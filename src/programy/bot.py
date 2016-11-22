@@ -82,8 +82,10 @@ class Bot(object):
             return conversation
 
     def ask_question(self, clientid: str, text: str):
+
         logging.debug("Question (%s): %s"%(clientid, text))
-        pre_processed = self.preprocess_question(text)
+
+        pre_processed = self.brain.pre_process_question(text)
         logging.debug("Pre Processed (%s): %s"%(clientid, pre_processed))
 
         conversation = self.get_conversation(clientid)
@@ -95,13 +97,9 @@ class Bot(object):
             response = self.brain.ask_question(self, clientid, each_sentence)
             if response is not None:
                 logging.debug("Raw Response (%s): %s"%(clientid, response))
-                each_sentence.response = self.post_process_response(response)
+
+                each_sentence.response = self.brain.post_process_response(response)
                 logging.debug("Processed Response (%s): %s"%(clientid, each_sentence.response))
+
         return question.combine_answers()
-
-    def preprocess_question(self, question):
-        return question.upper ()
-
-    def post_process_response(self, response: str):
-        return response.strip()
 

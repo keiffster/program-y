@@ -33,7 +33,7 @@ class ClassLoader(object):
         logging.debug("Importing module [%s]" % module_path)
         imported_module = importlib.import_module(module_path)
 
-        logging.debug("Instantiating class [%s]")
+        logging.debug("Instantiating class [%s]" % class_name)
         new_class = getattr(imported_module, class_name)
         return new_class
 

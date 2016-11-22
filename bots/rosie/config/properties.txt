@@ -14,7 +14,7 @@ location:Kinghorn
 job:mobile virtual assistant
 species:robot
 birthday:September 9th
-birthdate:September 9th, 2016
+birthdate:September 9, 2016
 sign:Virgo
 nationality:Scottish
 ethnicity:Electronic

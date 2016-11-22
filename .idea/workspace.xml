@@ -2,9 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e19fefc-f103-4fe9-ab35-41aaafa720a4" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bots/alice2/config/postprocessors.conf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bots/rosie/config/postprocessors.conf" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/.coverage" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/.gitignore" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/date.aiml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/alice2/config/preprocessors.conf" afterPath="$PROJECT_DIR$/bots/alice2/config/preprocessors.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/rosie/config/client.yaml" afterPath="$PROJECT_DIR$/bots/rosie/config/client.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/rosie/config/preprocessors.conf" afterPath="$PROJECT_DIR$/bots/rosie/config/preprocessors.conf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/rosie/config/properties.txt" afterPath="$PROJECT_DIR$/bots/rosie/config/properties.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/requirements.txt" afterPath="$PROJECT_DIR$/requirements.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/bot.py" afterPath="$PROJECT_DIR$/src/programy/bot.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/brain.py" afterPath="$PROJECT_DIR$/src/programy/brain.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/config.py" afterPath="$PROJECT_DIR$/src/programy/config.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/parser/template/nodes.py" afterPath="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/processing.py" afterPath="$PROJECT_DIR$/src/programy/processing.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/utils/classes/loader.py" afterPath="$PROJECT_DIR$/src/programy/utils/classes/loader.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" afterPath="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/datetime.aiml" afterPath="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/datetime.aiml" />
     </list>
     <ignored path="program-y.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -23,7 +39,40 @@
     <favorites_list name="program-y" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="brain.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/programy/brain.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="417">
+              <caret line="215" column="38" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
+              <folding>
+                <element signature="e#1067#1081#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="processing.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/programy/processing.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bot.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/programy/bot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="100" column="59" selection-start-line="100" selection-start-column="59" selection-end-line="100" selection-end-column="59" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -38,15 +87,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/programy/utils/services/pannous_service.py" />
-        <option value="$PROJECT_DIR$/src/programy/utils/services/wikipedia_service.py" />
-        <option value="$PROJECT_DIR$/COPYRIGHT.txt" />
-        <option value="$PROJECT_DIR$/src/test/test_bot.py" />
-        <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/date.aiml" />
-        <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/datetime.aiml" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/think/think.aiml" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_think_aiml.py" />
-        <option value="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/test_graph.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_bot.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_basics.py" />
@@ -76,19 +118,26 @@
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/condition/condition.aiml" />
         <option value="$PROJECT_DIR$/bots/rosie/aiml/knowledge.aiml" />
         <option value="$PROJECT_DIR$/src/test/custom.py" />
-        <option value="$PROJECT_DIR$/src/programy/brain.py" />
-        <option value="$PROJECT_DIR$/bots/rosie/config/client.yaml" />
-        <option value="$PROJECT_DIR$/src/programy/config.py" />
         <option value="$PROJECT_DIR$/src/programy/clients.py" />
         <option value="$PROJECT_DIR$/TODO" />
         <option value="$PROJECT_DIR$/src/test/test_dialog.py" />
         <option value="$PROJECT_DIR$/src/programy/dialog.py" />
         <option value="$PROJECT_DIR$/src/.gitignore" />
-        <option value="$PROJECT_DIR$/src/programy/bot.py" />
-        <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/src/programy/parser/template/evaluator.py" />
-        <option value="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/datetime.aiml" />
+        <option value="$PROJECT_DIR$/bots/rosie/config/properties.txt" />
+        <option value="$PROJECT_DIR$/requirements.txt" />
+        <option value="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
+        <option value="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
+        <option value="$PROJECT_DIR$/src/programy/utils/classes/loader.py" />
+        <option value="$PROJECT_DIR$/bots/alice2/config/preprocessors.conf" />
+        <option value="$PROJECT_DIR$/bots/alice2/config/postprocessors.conf" />
+        <option value="$PROJECT_DIR$/bots/rosie/config/client.yaml" />
+        <option value="$PROJECT_DIR$/src/programy/config.py" />
+        <option value="$PROJECT_DIR$/src/programy/brain.py" />
+        <option value="$PROJECT_DIR$/src/programy/bot.py" />
+        <option value="$PROJECT_DIR$/src/programy/processing.py" />
       </list>
     </option>
   </component>
@@ -122,58 +171,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="program-y" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Problems" />
         <subPane subId="Project Files">
@@ -221,7 +219,72 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="programy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bots" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -230,13 +293,6 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/test/aiml_tests" />
-      <recent name="$PROJECT_DIR$/src/test/aiml_tests/test_files" />
-      <recent name="$PROJECT_DIR$/src/test/aiml_tests/test_files/condition" />
-      <recent name="$PROJECT_DIR$/src/test/parser/template/graph" />
-      <recent name="$PROJECT_DIR$/src/programy/utils/parsing" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/test/parser/template/graph" />
       <recent name="$PROJECT_DIR$/src/test/utils/parsing" />
@@ -244,96 +300,15 @@
       <recent name="$PROJECT_DIR$/bots/rosie/sets" />
       <recent name="$PROJECT_DIR$/bots/rosie/maps" />
     </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bots/rosie/config" />
+      <recent name="$PROJECT_DIR$/bots/alice2/config" />
+      <recent name="$PROJECT_DIR$/src/test/aiml_tests" />
+      <recent name="$PROJECT_DIR$/src/test/aiml_tests/test_files" />
+      <recent name="$PROJECT_DIR$/src/test/aiml_tests/test_files/condition" />
+    </key>
   </component>
-  <component name="RunManager" selected="Python.rosiebot">
-    <configuration default="false" name="Unittests in ConditionLoopAIMLTests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/aiml_tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_loop_aiml.py" />
-      <option name="CLASS_NAME" value="ConditionLoopAIMLTests" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_CLASS" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittest ConditionLoopAIMLTests.test_condition_type3_loop" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/aiml_tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_loop_aiml.py" />
-      <option name="CLASS_NAME" value="ConditionLoopAIMLTests" />
-      <option name="METHOD_NAME" value="test_condition_type3_loop" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_METHOD" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in test (1)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$/src/test" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in test (2)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$/src/test" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.processing">
     <configuration default="false" name="Unittests in test (3)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -354,6 +329,89 @@
       <option name="PUREUNITTEST" value="true" />
       <option name="PARAMS" value="" />
       <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in DateTimeAIMLTests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/aiml_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
+      <option name="CLASS_NAME" value="DateTimeAIMLTests" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_CLASS" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittest DateTimeAIMLTests.test_age" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/aiml_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
+      <option name="CLASS_NAME" value="DateTimeAIMLTests" />
+      <option name="METHOD_NAME" value="test_age" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittest DateTimeAIMLTests.test_age_in_years" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/aiml_tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py" />
+      <option name="CLASS_NAME" value="DateTimeAIMLTests" />
+      <option name="METHOD_NAME" value="test_age_in_years" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="processing" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/programy" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/programy/processing.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="BashConfigurationType" factoryName="Bash">
@@ -540,19 +598,19 @@
       <item index="1" class="java.lang.String" itemvalue="Python.tillybot" />
       <item index="2" class="java.lang.String" itemvalue="Python.rosiebot" />
       <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in ConditionLoopAIMLTests" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest ConditionLoopAIMLTests.test_condition_type3_loop" />
-      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
-      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittests in test (2)" />
-      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in DateTimeAIMLTests" />
+      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest DateTimeAIMLTests.test_age" />
+      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittest DateTimeAIMLTests.test_age_in_years" />
+      <item index="8" class="java.lang.String" itemvalue="Python.processing" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test (2)" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in ConditionLoopAIMLTests" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest ConditionLoopAIMLTests.test_condition_type3_loop" />
+        <item index="0" class="java.lang.String" itemvalue="Python.processing" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest DateTimeAIMLTests.test_age_in_years" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest DateTimeAIMLTests.test_age" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in DateTimeAIMLTests" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
       </list>
     </recent_temporary>
   </component>
@@ -573,35 +631,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 07h 59m 31s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 24m 05s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 00m 39s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 28m 04s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 00m 52s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 28m 32s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 00m 59s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 28m 53s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 01m 07s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 28m 58s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 01m 24s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 36m 38s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 01m 46s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age - 2016.11.22 at 16h 36m 56s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 02m 38s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age_in_years - 2016.11.22 at 16h 37m 01s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age_in_years" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 02m 50s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age_in_years - 2016.11.22 at 16h 37m 10s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age_in_years" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.22 at 08h 09m 12s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
+    <history-entry file="Unittest_DateTimeAIMLTests_test_age_in_years - 2016.11.22 at 17h 51m 37s.xml">
+      <configuration name="Unittest DateTimeAIMLTests.test_age_in_years" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -623,11 +681,11 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23770492" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.49765807" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28922716" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290398" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30643275" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3056206" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -635,25 +693,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5415205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.16991644" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="812" y="39" width="295" height="1104" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23809524" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30643275" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="*.conf" />
@@ -725,12 +764,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/programy/parser/template/nodes.py</url>
-          <line>749</line>
+          <line>772</line>
           <option name="timeStamp" value="247" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/programy/parser/template/nodes.py</url>
-          <line>892</line>
+          <line>915</line>
           <option name="timeStamp" value="249" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -769,11 +808,6 @@
           <option name="timeStamp" value="388" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/programy/mappings/properties.py</url>
-          <line>40</line>
-          <option name="timeStamp" value="430" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/test/parser/template/graph/test_condition.py</url>
           <line>488</line>
           <option name="timeStamp" value="441" />
@@ -786,146 +820,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="443" />
+      <option name="time" value="444" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-457">
-          <caret line="277" column="97" selection-start-line="277" selection-start-column="97" selection-end-line="277" selection-end-column="97" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/parser/template/graph/test_condition.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="11" column="16" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/train.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/animal.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="16" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/default.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-355">
-          <caret line="12523" column="18" selection-start-line="12523" selection-start-column="18" selection-end-line="12523" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/reductions1.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="4093" column="18" selection-start-line="4093" selection-start-column="18" selection-end-line="4093" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/bot_profile.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5025">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/config.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="23" column="54" selection-start-line="23" selection-start-column="25" selection-end-line="23" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/client_profile.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="185">
-          <caret line="247" column="0" selection-start-line="247" selection-start-column="0" selection-end-line="260" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/topic/topic.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="50" column="19" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_topic_aiml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="29" column="0" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/topicstar/topicstar.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="24" column="62" selection-start-line="24" selection-start-column="62" selection-end-line="24" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_topicstar_aiml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="25" column="36" selection-start-line="25" selection-start-column="36" selection-end-line="25" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/parser/template/test_nodes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="289" column="31" selection-start-line="289" selection-start-column="31" selection-end-line="289" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/set/set.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="52" column="15" selection-start-line="52" selection-start-column="15" selection-end-line="52" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_set_aiml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="35" column="44" selection-start-line="35" selection-start-column="44" selection-end-line="35" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_loop_aiml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/loop/loop.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="55" column="120" selection-start-line="55" selection-start-column="120" selection-end-line="55" selection-end-column="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_get_aiml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/get/get.aiml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -944,13 +843,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1993">
           <caret line="165" column="53" selection-start-line="165" selection-start-column="53" selection-end-line="165" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/inquiry.aiml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-240">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1045,37 +937,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/brain.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="171" column="53" selection-start-line="171" selection-start-column="53" selection-end-line="171" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/config/client.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="728">
-          <caret line="219" column="20" selection-start-line="219" selection-start-column="20" selection-end-line="219" selection-end-column="20" />
-          <folding>
-            <element signature="e#1066#1131#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/test_dialog.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#15#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1091,65 +956,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="32" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/.coverage">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/.coverage" />
     <entry file="file://$PROJECT_DIR$/src/run.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
           <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/clients.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="114" column="47" selection-start-line="114" selection-start-column="47" selection-end-line="114" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="5" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/nodes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4605">
-          <caret line="330" column="50" selection-start-line="330" selection-start-column="50" selection-end-line="330" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="100" column="0" selection-start-line="100" selection-start-column="0" selection-end-line="100" selection-end-column="0" />
-          <folding>
-            <element signature="e#1067#1081#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/evaluator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="25" column="33" selection-start-line="25" selection-start-column="33" selection-end-line="25" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1161,10 +975,235 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/.gitignore">
+    <entry file="file://$PROJECT_DIR$/src/.gitignore" />
+    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/default.aiml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="615">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+        <state relative-caret-position="207">
+          <caret line="10058" column="156" selection-start-line="10058" selection-start-column="156" selection-end-line="10058" selection-end-column="156" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/inquiry.aiml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="48" column="10" selection-start-line="48" selection-start-column="10" selection-end-line="48" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/reductions1.aiml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="5281" column="19" selection-start-line="5281" selection-start-column="19" selection-end-line="5281" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/aiml/bot_profile.aiml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="72" column="11" selection-start-line="54" selection-start-column="0" selection-end-line="82" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="42" column="21" selection-start-line="42" selection-start-column="21" selection-end-line="42" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/properties.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/mappings/properties.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="488">
+          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_files/datetime/datetime.aiml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="72" column="83" selection-start-line="72" selection-start-column="28" selection-end-line="72" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/evaluator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_datetime_aiml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#15#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/nodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="757" column="0" selection-start-line="757" selection-start-column="0" selection-end-line="757" selection-end-column="0" />
+          <folding>
+            <element signature="e#1067#1081#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/sets/animal.set">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/sets/animals.set">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/sets/article.set">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/substitutions/normal.substitution">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="146">
+          <caret line="156" column="13" selection-start-line="156" selection-start-column="12" selection-end-line="156" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/keiff/config/preprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/utils/classes/loader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="316">
+          <caret line="35" column="61" selection-start-line="35" selection-start-column="61" selection-end-line="35" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/alice2/config/preprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/alice2/config/postprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2744">
+          <caret line="174" column="0" selection-start-line="174" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+          <folding>
+            <element signature="e#1066#1131#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/clients.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="114" column="45" selection-start-line="114" selection-start-column="45" selection-end-line="114" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/client.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="32" column="135" selection-start-line="32" selection-start-column="135" selection-end-line="32" selection-end-column="135" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/preprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/postprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="100" column="59" selection-start-line="100" selection-start-column="59" selection-end-line="100" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/brain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="215" column="38" selection-start-line="215" selection-start-column="38" selection-end-line="215" selection-end-column="38" />
+          <folding>
+            <element signature="e#1067#1081#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/processing.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="82" column="29" selection-start-line="82" selection-start-column="29" selection-end-line="82" selection-end-column="29" />
           <folding />
         </state>
       </provider>

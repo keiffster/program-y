@@ -19,6 +19,7 @@ import subprocess
 from random import randint
 from programy.parser.exceptions import ParserException
 from datetime import datetime
+from dateutil.relativedelta import relativedelta
 
 ######################################################################################################################
 #
@@ -710,6 +711,7 @@ class TemplateDateNode(TemplateAttribNode):
             raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
         self._format = attrib_value
 
+
 ######################################################################################################################
 #
 class TemplateIntervalNode(TemplateNode):
@@ -719,20 +721,41 @@ class TemplateIntervalNode(TemplateNode):
         self._style = style
         self._from = None
         self._to = None
+        if isinstance(style, str):
+            self._style = TemplateWordNode(style)
+        else:
+            self._style = style
 
     def resolve(self, bot, clientid):
-        format_str = self._format.resolve(bot, clientid)
+        try:
+            format_str = self._format.resolve(bot, clientid)
 
-        from_str = self._from.resolve(bot, clientid)
-        from_time = datetime.strptime(from_str, format_str)
+            from_str = self._from.resolve(bot, clientid)
+            from_time = datetime.strptime(from_str, format_str)
 
-        to_str = self._to.resolve(bot, clientid)
-        to_time = datetime.strptime(to_str, format_str)
+            to_str = self._to.resolve(bot, clientid)
+            to_time = datetime.strptime(to_str, format_str)
 
-        diff = to_time - from_time
-        resolved = str(diff.days)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
-        return resolved
+            style = self._style.resolve(bot, clientid)
+
+            diff = to_time - from_time
+            difference_in_years = relativedelta(to_time, from_time)
+
+            if style == "years":
+                resolved = str(difference_in_years.years)
+            elif style == "months":
+                resolved = str(difference_in_years.months)
+            elif style == "days":
+                resolved = str(difference_in_years.days)
+            else:
+                pass
+
+            logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+            return resolved
+
+        except Exception as e:
+            logging.exception(e)
+            return ""
 
     def format(self):
         return "[INTERVAL (format=%s, style=%s, from=%s, to=%s)]" % (

@@ -34,3 +34,19 @@ class DateTimeAIMLTests(unittest.TestCase):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "SEASON")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Winter")
+
+    def test_age(self):
+
+        DateTimeAIMLTests.test_client.bot.brain.properties.add_property('birthdate', "September 9, 2016")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "AGE")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "I am 2 months old.")
+
+    def test_age_in_years(self):
+
+        DateTimeAIMLTests.test_client.bot.brain.properties.add_property('birthdate', "September 9, 2016")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "AGE IN YEARS")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "0")

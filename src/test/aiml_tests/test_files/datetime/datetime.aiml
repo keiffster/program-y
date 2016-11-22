@@ -62,4 +62,41 @@ For more information see [url]
         </template>
     </category>
 
+    <category>
+        <pattern>AGE</pattern>
+        <template>
+            <think>
+                <set var="years">
+                    <interval format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy">
+                        <style>years</style>
+                        <from><bot name="birthdate"/></from>
+                        <to><date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/></to>
+                    </interval>
+                </set>
+                <set var="months">
+                    <interval format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy">
+                        <style>months</style>
+                        <from><bot name="birthdate"/></from>
+                        <to><date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/></to>
+                    </interval>
+                </set>
+            </think>
+            <condition var="years">
+                <li value="0">I am <get var="months"/> months old.</li>
+                <li>I am <get var="years"/> years old.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AGE IN YEARS</pattern>
+        <template>
+            <interval format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy">
+                <style>years</style>
+                <from><bot name="birthdate"/></from>
+                <to><date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/></to>
+            </interval>
+        </template>
+    </category>
+
 </aiml>

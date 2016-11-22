@@ -1,6 +1,7 @@
 wikipedia
 requests
 flask
+python-dateutil
 
 pylint
 coverage

@@ -68,6 +68,7 @@ class BrainConfiguration(BaseConfigurationData):
         self._properties = None
         self._triples = None
         self._preprocessors = None
+        self._postprocessors = None
 
     def load_config_section(self, config_file):
 
@@ -98,7 +99,9 @@ class BrainConfiguration(BaseConfigurationData):
         self._pronouns = config_file.get_option("pronouns", files)
         self._properties = config_file.get_option("properties", files)
         self._triples = config_file.get_option("triples", files)
+
         self._preprocessors = config_file.get_option("preprocessors", files)
+        self._postprocessors = config_file.get_option("postprocessors", files)
 
     def get_brain_file_configuration(self, config_file, section):
         files = config_file.get_option("files", section)
@@ -173,6 +176,11 @@ class BrainConfiguration(BaseConfigurationData):
     @property
     def preprocessors(self):
         return self._preprocessors
+
+    @property
+    def postprocessors(self):
+        return self._postprocessors
+
 
 class BotConfiguration(BaseConfigurationData):
 

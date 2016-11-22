@@ -26,6 +26,7 @@ from programy.mappings.properties import PropertiesCollection
 from programy.mappings.triples import TriplesCollection
 from programy.mappings.sets import SetCollection
 from programy.mappings.maps import MapCollection
+from programy.processing import ProcessorLoader
 from programy.config import BrainConfiguration
 
 class Brain(object):
@@ -45,6 +46,9 @@ class Brain(object):
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
         self._properties_collection = PropertiesCollection()
+
+        self._preprocessors = ProcessorLoader()
+        self._postprocessors = ProcessorLoader()
 
         self.load(self._configuration)
 
@@ -95,6 +99,14 @@ class Brain(object):
     @property
     def properties(self):
         return self._properties_collection
+
+    @property
+    def preprocessors(self):
+        return self._preprocessors
+
+    @property
+    def postprocessors(self):
+        return self._postprocessors
 
     def load(self, brain_configuration: BrainConfiguration):
         self._aiml_parser.load_aiml(brain_configuration)
@@ -167,6 +179,21 @@ class Brain(object):
         else:
             logging.warning("No configuration setting for map files")
 
+        if brain_configuration.preprocessors is not None:
+            total = self._preprocessors.load(brain_configuration.preprocessors)
+            logging.info("Loaded a total of %d pre processors" % (total))
+        else:
+            logging.warning("No configuration setting for pre processors")
+
+        if brain_configuration.postprocessors is not None:
+            total = self._postprocessors.load(brain_configuration.postprocessors)
+            logging.info("Loaded a total of %d post processors" % (total))
+        else:
+            logging.warning("No configuration setting for post processors")
+
+    def pre_process_question(self, question):
+        return self.preprocessors.process(question)
+
     def ask_question(self, bot, clientid, sentence) -> str:
 
         conversation = bot.get_conversation(clientid)
@@ -185,6 +212,8 @@ class Brain(object):
 
         return self._aiml_parser.match_sentence(bot, clientid, sentence, topic_pattern=topic_pattern, that_pattern=that_pattern)
 
-    def dump_tree(self):
+    def post_process_response(self, response: str):
+        return self.postprocessors.process(response)
 
+    def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")

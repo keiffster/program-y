@@ -26,11 +26,19 @@ class ProcessorLoader(ClassLoader):
 
     def load(self, filename, *args, **kw):
         logging.debug("Loading processors from file [%s]" % filename)
+        count = 0
         with open(filename, "r+") as file:
             for line in file:
                 new_class = self.instantiate_processor_class(line)
                 if new_class is not None:
                     self.processors.append(new_class(*args, **kw))
+                    count += 1
+        return count
+
+    def process(self, string):
+        for processor in self.processors:
+            string = processor.process(string)
+        return string
 
 ##################################################################
 #
@@ -44,6 +52,7 @@ class Processor:
     def process(self, string):
         pass
 
+
 ##################################################################
 #
 class PreProcessor(Processor):
@@ -51,13 +60,14 @@ class PreProcessor(Processor):
     def __init__(self):
         Processor.__init__(self)
 
-class WordPreProcessor(PreProcessor):
+class CleanUpPreProcessor(PreProcessor):
+
     def __init__(self):
         PreProcessor.__init__(self)
 
-class SentencePreProcessor(PreProcessor):
-    def __init__(self):
-        PreProcessor.__init__(self)
+    def process(self, string):
+        return string.upper()
+
 
 ##################################################################
 #
@@ -65,16 +75,9 @@ class PostProcessor(Processor):
     def __init__(self):
         Processor.__init__(self)
 
-class WordPostProcessor(PostProcessor):
+class CleanUpPostProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
-class SentencePostProcessor(PostProcessor):
-    def __init__(self):
-        PostProcessor.__init__(self)
-
-
-if __name__ == '__main__':
-
-    loader = ProcessorLoader ()
-    loader.load("../../bots/alice2/config/preprocessors.conf")
+    def process(self, string):
+        return string.strip()
