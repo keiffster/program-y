@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: familiar.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>ASK FAMILIAR CONTACTNAME</pattern>
+<template><think><set name="topic">ASKING FAMILIAR CONTACTNAME</set></think>
+What is your <lowercase><get name="familiarpredicate"/></lowercase>'s name?</template>
+</category>
+<topic name="ASKING FAMILIAR CONTACTNAME">
+<category><pattern>_</pattern><that>WHAT IS YOUR * S NAME</that>
+<template><think>
+<set name="topic">unknown</set>
+<set name="contactname"><star/></set>
+<set name="contactdest"><star/></set>
+<set name="isshortanswer"><srai>ISSHORTANSWER <star/></srai></set>
+</think>
+<condition name="isshortanswer">
+<li value="true">
+<srai>REMEMBERFAMILIARNAME</srai>
+<srai>RESUMEACTION <get name="modecom"/></srai>
+</li>
+<li><srai>CONTACTFINALIZE</srai> <srai><star/></srai></li>
+</condition></template>
+</category></topic>
+
+<category><pattern>MY <set>familiarname</set> S NAME IS *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>MY <set>familiarname</set> S NICKNAME IS *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>I CALL MY <set>familiarname</set> *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>EVERYONE CALLS MY <set>familiarname</set> *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>WE CALL MY <set>familiarname</set> *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>MY <set>familiarname</set> IS NAMED *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>MY <set>familiarname</set> IS CALLED *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>MY <set>familiarname</set> IS <set>name</set></pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>MY <set>familiarname</set> IS <set>name</set> *</pattern>
+<template><think>
+<set name="familiarpredicate"><srai>FAMILIARPREDICATE <star/></srai></set>
+<set name="contactname"><star index="2"/> <star index="3"/></set>
+</think>
+<srai>REMEMBERFAMILIARNAME</srai></template>
+</category>
+<category><pattern>* IS MY <set>familiarname</set></pattern>
+<template><srai>MY <star index="2"/> IS <star/></srai></template>
+</category>
+<category><pattern><set>name</set> IS MY <set>familiarname</set> #</pattern>
+<template><srai>MY <star index="2"/> IS <star/></srai></template>
+</category>
+<category><pattern>FAMILIARPREDICATE <set>familiarname</set></pattern>
+<template><map><name>familiarpredicate</name><star/></map></template>
+</category>
+<category><pattern>FAMILIARPREDICATE *</pattern>
+<template>unknown</template>
+</category>
+<category><pattern>ISAFAMILIARNAME <set>familiarname</set></pattern>
+<template>true</template>
+</category>
+<category><pattern>ISAFAMILIARNAME *</pattern>
+<template>false</template>
+</category>
+<category><pattern>GETFAMILIARNAME</pattern>
+<template><get><name><lowercase><get name="familiarpredicate"/></lowercase></name></get></template>
+</category>
+<category><pattern>FAMILIARPRONOUN <set>familiarname</set></pattern>
+<template><map><name>familiarpronoun</name><star/></map></template>
+</category>
+<category><pattern>FAMILIARPRONOUN *</pattern>
+<template>unknown</template>
+</category>
+<category><pattern>REMEMBERFAMILIARNAME</pattern>
+<template><think>
+<set name="familiarpredicate"><lowercase><get name="familiarpredicate"/></lowercase></set>
+</think>
+<condition name="familiarpredicate">
+<li value="unknown"/>
+<li>
+<condition name="familiarpredicate">
+<li value="wife">How long have you and <get name="contactname"/> been married?</li>
+<li value="husband">How long have you and <get name="contactname"/> been married?</li>
+<li value="dog">Do you have any other pets?</li>
+<li value="cat">Do you have any other pets?</li>
+<li>I will remember your <get name="familiarpredicate"/>'s name is <get name="contactname"/>.</li>
+</condition>
+<srai>GENDERCOMMENT</srai>
+<think><set><name><get name="familiarpredicate"/></name><get name="contactname"/></set></think>
+<learn>
+<category><pattern>WHO IS <eval><get name="contactname"/></eval></pattern>
+<template><eval><get name="contactname"/></eval> is your <eval><get name="familiarpredicate"/></eval>. </template>
+</category>
+<category><pattern><eval><get name="contactname"/></eval></pattern>
+<template>Your <eval><get name="familiarpredicate"/></eval>.</template>
+</category>
+</learn></li>
+</condition></template>
+</category>
+<category><pattern>GENDERCOMMENT</pattern>
+<template><think><set var="gendername"><srai>GENDERNAME <get name="contactname"/></srai></set>
+<set var="genderpred"><map name="familiargender"><get name="familiarpredicate"/></map></set>
+</think>
+<condition var="gendername">
+<li value="F"><condition value="M" var="genderpred">Isn't <get name="contactname"/> usually a female name?</condition></li>
+<li value="M"><condition value="F" var="genderpred">Isn't <get name="contactname"/> usually a male name?</condition></li>
+</condition></template>
+</category>
+</aiml>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+
+    #	<condition name="predicate">...</condition>
+
+    #	<condition><name>predicate</name>...</condition>
+    #		<li value="a">X</li>
+    #		<li value="b">Y</li>
+    #		<li>Z</li>				<- Default value if no condition met
+
+    #  <condition>
+    #		<li name='1' value="a">X</li>
+    #		<li value="b"><name>1</name>Y</li>
+    #		<li name="1"><value>b</value>Z</li>
+    #		<li><name>1</name><value>b</value>Z</li>
+    #		<li>Z<l/i>				<- Default value if no condition met
+    #  </condition>
+
+-->
+
+<aiml>
+
+	<category>
+		<pattern>TYPE2 LOOP</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition name="var1">
+		        <li value="value1">X</li>
+		        <li value="value2">Y <think><set name="var1">value3</set></think><loop /></li>
+		        <li value="value3">Z</li>
+		    </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE3 LOOP</pattern>
+		<template>
+		    <think><set name="var2">value2</set></think>
+            <condition>
+                <li name='var1' value="value1">A</li>
+                <li value="value2"><name>var2</name>B<think><set name="var2">value3</set><set name="var4">value4</set></think><loop /></li>
+                <li name="var3"><value>value3</value>C</li>
+                <li><name>var4</name><value>value4</value>D</li>
+            </condition>
+		</template>
+	</category>
+
+</aiml>

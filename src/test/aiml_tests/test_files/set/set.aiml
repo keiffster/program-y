@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>NAME SET</pattern>
+		<template>
+		    OK <set name="var1">test1</set>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MULTI WORD NAME SET</pattern>
+		<template>
+		    OK <set name="var1 var2">test1 test2</set>
+		</template>
+	</category>
+
+	<category>
+		<pattern>VAR SET</pattern>
+		<template>
+		    OK <set name="var2">test2</set>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MULTI WORD VAR SET</pattern>
+		<template>
+		    OK <set name="var2 var3">test2 test3</set>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TOPIC SET</pattern>
+		<template>
+		    OK <set name="topic">topic1</set>
+		</template>
+	</category>
+
+    <topic name="topic1">
+        <category>
+            <pattern>TOPIC UNSET</pattern>
+            <template>
+                OK <set name="topic"></set>
+            </template>
+        </category>
+    </topic>
+
+    <category>
+		<pattern>TOPIC SET VAR</pattern>
+		<template>
+		    OK
+		    <set name="topic">topic2</set>
+		    <set name="var3">test3</set>
+		</template>
+	</category>
+
+    <category>
+		<pattern>SET MULTI WORD TOPIC</pattern>
+		<template>
+		    OK
+		    <set name="topic">topic2 topic3</set>
+		</template>
+	</category>
+
+</aiml>

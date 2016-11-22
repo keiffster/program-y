@@ -1,0 +1,6 @@
+wikipedia
+requests
+flask
+
+pylint
+coverage

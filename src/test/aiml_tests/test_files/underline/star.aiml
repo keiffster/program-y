@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>_ HEY</pattern>
+		<template>
+		    STAR IS <star index="1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>HELLO _</pattern>
+		<template>
+		    HI <star index="1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>GOODBYE _ SEEYA</pattern>
+		<template>
+		    LATER <star/>
+		</template>
+	</category>
+
+	<category>
+		<pattern>_ HI _</pattern>
+		<template>
+		    YOU SAID <star index="1" /> AND <star index="2" />
+		</template>
+	</category>
+
+</aiml>

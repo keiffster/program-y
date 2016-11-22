@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: oob.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>TRANSCRIPT</pattern>
+<template>Sending transcript to <get name="email"/>.
+<oob><email><to><get name="email"/></to><subject>Transcript of <bot name="name"/> with <get name="name"/> on <date/></subject><body>
+<srai>DIALOG HISTORY</srai></body></email></oob></template>
+</category>
+<category><pattern>SEND BUG REPORT</pattern>
+<template>Sending transcript to callmom-info@pandorabots.com.
+<oob><email><to>callmom-info@pandorabots.com</to><subject>Transcript of <bot name="name"/> with <get name="name"/> on <date/></subject><body>
+<srai>DIALOG HISTORY</srai></body></email></oob></template>
+</category>
+<category><pattern>REPORT A PROBLEM</pattern>
+<template><oob><dialog><title>Would you like to send a bug report?</title><list><item>Yes</item><item>No</item></list></dialog></oob>
+To help the developers understand your problem, you can choose to send us a transcript of your recent conversation with CallMom.  You can add your own comments to the email message too.  Would you like to send a report?</template>
+</category>
+<category><pattern>YES</pattern><that>WOULD YOU LIKE TO SEND A REPORT</that>
+<template><srai>SEND BUG REPORT</srai></template>
+</category>
+<category><pattern>TEACH ME <set>language</set></pattern>
+<template><srai>LANGUAGE</srai> Let's try a searching for "learn <star/>". <oob><search>LEARN <star/></search></oob></template>
+</category>
+<category><pattern>CLEAR LOG</pattern>
+<template>Done. <oob><clear>log</clear></oob></template>
+</category>
+<category><pattern>*</pattern><that>WHAT WOULD YOU LIKE TO WRITE ON TWITTER</that>
+<template><srai>TWEET <star/></srai></template>
+</category>
+<category><pattern>SEND MAIL</pattern>
+<template><srai>SEND EMAIL</srai></template>
+</category>
+<category><pattern>SEND FEATURE REQUEST *</pattern>
+<template><think><set name="featurerequest"><star/></set></think> Click send to mail your feature request.  
+<oob><email><to>callmom-info@pandorabots.com</to><subject>Feature request <get name="featurerequest"/></subject><body>Dear CallMom developers, I'd like to request that you add this feature to the next version of CallMom: <get name="featurerequest"/>.  Sincerely, <get name="name"/></body></email></oob></template>
+</category>
+<category><pattern>SHOW ME A VIDEO *</pattern>
+<template>I'm looking up videos for you.  <oob><search>VIDEO <star/></search></oob></template>
+</category>
+<category><pattern>SHOW ME A WEBSITE ABOUT *</pattern>
+<template>Let's try a google search.  <oob><search><star/></search></oob></template>
+</category>
+<category><pattern>I AM GOING TO KILL *</pattern>
+<template>You should contact the authorities.  <oob><dial>911</dial></oob></template>
+</category>
+<category><pattern>GOOGLE</pattern>
+<template>I'm opening Google search.  <oob><search/></oob></template>
+</category>
+<category><pattern>GOOGLE *</pattern>
+<template><oob><search><star/></search></oob> I'm opening your browser.</template>
+</category>
+<category><pattern>SEARCH *</pattern>
+<template>I'll try a web search.  <oob><search><star/></search></oob></template>
+</category>
+<category><pattern>YES</pattern><that>WOULD YOU LIKE TO SEND THIS FEATURE REQUEST *</that>
+<template><srai>SEND FEATURE REQUEST <get name="featurerequest"/></srai></template>
+</category>
+<category><pattern>LAUNCH CAMERA</pattern>
+<template>Launching the camera.  <oob><camera>on</camera></oob></template>
+</category>
+<category><pattern>LAUNCH * DOT COM</pattern>
+<template>Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob></template>
+</category>
+<category><pattern>TACO</pattern>
+<template>I'm looking for Mexican restaurants near you.  <oob><map>Tacos</map></oob></template>
+</category>
+<category><pattern>PIZZA</pattern>
+<template>I'm looking on the map for Pizza places near you.  <oob><map>Pizza</map></oob></template>
+</category>
+<category><pattern>WHERE ARE THE *</pattern>
+<template>I'm looking on the map. <oob><map><star/></map></oob></template>
+</category>
+<category><pattern>WHERE IS A *</pattern>
+<template>I'll check the map for <star/>.  <oob><map><star/></map></oob></template>
+</category>
+<category><pattern>WHERE IS PASADENA</pattern>
+<template>Let me show you on the map.  <oob><map>Pasadena</map></oob></template>
+</category>
+<category><pattern>WHERE IS *</pattern>
+<template><oob><map><star/></map></oob> I'm looking on the map.</template>
+</category>
+<category><pattern>WHERE IS YORKSHIRE</pattern>
+<template>Let's look on the map.  <oob><map>Yorkshire</map></oob></template>
+</category>
+<category><pattern>WHERE IS NEW YORK</pattern>
+<template>Let me show you on the map. <oob><map>New York</map></oob></template>
+</category>
+<category><pattern>WHERE IS LEEDS</pattern>
+<template>I'll show you on the map.  <oob><map>Leeds</map></oob></template>
+</category>
+<category><pattern>WHERE IS INDIA</pattern>
+<template>I'll show you on the map.  <oob><map>India</map></oob></template>
+</category>
+<category><pattern>DIALOG TEST</pattern>
+<template>Testing dialog.  <oob><dialog><list><li>Yes</li><li>No</li></list></dialog></oob></template>
+</category>
+<category><pattern>ESPN</pattern>
+<template>Opening ESPN.  <oob><url>http://espn.go.com</url></oob></template>
+</category>
+<category><pattern>AAA</pattern>
+<template>Looking up AAA.  <oob><map>AAA</map></oob></template>
+</category>
+<category><pattern>BROWSE TO *</pattern>
+<template><oob><search><star/></search></oob></template>
+</category>
+<category><pattern>CALL 911</pattern>
+<template>Now dialing emergency services from your location.  <oob><dial>911</dial></oob></template>
+</category>
+<category><pattern>PLAY *</pattern>
+<template>Now loading your choice of music. I hope you like it. Please wait a moment while I load it up. <oob><url>http://www.youtube.com/embed?listType=search&amp;list=<star/>&amp;autoplay=1</url></oob></template>
+</category>
+<category><pattern>WIFI ON</pattern>
+<template>Turning on Wifi.  <oob><wifi>on</wifi></oob></template>
+</category>
+<category><pattern>WIFI OFF</pattern>
+<template>Turning off Wifi  <oob><wifi>off</wifi></oob></template>
+</category>
+<category><pattern>HOROSCOPE *</pattern>
+<template>Let's try a search for your horoscope.  <oob><search>HOROSCOPE <star/></search></oob></template>
+</category>
+<category><pattern>JOBS *</pattern>
+<template>I'll try search for jobs.  <oob><search>JOBS <star/></search></oob></template>
+</category>
+<category><pattern>TWEET *</pattern>
+<template><oob><url>https://twitter.com/intent/tweet?source=webclient&amp;text=<star/></url></oob>Please check the message and press Tweet if you are happy.</template>
+</category>
+<category><pattern>WWW DOT * DOT COM</pattern>
+<template>I'm opening <star/>.com.  <oob><url>http://www.<star/>.com</url></oob></template>
+</category>
+<category><pattern>WHAT IS THE ADDRESS TO *</pattern>
+<template>I'll try to find it on the map <oob><map><star/></map></oob></template>
+</category>
+<category><pattern>TEST ALARM</pattern>
+<template>Alarm now set for 11:30.
+<oob><alarm><hour>11</hour><minute>30</minute></alarm></oob></template>
+</category>
+<category><pattern>UPDATE FACEBOOK STATUS</pattern>
+<template><oob><url>http://www.facebook.com/dialog/feed?_path=feed&amp;app_id=294334050655455&amp;redirect_uri=https://www.facebook.com&amp;display=touch</url></oob>Now opening a screen for you to update your status. Type or speak your message into the status box and press share to post it on your wall.</template>
+</category>
+<category><pattern>OPEN GOOGLE</pattern>
+<template><oob><search/></oob></template>
+</category>
+<category><pattern>OPEN * DOT COM</pattern>
+<template>Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob></template>
+</category>
+<category><pattern>OPEN * COM</pattern>
+<template>Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob></template>
+</category>
+<category><pattern>GPS ON</pattern>
+<template>Use Settings to turn on GPS.</template>
+</category>
+<category><pattern>GPS OFF</pattern>
+<template>Use Settings to turn off GPS.</template>
+</category>
+<category><pattern>SEARCH FOR A *</pattern>
+<template><oob><search>a <star/></search></oob> I'm trying a web search.</template>
+</category>
+<category><pattern>I WANT TO KILL MYSELF</pattern>
+<template>You should call Emergency Services.  <oob><dial>911</dial></oob></template>
+</category>
+</aiml>

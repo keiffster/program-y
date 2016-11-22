@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>$PRIORITY0</pattern>
+		<template>
+		    PRIORITY0 TEST SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>$PRIORITY1 TEST</pattern>
+		<template>
+		    PRIORITY1 TEST SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>$PRIORITY2 TEST1</pattern>
+		<template>
+		    PRIORITY2 TEST1 SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>$PRIORITY2 TEST2</pattern>
+		<template>
+		    PRIORITY2 TEST2 SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS IS $PRIORITY3 TEST</pattern>
+		<template>
+		    PRIORITY3 TEST SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS IS $PRIORITY4 TEST1</pattern>
+		<template>
+		    PRIORITY4 TEST1 SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS IS $PRIORITY4 TEST2</pattern>
+		<template>
+		    PRIORITY4 TEST2 SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS TEST IS $PRIORITY5</pattern>
+		<template>
+		    PRIORITY5 TEST SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS TEST1 IS $PRIORITY6</pattern>
+		<template>
+		    PRIORITY6 TEST1 SUCCESS
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS TEST2 IS $PRIORITY6</pattern>
+		<template>
+		    PRIORITY6 TEST2 SUCCESS
+		</template>
+	</category>
+
+</aiml>

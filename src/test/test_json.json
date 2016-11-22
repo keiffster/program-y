@@ -1,0 +1,41 @@
+{
+    "brain": {
+        "supress_warnings": false,
+        "allow_system_aiml": true,
+        "allow_learn_aiml": true,
+        "allow_learnf_aiml": true,
+
+        "files": {
+            "aiml": {
+                "files": "/aiml",
+                "extension": ".aiml",
+                "directories": true
+            },
+            "sets": {
+                "files": "/sets",
+                "extension": ".txt",
+                "directories": false
+            },
+            "maps": {
+                "files": "/maps",
+                "extension": ".txt",
+                "directories": true
+            },
+            "denormal": "denormal.txt",
+            "normal": "normal.txt",
+            "gender": "gender.txt",
+            "person": "person.txt",
+            "person2": "person2.txt",
+            "predicates": "predicates.txt",
+            "pronouns": "pronouns.txt",
+            "properties": "properties.txt",
+            "triples": "triples.txt",
+            "preprocessors": "preprocessors.txt"
+        }
+    },
+    "bot": {
+        "prompt": ">>>",
+        "default_response": "Sorry, I don't have an answer for that!",
+        "exit_response": "So long, and thanks for the fish!"
+    }
+}

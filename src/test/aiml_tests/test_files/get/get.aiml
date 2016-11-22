@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>NAME UNKNOWN</pattern>
+		<template>
+		    <get name="varX" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>NAME GET</pattern>
+		<template>
+		    <think><set name="var1">test1</set></think>
+		    <get name="var1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>NAME GET WITH TOPIC</pattern>
+		<template>
+		    <think><set name="topic">topic1</set></think>
+		    <think><set name="var1">test2</set></think>
+		    <get name="var1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>NAME GET AFTER TOPIC UNSET</pattern>
+		<template>
+		    <think><set name="var1">test3</set></think>
+		    VAR1 is <get name="var1" />
+		    <think><set name="topic">topic1</set></think>
+		    <think><set name="var1">test4</set></think>
+		    AND NOW VAR1 is <get name="var1" />
+		    <think><set name="topic"></set></think>
+		    AND FINALLY NOW VAR 1 is <get name="var1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>VAR GET</pattern>
+		<template>
+		    <think><set var="var1">vtest1</set></think>
+		    <get var="var1" />
+		</template>
+	</category>
+
+
+</aiml>

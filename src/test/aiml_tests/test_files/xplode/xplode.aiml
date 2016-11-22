@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>MAKE EXPLODE</pattern>
+		<template>
+			<explode>hello world</explode>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MAKE IMPLODE</pattern>
+		<template>
+			<implode>hello world</implode>
+		</template>
+	</category>
+
+	<category>
+		<pattern>NESTED EXPLODE IMPLODE</pattern>
+		<template>
+			<implode><explode>hello world</explode></implode>
+		</template>
+	</category>
+
+	<category>
+		<pattern>NESTED IMPLODE EXPLODE</pattern>
+		<template>
+			<explode><implode>hello world</implode></explode>
+		</template>
+	</category>
+
+</aiml>

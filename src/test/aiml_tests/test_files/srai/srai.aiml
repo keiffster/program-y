@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>HELLO</pattern>
+		<template>
+		    HI THERE
+		</template>
+	</category>
+
+	<category>
+		<pattern>HI</pattern>
+		<template>
+		    <srai>
+		        HELLO
+		    </srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MORNING</pattern>
+		<template>
+		    WELL <srai>HELLO</srai> AND <srai>HELLO</srai> AGAIN
+		</template>
+	</category>
+
+	<category>
+		<pattern>GOODBYE KEIFFBOT</pattern>
+		<template>
+		    SEEYA MATE
+		</template>
+	</category>
+
+	<category>
+		<pattern>HOW AM I</pattern>
+		<template>
+		    KEIFFBOT
+		</template>
+	</category>
+
+	<category>
+		<pattern>FAREWELL</pattern>
+		<template>
+		    <srai>GOODBYE <srai>HOW AM I</srai></srai>
+		</template>
+	</category>
+
+
+
+</aiml>

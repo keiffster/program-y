@@ -1,0 +1,44 @@
+TODO
+
+Add 'env' variable
+    Supports values console, browser, rest
+
+<html> tags
+
+dialog needs proper unit testing
+
+make sure topic star and that star match for set
+
+<that><topic> can take single "1" and double "1,2" indexes
+
+wrap every resolve method in try/catch and return "" if error
+
+Add type checking to nodes
+All parameters should check that the type passed in is either
+	TemplateNode
+or	PatternNode
+
+Add logging to all nodes to output their specific section
+
+Change resolve() to eval()
+
+date needs more styles adding, currently only supports days
+
+date should only support pformat - python format and report errors on format and jformat
+
+interval needs to use same styles as date
+
+config xml, yaml and json do not handle missing values
+need a better optionf or default values and mandatory values
+
+convert some Template nodes from variants to subclasses of base
+    ( See Condition Node for example )
+
+replace parse_tag_expression with table lookup loaded from config file
+    ( This will allow extensions to be added via config )
+
+Info aiml tests need property values setting up for test
+
+Implement PEP guidelines for all code
+
+Implement pylint

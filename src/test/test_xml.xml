@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <brain>
+        <supress_warnings>True</supress_warnings>
+        <allow_system_aiml>True</allow_system_aiml>
+        <allow_learn_aiml>True</allow_learn_aiml>
+        <allow_learnf_aiml>True</allow_learnf_aiml>
+
+       <files>
+           <aiml>
+               <files>/aiml</files>
+               <extension>.aiml</extension>
+               <directories>True</directories>
+           </aiml>
+           <sets>
+               <files>/sets</files>
+               <extension>.txt</extension>
+               <directories>False</directories>
+           </sets>
+           <maps>
+               <files>/maps</files>
+               <extension>.txt</extension>
+               <directories>True</directories>
+           </maps>
+        <denormal>denormal.txt</denormal>
+        <normal>normal.txt</normal>
+        <gender>gender.txt</gender>
+        <person>person.txt</person>
+        <person2>person2.txt</person2>
+        <predicates>predicates.txt</predicates>
+        <pronouns>pronouns.txt</pronouns>
+        <properties>properties.txt</properties>
+        <triples>triples.txt</triples>
+        <preprocessors>preprocessors.txt</preprocessors>
+       </files>
+    </brain>
+    <bot>
+        <prompt>>>></prompt>
+        <default_response>Sorry, I don't have an answer for that!</default_response>
+        <exit_response>So long, and thanks for the fish!</exit_response>
+    </bot>
+</configuration>

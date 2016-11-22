@@ -1,0 +1,14 @@
+man:male
+woman:female
+male:male
+female:female
+boy:male
+girl:female
+XX:female
+XY:male
+gal:female
+guy:male
+dude:male
+lady:female
+chick:female
+

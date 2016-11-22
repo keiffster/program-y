@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>BOT PROPERTY XXX</pattern>
+		<template>
+		    <bot name='XXX' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY URL</pattern>
+		<template>
+		    <bot name='url' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY NAME</pattern>
+		<template>
+		    <bot name='name' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY FIRSTNAME</pattern>
+		<template>
+		    <bot name='firstname' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY MIDDLENAME</pattern>
+		<template>
+		    <bot name='middlename' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY LASTNAME</pattern>
+		<template>
+		    <bot name='lastname' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY FULLNAME</pattern>
+		<template>
+		    <bot name='fullname' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY EMAIL</pattern>
+		<template>
+		    <bot name='email' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY GENDER</pattern>
+		<template>
+		    <bot name='gender' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY BOTMASTER</pattern>
+		<template>
+		    <bot name='botmaster' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY ORGANISATION</pattern>
+		<template>
+		    <bot name='organization' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY VERSION</pattern>
+		<template>
+		    <bot name='version' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY JOB</pattern>
+		<template>
+		    <bot name='job' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY SPECIES</pattern>
+		<template>
+		    <bot name='species' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY BIRTHPLACE</pattern>
+		<template>
+		    <bot name='birthplace' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY BIRTHDAY</pattern>
+		<template>
+		    <bot name='birthday' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY BIRTHDATE</pattern>
+		<template>
+		    <bot name='birthdate' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY SIGN</pattern>
+		<template>
+		    <bot name='sign' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY LOGO</pattern>
+		<template>
+		    <bot name='logo' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY RELIGION</pattern>
+		<template>
+		    No religion, I am an <bot name='religion' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY DEFAULT GET</pattern>
+		<template>
+		    <bot name='default-get' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY DEFAULT PROPERTY</pattern>
+		<template>
+		    <bot name='property' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY DEFAULT MAP</pattern>
+		<template>
+		    <bot name='default-map' />
+		</template>
+	</category>
+
+	<category>
+		<pattern>BOT PROPERTY LEARN FILENAME</pattern>
+		<template>
+		    <bot name='learn-filename' />
+		</template>
+	</category>
+
+</aiml>

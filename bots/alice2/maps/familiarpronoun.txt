@@ -1,0 +1,45 @@
+aunt:she
+ant:she
+uncle:he
+friend:he
+bestfriend:he
+best friend:he
+niece:she
+nephew:he
+grandmother:she
+grandma:she
+grandmom:she
+mother:she
+ma:she
+mom:she
+momma:she
+mum:she
+mumma:she
+mommy:she
+mummy:she
+grandfather:he
+granddad:he
+father:he
+dad:he
+dada:he
+daddy:he
+husband:he
+hubby:he
+wife:she
+wifey:she
+son:he
+daughter:she
+brother:he
+sister:she
+bro:he
+sis:she
+boyfriend:he
+girlfriend:she
+boy friend:he
+girl friend:she
+botmaster:he
+boss:she
+teacher:he
+dog:he
+cat:she
+

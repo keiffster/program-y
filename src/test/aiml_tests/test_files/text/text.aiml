@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>MAKE UPPERCASE</pattern>
+		<template>
+			<uppercase>hello world</uppercase>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MAKE LOWERCASE</pattern>
+		<template>
+			<lowercase>HELLO World</lowercase>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MAKE SENTENCE</pattern>
+		<template>
+			<sentence>hello world</sentence>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MAKE FORMAL</pattern>
+		<template>
+			<formal>hello world</formal>
+		</template>
+	</category>
+
+</aiml>

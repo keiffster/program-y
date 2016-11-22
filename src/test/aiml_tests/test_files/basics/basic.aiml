@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>HELLO</pattern>
+		<template>
+			HELLO, WORLD
+		</template>
+	</category>
+
+	<category>
+		<pattern>HELLO THERE</pattern>
+		<template>
+			HOW ARE YOU
+		</template>
+	</category>
+
+	<category>
+		<pattern>HELLO THERE NOW</pattern>
+		<template>
+			HOW ARE YOU NOW
+		</template>
+	</category>
+
+	<category>
+		<pattern>HI *</pattern>
+		<template>
+			HI, HOW ARE YOU
+		</template>
+	</category>
+
+	<category>
+		<pattern>HOWDY #</pattern>
+		<template>
+			HOWDY PARTNER
+		</template>
+	</category>
+
+	<category>
+		<pattern>* HEY</pattern>
+		<template>
+			HEY, HOW ARE YOU
+		</template>
+	</category>
+
+	<category>
+		<pattern># YO</pattern>
+		<template>
+			YO, HOW ARE YOU
+		</template>
+	</category>
+
+	<category>
+		<pattern>* GOODBYE *</pattern>
+		<template>
+			BYE BYE
+		</template>
+	</category>
+
+	<category>
+		<pattern>* SEEYA #</pattern>
+		<template>
+			BYE THE NOW
+		</template>
+	</category>
+
+	<category>
+		<pattern># LATER #</pattern>
+		<template>
+			LATERZ
+		</template>
+	</category>
+
+	<category>
+		<pattern># FAREWELL *</pattern>
+		<template>
+			UNTIL TOMORROW
+		</template>
+	</category>
+
+	<category>
+		<pattern>MORNING # MATE</pattern>
+		<template>
+			GOOD MORNING
+		</template>
+	</category>
+
+	<category>
+		<pattern>EVENING * CHUM</pattern>
+		<template>
+			GOOD EVENING
+		</template>
+	</category>
+
+</aiml>

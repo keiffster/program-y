@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>A B</pattern>
+		<template>
+			C
+		</template>
+	</category>
+
+	<category>
+		<pattern>A B C</pattern>
+		<template>
+			D
+		</template>
+	</category>
+
+	<category>
+		<pattern>* D E</pattern>
+		<template>
+			F
+		</template>
+	</category>
+
+	<category>
+		<pattern>G * H</pattern>
+		<template>
+			I
+		</template>
+	</category>
+
+	<category>
+		<pattern>J K *</pattern>
+		<template>
+			L
+		</template>
+	</category>
+
+	<category>
+		<pattern># M N</pattern>
+		<template>
+			O
+		</template>
+	</category>
+
+	<category>
+		<pattern>P # Q</pattern>
+		<template>
+			R
+		</template>
+	</category>
+
+	<category>
+		<pattern>S T #</pattern>
+		<template>
+			U
+		</template>
+	</category>
+
+	<category>
+		<pattern>* AA BB #</pattern>
+		<template>
+			CC
+		</template>
+	</category>
+
+	<category>
+		<pattern>* CC DD *</pattern>
+		<template>
+			EE
+		</template>
+	</category>
+
+	<category>
+		<pattern># FF GG *</pattern>
+		<template>
+			HH
+		</template>
+	</category>
+
+	<category>
+		<pattern># II JJ #</pattern>
+		<template>
+			KK
+		</template>
+	</category>
+
+	<category>
+		<pattern>* MM * MM * NN * NN *</pattern>
+		<template>
+			PPPP
+		</template>
+	</category>
+
+	<category>
+		<pattern># PP # PP # QQ # QQ #</pattern>
+		<template>
+			RRRR
+		</template>
+	</category>
+
+</aiml>

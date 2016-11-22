@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>TEST DATE</pattern>
+		<template>
+			Today is <date />
+		</template>
+	</category>
+
+	<category>
+		<pattern>TEST INTERVAL</pattern>
+		<template>
+			<interval>
+                <format>%c</format>
+                <style>days</style>
+                <from>Wed Oct  5 16:35:11 2016</from>
+                <to>Fri Oct  7 16:35:11 2016</to>
+			</interval>
+		</template>
+	</category>
+
+    <category>
+        <pattern>SEASON</pattern>
+        <template>
+            <think>
+                <set var="month"><date format="%B" jformat="MMMMMMMMM"/></set>
+            </think>
+            <condition var="month">
+            <li><value>January</value>Winter</li>
+            <li><value>February</value>Winter</li>
+            <li><value>March</value>Winter</li>
+            <li><value>April</value>Spring</li>
+            <li><value>May</value>Spring</li>
+            <li><value>June</value>Summer</li>
+            <li><value>July</value>Summer</li>
+            <li><value>August</value>Summer</li>
+            <li><value>September</value>Fall</li>
+            <li><value>October</value>Fall</li>
+            <li><value>November</value>Winter</li>
+            <li><value>December</value>Winter</li>
+            <li>unknown</li>
+            </condition>
+        </template>
+    </category>
+
+</aiml>

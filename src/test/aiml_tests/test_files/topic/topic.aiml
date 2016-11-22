@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>HELLO</pattern>
+		<template>
+		    <think><set name="topic">TEST1TOPIC</set></think>
+		    <srai>HI THERE</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>HI THERE</pattern>
+		<template>
+		    OUTSIDE OF TEST1TOPIC
+		</template>
+	</category>
+
+    <topic name="TEST1TOPIC">
+        <category>
+            <pattern>HI THERE</pattern>
+            <template>
+                INSIDE OF TEST1TOPIC
+            </template>
+        </category>
+    </topic>
+
+    <!--  -->
+
+	<category>
+		<pattern>GOODBYE</pattern>
+		<template>
+		    <think><set name="topic">TEST2 TOPIC</set></think>
+		    <srai>SEEYA</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>SEEYA</pattern>
+		<template>
+		    OUTSIDE OF TEST2 TOPIC
+		</template>
+	</category>
+
+    <topic name="TEST2 TOPIC">
+        <category>
+            <pattern>SEEYA</pattern>
+            <template>
+                INSIDE OF TEST2 TOPIC
+            </template>
+        </category>
+    </topic>
+
+</aiml>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+
+    #	<condition name="predicate">...</condition>
+    #	<condition><name>predicate</name>...</condition>
+    #		<li value="a">X</li>
+    #		<li value="b">Y</li>
+    #		<li>Z</li>				<- Default value if no condition met
+
+    #  <condition>
+    #		<li name='1' value="a">X</li>
+    #		<li value="b"><name>1</name>Y</li>
+    #		<li name="1"><value>b</value>Z</li>
+    #		<li><name>1</name><value>b</value>Z</li>
+    #		<li>Z<l/i>				<- Default value if no condition met
+    #  </condition>
+
+-->
+
+<aiml>
+
+	<category>
+		<pattern>TYPE1 VARIANT1</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition name="var1" value="value1">X</condition>
+		    <condition name="var1" value="value2">Y</condition>
+		    <condition name="var1" value="value3">Z</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE1 VARIANT2</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition name="var1"><value>value1</value>X</condition>
+		    <condition name="var1"><value>value2</value>Y</condition>
+		    <condition name="var1"><value>value3</value>Z</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE1 VARIANT3</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition value="value1"><name>var1</name>X</condition>
+		    <condition value="value2"><name>var1</name>Y</condition>
+		    <condition value="value3"><name>var1</name>Z</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE1 VARIANT4</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition><name>var1</name><value>value1</value>X</condition>
+		    <condition><name>var1</name><value>value2</value>Y</condition>
+		    <condition><name>var1</name><value>value3</value>Z</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE1 VARIANT1 NO MATCH</pattern>
+		<template>
+		    <think><set name="var1">XXX</set></think>
+		    <condition name="var1" value="value1">X</condition>
+		    <condition name="var1" value="value2">Y</condition>
+		    <condition name="var1" value="value3">Z</condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE2 VARIANT1 NO DEFAULT</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition name="var1">
+		        <li value="value1">X</li>
+		        <li value="value2">Y</li>
+		        <li value="value3">Z</li>
+		    </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE2 VARIANT1 WITH DEFAULT</pattern>
+		<template>
+		    <think><set name="var1">XXX</set></think>
+		    <condition name="var1">
+		        <li value="value1">X</li>
+		        <li value="value2">Y</li>
+		        <li value="value3">Z</li>
+		        <li>DEF</li>
+		    </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE2 VARIANT2 NO DEFAULT</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+		    <condition name="var1">
+		        <li> <value>value1</value>X</li>
+		        <li> <value>value2</value>Y</li>
+		        <li> <value>value3</value>Z</li>
+		    </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE2 VARIANT2 NO MATCH</pattern>
+		<template>
+		    <think><set name="var1">XXX</set></think>
+		    <condition name="var1">
+		        <li> <value>value1</value>X</li>
+		        <li> <value>value2</value>Y</li>
+		        <li> <value>value3</value>Z</li>
+		    </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE3 VARIANT1 NO DEFAULT</pattern>
+		<template>
+		    <think><set name="var1">value2</set></think>
+            <condition>
+                <li name='var1' value="value2">A</li>
+                <li value="value2"><name>var2</name>B</li>
+                <li name="var3"><value>value3</value>C</li>
+                <li><name>var4</name><value>value4</value>D</li>
+            </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE3 VARIANT1 WITH DEFAULT</pattern>
+		<template>
+		    <think><set name="var1">XXX</set></think>
+            <condition>
+                <li name='var1' value="value2">A</li>
+                <li value="value2"><name>var2</name>B</li>
+                <li name="var3"><value>value3</value>C</li>
+                <li><name>var4</name><value>value4</value>D</li>
+                <li>DEF</li>
+            </condition>
+		</template>
+	</category>
+
+	<category>
+		<pattern>TYPE3 VARIANT1 NO MATCH</pattern>
+		<template>
+		    <think><set name="var1">XXX</set></think>
+            <condition>
+                <li name='var1' value="value2">A</li>
+                <li value="value2"><name>var2</name>B</li>
+                <li name="var3"><value>value3</value>C</li>
+                <li><name>var4</name><value>value4</value>D</li>
+            </condition>
+		</template>
+	</category>
+
+</aiml>
