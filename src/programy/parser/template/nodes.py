@@ -18,6 +18,7 @@ import logging
 import subprocess
 from random import randint
 from programy.parser.exceptions import ParserException
+from programy.utils.classes.loader import ClassLoader
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -1086,7 +1087,7 @@ class TemplateSRAIXNode(TemplateNode):
         return resolved
 
     def format(self):
-        return "[SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)]" % (
+        return "SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)" % (
             self.host, self.botid, self.hint, self.apikey, self.service)
 
 
@@ -1100,8 +1101,8 @@ class TemplateLearnNode(TemplateNode):
         logging.debug("[%s] resolved to nothing" % (self.format()))
         return ""
 
-def format(self):
-        return "[LEARN]"
+    def format(self):
+        return "LEARN"
 
 
 ######################################################################################################################
@@ -1115,7 +1116,7 @@ class TemplateLearnfNode(TemplateNode):
         return ""
 
     def format(self):
-        return "[LEARNF]"
+        return "LEARNF"
 
 
 ######################################################################################################################
@@ -1131,3 +1132,30 @@ class TemplateEvalNode(TemplateNode):
         return "EVAL"
 
 
+######################################################################################################################
+#
+class TemplateExtensionNode(TemplateNode):
+    def __init__(self):
+        TemplateNode.__init__(self)
+        self._path = None
+
+    def resolve(self, bot, clientid):
+        try:
+            data = " ".join([child.resolve(bot, clientid) for child in self._children])
+
+            new_class = ClassLoader.instantiate_class(self._path)
+            if new_class is not None:
+                instance = new_class()
+                resolved = instance.execute(data)
+
+                logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+                return resolved
+
+        except Exception as e:
+            logging.exception(e)
+            logging.error("Extension [%s] failed to execute" % self._path )
+
+        return ""
+
+    def format(self):
+        return "EXTENSION (%s)" % self._path

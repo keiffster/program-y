@@ -25,9 +25,9 @@ class TemplateGraph(object):
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*
     #
     def parse_template_expression(self, pattern):
-        root = TemplateNode()
-        self.parse_template_node(pattern, root)
-        return root
+        node = TemplateNode()
+        self.parse_template_node(pattern, node)
+        return node
 
     def parse_template_node(self, pattern, current_branch):
 
@@ -135,6 +135,11 @@ class TemplateGraph(object):
             self.parse_size_expression(expression, branch)
         elif expression.tag == 'oob':
             self.parse_oob_expression(expression, branch)
+
+        # This is tag not AIML 2.0 compliant
+        elif expression.tag == 'extension':
+            self.parse_extension_expression(expression, branch)
+
         else:
             self.parse_unknown_as_text_node(expression, branch)
             #raise ParserException("Error, unknown expression tag: <%s>" % (expression.tag), xml_element=expression)
@@ -916,6 +921,33 @@ class TemplateGraph(object):
             logging.warning("from node, format missing !")
         if interval_node._to is None:
             logging.warning("to node, format missing !")
+
+    #######################################################################################################
+    #	EXTENSION_EXPRESSION ::== <extension>
+    #                               <path>programy.etension.SomeModule</path>
+    #                               parameters
+    #							</extension>
+
+    def parse_extension_expression(self, expression, branch):
+
+        extension_node = TemplateExtensionNode()
+        branch.children.append(extension_node)
+
+        if 'path' in expression.attrib:
+            extension_node._path = expression.attrib['path']
+
+        head_text = expression.text
+        self.parse_text(head_text, extension_node)
+
+        for child in expression:
+            if child.tag == 'path':
+                extension_node._path = child.text
+            else:
+                self.parse_tag_expression(child, extension_node)
+
+            tail_text = child.tail
+            self.parse_text(tail_text, extension_node)
+
 
     #
     # WARNING - Not sure I'll even implement this at this time

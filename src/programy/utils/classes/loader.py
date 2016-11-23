@@ -22,7 +22,8 @@ class ClassLoader(object):
     def __init__(self):
         pass
 
-    def instantiate_processor_class(self, class_string):
+    @staticmethod
+    def instantiate_class(class_string):
         processor_path = class_string.strip()
         logging.debug("Processor path [%s]" % processor_path)
 

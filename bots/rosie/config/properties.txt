@@ -1,5 +1,5 @@
 url:http://www.keithsterling.com/aiml
-name:KeiffBot 1.0
+name:KeiffBot
 firstname:Keiff
 middlename:AIML
 lastname:BoT

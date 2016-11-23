@@ -29,7 +29,7 @@ class ProcessorLoader(ClassLoader):
         count = 0
         with open(filename, "r+") as file:
             for line in file:
-                new_class = self.instantiate_processor_class(line)
+                new_class = ClassLoader.instantiate_class(line)
                 if new_class is not None:
                     self.processors.append(new_class(*args, **kw))
                     count += 1
@@ -39,6 +39,7 @@ class ProcessorLoader(ClassLoader):
         for processor in self.processors:
             string = processor.process(string)
         return string
+
 
 ##################################################################
 #

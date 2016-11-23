@@ -108,6 +108,7 @@ class ConsoleBotClient(BotClient):
         if self.arguments.noloop is False:
             logging.info ("Entering conversation loop...")
             running = True
+            self.display_response(self.bot.get_version_string)
             self.display_response(self.bot.initial_question)
             while running is True:
                 try:
@@ -135,6 +136,7 @@ class ConsoleBotClient(BotClient):
 
 if __name__ == '__main__':
 
+    print ("Loading, please wait...")
     client = ConsoleBotClient()
     client.run()
 

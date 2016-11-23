@@ -63,6 +63,16 @@ class Bot(object):
         else:
             return "Hello"
 
+    @property
+    def get_version_string(self):
+        if self._configuration is not None:
+            return "%s version %s, initiated %s" %(
+                self.brain.properties.property("name"),
+                self.brain.properties.property("version"),
+                self.brain.properties.property("birthdate"))
+        else:
+            return ""
+
     def has_conversation(self, clientid):
         if clientid in self._conversations:
             return True

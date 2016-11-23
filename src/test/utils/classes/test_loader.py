@@ -11,7 +11,7 @@ class ClassLoaderTests(unittest.TestCase):
         loader = ClassLoader()
         self.assertIsNotNone(loader)
 
-        meta_class = loader.instantiate_processor_class("test.testclass.TestClass")
+        meta_class = loader.instantiate_class("test.testclass.TestClass")
         self.assertIsNotNone(meta_class)
         new_class = meta_class()
         self.assertIsNotNone(new_class)
