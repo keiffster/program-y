@@ -295,7 +295,7 @@ class PatternRootNode(PatternNode):
     def is_root(self):
         return True
 
-    def can_add(self, new_node):
+    def can_add(self, new_node: PatternNode):
         if isinstance(new_node, PatternRootNode):
             raise ParserException("Cannot add root node to existing root node")
         if isinstance(new_node, PatternTopicNode):
@@ -305,12 +305,12 @@ class PatternRootNode(PatternNode):
         if isinstance(new_node, PatternTemplateNode):
             raise ParserException("Cannot add template node to root node")
 
-    def equivalent(self, other):
+    def equivalent(self, other: PatternNode)->bool:
         if isinstance(other, PatternRootNode):
             return True
         return False
 
-    def to_string(self, verbose=True):
+    def to_string(self, verbose: bool=True)->str:
         return "ROOT [%s]" % self._child_count(verbose)
 
 #######################################################################################################################

@@ -38,6 +38,8 @@ class TestClient(BotClient):
         self.configuration.brain_configuration._triples = None
         self.configuration.brain_configuration._preprocessors = None
 
+        self.configuration.bot_configuration.default_response = ""
+
     def initiate_bot(self, configuration):
         brain = Brain(configuration.brain_configuration)
         self.bot = Bot(brain, config=configuration.bot_configuration)

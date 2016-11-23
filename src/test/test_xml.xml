@@ -32,11 +32,13 @@
         <properties>properties.txt</properties>
         <triples>triples.txt</triples>
         <preprocessors>preprocessors.txt</preprocessors>
+        <postprocessors>postprocessors.txt</postprocessors>
        </files>
     </brain>
     <bot>
         <prompt>>>></prompt>
         <default_response>Sorry, I don't have an answer for that!</default_response>
         <exit_response>So long, and thanks for the fish!</exit_response>
+        <initial_question>Hi, how can I help you?</initial_question>
     </bot>
 </configuration>

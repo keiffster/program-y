@@ -28,11 +28,12 @@ brain:
       properties: properties.txt
       triples: triples.txt
       preprocessors: preprocessors.txt
+      postprocessors: postprocessors.txt
 
 bot:
   prompt: ">>>"
   default_response: Sorry, I don't have an answer for that!
   exit_response: So long, and thanks for the fish!
-
+  initial_question: Hi, how can I help you?
 
 

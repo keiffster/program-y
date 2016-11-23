@@ -18,7 +18,7 @@ class InfoAIMLTests(unittest.TestCase):
     def setUpClass(cls):
         InfoAIMLTests.test_client = BasicTestClient()
 
-    def test_progrsm(self):
+    def test_program(self):
         response = InfoAIMLTests.test_client.bot.ask_question("test",  "TEST PROGRAM")
         self.assertIsNotNone(response)
         self.assertEqual(response, "AIMLBot")

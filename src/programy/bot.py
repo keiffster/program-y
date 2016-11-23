@@ -46,7 +46,8 @@ class Bot(object):
         if self._configuration is not None:
             return self._configuration.default_response
         else:
-            return "Sorry, I don't have an answer for that right now"
+            #return "Sorry, I don't have an answer for that right now"
+            return ""
 
     @property
     def exit_response(self):
@@ -97,9 +98,10 @@ class Bot(object):
             response = self.brain.ask_question(self, clientid, each_sentence)
             if response is not None:
                 logging.debug("Raw Response (%s): %s"%(clientid, response))
-
-                each_sentence.response = self.brain.post_process_response(response)
+                each_sentence.response = self.brain.post_process_response(response).strip()
                 logging.debug("Processed Response (%s): %s"%(clientid, each_sentence.response))
+            else:
+                each_sentence.response = self.default_response
 
         return question.combine_answers()
 

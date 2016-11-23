@@ -42,6 +42,9 @@ class TemplateNode(object):
             output("%s{%s}" % (tabs, child.format()))
             self.output_child(child, tabs + "\t")
 
+    def resolve_children_to_string(self, bot, clientid):
+        return " ".join([child.resolve(bot, clientid) for child in self._children])
+
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
         logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
@@ -808,6 +811,7 @@ class TemplateSizeNode(TemplateNode):
 
     def format(self):
         return "SIZE"
+
 
 ######################################################################################################################
 #
