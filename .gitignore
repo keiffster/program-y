@@ -90,3 +90,7 @@ ENV/
 # Rope project settings
 .ropeproject
 
+bots/keiff/aiml/
+src/.DS_Store
+.idea
+
