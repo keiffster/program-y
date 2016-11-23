@@ -76,7 +76,7 @@ class BotClient(object):
         if arguments.logging is not None:
             with open(arguments.logging, 'r+') as yml_data_file:
                 logging_config = yaml.load(yml_data_file)
-                logging.config.dictConfig(logging_config['logging'])
+                logging.config.dictConfig(logging_config) #['logging'])
                 logging.info("Now logging under configuration")
         else:
             print ("Warning. No logging configuration file defined, using defaults...")

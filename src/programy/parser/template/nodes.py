@@ -219,7 +219,7 @@ class TemplateSetNode(TemplateNode):
 
         else:
             if bot.brain.properties.has_property(name):
-                logging.error("Global property already exists for name %s, ignoring set!" % name)
+                logging.error("Global property already exists for name [%s], ignoring set!" % name)
             else:
                 logging.debug("[%s] resolved to global: [%s] => [%s]" % (self.format(), name, value))
                 bot.get_conversation(clientid).set_predicate(name, value)
@@ -416,12 +416,12 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
         default = self.get_default()
         if default is not None:
             resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default._children])
+
+            if default.loop is True:
+                resolved = resolved.strip() + " " + self.resolve(bot, clientid)
         else:
             resolved = ""
         logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
-
-        if default.loop is True:
-            resolved = resolved.strip() + " " + self.resolve(bot, clientid)
 
         return resolved
 
@@ -742,16 +742,37 @@ class TemplateIntervalNode(TemplateNode):
             style = self._style.resolve(bot, clientid)
 
             diff = to_time - from_time
-            difference_in_years = relativedelta(to_time, from_time)
+            difference = relativedelta(to_time, from_time)
 
             if style == "years":
-                resolved = str(difference_in_years.years)
+                resolved = str(difference.years)
             elif style == "months":
-                resolved = str(difference_in_years.months)
+                resolved = str(difference.months)
+            elif style == "weeks":
+                resolved = str(difference.weeks)
             elif style == "days":
-                resolved = str(difference_in_years.days)
+                resolved = str(difference.days)
+            elif style == "hours":
+                resolved = str(difference.hours)
+            elif style == "minutes":
+                resolved = str(difference.minutes)
+            elif style == "seconds":
+                resolved = str(difference.seconds)
+            elif style == "microseconds":
+                resolved = str(difference.microseconds)
+            elif style == "ymd":
+                resolved = "%d years, %d months, %d days" % \
+                           (difference.years, difference.months, difference.days)
+            elif style == "hms":
+                resolved = "%d hours, %d minutes, %d seconds" % \
+                           (  difference.hours, difference.minutes, difference.seconds)
+            elif style == "ymdhms":
+                resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
+                           (difference.years, difference.months, difference.days,
+                            difference.hours, difference.minutes, difference.seconds)
             else:
-                pass
+                logging.error("Unknown interval style [%s]" % (style))
+                resolved = ""
 
             logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
             return resolved

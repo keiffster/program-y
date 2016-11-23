@@ -2,17 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e19fefc-f103-4fe9-ab35-41aaafa720a4" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/bots/rosie/config/postprocessors.conf" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bots/rosie/config/postprocessors.conf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/programy/chatlog.log.1" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/programy/chatlog.log.2" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/programy/chatlog.log.3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TODO" afterPath="$PROJECT_DIR$/TODO" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/rosie/config/logging.yaml" afterPath="$PROJECT_DIR$/bots/rosie/config/logging.yaml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bots/rosie/config/preprocessors.conf" afterPath="$PROJECT_DIR$/bots/rosie/config/preprocessors.conf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/bot.py" afterPath="$PROJECT_DIR$/src/programy/bot.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/parser/pattern/nodes.py" afterPath="$PROJECT_DIR$/src/programy/parser/pattern/nodes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/clients.py" afterPath="$PROJECT_DIR$/src/programy/clients.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/programy/parser/template/nodes.py" afterPath="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/aiml_tests/client.py" afterPath="$PROJECT_DIR$/src/test/aiml_tests/client.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/aiml_tests/test_info_aiml.py" afterPath="$PROJECT_DIR$/src/test/aiml_tests/test_info_aiml.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/test_json.json" afterPath="$PROJECT_DIR$/src/test/test_json.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/test_xml.xml" afterPath="$PROJECT_DIR$/src/test/test_xml.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/test_yaml.yaml" afterPath="$PROJECT_DIR$/src/test/test_yaml.yaml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" afterPath="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
     </list>
     <ignored path="program-y.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,11 +32,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TODO" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/TODO">
+      <file leaf-file-name="logging.yaml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bots/rosie/config/logging.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="32" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="32" />
+            <state relative-caret-position="75">
+              <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -57,7 +57,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_map.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_random.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_req_resp.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_set.py" />
@@ -72,7 +71,6 @@
         <option value="$PROJECT_DIR$/src/programy/parser/template/graph.py" />
         <option value="$PROJECT_DIR$/src/test/parser/template/graph/test_condition.py" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_loop_aiml.py" />
-        <option value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/topicstar/topicstar.aiml" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/topic/topic.aiml" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_set_aiml.py" />
@@ -81,8 +79,6 @@
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_files/condition/condition.aiml" />
         <option value="$PROJECT_DIR$/bots/rosie/aiml/knowledge.aiml" />
         <option value="$PROJECT_DIR$/src/test/custom.py" />
-        <option value="$PROJECT_DIR$/src/programy/clients.py" />
-        <option value="$PROJECT_DIR$/TODO" />
         <option value="$PROJECT_DIR$/src/test/test_dialog.py" />
         <option value="$PROJECT_DIR$/src/programy/dialog.py" />
         <option value="$PROJECT_DIR$/src/.gitignore" />
@@ -99,7 +95,6 @@
         <option value="$PROJECT_DIR$/src/programy/config.py" />
         <option value="$PROJECT_DIR$/src/programy/brain.py" />
         <option value="$PROJECT_DIR$/src/programy/processing.py" />
-        <option value="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
         <option value="$PROJECT_DIR$/src/test/test_json.json" />
         <option value="$PROJECT_DIR$/src/test/test_xml.xml" />
         <option value="$PROJECT_DIR$/src/test/test_yaml.yaml" />
@@ -108,6 +103,11 @@
         <option value="$PROJECT_DIR$/src/programy/bot.py" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/test_basic_aiml.py" />
         <option value="$PROJECT_DIR$/src/test/aiml_tests/client.py" />
+        <option value="$PROJECT_DIR$/TODO" />
+        <option value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
+        <option value="$PROJECT_DIR$/src/programy/clients.py" />
+        <option value="$PROJECT_DIR$/bots/rosie/config/logging.yaml" />
+        <option value="$PROJECT_DIR$/src/programy/parser/template/nodes.py" />
       </list>
     </option>
   </component>
@@ -221,6 +221,86 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="programy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="programy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="programy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="parser" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="template" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="program-y" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bots" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -246,60 +326,21 @@
       <recent name="$PROJECT_DIR$/src/test/aiml_tests/test_files/condition" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in test (3)">
-    <configuration default="false" name="processing" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/programy" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/programy/processing.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittests in test (1)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Unittests in test (1)">
+    <configuration default="false" name="Unittest TemplateIntervalNodeTests.test_node_hours" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/parser/template" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="program-y" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$/src/test" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <option name="PUREUNITTEST" value="true" />
-      <option name="PARAMS" value="" />
-      <option name="USE_PARAM" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="Unittest BasicAIMLTests.test_basic_no_match" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="program-y" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/aiml_tests/test_basic_aiml.py" />
-      <option name="CLASS_NAME" value="BasicAIMLTests" />
-      <option name="METHOD_NAME" value="test_basic_no_match" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$/src/test" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
+      <option name="CLASS_NAME" value="TemplateIntervalNodeTests" />
+      <option name="METHOD_NAME" value="test_node_hours" />
+      <option name="FOLDER_NAME" value="" />
       <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
@@ -308,21 +349,21 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittests in test (2)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TemplateIntervalNodeTests.test_node_minutes" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/parser/template" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="program-y" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="$PROJECT_DIR$/src/test" />
-      <option name="TEST_TYPE" value="TEST_FOLDER" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
+      <option name="CLASS_NAME" value="TemplateIntervalNodeTests" />
+      <option name="METHOD_NAME" value="test_node_minutes" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
       <option name="PUREUNITTEST" value="true" />
@@ -330,7 +371,51 @@
       <option name="USE_PARAM" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="Unittests in test (3)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Unittest TemplateIntervalNodeTests.test_node_seconds" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/parser/template" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
+      <option name="CLASS_NAME" value="TemplateIntervalNodeTests" />
+      <option name="METHOD_NAME" value="test_node_seconds" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/test/parser/template" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="program-y" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test/parser/template/test_nodes.py" />
+      <option name="CLASS_NAME" value="TemplateIntervalNodeTests" />
+      <option name="METHOD_NAME" value="test_node_ymdhms" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_METHOD" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <option name="PUREUNITTEST" value="true" />
+      <option name="PARAMS" value="" />
+      <option name="USE_PARAM" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Unittests in test (1)" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -536,19 +621,19 @@
       <item index="1" class="java.lang.String" itemvalue="Python.tillybot" />
       <item index="2" class="java.lang.String" itemvalue="Python.rosiebot" />
       <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.processing" />
-      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
-      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest BasicAIMLTests.test_basic_no_match" />
-      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittests in test (2)" />
-      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_hours" />
+      <item index="5" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_minutes" />
+      <item index="6" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_seconds" />
+      <item index="7" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_ymdhms" />
+      <item index="8" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test (3)" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittests in test (2)" />
-        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest BasicAIMLTests.test_basic_no_match" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.processing" />
+        <item index="0" class="java.lang.String" itemvalue="Python tests.Unittests in test (1)" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_ymdhms" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_seconds" />
+        <item index="3" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_minutes" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Unittest TemplateIntervalNodeTests.test_node_hours" />
       </list>
     </recent_temporary>
   </component>
@@ -573,39 +658,46 @@
       <option name="project" value="LOCAL" />
       <updated>1479838451247</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Various changes in support of better unit testing">
+      <created>1479891871627</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1479891871627</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittest_BasicAIMLTests_test_basic_no_match - 2016.11.23 at 08h 53m 52s.xml">
-      <configuration name="Unittest BasicAIMLTests.test_basic_no_match" configurationId="tests" />
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_minutes - 2016.11.23 at 10h 01m 00s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_minutes" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittest_BasicAIMLTests_test_basic_no_match - 2016.11.23 at 08h 53m 55s.xml">
-      <configuration name="Unittest BasicAIMLTests.test_basic_no_match" configurationId="tests" />
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_minutes - 2016.11.23 at 10h 01m 10s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_minutes" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 07h 49m 50s.xml">
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_minutes - 2016.11.23 at 10h 01m 15s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_minutes" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_seconds - 2016.11.23 at 10h 01m 50s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_seconds" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_ymdhms - 2016.11.23 at 10h 05m 54s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_ymdhms - 2016.11.23 at 10h 06m 15s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_ymdhms - 2016.11.23 at 10h 06m 24s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_ymdhms - 2016.11.23 at 10h 06m 43s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittest_TemplateIntervalNodeTests_test_node_ymdhms - 2016.11.23 at 10h 07m 36s.xml">
+      <configuration name="Unittest TemplateIntervalNodeTests.test_node_ymdhms" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 10h 07m 43s.xml">
       <configuration name="Unittests in test (1)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 07h 50m 18s.xml">
-      <configuration name="Unittests in test (1)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 07h 54m 30s.xml">
-      <configuration name="Unittests in test (1)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 08h 50m 33s.xml">
-      <configuration name="Unittests in test (1)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(1) - 2016.11.23 at 08h 51m 37s.xml">
-      <configuration name="Unittests in test (1)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(2) - 2016.11.23 at 08h 54m 43s.xml">
-      <configuration name="Unittests in test (2)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(2) - 2016.11.23 at 08h 56m 43s.xml">
-      <configuration name="Unittests in test (2)" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_(3) - 2016.11.23 at 08h 56m 59s.xml">
-      <configuration name="Unittests in test (3)" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -624,10 +716,10 @@
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18384568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" x="812" y="39" width="295" height="1104" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32879817" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23770492" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23770492" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28922716" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38407496" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290398" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -657,7 +749,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Support for date time defect&#10;Added pre and post loader processing of question and response" />
-    <option name="LAST_COMMIT_MESSAGE" value="Support for date time defect&#10;Added pre and post loader processing of question and response" />
+    <MESSAGE value="Various changes in support of better unit testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Various changes in support of better unit testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -714,7 +807,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/src/programy/parser/template/nodes.py</url>
-          <line>919</line>
+          <line>940</line>
           <option name="timeStamp" value="249" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -775,28 +868,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/programy/parser/aiml_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3615">
-          <caret line="253" column="8" selection-start-line="253" selection-start-column="8" selection-end-line="253" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/test_dialog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/dialog.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="139" column="0" selection-start-line="139" selection-start-column="0" selection-end-line="139" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/.coverage" />
     <entry file="file://$PROJECT_DIR$/src/run.sh">
       <provider selected="true" editor-type-id="text-editor">
@@ -842,14 +913,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
           <caret line="72" column="11" selection-start-line="54" selection-start-column="0" selection-end-line="82" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/config/properties.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="27" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -960,22 +1023,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/config/preprocessors.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bots/rosie/config/postprocessors.conf">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/programy/processing.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="474">
@@ -1040,38 +1087,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/parser/template/test_nodes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#34#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/nodes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="53" column="23" selection-start-line="53" selection-start-column="23" selection-end-line="53" selection-end-column="23" />
-          <folding>
-            <element signature="e#1067#1081#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/aiml_tests/test_arrow_aiml.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
           <caret line="45" column="0" selection-start-line="45" selection-start-column="0" selection-end-line="46" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/clients.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="61" column="6" selection-start-line="61" selection-start-column="6" selection-end-line="61" selection-end-column="6" />
           <folding />
         </state>
       </provider>
@@ -1081,7 +1100,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1099,7 +1118,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1122,20 +1141,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/programy/bot.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="50" column="0" selection-start-line="50" selection-start-column="0" selection-end-line="50" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/programy/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
           <caret line="214" column="24" selection-start-line="214" selection-start-column="8" selection-end-line="214" selection-end-column="24" />
           <folding>
-            <element signature="e#1066#1131#0" expanded="true" />
+            <element signature="e#1066#1131#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1172,10 +1183,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///usr/local/lib/python3.5/site-packages/dateutil/relativedelta.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-287">
+          <caret line="90" column="8" selection-start-line="90" selection-start-column="8" selection-end-line="90" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TODO">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="32" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="32" />
+        <state relative-caret-position="249">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/preprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/postprocessors.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/parser/template/test_nodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7345">
+          <caret line="1105" column="0" selection-start-line="1105" selection-start-column="0" selection-end-line="1105" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/clients.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="113" column="48" selection-start-line="113" selection-start-column="48" selection-end-line="113" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/properties.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/bot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1065">
+          <caret line="74" column="8" selection-start-line="74" selection-start-column="8" selection-end-line="74" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/dialog.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="248">
+          <caret line="189" column="21" selection-start-line="189" selection-start-column="8" selection-end-line="189" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/programy/parser/template/nodes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="220" column="4" selection-start-line="220" selection-start-column="4" selection-end-line="220" selection-end-column="4" />
+          <folding>
+            <element signature="e#1067#1081#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bots/rosie/config/logging.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="35" selection-start-line="5" selection-start-column="35" selection-end-line="5" selection-end-column="35" />
           <folding />
         </state>
       </provider>

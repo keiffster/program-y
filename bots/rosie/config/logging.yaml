@@ -1,19 +1,17 @@
-logging:
-    version: 1
-    formatters:
-      simple:
-        format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    handlers:
-      console:
-        class: logging.StreamHandler
-        level: DEBUG
+version: 1
+disable_existing_loggers: False
+
+formatters:
+  simple:
+    format: '%(asctime)s  %(name)-10s %(levelname)-7s %(message)s'
+
+handlers:
+    file:
+        class: logging.handlers.RotatingFileHandler
         formatter: simple
-        stream: ext://sys.stdout
-    loggers:
-      simpleExample:
-        level: DEBUG
-        handlers: [console]
-        propagate: no
-    root:
-      level: DEBUG
-      handlers: [console]
+        filename: /tmp/rosiebot.log
+
+root:
+    level: DEBUG
+    handlers:
+        - file

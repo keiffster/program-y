@@ -22,10 +22,6 @@ Add logging to all nodes to output their specific section
 
 Change resolve() to eval()
 
-date needs more styles adding, currently only supports days
-
-date should only support pformat - python format and report errors on format and jformat
-
 interval needs to use same styles as date
 
 config xml, yaml and json do not handle missing values
