@@ -1,6 +1,11 @@
-Wikipedia is provided by the code at https://pypi.python.org/pypi/wikipedia/
+Program-Y is an Python 3.x implementation of an AIML 2.0 Grammar
 
-Pannous Service https://market.mashape.com/pannous
+For more details of what AIML then head over to the spec at
+http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html
 
-Pandora Service https://developer.pandorabots.com/faq#ten
+For full documentation, tutorials and other helpful information, see the GitHub pages site
+https://keiffster.github.io/program-y/
+
+This is a very early 0.0.1 implementation, it covers almost all the 2.0 grammar apart from Eval, Learn and Learnf,
+but apart from that you can pretty much get up and running with your own chat bot pretty easily
 
