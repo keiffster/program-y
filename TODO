@@ -18,18 +18,8 @@ or	PatternNode
 
 Add logging to all nodes to output their specific section
 
-Change resolve() to eval()
-
-interval needs to use same styles as date
-
 config xml, yaml and json do not handle missing values
 need a better optionf or default values and mandatory values
-
-convert some Template nodes from variants to subclasses of base
-    ( See Condition Node for example )
-
-replace parse_tag_expression with table lookup loaded from config file
-    ( This will allow extensions to be added via config )
 
 Info aiml tests need property values setting up for test
 
@@ -37,8 +27,11 @@ Implement PEP guidelines for all code
 
 Implement pylint
 
-Wikipedia is provided by the code at https://pypi.python.org/pypi/wikipedia/
-
-Pannous Service https://market.mashape.com/pannous
-
-Pandora Service https://developer.pandorabots.com/faq#ten
+Implement External Services
+- Wikipedia is provided by the code at https://pypi.python.org/pypi/wikipedia/
+    - Ambiguous
+    - Disambiguous
+- Pannous Service https://market.mashape.com/pannous
+- Pandora Service https://developer.pandorabots.com/faq#ten
+- Google
+- Weather

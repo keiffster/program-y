@@ -6,6 +6,5 @@ http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html
 For full documentation, tutorials and other helpful information, see the GitHub pages site
 https://keiffster.github.io/program-y/
 
-This is a very early 0.0.1 implementation, it covers almost all the 2.0 grammar apart from Eval, Learn and Learnf,
-but apart from that you can pretty much get up and running with your own chat bot pretty easily
-
+This is a very early 0.0.2 implementation, it covers almost all the 2.0 grammar and has very high unit
+test coverage both of code and AIML files
