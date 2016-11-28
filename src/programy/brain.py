@@ -235,7 +235,7 @@ class Brain(object):
         root = tree.getroot()
 
         # Add our new element
-        child = ET.Element("learn")
+        child = ET.Element("category")
         child.append(pattern)
         child.append(topic)
         child.append(that)
