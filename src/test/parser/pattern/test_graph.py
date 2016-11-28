@@ -6,7 +6,7 @@ from programy.parser.pattern.nodes import *
 from programy.parser.template.nodes import *
 from programy.dialog import Sentence
 from test.parser.pattern.base import PatternTestBaseClass
-
+from programy.parser.aiml_parser import AIMLParser
 
 class PatternGraphTests(PatternTestBaseClass):
 

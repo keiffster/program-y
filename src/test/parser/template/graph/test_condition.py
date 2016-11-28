@@ -56,7 +56,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -78,7 +77,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -100,7 +98,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -122,7 +119,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -143,7 +139,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -165,7 +160,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -187,7 +181,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -209,7 +202,6 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsInstance(template_node, TemplateType1ConditionNode)
 
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
         self.assertEqual(template_node.value, "avalue")
 
@@ -236,11 +228,10 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType2ConditionNode)
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
-        self.assertEqual(len(template_node.conditions), 4)
+        self.assertEqual(len(template_node.children), 4)
 
-        node = template_node.conditions[0]
+        node = template_node.children[0]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -250,7 +241,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "A")
 
-        node = template_node.conditions[1]
+        node = template_node.children[1]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -260,7 +251,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "B")
 
-        node = template_node.conditions[2]
+        node = template_node.children[2]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -270,7 +261,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "C")
 
-        node = template_node.conditions[3]
+        node = template_node.children[3]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -301,11 +292,10 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType2ConditionNode)
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
-        self.assertEqual(len(template_node.conditions), 4)
+        self.assertEqual(len(template_node.children), 4)
 
-        node = template_node.conditions[0]
+        node = template_node.children[0]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertTrue(node.loop)
@@ -315,7 +305,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "A")
 
-        node = template_node.conditions[1]
+        node = template_node.children[1]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -325,7 +315,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "B")
 
-        node = template_node.conditions[2]
+        node = template_node.children[2]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -335,7 +325,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "C")
 
-        node = template_node.conditions[3]
+        node = template_node.children[3]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -366,11 +356,10 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType2ConditionNode)
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
-        self.assertEqual(len(template_node.conditions), 4)
+        self.assertEqual(len(template_node.children), 4)
 
-        node = template_node.conditions[0]
+        node = template_node.children[0]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -380,7 +369,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "A")
 
-        node = template_node.conditions[1]
+        node = template_node.children[1]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -390,7 +379,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "B")
 
-        node = template_node.conditions[2]
+        node = template_node.children[2]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -400,7 +389,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "C")
 
-        node = template_node.conditions[3]
+        node = template_node.children[3]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -430,11 +419,10 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType2ConditionNode)
         self.assertFalse(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
-        self.assertEqual(len(template_node.conditions), 4)
+        self.assertEqual(len(template_node.children), 4)
 
-        node = template_node.conditions[0]
+        node = template_node.children[0]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -444,7 +432,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "A")
 
-        node = template_node.conditions[1]
+        node = template_node.children[1]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -454,7 +442,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "B")
 
-        node = template_node.conditions[2]
+        node = template_node.children[2]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -464,7 +452,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "C")
 
-        node = template_node.conditions[3]
+        node = template_node.children[3]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertFalse(node.local)
         self.assertFalse(node.loop)
@@ -494,11 +482,10 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertIsNotNone(template_node)
         self.assertIsInstance(template_node, TemplateType2ConditionNode)
         self.assertTrue(template_node.local)
-        self.assertFalse(template_node.loop)
         self.assertEqual(template_node.name, "aname")
-        self.assertEqual(len(template_node.conditions), 4)
+        self.assertEqual(len(template_node.children), 4)
 
-        node = template_node.conditions[0]
+        node = template_node.children[0]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -508,7 +495,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "A")
 
-        node = template_node.conditions[1]
+        node = template_node.children[1]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -518,7 +505,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "B")
 
-        node = template_node.conditions[2]
+        node = template_node.children[2]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)
@@ -528,7 +515,7 @@ class TemplateGraphConditionTests(unittest.TestCase):
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.children[0].resolve(None, None), "C")
 
-        node = template_node.conditions[3]
+        node = template_node.children[3]
         self.assertIsInstance(node, TemplateConditionListItemNode)
         self.assertTrue(node.local)
         self.assertFalse(node.loop)

@@ -21,6 +21,9 @@ from programy.parser.template.nodes import *
 
 class TemplateGraph(object):
 
+    def __init__(self, aiml_parser=None):
+        self._aiml_parser = aiml_parser
+
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*
     #
@@ -256,13 +259,15 @@ class TemplateGraph(object):
     #	<condition><name>predicate</name><value>v</value>X</condition>
     #
     def parse_type1_condition(self, expression, branch):
-        condition = TemplateType1ConditionNode()
-        branch.append(condition)
 
         response = self.get_condition_name(expression)
-        condition.name = response[0]
-        condition.local = response[1]
-        condition.value = self.get_condition_value(expression)
+
+        name = response[0]
+        local = response[1]
+        value = self.get_condition_value(expression)
+
+        condition = TemplateType1ConditionNode(name=name, value=value, local=local)
+        branch.append(condition)
 
         self.parse_text(expression.text, condition)
 
@@ -295,10 +300,11 @@ class TemplateGraph(object):
     #		<li>Z</li>				<- Default value if no condition met
     #
     def parse_type2_condition(self, expression, branch):
-        condition = TemplateType2ConditionNode()
         response = self.get_condition_name(expression)
-        condition.name = response[0]
-        condition.local = response[1]
+        name = response[0]
+        local = response[1]
+
+        condition = TemplateType2ConditionNode(name=name, local=local)
 
         branch.append(condition)
 
@@ -318,7 +324,7 @@ class TemplateGraph(object):
                 list_item.value = self.get_condition_value(child, False)
                 list_item.local = condition.local
 
-                condition.conditions.append(list_item)
+                condition.children.append(list_item)
                 self.parse_text(child.text, list_item)
 
                 for sub_pattern in child:
@@ -973,14 +979,45 @@ class TemplateGraph(object):
     #	LEARN_EXPRESSION ::== 	<learn>LEARN_CATEGORY_EXPRESSION</learn> |
     #							<learnf>LEARN_CATEGORY_EXPRESSION</learnf>
 
+    def parse_eval_expression(self, expression, branch):
+
+        eval_node = TemplateEvalNode()
+        branch.children.append(eval_node)
+
+        head_text = expression.text
+        self.parse_text(head_text, eval_node)
+
+        for child in expression:
+            self.parse_tag_expression(child, eval_node)
+
+            tail_text = child.tail
+            self.parse_text(tail_text, eval_node)
+
     def parse_learn_expression(self, expression, branch):
-        raise ParserException("Error, learn not implemented yet!", xml_element=expression)
+
+        learn_node = TemplateLearnNode()
+        branch.children.append(learn_node)
+
+        for child in expression:
+            if child.tag == 'category':
+                parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
+                learn_node._pattern  = parsed[0]
+                learn_node._topic    = parsed[1]
+                learn_node._that     = parsed[2]
+                learn_node._template = parsed[3]
 
     def parse_learnf_expression(self, expression, branch):
-        raise ParserException("Error, learnf not implemented yet!", xml_element=expression)
 
-    def parse_eval_expression(self, expression, branch):
-        raise ParserException("Error, eval not implemented yet!", xml_element=expression)
+        learn_node = TemplateLearnfNode()
+        branch.children.append(learn_node)
+
+        for child in expression:
+            if child.tag == 'category':
+                parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
+                learn_node._pattern  = parsed[0]
+                learn_node._topic    = parsed[1]
+                learn_node._that     = parsed[2]
+                learn_node._template = parsed[3]
 
     def parse_oob_expression(self, expression, branch):
         raise ParserException("Error, oob not implemented yet!", xml_element=expression)

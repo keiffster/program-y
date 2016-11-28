@@ -16,7 +16,6 @@ class ArrowAIMLTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        logging.getLogger().setLevel(logging.DEBUG)
         ArrowAIMLTests.test_client = BasicTestClient()
 
     def test_arrow_first_word(self):

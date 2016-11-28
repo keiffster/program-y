@@ -8,7 +8,6 @@ from programy.config import ClientConfiguration
 class TestClient(BotClient):
 
     def __init__(self):
-        logging.getLogger().setLevel(logging.DEBUG)
         BotClient.__init__(self)
 
     def parse_arguements(self):

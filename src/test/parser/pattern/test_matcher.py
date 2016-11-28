@@ -14,7 +14,6 @@ class PatternMatcherTests(PatternTestBaseClass):
 
     @classmethod
     def setUpClass(cls):
-        logging.getLogger().setLevel(logging.DEBUG)
         PatternMatcherTests.bot = None
         PatternMatcherTests.clientid = "testid"
 

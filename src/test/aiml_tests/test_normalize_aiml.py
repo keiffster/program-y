@@ -20,7 +20,6 @@ class NormalizeAIMLTests(unittest.TestCase):
         NormalizeAIMLTests.test_client = BasicTestClient()
 
     def test_normalize(self):
-        logging.getLogger().setLevel(logging.INFO)
         response = NormalizeAIMLTests.test_client.bot.ask_question("test",  "TEST NORMALIZE")
         self.assertIsNotNone(response)
         self.assertEqual(response, "keithsterling dot com")

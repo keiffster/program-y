@@ -28,6 +28,7 @@ from programy.mappings.sets import SetCollection
 from programy.mappings.maps import MapCollection
 from programy.processing import ProcessorLoader
 from programy.config import BrainConfiguration
+import xml.etree.ElementTree as ET
 
 class Brain(object):
 
@@ -217,3 +218,30 @@ class Brain(object):
 
     def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")
+
+    def write_learnf_to_file(self,bot, clientid, pattern, topic, that, template):
+        learnf_path = "%s/learnf%s" % (self._configuration.aiml_files.files, self._configuration.aiml_files.extension)
+        logging.debug("Writing learnf to %s" % learnf_path)
+
+        import os.path
+        if os.path.isfile(learnf_path) is False:
+            file = open(learnf_path, "w+")
+            file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            file.write('<aiml>\n')
+            file.write('</aiml>\n')
+            file.close ()
+
+        tree = ET.parse(learnf_path)
+        root = tree.getroot()
+
+        # Add our new element
+        child = ET.Element("learn")
+        child.append(pattern)
+        child.append(topic)
+        child.append(that)
+        child.append(template.xml_tree(bot, clientid))
+
+        root.append(child)
+
+        tree.write(learnf_path, method="xml")
+

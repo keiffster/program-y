@@ -16,6 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import subprocess
+import xml.etree.ElementTree as ET
+
 from random import randint
 from programy.parser.exceptions import ParserException
 from programy.utils.classes.loader import ClassLoader
@@ -54,6 +56,21 @@ class TemplateNode(object):
     def format(self):
         return "[NODE]"
 
+    def xml_tree(self, bot, clientid):
+        param = ["<template>"]
+        self.to_xml_children(param, bot, clientid)
+        param[0] += "</template>"
+
+        return ET.fromstring(param[0])
+
+    def to_xml_children(self, param, bot, clientid):
+        first = True
+        for child in self.children:
+            if first is False:
+                param[0] += " "
+            param[0] += child.to_xml(bot, clientid)
+            first = False
+
 
 ######################################################################################################################
 #
@@ -69,6 +86,8 @@ class TemplateWordNode(TemplateNode):
     def format(self):
         return "[WORD]" + self.word
 
+    def to_xml(self, bot, clientid):
+        return self.word
 
 ######################################################################################################################
 #
@@ -85,6 +104,14 @@ class TemplateRandomNode(TemplateNode):
     def format(self):
         return "[RANDOM] %d" % (len(self._children))
 
+    def to_xml(self, bot, clientid):
+        xml =  "<random>"
+        for child in self.children:
+            xml += "<li>"
+            xml += child.to_xml(bot, clientid)
+            xml += "</li>"
+        xml += "</random>"
+        return xml
 
 ######################################################################################################################
 #
@@ -101,6 +128,12 @@ class TemplateSRAINode(TemplateNode):
     def format(self):
         return "[SRAI]"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<srai>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</srai>"
+        return xml
 
 ######################################################################################################################
 #
@@ -122,6 +155,9 @@ class TemplateSrNode(TemplateNode):
     def format(self):
         return "SR"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<sr />"
+        return xml
 
 ######################################################################################################################
 #
@@ -136,14 +172,18 @@ class TemplateAttribNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateIndexedNode(TemplateAttribNode):
-    def __init__(self):
+    def __init__(self, position=1, index=1):
         TemplateAttribNode.__init__(self)
-        self._position = 1
-        self._index = 1
+        self._position = position
+        self._index = index
 
     @property
     def index(self):
         return self._index
+
+    @property
+    def position(self):
+        return self._position
 
     def set_attrib(self, attrib_name, attrib_value):
 
@@ -178,8 +218,8 @@ class TemplateIndexedNode(TemplateAttribNode):
 ######################################################################################################################
 #
 class TemplateStarNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         sentence = bot.get_conversation(clientid).current_question().current_sentence()
@@ -195,6 +235,15 @@ class TemplateStarNode(TemplateIndexedNode):
     def format(self):
         return "STAR Index=%s" % self.index
 
+    def to_xml(self, bot, clientid):
+        xml =  "<star"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</star>"
+        return xml
 
 ######################################################################################################################
 #
@@ -230,6 +279,17 @@ class TemplateSetNode(TemplateNode):
     def format(self):
         return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.format())
 
+    def to_xml(self, bot, clientid):
+        xml =  "<set"
+        if self.local:
+            xml += ' var="%s"' % self.name.resolve(None, None)
+        else:
+            xml += ' name="%s"' % self.name.resolve(None, None)
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</set>"
+        return xml
 
 ######################################################################################################################
 #
@@ -266,6 +326,15 @@ class TemplateGetNode(TemplateNode):
 
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)
+
+    def to_xml(self, bot, clientid):
+        xml =  "<get"
+        if self.local:
+            xml += ' var="%s"' % self.name.resolve(bot, clientid)
+        else:
+            xml += ' name="%s"' % self.name.resolve(bot, clientid)
+        xml += " />"
+        return xml
 
 
 ######################################################################################################################
@@ -311,6 +380,15 @@ class TemplateMapNode(TemplateNode):
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output=logging.debug)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<map "
+        xml += ' name="%s"' % self.name.resolve(bot, clientid)
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</map>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -336,9 +414,52 @@ class TemplateBotNode(TemplateNode):
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<bot "
+        xml += ' name="%s"' % self.name.resolve(bot, clientid)
+        xml += " />"
+        return xml
+
 
 ######################################################################################################################
 #
+class TemplateConditionListItemNode(TemplateNode):
+    def __init__(self, name=None, value=None, local=False, loop=False):
+        TemplateNode.__init__(self)
+        self.name = name
+        self.value = value
+        self.local = local
+        self.loop = loop
+
+    def is_default(self):
+        if self.value is None:
+            return True
+        else:
+            return False
+
+    def resolve(self, bot, clientid):
+        pass
+
+    def format(self):
+        return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value)
+
+    def to_xml(self, bot, clientid):
+        xml =  '<li'
+        if self.name is not None:
+            if self.local is True:
+                xml += ' var="%s"' % self.name
+            else:
+                xml += ' name="%s"' % self.name
+        if self.value is not None:
+            xml += ' value="%s"' % self.value
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        if self.loop is True:
+            xml += "<loop />"
+        xml += '</li>'
+        return xml
+
 class TemplateConditionNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
@@ -357,20 +478,13 @@ class TemplateConditionNode(TemplateNode):
                 value = ""
         return value
 
-    def get_default(self):
-        for child in self.conditions:
-            if child.is_default() is True:
-                return child
-        return None
-
 
 class TemplateType1ConditionNode(TemplateConditionNode):
-    def __init__(self):
+    def __init__(self, name, value, local=False):
         TemplateConditionNode.__init__(self)
-        self.local = False
-        self.name = None
-        self.value = None
-        self.loop = False
+        self.name = name
+        self.value = value
+        self.local = local
 
     def resolve(self, bot, clientid):
         value = self._get_predicate_value(bot, clientid, self.name, self.local)
@@ -385,25 +499,42 @@ class TemplateType1ConditionNode(TemplateConditionNode):
     def format(self):
         return "[CONDITION1(%s=%s)]" % (self.name, self.value)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<condition"
+        if self.local is True:
+            xml += ' var="%s"' % self.name
+        else:
+            xml += ' name="%s"' % self.name
+        xml += ' value="%s"' % self.value
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</condition>"
+        return xml
+
 
 class TemplateConditionNodeWithChildren(TemplateConditionNode):
     def __init__(self):
         TemplateConditionNode.__init__(self)
-        self.conditions = []
+
+    def get_default(self):
+        for child in self.children:
+            if child.is_default() is True:
+                return child
+        return None
 
 
 class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
-    def __init__(self):
+    def __init__(self, name, local=False):
         TemplateConditionNodeWithChildren.__init__(self)
-        self.name = None
-        self.local = False
-        self.loop = False
+        self.name = name
+        self.local = local
 
     def resolve(self, bot, clientid):
 
         value = self._get_predicate_value(bot, clientid, self.name, self.local)
 
-        for condition in self.conditions:
+        for condition in self.children:
             if condition.is_default() is False:
                 if value == condition.value:
                     resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition._children])
@@ -429,26 +560,17 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
     def format(self):
         return "[CONDITION2(%s)]" % self.name
 
-
-class TemplateConditionListItemNode(TemplateNode):
-    def __init__(self):
-        TemplateNode.__init__(self)
-        self.name = None
-        self.value = None
-        self.local = False
-        self.loop = False
-
-    def is_default(self):
-        if self.value is None:
-            return True
+    def to_xml(self, bot, clientid):
+        xml =  "<condition"
+        if self.local is True:
+            xml += ' var="%s"' % self.name
         else:
-            return False
-
-    def resolve(self, bot, clientid):
-        pass
-
-    def format(self):
-        return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value)
+            xml += ' name="%s"' % self.name
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</condition>"
+        return xml
 
 
 class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
@@ -483,6 +605,13 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
     def format(self):
         return "[CONDITION3()]"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<condition>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</condition>"
+        return xml
+
 
 
 ######################################################################################################################
@@ -498,6 +627,13 @@ class TemplateThinkNode(TemplateNode):
 
     def format(self):
         return "THINK"
+
+    def to_xml(self, bot, clientid):
+        xml = "<think>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</think>"
+        return xml
 
 
 ######################################################################################################################
@@ -515,6 +651,13 @@ class TemplateLowercaseNode(TemplateNode):
     def format(self):
         return "LOWERCASE"
 
+    def to_xml(self, bot, clientid):
+        xml = "<lowercase>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</lowercase>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -531,6 +674,13 @@ class TemplateUppercaseNode(TemplateNode):
     def format(self):
         return "UPPERCASE"
 
+    def to_xml(self, bot, clientid):
+        xml = "<uppercase>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</uppercase>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -544,6 +694,13 @@ class TemplateFormalNode(TemplateNode):
 
     def format(self):
         return "FORMAL"
+
+    def to_xml(self, bot, clientid):
+        xml = "<formal>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</formal>"
+        return xml
 
 
 ######################################################################################################################
@@ -563,6 +720,13 @@ class TemplateSentenceNode(TemplateNode):
     def format(self):
         return "SENTENCE"
 
+    def to_xml(self, bot, clientid):
+        xml = "<sentence>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</sentence>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -579,6 +743,13 @@ class TemplateExplodeNode(TemplateNode):
 
     def format(self):
         return "EXPLODE"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<explode>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</explode>"
+        return xml
 
 
 ######################################################################################################################
@@ -597,6 +768,13 @@ class TemplateImplodeNode(TemplateNode):
     def format(self):
         return "IMPLODE"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<implode>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</implode>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -610,6 +788,10 @@ class TemplateIdNode(TemplateNode):
 
     def format(self):
         return "ID"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<id />"
+        return xml
 
 
 ######################################################################################################################
@@ -627,6 +809,13 @@ class TemplateVocabularyNode(TemplateNode):
 
     def format(self):
         return "VOCABULARY"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<vocabulary>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</vocabulary>"
+        return xml
 
 
 ######################################################################################################################
@@ -654,6 +843,10 @@ class TemplateProgramNode(TemplateNode):
 
     def format(self):
         return "PROGRAM"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<program />"
+        return xml
 
 
 ######################################################################################################################
@@ -714,6 +907,13 @@ class TemplateDateNode(TemplateAttribNode):
         if attrib_name != 'format':
             raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
         self._format = attrib_value
+
+    def to_xml(self, bot, clientid):
+        xml =  '<date format="%s" >' % self._format
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</date>"
+        return xml
 
 
 ######################################################################################################################
@@ -786,6 +986,20 @@ class TemplateIntervalNode(TemplateNode):
         return "[INTERVAL (format=%s, style=%s, from=%s, to=%s)]" % (
         self._format, self._style, self._from, self._to)
 
+    def to_xml(self, bot, clientid):
+        xml =  '<interval'
+        xml += ' format="%s"' % self._format.to_xml(bot, clientid)
+        xml += ' style="%s"' % self._style.to_xml(bot, clientid)
+        xml += '>'
+        xml += '<from>'
+        xml += self._from.to_xml(bot, clientid)
+        xml += '</from>'
+        xml += '<to>'
+        xml += self._to.to_xml(bot, clientid)
+        xml += '</to>'
+        xml += '</interval>'
+        return xml
+
 
 ######################################################################################################################
 #
@@ -819,6 +1033,16 @@ class TemplateSystemNode(TemplateAttribNode):
         logging.warning("System node timeout attrib currently ignored")
         self._timeout = attrib_value
 
+    def to_xml(self, bot, clientid):
+        xml =  "<system"
+        if self._timeout != 0:
+            xml += ' timeout="%d"' % self._timeout
+        xml += ">"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</system>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -834,14 +1058,19 @@ class TemplateSizeNode(TemplateNode):
     def format(self):
         return "SIZE"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<size />"
+        return xml
+
+
 
 ######################################################################################################################
 #
 # <input index=”n”/> is replaced with the value of the nth previous sentence input to the bot.
 #
 class TemplateInputNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         conversation = bot.get_conversation(clientid)
@@ -853,14 +1082,24 @@ class TemplateInputNode(TemplateIndexedNode):
     def format(self):
         return "INPUT Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<input"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</input>"
+        return xml
+
 
 ######################################################################################################################
 #
 # <request index=”n”/> is replaced with the value of the nth previous multi-sentence input to the bot.
 #
 class TemplateRequestNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         try:
@@ -878,14 +1117,24 @@ class TemplateRequestNode(TemplateIndexedNode):
     def format(self):
         return "REQUEST Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<request"
+        if self._position > 1:
+            xml += " position='%d'" % self._position
+        if self._index > 1:
+            xml += " index='%d'" % self._index
+        xml += ">"
+        xml += "</request>"
+        return xml
+
 
 ######################################################################################################################
 #
 # <response index=”n”/> is replaced with the value of the nth previous multi-sentence bot response..
 #
 class TemplateResponseNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         try:
@@ -903,6 +1152,16 @@ class TemplateResponseNode(TemplateIndexedNode):
     def format(self):
         return "RESPONSE Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<response"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</response>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -911,8 +1170,8 @@ class TemplateResponseNode(TemplateIndexedNode):
 # <that index="m,n" />
 #
 class TemplateThatNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         try:
@@ -930,12 +1189,22 @@ class TemplateThatNode(TemplateIndexedNode):
     def format(self):
         return "THAT Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<that"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</that>"
+        return xml
+
 
 ######################################################################################################################
 #
 class TemplateTopicStarNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         try:
@@ -955,12 +1224,22 @@ class TemplateTopicStarNode(TemplateIndexedNode):
     def format(self):
         return "TOPICSTAR Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<topicstar"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</topicstar>"
+        return xml
+
 
 ######################################################################################################################
 #
 class TemplateThatStarNode(TemplateIndexedNode):
-    def __init__(self):
-        TemplateIndexedNode.__init__(self)
+    def __init__(self, position=1, index=1):
+        TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
         try:
@@ -980,6 +1259,16 @@ class TemplateThatStarNode(TemplateIndexedNode):
     def format(self):
         return "THATSTAR Index=%s" % (self.index)
 
+    def to_xml(self, bot, clientid):
+        xml =  "<thatstar"
+        if self._position > 1:
+            xml += ' position="%d"' % self._position
+        if self._index > 1:
+            xml += ' index="%d"' % self._index
+        xml += ">"
+        xml += "</thatstar>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -995,6 +1284,13 @@ class TemplatePersonNode(TemplateNode):
 
     def format(self):
         return "PERSON"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<person>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</person>"
+        return xml
 
 
 ######################################################################################################################
@@ -1012,6 +1308,13 @@ class TemplatePerson2Node(TemplateNode):
     def format(self):
         return "PERSON2"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<person2>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</person2>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -1027,6 +1330,13 @@ class TemplateGenderNode(TemplateNode):
 
     def format(self):
         return "GENDER"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<gender>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</gender>"
+        return xml
 
 
 ######################################################################################################################
@@ -1044,6 +1354,13 @@ class TemplateNormalizeNode(TemplateNode):
     def format(self):
         return "NORMALIZE"
 
+    def to_xml(self, bot, clientid):
+        xml =  "<normalize>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</normalize>"
+        return xml
+
 
 ######################################################################################################################
 #
@@ -1060,63 +1377,12 @@ class TemplateDenormalizeNode(TemplateNode):
     def format(self):
         return "DENORMALIZE"
 
-
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-######################################################################################################################
-
-######################################################################################################################
-#
-class TemplateSRAIXNode(TemplateNode):
-    def __init__(self):
-        TemplateNode.__init__(self)
-        self.host = None
-        self.botid = None
-        self.hint = None
-        self.apikey = None
-        self.service = None
-
-    def resolve(self, bot, clientid):
-        resolved = "SRAIX -> " + " ".join([child.resolve(bot, clientid) for child in self._children])
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
-        return resolved
-
-    def format(self):
-        return "SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)" % (
-            self.host, self.botid, self.hint, self.apikey, self.service)
-
-
-######################################################################################################################
-#
-class TemplateLearnNode(TemplateNode):
-    def __init__(self):
-        TemplateNode.__init__(self)
-
-    def resolve(self, bot, clientid):
-        logging.debug("[%s] resolved to nothing" % (self.format()))
-        return ""
-
-    def format(self):
-        return "LEARN"
-
-
-######################################################################################################################
-#
-class TemplateLearnfNode(TemplateNode):
-    def __init__(self):
-        TemplateNode.__init__(self)
-
-    def resolve(self, bot, clientid):
-        logging.debug("[%s] resolved to nothing" % (self.format()))
-        return ""
-
-    def format(self):
-        return "LEARNF"
+    def to_xml(self, bot, clientid):
+        xml =  "<denormalize>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</denormalize>"
+        return xml
 
 
 ######################################################################################################################
@@ -1126,10 +1392,122 @@ class TemplateEvalNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        return "EVAL"
+        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        return resolved
 
     def format(self):
         return "EVAL"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<eval>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</eval>"
+        return xml
+
+
+######################################################################################################################
+#
+class TemplateLearnNode(TemplateNode):
+    def __init__(self):
+        TemplateNode.__init__(self)
+        self._pattern = None
+        self._topic = None
+        self._that = None
+        self._template = None
+
+    def resolve_element_evals(self, bot, clientid, element):
+
+        new_element = ET.Element(element.tag)
+
+        new_element.text = element.text
+
+        for child in element:
+            if child.tag == 'eval':
+                eval_str = ET.tostring(child, 'utf-8').decode('ascii')
+                template = ET.fromstring("<template>%s</template>" % eval_str)
+
+                ast = bot.brain.aiml_parser.template_parser.parse_template_expression(template)
+                resolved = ast.resolve(bot, clientid)
+                new_element.text += resolved
+            else:
+                new_element.append(child)
+
+        if element.tail is not None:
+            new_element.tail = element.tail.strip()
+
+        return new_element
+
+    def resolve(self, bot, clientid):
+        new_pattern = self.resolve_element_evals(bot, clientid, self._pattern)
+        new_topic = self.resolve_element_evals(bot, clientid, self._topic)
+        new_that = self.resolve_element_evals(bot, clientid, self._that)
+
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, self._template)
+
+        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
+                                                                        ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
+                                                                        ET.tostring(new_topic, 'utf-8').decode('utf-8'),
+                                                                        ET.tostring(new_that, 'utf-8').decode('utf-8')))
+
+        return ""
+
+    def format(self):
+        return "LEARN"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<learn>"
+
+        xml += ET.tostring(self._pattern, 'utf-8').decode('utf-8')
+        xml += ET.tostring(self._topic, 'utf-8').decode('utf-8')
+        xml += ET.tostring(self._that, 'utf-8').decode('utf-8')
+
+        xml += "<template>"
+        xml += self._template.to_xml(bot, clientid)
+        xml += "</template>"
+
+        xml += "</learn>"
+        return xml
+
+
+######################################################################################################################
+#
+class TemplateLearnfNode(TemplateLearnNode):
+    def __init__(self):
+        TemplateLearnNode.__init__(self)
+
+    def resolve(self, bot, clientid):
+        new_pattern = self.resolve_element_evals(bot, clientid, self._pattern)
+        new_topic = self.resolve_element_evals(bot, clientid, self._topic)
+        new_that = self.resolve_element_evals(bot, clientid, self._that)
+
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, self._template)
+
+        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
+                                                                        ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
+                                                                        ET.tostring(new_topic, 'utf-8').decode('utf-8'),
+                                                                        ET.tostring(new_that, 'utf-8').decode('utf-8')))
+
+        bot.brain.write_learnf_to_file(bot, clientid, new_pattern, new_topic, new_that, self._template)
+        return ""
+
+    def format(self):
+        return "LEARNF"
+
+    def to_xml(self, bot, clientid):
+        xml =  "<learnf>"
+
+        xml += ET.tostring(self._pattern, 'utf-8').decode('utf-8')
+        xml += ET.tostring(self._topic, 'utf-8').decode('utf-8')
+        xml += ET.tostring(self._that, 'utf-8').decode('utf-8')
+
+        xml += "<template>"
+        xml += self._template.to_xml(bot, clientid)
+        xml += "</template>"
+
+        xml += "</learnf>"
+        return xml
 
 
 ######################################################################################################################
@@ -1159,3 +1537,53 @@ class TemplateExtensionNode(TemplateNode):
 
     def format(self):
         return "EXTENSION (%s)" % self._path
+
+    def to_xml(self, bot, clientid):
+        xml =  '<extension'
+        xml += ' path="%s"' % self._path
+        xml += '>'
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += '</extension>'
+        return xml
+
+
+######################################################################################################################
+#
+class TemplateSRAIXNode(TemplateNode):
+    def __init__(self):
+        TemplateNode.__init__(self)
+        self.host = None
+        self.botid = None
+        self.hint = None
+        self.apikey = None
+        self.service = None
+
+    def resolve(self, bot, clientid):
+        resolved = "SRAIX -> " + " ".join([child.resolve(bot, clientid) for child in self._children])
+        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        return resolved
+
+    def format(self):
+        return "SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)" % (
+            self.host, self.botid, self.hint, self.apikey, self.service)
+
+    def to_xml(self, bot, clientid):
+        xml =  '<sraix'
+        if self.host is not None:
+            xml += ' host="%s"' % self.host
+        if self.botid is not None:
+            xml += ' botid="%s"' % self.botid
+        if self.hint is not None:
+            xml += ' hint="%s"' % self.hint
+        if self.apikey is not None:
+            xml += ' apikey="%s"' % self.apikey
+        if self.service is not None:
+            xml += ' service="%s"' % self.service
+        xml += '>'
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += '</sraix>'
+        return xml
+
+

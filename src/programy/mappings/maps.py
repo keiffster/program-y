@@ -50,7 +50,6 @@ class MapLoader(FileFinder):
 class MapCollection(object):
 
     def __init__(self):
-        SingleStringCollection.__init__(self)
         self._maps = {}
 
     def map(self, name):

@@ -42,7 +42,7 @@ class AIMLParser(object):
         self.stop_on_invalid = stop_on_invalid
         self.pattern_parser = PatternGraph()
         self.pattern_matcher = PatternMatcher(self.pattern_parser)
-        self.template_parser = TemplateGraph()
+        self.template_parser = TemplateGraph(self)
         self.template_evaluator = TemplateEvaluator()
         self._filename = "Unknown"
         self._version = "Unknown"
@@ -210,7 +210,7 @@ class AIMLParser(object):
         if category_found is False:
             raise ParserException("Error, no categories in topic", xml_element=topic_element)
 
-    def parse_category(self, category_xml, topic_element=None):
+    def parse_category(self, category_xml, topic_element=None, add_to_graph=True):
 
         topics = category_xml.findall('topic')
         if topic_element is not None:
@@ -247,9 +247,11 @@ class AIMLParser(object):
         elif len(patterns) > 1:
             raise ParserException("Error, multiple <pattern> nodes found in category", xml_element=category_xml)
         else:
-            self.pattern_parser.add_pattern_to_graph(patterns[0], topic_element, that_element, template_graph_root)
+            if add_to_graph is True:
+                self.pattern_parser.add_pattern_to_graph(patterns[0], topic_element, that_element, template_graph_root)
+                self._num_categories += 1
 
-        self._num_categories += 1
+        return (patterns[0], topic_element, that_element, template_graph_root)
 
     def match_sentence(self, bot, clientid, sentence, topic_pattern, that_pattern):
         logging.debug("Matching sentence [%s], topic=[%s], that=[%s] " % (sentence.text(), topic_pattern, that_pattern))
