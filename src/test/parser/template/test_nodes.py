@@ -926,28 +926,28 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateMapNode()
-        node.name = TemplateWordNode("colours")
-        node.append(TemplateWordNode("Black"))
+        node.name = TemplateWordNode("COLOURS")
+        node.append(TemplateWordNode("BLACK"))
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.bot.brain.maps._maps['colours'] = {'Black': 'White'}
+        self.bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
-        self.assertEqual("White", result)
+        self.assertEqual("WHITE", result)
 
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateMapNode()
-        node.name = TemplateWordNode("colours")
-        node.append(TemplateWordNode("Black"))
+        node.name = TemplateWordNode("COLOURS")
+        node.append(TemplateWordNode("BLACK"))
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><map name="colours">Black</map></template>', xml_str)
+        self.assertEqual('<template><map name="COLOURS">BLACK</map></template>', xml_str)
 
 
 ######################################################################################################################

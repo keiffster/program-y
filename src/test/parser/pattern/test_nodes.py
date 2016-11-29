@@ -249,9 +249,9 @@ class PatternSetNodeTests(PatternTestBaseClass):
 
         self.assertTrue(node.equivalent(PatternSetNode("test1")))
         self.assertFalse(node.is_root())
-        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[test1]")
+        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
 
-        self.bot.brain.sets._sets["test1"] = ["val1", "val2", "val3"]
+        self.bot.brain.sets._sets["TEST1"] = ["val1", "val2", "val3"]
 
         self.assertTrue(node.matches(self.bot, self.clientid, "val1"))
         self.assertTrue(node.matches(self.bot, self.clientid, "val2"))

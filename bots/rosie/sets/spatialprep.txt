@@ -1,0 +1,53 @@
+on
+north of
+east of
+above
+across from
+against
+ahead of
+along
+alongside
+around
+atop
+behind
+below
+beneath
+beside
+close to
+far from
+in front of
+inside
+inside of
+left of
+near
+near to
+next to
+on top of
+opposite
+underneath
+south of
+west of
+below
+across from
+against
+trailing
+along
+alongside
+inside
+below
+in front of
+above
+above
+beside
+close to
+far from
+behind
+around
+around
+right of
+near
+near to
+next to
+below
+opposite
+above

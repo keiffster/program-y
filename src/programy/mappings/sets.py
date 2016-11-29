@@ -19,10 +19,11 @@ from programy.utils.files.filefinder import FileFinder
 from programy.mappings.base import SingleStringCollection
 
 class SetLoader(FileFinder):
-    def __init__(self, collection):
+    def __init__(self):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
+        logging.debug("Loading set [%s]" % filename)
         the_set = []
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
@@ -42,7 +43,8 @@ class SetLoader(FileFinder):
     def process_line(self, line, the_set):
         text = line.strip()
         if text is not None and len(text) > 0:
-            the_set.append(text)
+            value = text.upper ()
+            the_set.append(value)
 
 
 class SetCollection(object):
@@ -52,15 +54,19 @@ class SetCollection(object):
         self._sets = {}
 
     def add_set(self, name, set_contents):
-        if name in self._sets:
-            raise Exception("Set %s already exists" % name)
-        self._sets[name] = set_contents
+        set_name = name.upper()
+        if set_name in self._sets:
+            raise Exception("Set %s already exists" % set_name)
+        logging.debug("Adding set [%s[ to set group" % set_name)
+        self._sets[set_name] = set_contents
 
     def set(self, name):
-        return self._sets[name]
+        set_name = name.upper ()
+        return self._sets[set_name]
 
     def contains(self, name):
-        if name in self._sets:
+        set_name = name.upper ()
+        if set_name in self._sets:
             return True
         else:
             return False
@@ -72,8 +78,6 @@ class SetCollection(object):
         return count
 
     def load(self, configuration):
-
-        loader = SetLoader (self)
+        loader = SetLoader ()
         self._sets = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
-
         return len(self._sets)

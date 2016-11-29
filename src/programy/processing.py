@@ -81,4 +81,7 @@ class CleanUpPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, string):
-        return string.strip()
+        stripped = string.strip()
+        if stripped.endswith(" ."):
+            stripped = stripped[:len(stripped)-2] + "."
+        return stripped

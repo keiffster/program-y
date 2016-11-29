@@ -1,0 +1,12 @@
+ALABAMA:Montgomery
+ALASKA:Juneau
+ARIZONA:Phoenix
+ARKANSAS:Little Rock
+CALIFORNIA:Sacramento
+COLORADO:Denver
+CONNECTICUT:Hartford
+DELAWARE:Dover
+FLORIDA:Tallahassee
+GEORGIA:Atlanta
+HAWAII:Honolulu
+IDAHO:Boise

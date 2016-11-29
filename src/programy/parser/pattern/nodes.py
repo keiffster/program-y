@@ -33,6 +33,7 @@ PATTERN_SIDE_BOT_PROPERTY_EXPRESSION ::== <bot name="PROPERTY_NAME"/> | <bot><na
 PROPERTY_NAME ::== WORD
 """
 
+
 #######################################################################################################################
 #
 class PatternNode(object):
@@ -99,6 +100,12 @@ class PatternNode(object):
         return False
 
     def is_one_or_more(self):
+        return False
+
+    def is_set(self):
+        return False
+
+    def is_bot(self):
         return False
 
     def is_template(self):
@@ -212,7 +219,7 @@ class PatternNode(object):
 
         return None
 
-    def _add_node (self, new_node):
+    def _add_node(self, new_node):
         # Otherwise use the new node, and return that to maintain consistence
         # And allow child node to be chained, but supports duplicates
         if new_node.is_priority():
@@ -286,6 +293,7 @@ class PatternNode(object):
         for child in self.children:
             child.dump(tabs+"\t", output_func, verbose)
 
+
 #######################################################################################################################
 #
 class PatternRootNode(PatternNode):
@@ -313,6 +321,7 @@ class PatternRootNode(PatternNode):
     def to_string(self, verbose: bool=True)->str:
         return "ROOT [%s]" % self._child_count(verbose)
 
+
 #######################################################################################################################
 #
 class PatternTopicNode(PatternNode):
@@ -335,6 +344,7 @@ class PatternTopicNode(PatternNode):
     def to_string(self, verbose=True):
         return "TOPIC [%s]" % self._child_count(verbose)
 
+
 #######################################################################################################################
 #
 class PatternThatNode(PatternNode):
@@ -356,6 +366,7 @@ class PatternThatNode(PatternNode):
 
     def to_string(self, verbose=True):
         return "THAT [%s]" % self._child_count(verbose)
+
 
 #######################################################################################################################
 #
@@ -387,8 +398,8 @@ class PatternTemplateNode(PatternNode):
         return False
 
     def to_string(self, verbose=True):
-        #return "PTEMPLATE [%s] template = (%s)" % (self._child_count(verbose), self._template.resolve(None, None))
         return "PTEMPLATE [%s] " % (self._child_count(verbose))
+
 
 #######################################################################################################################
 #
@@ -424,6 +435,7 @@ class PatternWordNode(PatternNode):
     def to_string(self, verbose=True):
         return "WORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
 
+
 #######################################################################################################################
 #
 class PatternPriorityWordNode(PatternWordNode):
@@ -452,11 +464,19 @@ class PatternPriorityWordNode(PatternWordNode):
     def to_string(self, verbose=True):
         return "PWORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
 
+
 #######################################################################################################################
 #
 class PatternSetNode(PatternWordNode):
     def __init__(self, word):
-        PatternWordNode.__init__(self, word)
+        PatternWordNode.__init__(self, word.upper())
+
+    @property
+    def set_name(self):
+        return self.word
+
+    def is_set(self):
+        return True
 
     def equivalent(self, other):
         if isinstance(other, PatternSetNode):
@@ -465,9 +485,11 @@ class PatternSetNode(PatternWordNode):
         return False
 
     def equals(self, bot, client, word):
-        if bot.brain.sets.contains(self.word):
-            set = bot.brain.sets.set(self.word)
-            if word in set:
+        if bot.brain.sets.contains(self.set_name):
+            logging.debug("Looking for [%s] in set [%s]" % (word, self.set_name))
+            set_words = bot.brain.sets.set(self.set_name)
+            if word in set_words:
+                logging.debug("Found a word [%s] in set [%s]" % (word, self.set_name))
                 return True
         return False
 
@@ -477,11 +499,15 @@ class PatternSetNode(PatternWordNode):
     def to_string(self, verbose=True):
         return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
 
+
 #######################################################################################################################
 #
 class PatternBotNode(PatternWordNode):
     def __init__(self, word):
         PatternWordNode.__init__(self, word)
+
+    def is_bot(self):
+        return True
 
     def equivalent(self, other):
         if isinstance(other, PatternBotNode):
@@ -501,13 +527,14 @@ class PatternBotNode(PatternWordNode):
     def to_string(self, verbose=True):
         return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.word)
 
+
 #######################################################################################################################
 #
 class PatternWildCardNode(PatternNode):
     def __init__(self, wildcard):
         PatternNode.__init__(self)
         if wildcard not in self.matching_wildcards():
-            raise ParserException ("%s not in valid wildcards %s" % (wildcard, ", ".join(self.matching_wildcards())))
+            raise ParserException("%s not in valid wildcards %s" % (wildcard, ", ".join(self.matching_wildcards())))
         self._wildcard = wildcard
 
     def is_wildcard(self):
@@ -524,7 +551,7 @@ class PatternWildCardNode(PatternNode):
                 return priority
 
         if self._0ormore_arrow is not None:
-            return  self._0ormore_arrow
+            return self._0ormore_arrow
 
         if self._0ormore_hash is not None:
             return self._0ormore_hash
@@ -547,6 +574,7 @@ class PatternWildCardNode(PatternNode):
 
     def matching_wildcards(self):
         return []
+
 
 #######################################################################################################################
 #
@@ -578,6 +606,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
     def to_string(self, verbose=True):
         return "ZEROORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
 
+
 #######################################################################################################################
 #
 class PatternOneOrMoreWildCardNode(PatternWildCardNode):
@@ -607,6 +636,5 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     def to_string(self, verbose=True):
         return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
-
 
 

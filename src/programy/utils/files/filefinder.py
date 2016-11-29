@@ -30,22 +30,22 @@ class FileFinder(object):
         """
 
     def find_files(self, path, subdir=False, extension=None):
-
-        filenames = []
+        found_files = []
         if subdir is False:
             paths = os.listdir(path)
+
             for filename in paths:
                 if filename.endswith(extension):
-                    filenames.append((filename, os.path.join(path, filename)))
+                    found_files.append((filename, os.path.join(path, filename)))
         else:
-            for dirname, dirnames, filenames in os.walk(path):
-                for filename in filenames:
-                    if filename.endswith(extension):
-                        filenames.append((filename, os.path.join(path, filename)))
+            for dirpath, dirnames, filenames in os.walk(path):
+                for filename in [f for f in filenames if f.endswith(extension)]:
+                    found_files.append((filename, os.path.join(dirpath, filename)))
 
-        return filenames
+        return found_files
 
     def load_dir_contents(self, path_to_sets, subdir=False, extension=".txt"):
+
         files = self.find_files(path_to_sets, subdir, extension)
 
         collection = {}
@@ -54,6 +54,7 @@ class FileFinder(object):
                 filename = file[0].split(".")[0]
             else:
                 filename = file[0]
+            filename = filename.upper ()
             collection[filename] = self.load_file_contents(file[1])
 
         return collection

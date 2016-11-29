@@ -22,14 +22,14 @@ For more information see [url]
 	<category>
 		<pattern>NAME MAP</pattern>
 		<template>
-		    OK <map name="map1">mapval1</map>
+		    OK <map name="MAP1">MAPVAL1</map>
 		</template>
 	</category>
 
 	<category>
 		<pattern>MULTI WORD NAME MAP</pattern>
 		<template>
-		    OK <map name="map1">mapval1</map>
+		    OK <map name="MAP1">MAPVAL1</map>
 		</template>
 	</category>
 

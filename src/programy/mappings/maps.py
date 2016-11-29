@@ -24,6 +24,7 @@ class MapLoader(FileFinder):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
+        logging.debug("Loading map [%s]" % filename)
         the_map = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
@@ -44,7 +45,9 @@ class MapLoader(FileFinder):
         text = line.strip()
         if text is not None and len(text) > 0:
             splits = text.split(":")
-            the_map[splits[0]] = splits[1]
+            name = splits[0].upper()
+            value = splits[1].upper()
+            the_map[name] = value
 
 
 class MapCollection(object):
@@ -53,17 +56,17 @@ class MapCollection(object):
         self._maps = {}
 
     def map(self, name):
-        return self._maps[name]
+        map_name = name.upper()
+        return self._maps[map_name]
 
     def contains(self, name):
-        if name in self._maps.keys():
+        map_name = name.upper()
+        if map_name in self._maps.keys():
             return True
         else:
             return False
 
     def load(self, configuration):
-
         loader = MapLoader ()
         self._maps = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
-
         return len(self._maps)

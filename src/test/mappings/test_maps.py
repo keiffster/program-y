@@ -5,22 +5,34 @@ from programy.mappings.maps import MapCollection, MapLoader
 
 class MapTests(unittest.TestCase):
 
-    def test_loader(self):
+    def test_loader_from_file(self):
+        loader = MapLoader()
+        self.assertIsNotNone(loader)
+
+        map = loader.load_file_contents("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/mappings/test_files/maps/test_map.txt")
+
+        self.assertIsNotNone(map)
+        self.assertEqual(len(map.keys()), 12)
+        self.assertEqual(map['ALABAMA'], 'MONTGOMERY')
+        self.assertEqual(map['COLORADO'], 'DENVER')
+        self.assertEqual(map['HAWAII'], 'HONOLULU')
+
+    def test_loader_from_text(self):
         loader = MapLoader()
         self.assertIsNotNone(loader)
 
         map = loader.load_from_text("""
-        key1:val1
-        key2:val2
-        key3:val3
-        key4:val4
+        KEY1:VAL1
+        KEY2:VAL2
+        KEY3:VAL3
+        KEY4:VAL4
         """)
         self.assertIsNotNone(map)
         self.assertEqual(len(map.keys()), 4)
-        self.assertEqual(map['key1'], 'val1')
-        self.assertEqual(map['key2'], 'val2')
-        self.assertEqual(map['key3'], 'val3')
-        self.assertEqual(map['key4'], 'val4')
+        self.assertEqual(map['KEY1'], 'VAL1')
+        self.assertEqual(map['KEY2'], 'VAL2')
+        self.assertEqual(map['KEY3'], 'VAL3')
+        self.assertEqual(map['KEY4'], 'VAL4')
 
     def test_collection(self):
         collection = MapCollection()
@@ -30,18 +42,18 @@ class MapTests(unittest.TestCase):
         self.assertIsNotNone(loader)
 
         collection._maps = loader.load_from_text("""
-            key1:val1
-            key2:val2
-            key3:val3
-            key4:val4
+            KEY1:VAL1
+            KEY2:VAL2
+            KEY3:VAL3
+            KEY4:VAL4
         """)
         self.assertIsNotNone(collection._maps)
-        self.assertTrue(collection.contains('key1'))
-        self.assertEqual(collection.map('key1'), 'val1')
-        self.assertTrue(collection.contains('key2'))
-        self.assertEqual(collection.map('key2'), 'val2')
-        self.assertTrue(collection.contains('key3'))
-        self.assertEqual(collection.map('key3'), 'val3')
-        self.assertTrue(collection.contains('key4'))
-        self.assertEqual(collection.map('key4'), 'val4')
-        self.assertFalse(collection.contains('key5'))
+        self.assertTrue(collection.contains('KEY1'))
+        self.assertEqual(collection.map('KEY1'), 'VAL1')
+        self.assertTrue(collection.contains('KEY2'))
+        self.assertEqual(collection.map('KEY2'), 'VAL2')
+        self.assertTrue(collection.contains('KEY3'))
+        self.assertEqual(collection.map('KEY3'), 'VAL3')
+        self.assertTrue(collection.contains('KEY4'))
+        self.assertEqual(collection.map('KEY4'), 'VAL4')
+        self.assertFalse(collection.contains('KEY5'))

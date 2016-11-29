@@ -189,6 +189,12 @@ class PatternMatcher(object):
         else:
             for child in root.children:
                 if child.matches(match_context.bot, match_context.clientid, word):
+
+                    if child.is_set() or child.is_bot ():
+                        matched_stars.append([])
+                        logging.debug("%sAdding new star match" % tabs_str)
+                        matched_stars[len(matched_stars) - 1].append(word)
+
                     logging.debug("%s0 or more matched child [%s] -> word [%s]" % (tabs_str, child.to_string(), word))
                     if self.match_children(match_context, child, sentence, num_word + 1, matched_path,
                                            matched_stars, num_star, depth + 1) is True:
@@ -240,6 +246,12 @@ class PatternMatcher(object):
         else:
             for child in root.children:
                 if child.matches(match_context.bot, match_context.clientid, word):
+
+                    if child.is_set() or child.is_bot ():
+                        matched_stars.append([])
+                        logging.debug("%sAdding new star match" % tabs_str)
+                        matched_stars[len(matched_stars) - 1].append(word)
+
                     logging.debug("%s1 or more matched child [%s] -> word [%s]" % (tabs_str, child.to_string(), word))
                     if self.match_children(match_context, child, sentence, num_word + 1, matched_path, matched_stars,
                                            num_star, depth + 1) is True:
@@ -288,6 +300,12 @@ class PatternMatcher(object):
             logging.debug("%sRoot has priority" % tabs_str)
             for child in root.priority_words:
                 if child.matches(match_context.bot, match_context.clientid, word):
+
+                    if child.is_set() or child.is_bot ():
+                        matched_stars.append([])
+                        logging.debug("%sAdding new star match" % tabs_str)
+                        matched_stars[len(matched_stars) - 1].append(word)
+
                     logging.debug("%sPriority matched child [%s] -> word [%s]" % (tabs_str, child.to_string(), word))
                     if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
                                            num_star, depth+1) is True:
@@ -329,6 +347,12 @@ class PatternMatcher(object):
             logging.debug("%sRoot has children (%d)" % (tabs_str, depth))
             for child in root.children:
                 if child.matches(match_context.bot, match_context.clientid, word):
+
+                    if child.is_set() or child.is_bot ():
+                        matched_stars.append([])
+                        logging.debug("%sAdding new star match" % tabs_str)
+                        matched_stars[len(matched_stars) - 1].append(word)
+
                     logging.debug("%sMatched child [%s] -> word [%s]" % (tabs_str, child.to_string(), word))
                     if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
                                            num_star, depth+1) is True:
