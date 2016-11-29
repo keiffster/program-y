@@ -96,7 +96,7 @@ class Bot(object):
 
         logging.debug("Question (%s): %s"%(clientid, text))
 
-        pre_processed = self.brain.pre_process_question(text)
+        pre_processed = self.brain.pre_process_question(self, clientid, text)
         logging.debug("Pre Processed (%s): %s"%(clientid, pre_processed))
 
         conversation = self.get_conversation(clientid)
@@ -108,7 +108,7 @@ class Bot(object):
             response = self.brain.ask_question(self, clientid, each_sentence)
             if response is not None:
                 logging.debug("Raw Response (%s): %s"%(clientid, response))
-                each_sentence.response = self.brain.post_process_response(response).strip()
+                each_sentence.response = self.brain.post_process_response(self, clientid, response).strip()
                 logging.debug("Processed Response (%s): %s"%(clientid, each_sentence.response))
             else:
                 each_sentence.response = self.default_response

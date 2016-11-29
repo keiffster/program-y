@@ -15,20 +15,22 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-from programy.parser.aiml_parser import AIMLParser
+import xml.etree.ElementTree as ET
+
+from processors.processing import ProcessorLoader
+from programy.config import BrainConfiguration
 from programy.mappings.denormal import DenormalCollection
 from programy.mappings.gender import GenderCollection
+from programy.mappings.maps import MapCollection
 from programy.mappings.normal import NormalCollection
 from programy.mappings.person import PersonCollection
 from programy.mappings.predicates import PredicatesCollection
 from programy.mappings.pronouns import PronounsCollection
 from programy.mappings.properties import PropertiesCollection
-from programy.mappings.triples import TriplesCollection
 from programy.mappings.sets import SetCollection
-from programy.mappings.maps import MapCollection
-from programy.processing import ProcessorLoader
-from programy.config import BrainConfiguration
-import xml.etree.ElementTree as ET
+from programy.mappings.triples import TriplesCollection
+from programy.parser.aiml_parser import AIMLParser
+
 
 class Brain(object):
 
@@ -192,8 +194,8 @@ class Brain(object):
         else:
             logging.warning("No configuration setting for post processors")
 
-    def pre_process_question(self, question):
-        return self.preprocessors.process(question)
+    def pre_process_question(self, bot, clientid, question):
+        return self.preprocessors.process(bot, clientid, question)
 
     def ask_question(self, bot, clientid, sentence) -> str:
 
@@ -213,8 +215,8 @@ class Brain(object):
 
         return self._aiml_parser.match_sentence(bot, clientid, sentence, topic_pattern=topic_pattern, that_pattern=that_pattern)
 
-    def post_process_response(self, response: str):
-        return self.postprocessors.process(response)
+    def post_process_response(self, bot, clientid, response: str):
+        return self.postprocessors.process(bot, clientid, response)
 
     def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")

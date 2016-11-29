@@ -35,9 +35,9 @@ class ProcessorLoader(ClassLoader):
                     count += 1
         return count
 
-    def process(self, string):
+    def process(self, bot, clientid, string):
         for processor in self.processors:
-            string = processor.process(string)
+            string = processor.process(bot, clientid, string)
         return string
 
 
@@ -50,7 +50,7 @@ class Processor:
         pass
 
     @abstractmethod
-    def process(self, string):
+    def process(self, bot, clientid, string):
         pass
 
 
@@ -61,27 +61,9 @@ class PreProcessor(Processor):
     def __init__(self):
         Processor.__init__(self)
 
-class CleanUpPreProcessor(PreProcessor):
-
-    def __init__(self):
-        PreProcessor.__init__(self)
-
-    def process(self, string):
-        return string.upper()
-
-
 ##################################################################
 #
 class PostProcessor(Processor):
     def __init__(self):
         Processor.__init__(self)
 
-class CleanUpPostProcessor(PostProcessor):
-    def __init__(self):
-        PostProcessor.__init__(self)
-
-    def process(self, string):
-        stripped = string.strip()
-        if stripped.endswith(" ."):
-            stripped = stripped[:len(stripped)-2] + "."
-        return stripped
