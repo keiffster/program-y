@@ -1,5 +1,5 @@
 import unittest
-
+import os
 from programy.mappings.sets import SetCollection, SetLoader
 
 
@@ -9,7 +9,7 @@ class SetTests(unittest.TestCase):
         loader = SetLoader()
         self.assertIsNotNone(loader)
 
-        the_set = loader.load_file_contents("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/mappings/test_files/sets/test_set.txt")
+        the_set = loader.load_file_contents(os.path.dirname(__file__)+ "/test_files/sets/test_set.txt")
         self.assertIsNotNone(the_set)
 
         self.assertIn("ALABAMA", the_set)

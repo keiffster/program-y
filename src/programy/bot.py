@@ -92,20 +92,22 @@ class Bot(object):
             self._conversations[clientid] = conversation
             return conversation
 
-    def ask_question(self, clientid: str, text: str):
+    def ask_question(self, clientid: str, text: str, srai=False):
 
         logging.debug("Question (%s): %s"%(clientid, text))
 
         pre_processed = self.brain.pre_process_question(self, clientid, text)
         logging.debug("Pre Processed (%s): %s"%(clientid, pre_processed))
 
-        conversation = self.get_conversation(clientid)
-
         question = Question.create_from_text(pre_processed)
+
+        conversation = self.get_conversation(clientid)
         conversation.record_dialog(question)
 
         for each_sentence in question._sentences:
+
             response = self.brain.ask_question(self, clientid, each_sentence)
+
             if response is not None:
                 logging.debug("Raw Response (%s): %s"%(clientid, response))
                 each_sentence.response = self.brain.post_process_response(self, clientid, response).strip()
@@ -113,5 +115,7 @@ class Bot(object):
             else:
                 each_sentence.response = self.default_response
 
-        return question.combine_answers()
+        if srai is True:
+            conversation.pop_dialog()
 
+        return question.combine_answers()

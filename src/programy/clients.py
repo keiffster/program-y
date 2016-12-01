@@ -18,6 +18,7 @@ import logging
 import yaml
 import argparse
 import logging.config
+import os
 from programy.config import ConfigurationFactory
 from programy.bot import Bot
 from programy.brain import Brain
@@ -29,6 +30,7 @@ class ClientArguments(object):
         self.add_arguments()
 
     def add_arguments(self):
+        self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')
         self.parser.add_argument('--config', dest='config', help='configuration file location')
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
@@ -37,6 +39,14 @@ class ClientArguments(object):
 
     def parse_args(self):
         self.args = self.parser.parse_args()
+
+    @property
+    def bot_root(self):
+        return self.args.bot_root
+
+    @bot_root.setter
+    def bot_root(self, root):
+        self.args.bot_root = root
 
     @property
     def logging(self):
@@ -82,7 +92,10 @@ class BotClient(object):
             print ("Warning. No logging configuration file defined, using defaults...")
 
     def load_configuration(self, arguments):
-        self.configuration = ConfigurationFactory.load_configuration_from_file(arguments.config_filename, arguments.config_format)
+        if arguments.bot_root is None:
+            arguments.bot_root = os.path.dirname(arguments.config_filename)
+            print ("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
+        self.configuration = ConfigurationFactory.load_configuration_from_file(arguments.config_filename, arguments.config_format, arguments.bot_root)
 
     def initiate_bot(self, configuration):
         self._brain = Brain (configuration.brain_configuration)

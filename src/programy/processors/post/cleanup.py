@@ -27,4 +27,9 @@ class CleanUpPostProcessor(PostProcessor):
         stripped = string.strip()
         if stripped.endswith(" ."):
             stripped = stripped[:len(stripped)-2] + "."
-        return stripped
+
+        first = stripped[:1]
+        rest = stripped[1:]
+        result = first.upper() + rest.lower()
+
+        return result

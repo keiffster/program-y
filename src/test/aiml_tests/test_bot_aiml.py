@@ -1,4 +1,5 @@
 import unittest
+import os
 from test.aiml_tests.client import TestClient
 from programy.config import BrainFileConfiguration
 
@@ -9,7 +10,7 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/aiml_tests/test_files/bot", ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../aiml_tests/test_files/bot", ".aiml", False)
 
 class BotAIMLTests(unittest.TestCase):
 
@@ -39,7 +40,7 @@ class BotAIMLTests(unittest.TestCase):
             default-get:unknown
             default-property:unknown
             default-map:unknown
-            learn-filename:keiffbot-learn.aiml
+            learn-filename:learn.aiml
         """)
 
     def test_bot_property_xxx(self):
@@ -155,4 +156,4 @@ class BotAIMLTests(unittest.TestCase):
     def test_bot_property_default_learn_filename(self):
         response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY LEARN FILENAME")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "keiffbot-learn.aiml")
+        self.assertEqual(response, "learn.aiml")

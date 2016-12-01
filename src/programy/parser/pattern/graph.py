@@ -16,6 +16,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.parser.pattern.nodes import *
 
+# TODO When xml is split over multiple lines, extra PatternWordNodes get crearted
+# <pattern>
+#      <set>name</set> is tall
+# </pattern>
+# This fails to match
 
 #######################################################################################################################
 #
@@ -55,12 +60,12 @@ class PatternGraph(object):
             if 'name' in element.attrib:
                 return PatternSetNode(element.attrib['name'])
             else:
-                return PatternSetNode(element.text)
+                return PatternSetNode(element.text.strip())
         elif element.tag == 'bot':
             if 'name' in element.attrib:
                 return PatternBotNode(element.attrib['name'])
             else:
-                return PatternBotNode(element.text)
+                return PatternBotNode(element.text.strip())
         else:
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element )
 
@@ -79,11 +84,26 @@ class PatternGraph(object):
 
         return current_node
 
+    def get_text_from_element(self, element):
+        text = element.text
+        if text is not None:
+            text = text.strip()
+            return text
+            #if text == "":
+            #    return None
+        return None
+
+    def get_tail_from_element(self, element):
+        text = element.tail
+        if text is not None:
+            text = text.strip()
+            return text
+        return None
+
     def add_pattern_to_node(self, pattern_element):
-        head_text = pattern_element.text
+        head_text = self.get_text_from_element(pattern_element)
         if head_text is not None:
-            #logging.info("Adding pattern %s" % head_text)
-            current_node = self._parse_text(head_text.strip(), self._root_node)
+            current_node = self._parse_text(head_text, self._root_node)
         else:
             current_node = self._root_node
 
@@ -91,9 +111,9 @@ class PatternGraph(object):
             new_node = PatternGraph.node_from_element(sub_element)
             current_node = current_node.add_child(new_node)
 
-            tail_text = sub_element.tail
+            tail_text = self.get_tail_from_element(sub_element)
             if tail_text is not None:
-                current_node = self._parse_text(tail_text.strip(), current_node)
+                current_node = self._parse_text(tail_text, current_node)
 
         return current_node
 
@@ -101,21 +121,21 @@ class PatternGraph(object):
         current_node = PatternTopicNode()
         current_node = base_node.add_topic(current_node)
 
-        head_text = topic_element.text
+        head_text = self.get_text_from_element(topic_element)
         if head_text is not None:
-            current_node = self._parse_text(head_text.strip(), current_node)
+            current_node = self._parse_text(head_text, current_node)
 
         added_child = False
         for sub_element in topic_element:
             new_node = PatternGraph.node_from_element(sub_element)
             current_node = current_node.add_child(new_node)
 
-            tail_text = sub_element.tail
+            tail_text = self.get_tail_from_element(sub_element)
             if tail_text is not None:
-                current_node = self._parse_text(tail_text.strip(), current_node)
+                current_node = self._parse_text(tail_text, current_node)
             added_child = True
 
-        if head_text is None or head_text == "":
+        if head_text is None:
             if added_child is False:
                 raise ParserException("Topic node text is empty", xml_element=topic_element)
 
@@ -125,7 +145,7 @@ class PatternGraph(object):
         current_node = PatternThatNode()
         current_node = base_node.add_that(current_node)
 
-        head_text = that_element.text
+        head_text = self.get_text_from_element(that_element)
         if head_text is not None:
             current_node = self._parse_text(head_text.strip(), current_node)
 
@@ -134,12 +154,12 @@ class PatternGraph(object):
             new_node = PatternGraph.node_from_element(sub_element)
             current_node = current_node.add_child(new_node)
 
-            tail_text = sub_element.tail
+            tail_text = self.get_tail_from_element(sub_element)
             if tail_text is not None:
-                current_node = self._parse_text(tail_text.strip(), current_node)
+                current_node = self._parse_text(tail_text, current_node)
             added_child = True
 
-        if head_text is None or head_text == "":
+        if head_text is None:
             if added_child is False:
                 raise ParserException("That node text is empty", xml_element=that_element)
 

@@ -97,9 +97,9 @@ class PatternGraphTests(PatternTestBaseClass):
         that_element = ET.fromstring('<that>*</that>')
         template_graph_root = None
 
-        self.bot.brain.sets._sets["SET1"] = ["val1", "val2", "val3", "val5"]
+        self.bot.brain.sets._sets["SET1"] = ["VAL1", "VAL2", "VAL3", "VAL5"]
 
-        element = ET.fromstring('<pattern><set>set1</set></pattern>')
+        element = ET.fromstring('<pattern><set>set1</set> IS A VALUE</pattern>')
         graph.add_pattern_to_graph(element, topic_element, that_element, template_graph_root)
         
         self.assertIsNotNone(graph.root)
@@ -109,10 +109,10 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertEqual(graph.root.children[0].word, "SET1")
 
         matcher = PatternMatcher(graph)
-        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("val1"), [], Sentence("*"), [], Sentence("*"), []))
-        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("val2"), [], Sentence("*"), [], Sentence("*"), []))
-        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("val3"), [], Sentence("*"), [], Sentence("*"), []))
-        self.assertIsNone(matcher.match(self.bot, self.clientid, Sentence("val4"), [], Sentence("*"), [], Sentence("*"), []))
+        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("VAL1 IS A VALUE"), [], Sentence("*"), [], Sentence("*"), []))
+        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("VAL2 IS A VALUE"), [], Sentence("*"), [], Sentence("*"), []))
+        self.assertIsNotNone(matcher.match(self.bot, self.clientid, Sentence("VAL3 IS A VALUE"), [], Sentence("*"), [], Sentence("*"), []))
+        self.assertIsNone(matcher.match(self.bot, self.clientid, Sentence("VAL4 IS A VALUE"), [], Sentence("*"), [], Sentence("*"), []))
 
     def test_add_pattern_to_graph_basic_set_name_attrib(self):
         graph = PatternGraph()

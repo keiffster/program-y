@@ -4,4 +4,5 @@ flask
 python-dateutil
 
 pylint
+nose
 coverage

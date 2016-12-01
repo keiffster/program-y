@@ -20,8 +20,9 @@ class TestBot(Bot):
     def response(self, text):
         self._response = text
 
-    def ask_question(self, clientid, text):
+    def ask_question(self, clientid, text, srai=False):
         return self._response
+
 
 class TemplateTestsBaseClass(unittest.TestCase, CustomAssertions):
 

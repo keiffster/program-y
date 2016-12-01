@@ -1,5 +1,5 @@
 import unittest
-
+import os
 from programy.mappings.maps import MapCollection, MapLoader
 
 
@@ -9,7 +9,7 @@ class MapTests(unittest.TestCase):
         loader = MapLoader()
         self.assertIsNotNone(loader)
 
-        map = loader.load_file_contents("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/mappings/test_files/maps/test_map.txt")
+        map = loader.load_file_contents(os.path.dirname(__file__)+ "/test_files/maps/test_map.txt")
 
         self.assertIsNotNone(map)
         self.assertEqual(len(map.keys()), 12)

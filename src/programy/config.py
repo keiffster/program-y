@@ -18,14 +18,22 @@ import xml.etree.ElementTree as ET
 
 import yaml
 import json
+from abc import ABCMeta, abstractmethod
 
 class BaseConfigurationData(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self, name):
         self.section_name = name
 
-    def load_config_section(self, config_file):
-        pass
+    def sub_bot_root(self, text, root):
+        return text.replace('$BOT_ROOT', root)
+
+    @abstractmethod
+    def load_config_section(self, config_file, bot_root):
+        """
+        Never Implemented
+        """
 
 class BrainFileConfiguration(object):
 
@@ -70,7 +78,13 @@ class BrainConfiguration(BaseConfigurationData):
         self._preprocessors = None
         self._postprocessors = None
 
-    def load_config_section(self, config_file):
+    def get_file_option(self, config_file, option_name, section, bot_root):
+        option = config_file.get_option(option_name, section)
+        if option is not None:
+            option = self.sub_bot_root(option, bot_root)
+        return option
+
+    def load_config_section(self, config_file, bot_root):
 
         brain = config_file.get_section(self.section_name)
 
@@ -82,29 +96,29 @@ class BrainConfiguration(BaseConfigurationData):
         files = config_file.get_section("files", brain)
 
         aiml = config_file.get_section("aiml", files)
-        self._aiml_files = self.get_brain_file_configuration(config_file, aiml)
+        self._aiml_files = self.get_brain_file_configuration(config_file, aiml, bot_root)
 
         sets = config_file.get_section("sets", files)
-        self._set_files = self.get_brain_file_configuration(config_file, sets)
+        self._set_files = self.get_brain_file_configuration(config_file, sets, bot_root)
 
         maps = config_file.get_section("maps", files)
-        self._map_files = self.get_brain_file_configuration(config_file, maps)
+        self._map_files = self.get_brain_file_configuration(config_file, maps, bot_root)
 
-        self._denormal = config_file.get_option("denormal", files)
-        self._normal = config_file.get_option("normal", files)
-        self._gender = config_file.get_option("gender", files)
-        self._person = config_file.get_option("person", files)
-        self._person2 = config_file.get_option("person2", files)
-        self._predicates = config_file.get_option("predicates", files)
-        self._pronouns = config_file.get_option("pronouns", files)
-        self._properties = config_file.get_option("properties", files)
-        self._triples = config_file.get_option("triples", files)
+        self._denormal          = self.get_file_option(config_file, "denormal", files, bot_root)
+        self._normal            = self.get_file_option(config_file, "normal", files, bot_root)
+        self._gender            = self.get_file_option(config_file, "gender", files, bot_root)
+        self._person            = self.get_file_option(config_file, "person", files, bot_root)
+        self._person2           = self.get_file_option(config_file, "person2", files, bot_root)
+        self._predicates        = self.get_file_option(config_file, "predicates", files, bot_root)
+        self._pronouns          = self.get_file_option(config_file, "pronouns", files, bot_root)
+        self._properties        = self.get_file_option(config_file, "properties", files, bot_root)
+        self._triples           = self.get_file_option(config_file, "triples", files, bot_root)
+        self._preprocessors     = self.get_file_option(config_file, "preprocessors", files, bot_root)
+        self._postprocessors    = self.get_file_option(config_file, "postprocessors", files, bot_root)
 
-        self._preprocessors = config_file.get_option("preprocessors", files)
-        self._postprocessors = config_file.get_option("postprocessors", files)
-
-    def get_brain_file_configuration(self, config_file, section):
+    def get_brain_file_configuration(self, config_file, section, bot_root):
         files = config_file.get_option("files", section)
+        files = self.sub_bot_root(files, bot_root)
         extension = config_file.get_option("extension", section)
         directories = config_file.get_option("directories", section)
         return BrainFileConfiguration(files, extension, directories)
@@ -185,13 +199,14 @@ class BrainConfiguration(BaseConfigurationData):
 class BotConfiguration(BaseConfigurationData):
 
     def __init__(self):
+        self.bot_root = "."
         self._prompt = ">>> "
         self._default_response = "Sorry, I don't have an answer for that right now"
         self._exit_response = "Bye!"
         self._initial_question = "Hello"
         BaseConfigurationData.__init__(self, "bot")
 
-    def load_config_section(self, config_file):
+    def load_config_section(self, config_file, bot_root):
         bot = config_file.get_section(self.section_name)
 
         self._prompt = config_file.get_option("prompt", bot)
@@ -246,12 +261,13 @@ class ClientConfiguration(object):
     def bot_configuration(self):
         return self._bot_config
 
-    def load_config_data(self, config_file):
-        self._brain_config.load_config_section(config_file)
-        self._bot_config.load_config_section(config_file)
+    def load_config_data(self, config_file, bot_root):
+        self._brain_config.load_config_section(config_file, bot_root)
+        self._bot_config.load_config_section(config_file, bot_root)
 
 
 class BaseConfigurationFile(object):
+    __metaclass__ = ABCMeta
 
     def __init__(self):
         self.client_config = self.get_client_configuration()
@@ -264,11 +280,29 @@ class BaseConfigurationFile(object):
         """
         return ClientConfiguration()
 
-    def get_section(self, section_name, parent_section=None):
-        pass
+    @abstractmethod
+    def load_from_text(self, text, bot_root):
+        """
+        Never Implemented
+        """
 
+    @abstractmethod
+    def load_from_file(self, filename, bot_root):
+        """
+        Never Implemented
+        """
+
+    @abstractmethod
+    def get_section(self, section_name, parent_section=None):
+        """
+        Never Implemented
+        """
+
+    @abstractmethod
     def get_option(self, section, option_name):
-        pass
+        """
+        Never Implemented
+        """
 
     def _infer_type_from_string(self, text):
         if text == 'True' or text == 'true':
@@ -284,14 +318,14 @@ class YamlConfigurationFile(BaseConfigurationFile):
     def __init__(self):
         BaseConfigurationFile.__init__(self)
 
-    def load_from_text(self, text):
+    def load_from_text(self, text, bot_root):
         self.yaml_data = yaml.load(text)
         self.client_config.load_config_data(self)
 
-    def load_from_file(self, filename):
+    def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as yml_data_file:
             self.yaml_data = yaml.load(yml_data_file)
-            self.client_config.load_config_data(self)
+            self.client_config.load_config_data(self, bot_root)
 
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
@@ -308,8 +342,11 @@ class JSONConfigurationFile(BaseConfigurationFile):
     def __init__(self):
         BaseConfigurationFile.__init__(self)
 
-    def load_from_file(self, filename):
+    def load_from_text(self, text, bot_root):
+        #TODO To implement
+        raise Exception("Not implemented yet")
 
+    def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as json_data_file:
             self.json_data = json.load(json_data_file)
             self.client_config.load_config_data(self)
@@ -329,8 +366,11 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def __init__(self):
         BaseConfigurationFile.__init__(self)
 
-    def load_from_file(self, filename):
+    def load_from_text(self, text, bot_root):
+        # TODO To implement
+        raise Exception("Not implemented yet")
 
+    def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as xml_data_file:
             tree = ET.parse(xml_data_file, parser=LineNumberingParser())
             self.xml_data = tree.getroot()
@@ -350,13 +390,13 @@ class XMLConfigurationFile(BaseConfigurationFile):
 class ConfigurationFactory(object):
 
     @classmethod
-    def load_configuration_from_file(cls, filename, format=None):
+    def load_configuration_from_file(cls, filename, format=None, bot_root="."):
 
         if format is None or len(format) == 0:
             format = ConfigurationFactory.guess_format_from_filename(filename)
 
         config_file = ConfigurationFactory.get_config_by_name(format)
-        config_file.load_from_file(filename)
+        config_file.load_from_file(filename, bot_root)
         return config_file.client_config
 
     @classmethod

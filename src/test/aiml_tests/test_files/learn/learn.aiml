@@ -23,15 +23,15 @@ For more information see [url]
 		<pattern>MY NAME IS *</pattern>
 		<template>
 			<think>
-				<set name="myname"><star /></set>
+				<set var="myname"><star /></set>
 			</think>
 		    <learn>
 				<category>
 					<pattern>WHAT IS MY NAME</pattern>
-					<template>YOUR NAME IS <eval><get name="myname" /></eval></template>
+					<template>YOUR NAME IS <eval><get var="myname" /></eval></template>
 				</category>
 			</learn>
-			OK, I will remember your name is <get name="myname" />
+			OK, I will remember your name is <get var="myname" />
 		</template>
 	</category>
 

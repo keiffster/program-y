@@ -1,4 +1,5 @@
 import unittest
+import os
 from test.aiml_tests.client import TestClient
 from programy.config import BrainFileConfiguration
 
@@ -9,7 +10,7 @@ class SraiTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(SraiTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/aiml_tests/test_files/srai", ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../aiml_tests/test_files/srai", ".aiml", False)
 
 class SraiAIMLTests(unittest.TestCase):
 

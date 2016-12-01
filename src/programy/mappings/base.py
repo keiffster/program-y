@@ -21,9 +21,6 @@ from abc import ABCMeta, abstractmethod
 class BaseCollection(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self):
-        pass
-
     @abstractmethod
     def split_line(self, line):
         """

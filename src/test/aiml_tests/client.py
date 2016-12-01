@@ -7,7 +7,9 @@ from programy.config import ClientConfiguration
 
 class TestClient(BotClient):
 
-    def __init__(self):
+    def __init__(self, debug=False):
+        if debug is True:
+            logging.getLogger().setLevel(logging.DEBUG)
         BotClient.__init__(self)
 
     def parse_arguements(self):

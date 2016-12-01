@@ -93,8 +93,8 @@ Cadmium green
 Cadmium orange
 Cadmium red
 Cadmium yellow
-Café au lait
-Café noir
+CafÃ© au lait
+CafÃ© noir
 Cal Poly Pomona green
 Cambridge Blue
 Camel
@@ -300,7 +300,7 @@ Green Blue
 Green yellow
 Grullo
 Guppie green
-Halayà úbe
+HalayÃ  Ãºbe
 Han blue
 Han purple
 Hansa yellow

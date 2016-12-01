@@ -37,6 +37,9 @@ class TemplateNode(object):
     def append(self, child):
         self._children.append(child)
 
+    def dump(self, tabs, output_func=logging.debug, verbose=True):
+        self.output(tabs, output_func)
+
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)
 
@@ -121,7 +124,7 @@ class TemplateSRAINode(TemplateNode):
 
     def resolve(self, bot, clientid):
         srai_text = " ".join([child.resolve(bot, clientid) for child in self._children])
-        resolved = bot.ask_question(clientid, srai_text)
+        resolved = bot.ask_question(clientid, srai_text, srai=True)
         logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
         return resolved
 
@@ -145,7 +148,7 @@ class TemplateSrNode(TemplateNode):
         sentence = bot.get_conversation(clientid).current_question().current_sentence()
 
         if len(sentence.stars) > 0:
-            resolved = bot.ask_question(clientid, sentence.stars[0])
+            resolved = bot.ask_question(clientid, sentence.stars[0], srai=True)
         else:
             logging.error("Sr node has no stars available")
             resolved = ""
@@ -1417,6 +1420,16 @@ class TemplateLearnNode(TemplateNode):
         self._that = None
         self._template = None
 
+    def evaluate_eval_nodes(self, bot, clientid, template):
+        count = 0
+        for child in template.children:
+            if isinstance(child, TemplateEvalNode):
+                new_word_node = TemplateWordNode(child.resolve(bot, clientid))
+                template._children[count] = new_word_node
+            count += 1
+
+        return template
+
     def resolve_element_evals(self, bot, clientid, element):
 
         new_element = ET.Element(element.tag)
@@ -1444,7 +1457,9 @@ class TemplateLearnNode(TemplateNode):
         new_topic = self.resolve_element_evals(bot, clientid, self._topic)
         new_that = self.resolve_element_evals(bot, clientid, self._that)
 
-        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, self._template)
+        template = self.evaluate_eval_nodes(bot, clientid, self._template)
+
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
 
         logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
                                                                         ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
@@ -1482,7 +1497,9 @@ class TemplateLearnfNode(TemplateLearnNode):
         new_topic = self.resolve_element_evals(bot, clientid, self._topic)
         new_that = self.resolve_element_evals(bot, clientid, self._that)
 
-        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, self._template)
+        template = self.evaluate_eval_nodes(bot, clientid, self._template)
+
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
 
         logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
                                                                         ET.tostring(new_pattern, 'utf-8').decode('utf-8'),

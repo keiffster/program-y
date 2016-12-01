@@ -1,6 +1,5 @@
 import unittest
-import logging
-
+import os
 from test.aiml_tests.client import TestClient
 from programy.config import BrainFileConfiguration
 
@@ -11,7 +10,7 @@ class ThatTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(ThatTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration("/Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/aiml_tests/test_files/that", ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../aiml_tests/test_files/that", ".aiml", False)
 
 class ThatAIMLTests(unittest.TestCase):
 

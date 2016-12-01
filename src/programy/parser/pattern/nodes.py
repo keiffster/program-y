@@ -273,7 +273,9 @@ class PatternNode(object):
         return "NODE [%s]" % self._child_count(verbose)
 
     def dump(self, tabs, output_func=logging.debug, verbose=True):
+
         output_func("%s%s" % (tabs, self.to_string(verbose)))
+
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, verbose)
         if self._0ormore_arrow is not None:
@@ -289,7 +291,7 @@ class PatternNode(object):
         if self._that is not None:
             self._that.dump(tabs+"\t", output_func, verbose)
         if self._template is not None:
-            output_func("%sTEMPLATE" % (tabs+"\t"))
+            self._template.dump(tabs+"\t", output_func, verbose)
         for child in self.children:
             child.dump(tabs+"\t", output_func, verbose)
 

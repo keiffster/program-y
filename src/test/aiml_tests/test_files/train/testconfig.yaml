@@ -9,7 +9,7 @@ brain:
 
     files:
         aiml:
-            files: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/aiml
+            files: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/aiml_tests/test_files/train
             extension: .aiml
             directories: false
         sets:

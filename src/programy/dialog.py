@@ -84,10 +84,14 @@ class Sentence(object):
             return None
 
     def _split_into_words(self, sentence, split_chars: str):
-        if sentence is None or len(sentence.strip()) == 0:
+        if sentence is None:
             return []
         else:
-            return sentence.split(split_chars)
+            sentence = sentence.strip ()
+            if len(sentence) == 0:
+                return []
+            else:
+                return sentence.split(split_chars)
 
 
 class Question(object):
@@ -123,6 +127,9 @@ class Question(object):
 
     def current_sentence(self):
         return self._sentences[-1]
+
+    def previous_sentence(self, num):
+        return self._sentences[len(self._sentences)-num]
 
     def _split_into_sentences(self, text:str, sentence_split_chars: str, word_split_chars: str):
         if text is not None and len(text.strip()) > 0:
@@ -206,3 +213,6 @@ class Conversation(object):
             self._questions.remove(self._questions[0])
         self._questions.append(question)
 
+    def pop_dialog(self):
+        if len(self._questions) > 0:
+            self._questions.pop()

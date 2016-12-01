@@ -995,29 +995,31 @@ class TemplateGraph(object):
 
     def parse_learn_expression(self, expression, branch):
 
-        learn_node = TemplateLearnNode()
-        branch.children.append(learn_node)
-
         for child in expression:
             if child.tag == 'category':
+                learn_node = TemplateLearnNode()
+
                 parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
                 learn_node._pattern  = parsed[0]
                 learn_node._topic    = parsed[1]
                 learn_node._that     = parsed[2]
                 learn_node._template = parsed[3]
+
+                branch.children.append(learn_node)
 
     def parse_learnf_expression(self, expression, branch):
 
-        learn_node = TemplateLearnfNode()
-        branch.children.append(learn_node)
-
         for child in expression:
             if child.tag == 'category':
+                learn_node = TemplateLearnfNode()
+
                 parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
                 learn_node._pattern  = parsed[0]
                 learn_node._topic    = parsed[1]
                 learn_node._that     = parsed[2]
                 learn_node._template = parsed[3]
+
+                branch.children.append(learn_node)
 
     def parse_oob_expression(self, expression, branch):
         raise ParserException("Error, oob not implemented yet!", xml_element=expression)

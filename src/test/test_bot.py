@@ -18,7 +18,7 @@ class TestBrain(Brain):
         else:
             self.response = text
 
-    def ask_question(self, bot, clientid, sentence):
+    def ask_question(self, bot, clientid, sentence, srai=False):
         return self.response
 
 class BotTests(unittest.TestCase):
