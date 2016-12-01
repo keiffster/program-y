@@ -39,7 +39,7 @@ class YamlConfigurationFileTests(unittest.TestCase):
     def test_load_from_file(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml")
+        yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml", ",")
         self.assertIsNotNone(yaml.yaml_data)
         brain = yaml.get_section("brain")
         self.assertIsNotNone(brain)
@@ -66,7 +66,7 @@ class ClientConfigurationTests(unittest.TestCase):
         self.assert_config_data(config_data)
 
     def test_load_config_data_json(self):
-        config_data = ConfigurationFactory.load_configuration_from_file(os.path.dirname(__file__)+"/test_json.json")
+        config_data = ConfigurationFactory.load_configuration_from_file(os.path.dirname(__file__)+"/test_json.json", None)
         self.assert_config_data(config_data)
 
     def test_load_config_data_xml(self):

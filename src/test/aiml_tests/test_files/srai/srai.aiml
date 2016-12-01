@@ -63,6 +63,23 @@ For more information see [url]
 		</template>
 	</category>
 
+	<category>
+		<pattern>TEST PREDICATE SET</pattern>
+		<template>
+		    <think>
+				<srai>SET PREDICATES</srai>
+			</think>
+			Global1 set to <get name="global1" /> and Local1 set to <get var="local1" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>SET PREDICATES</pattern>
+		<template>
+			<set name="global1">Value1</set>
+			<set var="local1">Value2</set>
+		</template>
+	</category>
 
 
 </aiml>

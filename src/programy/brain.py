@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import xml.etree.ElementTree as ET
 
-from processors.processing import ProcessorLoader
+from programy.processors.processing import ProcessorLoader
 from programy.config import BrainConfiguration
 from programy.mappings.denormal import DenormalCollection
 from programy.mappings.gender import GenderCollection

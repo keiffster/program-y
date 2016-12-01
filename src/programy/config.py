@@ -349,7 +349,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
     def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as json_data_file:
             self.json_data = json.load(json_data_file)
-            self.client_config.load_config_data(self)
+            self.client_config.load_config_data(self, bot_root)
 
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
@@ -374,7 +374,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         with open(filename, 'r+') as xml_data_file:
             tree = ET.parse(xml_data_file, parser=LineNumberingParser())
             self.xml_data = tree.getroot()
-            self.client_config.load_config_data(self)
+            self.client_config.load_config_data(self, bot_root)
 
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
