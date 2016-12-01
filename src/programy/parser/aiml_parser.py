@@ -253,7 +253,7 @@ class AIMLParser(object):
 
         return (patterns[0], topic_element, that_element, template_graph_root)
 
-    def match_sentence(self, bot, clientid, sentence, topic_pattern, that_pattern):
+    def match_sentence(self, bot, clientid, sentence, parent_question, topic_pattern, that_pattern):
         logging.debug("Matching sentence [%s], topic=[%s], that=[%s] " % (sentence.text(), topic_pattern, that_pattern))
 
         pattern_stars = []
@@ -261,8 +261,14 @@ class AIMLParser(object):
         that_stars = []
         matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern), topic_stars, Sentence(that_pattern), that_stars)
         if matched is not None:
-            sentence._stars = pattern_stars
-            sentence._topicstars = topic_stars
-            sentence._thatstars = that_stars
+            if parent_question is not None:
+                parent_question.current_sentence()._stars = pattern_stars
+                parent_question.current_sentence()._topicstars = topic_stars
+                parent_question.current_sentence()._thatstars = that_stars
+            else:
+                sentence._stars = pattern_stars
+                sentence._topicstars = topic_stars
+                sentence._thatstars = that_stars
+
             return self.template_evaluator.evaluate(bot, clientid, matched.template)
         return None

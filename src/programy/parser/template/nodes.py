@@ -268,7 +268,7 @@ class TemplateSetNode(TemplateNode):
 
         if self.local is True:
             logging.debug("[%s] resolved to local: [%s] => [%s]" % (self.format(), name, value))
-            bot.get_conversation(clientid).current_question().current_sentence().set_predicate(name, value)
+            bot.get_conversation(clientid).current_question().set_predicate(name, value)
 
         else:
             if bot.brain.properties.has_property(name):
@@ -305,7 +305,7 @@ class TemplateGetNode(TemplateNode):
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
         if self.local is True:
-            value = bot.get_conversation(clientid).current_question().current_sentence().predicate(name)
+            value = bot.get_conversation(clientid).current_question().predicate(name)
             if value is None:
                 logging.warning("No local var for %s, default-get used" % (name))
                 value = bot.brain.properties.property("default-get")
@@ -472,7 +472,7 @@ class TemplateConditionNode(TemplateNode):
         if local is False:
             value = bot.conversation(clientid).predicate(name)
         else:
-            value = bot.conversation(clientid).current_question().current_sentence().predicate(name)
+            value = bot.conversation(clientid).current_question().predicate(name)
 
         if value is None:
             value = bot.brain.properties.property("default-get")

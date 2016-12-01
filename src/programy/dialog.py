@@ -24,7 +24,6 @@ class Sentence(object):
         self._thatstars = []
         self._topicstars = []
         self._response = None
-        self._predicates = {}
 
     @property
     def words(self):
@@ -74,15 +73,6 @@ class Sentence(object):
     def response(self, text: str):
         self._response = text
 
-    def set_predicate(self, name: str, value: str):
-        self._predicates[name] = value
-
-    def predicate(self, name: str):
-        if name in self._predicates:
-            return self._predicates[name]
-        else:
-            return None
-
     def _split_into_words(self, sentence, split_chars: str):
         if sentence is None:
             return []
@@ -117,10 +107,20 @@ class Question(object):
 
     def __init__(self):
         self._sentences = []
+        self._predicates = {}
 
     @property
     def sentences(self):
         return self._sentences
+
+    def set_predicate(self, name: str, value: str):
+        self._predicates[name] = value
+
+    def predicate(self, name: str):
+        if name in self._predicates:
+            return self._predicates[name]
+        else:
+            return None
 
     def sentence(self, num: int):
         return self._sentences[num]

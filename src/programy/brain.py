@@ -198,7 +198,7 @@ class Brain(object):
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
-    def ask_question(self, bot, clientid, sentence) -> str:
+    def ask_question(self, bot, clientid, sentence, parent_question) -> str:
 
         conversation = bot.get_conversation(clientid)
 
@@ -208,13 +208,13 @@ class Brain(object):
             topic_pattern = "*"
 
         try:
-            that_question = conversation.nth_question(2)
+            that_question = conversation.nth_question(1)
             that_sentence = that_question.current_sentence()
             that_pattern = that_sentence.text()
         except:
             that_pattern = "*"
 
-        return self._aiml_parser.match_sentence(bot, clientid, sentence, topic_pattern=topic_pattern, that_pattern=that_pattern)
+        return self._aiml_parser.match_sentence(bot, clientid, sentence, parent_question, topic_pattern=topic_pattern, that_pattern=that_pattern)
 
     def post_process_response(self, bot, clientid, response: str):
         return self.postprocessors.process(bot, clientid, response)

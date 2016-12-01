@@ -242,7 +242,7 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         question = Question.create_from_text("Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
-        question.current_sentence().set_predicate("name", "keith")
+        question.set_predicate("name", "keith")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
@@ -375,7 +375,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
-        self.assertEqual("keith", question.current_sentence().predicate("name"))
+        self.assertEqual("keith", question.predicate("name"))
 
     def test_to_xml_local_set(self):
         root = TemplateNode()
@@ -557,7 +557,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
 
         question = Question.create_from_text("Hello")
         self.bot.conversation(self.clientid).record_dialog(question)
-        self.bot.conversation(self.clientid).current_question().current_sentence()._predicates["var1"] = "value2"
+        self.bot.conversation(self.clientid).current_question().set_predicate("var1", "value2")
 
         value = node._get_predicate_value(self.bot, self.clientid, "var1", True)
         self.assertEqual(value, "value2")
@@ -634,7 +634,7 @@ class TemplateType1ConditionNodeTests(TemplateTestsBaseClass):
 
         question = Question.create_from_text("Hello")
         self.bot.conversation(self.clientid).record_dialog(question)
-        self.bot.conversation(self.clientid).current_question().current_sentence()._predicates["var1"] = "value1"
+        self.bot.conversation(self.clientid).current_question().set_predicate("var1", "value1")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
@@ -658,7 +658,7 @@ class TemplateType1ConditionNodeTests(TemplateTestsBaseClass):
 
         question = Question.create_from_text("Hello")
         self.bot.conversation(self.clientid).record_dialog(question)
-        self.bot.conversation(self.clientid).current_question().current_sentence()._predicates["var1"] = "value2"
+        self.bot.conversation(self.clientid).current_question().set_predicate("var1", "value2")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
@@ -756,7 +756,7 @@ class TemplateType2ConditionNodeTests(TemplateTestsBaseClass):
 
         question = Question.create_from_text("Hello")
         self.bot.conversation(self.clientid).record_dialog(question)
-        self.bot.conversation(self.clientid).current_question().current_sentence()._predicates["var1"] = "value2"
+        self.bot.conversation(self.clientid).current_question().set_predicate("var1", "value2")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
