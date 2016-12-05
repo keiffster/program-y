@@ -106,3 +106,35 @@ class ClientConfigurationTests(unittest.TestCase):
         self.assertEqual(config_data.brain_configuration.properties, "properties.txt")
         self.assertEqual(config_data.brain_configuration.triples, "triples.txt")
         self.assertEqual(config_data.brain_configuration.preprocessors, "preprocessors.txt")
+
+        self.assertIsNotNone(config_data.brain_configuration.services)
+        self.assertEqual(4, len(config_data.brain_configuration.services))
+
+        self.assertIn(config_data.brain_configuration.services[0].name, ["REST", "PANNOUS", "PANDORA", "WIKIPEDIA"])
+        self.assertIn(config_data.brain_configuration.services[0].path, ["programy.utils.services.rest.GenericRESTService",
+                                                                         "programy.utils.services.pannous.PannousService",
+                                                                         "programy.utils.services.pandora.PandoraService",
+                                                                         "programy.utils.services.google.GoogleService",
+                                                                         "programy.utils.services.wikipedia.WikipediaService"])
+
+        self.assertIn(config_data.brain_configuration.services[1].name, ["REST", "PANNOUS", "PANDORA", "WIKIPEDIA"])
+        self.assertIn(config_data.brain_configuration.services[1].path, ["programy.utils.services.rest.GenericRESTService",
+                                                                         "programy.utils.services.pannous.PannousService",
+                                                                         "programy.utils.services.pandora.PandoraService",
+                                                                         "programy.utils.services.google.GoogleService",
+                                                                         "programy.utils.services.wikipedia.WikipediaService"])
+
+        self.assertIn(config_data.brain_configuration.services[2].name, ["REST", "PANNOUS", "PANDORA", "WIKIPEDIA"])
+        self.assertIn(config_data.brain_configuration.services[2].path, ["programy.utils.services.rest.GenericRESTService",
+                                                                         "programy.utils.services.pannous.PannousService",
+                                                                         "programy.utils.services.pandora.PandoraService",
+                                                                         "programy.utils.services.google.GoogleService",
+                                                                         "programy.utils.services.wikipedia.WikipediaService"])
+
+        self.assertIn(config_data.brain_configuration.services[3].name, ["REST", "PANNOUS", "PANDORA", "WIKIPEDIA"])
+        self.assertIn(config_data.brain_configuration.services[3].path, ["programy.utils.services.rest.GenericRESTService",
+                                                                         "programy.utils.services.pannous.PannousService",
+                                                                         "programy.utils.services.pandora.PandoraService",
+                                                                         "programy.utils.services.google.GoogleService",
+                                                                         "programy.utils.services.wikipedia.WikipediaService"])
+

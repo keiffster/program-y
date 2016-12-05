@@ -28,10 +28,5 @@ Implement PEP guidelines for all code
 Implement pylint
 
 Implement External Services
-- Wikipedia is provided by the code at https://pypi.python.org/pypi/wikipedia/
-    - Ambiguous
-    - Disambiguous
-- Pannous Service https://market.mashape.com/pannous
-- Pandora Service https://developer.pandorabots.com/faq#ten
-- Google
+
 - Weather

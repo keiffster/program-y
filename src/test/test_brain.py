@@ -21,4 +21,5 @@ class BrainTests(unittest.TestCase):
         self.assertIsNotNone(brain._triples_collection)
         self.assertIsNotNone(brain._sets_collection)
         self.assertIsNotNone(brain._maps_collection)
-
+        self.assertIsNotNone(brain._preprocessors)
+        self.assertIsNotNone(brain._postprocessors)

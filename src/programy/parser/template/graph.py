@@ -423,13 +423,14 @@ class TemplateGraph(object):
         branch.children.append(sraix_node)
 
         if 'host' in expression.attrib:
-            sraix_node.host = expression.attrib['host']
+            logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
         if 'botid' in expression.attrib:
-            sraix_node.botid = expression.attrib['botid']
+            logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
         if 'hint' in expression.attrib:
-            sraix_node.hint = expression.attrib['hint']
+            logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
         if 'apikey' in expression.attrib:
-            sraix_node.apikey = expression.attrib['apikey']
+            logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
+
         if 'service' in expression.attrib:
             sraix_node.service = expression.attrib['service']
 
@@ -438,13 +439,13 @@ class TemplateGraph(object):
 
         for child in expression:
             if child.tag == 'host':
-                sraix_node.host = child.text
+                logging.warning("'host' element not supported in sraix, moved to config, see documentation")
             elif child.tag == 'botid':
-                sraix_node.botid = child.text
+                logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
             elif child.tag == 'hint':
-                sraix_node.hint = child.text
+                logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
             elif child.tag == 'apikey':
-                sraix_node.apikey = child.text
+                logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
             elif child.tag == 'service':
                 sraix_node.service = child.text,
             else:
@@ -453,14 +454,6 @@ class TemplateGraph(object):
             tail_text = child.tail
             self.parse_text(tail_text, sraix_node)
 
-        if sraix_node.host is None:
-            logging.warning("SRAIX node, host missing !")
-        if sraix_node.botid is None:
-            logging.warning("SRAIX node, botid missing !")
-        if sraix_node.hint is None:
-            logging.warning("SRAIX node, hint missing !")
-        if sraix_node.apikey is None:
-            logging.warning("SRAIX node, apikey missing !")
         if sraix_node.service is None:
             logging.warning("SRAIX node, service missing !")
 

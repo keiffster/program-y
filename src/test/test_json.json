@@ -32,6 +32,21 @@
             "triples": "triples.txt",
             "preprocessors": "preprocessors.txt",
             "postprocessors": "postprocessors.txt"
+        },
+
+        "services": {
+            "REST": {
+                "path": "programy.utils.services.rest.GenericRESTService"
+            },
+            "Pannous": {
+                "path": "programy.utils.services.pannous.PannousService"
+            },
+            "Pandora": {
+                "path": "programy.utils.services.pandora.PandoraService"
+            },
+            "Wikipedia": {
+                "path": "programy.utils.services.wikipedia.WikipediaService"
+            }
         }
     },
     "bot": {

@@ -32,6 +32,14 @@ brain:
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
 
+    services:
+        Pannous:
+            path: programy.utils.services.pannous.PannousService
+            login: test-user
+        Pandora:
+            path: programy.utils.services.pandora.PandoraService
+            botid: f5d922d97e345aa1
+
 bot:
     prompt: ">>>"
     initial_question: Hi, how can I help you today?

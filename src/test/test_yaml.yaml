@@ -30,6 +30,16 @@ brain:
       preprocessors: preprocessors.txt
       postprocessors: postprocessors.txt
 
+  services:
+      REST:
+          path: programy.utils.services.rest.GenericRESTService
+      Pannous:
+          path: programy.utils.services.pannous.PannousService
+      Pandora:
+          path: programy.utils.services.pandora.PandoraService
+      Wikipedia:
+          path: programy.utils.services.wikipedia.WikipediaService
+
 bot:
   prompt: ">>>"
   default_response: Sorry, I don't have an answer for that!

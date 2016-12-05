@@ -22,18 +22,32 @@
                <extension>.txt</extension>
                <directories>True</directories>
            </maps>
-        <denormal>denormal.txt</denormal>
-        <normal>normal.txt</normal>
-        <gender>gender.txt</gender>
-        <person>person.txt</person>
-        <person2>person2.txt</person2>
-        <predicates>predicates.txt</predicates>
-        <pronouns>pronouns.txt</pronouns>
-        <properties>properties.txt</properties>
-        <triples>triples.txt</triples>
-        <preprocessors>preprocessors.txt</preprocessors>
-        <postprocessors>postprocessors.txt</postprocessors>
+            <denormal>denormal.txt</denormal>
+            <normal>normal.txt</normal>
+            <gender>gender.txt</gender>
+            <person>person.txt</person>
+            <person2>person2.txt</person2>
+            <predicates>predicates.txt</predicates>
+            <pronouns>pronouns.txt</pronouns>
+            <properties>properties.txt</properties>
+            <triples>triples.txt</triples>
+            <preprocessors>preprocessors.txt</preprocessors>
+            <postprocessors>postprocessors.txt</postprocessors>
        </files>
+        <services>
+            <REST>
+                <path>programy.utils.services.rest.GenericRESTService</path>
+            </REST>
+            <Pannous>
+                <path>programy.utils.services.pannous.PannousService</path>
+            </Pannous>
+            <Pandora>
+                <path>programy.utils.services.pandora.PandoraService</path>
+            </Pandora>
+            <Wikipedia>
+                <path>programy.utils.services.wikipedia.WikipediaService</path>
+            </Wikipedia>
+        </services>
     </brain>
     <bot>
         <prompt>>>></prompt>

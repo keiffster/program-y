@@ -19,10 +19,12 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 from random import randint
-from programy.parser.exceptions import ParserException
-from programy.utils.classes.loader import ClassLoader
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
+from programy.parser.exceptions import ParserException
+from programy.utils.classes.loader import ClassLoader
+from programy.utils.services.service import ServiceFactory
 
 ######################################################################################################################
 #
@@ -1567,6 +1569,7 @@ class TemplateExtensionNode(TemplateNode):
 
 ######################################################################################################################
 #
+
 class TemplateSRAIXNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
@@ -1577,9 +1580,19 @@ class TemplateSRAIXNode(TemplateNode):
         self.service = None
 
     def resolve(self, bot, clientid):
-        resolved = "SRAIX -> " + " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
         logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
-        return resolved
+        response = ""
+        try:
+            if self.service is not None:
+                bot_service = ServiceFactory.get_service(self.service, self.host, self.apikey, self.botid, self.hint)
+                response = bot_service.ask_question(bot, clientid, resolved)
+                logging.debug("SRAIX service [%s] return [%s]" % (self.service, response))
+            else:
+                logging.error("Sorry SRAIX does not currently have an implementation for [%s]" % self.host)
+        except Exception as e:
+            logging.error("SRAIX service [%s] failed with error [%s]" % (self.service, str(e)))
+        return response
 
     def format(self):
         return "SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)" % (

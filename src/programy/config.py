@@ -55,6 +55,30 @@ class BrainFileConfiguration(object):
         return self._directories
 
 
+class BrainServiceConfiguration(object):
+
+    def __init__(self, name, data=None):
+        self._name = name.upper()
+        self._params = {}
+        if data is not None:
+            for key in data.keys():
+                self._params[key.upper()] = data[key]
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def path(self):
+        return self._params['PATH']
+
+    def parameters(self):
+        return self._params.keys()
+
+    def parameter(self, name):
+        return self._params[name]
+
+
 class BrainConfiguration(BaseConfigurationData):
 
     def __init__(self):
@@ -77,6 +101,7 @@ class BrainConfiguration(BaseConfigurationData):
         self._triples = None
         self._preprocessors = None
         self._postprocessors = None
+        self._services = []
 
     def get_file_option(self, config_file, option_name, section, bot_root):
         option = config_file.get_option(option_name, section)
@@ -115,6 +140,13 @@ class BrainConfiguration(BaseConfigurationData):
         self._triples           = self.get_file_option(config_file, "triples", files, bot_root)
         self._preprocessors     = self.get_file_option(config_file, "preprocessors", files, bot_root)
         self._postprocessors    = self.get_file_option(config_file, "postprocessors", files, bot_root)
+
+        services = config_file.get_section("services", brain)
+        service_keys = config_file.get_child_section_keys("services", brain)
+
+        for name in service_keys:
+            service_data = config_file.get_section_data(name, services)
+            self._services.append(BrainServiceConfiguration(name, service_data))
 
     def get_brain_file_configuration(self, config_file, section, bot_root):
         files = config_file.get_option("files", section)
@@ -195,6 +227,9 @@ class BrainConfiguration(BaseConfigurationData):
     def postprocessors(self):
         return self._postprocessors
 
+    @property
+    def services(self):
+        return self._services
 
 class BotConfiguration(BaseConfigurationData):
 
@@ -299,6 +334,18 @@ class BaseConfigurationFile(object):
         """
 
     @abstractmethod
+    def get_section_data(self, section_name, parent_section=None):
+        """
+        Never Implemented
+        """
+
+    @abstractmethod
+    def get_child_section_keys(self, section_name, parent_section=None):
+        """
+        Never Implemented
+        """
+
+    @abstractmethod
     def get_option(self, section, option_name):
         """
         Never Implemented
@@ -333,6 +380,15 @@ class YamlConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section[section_name]
 
+    def get_section_data(self, section_name, parent_section=None):
+        return self.get_section(section_name, parent_section)
+
+    def get_child_section_keys(self, section_name, parent_section=None):
+        if parent_section is None:
+            return self.yaml_data[section_name].keys()
+        else:
+            return parent_section[section_name].keys()
+
     def get_option(self, option_name, section):
         return section[option_name]
 
@@ -356,6 +412,15 @@ class JSONConfigurationFile(BaseConfigurationFile):
             return self.json_data[section_name]
         else:
             return parent_section[section_name]
+
+    def get_section_data(self, section_name, parent_section=None):
+        return self.get_section(section_name, parent_section)
+
+    def get_child_section_keys(self, section_name, parent_section=None):
+        if parent_section is None:
+            return self.json_data[section_name].keys()
+        else:
+            return parent_section[section_name].keys()
 
     def get_option(self, option_name, section):
         return section[option_name]
@@ -381,6 +446,26 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return self.xml_data.find(section_name)
         else:
             return parent_section.find(section_name)
+
+    def get_section_data(self, section_name, parent_section=None):
+        if parent_section is None:
+            section = self.xml_data.find(section_name)
+        else:
+            section = parent_section.find(section_name)
+        data = {}
+        for child in section:
+            data[child.tag] = child.text
+        return data
+
+    def get_child_section_keys(self, section_name, parent_section=None):
+        keys = []
+        if parent_section is None:
+            for child in self.xml_data.find(section_name):
+                keys.append(child.tag)
+        else:
+            for child in parent_section.find(section_name):
+                keys.append(child.tag)
+        return keys
 
     def get_option(self, option_name, section):
         child = section.find(option_name)

@@ -1,7 +1,9 @@
-wikipedia
+
 requests
 flask
 python-dateutil
+
+wikipedia
 
 pylint
 nose

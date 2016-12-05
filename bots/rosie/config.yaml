@@ -32,8 +32,23 @@ brain:
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
 
+    services:
+        REST:
+            path: programy.utils.services.rest.GenericRESTService
+        Pannous:
+            path: programy.utils.services.pannous.PannousService
+            login: test-user
+        Pandora:
+            path: programy.utils.services.pandora.PandoraService
+            botid: f5d922d97e345aa1
+        Google:
+            path: programy.utils.services.googleservice.GoogleService
+        Wikipedia:
+            path: programy.utils.services.wikipediaservice.WikipediaService
+
 bot:
     prompt: ">>>"
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!
     exit_response: So long, and thanks for the fish!
+

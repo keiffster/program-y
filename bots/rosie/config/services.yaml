@@ -7,10 +7,6 @@ pandora:
   file: programy.services.pandora
   class: PandoraSRAIService
 
-google:
-  file: programy.services.google
-  class: GoogleSRAIService
-
 wikipedia:
   file: programy.services.wikipedia
   class: WikipediaSRAIService

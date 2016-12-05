@@ -15,6 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import os.path
 import xml.etree.ElementTree as ET
 
 from programy.processors.processing import ProcessorLoader
@@ -30,8 +31,7 @@ from programy.mappings.properties import PropertiesCollection
 from programy.mappings.sets import SetCollection
 from programy.mappings.triples import TriplesCollection
 from programy.parser.aiml_parser import AIMLParser
-import os.path
-
+from programy.utils.services.service import ServiceFactory
 
 class Brain(object):
 
@@ -115,6 +115,7 @@ class Brain(object):
     def load(self, brain_configuration: BrainConfiguration):
         self._aiml_parser.load_aiml(brain_configuration)
         self.load_collections(brain_configuration)
+        self.load_services(brain_configuration)
 
     def load_collections(self, brain_configuration):
         if brain_configuration.denormal is not None:
@@ -194,6 +195,9 @@ class Brain(object):
             logging.info("Loaded a total of %d post processors" % (total))
         else:
             logging.warning("No configuration setting for post processors")
+
+    def load_services(self, brain_configuration):
+        ServiceFactory.preload_services(brain_configuration.services)
 
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
