@@ -13,6 +13,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
+# TODO config xml, yaml and json do not handle missing values, need a better option for default values and mandatory values
+
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 

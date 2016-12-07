@@ -100,6 +100,10 @@ class BotClient(object):
     def initiate_bot(self, configuration):
         self._brain = Brain (configuration.brain_configuration)
         self.bot = Bot(self._brain, configuration.bot_configuration)
+        self.set_environment()
+
+    def set_environment(self):
+        self.bot.brain.properties.add_property("env", "Unknown")
 
     def run(self):
         pass
@@ -116,6 +120,9 @@ class ConsoleBotClient(BotClient):
     def __init__(self):
         BotClient.__init__(self)
         self.clientid = "Console"
+
+    def set_environment(self):
+        self.bot.brain.predicates.pairs.append(["env", "Console"])
 
     def run(self):
         if self.arguments.noloop is False:

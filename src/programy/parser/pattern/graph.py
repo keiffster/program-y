@@ -22,6 +22,8 @@ from programy.parser.pattern.nodes import *
 # </pattern>
 # This fails to match
 
+# TODO better handling of <html> type tags
+
 #######################################################################################################################
 #
 class PatternGraph(object):

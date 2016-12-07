@@ -20,7 +20,6 @@ class PredicatesCollection(DoubleStringCharSplitCollection):
 
     def __init__(self):
         DoubleStringCharSplitCollection.__init__(self)
-        pass
 
     def get_split_char(self):
         return ":"

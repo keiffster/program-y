@@ -208,14 +208,30 @@ class Brain(object):
 
         try:
             topic_pattern = conversation.predicate("topic")
+            logging.info("Topic pattern = [%s]" % topic_pattern)
         except:
+            logging.info("No Topic pattern default to [*]")
             topic_pattern = "*"
 
         try:
-            that_question = conversation.nth_question(1)
+            if parent_question is not None:
+                that_question = parent_question
+            else:
+                that_question = conversation.nth_question(2)
+
             that_sentence = that_question.current_sentence()
-            that_pattern = that_sentence.text()
-        except:
+
+            # If the last response was valid, i.e not none and not empty string, then use
+            # that as the that_pattern, otherwise we default to '*' as pattern
+            if that_sentence.response is not None and that_sentence.response != '':
+                that_pattern = that_sentence.response
+                logging.info("That pattern = [%s]" % that_pattern)
+            else:
+                logging.info("That pattern, no response, default to [*]")
+                that_pattern = "*"
+
+        except Exception as e:
+            logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
         return self._aiml_parser.match_sentence(bot, clientid, sentence, parent_question, topic_pattern=topic_pattern, that_pattern=that_pattern)

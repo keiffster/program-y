@@ -14,10 +14,8 @@ class PatternsTestClient(TestClient):
 
 class PatternsAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         PatternsAIMLTests.test_client = PatternsTestClient()
-        #PatternsAIMLTests.test_client.bot.brain._aiml_parser.pattern_parser._root_node.dump("", output_func=logging.debug)
 
     def test_basic2_1(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test",  "A B")
@@ -27,33 +25,39 @@ class PatternsAIMLTests(unittest.TestCase):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "A B C")
         self.assertEqual(response, "D")
 
-    def test_basic2_3(self):
+    def test_basic2_3_1(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "D E")
         self.assertEqual(response, "")
 
+    def test_basic2_3_2(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "A D E")
         self.assertEqual(response, "F")
 
+    def test_basic2_3_3(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "A B C D E")
         self.assertEqual(response, "F")
 
+    def test_basic2_3_4(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "X D E X")
         self.assertEqual(response, "")
 
-    def test_basic2_4(self):
+    def test_basic2_4_1(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "G H")
         self.assertEqual(response, "")
 
+    def test_basic2_4_2(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "G X H")
         self.assertEqual(response, "I")
 
+    def test_basic2_4_3(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "G X X H")
         self.assertEqual(response, "I")
 
-    def test_basic2_5(self):
+    def test_basic2_5_1(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "J K")
         self.assertEqual(response, "")
 
+    #def test_basic2_5_2(self):
         response = PatternsAIMLTests.test_client.bot.ask_question("test", "J K X")
         self.assertEqual(response, "L")
 

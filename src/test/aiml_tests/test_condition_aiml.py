@@ -16,6 +16,9 @@ class ConditionAIMLTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
+        pass
+
+    def setUp(self):
         ConditionAIMLTests.test_client = BasicTestClient()
 
     def test_condition_type1_variant1(self):

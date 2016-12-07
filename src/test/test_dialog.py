@@ -5,6 +5,7 @@ from programy.bot import Bot
 from programy.brain import Brain
 from programy.config import BrainConfiguration, BotConfiguration
 
+#TODO dialog needs proper unit testing
 
 #############################################################################
 #

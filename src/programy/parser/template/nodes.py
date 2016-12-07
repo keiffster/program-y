@@ -26,6 +26,9 @@ from programy.parser.exceptions import ParserException
 from programy.utils.classes.loader import ClassLoader
 from programy.utils.services.service import ServiceFactory
 
+# TODO wrap every resolve method in try/catch and return "" if error
+# TODO rename resolve to evaluate
+
 ######################################################################################################################
 #
 class TemplateNode(object):
@@ -318,10 +321,12 @@ class TemplateGetNode(TemplateNode):
         else:
             value = bot.get_conversation(clientid).predicate(name)
             if value is None:
-                value = bot.brain.properties.property("default-get")
+                value = bot.brain.predicates.predicate(name)
                 if value is None:
-                    logging.error("No value for default-get defined, empty string returned")
-                    value = ""
+                    value = bot.brain.properties.property("default-get")
+                    if value is None:
+                        logging.error("No value for default-get defined, empty string returned")
+                        value = ""
             logging.debug("[%s] resolved to global: [%s] <= [%s]" % (self.format(), name, value))
 
         return value
@@ -376,7 +381,7 @@ class TemplateMapNode(TemplateNode):
                     logging.error("No value for default-map defined, empty string returned")
                     value = ""
 
-        logging.debug("[%s] resolved to [%s] = [%s]" % (self.format(), name, value))
+        logging.debug("MAP [%s] resolved to [%s] = [%s]" % (self.format(), name, value))
         return value
 
     def format(self):
@@ -1248,7 +1253,9 @@ class TemplateThatStarNode(TemplateIndexedNode):
 
     def resolve(self, bot, clientid):
         try:
-            sentence = bot.get_conversation(clientid).current_question().current_sentence()
+            question = bot.get_conversation(clientid).nth_question(1)
+
+            sentence = question.current_sentence()
 
             if self.index > 0:
                 if self.index <= len(sentence.thatstars):

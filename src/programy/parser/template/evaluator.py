@@ -20,6 +20,7 @@ from programy.bot import Bot
 
 class TemplateEvaluator(object):
 
+    # TODO wrap every resolve method in try/catch and return "" if error
     def evaluate(self, bot: Bot, clientid: str, template_node: TemplateNode):
         logging.debug ("Evaluating node [%s]" % template_node.format())
         template_node.output ()

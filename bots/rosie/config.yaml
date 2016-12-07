@@ -41,8 +41,6 @@ brain:
         Pandora:
             path: programy.utils.services.pandora.PandoraService
             botid: f5d922d97e345aa1
-        Google:
-            path: programy.utils.services.googleservice.GoogleService
         Wikipedia:
             path: programy.utils.services.wikipediaservice.WikipediaService
 

@@ -14,8 +14,7 @@ class BasicTestClient(TestClient):
 
 class GetAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp(self):
         GetAIMLTests.test_client = BasicTestClient()
         GetAIMLTests.test_client.bot.brain.properties.load_from_text("""
              default-get:unknown

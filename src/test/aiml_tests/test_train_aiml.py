@@ -27,6 +27,21 @@ class TrainAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
+        TrainAIMLTests.test_client.bot.brain.dump_tree()
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHAT DOES JESSICA LIKE")
+        self.assertIsNotNone(response)
+        self.assertEqual("Jessica likes to smoke cigars", response)
+
+        TrainAIMLTests.test_client.bot.brain.dump_tree()
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHAT DOES JESSICA SMOKE")
+        self.assertIsNotNone(response)
+        self.assertEqual("Jessica likes to smoke cigars", response)
+
+        TrainAIMLTests.test_client.bot.brain.dump_tree()
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHO SMOKES")
+        self.assertIsNotNone(response)
+        self.assertEqual("Jessica likes to smoke cigars", response)
+
     def test_train_pronoun(self):
         TrainAIMLTests.test_client.bot.brain.dump_tree()
         response = TrainAIMLTests.test_client.bot.ask_question("test", "MOMMY LIKES TO SMOKE CIGARS")

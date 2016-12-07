@@ -22,15 +22,15 @@ For more information see [url]
 	<category>
 		<pattern>HELLO THERE</pattern>
 		<template>
-		    <srai>HI THERE</srai>
+		    HI THERE
 		</template>
 	</category>
 
     <category>
-        <pattern>HI THERE</pattern>
-        <that>HELLO *</that>
+        <pattern>I SAID HI THERE</pattern>
+        <that>*</that>
         <template>
-            HELLO WITH <thatstar />
+            HEARD YOU SAY <thatstar />
         </template>
     </category>
 

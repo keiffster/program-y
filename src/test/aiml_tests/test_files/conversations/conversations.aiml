@@ -20,24 +20,18 @@ For more information see [url]
 <aiml>
 
 	<category>
-		<pattern>TEST PROGRAM</pattern>
+		<pattern>HELLO</pattern>
 		<template>
-			<program />
+			HELLO, WORLD
 		</template>
 	</category>
 
 	<category>
-		<pattern>TEST ID</pattern>
+		<pattern>GOODBYE</pattern>
 		<template>
-		    <id />
+			SEE YA
 		</template>
 	</category>
 
-	<category>
-		<pattern>TEST ENVIRONMENT</pattern>
-		<template>
-		    ENVIRONMET IS <get name="env" />
-		</template>
-	</category>
 
 </aiml>

@@ -22,20 +22,20 @@ For more information see [url]
 	<category>
 		<pattern>HELLO</pattern>
 		<template>
-		    <srai>HI THERE</srai>
+		    HI THERE
 		</template>
 	</category>
 
     <category>
-        <pattern>HI THERE</pattern>
+        <pattern>HELLO AGAIN</pattern>
         <template>
             HELLO WITHOUT THAT
         </template>
     </category>
 
     <category>
-        <pattern>HI THERE</pattern>
-        <that>HELLO</that>
+        <pattern>HELLO AGAIN</pattern>
+        <that>HI THERE</that>
         <template>
             HELLO WITH THAT
         </template>

@@ -27,3 +27,11 @@ class InfoAIMLTests(unittest.TestCase):
         response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ID")
         self.assertIsNotNone(response)
         self.assertEqual(response, "test")
+
+    def test_env(self):
+
+        InfoAIMLTests.test_client.bot.brain.predicates.pairs.append(["env","test"])
+
+        response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ENVIRONMENT")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "ENVIRONMET IS test")

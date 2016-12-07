@@ -14,8 +14,7 @@ class SrTestClient(TestClient):
 
 class SrAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
+    def setUp (self):
         SrAIMLTests.test_client = SrTestClient()
 
     def test_sr_response(self):
