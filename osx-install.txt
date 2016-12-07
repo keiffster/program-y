@@ -1,0 +1,15 @@
+OSX installation readme.txt
+
+1) Install python 3 from:
+https://www.python.org/downloads/
+
+2) Install libraries :
+pip3 install pyyaml
+pip3 install python-dateutil
+pip3 install requests
+
+3) Execute bots:
+sh alice2.sh 
+
+4) Download last version from 
+https://github.com/keiffster/program-y
