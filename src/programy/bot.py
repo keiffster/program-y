@@ -108,15 +108,18 @@ class Bot(object):
         else:
             parent_question = conversation.current_question()
 
+        answers = []
         for each_sentence in question._sentences:
 
             response = self.brain.ask_question(self, clientid, each_sentence, parent_question)
 
             if response is not None:
                 logging.debug("Raw Response (%s): %s"%(clientid, response))
-                each_sentence.response = self.brain.post_process_response(self, clientid, response).strip()
-                logging.debug("Processed Response (%s): %s"%(clientid, each_sentence.response))
+                each_sentence.response = response
+                answer = self.brain.post_process_response(self, clientid, response).strip()
+                answers.append(answer)
+                logging.debug("Processed Response (%s): %s"%(clientid, answer))
             else:
                 each_sentence.response = self.default_response
 
-        return question.combine_answers()
+        return ". ".join([sentence for sentence in answers if sentence is not None])

@@ -129,7 +129,7 @@ class ConsoleBotClient(BotClient):
             logging.info ("Entering conversation loop...")
             running = True
             self.display_response(self.bot.get_version_string)
-            self.display_response(self.bot.initial_question)
+            self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
             while running is True:
                 try:
                     question = self.get_question()

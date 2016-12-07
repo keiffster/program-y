@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<aiml version="2.0">
+    <category>
+        <pattern>I LIKE COFFEE</pattern>
+        <template>DO YOU TAKE CREAM OR SUGAR IN YOUR COFFEE?</template>
+    </category>
+
+    <category>
+        <pattern>YES</pattern>
+        <that>DO YOU TAKE CREAM OR SUGAR IN YOUR COFFEE?</that>
+        <template>I DO TOO.</template>
+    </category>
+
+    <category>
+        <pattern>NO</pattern>
+        <that>DO YOU TAKE CREAM OR SUGAR IN YOUR COFFEE?</that>
+        <template>REALLY? I HAVE A HARD TIME DRINKING BLACK COFFEE.</template>
+    </category>
+</aiml>
