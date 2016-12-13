@@ -19,7 +19,7 @@ import yaml
 import argparse
 import logging.config
 import os
-from programy.config import ConfigurationFactory
+from programy.config import ConfigurationFactory, ClientConfiguration
 from programy.bot import Bot
 from programy.brain import Brain
 
@@ -91,11 +91,22 @@ class BotClient(object):
         else:
             print ("Warning. No logging configuration file defined, using defaults...")
 
+    def get_client_configuration(self):
+        """
+        By overriding this class in you Configuration file, you can add new configurations
+        and stil use the dynamic loader capabilities
+        :return: Client configuration object
+        """
+        return ClientConfiguration()
+
     def load_configuration(self, arguments):
         if arguments.bot_root is None:
             arguments.bot_root = os.path.dirname(arguments.config_filename)
             print ("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
-        self.configuration = ConfigurationFactory.load_configuration_from_file(arguments.config_filename, arguments.config_format, arguments.bot_root)
+
+        self.configuration = self.get_client_configuration()
+
+        ConfigurationFactory.load_configuration_from_file(self.configuration, arguments.config_filename, arguments.config_format, arguments.bot_root)
 
     def initiate_bot(self, configuration):
         self._brain = Brain (configuration.brain_configuration)
@@ -113,50 +124,4 @@ class BotClient(object):
 
     def log_response(self, question, answer):
         pass
-
-
-class ConsoleBotClient(BotClient):
-
-    def __init__(self):
-        BotClient.__init__(self)
-        self.clientid = "Console"
-
-    def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "Console"])
-
-    def run(self):
-        if self.arguments.noloop is False:
-            logging.info ("Entering conversation loop...")
-            running = True
-            self.display_response(self.bot.get_version_string)
-            self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
-            while running is True:
-                try:
-                    question = self.get_question()
-                    response = self.bot.ask_question(self.clientid, question)
-                    if response is None:
-                        self.display_response(self.bot.default_response)
-                        self.log_unknown_response(question)
-                    else:
-                        self.display_response(response)
-                        self.log_response(question, response)
-                except KeyboardInterrupt:
-                    running = False
-                    self.display_response(self.bot.exit_response)
-                except Exception as e:
-                    logging.exception(e)
-                    logging.error ("Oops something bad happened !")
-
-    def get_question(self):
-        ask = "%s "%self.bot.prompt
-        return input(ask)
-
-    def display_response(self, response):
-        print(response)
-
-if __name__ == '__main__':
-
-    print ("Loading, please wait...")
-    client = ConsoleBotClient()
-    client.run()
 

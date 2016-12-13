@@ -2,6 +2,7 @@ import unittest
 import os
 from test.aiml_tests.client import TestClient
 from programy.config import ConfigurationFactory
+from programy.config import ClientConfiguration
 
 class TrainTestClient(TestClient):
 
@@ -9,7 +10,8 @@ class TrainTestClient(TestClient):
         TestClient.__init__(self, debug=True)
 
     def load_configuration(self, arguments):
-        self.configuration = ConfigurationFactory.load_configuration_from_file(os.path.dirname(__file__)+"/test_files/train/testconfig.yaml", "yaml")
+        self.configuration = ClientConfiguration()
+        ConfigurationFactory.load_configuration_from_file(self.configuration, os.path.dirname(__file__)+"/test_files/train/testconfig.yaml")
 
 class TrainAIMLTests(unittest.TestCase):
 

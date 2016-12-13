@@ -50,3 +50,7 @@ bot:
     default_response: Sorry, I don't have an answer for that!
     exit_response: So long, and thanks for the fish!
 
+rest:
+  host: 127.0.0.1
+  port: 5000
+  debug: false

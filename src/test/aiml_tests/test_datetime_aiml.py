@@ -41,7 +41,7 @@ class DateTimeAIMLTests(unittest.TestCase):
 
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "AGE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "I am 2 months old.")
+        self.assertRegex(response, "I am \d{1}|\d{2] months old.")
 
     def test_age_in_years(self):
 

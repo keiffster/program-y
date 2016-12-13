@@ -21,7 +21,9 @@ import xml.etree.ElementTree as ET
 
 import yaml
 import json
+import logging
 from abc import ABCMeta, abstractmethod
+
 
 class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
@@ -40,7 +42,7 @@ class BaseConfigurationData(object):
 
 class BrainFileConfiguration(object):
 
-    def __init__(self, files, extension, directories):
+    def __init__(self, files, extension=".aiml", directories=False):
         self._files = files
         self._extension = extension
         self._directories = directories
@@ -79,13 +81,15 @@ class BrainServiceConfiguration(object):
         return self._params.keys()
 
     def parameter(self, name):
-        return self._params[name]
+        if name in self._params:
+            return self._params[name]
+        else:
+            return None
 
 
 class BrainConfiguration(BaseConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "brain")
         self._supress_warnings = False
         self._allow_system_aiml = True
         self._allow_learn_aiml = True
@@ -105,58 +109,68 @@ class BrainConfiguration(BaseConfigurationData):
         self._preprocessors = None
         self._postprocessors = None
         self._services = []
+        BaseConfigurationData.__init__(self, "brain")
 
-    def get_file_option(self, config_file, option_name, section, bot_root):
+    def _get_file_option(self, config_file, option_name, section, bot_root):
         option = config_file.get_option(option_name, section)
         if option is not None:
             option = self.sub_bot_root(option, bot_root)
         return option
 
-    def load_config_section(self, config_file, bot_root):
-
-        brain = config_file.get_section(self.section_name)
-
-        self._supress_warnings = config_file.get_option("supress_warnings", brain)
-        self._allow_system_aiml = config_file.get_option("allow_system_aiml", brain)
-        self._allow_learn_aiml = config_file.get_option("allow_learn_aiml", brain)
-        self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain)
-
-        files = config_file.get_section("files", brain)
-
-        aiml = config_file.get_section("aiml", files)
-        self._aiml_files = self.get_brain_file_configuration(config_file, aiml, bot_root)
-
-        sets = config_file.get_section("sets", files)
-        self._set_files = self.get_brain_file_configuration(config_file, sets, bot_root)
-
-        maps = config_file.get_section("maps", files)
-        self._map_files = self.get_brain_file_configuration(config_file, maps, bot_root)
-
-        self._denormal          = self.get_file_option(config_file, "denormal", files, bot_root)
-        self._normal            = self.get_file_option(config_file, "normal", files, bot_root)
-        self._gender            = self.get_file_option(config_file, "gender", files, bot_root)
-        self._person            = self.get_file_option(config_file, "person", files, bot_root)
-        self._person2           = self.get_file_option(config_file, "person2", files, bot_root)
-        self._predicates        = self.get_file_option(config_file, "predicates", files, bot_root)
-        self._pronouns          = self.get_file_option(config_file, "pronouns", files, bot_root)
-        self._properties        = self.get_file_option(config_file, "properties", files, bot_root)
-        self._triples           = self.get_file_option(config_file, "triples", files, bot_root)
-        self._preprocessors     = self.get_file_option(config_file, "preprocessors", files, bot_root)
-        self._postprocessors    = self.get_file_option(config_file, "postprocessors", files, bot_root)
-
-        services = config_file.get_section("services", brain)
-        service_keys = config_file.get_child_section_keys("services", brain)
-
-        for name in service_keys:
-            service_data = config_file.get_section_data(name, services)
-            self._services.append(BrainServiceConfiguration(name, service_data))
-
-    def get_brain_file_configuration(self, config_file, section, bot_root):
+    def _get_brain_file_configuration(self, config_file, section, bot_root):
         files = config_file.get_option("files", section)
         files = self.sub_bot_root(files, bot_root)
         extension = config_file.get_option("extension", section)
         directories = config_file.get_option("directories", section)
         return BrainFileConfiguration(files, extension, directories)
+
+    def load_config_section(self, config_file, bot_root):
+
+        brain = config_file.get_section(self.section_name)
+        if brain is not None:
+            self._supress_warnings = config_file.get_option("supress_warnings", brain)
+            self._allow_system_aiml = config_file.get_option("allow_system_aiml", brain)
+            self._allow_learn_aiml = config_file.get_option("allow_learn_aiml", brain)
+            self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain)
+
+            files = config_file.get_section("files", brain)
+            if files is not None:
+                aiml = config_file.get_section("aiml", files)
+
+                self._aiml_files = self._get_brain_file_configuration(config_file, aiml, bot_root)
+
+                sets = config_file.get_section("sets", files)
+                self._set_files = self._get_brain_file_configuration(config_file, sets, bot_root)
+
+                maps = config_file.get_section("maps", files)
+                self._map_files = self._get_brain_file_configuration(config_file, maps, bot_root)
+
+                self._denormal          = self._get_file_option(config_file, "denormal", files, bot_root)
+                self._normal            = self._get_file_option(config_file, "normal", files, bot_root)
+                self._gender            = self._get_file_option(config_file, "gender", files, bot_root)
+                self._person            = self._get_file_option(config_file, "person", files, bot_root)
+                self._person2           = self._get_file_option(config_file, "person2", files, bot_root)
+                self._predicates        = self._get_file_option(config_file, "predicates", files, bot_root)
+                self._pronouns          = self._get_file_option(config_file, "pronouns", files, bot_root)
+                self._properties        = self._get_file_option(config_file, "properties", files, bot_root)
+                self._triples           = self._get_file_option(config_file, "triples", files, bot_root)
+                self._preprocessors     = self._get_file_option(config_file, "preprocessors", files, bot_root)
+                self._postprocessors    = self._get_file_option(config_file, "postprocessors", files, bot_root)
+            else:
+                logging.warning("Config section [files] missing from Brain")
+
+            services = config_file.get_section("services", brain)
+            if services is not None:
+                service_keys = config_file.get_child_section_keys("services", brain)
+
+                for name in service_keys:
+                    service_data = config_file.get_section_data(name, services)
+                    self._services.append(BrainServiceConfiguration(name, service_data))
+
+            else:
+                logging.warning("Config section [services] missing from Brain")
+        else:
+            logging.warning("Config section [%s] missing" % self.section_name)
 
     @property
     def supress_warnings(self):
@@ -234,6 +248,7 @@ class BrainConfiguration(BaseConfigurationData):
     def services(self):
         return self._services
 
+
 class BotConfiguration(BaseConfigurationData):
 
     def __init__(self):
@@ -246,11 +261,13 @@ class BotConfiguration(BaseConfigurationData):
 
     def load_config_section(self, config_file, bot_root):
         bot = config_file.get_section(self.section_name)
-
-        self._prompt = config_file.get_option("prompt", bot)
-        self._default_response = config_file.get_option("default_response", bot)
-        self._exit_response = config_file.get_option("exit_response", bot)
-        self._initial_question = config_file.get_option("initial_question", bot)
+        if bot is not None:
+            self._prompt = config_file.get_option("prompt", bot)
+            self._default_response = config_file.get_option("default_response", bot)
+            self._exit_response = config_file.get_option("exit_response", bot)
+            self._initial_question = config_file.get_option("initial_question", bot)
+        else:
+            logging.warning("Config section [%s] missing" % self.section_name)
 
     @property
     def prompt(self):
@@ -285,6 +302,40 @@ class BotConfiguration(BaseConfigurationData):
         self._initial_question = text
 
 
+class RestConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        self._host = "0.0.0.0"
+        self._port = 80
+        self._debug = False
+        self._use_api_keys = False
+        BaseConfigurationData.__init__(self, "rest")
+
+    @property
+    def host(self):
+        return self._host
+
+    @property
+    def port(self):
+        return self._port
+
+    @property
+    def debug(self):
+        return self._debug
+
+    @property
+    def use_api_keys(self):
+        return self._use_api_keys
+
+    def load_config_section(self, config_file, bot_root):
+        rest = config_file.get_section(self.section_name)
+        if rest is not None:
+            self._host = config_file.get_option("host", rest)
+            self._port = config_file.get_option("port", rest)
+            self._debug = config_file.get_bool_option("debug", rest)
+            self._use_api_keys = config_file.get_bool_option("use_api_keys", rest)
+
+
 class ClientConfiguration(object):
 
     def __init__(self):
@@ -304,19 +355,26 @@ class ClientConfiguration(object):
         self._bot_config.load_config_section(config_file, bot_root)
 
 
+class RestClientConfiguration(ClientConfiguration):
+
+    def __init__(self):
+        ClientConfiguration.__init__(self)
+        self._rest_config = RestConfiguration()
+
+    @property
+    def rest_configuration(self):
+        return self._rest_config
+
+    def load_config_data(self, config_file, bot_root):
+        super(RestClientConfiguration, self).load_config_data(config_file, bot_root)
+        self._rest_config.load_config_section(config_file, bot_root)
+
+
 class BaseConfigurationFile(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self):
-        self.client_config = self.get_client_configuration()
-
-    def get_client_configuration(self):
-        """
-        By overriding this class in you Configuration file, you can add new configurations
-        and stil use the dynamic loader capabilities
-        :return: Client configuration object
-        """
-        return ClientConfiguration()
+    def __init__(self, client_config):
+        self.client_config = client_config
 
     @abstractmethod
     def load_from_text(self, text, bot_root):
@@ -365,12 +423,12 @@ class BaseConfigurationFile(object):
 
 class YamlConfigurationFile(BaseConfigurationFile):
 
-    def __init__(self):
-        BaseConfigurationFile.__init__(self)
+    def __init__(self, client_config):
+        BaseConfigurationFile.__init__(self, client_config)
 
     def load_from_text(self, text, bot_root):
         self.yaml_data = yaml.load(text)
-        self.client_config.load_config_data(self)
+        self.client_config.load_config_data(self, bot_root)
 
     def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as yml_data_file:
@@ -379,9 +437,12 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
-            return self.yaml_data[section_name]
+            if section_name in self.yaml_data:
+                return self.yaml_data[section_name]
         else:
-            return parent_section[section_name]
+            if section_name in parent_section:
+                return parent_section[section_name]
+        return None
 
     def get_section_data(self, section_name, parent_section=None):
         return self.get_section(section_name, parent_section)
@@ -392,18 +453,44 @@ class YamlConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section[section_name].keys()
 
-    def get_option(self, option_name, section):
-        return section[option_name]
+    def get_option(self, option_name, section, missing_value=None):
+        if option_name in section:
+            return section[option_name]
+        else:
+            logging.error("Missing value for [%s] in config section [%s], return default value %s" % (option_name, section, missing_value))
+            return missing_value
+
+    def get_bool_option(self, option_name, section, missing_value=False):
+        if option_name in section:
+            value = section[option_name]
+            if isinstance(value, bool):
+                return bool(value)
+            else:
+                raise Exception("Invalid boolean config value")
+        else:
+            logging.error("Missing value for [%s] in config section [%s], return default value %s" % (option_name, section, missing_value))
+            return missing_value
+
+    def get_int_option(self, option_name, section, missing_value=0):
+        if option_name in section:
+            value = section[option_name]
+            if isinstance(value, int):
+                return int(value)
+            else:
+                raise Exception("Invalid integer config value")
+        else:
+            logging.error("Missing value for [%s] in config section [%s], return default value %d" % (option_name, section, missing_value))
+            return missing_value
 
 
 class JSONConfigurationFile(BaseConfigurationFile):
 
-    def __init__(self):
-        BaseConfigurationFile.__init__(self)
+    def __init__(self, client_config):
+        BaseConfigurationFile.__init__(self, client_config)
 
     def load_from_text(self, text, bot_root):
-        #TODO To implement
-        raise Exception("Not implemented yet")
+        self.json_data = json.loads(text)
+        self.client_config.load_config_data(self, bot_root)
 
     def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as json_data_file:
@@ -431,12 +518,13 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
 class XMLConfigurationFile(BaseConfigurationFile):
 
-    def __init__(self):
-        BaseConfigurationFile.__init__(self)
+    def __init__(self, client_config):
+        BaseConfigurationFile.__init__(self, client_config)
 
     def load_from_text(self, text, bot_root):
-        # TODO To implement
-        raise Exception("Not implemented yet")
+        tree = ET.fromstring(text)
+        self.xml_data = tree
+        self.client_config.load_config_data(self, bot_root)
 
     def load_from_file(self, filename, bot_root):
         with open(filename, 'r+') as xml_data_file:
@@ -478,14 +566,14 @@ class XMLConfigurationFile(BaseConfigurationFile):
 class ConfigurationFactory(object):
 
     @classmethod
-    def load_configuration_from_file(cls, filename, format=None, bot_root="."):
+    def load_configuration_from_file(cls, client_config, filename, format=None, bot_root="."):
 
         if format is None or len(format) == 0:
             format = ConfigurationFactory.guess_format_from_filename(filename)
 
-        config_file = ConfigurationFactory.get_config_by_name(format)
+        config_file = ConfigurationFactory.get_config_by_name(client_config, format)
         config_file.load_from_file(filename, bot_root)
-        return config_file.client_config
+        return config_file
 
     @classmethod
     def guess_format_from_filename(cls, filename):
@@ -497,14 +585,14 @@ class ConfigurationFactory(object):
         return format
 
     @classmethod
-    def get_config_by_name(cls, format):
+    def get_config_by_name(cls, client_config, format):
         format = format.lower()
 
         if format == 'yaml':
-            return YamlConfigurationFile()
+            return YamlConfigurationFile(client_config)
         elif format == 'json':
-            return JSONConfigurationFile()
+            return JSONConfigurationFile(client_config)
         elif format == 'xml':
-            return XMLConfigurationFile()
+            return XMLConfigurationFile(client_config)
         else:
             raise Exception("Unsupported configuration format:", format)
