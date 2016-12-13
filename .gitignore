@@ -94,3 +94,5 @@ ENV/
 src/.DS_Store
 .idea
 
+# Pylint output
+pylint.log
