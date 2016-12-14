@@ -32,6 +32,7 @@ from programy.utils.services.service import ServiceFactory
 ######################################################################################################################
 #
 class TemplateNode(object):
+
     def __init__(self):
         self._children = []
 
@@ -49,8 +50,8 @@ class TemplateNode(object):
         self.output_child(self, tabs, output)
 
     def output_child(self, node, tabs, output=logging.debug):
-        for child in node._children:
-            output("%s{%s}" % (tabs, child.format()))
+        for child in node.children:
+            output("%s{%s}" % (tabs, child.to_string()))
             self.output_child(child, tabs + "\t")
 
     def resolve_children_to_string(self, bot, clientid):
@@ -58,10 +59,10 @@ class TemplateNode(object):
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[NODE]"
 
     def xml_tree(self, bot, clientid):
@@ -70,6 +71,9 @@ class TemplateNode(object):
         param[0] += "</template>"
 
         return ET.fromstring(param[0])
+
+    def to_xml(self, bot, clientid):
+        return ""
 
     def to_xml_children(self, param, bot, clientid):
         first = True
@@ -83,15 +87,24 @@ class TemplateNode(object):
 ######################################################################################################################
 #
 class TemplateWordNode(TemplateNode):
+
     def __init__(self, word):
         TemplateNode.__init__(self)
-        self.word = word
+        self._word = word
+
+    @property
+    def word(self):
+        return self._word
+
+    @word.setter
+    def word(self, word):
+        self._word = word
 
     def resolve(self, bot, clientid):
-        logging.debug("[%s] resolved to [%s]" % (self.format(), self.word))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), self.word)
         return self.word
 
-    def format(self):
+    def to_string(self):
         return "[WORD]" + self.word
 
     def to_xml(self, bot, clientid):
@@ -100,20 +113,21 @@ class TemplateWordNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateRandomNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         selection = randint(0, len(self._children))
         resolved = self._children[selection - 1].resolve(bot, clientid)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[RANDOM] %d" % (len(self._children))
 
     def to_xml(self, bot, clientid):
-        xml =  "<random>"
+        xml = "<random>"
         for child in self.children:
             xml += "<li>"
             xml += child.to_xml(bot, clientid)
@@ -124,20 +138,21 @@ class TemplateRandomNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateSRAINode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         srai_text = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.ask_question(clientid, srai_text, srai=True)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[SRAI]"
 
     def to_xml(self, bot, clientid):
-        xml =  "<srai>"
+        xml = "<srai>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</srai>"
@@ -146,6 +161,7 @@ class TemplateSRAINode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateSrNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -157,19 +173,20 @@ class TemplateSrNode(TemplateNode):
         else:
             logging.error("Sr node has no stars available")
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "SR"
 
     def to_xml(self, bot, clientid):
-        xml =  "<sr />"
+        xml = "<sr />"
         return xml
 
 ######################################################################################################################
 #
 class TemplateAttribNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -180,25 +197,34 @@ class TemplateAttribNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateIndexedNode(TemplateAttribNode):
+
     def __init__(self, position=1, index=1):
         TemplateAttribNode.__init__(self)
         self._position = position
         self._index = index
 
     @property
+    def position(self):
+        return self._position
+
+    @position.setter
+    def position(self, position):
+        self._position = position
+
+    @property
     def index(self):
         return self._index
 
-    @property
-    def position(self):
-        return self._position
+    @index.setter
+    def index(self, index):
+        self._index = index
 
     def set_attrib(self, attrib_name, attrib_value):
 
         if attrib_name != 'index':
             raise ParserException("Invalid attribute name [%s] for this node" % (attrib_name))
 
-        if type(attrib_value) is int:
+        if isinstance(attrib_value, int):
             int_val = attrib_value
             self._index = int_val
         else:
@@ -206,16 +232,16 @@ class TemplateIndexedNode(TemplateAttribNode):
             if len(splits) == 1:
                 try:
                     self._index = int(splits[0])
-                except Exception as e:
-                    logging.exception(e)
-                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'" % (attrib_value, attrib_name))
+                except Exception as excep:
+                    logging.exception(excep)
+                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'", attrib_value, attrib_name)
             elif len(splits) == 2:
                 try:
                     self._position = int(splits[0])
                     self._index = int(splits[1])
-                except Exception as e:
-                    logging.exception(e)
-                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'" % (attrib_value, attrib_name))
+                except Exception as excep:
+                    logging.exception(excep)
+                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'", attrib_value, attrib_name)
 
         if self._index == 0:
             raise ParserException("Index values are 1 based, cannot be 0")
@@ -226,6 +252,7 @@ class TemplateIndexedNode(TemplateAttribNode):
 ######################################################################################################################
 #
 class TemplateStarNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -235,16 +262,16 @@ class TemplateStarNode(TemplateIndexedNode):
         if self.index <= len(sentence.stars):
             resolved = sentence.stars[self.index -1]
         else:
-            logging.error("Star index not in range [%d] -> [%d]" % (self.index , len(sentence.stars)))
+            logging.error("Star index not in range [%d] -> [%d]", self.index, len(sentence.stars))
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "STAR Index=%s" % self.index
 
     def to_xml(self, bot, clientid):
-        xml =  "<star"
+        xml = "<star"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -256,11 +283,28 @@ class TemplateStarNode(TemplateIndexedNode):
 ######################################################################################################################
 #
 class TemplateSetNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
-        self.name = None
-        self.local = True
+        self._name = None
+        self._local = True
 
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+        
+    @property
+    def local(self):
+        return self._local
+
+    @local.setter
+    def local(self, local):
+        self._local = local
+        
     def resolve_children(self, bot, clientid):
         if len(self._children) > 0:
             return " ".join([child.resolve(bot, clientid) for child in self._children])
@@ -272,23 +316,23 @@ class TemplateSetNode(TemplateNode):
         value = self.resolve_children(bot, clientid)
 
         if self.local is True:
-            logging.debug("[%s] resolved to local: [%s] => [%s]" % (self.format(), name, value))
+            logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
             bot.get_conversation(clientid).current_question().set_predicate(name, value)
 
         else:
             if bot.brain.properties.has_property(name):
-                logging.error("Global property already exists for name [%s], ignoring set!" % name)
+                logging.error("Global property already exists for name [%s], ignoring set!", name)
             else:
-                logging.debug("[%s] resolved to global: [%s] => [%s]" % (self.format(), name, value))
+                logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
                 bot.get_conversation(clientid).set_predicate(name, value)
 
         return value
 
-    def format(self):
-        return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.format())
+    def to_string(self):
+        return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())
 
     def to_xml(self, bot, clientid):
-        xml =  "<set"
+        xml = "<set"
         if self.local:
             xml += ' var="%s"' % self.name.resolve(None, None)
         else:
@@ -302,22 +346,39 @@ class TemplateSetNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateGetNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
-        self.name = None
-        self.local = False
+        self._name = None
+        self._local = False
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @property
+    def local(self):
+        return self._local
+
+    @local.setter
+    def local(self, local):
+        self._local = local
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
         if self.local is True:
             value = bot.get_conversation(clientid).current_question().predicate(name)
             if value is None:
-                logging.warning("No local var for %s, default-get used" % (name))
+                logging.warning("No local var for %s, default-get used", name)
                 value = bot.brain.properties.property("default-get")
                 if value is None:
                     logging.error("No value for default-get defined, empty string returned")
                     value = ""
-            logging.debug("[%s] resolved to global: [%s] <= [%s]" % (self.format(), name, value))
+            logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
         else:
             value = bot.get_conversation(clientid).predicate(name)
             if value is None:
@@ -327,18 +388,18 @@ class TemplateGetNode(TemplateNode):
                     if value is None:
                         logging.error("No value for default-get defined, empty string returned")
                         value = ""
-            logging.debug("[%s] resolved to global: [%s] <= [%s]" % (self.format(), name, value))
+            logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
 
         return value
 
-    def format(self):
-        return "[GET [%s] - %s]" % ("Local" if self.local else "Global", self.name.format())
+    def to_string(self):
+        return "[GET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())
 
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)
 
     def to_xml(self, bot, clientid):
-        xml =  "<get"
+        xml = "<get"
         if self.local:
             xml += ' var="%s"' % self.name.resolve(bot, clientid)
         else:
@@ -350,9 +411,18 @@ class TemplateGetNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateMapNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
-        self.name = None
+        self._name = None
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
 
     def resolve_children(self, bot, clientid):
         if len(self._children) > 0:
@@ -362,16 +432,16 @@ class TemplateMapNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
-        map = bot.brain.maps.map(name)
-        if map is None:
+        the_map = bot.brain.maps.map(name)
+        if the_map is None:
             value = bot.brain.properties.property("default-map")
             if value is None:
                 logging.error("No value for default-map defined, empty string returned")
                 value = ""
         else:
             var = self.resolve_children(bot, clientid)
-            if var in map:
-                value = map[var]
+            if var in the_map:
+                value = the_map[var]
                 if value is None:
                     logging.error("No value for default-map defined, empty string returned")
                     value = ""
@@ -381,17 +451,17 @@ class TemplateMapNode(TemplateNode):
                     logging.error("No value for default-map defined, empty string returned")
                     value = ""
 
-        logging.debug("MAP [%s] resolved to [%s] = [%s]" % (self.format(), name, value))
+        logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
-    def format(self):
-        return "[MAP (%s)]" % (self.name.format())
+    def to_string(self):
+        return "[MAP (%s)]" % (self.name.to_string())
 
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output=logging.debug)
 
     def to_xml(self, bot, clientid):
-        xml =  "<map "
+        xml = "<map "
         xml += ' name="%s"' % self.name.resolve(bot, clientid)
         xml += ">"
         for child in self.children:
@@ -403,9 +473,18 @@ class TemplateMapNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateBotNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
-        self.name = None
+        self._name = None
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
@@ -415,17 +494,17 @@ class TemplateBotNode(TemplateNode):
             if value is None:
                 value = ""
 
-        logging.debug("[%s] resolved to [%s] = [%s]" % (self.format(), name, value))
+        logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
-    def format(self):
-        return "[BOT (%s)]" % (self.name.format())
+    def to_string(self):
+        return "[BOT (%s)]" % (self.name.to_string())
 
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)
 
     def to_xml(self, bot, clientid):
-        xml =  "<bot "
+        xml = "<bot "
         xml += ' name="%s"' % self.name.resolve(bot, clientid)
         xml += " />"
         return xml
@@ -434,27 +513,58 @@ class TemplateBotNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateConditionListItemNode(TemplateNode):
+
     def __init__(self, name=None, value=None, local=False, loop=False):
         TemplateNode.__init__(self)
-        self.name = name
-        self.value = value
-        self.local = local
-        self.loop = loop
+        self._name = name
+        self._value = value
+        self._local = local
+        self._loop = loop
+
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        self._value = value
+
+    @property
+    def local(self):
+        return self._local
+
+    @local.setter
+    def local(self, local):
+        self._local = local
+
+    @property
+    def loop(self):
+        return self._loop
+
+    @loop.setter
+    def loop(self, loop):
+        self._loop = loop
 
     def is_default(self):
-        if self.value is None:
-            return True
-        else:
-            return False
+        return bool(self.value is None)
 
     def resolve(self, bot, clientid):
         pass
 
-    def format(self):
+    def to_string(self):
         return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value)
 
     def to_xml(self, bot, clientid):
-        xml =  '<li'
+        xml = '<li'
         if self.name is not None:
             if self.local is True:
                 xml += ' var="%s"' % self.name
@@ -470,7 +580,9 @@ class TemplateConditionListItemNode(TemplateNode):
         xml += '</li>'
         return xml
 
+
 class TemplateConditionNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -490,11 +602,36 @@ class TemplateConditionNode(TemplateNode):
 
 
 class TemplateType1ConditionNode(TemplateConditionNode):
+
     def __init__(self, name, value, local=False):
         TemplateConditionNode.__init__(self)
-        self.name = name
-        self.value = value
-        self.local = local
+        self._name = name
+        self._value = value
+        self._local = local
+
+    @property
+    def name(self):
+        return self._name
+
+    @name.setter
+    def name(self, name):
+        self._name = name
+
+    @property
+    def value(self):
+        return self._value
+
+    @value.setter
+    def value(self, value):
+        self._value = value
+
+    @property
+    def local(self):
+        return self._local
+
+    @local.setter
+    def local(self, local):
+        self._local = local
 
     def resolve(self, bot, clientid):
         value = self._get_predicate_value(bot, clientid, self.name, self.local)
@@ -503,14 +640,14 @@ class TemplateType1ConditionNode(TemplateConditionNode):
         else:
             resolved = ""
 
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[CONDITION1(%s=%s)]" % (self.name, self.value)
 
     def to_xml(self, bot, clientid):
-        xml =  "<condition"
+        xml = "<condition"
         if self.local is True:
             xml += ' var="%s"' % self.name
         else:
@@ -524,6 +661,7 @@ class TemplateType1ConditionNode(TemplateConditionNode):
 
 
 class TemplateConditionNodeWithChildren(TemplateConditionNode):
+
     def __init__(self):
         TemplateConditionNode.__init__(self)
 
@@ -535,6 +673,7 @@ class TemplateConditionNodeWithChildren(TemplateConditionNode):
 
 
 class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
+
     def __init__(self, name, local=False):
         TemplateConditionNodeWithChildren.__init__(self)
         self.name = name
@@ -547,8 +686,8 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
         for condition in self.children:
             if condition.is_default() is False:
                 if value == condition.value:
-                    resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition._children])
-                    logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+                    resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                    logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
                     if condition.loop is True:
                         resolved = resolved.strip() + " " + self.resolve(bot, clientid)
@@ -557,21 +696,21 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
 
         default = self.get_default()
         if default is not None:
-            resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default._children])
+            resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
 
             if default.loop is True:
                 resolved = resolved.strip() + " " + self.resolve(bot, clientid)
         else:
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[CONDITION2(%s)]" % self.name
 
     def to_xml(self, bot, clientid):
-        xml =  "<condition"
+        xml = "<condition"
         if self.local is True:
             xml += ' var="%s"' % self.name
         else:
@@ -584,6 +723,7 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
 
 
 class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
+
     def __init__(self):
         TemplateConditionNodeWithChildren.__init__(self)
 
@@ -591,8 +731,8 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
         for condition in self.children:
             value = self._get_predicate_value(bot, clientid, condition.name, condition.local)
             if value == condition.value:
-                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition._children])
-                logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
                 if condition.loop is True:
                     resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()
@@ -601,22 +741,22 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
 
         default = self.get_default()
         if default is not None:
-            resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default._children])
+            resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
 
             if default.loop is True:
                 resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()
 
         else:
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "[CONDITION3()]"
 
     def to_xml(self, bot, clientid):
-        xml =  "<condition>"
+        xml = "<condition>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</condition>"
@@ -627,15 +767,16 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
 ######################################################################################################################
 #
 class TemplateThinkNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return ""
 
-    def format(self):
+    def to_string(self):
         return "THINK"
 
     def to_xml(self, bot, clientid):
@@ -649,16 +790,17 @@ class TemplateThinkNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateLowercaseNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = resolved.lower()
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "LOWERCASE"
 
     def to_xml(self, bot, clientid):
@@ -672,16 +814,17 @@ class TemplateLowercaseNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateUppercaseNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = resolved.upper()
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "UPPERCASE"
 
     def to_xml(self, bot, clientid):
@@ -695,6 +838,7 @@ class TemplateUppercaseNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateFormalNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -702,7 +846,7 @@ class TemplateFormalNode(TemplateNode):
         result = " ".join([child.resolve(bot, clientid) for child in self._children])
         return result.title()
 
-    def format(self):
+    def to_string(self):
         return "FORMAL"
 
     def to_xml(self, bot, clientid):
@@ -716,6 +860,7 @@ class TemplateFormalNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateSentenceNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -724,10 +869,10 @@ class TemplateSentenceNode(TemplateNode):
         first = result[:1]
         rest = result[1:]
         resolved = first.upper() + rest.lower()
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "SENTENCE"
 
     def to_xml(self, bot, clientid):
@@ -741,6 +886,7 @@ class TemplateSentenceNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateExplodeNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -748,14 +894,14 @@ class TemplateExplodeNode(TemplateNode):
         result = " ".join([child.resolve(bot, clientid) for child in self._children])
         letters = [ch for ch in result if ch != ' ']
         resolved = " ".join(letters)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "EXPLODE"
 
     def to_xml(self, bot, clientid):
-        xml =  "<explode>"
+        xml = "<explode>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</explode>"
@@ -765,6 +911,7 @@ class TemplateExplodeNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateImplodeNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -772,14 +919,14 @@ class TemplateImplodeNode(TemplateNode):
         result = " ".join([child.resolve(bot, clientid) for child in self._children])
         letters = [ch for ch in result if ch != ' ']
         resolved = "".join(letters)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "IMPLODE"
 
     def to_xml(self, bot, clientid):
-        xml =  "<implode>"
+        xml = "<implode>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</implode>"
@@ -789,24 +936,26 @@ class TemplateImplodeNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateIdNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        logging.debug("[%s] resolved to [%s]" % (self.format(), clientid))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
         return clientid
 
-    def format(self):
+    def to_string(self):
         return "ID"
 
     def to_xml(self, bot, clientid):
-        xml =  "<id />"
+        xml = "<id />"
         return xml
 
 
 ######################################################################################################################
 #
 class TemplateVocabularyNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -814,14 +963,14 @@ class TemplateVocabularyNode(TemplateNode):
         set_words = bot.brain.sets.count_words_in_sets()
         pattern_words = bot.brain.aiml_parser.pattern_parser.count_words_in_patterns()
         resolved = "%d" % (set_words + pattern_words)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "VOCABULARY"
 
     def to_xml(self, bot, clientid):
-        xml =  "<vocabulary>"
+        xml = "<vocabulary>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</vocabulary>"
@@ -831,6 +980,7 @@ class TemplateVocabularyNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateProgramNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
@@ -848,55 +998,21 @@ class TemplateProgramNode(TemplateNode):
             logging.error("Version property missing")
 
         resolved = "%s %s" % (fullname, version)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "PROGRAM"
 
     def to_xml(self, bot, clientid):
-        xml =  "<program />"
+        xml = "<program />"
         return xml
 
 
-######################################################################################################################
+# #####################################################################################################################
 #
-"""
-    Code	Meaning	Example
-    %a	    Weekday as locale’s abbreviated name.	Mon
-    %A	    Weekday as locale’s full name.	Monday
-    %w	    Weekday as a decimal number, where 0 is Sunday and 6 is Saturday.	1
-    %d	    Day of the month as a zero-padded decimal number.	30
-    %-d	    Day of the month as a decimal number. (Platform specific)	30
-    %b	    Month as locale’s abbreviated name.	Sep
-    %B	    Month as locale’s full name.	September
-    %m	    Month as a zero-padded decimal number.	09
-    %-m	    Month as a decimal number. (Platform specific)	9
-    %y	    Year without century as a zero-padded decimal number.	13
-    %Y	    Year with century as a decimal number.	2013
-    %H	    Hour (24-hour clock) as a zero-padded decimal number.	07
-    %-H	    Hour (24-hour clock) as a decimal number. (Platform specific)	7
-    %I	    Hour (12-hour clock) as a zero-padded decimal number.	07
-    %-I	    Hour (12-hour clock) as a decimal number. (Platform specific)	7
-    %p	    Locale’s equivalent of either AM or PM.	AM
-    %M	    Minute as a zero-padded decimal number.	06
-    %-M	    Minute as a decimal number. (Platform specific)	6
-    %S	    Second as a zero-padded decimal number.	05
-    %-S	    Second as a decimal number. (Platform specific)	5
-    %f	    Microsecond as a decimal number, zero-padded on the left.	000000
-    %z	    UTC offset in the form +HHMM or -HHMM (empty string if the the object is naive).
-    %Z	    Time zone name (empty string if the object is naive).
-    %j	    Day of the year as a zero-padded decimal number.	273
-    %-j	    Day of the year as a decimal number. (Platform specific)	273
-    %U	    Week number of the year (Sunday as the first day of the week) as a zero padded decimal number.
-    %W	    Week number of the year (Monday as the first day of the week) as a decimal number.
-    %c	    Locale’s appropriate date and time representation.	Mon Sep 30 07:06:05 2013
-    %x	    Locale’s appropriate date representation.	09/30/13
-    %X	    Locale’s appropriate time representation.	07:06:05
-    %%	    A literal '%' character.	%
-"""
-
 class TemplateDateNode(TemplateAttribNode):
+
     def __init__(self, date_format=None):
         TemplateAttribNode.__init__(self)
         if date_format is None:
@@ -904,13 +1020,21 @@ class TemplateDateNode(TemplateAttribNode):
         else:
             self._format = date_format
 
+    @property
+    def format(self):
+        return self._format
+
+    @format.setter
+    def format(self, format):
+        self._format = format
+
     def resolve(self, bot, clientid):
         time_now = datetime.now()
         resolved = time_now.strftime(self._format)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "DATE format=%s" % (self._format)
 
     def set_attrib(self, attrib_name, attrib_value):
@@ -919,7 +1043,7 @@ class TemplateDateNode(TemplateAttribNode):
         self._format = attrib_value
 
     def to_xml(self, bot, clientid):
-        xml =  '<date format="%s" >' % self._format
+        xml = '<date format="%s" >' % self._format
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</date>"
@@ -929,25 +1053,60 @@ class TemplateDateNode(TemplateAttribNode):
 ######################################################################################################################
 #
 class TemplateIntervalNode(TemplateNode):
+
     def __init__(self, date_format="%c", style="days"):
         TemplateNode.__init__(self)
-        self._format = date_format
-        self._style = style
-        self._from = None
-        self._to = None
+        self._interval_from = None
+        self._interval_to = None
+        if isinstance(date_format, str):
+            self._format = TemplateWordNode(date_format)
+        else:
+            self._format = date_format
         if isinstance(style, str):
             self._style = TemplateWordNode(style)
         else:
             self._style = style
 
+    @property
+    def format(self):
+        return self._format
+
+    @format.setter
+    def format(self, format):
+        self._format = format
+
+    @property
+    def interval_from(self):
+        return self._interval_from
+
+    @interval_from.setter
+    def interval_from(self, interval_from):
+        self._interval_from = interval_from
+
+    @property
+    def interval_to(self):
+        return self._interval_to
+
+    @interval_to.setter
+    def interval_to(self, interval_to):
+        self._interval_to = interval_to
+
+    @property
+    def style(self):
+        return self._style
+
+    @style.setter
+    def style(self, style):
+        self._style = style
+
     def resolve(self, bot, clientid):
         try:
             format_str = self._format.resolve(bot, clientid)
 
-            from_str = self._from.resolve(bot, clientid)
+            from_str = self.interval_from.resolve(bot, clientid)
             from_time = datetime.strptime(from_str, format_str)
 
-            to_str = self._to.resolve(bot, clientid)
+            to_str = self.interval_to.resolve(bot, clientid)
             to_time = datetime.strptime(to_str, format_str)
 
             style = self._style.resolve(bot, clientid)
@@ -976,36 +1135,35 @@ class TemplateIntervalNode(TemplateNode):
                            (difference.years, difference.months, difference.days)
             elif style == "hms":
                 resolved = "%d hours, %d minutes, %d seconds" % \
-                           (  difference.hours, difference.minutes, difference.seconds)
+                           (difference.hours, difference.minutes, difference.seconds)
             elif style == "ymdhms":
                 resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
                            (difference.years, difference.months, difference.days,
                             difference.hours, difference.minutes, difference.seconds)
             else:
-                logging.error("Unknown interval style [%s]" % (style))
+                logging.error("Unknown interval style [%s]", style)
                 resolved = ""
 
-            logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+            logging.debug("[INTERVAL] resolved to [%s]", resolved)
             return resolved
 
-        except Exception as e:
-            logging.exception(e)
+        except Exception as excep:
+            logging.exception(excep)
             return ""
 
-    def format(self):
-        return "[INTERVAL (format=%s, style=%s, from=%s, to=%s)]" % (
-        self._format, self._style, self._from, self._to)
+    def to_string(self):
+        return "[INTERVAL]"
 
     def to_xml(self, bot, clientid):
-        xml =  '<interval'
+        xml = '<interval'
         xml += ' format="%s"' % self._format.to_xml(bot, clientid)
         xml += ' style="%s"' % self._style.to_xml(bot, clientid)
         xml += '>'
         xml += '<from>'
-        xml += self._from.to_xml(bot, clientid)
+        xml += self._interval_from.to_xml(bot, clientid)
         xml += '</from>'
         xml += '<to>'
-        xml += self._to.to_xml(bot, clientid)
+        xml += self._interval_to.to_xml(bot, clientid)
         xml += '</to>'
         xml += '</interval>'
         return xml
@@ -1014,37 +1172,46 @@ class TemplateIntervalNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateSystemNode(TemplateAttribNode):
+
     def __init__(self):
         TemplateAttribNode.__init__(self)
         self._timeout = 0
 
+    @property
+    def timeout(self):
+        return self._timeout
+
+    @timeout.setter
+    def timeout(self, timeout):
+        self._timeout = timeout
+
     def resolve(self, bot, clientid):
-        if bot.brain._configuration.allow_system_aiml is True:
+        if bot.brain.configuration.allow_system_aiml is True:
             command = " ".join([child.resolve(bot, clientid) for child in self._children])
-            p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result = []
-            for line in p.stdout.readlines():
+            for line in process.stdout.readlines():
                 byte_string = line.decode("utf-8")
                 result.append(byte_string.strip())
-            p.wait()
+            process.wait()
             resolved = " ".join(result)
         else:
             logging.warning("System command node disabled in config")
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "SYSTEM timeout=%s" % (self._timeout)
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':
-            raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
+            raise ParserException("Invalid attribute name %s for this node", attrib_name)
         logging.warning("System node timeout attrib currently ignored")
         self._timeout = attrib_value
 
     def to_xml(self, bot, clientid):
-        xml =  "<system"
+        xml = "<system"
         if self._timeout != 0:
             xml += ' timeout="%d"' % self._timeout
         xml += ">"
@@ -1057,21 +1224,21 @@ class TemplateSystemNode(TemplateAttribNode):
 ######################################################################################################################
 #
 class TemplateSizeNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         resolved = str(bot.brain.aiml_parser.num_categories)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "SIZE"
 
     def to_xml(self, bot, clientid):
-        xml =  "<size />"
+        xml = "<size />"
         return xml
-
 
 
 ######################################################################################################################
@@ -1079,6 +1246,7 @@ class TemplateSizeNode(TemplateNode):
 # <input index=”n”/> is replaced with the value of the nth previous sentence input to the bot.
 #
 class TemplateInputNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1086,14 +1254,14 @@ class TemplateInputNode(TemplateIndexedNode):
         conversation = bot.get_conversation(clientid)
         sentence = conversation.nth_sentence(self.index)
         resolved = sentence
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "INPUT Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<input"
+        xml = "<input"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -1108,6 +1276,7 @@ class TemplateInputNode(TemplateIndexedNode):
 # <request index=”n”/> is replaced with the value of the nth previous multi-sentence input to the bot.
 #
 class TemplateRequestNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1118,17 +1287,17 @@ class TemplateRequestNode(TemplateIndexedNode):
             question = conversation.nth_question(nth_question)
             sentences = question.combine_sentences()
             resolved = sentences
-        except Exception as ex:
-            logging.exception(ex)
+        except Exception as excep:
+            logging.exception(excep)
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "REQUEST Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<request"
+        xml = "<request"
         if self._position > 1:
             xml += " position='%d'" % self._position
         if self._index > 1:
@@ -1143,6 +1312,7 @@ class TemplateRequestNode(TemplateIndexedNode):
 # <response index=”n”/> is replaced with the value of the nth previous multi-sentence bot response..
 #
 class TemplateResponseNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1153,17 +1323,17 @@ class TemplateResponseNode(TemplateIndexedNode):
             question = conversation.nth_question(nth_question)
             responses = question.combine_answers()
             resolved = responses
-        except Exception as ex:
-            logging.exception(ex)
+        except Exception as excep:
+            logging.exception(excep)
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "RESPONSE Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<response"
+        xml = "<response"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -1180,6 +1350,7 @@ class TemplateResponseNode(TemplateIndexedNode):
 # <that index="m,n" />
 #
 class TemplateThatNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1190,17 +1361,17 @@ class TemplateThatNode(TemplateIndexedNode):
             question = conversation.nth_question(nth_question)
             responses = question.combine_answers()
             resolved = responses
-        except Exception as ex:
-            logging.exception(ex)
+        except Exception as excep:
+            logging.exception(excep)
             resolved = ""
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "THAT Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<that"
+        xml = "<that"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -1213,6 +1384,7 @@ class TemplateThatNode(TemplateIndexedNode):
 ######################################################################################################################
 #
 class TemplateTopicStarNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1224,18 +1396,18 @@ class TemplateTopicStarNode(TemplateIndexedNode):
                 if self.index <= len(sentence.topicstars):
                     return sentence.topicstars[self.index - 1]
             else:
-                logging.error("Topic Star index not in range [%d] -> [%d]" % (self.index, len(sentence.topicstars)))
+                logging.error("Topic Star index not in range [%d] -> [%d]", self.index, len(sentence.topicstars))
 
-        except Exception as e:
-            logging.error("Topic Star index is not an integer value [%d]" % self.index)
+        except Exception:
+            logging.error("Topic Star index is not an integer value [%d]", self.index)
 
         return ""
 
-    def format(self):
+    def to_string(self):
         return "TOPICSTAR Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<topicstar"
+        xml = "<topicstar"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -1248,6 +1420,7 @@ class TemplateTopicStarNode(TemplateIndexedNode):
 ######################################################################################################################
 #
 class TemplateThatStarNode(TemplateIndexedNode):
+
     def __init__(self, position=1, index=1):
         TemplateIndexedNode.__init__(self, position, index)
 
@@ -1261,18 +1434,18 @@ class TemplateThatStarNode(TemplateIndexedNode):
                 if self.index <= len(sentence.thatstars):
                     return sentence.thatstars[self.index - 1]
             else:
-                logging.error("That Star index not in range [%d] -> [%d]" % (self.index, len(sentence.thatstars)))
+                logging.error("That Star index not in range [%d] -> [%d]", self.index, len(sentence.thatstars))
 
-        except Exception as e:
-            logging.error("That Star index is not an integer value [%d]" % self.index)
+        except Exception:
+            logging.error("That Star index is not an integer value [%d]", self.index)
 
         return ""
 
-    def format(self):
+    def to_string(self):
         return "THATSTAR Index=%s" % (self.index)
 
     def to_xml(self, bot, clientid):
-        xml =  "<thatstar"
+        xml = "<thatstar"
         if self._position > 1:
             xml += ' position="%d"' % self._position
         if self._index > 1:
@@ -1285,20 +1458,21 @@ class TemplateThatStarNode(TemplateIndexedNode):
 ######################################################################################################################
 #
 class TemplatePersonNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         string = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.brain.persons.personalise_string(string)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "PERSON"
 
     def to_xml(self, bot, clientid):
-        xml =  "<person>"
+        xml = "<person>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</person>"
@@ -1308,20 +1482,21 @@ class TemplatePersonNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplatePerson2Node(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         string = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.brain.person2s.personalise_string(string)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "PERSON2"
 
     def to_xml(self, bot, clientid):
-        xml =  "<person2>"
+        xml = "<person2>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</person2>"
@@ -1331,20 +1506,21 @@ class TemplatePerson2Node(TemplateNode):
 ######################################################################################################################
 #
 class TemplateGenderNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         string = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.brain.genders.genderise_string(string)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "GENDER"
 
     def to_xml(self, bot, clientid):
-        xml =  "<gender>"
+        xml = "<gender>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</gender>"
@@ -1354,20 +1530,21 @@ class TemplateGenderNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateNormalizeNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         string = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.brain.normals.normalise_string(string)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "NORMALIZE"
 
     def to_xml(self, bot, clientid):
-        xml =  "<normalize>"
+        xml = "<normalize>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</normalize>"
@@ -1377,20 +1554,21 @@ class TemplateNormalizeNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateDenormalizeNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         string = " ".join([child.resolve(bot, clientid) for child in self._children])
         resolved = bot.brain.denormals.denormalise_string(string)
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "DENORMALIZE"
 
     def to_xml(self, bot, clientid):
-        xml =  "<denormalize>"
+        xml = "<denormalize>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</denormalize>"
@@ -1400,19 +1578,20 @@ class TemplateDenormalizeNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateEvalNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def format(self):
+    def to_string(self):
         return "EVAL"
 
     def to_xml(self, bot, clientid):
-        xml =  "<eval>"
+        xml = "<eval>"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</eval>"
@@ -1422,6 +1601,7 @@ class TemplateEvalNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateLearnNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
         self._pattern = None
@@ -1429,12 +1609,44 @@ class TemplateLearnNode(TemplateNode):
         self._that = None
         self._template = None
 
+    @property
+    def pattern(self):
+        return self._pattern
+
+    @pattern.setter
+    def pattern(self, pattern):
+        self._pattern = pattern
+
+    @property
+    def topic(self):
+        return self._topic
+
+    @topic.setter
+    def topic(self, topic):
+        self._topic = topic
+
+    @property
+    def that(self):
+        return self._that
+
+    @that.setter
+    def that(self, that):
+        self._that = that
+
+    @property
+    def template(self):
+        return self._template
+
+    @template.setter
+    def template(self, template):
+        self._template = template
+
     def evaluate_eval_nodes(self, bot, clientid, template):
         count = 0
         for child in template.children:
             if isinstance(child, TemplateEvalNode):
                 new_word_node = TemplateWordNode(child.resolve(bot, clientid))
-                template._children[count] = new_word_node
+                template.children[count] = new_word_node
             count += 1
 
         return template
@@ -1470,18 +1682,18 @@ class TemplateLearnNode(TemplateNode):
 
         bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
 
-        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
-                                                                        ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
-                                                                        ET.tostring(new_topic, 'utf-8').decode('utf-8'),
-                                                                        ET.tostring(new_that, 'utf-8').decode('utf-8')))
+        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
+                      ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
+                      ET.tostring(new_topic, 'utf-8').decode('utf-8'),
+                      ET.tostring(new_that, 'utf-8').decode('utf-8'))
 
         return ""
 
-    def format(self):
+    def to_string(self):
         return "LEARN"
 
     def to_xml(self, bot, clientid):
-        xml =  "<learn>"
+        xml = "<learn>"
 
         xml += ET.tostring(self._pattern, 'utf-8').decode('utf-8')
         xml += ET.tostring(self._topic, 'utf-8').decode('utf-8')
@@ -1498,6 +1710,7 @@ class TemplateLearnNode(TemplateNode):
 ######################################################################################################################
 #
 class TemplateLearnfNode(TemplateLearnNode):
+
     def __init__(self):
         TemplateLearnNode.__init__(self)
 
@@ -1510,19 +1723,19 @@ class TemplateLearnfNode(TemplateLearnNode):
 
         bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
 
-        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]" % (self.format(),
-                                                                        ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
-                                                                        ET.tostring(new_topic, 'utf-8').decode('utf-8'),
-                                                                        ET.tostring(new_that, 'utf-8').decode('utf-8')))
+        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
+                      ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
+                      ET.tostring(new_topic, 'utf-8').decode('utf-8'),
+                      ET.tostring(new_that, 'utf-8').decode('utf-8'))
 
         bot.brain.write_learnf_to_file(bot, clientid, new_pattern, new_topic, new_that, self._template)
         return ""
 
-    def format(self):
+    def to_string(self):
         return "LEARNF"
 
     def to_xml(self, bot, clientid):
-        xml =  "<learnf>"
+        xml = "<learnf>"
 
         xml += ET.tostring(self._pattern, 'utf-8').decode('utf-8')
         xml += ET.tostring(self._topic, 'utf-8').decode('utf-8')
@@ -1539,9 +1752,18 @@ class TemplateLearnfNode(TemplateLearnNode):
 ######################################################################################################################
 #
 class TemplateExtensionNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
         self._path = None
+
+    @property
+    def path(self):
+        return self._path
+
+    @path.setter
+    def path(self, path):
+        self._path = path
 
     def resolve(self, bot, clientid):
         try:
@@ -1552,20 +1774,20 @@ class TemplateExtensionNode(TemplateNode):
                 instance = new_class()
                 resolved = instance.execute(data)
 
-                logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
                 return resolved
 
-        except Exception as e:
-            logging.exception(e)
-            logging.error("Extension [%s] failed to execute" % self._path )
+        except Exception as excep:
+            logging.exception(excep)
+            logging.error("Extension [%s] failed to execute", self._path)
 
         return ""
 
-    def format(self):
+    def to_string(self):
         return "EXTENSION (%s)" % self._path
 
     def to_xml(self, bot, clientid):
-        xml =  '<extension'
+        xml = '<extension'
         xml += ' path="%s"' % self._path
         xml += '>'
         for child in self.children:
@@ -1578,49 +1800,43 @@ class TemplateExtensionNode(TemplateNode):
 #
 
 class TemplateSRAIXNode(TemplateNode):
+
     def __init__(self):
         TemplateNode.__init__(self)
-        self.host = None
-        self.botid = None
-        self.hint = None
-        self.apikey = None
-        self.service = None
+        self._service = None
+
+    @property
+    def service(self):
+        return self._service
+
+    @service.setter
+    def service(self, service):
+        self._service = service
 
     def resolve(self, bot, clientid):
         resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
-        logging.debug("[%s] resolved to [%s]" % (self.format(), resolved))
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         response = ""
         try:
-            if self.service is not None:
-                bot_service = ServiceFactory.get_service(self.service, self.host, self.apikey, self.botid, self.hint)
+            if self._service is not None:
+                bot_service = ServiceFactory.get_service(self._service)
                 response = bot_service.ask_question(bot, clientid, resolved)
-                logging.debug("SRAIX service [%s] return [%s]" % (self.service, response))
+                logging.debug("SRAIX service [%s] return [%s]", self._service, response)
             else:
-                logging.error("Sorry SRAIX does not currently have an implementation for [%s]" % self.host)
-        except Exception as e:
-            logging.error("SRAIX service [%s] failed with error [%s]" % (self.service, str(e)))
+                logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+        except Exception as excep:
+            logging.error("SRAIX service [%s] failed with error [%s]", self._service, str(excep))
         return response
 
-    def format(self):
-        return "SRAIX (host=%s, botid=%s, hint=%s, apikey=%s, service=%s)" % (
-            self.host, self.botid, self.hint, self.apikey, self.service)
+    def to_string(self):
+        return "SRAIX (service=%s)" % (self._service)
 
     def to_xml(self, bot, clientid):
-        xml =  '<sraix'
-        if self.host is not None:
-            xml += ' host="%s"' % self.host
-        if self.botid is not None:
-            xml += ' botid="%s"' % self.botid
-        if self.hint is not None:
-            xml += ' hint="%s"' % self.hint
-        if self.apikey is not None:
-            xml += ' apikey="%s"' % self.apikey
-        if self.service is not None:
+        xml = '<sraix'
+        if self._service is not None:
             xml += ' service="%s"' % self.service
         xml += '>'
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += '</sraix>'
         return xml
-
-

@@ -43,16 +43,15 @@ class ServiceFactory(object):
         loader = ClassLoader()
         for service_config in service_configs:
             name = service_config.name.upper()
-            logging.debug("Preloading service [%s] -> [%s]" % (name, service_config.path))
+            logging.debug("Preloading service [%s] -> [%s]", name, service_config.path)
             meta_class = loader.instantiate_class(service_config.path)
             new_class = meta_class(service_config)
             ServiceFactory.services[name] = new_class
 
     @classmethod
-    def get_service(cls, service, host=None, apikey=None, botid=None, hint=None):
+    def get_service(cls, service):
         name = service.upper()
         if name in ServiceFactory.services:
             return ServiceFactory.services[name]
         else:
-            raise Exception ("Unknown service [%s]" % name)
-
+            raise Exception("Unknown service [%s]" % name)

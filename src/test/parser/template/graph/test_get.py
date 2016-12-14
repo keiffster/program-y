@@ -46,7 +46,7 @@ class TemplateGraphGetTests(unittest.TestCase):
         self.assertIsNotNone(get_node)
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
-        self.assertIsInstance(get_node.name, TemplateWordNode)
+        self.assertIsInstance(get_node.name, TemplateNode)
         self.assertEqual(get_node.name.resolve(None, None), "somepred")
         self.assertFalse(get_node.local)
 
@@ -66,7 +66,7 @@ class TemplateGraphGetTests(unittest.TestCase):
         self.assertIsNotNone(get_node)
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
-        self.assertIsInstance(get_node.name, TemplateWordNode)
+        self.assertIsInstance(get_node.name, TemplateNode)
         self.assertEqual(get_node.name.resolve(None, None), "somepred")
         self.assertFalse(get_node.local)
 
@@ -86,7 +86,7 @@ class TemplateGraphGetTests(unittest.TestCase):
         self.assertIsNotNone(get_node)
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
-        self.assertIsInstance(get_node.name, TemplateWordNode)
+        self.assertIsInstance(get_node.name, TemplateNode)
         self.assertEqual(get_node.name.resolve(None, None), "somevar")
         self.assertTrue(get_node.local)
 

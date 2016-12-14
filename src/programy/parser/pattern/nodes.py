@@ -17,26 +17,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 from programy.parser.exceptions import ParserException
 
-"""
-PATTERN_EXPRESSION ::== WORD | PRIORITY_WORD | WILDCARD | SET_STATEMENT | PATTERN_SIDE_BOT_PROPERTY_EXPRESSION
-
-WORD ::= Some Tet
-
-PRIORITY_WORD ::== $WORD
-
-WILDCARD ::== * | _ | ^ | #
-
-SET_STATEMENT ::== <set>SET_NAME</set>
-SET_NAME ::== WORD
-
-PATTERN_SIDE_BOT_PROPERTY_EXPRESSION ::== <bot name="PROPERTY_NAME"/> | <bot><name>PROPERTY_NAME</name></bot>
-PROPERTY_NAME ::== WORD
-"""
-
 
 #######################################################################################################################
 #
 class PatternNode(object):
+
     def __init__(self):
         self._priority_words = []
         self._0ormore_arrow = None
@@ -128,10 +113,7 @@ class PatternNode(object):
             return True
 
     def has_topic(self):
-        if self.topic is not None:
-            return True
-        else:
-            return False
+        return bool(self.topic is not None)
 
     def add_topic(self, topic):
         if self.has_topic() is False:
@@ -144,16 +126,10 @@ class PatternNode(object):
         return self._that
 
     def has_that(self):
-        if self.that is not None:
-            return True
-        else:
-            return False
+        return bool(self.that is not None)
 
     def has_template(self):
-        if self.template is not None:
-            return True
-        else:
-            return False
+        return bool(self.template is not None)
 
     def add_template(self, template):
         if self.has_template() is False:
@@ -299,6 +275,7 @@ class PatternNode(object):
 #######################################################################################################################
 #
 class PatternRootNode(PatternNode):
+
     def __init__(self):
         PatternNode.__init__(self)
 
@@ -327,6 +304,7 @@ class PatternRootNode(PatternNode):
 #######################################################################################################################
 #
 class PatternTopicNode(PatternNode):
+
     def __init__(self):
         PatternNode.__init__(self)
 
@@ -350,6 +328,7 @@ class PatternTopicNode(PatternNode):
 #######################################################################################################################
 #
 class PatternThatNode(PatternNode):
+
     def __init__(self):
         PatternNode.__init__(self)
 
@@ -373,6 +352,7 @@ class PatternThatNode(PatternNode):
 #######################################################################################################################
 #
 class PatternTemplateNode(PatternNode):
+
     def __init__(self, template):
         PatternNode.__init__(self)
         self._template = template
@@ -406,6 +386,7 @@ class PatternTemplateNode(PatternNode):
 #######################################################################################################################
 #
 class PatternWordNode(PatternNode):
+
     def __init__(self, word):
         PatternNode.__init__(self)
         self._word = word
@@ -441,6 +422,7 @@ class PatternWordNode(PatternNode):
 #######################################################################################################################
 #
 class PatternPriorityWordNode(PatternWordNode):
+
     def __init__(self, word):
         PatternWordNode.__init__(self, word)
 
@@ -470,6 +452,7 @@ class PatternPriorityWordNode(PatternWordNode):
 #######################################################################################################################
 #
 class PatternSetNode(PatternWordNode):
+
     def __init__(self, word):
         PatternWordNode.__init__(self, word.upper())
 
@@ -488,10 +471,10 @@ class PatternSetNode(PatternWordNode):
 
     def equals(self, bot, client, word):
         if bot.brain.sets.contains(self.set_name):
-            logging.debug("Looking for [%s] in set [%s]" % (word, self.set_name))
+            logging.debug("Looking for [%s] in set [%s]", word, self.set_name)
             set_words = bot.brain.sets.set(self.set_name)
             if word in set_words:
-                logging.debug("Found a word [%s] in set [%s]" % (word, self.set_name))
+                logging.debug("Found a word [%s] in set [%s]", word, self.set_name)
                 return True
         return False
 
@@ -505,6 +488,7 @@ class PatternSetNode(PatternWordNode):
 #######################################################################################################################
 #
 class PatternBotNode(PatternWordNode):
+
     def __init__(self, word):
         PatternWordNode.__init__(self, word)
 
@@ -533,6 +517,7 @@ class PatternBotNode(PatternWordNode):
 #######################################################################################################################
 #
 class PatternWildCardNode(PatternNode):
+
     def __init__(self, wildcard):
         PatternNode.__init__(self)
         if wildcard not in self.matching_wildcards():
@@ -581,6 +566,7 @@ class PatternWildCardNode(PatternNode):
 #######################################################################################################################
 #
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
+
     MATCH_CHARS = ['^', '#']
 
     def __init__(self, wildcard):
@@ -594,10 +580,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
     @staticmethod
     def is_wild_card(text):
-        if text in PatternZeroOrMoreWildCardNode.MATCH_CHARS:
-            return True
-        else:
-            return False
+        return bool(text in PatternZeroOrMoreWildCardNode.MATCH_CHARS)
 
     def equivalent(self, other):
         if isinstance(other, PatternZeroOrMoreWildCardNode):
@@ -612,6 +595,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 #######################################################################################################################
 #
 class PatternOneOrMoreWildCardNode(PatternWildCardNode):
+
     MATCH_CHARS = ['_', '*']
 
     def __init__(self, wildcard):
@@ -625,10 +609,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     @staticmethod
     def is_wild_card(text):
-        if text in PatternOneOrMoreWildCardNode.MATCH_CHARS:
-            return True
-        else:
-            return False
+        return bool(text in PatternOneOrMoreWildCardNode.MATCH_CHARS)
 
     def equivalent(self, other):
         if isinstance(other, PatternOneOrMoreWildCardNode):
@@ -638,5 +619,3 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     def to_string(self, verbose=True):
         return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
-
-

@@ -38,7 +38,7 @@ class FileFinder(object):
                 if filename.endswith(extension):
                     found_files.append((filename, os.path.join(path, filename)))
         else:
-            for dirpath, dirnames, filenames in os.walk(path):
+            for dirpath, _, filenames in os.walk(path):
                 for filename in [f for f in filenames if f.endswith(extension)]:
                     found_files.append((filename, os.path.join(dirpath, filename)))
 
@@ -54,7 +54,7 @@ class FileFinder(object):
                 filename = file[0].split(".")[0]
             else:
                 filename = file[0]
-            filename = filename.upper ()
+            filename = filename.upper()
             collection[filename] = self.load_file_contents(file[1])
 
         return collection

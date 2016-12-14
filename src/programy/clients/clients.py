@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions
+of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -14,11 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
-import yaml
-import argparse
-import logging.config
 import os
+import argparse
+import logging
+import logging.config
+import yaml
+
 from programy.config import ConfigurationFactory, ClientConfiguration
 from programy.bot import Bot
 from programy.brain import Brain
@@ -26,6 +28,7 @@ from programy.brain import Brain
 class ClientArguments(object):
 
     def __init__(self):
+        self.args = None
         self.parser = argparse.ArgumentParser(description='ProgramY AIML2.0 Console Client')
         self.add_arguments()
 
@@ -72,7 +75,7 @@ class ClientArguments(object):
 class BotClient(object):
 
     def __init__(self):
-        self.arguments = self.parse_arguements ()
+        self.arguments = self.parse_arguements()
         self.initiate_logging(self.arguments)
         self.load_configuration(self.arguments)
         self.initiate_bot(self.configuration)
@@ -86,10 +89,10 @@ class BotClient(object):
         if arguments.logging is not None:
             with open(arguments.logging, 'r+') as yml_data_file:
                 logging_config = yaml.load(yml_data_file)
-                logging.config.dictConfig(logging_config) #['logging'])
+                logging.config.dictConfig(logging_config)
                 logging.info("Now logging under configuration")
         else:
-            print ("Warning. No logging configuration file defined, using defaults...")
+            print("Warning. No logging configuration file defined, using defaults...")
 
     def get_client_configuration(self):
         """
@@ -102,14 +105,15 @@ class BotClient(object):
     def load_configuration(self, arguments):
         if arguments.bot_root is None:
             arguments.bot_root = os.path.dirname(arguments.config_filename)
-            print ("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
+            print("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
 
         self.configuration = self.get_client_configuration()
 
-        ConfigurationFactory.load_configuration_from_file(self.configuration, arguments.config_filename, arguments.config_format, arguments.bot_root)
+        ConfigurationFactory.load_configuration_from_file(self.configuration, arguments.config_filename,
+                                                          arguments.config_format, arguments.bot_root)
 
     def initiate_bot(self, configuration):
-        self._brain = Brain (configuration.brain_configuration)
+        self._brain = Brain(configuration.brain_configuration)
         self.bot = Bot(self._brain, configuration.bot_configuration)
         self.set_environment()
 
@@ -124,4 +128,3 @@ class BotClient(object):
 
     def log_response(self, question, answer):
         pass
-

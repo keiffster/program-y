@@ -22,7 +22,4 @@ class PronounsCollection(SingleStringCollection):
         SingleStringCollection.__init__(self)
 
     def is_pronoun(self, word):
-        if word in self._strings:
-            return True
-        else:
-            return False
+        return bool(word in self._strings)

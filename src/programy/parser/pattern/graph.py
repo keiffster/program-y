@@ -14,7 +14,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.parser.pattern.nodes import *
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes import PatternRootNode
+from programy.parser.pattern.nodes import PatternPriorityWordNode
+from programy.parser.pattern.nodes import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes import PatternZeroOrMoreWildCardNode
+from programy.parser.pattern.nodes import PatternWordNode
+from programy.parser.pattern.nodes import PatternSetNode
+from programy.parser.pattern.nodes import PatternBotNode
+from programy.parser.pattern.nodes import PatternTopicNode
+from programy.parser.pattern.nodes import PatternThatNode
+from programy.parser.pattern.nodes import PatternTemplateNode
 
 # TODO When xml is split over multiple lines, extra PatternWordNodes get crearted
 # <pattern>
@@ -69,7 +79,7 @@ class PatternGraph(object):
             else:
                 return PatternBotNode(element.text.strip())
         else:
-            raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element )
+            raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
     def _count_words_in_children(self, node, counter):
         for child in node.children:
@@ -176,24 +186,23 @@ class PatternGraph(object):
 
         try:
             current_node = self.add_pattern_to_node(pattern_element)
-        except ParserException as pe:
-            pe._xml_element = pattern_element
-            raise pe
+        except ParserException as parser_excep:
+            parser_excep._xml_element = pattern_element
+            raise parser_excep
 
         try:
             current_node = self.add_topic_to_node(topic_element, current_node)
-        except ParserException as pe:
-            pe._xml_element = topic_element
-            raise pe
+        except ParserException as parser_excep:
+            parser_excep._xml_element = topic_element
+            raise parser_excep
 
         try:
             current_node = self.add_that_to_node(that_element, current_node)
-        except ParserException as pe:
-            pe._xml_element = that_element
-            raise pe
+        except ParserException as parser_excep:
+            parser_excep._xml_element = that_element
+            raise parser_excep
 
         self.add_template_to_node(template_graph_root, current_node)
 
     def dump(self, output_func=print, verbose=True):
         self.root.dump("", output_func, verbose)
-

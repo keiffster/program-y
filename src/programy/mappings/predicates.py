@@ -24,12 +24,5 @@ class PredicatesCollection(DoubleStringCharSplitCollection):
     def get_split_char(self):
         return ":"
 
-    def split_line(self, line):
-        splits = self.split_line_by_char(line)
-        if len(splits) > 2:
-            return [splits[0], self.get_split_char().join(splits[1:])]
-        else:
-            return splits
-
     def predicate(self, key):
         return self.value(key)

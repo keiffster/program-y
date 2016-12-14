@@ -23,7 +23,7 @@ class CleanUpPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, bot, clientid, string):
-        logging.debug ("Cleaning up output...")
+        logging.debug("Cleaning up output...")
         stripped = string.strip()
         if stripped.endswith(" ."):
             stripped = stripped[:len(stripped)-2] + "."

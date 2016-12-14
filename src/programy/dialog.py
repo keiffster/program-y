@@ -18,7 +18,7 @@ import logging
 
 class Sentence(object):
 
-    def __init__(self, text: str, split_chars: str =" "):
+    def __init__(self, text: str, split_chars: str=" "):
         self._words = self._split_into_words(text, split_chars)
         self._stars = []
         self._thatstars = []
@@ -29,41 +29,29 @@ class Sentence(object):
     def words(self):
         return self._words
 
-    def num_words(self):
-        return len(self.words)
-
-    def word(self, num: int):
-        if num < self.num_words():
-            return self.words[num]
-        else:
-            raise Exception ("Num word array violation !")
-
-    def words_from_current_pos(self, current_pos: int):
-        if len(self._words) > 0:
-            return " ".join(self._words[current_pos:])
-        return ""
-
-    def text(self):
-        return " ".join(self._words)
-
-    @property
-    def current_word(self):
-        return self._words[self._curr_word]
-
     @property
     def stars(self):
         return self._stars
 
-    def reset_stars(self):
-        self._stars = []
+    @stars.setter
+    def stars(self, stars):
+        self._stars = stars
 
     @property
     def thatstars(self):
         return self._thatstars
 
+    @thatstars.setter
+    def thatstars(self, thatstars):
+        self._thatstars = thatstars
+
     @property
     def topicstars(self):
         return self._topicstars
+
+    @topicstars.setter
+    def topicstars(self, topicstars):
+        self._topicstars = topicstars
 
     @property
     def response(self):
@@ -73,11 +61,31 @@ class Sentence(object):
     def response(self, text: str):
         self._response = text
 
+    def num_words(self):
+        return len(self.words)
+
+    def word(self, num: int):
+        if num < self.num_words():
+            return self.words[num]
+        else:
+            raise Exception("Num word array violation !")
+
+    def words_from_current_pos(self, current_pos: int):
+        if len(self._words) > 0:
+            return " ".join(self._words[current_pos:])
+        return ""
+
+    def text(self):
+        return " ".join(self._words)
+
+    def reset_stars(self):
+        self._stars = []
+
     def _split_into_words(self, sentence, split_chars: str):
         if sentence is None:
             return []
         else:
-            sentence = sentence.strip ()
+            sentence = sentence.strip()
             if len(sentence) == 0:
                 return []
             else:
@@ -88,21 +96,21 @@ class Question(object):
 
     @staticmethod
     def create_from_text(text: str, sentence_split_chars: str=".", word_split_chars: str=" "):
-        question = Question ()
-        question._split_into_sentences(text, sentence_split_chars, word_split_chars)
+        question = Question()
+        question.split_into_sentences(text, sentence_split_chars, word_split_chars)
         return question
 
     @staticmethod
     def create_from_sentence(sentence: Sentence):
-        question = Question ()
-        question._sentences.append(sentence)
+        question = Question()
+        question.sentences.append(sentence)
         return question
 
     @staticmethod
     def create_from_sentences(sentence: Sentence):
-        question = Question ()
+        question = Question()
         for each_sentence in sentence:
-            question._sentences.append(each_sentence)
+            question.sentences.append(each_sentence)
         return question
 
     def __init__(self):
@@ -131,7 +139,7 @@ class Question(object):
     def previous_sentence(self, num):
         return self._sentences[len(self._sentences)-num]
 
-    def _split_into_sentences(self, text:str, sentence_split_chars: str, word_split_chars: str):
+    def split_into_sentences(self, text: str, sentence_split_chars: str, word_split_chars: str):
         if text is not None and len(text.strip()) > 0:
             self._sentences = []
             all_sentences = text.split(sentence_split_chars)
@@ -142,12 +150,12 @@ class Question(object):
         return ". ".join([sentence.text() for sentence in self._sentences])
 
     def combine_answers(self):
-        return ". ".join([sentence.response for sentence in self._sentences if sentence._response is not None])
+        return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
 
-"""
-A Conversation is made up of questions, each question is made up of sentences
-"""
+#
+# A Conversation is made up of questions, each question is made up of sentences
+#
 class Conversation(object):
 
     def __init__(self, clientid: str, bot: object, max_histories=100):
@@ -183,7 +191,7 @@ class Conversation(object):
     def all_sentences(self):
         sentences = []
         for question in self._questions:
-            for sentence in question._sentences:
+            for sentence in question.sentences:
                 sentences.append(sentence.text())
         return sentences
 
@@ -202,14 +210,15 @@ class Conversation(object):
         self._predicates[name] = value
 
     def predicate(self, name: str):
-        if name in self._predicates:
-            return self._predicates[name]
-        else:
-            return None
+        if self._predicates is not None:
+            if name in self._predicates:
+                return self._predicates[name]
+
+        return None
 
     def record_dialog(self, question: Question):
         if len(self._questions) == self._max_histories:
-            logging.info("Conversation history at max [%d], removing oldest"%(self._max_histories))
+            logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
             self._questions.remove(self._questions[0])
         self._questions.append(question)
 

@@ -35,7 +35,7 @@ class Bot(object):
         return self._conversations
 
     @property
-    def prompt (self):
+    def prompt(self):
         if self._configuration is not None:
             return self._configuration.prompt
         else:
@@ -74,30 +74,27 @@ class Bot(object):
             return ""
 
     def has_conversation(self, clientid):
-        if clientid in self._conversations:
-            return True
-        else:
-            return False
+        return bool(clientid in self._conversations)
 
     def conversation(self, clientid: str):
         return self.get_conversation(clientid)
 
     def get_conversation(self, clientid: str):
         if clientid in self._conversations:
-            logging.info ("Retrieving conversation for client %s"%(clientid))
+            logging.info("Retrieving conversation for client %s", clientid)
             return self._conversations[clientid]
         else:
-            logging.info ("Creating new conversation for client %s"%(clientid))
+            logging.info("Creating new conversation for client %s", clientid)
             conversation = Conversation(clientid, self)
             self._conversations[clientid] = conversation
             return conversation
 
     def ask_question(self, clientid: str, text: str, srai=False):
 
-        logging.debug("Question (%s): %s"%(clientid, text))
+        logging.debug("Question (%s): %s", clientid, text)
 
         pre_processed = self.brain.pre_process_question(self, clientid, text)
-        logging.debug("Pre Processed (%s): %s"%(clientid, pre_processed))
+        logging.debug("Pre Processed (%s): %s", clientid, pre_processed)
 
         conversation = self.get_conversation(clientid)
 
@@ -109,17 +106,18 @@ class Bot(object):
             parent_question = conversation.current_question()
 
         answers = []
-        for each_sentence in question._sentences:
+        for each_sentence in question.sentences:
 
             response = self.brain.ask_question(self, clientid, each_sentence, parent_question)
 
             if response is not None:
-                logging.debug("Raw Response (%s): %s"%(clientid, response))
+                logging.debug("Raw Response (%s): %s", clientid, response)
                 each_sentence.response = response
                 answer = self.brain.post_process_response(self, clientid, response).strip()
                 answers.append(answer)
-                logging.debug("Processed Response (%s): %s"%(clientid, answer))
+                logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
                 each_sentence.response = self.default_response
+                answers.append(self.default_response)
 
         return ". ".join([sentence for sentence in answers if sentence is not None])

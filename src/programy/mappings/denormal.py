@@ -21,12 +21,6 @@ class DenormalCollection(DoubleStringPatternSplitCollection):
     def __init__(self):
         DoubleStringPatternSplitCollection.__init__(self)
 
-    def get_split_pattern(self):
-        return r"\"(.*?)\",\"(.*?)\""
-
-    def split_line(self, line):
-        return self.split_line_by_pattern(line)
-
     def denormalise(self, normal):
         if self.has_key(normal):
             return self.value(normal)

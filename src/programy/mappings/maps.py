@@ -17,21 +17,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.files.filefinder import FileFinder
-from programy.mappings.base import SingleStringCollection
 
 class MapLoader(FileFinder):
     def __init__(self):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
-        logging.debug("Loading map [%s]" % filename)
+        logging.debug("Loading map [%s]", filename)
         the_map = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
                     self.process_line(line, the_map)
-        except Exception as e:
-            logging.error("Failed to load map [%s] - %s"%(filename, e))
+        except Exception as excep:
+            logging.error("Failed to load map [%s] - %s", filename, excep)
         return the_map
 
     def load_from_text(self, text):
@@ -61,12 +60,9 @@ class MapCollection(object):
 
     def contains(self, name):
         map_name = name.upper()
-        if map_name in self._maps.keys():
-            return True
-        else:
-            return False
+        return bool(map_name in self._maps.keys())
 
     def load(self, configuration):
-        loader = MapLoader ()
+        loader = MapLoader()
         self._maps = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
         return len(self._maps)

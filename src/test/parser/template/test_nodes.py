@@ -900,10 +900,6 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
 
         node = TemplateSRAIXNode()
         self.assertIsNotNone(node)
-        node.host = "http://somebot.org"
-        node.botid = "1234567890"
-        node.hint = "The usual"
-        node.apikey = "ABCDEF"
         node.service = "api"
 
         root.append(node)
@@ -912,7 +908,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         xml = root.xml_tree(self.bot, self.clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><sraix apikey="ABCDEF" botid="1234567890" hint="The usual" host="http://somebot.org" service="api">Hello</sraix></template>', xml_str)
+        self.assertEqual('<template><sraix service="api">Hello</sraix></template>', xml_str)
 
 
 ######################################################################################################################
@@ -1781,7 +1777,7 @@ class TemplateDateNodeTests(TemplateTestsBaseClass):
 
     DEFAULT_DATETIME_REGEX = "^.{3}\s*.{3}\s*\d{1,}\s\d{2}:\d{2}:\d{2}\s\d{4}"
 
-    def test_node_default_format(self):
+    def test_node_defaultformat(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -1794,7 +1790,7 @@ class TemplateDateNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertRegex(root.resolve(self.bot, self.clientid), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
-    def test_node_custom_format(self):
+    def test_node_customformat(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -1829,10 +1825,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("years")
-        node._from = TemplateWordNode("Thu Oct  6 16:35:11 2014")
-        node._to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("years")
+        node.interval_from = TemplateWordNode("Thu Oct  6 16:35:11 2014")
+        node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1850,10 +1846,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("months")
-        node._from = TemplateWordNode("Thu Jul  6 16:35:11 2014")
-        node._to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("months")
+        node.interval_from = TemplateWordNode("Thu Jul  6 16:35:11 2014")
+        node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1871,10 +1867,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("weeks")
-        node._from = TemplateWordNode("Thu Oct  1 16:35:11 2016")
-        node._to = TemplateWordNode("Fri Oct  14 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("weeks")
+        node.interval_from = TemplateWordNode("Thu Oct  1 16:35:11 2016")
+        node.interval_to = TemplateWordNode("Fri Oct  14 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1892,10 +1888,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("days")
-        node._from = TemplateWordNode("Thu Oct  6 16:35:11 2016")
-        node._to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("days")
+        node.interval_from = TemplateWordNode("Thu Oct  6 16:35:11 2016")
+        node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1913,10 +1909,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("hours")
-        node._from = TemplateWordNode("Thu Oct  7 12:35:11 2016")
-        node._to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("hours")
+        node.interval_from = TemplateWordNode("Thu Oct  7 12:35:11 2016")
+        node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1934,10 +1930,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("minutes")
-        node._from = TemplateWordNode("Thu Oct 7 16:33:09 2016")
-        node._to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("minutes")
+        node.interval_from = TemplateWordNode("Thu Oct 7 16:33:09 2016")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1955,10 +1951,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("seconds")
-        node._from = TemplateWordNode("Thu Oct 7 16:35:09 2016")
-        node._to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("seconds")
+        node.interval_from = TemplateWordNode("Thu Oct 7 16:35:09 2016")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1976,10 +1972,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("ymdhms")
-        node._from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
-        node._to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("ymdhms")
+        node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
@@ -1993,10 +1989,10 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateIntervalNode()
-        node._format = TemplateWordNode("%c")
-        node._style = TemplateWordNode("years")
-        node._from = TemplateWordNode("Thu Oct 6 16:35:11 2014")
-        node._to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("years")
+        node.interval_from = TemplateWordNode("Thu Oct 6 16:35:11 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)

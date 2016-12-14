@@ -13,7 +13,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import requests
 import logging
 
 from programy.utils.services.service import Service
@@ -40,7 +39,7 @@ class PannousService(Service):
                 raise Exception("'output' section missing from pannous json_data")
 
             if len(json_data["output"]) == 0:
-                raise Exception ("'output' section has no elements in pannous json_data")
+                raise Exception("'output' section has no elements in pannous json_data")
 
             if 'actions' not in json_data["output"][0]:
                 raise Exception("'actions' section in output[0] in pannous json_data")
@@ -53,16 +52,19 @@ class PannousService(Service):
 
             return json_data["output"][0]['actions']['say']['text']
 
-        except Exception as e:
-            logging.error(str(e))
+        except Exception as excep:
+            logging.error(str(excep))
             return ""
 
 # Integration Test
 if __name__ == '__main__':
 
-    config = BrainServiceConfiguration("PANNOUS")
-    config._params['login'] = "test-user"
+    def run():
+        service_config = BrainServiceConfiguration("PANNOUS")
+        service_config.set_parameter('login', "test-user")
 
-    service = PannousService (config)
-    response = service.ask_question(None, "testid", "What does a cat look like") # "What is a cat")
-    print(response)
+        service = PannousService(service_config)
+        service_response = service.ask_question(None, "testid", "What does a cat look like") # "What is a cat")
+        print(service_response)
+
+    run()

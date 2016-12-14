@@ -49,7 +49,7 @@ def is_apikey_valid(apikey):
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if rest_client.configuration.rest_configuration._use_api_keys:
+    if rest_client.configuration.rest_configuration.use_api_keys:
         if 'apikey' not in request.args or request.args['apikey'] is None:
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
@@ -60,7 +60,7 @@ def ask():
     if 'question' not in request.args or request.args['question'] is None:
         abort(400)
 
-    question  = request.args['question']
+    question = request.args['question']
 
     if 'sessionid' not in request.args or request.args['sessionid'] is None:
         abort(400)
@@ -79,26 +79,30 @@ def ask():
         response = {"question": question,
                     "answer": answer,
                     "sessionid": sessionid
-                    }
+                   }
 
         return jsonify({'response': response})
 
-    except Exception as e:
-        print(e)
+    except Exception as excep:
+        print(excep)
 
         response = {"question": question,
                     "answer": rest_client.bot.default_response,
                     "sessionid": sessionid
-                    }
+                   }
 
         return jsonify({'response': response}, 400)
 
 if __name__ == '__main__':
 
-    print("REST Client running on %s:%s" % (rest_client.configuration.rest_configuration.host, rest_client.configuration.rest_configuration.port))
-    if rest_client.configuration.rest_configuration.debug is True:
-        print("REST Client running in debug mode")
+    def run():
+        print("REST Client running on %s:%s" % (rest_client.configuration.rest_configuration.host,
+                                                rest_client.configuration.rest_configuration.port))
+        if rest_client.configuration.rest_configuration.debug is True:
+            print("REST Client running in debug mode")
 
-    app.run(host=rest_client.configuration.rest_configuration.host,
-            port=rest_client.configuration.rest_configuration.port,
-            debug=rest_client.configuration.rest_configuration.debug)
+        app.run(host=rest_client.configuration.rest_configuration.host,
+                port=rest_client.configuration.rest_configuration.port,
+                debug=rest_client.configuration.rest_configuration.debug)
+
+    run()

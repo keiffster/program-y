@@ -13,7 +13,7 @@ class ConsoleBotClient(BotClient):
 
     def run(self):
         if self.arguments.noloop is False:
-            logging.info ("Entering conversation loop...")
+            logging.info("Entering conversation loop...")
             running = True
             self.display_response(self.bot.get_version_string)
             self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
@@ -30,9 +30,9 @@ class ConsoleBotClient(BotClient):
                 except KeyboardInterrupt:
                     running = False
                     self.display_response(self.bot.exit_response)
-                except Exception as e:
-                    logging.exception(e)
-                    logging.error ("Oops something bad happened !")
+                except Exception as excep:
+                    logging.exception(excep)
+                    logging.error("Oops something bad happened !")
 
     def get_question(self):
         ask = "%s "%self.bot.prompt
@@ -43,6 +43,9 @@ class ConsoleBotClient(BotClient):
 
 if __name__ == '__main__':
 
-    print ("Loading, please wait...")
-    client = ConsoleBotClient()
-    client.run()
+    def run():
+        print("Loading, please wait...")
+        console_app = ConsoleBotClient()
+        console_app.run()
+
+    run()

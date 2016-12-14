@@ -24,7 +24,5 @@ class CleanUpPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, bot, clientid, string):
-        logging.debug ("Cleaning up input...")
+        logging.debug("Cleaning up input...")
         return string.upper()
-
-

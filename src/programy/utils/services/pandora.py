@@ -35,25 +35,28 @@ class PandoraService(Service):
             response = RequestsAPI.get(PandoraService.default_url, params=payload)
 
             if response is None:
-                raise Exception ("No response from service")
+                raise Exception("No response from service")
 
             tree = ElementTree.fromstring(response.content)
 
             that = tree.find("that")
             if that is None:
-                raise Exception ("Invalid response from service, no 'that'")
+                raise Exception("Invalid response from service, no 'that'")
 
             return that.text
 
-        except Exception as e:
-            logging.error(str(e))
+        except Exception as excep:
+            logging.error(str(excep))
             return ""
 
 if __name__ == '__main__':
 
-    config = BrainServiceConfiguration("PANDORA")
-    config._params['botid'] = "f5d922d97e345aa1"
+    def run():
+        service_config = BrainServiceConfiguration("PANDORA")
+        service_config.set_parameter('botid', "f5d922d97e345aa1")
 
-    service = PandoraService (config)
-    response = service.ask_question(None, "testid", "What does a cat look like") #"What is a cat")
-    print(response)
+        service = PandoraService(service_config)
+        service_response = service.ask_question(None, "testid", "What does a cat look like") #"What is a cat")
+        print(service_response)
+
+    run()

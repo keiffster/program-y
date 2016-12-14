@@ -14,8 +14,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-# TODO config xml, yaml and json do not handle missing values, need a better option for default values and mandatory values
-
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 
@@ -79,6 +77,9 @@ class BrainServiceConfiguration(object):
 
     def parameters(self):
         return self._params.keys()
+
+    def set_parameter(self, key, value):
+        self._params[key] = value
 
     def parameter(self, name):
         if name in self._params:
@@ -145,17 +146,17 @@ class BrainConfiguration(BaseConfigurationData):
                 maps = config_file.get_section("maps", files)
                 self._map_files = self._get_brain_file_configuration(config_file, maps, bot_root)
 
-                self._denormal          = self._get_file_option(config_file, "denormal", files, bot_root)
-                self._normal            = self._get_file_option(config_file, "normal", files, bot_root)
-                self._gender            = self._get_file_option(config_file, "gender", files, bot_root)
-                self._person            = self._get_file_option(config_file, "person", files, bot_root)
-                self._person2           = self._get_file_option(config_file, "person2", files, bot_root)
-                self._predicates        = self._get_file_option(config_file, "predicates", files, bot_root)
-                self._pronouns          = self._get_file_option(config_file, "pronouns", files, bot_root)
-                self._properties        = self._get_file_option(config_file, "properties", files, bot_root)
-                self._triples           = self._get_file_option(config_file, "triples", files, bot_root)
-                self._preprocessors     = self._get_file_option(config_file, "preprocessors", files, bot_root)
-                self._postprocessors    = self._get_file_option(config_file, "postprocessors", files, bot_root)
+                self._denormal = self._get_file_option(config_file, "denormal", files, bot_root)
+                self._normal = self._get_file_option(config_file, "normal", files, bot_root)
+                self._gender = self._get_file_option(config_file, "gender", files, bot_root)
+                self._person = self._get_file_option(config_file, "person", files, bot_root)
+                self._person2 = self._get_file_option(config_file, "person2", files, bot_root)
+                self._predicates = self._get_file_option(config_file, "predicates", files, bot_root)
+                self._pronouns = self._get_file_option(config_file, "pronouns", files, bot_root)
+                self._properties = self._get_file_option(config_file, "properties", files, bot_root)
+                self._triples = self._get_file_option(config_file, "triples", files, bot_root)
+                self._preprocessors = self._get_file_option(config_file, "preprocessors", files, bot_root)
+                self._postprocessors = self._get_file_option(config_file, "postprocessors", files, bot_root)
             else:
                 logging.warning("Config section [files] missing from Brain")
 
@@ -170,7 +171,7 @@ class BrainConfiguration(BaseConfigurationData):
             else:
                 logging.warning("Config section [services] missing from Brain")
         else:
-            logging.warning("Config section [%s] missing" % self.section_name)
+            logging.warning("Config section [%s] missing", self.section_name)
 
     @property
     def supress_warnings(self):
@@ -267,7 +268,7 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response = config_file.get_option("exit_response", bot)
             self._initial_question = config_file.get_option("initial_question", bot)
         else:
-            logging.warning("Config section [%s] missing" % self.section_name)
+            logging.warning("Config section [%s] missing", self.section_name)
 
     @property
     def prompt(self):
@@ -407,7 +408,8 @@ class BaseConfigurationFile(object):
         """
 
     @abstractmethod
-    def get_option(self, section, option_name):
+    #TODO option_name and section are the wrong way round to other function calls
+    def get_option(self, option_name, section, missing_value=None):
         """
         Never Implemented
         """
@@ -425,6 +427,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
     def __init__(self, client_config):
         BaseConfigurationFile.__init__(self, client_config)
+        self.yaml_data = None
 
     def load_from_text(self, text, bot_root):
         self.yaml_data = yaml.load(text)
@@ -457,7 +460,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         if option_name in section:
             return section[option_name]
         else:
-            logging.error("Missing value for [%s] in config section [%s], return default value %s" % (option_name, section, missing_value))
+            logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
             return missing_value
 
     def get_bool_option(self, option_name, section, missing_value=False):
@@ -468,7 +471,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             else:
                 raise Exception("Invalid boolean config value")
         else:
-            logging.error("Missing value for [%s] in config section [%s], return default value %s" % (option_name, section, missing_value))
+            logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
             return missing_value
 
     def get_int_option(self, option_name, section, missing_value=0):
@@ -479,7 +482,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             else:
                 raise Exception("Invalid integer config value")
         else:
-            logging.error("Missing value for [%s] in config section [%s], return default value %d" % (option_name, section, missing_value))
+            logging.error("Missing value for [%s] in config section [%s], return default value %d", option_name, section, missing_value)
             return missing_value
 
 
@@ -487,6 +490,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
     def __init__(self, client_config):
         BaseConfigurationFile.__init__(self, client_config)
+        self.json_data = None
 
     def load_from_text(self, text, bot_root):
         self.json_data = json.loads(text)
@@ -512,14 +516,19 @@ class JSONConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section[section_name].keys()
 
-    def get_option(self, option_name, section):
-        return section[option_name]
+    def get_option(self, option_name, section, missing_value=None):
+        if option_name in section:
+            return section[option_name]
+        else:
+            logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
+            return missing_value
 
 
 class XMLConfigurationFile(BaseConfigurationFile):
 
     def __init__(self, client_config):
         BaseConfigurationFile.__init__(self, client_config)
+        self.xml_data = None
 
     def load_from_text(self, text, bot_root):
         tree = ET.fromstring(text)
@@ -558,41 +567,45 @@ class XMLConfigurationFile(BaseConfigurationFile):
                 keys.append(child.tag)
         return keys
 
-    def get_option(self, option_name, section):
+    def get_option(self, option_name, section, missing_value=None):
         child = section.find(option_name)
-        return self._infer_type_from_string(child.text)
+        if child is not None:
+            return self._infer_type_from_string(child.text)
+        else:
+            logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
+            return missing_value
 
 
 class ConfigurationFactory(object):
 
     @classmethod
-    def load_configuration_from_file(cls, client_config, filename, format=None, bot_root="."):
+    def load_configuration_from_file(cls, client_config, filename, file_format=None, bot_root="."):
 
-        if format is None or len(format) == 0:
-            format = ConfigurationFactory.guess_format_from_filename(filename)
+        if file_format is None or len(file_format) == 0:
+            file_format = ConfigurationFactory.guess_format_from_filename(filename)
 
-        config_file = ConfigurationFactory.get_config_by_name(client_config, format)
+        config_file = ConfigurationFactory.get_config_by_name(client_config, file_format)
         config_file.load_from_file(filename, bot_root)
         return config_file
 
     @classmethod
     def guess_format_from_filename(cls, filename):
         if "." not in filename:
-            raise Exception ("No file extension to allow format guessing!")
+            raise Exception("No file extension to allow format guessing!")
 
         last_dot = filename.rfind(".")
-        format = filename[last_dot + 1:]
-        return format
+        file_format = filename[last_dot + 1:]
+        return file_format
 
     @classmethod
-    def get_config_by_name(cls, client_config, format):
-        format = format.lower()
+    def get_config_by_name(cls, client_config, file_format):
+        file_format = file_format.lower()
 
-        if format == 'yaml':
+        if file_format == 'yaml':
             return YamlConfigurationFile(client_config)
-        elif format == 'json':
+        elif file_format == 'json':
             return JSONConfigurationFile(client_config)
-        elif format == 'xml':
+        elif file_format == 'xml':
             return XMLConfigurationFile(client_config)
         else:
-            raise Exception("Unsupported configuration format:", format)
+            raise Exception("Unsupported configuration format:", file_format)

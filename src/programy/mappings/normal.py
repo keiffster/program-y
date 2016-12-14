@@ -21,12 +21,6 @@ class NormalCollection(DoubleStringPatternSplitCollection):
     def __init__(self):
         DoubleStringPatternSplitCollection.__init__(self)
 
-    def get_split_pattern(self):
-        return r"\"(.*?)\",\"(.*?)\""
-
-    def split_line(self, line):
-        return self.split_line_by_pattern(line)
-
     def normalise(self, denormal):
         if self.has_key(denormal):
             return self.value(denormal)
@@ -34,4 +28,3 @@ class NormalCollection(DoubleStringPatternSplitCollection):
 
     def normalise_string(self, string):
         return self.replace_by_pattern(string)
-

@@ -38,7 +38,7 @@ class TemplateGraphThatTests(unittest.TestCase):
             """)
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
-        self.assertEqual(ast.children[0].format(), "THAT Index=1")
+        self.assertEqual(ast.children[0].to_string(), "THAT Index=1")
 
     def test_thatstar_index_as_attrib_full(self):
         template = ET.fromstring("""
@@ -48,7 +48,7 @@ class TemplateGraphThatTests(unittest.TestCase):
 			""")
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
-        self.assertEqual(ast.children[0].format(), "THATSTAR Index=1")
+        self.assertEqual(ast.children[0].to_string(), "THATSTAR Index=1")
         self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "*")
 
 

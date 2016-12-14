@@ -38,7 +38,7 @@ class TemplateGraphTopicTests(unittest.TestCase):
 			""")
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
-        self.assertEqual(ast.children[0].format(), "TOPICSTAR Index=1")
+        self.assertEqual(ast.children[0].to_string(), "TOPICSTAR Index=1")
         self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "*")
 
 

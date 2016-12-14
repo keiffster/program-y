@@ -34,22 +34,25 @@ class WikipediaService(Service):
         try:
             search = WikipediaAPI.summary(question, sentences=1)
             return search
-        except wikipedia.exceptions.DisambiguationError as e:
-            logging.error("Wikipedia search is ambiguous for question [%s]" % question)
+        except wikipedia.exceptions.DisambiguationError:
+            logging.error("Wikipedia search is ambiguous for question [%s]", question)
             return ""
-        except wikipedia.exceptions.PageError as e:
-            logging.error("No page on Wikipedia for question [%s]" % question)
+        except wikipedia.exceptions.PageError:
+            logging.error("No page on Wikipedia for question [%s]", question)
             return ""
-        except Exception as e:
-            logging.error("General error querying Wikipedia for question [%s]" % question)
+        except Exception:
+            logging.error("General error querying Wikipedia for question [%s]", question)
             return ""
 
 
 # Integration Test
 if __name__ == '__main__':
 
-    config = BrainServiceConfiguration("WIKIPEDIA")
+    def run():
+        servce_config = BrainServiceConfiguration("WIKIPEDIA")
 
-    service = WikipediaService (config)
-    response = service.ask_question(None, "testid", "keith sterling")
-    print(response)
+        service = WikipediaService(servce_config)
+        service_response = service.ask_question(None, "testid", "keith sterling")
+        print(service_response)
+
+    run()

@@ -16,8 +16,54 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
+import logging
+from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes import TemplateNode
+from programy.parser.template.nodes import TemplateWordNode
+from programy.parser.template.nodes import TemplateRandomNode
+from programy.parser.template.nodes import TemplateType1ConditionNode
+from programy.parser.template.nodes import TemplateType2ConditionNode
+from programy.parser.template.nodes import TemplateType3ConditionNode
+from programy.parser.template.nodes import TemplateConditionListItemNode
+from programy.parser.template.nodes import TemplateSRAINode
+from programy.parser.template.nodes import TemplateSRAIXNode
+from programy.parser.template.nodes import TemplateGetNode
+from programy.parser.template.nodes import TemplateSetNode
+from programy.parser.template.nodes import TemplateMapNode
+from programy.parser.template.nodes import TemplateBotNode
+from programy.parser.template.nodes import TemplateThinkNode
+from programy.parser.template.nodes import TemplateNormalizeNode
+from programy.parser.template.nodes import TemplateDenormalizeNode
+from programy.parser.template.nodes import TemplatePersonNode
+from programy.parser.template.nodes import TemplatePerson2Node
+from programy.parser.template.nodes import TemplateGenderNode
+from programy.parser.template.nodes import TemplateSrNode
+from programy.parser.template.nodes import TemplateIdNode
+from programy.parser.template.nodes import TemplateSizeNode
+from programy.parser.template.nodes import TemplateVocabularyNode
+from programy.parser.template.nodes import TemplateEvalNode
+from programy.parser.template.nodes import TemplateExplodeNode
+from programy.parser.template.nodes import TemplateImplodeNode
+from programy.parser.template.nodes import TemplateProgramNode
+from programy.parser.template.nodes import TemplateLowercaseNode
+from programy.parser.template.nodes import TemplateUppercaseNode
+from programy.parser.template.nodes import TemplateSentenceNode
+from programy.parser.template.nodes import TemplateFormalNode
+from programy.parser.template.nodes import TemplateThatNode
+from programy.parser.template.nodes import TemplateThatStarNode
+from programy.parser.template.nodes import TemplateTopicStarNode
+from programy.parser.template.nodes import TemplateStarNode
+from programy.parser.template.nodes import TemplateInputNode
+from programy.parser.template.nodes import TemplateRequestNode
+from programy.parser.template.nodes import TemplateResponseNode
+from programy.parser.template.nodes import TemplateDateNode
+from programy.parser.template.nodes import TemplateIntervalNode
+from programy.parser.template.nodes import TemplateSystemNode
+from programy.parser.template.nodes import TemplateExtensionNode
+from programy.parser.template.nodes import TemplateLearnNode
+from programy.parser.template.nodes import TemplateLearnfNode
 
-from programy.parser.template.nodes import *
+
 
 class TemplateGraph(object):
 
@@ -177,10 +223,10 @@ class TemplateGraph(object):
             raise ParserException("Error, no li children of random element!", xml_element=expression)
 
     #######################################################################################################
-    #	CONDITION_ITEM_COMPONENT ::== <name>TEMPLATE_EXPRESSION</name> | <value>TEMPLATE_EXPRESSION</value> | <loop/> | TEMPLATE_EXPRESSION
-    #	CONDITION_ITEM_EXPRESSION ::== <li( CONDITION_ATTRIBUTES)*>(CONDITION_ITEM_COMPONENT)*</li>
-    #	CONDITION_ATTRIBUTES ::== (name="NAME") | (value="NORMALIZED_TEXT")
-    #	CONDITION_EXPRESSION ::== <condition( CONDITION_ATTRIBUTES)>(CONDITION_ITEM_EXPRESSION)*</condition>
+    # CONDITION_ITEM_COMPONENT ::== <name>TEMPLATE_EXPRESSION</name> | <value>TEMPLATE_EXPRESSION</value> | <loop/> | TEMPLATE_EXPRESSION
+    # CONDITION_ITEM_EXPRESSION ::== <li( CONDITION_ATTRIBUTES)*>(CONDITION_ITEM_COMPONENT)*</li>
+    # CONDITION_ATTRIBUTES ::== (name="NAME") | (value="NORMALIZED_TEXT")
+    # CONDITION_EXPRESSION ::== <condition( CONDITION_ATTRIBUTES)>(CONDITION_ITEM_EXPRESSION)*</condition>
     #
     def parse_condition_attributes(self, expression):
         name = None
@@ -212,8 +258,8 @@ class TemplateGraph(object):
             return (condition.attrib['var'], True)
         else:
             names = condition.findall('name')
-            vars = condition.findall('var')
-            if len(names) == 0 and len(vars) == 0:
+            variables = condition.findall('var')
+            if len(names) == 0 and len(variables) == 0:
                 if raise_on_missing is True:
                     raise ParserException("Error, condition element has no name or var", xml_element=condition)
                 else:
@@ -223,7 +269,7 @@ class TemplateGraph(object):
                     raise ParserException("Error, condition element has multiple name elements", xml_element=condition)
                 else:
                     return (None, False)
-            elif len(vars) > 1:
+            elif len(variables) > 1:
                 if raise_on_missing is True:
                     raise ParserException("Error, condition element has multiple var elements", xml_element=condition)
                 else:
@@ -253,10 +299,10 @@ class TemplateGraph(object):
                 return condition.find('value').text
 
     # Type 1
-    #	<condition name="predicate" value="v">X</condition>,
-    #	<condition name="predicate"><value>v</value>X</condition>,
-    #	<condition value="v"><name>predicate</name>X</condition>, and
-    #	<condition><name>predicate</name><value>v</value>X</condition>
+    # <condition name="predicate" value="v">X</condition>,
+    # <condition name="predicate"><value>v</value>X</condition>,
+    # <condition value="v"><name>predicate</name>X</condition>, and
+    # <condition><name>predicate</name><value>v</value>X</condition>
     #
     def parse_type1_condition(self, expression, branch):
 
@@ -293,11 +339,11 @@ class TemplateGraph(object):
             self.parse_text(tail_text, condition)
 
     # Type 2
-    #	<condition name="predicate">...</condition>
-    #	<condition><name>predicate</name>...</condition>
-    #		<li value="a">X</li>
-    #		<li value="b">Y</li>
-    #		<li>Z</li>				<- Default value if no condition met
+    # <condition name="predicate">...</condition>
+    # <condition><name>predicate</name>...</condition>
+    # 	<li value="a">X</li>
+    # 	<li value="b">Y</li>
+    # 	<li>Z</li>				<- Default value if no condition met
     #
     def parse_type2_condition(self, expression, branch):
         response = self.get_condition_name(expression)
@@ -352,11 +398,11 @@ class TemplateGraph(object):
 
     # Type 3
     #  <condition>
-    #		<li name='1' value="a">X</li>
-    #		<li value="b"><name>1</name>Y</li>
-    #		<li name="1"><value>b</value>Z</li>
-    #		<li><name>1</name><value>b</value>Z</li>
-    #		<li>Z<l/i>				<- Default value if no condition met
+    # 	<li name='1' value="a">X</li>
+    # 	<li value="b"><name>1</name>Y</li>
+    # 	<li name="1"><value>b</value>Z</li>
+    # 	<li><name>1</name><value>b</value>Z</li>
+    # 	<li>Z<l/i>				<- Default value if no condition met
     #  </condition>
     #
     def parse_type3_condition(self, expression, branch):
@@ -407,15 +453,15 @@ class TemplateGraph(object):
                 raise ParserException("Error, invalid element <%s> in condition element" % (child.tag), xml_element=expression)
 
     #######################################################################################################
-    #	SRAI_EXPRESSION ::== <srai>TEMPLATE_EXPRESSION</srai>
+    # SRAI_EXPRESSION ::== <srai>TEMPLATE_EXPRESSION</srai>
 
     def parse_srai_expression(self, expression, branch):
         self._parse_node(TemplateSRAINode(), expression, branch)
 
     #######################################################################################################
-    #	SRAIX_ATTRIBUTES ::= host="HOSTNAME" | botid="BOTID" | hint="TEXT" | apikey="APIKEY" | service="SERVICE"
-    #	SRAIX_ATTRIBUTE_TAGS ::= <host>TEMPLATE_EXPRESSION</host> | <botid>TEMPLATE_EXPRESSION</botid> | <hint>TEMPLATE_EXPRESSION</hint> | <apikey>TEMPLATE_EXPRESSION</apikey> | <service>TEMPLATE_EXPRESSION</service>
-    #	SRAIX_EXPRESSION ::== <sraix( SRAIX_ATTRIBUTES)*>TEMPLATE_EXPRESSION</sraix> |
+    # SRAIX_ATTRIBUTES ::= host="HOSTNAME" | botid="BOTID" | hint="TEXT" | apikey="APIKEY" | service="SERVICE"
+    # SRAIX_ATTRIBUTE_TAGS ::= <host>TEMPLATE_EXPRESSION</host> | <botid>TEMPLATE_EXPRESSION</botid> | <hint>TEMPLATE_EXPRESSION</hint> | <apikey>TEMPLATE_EXPRESSION</apikey> | <service>TEMPLATE_EXPRESSION</service>
+    # SRAIX_EXPRESSION ::== <sraix( SRAIX_ATTRIBUTES)*>TEMPLATE_EXPRESSION</sraix> |
 
     def parse_sraix_expression(self, expression, branch):
 
@@ -457,8 +503,12 @@ class TemplateGraph(object):
         if sraix_node.service is None:
             logging.warning("SRAIX node, service missing !")
 
-    #######################################################################################################
-    #	GET_PREDICATE_EXPRESSION ::== <get name="WORD"/> | <get><name>TEMPLATE_EXPRESSION</name></get> | <get var=”WORD”> | <get><var>WORD</var></get>
+    # ######################################################################################################
+    # GET_PREDICATE_EXPRESSION ::==
+    # <get name="WORD"/> |
+    # <get><name>TEMPLATE_EXPRESSION</name></get> |
+    # <get var=”WORD”> |
+    # <get><var>WORD</var></get>
 
     def parse_get_expression(self, expression, branch):
 
@@ -469,16 +519,20 @@ class TemplateGraph(object):
         var_found = False
 
         if 'name' in expression.attrib:
+            node = TemplateNode()
             name_node = TemplateWordNode(expression.attrib['name'])
+            node.append(name_node)
             get_node.local = False
             name_found = True
-            get_node.name = name_node
+            get_node.name = node
 
         if 'var' in expression.attrib:
-            name_node = TemplateWordNode(expression.attrib['var'])
+            node = TemplateNode()
+            var_node = TemplateWordNode(expression.attrib['var'])
+            node.append(var_node)
             get_node.local = True
             var_found = True
-            get_node.name = name_node
+            get_node.name = node
 
         for child in expression:
 
@@ -512,8 +566,12 @@ class TemplateGraph(object):
         if name_found is True and var_found is True:
             raise ParserException("Error, get node has both name AND var values", xml_element=expression)
 
-    #######################################################################################################
-    #	SET_PREDICATE_EXPRESSION ::== <set name="WORD">TEMPLATE_EXPRESSION</set> | <set><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</set> |  <set var="WORD">TEMPLATE_EXPRESSION</set> | <set><var>TEMPLATE_EXPRESSION</var>TEMPLATE_EXPRESSION</set>
+    # ######################################################################################################
+    # SET_PREDICATE_EXPRESSION ::==
+    # <set name="WORD">TEMPLATE_EXPRESSION</set> |
+    # <set><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</set> |
+    # <set var="WORD">TEMPLATE_EXPRESSION</set> |
+    # <set><var>TEMPLATE_EXPRESSION</var>TEMPLATE_EXPRESSION</set>
 
     def parse_set_expression(self, expression, branch):
 
@@ -524,16 +582,20 @@ class TemplateGraph(object):
         var_found = False
 
         if 'name' in expression.attrib:
+            node = TemplateNode()
             name_node = TemplateWordNode(expression.attrib['name'])
+            node.append(name_node)
             set_node.local = False
             name_found = True
-            set_node.name = name_node
+            set_node.name = node
 
         if 'var' in expression.attrib:
+            node = TemplateNode()
             name_node = TemplateWordNode(expression.attrib['var'])
+            node.append(name_node)
             set_node.local = True
             var_found = True
-            set_node.name = name_node
+            set_node.name = node
 
         self.parse_text(expression.text, set_node)
 
@@ -574,8 +636,10 @@ class TemplateGraph(object):
         if name_found is False and var_found is False:
             raise ParserException("Error, set node has both name AND var values", xml_element=expression)
 
-    #######################################################################################################
-    #	MAP_EXPRESSION ::= <map name="WORD">TEMPLATE_EXPRESSION</map> | <map><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</map>
+    # ######################################################################################################
+    # MAP_EXPRESSION ::=
+    # <map name="WORD">TEMPLATE_EXPRESSION</map> |
+    # <map><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</map>
 
     def parse_map_expression(self, expression, branch):
 
@@ -585,9 +649,11 @@ class TemplateGraph(object):
         name_found = False
 
         if 'name' in expression.attrib:
+            node = TemplateNode()
             name_node = TemplateWordNode(expression.attrib['name'])
+            node.append(name_node)
             name_found = True
-            map_node.name = name_node
+            map_node.name = node
 
         self.parse_text(expression.text, map_node)
 
@@ -612,8 +678,10 @@ class TemplateGraph(object):
         if name_found is False:
             raise ParserException("Error, name not found", xml_element=expression)
 
-    #######################################################################################################
-    #	BOT_PROPERTY_EXPRESSION ::== <bot name="PROPERTY"/> | <bot><name>TEMPLATE_EXPRESSION</name></bot>
+    # ######################################################################################################
+    # BOT_PROPERTY_EXPRESSION ::==
+    # <bot name="PROPERTY"/> |
+    # <bot><name>TEMPLATE_EXPRESSION</name></bot>
 
     def parse_bot_expression(self, expression, branch):
 
@@ -623,9 +691,11 @@ class TemplateGraph(object):
         name_found = False
 
         if 'name' in expression.attrib:
+            node = TemplateNode()
             name_node = TemplateWordNode(expression.attrib['name'])
+            node.append(name_node)
             name_found = True
-            bot_node.name = name_node
+            bot_node.name = node
 
         self.parse_text(expression.text, bot_node)
 
@@ -633,7 +703,6 @@ class TemplateGraph(object):
 
             if child.tag == 'name':
                 node = TemplateNode()
-
                 self.parse_text(child.text, node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
@@ -662,103 +731,103 @@ class TemplateGraph(object):
             self.parse_text(child.tail, node)
 
     #######################################################################################################
-    #	THINK_EXPRESSION ::== <think>TEMPLATE_EXPRESSION</think>
+    # THINK_EXPRESSION ::== <think>TEMPLATE_EXPRESSION</think>
 
     def parse_think_expression(self, expression, branch):
         self._parse_node(TemplateThinkNode(), expression, branch)
 
     #######################################################################################################
-    #	NORMALIZE_EXPRESSION ::== <normalize>TEMPLATE_EXPRESSION</normalize>
+    # NORMALIZE_EXPRESSION ::== <normalize>TEMPLATE_EXPRESSION</normalize>
 
     def parse_normalize_expression(self, expression, branch):
         self._parse_node(TemplateNormalizeNode(), expression, branch)
 
     #######################################################################################################
-    #	DENORMALIZE_EXPRESSION ::== <denormalize>TEMPLATE_EXPRESSION</denormalize>
+    # DENORMALIZE_EXPRESSION ::== <denormalize>TEMPLATE_EXPRESSION</denormalize>
 
     def parse_denormalize_expression(self, expression, branch):
         self._parse_node(TemplateDenormalizeNode(), expression, branch)
 
     #######################################################################################################
-    #	PERSON_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
+    # PERSON_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
     def parse_person_expression(self, expression, branch):
         self._parse_node(TemplatePersonNode(), expression, branch)
 
     #######################################################################################################
-    #	PERSON2_EXPRESSION ::== <person2>TEMPLATE_EXPRESSION</person2>
+    # PERSON2_EXPRESSION ::== <person2>TEMPLATE_EXPRESSION</person2>
 
     def parse_person2_expression(self, expression, branch):
         self._parse_node(TemplatePerson2Node(), expression, branch)
 
     #######################################################################################################
-    #	GENDER_EXPRESSION ::== <gender>TEMPLATE_EXPRESSION</gender>
+    # GENDER_EXPRESSION ::== <gender>TEMPLATE_EXPRESSION</gender>
 
     def parse_gender_expression(self, expression, branch):
         self._parse_node(TemplateGenderNode(), expression, branch)
 
     #######################################################################################################
-    #	<sr/> |
+    # <sr/> |
 
     def parse_sr_expression(self, expression, branch):
         self._parse_node(TemplateSrNode(), expression, branch)
 
     #######################################################################################################
-    #	<id/> |
+    # <id/> |
 
     def parse_id_expression(self, expression, branch):
         self._parse_node(TemplateIdNode(), expression, branch)
 
     #######################################################################################################
-    #	<vocabulary/> |
+    # <vocabulary/> |
 
     def parse_vocabulary_expression(self, expression, branch):
         self._parse_node(TemplateVocabularyNode(), expression, branch)
 
     #######################################################################################################
-    #	<size/> |
+    # <size/> |
 
     def parse_size_expression(self, expression, branch):
         self._parse_node(TemplateSizeNode(), expression, branch)
 
     #######################################################################################################
-    #	<program/>	'''
+    # <program/>	'''
 
     def parse_program_expression(self, expression, branch):
         self._parse_node(TemplateProgramNode(), expression, branch)
 
     #######################################################################################################
-    #	<explode>ABC</explode>
+    # <explode>ABC</explode>
 
     def parse_explode_expression(self, expression, branch):
         self._parse_node(TemplateExplodeNode(), expression, branch)
 
     #######################################################################################################
-    #	<implode>ABC</implode>
+    # <implode>ABC</implode>
 
     def parse_implode_expression(self, expression, branch):
         self._parse_node(TemplateImplodeNode(), expression, branch)
 
     #######################################################################################################
-    #	<lowercase>ABC</lowercase>
+    # <lowercase>ABC</lowercase>
 
     def parse_lowercase_expression(self, expression, branch):
         self._parse_node(TemplateLowercaseNode(), expression, branch)
 
     #######################################################################################################
-    #	<uppercase>ABC</uppercase>
+    # <uppercase>ABC</uppercase>
 
     def parse_uppercase_expression(self, expression, branch):
         self._parse_node(TemplateUppercaseNode(), expression, branch)
 
     #######################################################################################################
-    #	<formal>ABC</formal>
+    # <formal>ABC</formal>
 
     def parse_formal_expression(self, expression, branch):
         self._parse_node(TemplateFormalNode(), expression, branch)
 
     #######################################################################################################
-    #	<sentence>ABC</sentence>
+    # <sentence>ABC</sentence>
 
     def parse_sentence_expression(self, expression, branch):
         self._parse_node(TemplateSentenceNode(), expression, branch)
@@ -788,57 +857,57 @@ class TemplateGraph(object):
             self.parse_text(child.tail, node)
 
         if attrib_found is False:
-            logging.debug("Setting default value for attrib [%s]" % attrib_name)
+            logging.debug("Setting default value for attrib [%s]", attrib_name)
             node.set_attrib(attrib_name, default_value)
 
     #######################################################################################################
-    #	INDEX_ATTRIBUTE ::== index="NUMBER"
-    #	STAR_EXPRESSION ::== <star( INDEX_ATTRIBUTE)/> | <star><index>TEMPLATE_EXPRESSION</index></star>
+    # INDEX_ATTRIBUTE ::== index="NUMBER"
+    # STAR_EXPRESSION ::== <star( INDEX_ATTRIBUTE)/> | <star><index>TEMPLATE_EXPRESSION</index></star>
 
     def parse_star_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateStarNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	THAT_EXPRESSION ::== <that( INDEX_ATTRIBUTE)/> | <that><index></index></that>
+    # THAT_EXPRESSION ::== <that( INDEX_ATTRIBUTE)/> | <that><index></index></that>
 
     def parse_that_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateThatNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	THATSTAR_EXPRESSION ::== <thatstar( INDEX_ATTRIBUTE)/> | <thatstar><index>TEMPLATE_EXPRESSION</index></thatstar>
+    # THATSTAR_EXPRESSION ::== <thatstar( INDEX_ATTRIBUTE)/> | <thatstar><index>TEMPLATE_EXPRESSION</index></thatstar>
 
     def parse_thatstar_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateThatStarNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	TOPICSTAR_EXPRESSION ::== <topicstar( INDEX_ATTRIBUTE)/> | <topicstar><index>TEMPLATE_EXPRESSION</index></topicstar>
+    # TOPICSTAR_EXPRESSION ::== <topicstar( INDEX_ATTRIBUTE)/> | <topicstar><index>TEMPLATE_EXPRESSION</index></topicstar>
 
     def parse_topicstar_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateTopicStarNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	INPUT_EXPRESSION ::== <input( INDEX_ATTRIBUTE)/> | <input><index>TEMPLATE_EXPRESSION</index></input>
+    # INPUT_EXPRESSION ::== <input( INDEX_ATTRIBUTE)/> | <input><index>TEMPLATE_EXPRESSION</index></input>
 
     def parse_input_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateInputNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	REQUEST_EXPRESSION ::== <request( INDEX_ATTRIBUTE)/> | <request><index>TEMPLATE_EXPRESSION</index></request>
+    # REQUEST_EXPRESSION ::== <request( INDEX_ATTRIBUTE)/> | <request><index>TEMPLATE_EXPRESSION</index></request>
 
     def parse_request_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateRequestNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	RESPONSE_EXPRESSION ::== <response( INDEX_ATTRIBUTE)/> | <response><index>TEMPLATE_EXPRESSION</index></response>
+    # RESPONSE_EXPRESSION ::== <response( INDEX_ATTRIBUTE)/> | <response><index>TEMPLATE_EXPRESSION</index></response>
 
     def parse_response_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateResponseNode(), expression, branch, "index", "1")
 
     #######################################################################################################
-    #	DATE_ATTRIBUTES ::== (format="LISP_DATE_FORMAT") | (jformat="JAVA DATE FORMAT")
-    #	DATE_ATTRIBUTE_TAG ::== <format>TEMPLATE_EXPRESSION</format> | <jformat>TEMPLATE_EXPRESSION</jformat>
-    #	DATE_EXPRESSION ::== <date( DATE_ATTRIBUTES)*/> | <date>(DATE_ATTRIBUTE_TAG)</date>
-    #	Pandorabots supports three extension attributes to the date element in templates:
+    # DATE_ATTRIBUTES ::== (format="LISP_DATE_FORMAT") | (jformat="JAVA DATE FORMAT")
+    # DATE_ATTRIBUTE_TAG ::== <format>TEMPLATE_EXPRESSION</format> | <jformat>TEMPLATE_EXPRESSION</jformat>
+    # DATE_EXPRESSION ::== <date( DATE_ATTRIBUTES)*/> | <date>(DATE_ATTRIBUTE_TAG)</date>
+    # Pandorabots supports three extension attributes to the date element in templates:
     #     	locale
     #       format
     #       timezone
@@ -847,21 +916,21 @@ class TemplateGraph(object):
         self._parse_node_with_attrib(TemplateDateNode(), expression, branch, "format", "%c")
 
     #######################################################################################################
-    #	SYSTEM_EXPRESSION ::==
+    # SYSTEM_EXPRESSION ::==
     # 		<system( TIMEOUT_ATTRIBUTE)>TEMPLATE_EXPRESSION</system> |
     #  		<system><timeout>TEMPLATE_EXPRESSION</timeout></system>
-    #	TIMEOUT_ATTRIBUTE :== timeout=”NUMBER”
+    # TIMEOUT_ATTRIBUTE :== timeout=”NUMBER”
 
     def parse_system_expression(self, expression, branch):
         self._parse_node_with_attrib(TemplateSystemNode(), expression, branch, "timeout", "0")
 
     #######################################################################################################
-    #	INTERVAL_EXPRESSION ::== <interval>
-    #								(DATE_ATTRIBUTE_TAGS)
-    #								<style>(TEMPLATE_EXPRESSION)</style>
-    #								<from>(TEMPLATE_EXPRESSION)</from>
-    #								<to>(TEMPLATE_EXPRESSION)</to>
-    #							</interval>
+    # INTERVAL_EXPRESSION ::== <interval>
+    # 							(DATE_ATTRIBUTE_TAGS)
+    # 							<style>(TEMPLATE_EXPRESSION)</style>
+    # 							<from>(TEMPLATE_EXPRESSION)</from>
+    # 							<to>(TEMPLATE_EXPRESSION)</to>
+    # 						</interval>
 
     def parse_interval_expression(self, expression, branch):
         # TemplateInternalNode
@@ -871,14 +940,14 @@ class TemplateGraph(object):
         branch.children.append(interval_node)
 
         if 'format' in expression.attrib:
-            interval_node._format = TemplateWordNode(expression.attrib['format'])
+            interval_node.format = TemplateWordNode(expression.attrib['format'])
 
         head_text = expression.text
         self.parse_text(head_text, interval_node)
 
         for child in expression:
             if child.tag == 'format':
-                interval_node._format = TemplateWordNode(child.text)
+                interval_node.format = TemplateWordNode(child.text)
             elif child.tag == 'style':
                 node = TemplateNode()
 
@@ -887,7 +956,7 @@ class TemplateGraph(object):
                     self.parse_tag_expression(sub_child, node)
                     self.parse_text(child.text, node)
 
-                interval_node._style = node
+                interval_node.style = node
             elif child.tag == 'from':
                 node = TemplateNode()
 
@@ -896,7 +965,7 @@ class TemplateGraph(object):
                     self.parse_tag_expression(sub_child, node)
                     self.parse_text(child.text, node)
 
-                interval_node._from = node
+                interval_node.interval_from = node
             elif child.tag == 'to':
                 node = TemplateNode()
 
@@ -905,27 +974,27 @@ class TemplateGraph(object):
                     self.parse_tag_expression(sub_child, node)
                     self.parse_text(child.text, node)
 
-                interval_node._to = node
+                interval_node.interval_to = node
             else:
                 self.parse_tag_expression(child, interval_node)
 
             tail_text = child.tail
             self.parse_text(tail_text, interval_node)
 
-        if interval_node._format is None:
+        if interval_node.format is None:
             logging.warning("Interval node, format missing !")
-        if interval_node._style is None:
+        if interval_node.style is None:
             logging.warning("style node, format missing !")
-        if interval_node._from is None:
-            logging.warning("from node, format missing !")
-        if interval_node._to is None:
-            logging.warning("to node, format missing !")
+        if interval_node.interval_from is None:
+            logging.warning("interval_from node, format missing !")
+        if interval_node.interval_to is None:
+            logging.warning("interval_to node, format missing !")
 
     #######################################################################################################
-    #	EXTENSION_EXPRESSION ::== <extension>
+    # EXTENSION_EXPRESSION ::== <extension>
     #                               <path>programy.etension.SomeModule</path>
     #                               parameters
-    #							</extension>
+    # 						</extension>
 
     def parse_extension_expression(self, expression, branch):
 
@@ -933,14 +1002,14 @@ class TemplateGraph(object):
         branch.children.append(extension_node)
 
         if 'path' in expression.attrib:
-            extension_node._path = expression.attrib['path']
+            extension_node.path = expression.attrib['path']
 
         head_text = expression.text
         self.parse_text(head_text, extension_node)
 
         for child in expression:
             if child.tag == 'path':
-                extension_node._path = child.text
+                extension_node.path = child.text
             else:
                 self.parse_tag_expression(child, extension_node)
 
@@ -952,25 +1021,25 @@ class TemplateGraph(object):
     # WARNING - Not sure I'll even implement this at this time
     #
     #######################################################################################################
-    #	EVAL_EXPRESSION ::== <eval>TEMPLATE_EXPRESSION</eval>
+    # EVAL_EXPRESSION ::== <eval>TEMPLATE_EXPRESSION</eval>
     #
-    #	LEARN_PATTERN_EXPRESSION ::== PATTERN_EXPRESSION | EVAL_EXPRESSION
-    #	LEARN_PATTERN_EXPRESSION ::== (LEARN_PATTERN_EXPRESSION)+
+    # LEARN_PATTERN_EXPRESSION ::== PATTERN_EXPRESSION | EVAL_EXPRESSION
+    # LEARN_PATTERN_EXPRESSION ::== (LEARN_PATTERN_EXPRESSION)+
     #
-    #	LEARN_TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | EVAL_EXPRESSION
+    # LEARN_TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | EVAL_EXPRESSION
     #
-    #	LEARN_TEMPLATE_EXPRESSION ::== (LEARN_TEMPLATE_EXPRESSION)*
+    # LEARN_TEMPLATE_EXPRESSION ::== (LEARN_TEMPLATE_EXPRESSION)*
     #
-    #	LEARN_CATEGORY_EXPRESSION ::==
-    #							<category>
-    #								<pattern>LEARN_PATTERN_EXPRESSION</pattern>
-    #								(<that>LEARN_PATTERN_EXPRESSION</that>)
-    #								(<topic>LEARN_PATTERN_EXPRESSION</topic>)
-    #								<template>LEARN_TEMPLATE_EXPRESSION</template>
-    #							</category>
+    # LEARN_CATEGORY_EXPRESSION ::==
+    # 						<category>
+    # 							<pattern>LEARN_PATTERN_EXPRESSION</pattern>
+    # 							(<that>LEARN_PATTERN_EXPRESSION</that>)
+    # 							(<topic>LEARN_PATTERN_EXPRESSION</topic>)
+    # 							<template>LEARN_TEMPLATE_EXPRESSION</template>
+    # 						</category>
     #
-    #	LEARN_EXPRESSION ::== 	<learn>LEARN_CATEGORY_EXPRESSION</learn> |
-    #							<learnf>LEARN_CATEGORY_EXPRESSION</learnf>
+    # LEARN_EXPRESSION ::== 	<learn>LEARN_CATEGORY_EXPRESSION</learn> |
+    # 						<learnf>LEARN_CATEGORY_EXPRESSION</learnf>
 
     def parse_eval_expression(self, expression, branch):
 
@@ -993,10 +1062,10 @@ class TemplateGraph(object):
                 learn_node = TemplateLearnNode()
 
                 parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
-                learn_node._pattern  = parsed[0]
-                learn_node._topic    = parsed[1]
-                learn_node._that     = parsed[2]
-                learn_node._template = parsed[3]
+                learn_node.pattern = parsed[0]
+                learn_node.topic = parsed[1]
+                learn_node.that = parsed[2]
+                learn_node.template = parsed[3]
 
                 branch.children.append(learn_node)
 
@@ -1007,14 +1076,12 @@ class TemplateGraph(object):
                 learn_node = TemplateLearnfNode()
 
                 parsed = self._aiml_parser.parse_category(child, add_to_graph=False)
-                learn_node._pattern  = parsed[0]
-                learn_node._topic    = parsed[1]
-                learn_node._that     = parsed[2]
-                learn_node._template = parsed[3]
+                learn_node.pattern = parsed[0]
+                learn_node.topic = parsed[1]
+                learn_node.that = parsed[2]
+                learn_node.template = parsed[3]
 
                 branch.children.append(learn_node)
 
     def parse_oob_expression(self, expression, branch):
         raise ParserException("Error, oob not implemented yet!", xml_element=expression)
-
-

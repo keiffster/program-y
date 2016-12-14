@@ -14,17 +14,19 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+import logging
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 
+from programy.parser.exceptions import ParserException
 from programy.config import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.pattern.matcher import PatternMatcher
-from programy.parser.pattern.nodes import *
 from programy.parser.template.graph import TemplateGraph
 from programy.parser.template.evaluator import TemplateEvaluator
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog import Sentence
+
 
 class AIMLLoader(FileFinder):
     def __init__(self, aiml_parser):
@@ -58,12 +60,12 @@ class AIMLParser(object):
         return self._num_categories
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
-        self._supress_warnings = brain_configuration._supress_warnings
+        self._supress_warnings = brain_configuration.supress_warnings
         if brain_configuration.aiml_files is not None:
             aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.aiml_files.files,
-                                                              brain_configuration.aiml_files.directories,
-                                                              brain_configuration.aiml_files.extension)
-            logging.info("Loaded a total of %d aiml files" % (len(aimls_loaded)))
+                                                               brain_configuration.aiml_files.directories,
+                                                               brain_configuration.aiml_files.extension)
+            logging.info("Loaded a total of %d aiml files", len(aimls_loaded))
         else:
             logging.info("No AIML files defined in configuration to load")
 
@@ -85,12 +87,12 @@ class AIMLParser(object):
         else:
             try:
                 self.parse_aiml(aiml, filename)
-            except ParserException as pe:
-                pe._filename = filename
-                raise pe
+            except ParserException as parser_excep:
+                parser_excep.filename = filename
+                raise parser_excep
             except ET.ParseError as xmlpe:
-                xmlpe._filename = filename
-                xmlpe._xml_exception = xmlpe
+                xmlpe.filename = filename
+                xmlpe.xml_exception = xmlpe
 
     def parse_from_text(self, text):
         """
@@ -130,21 +132,21 @@ class AIMLParser(object):
                 try:
                     self.parse_topic(expression)
                     categories_found = True
-                except ParserException as pe:
-                    pe._filename = filename
-                    logging.error(pe.format_message())
+                except ParserException as parser_excep:
+                    parser_excep.filename = filename
+                    logging.error(parser_excep.format_message())
                     if self.stop_on_invalid is True:
-                        raise pe
+                        raise parser_excep
 
             elif expression.tag == 'category':
                 try:
                     self.parse_category(expression)
                     categories_found = True
-                except ParserException as pe:
-                    pe._filename = filename
-                    logging.error(pe.format_message())
+                except ParserException as parser_excep:
+                    parser_excep.filename = filename
+                    logging.error(parser_excep.format_message())
                     if self.stop_on_invalid is True:
-                        raise pe
+                        raise parser_excep
 
             else:
                 raise ParserException("Error, unknown top level tag, %s" % expression.tag, xml_element=expression)
@@ -164,7 +166,7 @@ class AIMLParser(object):
             self._version = aiml.attrib['version']
             if self._version not in ['0.9', '1.0', '1.1', '2.0']:
                 if self._supress_warnings is False:
-                    logging.warning("Version number not a supported version: %s" % self._version)
+                    logging.warning("Version number not a supported version: %s", self._version)
         else:
             if self._supress_warnings is False:
                 logging.warning("No version info, defaulting to 2.0")
@@ -193,7 +195,7 @@ class AIMLParser(object):
             if name is None or len(name) == 0:
                 raise ParserException("Topic name empty or null", xml_element=topic_element)
             xml = "<topic>%s</topic>" % name
-            logging.info("Topic attrib converted to %s" % xml)
+            logging.info("Topic attrib converted to %s", xml)
             topic_pattern = ET.fromstring(xml)
         else:
             raise ParserException("Error, missing name attribute for topic", xml_element=topic_element)
@@ -254,21 +256,22 @@ class AIMLParser(object):
         return (patterns[0], topic_element, that_element, template_graph_root)
 
     def match_sentence(self, bot, clientid, sentence, parent_question, topic_pattern, that_pattern):
-        logging.debug("Matching sentence [%s], topic=[%s], that=[%s] " % (sentence.text(), topic_pattern, that_pattern))
+        logging.debug("Matching sentence [%s], topic=[%s], that=[%s] ", sentence.text(), topic_pattern, that_pattern)
 
         pattern_stars = []
         topic_stars = []
         that_stars = []
-        matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern), topic_stars, Sentence(that_pattern), that_stars)
+        matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern),
+                                             topic_stars, Sentence(that_pattern), that_stars)
         if matched is not None:
             if parent_question is not None:
-                parent_question.current_sentence()._stars = pattern_stars
-                parent_question.current_sentence()._topicstars = topic_stars
-                parent_question.current_sentence()._thatstars = that_stars
+                parent_question.current_sentence().stars = pattern_stars
+                parent_question.current_sentence().topicstars = topic_stars
+                parent_question.current_sentence().thatstars = that_stars
             else:
-                sentence._stars = pattern_stars
-                sentence._topicstars = topic_stars
-                sentence._thatstars = that_stars
+                sentence.stars = pattern_stars
+                sentence.topicstars = topic_stars
+                sentence.thatstars = that_stars
 
             return self.template_evaluator.evaluate(bot, clientid, matched.template)
         return None

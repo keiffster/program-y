@@ -99,6 +99,13 @@ class DoubleStringCharSplitCollection(BaseCollection):
     def get_split_char(self):
         return ","
 
+    def split_line(self, line):
+        splits = self.split_line_by_char(line)
+        if len(splits) > 2:
+            return [splits[0], self.get_split_char().join(splits[1:])]
+        else:
+            return splits
+
     def split_line_by_char(self, line):
         splits = line.split(self.get_split_char())
         return splits
@@ -126,31 +133,34 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         return None
 
     def get_split_pattern(self):
-        return ".*"
+        return r"\"(.*?)\",\"(.*?)\""
+
+    def split_line(self, line):
+        return self.split_line_by_pattern(line)
 
     def split_line_by_pattern(self, line):
         line = line.strip()
         if line is not None and len(line) > 0:
-            p = re.compile(self.get_split_pattern())
-            match = p.search(line)
+            pattern = re.compile(self.get_split_pattern())
+            match = pattern.search(line)
             lhs = match.group(1)
             rhs = match.group(2)
             return [lhs, rhs]
         return None
 
     def normalise_pattern(self, pattern):
-        pattern = pattern.replace("(", "\(")
-        pattern = pattern.replace(")", "\)")
-        pattern = pattern.replace("[", "\[")
-        pattern = pattern.replace("]", "\]")
-        pattern = pattern.replace("{", "\{")
-        pattern = pattern.replace("}", "\}")
-        pattern = pattern.replace("|", "\|")
-        pattern = pattern.replace("^", "\^")
-        pattern = pattern.replace("$", "\$")
-        pattern = pattern.replace("+", "\+")
-        pattern = pattern.replace(".", "\.")
-        pattern = pattern.replace("*", "\*")
+        pattern = pattern.replace("(", r"\(")
+        pattern = pattern.replace(")", r"\)")
+        pattern = pattern.replace("[", r"\[")
+        pattern = pattern.replace("]", r"\]")
+        pattern = pattern.replace("{", r"\{")
+        pattern = pattern.replace("}", r"\}")
+        pattern = pattern.replace("|", r"\|")
+        pattern = pattern.replace("^", r"\^")
+        pattern = pattern.replace("$", r"\$")
+        pattern = pattern.replace("+", r"\+")
+        pattern = pattern.replace(".", r"\.")
+        pattern = pattern.replace("*", r"\*")
         return pattern
 
     def process_splits(self, splits):
@@ -167,23 +177,20 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         alreadys = []
         for pair in self.pairs:
             try:
-                #print ("Matching [%s] ---> [%s]" % (pair[1], replacable))
-                p = re.compile(pair[1])
-                if p.findall(replacable):
+                pattern = re.compile(pair[1])
+                if pattern.findall(replacable):
                     found = False
                     for already in alreadys:
                         stripped = pair[0].strip()
                         if stripped in already:
-                            #print("Already replaced [%s]" % stripped)
                             found = True
                     if found is not True:
-                        #print ("Replacing [%s] with [%s] ---> [%s]" % (pair[0], pair[2], replacable))
-                        replacable = p.sub(pair[2]+" ", replacable)
+                        replacable = pattern.sub(pair[2]+" ", replacable)
                         alreadys.append(pair[2])
 
-            except Exception as e:
-                logging.error("Invalid regular expression [%s]" % pair[1])
-                logging.exception(e)
+            except Exception as excep:
+                logging.error("Invalid regular expression [%s]", pair[1])
+                logging.exception(excep)
 
         return re.sub(' +', ' ', replacable.strip())
 
@@ -195,7 +202,7 @@ class TripleStringCollection(BaseCollection):
         self.triples = {}
 
     @abstractmethod
-    def get_split_pattern(self):
+    def split_line(self, line):
         """
         Never Implemented
         """
@@ -230,8 +237,8 @@ class TripleStringCollection(BaseCollection):
     def split_line_by_pattern(self, line):
         line = line.strip()
         if line is not None and len(line) > 0:
-            p = re.compile(self.get_split_pattern())
-            match = p.search(line)
+            pattern = re.compile(self.get_split_pattern())
+            match = pattern.search(line)
             first = match.group(1)
             second = match.group(2)
             third = match.group(3)
@@ -250,4 +257,3 @@ class TripleStringCollection(BaseCollection):
             self.triples[first][second] = third
 
         return True
-

@@ -13,8 +13,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import requests
 import logging
+import requests
 
 from programy.utils.services.service import Service
 from programy.config import BrainServiceConfiguration
@@ -43,27 +43,31 @@ class GenericRESTService(Service):
 
         try:
             if method == 'GET':
-                response = requests.get(self.host, data=payload)
+                response = requests.get(host, data=payload)
             elif method == 'POST':
-                response = requests.post(self.host, data=payload)
+                response = requests.post(host, data=payload)
             else:
-                raise Exception ("Unsupported REST method [%s]" % method)
+                raise Exception("Unsupported REST method [%s]", method)
 
             if response.status_code != 200:
-                logging.error ("[%s] return status code [%d]" % (host, response.status_code))
+                logging.error("[%s] return status code [%d]", host, response.status_code)
             else:
                 return response.text
 
-        except Exception as e:
-            logging.exception (e)
+        except Exception as excep:
+            logging.exception(excep)
 
         return ""
 
 # Integration Test
 if __name__ == '__main__':
 
-    config = BrainServiceConfiguration("REST")
+    def run():
+        service_config = BrainServiceConfiguration("REST")
 
-    service = GenericRESTService (config)
-    response = service.ask_question(None, "testid", "What is a cat")
-    print(response)
+        service = GenericRESTService(service_config)
+        service_response = service.ask_question(None, "testid", "What is a cat")
+        print(service_response)
+
+    run()
+
