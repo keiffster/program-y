@@ -93,31 +93,48 @@ class Bot(object):
 
         logging.debug("Question (%s): %s", clientid, text)
 
-        pre_processed = self.brain.pre_process_question(self, clientid, text)
-        logging.debug("Pre Processed (%s): %s", clientid, pre_processed)
+        if srai is False:
+            pre_processed = self.brain.pre_process_question(self, clientid, text)
+            logging.debug("Pre Processed (%s): %s", clientid, pre_processed)
+        else:
+            pre_processed = text
 
         conversation = self.get_conversation(clientid)
 
         question = Question.create_from_text(pre_processed)
-        if srai is False:
-            conversation.record_dialog(question)
-            parent_question = None
-        else:
-            parent_question = conversation.current_question()
+
+        # KS
+        conversation.record_dialog(question)
+        # if srai is False:
+        #     conversation.record_dialog(question)
+        #     parent_question = None
+        # else:
+        #     parent_question = conversation.current_question()
 
         answers = []
         for each_sentence in question.sentences:
 
-            response = self.brain.ask_question(self, clientid, each_sentence, parent_question)
+            # KS
+            response = self.brain.ask_question(self, clientid, each_sentence)
+            #response = self.brain.ask_question(self, clientid, each_sentence, parent_question)
 
             if response is not None:
                 logging.debug("Raw Response (%s): %s", clientid, response)
                 each_sentence.response = response
-                answer = self.brain.post_process_response(self, clientid, response).strip()
+
+                if srai is False:
+                    answer = self.brain.post_process_response(self, clientid, response).strip()
+                else:
+                    answer = response
+
                 answers.append(answer)
                 logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)
+
+        # KS
+        if srai is True:
+            conversation.pop_dialog()
 
         return ". ".join([sentence for sentence in answers if sentence is not None])

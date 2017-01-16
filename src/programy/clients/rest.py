@@ -13,6 +13,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
 from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.clients import BotClient
@@ -49,20 +50,26 @@ def is_apikey_valid(apikey):
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if rest_client.configuration.rest_configuration.use_api_keys:
+    if rest_client.configuration.rest_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
+            logging.error("Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
-    apikey = request.args['apikey']
-    if is_apikey_valid(apikey) is False:
-        return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+        apikey = request.args['apikey']
+        if is_apikey_valid(apikey) is False:
+            logging.error("'Unauthorised access - invalid api key")
+            return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
     if 'question' not in request.args or request.args['question'] is None:
+        print("'question' missing from request")
+        logging.error("'question' missing from request")
         abort(400)
 
     question = request.args['question']
 
     if 'sessionid' not in request.args or request.args['sessionid'] is None:
+        print("'sessionid' missing from request")
+        logging.error("'sessionid' missing from request")
         abort(400)
 
     sessionid = request.args['sessionid']
@@ -84,11 +91,11 @@ def ask():
         return jsonify({'response': response})
 
     except Exception as excep:
-        print(excep)
 
         response = {"question": question,
                     "answer": rest_client.bot.default_response,
-                    "sessionid": sessionid
+                    "sessionid": sessionid,
+                    "error": str(excep)
                    }
 
         return jsonify({'response': response}, 400)

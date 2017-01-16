@@ -69,7 +69,6 @@ class TemplateNode(object):
         param = ["<template>"]
         self.to_xml_children(param, bot, clientid)
         param[0] += "</template>"
-
         return ET.fromstring(param[0])
 
     def to_xml(self, bot, clientid):
@@ -173,6 +172,7 @@ class TemplateSrNode(TemplateNode):
         else:
             logging.error("Sr node has no stars available")
             resolved = ""
+
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
@@ -432,27 +432,50 @@ class TemplateMapNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
-        the_map = bot.brain.maps.map(name)
-        if the_map is None:
-            value = bot.brain.properties.property("default-map")
-            if value is None:
-                logging.error("No value for default-map defined, empty string returned")
-                value = ""
-        else:
-            var = self.resolve_children(bot, clientid)
-            if var in the_map:
-                value = the_map[var]
-                if value is None:
-                    logging.error("No value for default-map defined, empty string returned")
-                    value = ""
+        name = name.upper ()
+        var = self.resolve_children(bot, clientid)
+        var = var.upper()
+
+        if name == 'SUCCESSOR':
+            val = int(var)
+            value = str(val + 1)
+        elif name == 'PREDECESSOR':
+            val = int(var)
+            value = str(val - 1)
+        elif name == 'SINGULAR':
+            if name.endswith('IES'):
+                value = var[:-3]
+            elif name.endswith('ES'):
+                value = var[:-2]
+            elif name.endswith('S'):
+                value = var[:-1]
             else:
+                value = var
+        elif name == 'PLURAL':
+            if name.endswith('Y'):
+                value = var[:-1] + 'IES'
+            else:
+                value = var + 'S'
+        else:
+            the_map = bot.brain.maps.map(name)
+            if the_map is None:
+                logging.error("No map defined for [%s], using default-map" % name)
                 value = bot.brain.properties.property("default-map")
                 if value is None:
                     logging.error("No value for default-map defined, empty string returned")
                     value = ""
+            else:
+                if var in the_map:
+                    value = the_map[var]
+                else:
+                    logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))
+                    value = bot.brain.properties.property("default-map")
+                    if value is None:
+                        logging.error("No value for default-map defined, empty string returned")
+                        value = ""
 
         logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-        return value
+        return value.upper()
 
     def to_string(self):
         return "[MAP (%s)]" % (self.name.to_string())
@@ -521,7 +544,6 @@ class TemplateConditionListItemNode(TemplateNode):
         self._local = local
         self._loop = loop
 
-
     @property
     def name(self):
         return self._name
@@ -570,9 +592,11 @@ class TemplateConditionListItemNode(TemplateNode):
                 xml += ' var="%s"' % self.name
             else:
                 xml += ' name="%s"' % self.name
-        if self.value is not None:
-            xml += ' value="%s"' % self.value
         xml += ">"
+        if self.value is not None:
+            xml += '<value>'
+            xml += self.value.to_xml(bot, clientid)
+            xml += '</value>'
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         if self.loop is True:
@@ -635,7 +659,7 @@ class TemplateType1ConditionNode(TemplateConditionNode):
 
     def resolve(self, bot, clientid):
         value = self._get_predicate_value(bot, clientid, self.name, self.local)
-        if value == self.value:
+        if value == self.value.resolve(bot, clientid):
             resolved = " ".join([child.resolve(bot, clientid) for child in self.children])
         else:
             resolved = ""
@@ -652,8 +676,10 @@ class TemplateType1ConditionNode(TemplateConditionNode):
             xml += ' var="%s"' % self.name
         else:
             xml += ' name="%s"' % self.name
-        xml += ' value="%s"' % self.value
         xml += ">"
+        xml += '<value>'
+        xml += self.value.to_xml(bot, clientid)
+        xml += '</value>'
         for child in self.children:
             xml += child.to_xml(bot, clientid)
         xml += "</condition>"
@@ -685,7 +711,9 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
 
         for condition in self.children:
             if condition.is_default() is False:
-                if value == condition.value:
+                condition_value = condition.value.resolve(bot, clientid)
+                #print("Value [%s] =?= [%s]" % (value, condition_value.strip()))
+                if value == condition_value:
                     resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
                     logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
@@ -702,6 +730,7 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
                 resolved = resolved.strip() + " " + self.resolve(bot, clientid)
         else:
             resolved = ""
+
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
@@ -730,14 +759,16 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
     def resolve(self, bot, clientid):
         for condition in self.children:
             value = self._get_predicate_value(bot, clientid, condition.name, condition.local)
-            if value == condition.value:
-                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
-                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if condition.value is not None:
+                condition_value = condition.value.resolve(bot, clientid)
+                if value == condition_value:
+                    resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                    logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
-                if condition.loop is True:
-                    resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()
+                    if condition.loop is True:
+                        resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()
 
-                return resolved
+                    return resolved
 
         default = self.get_default()
         if default is not None:
@@ -933,6 +964,65 @@ class TemplateImplodeNode(TemplateNode):
         return xml
 
 
+
+######################################################################################################################
+#
+
+class TemplateFirstNode(TemplateNode):
+
+    def __init__(self):
+        TemplateNode.__init__(self)
+
+    def resolve(self, bot, clientid):
+        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        words = result.split(" ")
+        if len(words) > 0:
+            resolved = words[0]
+        else:
+            resolved = "NIL"
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
+
+    def to_string(self):
+        return "FIRST"
+
+    def to_xml(self, bot, clientid):
+        xml = "<first>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</first>"
+        return xml
+
+
+######################################################################################################################
+#
+
+class TemplateRestNode(TemplateNode):
+
+    def __init__(self):
+        TemplateNode.__init__(self)
+
+    def resolve(self, bot, clientid):
+        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        words = result.split(" ")
+        if len(words) > 1:
+            resolved = " ".join(words[1:])
+        else:
+            resolved = "NIL"
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        return resolved
+
+    def to_string(self):
+        return "REST"
+
+    def to_xml(self, bot, clientid):
+        xml = "<rest>"
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        xml += "</rest>"
+        return xml
+
+
 ######################################################################################################################
 #
 class TemplateIdNode(TemplateNode):
@@ -1030,7 +1120,7 @@ class TemplateDateNode(TemplateAttribNode):
 
     def resolve(self, bot, clientid):
         time_now = datetime.now()
-        resolved = time_now.strftime(self._format)
+        resolved = time_now.strftime(self._format).upper ()
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 

@@ -1,0 +1,60 @@
+address:address
+age:age
+baby:baby
+bestfriend:bestfriend
+birthday:birthday
+birthplace:birthplace
+boyfriend:boyfriend
+brother:brother
+cat:cat
+city:city
+country:country
+county:county
+daughter:daughter
+dog:dog
+email:email
+employer:employer
+father:father
+favorite actor:favoriteactor
+favorite actress:favoriteactress
+favorite band:favoriteband
+favorite book:favoritebook
+favorite car:favoritecar
+favorite color:favoritecolor
+favorite drink:favoritedrink
+favorite food:favoritefood
+favorite ice cream:favoriteicecream
+favorite movie:favoritemovie
+favorite song:favoritesong
+favorite sport:favoritesport
+favorite tv show:favoritetvshow
+first name:firstname
+friend:friend
+gender:gender
+girlfriend:girlfriend
+grandfather:grandfather
+grandmother:grandmother
+hair:hair
+has:has
+husband:husband
+last name:lastname
+latitude:latitude
+likes:likes
+location:location
+longitute:longitute
+middlename:middlename
+mother:mother
+nephew:nephew
+niece:niece
+orientation:orientation
+province:province
+religion:religion
+residence:residence
+road:road
+sister:sister
+state:state
+status:status
+street:street
+town:town
+wife:wife
+

@@ -33,7 +33,6 @@ class FileFinder(object):
         found_files = []
         if subdir is False:
             paths = os.listdir(path)
-
             for filename in paths:
                 if filename.endswith(extension):
                     found_files.append((filename, os.path.join(path, filename)))

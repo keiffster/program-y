@@ -101,14 +101,14 @@ class PatternGraph(object):
         if text is not None:
             text = text.strip()
             return text
-            #if text == "":
-            #    return None
         return None
 
     def get_tail_from_element(self, element):
         text = element.tail
         if text is not None:
             text = text.strip()
+            if text == "":
+                return None
             return text
         return None
 

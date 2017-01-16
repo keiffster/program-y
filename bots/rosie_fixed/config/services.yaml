@@ -1,0 +1,16 @@
+
+pannous:
+  file: programy.services.pannous
+  class: PannousSRAIService
+
+pandora:
+  file: programy.services.pandora
+  class: PandoraSRAIService
+
+wikipedia:
+  file: programy.services.wikipedia
+  class: WikipediaSRAIService
+
+generic:
+  file: programy.services.generic
+  class: GenericSRAIService

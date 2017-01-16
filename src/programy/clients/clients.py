@@ -27,18 +27,19 @@ from programy.brain import Brain
 
 class ClientArguments(object):
 
-    def __init__(self):
+    def __init__(self, client):
         self.args = None
-        self.parser = argparse.ArgumentParser(description='ProgramY AIML2.0 Console Client')
-        self.add_arguments()
+        self.add_arguments(client)
 
-    def add_arguments(self):
+    def add_arguments(self, client):
+        self.parser = argparse.ArgumentParser(description=client.get_description())
         self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')
         self.parser.add_argument('--config', dest='config', help='configuration file location')
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
         self.parser.add_argument('--debug', dest='debug', action='store_true', help='run in debug mode')
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
+        client.add_client_arguments(self.parser)
 
     def parse_args(self):
         self.args = self.parser.parse_args()
@@ -75,13 +76,24 @@ class ClientArguments(object):
 class BotClient(object):
 
     def __init__(self):
-        self.arguments = self.parse_arguements()
+        self._arguments = self.parse_arguements()
         self.initiate_logging(self.arguments)
         self.load_configuration(self.arguments)
         self.initiate_bot(self.configuration)
 
+    @property
+    def arguments(self):
+        return self._arguments
+
+    def get_description(self):
+        return 'ProgramY AIML2.0 Console Client'
+
+    def add_client_arguments(self, parser):
+        # Nothing to add
+        pass
+
     def parse_arguements(self):
-        client_args = ClientArguments()
+        client_args = ClientArguments(self)
         client_args.parse_args()
         return client_args
 

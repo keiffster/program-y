@@ -107,10 +107,14 @@ class PatternNode(object):
     def has_zero_or_more(self):
         if self._0ormore_arrow is not None or self._0ormore_hash is not None:
             return True
+        else:
+            return False
 
     def has_one_or_more(self):
         if self._1ormore_star is not None or self._1ormore_underline is not None:
             return True
+        else:
+            return False
 
     def has_topic(self):
         return bool(self.topic is not None)
@@ -470,7 +474,9 @@ class PatternSetNode(PatternWordNode):
         return False
 
     def equals(self, bot, client, word):
-        if bot.brain.sets.contains(self.set_name):
+        if self.set_name.upper() == 'NUMBER':
+            return word.isnumeric()
+        elif bot.brain.sets.contains(self.set_name):
             logging.debug("Looking for [%s] in set [%s]", word, self.set_name)
             set_words = bot.brain.sets.set(self.set_name)
             if word in set_words:

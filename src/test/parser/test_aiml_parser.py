@@ -241,6 +241,53 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsInstance(template, PatternTemplateNode)
         self.assertEqual(template.template.resolve(bot=None, clientid="test"), "RESPONSE")
 
+    def test_base_aiml_topic_category_template_multi_line(self):
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <topic name="test">
+                    <category>
+                        <pattern>*</pattern>
+                        <template>
+                            RESPONSE1,
+                            RESPONSE2.
+                            RESPONSE3
+                        </template>
+                    </category>
+                </topic>
+            </aiml>
+            """)
+
+        self.assertIsNotNone(self.parser.pattern_parser)
+        self.assertIsNotNone(self.parser.pattern_parser.root)
+        self.assertIsInstance(self.parser.pattern_parser.root, PatternRootNode)
+        self.assertTrue(self.parser.pattern_parser.root.has_one_or_more())
+
+        node = self.parser.pattern_parser.root.star
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
+        self.assertEquals(node.wildcard, "*")
+
+        topic = node.topic
+        self.assertIsNotNone(topic)
+        self.assertIsInstance(topic, PatternTopicNode)
+        self.assertEqual(len(topic.children), 1)
+        self.assertIsNotNone(topic.children[0])
+        self.assertIsInstance(topic.children[0], PatternWordNode)
+        self.assertEqual(topic.children[0].word, "test")
+
+        that = topic.children[0].that
+        self.assertIsNotNone(that)
+        self.assertIsInstance(that, PatternThatNode)
+        self.assertTrue(that.has_one_or_more())
+        self.assertIsInstance(that.star, PatternOneOrMoreWildCardNode)
+        self.assertEquals(that.star.wildcard, "*")
+
+        template = that.star.template
+        self.assertIsNotNone(template)
+        self.assertIsInstance(template, PatternTemplateNode)
+        self.assertEqual(template.template.resolve(bot=None, clientid="test"), "RESPONSE1, RESPONSE2. RESPONSE3")
+
     def test_base_aiml_category_template(self):
         self.parser.parse_from_text(
             """<?xml version="1.0" encoding="UTF-8"?>

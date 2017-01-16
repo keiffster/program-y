@@ -528,12 +528,6 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsInstance(base_node.that.children[0].children[0].children[0], PatternWordNode)
         self.assertEqual(base_node.that.children[0].children[0].children[0].word, "WORLD")
 
-    ##################################################################################################################
-    #
-
-    def test_add_template_to_node(self):
-        pass
-
 
     ##################################################################################################################
     #
@@ -552,3 +546,38 @@ class PatternGraphTests(PatternTestBaseClass):
         template_graph_root = None
         element = ET.fromstring("<pattern>test1</pattern>")
         graph.add_pattern_to_graph(element, topic_element, that_element, template_graph_root)
+
+    ##################################################################################################################
+    #
+
+    def test_simple_hash_and_star_at_end(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>A # *</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        self.assertIsNotNone(graph.root)
+        self.assertIsNotNone(graph.root.children)
+        self.assertEqual(len(graph.root.children), 1)
+
+        word_node = graph.root.children[0]
+        self.assertIsInstance(word_node, PatternWordNode)
+        self.assertEqual(word_node.word, "A")
+
+        self.assertTrue(word_node.has_zero_or_more())
+        if word_node.arrow is not None:
+            wildcard_node = word_node.arrow
+        elif word_node.hash is not None:
+            wildcard_node = word_node.hash
+        self.assertIsNotNone(wildcard_node)
+
+        self.assertTrue(wildcard_node.has_one_or_more())
+        if word_node.star is not None:
+            wildcard_node = word_node.star
+        elif word_node.underline is not None:
+            wildcard_node = word_node.underline
+        self.assertIsNotNone(wildcard_node)

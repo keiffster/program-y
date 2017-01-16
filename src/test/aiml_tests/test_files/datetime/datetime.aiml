@@ -45,18 +45,18 @@ For more information see [url]
                 <set var="month"><date format="%B" jformat="MMMMMMMMM"/></set>
             </think>
             <condition var="month">
-            <li><value>January</value>Winter</li>
-            <li><value>February</value>Winter</li>
-            <li><value>March</value>Winter</li>
-            <li><value>April</value>Spring</li>
-            <li><value>May</value>Spring</li>
-            <li><value>June</value>Summer</li>
-            <li><value>July</value>Summer</li>
-            <li><value>August</value>Summer</li>
-            <li><value>September</value>Fall</li>
-            <li><value>October</value>Fall</li>
-            <li><value>November</value>Winter</li>
-            <li><value>December</value>Winter</li>
+                <li><value>JANUARY</value>Winter</li>
+                <li><value>FEBRUARY</value>Winter</li>
+                <li><value>MARCH</value>Winter</li>
+                <li><value>APRIL</value>Spring</li>
+                <li><value>MAY</value>Spring</li>
+                <li><value>JUNE</value>Summer</li>
+                <li><value>JULY</value>Summer</li>
+                <li><value>AUGUST</value>Summer</li>
+                <li><value>SEPTEMBER</value>Fall</li>
+                <li><value>OCTOBER</value>Fall</li>
+                <li><value>NOVEMBER</value>Winter</li>
+                <li><value>DECEMBER</value>Winter</li>
             <li>unknown</li>
             </condition>
         </template>
@@ -96,6 +96,40 @@ For more information see [url]
                 <from><bot name="birthdate"/></from>
                 <to><date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/></to>
             </interval>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DAYS UNTIL <set>weekday</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="day">
+                    <star/>
+                </set>
+                <set var="today">
+                    <date format="%A" jformat="EEEEEEEEEE"/>
+                </set>
+                <set var="days">0</set>
+            </think>
+            <condition var="today">
+                <li>
+                    <value>
+                        <get var="day"/>
+                    </value>
+                    <get var="days"/>
+                </li>
+                <li>
+                    <think>
+                        <set var="today">
+                            <map name="tomorrow"><get var="today"/></map>
+                        </set>
+                        <set var="days"><map name="successor"><get var="days"/></map>
+                        </set>
+                    </think>
+                    <loop/>
+                </li>
+            </condition>
         </template>
     </category>
 

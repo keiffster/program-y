@@ -233,7 +233,9 @@ class Brain(object):
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
-    def ask_question(self, bot, clientid, sentence, parent_question) -> str:
+    # KS
+    #def ask_question(self, bot, clientid, sentence, parent_question) -> str:
+    def ask_question(self, bot, clientid, sentence) -> str:
 
         conversation = bot.get_conversation(clientid)
 
@@ -245,10 +247,12 @@ class Brain(object):
             logging.info("Topic pattern = [%s]", topic_pattern)
 
         try:
-            if parent_question is not None:
-                that_question = parent_question
-            else:
-                that_question = conversation.nth_question(2)
+            # KS
+            #if parent_question is not None:
+            #    that_question = parent_question
+            #else:
+            #    that_question = conversation.nth_question(2)
+            that_question = conversation.nth_question(2)
 
             that_sentence = that_question.current_sentence()
 
@@ -265,7 +269,10 @@ class Brain(object):
             logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
-        return self._aiml_parser.match_sentence(bot, clientid, sentence, parent_question, topic_pattern=topic_pattern,
+        return self._aiml_parser.match_sentence(bot, clientid,
+                                                sentence,
+                                                None, # KS parent_question,
+                                                topic_pattern=topic_pattern,
                                                 that_pattern=that_pattern)
 
     def post_process_response(self, bot, clientid, response: str):

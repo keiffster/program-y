@@ -68,8 +68,9 @@ For more information see [url]
 		<template>
 		    <think>
 				<srai>SET PREDICATES</srai>
+				<set var="local2">Value3</set>
 			</think>
-			Global1 set to <get name="global1" /> and Local1 set to <get var="local1" />
+			Global1 set to <get name="global1" /> and Local1 set to <get var="local1" />  and Local2 set to <get var="local2" />
 		</template>
 	</category>
 

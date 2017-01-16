@@ -45,3 +45,9 @@ bot:
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!
     exit_response: So long, and thanks for the fish!
+
+rest:
+  host: 127.0.0.1
+  port: 5000
+  debug: true
+  use_api_keys: false

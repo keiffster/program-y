@@ -62,7 +62,8 @@ from programy.parser.template.nodes import TemplateSystemNode
 from programy.parser.template.nodes import TemplateExtensionNode
 from programy.parser.template.nodes import TemplateLearnNode
 from programy.parser.template.nodes import TemplateLearnfNode
-
+from programy.parser.template.nodes import TemplateFirstNode
+from programy.parser.template.nodes import TemplateRestNode
 
 
 class TemplateGraph(object):
@@ -80,14 +81,14 @@ class TemplateGraph(object):
 
     def parse_template_node(self, pattern, current_branch):
 
-        head_text = pattern.text
+        head_text = self.get_text_from_element(pattern)
         head_result = self.parse_text(head_text, current_branch)
 
         found_sub = False
         for sub_pattern in pattern:
             self.parse_tag_expression(sub_pattern, current_branch)
 
-            tail_text = sub_pattern.tail
+            tail_text = self.get_tail_from_element(sub_pattern)
             self.parse_text(tail_text, current_branch)
 
             found_sub = True
@@ -101,9 +102,26 @@ class TemplateGraph(object):
             if len(string) > 0:
                 words = string.split(" ")
                 for word in words:
-                    branch.children.append(TemplateWordNode(word))
+                    if word is not None and len(word) > 0:
+                        branch.children.append(TemplateWordNode(word.strip()))
                 return True
         return False
+
+    def get_text_from_element(self, element):
+        text = element.text
+        if text is not None:
+            text = text.strip()
+            return text
+        return None
+
+    def get_tail_from_element(self, element):
+        text = element.tail
+        if text is not None:
+            text = text.strip()
+            if text == "":
+                return None
+            return text
+        return None
 
     def parse_tag_expression(self, expression, branch):
         if expression.tag == 'random':
@@ -184,6 +202,11 @@ class TemplateGraph(object):
             self.parse_size_expression(expression, branch)
         elif expression.tag == 'oob':
             self.parse_oob_expression(expression, branch)
+        elif expression.tag == 'first':
+            self.parse_first_expression(expression, branch)
+        elif expression.tag == 'rest':
+            self.parse_rest_expression(expression, branch)
+
 
         # This is tag not AIML 2.0 compliant
         elif expression.tag == 'extension':
@@ -199,7 +222,7 @@ class TemplateGraph(object):
 
     def parse_unknown_as_text_node(self, expression, branch):
         value = ET.tostring(expression, encoding="utf-8", method='xml').decode("utf-8")
-        text_node = TemplateWordNode(word=value)
+        text_node = TemplateWordNode(word=value.strip())
         branch.children.append(text_node)
 
     #######################################################################################################
@@ -276,13 +299,18 @@ class TemplateGraph(object):
                     return (None, False)
             else:
                 if len(names) == 1:
-                    return (condition.find('name').text, False)
+                    name_text = self.get_text_from_element(condition.find('name'))
+                    return (name_text, False)
                 else:
-                    return (condition.find('var').text, True)
+                    var_text = self.get_text_from_element(condition.find('var'))
+                    return (var_text, True)
 
     def get_condition_value(self, condition, raise_on_missing=True):
         if 'value' in condition.attrib:
-            return condition.attrib['value']
+            value_node = TemplateNode()
+            value_node.append(TemplateWordNode(condition.attrib['value']))
+            return value_node
+            #return condition.attrib['value']
         else:
             values = condition.findall('value')
             if len(values) == 0:
@@ -296,7 +324,10 @@ class TemplateGraph(object):
                 else:
                     return None
             else:
-                return condition.find('value').text
+                value_node = TemplateNode()
+                self.parse_template_node(values[0], value_node)
+                return value_node
+                #return self.get_text_from_element(condition.find('value'))
 
     # Type 1
     # <condition name="predicate" value="v">X</condition>,
@@ -315,7 +346,7 @@ class TemplateGraph(object):
         condition = TemplateType1ConditionNode(name=name, value=value, local=local)
         branch.append(condition)
 
-        self.parse_text(expression.text, condition)
+        self.parse_text(self.get_text_from_element(expression), condition)
 
         for child in expression:
             if child.tag == 'name':
@@ -335,7 +366,7 @@ class TemplateGraph(object):
 
             else:
                 self.parse_tag_expression(child, condition)
-            tail_text = child.tail
+            tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, condition)
 
     # Type 2
@@ -371,7 +402,7 @@ class TemplateGraph(object):
                 list_item.local = condition.local
 
                 condition.children.append(list_item)
-                self.parse_text(child.text, list_item)
+                self.parse_text(self.get_text_from_element(child), list_item)
 
                 for sub_pattern in child:
 
@@ -390,7 +421,7 @@ class TemplateGraph(object):
                     else:
                         self.parse_tag_expression(sub_pattern, list_item)
 
-                    tail_text = sub_pattern.tail
+                    tail_text = self.get_tail_from_element(sub_pattern)
                     self.parse_text(tail_text, list_item)
 
             else:
@@ -428,7 +459,7 @@ class TemplateGraph(object):
 
                 condition.append(list_item)
 
-                self.parse_text(child.text, list_item)
+                self.parse_text(self.get_text_from_element(child), list_item)
 
                 for sub_pattern in child:
                     if sub_pattern.tag == 'name':
@@ -446,7 +477,7 @@ class TemplateGraph(object):
                     else:
                         self.parse_tag_expression(sub_pattern, list_item)
 
-                    tail_text = sub_pattern.tail
+                    tail_text = self.get_tail_from_element(sub_pattern)
                     self.parse_text(tail_text, list_item)
 
             else:
@@ -480,7 +511,7 @@ class TemplateGraph(object):
         if 'service' in expression.attrib:
             sraix_node.service = expression.attrib['service']
 
-        head_text = expression.text
+        head_text = self.get_text_from_element(expression)
         self.parse_text(head_text, sraix_node)
 
         for child in expression:
@@ -493,11 +524,11 @@ class TemplateGraph(object):
             elif child.tag == 'apikey':
                 logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
             elif child.tag == 'service':
-                sraix_node.service = child.text,
+                sraix_node.service = self.get_text_from_element(child)
             else:
                 self.parse_tag_expression(child, sraix_node)
 
-            tail_text = child.tail
+            tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, sraix_node)
 
         if sraix_node.service is None:
@@ -539,10 +570,10 @@ class TemplateGraph(object):
             if child.tag == 'name':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 get_node.name = node
                 get_node.local = False
@@ -551,10 +582,10 @@ class TemplateGraph(object):
             elif child.tag == 'var':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 get_node.name = node
                 get_node.local = True
@@ -597,17 +628,17 @@ class TemplateGraph(object):
             var_found = True
             set_node.name = node
 
-        self.parse_text(expression.text, set_node)
+        self.parse_text(self.get_text_from_element(expression), set_node)
 
         for child in expression:
 
             if child.tag == 'name':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 set_node.name = node
                 set_node.local = False
@@ -616,10 +647,10 @@ class TemplateGraph(object):
             elif child.tag == 'var':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 set_node.name = node
                 set_node.local = True
@@ -628,7 +659,7 @@ class TemplateGraph(object):
             else:
                 self.parse_tag_expression(child, set_node)
 
-            self.parse_text(child.tail, set_node)
+            self.parse_text(self.get_tail_from_element(child), set_node)
 
         if name_found is True and var_found is True:
             raise ParserException("Error, set node has both name AND var values", xml_element=expression)
@@ -655,17 +686,17 @@ class TemplateGraph(object):
             name_found = True
             map_node.name = node
 
-        self.parse_text(expression.text, map_node)
+        self.parse_text(self.get_text_from_element(expression), map_node)
 
         for child in expression:
 
             if child.tag == 'name':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 map_node.name = node
                 name_found = True
@@ -673,7 +704,7 @@ class TemplateGraph(object):
             else:
                 self.parse_tag_expression(child, map_node)
 
-            self.parse_text(child.tail, map_node)
+            self.parse_text(self.get_tail_from_element(child), map_node)
 
         if name_found is False:
             raise ParserException("Error, name not found", xml_element=expression)
@@ -697,16 +728,16 @@ class TemplateGraph(object):
             name_found = True
             bot_node.name = node
 
-        self.parse_text(expression.text, bot_node)
+        self.parse_text(self.get_text_from_element(expression), bot_node)
 
         for child in expression:
 
             if child.tag == 'name':
                 node = TemplateNode()
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 bot_node.name = node
                 name_found = True
@@ -714,7 +745,7 @@ class TemplateGraph(object):
             else:
                 self.parse_tag_expression(child, bot_node)
 
-            self.parse_text(child.tail, bot_node)
+            self.parse_text(self.get_tail_from_element(child), bot_node)
 
         if name_found is False:
             raise ParserException("Error, name not found", xml_element=expression)
@@ -724,11 +755,18 @@ class TemplateGraph(object):
     def _parse_node(self, node, expression, branch):
         branch.children.append(node)
 
-        self.parse_text(expression.text, node)
+        expression_text = self.parse_text(self.get_text_from_element(expression), node)
 
+        expression_children = False
         for child in expression:
             self.parse_tag_expression(child, node)
-            self.parse_text(child.tail, node)
+            self.parse_text(self.get_tail_from_element(child), node)
+            expression_children = True
+
+        if expression_text is None and expression_children is False:
+            # No content in node, default to <star/>
+            logging.debug ("Node has no content (text or children), default to <star/>")
+            node.append(TemplateStarNode())
 
     #######################################################################################################
     # THINK_EXPRESSION ::== <think>TEMPLATE_EXPRESSION</think>
@@ -834,6 +872,18 @@ class TemplateGraph(object):
 
 
     #######################################################################################################
+    # <explode>ABC</explode>
+
+    def parse_first_expression(self, expression, branch):
+        self._parse_node(TemplateFirstNode(), expression, branch)
+
+    #######################################################################################################
+    # <implode>ABC</implode>
+
+    def parse_rest_expression(self, expression, branch):
+        self._parse_node(TemplateRestNode(), expression, branch)
+
+    #######################################################################################################
 
     def _parse_node_with_attrib(self, node, expression, branch, attrib_name, default_value=None):
 
@@ -844,17 +894,17 @@ class TemplateGraph(object):
             #logging.debug("Attrib [%s] found as part of node attributes" % attrib_name)
             node.set_attrib(attrib_name, expression.attrib[attrib_name])
 
-        self.parse_text(expression.text, node)
+        self.parse_text(self.get_text_from_element(expression), node)
 
         for child in expression:
 
             if child.tag == attrib_name:
                 #logging.debug("Attrib [%s] found as part of child nodes" % attrib_name)
-                node.set_attrib(attrib_name, child.text)
+                node.set_attrib(attrib_name, self.get_text_from_element(child))
             else:
                 self.parse_tag_expression(child, node)
 
-            self.parse_text(child.tail, node)
+            self.parse_text(self.get_tail_from_element(child), node)
 
         if attrib_found is False:
             logging.debug("Setting default value for attrib [%s]", attrib_name)
@@ -942,43 +992,43 @@ class TemplateGraph(object):
         if 'format' in expression.attrib:
             interval_node.format = TemplateWordNode(expression.attrib['format'])
 
-        head_text = expression.text
+        head_text = self.get_text_from_element(expression)
         self.parse_text(head_text, interval_node)
 
         for child in expression:
             if child.tag == 'format':
-                interval_node.format = TemplateWordNode(child.text)
+                interval_node.format = TemplateWordNode(self.get_text_from_element(child))
             elif child.tag == 'style':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 interval_node.style = node
             elif child.tag == 'from':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 interval_node.interval_from = node
             elif child.tag == 'to':
                 node = TemplateNode()
 
-                self.parse_text(child.text, node)
+                self.parse_text(self.get_text_from_element(child), node)
                 for sub_child in child:
                     self.parse_tag_expression(sub_child, node)
-                    self.parse_text(child.text, node)
+                    self.parse_text(self.get_text_from_element(child), node)
 
                 interval_node.interval_to = node
             else:
                 self.parse_tag_expression(child, interval_node)
 
-            tail_text = child.tail
+            tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, interval_node)
 
         if interval_node.format is None:
@@ -1004,16 +1054,16 @@ class TemplateGraph(object):
         if 'path' in expression.attrib:
             extension_node.path = expression.attrib['path']
 
-        head_text = expression.text
+        head_text = self.get_text_from_element(expression)
         self.parse_text(head_text, extension_node)
 
         for child in expression:
             if child.tag == 'path':
-                extension_node.path = child.text
+                extension_node.path = self.get_text_from_element(child)
             else:
                 self.parse_tag_expression(child, extension_node)
 
-            tail_text = child.tail
+            tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, extension_node)
 
 
@@ -1046,13 +1096,13 @@ class TemplateGraph(object):
         eval_node = TemplateEvalNode()
         branch.children.append(eval_node)
 
-        head_text = expression.text
+        head_text = self.get_text_from_element(expression)
         self.parse_text(head_text, eval_node)
 
         for child in expression:
             self.parse_tag_expression(child, eval_node)
 
-            tail_text = child.tail
+            tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, eval_node)
 
     def parse_learn_expression(self, expression, branch):

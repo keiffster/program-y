@@ -258,20 +258,37 @@ class AIMLParser(object):
     def match_sentence(self, bot, clientid, sentence, parent_question, topic_pattern, that_pattern):
         logging.debug("Matching sentence [%s], topic=[%s], that=[%s] ", sentence.text(), topic_pattern, that_pattern)
 
-        pattern_stars = []
-        topic_stars = []
-        that_stars = []
-        matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern),
-                                             topic_stars, Sentence(that_pattern), that_stars)
-        if matched is not None:
-            if parent_question is not None:
-                parent_question.current_sentence().stars = pattern_stars
-                parent_question.current_sentence().topicstars = topic_stars
-                parent_question.current_sentence().thatstars = that_stars
-            else:
-                sentence.stars = pattern_stars
-                sentence.topicstars = topic_stars
-                sentence.thatstars = that_stars
+        if parent_question is not None:
+            pattern_stars = parent_question.current_sentence()._stars
+            topic_stars = parent_question.current_sentence()._topicstars
+            that_stars = parent_question.current_sentence()._thatstars
+        else:
+            pattern_stars = sentence._stars
+            topic_stars = sentence._topicstars
+            that_stars = sentence._thatstars
 
+        matched = self.pattern_matcher.match(bot, clientid,
+                                             sentence, pattern_stars,
+                                             Sentence(topic_pattern),topic_stars,
+                                             Sentence(that_pattern), that_stars)
+        if matched is not None:
             return self.template_evaluator.evaluate(bot, clientid, matched.template)
+
+        # pattern_stars = []
+        # topic_stars = []
+        # that_stars = []
+        # matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern),
+        #                                      topic_stars, Sentence(that_pattern), that_stars)
+        # if matched is not None:
+        #     if parent_question is not None:
+        #         parent_question.current_sentence().stars = pattern_stars
+        #         parent_question.current_sentence().topicstars = topic_stars
+        #         parent_question.current_sentence().thatstars = that_stars
+        #     else:
+        #         sentence.stars = pattern_stars
+        #         sentence.topicstars = topic_stars
+        #         sentence.thatstars = that_stars
+        #
+        #     return self.template_evaluator.evaluate(bot, clientid, matched.template)
+
         return None

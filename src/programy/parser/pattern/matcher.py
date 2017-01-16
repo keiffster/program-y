@@ -73,7 +73,8 @@ class PatternMatcher(object):
         matched_path = []
         matched_stars = []
         if self.match_children(match_context, self.graph.root, pattern_sentence, 0, matched_path, matched_stars,
-                               0, 0) is True:
+                               0) is True:
+
             for match in match_context.pattern_stars:
                 pattern_stars.append(match)
 
@@ -93,7 +94,7 @@ class PatternMatcher(object):
             string += "\t"
         return string
 
-    def end_of_sentence(self, match_context, root, sentence, num_word, matched_path, matched_stars, num_star, depth):
+    def end_of_sentence(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
 
         tabs_str = self._get_tabs(depth)
 
@@ -101,25 +102,25 @@ class PatternMatcher(object):
             logging.debug("%sRoot has zero or more", tabs_str)
             if root.arrow is not None:
                 if self.match_children(match_context, root.arrow, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
             else:
                 if self.match_children(match_context, root.hash, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
 
         if root.has_topic():
             self.matches_to_stars(matched_stars, match_context.pattern_stars)
             matched_stars = []
-            if self.match_children(match_context, root.topic, match_context.topic_sentence, 0, matched_path, matched_stars,
-                                   0, 0) is True:
+            if self.match_children(match_context, root.topic, match_context.topic_sentence, 0, matched_path,
+                                   matched_stars, 0) is True:
                 return True
 
         elif root.has_that():
             self.matches_to_stars(matched_stars, match_context.topic_stars)
             matched_stars = []
-            if self.match_children(match_context, root.that, match_context.that_sentence, 0, matched_path, matched_stars,
-                                   0, 0) is True:
+            if self.match_children(match_context, root.that, match_context.that_sentence, 0, matched_path,
+                                   matched_stars, 0) is True:
                 return True
 
         elif root.has_template():
@@ -132,7 +133,7 @@ class PatternMatcher(object):
             logging.debug("%sRoot has no topic, that or template, exiting...", tabs_str)
             return False
 
-    def is_zero_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, num_star, depth):
+    def is_zero_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
 
         tabs_str = self._get_tabs(depth)
 
@@ -143,18 +144,18 @@ class PatternMatcher(object):
         if root.has_wildcard():
             logging.debug("%sRoot next is wildcard", tabs_str)
 
-            logging.debug("%s0ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, num_star)
+            logging.debug("%s0ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
             # added = True
             matched_stars[len(matched_stars) - 1].append(word)
             matched_stars.append([])
 
             if root.hash is not None:
                 if self.match_children(match_context, root.hash, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
             elif root.arrow is not None:
                 if self.match_children(match_context, root.arrow, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
             else:
                 raise Exception("Unknown zero or ore wild card")
@@ -173,17 +174,17 @@ class PatternMatcher(object):
 
                     logging.debug("%s0 or more matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
                     if self.match_children(match_context, child, sentence, num_word + 1, matched_path,
-                                           matched_stars, num_star, depth + 1) is True:
+                                           matched_stars, depth + 1) is True:
                         return True
 
-        logging.debug("%s0ORM. Adding (%s) to star match (%d)", tabs_str, word, num_star)
+        logging.debug("%s0ORM. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
         # if added is False:
         # matched_stars.append([])
         logging.debug("%sAdding new star match", tabs_str)
         matched_stars[len(matched_stars) - 1].append(word)
 
         if self.match_children(match_context, root, sentence, num_word + 1, matched_path, matched_stars,
-                               num_star, depth + 1) is True:
+                               depth + 1) is True:
             return True
 
         if len(matched_stars) > 0:
@@ -191,7 +192,7 @@ class PatternMatcher(object):
 
         return False
 
-    def is_one_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, num_star, depth):
+    def is_one_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
 
         tabs_str = self._get_tabs(depth)
 
@@ -201,17 +202,17 @@ class PatternMatcher(object):
         if root.has_wildcard():
             logging.debug("%sRoot next is wildcard", tabs_str)
 
-            logging.debug("%s1ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, num_star)
+            logging.debug("%s1ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
             matched_stars.append([])
             matched_stars[len(matched_stars) - 1].append(word)
 
             if root.underline is not None:
                 if self.match_children(match_context, root.underline, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
             if root.star is not None:
                 if self.match_children(match_context, root.star, sentence, num_word + 1, matched_path,
-                                       matched_stars, num_star, depth + 1) is True:
+                                       matched_stars, depth + 1) is True:
                     return True
             else:
                 raise Exception("Unknown one or ore wild card")
@@ -230,14 +231,14 @@ class PatternMatcher(object):
 
                     logging.debug("%s1 or more matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
                     if self.match_children(match_context, child, sentence, num_word + 1, matched_path, matched_stars,
-                                           num_star, depth + 1) is True:
+                                           depth + 1) is True:
                         return True
 
-            logging.debug("%s1ORM Adding (%s) to star match (%d)", tabs_str, word, num_star)
+            logging.debug("%s1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
             matched_stars[len(matched_stars) - 1].append(word)
 
             if self.match_children(match_context, root, sentence, num_word + 1, matched_path, matched_stars,
-                                   num_star, depth + 1) is True:
+                                   depth + 1) is True:
                 return True
 
             if len(matched_stars) > 0:
@@ -246,7 +247,7 @@ class PatternMatcher(object):
         return False
 
     def match_children(self, match_context: MatchContext, root: PatternNode, sentence: Sentence, num_word: int,
-                       matched_path: list, matched_stars: list, num_star: int, depth: int):
+                       matched_path: list, matched_stars: list, depth: int):
 
         tabs_str = self._get_tabs(depth)
 
@@ -255,15 +256,15 @@ class PatternMatcher(object):
             return False
 
         if num_word >= sentence.num_words():
-            return self.end_of_sentence(match_context, root, sentence, num_word, matched_path, matched_stars, num_star, depth)
+            return self.end_of_sentence(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
 
         if root.is_zero_or_more():
-            result = self.is_zero_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, num_word, depth)
+            result = self.is_zero_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
             if result is True:
                 return True
 
         if root.is_one_or_more():
-            result = self.is_one_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, num_word, depth)
+            result = self.is_one_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
             if result is True:
                 return True
 
@@ -284,7 +285,7 @@ class PatternMatcher(object):
 
                     logging.debug("%sPriority matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
                     if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
-                                           num_star, depth+1) is True:
+                                           depth+1) is True:
                         return True
 
         if root.has_zero_or_more():
@@ -296,7 +297,7 @@ class PatternMatcher(object):
 
                     logging.debug("%sMatching child [#] -> word [%s]", tabs_str, word)
                     if self.match_children(match_context, root.hash, sentence, num_word, matched_path, matched_stars,
-                                           num_star, depth+1) is True:
+                                           depth+1) is True:
                         return True
 
                     if len(matched_stars) > 0:
@@ -307,13 +308,13 @@ class PatternMatcher(object):
                 if root.underline is not None:
                     logging.debug("%sRoot has 1 or more", tabs_str)
 
-                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, num_star)
+                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
                     matched_stars.append([])
                     matched_stars[len(matched_stars) - 1].append(word)
 
                     logging.debug("%sMatching child [_] -> word [%s]", tabs_str, word)
                     if self.match_children(match_context, root.underline, sentence, num_word+1, matched_path,
-                                           matched_stars, num_star, depth+1) is True:
+                                           matched_stars, depth+1) is True:
                         return True
 
                     if len(matched_stars) > 0:
@@ -331,19 +332,18 @@ class PatternMatcher(object):
 
                     logging.debug("%sMatched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
                     if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
-                                           num_star, depth+1) is True:
+                                           depth+1) is True:
                         return True
 
         if root.has_zero_or_more():
             if num_word <= sentence.num_words():
-
                 if root.arrow is not None:
                     logging.debug("%sRoot is 0 or more", tabs_str)
                     matched_stars.append([])
 
                     logging.debug("%sMatching child [^] -> word [%s]", word, tabs_str)
                     if self.match_children(match_context, root.arrow, sentence, num_word, matched_path, matched_stars,
-                                           num_star, depth+1) is True:
+                                           depth+1) is True:
                         return True
 
                     if len(matched_stars) > 0:
@@ -353,13 +353,13 @@ class PatternMatcher(object):
             if num_word < sentence.num_words():
                 if root.star is not None:
                     logging.debug("%sRoot has 1 or more", tabs_str)
-                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, num_star)
+                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
                     matched_stars.append([])
                     matched_stars[len(matched_stars) - 1].append(word)
 
                     logging.debug("%sMatching child [*] -> word [%s]", tabs_str, word)
                     if self.match_children(match_context, root.star, sentence, num_word+1, matched_path,
-                                           matched_stars, num_star, depth+1) is True:
+                                           matched_stars, depth+1) is True:
                         return True
 
                     if len(matched_stars) > 0:
