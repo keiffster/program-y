@@ -13,5 +13,5 @@ Now includes external services Pandora, Pannous, Wikipedia and Generic REST
 
 Whats New in 0.2.2 ?
 
-Added new REST client which demonstrates how to pass unique user id through to the parser to maintain sesseion
+Added new REST client which demonstrates how to pass unique user id through to the parser to maintain session
 In this instance the REST server would be called from another client such as XMPP, Facebook Messegner with a unique id such as session id or user id
