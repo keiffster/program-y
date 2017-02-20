@@ -258,6 +258,7 @@ class BotConfiguration(BaseConfigurationData):
         self._default_response = "Sorry, I don't have an answer for that right now"
         self._exit_response = "Bye!"
         self._initial_question = "Hello"
+        self._override_predicates = True
         BaseConfigurationData.__init__(self, "bot")
 
     def load_config_section(self, config_file, bot_root):
@@ -302,6 +303,13 @@ class BotConfiguration(BaseConfigurationData):
     def initial_question(self, text):
         self._initial_question = text
 
+    @property
+    def override_predicates(self):
+        return self._override_predicates
+
+    @override_predicates.setter
+    def override_predicates(self, override):
+        self._override_predicates = override
 
 class RestConfiguration(BaseConfigurationData):
 

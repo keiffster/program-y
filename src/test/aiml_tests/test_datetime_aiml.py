@@ -8,7 +8,7 @@ unittest.util._MAX_LENGTH=2000
 class BasicTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self)
+        TestClient.__init__(self, debug=True)
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)

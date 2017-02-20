@@ -20,18 +20,18 @@ For more information see [url]
 <aiml>
 
 	<category>
-		<pattern>TEST DENORMALIZE</pattern>
+		<pattern>RECURSIVE *</pattern>
 		<template>
-			<denormalize>keithsterling dot com</denormalize>
+		    ENDED
 		</template>
 	</category>
 
 	<category>
-		<pattern>SAY *</pattern>
+		<pattern>RECURSIVE * *</pattern>
 		<template>
-			<denormalize><star/></denormalize>
+            RECURSED
+            <srai>RECURSIVE <star index="2" /></srai>
 		</template>
-
 	</category>
 
 </aiml>

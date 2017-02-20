@@ -64,6 +64,10 @@ class Bot(object):
             return "Hello"
 
     @property
+    def override_predicates(self):
+        return self._configuration.override_predicates
+
+    @property
     def get_version_string(self):
         if self._configuration is not None:
             return "%s version %s, initiated %s" %(

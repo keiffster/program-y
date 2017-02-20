@@ -74,7 +74,7 @@ class PatternMatcher(object):
         matched_stars = []
         if self.match_children(match_context, self.graph.root, pattern_sentence, 0, matched_path, matched_stars,
                                0) is True:
-
+            
             for match in match_context.pattern_stars:
                 pattern_stars.append(match)
 

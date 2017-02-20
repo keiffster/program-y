@@ -20,37 +20,37 @@ class TrainAIMLTests(unittest.TestCase):
 
     def test_train_noun(self):
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "JESSICA LIKES TO SMOKE CIGARS")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "jessica likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Do you smoke cigars too?", response)
 
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHO LIKES TO SMOKE CIGARS")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHAT DOES JESSICA LIKE")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "what does jessica like")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHAT DOES JESSICA SMOKE")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "what does jessica smoke")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHO SMOKES")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "who smokes")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
     def test_train_pronoun(self):
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "MOMMY LIKES TO SMOKE CIGARS")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "mommy likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Do you smoke cigars too?", response)
 
         TrainAIMLTests.test_client.bot.brain.dump_tree()
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "WHO LIKES TO SMOKE CIGARS")
+        response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Mommy likes to smoke cigars", response)

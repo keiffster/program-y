@@ -28,15 +28,15 @@ class GetAIMLTests(unittest.TestCase):
     #################################################################################################################
     #
 
-    def test_name_get(self):
-        response = GetAIMLTests.test_client.bot.ask_question("test", "NAME GET")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, "test1")
-
     def test_name_unknown_get(self):
         response = GetAIMLTests.test_client.bot.ask_question("test", "NAME UNKNOWN")
         self.assertIsNotNone(response)
         self.assertEqual(response, "unknown")
+
+    def test_name_get(self):
+        response = GetAIMLTests.test_client.bot.ask_question("test", "NAME GET")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "test1")
 
     def test_name_get_with_topic(self):
         response = GetAIMLTests.test_client.bot.ask_question("test", "NAME GET WITH TOPIC")

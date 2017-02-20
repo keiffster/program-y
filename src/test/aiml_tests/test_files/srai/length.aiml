@@ -1,0 +1,79 @@
+<aiml>
+    <category>
+        <pattern>
+            XADD <set>number</set> XS 0
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XADD <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XADD
+                <map name="successor">
+                    <star index="1"/>
+                </map>
+                XS
+                <map name="predecessor">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXLENGTH * XS <set>number</set>
+        </pattern>
+        <template>
+            <srai>XADD
+                <star index="2"/>
+                XS 1
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXLENGTH * * XS <set>number</set>
+        </pattern>
+        <template>
+            <srai>XXLENGTH
+                <star index="2"/>
+                XS
+                <srai>XADD
+                    <star index="3"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLENGTH
+        </pattern>
+        <template>0
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLENGTH *
+        </pattern>
+        <template>
+            <srai>XXLENGTH
+                <explode>
+                    <star index="1"/>
+                </explode>
+                XS 0
+            </srai>
+        </template>
+    </category>
+
+</aiml>

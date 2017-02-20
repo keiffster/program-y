@@ -61,6 +61,25 @@ For more information see [url]
 		</template>
 	</category>
 
+	<category>
+		<pattern>STAR WITH SET <set>number</set></pattern>
+		<template>
+		    SET IS <star/>
+		</template>
+	</category>
 
+	<category>
+		<pattern>STAR WITH SETS <set>number</set> <set>number</set></pattern>
+		<template>
+		    SETS ARE <star/> AND <star index="2"/>
+		</template>
+	</category>
+
+	<category>
+		<pattern>MIXED STARS AND SETS * <set>number</set> * <set>number</set> *</pattern>
+		<template>
+		    STARS ARE <star/> AND <star index="2"/> AND <star index="3"/> AND <star index="4"/> AND <star index="5"/>
+		</template>
+	</category>
 
 </aiml>

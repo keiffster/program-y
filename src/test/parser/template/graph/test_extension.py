@@ -11,6 +11,7 @@ from programy.parser.template.nodes import *
 class TestExtension(object):
 
     def execute(self, data):
+        print(data)
         return "executed"
 
 class TemplateGraphBotTests(unittest.TestCase):

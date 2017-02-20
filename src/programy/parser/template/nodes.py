@@ -55,10 +55,10 @@ class TemplateNode(object):
             self.output_child(child, tabs + "\t")
 
     def resolve_children_to_string(self, bot, clientid):
-        return " ".join([child.resolve(bot, clientid) for child in self._children])
+        return (" ".join([child.resolve(bot, clientid) for child in self._children])).strip()
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
@@ -142,7 +142,7 @@ class TemplateSRAINode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        srai_text = " ".join([child.resolve(bot, clientid) for child in self._children])
+        srai_text = self.resolve_children_to_string(bot, clientid)
         resolved = bot.ask_question(clientid, srai_text, srai=True)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -307,7 +307,7 @@ class TemplateSetNode(TemplateNode):
         
     def resolve_children(self, bot, clientid):
         if len(self._children) > 0:
-            return " ".join([child.resolve(bot, clientid) for child in self._children])
+            return self.resolve_children_to_string(bot, clientid)
         else:
             return ""
 
@@ -315,14 +315,23 @@ class TemplateSetNode(TemplateNode):
         name = self.name.resolve(bot, clientid)
         value = self.resolve_children(bot, clientid)
 
+        """
+        Todo, if local then set per the conversation
+        If globals
+            If exists in predicates then don't replace
+            If not in predicates then set as global to the conversation
+        """
+
         if self.local is True:
             logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
             bot.get_conversation(clientid).current_question().set_predicate(name, value)
-
         else:
-            if bot.brain.properties.has_property(name):
+            if bot.override_predicates is False and bot.brain.properties.has_property(name):
                 logging.error("Global property already exists for name [%s], ignoring set!", name)
+                value = bot.brain.properties.property(name)
             else:
+                if bot.brain.properties.has_property(name):
+                    logging.warning("Global property already exists for name [%s], over writing!", name)
                 logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
                 bot.get_conversation(clientid).set_predicate(name, value)
 
@@ -369,7 +378,16 @@ class TemplateGetNode(TemplateNode):
         self._local = local
 
     def resolve(self, bot, clientid):
+
         name = self.name.resolve(bot, clientid)
+
+        """
+        Todo, if local then set per the conversation
+        If globals
+            If exists in predicates then don't replace
+            If not in predicates then set as global to the conversation
+        """
+
         if self.local is True:
             value = bot.get_conversation(clientid).current_question().predicate(name)
             if value is None:
@@ -378,7 +396,7 @@ class TemplateGetNode(TemplateNode):
                 if value is None:
                     logging.error("No value for default-get defined, empty string returned")
                     value = ""
-            logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+            logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
             value = bot.get_conversation(clientid).predicate(name)
             if value is None:
@@ -426,23 +444,23 @@ class TemplateMapNode(TemplateNode):
 
     def resolve_children(self, bot, clientid):
         if len(self._children) > 0:
-            return " ".join([child.resolve(bot, clientid) for child in self._children])
+            return self.resolve_children_to_string(bot, clientid)
         else:
             return ""
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
-        name = name.upper ()
+        #name = name.upper ()
         var = self.resolve_children(bot, clientid)
-        var = var.upper()
+        #var = var.upper()
 
-        if name == 'SUCCESSOR':
+        if name == 'successor':
             val = int(var)
             value = str(val + 1)
-        elif name == 'PREDECESSOR':
+        elif name == 'predecessor':
             val = int(var)
             value = str(val - 1)
-        elif name == 'SINGULAR':
+        elif name == 'singular':
             if name.endswith('IES'):
                 value = var[:-3]
             elif name.endswith('ES'):
@@ -451,7 +469,7 @@ class TemplateMapNode(TemplateNode):
                 value = var[:-1]
             else:
                 value = var
-        elif name == 'PLURAL':
+        elif name == 'plural':
             if name.endswith('Y'):
                 value = var[:-1] + 'IES'
             else:
@@ -475,7 +493,8 @@ class TemplateMapNode(TemplateNode):
                         value = ""
 
         logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-        return value.upper()
+        #return value.upper()
+        return value
 
     def to_string(self):
         return "[MAP (%s)]" % (self.name.to_string())
@@ -803,7 +822,7 @@ class TemplateThinkNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return ""
 
@@ -826,7 +845,7 @@ class TemplateLowercaseNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         resolved = resolved.lower()
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -850,7 +869,7 @@ class TemplateUppercaseNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         resolved = resolved.upper()
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -874,7 +893,7 @@ class TemplateFormalNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         return result.title()
 
     def to_string(self):
@@ -896,7 +915,7 @@ class TemplateSentenceNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         first = result[:1]
         rest = result[1:]
         resolved = first.upper() + rest.lower()
@@ -922,7 +941,7 @@ class TemplateExplodeNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         letters = [ch for ch in result if ch != ' ']
         resolved = " ".join(letters)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
@@ -947,7 +966,7 @@ class TemplateImplodeNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         letters = [ch for ch in result if ch != ' ']
         resolved = "".join(letters)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
@@ -974,7 +993,7 @@ class TemplateFirstNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         words = result.split(" ")
         if len(words) > 0:
             resolved = words[0]
@@ -1003,7 +1022,7 @@ class TemplateRestNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = " ".join([child.resolve(bot, clientid) for child in self._children])
+        result = self.resolve_children_to_string(bot, clientid)
         words = result.split(" ")
         if len(words) > 1:
             resolved = " ".join(words[1:])
@@ -1277,7 +1296,7 @@ class TemplateSystemNode(TemplateAttribNode):
 
     def resolve(self, bot, clientid):
         if bot.brain.configuration.allow_system_aiml is True:
-            command = " ".join([child.resolve(bot, clientid) for child in self._children])
+            command = self.resolve_children_to_string(bot, clientid)
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result = []
             for line in process.stdout.readlines():
@@ -1553,7 +1572,7 @@ class TemplatePersonNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        string = " ".join([child.resolve(bot, clientid) for child in self._children])
+        string = self.resolve_children_to_string(bot, clientid)
         resolved = bot.brain.persons.personalise_string(string)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -1577,7 +1596,7 @@ class TemplatePerson2Node(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        string = " ".join([child.resolve(bot, clientid) for child in self._children])
+        string = self.resolve_children_to_string(bot, clientid)
         resolved = bot.brain.person2s.personalise_string(string)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -1601,7 +1620,7 @@ class TemplateGenderNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        string = " ".join([child.resolve(bot, clientid) for child in self._children])
+        string = self.resolve_children_to_string(bot, clientid)
         resolved = bot.brain.genders.genderise_string(string)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -1625,7 +1644,7 @@ class TemplateNormalizeNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        string = " ".join([child.resolve(bot, clientid) for child in self._children])
+        string = self.resolve_children_to_string(bot, clientid)
         resolved = bot.brain.normals.normalise_string(string)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -1649,7 +1668,7 @@ class TemplateDenormalizeNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        string = " ".join([child.resolve(bot, clientid) for child in self._children])
+        string = self.resolve_children_to_string(bot, clientid)
         resolved = bot.brain.denormals.denormalise_string(string)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -1673,7 +1692,7 @@ class TemplateEvalNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
@@ -1857,7 +1876,7 @@ class TemplateExtensionNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
-            data = " ".join([child.resolve(bot, clientid) for child in self._children])
+            data = self.resolve_children_to_string(bot, clientid)
 
             new_class = ClassLoader.instantiate_class(self._path)
             if new_class is not None:
@@ -1904,7 +1923,7 @@ class TemplateSRAIXNode(TemplateNode):
         self._service = service
 
     def resolve(self, bot, clientid):
-        resolved = " ".join([child.resolve(bot, clientid) for child in self._children])
+        resolved = self.resolve_children_to_string(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         response = ""
         try:

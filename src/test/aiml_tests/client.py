@@ -7,9 +7,9 @@ from programy.config import ClientConfiguration
 
 class TestClient(BotClient):
 
-    def __init__(self, debug=False):
+    def __init__(self, debug=False, level=logging.DEBUG):
         if debug is True:
-            logging.getLogger().setLevel(logging.DEBUG)
+            logging.getLogger().setLevel(level)
         BotClient.__init__(self)
 
     def parse_arguements(self):
@@ -44,3 +44,6 @@ class TestClient(BotClient):
     def initiate_bot(self, configuration):
         brain = Brain(configuration.brain_configuration)
         self.bot = Bot(brain, config=configuration.bot_configuration)
+
+    def dump_bot_brain_tree(self):
+        self.bot.brain.dump_tree()

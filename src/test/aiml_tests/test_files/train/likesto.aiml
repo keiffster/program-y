@@ -77,10 +77,11 @@
                     ^
                 </set>
             </think>
-            Do you
+            <sentence>Do you
             <get var="verb"/>
             <get var="obj"/>
             too?
+            </sentence>
             <learn>
                 <category>
                     <pattern>
@@ -90,7 +91,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>
@@ -102,7 +105,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>
@@ -114,7 +119,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>
@@ -126,7 +133,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>
@@ -138,7 +147,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>
@@ -150,7 +161,9 @@
                     </pattern>
                     <template>
                         <eval>
-                            <get var="response"/>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
                         </eval>
                     </template>
                 </category>

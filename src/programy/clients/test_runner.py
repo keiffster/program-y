@@ -62,10 +62,11 @@ class TestFileFileFinder(FileFinder):
             for row in csvreader:
                 if len(row) > 1:
                     question = row[0]
-                    answers = []
-                    for answer in row[1:]:
-                        answers.append(answer.replace('"', "").strip())
-                    questions.append(TestQuestion(question, answers))
+                    if question[0] != '#':
+                        answers = []
+                        for answer in row[1:]:
+                            answers.append(answer.replace('"', "").strip())
+                        questions.append(TestQuestion(question, answers))
         return questions
 
 

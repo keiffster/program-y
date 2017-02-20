@@ -390,11 +390,13 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><set var="name">keith</set></template>', xml_str)
 
-    def test_global_set(self):
+    def test_global_set_allow_overrides_no_default(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
+
+        self.bot._configuration.override_predicates = True
 
         node = TemplateSetNode()
         self.assertIsNotNone(node)
@@ -416,6 +418,66 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertEqual("keith", result)
 
         self.assertEqual("keith", conversation.predicate("name"))
+
+    def test_global_set_allow_overrides_with_default(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        self.bot._configuration.override_predicates = True
+        self.bot.brain.properties.pairs.append(["name", "fred"])
+
+        node = TemplateSetNode()
+        self.assertIsNotNone(node)
+        node.name = TemplateWordNode("name")
+        node.local = False
+        node.append(TemplateWordNode("keith"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        conversation = self.bot.get_conversation(self.clientid)
+        self.assertIsNotNone(conversation)
+        question = Question.create_from_text("Hello")
+        conversation.record_dialog(question)
+        self.assertIsNotNone(conversation.current_question())
+
+        result = node.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("keith", result)
+
+        self.assertEqual("keith", conversation.predicate("name"))
+
+    def test_global_set_deny_overrides_with_default(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        self.bot._configuration.override_predicates = False
+        self.bot.brain.properties.pairs.append(["name", "fred"])
+
+        node = TemplateSetNode()
+        self.assertIsNotNone(node)
+        node.name = TemplateWordNode("name")
+        node.local = False
+        node.append(TemplateWordNode("keith"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        conversation = self.bot.get_conversation(self.clientid)
+        self.assertIsNotNone(conversation)
+        question = Question.create_from_text("Hello")
+        conversation.record_dialog(question)
+        self.assertIsNotNone(conversation.current_question())
+
+        result = node.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("fred", result)
+
+        self.assertEqual(None, conversation.predicate("name"))
 
     def test_to_xml_global_set(self):
         root = TemplateNode()
@@ -1112,8 +1174,8 @@ class TemplateNormalizeNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode(" shouldnt "))
-        self.bot.brain.normals.process_splits([" shouldnt "," should not "])
+        node.append(TemplateWordNode("shouldnt"))
+        self.bot.brain.normals.process_splits(["shouldnt","should not"])
 
         self.assertEqual(root.resolve(self.bot, self.clientid), "should not")
 
@@ -1145,10 +1207,10 @@ class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode(" dot uk "))
-        self.bot.brain.denormals.process_splits([" dot uk ",".uk"])
+        node.append(TemplateWordNode("keiff dot uk"))
+        self.bot.brain.denormals.process_splits([" dot uk",".uk"])
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), ".uk")
+        self.assertEqual(root.resolve(self.bot, self.clientid), "keiff.uk")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -1178,8 +1240,8 @@ class TemplatePersonNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode(" me "))
-        self.bot.brain.persons.process_splits([" me "," you "])
+        node.append(TemplateWordNode("me"))
+        self.bot.brain.persons.process_splits(["me","you"])
 
         self.assertEqual(root.resolve(self.bot, self.clientid), "you")
 
@@ -1211,8 +1273,8 @@ class TemplatePerson2NodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode(" me "))
-        self.bot.brain.person2s.process_splits([" me "," him or her "])
+        node.append(TemplateWordNode("me"))
+        self.bot.brain.person2s.process_splits(["me","him or her"])
 
         self.assertEqual(root.resolve(self.bot, self.clientid), "him or her")
 
@@ -1244,8 +1306,8 @@ class TemplateGenderNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode(" to him "))
-        self.bot.brain.genders.process_splits([" to him "," to her "])
+        node.append(TemplateWordNode("to him"))
+        self.bot.brain.genders.process_splits(["to him","to her"])
 
         self.assertEqual(root.resolve(self.bot, self.clientid), "to her")
 

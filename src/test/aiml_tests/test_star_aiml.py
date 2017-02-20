@@ -67,3 +67,34 @@ class StarAIMLTests(unittest.TestCase):
         response = StarAIMLTests.test_client.bot.ask_question("test", "MULTI STARS ONE TWO THREE FOUR")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'FOUR THREE TWO ONE')
+
+    def test_star_with_set(self):
+        response = StarAIMLTests.test_client.bot.ask_question("test", "STAR WITH SET 666")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'SET IS 666')
+
+    def test_multi_stars_with_set(self):
+        response = StarAIMLTests.test_client.bot.ask_question("test", "STAR WITH SETS 666 999")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'SETS ARE 666 AND 999')
+
+    def test_mixed_stars_and_sets(self):
+        response = StarAIMLTests.test_client.bot.ask_question("test", "MIXED STARS AND SETS 11 22 33 44 55")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'STARS ARE 11 AND 22 AND 33 AND 44 AND 55')
+
+    def test_recursion_one_star(self):
+        response = StarAIMLTests.test_client.bot.ask_question("test", "RECURSIVE TEST")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'ENDED')
+
+    def test_recursion_two_stars(self):
+        response = StarAIMLTests.test_client.bot.ask_question("test", "RECURSIVE TEST THIS")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'RECURSED ENDED')
+
+    def test_recursion_four_stars(self):
+        StarAIMLTests.test_client.dump_bot_brain_tree()
+        response = StarAIMLTests.test_client.bot.ask_question("test", "RECURSIVE TEST THIS THAT OTHER")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'RECURSED RECURSED RECURSED ENDED')
