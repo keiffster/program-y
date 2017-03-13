@@ -66,9 +66,16 @@ class Match(object):
 
 class MatchContext(object):
 
-    def __init__(self):
+    MAX_SEARCH_DEPTH = 10000
+
+    def __init__(self, max_search_depth=MAX_SEARCH_DEPTH):
         self._matched_nodes = []
         self._template_node = None
+        self._max_search_depth = max_search_depth
+
+    @property
+    def max_search_depth(self):
+        return self._max_search_depth
 
     def add_match(self, match):
         self._matched_nodes.append(match)

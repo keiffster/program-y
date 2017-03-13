@@ -326,58 +326,64 @@ class PatternNode(object):
         for child in self.children:
             child.dump(tabs+"\t", output_func, verbose)
 
-    def consume(self, bot, clientid, context, words, word_no, type):
+    def consume(self, bot, clientid, context, words, word_no, type, depth):
+
+        tabs = TextUtils.get_tabs(word_no)
+
+        if depth > context.max_search_depth:
+            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            return None
 
         if word_no >= words.num_words():
             if self._template is not None:
-                logging.debug("%sFound a template, success!" % (TextUtils.get_tabs(word_no)))
+                logging.debug("%sFound a template, success!" % (tabs))
                 return self._template
             else:
-                logging.debug("%sNo more words and no template, no match found!" % (TextUtils.get_tabs(word_no)))
+                logging.debug("%sNo more words and no template, no match found!" % (tabs))
                 #context.pop_match()
                 return None
 
         if self._topic is not None:
-            match = self._topic.consume(bot, clientid, context, words, word_no, Match.TOPIC)
+            match = self._topic.consume(bot, clientid, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
                 return match
             if words.word(word_no) == '__TOPIC__':
-                logging.debug("%sLooking for a __TOPIC__, none give, no match found!" % (TextUtils.get_tabs(word_no)))
+                logging.debug("%sLooking for a __TOPIC__, none give, no match found!" % (tabs))
                 #context.pop_match()
                 return None
 
         if self._that is not None:
-            match = self._that.consume(bot, clientid, context, words, word_no, Match.THAT)
+            match = self._that.consume(bot, clientid, context, words, word_no, Match.THAT, depth+1)
             if match is not None:
                 return match
             if words.word(word_no) == '__THAT__':
-                logging.debug("%sLooking for a __THAT__, none give, no match found!" % (TextUtils.get_tabs(word_no)))
+                logging.debug("%sLooking for a __THAT__, none give, no match found!" % (tabs))
                 #context.pop_match()
                 return None
 
         for child in self._priority_words:
             if child.equals(bot, clientid, words.word(word_no)):
-                logging.debug("%sPriority %s matched %s" % (TextUtils.get_tabs(word_no), child._word, words.word(word_no)))
+                logging.debug("%sPriority %s matched %s" % (tabs, child._word, words.word(word_no)))
 
-                logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+                logging.debug("%sMATCH -> %s" % (tabs, words.word(word_no)))
                 match_node = Match(type, child, words.word(word_no))
                 context.add_match(match_node)
 
-                match = child.consume(bot, clientid, context, words, word_no + 1, type)
+                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
                 if match is not None:
                     return match
                 else:
                     context.pop_match ()
 
         if self._0ormore_hash is not None:
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type)
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
             #else:
             #    context.pop_match ()
 
         if self._1ormore_underline is not None:
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, type)
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
             #else:
@@ -385,33 +391,33 @@ class PatternNode(object):
 
         for child in self._children:
             if child.equals(bot, clientid, words.word(word_no)):
-                logging.debug("%sChild %s matched %s" % (TextUtils.get_tabs(word_no), child._word, words.word(word_no)))
+                logging.debug("%sChild %s matched %s" % (tabs, child._word, words.word(word_no)))
 
-                logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+                logging.debug("%sMATCH -> %s" % (tabs, words.word(word_no)))
                 match_node = Match(type, child, words.word(word_no))
                 context.add_match(match_node)
 
-                match = child.consume(bot, clientid, context, words, word_no + 1, type)
+                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
                 if match is not None:
                     return match
                 else:
                     context.pop_match ()
 
         if self._0ormore_arrow is not None:
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type)
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
             #else:
             #    context.pop_match ()
 
         if self._1ormore_star is not None:
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, type)
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
             #else:
             #    context.pop_match ()
 
-        logging.debug("%sNo match for %s, trying another path" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        logging.debug("%sNo match for %s, trying another path" % (tabs, words.word(word_no)))
         return None
 
 
@@ -447,7 +453,7 @@ class PatternRootNode(PatternNode):
             return "ROOT "
 
     def match(self, bot, clientid, context, words):
-        return self.consume(bot, clientid, context, words, 0, Match.WORD)
+        return self.consume(bot, clientid, context, words, 0, Match.WORD, 0)
 
 #######################################################################################################################
 #
@@ -480,12 +486,19 @@ class PatternTopicNode(PatternNode):
         else:
             return "TOPIC"
 
-    def consume(self, bot, clientid, context, words, word_no, type):
-        if words.word(word_no) == '__TOPIC__':
-            logging.debug("%sTopic matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
-            return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, type)
+    def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        logging.debug("%sTopic NOT matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        tabs = TextUtils.get_tabs(word_no)
+
+        if depth > context.max_search_depth:
+            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            return None
+
+        if words.word(word_no) == '__TOPIC__':
+            logging.debug("%sTopic matched %s" % (tabs, words.word(word_no)))
+            return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
+
+        logging.debug("%sTopic NOT matched %s" % (tabs, words.word(word_no)))
         return None
 
 #######################################################################################################################
@@ -519,12 +532,19 @@ class PatternThatNode(PatternNode):
         else:
             return "THAT"
 
-    def consume(self, bot, clientid, context, words, word_no, type):
-        if words.word(word_no) == '__THAT__':
-            logging.debug("%sThat matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
-            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+    def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        logging.debug("%sTHAT NOT matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        tabs = TextUtils.get_tabs(word_no)
+
+        if depth > context.max_search_depth:
+            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            return None
+
+        if words.word(word_no) == '__THAT__':
+            logging.debug("%sThat matched %s" % (tabs, words.word(word_no)))
+            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
+
+        logging.debug("%sTHAT NOT matched %s" % (tabs, words.word(word_no)))
         return None
 
 #######################################################################################################################
@@ -748,33 +768,39 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         else:
             return "ZEROORMORE [%s]" % (self.wildcard)
 
-    def consume(self, bot, clientid, context, words, word_no, type):
+    def consume(self, bot, clientid, context, words, word_no, type, depth):
+
+        tabs = TextUtils.get_tabs(word_no)
+
+        if depth > context.max_search_depth:
+            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            return None
 
         context_match = Match(type, self, None)
         context.add_match(context_match)
         matches_added = 1
 
         if self._0ormore_hash is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
@@ -785,34 +811,34 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         if len(self._children) > 0:
             for child in self._children:
                 if child.equals(bot, clientid, word):
-                    logging.debug ("%sWildcard child %s matched %s"%(TextUtils.get_tabs(word_no), child._word, word))
+                    logging.debug ("%sWildcard child %s matched %s"%(tabs, child._word, word))
 
-                    logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+                    logging.debug("%s*MATCH -> %s" % (tabs, word))
                     context_match2 = Match(Match.WORD, child, word)
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(bot, clientid, context, words, word_no+1, type)
+                    match = child.consume(bot, clientid, context, words, word_no+1, type, depth+1)
                     if match is not None:
                         return match
 
-            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+            logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
 
-            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            logging.debug("%s*MATCH -> %s" % (tabs, word))
             context_match.add_word(word)
 
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
             if match is not None:
                 return match
 
             word_no += 1
             word = words.word(word_no)
 
-            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
-            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
+            logging.debug("%s*MATCH -> %s" % (tabs, word))
             context_match.add_word(word)
 
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
             if match is not None:
                 return match
 
@@ -822,22 +848,22 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 return None
             word = words.word(word_no)
 
-        logging.debug("%sNo children, consume words until next break point" % (TextUtils.get_tabs(word_no)))
+        logging.debug("%sNo children, consume words until next break point" % (tabs))
         while word_no < words.num_words() - 1:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
 
-            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            logging.debug("%s*MATCH -> %s" % (tabs, word))
             context_match.add_word(word)
 
             word_no += 1
             word = words.word(word_no)
-            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+            logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
 
-        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+        logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
 
-        match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+        match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
 
         if match is not None:
             return match
@@ -876,39 +902,46 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         else:
             return "ONEORMORE [%s]" % (self.wildcard)
 
-    def consume(self, bot, clientid, context, words, word_no, type):
+    def consume(self, bot, clientid, context, words, word_no, type, depth):
+
+        tabs = TextUtils.get_tabs(word_no)
+
+        if depth > context.max_search_depth:
+            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            return None
 
         if word_no >= words.num_words():
             return None
-        word = words.word(word_no)
-        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
 
-        logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+        word = words.word(word_no)
+        logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
+
+        logging.debug("%s*MATCH -> %s" % (tabs, word))
         context_match = Match(type, self, word)
         context.add_match(context_match)
         matches_add = 1
 
         if self._0ormore_hash is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type)
+            logging.debug("%sWildcard is next node, moving on!"%(tabs))
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
@@ -916,26 +949,26 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
         word_no += 1
         if word_no >= words.num_words():
-            logging.debug("%sNo more words" % (TextUtils.get_tabs(word_no)))
-            return super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            logging.debug("%sNo more words" % (tabs))
+            return super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
         word = words.word(word_no)
 
         if len(self._children) > 0:
             for child in self._children:
                 if child.equals(bot, clientid, word):
-                    logging.debug ("%sWildcard child %s matched %s"%(TextUtils.get_tabs(word_no), child._word, word))
+                    logging.debug ("%sWildcard child %s matched %s"%(tabs, child._word, word))
 
-                    logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+                    logging.debug("%sMATCH -> %s" % (tabs, word))
                     context_match2 = Match(Match.WORD, child, word)
                     context.add_match(context_match2)
                     matches_add += 1
-                    match = child.consume(bot, clientid, context, words, word_no+1, type)
+                    match = child.consume(bot, clientid, context, words, word_no+1, type, depth+1)
                     if match is not None:
                         return match
 
-            logging.debug ("%sWildcard %s consumed %s"%(TextUtils.get_tabs(word_no), self._wildcard, word))
+            logging.debug ("%sWildcard %s consumed %s"%(tabs, self._wildcard, word))
 
-            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            logging.debug("%s*MATCH -> %s" % (tabs, word))
             context_match.add_word(word)
 
             word_no += 1
@@ -944,28 +977,28 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 return None
             word = words.word(word_no)
 
-        logging.debug("%sNo children, consume words until next break point"%(TextUtils.get_tabs(word_no)))
+        logging.debug("%sNo children, consume words until next break point"%(tabs))
         while word_no < words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
                 return match
 
-            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+            logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
 
-            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            logging.debug("%s*MATCH -> %s" % (tabs, word))
             context_match.add_word(word)
 
             word_no += 1
             word = words.word(word_no)
 
-        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
-        logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+        logging.debug("%sWildcard %s consumed %s" % (tabs, self._wildcard, word))
+        logging.debug("%s*MATCH -> %s" % (tabs, word))
         context_match.add_word(word)
 
         if word_no == words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
         else:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
 
         if match is not None:
             return match
