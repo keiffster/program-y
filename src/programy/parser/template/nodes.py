@@ -25,6 +25,11 @@ from dateutil.relativedelta import relativedelta
 from programy.parser.exceptions import ParserException
 from programy.utils.classes.loader import ClassLoader
 from programy.utils.services.service import ServiceFactory
+from programy.utils.text.text import TextUtils
+from programy.parser.template.maps.plural import PluralMap
+from programy.parser.template.maps.singular import SingularMap
+from programy.parser.template.maps.predecessor import PredecessorMap
+from programy.parser.template.maps.successor import SuccessorMap
 
 # TODO wrap every resolve method in try/catch and return "" if error
 # TODO rename resolve to evaluate
@@ -143,6 +148,8 @@ class TemplateSRAINode(TemplateNode):
 
     def resolve(self, bot, clientid):
         srai_text = self.resolve_children_to_string(bot, clientid)
+        logging.debug("[%s] SRAI Text [%s]"%(self.to_string(), srai_text))
+
         resolved = bot.ask_question(clientid, srai_text, srai=True)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -167,8 +174,10 @@ class TemplateSrNode(TemplateNode):
     def resolve(self, bot, clientid):
         sentence = bot.get_conversation(clientid).current_question().current_sentence()
 
-        if len(sentence.stars) > 0:
-            resolved = bot.ask_question(clientid, sentence.stars[0], srai=True)
+        star = sentence.matched_context.star(1)
+
+        if star is not None:
+            resolved = bot.ask_question(clientid, star, srai=True)
         else:
             logging.error("Sr node has no stars available")
             resolved = ""
@@ -257,13 +266,17 @@ class TemplateStarNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
-        sentence = bot.get_conversation(clientid).current_question().current_sentence()
+        conversation = bot.get_conversation(clientid)
+        current_question = conversation.current_question()
+        current_sentence = current_question.current_sentence()
+        matched_context = current_sentence.matched_context
 
-        if self.index <= len(sentence.stars):
-            resolved = sentence.stars[self.index -1]
-        else:
-            logging.error("Star index not in range [%d] -> [%d]", self.index, len(sentence.stars))
+        resolved = matched_context.star(self.index)
+
+        if resolved is None:
+            logging.error("Star index not in range [%d]"%(self.index))
             resolved = ""
+
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
@@ -433,6 +446,7 @@ class TemplateMapNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._name = None
+        self._internal_maps = [PluralMap(), SingularMap(), PredecessorMap(), SuccessorMap()]
 
     @property
     def name(self):
@@ -450,31 +464,15 @@ class TemplateMapNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
-        #name = name.upper ()
         var = self.resolve_children(bot, clientid)
-        #var = var.upper()
 
-        if name == 'successor':
-            val = int(var)
-            value = str(val + 1)
-        elif name == 'predecessor':
-            val = int(var)
-            value = str(val - 1)
-        elif name == 'singular':
-            if name.endswith('IES'):
-                value = var[:-3]
-            elif name.endswith('ES'):
-                value = var[:-2]
-            elif name.endswith('S'):
-                value = var[:-1]
-            else:
-                value = var
-        elif name == 'plural':
-            if name.endswith('Y'):
-                value = var[:-1] + 'IES'
-            else:
-                value = var + 'S'
-        else:
+        internal = False
+        for map in self._internal_maps:
+            if map.get_name() == name:
+                value = map.map(var)
+                internal = True
+
+        if internal is False:
             the_map = bot.brain.maps.map(name)
             if the_map is None:
                 logging.error("No map defined for [%s], using default-map" % name)
@@ -493,7 +491,6 @@ class TemplateMapNode(TemplateNode):
                         value = ""
 
         logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-        #return value.upper()
         return value
 
     def to_string(self):
@@ -1498,19 +1495,15 @@ class TemplateTopicStarNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
-        try:
-            sentence = bot.get_conversation(clientid).current_question().current_sentence()
+        sentence = bot.get_conversation(clientid).current_question().current_sentence()
 
-            if self.index > 0:
-                if self.index <= len(sentence.topicstars):
-                    return sentence.topicstars[self.index - 1]
-            else:
-                logging.error("Topic Star index not in range [%d] -> [%d]", self.index, len(sentence.topicstars))
+        resolved = sentence.matched_context.topicstar(self.index)
 
-        except Exception:
-            logging.error("Topic Star index is not an integer value [%d]", self.index)
+        if resolved is None:
+            logging.error("That Star index not in range [%d]" % (self.index))
+            resolved = ""
 
-        return ""
+        return resolved
 
     def to_string(self):
         return "TOPICSTAR Index=%s" % (self.index)
@@ -1534,21 +1527,17 @@ class TemplateThatStarNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
-        try:
-            question = bot.get_conversation(clientid).nth_question(1)
+        question = bot.get_conversation(clientid).nth_question(1)
 
-            sentence = question.current_sentence()
+        sentence = question.current_sentence()
 
-            if self.index > 0:
-                if self.index <= len(sentence.thatstars):
-                    return sentence.thatstars[self.index - 1]
-            else:
-                logging.error("That Star index not in range [%d] -> [%d]", self.index, len(sentence.thatstars))
+        resolved = sentence.matched_context.thatstar(self.index)
 
-        except Exception:
-            logging.error("That Star index is not an integer value [%d]", self.index)
+        if resolved is None:
+            logging.error("That Star index not in range [%d]" % (self.index))
+            resolved = ""
 
-        return ""
+        return resolved
 
     def to_string(self):
         return "THATSTAR Index=%s" % (self.index)
@@ -1764,21 +1753,25 @@ class TemplateLearnNode(TemplateNode):
 
         new_element = ET.Element(element.tag)
 
-        new_element.text = element.text
+        new_element.text = TextUtils.strip_whitespace(element.text)
 
         for child in element:
             if child.tag == 'eval':
                 eval_str = ET.tostring(child, 'utf-8').decode('ascii')
+                eval_str = TextUtils.strip_whitespace(eval_str)
                 template = ET.fromstring("<template>%s</template>" % eval_str)
 
                 ast = bot.brain.aiml_parser.template_parser.parse_template_expression(template)
                 resolved = ast.resolve(bot, clientid)
-                new_element.text += resolved
+
+                new_element.text += " " + resolved
             else:
                 new_element.append(child)
 
+        new_element.text = new_element.text.upper ()
+
         if element.tail is not None:
-            new_element.tail = element.tail.strip()
+            new_element.tail = TextUtils.strip_whitespace(element.tail)
 
         return new_element
 
@@ -1813,6 +1806,7 @@ class TemplateLearnNode(TemplateNode):
         xml += "</template>"
 
         xml += "</learn>"
+        xml += ""
         return xml
 
 

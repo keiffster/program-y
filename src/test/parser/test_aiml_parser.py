@@ -3,8 +3,10 @@ from xml.etree.ElementTree import ParseError
 
 from programy.parser.aiml_parser import AIMLParser
 from programy.parser.pattern.nodes import *
+from programy.dialog import Sentence
 
 class AIMLParserTests(unittest.TestCase):
+
     def setUp(self):
         self.parser = AIMLParser(supress_warnings=True, stop_on_invalid=True)
         self.assertIsNotNone(self.parser)
@@ -677,6 +679,23 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsInstance(that.star, PatternOneOrMoreWildCardNode)
         self.assertEquals(that.star.wildcard, "*")
 
+    def test_match_sentence(self):
+
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <category>
+                    <pattern>HELLO</pattern>
+                    <template>Hiya</template>
+                </category>
+            </aiml>
+            """)
+
+        self.parser.pattern_parser.dump()
+
+        context = self.parser.match_sentence(None, "test", Sentence("HELLO"), "*", "*")
+        self.assertIsNotNone(context)
+        self.assertEqual("Hiya", context.template_node().template.resolve(None, None))
 
 if __name__ == '__main__':
     unittest.main()

@@ -18,40 +18,21 @@ import logging
 
 class Sentence(object):
 
-    def __init__(self, text: str, split_chars: str=" "):
+    def __init__(self, text: str=None, split_chars: str=" "):
         self._words = self._split_into_words(text, split_chars)
-        self._stars = []
-        self._thatstars = []
-        self._topicstars = []
         self._response = None
+        self._matched_context = None
 
     @property
     def words(self):
         return self._words
 
-    @property
-    def stars(self):
-        return self._stars
+    def append_word(self, word):
+        self._words.append(word)
 
-    @stars.setter
-    def stars(self, stars):
-        self._stars = stars
-
-    @property
-    def thatstars(self):
-        return self._thatstars
-
-    @thatstars.setter
-    def thatstars(self, thatstars):
-        self._thatstars = thatstars
-
-    @property
-    def topicstars(self):
-        return self._topicstars
-
-    @topicstars.setter
-    def topicstars(self, topicstars):
-        self._topicstars = topicstars
+    def append_sentence(self, sentence):
+        for word in sentence._words:
+            self._words.append(word)
 
     @property
     def response(self):
@@ -61,6 +42,14 @@ class Sentence(object):
     def response(self, text: str):
         self._response = text
 
+    @property
+    def matched_context(self):
+        return self._matched_context
+
+    @matched_context.setter
+    def matched_context(self, context):
+        self._matched_context = context
+
     def num_words(self):
         return len(self.words)
 
@@ -68,7 +57,7 @@ class Sentence(object):
         if num < self.num_words():
             return self.words[num]
         else:
-            raise Exception("Num word array violation !")
+                raise Exception("Num word array violation !")
 
     def words_from_current_pos(self, current_pos: int):
         if len(self._words) > 0:
@@ -77,9 +66,6 @@ class Sentence(object):
 
     def text(self):
         return " ".join(self._words)
-
-    def reset_stars(self):
-        self._stars = []
 
     def _split_into_words(self, sentence, split_chars: str):
         if sentence is None:

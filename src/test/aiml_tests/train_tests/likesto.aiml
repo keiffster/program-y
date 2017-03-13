@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: train.aiml -->
+    <!-- Last modified: July 27, 2016 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <category>
+        <pattern>* LIKES TO <set>be</set> *
+        </pattern>
+        <template>
+            <think>
+                <set var="name">
+                    <star/>
+                </set>
+                <set var="verb">
+                    <star index="2"/>
+                </set>
+                <set var="is">
+                    <map name="be2is">
+                        <get var="verb"/>
+                    </map>
+                </set>
+                <set var="obj">
+                    <star index="3"/>
+                </set>
+                <set var="response">
+                    <input/>.
+                </set>
+
+                <srai>SETHESHE
+                    <star/>
+                </srai>
+
+                <set var="response">
+                    <input/>
+                </set>
+                <set var="pattern1">WHO LIKES TO
+                    <get var="verb"/>
+                    <get var="obj"/>
+                </set>
+                <set var="pattern2">WHAT DOES
+                    <get var="name"/>
+                    LIKE ^
+                </set>
+                <set var="pattern3">WHAT DOES
+                    <get name="pronoun"/>
+                    LIKE ^
+                </set>
+                <set var="pattern5">WHAT DOES
+                    <get var="name"/>
+                    <get var="verb"/>
+                    ^
+                </set>
+                <set var="pattern4">WHAT DOES
+                    <get name="pronoun"/>
+                    <get var="verb"/>
+                    ^
+                </set>
+                <set var="pattern6">WHO
+                    <get var="is"/>
+                    ^
+                </set>
+            </think>
+            <sentence>Do you
+            <get var="verb"/>
+            <get var="obj"/>
+            too?
+            </sentence>
+            <learn>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern1"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern2"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern3"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern4"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern5"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get var="pattern6"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <sentence>
+                                <get var="response"/>
+                            </sentence>
+                        </eval>
+                    </template>
+                </category>
+            </learn>
+        </template>
+    </category>
+
+    <!-- This is called from the grammar above -->
+
+    <category>
+        <pattern>SETHESHE
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <think>
+                <set name="pronoun">
+                    <map>
+                        <name>familiarpronoun</name>
+                        <star/>
+                    </map>
+                </set>
+                <set>
+                    <name>
+                        <get name="pronoun"/>
+                    </name>
+                    <star/>
+                </set>
+            </think>
+        </template>
+    </category>
+
+</aiml>

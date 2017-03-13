@@ -233,8 +233,6 @@ class Brain(object):
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
-    # KS
-    #def ask_question(self, bot, clientid, sentence, parent_question) -> str:
     def ask_question(self, bot, clientid, sentence) -> str:
 
         conversation = bot.get_conversation(clientid)
@@ -247,13 +245,7 @@ class Brain(object):
             logging.info("Topic pattern = [%s]", topic_pattern)
 
         try:
-            # KS
-            #if parent_question is not None:
-            #    that_question = parent_question
-            #else:
-            #    that_question = conversation.nth_question(2)
             that_question = conversation.nth_question(2)
-
             that_sentence = that_question.current_sentence()
 
             # If the last response was valid, i.e not none and not empty string, then use
@@ -269,11 +261,17 @@ class Brain(object):
             logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
-        return self._aiml_parser.match_sentence(bot, clientid,
-                                                sentence,
-                                                None, # KS parent_question,
-                                                topic_pattern=topic_pattern,
-                                                that_pattern=that_pattern)
+        match_context =  self._aiml_parser.match_sentence(bot, clientid,
+                                                        sentence,
+                                                        topic_pattern=topic_pattern,
+                                                        that_pattern=that_pattern)
+
+        if match_context is not None:
+            template_node = match_context.template_node()
+            logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+            return template_node.template.resolve(bot, clientid)
+
+        return None
 
     def post_process_response(self, bot, clientid, response: str):
         return self.postprocessors.process(bot, clientid, response)

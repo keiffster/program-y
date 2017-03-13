@@ -16,27 +16,47 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 from programy.parser.exceptions import ParserException
-
+from programy.utils.text.text import TextUtils
+from programy.parser.pattern.matcher import Match
 
 #######################################################################################################################
 #
 class PatternNode(object):
 
     def __init__(self):
+
+        # Child Nodes
         self._priority_words = []
-        self._0ormore_arrow = None
         self._0ormore_hash = None
-        self._children = []
         self._1ormore_underline = None
+        self._children = []
+        self._0ormore_arrow = None
         self._1ormore_star = None
+
+        # Topic, That and Template Nodes
         self._topic = None
         self._that = None
         self._template = None
 
+    ########################################################################
+    #
+    def is_root(self):
+        return False
+
+    ########################################################################
+    #
     @property
     def priority_words(self):
         return self._priority_words
 
+    def has_priority_words(self):
+        return True if len(self._priority_words) > 0 else False
+
+    def is_priority(self):
+        return False
+
+    ########################################################################
+    #
     @property
     def arrow(self):
         return self._0ormore_arrow
@@ -46,58 +66,12 @@ class PatternNode(object):
         return self._0ormore_hash
 
     @property
-    def children(self):
-        return self._children
-
-    def child(self, num):
-        return self._children[num]
-
-    @property
     def underline(self):
         return self._1ormore_underline
 
     @property
     def star(self):
         return self._1ormore_star
-
-    @property
-    def topic(self):
-        return self._topic
-
-    @property
-    def template(self):
-        return self._template
-
-    @property
-    def that(self):
-        return self._that
-
-    def is_root(self):
-        return False
-
-    def is_priority(self):
-        return False
-
-    def is_wildcard(self):
-        return False
-
-    def is_zero_or_more(self):
-        return False
-
-    def is_one_or_more(self):
-        return False
-
-    def is_set(self):
-        return False
-
-    def is_bot(self):
-        return False
-
-    def is_template(self):
-        return False
-
-    def has_priority_words(self):
-        return True if len(self._priority_words) > 0 else False
 
     def has_wildcard(self):
         if self.has_zero_or_more() is True or self.has_one_or_more():
@@ -110,37 +84,49 @@ class PatternNode(object):
         else:
             return False
 
+    def has_0ormore_arrow(self):
+        return bool(self._0ormore_arrow is not None)
+
+    def has_0ormore_hash(self):
+        return bool(self._0ormore_hash is not None)
+
     def has_one_or_more(self):
         if self._1ormore_star is not None or self._1ormore_underline is not None:
             return True
         else:
             return False
 
-    def has_topic(self):
-        return bool(self.topic is not None)
+    def has_1ormore_star(self):
+        return bool(self._1ormore_star is not None)
 
-    def add_topic(self, topic):
-        if self.has_topic() is False:
-            self._topic = topic
-        return self._topic
+    def has_1ormore_underline(self):
+        return bool(self._1ormore_underline is not None)
 
-    def add_that(self, that):
-        if self.has_that() is False:
-            self._that = that
-        return self._that
+    def is_wildcard(self):
+        return False
 
-    def has_that(self):
-        return bool(self.that is not None)
+    def is_zero_or_more(self):
+        return False
 
-    def has_template(self):
-        return bool(self.template is not None)
+    def is_one_or_more(self):
+        return False
 
-    def add_template(self, template):
-        if self.has_template() is False:
-            self._template = template
-        return self._template
+    ########################################################################
+    #
+    @property
+    def children(self):
+        return self._children
+
+    def child(self, num):
+        return self._children[num]
 
     def has_children(self):
+        if len(self._children) > 0:
+            return True
+
+        return False
+
+    def has_nodes(self):
         if len(self._children) > 0:
             return True
 
@@ -152,15 +138,77 @@ class PatternNode(object):
 
         return False
 
+    ########################################################################
+    #
+    @property
+    def topic(self):
+        return self._topic
+
+    def is_topic(self):
+        return False
+
+    def has_topic(self):
+        return bool(self.topic is not None)
+
+    def add_topic(self, topic):
+        if self.has_topic() is False:
+            self._topic = topic
+        return self._topic
+
+    ########################################################################
+    #
+    @property
+    def that(self):
+        return self._that
+
+    def add_that(self, that):
+        if self.has_that() is False:
+            self._that = that
+        return self._that
+
+    def is_that(self):
+        return False
+
+    def has_that(self):
+        return bool(self.that is not None)
+
+    ########################################################################
+    #
+    @property
+    def template(self):
+        return self._template
+
+    def is_template(self):
+        return False
+
+    def has_template(self):
+        return bool(self.template is not None)
+
+    def add_template(self, template):
+        if self.has_template() is False:
+            self._template = template
+        return self._template
+
+    ########################################################################
+    #
+    def is_set(self):
+        return False
+
+    ########################################################################
+    #
+    def is_bot(self):
+        return False
+
+    ########################################################################
+    #
     def equivalent(self, other):
         return False
 
     def equals(self, bot, clientid, word):
         return False
 
-    def matches(self, bot, clientid, word):
-        return False
-
+    ########################################################################
+    #
     def can_add(self, new_node):
         pass
 
@@ -168,7 +216,7 @@ class PatternNode(object):
 
         for priority in self._priority_words:
             if priority.equivalent(new_node):
-                # Equivalent node already exists, use this one insead
+                # Equivalent node already exists, use this one instead
                 return priority
 
         if self._0ormore_arrow is not None:
@@ -250,7 +298,10 @@ class PatternNode(object):
             return ""
 
     def to_string(self, verbose=True):
-        return "NODE [%s]" % self._child_count(verbose)
+        if verbose is True:
+            return "NODE [%s]" % self._child_count(verbose)
+        else:
+            return "NODE"
 
     def dump(self, tabs, output_func=logging.debug, verbose=True):
 
@@ -274,6 +325,94 @@ class PatternNode(object):
             self._template.dump(tabs+"\t", output_func, verbose)
         for child in self.children:
             child.dump(tabs+"\t", output_func, verbose)
+
+    def consume(self, bot, clientid, context, words, word_no, type):
+
+        if word_no >= words.num_words():
+            if self._template is not None:
+                logging.debug("%sFound a template, success!" % (TextUtils.get_tabs(word_no)))
+                return self._template
+            else:
+                logging.debug("%sNo more words and no template, no match found!" % (TextUtils.get_tabs(word_no)))
+                #context.pop_match()
+                return None
+
+        if self._topic is not None:
+            match = self._topic.consume(bot, clientid, context, words, word_no, Match.TOPIC)
+            if match is not None:
+                return match
+            if words.word(word_no) == '__TOPIC__':
+                logging.debug("%sLooking for a __TOPIC__, none give, no match found!" % (TextUtils.get_tabs(word_no)))
+                #context.pop_match()
+                return None
+
+        if self._that is not None:
+            match = self._that.consume(bot, clientid, context, words, word_no, Match.THAT)
+            if match is not None:
+                return match
+            if words.word(word_no) == '__THAT__':
+                logging.debug("%sLooking for a __THAT__, none give, no match found!" % (TextUtils.get_tabs(word_no)))
+                #context.pop_match()
+                return None
+
+        for child in self._priority_words:
+            if child.equals(bot, clientid, words.word(word_no)):
+                logging.debug("%sPriority %s matched %s" % (TextUtils.get_tabs(word_no), child._word, words.word(word_no)))
+
+                logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+                match_node = Match(type, child, words.word(word_no))
+                context.add_match(match_node)
+
+                match = child.consume(bot, clientid, context, words, word_no + 1, type)
+                if match is not None:
+                    return match
+                else:
+                    context.pop_match ()
+
+        if self._0ormore_hash is not None:
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+            #else:
+            #    context.pop_match ()
+
+        if self._1ormore_underline is not None:
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+            #else:
+            #    context.pop_match ()
+
+        for child in self._children:
+            if child.equals(bot, clientid, words.word(word_no)):
+                logging.debug("%sChild %s matched %s" % (TextUtils.get_tabs(word_no), child._word, words.word(word_no)))
+
+                logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+                match_node = Match(type, child, words.word(word_no))
+                context.add_match(match_node)
+
+                match = child.consume(bot, clientid, context, words, word_no + 1, type)
+                if match is not None:
+                    return match
+                else:
+                    context.pop_match ()
+
+        if self._0ormore_arrow is not None:
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+            #else:
+            #    context.pop_match ()
+
+        if self._1ormore_star is not None:
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+            #else:
+            #    context.pop_match ()
+
+        logging.debug("%sNo match for %s, trying another path" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        return None
 
 
 #######################################################################################################################
@@ -302,12 +441,19 @@ class PatternRootNode(PatternNode):
         return False
 
     def to_string(self, verbose: bool=True)->str:
-        return "ROOT [%s]" % self._child_count(verbose)
+        if verbose is True:
+            return "ROOT [%s]" % self._child_count(verbose)
+        else:
+            return "ROOT "
 
+    def match(self, bot, clientid, context, words):
+        return self.consume(bot, clientid, context, words, 0, Match.WORD)
 
 #######################################################################################################################
 #
 class PatternTopicNode(PatternNode):
+
+    TOPIC = "__TOPIC__"
 
     def __init__(self):
         PatternNode.__init__(self)
@@ -320,18 +466,33 @@ class PatternTopicNode(PatternNode):
         if isinstance(new_node, PatternThatNode):
             raise ParserException("Cannot add that node to topic node")
 
+    def is_topic(self):
+        return True
+
     def equivalent(self, other):
         if isinstance(other, PatternTopicNode):
             return True
         return False
 
     def to_string(self, verbose=True):
-        return "TOPIC [%s]" % self._child_count(verbose)
+        if verbose is True:
+            return "TOPIC [%s]" % self._child_count(verbose)
+        else:
+            return "TOPIC"
 
+    def consume(self, bot, clientid, context, words, word_no, type):
+        if words.word(word_no) == '__TOPIC__':
+            logging.debug("%sTopic matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+            return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, type)
+
+        logging.debug("%sTopic NOT matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        return None
 
 #######################################################################################################################
 #
 class PatternThatNode(PatternNode):
+
+    THAT = "__THAT__"
 
     def __init__(self):
         PatternNode.__init__(self)
@@ -344,14 +505,27 @@ class PatternThatNode(PatternNode):
         if isinstance(new_node, PatternThatNode):
             raise ParserException("Cannot add that node to that node")
 
+    def is_that(self):
+        return True
+
     def equivalent(self, other):
         if isinstance(other, PatternThatNode):
             return True
         return False
 
     def to_string(self, verbose=True):
-        return "THAT [%s]" % self._child_count(verbose)
+        if verbose is True:
+            return "THAT [%s]" % self._child_count(verbose)
+        else:
+            return "THAT"
 
+    def consume(self, bot, clientid, context, words, word_no, type):
+        if words.word(word_no) == '__THAT__':
+            logging.debug("%sThat matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+
+        logging.debug("%sTHAT NOT matched %s" % (TextUtils.get_tabs(word_no), words.word(word_no)))
+        return None
 
 #######################################################################################################################
 #
@@ -384,8 +558,10 @@ class PatternTemplateNode(PatternNode):
         return False
 
     def to_string(self, verbose=True):
-        return "PTEMPLATE [%s] " % (self._child_count(verbose))
-
+        if verbose is True:
+            return "PTEMPLATE [%s] " % (self._child_count(verbose))
+        else:
+            return "PTEMPLATE"
 
 #######################################################################################################################
 #
@@ -403,11 +579,6 @@ class PatternWordNode(PatternNode):
         if isinstance(new_node, PatternRootNode):
             raise ParserException("Cannot add root node to child node")
 
-    def matches(self, bot, clientid, word):
-        if self._word == word:
-            return True
-        return False
-
     def equivalent(self, other):
         if isinstance(other, PatternWordNode):
             if self._word == other.word:
@@ -420,8 +591,10 @@ class PatternWordNode(PatternNode):
         return False
 
     def to_string(self, verbose=True):
-        return "WORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
-
+        if verbose is True:
+            return "WORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
+        else:
+            return "WORD [%s]" % (self.word)
 
 #######################################################################################################################
 #
@@ -444,13 +617,11 @@ class PatternPriorityWordNode(PatternWordNode):
             return True
         return False
 
-    def matches(self, bot, clientid, word):
-        if self._word == word:
-            return True
-        return False
-
     def to_string(self, verbose=True):
-        return "PWORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
+        if verbose is True:
+            return "PWORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
+        else:
+            return "PWORD [%s]" % (self.word)
 
 
 #######################################################################################################################
@@ -480,15 +651,15 @@ class PatternSetNode(PatternWordNode):
             logging.debug("Looking for [%s] in set [%s]", word, self.set_name)
             set_words = bot.brain.sets.set(self.set_name)
             if word in set_words:
-                logging.debug("Found a word [%s] in set [%s]", word, self.set_name)
+                logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
                 return True
         return False
 
-    def matches(self, bot, clientid, word):
-        return self.equals(bot, clientid, word)
-
     def to_string(self, verbose=True):
-        return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
+        if verbose is True:
+            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
+        else:
+            return "SET name=[%s]" % (self.word)
 
 
 #######################################################################################################################
@@ -510,14 +681,15 @@ class PatternBotNode(PatternWordNode):
     def equals(self, bot, clientid, word):
         if bot.brain.properties.has_property(self.word):
             if word == bot.brain.properties.property(self.word):
+                logging.debug("Found word [%s] as bot property"%(word))
                 return True
         return False
 
-    def matches(self, bot, clientid, word):
-        return self.equals(bot, clientid, word)
-
     def to_string(self, verbose=True):
-        return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.word)
+        if verbose is True:
+            return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.word)
+        else:
+            return "BOT property=[%s]" % (self.word)
 
 
 #######################################################################################################################
@@ -536,30 +708,6 @@ class PatternWildCardNode(PatternNode):
     def can_add(self, new_node):
         if isinstance(new_node, PatternRootNode):
             raise ParserException("Cannot add root node to child node")
-
-    def has_child_match(self, bot, clientid, next_word):
-
-        for priority in self._priority_words:
-            if priority.equals(bot, clientid, next_word):
-                return priority
-
-        if self._0ormore_arrow is not None:
-            return self._0ormore_arrow
-
-        if self._0ormore_hash is not None:
-            return self._0ormore_hash
-
-        for child in self.children:
-            if child.equals(bot, clientid, next_word):
-                return child
-
-        if self._1ormore_underline is not None:
-            return self._1ormore_underline
-
-        if self._1ormore_star is not None:
-            return self._1ormore_star
-
-        return None
 
     @property
     def wildcard(self):
@@ -595,8 +743,107 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         return False
 
     def to_string(self, verbose=True):
-        return "ZEROORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+        if verbose is True:
+            return "ZEROORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+        else:
+            return "ZEROORMORE [%s]" % (self.wildcard)
 
+    def consume(self, bot, clientid, context, words, word_no, type):
+
+        context_match = Match(type, self, None)
+        context.add_match(context_match)
+        matches_added = 1
+
+        if self._0ormore_hash is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._1ormore_underline is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._0ormore_arrow is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._1ormore_star is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        # TODO Add priority words first
+
+        word = words.word(word_no)
+
+        if len(self._children) > 0:
+            for child in self._children:
+                if child.equals(bot, clientid, word):
+                    logging.debug ("%sWildcard child %s matched %s"%(TextUtils.get_tabs(word_no), child._word, word))
+
+                    logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+                    context_match2 = Match(Match.WORD, child, word)
+                    context.add_match(context_match2)
+                    matches_added += 1
+
+                    match = child.consume(bot, clientid, context, words, word_no+1, type)
+                    if match is not None:
+                        return match
+
+            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+
+            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            context_match.add_word(word)
+
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+            if match is not None:
+                return match
+
+            word_no += 1
+            word = words.word(word_no)
+
+            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            context_match.add_word(word)
+
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type)
+            if match is not None:
+                return match
+
+            word_no += 1
+            if word_no >= words.num_words():
+                context.pop_matches(matches_added)
+                return None
+            word = words.word(word_no)
+
+        logging.debug("%sNo children, consume words until next break point" % (TextUtils.get_tabs(word_no)))
+        while word_no < words.num_words() - 1:
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+
+            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            context_match.add_word(word)
+
+            word_no += 1
+            word = words.word(word_no)
+            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+
+        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+
+        match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+
+        if match is not None:
+            return match
+        else:
+            context.pop_matches(matches_added)
+            return None
 
 #######################################################################################################################
 #
@@ -624,4 +871,105 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         return False
 
     def to_string(self, verbose=True):
-        return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+        if verbose is True:
+            return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+        else:
+            return "ONEORMORE [%s]" % (self.wildcard)
+
+    def consume(self, bot, clientid, context, words, word_no, type):
+
+        if word_no >= words.num_words():
+            return None
+        word = words.word(word_no)
+        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+
+        logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+        context_match = Match(type, self, word)
+        context.add_match(context_match)
+        matches_add = 1
+
+        if self._0ormore_hash is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._1ormore_underline is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._0ormore_arrow is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        if self._1ormore_star is not None:
+            logging.debug("%sWildcard is next node, moving on!"%(TextUtils.get_tabs(word_no)))
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type)
+            if match is not None:
+                return match
+
+        # TODO Add priority words first
+
+        word_no += 1
+        if word_no >= words.num_words():
+            logging.debug("%sNo more words" % (TextUtils.get_tabs(word_no)))
+            return super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+        word = words.word(word_no)
+
+        if len(self._children) > 0:
+            for child in self._children:
+                if child.equals(bot, clientid, word):
+                    logging.debug ("%sWildcard child %s matched %s"%(TextUtils.get_tabs(word_no), child._word, word))
+
+                    logging.debug("%sMATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+                    context_match2 = Match(Match.WORD, child, word)
+                    context.add_match(context_match2)
+                    matches_add += 1
+                    match = child.consume(bot, clientid, context, words, word_no+1, type)
+                    if match is not None:
+                        return match
+
+            logging.debug ("%sWildcard %s consumed %s"%(TextUtils.get_tabs(word_no), self._wildcard, word))
+
+            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            context_match.add_word(word)
+
+            word_no += 1
+            if word_no >= words.num_words():
+                context.pop_matches(matches_add)
+                return None
+            word = words.word(word_no)
+
+        logging.debug("%sNo children, consume words until next break point"%(TextUtils.get_tabs(word_no)))
+        while word_no < words.num_words()-1:
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+            if match is not None:
+                return match
+
+            logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+
+            logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+            context_match.add_word(word)
+
+            word_no += 1
+            word = words.word(word_no)
+
+        logging.debug("%sWildcard %s consumed %s" % (TextUtils.get_tabs(word_no), self._wildcard, word))
+        logging.debug("%s*MATCH -> %s" % (TextUtils.get_tabs(word_no), word))
+        context_match.add_word(word)
+
+        if word_no == words.num_words()-1:
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type)
+        else:
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type)
+
+        if match is not None:
+            return match
+        else:
+            context.pop_matches(matches_add)
+            return None
+

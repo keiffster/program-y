@@ -15,357 +15,118 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-from programy.parser.pattern.nodes import PatternNode
 from programy.dialog import Sentence
-from programy.bot import Bot
-
-class MatchContext(object):
-    def __init__(self):
-        self.bot = None
-        self.clientid = None
-        self.pattern_sentence = None
-        self.pattern_stars = []
-        self.topic_sentence = None
-        self.topic_stars = []
-        self.that_sentence = None
-        self.that_stars = []
 
 
-class PatternMatcher(object):
+class Match(object):
 
-    def __init__(self, graph, max_match_depth=1000):
-        self._graph = graph
-        self._max_match_depth = max_match_depth
+    WORD = 0
+    TOPIC = 2
+    THAT = 3
+
+    def __init__(self, type, node, word):
+        self._match_type = type
+        self._matched_node = node
+        self._matched_words = []
+        if word is not None:
+            self.add_word(word)
+
+    def add_word(self, word):
+        self._matched_words.append(word)
 
     @property
-    def graph(self):
-        return self._graph
+    def match_type(self):
+        return self._match_type
 
-    def matches_to_stars(self, matches, stars):
-        stars.clear()
-        for match in matches:
-            if len(match) > 0:
-                matched = " ".join(match)
-                if matched != "*":
-                    stars.append(matched)
+    @property
+    def matched_node(self):
+        return self._matched_node
 
-    def match(self,
-              bot: Bot,
-              clientid: str,
-              pattern_sentence: Sentence,
-              pattern_stars: list,
-              topic_sentence: Sentence,
-              topic_stars: list,
-              that_sentence: Sentence,
-              that_stars: list):
-        logging.debug("Pattern matching sentence [%s],  topic[%s], that[%s]",
-                      pattern_sentence.words_from_current_pos(0),
-                      topic_sentence.words_from_current_pos(0),
-                      that_sentence.words_from_current_pos(0))
+    @property
+    def matched_words(self):
+        return self._matched_words
 
-        match_context = MatchContext()
-        match_context.bot = bot
-        match_context.clientid = clientid
-        match_context.pattern_sentence = pattern_sentence
-        match_context.topic_sentence = topic_sentence
-        match_context.that_sentence = that_sentence
+    def joined_words(self, join_char=" "):
+        return join_char.join(self.matched_words)
 
-        matched_path = []
-        matched_stars = []
-        if self.match_children(match_context, self.graph.root, pattern_sentence, 0, matched_path, matched_stars,
-                               0) is True:
-            
-            for match in match_context.pattern_stars:
-                pattern_stars.append(match)
+    @staticmethod
+    def type_to_string(type):
+        if type == Match.WORD:
+            return "Word"
+        elif type == Match.TOPIC:
+            return "Topic"
+        elif type == Match.THAT:
+            return "That"
+        else:
+            return "Unknown"
 
-            for match in match_context.topic_stars:
-                topic_stars.append(match)
+    def to_string(self):
+        return "Match=(%s) Node=(%s) Matched=(%s)"%(Match.type_to_string(self._match_type), self._matched_node.to_string(verbose=False), self.joined_words())
 
-            for match in match_context.that_stars:
-                that_stars.append(match)
 
-            return matched_path[0]
+class MatchContext(object):
 
+    def __init__(self):
+        self._matched_nodes = []
+        self._template_node = None
+
+    def add_match(self, match):
+        self._matched_nodes.append(match)
+
+    def pop_match(self):
+        if len(self._matched_nodes) > 0:
+            self._matched_nodes.pop()
+
+    def pop_matches(self, matches_add):
+        for x in range(0, matches_add):
+            self.pop_match()
+
+    def set_template(self, template):
+        self._template_node = template
+
+    @property
+    def matched_nodes(self):
+        return self._matched_nodes
+
+    def template_node(self):
+        return self._template_node
+
+    def matched(self):
+        if self._template_node is not None:
+            return True
+        else:
+            return False
+
+    def _get_indexed_match_by_type(self, index, type):
+        count = 1
+        for match in self._matched_nodes:
+            if match._match_type == type and \
+                ( match._matched_node.is_wildcard() or
+                  match._matched_node.is_set() or
+                  match._matched_node.is_bot()):
+                if count == index:
+                    return match.joined_words()
+                count += 1
         return None
 
-    def _get_tabs(self, depth: int):
-        string = ""
-        for i in range(depth):
-            string += "\t"
-        return string
+    def star(self, index):
+        return self._get_indexed_match_by_type(index,  Match.WORD)
 
-    def end_of_sentence(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
+    def topicstar(self, index):
+        return self._get_indexed_match_by_type(index,  Match.TOPIC)
 
-        tabs_str = self._get_tabs(depth)
+    def thatstar(self, index):
+        return self._get_indexed_match_by_type(index,  Match.THAT)
 
-        if root.has_zero_or_more():
-            logging.debug("%sRoot has zero or more", tabs_str)
-            if root.arrow is not None:
-                if self.match_children(match_context, root.arrow, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-            else:
-                if self.match_children(match_context, root.hash, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-
-        if root.has_topic():
-            self.matches_to_stars(matched_stars, match_context.pattern_stars)
-            matched_stars = []
-            if self.match_children(match_context, root.topic, match_context.topic_sentence, 0, matched_path,
-                                   matched_stars, 0) is True:
-                return True
-
-        elif root.has_that():
-            self.matches_to_stars(matched_stars, match_context.topic_stars)
-            matched_stars = []
-            if self.match_children(match_context, root.that, match_context.that_sentence, 0, matched_path,
-                                   matched_stars, 0) is True:
-                return True
-
-        elif root.has_template():
-            logging.debug("%sRoot has template...[%s]", tabs_str, root.template.to_string())
-            self.matches_to_stars(matched_stars, match_context.that_stars)
-            matched_path.append(root.template)
-            return True
-
+    def list_matches(self, output_func=logging.debug):
+        output_func("Matches...")
+        count = 1
+        for match in self._matched_nodes:
+            output_func("\t%d - %s"%(count, match.to_string()))
+            count += 1
+        if self.matched() is True:
+            output_func("\tT - %s"%(self._template_node.to_string()))
         else:
-            logging.debug("%sRoot has no topic, that or template, exiting...", tabs_str)
-            return False
+            output_func("\tT - None")
 
-    def is_zero_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
 
-        tabs_str = self._get_tabs(depth)
-
-        word = sentence.word(num_word)
-
-        # added = False
-        logging.debug("%sRoot is 0 or more", tabs_str)
-        if root.has_wildcard():
-            logging.debug("%sRoot next is wildcard", tabs_str)
-
-            logging.debug("%s0ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-            # added = True
-            matched_stars[len(matched_stars) - 1].append(word)
-            matched_stars.append([])
-
-            if root.hash is not None:
-                if self.match_children(match_context, root.hash, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-            elif root.arrow is not None:
-                if self.match_children(match_context, root.arrow, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-            else:
-                raise Exception("Unknown zero or ore wild card")
-
-                # if len(matched_stars) > 0:
-                #    matched_stars.pop()
-
-        else:
-            for child in root.children:
-                if child.matches(match_context.bot, match_context.clientid, word):
-
-                    if child.is_set() or child.is_bot():
-                        matched_stars.append([])
-                        logging.debug("%sAdding new star match", tabs_str)
-                        matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%s0 or more matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
-                    if self.match_children(match_context, child, sentence, num_word + 1, matched_path,
-                                           matched_stars, depth + 1) is True:
-                        return True
-
-        logging.debug("%s0ORM. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-        # if added is False:
-        # matched_stars.append([])
-        logging.debug("%sAdding new star match", tabs_str)
-        matched_stars[len(matched_stars) - 1].append(word)
-
-        if self.match_children(match_context, root, sentence, num_word + 1, matched_path, matched_stars,
-                               depth + 1) is True:
-            return True
-
-        if len(matched_stars) > 0:
-            matched_stars.pop()
-
-        return False
-
-    def is_one_or_more(self, match_context, root, sentence, num_word, matched_path, matched_stars, depth):
-
-        tabs_str = self._get_tabs(depth)
-
-        word = sentence.word(num_word)
-
-        logging.debug("%sRoot is one or more", tabs_str)
-        if root.has_wildcard():
-            logging.debug("%sRoot next is wildcard", tabs_str)
-
-            logging.debug("%s1ORM HAS. Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-            matched_stars.append([])
-            matched_stars[len(matched_stars) - 1].append(word)
-
-            if root.underline is not None:
-                if self.match_children(match_context, root.underline, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-            if root.star is not None:
-                if self.match_children(match_context, root.star, sentence, num_word + 1, matched_path,
-                                       matched_stars, depth + 1) is True:
-                    return True
-            else:
-                raise Exception("Unknown one or ore wild card")
-
-            if len(matched_stars) > 0:
-                matched_stars.pop()
-
-        else:
-            for child in root.children:
-                if child.matches(match_context.bot, match_context.clientid, word):
-
-                    if child.is_set() or child.is_bot():
-                        matched_stars.append([])
-                        logging.debug("%sAdding new star match", tabs_str)
-                        matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%s1 or more matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
-                    if self.match_children(match_context, child, sentence, num_word + 1, matched_path, matched_stars,
-                                           depth + 1) is True:
-                        return True
-
-            logging.debug("%s1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-            matched_stars[len(matched_stars) - 1].append(word)
-
-            if self.match_children(match_context, root, sentence, num_word + 1, matched_path, matched_stars,
-                                   depth + 1) is True:
-                return True
-
-            if len(matched_stars) > 0:
-                matched_stars.pop()
-
-        return False
-
-    def match_children(self, match_context: MatchContext, root: PatternNode, sentence: Sentence, num_word: int,
-                       matched_path: list, matched_stars: list, depth: int):
-
-        tabs_str = self._get_tabs(depth)
-
-        if depth > self._max_match_depth:
-            logging.debug("%sMax recursive depth reached [%d]", tabs_str, self._max_match_depth)
-            return False
-
-        if num_word >= sentence.num_words():
-            return self.end_of_sentence(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
-
-        if root.is_zero_or_more():
-            result = self.is_zero_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
-            if result is True:
-                return True
-
-        if root.is_one_or_more():
-            result = self.is_one_or_more(match_context, root, sentence, num_word, matched_path, matched_stars, depth)
-            if result is True:
-                return True
-
-        #########################################################################################################
-        # Order = $  # _ word ^ *
-
-        word = sentence.word(num_word)
-
-        if root.has_priority_words():
-            logging.debug("%sRoot has priority", tabs_str)
-            for child in root.priority_words:
-                if child.matches(match_context.bot, match_context.clientid, word):
-
-                    if child.is_set() or child.is_bot():
-                        matched_stars.append([])
-                        logging.debug("%sAdding new star match", tabs_str)
-                        matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%sPriority matched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
-                    if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
-                                           depth+1) is True:
-                        return True
-
-        if root.has_zero_or_more():
-            if num_word <= sentence.num_words():
-
-                if root.hash is not None:
-                    logging.debug("%sRoot is 0 or more", tabs_str)
-                    matched_stars.append([])
-
-                    logging.debug("%sMatching child [#] -> word [%s]", tabs_str, word)
-                    if self.match_children(match_context, root.hash, sentence, num_word, matched_path, matched_stars,
-                                           depth+1) is True:
-                        return True
-
-                    if len(matched_stars) > 0:
-                        matched_stars.pop()
-
-        if root.has_one_or_more():
-            if num_word < sentence.num_words():
-                if root.underline is not None:
-                    logging.debug("%sRoot has 1 or more", tabs_str)
-
-                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-                    matched_stars.append([])
-                    matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%sMatching child [_] -> word [%s]", tabs_str, word)
-                    if self.match_children(match_context, root.underline, sentence, num_word+1, matched_path,
-                                           matched_stars, depth+1) is True:
-                        return True
-
-                    if len(matched_stars) > 0:
-                        matched_stars.pop()
-
-        if root.has_children():
-            logging.debug("%sRoot has children (%d)", tabs_str, depth)
-            for child in root.children:
-                if child.matches(match_context.bot, match_context.clientid, word):
-
-                    if child.is_set() or child.is_bot():
-                        matched_stars.append([])
-                        logging.debug("%sAdding new star match", tabs_str)
-                        matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%sMatched child [%s] -> word [%s]", tabs_str, child.to_string(), word)
-                    if self.match_children(match_context, child, sentence, num_word+1, matched_path, matched_stars,
-                                           depth+1) is True:
-                        return True
-
-        if root.has_zero_or_more():
-            if num_word <= sentence.num_words():
-                if root.arrow is not None:
-                    logging.debug("%sRoot is 0 or more", tabs_str)
-                    matched_stars.append([])
-
-                    logging.debug("%sMatching child [^] -> word [%s]", word, tabs_str)
-                    if self.match_children(match_context, root.arrow, sentence, num_word, matched_path, matched_stars,
-                                           depth+1) is True:
-                        return True
-
-                    if len(matched_stars) > 0:
-                        matched_stars.pop()
-
-        if root.has_one_or_more():
-            if num_word < sentence.num_words():
-                if root.star is not None:
-                    logging.debug("%sRoot has 1 or more", tabs_str)
-                    logging.debug("%sHAS 1ORM Adding (%s) to star match (%d)", tabs_str, word, len(matched_stars))
-                    matched_stars.append([])
-                    matched_stars[len(matched_stars) - 1].append(word)
-
-                    logging.debug("%sMatching child [*] -> word [%s]", tabs_str, word)
-                    if self.match_children(match_context, root.star, sentence, num_word+1, matched_path,
-                                           matched_stars, depth+1) is True:
-                        return True
-
-                    if len(matched_stars) > 0:
-                        matched_stars.pop()
-
-        logging.debug("%sNo match", tabs_str)
-        matched_stars.clear()
-        matched_stars.append([])
-        return False

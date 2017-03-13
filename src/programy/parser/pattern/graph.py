@@ -14,6 +14,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+import logging
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes import PatternRootNode
 from programy.parser.pattern.nodes import PatternPriorityWordNode
@@ -25,6 +26,7 @@ from programy.parser.pattern.nodes import PatternBotNode
 from programy.parser.pattern.nodes import PatternTopicNode
 from programy.parser.pattern.nodes import PatternThatNode
 from programy.parser.pattern.nodes import PatternTemplateNode
+from programy.utils.text.text import TextUtils
 
 # TODO When xml is split over multiple lines, extra PatternWordNodes get crearted
 # <pattern>
@@ -72,12 +74,12 @@ class PatternGraph(object):
             if 'name' in element.attrib:
                 return PatternSetNode(element.attrib['name'])
             else:
-                return PatternSetNode(element.text.strip())
+                return PatternSetNode(TextUtils.strip_whitespace(element.text))
         elif element.tag == 'bot':
             if 'name' in element.attrib:
                 return PatternBotNode(element.attrib['name'])
             else:
-                return PatternBotNode(element.text.strip())
+                return PatternBotNode(TextUtils.strip_whitespace(element.text))
         else:
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
@@ -90,7 +92,7 @@ class PatternGraph(object):
 
         words = pattern_text.split(" ")
         for word in words:
-            word = word.strip()
+            word = TextUtils.strip_whitespace(word)
             new_node = PatternGraph.node_from_text(word)
             current_node = current_node.add_child(new_node)
 
@@ -99,14 +101,16 @@ class PatternGraph(object):
     def get_text_from_element(self, element):
         text = element.text
         if text is not None:
-            text = text.strip()
+            text = TextUtils.strip_whitespace(text)
+            if text == "":
+                return None
             return text
         return None
 
     def get_tail_from_element(self, element):
         text = element.tail
         if text is not None:
-            text = text.strip()
+            text = TextUtils.strip_whitespace(text)
             if text == "":
                 return None
             return text
@@ -159,7 +163,7 @@ class PatternGraph(object):
 
         head_text = self.get_text_from_element(that_element)
         if head_text is not None:
-            current_node = self._parse_text(head_text.strip(), current_node)
+            current_node = self._parse_text(TextUtils.strip_whitespace(head_text), current_node)
 
         added_child = False
         for sub_element in that_element:
@@ -204,5 +208,6 @@ class PatternGraph(object):
 
         self.add_template_to_node(template_graph_root, current_node)
 
-    def dump(self, output_func=print, verbose=True):
+    def dump(self, output_func=logging.debug, verbose=True):
         self.root.dump("", output_func, verbose)
+        output_func("")

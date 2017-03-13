@@ -1,37 +1,13 @@
 import unittest
-import xml.etree.ElementTree as ET
 
-from programy.bot import Bot
-from programy.brain import Brain
-from programy.config import ClientConfiguration, BrainConfiguration
-from programy.dialog import Question, Sentence
-from programy.parser.template.graph import TemplateGraph
 from programy.parser.template.nodes import *
-from programy.parser.aiml_parser import AIMLParser
 from programy.config import BrainFileConfiguration
+from test.parser.template.graph.test_graph_client import TemplateGraphTestClient
 
-class TemplateGraphLearnTests(unittest.TestCase):
 
-    def setUp(self):
-        self.parser = TemplateGraph(AIMLParser())
-        self.assertIsNotNone(self.parser)
+class TemplateGraphLearnTests(TemplateGraphTestClient):
 
-        self.test_brain = None
-        self.test_sentence = Sentence("test sentence")
-        self.test_sentence._stars = ['one', 'two', 'three', 'four', 'five', 'six']
-        self.test_sentence._thatstars = ["*"]
-        self.test_sentence._topicstars = ["*"]
-
-        test_config = ClientConfiguration()
-
-        self.test_bot = Bot(Brain(BrainConfiguration()), config=test_config.bot_configuration)
-        self.test_clientid = "testid"
-
-        conversation = self.test_bot.get_conversation(self.test_clientid)
-        question = Question.create_from_sentence(self.test_sentence)
-        conversation._questions.append(question)
-
-    def test_eval_simple(self):
+     def test_eval_simple(self):
         template = ET.fromstring("""
 			<template>
 				<eval>sometext</eval>
@@ -54,7 +30,8 @@ class TemplateGraphLearnTests(unittest.TestCase):
 
         self.assertEqual(eval_node.resolve(self.test_bot, self.test_clientid), "sometext")
 
-    def test_learn_simple(self):
+     def test_learn_simple(self):
+
         template = ET.fromstring("""
 			<template>
 				<learn>
@@ -90,7 +67,7 @@ class TemplateGraphLearnTests(unittest.TestCase):
         response = self.test_bot.ask_question(self.test_clientid, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)
 
-    def test_learnf_simple(self):
+     def test_learnf_simple(self):
         template = ET.fromstring("""
 			<template>
 				<learnf>

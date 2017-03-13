@@ -107,20 +107,12 @@ class Bot(object):
 
         question = Question.create_from_text(pre_processed)
 
-        # KS
         conversation.record_dialog(question)
-        # if srai is False:
-        #     conversation.record_dialog(question)
-        #     parent_question = None
-        # else:
-        #     parent_question = conversation.current_question()
 
         answers = []
         for each_sentence in question.sentences:
 
-            # KS
             response = self.brain.ask_question(self, clientid, each_sentence)
-            #response = self.brain.ask_question(self, clientid, each_sentence, parent_question)
 
             if response is not None:
                 logging.debug("Raw Response (%s): %s", clientid, response)
@@ -137,7 +129,6 @@ class Bot(object):
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)
 
-        # KS
         if srai is True:
             conversation.pop_dialog()
 

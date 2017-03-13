@@ -21,12 +21,10 @@ import xml.etree.ElementTree as ET
 from programy.parser.exceptions import ParserException
 from programy.config import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
-from programy.parser.pattern.matcher import PatternMatcher
 from programy.parser.template.graph import TemplateGraph
-from programy.parser.template.evaluator import TemplateEvaluator
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog import Sentence
-
+from programy.parser.pattern.matcher import MatchContext
 
 class AIMLLoader(FileFinder):
     def __init__(self, aiml_parser):
@@ -43,9 +41,7 @@ class AIMLParser(object):
         self._supress_warnings = supress_warnings
         self.stop_on_invalid = stop_on_invalid
         self.pattern_parser = PatternGraph()
-        self.pattern_matcher = PatternMatcher(self.pattern_parser)
         self.template_parser = TemplateGraph(self)
-        self.template_evaluator = TemplateEvaluator()
         self._filename = "Unknown"
         self._version = "Unknown"
         self._aiml_loader = AIMLLoader(self)
@@ -255,40 +251,33 @@ class AIMLParser(object):
 
         return (patterns[0], topic_element, that_element, template_graph_root)
 
-    def match_sentence(self, bot, clientid, sentence, parent_question, topic_pattern, that_pattern):
-        logging.debug("Matching sentence [%s], topic=[%s], that=[%s] ", sentence.text(), topic_pattern, that_pattern)
+    def match_sentence(self, bot, clientid, pattern_sentence, topic_pattern, that_pattern):
 
-        if parent_question is not None:
-            pattern_stars = parent_question.current_sentence()._stars
-            topic_stars = parent_question.current_sentence()._topicstars
-            that_stars = parent_question.current_sentence()._thatstars
-        else:
-            pattern_stars = sentence._stars
-            topic_stars = sentence._topicstars
-            that_stars = sentence._thatstars
+        topic_sentence = Sentence(topic_pattern)
+        that_sentence = Sentence(that_pattern)
 
-        matched = self.pattern_matcher.match(bot, clientid,
-                                             sentence, pattern_stars,
-                                             Sentence(topic_pattern),topic_stars,
-                                             Sentence(that_pattern), that_stars)
-        if matched is not None:
-            return self.template_evaluator.evaluate(bot, clientid, matched.template)
+        logging.debug("AIML Parser matching sentence [%s], topic=[%s], that=[%s] ", pattern_sentence.text(), topic_pattern, that_pattern)
 
-        # pattern_stars = []
-        # topic_stars = []
-        # that_stars = []
-        # matched = self.pattern_matcher.match(bot, clientid, sentence, pattern_stars, Sentence(topic_pattern),
-        #                                      topic_stars, Sentence(that_pattern), that_stars)
-        # if matched is not None:
-        #     if parent_question is not None:
-        #         parent_question.current_sentence().stars = pattern_stars
-        #         parent_question.current_sentence().topicstars = topic_stars
-        #         parent_question.current_sentence().thatstars = that_stars
-        #     else:
-        #         sentence.stars = pattern_stars
-        #         sentence.topicstars = topic_stars
-        #         sentence.thatstars = that_stars
-        #
-        #     return self.template_evaluator.evaluate(bot, clientid, matched.template)
+        sentence = Sentence()
+        sentence.append_sentence(pattern_sentence)
+        sentence.append_word('__TOPIC__')
+        sentence.append_sentence(topic_sentence)
+        sentence.append_word('__THAT__')
+        sentence.append_sentence(that_sentence)
+        logging.debug("Matching [%s]"%sentence.words_from_current_pos(0))
+
+        context = MatchContext()
+
+        template = self.pattern_parser._root_node.match(bot, clientid, context, sentence)
+
+        if template is not None:
+            context._template_node = template
+
+            context.list_matches()
+
+            # Save the matched context for the associated sentence
+            pattern_sentence.matched_context = context
+
+            return context
 
         return None

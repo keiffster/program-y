@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: train.aiml -->
+    <!-- Last modified: July 27, 2016 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <category>
+        <pattern>
+            <set>familiarname</set>
+            <set>is</set> *
+        </pattern>
+        <template>
+            <think>
+                <set name="learnpattern">Who
+                    <star index="2"/>
+                    <person>
+                        <star index="3"/>
+                    </person>
+                </set>
+                ?
+                <set name="learntemplate">Your
+                    <star/>
+                </set>
+                .
+                <learn>
+                    <category>
+                        <pattern>
+                            <eval>
+                                <get name="learnpattern"/>
+                            </eval>
+                        </pattern>
+                        <template>
+                            <eval>
+                                <get name="learntemplate"/>
+                            </eval>
+                        </template>
+                    </category>
+                </learn>
+            </think>
+            Now you can ask me: "<get name="learnpattern"/>"?
+            <think>
+                <set name="learnpattern">What does my
+                    <star/>
+                    <map name="is2be">
+                        <star index="2"/>
+                    </map>
+                </set>
+                ?
+                <set name="learntemplate">
+                    <person>
+                        <star index="3"/>
+                    </person>
+                </set>
+                .
+                <learn>
+                    <category>
+                        <pattern>
+                            <eval>
+                                <get name="learnpattern"/>
+                            </eval>
+                        </pattern>
+                        <template>
+                            <eval>
+                                <get name="learntemplate"/>
+                            </eval>
+                        </template>
+                    </category>
+                </learn>
+            </think>
+            and "<get name="learnpattern"/>"?
+        </template>
+    </category>
+
+</aiml>

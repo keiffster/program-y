@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+    <category>
+        <pattern>* IS A *</pattern>
+        <template>Ok, I will remember
+            <star/>
+            is a<star index="2"/>.
+            <think>
+                <set name="isaname">
+                    <srai>ISANAME
+                        <star/>
+                    </srai>
+                </set>
+                <condition name="isaname">
+                    <li value="true">
+                        <set name="learnpattern">WHO IS A</set>
+                    </li>
+                    <li>
+                        <set name="learnpattern">WHAT IS A</set>
+                    </li>
+                </condition>
+            </think>
+            <learn>
+                <category>
+                    <pattern>WHAT IS
+                        <eval>
+                            <star/>
+                        </eval>
+                    </pattern>
+                    <template>A
+                        <eval>
+                            <star index="2"/>
+                        </eval>
+                        .
+                    </template>
+                </category>
+                <category>
+                    <pattern>
+                        <eval>
+                            <get name="learnpattern"/>
+                        </eval>
+                        <eval>
+                            <star index="2"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <star/>
+                        </eval>
+                        .
+                    </template>
+                </category>
+                <category>
+                    <pattern>IS
+                        <eval>
+                            <star/>
+                        </eval>
+                        A
+                        <eval>
+                            <star index="2"/>
+                        </eval>
+                    </pattern>
+                    <template>Yes.</template>
+                </category>
+            </learn>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ISANAME
+            <set>name</set>
+        </pattern>
+        <template>true</template>
+    </category>
+
+    <category>
+        <pattern>ISANAME *</pattern>
+        <template>false</template>
+    </category>
+
+</aiml>

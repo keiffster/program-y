@@ -207,6 +207,13 @@ class TemplateGraph(object):
         elif expression.tag == 'rest':
             self.parse_rest_expression(expression, branch)
 
+        # Tags found in Program-A reference implementastion, but not documented in the spec !!! ffs
+        # addtriple
+        # deletetriple
+        # select
+        # uniq
+        # resetlearnf
+        # resetlearn
 
         # This is tag not AIML 2.0 compliant
         elif expression.tag == 'extension':

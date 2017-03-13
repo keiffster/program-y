@@ -17263,8 +17263,7 @@
                 <li>What is it to you.</li>
                 <li>I am not sure if I can quantify the answer.</li>
             </random>
-            <br/>
-            <srai>xfind
+            <srai>XFIND
                 <person/>
             </srai>
         </template>
@@ -19232,7 +19231,6 @@
                 <li>Try asking another<bot name="species"/>.
                 </li>
             </random>
-            <br/>
             <srai>XFIND
                 <person/>
             </srai>
@@ -19704,7 +19702,6 @@
                     as often as possible, do you?
                 </li>
             </random>
-            <br/>
             <think>
                 <set name="does">
                     <person/>
@@ -20456,7 +20453,6 @@
                 <li>Doesn't everyone have a</li>
             </random>
             <person/>.
-            <br/>
             I have
             <random>
                 <li>a lot of friends on the Internet.</li>
@@ -25119,7 +25115,7 @@
     </category>
     <category>
         <pattern>SPRINGTIME *</pattern>
-        <template>Paris in the<br/>the spring.
+        <template>Paris in the the spring.
         </template>
     </category>
     <category>
