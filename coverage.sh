@@ -2,5 +2,5 @@
 
 clear
 
-nosetests --with-xcoverage --cover-html --with-xunit --cover-erase --cover-branches --cover-package=programy
+nosetests --cover-html --cover-html-dir=cover --with-xunit --cover-erase --cover-branches --cover-package=programy
 
