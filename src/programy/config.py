@@ -129,10 +129,10 @@ class BrainConfiguration(BaseConfigurationData):
 
         brain = config_file.get_section(self.section_name)
         if brain is not None:
-            self._supress_warnings = config_file.get_option("supress_warnings", brain)
-            self._allow_system_aiml = config_file.get_option("allow_system_aiml", brain)
-            self._allow_learn_aiml = config_file.get_option("allow_learn_aiml", brain)
-            self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain)
+            self._supress_warnings = config_file.get_option("supress_warnings", brain, False)
+            self._allow_system_aiml = config_file.get_option("allow_system_aiml", brain, False)
+            self._allow_learn_aiml = config_file.get_option("allow_learn_aiml", brain, False)
+            self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain, False)
 
             files = config_file.get_section("files", brain)
             if files is not None:

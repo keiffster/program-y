@@ -214,6 +214,7 @@ class TemplateGraph(object):
         # uniq
         # resetlearnf
         # resetlearn
+        # search
 
         # This is tag not AIML 2.0 compliant
         elif expression.tag == 'extension':

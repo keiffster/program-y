@@ -31,7 +31,6 @@ For more information see [url]
 		<template>
 			<denormalize><star/></denormalize>
 		</template>
-
 	</category>
 
 </aiml>

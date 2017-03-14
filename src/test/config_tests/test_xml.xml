@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <brain>
-        <supress_warnings>True</supress_warnings>
+   <!--     <supress_warnings>True</supress_warnings> -->
         <allow_system_aiml>True</allow_system_aiml>
         <allow_learn_aiml>True</allow_learn_aiml>
         <allow_learnf_aiml>True</allow_learnf_aiml>
