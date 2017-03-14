@@ -98,7 +98,7 @@ def ask():
                     "error": str(excep)
                    }
 
-        return jsonify({'response': response}, 400)
+        return jsonify({'response': response})
 
 if __name__ == '__main__':
 
