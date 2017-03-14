@@ -964,8 +964,7 @@ class TemplateImplodeNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         result = self.resolve_children_to_string(bot, clientid)
-        letters = [ch for ch in result if ch != ' ']
-        resolved = "".join(letters)
+        resolved = TextUtils.strip_all_whitespace(result)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
