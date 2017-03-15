@@ -1,0 +1,45 @@
+aunt
+ant
+uncle
+friend
+best friend
+bestfriend
+niece
+nephew
+grandmother
+grandma
+grandmom
+mother
+ma
+mom
+momma
+mum
+mumma
+mommy
+mummy
+grandfather
+granddad
+father
+dad
+dada
+daddy
+husband
+hubby
+wife
+wifey
+son
+daughter
+brother
+sister
+bro
+sis
+boyfriend
+girlfriend
+boy friend
+girl friend
+botmaster
+bot master
+boss
+teacher
+dog
+cat
