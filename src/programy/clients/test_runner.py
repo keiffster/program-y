@@ -98,15 +98,18 @@ class TestRunnerBotClient(BotClient):
         for category in collection.keys():
             for test in collection[category]:
                 test.category = category
-                #print ("[%s]" % test.question)
                 response = self.bot.ask_question(self.clientid, test.question).upper()
-                #print ("\t[%s]" % response)
                 success = False
                 test.response = response
-                for expected_regex in test.answers_regex:
-                    if expected_regex.search(response):
+                if len(test.answers_regex) == 0:
+                    if test.response == "":
                         success = True
                         break
+                else:
+                    for expected_regex in test.answers_regex:
+                        if expected_regex.search(response):
+                            success = True
+                            break
                 if success is True:
                     successes.append(test)
                 else:
