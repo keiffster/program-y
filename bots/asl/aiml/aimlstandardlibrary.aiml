@@ -637,6 +637,7 @@
             <set>number</set>
         </pattern>
         <template>
+            <implode>
             <srai>XXSUBSTRINGHead
                 <explode>
                     <star index="1"/>
@@ -645,6 +646,7 @@
                 <star index="2"/>
                 XS 0
             </srai>
+            </implode>
         </template>
     </category>
 
@@ -1012,10 +1014,12 @@
             XIMPLODE * *
         </pattern>
         <template>
+            <implode>
             <star index="1"/>
             <srai>XIMPLODE
                 <star index="2"/>
             </srai>
+            </implode>
         </template>
     </category>
 
