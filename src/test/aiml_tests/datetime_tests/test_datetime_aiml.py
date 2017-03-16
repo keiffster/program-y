@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config import BrainFileConfiguration
+from programy.config.brain import BrainFileConfiguration
 
 unittest.util._MAX_LENGTH=2000
 

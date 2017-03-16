@@ -3,7 +3,7 @@ import logging
 from programy.clients.clients import BotClient
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config import ClientConfiguration
+from programy.config.client.client import ClientConfiguration
 
 class TestClient(BotClient):
 

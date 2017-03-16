@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.dialog import Conversation, Question
-from programy.config import BotConfiguration
+from programy.config.bot import BotConfiguration
 
 class Bot(object):
 

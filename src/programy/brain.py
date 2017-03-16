@@ -19,7 +19,7 @@ import os.path
 import xml.etree.ElementTree as ET
 
 from programy.processors.processing import ProcessorLoader
-from programy.config import BrainConfiguration
+from programy.config.brain import BrainConfiguration
 from programy.mappings.denormal import DenormalCollection
 from programy.mappings.gender import GenderCollection
 from programy.mappings.maps import MapCollection

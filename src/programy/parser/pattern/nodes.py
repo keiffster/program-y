@@ -348,7 +348,7 @@ class PatternNode(object):
             if match is not None:
                 return match
             if words.word(word_no) == PatternTopicNode.TOPIC:
-                logging.debug("%sLooking for a %s, none give, no match found!" % (PatternTopicNode.TOPIC, tabs))
+                logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternTopicNode.TOPIC))
                 #context.pop_match()
                 return None
 
@@ -357,7 +357,7 @@ class PatternNode(object):
             if match is not None:
                 return match
             if words.word(word_no) == PatternThatNode.THAT:
-                logging.debug("%sLooking for a %s, none give, no match found!" % (PatternThatNode.THAT, tabs))
+                logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternThatNode.THAT))
                 #context.pop_match()
                 return None
 

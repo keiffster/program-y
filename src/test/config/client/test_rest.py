@@ -1,37 +1,39 @@
 import unittest
-import os
 
-from programy.config import YamlConfigurationFile
-from programy.config import ClientConfiguration
+from programy.config.client.rest import RestConfiguration
+from programy.config.file.yaml import YamlConfigurationFile
+from programy.config.client.client import ClientConfiguration
+from programy.config.client.rest import RestClientConfiguration
 
 
-class YamlConfigurationFileTests(unittest.TestCase):
+class RestConfigurationTests(unittest.TestCase):
 
-    def test_load_from_file(self):
+    def test_init(self):
         client_config = ClientConfiguration()
         yaml = YamlConfigurationFile(client_config)
         self.assertIsNotNone(yaml)
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml", ",")
-        self.assertIsNotNone(yaml.yaml_data)
-        brain = yaml.get_section("brain")
-        self.assertIsNotNone(brain)
-        files = yaml.get_section("files", brain)
-        self.assertIsNotNone(files)
-        aiml = yaml.get_section("aiml", files)
-        self.assertIsNotNone(aiml)
+        yaml.load_from_text("""
+        rest:
+          host: 127.0.0.1
+          port: 5000
+          debug: false
+          use_api_keys: false
+        """, ".")
 
-        files = yaml.get_section("files", aiml)
-        self.assertIsNotNone(files)
-        self.assertEqual(files, "/aiml")
-        extension = yaml.get_section("extension", aiml)
-        self.assertIsNotNone(extension)
-        self.assertEqual(extension, ".aiml")
-        directories = yaml.get_section("directories", aiml)
-        self.assertIsNotNone(directories)
-        self.assertEqual(directories, True)
+        rest_config = RestConfiguration()
+        rest_config.load_config_section(yaml, ".")
 
-    def test_load_from_text(self):
-        client_config = ClientConfiguration()
+        self.assertEqual("127.0.0.1", rest_config.host)
+        self.assertEqual(5000, rest_config.port)
+        self.assertEqual(False, rest_config.debug)
+        self.assertEqual(False, rest_config.use_api_keys)
+
+
+class RestClientConfigurationTests(unittest.TestCase):
+
+    def test_init(self):
+        client_config = RestClientConfiguration()
+
         yaml = YamlConfigurationFile(client_config)
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
@@ -81,23 +83,14 @@ class YamlConfigurationFileTests(unittest.TestCase):
           default_response: Sorry, I don't have an answer for that!
           exit_response: So long, and thanks for the fish!
           initial_question: Hi, how can I help you?
-        """, ".")
 
-        self.assertIsNotNone(yaml.yaml_data)
-        brain = yaml.get_section("brain")
-        self.assertIsNotNone(brain)
-        files = yaml.get_section("files", brain)
-        self.assertIsNotNone(files)
-        aiml = yaml.get_section("aiml", files)
-        self.assertIsNotNone(aiml)
+        rest:
+          host: 127.0.0.1
+          port: 5000
+          debug: false
+          use_api_keys: false
+          """, ".")
 
-        files = yaml.get_section("files", aiml)
-        self.assertIsNotNone(files)
-        self.assertEqual(files, "/aiml")
-        extension = yaml.get_section("extension", aiml)
-        self.assertIsNotNone(extension)
-        self.assertEqual(extension, ".aiml")
-        directories = yaml.get_section("directories", aiml)
-        self.assertIsNotNone(directories)
-        self.assertEqual(directories, True)
-
+        self.assertIsNotNone(client_config.bot_configuration)
+        self.assertIsNotNone(client_config.brain_configuration)
+        self.assertIsNotNone(client_config.rest_configuration)

@@ -1,8 +1,8 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config import ConfigurationFactory
-from programy.config import ClientConfiguration
+from programy.config.file.factory import ConfigurationFactory
+from programy.config.client.client import ClientConfiguration
 
 class NowAskMeTrainTestClient(TestClient):
 

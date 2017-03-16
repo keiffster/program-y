@@ -17,7 +17,7 @@ import logging
 import requests
 
 from programy.utils.services.service import Service
-from programy.config import BrainServiceConfiguration
+from programy.config.brain import BrainServiceConfiguration
 
 class GenericRESTService(Service):
 

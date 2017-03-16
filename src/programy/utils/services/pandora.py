@@ -17,7 +17,7 @@ import logging
 from xml.etree import ElementTree
 
 from programy.utils.services.service import Service
-from programy.config import BrainServiceConfiguration
+from programy.config.brain import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
 class PandoraService(Service):

@@ -1,7 +1,7 @@
 import unittest
 
 from programy.parser.template.nodes import *
-from programy.config import BrainFileConfiguration
+from programy.config.brain import BrainFileConfiguration
 from test.parser.template.graph.test_graph_client import TemplateGraphTestClient
 
 

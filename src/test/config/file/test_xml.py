@@ -1,8 +1,8 @@
 import unittest
 import os
 
-from programy.config import XMLConfigurationFile
-from programy.config import ClientConfiguration
+from programy.config.file.xml import XMLConfigurationFile
+from programy.config.client.client import ClientConfiguration
 
 
 class XMLConfigurationFileTests(unittest.TestCase):

@@ -21,7 +21,8 @@ import logging
 import logging.config
 import yaml
 
-from programy.config import ConfigurationFactory, ClientConfiguration
+from programy.config.file.factory import ConfigurationFactory
+from programy.config.client.client import ClientConfiguration
 from programy.bot import Bot
 from programy.brain import Brain
 

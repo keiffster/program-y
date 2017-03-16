@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config import BrainFileConfiguration
+from programy.config.brain import BrainFileConfiguration
 
 # TODO <that><topic> can take single "1" and double "1,2" indexes
 

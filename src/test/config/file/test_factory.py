@@ -1,8 +1,7 @@
 import unittest
 
-from programy.config import ConfigurationFactory
-from programy.config import ClientConfiguration
-
+from programy.config.file.factory import ConfigurationFactory
+from programy.config.client.client import ClientConfiguration
 
 class ConfigurationFactoryTests(unittest.TestCase):
 

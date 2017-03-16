@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 from abc import ABCMeta, abstractmethod
 from programy.utils.classes.loader import ClassLoader
-from programy.config import BrainServiceConfiguration
+from programy.config.brain import BrainServiceConfiguration
 
 class Service(object):
     __metaclass__ = ABCMeta

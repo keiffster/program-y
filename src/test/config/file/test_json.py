@@ -1,8 +1,8 @@
 import unittest
 import os
 
-from programy.config import JSONConfigurationFile
-from programy.config import ClientConfiguration
+from programy.config.file.json import JSONConfigurationFile
+from programy.config.client.client import ClientConfiguration
 
 
 class JsonConfigurationFileTests(unittest.TestCase):

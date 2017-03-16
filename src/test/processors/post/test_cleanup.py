@@ -2,8 +2,8 @@ import unittest
 from programy.processors.post.cleanup import CleanUpPostProcessor
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config import BrainConfiguration, BotConfiguration
-
+from programy.config.brain import BrainConfiguration
+from programy.config.bot import BotConfiguration
 
 class PostCleanUpTests(unittest.TestCase):
 

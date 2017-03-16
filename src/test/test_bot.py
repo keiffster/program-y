@@ -2,9 +2,9 @@ import unittest
 
 from programy.brain import Brain
 from programy.bot import Bot
-from programy.config import ClientConfiguration
-from programy.config import BrainConfiguration
-from programy.config import BotConfiguration
+from programy.config.client.client import ClientConfiguration
+from programy.config.brain import BrainConfiguration
+from programy.config.bot import BotConfiguration
 
 class TestBrain(Brain):
 

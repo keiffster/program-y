@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.services.service import Service
-from programy.config import BrainServiceConfiguration
+from programy.config.brain import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
 class PannousService(Service):

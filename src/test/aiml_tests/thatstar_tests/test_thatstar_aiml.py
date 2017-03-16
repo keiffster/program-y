@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config import BrainFileConfiguration
+from programy.config.brain import BrainFileConfiguration
 
 # TODO make sure topic star and that star match for set
 # TODO <that><topic> can take single "1" and double "1,2" indexes

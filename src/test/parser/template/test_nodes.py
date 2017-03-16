@@ -4,7 +4,8 @@ from programy.parser.template.nodes import *
 from programy.bot import Bot
 from programy.brain import Brain
 from programy.dialog import Conversation, Question
-from programy.config import BrainConfiguration, BotConfiguration, BrainFileConfiguration
+from programy.config.brain import BrainConfiguration, BrainFileConfiguration
+from programy.config.bot import BotConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 

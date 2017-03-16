@@ -3,7 +3,8 @@ import unittest
 from programy.dialog import Sentence, Question, Conversation
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config import BrainConfiguration, BotConfiguration
+from programy.config.brain import BrainConfiguration
+from programy.config.bot import BotConfiguration
 
 #TODO dialog needs proper unit testing
 

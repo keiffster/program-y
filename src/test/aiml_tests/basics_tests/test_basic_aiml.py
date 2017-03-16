@@ -3,7 +3,7 @@ import os
 import logging
 
 from test.aiml_tests.client import TestClient
-from programy.config import BrainFileConfiguration
+from programy.config.brain import BrainFileConfiguration
 
 class BasicTestClient(TestClient):
 

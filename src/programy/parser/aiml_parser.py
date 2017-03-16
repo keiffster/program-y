@@ -19,7 +19,7 @@ from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 
 from programy.parser.exceptions import ParserException
-from programy.config import BrainConfiguration
+from programy.config.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
