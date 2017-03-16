@@ -77,7 +77,10 @@ class TemplateNode(object):
         return ET.fromstring(param[0])
 
     def to_xml(self, bot, clientid):
-        return ""
+        xml = ""
+        for child in self.children:
+            xml += child.to_xml(bot, clientid)
+        return xml
 
     def to_xml_children(self, param, bot, clientid):
         first = True
@@ -277,7 +280,7 @@ class TemplateStarNode(TemplateIndexedNode):
             logging.error("Star index not in range [%d]"%(self.index))
             resolved = ""
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("Star Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
@@ -1739,14 +1742,19 @@ class TemplateLearnNode(TemplateNode):
         self._template = template
 
     def evaluate_eval_nodes(self, bot, clientid, template):
+
+        new_template = TemplateNode()
+
         count = 0
         for child in template.children:
             if isinstance(child, TemplateEvalNode):
                 new_word_node = TemplateWordNode(child.resolve(bot, clientid))
-                template.children[count] = new_word_node
+                new_template.children.append(new_word_node)
+            else:
+                new_template.children.append(child)
             count += 1
 
-        return template
+        return new_template
 
     def resolve_element_evals(self, bot, clientid, element):
 
@@ -1758,7 +1766,8 @@ class TemplateLearnNode(TemplateNode):
             if child.tag == 'eval':
                 eval_str = ET.tostring(child, 'utf-8').decode('ascii')
                 eval_str = TextUtils.strip_whitespace(eval_str)
-                template = ET.fromstring("<template>%s</template>" % eval_str)
+                str_val = "<template>%s</template>" % eval_str
+                template = ET.fromstring(str_val)
 
                 ast = bot.brain.aiml_parser.template_parser.parse_template_expression(template)
                 resolved = ast.resolve(bot, clientid)
@@ -1779,14 +1788,19 @@ class TemplateLearnNode(TemplateNode):
         new_topic = self.resolve_element_evals(bot, clientid, self._topic)
         new_that = self.resolve_element_evals(bot, clientid, self._that)
 
-        template = self.evaluate_eval_nodes(bot, clientid, self._template)
+        # TODO This overwrites the self._template with an evaluated one
+        # What it should do is return a new template that is then added
+        # to the graph
+        new_template = self.evaluate_eval_nodes(bot, clientid, self._template)
 
-        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template)
 
         logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
                       ET.tostring(new_topic, 'utf-8').decode('utf-8'),
                       ET.tostring(new_that, 'utf-8').decode('utf-8'))
+
+        logging.debug("%s", self.to_xml(bot, clientid))
 
         return ""
 
@@ -1805,7 +1819,7 @@ class TemplateLearnNode(TemplateNode):
         xml += "</template>"
 
         xml += "</learn>"
-        xml += ""
+
         return xml
 
 
@@ -1848,6 +1862,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         xml += "</template>"
 
         xml += "</learnf>"
+
         return xml
 
 

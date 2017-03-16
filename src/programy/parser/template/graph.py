@@ -94,10 +94,12 @@ class TemplateGraph(object):
             found_sub = True
 
         if head_result is False and found_sub is False:
-            logging.warning("No context in template tag at [line(%d), column(%d)]" %
-                                                        (pattern._end_line_number,
-                                                         pattern._end_column_number))
-            #raise ParserException("Error, no content in template tag", xml_element=pattern)
+            if hasattr(pattern, '_end_line_number'):
+                logging.warning("No context in template tag at [line(%d), column(%d)]" %
+                                                            (pattern._end_line_number,
+                                                             pattern._end_column_number))
+            else:
+                logging.warning("No context in template tag")
 
     def parse_text(self, text, branch):
         if text is not None:

@@ -11,8 +11,9 @@ class TemplateGraphBasicTests(TemplateGraphTestClient):
 			<template>
 			</template>
 			""")
-        with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+        self.assertEqual(0, len(ast.children))
 
     def test_base_template(self):
         template = ET.fromstring("""

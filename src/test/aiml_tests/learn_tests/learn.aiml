@@ -35,4 +35,36 @@ For more information see [url]
 		</template>
 	</category>
 
+    <!--
+	<category>
+		<pattern>LEARN * IS *</pattern>
+		<template>
+			<think>
+				<set name="star1"><star index="1"/></set>
+				<set name="star2"><star index="2"/></set>
+			</think>
+		    <learn>
+				<category>
+					<pattern>WHAT IS <eval><get name="star1" /></eval></pattern>
+					<template><eval><get name="star2" /></eval></template>
+				</category>
+			</learn>
+			OK, I will remember <get name="star1" /> is <get name="star2" />
+		</template>
+	</category>
+    -->
+
+    <category>
+		<pattern>LEARN * IS *</pattern>
+		<template>
+		    <learn>
+				<category>
+					<pattern>WHAT IS <eval><star index="1"/></eval></pattern>
+					<template><eval><star index="2"/></eval></template>
+				</category>
+			</learn>
+			OK, I will remember <star index="1"/> is <star index="2"/>
+		</template>
+	</category>
+
 </aiml>
