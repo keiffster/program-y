@@ -1,0 +1,22 @@
+bear:grrrrr
+bee:buzz
+bird:tweet
+buffalo:moo
+cat:moew
+chicken:cluck
+cow:moo
+dog:woof
+dolphin:eeeeee
+duck:quack
+frog:ribbit
+goose:honk
+horse:nay
+lion:roar
+owl:hoo hoo
+ox:moo
+person:hello
+pig:oink
+sheep:baaa
+tiger:roaar
+wolf:woof
+zebra:nay

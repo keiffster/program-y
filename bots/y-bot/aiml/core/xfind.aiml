@@ -27,6 +27,9 @@
     <!-- as adopted by the ALICE A.I. Foundation. -->
     <!-- Last modified July 26, 2007 -->
 
+    <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
+
+
     <category>
         <pattern>ACCESS *</pattern>
         <template>

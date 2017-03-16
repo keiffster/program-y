@@ -20,20 +20,37 @@
     -->
 
     <category>
-        <pattern>
-            # MY MINUTES
-        </pattern>
-        <template>
-            <srai>MINUTES NOW</srai>
-        </template>
+        <pattern># HELLO *</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># HI #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># YO #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>HEY THERE #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>GOOD MORNING</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>GOOD DAY</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>GOOD EVENING</pattern><template><srai>HELLO</srai></template>
     </category>
 
     <category>
         <pattern>
-            MINUTES *
+            HELLO
         </pattern>
         <template>
-            You have 000 minutes of call time left
+            <random>
+                <li>Hello!</li>
+                <li>Hi there!</li>
+                <li>Greetings!</li>
+            </random>
         </template>
     </category>
 

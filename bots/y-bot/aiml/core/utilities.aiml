@@ -20,6 +20,8 @@
     <!--  http://www.alicebot.org -->
     <!--  -->
 
+    <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
+
     <category>
         <pattern>ACRONYM *</pattern>
         <template>
