@@ -265,7 +265,18 @@ class PatternNode(object):
         elif new_node.is_template():
             self._template = new_node
         else:
-            self.children.append(new_node)
+            # Append sets and bots to the end of the array as they take a slightly
+            # lower priority to actual words.
+            # This allows the following to work
+            #  my favorite color is green
+            #  my favorite color is <set>color</set>
+            # In the above, if the set color contains green then
+            # it still gets picked up in the first grammar and not he second
+            if new_node.is_set() or new_node.is_bot():
+               self.children.append(new_node)
+            else:
+                self.children.insert(0, new_node)
+
         return new_node
 
     def add_child(self, new_node):
