@@ -16,8 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.config.file.xml import XMLConfigurationFile
 from programy.config.file.yaml import YamlConfigurationFile
-
-from config.file.json import JSONConfigurationFile
+from programy.config.file.json import JSONConfigurationFile
 
 
 class ConfigurationFactory(object):

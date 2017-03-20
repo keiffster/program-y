@@ -17,10 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import subprocess
 import xml.etree.ElementTree as ET
+import datetime
+from dateutil.relativedelta import relativedelta
 
 from random import randint
-from datetime import datetime
-from dateutil.relativedelta import relativedelta
 
 from programy.parser.exceptions import ParserException
 from programy.utils.classes.loader import ClassLoader
@@ -1137,8 +1137,8 @@ class TemplateDateNode(TemplateAttribNode):
         self._format = format
 
     def resolve(self, bot, clientid):
-        time_now = datetime.now()
-        resolved = time_now.strftime(self._format).upper ()
+        time_now = datetime.datetime.now()
+        resolved = time_now.strftime(self._format).upper()
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
@@ -1212,10 +1212,10 @@ class TemplateIntervalNode(TemplateNode):
             format_str = self._format.resolve(bot, clientid)
 
             from_str = self.interval_from.resolve(bot, clientid)
-            from_time = datetime.strptime(from_str, format_str)
+            from_time = datetime.datetime.strptime(from_str, format_str)
 
             to_str = self.interval_to.resolve(bot, clientid)
-            to_time = datetime.strptime(to_str, format_str)
+            to_time = datetime.datetime.strptime(to_str, format_str)
 
             style = self._style.resolve(bot, clientid)
 
@@ -1229,7 +1229,7 @@ class TemplateIntervalNode(TemplateNode):
             elif style == "weeks":
                 resolved = str(difference.weeks)
             elif style == "days":
-                resolved = str(difference.days)
+                resolved = str(diff.days)
             elif style == "hours":
                 resolved = str(difference.hours)
             elif style == "minutes":

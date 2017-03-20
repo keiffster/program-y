@@ -477,7 +477,7 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsInstance(self.parser.pattern_parser.root, PatternRootNode)
         self.assertEqual(2, len(self.parser.pattern_parser.root.children))
 
-        node = self.parser.pattern_parser.root.children[0]
+        node = self.parser.pattern_parser.root.children[1]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
         self.assertEquals(node.word, "Hello")
@@ -496,7 +496,7 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsInstance(that.star, PatternOneOrMoreWildCardNode)
         self.assertEquals(that.star.wildcard, "*")
 
-        node = self.parser.pattern_parser.root.children[1]
+        node = self.parser.pattern_parser.root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
         self.assertEquals(node.word, "Goodbye")
@@ -534,7 +534,7 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsNotNone(self.parser.pattern_parser.root)
         self.assertEqual(2, len(self.parser.pattern_parser.root.children))
 
-        node = self.parser.pattern_parser.root.children[0]
+        node = self.parser.pattern_parser.root.children[1]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
         self.assertEquals(node.word, "Hello")
@@ -554,7 +554,7 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsInstance(that.star, PatternOneOrMoreWildCardNode)
         self.assertEquals(that.star.wildcard, "*")
 
-        node = self.parser.pattern_parser.root.children[1]
+        node = self.parser.pattern_parser.root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
         self.assertEquals(node.word, "Goodbye")
@@ -604,7 +604,7 @@ class AIMLParserTests(unittest.TestCase):
         node1 = self.parser.pattern_parser.root.children[0]
         self.assertIsNotNone(node1)
         self.assertIsInstance(node1, PatternWordNode)
-        self.assertEquals(node1.word, "Welcome")
+        self.assertEquals(node1.word, "Interesting")
 
         topic = node1.topic
         self.assertIsNotNone(topic)
@@ -623,7 +623,7 @@ class AIMLParserTests(unittest.TestCase):
         node2 = self.parser.pattern_parser.root.children[1]
         self.assertIsNotNone(node2)
         self.assertIsInstance(node2, PatternWordNode)
-        self.assertEquals(node2.word, "Hello")
+        self.assertEquals(node2.word, "Goodbye")
 
         topic = node2.topic
         self.assertIsNotNone(topic)
@@ -643,7 +643,7 @@ class AIMLParserTests(unittest.TestCase):
         node3 = self.parser.pattern_parser.root.children[2]
         self.assertIsNotNone(node3)
         self.assertIsInstance(node3, PatternWordNode)
-        self.assertEquals(node3.word, "Goodbye")
+        self.assertEquals(node3.word, "Hello")
 
         topic = node3.topic
         self.assertIsNotNone(topic)
@@ -663,7 +663,7 @@ class AIMLParserTests(unittest.TestCase):
         node4 = self.parser.pattern_parser.root.children[3]
         self.assertIsNotNone(node4)
         self.assertIsInstance(node4, PatternWordNode)
-        self.assertEquals(node4.word, "Interesting")
+        self.assertEquals(node4.word, "Welcome")
 
         topic = node4.topic
         self.assertIsNotNone(topic)

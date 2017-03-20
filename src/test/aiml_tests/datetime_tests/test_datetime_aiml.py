@@ -23,34 +23,229 @@ class DateTimeAIMLTests(unittest.TestCase):
     def setUp(cls):
         DateTimeAIMLTests.test_client = BasicTestClient()
 
-    def test_date(self):
-        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TEST DATE")
-        self.assertIsNotNone(response)
-        self.assertRegex(response, DateTimeAIMLTests.DEFAULT_DATETIME_REGEX)
-
-    def test_interval(self):
-        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TEST INTERVAL")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, "2")
-
     def test_season(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "SEASON")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Winter")
 
-    def test_age(self):
-        DateTimeAIMLTests.test_client.bot.brain.properties.add_property('birthdate', "September 9, 2016")
-        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "AGE")
+    def test_day(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAY")
         self.assertIsNotNone(response)
-        self.assertRegex(response, "I am \d{1}|\d{2} months old.")
+        self.assertEqual(response, "Today is MONDAY")
 
-    def test_age_in_years(self):
-        DateTimeAIMLTests.test_client.bot.brain.properties.add_property('birthdate', "September 9, 2016")
-        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "AGE IN YEARS")
+    def test_tomorrow(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TOMORROW")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "0")
+        self.assertEqual(response, "TUESDAY")
 
-    def test_days_until(self):
-        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL SUNDAY")
+    def test_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "YEAR")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "This is 2017")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "YEAR NEXT")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "This is 2017")
+
+    def test_next_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "NEXT YEAR")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "2018")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "NEXT YEAR NEXT")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "2018")
+
+    def test_last_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "LAST YEAR")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "2016")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "LAST YEAR AGO")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "2016")
+
+    def test_month(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "MONTH")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "This is MARCH")
+
+    def test_time(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TIME")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "The time is \\d{2}:\\d{2} [AM|PM]")
+
+    def test_day_phase(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "DAY PHASE")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "[Noon|Afternoon|Night]")
+
+    def test_days_until_day(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL THURSDAY")
         self.assertIsNotNone(response)
         self.assertRegex(response, "\d{1}|\d{2}")
+
+    def test_days_until_christmas(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL CHRISTMAS")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "\d{1}|\d{2}")
+
+    def test_days_until_day_month_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL APRIL 01 2017")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "\d{1}|\d{2}")
+
+    def test_days_until_month_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL APRIL 01")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "\d{1}|\d{2}")
+
+    def test_date(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "DATE")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "Today is .* \\d{2}, \\d{4}")
+
+    def test_date_tomorrow(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE TOMORROW")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{2} , \\d{4}")
+
+    def test_date_and_time(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE AND TIME")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, "The date and time is .{3} .{3} \\d{2} \\d{2}:\\d{2}:\\d{2} \\d{4}")
+
+    def test_tomorrowdate_month_day_year(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE APRIL 01 2017")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_tomorrowdate_month_end_carry_over(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE JANUARY 31 2017")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2012")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2016")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2024")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2028")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 28 2019")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE FEBRUARY 29 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE MATCH 30 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE APRIL 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE MAY 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE JUNE 30 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE JULY 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE AUGUST 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE SEPTEMBER 30 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE OCTOBER 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE NOVEBER 30 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE DECEMBER 31 2020")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_date_in_one_days(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "DATE IN 1 DAYS")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_date_in_two_days(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE IN 2 DAYS")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_date_in_ten_days(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE IN 10 DAYS")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_day_after_tomorrow_date(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYAFTERTOMORROWDATE")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_day_after_tomorrow_date_specific(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYAFTERTOMORROWDATE APRIL 01 2017")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".* \\d{1}|\\d{2} , \\d{4}")
+
+    def test_day_after_tomorrow(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAY AFTER TOMORROW")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+    def test_days_until_weekday(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAYS UNTIL THURSDAY")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+    def test_date_on(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE ON THURSDAY")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+    def test_date_weekend(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE ON WEEKEND")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+    def test_weekday_in_five_days(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "WEEKDAY IN 5 DAYS")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+    def test_date_a_week_from(self):
+        response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE A WEEK FROM THURSDAY")
+        self.assertIsNotNone(response)
+        self.assertRegex(response, ".*")
+
+

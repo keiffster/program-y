@@ -69,9 +69,9 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsNotNone(graph.root.children)
         self.assertEqual(len(graph.root.children), 2)
         self.assertIsInstance(graph.root.children[0], PatternWordNode)
-        self.assertEqual(graph.root.children[0].word, "test1")
+        self.assertEqual(graph.root.children[0].word, "test2")
         self.assertIsInstance(graph.root.children[0], PatternWordNode)
-        self.assertEqual(graph.root.children[1].word, "test2")
+        self.assertEqual(graph.root.children[1].word, "test1")
 
     def test_add_pattern_to_graph_multi_word(self):
         graph = PatternGraph()
@@ -103,13 +103,14 @@ class PatternGraphTests(PatternTestBaseClass):
 
         self.assertEqual(len(graph.root.children[0].children), 2)
         self.assertIsInstance(graph.root.children[0].children[0], PatternWordNode)
-        self.assertEqual(graph.root.children[0].children[0].word, "test2")
-        self.assertIsInstance(graph.root.children[0].children[1], PatternWordNode)
-        self.assertEqual(graph.root.children[0].children[1].word, "test3")
+        self.assertEqual(graph.root.children[0].children[0].word, "test3")
+        self.assertEqual(len(graph.root.children[0].children[0].children), 1)
+        self.assertIsInstance(graph.root.children[0].children[0].children[0], PatternWordNode)
+        self.assertEqual(graph.root.children[0].children[0].children[0].word, "test4")
 
-        self.assertEqual(len(graph.root.children[0].children[1].children), 1)
-        self.assertIsInstance(graph.root.children[0].children[1].children[0], PatternWordNode)
-        self.assertEqual(graph.root.children[0].children[1].children[0].word, "test4")
+        self.assertIsInstance(graph.root.children[0].children[1], PatternWordNode)
+        self.assertEqual(graph.root.children[0].children[1].word, "test2")
+
 
     def test_add_pattern_to_graph_basic_set_text(self):
         graph = PatternGraph()

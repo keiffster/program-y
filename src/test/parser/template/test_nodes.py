@@ -1878,8 +1878,8 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         node = TemplateIntervalNode()
         node.format = TemplateWordNode("%c")
         node.style = TemplateWordNode("years")
-        node.interval_from = TemplateWordNode("Thu Oct  6 16:35:11 2014")
-        node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
+        node.interval_from = TemplateWordNode("Thu Oct 06 16:35:11 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 07 16:35:11 2016")
 
         self.assertIsNotNone(node)
 
