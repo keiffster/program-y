@@ -17,7 +17,7 @@ import logging
 from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.clients import BotClient
-from programy.config.config import RestClientConfiguration
+from programy.config.client.rest import RestClientConfiguration
 
 class RestBotClient(BotClient):
 
