@@ -12,19 +12,31 @@ Nothing in here should ever be taken as meaningful tests, they come and go like 
 class ScratchTestsClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self)
+        TestClient.__init__(self, debug=True)
 
     def load_configuration(self, arguments):
         super(ScratchTestsClient, self).load_configuration(arguments)
         self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
 
-class SrAIMLTests(unittest.TestCase):
+class ScratchAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        SrAIMLTests.test_client = ScratchTestsClient()
+        ScratchAIMLTests.test_client = ScratchTestsClient()
 
     def test_response(self):
-        response = SrAIMLTests.test_client.bot.ask_question("testif", "XXX")
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "I AM MARRIED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'YYY')
+        self.assertEqual(response, 'HOW LONG HAVE YOU BEEN MARRIED')
 
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "3 YEARS")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Congratulations!')
+
+    def test_response2(self):
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "ZZZ")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'ARE YOU TIRED?')
+
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "YES")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Maybe you should get some rest. I will still be here later.')

@@ -38,4 +38,8 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEquals("testtest", TextUtils.strip_all_whitespace("\r\t\ntest test\r\t\n"))
         self.assertEquals("testtest", TextUtils.strip_all_whitespace("\r\t\ntest\n\r\ttest\r\t\n"))
 
-
+    def test_strip_all_punctuation(self):
+        self.assertEquals("", TextUtils.strip_all_punctuation(""))
+        self.assertEquals(" ", TextUtils.strip_all_punctuation(" "))
+        self.assertEquals("x y z", TextUtils.strip_all_punctuation("x! y? z."))
+        self.assertEquals("a b c", TextUtils.strip_all_punctuation("!a b c?"))

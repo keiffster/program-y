@@ -32,6 +32,7 @@ from programy.mappings.sets import SetCollection
 from programy.mappings.triples import TriplesCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.utils.services.service import ServiceFactory
+from programy.utils.text.text import TextUtils
 
 class Brain(object):
 
@@ -251,7 +252,7 @@ class Brain(object):
             # If the last response was valid, i.e not none and not empty string, then use
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
-                that_pattern = that_sentence.response
+                that_pattern = TextUtils.strip_all_punctuation(that_sentence.response)
                 logging.info("That pattern = [%s]", that_pattern)
             else:
                 logging.info("That pattern, no response, default to [*]")

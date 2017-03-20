@@ -18,10 +18,11 @@ import re
 
 class TextUtils:
 
-    DEFAULT_TAB_SPACE = "  "
+    DEFAULT_TAB_SPACE       = "  "
 
-    STRIP_ALL_WHITESPACE = '[\s+]'
-    STRIP_WHITESPACE = '[\n\t\r+]'
+    STRIP_ALL_WHITESPACE    = '[\s+]'
+    STRIP_WHITESPACE        = '[\n\t\r+]'
+    STRIP_ALL_PUNCTUATION   = r'[^\w\s]'
 
     @staticmethod
     def get_tabs(depth: int, tabs=DEFAULT_TAB_SPACE):
@@ -40,3 +41,7 @@ class TextUtils:
         first_pass = re.sub(TextUtils.STRIP_ALL_WHITESPACE, '', string)
         return ' '.join(first_pass.split())
 
+    @staticmethod
+    def strip_all_punctuation(string):
+        first_pass = re.sub(TextUtils.STRIP_ALL_PUNCTUATION, '', string)
+        return first_pass
