@@ -41,8 +41,8 @@ brain:
         Pandora:
             path: programy.utils.services.pandora.PandoraService
             botid: f5d922d97e345aa1
-        #Wikipedia:
-        #    path: programy.utils.services.wikipediaservice.WikipediaService
+        Wikipedia:
+            path: programy.utils.services.wikipediaservice.WikipediaService
 
 bot:
     prompt: ">>>"
