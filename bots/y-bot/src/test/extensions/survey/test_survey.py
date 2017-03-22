@@ -1,14 +1,14 @@
 import unittest
 
-from extensions.telecoms.minutes import TelecomMinutesExtension
+from extensions.survey.survey import SurveyExtension
 
-class BankBalanceExtensionTests(unittest.TestCase):
+class SurveyExtensionTests(unittest.TestCase):
 
-    def test_balance(self):
+    def test_survey(self):
 
-        minutes = TelecomMinutesExtension()
+        minutes = SurveyExtension()
         self.assertIsNotNone(minutes)
 
-        result = minutes.execute("NOW")
+        result = minutes.execute("Answer1| Answer2")
         self.assertIsNotNone(result)
-        self.assertEqual("0 0", result)
+        self.assertEqual("OK", result)

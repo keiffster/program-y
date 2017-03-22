@@ -1,91 +1,23 @@
 import unittest
 import os
-import datetime, time
+
+from programy.config.brain import BrainFileConfiguration
+from programy.utils.text.dateformat import DateFormatter
 
 from test.aiml_tests.client import TestClient
-from programy.config.brain import BrainFileConfiguration
 
 unittest.util._MAX_LENGTH=2000
 
 class BasicTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
         self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
         self.configuration.brain_configuration._set_files = BrainFileConfiguration(os.path.dirname(__file__)+"/sets", ".txt", False)
         self.configuration.brain_configuration._map_files = BrainFileConfiguration(os.path.dirname(__file__)+"/maps", ".txt", False)
-
-
-class DateFormatter(object):
-
-    def __init__(self):
-        self._time_now = datetime.datetime.now()
-
-    def abbreviated_weekday(self):
-        return self._time_now.strftime("%a")
-
-    def full_weekday(self):
-        return self._time_now.strftime("%A")
-
-    def abbreviated_month(self):
-        return self._time_now.strftime("%b")
-
-    def full_month(self):
-        return self._time_now.strftime("%B")
-
-    def locate_appropriate_date_time(self):
-        return self._time_now.strftime("%c")
-
-    def decimal_day_of_month(self):
-        return self._time_now.strftime("%d")
-
-    def hour_24_hour_clock(self):
-        return self._time_now.strftime("%H")
-
-    def hour_12_hour_clock(self):
-        return self._time_now.strftime("%I")
-
-    def decimal_day_of_year(self):
-        return self._time_now.strftime("%j")
-
-    def decimal_month(self):
-        return self._time_now.strftime("%m")
-
-    def decimal_minute(self):
-        return self._time_now.strftime("%M")
-
-    def am_or_pm(self):
-        return self._time_now.strftime("%p")
-
-    def decimal_second(self):
-        return self._time_now.strftime("%S")
-
-    def decimal_week_number_sunday_as_first(self):
-        return self._time_now.strftime("%U")
-
-    def decimal_week_number_monday_as_first(self):
-        return self._time_now.strftime("%W")
-
-    def decimal_weekday(self):
-        return self._time_now.strftime("%w")
-
-    def date_representation(self):
-        return self._time_now.strftime("%x")
-
-    def time_representation(self):
-        return self._time_now.strftime("%X")
-
-    def year_2_digit(self):
-        return self._time_now.strftime("%y")
-
-    def year_4_digit(self):
-        return self._time_now.strftime("%Y")
-
-    def timezone_name(self):
-        return self._time_now.strftime("%Z")
 
 
 class DateTimeAIMLTests(unittest.TestCase):
@@ -106,11 +38,11 @@ class DateTimeAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "Today is %s"%(self.date.full_weekday().upper()))
 
-    #TODO
     def test_tomorrow(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TOMORROW")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "TUESDAY")
+        self.date = DateFormatter(days=1)
+        self.assertEqual(response, self.date.full_weekday().upper())
 
     def test_year(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "YEAR")

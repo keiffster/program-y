@@ -6,7 +6,7 @@ from programy.config.brain import BrainFileConfiguration
 class LearnTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         super(LearnTestClient, self).load_configuration(arguments)

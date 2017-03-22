@@ -39,29 +39,28 @@ class Bot(object):
         if self._configuration is not None:
             return self._configuration.prompt
         else:
-            return ">>> "
+            return BotConfiguration.DEFAULT_PROMPT
 
     @property
     def default_response(self):
         if self._configuration is not None:
             return self._configuration.default_response
         else:
-            #return "Sorry, I don't have an answer for that right now"
-            return ""
+            return BotConfiguration.DEFAULT_RESPONSE
 
     @property
     def exit_response(self):
         if self._configuration is not None:
             return self._configuration.exit_response
         else:
-            return "Bye!"
+            return BotConfiguration.DEFAULT_EXIT_RESPONSE
 
     @property
     def initial_question(self):
         if self._configuration is not None:
             return self._configuration.initial_question
         else:
-            return "Hello"
+            return BotConfiguration.DEFAULT_INITIAL_QUESTION
 
     @property
     def override_predicates(self):

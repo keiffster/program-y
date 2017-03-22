@@ -12,7 +12,7 @@ Nothing in here should ever be taken as meaningful tests, they come and go like 
 class ScratchTestsClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         super(ScratchTestsClient, self).load_configuration(arguments)

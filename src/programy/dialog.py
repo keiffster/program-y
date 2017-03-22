@@ -57,12 +57,14 @@ class Sentence(object):
         if num < self.num_words():
             return self.words[num]
         else:
-                raise Exception("Num word array violation !")
+            raise Exception("Num word array violation !")
 
     def words_from_current_pos(self, current_pos: int):
         if len(self._words) > 0:
             return " ".join(self._words[current_pos:])
-        return ""
+        else:
+            # return ""
+            raise Exception("Num word array violation !")
 
     def text(self):
         return " ".join(self._words)
@@ -83,7 +85,7 @@ class Question(object):
     @staticmethod
     def create_from_text(text: str, sentence_split_chars: str=".", word_split_chars: str=" "):
         question = Question()
-        question.split_into_sentences(text, sentence_split_chars, word_split_chars)
+        question._split_into_sentences(text, sentence_split_chars, word_split_chars)
         return question
 
     @staticmethod
@@ -93,11 +95,11 @@ class Question(object):
         return question
 
     @staticmethod
-    def create_from_sentences(sentence: Sentence):
-        question = Question()
-        for each_sentence in sentence:
-            question.sentences.append(each_sentence)
-        return question
+    def create_from_question(question):
+        new_question = Question()
+        for each_sentence in question.sentences:
+            new_question.sentences.append(each_sentence)
+        return new_question
 
     def __init__(self):
         self._sentences = []
@@ -117,20 +119,22 @@ class Question(object):
             return None
 
     def sentence(self, num: int):
-        return self._sentences[num]
+        if num < len(self._sentences):
+            return self._sentences[num]
+        else:
+            raise Exception("Num sentence array violation !")
 
     def current_sentence(self):
-        return self._sentences[-1]
+        if len(self._sentences) == 0:
+            raise Exception("Num sentence array violation !")
+        else:
+            return self._sentences[-1]
 
     def previous_sentence(self, num):
-        return self._sentences[len(self._sentences)-num]
-
-    def split_into_sentences(self, text: str, sentence_split_chars: str, word_split_chars: str):
-        if text is not None and len(text.strip()) > 0:
-            self._sentences = []
-            all_sentences = text.split(sentence_split_chars)
-            for each_sentence in all_sentences:
-                self._sentences.append(Sentence(each_sentence, word_split_chars))
+        if len(self._sentences) < num:
+            raise Exception("Num sentence array violation !")
+        else:
+            return self._sentences[len(self._sentences)-num]
 
     def combine_sentences(self):
         return ". ".join([sentence.text() for sentence in self._sentences])
@@ -138,6 +142,12 @@ class Question(object):
     def combine_answers(self):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
+    def _split_into_sentences(self, text: str, sentence_split_chars: str, word_split_chars: str):
+        if text is not None and len(text.strip()) > 0:
+            self._sentences = []
+            all_sentences = text.split(sentence_split_chars)
+            for each_sentence in all_sentences:
+                self._sentences.append(Sentence(each_sentence, word_split_chars))
 
 #
 # A Conversation is made up of questions, each question is made up of sentences
@@ -164,6 +174,7 @@ class Conversation(object):
     def questions(self):
         return self._questions
 
+    # 1 indexed, not 0 indexed, 1st question is nth_question(1)
     def nth_question(self, num: int):
         if num <= len(self._questions):
             question_num = len(self._questions)-num
@@ -172,7 +183,10 @@ class Conversation(object):
             raise Exception("Invalid question index")
 
     def current_question(self):
-        return self._questions[-1]
+        if len(self._questions) > 0:
+            return self._questions[-1]
+        else:
+            raise Exception("Invalid question index")
 
     def all_sentences(self):
         sentences = []

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Y-Bot Chat Window</title>
+<link type="text/css" rel="stylesheet" href="static/style.css" />
+</head>
+
+<div id="wrapper">
+    <div id="menu">
+        <p class="welcome">Hello, my name is Y-Bot, how can I help you today? <b></b></p>
+        <div style="clear:both"></div>
+    </div>
+
+    <div id="chatbox"></div>
+
+    <form name="message" action="">
+        <input name="usermsg" type="text" id="usermsg" size="63" />
+        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+    </form>
+</div>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js"></script>
+<script type="text/javascript">
+
+// jQuery Document
+$(document).ready(function(){
+
+	$("#submitmsg").click(function(){
+
+        var question = $("#usermsg").val();
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "/api/v1.0/ask?question="+question+"&sessionid=1234567890", false);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+
+        var response = JSON.parse(xhttp.responseText);
+
+        $("#chatbox").append ("<p><b>You:</b> "+response.response.question+"</p>" );
+        $("#chatbox").append ("<p><b>Y-Bot:</b> "+response.response.answer+"</p>" );
+        $("#chatbox")[0].scrollTop = $("#chatbox")[0].scrollHeight;
+
+        $("#usermsg").attr("value", "");
+
+		return false;
+	});
+
+});
+</script>
+</body>
+</html>

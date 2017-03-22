@@ -7,7 +7,7 @@ from programy.config.client.client import ClientConfiguration
 class NowAskMeTrainTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         self.configuration = ClientConfiguration()

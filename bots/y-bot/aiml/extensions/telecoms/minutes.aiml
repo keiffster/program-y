@@ -19,21 +19,45 @@
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 
+    <!-- Basic entry point into request a phone users remaining minutes -->
+    <!-- Create as many of these to provide a wide a richer grammar for asking for phone data -->
+    <!-- Currently defaults to NOW as the date, but you could extend this to put in a specific -->
+    <!-- date, month, year or period -->
     <category>
         <pattern>
-            # MY MINUTES
+            HOW MANY MINUTES #
         </pattern>
         <template>
-            <srai>MINUTES NOW</srai>
+            <srai>PHONE MINUTES NOW</srai>
         </template>
     </category>
 
+    <!-- Primary entry point ot request phone  data, called from the variety of grammars above -->
+    <!-- <star /> is the only parameter which should be considered a user defined time value -->
+    <!-- Calls the extension to retrieve the phone data, which shouldd return 2 values -->
+    <!-- TOTAL_LEFT TOTAL_USSED -->
+    <!-- Then calls SHOW_USAGE to format the results into somethiing that is meaningful -->
     <category>
         <pattern>
-            MINUTES *
+            PHONE MINUTES *
         </pattern>
         <template>
-            You have 000 minutes of call time left
+            <srai>
+                SHOW_MINUTES
+                <extension path="extensions.telecoms.minutes.TelecomMinutesExtension">
+                    <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <!-- Format the result of calling the extensions, provide a polite result back to the customer -->
+    <category>
+        <pattern>
+            SHOW_MINUTES * *
+        </pattern>
+        <template>
+            This month you have <star index="2" /> minutes available and have consumed <star index="1" /> minutes.
         </template>
     </category>
 

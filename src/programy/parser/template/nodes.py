@@ -32,7 +32,6 @@ from programy.parser.template.maps.predecessor import PredecessorMap
 from programy.parser.template.maps.successor import SuccessorMap
 
 # TODO wrap every resolve method in try/catch and return "" if error
-# TODO rename resolve to evaluate
 
 ######################################################################################################################
 #

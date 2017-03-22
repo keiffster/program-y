@@ -19,21 +19,45 @@
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 
+    <!-- Basic entry point into request a nergy usage -->
+    <!-- Create as many of these to provide a wide a richer grammar for asking for consumption data -->
+    <!-- Currently defaults to NOW as the date, but you could extend this to put in a specific -->
+    <!-- date, month, year or period -->
     <category>
         <pattern>
-            # MY USAGE
+            # MY ENERGY USAGE
         </pattern>
         <template>
-            <srai>USAGE NOW</srai>
+            <srai>ENERGY USAGE NOW</srai>
         </template>
     </category>
 
+    <!-- Primary entry point ot request energy consumption data, called from the variety of grammars above -->
+    <!-- <star /> is the only parameter which should be considered a user defined time value -->
+    <!-- Calls the extension to retrieve the usage data, which shouldd return 3 values -->
+    <!-- Gas Elec Units -->
+    <!-- Then calls SHOW_USAGE to format the results into somethiing that is meaningful -->
     <category>
         <pattern>
-            USAGE *
+            ENERGY USAGE *
         </pattern>
         <template>
-            You have used 000 KWhs of electrcity and 000 KWhs of Gas
+            <srai>
+                SHOW_USAGE
+                <extension path="extensions.energy.usage.EnergyUsageExtension">
+                    <star />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <!-- Format the result of calling the extensions, provide a polite result back to the customer -->
+    <category>
+        <pattern>
+            SHOW_USAGE * * *
+        </pattern>
+        <template>
+            So far this month you have used <star index="1" /> <star index="3" /> of Gas and <star index="2" /> <star index="3" /> of Electricity.
         </template>
     </category>
 

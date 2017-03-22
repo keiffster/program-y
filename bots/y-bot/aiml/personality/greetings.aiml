@@ -29,7 +29,7 @@
         <pattern># YO #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
-        <pattern>HEY THERE #</pattern><template><srai>HELLO</srai></template>
+        <pattern>HEY #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
         <pattern>GOOD MORNING</pattern><template><srai>HELLO</srai></template>

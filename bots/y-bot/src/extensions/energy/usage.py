@@ -16,20 +16,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 """
-This is an example extension that allow syou to call an external service to retreive the bank balance
+This is an example extension that allow you to call an external service to retreive the energy consumption data
 of the customer. Currently contains no authentication
 """
 import logging
 
-class BankingBalanceExtension(object):
+class EnergyUsageExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, data):
-        logging.debug ("Bank Balance - Calling external service for with extra data [%s]"%(data))
+        logging.debug ("Energy Usage - Calling external service for with extra data [%s]"%(data))
 
         #
-        # Add the logic to receive the balance and format it into pounds and pence and either CREDIT|DEBIT
+        # Add the logic to receive the balance and format it into KWh for Gas and Electricity consumption
         #
         #
 
-        return "0 00 CREDIT"
+        return "0 0 KWh"

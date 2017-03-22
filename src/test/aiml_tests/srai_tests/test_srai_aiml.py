@@ -7,7 +7,7 @@ import logging
 class SraiTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True, level=logging.DEBUG)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         super(SraiTestClient, self).load_configuration(arguments)

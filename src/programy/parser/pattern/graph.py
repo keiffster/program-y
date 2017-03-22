@@ -28,12 +28,6 @@ from programy.parser.pattern.nodes import PatternThatNode
 from programy.parser.pattern.nodes import PatternTemplateNode
 from programy.utils.text.text import TextUtils
 
-# TODO When xml is split over multiple lines, extra PatternWordNodes get crearted
-# <pattern>
-#      <set>name</set> is tall
-# </pattern>
-# This fails to match
-
 # TODO better handling of <html> type tags
 
 #######################################################################################################################

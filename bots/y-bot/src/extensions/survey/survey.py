@@ -16,20 +16,19 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 """
-This is an example extension that allow you to call an external service to retreive the energy consumption data
-of the customer. Currently contains no authentication
+This is an example extension that allow you to call an external service to save the results of a survey
+Currently contains no authentication
 """
 import logging
 
-class EnergyUsageExtension(object):
+class SurveyExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, data):
-        logging.debug ("Energy Usage - Calling external service for with extra data [%s]"%(data))
+        logging.debug ("Survey Storage - Storing data [%s]"%(data))
 
-        #
-        # Add the logic to receive the balance and format it into KWh for Gas and Electricity consumption
-        #
-        #
+        # Data is bar delimited, so you could write to a file, add to a database, or send to another REST service
+        for answer in data.split("|"):
+            print("Answer = %s"%(answer.strip()))
 
-        return "0 0 KWh"
+        return "OK"

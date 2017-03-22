@@ -21,20 +21,46 @@
 
     <category>
         <pattern>
-            # MY PHONE MINUTES
+            START SURVEY
         </pattern>
         <template>
-            <srai>PHONE MINUTES NOW</srai>
+            <think><set name="topic">SURVEY_QUESTION1</set></think>
+            Question 1. What do you like about AIML?
         </template>
     </category>
 
-    <category>
-        <pattern>
-            PHONE MINUTES *
-        </pattern>
-        <template>
-            You have 000 minutes of call time left
-        </template>
-    </category>
+    <topic name="SURVEY_QUESTION1">
+        <category>
+            <pattern>
+                *
+            </pattern>
+            <template>
+                <think>
+                    <set name="topic">SURVEY_QUESTION2</set>
+                    <set name="answer1"><star /></set>
+                </think>
+
+                Thanks, now Question 2. What do you dislike about AIML?
+            </template>
+        </category>
+    </topic>
+
+    <topic name="SURVEY_QUESTION2">
+        <category>
+            <pattern>
+                *
+            </pattern>
+            <template>
+                <think>
+                    <set name="answer2"><star /></set>
+                    <extension path="extensions.survey.survey.SurveyExtension">
+                    <get name="answer1" />|
+                    <get name="answer2" />
+                </extension>
+                </think>
+                Thanks, thats the end of the survey
+            </template>
+        </category>
+    </topic>
 
 </aiml>

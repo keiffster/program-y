@@ -19,22 +19,46 @@
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 
+    <!-- Basic entry point into request a bank balance -->
+    <!-- Create as many of these to provide a wide a richer grammar for asking for a balance -->
+    <!-- Currently defaults to NOW as the date, but you could extend this to put in a specific -->
+    <!-- date, month, year or period -->
     <category>
         <pattern>
-            # MY BALANCE
+            # MY BANK BALANCE
         </pattern>
         <template>
-            <srai>BALANCE NOW</srai>
+            <srai>BANK BALANCE NOW</srai>
         </template>
     </category>
 
+    <!-- Primary entry point ot request a balance, called from the variety of grammars above -->
+    <!-- <star /> is the only parameter which should be considered a user defined time value -->
+    <!-- Calls the extension to retrieve the balance, which should return 3 values -->
+    <!-- Pounds Pence CREDIT|DEBIT -->
+    <!-- Then calls SHOW_BALANCE to format the results into somethiing that is meaningful -->
     <category>
         <pattern>
-            BALANCE *
+            BANK BALANCE *
         </pattern>
         <template>
-            Your balance is £0.00
+            <srai>
+                SHOW_BALANCE
+                <extension path="extensions.banking.balance.BankingBalanceExtension">
+                    <star />
+                </extension>
+            </srai>
         </template>
     </category>
 
+    <!-- Format the result of calling the extensions, provide a polite result back to the customer -->
+    <category>
+        <pattern>
+            SHOW_BALANCE * * *
+        </pattern>
+        <template>
+            Your bank balance is currently <implode>£<star index="1" />.<star index="2" />.</implode>
+        </template>
+    </category>
+    
 </aiml>

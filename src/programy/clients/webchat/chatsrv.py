@@ -1,21 +1,4 @@
-"""
-Copyright (c) 2016 Keith Sterling
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
-documentation files (the "Software"), to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
-THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-"""
-import logging
-from flask import Flask, jsonify, request, make_response, abort
-
+from flask import Flask, jsonify, request, make_response, abort, current_app
 from programy.clients.clients import BotClient
 from programy.config.client.rest import RestClientConfiguration
 
@@ -33,8 +16,12 @@ class RestBotClient(BotClient):
 print("Loading, please wait...")
 rest_client = RestBotClient()
 
-print("Initiating REST Service...")
+print("Initiating Webchat Client...")
 app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return current_app.send_static_file('webchat.html')
 
 # Enter you API keys, here, alternatively store in a db or file and load at startup
 # This is an exmaple, and therefore not suitable for production
@@ -47,10 +34,6 @@ def is_apikey_valid(apikey):
     else:
         return False
 
-# Example Usage
-#
-# curl 'http://localhost:5000/api/v1.0/ask?question=hello+world&sessionid=1234567890'
-#
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 

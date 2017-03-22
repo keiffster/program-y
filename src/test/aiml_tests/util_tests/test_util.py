@@ -7,7 +7,7 @@ from programy.config.brain import BrainFileConfiguration
 class UtiltyTestClient(TestClient):
 
     def __init__(self):
-        TestClient.__init__(self, debug=True)
+        TestClient.__init__(self)
 
     def load_configuration(self, arguments):
         super(UtiltyTestClient, self).load_configuration(arguments)

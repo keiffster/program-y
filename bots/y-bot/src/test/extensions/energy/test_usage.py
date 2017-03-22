@@ -1,14 +1,14 @@
 import unittest
 
-from extensions.banking.balance import BankingBalanceExtension
+from extensions.energy.usage import EnergyUsageExtension
 
-class BankBalanceExtensionTests(unittest.TestCase):
+class EnergyUsageExtensionTests(unittest.TestCase):
 
-    def test_balance(self):
+    def test_usage(self):
 
-        balance = BankingBalanceExtension()
-        self.assertIsNotNone(balance)
+        usage = EnergyUsageExtension()
+        self.assertIsNotNone(usage)
 
-        result = balance.execute("NOW")
+        result = usage.execute("NOW")
         self.assertIsNotNone(result)
-        self.assertEqual("0.00", result)
+        self.assertEqual("0 0 KWh", result)
