@@ -1,6 +1,9 @@
 from test.parser.pattern.test_nodes.base import PatternTestBaseClass
-from programy.parser.pattern.nodes import *
-from programy.parser.template.nodes import TemplateNode
+
+from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+from programy.parser.pattern.nodes.root import PatternRootNode
 
 
 class PatternTemplateNodeTests(PatternTestBaseClass):

@@ -2,7 +2,14 @@ import unittest
 from xml.etree.ElementTree import ParseError
 
 from programy.parser.aiml_parser import AIMLParser
-from programy.parser.pattern.nodes import *
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
 from programy.dialog import Sentence
 
 class AIMLParserTests(unittest.TestCase):

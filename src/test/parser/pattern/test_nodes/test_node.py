@@ -1,5 +1,8 @@
 from test.parser.pattern.test_nodes.base import PatternTestBaseClass
-from programy.parser.pattern.nodes import *
+
+from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
 class PatternNodeTests(PatternTestBaseClass):
 

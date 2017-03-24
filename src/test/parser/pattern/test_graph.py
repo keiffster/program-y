@@ -1,16 +1,346 @@
+import xml.etree.ElementTree as ET
+
 from test.parser.pattern.test_nodes.base import PatternTestBaseClass
-from programy.dialog import Sentence
+
+from programy.parser.exceptions import ParserException
 from programy.parser.pattern.graph import PatternGraph
-from programy.parser.pattern.nodes import *
-from programy.parser.template.nodes import *
+from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
+from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.word import TemplateWordNode
 
 
 class PatternGraphTests(PatternTestBaseClass):
 
-    def test_init_graph(self):
+    def test_init_no_root(self):
         graph = PatternGraph()
         self.assertIsNotNone(graph)
         self.assertIsNotNone(graph.root)
+        self.assertIsInstance(graph.root, PatternRootNode)
+
+    def test_init_with_root(self):
+        root = PatternRootNode()
+        graph = PatternGraph(root)
+        self.assertIsNotNone(graph)
+        self.assertIsNotNone(graph.root)
+        self.assertIsInstance(graph.root, PatternRootNode)
+        self.assertEqual(graph.root, root)
+
+    def test_init_with_invalid_root(self):
+        root = PatternWordNode("Word")
+        with self.assertRaises(ParserException):
+            graph = PatternGraph(root)
+
+    def test_node_from_text_prioity(self):
+        node = PatternGraph.node_from_text("$A")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternPriorityWordNode)
+
+    def test_node_from_text_zeroormore(self):
+        node = PatternGraph.node_from_text("^")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternZeroOrMoreWildCardNode)
+
+        node = PatternGraph.node_from_text("#")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternZeroOrMoreWildCardNode)
+
+    def test_node_from_text_oneormore(self):
+        node = PatternGraph.node_from_text("_")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
+
+        node = PatternGraph.node_from_text("*")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
+
+    def test_node_from_text_word(self):
+        node = PatternGraph.node_from_text("X")
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternWordNode)
+
+    def test_node_from_element_set(self):
+        set_element = ET.fromstring('<set>colour</set>')
+        node = PatternGraph.node_from_element(set_element)
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternSetNode)
+
+    def test_node_from_element_bot(self):
+        set_element = ET.fromstring('<bot>name</bot>')
+        node = PatternGraph.node_from_element(set_element)
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternBotNode)
+
+    def test_parse_text_nothing(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternRootNode)
+        self.assertEqual(final_node, root)
+
+    def test_parse_text_word(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("HELLO", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternWordNode)
+        self.assertEqual(final_node.word, "HELLO")
+
+    def test_parse_text_multiple_words(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("HELLO THERE", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternWordNode)
+        self.assertEqual(final_node.word, "THERE")
+
+    def test_parse_text_multiple_words_whitespaces(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("HELLO \t\n\r THERE", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternWordNode)
+        self.assertEqual(final_node.word, "THERE")
+
+    def test_parse_text_priority(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("$HELLO", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternPriorityWordNode)
+
+    def test_parse_text_zeroormore(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("^", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternZeroOrMoreWildCardNode)
+
+        final_node = graph._parse_text("#", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternZeroOrMoreWildCardNode)
+
+    def test_parse_text_oneormore(self):
+        graph = PatternGraph()
+        root = PatternRootNode()
+        final_node = graph._parse_text("_", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternOneOrMoreWildCardNode)
+
+        final_node = graph._parse_text("*", root)
+        self.assertIsNotNone(final_node)
+        self.assertIsInstance(final_node, PatternOneOrMoreWildCardNode)
+
+    def get_text_from_element_word(self):
+        graph = PatternGraph()
+        set_element = ET.fromstring('<set>colour</set>')
+        text = graph.get_text_from_element(set_element)
+        self.assertIsNotNone(text)
+        self.assertEquals("colour", text)
+
+    def get_text_from_element_whitespaces(self):
+        graph = PatternGraph()
+        set_element = ET.fromstring('<set>colour \n\r\t  eyes</set>')
+        text = graph.get_text_from_element(set_element)
+        self.assertIsNotNone(text)
+        self.assertEquals("colour set", text)
+
+    def get_tail_from_element_word(self):
+        graph = PatternGraph()
+        set_element = ET.fromstring('<set>colour</set>this')
+        text = graph.get_tail_from_element(set_element)
+        self.assertIsNotNone(text)
+        self.assertEquals("this", text)
+
+    def get_tail_from_element_word_whitespaces(self):
+        graph = PatternGraph()
+        set_element = ET.fromstring('<set>colour</set>this \t that \n the \r other')
+        text = graph.get_tail_from_element(set_element)
+        self.assertIsNotNone(text)
+        self.assertEquals("this that the other", text)
+
+    def test_add_pattern_to_node(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring('<pattern>HELLO</pattern>')
+        node = graph.add_pattern_to_node(pattern)
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternWordNode)
+        self.assertEqual(node.word, "HELLO")
+
+    def test_add_pattern_to_node_whitespaces(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        node = graph.add_pattern_to_node(pattern)
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternWordNode)
+        self.assertEqual(node.word, "HELLO")
+
+    def test_add_topic_to_node_word(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        pattern_node = graph.add_pattern_to_node(pattern)
+
+        topic = ET.fromstring("""
+        <topic>
+            THERE
+        </topic>""")
+        topic_node = graph.add_that_to_node(topic, pattern_node)
+        self.assertIsNotNone(topic_node)
+        self.assertIsInstance(topic_node, PatternWordNode)
+        self.assertEqual(topic_node.word, "THERE")
+
+    def test_add_topic_to_node_wildcard(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        pattern_node = graph.add_pattern_to_node(pattern)
+
+        topic = ET.fromstring("""
+        <topic>
+            *
+        </topic>""")
+        topic_node = graph.add_that_to_node(topic, pattern_node)
+        self.assertIsNotNone(topic_node)
+        self.assertIsInstance(topic_node, PatternOneOrMoreWildCardNode)
+        self.assertEqual(topic_node.wildcard, "*")
+
+    def test_add_that_to_node_word(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        pattern_node = graph.add_pattern_to_node(pattern)
+
+        topic = ET.fromstring("""
+        <topic>
+            THERE
+        </topic>""")
+        topic_node = graph.add_that_to_node(topic, pattern_node)
+
+        that = ET.fromstring("""
+        <that>
+            HERE
+        </that>""")
+        that_node = graph.add_that_to_node(that, topic_node)
+        self.assertIsNotNone(that_node)
+        self.assertIsInstance(that_node, PatternWordNode)
+        self.assertEqual(that_node.word, "HERE")
+
+    def test_add_that_to_node_word(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        pattern_node = graph.add_pattern_to_node(pattern)
+
+        topic = ET.fromstring("""
+        <topic>
+            THERE
+        </topic>""")
+        topic_node = graph.add_that_to_node(topic, pattern_node)
+
+        that = ET.fromstring("""
+        <that>
+            *
+        </that>""")
+        that_node = graph.add_that_to_node(that, topic_node)
+        self.assertIsNotNone(that_node)
+        self.assertIsInstance(that_node, PatternOneOrMoreWildCardNode)
+        self.assertEqual(that_node.wildcard, "*")
+
+    def test_add_template_to_node(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("""
+        <pattern>
+            HELLO
+        </pattern>""")
+        pattern_node = graph.add_pattern_to_node(pattern)
+
+        topic = ET.fromstring("""
+        <topic>
+            THERE
+        </topic>""")
+        topic_node = graph.add_that_to_node(topic, pattern_node)
+
+        that = ET.fromstring("""
+        <that>
+            *
+        </that>""")
+        that_node = graph.add_that_to_node(that, topic_node)
+
+        template = TemplateWordNode("TEST")
+        template_node = graph.add_template_to_node(template, that_node)
+        self.assertIsNotNone(template_node)
+        self.assertIsInstance(template_node, PatternTemplateNode)
+
+    def test_add_pattern_to_graph(self):
+        graph = PatternGraph()
+        pattern = ET.fromstring("<pattern>HELLO</pattern>")
+        topic = ET.fromstring("<topic>HELLO</topic>")
+        that = ET.fromstring("<that>HELLO</that>")
+        template = TemplateWordNode("TEST")
+        graph.add_pattern_to_graph(pattern, topic, that, template)
+
+        self.assertIsNotNone(graph.root)
+        self.assertIsNotNone(graph.root.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic)
+        self.assertIsNotNone(graph.root.child(0).topic.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that)
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that.child(0))
+        self.assertIsNotNone(graph.root.child(0).topic.child(0).that.child(0).template)
+
+    def test_count_word_in_patterns(self):
+        graph = PatternGraph()
+        count = graph.count_words_in_patterns()
+        self.assertEquals(0, count)
+        graph = PatternGraph()
+        pattern = ET.fromstring("<pattern>HELLO</pattern>")
+        topic = ET.fromstring("<topic>HELLO</topic>")
+        that = ET.fromstring("<that>HELLO</that>")
+        template = TemplateWordNode("TEST")
+        graph.add_pattern_to_graph(pattern, topic, that, template)
+
+        count = graph.count_words_in_patterns()
+        self.assertEquals(1, count)
+
+    def test_count_words_in_patterns(self):
+        graph = PatternGraph()
+        count = graph.count_words_in_patterns()
+        self.assertEquals(0, count)
+        graph = PatternGraph()
+        pattern1 = ET.fromstring("<pattern>HELLO THErE</pattern>")
+        topic = ET.fromstring("<topic>HELLO</topic>")
+        that = ET.fromstring("<that>HELLO</that>")
+        template = TemplateWordNode("TEST")
+
+        graph.add_pattern_to_graph(pattern1, topic, that, template)
+        count = graph.count_words_in_patterns()
+        self.assertEquals(2, count)
+
+        pattern2 = ET.fromstring("<pattern>WHERE ARE YOU</pattern>")
+        graph.add_pattern_to_graph(pattern2, topic, that, template)
+        count = graph.count_words_in_patterns()
+        self.assertEquals(5, count)
 
     def test_add_pattern_with_whitepsace(self):
         graph = PatternGraph()

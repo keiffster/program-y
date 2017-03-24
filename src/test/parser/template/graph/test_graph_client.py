@@ -8,7 +8,7 @@ from programy.config.brain import BrainConfiguration
 from programy.dialog import Question, Sentence
 from programy.parser.template.graph import TemplateGraph
 from programy.parser.pattern.matcher import MatchContext, Match
-from programy.parser.pattern.nodes import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.aiml_parser import AIMLParser
 
 class TemplateGraphTestClient(unittest.TestCase):

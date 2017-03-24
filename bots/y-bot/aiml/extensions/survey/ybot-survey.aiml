@@ -32,14 +32,13 @@
     <topic name="SURVEY_QUESTION1">
         <category>
             <pattern>
-                *
+                #
             </pattern>
             <template>
                 <think>
                     <set name="topic">SURVEY_QUESTION2</set>
                     <set name="answer1"><star /></set>
                 </think>
-
                 Thanks, now Question 2. What do you dislike about AIML?
             </template>
         </category>
@@ -48,7 +47,7 @@
     <topic name="SURVEY_QUESTION2">
         <category>
             <pattern>
-                *
+                #
             </pattern>
             <template>
                 <think>

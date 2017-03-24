@@ -1,0 +1,58 @@
+"""
+Copyright (c) 2016 Keith Sterling
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
+
+import logging
+
+from programy.parser.exceptions import ParserException
+
+from programy.parser.pattern.matcher import Match
+from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
+
+class PatternRootNode(PatternNode):
+
+    def __init__(self):
+        PatternNode.__init__(self)
+
+    def is_root(self):
+        return True
+
+    def can_add(self, new_node: PatternNode):
+        if isinstance(new_node, PatternRootNode):
+            raise ParserException("Cannot add root node to existing root node")
+        if isinstance(new_node, PatternTopicNode):
+            raise ParserException("Cannot add topic node to root node")
+        if isinstance(new_node, PatternThatNode):
+            raise ParserException("Cannot add that node to root node")
+        if isinstance(new_node, PatternTemplateNode):
+            raise ParserException("Cannot add template node to root node")
+
+    def equivalent(self, other: PatternNode)->bool:
+        if isinstance(other, PatternRootNode):
+            return True
+        return False
+
+    def to_string(self, verbose: bool=True)->str:
+        if verbose is True:
+            return "ROOT [%s]" % self._child_count(verbose)
+        else:
+            return "ROOT "
+
+    def match(self, bot, clientid, context, words):
+        return self.consume(bot, clientid, context, words, 0, Match.WORD, 0)

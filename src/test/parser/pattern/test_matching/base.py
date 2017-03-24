@@ -4,7 +4,7 @@ import xml.etree.ElementTree as ET
 from test.parser.pattern.test_nodes.base import PatternTestBaseClass, TestBot
 from programy.dialog import Sentence
 from programy.parser.pattern.graph import PatternGraph
-from programy.parser.template.nodes import TemplateWordNode
+from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.aiml_parser import AIMLParser
 
 class PatternMatcherBaseClass(PatternTestBaseClass):

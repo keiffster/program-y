@@ -1,5 +1,9 @@
+import xml.etree.ElementTree as ET
 import unittest
-from programy.parser.template.nodes import *
+
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.extension import TemplateExtensionNode
+
 from test.parser.template.graph.test_graph_client import TemplateGraphTestClient
 
 

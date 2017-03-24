@@ -2,6 +2,8 @@ from test.parser.pattern.test_nodes.base import PatternTestBaseClass
 from programy.dialog import Sentence
 from programy.parser.pattern.nodes import *
 
+from programy.parser.exceptions import ParserException
+from programy.parser.pattern.nodes.word import PatternWordNode
 
 class PatternWordNodeTests(PatternTestBaseClass):
 

@@ -1,5 +1,5 @@
 from test.parser.pattern.test_nodes.base import PatternTestBaseClass
-from programy.parser.pattern.nodes import *
+from programy.parser.pattern.nodes.bot import PatternBotNode
 
 class PatternBotNodeTests(PatternTestBaseClass):
 

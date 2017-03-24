@@ -1,6 +1,15 @@
+import xml.etree.ElementTree as ET
+
 import unittest
 
-from programy.parser.template.nodes import *
+from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.condtype1 import TemplateType1ConditionNode
+from programy.parser.template.nodes.condtype2 import TemplateType2ConditionNode
+from programy.parser.template.nodes.condtype3 import TemplateType3ConditionNode
+from programy.parser.template.nodes.condlistitem import TemplateConditionListItemNode
+
+
 from test.parser.template.graph.test_graph_client import TemplateGraphTestClient
 
 

@@ -29,6 +29,6 @@ class SurveyExtension(object):
 
         # Data is bar delimited, so you could write to a file, add to a database, or send to another REST service
         for answer in data.split("|"):
-            print("Answer = %s"%(answer.strip()))
+            logging.debug("Answer = %s"%(answer.strip()))
 
         return "OK"

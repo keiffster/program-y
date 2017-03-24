@@ -15,18 +15,21 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-from programy.parser.exceptions import ParserException
-from programy.parser.pattern.nodes import PatternRootNode
-from programy.parser.pattern.nodes import PatternPriorityWordNode
-from programy.parser.pattern.nodes import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes import PatternWordNode
-from programy.parser.pattern.nodes import PatternSetNode
-from programy.parser.pattern.nodes import PatternBotNode
-from programy.parser.pattern.nodes import PatternTopicNode
-from programy.parser.pattern.nodes import PatternThatNode
-from programy.parser.pattern.nodes import PatternTemplateNode
+
 from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
+
+from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
 
 # TODO better handling of <html> type tags
 
@@ -38,7 +41,7 @@ class PatternGraph(object):
         if root_node is None:
             self._root_node = PatternRootNode()
         else:
-            if isinstance(root_node, PatternRootNode):
+            if isinstance(root_node, PatternRootNode) is False:
                 raise ParserException("Root node needs to be of base type PatternRootNode")
             self._root_node = root_node
 
@@ -57,11 +60,6 @@ class PatternGraph(object):
         else:
             return PatternWordNode(word)
 
-    def count_words_in_patterns(self):
-        counter = [0]
-        self._count_words_in_children(self._root_node, counter)
-        return counter[0]
-
     @staticmethod
     def node_from_element(element):
         if element.tag == 'set':
@@ -77,18 +75,16 @@ class PatternGraph(object):
         else:
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
-    def _count_words_in_children(self, node, counter):
-        for child in node.children:
-            counter[0] += 1
-            self._count_words_in_children(child, counter)
-
     def _parse_text(self, pattern_text, current_node):
 
-        words = pattern_text.split(" ")
+        #words = pattern_text.split(" ")
+        stripped = pattern_text.strip()
+        words = stripped.split(" ")
         for word in words:
-            word = TextUtils.strip_whitespace(word)
-            new_node = PatternGraph.node_from_text(word)
-            current_node = current_node.add_child(new_node)
+            if word != '': # Blank nodes add no value, ignore them
+                word = TextUtils.strip_whitespace(word)
+                new_node = PatternGraph.node_from_text(word)
+                current_node = current_node.add_child(new_node)
 
         return current_node
 
@@ -201,6 +197,16 @@ class PatternGraph(object):
             raise parser_excep
 
         self.add_template_to_node(template_graph_root, current_node)
+
+    def count_words_in_patterns(self):
+        counter = [0]
+        self._count_words_in_children(self._root_node, counter)
+        return counter[0]
+
+    def _count_words_in_children(self, node, counter):
+        for child in node.children:
+            counter[0] += 1
+            self._count_words_in_children(child, counter)
 
     def dump(self, output_func=logging.debug, verbose=True):
         self.root.dump("", output_func, verbose)

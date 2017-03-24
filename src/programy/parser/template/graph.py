@@ -16,54 +16,56 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
+
 import logging
+
 from programy.parser.exceptions import ParserException
-from programy.parser.template.nodes import TemplateNode
-from programy.parser.template.nodes import TemplateWordNode
-from programy.parser.template.nodes import TemplateRandomNode
-from programy.parser.template.nodes import TemplateType1ConditionNode
-from programy.parser.template.nodes import TemplateType2ConditionNode
-from programy.parser.template.nodes import TemplateType3ConditionNode
-from programy.parser.template.nodes import TemplateConditionListItemNode
-from programy.parser.template.nodes import TemplateSRAINode
-from programy.parser.template.nodes import TemplateSRAIXNode
-from programy.parser.template.nodes import TemplateGetNode
-from programy.parser.template.nodes import TemplateSetNode
-from programy.parser.template.nodes import TemplateMapNode
-from programy.parser.template.nodes import TemplateBotNode
-from programy.parser.template.nodes import TemplateThinkNode
-from programy.parser.template.nodes import TemplateNormalizeNode
-from programy.parser.template.nodes import TemplateDenormalizeNode
-from programy.parser.template.nodes import TemplatePersonNode
-from programy.parser.template.nodes import TemplatePerson2Node
-from programy.parser.template.nodes import TemplateGenderNode
-from programy.parser.template.nodes import TemplateSrNode
-from programy.parser.template.nodes import TemplateIdNode
-from programy.parser.template.nodes import TemplateSizeNode
-from programy.parser.template.nodes import TemplateVocabularyNode
-from programy.parser.template.nodes import TemplateEvalNode
-from programy.parser.template.nodes import TemplateExplodeNode
-from programy.parser.template.nodes import TemplateImplodeNode
-from programy.parser.template.nodes import TemplateProgramNode
-from programy.parser.template.nodes import TemplateLowercaseNode
-from programy.parser.template.nodes import TemplateUppercaseNode
-from programy.parser.template.nodes import TemplateSentenceNode
-from programy.parser.template.nodes import TemplateFormalNode
-from programy.parser.template.nodes import TemplateThatNode
-from programy.parser.template.nodes import TemplateThatStarNode
-from programy.parser.template.nodes import TemplateTopicStarNode
-from programy.parser.template.nodes import TemplateStarNode
-from programy.parser.template.nodes import TemplateInputNode
-from programy.parser.template.nodes import TemplateRequestNode
-from programy.parser.template.nodes import TemplateResponseNode
-from programy.parser.template.nodes import TemplateDateNode
-from programy.parser.template.nodes import TemplateIntervalNode
-from programy.parser.template.nodes import TemplateSystemNode
-from programy.parser.template.nodes import TemplateExtensionNode
-from programy.parser.template.nodes import TemplateLearnNode
-from programy.parser.template.nodes import TemplateLearnfNode
-from programy.parser.template.nodes import TemplateFirstNode
-from programy.parser.template.nodes import TemplateRestNode
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.template.nodes.rand import TemplateRandomNode
+from programy.parser.template.nodes.condtype1 import TemplateType1ConditionNode
+from programy.parser.template.nodes.condtype2 import TemplateType2ConditionNode
+from programy.parser.template.nodes.condtype3 import TemplateType3ConditionNode
+from programy.parser.template.nodes.condlistitem import TemplateConditionListItemNode
+from programy.parser.template.nodes.srai import TemplateSRAINode
+from programy.parser.template.nodes.sraix import TemplateSRAIXNode
+from programy.parser.template.nodes.get import TemplateGetNode
+from programy.parser.template.nodes.set import TemplateSetNode
+from programy.parser.template.nodes.map import TemplateMapNode
+from programy.parser.template.nodes.bot import TemplateBotNode
+from programy.parser.template.nodes.think import TemplateThinkNode
+from programy.parser.template.nodes.normalise import TemplateNormalizeNode
+from programy.parser.template.nodes.denormalise import TemplateDenormalizeNode
+from programy.parser.template.nodes.person import TemplatePersonNode
+from programy.parser.template.nodes.person2 import TemplatePerson2Node
+from programy.parser.template.nodes.gender import TemplateGenderNode
+from programy.parser.template.nodes.sr import TemplateSrNode
+from programy.parser.template.nodes.id import TemplateIdNode
+from programy.parser.template.nodes.size import TemplateSizeNode
+from programy.parser.template.nodes.vocabulary import TemplateVocabularyNode
+from programy.parser.template.nodes.eval import TemplateEvalNode
+from programy.parser.template.nodes.explode import TemplateExplodeNode
+from programy.parser.template.nodes.implode import TemplateImplodeNode
+from programy.parser.template.nodes.program import TemplateProgramNode
+from programy.parser.template.nodes.lowercase import TemplateLowercaseNode
+from programy.parser.template.nodes.uppercase import TemplateUppercaseNode
+from programy.parser.template.nodes.sentence import TemplateSentenceNode
+from programy.parser.template.nodes.formal import TemplateFormalNode
+from programy.parser.template.nodes.that import TemplateThatNode
+from programy.parser.template.nodes.thatstar import TemplateThatStarNode
+from programy.parser.template.nodes.topicstar import TemplateTopicStarNode
+from programy.parser.template.nodes.star import TemplateStarNode
+from programy.parser.template.nodes.input import TemplateInputNode
+from programy.parser.template.nodes.request import TemplateRequestNode
+from programy.parser.template.nodes.response import TemplateResponseNode
+from programy.parser.template.nodes.date import TemplateDateNode
+from programy.parser.template.nodes.interval import TemplateIntervalNode
+from programy.parser.template.nodes.system import TemplateSystemNode
+from programy.parser.template.nodes.extension import TemplateExtensionNode
+from programy.parser.template.nodes.learn import TemplateLearnNode
+from programy.parser.template.nodes.learnf import TemplateLearnfNode
+from programy.parser.template.nodes.first import TemplateFirstNode
+from programy.parser.template.nodes.rest import TemplateRestNode
 
 
 class TemplateGraph(object):
@@ -212,7 +214,7 @@ class TemplateGraph(object):
         elif expression.tag == 'rest':
             self.parse_rest_expression(expression, branch)
 
-        # Tags found in Program-A reference implementastion, but not documented in the spec !!! ffs
+        # Tags found in Program-A reference implementation, but not documented in the spec !!! ffs
         # addtriple
         # deletetriple
         # select
