@@ -16,6 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 
 import logging
+import re
+
 from programy.processors.processing import PostProcessor
 
 class CleanUpPostProcessor(PostProcessor):
@@ -24,13 +26,9 @@ class CleanUpPostProcessor(PostProcessor):
 
     def process(self, bot, clientid, string):
         logging.debug("Cleaning up output...")
-        stripped = string.strip()
-        if stripped.endswith(" ."):
-            stripped = stripped[:len(stripped)-2] + "."
-        return stripped
 
-        #
-        #first = stripped[:1]
-        #rest = stripped[1:]
-        #result = first.upper() + rest.lower()
-        #return result
+        pass1 = re.split(r"""("[^"]*"|'[^']*')""", string)
+        pass2 = [val.strip() for val in pass1]
+        pass3 = " ".join(re.sub(r'("\s+)(.*)(\s+")', r'"\2"', val) for val in pass2)
+        pass4 = re.sub(r'\s+([,:;?.!](?:\s|$))', r'\1', pass3)
+        return pass4

@@ -14,7 +14,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+import logging
 import os
+
 from abc import ABCMeta, abstractmethod
 
 class FileFinder(object):
@@ -54,6 +56,10 @@ class FileFinder(object):
             else:
                 filename = file[0]
             filename = filename.upper()
-            collection[filename] = self.load_file_contents(file[1])
+
+            try:
+                collection[filename] = self.load_file_contents(file[1])
+            except Exception as e:
+                logging.error ("Failed to load file contents for file [%s]"%file[1])
 
         return collection

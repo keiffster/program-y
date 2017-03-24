@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <topic name="">
+        <category>
+            <pattern>*
+            <template>RESPONSE</template>
+        </category>
+    </topic>
+</aiml>

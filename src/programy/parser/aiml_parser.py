@@ -32,9 +32,10 @@ class AIMLLoader(FileFinder):
         self.aiml_parser = aiml_parser
 
     def load_file_contents(self, filename):
-        logging.info(filename)
-        return self.aiml_parser.parse_from_file(filename)
-
+        try:
+            return self.aiml_parser.parse_from_file(filename)
+        except Exception as e:
+            logging.exception("Failed to load contents of file from [%s]"%filename, e)
 
 class AIMLParser(object):
     def __init__(self, supress_warnings=False, stop_on_invalid=False):
@@ -75,20 +76,16 @@ class AIMLParser(object):
 
         logging.info("Loading aiml file file: " + self._filename)
 
-        tree = ET.parse(filename, parser=LineNumberingParser())
-        aiml = tree.getroot()
-
-        if aiml is None or aiml.tag != 'aiml':
-            raise ParserException("Error, root tag is not <aiml>", filename=filename)
-        else:
-            try:
+        try:
+            tree = ET.parse(filename, parser=LineNumberingParser())
+            aiml = tree.getroot()
+            if aiml is None or aiml.tag != 'aiml':
+                raise ParserException("Error, root tag is not <aiml>", filename=filename)
+            else:
                 self.parse_aiml(aiml, filename)
-            except ParserException as parser_excep:
-                parser_excep.filename = filename
-                raise parser_excep
-            except ET.ParseError as xmlpe:
-                xmlpe.filename = filename
-                xmlpe.xml_exception = xmlpe
+        except Exception as e:
+            logging.error("Failed to load contents of AIML file from [%s] - [%s]"%(filename, e))
+
 
     def parse_from_text(self, text):
         """
@@ -100,7 +97,7 @@ class AIMLParser(object):
         aiml = ET.fromstring(text)
 
         if aiml is None or aiml.tag != 'aiml':
-            ParserException("Error, root tag is not <aiml>", filename="text")
+            raise ParserException("Error, root tag is not <aiml>", filename="text")
         else:
             self.parse_aiml(aiml, "text")
 

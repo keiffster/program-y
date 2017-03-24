@@ -23,4 +23,4 @@ class TrainAIMLTests(unittest.TestCase):
         response = TrainAIMLTests.test_client.bot.ask_question("test", "daddy is great")
         self.assertIsNotNone(response)
         #TODO Sort out space in questions
-        self.assertEqual("Now you can ask me: \" Who IS GREAT \"? and \" What does my DADDY BE \"?", response)
+        self.assertEqual('Now you can ask me: "Who IS GREAT"? and "What does my DADDY BE"?', response)
