@@ -27,20 +27,8 @@ class TemplateLearnfNode(TemplateLearnNode):
         TemplateLearnNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        new_pattern = self.resolve_element_evals(bot, clientid, self._pattern)
-        new_topic = self.resolve_element_evals(bot, clientid, self._topic)
-        new_that = self.resolve_element_evals(bot, clientid, self._that)
-
-        template = self.evaluate_eval_nodes(bot, clientid, self._template)
-
-        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, template)
-
-        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
-                      ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
-                      ET.tostring(new_topic, 'utf-8').decode('utf-8'),
-                      ET.tostring(new_that, 'utf-8').decode('utf-8'))
-
-        bot.brain.write_learnf_to_file(bot, clientid, new_pattern, new_topic, new_that, self._template)
+        new_template = self._create_new_template(bot, clientid)
+        bot.brain.write_learnf_to_file(bot, clientid, new_template._pattern, new_template._topic, new_template._that, new_template._template)
         return ""
 
     def to_string(self):

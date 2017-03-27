@@ -25,13 +25,22 @@ For more information see [url]
 			<think>
 				<set name="myname"><star /></set>
 			</think>
-		    <learn>
+		    <learnf>
 				<category>
 					<pattern>WHAT IS MY NAME</pattern>
 					<template>YOUR NAME IS <eval><get name="myname" /></eval></template>
 				</category>
-			</learn>
+			</learnf>
 			OK, I will remember your name is <get name="myname" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>* PLAYED *</pattern>
+		<template>Ok. I will remember this
+			<learnf><category><pattern>WHAT DID <eval><star/> PLAY</eval></pattern>
+				<template><eval><star/></eval> PLAYED <eval><star index="2"/></eval></template>
+			</category></learnf>
 		</template>
 	</category>
 

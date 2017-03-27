@@ -22,6 +22,13 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.eval import TemplateEvalNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
+class NewTemplate(object):
+
+    def __init__(self, pattern, topic, that, template):
+        self._pattern = pattern
+        self._topic = topic
+        self._that = that
+        self._template = template
 
 class TemplateLearnNode(TemplateNode):
 
@@ -106,14 +113,11 @@ class TemplateLearnNode(TemplateNode):
 
         return new_element
 
-    def resolve(self, bot, clientid):
+    def _create_new_template(self, bot, clientid):
         new_pattern = self.resolve_element_evals(bot, clientid, self._pattern)
         new_topic = self.resolve_element_evals(bot, clientid, self._topic)
         new_that = self.resolve_element_evals(bot, clientid, self._that)
 
-        # TODO This overwrites the self._template with an evaluated one
-        # What it should do is return a new template that is then added
-        # to the graph
         new_template = self.evaluate_eval_nodes(bot, clientid, self._template)
 
         bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template)
@@ -123,8 +127,10 @@ class TemplateLearnNode(TemplateNode):
                       ET.tostring(new_topic, 'utf-8').decode('utf-8'),
                       ET.tostring(new_that, 'utf-8').decode('utf-8'))
 
-        logging.debug("%s", self.to_xml(bot, clientid))
+        return NewTemplate(new_pattern, new_topic, new_that, new_template)
 
+    def resolve(self, bot, clientid):
+        self._create_new_template(bot, clientid)
         return ""
 
     def to_string(self):
