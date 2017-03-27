@@ -27,7 +27,7 @@ class TemplateRandomNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        selection = randint(0, len(self._children))
+        selection = randint(0, (len(self._children)-1))
         resolved = self._children[selection - 1].resolve(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
