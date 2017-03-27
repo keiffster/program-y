@@ -38,3 +38,12 @@ class TopicAIMLTests(unittest.TestCase):
         response = TopicAIMLTests.test_client.bot.ask_question("test", "GOODBYE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'INSIDE OF TEST2 TOPIC')
+
+    def test_topic_wildcard_topic_words(self):
+        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD1")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'WILDCARD1 TEST OK')
+
+        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD2")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'WILDCARD2 TEST OK')

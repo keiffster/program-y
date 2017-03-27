@@ -19,6 +19,8 @@ For more information see [url]
 
 <aiml>
 
+	<!--  Test Topic matchinig as a single word -->
+
 	<category>
 		<pattern>HELLO</pattern>
 		<template>
@@ -43,7 +45,7 @@ For more information see [url]
         </category>
     </topic>
 
-    <!--  -->
+    <!-- Test Topic matching as multiple words -->
 
 	<category>
 		<pattern>GOODBYE</pattern>
@@ -68,5 +70,38 @@ For more information see [url]
             </template>
         </category>
     </topic>
+
+	<!-- Test Topic Matching with Wild cards -->
+
+	<category>
+		<pattern>WILDCARD1</pattern>
+		<template>
+			<srai>WILDCARD TEST</srai>
+		</template>
+	</category>
+
+		<category>
+		<pattern>WILDCARD2</pattern>
+		<template>
+			<think><set name="topic">TEST3 TOPIC</set></think>
+			<srai>WILDCARD TEST</srai>
+		</template>
+	</category>
+
+	<category>
+		<pattern>WILDCARD *</pattern>
+		<template>
+			WILDCARD1 TEST OK
+		</template>
+	</category>
+
+	<topic name="TEST3 TOPIC">
+		<category>
+			<pattern>WILDCARD *</pattern>
+			<template>
+				WILDCARD2 TEST OK
+			</template>
+		</category>
+	</topic>
 
 </aiml>
