@@ -22,24 +22,20 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         conversation = Conversation("testid", self.bot)
-        question = Question.create_from_text("Hello world")
-        question.current_sentence()._response = "Hello Matey"
-        conversation._questions.append(question)
+
+        question = Question.create_from_text("Hello1 question")
+        question.current_sentence()._response = "Hello1 response"
+        conversation.record_dialog(question)
+
+        question = Question.create_from_text("Hello quesiton2")
+        question.current_sentence()._response = "Hello2 response"
+        conversation.record_dialog(question)
+
         self.bot._conversations["testid"] = conversation
 
         response = root.resolve(self.bot, "testid")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello Matey")
-
-    def test_to_xml_defaults(self):
-        root = TemplateNode()
-        node = TemplateResponseNode()
-        root.append(node)
-
-        xml = root.xml_tree(self.bot, self.clientid)
-        self.assertIsNotNone(xml)
-        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><response /></template>", xml_str)
+        self.assertEqual(response, "Hello1 response")
 
     def test_node_no_defaults(self):
         root = TemplateNode()
@@ -54,6 +50,16 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(2, node.index)
         self.assertEqual(3, node.position)
+
+    def test_to_xml_defaults(self):
+        root = TemplateNode()
+        node = TemplateResponseNode()
+        root.append(node)
+
+        xml = root.xml_tree(self.bot, self.clientid)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual("<template><response /></template>", xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()

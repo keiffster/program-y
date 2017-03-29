@@ -32,7 +32,8 @@ class TemplateResponseNode(TemplateIndexedNode):
         try:
             nth_question = self.index
             conversation = bot.get_conversation(clientid)
-            question = conversation.nth_question(nth_question)
+            # Fix provided by @newdev7 28/03/2017
+            question = conversation.nth_question(nth_question+1)
             responses = question.combine_answers()
             resolved = responses
         except Exception as excep:
