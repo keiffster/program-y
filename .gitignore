@@ -96,3 +96,6 @@ ENV/
 
 # Pylint output
 pylint.log
+
+# Ignore license key files
+licenses.keys
