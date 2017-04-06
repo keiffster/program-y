@@ -24,7 +24,7 @@ import logging
 class TelecomMinutesExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, data):
+    def execute(self, bot, clientid, data):
         logging.debug ("Telecom Minutes - Calling external service for with extra data [%s]"%(data))
 
         #

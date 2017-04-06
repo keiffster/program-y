@@ -23,6 +23,7 @@ from programy.parser.template.nodes.indexed import TemplateIndexedNode
 #
 # <request index=”n”/> is replaced with the value of the nth previous multi-sentence input to the bot.
 #
+#TODO Multiple request calls with AGAIN causes stack fault
 class TemplateRequestNode(TemplateIndexedNode):
 
     def __init__(self, position=1, index=1):
@@ -32,7 +33,7 @@ class TemplateRequestNode(TemplateIndexedNode):
         try:
             nth_question = self.index
             conversation = bot.get_conversation(clientid)
-            question = conversation.nth_question(nth_question)
+            question = conversation.nth_question(nth_question+1)
             sentences = question.combine_sentences()
             resolved = sentences
         except Exception as excep:

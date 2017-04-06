@@ -98,4 +98,4 @@ ENV/
 pylint.log
 
 # Ignore license key files
-licenses.keys
+license.keys

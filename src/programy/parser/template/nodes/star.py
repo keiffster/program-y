@@ -18,7 +18,7 @@ import logging
 
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
-
+#TODO If the index exceeds the number of stars then an exception is thrown, it should write an error and return None
 class TemplateStarNode(TemplateIndexedNode):
 
     def __init__(self, position=1, index=1):

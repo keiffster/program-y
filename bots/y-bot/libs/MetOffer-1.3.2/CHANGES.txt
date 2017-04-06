@@ -1,0 +1,21 @@
+v0.1,   2012-11-03 -- Initial release.
+v1.0,   2013-05-19 -- Adapted to new API structure.  Functionality extended.
+v1.1,   2013-08-12 -- Compatibility with Python 2.x added.
+v1.2,   2013-12-04 -- Added parsing of site elevation and improved versatility
+                      in finding nearest sites to given coordinates.
+v1.3,   2014-06-15 -- parse_val can now accept returned data with single
+                      timesteps such as when a forecast has been requested
+                      using the isotime parameter.
+                      _query method of MetOffer class now returns raw API
+                      output.  Methods which use this handle conversion from
+                      json to Python objects.
+		      Tuples in the data attribute of Weather instances
+                      returned by parse_val are now 3-tuples (EXCEPT for
+                      'timestamp').  The third element is the 'name' of the
+                      measurement type as used by the API (e.g. 'T' for
+                      'Temperature').
+                      Separate function created to devise dict that maps Met
+                      Office 'names' to description and measurement unit from
+                      the raw returned data (extract_data_key).
+v1.3.1, 2014-06-15 -- Fixed packaging error.
+v1.3.2, 2014-06-16 -- Fixed docs.

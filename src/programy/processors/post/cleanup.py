@@ -31,4 +31,5 @@ class CleanUpPostProcessor(PostProcessor):
         pass2 = [val.strip() for val in pass1]
         pass3 = " ".join(re.sub(r'("\s+)(.*)(\s+")', r'"\2"', val) for val in pass2)
         pass4 = re.sub(r'\s+([,:;?.!](?:\s|$))', r'\1', pass3)
-        return pass4
+        final = re.sub(r'(\d)\.\s+(\d)', r'\1.\2', pass4)
+        return final

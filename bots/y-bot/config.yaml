@@ -8,6 +8,7 @@ brain:
     allow_learnf_aiml: true
 
     files:
+        license_keys: $BOT_ROOT/config/license.keys
         aiml:
             files: $BOT_ROOT/aiml
             extension: .aiml

@@ -122,12 +122,12 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_date_tomorrow(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE TOMORROW")
         self.assertIsNotNone(response)
-        self.assertRegex(response, ".* \\d{2} \\d{4}")
+        self.assertRegex(response, ".* \\d{1}|\\d{2} \\d{4}")
 
     def test_date_and_time(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DATE AND TIME")
         self.assertIsNotNone(response)
-        self.assertRegex(response, "The date and time is .{3} .{3} \\d{2} \\d{2}:\\d{2}:\\d{2} \\d{4}")
+        self.assertRegex(response, "The date and time is .{3} .{3}\s*\\d{1}|\\d{2} \\d{2}:\\d{2}:\\d{2} \\d{4}")
 
     def test_tomorrowdate_month_day_year(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test",  "TOMORROWDATE APRIL 01 2017")

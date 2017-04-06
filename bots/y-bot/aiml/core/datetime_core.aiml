@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aiml>
-    <!-- File: date.aiml -->
+    <!-- File: datetime_core.aiml -->
     <!-- Last modified: September 5, 2014 -->
     <!--  -->
     <!-- This AIML file is part of the Rosie knowledge base. -->
@@ -117,7 +117,7 @@
     <category>
         <pattern>DATE</pattern>
         <template>Today is
-            <date format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy"/>
+            <sentence><date format="%B %d, %Y" jformat="MMMMMMMMM dd yyyy"/></sentence>
         </template>
     </category>
     <category>
@@ -150,8 +150,11 @@
     </category>
     <category>
         <pattern>DATE AND TIME</pattern>
-        <template>The date and time is
+        <template>
+            <sentence>
+            The date and time is
             <date/>
+            </sentence>
         </template>
     </category>
     <category>

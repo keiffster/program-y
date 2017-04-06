@@ -43,7 +43,7 @@ class TemplateExtensionNode(TemplateNode):
             new_class = ClassLoader.instantiate_class(self._path)
             if new_class is not None:
                 instance = new_class()
-                resolved = instance.execute(data)
+                resolved = instance.execute(bot, clientid, data)
 
                 logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
                 return resolved

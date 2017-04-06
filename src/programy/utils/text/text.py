@@ -45,3 +45,13 @@ class TextUtils:
     def strip_all_punctuation(string):
         first_pass = re.sub(TextUtils.STRIP_ALL_PUNCTUATION, '', string)
         return first_pass
+
+    @staticmethod
+    def urlify(string):
+        return string.replace(" ", "%20")
+
+    @staticmethod
+    def strip_html(data, replace_with=''):
+        p = re.compile(r'<.*?>')
+        return p.sub(replace_with, data)
+

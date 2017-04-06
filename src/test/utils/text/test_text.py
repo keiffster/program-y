@@ -43,3 +43,13 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEquals(" ", TextUtils.strip_all_punctuation(" "))
         self.assertEquals("x y z", TextUtils.strip_all_punctuation("x! y? z."))
         self.assertEquals("a b c", TextUtils.strip_all_punctuation("!a b c?"))
+
+    def test_urlify(self):
+        self.assertEquals("", TextUtils.urlify(""))
+        self.assertEquals("%20", TextUtils.urlify(" "))
+        self.assertEquals("Hello%20World", TextUtils.urlify("Hello World"))
+
+    def test_strip_html(self):
+        self.assertEquals("", TextUtils.strip_html(""))
+        self.assertEquals("", TextUtils.strip_html("<html></html>"))
+        self.assertEquals("Hello World", TextUtils.strip_html("<html>Hello <b>World</b></html>"))

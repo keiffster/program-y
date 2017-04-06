@@ -2,6 +2,10 @@ import datetime, time
 
 class DateFormatter(object):
 
+    @staticmethod
+    def year_month_day(year, month, day):
+        return datetime.datetime.strptime("%d-%d-%d"%(year, month, day), "%Y-%m-%d")
+
     def __init__(self, weeks=0, days=0, hours=0, mins=0, secs=0):
         self._time_now = datetime.datetime.now()
         if weeks > 0:
