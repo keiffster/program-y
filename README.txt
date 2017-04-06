@@ -9,7 +9,7 @@ https://keiffster.github.io/program-y/
 Whats New
 ==========
 
-0.6 introduces some interesting new features, specifically around the use of external services
+0.7.0 introduces some interesting new features, specifically around the use of external services
 
 y-bot introduces extensions to call UK Met Office Weather and Google Maps. This work introduces 2 new features
 people need to be aware of
