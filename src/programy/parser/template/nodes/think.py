@@ -26,9 +26,13 @@ class TemplateThinkNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = self.resolve_children_to_string(bot, clientid)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return ""
+        try:
+            resolved = self.resolve_children_to_string(bot, clientid)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return ""
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "THINK"

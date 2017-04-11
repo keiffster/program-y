@@ -37,19 +37,23 @@ class TemplateLogNode(TemplateAttribNode):
         self._level = level
 
     def resolve(self, bot, clientid):
-        resolved = self.resolve_children_to_string(bot, clientid)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        if self._level == "debug":
-            logging.debug(resolved)
-        elif self._level == "warning":
-            logging.warning(resolved)
-        elif self._level == "error":
-            logging.error(resolved)
-        elif self._level == "info":
-            logging.info(resolved)
-        else:
-            logging.info(resolved)
-        return ""
+        try:
+            resolved = self.resolve_children_to_string(bot, clientid)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if self._level == "debug":
+                logging.debug(resolved)
+            elif self._level == "warning":
+                logging.warning(resolved)
+            elif self._level == "error":
+                logging.error(resolved)
+            elif self._level == "info":
+                logging.info(resolved)
+            else:
+                logging.info(resolved)
+            return ""
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "LOG level=%s" % (self._level)

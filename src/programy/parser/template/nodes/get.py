@@ -44,37 +44,40 @@ class TemplateGetNode(TemplateNode):
         self._local = local
 
     def resolve(self, bot, clientid):
+        try:
+            name = self.name.resolve(bot, clientid)
 
-        name = self.name.resolve(bot, clientid)
+            """
+            Todo, if local then set per the conversation
+            If globals
+                If exists in predicates then don't replace
+                If not in predicates then set as global to the conversation
+            """
 
-        """
-        Todo, if local then set per the conversation
-        If globals
-            If exists in predicates then don't replace
-            If not in predicates then set as global to the conversation
-        """
-
-        if self.local is True:
-            value = bot.get_conversation(clientid).current_question().predicate(name)
-            if value is None:
-                logging.warning("No local var for %s, default-get used", name)
-                value = bot.brain.properties.property("default-get")
+            if self.local is True:
+                value = bot.get_conversation(clientid).current_question().predicate(name)
                 if value is None:
-                    logging.error("No value for default-get defined, empty string returned")
-                    value = ""
-            logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
-        else:
-            value = bot.get_conversation(clientid).predicate(name)
-            if value is None:
-                value = bot.brain.predicates.predicate(name)
-                if value is None:
+                    logging.warning("No local var for %s, default-get used", name)
                     value = bot.brain.properties.property("default-get")
                     if value is None:
                         logging.error("No value for default-get defined, empty string returned")
                         value = ""
-            logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+                logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
+            else:
+                value = bot.get_conversation(clientid).predicate(name)
+                if value is None:
+                    value = bot.brain.predicates.predicate(name)
+                    if value is None:
+                        value = bot.brain.properties.property("default-get")
+                        if value is None:
+                            logging.error("No value for default-get defined, empty string returned")
+                            value = ""
+                logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
 
-        return value
+            return value
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[GET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())

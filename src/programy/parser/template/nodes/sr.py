@@ -25,18 +25,22 @@ class TemplateSrNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        sentence = bot.get_conversation(clientid).current_question().current_sentence()
+        try:
+            sentence = bot.get_conversation(clientid).current_question().current_sentence()
 
-        star = sentence.matched_context.star(1)
+            star = sentence.matched_context.star(1)
 
-        if star is not None:
-            resolved = bot.ask_question(clientid, star, srai=True)
-        else:
-            logging.error("Sr node has no stars available")
-            resolved = ""
+            if star is not None:
+                resolved = bot.ask_question(clientid, star, srai=True)
+            else:
+                logging.error("Sr node has no stars available")
+                resolved = ""
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "SR"

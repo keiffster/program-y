@@ -36,11 +36,11 @@ class TemplateRequestNode(TemplateIndexedNode):
             question = conversation.nth_question(nth_question+1)
             sentences = question.combine_sentences()
             resolved = sentences
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
         except Exception as excep:
             logging.exception(excep)
-            resolved = ""
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+            return ""
 
     def to_string(self):
         return "REQUEST Index=%s" % (self.index)

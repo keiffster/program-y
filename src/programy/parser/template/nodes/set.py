@@ -49,30 +49,35 @@ class TemplateSetNode(TemplateNode):
             return ""
 
     def resolve(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
-        value = self.resolve_children(bot, clientid)
+        try:
+            name = self.name.resolve(bot, clientid)
+            value = self.resolve_children(bot, clientid)
 
-        """
-        Todo, if local then set per the conversation
-        If globals
-            If exists in predicates then don't replace
-            If not in predicates then set as global to the conversation
-        """
+            """
+            #TODO, if local then set per the conversation
+            If globals
+                If exists in predicates then don't replace
+                If not in predicates then set as global to the conversation
+            """
 
-        if self.local is True:
-            logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
-            bot.get_conversation(clientid).current_question().set_predicate(name, value)
-        else:
-            if bot.override_predicates is False and bot.brain.properties.has_property(name):
-                logging.error("Global property already exists for name [%s], ignoring set!", name)
-                value = bot.brain.properties.property(name)
+            if self.local is True:
+                logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
+                bot.get_conversation(clientid).current_question().set_predicate(name, value)
             else:
-                if bot.brain.properties.has_property(name):
-                    logging.warning("Global property already exists for name [%s], over writing!", name)
-                logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
-                bot.get_conversation(clientid).set_predicate(name, value)
+                if bot.override_predicates is False and bot.brain.properties.has_property(name):
+                    logging.error("Global property already exists for name [%s], ignoring set!", name)
+                    value = bot.brain.properties.property(name)
+                else:
+                    if bot.brain.properties.has_property(name):
+                        logging.warning("Global property already exists for name [%s], over writing!", name)
+                    logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
+                    bot.get_conversation(clientid).set_predicate(name, value)
 
-        return value
+            logging.debug("[%s] resolved to [%s]", self.to_string(), value)
+            return value
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())

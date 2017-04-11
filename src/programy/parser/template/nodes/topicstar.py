@@ -26,15 +26,16 @@ class TemplateTopicStarNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
-        sentence = bot.get_conversation(clientid).current_question().current_sentence()
-
-        resolved = sentence.matched_context.topicstar(self.index)
-
-        if resolved is None:
-            logging.error("That Star index not in range [%d]" % (self.index))
-            resolved = ""
-
-        return resolved
+        try:
+            sentence = bot.get_conversation(clientid).current_question().current_sentence()
+            resolved = sentence.matched_context.topicstar(self.index)
+            if resolved is None:
+                logging.error("That Star index not in range [%d]" % (self.index))
+                resolved = ""
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "TOPICSTAR Index=%s" % (self.index)

@@ -27,9 +27,13 @@ class TemplateLearnfNode(TemplateLearnNode):
         TemplateLearnNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        new_template = self._create_new_template(bot, clientid)
-        bot.brain.write_learnf_to_file(bot, clientid, new_template._pattern, new_template._topic, new_template._that, new_template._template)
-        return ""
+        try:
+            new_template = self._create_new_template(bot, clientid)
+            bot.brain.write_learnf_to_file(bot, clientid, new_template._pattern, new_template._topic, new_template._that, new_template._template)
+            return ""
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "LEARNF"

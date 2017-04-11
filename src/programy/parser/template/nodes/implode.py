@@ -27,10 +27,14 @@ class TemplateImplodeNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = self.resolve_children_to_string(bot, clientid)
-        resolved = TextUtils.strip_all_whitespace(result)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            result = self.resolve_children_to_string(bot, clientid)
+            resolved = TextUtils.strip_all_whitespace(result)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "IMPLODE"

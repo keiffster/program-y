@@ -27,10 +27,14 @@ class TemplateRandomNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        selection = randint(0, (len(self._children)-1))
-        resolved = self._children[selection - 1].resolve(bot, clientid)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            selection = randint(0, (len(self._children)-1))
+            resolved = self._children[selection - 1].resolve(bot, clientid)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[RANDOM] %d" % (len(self._children))

@@ -25,10 +25,14 @@ class TemplateUppercaseNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        resolved = self.resolve_children_to_string(bot, clientid)
-        resolved = resolved.upper()
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            resolved = self.resolve_children_to_string(bot, clientid)
+            resolved = resolved.upper()
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "UPPERCASE"

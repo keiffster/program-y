@@ -52,14 +52,18 @@ class TemplateType1ConditionNode(TemplateConditionNode):
         self._local = local
 
     def resolve(self, bot, clientid):
-        value = self._get_predicate_value(bot, clientid, self.name, self.local)
-        if value == self.value.resolve(bot, clientid):
-            resolved = " ".join([child.resolve(bot, clientid) for child in self.children])
-        else:
-            resolved = ""
+        try:
+            value = self._get_predicate_value(bot, clientid, self.name, self.local)
+            if value == self.value.resolve(bot, clientid):
+                resolved = " ".join([child.resolve(bot, clientid) for child in self.children])
+            else:
+                resolved = ""
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[CONDITION1(%s=%s)]" % (self.name, self.value)

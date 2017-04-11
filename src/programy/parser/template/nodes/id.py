@@ -25,8 +25,12 @@ class TemplateIdNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
-        return clientid
+        try:
+            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
+            return clientid
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "ID"

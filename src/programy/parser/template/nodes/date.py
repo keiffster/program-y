@@ -39,10 +39,14 @@ class TemplateDateNode(TemplateAttribNode):
         self._format = format
 
     def resolve(self, bot, clientid):
-        time_now = datetime.datetime.now()
-        resolved = time_now.strftime(self._format).upper()
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            time_now = datetime.datetime.now()
+            resolved = time_now.strftime(self._format).upper()
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "DATE format=%s" % (self._format)

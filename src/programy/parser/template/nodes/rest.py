@@ -26,14 +26,18 @@ class TemplateRestNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = self.resolve_children_to_string(bot, clientid)
-        words = result.split(" ")
-        if len(words) > 1:
-            resolved = " ".join(words[1:])
-        else:
-            resolved = "NIL"
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            result = self.resolve_children_to_string(bot, clientid)
+            words = result.split(" ")
+            if len(words) > 1:
+                resolved = " ".join(words[1:])
+            else:
+                resolved = "NIL"
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "REST"

@@ -30,11 +30,15 @@ class TemplateInputNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, position, index)
 
     def resolve(self, bot, clientid):
-        conversation = bot.get_conversation(clientid)
-        sentence = conversation.nth_sentence(self.index)
-        resolved = sentence
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            conversation = bot.get_conversation(clientid)
+            sentence = conversation.nth_sentence(self.index)
+            resolved = sentence
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "INPUT Index=%s" % (self.index)

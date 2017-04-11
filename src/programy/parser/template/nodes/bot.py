@@ -32,15 +32,19 @@ class TemplateBotNode(TemplateNode):
         self._name = name
 
     def resolve(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
-        value = bot.brain.properties.property(name)
-        if value is None:
-            value = bot.brain.properties.property("default-property")
+        try:
+            name = self.name.resolve(bot, clientid)
+            value = bot.brain.properties.property(name)
             if value is None:
-                value = ""
+                value = bot.brain.properties.property("default-property")
+                if value is None:
+                    value = ""
 
-        logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-        return value
+            logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+            return value
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[BOT (%s)]" % (self.name.to_string())

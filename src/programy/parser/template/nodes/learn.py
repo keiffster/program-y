@@ -130,8 +130,12 @@ class TemplateLearnNode(TemplateNode):
         return NewTemplate(new_pattern, new_topic, new_that, new_template)
 
     def resolve(self, bot, clientid):
-        self._create_new_template(bot, clientid)
-        return ""
+        try:
+            self._create_new_template(bot, clientid)
+            return ""
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "LEARN"

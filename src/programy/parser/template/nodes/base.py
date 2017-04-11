@@ -17,8 +17,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import xml.etree.ElementTree as ET
 
-# TODO wrap every resolve method in try/catch and return "" if error
-
 ######################################################################################################################
 #
 class TemplateNode(object):
@@ -48,9 +46,13 @@ class TemplateNode(object):
         return (" ".join([child.resolve(bot, clientid) for child in self._children])).strip()
 
     def resolve(self, bot, clientid):
-        resolved = self.resolve_children_to_string(bot, clientid)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            resolved = self.resolve_children_to_string(bot, clientid)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[NODE]"

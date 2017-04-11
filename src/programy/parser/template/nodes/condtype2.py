@@ -27,34 +27,37 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
         self.local = local
 
     def resolve(self, bot, clientid):
+        try:
+            value = self._get_predicate_value(bot, clientid, self.name, self.local)
 
-        value = self._get_predicate_value(bot, clientid, self.name, self.local)
+            for condition in self.children:
+                if condition.is_default() is False:
+                    condition_value = condition.value.resolve(bot, clientid)
+                    #print("Value [%s] =?= [%s]" % (value, condition_value.strip()))
+                    if value == condition_value:
+                        resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
-        for condition in self.children:
-            if condition.is_default() is False:
-                condition_value = condition.value.resolve(bot, clientid)
-                #print("Value [%s] =?= [%s]" % (value, condition_value.strip()))
-                if value == condition_value:
-                    resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
-                    logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+                        if condition.loop is True:
+                            resolved = resolved.strip() + " " + self.resolve(bot, clientid)
 
-                    if condition.loop is True:
-                        resolved = resolved.strip() + " " + self.resolve(bot, clientid)
+                        return resolved
 
-                    return resolved
+            default = self.get_default()
+            if default is not None:
+                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
 
-        default = self.get_default()
-        if default is not None:
-            resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
+                if default.loop is True:
+                    resolved = resolved.strip() + " " + self.resolve(bot, clientid)
+            else:
+                resolved = ""
 
-            if default.loop is True:
-                resolved = resolved.strip() + " " + self.resolve(bot, clientid)
-        else:
-            resolved = ""
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-
-        return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[CONDITION2(%s)]" % self.name

@@ -44,35 +44,39 @@ class TemplateMapNode(TemplateNode):
             return ""
 
     def resolve(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
-        var = self.resolve_children(bot, clientid)
+        try:
+            name = self.name.resolve(bot, clientid)
+            var = self.resolve_children(bot, clientid)
 
-        internal = False
-        for map in self._internal_maps:
-            if map.get_name() == name:
-                value = map.map(var)
-                internal = True
+            internal = False
+            for map in self._internal_maps:
+                if map.get_name() == name:
+                    value = map.map(var)
+                    internal = True
 
-        if internal is False:
-            the_map = bot.brain.maps.map(name)
-            if the_map is None:
-                logging.error("No map defined for [%s], using default-map" % name)
-                value = bot.brain.properties.property("default-map")
-                if value is None:
-                    logging.error("No value for default-map defined, empty string returned")
-                    value = ""
-            else:
-                if var in the_map:
-                    value = the_map[var]
-                else:
-                    logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))
+            if internal is False:
+                the_map = bot.brain.maps.map(name)
+                if the_map is None:
+                    logging.error("No map defined for [%s], using default-map" % name)
                     value = bot.brain.properties.property("default-map")
                     if value is None:
                         logging.error("No value for default-map defined, empty string returned")
                         value = ""
+                else:
+                    if var in the_map:
+                        value = the_map[var]
+                    else:
+                        logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))
+                        value = bot.brain.properties.property("default-map")
+                        if value is None:
+                            logging.error("No value for default-map defined, empty string returned")
+                            value = ""
 
-        logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-        return value
+            logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+            return value
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "[MAP (%s)]" % (self.name.to_string())

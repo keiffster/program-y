@@ -24,21 +24,25 @@ class TemplateProgramNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        fullname = "AIMLBot"
-        if bot.brain.properties.has_property("fullname") is True:
-            fullname = bot.brain.properties.property("fullname")
-        else:
-            logging.error("Fullname property missing")
+        try:
+            fullname = "AIMLBot"
+            if bot.brain.properties.has_property("fullname") is True:
+                fullname = bot.brain.properties.property("fullname")
+            else:
+                logging.error("Fullname property missing")
 
-        version = ""
-        if bot.brain.properties.has_property("version") is True:
-            version = bot.brain.properties.property("version")
-        else:
-            logging.error("Version property missing")
+            version = ""
+            if bot.brain.properties.has_property("version") is True:
+                version = bot.brain.properties.property("version")
+            else:
+                logging.error("Version property missing")
 
-        resolved = "%s %s" % (fullname, version)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+            resolved = "%s %s" % (fullname, version)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "PROGRAM"

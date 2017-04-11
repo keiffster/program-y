@@ -50,9 +50,7 @@ class TemplateExtensionNode(TemplateNode):
 
         except Exception as excep:
             logging.exception(excep)
-            logging.error("Extension [%s] failed to execute", self._path)
-
-        return ""
+            return ""
 
     def to_string(self):
         return "EXTENSION (%s)" % self._path

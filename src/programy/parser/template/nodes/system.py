@@ -38,20 +38,24 @@ class TemplateSystemNode(TemplateAttribNode):
         self._timeout = timeout
 
     def resolve(self, bot, clientid):
-        if bot.brain.configuration.allow_system_aiml is True:
-            command = self.resolve_children_to_string(bot, clientid)
-            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-            result = []
-            for line in process.stdout.readlines():
-                byte_string = line.decode("utf-8")
-                result.append(byte_string.strip())
-            process.wait()
-            resolved = " ".join(result)
-        else:
-            logging.warning("System command node disabled in config")
-            resolved = ""
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            if bot.brain.configuration.allow_system_aiml is True:
+                command = self.resolve_children_to_string(bot, clientid)
+                process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                result = []
+                for line in process.stdout.readlines():
+                    byte_string = line.decode("utf-8")
+                    result.append(byte_string.strip())
+                process.wait()
+                resolved = " ".join(result)
+            else:
+                logging.warning("System command node disabled in config")
+                resolved = ""
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "SYSTEM timeout=%s" % (self._timeout)

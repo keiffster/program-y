@@ -24,8 +24,12 @@ class TemplateFormalNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        result = self.resolve_children_to_string(bot, clientid)
-        return result.title()
+        try:
+            result = self.resolve_children_to_string(bot, clientid)
+            return result.title()
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "FORMAL"

@@ -25,11 +25,15 @@ class TemplateVocabularyNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        set_words = bot.brain.sets.count_words_in_sets()
-        pattern_words = bot.brain.aiml_parser.pattern_parser.count_words_in_patterns()
-        resolved = "%d" % (set_words + pattern_words)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        return resolved
+        try:
+            set_words = bot.brain.sets.count_words_in_sets()
+            pattern_words = bot.brain.aiml_parser.pattern_parser.count_words_in_patterns()
+            resolved = "%d" % (set_words + pattern_words)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+        except Exception as excep:
+            logging.exception(excep)
+            return ""
 
     def to_string(self):
         return "VOCABULARY"
