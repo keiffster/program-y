@@ -63,7 +63,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
                 keys.append(child.tag)
         return keys
 
-    def get_option(self, option_name, section, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None):
         child = section.find(option_name)
         if child is not None:
             return self._infer_type_from_string(child.text)

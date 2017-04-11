@@ -54,14 +54,14 @@ class YamlConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section[section_name].keys()
 
-    def get_option(self, option_name, section, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None):
         if option_name in section:
             return section[option_name]
         else:
             logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
             return missing_value
 
-    def get_bool_option(self, option_name, section, missing_value=False):
+    def get_bool_option(self, section, option_name, missing_value=False):
         if option_name in section:
             value = section[option_name]
             if isinstance(value, bool):
@@ -72,7 +72,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
             return missing_value
 
-    def get_int_option(self, option_name, section, missing_value=0):
+    def get_int_option(self, section, option_name, missing_value=0):
         if option_name in section:
             value = section[option_name]
             if isinstance(value, int):

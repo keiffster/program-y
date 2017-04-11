@@ -15,8 +15,6 @@ class LineNumberingParserTests(unittest.TestCase):
         self.assertEqual(22, raised.exception.position[0])
         self.assertEqual(10, raised.exception.position[1])
 
-    # TODO Work out why this fails ?
-    """
     def test_working_xml(self):
         tree = ET.parse(os.path.dirname(__file__)+"/working.xml", parser=LineNumberingParser())
         aiml = tree.getroot()
@@ -27,4 +25,3 @@ class LineNumberingParserTests(unittest.TestCase):
         self.assertEqual(1, len(patterns))
         self.assertEqual(26, patterns[0]._end_line_number)
         self.assertEqual(4, patterns[0]._end_column_number)
-    """

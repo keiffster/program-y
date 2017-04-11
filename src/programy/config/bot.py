@@ -40,11 +40,11 @@ class BotConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         bot = config_file.get_section(self.section_name)
         if bot is not None:
-            self._prompt = config_file.get_option("prompt", bot, BotConfiguration.DEFAULT_PROMPT)
-            self._default_response = config_file.get_option("default_response", bot, BotConfiguration.DEFAULT_RESPONSE)
-            self._exit_response = config_file.get_option("exit_response", bot, BotConfiguration.DEFAULT_EXIT_RESPONSE)
-            self._initial_question = config_file.get_option("initial_question", bot, BotConfiguration.DEFAULT_INITIAL_QUESTION)
-            self._override_predicates = config_file.get_option("override_predicates", bot, BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
+            self._prompt = config_file.get_option(bot, "prompt", BotConfiguration.DEFAULT_PROMPT)
+            self._default_response = config_file.get_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
+            self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
+            self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
+            self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
         else:
             logging.warning("Config section [%s] missing, using default values", self.section_name)
             self.bot_root               = BotConfiguration.DEFAULT_ROOT

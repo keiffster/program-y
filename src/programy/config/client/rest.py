@@ -46,10 +46,10 @@ class RestConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         rest = config_file.get_section(self.section_name)
         if rest is not None:
-            self._host = config_file.get_option("host", rest)
-            self._port = config_file.get_option("port", rest)
-            self._debug = config_file.get_bool_option("debug", rest)
-            self._use_api_keys = config_file.get_bool_option("use_api_keys", rest)
+            self._host = config_file.get_option(rest, "host")
+            self._port = config_file.get_option(rest, "port")
+            self._debug = config_file.get_bool_option(rest, "debug")
+            self._use_api_keys = config_file.get_bool_option(rest, "use_api_keys")
 
 class RestClientConfiguration(ClientConfiguration):
 

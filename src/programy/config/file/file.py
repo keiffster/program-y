@@ -54,8 +54,7 @@ class BaseConfigurationFile(object):
         """
 
     @abstractmethod
-    #TODO option_name and section are the wrong way round to other function calls
-    def get_option(self, option_name, section, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None):
         """
         Never Implemented
         """

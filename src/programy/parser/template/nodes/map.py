@@ -27,7 +27,6 @@ class TemplateMapNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._name = None
-        # TODO Load this from configuration file
         self._internal_maps = [PluralMap(), SingularMap(), PredecessorMap(), SuccessorMap()]
 
     @property

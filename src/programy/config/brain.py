@@ -98,27 +98,27 @@ class BrainConfiguration(BaseConfigurationData):
         BaseConfigurationData.__init__(self, "brain")
 
     def _get_file_option(self, config_file, option_name, section, bot_root):
-        option = config_file.get_option(option_name, section)
+        option = config_file.get_option(section, option_name)
         if option is not None:
             option = self.sub_bot_root(option, bot_root)
         return option
 
     def _get_brain_file_configuration(self, config_file, section, bot_root):
-        files = config_file.get_option("files", section)
+        files = config_file.get_option(section, "files")
         files = self.sub_bot_root(files, bot_root)
-        extension = config_file.get_option("extension", section)
-        directories = config_file.get_option("directories", section)
+        extension = config_file.get_option(section, "extension")
+        directories = config_file.get_option(section, "directories")
         return BrainFileConfiguration(files, extension, directories)
 
     def load_config_section(self, config_file, bot_root):
 
         brain = config_file.get_section(self.section_name)
         if brain is not None:
-            self._supress_warnings = config_file.get_option("supress_warnings", brain, BrainConfiguration.DEFAULT_SUPRESS_WARNINGS)
-            self._allow_system_aiml = config_file.get_option("allow_system_aiml", brain, BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML)
-            self._allow_learn_aiml = config_file.get_option("allow_learn_aiml", brain, BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML)
-            self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain, BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
-            self._allow_learnf_aiml = config_file.get_option("allow_learnf_aiml", brain, BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
+            self._supress_warnings = config_file.get_option(brain, "supress_warnings", BrainConfiguration.DEFAULT_SUPRESS_WARNINGS)
+            self._allow_system_aiml = config_file.get_option(brain, "allow_system_aiml", BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML)
+            self._allow_learn_aiml = config_file.get_option(brain, "allow_learn_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML)
+            self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
+            self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
 
             files = config_file.get_section("files", brain)
             if files is not None:

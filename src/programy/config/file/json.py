@@ -51,7 +51,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section[section_name].keys()
 
-    def get_option(self, option_name, section, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None):
         if option_name in section:
             return section[option_name]
         else:

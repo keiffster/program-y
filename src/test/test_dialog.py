@@ -6,8 +6,6 @@ from programy.brain import Brain
 from programy.config.brain import BrainConfiguration
 from programy.config.bot import BotConfiguration
 
-#TODO dialog needs proper unit testing
-
 #############################################################################
 #
 class SentenceTests(unittest.TestCase):
