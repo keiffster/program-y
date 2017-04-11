@@ -1,13 +1,11 @@
 
-from test.parser.pattern.test_matching.base import PatternMatcherBaseClass
+from test.parser.pattern.matching.base import PatternMatcherBaseClass
 
 class PatternMatcherTests(PatternMatcherBaseClass):
 
     def test_hash_tree_matching_empty(self):
 
         self.add_pattern_to_graph(pattern="#", topic="X", that="Y", template="1")
-
-        self.dump_graph()
 
         context = self.match_sentence("A", topic="X", that="Y")
         self.assertIsNotNone(context)
@@ -19,8 +17,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
     def test_hash_tree_matching_single(self):
 
         self.add_pattern_to_graph(pattern="# A", topic="X", that="Y", template="1")
-
-        self.dump_graph()
 
         context = self.match_sentence("B A", topic="X", that="Y")
         self.assertIsNotNone(context)
@@ -40,8 +36,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         self.add_pattern_to_graph(pattern="# C D", topic="X", that="Y", template="1")
 
-        self.dump_graph()
-
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
         self.assertIsNotNone(context.template_node())
@@ -60,8 +54,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         self.add_pattern_to_graph(pattern="A # D", topic="X", that="Y", template="1")
 
-        self.dump_graph()
-
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
         self.assertIsNotNone(context.template_node())
@@ -79,8 +71,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
     def test_hash_tree_matching_end(self):
 
         self.add_pattern_to_graph(pattern="A B #", topic="X", that="Y", template="1")
-
-        self.dump_graph()
 
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
@@ -101,8 +91,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
         self.add_pattern_to_graph(pattern="# F G", topic="*", that="*", template="2")
         self.add_pattern_to_graph(pattern="# A B #", topic="*", that="*", template="1")
 
-        self.dump_graph()
-
         context = self.match_sentence("F A B G", topic="X", that="Y")
         self.assertIsNotNone(context)
         self.assertIsNotNone(context.template_node())
@@ -115,8 +103,6 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         self.add_pattern_to_graph(pattern="A # B # C", topic="X", that="Z", template="1")
         self.add_pattern_to_graph(pattern="A # B # C", topic="X", that="Y", template="1")
-
-        self.dump_graph()
 
         context = self.match_sentence("A X1 X2 X3 X4 B Y1 Y2 Y3 Y4 C", topic="X", that="Y")
 

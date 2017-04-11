@@ -25,6 +25,7 @@ from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
@@ -72,6 +73,8 @@ class PatternGraph(object):
                 return PatternBotNode(element.attrib['name'])
             else:
                 return PatternBotNode(TextUtils.strip_whitespace(element.text))
+        elif element.tag == 'iset':
+            return PatternISetNode(element.text)
         else:
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 

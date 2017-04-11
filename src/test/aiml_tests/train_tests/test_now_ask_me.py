@@ -22,5 +22,4 @@ class TrainAIMLTests(unittest.TestCase):
         TrainAIMLTests.test_client.bot.brain.dump_tree()
         response = TrainAIMLTests.test_client.bot.ask_question("test", "daddy is great")
         self.assertIsNotNone(response)
-        #TODO Sort out space in questions
         self.assertEqual('Now you can ask me: "Who IS GREAT"? and "What does my DADDY BE"?', response)

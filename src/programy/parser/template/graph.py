@@ -66,7 +66,7 @@ from programy.parser.template.nodes.learn import TemplateLearnNode
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
 from programy.parser.template.nodes.first import TemplateFirstNode
 from programy.parser.template.nodes.rest import TemplateRestNode
-
+from programy.parser.template.nodes.log import TemplateLogNode
 
 class TemplateGraph(object):
 
@@ -226,6 +226,9 @@ class TemplateGraph(object):
         # This is tag not AIML 2.0 compliant
         elif expression.tag == 'extension':
             self.parse_extension_expression(expression, branch)
+        # This is tag not AIML 2.0 compliant
+        elif expression.tag == 'log':
+            self.parse_log_expression(expression, branch)
 
         else:
             self.parse_unknown_as_text_node(expression, branch)
@@ -1081,10 +1084,14 @@ class TemplateGraph(object):
             tail_text = self.get_tail_from_element(child)
             self.parse_text(tail_text, extension_node)
 
+    #######################################################################################################
+    # EXTENSION_EXPRESSION ::== <log>Message</log>
+    #                           <log level="error|warning|debug|info">Message</log>
+    #
 
-    #
-    # WARNING - Not sure I'll even implement this at this time
-    #
+    def parse_log_expression(self, expression, branch):
+        self._parse_node_with_attrib(TemplateLogNode(), expression, branch, "level", "debug")
+
     #######################################################################################################
     # EVAL_EXPRESSION ::== <eval>TEMPLATE_EXPRESSION</eval>
     #

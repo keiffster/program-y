@@ -53,7 +53,6 @@ class TrainAIMLTests(unittest.TestCase):
         response = TrainAIMLTests.test_client.bot.ask_question("test", "mommy likes to smoke cigars")
         self.assertIsNotNone(response)
 
-        #TODO Fix the spacing in quotes
         self.assertEqual('Now you can ask me: "Who LIKES TO SMOKE CIGARS"? and "What does my MOMMY LIKE"?', response)
 
         response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")

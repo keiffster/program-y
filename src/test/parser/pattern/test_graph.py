@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-from test.parser.pattern.test_nodes.base import PatternTestBaseClass
+from test.parser.pattern.nodes.base import PatternTestBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.graph import PatternGraph

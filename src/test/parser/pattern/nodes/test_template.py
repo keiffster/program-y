@@ -1,4 +1,4 @@
-from test.parser.pattern.test_nodes.base import PatternTestBaseClass
+from test.parser.pattern.nodes.base import PatternTestBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
@@ -18,6 +18,13 @@ class PatternTemplateNodeTests(PatternTestBaseClass):
         self.assertFalse(node.is_wildcard())
         self.assertFalse(node.is_zero_or_more())
         self.assertFalse(node.is_one_or_more())
+        self.assertFalse(node.is_set())
+        self.assertFalse(node.is_bot())
+        self.assertTrue(node.is_template())
+        self.assertFalse(node.is_that())
+        self.assertFalse(node.is_topic())
+        self.assertFalse(node.is_wildcard())
+
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 

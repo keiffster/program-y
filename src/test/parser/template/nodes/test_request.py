@@ -23,10 +23,15 @@ class TemplateRequestNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         conversation = Conversation("testid", self.bot)
+        self.bot._conversations["testid"] = conversation
+
         question = Question.create_from_text("Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation._questions.append(question)
-        self.bot._conversations["testid"] = conversation
+
+        question = Question.create_from_text("What did you say")
+        question.current_sentence()._response = "Hello matey"
+        conversation._questions.append(question)
 
         response = root.resolve(self.bot, "testid")
         self.assertIsNotNone(response)

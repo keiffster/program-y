@@ -7,6 +7,8 @@ from programy.parser.template.nodes.word import TemplateWordNode
 from test.parser.template.base import TemplateTestsBaseClass
 
 
+#TODO These tests are meaningless, the node is not tested for a learnf syntac
+
 class TemplateLearnNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):

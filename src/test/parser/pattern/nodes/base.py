@@ -8,6 +8,9 @@ class TestProperties:
     def __init__(self):
         self._properties = {}
 
+    def set_property(self, name, value):
+        self._properties[name] = value
+
     def has_property(self, name):
         if name in self._properties:
             return True
@@ -21,6 +24,9 @@ class TestSet:
 
     def __init__(self):
         self._sets = {}
+
+    def add_set(self, name, values):
+        self._sets[name] = values
 
     def contains(self, name):
         if name in self._sets:

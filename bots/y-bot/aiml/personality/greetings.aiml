@@ -20,13 +20,16 @@
     -->
 
     <category>
-        <pattern># HELLO *</pattern><template><srai>HELLO</srai></template>
+        <pattern>HELLO #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
-        <pattern># HI #</pattern><template><srai>HELLO</srai></template>
+        <pattern>* HELLO #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
-        <pattern># YO #</pattern><template><srai>HELLO</srai></template>
+        <pattern>* HI #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>* YO #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
         <pattern>HEY #</pattern><template><srai>HELLO</srai></template>

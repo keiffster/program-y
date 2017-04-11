@@ -46,7 +46,7 @@
             # WHAT # DAY #
         </pattern>
         <template>
-            It is <srai>DAY</srai>
+            <srai>DAY</srai>
         </template>
     </category>
 
@@ -55,7 +55,7 @@
             # WHICH # DAY #
         </pattern>
         <template>
-            It is <srai>DAY</srai>
+            <srai>DAY</srai>
         </template>
     </category>
 
@@ -82,7 +82,7 @@
             # WHAT # DAY # TOMORROW
         </pattern>
         <template>
-            It is <srai>TOMORROW</srai>
+            It will be <srai>TOMORROW</srai>
         </template>
     </category>
 
@@ -91,7 +91,7 @@
             # WHAT IS TOMORROW
         </pattern>
         <template>
-            It is <srai>TOMORROW</srai>
+            It will be <srai>TOMORROW</srai>
         </template>
     </category>
 
@@ -100,7 +100,7 @@
             # WHICH # DAY # TOMORROW
         </pattern>
         <template>
-            It is <srai>TOMORROW</srai>
+            It will be <srai>TOMORROW</srai>
         </template>
     </category>
 
@@ -119,6 +119,33 @@
         </pattern>
         <template>
             <srai>YEAR</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # TODAYS DATE #
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # DATE #
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # TIME #
+        </pattern>
+        <template>
+            <srai>TIME</srai>
         </template>
     </category>
 

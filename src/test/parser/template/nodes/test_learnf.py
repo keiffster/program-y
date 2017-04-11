@@ -7,7 +7,7 @@ from programy.config.brain import BrainFileConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 
-
+#TODO These tests are meaningless, the node is not tested for a learnf syntac
 class TemplateLearnfNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):

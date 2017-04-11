@@ -1,4 +1,4 @@
-from test.parser.pattern.test_nodes.base import PatternTestBaseClass
+from test.parser.pattern.nodes.base import PatternTestBaseClass
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
@@ -9,11 +9,19 @@ class PatternNodeTests(PatternTestBaseClass):
     def test_init(self):
         node = PatternNode()
         self.assertIsNotNone(node)
+
         self.assertFalse(node.is_root())
         self.assertFalse(node.is_priority())
         self.assertFalse(node.is_wildcard())
         self.assertFalse(node.is_zero_or_more())
         self.assertFalse(node.is_one_or_more())
+        self.assertFalse(node.is_set())
+        self.assertFalse(node.is_bot())
+        self.assertFalse(node.is_template())
+        self.assertFalse(node.is_that())
+        self.assertFalse(node.is_topic())
+        self.assertFalse(node.is_wildcard())
+
         self.assertFalse(node.has_children())
         self.assertIsNotNone(node.children)
 
@@ -25,8 +33,8 @@ class PatternNodeTests(PatternTestBaseClass):
         self.assertEqual(node.to_string(), "NODE [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)]")
 
     def test_add_child(self):
-
         node = PatternNode()
+        self.assertIsNotNone(node)
 
         priority_word1 = PatternPriorityWordNode("pword")
         priority_word2 = PatternPriorityWordNode("pword")

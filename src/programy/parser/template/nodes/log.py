@@ -16,49 +16,57 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.utils.services.service import ServiceFactory
+
+from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes.atttrib import TemplateAttribNode
 
 
-class TemplateSRAIXNode(TemplateNode):
+
+class TemplateLogNode(TemplateAttribNode):
 
     def __init__(self):
-        TemplateNode.__init__(self)
-        self._service = None
+        TemplateAttribNode.__init__(self)
+        self._level = "debug"
 
     @property
-    def service(self):
-        return self._service
+    def level(self):
+        return self._level
 
-    @service.setter
-    def service(self, service):
-        self._service = service
+    @level.setter
+    def level(self, level):
+        self._level = level
 
     def resolve(self, bot, clientid):
         resolved = self.resolve_children_to_string(bot, clientid)
         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        response = ""
-        try:
-            if self._service is not None:
-                #TODO This seems to be an issue
-                bot_service = ServiceFactory.get_service(self._service)
-                response = bot_service.ask_question(bot, clientid, resolved)
-                logging.debug("SRAIX service [%s] return [%s]", self._service, response)
-            else:
-                logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
-        except Exception as excep:
-            logging.error("SRAIX service [%s] failed with error [%s]", self._service, str(excep))
-        return response
+        if self._level == "debug":
+            logging.debug(resolved)
+        elif self._level == "warning":
+            logging.warning(resolved)
+        elif self._level == "error":
+            logging.error(resolved)
+        elif self._level == "info":
+            logging.info(resolved)
+        else:
+            logging.info(resolved)
+        return ""
 
     def to_string(self):
-        return "SRAIX (service=%s)" % (self._service)
+        return "LOG level=%s" % (self._level)
+
+    def set_attrib(self, attrib_name, attrib_value):
+        if attrib_name != 'level':
+            raise ParserException("Invalid attribute name %s for this node", attrib_name)
+        if attrib_value not in ['debug', 'info', 'warning', 'error']:
+            raise ParserException("Invalid attribute value %s for this node %s", attrib_value. attrib_name)
+        self._level = attrib_value
 
     def to_xml(self, bot, clientid):
-        xml = '<sraix'
-        if self._service is not None:
-            xml += ' service="%s"' % self.service
-        xml += '>'
+        xml = "<log"
+        if self._level is not None:
+            xml += ' level="%s"' % self._level
+        xml += ">"
         for child in self.children:
             xml += child.to_xml(bot, clientid)
-        xml += '</sraix>'
+        xml += "</log>"
         return xml

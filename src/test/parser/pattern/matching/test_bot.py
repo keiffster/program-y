@@ -1,5 +1,5 @@
 
-from test.parser.pattern.test_matching.base import PatternMatcherBaseClass
+from test.parser.pattern.matching.base import PatternMatcherBaseClass
 
 class PatternMatcherBotTests(PatternMatcherBaseClass):
 
@@ -8,8 +8,6 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
         PatternMatcherBaseClass.bot.brain.properties._properties['firstname'] = 'testbot'
 
         self.add_pattern_to_graph(pattern="<bot>firstname</bot>", topic="X", that="Y", template="1")
-
-        self.dump_graph()
 
         context = self.match_sentence("testbot", topic="X", that="Y")
         self.assertIsNotNone(context)

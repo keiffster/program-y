@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from utils.weather.metoffice import MetOffice, DailyForecastDayDataPoint, DailyForecastNightDataPoint, ThreeHourlyForecastDataPoint, ObservationDataPoint
+from programy.utils.weather.metoffice import MetOffice, DailyForecastDayDataPoint, DailyForecastNightDataPoint, ThreeHourlyForecastDataPoint, ObservationDataPoint
 from programy.utils.text.dateformat import DateFormatter
 from programy.utils.license.keys import LicenseKeys
 
