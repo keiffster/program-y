@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import os
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
@@ -7,10 +8,13 @@ from programy.config.brain import BrainFileConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 
-#TODO These tests are meaningless, the node is not tested for a learnf syntac
 class TemplateLearnfNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
+
+        if os.path.exists('/tmp/leanf.aiml'):
+            os.remove('/tmp/leanf.aiml')
+
         root = TemplateNode()
         self.assertIsNotNone(root)
 
@@ -25,10 +29,11 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         self.assertEqual(1, len(root.children))
 
         self.bot.brain._configuration._aiml_files = BrainFileConfiguration("/tmp", ".aiml", False)
-
         resolved = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
+
+        self.assertTrue(os.path.exists('/tmp/learnf.aiml'))
 
     def test_to_xml(self):
         root = TemplateNode()

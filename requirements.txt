@@ -10,3 +10,4 @@ pylint
 nose
 coverage
 pyyaml
+tweepy

@@ -81,7 +81,4 @@ class TemplateNodeMixedTests(TemplateTestsBaseClass):
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Hello Test1 World!", "Hello Test2 World!", "Hello Test3 World!"])
 
-    def test_to_xml(self):
-        # TODO Add unit testing here
-        pass
 

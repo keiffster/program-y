@@ -136,12 +136,12 @@
                 <li>
                     <condition var="hour">
                         <li value="12">Noon</li>
-                        <li value="1">Afternoon</li>
-                        <li value="2">Afternoon</li>
-                        <li value="3">Afternoon</li>
-                        <li value="4">Afternoon</li>
-                        <li value="5">Afternoon</li>
-                        <li value="6">Afternoon</li>
+                        <li value="01">Afternoon</li>
+                        <li value="02">Afternoon</li>
+                        <li value="03">Afternoon</li>
+                        <li value="04">Afternoon</li>
+                        <li value="05">Afternoon</li>
+                        <li value="06">Afternoon</li>
                         <li>Night</li>
                     </condition>
                 </li>

@@ -28,6 +28,7 @@ class PannousService(Service):
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
+            # TODO possibly move this into license.keys
             login = self._config.parameter('login')
 
             payload = {'input': question, 'login': login}

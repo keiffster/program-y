@@ -29,6 +29,7 @@ class PandoraService(Service):
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
+            # TODO move this into license.keys
             botid = self._config.parameter('botid')
 
             payload = {'botid': botid, 'input': question}

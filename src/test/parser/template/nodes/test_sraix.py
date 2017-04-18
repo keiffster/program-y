@@ -26,8 +26,6 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        #TODO Better unit testing of external service calls required
-
     def test_to_xml(self):
         root = TemplateNode()
 

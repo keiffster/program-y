@@ -56,3 +56,14 @@ rest:
   host: 127.0.0.1
   port: 5000
   debug: false
+
+twitter:
+  username: @programybot
+  polling: true
+  polling_interval: 59
+  streaming: false
+  use_status: true
+  use_direct_message: true
+  auto_follow: true
+  storage: file
+  storage_location: $BOT_ROOT/storage/twitter.data

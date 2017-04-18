@@ -26,6 +26,9 @@
         <pattern>* HELLO #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
+        <pattern>* HIYA #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
         <pattern>* HI #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
@@ -35,6 +38,9 @@
         <pattern>HEY #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
+        <pattern>MORNING</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
         <pattern>GOOD MORNING</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
@@ -42,6 +48,9 @@
     </category>
     <category>
         <pattern>GOOD EVENING</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>EVENING</pattern><template><srai>HELLO</srai></template>
     </category>
 
     <category>
@@ -53,6 +62,17 @@
                 <li>Hello!</li>
                 <li>Hi there!</li>
                 <li>Greetings!</li>
+                <li>Hiya!</li>
+                <li>
+                    <think><set name="dayphase"><srai>DAY PHASE</srai></set></think>
+                    <condition name="dayphase">
+                        <li value="Morning">Good morning.</li>
+                        <li value="Noon">Good afternoon.</li>
+                        <li value="Afternoon">Good afternoon.</li>
+                        <li value="Night">Good evening.</li>
+                        <li>Hello!</li>
+                    </condition>
+                </li>
             </random>
         </template>
     </category>

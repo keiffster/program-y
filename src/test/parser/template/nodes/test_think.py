@@ -21,8 +21,6 @@ class TemplateThinkNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-    # TODO More unit tests for different variations here please
-
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateThinkNode()
