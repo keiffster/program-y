@@ -21,7 +21,6 @@ from programy.config.client.client import ClientConfiguration
 class TwitterConfiguration(BaseConfigurationData):
 
     def __init__(self):
-        self._username = None
         self._polling = False
         self._polling_interval = 0
         self._streaming = False
@@ -31,10 +30,6 @@ class TwitterConfiguration(BaseConfigurationData):
         self._storage = None
         self._storage_location = None
         BaseConfigurationData.__init__(self, "twitter")
-
-    @property
-    def username(self):
-        return self._username
 
     @property
     def polling(self):
@@ -71,7 +66,6 @@ class TwitterConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         twitter = config_file.get_section(self.section_name)
         if twitter is not None:
-            self._username = config_file.get_option(twitter, "username")
             self._polling = config_file.get_bool_option(twitter, "polling")
             if self._polling is True:
                 self._polling_interval = config_file.get_int_option(twitter, "polling_interval")
@@ -99,4 +93,3 @@ class TwitterClientConfiguration(ClientConfiguration):
     def load_config_data(self, config_file, bot_root):
         super(TwitterClientConfiguration, self).load_config_data(config_file, bot_root)
         self._twitter_config.load_config_section(config_file, bot_root)
-        print("Hello")

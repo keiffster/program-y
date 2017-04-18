@@ -67,3 +67,9 @@ twitter:
   auto_follow: true
   storage: file
   storage_location: $BOT_ROOT/storage/twitter.data
+
+facebook:
+  username: me@keithsterling.com
+  polling: true
+  polling_interval: 30
+  streaming: false
