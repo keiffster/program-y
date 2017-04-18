@@ -71,24 +71,20 @@ class TwitterConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         twitter = config_file.get_section(self.section_name)
         if twitter is not None:
-            self._host = config_file.get_option(twitter, "host")
-            self._port = config_file.get_option(twitter, "port")
-            self._debug = config_file.get_bool_option(twitter, "debug")
-            self._use_api_keys = config_file.get_bool_option(twitter, "use_api_keys")
+            self._username = config_file.get_option(twitter, "username")
+            self._polling = config_file.get_bool_option(twitter, "polling")
+            if self._polling is True:
+                self._polling_interval = config_file.get_int_option(twitter, "polling_interval")
+            self._streaming = config_file.get_bool_option(twitter, "streaming")
+            self._use_status = config_file.get_bool_option(twitter, "use_status")
+            self._use_direct_message = config_file.get_bool_option(twitter, "use_direct_message")
+            if self._use_direct_message is True:
+                self._auto_follow = config_file.get_bool_option(twitter, "auto_follow")
 
-        self._username = config_file.get_option(twitter, "username")
-        self._polling = config_file.get_int_option(twitter, "polling")
-        if self._polling is True:
-            self._polling_interval = config_file.get_integer_option(twitter, "polling_interval")
-        self._streaming = config_file.get_bool_option(twitter, "streaming")
-        self._use_status = config_file.get_bool_option(twitter, "status")
-        self._use_direct_message = config_file.get_bool_option(twitter, "use_direct_message")
-        if self._use_direct_message is True:
-            self._auto_follow = config_file.get_bool_option(twitter, "auto_follow")
-
-        self._storage = config_file.get_option(twitter, "storage")
-        if self._storage is 'file':
-            self._storage_location = config_file.get_option(twitter, "storage_location")
+            self._storage = config_file.get_option(twitter, "storage")
+            if self._storage == 'file':
+                storage_loc = config_file.get_option(twitter, "storage_location")
+                self._storage_location = self.sub_bot_root(storage_loc, bot_root)
 
 class TwitterClientConfiguration(ClientConfiguration):
 
@@ -103,3 +99,4 @@ class TwitterClientConfiguration(ClientConfiguration):
     def load_config_data(self, config_file, bot_root):
         super(TwitterClientConfiguration, self).load_config_data(config_file, bot_root)
         self._twitter_config.load_config_section(config_file, bot_root)
+        print("Hello")

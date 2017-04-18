@@ -58,7 +58,7 @@ rest:
   debug: false
 
 twitter:
-  username: @programybot
+  username: programybot
   polling: true
   polling_interval: 59
   streaming: false

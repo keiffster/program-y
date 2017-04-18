@@ -34,7 +34,7 @@ class TwitterBotClient(BotClient):
         for message in messages:
             #print("message: ", message.text)
             try:
-                self.process_direct_message_question(api, message.user.id, message.text)
+                self.process_direct_message_question(message.user.id, message.text)
             except Exception as err:
                 print(err)
 
@@ -60,7 +60,7 @@ class TwitterBotClient(BotClient):
         for status in statuses:
             #print("status: ", status.text)
             try:
-                self.process_status_question(api, status.user.id, status.text)
+                self.process_status_question(status.user.id, status.text)
             except Exception as err:
                 print(err)
 
@@ -75,8 +75,9 @@ class TwitterBotClient(BotClient):
         pos = text.find(self._username)
         if pos == -1:
             return
+        pos = pos - 1   # Take into account @ sign
 
-        question = text[(pos+self._username_len+1):]
+        question = text[(pos+self._username_len)+1:]
 
         print("%s -> %s"%(userid, question))
 
@@ -150,7 +151,7 @@ class TwitterBotClient(BotClient):
 
     def run(self):
 
-        self._initialise()
+        self.initialise()
 
         if self.configuration.twitter_configuration.polling is True:
             self.use_polling()
