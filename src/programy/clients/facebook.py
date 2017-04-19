@@ -85,7 +85,7 @@ class FacebookBotClient(BotClient):
 if __name__ == '__main__':
 
     def run():
-        logging.debug("Loading Facebook client, please wait...")
+        print("Loading Facebook client, please wait. See log output for progress...")
         facebook_app = FacebookBotClient()
         facebook_app.run()
 

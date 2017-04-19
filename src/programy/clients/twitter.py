@@ -108,7 +108,7 @@ class TwitterBotClient(BotClient):
 
         self._api = tweepy.API(auth)
 
-        self._username = self.bot.brain.license_keys.get_key("TWITTER_USERNAME")
+        self._username = self.bot.license_keys.get_key("TWITTER_USERNAME")
         self._username_len = len(self._username) # Going to get used quite a lot
 
     def get_last_message_ids(self):
@@ -181,7 +181,7 @@ class TwitterBotClient(BotClient):
 if __name__ == '__main__':
 
     def run():
-        logging.debug("Loading Twitter client, please wait...")
+        print("Loading Twitter client, please wait. See log output for progres...")
         twitter_app = TwitterBotClient()
         twitter_app.run()
 

@@ -56,7 +56,7 @@ class XmppBotClient(BotClient):
 if __name__ == '__main__':
 
     def run():
-        logging.debug("Loading Xmpp client, please wait...")
+        print("Loading Xmpp client, please wait. See log output for progress...")
         xmpp_app = XmppBotClient()
         xmpp_app.run()
 
