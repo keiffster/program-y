@@ -34,12 +34,12 @@ class ConsoleBotClient(BotClient):
                     logging.exception(excep)
                     logging.error("Oops something bad happened !")
 
-    def get_question(self):
+    def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt
-        return input(ask)
+        return input_func(ask)
 
-    def display_response(self, response):
-        print(response)
+    def display_response(self, response, output_func=print):
+        output_func(response)
 
 if __name__ == '__main__':
 

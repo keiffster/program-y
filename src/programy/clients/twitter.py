@@ -1,5 +1,6 @@
 import logging
 import tweepy
+from tweepy.error import RateLimitError
 import time
 import os
 
@@ -46,10 +47,30 @@ class TwitterBotClient(BotClient):
 
         return last_message_id
 
+    def process_followers(self):
+        logging.debug("Processing followers")
+        followers = self._api.followers()
+        followers_ids = [x.id for x in followers]
+        friends = self._api.friends_ids()
+
+        # Unfollow anyone I follow that does not follow me
+        for friend_id in friends:
+            if friend_id not in followers_ids:
+                logging.debug ("Removing previous friendship with [%d]"%(friend_id))
+                self._api.destroy_friendship(friend_id)
+
+        # Next follow those new fellows following me
+        for follower in followers:
+            logging.debug ("Checking follower [%s]"%follower.screen_name)
+            if follower.id not in friends:
+                logging.debug("Following %s"%follower.screen_name)
+                follower.follow()
+                self._api.send_direct_message(follower.id, text=self._welcome_message)
+
     def process_direct_message_question(self, userid, text):
         logging.debug("Direct Messages: %s -> %s"%(userid, text))
         response = self.bot.ask_question(userid, text)
-        self._api.send_direct_message(userid, response)
+        self._api.send_direct_message(userid, text=response)
 
     def process_statuses(self, last_status_id):
         logging.debug ("Processing status updates since [%s]"%last_status_id)
@@ -63,8 +84,9 @@ class TwitterBotClient(BotClient):
             statuses.sort(key=lambda msg: msg.id)
 
         for status in statuses:
-            logging.debug("status: %s"% status.text)
+            print ("[%s] - [%s]"%(status.author.screen_name, self._username))
             if status.author.screen_name != self._username:
+                logging.debug("status: %s" % status.text)
                 try:
                     self.process_status_question(status.user.id, status.text)
                 except Exception as err:
@@ -106,6 +128,8 @@ class TwitterBotClient(BotClient):
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
 
+        self._welcome_message = self.configuration.twitter_configuration.welcome_message
+
         self._api = tweepy.API(auth)
 
         self._username = self.bot.license_keys.get_key("TWITTER_USERNAME")
@@ -145,6 +169,8 @@ class TwitterBotClient(BotClient):
         while running is True:
             try:
                 if self.configuration.twitter_configuration.use_direct_message is True:
+                    self.process_followers()
+
                     last_direct_message_id = self.process_direct_messages(last_direct_message_id)
                     logging.debug("Last message id = %d"% last_direct_message_id)
 
@@ -158,6 +184,10 @@ class TwitterBotClient(BotClient):
 
             except KeyboardInterrupt:
                 running = False
+
+            except RateLimitError as re:
+                logging.error("Rate limit exceeded, sleeping for 15 minutes")
+                time.sleep(15*60)
 
             except Exception as e:
                 logging.exception(e)

@@ -29,6 +29,7 @@ class TwitterConfiguration(BaseConfigurationData):
         self._auto_follow = False
         self._storage = None
         self._storage_location = None
+        self._welcome_message = "Thanks for following me."
         BaseConfigurationData.__init__(self, "twitter")
 
     @property
@@ -63,6 +64,10 @@ class TwitterConfiguration(BaseConfigurationData):
     def storage_location(self):
         return self._storage_location
 
+    @property
+    def welcome_message(self):
+        return self._welcome_message
+
     def load_config_section(self, config_file, bot_root):
         twitter = config_file.get_section(self.section_name)
         if twitter is not None:
@@ -79,6 +84,8 @@ class TwitterConfiguration(BaseConfigurationData):
             if self._storage == 'file':
                 storage_loc = config_file.get_option(twitter, "storage_location")
                 self._storage_location = self.sub_bot_root(storage_loc, bot_root)
+
+            self._welcome_message = config_file.get_option(twitter, "welcome_message")
 
 class TwitterClientConfiguration(ClientConfiguration):
 

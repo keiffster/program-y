@@ -59,13 +59,14 @@ rest:
 
 twitter:
   polling: true
-  polling_interval: 59
+  polling_interval: 49
   streaming: false
   use_status: true
   use_direct_message: true
   auto_follow: true
   storage: file
   storage_location: $BOT_ROOT/storage/twitter.data
+  welcome_message: Thanks for following me, send me a message and I'll try and help
 
 facebook:
   polling: true
