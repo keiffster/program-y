@@ -1,4 +1,5 @@
 import logging
+import slixmpp
 
 from programy.clients.clients import BotClient
 from programy.config.client.xmpp import XmppClientConfiguration
@@ -17,7 +18,7 @@ class XmppBotClient(BotClient):
         return XmppClientConfiguration()
 
     def run(self):
-        logging.debug("XMPP App Running..")
+        logging.debug("%s App Running.."%self._environment)
 
 
 if __name__ == '__main__':

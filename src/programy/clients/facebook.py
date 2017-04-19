@@ -32,8 +32,8 @@ class FacebookBotClient(BotClient):
         return FacebookClientConfiguration()
 
     def _initialise(self):
-        self._username = self.bot.brain.license_keys.get_key("FACEBOOK_USERNAME")
-        self._password = self.bot.brain.license_keys.get_key("FACEBOOK_PASSWORD")
+        self._username = self.bot.license_keys.get_key("FACEBOOK_USERNAME")
+        self._password = self.bot.license_keys.get_key("FACEBOOK_PASSWORD")
 
     def use_polling(self):
         logging.debug("Running Facebook using polling model")
@@ -42,12 +42,14 @@ class FacebookBotClient(BotClient):
         running = True
         while running is True:
             try:
-                author_id = None
-                message = None
+                unread = self._client.getUnread()
+                print(unread)
+                #author_id = None
+                #message = None
 
-                self.process_message(author_id, message)
+                #self.process_message(author_id, message)
 
-                time.sleep(self.configuration.twitter_configuration.polling_interval)
+                time.sleep(self.configuration.facebook_configuration.polling_interval)
 
             except KeyboardInterrupt:
                 running = False

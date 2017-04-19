@@ -29,6 +29,7 @@ class BotConfiguration(BaseConfigurationData):
     DEFAULT_OVERRIDE_PREDICATES    = True
 
     def __init__(self):
+        self._license_keys          = None
         self.bot_root               = BotConfiguration.DEFAULT_ROOT
         self._prompt                = BotConfiguration.DEFAULT_PROMPT
         self._default_response      = BotConfiguration.DEFAULT_RESPONSE
@@ -40,6 +41,7 @@ class BotConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         bot = config_file.get_section(self.section_name)
         if bot is not None:
+            self._license_keys = self._get_file_option(config_file, "license_keys", bot, bot_root)
             self._prompt = config_file.get_option(bot, "prompt", BotConfiguration.DEFAULT_PROMPT)
             self._default_response = config_file.get_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
@@ -47,12 +49,17 @@ class BotConfiguration(BaseConfigurationData):
             self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
         else:
             logging.warning("Config section [%s] missing, using default values", self.section_name)
+            self._license_keys          = None
             self.bot_root               = BotConfiguration.DEFAULT_ROOT
             self._prompt                = BotConfiguration.DEFAULT_PROMPT
             self._default_response      = BotConfiguration.DEFAULT_RESPONSE
             self._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
             self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
             self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
+
+    @property
+    def license_keys(self):
+        return self._license_keys
 
     @property
     def prompt(self):

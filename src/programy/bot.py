@@ -18,6 +18,7 @@ import logging
 
 from programy.dialog import Conversation, Question
 from programy.config.bot import BotConfiguration
+from programy.utils.license.keys import LicenseKeys
 
 class Bot(object):
 
@@ -25,6 +26,8 @@ class Bot(object):
         self._brain = brain
         self._configuration = config
         self._conversations = {}
+        self._license_keys = LicenseKeys()
+        self._load_license_keys(self._configuration)
 
     @property
     def brain(self):
@@ -33,6 +36,16 @@ class Bot(object):
     @property
     def conversations(self):
         return self._conversations
+
+    @property
+    def license_keys(self):
+        return self._license_keys
+
+    def _load_license_keys(self, bot_configuration):
+        if bot_configuration.license_keys is not None:
+            self._license_keys.load_license_key_file(bot_configuration.license_keys)
+        else:
+            logging.warning("No configuration setting for license_keys")
 
     @property
     def prompt(self):

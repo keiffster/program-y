@@ -12,3 +12,4 @@ coverage
 pyyaml
 tweepy
 fbchat
+slixmpp

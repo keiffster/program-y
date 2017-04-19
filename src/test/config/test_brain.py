@@ -66,7 +66,6 @@ class BrainConfigurationTests(unittest.TestCase):
                     files: $BOT_ROOT/maps
                     extension: .txt
                     directories: false
-                license_keys: $BOT_ROOT/config/license.keys
                 denormal: $BOT_ROOT/config/denormal.txt
                 normal: $BOT_ROOT/config/normal.txt
                 gender: $BOT_ROOT/config/gender.txt
@@ -92,7 +91,6 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(brain_config.aiml_files)
         self.assertIsNotNone(brain_config.set_files)
         self.assertIsNotNone(brain_config.map_files)
-        self.assertEqual("./config/license.keys", brain_config.license_keys)
         self.assertEqual("./config/denormal.txt", brain_config.denormal)
         self.assertEqual("./config/normal.txt", brain_config.normal)
         self.assertEqual("./config/gender.txt", brain_config.gender)

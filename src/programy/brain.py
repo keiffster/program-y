@@ -33,15 +33,12 @@ from programy.mappings.triples import TriplesCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.utils.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
-from programy.utils.license.keys import LicenseKeys
 
 class Brain(object):
 
     def __init__(self, configuration: BrainConfiguration):
         self._configuration = configuration
         self._aiml_parser = AIMLParser()
-
-        self._license_keys = LicenseKeys()
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()
@@ -67,10 +64,6 @@ class Brain(object):
     @property
     def aiml_parser(self):
         return self._aiml_parser
-
-    @property
-    def license_keys(self):
-        return self._license_keys
 
     @property
     def denormals(self):
@@ -128,12 +121,6 @@ class Brain(object):
         self._aiml_parser.load_aiml(brain_configuration)
         self.load_collections(brain_configuration)
         self.load_services(brain_configuration)
-
-    def _load_license_keys(self, brain_configuration):
-        if brain_configuration.license_keys is not None:
-            self._license_keys.load_license_key_file(brain_configuration.license_keys)
-        else:
-            logging.warning("No configuration setting for license_keys")
 
     def _load_denormals(self, brain_configuration):
         if brain_configuration.denormal is not None:
@@ -227,7 +214,6 @@ class Brain(object):
             logging.warning("No configuration setting for post processors")
 
     def load_collections(self, brain_configuration):
-        self._load_license_keys(brain_configuration)
         self._load_denormals(brain_configuration)
         self._load_normals(brain_configuration)
         self._load_genders(brain_configuration)

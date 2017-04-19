@@ -97,11 +97,11 @@ class TwitterBotClient(BotClient):
         self._api.update_status(status)
 
     def initialise(self):
-        consumer_key = self.bot.brain.license_keys.get_key("TWITTER_CONSUMER_KEY")
-        consumer_secret = self.bot.brain.license_keys.get_key("TWITTER_CONSUMER_SECRET")
+        consumer_key = self.bot.license_keys.get_key("TWITTER_CONSUMER_KEY")
+        consumer_secret = self.bot.license_keys.get_key("TWITTER_CONSUMER_SECRET")
 
-        access_token = self.bot.brain.license_keys.get_key("TWITTER_ACCESS_TOKEN")
-        access_token_secret = self.bot.brain.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
+        access_token = self.bot.license_keys.get_key("TWITTER_ACCESS_TOKEN")
+        access_token_secret = self.bot.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
 
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
@@ -120,8 +120,8 @@ class TwitterBotClient(BotClient):
             if os.path.exists(self.configuration.twitter_configuration.storage_location):
                 try:
                     with open(self.configuration.twitter_configuration.storage_location, "r+") as idfile:
-                        last_direct_message_id = idfile.readline()
-                        last_status_id = idfile.readline()
+                        last_direct_message_id = int(idfile.readline().strip())
+                        last_status_id = int(idfile.readline().strip())
                 except Exception as e:
                     logging.exception(e)
 
@@ -146,11 +146,11 @@ class TwitterBotClient(BotClient):
             try:
                 if self.configuration.twitter_configuration.use_direct_message is True:
                     last_direct_message_id = self.process_direct_messages(last_direct_message_id)
-                    logging.debug("Last message id = %s"% last_direct_message_id)
+                    logging.debug("Last message id = %d"% last_direct_message_id)
 
                 if self.configuration.twitter_configuration._use_status is True:
                     last_status_id = self.process_statuses(last_status_id)
-                    logging.debug("Last status id = %s"% last_status_id)
+                    logging.debug("Last status id = %d"% last_status_id)
 
                 self.store_last_message_ids(last_direct_message_id, last_status_id)
 

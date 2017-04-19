@@ -23,6 +23,12 @@ class BaseConfigurationData(object):
     def __init__(self, name):
         self.section_name = name
 
+    def _get_file_option(self, config_file, option_name, section, bot_root):
+        option = config_file.get_option(section, option_name)
+        if option is not None:
+            option = self.sub_bot_root(option, bot_root)
+        return option
+
     def sub_bot_root(self, text, root):
         return text.replace('$BOT_ROOT', root)
 

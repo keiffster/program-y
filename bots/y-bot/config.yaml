@@ -8,7 +8,6 @@ brain:
     allow_learnf_aiml: true
 
     files:
-        license_keys: $BOT_ROOT/config/license.keys
         aiml:
             files: $BOT_ROOT/aiml
             extension: .aiml
@@ -46,6 +45,7 @@ brain:
             path: programy.utils.services.wikipediaservice.WikipediaService
 
 bot:
+    license_keys: $BOT_ROOT/config/license.keys
     prompt: ">>>"
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!

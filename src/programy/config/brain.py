@@ -82,7 +82,6 @@ class BrainConfiguration(BaseConfigurationData):
         self._aiml_files        = None
         self._set_files         = None
         self._map_files         = None
-        self._license_keys      = None
         self._denormal          = None
         self._normal            = None
         self._gender            = None
@@ -96,12 +95,6 @@ class BrainConfiguration(BaseConfigurationData):
         self._postprocessors    = None
         self._services = []
         BaseConfigurationData.__init__(self, "brain")
-
-    def _get_file_option(self, config_file, option_name, section, bot_root):
-        option = config_file.get_option(section, option_name)
-        if option is not None:
-            option = self.sub_bot_root(option, bot_root)
-        return option
 
     def _get_brain_file_configuration(self, config_file, section, bot_root):
         files = config_file.get_option(section, "files")
@@ -131,7 +124,6 @@ class BrainConfiguration(BaseConfigurationData):
                 maps = config_file.get_section("maps", files)
                 self._map_files = self._get_brain_file_configuration(config_file, maps, bot_root)
 
-                self._license_keys = self._get_file_option(config_file, "license_keys", files, bot_root)
                 self._denormal = self._get_file_option(config_file, "denormal", files, bot_root)
                 self._normal = self._get_file_option(config_file, "normal", files, bot_root)
                 self._gender = self._get_file_option(config_file, "gender", files, bot_root)
@@ -192,10 +184,6 @@ class BrainConfiguration(BaseConfigurationData):
     @property
     def map_files(self):
         return self._map_files
-
-    @property
-    def license_keys(self):
-        return self._license_keys
 
     @property
     def denormal(self):
