@@ -1,13 +1,14 @@
 import logging
-import slixmpp
+import sleekxmpp
 
 from programy.clients.clients import BotClient
 from programy.config.client.xmpp import XmppClientConfiguration
 
-class XmppClient(slixmpp.ClientXMPP):
+class XmppClient(sleekxmpp.ClientXMPP):
 
-    def __init__(self, jid, password):
-        slixmpp.ClientXMPP.__init__(self, jid, password)
+    def __init__(self, bot_client, jid, password):
+        self.bot_client = bot_client
+        sleekxmpp.ClientXMPP.__init__(self, jid, password)
 
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
@@ -18,8 +19,13 @@ class XmppClient(slixmpp.ClientXMPP):
 
     def message(self, msg):
         if msg['type'] in ('chat', 'normal'):
-            msg.reply("Thanks for sending\n%(body)s" % msg).send()
 
+            question = msg['body']
+            userid = msg['from']
+
+            response =  self.bot_client.bot.ask_question(userid, question)
+
+            msg.reply(response).send()
 
 
 class XmppBotClient(BotClient):
@@ -40,7 +46,7 @@ class XmppBotClient(BotClient):
         username = self.bot.license_keys.get_key("XMPP_USERNAME")
         password = self.bot.license_keys.get_key("XMPP_PASSWORD")
 
-        self._client = XmppClient(username, password)
+        self._client = XmppClient(self, username, password)
         if self.configuration.xmpp_configuration.xep_0030 is True:
             self._client.register_plugin('xep_0030')
         if self.configuration.xmpp_configuration.xep_0004 is True:
@@ -50,8 +56,12 @@ class XmppBotClient(BotClient):
         if self.configuration.xmpp_configuration.xep_0199 is True:
             self._client.register_plugin('xep_0199')
 
-        self._client.connect()
-        self._client.process()
+        if self._client.connect(('talk.google.com', 5222)):
+            print("Connected, running...")
+            #self._client.connect()
+            self._client.process(block=True)
+        else:
+            print("Failed to connect, exiting...")
 
 if __name__ == '__main__':
 
