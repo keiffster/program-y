@@ -169,7 +169,8 @@ class TwitterBotClient(BotClient):
         while running is True:
             try:
                 if self.configuration.twitter_configuration.use_direct_message is True:
-                    self.process_followers()
+                    if self.configuration.twitter_configuration.auto_follow is True:
+                        self.process_followers()
 
                     last_direct_message_id = self.process_direct_messages(last_direct_message_id)
                     logging.debug("Last message id = %d"% last_direct_message_id)
