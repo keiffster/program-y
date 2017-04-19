@@ -58,7 +58,6 @@ rest:
   debug: false
 
 twitter:
-  username: programybot
   polling: true
   polling_interval: 59
   streaming: false
@@ -69,7 +68,12 @@ twitter:
   storage_location: $BOT_ROOT/storage/twitter.data
 
 facebook:
-  username: me@keithsterling.com
   polling: true
   polling_interval: 30
   streaming: false
+
+xmpp:
+  xep_0030: true
+  xep_0004: true
+  xep_0060: true
+  xep_0199: true

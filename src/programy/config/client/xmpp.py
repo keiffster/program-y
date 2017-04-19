@@ -21,13 +21,36 @@ from programy.config.client.client import ClientConfiguration
 class XmppConfiguration(BaseConfigurationData):
 
     def __init__(self):
+        self._xep_0030 = False
+        self._xep_0004 = False
+        self._xep_0060 = False
+        self._xep_0199 = False
         BaseConfigurationData.__init__(self, "xmpp")
+
+    @property
+    def xep_0030(self):
+        return self._xep_0030
+
+    @property
+    def xep_0004(self):
+        return self._xep_0004
+
+    @property
+    def xep_0060(self):
+        return self._xep_0060
+
+    @property
+    def xep_0199(self):
+        return self._xep_0199
 
     def load_config_section(self, config_file, bot_root):
         xmpp = config_file.get_section(self.section_name)
         if xmpp is not None:
-            pass
-        
+            self._xep_0030 = config_file.get_bool_option(xmpp, "xep_0030")
+            self._xep_0004 = config_file.get_bool_option(xmpp, "xep_0004")
+            self._xep_0060 = config_file.get_bool_option(xmpp, "xep_0060")
+            self._xep_0199 = config_file.get_bool_option(xmpp, "xep_0199")
+
 class XmppClientConfiguration(ClientConfiguration):
 
     def __init__(self):

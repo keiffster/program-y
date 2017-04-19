@@ -21,15 +21,10 @@ from programy.config.client.client import ClientConfiguration
 class FacebookConfiguration(BaseConfigurationData):
 
     def __init__(self):
-        self._username = None
         self._polling = False
         self._polling_interval = 0
         self._streaming = False
         BaseConfigurationData.__init__(self, "facebook")
-
-    @property
-    def username(self):
-        return self._username
 
     @property
     def polling(self):
@@ -46,7 +41,6 @@ class FacebookConfiguration(BaseConfigurationData):
     def load_config_section(self, config_file, bot_root):
         facebook = config_file.get_section(self.section_name)
         if facebook is not None:
-            self._username = config_file.get_option(facebook, "username")
             self._polling = config_file.get_bool_option(facebook, "polling")
             if self._polling is True:
                 self._polling_interval = config_file.get_int_option(facebook, "polling_interval")
