@@ -1,40 +1,36 @@
 import unittest
 
+from programy.config.client.webchat import WebChatConfiguration
 from programy.config.file.yaml import YamlConfigurationFile
 from programy.config.client.client import ClientConfiguration
-from programy.config.client.xmpp import XmppConfiguration, XmppClientConfiguration
+from programy.config.client.webchat import WebChatClientConfiguration
 
 
-class XmppConfigurationTests(unittest.TestCase):
+class WebChatConfigurationTests(unittest.TestCase):
 
     def test_init(self):
         client_config = ClientConfiguration()
         yaml = YamlConfigurationFile(client_config)
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
-            xmpp:
-                server: talk.google.com
-                port: 5222
-                xep_0030: true
-                xep_0004: true
-                xep_0060: true
-                xep_0199: true
+        webchat:
+          host: 127.0.0.1
+          port: 5000
+          debug: false
         """, ".")
 
-        xmpp_config = XmppConfiguration()
-        xmpp_config.load_config_section(yaml, ".")
+        webchat_config = WebChatConfiguration()
+        webchat_config.load_config_section(yaml, ".")
 
-        self.assertEquals('talk.google.com', xmpp_config.server)
-        self.assertEquals(5222, xmpp_config.port)
-        self.assertTrue(xmpp_config.xep_0030)
-        self.assertTrue(xmpp_config.xep_0004)
-        self.assertTrue(xmpp_config.xep_0060)
-        self.assertTrue(xmpp_config.xep_0199)
+        self.assertEqual("127.0.0.1", webchat_config.host)
+        self.assertEqual(5000, webchat_config.port)
+        self.assertEqual(False, webchat_config.debug)
 
-class XmppClientConfigurationTests(unittest.TestCase):
+
+class WebChatClientConfigurationTests(unittest.TestCase):
 
     def test_init(self):
-        client_config = XmppClientConfiguration()
+        client_config = WebChatClientConfiguration()
 
         yaml = YamlConfigurationFile(client_config)
         self.assertIsNotNone(yaml)
@@ -72,7 +68,7 @@ class XmppClientConfigurationTests(unittest.TestCase):
 
           services:
               REST:
-                  path: programy.utils.services.rest.GenericRESTService
+                  path: programy.utils.services.webchat.GenericRESTService
               Pannous:
                   path: programy.utils.services.pannous.PannousService
               Pandora:
@@ -86,16 +82,12 @@ class XmppClientConfigurationTests(unittest.TestCase):
           exit_response: So long, and thanks for the fish!
           initial_question: Hi, how can I help you?
 
-        xmpp:
-            server: talk.google.com
-            port: 5222
-            xep_0030: true
-            xep_0004: true
-            xep_0060: true
-            xep_0199: true
+        webchat:
+          host: 127.0.0.1
+          port: 5000
+          debug: false
           """, ".")
 
         self.assertIsNotNone(client_config.bot_configuration)
         self.assertIsNotNone(client_config.brain_configuration)
-        self.assertIsNotNone(client_config.xmpp_configuration)
-
+        self.assertIsNotNone(client_config.webchat_configuration)

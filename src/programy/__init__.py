@@ -13,3 +13,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
+# -*- coding: UTF-8 -*-
+
+"""
+    programy
+    ~~~~~~
+    AIML Interpreter for Python 2.x
+    :copyright: (c) 2016-17 by Keith Sterling
+    :license: MIT, see LICENSE for more details.
+"""
+
+
+__copyright__ = 'Copyright 2016-17 by Keith Sterling'
+__version__ = '0.x.x'
+__license__ = 'MIT'
+__author__ = 'Keith Sterling'
+__email__ = 'keiffster@gmail.com'
+__source__ = 'https://github.com/keiffster/programy/'
+
+__all__ = [
+    'Client',
+]

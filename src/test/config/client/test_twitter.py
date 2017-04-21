@@ -34,7 +34,7 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertTrue(twitter_config.auto_follow)
         self.assertEquals("file", twitter_config.storage)
         self.assertEquals("./storage/twitter.data", twitter_config.storage_location)
-        self.assertEquals("Thanks for following me", twitter_config.welcome_messgae)
+        self.assertEquals("Thanks for following me", twitter_config.welcome_message)
 
 
 class TwitterClientConfigurationTests(unittest.TestCase):

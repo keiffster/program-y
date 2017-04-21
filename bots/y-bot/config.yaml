@@ -57,6 +57,11 @@ rest:
   port: 5000
   debug: false
 
+webchat:
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+
 twitter:
   polling: true
   polling_interval: 49
@@ -69,11 +74,13 @@ twitter:
   welcome_message: Thanks for following me, send me a message and I'll try and help
 
 facebook:
-  polling: true
+  polling: false
   polling_interval: 30
-  streaming: false
+  streaming: true
 
 xmpp:
+  server: talk.google.com
+  port: 5222
   xep_0030: true
   xep_0004: true
   xep_0060: true

@@ -46,6 +46,9 @@ class XmppBotClient(BotClient):
         username = self.bot.license_keys.get_key("XMPP_USERNAME")
         password = self.bot.license_keys.get_key("XMPP_PASSWORD")
 
+        server = self.configuration.xmpp_configuration.server
+        port = self.configuration.xmpp_configuration.port
+
         self._client = XmppClient(self, username, password)
         if self.configuration.xmpp_configuration.xep_0030 is True:
             self._client.register_plugin('xep_0030')
@@ -56,9 +59,9 @@ class XmppBotClient(BotClient):
         if self.configuration.xmpp_configuration.xep_0199 is True:
             self._client.register_plugin('xep_0199')
 
-        if self._client.connect(('talk.google.com', 5222)):
+
+        if self._client.connect((server, port)):
             print("Connected, running...")
-            #self._client.connect()
             self._client.process(block=True)
         else:
             print("Failed to connect, exiting...")

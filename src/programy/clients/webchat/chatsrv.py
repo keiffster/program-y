@@ -1,8 +1,10 @@
+import logging
+
 from flask import Flask, jsonify, request, make_response, abort, current_app
 from programy.clients.clients import BotClient
-from programy.config.client.rest import RestClientConfiguration
+from programy.config.client.webchat import WebChatClientConfiguration
 
-class RestBotClient(BotClient):
+class WebChatBotClient(BotClient):
 
     def __init__(self):
         BotClient.__init__(self)
@@ -11,10 +13,10 @@ class RestBotClient(BotClient):
         self.bot.brain.predicates.pairs.append(["env", "REST"])
 
     def get_client_configuration(self):
-        return RestClientConfiguration()
+        return WebChatClientConfiguration()
 
 print("Loading, please wait...")
-rest_client = RestBotClient()
+webchat_client = WebChatBotClient()
 
 print("Initiating Webchat Client...")
 app = Flask(__name__)
@@ -37,7 +39,7 @@ def is_apikey_valid(apikey):
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if rest_client.configuration.rest_configuration.use_api_keys is True:
+    if webchat_client.configuration.webchat_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
             logging.error("Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
@@ -62,13 +64,13 @@ def ask():
     sessionid = request.args['sessionid']
 
     try:
-        response = rest_client.bot.ask_question(sessionid, question)
+        response = webchat_client.bot.ask_question(sessionid, question)
         if response is None:
-            answer = rest_client.bot.default_response
-            rest_client.log_unknown_response(question)
+            answer = webchat_client.bot.default_response
+            webchat_client.log_unknown_response(question)
         else:
             answer = response
-            rest_client.log_response(question, response)
+            webchat_client.log_response(question, response)
 
         response = {"question": question,
                     "answer": answer,
@@ -80,7 +82,7 @@ def ask():
     except Exception as excep:
 
         response = {"question": question,
-                    "answer": rest_client.bot.default_response,
+                    "answer": webchat_client.bot.default_response,
                     "sessionid": sessionid,
                     "error": str(excep)
                    }
@@ -90,13 +92,13 @@ def ask():
 if __name__ == '__main__':
 
     def run():
-        print("REST Client running on %s:%s" % (rest_client.configuration.rest_configuration.host,
-                                                rest_client.configuration.rest_configuration.port))
-        if rest_client.configuration.rest_configuration.debug is True:
+        print("REST Client running on %s:%s" % (webchat_client.configuration.webchat_configuration.host,
+                                                webchat_client.configuration.webchat_configuration.port))
+        if webchat_client.configuration.webchat_configuration.debug is True:
             print("REST Client running in debug mode")
 
-        app.run(host=rest_client.configuration.rest_configuration.host,
-                port=rest_client.configuration.rest_configuration.port,
-                debug=rest_client.configuration.rest_configuration.debug)
+        app.run(host=webchat_client.configuration.webchat_configuration.host,
+                port=webchat_client.configuration.webchat_configuration.port,
+                debug=webchat_client.configuration.webchat_configuration.debug)
 
     run()

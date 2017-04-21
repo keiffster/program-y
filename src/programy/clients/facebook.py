@@ -1,29 +1,45 @@
-import fbchat
 import logging
 import time
+from flask import Flask, request
+
+from fbmessenger import BaseMessenger
 
 from programy.clients.clients import BotClient
 from programy.config.client.facebook import FacebookClientConfiguration
 
-class FacebookStreamingClient(fbchat.Client):
+# This uses https://ngrok.com/ to create a secure tunnel to localhost
+# Required by facebook to send message notifications
 
-    def __init__(self, botclient, email, password, debug=True, user_agent=None):
-        fbchat.Client.__init__(self, email, password, debug, user_agent)
-        self._bot_client = botclient
+# https://github.com/rehabstudio/fbmessenger/tree/master/example
 
-    def on_message(self, mid, author_id, author_name, message, metadata):
-        self.markAsDelivered(author_id, mid)
-        self.markAsRead(author_id)
+class FacebookMessenger(BaseMessenger):
+    def __init__(self, page_access_token):
+        self.page_access_token = page_access_token
+        super(FacebookMessenger, self).__init__(self.page_access_token)
 
-        if str(author_id) != str(self.uid):
-            self._bot_client.process_message(author_id, message)
+    def message(self, message):
+        self.send({'text': 'Received: {0}'.format(message['message']['text'])})
+
+    def delivery(self, message):
+        pass
+
+    def read(self, message):
+        pass
+
+    def account_linking(self, message):
+        pass
+
+    def postback(self, message):
+        pass
+
+    def optin(self, message):
+        pass
 
 
 class FacebookBotClient(BotClient):
 
     def __init__(self):
         BotClient.__init__(self)
-        self._client = None
 
     def set_environment(self):
         self.bot.brain.predicates.pairs.append(["env", "Facebook"])
@@ -31,63 +47,37 @@ class FacebookBotClient(BotClient):
     def get_client_configuration(self):
         return FacebookClientConfiguration()
 
-    def _initialise(self):
-        self._username = self.bot.license_keys.get_key("FACEBOOK_USERNAME")
-        self._password = self.bot.license_keys.get_key("FACEBOOK_PASSWORD")
-
-    def use_polling(self):
-        logging.debug("Running Facebook using polling model")
-        self._client = fbchat.Client(self._username, self._password)
-
-        running = True
-        while running is True:
-            try:
-                unread = self._client.getUnread()
-                print(unread)
-                #author_id = None
-                #message = None
-
-                #self.process_message(author_id, message)
-
-                time.sleep(self.configuration.facebook_configuration.polling_interval)
-
-            except KeyboardInterrupt:
-                running = False
-
-            except Exception as e:
-                logging.exception(e)
-
-        logging.debug("Exiting gracefully...")
-
-    def process_message(self, author_id, message):
-        logging.debug("%s -> %s"%(author_id, message))
-        response = self.bot.ask_question(author_id, message)
-        logging.debug(response)
-        self._client.send(author_id, response)
-
-    def use_streaming(self):
-        logging.debug("Running Facebook using streaming model")
-        self._client = FacebookStreamingClient(self, self._username, self._password)
-        logging.debug("Listening...")
-        self._client.listen()
-
     def run(self):
-        self._initialise()
 
-        if self.configuration.facebook_configuration.polling is True:
-            self.use_polling()
-        elif self.configuration.facebook_configuration.streaming is True:
-            self.use_streaming()
-        else:
-            logging.error("No Facebook interactiong model specified in config ( polling or streaming )")
+        self._page_token = self.bot.license_keys.get_key("FACEBOOK_PAGE_TOKEN")
+        self._verify_token = self.bot.license_keys.get_key("FACEBOOK_VERIFY_TOKEN")
 
+        self._messenger = FacebookMessenger(self._page_token)
+
+app = Flask(__name__)
+app.debug = True
+
+twitter_app = FacebookBotClient()
+twitter_app.run()
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    return "Hello"
+
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+    print("Hello")
+    if request.method == 'GET':
+        if request.args.get('hub.verify_token') == twitter_app._verify_token:
+            #return request.args.get('hub.challenge')
+            return 'OK'
+        raise ValueError('FACEBOOK_VERIFY_TOKEN does not match.')
+    elif request.method == 'POST':
+        twitter_app._messenger.handle(request.get_json(force=True))
+    return ''
 
 if __name__ == '__main__':
 
-    def run():
-        print("Loading Facebook client, please wait. See log output for progress...")
-        facebook_app = FacebookBotClient()
-        facebook_app.run()
-
-    run()
+    app.run(host='127.0.0.1', port=8080, debug=True)
 

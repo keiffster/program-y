@@ -10,5 +10,5 @@ setup(
     url='http://pypi.python.org/pypi/MetOffer/',
     license='LICENSE.txt',
     description='Simple wrapper for the Met Office DataPoint API.',
-    long_description=open('README.txt').read(),
+    long_description=open('README.rst').read(),
 )
