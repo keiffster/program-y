@@ -212,6 +212,11 @@ class PatternNode(object):
     def equals(self, bot, clientid, word):
         return False
 
+    def equals_ignore_case(self, bot, client, word1, word2):
+        if word1 is not None and word2 is not None:
+            return bool(word1.upper() == word2.upper())
+        return False
+
     ########################################################################
     #
     def can_add(self, new_node):
