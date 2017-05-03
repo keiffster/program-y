@@ -27,7 +27,10 @@ class TemplateMapNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._name = None
-        self._internal_maps = [PluralMap(), SingularMap(), PredecessorMap(), SuccessorMap()]
+        self._internal_maps = {PluralMap.get_name(): PluralMap(),
+                               SingularMap.get_name(): SingularMap(),
+                               PredecessorMap.get_name(): PredecessorMap(),
+                               SuccessorMap.get_name(): SuccessorMap()}
 
     @property
     def name(self):
@@ -45,16 +48,13 @@ class TemplateMapNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
-            name = self.name.resolve(bot, clientid)
-            var = self.resolve_children(bot, clientid)
+            name = self.name.resolve(bot, clientid).upper()
+            var = self.resolve_children(bot, clientid).upper()
 
-            internal = False
-            for map in self._internal_maps:
-                if map.get_name() == name:
-                    value = map.map(var)
-                    internal = True
-
-            if internal is False:
+            if name in self._internal_maps:
+                map = self._internal_maps[name]
+                value = map.map(var)
+            else:
                 the_map = bot.brain.maps.map(name)
                 if the_map is None:
                     logging.error("No map defined for [%s], using default-map" % name)
@@ -63,7 +63,7 @@ class TemplateMapNode(TemplateNode):
                         logging.error("No value for default-map defined, empty string returned")
                         value = ""
                 else:
-                    if var in the_map:
+                    if var in the_map.keys():
                         value = the_map[var]
                     else:
                         logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))

@@ -21,14 +21,15 @@ from programy.parser.template.maps.map import TemplateMap
 
 class PluralMap(TemplateMap):
 
-    NAME = "plural"
+    NAME = "PLURAL"
     STATICS = {"MOUSE": "MICE"
               }
 
     def __init__(self):
         TemplateMap.__init__(self)
 
-    def get_name(self):
+    @staticmethod
+    def get_name():
         return PluralMap.NAME
 
     def static_map(self, value):
@@ -38,11 +39,12 @@ class PluralMap(TemplateMap):
 
     def map(self, value):
         plural_value = self.static_map(value)
-        if plural_value is not None:
-            return plural_value
+        if plural_value is None:
+            if value.endswith('Y'):
+                plural_value = value[:-1] + 'IES'
+            else:
+                plural_value = value + "S"
 
-        if value.endswith('Y'):
-            return value[:-1] + 'IES'
-
-        return value + 'S'
+        logging.debug("PluralMap converted %s to %s" % (value, plural_value))
+        return plural_value
 

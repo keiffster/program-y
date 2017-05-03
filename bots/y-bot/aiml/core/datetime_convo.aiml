@@ -43,6 +43,24 @@
 
     <category>
         <pattern>
+            # WHAT # MONTH #
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # MONTH #
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
             # WHAT # DAY #
         </pattern>
         <template>

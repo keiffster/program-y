@@ -14,29 +14,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+
 import logging
+import re
 
-from programy.parser.template.maps.map import TemplateMap
+from programy.processors.processing import PostProcessor
 
-class SuccessorMap(TemplateMap):
-
-    NAME = "SUCCESSOR"
-
+class RemoveMultiSpacePostProcessor(PostProcessor):
     def __init__(self):
-        TemplateMap.__init__(self)
+        PostProcessor.__init__(self)
 
-    @staticmethod
-    def get_name():
-        return SuccessorMap.NAME
-
-    def map(self, value):
-        try:
-            int_value = int(value)
-            str_value = str(int_value + 1)
-            logging.debug("SuccessorMap converted %s to %s" % (value, str_value))
-            return str_value
-        except:
-            logging.error("SuccessorMap could not convert %s to integer string" % (value))
-            return ""
-
-
+    def process(self, bot, clientid, word_string):
+        logging.debug("Removing multiple spaces from words...")
+        word_list = word_string.split()
+        words = [word.strip() for word in word_list]
+        return " ".join([w for w in words if len(w) > 0])

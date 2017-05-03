@@ -17,13 +17,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 from programy.utils.files.filefinder import FileFinder
 
+
 class SetLoader(FileFinder):
     def __init__(self):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
         logging.debug("Loading set [%s]", filename)
-        the_set = []
+        the_set = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
@@ -33,7 +34,7 @@ class SetLoader(FileFinder):
         return the_set
 
     def load_from_text(self, text):
-        the_set = []
+        the_set = {}
         lines = text.split("\n")
         for line in lines:
             self.process_line(line, the_set)
@@ -42,8 +43,7 @@ class SetLoader(FileFinder):
     def process_line(self, line, the_set):
         text = line.strip()
         if text is not None and len(text) > 0:
-            value = text.upper()
-            the_set.append(value)
+            the_set[text.upper()] = text
 
 
 class SetCollection(object):
@@ -51,20 +51,26 @@ class SetCollection(object):
     def __init__(self):
         self._sets = {}
 
-    def add_set(self, name, set_contents):
+    def add_list_to_set(self, name, set_contents):
+        # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
         if set_name in self._sets:
             raise Exception("Set %s already exists" % set_name)
         logging.debug("Adding set [%s[ to set group", set_name)
-        self._sets[set_name] = set_contents
+        new_set = {}
+        for word in set_contents:
+            new_set[word.upper()] = word
+        self._sets[set_name] = new_set
 
     def set(self, name):
+        # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
         return self._sets[set_name]
 
     def contains(self, name):
+        # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
-        return bool(set_name in self._sets)
+        return bool(set_name in self._sets.keys())
 
     def count_words_in_sets(self):
         count = 0

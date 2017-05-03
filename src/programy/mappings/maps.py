@@ -45,8 +45,7 @@ class MapLoader(FileFinder):
         if text is not None and len(text) > 0:
             splits = text.split(":")
             name = splits[0].upper()
-            value = splits[1].upper()
-            the_map[name] = value
+            the_map[name] = splits[1]
 
 
 class MapCollection(object):

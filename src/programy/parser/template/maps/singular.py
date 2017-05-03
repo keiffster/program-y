@@ -20,14 +20,15 @@ from programy.parser.template.maps.map import TemplateMap
 
 class SingularMap(TemplateMap):
 
-    NAME = "singular"
+    NAME = "SINGULAR"
     STATICS = {"MICE": "MOUSE"
               }
 
     def __init__(self):
         TemplateMap.__init__(self)
 
-    def get_name(self):
+    @staticmethod
+    def get_name():
         return SingularMap.NAME
 
     def static_map(self, value):
@@ -36,13 +37,14 @@ class SingularMap(TemplateMap):
         return None
 
     def map(self, value):
-        plural_value = self.static_map(value)
-        if plural_value is not None:
-            return plural_value
+        singular_value = self.static_map(value)
+        if singular_value is None:
+            if value.endswith('IES'):
+                singular_value = value[:-3] + "Y"
+            elif value.endswith('S'):
+                singular_value = value[:-1]
+            else:
+                singular_value = value
 
-        if value.endswith('IES'):
-            return value[:-3] + "Y"
-        elif value.endswith('S'):
-            return value[:-1]
-        else:
-            return value
+        logging.debug("SingleMap converted %s to %s" % (value, singular_value))
+        return singular_value

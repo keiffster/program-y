@@ -41,7 +41,7 @@ class TemplateDateNode(TemplateAttribNode):
     def resolve(self, bot, clientid):
         try:
             time_now = datetime.datetime.now()
-            resolved = time_now.strftime(self._format).upper()
+            resolved = time_now.strftime(self._format)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

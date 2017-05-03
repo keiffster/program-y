@@ -11,8 +11,10 @@ class SetTests(unittest.TestCase):
 
         the_set = loader.load_file_contents(os.path.dirname(__file__)+ "/test_files/sets/test_set.txt")
         self.assertIsNotNone(the_set)
+        self.assertEqual(len(the_set), 17)
 
         self.assertIn("ALABAMA", the_set)
+        self.assertEqual("Alabama", the_set['ALABAMA'])
         self.assertIn("ALASKA", the_set)
         self.assertIn("KANSAS", the_set)
         self.assertIn("KENTUCKY", the_set)
@@ -23,14 +25,16 @@ class SetTests(unittest.TestCase):
         self.assertIsNotNone(loader)
 
         the_set = loader.load_from_text("""
-            VAL1
-            VAL2
-            VAL3
-            VAL4
+            Val1
+            Val2
+            Val3
+            Val4
         """)
         self.assertIsNotNone(the_set)
         self.assertEqual(len(the_set), 4)
+
         self.assertIn("VAL1", the_set)
+        self.assertEqual("Val1", the_set['VAL1'])
         self.assertIn("VAL2", the_set)
         self.assertIn("VAL3", the_set)
         self.assertIn("VAL4", the_set)
@@ -43,10 +47,10 @@ class SetTests(unittest.TestCase):
         self.assertIsNotNone(collection)
 
         collection._sets = loader.load_from_text("""
-            VAL1
-            VAL2
-            VAL3
-            VAL4
+            Val1
+            Val2
+            Val3
+            Val4
         """)
 
         self.assertIsNotNone(collection._sets)

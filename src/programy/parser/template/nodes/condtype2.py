@@ -33,8 +33,9 @@ class TemplateType2ConditionNode(TemplateConditionNodeWithChildren):
             for condition in self.children:
                 if condition.is_default() is False:
                     condition_value = condition.value.resolve(bot, clientid)
-                    #print("Value [%s] =?= [%s]" % (value, condition_value.strip()))
-                    if value == condition_value:
+
+                    # Condition comparison is always case insensetive
+                    if value.upper() == condition_value.upper():
                         resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
                         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 

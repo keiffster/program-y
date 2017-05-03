@@ -8,4 +8,7 @@ class TestSingularMaps(unittest.TestCase):
         map = SuccessorMap()
         self.assertEqual("2", map.map("1"))
 
+    def test_successor_text(self):
+        map = SuccessorMap()
+        self.assertEqual("", map.map("one"))
 

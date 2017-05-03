@@ -30,7 +30,9 @@ class TemplateType3ConditionNode(TemplateConditionNodeWithChildren):
                 value = self._get_predicate_value(bot, clientid, condition.name, condition.local)
                 if condition.value is not None:
                     condition_value = condition.value.resolve(bot, clientid)
-                    if value == condition_value:
+
+                    # Condition comparison is always case insensetive
+                    if value.upper() == condition_value.upper():
                         resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
                         logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 

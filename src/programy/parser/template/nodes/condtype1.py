@@ -54,7 +54,9 @@ class TemplateType1ConditionNode(TemplateConditionNode):
     def resolve(self, bot, clientid):
         try:
             value = self._get_predicate_value(bot, clientid, self.name, self.local)
-            if value == self.value.resolve(bot, clientid):
+
+            # Condition comparison is always case insensetive
+            if value.upper() == self.value.resolve(bot, clientid).upper():
                 resolved = " ".join([child.resolve(bot, clientid) for child in self.children])
             else:
                 resolved = ""

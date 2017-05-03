@@ -18,11 +18,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 from programy.processors.processing import PreProcessor
 
-class CleanUpPreProcessor(PreProcessor):
+class ToUpperPreProcessor(PreProcessor):
 
     def __init__(self):
         PreProcessor.__init__(self)
 
     def process(self, bot, clientid, string):
-        logging.debug("Cleaning up input...")
+        logging.debug("Making input upper case...")
         return string.upper()

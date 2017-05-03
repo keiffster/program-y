@@ -18,7 +18,6 @@ import logging
 
 from programy.parser.pattern.nodes.word import PatternWordNode
 
-
 class PatternSetNode(PatternWordNode):
 
     def __init__(self, word):

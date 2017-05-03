@@ -53,7 +53,7 @@
                     </category>
                 </learn>
             </think>
-            Now you can ask me: "<get name="learnpattern"/>"?
+            Now you can ask me: "<get name="learnpattern"/>?"
             <think>
                 <set name="learnpattern">What does my
                     <star/>
@@ -83,7 +83,7 @@
                     </category>
                 </learn>
             </think>
-            and "<get name="learnpattern"/>"?
+            and "<get name="learnpattern"/>?"
         </template>
     </category>
 

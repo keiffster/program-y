@@ -18,6 +18,7 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         node = TemplateMapNode()
         node.name = TemplateWordNode("COLOURS")
         node.append(TemplateWordNode("BLACK"))
+
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
@@ -26,6 +27,74 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
         self.assertEqual("WHITE", result)
+
+    def test_plural(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("PLURAL")
+        node.append(TemplateWordNode("HORSE"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("HORSES", result)
+
+    def test_singular(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("SINGULAR")
+        node.append(TemplateWordNode("HORSES"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("HORSE", result)
+
+    def test_predecessor(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("PREDECESSOR")
+        node.append(TemplateWordNode("2"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("1", result)
+
+    def test_succesor(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("SUCCESSOR")
+        node.append(TemplateWordNode("1"))
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("2", result)
 
     def test_to_xml(self):
         root = TemplateNode()

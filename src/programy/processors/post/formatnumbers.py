@@ -20,16 +20,13 @@ import re
 
 from programy.processors.processing import PostProcessor
 
-class CleanUpPostProcessor(PostProcessor):
+class FormatNumbersPostProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
-    def process(self, bot, clientid, string):
-        logging.debug("Cleaning up output...")
-
-        pass1 = re.split(r"""("[^"]*"|'[^']*')""", string)
-        pass2 = [val.strip() for val in pass1]
-        pass3 = " ".join(re.sub(r'("\s+)(.*)(\s+")', r'"\2"', val) for val in pass2)
-        pass4 = re.sub(r'\s+([,:;?.!](?:\s|$))', r'\1', pass3)
-        final = re.sub(r'(\d)\.\s+(\d)', r'\1.\2', pass4)
-        return final
+    def process(self, bot, clientid, word_str):
+        logging.debug("Formatting numbers...")
+        word_str = re.sub(r'(\d)([\.|,])\s+(\d)', r'\1\2\3', word_str)
+        word_str = re.sub(r'(\d)\s+([\.|,])(\d)', r'\1\2\3', word_str)
+        word_str = re.sub(r'(\d)\s+([\.|,])\s+(\d)', r'\1\2\3', word_str)
+        return word_str

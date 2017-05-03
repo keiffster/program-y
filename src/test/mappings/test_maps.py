@@ -13,9 +13,9 @@ class MapTests(unittest.TestCase):
 
         self.assertIsNotNone(map)
         self.assertEqual(len(map.keys()), 12)
-        self.assertEqual(map['ALABAMA'], 'MONTGOMERY')
-        self.assertEqual(map['COLORADO'], 'DENVER')
-        self.assertEqual(map['HAWAII'], 'HONOLULU')
+        self.assertEqual(map['ALABAMA'], 'Montgomery')
+        self.assertEqual(map['COLORADO'], 'Denver')
+        self.assertEqual(map['HAWAII'], 'Honolulu')
 
     def test_loader_from_text(self):
         loader = MapLoader()

@@ -36,13 +36,13 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_day(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Today is %s"%(self.date.full_weekday().upper()))
+        self.assertEqual(response, "Today is %s"%(self.date.full_weekday()))
 
     def test_tomorrow(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TOMORROW")
         self.assertIsNotNone(response)
         self.date = DateFormatter(days=1)
-        self.assertEqual(response, self.date.full_weekday().upper())
+        self.assertEqual(response, self.date.full_weekday())
 
     def test_year(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "YEAR")
@@ -78,7 +78,7 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_month(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "MONTH")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.full_month().upper()))
+        self.assertEqual(response, "This is %s"%(self.date.full_month()))
 
     def test_time(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "TIME")

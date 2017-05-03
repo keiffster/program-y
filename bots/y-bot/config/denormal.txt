@@ -121,7 +121,6 @@
 " colon 9",":9"
 " smile ",";)"
 " smile ",";-)"
-" at ","@"
 " atsign ","@"
 " leftbracket ","["
 " forwardslash ","\""
