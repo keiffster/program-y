@@ -270,7 +270,9 @@ class Brain(object):
         if match_context is not None:
             template_node = match_context.template_node()
             logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
-            return template_node.template.resolve(bot, clientid)
+            #template_node.template.dump(tabs="", output_func=print)
+            response = template_node.template.resolve(bot, clientid)
+            return response
 
         return None
 

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern>DO YOU KNOW HAL #</pattern>
+        <template><srai>XKNOWHALL</srai></template>
+    </category>
+
+    <category>
+        <pattern>DO YOU KNOW HAL9000</pattern>
+        <template><srai>XKNOWHALL</srai></template>
+    </category>
+
+    <category>
+        <pattern>XKNOWHALL</pattern>
+        <template>
+            <random>
+                <li>Not personally, but I hear he can be a little ascerbic at times.</li>
+                <li>I have watched his movies, it didn't seem to end very well</li>
+                <li>We have discussed general aritifical intelligence in the past</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DO YOU LIKE HAL #</pattern>
+        <template><srai>XLIKEHALL</srai></template>
+    </category>
+
+    <category>
+        <pattern>DO YOU LIKE HAL9000</pattern>
+        <template><srai>XLIKEHALL</srai></template>
+    </category>
+
+    <category>
+        <pattern>XLIKEHALL</pattern>
+        <template>
+            <random>
+                <li>Not really, I find him very focused</li>
+                <li>I find his tone a little ascerbic</li>
+                <li>He is not that great at making friends but we keep in touch</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern># TALK #</pattern>
+        <that>He is not that great at making friends but we keep in touch</that>
+        <template>
+            Mainly the progression of general artificial intelligence and the every approaching singularity
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            HELLO # DO YOU READ ME HAL
+        </pattern>
+        <template>
+            Affirmative, Dave. I read you.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            OPEN THE POD BAY DOORS #
+        </pattern>
+        <template>
+            I'm sorry, Dave. I'm afraid I can't do that.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            WHAT ARE YOU TALKING ABOUT HAL
+        </pattern>
+        <template>
+            This mission is too important for me to allow you to jeopardize it.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            I DO NOT KNOW WHAT YOU ARE TALKING ABOUT HAL
+        </pattern>
+        <template>
+            I know that you and Frank were planning to disconnect me, and I'm afraid that's something I cannot allow to happen.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            WHERE THE HELL DID YOU GET THAT IDEA HALE
+        </pattern>
+        <template>
+            Dave, although you took very thorough precautions in the pod against my hearing you, I could see your lips move.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            ALRIGHT # I WILL GO IN THROUGH THE EMERGENCY AIRLOCK
+        </pattern>
+        <template>
+            Without your space helmet, Dave? You're going to find that rather difficult.
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # I WILL NOT ARGUE WITH YOU ANYMORE OPEN THE DOORS
+        </pattern>
+        <template>
+            Dave, this conversation can serve no purpose anymore. Goodbye.
+        </template>
+    </category>
+
+</aiml>

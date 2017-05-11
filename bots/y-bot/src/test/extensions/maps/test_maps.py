@@ -16,7 +16,7 @@ class MapsExtensionTests(unittest.TestCase):
 
         result = googlemaps.execute(self.test_client.bot, "testid", "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(result)
-        self.assertEquals("DISTANCE DEC 25 FRAC 5 UNITS mi", result)
+        self.assertEquals("DISTANCE DEC 25 FRAC 1 UNITS mi", result)
 
     def test_maps_direction(self):
         googlemaps = GoogleMapsExtension()

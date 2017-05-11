@@ -17,35 +17,23 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.utils.weather.metoffice import MetOffice
-from programy.utils.geo.google import GoogleMaps
+from programy.utils.newsapi.newsapi import NewsAPI
 
-class WeatherExtension(object):
+class NewsAPIExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
 
         splits = data.split()
 
-        if splits[0] == 'LOCATION':
-            postcode = splits[1]
-        else:
-            return None
+        source = splits[0]
+        max = 10 # int(splits[1])
+        sort = False#  bool(splits[2])
+        reverse = False# bool(splits[3])
 
-        if splits[2] == 'WHEN':
-            when = splits[3]
-        else:
-            return None
+        newsapi = NewsAPI(bot.license_keys)
 
-        logging.debug("Getting weather for %s at time %s"%(postcode, when))
+        results = newsapi.to_program_y_text(newsapi.get_headlines(source, max, sort, reverse))
 
-        googlemaps = GoogleMaps()
-        latlng = googlemaps.get_latlong_for_location(postcode)
+        return results
 
-        logging.debug ("Weather - Calling external weather service for with extra data [%s]"%(data))
-
-        met_office = MetOffice(bot.license_keys)
-
-        observation = met_office.current_observation(latlng.latitude, latlng.longitude)
-
-        return observation.get_latest().to_program_y_text()

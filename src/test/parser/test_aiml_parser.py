@@ -713,5 +713,34 @@ class AIMLParserTests(unittest.TestCase):
         self.assertIsNotNone(context)
         self.assertEqual("Hiya", context.template_node().template.resolve(None, None))
 
+    def test_inline_br_html(self):
+
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <category>
+                    <pattern>HELLO</pattern>
+                    <template>Hello  <br/> World</template>
+                </category>
+            </aiml>
+            """)
+
+        self.parser.pattern_parser.dump(output_func=print)
+
+    def test_inline_bold_html(self):
+
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <category>
+                    <pattern>HELLO</pattern>
+                    <template>Hello <bold>You</bold> World</template>
+                </category>
+            </aiml>
+            """)
+
+        self.parser.pattern_parser.dump(output_func=print)
+
+
 if __name__ == '__main__':
     unittest.main()

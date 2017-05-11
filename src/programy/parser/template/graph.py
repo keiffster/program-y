@@ -240,8 +240,11 @@ class TemplateGraph(object):
 
     def parse_unknown_as_text_node(self, expression, branch):
         value = ET.tostring(expression, encoding="utf-8", method='xml').decode("utf-8")
-        text_node = TemplateWordNode(word=value.strip())
+        tag = expression.tag
+        tail = expression.tail
+        text_node = TemplateWordNode(word="<%s />"%tag)
         branch.children.append(text_node)
+        self.parse_text(tail, text_node)
 
     #######################################################################################################
     # 	RANDOM_EXPRESSION ::== <random>(<li>TEMPLATE_EXPRESSION</li>)+</random>

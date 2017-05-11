@@ -15,4 +15,4 @@ class BankBalanceExtensionTests(unittest.TestCase):
 
         result = balance.execute(self.bot, self.clientid, "NOW")
         self.assertIsNotNone(result)
-        self.assertEqual("0.00", result)
+        self.assertEqual("0 00 CREDIT", result)

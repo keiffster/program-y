@@ -125,7 +125,6 @@ class Bot(object):
         for each_sentence in question.sentences:
 
             response = self.brain.ask_question(self, clientid, each_sentence)
-
             if response is not None:
                 logging.debug("Raw Response (%s): %s", clientid, response)
                 each_sentence.response = response

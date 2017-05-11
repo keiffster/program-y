@@ -13,7 +13,7 @@ class WeatherExtensionTests(unittest.TestCase):
         threehourly = os.path.dirname(__file__) + "/forecast_3hourly.json"
         daily       = os.path.dirname(__file__) + "/forecast_daily.json"
 
-        self.test_client.bot.brain.license_keys.load_license_key_data("""
+        self.test_client.bot.license_keys.load_license_key_data("""
         METOFFICE_API_KEY=TESTKEY
         CURRENT_OBSERVATION_RESPONSE_FILE=%s
         THREE_HOURLY_FORECAST_RESPONSE_FILE=%s
