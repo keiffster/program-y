@@ -33,12 +33,14 @@ brain:
         postprocessors: $BOT_ROOT/config/postprocessors.conf
 
     services:
-        Pannous:
+       Pannous:
             path: programy.utils.services.pannous.PannousService
-            login: test-user
+            url: http://weannie.pannous.com/api
         Pandora:
             path: programy.utils.services.pandora.PandoraService
-            botid: f5d922d97e345aa1
+            url: http://www.pandorabots.com/pandora/talk-xml
+        Wikipedia:
+            path: programy.utils.services.wikipediaservice.WikipediaService
 
 bot:
     prompt: ">>>"
