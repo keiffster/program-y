@@ -19,38 +19,50 @@ import requests
 from programy.utils.services.service import Service
 from programy.config.brain import BrainServiceConfiguration
 
+class RestAPI(object):
+
+    def get(self, host, data):
+        return requests.get(host, data=data)
+
+    def post(host, data):
+        return requests.post(host, data=data)
+
 class GenericRESTService(Service):
 
-    def __init__(self, config):
+    def __init__(self, config: BrainServiceConfiguration, api=None):
         Service.__init__(self, config)
+
+        if api is None:
+            self.api = RestAPI()
+        else:
+            self.api = api
+
+        self.payload = {}
+        self.method = "GET"
+        self.host = None
+        for param in self._config.parameters():
+            if param == 'method':
+                self.method = self._config.parameter(param)
+            elif param == 'host':
+                self.host = self._config.parameter(param)
+            else:
+                self.payload[param] = self._config.parameter(param)
+
+        if self.host is None:
+            raise Exception("Undefined host parameter")
 
     def ask_question(self, bot, clientid: str, question: str):
 
-        payload = {}
-        params = self._config.parameters()
-        method = "GET"
-        host = None
-        for param in params:
-            if param == 'method':
-                method = self._config.parameter(param)
-            elif param == 'host':
-                host = self._config.parameter(param)
-            else:
-                payload[param] = self._config.parameter(param)
-
-        if host is None:
-            raise Exception("Undefined host parameter")
-
         try:
-            if method == 'GET':
-                response = requests.get(host, data=payload)
-            elif method == 'POST':
-                response = requests.post(host, data=payload)
+            if self.method == 'GET':
+                response = self.api.get(self.host, data=self.payload)
+            elif self.method == 'POST':
+                response = self.api.post(self.host, data=self.payload)
             else:
-                raise Exception("Unsupported REST method [%s]", method)
+                raise Exception("Unsupported REST method [%s]", self.method)
 
             if response.status_code != 200:
-                logging.error("[%s] return status code [%d]", host, response.status_code)
+                logging.error("[%s] return status code [%d]", self.host, response.status_code)
             else:
                 return response.text
 

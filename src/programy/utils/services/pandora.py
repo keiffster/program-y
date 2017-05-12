@@ -20,44 +20,52 @@ from programy.utils.services.service import Service
 from programy.config.brain import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
+class PandoraAPI(object):
+
+    def ask_question(self, question, botid):
+        payload = {'botid': botid, 'input': question}
+        response = RequestsAPI.get(PandoraService.default_url, params=payload)
+
+        if response is None:
+            raise Exception("No response from service")
+
+        tree = ElementTree.fromstring(response.content)
+
+        that = tree.find("that")
+        if that is None:
+            raise Exception("Invalid response from service, no 'that'")
+
+        return that.text
+
 class PandoraService(Service):
 
     default_url = 'http://www.pandorabots.com/pandora/talk-xml'
 
-    def __init__(self, config: BrainServiceConfiguration):
+    def __init__(self, config: BrainServiceConfiguration, api=None):
         Service.__init__(self, config)
+
+        if api is None:
+            self.api = PandoraAPI()
+        else:
+            self.api = api
+
+        self.url = None
+        if 'url' in self._config.parameters():
+            self.url = self._config.parameter('url')
+        else:
+            raise Exception("Undefined url parameter")
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
-            # TODO move this into license.keys
-            botid = self._config.parameter('botid')
+            if bot.license_keys.has_key('PANDORA_BOTID') is True:
+                botid = bot.license_keys.get_key('PANDORA_BOTID')
+            else:
+                logging.error("No variable PANDORA_BOTID found in license key file")
+                return ""
 
-            payload = {'botid': botid, 'input': question}
-            response = RequestsAPI.get(PandoraService.default_url, params=payload)
-
-            if response is None:
-                raise Exception("No response from service")
-
-            tree = ElementTree.fromstring(response.content)
-
-            that = tree.find("that")
-            if that is None:
-                raise Exception("Invalid response from service, no 'that'")
-
-            return that.text
+            return self.api.ask_question(self.url, question, botid)
 
         except Exception as excep:
             logging.error(str(excep))
             return ""
 
-if __name__ == '__main__':
-
-    def run():
-        service_config = BrainServiceConfiguration("PANDORA")
-        service_config.set_parameter('botid', "f5d922d97e345aa1")
-
-        service = PandoraService(service_config)
-        service_response = service.ask_question(None, "testid", "What does a cat look like") #"What is a cat")
-        print(service_response)
-
-    run()

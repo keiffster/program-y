@@ -21,18 +21,22 @@ from programy.config.brain import BrainServiceConfiguration
 
 class WikipediaAPI(object):
 
-    @staticmethod
-    def summary(title, sentences=0, chars=0, auto_suggest=True, redirect=True):
+    def summary(self, title, sentences=0, chars=0, auto_suggest=True, redirect=True):
         return wikipedia.summary(title, sentences, chars, auto_suggest, redirect)
 
 class WikipediaService(Service):
 
-    def __init__(self, config):
+    def __init__(self, config=None, api=None):
         Service.__init__(self, config)
+
+        if api is None:
+            self.api = WikipediaAPI()
+        else:
+            self.api = api
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
-            search = WikipediaAPI.summary(question, sentences=1)
+            search = self.api.summary(question, sentences=1)
             return search
         except wikipedia.exceptions.DisambiguationError:
             logging.error("Wikipedia search is ambiguous for question [%s]", question)

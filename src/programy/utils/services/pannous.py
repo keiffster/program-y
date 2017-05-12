@@ -19,53 +19,60 @@ from programy.utils.services.service import Service
 from programy.config.brain import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
+class PannousAPI(object):
+
+    def ask_question(self, url, question, login):
+        payload = {'input': question, 'login': login}
+
+        response = RequestsAPI.get(url, params=payload)
+        json_data = response.json()
+
+        if 'output' not in json_data:
+            raise Exception("'output' section missing from pannous json_data")
+
+        if len(json_data["output"]) == 0:
+            raise Exception("'output' section has no elements in pannous json_data")
+
+        if 'actions' not in json_data["output"][0]:
+            raise Exception("'actions' section in output[0] in pannous json_data")
+
+        if 'say' not in json_data["output"][0]['actions']:
+            raise Exception("'say' section missing from output[0]['actions'] in pannous json_data")
+
+        if 'text' not in json_data["output"][0]['actions']['say']:
+            raise Exception("text' section missing from output[0]['actions']['say'] in pannous json_data")
+
+        return json_data["output"][0]['actions']['say']['text']
+
+
 class PannousService(Service):
 
-    default_url = 'http://weannie.pannous.com/api'
-
-    def __init__(self, config):
+    def __init__(self, config: BrainServiceConfiguration, api=None):
         Service.__init__(self, config)
 
+        if api is None:
+            self.api = PannousAPI()
+        else:
+            self.api = api
+
+        self.url = None
+        if 'url' in self._config.parameters():
+            self.url = self._config.parameter('url')
+        else:
+            raise Exception("Undefined url parameter")
+
     def ask_question(self, bot, clientid: str, question: str):
+
+
         try:
-            # TODO possibly move this into license.keys
-            login = self._config.parameter('login')
+            if bot.license_keys.has_key('PANNOUS_LOGIN') is True:
+                login = bot.license_keys.get_key('PANNOUS_LOGIN')
+            else:
+                logging.error("No variable PANNOUS_LOGIN found in license key file")
+                return ""
 
-            payload = {'input': question, 'login': login}
-
-            response = RequestsAPI.get(PannousService.default_url, params=payload)
-            json_data = response.json()
-
-            if 'output' not in json_data:
-                raise Exception("'output' section missing from pannous json_data")
-
-            if len(json_data["output"]) == 0:
-                raise Exception("'output' section has no elements in pannous json_data")
-
-            if 'actions' not in json_data["output"][0]:
-                raise Exception("'actions' section in output[0] in pannous json_data")
-
-            if 'say' not in json_data["output"][0]['actions']:
-                raise Exception("'say' section missing from output[0]['actions'] in pannous json_data")
-
-            if 'text' not in json_data["output"][0]['actions']['say']:
-                raise Exception("text' section missing from output[0]['actions']['say'] in pannous json_data")
-
-            return json_data["output"][0]['actions']['say']['text']
+            return self.api.ask_question(self.url, question, login)
 
         except Exception as excep:
             logging.error(str(excep))
             return ""
-
-# Integration Test
-if __name__ == '__main__':
-
-    def run():
-        service_config = BrainServiceConfiguration("PANNOUS")
-        service_config.set_parameter('login', "test-user")
-
-        service = PannousService(service_config)
-        service_response = service.ask_question(None, "testid", "What does a cat look like") # "What is a cat")
-        print(service_response)
-
-    run()
