@@ -22,9 +22,9 @@ from programy.utils.services.requestsapi import RequestsAPI
 
 class PandoraAPI(object):
 
-    def ask_question(self, question, botid):
+    def ask_question(self, url, question, botid):
         payload = {'botid': botid, 'input': question}
-        response = RequestsAPI.get(PandoraService.default_url, params=payload)
+        response = RequestsAPI.get(url, params=payload)
 
         if response is None:
             raise Exception("No response from service")
@@ -39,8 +39,6 @@ class PandoraAPI(object):
 
 class PandoraService(Service):
 
-    default_url = 'http://www.pandorabots.com/pandora/talk-xml'
-
     def __init__(self, config: BrainServiceConfiguration, api=None):
         Service.__init__(self, config)
 
@@ -50,8 +48,8 @@ class PandoraService(Service):
             self.api = api
 
         self.url = None
-        if 'url' in self._config.parameters():
-            self.url = self._config.parameter('url')
+        if 'URL' in self._config.parameters():
+            self.url = self._config.parameter('URL')
         else:
             raise Exception("Undefined url parameter")
 

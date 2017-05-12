@@ -56,8 +56,8 @@ class PannousService(Service):
             self.api = api
 
         self.url = None
-        if 'url' in self._config.parameters():
-            self.url = self._config.parameter('url')
+        if 'URL' in self._config.parameters():
+            self.url = self._config.parameter('URL')
         else:
             raise Exception("Undefined url parameter")
 

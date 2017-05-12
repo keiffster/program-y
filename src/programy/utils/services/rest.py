@@ -41,10 +41,10 @@ class GenericRESTService(Service):
         self.method = "GET"
         self.host = None
         for param in self._config.parameters():
-            if param == 'method':
-                self.method = self._config.parameter(param)
-            elif param == 'host':
-                self.host = self._config.parameter(param)
+            if param == 'METHOD':
+                self.method = self._config.parameter('METHOD')
+            elif param == 'HOST':
+                self.host = self._config.parameter('HOST')
             else:
                 self.payload[param] = self._config.parameter(param)
 
