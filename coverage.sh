@@ -2,5 +2,8 @@
 
 clear
 
-nosetests --cover-html --cover-html-dir=cover --with-xunit --cover-erase --cover-branches --cover-package=programy
+export PYTHONPATH=./src:./bots/y-bot/src:./bots/y-bot/libs/MetOffer-1.3.2/
 
+nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=programy
+
+coverage html -d cover

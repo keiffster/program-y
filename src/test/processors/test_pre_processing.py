@@ -8,10 +8,11 @@ from programy.config.bot import BotConfiguration
 
 
 class PreProcessingTests(unittest.TestCase):
+
     def setUp(self):
         self.bot = Bot(Brain(BrainConfiguration()), config=BotConfiguration())
 
-    def test_post_cleanup(self):
+    def test_pre_cleanup(self):
 
         test_str = "Hello World"
 
