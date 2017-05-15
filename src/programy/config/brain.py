@@ -45,7 +45,6 @@ class BrainServiceConfiguration(object):
         if data is not None:
             for key in data.keys():
                 self._params[key.upper()] = data[key]
-                print(name, key, data[key])
 
     @property
     def name(self):
