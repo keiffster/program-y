@@ -20,34 +20,32 @@ class PostProcessingTests(unittest.TestCase):
         self.numbers = FormatNumbersPostProcessor()
         self.multispaces = RemoveMultiSpacePostProcessor()
 
-    """
-    def post_process_test(self, text):
-        text = self.denormalize.process(self.bot, "testid", text)
-        text = self.punctuation.process(self.bot, "testid", text)
-        text = self.numbers.process(self.bot, "testid", text)
-        text = self.multispaces.process(self.bot, "testid", text)
-        return text
+    def post_process(self, output_str):
+        output_str = self.denormalize.process(self.bot, "testid", output_str)
+        output_str = self.punctuation.process(self.bot, "testid", output_str)
+        output_str = self.numbers.process(self.bot, "testid", output_str)
+        output_str = self.multispaces.process(self.bot, "testid", output_str)
+        return output_str
 
     def test_post_cleanup(self):
 
-        result = self.post_process_test(text="Hello World")
+        result = self.post_process("Hello World")
         self.assertIsNotNone(result)
         self.assertEqual("Hello World", result)
 
-        result = self.post_process_test(text="Hello World . This is It! ")
+        result = self.post_process("Hello World . This is It! ")
         self.assertIsNotNone(result)
         self.assertEqual("Hello World. This is It!", result)
 
-        result = self.post_process_test(text="Is the result 23 . 45 ?")
+        result = self.post_process("Is the result 23 . 45 ?")
         self.assertIsNotNone(result)
         self.assertEqual("Is the result 23.45?", result)
 
-        result = self.post_process_test(text="My email address is ybot atsign programy dot com")
+        result = self.post_process("My email address is ybot atsign programy dot com")
         self.assertIsNotNone(result)
         self.assertEqual("My email address is ybot@programy.com", result)
 
-        result = self.post_process_test(text="He said ' Hello World '.")
+        result = self.post_process("He said ' Hello World '.")
         self.assertIsNotNone(result)
         self.assertEqual("He said 'Hello World'.", result)
 
-    """
