@@ -16,16 +16,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 
 import logging
-import re
+import textwrap
 import os
 
 from programy.processors.processing import PostProcessor
 
-class RemoveHTMLPostProcessor(PostProcessor):
+class ConsoleFormatPostProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
     def process(self, bot, clientid, word_string):
-        logging.debug("Removing html from sentence...")
-        word_string = re.sub(r'<\s*br\s*/>\s*', os.linesep, word_string)
+        logging.debug("Formatting response for console outpout...")
+        lines = textwrap.wrap(word_string, width=80)
+        word_string = os.linesep.join(lines)
         return word_string
