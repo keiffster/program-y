@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: balance.aiml -->
+    <!--  -->
+    <!-- This AIML file is part of the Y-Bot knowledge base. -->
+    <!--  -->
+    <!-- Y-Bot is Copyright &copy; 2017 by Keith Sterling. -->
+    <!--
+    Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+    documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+    the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+    THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    -->
+
+    <category>
+        <pattern>
+            # WEATHER # IN * #
+        </pattern>
+        <template>
+            <srai>
+               WEATHER LOCATION <star index="3" /> WHEN NOW
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WEATHER TODAY
+        </pattern>
+        <template>
+            <srai>
+               WEATHER LOCATION UK WHEN NOW
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            WEATHER LOCATION * WHEN *
+        </pattern>
+        <template>
+            <srai>
+                SHOW_WEATHER
+                <extension path="extensions.weather.weather.WeatherExtension">
+                    LOCATION <star index="1"/> WHEN <star index="2"/>
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            SHOW_WEATHER WEATHER * TEMP * * VISIBILITY V * VF * WIND D * DF * S * PRESSURE P * PT * PTF * HUMIDITY * *
+        </pattern>
+        <template>
+            <think>
+                <set name="weather"><star index="1" /></set>
+                <set name="temp_dec"><star index="2" /></set>
+                <set name="temp_frac"><star index="3" /></set>
+                <set name="vis"><star index="4" /></set>
+                <set name="vis_full"><star index="5" /></set>
+                <set name="wind_dir"><star index="6" /></set>
+                <set name="wind_dir_full"><star index="7" /></set>
+                <set name="wind_speed"><star index="8" /></set>
+                <set name="pressure"><star index="9" /></set>
+                <set name="press_tend"><star index="10" /></set>
+                <set name="press_tend_full"><star index="11" /></set>
+                <set name="humid_dec"><star index="12" /></set>
+                <set name="humid_frac"><star index="13" /></set>
+            </think>
+            <denormalize>
+            Today the weather is <get name="weather" />, with a temperature of <get name="temp_dec"/>dot<get name="temp_frac"/>'C
+            </denormalize>
+        </template>
+    </category>
+
+</aiml>
