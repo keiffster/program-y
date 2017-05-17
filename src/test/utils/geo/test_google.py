@@ -10,9 +10,9 @@ from programy.utils.geo.latlong import LatLong
 class GoogleMapsTests(unittest.TestCase):
 
     def test_location(self):
-        googlemaps = GoogleMaps()
+        googlemaps = GoogleMaps(None)
 
-        filename = os.path.dirname(__file__) + "/location.json"
+        filename = os.path.dirname(__file__) + "/google_latlong.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods
         self.assertTrue(os.path.isfile(filename))
 
@@ -25,7 +25,7 @@ class GoogleMapsTests(unittest.TestCase):
         self.assertEquals(latlng.longitude, -3.1752001)
 
     def test_distance_uk_driving_imperial(self):
-        googlemaps = GoogleMaps()
+        googlemaps = GoogleMaps(None)
 
         filename = os.path.dirname(__file__) + "/distance.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods
@@ -36,10 +36,10 @@ class GoogleMapsTests(unittest.TestCase):
         distance = googlemaps.get_distance_between_addresses("Edinburgh", "London", country="UK", mode="driving", units="imperial")
         self.assertIsNotNone(distance)
         self.assertIsInstance(distance, GoogleDistance)
-        self.assertEquals("25.5 mi", distance._distance_text)
+        self.assertEquals("25.1 mi", distance._distance_text)
 
     def test_directions(self):
-        googlemaps = GoogleMaps()
+        googlemaps = GoogleMaps(None)
 
         filename = os.path.dirname(__file__) + "/directions.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods

@@ -4,22 +4,30 @@ from test.aiml_tests.client import TestClient
 from programy.config.brain import BrainFileConfiguration
 
 
-class TelecomsMinutesTestsClient(TestClient):
+class SurveyTestsClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self, debug=True)
 
     def load_configuration(self, arguments):
-        super(TelecomsMinutesTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../../../../aiml/extensions/telecoms", ".aiml", False)
+        super(SurveyTestsClient, self).load_configuration(arguments)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
 
-class TelecomsMinutesAIMLTests(unittest.TestCase):
+class SurveyAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        TelecomsMinutesAIMLTests.test_client = TelecomsMinutesTestsClient()
+        SurveyAIMLTests.test_client = SurveyTestsClient()
 
-    def test_balance(self):
-        response = TelecomsMinutesAIMLTests.test_client.bot.ask_question("testif", "HOW MANY MINUTES DO I HAVE LEFT")
+    def test_survey(self):
+        # Question 1
+        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "START SURVEY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'This month you have 0 minutes available and have consumed 0 minutes.')
+        self.assertEqual(response, 'Question 1. What do you like about AIML?')
 
+        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Its really cool")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Thanks, now Question 2. What do you dislike about AIML?')
+
+        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Too many undocmented features by the creators")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Thanks, thats the end of the survey')

@@ -1,24 +1,27 @@
-import unittest
 import os
+import unittest
 
-from extensions.weather.weather import WeatherExtension
+from programy.extensions.weather.weather import WeatherExtension
 from test.aiml_tests.client import TestClient
+
 
 class WeatherExtensionTests(unittest.TestCase):
 
     def setUp(self):
         self.test_client = TestClient()
 
+        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
         observation = os.path.dirname(__file__) + "/observation.json"
         threehourly = os.path.dirname(__file__) + "/forecast_3hourly.json"
         daily       = os.path.dirname(__file__) + "/forecast_daily.json"
 
         self.test_client.bot.license_keys.load_license_key_data("""
+        GOOGLE_LATLONG=%s
         METOFFICE_API_KEY=TESTKEY
         CURRENT_OBSERVATION_RESPONSE_FILE=%s
         THREE_HOURLY_FORECAST_RESPONSE_FILE=%s
         DAILY_FORECAST_RESPONSE_FILE=%s
-        """%(observation, threehourly, daily))
+        """%(latlong, observation, threehourly, daily))
         self.clientid = "testid"
 
     def test_observation(self):

@@ -1,6 +1,6 @@
 import unittest
 
-from extensions.survey.survey import SurveyExtension
+from programy.extensions.survey.survey import SurveyExtension
 
 class SurveyExtensionTests(unittest.TestCase):
 

@@ -6,6 +6,11 @@ class DateFormatter(object):
     def year_month_day(year, month, day):
         return datetime.datetime.strptime("%d-%d-%d"%(year, month, day), "%Y-%m-%d")
 
+    @staticmethod
+    def year_month_day_now():
+        now = datetime.datetime.now()
+        return datetime.datetime.strptime(now.strftime("%Y-%m-%d"), "%Y-%m-%d")
+
     def __init__(self, weeks=0, days=0, hours=0, mins=0, secs=0):
         self._time_now = datetime.datetime.now()
         if weeks > 0:

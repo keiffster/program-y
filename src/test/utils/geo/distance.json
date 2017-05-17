@@ -1,0 +1,26 @@
+{
+  "destination_addresses": [
+    "Kinghorn, UK"
+  ],
+  "origin_addresses": [
+    "Edinburgh, UK"
+  ],
+  "rows": [
+    {
+      "elements": [
+        {
+          "distance": {
+            "text": "25.1 mi",
+            "value": 40373
+          },
+          "duration": {
+            "text": "52 mins",
+            "value": 3097
+          },
+          "status": "OK"
+        }
+      ]
+    }
+  ],
+  "status": "OK"
+}

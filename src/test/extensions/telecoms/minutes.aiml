@@ -44,7 +44,7 @@
         <template>
             <srai>
                 SHOW_MINUTES
-                <extension path="extensions.telecoms.minutes.TelecomMinutesExtension">
+                <extension path="programy.extensions.telecoms.minutes.TelecomMinutesExtension">
                     <star />
                 </extension>
             </srai>

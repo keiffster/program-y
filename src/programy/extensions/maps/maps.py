@@ -30,7 +30,7 @@ class GoogleMapsExtension(object):
         from_place = splits[1]
         to_place = splits[2]
 
-        googlemaps = GoogleMaps()
+        googlemaps = GoogleMaps(bot.license_keys)
 
         if command == "DISTANCE":
             distance = googlemaps.get_distance_between_addresses(from_place, to_place)

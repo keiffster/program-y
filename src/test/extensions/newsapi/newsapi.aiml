@@ -415,7 +415,7 @@
            NEWS * MAX * SORT * REVERSE *
         </pattern>
         <template>
-            <extension path="extensions.newsapi.newsapi.NewsAPIExtension">
+            <extension path="programy.extensions.newsapi.newsapi.NewsAPIExtension">
                 <star index="1"/> <star index="2"/> n<star index="3"/> <star index="4"/>
             </extension>
         </template>

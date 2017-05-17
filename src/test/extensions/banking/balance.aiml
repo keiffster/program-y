@@ -44,7 +44,7 @@
         <template>
             <srai>
                 SHOW_BALANCE
-                <extension path="extensions.banking.balance.BankingBalanceExtension">
+                <extension path="programy.extensions.banking.balance.BankingBalanceExtension">
                     <star />
                 </extension>
             </srai>

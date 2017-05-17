@@ -37,7 +37,16 @@ class GeoNamesApi(object):
         else:
             raise Exception ("No valid license key GEO_NAMES_COUNTRY")
 
+        self.latlong_response_file = None
+        if license_keys.has_key('GEONAMES_LATLONG'):
+            self.country = license_keys.get_key('GEONAMES_LATLONG')
+
+
     def _get_latlong_for_postcode_response(self, postcode):
+
+        if self.latlong_response_file is not None:
+            return self.load_get_latlong_for_postcode_from_file(self.latlong_response_file)
+
         postcode = "".join(postcode.split(" "))
         url = GeoNamesApi.POSTALCODESEARCH.format(postcode, self.country, self.account_name)
 
@@ -50,6 +59,10 @@ class GeoNamesApi(object):
             raise Exception("Invalid response from GeoNames")
 
         return json.loads(content.decode('utf8'))
+
+    def load_get_latlong_for_postcode_from_file(self, filename):
+        with open(filename, "w+") as response_file:
+            return json.load(response_file)
 
     def store_get_latlong_for_postcode_to_file(self, postcode, filename):
         content = self._get_latlong_for_postcode_response(postcode)
@@ -78,8 +91,16 @@ if __name__ == '__main__':
 
     # Only to be used to create test data for unit tests
 
-    geonamesapi = GeoNamesApi(os.path.dirname(__file__) + '/../../../../bots/y-bot/config/license.keys')
-    geonamesapi.store_get_latlong_for_postcode_to_file("KY39UR", "postcode.json")
+    from programy.utils.license.keys import LicenseKeys
+
+    license_keys = LicenseKeys()
+    license_keys.load_license_key_file(os.path.dirname(__file__) + '/../../../../bots/y-bot/config/license.keys')
+
+    geonamesapi = GeoNamesApi(license_keys)
+
+    # Running these tools drops test files into the geocode test folder
+    geonamesapi.store_get_latlong_for_postcode_to_file("KY39UR", "../../../test/utils/geocode/geonames_latlong.json")
+    geonamesapi.store_get_latlong_for_postcode_to_file("KY39UR", "../../../test/utils/geo/geonames_latlong.json")
 
     # Only to be used to create test data for unit tests
 

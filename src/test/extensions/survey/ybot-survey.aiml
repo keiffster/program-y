@@ -52,7 +52,7 @@
             <template>
                 <think>
                     <set name="answer2"><star /></set>
-                    <extension path="extensions.survey.survey.SurveyExtension">
+                    <extension path="programy.extensions.survey.survey.SurveyExtension">
                     <get name="answer1" />|
                     <get name="answer2" />
                 </extension>

@@ -82,7 +82,7 @@
         <template>
             <srai>
                 SHOW_DISTANCE
-                <extension path="extensions.maps.maps.GoogleMapsExtension">
+                <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
                     DISTANCE <star index="1"/> <star index="2"/>
                 </extension>
             </srai>
@@ -115,7 +115,7 @@
         <template>
             <srai>
                 SHOW_DIRECTIONS
-                <extension path="extensions.maps.maps.GoogleMapsExtension">
+                <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
                     DIRECTIONS <star index="1"/> <star index="2"/>
                 </extension>
             </srai>

@@ -2,7 +2,7 @@
 
 clear
 
-export PYTHONPATH=./src:./bots/y-bot/src:./bots/y-bot/libs/MetOffer-1.3.2/
+export PYTHONPATH=./src:./libs/MetOffer-1.3.2/:./bots/y-bot/src:.
 
 nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=programy
 

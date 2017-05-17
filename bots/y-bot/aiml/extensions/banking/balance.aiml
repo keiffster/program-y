@@ -44,14 +44,14 @@
         <template>
             <srai>
                 SHOW_BALANCE
-                <extension path="extensions.banking.balance.BankingBalanceExtension">
+                <extension path="programy.extensions.banking.balance.BankingBalanceExtension">
                     <star />
                 </extension>
             </srai>
         </template>
     </category>
 
-    <!-- Format the result of calling the extensions, provide a polite result back to the customer -->
+    <!-- Format the result of calling the utils, provide a polite result back to the customer -->
     <category>
         <pattern>
             SHOW_BALANCE * * *

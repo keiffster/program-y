@@ -11,12 +11,18 @@ class GeoCodeTestsClient(TestClient):
 
     def load_configuration(self, arguments):
         super(GeoCodeTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../../../../aiml/extensions/geocode", ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
 
 class GeoCodeAIMLTests(unittest.TestCase):
 
     def setUp (self):
         GeoCodeAIMLTests.test_client = GeoCodeTestsClient()
+
+        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
+
+        GeoCodeAIMLTests.test_client.bot.license_keys.load_license_key_data("""
+        GOOGLE_LATLONG = %s
+        """%(latlong))
 
     def test_postcode1(self):
         response = GeoCodeAIMLTests.test_client.bot.ask_question("testif", "POSTCODE KY39UR")
@@ -31,4 +37,4 @@ class GeoCodeAIMLTests(unittest.TestCase):
     def test_location(self):
         response = GeoCodeAIMLTests.test_client.bot.ask_question("testif", "LOCATION KINGHORN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 071231 LONGITUDE DEC -3 FRAC 174329')
+        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001')

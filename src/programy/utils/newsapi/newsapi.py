@@ -1,6 +1,8 @@
 import os
 import logging
 import requests
+import json
+
 
 class NewsArticle(object):
 
@@ -26,6 +28,16 @@ class NewsArticle(object):
         self.author = self._get_json_attribute(data, "author")
         self.url = self._get_json_attribute(data, "url")
         self.urlToImage = self._get_json_attribute(data, "urlToImage")
+
+    def to_json(self):
+        data = {}
+        data["title"] = self.title
+        data["description"] = self.description
+        data["publishedAt"] = self.publishedAt
+        data["author"] = self.author
+        data["url"] = self.url
+        data["urlToImage"] = self.urlToImage
+        return data
 
 # https://newsapi.org/bbc-news-api
 
@@ -540,10 +552,30 @@ class NewsAPI(object):
             return []
 
     @staticmethod
+    def to_json(articles):
+        data = {}
+        data['articles'] = []
+        for article in articles:
+            data['articles'].append(article.to_json())
+        return data
+
+    @staticmethod
+    def json_to_file(filename, json_data):
+        with open(filename, 'w+') as f:
+            json.dump(json_data, f)
+
+    @staticmethod
+    def json_from_file(filename):
+        with open(filename, 'r+') as f:
+            return json.load(f)
+
+    @staticmethod
     def to_program_y_text(articles, break_str=" <br /> "):
         return break_str.join("%s - %s" % (article.title, article.description) for article in articles)
 
 if __name__ == '__main__':
+
+    # Running these tools drops test files into the geocode test folder
 
     from programy.utils.license.keys import LicenseKeys
 
@@ -553,4 +585,9 @@ if __name__ == '__main__':
     news_api = NewsAPI(license_keys)
 
     results = news_api.get_headlines(NewsAPI.BBC_NEWS)
-    print(news_api.to_program_y_text(results))
+
+    json_data = NewsAPI.to_json(results)
+
+    NewsAPI.json_to_file('../../../test/utils/newsapi/newsapi.json', json_data)
+
+    # Running these tools drops test files into the geocode test folder

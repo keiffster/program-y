@@ -17,7 +17,7 @@ class GeoNamesTests(unittest.TestCase):
         geonames = GeoNamesApi(license_keys)
         self.assertIsNotNone(geonames)
 
-        GeoNamesApi.get_latlong_for_postcode_response_file = os.path.dirname(__file__)+"/postcode.json"
+        GeoNamesApi.get_latlong_for_postcode_response_file = os.path.dirname(__file__)+"/geonames_latlong.json"
 
         latlng = geonames.get_latlong_for_postcode('KY39UR')
         self.assertIsNotNone(latlng)

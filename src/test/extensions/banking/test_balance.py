@@ -1,6 +1,6 @@
 import unittest
 
-from extensions.banking.balance import BankingBalanceExtension
+from programy.extensions.banking.balance import BankingBalanceExtension
 
 class BankBalanceExtensionTests(unittest.TestCase):
 

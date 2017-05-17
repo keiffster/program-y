@@ -194,10 +194,18 @@ class GoogleMaps(object):
     DISTANCE = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&country={2}&sensor=false&mode={3}&units={4}"
     GEOCODE = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false"
 
-    def __init__(self):
+    def __init__(self, license_keys):
         self.response_file_for_get_latlong_for_location = None
         self.response_file_for_get_distance_between_addresses = None
         self.response_file_for_get_directions_between_addresses = None
+
+        if license_keys is not None:
+            if license_keys.has_key("GOOGLE_LATLONG"):
+                self.response_file_for_get_latlong_for_location = license_keys.get_key("GOOGLE_LATLONG")
+            if license_keys.has_key("GOOGLE_MAPS_DISTANCE"):
+                self.response_file_for_get_distance_between_addresses = license_keys.get_key("GOOGLE_MAPS_DISTANCE")
+            if license_keys.has_key("GOOGLE_MAPS_DIRECTIONS"):
+                self.response_file_for_get_directions_between_addresses = license_keys.get_key("GOOGLE_MAPS_DIRECTIONS")
 
     ##################
 
@@ -314,8 +322,12 @@ if __name__ == '__main__':
     # Only to be used to create test data for unit tests
     googlemaps = GoogleMaps()
 
-    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "location.json")
-    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "distance.json")
-    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "directions.json")
+    # Running these tools drops test files into the geocode test folder
+    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "../../../test/utils/geo/google_latlong.json")
+    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/geo/distance.json")
+    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/geo/directions.json")
 
+    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "../../../test/utils/weather/google_latlong.json")
+    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/distance.json")
+    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/directions.json")
     # Only to be used to create test data for unit tests

@@ -35,7 +35,7 @@ class GeoCodeExtension(object):
         else:
             return None
 
-        googlemaps = GoogleMaps()
+        googlemaps = GoogleMaps(bot.license_keys)
         latlng = googlemaps.get_latlong_for_location(location)
         if latlng is not None:
             str_lat = str(latlng.latitude)

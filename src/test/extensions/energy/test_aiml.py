@@ -4,30 +4,22 @@ from test.aiml_tests.client import TestClient
 from programy.config.brain import BrainFileConfiguration
 
 
-class SurveyTestsClient(TestClient):
+class EnergyUsageTestsClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self, debug=True)
 
     def load_configuration(self, arguments):
-        super(SurveyTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__)+"/../../../../aiml/extensions/survey", ".aiml", False)
+        super(EnergyUsageTestsClient, self).load_configuration(arguments)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
 
-class SurveyAIMLTests(unittest.TestCase):
+class EnergyUsageAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        SurveyAIMLTests.test_client = SurveyTestsClient()
+        EnergyUsageAIMLTests.test_client = EnergyUsageTestsClient()
 
-    def test_survey(self):
-        # Question 1
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "START SURVEY")
+    def test_usage(self):
+        response = EnergyUsageAIMLTests.test_client.bot.ask_question("testif", "WHAT IS MY ENERGY USAGE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Question 1. What do you like about AIML?')
+        self.assertEqual(response, 'So far this month you have used 0 KWh of Gas and 0 KWh of Electricity.')
 
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Its really cool")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'Thanks, now Question 2. What do you dislike about AIML?')
-
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Too many undocmented features by the creators")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'Thanks, thats the end of the survey')

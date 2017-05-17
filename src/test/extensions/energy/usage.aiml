@@ -44,7 +44,7 @@
         <template>
             <srai>
                 SHOW_USAGE
-                <extension path="extensions.energy.usage.EnergyUsageExtension">
+                <extension path="programy.extensions.energy.usage.EnergyUsageExtension">
                     <star />
                 </extension>
             </srai>
