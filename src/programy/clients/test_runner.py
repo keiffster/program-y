@@ -1,6 +1,7 @@
 import logging
 import csv
 import re
+import datetime
 
 from programy.clients.clients import BotClient
 from programy.utils.files.filefinder import FileFinder
@@ -92,13 +93,14 @@ class TestRunnerBotClient(BotClient):
     def run(self):
         print ("Loading Tests from directory [%s]" % self.test_dir)
         file_finder = TestFileFileFinder()
-        collection = file_finder.load_dir_contents(self.test_dir, extension=".tests")
+        collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
         successes = []
         failures = []
+        start = datetime.datetime.now()
         for category in collection.keys():
             for test in collection[category]:
                 test.category = category
-                response = self.bot.ask_question(self.clientid, test.question).upper()
+                response = self.bot.ask_question(self.clientid, test.question)
                 success = False
                 test.response = response
                 if len(test.answers_regex) == 0:
@@ -114,11 +116,16 @@ class TestRunnerBotClient(BotClient):
                     successes.append(test)
                 else:
                     failures.append(test)
+        stop = datetime.datetime.now()
+        diff = stop-start
+        total_tests = len(successes)+len(failures)
 
         print ("Successes: %d" % len(successes))
         print ("Failures:  %d" % len(failures))
         for failure in failures:
             print ("\t%s: [%s] expected [%s], got [%s]" % (failure.category, failure.question, failure.answers_string, failure.response))
+        print ("Total processing time %f.2 secs"%diff.total_seconds())
+        print ("Thats approx %f tests per sec"%(total_tests/diff.total_seconds()))
 
 if __name__ == '__main__':
 

@@ -25,7 +25,7 @@
 
     <category>
         <pattern>
-            # WHAT # SEASON #
+            # THE SEASON ^
         </pattern>
         <template>
             It is <srai>SEASON</srai>
@@ -34,7 +34,7 @@
 
     <category>
         <pattern>
-            # WHICH # SEASON #
+            # WHAT # SEASON ^
         </pattern>
         <template>
             It is <srai>SEASON</srai>
@@ -43,7 +43,16 @@
 
     <category>
         <pattern>
-            # WHAT # MONTH #
+            # WHICH # SEASON ^
+        </pattern>
+        <template>
+            It is <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHAT # MONTH ^
         </pattern>
         <template>
             <srai>MONTH</srai>
@@ -52,7 +61,7 @@
 
     <category>
         <pattern>
-            # WHICH # MONTH #
+            # WHICH # MONTH ^
         </pattern>
         <template>
             <srai>MONTH</srai>
@@ -61,7 +70,7 @@
 
     <category>
         <pattern>
-            # WHAT # DAY #
+            # WHAT # DAY ^
         </pattern>
         <template>
             <srai>DAY</srai>
@@ -70,7 +79,7 @@
 
     <category>
         <pattern>
-            # WHICH # DAY #
+            # WHICH # DAY ^
         </pattern>
         <template>
             <srai>DAY</srai>
@@ -88,10 +97,19 @@
 
     <category>
         <pattern>
-            # WHAT # TODAY
+            # WHAT # TODAY ^
         </pattern>
         <template>
-            <srai>TODAY</srai>
+            <srai>DAY</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            # WHICH # TODAY ^
+        </pattern>
+        <template>
+            <srai>DAY</srai>
         </template>
     </category>
 
@@ -124,7 +142,7 @@
 
     <category>
         <pattern>
-            # WHAT # YEAR #
+            # WHAT # YEAR ^
         </pattern>
         <template>
             <srai>YEAR</srai>
@@ -133,7 +151,7 @@
 
     <category>
         <pattern>
-            # WHICH # YEAR #
+            # WHICH # YEAR ^
         </pattern>
         <template>
             <srai>YEAR</srai>
@@ -142,7 +160,7 @@
 
     <category>
         <pattern>
-            # WHAT # TODAYS DATE #
+            # WHAT # TODAYS DATE ^
         </pattern>
         <template>
             <srai>DATE</srai>
@@ -151,7 +169,7 @@
 
     <category>
         <pattern>
-            # WHAT # DATE #
+            # WHAT # DATE ^
         </pattern>
         <template>
             <srai>DATE</srai>
@@ -160,7 +178,7 @@
 
     <category>
         <pattern>
-            # WHAT # TIME #
+            # WHAT # TIME ^
         </pattern>
         <template>
             <srai>TIME</srai>

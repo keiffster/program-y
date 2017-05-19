@@ -3,40 +3,41 @@ import logging
 import requests
 import json
 
+from programy.utils.license.keys import LicenseKeys
 
 class NewsArticle(object):
 
     def __init__(self):
         self.title = None
         self.description = None
-        self.publishedAt = None
+        self.published_at = None
         self.author = None
         self.url = None
-        self.urlToImage = None
+        self.url_to_image = None
 
     def _get_json_attribute(self, data, name, def_value=None):
         if name in data:
             return data[name]
         else:
-            logging.debug ("Attribute [%s] missing from New API Article data"%name)
+            logging.debug("Attribute [%s] missing from New API Article data"%name)
             return def_value
 
     def parse_json(self, data):
         self.title = self._get_json_attribute(data, "title")
         self.description = self._get_json_attribute(data, "description")
-        self.publishedAt = self._get_json_attribute(data, "publishedAt")
+        self.published_at = self._get_json_attribute(data, "publishedAt")
         self.author = self._get_json_attribute(data, "author")
         self.url = self._get_json_attribute(data, "url")
-        self.urlToImage = self._get_json_attribute(data, "urlToImage")
+        self.url_to_image = self._get_json_attribute(data, "urlToImage")
 
     def to_json(self):
         data = {}
         data["title"] = self.title
         data["description"] = self.description
-        data["publishedAt"] = self.publishedAt
+        data["publishedAt"] = self.published_at
         data["author"] = self.author
         data["url"] = self.url
-        data["urlToImage"] = self.urlToImage
+        data["urlToImage"] = self.url_to_image
         return data
 
 # https://newsapi.org/bbc-news-api
@@ -190,24 +191,24 @@ class NewsAPI(object):
             raise Exception ("No valid license key METOFFICE_API_KEY found")
 
     @staticmethod
-    def _format_url(service, api_key, sortBy="top"):
-        return NewsAPI.BASE_URL%(service, sortBy, api_key)
+    def _format_url(service, api_key, sort_by="top"):
+        return NewsAPI.BASE_URL%(service, sort_by, api_key)
 
     @staticmethod
-    def _get_data(url_str, api_key, max, sort, reverse):
+    def _get_data(url_str, api_key, max_articles, sort, reverse):
         url = NewsAPI._format_url(url_str, api_key)
-        return NewsAPI._get_news_feed_articles(url, max, sort, reverse)
+        return NewsAPI._get_news_feed_articles(url, max_articles, sort, reverse)
 
     @staticmethod
-    def _get_news_feed_articles(url, max, sort, reverse):
+    def _get_news_feed_articles(url, max_articles, sort, reverse):
         logging.debug("News API URL: [%s]"%url)
         response = requests.get(url)
         articles = []
         if response.status_code == 200:
             header_splits = response.headers['content-type'].split(";")
             if header_splits[0] == 'application/json':
-                json = response.json()
-                for article_data in json['articles']:
+                json_data = response.json()
+                for article_data in json_data['articles']:
                     article = NewsArticle()
                     article.parse_json(article_data)
                     articles.append(article)
@@ -215,11 +216,11 @@ class NewsAPI(object):
 
                 if sort is True:
                     logging.debug("Sorting articles,, reverse=%s" % str(reverse))
-                    articles.sort(key=lambda article: article.publishedAt, reverse=reverse)
+                    articles.sort(key=lambda article: article.published_at, reverse=reverse)
 
-                if max != 0:
-                    logging.debug("Returning max %d articles" % max)
-                    articles = articles[:max]
+                if max_articles != 0:
+                    logging.debug("Returning max_articles %d articles" % max_articles)
+                    articles = articles[:max_articles]
                 else:
                     logging.debug("Returning all articles")
 
@@ -232,323 +233,323 @@ class NewsAPI(object):
         return articles
 
     @staticmethod
-    def abc_news_au(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ABC_NEWS_AU, api_key, max, sort, reverse)
+    def abc_news_au(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ABC_NEWS_AU, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def al_jazeera_english(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.AL_JAZEERA_ENGLISH, api_key, max, sort, reverse)
+    def al_jazeera_english(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.AL_JAZEERA_ENGLISH, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def ars_technica(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ARS_TECHNICA, api_key, max, sort, reverse)
+    def ars_technica(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ARS_TECHNICA, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def associated_press(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ASSOCIATED_PRESS, api_key, max, sort, reverse)
+    def associated_press(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ASSOCIATED_PRESS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def bbc_news(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BBC_NEWS, api_key, max, sort, reverse)
+    def bbc_news(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BBC_NEWS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def bbc_sport(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BBC_SPORT, api_key, max, sort, reverse)
+    def bbc_sport(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BBC_SPORT, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def bloomberg(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BLOOMBERG, api_key, max, sort, reverse)
+    def bloomberg(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BLOOMBERG, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def business_insider(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BUSINESS_INSIDER, api_key, max, sort, reverse)
+    def business_insider(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BUSINESS_INSIDER, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def business_insider_uk(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BUSINESS_INSIDER_UK, api_key, max, sort, reverse)
+    def business_insider_uk(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BUSINESS_INSIDER_UK, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def buzzfeed(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.BUZZFEED, api_key, max, sort, reverse)
+    def buzzfeed(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.BUZZFEED, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def cnbc(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.CNBC, api_key, max, sort, reverse)
+    def cnbc(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.CNBC, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def cnn(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.CNN, api_key, max, sort, reverse)
+    def cnn(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.CNN, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def daily_mail(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.DAILY_MAIL, api_key, max, sort, reverse)
+    def daily_mail(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.DAILY_MAIL, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def engadget(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ENGADGET, api_key, max, sort, reverse)
+    def engadget(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ENGADGET, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def entertainment_weekly(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ENTERTAINMENT_WEEKLY, api_key, max, sort, reverse)
+    def entertainment_weekly(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ENTERTAINMENT_WEEKLY, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def espn(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ESPN, api_key, max, sort, reverse)
+    def espn(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ESPN, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def espn_cric_info(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.ESPN_CRIC_INFO, api_key, max, sort, reverse)
+    def espn_cric_info(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.ESPN_CRIC_INFO, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def financial_times(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.FINANCIAL_TIMES, api_key, max, sort, reverse)
+    def financial_times(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.FINANCIAL_TIMES, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def football_italia(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.FOOTBALL_ITALIA, api_key, max, sort, reverse)
+    def football_italia(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.FOOTBALL_ITALIA, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def fortune(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.FORTUNE, api_key, max, sort, reverse)
+    def fortune(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.FORTUNE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def four_four_two(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.FOUR_FOUR_TWO, api_key, max, sort, reverse)
+    def four_four_two(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.FOUR_FOUR_TWO, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def fox_sports(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.FOX_SPORTS, api_key, max, sort, reverse)
+    def fox_sports(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.FOX_SPORTS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def google_news(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.GOOGLE_NEWS, api_key, max, sort, reverse)
+    def google_news(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.GOOGLE_NEWS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def hacker_news(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.HACKER_NEWS, api_key, max, sort, reverse)
+    def hacker_news(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.HACKER_NEWS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def ign(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.IGN, api_key, max, sort, reverse)
+    def ign(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.IGN, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def independent(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.INDEPENDENT, api_key, max, sort, reverse)
+    def independent(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.INDEPENDENT, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def mashable(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.MASHABLE, api_key, max, sort, reverse)
+    def mashable(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.MASHABLE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def metro(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.METRO, api_key, max, sort, reverse)
+    def metro(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.METRO, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def mirror(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.MIRROR, api_key, max, sort, reverse)
+    def mirror(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.MIRROR, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def mtv_news(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.MTV_NEWS, api_key, max, sort, reverse)
+    def mtv_news(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.MTV_NEWS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def mtv_news_uk(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.MTV_NEWS_UK, api_key, max, sort, reverse)
+    def mtv_news_uk(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.MTV_NEWS_UK, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def national_geographic(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.NATIONAL_GEOGRAPHIC, api_key, max, sort, reverse)
+    def national_geographic(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.NATIONAL_GEOGRAPHIC, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def new_scientist(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.NEW_SCIENTIST, api_key, max, sort, reverse)
+    def new_scientist(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.NEW_SCIENTIST, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def newsweek(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.NEWSWEEK, api_key, max, sort, reverse)
+    def newsweek(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.NEWSWEEK, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def new_york_magazine(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.NEW_YORK_MAGAZINE, api_key, max, sort, reverse)
+    def new_york_magazine(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.NEW_YORK_MAGAZINE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def nfl_news(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.NFL_NEWS, api_key, max, sort, reverse)
+    def nfl_news(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.NFL_NEWS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def polygon(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.POLYGON, api_key, max, sort, reverse)
+    def polygon(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.POLYGON, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def recode(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.RECODE, api_key, max, sort, reverse)
+    def recode(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.RECODE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def reddit(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.REDDIT_R_ALL, api_key, max, sort, reverse)
+    def reddit(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.REDDIT_R_ALL, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def reuters(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.REUTERS, api_key, max, sort, reverse)
+    def reuters(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.REUTERS, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def talksport(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.TALKSPORT, api_key, max, sort, reverse)
+    def talksport(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.TALKSPORT, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def techcrunch(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.TECHCRUNCH, api_key, max, sort, reverse)
+    def techcrunch(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.TECHCRUNCH, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def techradar(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.TECHRADAR, api_key, max, sort, reverse)
+    def techradar(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.TECHRADAR, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_economist(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_ECONOMIST, api_key, max, sort, reverse)
+    def the_economist(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_ECONOMIST, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_guardian_au(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_GUARDIAN_AU, api_key, max, sort, reverse)
+    def the_guardian_au(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_GUARDIAN_AU, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_guardian_uk(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_GUARDIAN_UK, api_key, max, sort, reverse)
+    def the_guardian_uk(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_GUARDIAN_UK, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_huffington_post(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_HUFFINGTON_POST, api_key, max, sort, reverse)
+    def the_huffington_post(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_HUFFINGTON_POST, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_new_york_times(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_NEW_YORK_TIMES, api_key, max, sort, reverse)
+    def the_new_york_times(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_NEW_YORK_TIMES, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_next_web(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_NEXT_WEB, api_key, max, sort, reverse)
+    def the_next_web(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_NEXT_WEB, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_sport_bible(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_SPORT_BIBLE, api_key, max, sort, reverse)
+    def the_sport_bible(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_SPORT_BIBLE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_telegraph(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_TELEGRAPH, api_key, max, sort, reverse)
+    def the_telegraph(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_TELEGRAPH, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_verge(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_VERGE, api_key, max, sort, reverse)
+    def the_verge(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_VERGE, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_wall_street_journal(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_WALL_STREET_JOURNAL, api_key, max, sort, reverse)
+    def the_wall_street_journal(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_WALL_STREET_JOURNAL, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def the_washington_post(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.THE_WASHINGTON_POST, api_key, max, sort, reverse)
+    def the_washington_post(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.THE_WASHINGTON_POST, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def time(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.TIME, api_key, max, sort, reverse)
+    def time(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.TIME, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def usa_today(api_key, max, sort, reverse):
-        return NewsAPI._get_data(NewsAPI.USA_TODAY, api_key, max, sort, reverse)
+    def usa_today(api_key, max_articles, sort, reverse):
+        return NewsAPI._get_data(NewsAPI.USA_TODAY, api_key, max_articles, sort, reverse)
 
     @staticmethod
-    def business(api_key, max, sort, reverse):
+    def business(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.bloomberg(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.business_insider(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.business_insider_uk(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.cnbc(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.financial_times(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.fortune(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.the_economist(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.the_wall_street_journal(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.bloomberg(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.business_insider(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.business_insider_uk(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.cnbc(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.financial_times(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.fortune(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.the_economist(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.the_wall_street_journal(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def entertainment(api_key, max, sort, reverse):
+    def entertainment(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.buzzfeed(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.daily_mail(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.entertainment_weekly(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.mashable(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.buzzfeed(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.daily_mail(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.entertainment_weekly(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.mashable(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def gaming(api_key, max, sort, reverse):
+    def gaming(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.ign(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.polygon(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.ign(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.polygon(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def music(api_key, max, sort, reverse):
+    def music(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.mtv_news(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.mtv_news_uk(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.mtv_news(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.mtv_news_uk(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def science_and_nature(api_key, max, sort, reverse):
+    def science_and_nature(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.national_geographic(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.new_scientist(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.national_geographic(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.new_scientist(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def sport(api_key, max, sort, reverse):
+    def sport(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.bbc_sport(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.espn(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.espn_cric_info(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.football_italia(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.four_four_two(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.fox_sports(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.talksport(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.the_sport_bible(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.bbc_sport(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.espn(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.espn_cric_info(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.football_italia(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.four_four_two(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.fox_sports(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.talksport(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.the_sport_bible(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def technology(api_key, max, sort, reverse):
+    def technology(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.ars_technica(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.engadget(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.hacker_news(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.recode(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.techcrunch(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.techradar(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.the_verge(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.ars_technica(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.engadget(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.hacker_news(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.recode(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.techcrunch(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.techradar(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.the_verge(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def uk_news(api_key, max, sort, reverse):
+    def uk_news(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.bbc_news(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.uk_newspapers(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.bbc_news(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.uk_newspapers(api_key, max_articles, sort, reverse))
         return articles
 
     @staticmethod
-    def uk_newspapers(api_key, max, sort, reverse):
+    def uk_newspapers(api_key, max_articles, sort, reverse):
         articles = []
-        articles.extend(NewsAPI.the_guardian_uk(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.mirror(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.the_telegraph(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.daily_mail(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.financial_times(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.independent(api_key, max, sort, reverse))
-        articles.extend(NewsAPI.metro(api_key, max, sort, reverse))
+        articles.extend(NewsAPI.the_guardian_uk(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.mirror(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.the_telegraph(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.daily_mail(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.financial_times(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.independent(api_key, max_articles, sort, reverse))
+        articles.extend(NewsAPI.metro(api_key, max_articles, sort, reverse))
         return articles
 
     def get_headlines(self, source, max=0, sort=False, reverse=False):
 
         if source in self.function_mapping.keys():
             function = self.function_mapping[source]
-            return function(self.api_key, max, sort, reverse)
+            return function(self.api_key, max_articles, sort, reverse)
         else:
-            logging.error ("No source available for %s"%source)
+            logging.error("No source available for %s"%source)
             return []
 
     @staticmethod
@@ -561,13 +562,13 @@ class NewsAPI(object):
 
     @staticmethod
     def json_to_file(filename, json_data):
-        with open(filename, 'w+') as f:
-            json.dump(json_data, f)
+        with open(filename, 'w+') as json_file:
+            json.dump(json_data, json_file)
 
     @staticmethod
     def json_from_file(filename):
-        with open(filename, 'r+') as f:
-            return json.load(f)
+        with open(filename, 'r+') as json_file:
+            return json.load(json_file)
 
     @staticmethod
     def to_program_y_text(articles, break_str=" <br /> "):
@@ -577,12 +578,10 @@ if __name__ == '__main__':
 
     # Running these tools drops test files into the geocode test folder
 
-    from programy.utils.license.keys import LicenseKeys
+    app_license_keys = LicenseKeys()
+    app_license_keys.load_license_key_file(os.path.dirname(__file__) + '/../../../../bots/y-bot/config/license.keys')
 
-    license_keys = LicenseKeys()
-    license_keys.load_license_key_file(os.path.dirname(__file__) + '/../../../../bots/y-bot/config/license.keys')
-
-    news_api = NewsAPI(license_keys)
+    news_api = NewsAPI(app_license_keys)
 
     results = news_api.get_headlines(NewsAPI.BBC_NEWS)
 

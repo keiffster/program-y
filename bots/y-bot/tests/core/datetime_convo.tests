@@ -1,0 +1,56 @@
+# THE SEASON #
+"THE SEASON", "Winter", "Spring", "Summer", "Autumn", "Fall"
+"TELL ME THE SEASON", "Winter", "Spring", "Summer", "Autumn", "Fall"
+
+# WHAT # SEASON #
+"WHAT SEASON", "Winter", "Spring", "Summer", "Autumn", "Fall"
+"WHAT SEASON IS IT", "Winter", "Spring", "Summer", "Autumn", "Fall"
+"DO YOU KNOW WHAT SEASON IT IS", "Winter", "Spring", "Summer", "Autumn", "Fall"
+
+# WHICH # SEASON #
+"WHICH SEASON", "Winter", "Spring", "Summer", "Autumn", "Fall"
+"WHICH SEASON IS IT", "Winter", "Spring", "Summer", "Autumn", "Fall"
+"CAN YOU TELL ME WHICH SEASON IT IS", "Winter", "Spring", "Summer", "Autumn", "Fall"
+
+# WHAT # MONTH #
+"WHAT MONTH", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+"WHAT MONTH IS IT", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+"TELL ME WHAT MONTH IS IT", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+
+# WHICH # MONTH #
+"WHICH MONTH", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+"WHICH MONTH IS IT", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+"TELL ME WHICH MONTH IS IT", "This is [January|February|March|April|May|June|July|August|September|October|November|December]"
+
+# WHAT # DAY #
+"WHAT DAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHICH # DAY #
+"WHICH DAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# TODAY
+"TODAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHAT # TODAY
+"WHAT TODAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHAT # DAY # TOMORROW
+"WHAT DAY TOMORROW", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHAT IS TOMORROW
+"WHAT DAY IS TOMORROW", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHICH # DAY # TOMORROW
+"WHICH DAY TOMORROW", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+
+# WHAT # YEAR #
+"WHAT YEAR", "20[0-9][0-9]"
+
+# WHICH # YEAR #
+"WHICH YEAR", "20[0-9][0-9]"
+
+# WHAT # TODAYS DATE #
+
+# WHAT # DATE #
+
+# WHAT # TIME #

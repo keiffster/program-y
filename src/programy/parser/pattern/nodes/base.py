@@ -367,6 +367,7 @@ class PatternNode(object):
         if self._topic is not None:
             match = self._topic.consume(bot, clientid, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
+                logging.debug("%sMatched topic, success!" % (tabs))
                 return match
             if words.word(word_no) == PatternNode.TOPIC:
                 logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternNode.TOPIC))
@@ -376,6 +377,7 @@ class PatternNode(object):
         if self._that is not None:
             match = self._that.consume(bot, clientid, context, words, word_no, Match.THAT, depth+1)
             if match is not None:
+                logging.debug("%sMatched that, success!" % (tabs))
                 return match
             if words.word(word_no) == PatternNode.THAT:
                 logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternNode.THAT))
@@ -392,6 +394,7 @@ class PatternNode(object):
 
                 match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
                 if match is not None:
+                    logging.debug("%sMatched child, success!" % (tabs))
                     return match
                 else:
                     context.pop_match ()
@@ -399,6 +402,7 @@ class PatternNode(object):
         if self._0ormore_hash is not None:
             match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
+                logging.debug("%sMatched 0 or more hash, success!" % (tabs))
                 return match
             #else:
             #    context.pop_match ()
@@ -406,6 +410,7 @@ class PatternNode(object):
         if self._1ormore_underline is not None:
             match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
+                logging.debug("%sMatched 1 or more underline, success!" % (tabs))
                 return match
             #else:
             #    context.pop_match ()
@@ -420,6 +425,7 @@ class PatternNode(object):
 
                 match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
                 if match is not None:
+                    logging.debug("%sMatched child, success!" % (tabs))
                     return match
                 else:
                     context.pop_match ()
@@ -427,6 +433,7 @@ class PatternNode(object):
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
+                logging.debug("%sMatched 0 or more arrow, success!" % (tabs))
                 return match
             #else:
             #    context.pop_match ()
@@ -434,6 +441,7 @@ class PatternNode(object):
         if self._1ormore_star is not None:
             match = self._1ormore_star.consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
+                logging.debug("%sMatched 1 or more star, success!" % (tabs))
                 return match
             #else:
             #    context.pop_match ()

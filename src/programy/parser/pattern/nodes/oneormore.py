@@ -116,8 +116,13 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                     if match is not None:
                         return match
 
-            if word == PatternTopicNode.TOPIC or word == PatternThatNode.THAT:
-                logging.debug ("Found a topic or that ar the wrong place....")
+            if word == PatternTopicNode.TOPIC:
+                logging.debug ("Found a topic at the wrong place....")
+                context.pop_matches(matches_add)
+                return None
+
+            if word == PatternThatNode.THAT:
+                logging.debug ("Found a that at the wrong place....")
                 context.pop_matches(matches_add)
                 return None
 
@@ -138,8 +143,13 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if match is not None:
                 return match
 
-            if word == PatternTopicNode.TOPIC or word == PatternThatNode.THAT:
-                logging.debug ("Found a topic or that ar the wrong place....")
+            if word == PatternTopicNode.TOPIC:
+                logging.debug ("Found a topic at the wrong place....")
+                context.pop_matches(matches_add)
+                return None
+
+            if word == PatternThatNode.THAT:
+                logging.debug ("Found a that at the wrong place....")
                 context.pop_matches(matches_add)
                 return None
 

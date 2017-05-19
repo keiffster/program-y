@@ -106,8 +106,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     if match is not None:
                         return match
 
-                    if word == PatternTopicNode.TOPIC or word == PatternThatNode.THAT:
-                        logging.debug ("Found a topic or that ar the wrong place....")
+                    if word == PatternTopicNode.TOPIC :
+                        logging.debug ("1 Found a topic at the wrong place....")
+                        context.pop_matches(matches_added)
+                        return None
+
+                    if word == PatternThatNode.THAT:
+                        logging.debug("Found a that at the wrong place....")
                         context.pop_matches(matches_added)
                         return None
 
@@ -123,8 +128,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-            if word == PatternTopicNode.TOPIC or word == PatternThatNode.THAT:
-                logging.debug("Found a topic or that ar the wrong place....")
+            if word == PatternTopicNode.TOPIC:
+                logging.debug("2 Found a topic at the wrong place....")
+                context.pop_matches(matches_added)
+                return None
+
+            if word == PatternThatNode.THAT:
+                logging.debug("Found a that at the wrong place....")
                 context.pop_matches(matches_added)
                 return None
 
@@ -148,8 +158,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             if match is not None:
                 return match
 
-            if word == PatternTopicNode.TOPIC or word == PatternThatNode.THAT:
-                logging.debug("Found a topic or that ar the wrong place....")
+            if word == PatternTopicNode.TOPIC:
+                logging.debug("3 Found a topic at the wrong place....")
+                context.pop_matches(matches_added)
+                return None
+
+            if word == PatternThatNode.THAT:
+                logging.debug("Found a that at the wrong place....")
                 context.pop_matches(matches_added)
                 return None
 
