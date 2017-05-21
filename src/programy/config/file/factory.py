@@ -14,9 +14,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.file.xml import XMLConfigurationFile
-from programy.config.file.yaml import YamlConfigurationFile
-from programy.config.file.json import JSONConfigurationFile
+from programy.config.file.xml_file import XMLConfigurationFile
+from programy.config.file.yaml_file import YamlConfigurationFile
+from programy.config.file.json_file import JSONConfigurationFile
 
 
 class ConfigurationFactory(object):

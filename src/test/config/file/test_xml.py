@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from programy.config.file.xml import XMLConfigurationFile
+from programy.config.file.xml_file import XMLConfigurationFile
 from programy.config.client.client import ClientConfiguration
 
 

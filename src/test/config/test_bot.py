@@ -1,7 +1,7 @@
 import unittest
 
 from programy.config.bot import BotConfiguration
-from programy.config.file.yaml import YamlConfigurationFile
+from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.client.client import ClientConfiguration
 
 

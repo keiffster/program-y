@@ -15,7 +15,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import json
-import yaml
 
 import logging
 from programy.config.file.file import BaseConfigurationFile

@@ -3,7 +3,7 @@ import unittest
 from programy.config.brain import BrainFileConfiguration
 from programy.config.brain import BrainServiceConfiguration
 from programy.config.brain import BrainConfiguration
-from programy.config.file.yaml import YamlConfigurationFile
+from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.client.client import ClientConfiguration
 
 

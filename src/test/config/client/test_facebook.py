@@ -1,6 +1,6 @@
 import unittest
 
-from programy.config.file.yaml import YamlConfigurationFile
+from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.client.client import ClientConfiguration
 from programy.config.client.facebook import FacebookConfiguration, FacebookClientConfiguration
 

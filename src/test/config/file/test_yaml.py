@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from programy.config.file.yaml import YamlConfigurationFile
+from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.client.client import ClientConfiguration
 
 class YamlConfigurationFileTests(unittest.TestCase):

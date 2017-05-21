@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from programy.config.file.json import JSONConfigurationFile
+from programy.config.file.json_file import JSONConfigurationFile
 from programy.config.client.client import ClientConfiguration
 
 
