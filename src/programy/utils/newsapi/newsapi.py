@@ -543,7 +543,7 @@ class NewsAPI(object):
         articles.extend(NewsAPI.metro(api_key, max_articles, sort, reverse))
         return articles
 
-    def get_headlines(self, source, max=0, sort=False, reverse=False):
+    def get_headlines(self, source, max_articles=0, sort=False, reverse=False):
 
         if source in self.function_mapping.keys():
             function = self.function_mapping[source]

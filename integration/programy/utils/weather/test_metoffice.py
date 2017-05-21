@@ -46,7 +46,7 @@ class MetOfficeWeatherExtensionIntegrationTests(unittest.TestCase):
         report = forecast.get_report_for_date(date)
         self.assertIsNotNone(report)
 
-        datapoint = report.get_time_period_by_time("540")
+        datapoint = report.get_time_period_by_time("900")
         self.assertIsNotNone(datapoint)
         self.assertIsInstance(datapoint, ThreeHourlyForecastDataPoint)
 
