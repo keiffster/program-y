@@ -741,6 +741,27 @@ class AIMLParserTests(unittest.TestCase):
 
         self.parser.pattern_parser.dump(output_func=print)
 
+    def test_iset(self):
+
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <category>
+                    <pattern>Hello</pattern>
+                    <template>Hi There</template>
+                </category>
+                <category>
+                    <pattern># <iset>who, what</iset> are you</pattern>
+                    <template>OK thanks</template>
+                </category>
+                <category>
+                    <pattern># <iset>who, what</iset> is he</pattern>
+                    <template>OK thanks</template>
+                </category>
+            </aiml>
+            """)
+
+        self.parser.pattern_parser.dump(output_func=print)
 
 if __name__ == '__main__':
     unittest.main()

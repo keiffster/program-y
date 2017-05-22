@@ -12,7 +12,7 @@ from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
-
+from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.parser.pattern.nodes.set import PatternSetNode
 from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.template.nodes.base import TemplateNode
@@ -68,6 +68,12 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
 
+    def test_node_from_element_iset(self):
+        set_element = ET.fromstring('<iset>yes, no</iset>')
+        node = PatternGraph.node_from_element(set_element)
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternISetNode)
+
     def test_node_from_element_set(self):
         set_element = ET.fromstring('<set>colour</set>')
         node = PatternGraph.node_from_element(set_element)
@@ -75,8 +81,8 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsInstance(node, PatternSetNode)
 
     def test_node_from_element_bot(self):
-        set_element = ET.fromstring('<bot>name</bot>')
-        node = PatternGraph.node_from_element(set_element)
+        bot_element = ET.fromstring('<bot>name</bot>')
+        node = PatternGraph.node_from_element(bot_element)
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternBotNode)
 

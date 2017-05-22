@@ -24,6 +24,7 @@ class WebChatConfiguration(BaseConfigurationData):
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
+        self._use_api_keys = False
         BaseConfigurationData.__init__(self, "webchat")
 
     @property
@@ -38,12 +39,17 @@ class WebChatConfiguration(BaseConfigurationData):
     def debug(self):
         return self._debug
 
+    @property
+    def use_api_keys(self):
+        return self._use_api_keys
+
     def load_config_section(self, config_file, bot_root):
         webchat = config_file.get_section(self.section_name)
         if webchat is not None:
             self._host = config_file.get_option(webchat, "host")
             self._port = config_file.get_option(webchat, "port")
             self._debug = config_file.get_bool_option(webchat, "debug")
+            self._use_api_keys = config_file.get_bool_option(webchat, "use_api_keys")
 
 class WebChatClientConfiguration(ClientConfiguration):
 
