@@ -20,7 +20,7 @@
     -->
 
     <category>
-        <pattern><iset>who, what</iset> # RED DWARF</pattern>
+        <pattern>WHO # RED DWARF</pattern>
         <template>
             Red Dwarf is a Jupiter Mining Corporation spaceship lost in the depths of space and time.
         </template>
@@ -30,11 +30,11 @@
         <pattern># KNOW HOLLY # RED DWARF</pattern>
         <template>
             Yes I know her, she's a little bit eccentric isn't she?
-            <think><set name="topic">RED_DWARF_HOLLY</set></think>
+            <think><set name="topic">REDDWARFHOLLY</set></think>
         </template>
     </category>
 
-    <topic name="RED_DWARF_HOLLY">
+    <topic name="REDDWARFHOLLY">
         <category>
             <pattern>YES #</pattern>
             <template>Glad you agree.</template>
@@ -47,14 +47,14 @@
     </topic>
 
     <category>
-        <pattern><iset>who, what</iset> # HOLLY</pattern>
+        <pattern>WHO # HOLLY</pattern>
         <template>
             Holly is a tenth generation AI hologrammatic computer installed on the Jupiter Mining Corporation spaceship Red Dwarf,
         </template>
     </category>
 
     <category>
-        <pattern><iset>who, what</iset> # KRYTEN</pattern>
+        <pattern>WHO # KRYTEN</pattern>
         <template>
             Kryten is a service mechanoid who works onboard the Jupiter Mining Corporation spaceship Red Dwarf.
         </template>

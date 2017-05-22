@@ -24,13 +24,13 @@
 
 # WHAT # DAY #
 "WHAT DAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-"WHAT DAY IS IT TODAY", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-"TELL ME WHAT DAY IT IS", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+"WHAT DAY IS IT TODAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+"TELL ME WHAT DAY IT IS", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 
 # WHICH # DAY #
 "WHICH DAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-"WHICH DAY IS IT TODAY", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
-"TELL ME WHICH DAY IT IS", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+"WHICH DAY IS IT TODAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+"TELL ME WHICH DAY IT IS", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
 
 # TODAY
 "TODAY", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"

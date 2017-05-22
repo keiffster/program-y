@@ -38,7 +38,6 @@ class ClientArguments(object):
         self.parser.add_argument('--config', dest='config', help='configuration file location')
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
-        self.parser.add_argument('--debug', dest='debug', action='store_true', help='run in debug mode')
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
         client.add_client_arguments(self.parser)
 
@@ -64,10 +63,6 @@ class ClientArguments(object):
     @property
     def config_format(self):
         return self.args.cformat
-
-    @property
-    def debug(self):
-        return self.args.debug
 
     @property
     def noloop(self):

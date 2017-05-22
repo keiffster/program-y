@@ -20,7 +20,15 @@
     -->
 
     <category>
-        <pattern># <iset>who, what</iset> # DEEP THOUGHT</pattern>
+        <pattern># WHAT # DEEP THOUGHT</pattern>
+        <template>
+            Deep Thought is a computer that was created by the pan-dimensional, hyper-intelligent species of beings <br/>
+            to come up with the answer to The Ultimate Question of Life, the Universe, and Everything
+        </template>
+    </category>
+
+    <category>
+        <pattern># WHO # DEEP THOUGHT</pattern>
         <template>
             Deep Thought is a computer that was created by the pan-dimensional, hyper-intelligent species of beings <br/>
             to come up with the answer to The Ultimate Question of Life, the Universe, and Everything

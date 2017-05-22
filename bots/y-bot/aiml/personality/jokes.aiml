@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <aiml>
     <!-- Free software &copy; 2001-2003 ALICE A.I. Foundation. -->
     <!-- This program is open source code released under -->
@@ -10,30 +10,30 @@
 
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
+
     <category>
         <pattern>* SOMETHING FUNNY</pattern>
         <template>
-            <srai>TELL_A_JOKE</srai>
+            <srai>YTELLAJOKE</srai>
         </template>
     </category>
 
     <category>
         <pattern>TELL * JOKE</pattern>
         <template>
-            <srai>TELL_A_JOKE</srai>
+            <srai>YTELLAJOKE</srai>
         </template>
     </category>
 
     <category>
         <pattern># MAKE * LAUGH</pattern>
         <template>
-            <srai>TELL_A_JOKE</srai>
+            <srai>YTELLAJOKE</srai>
         </template>
     </category>
 
     <category>
-        <pattern>TELL_A_JOKE</pattern>
-
+        <pattern>YTELLAJOKE</pattern>
         <template>
             <random>
                 <li>I met a Dutch girl with inflatable shoes last week, phoned her up to arrange a date but
@@ -209,9 +209,7 @@
                     of the finest silk and got loads of cactuses over it." "Cacti", says the co-worker. "Forget
                     my tie", says the bloke. "Look at my shirt!"
                 </li>
-                <li>1110011010001011111?
-                     
-                     010011010101100111011!
+                <li>1110011010001011111? 010011010101100111011!
                 </li>
                 <li>What did the plumber say when he wanted to divorce his wife? Sorry, but it's over, Flo!
                 </li>
@@ -515,7 +513,7 @@
 
     <category>
         <pattern>_</pattern>
-        <that>010011010101100111011</that>
+        <that>1110011010001011111? 010011010101100111011!</that>
         <template>Well computers think it's a funny joke.</template>
     </category>
 

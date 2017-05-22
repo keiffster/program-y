@@ -43,8 +43,6 @@ class AIMLParser(object):
         self.stop_on_invalid = stop_on_invalid
         self.pattern_parser = PatternGraph()
         self.template_parser = TemplateGraph(self)
-        self._filename = "Unknown"
-        self._version = "Unknown"
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
 
@@ -66,15 +64,17 @@ class AIMLParser(object):
         else:
             logging.info("No AIML files defined in configuration to load")
 
+        if brain_configuration.dump_to_file is not None:
+            logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.dump_to_file)
+            self.pattern_parser.dump_to_file(brain_configuration.dump_to_file)
+
     def parse_from_file(self, filename):
         """
         Parse an AIML file and return all the cateogeries found in the file
         :param filename: Name of file to parse
         :return list of categories parsed from file:
         """
-        self._filename = filename
-
-        logging.info("Loading aiml file file: " + self._filename)
+        logging.info("Loading aiml file: " + filename)
 
         try:
             tree = ET.parse(filename, parser=LineNumberingParser())
@@ -156,14 +156,15 @@ class AIMLParser(object):
 
     def parse_version(self, aiml):
         if 'version' in aiml.attrib:
-            self._version = aiml.attrib['version']
-            if self._version not in ['0.9', '1.0', '1.1', '2.0']:
+            version = aiml.attrib['version']
+            if version not in ['0.9', '1.0', '1.1', '2.0']:
                 if self._supress_warnings is False:
-                    logging.warning("Version number not a supported version: %s", self._version)
+                    logging.warning("Version number not a supported version: %s", version)
         else:
             if self._supress_warnings is False:
                 logging.warning("No version info, defaulting to 2.0")
-            self._version = "2.0"
+            version = "2.0"
+        return version
 
     #########################################################################################
     #
@@ -195,7 +196,6 @@ class AIMLParser(object):
 
         category_found = False
         for child in topic_element:
-            logging.debug(child.tag)
             if child.tag == 'category':
                 self.parse_category(child, topic_pattern)
                 category_found = True

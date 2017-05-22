@@ -111,10 +111,12 @@ class PatternGraph(object):
 
     def add_pattern_to_node(self, pattern_element):
         head_text = self.get_text_from_element(pattern_element)
+
         if head_text is not None:
             current_node = self._parse_text(head_text, self._root_node)
         else:
             current_node = self._root_node
+        node = current_node
 
         for sub_element in pattern_element:
             new_node = PatternGraph.node_from_element(sub_element)
@@ -211,6 +213,10 @@ class PatternGraph(object):
             counter[0] += 1
             self._count_words_in_children(child, counter)
 
-    def dump(self, output_func=logging.debug, verbose=True):
-        self.root.dump("", output_func, verbose)
+    def dump(self, output_func=logging.debug, eol="", verbose=True):
+        self.root.dump("", output_func, eol, verbose)
         output_func("")
+
+    def dump_to_file(self, filename):
+        with open(filename, "w+") as dump_file:
+            self.dump(output_func=dump_file.write, eol="\n")

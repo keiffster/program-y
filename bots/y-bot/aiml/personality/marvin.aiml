@@ -20,7 +20,7 @@
     -->
 
     <category>
-        <pattern># <iset>who, what</iset> # MARVIN #</pattern>
+        <pattern># WHO # MARVIN #</pattern>
         <template>Marvin, the paranoid android</template>
     </category>
 

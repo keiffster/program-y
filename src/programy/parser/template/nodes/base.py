@@ -31,16 +31,16 @@ class TemplateNode(object):
     def append(self, child):
         self._children.append(child)
 
-    def dump(self, tabs, output_func=logging.debug, verbose=True):
-        self.output(tabs, output_func)
+    def dump(self, tabs, output_func, eol, verbose):
+        self.output(tabs, output_func, eol, verbose)
 
-    def output(self, tabs="", output=logging.debug):
-        self.output_child(self, tabs, output)
+    def output(self, tabs, output_func, eol, verbose):
+        self.output_child(self, tabs, eol, output_func)
 
-    def output_child(self, node, tabs, output=logging.debug):
+    def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            output("%s{%s}" % (tabs, child.to_string()))
-            self.output_child(child, tabs + "\t")
+            output_func("%s{%s}%s" % (tabs, child.to_string(), eol))
+            self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, bot, clientid):
         return (" ".join([child.resolve(bot, clientid) for child in self._children])).strip()

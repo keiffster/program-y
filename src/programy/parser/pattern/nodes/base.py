@@ -324,28 +324,28 @@ class PatternNode(object):
         else:
             return "NODE"
 
-    def dump(self, tabs, output_func=logging.debug, verbose=True):
+    def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
-        output_func("%s%s" % (tabs, self.to_string(verbose)))
+        output_func("%s%s%s" % (tabs, self.to_string(verbose), eol))
 
         for priority in self._priority_words:
-            priority.dump(tabs+"\t", output_func, verbose)
+            priority.dump(tabs+"\t", output_func, eol, verbose)
         if self._0ormore_arrow is not None:
-            self._0ormore_arrow.dump(tabs+"\t", output_func, verbose)
+            self._0ormore_arrow.dump(tabs+"\t", output_func, eol, verbose)
         if self._0ormore_hash is not None:
-            self._0ormore_hash.dump(tabs+"\t", output_func, verbose)
+            self._0ormore_hash.dump(tabs+"\t", output_func, eol, verbose)
         if self._1ormore_underline is not None:
-            self._1ormore_underline.dump(tabs+"\t", output_func, verbose)
+            self._1ormore_underline.dump(tabs+"\t", output_func, eol, verbose)
         if self._1ormore_star is not None:
-            self._1ormore_star.dump(tabs+"\t", output_func, verbose)
+            self._1ormore_star.dump(tabs+"\t", output_func, eol, verbose)
         if self._topic is not None:
-            self._topic.dump(tabs+"\t", output_func, verbose)
+            self._topic.dump(tabs+"\t", output_func, eol, verbose)
         if self._that is not None:
-            self._that.dump(tabs+"\t", output_func, verbose)
+            self._that.dump(tabs+"\t", output_func, eol, verbose)
         if self._template is not None:
-            self._template.dump(tabs+"\t", output_func, verbose)
+            self._template.dump(tabs+"\t", output_func, eol, verbose)
         for child in self.children:
-            child.dump(tabs+"\t", output_func, verbose)
+            child.dump(tabs+"\t", output_func, eol, verbose)
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 

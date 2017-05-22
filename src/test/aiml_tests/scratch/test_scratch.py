@@ -24,19 +24,7 @@ class ScratchAIMLTests(unittest.TestCase):
         ScratchAIMLTests.test_client = ScratchTestsClient()
 
     def test_response(self):
-        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "I AM MARRIED")
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "SCRATCH TEST")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HOW LONG HAVE YOU BEEN MARRIED')
+        self.assertEqual(response, 'OK')
 
-        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "3 YEARS")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'Congratulations!')
-
-    def test_response2(self):
-        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "ZZZ")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'ARE YOU TIRED?')
-
-        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "YES")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'Maybe you should get some rest. I will still be here later.')

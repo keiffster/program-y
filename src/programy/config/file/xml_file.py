@@ -68,6 +68,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         if child is not None:
             return self._infer_type_from_string(child.text)
         else:
-            logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
+            if missing_value is not None:
+                logging.error("Missing value for [%s] in config section [%s], return default value %s", option_name, section, missing_value)
             return missing_value
 
