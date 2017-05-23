@@ -38,11 +38,13 @@
             </srai>
         </template>
     </category>
+
     <category>
         <pattern>GOOGLE *</pattern>
         <template><![CDATA[<a target="_new"   href="http://www.google.com/search?q=<personf/>">]]>  Google Search
             <![CDATA[</a>]]></template>
     </category>
+
     <category>
         <pattern>XDMOZ *</pattern>
         <template><![CDATA[<a target="_new"   href="http://search.dmoz.org/cgi-bin/search?search=<personf/>">]]>
@@ -59,6 +61,7 @@
             <![CDATA[</a>]]>
         </template>
     </category>
+
     <category>
         <pattern>XFIND *</pattern>
         <template>
@@ -129,6 +132,7 @@
             </think>
         </template>
     </category>
+
     <category>
         <pattern>XGOOGLE *</pattern>
         <template><![CDATA[<a target="_new"   href="http://www.google.com/search?q=<personf/>">]]>  Google Search

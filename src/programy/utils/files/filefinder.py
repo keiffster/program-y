@@ -45,21 +45,46 @@ class FileFinder(object):
 
         return found_files
 
+    def get_just_filename_file(self, file):
+        if "." in file[0]:
+            filename = file[0].split(".")[0]
+        else:
+            filename = file[0]
+        return filename.upper()
+
     def load_dir_contents(self, path_to_sets, subdir=False, extension=".txt"):
 
         files = self.find_files(path_to_sets, subdir, extension)
 
         collection = {}
         for file in files:
-            if "." in file[0]:
-                filename = file[0].split(".")[0]
-            else:
-                filename = file[0]
-            filename = filename.upper()
+            just_filename = self.get_just_filename_file(file)
 
             try:
-                collection[filename] = self.load_file_contents(file[1])
+                collection[just_filename] = self.load_file_contents(file[1])
             except Exception as e:
                 logging.error ("Failed to load file contents for file [%s]"%file[1])
+
+        return collection
+
+    def get_just_filename_from_filename(self, filename):
+
+        sections = filename.split(os.sep)
+        last_section = sections[-1]
+        if "." in last_section:
+            filename = last_section.split(".")[0]
+        else:
+            filename = last_section
+        return filename
+
+    def load_single_file_contents(self, filename):
+
+        just_filename = self.get_just_filename_from_filename(filename)
+
+        collection = {}
+        try:
+            collection[just_filename] = self.load_file_contents(filename)
+        except Exception as e:
+            logging.error ("Failed to load file contents for file [%s]"%filename)
 
         return collection

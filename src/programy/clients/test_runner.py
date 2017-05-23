@@ -81,25 +81,41 @@ class TestRunnerBotClient(BotClient):
     def test_dir(self):
         return self.arguments.args.test_dir
 
+    @property
+    def test_file(self):
+        return self.arguments.args.test_file
+
+    @property
+    def verbose(self):
+        return self.arguments.args.verbose
+
     def get_description(self):
         return 'ProgramY Test Runner Client'
 
     def add_client_arguments(self, parser):
         parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
+        parser.add_argument('--test_file', dest='test_file', help='Single file ot tests to run against grammar')
+        parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
     def set_environment(self):
         self.bot.brain.predicates.pairs.append(["env", "TestRunner"])
 
     def run(self):
-        print ("Loading Tests from directory [%s]" % self.test_dir)
         file_finder = TestFileFileFinder()
-        collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
+        if self.test_dir is not None:
+            print ("Loading Tests from directory [%s]" % self.test_dir)
+            collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
+        else:
+            collection = file_finder.load_single_file_contents(self.test_file)
+
         successes = []
         failures = []
         start = datetime.datetime.now()
         for category in collection.keys():
             for test in collection[category]:
                 test.category = category
+                if self.verbose:
+                    print(test.question)
                 response = self.bot.ask_question(self.clientid, test.question)
                 success = False
                 test.response = response

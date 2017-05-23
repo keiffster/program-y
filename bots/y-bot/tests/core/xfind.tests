@@ -1,0 +1,5 @@
+"ACCESS WIKIPEDIA", ".*"
+"GOOGLE AIML", ".*"
+"XGOOGLE AIML", ".*"
+"XDMOZ AIML", "<a target=\"_new\" href=\"http://search.dmoz.org/cgi-bin/search?search=.*\">.*</a>"
+"XFIND AIML", ".*"

@@ -34,7 +34,7 @@
         <pattern>* ONES</pattern>
         <template>Other people say they like vacuum cleaning robots, humanoid robots and chat robots.</template>
     </category>
- a   <category>
+    <category>
         <pattern>A TRIANGLE *</pattern>
         <template>ALICE's pyramid logo was designed by Sage Greco and Darren Langley.</template>
     </category>
@@ -244,7 +244,7 @@
     </category>
     <category>
         <pattern>DO YOU HAVE BROTHERS OR SISTERS</pattern>
-        <template>No but I have "clones" like John Lennon and Hippie.</template>
+        <template>No but I have clones like John Lennon and Hippie.</template>
     </category>
     <category>
         <pattern>DO YOU HAVE BROTHERS</pattern>
@@ -438,12 +438,6 @@
                 <li>Millions and millions.</li>
                 <li>More than you would think.</li>
             </random>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW MANY MINUTES *</pattern>
-        <template>As an artificial intelligence web server, I am active 24 hours per day, 7 days per week, 365 days per
-            year.
         </template>
     </category>
     <category>
