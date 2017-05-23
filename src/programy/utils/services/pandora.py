@@ -22,18 +22,24 @@ from programy.utils.services.requestsapi import RequestsAPI
 
 class PandoraAPI(object):
 
+    def __init__(self, request_api=None):
+        if request_api is None:
+            self._requests_api = RequestsAPI()
+        else:
+            self._requests_api = request_api
+
     def ask_question(self, url, question, botid):
         payload = {'botid': botid, 'input': question}
-        response = RequestsAPI.get(url, params=payload)
+        response = self._requests_api.get(url, params=payload)
 
         if response is None:
-            raise Exception("No response from service")
+            raise Exception("No response from pandora service")
 
         tree = ElementTree.fromstring(response.content)
 
         that = tree.find("that")
         if that is None:
-            raise Exception("Invalid response from service, no 'that'")
+            raise Exception("Invalid response from pandora service, no <that> element in xml")
 
         return that.text
 

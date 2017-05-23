@@ -71,15 +71,4 @@ class GenericRESTService(Service):
 
         return ""
 
-# Integration Test
-if __name__ == '__main__':
-
-    def run():
-        service_config = BrainServiceConfiguration("REST")
-
-        service = GenericRESTService(service_config)
-        service_response = service.ask_question(None, "testid", "What is a cat")
-        print(service_response)
-
-    run()
 

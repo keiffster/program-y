@@ -21,16 +21,25 @@ from programy.utils.services.requestsapi import RequestsAPI
 
 class PannousAPI(object):
 
+    def __init__(self, request_api=None):
+        if request_api is None:
+            self._requests_api = RequestsAPI()
+        else:
+            self._requests_api = request_api
+
     def ask_question(self, url, question, login):
         payload = {'input': question, 'login': login}
 
-        response = RequestsAPI.get(url, params=payload)
+        response = self._requests_api.get(url, params=payload)
+        if response is None:
+            raise Exception("No response from pannous service")
+
         json_data = response.json()
 
         if 'output' not in json_data:
             raise Exception("'output' section missing from pannous json_data")
 
-        if len(json_data["output"]) == 0:
+        if json_data["output"] is None or len(json_data["output"]) == 0:
             raise Exception("'output' section has no elements in pannous json_data")
 
         if 'actions' not in json_data["output"][0]:
@@ -40,7 +49,7 @@ class PannousAPI(object):
             raise Exception("'say' section missing from output[0]['actions'] in pannous json_data")
 
         if 'text' not in json_data["output"][0]['actions']['say']:
-            raise Exception("text' section missing from output[0]['actions']['say'] in pannous json_data")
+            raise Exception("'text' section missing from output[0]['actions']['say'] in pannous json_data")
 
         return json_data["output"][0]['actions']['say']['text']
 

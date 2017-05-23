@@ -48,15 +48,3 @@ class WikipediaService(Service):
             logging.error("General error querying Wikipedia for question [%s]", question)
             return ""
 
-
-# Integration Test
-if __name__ == '__main__':
-
-    def run():
-        servce_config = BrainServiceConfiguration("WIKIPEDIA")
-
-        service = WikipediaService(servce_config)
-        service_response = service.ask_question(None, "testid", "keith sterling")
-        print(service_response)
-
-    run()
