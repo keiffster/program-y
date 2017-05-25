@@ -25,14 +25,14 @@ class PatternSetNode(PatternWordNode):
 
     @property
     def set_name(self):
-        return self.word
+        return self._word
 
     def is_set(self):
         return True
 
     def equivalent(self, other):
         if isinstance(other, PatternSetNode):
-            if self._word == other.word:
+            if self.set_name == other.set_name:
                 return True
         return False
 
@@ -49,7 +49,7 @@ class PatternSetNode(PatternWordNode):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
+            return "SET [%s] words=[%s]" % (self._child_count(verbose), self.word)
         else:
-            return "SET name=[%s]" % (self.word)
+            return "SET words=[%s]" % (self.word)
 

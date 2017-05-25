@@ -29,14 +29,14 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertEquals("TEST2", node.words[1])
         self.assertEquals("TEST3", node.words[2])
 
-        self.assertTrue(node.equivalent(PatternISetNode("test1, test2, test3")))
+        self.assertFalse(node.equivalent(PatternISetNode("test1, test2, test3")))
 
         self.assertTrue(node.equals(None, "testid", "TEST1"))
         self.assertTrue(node.equals(None, "testid", "TEST2"))
         self.assertTrue(node.equals(None, "testid", "TEST3"))
         self.assertFalse(node.equals(None, "testid", "TEST4"))
 
-        self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1,TEST2,TEST3]")
+        self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
 
     def test_parse_words(self):
         node = PatternISetNode("test1")

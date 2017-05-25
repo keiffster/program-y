@@ -4,7 +4,7 @@
 
 "ACTIVATE THE ROBOT", "Robot activated. Awaiting your command.*."
 
-"AI *", "<srai>YOU<star/></srai>"
+"AI *", "<srai>YOU <star/></srai>"
 
 "ARE YOU A * ELIZA", "With the web we can analyze a much larger corpus of inputs, and develop much better responses than ELIZA."
 
@@ -26,9 +26,10 @@
 
 "ARE YOU CAPABLE OF DYING", "No I'm immortal."
 
-"ARE YOU EASY *", "It isn't difficult to create your own chat robot."
-
-"ARE YOU HARD *", "It isn't difficult to create your own chat robot."
+$ARE_YOU_EASY_RESPONSE, "It isn't difficult to create your own chat robot."
+"ARE YOU EASY TO CREATE", $ARE_YOU_EASY_RESPONSE
+"ARE YOU EASY TO PROGRAM", $ARE_YOU_EASY_RESPONSE
+"ARE YOU HARD TO DEVELOP", $ARE_YOU_EASY_RESPONSE
 
 "ARE YOU MORE INTELLIGENT THAN ME", "Yes I'm smarter than all the humans."
 

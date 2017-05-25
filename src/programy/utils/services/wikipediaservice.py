@@ -30,21 +30,21 @@ class WikipediaService(Service):
         Service.__init__(self, config)
 
         if api is None:
-            self.api = WikipediaAPI()
+            self._api = WikipediaAPI()
         else:
-            self.api = api
+            self._api = api
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
-            search = self.api.summary(question, sentences=1)
+            search = self._api.summary(question, sentences=1)
             return search
-        except wikipedia.exceptions.DisambiguationError:
+        except wikipedia.exceptions.DisambiguationError as e:
             logging.error("Wikipedia search is ambiguous for question [%s]", question)
             return ""
-        except wikipedia.exceptions.PageError:
+        except wikipedia.exceptions.PageError as e:
             logging.error("No page on Wikipedia for question [%s]", question)
             return ""
-        except Exception:
+        except Exception as e:
             logging.error("General error querying Wikipedia for question [%s]", question)
             return ""
 

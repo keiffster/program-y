@@ -16,35 +16,31 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.pattern.nodes.word import PatternWordNode
 
 
-class PatternISetNode(PatternNode):
+class PatternISetNode(PatternWordNode):
 
     def __init__(self, words):
-        PatternNode.__init__(self)
-        self._word = 'iset'
+        PatternWordNode.__init__(self, 'iset')
         self._words = []
         self._parse_words(words)
-
-    @property
-    def words(self):
-        return self._words
 
     def _parse_words(self, words):
         splits = words.split(",")
         for word in splits:
             self._words.append(word.strip().upper())
 
+    @property
+    def words(self):
+        return self._words
+
     def is_set(self):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternISetNode):
-            for word in self._words:
-                if word not in other._words:
-                    return False
-        return True
+        # All isets are never equivalent, as they are inline and are unique regardless of set content
+        return False
 
     def equals(self, bot, client, word):
         for set_word in self._words:
@@ -55,7 +51,7 @@ class PatternISetNode(PatternNode):
     def to_string(self, verbose=True):
         words_str = ",".join(self._words)
         if verbose is True:
-            return "ISET [%s] name=[%s]" % (self._child_count(verbose), words_str)
+            return "ISET [%s] words=[%s]" % (self._child_count(verbose), words_str)
         else:
-            return "ISET name=[%s]" % words_str
+            return "ISET words=[%s]" % words_str
 

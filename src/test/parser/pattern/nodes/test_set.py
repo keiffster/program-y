@@ -30,7 +30,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equals(self.bot, "testid", "VALUE2"))
         self.assertTrue(node.equals(self.bot, "testid", "VALUE3"))
         self.assertFalse(node.equals(self.bot, "testid", "VALUE4"))
-        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
+        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1]")
 
     def test_number(self):
         node = PatternSetNode("NUMBER")

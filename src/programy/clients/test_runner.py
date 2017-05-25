@@ -55,19 +55,53 @@ class TestFileFileFinder(FileFinder):
     def __init__(self):
         FileFinder.__init__(self)
 
+    def empty_row(self, row):
+        return bool(len(row)<2)
+
+    def is_comment(self, question):
+        return bool(question[0]=='#')
+
+    def is_template(self, question):
+        return bool(question[0] == '$')
+
+    def clean_up_answer(self, text):
+        return text.replace('"', "").strip()
+
+    def add_answers_to_template(self, row, question, templates):
+        answers = []
+        for answer in row[1:]:
+            answers.append(self.clean_up_answer(answer))
+        templates[question] = answers
+
+    def add_template_answers(self, templates, answer, answers):
+        if answer in templates:
+            template = templates[answer]
+            for template_answer in template:
+                answers.append(template_answer)
+        else:
+            print("Template [%s] not found!" % answer)
+
     def load_file_contents(self, filename):
         print("Loading tests from file [%s]" % filename)
         questions = []
+        templates = {}
         with open(filename, 'r') as csvfile:
             csvreader = csv.reader(csvfile, delimiter=',', quotechar='"')
             for row in csvreader:
-                if len(row) > 1:
+                if self.empty_row(row) is False:
                     question = row[0]
-                    if question[0] != '#':
-                        answers = []
-                        for answer in row[1:]:
-                            answers.append(answer.replace('"', "").strip())
-                        questions.append(TestQuestion(question, answers))
+                    if self.is_comment(question) is False:
+                        if self.is_template(question) is True:
+                            self.add_answers_to_template(row, question, templates)
+                        else:
+                            answers = []
+                            for answer in row[1:]:
+                                answer = answer.strip()
+                                if self.is_template(answer) is True:
+                                    self.add_template_answers(templates, answer, answers)
+                                else:
+                                    answers.append(self.clean_up_answer(answer))
+                            questions.append(TestQuestion(question, answers))
         return questions
 
 
@@ -110,12 +144,16 @@ class TestRunnerBotClient(BotClient):
 
         successes = []
         failures = []
+        warnings = 0
         start = datetime.datetime.now()
         for category in collection.keys():
             for test in collection[category]:
                 test.category = category
                 if self.verbose:
                     print(test.question)
+                if any((c in '*$_^,') for c in test.question):
+                    print ("WARNING: Wildcards in question! [%s]"%test.question)
+                    warnings = warnings +1
                 response = self.bot.ask_question(self.clientid, test.question)
                 success = False
                 test.response = response
@@ -138,6 +176,8 @@ class TestRunnerBotClient(BotClient):
 
         print ("Successes: %d" % len(successes))
         print ("Failures:  %d" % len(failures))
+        if warnings > 0:
+            print ("Warnings:  %d" % warnings)
         for failure in failures:
             print ("\t%s: [%s] expected [%s], got [%s]" % (failure.category, failure.question, failure.answers_string, failure.response))
         print ("Total processing time %f.2 secs"%diff.total_seconds())

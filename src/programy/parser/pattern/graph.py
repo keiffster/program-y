@@ -74,7 +74,7 @@ class PatternGraph(object):
             else:
                 return PatternBotNode(TextUtils.strip_whitespace(element.text))
         elif element.tag == 'iset':
-            return PatternISetNode(element.text)
+            return PatternISetNode(TextUtils.strip_whitespace(element.text))
         else:
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
