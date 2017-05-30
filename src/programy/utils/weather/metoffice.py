@@ -594,7 +594,7 @@ class MetOffice(object):
 
 if __name__ == '__main__':
 
-    # Only to be used to create test data for unit tests
+    # Only to be used to create test data for unit aiml_tests
 
     from programy.utils.license.keys import LicenseKeys
 
@@ -617,5 +617,5 @@ if __name__ == '__main__':
         met_office.nearest_location_forecast(lat, lng, metoffer.DAILY)
         met_office.nearest_location_forecast(lat, lng, metoffer.THREE_HOURLY)
 
-    # Only to be used to create test data for unit tests
+    # Only to be used to create test data for unit aiml_tests
 

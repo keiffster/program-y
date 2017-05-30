@@ -82,7 +82,7 @@ class TestFileFileFinder(FileFinder):
             print("Template [%s] not found!" % answer)
 
     def load_file_contents(self, filename):
-        print("Loading tests from file [%s]" % filename)
+        print("Loading aiml_tests from file [%s]" % filename)
         questions = []
         templates = {}
         with open(filename, 'r') as csvfile:
@@ -128,7 +128,7 @@ class TestRunnerBotClient(BotClient):
 
     def add_client_arguments(self, parser):
         parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
-        parser.add_argument('--test_file', dest='test_file', help='Single file ot tests to run against grammar')
+        parser.add_argument('--test_file', dest='test_file', help='Single file ot aiml_tests to run against grammar')
         parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
     def set_environment(self):
@@ -138,7 +138,7 @@ class TestRunnerBotClient(BotClient):
         file_finder = TestFileFileFinder()
         if self.test_dir is not None:
             print ("Loading Tests from directory [%s]" % self.test_dir)
-            collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
+            collection = file_finder.load_dir_contents(self.test_dir, extension=".aiml_tests", subdir=True)
         else:
             collection = file_finder.load_single_file_contents(self.test_file)
 
@@ -181,7 +181,7 @@ class TestRunnerBotClient(BotClient):
         for failure in failures:
             print ("\t%s: [%s] expected [%s], got [%s]" % (failure.category, failure.question, failure.answers_string, failure.response))
         print ("Total processing time %f.2 secs"%diff.total_seconds())
-        print ("Thats approx %f tests per sec"%(total_tests/diff.total_seconds()))
+        print ("Thats approx %f aiml_tests per sec"%(total_tests/diff.total_seconds()))
 
 if __name__ == '__main__':
 

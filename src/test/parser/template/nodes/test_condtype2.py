@@ -67,7 +67,7 @@ class TemplateType2ConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("Word2", result)
 
-    # TODO Add unit tests for <loop /> construct
+    # TODO Add unit aiml_tests for <loop /> construct
 
     def test_to_xml_global(self):
         root = TemplateNode()

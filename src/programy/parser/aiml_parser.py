@@ -14,9 +14,10 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
+import logging
+import datetime
 
 from programy.parser.exceptions import ParserException
 from programy.config.brain import BrainConfiguration
@@ -57,10 +58,15 @@ class AIMLParser(object):
     def load_aiml(self, brain_configuration: BrainConfiguration):
         self._supress_warnings = brain_configuration.supress_warnings
         if brain_configuration.aiml_files is not None:
+            start = datetime.datetime.now()
             aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.aiml_files.files,
                                                                brain_configuration.aiml_files.directories,
                                                                brain_configuration.aiml_files.extension)
-            logging.info("Loaded a total of %d aiml files", len(aimls_loaded))
+            stop = datetime.datetime.now()
+            diff = stop - start
+            logging.info("Loaded a total of %d aiml files with %d categories"%(len(aimls_loaded), self.num_categories))
+            logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+            logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
         else:
             logging.info("No AIML files defined in configuration to load")
 

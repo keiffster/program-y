@@ -319,7 +319,7 @@ class GoogleMaps(object):
 
 if __name__ == '__main__':
 
-    # Only to be used to create test data for unit tests
+    # Only to be used to create test data for unit aiml_tests
     googlemaps = GoogleMaps()
 
     # Running these tools drops test files into the geocode test folder
@@ -330,4 +330,4 @@ if __name__ == '__main__':
     googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "../../../test/utils/weather/google_latlong.json")
     googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/distance.json")
     googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/directions.json")
-    # Only to be used to create test data for unit tests
+    # Only to be used to create test data for unit aiml_tests

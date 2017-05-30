@@ -40,7 +40,7 @@ class TemplateType3ConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("Word1", result)
 
-    # TODO Add unit tests for <loop /> construct
+    # TODO Add unit aiml_tests for <loop /> construct
 
     def test_to_xml(self):
         root = TemplateNode()

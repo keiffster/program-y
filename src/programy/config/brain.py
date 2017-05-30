@@ -113,7 +113,7 @@ class BrainConfiguration(BaseConfigurationData):
             self._allow_learn_aiml = config_file.get_option(brain, "allow_learn_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
-            self._dump_to_file = config_file.get_option(brain, "dump_to_file", None)
+            self._dump_to_file = config_file.get_option(brain, "dump_to_file", missing_value=None)
 
             files = config_file.get_section("files", brain)
             if files is not None:
