@@ -63,7 +63,7 @@ class TemplateMapNode(TemplateNode):
                         logging.error("No value for default-map defined, empty string returned")
                         value = ""
                 else:
-                    if var in the_map.keys():
+                    if var in the_map:
                         value = the_map[var]
                     else:
                         logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))

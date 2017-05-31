@@ -42,9 +42,10 @@ class PatternWordNode(PatternNode):
         return False
 
     def equals(self, bot, clientid, word):
-        if self.word == word:
-            return True
-        return False
+        return self.equals_ignore_case(bot, clientid, self._word, word)
+        #if self.word == word:
+        #    return True
+        #return False
 
     def to_string(self, verbose=True):
         if verbose is True:

@@ -72,6 +72,7 @@ class TemplateGraph(object):
 
     def __init__(self, aiml_parser=None):
         self._aiml_parser = aiml_parser
+        self.node_lookups = None
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*
@@ -130,7 +131,70 @@ class TemplateGraph(object):
             return text
         return None
 
+    def load_node_lookups(self):
+        self.node_lookups = dict([
+            ('random', self.parse_random_expression),
+            ('condition', self.parse_condition_expression),
+            ('srai', self.parse_srai_expression),
+            ('sraix', self.parse_sraix_expression),
+            ('get', self.parse_get_expression),
+            ('set', self.parse_set_expression),
+            ('map', self.parse_map_expression),
+            ('bot', self.parse_bot_expression),
+            ('date', self.parse_date_expression),
+            ('interval', self.parse_interval_expression),
+            ('think', self.parse_think_expression),
+            ('normalize', self.parse_normalize_expression),
+            ('denormalize', self.parse_denormalize_expression),
+            ('person', self.parse_person_expression),
+            ('person2', self.parse_person2_expression),
+            ('gender', self.parse_gender_expression),
+            ('system', self.parse_system_expression),
+            ('star', self.parse_star_expression),
+            ('that', self.parse_that_expression),
+            ('thatstar', self.parse_thatstar_expression),
+            ('topicstar', self.parse_topicstar_expression),
+            ('input', self.parse_input_expression),
+            ('request', self.parse_request_expression),
+            ('response', self.parse_response_expression),
+            ('learn', self.parse_learn_expression),
+            ('learnf', self.parse_learnf_expression),
+            ('sr', self.parse_sr_expression),
+            ('id', self.parse_id_expression),
+            ('vocabulary', self.parse_vocabulary_expression),
+            ('program', self.parse_program_expression),
+            ('implode', self.parse_implode_expression),
+            ('explode', self.parse_explode_expression),
+            ('formal', self.parse_formal_expression),
+            ('lowercase', self.parse_lowercase_expression),
+            ('uppercase', self.parse_uppercase_expression),
+            ('sentence', self.parse_sentence_expression),
+            ('eval', self.parse_eval_expression),
+            ('size', self.parse_size_expression),
+            ('oob', self.parse_oob_expression),
+            ('first', self.parse_first_expression),
+            ('rest', self.parse_rest_expression),
+            ('extension', self.parse_extension_expression),
+            ('log', self.parse_log_expression)
+        ])
+
     def parse_tag_expression(self, expression, branch):
+        self.parse_tag_via_lookup(expression, branch)
+        #self.parse_tag_via_if(expression, branch)
+
+    def parse_tag_via_lookup(self, expression, branch):
+        if self.node_lookups is None:
+            self.load_node_lookups()
+
+        if expression.tag in self.node_lookups:
+            method = self.node_lookups[expression.tag]
+            method(expression, branch)
+        else:
+            self.parse_unknown_as_text_node(expression, branch)
+            # raise ParserException("Error, unknown expression tag: <%s>" % (expression.tag), xml_element=expression)
+
+    def parse_tag_via_if(self, expression, branch):
+
         if expression.tag == 'random':
             self.parse_random_expression(expression, branch)
         elif expression.tag == 'condition':

@@ -59,7 +59,7 @@ class MapCollection(object):
 
     def contains(self, name):
         map_name = name.upper()
-        return bool(map_name in self._maps.keys())
+        return bool(map_name in self._maps)
 
     def load(self, configuration):
         loader = MapLoader()

@@ -79,8 +79,6 @@ class PatternGraph(object):
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
     def _parse_text(self, pattern_text, current_node):
-
-        #words = pattern_text.split(" ")
         stripped = pattern_text.strip()
         words = stripped.split(" ")
         for word in words:

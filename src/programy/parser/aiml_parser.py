@@ -46,6 +46,10 @@ class AIMLParser(object):
         self.template_parser = TemplateGraph(self)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
+        self._num_templates = 1
+        self._total_template_time = 0
+        self._total_pattern_time = 0
+
 
     @property
     def supress_warnings(self):
@@ -67,6 +71,9 @@ class AIMLParser(object):
             logging.info("Loaded a total of %d aiml files with %d categories"%(len(aimls_loaded), self.num_categories))
             logging.info("Total processing time %f.2 secs" % diff.total_seconds())
             logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
+            logging.info("Patterns %d in %f.2 ms => %f.2 ms per pattern"%(self._num_categories, self._total_pattern_time, (self._total_pattern_time/self._num_categories)))
+            logging.info("Templates %d in %f.2 ms => %f.2 ms per template"%(self._num_templates, self._total_template_time, (self._total_template_time/self._num_templates)))
+
         else:
             logging.info("No AIML files defined in configuration to load")
 
@@ -240,7 +247,12 @@ class AIMLParser(object):
         elif len(templates) > 1:
             raise ParserException("Error, multiple <template> nodes found in category", xml_element=category_xml)
         else:
+            start = datetime.datetime.now()
             template_graph_root = self.template_parser.parse_template_expression(templates[0])
+            stop = datetime.datetime.now ()
+            diff = stop - start
+            self._total_template_time += diff.total_seconds()*1000
+            self._num_templates += 1
 
         patterns = category_xml.findall('pattern')
         if len(patterns) == 0:
@@ -249,7 +261,11 @@ class AIMLParser(object):
             raise ParserException("Error, multiple <pattern> nodes found in category", xml_element=category_xml)
         else:
             if add_to_graph is True:
+                start = datetime.datetime.now()
                 self.pattern_parser.add_pattern_to_graph(patterns[0], topic_element, that_element, template_graph_root)
+                stop = datetime.datetime.now()
+                diff = stop - start
+                self._total_pattern_time += diff.total_seconds()*1000
                 self._num_categories += 1
 
         return (patterns[0], topic_element, that_element, template_graph_root)

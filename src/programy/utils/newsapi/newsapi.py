@@ -545,7 +545,7 @@ class NewsAPI(object):
 
     def get_headlines(self, source, max_articles=0, sort=False, reverse=False):
 
-        if source in self.function_mapping.keys():
+        if source in self.function_mapping:
             function = self.function_mapping[source]
             return function(self.api_key, max_articles, sort, reverse)
         else:

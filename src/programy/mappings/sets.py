@@ -70,7 +70,7 @@ class SetCollection(object):
     def contains(self, name):
         # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
-        return bool(set_name in self._sets.keys())
+        return bool(set_name in self._sets)
 
     def count_words_in_sets(self):
         count = 0
