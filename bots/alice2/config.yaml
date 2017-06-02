@@ -12,10 +12,11 @@ brain:
     files:
         aiml:
              files: $BOT_ROOT/aiml
+             #file: $BOT_ROOT/aiml/professor/professor.0001.aiml
              extension: .aiml
              directories: true
-             errors: /tmp/alice2_aiml_errors.txt
-             duplicates: /tmp/alice2_aiml_duplicates.txt
+             errors: /tmp/alice2_errors.txt
+             duplicates: /tmp/alice2_duplicates.txt
 
         sets:
             files: $BOT_ROOT/sets

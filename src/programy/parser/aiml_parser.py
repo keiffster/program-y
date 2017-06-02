@@ -47,8 +47,8 @@ class AIMLParser(object):
         self.template_parser = TemplateGraph(self)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
-        self._duplicates = []
-        self._errors = []
+        self._duplicates = None
+        self._errors = None
 
     @property
     def supress_warnings(self):
@@ -58,10 +58,16 @@ class AIMLParser(object):
     def num_categories(self):
         return self._num_categories
 
+    def create_debug_storage(self, brain_configuration):
+        if brain_configuration.aiml_files.errors is not None:
+            self._errors = []
+        if brain_configuration.aiml_files.duplicates is not None:
+            self._duplicates = []
+
     def save_debug_files(self, brain_configuration):
 
         if brain_configuration.aiml_files.errors is not None:
-            logging.info("Removing any previous aiml errors file [%s]"%brain_configuration.aiml_files.errors)
+            logging.info("Saving aiml errors to file [%s]"%brain_configuration.aiml_files.errors)
             try:
                 with open(brain_configuration.aiml_files.errors, "w+") as errors_file:
                     for error in self._errors:
@@ -69,14 +75,20 @@ class AIMLParser(object):
             except Exception as e:
                 logging.exception (e)
 
-        if brain_configuration.aiml_files.errors is not None:
-            logging.info("Removing any previous aiml duplicates file [%s]"%brain_configuration.aiml_files.duplicates)
+        if brain_configuration.aiml_files.duplicates is not None:
+            logging.info("Saving aiml duplicates to file [%s]"%brain_configuration.aiml_files.duplicates)
             try:
                 with open(brain_configuration.aiml_files.duplicates, "w+") as duplicates_file:
                     for duplicate in self._duplicates:
                         duplicates_file.write(duplicate)
             except Exception as e:
                 logging.exception (e)
+
+    def display_debug_info(self, brain_configuration):
+        if self._errors is not None:
+            logging.info("Found a total of %d errors in your grammrs, check out [%s] for details"%(len(self._errors), brain_configuration.aiml_files.errors))
+        if self._duplicates is not None:
+            logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details"%(len(self._duplicates), brain_configuration.aiml_files.duplicates))
 
     def load_files_from_directory(self, brain_configuration):
         start = datetime.datetime.now()
@@ -85,8 +97,8 @@ class AIMLParser(object):
                                                            brain_configuration.aiml_files.extension)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Loaded a total of %d aiml files with %d categories" % (len(aimls_loaded), self.num_categories))
         logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+        logging.info("Loaded a total of %d aiml files with %d categories" % (len(aimls_loaded), self.num_categories))
         if diff.total_seconds() > 0:
             logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
 
@@ -95,14 +107,16 @@ class AIMLParser(object):
         self._aiml_loader.load_single_file_contents(brain_configuration.aiml_files.file)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Loaded a single aiml file with %d categories" % (self.num_categories))
         logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+        logging.info("Loaded a single aiml file with %d categories" % (self.num_categories))
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
 
         self._supress_warnings = brain_configuration.supress_warnings
 
         if brain_configuration.aiml_files is not None:
+
+            self.create_debug_storage(brain_configuration)
 
             if brain_configuration.aiml_files.files is not None:
                 self.load_files_from_directory(brain_configuration)
@@ -114,6 +128,9 @@ class AIMLParser(object):
                 logging.info("No AIML files or file defined in configuration to load")
 
             self.save_debug_files(brain_configuration)
+
+            self.display_debug_info(brain_configuration)
+
         else:
             logging.info("No AIML files or file defined in configuration to load")
 
@@ -178,6 +195,24 @@ class AIMLParser(object):
     #   </aiml>
     #
 
+    def handle_aiml_duplicate(self, dupe_excep, filename):
+        if self._duplicates is not None:
+            dupe_excep.filename = filename
+            msg = dupe_excep.format_message()
+            self._duplicates.append(msg + "\n")
+            logging.error(msg)
+
+    def handle_aiml_error(self, parser_excep, filename):
+        parser_excep.filename = filename
+        msg = parser_excep.format_message()
+        logging.error(msg)
+
+        if self._errors is not None:
+            self._errors.append(msg + "\n")
+
+        if self.stop_on_invalid is True:
+            raise parser_excep
+
     def parse_aiml(self, aiml_xml, filename):
         self.parse_version(aiml_xml)
 
@@ -189,22 +224,10 @@ class AIMLParser(object):
                     categories_found = True
 
                 except DuplicateGrammarException as dupe_excep:
-                    dupe_excep.filename = filename
-                    msg = dupe_excep.format_message()
-                    self._duplicates.append(msg + "\n")
-                    logging.error(msg)
-
-                    if self.stop_on_invalid is True:
-                        raise dupe_excep
+                    self.handle_aiml_duplicate(dupe_excep, filename)
 
                 except ParserException as parser_excep:
-                    parser_excep.filename = filename
-                    msg = parser_excep.format_message()
-                    self._errors.append(msg+"\n")
-                    logging.error(msg)
-
-                    if self.stop_on_invalid is True:
-                        raise parser_excep
+                    self.handle_aiml_error(parser_excep, filename)
 
             elif expression.tag == 'category':
                 try:
@@ -212,22 +235,10 @@ class AIMLParser(object):
                     categories_found = True
 
                 except DuplicateGrammarException as dupe_excep:
-                    dupe_excep.filename = filename
-                    msg = dupe_excep.format_message()
-                    self._duplicates.append(msg+"\n")
-                    logging.error(msg)
-
-                    if self.stop_on_invalid is True:
-                        raise dupe_excep
+                    self.handle_aiml_duplicate(dupe_excep, filename)
 
                 except ParserException as parser_excep:
-                    parser_excep.filename = filename
-                    msg = parser_excep.format_message()
-                    self._errors.append(msg+"\n")
-                    logging.error(msg)
-
-                    if self.stop_on_invalid is True:
-                        raise parser_excep
+                    self.handle_aiml_error(parser_excep, filename)
 
             else:
                 raise ParserException("Error, unknown top level tag, %s" % expression.tag, xml_element=expression)
