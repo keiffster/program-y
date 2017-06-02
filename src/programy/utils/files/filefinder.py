@@ -45,21 +45,13 @@ class FileFinder(object):
 
         return found_files
 
-    def get_just_filename_file(self, file):
-        if "." in file[0]:
-            filename = file[0].split(".")[0]
-        else:
-            filename = file[0]
-        return filename.upper()
-
     def load_dir_contents(self, path_to_sets, subdir=False, extension=".txt"):
 
         files = self.find_files(path_to_sets, subdir, extension)
 
         collection = {}
         for file in files:
-            just_filename = self.get_just_filename_file(file)
-
+            just_filename = self.get_just_filename_from_filepath(file[0])
             try:
                 collection[just_filename] = self.load_file_contents(file[1])
             except Exception as e:
@@ -67,19 +59,8 @@ class FileFinder(object):
 
         return collection
 
-    def get_just_filename_from_filename(self, filename):
-
-        sections = filename.split(os.sep)
-        last_section = sections[-1]
-        if "." in last_section:
-            filename = last_section.split(".")[0]
-        else:
-            filename = last_section
-        return filename
-
     def load_single_file_contents(self, filename):
-
-        just_filename = self.get_just_filename_from_filename(filename)
+        just_filename = self.get_just_filename_from_filepath(filename)
 
         collection = {}
         try:
@@ -88,3 +69,18 @@ class FileFinder(object):
             logging.error ("Failed to load file contents for file [%s]"%filename)
 
         return collection
+
+    def get_just_filename_from_filepath(self, filepath):
+
+        last_slash = filepath.rfind(os.sep)
+        if last_slash == -1:
+            last_slash = 0
+
+        filename_ext = filepath[last_slash:]
+
+        last_dot = filename_ext.rfind(".")
+
+        filename = filename_ext[:last_dot]
+
+        return filename.upper()
+

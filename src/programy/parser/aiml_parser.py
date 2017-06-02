@@ -18,8 +18,9 @@ from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 import logging
 import datetime
+import os
 
-from programy.parser.exceptions import ParserException
+from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.config.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
@@ -46,10 +47,8 @@ class AIMLParser(object):
         self.template_parser = TemplateGraph(self)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
-        self._num_templates = 1
-        self._total_template_time = 0
-        self._total_pattern_time = 0
-
+        self._duplicates = []
+        self._errors = []
 
     @property
     def supress_warnings(self):
@@ -59,23 +58,65 @@ class AIMLParser(object):
     def num_categories(self):
         return self._num_categories
 
-    def load_aiml(self, brain_configuration: BrainConfiguration):
-        self._supress_warnings = brain_configuration.supress_warnings
-        if brain_configuration.aiml_files is not None:
-            start = datetime.datetime.now()
-            aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.aiml_files.files,
-                                                               brain_configuration.aiml_files.directories,
-                                                               brain_configuration.aiml_files.extension)
-            stop = datetime.datetime.now()
-            diff = stop - start
-            logging.info("Loaded a total of %d aiml files with %d categories"%(len(aimls_loaded), self.num_categories))
-            logging.info("Total processing time %f.2 secs" % diff.total_seconds())
-            logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
-            logging.info("Patterns %d in %f.2 ms => %f.2 ms per pattern"%(self._num_categories, self._total_pattern_time, (self._total_pattern_time/self._num_categories)))
-            logging.info("Templates %d in %f.2 ms => %f.2 ms per template"%(self._num_templates, self._total_template_time, (self._total_template_time/self._num_templates)))
+    def save_debug_files(self, brain_configuration):
 
+        if brain_configuration.aiml_files.errors is not None:
+            logging.info("Removing any previous aiml errors file [%s]"%brain_configuration.aiml_files.errors)
+            try:
+                with open(brain_configuration.aiml_files.errors, "w+") as errors_file:
+                    for error in self._errors:
+                        errors_file.write(error)
+            except Exception as e:
+                logging.exception (e)
+
+        if brain_configuration.aiml_files.errors is not None:
+            logging.info("Removing any previous aiml duplicates file [%s]"%brain_configuration.aiml_files.duplicates)
+            try:
+                with open(brain_configuration.aiml_files.duplicates, "w+") as duplicates_file:
+                    for duplicate in self._duplicates:
+                        duplicates_file.write(duplicate)
+            except Exception as e:
+                logging.exception (e)
+
+    def load_files_from_directory(self, brain_configuration):
+        start = datetime.datetime.now()
+        aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.aiml_files.files,
+                                                           brain_configuration.aiml_files.directories,
+                                                           brain_configuration.aiml_files.extension)
+        stop = datetime.datetime.now()
+        diff = stop - start
+        logging.info("Loaded a total of %d aiml files with %d categories" % (len(aimls_loaded), self.num_categories))
+        logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+        if diff.total_seconds() > 0:
+            logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
+
+    def load_single_file(self, brain_configuration):
+        start = datetime.datetime.now()
+        self._aiml_loader.load_single_file_contents(brain_configuration.aiml_files.file)
+        stop = datetime.datetime.now()
+        diff = stop - start
+        logging.info("Loaded a single aiml file with %d categories" % (self.num_categories))
+        logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+
+    def load_aiml(self, brain_configuration: BrainConfiguration):
+
+        self._supress_warnings = brain_configuration.supress_warnings
+
+        if brain_configuration.aiml_files is not None:
+
+            if brain_configuration.aiml_files.files is not None:
+                self.load_files_from_directory(brain_configuration)
+
+            elif brain_configuration.aiml_files.file is not None:
+                self.load_single_file(brain_configuration)
+
+            else:
+                logging.info("No AIML files or file defined in configuration to load")
+
+            self.save_debug_files(brain_configuration)
         else:
-            logging.info("No AIML files defined in configuration to load")
+            logging.info("No AIML files or file defined in configuration to load")
+
 
         if brain_configuration.dump_to_file is not None:
             logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.dump_to_file)
@@ -90,13 +131,21 @@ class AIMLParser(object):
         logging.info("Loading aiml file: " + filename)
 
         try:
+            #print("Parsing raw XML Tree")
             tree = ET.parse(filename, parser=LineNumberingParser())
+            #print("Parsed...")
             aiml = tree.getroot()
             if aiml is None or aiml.tag != 'aiml':
                 raise ParserException("Error, root tag is not <aiml>", filename=filename)
             else:
+                #print("Parsing loaded AIML tree")
+                #start = datetime.datetime.now()
                 self.parse_aiml(aiml, filename)
+                #stop = datetime.datetime.now()
+                #diff = stop - start
+                #print("Parsed in %f sec"%(diff.total_seconds()))
         except Exception as e:
+            logging.exception(e)
             logging.error("Failed to load contents of AIML file from [%s] - [%s]"%(filename, e))
 
 
@@ -138,9 +187,22 @@ class AIMLParser(object):
                 try:
                     self.parse_topic(expression)
                     categories_found = True
+
+                except DuplicateGrammarException as dupe_excep:
+                    dupe_excep.filename = filename
+                    msg = dupe_excep.format_message()
+                    self._duplicates.append(msg + "\n")
+                    logging.error(msg)
+
+                    if self.stop_on_invalid is True:
+                        raise dupe_excep
+
                 except ParserException as parser_excep:
                     parser_excep.filename = filename
-                    logging.error(parser_excep.format_message())
+                    msg = parser_excep.format_message()
+                    self._errors.append(msg+"\n")
+                    logging.error(msg)
+
                     if self.stop_on_invalid is True:
                         raise parser_excep
 
@@ -148,9 +210,22 @@ class AIMLParser(object):
                 try:
                     self.parse_category(expression)
                     categories_found = True
+
+                except DuplicateGrammarException as dupe_excep:
+                    dupe_excep.filename = filename
+                    msg = dupe_excep.format_message()
+                    self._duplicates.append(msg+"\n")
+                    logging.error(msg)
+
+                    if self.stop_on_invalid is True:
+                        raise dupe_excep
+
                 except ParserException as parser_excep:
                     parser_excep.filename = filename
-                    logging.error(parser_excep.format_message())
+                    msg = parser_excep.format_message()
+                    self._errors.append(msg+"\n")
+                    logging.error(msg)
+
                     if self.stop_on_invalid is True:
                         raise parser_excep
 
@@ -218,8 +293,7 @@ class AIMLParser(object):
         if category_found is False:
             raise ParserException("Error, no categories in topic", xml_element=topic_element)
 
-    def parse_category(self, category_xml, topic_element=None, add_to_graph=True):
-
+    def find_topic(self, category_xml, topic_element=None):
         topics = category_xml.findall('topic')
         if topic_element is not None:
             if len(topics) > 0:
@@ -233,6 +307,9 @@ class AIMLParser(object):
             else:
                 topic_element = ET.fromstring("<topic>*</topic>")
 
+        return topic_element
+
+    def find_that(self, category_xml):
         thats = category_xml.findall('that')
         if len(thats) > 1:
             raise ParserException("Error, multiple <that> nodes found in category", xml_element=category_xml)
@@ -240,35 +317,41 @@ class AIMLParser(object):
             that_element = thats[0]
         else:
             that_element = ET.fromstring("<that>*</that>")
+        return that_element
 
+    def get_template(self, category_xml):
         templates = category_xml.findall('template')
         if len(templates) == 0:
             raise ParserException("Error, no template node found in category", xml_element=category_xml)
         elif len(templates) > 1:
             raise ParserException("Error, multiple <template> nodes found in category", xml_element=category_xml)
         else:
-            start = datetime.datetime.now()
-            template_graph_root = self.template_parser.parse_template_expression(templates[0])
-            stop = datetime.datetime.now ()
-            diff = stop - start
-            self._total_template_time += diff.total_seconds()*1000
-            self._num_templates += 1
+            return self.template_parser.parse_template_expression(templates[0])
 
+    def get_pattern(self, category_xml):
         patterns = category_xml.findall('pattern')
         if len(patterns) == 0:
             raise ParserException("Error, no pattern node found in category", xml_element=category_xml)
         elif len(patterns) > 1:
             raise ParserException("Error, multiple <pattern> nodes found in category", xml_element=category_xml)
         else:
-            if add_to_graph is True:
-                start = datetime.datetime.now()
-                self.pattern_parser.add_pattern_to_graph(patterns[0], topic_element, that_element, template_graph_root)
-                stop = datetime.datetime.now()
-                diff = stop - start
-                self._total_pattern_time += diff.total_seconds()*1000
-                self._num_categories += 1
+            return patterns[0]
 
-        return (patterns[0], topic_element, that_element, template_graph_root)
+    def parse_category(self, category_xml, topic_element=None, add_to_graph=True):
+
+        topic_element = self.find_topic(category_xml, topic_element)
+
+        that_element = self.find_that(category_xml)
+
+        template_graph_root = self.get_template(category_xml)
+
+        pattern = self.get_pattern(category_xml)
+
+        if add_to_graph is True:
+            self.pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root)
+            self._num_categories += 1
+
+        return (pattern, topic_element, that_element, template_graph_root)
 
     def match_sentence(self, bot, clientid, pattern_sentence, topic_pattern, that_pattern):
 

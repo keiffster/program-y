@@ -31,7 +31,7 @@ class PatternSetNode(PatternWordNode):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternSetNode):
+        if other.is_set():
             if self.set_name == other.set_name:
                 return True
         return False

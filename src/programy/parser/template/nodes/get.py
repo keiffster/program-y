@@ -80,7 +80,11 @@ class TemplateGetNode(TemplateNode):
             return ""
 
     def to_string(self):
-        return "[GET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())
+        if self.name is None:
+            name = "None"
+        else:
+            name = self.name.to_string()
+        return "[GET [%s] - %s]" % ("Local" if self.local else "Global", name)
 
     def output(self, tabs="", output=logging.debug):
         self.output_child(self, tabs, output)

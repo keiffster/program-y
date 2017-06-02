@@ -28,6 +28,7 @@ class Bot(object):
         self._conversations = {}
         self._license_keys = LicenseKeys()
         self._load_license_keys(self._configuration)
+        self._question_depth = 0
 
     @property
     def brain(self):
@@ -124,6 +125,10 @@ class Bot(object):
         answers = []
         for each_sentence in question.sentences:
 
+            self._question_depth += 1
+            if self._question_depth > 10:
+                raise Exception ("Maximum recursion limit exceeded")
+
             response = self.brain.ask_question(self, clientid, each_sentence)
             if response is not None:
                 logging.debug("Raw Response (%s): %s", clientid, response)
@@ -139,6 +144,8 @@ class Bot(object):
             else:
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)
+
+            self._question_depth = 0
 
         if srai is True:
             conversation.pop_dialog()

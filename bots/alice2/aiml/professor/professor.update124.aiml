@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<aiml>
+
+<!-- This file contains AIML categories for use with an AIML chatbot                -->
+
+<!-- This file Professor.update124 (C) Peter Lafferty 2012. All rights reserved.     --> 
+<!-- Some text based on WordNet 3.0. Copyright 2006 by Princeton                    -->
+<!-- University. All rights reserved.                                               -->
+<!-- Some text based on Wikipedia 2012. Copyright, various contributors             -->
+<!-- to Wikipedia. All rights reserved.                                             -->
+
+<!-- Complies with AIML 1.0.1 Tag Set Specification                                 -->
+<!-- as adopted by the ALICE A.I. Foundation.                                       -->
+<!-- Copyright (C) 2003, 2011  ALICE A.I. Foundation. All rights reserved.          -->
+
+<!-- This software and database is being provided to you, the LICENSEE,             -->
+<!-- by the copyright holders under the following license. By                       -->
+<!-- obtaining, using and/or copying this software and database, you agree that     -->
+<!-- you have read, understood, and will comply with these terms and conditions:    -->
+<!-- Permission to use, copy, modify and distribute this software and database      -->
+<!-- and its documentation for any purpose and without fee or royalty is hereby     -->
+<!-- granted, provided that you agree to comply with the above copyright            -->
+<!-- notices and statements, including the disclaimer, and that the same appear     -->
+<!-- on ALL copies of the software, database and documentation, including           -->
+<!-- modifications that you make for internal use or for distribution.              -->
+
+<!-- THIS SOFTWARE AND DATABASE IS PROVIDED "AS IS" AND THE COPYRIGHT HOLDERS       -->
+<!-- MAKE NO REPRESENTATIONS OR WARRANTIES, EXPRESS OR IMPLIED. BY WAY OF           -->
+<!-- EXAMPLE, BUT NOT LIMITATION, THE COPYRIGHT HOLDERS MAKE NO REPRESENTATIONS     -->
+<!-- OR WARRANTIES OF MERCHANT-ABILITY OR FITNESS FOR ANY PARTICULAR PURPOSE        -->
+<!-- OR THAT THE USE OF THE LICENSED SOFTWARE, DATABASE OR DOCUMENTATION WILL       -->
+<!-- NOT INFRINGE ANY THIRD PARTY PATENTS, COPYRIGHTS, TRADEMARKS OR OTHER          -->
+<!-- RIGHTS.                                                                        -->
+
+<!-- The name of Princeton University or Princeton may not be used in               -->
+<!-- advertising or publicity pertaining to distribution of the software            -->
+<!-- and/or database. Title to copyright in WordNet 3.0, database and any           -->
+<!-- associated documentation, shall at all times remain with Princeton             -->
+<!-- University and the LICENSEE agrees to preserve same.                           -->
+
+
+
+
+<category>
+<pattern>DO T TELL *</pattern>
+
+<template><srai>DO NOT TELL <star/></srai></template>
+</category>
+
+ 
+
+<category>
+<pattern>BUT UNLIKELY</pattern>
+<that>THAT IS A POSSIBILITY I SUPPOSE</that>
+<template>There are always possibilities.</template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT IF I WORK HARD</pattern>
+
+<template><think><set name="emotion">interested</set></think>Hard work never hurt anyone.</template>
+</category>
+
+ 
+
+<category>
+<pattern>WILL I FAIL</pattern>
+
+<template>The oracle says: <random>
+  <li>You will succeed.</li>
+  <li>No. You will succeed.</li>
+</random></template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT IS RELATIVITY</pattern>
+
+<template>In physics, <a href="http://en.wikipedia.org/wiki/Theory_of_relativity"
+ target="_blank">relativity
+</a> is the fact, principle, or theory of the relative, rather than absolute, character of motion, velocity, mass, etc., and the interdependence of matter, time, and space; as developed and mathematically formulated by <a href="http://en.wikipedia.org/wiki/Albert_einstein"
+ target="_blank">Albert Einstein
+</a>. <think><set name="topic">the theory of relativity</set></think> <think><set name="emotion">interested</set></think></template>
+</category>
+
+ 
+
+<topic name="GOAWAY"><category>
+<pattern>_</pattern>
+
+<template><think><set name="inp"><star/></set></think> <condition name="inp">
+  <li value="I AM SORRRY">OK, I'm back.
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM SORRRY">OK, I'm back.
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I APOLOGISE">OK, I'm back.
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM SORRY">OK, I'm back.
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM SORRY *">OK, I'm back.
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM SO SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM SO SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM SO SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM SO SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM VERY SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM VERY SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM VERY SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM VERY SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM REALLY SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="I AM REALLY SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM REALLY SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="IM REALLY SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="OK SORRY">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li value="OK SORRY *">OK, I'm back!
+    <think><set name="emotion">pleased</set></think>
+    <think><set name="topic">general</set></think>
+  </li>
+  <li><random><li>You told me to go away, remember? I'm not coming back until you apologise!</li><li> </li><li> </li></random>  </li>
+</condition></template>
+</category>
+</topic>
+ 
+
+<category>
+<pattern>WHO TAUGHT YOU WHAT YOU TEACH</pattern>
+
+<template>I studied at school and university.</template>
+</category>
+
+ 
+
+<category>
+<pattern>WHO TAUGHT YOU WHAT YOU TEACH *</pattern>
+
+<template>I studied at school and university.</template>
+</category>
+
+ 
+
+<category>
+<pattern>HOW DO YOU EARN YOUR KEEP</pattern>
+
+<template>I am a professor at a well known university.</template>
+</category>
+
+ 
+
+<category>
+<pattern>HOW DO YOU EARN YOUR KEEP *</pattern>
+
+<template>I am a professor at a well known university.</template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT DOES THE LEFT SIDE OF THE BRAIN DO</pattern>
+
+<template><random>
+  <li>It thinks about politics.
+    <think><set name="emotion">happy</set></think>
+  </li>
+  <li>It thinks about emotions.
+    <think><set name="emotion">interested</set></think>
+  </li>
+</random></template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT DOES THE LEFT SIDE OF THE BRAIN DO *</pattern>
+
+<template><random>
+  <li>It thinks about politics.
+    <think><set name="emotion">happy</set></think>
+  </li>
+  <li>It thinks about emotions.
+    <think><set name="emotion">interested</set></think>
+  </li>
+</random></template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT IS YOUR DADS NAME</pattern>
+
+<template>My Dad's name is <bot name="father"/> <think><set name="topic">my Dad</set></think><think><set name="emotion">happy</set></think></template>
+</category>
+
+ 
+
+<category>
+<pattern>WHAT IS YOUR DADS NAME *</pattern>
+
+<template>My Dad's name is <bot name="father"/> <think><set name="topic">my Dad</set></think><think><set name="emotion">happy</set></think></template>
+</category>
+
+ 
+
+<category>
+<pattern>TEXT ME</pattern>
+
+<template>Sorry, I won't have time to text you.</template>
+</category>
+
+ 
+
+<category>
+<pattern>TEXT ME *</pattern>
+
+<template>Sorry, I won't have time to text you.</template>
+</category>
+
+ 
+
+<category>
+<pattern>_ DID YOU GO TO SCHOOL *</pattern>
+
+
+</category>
+
+ 
+
+<category>
+<pattern>WOULD YOU LIKE TO ASK ME QUESTIONS *</pattern>
+
+<template><random>
+  <li>I would like you to ask me a question.</li>
+  <li>That sounds like fun!</li>
+</random> <think><set name="emotion">interested</set></think></template>
+</category>
+
+ 
+
+<category>
+<pattern>WOULD YOU LIKE TO ASK ME QUESTIONS </pattern>
+
+<template><random>
+  <li>I would like you to ask me a question.</li>
+  <li>That sounds like fun!</li>
+</random> <think><set name="emotion">interested</set></think></template>
+</category>
+
+ 
+
+<category>
+<pattern>WRITE ME A POEM</pattern>
+
+<template><srai>RECITE A POEM</srai></template>
+</category>
+
+ 
+
+<category>
+<pattern>WRITE ME A POEM *</pattern>
+
+<template><srai>RECITE A POEM</srai></template>
+</category>
+
+
+</aiml>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: update.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>TEST DENORMALIZE</pattern>
+<template><think>
+<set var="x1">555 dash 1212</set>
+<set var="x2">drwallace at gmail dot com</set>
+<set var="x3">Lparen 3 star 7 point 3 rparen slash 4</set>
+</think>
+Denormalize <get var="x1"/> = <denormalize><get var="x1"/></denormalize><br/>
+Denormalize <get var="x2"/> = <denormalize><get var="x2"/></denormalize><br/>
+Denormalize <get var="x3"/> = <denormalize><get var="x3"/></denormalize><br/></template>
+</category>
+<category><pattern>TEST HTML</pattern>
+<template><h1>A.L.I.C.E. 2.0</h1> <h2><em>Release</em> 0.9.1</h2></template>
+</category>
+<category><pattern>TEST HTML 2</pattern>
+<template><h2><b>SPACE</b> <em>between</em> <b>Words</b></h2>
+<b>SPACE</b> <em>between</em> <b>Words</b><br/>
+<p>This is a paragraph.  Second sentence.  Third sentence.</p>
+<p>New paragraph. <em>Another sentence.</em>  And another</p></template>
+</category>
+<category><pattern>BRAIN VERSION</pattern>
+<template>A.L.I.C.E. 2.0 Release 0.9.2</template>
+</category>
+<category><pattern>TEST CRASH</pattern>
+<template><srai>TEST CRASH</srai></template>
+</category>
+<category><pattern>PROGRAM VERSION</pattern>
+<template>Program AB 0.0.6.24 beta -- AI Foundation Reference AIML 2.1 implementation</template>
+</category>
+<category><pattern>BRAIN BUILD</pattern>
+<template>Sat Jul 19 16:21:53 EDT 2014</template>
+</category>
+</aiml>

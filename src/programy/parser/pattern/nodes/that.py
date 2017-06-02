@@ -39,7 +39,7 @@ class PatternThatNode(PatternNode):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternThatNode):
+        if other.is_that():
             return True
         return False
 

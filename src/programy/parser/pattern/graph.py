@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.text.text import TextUtils
-from programy.parser.exceptions import ParserException
+from programy.parser.exceptions import ParserException, DuplicateGrammarException
 
 from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
@@ -42,7 +42,7 @@ class PatternGraph(object):
         if root_node is None:
             self._root_node = PatternRootNode()
         else:
-            if isinstance(root_node, PatternRootNode) is False:
+            if root_node.is_root() is False:
                 raise ParserException("Root node needs to be of base type PatternRootNode")
             self._root_node = root_node
 
@@ -79,12 +79,15 @@ class PatternGraph(object):
             raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
 
     def _parse_text(self, pattern_text, current_node):
+
         stripped = pattern_text.strip()
         words = stripped.split(" ")
         for word in words:
             if word != '': # Blank nodes add no value, ignore them
                 word = TextUtils.strip_whitespace(word)
+
                 new_node = PatternGraph.node_from_text(word)
+
                 current_node = current_node.add_child(new_node)
 
         return current_node
@@ -108,71 +111,87 @@ class PatternGraph(object):
         return None
 
     def add_pattern_to_node(self, pattern_element):
-        head_text = self.get_text_from_element(pattern_element)
+        try:
 
-        if head_text is not None:
-            current_node = self._parse_text(head_text, self._root_node)
-        else:
-            current_node = self._root_node
-        node = current_node
+            head_text = self.get_text_from_element(pattern_element)
+            if head_text is not None:
+                current_node = self._parse_text(head_text, self._root_node)
+            else:
+                current_node = self._root_node
 
-        for sub_element in pattern_element:
-            new_node = PatternGraph.node_from_element(sub_element)
-            current_node = current_node.add_child(new_node)
+            for sub_element in pattern_element:
+                new_node = PatternGraph.node_from_element(sub_element)
+                current_node = current_node.add_child(new_node)
 
-            tail_text = self.get_tail_from_element(sub_element)
-            if tail_text is not None:
-                current_node = self._parse_text(tail_text, current_node)
+                tail_text = self.get_tail_from_element(sub_element)
+                if tail_text is not None:
+                    current_node = self._parse_text(tail_text, current_node)
 
-        return current_node
+            return current_node
+
+        except ParserException as parser_excep:
+            parser_excep._xml_element = pattern_element
+            raise parser_excep
 
     def add_topic_to_node(self, topic_element, base_node):
-        current_node = PatternTopicNode()
-        current_node = base_node.add_topic(current_node)
+        try:
 
-        head_text = self.get_text_from_element(topic_element)
-        if head_text is not None:
-            current_node = self._parse_text(head_text, current_node)
+            current_node = PatternTopicNode()
+            current_node = base_node.add_topic(current_node)
 
-        added_child = False
-        for sub_element in topic_element:
-            new_node = PatternGraph.node_from_element(sub_element)
-            current_node = current_node.add_child(new_node)
+            head_text = self.get_text_from_element(topic_element)
+            if head_text is not None:
+                current_node = self._parse_text(head_text, current_node)
 
-            tail_text = self.get_tail_from_element(sub_element)
-            if tail_text is not None:
-                current_node = self._parse_text(tail_text, current_node)
-            added_child = True
+            added_child = False
+            for sub_element in topic_element:
+                new_node = PatternGraph.node_from_element(sub_element)
+                current_node = current_node.add_child(new_node)
 
-        if head_text is None:
-            if added_child is False:
-                raise ParserException("Topic node text is empty", xml_element=topic_element)
+                tail_text = self.get_tail_from_element(sub_element)
+                if tail_text is not None:
+                    current_node = self._parse_text(tail_text, current_node)
+                added_child = True
 
-        return current_node
+            if head_text is None:
+                if added_child is False:
+                    raise ParserException("Topic node text is empty", xml_element=topic_element)
+
+            return current_node
+
+        except ParserException as parser_excep:
+            parser_excep._xml_element = topic_element
+            raise parser_excep
 
     def add_that_to_node(self, that_element, base_node):
-        current_node = PatternThatNode()
-        current_node = base_node.add_that(current_node)
+        try:
 
-        head_text = self.get_text_from_element(that_element)
-        if head_text is not None:
-            current_node = self._parse_text(TextUtils.strip_whitespace(head_text), current_node)
+            current_node = PatternThatNode()
+            current_node = base_node.add_that(current_node)
 
-        added_child = False
-        for sub_element in that_element:
-            new_node = PatternGraph.node_from_element(sub_element)
-            current_node = current_node.add_child(new_node)
+            head_text = self.get_text_from_element(that_element)
+            if head_text is not None:
+                current_node = self._parse_text(TextUtils.strip_whitespace(head_text), current_node)
 
-            tail_text = self.get_tail_from_element(sub_element)
-            if tail_text is not None:
-                current_node = self._parse_text(tail_text, current_node)
-            added_child = True
+            added_child = False
+            for sub_element in that_element:
+                new_node = PatternGraph.node_from_element(sub_element)
+                current_node = current_node.add_child(new_node)
 
-        if head_text is None:
-            if added_child is False:
-                raise ParserException("That node text is empty", xml_element=that_element)
+                tail_text = self.get_tail_from_element(sub_element)
+                if tail_text is not None:
+                    current_node = self._parse_text(tail_text, current_node)
+                added_child = True
 
-        return current_node
+            if head_text is None:
+                if added_child is False:
+                    raise ParserException("That node text is empty", xml_element=that_element)
+
+            return current_node
+
+        except ParserException as parser_excep:
+            parser_excep._xml_element = that_element
+            raise parser_excep
 
     def add_template_to_node(self, template_graph_root, current_node):
         template_node = PatternTemplateNode(template_graph_root)
@@ -181,25 +200,16 @@ class PatternGraph(object):
 
     def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root):
 
-        try:
-            current_node = self.add_pattern_to_node(pattern_element)
-        except ParserException as parser_excep:
-            parser_excep._xml_element = pattern_element
-            raise parser_excep
+        current_node = self.add_pattern_to_node(pattern_element)
 
-        try:
-            current_node = self.add_topic_to_node(topic_element, current_node)
-        except ParserException as parser_excep:
-            parser_excep._xml_element = topic_element
-            raise parser_excep
+        current_node = self.add_topic_to_node(topic_element, current_node)
 
-        try:
-            current_node = self.add_that_to_node(that_element, current_node)
-        except ParserException as parser_excep:
-            parser_excep._xml_element = that_element
-            raise parser_excep
+        current_node = self.add_that_to_node(that_element, current_node)
 
-        self.add_template_to_node(template_graph_root, current_node)
+        if current_node.has_template():
+            raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text))
+        else:
+            self.add_template_to_node(template_graph_root, current_node)
 
     def count_words_in_patterns(self):
         counter = [0]

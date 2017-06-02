@@ -41,7 +41,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         return bool(text in PatternZeroOrMoreWildCardNode.MATCH_CHARS)
 
     def equivalent(self, other):
-        if isinstance(other, PatternZeroOrMoreWildCardNode):
+        if other.is_zero_or_more():
             if self._wildcard == other.wildcard:
                 return True
         return False

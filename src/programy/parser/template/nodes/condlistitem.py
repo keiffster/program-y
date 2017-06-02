@@ -66,7 +66,13 @@ class TemplateConditionListItemNode(TemplateNode):
         pass
 
     def to_string(self):
-        return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value)
+        if self.name is not None:
+            return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value.to_string())
+        else:
+            if self.value is not None:
+                return "[CONDITIONLIST(%s)]" % (self.value.to_string())
+            else:
+                return "[CONDITIONLIST]"
 
     def to_xml(self, bot, clientid):
         xml = '<li'

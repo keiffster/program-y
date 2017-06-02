@@ -27,16 +27,19 @@ class PatternWordNode(PatternNode):
         PatternNode.__init__(self)
         self._word = word
 
+    def is_word(self):
+        return True
+
     @property
     def word(self):
         return self._word
 
     def can_add(self, new_node):
-        if isinstance(new_node, PatternRootNode):
+        if new_node.is_root():
             raise ParserException("Cannot add root node to child node")
 
     def equivalent(self, other):
-        if isinstance(other, PatternWordNode):
+        if other.is_word():
             if self._word == other.word:
                 return True
         return False

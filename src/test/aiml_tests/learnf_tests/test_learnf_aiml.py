@@ -14,13 +14,13 @@ class LearnfTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(LearnfTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(files=os.path.dirname(__file__))
 
 class LearnfAIMLTests(unittest.TestCase):
 
     def setUp(self):
         LearnfAIMLTests.test_client = LearnfTestClient()
-        LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files = BrainFileConfiguration("/tmp", ".aiml", False)
+        LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files = BrainFileConfiguration(files="/tmp")
         self.learnf_path = "%s/learnf%s" % (LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files.files, LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files.extension)
         if os.path.exists(self.learnf_path):
             os.remove(self.learnf_path)

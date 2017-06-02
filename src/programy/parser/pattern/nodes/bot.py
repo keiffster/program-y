@@ -26,7 +26,7 @@ class PatternBotNode(PatternWordNode):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternBotNode):
+        if other.is_bot():
             if self._word == other.word:
                 return True
         return False

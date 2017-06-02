@@ -58,7 +58,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         if option_name in section:
             return section[option_name]
         else:
-            logging.error("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_bool_option(self, section, option_name, missing_value=False):
@@ -69,7 +69,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             else:
                 raise Exception("Invalid boolean config value")
         else:
-            logging.error("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
@@ -80,7 +80,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             else:
                 raise Exception("Invalid integer config value")
         else:
-            logging.error("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
 

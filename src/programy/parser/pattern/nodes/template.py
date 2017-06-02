@@ -44,7 +44,7 @@ class PatternTemplateNode(PatternNode):
             raise ParserException("Cannot add template node to template node")
 
     def equivalent(self, other):
-        if isinstance(other, PatternTemplateNode):
+        if other.is_template():
             return True
         return False
 

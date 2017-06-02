@@ -33,6 +33,8 @@ class ConsoleBotClient(BotClient):
                 except Exception as excep:
                     logging.exception(excep)
                     logging.error("Oops something bad happened !")
+                    self.display_response(self.bot.default_response)
+                    self.log_unknown_response(question)
 
     def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt

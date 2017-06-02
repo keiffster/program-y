@@ -19,10 +19,30 @@ from programy.config.base import BaseConfigurationData
 
 class BrainFileConfiguration(object):
 
-    def __init__(self, files, extension=".aiml", directories=False):
-        self._files = files
-        self._extension = extension
-        self._directories = directories
+    def __init__(self, file=None, files=None, extension=".aiml", directories=False, errors=None, duplicates=None):
+        self._file = None
+        self._files = None
+        self._extension = None
+        self._directories = None
+        self._errors = None
+        self._duplicates = None
+
+        if file is not None:
+            self._file = file
+        else:
+            self._files = files
+            self._extension = extension
+            self._directories = directories
+
+        self._errors = errors
+        self._duplicates = duplicates
+
+    @property
+    def file(self):
+        return self._file
+
+    def is_single_file(self):
+        return bool(self._file is not None)
 
     @property
     def files(self):
@@ -35,6 +55,14 @@ class BrainFileConfiguration(object):
     @property
     def directories(self):
         return self._directories
+
+    @property
+    def errors(self):
+        return self._errors
+
+    @property
+    def duplicates(self):
+        return self._duplicates
 
 
 class BrainServiceConfiguration(object):
@@ -98,11 +126,19 @@ class BrainConfiguration(BaseConfigurationData):
         BaseConfigurationData.__init__(self, "brain")
 
     def _get_brain_file_configuration(self, config_file, section, bot_root):
+        errors = config_file.get_option(section, "errors", missing_value=None)
+        duplicates = config_file.get_option(section, "duplicates", missing_value=None)
+
         files = config_file.get_option(section, "files")
-        files = self.sub_bot_root(files, bot_root)
-        extension = config_file.get_option(section, "extension")
-        directories = config_file.get_option(section, "directories")
-        return BrainFileConfiguration(files, extension, directories)
+        if files is not None:
+            files = self.sub_bot_root(files, bot_root)
+            extension = config_file.get_option(section, "extension")
+            directories = config_file.get_option(section, "directories")
+            return BrainFileConfiguration(files=files, extension=extension, directories=directories, errors=errors, duplicates=duplicates)
+        else:
+            file = config_file.get_option(section, "file")
+            file = self.sub_bot_root(file, bot_root)
+            return BrainFileConfiguration(file=file, errors=errors, duplicates=duplicates)
 
     def load_config_section(self, config_file, bot_root):
 

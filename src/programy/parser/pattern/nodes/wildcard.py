@@ -33,7 +33,7 @@ class PatternWildCardNode(PatternNode):
         return True
 
     def can_add(self, new_node):
-        if isinstance(new_node, PatternRootNode):
+        if new_node.is_root():
             raise ParserException("Cannot add root node to child node")
 
     @property

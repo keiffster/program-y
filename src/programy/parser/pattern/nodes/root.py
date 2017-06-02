@@ -34,17 +34,17 @@ class PatternRootNode(PatternNode):
         return True
 
     def can_add(self, new_node: PatternNode):
-        if isinstance(new_node, PatternRootNode):
+        if new_node.is_root():
             raise ParserException("Cannot add root node to existing root node")
-        if isinstance(new_node, PatternTopicNode):
+        if new_node.is_topic():
             raise ParserException("Cannot add topic node to root node")
-        if isinstance(new_node, PatternThatNode):
+        if new_node.is_that():
             raise ParserException("Cannot add that node to root node")
-        if isinstance(new_node, PatternTemplateNode):
+        if new_node.is_template():
             raise ParserException("Cannot add template node to root node")
 
     def equivalent(self, other: PatternNode)->bool:
-        if isinstance(other, PatternRootNode):
+        if other.is_root():
             return True
         return False
 

@@ -39,7 +39,7 @@ class PatternTopicNode(PatternNode):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternTopicNode):
+        if other.is_topic():
             return True
         return False
 

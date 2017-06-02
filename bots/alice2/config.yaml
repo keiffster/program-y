@@ -11,9 +11,12 @@ brain:
 
     files:
         aiml:
-            files: $BOT_ROOT/aiml
-            extension: .aiml
-            directories: false
+             files: $BOT_ROOT/aiml
+             extension: .aiml
+             directories: true
+             errors: /tmp/alice2_aiml_errors.txt
+             duplicates: /tmp/alice2_aiml_duplicates.txt
+
         sets:
             files: $BOT_ROOT/sets
             extension: .txt

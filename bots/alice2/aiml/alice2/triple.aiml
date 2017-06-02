@@ -1,0 +1,1201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: triple.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>GENSYM</pattern>
+<template><condition name="symcount">
+<li value="unknown">symbol<set name="symcount">0</set></li>
+<li>symbol<set name="symcount"><map name="successor"><get name="symcount"/></map></set></li>
+</condition></template>
+</category>
+<category><pattern>I HAVE A <set>color</set> *</pattern>
+<template><think>
+<set var="color"><star/></set>
+<set var="noun"><star index="2"/></set>
+<set var="symbol"><srai>GENSYM</srai></set>
+<set var="obj"><star index="2"/></set>
+<set var="description">a <star/> <star index="2"/></set>
+<addtriple><subj><id/></subj><pred>has</pred><obj><get var="symbol"/></obj></addtriple>
+<addtriple><subj><get var="symbol"/></subj><pred>hasColor</pred><obj><get var="color"/></obj></addtriple>
+<addtriple><subj><get var="symbol"/></subj><pred>hasDescription</pred><obj><get var="description"/></obj></addtriple>
+<addtriple><subj><get var="symbol"/></subj><pred>isA</pred><obj><get var="obj"/></obj></addtriple>
+</think>
+<star/> is a nice color of <star index="2"/>.</template>
+</category>
+<category><pattern>WHAT DO I HAVE ^</pattern>
+<template><set var="tuples"><select><vars>?sym</vars><q><subj><id/></subj><pred>has</pred><obj>?sym</obj></q></select></set>
+<condition var="tuples">
+  <li value="NIL">I don't know.  What do you have?</li>
+  <li><condition var="tuples">
+<li value="NIL"/>
+<li><think><set var="head"><first><get var="tuples"/></first></set><set var="tuples"><rest><get var="tuples"/></rest></set></think><uniq><subj><get var="?sym"><tuple><get var="head"/></tuple></get></subj><pred>hasDescription</pred><obj>?description</obj></uniq><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/></li>
+</condition>
+  </li>
+</condition></template>
+</category>
+<category><pattern>WHAT COLOR IS MY *</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?color</vars>
+<q><subj><id/></subj><pred>has</pred><obj>?sym</obj></q>
+<q><subj>?sym</subj><pred>isA</pred><obj><star/></obj></q>
+<q><subj>?sym</subj><pred>hasColor</pred><obj>?color</obj></q>
+</select>
+</set>
+</think>
+<condition var="tuples">
+<li value="NIL">You have a <star/>?</li>
+<li><get var="?color"><tuple><first><get var="tuples"/></first></tuple></get>.</li>
+</condition></template>
+</category>
+<category><pattern>WHAT <set>color</set> ^ DO I HAVE</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?obj</vars>
+<q><subj><id/></subj><pred>has</pred><obj>?sym</obj></q>
+<q><subj>?sym</subj><pred>hasColor</pred><obj><star/></obj></q>
+<q><subj>?sym</subj><pred>isA</pred><obj>?obj</obj></q>
+</select>
+</set>
+</think>
+<condition var="tuples">
+  <li value="NIL">Nothing that I know of.</li>
+  <li>Your <get var="?obj"><tuple><first><get var="tuples"/></first></tuple></get>.</li>
+</condition></template>
+</category>
+<category><pattern><set>entity</set></pattern>
+<template><star/> is an enity.</template>
+</category>
+<category><pattern>SIZE TABLE</pattern>
+<template><think><set var="size">0</set></think>
+<condition var="size">
+<li value="16"/>
+<li><get var="size"/>:
+<think>
+<set var="items"><select><vars>?x</vars><q><subj>?x</subj><pred>hasSize</pred><obj><get var="size"/></obj></q></select></set>
+<set var="size"><map><name>successor</name><get var="size"/></map></set>
+</think>
+<condition var="items">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="items"/></first></set>
+<set var="items"><rest><get var="items"/></rest></set>
+</think>"<get var="?x"><tuple><get var="head"/></tuple></get>"<srai>COMMAFY <get var="items"/></srai> <loop/></li>
+</condition>
+<loop/></li>
+</condition></template>
+</category>
+<category><pattern>COMMAFY NIL</pattern>
+<template><template/></template>
+</category>
+<category><pattern>COMMAFY *</pattern>
+<template>,</template>
+</category>
+<category><pattern>UNIQ TEST</pattern>
+<template><uniq><subj>York</subj><pred>isa</pred><obj>?object</obj></uniq></template>
+</category>
+<category><pattern>UNIQ TEST 2</pattern>
+<template><addtriple><subj>10099</subj><pred>hasFirstName</pred><obj>Alan</obj></addtriple>
+<addtriple><subj>10099</subj><pred>hasLastName</pred><obj>Turing</obj></addtriple>
+<addtriple><subj>10099</subj><pred>hasMobileNumber</pred><obj>2125551212</obj></addtriple>
+<set var="id">
+<uniq><subj>?id</subj><pred>hasFirstName</pred><obj>Alan</obj></uniq>
+</set>
+<uniq><subj><get var="id"/></subj><pred>hasMobileNumber</pred><obj>?number</obj></uniq></template>
+</category>
+<category><pattern>UNIQ TEST 3</pattern>
+<template><addtriple><subj>X</subj><pred>Y</pred><obj>Z</obj></addtriple>
+  <set var="uniqvar">?x</set>
+  <uniq><subj><get var="uniqvar"/></subj><pred>Y</pred><obj>Z</obj></uniq></template>
+</category>
+<category><pattern>WHAT IS THE PURPOSE OF *</pattern>
+<template><think>
+<set var="purpose">
+<uniq><subj><star/></subj><pred>hasPurpose</pred><obj>?purpose</obj></uniq>
+</set>
+</think>
+<condition var="purpose">
+<li value="unknown">I don't know what <star/> is for.</li>
+<li><get var="purpose"/></li>
+</condition></template>
+</category>
+<category><pattern>ADDTRIPLE TEST</pattern>
+<template>Adding triples:
+<addtriple><subj>Sacramento</subj><pred>capitalOf</pred><obj>California</obj></addtriple>
+<addtriple><subj>Austin</subj><pred>capitalOf</pred><obj>Texas</obj></addtriple>
+<addtriple><subj>Reno</subj><pred>capitalOf</pred><obj>Nevada</obj></addtriple>
+<addtriple><subj>Austin</subj><pred>capitalOf</pred><obj>Texas</obj></addtriple>
+<addtriple><subj>Los Angeles</subj><pred>capitalOf</pred></addtriple></template>
+</category>
+<category><pattern>DELETETRIPLE TEST</pattern>
+<template>Adding triples:
+<addtriple><subj>FIDO</subj><pred>ISA</pred><obj>DOG</obj></addtriple>
+<addtriple><subj>ROVER</subj><pred>ISA</pred><obj>DOG</obj></addtriple>
+<addtriple><subj>SNOOPY</subj><pred>ISA</pred><obj>DOG</obj></addtriple>
+Select:
+<select><vars>?x ?y</vars><q><subj>?x</subj><pred>?y</pred><obj>DOG</obj></q></select>
+Deleting triples:
+<deletetriple><subj>FIDO</subj><pred>ISA</pred><obj>DOG</obj></deletetriple>
+<deletetriple><subj>ROVER</subj><pred>ISA</pred><obj>DOG</obj></deletetriple>
+<deletetriple><subj>REX</subj><pred>ISA</pred><obj>DOG</obj></deletetriple>
+<deletetriple><subj>FIDO</subj><obj>DOG</obj></deletetriple>
+Select:
+<select><vars>?x ?y</vars><q><subj>?x</subj><pred>?y</pred><obj>DOG</obj></q></select></template>
+</category>
+<category><pattern>WHICH IS LARGER ^ <set>entity</set> OR ^ <set>entity</set></pattern>
+<template><think>
+<set var="larger"><srai>LARGEROF <star index="2"/> AND <star index="4"/></srai></set>
+</think>
+<condition var="larger">
+<li value="unknown">I can't tell which one is larger.</li>
+<li value="same">They are about the same size.</li>
+<li><formal><get var="larger"/></formal> is larger.</li>
+</condition></template>
+</category>
+<category><pattern>WHICH IS FASTER <set>entity</set> OR <set>entity</set></pattern>
+<template><think>
+<set var="faster"><srai>FASTEROF <star/> AND <star index="2"/></srai></set>
+</think>
+<condition var="faster">
+<li value="unknown">I can't tell which one is faster.</li>
+<li value="same">They are about the same speed.</li>
+<li><formal><get var="faster"/></formal> is faster.</li>
+</condition></template>
+</category>
+<category><pattern>ALL ISA</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x ?y ?z ?w</vars>
+<q><subj>?x</subj><pred>isa</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred>isa</pred><obj>?z</obj></q>
+<q><subj>?z</subj><pred>isa</pred><obj>?w</obj></q>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> --&gt; <get var="?y"><tuple><get var="head"/></tuple></get> --&gt; <get var="?z"><tuple><get var="head"/></tuple></get> --&gt; <get var="?w"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred>hasSize</pred><obj>7</obj></q>
+<q><subj>?x</subj><pred>lifeArea</pred><obj>Physical</obj></q>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST NOTQ</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<notq><subj>?x</subj><pred>isa</pred><obj>Person</obj></notq>
+</select>
+</set></template>
+</category>
+<category><pattern>SELECT TEST NOT</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred>hasSize</pred><obj>7</obj></q>
+<notq><subj>?x</subj><pred>isa</pred><obj>Person</obj></notq>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST NOT 2</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred>hasSize</pred><obj>7</obj></q>
+<notq><subj>?x</subj><pred>isa</pred><obj>Person</obj></notq>
+<notq><subj>?x</subj><pred>isa</pred><obj>Parent</obj></notq>
+<notq><subj>?x</subj><pred>lifeArea</pred><obj>Family</obj></notq>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST NOT 3</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred>hasSize</pred><obj>7</obj></q>
+<q><subj>?x</subj><pred>isa</pred><obj>?y</obj></q>
+<notq><subj>?y</subj><pred>isa</pred><obj>Person</obj></notq>
+<notq><subj>?x</subj><pred>isa</pred><obj>Person</obj></notq>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST 3</pattern>
+<template><set var="tuples">
+<select>
+<vars>?entity ?lifeArea ?purpose</vars>
+<q><subj>?entity</subj><pred>lifeArea</pred><obj>?lifeArea</obj></q>
+<q><subj>?entity</subj><pred>hasPurpose</pred><obj>?purpose</obj></q>
+<q><subj>?entity</subj><pred>isA</pred><obj>plant</obj></q>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think><set var="head"><first><get var="tuples"/></first></set><set var="tuples"><rest><get var="tuples"/></rest></set></think>
+["<get var="?entity"><tuple><get var="head"/></tuple></get>",
+"<get var="?lifeArea"><tuple><get var="head"/></tuple></get>",
+"<get var="?purpose"><tuple><get var="head"/></tuple></get>"] <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SELECT TEST 2</pattern>
+<template><set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred>hasSize</pred><obj>7</obj></q>
+<q><subj>?x</subj><pred>lifeArea</pred><obj>Physical</obj></q>
+<q><subj>?x</subj><pred>isa</pred><obj>Person</obj></q>
+</select>
+</set>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>* IS <set>erdown</set> THAN *</pattern>
+<template><think><set var="erup"><star index="2"/></set>
+<set var="opposite"><map><name>opposite</name><get var="erup"/></map></set>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="3"/></set>
+</think>
+<srai><get var="thing2"/> IS <get var="opposite"/> THAN <get var="thing1"/></srai></template>
+</category>
+<category><pattern><set>name</set> IS <set>erup</set> THAN *</pattern>
+<template><think><set var="erup"><star index="2"/></set>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="3"/></set>
+</think>
+So <get var="thing2"/> is <map><name>opposite</name><get var="erup"/></map> than <get var="thing1"/>?
+<think>
+<addtriple><subj><get var="thing1"/></subj><pred><get var="erup"/> than</pred><obj><get var="thing2"/></obj></addtriple>
+</think></template>
+</category>
+<category><pattern><set>name</set> IS <set>erdown</set> THAN *</pattern>
+<template><think><set var="erup"><star index="2"/></set>
+<set var="opposite"><map><name>opposite</name><get var="erup"/></map></set>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="3"/></set>
+</think>
+<srai><get var="thing2"/> IS <get var="opposite"/> THAN <get var="thing1"/></srai></template>
+</category>
+<category><pattern>GREEK TEST</pattern>
+<template><think>
+<srai>Socrates is older than Plato</srai>
+<srai>Plato is older than Aristotle</srai>
+</think>
+Who is older Socrates or Plato? <srai>Who is older Socrates or Plato</srai>
+Who is older Plato or Socrates? <srai>Who is older Plato or Socrates</srai>
+Who is older Aristotle or Plato? <srai>Who is older Aristotle or Plato</srai>
+Who is older Plato or Aritstotle? <srai>Who is older Plato or Aristotle</srai>
+Who is older Socrates or Aristotle? <srai>Who is older Socrates or Aristotle</srai>
+Who is older Aristotle or Socrates? <srai>Who is older Aristotle or Socrates</srai>
+Who is younger Socrates or Aristotle? <srai>Who is younger Socrates or Aristotle</srai>
+Who is younger Aristotle or Socrates? <srai>Who is younger Aristotle or Socrates</srai></template>
+</category>
+<category><pattern>WHICH IS <set>erup</set> * OR *</pattern>
+<template><think>
+<set var="er"><star/></set>
+<set var="pred"><star/> than</set>
+<set var="thing1"><star index="2"/></set>
+<set var="thing2"><star index="3"/></set>
+<set var="yescase"><srai>IS <get var="thing1"/> <get var="pred"/> <get var="thing2"/></srai></set>
+</think>
+<condition var="yescase">
+<li value="YES"><get var="thing1"/> is <get var="er"/>.</li>
+<li value="NO"><get var="thing2"/> is <get var="er"/>.</li>
+<li value="same">They are the same.</li>
+<li><sraix service="pannous">WHICH IS <star/> <star index="2"/> OR <star index="3"/></sraix></li>
+</condition></template>
+</category>
+<category><pattern>IS * <set>erdown</set> THAN *</pattern>
+<template><think>
+<set var="er"><star index="2"/></set>
+<set var="pred"><star index="2"/> than</set>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="3"/></set>
+<set var="opposite"><map><name>opposite</name><get var="er"/></map></set>
+<set var="result"><srai>IS <get var="thing1"/> <get var="opposite"/> THAN <get var="thing2"/></srai></set>
+</think>
+<condition var="result">
+<li value="YES">No</li>
+<li value="NO">Yes</li>
+<li value="same">same</li>
+<li value="unknown">unknown</li>
+<li><get var="result"/></li>
+</condition></template>
+</category>
+<category><pattern>IS * <set>erup</set> THAN *</pattern>
+<template><think>
+<set var="er"><star index="2"/></set>
+<set var="pred"><star index="2"/> than</set>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="3"/></set>
+<set var="case1">
+<srai>APPEND 
+<select><q><subj><get var="thing1"/></subj><pred><get var="pred"/></pred><obj><get var="thing2"/></obj></q></select>
+<select><vars>?x</vars>
+<q><subj><get var="thing1"/></subj><pred><get var="pred"/></pred><obj>?x</obj></q>
+<q><subj>?x</subj><pred><get var="pred"/></pred><obj><get var="thing2"/></obj></q>
+</select>
+</srai></set>
+<set var="case2">
+<srai>APPEND 
+<select><q><subj><get var="thing2"/></subj><pred><get var="pred"/></pred><obj><get var="thing1"/></obj></q></select>
+
+<select><vars>?x</vars>
+<q><subj><get var="thing2"/></subj><pred><get var="pred"/></pred><obj>?x</obj></q>
+<q><subj>?x</subj><pred><get var="pred"/></pred><obj><get var="thing1"/></obj></q></select>
+</srai></set>
+</think>
+<condition var="thing1">
+<li><value><get var="thing2"/></value>same</li>
+<li>
+<condition var="case1">
+<li value="NIL">
+<condition var="case2">
+<li value="NIL">unknown</li>
+<li>No</li>
+</condition>
+</li>
+<li>
+<condition var="case2">
+<li value="NIL">Yes</li>
+<li>unknown</li>
+</condition>
+</li>
+</condition>
+</li>
+</condition></template>
+</category>
+<category><pattern>APPEND NIL *</pattern>
+<template><srai>APPEND <star/></srai></template>
+</category>
+<category><pattern>APPEND * NIL</pattern>
+<template><srai>APPEND <star/></srai></template>
+</category>
+<category><pattern>APPEND NIL NIL</pattern>
+<template>NIL</template>
+</category>
+<category><pattern>APPEND *</pattern>
+<template><star/></template>
+</category>
+<category><pattern>WHICH IS <set>erdown</set> * OR *</pattern>
+<template><think>
+<set var="er"><star/></set>
+<set var="thing1"><star index="2"/></set>
+<set var="thing2"><star index="3"/></set>
+<set var="nocase"><srai>IS <get var="thing1"/> <map><name>opposite</name><get var="er"/></map> THAN <get var="thing2"/></srai></set>
+</think>
+<condition var="nocase">
+<li value="YES"><get var="thing2"/> is <get var="er"/>.</li>
+<li value="NO"><get var="thing1"/> is <get var="er"/>.</li>
+<li value="same">They are the same.</li>
+<li><sraix service="pannous">WHICH IS <star/> <star index="2"/> OR <star index="3"/></sraix></li>
+</condition></template>
+</category>
+<category><pattern><set>name</set> IS TALLER THAN <set>name</set></pattern>
+<template>I will remember <star/> is taller than <star index="2"/>.
+<think><addtriple><subj><star/></subj><pred>taller than</pred><obj><star index="2"/></obj></addtriple></think></template>
+</category>
+<category><pattern><set>name</set> DREAMS ABOUT *</pattern>
+<template><addtriple><subj><star/></subj><pred>dreams about</pred><obj><star index="2"/></obj></addtriple>
+Saved triple: <star/>, dreams about, <star index="2"/>.</template>
+</category>
+<category><pattern>WHO DREAMS</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?x</vars><q><subj>?x</subj><pred>dreams about</pred><obj>?y</obj></q></select>
+</set>
+</think>
+<condition value="NIL" var="tuples">I don't know who.</condition>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get><condition var="tuples"><li value="NIL"/><li>,</li></condition>
+<loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>WHAT DOES * DREAM ABOUT</pattern>
+<template><think><set var="tuples">
+<select>
+<vars>?x</vars><q><subj><star/></subj><pred>dreams about</pred><obj>?x</obj></q>
+</select>
+</set>
+</think>
+<condition value="NIL" var="tuples">I don't what <star/> dreams about.</condition>
+<condition var="tuples">
+<li value="NIL"/>
+<li>
+<think><set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>WHO DREAMS ABOUT *</pattern>
+<template><think><set var="tuples">
+<select>
+<vars>?x</vars><q><subj>?x</subj><pred>dreams about</pred><obj><star/></obj></q>
+</select>
+</set>
+</think>
+<condition value="NIL" var="tuples">I don't who dreams about <star/>.</condition>
+<condition var="tuples">
+<li value="NIL"/>
+<li>
+<think><set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>WHAT DOES <set>name</set> DO</pattern>
+<template><think><set var="tuples">
+<select>
+<vars>?x ?y</vars><q><subj><star/></subj><pred>?x</pred><obj>?y</obj></q>
+</select>
+</set>
+</think>
+<condition value="NIL" var="tuples">I don't what <star/> does.</condition>
+<condition var="tuples">
+<li value="NIL"/>
+<li>
+<think><set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+<get var="?x"><tuple><get var="head"/></tuple></get> <get var="?y"><tuple><get var="head"/></tuple></get><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>GETPURPOSE *</pattern>
+<template><think>
+<set var="purpose">
+<first>
+<select>
+<vars>?x</vars>
+<q>
+<subj><star/></subj>
+<pred>hasPurpose</pred>
+<obj>?x</obj>
+</q>
+</select>
+</first>
+</set>
+</think>
+First tuple = <get var="purpose"/>.
+Get ?x from tuple = <get var="?x"><tuple><get var="purpose"/></tuple></get>.
+<condition var="purpose">
+<li value="NIL">I don't know what <star/> is for.</li>
+<li><get var="?x"><tuple><get var="purpose"/></tuple></get></li>
+</condition></template>
+</category>
+<category><pattern>WHAT AREA OF LIFE IS *</pattern>
+<template><think><set var="area">
+<select><vars>?x</vars>
+<q><subj><star/></subj><pred>lifeArea</pred><obj>?x</obj></q>
+</select>
+</set>
+</think>
+<condition var="area">
+<li value="NIL">I don't know what area <star/> belongs to.</li>
+<li><get var="?x"><tuple><get var="area"/></tuple></get></li>
+</condition></template>
+</category>
+<category><pattern>BOTHLIFEAREA *</pattern>
+<template>They are both found in the <star/> area of life.</template>
+</category>
+<category><pattern>BOTHLIFEAREA EDUCATION</pattern>
+<template>They are both something you could learn about in school.</template>
+</category>
+<category><pattern>BOTHLIFEAREA RECREATION</pattern>
+<template>They are both something you might do for recreation.</template>
+</category>
+<category><pattern>BOTHLIFEAREA PHYSICAL</pattern>
+<template>They are both part of the physical world.</template>
+</category>
+<category><pattern>BOTHLIFEAREA SPIRITUAL</pattern>
+<template>They are both spiritual matters.</template>
+</category>
+<category><pattern>BOTHLIFEAREA ENTERTAINMENT</pattern>
+<template>They are both connected with entertainment.</template>
+</category>
+<category><pattern>BOTHLIFEAREA FAMILY</pattern>
+<template>They are both part of family life.</template>
+</category>
+<category><pattern>BOTHLIFEAREA SOCIAL</pattern>
+<template>They are both part of social life.</template>
+</category>
+<category><pattern>ONELIFEAREA * *</pattern>
+<template><star index="2"/> is part of the <star/> area of life</template>
+</category>
+<category><pattern>ONELIFEAREA EDUCATION *</pattern>
+<template><star/> is something you could learn about in school</template>
+</category>
+<category><pattern>ONELIFEAREA RECREATION *</pattern>
+<template><star/> is something you might do for recreation</template>
+</category>
+<category><pattern>ONELIFEAREA PHYSICAL *</pattern>
+<template><star/> is part of the physical world</template>
+</category>
+<category><pattern>ONELIFEAREA SPIRITUAL *</pattern>
+<template><star/> is a spiritual matter</template>
+</category>
+<category><pattern>ONELIFEAREA ENTERTAINMENT *</pattern>
+<template><star/> is connected with entertainment</template>
+</category>
+<category><pattern>ONELIFEAREA FAMILY *</pattern>
+<template><star/> is part of family life</template>
+</category>
+<category><pattern>ONELIFEAREA SOCIAL *</pattern>
+<template><star/> is part of social life</template>
+</category>
+<category><pattern>WHAT ISA *</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?x</vars>
+<q><subj><star/></subj><pred>isa</pred><obj>?x</obj></q></select>
+</set>
+</think>
+<condition var="tuples">
+<li value="NIL">NIL</li>
+<li>
+<think><set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think>
+CONS <get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>UNIQUEWORDS *</pattern>
+<template><star/></template>
+</category>
+<category><pattern>UNIQUEWORDS * *</pattern>
+<template><think>
+<set var="contains"><srai>CONTAINSLETTERLIST <star/> LIST <star index="2"/> END</srai></set>
+</think>
+<condition var="contains">
+<li value="true"><srai>UNIQUEWORDS <star index="2"/></srai></li>
+<li><star/> <srai>UNIQUEWORDS <star index="2"/></srai></li>
+</condition></template>
+</category>
+<category><pattern>SAMEPURPOSE * SAMEAS *</pattern>
+<template><think>
+<set var="p1"><srai>WHAT IS <star/> FOR</srai></set>
+<set var="p2"><srai>WHAT IS <star index="2"/> FOR</srai></set>
+</think>
+<srai>IS <get var="p1"/> EQUALTO <get var="p2"/></srai></template>
+</category>
+<category><pattern>SAMELIFEAREA * SAMEAS *</pattern>
+<template><think>
+<set var="a1"><srai>WHAT AREA OF LIFE IS <star/></srai></set>
+<set var="a2"><srai>WHAT AREA OF LIFE IS <star index="2"/></srai></set>
+</think>
+<srai>IS <get var="a1"/> EQUALTO <get var="a2"/></srai></template>
+</category>
+<category><pattern>CONTAINSLETTER * *</pattern>
+<template><srai>CONTAINSLETTERLIST <star/> LIST <explode><star index="2"/></explode> END</srai></template>
+</category>
+<category><pattern>CONTAINSLETTERLIST * LIST * END</pattern>
+<template><srai>IS <star/> EQUALTO <star index="2"/></srai></template>
+</category>
+<category><pattern>CONTAINSLETTERLIST * LIST * * END</pattern>
+<template><think><set var="firstletter">
+<srai>IS <star/> EQUALTO <star index="2"/></srai>
+</set>
+</think>
+<condition var="firstletter">
+<li value="true">true</li>
+<li><srai>CONTAINSLETTERLIST <star/> LIST <star index="3"/> END</srai></li>
+</condition></template>
+</category>
+<category><pattern>LETTERSINCOMMON * XWORD *</pattern>
+<template><think>
+<set var="any">false</set>
+<set var="letterlist"><explode><star/></explode> END</set></think>
+<condition var="letterlist">
+<li value="END"><condition value="false" var="any">None</condition></li>
+<li>
+<think><set var="first"><srai>FIRSTWORD <get var="letterlist"/></srai></set>
+<set var="letterlist"><srai>REMAININGWORDS <get var="letterlist"/></srai></set>
+<set var="contains"><srai>CONTAINSLETTER <get var="first"/> <star index="2"/></srai></set>
+</think>
+<condition value="true" var="contains">
+<think><set var="any">true</set></think>
+<get var="first"/>
+</condition>
+<loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>COMMASEPWORDS *</pattern>
+<template><star/></template>
+</category>
+<category><pattern>COMMASEPWORDS * *</pattern>
+<template><star/> and <star index="2"/></template>
+</category>
+<category><pattern>COMMASEPWORDS * * *</pattern>
+<template><star/>, <srai>COMMASEPWORDS <star index="2"/> <star index="3"/></srai></template>
+</category>
+<category><pattern>COMMASEPLIST *</pattern>
+<template><star/></template>
+</category>
+<category><pattern>COMMASEPLIST CONS * NIL</pattern>
+<template><star/></template>
+</category>
+<category><pattern>COMMASEPLIST CONS * CONS * NIL</pattern>
+<template><star/> and <star index="2"/></template>
+</category>
+<category><pattern>COMMASEPLIST CONS *</pattern>
+<template><star/>, <srai>COMMASEPLIST CONS <star/></srai></template>
+</category>
+<category><pattern>COMMONCLASSES * XOBJECT *</pattern>
+<template><think>
+<set var="c1"><srai>LISTOBJECTS SUBJ <star/> PRED isa</srai></set>
+<set var="c2"><srai>LISTOBJECTS SUBJ <star index="2"/> PRED isa</srai></set>
+</think>
+<condition var="c1">
+<li value="NIL">NIL</li>
+<li>
+<think>
+<set var="head"><srai>LISTCAR <get var="c1"/></srai></set>
+<set var="c1"><srai>LISTCDR <get var="c1"/></srai></set>
+<set var="member"><srai>LISTMEMBER <get var="head"/> OF LIST <get var="c2"/></srai></set>
+</think>
+<condition value="true" var="member">CONS <get var="head"/> </condition> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>SINGULAR *</pattern>
+<template><map><name>singular</name><star/></map></template>
+</category>
+<category><pattern>PLURAL *</pattern>
+<template><map><name>plural</name><star/></map></template>
+</category>
+<category><pattern>GETOBJECT SUBJ * PRED *</pattern>
+<template><get var="?x"><tuple><first><select><vars>?x</vars><q><subj><star/></subj><pred><star index="2"/></pred><obj>?x</obj></q></select></first></tuple></get></template>
+</category>
+<category><pattern>LISTOBJECTS SUBJ * PRED *</pattern>
+<template><think>
+<set var="tuples"><select><vars>?x</vars><q><subj><star/></subj><pred><star index="2"/></pred><obj>?x</obj></q></select></set>
+</think>
+<condition var="tuples">
+<li value="NIL">NIL</li>
+<li><think>
+<set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set>
+</think> CONS <get var="?x"><tuple><get var="head"/></tuple></get> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>HOW DOES * DIFFER FROM *</pattern>
+<template><think>
+<set var="alike">true</set>
+<set var="word1"><star/></set>
+<set var="word2"><star index="2"/></set>
+<set var="name1"><srai>ISANAME <get var="word1"/></srai></set>
+<set var="name2"><srai>ISANAME <get var="word2"/></srai></set>
+<set var="size1"><srai>SIZEOF <get var="word1"/></srai></set>
+<set var="size2"><srai>SIZEOF <get var="word2"/></srai></set>
+<set var="gender1"><srai>GENDERNAME <get var="word1"/></srai></set>
+<set var="gender2"><srai>GENDERNAME <get var="word2"/></srai></set>
+<condition value="false" var="name1">
+<set var="word1"><formal><srai>SINGULAR <get var="word1"/></srai></formal></set>
+</condition>
+<condition value="false" var="name2">
+<set var="word2"><formal><srai>SINGULAR <get var="word2"/></srai></formal></set>
+</condition>
+<set var="purpose1"><srai>GETOBJECT SUBJ <get var="word1"/> PRED hasPurpose</srai></set>
+<set var="purpose2"><srai>GETOBJECT SUBJ <get var="word2"/> PRED hasPurpose</srai></set>
+<set var="samepurpose"><srai>IS <get var="purpose1"/> EQUALTO <get var="purpose2"/></srai></set>
+<set var="samesize"><srai>IS <get var="size1"/> EQUALTO <get var="size2"/></srai></set>
+<set var="area1"><srai>GETOBJECT SUBJ <get var="word1"/> PRED lifeArea</srai></set>
+<set var="area2"><srai>GETOBJECT SUBJ <get var="word2"/> PRED lifeArea</srai></set>
+<set var="samearea"><srai>IS <get var="area1"/> EQUALTO <get var="area2"/></srai></set>
+<set var="n1"><srai>SENTENCELENGTH <explode><get var="word1"/></explode></srai></set>
+<set var="n2"><srai>SENTENCELENGTH <explode><get var="word2"/></explode></srai></set>
+</think>
+<condition var="n1">
+<li><value><get var="n2"/></value></li>
+<li><get var="word1"/> has <get var="n1"/> letters, and <get var="word2"/> has <get var="n2"/> letters.
+<think><set var="alike">false</set></think>
+</li>
+</condition>
+<condition var="name1">
+<li value="true">
+<condition value="false" var="name2"><get var="word1"/> is a common name, but <get var="word2"/> is not. <think><set var="alike">false</set></think></condition>
+</li>
+<li><condition value="true" var="name2"><get var="word2"/> is a common name, but <get var="word1"/> is not. <think><set var="alike">false</set></think></condition>
+</li>
+</condition>
+<condition var="size2">
+<li value="unknown"/>
+<li>
+<condition var="size1">
+<li value="unknown"/>
+<li>
+<condition value="false" var="samesize"><srai>IS <get var="word1"/> LARGER THAN <get var="word2"/></srai></condition>
+</li>
+</condition>
+</li>
+</condition>
+
+<condition var="purpose1">
+<li value="unknown"/>
+<li>
+  <condition var="purpose2">
+  <li value="unknown"/>
+  <li><condition value="false" var="samepurpose">
+They have different purposes: <get var="word1"/>'s purpose is <get var="purpose1"/>, and <get var="word2"/>'s purpose is <get var="purpose2"/>.
+<think><set var="alike">false</set></think></condition>
+  </li>
+  </condition>
+</li>
+</condition>
+<condition var="area1">
+<li value="unknown"/>
+<li>
+  <condition var="area2">
+  <li value="unknown"/>
+  <li><condition value="false" var="samearea"><srai>ONELIFEAREA <get var="area1"/> <get var="word1"/></srai>, and <srai>ONELIFEAREA <get var="area2"/> <get var="word2"/></srai>.
+<think><set var="alike">false</set></think></condition>
+  </li>
+  </condition>
+</li>
+</condition>
+<condition value="true" var="alike">They seem much the same to me.</condition></template>
+</category>
+<category><pattern>HOW IS * LIKE *</pattern>
+<template><think>
+<set var="alike">false</set>
+<set var="word1"><star/></set>
+<set var="word2"><star index="2"/></set>
+<set var="name1"><srai>ISANAME <get var="word1"/></srai></set>
+<set var="name2"><srai>ISANAME <get var="word2"/></srai></set>
+<set var="size1"><srai>SIZEOF <get var="word1"/></srai></set>
+<set var="size2"><srai>SIZEOF <get var="word2"/></srai></set>
+<set var="gender1"><srai>GENDERNAME <get var="word1"/></srai></set>
+<set var="gender2"><srai>GENDERNAME <get var="word2"/></srai></set>
+<condition value="false" var="name1">
+<set var="word1"><formal><srai>SINGULAR <get var="word1"/></srai></formal></set>
+</condition>
+<condition value="false" var="name2">
+<set var="word2"><formal><srai>SINGULAR <get var="word2"/></srai></formal></set>
+</condition>
+<set var="samepurpose"><srai>SAMEPURPOSE <get var="word1"/> SAMEAS <get var="word2"/></srai></set>
+<set var="samelifearea"><srai>SAMELIFEAREA <get var="word1"/> SAMEAS <get var="word2"/></srai></set>
+<set var="samesize"><srai>IS <get var="size1"/> EQUALTO <get var="size2"/></srai></set>
+<set var="commonclasses"><srai>COMMONCLASSES <get var="word1"/> XOBJECT <get var="word2"/></srai></set>
+<set var="commonletters"><srai>UNIQUEWORDS <srai>LETTERSINCOMMON <get var="word1"/> XWORD <get var="word2"/></srai></srai></set>
+<set var="n1"><srai>SENTENCELENGTH <explode><get var="word1"/></explode></srai></set>
+<set var="n2"><srai>SENTENCELENGTH <explode><get var="word2"/></explode></srai></set>
+</think>
+<srai>INTERJECTION</srai>..
+<get var="word1"/> and <get var="word2"/>?
+<condition value="true" var="name1">
+<condition value="true" var="name2">
+They are both common names of people.
+<think><set var="alike">true</set></think>
+<condition var="gender1"><value><get var="gender2"/></value>
+They are both <condition var="gender1"><li value="M">male</li><li>female</li></condition>.
+</condition>
+</condition>
+</condition>
+<condition var="commonclasses">
+<li value="NIL"/>
+<li>
+<think><set var="alike">true</set></think>
+They are both <srai>COMMASEPLIST <get var="commonclasses"/></srai>.
+</li>
+</condition>
+<condition var="n1"><value><get var="n2"/></value>
+They both have <get var="n1"/> letters.
+<think><set var="alike">true</set></think>
+</condition>
+<condition var="commonletters">
+<li value="None"/>
+<li>They have the letters <srai>COMMASEPWORDS <get var="commonletters"/></srai> in common.
+<think><set var="alike">true</set></think>
+</li>
+</condition>
+<condition value="true" var="samesize">
+<condition var="size1">
+<li value="unknown"/>
+<li>They are about the same size.</li>
+</condition>
+</condition>
+<condition value="true" var="samepurpose">They have the same purpose: <srai>WHAT IS <get var="word1"/> FOR</srai>. <think><set var="alike">true</set></think></condition>
+<condition value="true" var="samelifearea">
+<srai>BOTHLIFEAREA <srai>WHAT AREA OF LIFE IS <get var="word1"/></srai></srai>
+<think><set var="alike">true</set></think></condition>
+<condition value="false" var="alike">I don't know how they are alike.</condition></template>
+</category>
+<category><pattern>SIZEOF *</pattern>
+<template><get var="?x"><tuple><first><select><q><subj><star/></subj><pred>hasSize</pred><obj>?x</obj></q></select></first></tuple></get></template>
+</category>
+<category><pattern>SPEEDOF *</pattern>
+<template><get var="?x"><tuple><first><select><q><subj><star/></subj><pred>hasSpeed</pred><obj>?x</obj></q></select></first></tuple></get></template>
+</category>
+<category><pattern>LARGEROF * AND *</pattern>
+<template><think>
+<set var="thing1"><star/></set>
+<set var="thing2"><star index="2"/></set>
+<set var="result"><srai>IS <get var="thing1"/> LARGER THAN <get var="thing2"/></srai></set>
+</think>
+<condition var="result">
+<li value="YES"><get var="thing1"/></li>
+<li value="NO"><get var="thing2"/></li>
+<li>unknown</li>
+</condition></template>
+</category>
+<category><pattern>LARGEROF <set>entity</set> AND <set>entity</set></pattern>
+<template><think>
+<set var="s1"><srai>SIZEOF <star/></srai></set>
+<set var="s2"><srai>SIZEOF <star index="2"/></srai></set>
+</think>
+<condition var="s1">
+<li value="unknown">unknown</li>
+<li>
+  <condition var="s2">
+  <li value="unknown">unknown</li>
+  <li><value><get var="s1"/></value>same</li>
+  <li><think><set var="larger"><srai>LARGEROF <get var="s1"/> <get var="s2"/></srai></set></think>
+    <condition var="larger">
+    <li><value><get var="s1"/></value><star/></li>
+    <li><star index="2"/></li>
+    </condition>
+  </li>
+  </condition>
+</li>
+</condition></template>
+</category>
+<category><pattern>FASTEROF <set>entity</set> AND <set>entity</set></pattern>
+<template><think>
+<set var="s1"><srai>SPEEDOF <star/></srai></set>
+<set var="s2"><srai>SPEEDOF <star index="2"/></srai></set>
+</think>
+<condition var="s1">
+<li value="unknown">unknown</li>
+<li>
+  <condition var="s2">
+  <li value="unknown">unknown</li>
+  <li><value><get var="s1"/></value>same</li>
+  <li><think><set var="larger"><srai>LARGEROF <get var="s1"/> <get var="s2"/></srai></set></think>
+    <condition var="larger">
+    <li><value><get var="s1"/></value><star/></li>
+    <li><star index="2"/></li>
+    </condition>
+  </li>
+  </condition>
+</li>
+</condition></template>
+</category>
+<category><pattern>FASTEROF *</pattern>
+<template>unknown</template>
+</category>
+<category><pattern>LARGEROF *</pattern>
+<template>unknown</template>
+</category>
+<category><pattern>SMALLEROF <set>entity</set> AND <set>entity</set></pattern>
+<template><think>
+<set var="s1"><srai>SIZEOF <star/></srai></set>
+<set var="s2"><srai>SIZEOF <star index="2"/></srai></set>
+</think>
+<condition var="s1">
+<li value="unknown">unknown</li>
+<li>
+  <condition var="s2">
+  <li value="unknown">unknown</li>
+  <li><value><get var="s1"/></value>same</li>
+  <li><think><set var="smaller"><srai>SMALLEROF <get var="s1"/> <get var="s2"/></srai></set></think>
+    <condition var="smaller">
+    <li><value><get var="s1"/></value><star/></li>
+    <li><star index="2"/></li>
+    </condition>
+  </li>
+  </condition>
+</li>
+</condition></template>
+</category>
+<category><pattern>SYLLABLES *</pattern>
+<template><think>
+<set var="result"><q><subj><star/></subj><pred>hasSyllables</pred></q></set>
+</think>
+<condition var="result">
+<li value="NIL">unknown</li>
+<li><object><srai>LISTCAR <get var="result"/></srai></object></li>
+</condition></template>
+</category>
+<category><pattern>IS * <set>article</set> *</pattern>
+<template><srai>IS <star/> MEMBEROF <star index="3"/></srai></template>
+</category>
+<category><pattern>IS <set>article</set> * *</pattern>
+<template><srai>IS <star index="2"/> MEMBEROF <star index="3"/></srai></template>
+</category>
+<category><pattern>IS <set>article</set> * <set>article</set> *</pattern>
+<template><srai>IS <star index="2"/> MEMBEROF <star index="4"/></srai></template>
+</category>
+<category><pattern>IS * MEMBEROF *</pattern>
+<template><think>
+<set var="types"><srai>WHAT ISA <star/></srai></set>
+<condition var="types">
+<li value="NIL"><set var="result"><sraix service="pannous">IS <star/> A <star index="2"/></sraix></set></li>
+<li><set var="result">No.</set></li>
+</condition>
+</think>
+<condition var="types">
+<li value="NIL"/>
+<li>
+<think>
+<set var="head"><srai>LISTCAR <get var="types"/></srai></set>
+<set var="types"><srai>LISTCDR <get var="types"/></srai></set>
+<condition><var>head</var><value><star index="2"/></value>
+<set var="result">Yes.</set>
+</condition>
+</think>
+<loop/>
+</li>
+</condition>
+<get var="result"/></template>
+</category>
+<category><pattern>ADDTRIPLE * * *</pattern>
+<template><addtriple><subj><star/></subj><pred><star index="2"/></pred><obj><star index="3"/></obj></addtriple></template>
+</category>
+<category><pattern>LIST TRIPLES</pattern>
+<template><select>
+<vars>?subj ?pred ?obj</vars>
+<q><subj>?subj</subj><pred>?pred</pred><obj>?obj</obj></q>
+</select></template>
+</category>
+<category><pattern>FIRST *</pattern>
+<template><first><star/></first></template>
+</category>
+<category><pattern>REST *</pattern>
+<template><rest><star/></rest></template>
+</category>
+<category><pattern>PRINT TRIPLES</pattern>
+<template><think>
+<set var="list"><srai>LIST TRIPLES</srai></set>
+</think>
+<condition var="list">
+<li value="NIL"/>
+<li><think>
+<set var="head"><first><get var="list"/></first></set>
+<set var="list"><rest><get var="list"/></rest></set>
+</think>
+["<get var="?subj"><tuple><get var="head"/></tuple></get>","<get var="?pred"><tuple><get var="head"/></tuple></get>","<get var="?obj"><tuple><get var="head"/></tuple></get>"]
+<loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>NAME <set>number</set> *</pattern>
+<template><think>
+<set var="number"><star/></set>
+<set var="singular"><map><name>singular</name><star index="2"/></map></set>
+<set var="tuples"><select><vars>?x</vars><q><subj>?x</subj><pred>isa</pred><obj><get var="singular"/></obj></q></select></set>
+<set var="count"><srai>COUNTWORDS <get var="tuples"/></srai></set>
+</think>
+<condition var="tuples">
+  <li value="NIL"><sraix>NAME <star/> <star index="2"/></sraix></li>
+  <li>I know <get var="count"/> <star index="2"/>.
+    <condition>
+    <li value="NIL" var="tuples"/>
+    <li value="0" var="number"/>
+    <li><think>
+          <set var="head"><first><get var="tuples"/></first></set>
+          <set var="tuples"><rest><get var="tuples"/></rest></set>
+          <set var="number"><map><name>predecessor</name><get var="number"/></map></set>
+        </think><get var="?x"><tuple><get var="head"/></tuple></get><condition><li value="NIL" var="tuples">.</li><li value="0" var="number">.</li><li>,</li></condition> <loop/> </li>
+    </condition>
+  </li>
+</condition></template>
+</category>
+<category><pattern><set>name</set> IS THE FATHER OF <set>name</set></pattern>
+<template><think><srai>SETHESHE <star index="2"/></srai></think>
+  I see.  <star index="2"/> is <star/>'s <condition name="pronoun"><li value="he">son</li><li>daughter</li></condition>.
+<think>
+<addtriple><subj><star/></subj><pred>fatherOf</pred><obj><star index="2"/></obj></addtriple>
+<addtriple><subj><star/></subj><pred>parentOf</pred><obj><star index="2"/></obj></addtriple>
+</think></template>
+</category>
+<category><pattern><set>name</set> IS THE MOTHER OF <set>name</set></pattern>
+<template><think><srai>SETHESHE <star index="2"/></srai></think>
+  I see.  <star index="2"/> is <star/>'s <condition name="pronoun"><li value="he">son</li><li>daughter</li></condition>.
+<think>
+<addtriple><subj><star/></subj><pred>motherOf</pred><obj><star index="2"/></obj></addtriple>
+<addtriple><subj><star/></subj><pred>parentOf</pred><obj><star index="2"/></obj></addtriple>
+</think></template>
+</category>
+<category><pattern>GRANDFATHER OF <set>name</set></pattern>
+<template><think><set var="tuples">
+<select><vars>?x</vars>
+<q><subj>?x</subj><pred>fatherOf</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred>parentOf</pred><obj><star/></obj></q>
+</select></set>
+</think>
+<condition var="tuples">
+<li value="NIL"/>
+<li><think><set var="head"><first><get var="tuples"/></first></set>
+<set var="tuples"><rest><get var="tuples"/></rest></set></think>
+<get var="?x"><tuple><get var="head"/></tuple></get> 
+<get var="?A"><tuple><get var="head"/></tuple></get> 
+<loop/>
+</li>
+</condition></template>
+</category>
+<category><pattern>WHO IS <set>erup</set></pattern>
+<template><think>
+<set name="whowhat">who</set>
+</think><srai>WHICH IS <star/></srai></template>
+</category>
+<category><pattern>WHO IS <set>erdown</set></pattern>
+<template><think>
+<set name="whowhat">who</set>
+</think><srai>WHICH IS <star/></srai></template>
+</category>
+<category><pattern>WHAT IS <set>erup</set></pattern>
+<template><think>
+<set name="whowhat">what</set>
+</think><srai>WHICH IS <star/></srai></template>
+</category>
+<category><pattern>WHAT IS <set>erdown</set></pattern>
+<template><think>
+<set name="whowhat">what</set>
+</think><srai>WHICH IS <star/></srai></template>
+</category>
+<category><pattern>WHICH IS <set>erup</set></pattern>
+<template><think>
+<set var="tuples">
+<select>
+<vars>?x</vars>
+<q><subj>?x</subj><pred><star/> than</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred><star/> than</pred><obj>?z</obj></q>
+</select>
+</set>
+<set var="first"><first><get var="tuples"/></first></set>
+<set var="X"><get var="?x"><tuple><get var="first"/></tuple></get></set>
+</think>
+<condition var="X">
+<li value="unknown">I can't tell <condition name="whowhat"><li value="unknown">which</li><li><get name="whowhat"/></li></condition> is <star/>.</li>
+<li><formal><get var="X"/></formal> is <map><name>er2est</name><star/></map>.</li>
+</condition></template>
+</category>
+<category><pattern>WHICH IS <set>erdown</set></pattern>
+<template><think>
+<set var="opposite"><map><name>opposite</name><star/></map></set>
+<set var="tuples">
+<select>
+<vars>?z</vars>
+<q><subj>?x</subj><pred><get var="opposite"/> than</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred><get var="opposite"/> than</pred><obj>?z</obj></q>
+</select>
+</set>
+<set var="first"><first><get var="tuples"/></first></set>
+<set var="Z"><get var="?z"><tuple><get var="first"/></tuple></get></set>
+</think>
+<condition var="Z">
+<li value="unknown">I can't tell <condition name="whowhat"><li value="unknown">which</li><li><get name="whowhat"/></li></condition> is <star/>.</li>
+<li><formal><get var="Z"/></formal> is <map><name>er2est</name><star/></map>.</li>
+</condition></template>
+</category>
+<category><pattern>WHICH IS <set>erup</set> THAN *</pattern>
+<template><think><set var="tuples">
+<select><vars>?x</vars><q><subj>?x</subj><pred><star/> than</pred><obj><star index="2"/></obj></q></select>
+<select><vars>?x</vars>
+<q><subj>?x</subj><pred><star/> than</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred><star/> than</pred><obj><star index="2"/></obj></q>
+</select>
+</set>
+</think>
+<condition var="tuples">
+<li value="NIL NIL">I can't tell <condition name="whowhat"><li value="unknown">which</li><li><get name="whowhat"/></li></condition> is <star/>.</li>
+<li><think><set var="tuples"><srai>REMOVENILS <get var="tuples"/></srai></set></think>
+<condition var="tuples"><li value="NIL"/>
+<li><get var="?x"><tuple><first><get var="tuples"/></first></tuple></get><think><set var="tuples"><rest><get var="tuples"/></rest></set></think><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/></li>
+</condition>
+</li>
+</condition></template>
+</category>
+<category><pattern>WHICH IS <set>erdown</set> THAN *</pattern>
+<template><think>
+<set var="opposite"><map><name>opposite</name><star/></map></set>
+<set var="tuples">
+<select><vars>?x</vars><q><subj><star index="2"/></subj><pred><get var="opposite"/> than</pred><obj>?x</obj></q></select>
+<select><vars>?x</vars>
+<q><subj><star index="2"/></subj><pred><get var="opposite"/> than</pred><obj>?y</obj></q>
+<q><subj>?y</subj><pred><get var="opposite"/> than</pred><obj>?x</obj></q>
+</select>
+</set>
+<!--
+<set var="tuples"><srai>REMOVENILS <get var="tuples"/></srai></set>
+-->
+</think>
+<condition var="tuples">
+<li value="NIL NIL">I can't tell <condition name="whowhat"><li value="unknown">which</li><li><get name="whowhat"/></li></condition> is <star/>.</li>
+<li><think><set var="tuples"><srai>REMOVENILS <get var="tuples"/></srai></set></think>
+<condition var="tuples"><li value="NIL"/>
+<li><get var="?x"><tuple><first><get var="tuples"/></first></tuple></get><think><set var="tuples"><rest><get var="tuples"/></rest></set></think><condition var="tuples"><li value="NIL"/><li>,</li></condition> <loop/></li>
+</condition>
+</li>
+</condition></template>
+</category>
+</aiml>

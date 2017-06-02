@@ -26,6 +26,10 @@ class TemplateIndexedNode(TemplateAttribNode):
 
     def __init__(self, position=1, index=1):
         TemplateAttribNode.__init__(self)
+        # TODO Position means question
+        # Index means setence in question
+        # Need to make sure every index class is using this correctly
+        # See TODO Below
         self._position = position
         self._index = index
 
@@ -64,7 +68,12 @@ class TemplateIndexedNode(TemplateAttribNode):
             elif len(splits) == 2:
                 try:
                     self._position = int(splits[0])
-                    self._index = int(splits[1])
+                    if splits[1] == '*':
+                        # TODO I think this is wrong
+                        # A number of aiml files use index="2,*", where * means all sentences
+                        self._index = 1
+                    else:
+                        self._index = int(splits[1])
                 except Exception as excep:
                     logging.exception(excep)
                     raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'", attrib_value, attrib_name)

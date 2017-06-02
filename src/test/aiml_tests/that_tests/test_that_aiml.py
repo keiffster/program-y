@@ -12,7 +12,7 @@ class ThatTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(ThatTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(os.path.dirname(__file__), ".aiml", False)
+        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(files=os.path.dirname(__file__))
 
 class ThatAIMLTests(unittest.TestCase):
 

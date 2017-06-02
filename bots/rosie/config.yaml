@@ -36,10 +36,10 @@ brain:
        Pannous:
             path: programy.utils.services.pannous.PannousService
             url: http://weannie.pannous.com/api
-        Pandora:
+       Pandora:
             path: programy.utils.services.pandora.PandoraService
             url: http://www.pandorabots.com/pandora/talk-xml
-        Wikipedia:
+       Wikipedia:
             path: programy.utils.services.wikipediaservice.WikipediaService
 
 bot:

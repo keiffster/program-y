@@ -28,7 +28,7 @@ class PatternPriorityWordNode(PatternWordNode):
         return True
 
     def equivalent(self, other):
-        if isinstance(other, PatternPriorityWordNode):
+        if other.is_priority():
             if self.word == other.word:
                 return True
         return False
