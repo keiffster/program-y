@@ -131,6 +131,10 @@ class TemplateGraph(object):
             return text
         return None
 
+    def parse_tag_expression(self, expression, branch):
+        self.parse_tag_via_lookup(expression, branch)
+        #self.parse_tag_via_if(expression, branch)
+
     def load_node_lookups(self):
         self.node_lookups = dict([
             ('random', self.parse_random_expression),
@@ -177,10 +181,6 @@ class TemplateGraph(object):
             ('extension', self.parse_extension_expression),
             ('log', self.parse_log_expression)
         ])
-
-    def parse_tag_expression(self, expression, branch):
-        self.parse_tag_via_lookup(expression, branch)
-        #self.parse_tag_via_if(expression, branch)
 
     def parse_tag_via_lookup(self, expression, branch):
         if self.node_lookups is None:

@@ -126,8 +126,8 @@ class Bot(object):
         for each_sentence in question.sentences:
 
             self._question_depth += 1
-            if self._question_depth > 10:
-                raise Exception ("Maximum recursion limit exceeded")
+            if self._question_depth > self._configuration.max_recursion:
+                raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_recursion))
 
             response = self.brain.ask_question(self, clientid, each_sentence)
             if response is not None:

@@ -19,6 +19,7 @@ class BotConfigurationTests(unittest.TestCase):
             default_response: Sorry, I don't have an answer for that!
             exit_response: So long, and thanks for the fish!
             override_predicates: true
+            max_recursion: 10
 
         """, ".")
 
@@ -30,6 +31,9 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
         self.assertEqual("Sorry, I don't have an answer for that!", bot_config.default_response)
         self.assertEqual("So long, and thanks for the fish!", bot_config.exit_response)
+
+        self.assertEqual(10, bot_config.max_recursion)
+
         self.assertTrue(bot_config.override_predicates)
 
 

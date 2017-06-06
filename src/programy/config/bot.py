@@ -36,6 +36,7 @@ class BotConfiguration(BaseConfigurationData):
         self._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
         self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
         self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
+        self._max_recursion         = 100
         BaseConfigurationData.__init__(self, "bot")
 
     def load_config_section(self, config_file, bot_root):
@@ -47,6 +48,7 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
             self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
+            self._max_recursion = config_file.get_option(bot, "max_recursion", 100)
         else:
             logging.warning("Config section [%s] missing, using default values", self.section_name)
             self._license_keys          = None
@@ -56,6 +58,7 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
             self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
             self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
+            self._max_recursion         = 100
 
     @property
     def license_keys(self):
@@ -101,3 +104,6 @@ class BotConfiguration(BaseConfigurationData):
     def override_predicates(self, override):
         self._override_predicates = override
 
+    @property
+    def max_recursion(self):
+        return self._max_recursion

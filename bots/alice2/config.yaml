@@ -1,5 +1,18 @@
 
-brain:
+
+        sets:
+            files: $BOT_ROOT/sets
+            extension: .txt
+            directories: false
+        maps:
+            files: $BOT_ROOT/maps
+            extension: .txt
+            directories: false
+        denormal: $BOT_ROOT/config/denormal.txt
+        normal: $BOT_ROOT/config/normal.txt
+        gender: $BOT_ROOT/config/gender.txt
+        person: $BOT_ROOT/config/person.txt
+        person2: $BOT_ROOTbrain:
 
     supress_warnings: true
 
@@ -17,20 +30,7 @@ brain:
              directories: true
              errors: /tmp/alice2_errors.txt
              duplicates: /tmp/alice2_duplicates.txt
-
-        sets:
-            files: $BOT_ROOT/sets
-            extension: .txt
-            directories: false
-        maps:
-            files: $BOT_ROOT/maps
-            extension: .txt
-            directories: false
-        denormal: $BOT_ROOT/config/denormal.txt
-        normal: $BOT_ROOT/config/normal.txt
-        gender: $BOT_ROOT/config/gender.txt
-        person: $BOT_ROOT/config/person.txt
-        person2: $BOT_ROOT/config/person2.txt
+/config/person2.txt
         predicates: $BOT_ROOT/config/predicates.txt
         pronouns: $BOT_ROOT/config/pronouns.txt
         properties: $BOT_ROOT/config/properties.txt

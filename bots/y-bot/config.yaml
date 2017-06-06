@@ -56,6 +56,8 @@ bot:
     exit_response: So long, and thanks for the fish!
     override_predicates: true
 
+    max_recursion: 100
+
 rest:
   host: 127.0.0.1
   port: 5000
