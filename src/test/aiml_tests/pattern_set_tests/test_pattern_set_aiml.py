@@ -21,3 +21,9 @@ class PatternsetAIMLTests(unittest.TestCase):
     def test_patten_set_match(self):
         response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS RED")
         self.assertEqual(response, "RED IS A NICE COLOR.")
+
+    # TODO
+    # Uncomment this
+    # def test_patten_match_multi_word_set(self):
+    #    response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS AIR FORCE BLUE")
+    #    self.assertEqual(response, "RED IS A NICE COLOR.")

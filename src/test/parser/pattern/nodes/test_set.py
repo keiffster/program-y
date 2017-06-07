@@ -38,3 +38,14 @@ class PatternSetNodeTests(PatternTestBaseClass):
 
         self.assertTrue(node.equals(self.bot, "testid", "12"))
         self.assertFalse(node.equals(self.bot, "testid", "XY"))
+
+    def test_spaces(self):
+        self.bot.brain.sets.add_set("TEST1", ["VALUE1 TEXT1", "VALUE2 TEXT2", "VALUE3 TEXT3"])
+
+        node = PatternSetNode("test1")
+        self.assertIsNotNone(node)
+
+        self.assertTrue(node.equivalent(PatternSetNode("TEST1")))
+        self.assertTrue(node.equals(self.bot, "testid", "VALUE1 TEXT1"))
+        self.assertTrue(node.equals(self.bot, "testid", "VALUE2 TEXT2"))
+        self.assertTrue(node.equals(self.bot, "testid", "VALUE3 TEXT3"))
