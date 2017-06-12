@@ -35,4 +35,12 @@ For more information see [url]
         </template>
     </category>
 
+    <category>
+        <pattern><set>color</set> IS A NICE COLOUR
+        </pattern>
+        <template>
+            YES <star /> IS A LOVELY COLOUR.
+        </template>
+    </category>
+
 </aiml>

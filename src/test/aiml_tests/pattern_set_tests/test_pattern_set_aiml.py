@@ -45,3 +45,13 @@ class PatternsetAIMLTests(unittest.TestCase):
 
         response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "I DO NOT LIKE SACRAMENTO STATE GREEN AT ALL")
         self.assertEqual(response, "IT IS OK, Sacramento State green IS NOT MY BEST COLOUR EITHER")
+
+    def test_patten_match_mixed_word_set_at_front(self):
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "RED IS A NICE COLOUR")
+        self.assertEqual(response, "YES Red IS A LOVELY COLOUR.")
+
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "RED ORANGE IS A NICE COLOUR")
+        self.assertEqual(response, "YES Red Orange IS A LOVELY COLOUR.")
+
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "SACRAMENTO STATE GREEN IS A NICE COLOUR")
+        self.assertEqual(response, "YES Sacramento State green IS A LOVELY COLOUR.")
