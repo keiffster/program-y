@@ -1,6 +1,7 @@
 from test.parser.pattern.nodes.base import PatternTestBaseClass
 
 from programy.parser.pattern.nodes.iset import PatternISetNode
+from programy.dialog import Sentence
 
 class PatternSetNodeTests(PatternTestBaseClass):
 
@@ -31,10 +32,16 @@ class PatternSetNodeTests(PatternTestBaseClass):
 
         self.assertFalse(node.equivalent(PatternISetNode("test1, test2, test3")))
 
-        self.assertTrue(node.equals(None, "testid", "TEST1"))
-        self.assertTrue(node.equals(None, "testid", "TEST2"))
-        self.assertTrue(node.equals(None, "testid", "TEST3"))
-        self.assertFalse(node.equals(None, "testid", "TEST4"))
+        sentence = Sentence("TEST1 TEST2 TEST3")
+
+        result = node.equals(None, "testid", sentence, 0)
+        self.assertTrue(result.matched)
+        result = node.equals(None, "testid", sentence, 1)
+        self.assertTrue(result.matched)
+        result = node.equals(None, "testid", sentence, 2)
+        self.assertTrue(result.matched)
+        result = node.equals(None, "testid", sentence, 3)
+        self.assertFalse(result.matched)
 
         self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
 

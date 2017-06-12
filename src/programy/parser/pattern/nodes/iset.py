@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.matcher import EqualsMatch
 
 
 class PatternISetNode(PatternWordNode):
@@ -42,11 +43,14 @@ class PatternISetNode(PatternWordNode):
         # All isets are never equivalent, as they are inline and are unique regardless of set content
         return False
 
-    def equals(self, bot, client, word):
+    def equals(self, bot, client, words, word_no):
+        word = words.word(word_no)
         for set_word in self._words:
             if word == set_word:
-                return True
-        return False
+                logging.debug("Found word [%s] in iset"%(word))
+                return EqualsMatch(True, word_no, word)
+        logging.error("No word [%s] found in iset" % (word))
+        return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         words_str = ",".join(self._words)

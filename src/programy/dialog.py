@@ -57,7 +57,7 @@ class Sentence(object):
         if num < self.num_words():
             return self.words[num]
         else:
-            raise Exception("Num word array violation !")
+            return None
 
     def words_from_current_pos(self, current_pos: int):
         if len(self._words) > 0:

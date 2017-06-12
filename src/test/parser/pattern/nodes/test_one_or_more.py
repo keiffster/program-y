@@ -2,6 +2,7 @@ from programy.parser.exceptions import ParserException
 
 from test.parser.pattern.nodes.base import PatternTestBaseClass
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.dialog import Sentence
 
 class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
 
@@ -30,8 +31,11 @@ class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
 
         self.assertEqual(node.wildcard, "*")
 
+        sentence = Sentence("*")
+
         self.assertTrue(node.equivalent(PatternOneOrMoreWildCardNode("*")))
-        self.assertFalse(node.equals(self.bot, "testid", "*"))
+        result = node.equals(self.bot, "testid", sentence, 0)
+        self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ONEORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]")
 
     def test_underline(self):

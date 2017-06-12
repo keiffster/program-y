@@ -1,5 +1,6 @@
 from test.parser.pattern.nodes.base import PatternTestBaseClass
 from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.dialog import Sentence
 
 class PatternBotNodeTests(PatternTestBaseClass):
 
@@ -25,8 +26,14 @@ class PatternBotNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternBotNode("test1")))
         self.assertFalse(node.equivalent(PatternBotNode("test2")))
 
-        self.assertTrue(node.equals(self.bot, "testid", "value1"))
-        self.assertFalse(node.equals(self.bot, "testid", "value2"))
+        sentence = Sentence("value1 value2")
+
+        result = node.equals(self.bot, "testid", sentence, 0)
+        self.assertTrue(result.matched)
+        self.assertEquals(0, result.word_no)
+        result = node.equals(self.bot, "testid", sentence, 1)
+        self.assertFalse(result.matched)
+        self.assertEquals(1, result.word_no)
 
         self.assertEqual(node.to_string(), "BOT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test1]")
 

@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.matcher import EqualsMatch
 
 
 class PatternPriorityWordNode(PatternWordNode):
@@ -33,10 +34,11 @@ class PatternPriorityWordNode(PatternWordNode):
                 return True
         return False
 
-    def equals(self, bot, clientid, word):
+    def equals(self, bot, clientid, words, word_no):
+        word = words.word(word_no)
         if self._word == word:
-            return True
-        return False
+            return EqualsMatch(True, word_no, word)
+        return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:

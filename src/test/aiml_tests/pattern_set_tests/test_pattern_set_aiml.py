@@ -19,11 +19,20 @@ class PatternsetAIMLTests(unittest.TestCase):
         PatternsetAIMLTests.test_client = BasicTestClient()
 
     def test_patten_set_match(self):
-        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS RED")
-        self.assertEqual(response, "RED IS A NICE COLOR.")
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS AMBER")
+        self.assertEqual(response, "Amber IS A NICE COLOR.")
 
-    # TODO
-    # Uncomment this
-    # def test_patten_match_multi_word_set(self):
-    #    response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS AIR FORCE BLUE")
-    #    self.assertEqual(response, "RED IS A NICE COLOR.")
+    def test_patten_match_multi_word_set(self):
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS AIR FORCE BLUE")
+        self.assertEqual(response, "Air Force blue IS A NICE COLOR.")
+
+    def test_patten_match_mixed_word_set(self):
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS RED")
+        self.assertEqual(response, "Red IS A NICE COLOR.")
+
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS RED ORANGE")
+        self.assertEqual(response, "Red Orange IS A NICE COLOR.")
+
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS SACRAMENTO STATE GREEN")
+        self.assertEqual(response, "Sacramento State green IS A NICE COLOR.")
+

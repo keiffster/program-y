@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.matcher import EqualsMatch
 
 class PatternSetNode(PatternWordNode):
 
@@ -36,20 +37,53 @@ class PatternSetNode(PatternWordNode):
                 return True
         return False
 
-    def equals(self, bot, client, word):
-        if self.set_name.upper() == 'NUMBER':
-            return word.isnumeric()
-        elif bot.brain.sets.contains(self.set_name):
-            logging.debug("Looking for [%s] in set [%s]", word, self.set_name)
-            set_words = bot.brain.sets.set(self.set_name)
-            if word in set_words:
+    def set_is_numeric(self):
+        return bool(self.set_name.upper() == 'NUMBER')
+
+    def set_is_known(self, bot):
+        return bool(bot.brain.sets.contains(self.set_name))
+
+    def words_in_set(self, bot, words, word_no):
+
+        word = words.word(word_no)
+        set_words = bot.brain.sets.set(self.set_name)
+
+        if word in set_words:
+            phrases = set_words[word]
+            phrases = sorted(phrases, key=len, reverse=True)
+            for phrase in phrases:
+                phrase_word_no = 0
+                words_word_no = word_no
+                while phrase_word_no < len(phrase) and words_word_no < words.num_words():
+                    phrase_word = phrase[phrase_word_no].upper()
+                    word = words.word(words_word_no)
+                    if phrase_word == word:
+                        if phrase_word_no+1 == len(phrase):
+                            return EqualsMatch(True, words_word_no, " ".join(phrase))
+                    phrase_word_no += 1
+                    words_word_no += 1
+
+        return EqualsMatch(False, word_no)
+
+    def equals(self, bot, client, words, word_no):
+        word = words.word(word_no)
+        if self.set_is_numeric():
+            return EqualsMatch(word.isnumeric(), word_no, word)
+        elif self.set_is_known(bot):
+            match = self.words_in_set(bot, words, word_no)
+            if match.matched is True:
                 logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
-                return True
-        return False
+                return match
+            else:
+                logging.error("No word [%s] found in set [%s]"%(word, self.set_name))
+                return EqualsMatch(False, word_no)
+        else:
+            logging.error("No set named [%s] in sets collection"%(self.set_name))
+            return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "SET [%s] words=[%s]" % (self._child_count(verbose), self.word)
+            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
         else:
-            return "SET words=[%s]" % (self.word)
+            return "SET name=[%s]" % (self.word)
 
