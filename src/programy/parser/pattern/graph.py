@@ -18,19 +18,10 @@ import logging
 
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
-
+from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.root import PatternRootNode
-from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.parser.pattern.nodes.set import PatternSetNode
-from programy.parser.pattern.nodes.iset import PatternISetNode
-from programy.parser.pattern.nodes.bot import PatternBotNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
-
 
 # TODO better handling of <html> type tags
 
@@ -38,45 +29,53 @@ from programy.parser.pattern.nodes.template import PatternTemplateNode
 #
 class PatternGraph(object):
 
-    def __init__(self, root_node=None):
+    def __init__(self, root_node=None, pattern_factory=None):
         if root_node is None:
+            logging.debug("Defaulting root to PatternRootNode")
             self._root_node = PatternRootNode()
         else:
             if root_node.is_root() is False:
                 raise ParserException("Root node needs to be of base type PatternRootNode")
             self._root_node = root_node
 
+        if pattern_factory is None:
+            logging.debug("Defaulting node factory to PatternNodeFactory")
+            self._pattern_factory = PatternNodeFactory()
+            self._pattern_factory.load_nodes_config_from_file("dummy_config.conf")
+        else:
+            if isinstance(pattern_factory, PatternNodeFactory) is False:
+                raise ParserException("Pattern factory needs to be base class of PatternNodeFactory" )
+            self._pattern_factory = pattern_factory
+
     @property
     def root(self):
         return self._root_node
 
-    @staticmethod
-    def node_from_text(word):
+    def node_from_text(self, word):
         if word.startswith("$"):
-            return PatternPriorityWordNode(word[1:])
+            node_class = self._pattern_factory.new_node_class('priority')
+            return node_class(word[1:])
         elif PatternZeroOrMoreWildCardNode.is_wild_card(word):
-            return PatternZeroOrMoreWildCardNode(word)
+            node_class = self._pattern_factory.new_node_class('zeroormore')
+            return node_class(word)
         elif PatternOneOrMoreWildCardNode.is_wild_card(word):
-            return PatternOneOrMoreWildCardNode(word)
+            node_class = self._pattern_factory.new_node_class('oneormore')
+            return node_class(word)
         else:
-            return PatternWordNode(word)
+            node_class = self._pattern_factory.new_node_class('word')
+            return node_class(word)
 
-    @staticmethod
-    def node_from_element(element):
-        if element.tag == 'set':
-            if 'name' in element.attrib:
-                return PatternSetNode(element.attrib['name'])
-            else:
-                return PatternSetNode(TextUtils.strip_whitespace(element.text))
-        elif element.tag == 'bot':
-            if 'name' in element.attrib:
-                return PatternBotNode(element.attrib['name'])
-            else:
-                return PatternBotNode(TextUtils.strip_whitespace(element.text))
-        elif element.tag == 'iset':
-            return PatternISetNode(TextUtils.strip_whitespace(element.text))
+    def node_from_element(self, element):
+
+        node_name = element.tag
+        if self._pattern_factory.exists(node_name) is False:
+            raise ParserException ("Unknown node name [%s]"%node_name)
+
+        node_instance = self._pattern_factory.new_node_class(node_name)
+        if 'name' in element.attrib:
+            return node_instance(element.attrib['name'])
         else:
-            raise ParserException("Invalid parser graph node <%s>" % element.tag, xml_element=element)
+            return node_instance(TextUtils.strip_whitespace(element.text))
 
     def _parse_text(self, pattern_text, current_node):
 
@@ -86,7 +85,7 @@ class PatternGraph(object):
             if word != '': # Blank nodes add no value, ignore them
                 word = TextUtils.strip_whitespace(word)
 
-                new_node = PatternGraph.node_from_text(word)
+                new_node = self.node_from_text(word)
 
                 current_node = current_node.add_child(new_node)
 
@@ -120,7 +119,7 @@ class PatternGraph(object):
                 current_node = self._root_node
 
             for sub_element in pattern_element:
-                new_node = PatternGraph.node_from_element(sub_element)
+                new_node = self.node_from_element(sub_element)
                 current_node = current_node.add_child(new_node)
 
                 tail_text = self.get_tail_from_element(sub_element)
@@ -136,7 +135,7 @@ class PatternGraph(object):
     def add_topic_to_node(self, topic_element, base_node):
         try:
 
-            current_node = PatternTopicNode()
+            current_node = self._pattern_factory.new_node_class('topic')()
             current_node = base_node.add_topic(current_node)
 
             head_text = self.get_text_from_element(topic_element)
@@ -145,7 +144,7 @@ class PatternGraph(object):
 
             added_child = False
             for sub_element in topic_element:
-                new_node = PatternGraph.node_from_element(sub_element)
+                new_node = self.node_from_element(sub_element)
                 current_node = current_node.add_child(new_node)
 
                 tail_text = self.get_tail_from_element(sub_element)
@@ -166,7 +165,7 @@ class PatternGraph(object):
     def add_that_to_node(self, that_element, base_node):
         try:
 
-            current_node = PatternThatNode()
+            current_node = self._pattern_factory.new_node_class('that')()
             current_node = base_node.add_that(current_node)
 
             head_text = self.get_text_from_element(that_element)
@@ -175,7 +174,7 @@ class PatternGraph(object):
 
             added_child = False
             for sub_element in that_element:
-                new_node = PatternGraph.node_from_element(sub_element)
+                new_node = self.node_from_element(sub_element)
                 current_node = current_node.add_child(new_node)
 
                 tail_text = self.get_tail_from_element(sub_element)
@@ -194,7 +193,7 @@ class PatternGraph(object):
             raise parser_excep
 
     def add_template_to_node(self, template_graph_root, current_node):
-        template_node = PatternTemplateNode(template_graph_root)
+        template_node = self._pattern_factory.new_node_class('template')(template_graph_root)
         current_node = current_node.add_child(template_node)
         return current_node
 

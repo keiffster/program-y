@@ -20,6 +20,7 @@ import xml.etree.ElementTree as ET
 import logging
 
 from programy.parser.exceptions import ParserException
+from programy.parser.template.factory import TemplateNodeFactory
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.rand import TemplateRandomNode
@@ -70,9 +71,18 @@ from programy.parser.template.nodes.log import TemplateLogNode
 
 class TemplateGraph(object):
 
-    def __init__(self, aiml_parser=None):
+    def __init__(self, aiml_parser=None, template_factory=None):
         self._aiml_parser = aiml_parser
         self.node_lookups = None
+
+        if template_factory is None:
+            logging.debug("Defaulting node factory to TemplateNodeFactory")
+            self._template_factory = TemplateNodeFactory()
+            self._template_factory.load_nodes_config_from_file("dummy_config.conf")
+        else:
+            if isinstance(template_factory, TemplateNodeFactory) is False:
+                raise ParserException("Template factory needs to be base class of TemplateNodeFactory" )
+            self._template_factory = template_factory
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*

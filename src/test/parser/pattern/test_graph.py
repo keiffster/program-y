@@ -41,48 +41,55 @@ class PatternGraphTests(PatternTestBaseClass):
             graph = PatternGraph(root)
 
     def test_node_from_text_prioity(self):
-        node = PatternGraph.node_from_text("$A")
+        graph = PatternGraph()
+        node = graph.node_from_text("$A")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternPriorityWordNode)
 
     def test_node_from_text_zeroormore(self):
-        node = PatternGraph.node_from_text("^")
+        graph = PatternGraph()
+        node = graph.node_from_text("^")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternZeroOrMoreWildCardNode)
 
-        node = PatternGraph.node_from_text("#")
+        node = graph.node_from_text("#")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternZeroOrMoreWildCardNode)
 
     def test_node_from_text_oneormore(self):
-        node = PatternGraph.node_from_text("_")
+        graph = PatternGraph()
+        node = graph.node_from_text("_")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
 
-        node = PatternGraph.node_from_text("*")
+        node = graph.node_from_text("*")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
 
     def test_node_from_text_word(self):
-        node = PatternGraph.node_from_text("X")
+        graph = PatternGraph()
+        node = graph.node_from_text("X")
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternWordNode)
 
     def test_node_from_element_iset(self):
         set_element = ET.fromstring('<iset>yes, no</iset>')
-        node = PatternGraph.node_from_element(set_element)
+        graph = PatternGraph()
+        node = graph.node_from_element(set_element)
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternISetNode)
 
     def test_node_from_element_set(self):
         set_element = ET.fromstring('<set>colour</set>')
-        node = PatternGraph.node_from_element(set_element)
+        graph = PatternGraph()
+        node = graph.node_from_element(set_element)
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternSetNode)
 
     def test_node_from_element_bot(self):
         bot_element = ET.fromstring('<bot>name</bot>')
-        node = PatternGraph.node_from_element(bot_element)
+        graph = PatternGraph()
+        node = graph.node_from_element(bot_element)
         self.assertIsNotNone(node)
         self.assertIsInstance(node, PatternBotNode)
 

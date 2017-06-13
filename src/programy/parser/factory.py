@@ -78,6 +78,9 @@ class NodeFactory(object):
             line = line.strip()
             self.process_config_line(line)
 
+    def exists(self, node_name):
+        return node_name in self._nodes_config
+
     def new_node_class(self, name):
         if name not in self._nodes_config:
             raise Exception("Invalid node name [%s]"% name)
