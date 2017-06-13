@@ -265,11 +265,7 @@ class PatternNode(object):
                 if new_node.word in self._children_words:
                     return self._children_words[new_node.word]
             except Exception as e:
-                print(e)
-
-        #for child in self.children:
-        #    if child.equivalent(new_node):
-        #        return child
+                logging.exception(e)
 
         return None
 

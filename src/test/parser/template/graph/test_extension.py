@@ -10,7 +10,6 @@ from test.parser.template.graph.test_graph_client import TemplateGraphTestClient
 class TestExtension(object):
 
     def execute(self, bot, clientid, data):
-        print(data)
         return "executed"
 
 

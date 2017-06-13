@@ -36,5 +36,4 @@ class MapsAIMLTests(unittest.TestCase):
     def test_directions(self):
         response = MapsAIMLTests.test_client.bot.ask_question("testif", "DIRECTIONS EDINBURGH KINGHORN")
         self.assertIsNotNone(response)
-        print(response)
         self.assertTrue(response.startswith("To get there Head west on Leith St"))

@@ -507,8 +507,6 @@ class PatternGraphTests(PatternTestBaseClass):
         element2 = ET.fromstring('<pattern>IS <iset>word1, word2, word3</iset> A ANOTHER VALUE</pattern>')
         graph.add_pattern_to_graph(element2, topic_element, that_element, template_graph_root)
 
-        graph.dump(output_func=print)
-
         self.assertIsNotNone(graph.root)
         self.assertIsNotNone(graph.root.children)
         self.assertEqual(len(graph.root.children), 1)

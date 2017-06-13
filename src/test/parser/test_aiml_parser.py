@@ -725,8 +725,6 @@ class AIMLParserTests(unittest.TestCase):
             </aiml>
             """)
 
-        self.parser.pattern_parser.dump(output_func=print)
-
     def test_inline_bold_html(self):
 
         self.parser.parse_from_text(
@@ -738,8 +736,6 @@ class AIMLParserTests(unittest.TestCase):
                 </category>
             </aiml>
             """)
-
-        self.parser.pattern_parser.dump(output_func=print)
 
     def test_iset(self):
 
@@ -760,8 +756,6 @@ class AIMLParserTests(unittest.TestCase):
                 </category>
             </aiml>
             """)
-
-        self.parser.pattern_parser.dump(output_func=print)
 
 if __name__ == '__main__':
     unittest.main()
