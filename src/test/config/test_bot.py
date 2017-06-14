@@ -17,6 +17,7 @@ class BotConfigurationTests(unittest.TestCase):
             prompt: ">>>"
             initial_question: Hi, how can I help you today?
             default_response: Sorry, I don't have an answer for that!
+            empty_string: YEMPTY
             exit_response: So long, and thanks for the fish!
             override_predicates: true
             max_recursion: 10
@@ -30,7 +31,7 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(">>>", bot_config.prompt)
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
         self.assertEqual("Sorry, I don't have an answer for that!", bot_config.default_response)
-        self.assertEqual("So long, and thanks for the fish!", bot_config.exit_response)
+        self.assertEqual("YEMPTY", bot_config.empty_string)
 
         self.assertEqual(10, bot_config.max_recursion)
 

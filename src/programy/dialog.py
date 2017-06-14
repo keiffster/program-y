@@ -148,7 +148,6 @@ class Question(object):
             all_sentences = text.split(sentence_split_chars)
             for each_sentence in all_sentences:
                 self._sentences.append(Sentence(each_sentence, word_split_chars))
-
 #
 # A Conversation is made up of questions, each question is made up of sentences
 #

@@ -40,7 +40,6 @@ class PatternSetNode(PatternWordNode):
         if self.set_name.upper() == 'NUMBER':
             return word.isnumeric()
         elif bot.brain.sets.contains(self.set_name):
-            logging.debug("Looking for [%s] in set [%s]", word, self.set_name)
             set_words = bot.brain.sets.set(self.set_name)
             if word in set_words:
                 logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))

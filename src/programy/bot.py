@@ -116,6 +116,9 @@ class Bot(object):
         else:
             pre_processed = text
 
+        if len(pre_processed) == 0:
+            pre_processed = self._configuration.empty_string
+
         conversation = self.get_conversation(clientid)
 
         question = Question.create_from_text(pre_processed)
@@ -136,6 +139,8 @@ class Bot(object):
 
                 if srai is False:
                     answer = self.brain.post_process_response(self, clientid, response).strip()
+                    if len(answer) == 0:
+                        answer = self.default_response
                 else:
                     answer = response
 

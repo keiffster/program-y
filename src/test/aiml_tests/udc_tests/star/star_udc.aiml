@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>*</pattern>
+		<template>
+		    UDC Star Response
+		</template>
+	</category>
+
+	<category>
+		<pattern>* THIS</pattern>
+		<template>
+		    This Response
+		</template>
+	</category>
+
+	<category>
+		<pattern>THAT *</pattern>
+		<template>
+		    UDC That Response
+		</template>
+	</category>
+
+	<category>
+		<pattern>THE * OTHER</pattern>
+		<template>
+		    UDC THE OTHER Response
+		</template>
+	</category>
+
+</aiml>
