@@ -177,7 +177,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         alreadys = []
         for pair in self.pairs:
             try:
-                pattern = re.compile(pair[1])
+                pattern = re.compile(pair[1],re.IGNORECASE)
                 if pattern.findall(replacable):
                     found = False
                     for already in alreadys:
@@ -185,7 +185,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         if stripped in already:
                             found = True
                     if found is not True:
-                        replacable = pattern.sub(pair[2]+" ", replacable)
+                        replacable = pattern.sub(pair[2], replacable)
                         alreadys.append(pair[2])
 
             except Exception as excep:
