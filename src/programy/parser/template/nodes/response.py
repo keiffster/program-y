@@ -55,3 +55,12 @@ class TemplateResponseNode(TemplateIndexedNode):
         xml += "</response>"
         return xml
 
+    #######################################################################################################
+    # RESPONSE_EXPRESSION ::== <response( INDEX_ATTRIBUTE)/> | <response><index>TEMPLATE_EXPRESSION</index></response>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "index", "1")
+        if len(self.children) > 0:
+            logging.warning("<response> node should not contains child text, use <response /> or <response></response> only")
+
+

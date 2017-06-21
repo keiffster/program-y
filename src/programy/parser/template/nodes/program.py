@@ -51,3 +51,11 @@ class TemplateProgramNode(TemplateNode):
         xml = "<program />"
         return xml
 
+    #######################################################################################################
+    # <program/>	'''
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+        if len(self.children) > 0:
+            logging.warning("<program> node should not contains child text, use <program /> or <program></program> only")
+

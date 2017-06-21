@@ -4,9 +4,7 @@ import os
 from programy.parser.template.factory import TemplateNodeFactory
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.rand import TemplateRandomNode
-from programy.parser.template.nodes.condtype1 import TemplateType1ConditionNode
-from programy.parser.template.nodes.condtype2 import TemplateType2ConditionNode
-from programy.parser.template.nodes.condtype3 import TemplateType3ConditionNode
+from programy.parser.template.nodes.condition import TemplateConditionNode
 from programy.parser.template.nodes.srai import TemplateSRAINode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.get import TemplateGetNode
@@ -69,12 +67,10 @@ class TemplateFactoryTests(unittest.TestCase):
         self.assertIsInstance(new_node, cls)
 
     def assert_nodes(self, factory):
-        self.assertEquals(45, len(factory._nodes_config))
+        self.assertEquals(44, len(factory._nodes_config))
 
         self.assert_node(factory, 'random', TemplateRandomNode, None)
-        self.assert_node(factory, 'condition1', TemplateType1ConditionNode, "name", "value")
-        self.assert_node(factory, 'condition2', TemplateType2ConditionNode, "name", "value")
-        self.assert_node(factory, 'condition3', TemplateType3ConditionNode, None)
+        self.assert_node(factory, 'condition', TemplateConditionNode, "name", "value")
         self.assert_node(factory, 'srai', TemplateSRAINode, None)
         self.assert_node(factory, 'sraix', TemplateSRAIXNode, None)
         self.assert_node(factory, 'get', TemplateGetNode, None)
@@ -124,5 +120,5 @@ class TemplateFactoryTests(unittest.TestCase):
     def test_load_nodes_config_from_file_invalid_filename(self):
         factory = TemplateNodeFactory()
         factory.load_nodes_config_from_file("some_rubbish.txt")
-        self.assertEquals(45, len(factory._nodes_config))
+        self.assertEquals(44, len(factory._nodes_config))
         self.assert_nodes(factory)

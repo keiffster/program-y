@@ -21,6 +21,7 @@ from programy.parser.template.maps.singular import SingularMap
 from programy.parser.template.maps.predecessor import PredecessorMap
 from programy.parser.template.maps.successor import SuccessorMap
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
 
 class TemplateMapNode(TemplateNode):
 
@@ -92,3 +93,33 @@ class TemplateMapNode(TemplateNode):
             xml += child.to_xml(bot, clientid)
         xml += "</map>"
         return xml
+
+    # ######################################################################################################
+    # MAP_EXPRESSION ::=
+    # <map name="WORD">TEMPLATE_EXPRESSION</map> |
+    # <map><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</map>
+
+    def parse_expression(self, graph, expression):
+
+        name_found = False
+
+        if 'name' in expression.attrib:
+            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'name')
+            name_found = True
+
+        self.parse_text(graph, self.get_text_from_element(expression))
+
+        for child in expression:
+
+            if child.tag == 'name':
+                self.name = self.parse_children_as_word_node(graph, child)
+                name_found = True
+
+            else:
+                graph.parse_tag_expression(child, self)
+
+            self.parse_text(graph, self.get_tail_from_element(child))
+
+        if name_found is False:
+            raise ParserException("Error, name not found", xml_element=expression)
+

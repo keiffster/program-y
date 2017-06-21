@@ -41,3 +41,9 @@ class TemplateFormalNode(TemplateNode):
         xml += "</formal>"
         return xml
 
+    #######################################################################################################
+    # <formal>ABC</formal>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

@@ -15,9 +15,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import os
 import xml.etree.ElementTree as ET
 
-from programy.utils.classes.loader import ClassLoader
 from programy.parser.template.nodes.learn import TemplateLearnNode
 
 
@@ -28,8 +28,9 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def resolve(self, bot, clientid):
         try:
-            new_template = self._create_new_template(bot, clientid)
-            bot.brain.write_learnf_to_file(bot, clientid, new_template._pattern, new_template._topic, new_template._that, new_template._template)
+            for category in self.children:
+                new_node = self._create_new_category(bot, clientid, category)
+                self.write_learnf_to_file(bot, clientid, new_node)
             return ""
         except Exception as excep:
             logging.exception(excep)
@@ -40,16 +41,31 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def to_xml(self, bot, clientid):
         xml = "<learnf>"
-
-        xml += ET.tostring(self._pattern, 'utf-8').decode('utf-8')
-        xml += ET.tostring(self._topic, 'utf-8').decode('utf-8')
-        xml += ET.tostring(self._that, 'utf-8').decode('utf-8')
-
-        xml += "<template>"
-        xml += self._template.to_xml(bot, clientid)
-        xml += "</template>"
-
+        xml += self.children_to_xml(bot, clientid)
         xml += "</learnf>"
-
         return xml
 
+    def write_learnf_to_file(self, bot, clientid, category):
+        learnf_path = "%s/learnf%s" % (bot.brain._configuration.aiml_files.files, bot.brain._configuration.aiml_files.extension)
+        logging.debug("Writing learnf to %s", learnf_path)
+
+        if os.path.isfile(learnf_path) is False:
+            file = open(learnf_path, "w+")
+            file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+            file.write('<aiml>\n')
+            file.write('</aiml>\n')
+            file.close()
+
+        tree = ET.parse(learnf_path)
+        root = tree.getroot()
+
+        # Add our new element
+        child = ET.Element("category")
+        child.append(category.pattern)
+        child.append(category.topic)
+        child.append(category.that)
+        child.append(category.template.xml_tree(bot, clientid))
+
+        root.append(child)
+
+        tree.write(learnf_path, method="xml")

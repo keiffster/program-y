@@ -75,3 +75,13 @@ class TemplateSystemNode(TemplateAttribNode):
             xml += child.to_xml(bot, clientid)
         xml += "</system>"
         return xml
+
+    #######################################################################################################
+    # SYSTEM_EXPRESSION ::==
+    # 		<system( TIMEOUT_ATTRIBUTE)>TEMPLATE_EXPRESSION</system> |
+    #  		<system><timeout>TEMPLATE_EXPRESSION</timeout></system>
+    # TIMEOUT_ATTRIBUTE :== timeout=”NUMBER”
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "timeout", "0")
+

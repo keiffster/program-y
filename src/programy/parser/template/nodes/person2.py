@@ -44,3 +44,10 @@ class TemplatePerson2Node(TemplateNode):
             xml += child.to_xml(bot, clientid)
         xml += "</person2>"
         return xml
+
+    #######################################################################################################
+    # PERSON2_EXPRESSION ::== <person2>TEMPLATE_EXPRESSION</person2>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

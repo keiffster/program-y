@@ -50,3 +50,9 @@ class TemplateTopicStarNode(TemplateIndexedNode):
         xml += "</topicstar>"
         return xml
 
+    #######################################################################################################
+    # TOPICSTAR_EXPRESSION ::== <topicstar( INDEX_ATTRIBUTE)/> | <topicstar><index>TEMPLATE_EXPRESSION</index></topicstar>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "index", "1")
+

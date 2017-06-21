@@ -38,3 +38,12 @@ class TemplateSizeNode(TemplateNode):
     def to_xml(self, bot, clientid):
         xml = "<size />"
         return xml
+
+    #######################################################################################################
+    # <size/> |
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+        if len(self.children) > 0:
+            logging.warning("<size> node should not contains child text, use <size /> or <size></size> only")
+

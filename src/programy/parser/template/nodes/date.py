@@ -62,3 +62,16 @@ class TemplateDateNode(TemplateAttribNode):
             xml += child.to_xml(bot, clientid)
         xml += "</date>"
         return xml
+
+    #######################################################################################################
+    # DATE_ATTRIBUTES ::== (format="LISP_DATE_FORMAT") | (jformat="JAVA DATE FORMAT")
+    # DATE_ATTRIBUTE_TAG ::== <format>TEMPLATE_EXPRESSION</format> | <jformat>TEMPLATE_EXPRESSION</jformat>
+    # DATE_EXPRESSION ::== <date( DATE_ATTRIBUTES)*/> | <date>(DATE_ATTRIBUTE_TAG)</date>
+    # Pandorabots supports three extension attributes to the date element in templates:
+    #     	locale
+    #       format
+    #       timezone
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "format", "%c")
+

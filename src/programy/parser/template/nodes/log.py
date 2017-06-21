@@ -74,3 +74,12 @@ class TemplateLogNode(TemplateAttribNode):
             xml += child.to_xml(bot, clientid)
         xml += "</log>"
         return xml
+
+    #######################################################################################################
+    # LOG_EXPRESSION ::== <log>Message</log>
+    #                           <log level="error|warning|debug|info">Message</log>
+    #
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "level", "debug")
+

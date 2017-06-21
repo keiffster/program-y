@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
 
 
 
@@ -93,3 +94,51 @@ class TemplateSetNode(TemplateNode):
             xml += child.to_xml(bot, clientid)
         xml += "</set>"
         return xml
+
+    # ######################################################################################################
+    # SET_PREDICATE_EXPRESSION ::==
+    # <set name="WORD">TEMPLATE_EXPRESSION</set> |
+    # <set><name>TEMPLATE_EXPRESSION</name>TEMPLATE_EXPRESSION</set> |
+    # <set var="WORD">TEMPLATE_EXPRESSION</set> |
+    # <set><var>TEMPLATE_EXPRESSION</var>TEMPLATE_EXPRESSION</set>
+
+    def parse_expression(self, graph, expression):
+
+        name_found = False
+        var_found = False
+
+        if 'name' in expression.attrib:
+            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'name')
+            self.local = False
+            name_found = True
+
+        if 'var' in expression.attrib:
+            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'var')
+            self.local = True
+            var_found = True
+
+        self.parse_text(graph, self.get_text_from_element(expression))
+
+        for child in expression:
+
+            if child.tag == 'name':
+                self.name = self.parse_children_as_word_node(graph, child)
+                self.local = False
+                name_found = True
+
+            elif child.tag == 'var':
+                self.name = self.parse_children_as_word_node(graph, child)
+                self.local = True
+                var_found = True
+
+            else:
+                graph.parse_tag_expression(child, self)
+
+            self.parse_text(graph, self.get_tail_from_element(child))
+
+        if name_found is True and var_found is True:
+            raise ParserException("Error, set node has both name AND var values", xml_element=expression)
+
+        if name_found is False and var_found is False:
+            raise ParserException("Error, set node has both name AND var values", xml_element=expression)
+

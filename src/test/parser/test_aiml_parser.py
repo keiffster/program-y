@@ -757,5 +757,26 @@ class AIMLParserTests(unittest.TestCase):
             </aiml>
             """)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_duplicate_topics(self):
+
+        self.parser.parse_from_text(
+            """<?xml version="1.0" encoding="UTF-8"?>
+            <aiml>
+                <topic name="TOPIC1">
+                    <category>
+                        <pattern>*</pattern>
+                        <template>
+                            Test Text
+                        </template>
+                    </category>
+                </topic>
+                <topic name="TOPIC2">
+                    <category>
+                        <pattern>*</pattern>
+                        <template>
+                            Test Text
+                        </template>
+                    </category>
+                </topic>
+            </aiml>
+            """)

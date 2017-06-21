@@ -46,3 +46,9 @@ class TemplateDenormalizeNode(TemplateNode):
         xml += "</denormalize>"
         return xml
 
+    #######################################################################################################
+    # DENORMALIZE_EXPRESSION ::== <denormalize>TEMPLATE_EXPRESSION</denormalize>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

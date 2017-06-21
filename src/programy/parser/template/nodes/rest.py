@@ -49,3 +49,9 @@ class TemplateRestNode(TemplateNode):
         xml += "</rest>"
         return xml
 
+    #######################################################################################################
+    # <implode>ABC</implode>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

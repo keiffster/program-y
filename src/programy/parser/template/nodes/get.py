@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
 
 
 
@@ -97,4 +98,44 @@ class TemplateGetNode(TemplateNode):
             xml += ' name="%s"' % self.name.resolve(bot, clientid)
         xml += " />"
         return xml
+
+    # ######################################################################################################
+    # GET_PREDICATE_EXPRESSION ::==
+    # <get name="WORD"/> |
+    # <get><name>TEMPLATE_EXPRESSION</name></get> |
+    # <get var=”WORD”> |
+    # <get><var>WORD</var></get>
+
+    def parse_expression(self, graph, expression):
+
+        name_found = False
+        var_found = False
+
+        if 'name' in expression.attrib:
+            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'name')
+            self.local = False
+            name_found = True
+
+        if 'var' in expression.attrib:
+            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'var')
+            self.local = True
+            var_found = True
+
+        for child in expression:
+
+            if child.tag == 'name':
+                self.name = self.parse_children_as_word_node(graph, child)
+                self.local = False
+                name_found = True
+
+            elif child.tag == 'var':
+                self.name = self.parse_children_as_word_node(graph, child)
+                self.local = True
+                var_found = True
+
+            else:
+                raise ParserException("Error, invalid get", xml_element=expression)
+
+        if name_found is True and var_found is True:
+            raise ParserException("Error, get node has both name AND var values", xml_element=expression)
 

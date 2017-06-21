@@ -64,3 +64,46 @@ class TemplateSRAIXNode(TemplateNode):
             xml += child.to_xml(bot, clientid)
         xml += '</sraix>'
         return xml
+
+    #######################################################################################################
+    # SRAIX_ATTRIBUTES ::= host="HOSTNAME" | botid="BOTID" | hint="TEXT" | apikey="APIKEY" | service="SERVICE"
+    # SRAIX_ATTRIBUTE_TAGS ::= <host>TEMPLATE_EXPRESSION</host> | <botid>TEMPLATE_EXPRESSION</botid> | <hint>TEMPLATE_EXPRESSION</hint> | <apikey>TEMPLATE_EXPRESSION</apikey> | <service>TEMPLATE_EXPRESSION</service>
+    # SRAIX_EXPRESSION ::== <sraix( SRAIX_ATTRIBUTES)*>TEMPLATE_EXPRESSION</sraix> |
+
+    def parse_expression(self, graph, expression):
+
+        if 'host' in expression.attrib:
+            logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
+        if 'botid' in expression.attrib:
+            logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
+        if 'hint' in expression.attrib:
+            logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
+        if 'apikey' in expression.attrib:
+            logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
+
+        if 'service' in expression.attrib:
+            self.service = expression.attrib['service']
+
+        head_text = self.get_text_from_element(expression)
+        self.parse_text(graph, head_text)
+
+        for child in expression:
+            if child.tag == 'host':
+                logging.warning("'host' element not supported in sraix, moved to config, see documentation")
+            elif child.tag == 'botid':
+                logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
+            elif child.tag == 'hint':
+                logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
+            elif child.tag == 'apikey':
+                logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
+            elif child.tag == 'service':
+                self.service = self.get_text_from_element(child)
+            else:
+                graph.parse_tag_expression(child, self)
+
+            tail_text = self.get_tail_from_element(child)
+            self.parse_text(graph, tail_text)
+
+        if self.service is None:
+            logging.warning("SRAIX node, service missing !")
+

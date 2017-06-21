@@ -47,3 +47,10 @@ class TemplateSentenceNode(TemplateNode):
         xml += "</sentence>"
         return xml
 
+    #######################################################################################################
+    # <sentence>ABC</sentence>
+
+    def parse_expression(self, graph, branch):
+        self._parse_node(graph, branch)
+
+

@@ -48,3 +48,12 @@ class TemplateSrNode(TemplateNode):
     def to_xml(self, bot, clientid):
         xml = "<sr />"
         return xml
+
+    #######################################################################################################
+    # <sr/> |
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+        if len(self.children) > 0:
+            logging.warning("<sr> node should not contains child text, use <sr /> or <sr></sr> only")
+

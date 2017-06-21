@@ -64,3 +64,26 @@ class TemplateExtensionNode(TemplateNode):
         xml += '</extension>'
         return xml
 
+    #######################################################################################################
+    # EXTENSION_EXPRESSION ::== <extension>
+    #                               <path>programy.etension.SomeModule</path>
+    #                               parameters
+    # 						</extension>
+
+    def parse_expression(self, graph, expression):
+
+        if 'path' in expression.attrib:
+            self.path = expression.attrib['path']
+
+        head_text = self.get_text_from_element(expression)
+        self.parse_text(graph, head_text)
+
+        for child in expression:
+            if child.tag == 'path':
+                self.path = self.get_text_from_element(child)
+            else:
+                graph.parse_tag_expression(child, self)
+
+            tail_text = self.get_tail_from_element(child)
+            self.parse_text(graph, tail_text)
+

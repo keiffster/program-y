@@ -44,3 +44,9 @@ class TemplateUppercaseNode(TemplateNode):
         xml += "</uppercase>"
         return xml
 
+    #######################################################################################################
+    # <uppercase>ABC</uppercase>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

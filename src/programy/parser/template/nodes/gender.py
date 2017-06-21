@@ -44,3 +44,9 @@ class TemplateGenderNode(TemplateNode):
         xml += "</gender>"
         return xml
 
+    #######################################################################################################
+    # GENDER_EXPRESSION ::== <gender>TEMPLATE_EXPRESSION</gender>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+

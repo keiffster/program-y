@@ -30,14 +30,6 @@ from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNo
 class PatternGraph(object):
 
     def __init__(self, root_node=None, pattern_factory=None):
-        if root_node is None:
-            logging.debug("Defaulting root to PatternRootNode")
-            self._root_node = PatternRootNode()
-        else:
-            if root_node.is_root() is False:
-                raise ParserException("Root node needs to be of base type PatternRootNode")
-            self._root_node = root_node
-
         if pattern_factory is None:
             logging.debug("Defaulting node factory to PatternNodeFactory")
             self._pattern_factory = PatternNodeFactory()
@@ -46,6 +38,14 @@ class PatternGraph(object):
             if isinstance(pattern_factory, PatternNodeFactory) is False:
                 raise ParserException("Pattern factory needs to be base class of PatternNodeFactory" )
             self._pattern_factory = pattern_factory
+
+        if root_node is None:
+            logging.debug("Defaulting root to PatternRootNode")
+            self._root_node = self._pattern_factory.get_root_node()
+        else:
+            if root_node.is_root() is False:
+                raise ParserException("Root node needs to be of base type PatternRootNode")
+            self._root_node = root_node
 
     @property
     def root(self):
@@ -209,6 +209,7 @@ class PatternGraph(object):
             raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text))
         else:
             self.add_template_to_node(template_graph_root, current_node)
+            return current_node
 
     def count_words_in_patterns(self):
         counter = [0]

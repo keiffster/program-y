@@ -25,6 +25,3 @@ class TemplateNodeFactory(NodeFactory):
 
     def default_config_file(self):
         return os.path.dirname(__file__) + os.sep + "template_nodes.conf"
-
-
-

@@ -39,3 +39,12 @@ class TemplateIdNode(TemplateNode):
         xml = "<id />"
         return xml
 
+    #######################################################################################################
+    # <id/> |
+
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)
+        if len(self.children) > 0:
+            logging.warning("<id> node should not contains child text, use <id /> or <id></id> only")
+
+

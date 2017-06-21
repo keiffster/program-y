@@ -54,3 +54,10 @@ class TemplateThatNode(TemplateIndexedNode):
         xml += ">"
         xml += "</that>"
         return xml
+
+    #######################################################################################################
+    # THAT_EXPRESSION ::== <that( INDEX_ATTRIBUTE)/> | <that><index></index></that>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "index", "1")
+

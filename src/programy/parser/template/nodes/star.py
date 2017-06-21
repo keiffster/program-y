@@ -55,3 +55,11 @@ class TemplateStarNode(TemplateIndexedNode):
         xml += ">"
         xml += "</star>"
         return xml
+
+    #######################################################################################################
+    # INDEX_ATTRIBUTE ::== index="NUMBER"
+    # STAR_EXPRESSION ::== <star( INDEX_ATTRIBUTE)/> | <star><index>TEMPLATE_EXPRESSION</index></star>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "index", "1")
+

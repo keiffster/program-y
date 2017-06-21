@@ -55,3 +55,11 @@ class TemplateRequestNode(TemplateIndexedNode):
         xml += "</request>"
         return xml
 
+    #######################################################################################################
+    # REQUEST_EXPRESSION ::== <request( INDEX_ATTRIBUTE)/> | <request><index>TEMPLATE_EXPRESSION</index></request>
+
+    def parse_expression(self, graph, expression):
+        self._parse_node_with_attrib(graph, expression, "index", "1")
+        if len(self.children) > 0:
+            logging.warning("<request> node should not contains child text, use <request /> or <request></request> only")
+
