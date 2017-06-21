@@ -38,7 +38,7 @@ class Brain(object):
 
     def __init__(self, configuration: BrainConfiguration):
         self._configuration = configuration
-        self._aiml_parser = AIMLParser()
+        self._aiml_parser = AIMLParser(self)
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()

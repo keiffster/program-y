@@ -261,7 +261,13 @@ class PatternNode(object):
         if new_node.is_word() or new_node.is_set() or new_node.is_bot():
             try:
                 if new_node.word in self._children_words:
-                    return self._children_words[new_node.word]
+                    existing_node = self._children_words[new_node.word]
+                    if new_node.is_set() is True and existing_node.is_set() is True:
+                        return existing_node
+                    elif new_node.is_bot() is True and existing_node.is_bot() is True:
+                        return existing_node
+                    elif new_node.is_word() is True and existing_node.is_word() is True:
+                        return existing_node
             except Exception as e:
                 logging.exception(e)
 
@@ -294,6 +300,7 @@ class PatternNode(object):
             # it still gets picked up in the first grammar and not he second
             if new_node.is_set() or new_node.is_bot():
                self.children.append(new_node)
+               self._children_words[new_node.word] = new_node
             else:
                 self.children.insert(0, new_node)
                 if new_node.is_word():

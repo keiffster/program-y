@@ -27,6 +27,9 @@ class PatternSetNode(PatternWordNode):
     def set_name(self):
         return self._word
 
+    def is_word(self):
+        return False
+
     def is_set(self):
         return True
 

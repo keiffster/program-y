@@ -40,19 +40,15 @@ class AIMLLoader(FileFinder):
             logging.exception("Failed to load contents of file from [%s]"%filename, e)
 
 class AIMLParser(object):
-    def __init__(self, supress_warnings=False, stop_on_invalid=False):
-        self._supress_warnings = supress_warnings
-        self.stop_on_invalid = stop_on_invalid
-        self.pattern_parser = PatternGraph()
-        self.template_parser = TemplateGraph(self)
+
+    def __init__(self, brain=None):
+        self._brain = brain
+        self.pattern_parser = PatternGraph(aiml_parser=self)
+        self.template_parser = TemplateGraph(aiml_parser=self)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
         self._duplicates = None
         self._errors = None
-
-    @property
-    def supress_warnings(self):
-        return self._supress_warnings
 
     @property
     def num_categories(self):
@@ -112,8 +108,6 @@ class AIMLParser(object):
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
 
-        self._supress_warnings = brain_configuration.supress_warnings
-
         if brain_configuration.aiml_files is not None:
 
             self.create_debug_storage(brain_configuration)
@@ -148,19 +142,12 @@ class AIMLParser(object):
         logging.info("Loading aiml file: " + filename)
 
         try:
-            #print("Parsing raw XML Tree")
             tree = ET.parse(filename, parser=LineNumberingParser())
-            #print("Parsed...")
             aiml = tree.getroot()
             if aiml is None or aiml.tag != 'aiml':
                 raise ParserException("Error, root tag is not <aiml>", filename=filename)
             else:
-                #print("Parsing loaded AIML tree")
-                #start = datetime.datetime.now()
                 self.parse_aiml(aiml, filename)
-                #stop = datetime.datetime.now()
-                #diff = stop - start
-                #print("Parsed in %f sec"%(diff.total_seconds()))
         except Exception as e:
             logging.exception(e)
             logging.error("Failed to load contents of AIML file from [%s] - [%s]"%(filename, e))
@@ -210,9 +197,6 @@ class AIMLParser(object):
         if self._errors is not None:
             self._errors.append(msg + "\n")
 
-        if self.stop_on_invalid is True:
-            raise parser_excep
-
     def parse_aiml(self, aiml_xml, filename):
         self.parse_version(aiml_xml)
 
@@ -245,8 +229,6 @@ class AIMLParser(object):
 
         if categories_found is False:
             logging.warning("no categories in aiml file")
-            if self.stop_on_invalid is True:
-                raise ParserException("Error, no categories in aiml file", filename=filename)
 
     #########################################################################################
     #
@@ -257,11 +239,9 @@ class AIMLParser(object):
         if 'version' in aiml.attrib:
             version = aiml.attrib['version']
             if version not in ['0.9', '1.0', '1.1', '2.0']:
-                if self._supress_warnings is False:
-                    logging.warning("Version number not a supported version: %s", version)
+                logging.warning("Version number not a supported version: %s", version)
         else:
-            if self._supress_warnings is False:
-                logging.warning("No version info, defaulting to 2.0")
+            logging.warning("No version info, defaulting to 2.0")
             version = "2.0"
         return version
 

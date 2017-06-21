@@ -252,7 +252,6 @@ class TemplateConditionNode(TemplateNode):
         self.parse_text(graph, self.get_text_from_element(expression))
 
         for child in expression:
-            print(child.tag)
             if child.tag == 'name':
                 pass
 

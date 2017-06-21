@@ -103,10 +103,11 @@ class BrainConfiguration(BaseConfigurationData):
     DEFAULT_ALLOW_LEARNF_AIML   = True
 
     def __init__(self):
-        self._supress_warnings  = BrainConfiguration.DEFAULT_SUPRESS_WARNINGS
         self._allow_system_aiml = BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML
         self._allow_learn_aiml  = BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML
         self._allow_learnf_aiml = BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML
+        self._pattern_nodes     = None
+        self._template_nodes    = None
         self._dump_to_file      = None
         self._aiml_files        = None
         self._set_files         = None
@@ -144,11 +145,12 @@ class BrainConfiguration(BaseConfigurationData):
 
         brain = config_file.get_section(self.section_name)
         if brain is not None:
-            self._supress_warnings = config_file.get_option(brain, "supress_warnings", BrainConfiguration.DEFAULT_SUPRESS_WARNINGS)
             self._allow_system_aiml = config_file.get_option(brain, "allow_system_aiml", BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML)
             self._allow_learn_aiml = config_file.get_option(brain, "allow_learn_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
+            self._pattern_nodes = config_file.get_option(brain, "pattern_nodes", missing_value=None)
+            self._template_nodes = config_file.get_option(brain, "template_nodes", missing_value=None)
             self._dump_to_file = config_file.get_option(brain, "dump_to_file", missing_value=None)
 
             files = config_file.get_section("files", brain)
@@ -189,16 +191,13 @@ class BrainConfiguration(BaseConfigurationData):
                 logging.warning("Config section [services] missing from Brain, no services loaded")
         else:
             logging.warning("Config section [%s] missing, using default values", self.section_name)
-            self._supress_warnings  = BrainConfiguration.DEFAULT_SUPRESS_WARNINGS
             self._allow_system_aiml = BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML
             self._allow_learn_aiml  = BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML
             self._allow_learnf_aiml = BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML
             self._allow_learnf_aiml = BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML
+            self._pattern_nodes     = None
+            self._template_nodes    = None
             self._dump_to_file      = None
-
-    @property
-    def supress_warnings(self):
-        return self._supress_warnings
 
     @property
     def allow_system_aiml(self):
@@ -211,6 +210,14 @@ class BrainConfiguration(BaseConfigurationData):
     @property
     def allow_learnf_aiml(self):
         return self._allow_learnf_aiml
+
+    @property
+    def pattern_nodes(self):
+        return self._pattern_nodes
+
+    @property
+    def template_nodes(self):
+        return self._template_nodes
 
     @property
     def dump_to_file(self):

@@ -22,18 +22,17 @@ from programy.parser.template.factory import TemplateNodeFactory
 
 class TemplateGraph(object):
 
-    def __init__(self, aiml_parser=None, template_factory=None):
+    def __init__(self, aiml_parser=None):
         self._aiml_parser = aiml_parser
         self.node_lookups = None
 
-        if template_factory is None:
-            logging.debug("Defaulting node factory to TemplateNodeFactory")
-            self._template_factory = TemplateNodeFactory()
-            self._template_factory.load_nodes_config_from_file("dummy_config.conf")
-        else:
-            if isinstance(template_factory, TemplateNodeFactory) is False:
-                raise ParserException("Template factory needs to be base class of TemplateNodeFactory" )
-            self._template_factory = template_factory
+        template_nodes = None
+        if aiml_parser is not None:
+            if aiml_parser._brain is not None:
+                template_nodes = aiml_parser._brain.configuration.template_nodes
+
+        self._template_factory = TemplateNodeFactory()
+        self._template_factory.load_nodes_config_from_file(template_nodes)
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*

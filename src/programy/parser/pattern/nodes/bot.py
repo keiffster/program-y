@@ -22,6 +22,9 @@ class PatternBotNode(PatternWordNode):
     def __init__(self, word):
         PatternWordNode.__init__(self, word)
 
+    def is_word(self):
+        return False
+
     def is_bot(self):
         return True
 

@@ -29,7 +29,7 @@ class PatternGraphTests(PatternTestBaseClass):
 
     def test_init_with_root(self):
         root = PatternRootNode()
-        graph = PatternGraph(root)
+        graph = PatternGraph(root_node=root)
         self.assertIsNotNone(graph)
         self.assertIsNotNone(graph.root)
         self.assertIsInstance(graph.root, PatternRootNode)
@@ -38,7 +38,7 @@ class PatternGraphTests(PatternTestBaseClass):
     def test_init_with_invalid_root(self):
         root = PatternWordNode("Word")
         with self.assertRaises(ParserException):
-            graph = PatternGraph(root)
+            graph = PatternGraph(root_node=root)
 
     def test_node_from_text_prioity(self):
         graph = PatternGraph()
@@ -518,11 +518,9 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsNotNone(graph.root.children)
         self.assertEqual(len(graph.root.children), 1)
         self.assertIsInstance(graph.root.children[0], PatternWordNode)
-        self.assertEqual(len(graph.root.children[0].children), 2)
+        self.assertEqual(len(graph.root.children[0].children), 1)
         self.assertIsInstance(graph.root.children[0].children[0], PatternISetNode)
         self.assertEqual(graph.root.children[0].children[0].word, "iset")
-        self.assertIsInstance(graph.root.children[0].children[1], PatternISetNode)
-        self.assertEqual(graph.root.children[0].children[1].word, "iset")
 
     def test_add_pattern_to_graph_basic_bot_text(self):
         graph = PatternGraph()
@@ -989,6 +987,162 @@ class PatternGraphTests(PatternTestBaseClass):
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
         that_element = ET.fromstring("<that>X Y</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_priority(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>$A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern>$A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        with self.assertRaises(DuplicateGrammarException):
+            graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_priority_and_word(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern>$A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_priority_and_word_otherwayround(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>$A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_set(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        with self.assertRaises(DuplicateGrammarException):
+            graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_set_and_word(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_set_and_word_otherwayround(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_bot(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        with self.assertRaises(DuplicateGrammarException):
+            graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_bot_and_word(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+    def test_duplicate_bot_and_word_otherwayround(self):
+        graph = PatternGraph()
+
+        pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
+        template_node = TemplateNode()
+
+        graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        pattern_element = ET.fromstring("<pattern>A</pattern>")
+        topic_element = ET.fromstring("<topic>*</topic>")
+        that_element = ET.fromstring("<that>*</that>")
         template_node = TemplateNode()
 
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)

@@ -84,7 +84,6 @@ class BrainConfigurationTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")
 
-        self.assertEqual(True, brain_config.supress_warnings)
         self.assertEqual(True, brain_config.allow_system_aiml)
         self.assertEqual(True, brain_config.allow_learn_aiml)
         self.assertEqual(True, brain_config.allow_learnf_aiml)

@@ -29,15 +29,16 @@ from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNo
 #
 class PatternGraph(object):
 
-    def __init__(self, root_node=None, pattern_factory=None):
-        if pattern_factory is None:
-            logging.debug("Defaulting node factory to PatternNodeFactory")
-            self._pattern_factory = PatternNodeFactory()
-            self._pattern_factory.load_nodes_config_from_file("dummy_config.conf")
-        else:
-            if isinstance(pattern_factory, PatternNodeFactory) is False:
-                raise ParserException("Pattern factory needs to be base class of PatternNodeFactory" )
-            self._pattern_factory = pattern_factory
+    def __init__(self, aiml_parser=None, root_node=None):
+        self._aiml_parser = aiml_parser
+
+        pattern_nodes = None
+        if aiml_parser is not None:
+            if aiml_parser._brain is not None:
+                pattern_nodes = aiml_parser._brain.configuration.pattern_nodes
+
+        self._pattern_factory = PatternNodeFactory()
+        self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
 
         if root_node is None:
             logging.debug("Defaulting root to PatternRootNode")

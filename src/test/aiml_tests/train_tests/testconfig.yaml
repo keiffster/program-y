@@ -1,8 +1,6 @@
 
 brain:
 
-    supress_warnings: true
-
     allow_system_aiml: true
     allow_learn_aiml: true
     allow_learnf_aiml: true

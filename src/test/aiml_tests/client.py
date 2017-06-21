@@ -22,8 +22,6 @@ class TestClient(BotClient):
     def load_configuration(self, arguments):
         self.configuration = ClientConfiguration()
 
-        self.configuration.brain_configuration._supress_warnings = False
-
         self.configuration.brain_configuration._aiml_files = None
         self.configuration.brain_configuration._set_files = None
         self.configuration.brain_configuration._map_files = None

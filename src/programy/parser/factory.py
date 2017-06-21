@@ -58,9 +58,9 @@ class NodeFactory(object):
 
         return True
 
-    def load_nodes_config_from_file(self, filename):
+    def load_nodes_config_from_file(self, filename=None):
         try:
-            if os.path.exists(filename) is False:
+            if filename is None or os.path.exists(filename) is False:
                 filename = self.default_config_file()
 
             with open(filename, "r+") as node_file:

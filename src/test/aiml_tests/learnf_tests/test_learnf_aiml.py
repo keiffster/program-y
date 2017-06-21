@@ -60,7 +60,6 @@ class LearnfAIMLTests(unittest.TestCase):
 
         patterns = categories[0].findall('pattern')
         self.assertEquals(1, len(patterns))
-        print(patterns[0].text)
         self.assertEquals(patterns[0].text, pattern)
 
         topics = categories[0].findall('topic')

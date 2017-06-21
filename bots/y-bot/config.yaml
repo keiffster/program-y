@@ -1,11 +1,12 @@
 
 brain:
 
-    supress_warnings: true
-
     allow_system_aiml: true
     allow_learn_aiml: true
     allow_learnf_aiml: true
+
+    pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
+    template_nodes: $BOT_ROOT/config/template_nodes.conf
 
     dump_to_file: /tmp/braintree.txt
 

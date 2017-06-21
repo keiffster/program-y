@@ -71,7 +71,6 @@ class ClientConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(client_config.brain_configuration)
 
-        self.assertTrue(client_config.brain_configuration.supress_warnings)
         self.assertTrue(client_config.brain_configuration.allow_system_aiml)
         self.assertTrue(client_config.brain_configuration.allow_learn_aiml)
         self.assertTrue(client_config.brain_configuration.allow_learnf_aiml)
@@ -193,7 +192,6 @@ class ClientConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(client_config.brain_configuration)
 
-        self.assertFalse(client_config.brain_configuration.supress_warnings)
         self.assertTrue(client_config.brain_configuration.allow_system_aiml)
         self.assertTrue(client_config.brain_configuration.allow_learn_aiml)
         self.assertTrue(client_config.brain_configuration.allow_learnf_aiml)

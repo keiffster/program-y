@@ -35,6 +35,9 @@ class PatternISetNode(PatternWordNode):
     def words(self):
         return self._words
 
+    def is_word(self):
+        return False
+
     def is_set(self):
         return True
 
