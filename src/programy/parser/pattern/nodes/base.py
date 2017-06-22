@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.text.text import TextUtils
-from programy.parser.pattern.matcher import Match
+from programy.parser.pattern.matcher import Match, EqualsMatch
 
 #######################################################################################################################
 #
@@ -211,8 +211,8 @@ class PatternNode(object):
     def equivalent(self, other):
         return False
 
-    def equals(self, bot, clientid, word):
-        return False
+    def equals(self, bot, clientid, words, word_no):
+        return EqualsMatch(False, word_no)
 
     def equals_ignore_case(self, bot, client, word1, word2):
         if word1 is not None and word2 is not None:
@@ -402,9 +402,15 @@ class PatternNode(object):
                 return None
 
         for child in self._priority_words:
-            if child.equals(bot, clientid, words.word(word_no)):
-                logging.debug("%sPriority %s matched %s" % (tabs, child._word, words.word(word_no)))
-                match_node = Match(type, child, words.word(word_no))
+
+            result= child.equals(bot, clientid, words, word_no)
+            if result.matched is True:
+                word_no = result.word_no
+                logging.debug("%sPriority %s matched %s" % (tabs, child._word, result.matched_phrase))
+
+                logging.debug("%sMATCH -> %s" % (tabs, result.matched_phrase))
+                match_node = Match(type, child, result.matched_phrase)
+
                 context.add_match(match_node)
 
                 match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
@@ -427,9 +433,15 @@ class PatternNode(object):
                 return match
 
         for child in self._children:
-            if child.equals(bot, clientid, words.word(word_no)):
-                logging.debug("%sChild %s matched %s" % (tabs, child._word, words.word(word_no)))
-                match_node = Match(type, child, words.word(word_no))
+
+            result = child.equals(bot, clientid, words, word_no)
+            if result.matched is True:
+                word_no = result.word_no
+                logging.debug("%sChild %s matched %s" % (tabs, child._word, result.matched_phrase))
+
+                logging.debug("%sMATCH -> %s" % (tabs, result.matched_phrase))
+                match_node = Match(type, child, result.matched_phrase)
+
                 context.add_match(match_node)
 
                 match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)

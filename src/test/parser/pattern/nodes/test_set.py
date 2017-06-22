@@ -1,11 +1,11 @@
 from test.parser.pattern.nodes.base import PatternTestBaseClass
-
 from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.dialog import Sentence
 
 class PatternSetNodeTests(PatternTestBaseClass):
 
     def test_init(self):
-        self.bot.brain.sets.add_set("TEST1", ["VALUE1", "VALUE2", "VALUE3"])
+        self.bot.brain.sets.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]]})
 
         node = PatternSetNode("test1")
         self.assertIsNotNone(node)
@@ -25,27 +25,27 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
+        sentence = Sentence("VALUE1 VALUE2 VALUE3 VALUE4")
+
         self.assertTrue(node.equivalent(PatternSetNode("TEST1")))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE1"))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE2"))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE3"))
-        self.assertFalse(node.equals(self.bot, "testid", "VALUE4"))
-        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1]")
+        result = node.equals(self.bot, "testid", sentence, 0)
+        self.assertTrue(result.matched)
+        result = node.equals(self.bot, "testid", sentence, 1)
+        self.assertTrue(result.matched)
+        result = node.equals(self.bot, "testid", sentence, 2)
+        self.assertTrue(result.matched)
+        result = node.equals(self.bot, "testid", sentence, 3)
+        self.assertFalse(result.matched)
+        self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
 
     def test_number(self):
         node = PatternSetNode("NUMBER")
         self.assertIsNotNone(node)
 
-        self.assertTrue(node.equals(self.bot, "testid", "12"))
-        self.assertFalse(node.equals(self.bot, "testid", "XY"))
+        sentence = Sentence("12 XY")
 
-    def test_spaces(self):
-        self.bot.brain.sets.add_set("TEST1", ["VALUE1 TEXT1", "VALUE2 TEXT2", "VALUE3 TEXT3"])
+        result = node.equals(self.bot, "testid", sentence, 0)
+        self.assertTrue(result.matched)
+        result = node.equals(self.bot, "testid", sentence, 1)
+        self.assertFalse(result.matched)
 
-        node = PatternSetNode("test1")
-        self.assertIsNotNone(node)
-
-        self.assertTrue(node.equivalent(PatternSetNode("TEST1")))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE1 TEXT1"))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE2 TEXT2"))
-        self.assertTrue(node.equals(self.bot, "testid", "VALUE3 TEXT3"))

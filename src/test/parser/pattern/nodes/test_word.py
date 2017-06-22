@@ -1,5 +1,6 @@
 from test.parser.pattern.nodes.base import PatternTestBaseClass
 from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.dialog import Sentence
 
 class PatternWordNodeTests(PatternTestBaseClass):
 
@@ -21,9 +22,13 @@ class PatternWordNodeTests(PatternTestBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
+        sentence = Sentence("test1 test")
+
         self.assertTrue(node.equivalent(PatternWordNode("test1")))
-        self.assertTrue(node.equals(self.bot, "testid", "test1"))
-        self.assertFalse(node.equals(self.bot, "testid", "test"))
+        result = node.equals(self.bot, "testid", sentence, 0)
+        self.assertTrue(result.matched)
+        result = node.equals(self.bot, "testid", sentence, 1)
+        self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "WORD [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
 
         node.add_child(PatternWordNode("test2"))

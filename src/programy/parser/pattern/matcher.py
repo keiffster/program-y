@@ -137,3 +137,21 @@ class MatchContext(object):
             output_func("\tT - None")
 
 
+class EqualsMatch(object):
+    def __init__(self, matched, word_no, matched_phrase=None):
+        self._matched = matched
+        self._word_no = word_no
+        self._matched_phrase = matched_phrase
+
+    @property
+    def matched(self):
+        return self._matched
+
+    @property
+    def word_no(self):
+        return self._word_no
+
+    @property
+    def matched_phrase(self):
+        return self._matched_phrase
+

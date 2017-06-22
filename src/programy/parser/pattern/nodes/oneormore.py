@@ -19,7 +19,7 @@ import logging
 from programy.utils.text.text import TextUtils
 
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
-from programy.parser.pattern.matcher import Match
+from programy.parser.pattern.matcher import Match, EqualsMatch
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
 from programy.parser.pattern.nodes.base import PatternNode
@@ -142,9 +142,15 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
         if len(self._children) > 0:
             for child in self._children:
-                if child.equals(bot, clientid, word):
-                    logging.debug ("%sWildcard child %s matched %s"%(tabs, child._word, word))
-                    context_match2 = Match(Match.WORD, child, word)
+
+                result = child.equals(bot, clientid, words, word_no)
+                if result.matched is True:
+                    word_no = result.word_no
+                    logging.debug ("%sWildcard child %s matched %s"%(tabs, child._word, result.matched_phrase))
+
+                    logging.debug("%sMATCH -> %s" % (tabs, result.matched_phrase))
+                    context_match2 = Match(Match.WORD, child, result.matched_phrase)
+
                     context.add_match(context_match2)
                     matches_add += 1
 

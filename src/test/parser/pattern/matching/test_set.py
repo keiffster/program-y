@@ -5,7 +5,7 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
     def test_basic_set_match(self):
 
-        self.bot.brain.sets.add_set("SEX", ["MAN", "WOMAN"])
+        self.bot.brain.sets.add_set("SEX", {"MAN": [["MAN"]], "WOMAN": [["WOMAN"]]})
 
         self.add_pattern_to_graph(pattern="I AM A <set>sex</set>", topic="X", that="Y", template="1")
 

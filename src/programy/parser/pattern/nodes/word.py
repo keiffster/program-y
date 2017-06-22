@@ -18,7 +18,7 @@ import logging
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.matcher import EqualsMatch
 
 
 class PatternWordNode(PatternNode):
@@ -44,11 +44,9 @@ class PatternWordNode(PatternNode):
                 return True
         return False
 
-    def equals(self, bot, clientid, word):
-        return self.equals_ignore_case(bot, clientid, self._word, word)
-        #if self.word == word:
-        #    return True
-        #return False
+    def equals(self, bot, clientid, words, word_no):
+        word = words.word(word_no)
+        return EqualsMatch(self.equals_ignore_case(bot, clientid, self._word, word), word_no, word)
 
     def to_string(self, verbose=True):
         if verbose is True:

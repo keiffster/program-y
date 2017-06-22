@@ -22,4 +22,4 @@ class TrainAIMLTests(unittest.TestCase):
         TrainAIMLTests.test_client.bot.brain.dump_tree()
         response = TrainAIMLTests.test_client.bot.ask_question("test", "daddy is great")
         self.assertIsNotNone(response)
-        self.assertEqual('Now you can ask me: "Who IS GREAT?" and "What does my DADDY be?"', response)
+        self.assertEqual('Now you can ask me: "Who is GREAT?" and "What does my daddy be?"', response)

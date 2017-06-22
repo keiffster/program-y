@@ -22,6 +22,14 @@ class SetLoader(FileFinder):
     def __init__(self):
         FileFinder.__init__(self)
 
+    def sort_sets(self, the_set):
+        sorted_set = {}
+        for key in the_set.keys():
+            values = the_set[key]
+            sorted_values = sorted(values, key=len, reverse=True)
+            sorted_set[key] = sorted_values
+        return sorted_set
+
     def load_file_contents(self, filename):
         logging.debug("Loading set [%s]", filename)
         the_set = {}
@@ -31,20 +39,23 @@ class SetLoader(FileFinder):
                     self.process_line(line, the_set)
         except Exception as excep:
             logging.error("Failed to load set [%s] - %s", filename, excep)
-        return the_set
+        return self.sort_sets(the_set)
 
     def load_from_text(self, text):
         the_set = {}
         lines = text.split("\n")
         for line in lines:
             self.process_line(line, the_set)
-        return the_set
+        return self.sort_sets(the_set)
 
     def process_line(self, line, the_set):
         text = line.strip()
         if text is not None and len(text) > 0:
-            the_set[text.upper()] = text
-
+            splits = text.split()
+            key = splits[0].upper()
+            if key not in the_set:
+                the_set[key] = []
+            the_set[key].append(splits)
 
 class SetCollection(object):
 

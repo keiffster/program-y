@@ -11,13 +11,14 @@ class SetTests(unittest.TestCase):
 
         the_set = loader.load_file_contents(os.path.dirname(__file__)+ "/test_files/sets/test_set.txt")
         self.assertIsNotNone(the_set)
-        self.assertEqual(len(the_set), 17)
+        self.assertEqual(len(the_set), 451)
 
-        self.assertIn("ALABAMA", the_set)
-        self.assertEqual("Alabama", the_set['ALABAMA'])
-        self.assertIn("ALASKA", the_set)
-        self.assertIn("KANSAS", the_set)
-        self.assertIn("KENTUCKY", the_set)
+        self.assertIn("AMBER", the_set)
+        self.assertEqual([["Amber"]], the_set['AMBER'])
+
+        self.assertIn("RED", the_set)
+        self.assertEqual([['Red', 'brown'], ['Red', 'Orange'], ['Red', 'violet'], ['Red']], the_set["RED"])
+
         self.assertNotIn("London", the_set)
 
     def test_loader_from_text(self):
@@ -34,10 +35,30 @@ class SetTests(unittest.TestCase):
         self.assertEqual(len(the_set), 4)
 
         self.assertIn("VAL1", the_set)
-        self.assertEqual("Val1", the_set['VAL1'])
+        self.assertEqual([["Val1"]], the_set['VAL1'])
         self.assertIn("VAL2", the_set)
         self.assertIn("VAL3", the_set)
         self.assertIn("VAL4", the_set)
+
+    def test_loader_from_text_multi_word(self):
+        loader = SetLoader()
+        self.assertIsNotNone(loader)
+
+        the_set = loader.load_from_text("""
+            Val11 Val12
+            Val2
+            Val31 Val32
+            Val4
+        """)
+        self.assertIsNotNone(the_set)
+        self.assertEqual(len(the_set), 4)
+
+        self.assertIn("VAL11", the_set)
+        self.assertEqual([["Val11", "Val12"]], the_set['VAL11'])
+        self.assertIn("VAL2", the_set)
+        self.assertIn("VAL31", the_set)
+        self.assertIn("VAL4", the_set)
+
 
     def test_collection(self):
         loader = SetLoader()

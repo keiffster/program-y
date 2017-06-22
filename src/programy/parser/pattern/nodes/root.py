@@ -20,9 +20,6 @@ from programy.parser.exceptions import ParserException
 
 from programy.parser.pattern.matcher import Match
 from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
 
 
 class PatternRootNode(PatternNode):

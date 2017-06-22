@@ -27,4 +27,20 @@ For more information see [url]
         </template>
     </category>
 
+    <category>
+        <pattern>I DO NOT LIKE <set>color</set> *
+        </pattern>
+        <template>
+            IT IS OK, <star/> IS NOT MY BEST COLOUR EITHER
+        </template>
+    </category>
+
+    <category>
+        <pattern><set>color</set> IS A NICE COLOUR
+        </pattern>
+        <template>
+            YES <star /> IS A LOVELY COLOUR.
+        </template>
+    </category>
+
 </aiml>
