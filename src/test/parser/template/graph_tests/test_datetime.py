@@ -1,10 +1,12 @@
 import xml.etree.ElementTree as ET
-import unittest
+
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.date import TemplateDateNode
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
-class TemplateGraphDateTimeTests(TemplateGraphTestClient):
+class TemplateGraphDateTests(TemplateGraphTestClient):
 
     def test_date_format_as_attrib(self):
         template = ET.fromstring("""
@@ -14,6 +16,13 @@ class TemplateGraphDateTimeTests(TemplateGraphTestClient):
             """)
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
+        self.assertIsInstance(ast, TemplateNode)
+        self.assertIsNotNone(ast.children)
+        self.assertEqual(len(ast.children), 1)
+
+        set_node = ast.children[0]
+        self.assertIsNotNone(set_node)
+        self.assertIsInstance(set_node, TemplateDateNode)
         self.assertIsNotNone(ast.resolve(self.test_bot, self.test_clientid))
 
     def test_date_format_as_attrib_full(self):
@@ -24,6 +33,13 @@ class TemplateGraphDateTimeTests(TemplateGraphTestClient):
             """)
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
+        self.assertIsInstance(ast, TemplateNode)
+        self.assertIsNotNone(ast.children)
+        self.assertEqual(len(ast.children), 1)
+
+        set_node = ast.children[0]
+        self.assertIsNotNone(set_node)
+        self.assertIsInstance(set_node, TemplateDateNode)
         self.assertIsNotNone(ast.resolve(self.test_bot, self.test_clientid))
 
     def test_date_format_as_attrib_default(self):
@@ -34,20 +50,12 @@ class TemplateGraphDateTimeTests(TemplateGraphTestClient):
             """)
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
-        self.assertIsNotNone(ast.resolve(self.test_bot, self.test_clientid))
+        self.assertIsInstance(ast, TemplateNode)
+        self.assertIsNotNone(ast.children)
+        self.assertEqual(len(ast.children), 1)
 
-    def test_interval_values_as_attribs(self):
-        template = ET.fromstring("""
-            <template>
-                <interval>
-                    <format>%c</format>
-                    <style>days</style>
-                    <from>Wed Oct  5 16:35:11 2016</from>
-                    <to>Fri Oct  7 16:35:11 2016</to>
-                </interval>
-            </template>
-            """)
-        ast = self.parser.parse_template_expression(template)
-        self.assertIsNotNone(ast)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "2")
+        set_node = ast.children[0]
+        self.assertIsNotNone(set_node)
+        self.assertIsInstance(set_node, TemplateDateNode)
+        self.assertIsNotNone(ast.resolve(self.test_bot, self.test_clientid))
 
