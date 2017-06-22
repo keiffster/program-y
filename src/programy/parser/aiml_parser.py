@@ -163,9 +163,9 @@ class AIMLParser(object):
         aiml = ET.fromstring(text)
 
         if aiml is None or aiml.tag != 'aiml':
-            raise ParserException("Error, root tag is not <aiml>", filename="text")
+            raise ParserException("Error, root tag is not <aiml>")
         else:
-            self.parse_aiml(aiml, "text")
+            self.parse_aiml(aiml, None)
 
     #########################################################################################
     #

@@ -23,23 +23,6 @@ class AIMLParserTests(unittest.TestCase):
         filename = os.path.dirname(__file__)+ '/valid.aiml'
         self.parser.parse_from_file(filename)
 
-    def test_parse_from_file_invalid(self):
-        filename = os.path.dirname(__file__)+ '/invalid.aiml'
-        self.parser.parse_from_file(filename)
-
-    def test_crud(self):
-        with self.assertRaises(ParseError) as raised:
-            self.parser.parse_from_text(
-                """Blah Blah Blah
-                """)
-
-    def test_no_aiml(self):
-        with self.assertRaises(ParseError) as raised:
-            self.parser.parse_from_text(
-                """<?xml version="1.0" encoding="UTF-8"?>
-                """)
-        self.assertTrue(str(raised.exception).startswith("no element found:"))
-
     def test_base_aiml_topic_category_template(self):
         self.parser.parse_from_text(
             """<?xml version="1.0" encoding="UTF-8"?>
