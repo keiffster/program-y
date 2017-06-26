@@ -415,8 +415,7 @@
     <!-- LESS THAN OR EQUAL TO-->
     <category>
         <pattern>
-            XLE <set>number</set> XS
-            <set>number</set>
+            XLE <set>number</set> XS <set>number</set>
         </pattern>
         <template>
             <think>
@@ -500,9 +499,11 @@
                     <template>TRUE</template>
                 </category>
             </learn>
+
             <srai>XFALSE
                 <star index="2"/>
             </srai>
+
             <learn>
                 <category>
                     <pattern>
@@ -515,6 +516,7 @@
                     <template>FALSE</template>
                 </category>
             </learn>
+
         </template>
     </category>
 
@@ -1050,7 +1052,7 @@
         <pattern>
             XBLACKHOLE
         </pattern>
-        <template></template>
+        <template> </template>
     </category>
 
     <category>

@@ -35,12 +35,12 @@
     </category>
     <category>
         <pattern>FIRST NAME</pattern>
-        <template>My first name is<bot name="firstname"/>.
+        <template>My first name is <bot name="firstname"/>.
         </template>
     </category>
     <category>
         <pattern>FULL NAME</pattern>
-        <template>My full name is<bot name="fullname"/>.
+        <template>My full name is <bot name="fullname"/>.
         </template>
     </category>
     <category>

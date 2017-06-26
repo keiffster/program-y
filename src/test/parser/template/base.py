@@ -1,5 +1,4 @@
 import unittest
-import logging
 
 from programy.bot import Bot
 from programy.brain import Brain

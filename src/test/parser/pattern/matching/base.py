@@ -1,7 +1,7 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from test.parser.pattern.nodes.base import PatternTestBaseClass, TestBot
+from test.parser.pattern.base import PatternTestBaseClass, TestBot
 from programy.dialog import Sentence
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.nodes.word import TemplateWordNode

@@ -44,7 +44,8 @@
     </category>
     <category>
         <pattern>MY FAVORITE COLOR IS *</pattern>
-        <template>I didn't recognize
+        <template>
+            I didn't recognize
             <star/>
             as a color.
         </template>
@@ -283,14 +284,51 @@
         </template>
     </category>
     <category>
+        <pattern>MY LATITUDE IS *</pattern>
+        <template>Thanks for confiding in me.
+            <think>
+                <set name="latitude">
+                    <star/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
         <pattern>MY LATITUDE</pattern>
         <template>
             <get name="latitude"/>
         </template>
     </category>
     <category>
+        <pattern>MY BOYFRIEND IS *</pattern>
+        <template>Thanks for confiding in me.
+            <think>
+                <set name="boyfriend">
+                    <star/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
         <pattern>MY BOYFRIEND</pattern>
-        <template><get name="boyfriend"/>?
+        <template>
+            <get name="boyfriend"/>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIEND IS *</pattern>
+        <template>Thanks for confiding in me.
+            <think>
+                <set name="girlfriend">
+                    <star/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>MY GIRLFRIEND</pattern>
+        <template>
+            <get name="girlfriend"/>
         </template>
     </category>
     <category>
@@ -302,8 +340,8 @@
                 </set>
             </think>
             <condition var="name">
-                <li value="unknown">I don't know your name. What is your name?</li>
-                <li value="Friend">I don't know your name. What is your name?</li>
+                <li value="unknown">I don't know your name, hat is your name?</li>
+                <li value="Friend">I don't know your name, what is your name?</li>
                 <li><get var="name"/>.
                 </li>
             </condition>
@@ -332,6 +370,16 @@
             </condition>
             .
             I call you<get name="name"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>MY TOWN IS *</pattern>
+        <template>Thanks for confiding in me.
+            <think>
+                <set name="town">
+                    <star/>
+                </set>
+            </think>
         </template>
     </category>
     <category>

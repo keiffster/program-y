@@ -10,7 +10,6 @@ brain:
     files:
         aiml:
              files: $BOT_ROOT/aiml
-             #file: $BOT_ROOT/aiml/professor/professor.0001.aiml
              extension: .aiml
              directories: true
              #errors: /tmp/alice2_errors.txt

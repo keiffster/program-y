@@ -1,17 +1,24 @@
 "XFALSE X", "FALSE"
+
 "XTRUE X", "TRUE"
+
 "XNUMBER 1", "1"
 "XNUMBER X", "Sorry, I don't have an answer for that!!"
+
 "XSTRING X", "X"
 "XSTRING X@Y", "X AT Y"
+
 "XISTRUE TRUE", "TRUE"
 "XISTRUE FALSE", "FALSE"
 "XISTRUE 6", "FALSE"
+
 "XISFALSE FALSE", "TRUE"
 "XISFALSE TRUE", "FALSE"
 "XISFALSE 7", "FALSE"
+
 "XISNUMBER 1", "TRUE"
 "XISNUMBER X", "FALSE"
+
 "XTYPEOF 1", "XNUMBER"
 "XTYPEOF X", "XSTRING"
 "XTYPEOF TRUE", "XBOOL"
@@ -78,7 +85,8 @@
 "XCDR 1 2 3", "2 3"
 "XIMPLODE 1 2 3", "123"
 "XREVERSE 1 2 3", "3 2 1"
-"XBLACKHOLE", ""
+# XBLACKHOLE not supported in this version of Programy-Y
+# "XBLACKHOLE", ""
 
 "XLOOP KEIFF XS 1", "KEIFF"
 "XLOOP KEIFF XS 3", "KEIFF KEIFF KEIFF"

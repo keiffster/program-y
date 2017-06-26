@@ -23,3 +23,8 @@ class NormalizeAIMLTests(unittest.TestCase):
         response = NormalizeAIMLTests.test_client.bot.ask_question("test",  "TEST NORMALIZE")
         self.assertIsNotNone(response)
         self.assertEqual(response, "keithsterling dot com")
+
+    def test_normalize_star(self):
+        response = NormalizeAIMLTests.test_client.bot.ask_question("test",  "NORMALIZE test.org", srai=True)
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "test dot org")

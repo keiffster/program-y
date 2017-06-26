@@ -98,9 +98,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 result = child.equals(bot, clientid, words, word_no)
                 if result.matched is True:
                     word_no = result.word_no
-                    logging.debug ("%sWildcard child %s matched %s"%(tabs, child._word, result.matched_phrase))
+                    logging.debug ("%sWildcard child matched %s"%(tabs, result.matched_phrase))
 
-                    logging.debug("%s*MATCH -> %s" % (tabs, result.matched_phrase))
                     context_match2 = Match(Match.WORD, child, result.matched_phrase)
 
                     context.add_match(context_match2)

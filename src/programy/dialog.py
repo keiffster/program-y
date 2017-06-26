@@ -83,9 +83,13 @@ class Sentence(object):
 class Question(object):
 
     @staticmethod
-    def create_from_text(text: str, sentence_split_chars: str=".", word_split_chars: str=" "):
+    def create_from_text(text: str, sentence_split_chars: str=".", word_split_chars: str=" ", split=True):
         question = Question()
-        question._split_into_sentences(text, sentence_split_chars, word_split_chars)
+        if split is True:
+            question._split_into_sentences(text, sentence_split_chars, word_split_chars)
+        else:
+            question._sentences = []
+            question._sentences.append(Sentence(text))
         return question
 
     @staticmethod

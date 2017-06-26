@@ -121,7 +121,7 @@ class TemplateLearnNode(TemplateNode):
 
         new_template = self.evaluate_eval_nodes(bot, clientid, category.template)
 
-        new_node = bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template)
+        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
 
         logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),

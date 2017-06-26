@@ -31,6 +31,10 @@ class TemplateStarNode(TemplateIndexedNode):
             current_sentence = current_question.current_sentence()
             matched_context = current_sentence.matched_context
 
+            if matched_context is None:
+                logging.error("Star node has no matched context for clientid %s" % (clientid))
+                resolved = ""
+
             resolved = matched_context.star(self.index)
 
             if resolved is None:
@@ -39,6 +43,7 @@ class TemplateStarNode(TemplateIndexedNode):
 
             logging.debug("Star Node [%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""

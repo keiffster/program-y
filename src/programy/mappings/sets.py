@@ -55,6 +55,8 @@ class SetLoader(FileFinder):
             key = splits[0].upper()
             if key not in the_set:
                 the_set[key] = []
+            #for word in splits:
+            #    the_set[key].append(word.upper())
             the_set[key].append(splits)
 
 class SetCollection(object):
@@ -62,16 +64,13 @@ class SetCollection(object):
     def __init__(self):
         self._sets = {}
 
-    def add_list_to_set(self, name, set_contents):
+    def add_set(self, name, the_set):
         # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
         if set_name in self._sets:
             raise Exception("Set %s already exists" % set_name)
         logging.debug("Adding set [%s[ to set group", set_name)
-        new_set = {}
-        for word in set_contents:
-            new_set[word.upper()] = word
-        self._sets[set_name] = new_set
+        self._sets[set_name] = the_set
 
     def set(self, name):
         # Set names always stored in upper case to handle ambiquity

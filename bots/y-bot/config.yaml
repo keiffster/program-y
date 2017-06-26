@@ -10,11 +10,14 @@ brain:
 
     dump_to_file: /tmp/braintree.txt
 
+
     files:
         aiml:
             files: $BOT_ROOT/aiml
             extension: .aiml
             directories: true
+            errors: /tmp/ybot_errors.txt
+            duplicates: /tmp/ybot_duplicates.txt
         sets:
             files: $BOT_ROOT/sets
             extension: .txt

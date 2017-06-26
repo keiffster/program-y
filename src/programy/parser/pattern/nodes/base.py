@@ -201,6 +201,9 @@ class PatternNode(object):
     def is_set(self):
         return False
 
+    def is_iset(self):
+        return False
+
     ########################################################################
     #
     def is_bot(self):
@@ -226,11 +229,10 @@ class PatternNode(object):
 
     def _node_exists(self, new_node):
 
-        if new_node.is_priority():
-            for priority in self._priority_words:
-                if priority.equivalent(new_node):
-                    # Equivalent node already exists, use this one instead
-                    return priority
+        for priority in self._priority_words:
+            if priority.equivalent(new_node):
+                # Equivalent node already exists, use this one instead
+                return priority
 
         if new_node.is_zero_or_more():
             if self._0ormore_arrow is not None:
@@ -258,18 +260,29 @@ class PatternNode(object):
                 if self._that.equivalent(new_node):
                     return self._that
 
-        if new_node.is_word() or new_node.is_set() or new_node.is_bot():
-            try:
-                if new_node.word in self._children_words:
-                    existing_node = self._children_words[new_node.word]
-                    if new_node.is_set() is True and existing_node.is_set() is True:
-                        return existing_node
-                    elif new_node.is_bot() is True and existing_node.is_bot() is True:
-                        return existing_node
-                    elif new_node.is_word() is True and existing_node.is_word() is True:
-                        return existing_node
-            except Exception as e:
-                logging.exception(e)
+        if new_node.is_set:
+            for node in self._children:
+                if node.is_set:
+                    if node.equivalent(new_node):
+                        # Equivalent node already exists, use this one instead
+                        return node
+
+        if new_node.is_iset:
+            return None
+
+        if new_node.is_bot:
+            for node in self._children:
+                if node.is_bot:
+                    if node.equivalent(new_node):
+                        # Equivalent node already exists, use this one instead
+                        return node
+
+        if new_node.is_word:
+            for node in self._children:
+                if node.is_word:
+                    if node.equivalent(new_node):
+                        # Equivalent node already exists, use this one instead
+                        return node
 
         return None
 
@@ -298,9 +311,15 @@ class PatternNode(object):
             #  my favorite color is <set>color</set>
             # In the above, if the set color contains green then
             # it still gets picked up in the first grammar and not he second
-            if new_node.is_set() or new_node.is_bot():
+            if new_node.is_set():
+                self.children.append(new_node)
+                self._children_words[new_node.set_name] = new_node
+            elif new_node.is_iset():
+                self.children.append(new_node)
+                self._children_words[new_node.iset_name] = new_node
+            elif new_node.is_bot():
                self.children.append(new_node)
-               self._children_words[new_node.word] = new_node
+               self._children_words[new_node.property] = new_node
             else:
                 self.children.insert(0, new_node)
                 if new_node.is_word():
@@ -406,9 +425,8 @@ class PatternNode(object):
             result= child.equals(bot, clientid, words, word_no)
             if result.matched is True:
                 word_no = result.word_no
-                logging.debug("%sPriority %s matched %s" % (tabs, child._word, result.matched_phrase))
+                logging.debug("%sPriority matched %s" % (tabs, result.matched_phrase))
 
-                logging.debug("%sMATCH -> %s" % (tabs, result.matched_phrase))
                 match_node = Match(type, child, result.matched_phrase)
 
                 context.add_match(match_node)
@@ -437,9 +455,8 @@ class PatternNode(object):
             result = child.equals(bot, clientid, words, word_no)
             if result.matched is True:
                 word_no = result.word_no
-                logging.debug("%sChild %s matched %s" % (tabs, child._word, result.matched_phrase))
+                logging.debug("%sChild matched %s" % (tabs, result.matched_phrase))
 
-                logging.debug("%sMATCH -> %s" % (tabs, result.matched_phrase))
                 match_node = Match(type, child, result.matched_phrase)
 
                 context.add_match(match_node)

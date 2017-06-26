@@ -2,7 +2,6 @@ import unittest
 import os
 from programy.mappings.sets import SetCollection, SetLoader
 
-
 class SetTests(unittest.TestCase):
 
     def test_loader_from_file(self):

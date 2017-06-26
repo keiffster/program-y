@@ -15,36 +15,38 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 
-class PatternBotNode(PatternWordNode):
+class PatternBotNode(PatternNode):
 
-    def __init__(self, word):
-        PatternWordNode.__init__(self, word)
-
-    def is_word(self):
-        return False
+    def __init__(self, property):
+        PatternNode.__init__(self)
+        self._property = property
 
     def is_bot(self):
         return True
 
+    @property
+    def property(self):
+        return self._property
+
     def equivalent(self, other):
         if other.is_bot():
-            if self._word == other.word:
+            if self.property == other.property:
                 return True
         return False
 
     def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
-        if bot.brain.properties.has_property(self.word):
-            if word == bot.brain.properties.property(self.word):
+        if bot.brain.properties.has_property(self.property):
+            if word == bot.brain.properties.property(self.property):
                 logging.debug("Found word [%s] as bot property"%(word))
                 return EqualsMatch(True, word_no, word)
         return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.word)
+            return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.property)
         else:
-            return "BOT property=[%s]" % (self.word)
+            return "BOT property=[%s]" % (self.property)

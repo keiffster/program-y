@@ -16,20 +16,18 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 
-class PatternSetNode(PatternWordNode):
+class PatternSetNode(PatternNode):
 
-    def __init__(self, word):
-        PatternWordNode.__init__(self, word.upper())
+    def __init__(self, name):
+        PatternNode.__init__(self)
+        self._set_name = name.upper()
 
     @property
     def set_name(self):
-        return self._word
-
-    def is_word(self):
-        return False
+        return self._set_name
 
     def is_set(self):
         return True
@@ -48,7 +46,7 @@ class PatternSetNode(PatternWordNode):
 
     def words_in_set(self, bot, words, word_no):
 
-        word = words.word(word_no)
+        word = words.word(word_no).upper()
         set_words = bot.brain.sets.set(self.set_name)
 
         if word in set_words:
@@ -59,7 +57,7 @@ class PatternSetNode(PatternWordNode):
                 words_word_no = word_no
                 while phrase_word_no < len(phrase) and words_word_no < words.num_words():
                     phrase_word = phrase[phrase_word_no].upper()
-                    word = words.word(words_word_no)
+                    word = words.word(words_word_no).upper()
                     if phrase_word == word:
                         if phrase_word_no+1 == len(phrase):
                             return EqualsMatch(True, words_word_no, " ".join(phrase))
@@ -70,6 +68,7 @@ class PatternSetNode(PatternWordNode):
 
     def equals(self, bot, client, words, word_no):
         word = words.word(word_no)
+
         if self.set_is_numeric():
             return EqualsMatch(word.isnumeric(), word_no, word)
         elif self.set_is_known(bot):
@@ -86,7 +85,7 @@ class PatternSetNode(PatternWordNode):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.word)
+            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.set_name)
         else:
-            return "SET name=[%s]" % (self.word)
+            return "SET name=[%s]" % (self.set_name)
 

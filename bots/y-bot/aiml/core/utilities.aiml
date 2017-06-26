@@ -89,23 +89,17 @@
         </template>
     </category>
     <category>
-        <pattern>SUBSTRINGEXPLODE <set>number</set>
-            <set>number</set> *
+        <pattern>SUBSTRINGEXPLODE <set>number</set> <set>number</set> *
         </pattern>
         <template>
             <think>
                 <set var="count">0</set>
-                <set var="start">
-                    <star/>
-                </set>
-                <set var="end">
-                    <star index="2"/>
-                </set>
-                <set var="list">
-                    <star index="3"/>
-                </set>
+                <set var="start"><star/></set>
+                <set var="end"><star index="2"/></set>
+                <set var="list"><star index="3"/></set>
                 <set var="print">false</set>
             </think>
+
             <condition var="list">
                 <li value="NIL"/>
                 <li>

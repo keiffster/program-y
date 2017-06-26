@@ -39,9 +39,9 @@ class PatternTopicNode(PatternNode):
         return True
 
     def equivalent(self, other):
-        if other.is_topic():
-            return True
-        return False
+        if other.is_topic() is False:
+            return False
+        return True
 
     def to_string(self, verbose=True):
         if verbose is True:

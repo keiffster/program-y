@@ -5,6 +5,7 @@ from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.vocabulary import TemplateVocabularyNode
 from programy.bot import Bot, BotConfiguration
 from programy.brain import Brain, BrainConfiguration
+from programy.mappings.sets import SetLoader
 
 from test.parser.template.base import TemplateTestsBaseClass
 
@@ -19,7 +20,13 @@ class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
         pattern_element = ET.fromstring("<pattern>hello world</pattern>")
         test_bot.brain._aiml_parser.pattern_parser.add_pattern_to_graph(pattern_element, topic_element, that_element, None)
 
-        test_bot.brain._sets_collection.add_list_to_set("testset", ["val1", "val2", "val3"])
+        loader = SetLoader()
+
+        test_bot.brain.sets.add_set("testset", loader.load_from_text("""
+        val1
+        val2
+        val3
+        """))
 
         root = TemplateNode()
         self.assertIsNotNone(root)

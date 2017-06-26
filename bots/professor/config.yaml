@@ -1,0 +1,58 @@
+
+brain:
+
+    allow_system_aiml: true
+    allow_learn_aiml: true
+    allow_learnf_aiml: true
+
+    #dump_to_file: /tmp/professor_braintree.txt
+
+    files:
+        aiml:
+             files: $BOT_ROOT/aiml
+             extension: .aiml
+             directories: true
+             #errors: /tmp/professor_errors.txt
+             #duplicates: /tmp/professor_duplicates.txt
+        sets:
+            files: $BOT_ROOT/sets
+            extension: .txt
+            directories: false
+        maps:
+            files: $BOT_ROOT/maps
+            extension: .txt
+            directories: false
+        denormal: $BOT_ROOT/config/denormal.txt
+        normal: $BOT_ROOT/config/normal.txt
+        gender: $BOT_ROOT/config/gender.txt
+        person: $BOT_ROOT/config/person.txt
+        person2: $BOT_ROOT/config/person2.txt
+        predicates: $BOT_ROOT/config/predicates.txt
+        pronouns: $BOT_ROOT/config/pronouns.txt
+        properties: $BOT_ROOT/config/properties.txt
+        triples: $BOT_ROOT/config/triples.txt
+        preprocessors: $BOT_ROOT/config/preprocessors.conf
+        postprocessors: $BOT_ROOT/config/postprocessors.conf
+
+    services:
+       Pannous:
+            path: programy.utils.services.pannous.PannousService
+            url: http://weannie.pannous.com/api
+       Pandora:
+            path: programy.utils.services.pandora.PandoraService
+            url: http://www.pandorabots.com/pandora/talk-xml
+       Wikipedia:
+            path: programy.utils.services.wikipediaservice.WikipediaService
+
+bot:
+    prompt: ">>>"
+    initial_question: Hi, how can I help you today?
+    default_response: Sorry, I don't have an answer for that!
+    exit_response: So long, and thanks for the fish!
+    max_recursion: 10
+
+rest:
+  host: 127.0.0.1
+  port: 5000
+  debug: true
+  use_api_keys: false

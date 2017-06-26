@@ -121,7 +121,10 @@ class Bot(object):
 
         conversation = self.get_conversation(clientid)
 
-        question = Question.create_from_text(pre_processed)
+        if srai is False:
+            question = Question.create_from_text(pre_processed)
+        else:
+            question = Question.create_from_text(pre_processed, split=False)
 
         conversation.record_dialog(question)
 

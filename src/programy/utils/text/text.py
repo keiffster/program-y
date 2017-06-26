@@ -22,7 +22,7 @@ class TextUtils:
 
     STRIP_ALL_WHITESPACE    = '[\s+]'
     STRIP_WHITESPACE        = '[\n\t\r+]'
-    STRIP_ALL_PUNCTUATION   = r'[^\w\s]'
+    STRIP_ALL_PUNCTUATION   = r'[:\'";,.?!"]'
 
     @staticmethod
     def get_tabs(depth: int, tabs=DEFAULT_TAB_SPACE):

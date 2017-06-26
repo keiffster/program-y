@@ -16,35 +16,37 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 
 
-class PatternPriorityWordNode(PatternWordNode):
+class PatternPriorityWordNode(PatternNode):
 
     def __init__(self, word):
-        PatternWordNode.__init__(self, word)
+        PatternNode.__init__(self)
+        self._priority_word = word
 
-    def is_word(self):
-        return False
+    @property
+    def priority_word(self):
+        return self._priority_word
 
     def is_priority(self):
         return True
 
     def equivalent(self, other):
         if other.is_priority():
-            if self.word == other.word:
+            if self.priority_word == other.priority_word:
                 return True
         return False
 
     def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
-        if self._word == word:
+        if self.priority_word == word:
             return EqualsMatch(True, word_no, word)
         return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "PWORD [%s] word=[%s]" % (self._child_count(verbose), self.word)
+            return "PWORD [%s] word=[%s]" % (self._child_count(verbose), self.priority_word)
         else:
-            return "PWORD [%s]" % (self.word)
+            return "PWORD [%s]" % (self.priority_word)

@@ -198,19 +198,23 @@ class PatternGraph(object):
         current_node = current_node.add_child(template_node)
         return current_node
 
-    def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root):
+    def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root, learn=False):
 
-        current_node = self.add_pattern_to_node(pattern_element)
+        pattern_node = self.add_pattern_to_node(pattern_element)
 
-        current_node = self.add_topic_to_node(topic_element, current_node)
+        topic_node = self.add_topic_to_node(topic_element, pattern_node)
 
-        current_node = self.add_that_to_node(that_element, current_node)
+        that_node = self.add_that_to_node(that_element, topic_node)
 
-        if current_node.has_template():
-            raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text))
+        if that_node.has_template() is True:
+            if learn is False:
+                raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text))
+            else:
+                logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text))
+                self.add_template_to_node(template_graph_root, that_node)
         else:
-            self.add_template_to_node(template_graph_root, current_node)
-            return current_node
+            self.add_template_to_node(template_graph_root, that_node)
+        return that_node
 
     def count_words_in_patterns(self):
         counter = [0]

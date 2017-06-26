@@ -16,16 +16,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 
 
-class PatternISetNode(PatternWordNode):
+class PatternISetNode(PatternNode):
+
+    iset_count = 1
 
     def __init__(self, words):
-        PatternWordNode.__init__(self, 'iset')
+        PatternNode.__init__(self)
         self._words = []
         self._parse_words(words)
+        self._iset_name = "iset_%d"%(PatternISetNode.iset_count)
+        PatternISetNode.iset_count += 1
 
     def _parse_words(self, words):
         splits = words.split(",")
@@ -36,10 +40,11 @@ class PatternISetNode(PatternWordNode):
     def words(self):
         return self._words
 
-    def is_word(self):
-        return False
+    @property
+    def iset_name(self):
+        return self._iset_name
 
-    def is_set(self):
+    def is_iset(self):
         return True
 
     def equivalent(self, other):

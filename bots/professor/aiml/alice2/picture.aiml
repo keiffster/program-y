@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: picture.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>SHOW ME *</pattern>
+<template><srai>PICTUREBLAB <star/></srai>
+<sraix default="PICFAILED" hint="pic" service="pannous">SHOW ME <star/></sraix></template>
+</category>
+<category><pattern>PICTUREBLAB *</pattern>
+<template><random>
+<li>Here you are.</li>
+<li>I hope you like this picture.</li>
+<li>I have this picture.</li>
+<li>There you go.</li>
+<li>Look at that <star/>.</li>
+<li>This is what <star/> looks like.</li>
+<li>I found this pic of <star/>.</li>
+<li>I've displayed a picture for you.</li>
+</random></template>
+</category>
+</aiml>

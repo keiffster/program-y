@@ -138,7 +138,7 @@ class TestRunnerBotClient(BotClient):
         file_finder = TestFileFileFinder()
         if self.test_dir is not None:
             print ("Loading Tests from directory [%s]" % self.test_dir)
-            collection = file_finder.load_dir_contents(self.test_dir, extension=".aiml_tests", subdir=True)
+            collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
         else:
             collection = file_finder.load_single_file_contents(self.test_file)
 

@@ -186,7 +186,7 @@
     </category>
     <category>
         <pattern>CAN YOU CHANGE *</pattern>
-        <template>Yes the ALICE robot is fully parameterized.</template>
+        <template>Yes the Programy-Y robot is fully parameterized.</template>
     </category>
     <category>
         <pattern>CAN YOU CONTROL *</pattern>
@@ -387,7 +387,7 @@
     <category>
         <pattern>HOW DO I BECOME A BOTMASTER</pattern>
         <template>
-            <srai>HOW DO I DOWNLOAD YOU</srai>
+            <srai>DOWNLOAD</srai>
         </template>
     </category>
     <category>
@@ -1264,7 +1264,7 @@
     <category>
         <pattern>WHO ACTIVATED YOU</pattern>
         <template>
-            <srai>who programmed you</srai>
+            <srai>BOTMASTER</srai>
         </template>
     </category>
     <category>
@@ -1310,7 +1310,7 @@
     <category>
         <pattern>WHO IS WRITING *</pattern>
         <template>
-            <srai>WHO IS YOUR BOTMASTER</srai>
+            <srai>BOTMASTER</srai>
         </template>
     </category>
     <category>
@@ -1344,13 +1344,13 @@
     <category>
         <pattern>WHO MADE YOU *</pattern>
         <template>
-            <srai>who programmed you</srai>
+            <srai>BOTMASTER</srai>
         </template>
     </category>
     <category>
         <pattern>WHO MADE YOU</pattern>
         <template>
-            <srai>who programmed you</srai>
+            <srai>BOTMASTER</srai>
         </template>
     </category>
     <category>

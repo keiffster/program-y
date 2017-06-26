@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+<!-- File: rsvp.aiml -->
+<!-- Author: Dr. Richard S. Wallace -->
+<!-- Last modified: July 19, 2014 -->
+<!--  -->
+<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!--  -->
+<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!--  -->
+<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Public License, as published by the Free Software Foundation. -->
+<!--  -->
+<!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+<!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+<!--  -->
+<!-- For more information see http://www.alicebot.org -->
+<!--  -->
+<category><pattern>SEND RSVP TO *</pattern>
+<template>I'm sending an RSVP to <star/>.
+<think>
+<addtriple><subj><star/></subj><pred>has</pred><obj>RSVP</obj></addtriple>
+<addtriple><subj><star/></subj><pred>status</pred><obj>not responded</obj></addtriple>
+</think></template>
+</category>
+<category><pattern>WHO HAS AN RSVP</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?x</vars><q><subj>?x</subj><pred>has</pred><obj>RSVP</obj></q></select>
+</set>
+</think>
+<condition var="tuples">
+  <li value="NIL"/>
+  <li><get var="?x"><tuple><first><get var="tuples"/></first></tuple></get>,
+  <think>
+      <set var="tuples"><rest><get var="tuples"/></rest></set>
+  </think> <loop/></li>
+</condition></template>
+</category>
+<category><pattern>RSVP STATUS</pattern>
+<template><think>
+<set var="tuples">
+<select><vars>?x ?status</vars><q><subj>?x</subj><pred>status</pred><obj>?status</obj></q></select>
+</set>
+</think>
+<condition var="tuples">
+  <li value="NIL"/>
+  <li><get var="?x"><tuple><first><get var="tuples"/></first></tuple></get> -- <get var="?status"><tuple><first><get var="tuples"/></first></tuple></get> 
+  <think>
+      <set var="tuples"><rest><get var="tuples"/></rest></set>
+  </think> <loop/></li>
+</condition></template>
+</category>
+<category><pattern><set>name</set> IS ATTENDING</pattern>
+<template>Setting <star/>'s RSVP status to "attending".
+<think>
+<deletetriple><subj><star/></subj><pred>status</pred><obj>not responded</obj></deletetriple>
+<addtriple><subj><star/></subj><pred>status</pred><obj>attending</obj></addtriple>
+</think></template>
+</category>
+<category><pattern><set>name</set> IS NOT ATTENDING</pattern>
+<template>Setting <star/>'s RSVP status to "not attending".
+<think>
+<deletetriple><subj><star/></subj><pred>status</pred><obj>not responded</obj></deletetriple>
+<addtriple><subj><star/></subj><pred>status</pred><obj>not attending</obj></addtriple>
+</think></template>
+</category>
+</aiml>

@@ -5,7 +5,7 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
     def test_basic_bot_match(self):
 
-        PatternMatcherBaseClass.bot.brain.properties._properties['firstname'] = 'testbot'
+        PatternMatcherBaseClass.bot.brain.properties.add_property('firstname', 'testbot')
 
         self.add_pattern_to_graph(pattern="<bot>firstname</bot>", topic="X", that="Y", template="1")
 
