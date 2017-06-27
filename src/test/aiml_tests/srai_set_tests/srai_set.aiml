@@ -20,7 +20,7 @@ For more information see [url]
 <aiml>
 
 	<category>
-        <pattern>TEST SRAI SET</pattern>
+        <pattern>TEST SRAI SET</pattern>ls
         <template>
             <set var="abc"/>
             <srai><get var="abc"/></srai>

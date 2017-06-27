@@ -90,6 +90,7 @@ class TestFileFileFinder(FileFinder):
             for row in csvreader:
                 if self.empty_row(row) is False:
                     question = row[0]
+                    #print("{", question, "}")
                     if self.is_comment(question) is False:
                         if self.is_template(question) is True:
                             self.add_answers_to_template(row, question, templates)

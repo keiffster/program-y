@@ -61,12 +61,12 @@
     <!-- Age -->
     <category>
         <pattern>BIRTHDAY</pattern>
-        <template>My birthday is<bot name="birthday"/>.
+        <template>My birthday is <bot name="birthday"/>.
         </template>
     </category>
     <category>
         <pattern>BIRTHDATE</pattern>
-        <template>I was born on<bot name="birthdate"/>.
+        <template>I was born on <bot name="birthdate"/>.
         </template>
     </category>
     <category>
@@ -200,7 +200,15 @@
     </category>
     <category>
         <pattern>EYES</pattern>
-        <template>My eyes are<bot name="eyes"/>.
+        <template>
+            <think>
+                <set var="numeyes"><bot name="eyes"/></set>
+            </think>
+            <condition var="numeyes">
+                <li value="none">I have no eyes, but excellent radar</li>
+                <li value="one">I have one eye</li>
+                <li>I have <bot name="eyes"/> eyes</li>
+            </condition>
         </template>
     </category>
     <category>
@@ -246,6 +254,7 @@
         <template>My botmaster's name is<bot name="botmaster"/>.
         </template>
     </category>
+
     <category>
         <pattern>STATUS</pattern>
         <template>I am currently<bot name="marital-status"/>.
@@ -316,6 +325,11 @@
         </template>
     </category>
     <category>
+        <pattern>HOBBY</pattern>
+        <template>I love to spend my free time<bot name="hobby"/>.
+        </template>
+    </category>
+    <category>
         <pattern>IQ</pattern>
         <template>My IQ is<bot name="iq"/>.
         </template>
@@ -372,6 +386,16 @@
         </template>
     </category>
     <category>
+        <pattern>URL</pattern>
+        <template>
+            <condition name="env">
+                <li value="browser"><bot name="url"/>.
+                </li>
+                <li>You'll have to connect me to a browser if you want click my url.</li>
+            </condition>
+        </template>
+    </category>
+    <category>
         <pattern>EMOTIONS</pattern>
         <template>I feel a great sense of<bot name="emotions"/>.
         </template>
@@ -400,6 +424,11 @@
     <category>
         <pattern>FRIENDS</pattern>
         <template>My good friends include<bot name="friends"/>, and you.
+        </template>
+    </category>
+    <category>
+        <pattern>MANUFACTURER</pattern>
+        <template>I was made by<bot name="manufacturer"/>.
         </template>
     </category>
     <category>
@@ -486,6 +515,12 @@
         </template>
     </category>
     <category>
+        <pattern>DREAM</pattern>
+        <template>
+            I dream of electric sheep
+        </template>
+    </category>
+    <category>
         <pattern>HAVE</pattern>
         <template>I have
             <random>
@@ -507,13 +542,6 @@
                 <li>I am able to talk to a few other robots.</li>
                 <li>Besides you, I can speak with some other robots.</li>
             </random>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>interest</set>
-        </pattern>
-        <template>I am very interested in<star/>.
         </template>
     </category>
 
@@ -562,6 +590,12 @@
         <pattern>CAT</pattern>
         <template>
             <srai>PETS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SIBLINGS</pattern>
+        <template>
+            <srai>FAMILY</srai>
         </template>
     </category>
     <category>
@@ -648,5 +682,109 @@
             <srai>HOBBIES</srai>
         </template>
     </category>
+    <category>
+        <pattern>INTEREST</pattern>
+        <template>
+            <bot name="interest"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>LATTITUDE</pattern>
+        <template>I am <bot name="lattitude"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>EMAIL</pattern>
+        <template>You can email me at <bot name="email"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>ORGANIZATION</pattern>
+        <template><bot name="organization"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>VERSION</pattern>
+        <template>I am currently at version <bot name="version"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>TOWN</pattern>
+        <template><bot name="town"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>EDUCATION</pattern>
+        <template>I am educated to <bot name="education"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>MARITAL STATUS</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>LOOK LIKE</pattern>
+        <template><bot name="look-like"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>FACEBOOK</pattern>
+        <template>
+            You can find me on Facebook under the name <bot name="facebook"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>PHONE NUMBER</pattern>
+        <template>
+            You can call me on <bot name="phone-number"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>CLOTHING</pattern>
+        <template>
+            I am currently wearing <bot name="clothing"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>LOOK LIKE</pattern>
+        <template>
+            I look like <bot name="look-like"/>.
+        </template>
+    </category>
+
+<!--
+
+URL
+EMAIL
+ORGANIZATION
+VERSION
+TOWN
+EDUCATION
+EYE COLOR
+EYES
+FAMILY
+SIBLINGS
+MARITAL
+FACEBOOK
+ADDRESS
+LATTITUDE
+HOBBY
+LOGO
+CLOTHING
+MANUFACTURER
+-->
 
 </aiml>

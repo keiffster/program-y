@@ -5,6 +5,13 @@ brain:
     allow_learn_aiml: true
     allow_learnf_aiml: true
 
+    # These have not been added to the system yet
+    default-get: unknown
+    default-property: unknown
+    default-map: unknown
+    learn-filename: y-bot-learn.aiml
+    # These have not been added to the system yet
+
     pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
     template_nodes: $BOT_ROOT/config/template_nodes.conf
 
