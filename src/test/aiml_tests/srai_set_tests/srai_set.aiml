@@ -20,29 +20,18 @@ For more information see [url]
 <aiml>
 
 	<category>
-		<pattern>TEST MULTI SRAI * *</pattern>
-		<template>
-		    <srai>FIRST <star index="1"/></srai>
-		    <srai>SECOND <star index="2"/></srai>
-		</template>
-	</category>
+        <pattern>TEST SRAI SET</pattern>
+        <template>
+            <set var="abc"/>
+            <srai><get var="abc"/></srai>
+        </template>
+    </category>
 
 	<category>
-		<pattern>FIRST *</pattern>
-		<template>TEST1 <star/> TEST1</template>
-	</category>
-
-	<category>
-		<pattern>SECOND *</pattern>
-		<template>TEST2 <star/> TEST2</template>
-	</category>
-
-	<category>
-		<pattern>TEST INCLUDED SRAI * *</pattern>
-		<template>
-		    <srai>FIRST <star index="1"/> <srai>SECOND <star index="2"/></srai></srai>
-		</template>
-	</category>
-
+        <pattern>#</pattern>
+        <template>
+            BLANK RESPONSE
+        </template>
+    </category>
 
 </aiml>
