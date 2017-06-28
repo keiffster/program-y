@@ -110,6 +110,7 @@ class MatchContext(object):
             if match._match_type == type and \
                 ( match._matched_node.is_wildcard() or
                   match._matched_node.is_set() or
+                  match._matched_node.is_iset() or
                   match._matched_node.is_bot()):
                 if count == index:
                     return match.joined_words()

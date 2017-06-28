@@ -70,9 +70,11 @@ setup(
         'lxml',
         'wikipedia',
         'pyyaml',
+        'pylint',
+        'nose',
+        'coverage',
         'tweepy',
-        'sleekxmpp',
-        'fbmessenger'
+        'sleekxmpp'
     ],
     url=source,
     version=version,

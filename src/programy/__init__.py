@@ -19,14 +19,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
     programy
     ~~~~~~
-    AIML Interpreter for Python 2.x
+    AIML Interpreter for Python 3.x
     :copyright: (c) 2016-17 by Keith Sterling
     :license: MIT, see LICENSE for more details.
 """
 
 
 __copyright__ = 'Copyright 2016-17 by Keith Sterling'
-__version__ = '0.x.x'
+__version__ = '0.9.0'
 __license__ = 'MIT'
 __author__ = 'Keith Sterling'
 __email__ = 'keiffster@gmail.com'

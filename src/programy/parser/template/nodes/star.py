@@ -18,7 +18,6 @@ import logging
 
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
-#TODO If the index exceeds the number of stars then an exception is thrown, it should write an error and return None
 class TemplateStarNode(TemplateIndexedNode):
 
     def __init__(self, position=1, index=1):
@@ -35,9 +34,12 @@ class TemplateStarNode(TemplateIndexedNode):
                 logging.error("Star node has no matched context for clientid %s" % (clientid))
                 resolved = ""
 
-            resolved = matched_context.star(self.index)
-
-            if resolved is None:
+            try:
+                resolved = matched_context.star(self.index)
+                if resolved is None:
+                    logging.error("Star index not in range [%d]" % (self.index))
+                    resolved = ""
+            except:
                 logging.error("Star index not in range [%d]"%(self.index))
                 resolved = ""
 

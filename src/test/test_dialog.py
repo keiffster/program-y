@@ -142,8 +142,13 @@ class QuestionTests(unittest.TestCase):
     def test_next_previous_sentences(self):
         question = Question.create_from_text("Hello There. How Are you")
         self.assertEqual("How Are you", question.current_sentence().text())
-        # TODO This should be 1 and will need to be changed in the code too
-        self.assertEqual("Hello There", question.previous_sentence(2).text())
+        self.assertEqual("Hello There", question.previous_sentence().text())
+
+    def test_next_previous_nth_sentences(self):
+        question = Question.create_from_text("Hello There. How Are you")
+        self.assertEqual("How Are you", question.current_sentence().text())
+        self.assertEqual("Hello There", question.previous_nth_sentence(2).text())
+
 
 #############################################################################
 #

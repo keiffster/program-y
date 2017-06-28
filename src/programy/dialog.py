@@ -134,7 +134,13 @@ class Question(object):
         else:
             return self._sentences[-1]
 
-    def previous_sentence(self, num):
+    def previous_sentence(self):
+        if len(self._sentences) < 2:
+            raise Exception("Num sentence array violation !")
+        else:
+            return self._sentences[len(self._sentences)-2]
+
+    def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
             raise Exception("Num sentence array violation !")
         else:
