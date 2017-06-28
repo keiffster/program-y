@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016 Keith Sterling
+Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -36,11 +36,11 @@ class PatternTemplateNode(PatternNode):
     def can_add(self, new_node):
         if new_node.is_root():
             raise ParserException("Cannot add root node to template node")
-        if new_node.is_topic():
+        elif new_node.is_topic():
             raise ParserException("Cannot add topic node to template node")
-        if new_node.is_that():
+        elif new_node.is_that():
             raise ParserException("Cannot add that node to template node")
-        if new_node.is_template():
+        elif new_node.is_template():
             raise ParserException("Cannot add template node to template node")
 
     def equivalent(self, other):

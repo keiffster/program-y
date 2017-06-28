@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016 Keith Sterling
+Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -47,6 +47,13 @@ class TemplateMapNode(TemplateNode):
         else:
             return ""
 
+    def get_default_value(self, bot):
+        value = bot.brain.properties.property("default-map")
+        if value is None:
+            logging.error("No value for default-map defined, empty string returned")
+            value = ""
+        return value
+
     def resolve(self, bot, clientid):
         try:
             name = self.name.resolve(bot, clientid).upper()
@@ -56,22 +63,16 @@ class TemplateMapNode(TemplateNode):
                 map = self._internal_maps[name]
                 value = map.map(var)
             else:
-                the_map = bot.brain.maps.map(name)
-                if the_map is None:
-                    logging.error("No map defined for [%s], using default-map" % name)
-                    value = bot.brain.properties.property("default-map")
-                    if value is None:
-                        logging.error("No value for default-map defined, empty string returned")
-                        value = ""
+                if bot.brain.maps.contains(name) is False:
+                    logging.error("No map defined for [%s], using default-map as value" % var)
+                    value = self.get_default_value(bot)
                 else:
+                    the_map = bot.brain.maps.map(name)
                     if var in the_map:
                         value = the_map[var]
                     else:
-                        logging.error("No value defined [%s] in map [%s], using default-map" % (var, name))
-                        value = bot.brain.properties.property("default-map")
-                        if value is None:
-                            logging.error("No value for default-map defined, empty string returned")
-                            value = ""
+                        logging.error("No value defined for [%s], using default-map as value" % var)
+                        value = self.get_default_value(bot)
 
             logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
             return value

@@ -20,6 +20,8 @@ class TemplateSrNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
+        self.assertEqual("", node.resolve(self.bot, self.clientid))
+
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateSrNode()

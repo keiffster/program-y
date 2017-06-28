@@ -4,7 +4,11 @@ from programy.parser.exceptions import ParserException
 
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.topic import PatternTopicNode
+from programy.parser.pattern.nodes.that import PatternThatNode
 
 class PatternRootNodeTests(PatternTestBaseClass):
 
@@ -49,5 +53,47 @@ class PatternRootNodeTests(PatternTestBaseClass):
         with self.assertRaises(ParserException) as raised:
             node1.can_add(node2)
         self.assertTrue(str(raised.exception).startswith("Cannot add root node to child node"))
+
+    def test_root_to_root(self):
+        node1 = PatternRootNode()
+        node2 = PatternRootNode()
+
+        with self.assertRaises(ParserException) as raised:
+            node1.can_add(node2)
+        self.assertEqual(str(raised.exception), "Cannot add root node to existing root node")
+
+    def test_template_to_root(self):
+        node1 = PatternRootNode()
+        node2 = PatternTemplateNode(TemplateNode())
+
+        with self.assertRaises(ParserException) as raised:
+            node1.can_add(node2)
+        self.assertEqual(str(raised.exception), "Cannot add template node to root node")
+
+    def test_topic_to_root(self):
+        node1 = PatternRootNode()
+        node2 = PatternTopicNode()
+
+        with self.assertRaises(ParserException) as raised:
+            node1.can_add(node2)
+        self.assertEqual(str(raised.exception), "Cannot add topic node to root node")
+
+    def test_that_to_root(self):
+        node1 = PatternRootNode()
+        node2 = PatternThatNode()
+
+        with self.assertRaises(ParserException) as raised:
+            node1.can_add(node2)
+        self.assertEqual(str(raised.exception), "Cannot add that node to root node")
+
+    def test_multiple_templates(self):
+        node1 = PatternTemplateNode(TemplateNode())
+        node2 = PatternTemplateNode(TemplateNode())
+
+        with self.assertRaises(ParserException) as raised:
+            node1.can_add(node2)
+        self.assertEqual(str(raised.exception), "Cannot add template node to template node")
+
+
 
 

@@ -16,6 +16,8 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateMapNode()
+        self.assertEqual("", node.resolve_children(self.bot, self.clientid))
+
         node.name = TemplateWordNode("COLOURS")
         node.append(TemplateWordNode("BLACK"))
 
@@ -28,7 +30,61 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("WHITE", result)
 
-    def test_plural(self):
+    def test_no_var_defaultmap_set(self):
+        self.bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self.bot.brain.properties.add_property('default-map', "test_value")
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("COLOURS")
+        node.append(TemplateWordNode("UNKNOWN"))
+        root = TemplateNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("test_value", result)
+
+    def test_no_var_defaultmap_not_set(self):
+        self.bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("COLOURS")
+        node.append(TemplateWordNode("UNKNOWN"))
+        root = TemplateNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("", result)
+
+    def test_no_map_for_name_defaultmap_set(self):
+        self.bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self.bot.brain.properties.add_property('default-map', "test_value")
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("UNKNOWN")
+        node.append(TemplateWordNode("BLACK"))
+        root = TemplateNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("test_value", result)
+
+    def test_no_map_for_name_defaultmap_not_set(self):
+        self.bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+
+        node = TemplateMapNode()
+        node.name = TemplateWordNode("UNKNOWN")
+        node.append(TemplateWordNode("BLACK"))
+        root = TemplateNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("", result)
+
+    def test_internal_map_plural(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -45,7 +101,7 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("HORSES", result)
 
-    def test_singular(self):
+    def test_internal_map_singular(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -62,7 +118,7 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("HORSE", result)
 
-    def test_predecessor(self):
+    def test_internal_map_predecessor(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -79,7 +135,7 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("1", result)
 
-    def test_succesor(self):
+    def test_internal_map_succesor(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
