@@ -40,8 +40,7 @@ class TemplatePerson2Node(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<person2>"
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</person2>"
         return xml
 

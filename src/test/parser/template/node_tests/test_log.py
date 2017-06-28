@@ -3,10 +3,52 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.log import TemplateLogNode
 from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.exceptions import ParserException
 
 from test.parser.template.base import TemplateTestsBaseClass
 
 class TemplateLogNodeTests(TemplateTestsBaseClass):
+
+    def test_init(self):
+        log = TemplateLogNode()
+
+        log.level = "debug"
+        self.assertEqual("debug", log.level)
+        self.assertEqual("", log.resolve(None, None))
+
+        log.level = "warning"
+        self.assertEqual("warning", log.level)
+        self.assertEqual("", log.resolve(None, None))
+
+        log.level = "error"
+        self.assertEqual("error", log.level)
+        self.assertEqual("", log.resolve(None, None))
+
+        log.level = "info"
+        self.assertEqual("info", log.level)
+        self.assertEqual("", log.resolve(None, None))
+
+    def test_set_attrib(self):
+        log = TemplateLogNode()
+
+        log.set_attrib('level', 'debug')
+        self.assertEqual("debug", log.level)
+
+        log.set_attrib('level', 'warning')
+        self.assertEqual("warning", log.level)
+
+        log.set_attrib('level', 'error')
+        self.assertEqual("error", log.level)
+
+        log.set_attrib('level', 'info')
+        self.assertEqual("info", log.level)
+
+        with self.assertRaises(ParserException):
+            log.set_attrib('unknown', 'info')
+
+        with self.assertRaises(ParserException):
+            log.set_attrib('level', 'unknown')
+
 
     def test_node(self):
         root = TemplateNode()

@@ -41,8 +41,7 @@ class TemplateDenormalizeNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<denormalize>"
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</denormalize>"
         return xml
 

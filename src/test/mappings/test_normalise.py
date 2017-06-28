@@ -27,3 +27,6 @@ class NormaliseTests(unittest.TestCase):
 
         self.assertEqual(collection.normalise_string("That will be 24 %24"), "That will be 24 dollars")
         self.assertEqual(collection.normalise_string("You aren't him"), "You are not him")
+
+        self.assertEqual("(^aren t | aren t | aren t$)", collection.normalise(" aren t "))
+        self.assertIsNone(collection.normalise(" other "))

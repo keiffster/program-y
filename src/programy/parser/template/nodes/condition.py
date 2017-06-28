@@ -88,8 +88,7 @@ class TemplateConditionListItemNode(TemplateNode):
             xml += '<value>'
             xml += self.value.to_xml(bot, clientid)
             xml += '</value>'
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         if self.loop is True:
             xml += "<loop />"
         xml += '</li>'
@@ -390,8 +389,7 @@ class TemplateConditionNode(TemplateNode):
             xml += self.value.to_xml(bot, clientid)
             xml += '</value>'
 
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
 
         xml += "</condition>"
 

@@ -59,8 +59,7 @@ class TemplateExtensionNode(TemplateNode):
         xml = '<extension'
         xml += ' path="%s"' % self._path
         xml += '>'
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += '</extension>'
         return xml
 

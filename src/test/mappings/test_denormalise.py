@@ -29,3 +29,6 @@ class DenormaliseTests(unittest.TestCase):
 
         self.assertEqual(collection.denormalise_string("You are not him"), "You aren't him")
         self.assertEqual(collection.denormalise_string("keithsterling dot co dot uk"), "keithsterling.co.uk")
+
+        self.assertEqual("(^dot co | dot co | dot co$)", collection.denormalise(" dot co "))
+        self.assertIsNone(collection.denormalise(" dot cox "))

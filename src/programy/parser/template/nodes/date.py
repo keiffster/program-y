@@ -58,8 +58,7 @@ class TemplateDateNode(TemplateAttribNode):
 
     def to_xml(self, bot, clientid):
         xml = '<date format="%s" >' % self._format
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</date>"
         return xml
 

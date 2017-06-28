@@ -39,8 +39,7 @@ class TemplateThinkNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<think>"
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</think>"
         return xml
 

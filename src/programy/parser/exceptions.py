@@ -26,10 +26,6 @@ class ParserException(Exception):
     def message(self):
         return self._message
 
-    @message.setter
-    def message(self, message):
-        self._message = message
-
     @property
     def filename(self):
         return self._filename
@@ -73,11 +69,13 @@ class ParserException(Exception):
                                                        self._xml_element._end_column_number)
         return msg
 
+
 class DuplicateGrammarException(ParserException):
     def __init__(self, message, filename=None, xml_exception=None, xml_element=None):
         ParserException.__init__(self, message, filename=filename, xml_exception=xml_exception, xml_element=xml_element)
 
+
 class MatcherException(Exception):
     def __init__(self, message):
-        Exception.__init__(message)
+        Exception.__init__(self, message)
         self.message = message

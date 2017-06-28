@@ -60,8 +60,7 @@ class TemplateSRAIXNode(TemplateNode):
         if self._service is not None:
             xml += ' service="%s"' % self.service
         xml += '>'
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += '</sraix>'
         return xml
 

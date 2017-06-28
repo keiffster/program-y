@@ -71,8 +71,7 @@ class TemplateSystemNode(TemplateAttribNode):
         if self._timeout != 0:
             xml += ' timeout="%d"' % self._timeout
         xml += ">"
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</system>"
         return xml
 

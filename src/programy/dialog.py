@@ -189,7 +189,7 @@ class Conversation(object):
             question_num = len(self._questions)-num
             return self._questions[question_num]
         else:
-            raise Exception("Invalid question index")
+            raise Exception("Invalid question index [%d]"%num)
 
     def current_question(self):
         if len(self._questions) > 0:

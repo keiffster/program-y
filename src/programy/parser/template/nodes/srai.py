@@ -41,8 +41,7 @@ class TemplateSRAINode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<srai>"
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
+        xml += self.children_to_xml(bot, clientid)
         xml += "</srai>"
         return xml
 

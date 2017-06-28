@@ -57,25 +57,24 @@ class TemplateNode(object):
     def to_string(self):
         return "[NODE]"
 
-    def xml_tree(self, bot, clientid):
-        param = ["<template>"]
-        self.to_xml_children(param, bot, clientid)
-        param[0] += "</template>"
-        return ET.fromstring(param[0])
-
     def to_xml(self, bot, clientid):
-        xml = ""
-        for child in self.children:
-            xml += child.to_xml(bot, clientid)
-        return xml
+        return self.children_to_xml(bot, clientid)
 
-    def to_xml_children(self, param, bot, clientid):
+    def xml_tree(self, bot, clientid):
+        xml = "<template>"
+        xml += self.children_to_xml(bot, clientid)
+        xml += "</template>"
+        return ET.fromstring(xml)
+
+    def children_to_xml(self, bot, clientid):
+        xml = ""
         first = True
         for child in self.children:
-            if first is False:
-                param[0] += " "
-            param[0] += child.to_xml(bot, clientid)
+            if first is not True:
+                xml += " "
             first = False
+            xml += child.to_xml(bot, clientid)
+        return xml
 
     def parse_text(self, graph, text):
         if text is not None:
