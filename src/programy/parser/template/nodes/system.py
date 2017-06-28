@@ -17,10 +17,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import subprocess
 
-
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.atttrib import TemplateAttribNode
-
 
 
 class TemplateSystemNode(TemplateAttribNode):
