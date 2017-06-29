@@ -2,9 +2,10 @@ import unittest
 
 from programy.bot import Bot
 from programy.brain import Brain
-from test.custom import CustomAssertions
 from programy.config.brain import BrainConfiguration
 from programy.config.bot import BotConfiguration
+
+from test.custom import CustomAssertions
 
 class TestBot(Bot):
 

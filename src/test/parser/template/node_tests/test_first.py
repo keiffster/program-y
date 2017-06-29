@@ -41,3 +41,26 @@ class TemplateFirstNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><first>Word1 Word2</first></template>", xml_str)
+
+    def test_node_no_words(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateFirstNode()
+        self.assertIsNotNone(node)
+
+        root.append(node)
+
+        self.assertEqual(root.resolve(None, "clientid"), "NIL")
+
+    def test_to_xml_no_words(self):
+        root = TemplateNode()
+        node = TemplateFirstNode()
+        root.append(node)
+
+        xml = root.xml_tree(self.bot, self.clientid)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual("<template><first /></template>", xml_str)

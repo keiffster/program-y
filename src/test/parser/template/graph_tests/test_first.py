@@ -47,6 +47,6 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
             """)
         ast = self.parser.parse_template_expression(template)
 
-        self.assertEqual(ast.resolve(None, None), "")
+        self.assertEqual(ast.resolve(None, None), "NIL")
 
 

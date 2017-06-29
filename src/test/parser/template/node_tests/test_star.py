@@ -1,7 +1,10 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.star import TemplateStarNode
+from programy.dialog import Conversation, Question
+from programy.parser.pattern.matcher import MatchContext, Match
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.template.nodes.base import TemplateNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
@@ -19,6 +22,73 @@ class TemplateStarNodeTests(TemplateTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
+
+    def test_node_no_conversation(self):
+        root = TemplateNode()
+        node = TemplateStarNode()
+        root.append(node)
+
+        self.assertEqual("", root.resolve(self.bot,  self.clientid))
+
+    def test_node_no_question(self):
+        root = TemplateNode()
+        node = TemplateStarNode()
+        root.append(node)
+
+        conversation = Conversation("testid", self.bot)
+        self.bot._conversations["testid"] = conversation
+
+        self.assertEqual("", root.resolve(self.bot, self.clientid))
+
+    def test_node_no_sentences(self):
+        root = TemplateNode()
+        node = TemplateStarNode()
+        root.append(node)
+
+        conversation = Conversation("testid", self.bot)
+        question = Question()
+        conversation.record_dialog(question)
+        self.bot._conversations["testid"] = conversation
+
+        self.assertEqual("", root.resolve(self.bot, self.clientid))
+
+    def test_node_no_star(self):
+        root = TemplateNode()
+        node = TemplateStarNode()
+        root.append(node)
+
+        conversation = Conversation("testid", self.bot)
+        question = Question.create_from_text("Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+        question = Question.create_from_text("How are you")
+        question.current_sentence()._response = "Very well thanks"
+        conversation.record_dialog(question)
+        self.bot._conversations["testid"] = conversation
+
+        self.assertEqual("", root.resolve(self.bot, self.clientid))
+
+    def test_node_with_star(self):
+        root = TemplateNode()
+        node = TemplateStarNode()
+        root.append(node)
+
+        conversation = Conversation("testid", self.bot)
+        question = Question.create_from_text("Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+        question = Question.create_from_text("How are you")
+        question.current_sentence()._response = "Very well thanks"
+        conversation.record_dialog(question)
+        match = PatternOneOrMoreWildCardNode("*")
+        context = MatchContext()
+        context.add_match(Match(Match.WORD, match, "Matched"))
+        question.current_sentence()._matched_context = context
+
+        conversation.record_dialog(question)
+        self.bot._conversations["testid"] = conversation
+
+        self.assertEqual("Matched", root.resolve(self.bot, self.clientid))
 
     def test_to_xml_defaults(self):
         root = TemplateNode()

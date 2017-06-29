@@ -28,9 +28,12 @@ class TemplateRestNode(TemplateNode):
     def resolve(self, bot, clientid):
         try:
             result = self.resolve_children_to_string(bot, clientid)
-            words = result.split(" ")
-            if len(words) > 1:
-                resolved = " ".join(words[1:])
+            if result is not "":
+                words = result.split(" ")
+                if len(words) > 1:
+                    resolved = " ".join(words[1:])
+                else:
+                    resolved = "NIL"
             else:
                 resolved = "NIL"
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)

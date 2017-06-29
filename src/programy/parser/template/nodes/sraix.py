@@ -53,7 +53,10 @@ class TemplateSRAIXNode(TemplateNode):
             return ""
 
     def to_string(self):
-        return "SRAIX (service=%s)" % (self._service)
+        if self._service is not None:
+            return "SRAIX (service=%s)" % (self._service)
+        else:
+            return "SRAIX ()"
 
     def to_xml(self, bot, clientid):
         xml = '<sraix'

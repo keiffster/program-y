@@ -57,7 +57,8 @@ class ParserException(Exception):
             msg += " in [%s]" % self._filename
 
         if self._xml_exception is not None:
-            if str(self._xml_exception):
+            if isinstance(self._xml_exception, str):
+                msg += " : "
                 msg += self._xml_exception
             else:
                 msg += " at [line(%d), column(%d)]" % (self._xml_exception.position[0],

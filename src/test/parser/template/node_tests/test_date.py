@@ -6,9 +6,10 @@ from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.exceptions import ParserException
 
 from test.parser.template.base import TemplateTestsBaseClass
+from test.custom import CustomAssertions
 
 
-class TemplateDateNodeTests(TemplateTestsBaseClass):
+class TemplateDateNodeTests(TemplateTestsBaseClass, CustomAssertions):
 
     DEFAULT_DATETIME_REGEX = "^.{3}\s*.{3}\s*\d{1,}\s\d{2}:\d{2}:\d{2}\s\d{4}"
 

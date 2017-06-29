@@ -1,3 +1,19 @@
+"""
+Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
+
 import datetime, time
 
 class DateFormatter(object):
@@ -11,18 +27,27 @@ class DateFormatter(object):
         now = datetime.datetime.now()
         return datetime.datetime.strptime(now.strftime("%Y-%m-%d"), "%Y-%m-%d")
 
-    def __init__(self, weeks=0, days=0, hours=0, mins=0, secs=0):
+    def __init__(self, weeks=0, days=0, hours=0, minutes=0, seconds=0):
         self._time_now = datetime.datetime.now()
         if weeks > 0:
-            self._time_now += datetime.timedelta(days=days*7)
+            new_now = self._time_now + datetime.timedelta(days=weeks*7)
+            self._time_now = new_now
         if days > 0:
-            self._time_now += datetime.timedelta(days=days)
+            new_now = self._time_now + datetime.timedelta(days=days)
+            self._time_now = new_now
         if hours > 0:
-            self._time_now += datetime.timedelta(seconds=hours*60*60)
-        if mins > 0:
-            self._time_now += datetime.timedelta(seconds=mins*60)
-        if secs > 0:
-            self._time_now += datetime.timedelta(secs)
+            new_now = self._time_now + datetime.timedelta(seconds=hours*60*60)
+            self._time_now = new_now
+        if minutes > 0:
+            new_now = self._time_now + datetime.timedelta(seconds=minutes*60)
+            self._time_now = new_now
+        if seconds > 0:
+            new_now = self._time_now + datetime.timedelta(seconds=seconds)
+            self._time_now = new_now
+
+    @property
+    def time_now(self):
+        return self._time_now
 
     def abbreviated_weekday(self):
         return self._time_now.strftime("%a")

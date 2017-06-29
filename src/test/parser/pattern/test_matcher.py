@@ -4,8 +4,6 @@ from programy.parser.pattern.matcher import Match
 from programy.parser.pattern.matcher import MatchContext
 from programy.parser.pattern.matcher import EqualsMatch
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.template.nodes.base import TemplateNode
 
