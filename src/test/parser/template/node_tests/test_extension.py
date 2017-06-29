@@ -53,6 +53,14 @@ class TemplateExtensionNodeTests(TemplateTestsBaseClass):
 
         self.assertEqual(root.resolve(self.bot, self.clientid), "Test")
 
+    def test_node_invalid_class(self):
+        root = TemplateNode()
+        node = TemplateExtensionNode()
+        node.path = "test.parser.template.node_tests.test_extension.MockExtensionOther"
+        root.append(node)
+        self.assertEqual(root.resolve(self.bot, self.clientid), "")
+
+
     def test_to_xml(self):
         root = TemplateNode()
         self.assertIsNotNone(root)

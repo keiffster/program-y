@@ -18,7 +18,7 @@ import logging
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.services.service import ServiceFactory
-
+from programy.parser.exceptions import ParserException
 
 class TemplateSRAIXNode(TemplateNode):
 
@@ -107,5 +107,5 @@ class TemplateSRAIXNode(TemplateNode):
             self.parse_text(graph, tail_text)
 
         if self.service is None:
-            logging.warning("SRAIX node, service missing !")
+            raise ParserException("SRAIX node, service attribute missing !")
 

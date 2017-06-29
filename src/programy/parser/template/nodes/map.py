@@ -83,9 +83,6 @@ class TemplateMapNode(TemplateNode):
     def to_string(self):
         return "[MAP (%s)]" % (self.name.to_string())
 
-    def output(self, tabs="", output=logging.debug):
-        self.output_child(self, tabs, output=logging.debug)
-
     def to_xml(self, bot, clientid):
         xml = "<map "
         xml += ' name="%s"' % self.name.resolve(bot, clientid)

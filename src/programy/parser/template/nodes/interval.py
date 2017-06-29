@@ -155,7 +155,7 @@ class TemplateIntervalNode(TemplateNode):
                 node.parse_text(graph, self.get_text_from_element(child))
                 for sub_child in child:
                     graph.parse_tag_expression(sub_child, node)
-                    node.parse_text(self.get_text_from_element(child))
+                    node.parse_text(graph, self.get_text_from_element(child))
                 self.style = node
 
             elif child.tag == 'from':

@@ -14,13 +14,20 @@ class TemplateWordNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        root.append(TemplateWordNode("Hello"))
-        root.append(TemplateWordNode("World!"))
+        node1 = TemplateWordNode("Hello")
+        root.append(node1)
+        node2 =TemplateWordNode("World!")
+        root.append(node2)
         self.assertEqual(len(root.children), 2)
 
         resolved = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual(resolved, "Hello World!")
+
+        node2.word = "Again!"
+        resolved = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(resolved)
+        self.assertEqual(resolved, "Hello Again!")
 
     def test_to_xml(self):
         root = TemplateNode()

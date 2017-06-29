@@ -22,5 +22,5 @@ class TemplateAttribNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def set_attrib(self, attrib_name, attrib_value):
-        pass
+        raise NotImplemented("Should not call this base method, implementation missing")
 

@@ -1,8 +1,8 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
+from programy.parser.exceptions import ParserException
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -108,3 +108,21 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node.name, TemplateNode)
         self.assertEqual(get_node.name.resolve(None, None), "somevar")
         self.assertTrue(get_node.local)
+
+    def test_get_template_name_and_var(self):
+        template = ET.fromstring("""
+			<template>
+				<get name="somename" var="somevar" />
+			</template>
+			""")
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)
+
+    def test_get_template_other_than_name_and_var(self):
+        template = ET.fromstring("""
+			<template>
+				<get><id>somevar</id></get>
+			</template>
+			""")
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)

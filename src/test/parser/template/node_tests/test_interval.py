@@ -16,6 +16,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
+        self.assertEqual("[INTERVAL]", node.to_string())
         node.format = TemplateWordNode("%c")
         node.style = TemplateWordNode("years")
         node.interval_from = TemplateWordNode("Thu Oct 06 16:35:11 2014")
@@ -29,6 +30,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         response = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2")
+
 
     def test_node_months(self):
         root = TemplateNode()
@@ -156,6 +158,90 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(response)
         self.assertEqual(response, "2")
 
+    def test_node_microseconds(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateIntervalNode()
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("microseconds")
+        node.interval_from = TemplateWordNode("Thu Oct 7 16:35:09 2016")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:09 2016")
+
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        response = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "0")
+
+    def test_node_ymd(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateIntervalNode()
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("ymd")
+        node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        response = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "2 years, 2 months, 23 days")
+
+    def test_node_hms(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateIntervalNode()
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("hms")
+        node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        response = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "0 hours, 2 minutes, 2 seconds")
+
+    def test_node_unknown(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateIntervalNode()
+        node.format = TemplateWordNode("%c")
+        node.style = TemplateWordNode("unknown")
+        node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
+        node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
+
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        response = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "")
+
     def test_node_ymdhms(self):
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -176,6 +262,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         response = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2 years, 2 months, 23 days, 0 hours, 2 minutes, 2 seconds")
+
 
     def test_to_xml(self):
         root = TemplateNode()

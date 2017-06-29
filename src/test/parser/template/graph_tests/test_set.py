@@ -1,8 +1,8 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.set import TemplateSetNode
+from programy.parser.exceptions import ParserException
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -149,3 +149,20 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertEqual(len(set_node.children), 1)
         self.assertEqual(set_node.children[0].resolve(None, None), "Value4")
 
+    def test_set_name_and_var(self):
+        template = ET.fromstring("""
+                <template>
+                    <set name="somepred" var="somevar">Value1</set>
+                </template>
+                """)
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)
+
+    def test_set_no_name_or_var(self):
+        template = ET.fromstring("""
+                <template>
+                    <set>Value1</set>
+                </template>
+                """)
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)

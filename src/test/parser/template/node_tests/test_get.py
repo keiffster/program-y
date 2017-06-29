@@ -123,6 +123,7 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         node.local = False
         node.append(TemplateWordNode("Fred"))
         self.assertIsNotNone(node)
+        self.assertEqual("[GET [Global] - [WORD]name]", node.to_string())
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
@@ -133,3 +134,22 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
 
+    def test_global_no_name(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateGetNode()
+        node.append(TemplateWordNode("Fred"))
+        self.assertIsNotNone(node)
+        self.assertEqual("[GET [Global] - None]", node.to_string())
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self.bot.brain.properties.add_property("default-get", "unknown")
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEqual("", result)

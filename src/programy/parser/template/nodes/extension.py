@@ -41,12 +41,11 @@ class TemplateExtensionNode(TemplateNode):
             data = self.resolve_children_to_string(bot, clientid)
 
             new_class = ClassLoader.instantiate_class(self._path)
-            if new_class is not None:
-                instance = new_class()
-                resolved = instance.execute(bot, clientid, data)
+            instance = new_class()
+            resolved = instance.execute(bot, clientid, data)
 
-                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-                return resolved
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
 
         except Exception as excep:
             logging.exception(excep)

@@ -1,8 +1,8 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.map import TemplateMapNode
+from programy.parser.exceptions import ParserException
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -53,3 +53,11 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
         self.assertEqual(len(set_node.children), 1)
         self.assertEqual(set_node.children[0].resolve(None, None), "sometext")
 
+    def test_map_no_name(self):
+        template = ET.fromstring("""
+			<template>
+				<map>sometext</map>
+			</template>
+			""")
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)

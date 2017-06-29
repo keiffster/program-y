@@ -16,3 +16,6 @@ class TestSingularMaps(unittest.TestCase):
         map = SingularMap()
         self.assertEqual("CURL", map.map("CURLS"))
 
+    def test_plural_no_match(self):
+        map = SingularMap()
+        self.assertEqual("FISH", map.map("FISH"))

@@ -21,11 +21,11 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
 
         learn = TemplateLearnfNode()
         self.assertIsNotNone(learn)
-        learn._pattern = ET.fromstring("<pattern>HELLO LEARN</pattern>")
-        learn._topic = ET.fromstring("<topic>*</topic>")
-        learn._that = ET.fromstring("<that>*</that>")
-        learn._template = TemplateWordNode("LEARN")
-
+        learn_cat = LearnCategory(ET.fromstring("<pattern>HELLO LEARN</pattern>"),
+                                  ET.fromstring("<topic>*</topic>"),
+                                  ET.fromstring("<that>*</that>"),
+                                  TemplateWordNode("LEARN"))
+        learn.append(learn_cat)
         root.append(learn)
         self.assertEqual(1, len(root.children))
 

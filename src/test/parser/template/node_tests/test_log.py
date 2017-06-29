@@ -28,6 +28,10 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         self.assertEqual("info", log.level)
         self.assertEqual("", log.resolve(None, None))
 
+        log.level = "exception"
+        self.assertEqual("exception", log.level)
+        self.assertEqual("", log.resolve(None, None))
+
     def test_set_attrib(self):
         log = TemplateLogNode()
 
@@ -82,7 +86,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log._level = "debug"
+        log.level = "debug"
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -96,7 +100,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log._level = "error"
+        log.level = "error"
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -110,7 +114,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log._level = "info"
+        log.level = "info"
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -124,7 +128,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log._level = "warning"
+        log.level = "warning"
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -133,3 +137,17 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="warning">Log Test</log></template>', xml_str)
+
+    def test_to_xml_unknown(self):
+
+        root = TemplateNode()
+        log = TemplateLogNode()
+        log.level = None
+
+        log.append(TemplateWordNode("Log Test"))
+        root.append(log)
+
+        xml = root.xml_tree(self.bot, self.clientid)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual('<template><log>Log Test</log></template>', xml_str)

@@ -368,6 +368,7 @@ class PatternNode(object):
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._0ormore_arrow is not None:
             self._0ormore_arrow.dump(tabs+"\t", output_func, eol, verbose)
         if self._0ormore_hash is not None:
@@ -382,6 +383,7 @@ class PatternNode(object):
             self._that.dump(tabs+"\t", output_func, eol, verbose)
         if self._template is not None:
             self._template.dump(tabs+"\t", output_func, eol, verbose)
+
         for child in self.children:
             child.dump(tabs+"\t", output_func, eol, verbose)
 

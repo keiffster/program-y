@@ -87,9 +87,6 @@ class TemplateGetNode(TemplateNode):
             name = self.name.to_string()
         return "[GET [%s] - %s]" % ("Local" if self.local else "Global", name)
 
-    def output(self, tabs="", output=logging.debug):
-        self.output_child(self, tabs, output)
-
     def to_xml(self, bot, clientid):
         xml = "<get"
         if self.local:

@@ -8,6 +8,7 @@ from programy.config.brain import BrainConfiguration, BrainServiceConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+
 class MockService(Service):
 
     def __init__(self, config):

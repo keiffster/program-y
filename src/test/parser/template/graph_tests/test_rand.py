@@ -21,6 +21,17 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         with self.assertRaises(ParserException):
             ast = self.parser.parse_template_expression(template)
 
+    def test_random_template_none_li(self):
+        template = ET.fromstring("""
+            <template>
+                <random>
+                    <lowercase>FAIL</lowercase>
+                </random>
+            </template>
+            """)
+        with self.assertRaises(ParserException):
+            ast = self.parser.parse_template_expression(template)
+
     def test_random_template(self):
         template = ET.fromstring("""
 			<template>
