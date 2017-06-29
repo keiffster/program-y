@@ -8,6 +8,16 @@ from programy.utils.license.keys import LicenseKeys
 
 class LicenseKeyTests(unittest.TestCase):
 
+    def test_add_keys(self):
+        keys = LicenseKeys()
+        self.assertFalse(keys.has_key("KEY1"))
+        keys.add_key("KEY1", "VALUE1")
+        self.assertTrue(keys.has_key("KEY1"))
+        self.assertEqual("VALUE1", keys.get_key("KEY1"))
+        keys.add_key("KEY1", "VALUE2")
+        self.assertTrue(keys.has_key("KEY1"))
+        self.assertEqual("VALUE2", keys.get_key("KEY1"))
+
     def test_load_license_keys_data(self):
         keys = LicenseKeys()
         keys.load_license_key_data("""

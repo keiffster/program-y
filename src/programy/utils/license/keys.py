@@ -5,6 +5,11 @@ class LicenseKeys(object):
     def __init__(self):
         self._keys = {}
 
+    def add_key(self, name, value):
+        if name in self._keys:
+            logging.warning ("License key [%s], already exists"%name)
+        self._keys[name] = value
+
     def has_key(self, name):
         return bool(name in self._keys)
 
