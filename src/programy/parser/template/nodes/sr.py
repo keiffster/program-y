@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
 
 
 class TemplateSrNode(TemplateNode):
@@ -55,5 +56,5 @@ class TemplateSrNode(TemplateNode):
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if len(self.children) > 0:
-            logging.warning("<sr> node should not contains child text, use <sr /> or <sr></sr> only")
+            raise ParserException("<sr> node should not contains child text, use <sr /> or <sr></sr> only")
 

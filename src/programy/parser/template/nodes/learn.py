@@ -29,7 +29,7 @@ class LearnCategory(object):
         self._topic = topic
         self._that = that
         self._template = template
-        self.children = []
+        self._children = []
 
     @property
     def pattern(self):
@@ -62,6 +62,13 @@ class LearnCategory(object):
     @template.setter
     def template(self, template):
         self._template = template
+
+    @property
+    def children(self):
+        return self._children
+
+    def append(self, category):
+        self._children.append(category)
 
     def to_string(self):
         return "CATEGORY"
@@ -164,11 +171,9 @@ class TemplateLearnNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         for child in expression:
+            # TODO Handle case when its not a category
             if child.tag == 'category':
-
                 parsed = graph._aiml_parser.parse_category(child, add_to_graph=False)
-
                 learn_category = LearnCategory(parsed[0], parsed[1], parsed[2], parsed[3])
-
                 self.children.append(learn_category)
 

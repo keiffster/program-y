@@ -14,7 +14,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
 			<template>
 				<learn>
 				    <category>
-				        <pattern>HELLO <eval>WORLD</eval> THERE</pattern>
+				        <pattern>HELLO <eval>WORLD</eval> <iset>THERE, NOW</iset></pattern>
 				        <template>HIYA</template>
 				    </category>
 				</learn>

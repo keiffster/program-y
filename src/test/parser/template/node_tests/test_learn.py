@@ -1,10 +1,38 @@
 import xml.etree.ElementTree as ET
+import unittest
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import TemplateLearnNode, LearnCategory
 from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
+
+class TestLearnCategory(unittest.TestCase):
+
+    def test_init(self):
+        learncat = LearnCategory("pattern", "topic", "that", "template")
+        self.assertIsNotNone(learncat)
+        self.assertIsNotNone(learncat._pattern)
+        self.assertIsNotNone(learncat._topic)
+        self.assertIsNotNone(learncat._that)
+        self.assertIsNotNone(learncat._template)
+        self.assertIsNotNone(learncat.children)
+        self.assertEqual(0, len(learncat.children))
+
+        self.assertEqual("CATEGORY", learncat.to_string())
+
+        learncat.pattern = "pattern2"
+        self.assertEqual("pattern2", learncat.pattern)
+        learncat.topic = "topic2"
+        self.assertEqual("topic2", learncat.topic)
+        learncat.that = "that2"
+        self.assertEqual("that2", learncat.that)
+        learncat.template = "template2"
+        self.assertEqual("template2", learncat.template)
+
+        learncat.append("category1")
+        learncat.append("category2")
+        self.assertEqual(2, len(learncat.children))
 
 class TemplateLearnNodeTests(TemplateTestsBaseClass):
 

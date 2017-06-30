@@ -1,7 +1,7 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.sr import TemplateSrNode
+from programy.parser.exceptions import ParserException
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -20,3 +20,11 @@ class TemplateGraphSrTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateSrNode)
 
+    def test_size_with_children(self):
+        template = ET.fromstring("""
+			<template>
+				<sr>Something</sr>
+			</template>
+			""")
+        with self.assertRaises(ParserException):
+            root = self.parser.parse_template_expression(template)

@@ -8,7 +8,7 @@ from test.parser.template.graph_tests.graph_test_client import TemplateGraphTest
 
 class TemplateGraphUppercaseTests(TemplateGraphTestClient):
 
-    def test_denormize_node_from_xml(self):
+    def test_uppercase_node_from_xml(self):
         template = ET.fromstring("""
 			<template>
 				<uppercase>Text</uppercase>

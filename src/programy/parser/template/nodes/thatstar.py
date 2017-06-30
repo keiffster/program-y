@@ -31,9 +31,7 @@ class TemplateThatStarNode(TemplateIndexedNode):
             question = bot.get_conversation(clientid).nth_question(1)
             sentence = question.current_sentence()
             resolved = sentence.matched_context.thatstar(self.index)
-            if resolved is None:
-                logging.error("That Star index not in range [%d]" % (self.index))
-                resolved = ""
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)

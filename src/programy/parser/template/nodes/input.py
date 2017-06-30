@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
-
+from programy.parser.exceptions import ParserException
 
 
 ######################################################################################################################
@@ -59,5 +59,5 @@ class TemplateInputNode(TemplateIndexedNode):
     def parse_expression(self, graph, expression):
         self._parse_node_with_attrib(graph, expression, "index", "1")
         if len(self.children) > 0:
-            logging.warning("<input> node should not contains child text, use <input /> or <input></input> only")
+            raise ParserException("<input> node should not contains child text, use <input /> or <input></input> only")
 
