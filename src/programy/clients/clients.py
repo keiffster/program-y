@@ -16,63 +16,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import os
-import argparse
 import logging
 import logging.config
 import yaml
 
 from programy.config.file.factory import ConfigurationFactory
 from programy.config.client.client import ClientConfiguration
+from programy.clients.args import CommandLineClientArguments
 from programy.bot import Bot
 from programy.brain import Brain
 
-class ClientArguments(object):
-
-    def __init__(self, client):
-        self.args = None
-        self.add_arguments(client)
-
-    def add_arguments(self, client):
-        self.parser = argparse.ArgumentParser(description=client.get_description())
-        self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')
-        self.parser.add_argument('--config', dest='config', help='configuration file location')
-        self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
-        self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
-        self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
-        client.add_client_arguments(self.parser)
-
-    def parse_args(self):
-        self.args = self.parser.parse_args()
-
-    @property
-    def bot_root(self):
-        return self.args.bot_root
-
-    @bot_root.setter
-    def bot_root(self, root):
-        self.args.bot_root = root
-
-    @property
-    def logging(self):
-        return self.args.logging
-
-    @property
-    def config_filename(self):
-        return self.args.config
-
-    @property
-    def config_format(self):
-        return self.args.cformat
-
-    @property
-    def noloop(self):
-        return self.args.noloop
-
-
 class BotClient(object):
 
-    def __init__(self):
-        self._arguments = self.parse_arguements()
+    def __init__(self, argument_parser=None):
+        self._arguments = self.parse_arguments(argument_parser=argument_parser)
         self.initiate_logging(self.arguments)
         self.load_configuration(self.arguments)
         self.initiate_bot(self.configuration)
@@ -84,12 +41,12 @@ class BotClient(object):
     def get_description(self):
         return 'ProgramY AIML2.0 Console Client'
 
-    def add_client_arguments(self, parser):
+    def add_client_arguments(self, parser=None):
         # Nothing to add
         pass
 
-    def parse_arguements(self):
-        client_args = ClientArguments(self)
+    def parse_arguments(self, argument_parser):
+        client_args = CommandLineClientArguments(self, parser=argument_parser)
         client_args.parse_args()
         return client_args
 
@@ -112,13 +69,19 @@ class BotClient(object):
 
     def load_configuration(self, arguments):
         if arguments.bot_root is None:
-            arguments.bot_root = os.path.dirname(arguments.config_filename)
+            if arguments.config_filename is not None:
+                arguments.bot_root = os.path.dirname(arguments.config_filename)
+            else:
+                arguments.bot_root = "."
             print("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
 
         self.configuration = self.get_client_configuration()
 
-        ConfigurationFactory.load_configuration_from_file(self.configuration, arguments.config_filename,
-                                                          arguments.config_format, arguments.bot_root)
+        if arguments.config_filename is not None:
+            ConfigurationFactory.load_configuration_from_file(self.configuration, arguments.config_filename,
+                                                              arguments.config_format, arguments.bot_root)
+        else:
+            print ("No configuration file specified, using defaults only !")
 
     def initiate_bot(self, configuration):
         self._brain = Brain(configuration.brain_configuration)

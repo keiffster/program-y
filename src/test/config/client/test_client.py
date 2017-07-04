@@ -137,16 +137,6 @@ class ClientConfigurationTests(unittest.TestCase):
             yaml.load_from_text("""
             """, ".")
 
-    def test_init_with_empty_sections(self):
-        with self.assertRaises(Exception):
-            client_config = ClientConfiguration()
-            yaml = YamlConfigurationFile(client_config)
-            self.assertIsNotNone(yaml)
-            yaml.load_from_text("""
-        brain:
-          files:
-            """, ".")
-
     def test_init_with_files_only(self):
         client_config = ClientConfiguration()
         yaml = YamlConfigurationFile(client_config)
@@ -198,16 +188,4 @@ class ClientConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(client_config.brain_configuration._services)
         self.assertEqual(0, len(client_config.brain_configuration._services))
-
-    def test_init_with_brain_empty_children(self):
-        with self.assertRaises(Exception):
-            client_config = ClientConfiguration()
-            yaml = YamlConfigurationFile(client_config)
-            self.assertIsNotNone(yaml)
-            yaml.load_from_text("""
-            brain:
-                files:
-                services:
-            bot:
-            """, ".")
 

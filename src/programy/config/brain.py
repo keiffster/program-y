@@ -176,8 +176,7 @@ class BrainConfiguration(BaseConfigurationData):
                 self._preprocessors = self._get_file_option(config_file, "preprocessors", files, bot_root)
                 self._postprocessors = self._get_file_option(config_file, "postprocessors", files, bot_root)
             else:
-                logging.warning("Config section [files] missing from Brain, default values not appropriate")
-                raise Exception ("Config section [files] missing from Brain")
+                logging.error("Config section [files] missing from Brain, default values not appropriate")
 
             services = config_file.get_section("services", brain)
             if services is not None:

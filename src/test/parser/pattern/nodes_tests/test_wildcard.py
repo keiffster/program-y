@@ -55,9 +55,9 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
 
         wildcard = MockPatternWildCardNode("*")
         self.assertIsNotNone(wildcard)
+
         context = MatchContext()
         sentence = Sentence("TEST SENTENCE")
-
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNone(match)
 
@@ -70,11 +70,13 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
 
         context = MatchContext()
         sentence = Sentence("TEST SENTENCE")
-
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        # TODO Test Add test for just "TEST" as this is zero or more
+        context = MatchContext()
+        sentence = Sentence("TEST")
+        match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
+        self.assertIsNotNone(match)
 
     def test_check_child_is_wildcard_arrow(self):
 
@@ -85,11 +87,13 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
 
         context = MatchContext()
         sentence = Sentence("TEST SENTENCE")
-
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        # TODO Test Add test for just "TEST" as this is zero or more
+        context = MatchContext()
+        sentence = Sentence("TEST")
+        match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
+        self.assertIsNotNone(match)
 
     def test_check_child_is_wildcard_star(self):
 
@@ -100,11 +104,13 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
 
         context = MatchContext()
         sentence = Sentence("TEST SENTENCE")
-
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-    # TODO Test Add test for just "TEST" as this is one or more
+        context = MatchContext()
+        sentence = Sentence("TEST")
+        match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0, Match.WORD, 0)
+        self.assertIsNone(match)
 
     def test_check_child_is_wildcard_underline(self):
 
@@ -115,9 +121,11 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
 
         context = MatchContext()
         sentence = Sentence("TEST SENTENCE")
-
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        # TODO Test Add test for just "TEST" as this is pne or more
+        context = MatchContext()
+        sentence = Sentence("TEST")
+        match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
+        self.assertIsNone(match)
 

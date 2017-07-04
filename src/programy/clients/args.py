@@ -1,0 +1,72 @@
+import argparse
+import logging
+import logging.config
+
+class ClientArguments(object):
+
+    DEFAULT_BOT_ROOT = "."
+    DEFAULT_LOGGING = logging.DEBUG
+    DEFAULT_CONFIG_NAME = "config.yaml"
+    DEFAULT_CONFIG_FORMAT = "yaml:"
+    DEFAULT_NOLOOP = False
+
+    def __init__(self, client, parser=None):
+        self._bot_root = ClientArguments.DEFAULT_BOT_ROOT
+        self._logging = ClientArguments.DEFAULT_LOGGING
+        self._config_name = ClientArguments.DEFAULT_CONFIG_NAME
+        self._config_format = ClientArguments.DEFAULT_CONFIG_FORMAT
+        self._no_loop = ClientArguments.DEFAULT_NOLOOP
+
+    def parse_args(self):
+        pass
+
+    @property
+    def bot_root(self):
+        return self._bot_root
+
+    @bot_root.setter
+    def bot_root(self, root):
+        self._bot_root = root
+
+    @property
+    def logging(self):
+        return self._logging
+
+    @property
+    def config_filename(self):
+        return self._config_name
+
+    @property
+    def config_format(self):
+        return self._config_format
+
+    @property
+    def noloop(self):
+        return self._no_loop
+
+
+class CommandLineClientArguments(ClientArguments):
+
+    def __init__(self, client, parser=None):
+        ClientArguments.__init__(self, client)
+
+        if parser is None:
+            self.parser = argparse.ArgumentParser(description=client.get_description())
+        else:
+            self.parser = parser
+        self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')
+        self.parser.add_argument('--config', dest='config', help='configuration file location')
+        self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
+        self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
+        self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
+        client.add_client_arguments(self.parser)
+
+    def parse_args(self):
+        self.args = self.parser.parse_args()
+
+        self._bot_root = self.args.bot_root
+        self._logging = self.args.logging
+        self._config_name = self.args.config
+        self._config_format = self.args.cformat
+        self._no_loop = self.args.noloop
+

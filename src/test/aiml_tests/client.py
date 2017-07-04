@@ -12,7 +12,7 @@ class TestClient(BotClient):
             logging.getLogger().setLevel(level)
         BotClient.__init__(self)
 
-    def parse_arguements(self):
+    def parse_arguments(self, argument_parser):
         client_args = {}
         return client_args
 
