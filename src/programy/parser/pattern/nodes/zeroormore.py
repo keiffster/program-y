@@ -19,9 +19,7 @@ import logging
 from programy.utils.text.text import TextUtils
 
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
-from programy.parser.pattern.matcher import Match, EqualsMatch
-from programy.parser.pattern.nodes.topic import PatternTopicNode
-from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.matcher import Match
 
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
@@ -57,36 +55,16 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         tabs = TextUtils.get_tabs(word_no)
 
         if depth > context.max_search_depth:
-            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
             return None
 
         context_match = Match(type, self, None)
         context.add_match(context_match)
         matches_added = 1
 
-        if self._0ormore_hash is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(tabs))
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type, depth+1)
-            if match is not None:
-                return match
-
-        if self._1ormore_underline is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(tabs))
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type, depth+1)
-            if match is not None:
-                return match
-
-        if self._0ormore_arrow is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(tabs))
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type, depth+1)
-            if match is not None:
-                return match
-
-        if self._1ormore_star is not None:
-            logging.debug("%sWildcard is next node, moving on!"%(tabs))
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type, depth+1)
-            if match is not None:
-                return match
+        match = self.check_child_is_wildcard(tabs, bot, clientid, context, words, word_no, type, depth)
+        if match is not None:
+            return match
 
         # TODO Add priority words first
 
@@ -109,14 +87,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     if match is not None:
                         return match
 
-                    if word == PatternTopicNode.TOPIC :
-                        logging.debug ("%sFound a topic at the wrong place...."%tabs)
-                        context.pop_matches(matches_added)
-                        return None
-
-                    if word == PatternThatNode.THAT:
-                        logging.debug("%sFound a that at the wrong place...."%tabs)
-                        context.pop_matches(matches_added)
+                    if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                         return None
 
             logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
@@ -129,14 +100,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-            if word == PatternTopicNode.TOPIC:
-                logging.debug("%sFound a topic at the wrong place...."%tabs)
-                context.pop_matches(matches_added)
-                return None
-
-            if word == PatternThatNode.THAT:
-                logging.debug("%sFound a that at the wrong place...."%tabs)
-                context.pop_matches(matches_added)
+            if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
             logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
@@ -158,24 +122,20 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             if match is not None:
                 return match
 
-            if word == PatternTopicNode.TOPIC:
-                logging.debug("%sFound a topic at the wrong place...."%tabs)
-                context.pop_matches(matches_added)
+            if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
-            if word == PatternThatNode.THAT:
-                logging.debug("%sFound a that at the wrong place...."%tabs)
-                context.pop_matches(matches_added)
-                return None
-
-            logging.debug("%s*MATCH -> %s" % (tabs, word))
+            logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
             context_match.add_word(word)
 
             word_no += 1
             word = words.word(word_no)
-            logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
 
-        match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
+        #match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
+        if word_no == words.num_words()-1:
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
+        else:
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
 
         if match is not None:
             return match

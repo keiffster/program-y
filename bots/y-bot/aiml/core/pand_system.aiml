@@ -36,7 +36,6 @@
         <pattern>BRAIN BUILD</pattern>
         <template>
             <program>
-                <info>build</info>
             </program>
         </template>
     </category>
