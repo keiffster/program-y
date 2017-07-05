@@ -93,7 +93,7 @@ class AIMLParser(object):
                                                            brain_configuration.aiml_files.extension)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+        logging.info("Total processing time %.6f secs" % diff.total_seconds())
         logging.info("Loaded a total of %d aiml files with %d categories" % (len(aimls_loaded), self.num_categories))
         if diff.total_seconds() > 0:
             logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
@@ -103,7 +103,7 @@ class AIMLParser(object):
         self._aiml_loader.load_single_file_contents(brain_configuration.aiml_files.file)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Total processing time %f.2 secs" % diff.total_seconds())
+        logging.info("Total processing time %.6f secs" % diff.total_seconds())
         logging.info("Loaded a single aiml file with %d categories" % (self.num_categories))
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
@@ -147,7 +147,11 @@ class AIMLParser(object):
             if aiml is None or aiml.tag != 'aiml':
                 raise ParserException("Error, root tag is not <aiml>", filename=filename)
             else:
-                self.parse_aiml(aiml, filename)
+                start = datetime.datetime.now()
+                num_categories = self.parse_aiml(aiml, filename)
+                stop = datetime.datetime.now()
+                diff = stop - start
+                logging.info("Processed %s with %d categories in %f.2 secs" %(filename, num_categories, diff.total_seconds()))
         except Exception as e:
             logging.exception(e)
             logging.error("Failed to load contents of AIML file from [%s] - [%s]"%(filename, e))
@@ -201,10 +205,12 @@ class AIMLParser(object):
         self.parse_version(aiml_xml)
 
         categories_found = False
+        num_category = 0
         for expression in aiml_xml:
             if expression.tag == 'topic':
                 try:
-                    self.parse_topic(expression)
+                    num_topic_categories = self.parse_topic(expression)
+                    num_category += num_topic_categories
                     categories_found = True
 
                 except DuplicateGrammarException as dupe_excep:
@@ -217,6 +223,7 @@ class AIMLParser(object):
                 try:
                     self.parse_category(expression)
                     categories_found = True
+                    num_category += 1
 
                 except DuplicateGrammarException as dupe_excep:
                     self.handle_aiml_duplicate(dupe_excep, filename)
@@ -229,6 +236,8 @@ class AIMLParser(object):
 
         if categories_found is False:
             logging.warning("no categories in aiml file")
+
+        return num_category
 
     #########################################################################################
     #
@@ -274,15 +283,19 @@ class AIMLParser(object):
             raise ParserException("Error, missing name attribute for topic", xml_element=topic_element)
 
         category_found = False
+        num_category = 0
         for child in topic_element:
             if child.tag == 'category':
                 self.parse_category(child, topic_pattern)
                 category_found = True
+                num_category += 1
             else:
                 raise ParserException("Error unknown child node of topic, %s" % child.tag, xml_element=topic_element)
 
         if category_found is False:
             raise ParserException("Error, no categories in topic", xml_element=topic_element)
+
+        return num_category
 
     def find_topic(self, category_xml, topic_element=None):
         topics = category_xml.findall('topic')

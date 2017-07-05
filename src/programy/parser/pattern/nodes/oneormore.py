@@ -53,7 +53,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        tabs = TextUtils.get_tabs(word_no)
+        tabs = TextUtils.get_tabs(depth)
 
         if depth > context.max_search_depth:
             logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))

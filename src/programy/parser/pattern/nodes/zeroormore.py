@@ -52,7 +52,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        tabs = TextUtils.get_tabs(word_no)
+        tabs = TextUtils.get_tabs(depth)
 
         if depth > context.max_search_depth:
             logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
@@ -131,7 +131,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-        #match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
         if word_no == words.num_words()-1:
             match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
         else:

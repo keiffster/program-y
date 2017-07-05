@@ -15,8 +15,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import os.path
-import xml.etree.ElementTree as ET
+
+try:
+    import _pickle as pickle
+except:
+    import pickle
+import gc
 
 from programy.processors.processing import ProcessorLoader
 from programy.config.brain import BrainConfiguration
@@ -33,6 +37,7 @@ from programy.mappings.triples import TriplesCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.utils.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
+import datetime
 
 class Brain(object):
 
@@ -118,8 +123,45 @@ class Brain(object):
         return self._postprocessors
 
     def load(self, brain_configuration: BrainConfiguration):
-        self._aiml_parser.load_aiml(brain_configuration)
+
+        load_aiml = True
+        if brain_configuration.load_binary is True:
+            logging.info("Loading binary brain from [%s]"%brain_configuration.binary_filename)
+            try:
+                start = datetime.datetime.now()
+                gc.disable()
+                f = open(brain_configuration.binary_filename, "rb")
+                self._aiml_parser = pickle.load(f)
+                gc.enable()
+                f.close()
+                stop = datetime.datetime.now()
+                diff = stop - start
+                logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
+                load_aiml = False
+            except Exception as e:
+                logging.exception(e)
+                if brain_configuration.load_aiml_on_binary_fail is True:
+                    load_aiml = True
+                else:
+                    raise e
+
+        if load_aiml is True:
+            logging.info("Loading aiml source brain")
+            self._aiml_parser.load_aiml(brain_configuration)
+
+        if brain_configuration.save_binary is True:
+            logging.info("Saving binary brain to [%s]"%brain_configuration.binary_filename)
+            start = datetime.datetime.now()
+            f = open(brain_configuration.binary_filename, "wb")
+            pickle.dump(self._aiml_parser, f)
+            f.close()
+            stop = datetime.datetime.now()
+            diff = stop - start
+            logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
+
+        logging.info("Loading collections")
         self.load_collections(brain_configuration)
+        logging.info("Loading services")
         self.load_services(brain_configuration)
 
     def _load_denormals(self, brain_configuration):

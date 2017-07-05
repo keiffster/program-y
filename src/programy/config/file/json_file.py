@@ -57,4 +57,24 @@ class JSONConfigurationFile(BaseConfigurationFile):
             logging.warning("Missing value for [%s] in config , return default value %s", option_name, missing_value)
             return missing_value
 
+    def get_bool_option(self, section, option_name, missing_value=False):
+        if option_name in section:
+            value = section[option_name]
+            if isinstance(value, bool):
+                return bool(value)
+            else:
+                raise Exception("Invalid boolean config value")
+        else:
+            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            return missing_value
 
+    def get_int_option(self, section, option_name, missing_value=0):
+        if option_name in section:
+            value = section[option_name]
+            if isinstance(value, int):
+                return int(value)
+            else:
+                raise Exception("Invalid integer config value")
+        else:
+            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            return missing_value

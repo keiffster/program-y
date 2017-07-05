@@ -18,6 +18,7 @@ import logging
 
 from programy.utils.text.text import TextUtils
 from programy.parser.pattern.matcher import Match, EqualsMatch
+import datetime
 
 #######################################################################################################################
 #
@@ -34,6 +35,9 @@ class PatternNode(object):
         self._1ormore_underline = None
         self._children = []
         self._children_words = {}
+        self._iset_names = {}
+        self._set_names = {}
+        self._bot_properties = {}
         self._0ormore_arrow = None
         self._1ormore_star = None
 
@@ -234,7 +238,7 @@ class PatternNode(object):
                 # Equivalent node already exists, use this one instead
                 return priority
 
-        if new_node.is_zero_or_more():
+        if new_node.is_zero_or_more() is True:
             if self._0ormore_arrow is not None:
                 if self._0ormore_arrow.equivalent(new_node):
                     return self._0ormore_arrow
@@ -242,7 +246,7 @@ class PatternNode(object):
                 if self._0ormore_hash.equivalent(new_node):
                     return self._0ormore_hash
 
-        if new_node.is_one_or_more():
+        if new_node.is_one_or_more() is True:
             if self._1ormore_underline is not None:
                 if self._1ormore_underline.equivalent(new_node):
                     return self._1ormore_underline
@@ -250,7 +254,7 @@ class PatternNode(object):
                 if self._1ormore_star.equivalent(new_node):
                     return self._1ormore_star
 
-        if new_node.is_topic():
+        if new_node.is_topic() is True:
             if self._topic is not None:
                 if self._topic.equivalent(new_node):
                     return self._topic
@@ -260,29 +264,51 @@ class PatternNode(object):
                 if self._that.equivalent(new_node):
                     return self._that
 
+        if new_node.is_iset() is True:
+            return None
+
+        if new_node.is_set() is True:
+            if new_node.set_name in self._set_names:
+                existing_node = self._set_names[new_node.set_name]
+                if existing_node.is_word:
+                    if existing_node.equivalent(new_node):
+                        # Equivalent node already exists, use this one instead
+                        return existing_node
+
+        if new_node.is_bot() is True:
+            if new_node.property in self._bot_properties:
+                existing_node = self._bot_properties[new_node.property]
+                if existing_node.is_word:
+                    if existing_node.equivalent(new_node):
+                        # Equivalent node already exists, use this one instead
+                        return existing_node
+        """
+        # TODO Test for set and word with the same name
+        # Will fail, need to store sets and words in different containers
         if new_node.is_set:
             for node in self._children:
                 if node.is_set:
                     if node.equivalent(new_node):
                         # Equivalent node already exists, use this one instead
                         return node
-
-        if new_node.is_iset:
-            return None
-
+        
+        # TODO Test for bot and word with the same name
+        # Will fail, need to store bots and words in different containers
         if new_node.is_bot:
             for node in self._children:
                 if node.is_bot:
                     if node.equivalent(new_node):
                         # Equivalent node already exists, use this one instead
                         return node
+        """
 
-        if new_node.is_word:
-            for node in self._children:
-                if node.is_word:
-                    if node.equivalent(new_node):
+        if new_node.is_word():
+            if new_node.word in self._children_words:
+                existing_node = self._children_words[new_node.word]
+                if existing_node.is_word:
+                    if existing_node.equivalent(new_node):
                         # Equivalent node already exists, use this one instead
-                        return node
+                        return existing_node
 
         return None
 
@@ -313,13 +339,13 @@ class PatternNode(object):
             # it still gets picked up in the first grammar and not he second
             if new_node.is_set():
                 self.children.append(new_node)
-                self._children_words[new_node.set_name] = new_node
+                self._set_names[new_node.set_name] = new_node
             elif new_node.is_iset():
                 self.children.append(new_node)
-                self._children_words[new_node.iset_name] = new_node
+                self._iset_names[new_node.iset_name] = new_node
             elif new_node.is_bot():
                self.children.append(new_node)
-               self._children_words[new_node.property] = new_node
+               self._bot_properties[new_node.property] = new_node
             else:
                 self.children.insert(0, new_node)
                 if new_node.is_word():
@@ -338,7 +364,8 @@ class PatternNode(object):
             return exists
 
         # Otherwise add the new node to the appropriate container
-        return self._add_node(new_node)
+        result = self._add_node(new_node)
+        return result
 
     def _child_count(self, verbose=True):
         if verbose is True:
@@ -387,9 +414,33 @@ class PatternNode(object):
         for child in self.children:
             child.dump(tabs+"\t", output_func, eol, verbose)
 
+    def match_children(self, bot, clientid, children, child_type, words, word_no, context, type, depth):
+
+        tabs = TextUtils.get_tabs(depth)
+
+        for child in children:
+
+            result = child.equals(bot, clientid, words, word_no)
+            if result.matched is True:
+                word_no = result.word_no
+                logging.debug("%s%s matched %s" % (tabs, child_type, result.matched_phrase))
+
+                match_node = Match(type, child, result.matched_phrase)
+
+                context.add_match(match_node)
+
+                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
+                if match is not None:
+                    logging.debug("%sMatched %s child, success!" % (tabs, child_type))
+                    return match, word_no
+                else:
+                    context.pop_match ()
+
+        return None, word_no
+
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        tabs = TextUtils.get_tabs(word_no)
+        tabs = TextUtils.get_tabs(depth)
 
         if depth > context.max_search_depth:
             logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
@@ -422,23 +473,9 @@ class PatternNode(object):
                 logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternNode.THAT))
                 return None
 
-        for child in self._priority_words:
-
-            result= child.equals(bot, clientid, words, word_no)
-            if result.matched is True:
-                word_no = result.word_no
-                logging.debug("%sPriority matched %s" % (tabs, result.matched_phrase))
-
-                match_node = Match(type, child, result.matched_phrase)
-
-                context.add_match(match_node)
-
-                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
-                if match is not None:
-                    logging.debug("%sMatched child, success!" % (tabs))
-                    return match
-                else:
-                    context.pop_match ()
+        match, word_no = self.match_children(bot, clientid, self._priority_words, "Priority", words, word_no, context, type, depth)
+        if match is not None:
+            return match
 
         if self._0ormore_hash is not None:
             match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type, depth+1)
@@ -452,23 +489,9 @@ class PatternNode(object):
                 logging.debug("%sMatched 1 or more underline, success!" % (tabs))
                 return match
 
-        for child in self._children:
-
-            result = child.equals(bot, clientid, words, word_no)
-            if result.matched is True:
-                word_no = result.word_no
-                logging.debug("%sChild matched %s" % (tabs, result.matched_phrase))
-
-                match_node = Match(type, child, result.matched_phrase)
-
-                context.add_match(match_node)
-
-                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
-                if match is not None:
-                    logging.debug("%sMatched child, success!" % (tabs))
-                    return match
-                else:
-                    context.pop_match ()
+        match, word_no = self.match_children(bot, clientid, self._children, "Word", words, word_no, context, type, depth)
+        if match is not None:
+            return match
 
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type, depth+1)

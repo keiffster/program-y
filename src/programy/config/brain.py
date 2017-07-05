@@ -106,9 +106,17 @@ class BrainConfiguration(BaseConfigurationData):
         self._allow_system_aiml = BrainConfiguration.DEFAULT_ALLOW_SYSTEM_AIML
         self._allow_learn_aiml  = BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML
         self._allow_learnf_aiml = BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML
+
         self._pattern_nodes     = None
         self._template_nodes    = None
+
         self._dump_to_file      = None
+
+        self._save_binary       = None
+        self._load_binary       = None
+        self._binary_filename   = None
+        self._load_aiml_on_binary_fail = None
+
         self._aiml_files        = None
         self._set_files         = None
         self._map_files         = None
@@ -123,7 +131,9 @@ class BrainConfiguration(BaseConfigurationData):
         self._triples           = None
         self._preprocessors     = None
         self._postprocessors    = None
+
         self._services = []
+
         BaseConfigurationData.__init__(self, "brain")
 
     def _get_brain_file_configuration(self, config_file, section, bot_root):
@@ -149,9 +159,16 @@ class BrainConfiguration(BaseConfigurationData):
             self._allow_learn_aiml = config_file.get_option(brain, "allow_learn_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARN_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
             self._allow_learnf_aiml = config_file.get_option(brain, "allow_learnf_aiml", BrainConfiguration.DEFAULT_ALLOW_LEARNF_AIML)
+
             self._pattern_nodes = config_file.get_option(brain, "pattern_nodes", missing_value=None)
             self._template_nodes = config_file.get_option(brain, "template_nodes", missing_value=None)
+
             self._dump_to_file = config_file.get_option(brain, "dump_to_file", missing_value=None)
+
+            self._save_binary = config_file.get_bool_option(brain, "save_binary", missing_value=False)
+            self._load_binary = config_file.get_bool_option(brain, "load_binary", missing_value=False)
+            self._binary_filename = config_file.get_option(brain, "binary_filename", missing_value=None)
+            self._load_aiml_on_binary_fail = config_file.get_bool_option(brain, "load_aiml_on_binary_fail", missing_value=False)
 
             files = config_file.get_section("files", brain)
             if files is not None:
@@ -221,6 +238,22 @@ class BrainConfiguration(BaseConfigurationData):
     @property
     def dump_to_file(self):
         return self._dump_to_file
+
+    @property
+    def save_binary(self):
+        return self._save_binary
+
+    @property
+    def load_binary(self):
+        return self._load_binary
+
+    @property
+    def binary_filename(self):
+        return self._binary_filename
+
+    @property
+    def load_aiml_on_binary_fail(self):
+        return self._load_aiml_on_binary_fail
 
     @property
     def aiml_files(self):

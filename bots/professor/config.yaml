@@ -7,6 +7,11 @@ brain:
 
     #dump_to_file: /tmp/professor_braintree.txt
 
+    save_binary: false
+    load_binary: false
+    binary_filename: /tmp/professor.brain
+    load_aiml_on_binary_fail: false
+
     files:
         aiml:
              files: $BOT_ROOT/aiml
