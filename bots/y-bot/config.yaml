@@ -17,6 +17,10 @@ brain:
 
     dump_to_file: /tmp/braintree.txt
 
+    save_binary: false
+    load_binary: false
+    binary_filename: /tmp/y-bot.brain
+    load_aiml_on_binary_fail: false
 
     files:
         aiml:
