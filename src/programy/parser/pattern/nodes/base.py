@@ -282,25 +282,6 @@ class PatternNode(object):
                     if existing_node.equivalent(new_node):
                         # Equivalent node already exists, use this one instead
                         return existing_node
-        """
-        # TODO Test for set and word with the same name
-        # Will fail, need to store sets and words in different containers
-        if new_node.is_set:
-            for node in self._children:
-                if node.is_set:
-                    if node.equivalent(new_node):
-                        # Equivalent node already exists, use this one instead
-                        return node
-        
-        # TODO Test for bot and word with the same name
-        # Will fail, need to store bots and words in different containers
-        if new_node.is_bot:
-            for node in self._children:
-                if node.is_bot:
-                    if node.equivalent(new_node):
-                        # Equivalent node already exists, use this one instead
-                        return node
-        """
 
         if new_node.is_word():
             if new_node.word in self._children_words:

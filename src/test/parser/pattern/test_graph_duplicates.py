@@ -5,9 +5,11 @@ from test.parser.pattern.base import PatternTestBaseClass
 from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.word import PatternWordNode
 
 
-class PatternGraphTests(PatternTestBaseClass):
+class PatternGraphDuplicateTests(PatternTestBaseClass):
 
     def test_duplicate_pattern(self):
         graph = PatternGraph()
@@ -252,3 +254,12 @@ class PatternGraphTests(PatternTestBaseClass):
         template_node = TemplateNode()
 
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+
+        self.assertIsNotNone(graph.root.children)
+        self.assertEqual(2, len(graph.root.children))
+        self.assertIsInstance(graph.root.children[0], PatternWordNode)
+        self.assertIsInstance(graph.root.children[1], PatternBotNode)
+
+        self.assertEqual(1, len(graph.root._bot_properties))
+        values = graph.root._bot_properties.values()
+        self.assertIsInstance(list(values)[0], PatternBotNode)
