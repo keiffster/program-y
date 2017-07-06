@@ -66,3 +66,18 @@ class BaseConfigurationFile(object):
             return False
         else:
             return text
+
+    def convert_to_bool(self, value):
+        if value.upper() == 'TRUE':
+            return True
+        elif value.upper() == 'FALSE':
+            return False
+        else:
+            raise Exception("Invalid boolean config value [%s]"%value)
+
+    def convert_to_int(self, value):
+        if value.isdigit():
+            return int(value)
+        else:
+            raise Exception("Invalid integer config value [%s]"%value)
+

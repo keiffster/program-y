@@ -20,6 +20,26 @@ class XMLConfigurationFileTests(unittest.TestCase):
         aiml = xml.get_section("aiml", files)
         self.assertIsNotNone(aiml)
 
+        depth_str = xml.get_option(brain, "max_depth")
+        self.assertEqual('100', depth_str)
+        supress_warnings = xml.get_bool_option(brain, "supress_warnings")
+        self.assertTrue(supress_warnings)
+        depth_int = xml.get_int_option(brain, "max_depth")
+        self.assertEqual(100, depth_int)
+
+        with self.assertRaises(Exception):
+            xml.get_bool_option(brain, "max_depth")
+
+        with self.assertRaises(Exception):
+            xml.get_int_option(brain, "supress_warnings")
+
+        other_depth = xml.get_option(brain, "max_other_depth", 50)
+        self.assertEqual(50, other_depth)
+        supress_other_warnings = xml.get_bool_option(brain, "supress_other_warnings", True)
+        self.assertTrue(supress_other_warnings)
+        other_depth_int = xml.get_int_option(brain, "other_depth_int", 999)
+        self.assertEqual(999, other_depth_int)
+
         files = xml.get_section("files", aiml)
         self.assertIsNotNone(files)
         self.assertEqual(files.text, "/aiml")

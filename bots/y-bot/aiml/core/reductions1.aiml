@@ -1,21 +1,25 @@
-re<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <aiml>
 <!-- File: reductions1.aiml -->
-<!-- Author: Dr. Richard S. Wallace -->
-<!-- Last modified: July 19, 2014 -->
+<!-- Last modified: September 5, 2014 -->
 <!--  -->
-<!-- This AIML file is part of the ALICE2 0.0.5 chat bot knowledge base. -->
+<!-- This AIML file is part of the Rosie knowledge base. -->
 <!--  -->
-<!-- The ALICE2 brain is Copyright &copy; 2014 by ALICE AI Foundation. -->
+<!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
 <!--  -->
-<!-- The ALICE2 brain is released under the terms of the GNU Lesser General -->
+<!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+<!--  -->
+<!-- The Rosie brain is released under the terms of the GNU Lesser General -->
 <!-- Public License, as published by the Free Software Foundation. -->
 <!--  -->
 <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
 <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
 <!--  -->
-<!-- For more information see http://www.alicebot.org -->
+<!-- For more information: -->
+<!-- http://www.pandorabots.com -->
+<!--  http://www.alicebot.org -->
 <!--  -->
+
 <category><pattern>*</pattern><that>WHO IS HE</that>
 <template><srai>HIS NAME IS <star/></srai></template>
 </category>

@@ -21,19 +21,70 @@ from programy.utils.newsapi.newsapi import NewsAPI
 
 class NewsAPIExtension(object):
 
+    def get_news_api_api(self, bot, clientid):
+        return  NewsAPI(bot.license_keys)
+
+    def get_news(self, bot, clientid, source, max, sort, reverse):
+
+        newsapi = self.get_news_api_api(bot, clientid)
+
+        headlines = newsapi.get_headlines(source, max, sort, reverse)
+        if headlines is None:
+            logging.error("NewsAPIExtension no headlines found!")
+            return ""
+
+        results = newsapi.to_program_y_text(headlines)
+        if results is None:
+            logging.error("NewsAPIExtension no results returned!")
+            return ""
+
+        return results
+
+    def parse_data(self, data):
+        source = None
+        max = 10
+        sort = False
+        reverse = False
+
+        splits = data.split()
+        count = 0
+        while count < len(splits):
+            if splits[count] == "SOURCE":
+                count += 1
+                source = splits[count]
+            elif splits[count] == "MAX":
+                count += 1
+                max = int(splits[count])
+            elif splits[count] == "SORT":
+                count += 1
+                if splits[count].upper() == 'TRUE':
+                    sort = True
+                elif splits[count].upper() == 'FALSE':
+                    sort = False
+                else:
+                    logging.error("Invalid value for NewAPI Data parameter sort [%s]"%splits[count])
+                    sort = False
+            elif splits[count] == "REVERSE":
+                count += 1
+                if splits[count].upper() == 'TRUE':
+                    reverse = True
+                elif splits[count].upper() == 'FALSE':
+                    reverse = False
+                else:
+                    logging.error("Invalid value for NewAPI Data parameter reverse [%s]"%splits[count])
+                    reverse = False
+            count += 1
+
+        return source, max, sort, reverse
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
 
-        splits = data.split()
+        source, max, sort, reverse = self.parse_data(bot, clientid, data)
 
-        source = splits[0]
-        max = 10 # int(splits[1])
-        sort = False#  bool(splits[2])
-        reverse = False# bool(splits[3])
+        if source is None:
+            logging.error("NewsAPIExtension no source passed in as data parameter!")
+            return ""
 
-        newsapi = NewsAPI(bot.license_keys)
-
-        results = newsapi.to_program_y_text(newsapi.get_headlines(source, max, sort, reverse))
-
-        return results
+        return self.get_news(bot, clientid, source, max, sort, reverse)
 

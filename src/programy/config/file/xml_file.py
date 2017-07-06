@@ -43,24 +43,17 @@ class XMLConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section.find(section_name)
 
-    def get_section_data(self, section_name, parent_section=None):
-        if parent_section is None:
-            section = self.xml_data.find(section_name)
-        else:
-            section = parent_section.find(section_name)
+    def get_section_data(self, section_name, parent_section):
+        section = parent_section.find(section_name)
         data = {}
         for child in section:
             data[child.tag] = child.text
         return data
 
-    def get_child_section_keys(self, section_name, parent_section=None):
+    def get_child_section_keys(self, section_name, parent_section):
         keys = []
-        if parent_section is None:
-            for child in self.xml_data.find(section_name):
-                keys.append(child.tag)
-        else:
-            for child in parent_section.find(section_name):
-                keys.append(child.tag)
+        for child in parent_section.find(section_name):
+            keys.append(child.tag)
         return keys
 
     def get_option(self, section, option_name, missing_value=None):
@@ -73,23 +66,17 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return missing_value
 
     def get_bool_option(self, section, option_name, missing_value=False):
-        if option_name in section:
-            value = section[option_name]
-            if isinstance(value, bool):
-                return bool(value)
-            else:
-                raise Exception("Invalid boolean config value")
+        child = section.find(option_name)
+        if child is not None:
+            return self.convert_to_bool(child.text)
         else:
             logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
-        if option_name in section:
-            value = section[option_name]
-            if isinstance(value, int):
-                return int(value)
-            else:
-                raise Exception("Invalid integer config value")
+        child = section.find(option_name)
+        if child is not None:
+            return self.convert_to_int(child.text)
         else:
             logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value

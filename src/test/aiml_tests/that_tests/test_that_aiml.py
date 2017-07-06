@@ -45,3 +45,20 @@ class ThatAIMLTests(unittest.TestCase):
         response = ThatAIMLTests.test_client.bot.ask_question("test", "NO")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'REALLY? I HAVE A HARD TIME DRINKING BLACK COFFEE.')
+
+    def test_that_case(self):
+        response = ThatAIMLTests.test_client.bot.ask_question("test", "CASE HELLO1")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'CASE HI THERE')
+
+        response = ThatAIMLTests.test_client.bot.ask_question("test", "CASE HELLO AGAIN")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'CASE HELLO RESPONSE')
+
+        response = ThatAIMLTests.test_client.bot.ask_question("test", "CASE HELLO2")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Case Hi There')
+
+        response = ThatAIMLTests.test_client.bot.ask_question("test", "CASE HELLO AGAIN")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'CASE HELLO RESPONSE')

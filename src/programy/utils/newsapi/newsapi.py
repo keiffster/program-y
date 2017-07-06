@@ -5,6 +5,11 @@ import json
 
 from programy.utils.license.keys import LicenseKeys
 
+class NewsApiApi(object):
+
+    def get_news(self, url):
+        return  requests.get(url)
+
 class NewsArticle(object):
 
     def __init__(self):
@@ -115,7 +120,12 @@ class NewsAPI(object):
     UK_NEWS = "uk_news"
     UK_NEWSPAPERS = "uk_newspapers"
 
-    def __init__(self, license_keys):
+    def __init__(self, license_keys, news_api_api=None):
+
+        if news_api_api is None:
+            NewsAPI._news_api_api = NewsApiApi()
+        else:
+            NewsAPI._news_api_api = news_api_api
 
         self.function_mapping = {
             NewsAPI.ABC_NEWS_AU: NewsAPI.abc_news_au,
@@ -184,7 +194,10 @@ class NewsAPI(object):
             NewsAPI.UK_NEWS: NewsAPI.uk_news,
             NewsAPI.UK_NEWSPAPERS: NewsAPI.uk_newspapers,
         }
-        
+
+        if license_keys is None:
+            raise Exception ("Missing license keys")
+
         if license_keys.has_key('NEWSAPI_API_KEY'):
             self.api_key = license_keys.get_key('NEWSAPI_API_KEY')
         else:
@@ -202,28 +215,30 @@ class NewsAPI(object):
     @staticmethod
     def _get_news_feed_articles(url, max_articles, sort, reverse):
         logging.debug("News API URL: [%s]"%url)
-        response = requests.get(url)
+        response = NewsAPI._news_api_api.get_news(url)
         articles = []
         if response.status_code == 200:
             header_splits = response.headers['content-type'].split(";")
             if header_splits[0] == 'application/json':
                 json_data = response.json()
-                for article_data in json_data['articles']:
-                    article = NewsArticle()
-                    article.parse_json(article_data)
-                    articles.append(article)
-                    logging.debug(article.description)
+                if 'articles' in json_data:
+                    for article_data in json_data['articles']:
+                        article = NewsArticle()
+                        article.parse_json(article_data)
+                        articles.append(article)
+                        logging.debug(article.description)
 
-                if sort is True:
-                    logging.debug("Sorting articles,, reverse=%s" % str(reverse))
-                    articles.sort(key=lambda article: article.published_at, reverse=reverse)
+                    if sort is True:
+                        logging.debug("Sorting articles,, reverse=%s" % str(reverse))
+                        articles.sort(key=lambda article: article.published_at, reverse=reverse)
 
-                if max_articles != 0:
-                    logging.debug("Returning max_articles %d articles" % max_articles)
-                    articles = articles[:max_articles]
+                    if max_articles != 0:
+                        logging.debug("Returning max_articles %d articles" % max_articles)
+                        articles = articles[:max_articles]
+                    else:
+                        logging.debug("Returning all articles")
                 else:
-                    logging.debug("Returning all articles")
-
+                    logging.error("NewAPI payload contains no articles attribute")
             else:
                 logging.error("NewsAPI request none JSON object")
 
@@ -231,6 +246,37 @@ class NewsAPI(object):
             logging.error("NewsAPI request returned error code %d"%response.status_code)
 
         return articles
+
+    def get_headlines(self, source, max_articles=0, sort=False, reverse=False):
+
+        if source in self.function_mapping:
+            function = self.function_mapping[source]
+            return function(self.api_key, max_articles, sort, reverse)
+        else:
+            logging.error("No source available for %s"%source)
+            return []
+
+    @staticmethod
+    def to_json(articles):
+        data = {}
+        data['articles'] = []
+        for article in articles:
+            data['articles'].append(article.to_json())
+        return data
+
+    @staticmethod
+    def json_to_file(filename, json_data):
+        with open(filename, 'w+') as json_file:
+            json.dump(json_data, json_file)
+
+    @staticmethod
+    def json_from_file(filename):
+        with open(filename, 'r+') as json_file:
+            return json.load(json_file)
+
+    @staticmethod
+    def to_program_y_text(articles, break_str=" <br /> "):
+        return break_str.join("%s - %s" % (article.title, article.description) for article in articles)
 
     @staticmethod
     def abc_news_au(api_key, max_articles, sort, reverse):
@@ -543,40 +589,9 @@ class NewsAPI(object):
         articles.extend(NewsAPI.metro(api_key, max_articles, sort, reverse))
         return articles
 
-    def get_headlines(self, source, max_articles=0, sort=False, reverse=False):
-
-        if source in self.function_mapping:
-            function = self.function_mapping[source]
-            return function(self.api_key, max_articles, sort, reverse)
-        else:
-            logging.error("No source available for %s"%source)
-            return []
-
-    @staticmethod
-    def to_json(articles):
-        data = {}
-        data['articles'] = []
-        for article in articles:
-            data['articles'].append(article.to_json())
-        return data
-
-    @staticmethod
-    def json_to_file(filename, json_data):
-        with open(filename, 'w+') as json_file:
-            json.dump(json_data, json_file)
-
-    @staticmethod
-    def json_from_file(filename):
-        with open(filename, 'r+') as json_file:
-            return json.load(json_file)
-
-    @staticmethod
-    def to_program_y_text(articles, break_str=" <br /> "):
-        return break_str.join("%s - %s" % (article.title, article.description) for article in articles)
-
 if __name__ == '__main__':
 
-    # Running these tools drops test files into the geocode test folder
+    # Running these tools drops test files into the newapi test folder
 
     app_license_keys = LicenseKeys()
     app_license_keys.load_license_key_file(os.path.dirname(__file__) + '/../../../../bots/y-bot/config/license.keys')

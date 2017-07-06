@@ -6,8 +6,6 @@ from programy.config.client.client import ClientConfiguration
 
 class YamlConfigurationFileTests(unittest.TestCase):
 
-
-
     def test_load_from_file(self):
         client_config = ClientConfiguration()
         yaml = YamlConfigurationFile(client_config)
@@ -20,6 +18,20 @@ class YamlConfigurationFileTests(unittest.TestCase):
         self.assertIsNotNone(files)
         aiml = yaml.get_section("aiml", files)
         self.assertIsNotNone(aiml)
+
+        depth_str = yaml.get_option(brain, "max_depth")
+        self.assertEqual(100, depth_str)
+        supress_warnings = yaml.get_bool_option(brain, "supress_warnings")
+        self.assertFalse(supress_warnings)
+        depth_int = yaml.get_int_option(brain, "max_depth")
+        self.assertEqual(100, depth_int)
+
+        other_depth = yaml.get_option(brain, "max_other_depth", 50)
+        self.assertEqual(50, other_depth)
+        supress_other_warnings = yaml.get_bool_option(brain, "supress_other_warnings", True)
+        self.assertTrue(supress_other_warnings)
+        other_depth_int = yaml.get_int_option(brain, "other_depth_int", 999)
+        self.assertEqual(999, other_depth_int)
 
         files = yaml.get_section("files", aiml)
         self.assertIsNotNone(files)

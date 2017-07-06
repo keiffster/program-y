@@ -5,6 +5,8 @@
         "allow_learn_aiml": true,
         "allow_learnf_aiml": true,
 
+        "max_depth":        100,
+
         "files": {
             "aiml": {
                 "files": "/aiml",
