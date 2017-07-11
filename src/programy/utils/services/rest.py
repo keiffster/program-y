@@ -17,7 +17,7 @@ import logging
 import requests
 
 from programy.utils.services.service import Service
-from programy.config.brain import BrainServiceConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 
 class RestAPI(object):
 
@@ -38,18 +38,15 @@ class GenericRESTService(Service):
             self.api = api
 
         self.payload = {}
-        self.method = "GET"
-        self.host = None
-        for param in self._config.parameters():
-            if param == 'METHOD':
-                self.method = self._config.parameter('METHOD')
-            elif param == 'HOST':
-                self.host = self._config.parameter('HOST')
-            else:
-                self.payload[param] = self._config.parameter(param)
 
-        if self.host is None:
+        if config.method is None:
+            self.method ="GET"
+        else:
+            self.method = config.method
+
+        if config.host is None:
             raise Exception("Undefined host parameter")
+        self.host = config.host
 
     def ask_question(self, bot, clientid: str, question: str):
 

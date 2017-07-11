@@ -1,22 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
-File: [filename]
-Author: [botmaster]
-Last modified: [date]
-
-This AIML file is part of the [botname] [version] chat bot knowledge base.
-
-The [botname] brain is Copyright &copy; [YYYY] by [organization].
-
-The [botname] brain is released under the terms of the GNU Lesser General
-Public License, as published by the Free Software Foundation.
-
-This file is distributed WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
-
-For more information see [url]
--->
-
 <aiml>
 
 	<category>
@@ -38,10 +19,10 @@ For more information see [url]
 	<category>
 		<pattern>* PLAYED *</pattern>
 		<template>Ok. I will remember this
-			<learnf><category><pattern>WHAT DID <eval><star/> PLAY</eval></pattern>
-				<template><eval><star/></eval> PLAYED <eval><star index="2"/></eval></template>
+			<learnf><category><pattern>WHAT DID <eval><star /> PLAY</eval></pattern>
+				<template><eval><star /></eval> PLAYED <eval><star index="2" /></eval></template>
 			</category></learnf>
 		</template>
 	</category>
 
-</aiml>
+<category><pattern>WHAT DID JOHN PLAY</pattern><topic>*</topic><that>*</that><template>JOHN PLAYED CRICKET</template></category><category><pattern>WHAT IS MY NAME</pattern><topic>*</topic><that>*</that><template>YOUR NAME IS FRED</template></category><category><pattern>WHAT DID JOHN PLAY</pattern><topic>*</topic><that>*</that><template>JOHN PLAYED CRICKET</template></category><category><pattern>WHAT IS MY NAME</pattern><topic>*</topic><that>*</that><template>YOUR NAME IS FRED</template></category></aiml>

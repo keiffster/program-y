@@ -1,7 +1,6 @@
 import unittest
 
 from programy.config.file.factory import ConfigurationFactory
-from programy.config.client.client import ClientConfiguration
 
 class ConfigurationFactoryTests(unittest.TestCase):
 
@@ -18,12 +17,11 @@ class ConfigurationFactoryTests(unittest.TestCase):
             ConfigurationFactory.guess_format_from_filename("file_yaml")
 
     def test_get_config_by_name(self):
-        client_config = ClientConfiguration()
-        config_type = ConfigurationFactory.get_config_by_name(client_config, "yaml")
+        config_type = ConfigurationFactory.get_config_by_name("yaml")
         self.assertIsNotNone(config_type)
-        config_type = ConfigurationFactory.get_config_by_name(client_config, "json")
+        config_type = ConfigurationFactory.get_config_by_name("json")
         self.assertIsNotNone(config_type)
-        config_type = ConfigurationFactory.get_config_by_name(client_config, "xml")
+        config_type = ConfigurationFactory.get_config_by_name("xml")
         self.assertIsNotNone(config_type)
 
     def test_get_config_by_name_wrong_extension(self):

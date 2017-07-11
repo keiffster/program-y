@@ -9,6 +9,9 @@ from test.parser.template.graph_tests.graph_test_client import TemplateGraphTest
 class TemplateGraphSystemTests(TemplateGraphTestClient):
 
     def test_system_timeout_as_attrib_full(self):
+
+        self.test_bot.brain.configuration.overrides._allow_system_aiml = True
+
         template = ET.fromstring("""
 			<template>
 				<system timeout="1000">echo "Hello World"</system>

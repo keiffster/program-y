@@ -145,7 +145,7 @@ class PannousServiceTests(unittest.TestCase):
     def test_ask_question(self):
 
         config = BrainServiceConfiguration("pannous")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PannousService(config=config, api=MockPannousAPI(response="Test pannous response"))
         self.assertIsNotNone(service)
@@ -172,7 +172,7 @@ class PannousServiceTests(unittest.TestCase):
         self.bot.license_keys = LicenseKeys()
 
         config = BrainServiceConfiguration("pannous")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PannousService(config=config, api=MockPannousAPI(response="Test pannous response"))
         self.assertIsNotNone(service)
@@ -183,7 +183,7 @@ class PannousServiceTests(unittest.TestCase):
     def test_ask_question_with_exception(self):
 
         config = BrainServiceConfiguration("pannous")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PannousService(config=config, api=MockPannousAPI(response="Some wierd error", throw_exception=True))
         self.assertIsNotNone(service)

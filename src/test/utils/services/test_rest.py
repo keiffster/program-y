@@ -34,8 +34,8 @@ class RestServiceTests(unittest.TestCase):
 
     def test_ask_question(self):
         config = BrainServiceConfiguration("rest")
-        config.set_parameter("host", "127.0.0.1")
-        config.set_parameter("method", "GET")
+        config._host = "127.0.0.1"
+        config._method = "GET"
 
         service = GenericRESTService(config=config, api=MockRestAPI())
         self.assertIsNotNone(service)

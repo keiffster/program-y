@@ -13,10 +13,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 import logging
 from abc import ABCMeta, abstractmethod
 from programy.utils.classes.loader import ClassLoader
-from programy.config.brain import BrainServiceConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 
 class Service(object):
     __metaclass__ = ABCMeta
@@ -39,12 +40,13 @@ class ServiceFactory(object):
     services = {}
 
     @classmethod
-    def preload_services(cls, service_configs):
+    def preload_services(cls, services_config):
         loader = ClassLoader()
-        for service_config in service_configs:
-            name = service_config.name.upper()
-            logging.debug("Preloading service [%s] -> [%s]", name, service_config.path)
-            meta_class = loader.instantiate_class(service_config.path)
+        for service_name in services_config.services():
+            name = service_name.upper()
+            service_config = services_config.service(service_name)
+            logging.debug("Preloading service [%s] -> [%s]", name, service_config.classname)
+            meta_class = loader.instantiate_class(service_config.classname)
             new_class = meta_class(service_config)
             ServiceFactory.services[name] = new_class
 

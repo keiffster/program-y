@@ -71,7 +71,7 @@ class PandoraServiceTests(unittest.TestCase):
     def test_ask_question(self):
 
         config = BrainServiceConfiguration("pandora")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PandoraService(config=config, api=MockPandoraAPI(response="Test pandora response"))
         self.assertIsNotNone(service)
@@ -98,7 +98,7 @@ class PandoraServiceTests(unittest.TestCase):
         self.bot.license_keys = LicenseKeys()
 
         config = BrainServiceConfiguration("pandora")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PandoraService(config=config, api=MockPandoraAPI(response="Test pandora response"))
         self.assertIsNotNone(service)
@@ -109,7 +109,7 @@ class PandoraServiceTests(unittest.TestCase):
     def test_ask_question_with_exception(self):
 
         config = BrainServiceConfiguration("pandora")
-        config.set_parameter("url", "http://test.pandora.url")
+        config._url = "http://test.pandora.url"
 
         service = PandoraService(config=config, api=MockPandoraAPI(response="Some wierd error", throw_exception=True))
         self.assertIsNotNone(service)

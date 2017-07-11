@@ -37,7 +37,7 @@ class TemplateSystemNode(TemplateAttribNode):
 
     def resolve(self, bot, clientid):
         try:
-            if bot.brain.configuration.allow_system_aiml is True:
+            if bot.brain.configuration.overrides.allow_system_aiml is True:
                 command = self.resolve_children_to_string(bot, clientid)
                 process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 result = []

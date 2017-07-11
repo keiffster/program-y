@@ -21,7 +21,11 @@ class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, name):
-        self.section_name = name
+        self._section_name = name
+
+    @property
+    def section_name(self):
+        return self._section_name
 
     def _get_file_option(self, config_file, option_name, section, bot_root):
         option = config_file.get_option(section, option_name)

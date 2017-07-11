@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 # TODO <that><topic> can take single "1" and double "1,2" indexes
 
@@ -12,7 +12,7 @@ class TopicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(TopicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(files=os.path.dirname(__file__))
+        self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
 
 class TopicAIMLTests(unittest.TestCase):
 

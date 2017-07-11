@@ -34,6 +34,9 @@ class Sentence(object):
         for word in sentence._words:
             self._words.append(word)
 
+    def replace_words(self, text):
+        self._words = self._split_into_words(text, " ")
+
     @property
     def response(self):
         return self._response

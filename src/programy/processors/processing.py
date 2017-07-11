@@ -29,10 +29,13 @@ class ProcessorLoader(ClassLoader):
         count = 0
         with open(filename, "r+") as file:
             for line in file:
-                new_class = ClassLoader.instantiate_class(line)
-                if new_class is not None:
-                    self.processors.append(new_class(*args, **kw))
-                    count += 1
+                line = line.strip()
+                if len(line) > 0:
+                    if line[0] != '#':
+                        new_class = ClassLoader.instantiate_class(line)
+                        if new_class is not None:
+                            self.processors.append(new_class(*args, **kw))
+                            count += 1
         return count
 
     def process(self, bot, clientid, string):

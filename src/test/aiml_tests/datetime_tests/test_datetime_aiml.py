@@ -1,7 +1,7 @@
 import unittest
 import os
 
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
 from programy.utils.text.dateformat import DateFormatter
 
 from test.aiml_tests.client import TestClient
@@ -15,9 +15,11 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(files=os.path.dirname(__file__))
-        self.configuration.brain_configuration._set_files = BrainFileConfiguration(files=os.path.dirname(__file__)+"/sets", extension=".txt")
-        self.configuration.brain_configuration._map_files = BrainFileConfiguration(files=os.path.dirname(__file__)+"/maps", extension=".txt")
+        self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
+        self.configuration.brain_configuration.files.set_files._files = os.path.dirname(__file__)+"/sets"
+        self.configuration.brain_configuration.files.set_files._extension=".txt"
+        self.configuration.brain_configuration.files.map_files._files = os.path.dirname(__file__)+"/maps"
+        self.configuration.brain_configuration.files.map_files._extension=".txt"
 
 
 class DateTimeAIMLTests(unittest.TestCase):

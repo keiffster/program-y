@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.services.service import Service
-from programy.config.brain import BrainServiceConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
 class PannousAPI(object):
@@ -65,9 +65,7 @@ class PannousService(Service):
             self.api = api
 
         self.url = None
-        if 'URL' in self._config.parameters():
-            self.url = self._config.parameter('URL')
-        else:
+        if config.url is None:
             raise Exception("Undefined url parameter")
 
     def ask_question(self, bot, clientid: str, question: str):

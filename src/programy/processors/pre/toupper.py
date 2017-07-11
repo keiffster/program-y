@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 
 import logging
+
 from programy.processors.processing import PreProcessor
 
 class ToUpperPreProcessor(PreProcessor):

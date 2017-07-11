@@ -21,7 +21,7 @@ import datetime
 import os
 
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
-from programy.config.brain import BrainConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
@@ -55,26 +55,26 @@ class AIMLParser(object):
         return self._num_categories
 
     def create_debug_storage(self, brain_configuration):
-        if brain_configuration.aiml_files.errors is not None:
+        if brain_configuration.files.aiml_files.errors is not None:
             self._errors = []
-        if brain_configuration.aiml_files.duplicates is not None:
+        if brain_configuration.files.aiml_files.duplicates is not None:
             self._duplicates = []
 
     def save_debug_files(self, brain_configuration):
 
-        if brain_configuration.aiml_files.errors is not None:
-            logging.info("Saving aiml errors to file [%s]"%brain_configuration.aiml_files.errors)
+        if brain_configuration.files.aiml_files.errors is not None:
+            logging.info("Saving aiml errors to file [%s]"%brain_configuration.files.aiml_files.errors)
             try:
-                with open(brain_configuration.aiml_files.errors, "w+") as errors_file:
+                with open(brain_configuration.files.aiml_files.errors, "w+") as errors_file:
                     for error in self._errors:
                         errors_file.write(error)
             except Exception as e:
                 logging.exception (e)
 
-        if brain_configuration.aiml_files.duplicates is not None:
-            logging.info("Saving aiml duplicates to file [%s]"%brain_configuration.aiml_files.duplicates)
+        if brain_configuration.files.aiml_files.duplicates is not None:
+            logging.info("Saving aiml duplicates to file [%s]"%brain_configuration.files.aiml_files.duplicates)
             try:
-                with open(brain_configuration.aiml_files.duplicates, "w+") as duplicates_file:
+                with open(brain_configuration.files.aiml_files.duplicates, "w+") as duplicates_file:
                     for duplicate in self._duplicates:
                         duplicates_file.write(duplicate)
             except Exception as e:
@@ -82,15 +82,15 @@ class AIMLParser(object):
 
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:
-            logging.info("Found a total of %d errors in your grammrs, check out [%s] for details"%(len(self._errors), brain_configuration.aiml_files.errors))
+            logging.info("Found a total of %d errors in your grammrs, check out [%s] for details"%(len(self._errors), brain_configuration.files.aiml_files.errors))
         if self._duplicates is not None:
-            logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details"%(len(self._duplicates), brain_configuration.aiml_files.duplicates))
+            logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details"%(len(self._duplicates), brain_configuration.files.aiml_files.duplicates))
 
     def load_files_from_directory(self, brain_configuration):
         start = datetime.datetime.now()
-        aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.aiml_files.files,
-                                                           brain_configuration.aiml_files.directories,
-                                                           brain_configuration.aiml_files.extension)
+        aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.files.aiml_files.files,
+                                                           brain_configuration.files.aiml_files.directories,
+                                                           brain_configuration.files.aiml_files.extension)
         stop = datetime.datetime.now()
         diff = stop - start
         logging.info("Total processing time %.6f secs" % diff.total_seconds())
@@ -100,7 +100,7 @@ class AIMLParser(object):
 
     def load_single_file(self, brain_configuration):
         start = datetime.datetime.now()
-        self._aiml_loader.load_single_file_contents(brain_configuration.aiml_files.file)
+        self._aiml_loader.load_single_file_contents(brain_configuration.files.aiml_files.file)
         stop = datetime.datetime.now()
         diff = stop - start
         logging.info("Total processing time %.6f secs" % diff.total_seconds())
@@ -108,14 +108,14 @@ class AIMLParser(object):
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
 
-        if brain_configuration.aiml_files is not None:
+        if brain_configuration.files.aiml_files is not None:
 
             self.create_debug_storage(brain_configuration)
 
-            if brain_configuration.aiml_files.files is not None:
+            if brain_configuration.files.aiml_files.files is not None:
                 self.load_files_from_directory(brain_configuration)
 
-            elif brain_configuration.aiml_files.file is not None:
+            elif brain_configuration.files.aiml_files.file is not None:
                 self.load_single_file(brain_configuration)
 
             else:
@@ -129,9 +129,9 @@ class AIMLParser(object):
             logging.info("No AIML files or file defined in configuration to load")
 
 
-        if brain_configuration.dump_to_file is not None:
+        if brain_configuration.binaries.dump_to_file is not None:
             logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.dump_to_file)
-            self.pattern_parser.dump_to_file(brain_configuration.dump_to_file)
+            self.pattern_parser.dump_to_file(brain_configuration.binaries.dump_to_file)
 
     def parse_from_file(self, filename):
         """

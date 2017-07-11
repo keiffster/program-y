@@ -1,7 +1,6 @@
-import unittest
 import xml.etree.ElementTree as ET
 
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory

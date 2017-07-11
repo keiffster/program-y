@@ -3,8 +3,9 @@ import csv
 import re
 import datetime
 
-from programy.clients.clients import BotClient
+from programy.clients.client import BotClient
 from programy.utils.files.filefinder import FileFinder
+from programy.config.sections.client.console import ConsoleConfiguration
 
 class TestQuestion(object):
 
@@ -134,6 +135,9 @@ class TestRunnerBotClient(BotClient):
 
     def set_environment(self):
         self.bot.brain.predicates.pairs.append(["env", "TestRunner"])
+
+    def get_client_configuration(self):
+        return ConsoleConfiguration()
 
     def run(self):
         file_finder = TestFileFileFinder()

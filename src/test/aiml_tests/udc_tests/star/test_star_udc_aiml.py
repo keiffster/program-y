@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 class BasicTestClient(TestClient):
 
@@ -10,7 +10,7 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(file=os.path.dirname(__file__)+os.sep+'star_udc.aiml')
+        self.configuration.brain_configuration.files.aiml_files._file = os.path.dirname(__file__)+os.sep+'star_udc.aiml'
 
 class UDCAIMLTests(unittest.TestCase):
 

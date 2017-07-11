@@ -63,5 +63,8 @@ class MapCollection(object):
 
     def load(self, configuration):
         loader = MapLoader()
-        self._maps = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+        if configuration.files is not None:
+            self._maps = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+        else:
+            self._maps = {}
         return len(self._maps)

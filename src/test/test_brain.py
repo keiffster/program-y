@@ -1,7 +1,7 @@
 import unittest
 
 from programy.brain import Brain
-from programy.config.brain import BrainConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
 
 class BrainTests(unittest.TestCase):
 

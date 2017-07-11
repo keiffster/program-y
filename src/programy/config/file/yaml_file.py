@@ -18,23 +18,28 @@ import logging
 import yaml
 
 from programy.config.file.file import BaseConfigurationFile
+from programy.config.programy import ProgramyConfiguration
 
 class YamlConfigurationFile(BaseConfigurationFile):
 
-    def __init__(self, client_config):
-        BaseConfigurationFile.__init__(self, client_config)
+    def __init__(self):
+        BaseConfigurationFile.__init__(self)
         self.yaml_data = None
 
-    def load_from_text(self, text, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root):
         self.yaml_data = yaml.load(text)
         if self.yaml_data is None:
             raise Exception ("Yaml data is missing")
-        self.client_config.load_config_data(self, bot_root)
+        configuration = ProgramyConfiguration(client_configuration)
+        configuration.load_config_data(self, bot_root)
+        return configuration
 
-    def load_from_file(self, filename, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root):
+        configuration = ProgramyConfiguration(client_configuration)
         with open(filename, 'r+') as yml_data_file:
             self.yaml_data = yaml.load(yml_data_file)
-            self.client_config.load_config_data(self, bot_root)
+            configuration.load_config_data(self, bot_root)
+        return configuration
 
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
@@ -48,8 +53,11 @@ class YamlConfigurationFile(BaseConfigurationFile):
     def get_section_data(self, section_name, parent_section=None):
         return self.get_section(section_name, parent_section)
 
-    def get_child_section_keys(self, section_name, parent_section=None):
-        return parent_section[section_name].keys()
+    def get_child_section_keys(self, child_section_name, parent_section=None):
+        if child_section_name in parent_section:
+            return parent_section[child_section_name].keys()
+        else:
+            return None
 
     def get_option(self, section, option_name, missing_value=None):
         if option_name in section:

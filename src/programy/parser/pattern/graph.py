@@ -35,7 +35,7 @@ class PatternGraph(object):
         pattern_nodes = None
         if aiml_parser is not None:
             if aiml_parser._brain is not None:
-                pattern_nodes = aiml_parser._brain.configuration.pattern_nodes
+                pattern_nodes = aiml_parser._brain.configuration.nodes.pattern_nodes
 
         self._pattern_factory = PatternNodeFactory()
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
@@ -208,9 +208,16 @@ class PatternGraph(object):
 
         if that_node.has_template() is True:
             if learn is False:
-                raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text))
+                if pattern_element.text is not None:
+                    raise DuplicateGrammarException("Dupicate grammar tree found [%s]"%(pattern_element.text.strip()))
+                else:
+                    raise DuplicateGrammarException("Dupicate grammar tree found for bot/set")
             else:
-                logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text))
+                if pattern_element.text is not None:
+                    logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text.strip()))
+                else:
+                    logging.warning("Dupicate grammar tree found for bot/set in learn, replacing existing")
+
                 self.add_template_to_node(template_graph_root, that_node)
         else:
             self.add_template_to_node(template_graph_root, that_node)

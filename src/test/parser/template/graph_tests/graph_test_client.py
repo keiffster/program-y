@@ -3,8 +3,9 @@ import xml.etree.ElementTree as ET
 
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.client.client import ClientConfiguration
-from programy.config.brain import BrainConfiguration
+from programy.config.programy import ProgramyConfiguration
+from programy.config.sections.client.console import ConsoleConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
 from programy.dialog import Question, Sentence
 from programy.parser.template.graph import TemplateGraph
 from programy.parser.pattern.matcher import MatchContext, Match
@@ -32,7 +33,7 @@ class TemplateGraphTestClient(unittest.TestCase):
                                                              Match(Match.TOPIC, test_node, '*'),
                                                              Match(Match.THAT, test_node, '*')]
 
-        test_config = ClientConfiguration()
+        test_config = ProgramyConfiguration(ConsoleConfiguration())
 
         self.test_bot = Bot(Brain(BrainConfiguration()), config=test_config.bot_configuration)
         self.test_clientid = "testid"

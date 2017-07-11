@@ -2,15 +2,14 @@ import unittest
 import os
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.client.client import ClientConfiguration
+from programy.config.sections.client.console import ConsoleConfiguration
 
 class YamlConfigurationFileTests(unittest.TestCase):
 
     def test_load_from_file(self):
-        client_config = ClientConfiguration()
-        yaml = YamlConfigurationFile(client_config)
+        yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml", ",")
+        yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml", ConsoleConfiguration(), ".")
         self.assertIsNotNone(yaml.yaml_data)
         brain = yaml.get_section("brain")
         self.assertIsNotNone(brain)
@@ -19,33 +18,10 @@ class YamlConfigurationFileTests(unittest.TestCase):
         aiml = yaml.get_section("aiml", files)
         self.assertIsNotNone(aiml)
 
-        depth_str = yaml.get_option(brain, "max_depth")
-        self.assertEqual(100, depth_str)
-        supress_warnings = yaml.get_bool_option(brain, "supress_warnings")
-        self.assertFalse(supress_warnings)
-        depth_int = yaml.get_int_option(brain, "max_depth")
-        self.assertEqual(100, depth_int)
-
-        other_depth = yaml.get_option(brain, "max_other_depth", 50)
-        self.assertEqual(50, other_depth)
-        supress_other_warnings = yaml.get_bool_option(brain, "supress_other_warnings", True)
-        self.assertTrue(supress_other_warnings)
-        other_depth_int = yaml.get_int_option(brain, "other_depth_int", 999)
-        self.assertEqual(999, other_depth_int)
-
-        files = yaml.get_section("files", aiml)
-        self.assertIsNotNone(files)
-        self.assertEqual(files, "/aiml")
-        extension = yaml.get_section("extension", aiml)
-        self.assertIsNotNone(extension)
-        self.assertEqual(extension, ".aiml")
-        directories = yaml.get_section("directories", aiml)
-        self.assertIsNotNone(directories)
-        self.assertEqual(directories, True)
+        # TODO Add tests to check values have been loaded
 
     def test_load_from_text(self):
-        client_config = ClientConfiguration()
-        yaml = YamlConfigurationFile(client_config)
+        yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
         brain:
@@ -94,7 +70,7 @@ class YamlConfigurationFileTests(unittest.TestCase):
           default_response: Sorry, I don't have an answer for that!
           exit_response: So long, and thanks for the fish!
           initial_question: Hi, how can I help you?
-        """, ".")
+        """, ConsoleConfiguration(), ".")
 
         self.assertIsNotNone(yaml.yaml_data)
         brain = yaml.get_section("brain")
@@ -114,3 +90,4 @@ class YamlConfigurationFileTests(unittest.TestCase):
         self.assertIsNotNone(directories)
         self.assertEqual(directories, True)
 
+        # TODO Add tests to check values have been loaded

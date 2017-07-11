@@ -17,7 +17,7 @@ import logging
 from xml.etree import ElementTree
 
 from programy.utils.services.service import Service
-from programy.config.brain import BrainServiceConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 from programy.utils.services.requestsapi import RequestsAPI
 
 class PandoraAPI(object):
@@ -53,10 +53,7 @@ class PandoraService(Service):
         else:
             self.api = api
 
-        self.url = None
-        if 'URL' in self._config.parameters():
-            self.url = self._config.parameter('URL')
-        else:
+        if config.url is None:
             raise Exception("Undefined url parameter")
 
     def ask_question(self, bot, clientid: str, question: str):
@@ -67,7 +64,7 @@ class PandoraService(Service):
                 logging.error("No variable PANDORA_BOTID found in license key file")
                 return ""
 
-            return self.api.ask_question(self.url, question, botid)
+            return self.api.ask_question(self._config.url, question, botid)
 
         except Exception as excep:
             logging.error(str(excep))

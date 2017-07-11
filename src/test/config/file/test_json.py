@@ -2,16 +2,14 @@ import unittest
 import os
 
 from programy.config.file.json_file import JSONConfigurationFile
-from programy.config.client.client import ClientConfiguration
-
+from programy.config.sections.client.console import ConsoleConfiguration
 
 class JsonConfigurationFileTests(unittest.TestCase):
 
     def test_load_from_file(self):
-        client_config = ClientConfiguration()
-        json = JSONConfigurationFile(client_config)
+        json = JSONConfigurationFile()
         self.assertIsNotNone(json)
-        json.load_from_file(os.path.dirname(__file__)+"/test_json.json", ",")
+        json.load_from_file(os.path.dirname(__file__)+"/test_json.json", ConsoleConfiguration(), ".")
         self.assertIsNotNone(json.json_data)
         brain = json.get_section("brain")
         self.assertIsNotNone(brain)
@@ -20,36 +18,10 @@ class JsonConfigurationFileTests(unittest.TestCase):
         aiml = json.get_section("aiml", files)
         self.assertIsNotNone(aiml)
 
-        services = json.get_child_section_keys("services", brain)
-        self.assertIsNotNone(services)
-
-        depth_str = json.get_option(brain, "max_depth")
-        self.assertEqual(100, depth_str)
-        supress_warnings = json.get_bool_option(brain, "supress_warnings")
-        self.assertFalse(supress_warnings)
-        depth_int = json.get_int_option(brain, "max_depth")
-        self.assertEqual(100, depth_int)
-
-        other_depth = json.get_option(brain, "max_other_depth", 50)
-        self.assertEqual(50, other_depth)
-        supress_other_warnings = json.get_bool_option(brain, "supress_other_warnings", True)
-        self.assertTrue(supress_other_warnings)
-        other_depth_int = json.get_int_option(brain, "other_depth_int", 999)
-        self.assertEqual(999, other_depth_int)
-
-        files = json.get_section("files", aiml)
-        self.assertIsNotNone(files)
-        self.assertEqual(files, "/aiml")
-        extension = json.get_section("extension", aiml)
-        self.assertIsNotNone(extension)
-        self.assertEqual(extension, ".aiml")
-        directories = json.get_section("directories", aiml)
-        self.assertIsNotNone(directories)
-        self.assertEqual(directories, True)
+        # TODO Add tests to check values have been loaded
 
     def test_load_from_text(self):
-        client_config = ClientConfiguration()
-        json = JSONConfigurationFile(client_config)
+        json = JSONConfigurationFile()
         self.assertIsNotNone(json)
         json.load_from_text("""
         {
@@ -109,5 +81,6 @@ class JsonConfigurationFileTests(unittest.TestCase):
                 "exit_response": "So long, and thanks for the fish!",
                 "initial_question": "Hi, how can I help you>"
             }
-        }""", ",")
+        }""", ConsoleConfiguration(), ".")
 
+        # TODO Add tests to check values have been loaded

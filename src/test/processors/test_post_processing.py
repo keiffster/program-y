@@ -5,8 +5,8 @@ from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.brain import BrainConfiguration
-from programy.config.bot import BotConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.bot.bot import BotConfiguration
 
 
 class PostProcessingTests(unittest.TestCase):

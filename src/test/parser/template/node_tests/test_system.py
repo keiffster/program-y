@@ -11,6 +11,9 @@ from test.parser.template.base import TemplateTestsBaseClass
 class TemplateSystemNodeTests(TemplateTestsBaseClass):
 
     def test_node_no_timeout(self):
+
+        self.bot.brain.configuration.overrides._allow_system_aiml = True
+
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -28,6 +31,9 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
         self.assertEqual(response, "Hello World")
 
     def test_node_with_timeout(self):
+
+        self.bot.brain.configuration.overrides._allow_system_aiml = True
+
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -46,6 +52,9 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
         self.assertEqual(response, "Hello World")
 
     def test_node_with_system_switched_off(self):
+
+        self.bot.brain.configuration.overrides._allow_system_aiml = False
+
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -58,8 +67,6 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-
-        self.bot.brain.configuration._allow_system_aiml = False
 
         response = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(response)

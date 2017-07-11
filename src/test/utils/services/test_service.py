@@ -1,7 +1,8 @@
 import unittest
 
 from programy.utils.services.service import Service, ServiceFactory
-from programy.config.brain import BrainConfiguration, BrainServiceConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 
 class MockService(Service):
 
@@ -15,10 +16,11 @@ class ServiceFactoryTests(unittest.TestCase):
 
     def test_load_services(self):
 
-        service_config = BrainServiceConfiguration("mock", {'path': 'test.utils.services.test_service.MockService'})
+        service_config = BrainServiceConfiguration("mock")
+        service_config._classname = 'test.utils.services.test_service.MockService'
 
         brain_config = BrainConfiguration()
-        brain_config.services.append(service_config)
+        brain_config.services._services['mock'] = service_config
 
         ServiceFactory.preload_services(brain_config.services)
 

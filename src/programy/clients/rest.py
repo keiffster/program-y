@@ -13,25 +13,25 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 import logging
 from flask import Flask, jsonify, request, make_response, abort
 
-from programy.clients.clients import BotClient
-from programy.config.client.rest import RestClientConfiguration
+from programy.clients.client import BotClient
+from programy.config.sections.client.rest import RestConfiguration
 
 class RestBotClient(BotClient):
 
-    def __init__(self):
-        BotClient.__init__(self)
+    def __init__(self, argument_parser=None):
+        BotClient.__init__(self, argument_parser)
 
     def set_environment(self):
         self.bot.brain.predicates.pairs.append(["env", "REST"])
 
     def get_client_configuration(self):
-        return RestClientConfiguration()
+        return RestConfiguration()
 
-print("Loading, please wait...")
-rest_client = RestBotClient()
+rest_client = None
 
 print("Initiating REST Service...")
 app = Flask(__name__)
@@ -109,6 +109,10 @@ if __name__ == '__main__':
     def run():
         print("REST Client running on %s:%s" % (rest_client.configuration.rest_configuration.host,
                                                 rest_client.configuration.rest_configuration.port))
+
+        print("Loading, please wait...")
+        rest_client = RestBotClient()
+
         if rest_client.configuration.rest_configuration.debug is True:
             print("REST Client running in debug mode")
 

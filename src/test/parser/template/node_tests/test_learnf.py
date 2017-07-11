@@ -5,7 +5,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 
@@ -29,7 +29,7 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         root.append(learn)
         self.assertEqual(1, len(root.children))
 
-        self.bot.brain._configuration._aiml_files = BrainFileConfiguration(files="/tmp", extension=".aiml", directories=False)
+        self.bot.brain.configuration.defaults._learn_filename = '/tmp/learnf.aiml'
         resolved = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)

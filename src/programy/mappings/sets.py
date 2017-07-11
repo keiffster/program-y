@@ -90,5 +90,8 @@ class SetCollection(object):
 
     def load(self, configuration):
         loader = SetLoader()
-        self._sets = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+        if configuration.files is not None:
+            self._sets = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+        else:
+            self._sets = {}
         return len(self._sets)

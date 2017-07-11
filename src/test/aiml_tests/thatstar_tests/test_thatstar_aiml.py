@@ -1,7 +1,7 @@
 import unittest
 import os
 from test.aiml_tests.client import TestClient
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 # TODO make sure topic star and that star match for set
 # TODO <that><topic> can take single "1" and double "1,2" indexes
@@ -13,7 +13,7 @@ class ThatStarTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(ThatStarTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration._aiml_files = BrainFileConfiguration(files=os.path.dirname(__file__))
+        self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
 
 class ThatStarAIMLTests(unittest.TestCase):
 

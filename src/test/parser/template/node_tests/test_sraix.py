@@ -4,7 +4,8 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.utils.services.service import Service, ServiceFactory
-from programy.config.brain import BrainConfiguration, BrainServiceConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.brain.service import BrainServiceConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
 
@@ -97,10 +98,11 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
 
     def test_call_service(self):
 
-        service_config = BrainServiceConfiguration("mock", {'path': 'test.utils.services.test_service.MockService'})
+        service_config = BrainServiceConfiguration("mock")
+        service_config._classname = 'test.utils.services.test_service.MockService'
 
         brain_config = BrainConfiguration()
-        brain_config.services.append(service_config)
+        brain_config.services._services['mock'] = service_config
 
         ServiceFactory.preload_services(brain_config.services)
 

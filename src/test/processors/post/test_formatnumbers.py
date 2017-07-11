@@ -2,8 +2,8 @@ import unittest
 from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.brain import BrainConfiguration
-from programy.config.bot import BotConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.bot.bot import BotConfiguration
 
 class FormatNmbersTests(unittest.TestCase):
 

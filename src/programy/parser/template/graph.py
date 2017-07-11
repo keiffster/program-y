@@ -29,7 +29,7 @@ class TemplateGraph(object):
         template_nodes = None
         if aiml_parser is not None:
             if aiml_parser._brain is not None:
-                template_nodes = aiml_parser._brain.configuration.template_nodes
+                template_nodes = aiml_parser._brain.configuration.nodes.template_nodes
 
         self._template_factory = TemplateNodeFactory()
         self._template_factory.load_nodes_config_from_file(template_nodes)

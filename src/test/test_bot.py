@@ -2,9 +2,10 @@ import unittest
 
 from programy.brain import Brain
 from programy.bot import Bot
-from programy.config.client.client import ClientConfiguration
-from programy.config.brain import BrainConfiguration
-from programy.config.bot import BotConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.programy import ProgramyConfiguration
+from programy.config.sections.client.console import ConsoleConfiguration
 
 class BotTests(unittest.TestCase):
 
@@ -24,12 +25,13 @@ class BotTests(unittest.TestCase):
         test_brain = Brain(BrainConfiguration())
         bot = Bot(test_brain, BotConfiguration())
         self.assertIsNotNone(bot)
+
         self.assertEqual(bot.prompt, ">>> ")
-        self.assertEqual(bot.default_response, "Sorry, I don't have an answer for that right now")
+        self.assertEqual(bot.default_response, "")
         self.assertEqual(bot.exit_response, "Bye!")
 
     def test_bot_with_config(self):
-        configuration = ClientConfiguration()
+        configuration = ProgramyConfiguration(ConsoleConfiguration())
         self.assertIsNotNone(configuration)
         self.assertIsNotNone(configuration.bot_configuration)
         self.assertIsNotNone(configuration.brain_configuration)
@@ -70,6 +72,7 @@ class BotTests(unittest.TestCase):
         self.assertTrue(bot.has_conversation("testid2"))
 
     def test_bot_chat_loop(self):
+
         test_brain = Brain(BrainConfiguration())
         self.assertIsNotNone(test_brain)
         self.assertIsInstance(test_brain, Brain)
@@ -77,6 +80,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(test_brain, BotConfiguration())
         self.assertIsNotNone(bot)
         self.assertIsInstance(bot, Bot)
+        bot.configuration._default_response = "Sorry, I don't have an answer for that right now"
 
         response = bot.ask_question("testid", "hello")
         self.assertIsNotNone(response)

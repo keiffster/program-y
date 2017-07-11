@@ -20,9 +20,6 @@ from abc import ABCMeta, abstractmethod
 class BaseConfigurationFile(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, client_config):
-        self.client_config = client_config
-
     @abstractmethod
     def load_from_text(self, text, bot_root):
         """
@@ -58,14 +55,6 @@ class BaseConfigurationFile(object):
         """
         Never Implemented
         """
-
-    def _infer_type_from_string(self, text):
-        if text == 'True' or text == 'true':
-            return True
-        elif text == 'False' or text == 'false':
-            return False
-        else:
-            return text
 
     def convert_to_bool(self, value):
         if value.upper() == 'TRUE':

@@ -4,14 +4,15 @@ from xml.etree.ElementTree import ParseError
 
 from programy.parser.aiml_parser import AIMLParser
 from programy.brain import Brain
-from programy.config.brain import BrainConfiguration
-from programy.config.brain import BrainFileConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.brain.file import BrainFileConfiguration
 
 class AIMLParserErrorTests(unittest.TestCase):
 
     def setUp(self):
         config = BrainConfiguration()
-        config._aiml_files = BrainFileConfiguration(errors="/tmp/errors.txt")
+        config.files.aiml_files._errors = "/tmp/errors.txt"
+
         test_brain = Brain(configuration=config)
         self.parser = AIMLParser(brain=test_brain)
         self.parser.create_debug_storage(config)
