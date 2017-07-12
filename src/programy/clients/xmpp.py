@@ -49,8 +49,8 @@ class XmppBotClient(BotClient):
     def __init__(self, argument_parser=None):
         BotClient.__init__(self, argument_parser)
 
-    def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "xmpp"])
+    def set_environment(self, env='xmpp'):
+        self.bot.brain.predicates.pairs.append(["env", env])
         
     def get_client_configuration(self):
         return XmppConfiguration()
