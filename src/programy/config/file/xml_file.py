@@ -48,18 +48,15 @@ class XMLConfigurationFile(BaseConfigurationFile):
         else:
             return parent_section.find(section_name)
 
-    def get_section_data(self, section_name, parent_section):
-        sections = parent_section.find(section_name)
-        data = {}
-        for child in sections:
-            data[child.tag] = child.text
-        return data
-
     def get_child_section_keys(self, section_name, parent_section):
-        keys = []
-        for child in parent_section.find(section_name):
-            keys.append(child.tag)
-        return keys
+        found = parent_section.find(section_name)
+        if found is not None:
+            keys = []
+            for child in found:
+                keys.append(child.tag)
+            return keys
+        else:
+            return None
 
     def get_option(self, section, option_name, missing_value=None):
         child = section.find(option_name)

@@ -10,51 +10,51 @@ brain:
     # Defaults
     # These have not been added to the system yet
     defaults:
-      default-get: unknown
-      default-property: unknown
-      default-map: unknown
-      learn-filename: y-bot-learnf.aiml
+      default-get: test_unknown
+      default-property: test_unknown
+      default-map: test_unknown
+      learn-filename: test-learnf.aiml
     # These have not been added to the system yet
 
     # Nodes
     nodes:
-      pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
-      template_nodes: $BOT_ROOT/config/template_nodes.conf
+      pattern_nodes: $BOT_ROOT/config/test_pattern_nodes.conf
+      template_nodes: $BOT_ROOT/config/test_template_nodes.conf
 
     # Binary
     binaries:
-      save_binary: false
-      load_binary: false
-      binary_filename: $BOT_ROOT/output/y-bot.brain
-      load_aiml_on_binary_fail: false
-      dump_to_file: $BOT_ROOT/output/braintree.txt
+      save_binary: true
+      load_binary: true
+      binary_filename: $BOT_ROOT/output/test-y-bot.brain
+      load_aiml_on_binary_fail: true
+      dump_to_file: $BOT_ROOT/output/test-braintree.txt
 
     files:
         aiml:
-            files: $BOT_ROOT/aiml
-            extension: .aiml
+            files: $BOT_ROOT/test-aiml
+            extension: .test-aiml
             directories: true
-            errors: $BOT_ROOT/output/y-bot_errors.txt
-            duplicates: $BOT_ROOT/output/y-bot_duplicates.txt
+            errors: $BOT_ROOT/output/test-y-bot_errors.txt
+            duplicates: $BOT_ROOT/output/test-y-bot_duplicates.txt
         sets:
-            files: $BOT_ROOT/sets
-            extension: .txt
-            directories: false
+            files: $BOT_ROOT/test-sets
+            extension: .test-txt
+            directories: true
         maps:
-            files: $BOT_ROOT/maps
-            extension: .txt
-            directories: false
-        denormal: $BOT_ROOT/config/denormal.txt
-        normal: $BOT_ROOT/config/normal.txt
-        gender: $BOT_ROOT/config/gender.txt
-        person: $BOT_ROOT/config/person.txt
-        person2: $BOT_ROOT/config/person2.txt
-        predicates: $BOT_ROOT/config/predicates.txt
-        pronouns: $BOT_ROOT/config/pronouns.txt
-        properties: $BOT_ROOT/config/properties.txt
-        triples: $BOT_ROOT/config/triples.txt
-        preprocessors: $BOT_ROOT/config/preprocessors.conf
-        postprocessors: $BOT_ROOT/config/postprocessors.conf
+            files: $BOT_ROOT/test-maps
+            extension: .test-txt
+            directories: true
+        denormal: $BOT_ROOT/config/test-denormal.txt
+        normal: $BOT_ROOT/config/test-normal.txt
+        gender: $BOT_ROOT/config/test-gender.txt
+        person: $BOT_ROOT/config/test-person.txt
+        person2: $BOT_ROOT/config/test-person2.txt
+        predicates: $BOT_ROOT/config/test-predicates.txt
+        pronouns: $BOT_ROOT/config/test-pronouns.txt
+        properties: $BOT_ROOT/config/test-properties.txt
+        triples: $BOT_ROOT/config/test-triples.txt
+        preprocessors: $BOT_ROOT/config/test-preprocessors.conf
+        postprocessors: $BOT_ROOT/config/test-postprocessors.conf
 
     services:
         REST:
@@ -71,20 +71,20 @@ brain:
             classname: programy.utils.services.wikipediaservice.WikipediaService
 
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
-    prompt: ">>>"
-    initial_question: Hi, how can I help you today?
-    default_response: Sorry, I don't have an answer for that!
-    empty_string_srai: YEMPTY
-    exit_response: So long, and thanks for the fish!
+    license_keys: $BOT_ROOT/config/test-license.keys
+    prompt: TEST>>>
+    initial_question: Hi, how can I help you test today?
+    default_response: Sorry, I don't have a test answer for that!
+    empty_string: TEST-YEMPTY
+    exit_response: So long, and thanks for the test fish!
     override_predicates: true
     max_recursion: 10
 
     spelling:
-      classname: programy.utils.spelling.checker.SpellingChecker
-      corpus: $BOT_ROOT/spelling/corpus.txt
+      classname: programy.utils.spelling.checker.TestSpellingChecker
+      corpus: $BOT_ROOT/spelling/test-corpus.txt
       check_before: true
-      check_and_retry: false
+      check_and_retry: true
 
 
 rest:

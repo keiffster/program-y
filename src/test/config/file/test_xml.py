@@ -4,27 +4,62 @@ import os
 from programy.config.file.xml_file import XMLConfigurationFile
 from programy.config.sections.client.console import ConsoleConfiguration
 
+from test.config.file.base_file_tests import ConfigurationBaseFileTests
 
-class XMLConfigurationFileTests(unittest.TestCase):
+
+class XMLConfigurationFileTests(ConfigurationBaseFileTests):
+
+    def test_get_methods(self):
+        config_data = XMLConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+<root>
+	<brain>
+		<overrides>
+			<allow_system_aiml>true</allow_system_aiml>
+			<allow_learn_aiml>true</allow_learn_aiml>
+			<allow_learnf_aiml>true</allow_learnf_aiml>
+			<int_value>999</int_value>
+		</overrides>
+	</brain>
+</root>
+          """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section = config_data.get_section("brainx")
+        self.assertIsNone(section)
+
+        section = config_data.get_section("brain")
+        self.assertIsNotNone(section)
+
+        child_section = config_data.get_section("overrides", section)
+        self.assertIsNotNone(child_section)
+
+        keys = list(config_data.get_child_section_keys("overrides", section))
+        self.assertIsNotNone(keys)
+        self.assertEqual(4, len(keys))
+        self.assertTrue("allow_system_aiml" in keys)
+        self.assertTrue("allow_learn_aiml" in keys)
+        self.assertTrue("allow_learnf_aiml" in keys)
+        self.assertIsNone(config_data.get_child_section_keys("missing", section))
+        self.assertEqual(True, config_data.get_option(child_section, "allow_system_aiml"))
+        self.assertEqual(True, config_data.get_option(child_section, "missing", missing_value=True))
+        self.assertEqual(True, config_data.get_bool_option(child_section, "allow_system_aiml"))
+        self.assertEqual(False, config_data.get_bool_option(child_section, "other_value"))
+        self.assertEqual(999, config_data.get_int_option(child_section, "int_value"))
+        self.assertEqual(0, config_data.get_int_option(child_section, "other_value"))
 
     def test_load_from_file(self):
         xml = XMLConfigurationFile()
         self.assertIsNotNone(xml)
-        xml.load_from_file(os.path.dirname(__file__)+"/test_xml.xml", ConsoleConfiguration(), ".")
-        self.assertIsNotNone(xml.xml_data)
-        brain = xml.get_section("brain")
-        self.assertIsNotNone(brain)
-        files = xml.get_section("files", brain)
-        self.assertIsNotNone(files)
-        aiml = xml.get_section("aiml", files)
-        self.assertIsNotNone(aiml)
-
-        # TODO Add tests to check values have been loaded
+        configuration = xml.load_from_file(os.path.dirname(__file__)+"/test_xml.xml", ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+        self.assert_configuration(configuration)
 
     def test_load_from_text(self):
         xml = XMLConfigurationFile()
         self.assertIsNotNone(xml)
-        xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
+        configuration=xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
 <root>
 	<brain>
 		<overrides>
@@ -33,51 +68,51 @@ class XMLConfigurationFileTests(unittest.TestCase):
 			<allow_learnf_aiml>true</allow_learnf_aiml>
 		</overrides>
 		<defaults>
-			<default-get>unknown</default-get>
-			<default-property>unknown</default-property>
-			<default-map>unknown</default-map>
-			<learn-filename>y-bot-learnf.aiml</learn-filename>
+			<default-get>test_unknown</default-get>
+			<default-property>test_unknown</default-property>
+			<default-map>test_unknown</default-map>
+			<learn-filename>test-learnf.aiml</learn-filename>
 		</defaults>
 		<nodes>
-			<pattern_nodes>$BOT_ROOT/config/pattern_nodes.conf</pattern_nodes>
-			<template_nodes>$BOT_ROOT/config/template_nodes.conf</template_nodes>
+			<pattern_nodes>$BOT_ROOT/config/test_pattern_nodes.conf</pattern_nodes>
+			<template_nodes>$BOT_ROOT/config/test_template_nodes.conf</template_nodes>
 		</nodes>
 		<binaries>
-			<save_binary>false</save_binary>
-			<load_binary>false</load_binary>
-			<binary_filename>$BOT_ROOT/output/y-bot.brain</binary_filename>
-			<load_aiml_on_binary_fail>false</load_aiml_on_binary_fail>
-			<dump_to_file>$BOT_ROOT/output/braintree.txt</dump_to_file>
+			<save_binary>true</save_binary>
+			<load_binary>true</load_binary>
+			<binary_filename>$BOT_ROOT/output/test-y-bot.brain</binary_filename>
+			<load_aiml_on_binary_fail>true</load_aiml_on_binary_fail>
+			<dump_to_file>$BOT_ROOT/output/test-braintree.txt</dump_to_file>
 		</binaries>
 		<files>
 			<aiml>
-				<files>$BOT_ROOT/aiml</files>
-				<extension>.aiml</extension>
+				<files>$BOT_ROOT/test-aiml</files>
+				<extension>.test-aiml</extension>
 				<directories>true</directories>
-				<errors>$BOT_ROOT/output/y-bot_errors.txt</errors>
-				<duplicates>$BOT_ROOT/output/y-bot_duplicates.txt</duplicates>
+				<errors>$BOT_ROOT/output/test-y-bot_errors.txt</errors>
+				<duplicates>$BOT_ROOT/output/test-y-bot_duplicates.txt</duplicates>
 			</aiml>
 			<sets>
-				<files>$BOT_ROOT/sets</files>
-				<extension>.txt</extension>
-				<directories>false</directories>
+				<files>$BOT_ROOT/test-sets</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
 			</sets>
 			<maps>
-				<files>$BOT_ROOT/maps</files>
-				<extension>.txt</extension>
-				<directories>false</directories>
+				<files>$BOT_ROOT/test-maps</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
 			</maps>
-			<denormal>$BOT_ROOT/config/denormal.txt</denormal>
-			<normal>$BOT_ROOT/config/normal.txt</normal>
-			<gender>$BOT_ROOT/config/gender.txt</gender>
-			<person>$BOT_ROOT/config/person.txt</person>
-			<person2>$BOT_ROOT/config/person2.txt</person2>
-			<predicates>$BOT_ROOT/config/predicates.txt</predicates>
-			<pronouns>$BOT_ROOT/config/pronouns.txt</pronouns>
-			<properties>$BOT_ROOT/config/properties.txt</properties>
-			<triples>$BOT_ROOT/config/triples.txt</triples>
-			<preprocessors>$BOT_ROOT/config/preprocessors.conf</preprocessors>
-			<postprocessors>$BOT_ROOT/config/postprocessors.conf</postprocessors>
+			<denormal>$BOT_ROOT/config/test-denormal.txt</denormal>
+			<normal>$BOT_ROOT/config/test-normal.txt</normal>
+			<gender>$BOT_ROOT/config/test-gender.txt</gender>
+			<person>$BOT_ROOT/config/test-person.txt</person>
+			<person2>$BOT_ROOT/config/test-person2.txt</person2>
+			<predicates>$BOT_ROOT/config/test-predicates.txt</predicates>
+			<pronouns>$BOT_ROOT/config/test-pronouns.txt</pronouns>
+			<properties>$BOT_ROOT/config/test-properties.txt</properties>
+			<triples>$BOT_ROOT/config/test-triples.txt</triples>
+			<preprocessors>$BOT_ROOT/config/test-preprocessors.conf</preprocessors>
+			<postprocessors>$BOT_ROOT/config/test-postprocessors.conf</postprocessors>
 		</files>
 		<services>
 			<REST>
@@ -99,19 +134,19 @@ class XMLConfigurationFileTests(unittest.TestCase):
 		</services>
 	</brain>
 	<bot>
-		<license_keys>$BOT_ROOT/config/license.keys</license_keys>
-		<prompt>>>></prompt>
-		<initial_question>Hi, how can I help you today?</initial_question>
-		<default_response>Sorry, I don't have an answer for that!</default_response>
-		<empty_string_srai>YEMPTY</empty_string_srai>
-		<exit_response>So long, and thanks for the fish!</exit_response>
+		<license_keys>$BOT_ROOT/config/test-license.keys</license_keys>
+		<prompt>TEST>>></prompt>
+		<initial_question>Hi, how can I help you test today?</initial_question>
+		<default_response>Sorry, I don't have a test answer for that!</default_response>
+		<empty_string>TEST-YEMPTY</empty_string>
+		<exit_response>So long, and thanks for the test fish!</exit_response>
 		<override_predicates>true</override_predicates>
 		<max_recursion>10</max_recursion>
 		<spelling>
-			<classname>programy.utils.spelling.checker.SpellingChecker</classname>
-			<corpus>$BOT_ROOT/spelling/corpus.txt</corpus>
+			<classname>programy.utils.spelling.checker.TestSpellingChecker</classname>
+			<corpus>$BOT_ROOT/spelling/test-corpus.txt</corpus>
 			<check_before>true</check_before>
-			<check_and_retry>false</check_and_retry>
+			<check_and_retry>true</check_and_retry>
 		</spelling>
 	</bot>
 	<rest>
@@ -149,6 +184,7 @@ class XMLConfigurationFileTests(unittest.TestCase):
 		<xep_0199>true</xep_0199>
 	</xmpp>
 </root>
-""", ConsoleConfiguration(), ".")
+            """, ConsoleConfiguration(), ".")
 
-        # TODO Add tests to check values have been loaded
+        self.assertIsNotNone(configuration)
+        self.assert_configuration(configuration)

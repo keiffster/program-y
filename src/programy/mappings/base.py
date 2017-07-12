@@ -55,6 +55,7 @@ class BaseCollection(object):
                     count += 1
         return count
 
+
 class SingleStringCollection(BaseCollection):
 
     def __init__(self):
@@ -78,6 +79,9 @@ class DoubleStringCharSplitCollection(BaseCollection):
     def __init__(self):
         BaseCollection.__init__(self)
         self.pairs = []
+
+    def add_value(self, key, value):
+        self.pairs.append([key, value])
 
     def set_value(self, key, value):
         for pair in self.pairs:
@@ -113,6 +117,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
     def process_splits(self, splits):
         self.pairs.append([splits[0], splits[1]])
         return True
+
 
 class DoubleStringPatternSplitCollection(BaseCollection):
 
@@ -201,11 +206,12 @@ class TripleStringCollection(BaseCollection):
         BaseCollection.__init__(self)
         self.triples = {}
 
-    @abstractmethod
     def split_line(self, line):
-        """
-        Never Implemented
-        """
+        splits = self.split_line_by_char(line)
+        if len(splits) > 3:
+            return [splits[0], splits[1], self.get_split_char().join(splits[2:])]
+        else:
+            return splits
 
     def get_split_char(self):
         return ":"
@@ -233,17 +239,6 @@ class TripleStringCollection(BaseCollection):
     def split_line_by_char(self, line):
         splits = line.split(self.get_split_char())
         return splits
-
-    def split_line_by_pattern(self, line):
-        line = line.strip()
-        if line is not None and len(line) > 0:
-            pattern = re.compile(self.get_split_pattern())
-            match = pattern.search(line)
-            first = match.group(1)
-            second = match.group(2)
-            third = match.group(3)
-            return [first, second, third]
-        return None
 
     def process_splits(self, splits):
         first = splits[0]

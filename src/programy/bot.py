@@ -39,19 +39,21 @@ class Bot(object):
 
     def load_license_keys(self):
         self._license_keys = LicenseKeys()
-        self._load_license_keys(self._configuration)
+        if self._configuration is not None:
+            self._load_license_keys(self._configuration)
 
     def initiate_spellchecker(self):
         self._spell_checker = None
         if self._configuration is not None:
-            if self._configuration.spelling is not None:
-                if self._configuration.spelling.classname is not None:
-                    try:
-                        logging.info("Loading spelling checker from class [%s]"%self._configuration.spelling.classname)
-                        spell_class = ClassLoader.instantiate_class(self._configuration.spelling.classname)
-                        self._spell_checker = spell_class(self._configuration.spelling)
-                    except Exception as e:
-                        logging.exception(e)
+            if self._configuration.spelling.classname is not None:
+                try:
+                    logging.info("Loading spelling checker from class [%s]"%self._configuration.spelling.classname)
+                    spell_class = ClassLoader.instantiate_class(self._configuration.spelling.classname)
+                    self._spell_checker = spell_class(self._configuration.spelling)
+                except Exception as e:
+                    logging.exception(e)
+            else:
+                logging.warning("No configuration setting for spelling checker!")
 
     @property
     def spell_checker(self):
@@ -105,7 +107,10 @@ class Bot(object):
 
     @property
     def override_predicates(self):
-        return self._configuration.override_predicates
+        if self._configuration is not None:
+            return self._configuration.override_predicates
+        else:
+            return False
 
     @property
     def get_version_string(self):
@@ -133,6 +138,27 @@ class Bot(object):
             self._conversations[clientid] = conversation
             return conversation
 
+    def check_max_recursion(self):
+        if self._question_depth > self._configuration.max_recursion:
+            raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_recursion))
+
+    def check_spelling_before(self, each_sentence):
+        if self._configuration.spelling.check_before is True:
+            text = each_sentence.text()
+            corrected = self.spell_checker.correct(text)
+            logging.debug ("Spell Checker corrected [%s] to [%s]"%(text, corrected))
+            each_sentence.replace_words(corrected)
+
+    def check_spelling_and_retry(self, clientid, each_sentence):
+        if self._configuration.spelling.check_and_retry is True:
+            text = each_sentence.text()
+            corrected = self.spell_checker.correct(text)
+            logging.debug("Spell Checker corrected [%s] to [%s]" % (text, corrected))
+            each_sentence.replace_words(corrected)
+            response = self.brain.ask_question(self, clientid, each_sentence)
+            return response
+        return None
+
     def ask_question(self, clientid: str, text: str, srai=False):
 
         logging.debug("Question (%s): %s", clientid, text)
@@ -155,27 +181,19 @@ class Bot(object):
 
         conversation.record_dialog(question)
 
+        self._question_depth += 1
+
         answers = []
         for each_sentence in question.sentences:
 
-            self._question_depth += 1
-            if self._question_depth > self._configuration.max_recursion:
-                raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_recursion))
+            self.check_max_recursion()
 
-            if self._configuration.spelling.check_before is True:
-                text = each_sentence.text()
-                corrected = self.spell_checker.correct(text)
-                logging.debug ("Spell Checker corrected [%s] to [%s]"%(text, corrected))
-                each_sentence.replace_words(corrected)
+            self.check_spelling_before(each_sentence)
 
             response = self.brain.ask_question(self, clientid, each_sentence)
+
             if response is None:
-                if self._configuration.spelling.check_and_retry is True:
-                    text = each_sentence.text()
-                    corrected = self.spell_checker.correct(text)
-                    logging.debug("Spell Checker corrected [%s] to [%s]" % (text, corrected))
-                    each_sentence.replace_words(corrected)
-                    response = self.brain.ask_question(self, clientid, each_sentence)
+                response = self.check_spelling_and_retry(clientid, each_sentence)
 
             if response is not None:
                 logging.debug("Raw Response (%s): %s", clientid, response)
@@ -194,7 +212,7 @@ class Bot(object):
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)
 
-            self._question_depth = 0
+        self._question_depth = 0
 
         if srai is True:
             conversation.pop_dialog()

@@ -49,9 +49,6 @@ class JSONConfigurationFile(BaseConfigurationFile):
                 return parent_section[section_name]
         return None
 
-    def get_section_data(self, section_name, parent_section=None):
-        return self.get_section(section_name, parent_section)
-
     def get_child_section_keys(self, child_section_name, parent_section):
         if child_section_name in parent_section:
             return parent_section[child_section_name].keys()

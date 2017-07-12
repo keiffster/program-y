@@ -130,7 +130,7 @@ class AIMLParser(object):
 
 
         if brain_configuration.binaries.dump_to_file is not None:
-            logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.dump_to_file)
+            logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.binaries.dump_to_file)
             self.pattern_parser.dump_to_file(brain_configuration.binaries.dump_to_file)
 
     def parse_from_file(self, filename):

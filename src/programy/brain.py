@@ -95,7 +95,7 @@ class Brain(object):
         return self._predicates_collection
 
     @property
-    def pronounds(self):
+    def pronouns(self):
         return self._pronouns_collection
 
     @property
@@ -122,42 +122,49 @@ class Brain(object):
     def postprocessors(self):
         return self._postprocessors
 
-    def load(self, brain_configuration: BrainConfiguration):
-
-        load_aiml = True
-        if brain_configuration.binaries.load_binary is True:
-            logging.info("Loading binary brain from [%s]"%brain_configuration.binaries.binary_filename)
-            try:
-                start = datetime.datetime.now()
-                gc.disable()
-                f = open(brain_configuration.binaries.binary_filename, "rb")
-                self._aiml_parser = pickle.load(f)
-                gc.enable()
-                f.close()
-                stop = datetime.datetime.now()
-                diff = stop - start
-                logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
-                load_aiml = False
-            except Exception as e:
-                logging.exception(e)
-                if brain_configuration.binaries.load_aiml_on_binary_fail is True:
-                    load_aiml = True
-                else:
-                    raise e
-
-        if load_aiml is True:
-            logging.info("Loading aiml source brain")
-            self._aiml_parser.load_aiml(brain_configuration)
-
-        if brain_configuration.binaries.save_binary is True:
-            logging.info("Saving binary brain to [%s]"%brain_configuration.binaries.binary_filename)
+    def load_binary(self, brain_configuration):
+        logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
+        try:
             start = datetime.datetime.now()
-            f = open(brain_configuration.binaries.binary_filename, "wb")
-            pickle.dump(self._aiml_parser, f)
+            gc.disable()
+            f = open(brain_configuration.binaries.binary_filename, "rb")
+            self._aiml_parser = pickle.load(f)
+            gc.enable()
             f.close()
             stop = datetime.datetime.now()
             diff = stop - start
-            logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
+            logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
+            load_aiml = False
+        except Exception as e:
+            logging.exception(e)
+            if brain_configuration.binaries.load_aiml_on_binary_fail is True:
+                load_aiml = True
+            else:
+                raise e
+
+    def load_aiml(self, brain_configuration):
+        logging.info("Loading aiml source brain")
+        self._aiml_parser.load_aiml(brain_configuration)
+
+    def save_binary(self, brain_configuration):
+        logging.info("Saving binary brain to [%s]" % brain_configuration.binaries.binary_filename)
+        start = datetime.datetime.now()
+        f = open(brain_configuration.binaries.binary_filename, "wb")
+        pickle.dump(self._aiml_parser, f)
+        f.close()
+        stop = datetime.datetime.now()
+        diff = stop - start
+        logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
+
+    def load(self, brain_configuration: BrainConfiguration):
+
+        if brain_configuration.binaries.load_binary is True:
+            self.load_binary(brain_configuration)
+
+        self.load_aiml(brain_configuration)
+
+        if brain_configuration.binaries.save_binary is True:
+            self.save_binary(brain_configuration)
 
         logging.info("Loading collections")
         self.load_collections(brain_configuration)
@@ -228,18 +235,12 @@ class Brain(object):
             logging.warning("No configuration setting for triples")
 
     def _load_sets(self, brain_configuration):
-        if brain_configuration.files.set_files is not None:
-            total = self._sets_collection.load(brain_configuration.files.set_files)
-            logging.info("Loaded a total of %d sets files", total)
-        else:
-            logging.warning("No configuration setting for set files")
+        total = self._sets_collection.load(brain_configuration.files.set_files)
+        logging.info("Loaded a total of %d sets files", total)
 
     def _load_maps(self, brain_configuration):
-        if brain_configuration.files.map_files is not None:
-            total = self._maps_collection.load(brain_configuration.files.map_files)
-            logging.info("Loaded a total of %d maps files", total)
-        else:
-            logging.warning("No configuration setting for map files")
+        total = self._maps_collection.load(brain_configuration.files.map_files)
+        logging.info("Loaded a total of %d maps files", total)
 
     def _load_preprocessors(self, brain_configuration):
         if brain_configuration.files.preprocessors is not None:

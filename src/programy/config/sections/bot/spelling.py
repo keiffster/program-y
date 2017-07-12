@@ -21,6 +21,7 @@ from programy.config.base import BaseConfigurationData
 class BotSpellingConfiguration(BaseConfigurationData):
 
     def __init__(self):
+        BaseConfigurationData.__init__(self, name="spelling")
         self._classname = None
         self._corpus = None
         self._alphabet = None

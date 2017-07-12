@@ -39,12 +39,6 @@ class BaseConfigurationFile(object):
         """
 
     @abstractmethod
-    def get_section_data(self, section_name, parent_section=None):
-        """
-        Never Implemented
-        """
-
-    @abstractmethod
     def get_child_section_keys(self, section_name, parent_section=None):
         """
         Never Implemented

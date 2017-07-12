@@ -1,0 +1,2 @@
+<aiml>
+<category><pattern>WHAT IS MY NAME</pattern><topic>*</topic><that>*</that><template>YOUR NAME IS FRED</template></category></aiml>

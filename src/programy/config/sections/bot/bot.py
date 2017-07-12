@@ -40,7 +40,6 @@ class BotConfiguration(BaseConfigurationData):
         self._empty_string          = BotConfiguration.DEFAULT_EMPTY_STRING
         self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
         self._max_recursion         = 10
-        self._spelling              = None
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
@@ -54,7 +53,7 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
             self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
-            self._max_recursion = config_file.get_option(bot, "max_recursion", 10)
+            self._max_recursion = config_file.get_int_option(bot, "max_recursion", 10)
             self._spelling.load_config_section(config_file, bot, bot_root)
 
 

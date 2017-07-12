@@ -12,17 +12,14 @@ from test.config.file.base_file_tests import ConfigurationBaseFileTests
 class LoadConfigurationDataTests(ConfigurationBaseFileTests):
 
     def test_load_config_data_yaml(self):
-        client_config = ConsoleConfiguration()
-        config_data = ConfigurationFactory.load_configuration_from_file(client_config, os.path.dirname(__file__)+"/test_yaml.yaml")
-        self.assert_config_data(config_data)
+        config_data = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(), os.path.dirname(__file__)+"/test_yaml.yaml")
+        self.assert_configuration(config_data)
 
     def test_load_config_data_json(self):
-        client_config = ConsoleConfiguration()
-        config_data = ConfigurationFactory.load_configuration_from_file(client_config, os.path.dirname(__file__)+"/test_json.json")
-        self.assert_config_data(client_config)
+        config_data = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(), os.path.dirname(__file__)+"/test_json.json")
+        self.assert_configuration(config_data)
 
     def test_load_config_data_xml(self):
-        client_config = ConsoleConfiguration()
-        config_data = ConfigurationFactory.load_configuration_from_file(client_config, os.path.dirname(__file__)+"/test_xml.xml")
-        self.assert_config_data(config_data)
+        config_data = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(), os.path.dirname(__file__)+"/test_xml.xml")
+        self.assert_configuration(config_data)
 
