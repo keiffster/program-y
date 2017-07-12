@@ -56,24 +56,23 @@ class XmppBotClient(BotClient):
         return XmppConfiguration()
 
     def run(self):
-        logging.debug("%s App Running.."%self._environment)
+        logging.debug("%s App Running.."%self.bot.brain.predicates.predicate("env"))
 
         username = self.bot.license_keys.get_key("XMPP_USERNAME")
         password = self.bot.license_keys.get_key("XMPP_PASSWORD")
 
-        server = self.configuration.xmpp_configuration.server
-        port = self.configuration.xmpp_configuration.port
+        server = self.configuration.client_configuration.server
+        port = self.configuration.client_configuration.port
 
         self._client = XmppClient(self, username, password)
-        if self.configuration.xmpp_configuration.xep_0030 is True:
+        if self.configuration.client_configuration.xep_0030 is True:
             self._client.register_plugin('xep_0030')
-        if self.configuration.xmpp_configuration.xep_0004 is True:
+        if self.configuration.client_configuration.xep_0004 is True:
             self._client.register_plugin('xep_0004')
-        if self.configuration.xmpp_configuration.xep_0060 is True:
+        if self.configuration.client_configuration.xep_0060 is True:
             self._client.register_plugin('xep_0060')
-        if self.configuration.xmpp_configuration.xep_0199 is True:
+        if self.configuration.client_configuration.xep_0199 is True:
             self._client.register_plugin('xep_0199')
-
 
         if self._client.connect((server, port)):
             print("Connected, running...")
