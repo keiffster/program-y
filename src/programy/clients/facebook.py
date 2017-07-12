@@ -14,8 +14,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
-import time
 from flask import Flask, request
 
 from fbmessenger import BaseMessenger
@@ -73,8 +71,7 @@ class FacebookBotClient(BotClient):
 app = Flask(__name__)
 app.debug = True
 
-twitter_app = None
-
+facebook_app = None
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -84,15 +81,17 @@ def index():
 def webhook():
     print("Hello")
     if request.method == 'GET':
-        if request.args.get('hub.verify_token') == twitter_app._verify_token:
+        if request.args.get('hub.verify_token') == facebook_app._verify_token:
             #return request.args.get('hub.challenge')
             return 'OK'
         raise ValueError('FACEBOOK_VERIFY_TOKEN does not match.')
     elif request.method == 'POST':
-        twitter_app._messenger.handle(request.get_json(force=True))
+        facebook_app._messenger.handle(request.get_json(force=True))
     return ''
 
 if __name__ == '__main__':
-    twitter_app = FacebookBotClient()
-    app.run(host='127.0.0.1', port=8080, debug=True)
+
+    facebook_app = FacebookBotClient()
+    print("App running on http://127.0.0.0:8080")
+    app.run(host='127.0.0.1', port=8080, debug=False)
 
