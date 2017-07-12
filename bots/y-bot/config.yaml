@@ -83,7 +83,7 @@ bot:
     spelling:
       classname: programy.utils.spelling.checker.SpellingChecker
       corpus: $BOT_ROOT/spelling/corpus.txt
-      check_before: true
+      check_before: false
       check_and_retry: false
 
 

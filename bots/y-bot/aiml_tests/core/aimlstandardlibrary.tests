@@ -6,7 +6,7 @@
 "XNUMBER X", "Sorry, I don't have an answer for that!!"
 
 "XSTRING X", "X"
-"XSTRING X@Y", "X AT Y"
+"XSTRING X@Y", "X at Y"
 
 "XISTRUE TRUE", "TRUE"
 "XISTRUE FALSE", "FALSE"

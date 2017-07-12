@@ -54,7 +54,7 @@ brain:
         properties: $BOT_ROOT/config/properties.txt
         triples: $BOT_ROOT/config/triples.txt
         preprocessors: $BOT_ROOT/config/preprocessors.conf
-        postprocessors: $BOT_ROOT/config/postprocessors.conf
+        postprocessors: $BOT_ROOT/config/test_postprocessors.conf
 
     services:
         REST:
@@ -83,7 +83,7 @@ bot:
     spelling:
       classname: programy.utils.spelling.checker.SpellingChecker
       corpus: $BOT_ROOT/spelling/corpus.txt
-      check_before: true
+      check_before: false
       check_and_retry: false
 
 
