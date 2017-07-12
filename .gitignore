@@ -101,3 +101,5 @@ pylint.log
 license.keys
 /bots/y-bot/output/
 bots/y-bot/output/
+/bots/alice2/output/
+/bots/professor/output/
