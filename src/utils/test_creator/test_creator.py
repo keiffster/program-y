@@ -34,7 +34,9 @@ if __name__ == '__main__':
                 else:
                     pattern_text = pattern.text
                 template = category.find('template')
-                print('"%s", "%s"'%(pattern_text, template.text))
+                test_line = '"%s", "%s"'%(pattern_text, template.text)
+                output_file.write(test_line)
+                output_file.write("\n")
 
             topics = aiml.findall('topic')
             if len(topics) > 0:
