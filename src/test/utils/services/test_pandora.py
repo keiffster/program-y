@@ -1,6 +1,5 @@
 import unittest
 import os
-from xml.etree import ElementTree
 
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.services.pandora import PandoraService, PandoraAPI

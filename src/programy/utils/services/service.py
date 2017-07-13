@@ -51,6 +51,10 @@ class ServiceFactory(object):
             ServiceFactory.services[name] = new_class
 
     @classmethod
+    def service_exists(cls, name):
+        return bool(name.upper() in ServiceFactory.services)\
+
+    @classmethod
     def get_service(cls, service):
         name = service.upper()
         if name in ServiceFactory.services:

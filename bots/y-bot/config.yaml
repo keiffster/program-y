@@ -69,6 +69,8 @@ brain:
             url: http://www.pandorabots.com/pandora/talk-xml
         Wikipedia:
             classname: programy.utils.services.wikipediaservice.WikipediaService
+        Authentication:
+            classname: programy.utils.services.authentication.AuthenticationService
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys
