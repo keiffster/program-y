@@ -70,7 +70,8 @@ brain:
         Wikipedia:
             classname: programy.utils.services.wikipediaservice.WikipediaService
         Authentication:
-            classname: programy.utils.services.authentication.AuthenticationService
+            classname: programy.utils.services.auth.passthrough.PassThroughAuthenticationService
+            denied_srai: ACCESS_DENIED
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys

@@ -19,7 +19,7 @@ from programy.utils.services.service import Service
 from programy.config.sections.brain.service import BrainServiceConfiguration
 
 
-class AuthenticationService(Service):
+class PassThroughAuthenticationService(Service):
 
     def __init__(self, config: BrainServiceConfiguration):
         Service.__init__(self, config)

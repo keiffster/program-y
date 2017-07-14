@@ -39,7 +39,13 @@ class BaseConfigurationFile(object):
         """
 
     @abstractmethod
-    def get_child_section_keys(self, section_name, parent_section=None):
+    def get_keys(self, child_section):
+        """
+        Never Implemented
+        """
+
+    @abstractmethod
+    def get_child_section_keys(self, section_name, parent_section):
         """
         Never Implemented
         """

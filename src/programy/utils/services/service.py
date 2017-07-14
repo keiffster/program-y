@@ -25,6 +25,10 @@ class Service(object):
     def __init__(self, config: BrainServiceConfiguration):
         self._config = config
 
+    @property
+    def configuration(self):
+        return self._config
+
     def load_additional_config(self, service_config):
         pass
 
