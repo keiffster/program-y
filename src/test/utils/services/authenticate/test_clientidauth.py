@@ -1,6 +1,6 @@
 import unittest
 
-from programy.utils.services.auth.clientidauth import ClientIdAuthenticationService
+from programy.utils.services.authenticate.clientidauth import ClientIdAuthenticationService
 from programy.config.sections.brain.service import BrainServiceConfiguration
 from programy.brain import Brain
 from programy.bot import Bot
