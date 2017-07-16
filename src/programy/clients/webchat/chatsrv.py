@@ -2,7 +2,7 @@ import logging
 
 from flask import Flask, jsonify, request, make_response, abort, current_app
 from programy.clients.client import BotClient
-from programy.config.client.webchat import WebChatClientConfiguration
+from programy.config.sections.client.webchat import WebChatConfiguration
 
 class WebChatBotClient(BotClient):
 
@@ -13,7 +13,7 @@ class WebChatBotClient(BotClient):
         self.bot.brain.predicates.pairs.append(["env", "REST"])
 
     def get_client_configuration(self):
-        return WebChatClientConfiguration()
+        return WebChatConfiguration()
 
 print("Loading, please wait...")
 webchat_client = WebChatBotClient()
@@ -39,7 +39,7 @@ def is_apikey_valid(apikey):
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if webchat_client.configuration.webchat_configuration.use_api_keys is True:
+    if webchat_client.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
             logging.error("Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
@@ -92,13 +92,13 @@ def ask():
 if __name__ == '__main__':
 
     def run():
-        print("REST Client running on %s:%s" % (webchat_client.configuration.webchat_configuration.host,
-                                                webchat_client.configuration.webchat_configuration.port))
-        if webchat_client.configuration.webchat_configuration.debug is True:
-            print("REST Client running in debug mode")
+        print("WebChat Client running on %s:%s" % (webchat_client.configuration.client_configuration.host,
+                                                   webchat_client.configuration.client_configuration.port))
+        if webchat_client.configuration.client_configuration.debug is True:
+            print("WebChat Client running in debug mode")
 
-        app.run(host=webchat_client.configuration.webchat_configuration.host,
-                port=webchat_client.configuration.webchat_configuration.port,
-                debug=webchat_client.configuration.webchat_configuration.debug)
+        app.run(host=webchat_client.configuration.client_configuration.host,
+                port=webchat_client.configuration.client_configuration.port,
+                debug=webchat_client.configuration.client_configuration.debug)
 
     run()
