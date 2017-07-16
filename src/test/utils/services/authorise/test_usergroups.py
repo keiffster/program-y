@@ -3,8 +3,7 @@ import unittest
 from programy.utils.services.authorise.usergroups import User
 from programy.utils.services.authorise.usergroups import Group
 
-
-class UserGroupsServiceTests(unittest.TestCase):
+class UserGroupTests(unittest.TestCase):
 
     def test_users(self):
         user1 = User("keith")

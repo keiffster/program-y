@@ -2,7 +2,7 @@ import logging
 
 from flask import Flask, jsonify, request, make_response, abort, current_app
 from programy.clients.client import BotClient
-from programy.config.client.webchat import WebChatClientConfiguration
+from programy.config.sections.client.webchat import WebChatClientConfiguration
 
 class WebChatBotClient(BotClient):
 

@@ -15,76 +15,99 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+
 from programy.parser.template.nodes.base import TemplateNode
+from programy.utils.services.service import ServiceFactory
 from programy.parser.exceptions import ParserException
 
-class TemplateBotNode(TemplateNode):
+class TemplateAuthoriseNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
-        self._name = None
+        self._user = None
+        self._role = None
+        self._group = None
 
     @property
-    def name(self):
-        return self._name
+    def user(self):
+        return self._user
 
-    @name.setter
-    def name(self, name):
-        self._name = name
+    @property
+    def role(self):
+        return self._role
+
+    @property
+    def group(self):
+        return self._group
 
     def resolve(self, bot, clientid):
         try:
-            name = self.name.resolve(bot, clientid)
-            value = bot.brain.properties.property(name)
-            if value is None:
-                value = bot.brain.properties.property("default-property")
-                if value is None:
-                    value = ""
+            # Check if the user, role or group exists, assumption being, that if defined
+            # in the tag and exists then we can execute the inner children
+            # Assumpetion is that user has been authenticated and passed and is value
+            if self._user is not None:
+                bot.brain.authorisation.authorise_for_user(clientid, self._user)
+            if self._role is not None:
+                bot.brain.authorisation.authorise_for_role(clientid, self._role)
+            if self._role is not None:
+                bot.brain.authorisation.authorise_for_group(clientid, self._group)
+            else:
+                raise Exception("Unknown authorisation defined!")
 
-            logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-            return value
+            # Resolve afterwards, as pointless resolving before checking for authorisation
+            resolved = self.resolve_children_to_string(bot, clientid)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "[BOT (%s)]" % (self.name.to_string())
-
-    def output(self, tabs="", output=logging.debug):
-        self.output_child(self, tabs, output)
+        text = "AUTHORISE ("
+        if self._user is not None:
+            text += "user=%s"%self._user
+        if self._role is not None:
+            text += "role=%s"%self._role
+        if self._group is not None:
+            text += "group=%s"%self._group
+        text += ")"
 
     def to_xml(self, bot, clientid):
-        xml = "<bot "
-        xml += ' name="%s"' % self.name.resolve(bot, clientid)
-        xml += " />"
+        xml = '<authorise'
+        if self._service is not None:
+            if self._user is not None:
+                xml += 'user="%s"' % self._user
+            if self._role is not None:
+                xml += 'role="%s"' % self._role
+            if self._group is not None:
+                xml += 'group="%s"' % self._group
+        xml += '>'
+        xml += self.children_to_xml(bot, clientid)
+        xml += '</authorise>'
         return xml
 
-    # ######################################################################################################
-    # BOT_PROPERTY_EXPRESSION ::==
-    # <bot name="PROPERTY"/> |
-    # <bot><name>TEMPLATE_EXPRESSION</name></bot>
+    #######################################################################################################
+    # AUTHORISE_ATTRIBUTES ::= role="ROLEID" | group="GROUPID" | user="USERID"
+    # AUTHORISE_EXPRESSION ::== <authorise( AUTHORISE_ATTRIBUTES)*>TEMPLATE_EXPRESSION</authorise> |
 
     def parse_expression(self, graph, expression):
-        name_found = False
 
-        if 'name' in expression.attrib:
-            self.name = self.parse_attrib_value_as_word_node(graph, expression, 'name')
-            name_found = True
+        if 'user' in expression.attrib:
+            self._user = expression.attrib['user']
+        if 'role' in expression.attrib:
+            self._role = expression.attrib['role']
+        if 'group' in expression.attrib:
+            self._group = expression.attrib['group']
 
-        self.parse_text(graph, self.get_text_from_element(expression))
+        if self._user is None and self._role is None and self._group is None:
+            raise ParserException("AUTHORISE node, user, role or group attribute missing !")
+
+        head_text = self.get_text_from_element(expression)
+        self.parse_text(graph, head_text)
 
         for child in expression:
-
-            if child.tag == 'name':
-                self.name = self.parse_children_as_word_node(graph, child)
-                self.local = False
-                name_found = True
-
-            else:
-                graph.parse_tag_expression(child, self)
-
-            self.parse_text(graph, self.get_tail_from_element(child))
-
-        if name_found is False:
-            raise ParserException("Error, name not found", xml_element=expression)
+            graph.parse_tag_expression(child, self)
+            tail_text = self.get_tail_from_element(child)
+            self.parse_text(graph, tail_text)
 

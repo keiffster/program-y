@@ -192,7 +192,7 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
 
                 services:
                     Authentication:
-                        classname: programy.utils.services.auth.passthrough.PassThroughAuthenticationService
+                        classname: programy.utils.services.authenticate.passthrough.PassThroughAuthenticationService
                         denied_srai: ACCESS_DENIED
 
             """, ConsoleConfiguration(), ".")
