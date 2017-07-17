@@ -13,40 +13,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
 
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.sections.brain.security import BrainSecurityConfiguration
+from programy.utils.security.authenticate.authenticator import Authenticator
 
 
-class ProgramyConfiguration(object):
+class BasicPassThroughAuthenticationService(Authenticator):
 
-    def __init__(self, client_configuration, brain_config=None, bot_config=None):
-        if brain_config is None:
-            self._brain_config = BrainConfiguration()
-        else:
-            self._brain_config = brain_config
+    def __init__(self, configuration: BrainSecurityConfiguration):
+        Authenticator.__init__(self, configuration)
 
-        if bot_config is None:
-            self._bot_config = BotConfiguration()
-        else:
-            self._bot_config = bot_config
-
-        self._client_config = client_configuration
-
-    @property
-    def brain_configuration(self):
-        return self._brain_config
-
-    @property
-    def bot_configuration(self):
-        return self._bot_config
-
-    @property
-    def client_configuration(self):
-        return self._client_config
-
-    def load_config_data(self, config_file, bot_root):
-        self._brain_config.load_config_section(config_file, bot_root)
-        self._bot_config.load_config_section(config_file, bot_root)
-        self._client_config.load_config_section(config_file, bot_root)
+    def authenticate(self, clientid: str):
+        return True
 

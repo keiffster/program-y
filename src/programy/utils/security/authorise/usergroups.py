@@ -44,7 +44,9 @@ class Authorisable(object):
         if role in self._roles:
             return True
         for group in self._groups:
-                return group.has_role(role)
+            if group.has_role(role) is True:
+                return True
+        return False
 
     @property
     def groups(self):

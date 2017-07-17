@@ -13,24 +13,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-
 import logging
-from programy.processors.processing import PreProcessor
-from programy.utils.services.service import ServiceFactory
 
-class AuthenticatePreProcessor(PreProcessor):
+from programy.utils.security.authorise.authorisor import Authoriser
+from programy.config.sections.brain.service import BrainServiceConfiguration
 
-    def __init__(self):
-        PreProcessor.__init__(self)
 
-    def process(self, bot, clientid, string):
+class PassThroughAuthorisationService(Authoriser):
 
-        if  ServiceFactory.service_exists("Authentication"):
-            auth_service = ServiceFactory.get_service("Authentication")
-            if auth_service is not None:
-                logging.debug("Authenticating user [%s]" % clientid)
-                return auth_service.ask_question(bot, clientid, string)
+    def __init__(self, config: BrainServiceConfiguration):
+        Authoriser.__init__(self, config)
 
-        logging.debug("No authentication service defined, allowing question")
-        return string
+    def authorise(self, userid, role):
+        return True
+

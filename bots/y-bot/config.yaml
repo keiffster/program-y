@@ -69,9 +69,14 @@ brain:
             url: http://www.pandorabots.com/pandora/talk-xml
         Wikipedia:
             classname: programy.utils.services.wikipediaservice.WikipediaService
-        Authentication:
-            classname: programy.utils.services.authenticate.passthrough.PassThroughAuthenticationService
-            denied_srai: ACCESS_DENIED
+
+    security:
+        authentication:
+            classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+            denied_srai: AUTHENTICATION_FAILED
+        authorisation:
+            classname: programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+            denied_srai: AUTHORISATION_FAILED
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys

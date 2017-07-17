@@ -14,39 +14,37 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.utils.security.authorise.usergroups import User
+from programy.utils.security.authorise.usergroups import Group
+from programy.utils.security.authorise.authorisor import Authoriser, AuthorisationException
+from programy.config.sections.brain.security import BrainSecurityConfiguration
 
+class BasicUserGroupAuthorisationService(Authoriser):
 
-class ProgramyConfiguration(object):
+    def __init__(self, config: BrainSecurityConfiguration):
+        Authoriser.__init__(self, config)
+        self.load_users_and_groups()
 
-    def __init__(self, client_configuration, brain_config=None, bot_config=None):
-        if brain_config is None:
-            self._brain_config = BrainConfiguration()
-        else:
-            self._brain_config = brain_config
+    def load_users_and_groups(self):
 
-        if bot_config is None:
-            self._bot_config = BotConfiguration()
-        else:
-            self._bot_config = bot_config
+        self._users = {}
+        self._groups = {}
 
-        self._client_config = client_configuration
+        console_user = User("console")
+        self._users["console"] = console_user
 
-    @property
-    def brain_configuration(self):
-        return self._brain_config
+        sysadmin_group = Group("sysadmin")
+        self._groups["sysadmin"] = sysadmin_group
 
-    @property
-    def bot_configuration(self):
-        return self._bot_config
+        sysadmin_group.add_role("root")
 
-    @property
-    def client_configuration(self):
-        return self._client_config
+        console_user.add_to_group(sysadmin_group)
 
-    def load_config_data(self, config_file, bot_root):
-        self._brain_config.load_config_section(config_file, bot_root)
-        self._bot_config.load_config_section(config_file, bot_root)
-        self._client_config.load_config_section(config_file, bot_root)
+    def authorise(self, clientid, role):
+        if clientid not in self._users:
+            raise AuthorisationException("User [%s] unknown to system!"%clientid)
+
+        user = self._users[clientid]
+        return user.has_role(role)
+
 

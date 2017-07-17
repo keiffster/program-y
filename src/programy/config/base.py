@@ -15,7 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from abc import ABCMeta, abstractmethod
-
+import logging
 
 class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
@@ -28,7 +28,11 @@ class BaseConfigurationData(object):
         return bool(key in self._additionals)
 
     def value(self, key):
-        return self._additionals[key]
+        if key in self._additionals:
+            return self._additionals[key]
+        else:
+            logging.warning("Configuration key [%s] does not exist"%key)
+            return None
 
     @property
     def section_name(self):

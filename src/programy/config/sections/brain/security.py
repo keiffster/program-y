@@ -14,39 +14,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+import logging
 
+from programy.config.base import BaseConfigurationData
 
-class ProgramyConfiguration(object):
+class BrainSecurityConfiguration(BaseConfigurationData):
 
-    def __init__(self, client_configuration, brain_config=None, bot_config=None):
-        if brain_config is None:
-            self._brain_config = BrainConfiguration()
+    def __init__(self, service_name):
+        BaseConfigurationData.__init__(self, service_name)
+        self._classname = None
+        self._denied_srai = None
+
+    @property
+    def classname(self):
+        return self._classname
+
+    @property
+    def denied_srai(self):
+        return self._denied_srai
+
+    def load_config_section(self, file_config, service_config, bot_root):
+        service = file_config.get_section(self.section_name, service_config)
+        if service is not None:
+            self._classname = file_config.get_option(service, "classname", missing_value=None)
+            self._denied_srai = file_config.get_option(service, "denied_srai", missing_value=None)
+            self.load_additional_key_values(file_config, service)
         else:
-            self._brain_config = brain_config
-
-        if bot_config is None:
-            self._bot_config = BotConfiguration()
-        else:
-            self._bot_config = bot_config
-
-        self._client_config = client_configuration
-
-    @property
-    def brain_configuration(self):
-        return self._brain_config
-
-    @property
-    def bot_configuration(self):
-        return self._bot_config
-
-    @property
-    def client_configuration(self):
-        return self._client_config
-
-    def load_config_data(self, config_file, bot_root):
-        self._brain_config.load_config_section(config_file, bot_root)
-        self._bot_config.load_config_section(config_file, bot_root)
-        self._client_config.load_config_section(config_file, bot_root)
-
+            logging.warning("'security' section missing from bot config, using to defaults")

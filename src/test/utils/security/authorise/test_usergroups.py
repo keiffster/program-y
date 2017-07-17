@@ -1,7 +1,7 @@
 import unittest
 
-from programy.utils.services.authorise.usergroups import User
-from programy.utils.services.authorise.usergroups import Group
+from programy.utils.security.authorise.usergroups import User
+from programy.utils.security.authorise.usergroups import Group
 
 class UserGroupTests(unittest.TestCase):
 

@@ -3,16 +3,26 @@ import xml.etree.ElementTree as ET
 
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.programy import ProgramyConfiguration
-from programy.config.sections.client.console import ConsoleConfiguration
-from programy.config.sections.brain.brain import BrainConfiguration
 from programy.dialog import Question, Sentence
 from programy.parser.template.graph import TemplateGraph
 from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.aiml_parser import AIMLParser
+from programy.config.programy import ProgramyConfiguration
+from programy.config.sections.client.console import ConsoleConfiguration
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.bot.bot import BotConfiguration
 
 class TemplateGraphTestClient(unittest.TestCase):
+
+    def get_brain_config(self):
+        return BrainConfiguration()
+
+    def get_bot_config(self):
+        return BotConfiguration()
+
+    def get_client_config(self):
+        return ConsoleConfiguration()
 
     def setUp(self):
         self.parser = TemplateGraph(AIMLParser())
@@ -33,9 +43,11 @@ class TemplateGraphTestClient(unittest.TestCase):
                                                              Match(Match.TOPIC, test_node, '*'),
                                                              Match(Match.THAT, test_node, '*')]
 
-        test_config = ProgramyConfiguration(ConsoleConfiguration())
+        test_config = ProgramyConfiguration(self.get_client_config(),
+                                            brain_config=self.get_brain_config(),
+                                            bot_config=self.get_bot_config())
 
-        self.test_bot = Bot(Brain(BrainConfiguration()), config=test_config.bot_configuration)
+        self.test_bot = Bot(Brain(self.get_brain_config()), config=test_config.bot_configuration)
         self.test_clientid = "testid"
 
         conversation = self.test_bot.get_conversation(self.test_clientid)

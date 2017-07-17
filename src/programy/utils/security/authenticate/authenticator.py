@@ -14,47 +14,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.utils.services.authorise.usergroups import User
-from programy.utils.services.authorise.usergroups import Group
+from programy.config.sections.brain.security import BrainSecurityConfiguration
 
 
-class AuthorisationException(Exception):
+class Authenticator(object):
 
-    def __init__(self, msg):
-        Exception.__init__(self, msg)
+    def __init__(self, configuration: BrainSecurityConfiguration):
+        self._configuration = configuration
 
+    @property
+    def configuration(self):
+        return self._configuration
 
-class Authoriser(object):
+    def get_default_denied_srai(self):
+        return self.configuration.denied_srai
 
-    def __init__(self, users, groups):
-        self._users = users
-        self._groups = groups
-
-    def authorise(self, userid, role):
-        if userid not in self._users:
-            raise AuthorisationException("User [%s] unknown to system!")
-
-        user = self._users[userid]
-        return user.has_role(role)
-
-
-class BasicUserGroupLoader(object):
-
-    @classmethod
-    def load_users_and_groups(cls):
-
-        users = {}
-        groups = {}
-
-        console_user = User("console")
-        users["console"] = console_user
-
-        sysadmin_group = Group("sysadmin")
-        groups["sysadmin"] = sysadmin_group
-
-        sysadmin_group.add_role("root")
-
-        console_user.add_to_group(sysadmin_group)
-
-        return Authoriser(users, groups)
-
+    def authenticate(self, clientid: str):
+        return False

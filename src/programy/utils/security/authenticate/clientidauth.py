@@ -15,14 +15,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import logging
 
-from programy.utils.services.service import Service
-from programy.config.sections.brain.service import BrainServiceConfiguration
+from programy.config.sections.brain.security import BrainSecurityConfiguration
+from programy.utils.security.authenticate.authenticator import Authenticator
 
 
-class ClientIdAuthenticationService(Service):
+class ClientIdAuthenticationService(Authenticator):
 
-    def __init__(self, config: BrainServiceConfiguration):
-        Service.__init__(self, config)
+    def __init__(self, configuration: BrainSecurityConfiguration):
+        Authenticator.__init__(self, configuration)
         self.authorised = [
             "console"
         ]
@@ -38,16 +38,15 @@ class ClientIdAuthenticationService(Service):
             self.authorised.append(clientid)
         return authorised
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def authenticate(self, clientid: str):
         try:
             if clientid in self.authorised:
-                return question
+                return True
             else:
                 if self._auth_clientid(clientid) is True:
-                    return question
+                    return True
 
-                return self.configuration.value('denied_srai')
-
+                return False
         except Exception as excep:
             logging.error(str(excep))
-            return ""
+            return False

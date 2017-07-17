@@ -13,26 +13,31 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 import logging
 
-from programy.utils.services.service import Service
-from programy.config.sections.brain.service import BrainServiceConfiguration
+from programy.config.base import BaseConfigurationData
+from programy.config.sections.brain.security import BrainSecurityConfiguration
 
+class BrainSecuritiesConfiguration(BaseConfigurationData):
+    def __init__(self):
+        BaseConfigurationData.__init__(self, "security")
+        self._authorisation = None
+        self._authentication = None
 
-class PassThroughAuthenticationService(Service):
+    @property
+    def authorisation(self):
+        return self._authorisation
 
-    def __init__(self, config: BrainServiceConfiguration):
-        Service.__init__(self, config)
+    @property
+    def authentication(self):
+        return self._authentication
 
-    def ask_question(self, bot, clientid: str, question: str):
-        try:
-            # When implementing a an authentication service you put the logic here
-            # You have access to the bot, the brain ( through the bot ) and the client id
-            # Which for all but console is unique based on the clients way of identifying
-            # the user
-            return question
-        except Exception as excep:
-            logging.error(str(excep))
-            return ""
+    def load_config_section(self, file_config, brain_config, bot_root):
+        securities = file_config.get_section(self.section_name, brain_config)
+        if securities is not None:
+            self._authentication = BrainSecurityConfiguration("authentication")
+            self._authentication.load_config_section(file_config, securities, bot_root)
 
-
+            self._authorisation = BrainSecurityConfiguration("authorisation")
+            self._authorisation.load_config_section(file_config, securities, bot_root)
