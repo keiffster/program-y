@@ -30,6 +30,14 @@ class Authorisable(object):
     def roles(self):
         return self._roles
 
+    @property
+    def groups(self):
+        return self._groups
+
+    def add_role(self, role):
+        if role not in self._roles:
+            self.roles.append(role)
+
     def add_role(self, role):
         if role not in self._roles:
             self._roles.append(role)
@@ -70,7 +78,6 @@ class Group(Authorisable):
     @property
     def groupid(self):
         return self._id
-
 
     @property
     def users(self):

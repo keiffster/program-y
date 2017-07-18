@@ -1,0 +1,4 @@
+users:
+  console:
+    roles:
+      root

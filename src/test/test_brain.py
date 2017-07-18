@@ -31,7 +31,7 @@ class BrainTests(unittest.TestCase):
     def test_brain_init_with_config(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), ".")
+        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")
@@ -72,10 +72,10 @@ class BrainTests(unittest.TestCase):
     def test_brain_init_with_secure_config(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_secure_brain.yaml", ConsoleConfiguration(), ".")
+        yaml.load_from_file(os.path.dirname(__file__)+ os.sep + "test_secure_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_config_section(yaml, os.path.dirname(__file__))
 
         brain = Brain(brain_config)
         self.assertIsNotNone(brain)

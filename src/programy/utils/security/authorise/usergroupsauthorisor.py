@@ -14,9 +14,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.utils.security.authorise.usergroups import User
-from programy.utils.security.authorise.usergroups import Group
-from programy.utils.security.authorise.authorisor import Authoriser, AuthorisationException
+import logging
+
+from programy.utils.security.authorise.authorisor import Authoriser
+from programy.utils.security.authorise.authorisor import AuthorisationException
+from programy.utils.security.authorise.usergrouploader import UserGroupLoader
 from programy.config.sections.brain.security import BrainSecurityConfiguration
 
 class BasicUserGroupAuthorisationService(Authoriser):
@@ -30,21 +32,19 @@ class BasicUserGroupAuthorisationService(Authoriser):
         self._users = {}
         self._groups = {}
 
-        console_user = User("console")
-        self._users["console"] = console_user
-
-        sysadmin_group = Group("sysadmin")
-        self._groups["sysadmin"] = sysadmin_group
-
-        sysadmin_group.add_role("root")
-
-        console_user.add_to_group(sysadmin_group)
+        if self.configuration.usergroups is not None:
+            loader = UserGroupLoader()
+            self._users, self._groups = loader.load_users_and_groups_from_file(self.configuration.usergroups)
+        else:
+            logging.warning("No user groups defined, authorisation tag will not work!")
 
     def authorise(self, clientid, role):
         if clientid not in self._users:
             raise AuthorisationException("User [%s] unknown to system!"%clientid)
 
-        user = self._users[clientid]
-        return user.has_role(role)
-
+        if clientid in self._users:
+            user = self._users[clientid]
+            return user.has_role(role)
+        else:
+            return False
 

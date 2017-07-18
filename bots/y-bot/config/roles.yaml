@@ -1,0 +1,19 @@
+users:
+  console:
+    roles:
+      user
+    groups:
+      sysadmin
+
+groups:
+  sysadmin:
+    roles:
+      root, admin, system
+    groups:
+      user
+
+  user:
+    roles:
+      ask
+
+

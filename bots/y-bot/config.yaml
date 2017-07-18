@@ -77,6 +77,7 @@ brain:
         authorisation:
             classname: programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
             denied_srai: AUTHORISATION_FAILED
+            usergroups: $BOT_ROOT/config/roles.yaml
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys

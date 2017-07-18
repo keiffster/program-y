@@ -16,6 +16,7 @@ class AuthoriseTestClient(TestClient):
         self.configuration.brain_configuration.security._authorisation = BrainSecurityConfiguration("authorisation")
         self.configuration.brain_configuration.security.authorisation._classname = "programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
         self.configuration.brain_configuration.security.authorisation._denied_srai = "ACCESS_DENIED"
+        self.configuration.brain_configuration.security.authorisation._usergroups = os.path.dirname(__file__) + os.sep + "usergroups.yaml"
 
 class AuthoriseAIMLTests(unittest.TestCase):
 

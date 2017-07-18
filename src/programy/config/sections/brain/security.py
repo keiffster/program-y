@@ -24,6 +24,7 @@ class BrainSecurityConfiguration(BaseConfigurationData):
         BaseConfigurationData.__init__(self, service_name)
         self._classname = None
         self._denied_srai = None
+        self._usergroups = None
 
     @property
     def classname(self):
@@ -33,11 +34,18 @@ class BrainSecurityConfiguration(BaseConfigurationData):
     def denied_srai(self):
         return self._denied_srai
 
+    @property
+    def usergroups(self):
+        return self._usergroups
+
     def load_config_section(self, file_config, service_config, bot_root):
         service = file_config.get_section(self.section_name, service_config)
         if service is not None:
             self._classname = file_config.get_option(service, "classname", missing_value=None)
             self._denied_srai = file_config.get_option(service, "denied_srai", missing_value=None)
+            usergroups = file_config.get_option(service, "usergroups", missing_value=None)
+            if usergroups is not None:
+                self._usergroups = self.sub_bot_root(usergroups, bot_root)
             self.load_additional_key_values(file_config, service)
         else:
             logging.warning("'security' section missing from bot config, using to defaults")
