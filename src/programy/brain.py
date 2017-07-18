@@ -40,8 +40,8 @@ from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
 import datetime
 
-class Brain(object):
 
+class Brain(object):
     def __init__(self, configuration: BrainConfiguration):
         self._configuration = configuration
         self._aiml_parser = AIMLParser(self)
@@ -187,7 +187,6 @@ class Brain(object):
         logging.info("Loading security services")
         self.load_security_services(brain_configuration)
 
-
     def _load_denormals(self, brain_configuration):
         if brain_configuration.files.denormal is not None:
             total = self._denormal_collection.load_from_filename(brain_configuration.files.denormal)
@@ -296,7 +295,8 @@ class Brain(object):
             if brain_configuration.security.authentication is not None:
                 if brain_configuration.security.authentication.classname is not None:
                     try:
-                        classobject = ClassLoader.instantiate_class(brain_configuration.security.authentication.classname)
+                        classobject = ClassLoader.instantiate_class(
+                            brain_configuration.security.authentication.classname)
                         self._authentication = classobject(brain_configuration.security.authentication)
                     except Exception as excep:
                         logging.exception(excep)
@@ -306,7 +306,8 @@ class Brain(object):
             if brain_configuration.security.authorisation is not None:
                 if brain_configuration.security.authorisation.classname is not None:
                     try:
-                        classobject = ClassLoader.instantiate_class(brain_configuration.security.authorisation.classname)
+                        classobject = ClassLoader.instantiate_class(
+                            brain_configuration.security.authorisation.classname)
                         self._authorisation = classobject(brain_configuration.security.authorisation)
                     except Exception as excep:
                         logging.exception(excep)
@@ -352,10 +353,10 @@ class Brain(object):
             logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
-        match_context =  self._aiml_parser.match_sentence(bot, clientid,
-                                                        sentence,
-                                                        topic_pattern=topic_pattern,
-                                                        that_pattern=that_pattern)
+        match_context = self._aiml_parser.match_sentence(bot, clientid,
+                                                         sentence,
+                                                         topic_pattern=topic_pattern,
+                                                         that_pattern=that_pattern)
 
         if match_context is not None:
             template_node = match_context.template_node()
