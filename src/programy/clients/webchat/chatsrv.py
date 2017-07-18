@@ -91,6 +91,15 @@ def ask():
 
 if __name__ == '__main__':
 
+    import os, signal, sys
+
+    def set_exit_handler(func):
+        signal.signal(signal.SIGTERM, func)
+
+    def on_exit(sig, func=None):
+        print("exit handler triggered")
+        sys.exit(1)
+
     def run():
         print("WebChat Client running on %s:%s" % (webchat_client.configuration.client_configuration.host,
                                                    webchat_client.configuration.client_configuration.port))
@@ -100,5 +109,8 @@ if __name__ == '__main__':
         app.run(host=webchat_client.configuration.client_configuration.host,
                 port=webchat_client.configuration.client_configuration.port,
                 debug=webchat_client.configuration.client_configuration.debug)
+
+
+    set_exit_handler(on_exit)
 
     run()
