@@ -3,7 +3,7 @@
 # Programy Web Chat Client
 #
 
-workdir=/etc/gitprogramy
+workdir=/home/ec2-user/programy
 export PYTHONPATH=$workdir/src:$workdir/libs/MetOffer-1.3.2:.
 
 start() {
@@ -13,7 +13,7 @@ start() {
 }
 
 stop() {
-    pid=`ps -ef | grep '[p]ython $workdir/src/clients/webchat/chatsrv.py' | awk '{ print $2 }'`
+    pid=`ps -ef | grep '/programy/src/clients/webchat/chatsrv.py' | awk '{ print $2 }'`
     echo $pid
     kill $pid
     sleep 2
