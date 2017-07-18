@@ -39,7 +39,7 @@ class BrainServicesConfiguration(BaseConfigurationData):
     def load_config_section(self, file_config, brain_config, bot_root):
         services = file_config.get_section("services", brain_config)
         if services is not None:
-            service_keys = file_config.get_child_section_keys("services", brain_config)
+            service_keys = file_config.get_keys(services)
 
             for name in service_keys:
                 service = BrainServiceConfiguration(name)

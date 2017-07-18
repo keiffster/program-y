@@ -15,13 +15,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from abc import ABCMeta, abstractmethod
-
+import logging
 
 class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, name):
         self._section_name = name
+        self._additionals = {}
+
+    def exists(self, key):
+        return bool(key in self._additionals)
+
+    def value(self, key):
+        if key in self._additionals:
+            return self._additionals[key]
+        else:
+            logging.warning("Configuration key [%s] does not exist"%key)
+            return None
 
     @property
     def section_name(self):
@@ -41,3 +52,13 @@ class BaseConfigurationData(object):
         """
         Never Implemented
         """
+
+    def additionals_to_add(self):
+        return []
+
+    def load_additional_key_values(self, file_config, service):
+        for key in file_config.get_keys(service):
+            if key in self.additionals_to_add():
+                value = file_config.get_option(service, key)
+                self._additionals[key] = value
+

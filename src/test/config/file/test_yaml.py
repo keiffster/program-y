@@ -184,3 +184,24 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 
+    def test_load_additionals(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        configuration = yaml.load_from_text("""
+            brain:
+
+                services:
+                    Authentication:
+                        classname: programy.utils.services.authenticate.passthrough.PassThroughAuthenticationService
+                        denied_srai: ACCESS_DENIED
+
+            """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertTrue(configuration.brain_configuration.services.exists("Authentication"))
+        auth_service = configuration.brain_configuration.services.service("Authentication")
+        self.assertIsNotNone(auth_service)
+
+        self.assertTrue(auth_service.exists("denied_srai"))
+        self.assertEqual("ACCESS_DENIED", auth_service.value("denied_srai"))

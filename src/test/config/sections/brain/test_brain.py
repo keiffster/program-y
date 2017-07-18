@@ -61,6 +61,14 @@ class BrainConfigurationTests(unittest.TestCase):
                     preprocessors: $BOT_ROOT/config/preprocessors.conf
                     postprocessors: $BOT_ROOT/config/postprocessors.conf
             
+                security:
+                    authentication:
+                        classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+                        denied_srai: AUTHENTICATION_FAILED
+                    authorisation:
+                        classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+                        denied_srai: AUTHORISATION_FAILED
+
                 services:
                     REST:
                         classname: programy.utils.services.rest.GenericRESTService
@@ -130,6 +138,10 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertEqual(brain_config.files.triples, "./config/triples.txt")
         self.assertEqual(brain_config.files.preprocessors, "./config/preprocessors.conf")
         self.assertEqual(brain_config.files.postprocessors, "./config/postprocessors.conf")
+
+        self.assertIsNotNone(brain_config.security)
+        self.assertIsNotNone(brain_config.security.authorisation)
+        self.assertIsNotNone(brain_config.security.authentication)
 
         self.assertIsNotNone(brain_config.services)
         self.assertTrue(brain_config.services.exists("REST"))

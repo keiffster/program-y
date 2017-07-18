@@ -20,9 +20,17 @@ from programy.config.sections.bot.bot import BotConfiguration
 
 class ProgramyConfiguration(object):
 
-    def __init__(self, client_configuration):
-        self._brain_config = BrainConfiguration()
-        self._bot_config = BotConfiguration()
+    def __init__(self, client_configuration, brain_config=None, bot_config=None):
+        if brain_config is None:
+            self._brain_config = BrainConfiguration()
+        else:
+            self._brain_config = brain_config
+
+        if bot_config is None:
+            self._bot_config = BotConfiguration()
+        else:
+            self._bot_config = bot_config
+
         self._client_config = client_configuration
 
     @property

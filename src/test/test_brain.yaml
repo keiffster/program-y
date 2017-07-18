@@ -17,3 +17,11 @@ brain:
             extension: .aiml
             directories: false
 
+    security:
+        authentication:
+            classname: programy.utils.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+            denied_srai: AUTHENTICATION_FAILED
+        authorisation:
+            classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+            denied_srai: AUTHORISATION_FAILED
+

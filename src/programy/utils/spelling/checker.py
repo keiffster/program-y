@@ -21,7 +21,6 @@ class SpellingChecker(object):
         self.sum_of_words = sum(self.words.values())
 
     def all_words(self, text):
-        #return re.findall(r'\w+', text.lower())
         return re.findall(r'\w+', text.upper())
 
     def probability(self, word):

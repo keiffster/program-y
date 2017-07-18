@@ -25,6 +25,10 @@ class Service(object):
     def __init__(self, config: BrainServiceConfiguration):
         self._config = config
 
+    @property
+    def configuration(self):
+        return self._config
+
     def load_additional_config(self, service_config):
         pass
 
@@ -49,6 +53,10 @@ class ServiceFactory(object):
             meta_class = loader.instantiate_class(service_config.classname)
             new_class = meta_class(service_config)
             ServiceFactory.services[name] = new_class
+
+    @classmethod
+    def service_exists(cls, name):
+        return bool(name.upper() in ServiceFactory.services)\
 
     @classmethod
     def get_service(cls, service):
