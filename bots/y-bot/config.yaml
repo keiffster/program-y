@@ -72,7 +72,7 @@ brain:
 
     security:
         authentication:
-            classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+            classname: programy.utils.security.authenticate.passthrough.BasicPassThroughAuthenticationService
             denied_srai: AUTHENTICATION_FAILED
         authorisation:
             classname: programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
@@ -82,10 +82,30 @@ brain:
     oob:
       default:
         classname: programy.utils.oob.default.DefaultOutOfBoundsProcessor
+      alarm:
+        classname: programy.utils.oob.alarm.AlarmOutOfBoundsProcessor
+      camera:
+        classname: programy.utils.oob.camera.CameraOutOfBoundsProcessor
+      clear:
+        classname: programy.utils.oob.clear.ClearOutOfBoundsProcessor
       dial:
         classname: programy.utils.oob.dial.DialOutOfBoundsProcessor
+      dialog:
+        classname: programy.utils.oob.dialog.DialogOutOfBoundsProcessor
       email:
-        classname: programy.utils.oob.emil.EmailOutOfBoundsProcessor
+        classname: programy.utils.oob.email.EmailOutOfBoundsProcessor
+      map:
+        classname: programy.utils.oob.map.MapOutOfBoundsProcessor
+      schedule:
+        classname: programy.utils.oob.schedule.ScheduleOutOfBoundsProcessor
+      search:
+        classname: programy.utils.oob.search.SearchOutOfBoundsProcessor
+      sms:
+        classname: programy.utils.oob.sms.SMSOutOfBoundsProcessor
+      url:
+        classname: programy.utils.oob.url.URLOutOfBoundsProcessor
+      wifi:
+        classname: programy.utils.oob.wifi.WifiOutOfBoundsProcessor
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys

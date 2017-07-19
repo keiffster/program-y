@@ -26,6 +26,7 @@ class LicenseKeys(object):
 
     def load_license_key_file(self, license_key_filename):
         try:
+            logging.info("Loading license key file: [%s]"%license_key_filename)
             with open(license_key_filename, "r+") as license_file:
                 for line in license_file:
                     self._process_license_key_line(line)

@@ -1,5 +1,6 @@
 import unittest
 import os
+import xml.etree.ElementTree as ET
 
 from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration
@@ -76,8 +77,10 @@ class BrainTests(unittest.TestCase):
         self.assertTrue(brain.authorisation.authorise("console", "somthing"))
         self.assertTrue(brain.authorisation.authorise("someone", "other"))
 
-        self.assertEqual("<something>other</something>", brain.default_oob.process_out_of_bounds(None, "console", "<something>other</something>"))
-        self.assertEqual("", brain.oobs['dial'].process_out_of_bounds(None, "console", "<dial>07777777777</dial>"))
+        oob_content = ET.fromstring("<oob><something>other</something></oob>")
+        self.assertEqual("", brain.default_oob.process_out_of_bounds(None, "console", oob_content))
+        oob_content = ET.fromstring("<oob><dial>07777777777</dial></oob>")
+        self.assertEqual("", brain.oobs['dial'].process_out_of_bounds(None, "console", oob_content))
 
     def test_brain_init_with_secure_config(self):
 
@@ -144,4 +147,4 @@ class BrainTests(unittest.TestCase):
 
         brain = Brain(brain_config)
 
-        self.assertEqual("", brain.process_oob(None, "console", ""))
+        self.assertEqual("", brain.process_oob(None, "console", "<oob></oob>"))

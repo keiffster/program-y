@@ -41,6 +41,8 @@ class Bot(object):
         self._license_keys = LicenseKeys()
         if self._configuration is not None:
             self._load_license_keys(self._configuration)
+        else:
+            logging.warning("No configuration defined when loading license keys")
 
     def initiate_spellchecker(self):
         self._spell_checker = None

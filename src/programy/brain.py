@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import re
-
+import xml.etree.ElementTree as ET
 try:
     import _pickle as pickle
 except:
@@ -332,23 +332,6 @@ class Brain(object):
         else:
             logging.debug("No security configuration defined, running open...")
 
-    def load_oob_processors(self, brain_configuration):
-        if brain_configuration.oob is not None:
-            if brain_configuration.oob.default() is not None:
-                try:
-                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.default().classname)
-                    self._default_oob = classobject()
-                except Exception as excep:
-                    logging.exception(excep)
-
-            for oob_name in  brain_configuration.oob.oobs():
-                oob = brain_configuration.oob.oob(oob_name)
-                try:
-                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.oob(oob_name).classname)
-                    self._oob[oob_name] = classobject()
-                except Exception as excep:
-                    logging.exception(excep)
-
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
@@ -403,6 +386,24 @@ class Brain(object):
 
         return None
 
+    def load_oob_processors(self, brain_configuration):
+        if brain_configuration.oob is not None:
+            if brain_configuration.oob.default() is not None:
+                try:
+                    logging.info("Loading default oob")
+                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.default().classname)
+                    self._default_oob = classobject()
+                except Exception as excep:
+                    logging.exception(excep)
+
+            for oob_name in  brain_configuration.oob.oobs():
+                try:
+                    logging.info("Loading oob: %s"%oob_name)
+                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.oob(oob_name).classname)
+                    self._oob[oob_name] = classobject()
+                except Exception as excep:
+                    logging.exception(excep)
+
     def strip_oob(self, response):
         m = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
         g = m.match(response)
@@ -418,12 +419,18 @@ class Brain(object):
         return response, None
 
     def process_oob(self, bot, clientid, oob_command):
-        for oob_name in self._oob.keys():
-            tag = "<%s>"%oob_name
-            if tag in oob_command:
-                oob_class = self._oob[oob_name]
-                return oob_class.process_out_of_bounds(bot, clientid, oob_command)
-        return self._default_oob.process_out_of_bounds(bot, clientid, oob_command)
+
+        oob_content = ET.fromstring(oob_command)
+
+        if oob_content.tag == 'oob':
+            for tag in oob_content:
+                if tag in self._oob:
+                    oob_class = self._oob[tag]
+                    return oob_class.process_out_of_bounds(bot, clientid, tag)
+                else:
+                    return self._default_oob.process_out_of_bounds(bot, clientid, tag)
+
+        return ""
 
     def post_process_response(self, bot, clientid, response: str):
         return self.postprocessors.process(bot, clientid, response)

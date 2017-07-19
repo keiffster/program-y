@@ -4,24 +4,24 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBoundsProcessor
 
 """
-Example: <oob><dial>07777777777</dial></oob>
+Example: <oob><search>VIDEO <star/></search></oob>
 """
-class DialOutOfBoundsProcessor(OutOfBoundsProcessor):
+class SearchOutOfBoundsProcessor(OutOfBoundsProcessor):
 
     def __init__(self):
         OutOfBoundsProcessor.__init__(self)
-        self._number = None
+        self._search = None
 
     def parse_oob_xml(self, oob: ET.Element):
         if oob.text is not None:
-            self._number = oob.text
+            self._search = oob.text
             return True
         else:
-            logging.error("Unvalid dial oob command - missing dial text!")
+            logging.error("Unvalid search oob command - missing search query!")
             return False
 
             return self.execute_oob_command(bot, clientid)
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("DialOutOfBoundsProcessor: Dialing=%s", self._number)
+        logging.info("SearchOutOfBoundsProcessor: Searching=%s", self._search)
         return ""
