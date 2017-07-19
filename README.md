@@ -32,7 +32,7 @@ For full documentation, tutorials and other helpful information, see the [Progra
 
 The project is maintained via a [Kanban Board](https://github.com/keiffster/program-y/projects/1). Here you can see a list of the active tasks plus the items in the backlog that we'll be adding next
 
-All issues are maintained in the []Program-Y Issue Tracker](https://github.com/keiffster/program-y/issues)
+All issues are maintained in the [Program-Y Issue Tracker](https://github.com/keiffster/program-y/issues)
 
 For more details of what AIML is, head over to the git a[AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
 
