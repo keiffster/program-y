@@ -1,5 +1,6 @@
 
 from abc import ABCMeta, abstractmethod
+import xml.etree.ElementTree as ET
 
 class OutOfBoundsProcessor(object):
 
@@ -12,3 +13,7 @@ class OutOfBoundsProcessor(object):
         Never Implemented
         """
         raise NotImplemented()
+
+    def to_xml(self, oob):
+        return ET.froomstring(oob)
+

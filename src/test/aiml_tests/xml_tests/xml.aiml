@@ -22,29 +22,16 @@ For more information see [url]
 	<category>
 		<pattern>HELLO</pattern>
 		<template>
-			<oob>HELLO, WORLD</oob>
+			I said <b>how are you</b> ?
 		</template>
 	</category>
 
 	<category>
-		<pattern>HI THERE</pattern>
+		<pattern>PICTURE</pattern>
 		<template>
-			<oob><uppercase>Hola!</uppercase></oob>
+			You can see my picture at <a href="http://someurl/image.png">Here</a>
 		</template>
 	</category>
 
-	<category>
-		<pattern>SAY HELLO</pattern>
-		<template>
-			<oob><message><uppercase>Hola!</uppercase></message></oob>
-		</template>
-	</category>
-
-	<category>
-		<pattern>FILE BUG REPORT</pattern>
-		<template>
-			<oob><dialog><title>Would you like to send a bug report?</title><list><item>Yes</item><item>No</item></list></dialog></oob> To help the developers blah blah blah
-		</template>
-	</category>
 
 </aiml>

@@ -25,6 +25,14 @@ class OOBAIMLTests(unittest.TestCase):
         response = OOBAIMLTests.test_client.bot.ask_question("test",  "HELLO")
         self.assertEqual(response, "<oob>HELLO, WORLD</oob>")
 
+    def test_oob_content(self):
+        response = OOBAIMLTests.test_client.bot.ask_question("test",  "HI THERE")
+        self.assertEqual(response, "<oob>HOLA!</oob>")
+
+    def test_oob_xml_and_content(self):
+        response = OOBAIMLTests.test_client.bot.ask_question("test",  "SAY HELLO")
+        self.assertEqual(response, "<oob><message>HOLA!</message></oob>")
+
     def test_oob_complex(self):
         response = OOBAIMLTests.test_client.bot.ask_question("test",  "FILE BUG REPORT")
         self.assertEqual(response, "To help the developers blah blah blah <oob><dialog><title>Would you like to send a bug report?</title> <list><item>Yes</item> <item>No</item></list></dialog></oob>")
