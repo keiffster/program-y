@@ -34,6 +34,6 @@ The project is maintained via a [Kanban Board](https://github.com/keiffster/prog
 
 All issues are maintained in the [Program-Y Issue Tracker](https://github.com/keiffster/program-y/issues)
 
-For more details of what AIML is, head over to the git a[AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
+For more details of what AIML is, head over to the [AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
 
 
