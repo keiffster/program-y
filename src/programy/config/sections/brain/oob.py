@@ -18,49 +18,19 @@ import logging
 
 from programy.config.base import BaseConfigurationData
 
-class BrainServiceConfiguration(BaseConfigurationData):
+class BrainOOBConfiguration(BaseConfigurationData):
 
-    additionals = ['denied_srai']
-
-    def __init__(self, service_name):
-        BaseConfigurationData.__init__(self, service_name)
+    def __init__(self, oob_name):
+        BaseConfigurationData.__init__(self, oob_name)
         self._classname = None
-        self._method = None
-        self._host = None
-        self._port = None
-        self._url = None
 
     @property
     def classname(self):
         return self._classname
 
-    @property
-    def method(self):
-        return self._method
-
-    @property
-    def host(self):
-        return self._host
-
-    @property
-    def port(self):
-        return self._port
-
-    @property
-    def url(self):
-        return self._url
-
-    def additionals_to_add(self):
-        return BrainServiceConfiguration.additionals
-
     def load_config_section(self, file_config, service_config, bot_root):
         service = file_config.get_section(self.section_name, service_config)
         if service is not None:
             self._classname = file_config.get_option(service, "classname", missing_value=None)
-            self._method = file_config.get_option(service, "method", missing_value=None)
-            self._host = file_config.get_option(service, "host", missing_value=None)
-            self._port = file_config.get_option(service, "port", missing_value=None)
-            self._url = file_config.get_option(service, "url", missing_value=None)
-            self.load_additional_key_values(file_config, service)
         else:
-            logging.warning("'services' section missing from brain config, using to defaults")
+            logging.warning("'oob' section missing from brain config, using to defaults")

@@ -24,6 +24,7 @@ from programy.config.sections.brain.binaries import BrainBinariesConfiguration
 from programy.config.sections.brain.files import BrainFilesConfiguration
 from programy.config.sections.brain.services import BrainServicesConfiguration
 from programy.config.sections.brain.securities import BrainSecuritiesConfiguration
+from programy.config.sections.brain.oobs import BrainOOBSConfiguration
 
 
 class BrainConfiguration(BaseConfigurationData):
@@ -37,6 +38,7 @@ class BrainConfiguration(BaseConfigurationData):
         self._files = BrainFilesConfiguration()
         self._services = BrainServicesConfiguration()
         self._security = BrainSecuritiesConfiguration()
+        self._oob = BrainOOBSConfiguration()
 
     @property
     def overrides(self):
@@ -66,6 +68,10 @@ class BrainConfiguration(BaseConfigurationData):
     def security(self):
         return self._security
 
+    @property
+    def oob(self):
+        return self._oob
+
     def load_config_section(self, file_config, bot_root):
         brain_config = file_config.get_section("brain")
         if brain_config is not None:
@@ -76,5 +82,6 @@ class BrainConfiguration(BaseConfigurationData):
             self._files.load_config_section(file_config, brain_config, bot_root)
             self._services.load_config_section(file_config, brain_config, bot_root)
             self._security.load_config_section(file_config, brain_config, bot_root)
+            self._oob.load_config_section(file_config, brain_config, bot_root)
 
 

@@ -19,12 +19,11 @@ class BasicAIMLTests(unittest.TestCase):
     def setUp(self):
         BasicAIMLTests.test_client = BasicTestClient()
 
-    def test_basic_no_response(self):
+    def test_basic_basic_text(self):
         response = BasicAIMLTests.test_client.bot.ask_question("test",  "NO RESPONSE")
         self.assertEqual(response, '')
 
     def test_basic_one_word(self):
-        BasicAIMLTests.test_client.dump_bot_brain_tree()
         response = BasicAIMLTests.test_client.bot.ask_question("test",  "HELLO")
         self.assertEqual(response, "HELLO, WORLD")
 

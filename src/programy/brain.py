@@ -15,6 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import re
 
 try:
     import _pickle as pickle
@@ -58,11 +59,14 @@ class Brain(object):
         self._maps_collection = MapCollection()
         self._properties_collection = PropertiesCollection()
 
+        self._preprocessors = ProcessorLoader()
+        self._postprocessors = ProcessorLoader()
+
         self._authentication = None
         self._authorisation = None
 
-        self._preprocessors = ProcessorLoader()
-        self._postprocessors = ProcessorLoader()
+        self._default_oob = None
+        self._oob = {}
 
         self.load(self._configuration)
 
@@ -134,6 +138,14 @@ class Brain(object):
     def authorisation(self):
         return self._authorisation
 
+    @property
+    def default_oob(self):
+        return self._default_oob
+
+    @property
+    def oobs(self):
+        return self._oob
+
     def load_binary(self, brain_configuration):
         logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
         try:
@@ -186,6 +198,9 @@ class Brain(object):
 
         logging.info("Loading security services")
         self.load_security_services(brain_configuration)
+
+        logging.info("Loading oob processors")
+        self.load_oob_processors(brain_configuration)
 
     def _load_denormals(self, brain_configuration):
         if brain_configuration.files.denormal is not None:
@@ -317,6 +332,23 @@ class Brain(object):
         else:
             logging.debug("No security configuration defined, running open...")
 
+    def load_oob_processors(self, brain_configuration):
+        if brain_configuration.oob is not None:
+            if brain_configuration.oob.default() is not None:
+                try:
+                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.default().classname)
+                    self._default_oob = classobject()
+                except Exception as excep:
+                    logging.exception(excep)
+
+            for oob_name in  brain_configuration.oob.oobs():
+                oob = brain_configuration.oob.oob(oob_name)
+                try:
+                    classobject = ClassLoader.instantiate_class(brain_configuration.oob.oob(oob_name).classname)
+                    self._oob[oob_name] = classobject()
+                except Exception as excep:
+                    logging.exception(excep)
+
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
@@ -362,9 +394,36 @@ class Brain(object):
             template_node = match_context.template_node()
             logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
             response = template_node.template.resolve(bot, clientid)
+            if "<oob>" in response:
+                response, oob = self.strip_oob(response)
+                if oob is not None:
+                    oob_response = self.process_oob(bot, clientid, oob)
+                    response = response + " " + oob_response
             return response
 
         return None
+
+    def strip_oob(self, response):
+        m = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
+        g = m.match(response)
+        if g is not None:
+            front =  g.group(1).strip()
+            back = g.group(3).strip()
+            response = ""
+            if front != "":
+                response = front + " "
+            response += back
+            oob = g.group(2)
+            return response, oob
+        return response, None
+
+    def process_oob(self, bot, clientid, oob_command):
+        for oob_name in self._oob.keys():
+            tag = "<%s>"%oob_name
+            if tag in oob_command:
+                oob_class = self._oob[oob_name]
+                return oob_class.process_out_of_bounds(bot, clientid, oob_command)
+        return self._default_oob.process_out_of_bounds(bot, clientid, oob_command)
 
     def post_process_response(self, bot, clientid, response: str):
         return self.postprocessors.process(bot, clientid, response)

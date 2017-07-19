@@ -79,6 +79,14 @@ brain:
             denied_srai: AUTHORISATION_FAILED
             usergroups: $BOT_ROOT/config/roles.yaml
 
+    oob:
+      default:
+        classname: programy.utils.oob.default.DefaultOutOfBoundsProcessor
+      dial:
+        classname: programy.utils.oob.dial.DialOutOfBoundsProcessor
+      email:
+        classname: programy.utils.oob.emil.EmailOutOfBoundsProcessor
+
 bot:
     license_keys: $BOT_ROOT/config/license.keys
     prompt: ">>>"

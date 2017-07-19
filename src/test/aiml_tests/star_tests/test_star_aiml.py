@@ -94,23 +94,19 @@ class StarAIMLTests(unittest.TestCase):
         self.assertEqual(response, 'RECURSED ENDED')
 
     def test_recursion_four_stars(self):
-        StarAIMLTests.test_client.dump_bot_brain_tree()
         response = StarAIMLTests.test_client.bot.ask_question("test", "RECURSIVE TEST THIS THAT OTHER")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'RECURSED RECURSED RECURSED ENDED')
 
     def test_star_case(self):
-        StarAIMLTests.test_client.dump_bot_brain_tree()
         response = StarAIMLTests.test_client.bot.ask_question("test", "STAR CASE TEST1")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'TEST1')
 
-        StarAIMLTests.test_client.dump_bot_brain_tree()
         response = StarAIMLTests.test_client.bot.ask_question("test", "STAR CASE test2")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'test2')
 
-        StarAIMLTests.test_client.dump_bot_brain_tree()
         response = StarAIMLTests.test_client.bot.ask_question("test", "STAR CASE TesT3")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'TesT3')

@@ -26,7 +26,6 @@ class BrainConfigurationTests(unittest.TestCase):
                   pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
                   template_nodes: $BOT_ROOT/config/template_nodes.conf
             
-
                 binaries:
                   save_binary: false
                   load_binary: false
@@ -68,6 +67,14 @@ class BrainConfigurationTests(unittest.TestCase):
                     authorisation:
                         classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
                         denied_srai: AUTHORISATION_FAILED
+
+                oob:
+                  default:
+                    classname: programy.utils.oob.default.DefaultOutOfBoundsProcessor
+                  dial:
+                    classname: programy.utils.oob.dial.DialOutOfBoundsProcessor
+                  email:
+                    classname: programy.utils.oob.email.EmailOutOfBoundsProcessor
 
                 services:
                     REST:
@@ -142,6 +149,12 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(brain_config.security)
         self.assertIsNotNone(brain_config.security.authorisation)
         self.assertIsNotNone(brain_config.security.authentication)
+
+        self.assertIsNotNone(brain_config.oob)
+        self.assertIsNotNone(brain_config.oob.oobs())
+        self.assertIsNotNone(brain_config.oob.default())
+        self.assertIsNotNone(brain_config.oob.oob("dial"))
+        self.assertIsNotNone(brain_config.oob.oob("email"))
 
         self.assertIsNotNone(brain_config.services)
         self.assertTrue(brain_config.services.exists("REST"))

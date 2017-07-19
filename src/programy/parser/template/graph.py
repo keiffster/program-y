@@ -64,18 +64,13 @@ class TemplateGraph(object):
             node_instance.parse_expression(self, expression)
             branch.children.append(node_instance)
         else:
-            self.parse_unknown_as_text_node(expression,branch)
-
-    def parse_oob_expression(self, expression, branch):
-        raise ParserException("Error, oob not implemented yet!", xml_element=expression)
+            self.parse_unknown_as_xml_node(expression,branch)
 
     #######################################################################################################
     # 	UNKNONWN NODE
     #   When its a node we don't know, add it as a text node. This deals with html nodes creeping into the text
-    def parse_unknown_as_text_node(self, expression, branch):
-        value = ET.tostring(expression, encoding="utf-8", method='xml').decode("utf-8")
-        tag = expression.tag
-        tail = expression.tail
-        text_node = self.get_word_node(text="<%s />"%tag)
-        branch.children.append(text_node)
-        text_node.parse_text(self, tail)
+    def parse_unknown_as_xml_node(self, expression, branch):
+        xml_node_class = self.get_node_class_by_name('xml')
+        xml_node = xml_node_class()
+        branch.children.append(xml_node)
+        xml_node.parse_expression(self, expression)

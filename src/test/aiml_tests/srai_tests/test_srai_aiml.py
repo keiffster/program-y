@@ -69,7 +69,6 @@ class SraiAIMLTests(unittest.TestCase):
         self.assertEqual('0', response)
 
     def test_xxlength_1char_string(self):
-        SraiAIMLTests.test_client.dump_bot_brain_tree()
         response = SraiAIMLTests.test_client.bot.ask_question("test", "XXLENGTH X XS 0")
         self.assertIsNotNone(response)
         self.assertEqual('1', response)

@@ -25,3 +25,10 @@ brain:
             classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
             denied_srai: AUTHORISATION_FAILED
 
+    oob:
+      default:
+        classname: programy.utils.oob.default.DefaultOutOfBoundsProcessor
+      dial:
+        classname: programy.utils.oob.dial.DialOutOfBoundsProcessor
+      email:
+        classname: programy.utils.oob.email.EmailOutOfBoundsProcessor
