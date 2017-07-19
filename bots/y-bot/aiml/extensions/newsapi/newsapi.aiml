@@ -416,7 +416,7 @@
         </pattern>
         <template>
             <extension path="programy.extensions.newsapi.newsapi.NewsAPIExtension">
-                <star index="1"/> <star index="2"/> n<star index="3"/> <star index="4"/>
+                SOURCE <star index="1"/> MAX <star index="2"/> SORT <star index="3"/> REVERSE <star index="4"/>
             </extension>
         </template>
     </category>

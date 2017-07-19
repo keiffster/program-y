@@ -80,7 +80,7 @@ class NewsAPIExtension(object):
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
 
-        source, max, sort, reverse = self.parse_data(bot, clientid, data)
+        source, max, sort, reverse = self.parse_data(data)
 
         if source is None:
             logging.error("NewsAPIExtension no source passed in as data parameter!")
