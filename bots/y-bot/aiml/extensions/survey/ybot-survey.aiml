@@ -58,6 +58,9 @@
                 </extension>
                 </think>
                 Thanks, thats the end of the survey
+                <think>
+                    <set name="topic"></set>
+                </think>
             </template>
         </category>
     </topic>
