@@ -4,6 +4,12 @@ Program-Y is an Python 3.x implementation of an AIML 2.0 Specification, but its 
 greenfield implementation of the entire AIML 2.0 spec in Python 3. it has extensive unit tests coverage (>85% at all 
 times) and a full suite of documentation to get you up and running, learn AIML and build you own ChatBots
 
+Programy-Y is fully cross plaform, running on 
+
+* Mac OSX
+* Linux
+* Windows
+
 Program-Y is extremely extensible, you can
 
 * Add you own AIML tags
@@ -21,7 +27,7 @@ Program-Y is extremely extensible, you can
 ** Facebook ( coming )
 ** Slack ( coming soon )
 
-Program-Y Shops with a number of Bots preconfigured
+Program-Y Ships with a number of Bots preconfigured
 
 * Alice2 - The original Alice Chatbot updated for AIML 2.0
 * Rosie - A starter chat bot from the inventors of AIML
