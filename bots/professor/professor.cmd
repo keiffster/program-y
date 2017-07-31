@@ -1,6 +1,8 @@
-SET PROGRAMY=y:\program-y
+@echo off
 
-SET PYTHONPATH=%PROGRAMY\src;%PROGRAMY\libs\MetOffer-1.3.2;%PROGRAMY\bots\professor
+CLS
 
-python3 %PROGRAMY\src\programy\clients\console.py --bot_root %PROGRAMY\bots\professor --config %PROGRAMY\bots\professor\config.yaml --cformat yaml --logging %PROGRAMY\bots\professor\logging.yaml
+SET PYTHONPATH=..\..\src;..\..\libs\MetOffer-1.3.2;.
+
+python ..\..\src\programy\clients\console.py --config .\config.windows.yaml --cformat yaml --logging .\logging.windows.yaml
 
