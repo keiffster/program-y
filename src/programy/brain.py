@@ -335,6 +335,16 @@ class Brain(object):
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
 
+    def parse_last_sentences_from_response(self, response):
+        response = re.sub(r'<\s*br\s*/>\s*', ".", response)
+        response = re.sub(r'<br></br>*', ".", response)
+        sentences = response.split(".")
+        sentences = [x for x in sentences if x]
+        last_sentence = sentences[-1]
+        that_pattern = TextUtils.strip_all_punctuation(last_sentence)
+        that_pattern = that_pattern.strip()
+        return that_pattern
+
     def ask_question(self, bot, clientid, sentence) -> str:
 
         if self.authentication is not None:
@@ -358,7 +368,7 @@ class Brain(object):
             # If the last response was valid, i.e not none and not empty string, then use
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
-                that_pattern = TextUtils.strip_all_punctuation(that_sentence.response)
+                that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
                 logging.info("That pattern = [%s]", that_pattern)
             else:
                 logging.info("That pattern, no response, default to [*]")

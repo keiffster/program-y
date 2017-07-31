@@ -22,7 +22,7 @@ class TextUtils:
 
     STRIP_ALL_WHITESPACE    = '[\s+]'
     STRIP_WHITESPACE        = '[\n\t\r+]'
-    STRIP_ALL_PUNCTUATION   = r'[:\'";,.?!"]'
+    STRIP_ALL_PUNCTUATION   = r'[:\'";,.?!\(\)\-"]'
 
     @staticmethod
     def get_tabs(depth: int, tabs=DEFAULT_TAB_SPACE):
@@ -43,8 +43,9 @@ class TextUtils:
 
     @staticmethod
     def strip_all_punctuation(string):
-        first_pass = re.sub(TextUtils.STRIP_ALL_PUNCTUATION, '', string)
-        return first_pass
+        first_pass = re.sub(TextUtils.STRIP_ALL_PUNCTUATION, ' ', string)
+        second_pass = re.sub(r'\s+', ' ', first_pass)
+        return second_pass.strip()
 
     @staticmethod
     def urlify(string):

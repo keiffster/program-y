@@ -40,7 +40,7 @@ class TextUtilsTests(unittest.TestCase):
 
     def test_strip_all_punctuation(self):
         self.assertEquals("", TextUtils.strip_all_punctuation(""))
-        self.assertEquals(" ", TextUtils.strip_all_punctuation(" "))
+        self.assertEquals("", TextUtils.strip_all_punctuation(" "))
         self.assertEquals("x y z", TextUtils.strip_all_punctuation("x! y? z."))
         self.assertEquals("a b c", TextUtils.strip_all_punctuation("!a b c?"))
 

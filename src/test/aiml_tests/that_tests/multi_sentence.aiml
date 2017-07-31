@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<category>
+		<pattern>START</pattern>
+		<template>
+            This is sentence 1. This is sentence two.
+		</template>
+	</category>
+
+    <category>
+        <pattern>CONTINUE</pattern>
+        <that>This is sentence two</that>
+        <template>
+            TEST PASS
+        </template>
+    </category>
+
+    <category>
+        <pattern>CONTINUE</pattern>
+        <template>
+            TEST FAIL
+        </template>
+    </category>
+
+</aiml>
