@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-class OutOfBoundsProcessor(object):
+class OutOfBandProcessor(object):
 
     def __init__(self):
         return

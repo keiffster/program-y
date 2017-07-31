@@ -1,15 +1,15 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><dial>07777777777</dial></oob>
 """
-class DialOutOfBoundsProcessor(OutOfBoundsProcessor):
+class DialOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._number = None
 
     def parse_oob_xml(self, oob: ET.Element):
@@ -23,5 +23,5 @@ class DialOutOfBoundsProcessor(OutOfBoundsProcessor):
             return self.execute_oob_command(bot, clientid)
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("DialOutOfBoundsProcessor: Dialing=%s", self._number)
+        logging.info("DialOutOfBandProcessor: Dialing=%s", self._number)
         return ""

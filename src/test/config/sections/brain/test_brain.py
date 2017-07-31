@@ -70,11 +70,11 @@ class BrainConfigurationTests(unittest.TestCase):
 
                 oob:
                   default:
-                    classname: programy.utils.oob.default.DefaultOutOfBoundsProcessor
+                    classname: programy.utils.oob.default.DefaultOutOfBandProcessor
                   dial:
-                    classname: programy.utils.oob.dial.DialOutOfBoundsProcessor
+                    classname: programy.utils.oob.dial.DialOutOfBandProcessor
                   email:
-                    classname: programy.utils.oob.email.EmailOutOfBoundsProcessor
+                    classname: programy.utils.oob.email.EmailOutOfBandProcessor
 
                 services:
                     REST:

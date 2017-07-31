@@ -1,15 +1,15 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><schedule><title><star/></title><description><lowercase><star index="2"/></lowercase></description><get name="sraix"/></schedule></oob>
 """
-class ScheduleOutOfBoundsProcessor(OutOfBoundsProcessor):
+class ScheduleOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._title = None
         self._description = None
 
@@ -30,5 +30,5 @@ class ScheduleOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("ScheduleOutOfBoundsProcessor: Scheduling=%s", self._title)
+        logging.info("ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
         return ""

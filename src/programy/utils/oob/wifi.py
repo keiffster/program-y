@@ -1,16 +1,16 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><wifi>on|off</wifi></oob>
 """
 
-class WifiOutOfBoundsProcessor(OutOfBoundsProcessor):
+class WifiOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._command = None
 
     def parse_oob_xml(self, oob: ET.Element):
@@ -22,5 +22,5 @@ class WifiOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("WifiOutOfBoundsProcessor: Setting camera to=%s", self._command)
+        logging.info("WifiOutOfBandProcessor: Setting camera to=%s", self._command)
         return ""

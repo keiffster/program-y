@@ -1,6 +1,6 @@
 import logging
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
@@ -11,10 +11,10 @@ dialog
 
 """
 
-class DialogOutOfBoundsProcessor(OutOfBoundsProcessor):
+class DialogOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._title = None
         self._list = None
 
@@ -35,5 +35,5 @@ class DialogOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("DialogOutOfBoundsProcessor: Dialog=%s", self._title)
+        logging.info("DialogOutOfBandProcessor: Dialog=%s", self._title)
         return ""

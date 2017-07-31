@@ -1,7 +1,7 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 <oob><url>http://<star/>.com</url></oob>
@@ -10,10 +10,10 @@ url
 
 """
 
-class URLOutOfBoundsProcessor(OutOfBoundsProcessor):
+class URLOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._url = None
 
     def parse_oob_xml(self, oob: ET.Element):
@@ -27,5 +27,5 @@ class URLOutOfBoundsProcessor(OutOfBoundsProcessor):
             return self.execute_oob_command(bot, clientid)
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("URLOutOfBoundsProcessor: Loading=%s", self._url)
+        logging.info("URLOutOfBandProcessor: Loading=%s", self._url)
         return ""

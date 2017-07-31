@@ -1,16 +1,16 @@
 import logging
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
 Example: <oob><camera>on|off</camera></oob>
 """
 
-class CameraOutOfBoundsProcessor(OutOfBoundsProcessor):
+class CameraOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._command = None
 
     def parse_oob_xml(self, oob):
@@ -22,5 +22,5 @@ class CameraOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("CameraOutOfBoundsProcessor: Setting camera to=%s", self._command)
+        logging.info("CameraOutOfBandProcessor: Setting camera to=%s", self._command)
         return ""

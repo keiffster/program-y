@@ -1,7 +1,7 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 <oob>
@@ -13,10 +13,10 @@ from programy.utils.oob.oob import OutOfBoundsProcessor
 </oob>
 """
 
-class EmailOutOfBoundsProcessor(OutOfBoundsProcessor):
+class EmailOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._to = None
         self._subject = None
         self._body = None
@@ -41,5 +41,5 @@ class EmailOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("EmailOutOfBoundsProcessor: Emailing=%s", self._to)
+        logging.info("EmailOutOfBandProcessor: Emailing=%s", self._to)
         return ""

@@ -1,15 +1,15 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><map>Kinghorn</map></oob>
 """
-class MapOutOfBoundsProcessor(OutOfBoundsProcessor):
+class MapOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._location = None
 
     def parse_oob_xml(self, oob: ET.Element):
@@ -21,5 +21,5 @@ class MapOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("MapOutOfBoundsProcessor: Showing a map for location=%s", self._location)
+        logging.info("MapOutOfBandProcessor: Showing a map for location=%s", self._location)
         return ""

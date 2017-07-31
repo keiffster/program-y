@@ -1,6 +1,6 @@
 import logging
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
@@ -11,10 +11,10 @@ sms
 
 """
 
-class SMSOutOfBoundsProcessor(OutOfBoundsProcessor):
+class SMSOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._recipient = None
         self._description = None
 
@@ -35,5 +35,5 @@ class SMSOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("SMSOutOfBoundsProcessor: Messaging=%s", self._recipient)
+        logging.info("SMSOutOfBandProcessor: Messaging=%s", self._recipient)
         return ""

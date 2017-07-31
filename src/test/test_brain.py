@@ -7,9 +7,9 @@ from programy.config.sections.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.sections.client.console import ConsoleConfiguration
 from programy.utils.security.authorise.authorisor import AuthorisationException
-from programy.utils.oob.default import DefaultOutOfBoundsProcessor
-from programy.utils.oob.dial import DialOutOfBoundsProcessor
-from programy.utils.oob.email import EmailOutOfBoundsProcessor
+from programy.utils.oob.default import DefaultOutOfBandProcessor
+from programy.utils.oob.dial import DialOutOfBandProcessor
+from programy.utils.oob.email import EmailOutOfBandProcessor
 
 class BrainTests(unittest.TestCase):
 
@@ -111,9 +111,9 @@ class BrainTests(unittest.TestCase):
 
         brain = Brain(brain_config)
 
-        self.assertIsInstance(brain.default_oob, DefaultOutOfBoundsProcessor)
-        self.assertIsInstance(brain.oobs['dial'], DialOutOfBoundsProcessor)
-        self.assertIsInstance(brain.oobs['email'], EmailOutOfBoundsProcessor)
+        self.assertIsInstance(brain.default_oob, DefaultOutOfBandProcessor)
+        self.assertIsInstance(brain.oobs['dial'], DialOutOfBandProcessor)
+        self.assertIsInstance(brain.oobs['email'], EmailOutOfBandProcessor)
 
     def test_oob_stripping(self):
 

@@ -1,16 +1,16 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><clear>log</clear></oob>
 """
 
-class ClearOutOfBoundsProcessor(OutOfBoundsProcessor):
+class ClearOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._command = None
 
     def parse_oob_xml(self, oob):
@@ -22,5 +22,5 @@ class ClearOutOfBoundsProcessor(OutOfBoundsProcessor):
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("ClearOutOfBoundsProcessor: Clearing=%s", self._command)
+        logging.info("ClearOutOfBandProcessor: Clearing=%s", self._command)
         return ""

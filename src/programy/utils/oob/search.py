@@ -1,15 +1,15 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
 """
 Example: <oob><search>VIDEO <star/></search></oob>
 """
-class SearchOutOfBoundsProcessor(OutOfBoundsProcessor):
+class SearchOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
         self._search = None
 
     def parse_oob_xml(self, oob: ET.Element):
@@ -23,5 +23,5 @@ class SearchOutOfBoundsProcessor(OutOfBoundsProcessor):
             return self.execute_oob_command(bot, clientid)
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("SearchOutOfBoundsProcessor: Searching=%s", self._search)
+        logging.info("SearchOutOfBandProcessor: Searching=%s", self._search)
         return ""

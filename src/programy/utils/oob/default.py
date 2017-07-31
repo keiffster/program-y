@@ -1,11 +1,11 @@
 import logging
 
-from programy.utils.oob.oob import OutOfBoundsProcessor
+from programy.utils.oob.oob import OutOfBandProcessor
 
-class DefaultOutOfBoundsProcessor(OutOfBoundsProcessor):
+class DefaultOutOfBandProcessor(OutOfBandProcessor):
 
     def __init__(self):
-        OutOfBoundsProcessor.__init__(self)
+        OutOfBandProcessor.__init__(self)
 
     def execute_oob_command(bot, clientid):
         logging.info("Default OOB Processing....")
