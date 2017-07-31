@@ -10,7 +10,7 @@ Program-Y is extremely extensible, you can
 * Add you own Spelling Checker
 * Support User Authorisation
 * Support User Authentication
-* Add you own Out Out Bounds (OOB) tags
+* Add you own Out Out Band (OOB) tags
 * Run a variety of clients, including
 ** Console
 ** REST

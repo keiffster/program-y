@@ -1,4 +1,6 @@
 import unittest
+import os
+
 from programy.processors.post.removehtml import RemoveHTMLPostProcessor
 from programy.bot import Bot
 from programy.brain import Brain
@@ -19,8 +21,18 @@ class RemoveHTMLTests(unittest.TestCase):
 
         result = processor.process(self.bot, "testid", "Hello <br/> World")
         self.assertIsNotNone(result)
-        self.assertEqual("Hello \nWorld", result)
+        if os.name == 'posix':
+            self.assertEqual("Hello \nWorld", result)
+        elif os.name == 'nt':
+            self.assertEqual("Hello \r\nWorld", result)
+        else:
+            raise Exception("Unknown os [%s]"%os.name)
 
         result = processor.process(self.bot, "testid", "Hello <br /> World")
         self.assertIsNotNone(result)
-        self.assertEqual("Hello \nWorld", result)
+        if os.name == 'posix':
+            self.assertEqual("Hello \nWorld", result)
+        elif os.name == 'nt':
+            self.assertEqual("Hello \r\nWorld", result)
+        else:
+            raise Exception("Unknown os [%s]"%os.name)

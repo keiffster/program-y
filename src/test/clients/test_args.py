@@ -2,7 +2,7 @@ import unittest
 import logging
 from programy.clients.args import ClientArguments
 from programy.clients.args import CommandLineClientArguments
-
+import os
 class MockArguments(object):
 
     def __init__(self,
@@ -48,9 +48,9 @@ class ClientArgumentsTests(unittest.TestCase):
         self.assertIsNotNone(args.config_format)
         self.assertIsNotNone(args.noloop)
 
-        args.bot_root = "/tmp"
+        args.bot_root = os.sep + "tmp"
         self.assertIsNotNone(args.bot_root)
-        self.assertEqual("/tmp", args.bot_root)
+        self.assertEqual( os.sep + "tmp", args.bot_root)
 
 
 class CommandLineClientArgumentsTests(unittest.TestCase):

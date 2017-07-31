@@ -9,7 +9,7 @@ class MetOfficeWeatherExtensionTests(unittest.TestCase):
 
     def setUp(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
         self.lat = 56.0720397
         self.lng = -3.1752001
@@ -18,7 +18,7 @@ class MetOfficeWeatherExtensionTests(unittest.TestCase):
         met_office = MetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
 
-        met_office.set_current_observation_response_file(os.path.dirname(__file__) + "/observation.json")
+        met_office.set_current_observation_response_file(os.path.dirname(__file__) +  os.sep + "observation.json")
 
         observation = met_office.current_observation(self.lat, self.lng)
         self.assertIsNotNone(observation)
@@ -38,7 +38,7 @@ class MetOfficeWeatherExtensionTests(unittest.TestCase):
         met_office = MetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
 
-        met_office.set_three_hourly_forecast_response_file(os.path.dirname(__file__) + "/forecast_3hourly.json")
+        met_office.set_three_hourly_forecast_response_file(os.path.dirname(__file__) +  os.sep + "forecast_3hourly.json")
 
         forecast = met_office.three_hourly_forecast(self.lat, self.lng)
         self.assertIsNotNone(forecast)
@@ -58,7 +58,7 @@ class MetOfficeWeatherExtensionTests(unittest.TestCase):
         met_office = MetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
 
-        met_office.set_daily_forecast_response_file(os.path.dirname(__file__) + "/forecast_daily.json")
+        met_office.set_daily_forecast_response_file(os.path.dirname(__file__) +  os.sep + "forecast_daily.json")
 
         forecast = met_office.daily_forecast(self.lat, self.lng)
         self.assertIsNotNone(forecast)

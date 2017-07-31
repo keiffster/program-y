@@ -11,12 +11,12 @@ class LineNumberingParserTests(unittest.TestCase):
 
     def test_broken_xml(self):
         with self.assertRaises(ET.ParseError) as raised:
-            ET.parse(os.path.dirname(__file__)+"/broken.xml", parser=LineNumberingParser())
+            ET.parse(os.path.dirname(__file__)+ os.sep + "broken.xml", parser=LineNumberingParser())
         self.assertEqual(22, raised.exception.position[0])
         self.assertEqual(10, raised.exception.position[1])
 
     def test_working_xml(self):
-        tree = ET.parse(os.path.dirname(__file__)+"/working.xml", parser=LineNumberingParser())
+        tree = ET.parse(os.path.dirname(__file__)+ os.sep + "working.xml", parser=LineNumberingParser())
         aiml = tree.getroot()
         self.assertEqual(28, aiml._end_line_number)
         self.assertEqual(0, aiml._end_column_number)

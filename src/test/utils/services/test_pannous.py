@@ -140,7 +140,7 @@ class PannousServiceTests(unittest.TestCase):
     def setUp(self):
         self.bot = TestBot()
         self.bot.license_keys = LicenseKeys()
-        self.bot.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.bot.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_ask_question(self):
 

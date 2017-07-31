@@ -1,3 +1,4 @@
+"""
 import unittest
 
 from programy.clients.facebook import FacebookBotClient
@@ -11,3 +12,4 @@ class FacebookBotClientTests(unittest.TestCase):
         client = FacebookBotClient(arguments)
         self.assertIsNotNone(client)
 
+"""

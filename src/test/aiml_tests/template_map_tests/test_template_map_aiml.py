@@ -11,7 +11,7 @@ class BasicTestClient(TestClient):
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
         self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
-        self.configuration.brain_configuration.files.map_files._files=os.path.dirname(__file__)+"/maps"
+        self.configuration.brain_configuration.files.map_files._files=os.path.dirname(__file__)+ os.sep + "maps"
         self.configuration.brain_configuration.files.map_files._extension=".txt"
 
 class TemplateMapAIMLTests(unittest.TestCase):

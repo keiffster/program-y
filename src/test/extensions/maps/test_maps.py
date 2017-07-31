@@ -9,9 +9,9 @@ class MapsExtensionTests(unittest.TestCase):
     def setUp(self):
         self.test_client = TestClient()
 
-        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
-        distance    = os.path.dirname(__file__) + "/distance.json"
-        directions  = os.path.dirname(__file__) + "/directions.json"
+        latlong     = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
+        distance    = os.path.dirname(__file__) +  os.sep + "distance.json"
+        directions  = os.path.dirname(__file__) +  os.sep + "directions.json"
 
         self.test_client.bot.license_keys.load_license_key_data("""
         GOOGLE_LATLONG=%s

@@ -1,13 +1,13 @@
 import xml.etree.ElementTree as ET
 
-from programy.config.sections.brain.file import BrainFileConfiguration
+import os
 
+from programy.config.sections.brain.file import BrainFileConfiguration
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
-
 
 class TemplateGraphLearnfTests(TemplateGraphTestClient):
 
@@ -23,7 +23,7 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        self.test_bot.brain._configuration._aiml_files = BrainFileConfiguration("/tmp", ".aiml", False)
+        self.test_bot.brain._configuration._aiml_files = BrainFileConfiguration( os.sep + "tmp", ".aiml", False)
 
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)

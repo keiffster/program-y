@@ -38,7 +38,7 @@ class LicenseKeyTests(unittest.TestCase):
 
     def test_load_license_keys_file(self):
         keys = LicenseKeys()
-        keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
         self.assertTrue(keys.has_key('KEY1'))
         self.assertEquals("Key1Data", keys.get_key("KEY1"))
         self.assertTrue(keys.has_key('KEY2'))

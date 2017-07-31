@@ -18,10 +18,10 @@ class WeathersAIMLTests(unittest.TestCase):
 
         WeathersAIMLTests.test_client = WeathersTestsClient()
 
-        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
-        observation = os.path.dirname(__file__) + "/observation.json"
-        threehourly = os.path.dirname(__file__) + "/forecast_3hourly.json"
-        daily       = os.path.dirname(__file__) + "/forecast_daily.json"
+        latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
+        observation = os.path.dirname(__file__) + os.sep + "observation.json"
+        threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
+        daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
 
         WeathersAIMLTests.test_client.bot.license_keys.load_license_key_data("""
         GOOGLE_LATLONG=%s

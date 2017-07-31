@@ -13,6 +13,14 @@ from programy.utils.oob.email import EmailOutOfBandProcessor
 
 class BrainTests(unittest.TestCase):
 
+    def load_os_specific_configuration(self, yaml, linux_filename, windows_filename):
+        if os.name == 'posix':
+            yaml.load_from_file(os.path.dirname(__file__)+ os.sep + linux_filename, ConsoleConfiguration(), os.path.dirname(__file__))
+        elif os.name == 'nt':
+            yaml.load_from_file(os.path.dirname(__file__)+ os.sep + windows_filename, ConsoleConfiguration(), os.path.dirname(__file__))
+        else:
+            raise Exception("Unknown os [%s]"%os.name)
+
     def test_brain_init_no_config(self):
         brain = Brain(BrainConfiguration() )
         self.assertIsNotNone(brain)
@@ -37,7 +45,7 @@ class BrainTests(unittest.TestCase):
     def test_brain_init_with_config(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")
@@ -85,7 +93,7 @@ class BrainTests(unittest.TestCase):
     def test_brain_init_with_secure_config(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+ os.sep + "test_secure_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
+        self.load_os_specific_configuration(yaml, "test_secure_brain.yaml", "test_secure_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, os.path.dirname(__file__))
@@ -104,7 +112,7 @@ class BrainTests(unittest.TestCase):
     def test_oob_loading(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")
@@ -118,7 +126,7 @@ class BrainTests(unittest.TestCase):
     def test_oob_stripping(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")
@@ -140,7 +148,7 @@ class BrainTests(unittest.TestCase):
     def test_oob_processing(self):
 
         yaml = YamlConfigurationFile()
-        yaml.load_from_file(os.path.dirname(__file__)+"/test_brain.yaml", ConsoleConfiguration(), os.path.dirname(__file__))
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
         brain_config.load_config_section(yaml, ".")

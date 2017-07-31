@@ -1,0 +1,54 @@
+brain:
+    overrides:
+      allow_system_aiml: true
+      allow_learn_aiml: true
+      allow_learnf_aiml: true
+
+    binaries:
+      save_binary: false
+      load_binary: false
+      binary_filename: C:\Windows\Temp/y-bot.brain
+      load_aiml_on_binary_fail: false
+      dump_to_file: C:\Windows\Temp/braintree.txt
+
+    files:
+        aiml:
+            files: .
+            extension: .aiml
+            directories: false
+
+    security:
+        authentication:
+            classname: programy.utils.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+            denied_srai: AUTHENTICATION_FAILED
+        authorisation:
+            classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+            denied_srai: AUTHORISATION_FAILED
+
+    oob:
+      default:
+        classname: programy.utils.oob.default.DefaultOutOfBandProcessor
+      alarm:
+        classname: programy.utils.oob.alarm.AlarmOutOfBandProcessor
+      camera:
+        classname: programy.utils.oob.camera.CameraOutOfBandProcessor
+      clear:
+        classname: programy.utils.oob.clear.ClearOutOfBandProcessor
+      dial:
+        classname: programy.utils.oob.dial.DialOutOfBandProcessor
+      dialog:
+        classname: programy.utils.oob.dialog.DialogOutOfBandProcessor
+      email:
+        classname: programy.utils.oob.email.EmailOutOfBandProcessor
+      map:
+        classname: programy.utils.oob.map.MapOutOfBandProcessor
+      schedule:
+        classname: programy.utils.oob.schedule.ScheduleOutOfBandProcessor
+      search:
+        classname: programy.utils.oob.search.SearchOutOfBandProcessor
+      sms:
+        classname: programy.utils.oob.sms.SMSOutOfBandProcessor
+      url:
+        classname: programy.utils.oob.url.URLOutOfBandProcessor
+      wifi:
+        classname: programy.utils.oob.wifi.WifiOutOfBandProcessor

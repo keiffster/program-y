@@ -7,28 +7,28 @@ brain:
 
     files:
         aiml:
-            files: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/src/test/aiml_tests/train_tests
+            files: $BOT_ROOT
             extension: .aiml
             directories: false
         sets:
-            files: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/sets
+            files: $BOT_ROOT/sets
             extension: .txt
             directories: false
         maps:
-            files: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/maps
+            files: $BOT_ROOT/maps
             extension: .txt
             directories: false
-        denormal: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/denormal.txt
-        normal: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/normal.txt
-        gender: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/gender.txt
-        person: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/person.txt
-        person2: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/person2.txt
-        predicates: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/predicates.txt
-        pronouns: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/pronouns.txt
-        properties: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/properties.txt
-        triples: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/triples.txt
-        preprocessors: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/preprocessors.conf
-        postprocessors: /Users/keithsterling/Documents/Development/Python/Projects/AIML/program-y/bots/rosie/config/postprocessors.conf
+        denormal: $BOT_ROOT/config/denormal.txt
+        normal: $BOT_ROOT/config/normal.txt
+        gender: $BOT_ROOT/config/gender.txt
+        person: $BOT_ROOT/config/person.txt
+        person2: $BOT_ROOT/config/person2.txt
+        predicates: $BOT_ROOT/config/predicates.txt
+        pronouns: $BOT_ROOT/config/pronouns.txt
+        properties: $BOT_ROOT/config/properties.txt
+        triples: $BOT_ROOT/config/triples.txt
+        preprocessors: $BOT_ROOT/config/preprocessors.conf
+        postprocessors: $BOT_ROOT/config/postprocessors.conf
 
 bot:
     prompt: ">>>"

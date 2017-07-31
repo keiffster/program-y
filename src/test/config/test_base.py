@@ -1,23 +1,23 @@
 import unittest
 
 from programy.config.base import BaseConfigurationData
-
+import os
 class BaseConfigurationDataTests(unittest.TestCase):
 
     def test_sub_bot_root(self):
         config = BaseConfigurationData("test")
 
-        replaced = config.sub_bot_root("/data", "/root")
+        replaced = config.sub_bot_root( os.sep + "data",  os.sep + "root")
         self.assertIsNotNone(replaced)
-        self.assertEqual(replaced, "/data")
+        self.assertEqual(replaced,  os.sep + "data")
 
-        replaced = config.sub_bot_root("$BOT_ROOT/data", "/root")
+        replaced = config.sub_bot_root("$BOT_ROOT"+ os.sep + "data",  os.sep + "root")
         self.assertIsNotNone(replaced)
-        self.assertEqual(replaced, "/root/data")
+        self.assertEqual(replaced,  os.sep + "root" + os.sep + "data")
 
-        replaced = config.sub_bot_root("$BOT_ROOT$BOT_ROOT/data", "/root")
+        replaced = config.sub_bot_root("$BOT_ROOT$BOT_ROOT"+ os.sep + "data",  os.sep + "root")
         self.assertIsNotNone(replaced)
-        self.assertEqual(replaced, "/root/root/data")
+        self.assertEqual(replaced,  os.sep + "root" + os.sep + "root" + os.sep + "data")
 
     def test_additionals(self):
         config = BaseConfigurationData("test")

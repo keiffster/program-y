@@ -1,4 +1,5 @@
 import xml.etree.ElementTree as ET
+import os
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
@@ -28,7 +29,13 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
 
         response = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello World")
+
+        if os.name == 'posix':
+            self.assertEqual(response, "Hello World")
+        elif os.name == 'nt':
+                self.assertEqual(response, '"Hello World"')
+        else:
+            self.assertFalse(True)
 
     def test_node_with_timeout(self):
 
@@ -49,7 +56,12 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
 
         response = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello World")
+        if os.name == 'posix':
+            self.assertEqual(response, "Hello World")
+        elif os.name == 'nt':
+                self.assertEqual(response, '"Hello World"')
+        else:
+            self.assertFalse(True)
 
     def test_node_with_system_switched_off(self):
 

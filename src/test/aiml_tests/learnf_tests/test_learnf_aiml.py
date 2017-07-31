@@ -21,7 +21,7 @@ class LearnfAIMLTests(unittest.TestCase):
 
     def setUp(self):
         LearnfAIMLTests.test_client = LearnfTestClient()
-        LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files = BrainFileConfiguration(files="/tmp")
+        LearnfAIMLTests.test_client.bot.brain._configuration._aiml_files = BrainFileConfiguration(files= os.sep + "tmp")
         self.learnf_path = LearnfAIMLTests.test_client.bot.brain.configuration.defaults._learn_filename
         if os.path.exists(self.learnf_path):
             os.remove(self.learnf_path)

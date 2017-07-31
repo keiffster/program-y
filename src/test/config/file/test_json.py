@@ -51,7 +51,7 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
     def test_load_from_file(self):
         json = JSONConfigurationFile()
         self.assertIsNotNone(json)
-        configuration = json.load_from_file(os.path.dirname(__file__)+"/test_json.json", ConsoleConfiguration(), ".")
+        configuration = json.load_from_file(os.path.dirname(__file__)+ os.sep + "test_json.json", ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 

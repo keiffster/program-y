@@ -1,0 +1,68 @@
+Apple
+Apples
+Avocado
+Avocados
+Banana
+Bananas
+Blackberries
+Blueberries
+Broccoli
+Cake
+Candy
+Carrots
+Celery
+Cereal
+Cheese
+Chicken
+Chickpeas
+Coffee
+Crab
+Lobster
+Clams
+Cucumber
+Egg
+Eggs
+Fish
+Grapefruit
+Grapes
+Honey
+Ice Cream
+Kiwi fruit
+Lettuce
+Egg McMuffin
+Melons
+Melon
+Milk
+Mushrooms
+Mushroom
+Nuts
+Peanuts
+Cashews
+Almonds
+Nut
+Oil
+Onions
+Onion
+Orange
+Oranges
+Pineapple
+Pineapples
+Potato
+Potatos
+Rice
+Seeds
+Spinach
+Squash
+Strawberries
+Sweet potato
+Sweet potatos
+Tomatoes
+Tomato
+Spaghetti
+Steak
+Chicken
+Hamburg
+Hamburger
+Hot Dog
+Hot Dogs
+Yogurt

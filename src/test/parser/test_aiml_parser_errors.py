@@ -11,7 +11,7 @@ class AIMLParserErrorTests(unittest.TestCase):
 
     def setUp(self):
         config = BrainConfiguration()
-        config.files.aiml_files._errors = "/tmp/errors.txt"
+        config.files.aiml_files._errors =  os.sep + "tmp" + os.sep + "errors.txt"
 
         test_brain = Brain(configuration=config)
         self.parser = AIMLParser(brain=test_brain)

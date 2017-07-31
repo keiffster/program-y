@@ -12,7 +12,7 @@ class GoogleMapsTests(unittest.TestCase):
     def test_location(self):
         googlemaps = GoogleMaps(None)
 
-        filename = os.path.dirname(__file__) + "/google_latlong.json"
+        filename = os.path.dirname(__file__) + os.sep + "google_latlong.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods
         self.assertTrue(os.path.isfile(filename))
 
@@ -27,7 +27,7 @@ class GoogleMapsTests(unittest.TestCase):
     def test_distance_uk_driving_imperial(self):
         googlemaps = GoogleMaps(None)
 
-        filename = os.path.dirname(__file__) + "/distance.json"
+        filename = os.path.dirname(__file__) + os.sep + "distance.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods
         self.assertTrue(os.path.isfile(filename))
 
@@ -41,7 +41,7 @@ class GoogleMapsTests(unittest.TestCase):
     def test_directions(self):
         googlemaps = GoogleMaps(None)
 
-        filename = os.path.dirname(__file__) + "/directions.json"
+        filename = os.path.dirname(__file__) + os.sep + "directions.json"
         # If this line fails, you need to generate test data using programy.utils.geo.google_geo.GoogleMaps static methods
         self.assertTrue(os.path.isfile(filename))
 

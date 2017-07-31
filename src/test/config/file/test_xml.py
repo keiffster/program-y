@@ -52,7 +52,7 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
     def test_load_from_file(self):
         xml = XMLConfigurationFile()
         self.assertIsNotNone(xml)
-        configuration = xml.load_from_file(os.path.dirname(__file__)+"/test_xml.xml", ConsoleConfiguration(), ".")
+        configuration = xml.load_from_file(os.path.dirname(__file__)+ os.sep + "test_xml.xml", ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 

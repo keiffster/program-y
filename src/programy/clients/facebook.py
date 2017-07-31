@@ -14,6 +14,9 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+"""
+Current commented out so that I do  not have to include fbmessenger in the list of dependencies
+
 from flask import Flask, request
 
 from fbmessenger import BaseMessenger
@@ -95,3 +98,4 @@ if __name__ == '__main__':
     print("App running on http://127.0.0.0:8080")
     app.run(host='127.0.0.1', port=8080, debug=False)
 
+"""

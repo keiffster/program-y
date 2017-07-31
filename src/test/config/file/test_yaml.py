@@ -50,7 +50,7 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
     def test_load_from_file(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
-        configuration = yaml.load_from_file(os.path.dirname(__file__)+"/test_yaml.yaml", ConsoleConfiguration(), ".")
+        configuration = yaml.load_from_file(os.path.dirname(__file__)+ os.sep + "test_yaml.yaml", ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 

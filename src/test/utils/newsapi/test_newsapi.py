@@ -39,7 +39,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_missing_keys(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/bad_test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "bad_test.keys")
         with self.assertRaises(Exception):
             newsapi = NewsAPI(self.license_keys)
 
@@ -49,7 +49,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_get_news_feed_articles(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__) + os.sep + "test.keys")
 
         mock_api = MockNewsApiApi()
 
@@ -84,7 +84,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_get_news_feed_articles_none_200_response(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
         mock_api = MockNewsApiApi()
 
@@ -113,7 +113,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_get_news_feed_articles_content_not_json(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
         mock_api = MockNewsApiApi()
 
@@ -130,7 +130,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_get_news_feed_articles_no_articles(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
         mock_api = MockNewsApiApi()
 
@@ -149,7 +149,7 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
     def test_get_news_feed_articles_no_articles_included(self):
         self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+"/test.keys")
+        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
         mock_api = MockNewsApiApi()
 

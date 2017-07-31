@@ -22,7 +22,6 @@ import urllib.request
 from programy.utils.geo.latlong import LatLong
 from programy.utils.text.text import TextUtils
 
-
 class GoogleAddressComponent(object):
     def __init__(self):
         self.long_name = None
@@ -323,11 +322,11 @@ if __name__ == '__main__':
     googlemaps = GoogleMaps()
 
     # Running these tools drops test files into the geocode test folder
-    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "../../../test/utils/geo/google_latlong.json")
-    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/geo/distance.json")
-    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/geo/directions.json")
+    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", TextUtils.replace_path_seperator("../../../test/utils/geo/google_latlong.json"))
+    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/geo/distance.json"))
+    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/geo/directions.json"))
 
-    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", "../../../test/utils/weather/google_latlong.json")
-    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/distance.json")
-    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", "../../../test/utils/weather/directions.json")
+    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", TextUtils.replace_path_seperator("../../../test/utils/weather/google_latlong.json"))
+    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/weather/distance.json"))
+    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/weather/directions.json"))
     # Only to be used to create test data for unit aiml_tests

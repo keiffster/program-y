@@ -16,20 +16,20 @@ class FileFinderTests(unittest.TestCase):
 
     def test_find_files_no_subdir(self):
         file_finder = TestFileFinder()
-        files = file_finder.find_files(os.path.dirname(__file__)+ "/test_files", subdir=False, extension=".txt")
+        files = file_finder.find_files(os.path.dirname(__file__)+ os.sep + "test_files", subdir=False, extension=".txt")
         self.assertEqual(len(files), 3)
 
     def test_find_files_subdir(self):
         file_finder = TestFileFinder()
-        files = file_finder.find_files(os.path.dirname(__file__)+ "/test_files", subdir=True, extension=".txt")
+        files = file_finder.find_files(os.path.dirname(__file__)+ os.sep + "test_files", subdir=True, extension=".txt")
         self.assertEqual(len(files), 4)
 
     def test_load_dir_contents_no_subdir(self):
         file_finder = TestFileFinder()
-        file_finder.load_dir_contents(os.path.dirname(__file__)+ "/test_files", subdir=False, extension=".txt")
+        file_finder.load_dir_contents(os.path.dirname(__file__)+ os.sep + "test_files", subdir=False, extension=".txt")
         self.assertEqual(len(file_finder.files), 3)
 
     def test_load_dir_contents_subdir(self):
         file_finder = TestFileFinder()
-        file_finder.load_dir_contents(os.path.dirname(__file__)+ "/test_files", subdir=True, extension=".txt")
+        file_finder.load_dir_contents(os.path.dirname(__file__)+ os.sep + "test_files", subdir=True, extension=".txt")
         self.assertEqual(len(file_finder.files), 4)

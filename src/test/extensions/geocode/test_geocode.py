@@ -9,7 +9,7 @@ class GeoCodeExtensionTests(unittest.TestCase):
     def setUp(self):
         self.test_client = TestClient()
 
-        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
+        latlong     = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
 
         self.test_client.bot.license_keys.load_license_key_data("""
         GOOGLE_LATLONG = %s

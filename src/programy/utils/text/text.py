@@ -15,6 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import re
+import os
 
 class TextUtils:
 
@@ -56,3 +57,9 @@ class TextUtils:
         p = re.compile(r'<.*?>')
         return p.sub(replace_with, data)
 
+    @staticmethod
+    def replace_path_seperator(path, old="/", new=os.sep):
+        if old in path:
+            return path.replace(old, new)
+        else:
+            return path

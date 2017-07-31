@@ -18,7 +18,7 @@ class GeoCodeAIMLTests(unittest.TestCase):
     def setUp (self):
         GeoCodeAIMLTests.test_client = GeoCodeTestsClient()
 
-        latlong     = os.path.dirname(__file__) + "/google_latlong.json"
+        latlong     = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
 
         GeoCodeAIMLTests.test_client.bot.license_keys.load_license_key_data("""
         GOOGLE_LATLONG = %s

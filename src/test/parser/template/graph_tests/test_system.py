@@ -1,5 +1,5 @@
-import unittest
 import xml.etree.ElementTree as ET
+import os
 
 from programy.parser.template.nodes.system import TemplateSystemNode
 
@@ -22,5 +22,12 @@ class TemplateGraphSystemTests(TemplateGraphTestClient):
         node = root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateSystemNode)
-        self.assertEqual(root.resolve(self.test_bot, self.test_clientid), "Hello World")
+
+        if os.name == 'posix':
+            self.assertEqual(root.resolve(self.test_bot, self.test_clientid), "Hello World")
+        elif os.name == 'nt':
+            self.assertEqual(root.resolve(self.test_bot, self.test_clientid), '"Hello World"')
+        else:
+            self.assertFalse(True)
+
 

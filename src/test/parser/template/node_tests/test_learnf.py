@@ -11,10 +11,18 @@ from test.parser.template.base import TemplateTestsBaseClass
 
 class TemplateLearnfNodeTests(TemplateTestsBaseClass):
 
+    def get_os_specific_filename(self):
+        if os.name == 'posix':
+            return '\tmp\leanf.aiml'
+        elif os.name == 'nt':
+            return 'C:\Windows\Temp\leanf.aiml'
+        else:
+            raise Exception("Unknown OS [%s]"%os.name)
+        
     def test_node(self):
 
-        if os.path.exists('/tmp/leanf.aiml'):
-            os.remove('/tmp/leanf.aiml')
+        if os.path.exists(self.get_os_specific_filename()):
+            os.remove(self.get_os_specific_filename())
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -29,12 +37,12 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         root.append(learn)
         self.assertEqual(1, len(root.children))
 
-        self.bot.brain.configuration.defaults._learn_filename = '/tmp/learnf.aiml'
+        self.bot.brain.configuration.defaults._learn_filename = self.get_os_specific_filename()
         resolved = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
 
-        self.assertTrue(os.path.exists('/tmp/learnf.aiml'))
+        self.assertTrue(os.path.exists(self.get_os_specific_filename()))
 
     def test_to_xml(self):
         root = TemplateNode()

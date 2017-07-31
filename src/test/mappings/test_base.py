@@ -80,7 +80,7 @@ class TestSingleStringCollection(unittest.TestCase):
         singles = SingleStringCollection ()
         self.assertIsNotNone(singles)
 
-        count = singles.load_from_filename(os.path.dirname(__file__) + "/test_files/singles.txt")
+        count = singles.load_from_filename(os.path.dirname(__file__) +  os.sep + "test_files/singles.txt")
         self.assertEqual(count, 3)
         self.assertIn("val1", singles.strings)
         self.assertIn("val2", singles.strings)
@@ -197,7 +197,7 @@ class TestDoubleStringPatternSplitCollection(unittest.TestCase):
         doubles = DoubleStringPatternSplitCollection ()
         self.assertIsNotNone(doubles)
 
-        count = doubles.load_from_filename(os.path.dirname(__file__) + "/test_files/doubles_pattern.txt")
+        count = doubles.load_from_filename(os.path.dirname(__file__) +  os.sep + "test_files" + os.sep + "doubles_pattern.txt")
         self.assertEqual(count, 3)
 
         self.assertTrue(doubles.has_key("key1"))
@@ -261,7 +261,7 @@ class TestTripleStringCollection(unittest.TestCase):
         triples = TripleStringCollection ()
         self.assertIsNotNone(triples)
 
-        count = triples.load_from_filename(os.path.dirname(__file__) + "/test_files/triples.txt")
+        count = triples.load_from_filename(os.path.dirname(__file__) +  os.sep + "test_files" + os.sep + "triples.txt")
         self.assertEqual(count, 3)
 
         self.assertTrue(triples.has_primary("key1"))

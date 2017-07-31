@@ -11,7 +11,9 @@ class NowAskMeTrainTestClient(TestClient):
         TestClient.__init__(self)
 
     def load_configuration(self, arguments):
-        self.configuration =ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(), os.path.dirname(__file__)+"/testconfig.yaml")
+        self.configuration = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(),
+                                                                               os.path.dirname(__file__)+ os.sep + "testconfig.yaml",
+                                                                               bot_root=os.path.dirname(__file__))
 
 class TrainAIMLTests(unittest.TestCase):
 
