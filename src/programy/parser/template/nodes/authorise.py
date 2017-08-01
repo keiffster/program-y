@@ -24,6 +24,7 @@ class TemplateAuthoriseNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._role = None
+        self._denied_srai = None
 
     @property
     def role(self):
@@ -33,6 +34,14 @@ class TemplateAuthoriseNode(TemplateNode):
     def role(self, role):
         self._role = role
 
+    @property
+    def denied_srai(self):
+        return self._denied_srai
+
+    @denied_srai.setter
+    def denied_srai(self, denied_srai):
+        self._denied_srai = denied_srai
+
     def resolve(self, bot, clientid):
         try:
             # Check if the user, role or group exists, assumption being, that if defined
@@ -40,7 +49,10 @@ class TemplateAuthoriseNode(TemplateNode):
             # Assumption is that user has been authenticated and passed and is value
             if bot.brain.authorisation is not None:
                 if bot.brain.authorisation.authorise(clientid, self.role) is False:
-                    srai_text = bot.brain.authorisation.get_default_denied_srai()
+                    if self._denied_srai is not None:
+                        srai_text = self._denied_srai
+                    else:
+                        srai_text = bot.brain.authorisation.get_default_denied_srai()
                     resolved = bot.ask_question(clientid, srai_text, srai=True)
                     logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
                     return resolved
@@ -57,19 +69,23 @@ class TemplateAuthoriseNode(TemplateNode):
     def to_string(self):
         text = "AUTHORISE ("
         text += "role=%s"%self._role
+        if self._denied_srai is not None:
+            text += ", denied_srai=%s"%self._denied_srai
         text += ")"
         return text
 
     def to_xml(self, bot, clientid):
         xml = '<authorise'
         xml += ' role="%s"' % self._role
+        if self._denied_srai is not None:
+            xml += ' denied_srai="%s"' % self._denied_srai
         xml += '>'
         xml += self.children_to_xml(bot, clientid)
         xml += '</authorise>'
         return xml
 
     #######################################################################################################
-    # AUTHORISE_ATTRIBUTES ::= role="ROLEID"
+    # AUTHORISE_ATTRIBUTES ::= role="ROLEID" [, denied_srai="SRAI_TAG"]
     # AUTHORISE_EXPRESSION ::== <authorise( AUTHORISE_ATTRIBUTES)*>TEMPLATE_EXPRESSION</authorise> |
 
     def parse_expression(self, graph, expression):
@@ -79,6 +95,9 @@ class TemplateAuthoriseNode(TemplateNode):
 
         if self._role is None:
             raise ParserException("AUTHORISE role attribute missing !")
+
+        if 'denied_srai' in expression.attrib:
+            self._denied_srai = expression.attrib['denied_srai']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)

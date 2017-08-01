@@ -38,3 +38,28 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 
+    def test_authorise_with_role_as_attrib_and_optional_srai(self):
+        template = ET.fromstring("""
+			<template>
+				<authorise role="root" denied_srai="ACCESS_DENIED">
+				Hello
+				</authorise>
+			</template>
+			""")
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+        self.assertIsInstance(ast, TemplateNode)
+        self.assertIsNotNone(ast.children)
+        self.assertEqual(len(ast.children), 1)
+
+        auth_node = ast.children[0]
+        self.assertIsNotNone(auth_node)
+        self.assertIsInstance(auth_node, TemplateAuthoriseNode)
+        self.assertIsNotNone(auth_node.role)
+        self.assertEqual("root", auth_node.role)
+
+        result = auth_node.resolve(self.test_bot, "console")
+        self.assertIsNotNone(result)
+        self.assertEqual("Hello", result)
+

@@ -38,9 +38,25 @@ For more information see [url]
 	</category>
 
 	<category>
+		<pattern>CUSTOM DENY ACCESS</pattern>
+		<template>
+		    <authorise role="other" denied_srai="CUSTOM_ACCESS_DENIED">
+				Access Not Allowed
+			</authorise>
+		</template>
+	</category>
+
+	<category>
 		<pattern>ACCESS_DENIED</pattern>
 		<template>
 			Sorry, but you are not authorised to access this content!
+		</template>
+	</category>
+
+		<category>
+		<pattern>CUSTOM_ACCESS_DENIED</pattern>
+		<template>
+			Sorry, but no chance!
 		</template>
 	</category>
 

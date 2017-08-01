@@ -33,3 +33,8 @@ class AuthoriseAIMLTests(unittest.TestCase):
         response = AuthoriseAIMLTests.test_client.bot.ask_question("console", "DENY ACCESS")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Sorry, but you are not authorised to access this content!')
+
+    def test_authorise_denied_custom_response(self):
+        response = AuthoriseAIMLTests.test_client.bot.ask_question("console", "CUSTOM DENY ACCESS")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Sorry, but no chance!')
