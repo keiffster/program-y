@@ -24,3 +24,10 @@ class XMLAIMLTests(unittest.TestCase):
     def test_html_link(self):
         response = XMLAIMLTests.test_client.bot.ask_question("test",  "PICTURE")
         self.assertEqual(response, 'You can see my picture at <a href="http://someurl/image.png">Here</a>')
+
+    def test_html_br(self):
+        response = XMLAIMLTests.test_client.bot.ask_question("test",  "TEST1")
+        self.assertEqual(response, 'Line1\n\t\t\tLine2')
+
+        response = XMLAIMLTests.test_client.bot.ask_question("test",  "TEST2")
+        self.assertEqual(response, 'Line1 <br></br> Line2')

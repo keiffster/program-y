@@ -33,5 +33,21 @@ For more information see [url]
 		</template>
 	</category>
 
+	<category>
+		<pattern>TEST1</pattern>
+		<template>
+			Line1
+			Line2
+		</template>
+	</category>
+
+	<category>
+		<pattern>TEST2</pattern>
+		<template>
+			Line1
+			<br/>
+			Line2
+		</template>
+	</category>
 
 </aiml>

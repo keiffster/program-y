@@ -26,6 +26,6 @@ class RemoveMultiSpacePostProcessor(PostProcessor):
 
     def process(self, bot, clientid, word_string):
         logging.debug("Removing multiple spaces from words...")
-        word_list = word_string.split()
-        words = [word.strip() for word in word_list]
-        return " ".join([w for w in words if len(w) > 0])
+        word_string = re.sub(r'\s+', ' ', word_string)
+        return word_string.strip()
+

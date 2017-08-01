@@ -22,17 +22,17 @@ class RemoveHTMLTests(unittest.TestCase):
         result = processor.process(self.bot, "testid", "Hello <br/> World")
         self.assertIsNotNone(result)
         if os.name == 'posix':
-            self.assertEqual("Hello \nWorld", result)
+            self.assertEqual("Hello\nWorld", result)
         elif os.name == 'nt':
-            self.assertEqual("Hello \r\nWorld", result)
+            self.assertEqual("Hello\r\nWorld", result)
         else:
             raise Exception("Unknown os [%s]"%os.name)
 
         result = processor.process(self.bot, "testid", "Hello <br /> World")
         self.assertIsNotNone(result)
         if os.name == 'posix':
-            self.assertEqual("Hello \nWorld", result)
+            self.assertEqual("Hello\nWorld", result)
         elif os.name == 'nt':
-            self.assertEqual("Hello \r\nWorld", result)
+            self.assertEqual("Hello\r\nWorld", result)
         else:
             raise Exception("Unknown os [%s]"%os.name)
