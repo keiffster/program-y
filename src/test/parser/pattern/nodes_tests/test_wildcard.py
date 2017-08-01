@@ -43,7 +43,7 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard = MockPatternWildCardNode("*")
         self.assertIsNotNone(wildcard)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         matches_added = 1
 
         self.assertTrue(wildcard.invalid_topic_or_that("", PatternTopicNode.TOPIC, context, matches_added))
@@ -56,7 +56,7 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard = MockPatternWildCardNode("*")
         self.assertIsNotNone(wildcard)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST SENTENCE")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNone(match)
@@ -68,12 +68,12 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard._0ormore_hash = PatternZeroOrMoreWildCardNode('#')
         wildcard._0ormore_hash._template = PatternTemplateNode(TemplateNode())
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST SENTENCE")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
@@ -85,12 +85,12 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard._0ormore_arrow = PatternZeroOrMoreWildCardNode('^')
         wildcard._0ormore_arrow._template = PatternTemplateNode(TemplateNode())
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST SENTENCE")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
@@ -102,12 +102,12 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard._1ormore_star = PatternOneOrMoreWildCardNode('*')
         wildcard._1ormore_star._template = PatternTemplateNode(TemplateNode())
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST SENTENCE")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0, Match.WORD, 0)
         self.assertIsNone(match)
@@ -119,12 +119,12 @@ class PatternWildCardNodeTests(PatternTestBaseClass):
         wildcard._1ormore_underline = PatternOneOrMoreWildCardNode('_')
         wildcard._1ormore_underline._template = PatternTemplateNode(TemplateNode())
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST SENTENCE")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         sentence = Sentence("TEST")
         match = wildcard.check_child_is_wildcard("", self.bot, self.clientid, context, sentence, 0,  Match.WORD, 0)
         self.assertIsNone(match)

@@ -33,7 +33,7 @@ class TemplateGraphTestClient(unittest.TestCase):
 
         test_node = PatternOneOrMoreWildCardNode("*")
 
-        self.test_sentence._matched_context = MatchContext()
+        self.test_sentence._matched_context = MatchContext(max_search_depth=100, max_search_time=-1)
         self.test_sentence._matched_context._matched_nodes = [Match(Match.WORD, test_node, 'one'),
                                                              Match(Match.WORD, test_node, 'two'),
                                                              Match(Match.WORD, test_node, 'three'),

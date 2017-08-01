@@ -57,7 +57,8 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("Hello", bot_config.initial_question)
         self.assertEqual("", bot_config.default_response)
         self.assertEqual("", bot_config.empty_string)
-        self.assertEqual(10, bot_config.max_recursion)
+        self.assertEqual(100, bot_config.max_recursion)
+        self.assertEqual(-1, bot_config.max_timeout)
         self.assertTrue(bot_config.override_predicates)
 
         self.assertIsNotNone(bot_config.spelling)

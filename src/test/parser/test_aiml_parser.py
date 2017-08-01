@@ -12,6 +12,10 @@ from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 
 from programy.dialog import Sentence
+from programy.bot import Bot
+from programy.brain import Brain
+from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.bot.bot import BotConfiguration
 
 class AIMLParserTests(unittest.TestCase):
 
@@ -516,7 +520,9 @@ class AIMLParserTests(unittest.TestCase):
 
         self.parser.pattern_parser.dump()
 
-        context = self.parser.match_sentence(None, "test", Sentence("HELLO"), "*", "*")
+        bot = Bot(Brain(BrainConfiguration()), config=BotConfiguration())
+
+        context = self.parser.match_sentence(bot, "test", Sentence("HELLO"), "*", "*")
         self.assertIsNotNone(context)
         self.assertEqual("Hiya", context.template_node().template.resolve(None, None))
 

@@ -1,4 +1,5 @@
 import unittest
+import datetime
 
 from programy.parser.pattern.matcher import Match
 from programy.parser.pattern.matcher import MatchContext
@@ -6,6 +7,7 @@ from programy.parser.pattern.matcher import EqualsMatch
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.template.nodes.base import TemplateNode
+
 
 class PatternFactoryTests(unittest.TestCase):
 
@@ -41,14 +43,14 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals("Unknown", Match.type_to_string(999))
 
     def test_match_context_depth(self):
-        context1 = MatchContext()
-        self.assertEquals(MatchContext.MAX_SEARCH_DEPTH, context1.max_search_depth)
-
-        context2 = MatchContext(999)
-        self.assertEquals(999, context2.max_search_depth)
+        context1 = MatchContext(max_search_depth=100, max_search_time=60)
+        self.assertEquals(100, context1.max_search_depth)
+        self.assertEquals(60, context1.max_search_time)
 
     def test_match_context_depth(self):
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=60)
+        self.assertEquals(100, context.max_search_depth)
+        self.assertEquals(60, context.max_search_time)
         self.assertFalse(context.matched())
         template = PatternTemplateNode(template=TemplateNode)
         context.set_template(template)
@@ -57,7 +59,7 @@ class PatternFactoryTests(unittest.TestCase):
 
     def test_match_context_pop_push(self):
         topic = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=60)
         context.add_match(Match(Match.TOPIC, topic, None))
         self.assertEquals(1, len(context.matched_nodes))
         context.add_match(Match(Match.TOPIC, topic, None))
@@ -78,7 +80,7 @@ class PatternFactoryTests(unittest.TestCase):
         topic = PatternOneOrMoreWildCardNode("*")
         that = PatternOneOrMoreWildCardNode("*")
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=60)
 
         context.add_match(Match(Match.WORD, word, "Hello"))
         context.add_match(Match(Match.TOPIC, topic, "Hello Topic"))
@@ -92,7 +94,6 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEqual("Hello That", context.thatstar(1))
         self.assertIsNone(context.thatstar(2))
 
-
     def test_equals_match(self):
         equals_match = EqualsMatch(True, 1, "Hello World")
         self.assertIsNotNone(equals_match)
@@ -100,3 +101,18 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals(1, equals_match.word_no)
         self.assertEquals("Hello World", equals_match.matched_phrase)
         self.assertEquals("True, 1, Hello World", equals_match.to_string())
+
+    def test_time_functions(self):
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
+        self.assertEqual(-1, context.max_search_time)
+        self.assertFalse(context.search_time_exceeded())
+
+        context = MatchContext(max_search_depth=100, max_search_time=0)
+        self.assertEqual(0, context.max_search_time)
+        self.assertTrue(context.search_time_exceeded())
+
+        context = MatchContext(max_search_depth=100, max_search_time=60)
+        time_now = datetime.datetime.now()
+        prev_time = time_now - datetime.timedelta(seconds=-70)
+        context._total_search_start = prev_time
+        self.assertTrue(context.search_time_exceeded())

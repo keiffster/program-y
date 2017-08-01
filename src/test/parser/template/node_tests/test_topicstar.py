@@ -76,7 +76,7 @@ class TemplateTopicStarNodeTests(TemplateTestsBaseClass):
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         context.add_match(Match(Match.TOPIC, match, "Matched"))
         question.current_sentence()._matched_context = context
 
@@ -98,7 +98,7 @@ class TemplateTopicStarNodeTests(TemplateTestsBaseClass):
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext()
+        context = MatchContext(max_search_depth=100, max_search_time=-1)
         context.add_match(Match(Match.TOPIC, match, None))
         question.current_sentence()._matched_context = context
 

@@ -29,6 +29,8 @@ class BotConfiguration(BaseConfigurationData):
     DEFAULT_EXIT_RESPONSE           = "Bye!"
     DEFAULT_INITIAL_QUESTION        = "Hello"
     DEFAULT_OVERRIDE_PREDICATES     = True
+    DEFAULT_MAX_RECURSION           = 100
+    DEFAULT_MAX_TIMEOUT             = -1
 
     def __init__(self):
         self._license_keys          = None
@@ -39,7 +41,8 @@ class BotConfiguration(BaseConfigurationData):
         self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
         self._empty_string          = BotConfiguration.DEFAULT_EMPTY_STRING
         self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
-        self._max_recursion         = 10
+        self._max_recursion         = BotConfiguration.DEFAULT_MAX_RECURSION
+        self._max_timeout           = BotConfiguration.DEFAULT_MAX_TIMEOUT
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
@@ -53,9 +56,9 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
             self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
-            self._max_recursion = config_file.get_int_option(bot, "max_recursion", 10)
+            self._max_recursion = config_file.get_int_option(bot, "max_recursion", BotConfiguration.DEFAULT_MAX_RECURSION)
+            self._max_timeout = config_file.get_int_option(bot, "max_timeout", BotConfiguration.DEFAULT_MAX_TIMEOUT)
             self._spelling.load_config_section(config_file, bot, bot_root)
-
 
         else:
             logging.warning("Config section [%s] missing, using default values", self.section_name)
@@ -67,7 +70,8 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
             self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
             self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
-            self._max_recursion         = 10
+            self._max_recursion         = BotConfiguration.DEFAULT_MAX_RECURSION
+            self._max_timeout           = BotConfiguration.DEFAULT_MAX_TIMEOUT
 
     @property
     def bot_root(self):
@@ -128,6 +132,10 @@ class BotConfiguration(BaseConfigurationData):
     @property
     def max_recursion(self):
         return self._max_recursion
+
+    @property
+    def max_timeout(self):
+        return self._max_timeout
 
     @property
     def spelling(self):

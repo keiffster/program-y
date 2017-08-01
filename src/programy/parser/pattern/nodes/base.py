@@ -423,8 +423,12 @@ class PatternNode(object):
 
         tabs = TextUtils.get_tabs(depth)
 
+        if context.search_time_exceeded() is True:
+            logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_time))
+            return None
+
         if depth > context.max_search_depth:
-            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
             return None
 
         if word_no >= words.num_words():

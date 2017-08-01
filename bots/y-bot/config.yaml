@@ -115,7 +115,8 @@ bot:
     empty_string_srai: YEMPTY
     exit_response: So long, and thanks for the fish!
     override_predicates: true
-    max_recursion: 10
+    max_recursion: 100
+    max_timeout: 60
 
     spelling:
       classname: programy.utils.spelling.checker.SpellingChecker

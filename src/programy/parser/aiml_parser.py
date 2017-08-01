@@ -372,7 +372,7 @@ class AIMLParser(object):
         sentence.append_sentence(that_sentence)
         logging.debug("Matching [%s]"%sentence.words_from_current_pos(0))
 
-        context = MatchContext()
+        context = MatchContext(max_search_depth=bot.configuration.max_recursion, max_search_time=bot.configuration.max_timeout)
 
         template = self.pattern_parser._root_node.match(bot, clientid, context, sentence)
 

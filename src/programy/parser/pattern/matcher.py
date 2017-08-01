@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 from programy.dialog import Sentence
-
+import datetime
 
 class Match(object):
 
@@ -66,16 +66,31 @@ class Match(object):
 
 class MatchContext(object):
 
-    MAX_SEARCH_DEPTH = 1000
-
-    def __init__(self, max_search_depth=MAX_SEARCH_DEPTH):
+    def __init__(self, max_search_depth, max_search_time):
         self._matched_nodes = []
         self._template_node = None
         self._max_search_depth = max_search_depth
+        self._max_search_time = max_search_time
+        self._total_search_start = datetime.datetime.now()
 
     @property
     def max_search_depth(self):
         return self._max_search_depth
+
+    @property
+    def max_search_time(self):
+        return self._max_search_time
+
+    def total_search_time(self):
+        delta = datetime.datetime.now() - self._total_search_start
+        return abs(delta.total_seconds())
+
+    def search_time_exceeded(self):
+        if self._max_search_time == -1:
+            return False
+        else:
+            total = self.total_search_time()
+            return bool(total > self._max_search_time)
 
     def add_match(self, match):
         self._matched_nodes.append(match)
