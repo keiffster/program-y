@@ -66,7 +66,7 @@ class Match(object):
 
 class MatchContext(object):
 
-    MAX_SEARCH_DEPTH = 10000
+    MAX_SEARCH_DEPTH = 1000
 
     def __init__(self, max_search_depth=MAX_SEARCH_DEPTH):
         self._matched_nodes = []
