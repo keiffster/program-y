@@ -18,14 +18,24 @@ Program-Y is extremely extensible, you can
 * Support User Authentication
 * Add you own Out Out Band (OOB) tags
 * Run a variety of clients, including
-** Console
-** REST
-** Web Chat
-** Twitter
-** Google Hangouts (XMPP)
-** SMS ( coming soon )
-** Facebook ( coming )
-** Slack ( coming soon )
+  * Console
+  * REST
+  * Web Chat
+  * Twitter
+  * Google Hangouts (XMPP)
+  * SMS ( coming soon )
+  * Facebook ( coming )
+  * Slack ( coming soon )
+
+Program-Y comes with a base set of grammars for various industry sectors, including
+
+* Energy Industry
+* Banking
+* Telecoms
+* Weather
+* Surveys
+* News Feeds
+* Maps
 
 Program-Y Ships with a number of Bots preconfigured
 
@@ -40,6 +50,7 @@ The project is maintained via a [Kanban Board](https://github.com/keiffster/prog
 
 All issues are maintained in the [Program-Y Issue Tracker](https://github.com/keiffster/program-y/issues)
 
-For more details of what AIML is, head over to the [AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
-
+For more details of what AIML is, head over to the 
+* [AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
+* [Pandora Bots](http://docs.pandorabots.com/)
 
