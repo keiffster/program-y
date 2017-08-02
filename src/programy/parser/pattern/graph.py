@@ -23,8 +23,6 @@ from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
-# TODO better handling of <html> type tags
-
 #######################################################################################################################
 #
 class PatternGraph(object):
@@ -68,7 +66,7 @@ class PatternGraph(object):
 
     def node_from_element(self, element):
 
-        node_name = element.tag
+        node_name = TextUtils.tag_from_text(element.tag)
         if self._pattern_factory.exists(node_name) is False:
             raise ParserException ("Unknown node name [%s]"%node_name)
 

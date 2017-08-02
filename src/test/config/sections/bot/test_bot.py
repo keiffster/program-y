@@ -19,7 +19,10 @@ class BotConfigurationTests(unittest.TestCase):
             empty_string: YEMPTY
             exit_response: So long, and thanks for the fish!
             override_predicates: true
-            max_recursion: 10
+            max_question_recursion: 1000
+            max_question_timeout: 60
+            max_search_depth: 100
+            max_search_timeout: 60
             spelling:
               classname: programy.utils.spelling.checker.SpellingChecker
               alphabet: 'abcdefghijklmnopqrstuvwxyz'
@@ -36,7 +39,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
         self.assertEqual("Sorry, I don't have an answer for that!", bot_config.default_response)
         self.assertEqual("YEMPTY", bot_config.empty_string)
-        self.assertEqual(10, bot_config.max_recursion)
+        self.assertEqual(bot_config.max_question_recursion, 1000)
+        self.assertEqual(bot_config.max_question_timeout, 60)
+        self.assertEqual(bot_config.max_search_depth, 100)
+        self.assertEqual(bot_config.max_search_timeout, 60)
         self.assertTrue(bot_config.override_predicates)
 
         self.assertIsNotNone(bot_config.spelling)
@@ -57,8 +63,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("Hello", bot_config.initial_question)
         self.assertEqual("", bot_config.default_response)
         self.assertEqual("", bot_config.empty_string)
-        self.assertEqual(100, bot_config.max_recursion)
-        self.assertEqual(-1, bot_config.max_timeout)
+        self.assertEqual(bot_config.max_question_recursion, 100)
+        self.assertEqual(bot_config.max_question_timeout, -1)
+        self.assertEqual(bot_config.max_search_depth, 100)
+        self.assertEqual(bot_config.max_search_timeout, -1)
         self.assertTrue(bot_config.override_predicates)
 
         self.assertIsNotNone(bot_config.spelling)

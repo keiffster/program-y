@@ -19,7 +19,7 @@ import logging
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.atttrib import TemplateAttribNode
-
+from programy.utils.text.text import TextUtils
 
 
 class TemplateXMLNode(TemplateAttribNode):
@@ -64,7 +64,7 @@ class TemplateXMLNode(TemplateAttribNode):
 
     def _parse_node_with_attribs(self, graph, expression):
 
-        self._name = expression.tag
+        self._name = TextUtils.tag_from_text(expression.tag)
 
         for attrib_name in expression.attrib:
             self.set_attrib(attrib_name, expression.attrib[attrib_name])

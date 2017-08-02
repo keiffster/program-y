@@ -86,7 +86,10 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(configuration.bot_configuration.empty_string, "TEST-YEMPTY")
         self.assertEqual(configuration.bot_configuration.exit_response, "So long, and thanks for the test fish!")
         self.assertTrue(configuration.bot_configuration.override_predicates)
-        self.assertEqual(configuration.bot_configuration.max_recursion, 10)
+        self.assertEqual(configuration.bot_configuration.max_question_recursion, 1000)
+        self.assertEqual(configuration.bot_configuration.max_question_timeout, 60)
+        self.assertEqual(configuration.bot_configuration.max_search_depth, 100)
+        self.assertEqual(configuration.bot_configuration.max_search_timeout, 60)
 
         self.assertIsNotNone(configuration.bot_configuration.spelling)
         self.assertEqual(configuration.bot_configuration.spelling.section_name, "spelling")

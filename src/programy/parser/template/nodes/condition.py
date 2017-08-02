@@ -19,6 +19,8 @@ import logging
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.exceptions import ParserException
+from programy.utils.text.text import TextUtils
+
 
 class TemplateConditionListItemNode(TemplateNode):
 
@@ -251,20 +253,22 @@ class TemplateConditionNode(TemplateNode):
         self.parse_text(graph, self.get_text_from_element(expression))
 
         for child in expression:
-            if child.tag == 'name':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'name':
                 pass
 
-            elif child.tag == 'var':
+            elif tag_name == 'var':
                 pass
 
-            elif child.tag == 'value':
+            elif tag_name == 'value':
                 pass
 
-            elif child.tag == 'li':
+            elif tag_name == 'li':
                 raise ParserException("Error, li element not allowed as child of condition element",
                                       xml_element=expression)
 
-            elif child.tag == 'loop':
+            elif tag_name == 'loop':
                 raise ParserException("Error, this type of condition cannot have <loop /> element",
                                       xml_element=expression)
 
@@ -277,15 +281,17 @@ class TemplateConditionNode(TemplateNode):
     def parse_type2_condition(self, graph, expression):
 
         for child in expression:
-            if child.tag == 'name':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'name':
                 # Pass on this attribute as we have already pulled it from the get_condition_name above
                 pass
 
-            elif child.tag == 'var':
+            elif tag_name == 'var':
                 # Pass on this attribute as we have already pulled it from the get_condition_name above
                 pass
 
-            elif child.tag == 'li':
+            elif tag_name == 'li':
 
                 list_item = TemplateConditionListItemNode()
 
@@ -316,19 +322,20 @@ class TemplateConditionNode(TemplateNode):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Error, invalid element <%s> in condition element" % (child.tag),
+                raise ParserException("Error, invalid element <%s> in condition element" % (tag_name),
                                       xml_element=expression)
 
     def parse_type3_condition(self, graph, expression):
         for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
 
-            if child.tag == 'name':
+            if tag_name == 'name':
                 pass
 
-            elif child.tag == 'var':
+            elif tag_name == 'var':
                 pass
 
-            elif child.tag == 'li':
+            elif tag_name == 'li':
                 list_item = TemplateConditionListItemNode()
 
                 response = self.get_condition_name(child)
@@ -361,7 +368,7 @@ class TemplateConditionNode(TemplateNode):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Error, invalid element <%s> in condition element" % (child.tag), xml_element=expression)
+                raise ParserException("Error, invalid element <%s> in condition element" % (tag_name), xml_element=expression)
 
 
     def to_string(self):

@@ -66,31 +66,36 @@ class Match(object):
 
 class MatchContext(object):
 
-    def __init__(self, max_search_depth, max_search_time):
+    def __init__(self, max_search_depth, max_search_timeout):
         self._matched_nodes = []
         self._template_node = None
         self._max_search_depth = max_search_depth
-        self._max_search_time = max_search_time
+        self._max_search_timeout = max_search_timeout
         self._total_search_start = datetime.datetime.now()
 
     @property
     def max_search_depth(self):
         return self._max_search_depth
 
+    def search_depth_exceeded(self, depth):
+        if self._max_search_depth == -1:
+            return False
+        else:
+            return bool(depth > self._max_search_depth)
+
     @property
-    def max_search_time(self):
-        return self._max_search_time
+    def max_search_timeout(self):
+        return self._max_search_timeout
 
     def total_search_time(self):
         delta = datetime.datetime.now() - self._total_search_start
         return abs(delta.total_seconds())
 
     def search_time_exceeded(self):
-        if self._max_search_time == -1:
+        if self._max_search_timeout == -1:
             return False
         else:
-            total = self.total_search_time()
-            return bool(total > self._max_search_time)
+            return bool(self.total_search_time() > self._max_search_timeout)
 
     def add_match(self, match):
         self._matched_nodes.append(match)

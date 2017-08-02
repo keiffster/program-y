@@ -26,10 +26,6 @@ class TemplateIndexedNode(TemplateAttribNode):
 
     def __init__(self, position=1, index=1):
         TemplateAttribNode.__init__(self)
-        # TODO Position means question
-        # Index means setence in question
-        # Need to make sure every index class is using this correctly
-        # See TODO Below
         self._position = position
         self._index = index
 

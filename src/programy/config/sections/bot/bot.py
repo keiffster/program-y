@@ -29,8 +29,10 @@ class BotConfiguration(BaseConfigurationData):
     DEFAULT_EXIT_RESPONSE           = "Bye!"
     DEFAULT_INITIAL_QUESTION        = "Hello"
     DEFAULT_OVERRIDE_PREDICATES     = True
-    DEFAULT_MAX_RECURSION           = 100
-    DEFAULT_MAX_TIMEOUT             = -1
+    DEFAULT_MAX_QUESTION_RECURSION  = 100
+    DEFAULT_MAX_QUESTION_TIMEOUT    = -1
+    DEFAULT_MAX_SEARCH_DEPTH        = 100
+    DEFAULT_MAX_SEARCH_TIMEOUT      = -1
 
     def __init__(self):
         self._license_keys          = None
@@ -41,8 +43,10 @@ class BotConfiguration(BaseConfigurationData):
         self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
         self._empty_string          = BotConfiguration.DEFAULT_EMPTY_STRING
         self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
-        self._max_recursion         = BotConfiguration.DEFAULT_MAX_RECURSION
-        self._max_timeout           = BotConfiguration.DEFAULT_MAX_TIMEOUT
+        self._max_question_recursion= BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION
+        self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
+        self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
+        self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
@@ -56,8 +60,11 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
             self._override_predicates = config_file.get_option(bot, "override_predicates", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
-            self._max_recursion = config_file.get_int_option(bot, "max_recursion", BotConfiguration.DEFAULT_MAX_RECURSION)
-            self._max_timeout = config_file.get_int_option(bot, "max_timeout", BotConfiguration.DEFAULT_MAX_TIMEOUT)
+            self._max_question_recursion = config_file.get_int_option(bot, "max_question_recursion", BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION)
+            self._max_question_timeout = config_file.get_int_option(bot, "max_question_timeout", BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT)
+            self._max_search_depth = config_file.get_int_option(bot, "max_search_depth", BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH)
+            self._max_search_timeout = config_file.get_int_option(bot, "max_search_timeout", BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT)
+
             self._spelling.load_config_section(config_file, bot, bot_root)
 
         else:
@@ -70,8 +77,10 @@ class BotConfiguration(BaseConfigurationData):
             self._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
             self._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
             self._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
-            self._max_recursion         = BotConfiguration.DEFAULT_MAX_RECURSION
-            self._max_timeout           = BotConfiguration.DEFAULT_MAX_TIMEOUT
+            self._max_question_recursion= BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION
+            self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
+            self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
+            self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
 
     @property
     def bot_root(self):
@@ -130,12 +139,20 @@ class BotConfiguration(BaseConfigurationData):
         self._override_predicates = override
 
     @property
-    def max_recursion(self):
-        return self._max_recursion
+    def max_question_recursion(self):
+        return self._max_question_recursion
 
     @property
-    def max_timeout(self):
-        return self._max_timeout
+    def max_question_timeout(self):
+        return self._max_question_timeout
+
+    @property
+    def max_search_depth(self):
+        return self._max_search_depth
+
+    @property
+    def max_search_timeout(self):
+        return self._max_search_timeout
 
     @property
     def spelling(self):

@@ -37,7 +37,10 @@ class BotTests(unittest.TestCase):
         bot_config._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
         bot_config._empty_string          = BotConfiguration.DEFAULT_EMPTY_STRING
         bot_config._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
-        bot_config._max_recursion         = 10
+        bot_config._max_question_recursion = 1000
+        bot_config._max_question_timeout   = 60
+        bot_config._max_search_depth       = 100
+        bot_config._max_search_timeout     = 60
 
         bot = Bot(test_brain, bot_config)
 
@@ -204,7 +207,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(test_brain, BotConfiguration())
         self.assertIsNotNone(bot)
         bot.configuration._default_response = "Sorry, I don't have an answer for that right now"
-        bot.configuration._max_recursion = 0
+        bot.configuration._max_question_recursion = 0
 
         with self.assertRaises(Exception):
             response = bot.ask_question("testid", "hello")

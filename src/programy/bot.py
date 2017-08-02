@@ -15,6 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import datetime
 
 from programy.dialog import Conversation, Question
 from programy.config.sections.bot.bot import BotConfiguration
@@ -28,6 +29,7 @@ class Bot(object):
         self._configuration = config
         self._conversations = {}
         self._question_depth = 0
+        self._question_start_time = None
 
         self.load_license_keys()
 
@@ -141,8 +143,18 @@ class Bot(object):
             return conversation
 
     def check_max_recursion(self):
-        if self._question_depth > self._configuration.max_recursion:
-            raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_recursion))
+        if self._configuration.max_question_recursion != -1:
+            if self._question_depth > self._configuration.max_question_recursion:
+                raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_question_recursion))
+
+    def total_search_time(self):
+        delta = datetime.datetime.now() - self._question_start_time
+        return abs(delta.total_seconds())
+
+    def check_max_timeout(self):
+        if self._configuration.max_question_timeout != -1:
+            if self.total_search_time() > self._configuration.max_question_timeout:
+                raise Exception ("Maximum search time limit [%d] exceeded"%(self._configuration.max_question_timeout))
 
     def check_spelling_before(self, each_sentence):
         if self._configuration.spelling.check_before is True:
@@ -183,12 +195,16 @@ class Bot(object):
 
         conversation.record_dialog(question)
 
+        if self._question_depth == 0:
+            self._question_start_time = datetime.datetime.now()
         self._question_depth += 1
 
         answers = []
         for each_sentence in question.sentences:
 
             self.check_max_recursion()
+
+            self.check_max_timeout()
 
             self.check_spelling_before(each_sentence)
 

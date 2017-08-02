@@ -80,7 +80,10 @@
 		<empty_string>TEST-YEMPTY</empty_string>
 		<exit_response>So long, and thanks for the test fish!</exit_response>
 		<override_predicates>true</override_predicates>
-		<max_recursion>10</max_recursion>
+		<max_question_recursion>1000</max_question_recursion>
+        <max_question_timeout>60</max_question_timeout>
+        <max_search_depth>100</max_search_depth>
+        <max_search_timeout>60</max_search_timeout>
 		<spelling>
 			<classname>programy.utils.spelling.checker.TestSpellingChecker</classname>
 			<corpus>$BOT_ROOT/spelling/test-corpus.txt</corpus>

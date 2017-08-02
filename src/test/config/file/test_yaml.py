@@ -137,7 +137,10 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
                 empty_string: TEST-YEMPTY
                 exit_response: So long, and thanks for the test fish!
                 override_predicates: true
-                max_recursion: 10
+                max_question_recursion: 1000
+                max_question_timeout: 60
+                max_search_depth: 100
+                max_search_timeout: 60
             
                 spelling:
                   classname: programy.utils.spelling.checker.TestSpellingChecker

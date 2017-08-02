@@ -5,7 +5,6 @@ from xml.etree.ElementTree import ParseError
 from programy.parser.aiml_parser import AIMLParser
 from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.brain.file import BrainFileConfiguration
 
 class AIMLParserErrorTests(unittest.TestCase):
 
@@ -212,4 +211,3 @@ class AIMLParserErrorTests(unittest.TestCase):
         self.assertIsNotNone(self.parser._errors)
         self.assertEquals(1, len(self.parser._errors))
         self.assertEquals("Error, no template node found in category\n", self.parser._errors[0])
-

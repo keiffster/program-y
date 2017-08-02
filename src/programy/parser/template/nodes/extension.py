@@ -18,6 +18,7 @@ import logging
 
 from programy.utils.classes.loader import ClassLoader
 from programy.parser.template.nodes.base import TemplateNode
+from programy.utils.text.text import TextUtils
 
 
 ######################################################################################################################
@@ -77,7 +78,9 @@ class TemplateExtensionNode(TemplateNode):
         self.parse_text(graph, head_text)
 
         for child in expression:
-            if child.tag == 'path':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'path':
                 self.path = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)

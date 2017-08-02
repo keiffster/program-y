@@ -16,6 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import xml.etree.ElementTree as ET
+from programy.utils.text.text import TextUtils
+
 
 ######################################################################################################################
 #
@@ -155,8 +157,9 @@ class TemplateNode(object):
         self.parse_text(graph, self.get_text_from_element(expression))
 
         for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
 
-            if child.tag == attrib_name:
+            if tag_name == attrib_name:
                 self.set_attrib(attrib_name, self.get_text_from_element(child))
             else:
                 graph.parse_tag_expression(child, self)

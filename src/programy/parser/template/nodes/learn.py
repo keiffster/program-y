@@ -17,10 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.eval import TemplateEvalNode
-from programy.parser.template.nodes.word import TemplateWordNode
+from programy.utils.text.text import TextUtils
+from programy.parser.exceptions import ParserException
 
 class LearnCategory(object):
 
@@ -101,7 +101,9 @@ class TemplateLearnNode(TemplateNode):
         new_element.text = TextUtils.strip_whitespace(element.text)
 
         for child in element:
-            if child.tag == 'eval':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'eval':
                 eval_str = ET.tostring(child, 'utf-8').decode('ascii')
                 eval_str = TextUtils.strip_whitespace(eval_str)
                 str_val = "<template>%s</template>" % eval_str
@@ -171,9 +173,16 @@ class TemplateLearnNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         for child in expression:
-            # TODO Handle case when its not a category
-            if child.tag == 'category':
-                parsed = graph._aiml_parser.parse_category(child, add_to_graph=False)
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'category':
+                parsed = graph._aiml_parser.parse_category(child, namespace=None, topic_element=None, add_to_graph=False)
                 learn_category = LearnCategory(parsed[0], parsed[1], parsed[2], parsed[3])
                 self.children.append(learn_category)
 
+            elif tag_name == 'topic':
+                # TODO Handle case when its not a category
+                raise ParserException("Not supported yet")
+
+            else:
+                raise ParserException("Invalid tag [%s] found in <learn>"%tag_name)

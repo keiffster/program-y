@@ -106,9 +106,10 @@ def ask():
 
 if __name__ == '__main__':
 
+    print("Loading, please wait...")
+    rest_client = RestBotClient()
+
     def run():
-        print("Loading, please wait...")
-        rest_client = RestBotClient()
 
         print("REST Client running on %s:%s" % (rest_client.configuration.client_configuration.host,
                                                 rest_client.configuration.client_configuration.port))

@@ -18,6 +18,7 @@ import logging
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
+from programy.utils.text.text import TextUtils
 
 
 
@@ -119,13 +120,14 @@ class TemplateSetNode(TemplateNode):
         self.parse_text(graph, self.get_text_from_element(expression))
 
         for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
 
-            if child.tag == 'name':
+            if tag_name == 'name':
                 self.name = self.parse_children_as_word_node(graph, child)
                 self.local = False
                 name_found = True
 
-            elif child.tag == 'var':
+            elif tag_name == 'var':
                 self.name = self.parse_children_as_word_node(graph, child)
                 self.local = True
                 var_found = True

@@ -21,6 +21,7 @@ from random import randint
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.parser.template.factory import TemplateNodeFactory
+from programy.utils.text.text import TextUtils
 
 
 class TemplateRandomNode(TemplateNode):
@@ -56,13 +57,15 @@ class TemplateRandomNode(TemplateNode):
     def parse_expression(self, graph, expression):
         li_found = False
         for child in expression:
-            if child.tag == 'li':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'li':
                 li_found = True
                 li_node = graph.get_base_node()
                 self.children.append(li_node)
                 li_node.parse_template_node(graph, child)
             else:
-                raise ParserException("Error, unsupported random child tag: %s" % (child.tag), xml_element=expression)
+                raise ParserException("Error, unsupported random child tag: %s" % (tag_name), xml_element=expression)
 
         if li_found is False:
             raise ParserException("Error, no li children of random element!", xml_element=expression)

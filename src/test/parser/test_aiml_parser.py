@@ -23,9 +23,61 @@ class AIMLParserTests(unittest.TestCase):
         self.parser = AIMLParser()
         self.assertIsNotNone(self.parser)
 
+    def test_tag_name_from_namespace(self):
+        tag, namespace = self.parser.tag_and_namespace_from_text("aiml")
+        self.assertEquals("aiml", tag)
+        self.assertIsNone(namespace)
+
+        tag, namespace = self.parser.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml")
+        self.assertEquals("aiml", tag)
+        self.assertEquals("{http://alicebot.org/2001/AIML}", namespace)
+
     def test_parse_from_file_valid(self):
         filename = os.path.dirname(__file__)+ '/valid.aiml'
         self.parser.parse_from_file(filename)
+
+    def test_aiml_with_namespace(self):
+        self.parser.parse_from_text(
+        """<?xml version="1.0" encoding="ISO-8859-1"?>
+            <aiml version="1.01"
+                  xmlns="http://alicebot.org/2001/AIML"
+                  xmlns:aiml="http://alicebot.org/2001/AIML"
+                  xmlns:html="http://www.w3.org/TR/REC-html40">
+                <category>
+                    <pattern>*</pattern>
+                    <template>RESPONSE</template>
+                </category>
+            </aiml>
+        """)
+
+        self.assertIsNotNone(self.parser.pattern_parser)
+        self.assertIsNotNone(self.parser.pattern_parser.root)
+        self.assertIsInstance(self.parser.pattern_parser.root, PatternRootNode)
+        self.assertTrue(self.parser.pattern_parser.root.has_one_or_more())
+
+        node = self.parser.pattern_parser.root.star
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, PatternOneOrMoreWildCardNode)
+        self.assertEquals(node.wildcard, "*")
+
+        topic = node.topic
+        self.assertIsNotNone(topic)
+        self.assertIsInstance(topic, PatternTopicNode)
+        self.assertTrue(topic.has_one_or_more())
+        self.assertIsInstance(topic.star, PatternOneOrMoreWildCardNode)
+        self.assertEquals(topic.star.wildcard, "*")
+
+        that = topic.star.that
+        self.assertIsNotNone(that)
+        self.assertIsInstance(that, PatternThatNode)
+        self.assertTrue(that.has_one_or_more())
+        self.assertIsInstance(that.star, PatternOneOrMoreWildCardNode)
+        self.assertEquals(that.star.wildcard, "*")
+
+        template = that.star.template
+        self.assertIsNotNone(template)
+        self.assertIsInstance(template, PatternTemplateNode)
+        self.assertEqual(template.template.resolve(bot=None, clientid="test"), "RESPONSE")
 
     def test_base_aiml_topic_category_template(self):
         self.parser.parse_from_text(

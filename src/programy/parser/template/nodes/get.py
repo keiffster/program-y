@@ -18,7 +18,7 @@ import logging
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
-
+from programy.utils.text.text import TextUtils
 
 
 class TemplateGetNode(TemplateNode):
@@ -119,19 +119,20 @@ class TemplateGetNode(TemplateNode):
             var_found = True
 
         for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
 
-            if child.tag == 'name':
+            if tag_name == 'name':
                 self.name = self.parse_children_as_word_node(graph, child)
                 self.local = False
                 name_found = True
 
-            elif child.tag == 'var':
+            elif tag_name == 'var':
                 self.name = self.parse_children_as_word_node(graph, child)
                 self.local = True
                 var_found = True
 
-            else:
-                raise ParserException("Error, invalid get", xml_element=expression)
+        if name_found is False and var_found is False:
+            raise ParserException("Error, invalid get, missing either name or var", xml_element=expression)
 
         if name_found is True and var_found is True:
             raise ParserException("Error, get node has both name AND var values", xml_element=expression)

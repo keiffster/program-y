@@ -19,7 +19,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
-
+from programy.utils.text.text import TextUtils
 
 class TemplateIntervalNode(TemplateNode):
 
@@ -148,9 +148,12 @@ class TemplateIntervalNode(TemplateNode):
         self.parse_text(graph, head_text)
 
         for child in expression:
-            if child.tag == 'format':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'format':
                 self.format = graph.get_word_node(self.get_text_from_element(child))
-            elif child.tag == 'style':
+
+            elif tag_name == 'style':
                 node = graph.get_base_node()
                 node.parse_text(graph, self.get_text_from_element(child))
                 for sub_child in child:
@@ -158,7 +161,7 @@ class TemplateIntervalNode(TemplateNode):
                     node.parse_text(graph, self.get_text_from_element(child))
                 self.style = node
 
-            elif child.tag == 'from':
+            elif tag_name == 'from':
                 node = graph.get_base_node()
                 node.parse_text(graph, self.get_text_from_element(child))
                 for sub_child in child:
@@ -166,7 +169,7 @@ class TemplateIntervalNode(TemplateNode):
                     node.parse_text(graph, self.get_text_from_element(child))
                 self.interval_from = node
 
-            elif child.tag == 'to':
+            elif tag_name == 'to':
                 node = graph.get_base_node()
                 node.parse_text(graph, self.get_text_from_element(child))
                 for sub_child in child:

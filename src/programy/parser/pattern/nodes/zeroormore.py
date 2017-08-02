@@ -54,7 +54,11 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
         tabs = TextUtils.get_tabs(depth)
 
-        if depth > context.max_search_depth:
+        if context.search_time_exceeded() is True:
+            logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_time))
+            return None
+
+        if context.search_depth_exceeded(depth) is True:
             logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
             return None
 

@@ -27,10 +27,7 @@ class TextUtils:
 
     @staticmethod
     def get_tabs(depth: int, tabs=DEFAULT_TAB_SPACE):
-        string = ""
-        for i in range(depth):
-            string += tabs
-        return string
+        return tabs * depth
 
     @staticmethod
     def strip_whitespace(string):
@@ -63,3 +60,28 @@ class TextUtils:
             return path.replace(old, new)
         else:
             return path
+
+    @staticmethod
+    def tag_and_namespace_from_text(text):
+        # If there is a namespace, then it looks something like
+        # {http://alicebot.org/2001/AIML}aiml
+        pattern = re.compile("^{.*}.*$")
+        if pattern.match(text) is None:
+            # If that pattern does not exist, assume that the text is the tag name
+            return text, None
+
+        # Otherwise, extract namespace and tag name
+        m = re.compile("^({.*})(.*)$")
+        g = m.match(text)
+        if g is not None:
+            namespace = g.group(1).strip()
+            tag_name = g.group(2).strip()
+            return tag_name, namespace
+        else:
+            return None, None
+
+    @staticmethod
+    def tag_from_text(text):
+        tag, _ = TextUtils.tag_and_namespace_from_text(text)
+        return tag
+

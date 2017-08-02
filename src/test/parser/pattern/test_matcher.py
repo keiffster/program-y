@@ -43,14 +43,14 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals("Unknown", Match.type_to_string(999))
 
     def test_match_context_depth(self):
-        context1 = MatchContext(max_search_depth=100, max_search_time=60)
+        context1 = MatchContext(max_search_depth=100, max_search_timeout=60)
         self.assertEquals(100, context1.max_search_depth)
         self.assertEquals(60, context1.max_search_time)
 
     def test_match_context_depth(self):
-        context = MatchContext(max_search_depth=100, max_search_time=60)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60)
         self.assertEquals(100, context.max_search_depth)
-        self.assertEquals(60, context.max_search_time)
+        self.assertEquals(60, context.max_search_timeout)
         self.assertFalse(context.matched())
         template = PatternTemplateNode(template=TemplateNode)
         context.set_template(template)
@@ -59,7 +59,7 @@ class PatternFactoryTests(unittest.TestCase):
 
     def test_match_context_pop_push(self):
         topic = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_time=60)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60)
         context.add_match(Match(Match.TOPIC, topic, None))
         self.assertEquals(1, len(context.matched_nodes))
         context.add_match(Match(Match.TOPIC, topic, None))
@@ -80,7 +80,7 @@ class PatternFactoryTests(unittest.TestCase):
         topic = PatternOneOrMoreWildCardNode("*")
         that = PatternOneOrMoreWildCardNode("*")
 
-        context = MatchContext(max_search_depth=100, max_search_time=60)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60)
 
         context.add_match(Match(Match.WORD, word, "Hello"))
         context.add_match(Match(Match.TOPIC, topic, "Hello Topic"))
@@ -103,15 +103,15 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals("True, 1, Hello World", equals_match.to_string())
 
     def test_time_functions(self):
-        context = MatchContext(max_search_depth=100, max_search_time=-1)
-        self.assertEqual(-1, context.max_search_time)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
+        self.assertEqual(-1, context.max_search_timeout)
         self.assertFalse(context.search_time_exceeded())
 
-        context = MatchContext(max_search_depth=100, max_search_time=0)
-        self.assertEqual(0, context.max_search_time)
+        context = MatchContext(max_search_depth=100, max_search_timeout=0)
+        self.assertEqual(0, context.max_search_timeout)
         self.assertTrue(context.search_time_exceeded())
 
-        context = MatchContext(max_search_depth=100, max_search_time=60)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60)
         time_now = datetime.datetime.now()
         prev_time = time_now - datetime.timedelta(seconds=-70)
         context._total_search_start = prev_time

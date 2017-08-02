@@ -53,7 +53,8 @@ class PatternThatNode(PatternNode):
 
         tabs = TextUtils.get_tabs(depth)
 
-        if depth > context.max_search_depth:
+        if context.search_depth_exceeded(depth) is True:
+        # if depth > context.max_search_depth:
             logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
             return None
 

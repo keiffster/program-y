@@ -19,6 +19,7 @@ import logging
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.services.service import ServiceFactory
 from programy.parser.exceptions import ParserException
+from programy.utils.text.text import TextUtils
 
 class TemplateSRAIXNode(TemplateNode):
 
@@ -90,15 +91,17 @@ class TemplateSRAIXNode(TemplateNode):
         self.parse_text(graph, head_text)
 
         for child in expression:
-            if child.tag == 'host':
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'host':
                 logging.warning("'host' element not supported in sraix, moved to config, see documentation")
-            elif child.tag == 'botid':
+            elif tag_name == 'botid':
                 logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
-            elif child.tag == 'hint':
+            elif tag_name == 'hint':
                 logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
-            elif child.tag == 'apikey':
+            elif tag_name == 'apikey':
                 logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
-            elif child.tag == 'service':
+            elif tag_name == 'service':
                 self.service = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)

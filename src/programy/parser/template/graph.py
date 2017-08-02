@@ -19,6 +19,7 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.factory import TemplateNodeFactory
+from programy.utils.text.text import TextUtils
 
 class TemplateGraph(object):
 
@@ -59,8 +60,9 @@ class TemplateGraph(object):
         return word_class(text)
 
     def parse_tag_expression(self, expression, branch):
-        if self._template_factory.exists(expression.tag):
-            node_instance = self._template_factory.new_node_class(expression.tag)()
+        tag_name = TextUtils.tag_from_text(expression.tag)
+        if self._template_factory.exists(tag_name):
+            node_instance = self._template_factory.new_node_class(tag_name)()
             node_instance.parse_expression(self, expression)
             branch.children.append(node_instance)
         else:
