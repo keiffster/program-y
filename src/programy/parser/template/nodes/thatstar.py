@@ -16,43 +16,47 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.indexed import TemplateIndexedNode
+from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
 
 
 #####################################################################################################################
 #
-class TemplateThatStarNode(TemplateIndexedNode):
+class TemplateThatStarNode(TemplateDoubleIndexedNode):
 
-    def __init__(self, position=1, index=1):
-        TemplateIndexedNode.__init__(self, position, index)
+    def __init__(self, question=1, sentence=1):
+        TemplateDoubleIndexedNode.__init__(self, question, sentence)
 
     def resolve(self, bot, clientid):
         try:
-            question = bot.get_conversation(clientid).nth_question(1)
+            conversation = bot.get_conversation(clientid)
+
+            question = conversation.previous_nth_question(self.question-1)
+
             sentence = question.current_sentence()
-            resolved = sentence.matched_context.thatstar(self.index)
+
+            resolved = sentence.matched_context.thatstar(self.sentence)
+
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "THATSTAR Index=%s" % (self.index)
+        str = "THATSTAR"
+        str += self.get_question_and_sentence_as_str()
+        return str
 
     def to_xml(self, bot, clientid):
         xml = "<thatstar"
-        if self._position > 1:
-            xml += ' position="%d"' % self._position
-        if self._index > 1:
-            xml += ' index="%d"' % self._index
-        xml += ">"
-        xml += "</thatstar>"
+        xml += self.get_question_and_sentence_as_index_xml()
+        xml += "></thatstar>"
         return xml
 
     #######################################################################################################
     # THATSTAR_EXPRESSION ::== <thatstar( INDEX_ATTRIBUTE)/> | <thatstar><index>TEMPLATE_EXPRESSION</index></thatstar>
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attrib(graph, expression, "index", "1")
+        self._parse_node_with_attrib(graph, expression, "index", "1,1")
 

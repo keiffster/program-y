@@ -4,10 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-<oob><url>http://<star/>.com</url></oob>
-url
-	<url>
-
+<oob>
+    <url>http://<star/>.com</url>
+</oob>
 """
 
 class URLOutOfBandProcessor(OutOfBandProcessor):
@@ -24,8 +23,6 @@ class URLOutOfBandProcessor(OutOfBandProcessor):
             logging.error("Unvalid url oob command - missing url!")
             return False
 
-            return self.execute_oob_command(bot, clientid)
-
     def execute_oob_command(self, bot, clientid):
         logging.info("URLOutOfBandProcessor: Loading=%s", self._url)
-        return ""
+        return "URL"

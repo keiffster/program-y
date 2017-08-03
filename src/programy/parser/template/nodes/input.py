@@ -23,32 +23,43 @@ from programy.parser.exceptions import ParserException
 ######################################################################################################################
 #
 # <input index=”n”/> is replaced with the value of the nth previous sentence input to the bot.
-#
+# The input element returns the entire user’s input. This is distinct from the star element,
+# which returns only contents captured by a wildcard in the matched pattern.
+
 class TemplateInputNode(TemplateIndexedNode):
 
-    def __init__(self, position=1, index=1):
-        TemplateIndexedNode.__init__(self, position, index)
+    def __init__(self, index=0):
+        TemplateIndexedNode.__init__(self, index)
+
+    def get_default_index(self):
+        return 0
 
     def resolve(self, bot, clientid):
         try:
             conversation = bot.get_conversation(clientid)
-            sentence = conversation.nth_sentence(self.index)
-            resolved = sentence
+
+            question = conversation.current_question()
+
+            if self.index == 0:
+                resolved = question.combine_sentences()
+            else:
+                resolved = question.previous_nth_sentence(self.index).text()
+
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "INPUT Index=%s" % (self.index)
+        str = "INPUT"
+        str += self.get_index_as_str()
+        return str
 
     def to_xml(self, bot, clientid):
         xml = "<input"
-        if self._position > 1:
-            xml += ' position="%d"' % self._position
-        if self._index > 1:
-            xml += ' index="%d"' % self._index
+        xml += self.get_index_as_xml()
         xml += ">"
         xml += "</input>"
         return xml

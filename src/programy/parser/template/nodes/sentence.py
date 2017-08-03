@@ -49,6 +49,9 @@ class TemplateSentenceNode(TemplateNode):
     #######################################################################################################
     # <sentence>ABC</sentence>
 
+    def add_default_star(self):
+        return True
+
     def parse_expression(self, graph, branch):
         self._parse_node(graph, branch)
 

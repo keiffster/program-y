@@ -86,7 +86,7 @@ class BrainTests(unittest.TestCase):
         self.assertTrue(brain.authorisation.authorise("someone", "other"))
 
         oob_content = ET.fromstring("<oob><something>other</something></oob>")
-        self.assertEqual("", brain.default_oob.process_out_of_bounds(None, "console", oob_content))
+        self.assertEqual("<?xml version='1.0' encoding='utf8'?>\n<oob><something>other</something></oob>", brain.default_oob.process_out_of_bounds(None, "console", oob_content))
         oob_content = ET.fromstring("<oob><dial>07777777777</dial></oob>")
         self.assertEqual("", brain.oobs['dial'].process_out_of_bounds(None, "console", oob_content))
 

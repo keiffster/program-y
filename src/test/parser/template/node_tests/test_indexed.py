@@ -1,5 +1,6 @@
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
+from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
 from programy.parser.exceptions import ParserException
 
 from test.parser.template.base import TemplateTestsBaseClass
@@ -21,11 +22,6 @@ class TemplateIndexedNodeTests(TemplateTestsBaseClass):
 
     def test_get_set(self):
         node = TemplateIndexedNode()
-        node.position = 3
-        self.assertEqual(3, node.position)
-        node.position = 4
-        self.assertEqual(4, node.position)
-
         node.index = 3
         self.assertEqual(3, node.index)
         node.index = 4
@@ -34,23 +30,49 @@ class TemplateIndexedNodeTests(TemplateTestsBaseClass):
     def test_attrib_name_index_only(self):
         node = TemplateIndexedNode()
         node.set_attrib('index', 3)
-        self.assertEqual(1, node.position)
         self.assertEqual(3, node.index)
+
+    def test_invalid_attrib_name(self):
+        with self.assertRaises(Exception):
+            node = TemplateIndexedNode()
+            node.set_attrib('rubbish', 3)
+
+
+class TemplateDoubleIndexedNodeTests(TemplateTestsBaseClass):
+
+    def test_init(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateDoubleIndexedNode()
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+    def test_get_set(self):
+        node = TemplateDoubleIndexedNode()
+        node.index = 3
+        self.assertEqual(3, node.index)
+        node.index = 4
+        self.assertEqual(4, node.index)
 
     def test_attrib_name_position_and_index(self):
-        node = TemplateIndexedNode()
+        node = TemplateDoubleIndexedNode()
         node.set_attrib('index', "1,3")
-        self.assertEqual(1, node.position)
-        self.assertEqual(3, node.index)
+        self.assertEqual(1, node.question)
+        self.assertEqual(3, node.sentence)
 
     def test_attrib_name_position_and_index_as_star(self):
-        node = TemplateIndexedNode()
+        node = TemplateDoubleIndexedNode()
         node.set_attrib('index', "1,*")
-        self.assertEqual(1, node.position)
-        self.assertEqual(1, node.index)
+        self.assertEqual(1, node.question)
+        self.assertEqual(-1, node.sentence)
 
     def test_attrib_name_position_and_index_invalid(self):
-        node = TemplateIndexedNode()
+        node = TemplateDoubleIndexedNode()
 
         with self.assertRaises(ParserException):
             node.set_attrib('index', "1 3")
@@ -73,8 +95,3 @@ class TemplateIndexedNodeTests(TemplateTestsBaseClass):
         with self.assertRaises(ParserException):
             node.set_attrib('index', "x,x")
 
-
-    def test_invalid_attrib_name(self):
-        with self.assertRaises(Exception):
-            node = TemplateIndexedNode()
-            node.set_attrib('rubbish', 3)

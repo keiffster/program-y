@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><wifi>on|off</wifi></oob>
+<oob>
+    <wifi>on|off</wifi>
+</oob>
 """
 
 class WifiOutOfBandProcessor(OutOfBandProcessor):
@@ -23,4 +25,4 @@ class WifiOutOfBandProcessor(OutOfBandProcessor):
 
     def execute_oob_command(self, bot, clientid):
         logging.info("WifiOutOfBandProcessor: Setting camera to=%s", self._command)
-        return ""
+        return "WIFI"

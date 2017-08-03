@@ -4,7 +4,6 @@ from test.aiml_tests.client import TestClient
 from programy.config.sections.brain.file import BrainFileConfiguration
 
 # TODO make sure topic star and that star match for set
-# TODO <that><topic> can take single "1" and double "1,2" indexes
 
 class TopicStarTestClient(TestClient):
 

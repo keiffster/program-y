@@ -48,6 +48,9 @@ class TemplateDenormalizeNode(TemplateNode):
     #######################################################################################################
     # DENORMALIZE_EXPRESSION ::== <denormalize>TEMPLATE_EXPRESSION</denormalize>
 
+    def add_default_star(self):
+        return True
+
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
 

@@ -142,12 +142,13 @@ class QuestionTests(unittest.TestCase):
     def test_next_previous_sentences(self):
         question = Question.create_from_text("Hello There. How Are you")
         self.assertEqual("How Are you", question.current_sentence().text())
-        self.assertEqual("Hello There", question.previous_sentence().text())
+        self.assertEqual("Hello There", question.previous_nth_sentence(1).text())
 
     def test_next_previous_nth_sentences(self):
         question = Question.create_from_text("Hello There. How Are you")
         self.assertEqual("How Are you", question.current_sentence().text())
-        self.assertEqual("Hello There", question.previous_nth_sentence(2).text())
+        self.assertEqual("How Are you", question.previous_nth_sentence(0).text())
+        self.assertEqual("Hello There", question.previous_nth_sentence(1).text())
 
 
 #############################################################################
@@ -170,51 +171,35 @@ class ConversationTests(unittest.TestCase):
         with self.assertRaises(Exception):
             conversation.current_question()
         with self.assertRaises(Exception):
-            conversation.nth_question(0)
+            conversation.previous_nth_question(0)
 
         question1 = Question.create_from_text("Hello There")
         conversation.record_dialog(question1)
-        self.assertEqual(1, len(conversation.all_sentences()))
         self.assertEqual(question1, conversation.current_question())
-        self.assertEqual(question1, conversation.nth_question(1))
         with self.assertRaises(Exception):
-            conversation.nth_question(2)
-
-        questions = conversation.all_sentences()
-        self.assertEqual(1, len(questions))
+            conversation.previous_nth_question(1)
 
         question2 = Question.create_from_text("Hello There Again")
         conversation.record_dialog(question2)
-        self.assertEqual(2, len(conversation.all_sentences()))
         self.assertEqual(question2, conversation.current_question())
-        self.assertEqual(question2, conversation.nth_question(1))
+        self.assertEqual(question1, conversation.previous_nth_question(1))
         with self.assertRaises(Exception):
-            conversation.nth_question(3)
-
-        questions = conversation.all_sentences()
-        self.assertEqual(2, len(questions))
+            conversation.previous_nth_question(3)
 
         question3 = Question.create_from_text("Hello There Again Again")
         conversation.record_dialog(question3)
-        self.assertEqual(3, len(conversation.all_sentences()))
         self.assertEqual(question3, conversation.current_question())
-        self.assertEqual(question3, conversation.nth_question(1))
+        self.assertEqual(question2, conversation.previous_nth_question(1))
         with self.assertRaises(Exception):
-            conversation.nth_question(4)
-
-        questions = conversation.all_sentences()
-        self.assertEqual(3, len(questions))
+            conversation.previous_nth_question(4)
 
         # Max Histories for this test is 3
         # Therefore we should see the first question, pop of the stack
 
         question4 = Question.create_from_text("Hello There Again Again Again")
         conversation.record_dialog(question4)
-        self.assertEqual(3, len(conversation.all_sentences()))
         self.assertEqual(question4, conversation.current_question())
-        self.assertEqual(question4, conversation.nth_question(1))
+        self.assertEqual(question3, conversation.previous_nth_question(1))
         with self.assertRaises(Exception):
-            conversation.nth_question(5)
+            conversation.previous_nth_question(5)
 
-        questions = conversation.all_sentences()
-        self.assertEqual(3, len(questions))

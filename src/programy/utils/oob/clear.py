@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><clear>log</clear></oob>
+<oob>
+    <clear>log</clear>
+</oob>
 """
 
 class ClearOutOfBandProcessor(OutOfBandProcessor):
@@ -23,4 +25,4 @@ class ClearOutOfBandProcessor(OutOfBandProcessor):
 
     def execute_oob_command(self, bot, clientid):
         logging.info("ClearOutOfBandProcessor: Clearing=%s", self._command)
-        return ""
+        return "CLEAR"

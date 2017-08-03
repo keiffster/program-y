@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><map>Kinghorn</map></oob>
+<oob>
+    <map>Kinghorn</map>
+</oob>
 """
 class MapOutOfBandProcessor(OutOfBandProcessor):
 
@@ -22,4 +24,4 @@ class MapOutOfBandProcessor(OutOfBandProcessor):
 
     def execute_oob_command(self, bot, clientid):
         logging.info("MapOutOfBandProcessor: Showing a map for location=%s", self._location)
-        return ""
+        return "MAP"

@@ -131,6 +131,9 @@ class TemplateNode(object):
 
     #######################################################################################################
 
+    def add_default_star(self):
+        return False
+
     def _parse_node(self, graph, expression):
         expression_text = self.parse_text(graph, self.get_text_from_element(expression))
 
@@ -140,11 +143,12 @@ class TemplateNode(object):
             self.parse_text(graph, self.get_tail_from_element(child))
             expression_children = True
 
-        if expression_text is None and expression_children is False:
-            logging.debug ("Node has no content (text or children), default to <star/>")
-            star_class = graph.get_node_class_by_name('star')
-            star_node = star_class()
-            self.append(star_node)
+        if expression_text is False and expression_children is False:
+            if self.add_default_star() is True:
+                logging.debug ("Node has no content (text or children), default to <star/>")
+                star_class = graph.get_node_class_by_name('star')
+                star_node = star_class()
+                self.append(star_node)
 
     #######################################################################################################
 

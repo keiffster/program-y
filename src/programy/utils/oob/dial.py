@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><dial>07777777777</dial></oob>
+<oob>
+    <dial>07777777777</dial>
+</oob>
 """
 class DialOutOfBandProcessor(OutOfBandProcessor):
 
@@ -20,8 +22,6 @@ class DialOutOfBandProcessor(OutOfBandProcessor):
             logging.error("Unvalid dial oob command - missing dial text!")
             return False
 
-            return self.execute_oob_command(bot, clientid)
-
     def execute_oob_command(self, bot, clientid):
         logging.info("DialOutOfBandProcessor: Dialing=%s", self._number)
-        return ""
+        return "DIAL"

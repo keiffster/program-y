@@ -3,8 +3,6 @@ import os
 from test.aiml_tests.client import TestClient
 from programy.config.sections.brain.file import BrainFileConfiguration
 
-# TODO <that><topic> can take single "1" and double "1,2" indexes
-
 class ThatTestClient(TestClient):
 
     def __init__(self):

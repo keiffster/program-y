@@ -20,5 +20,5 @@ class TemplateGraphThatTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateThatNode)
 
-        self.assertEqual(root.children[0].to_string(), "THAT Index=1")
+        self.assertEqual(root.children[0].to_string(), "THAT")
 

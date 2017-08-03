@@ -22,20 +22,21 @@ from programy.parser.template.nodes.indexed import TemplateIndexedNode
 ######################################################################################################################
 #
 # <response index=”n”/> is replaced with the value of the nth previous multi-sentence bot response..
+# The response element returns the bot’s response specified by its historical index value.
 #
 class TemplateResponseNode(TemplateIndexedNode):
 
-    def __init__(self, position=1, index=1):
-        TemplateIndexedNode.__init__(self, position, index)
+    def __init__(self, index=1):
+        TemplateIndexedNode.__init__(self, index)
 
     def resolve(self, bot, clientid):
         try:
-            nth_question = self.index
             conversation = bot.get_conversation(clientid)
-            # Fix provided by @newdev7 28/03/2017
-            question = conversation.nth_question(nth_question+1)
-            responses = question.combine_answers()
-            resolved = responses
+
+            question = conversation.previous_nth_question(self.index)
+
+            resolved = question.combine_answers()
+
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
@@ -43,14 +44,13 @@ class TemplateResponseNode(TemplateIndexedNode):
             return ""
 
     def to_string(self):
-        return "RESPONSE Index=%s" % (self.index)
+        str = "RESPONSE"
+        str += self.get_index_as_str()
+        return str
 
     def to_xml(self, bot, clientid):
         xml = "<response"
-        if self._position > 1:
-            xml += ' position="%d"' % self._position
-        if self._index > 1:
-            xml += ' index="%d"' % self._index
+        xml += self.get_index_as_xml()
         xml += ">"
         xml += "</response>"
         return xml

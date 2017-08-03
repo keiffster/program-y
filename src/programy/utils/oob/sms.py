@@ -4,11 +4,12 @@ from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
-<oob><sms><recipient><get name="contacturi"/></recipient><message><get name="messagebody"/></message></sms></oob>
-sms
-	recipient
-	message
-
+<oob>
+    <sms>
+        <recipient><get name="contacturi"/></recipient>
+        <message><get name="messagebody"/></message>
+    </sms>
+</oob>
 """
 
 class SMSOutOfBandProcessor(OutOfBandProcessor):
@@ -16,7 +17,7 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
     def __init__(self):
         OutOfBandProcessor.__init__(self)
         self._recipient = None
-        self._description = None
+        self._message = None
 
     def parse_oob_xml(self, oob: ET.Element):
         for child in oob:
@@ -27,13 +28,13 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
             else:
                 logging.error ("Unknown child element [%s] in sms oob"%(child.tag))
 
-            if self._recipient is not None and \
-                self._description is not None :
-                return True
+        if self._recipient is not None and \
+            self._message is not None :
+            return True
 
-            logging.error("Invalid sms oob command")
-            return False
+        logging.error("Invalid sms oob command")
+        return False
 
     def execute_oob_command(self, bot, clientid):
         logging.info("SMSOutOfBandProcessor: Messaging=%s", self._recipient)
-        return ""
+        return "SMS"

@@ -4,7 +4,9 @@ from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
-Example: <oob><camera>on|off</camera></oob>
+<oob>
+    <camera>on|off</camera>
+</oob>
 """
 
 class CameraOutOfBandProcessor(OutOfBandProcessor):
@@ -18,9 +20,9 @@ class CameraOutOfBandProcessor(OutOfBandProcessor):
             self._command = oob.text
             return True
         else:
-            logging.error("Unvalid camera oob command - missing command")
+            logging.error("Invalid camera oob command - missing command")
             return False
 
     def execute_oob_command(self, bot, clientid):
         logging.info("CameraOutOfBandProcessor: Setting camera to=%s", self._command)
-        return ""
+        return "CAMERA"

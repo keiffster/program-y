@@ -137,17 +137,20 @@ class Question(object):
         else:
             return self._sentences[-1]
 
+    """
     def previous_sentence(self):
         if len(self._sentences) < 2:
             raise Exception("Num sentence array violation !")
         else:
             return self._sentences[len(self._sentences)-2]
+    """
 
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
             raise Exception("Num sentence array violation !")
         else:
-            return self._sentences[len(self._sentences)-num]
+            previous = -1 - num
+            return self._sentences[previous]
 
     def combine_sentences(self):
         return ". ".join([sentence.text() for sentence in self._sentences])
@@ -186,20 +189,20 @@ class Conversation(object):
     def questions(self):
         return self._questions
 
-    # 1 indexed, not 0 indexed, 1st question is nth_question(1)
-    def nth_question(self, num: int):
-        if num <= len(self._questions):
-            question_num = len(self._questions)-num
-            return self._questions[question_num]
-        else:
-            raise Exception("Invalid question index [%d]"%num)
-
     def current_question(self):
         if len(self._questions) > 0:
             return self._questions[-1]
         else:
             raise Exception("Invalid question index")
 
+    def previous_nth_question(self, num: int):
+        if len(self._questions) < num:
+            raise Exception("Num question array violation !")
+        else:
+            previous = -1 - num
+            return self._questions[previous]
+
+    """
     def all_sentences(self):
         sentences = []
         for question in self._questions:
@@ -213,6 +216,7 @@ class Conversation(object):
             return sentences[len(sentences)-num]
         else:
             raise Exception("Invalid sentence index")
+    """
 
     def set_predicate(self, name: str, value: str):
         if name == 'topic':

@@ -106,21 +106,20 @@ class TemplateStarNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateStarNode(position=3, index=2)
+        node = TemplateStarNode(index=2)
         self.assertIsNotNone(node)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
         self.assertEqual(2, node.index)
-        self.assertEqual(3, node.position)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
-        node = TemplateStarNode(position=2, index=3)
+        node = TemplateStarNode(index=3)
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><star index="3" position="2" /></template>', xml_str)
+        self.assertEqual('<template><star index="3" /></template>', xml_str)
 

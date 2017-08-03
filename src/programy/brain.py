@@ -362,7 +362,7 @@ class Brain(object):
             logging.info("Topic pattern = [%s]", topic_pattern)
 
         try:
-            that_question = conversation.nth_question(2)
+            that_question = conversation.previous_nth_question(1)
             that_sentence = that_question.current_sentence()
 
             # If the last response was valid, i.e not none and not empty string, then use
@@ -387,11 +387,13 @@ class Brain(object):
             template_node = match_context.template_node()
             logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
             response = template_node.template.resolve(bot, clientid)
+
             if "<oob>" in response:
                 response, oob = self.strip_oob(response)
                 if oob is not None:
                     oob_response = self.process_oob(bot, clientid, oob)
                     response = response + " " + oob_response
+
             return response
 
         return None
@@ -433,12 +435,12 @@ class Brain(object):
         oob_content = ET.fromstring(oob_command)
 
         if oob_content.tag == 'oob':
-            for tag in oob_content:
-                if tag in self._oob:
-                    oob_class = self._oob[tag]
-                    return oob_class.process_out_of_bounds(bot, clientid, tag)
+            for child in oob_content.findall('./'):
+                if child.tag in self._oob:
+                    oob_class = self._oob[child.tag]
+                    return oob_class.process_out_of_bounds(bot, clientid, child)
                 else:
-                    return self._default_oob.process_out_of_bounds(bot, clientid, tag)
+                    return self._default_oob.process_out_of_bounds(bot, clientid, child)
 
         return ""
 

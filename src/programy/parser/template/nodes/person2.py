@@ -47,6 +47,9 @@ class TemplatePerson2Node(TemplateNode):
     #######################################################################################################
     # PERSON2_EXPRESSION ::== <person2>TEMPLATE_EXPRESSION</person2>
 
+    def add_default_star(self):
+        return True
+
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
 

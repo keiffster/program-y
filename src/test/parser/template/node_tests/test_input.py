@@ -9,27 +9,13 @@ from test.parser.template.base import TemplateTestsBaseClass
 
 class TemplateInputNodeTests(TemplateTestsBaseClass):
 
-    def test_node(self):
-        root = TemplateNode()
-        self.assertIsNotNone(root)
-        self.assertIsNotNone(root.children)
-        self.assertEqual(len(root.children), 0)
-
+    def test_to_str_defaults(self):
         node = TemplateInputNode()
-        self.assertIsNotNone(node)
+        self.assertEquals("INPUT", node.to_string())
 
-        root.append(node)
-        self.assertEqual(len(root.children), 1)
-
-        conversation = Conversation("testid", self.bot)
-        question = Question.create_from_text("Hello world")
-        question.current_sentence()._response = "Hello matey"
-        conversation._questions.append(question)
-        self.bot._conversations["testid"] = conversation
-
-        response = root.resolve(self.bot, "testid")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello world")
+    def test_to_str_no_defaults(self):
+        node = TemplateInputNode(index=2)
+        self.assertEquals("INPUT index=2", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -41,26 +27,95 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><input /></template>", xml_str)
 
-    def test_node_no_defaults(self):
-        root = TemplateNode()
-        self.assertIsNotNone(root)
-        self.assertIsNotNone(root.children)
-        self.assertEqual(len(root.children), 0)
-
-        node = TemplateInputNode(position=3, index=2)
-        self.assertIsNotNone(node)
-
-        root.append(node)
-        self.assertEqual(len(root.children), 1)
-        self.assertEqual(2, node.index)
-        self.assertEqual(3, node.position)
-
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
-        node = TemplateInputNode(position=2, index=3)
+        node = TemplateInputNode(index=3)
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><input index="3" position="2" /></template>', xml_str)
+        self.assertEqual('<template><input index="3" /></template>', xml_str)
+
+    def test_resolve_with_defaults(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateInputNode()
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+        self.assertEqual(0, node.index)
+
+        conversation = Conversation("testid", self.bot)
+
+        question = Question.create_from_text("Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+
+        self.bot._conversations["testid"] = conversation
+
+        response = root.resolve(self.bot, "testid")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "Hello world")
+
+    def test_resolve_no_defaults(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateInputNode(index=1)
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+        self.assertEqual(1, node.index)
+
+        conversation = Conversation("testid", self.bot)
+
+        question = Question.create_from_text("Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+
+        question = Question.create_from_text("How are you. Are you well")
+        question.current_sentence()._response = "Fine thanks"
+        conversation.record_dialog(question)
+
+        self.bot._conversations["testid"] = conversation
+
+        response = root.resolve(self.bot, "testid")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "How are you")
+
+    def test_resolve_no_sentence(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = TemplateInputNode(index=3)
+        self.assertIsNotNone(node)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+        self.assertEqual(3, node.index)
+
+        conversation = Conversation("testid", self.bot)
+
+        question = Question.create_from_text("Hello world")
+        question.current_sentence()._response = "Hello matey"
+        conversation.record_dialog(question)
+
+        question = Question.create_from_text("How are you. Are you well")
+        question.current_sentence()._response = "Fine thanks"
+        conversation.record_dialog(question)
+
+        self.bot._conversations["testid"] = conversation
+
+        response = root.resolve(self.bot, "testid")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "")

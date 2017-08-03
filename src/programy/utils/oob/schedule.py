@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><schedule><title><star/></title><description><lowercase><star index="2"/></lowercase></description><get name="sraix"/></schedule></oob>
+<oob>
+    <schedule><title><star/></title><description><lowercase><star index="2"/></lowercase></description><get name="sraix"/></schedule>
+</oob>
 """
 class ScheduleOutOfBandProcessor(OutOfBandProcessor):
 
@@ -22,13 +24,13 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
             else:
                 logging.error ("Unknown child element [%s] in schedule oob"%(child.tag))
 
-            if self._title is not None and \
-                self._description is not None:
-                return True
+        if self._title is not None and \
+            self._description is not None:
+            return True
 
-            logging.error("Invalid email schedule command")
-            return False
+        logging.error("Invalid email schedule command")
+        return False
 
     def execute_oob_command(self, bot, clientid):
         logging.info("ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
-        return ""
+        return "SCHEDULE"

@@ -4,7 +4,9 @@ import xml.etree.ElementTree as ET
 from programy.utils.oob.oob import OutOfBandProcessor
 
 """
-Example: <oob><search>VIDEO <star/></search></oob>
+<oob>
+    <search>VIDEO <star/></search>
+</oob>
 """
 class SearchOutOfBandProcessor(OutOfBandProcessor):
 
@@ -20,8 +22,6 @@ class SearchOutOfBandProcessor(OutOfBandProcessor):
             logging.error("Unvalid search oob command - missing search query!")
             return False
 
-            return self.execute_oob_command(bot, clientid)
-
     def execute_oob_command(self, bot, clientid):
         logging.info("SearchOutOfBandProcessor: Searching=%s", self._search)
-        return ""
+        return "SEARCH"

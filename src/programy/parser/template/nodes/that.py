@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.indexed import TemplateIndexedNode
+from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
 
 ######################################################################################################################
 #
@@ -24,33 +24,34 @@ from programy.parser.template.nodes.indexed import TemplateIndexedNode
 # <that index=”n” />
 # <that index="m,n" />
 #
-class TemplateThatNode(TemplateIndexedNode):
+class TemplateThatNode(TemplateDoubleIndexedNode):
 
-    def __init__(self, position=1, index=1):
-        TemplateIndexedNode.__init__(self, position, index)
+    def __init__(self, question=1, sentence=1):
+        TemplateDoubleIndexedNode.__init__(self, question, sentence)
 
     def resolve(self, bot, clientid):
         try:
-            nth_question = self.index
             conversation = bot.get_conversation(clientid)
-            question = conversation.nth_question(nth_question)
-            responses = question.combine_answers()
-            resolved = responses
+
+            question = conversation.previous_nth_question(self.question)
+
+            resolved = question.combine_answers()
+
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "THAT Index=%s" % (self.index)
+        str = "THAT"
+        str += self.get_question_and_sentence_as_str()
+        return str
 
     def to_xml(self, bot, clientid):
         xml = "<that"
-        if self._position > 1:
-            xml += ' position="%d"' % self._position
-        if self._index > 1:
-            xml += ' index="%d"' % self._index
+        xml += self.get_question_and_sentence_as_index_xml()
         xml += ">"
         xml += "</that>"
         return xml

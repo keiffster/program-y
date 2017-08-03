@@ -4,11 +4,9 @@ from programy.utils.oob.oob import OutOfBandProcessor
 import xml.etree.ElementTree as ET
 
 """
-<dialog><title>Which contact?</title><list><get name="contactlist"/></list></dialog>
-dialog
-	title
-	list
-
+<oob>
+    <dialog><title>Which contact?</title><list><get name="contactlist"/></list></dialog>
+</oob>
 """
 
 class DialogOutOfBandProcessor(OutOfBandProcessor):
@@ -27,13 +25,13 @@ class DialogOutOfBandProcessor(OutOfBandProcessor):
             else:
                 logging.error ("Unknown child element [%s] in dialog oob"%(child.tag))
 
-            if self._title is not None and \
-                self._list is not None:
-                return True
+        if self._title is not None and \
+            self._list is not None:
+            return True
 
-            logging.error("Invalid dialog oob command")
-            return False
+        logging.error("Invalid dialog oob command")
+        return False
 
     def execute_oob_command(self, bot, clientid):
         logging.info("DialogOutOfBandProcessor: Dialog=%s", self._title)
-        return ""
+        return "DIALOG"
