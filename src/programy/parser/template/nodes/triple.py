@@ -42,14 +42,14 @@ class TemplateTripleNode(TemplateNode):
         return self._objective
 
     def parse_expression(self, graph, expression):
-        if 'subject' in expression.attrib:
-            self._subject = expression.attrib['subject']
+        if 'subj' in expression.attrib:
+            self._subject = expression.attrib['subj']
 
-        if 'predicate' in expression.attrib:
-            self._predicate = expression.attrib['predicate']
+        if 'pred' in expression.attrib:
+            self._predicate = expression.attrib['pred']
 
-        if 'objective' in expression.attrib:
-            self._objective = expression.attrib['objective']
+        if 'obj' in expression.attrib:
+            self._objective = expression.attrib['obj']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -57,11 +57,11 @@ class TemplateTripleNode(TemplateNode):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
 
-            if tag_name == 'subject':
+            if tag_name == 'subj':
                 self._subject = self.get_text_from_element(child)
-            elif tag_name == 'predicate':
+            elif tag_name == 'pred':
                 self._predicate = self.get_text_from_element(child)
-            elif tag_name == 'objective':
+            elif tag_name == 'obj':
                 self._objective = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)

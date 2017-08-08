@@ -1,16 +1,18 @@
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.tuple import TemplateTupleNode
+from programy.parser.template.nodes.search import TemplateSearchNode
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
-class TemplateGraphTupleTests(TemplateGraphTestClient):
+class TemplateGraphSearchTests(TemplateGraphTestClient):
 
-     def test_tuple_simple(self):
+     def test_search_basic(self):
         template = ET.fromstring("""
 			<template>
-			    <tuple></tuple>
+			    <search>
+			        question
+			    </search>
 			</template>
 			""")
 
@@ -20,5 +22,6 @@ class TemplateGraphTupleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
-        self.assertIsInstance(ast.children[0], TemplateTupleNode)
-        self.assertEqual(0, len(ast.children[0].children))
+        self.assertIsInstance(ast.children[0], TemplateSearchNode)
+        self.assertEqual(1, len(ast.children[0].children))
+

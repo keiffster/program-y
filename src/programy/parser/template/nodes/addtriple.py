@@ -47,5 +47,5 @@ class TemplateAddTripleNode(TemplateTripleNode):
     # ADDTRIPLE_EXPRESSION ::== <addtriple>TEMPLATE_EXPRESSION</addtriple>
 
     def parse_expression(self, graph, expression):
-        super(TemplateAddTripleNode, self).parse_expression(self, graph, expression)
+        super(TemplateAddTripleNode, self).parse_expression(graph, expression)
 

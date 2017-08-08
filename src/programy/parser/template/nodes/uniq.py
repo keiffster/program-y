@@ -16,13 +16,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.triple import TemplateTripleNode
 
 
-class TemplateUniqNode(TemplateNode):
+class TemplateUniqNode(TemplateTripleNode):
 
     def __init__(self):
-        TemplateNode.__init__(self)
+        TemplateTripleNode.__init__(self)
 
     def resolve(self, bot, clientid):
         try:
@@ -46,10 +46,7 @@ class TemplateUniqNode(TemplateNode):
     #######################################################################################################
     # UNIQ_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
-    def add_default_star(self):
-        return True
-
     def parse_expression(self, graph, expression):
-        self._parse_node(graph, expression)
+        super(TemplateUniqNode, self).parse_expression(graph, expression)
 
 

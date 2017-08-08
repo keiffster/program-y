@@ -17,12 +17,23 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.exceptions import ParserException
+from programy.utils.text.text import TextUtils
 
+class SelectQuery(object):
+
+    def __init__(self, type, subj, pred, obj):
+        self._type = type
+        self._subj = subj
+        self._pred = pred
+        self._obj = obj
 
 class TemplateSelectNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
+        self._vars = {}
+        self._queries = []
 
     def resolve(self, bot, clientid):
         try:
@@ -39,17 +50,66 @@ class TemplateSelectNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<select>"
-        xml += self.children_to_xml(bot, clientid)
+        if len(self._vars) > 0:
+            for var in self._vars:
+                pass
+        for query in self._queries:
+            pass
         xml += "</select>"
         return xml
 
     #######################################################################################################
     # SELECT_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
-    def add_default_star(self):
-        return True
+    def parse_vars(self, vars):
+        var_splits = vars.split(" ")
+        for var in var_splits:
+            if var.startswith("?"):
+                var_name = var[1:]
+            else:
+                var_name = var
+            self._vars[var_name] = None
+
+    def parse_query(self, query_name, query):
+        for child in query:
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'subj':
+                subj = self.get_text_from_element(child)
+            elif tag_name == 'pred':
+                pred = self.get_text_from_element(child)
+            elif tag_name == 'obj':
+                obj = self.get_text_from_element(child)
+            else:
+                logging.warning ("Unknown tag name [%s] in select query"%tag_name)
+
+        if subj is None:
+            raise ParserException("<subj> element missing from select query")
+
+        if pred is None:
+            raise ParserException("<pred> element missing from select query")
+
+        if obj is None:
+            raise ParserException("<obj> element missing from select query")
+
+        self._queries.append(SelectQuery(query_name, subj, pred, obj))
 
     def parse_expression(self, graph, expression):
-        self._parse_node(graph, expression)
+
+        vars = expression.findall('vars')
+
+        if len(vars) > 0:
+            if len(vars) > 1:
+                logging.warning ("Multiple <vars> found in select tag, using first")
+            self.parse_vars(vars[0].text)
+
+        queries = expression.findall('./')
+        for query in queries:
+            tag_name = TextUtils.tag_from_text(query.tag)
+            if tag_name == 'q' or tag_name == 'notq':
+                self.parse_query(tag_name, query)
+
+        if len(self.children) > 0:
+            raise ParserException("<select> node should not contains child text, use <select><vars></vars><q></q></select> only")
 
 

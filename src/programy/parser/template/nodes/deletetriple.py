@@ -48,6 +48,6 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
     # DELETETRIPLE_EXPRESSION ::== <deletetriple>TEMPLATE_EXPRESSION</deletetriple>
 
     def parse_expression(self, graph, expression):
-        super(TemplateDeleteTripleNode, self).parse_expression(self, graph, expression)
+        super(TemplateDeleteTripleNode, self).parse_expression(graph, expression)
 
 
