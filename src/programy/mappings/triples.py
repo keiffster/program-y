@@ -56,3 +56,31 @@ class TriplesCollection(TripleStringCollection):
             elif predicate in self.triples[subject]:
                 if objective is None or objective == self.triples[subject][predicate]:
                     del self.triples[subject][predicate]
+
+    def subjects(self):
+        return self.triples.keys()
+
+    def predicates(self, subject_name=None):
+        predicates = []
+        for subject in self.subjects():
+            if subject_name is None or subject_name == subject:
+                for predicate_name in self.triples[subject].keys():
+                    predicates.append([subject, predicate_name])
+        return predicates
+
+    def objectives(self, subject_name=None, predicate_name=None):
+        objectives = []
+        predicates = self.predicates(subject_name)
+        for predicate in predicates:
+            if subject_name is None or subject_name == predicate[0]:
+                if predicate_name is None or predicate_name == predicate[1]:
+                    objectives.append([predicate[0], predicate[1], self.triples[predicate[0]][predicate[1]]])
+        return objectives
+
+    def match(self, subject_name=None, predicate_name=None, objective_name=None):
+        matched = []
+        objectives = self.objectives(subject_name, predicate_name)
+        for objective in objectives:
+            if objective_name is None or objective_name == objective[2]:
+                matched.append(objective)
+        return matched
