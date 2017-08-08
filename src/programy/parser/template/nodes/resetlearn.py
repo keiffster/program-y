@@ -41,12 +41,9 @@ class TemplateResetLearnNode(TemplateNode):
     #######################################################################################################
     # RESETLEARN_EXPRESSION ::== <resetlearn />
 
-    def add_default_star(self):
-        return True
-
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if len(self.children) > 0:
-            raise ParserException("<resetlearn> node should not contains child text, use <id /> or <id></id> only")
+            raise ParserException("<resetlearn> node should not contains child text, use <resetlearn /> or <resetlearn></resetlearn> only")
 
 

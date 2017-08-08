@@ -45,7 +45,6 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         ast = self.parser.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
-        self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])

@@ -41,9 +41,6 @@ class TemplateResetLearnfNode(TemplateNode):
     #######################################################################################################
     # RESETLEARNF_EXPRESSION ::== <resetlearnf />>
 
-    def add_default_star(self):
-        return True
-
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if len(self.children) > 0:
