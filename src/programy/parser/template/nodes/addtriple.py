@@ -16,35 +16,36 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes.triple import TemplateTripleNode
 
-
-class TemplateIdNode(TemplateNode):
+class TemplateAddTripleNode(TemplateTripleNode):
 
     def __init__(self):
-        TemplateNode.__init__(self)
+        TemplateTripleNode.__init__(self)
+        self._node_name = "addtriple"
 
     def resolve(self, bot, clientid):
         try:
-            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
-            return clientid
+            bot.brain.triples.add_triple(self.subject, self._predicate, self.objective)
+            resolved = ""
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "ID"
+        return "ADDTRIPLE"
 
     def to_xml(self, bot, clientid):
-        return "<id />"
+        xml = "<addtriple>"
+        xml += self.children_to_xml(bot, clientid)
+        xml += "</addtriple>"
+        return xml
 
     #######################################################################################################
-    # <id/> |
+    # ADDTRIPLE_EXPRESSION ::== <addtriple>TEMPLATE_EXPRESSION</addtriple>
 
     def parse_expression(self, graph, expression):
-        self._parse_node(graph, expression)
-        if len(self.children) > 0:
-            raise ParserException("<id> node should not contains child text, use <id /> or <id></id> only")
-
+        super(TemplateAddTripleNode, self).parse_expression(self, graph, expression)
 

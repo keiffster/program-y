@@ -16,64 +16,40 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.utils.classes.loader import ClassLoader
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException
 
 
-######################################################################################################################
-#
-class TemplateExtensionNode(TemplateNode):
+class TemplateTripleNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
-        self._path = None
+        self._subject = None
+        self._predicate = None
+        self._objective = None
 
     @property
-    def path(self):
-        return self._path
+    def subject(self):
+        return self._subject
 
-    @path.setter
-    def path(self, path):
-        self._path = path
+    @property
+    def predicate(self):
+        return self._predicate
 
-    def resolve(self, bot, clientid):
-        try:
-            data = self.resolve_children_to_string(bot, clientid)
-
-            new_class = ClassLoader.instantiate_class(self._path)
-            instance = new_class()
-            resolved = instance.execute(bot, clientid, data)
-
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
-        except Exception as excep:
-            logging.exception(excep)
-            return ""
-
-    def to_string(self):
-        return "EXTENSION (%s)" % self._path
-
-    def to_xml(self, bot, clientid):
-        xml = '<extension'
-        xml += ' path="%s"' % self._path
-        xml += '>'
-        xml += self.children_to_xml(bot, clientid)
-        xml += '</extension>'
-        return xml
-
-    #######################################################################################################
-    # EXTENSION_EXPRESSION ::== <extension>
-    #                               <path>programy.etension.SomeModule</path>
-    #                               parameters
-    # 						</extension>
+    @property
+    def objective(self):
+        return self._objective
 
     def parse_expression(self, graph, expression):
+        if 'subject' in expression.attrib:
+            self._subject = expression.attrib['subject']
 
-        if 'path' in expression.attrib:
-            self.path = expression.attrib['path']
+        if 'predicate' in expression.attrib:
+            self._predicate = expression.attrib['predicate']
+
+        if 'objective' in expression.attrib:
+            self._objective = expression.attrib['objective']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -81,13 +57,26 @@ class TemplateExtensionNode(TemplateNode):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
 
-            if tag_name == 'path':
-                self.path = self.get_text_from_element(child)
+            if tag_name == 'subject':
+                self._subject = self.get_text_from_element(child)
+            elif tag_name == 'predicate':
+                self._predicate = self.get_text_from_element(child)
+            elif tag_name == 'objective':
+                self._objective = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if self.path is None:
-            raise ParserException("EXTENSION node, path attribute missing !")
+        if self._subject is None:
+            raise ParserException("<%s> node missing subject attribue/element"%self._node_name)
+
+        if self._predicate is None:
+            raise ParserException("<%s> node missing predicate attribue/element"%self._node_name)
+
+        if self._objective is None:
+            raise ParserException("<%s> node missing _objective attribue/element"%self._node_name)
+
+
+

@@ -206,11 +206,12 @@ class Bot(object):
 
             self.check_max_timeout()
 
-            self.check_spelling_before(each_sentence)
+            if srai is False:
+                self.check_spelling_before(each_sentence)
 
             response = self.brain.ask_question(self, clientid, each_sentence)
 
-            if response is None:
+            if response is None and srai is False:
                 response = self.check_spelling_and_retry(clientid, each_sentence)
 
             if response is not None:

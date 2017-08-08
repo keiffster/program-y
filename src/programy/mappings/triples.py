@@ -26,3 +26,33 @@ class TriplesCollection(TripleStringCollection):
 
     def split_line(self, line):
         return self.split_line_by_char(line)
+
+    def has_subject(self, subject):
+        return self.has_primary(subject)
+
+    def has_predicate(self, subject, predicate):
+        return self.has_secondary(subject, predicate)
+
+    def has_objective(self, subject, predicate, objective):
+        value = self.value(subject, predicate)
+        if value is not None:
+            return bool(value == objective)
+        return False
+
+    def objective(self, subject, predicate):
+        return self.value(subject, predicate)
+
+    def add_triple(self, subject, predicate, objective):
+        if subject not in self.triples:
+            self.triples[subject] = {}
+        self.triples[subject][predicate] = objective
+
+    def delete_triple(self, subject, predicate=None, objective=None):
+        if subject in self.triples:
+            if predicate is None:
+                del self.triples[subject]
+            elif len(self.triples[subject]) == 0:
+                del self.triples[subject]
+            elif predicate in self.triples[subject]:
+                if objective is None or objective == self.triples[subject][predicate]:
+                    del self.triples[subject][predicate]

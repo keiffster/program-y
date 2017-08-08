@@ -17,34 +17,39 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.exceptions import ParserException
 
 
-class TemplateIdNode(TemplateNode):
+class TemplateSelectNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         try:
-            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
-            return clientid
+            string = self.resolve_children_to_string(bot, clientid)
+            resolved = "SELECT"
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            return resolved
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "ID"
+        return "SELECT"
 
     def to_xml(self, bot, clientid):
-        return "<id />"
+        xml = "<select>"
+        xml += self.children_to_xml(bot, clientid)
+        xml += "</select>"
+        return xml
 
     #######################################################################################################
-    # <id/> |
+    # SELECT_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
+
+    def add_default_star(self):
+        return True
 
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
-        if len(self.children) > 0:
-            raise ParserException("<id> node should not contains child text, use <id /> or <id></id> only")
 
 

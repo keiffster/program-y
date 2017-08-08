@@ -20,31 +20,33 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 
 
-class TemplateIdNode(TemplateNode):
+class TemplateResetLearnfNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
         try:
-            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
-            return clientid
+            return ""
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def to_string(self):
-        return "ID"
+        return "RESETLEARNF"
 
     def to_xml(self, bot, clientid):
-        return "<id />"
+        return "<resetlearnf />"
 
     #######################################################################################################
-    # <id/> |
+    # RESETLEARNF_EXPRESSION ::== <resetlearnf />>
+
+    def add_default_star(self):
+        return True
 
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if len(self.children) > 0:
-            raise ParserException("<id> node should not contains child text, use <id /> or <id></id> only")
+            raise ParserException("<resetlearn> node should not contains child text, use <id /> or <id></id> only")
 
 
