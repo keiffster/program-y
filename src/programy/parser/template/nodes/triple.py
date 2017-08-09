@@ -27,7 +27,7 @@ class TemplateTripleNode(TemplateNode):
         TemplateNode.__init__(self)
         self._subject = None
         self._predicate = None
-        self._objective = None
+        self._object = None
 
     @property
     def subject(self):
@@ -38,8 +38,8 @@ class TemplateTripleNode(TemplateNode):
         return self._predicate
 
     @property
-    def objective(self):
-        return self._objective
+    def object(self):
+        return self._object
 
     def parse_expression(self, graph, expression):
         if 'subj' in expression.attrib:
@@ -49,7 +49,7 @@ class TemplateTripleNode(TemplateNode):
             self._predicate = expression.attrib['pred']
 
         if 'obj' in expression.attrib:
-            self._objective = expression.attrib['obj']
+            self._object = expression.attrib['obj']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -62,7 +62,7 @@ class TemplateTripleNode(TemplateNode):
             elif tag_name == 'pred':
                 self._predicate = self.get_text_from_element(child)
             elif tag_name == 'obj':
-                self._objective = self.get_text_from_element(child)
+                self._object = self.get_text_from_element(child)
             else:
                 graph.parse_tag_expression(child, self)
 
@@ -75,8 +75,8 @@ class TemplateTripleNode(TemplateNode):
         if self._predicate is None:
             raise ParserException("<%s> node missing predicate attribue/element"%self._node_name)
 
-        if self._objective is None:
-            raise ParserException("<%s> node missing _objective attribue/element"%self._node_name)
+        if self._object is None:
+            raise ParserException("<%s> node missing object attribue/element"%self._node_name)
 
 
 

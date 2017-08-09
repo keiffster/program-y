@@ -2991,8 +2991,8 @@ active:attractive
 attractive:active
 defective:effective
 effective:defective
-objective:adjective
-adjective:objective
+object:adjective
+adjective:object
 collective:respective
 respective:perspective
 perspective:respective

@@ -33,54 +33,69 @@ class TriplesCollection(TripleStringCollection):
     def has_predicate(self, subject, predicate):
         return self.has_secondary(subject, predicate)
 
-    def has_objective(self, subject, predicate, objective):
+    def has_object(self, subject, predicate, object):
         value = self.value(subject, predicate)
         if value is not None:
-            return bool(value == objective)
+            return bool(value == object)
         return False
 
-    def objective(self, subject, predicate):
+    def object(self, subject, predicate):
         return self.value(subject, predicate)
 
-    def add_triple(self, subject, predicate, objective):
+    def add_triple(self, subject, predicate, object):
         if subject not in self.triples:
             self.triples[subject] = {}
-        self.triples[subject][predicate] = objective
+        self.triples[subject][predicate] = object
 
-    def delete_triple(self, subject, predicate=None, objective=None):
+    def delete_triple(self, subject, predicate=None, object=None):
         if subject in self.triples:
             if predicate is None:
                 del self.triples[subject]
             elif len(self.triples[subject]) == 0:
                 del self.triples[subject]
             elif predicate in self.triples[subject]:
-                if objective is None or objective == self.triples[subject][predicate]:
+                if object is None or object == self.triples[subject][predicate]:
                     del self.triples[subject][predicate]
 
-    def subjects(self):
-        return self.triples.keys()
+    def subjects(self, subject_name=None):
+        if subject_name is None:
+            return self.triples.keys()
+        else:
+            return [subject_name]
 
-    def predicates(self, subject_name=None):
+    def predicates(self, subject_name=None, predicate_name=None):
         predicates = []
-        for subject in self.subjects():
-            if subject_name is None or subject_name == subject:
-                for predicate_name in self.triples[subject].keys():
-                    predicates.append([subject, predicate_name])
+        for subject in self.subjects(subject_name=subject_name):
+            for predicate in self.triples[subject].keys():
+                if predicate_name is None or predicate_name == predicate:
+                    predicates.append([subject, predicate])
         return predicates
 
-    def objectives(self, subject_name=None, predicate_name=None):
-        objectives = []
-        predicates = self.predicates(subject_name)
+    def objects(self, subject_name=None, predicate_name=None, object_name=None):
+        objects = []
+        predicates = self.predicates(subject_name=subject_name, predicate_name=predicate_name)
         for predicate in predicates:
-            if subject_name is None or subject_name == predicate[0]:
-                if predicate_name is None or predicate_name == predicate[1]:
-                    objectives.append([predicate[0], predicate[1], self.triples[predicate[0]][predicate[1]]])
-        return objectives
+            if predicate_name is None or predicate_name == predicate[1]:
+                if object_name is None or object_name == self.triples[predicate[0]][predicate[1]]:
+                    objects.append([predicate[0], predicate[1], self.triples[predicate[0]][predicate[1]]])
+        return objects
 
-    def match(self, subject_name=None, predicate_name=None, objective_name=None):
-        matched = []
-        objectives = self.objectives(subject_name, predicate_name)
-        for objective in objectives:
-            if objective_name is None or objective_name == objective[2]:
-                matched.append(objective)
-        return matched
+    def match(self, subject_name=None, predicate_name=None, object_name=None):
+        match = []
+        for subject in self.triples.keys():
+            for predicate in self.triples[subject].keys():
+                if subject_name is None or subject_name == subject:
+                    if predicate_name is None or predicate_name == predicate:
+                        if object_name is None or object_name == self.triples[subject][predicate]:
+                            match.append([subject, predicate, self.triples[subject][predicate]])
+        return match
+
+    def not_match(self, subject_name=None, predicate_name=None, object_name=None):
+        not_matched = []
+        for subject in self.triples.keys():
+            for predicate in self.triples[subject].keys():
+                if subject_name is None or subject_name != subject:
+                    if predicate_name is None or predicate_name != predicate:
+                        if object_name is None or object_name != self.triples[subject][predicate]:
+                            not_matched.append([subject, predicate, self.triples[subject][predicate]])
+        return not_matched
