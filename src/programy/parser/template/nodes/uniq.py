@@ -21,13 +21,64 @@ from programy.parser.template.nodes.triple import TemplateTripleNode
 
 class TemplateUniqNode(TemplateTripleNode):
 
-    def __init__(self):
-        TemplateTripleNode.__init__(self)
+    def __init__(self, subject=None, predicate=None, obj=None):
+        TemplateTripleNode.__init__(self, subject, predicate, obj)
+        self._node_name = "uniq"
+
+    def execute_query(self, bot, clientid):
+
+        # First resolve subj, pred and obj
+        subj = self._subject.resolve(bot, clientid)
+        pred = self._predicate.resolve(bot, clientid)
+        obj = self._object.resolve(bot, clientid)
+
+        # Now see if any are variables rather than data
+        if subj.startswith("?"):
+            subj_val = None
+        else:
+            subj_val = subj
+
+        if pred.startswith("?"):
+            pred_val = None
+        else:
+            pred_val = pred
+
+        if obj.startswith("?"):
+            obj_val = None
+        else:
+            obj_val = obj
+
+        triples = bot.brain.triples.match(subject_name=subj_val, predicate_name=pred_val, object_name=obj_val)
+
+        results = []
+        for triple in triples:
+            result = []
+            if subj.startswith("?"):
+                result.append(triple[0])
+            if pred.startswith("?"):
+                result.append(triple[1])
+            if obj.startswith("?"):
+                result.append(triple[2])
+            results.append(result)
+
+        return self.results_to_text(results)
+
+    def results_to_text(self, results):
+        text = ""
+        for result in results:
+            text += "("
+            first = True
+            for item in result:
+                if first is False:
+                    text += ", "
+                first = False
+                text += item
+            text += ")"
+        return text
 
     def resolve(self, bot, clientid):
         try:
-            string = self.resolve_children_to_string(bot, clientid)
-            resolved = "UNIQ"
+            resolved = self.execute_query(bot, clientid)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

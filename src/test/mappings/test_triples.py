@@ -142,20 +142,27 @@ class TripleTests(unittest.TestCase):
         objects = collection.objects(predicate_name="legs")
         self.assertEquals(3, len(objects))
 
-    def test_match(self):
-        collection = TriplesCollection()
-        self.assertIsNotNone(collection)
-
+    def add_data(self, collection):
         collection.add_triple("MONKEY", "legs", "2")
         collection.add_triple("MONKEY", "hasFur", "true")
         collection.add_triple("ZEBRA", "legs", "4")
         collection.add_triple("BIRD", "legs", "2")
         collection.add_triple("ELEPHANT", "trunk", "true")
 
+    def test_match_subject(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
+
         matches = collection.match(subject_name="MONKEY")
         self.assertEquals(2, len(matches))
         self.assertEqual(["MONKEY", "legs", "2"], matches[0])
         self.assertEqual(["MONKEY", "hasFur", "true"], matches[1])
+
+    def test_match_predicate(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.match(predicate_name="legs")
         self.assertEquals(3, len(matches))
@@ -163,64 +170,116 @@ class TripleTests(unittest.TestCase):
         self.assertEqual(["ZEBRA", "legs", "4"], matches[1])
         self.assertEqual(["BIRD", "legs", "2"], matches[2])
 
+    def test_match_subject_predicate(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
+
         matches = collection.match(subject_name="MONKEY", predicate_name="legs")
         self.assertEquals(1, len(matches))
         self.assertEqual(["MONKEY", "legs", "2"], matches[0])
+
+    def test_match_predicate_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.match(predicate_name="legs", object_name="2")
         self.assertEquals(2, len(matches))
         self.assertEqual(["MONKEY", "legs", "2"], matches[0])
         self.assertEqual(["BIRD", "legs", "2"], matches[1])
 
+    def test_match_subject_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
+
         matches = collection.match(subject_name="MONKEY", object_name="2")
         self.assertEquals(1, len(matches))
         self.assertEqual(["MONKEY", "legs", "2"], matches[0])
+
+    def test_match_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.match(object_name="2")
         self.assertEquals(2, len(matches))
         self.assertEqual(["MONKEY", "legs", "2"], matches[0])
         self.assertEqual(["BIRD", "legs", "2"], matches[1])
 
-    def test_not_match(self):
+    def test_not_match_subject(self):
         collection = TriplesCollection()
         self.assertIsNotNone(collection)
-
-        collection.add_triple("MONKEY", "legs", "2")
-        collection.add_triple("MONKEY", "hasFur", "true")
-        collection.add_triple("ZEBRA", "legs", "4")
-        collection.add_triple("BIRD", "legs", "2")
-        collection.add_triple("ELEPHANT", "trunk", "true")
+        self.add_data(collection)
 
         matches = collection.not_match(subject_name="MONKEY")
         self.assertEquals(3, len(matches))
+        self.assertEquals(["ZEBRA", "legs", "4"], matches[0])
+        self.assertEquals(["BIRD", "legs", "2"], matches[1])
+        self.assertEquals(["ELEPHANT", "trunk", "true"], matches[2])
+
+    def test_not_match_predicate(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.not_match(predicate_name="legs")
-        self.assertEquals(2, len(matches))
+        self.assertEquals(1, len(matches))
+        self.assertEquals(["ELEPHANT", "trunk", "true"], matches[0])
+
+    def test_not_match_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.not_match(object_name="4")
         self.assertEquals(4, len(matches))
+        self.assertEquals(["MONKEY", "legs", "2"], matches[0])
+        self.assertEquals(['MONKEY', 'hasFur', 'true'], matches[1])
+        self.assertEquals(["BIRD", "legs", "2"], matches[2])
+        self.assertEquals(["ELEPHANT", "trunk", "true"], matches[3])
+
+    def test_not_match_subject_predicate(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.not_match(subject_name="MONKEY", predicate_name="legs")
-        self.assertEquals(1, len(matches))
+        self.assertEquals(3, len(matches))
+        self.assertEquals(['ZEBRA', 'legs', '4'], matches[0])
+        self.assertEquals(['BIRD', 'legs', '2'], matches[1])
+        self.assertEquals(['ELEPHANT', 'trunk', 'true'], matches[2])
+
+    def test_not_match_subject_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.not_match(subject_name="MONKEY", object_name="2")
-        self.assertEquals(2, len(matches))
+        self.assertEquals(3, len(matches))
+        self.assertEquals(['ZEBRA', 'legs', '4'], matches[0])
+        self.assertEquals(['BIRD', 'legs', '2'], matches[1])
+        self.assertEquals(['ELEPHANT', 'trunk', 'true'], matches[2])
+
+    def test_not_match_predicate_object(self):
+        collection = TriplesCollection()
+        self.assertIsNotNone(collection)
+        self.add_data(collection)
 
         matches = collection.not_match(predicate_name="legs", object_name="2")
         self.assertEquals(2, len(matches))
+        self.assertEquals(['ZEBRA', 'legs', '4'], matches[0])
+        self.assertEquals(['ELEPHANT', 'trunk', 'true'], matches[1])
 
-    def test_matching(self):
+    def test_not_match_subject_predicate_object(self):
         collection = TriplesCollection()
         self.assertIsNotNone(collection)
+        self.add_data(collection)
 
-        collection.add_triple("MONKEY", "legs", "2")
-        collection.add_triple("MONKEY", "hasFur", "true")
-        collection.add_triple("ZEBRA", "legs", "4")
-        collection.add_triple("BIRD", "legs", "2")
-        collection.add_triple("ELEPHANT", "trunk", "true")
-
-        for subject in collection.triples.keys():
-            for predicate in collection.triples[subject].keys():
-                object = collection.triples[subject][predicate]
-                print("%10s, %10s, %10s"%(subject, predicate, object))
+        matches = collection.not_match(subject_name="MONKEY", predicate_name="legs", object_name="2")
+        self.assertEquals(3, len(matches))
+        self.assertEquals(['ZEBRA', 'legs', '4'], matches[0])
+        self.assertEquals(['BIRD', 'legs', '2'], matches[1])
+        self.assertEquals(["ELEPHANT", "trunk", "true"], matches[2])
 

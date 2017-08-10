@@ -5,13 +5,14 @@ from programy.parser.template.nodes.search import TemplateSearchNode
 
 from test.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
+
 class TemplateGraphSearchTests(TemplateGraphTestClient):
 
-     def test_search_basic(self):
+    def test_search_basic(self):
         template = ET.fromstring("""
 			<template>
 			    <search>
-			        question
+			        keith sterling
 			    </search>
 			</template>
 			""")
@@ -23,5 +24,7 @@ class TemplateGraphSearchTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSearchNode)
-        self.assertEqual(1, len(ast.children[0].children))
 
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("https://www.google.co.uk/search?q=keith+sterling", result)

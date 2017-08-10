@@ -86,16 +86,35 @@ class TriplesCollection(TripleStringCollection):
             for predicate in self.triples[subject].keys():
                 if subject_name is None or subject_name == subject:
                     if predicate_name is None or predicate_name == predicate:
-                        if object_name is None or object_name == self.triples[subject][predicate]:
-                            match.append([subject, predicate, self.triples[subject][predicate]])
+                        object = self.triples[subject][predicate]
+                        if object_name is None or object_name == object:
+                            match.append([subject, predicate, object])
         return match
 
     def not_match(self, subject_name=None, predicate_name=None, object_name=None):
         not_matched = []
+        matched = []
         for subject in self.triples.keys():
             for predicate in self.triples[subject].keys():
-                if subject_name is None or subject_name != subject:
-                    if predicate_name is None or predicate_name != predicate:
-                        if object_name is None or object_name != self.triples[subject][predicate]:
-                            not_matched.append([subject, predicate, self.triples[subject][predicate]])
+                object = self.triples[subject][predicate]
+
+                if subject_name is None or subject_name == subject:
+                    if predicate_name is None or predicate_name == predicate:
+                        if object_name is None or object_name == object:
+                            # We have a match against the variables, so we need to ignore this one
+                            matched.append([subject, predicate, object])
+                        else:
+                            not_matched.append([subject, predicate, object])
+                    else:
+                        if subject not in matched:
+                            not_matched.append([subject, predicate, object])
+                else:
+                    if subject not in matched:
+                        not_matched.append([subject, predicate, object])
+
+        for match in matched:
+            subject = match[0]
+            for not_match in not_matched:
+                if not_match[0] == subject:
+                    not_matched.remove(not_match)
         return not_matched

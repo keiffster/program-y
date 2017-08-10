@@ -7,7 +7,7 @@ from test.parser.template.graph_tests.graph_test_client import TemplateGraphTest
 
 class TemplateGraphUniqTests(TemplateGraphTestClient):
 
-    def test_learnf_type1(self):
+    def test_uniq_type1(self):
         template = ET.fromstring("""
      			<template>
      			    <uniq>
@@ -27,7 +27,7 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateUniqNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-    def test_learnf_type2(self):
+    def test_uniq_type2(self):
         template = ET.fromstring("""
      			<template>
      			    <uniq subj="X" pred="Y" obj="Z">
@@ -44,7 +44,7 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateUniqNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-    def test_learnf_type3(self):
+    def test_uniq_type3(self):
         template = ET.fromstring("""
      			<template>
      			    <uniq subj="X" pred="Y" obj="Z" />
@@ -60,3 +60,74 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateUniqNode)
         self.assertEqual(0, len(ast.children[0].children))
 
+    def test_uniq_query_on_object(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+     			<template>
+     			    <uniq>
+     			        <subj>MONKEY</subj>
+     			        <pred>legs</pred>
+     			        <obj>?legs</obj>
+     			    </uniq>
+     			</template>
+     			""")
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(2)", result)
+
+    def test_uniq_query_on_subject(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+     			<template>
+     			    <uniq>
+     			        <subj>?animal</subj>
+     			        <pred>legs</pred>
+     			        <obj>2</obj>
+     			    </uniq>
+     			</template>
+     			""")
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(MONKEY)(BIRD)", result)
+
+    def test_uniq_query_on_predicate(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+     			<template>
+     			    <uniq>
+     			        <subj>MONKEY</subj>
+     			        <pred>?hasLegs</pred>
+     			        <obj>2</obj>
+     			    </uniq>
+     			</template>
+     			""")
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(legs)", result)

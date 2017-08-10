@@ -322,6 +322,27 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertIsNotNone(result)
         self.assertEquals("(MONKEY, legs, 2)", result)
 
+    def test_not_query_no_vars(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <notq><subj>MONKEY</subj><pred>legs</pred><obj>2</obj></notq>
+                    </select>
+                </template>
+                """)
+
+        ast = self.parser.parse_template_expression(template)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(ZEBRA, legs, 4)(BIRD, legs, 2)(ELEPHANT, trunk, true)", result)
+
     def test_query_var(self):
         self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
         self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
@@ -343,6 +364,28 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
         self.assertEquals("(MONKEY)(BIRD)", result)
+
+    def test_not_query_var(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <notq><subj>?x</subj><pred>legs</pred><obj>2</obj></notq>
+                    </select>
+                </template>
+                """)
+
+        ast = self.parser.parse_template_expression(template)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(ZEBRA)(ELEPHANT)", result)
 
     def test_query_multi_vars(self):
         self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
@@ -388,3 +431,26 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
         self.assertEquals("(MONKEY)", result)
+
+    def test_query_var_mixed_queries(self):
+        self.test_bot.brain.triples.add_triple("MONKEY", "legs", "2")
+        self.test_bot.brain.triples.add_triple("MONKEY", "hasFur", "true")
+        self.test_bot.brain.triples.add_triple("ZEBRA", "legs", "4")
+        self.test_bot.brain.triples.add_triple("BIRD", "legs", "2")
+        self.test_bot.brain.triples.add_triple("ELEPHANT", "trunk", "true")
+
+        template = ET.fromstring("""
+                <template>
+                    <select>
+                        <vars>?x</vars>
+                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
+                        <notq><subj>?x</subj><pred>hasFur</pred><obj>true</obj></notq>
+                    </select>
+                </template>
+                """)
+
+        ast = self.parser.parse_template_expression(template)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("(BIRD)", result)

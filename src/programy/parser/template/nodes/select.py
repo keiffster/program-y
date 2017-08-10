@@ -21,17 +21,6 @@ from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
-"""
-<select>
-    <vars>?x ?y</vars>
-    <q>
-        <subj>?x</subj>
-        <pred>?y</pred>
-        <obj>true</obj>
-    </q>
-</select>
-"""
-
 class SelectQuery(object):
 
     def __init__(self, type, subj, pred, obj):
@@ -85,7 +74,7 @@ class SelectQuery(object):
         if self._type == "q":
             triples = bot.brain.triples.match(subject_name=subj_val, predicate_name=pred_val, object_name=obj_val)
         else:
-            triples = bot.brain.triples.not_match(subject_name=subj_var, predicate_name=pred_var, object_name=obj_var)
+            triples = bot.brain.triples.not_match(subject_name=subj_val, predicate_name=pred_val, object_name=obj_val)
 
         results = []
         for triple in triples:

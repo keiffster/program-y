@@ -23,11 +23,18 @@ from programy.parser.exceptions import ParserException
 
 class TemplateTripleNode(TemplateNode):
 
-    def __init__(self):
+    def __init__(self, subject=None, predicate=None, obj=None):
         TemplateNode.__init__(self)
-        self._subject = None
-        self._predicate = None
-        self._object = None
+        self._subject = subject
+        self._predicate = predicate
+        self._object = obj
+
+    def children_to_xml(self, bot, clientid):
+        xml = ""
+        xml += "<subj>%s</subj>"%self._subject.resolve(bot, clientid)
+        xml += "<pred>%s</pred>"%self._predicate.resolve(bot, clientid)
+        xml += "<obj>%s</obj>"%self._object.resolve(bot, clientid)
+        return xml
 
     @property
     def subject(self):
@@ -58,11 +65,11 @@ class TemplateTripleNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'subj':
-                self._subject = self.get_text_from_element(child)
+                self._subject = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
-                self._predicate = self.get_text_from_element(child)
+                self._predicate = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
-                self._object = self.get_text_from_element(child)
+                self._object = self.parse_children_as_word_node(graph, child)
             else:
                 graph.parse_tag_expression(child, self)
 
