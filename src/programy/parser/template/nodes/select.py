@@ -19,132 +19,25 @@ import logging
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
-
-
-class SelectQuery(object):
-
-    def __init__(self, type, subj, pred, obj):
-        self._type = type
-        self._subj = subj
-        self._pred = pred
-        self._obj = obj
-
-    def to_xml(self, bot, clientid):
-        xml = ""
-        xml += "<%s>" % self._type
-        xml += "<subj>%s</subj>"%self._subj
-        xml += "<pred>%s</pred>" % self._pred
-        xml += "<obj>%s</obj>" % self._obj
-        xml += "</%s>" % self._type
-        return xml
-
-    def execute_query(self, bot, clientid):
-
-        # First resolve subj, pred and obj
-        subj = self._subj.resolve(bot, clientid)
-        pred = self._pred.resolve(bot, clientid)
-        obj = self._obj.resolve(bot, clientid)
-
-        # Now see if any are variables rather than data
-        if subj.startswith("?"):
-            subj_var = subj
-            subj_val = None
-        else:
-            subj_var = None
-            subj_val = subj
-
-        if pred.startswith("?"):
-            pred_var = pred
-            pred_val = None
-        else:
-            pred_var = None
-            pred_val = pred
-
-        if obj.startswith("?"):
-            obj_var = obj
-            obj_val = None
-        else:
-            obj_var = None
-            obj_val = obj
-
-        # If first query, get results and set variables
-        # If subsequent query, using variables and check for result
-
-        # Query using subj, pred and obj data
-        if self._type == "q":
-            triples = bot.brain.triples.match(subject_name=subj_val, predicate_name=pred_val, object_name=obj_val)
-        else:
-            triples = bot.brain.triples.not_match(subject_name=subj_val, predicate_name=pred_val, object_name=obj_val)
-
-        results = []
-        for triple in triples:
-            results.append(((subj_var, triple[0]),(pred_var, triple[1]),(obj_var, triple[2])))
-        return results
-
-
-class QueryProcessor(object):
-
-    def process_triples(self, triples, return_vars):
-        results = []
-        if len(return_vars) == 0:
-            for triple in triples:
-                results.append([triple[0][1], triple[1][1], triple[2][1]])
-        else:
-            for triple in triples:
-                result = []
-                for var in return_vars:
-                    if triple[0][0] == var:
-                        result.append(triple[0][1])
-                    elif triple[1][0] == var:
-                        result.append(triple[1][1])
-                    elif triple[2][0] == var:
-                        result.append(triple[2][1])
-                results.append(result)
-        return results
-
-    def results_to_text(self, results):
-        text = ""
-        for result in results:
-            text += "("
-            first = True
-            for item in result:
-                if first is False:
-                    text += ", "
-                first = False
-                text += item
-            text += ")"
-        return text
-
-    def process_queries(self, bot, clientid, return_vars, queries ):
-        first_query = queries[0]
-        first_triples = first_query.execute_query(bot, clientid)
-        results = self.process_triples(first_triples, return_vars)
-
-        if len(queries) > 1:
-            for query in queries[1:]:
-                next_triples = query.execute_query(bot, clientid)
-                next_results = self.process_triples(next_triples, return_vars)
-                for result in results:
-                    if result not in next_results:
-                        results.remove(result)
-
-            if len(results) == 0:
-                return ""
-
-        return self.results_to_text(results)
-
+from programy.rdf.select import RDFSelectStatement
 
 class TemplateSelectNode(TemplateNode):
 
-    def __init__(self):
+    def __init__(self, query=None):
         TemplateNode.__init__(self)
-        self._vars = []
-        self._queries = []
-        self._processor = QueryProcessor()
+        if query is None:
+            self._query = RDFSelectStatement()
+        else:
+            self._query = query
+
+    @property
+    def query(self):
+        return self._query
 
     def resolve(self, bot, clientid):
         try:
-            resolved = self._processor.process_queries(bot, clientid, self._vars, self._queries)
+            resultset = self.query.execute(bot, clientid)
+            resolved = resultset.results_to_text()
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

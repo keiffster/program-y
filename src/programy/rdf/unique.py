@@ -14,38 +14,28 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
 
-from programy.parser.template.nodes.triple import TemplateTripleNode
+class RDFUniqueStatement(object):
 
+    def __init__(self, query):
+        self._query = query
 
-class TemplateUniqNode(TemplateTripleNode):
+    @property
+    def query(self):
+        return self._query
 
-    def __init__(self, entity=None):
-        TemplateTripleNode.__init__(self, node_name="uniq", entity)
+    def execute(self, bot, clientid):
 
-    def resolve(self, bot, clientid):
-        try:
-            resolved = self.execute_query(bot, clientid)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-        except Exception as excep:
-            logging.exception(excep)
-            return ""
+        queryresultset = self._query.execute(bot, clientid)
 
-    def to_string(self):
-        return "UNIQ"
+        result = []
+        if queryresultset.subject.startswith("?"):
+            result.append(queryresultset.results[0][0][1])
 
-    def to_xml(self, bot, clientid):
-        xml = "<uniq>"
-        xml += self.children_to_xml(bot, clientid)
-        xml += "</uniq>"
-        return xml
+        if queryresultset.predicate.startswith("?"):
+            result.append(queryresultset.results[0][1][1])
 
-    #######################################################################################################
-    # UNIQ_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
+        if queryresultset.object.startswith("?"):
+            result.append(queryresultset.results[0][2][1])
 
-    def parse_expression(self, graph, expression):
-        super(TemplateUniqNode, self).parse_expression(graph, expression)
-
-
+        return " ".join(result)

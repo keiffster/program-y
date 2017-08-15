@@ -19,44 +19,39 @@ import logging
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException
+from programy.rdf.entity import RDFEntity
 
 
 class TemplateTripleNode(TemplateNode):
 
-    def __init__(self, subject=None, predicate=None, obj=None):
+    def __init__(self, node_name, entity=None):
         TemplateNode.__init__(self)
-        self._subject = subject
-        self._predicate = predicate
-        self._object = obj
+        self._node_name = node_name
+        if entity is None:
+            self._entity = RDFEntity()
+        else:
+            self._entity = entity
+
+    @property
+    def node_name(self):
+        return self._node_name
+
+    @property
+    def entity(self):
+        return self._entity
 
     def children_to_xml(self, bot, clientid):
-        xml = ""
-        xml += "<subj>%s</subj>"%self._subject.resolve(bot, clientid)
-        xml += "<pred>%s</pred>"%self._predicate.resolve(bot, clientid)
-        xml += "<obj>%s</obj>"%self._object.resolve(bot, clientid)
-        return xml
-
-    @property
-    def subject(self):
-        return self._subject
-
-    @property
-    def predicate(self):
-        return self._predicate
-
-    @property
-    def object(self):
-        return self._object
+        return self.entity.to_xml(bot, clientid)
 
     def parse_expression(self, graph, expression):
         if 'subj' in expression.attrib:
-            self._subject = expression.attrib['subj']
+            subject = expression.attrib['subj']
 
         if 'pred' in expression.attrib:
-            self._predicate = expression.attrib['pred']
+            predicate = expression.attrib['pred']
 
         if 'obj' in expression.attrib:
-            self._object = expression.attrib['obj']
+            object = expression.attrib['obj']
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -65,25 +60,25 @@ class TemplateTripleNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'subj':
-                self._subject = self.parse_children_as_word_node(graph, child)
+                subject = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
-                self._predicate = self.parse_children_as_word_node(graph, child)
+                predicate = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
-                self._object = self.parse_children_as_word_node(graph, child)
+                object = self.parse_children_as_word_node(graph, child)
             else:
                 graph.parse_tag_expression(child, self)
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if self._subject is None:
-            raise ParserException("<%s> node missing subject attribue/element"%self._node_name)
+        if subject is None:
+            raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
 
-        if self._predicate is None:
-            raise ParserException("<%s> node missing predicate attribue/element"%self._node_name)
+        if predicate is None:
+            raise ParserException("<%s> node missing predicate attribue/element"%self.node_name)
 
-        if self._object is None:
-            raise ParserException("<%s> node missing object attribue/element"%self._node_name)
+        if object is None:
+            raise ParserException("<%s> node missing object attribue/element"%self.node_name)
 
-
+        self._entity = RDFEntity(subject=subject, predicate=predicate, object=object)
 

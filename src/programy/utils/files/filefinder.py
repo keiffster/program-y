@@ -43,7 +43,7 @@ class FileFinder(object):
                 for filename in [f for f in filenames if f.endswith(extension)]:
                     found_files.append((filename, os.path.join(dirpath, filename)))
 
-        return found_files
+        return sorted(found_files, key=lambda element: (element[1], element[0]))
 
     def load_dir_contents(self, path_to_sets, subdir=False, extension=".txt"):
 

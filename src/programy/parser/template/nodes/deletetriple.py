@@ -28,7 +28,7 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
     def resolve(self, bot, clientid):
         try:
             resolved = ""
-            bot.brain.triples.delete_triple(self.subject, self._predicate, self.object)
+            bot.brain.rdf.delete_entity(self.subject, self._predicate, self.object)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

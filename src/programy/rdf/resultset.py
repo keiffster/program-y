@@ -14,38 +14,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
 
-from programy.parser.template.nodes.triple import TemplateTripleNode
+class RDFQueryResultSet(object):
+    def __init__(self, subject, predicate, object, results):
+        self._subject = subject
+        self._predicate = predicate
+        self._object = object
+        self._results = results
 
+    @property
+    def subject(self):
+        return self._subject
 
-class TemplateUniqNode(TemplateTripleNode):
+    @property
+    def predicate(self):
+        return self._predicate
 
-    def __init__(self, entity=None):
-        TemplateTripleNode.__init__(self, node_name="uniq", entity)
+    @property
+    def object(self):
+        return self._object
 
-    def resolve(self, bot, clientid):
-        try:
-            resolved = self.execute_query(bot, clientid)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-        except Exception as excep:
-            logging.exception(excep)
-            return ""
+    @property
+    def results(self):
+        return self._results
 
-    def to_string(self):
-        return "UNIQ"
+    def get_variable_value(self, var_name, result):
+        if self.subject == var_name:
+            return result.subject
+        if self.predicate == var_name:
+            return result.predicate
+        if self.object == var_name:
+            return result.object
 
-    def to_xml(self, bot, clientid):
-        xml = "<uniq>"
-        xml += self.children_to_xml(bot, clientid)
-        xml += "</uniq>"
-        return xml
-
-    #######################################################################################################
-    # UNIQ_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
-
-    def parse_expression(self, graph, expression):
-        super(TemplateUniqNode, self).parse_expression(graph, expression)
-
-
+    def to_string(self, eol="\n"):
+        str = ""
+        for entity in self._results:
+            str += entity.to_string(self)
+            str += eol
+        return str

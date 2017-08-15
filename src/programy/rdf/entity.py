@@ -14,38 +14,52 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+class RDFEntity(object):
 
-from programy.parser.template.nodes.triple import TemplateTripleNode
+    def __init__(self, subject=None, predicate=None, object=None):
+        self._subject = subject
+        self._predicate = predicate
+        self._object = object
 
+    @property
+    def subject(self):
+        return self._subject
 
-class TemplateUniqNode(TemplateTripleNode):
+    @property
+    def predicate(self):
+        return self._predicate
 
-    def __init__(self, entity=None):
-        TemplateTripleNode.__init__(self, node_name="uniq", entity)
+    @property
+    def object(self):
+        return self._object
 
-    def resolve(self, bot, clientid):
-        try:
-            resolved = self.execute_query(bot, clientid)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-        except Exception as excep:
-            logging.exception(excep)
-            return ""
+    def to_string(self, resultset):
+        str = "( "
 
-    def to_string(self):
-        return "UNIQ"
+        if resultset.subject.startswith("?"):
+            str += resultset.subject
+        else:
+            str += "_"
+        str += "="
+        str += self.subject
 
-    def to_xml(self, bot, clientid):
-        xml = "<uniq>"
-        xml += self.children_to_xml(bot, clientid)
-        xml += "</uniq>"
-        return xml
+        str += ", "
 
-    #######################################################################################################
-    # UNIQ_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
+        if resultset.predicate.startswith("?"):
+            str += resultset.predicate
+        else:
+            str += "_"
+        str += "="
+        str += self.predicate
 
-    def parse_expression(self, graph, expression):
-        super(TemplateUniqNode, self).parse_expression(graph, expression)
+        str += ", "
 
+        if resultset.object.startswith("?"):
+            str += resultset.object
+        else:
+            str += "_"
+        str += "="
+        str += self.object
 
+        str += " )"
+        return str

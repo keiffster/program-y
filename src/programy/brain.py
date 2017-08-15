@@ -34,7 +34,7 @@ from programy.mappings.predicates import PredicatesCollection
 from programy.mappings.pronouns import PronounsCollection
 from programy.mappings.properties import PropertiesCollection
 from programy.mappings.sets import SetCollection
-from programy.mappings.triples import TriplesCollection
+from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.utils.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
@@ -54,7 +54,7 @@ class Brain(object):
         self._person2_collection = PersonCollection()
         self._predicates_collection = PredicatesCollection()
         self._pronouns_collection = PronounsCollection()
-        self._triples_collection = TriplesCollection()
+        self._rdf_collection = RDFCollection()
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
         self._properties_collection = PropertiesCollection()
@@ -107,8 +107,8 @@ class Brain(object):
         return self._pronouns_collection
 
     @property
-    def triples(self):
-        return self._triples_collection
+    def rdf(self):
+        return self._rdf_collection
 
     @property
     def sets(self):
@@ -258,9 +258,9 @@ class Brain(object):
         else:
             logging.warning("No configuration setting for properties")
 
-    def _load_triples(self, brain_configuration):
+    def _load_rdf(self, brain_configuration):
         if brain_configuration.files.triples is not None:
-            total = self._properties_collection.load_from_filename(brain_configuration.files.triples)
+            total = self._rdf_collection.load_from_filename(brain_configuration.files.triples)
             logging.info("Loaded a total of %d triples", total)
         else:
             logging.warning("No configuration setting for triples")
@@ -296,7 +296,7 @@ class Brain(object):
         self._load_predicates(brain_configuration)
         self._load_pronouns(brain_configuration)
         self._load_properties(brain_configuration)
-        self._load_triples(brain_configuration)
+        self._load_rdf(brain_configuration)
         self._load_sets(brain_configuration)
         self._load_maps(brain_configuration)
         self._load_preprocessors(brain_configuration)
