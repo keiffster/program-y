@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class RDFUniqueStatement(object):
 
-    def __init__(self, query):
+    def __init__(self, query=None):
         self._query = query
 
     @property

@@ -7,7 +7,7 @@ from test.parser.template.graph_tests.graph_test_client import TemplateGraphTest
 
 class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
 
-     def test_learnf_type1(self):
+     def test_delete_triple_type1(self):
         template = ET.fromstring("""
 			<template>
 			    <deletetriple>
@@ -27,7 +27,7 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateDeleteTripleNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-     def test_learnf_type2(self):
+     def test_delete_triple_type2(self):
         template = ET.fromstring("""
 			<template>
 			    <deletetriple subj="X" pred="Y" obj="Z">
@@ -44,7 +44,7 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateDeleteTripleNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-     def test_learnf_type3(self):
+     def test_delete_triple_type3(self):
         template = ET.fromstring("""
 			<template>
 			    <deletetriple subj="X" pred="Y" obj="Z" />

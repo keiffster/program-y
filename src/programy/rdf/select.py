@@ -32,34 +32,61 @@ class RDFSelectStatement(object):
     def queries(self):
         return self._queries
 
+    def to_xml(self, bot, clientid):
+        xml = ""
+        xml += "<vars>"
+        for var in self._vars:
+            xml += "?%s "%var
+        xml += "</vars>"
+        for query in self._queries:
+            xml += query.to_xml(bot, clientid)
+        return xml
+
     def execute(self, bot, clientid):
 
         query = self._queries[0]
-        query.to_string(bot, clientid)
         resultset = query.execute(bot, clientid)
 
         if len(self._queries) > 1:
             for query in self._queries[1:]:
+                matched = []
+
                 for result in resultset.results:
+
                     next_resultset = query.execute(bot, clientid, result)
-                resultset = next_resultset
+
+                    for next_result in next_resultset.results:
+                        if next_result[0][1] == result[0][1]:
+                            matched.append(next_result)
+
+                resultset._results = matched
 
         str = ""
         for result in resultset.results:
-            for var in self.vars:
+            if len(self._vars) > 0:
                 str += "("
-                if result[0][0] == var:
-                    str += var
-                    str += ", "
-                    str += result[0][1]
-                if result[1][0] == var:
-                    str += var
-                    str += ", "
-                    str += result[1][1]
-                if result[2][0] == var:
-                    str += var
-                    str += ", "
-                    str += result[2][1]
+                comma = False
+                for var in self.vars:
+                    if result[0][0] == var:
+                        str += var
+                        str += "="
+                        str += result[0][1]
+                        comma = True
+                    if result[1][0] == var:
+                        if comma is True:
+                            str += ", "
+                        str += var
+                        str += "="
+                        str += result[1][1]
+                    comma = True
+                    if result[2][0] == var:
+                        if comma is True:
+                            str += ", "
+                        str += var
+                        str += "="
+                        str += result[2][1]
+                        comma = True
                 str += ")"
-
+            else:
+                str += "(%s, %s, %s)"%(result[0][1], result[1][1], result[2][1])
         return str

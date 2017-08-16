@@ -20,6 +20,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 from programy.rdf.select import RDFSelectStatement
+from programy.rdf.query import RDFQuery
 
 class TemplateSelectNode(TemplateNode):
 
@@ -36,8 +37,7 @@ class TemplateSelectNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
-            resultset = self.query.execute(bot, clientid)
-            resolved = resultset.results_to_text()
+            resolved = self.query.execute(bot, clientid)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
@@ -49,12 +49,7 @@ class TemplateSelectNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<select>"
-        xml += "<vars>"
-        for var in self._vars:
-            xml += "?%s "%var
-        xml += "</vars>"
-        for query in self._queries:
-            xml += query.to_xml(bot, clientid)
+        xml += self.query.to_xml(bot, clientid)
         xml += "</select>"
         return xml
 
@@ -64,9 +59,15 @@ class TemplateSelectNode(TemplateNode):
     def parse_vars(self, vars):
         var_splits = vars.split(" ")
         for var_name in var_splits:
-            self._vars.append(var_name)
+            self._query._vars.append(var_name)
 
     def parse_query(self, graph, query_name, query):
+
+        if query_name == "q":
+            query_type = RDFQuery.QUERY
+        else:
+            query_type = RDFQuery.NOT_QUERY
+
         for child in query:
             tag_name = TextUtils.tag_from_text(child.tag)
 
@@ -88,7 +89,7 @@ class TemplateSelectNode(TemplateNode):
         if obj is None:
             raise ParserException("<obj> element missing from select query")
 
-        self._queries.append(SelectQuery(query_name, subj, pred, obj))
+        self._query._queries.append(RDFQuery(subj, pred, obj, query_type))
 
     def parse_expression(self, graph, expression):
 

@@ -44,7 +44,7 @@ class RDFCollection(BaseCollection):
 
         entity = RDFEntity(subject, predicate, object)
         self._subjects[subject][predicate][object] = entity
-        self._entities = entity
+        self._entities.append(entity)
 
         return True
 

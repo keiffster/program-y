@@ -29,8 +29,34 @@ class RDFQueryTests(unittest.TestCase):
             BIRD:feathers:yes
         """)
 
+    def test_select_single_query(self):
+        bot = TestBot()
+        self.load_data(bot.brain.rdf)
 
-    def test_select(self):
+        select = RDFSelectStatement(["?x"], [
+            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("legs"), object=TemplateWordNode("2"))
+        ])
+        self.assertIsNotNone(select)
+
+        result = select.execute(bot, "testid")
+        self.assertIsNotNone(result)
+        self.assertEquals("(?x=MONKEY)(?x=BIRD)", result)
+
+    def test_select_single_not_query(self):
+        bot = TestBot()
+        self.load_data(bot.brain.rdf)
+
+        select = RDFSelectStatement(["?x"], [
+            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("legs"), object=TemplateWordNode("2"), query_type=RDFQuery.NOT_QUERY)
+        ])
+        self.assertIsNotNone(select)
+
+        result = select.execute(bot, "testid")
+        self.assertIsNotNone(result)
+        self.assertEquals("(?x=BEAR)(?x=BEAR)", result)
+
+
+    def test_select_multi_query(self):
         bot = TestBot()
         self.load_data(bot.brain.rdf)
 
@@ -42,6 +68,6 @@ class RDFQueryTests(unittest.TestCase):
 
         result = select.execute(bot, "testid")
         self.assertIsNotNone(result)
-        self.assertEquals("(?x, BIRD)", result)
+        self.assertEquals("(?x=BIRD)", result)
 
 

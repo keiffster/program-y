@@ -29,6 +29,18 @@ class RDFQuery(object):
         self._query_type = query_type
 
     @property
+    def subject(self):
+        return self._subject_node
+
+    @property
+    def predicate(self):
+        return self._predicate_node
+
+    @property
+    def object(self):
+        return self._object_node
+
+    @property
     def query_type(self):
         return self._query_type
 

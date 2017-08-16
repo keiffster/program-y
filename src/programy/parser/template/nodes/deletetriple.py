@@ -21,9 +21,8 @@ from programy.parser.template.nodes.triple import TemplateTripleNode
 
 class TemplateDeleteTripleNode(TemplateTripleNode):
 
-    def __init__(self, subject=None, predicate=None, obj=None):
-        TemplateTripleNode.__init__(self, subject, predicate, obj)
-        self._node_name = "deletetriple"
+    def __init__(self, entity=None):
+        TemplateTripleNode.__init__(self, node_name="deletetriple", entity=entity)
 
     def resolve(self, bot, clientid):
         try:

@@ -16,17 +16,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.triple import TemplateTripleNode
+from programy.utils.text.text import TextUtils
+from programy.parser.template.nodes.base import TemplateNode
+from programy.rdf.unique import RDFUniqueStatement
+from programy.parser.exceptions import ParserException
+from programy.rdf.query import RDFQuery
 
+class TemplateUniqNode(TemplateNode):
 
-class TemplateUniqNode(TemplateTripleNode):
-
-    def __init__(self, entity=None):
-        TemplateTripleNode.__init__(self, node_name="uniq", entity)
+    def __init__(self, query=None):
+        TemplateNode.__init__(self)
+        if query is None:
+            self._query = RDFUniqueStatement()
+        else:
+            self._query = query
 
     def resolve(self, bot, clientid):
         try:
-            resolved = self.execute_query(bot, clientid)
+            resolved = self._query.execute(bot, clientid)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
@@ -38,7 +45,7 @@ class TemplateUniqNode(TemplateTripleNode):
 
     def to_xml(self, bot, clientid):
         xml = "<uniq>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self._query.to_xml(bot, clientid)
         xml += "</uniq>"
         return xml
 
@@ -46,6 +53,31 @@ class TemplateUniqNode(TemplateTripleNode):
     # UNIQ_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
     def parse_expression(self, graph, expression):
-        super(TemplateUniqNode, self).parse_expression(graph, expression)
 
+        subj = None
+        pred = None
+        obj = None
+
+        for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == 'subj':
+                subj = self.parse_children_as_word_node(graph, child)
+            elif tag_name == 'pred':
+                pred = self.parse_children_as_word_node(graph, child)
+            elif tag_name == 'obj':
+                obj = self.parse_children_as_word_node(graph, child)
+            else:
+                logging.warning ("Unknown tag name [%s] in select query"%tag_name)
+
+        if subj is None:
+            raise ParserException("<subj> element missing from select query")
+
+        if pred is None:
+            raise ParserException("<pred> element missing from select query")
+
+        if obj is None:
+            raise ParserException("<obj> element missing from select query")
+
+        self._query = RDFUniqueStatement(RDFQuery(subj, pred, obj, RDFQuery.QUERY))
 

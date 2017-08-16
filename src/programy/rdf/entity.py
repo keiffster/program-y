@@ -33,6 +33,13 @@ class RDFEntity(object):
     def object(self):
         return self._object
 
+    def to_xml(self, bot, clientid):
+        xml = ""
+        xml += "<subj>%s</subj>"%self._subject.to_xml(bot, clientid)
+        xml += "<pred>%s</pred>"%self._predicate.to_xml(bot, clientid)
+        xml += "<obj>%s</obj>"%self._object.to_xml(bot, clientid)
+        return xml
+
     def to_string(self, resultset):
         str = "( "
 
