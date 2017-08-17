@@ -10,6 +10,15 @@ Programy-Y is fully cross plaform, running on
 * Linux
 * Windows
 
+100% Support for all AIML 2.0 Tags plus all Pandora bot ones they never documented
+
+* Full support for al AIML 2.0 Tags
+* RDF Support through addtriple, deletetriple, select, uniq and uniq
+* List processing with first and rest
+* Advanced learn support with resetlearn and resetlearnf
+* Full OOB Support
+* Full embedded XML/HTML Support
+
 Program-Y is extremely extensible, you can
 
 * Add you own AIML tags
