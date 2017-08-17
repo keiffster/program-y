@@ -15,6 +15,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import pickle
+import json
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
@@ -31,13 +33,19 @@ class TemplateSelectNode(TemplateNode):
         else:
             self._query = query
 
+
     @property
     def query(self):
         return self._query
 
+    def encode_tuples(self, bot, tuples):
+        return json.dumps(tuples)
+        #return pickle._dumps(tuples)
+
     def resolve(self, bot, clientid):
         try:
-            resolved = self.query.execute(bot, clientid)
+            results = self.query.execute(bot, clientid)
+            resolved = json.dumps(results)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

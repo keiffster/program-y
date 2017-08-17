@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.template.nodes.select import TemplateSelectNode
 from programy.dialog import Question
 
 from test.parser.template.base import TemplateTestsBaseClass
@@ -153,3 +154,26 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
+
+    def test_tuples(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        select = TemplateSelectNode()
+        self.assertIsNotNone(select)
+
+        node = TemplateGetNode()
+        node.name = TemplateWordNode("?x ?y")
+        node.tuples = select
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self.assertEqual("[GET [Tuples] - ([WORD]?x ?y)]", node.to_string())
+
+        xml = root.xml_tree(self.bot, self.clientid)
+        self.assertIsNotNone(xml)
+        xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
+        self.assertEqual('<template><get var="?x ?y"><select><vars /></select></get></template>', xml_str)

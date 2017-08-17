@@ -35,4 +35,4 @@ class RDFUniqueStatementTests(unittest.TestCase):
 
         result = uniq.execute(bot, "testid")
         self.assertIsNotNone(result)
-        self.assertEquals(result, '0')
+        self.assertEquals(result, [['0']])

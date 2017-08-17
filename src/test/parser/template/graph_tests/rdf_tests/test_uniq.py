@@ -73,7 +73,7 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY", result)
+        self.assertEquals("MONKEY BIRD", result)
 
     def test_uniq_query_on_predicate(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")

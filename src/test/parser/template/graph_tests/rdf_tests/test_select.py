@@ -344,7 +344,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(MONKEY, legs, 2)", result)
+        self.assertEquals('[["MONKEY", "legs", "2"]]', result)
 
     def test_not_query_no_vars(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -365,7 +365,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(ZEBRA, legs, 4)(BIRD, legs, 2)(ELEPHANT, trunk, true)", result)
+        self.assertEquals('[["ZEBRA", "legs", "4"], ["BIRD", "legs", "2"], ["ELEPHANT", "trunk", "true"]]', result)
 
     def test_query_var(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -387,7 +387,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=MONKEY)(?x=BIRD)", result)
+        self.assertEquals('[["?x", "MONKEY"], ["?x", "BIRD"]]', result)
 
     def test_not_query_var(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -409,7 +409,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=ZEBRA)(?x=ELEPHANT)", result)
+        self.assertEquals('[["?x", "ZEBRA"], ["?x", "ELEPHANT"]]', result)
 
     def test_query_multi_vars(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -431,7 +431,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=MONKEY, ?y=legs)(?x=BIRD, ?y=legs)", result)
+        self.assertEquals('[["?x", "MONKEY"], ["?y", "legs"], ["?x", "BIRD"], ["?y", "legs"]]', result)
 
     def test_query_var_multi_queries(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -454,7 +454,7 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=MONKEY)", result)
+        self.assertEquals('[["?x", "MONKEY"]]', result)
 
     def test_query_var_mixed_queries(self):
         self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
@@ -477,4 +477,4 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=BIRD)", result)
+        self.assertEquals('[["?x", "BIRD"]]', result)

@@ -31,9 +31,17 @@ class TemplateUniqNode(TemplateNode):
         else:
             self._query = query
 
+    @property
+    def query(self):
+        return self._query
+
     def resolve(self, bot, clientid):
         try:
-            resolved = self._query.execute(bot, clientid)
+            results = self._query.execute(bot, clientid)
+            outer = []
+            for inner in results:
+                outer += inner
+            resolved = " ".join(outer)
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:

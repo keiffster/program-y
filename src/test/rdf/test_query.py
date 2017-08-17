@@ -29,7 +29,7 @@ class RDFQueryTests(unittest.TestCase):
         self.assertEquals(query.query_type, RDFQuery.NOT_QUERY)
         self.assertEquals("<notq><subj>Subject</subj><pred>Predicate</pred><obj>Object</obj></notq>", query.to_xml(None, None))
 
-    def test_execute(self):
+    def test_execute_single_var(self):
         bot = TestBot()
         bot.brain.rdf.load_from_text("""
             ACCOUNT:hasPurpose:to track money
@@ -47,3 +47,18 @@ class RDFQueryTests(unittest.TestCase):
         self.assertEquals(result[0][1], "ACCOUNT")
         self.assertEquals(result[1][1], "hasSize")
         self.assertEquals(result[2][1], "0")
+
+    def test_execute_multi_vars(self):
+        bot = TestBot()
+        bot.brain.rdf.load_from_text("""
+            ACCOUNT:hasPurpose:to track money
+            ACCOUNT:hasSize:0
+            ACCOUNT:hasSyllables:2
+            ACCOUNT:isa:Concept
+            ACCOUNT:lifeArea:Finances
+            ACT:hasPurpose:to entertain by performing
+        """)
+        query = RDFQuery(subject=TemplateWordNode("ACCOUNT"), predicate=TemplateWordNode("?x"), object=TemplateWordNode("?y"))
+        resultset = query.execute(bot, "testid")
+        self.assertIsNotNone(resultset)
+        self.assertEquals(5, len(resultset.results))

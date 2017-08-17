@@ -40,7 +40,7 @@ class RDFQueryTests(unittest.TestCase):
 
         result = select.execute(bot, "testid")
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=MONKEY)(?x=BIRD)", result)
+        self.assertEquals([['?x', 'MONKEY'], ['?x', 'BIRD']], result)
 
     def test_select_single_not_query(self):
         bot = TestBot()
@@ -53,8 +53,7 @@ class RDFQueryTests(unittest.TestCase):
 
         result = select.execute(bot, "testid")
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=BEAR)(?x=BEAR)", result)
-
+        self.assertEquals([['?x', 'BEAR'], ['?x', 'BEAR']], result)
 
     def test_select_multi_query(self):
         bot = TestBot()
@@ -68,6 +67,6 @@ class RDFQueryTests(unittest.TestCase):
 
         result = select.execute(bot, "testid")
         self.assertIsNotNone(result)
-        self.assertEquals("(?x=BIRD)", result)
+        self.assertEquals([['?x', 'BIRD']], result)
 
 

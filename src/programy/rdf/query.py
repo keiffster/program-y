@@ -125,19 +125,19 @@ class RDFQuery(object):
         for entity in entities:
             result = []
             if subject.startswith("?"):
-                result.append((subject, entity.subject))
+                result.append([subject, entity.subject])
             else:
-                result.append((None, entity.subject))
+                result.append([None, entity.subject])
 
             if predicate.startswith("?"):
-                result.append((predicate, entity.predicate))
+                result.append([predicate, entity.predicate])
             else:
-                result.append((None, entity.predicate))
+                result.append([None, entity.predicate])
 
             if object.startswith("?"):
-                result.append((object, entity.object))
+                result.append([object, entity.object])
             else:
-                result.append((None, entity.object))
+                result.append([None, entity.object])
 
             results.append(result)
 

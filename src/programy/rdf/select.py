@@ -61,32 +61,20 @@ class RDFSelectStatement(object):
 
                 resultset._results = matched
 
-        str = ""
+        values = []
         for result in resultset.results:
             if len(self._vars) > 0:
-                str += "("
-                comma = False
+                value = []
                 for var in self.vars:
                     if result[0][0] == var:
-                        str += var
-                        str += "="
-                        str += result[0][1]
-                        comma = True
+                        values.append([var, result[0][1]])
                     if result[1][0] == var:
-                        if comma is True:
-                            str += ", "
-                        str += var
-                        str += "="
-                        str += result[1][1]
+                        values.append([var, result[1][1]])
                     comma = True
                     if result[2][0] == var:
-                        if comma is True:
-                            str += ", "
-                        str += var
-                        str += "="
-                        str += result[2][1]
-                        comma = True
-                str += ")"
+                        values.append([var, result[2][1]])
+                if len(value) > 0:
+                    values.append(value)
             else:
-                str += "(%s, %s, %s)"%(result[0][1], result[1][1], result[2][1])
-        return str
+                values.append([result[0][1], result[1][1], result[2][1]])
+        return values

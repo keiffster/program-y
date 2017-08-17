@@ -24,18 +24,30 @@ class RDFUniqueStatement(object):
     def query(self):
         return self._query
 
+    def to_xml(self, bot, clientid):
+        xml = ""
+        xml += "<subj>%s</subj>"%self.query.subject.to_xml(bot, clientid)
+        xml += "<pred>%s</pred>"%self.query.predicate.to_xml(bot, clientid)
+        xml += "<obj>%s</obj>"%self.query.object.to_xml(bot, clientid)
+        return xml
+
     def execute(self, bot, clientid):
 
         queryresultset = self._query.execute(bot, clientid)
 
-        result = []
-        if queryresultset.subject.startswith("?"):
-            result.append(queryresultset.results[0][0][1])
+        uniques = []
+        for result in queryresultset.results:
+            unique = []
+            if queryresultset.subject.startswith("?"):
+                unique.append(result[0][1])
 
-        if queryresultset.predicate.startswith("?"):
-            result.append(queryresultset.results[0][1][1])
+            if queryresultset.predicate.startswith("?"):
+                unique.append(result[1][1])
 
-        if queryresultset.object.startswith("?"):
-            result.append(queryresultset.results[0][2][1])
+            if queryresultset.object.startswith("?"):
+                unique.append(result[2][1])
 
-        return " ".join(result)
+            if result not in uniques:
+                uniques.append(unique)
+
+        return uniques
