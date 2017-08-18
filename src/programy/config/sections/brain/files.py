@@ -27,6 +27,7 @@ class BrainFilesConfiguration(BaseConfigurationData):
         self._aiml_files        = BrainAIMLFileConfiguration()
         self._set_files         = BrainFileConfiguration("sets")
         self._map_files         = BrainFileConfiguration("maps")
+        self._rdf_files         = BrainFileConfiguration("rdf")
 
         self._denormal          = None
         self._normal            = None
@@ -85,6 +86,10 @@ class BrainFilesConfiguration(BaseConfigurationData):
         return self._properties
 
     @property
+    def rdf_files(self):
+        return self._rdf_files
+
+    @property
     def triples(self):
         return self._triples
 
@@ -102,6 +107,7 @@ class BrainFilesConfiguration(BaseConfigurationData):
             self._aiml_files.load_config_section(config_file, files_config, bot_root)
             self._set_files.load_config_section(config_file, files_config, bot_root)
             self._map_files.load_config_section(config_file, files_config, bot_root)
+            self._rdf_files.load_config_section(config_file, files_config, bot_root)
 
             self._denormal = self._get_file_option(config_file, "denormal", files_config, bot_root)
             self._normal = self._get_file_option(config_file, "normal", files_config, bot_root)

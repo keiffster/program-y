@@ -2,7 +2,19 @@ import logging
 
 from programy.mappings.base import BaseCollection
 from programy.rdf.entity import RDFEntity
+from programy.utils.files.filefinder import FileFinder
 
+class RDFLoader(FileFinder):
+    def __init__(self, collection):
+        FileFinder.__init__(self)
+        self._collection = collection
+
+    def load_file_contents(self, filename):
+        logging.debug("Loading rdf [%s]", filename)
+        try:
+            self._collection.load_from_filename(filename)
+        except Exception as excep:
+            logging.error("Failed to load rdf [%s] - %s", filename, excep)
 
 class RDFCollection(BaseCollection):
 
@@ -168,3 +180,13 @@ class RDFCollection(BaseCollection):
                 entities.remove(rem)
 
         return entities
+
+    def load(self, configuration):
+        loader = RDFLoader(self)
+        if configuration.files is not None:
+            files = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+            return len(files)
+        else:
+            self._subjects = {}
+            self._entities = []
+            return 0

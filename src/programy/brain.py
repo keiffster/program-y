@@ -259,7 +259,10 @@ class Brain(object):
             logging.warning("No configuration setting for properties")
 
     def _load_rdf(self, brain_configuration):
-        if brain_configuration.files.triples is not None:
+        if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files is not None:
+            total = self._rdf_collection.load(brain_configuration.files.rdf_files)
+            logging.info("Loaded a total of %d rdf files", total)
+        elif brain_configuration.files.triples is not None:
             total = self._rdf_collection.load_from_filename(brain_configuration.files.triples)
             logging.info("Loaded a total of %d triples", total)
         else:

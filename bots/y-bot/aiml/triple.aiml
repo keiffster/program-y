@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+    <category>
+		<pattern>TRIPLE TEST</pattern>
+		<template>
+			<select>
+				<vars>?x</vars>
+				<q><subj>ACCOUNT</subj><pred>hasPurpose</pred><obj>?x</obj></q>
+			</select>
+		</template>
+	</category>
+
+</aiml>
