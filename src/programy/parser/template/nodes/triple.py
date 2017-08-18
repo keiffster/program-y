@@ -44,6 +44,10 @@ class TemplateTripleNode(TemplateNode):
         return self.entity.to_xml(bot, clientid)
 
     def parse_expression(self, graph, expression):
+        subject = None
+        predicate = None
+        object = None
+
         if 'subj' in expression.attrib:
             subject = expression.attrib['subj']
 
