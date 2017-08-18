@@ -49,13 +49,13 @@ class TemplateTripleNode(TemplateNode):
         object = None
 
         if 'subj' in expression.attrib:
-            subject = expression.attrib['subj']
+            subject = graph.get_word_node(expression.attrib['subj'])
 
         if 'pred' in expression.attrib:
-            predicate = expression.attrib['pred']
+            predicate = graph.get_word_node(expression.attrib['pred'])
 
         if 'obj' in expression.attrib:
-            object = expression.attrib['obj']
+            object = graph.get_word_node(expression.attrib['obj'])
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)

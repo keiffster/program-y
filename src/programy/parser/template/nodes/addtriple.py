@@ -25,7 +25,11 @@ class TemplateAddTripleNode(TemplateTripleNode):
 
     def resolve(self, bot, clientid):
         try:
-            bot.brain.rdf.add_entity(self.entity.subject, self.entity.predicate, self.entity.object)
+            subject = self.entity.subject.resolve(bot, clientid)
+            predicate = self.entity.predicate.resolve(bot, clientid)
+            object = self.entity.object.resolve(bot, clientid)
+
+            bot.brain.rdf.add_entity(subject, predicate, object)
             resolved = ""
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
