@@ -1,13 +1,98 @@
-requests
-flask
-python-dateutil
-beautifulsoup4
-lxml
-wikipedia
-pylint
-nose
-coverage
-pyyaml
-tweepy
-sleekxmpp
+Edited by Sprinteroz
+Last Edited on: DD/MM/YYYY 22/08/2017  
+---------------------------------------------------
+
+
+*Files that are required to run Program-y
+
+1)  Requests
+2)  Flask
+3)  Python-Dateutil
+4)  BeautifulSoup4
+5)  Lxml
+6)  Wikipedia
+7)  Pylint
+8)  Nose
+9)  Coverage
+10) PyYAML
+11) Tweepy
+12) SleekXMPP
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++ Code has been added for windows users as some sites          +
++ have no info for installation on Windows                     +
++ All Windows Code must be done in Command Prompt              +
++ and best to run it as Administrator                          +
++                                                              +
++ Sorry Linux/UNIX users I did not add the code in due to the  +
++ fact there are so many flavours of Linux and the different   +
++ codes you need for each one, this is why I have added the    +
++ websites and GitHub address to help you find info quicker.   +
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+1)  Requests
+Windows Command Prompt Code: pip install requests
+Github Clone: https://github.com/requests/requests
+Website Info: https://pypi.python.org/pypi/requests
+
+2)  Flask
+Windows Command Prompt Code: pip install Flask
+Github Clone: https://github.com/pallets/flask
+Website Info: http://flask.pocoo.org/
+
+3)  Python-Dateutil
+Windows Command Prompt Code: pip install python-dateutil
+Github Clone: https://github.com/dateutil/dateutil/
+Website Info: https://dateutil.readthedocs.io/en/stable/
+
+4)  BeautifulSoup4
+Windows Command Prompt Code: pip install beautifulsoup4
+Github Clone: https://github.com/getanewsletter/BeautifulSoup4
+Website Info: https://www.crummy.com/software/BeautifulSoup/
+
+5)  Lxml
+Windows Command Prompt Code: easy_install lxml==3.8   
+Github Clone: https://github.com/lxml/lxml.git
+Website Info: https://pypi.python.org/pypi/lxml/3.8.0
+
+6)  Wikipedia
+Windows Command Prompt Code: pip install Wikipedia
+Github Clone: https://github.com/goldsmith/Wikipedia
+Website Info: https://wikipedia.readthedocs.io/en/latest/
+
+7)  Pylint
+Windows Command Prompt Code: pip install pylint
+NOTE For Windows Users MUST READ: https://pylint.readthedocs.io/en/latest/#note-for-windows-users
+Github Clone: https://github.com/PyCQA/pylint
+Website Info: https://www.pylint.org/
+
+8)  Nose
+Windows Command Prompt Code: pip install nose
+Github Clone: https://github.com/nose-devs/nose
+Website Info: http://nose.readthedocs.io/en/latest/
+
+9)  Coverage
+Windows Command Prompt Code: pip install coverage
+Github Clone: https://github.com/simplegeo/python-coverage
+Website Info: https://coverage.readthedocs.io/en/coverage-4.4.1/install.html#install
+
+10) PyYAML
+Windows Command Prompt Code: If you do not download software .exe file you will have to do some commands in command prompt if you download the .zip files: See Website Info link for more details
+Note Windows users You Must Have Installed: Python 2.7 / Python 3.4 or Python 3.5 will not work on other versions of Python that do not match e.g. Python 3.6
+Link to the Windows version of Python 3.5.4 Link: https://www.python.org/downloads/release/python-354/ "This will run with the PyYAML-3.12.win-amdXX-py3.5 links."
+Github Clone: https://github.com/yaml/pyyaml 
+Website Info: http://pyyaml.org/wiki/PyYAML
+
+11) Tweepy
+Windows Command Prompt Code: pip install Tweepy
+Github Clone: https://github.com/tweepy/tweepy
+Website Info: http://www.tweepy.org/ 
+Website Info: http://docs.tweepy.org/en/v3.5.0/index.html
+
+12) SleekXMPP
+Windows Command Prompt Code: pip install sleekxmpp
+Github Clone: https://github.com/fritzy/SleekXMPP
+Website Info: http://sleekxmpp.com/index.html
+Website Info: https://pypi.python.org/pypi/sleekxmpp
 
