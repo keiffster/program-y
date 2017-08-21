@@ -3,8 +3,6 @@ import os
 from test.aiml_tests.client import TestClient
 from programy.config.sections.brain.file import BrainFileConfiguration
 
-# TODO make sure topic star and that star match for set
-
 class TopicStarTestClient(TestClient):
 
     def __init__(self):

@@ -397,7 +397,10 @@ class PatternNode(object):
 
     def match_children(self, bot, clientid, children, child_type, words, word_no, context, type, depth):
 
-        tabs = TextUtils.get_tabs(depth)
+        if bot.configuration.tab_parse_output is True:
+            tabs = TextUtils.get_tabs(depth)
+        else:
+            tabs = ""
 
         for child in children:
 
@@ -421,7 +424,10 @@ class PatternNode(object):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        tabs = TextUtils.get_tabs(depth)
+        if bot.configuration.tab_parse_output is True:
+            tabs = TextUtils.get_tabs(depth)
+        else:
+            tabs = ""
 
         if context.search_time_exceeded() is True:
             logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_time))

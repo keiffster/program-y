@@ -28,6 +28,39 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
         self.assertEqual("1", context.template_node().template.word)
         self.assertEqual("Woman", context.star(1))
 
+    def test_multi_word_set_match(self):
+        loader = SetLoader()
+
+        self.bot.brain.sets.add_set("COLOR", loader.load_from_text("""
+        RED
+        RED AMBER
+        RED BURNT OAK
+        RED ORANGE
+        """))
+
+        self.add_pattern_to_graph(pattern="I LIKE <set>color</set> *", topic="*", that="*", template="1")
+
+        context = self.match_sentence("I LIKE RED PAINT", topic="*", that="*")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node())
+        self.assertEqual("1", context.template_node().template.word)
+        self.assertEqual("RED", context.star(1))
+        self.assertEqual("PAINT", context.star(2))
+
+        context = self.match_sentence("I LIKE RED AMBER CARS", topic="*", that="*")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node())
+        self.assertEqual("1", context.template_node().template.word)
+        self.assertEqual("RED AMBER", context.star(1))
+        self.assertEqual("CARS", context.star(2))
+
+        context = self.match_sentence("I LIKE RED BURNT OAK MOTOR BIKES", topic="*", that="*")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node())
+        self.assertEqual("1", context.template_node().template.word)
+        self.assertEqual("RED BURNT OAK", context.star(1))
+        self.assertEqual("MOTOR BIKES", context.star(2))
+
     def test_basic_set_number_match(self):
 
         self.add_pattern_to_graph(pattern="I AM <set>number</set> YEARS OLD", topic="X", that="Y", template="1")

@@ -13,7 +13,7 @@ brain:
       default-get: unknown
       default-property: unknown
       default-map: unknown
-      learn-filename: professor-learnf.aiml
+      learn-filename: y-bot-learnf.aiml
     # These have not been added to the system yet
 
     # Nodes
@@ -25,7 +25,7 @@ brain:
     binaries:
       save_binary: false
       load_binary: false
-      binary_filename: /tmp/professor.brain
+      binary_filename: /tmp/y-bot.brain
       load_aiml_on_binary_fail: false
       dump_to_file: /tmp/braintree.txt
 
@@ -34,8 +34,8 @@ brain:
             files: $BOT_ROOT/aiml
             extension: .aiml
             directories: true
-            #errors: /tmp/professor_errors.txt
-            #duplicates: /tmp/professor_duplicates.txt
+            errors: /tmp/y-bot_errors.txt
+            duplicates: /tmp/y-bot_duplicates.txt
         sets:
             files: $BOT_ROOT/sets
             extension: .txt
@@ -52,7 +52,11 @@ brain:
         predicates: $BOT_ROOT/config/predicates.txt
         pronouns: $BOT_ROOT/config/pronouns.txt
         properties: $BOT_ROOT/config/properties.txt
-        triples: $BOT_ROOT/config/triples.txt
+        #triples: $BOT_ROOT/rdf/triples.txt
+        rdf:
+            files:  $BOT_ROOT/rdf
+            extension: .txt
+            directories: false
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
 
@@ -70,13 +74,52 @@ brain:
         Wikipedia:
             classname: programy.utils.services.wikipediaservice.WikipediaService
 
+    security:
+        authentication:
+            classname: programy.utils.security.authenticate.passthrough.BasicPassThroughAuthenticationService
+            denied_srai: AUTHENTICATION_FAILED
+        authorisation:
+            classname: programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+            denied_srai: AUTHORISATION_FAILED
+            usergroups: $BOT_ROOT/config/roles.yaml
+
+    oob:
+      default:
+        classname: programy.utils.oob.default.DefaultOutOfBandProcessor
+      alarm:
+        classname: programy.utils.oob.alarm.AlarmOutOfBandProcessor
+      camera:
+        classname: programy.utils.oob.camera.CameraOutOfBandProcessor
+      clear:
+        classname: programy.utils.oob.clear.ClearOutOfBandProcessor
+      dial:
+        classname: programy.utils.oob.dial.DialOutOfBandProcessor
+      dialog:
+        classname: programy.utils.oob.dialog.DialogOutOfBandProcessor
+      email:
+        classname: programy.utils.oob.email.EmailOutOfBandProcessor
+      map:
+        classname: programy.utils.oob.map.MapOutOfBandProcessor
+      schedule:
+        classname: programy.utils.oob.schedule.ScheduleOutOfBandProcessor
+      search:
+        classname: programy.utils.oob.search.SearchOutOfBandProcessor
+      sms:
+        classname: programy.utils.oob.sms.SMSOutOfBandProcessor
+      url:
+        classname: programy.utils.oob.url.URLOutOfBandProcessor
+      wifi:
+        classname: programy.utils.oob.wifi.WifiOutOfBandProcessor
+
 bot:
     license_keys: $BOT_ROOT/config/license.keys
+
     prompt: ">>>"
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!
     empty_string_srai: YEMPTY
     exit_response: So long, and thanks for the fish!
+
     override_predicates: true
 
     max_question_recursion: 1000
@@ -92,12 +135,12 @@ bot:
 
 
 rest:
-  host: 127.0.0.1
+  host: 0.0.0.0
   port: 5000
   debug: false
 
 webchat:
-  host: 127.0.0.1
+  host: 0.0.0.0
   port: 5000
   debug: false
 

@@ -51,7 +51,10 @@ class PatternThatNode(PatternNode):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        tabs = TextUtils.get_tabs(depth)
+        if bot.configuration.tab_parse_output is True:
+            tabs = TextUtils.get_tabs(depth)
+        else:
+            tabs = ""
 
         if context.search_depth_exceeded(depth) is True:
         # if depth > context.max_search_depth:

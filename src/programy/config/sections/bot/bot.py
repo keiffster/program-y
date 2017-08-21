@@ -47,6 +47,7 @@ class BotConfiguration(BaseConfigurationData):
         self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
         self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
         self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
+        self._tab_parse_output      = False
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
@@ -153,6 +154,10 @@ class BotConfiguration(BaseConfigurationData):
     @property
     def max_search_timeout(self):
         return self._max_search_timeout
+
+    @property
+    def tab_parse_output(self):
+        return self._tab_parse_output
 
     @property
     def spelling(self):
