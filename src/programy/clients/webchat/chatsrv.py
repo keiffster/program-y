@@ -10,7 +10,7 @@ class WebChatBotClient(BotClient):
         BotClient.__init__(self)
 
     def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "REST"])
+        self.bot.brain.properties.add_property("env", "REST")
 
     def get_client_configuration(self):
         return WebChatConfiguration()

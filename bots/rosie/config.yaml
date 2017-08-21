@@ -49,8 +49,6 @@ brain:
         gender: $BOT_ROOT/config/gender.txt
         person: $BOT_ROOT/config/person.txt
         person2: $BOT_ROOT/config/person2.txt
-        predicates: $BOT_ROOT/config/predicates.txt
-        pronouns: $BOT_ROOT/config/pronouns.txt
         properties: $BOT_ROOT/config/properties.txt
         triples: $BOT_ROOT/config/triples.txt
         preprocessors: $BOT_ROOT/config/preprocessors.conf
@@ -77,7 +75,7 @@ bot:
     default_response: Sorry, I don't have an answer for that!
     empty_string_srai: YEMPTY
     exit_response: So long, and thanks for the fish!
-    override_predicates: true
+    override_properties: true
 
     max_question_recursion: 1000
     max_question_timeout: 60

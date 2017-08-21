@@ -35,7 +35,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
-        self.assertEqual("keith", question.predicate("name"))
+        self.assertEqual("keith", question.property("name"))
 
     def test_to_xml_local_set(self):
         root = TemplateNode()
@@ -56,7 +56,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self.bot._configuration.override_predicates = True
+        self.bot._configuration.override_propertys = True
 
         node = TemplateSetNode()
         self.assertIsNotNone(node)
@@ -77,7 +77,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
-        self.assertEqual("keith", conversation.predicate("name"))
+        self.assertEqual("keith", conversation.property("name"))
 
     def test_global_set_allow_overrides_with_default(self):
         root = TemplateNode()
@@ -85,7 +85,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self.bot._configuration.override_predicates = True
+        self.bot._configuration.override_propertys = True
         self.bot.brain.properties.pairs.append(["name", "fred"])
 
         node = TemplateSetNode()
@@ -107,7 +107,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
-        self.assertEqual("keith", conversation.predicate("name"))
+        self.assertEqual("keith", conversation.property("name"))
 
     def test_global_set_deny_overrides_with_default(self):
         root = TemplateNode()
@@ -115,7 +115,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self.bot._configuration.override_predicates = False
+        self.bot._configuration.override_properties = False
         self.bot.brain.properties.pairs.append(["name", "fred"])
 
         node = TemplateSetNode()
@@ -137,7 +137,7 @@ class TemplateSetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("fred", result)
 
-        self.assertEqual(None, conversation.predicate("name"))
+        self.assertEqual(None, conversation.property("name"))
 
     def test_to_xml_global_set(self):
         root = TemplateNode()

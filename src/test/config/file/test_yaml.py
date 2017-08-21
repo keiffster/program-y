@@ -108,8 +108,6 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
                     gender: $BOT_ROOT/config/test-gender.txt
                     person: $BOT_ROOT/config/test-person.txt
                     person2: $BOT_ROOT/config/test-person2.txt
-                    predicates: $BOT_ROOT/config/test-predicates.txt
-                    pronouns: $BOT_ROOT/config/test-pronouns.txt
                     properties: $BOT_ROOT/config/test-properties.txt
                     triples: $BOT_ROOT/config/test-triples.txt
                     preprocessors: $BOT_ROOT/config/test-preprocessors.conf
@@ -136,7 +134,7 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
                 default_response: Sorry, I don't have a test answer for that!
                 empty_string: TEST-YEMPTY
                 exit_response: So long, and thanks for the test fish!
-                override_predicates: true
+                override_properties: true
                 max_question_recursion: 1000
                 max_question_timeout: 60
                 max_search_depth: 100

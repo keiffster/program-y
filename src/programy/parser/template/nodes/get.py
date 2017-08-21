@@ -58,15 +58,8 @@ class TemplateGetNode(TemplateNode):
     def resolve_variable(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
 
-        """
-        Todo, if local then set per the conversation
-        If globals
-            If exists in predicates then don't replace
-            If not in predicates then set as global to the conversation
-        """
-
         if self.local is True:
-            value = bot.get_conversation(clientid).current_question().predicate(name)
+            value = bot.get_conversation(clientid).current_question().property(name)
             if value is None:
                 logging.warning("No local var for %s, default-get used", name)
                 value = bot.brain.properties.property("default-get")
@@ -75,9 +68,9 @@ class TemplateGetNode(TemplateNode):
                     value = ""
             logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
-            value = bot.get_conversation(clientid).predicate(name)
+            value = bot.get_conversation(clientid).property(name)
             if value is None:
-                value = bot.brain.predicates.predicate(name)
+                value = bot.brain.properties.property(name)
                 if value is None:
                     value = bot.brain.properties.property("default-get")
                     if value is None:

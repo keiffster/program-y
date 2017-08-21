@@ -23,7 +23,7 @@ class BotTests(unittest.TestCase):
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
         self.assertIsNotNone(bot.initial_question)
-        self.assertFalse(bot.override_predicates)
+        self.assertFalse(bot.override_properties)
         self.assertIsNotNone(bot.get_version_string)
 
     def test_bot_init_with_config(self):
@@ -36,7 +36,7 @@ class BotTests(unittest.TestCase):
         bot_config._exit_response         = BotConfiguration.DEFAULT_EXIT_RESPONSE
         bot_config._initial_question      = BotConfiguration.DEFAULT_INITIAL_QUESTION
         bot_config._empty_string          = BotConfiguration.DEFAULT_EMPTY_STRING
-        bot_config._override_predicates   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
+        bot_config._override_properties   = BotConfiguration.DEFAULT_OVERRIDE_PREDICATES
         bot_config._max_question_recursion = 1000
         bot_config._max_question_timeout   = 60
         bot_config._max_search_depth       = 100
@@ -52,7 +52,7 @@ class BotTests(unittest.TestCase):
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
         self.assertIsNotNone(bot.initial_question)
-        self.assertTrue(bot.override_predicates)
+        self.assertTrue(bot.override_properties)
         self.assertIsNotNone(bot.get_version_string)
 
     def test_bot_init_no_spellchecker(self):

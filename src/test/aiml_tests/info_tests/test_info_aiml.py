@@ -30,7 +30,7 @@ class InfoAIMLTests(unittest.TestCase):
 
     def test_env(self):
 
-        InfoAIMLTests.test_client.bot.brain.predicates.pairs.append(["env","test"])
+        InfoAIMLTests.test_client.bot.brain.properties.add_property("env","test")
 
         response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ENVIRONMENT")
         self.assertIsNotNone(response)

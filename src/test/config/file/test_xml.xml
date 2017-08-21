@@ -79,7 +79,7 @@
 		<default_response>Sorry, I don't have a test answer for that!</default_response>
 		<empty_string>TEST-YEMPTY</empty_string>
 		<exit_response>So long, and thanks for the test fish!</exit_response>
-		<override_predicates>true</override_predicates>
+		<override_properties>true</override_properties>
 		<max_question_recursion>1000</max_question_recursion>
         <max_question_timeout>60</max_question_timeout>
         <max_search_depth>100</max_search_depth>

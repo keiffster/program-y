@@ -26,7 +26,7 @@ class ConsoleBotClient(BotClient):
         self.clientid = "Console"
 
     def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "Console"])
+        self.bot.brain.properties.add_property("env", "Console")
 
     def get_client_configuration(self):
         return ConsoleConfiguration()

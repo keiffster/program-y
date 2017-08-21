@@ -110,18 +110,18 @@ class Question(object):
 
     def __init__(self):
         self._sentences = []
-        self._predicates = {}
+        self._properties = {}
 
     @property
     def sentences(self):
         return self._sentences
 
-    def set_predicate(self, name: str, value: str):
-        self._predicates[name] = value
+    def set_property(self, name: str, value: str):
+        self._properties[name] = value
 
-    def predicate(self, name: str):
-        if name in self._predicates:
-            return self._predicates[name]
+    def property(self, name: str):
+        if name in self._properties:
+            return self._properties[name]
         else:
             return None
 
@@ -136,14 +136,6 @@ class Question(object):
             raise Exception("Num sentence array violation !")
         else:
             return self._sentences[-1]
-
-    """
-    def previous_sentence(self):
-        if len(self._sentences) < 2:
-            raise Exception("Num sentence array violation !")
-        else:
-            return self._sentences[len(self._sentences)-2]
-    """
 
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
@@ -174,8 +166,8 @@ class Conversation(object):
         self._clientid = clientid
         self._questions = []
         self._max_histories = max_histories
-        self._predicates = {}
-        self._predicates['topic'] = '*'
+        self._properties = {}
+        self._properties['topic'] = '*'
 
     @property
     def bot(self):
@@ -202,33 +194,17 @@ class Conversation(object):
             previous = -1 - num
             return self._questions[previous]
 
-    """
-    def all_sentences(self):
-        sentences = []
-        for question in self._questions:
-            for sentence in question.sentences:
-                sentences.append(sentence.text())
-        return sentences
-
-    def nth_sentence(self, num: int):
-        sentences = self.all_sentences()
-        if num <= len(sentences):
-            return sentences[len(sentences)-num]
-        else:
-            raise Exception("Invalid sentence index")
-    """
-
-    def set_predicate(self, name: str, value: str):
+    def set_property(self, name: str, value: str):
         if name == 'topic':
             if value == "":
                 value = '*'
 
-        self._predicates[name] = value
+        self._properties[name] = value
 
-    def predicate(self, name: str):
-        if self._predicates is not None:
-            if name in self._predicates:
-                return self._predicates[name]
+    def property(self, name: str):
+        if self._properties is not None:
+            if name in self._properties:
+                return self._properties[name]
 
         return None
 

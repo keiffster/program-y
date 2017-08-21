@@ -64,16 +64,16 @@ class TemplateSetNode(TemplateNode):
 
             if self.local is True:
                 logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
-                bot.get_conversation(clientid).current_question().set_predicate(name, value)
+                bot.get_conversation(clientid).current_question().set_property(name, value)
             else:
-                if bot.override_predicates is False and bot.brain.properties.has_property(name):
+                if bot.override_properties is False and bot.brain.properties.has_property(name):
                     logging.error("Global property already exists for name [%s], ignoring set!", name)
                     value = bot.brain.properties.property(name)
                 else:
                     if bot.brain.properties.has_property(name):
                         logging.warning("Global property already exists for name [%s], over writing!", name)
                     logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
-                    bot.get_conversation(clientid).set_predicate(name, value)
+                    bot.get_conversation(clientid).set_property(name, value)
 
             logging.debug("[%s] resolved to [%s]", self.to_string(), value)
             return value

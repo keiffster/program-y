@@ -22,39 +22,39 @@ class TemplateSetAIMLTests(unittest.TestCase):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "NAME SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test1")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("var1"), "test1")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var1"), "test1")
 
     def test_multi_word_name_set_topic(self):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "MULTI WORD NAME SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test1 test2")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("var1 var2"), "test1 test2")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var1 var2"), "test1 test2")
 
     def test_var_set_topic(self):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "VAR SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test2")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("var2"), "test2")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var2"), "test2")
 
     def test_multi_word_var_set_topic(self):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "MULTI WORD VAR SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test2 test3")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("var2 var3"), "test2 test3")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var2 var3"), "test2 test3")
 
     def test_topic_set(self):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "TOPIC SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK topic1")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("topic"), "topic1")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "topic1")
 
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "TOPIC UNSET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("topic"), "*")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "*")
 
     def test_multi_word_topic_set(self):
         response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "SET MULTI WORD TOPIC")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK topic2 topic3")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").predicate("topic"), "topic2 topic3")
+        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "topic2 topic3")

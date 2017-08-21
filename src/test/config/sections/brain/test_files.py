@@ -31,8 +31,6 @@ class BrainFilesConfigurationTests(unittest.TestCase):
                 gender: $BOT_ROOT/config/gender.txt
                 person: $BOT_ROOT/config/person.txt
                 person2: $BOT_ROOT/config/person2.txt
-                predicates: $BOT_ROOT/config/predicates.txt
-                pronouns: $BOT_ROOT/config/pronouns.txt
                 properties: $BOT_ROOT/config/properties.txt
                 triples: $BOT_ROOT/config/triples.txt
                 preprocessors: $BOT_ROOT/config/preprocessors.conf
@@ -66,8 +64,6 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         self.assertEqual(files_config.gender, "./config/gender.txt")
         self.assertEqual(files_config.person, "./config/person.txt")
         self.assertEqual(files_config.person2, "./config/person2.txt")
-        self.assertEqual(files_config.predicates, "./config/predicates.txt")
-        self.assertEqual(files_config.pronouns, "./config/pronouns.txt")
         self.assertEqual(files_config.properties, "./config/properties.txt")
         self.assertEqual(files_config.triples, "./config/triples.txt")
         self.assertEqual(files_config.preprocessors, "./config/preprocessors.conf")

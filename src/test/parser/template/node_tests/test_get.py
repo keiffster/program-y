@@ -31,7 +31,7 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         question = Question.create_from_text("Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
-        question.set_predicate("name", "keith")
+        question.set_property("name", "keith")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
@@ -95,7 +95,7 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         question = Question.create_from_text("Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
-        conversation.set_predicate("name", "keith")
+        conversation.set_property("name", "keith")
 
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)

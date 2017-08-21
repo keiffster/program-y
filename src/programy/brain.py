@@ -30,8 +30,6 @@ from programy.mappings.gender import GenderCollection
 from programy.mappings.maps import MapCollection
 from programy.mappings.normal import NormalCollection
 from programy.mappings.person import PersonCollection
-from programy.mappings.predicates import PredicatesCollection
-from programy.mappings.pronouns import PronounsCollection
 from programy.mappings.properties import PropertiesCollection
 from programy.mappings.sets import SetCollection
 from programy.rdf.collection import RDFCollection
@@ -52,8 +50,6 @@ class Brain(object):
         self._gender_collection = GenderCollection()
         self._person_collection = PersonCollection()
         self._person2_collection = PersonCollection()
-        self._predicates_collection = PredicatesCollection()
-        self._pronouns_collection = PronounsCollection()
         self._rdf_collection = RDFCollection()
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
@@ -97,14 +93,6 @@ class Brain(object):
     @property
     def person2s(self):
         return self._person2_collection
-
-    @property
-    def predicates(self):
-        return self._predicates_collection
-
-    @property
-    def pronouns(self):
-        return self._pronouns_collection
 
     @property
     def rdf(self):
@@ -237,20 +225,6 @@ class Brain(object):
         else:
             logging.warning("No configuration setting for person2")
 
-    def _load_predicates(self, brain_configuration):
-        if brain_configuration.files.predicates is not None:
-            total = self._predicates_collection.load_from_filename(brain_configuration.files.predicates)
-            logging.info("Loaded a total of %d predicates", total)
-        else:
-            logging.warning("No configuration setting for predicates")
-
-    def _load_pronouns(self, brain_configuration):
-        if brain_configuration.files.pronouns is not None:
-            total = self._pronouns_collection.load_from_filename(brain_configuration.files.pronouns)
-            logging.info("Loaded a total of %d pronouns", total)
-        else:
-            logging.warning("No configuration setting for pronouns")
-
     def _load_properties(self, brain_configuration):
         if brain_configuration.files.properties is not None:
             total = self._properties_collection.load_from_filename(brain_configuration.files.properties)
@@ -296,8 +270,6 @@ class Brain(object):
         self._load_genders(brain_configuration)
         self._load_persons(brain_configuration)
         self._load_person2s(brain_configuration)
-        self._load_predicates(brain_configuration)
-        self._load_pronouns(brain_configuration)
         self._load_properties(brain_configuration)
         self._load_rdf(brain_configuration)
         self._load_sets(brain_configuration)
@@ -357,7 +329,7 @@ class Brain(object):
 
         conversation = bot.get_conversation(clientid)
 
-        topic_pattern = conversation.predicate("topic")
+        topic_pattern = conversation.property("topic")
         if topic_pattern is None:
             logging.info("No Topic pattern default to [*]")
             topic_pattern = "*"

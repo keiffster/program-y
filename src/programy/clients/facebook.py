@@ -59,7 +59,7 @@ class FacebookBotClient(BotClient):
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "Facebook"])
+        self.bot.brain.properties.add_property("env", "Facebook")
 
     def get_client_configuration(self):
         return FacebookConfiguration()

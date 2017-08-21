@@ -166,7 +166,7 @@ class ConversationTests(unittest.TestCase):
         self.assertEqual(conversation._clientid, "test")
         self.assertEqual(0, len(conversation._questions))
         self.assertEqual(3, conversation._max_histories)
-        self.assertEqual(1, len(conversation._predicates))
+        self.assertEqual(1, len(conversation._properties))
 
         with self.assertRaises(Exception):
             conversation.current_question()

@@ -110,9 +110,9 @@ class Bot(object):
             return BotConfiguration.DEFAULT_INITIAL_QUESTION
 
     @property
-    def override_predicates(self):
+    def override_properties(self):
         if self._configuration is not None:
-            return self._configuration.override_predicates
+            return self._configuration.override_properties
         else:
             return False
 

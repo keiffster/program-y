@@ -50,13 +50,13 @@ class XmppBotClient(BotClient):
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self, env='xmpp'):
-        self.bot.brain.predicates.pairs.append(["env", env])
+        self.bot.brain.properties.add_property("env", env)
         
     def get_client_configuration(self):
         return XmppConfiguration()
 
     def run(self):
-        logging.debug("%s App Running.."%self.bot.brain.predicates.predicate("env"))
+        logging.debug("%s App Running.."%self.bot.brain.properties.predicate("env"))
 
         username = self.bot.license_keys.get_key("XMPP_USERNAME")
         password = self.bot.license_keys.get_key("XMPP_PASSWORD")

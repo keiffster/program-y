@@ -134,7 +134,7 @@ class TestRunnerBotClient(BotClient):
         parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
     def set_environment(self):
-        self.bot.brain.predicates.pairs.append(["env", "TestRunner"])
+        self.bot.brain.properties.add_property("env", "TestRunner")
 
     def get_client_configuration(self):
         return ConsoleConfiguration()

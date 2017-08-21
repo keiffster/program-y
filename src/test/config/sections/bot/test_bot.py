@@ -18,7 +18,7 @@ class BotConfigurationTests(unittest.TestCase):
             default_response: Sorry, I don't have an answer for that!
             empty_string: YEMPTY
             exit_response: So long, and thanks for the fish!
-            override_predicates: true
+            override_properties: true
             max_question_recursion: 1000
             max_question_timeout: 60
             max_search_depth: 100
@@ -43,7 +43,7 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(bot_config.max_question_timeout, 60)
         self.assertEqual(bot_config.max_search_depth, 100)
         self.assertEqual(bot_config.max_search_timeout, 60)
-        self.assertTrue(bot_config.override_predicates)
+        self.assertTrue(bot_config.override_properties)
 
         self.assertIsNotNone(bot_config.spelling)
         self.assertEqual("programy.utils.spelling.checker.SpellingChecker", bot_config.spelling.classname)
@@ -67,7 +67,7 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(bot_config.max_question_timeout, -1)
         self.assertEqual(bot_config.max_search_depth, 100)
         self.assertEqual(bot_config.max_search_timeout, -1)
-        self.assertTrue(bot_config.override_predicates)
+        self.assertTrue(bot_config.override_properties)
 
         self.assertIsNotNone(bot_config.spelling)
 
