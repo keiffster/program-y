@@ -48,4 +48,4 @@ class BrainSecurityConfiguration(BaseConfigurationData):
                 self._usergroups = self.sub_bot_root(usergroups, bot_root)
             self.load_additional_key_values(file_config, service)
         else:
-            logging.warning("'security' section missing from bot config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'security' section missing from bot config, using to defaults")

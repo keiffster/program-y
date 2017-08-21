@@ -42,7 +42,7 @@ class TemplateUniqNode(TemplateNode):
             for inner in results:
                 outer += inner
             resolved = " ".join(outer)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)
@@ -76,7 +76,7 @@ class TemplateUniqNode(TemplateNode):
             elif tag_name == 'obj':
                 obj = self.parse_children_as_word_node(graph, child)
             else:
-                logging.warning ("Unknown tag name [%s] in select query"%tag_name)
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning ("Unknown tag name [%s] in select query"%tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")

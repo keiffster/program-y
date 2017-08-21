@@ -26,7 +26,7 @@ class RemoveHTMLPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, bot, clientid, word_string):
-        logging.debug("Removing html from sentence...")
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Removing html from sentence...")
         word_string = re.sub(r'\s*<\s*br\s*/>\s*', os.linesep, word_string)
         word_string = re.sub(r'\s*<br></br>\s*', os.linesep, word_string)
         return word_string

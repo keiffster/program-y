@@ -19,9 +19,9 @@ class DialOutOfBandProcessor(OutOfBandProcessor):
             self._number = oob.text
             return True
         else:
-            logging.error("Unvalid dial oob command - missing dial text!")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unvalid dial oob command - missing dial text!")
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("DialOutOfBandProcessor: Dialing=%s", self._number)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("DialOutOfBandProcessor: Dialing=%s", self._number)
         return "DIAL"

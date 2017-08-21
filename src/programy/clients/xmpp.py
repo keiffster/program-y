@@ -56,7 +56,7 @@ class XmppBotClient(BotClient):
         return XmppConfiguration()
 
     def run(self):
-        logging.debug("%s App Running.."%self.bot.brain.properties.predicate("env"))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s App Running.."%self.bot.brain.properties.property("env"))
 
         username = self.bot.license_keys.get_key("XMPP_USERNAME")
         password = self.bot.license_keys.get_key("XMPP_PASSWORD")

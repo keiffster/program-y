@@ -25,7 +25,7 @@ class ProcessorLoader(ClassLoader):
         self.processors = []
 
     def load(self, filename, *args, **kw):
-        logging.debug("Loading processors from file [%s]", filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Loading processors from file [%s]", filename)
         count = 0
         with open(filename, "r+") as file:
             for line in file:

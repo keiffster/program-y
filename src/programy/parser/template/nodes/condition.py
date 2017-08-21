@@ -145,7 +145,7 @@ class TemplateConditionNode(TemplateNode):
         if value is None:
             value = bot.brain.properties.property("default-get")
             if value is None:
-                logging.error("No value for default-get defined, empty string returned")
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value for default-get defined, empty string returned")
                 value = ""
         return value
 
@@ -423,7 +423,7 @@ class TemplateConditionNode(TemplateNode):
             else:
                 resolved = ""
 
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)
@@ -440,7 +440,7 @@ class TemplateConditionNode(TemplateNode):
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():
                         resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
-                        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
                         if condition.loop is True:
                             resolved = resolved.strip() + " " + self.resolve(bot, clientid)
@@ -456,7 +456,7 @@ class TemplateConditionNode(TemplateNode):
             else:
                 resolved = ""
 
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:
@@ -473,7 +473,7 @@ class TemplateConditionNode(TemplateNode):
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():
                         resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
-                        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
                         if condition.loop is True:
                             resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()
@@ -490,7 +490,7 @@ class TemplateConditionNode(TemplateNode):
             else:
                 resolved = ""
 
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:

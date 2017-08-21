@@ -61,12 +61,12 @@ class PandoraService(Service):
             if bot.license_keys.has_key('PANDORA_BOTID') is True:
                 botid = bot.license_keys.get_key('PANDORA_BOTID')
             else:
-                logging.error("No variable PANDORA_BOTID found in license key file")
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No variable PANDORA_BOTID found in license key file")
                 return ""
 
             return self.api.ask_question(self._config.url, question, botid)
 
         except Exception as excep:
-            logging.error(str(excep))
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(str(excep))
             return ""
 

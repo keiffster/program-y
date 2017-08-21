@@ -28,7 +28,7 @@ class TemplateGenderNode(TemplateNode):
         try:
             string = self.resolve_children_to_string(bot, clientid)
             resolved = bot.brain.genders.genderise_string(string)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)

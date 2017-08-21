@@ -47,7 +47,7 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def write_learnf_to_file(self, bot, clientid, category):
         learnf_path = bot.brain._configuration.defaults.learn_filename
-        logging.debug("Writing learnf to %s", learnf_path)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Writing learnf to %s", learnf_path)
 
         if os.path.isfile(learnf_path) is False:
             file = open(learnf_path, "w+")

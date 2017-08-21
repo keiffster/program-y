@@ -73,7 +73,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
                 return child
         else:
             if missing_value is not None:
-                logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def _infer_type_from_string(self, text):
@@ -89,7 +89,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         if child is not None:
             return self.convert_to_bool(child.text)
         else:
-            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
@@ -97,5 +97,5 @@ class XMLConfigurationFile(BaseConfigurationFile):
         if child is not None:
             return self.convert_to_int(child.text)
         else:
-            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value

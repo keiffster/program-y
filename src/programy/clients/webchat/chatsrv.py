@@ -41,24 +41,24 @@ def ask():
 
     if webchat_client.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
-            logging.error("Unauthorised access - api required but missing")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
         apikey = request.args['apikey']
         if is_apikey_valid(apikey) is False:
-            logging.error("'Unauthorised access - invalid api key")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'Unauthorised access - invalid api key")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
     if 'question' not in request.args or request.args['question'] is None:
         print("'question' missing from request")
-        logging.error("'question' missing from request")
+        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'question' missing from request")
         abort(400)
 
     question = request.args['question']
 
     if 'sessionid' not in request.args or request.args['sessionid'] is None:
         print("'sessionid' missing from request")
-        logging.error("'sessionid' missing from request")
+        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'sessionid' missing from request")
         abort(400)
 
     sessionid = request.args['sessionid']

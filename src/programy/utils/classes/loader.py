@@ -22,15 +22,15 @@ class ClassLoader(object):
     @staticmethod
     def instantiate_class(class_string):
         processor_path = class_string.strip()
-        logging.debug("Processor path [%s]", processor_path)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processor path [%s]", processor_path)
 
         last_dot = processor_path.rfind(".")
         module_path = processor_path[:last_dot]
         class_name = processor_path[last_dot+1:]
 
-        logging.debug("Importing module [%s]", module_path)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Importing module [%s]", module_path)
         imported_module = importlib.import_module(module_path)
 
-        logging.debug("Instantiating class [%s]", class_name)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Instantiating class [%s]", class_name)
         new_class = getattr(imported_module, class_name)
         return new_class

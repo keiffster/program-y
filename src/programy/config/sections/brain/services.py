@@ -47,4 +47,4 @@ class BrainServicesConfiguration(BaseConfigurationData):
                 self._services[name] = service
 
         else:
-            logging.warning("Config section [services] missing from Brain, no services loaded")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Config section [services] missing from Brain, no services loaded")

@@ -58,13 +58,13 @@ class PatternTopicNode(PatternNode):
 
         if context.search_depth_exceeded(depth) is True:
         #if depth > context.max_search_depth:
-            logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search depth [%d]exceeded" % (tabs, context.max_search_depth))
             return None
 
         if words.word(word_no) == PatternTopicNode.TOPIC:
-            logging.debug("%sTopic matched %s" % (tabs, words.word(word_no)))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sTopic matched %s" % (tabs, words.word(word_no)))
             return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
 
-        logging.debug("%sTopic NOT matched %s" % (tabs, words.word(word_no)))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sTopic NOT matched %s" % (tabs, words.word(word_no)))
         return None
 

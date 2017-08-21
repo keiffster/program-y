@@ -62,24 +62,24 @@ async def ask(request):
     
     if rest_client.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.raw_args or request.raw_args['apikey'] is None:
-            logging.error("Unauthorised access - api required but missing")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unauthorised access - api required but missing")
             return json({'error': 'Unauthorized access'})
 
         apikey = request.raw_args['apikey']
         if is_apikey_valid(apikey) is False:
-            logging.error("'Unauthorised access - invalid api key")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'Unauthorised access - invalid api key")
             return json({'error': 'Unauthorized access'})
 
     if 'question' not in request.raw_args or request.raw_args['question'] is None:
         print("'question' missing from request")
-        logging.error("'question' missing from request")
+        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'question' missing from request")
         raise ServerError("'question' missing from request", status_code=500)
 
     question = request.raw_args['question']
 
     if 'sessionid' not in request.raw_args or request.raw_args['sessionid'] is None:
         print("'sessionid' missing from request")
-        logging.error("'sessionid' missing from request")
+        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'sessionid' missing from request")
         raise ServerError("'sessionid' missing from request", status_code=500)
 
     sessionid = request.raw_args['sessionid']

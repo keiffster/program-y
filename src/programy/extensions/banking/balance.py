@@ -25,7 +25,7 @@ class BankingBalanceExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
-        logging.debug ("Bank Balance - Calling external service for with extra data [%s]"%(data))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Bank Balance - Calling external service for with extra data [%s]"%(data))
 
         #
         # Add the logic to receive the balance and format it into pounds and pence and either CREDIT|DEBIT

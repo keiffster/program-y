@@ -31,14 +31,14 @@ class SetLoader(FileFinder):
         return sorted_set
 
     def load_file_contents(self, filename):
-        logging.debug("Loading set [%s]", filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Loading set [%s]", filename)
         the_set = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
                     self.process_line(line, the_set)
         except Exception as excep:
-            logging.error("Failed to load set [%s] - %s", filename, excep)
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to load set [%s] - %s", filename, excep)
         return self.sort_sets(the_set)
 
     def load_from_text(self, text):
@@ -69,7 +69,7 @@ class SetCollection(object):
         set_name = name.upper()
         if set_name in self._sets:
             raise Exception("Set %s already exists" % set_name)
-        logging.debug("Adding set [%s[ to set group", set_name)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Adding set [%s[ to set group", set_name)
         self._sets[set_name] = the_set
 
     def set(self, name):

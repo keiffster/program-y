@@ -45,4 +45,4 @@ class BrainOverridesConfiguration(BaseConfigurationData):
             self._allow_learn_aiml = file_config.get_option(overrides, "allow_learn_aiml", missing_value=None)
             self._allow_learnf_aiml = file_config.get_option(overrides, "allow_learnf_aiml", missing_value=None)
         else:
-            logging.warning("'overrides' section missing from brain config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'overrides' section missing from brain config, using to defaults")

@@ -24,7 +24,7 @@ class NewsArticle(object):
         if name in data:
             return data[name]
         else:
-            logging.debug("Attribute [%s] missing from New API Article data"%name)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Attribute [%s] missing from New API Article data"%name)
             return def_value
 
     def parse_json(self, data):
@@ -214,7 +214,7 @@ class NewsAPI(object):
 
     @staticmethod
     def _get_news_feed_articles(url, max_articles, sort, reverse):
-        logging.debug("News API URL: [%s]"%url)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("News API URL: [%s]"%url)
         response = NewsAPI._news_api_api.get_news(url)
         articles = []
         if response.status_code == 200:
@@ -226,24 +226,24 @@ class NewsAPI(object):
                         article = NewsArticle()
                         article.parse_json(article_data)
                         articles.append(article)
-                        logging.debug(article.description)
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(article.description)
 
                     if sort is True:
-                        logging.debug("Sorting articles,, reverse=%s" % str(reverse))
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Sorting articles,, reverse=%s" % str(reverse))
                         articles.sort(key=lambda article: article.published_at, reverse=reverse)
 
                     if max_articles != 0:
-                        logging.debug("Returning max_articles %d articles" % max_articles)
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Returning max_articles %d articles" % max_articles)
                         articles = articles[:max_articles]
                     else:
-                        logging.debug("Returning all articles")
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Returning all articles")
                 else:
-                    logging.error("NewAPI payload contains no articles attribute")
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewAPI payload contains no articles attribute")
             else:
-                logging.error("NewsAPI request none JSON object")
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewsAPI request none JSON object")
 
         else:
-            logging.error("NewsAPI request returned error code %d"%response.status_code)
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewsAPI request returned error code %d"%response.status_code)
 
         return articles
 
@@ -253,7 +253,7 @@ class NewsAPI(object):
             function = self.function_mapping[source]
             return function(self.api_key, max_articles, sort, reverse)
         else:
-            logging.error("No source available for %s"%source)
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No source available for %s"%source)
             return []
 
     @staticmethod

@@ -55,12 +55,12 @@ class TemplateAuthoriseNode(TemplateNode):
                     else:
                         srai_text = bot.brain.authorisation.get_default_denied_srai()
                     resolved = bot.ask_question(clientid, srai_text, srai=True)
-                    logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
                     return resolved
 
             # Resolve afterwards, as pointless resolving before checking for authorisation
             resolved = self.resolve_children_to_string(bot, clientid)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:

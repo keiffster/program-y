@@ -10,11 +10,11 @@ class RDFLoader(FileFinder):
         self._collection = collection
 
     def load_file_contents(self, filename):
-        logging.debug("Loading rdf [%s]", filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Loading rdf [%s]", filename)
         try:
             self._collection.load_from_filename(filename)
         except Exception as excep:
-            logging.error("Failed to load rdf [%s] - %s", filename, excep)
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to load rdf [%s] - %s", filename, excep)
 
 class RDFCollection(BaseCollection):
 
@@ -97,7 +97,7 @@ class RDFCollection(BaseCollection):
             self._subjects[subject][predicate][object] = entity
             self._entities.append(entity)
         else:
-            logging.warning("Duplicate RDF Entity [%s][%s][%s]"%(subject, predicate, object))
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Duplicate RDF Entity [%s][%s][%s]"%(subject, predicate, object))
 
     def delete_entity(self, subject, predicate=None, object=None):
 

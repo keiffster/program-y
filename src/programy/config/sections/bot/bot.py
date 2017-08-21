@@ -33,6 +33,7 @@ class BotConfiguration(BaseConfigurationData):
     DEFAULT_MAX_QUESTION_TIMEOUT    = -1
     DEFAULT_MAX_SEARCH_DEPTH        = 100
     DEFAULT_MAX_SEARCH_TIMEOUT      = -1
+    DEFAULT_TAB_PARSE_OUTPUT        = True
 
     def __init__(self):
         self._license_keys          = None
@@ -47,7 +48,7 @@ class BotConfiguration(BaseConfigurationData):
         self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
         self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
         self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
-        self._tab_parse_output      = False
+        self._tab_parse_output      = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
@@ -65,11 +66,12 @@ class BotConfiguration(BaseConfigurationData):
             self._max_question_timeout = config_file.get_int_option(bot, "max_question_timeout", BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT)
             self._max_search_depth = config_file.get_int_option(bot, "max_search_depth", BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH)
             self._max_search_timeout = config_file.get_int_option(bot, "max_search_timeout", BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT)
+            self._tab_parse_output = config_file.get_bool_option(bot, "tab_parse_output", BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT)
 
             self._spelling.load_config_section(config_file, bot, bot_root)
 
         else:
-            logging.warning("Config section [%s] missing, using default values", self.section_name)
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Config section [%s] missing, using default values", self.section_name)
             self._license_keys          = None
             self._bot_root              = BotConfiguration.DEFAULT_ROOT
             self._prompt                = BotConfiguration.DEFAULT_PROMPT
@@ -82,6 +84,7 @@ class BotConfiguration(BaseConfigurationData):
             self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
             self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
             self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
+            self._tab_parse_output      = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
 
     @property
     def bot_root(self):

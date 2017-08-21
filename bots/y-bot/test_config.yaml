@@ -42,7 +42,6 @@ brain:
         person: $BOT_ROOT/config/person.txt
         person2: $BOT_ROOT/config/person2.txt
         properties: $BOT_ROOT/config/properties.txt
-        triples: $BOT_ROOT/config/triples.txt
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/test_postprocessors.conf
 

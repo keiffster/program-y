@@ -209,17 +209,17 @@ class GoogleMaps(object):
     ##################
 
     def _get_response_as_json(self, url):
-        logging.debug ("GoogleMaps Request = [%s]"%url)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("GoogleMaps Request = [%s]"%url)
         response = urllib.request.urlopen(url)
         content = response.read()
         decoded = content.decode('utf8')
-        logging.debug("GoogleMaps Response = [%s]"%decoded)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("GoogleMaps Response = [%s]"%decoded)
         return json.loads(decoded)
 
     ##################
 
     def set_response_file_for_get_latlong_for_location(self, filename):
-        logging.debug ("GoogleMaps: setting response file for get_latlong_for_location = [%s]"%filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("GoogleMaps: setting response file for get_latlong_for_location = [%s]"%filename)
         self.response_file_for_get_latlong_for_location = filename
 
     def _get_latlong_for_location_response(self, location):
@@ -229,10 +229,10 @@ class GoogleMaps(object):
 
     def get_latlong_for_location(self, location):
         if self.response_file_for_get_latlong_for_location is None:
-            logging.debug("get_latlong_for_location - calling service")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_latlong_for_location - calling service")
             response = self._get_latlong_for_location_response(location)
         else:
-            logging.debug("get_latlong_for_location - using mock file")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_latlong_for_location - using mock file")
             with open (self.response_file_for_get_latlong_for_location, "r+") as response_file:
                 response = json.load(response_file)
 
@@ -248,7 +248,7 @@ class GoogleMaps(object):
     ##################
 
     def set_response_file_for_get_distance_between_addresses(self, filename):
-        logging.debug ("GoogleMaps: setting response file for get_distance_between_addresses = [%s]"%filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("GoogleMaps: setting response file for get_distance_between_addresses = [%s]"%filename)
         self.response_file_for_get_distance_between_addresses = filename
 
     def _get_distance_between_addresses(self, origin, destination, country, mode, units):
@@ -259,20 +259,20 @@ class GoogleMaps(object):
 
     def get_distance_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
         if self.response_file_for_get_distance_between_addresses is None:
-            logging.debug("get_distance_between_addresses - calling service")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_distance_between_addresses - calling service")
             response = self._get_distance_between_addresses(origin, destination, country, mode, units)
         else:
-            logging.debug("get_distance_between_addresses - using mock file")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_distance_between_addresses - using mock file")
             with open(self.response_file_for_get_distance_between_addresses, "r+") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':
-            logging.debug("get_distance_between_addresses - OK")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_distance_between_addresses - OK")
             distance = GoogleDistance(origin, destination, country, mode, units)
             distance.parse_json(response['rows'])
             return distance
         else:
-            logging.error("get_distance_between_addresses - [%s]"%response['status'])
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("get_distance_between_addresses - [%s]"%response['status'])
             return None
 
     def store_get_distance_between_addresses_as_file(self, origin, destination, filename, country="UK", mode="driving", units="imperial"):
@@ -283,7 +283,7 @@ class GoogleMaps(object):
     ##################
 
     def set_response_file_for_get_directions_between_addresses(self, filename):
-        logging.debug ("GoogleMaps; setting response file for get_directions_between_addresses = [%s]"%filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("GoogleMaps; setting response file for get_directions_between_addresses = [%s]"%filename)
         self.response_file_for_get_directions_between_addresses = filename
 
     def _get_directions_between_addresses_response(self, origin, destination, country, mode, units):
@@ -294,20 +294,20 @@ class GoogleMaps(object):
 
     def get_directions_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
         if self.response_file_for_get_directions_between_addresses is None:
-            logging.debug("get_directions_between_addresses - calling live service")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_directions_between_addresses - calling live service")
             response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
         else:
-            logging.debug("get_directions_between_addresses - using mock file")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_directions_between_addresses - using mock file")
             with open(self.response_file_for_get_directions_between_addresses, "r+") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':
-            logging.debug("get_directions_between_addresses - OK")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("get_directions_between_addresses - OK")
             directions = GoogleDirections(origin, destination, country, mode, units)
             directions.parse_json(response['routes'])
             return directions
         else:
-            logging.error("get_directions_between_addresses - %s"%response['status'])
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("get_directions_between_addresses - %s"%response['status'])
             return None
 
     def store_get_directions_between_addresses_as_file(self, origin, destination, filename, country="UK", mode="driving", units="imperial"):

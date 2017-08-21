@@ -27,7 +27,7 @@ class TemplateIdNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
-            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
             return clientid
         except Exception as excep:
             logging.exception(excep)

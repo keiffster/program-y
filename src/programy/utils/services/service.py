@@ -49,7 +49,7 @@ class ServiceFactory(object):
         for service_name in services_config.services():
             name = service_name.upper()
             service_config = services_config.service(service_name)
-            logging.debug("Preloading service [%s] -> [%s]", name, service_config.classname)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Preloading service [%s] -> [%s]", name, service_config.classname)
             meta_class = loader.instantiate_class(service_config.classname)
             new_class = meta_class(service_config)
             ServiceFactory.services[name] = new_class

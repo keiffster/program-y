@@ -59,7 +59,7 @@ class GenericRESTService(Service):
                 raise Exception("Unsupported REST method [%s]", self.method)
 
             if response.status_code != 200:
-                logging.error("[%s] return status code [%d]", self.host, response.status_code)
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("[%s] return status code [%d]", self.host, response.status_code)
             else:
                 return response.text
 

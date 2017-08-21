@@ -38,15 +38,15 @@ class TemplateSRAIXNode(TemplateNode):
     def resolve(self, bot, clientid):
         try:
             resolved = self.resolve_children_to_string(bot, clientid)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
             if self._service is not None:
                 bot_service = ServiceFactory.get_service(self._service)
                 response = bot_service.ask_question(bot, clientid, resolved)
-                logging.debug("SRAIX service [%s] return [%s]", self._service, response)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SRAIX service [%s] return [%s]", self._service, response)
                 return response
             else:
-                logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
                 return ""
 
         except Exception as excep:
@@ -76,13 +76,13 @@ class TemplateSRAIXNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         if 'host' in expression.attrib:
-            logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
         if 'botid' in expression.attrib:
-            logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
         if 'hint' in expression.attrib:
-            logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
         if 'apikey' in expression.attrib:
-            logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
 
         if 'service' in expression.attrib:
             self.service = expression.attrib['service']
@@ -94,13 +94,13 @@ class TemplateSRAIXNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'host':
-                logging.warning("'host' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'host' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'botid':
-                logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'hint':
-                logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'apikey':
-                logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'service':
                 self.service = self.get_text_from_element(child)
             else:

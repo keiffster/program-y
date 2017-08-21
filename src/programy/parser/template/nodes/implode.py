@@ -30,7 +30,7 @@ class TemplateImplodeNode(TemplateNode):
         try:
             result = self.resolve_children_to_string(bot, clientid)
             resolved = TextUtils.strip_all_whitespace(result)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)

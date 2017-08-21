@@ -7,7 +7,7 @@ class LicenseKeys(object):
 
     def add_key(self, name, value):
         if name in self._keys:
-            logging.warning ("License key [%s], already exists"%name)
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning ("License key [%s], already exists"%name)
         self._keys[name] = value
 
     def has_key(self, name):
@@ -26,12 +26,12 @@ class LicenseKeys(object):
 
     def load_license_key_file(self, license_key_filename):
         try:
-            logging.info("Loading license key file: [%s]"%license_key_filename)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading license key file: [%s]"%license_key_filename)
             with open(license_key_filename, "r+") as license_file:
                 for line in license_file:
                     self._process_license_key_line(line)
         except:
-            logging.error("Invalid license key file [%s]"%license_key_filename)
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid license key file [%s]"%license_key_filename)
 
     def _process_license_key_line(self, line):
         line = line.strip()
@@ -43,4 +43,4 @@ class LicenseKeys(object):
                     key = splits[1].strip()
                     self._keys[key_name] = key
                 else:
-                    logging.warning ("Invalid license key [%s]"%line)
+                    if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning ("Invalid license key [%s]"%line)

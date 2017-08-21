@@ -58,4 +58,4 @@ class BotSpellingConfiguration(BaseConfigurationData):
             self._check_before = file_config.get_bool_option(spelling, "check_before", missing_value=False)
             self._check_and_retry = file_config.get_option(spelling, "check_and_retry", missing_value=False)
         else:
-            logging.warning("'spelling' section missing from bot config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'spelling' section missing from bot config, using to defaults")

@@ -60,6 +60,6 @@ class BrainFileConfiguration(BaseConfigurationData):
                 if file is not None:
                     self._file = self.sub_bot_root(file, bot_root)
         else:
-            logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
 
 

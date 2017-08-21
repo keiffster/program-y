@@ -53,7 +53,7 @@ class TemplateMapNode(TemplateNode):
         if value is None:
             value = bot.brain.properties.property("default-map")
             if value is None:
-                logging.error("No value for default-map defined, empty string returned")
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value for default-map defined, empty string returned")
                 value = ""
         return value
 
@@ -67,17 +67,17 @@ class TemplateMapNode(TemplateNode):
                 value = map.map(var)
             else:
                 if bot.brain.maps.contains(name) is False:
-                    logging.error("No map defined for [%s], using default-map as value" % var)
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No map defined for [%s], using default-map as value" % var)
                     value = self.get_default_value(bot)
                 else:
                     the_map = bot.brain.maps.map(name)
                     if var in the_map:
                         value = the_map[var]
                     else:
-                        logging.error("No value defined for [%s], using default-map as value" % var)
+                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value defined for [%s], using default-map as value" % var)
                         value = self.get_default_value(bot)
 
-            logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
             return value
         except Exception as excep:
             logging.exception(excep)

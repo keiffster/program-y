@@ -135,7 +135,7 @@ class Brain(object):
         return self._oob
 
     def load_binary(self, brain_configuration):
-        logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
         try:
             start = datetime.datetime.now()
             gc.disable()
@@ -145,7 +145,7 @@ class Brain(object):
             f.close()
             stop = datetime.datetime.now()
             diff = stop - start
-            logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
             load_aiml = False
         except Exception as e:
             logging.exception(e)
@@ -155,18 +155,18 @@ class Brain(object):
                 raise e
 
     def load_aiml(self, brain_configuration):
-        logging.info("Loading aiml source brain")
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading aiml source brain")
         self._aiml_parser.load_aiml(brain_configuration)
 
     def save_binary(self, brain_configuration):
-        logging.info("Saving binary brain to [%s]" % brain_configuration.binaries.binary_filename)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Saving binary brain to [%s]" % brain_configuration.binaries.binary_filename)
         start = datetime.datetime.now()
         f = open(brain_configuration.binaries.binary_filename, "wb")
         pickle.dump(self._aiml_parser, f)
         f.close()
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
 
     def load(self, brain_configuration: BrainConfiguration):
 
@@ -178,91 +178,91 @@ class Brain(object):
         if brain_configuration.binaries.save_binary is True:
             self.save_binary(brain_configuration)
 
-        logging.info("Loading collections")
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading collections")
         self.load_collections(brain_configuration)
 
-        logging.info("Loading services")
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading services")
         self.load_services(brain_configuration)
 
-        logging.info("Loading security services")
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading security services")
         self.load_security_services(brain_configuration)
 
-        logging.info("Loading oob processors")
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading oob processors")
         self.load_oob_processors(brain_configuration)
 
     def _load_denormals(self, brain_configuration):
         if brain_configuration.files.denormal is not None:
             total = self._denormal_collection.load_from_filename(brain_configuration.files.denormal)
-            logging.info("Loaded a total of %d denormalisations", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d denormalisations", total)
         else:
-            logging.warning("No configuration setting for denormal")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for denormal")
 
     def _load_normals(self, brain_configuration):
         if brain_configuration.files.normal is not None:
             total = self._normal_collection.load_from_filename(brain_configuration.files.normal)
-            logging.info("Loaded a total of %d normalisations", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d normalisations", total)
         else:
-            logging.warning("No configuration setting for normal")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for normal")
 
     def _load_genders(self, brain_configuration):
         if brain_configuration.files.gender is not None:
             total = self._gender_collection.load_from_filename(brain_configuration.files.gender)
-            logging.info("Loaded a total of %d genderisations", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d genderisations", total)
         else:
-            logging.warning("No configuration setting for gender")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for gender")
 
     def _load_persons(self, brain_configuration):
         if brain_configuration.files.person is not None:
             total = self._person_collection.load_from_filename(brain_configuration.files.person)
-            logging.info("Loaded a total of %d persons", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d persons", total)
         else:
-            logging.warning("No configuration setting for person")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for person")
 
     def _load_person2s(self, brain_configuration):
         if brain_configuration.files.person2 is not None:
             total = self._person2_collection.load_from_filename(brain_configuration.files.person2)
-            logging.info("Loaded a total of %d person2s", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d person2s", total)
         else:
-            logging.warning("No configuration setting for person2")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for person2")
 
     def _load_properties(self, brain_configuration):
         if brain_configuration.files.properties is not None:
             total = self._properties_collection.load_from_filename(brain_configuration.files.properties)
-            logging.info("Loaded a total of %d properties", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d properties", total)
         else:
-            logging.warning("No configuration setting for properties")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for properties")
 
     def _load_rdf(self, brain_configuration):
         if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files is not None:
             total = self._rdf_collection.load(brain_configuration.files.rdf_files)
-            logging.info("Loaded a total of %d rdf files", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d rdf files", total)
         elif brain_configuration.files.triples is not None:
             total = self._rdf_collection.load_from_filename(brain_configuration.files.triples)
-            logging.info("Loaded a total of %d triples", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d triples", total)
         else:
-            logging.warning("No configuration setting for triples")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for triples")
 
     def _load_sets(self, brain_configuration):
         total = self._sets_collection.load(brain_configuration.files.set_files)
-        logging.info("Loaded a total of %d sets files", total)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d sets files", total)
 
     def _load_maps(self, brain_configuration):
         total = self._maps_collection.load(brain_configuration.files.map_files)
-        logging.info("Loaded a total of %d maps files", total)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d maps files", total)
 
     def _load_preprocessors(self, brain_configuration):
         if brain_configuration.files.preprocessors is not None:
             total = self._preprocessors.load(brain_configuration.files.preprocessors)
-            logging.info("Loaded a total of %d pre processors", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d pre processors", total)
         else:
-            logging.warning("No configuration setting for pre processors")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for pre processors")
 
     def _load_postprocessors(self, brain_configuration):
         if brain_configuration.files.postprocessors is not None:
             total = self._postprocessors.load(brain_configuration.files.postprocessors)
-            logging.info("Loaded a total of %d post processors", total)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d post processors", total)
         else:
-            logging.warning("No configuration setting for post processors")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for post processors")
 
     def load_collections(self, brain_configuration):
         self._load_denormals(brain_configuration)
@@ -291,7 +291,7 @@ class Brain(object):
                     except Exception as excep:
                         logging.exception(excep)
             else:
-                logging.debug("No authentication configuration defined")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("No authentication configuration defined")
 
             if brain_configuration.security.authorisation is not None:
                 if brain_configuration.security.authorisation.classname is not None:
@@ -302,10 +302,10 @@ class Brain(object):
                     except Exception as excep:
                         logging.exception(excep)
             else:
-                logging.debug("No authorisation configuration defined")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("No authorisation configuration defined")
 
         else:
-            logging.debug("No security configuration defined, running open...")
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("No security configuration defined, running open...")
 
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)
@@ -324,17 +324,17 @@ class Brain(object):
 
         if self.authentication is not None:
             if self.authentication.authenticate(clientid) is False:
-                logging.error("[%s] failed authentication!")
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("[%s] failed authentication!")
                 return self.authentication.configuration.denied_srai
 
         conversation = bot.get_conversation(clientid)
 
         topic_pattern = conversation.property("topic")
         if topic_pattern is None:
-            logging.info("No Topic pattern default to [*]")
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No Topic pattern default to [*]")
             topic_pattern = "*"
         else:
-            logging.info("Topic pattern = [%s]", topic_pattern)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Topic pattern = [%s]", topic_pattern)
 
         try:
             that_question = conversation.previous_nth_question(1)
@@ -344,13 +344,13 @@ class Brain(object):
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
                 that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
-                logging.info("That pattern = [%s]", that_pattern)
+                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern = [%s]", that_pattern)
             else:
-                logging.info("That pattern, no response, default to [*]")
+                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern, no response, default to [*]")
                 that_pattern = "*"
 
         except Exception:
-            logging.info("No That pattern default to [*]")
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
         match_context = self._aiml_parser.match_sentence(bot, clientid,
@@ -360,7 +360,7 @@ class Brain(object):
 
         if match_context is not None:
             template_node = match_context.template_node()
-            logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
             response = template_node.template.resolve(bot, clientid)
 
             if "<oob>" in response:
@@ -377,7 +377,7 @@ class Brain(object):
         if brain_configuration.oob is not None:
             if brain_configuration.oob.default() is not None:
                 try:
-                    logging.info("Loading default oob")
+                    if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading default oob")
                     classobject = ClassLoader.instantiate_class(brain_configuration.oob.default().classname)
                     self._default_oob = classobject()
                 except Exception as excep:
@@ -385,7 +385,7 @@ class Brain(object):
 
             for oob_name in  brain_configuration.oob.oobs():
                 try:
-                    logging.info("Loading oob: %s"%oob_name)
+                    if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading oob: %s"%oob_name)
                     classobject = ClassLoader.instantiate_class(brain_configuration.oob.oob(oob_name).classname)
                     self._oob[oob_name] = classobject()
                 except Exception as excep:

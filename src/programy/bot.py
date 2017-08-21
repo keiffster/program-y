@@ -44,20 +44,20 @@ class Bot(object):
         if self._configuration is not None:
             self._load_license_keys(self._configuration)
         else:
-            logging.warning("No configuration defined when loading license keys")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration defined when loading license keys")
 
     def initiate_spellchecker(self):
         self._spell_checker = None
         if self._configuration is not None:
             if self._configuration.spelling.classname is not None:
                 try:
-                    logging.info("Loading spelling checker from class [%s]"%self._configuration.spelling.classname)
+                    if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading spelling checker from class [%s]"%self._configuration.spelling.classname)
                     spell_class = ClassLoader.instantiate_class(self._configuration.spelling.classname)
                     self._spell_checker = spell_class(self._configuration.spelling)
                 except Exception as e:
                     logging.exception(e)
             else:
-                logging.warning("No configuration setting for spelling checker!")
+                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for spelling checker!")
 
     @property
     def spell_checker(self):
@@ -79,7 +79,7 @@ class Bot(object):
         if bot_configuration.license_keys is not None:
             self._license_keys.load_license_key_file(bot_configuration.license_keys)
         else:
-            logging.warning("No configuration setting for license_keys")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No configuration setting for license_keys")
 
     @property
     def prompt(self):
@@ -134,10 +134,10 @@ class Bot(object):
 
     def get_conversation(self, clientid: str):
         if clientid in self._conversations:
-            logging.info("Retrieving conversation for client %s", clientid)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Retrieving conversation for client %s", clientid)
             return self._conversations[clientid]
         else:
-            logging.info("Creating new conversation for client %s", clientid)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Creating new conversation for client %s", clientid)
             conversation = Conversation(clientid, self)
             self._conversations[clientid] = conversation
             return conversation
@@ -160,14 +160,14 @@ class Bot(object):
         if self._configuration.spelling.check_before is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
-            logging.debug ("Spell Checker corrected [%s] to [%s]"%(text, corrected))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Spell Checker corrected [%s] to [%s]"%(text, corrected))
             each_sentence.replace_words(corrected)
 
     def check_spelling_and_retry(self, clientid, each_sentence):
         if self._configuration.spelling.check_and_retry is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
-            logging.debug("Spell Checker corrected [%s] to [%s]" % (text, corrected))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Spell Checker corrected [%s] to [%s]" % (text, corrected))
             each_sentence.replace_words(corrected)
             response = self.brain.ask_question(self, clientid, each_sentence)
             return response
@@ -175,11 +175,11 @@ class Bot(object):
 
     def ask_question(self, clientid: str, text: str, srai=False):
 
-        logging.debug("Question (%s): %s", clientid, text)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Question (%s): %s", clientid, text)
 
         if srai is False:
             pre_processed = self.brain.pre_process_question(self, clientid, text)
-            logging.debug("Pre Processed (%s): %s", clientid, pre_processed)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Pre Processed (%s): %s", clientid, pre_processed)
         else:
             pre_processed = text
 
@@ -215,7 +215,7 @@ class Bot(object):
                 response = self.check_spelling_and_retry(clientid, each_sentence)
 
             if response is not None:
-                logging.debug("Raw Response (%s): %s", clientid, response)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Raw Response (%s): %s", clientid, response)
                 each_sentence.response = response
 
                 if srai is False:
@@ -226,7 +226,7 @@ class Bot(object):
                     answer = response
 
                 answers.append(answer)
-                logging.debug("Processed Response (%s): %s", clientid, answer)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)

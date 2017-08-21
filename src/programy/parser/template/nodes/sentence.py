@@ -31,7 +31,7 @@ class TemplateSentenceNode(TemplateNode):
             first = result[:1]
             rest = result[1:]
             resolved = first.upper() + rest.lower()
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)

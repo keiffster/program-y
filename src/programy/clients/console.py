@@ -33,7 +33,7 @@ class ConsoleBotClient(BotClient):
 
     def run(self):
         if self.arguments.noloop is False:
-            logging.info("Entering conversation loop...")
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
             running = True
             self.display_response(self.bot.get_version_string)
             self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
@@ -52,7 +52,7 @@ class ConsoleBotClient(BotClient):
                     self.display_response(self.bot.exit_response)
                 except Exception as excep:
                     logging.exception(excep)
-                    logging.error("Oops something bad happened !")
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
                     self.display_response(self.bot.default_response)
                     self.log_unknown_response(question)
 

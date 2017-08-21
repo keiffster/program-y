@@ -20,9 +20,9 @@ class URLOutOfBandProcessor(OutOfBandProcessor):
             self._url = oob.text
             return True
         else:
-            logging.error("Unvalid url oob command - missing url!")
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unvalid url oob command - missing url!")
             return False
 
     def execute_oob_command(self, bot, clientid):
-        logging.info("URLOutOfBandProcessor: Loading=%s", self._url)
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("URLOutOfBandProcessor: Loading=%s", self._url)
         return "URL"

@@ -63,4 +63,4 @@ class BrainServiceConfiguration(BaseConfigurationData):
             self._url = file_config.get_option(service, "url", missing_value=None)
             self.load_additional_key_values(file_config, service)
         else:
-            logging.warning("'services' section missing from brain config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'services' section missing from brain config, using to defaults")

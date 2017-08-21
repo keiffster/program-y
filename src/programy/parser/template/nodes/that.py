@@ -37,7 +37,7 @@ class TemplateThatNode(TemplateDoubleIndexedNode):
 
             resolved = question.combine_answers()
 
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:

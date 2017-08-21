@@ -45,6 +45,6 @@ class PluralMap(TemplateMap):
             else:
                 plural_value = value + "S"
 
-        logging.debug("PluralMap converted %s to %s" % (value, plural_value))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("PluralMap converted %s to %s" % (value, plural_value))
         return plural_value
 

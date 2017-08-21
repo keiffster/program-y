@@ -54,5 +54,5 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
                 self._duplicates = self.sub_bot_root(duplicates, bot_root)
 
         else:
-            logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
 

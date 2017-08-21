@@ -132,7 +132,7 @@ class TemplateLearnNode(TemplateNode):
 
         bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
 
-        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
                       ET.tostring(new_topic, 'utf-8').decode('utf-8'),
                       ET.tostring(new_that, 'utf-8').decode('utf-8'))

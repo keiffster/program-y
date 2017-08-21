@@ -32,7 +32,7 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
 
             resolved = ""
             bot.brain.rdf.delete_entity(subject, predicate, object)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)

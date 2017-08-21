@@ -62,4 +62,4 @@ class BrainBinariesConfiguration(BaseConfigurationData):
             if dump_to_file is not None:
                 self._dump_to_file = self.sub_bot_root(dump_to_file, bot_root)
         else:
-            logging.warning("'binaries' section missing from bot config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'binaries' section missing from bot config, using to defaults")

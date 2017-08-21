@@ -25,10 +25,10 @@ class SurveyExtension(object):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
-        logging.debug ("Survey Storage - Storing data [%s]"%(data))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Survey Storage - Storing data [%s]"%(data))
 
         # Data is bar delimited, so you could write to a file, add to a database, or send to another REST service
         for answer in data.split("|"):
-            logging.debug("Answer = %s"%(answer.strip()))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Answer = %s"%(answer.strip()))
 
         return "OK"

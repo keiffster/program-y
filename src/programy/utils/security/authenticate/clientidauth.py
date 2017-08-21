@@ -48,5 +48,5 @@ class ClientIdAuthenticationService(Authenticator):
 
                 return False
         except Exception as excep:
-            logging.error(str(excep))
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(str(excep))
             return False

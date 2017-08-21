@@ -42,7 +42,7 @@ class TemplateBotNode(TemplateNode):
                 if value is None:
                     value = ""
 
-            logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
             return value
         except Exception as excep:
             logging.exception(excep)

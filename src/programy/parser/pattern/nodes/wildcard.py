@@ -46,12 +46,12 @@ class PatternWildCardNode(PatternNode):
 
     def invalid_topic_or_that(self, tabs, word, context, matches_add):
         if word == PatternTopicNode.TOPIC:
-            logging.debug("%sFound a topic at the wrong place...." % tabs)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sFound a topic at the wrong place...." % tabs)
             context.pop_matches(matches_add)
             return True
 
         if word == PatternThatNode.THAT:
-            logging.debug("%sFound a that at the wrong place...." % tabs)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sFound a that at the wrong place...." % tabs)
             context.pop_matches(matches_add)
             return True
 
@@ -59,25 +59,25 @@ class PatternWildCardNode(PatternNode):
 
     def check_child_is_wildcard(self, tabs, bot, clientid, context, words, word_no, type, depth):
         if self._0ormore_hash is not None:
-            logging.debug("%sWildcard # is next node, moving on!"%(tabs))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard # is next node, moving on!"%(tabs))
             match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
-            logging.debug("%sWildcard _ is next node, moving on!"%(tabs))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard _ is next node, moving on!"%(tabs))
             match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
-            logging.debug("%sWildcard ^ is next node, moving on!"%(tabs))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard ^ is next node, moving on!"%(tabs))
             match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
-            logging.debug("%sWildcard * is next node, moving on!"%(tabs))
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard * is next node, moving on!"%(tabs))
             match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type, depth+1)
             if match is not None:
                 return match

@@ -33,4 +33,4 @@ class BrainOOBConfiguration(BaseConfigurationData):
         if service is not None:
             self._classname = file_config.get_option(service, "classname", missing_value=None)
         else:
-            logging.warning("'oob' section missing from brain config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'oob' section missing from brain config, using to defaults")
