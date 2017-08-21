@@ -13,7 +13,7 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
 
     def get_os_specific_filename(self):
         if os.name == 'posix':
-            return '\tmp\leanf.aiml'
+            return '/tmp/learnf.aiml'
         elif os.name == 'nt':
             return 'C:\Windows\Temp\leanf.aiml'
         else:
