@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ NATHAN
+<aiml>
+
+<category>
+
+     <pattern>Hello</pattern>
+	 
+	 <template>
+	 Hello Human.
+	 </template>
+	 
+</category>
+
+<category>
+
+     <pattern>Repeat after me *</pattern>
+	 
+	 <template>
+	 <star/>
+	 </template>
+	 
+</category>
+
+<category>
+
+     <pattern>* name *</pattern>
+	 
+	 <template>
+	 Your name is <star index="2"/>
+	 </template>
+	 
+</category>
+
+<category>
+
+     <pattern>Hello *</pattern>
+	 
+	 <template>
+	 Hello My Friend.
+	 </template>
+	 
+</category>
+ 
+ <category>
+
+     <pattern>Hi</pattern>
+	 
+	 <template>
+	 <srai>Hello</srai>
+	
+	 </template>
+	 
+</category>
+
+<category>
+
+     <pattern>*</pattern>
+	 
+	 <template>
+	 I do not have a anaswer for that.
+	 </template>
+	 
+</category>
+
+	
+</aiml>
