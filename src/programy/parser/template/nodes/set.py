@@ -55,13 +55,6 @@ class TemplateSetNode(TemplateNode):
             name = self.name.resolve(bot, clientid)
             value = self.resolve_children(bot, clientid)
 
-            """
-            #TODO, if local then set per the conversation
-            If globals
-                If exists in predicates then don't replace
-                If not in predicates then set as global to the conversation
-            """
-
             if self.local is True:
                 logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
                 bot.get_conversation(clientid).current_question().set_property(name, value)

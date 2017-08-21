@@ -51,8 +51,10 @@ class TemplateMapNode(TemplateNode):
     def get_default_value(self, bot):
         value = bot.brain.properties.property("default-map")
         if value is None:
-            logging.error("No value for default-map defined, empty string returned")
-            value = ""
+            value = bot.brain.properties.property("default-map")
+            if value is None:
+                logging.error("No value for default-map defined, empty string returned")
+                value = ""
         return value
 
     def resolve(self, bot, clientid):

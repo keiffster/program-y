@@ -41,7 +41,7 @@ class SraiAIMLTests(unittest.TestCase):
     def test_predicate_set_srai(self):
         response = SraiAIMLTests.test_client.bot.ask_question("test", "TEST PREDICATE SET")
         self.assertIsNotNone(response)
-        self.assertEqual('Global1 set to Value1 and Local1 set to  and Local2 set to Value3', response )
+        self.assertEqual('Global1 set to Value1 and Local1 set to unknown and Local2 set to Value3', response )
 
     def test_srai_with_star(self):
         response = SraiAIMLTests.test_client.bot.ask_question("test", "TEST MULTI SRAI KEITH STERLING")
