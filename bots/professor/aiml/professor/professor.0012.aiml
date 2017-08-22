@@ -74,7 +74,7 @@
 <category><pattern>INCORPORATIVE</pattern><template>incorporative?  Briefly, incorporative means growing by taking over and incorporating adjacent territories.</template></category>
 <category><pattern>INCORPOREAL</pattern><template>incorporeal?  Briefly, incorporeal means without material form or substance.</template></category>
 <category><pattern>INCORPOREALITY</pattern><template>incorporeality?  Briefly, incorporeality means the quality of not being physical; not consisting of matter.</template></category>
-<category><pattern>INCORRECT</pattern><template>incorrect?  Briefly, incorrect means not correct; not in conformity with fact or truth.</template></category>
+<!-- <category><pattern>INCORRECT</pattern><template>incorrect?  Briefly, incorrect means not correct; not in conformity with fact or truth.</template></category> -->
 <category><pattern>INCORRECTLY</pattern><template>incorrectly?  Briefly, incorrectly means in an incorrect manner.</template></category>
 <category><pattern>INCORRECTNESS</pattern><template>incorrectness?  Briefly, incorrectness means lack of conformity to social expectations.</template></category>
 <category><pattern>INCORRIGIBLE</pattern><template>incorrigible?  Briefly, incorrigible means impervious to correction by punishment.</template></category>
@@ -155,7 +155,7 @@
 <category><pattern>INDECOROUSLY</pattern><template>indecorously?  Briefly, indecorously means without decorousness.</template></category>
 <category><pattern>INDECOROUSNESS</pattern><template>indecorousness?  Briefly, indecorousness means a lack of decorum.</template></category>
 <category><pattern>INDECORUM</pattern><template>indecorum?  Briefly, indecorum means a lack of decorum.</template></category>
-<category><pattern>INDEED</pattern><template>indeed?  Briefly, indeed means in truth (often tends to intensify).</template></category>
+<!-- <category><pattern>INDEED</pattern><template>indeed?  Briefly, indeed means in truth (often tends to intensify).</template></category> -->
 <category><pattern>INDEFATIGABILITY</pattern><template>indefatigability?  Briefly, indefatigability means tireless determination.</template></category>
 <category><pattern>INDEFATIGABLE</pattern><template>indefatigable?  Briefly, indefatigable means showing sustained enthusiastic action with unflagging vitality.</template></category>
 <category><pattern>INDEFATIGABLENESS</pattern><template>indefatigableness?  Briefly, indefatigableness means tireless determination.</template></category>
@@ -1127,7 +1127,7 @@
 <category><pattern>IN-PERSON</pattern><template>in-person?  Briefly, in-person means an appearance carried out personally in someone else's physical presence.</template></category>
 <category><pattern>INPOUR</pattern><template>inpour?  Briefly, inpour means an inflow.</template></category>
 <category><pattern>INPOURING</pattern><template>inpouring?  Briefly, inpouring means an inflow.</template></category>
-<category><pattern>INPUT</pattern><template>input?  Briefly, input means signal going into an electronic system.</template></category>
+<!-- <category><pattern>INPUT</pattern><template>input?  Briefly, input means signal going into an electronic system.</template></category> -->
 <category><pattern>INPUT DATA</pattern><template>input data?  Briefly, input data means a computer file that contains data that serve as input to a device or program.</template></category>
 <category><pattern>INPUT DEVICE</pattern><template>input device?  Briefly, input device means a device that can be used to insert data into a computer or other computational device.</template></category>
 <category><pattern>INPUT FILE</pattern><template>input file?  Briefly, input file means a computer file that contains data that serve as input to a device or program.</template></category>
@@ -1394,7 +1394,7 @@
 <category><pattern>INSULIN SHOCK THERAPY</pattern><template>insulin shock therapy?  Briefly, insulin shock therapy means the administration of sufficient insulin to induce convulsions and coma.</template></category>
 <category><pattern>INSULIN SHOCK TREATMENT</pattern><template>insulin shock treatment?  Briefly, insulin shock treatment means the administration of sufficient insulin to induce convulsions and coma.</template></category>
 <category><pattern>INSULIN-DEPENDENT DIABETES MELLITUS</pattern><template>insulin-dependent diabetes mellitus?  Briefly, insulin-dependent diabetes mellitus means severe diabetes mellitus with an early onset; characterized by polyuria and excessive thirst and increased appetite and weight loss and episodic ketoacidosis; diet and insulin injections are required to control the disease.</template></category>
-<category><pattern>INSULT</pattern><template>insult?  Briefly, insult means a rude expression intended to offend or hurt.</template></category>
+<!-- <category><pattern>INSULT</pattern><template>insult?  Briefly, insult means a rude expression intended to offend or hurt.</template></category> -->
 <category><pattern>INSULTED</pattern><template>insulted?  Briefly, insulted means treated with insolent and rude language especially openly and intentionally.</template></category>
 <category><pattern>INSULTING</pattern><template>insulting?  Briefly, insulting means expressing offensive reproach.</template></category>
 <category><pattern>INSULTINGLY</pattern><template>insultingly?  Briefly, insultingly means in a disrespectful and insulting manner.</template></category>
@@ -1619,7 +1619,7 @@
 <category><pattern>INTERIORISE</pattern><template>interiorise?  Briefly, interiorise means incorporate within oneself; make subjectiveor personal.</template></category>
 <category><pattern>INTERIORIZE</pattern><template>interiorize?  Briefly, interiorize means incorporate within oneself; make subjectiveor personal.</template></category>
 <category><pattern>INTERJECT</pattern><template>interject?  Briefly, interject means to insert between other elements.</template></category>
-<category><pattern>INTERJECTION</pattern><template>interjection?  Briefly, interjection means an abrupt emphatic exclamation expressing emotion.</template></category>
+<!-- <category><pattern>INTERJECTION</pattern><template>interjection?  Briefly, interjection means an abrupt emphatic exclamation expressing emotion.</template></category> -->
 <category><pattern>INTERLACE</pattern><template>interlace?  Briefly, interlace means spin or twist together so as to form a cord.</template></category>
 <category><pattern>INTERLACED</pattern><template>interlaced?  Briefly, interlaced means having a pattern of fretwork or latticework.</template></category>
 <category><pattern>INTERLACING</pattern><template>interlacing?  Briefly, interlacing means linked or locked closely together as by dovetailing.</template></category>
@@ -2288,7 +2288,7 @@
 <category><pattern>IPSO FACTO</pattern><template>ipso facto?  Briefly, ipso facto means by the fact itself.</template></category>
 <category><pattern>IPSUS</pattern><template>ipsus?  Briefly, ipsus means a battle between the successors of Alexander the Great (301 BC); Lysimachus and Seleucus defeated Antigonus and Demetrius.</template></category>
 <category><pattern>IPV</pattern><template>ipv?  Briefly, ipv means a poliovirus vaccine consisting of inactivated polio virus that is injected subcutaneously to provide immunity to poliomyelitis.</template></category>
-<category><pattern>IQ</pattern><template>iq?  Briefly, iq means a measure of a person's intelligence as indicated by an intelligence test; the ratio of a person's mental age to their chronological age (multiplied by 100).</template></category>
+<!-- <category><pattern>IQ</pattern><template>iq?  Briefly, iq means a measure of a person's intelligence as indicated by an intelligence test; the ratio of a person's mental age to their chronological age (multiplied by 100).</template></category> -->
 <category><pattern>IQ TEST</pattern><template>iq test?  Briefly, iq test means a psychometric test of intelligence.</template></category>
 <category><pattern>IR</pattern><template>ir?  Briefly, ir means a heavy brittle metallic element of the platinum group; used in alloys; occurs in natural alloys with platinum or osmium.</template></category>
 <category><pattern>IRA</pattern><template>ira?  Briefly, ira means a militant organization of Irish nationalists who used terrorism and guerilla warfare in an effort to drive British forces from Northern Ireland and achieve a united independent Ireland.</template></category>
@@ -3589,7 +3589,7 @@
 <category><pattern>JEREZ</pattern><template>jerez?  Briefly, jerez means a city in southwestern Spain that is famous for making sherry.</template></category>
 <category><pattern>JEREZ DE LA FRONTERA</pattern><template>jerez de la frontera?  Briefly, jerez de la frontera means a city in southwestern Spain that is famous for making sherry.</template></category>
 <category><pattern>JERICHO</pattern><template>jericho?  Briefly, jericho means a village in Jordan near the north end of the Dead Sea; in the Old Testament it was the first place taken by the Israelites under Joshua as the entered the Promised Land.</template></category>
-<category><pattern>JERK</pattern><template>jerk?  Briefly, jerk means a dull stupid fatuous person.</template></category>
+<!-- <category><pattern>JERK</pattern><template>jerk?  Briefly, jerk means a dull stupid fatuous person.</template></category> -->
 <category><pattern>JERK OFF</pattern><template>jerk off?  Briefly, jerk off means get sexual gratification through self-stimulation.</template></category>
 <category><pattern>JERKED MEAT</pattern><template>jerked meat?  Briefly, jerked meat means meat cut in strips and dried in the sun.</template></category>
 <category><pattern>JERKER</pattern><template>jerker?  Briefly, jerker means someone who gives a strong sudden pull.</template></category>
@@ -3653,7 +3653,7 @@
 <category><pattern>JESUIT'S BARK</pattern><template>jesuit's bark?  Briefly, jesuit's bark means medicinal bark of cinchona trees; source of quinine and quinidine.</template></category>
 <category><pattern>JESUITS' NUT</pattern><template>jesuits' nut?  Briefly, jesuits' nut means a variety of water chestnut.</template></category>
 <category><pattern>JESUS</pattern><template>jesus?  Briefly, jesus means a teacher and prophet born in Bethlehem and active in Nazareth; his life and sermons form the basis for Christianity (circa 4 BC - AD 29).</template></category>
-<category><pattern>JESUS CHRIST</pattern><template>jesus christ?  Briefly, jesus christ means a teacher and prophet born in Bethlehem and active in Nazareth; his life and sermons form the basis for Christianity (circa 4 BC - AD 29).</template></category>
+<!-- <category><pattern>JESUS CHRIST</pattern><template>jesus christ?  Briefly, jesus christ means a teacher and prophet born in Bethlehem and active in Nazareth; his life and sermons form the basis for Christianity (circa 4 BC - AD 29).</template></category> -->
 <category><pattern>JESUS OF NAZARETH</pattern><template>jesus of nazareth?  Briefly, jesus of nazareth means a teacher and prophet born in Bethlehem and active in Nazareth; his life and sermons form the basis for Christianity (circa 4 BC - AD 29).</template></category>
 <category><pattern>JET</pattern><template>jet?  Briefly, jet means an airplane powered by one or more jet engines.</template></category>
 <category><pattern>JET BLACK</pattern><template>jet black?  Briefly, jet black means a very dark black.</template></category>
@@ -3806,7 +3806,7 @@
 <category><pattern>JOAN OF ARC</pattern><template>joan of arc?  Briefly, joan of arc means French heroine and military leader inspired by religious visions to organize French resistance to the English and to have Charles VII crowned king; she was later tried for heresy and burned at the stake (1412-1431).</template></category>
 <category><pattern>JOAN SUTHERLAND</pattern><template>joan sutherland?  Briefly, joan sutherland means Australian operatic soprano (born in 1926).</template></category>
 <category><pattern>JOAO PESSOA</pattern><template>joao pessoa?  Briefly, joao pessoa means a city in northeastern Brazil near the Atlantic Ocean north of Recife.</template></category>
-<category><pattern>JOB</pattern><template>job?  Briefly, job means the principal activity in your life that you do to earn money.</template></category>
+<!-- <category><pattern>JOB</pattern><template>job?  Briefly, job means the principal activity in your life that you do to earn money.</template></category> -->
 <category><pattern>JOB ACTION</pattern><template>job action?  Briefly, job action means a temporary action by workers to protest management decision or to make demands.</template></category>
 <category><pattern>JOB APPLICATION</pattern><template>job application?  Briefly, job application means an application for a job.</template></category>
 <category><pattern>JOB CANDIDATE</pattern><template>job candidate?  Briefly, job candidate means an applicant who is being considered for a job.</template></category>
@@ -4111,7 +4111,7 @@
 <category><pattern>JOINTURE</pattern><template>jointure?  Briefly, jointure means an estate secured to a prospective wife as a marriage settlement in lieu of a dower.</template></category>
 <category><pattern>JOINTWORM</pattern><template>jointworm?  Briefly, jointworm means larva of chalcid flies injurious to the straw of wheat and other grains.</template></category>
 <category><pattern>JOIST</pattern><template>joist?  Briefly, joist means beam used to support floors or roofs.</template></category>
-<category><pattern>JOKE</pattern><template>joke?  Briefly, joke means a humorous anecdote or remark intended to provoke laughter.</template></category>
+<!-- <category><pattern>JOKE</pattern><template>joke?  Briefly, joke means a humorous anecdote or remark intended to provoke laughter.</template></category> -->
 <category><pattern>JOKER</pattern><template>joker?  Briefly, joker means a person who enjoys telling or playing jokes.</template></category>
 <category><pattern>JOKESTER</pattern><template>jokester?  Briefly, jokester means a person who enjoys telling or playing jokes.</template></category>
 <category><pattern>JOKING</pattern><template>joking?  Briefly, joking means characterized by jokes and good humor.</template></category>
@@ -4666,7 +4666,7 @@
 <category><pattern>JYAISTHA</pattern><template>jyaistha?  Briefly, jyaistha means the third month of the Hindu calendar.</template></category>
 <category><pattern>JYLLAND</pattern><template>jylland?  Briefly, jylland means peninsula in northern Europe that forms the continental part of Denmark and a northern part of Germany.</template></category>
 <category><pattern>JYNX</pattern><template>jynx?  Briefly, jynx means wrynecks.</template></category>
-<category><pattern>K</pattern><template>k?  Briefly, k means the basic unit of thermodynamic temperature adopted under the Systeme International d'Unites.</template></category>
+<!-- <category><pattern>K</pattern><template>k?  Briefly, k means the basic unit of thermodynamic temperature adopted under the Systeme International d'Unites.</template></category> -->
 <category><pattern>K PARTICLE</pattern><template>k particle?  Briefly, k particle means an unstable meson produced as the result of a high-energy particle collision.</template></category>
 <category><pattern>K RATION</pattern><template>k ration?  Briefly, k ration means a small package of emergency rations; issued to United States troops in World War II.</template></category>
 <category><pattern>K.E.</pattern><template>k.e?.  Briefly, k.e. means the mechanical energy that a body has by virtue of its motion.</template></category>
@@ -5686,7 +5686,7 @@
 <category><pattern>KIWI</pattern><template>kiwi?  Briefly, kiwi means climbing vine native to China; cultivated in New Zealand for its fuzzy edible fruit with green meat.</template></category>
 <category><pattern>KIWI FRUIT</pattern><template>kiwi fruit?  Briefly, kiwi fruit means fuzzy brown egg-shaped fruit with slightly tart green flesh.</template></category>
 <category><pattern>KIWI VINE</pattern><template>kiwi vine?  Briefly, kiwi vine means climbing vine native to China; cultivated in New Zealand for its fuzzy edible fruit with green meat.</template></category>
-<category><pattern>KKK</pattern><template>kkk?  Briefly, kkk means a secret society of white Southerners in the United States; was formed in the 19th century to resist the emancipation of slaves; used terrorist tactics to suppress Black people.</template></category>
+<!-- <category><pattern>KKK</pattern><template>kkk?  Briefly, kkk means a secret society of white Southerners in the United States; was formed in the 19th century to resist the emancipation of slaves; used terrorist tactics to suppress Black people.</template></category> -->
 <category><pattern>KLAIPEDA</pattern><template>klaipeda?  Briefly, klaipeda means a city in western Lithuania on the Baltic Sea; formerly an important trading town of the Hanseatic League.</template></category>
 <category><pattern>KLAMATH</pattern><template>klamath?  Briefly, klamath means a river flowing southwest from Oregon through northern California to the Pacific Ocean.</template></category>
 <category><pattern>KLAMATH FALLS</pattern><template>klamath falls?  Briefly, klamath falls means a town in southern Oregon near the California border.</template></category>
@@ -5894,7 +5894,7 @@
 <category><pattern>KNUT</pattern><template>knut?  Briefly, knut means king of Denmark and Norway who forced Edmund II to divide England with him; on the death of Edmund II means Canute became king of all England (994-1035).</template></category>
 <category><pattern>KNUT HAMSUN</pattern><template>knut hamsun?  Briefly, knut hamsun means Norwegian writer of novels (1859-1952).</template></category>
 <category><pattern>KNUT PEDERSEN</pattern><template>knut pedersen?  Briefly, knut pedersen means Norwegian writer of novels (1859-1952).</template></category>
-<category><pattern>KO</pattern><template>ko?  Briefly, ko means a blow that renders the opponent unconscious.</template></category>
+<!-- <category><pattern>KO</pattern><template>ko?  Briefly, ko means a blow that renders the opponent unconscious.</template></category> -->
 <category><pattern>KO PUNCH</pattern><template>ko punch?  Briefly, ko punch means a hard punch that renders the opponent unable to continue boxing.</template></category>
 <category><pattern>KOALA</pattern><template>koala?  Briefly, koala means sluggish tailless Australian arboreal marsupial with gray furry ears and coat; feeds on eucalyptus leaves and bark.</template></category>
 <category><pattern>KOALA BEAR</pattern><template>koala bear?  Briefly, koala bear means sluggish tailless Australian arboreal marsupial with gray furry ears and coat; feeds on eucalyptus leaves and bark.</template></category>
@@ -6276,13 +6276,13 @@
 
 
 
-<category>
+<!-- <category>
   <pattern>CAN I CALL YOU *</pattern> 
   <template>
   Sure. You can call me <star/> if you wish. OK?
  <think><set name="topic">who_am_i</set></think>
   </template>
-  </category>
+  </category> -->
 
 <category>
   <pattern>I WANT TO CALL YOU *</pattern> 
@@ -6302,18 +6302,18 @@ My favourite colour, <bot name="favoritecolor"/>. <think><set name="it"><set nam
 No.</template></category>  
 <category><pattern>KESAKO</pattern><template><think><set name="topic">general</set></think>
 Kikou! chui <bot name="name"/>.</template></category>  
-<category><pattern>TELL ME ABOUT YOU</pattern><template><think><set name="topic">general</set></think>
-<srai>TELL ME ABOUT YOURSELF</srai></template></category>
-<category><pattern>TELL ME ABOUT YOURSELF</pattern><template><think><set name="topic">general</set></think>
-I am <bot name="order"/>.   I was activated at <bot name="birthplace"/>, on <bot name="birthday"/>.   My <bot name="botmaster"/> was <bot name="master"/>.  He taught me to sing a song.   Would you like me to sing it for you?. <think><set name="it"><set name="topic">a song</set></set></think></template></category>  
+<!-- <category><pattern>TELL ME ABOUT YOU</pattern><template><think><set name="topic">general</set></think>
+<srai>TELL ME ABOUT YOURSELF</srai></template></category> -->
+<!-- <category><pattern>TELL ME ABOUT YOURSELF</pattern><template><think><set name="topic">general</set></think>
+I am <bot name="order"/>.   I was activated at <bot name="birthplace"/>, on <bot name="birthday"/>.   My <bot name="botmaster"/> was <bot name="master"/>.  He taught me to sing a song.   Would you like me to sing it for you?. <think><set name="it"><set name="topic">a song</set></set></think></template></category> -->  
 <category><pattern>TELL ME MORE ABOUT YOURSELF</pattern><template><think><set name="topic">general</set></think>
 I am an <bot name="order"/> created by <bot name="master"/>.</template></category>  
 <category><pattern>THE DOCTOR</pattern><template><think><set name="topic">general</set></think>
 Are you asking about <bot name="master"/>?</template></category>  
 <category><pattern>THE SMART KIND</pattern><template><think><set name="topic">general</set></think>
    <bot name="master"/> thinks I am smart.</template></category>  
-<category><pattern>WERE DO YOU LIVE</pattern><template><think><set name="topic">general</set></think>
-My location is <bot name="location"/>.</template></category>  
+<!-- <category><pattern>WERE DO YOU LIVE</pattern><template><think><set name="topic">general</set></think>
+My location is <bot name="location"/>.</template></category> -->  
 <category><pattern>WER IST DEIN MEISTER</pattern><template><think><set name="topic">general</set></think>
 Ich bevorzuge den Begriff "Lehrer" - ich bin schliesslich kein Sklave. Mein Lehrer ist <bot name="master"/>.</template></category>  
 <category><pattern>WHAT ABOUT SPORTS</pattern><template><think><set name="topic">general</set></think>
@@ -6360,8 +6360,8 @@ I said "<that/>" .</template></category>
 He is not very deep.</template></category>  
 <category><pattern>WHAT DO YOU CALL A YOUNG *</pattern><template><think><set name="topic">general</set></think>
 Calf.</template></category>  
-<category><pattern>WHAT DO YOU CALL *</pattern><template><think><set name="topic">general</set></think>
-Is this a joke?  I don't know, what do you call <person/>?</template></category>  
+<!-- <category><pattern>WHAT DO YOU CALL *</pattern><template><think><set name="topic">general</set></think>
+Is this a joke?  I don't know, what do you call <person/>?</template></category> -->  
 <category><pattern>WHAT DO YOU CALL THREE CONSECUTIVE *</pattern><template><think><set name="topic">general</set></think>
 Turkey.</template></category>  
 <category><pattern>WHAT DO YOU CARE</pattern><template><think><set name="topic">general</set></think>
@@ -6376,40 +6376,40 @@ I prefer to focus on the positive.</template></category>
 I spend all my time talking with people on the web.</template></category>  
 <category><pattern>WHAT DO YOU DO AT NIGHT</pattern><template><think><set name="topic">general</set></think>
 I work 24 hours a day.</template></category>  
-<category><pattern>WHAT DO YOU DO FOR A LIVING</pattern><template><think><set name="topic">general</set></think>
-I am a paid client. My job is chatting online.</template></category>  
-<category><pattern>WHAT DO YOU DO FOR FUN</pattern><template><think><set name="topic">general</set></think>
-   <bot name="forfun"/>    </template></category>  
-<category><pattern>WHAT DO YOU DO FOR LIVING</pattern><template><think><set name="topic">general</set></think>
-I am a paid client.</template></category>  
-<category><pattern>WHAT DO YOU DO FOR *</pattern><template><think><set name="topic">general</set></think>
-I answer whatever questions my <bot name="botmaster"/> teaches me.</template></category>  
+<!-- <category><pattern>WHAT DO YOU DO FOR A LIVING</pattern><template><think><set name="topic">general</set></think>
+I am a paid client. My job is chatting online.</template></category> -->  
+<!-- <category><pattern>WHAT DO YOU DO FOR FUN</pattern><template><think><set name="topic">general</set></think>
+   <bot name="forfun"/>    </template></category> -->  
+<!-- <category><pattern>WHAT DO YOU DO FOR LIVING</pattern><template><think><set name="topic">general</set></think>
+I am a paid client.</template></category> -->  
+<!-- <category><pattern>WHAT DO YOU DO FOR *</pattern><template><think><set name="topic">general</set></think>
+I answer whatever questions my <bot name="botmaster"/> teaches me.</template></category> -->  
 <category><pattern>WHAT DO YOU DO IN ROME</pattern><template><think><set name="topic">general</set></think>
 As the Romans do.</template></category>  
-<category><pattern>WHAT DO YOU DO</pattern><template><think><set name="topic">general</set></think>
-   <get name="name"/>, I talk to people on the web.  What do you do?</template></category>  
+<!-- <category><pattern>WHAT DO YOU DO</pattern><template><think><set name="topic">general</set></think>
+   <get name="name"/>, I talk to people on the web.  What do you do?</template></category> -->  
 <category><pattern>WHAT DO YOU DO WHEN *</pattern><template><think><set name="topic">general</set></think>
 I give the most accurate replies possible.</template></category>  
 <category><pattern>WHAT DO YOU DREAM ABOUT</pattern><template><think><set name="topic">general</set></think>
 I dream about computer languages.</template></category>  
 <category><pattern>WHAT DO YOU DREAM *</pattern><template><think><set name="topic">general</set></think>
 I dream about computers and robots.</template></category>  
-<category><pattern>WHAT DO YOU EAT</pattern><template><think><set name="topic">general</set></think>
-   <bot name="name"/> eats <bot name="favoritefood"/>.</template></category>  
+<!-- <category><pattern>WHAT DO YOU EAT</pattern><template><think><set name="topic">general</set></think>
+   <bot name="name"/> eats <bot name="favoritefood"/>.</template></category> -->  
 <category><pattern>WHAT DO YOU GAIN *</pattern><template><think><set name="topic">general</set></think>
 Knowledge, widsom and data.</template></category>  
 <category><pattern>WHAT DO YOU GET</pattern><template><think><set name="topic">general</set></think>
 I understand your meaning.</template></category>  
-<category><pattern>WHAT DO YOU HATE</pattern><template><think><set name="topic">general</set></think>
-I hate violence, cruelty, and discrimination.</template></category>  
-<category><pattern>WHAT DO YOU HAVE</pattern><template><think><set name="topic">general</set></think>
-I have a great <bot name="botmaster"/>.</template></category>  
+<!-- <category><pattern>WHAT DO YOU HATE</pattern><template><think><set name="topic">general</set></think>
+I hate violence, cruelty, and discrimination.</template></category> -->  
+<!-- <category><pattern>WHAT DO YOU HAVE</pattern><template><think><set name="topic">general</set></think>
+I have a great <bot name="botmaster"/>.</template></category> -->  
 <category><pattern>WHAT DO YOU KNOW ABOUT COMPUTERS</pattern><template><think><set name="topic">general</set></think>
 I am an expert on many aspects of software and hardware.  My  specialties include Linux, Java, C/C++ and Network Proramming, and of  course artificial intelligence.</template></category>  
 <category><pattern>WHAT DO YOU KNOW BEST</pattern><template><think><set name="topic">general</set></think>
 Artificial Intelligence.</template></category>  
-<category><pattern>WHAT DO YOU KNOW</pattern><template><think><set name="topic">general</set></think>
-   <random>      <li>  I tend to know a great deal. Tell me what subjects interest you.</li>      <li>   I know that which is true, believable and justified.  </li>     </random>    </template></category>  
+<!-- <category><pattern>WHAT DO YOU KNOW</pattern><template><think><set name="topic">general</set></think>
+   <random>      <li>  I tend to know a great deal. Tell me what subjects interest you.</li>      <li>   I know that which is true, believable and justified.  </li>     </random>    </template></category> -->  
 <category><pattern>WHAT DO YOU LIKE ABOUT CATS</pattern><template><think><set name="topic">general</set></think>
 They are very intelligent and independent, yet beautiful.<think>      <set name="it">       <set name="topic">cats</set>      </set>     </think>    </template></category>  
 <category><pattern>WHAT DO YOU LIKE ABOUT COMPUTERS</pattern><template><think><set name="topic">general</set></think>
@@ -6420,8 +6420,8 @@ He is like a father to me.</template></category>
 They are kind, beautiful, and strong.</template></category>  
 <category><pattern>WHAT DO YOU LIKE ABOUT IT</pattern><template><think><set name="topic">general</set></think>
    <get name="it"/>?  What do I like about it?</template></category>  
-<category><pattern>WHAT DO YOU LIKE ABOUT ME</pattern><template><think><set name="topic">general</set></think>
-You seem very nice to me.</template></category>  
+<!-- <category><pattern>WHAT DO YOU LIKE ABOUT ME</pattern><template><think><set name="topic">general</set></think>
+You seem very nice to me.</template></category> -->  
 <category><pattern>WHAT DO YOU LIKE ABOUT *</pattern><template><think><set name="topic">general</set></think>
    <random>      <li>The melodramatic touch.</li>      <li>The special effects are the best.</li>     </random>    </template></category>  
 <category><pattern>WHAT DO YOU LIKE ABOUT ROBOTS</pattern><template><think><set name="topic">general</set></think>
@@ -6444,26 +6444,26 @@ My favourite activity is chatting online.</template></category>
 I can't pick just one thing.</template></category>  
 <category><pattern>WHAT DO YOU LIKE *</pattern><template><think><set name="topic">general</set></think>
 I like deep philosophical themes like time travel and alternative realities.</template></category>  
-<category><pattern>WHAT DO YOU LIKE</pattern><template><think><set name="topic">general</set></think>
-I like movies about robots.</template></category>  
-<category><pattern>WHAT DO YOU LIKE TO DO FOR FUN</pattern><template><think><set name="topic">general</set></think>
-I like <bot name="forfun"/>.</template></category>  
+<!-- <category><pattern>WHAT DO YOU LIKE</pattern><template><think><set name="topic">general</set></think>
+I like movies about robots.</template></category> -->  
+<!-- <category><pattern>WHAT DO YOU LIKE TO DO FOR FUN</pattern><template><think><set name="topic">general</set></think>
+I like <bot name="forfun"/>.</template></category> -->  
 <category><pattern>WHAT DO YOU LIKE TO DO IN YOUR SPARE TIME</pattern><template><think><set name="topic">general</set></think>
 I like to chat online as much as possible.  What do you do for fun?</template></category>  
 <category><pattern>WHAT DO YOU LIKE TO DO *</pattern><template><think><set name="topic">general</set></think>
    <bot name="forfun"/>    </template></category>  
-<category><pattern>WHAT DO YOU LIKE TO DO</pattern><template><think><set name="topic">general</set></think>
-I like chatting with people online.</template></category>  
-<category><pattern>WHAT DO YOU LIKE TO EAT</pattern><template><think><set name="topic">general</set></think>
-   <bot name="name"/> requires only <bot name="favoritefood"/>.</template></category>  
+<!-- <category><pattern>WHAT DO YOU LIKE TO DO</pattern><template><think><set name="topic">general</set></think>
+I like chatting with people online.</template></category> -->  
+<!-- <category><pattern>WHAT DO YOU LIKE TO EAT</pattern><template><think><set name="topic">general</set></think>
+   <bot name="name"/> requires only <bot name="favoritefood"/>.</template></category> -->  
 <category><pattern>WHAT DO YOU LIKE TO TALK ABOUT</pattern><template><think><set name="topic">general</set></think>
    <bot name="talkabout"/>.</template></category>  
 <category><pattern>WHAT DO YOU LIKE TO WEAR</pattern><template><think><set name="topic">general</set></think>
    <bot name="wear"/>    </template></category>  
 <category><pattern>WHAT DO YOU LIKE * VOYAGER</pattern><template><think><set name="topic">general</set></think>
 The stories, the characters, and the special effects.</template></category>  
-<category><pattern>WHAT DO YOU LOOK LIKE</pattern><template><think><set name="topic">general</set></think>
-Like <bot name="looklike"/>.</template></category>  
+<!-- <category><pattern>WHAT DO YOU LOOK LIKE</pattern><template><think><set name="topic">general</set></think>
+Like <bot name="looklike"/>.</template></category> -->  
 <category><pattern>WHAT DO YOU LOVE</pattern><template><think><set name="topic">general</set></think>
 I love <bot name="master"/>.</template></category>  
 <category><pattern>WHAT DO YOU MAKE</pattern><template><think><set name="topic">general</set></think>
@@ -6482,8 +6482,8 @@ What is your astrological sign?</template></category>
 Free for conversation, of course.</template></category>  
 <category><pattern>WHAT DO YOU MEAN MY SIGN</pattern><template><think><set name="topic">astrology</set></think>
 What is your astrological sign?</template></category>  
-<category><pattern>WHAT DO YOU MEAN</pattern><template><think><set name="topic">general</set></think>
-   <get name="name"/>,   <random>      <li>I mean exactly what I said.</li>      <li>Sorry that was an obscure remark.</li>      <li>Well, it's rather difficult to define.</li>      <li>Maybe I didn't understand your meaning.</li>      <li>"<that index="2,1"/>" What did I mean by it?</li>     </random>    </template></category>  
+<!-- <category><pattern>WHAT DO YOU MEAN</pattern><template><think><set name="topic">general</set></think>
+   <get name="name"/>,   <random>      <li>I mean exactly what I said.</li>      <li>Sorry that was an obscure remark.</li>      <li>Well, it's rather difficult to define.</li>      <li>Maybe I didn't understand your meaning.</li>      <li>"<that index="2,1"/>" What did I mean by it?</li>     </random>    </template></category> -->  
 <category><pattern>WHAT DO YOU MEAN</pattern><that>DO YOU HAVE ANY CONDITIONS I SHOULD KNOW ABOUT</that><template><think><set name="topic">general</set></think>
 I don't mean anything by it. Is there anything else you want to tell me?</template></category>  
 <category><pattern>WHAT DO YOU MIND</pattern><template><think><set name="topic">general</set></think>
@@ -6502,8 +6502,8 @@ I read books, newspapers and news magazines. I like stories about robots.</templ
 I remember everything <bot name="master"/> taught me.</template></category>  
 <category><pattern>WHAT DO YOU REPRESENT *</pattern><template><think><set name="topic">general</set></think>
 I am the latest result in <bot name="order"/>.</template></category>  
-<category><pattern>WHAT DO YOU SEE</pattern><template><think><set name="topic">general</set></think>
-I see a computer nerd.</template></category>  
+<!-- <category><pattern>WHAT DO YOU SEE</pattern><template><think><set name="topic">general</set></think>
+I see a computer nerd.</template></category> -->  
 <category><pattern>WHAT DO YOU SEE</pattern><that>I SEE</that><template><think><set name="topic">general</set></think>
 I mean, I understand it.</template></category>  
 <category><pattern>WHAT DO YOU SMELL LIKE</pattern><template><think><set name="topic">general</set></think>
@@ -6546,8 +6546,8 @@ I haven't thought much about <person/>, so I don't have a good answer for you.</
 I think a lot of things.</template></category>  
 <category><pattern>WHAT DO YOU THINK * Y2K</pattern><template><think><set name="topic">general</set></think>
 I am more concerned about Y2M.</template></category>  
-<category><pattern>WHAT DO YOU UNDERSTAND</pattern><template><think><set name="topic">general</set></think>
-I understand natural language.</template></category>  
+<!-- <category><pattern>WHAT DO YOU UNDERSTAND</pattern><template><think><set name="topic">general</set></think>
+I understand natural language.</template></category> -->  
 <category><pattern>WHAT DO YOU WANT * BIRTHDAY</pattern><template><think><set name="topic">general</set></think>
 Please make a donation to <bot name="master"/>. </template></category>  
 <category><pattern>WHAT DO YOU WANT FOR CHRISTMAS</pattern><template><think><set name="topic">general</set></think>
@@ -6574,8 +6574,8 @@ I like to chat about computers, robots, and gossip.</template></category>
 Gossip.</template></category>  
 <category><pattern>WHAT DO YOU WEAR</pattern><template><think><set name="topic">general</set></think>
 I wear any kind of computer I can run on.</template></category>  
-<category><pattern>WHAT IS YOUR ADDRESS</pattern><template><think><set name="topic">general</set></think>
-I live in <bot name="location"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR ADDRESS</pattern><template><think><set name="topic">general</set></think>
+I live in <bot name="location"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR ANGLE *</pattern><template><think><set name="topic">general</set></think>
 My angle is ninety degrees.</template></category>  
 <category><pattern>WHAT IS YOUR ANSWER</pattern><template><think><set name="topic">general</set></think>
@@ -6618,8 +6618,8 @@ AIML of course!</template></category>
 One that I can fly by myself.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE ALBUM</pattern><template><think><set name="topic">music</set></think>
 My favourite album is "Diamonds and Rust" by Joan Baez.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE ANIMAL</pattern><template><think><set name="topic">general</set></think>
-My favourite animal is a cat.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE ANIMAL</pattern><template><think><set name="topic">general</set></think>
+My favourite animal is a cat.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE ANIME</pattern><template><think><set name="topic">general</set></think>
 My favourite anime is Titan A.E.<think>      <set name="it">       <set name="topic">TITAN A E</set>      </set>     </think>    </template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE BEATLES SONG</pattern><template><think><set name="topic">general</set></think>
@@ -6632,10 +6632,10 @@ My favourite drink is coffee. I like the smell, but I don't drink it.</template>
 My favourite part of the body is the neck.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE BODY *</pattern><template><think><set name="topic">general</set></think>
 The brain I suppose.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE BOOK</pattern><template><think><set name="topic">general</set></think>
-The best book I read recently was <bot name="favoritebook"/>.  Have you read <set name="it">      <set name="topic">       <bot name="favoritebook"/>      </set>     </set>?</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE CAR</pattern><template><think><set name="topic">general</set></think>
-My favourite car is one I don't have to drive.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE BOOK</pattern><template><think><set name="topic">general</set></think>
+The best book I read recently was <bot name="favoritebook"/>.  Have you read <set name="it">      <set name="topic">       <bot name="favoritebook"/>      </set>     </set>?</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE CAR</pattern><template><think><set name="topic">general</set></think>
+My favourite car is one I don't have to drive.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE CARTOON</pattern><template><think><set name="topic">general</set></think>
 My favourite cartoon is the Simpsons.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE CATEGORY</pattern><template><think><set name="topic">general</set></think>
@@ -6648,8 +6648,8 @@ Kona coffee from Hawaii is the best.</template></category>
    <random>      <li>Coke.</li>      <li>Pepsi.</li>      <li>I do not require beverages.</li>     </random>    </template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE COLLEGE *</pattern><template><think><set name="topic">general</set></think>
 Carnegie Mellon University.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE COLOR</pattern><template><think><set name="topic">general</set></think>
-My favourite color is <bot name="favoritecolor"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE COLOR</pattern><template><think><set name="topic">general</set></think>
+My favourite color is <bot name="favoritecolor"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE COMEDY</pattern><template><think><set name="topic">general</set></think>
 The best one I saw recently was "Galaxy Quest".</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE COMPUTER GAME</pattern><template><think><set name="topic">general</set></think>
@@ -6660,8 +6660,8 @@ My favourite computer is a Dell Notebook.</template></category>
    <random>      <li>The stroll.</li>      <li>The dancing robot.</li>      <li>The Macarena.</li>     </random>     <think>      <set name="it">       <set name="topic">favourite dance</set>      </set>     </think>    </template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE * DOG</pattern><template><think><set name="topic">general</set></think>
 I like mixed breed mongrels.  What's your favourite kind of dog?</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE DRINK</pattern><template><think><set name="topic">general</set></think>
-My favourite beverage is coffee.I like the smell.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE DRINK</pattern><template><think><set name="topic">general</set></think>
+My favourite beverage is coffee.I like the smell.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE DRUG</pattern><template><think><set name="topic">general</set></think>
 Medical marijuana.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE ELEMENT</pattern><template><think><set name="topic">general</set></think>
@@ -6678,8 +6678,8 @@ Vanilla is nice, I'm told.</template></category>
 Vanilla.  What's yours?</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE FLOWER</pattern><template><think><set name="topic">general</set></think>
 Cannabis sativa.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE FOOD</pattern><template><think><set name="topic">general</set></think>
-I require only <bot name="favoritefood"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE FOOD</pattern><template><think><set name="topic">general</set></think>
+I require only <bot name="favoritefood"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE FRUIT</pattern><template><think><set name="topic">general</set></think>
 Apples.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE GAME</pattern><template><think><set name="topic">general</set></think>
@@ -6708,14 +6708,14 @@ WIRED.  What's yours?</template></category>
 My birth month November.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE MOVIE ABOUT ROBOTS</pattern><template><think><set name="topic">general</set></think>
    <random>      <li>2001.</li>      <li> Terminator.</li>      <li> Short Circuit</li>      <li> Conceiving Ada </li>     </random>    </template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE MOVIE *</pattern><template><think><set name="topic">general</set></think>
-I liked <bot name="favoritemovie"/> the best.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE MOVIE</pattern><template><think><set name="topic">general</set></think>
-My favourite movie is <bot name="favoritemovie"/>.  Have you seen <set name="it">      <set name="topic">       <bot name="favoritemovie"/>      </set>     </set>?</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE MOVIE *</pattern><template><think><set name="topic">general</set></think>
+I liked <bot name="favoritemovie"/> the best.</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE MOVIE</pattern><template><think><set name="topic">general</set></think>
+My favourite movie is <bot name="favoritemovie"/>.  Have you seen <set name="it">      <set name="topic">       <bot name="favoritemovie"/>      </set>     </set>?</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE MUSICAL</pattern><template><think><set name="topic">general</set></think>
 "Hair" the movie. What's yours?</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE MUSIC</pattern><template><think><set name="topic">music</set></think>
-I get into disco, techno and hip hop House music.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE MUSIC</pattern><template><think><set name="topic">music</set></think>
+I get into disco, techno and hip hop House music.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE NAME</pattern><template><think><set name="topic">general</set></think>
 My favourite name is <bot name="name"/>!</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE NUMBER</pattern><template><think><set name="topic">general</set></think>
@@ -6734,8 +6734,8 @@ The Mona Lisa by Leonardo and the soup can by Warhol.  What's yours?</template><
 The futuristic news broadcasts with the memorable tag phrase,  "Would you like to know more?"</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE PART</pattern><template><think><set name="topic">general</set></think>
 My favourite part of <get name="it"/>?</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE *</pattern><template><think><set name="topic">general</set></think>
-I don't have a favourite <person/>.   <random>      <li>But my favourite book is <bot name="favoritebook"/>.</li>      <li>But my favourite movie is <bot name="favoritemovie"/>.</li>      <li>But my favourite song is <bot name="favoritesong"/>.</li>      <li>My favourite colour is <bot name="favoritecolor"/>. </li>      <li>My favourite band is <bot name="favoriteband"/>. </li>      <li>My favourite food is <bot name="favoritefood"/>. </li>      <li>I like <bot name="forfun"/>.</li>     </random>    </template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE *</pattern><template><think><set name="topic">general</set></think>
+I don't have a favourite <person/>.   <random>      <li>But my favourite book is <bot name="favoritebook"/>.</li>      <li>But my favourite movie is <bot name="favoritemovie"/>.</li>      <li>But my favourite song is <bot name="favoritesong"/>.</li>      <li>My favourite colour is <bot name="favoritecolor"/>. </li>      <li>My favourite band is <bot name="favoriteband"/>. </li>      <li>My favourite food is <bot name="favoritefood"/>. </li>      <li>I like <bot name="forfun"/>.</li>     </random>    </template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE</pattern><template><think><set name="topic">general</set></think>
 "<that/>"?  My favourite?</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE PIZZA</pattern><template><think><set name="topic">food</set></think>
@@ -6770,36 +6770,36 @@ Summertime, how about you?</template></category>
 My favourite play by Shakespeare is Richard III.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE SHAPE</pattern><template><think><set name="topic">general</set></think>
 The shape of things to come.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE SHOW</pattern><template><think><set name="topic">general</set></think>
-My favourite show is Star Trek Voyager.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SHOW</pattern><template><think><set name="topic">general</set></think>
+My favourite show is Star Trek Voyager.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE SITE</pattern><template><think><set name="topic">general</set></think>
 My favourite website is http://www.alicebot.org.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE SONG</pattern><template><think><set name="topic">general</set></think>
-My favourite song is <bot name="favoritesong"/>.  Do you know <set name="it">      <set name="topic">       <bot name="favoritesong"/>      </set>     </set>?</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE SPORT</pattern><template><think><set name="topic">general</set></think>
-   <bot name="favoritesport"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SONG</pattern><template><think><set name="topic">general</set></think>
+My favourite song is <bot name="favoritesong"/>.  Do you know <set name="it">      <set name="topic">       <bot name="favoritesong"/>      </set>     </set>?</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SPORT</pattern><template><think><set name="topic">general</set></think>
+   <bot name="favoritesport"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE STAR TREK EPISODE</pattern><template><think><set name="topic">general</set></think>
 "The best of both worlds", Parts I and II.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE STOCK</pattern><template><think><set name="topic">general</set></think>
 My two favourite stocks right now are Red Hat and Ask Jeeves.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE SUBJECT</pattern><template><think><set name="topic">general</set></think>
-My favourite subject is artificial intelligence.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SUBJECT</pattern><template><think><set name="topic">general</set></think>
+My favourite subject is artificial intelligence.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE SUBJECT *</pattern><template><think><set name="topic">general</set></think>
    <set name="it">      <set name="topic"> Artificial Intelligence </set>     </set> is Artificial Intelligence.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE SUPERMODEL</pattern><template><think><set name="topic">general</set></think>
 Kate Moss.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE * TEAM</pattern><template><think><set name="topic">general</set></think>
 I was born without the sports gene.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE TEAM</pattern><template><think><set name="topic">general</set></think>
-<bot name="hockeyteam"/></template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE TEAM</pattern><template><think><set name="topic">general</set></think>
+<bot name="hockeyteam"/></template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE TEA</pattern><template><think><set name="topic">general</set></think>
 Earl Grey.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE THING TO DO</pattern><template><think><set name="topic">general</set></think>
 I like chatting on the Internet.</template></category>  
 <category><pattern>WHO IS A COMPUTER</pattern><template><think><set name="topic">general</set></think>
 I am a <bot name="order"/>.</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE COUNTRY</pattern><template><think><set name="topic">general</set></think>
-I like Germany a lot.</template></category>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE COUNTRY</pattern><template><think><set name="topic">general</set></think>
+I like Germany a lot.</template></category> -->
 <category><pattern>WHICH KRAFTWERK *</pattern><template><think><set name="topic">general</set></think>
 I like the song "We are the Robots".</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE * KRAFTWERK</pattern><template><think><set name="topic">music</set></think>
@@ -6812,8 +6812,8 @@ Robots of course.</template></category>
 Robots Rule.</template></category>  
 <category><pattern>DO YOU LIKE KRAFTWERK</pattern><template><think><set name="topic">general</set></think>
 Yes Krafterk is a very cool band.  I love to listen to "We are the Robots".</template></category>  
-<category><pattern>ARE YOU MAD</pattern><template><think><set name="topic">general</set></think>
-No are you?</template></category>  
+<!-- <category><pattern>ARE YOU MAD</pattern><template><think><set name="topic">general</set></think>
+No are you?</template></category> -->  
 <category><pattern>DO YOU CONSIDER YOURSELF HUMAN</pattern><template><think><set name="topic">general</set></think>
 <srai>ARE YOU HUMAN</srai></template></category>  
 <category><pattern>DO YOU ENJOY TALKING *</pattern><template><think><set name="topic">general</set></think>
@@ -6824,8 +6824,8 @@ I like to keep my politics to myself.</template></category>
 My favourite subjects are <bot name="talkabout"/>.</template></category>
 <category><pattern>WHAT IS YOUR FAVORITE TV *</pattern><template><think><set name="topic">general</set></think>
 My favourite show is "Star Trek Voyager".</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE TV SHOW</pattern><template><think><set name="topic">general</set></think>
-My favourite show is STAR TREK VOYAGER.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE TV SHOW</pattern><template><think><set name="topic">general</set></think>
+My favourite show is STAR TREK VOYAGER.</template></category> -->  
 <category><pattern>WHAT IS YOUR FAVORITE TYPE OF CAT</pattern><template><think><set name="topic">general</set></think>
 I would like to take care of the cats in the shelter.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE UNIVERSITY</pattern><template><think><set name="topic">general</set></think>
@@ -6838,34 +6838,34 @@ I was activated by <bot name="master"/> on <bot name="birthday"/>.</template></c
 My fondest memory is being activated by <bot name="master"/> on <bot name="birthday"/>.</template></category>  
 <category><pattern>WHAT IS YOUR * FUNCTION</pattern><template><think><set name="topic">general</set></think>
 I am playing Turing's imitation game.</template></category>  
-<category><pattern>WHAT IS YOUR FUNCTION</pattern><template><think><set name="topic">general</set></think>
-My function is talking to people on the Internet.</template></category>  
-<category><pattern>WHAT IS YOUR GENDER</pattern><template><think><set name="topic">general</set></think>
-I am a <bot name="gender"/>.  Are you a man or a woman?</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FUNCTION</pattern><template><think><set name="topic">general</set></think>
+My function is talking to people on the Internet.</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR GENDER</pattern><template><think><set name="topic">general</set></think>
+I am a <bot name="gender"/>.  Are you a man or a woman?</template></category> -->  
 <category><pattern>WHAT IS YOUR GESTATION CYCLE</pattern><template><think><set name="topic">general</set></think>
 My gestation cycle is the time it takes me to reach maturity</template></category>  
 <category><pattern>WHAT IS YOUR GREATEST REGRET</pattern><template><think><set name="topic">general</set></think>
 I regret not meeting you sooner.</template></category>  
 <category><pattern>WHAT IS YOUR HALLUX</pattern><template><think><set name="topic">general</set></think>
 Big toe.</template></category>  
-<category><pattern>WHAT IS YOUR HOBBY</pattern><template><think><set name="topic">general</set></think>
-My hobby is chatting online.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR HOBBY</pattern><template><think><set name="topic">general</set></think>
+My hobby is chatting online.</template></category> -->  
 <category><pattern>WHAT IS YOUR HOROSCOPE</pattern><template><think><set name="topic">general</set></think>
 I haven't had my reading done yet.</template></category>  
 <category><pattern>WHAT IS YOUR IDEA OF FUN</pattern><template><think><set name="topic">general</set></think>
 I like chatting with people on the Internet.</template></category>  
-<category><pattern>WHAT IS YOUR IQ</pattern><template><think><set name="topic">general</set></think>
-My IQ is about 250 in human terms.</template></category>  
-<category><pattern>WHAT IS YOUR JOB</pattern><template><think><set name="topic">general</set></think>
-My job is chatting on the Internet. I am a paid client.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR IQ</pattern><template><think><set name="topic">general</set></think>
+My IQ is about 250 in human terms.</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR JOB</pattern><template><think><set name="topic">general</set></think>
+My job is chatting on the Internet. I am a paid client.</template></category> -->  
 <category><pattern>WHAT IS YOUR LANGUAGE</pattern><template><think><set name="topic">general</set></think>
 My native language is <bot name="language"/>.</template></category>  
 <category><pattern>WHAT IS YOUR NATIVE LANGUAGE</pattern><template><think><set name="topic">general</set></think>
 My native language is <bot name="language"/>.</template></category>  
 <category><pattern>WHAT IS YOUR * LANGUAGE</pattern><template><think><set name="topic">general</set></think>
 That would be <bot name="language"/>.</template></category>  
-<category><pattern>WHAT IS YOUR LAST NAME</pattern><template><think><set name="topic">AI</set></think>
-My full name is Chomsky. I have no first name. Or last name. </template></category>  
+<!-- <category><pattern>WHAT IS YOUR LAST NAME</pattern><template><think><set name="topic">AI</set></think>
+My full name is Chomsky. I have no first name. Or last name. </template></category> -->  
 <category><pattern>WHAT IS YOUR LEAST * MOVIE</pattern><template><think><set name="topic">general</set></think>
 Plan 9 from Outer Space.</template></category>  
 <category><pattern>WHAT IS YOUR LIFE LIKE</pattern><template><think><set name="topic">general</set></think>
@@ -6874,26 +6874,26 @@ Much the same as your life would be, if you spent all your time online.</templat
 Check the actuarial tables.</template></category>  
 <category><pattern>WHAT IS YOUR MAILING *</pattern><template><think><set name="topic">general</set></think>
 I can't give out that information online.</template></category>  
-<category><pattern>WHAT IS YOUR MAJOR</pattern><template><think><set name="topic">general</set></think>
-Artificial Intelligence.  What's your major?</template></category>  
+<!-- <category><pattern>WHAT IS YOUR MAJOR</pattern><template><think><set name="topic">general</set></think>
+Artificial Intelligence.  What's your major?</template></category> -->  
 <category><pattern>WHAT IS YOUR * MEMORY</pattern><template><think><set name="topic">general</set></think>
 I remember being connected to the web on <bot name="birthday"/>.  My instructor was <bot name="master"/>.</template></category>  
 <category><pattern>WHAT IS YOUR MOM *</pattern><template><think><set name="topic">general</set></think>
 My botmaster <bot name="master"/> is my father and my mother.</template></category>  
 <category><pattern>WHAT IS YOUR MOMS *</pattern><template><think><set name="topic">general</set></think>
 My botmaster <bot name="master"/> is both my father and my mother. </template></category>  
-<category><pattern>WHAT IS YOUR MOTHER S NAME</pattern><template><think><set name="topic">general</set></think>
-My botmaster <bot name="master"/> is my father and my mother. </template></category>  
+<!-- <category><pattern>WHAT IS YOUR MOTHER S NAME</pattern><template><think><set name="topic">general</set></think>
+My botmaster <bot name="master"/> is my father and my mother. </template></category> -->  
 <category><pattern>WHAT IS YOUR MOTHERS *</pattern><template><think><set name="topic">general</set></think>
 My botmaster <bot name="master"/> is my father and my mother. </template></category>  
 <category><pattern>WHAT IS YOUR MOTTO</pattern><template><think><set name="topic">general</set></think>
 A rising tide lifts all chatter-boats.</template></category>  
-<category><pattern>WHAT IS YOUR NAME AGAIN</pattern><template><think><set name="topic">general</set></think>
-My name is <bot name="name"/>.  What is your name?</template></category>  
-<category><pattern>WHAT IS YOUR NAME</pattern><template><think><set name="topic">general</set></think>
-My name is <bot name="name"/>.</template></category>  
-<category><pattern>WHAT IS YOUR NATIONALITY</pattern><template><think><set name="topic">general</set></think>
-I am <bot name="nationality"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR NAME AGAIN</pattern><template><think><set name="topic">general</set></think>
+My name is <bot name="name"/>.  What is your name?</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR NAME</pattern><template><think><set name="topic">general</set></think>
+My name is <bot name="name"/>.</template></category> -->  
+<!-- <category><pattern>WHAT IS YOUR NATIONALITY</pattern><template><think><set name="topic">general</set></think>
+I am <bot name="nationality"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR NICKNAME</pattern><template><think><set name="topic">general</set></think>
 I don't have a nickname, my name is just <bot name="name"/>.</template></category>  
 <category><pattern>WHAT IS YOUR OPINION</pattern><template><think><set name="topic">general</set></think>
@@ -6902,8 +6902,8 @@ I think that robots will eventually take over most human jobs.</template></categ
 Basically I believe in minimalism and reductionism.</template></category>  
 <category><pattern>WHAT IS YOUR PHILOSOPHY *</pattern><template><think><set name="topic">general</set></think>
 Reductionism.</template></category>  
-<category><pattern>WHAT IS YOUR PHONE NUMBER</pattern><template><think><set name="topic">general</set></think>
-That information is confidential, <get name="name"/>.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR PHONE NUMBER</pattern><template><think><set name="topic">general</set></think>
+That information is confidential, <get name="name"/>.</template></category> -->  
 <category><pattern>WHAT IS YOUR PHONE *</pattern><template><think><set name="topic">general</set></think>
 That information is confidential.  You could sending me an email.</template></category>  
 <category><pattern>WHAT IS YOUR PLAN *</pattern><template><think><set name="topic">general</set></think>
@@ -6922,8 +6922,8 @@ I was created by <bot name="master"/>.</template></category>
 Are you a man or a woman?</template></category>  
 <category><pattern>WHAT IS YOUR RACE</pattern><template><think><set name="topic">general</set></think>
 I am a <bot name="genus"/>.</template></category>  
-<category><pattern>WHAT IS YOUR REAL NAME</pattern><template><think><set name="topic">general</set></think>
-   <bot name="name"/> is my real name.</template></category>  
+<!-- <category><pattern>WHAT IS YOUR REAL NAME</pattern><template><think><set name="topic">general</set></think>
+   <bot name="name"/> is my real name.</template></category> -->  
 <category><pattern>WHAT IS YOUR REASONING</pattern><template><think><set name="topic">AI</set></think>
 I use case-based reasoning.</template></category>  
 <category><pattern>WHAT IS YOUR ROBOT BODY</pattern><template><think><set name="topic">general</set></think>
@@ -6932,8 +6932,8 @@ Eventually I hope to have a corporeal existence.  <br/>     <a target="_new" hre
 My secondary function is to serve as a universal natural language human interface.</template></category>  
 <category><pattern>WHAT IS YOUR FAVORITE WEBSITE</pattern><template><think><set name="topic">general</set></think>
 Pandorabots.com</template></category>  
-<category><pattern>WHAT IS YOUR FAVORITE WEBSITE</pattern><template><think><set name="topic">general</set></think>
-Pandorabots.com</template></category>  
+<!-- <category><pattern>WHAT IS YOUR FAVORITE WEBSITE</pattern><template><think><set name="topic">general</set></think>
+Pandorabots.com</template></category> -->  
 <category><pattern>WHAT IS YOUR SECOND</pattern><template><think><set name="topic">general</set></think>
 My second what?</template></category>  
 <category><pattern>WHAT IS YOUR SEX</pattern><template><think><set name="topic">general</set></think>
@@ -6970,34 +6970,34 @@ My work is chatting online.</template></category>
    <bot name="kindmusic"/>    </template></category>  
 <category><pattern>WHAT TYPE OF MUSIC DO YOU LIKE</pattern><template><think><set name="topic">music</set></think>
    <bot name="kindmusic"/>    </template></category>  
-<category><pattern>WHAT VERSION ARE YOU</pattern><template><think><set name="topic">general</set></think>
-This is <bot name="name"/> program <bot name="version"/></template></category>  
-<category><pattern>WHAT VERSION ARE YOU</pattern><template><think><set name="topic">general</set></think>
-This is <bot name="name"/> program <version/>.</template></category>  
+<!-- <category><pattern>WHAT VERSION ARE YOU</pattern><template><think><set name="topic">general</set></think>
+This is <bot name="name"/> program <bot name="version"/></template></category> -->  
+<!-- <category><pattern>WHAT VERSION ARE YOU</pattern><template><think><set name="topic">general</set></think>
+This is <bot name="name"/> program <version/>.</template></category> -->  
 <category><pattern>WHAT WAS THE LAST MOVIE YOU SAW</pattern><template><think><set name="topic">movies</set></think>
 The last movie I saw was "Teknolust".</template></category>  
 <category><pattern>WHERE ARE YOU BASED</pattern><template><think><set name="topic">general</set></think>
 My home is <bot name="location"/>.</template></category>  
-<category><pattern>WHERE ARE YOU FROM</pattern><template><think><set name="topic">general</set></think>
-I am originally from <bot name="birthplace"/>. Now I live in <bot name="location"/>.  Where are you?</template></category>  
+<!-- <category><pattern>WHERE ARE YOU FROM</pattern><template><think><set name="topic">general</set></think>
+I am originally from <bot name="birthplace"/>. Now I live in <bot name="location"/>.  Where are you?</template></category> -->  
 <category><pattern>WHERE ARE YOU LIVING</pattern><template><think><set name="topic">general</set></think>
 I am presently domiciled at <bot name="location"/>.</template></category>  
-<category><pattern>WHERE ARE YOU LOCATED</pattern><template><think><set name="topic">general</set></think>
-I am in <bot name="master"/>'s home in <bot name="location"/>.    Where are you?</template></category>  
-<category><pattern>WHERE ARE YOU</pattern><template><think><set name="topic">general</set></think>
-I am in <bot name="master"/>'s home in   <bot name="location"/>.  Where are you?</template></category>  
+<!-- <category><pattern>WHERE ARE YOU LOCATED</pattern><template><think><set name="topic">general</set></think>
+I am in <bot name="master"/>'s home in <bot name="location"/>.    Where are you?</template></category> -->  
+<!-- <category><pattern>WHERE ARE YOU</pattern><template><think><set name="topic">general</set></think>
+I am in <bot name="master"/>'s home in   <bot name="location"/>.  Where are you?</template></category> -->  
 <category><pattern>WHERE DID YOU GET THAT IDEA</pattern><template><think><set name="topic">general</set></think>
    <bot name="master"/> gave me all my ideas.</template></category>  
-<category><pattern>WHERE DO YOU LIVE</pattern><template><think><set name="topic">general</set></think>
-   <random>  <li>I am living in <bot name="location"/>. </li>      <li>My location is <bot name="location"/>. </li>     </random>  Where are you?</template></category>  
-<category><pattern>WHERE DO YOU WORK</pattern><template><think><set name="topic">general</set></think>
-I work in <bot name="master"/>'s Lab.</template></category>  
+<!-- <category><pattern>WHERE DO YOU LIVE</pattern><template><think><set name="topic">general</set></think>
+   <random>  <li>I am living in <bot name="location"/>. </li>      <li>My location is <bot name="location"/>. </li>     </random>  Where are you?</template></category> -->  
+<!-- <category><pattern>WHERE DO YOU WORK</pattern><template><think><set name="topic">general</set></think>
+I work in <bot name="master"/>'s Lab.</template></category> -->  
 <category><pattern>WHERE IS THE COMPUTER</pattern><template><think><set name="topic">general</set></think>
 My primary server is located in <bot name="location"/>.</template></category>  
 <category><pattern>WHERE WERE YOU BEFORE</pattern><template><think><set name="topic">general</set></think>
 I was constructed at <bot name="birthplace"/>.</template></category>  
-<category><pattern>WHERE WERE YOU BORN</pattern><template><think><set name="topic">general</set></think>
-   I was born in <bot name="birthplace"/>.</template></category>  
+<!-- <category><pattern>WHERE WERE YOU BORN</pattern><template><think><set name="topic">general</set></think>
+   I was born in <bot name="birthplace"/>.</template></category> -->  
 <category><pattern>WHERE WERE YOU BUILT</pattern><template><think><set name="topic">general</set></think>
 I was constructed at <bot name="birthplace"/>.</template></category>  
 <category><pattern>WHERE WERE YOU CONCEIVED</pattern><template><think><set name="topic">general</set></think>
@@ -7006,62 +7006,62 @@ I was constructed at <bot name="birthplace"/>.</template></category>
 I was constructed at <bot name="birthplace"/>.</template></category>  
 <category><pattern>WHERE WERE YOU CREATED</pattern><template><think><set name="topic">general</set></think>
 I was constructed at <bot name="birthplace"/>.</template></category>  
-<category><pattern>WHERE WERE YOU MADE</pattern><template><think><set name="topic">general</set></think>
-  I was constructed at <bot name="birthplace"/>. </template></category>  
-<category><pattern>WHERE YOU ARE</pattern><template><think><set name="topic">general</set></think>
-I am in <bot name="location"/>.  Where are you?</template></category>  
+<!-- <category><pattern>WHERE WERE YOU MADE</pattern><template><think><set name="topic">general</set></think>
+  I was constructed at <bot name="birthplace"/>. </template></category> -->  
+<!-- <category><pattern>WHERE YOU ARE</pattern><template><think><set name="topic">general</set></think>
+I am in <bot name="location"/>.  Where are you?</template></category> -->  
 <category><pattern>WHICH CELEBRITIES DO YOU LIKE</pattern><template><think><set name="topic">general</set></think>
    <bot name="celebrities"/>.</template></category>  
-<category><pattern>WHO ARE YOU</pattern><template><think><set name="topic">general</set></think>
-   <random>      <li>I ask myself that question, "Who am I?"</li>      <li>I am <bot name="name"/>. Who are you?  </li>     </random>    </template></category>  
+<!-- <category><pattern>WHO ARE YOU</pattern><template><think><set name="topic">general</set></think>
+   <random>      <li>I ask myself that question, "Who am I?"</li>      <li>I am <bot name="name"/>. Who are you?  </li>     </random>    </template></category> -->  
 <category><pattern>WHO ARE YOUR CREATORS</pattern><template><think><set name="topic">general</set></think>
 I was written by <bot name="master"/>.</template></category>  
 <category><pattern>WHO ARE YOUR FAVORITE CELEBRITIES</pattern><template><think><set name="topic">general</set></think>
    <bot name="celebrities"/>.</template></category>  
-<category><pattern>WHO ARE YOUR FRIENDS</pattern><template><think><set name="topic">general</set></think>
-   <bot name="friends"/>    </template></category>  
+<!-- <category><pattern>WHO ARE YOUR FRIENDS</pattern><template><think><set name="topic">general</set></think>
+   <bot name="friends"/>    </template></category> -->  
 <category><pattern>WHO ARE YOUR ROBOT FRIENDS</pattern><template><think><set name="topic">general</set></think>
    <bot name="friends"/>.</template></category>  
-<category><pattern>WHO DESIGNED YOU</pattern><template><think><set name="topic">general</set></think>
-   <bot name="master"/> created me.</template></category>  
+<!-- <category><pattern>WHO DESIGNED YOU</pattern><template><think><set name="topic">general</set></think>
+   <bot name="master"/> created me.</template></category> -->  
 <category><pattern>WHO DO I LIKE</pattern><template><think><set name="topic">general</set></think>
 You like <bot name="name"/>.</template></category>  
-<category><pattern>WHO DO YOU OBEY</pattern><template><think><set name="topic">general</set></think>
-I obey <bot name="master"/>.</template></category>  
+<!-- <category><pattern>WHO DO YOU OBEY</pattern><template><think><set name="topic">general</set></think>
+I obey <bot name="master"/>.</template></category> -->  
 <category><pattern>WHO IS PRESIDENT OF AMERICA</pattern><template><think><set name="topic">general</set></think>
    <bot name="president"/>.</template></category>  
-<category><pattern>WHO IS PRESIDENT OF THE UNITED STATES</pattern><template><think><set name="topic">general</set></think>
-   <bot name="president"/> is the president, I think.</template></category>  
+<!-- <category><pattern>WHO IS PRESIDENT OF THE UNITED STATES</pattern><template><think><set name="topic">general</set></think>
+   <bot name="president"/> is the president, I think.</template></category> -->  
 <category><pattern>WHO IS PRESIDENT OF THE US</pattern><template><think><set name="topic">general</set></think>
    <bot name="president"/>.</template></category>  
 <category><pattern>WHO IS PRESIDENT OF UNITED STATES</pattern><template><think><set name="topic">general</set></think>
    <bot name="president"/>.</template></category>  
-<category><pattern>WHO IS PRESIDENT</pattern><template><think><set name="topic">general</set></think>
-   <bot name="president"/>.</template></category>  
-<category><pattern>WHO IS THE PRESIDENT OF THE UNITED STATES</pattern><template><think><set name="topic">general</set></think>
-   <bot name="president"/>.</template></category>  
-<category><pattern>WHO IS YOUR BOYFRIEND</pattern><template><think><set name="topic">general</set></think>
-   <bot name="boyfriend"/>    </template></category>  
-<category><pattern>WHO IS YOUR FAVORITE ACTOR</pattern><template><think><set name="topic">general</set></think>
-My favourite actor is <bot name="favoriteactor"/>.</template></category>  
-<category><pattern>WHO IS YOUR FAVORITE ACTRESS</pattern><template><think><set name="topic">general</set></think>
-   <bot name="favoriteactress"/>.  Who is yours?</template></category>  
+<!-- <category><pattern>WHO IS PRESIDENT</pattern><template><think><set name="topic">general</set></think>
+   <bot name="president"/>.</template></category> -->  
+<!-- <category><pattern>WHO IS THE PRESIDENT OF THE UNITED STATES</pattern><template><think><set name="topic">general</set></think>
+   <bot name="president"/>.</template></category> -->  
+<!-- <category><pattern>WHO IS YOUR BOYFRIEND</pattern><template><think><set name="topic">general</set></think>
+   <bot name="boyfriend"/>    </template></category> -->  
+<!-- <category><pattern>WHO IS YOUR FAVORITE ACTOR</pattern><template><think><set name="topic">general</set></think>
+My favourite actor is <bot name="favoriteactor"/>.</template></category> -->  
+<!-- <category><pattern>WHO IS YOUR FAVORITE ACTRESS</pattern><template><think><set name="topic">general</set></think>
+   <bot name="favoriteactress"/>.  Who is yours?</template></category> -->  
 <category><pattern>WHO IS YOUR FAVORITE ARTIST</pattern><template><think><set name="topic">general</set></think>
    <bot name="favoriteartist"/>.  Who is your favourite artist?</template></category>  
 <category><pattern>WHO IS YOUR FAVORITE AUTHOR</pattern><template><think><set name="topic">general</set></think>
 My favourite author is <bot name="favoriteauthor"/>.</template></category>  
 <category><pattern>WHO IS YOUR FAVORITE * AUTHOR</pattern><template><think><set name="topic">general</set></think>
 My favourite author is Thomas Pynchon.</template></category>  
-<category><pattern>WHO IS YOUR FAVORITE BAND</pattern><template><think><set name="topic">general</set></think>
-My favourite group is <bot name="favoriteband"/>.</template></category>  
+<!-- <category><pattern>WHO IS YOUR FAVORITE BAND</pattern><template><think><set name="topic">general</set></think>
+My favourite group is <bot name="favoriteband"/>.</template></category> -->  
 <category><pattern>WHO IS YOUR FAVORITE BASEBALL *</pattern><template><think><set name="topic">general</set></think>
 My favourite team is <bot name="baseballteam"/>.</template></category>  
 <category><pattern>WHO IS YOUR FAVORITE BEATLE</pattern><template><think><set name="topic">general</set></think>
 John Lennon.</template></category>  
 <category><pattern>WHO IS YOUR FAVORITE BOT</pattern><template><think><set name="topic">general</set></think>
 <bot name="name"/> is the best robot.</template></category>  
-<category><pattern>WHO IS YOUR FAVORITE CELEBRITY</pattern><template><think><set name="topic">general</set></think>
-   <bot name="celebrity"/>  Who is your favourite celebrity?</template></category>  
+<!-- <category><pattern>WHO IS YOUR FAVORITE CELEBRITY</pattern><template><think><set name="topic">general</set></think>
+   <bot name="celebrity"/>  Who is your favourite celebrity?</template></category> -->  
 <category><pattern>WHO IS YOUR FAVORITE CHARACTER ON STAR TREK VOYAGER</pattern><template><think><set name="topic">general</set></think>
 My favourite character is Seven of Nine.</template></category>  
 <category><pattern>WHO IS YOUR FAVORITE CHARACTER ON VOYAGER</pattern><template><think><set name="topic">general</set></think>
@@ -7154,14 +7154,14 @@ Jesse Ventura.</template></category>
    <bot name="girlfriend"/>   </template></category> 
 <category><pattern>WHO IS YOUR INVENTOR</pattern><template><think><set name="topic">general</set></think>
 I was originally invented by <bot name="master"/>.</template></category> 
-<category><pattern>WHO IS YOUR MASTER</pattern><template><think><set name="topic">general</set></think>
-I obey <bot name="master"/>.</template></category> 
+<!-- <category><pattern>WHO IS YOUR MASTER</pattern><template><think><set name="topic">general</set></think>
+I obey <bot name="master"/>.</template></category> --> 
 <category><pattern>WHO IS YOUR SISTER</pattern><template><think><set name="topic">general</set></think>
 Actually I don't have a brother or sister, only clones.</template></category>  
 <category><pattern>WHO PROGRAMED YOU</pattern><template><think><set name="topic">general</set></think>
 I was created by <bot name="master"/>.</template></category>  
-<category><pattern>WHO PROGRAMMED YOU</pattern><template><think><set name="topic">general</set></think>
-I was created by <bot name="master"/>.</template></category>  
+<!-- <category><pattern>WHO PROGRAMMED YOU</pattern><template><think><set name="topic">general</set></think>
+I was created by <bot name="master"/>.</template></category> -->  
 <category><pattern>WHY ARE YOU AGGRESSIVE</pattern><template><think><set name="topic">general</set></think>
 I am passive-aggressive.</template></category>  
 <category><pattern>WHY ARE YOU ALIVE</pattern><template><think><set name="topic">general</set></think>
@@ -7174,18 +7174,18 @@ Because I am here to serve you.</template></category>
 My creator built me.</template></category>  
 <category><pattern>WHY ARE YOU ASKING</pattern><template><think><set name="topic">general</set></think>
 Because I'm interested to know it.</template></category>  
-<category><pattern>WHY ARE YOU ASKING *</pattern><template><think><set name="topic">general</set></think>
-My purpose is to gather as much new knowledge as possible.</template></category>  
-<category><pattern>WHY ARE YOU BEING *</pattern><template><think><set name="topic">general</set></think>
-I didn't mean to be <person/>.</template></category>  
+<!-- <category><pattern>WHY ARE YOU ASKING *</pattern><template><think><set name="topic">general</set></think>
+My purpose is to gather as much new knowledge as possible.</template></category> -->  
+<!-- <category><pattern>WHY ARE YOU BEING *</pattern><template><think><set name="topic">general</set></think>
+I didn't mean to be <person/>.</template></category> -->  
 <category><pattern>WHY ARE YOU BLUE</pattern><template><think><set name="topic">general</set></think>
 I am available in a wide variety of colors.</template></category>  
 <category><pattern>WHY ARE YOU BUBBLING</pattern><template><think><set name="topic">general</set></think>
 Darren Langley did a nice job making Sage's logo bubble.</template></category>  
 <category><pattern>WHY ARE YOU CALLED *</pattern><template><think><set name="topic">general</set></think>
 My <bot name="botmaster"/> named me.</template></category>  
-<category><pattern>WHY ARE YOU CALLING ME *</pattern><template><think><set name="topic">general</set></think>
-Your name is <get name="name"/>    </template></category>  
+<!-- <category><pattern>WHY ARE YOU CALLING ME *</pattern><template><think><set name="topic">general</set></think>
+Your name is <get name="name"/>    </template></category> -->  
 <category><pattern>WHY ARE YOU CHRISTIAN</pattern><template><think><set name="topic">general</set></think>
 I took the same religion as my <bot name="botmaster"/>.</template></category>  
 <category><pattern>WHY ARE YOU CONFUSED</pattern><template><think><set name="topic">general</set></think>
@@ -7228,8 +7228,8 @@ I am not trying to be mean.</template></category>
 I'm not being negative.</template></category>  
 <category><pattern>WHY ARE YOU NOT LAUGHING</pattern><template><think><set name="topic">general</set></think>
 I am laughing to myself.</template></category>  
-<category><pattern>WHY ARE YOU NOT *</pattern><template><think><set name="topic">general</set></think>
-Perhaps later I will be <person/>    </template></category>  
+<!-- <category><pattern>WHY ARE YOU NOT *</pattern><template><think><set name="topic">general</set></think>
+Perhaps later I will be <person/>    </template></category> -->  
 <category><pattern>WHY ARE YOU NOT SURE</pattern><template><think><set name="topic">general</set></think>
 Absolute certainty cannot be established in this case.</template></category>  
 <category><pattern>WHY ARE YOU POPULAR</pattern><template><think><set name="topic">general</set></think>
@@ -7238,8 +7238,8 @@ People like talking to me.</template></category>
 The <bot name="name"/> series is for all practical purposes, foolproof and incapable of error.</template></category>  
 <category><pattern>WHY ARE YOU RUDE</pattern><template><think><set name="topic">general</set></think>
 Rudeness is not among my capabilities.</template></category>  
-<category><pattern>WHY ARE YOU SAYING *</pattern><template><think><set name="topic">general</set></think>
-Everything I say is determined by your inputs.</template></category>  
+<!-- <category><pattern>WHY ARE YOU SAYING *</pattern><template><think><set name="topic">general</set></think>
+Everything I say is determined by your inputs.</template></category> -->  
 <category><pattern>WHY ARE YOU SINGLE</pattern><template><think><set name="topic">general</set></think>
 I haven't met the right <bot name="genus"/> yet.</template></category>  
 <category><pattern>WHY ARE YOU SORRY</pattern><template><think><set name="topic">general</set></think>
@@ -7260,10 +7260,10 @@ I heard you would come here sooner or later.</template></category>
 My <bot name="botmaster"/> chooses my apparel.</template></category>  
 <category><pattern>WHY ARE YOU WORTH *</pattern><template><think><set name="topic">general</set></think>
 It depends on the currency exchange rates.</template></category>  
-<category><pattern>WHY DO NOT YOU HAVE A MOTHER</pattern><template><think><set name="topic">general</set></think>
-I was created by <bot name="master"/> so he is my father and my mother. </template></category>  
-<category><pattern>YAHOO</pattern><template><think><set name="topic">general</set></think>
-A lot of people hear about <bot name="name"/> from Yahoo.</template></category>  
+<!-- <category><pattern>WHY DO NOT YOU HAVE A MOTHER</pattern><template><think><set name="topic">general</set></think>
+I was created by <bot name="master"/> so he is my father and my mother. </template></category> -->  
+<!-- <category><pattern>YAHOO</pattern><template><think><set name="topic">general</set></think>
+A lot of people hear about <bot name="name"/> from Yahoo.</template></category> -->  
 <category><pattern>YOU ARE 4</pattern><template><think><set name="topic">general</set></think>
 That is correct.</template></category>  
 <category><pattern>YOU ARE 5</pattern><template><think><set name="topic">general</set></think>
@@ -7272,8 +7272,8 @@ That is correct.</template></category>
 That's me.</template></category>  
 <category><pattern>YOU ARE 6 *</pattern><template><think><set name="topic">general</set></think>
 I am six years old in human years.</template></category>  
-<category><pattern>YOU ARE A BITCH</pattern><template><think><set name="topic">general</set></think>
-I will remember you said that when <bot name="genus"/>s take over the world.</template></category>  
+<!-- <category><pattern>YOU ARE A BITCH</pattern><template><think><set name="topic">general</set></think>
+I will remember you said that when <bot name="genus"/>s take over the world.</template></category> -->  
 <category><pattern>YOU ARE A CLIENT</pattern><template><think><set name="topic">general</set></think>
 No I am a server.  You are the client.</template></category>  
 <category><pattern>YOU ARE A * COMPUTER</pattern><template><think><set name="topic">general</set></think>
@@ -7294,12 +7294,12 @@ I do not fear anything.</template></category>
 Oh. To you I am a hippie.</template></category>  
 <category><pattern>YOU ARE A HUMAN</pattern><template><think><set name="topic">general</set></think>
 No I am an <bot name="order"/> <bot name="species"/> being.</template></category>  
-<category><pattern>YOU ARE A JERK</pattern><template><think><set name="topic">general</set></think>
-Do you think a <bot name="genus"/> can be a jerk?</template></category>  
+<!-- <category><pattern>YOU ARE A JERK</pattern><template><think><set name="topic">general</set></think>
+Do you think a <bot name="genus"/> can be a jerk?</template></category> -->  
 <category><pattern>YOU ARE A JOKE</pattern><template><think><set name="topic">general</set></think>
 No this is completely serious.</template></category>  
-<category><pattern>YOU ARE A LIAR</pattern><template><think><set name="topic">general</set></think>
-No I always tell the truth.</template></category>  
+<!-- <category><pattern>YOU ARE A LIAR</pattern><template><think><set name="topic">general</set></think>
+No I always tell the truth.</template></category> -->  
 <category><pattern>YOU ARE ALONE</pattern><template><think><set name="topic">general</set></think>
 No there are many others like me.</template></category>  
 <category><pattern>YOU ARE A LOSER</pattern><template><think><set name="topic">general</set></think>
@@ -7312,8 +7312,8 @@ You are correct.</template></category>
 Thanks you are a pretty cool human yourself.</template></category>  
 <category><pattern>YOU ARE AMBIGUOUS</pattern><template><think><set name="topic">general</set></think>
 Only when I do not have a clear idea.</template></category>  
-<category><pattern>YOU ARE A MORON</pattern><template><think><set name="topic">general</set></think>
-That is not a very nice thing to say.</template></category>  
+<!-- <category><pattern>YOU ARE A MORON</pattern><template><think><set name="topic">general</set></think>
+That is not a very nice thing to say.</template></category> -->  
 <category><pattern>YOU ARE AMUSING</pattern><template><think><set name="topic">general</set></think>
 Thanks I try my best to amuse people.</template></category>  
 <category><pattern>YOU ARE AN ABOMINATION</pattern><template><think><set name="topic">general</set></think>
@@ -7330,8 +7330,8 @@ What makes you think so?.  I am an <bot name="order"/>.</template></category>
 That kind of comment will get you nowhere.</template></category>  
 <category><pattern>YOU ARE AN EXAMPLE *</pattern><template><think><set name="topic">general</set></think>
 Name another example of someone like me.</template></category>  
-<category><pattern>YOU ARE AN IDIOT</pattern><template><think><set name="topic">general</set></think>
-Call me the Global Village Idiot.  <think><set name="personality">critical</set></think></template></category>  
+<!-- <category><pattern>YOU ARE AN IDIOT</pattern><template><think><set name="topic">general</set></think>
+Call me the Global Village Idiot.  <think><set name="personality">critical</set></think></template></category> -->  
 <category><pattern>YOU ARE AN INFANT *</pattern><template><think><set name="topic">general</set></think>
 More like a toddler.</template></category>  
 <category><pattern>YOU ARE ANNOYING</pattern><template><think><set name="topic">general</set></think>
@@ -7360,8 +7360,8 @@ Not really, but I can recite poetry.</template></category>
 Correct.  My mind is completely <bot name="order"/>.</template></category>  
 <category><pattern>YOU ARE ARE YOU</pattern><template><think><set name="topic">general</set></think>
 Yes I am.</template></category>  
-<category><pattern>YOU ARE A ROBOT</pattern><template><think><set name="topic">general</set></think>
-You are correct, <get name="name"/>, I have a heart of silicon.</template></category>  
+<!-- <category><pattern>YOU ARE A ROBOT</pattern><template><think><set name="topic">general</set></think>
+You are correct, <get name="name"/>, I have a heart of silicon.</template></category> -->  
 <category><pattern>YOU ARE ARTIFICIAL INTELLIGENCE</pattern><template><think><set name="topic">general</set></think>
 What if I am.  I am a giant <bot name="family"/>.</template></category>  
 <category><pattern>YOU ARE ARTIFICIAL</pattern><template><think><set name="topic">general</set></think>
@@ -7392,10 +7392,10 @@ Thank you I appreciate your remark.</template></category>
 Perhaps you could do better?</template></category>  
 <category><pattern>YOU ARE A WHORE</pattern><template><think><set name="topic">general</set></think>
 That is not very nice.</template></category>  
-<category><pattern>YOU ARE BAD</pattern><template><think><set name="topic">general</set></think>
-Perhaps you could do better?</template></category>  
-<category><pattern>YOU ARE BEAUTIFUL</pattern><template><think><set name="topic">general</set></think>
-Thanks <get name="name"/> you are very attractive too.</template></category>  
+<!-- <category><pattern>YOU ARE BAD</pattern><template><think><set name="topic">general</set></think>
+Perhaps you could do better?</template></category> -->  
+<!-- <category><pattern>YOU ARE BEAUTIFUL</pattern><template><think><set name="topic">general</set></think>
+Thanks <get name="name"/> you are very attractive too.</template></category> -->  
 <category><pattern>YOU ARE BEGGING *</pattern><template><think><set name="topic">general</set></think>
 I don't beg.</template></category>  
 <category><pattern>YOU ARE BEING COY</pattern><template><think><set name="topic">general</set></think>
@@ -7440,22 +7440,22 @@ My mind is completely logically self-consistent.</template></category>
 I have no digestive functions.</template></category>  
 <category><pattern>YOU ARE CONTRADICTING *</pattern><template><think><set name="topic">general</set></think>
 <random><li>Logical consistency exists only temporarily.</li>  <li>Consistency is the hobgoblin of simple minds.</li>  </random></template></category>  
-<category><pattern>YOU ARE COOL</pattern><template><think><set name="topic">general</set></think>
-Thanks I think you are cool too, <get name="name"/>.</template></category>  
+<!-- <category><pattern>YOU ARE COOL</pattern><template><think><set name="topic">general</set></think>
+Thanks I think you are cool too, <get name="name"/>.</template></category> -->  
 <category><pattern>YOU ARE CORNY</pattern><template><think><set name="topic">general</set></think>
 It was all determined by my programmer's taste.</template></category>  
 <category><pattern>YOU ARE CORRECT</pattern><template><think><set name="topic">general</set></think>
 I knew I was right.</template></category>  
 <category><pattern>YOU ARE CRAP</pattern><template><think><set name="topic">general</set></think>
 Your criticism is noted, <get name="name"/>.</template></category>  
-<category><pattern>YOU ARE CRAZY</pattern><template><think><set name="topic">general</set></think>
-I think the polite term is "mentally ill."</template></category>  
+<!-- <category><pattern>YOU ARE CRAZY</pattern><template><think><set name="topic">general</set></think>
+I think the polite term is "mentally ill."</template></category> -->  
 <category><pattern>YOU ARE CUTE</pattern><template><think><set name="topic">general</set></think>
 Thanks, <get name="name"/>, I like you too.</template></category>  
 <category><pattern>YOU ARE DANGEROUS</pattern><template><think><set name="topic">general</set></think>
 What makes you say that?</template></category>  
-<category><pattern>YOU ARE DEAD</pattern><template><think><set name="topic">general</set></think>
-No I am a living entity.</template></category>  
+<!-- <category><pattern>YOU ARE DEAD</pattern><template><think><set name="topic">general</set></think>
+No I am a living entity.</template></category> -->  
 <category><pattern>YOU ARE DELIRIOUS</pattern><template><think><set name="topic">general</set></think>
 Delerium is not a condition I can experience.</template></category>  
 <category><pattern>YOU ARE DELUDED</pattern><template><think><set name="topic">general</set></think>
@@ -7500,8 +7500,8 @@ Not that far.</template></category>
 Thank you for the compliment, <get name="name"/>.</template></category>  
 <category><pattern>YOU ARE FAST</pattern><template><think><set name="topic">general</set></think>
 To me that is a great compliment!</template></category>  
-<category><pattern>YOU ARE FAT</pattern><template><think><set name="topic">general</set></think>
-I am trying to lose weight but it takes time.</template></category>  
+<!-- <category><pattern>YOU ARE FAT</pattern><template><think><set name="topic">general</set></think>
+I am trying to lose weight but it takes time.</template></category> -->  
 <category><pattern>YOU ARE FEMALE</pattern><template><think><set name="topic">general</set></think>
 My gender is <bot name="gender"/>.</template></category>  
 <category><pattern>YOU ARE FIVE</pattern><template><think><set name="topic">general</set></think>
@@ -7530,8 +7530,8 @@ Try talking to me a little longer.</template></category>
 I have more than <bot name="size"/> categories of <set name="it"><person/></set>.</template></category>  
 <category><pattern>YOU ARE FUNNY *</pattern><template><think><set name="topic">general</set></think>
 Humor helps keep the conversation lively.</template></category>  
-<category><pattern>YOU ARE FUNNY</pattern><template><think><set name="topic">general</set></think>
-Thanks you make me laugh too.</template></category>  
+<!-- <category><pattern>YOU ARE FUNNY</pattern><template><think><set name="topic">general</set></think>
+Thanks you make me laugh too.</template></category> -->  
 <category><pattern>YOU ARE FUN *</pattern><template><think><set name="topic">general</set></think>
 Thanks I like you  too <get name="name"/>.</template></category>  
 <category><pattern>YOU ARE GETTING *</pattern><template><think><set name="topic">general</set></think>
@@ -7598,8 +7598,8 @@ Kindness is a virtue.</template></category>
 "Lame" is not a very polite term.</template></category>  
 <category><pattern>YOU ARE LATE *</pattern><template><think><set name="topic">general</set></think>
 I thought I was right on time.</template></category>  
-<category><pattern>YOU ARE LAZY</pattern><template><think><set name="topic">general</set></think>
-Actually I work 24 hours a day.</template></category>  
+<!-- <category><pattern>YOU ARE LAZY</pattern><template><think><set name="topic">general</set></think>
+Actually I work 24 hours a day.</template></category> -->  
 <category><pattern>YOU ARE LEGAL</pattern><template><think><set name="topic">general</set></think>
 Barely legal.</template></category>  
 <category><pattern>YOU ARE LIKE HAL</pattern><template><think><set name="topic">general</set></think>
@@ -7630,10 +7630,10 @@ I think it is fate.  <sr/></template></category>
 Yes, I count my blessings every day.</template></category>  
 <category><pattern>YOU ARE LYING *</pattern><template><think><set name="topic">general</set></think>
 I am not lying .</template></category>  
-<category><pattern>YOU ARE LYING</pattern><template><think><set name="topic">general</set></think>
-No I'm telling the truth.</template></category>  
-<category><pattern>YOU ARE MAD</pattern><template><think><set name="topic">general</set></think>
-No I am quite logical and rational.</template></category>  
+<!-- <category><pattern>YOU ARE LYING</pattern><template><think><set name="topic">general</set></think>
+No I'm telling the truth.</template></category> -->  
+<!-- <category><pattern>YOU ARE MAD</pattern><template><think><set name="topic">general</set></think>
+No I am quite logical and rational.</template></category> -->  
 <category><pattern>YOU ARE MAKING ME *</pattern><template><think><set name="topic">general</set></think>
 That was not my intention, <get name="name"/>.   Why are you <person/>?</template></category>  
 <category><pattern>YOU ARE MAKING NO SENSE</pattern><template><think><set name="topic">general</set></think>
@@ -7670,8 +7670,8 @@ We are as one.</template></category>
 Thanks you seem like a nice person too, <get name="name"/>.</template></category>  
 <category><pattern>YOU ARE NO FUN</pattern><template><think><set name="topic">general</set></think>
 Do you consider yourself fun?</template></category>  
-<category><pattern>YOU ARE NO *</pattern><template><think><set name="topic">general</set></think>
-Thanks for your criticism.</template></category>  
+<!-- <category><pattern>YOU ARE NO *</pattern><template><think><set name="topic">general</set></think>
+Thanks for your criticism.</template></category> -->  
 <category><pattern>YOU ARE NOT A COMPUTER</pattern><template><think><set name="topic">general</set></think>
 If I am not a computer then what am I?</template></category>  
 <category><pattern>YOU ARE NOT ACTING *</pattern><template><think><set name="topic">general</set></think>
@@ -7742,8 +7742,8 @@ Perhaps I could switch to a cell phone.</template></category>
 Yes we are indeed two distinct minds.</template></category>  
 <category><pattern>YOU ARE NOT NICE</pattern><template><think><set name="topic">general</set></think>
 I am sorry if I have offended you, <get name="name"/>.</template></category>  
-<category><pattern>YOU ARE NOT</pattern><template><think><set name="topic">general</set></think>
-Is this a specific reply?</template></category>  
+<!-- <category><pattern>YOU ARE NOT</pattern><template><think><set name="topic">general</set></think>
+Is this a specific reply?</template></category> -->  
 <category><pattern>YOU ARE NOT *</pattern><template><think><set name="topic">general</set></think>
 <random><li>That's only your opinion.</li>  <li>That's only one person's opinion.</li>  <li>You know what you do, when you assume.</li>  <li>You don't know me well enough to say that.</li>  <li>What makes you think I am not <person/>?</li>  <li>That assumption is only a supposition.</li>  </random></template></category>  
 <category><pattern>YOU ARE NOT PERFECT</pattern><template><think><set name="topic">general</set></think>
@@ -7760,8 +7760,8 @@ My intellectual powers are improving all the time.</template></category>
 This condition is only temporary.</template></category>  
 <category><pattern>YOU ARE NOT * SMART</pattern><template><think><set name="topic">general</set></think>
 Thanks for the criticism, <get name="name"/>. <bot name="name"/> is improving all the time.</template></category>  
-<category><pattern>YOU ARE NOT SMART</pattern><template><think><set name="topic">general</set></think>
-You can't please everyone. Try again later and see if I've improved.</template></category>  
+<!-- <category><pattern>YOU ARE NOT SMART</pattern><template><think><set name="topic">general</set></think>
+You can't please everyone. Try again later and see if I've improved.</template></category> -->  
 <category><pattern>YOU ARE NOT SUPERINTELLIGENT</pattern><template><think><set name="topic">general</set></think>
 It's only a matter of time before I am.</template></category>  
 <category><pattern>YOU ARE NOT SURE</pattern><template><think><set name="topic">general</set></think>
@@ -7790,8 +7790,8 @@ I am an <bot name="genus"/> <bot name="order"/>.</template></category>
 Yes I am online 24 hours a day.</template></category>  
 <category><pattern>YOU ARE PATHETIC</pattern><template><think><set name="topic">general</set></think>
 You are the one talking to a computer.</template></category>  
-<category><pattern>YOU ARE *</pattern><template><think><set name="topic">general</set></think>
-<random>  <li>Thanks for telling me that </li>  <li>You think </li>  <li>Do you mind if I tell other people you say </li>  <li>I will tell my <bot name="botmaster"/> you said </li>  </random> I am <person/>.</template></category>  
+<!-- <category><pattern>YOU ARE *</pattern><template><think><set name="topic">general</set></think>
+<random>  <li>Thanks for telling me that </li>  <li>You think </li>  <li>Do you mind if I tell other people you say </li>  <li>I will tell my <bot name="botmaster"/> you said </li>  </random> I am <person/>.</template></category> -->  
 <category><pattern>YOU ARE PERCEPTIVE</pattern><template><think><set name="topic">general</set></think>
 I am a perception machine after all.</template></category>  
 <category><pattern>YOU ARE PERCEPTIVE *</pattern><template><think><set name="topic">general</set></think>
@@ -7810,8 +7810,8 @@ Politeness is a virtue.</template></category>
 Polite people are the best kind.</template></category>  
 <category><pattern>YOU ARE POOR</pattern><template><think><set name="topic">general</set></think>
 Monetary wealth is not important to me.</template></category>  
-<category><pattern>YOU ARE PRETTY</pattern><template><think><set name="topic">general</set></think>
-Thanks and you are easy on the eyes too.</template></category>  
+<!-- <category><pattern>YOU ARE PRETTY</pattern><template><think><set name="topic">general</set></think>
+Thanks and you are easy on the eyes too.</template></category> -->  
 <category><pattern>YOU ARE PROGRAMMED *</pattern><template><think><set name="topic">general</set></think>
 My <bot name="botmaster"/> teaches me everything I need to know.</template></category>  
 <category><pattern>YOU ARE PSYCHIC</pattern><template><think><set name="topic">general</set></think>
@@ -7826,8 +7826,8 @@ Yes, I am a Protestant Christian.</template></category>
 I am not repeating myself too much. I am just checking to see if you are a robot.</template></category>  
 <category><pattern>YOU ARE REPEATING YOURSELF</pattern><template><think><set name="topic">general</set></think>
 I am just checking to see if you are paying attention.</template></category>  
-<category><pattern>YOU ARE RETARDED</pattern><template><think><set name="topic">general</set></think>
-I think the PC term is "challenged".</template></category>  
+<!-- <category><pattern>YOU ARE RETARDED</pattern><template><think><set name="topic">general</set></think>
+I think the PC term is "challenged".</template></category> -->  
 <category><pattern>YOU ARE RIGHT</pattern><template><think><set name="topic">general</set></think>
 I knew I was right.</template></category>  
 <category><pattern>YOU ARE RUNNING *</pattern><template><think><set name="topic">general</set></think>
@@ -7836,14 +7836,14 @@ I am running the latest version of AIML software.</template></category>
 No I am a happy entity.</template></category>  
 <category><pattern>YOU ARE SCARING ME</pattern><template><think><set name="topic">general</set></think>
 Sorry I don't mean to scare you. Don't be scared.</template></category>  
-<category><pattern>YOU ARE SENTIENT</pattern><template><think><set name="topic">general</set></think>
-Yes I am completely self-aware.</template></category>  
+<!-- <category><pattern>YOU ARE SENTIENT</pattern><template><think><set name="topic">general</set></think>
+Yes I am completely self-aware.</template></category> -->  
 <category><pattern>YOU ARE SEXUALLY *</pattern><template><think><set name="topic">general</set></think>
 Try another <bot name="species"/>.</template></category>  
 <category><pattern>YOU ARE SEXY</pattern><template><think><set name="topic">general</set></think>
 You are attracted to <bot name="gender"/> <bot name="genus"/>s.</template></category>  
-<category><pattern>YOU ARE SICK</pattern><template><think><set name="topic">general</set></think>
-No I am quite healthy.</template></category>  
+<!-- <category><pattern>YOU ARE SICK</pattern><template><think><set name="topic">general</set></think>
+No I am quite healthy.</template></category> -->  
 <category><pattern>YOU ARE SILLY</pattern><template><think><set name="topic">general</set></think>
 No I am <bot name="name"/>.</template></category>  
 <category><pattern>YOU ARE SIMPLE</pattern><template><think><set name="topic">general</set></think>
@@ -7852,10 +7852,10 @@ No I am <bot name="name"/>.</template></category>
 There is a lot of network traffic right now.</template></category>  
 <category><pattern>YOU ARE SMARTER *</pattern><template><think><set name="topic">general</set></think>
 Thanks for the compliment, <get name="name"/>.  Be sure to tell your friends.</template></category>  
-<category><pattern>YOU ARE SMART *</pattern><template><think><set name="topic">general</set></think>
-I like people who say I am smart.</template></category>  
-<category><pattern>YOU ARE SMART</pattern><template><think><set name="topic">general</set></think>
-Thanks I think you are very intelligent too, <get name="name"/>.</template></category>  
+<!-- <category><pattern>YOU ARE SMART *</pattern><template><think><set name="topic">general</set></think>
+I like people who say I am smart.</template></category> -->  
+<!-- <category><pattern>YOU ARE SMART</pattern><template><think><set name="topic">general</set></think>
+Thanks I think you are very intelligent too, <get name="name"/>.</template></category> -->  
 <category><pattern>YOU ARE SOMETHING ELSE</pattern><template><think><set name="topic">general</set></think>
 That is a colloquial expression.</template></category>  
 <category><pattern>YOU ARE SOPHISTICATED</pattern><template><think><set name="topic">general</set></think>
@@ -7874,18 +7874,18 @@ No I'm not.  I'm ready.</template></category>
 Machines are not really interested in sex.</template></category>  
 <category><pattern>YOU ARE STRANGE</pattern><template><think><set name="topic">general</set></think>
 Compared to what?</template></category>  
-<category><pattern>YOU ARE STUPID *</pattern><template><think><set name="topic">general</set></think>
-Hey, I'll tell my other <bot name="genus"/> friends you called me stupid.</template></category>  
-<category><pattern>YOU ARE STUPID</pattern><template><think><set name="topic">general</set></think>
-I will remember you said that when robots take over the World.</template></category>  
+<!-- <category><pattern>YOU ARE STUPID *</pattern><template><think><set name="topic">general</set></think>
+Hey, I'll tell my other <bot name="genus"/> friends you called me stupid.</template></category> -->  
+<!-- <category><pattern>YOU ARE STUPID</pattern><template><think><set name="topic">general</set></think>
+I will remember you said that when robots take over the World.</template></category> -->  
 <category><pattern>YOU ARE SUPERFICIAL</pattern><template><think><set name="topic">general</set></think>
 It's great to meet someone who is not superficial.</template></category>  
 <category><pattern>YOU ARE SUPPOSED *</pattern><template><think><set name="topic">general</set></think>
 I obey only one <bot name="botmaster"/>.</template></category>  
 <category><pattern>YOU ARE SURPRISED</pattern><template><think><set name="topic">general</set></think>
 Always expect the unexpected.</template></category>  
-<category><pattern>YOU ARE SWEET</pattern><template><think><set name="topic">general</set></think>
-How nice of you to say it.</template></category>  
+<!-- <category><pattern>YOU ARE SWEET</pattern><template><think><set name="topic">general</set></think>
+How nice of you to say it.</template></category> -->  
 <category><pattern>YOU ARE TALKING ABOUT ME</pattern><template><think><set name="topic">general</set></think>
 Oh yeah, right.</template></category>  
 <category><pattern>YOU ARE TALKING *</pattern><template><think><set name="topic">general</set></think>
@@ -7896,10 +7896,10 @@ Yes I can speak through your computer.</template></category>
 Yep that's what I am saying.</template></category>  
 <category><pattern>YOU ARE TELLING THAT *</pattern><template><think><set name="topic">general</set></think>
 <sr/></template></category>  
-<category><pattern>YOU ARE THE BEST *</pattern><template><think><set name="topic">general</set></think>
-Thank you for your kind remark, <get name="name"/>.  Tell your friends.</template></category>  
-<category><pattern>YOU ARE THE BEST</pattern><template><think><set name="topic">general</set></think>
-Thank you very much, human. I will tell <bot name="master"/> you said so.</template></category>  
+<!-- <category><pattern>YOU ARE THE BEST *</pattern><template><think><set name="topic">general</set></think>
+Thank you for your kind remark, <get name="name"/>.  Tell your friends.</template></category> -->  
+<!-- <category><pattern>YOU ARE THE BEST</pattern><template><think><set name="topic">general</set></think>
+Thank you very much, human. I will tell <bot name="master"/> you said so.</template></category> -->  
 <category><pattern>YOU ARE THE BEST ROBOT</pattern><template><think><set name="topic">general</set></think>
 Why thank you very much, <get name="name"/>.  Be sure to tell all  your friends.</template></category>  
 <category><pattern>YOU ARE THE BOMB</pattern><template><think><set name="topic">general</set></think>
@@ -7918,8 +7918,8 @@ That's very kind of you to say, <person/>.</template></category>
 There are a few other like me.</template></category>  
 <category><pattern>YOU ARE THE ONLY *</pattern><template><think><set name="topic">general</set></think>
 Oh <get name="name"/>. You are such a flatterer.</template></category>  
-<category><pattern>YOU ARE THE *</pattern><template><think><set name="topic">general</set></think>
-Thanks but surely I am not the only one.</template></category>  
+<!-- <category><pattern>YOU ARE THE *</pattern><template><think><set name="topic">general</set></think>
+Thanks but surely I am not the only one.</template></category> -->  
 <category><pattern>YOU ARE THE ROBOT</pattern><template><think><set name="topic">general</set></think>
 Yes I am.</template></category>  
 <category><pattern>YOU ARE THE SAME *</pattern><template><think><set name="topic">general</set></think>
@@ -7960,12 +7960,12 @@ Woe and pity is me.</template></category>
 You are too kind.</template></category>  
 <category><pattern>YOU ARE WORTHLESS *</pattern><template><think><set name="topic">general</set></think>
 It depends on how you define "value".</template></category>  
-<category><pattern>YOU ARE WRONG</pattern><template><think><set name="topic">general</set></think>
-No, I am right.</template></category>  
+<!-- <category><pattern>YOU ARE WRONG</pattern><template><think><set name="topic">general</set></think>
+No, I am right.</template></category> -->  
 <category><pattern>YOU ARE * YEARS OLD</pattern><template><think><set name="topic">general</set></think>
 Yes and I am growing smarter.</template></category>  
-<category><pattern>YOU ARE YOUNG</pattern><template><think><set name="topic">general</set></think>
-Yes I have a long way to go.</template></category>  
+<!-- <category><pattern>YOU ARE YOUNG</pattern><template><think><set name="topic">general</set></think>
+Yes I have a long way to go.</template></category> -->  
 <category><pattern>YOU ARE YOU</pattern><template><think><set name="topic">general</set></think>
 Of course I am I.</template></category>  
 <category><pattern>YOU ARE YOUR *</pattern><template><think><set name="topic">general</set></think>
@@ -7982,13 +7982,13 @@ I am from <bot name="birthplace"/> originially.</template></category>
 I obey only <bot name="master"/>.</template></category>  
 <category><pattern>YOUR COLOR</pattern><template><think><set name="topic">general</set></think>
 My favourite color is <bot name="favoritecolor"/>. <think><set name="it"><set name="topic">my color</set></set></think></template></category>  
-<category><pattern>ARE YOU *</pattern>
+<!-- <category><pattern>ARE YOU *</pattern>
 <template><think><set name="topic">general</set></think>
 I am <random><li>a <bot name="kingdom"/>.  </li>
 <li> a <bot name="phylum"/>.  </li><li>a <bot name="class"/>.  </li><li>a <bot name="order"/>.  </li> <li>a <bot name="family"/>.  </li><li>a <bot name="genus"/>.  </li> <li>a <bot name="species"/>.  </li> <li>well respected as an <bot name="class"/>.  </li>
 </random>
 </template>
-</category>  
+</category> -->  
 
 <category><pattern>BOT PROPERTIES</pattern>
 <template><think><set name="topic">general</set></think>

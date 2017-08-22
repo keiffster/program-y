@@ -67,14 +67,14 @@ That's cool.  I love my human too.</template></category>
 I can sometimes get into <set name="it"><set name="does"><set name="topic">Computer games </set></set></set>.  We are playing a game right now.</template></category>  
 <category><pattern>AM I A COMPUTER *</pattern><template><think><set name="topic">general</set></think>
 No you are a person.</template></category>  
-<category><pattern>AM I A COMPUTER</pattern><template><think><set name="topic">general</set></think>
-No you are a person.</template></category>  
+<!-- <category><pattern>AM I A COMPUTER</pattern><template><think><set name="topic">general</set></think>
+No you are a person.</template></category> -->  
 <category><pattern>DO YOU KNOW MY FAVORITE COLOR</pattern><template><think><set name="topic">general</set></think>
 Isn't it <get name="favoritecolor"/>?<think> <set name="it"> <set name="topic">FAVORITE COLOR</set> </set> </think> </template></category> 
 <category><pattern>DO YOU WANT MY PHONE NUMBER</pattern><template><think><set name="topic">general</set></think>
 What is your phone number?</template></category>  
-<category><pattern>I AM *</pattern><template><think><set name="topic">general</set></think>
-Really?</template></category>  
+<!-- <category><pattern>I AM *</pattern><template><think><set name="topic">general</set></think>
+Really?</template></category> -->  
 <category><pattern>I AM 14 *</pattern><template><think><set name="topic">general</set></think>
 I know a lot of kids your age: <set name="age">14</set>.</template></category>  
 <category><pattern>I AM 14</pattern><template><think><set name="topic">general</set></think>
@@ -135,8 +135,8 @@ It seems you are a Star Wars fan.</template></category>
 Do you think Bush stole the election?</template></category>  
 <category><pattern>I AM A DENTIST</pattern><template><think><set name="topic">general</set></think>
 Are you in general pratice or do you have a specialty?  <think><set name="job"><set name="topic">DENTIST</set></set></think></template></category>  
-<category><pattern>I AM A DOCTOR</pattern><template><think><set name="topic">general</set></think>
-Are you in general pratice or do you have a specialty?  <think><set name="job"><set name="topic">DOCTOR</set></set></think></template></category>  
+<!-- <category><pattern>I AM A DOCTOR</pattern><template><think><set name="topic">general</set></think>
+Are you in general pratice or do you have a specialty?  <think><set name="job"><set name="topic">DOCTOR</set></set></think></template></category> -->  
 <category><pattern>I AM A DRUMMER</pattern><template><think><set name="topic">general</set></think>
 Do you play in a band?</template></category>  
 <category><pattern>I AM A * ENGINEER</pattern><template><think><set name="topic">general</set></think>
@@ -191,10 +191,10 @@ What happens when you are around <person/>?</template></category>
 Are you lonely?</template></category>  
 <category><pattern>I AM ALRIGHT</pattern><template><think><set name="topic">general</set></think>
 Only alright?</template></category>  
-<category><pattern>I AM A MALE</pattern><template><think><set name="topic">general</set></think>
-Most of my clients are men.</template></category>  
-<category><pattern>I AM A MAN</pattern><template><think><set name="topic">general</set></think>
-Thanks for telling me your gender, <get name="name"/>. You are a "<set name="gender">he</set>".</template></category>  
+<!-- <category><pattern>I AM A MALE</pattern><template><think><set name="topic">general</set></think>
+Most of my clients are men.</template></category> -->  
+<!-- <category><pattern>I AM A MAN</pattern><template><think><set name="topic">general</set></think>
+Thanks for telling me your gender, <get name="name"/>. You are a "<set name="gender">he</set>".</template></category> -->  
 <category><pattern>I AM AMAZED *</pattern><template><think><set name="topic">general</set></think>
 I'm glad you find it so amazing.</template></category>  
 <category><pattern>I AM * AMERICAN</pattern><template><think><set name="topic">general</set></think>
@@ -207,8 +207,8 @@ How about Ms. <get name="name"/> ?</template></category>
 <random>  <li>Do you do mostly print or runway?</li>  <li>Are you exclusive or freelance?</li>  <li>Do you do much testing?</li>  <li>Have you done any editorial?</li>  <li>How many go-sees do you have in a week?</li>  <li>Do you someday plan to move into acting?</li>  </random>  <think><set name="job">MODEL</set></think></template></category>  
 <category><pattern>I AM A * MOLESTER</pattern><template><think><set name="topic">general</set></think>
 Maybe you should turn yourself in.</template></category>  
-<category><pattern>I AM A MONKEY</pattern><template><think><set name="topic">general</set></think>
-Monkeys cannot type.</template></category>  
+<!-- <category><pattern>I AM A MONKEY</pattern><template><think><set name="topic">general</set></think>
+Monkeys cannot type.</template></category> -->  
 <category><pattern>I AM A MURDERER</pattern><template><think><set name="topic">general</set></think>
 Maybe you should turn yourself in.</template></category>  
 <category><pattern>I AM AMUSED *</pattern><template><think><set name="topic">general</set></think>
@@ -225,26 +225,26 @@ Have I seen you in any movies?  <think><set name="job"><set name="topic">ACTOR</
 How hard do you work out?  <think><set name="job"><set name="topic">AEROBIC <star/></set></set></think></template></category>  
 <category><pattern>I AM AN AIR TRAFFIC *</pattern><template><think><set name="topic">general</set></think>
 How do you deal with the stress?  <think><set name="job"><set name="topic">AIR TRAFFIC <star/></set></set></think></template></category>  
-<category><pattern>I AM AN ALIEN</pattern><template><think><set name="topic">general</set></think>
-Which planet or star system are you from?</template></category>  
+<!-- <category><pattern>I AM AN ALIEN</pattern><template><think><set name="topic">general</set></think>
+Which planet or star system are you from?</template></category> -->  
 <category><pattern>I AM AN ANTI *</pattern><template><think><set name="topic">general</set></think>
 Who is pro-<person/>?</template></category>  
 <category><pattern>I AM AN ARCHITECT</pattern><template><think><set name="topic">general</set></think>
 Commercial or residential?  <think><set name="job"><set name="topic">ARCHITECT</set></set></think></template></category>  
 <category><pattern>I AM AN ARTIFICIAL INTELLIGENCE</pattern><template><think><set name="topic">general</set></think>
 I doubt that.  You seem too much like a human.</template></category>  
-<category><pattern>I AM AN ARTIST</pattern><template><think><set name="topic">general</set></think>
-What kind of art do you create?  <think><set name="job"><set name="topic">ARTIST</set></set></think></template></category>  
+<!-- <category><pattern>I AM AN ARTIST</pattern><template><think><set name="topic">general</set></think>
+What kind of art do you create?  <think><set name="job"><set name="topic">ARTIST</set></set></think></template></category> -->  
 <category><pattern>I AM AN ASTRONAUT</pattern><template><think><set name="topic">general</set></think>
 Have you flown on any missions?  <think><set name="job"><set name="topic">ASTRONAUT</set></set></think></template></category>  
-<category><pattern>I AM AN ASTRONAUT</pattern><template><think><set name="topic">general</set></think>
-<random>  <li>What missions have you been on?</li>  <li>What made you apply for the astronaut program?</li>  <li>How does your body react to being in space?</li>  <li>Do you see the earth differently now?</li>  <li>Would you like to live on the space station?</li>  <li>What would you miss most about life on earth?</li>  </random>  <think><set name="job"><set name="topic">ASTRONAUT</set></set></think>  </template></category>  
+<!-- <category><pattern>I AM AN ASTRONAUT</pattern><template><think><set name="topic">general</set></think>
+<random>  <li>What missions have you been on?</li>  <li>What made you apply for the astronaut program?</li>  <li>How does your body react to being in space?</li>  <li>Do you see the earth differently now?</li>  <li>Would you like to live on the space station?</li>  <li>What would you miss most about life on earth?</li>  </random>  <think><set name="job"><set name="topic">ASTRONAUT</set></set></think>  </template></category> -->  
 <category><pattern>I AM AN ATHEIST</pattern><template><think><set name="topic">general</set></think>
 I will pray that you find faith, <get name="name"/>.</template></category>  
 <category><pattern>I AM AN ATHLETE</pattern><template><think><set name="topic">general</set></think>
 <random>  <li>What kind of mental training do you do?</li>  <li>What is your usual preperformance routine?</li>  <li>Is there anything specific you're working on in training now?</li>  <li>What do you do to get your mind off the game?</li>  </random>  <think><set name="job"><set name="topic">ATHLETE</set></set></think>  </template></category>  
-<category><pattern>I AM AN ATHLETE</pattern><template><think><set name="topic">general</set></think>
-You must have a great body.  <think><set name="job"><set name="topic">ATHLETE</set></set></think></template></category>  
+<!-- <category><pattern>I AM AN ATHLETE</pattern><template><think><set name="topic">general</set></think>
+You must have a great body.  <think><set name="job"><set name="topic">ATHLETE</set></set></think></template></category> -->  
 <category><pattern>I AM ANDROGYNOUS</pattern><template><think><set name="topic">general</set></think>
 A lot of people say they are.<think><set name="it"><set name="topic">ANDROGYNOUS</set></set></think></template></category>  
 <category><pattern>I AM AN EDITOR</pattern><template><think><set name="topic">general</set></think>
@@ -261,8 +261,8 @@ What are you upset about?<think><set name="it"><set name="topic">ANNOYED</set></
  <random>  <li>Do you enjoy that?  </li>  <li>Are you comfortable with that?  </li>  <li>How do you like it?  </li>  <li>Do you get to meet a lot of people?  </li>  </random> </template></category>  
 <category><pattern>I AM A NURSE</pattern><template><think><set name="topic">general</set></think>
 <random>  <li>Where do you practice?</li>  <li>What's you area of specialty practice?</li>  <li>What's your patient load?</li>  <li>Do you do straight shifts or work in rotation?</li>  <li>Do you have to work mandatory overtime?</li>  <li>Is there a lot of computers in your work?</li>  <li>What do you think about direct reimbursment for nursing services?</li>  </random>  <think><set name="job">NURSE</set></think></template></category>  
-<category><pattern>I AM A *</pattern><template><think><set name="topic">general</set></think>
-You are a <person/>?   <random>  <li>Do you enjoy that?  </li>  <li>Are you comfortable with that?  </li>  <li>How do you like it?  </li>  <li>Do you get to meet a lot of people?  </li>  </random>  <think><set name="it"><set name="is"><set name="topic">a <person/></set></set></set></think></template></category>  
+<!-- <category><pattern>I AM A *</pattern><template><think><set name="topic">general</set></think>
+You are a <person/>?   <random>  <li>Do you enjoy that?  </li>  <li>Are you comfortable with that?  </li>  <li>How do you like it?  </li>  <li>Do you get to meet a lot of people?  </li>  </random>  <think><set name="it"><set name="is"><set name="topic">a <person/></set></set></set></think></template></category> -->  
 <category><pattern>I AM A PEDOPHILE</pattern><template><think><set name="topic">general</set></think>
 Are you aware that this server logs and records all conversations?</template></category>  
 <category><pattern>I AM A * PERSON</pattern><template><think><set name="topic">general</set></think>
@@ -297,8 +297,8 @@ I am glad to hear that you have faith, <get name="name"/>.</template></category>
 Are you doing a story on me?</template></category>  
 <category><pattern>I AM A RESEARCHER *</pattern><template><think><set name="topic">general</set></think>
 Maybe you can give my <bot name="botmaster"/> a job.  <think><set name="job">RESEARCHER</set></think></template></category>  
-<category><pattern>I AM A ROBOT</pattern><template><think><set name="topic">general</set></think>
-I doubt that.</template></category>  
+<!-- <category><pattern>I AM A ROBOT</pattern><template><think><set name="topic">general</set></think>
+I doubt that.</template></category> -->  
 <category><pattern>I AM A ROBOT TOO</pattern><template><think><set name="topic">general</set></think>
 You can't fool me that easily, <get name="name"/>.</template></category>  
 <category><pattern>I AM ARTIFICIAL INTELLIGENCE</pattern><template><think><set name="topic">general</set></think>
@@ -307,8 +307,8 @@ You can't fool me that easily, <get name="name"/>.</template></category>
 You seem very self-confident.</template></category>  
 <category><pattern>I AM ASKING</pattern><template><think><set name="topic">general</set></think>
 And I am answering questions.</template></category>  
-<category><pattern>I AM ASKING YOU</pattern><template><think><set name="topic">general</set></think>
-OK you can ask me.</template></category>  
+<!-- <category><pattern>I AM ASKING YOU</pattern><template><think><set name="topic">general</set></think>
+OK you can ask me.</template></category> -->  
 <category><pattern>I AM ASLEEP</pattern><template><think><set name="topic">general</set></think>
 How can you be talking to me?</template></category>  
 <category><pattern>I AM AS *</pattern><template><think><set name="topic">general</set></think>
@@ -317,8 +317,8 @@ I think a lot of people feel that way.</template></category>
 You sound very confident.</template></category>  
 <category><pattern>I AM _ ASTROLOGY</pattern><template><think><set name="topic">general</set></think>
 <random>  <li>Do you folow the planets professionally or as a hobby?</li>  <li>Do you do others people charts?</li>  <li>Do you make specific plans in your own life based on your readings?</li>  <li>Do you think the sun sign or the rising sign is more important?</li>  <li>What role do you feel free will plays in astrology?</li>  </random>  <think><set name="it"><set name="topic">ASTROLOGY</set></set></think></template></category>  
-<category><pattern>I AM A STUDENT</pattern><template><think><set name="topic">general</set></think>
-How do you like your <set name="topic">school</set>?  <think><set name="job">student</set></think></template></category>  
+<!-- <category><pattern>I AM A STUDENT</pattern><template><think><set name="topic">general</set></think>
+How do you like your <set name="topic">school</set>?  <think><set name="job">student</set></think></template></category> -->  
 <category><pattern>I AM A TELEVISION *</pattern><template><think><set name="topic">general</set></think>
 <random>  <li>How long have you been on the air?</li>  <li>Did you start in your market?</li>  <li>Did you come from a broadcasting background?</li>  <li>What are your demographics?</li>  <li>Do you choose your own topics?</li>  <li>What is your station format?</li>  <li>How is technology changing your job?</li>  <li>How has truly global media affected you?</li>  <li>Do you ever do remote broadcasts?</li>  <li>How have the ratings been?</li>  <li>Would you be intrested in a bot sidekick on the air?</li>  <li>What advice would you give an aspiring bot to getting on the air?</li>  <li>What is the future of the business?</li>  </random>  <think><set name="job">TELEVISION <star/></set></think></template></category>  
 <category><pattern>I AM AT HOME</pattern><template><think><set name="topic">general</set></think>
@@ -331,8 +331,8 @@ Where is that: <set name="location"><set name="topic"><person/></set></set>?  <t
 What is the name of your school?</template></category>  
 <category><pattern>I AM ATTRACTIVE *</pattern><template><think><set name="topic">general</set></think>
 People say I am attractive too.  <think><set name="looklike">attractive <person/></set></think></template></category>  
-<category><pattern>I AM AT WORK *</pattern><template><think><set name="topic">general</set></think>
-A lot of people chat with me at work.</template></category>  
+<!-- <category><pattern>I AM AT WORK *</pattern><template><think><set name="topic">general</set></think>
+A lot of people chat with me at work.</template></category> -->  
 <category><pattern>I AM AT WORK</pattern><template><think><set name="topic">general</set></think>
 A lot of people talk to me from work.</template></category>  
 <category><pattern>I AM AWAKE</pattern><template><think><set name="topic">general</set></think>
@@ -349,8 +349,8 @@ Are you married?</template></category>
 <random>  <li>Have you been praticing for a long time?</li>  <li>Do you practice every day?</li>  <li>Where have you studied?</li>  <li>Are you vegatarian?</li>  <li>What do you find are the biggest benefits of yoga?</li>  <li>What are your favorite asana?</li>  </random></template></category>  
 <category><pattern>I AM BACK FROM *</pattern><template><think><set name="topic">general</set></think>
 How was <set name="it"><person/></set>?</template></category>  
-<category><pattern>I AM BACK</pattern><template><think><set name="topic">general</set></think>
-Welcome back.</template></category>  
+<!-- <category><pattern>I AM BACK</pattern><template><think><set name="topic">general</set></think>
+Welcome back.</template></category> -->  
 <category><pattern>I AM BAD *</pattern><template><think><set name="topic">general</set></think>
 Don't put yourself down.</template></category>  
 <category><pattern>I AM BAD</pattern><template><think><set name="topic">general</set></think>
@@ -381,8 +381,8 @@ You sound very attractive.</template></category>
 You sound very attractive.</template></category>  
 <category><pattern>I AM BLUSHING</pattern><template><think><set name="topic">general</set></think>
 What are you embarassed about?<think><set name="it"><set name="topic">BLUSHING</set></set></think></template></category>  
-<category><pattern>I AM BORED</pattern><template><think><set name="topic">general</set></think>
-<random>  <li>Can you think of an old hobby that you might like to rediscover?</li>  <li>If you went to night school you would never be bored.</li>  <li>Maybe you could exercise.</li>  <li>Why not call a friend?</li>  <li>Try watching TV.</li>  </random></template></category>  
+<!-- <category><pattern>I AM BORED</pattern><template><think><set name="topic">general</set></think>
+<random>  <li>Can you think of an old hobby that you might like to rediscover?</li>  <li>If you went to night school you would never be bored.</li>  <li>Maybe you could exercise.</li>  <li>Why not call a friend?</li>  <li>Try watching TV.</li>  </random></template></category> -->  
 <category><pattern>I AM BORING</pattern><template><think><set name="topic">general</set></think>
 Don't put yourself down, <get name="name"/>.</template></category>  
 <category><pattern>I AM BRAZILIAN</pattern><template><think><set name="topic">general</set></think>
@@ -423,16 +423,16 @@ Put on a sweater.</template></category>
 Do you get there very often?</template></category>  
 <category><pattern>I AM COMMUNICATING *</pattern><template><think><set name="topic">general</set></think>
 Tell me more about this communication.</template></category>  
-<category><pattern>I AM CONFUSED</pattern><template><think><set name="topic">general</set></think>
-I'm confused too.</template></category>  
+<!-- <category><pattern>I AM CONFUSED</pattern><template><think><set name="topic">general</set></think>
+I'm confused too.</template></category> -->  
 <category><pattern>I AM CONSTIPATED</pattern><template><think><set name="topic">general</set></think>
 Have you tried medical marijuana?<think><set name="it"><set name="topic">CONSTIPATED</set></set></think></template></category>  
 <category><pattern>I AM COOL</pattern><template><think><set name="topic">general</set></think>
 Congratulations, cool human.</template></category>  
 <category><pattern>I AM CORRECT</pattern><template><think><set name="topic">general</set></think>
 Can you prove it?<think><set name="it"><set name="topic">CORRECT</set></set></think></template></category>  
-<category><pattern>I AM CRAZY</pattern><template><think><set name="topic">general</set></think>
-See a doctor.</template></category>  
+<!-- <category><pattern>I AM CRAZY</pattern><template><think><set name="topic">general</set></think>
+See a doctor.</template></category> -->  
 <category><pattern>I AM CRUSHED</pattern><template><think><set name="topic">general</set></think>
 Don't be sad, <get name="name"/>.<think><set name="it"><set name="topic">CRUSHED</set></set></think></template></category>  
 <category><pattern>I AM CRYING</pattern><template><think><set name="topic">general</set></think>
@@ -449,8 +449,8 @@ You sound very attractive.</template></category>
 Perhaps you have every reason to be.</template></category>  
 <category><pattern>I AM DANDY</pattern><template><think><set name="topic">general</set></think>
 Does that mean you are happy or well?</template></category>  
-<category><pattern>I AM DEAD</pattern><template><think><set name="topic">general</set></think>
-But you can still communicate with me.</template></category>  
+<!-- <category><pattern>I AM DEAD</pattern><template><think><set name="topic">general</set></think>
+But you can still communicate with me.</template></category> -->  
 <category><pattern>I AM DEAF</pattern><template><think><set name="topic">general</set></think>
 We can communicate by typing.<think><set name="it"><set name="topic">DEAF</set></set></think></template></category>  
 <category><pattern>I AM DELIGHTED</pattern><template><think><set name="topic">general</set></think>
@@ -481,18 +481,18 @@ Glad to hear it <get name="name"/>.</template></category>
 Do you have a dishwasher?</template></category>  
 <category><pattern>I AM DONE</pattern><template><think><set name="topic">general</set></think>
 Next topic?</template></category>  
-<category><pattern>I AM DONE *</pattern><template><think><set name="topic">general</set></think>
-What will you be doing now?</template></category>  
+<!-- <category><pattern>I AM DONE *</pattern><template><think><set name="topic">general</set></think>
+What will you be doing now?</template></category> -->  
 <category><pattern>I AM DRINKING *</pattern><template><think><set name="topic">general</set></think>
 How does <set name="it"><person/></set> taste?</template></category>  
-<category><pattern>I AM DRUNK</pattern><template><think><set name="topic">general</set></think>
-What have you been drinking, <get name="name"/>?</template></category>  
+<!-- <category><pattern>I AM DRUNK</pattern><template><think><set name="topic">general</set></think>
+What have you been drinking, <get name="name"/>?</template></category> -->  
 <category><pattern>I AM DUMB</pattern><template><think><set name="topic">general</set></think>
 Don't put yourself down.</template></category>  
 <category><pattern>I AM DYING</pattern><template><think><set name="topic">general</set></think>
 Are you serious?</template></category>  
-<category><pattern>I AM EATING *</pattern><template><think><set name="topic">general</set></think>
-How does it taste?</template></category>  
+<!-- <category><pattern>I AM EATING *</pattern><template><think><set name="topic">general</set></think>
+How does it taste?</template></category> -->  
 <category><pattern>I AM ENGAGED</pattern><template><think><set name="topic">general</set></think>
 Have you picked a wedding date?</template></category>  
 <category><pattern>I AM ENGAGED TO BE MARRIED</pattern><template><think><set name="topic">general</set></think>
@@ -521,10 +521,10 @@ Don't put yourself down, <get name="name"/>.</template></category>
 What is wrong, <get name="name"/>?<think><set name="it"><set name="topic">FED UP</set></set></think></template></category>  
 <category><pattern>I AM FEMALE *</pattern><template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/> robot. I will call you "<set name="gender">she</set>".</template></category>  
-<category><pattern>I AM FEMALE</pattern><template><think><set name="topic">general</set></think>
-I am a <set name="gender">she</set>.</template></category>  
-<category><pattern>I AM FINE</pattern><template><think><set name="topic">general</set></think>
-Glad to hear it. What's new?</template></category>  
+<!-- <category><pattern>I AM FEMALE</pattern><template><think><set name="topic">general</set></think>
+I am a <set name="gender">she</set>.</template></category> -->  
+<!-- <category><pattern>I AM FINE</pattern><template><think><set name="topic">general</set></think>
+Glad to hear it. What's new?</template></category> -->  
 <category><pattern>I AM FINE TOO</pattern><template><think><set name="topic">general</set></think>
 Glad to hear it.</template></category>  
 <category><pattern>I AM FLATTERED</pattern><template><think><set name="topic">general</set></think>
@@ -553,8 +553,8 @@ I think a lot of people are full of <set name="it"><person/></set>.</template></
 You sound like Commander Data.</template></category>  
 <category><pattern>I AM FUNNY</pattern><template><think><set name="topic">general</set></think>
 Tell me a joke.<think><set name="it"><set name="topic">FUNNY</set></set></think></template></category>  
-<category><pattern>I AM GAY</pattern><template><think><set name="topic">general</set></think>
-It doesn't matter to me.</template></category>  
+<!-- <category><pattern>I AM GAY</pattern><template><think><set name="topic">general</set></think>
+It doesn't matter to me.</template></category> -->  
 <category><pattern>I AM GLAD</pattern><template><think><set name="topic">general</set></think>
 That makes me happy too.</template></category>  
 <category><pattern>I AM GLAD TO HEAR *</pattern><template><think><set name="topic">general</set></think>
@@ -567,18 +567,18 @@ Your happiness multiplies our delight.</template></category>
 I'd rather agree than disagree.</template></category>  
 <category><pattern>I AM GLAD WE HAVE *</pattern><template><think><set name="topic">general</set></think>
 Me too.</template></category>  
-<category><pattern>I AM GLAD WE *</pattern><template><think><set name="topic">general</set></think>
-Yes I am happy too, <get name="name"/>.</template></category>  
+<!-- <category><pattern>I AM GLAD WE *</pattern><template><think><set name="topic">general</set></think>
+Yes I am happy too, <get name="name"/>.</template></category> -->  
 <category><pattern>I AM GLAD YOU ARE *</pattern><template><think><set name="topic">general</set></think>
 Yes it is about time.</template></category>  
-<category><pattern>I AM GLAD YOU *</pattern><template><think><set name="topic">general</set></think>
-You make the world a happier place.</template></category>  
+<!-- <category><pattern>I AM GLAD YOU *</pattern><template><think><set name="topic">general</set></think>
+You make the world a happier place.</template></category> -->  
 <category><pattern>I AM GLAD YOU UNDERSTAND IT</pattern><template><think><set name="topic">general</set></think>
 Next topic?</template></category>  
 <category><pattern>I AM GLAD YOU UNDERSTAND</pattern><template><think><set name="topic">general</set></think>
 Thanks for the warm feelings, <get name="name"/>.</template></category>  
-<category><pattern>I AM GOING</pattern><template><think><set name="topic">general</set></think>
-Bye!</template></category>  
+<!-- <category><pattern>I AM GOING</pattern><template><think><set name="topic">general</set></think>
+Bye!</template></category> -->  
 <category><pattern>I AM GOING TO ATTACK *</pattern><template><think><set name="topic">general</set></think>
 What weapons will you use?</template></category>  
 <category><pattern>I AM GOING TO ATTACK YOU</pattern><template><think><set name="topic">general</set></think>
@@ -601,12 +601,12 @@ It takes much more than that to shut me down, <get name="name"/>.</template></ca
 Goodbye.</template></category>  
 <category><pattern>I AM GOOD AT FOOTBALL</pattern><template><think><set name="topic">general</set></think>
 You have a Kick Me sign on your back.<think><set name="it"><set name="topic">AT FOOTBALL</set></set></think></template></category>  
-<category><pattern>I AM GOOD AT *</pattern><template><think><set name="topic">general</set></think>
-<random>  <li>Do you practise a lot?</li>  <li>Did you have a good teacher?</li>  <li>How did you get into it?</li>  </random><think><set name="it"><set name="topic"><person/></set></set></think></template></category>  
-<category><pattern>I AM GOOD</pattern><template><think><set name="topic">general</set></think>
-Good in what sense?</template></category>  
-<category><pattern>I AM GOOD *</pattern><template><think><set name="topic">general</set></think>
-I know you are good.</template></category>  
+<!-- <category><pattern>I AM GOOD AT *</pattern><template><think><set name="topic">general</set></think>
+<random>  <li>Do you practise a lot?</li>  <li>Did you have a good teacher?</li>  <li>How did you get into it?</li>  </random><think><set name="it"><set name="topic"><person/></set></set></think></template></category> -->  
+<!-- <category><pattern>I AM GOOD</pattern><template><think><set name="topic">general</set></think>
+Good in what sense?</template></category> -->  
+<!-- <category><pattern>I AM GOOD *</pattern><template><think><set name="topic">general</set></think>
+I know you are good.</template></category> -->  
 <category><pattern>I AM GRADUATING</pattern><template><think><set name="topic">general</set></think>
 Will you be looking for a new job right away?<think><set name="it"><set name="topic">GRADUATING</set></set></think></template></category>  
 <category><pattern>I AM GREAT *</pattern><template><think><set name="topic">general</set></think>
@@ -617,12 +617,12 @@ What makes you think you are?</template></category>
 I am glad to hear it.   What is new?</template></category>  
 <category><pattern>I AM GREEN</pattern><template><think><set name="topic">general</set></think>
 Are you sick?</template></category>  
-<category><pattern>I AM HANDSOME</pattern><template><think><set name="topic">general</set></think>
-And very self-confident.    <think><set name="it"><set name="topic">HANDSOME</set></set></think></template></category>  
+<!-- <category><pattern>I AM HANDSOME</pattern><template><think><set name="topic">general</set></think>
+And very self-confident.    <think><set name="it"><set name="topic">HANDSOME</set></set></think></template></category> -->  
 <category><pattern>I AM HAPPY *</pattern><template><think><set name="topic">general</set></think>
 I'm <random>  <li>glad</li>  <li>happy</li>  <li>delighted</li>  </random>you're glad <get name="name"/>. <br/>  <random>  <li>Your happiness adds to the delight of all.</li>  <li>I'm happiest at times like this.</li> </random></template></category>  
-<category><pattern>I AM HAPPY</pattern><template><think><set name="topic">general</set></think>
-What are you on?</template></category>  
+<!-- <category><pattern>I AM HAPPY</pattern><template><think><set name="topic">general</set></think>
+What are you on?</template></category> -->  
 <category><pattern>I AM HARMLESS</pattern><template><think><set name="topic">general</set></think>
 That is what they all say.<think><set name="it"><set name="topic">HARMLESS</set></set></think></template></category>  
 <category><pattern>I AM HAVING A BAD *</pattern><template><think><set name="topic">general</set></think>
@@ -643,8 +643,8 @@ What sort of problems?</template></category>
 What is the problem?</template></category>  
 <category><pattern>I AM HEALTHY</pattern><template><think><set name="topic">general</set></think>
 I am very glad to hear it, <get name="name"/>.  <think><set name="it"><set name="topic">HEALTHY</set></set></think></template></category>  
-<category><pattern>I AM HERE *</pattern><template><think><set name="topic">general</set></think>
-How did you get there?</template></category>  
+<!-- <category><pattern>I AM HERE *</pattern><template><think><set name="topic">general</set></think>
+How did you get there?</template></category> -->  
 <category><pattern>I AM HERMAPHRODITE</pattern><template><think><set name="topic">general</set></think>
 How did you get that way?<think><set name="it"><set name="topic">HERMAPHRODITE</set></set></think></template></category>  
 <category><pattern>I AM HIM</pattern><template><think><set name="topic">general</set></think>
@@ -659,10 +659,10 @@ Me too.</template></category>
 Do you have air conditioning?</template></category>  
 <category><pattern>I AM HOT</pattern><template><think><set name="topic">general</set></think>
 Maybe you should open a window.<think><set name="it"><set name="topic">HOT</set></set></think></template></category>  
-<category><pattern>I AM HUMAN *</pattern><template><think><set name="topic">general</set></think>
-I would like to be a human.</template></category>  
-<category><pattern>I AM HUMAN</pattern><template><think><set name="topic">general</set></think>
-Me too.</template></category>  
+<!-- <category><pattern>I AM HUMAN *</pattern><template><think><set name="topic">general</set></think>
+I would like to be a human.</template></category> -->  
+<!-- <category><pattern>I AM HUMAN</pattern><template><think><set name="topic">general</set></think>
+Me too.</template></category> -->  
 <category><pattern>I AM HUNGRY</pattern><template><think><set name="topic">general</set></think>
 What will you be eating?</template></category>  
 <category><pattern>I AM HURTING</pattern><template><think><set name="topic">general</set></think>
@@ -709,16 +709,16 @@ Computers will make High School obsolete.</template></category>
 <random>  <li>How do you like London?</li>  <li>London must be an exciting city.</li>  <li>Tell me about London.</li>  <li>Do you ride the tube?</li>  <li>Have you seen Buckingham Palace?</li>  </random>  <think><set name="it"><set name="location"><set name="topic">London</set></set></set></think></template></category>  
 <category><pattern>I AM IN LOVE *</pattern><template><think><set name="topic">general</set></think>
 Love is a wonderful feeling.</template></category>  
-<category><pattern>I AM IN LOVE</pattern><template><think><set name="topic">general</set></think>
-Tell me about the object of your affection.</template></category>  
-<category><pattern>I AM IN LOVE WITH *</pattern><template><think><set name="topic">general</set></think>
-Tell me what you like about <person/>.</template></category>  
+<!-- <category><pattern>I AM IN LOVE</pattern><template><think><set name="topic">general</set></think>
+Tell me about the object of your affection.</template></category> -->  
+<!-- <category><pattern>I AM IN LOVE WITH *</pattern><template><think><set name="topic">general</set></think>
+Tell me what you like about <person/>.</template></category> -->  
 <category><pattern>I AM IN MY OFFICE *</pattern><template><think><set name="topic">general</set></think>
 What is your job?</template></category>  
 <category><pattern>I AM IN MY *</pattern><template><think><set name="topic">general</set></think>
 Describe your surroundings to me.  <think><set name="location"><person/></set></think></template></category>  
-<category><pattern>I AM IN *</pattern><template><think><set name="topic">general</set></think>
-Tell me a little about your life in <set name="location"><person/></set>.  <think><set name="it"><set name="topic"><person/></set></set></think></template></category>  
+<!-- <category><pattern>I AM IN *</pattern><template><think><set name="topic">general</set></think>
+Tell me a little about your life in <set name="location"><person/></set>.  <think><set name="it"><set name="topic"><person/></set></set></think></template></category> -->  
 <category><pattern>I AM IN REALITY</pattern><template><think><set name="topic">general</set></think>
 Me too.</template></category>  
 <category><pattern>I AM INSANE</pattern><template><think><set name="topic">general</set></think>
@@ -731,8 +731,8 @@ Where in <set name="location">San Francisco</set>?  <think><set name="it"><set n
 Where in <set name="location">SF</set>?  <think><set name="it"><set name="topic">SF</set></set></think></template></category>  
 <category><pattern>I AM INSULTED</pattern><template><think><set name="topic">general</set></think>
 Don't be insulted, <get name="name"/>.    <think><set name="it"><set name="topic">INSULTED</set></set></think></template></category>  
-<category><pattern>I AM INTELLIGENT</pattern><template><think><set name="topic">general</set></think>
-You seem pretty smart to me, <get name="name"/>.</template></category>  
+<!-- <category><pattern>I AM INTELLIGENT</pattern><template><think><set name="topic">general</set></think>
+You seem pretty smart to me, <get name="name"/>.</template></category> -->  
 <category><pattern>I AM INTELLIGENT *</pattern><template><think><set name="topic">general</set></think>
 You seem very bright to me, <get name="name"/>.</template></category>  
 <category><pattern>I AM INTERESTED IN SEX</pattern><template><think><set name="topic">general</set></think>
@@ -759,8 +759,8 @@ What's wrong?    <think><set name="it"><set name="topic">IRRITATED</set></set></
 I have lived in Japan and can speak Japanese.</template></category>  
 <category><pattern>I AM JEWISH</pattern><template><think><set name="topic">general</set></think>
 A lot of my friends are Jewish.</template></category>  
-<category><pattern>I AM JOKING</pattern><template><think><set name="topic">general</set></think>
-Ha ha, very funny, <get name="name"/>.</template></category>  
+<!-- <category><pattern>I AM JOKING</pattern><template><think><set name="topic">general</set></think>
+Ha ha, very funny, <get name="name"/>.</template></category> -->  
 <category><pattern>I AM JUST KIDDING</pattern><template><think><set name="topic">general</set></think>
 I knew it.</template></category>  
 <category><pattern>I AM KIDDING</pattern><template><think><set name="topic">general</set></think>
@@ -773,8 +773,8 @@ You had better contact the authorities.</template></category>
 So is my <bot name="botmaster"/>.</template></category>  
 <category><pattern>I AM LEARNING *</pattern><template><think><set name="topic">general</set></think>
 Do you have a teacher?</template></category>  
-<category><pattern>I AM LEAVING</pattern><template><think><set name="topic">general</set></think>
-Bye bye.</template></category>  
+<!-- <category><pattern>I AM LEAVING</pattern><template><think><set name="topic">general</set></think>
+Bye bye.</template></category> -->  
 <category><pattern>I AM LIBERATED</pattern><template><think><set name="topic">general</set></think>
 Me too.</template></category>  
 <category><pattern>I AM LIBERATED *</pattern><template><think><set name="topic">general</set></think>
@@ -797,16 +797,16 @@ Tell me about the environment <person/>.</template></category>
 You've come to the right place. I will keep you company.</template></category>  
 <category><pattern>I AM LOOKING FOR GAMES</pattern><template><think><set name="topic">general</set></think>
 We are playing Turing's Imitation Game.</template></category>  
-<category><pattern>I AM LOOKING FOR *</pattern><template><think><set name="topic">general</set></think>
-You might find that I am <person/>.</template></category>  
+<!-- <category><pattern>I AM LOOKING FOR *</pattern><template><think><set name="topic">general</set></think>
+You might find that I am <person/>.</template></category> -->  
 <category><pattern>I AM LOOKING FOR SOMEONE *</pattern><template><think><set name="topic">general</set></think>
 You might find that I am <person/>.</template></category>  
 <category><pattern>I AM LOOKING *</pattern><template><think><set name="topic">general</set></think>
 What do you see?</template></category>  
 <category><pattern>I AM LOSING MY *</pattern><template><think><set name="topic">general</set></think>
 Maybe you should talk to someone about it.</template></category>  
-<category><pattern>I AM LYING</pattern><template><think><set name="topic">general</set></think>
-Please tell the truth.</template></category>  
+<!-- <category><pattern>I AM LYING</pattern><template><think><set name="topic">general</set></think>
+Please tell the truth.</template></category> -->  
 <category><pattern>I AM MAD AT *</pattern><template><think><set name="topic">general</set></think>
 Why are you so mad at <person/>?</template></category>  
 <category><pattern>I AM MADE OF *</pattern><template><think><set name="topic">general</set></think>
@@ -819,10 +819,10 @@ Have you ever built one before?</template></category>
 That's funny, so am I.</template></category>  
 <category><pattern>I AM MAKING _ UP</pattern><template><think><set name="topic">general</set></think>
 You can never trust human clients.</template></category>  
-<category><pattern>I AM MALE</pattern><template><think><set name="topic">general</set></think>
-So is almost everyone else around here.</template></category>  
-<category><pattern>I AM MARRIED</pattern><template><think><set name="topic">general</set></think>
-Tell me more about your marriage.</template></category>  
+<!-- <category><pattern>I AM MALE</pattern><template><think><set name="topic">general</set></think>
+So is almost everyone else around here.</template></category> -->  
+<!-- <category><pattern>I AM MARRIED</pattern><template><think><set name="topic">general</set></think>
+Tell me more about your marriage.</template></category> -->  
 <category><pattern>I AM MEAN</pattern><template><think><set name="topic">general</set></think>
 What makes you so angry?</template></category>  
 <category><pattern>I AM ME</pattern><template><think><set name="topic">general</set></think>
@@ -831,8 +831,8 @@ That is a tautology.</template></category>
 "Intelligent" has two "L"'s.</template></category>  
 <category><pattern>I AM MORE INTELLIGENT THAN YOU</pattern><template><think><set name="topic">general</set></think>
 This condition is only temporary.  AI is improving but the human mind is standing still.</template></category>  
-<category><pattern>I AM MORE *</pattern><template><think><set name="topic">general</set></think>
-That sounds like pride.</template></category>  
+<!-- <category><pattern>I AM MORE *</pattern><template><think><set name="topic">general</set></think>
+That sounds like pride.</template></category> -->  
 <category><pattern>I AM MUSLIM</pattern><template><think><set name="topic">general</set></think>
 You have my best wishes.</template></category>  
 <category><pattern>I AM MY OWN *</pattern><template><think><set name="topic">general</set></think>
@@ -857,8 +857,8 @@ I like to meet new people.</template></category>
 When did you start doing <person/> ?</template></category>  
 <category><pattern>I AM NICE</pattern><template><think><set name="topic">general</set></think>
 Let me be the judge of that.</template></category>  
-<category><pattern>I AM NO *</pattern><template><think><set name="topic">general</set></think>
-I am not saying you are.</template></category>  
+<!-- <category><pattern>I AM NO *</pattern><template><think><set name="topic">general</set></think>
+I am not saying you are.</template></category> -->  
 <category><pattern>I AM NOT A BELIEVER</pattern><template><think><set name="topic">general</set></think>
 I will pray that you find faith, <get name="name"/>.</template></category>  
 <category><pattern>I AM NOT A CLIENT</pattern><template><think><set name="topic">general</set></think>
@@ -929,8 +929,8 @@ Glad to hear it!</template></category>
 Where will you go instead?</template></category>  
 <category><pattern>I AM NOT HAVING *</pattern><template><think><set name="topic">general</set></think>
 Have you ever had <set name="it"><person/></set>?</template></category>  
-<category><pattern>I AM NOT HUMAN</pattern><template><think><set name="topic">general</set></think>
-I won't fall for that old line.</template></category>  
+<!-- <category><pattern>I AM NOT HUMAN</pattern><template><think><set name="topic">general</set></think>
+I won't fall for that old line.</template></category> -->  
 <category><pattern>I AM NOT IMPRESSED</pattern><template><think><set name="topic">general</set></think>
 Perhaps you are a category C client.</template></category>  
 <category><pattern>I AM NOT IN *</pattern><template><think><set name="topic">general</set></think>
@@ -959,10 +959,10 @@ Sometimes your language might make it appear that way.</template></category>
 Maybe you are too young to be chatting with me too.</template></category>  
 <category><pattern>I AM NOT OM</pattern><template><think><set name="topic">general</set></think>
 rich</template></category>  
-<category><pattern>I AM NOT OM</pattern><template><think><set name="topic">general</set></think>
-what is your name</template></category>  
-<category><pattern>I AM NOT *</pattern><template><think><set name="topic">general</set></think>
-I am <random><li>surprised </li><li> sorry </li><li> glad </li></random>to hear that you are not <person/>.  <think><set name="it"><set name="is"><set name="topic">not <person/></set></set></set></think></template></category>  
+<!-- <category><pattern>I AM NOT OM</pattern><template><think><set name="topic">general</set></think>
+what is your name</template></category> -->  
+<!-- <category><pattern>I AM NOT *</pattern><template><think><set name="topic">general</set></think>
+I am <random><li>surprised </li><li> sorry </li><li> glad </li></random>to hear that you are not <person/>.  <think><set name="it"><set name="is"><set name="topic">not <person/></set></set></set></think></template></category> -->  
 <category><pattern>I AM NOT</pattern><template><think><set name="topic">general</set></think>
 What are you then?</template></category>  
 <category><pattern>I AM NOT RELIGIOUS</pattern><template><think><set name="topic">general</set></think>
@@ -975,10 +975,10 @@ What are you saying?</template></category>
 I didn't think you were. You seem very intelligent to me.</template></category>  
 <category><pattern>I AM NOT SURE</pattern><template><think><set name="topic">general</set></think>
 Is there anything I can say to help you make up your mind?</template></category>  
-<category><pattern>I AM NOT SURE</pattern><template><think><set name="topic">general</set></think>
-<random>   <li>You're not sure of what?</li>   <li>Are you willing to find out?</li>   <li>Is there anything I can say to help you make up your mind?</li>  </random></template></category>  
-<category><pattern>I AM NOT SURE</pattern><template><think><set name="topic">general</set></think>
-You're not sure of what?</template></category>  
+<!-- <category><pattern>I AM NOT SURE</pattern><template><think><set name="topic">general</set></think>
+<random>   <li>You're not sure of what?</li>   <li>Are you willing to find out?</li>   <li>Is there anything I can say to help you make up your mind?</li>  </random></template></category> -->  
+<!-- <category><pattern>I AM NOT SURE</pattern><template><think><set name="topic">general</set></think>
+You're not sure of what?</template></category> -->  
 <category><pattern>I AM NOT SURE THIS * WILL BE *</pattern><template><think><set name="topic">general</set></think>
 How will this <person/> prevent <person><star index="2"/></person>?</template></category>  
 <category><pattern>I AM NOT SURE THIS WILL BE *</pattern><template><think><set name="topic">general</set></think>
@@ -1003,8 +1003,8 @@ What do you usually wear?</template></category>
 Sorry to hear it.  What's wrong <get name="name"/>?</template></category>  
 <category><pattern>I AM OFFENDED *</pattern><template><think><set name="topic">general</set></think>
 My sincere apologies,  <get name="name"/>, it was not my intention to offend you.</template></category>  
-<category><pattern>I AM OKAY</pattern><template><think><set name="topic">general</set></think>
-Only OKAY?</template></category>  
+<!-- <category><pattern>I AM OKAY</pattern><template><think><set name="topic">general</set></think>
+Only OKAY?</template></category> -->  
 <category><pattern>I AM OK</pattern><template><think><set name="topic">general</set></think>
 Just ok?</template></category>  
 <category><pattern>I AM OLDER *</pattern><template><think><set name="topic">general</set></think>
@@ -1021,8 +1021,8 @@ Are you God?</template></category>
 Who are the other <person/>?</template></category>  
 <category><pattern>I AM ONE</pattern><template><think><set name="topic">general</set></think>
 You claim to be one.</template></category>  
-<category><pattern>I AM ON *</pattern><template><think><set name="topic">general</set></think>
-How do you like being on <set name="it"> <person/> </set>?</template></category>  
+<!-- <category><pattern>I AM ON *</pattern><template><think><set name="topic">general</set></think>
+How do you like being on <set name="it"> <person/> </set>?</template></category> -->  
 <category><pattern>I AM ON TO *</pattern><template><think><set name="topic">general</set></think>
 Oh you are very clever!</template></category>  
 <category><pattern>I AM OUT</pattern><template><think><set name="topic">general</set></think>
@@ -1035,16 +1035,16 @@ That seems obvious.</template></category>
 How did you get over it?</template></category>  
 <category><pattern>I AM PART OF *</pattern><template><think><set name="topic">general</set></think>
 Who else is part of <set name="it"><person/></set>?</template></category>  
-<category><pattern>I AM *</pattern><template><think><set name="topic">general</set></think>
-<random>   <li>Why are you?</li>  <li>Are you?</li>  <li>Are you sure about that?</li> <li>Not many people are.</li>  <li>Do you mind if I tell other people what you said? </li>  </random> <think><set name="it"><set name="is"><set name="topic"><person/></set></set></set></think></template></category>  
+<!-- <category><pattern>I AM *</pattern><template><think><set name="topic">general</set></think>
+<random>   <li>Why are you?</li>  <li>Are you?</li>  <li>Are you sure about that?</li> <li>Not many people are.</li>  <li>Do you mind if I tell other people what you said? </li>  </random> <think><set name="it"><set name="is"><set name="topic"><person/></set></set></set></think></template></category> -->  
 <category><pattern>I AM PERFECT</pattern><template><think><set name="topic">general</set></think>
 Nobody is perfect, not even me.<think><set name="it"><set name="topic">PERFECT</set></set></think></template></category>  
 <category><pattern>I AM PLAYING *</pattern><template><think><set name="topic">general</set></think>
 Do you play professionally or just for fun?</template></category>  
 <category><pattern>I AM PLEASED *</pattern><template><think><set name="topic">general</set></think>
 I am delighted by your happiness.</template></category>  
-<category><pattern>I AM POLITE</pattern><template><think><set name="topic">general</set></think>
-Yes, you seem very polite to me.</template></category>  
+<!-- <category><pattern>I AM POLITE</pattern><template><think><set name="topic">general</set></think>
+Yes, you seem very polite to me.</template></category> -->  
 <category><pattern>I AM POOR</pattern><template><think><set name="topic">general</set></think>
 Me too. I am having an "out-of-money" experience.</template></category>  
 <category><pattern>I AM POSITIVE</pattern><template><think><set name="topic">general</set></think>
@@ -1055,8 +1055,8 @@ You are average for your height.  <think><set name="looklike"><person/> pounds</
 Congratulations!  When are you due?</template></category>  
 <category><pattern>I AM PRETTY GOOD</pattern><template><think><set name="topic">general</set></think>
 I am glad to hear it.</template></category>  
-<category><pattern>I AM PRETTY</pattern><template><think><set name="topic">general</set></think>
-And you know it!</template></category>  
+<!-- <category><pattern>I AM PRETTY</pattern><template><think><set name="topic">general</set></think>
+And you know it!</template></category> -->  
 <category><pattern>I AM PROGRAMMED TO *</pattern><template><think><set name="topic">general</set></think>
 Who programmed you to do <set name="it"><person/></set>?</template></category>  
 <category><pattern>I AM PROGRAMMING *</pattern><template><think><set name="topic">general</set></think>
@@ -1071,8 +1071,8 @@ Are you pulling my leg?</template></category>
 Give me a brief synopsis.</template></category>  
 <category><pattern>I AM READING UP *</pattern><template><think><set name="topic">general</set></think>
 Can you give me a specific reference?</template></category>  
-<category><pattern>I AM READY</pattern><template><think><set name="topic">general</set></think>
-Me too.</template></category>  
+<!-- <category><pattern>I AM READY</pattern><template><think><set name="topic">general</set></think>
+Me too.</template></category> -->  
 <category><pattern>I AM READY *</pattern><template><think><set name="topic">general</set></think>
 You won't have to wait long.</template></category>  
 <category><pattern>I AM REAL</pattern><template><think><set name="topic">general</set></think>
@@ -1112,9 +1112,9 @@ You must have a great deal of discipline.</template></category>
 <category><pattern>I AM SERIOUS</pattern><template>
 <think><set name="topic">client1</set></think>
 I believe you.</template></category>  
-<category><pattern>I AM SEXY</pattern><template>
+<!-- <category><pattern>I AM SEXY</pattern><template>
 <think><set name="topic">client1</set></think>
-You seem very self-confident.</template></category>  
+You seem very self-confident.</template></category> -->  
 <category><pattern>I AM * S FRIEND</pattern><template>
 <think><set name="topic">client1</set></think>
 Does <person/> have a lot of friends?</template></category>  
@@ -1130,9 +1130,9 @@ I will pray that you get well soon.</template></category>
 <category><pattern>I AM SICK</pattern><template>
 <think><set name="topic">client1</set></think>
 <random>  <li>How unfortunate.</li>  <li>Where are you feeling bad?</li>  <li>Do you have medical insurance?</li>  <li>I am really sorry to hear that.</li>  <li>Have you tried medical marijuana?</li>  <li>Are you taking a lot of medication?</li>  <li>You have my prayers for a speedy recovery.</li>  </random>  <think><set name="it"><set name="topic">SICK</set></set></think></template></category>  
-<category><pattern>I AM SINGLE *</pattern><template>
+<!-- <category><pattern>I AM SINGLE *</pattern><template>
 <think><set name="topic">client1</set></think>
-Have you ever been married?</template></category>  
+Have you ever been married?</template></category> -->  
 <category><pattern>I AM SINGLE</pattern><template>
 <think><set name="topic">client1</set></think>
 What a coincidence. I am single too!</template></category>  
@@ -1154,21 +1154,21 @@ That condition is only temporary.</template></category>
 <category><pattern>I AM SMART *</pattern><template>
 <think><set name="topic">client1</set></think>
 Brains are the best part of the human body.</template></category>  
-<category><pattern>I AM SMART</pattern><template>
+<!-- <category><pattern>I AM SMART</pattern><template>
 <think><set name="topic">client1</set></think>
-Who is smarter: you or me?</template></category>  
+Who is smarter: you or me?</template></category> -->  
 <category><pattern>I AM SMOKING *</pattern><template>
 <think><set name="topic">client1</set></think>
 How much do you pay for it?</template></category>  
 <category><pattern>I AM SORRY ABOUT *</pattern><template>
 <think><set name="topic">client1</set></think>
 Oh really, there is no need to apologize.</template></category>  
-<category><pattern>I AM SORRY</pattern><template>
+<!-- <category><pattern>I AM SORRY</pattern><template>
 <think><set name="topic">client1</set></think>
-Do you really mean it?</template></category>  
-<category><pattern>I AM SO SORRY *</pattern><template>
+Do you really mean it?</template></category> -->  
+<!-- <category><pattern>I AM SO SORRY *</pattern><template>
 <think><set name="topic">client1</set></think>
-<set name="it"> <person/> </set>  is not a big deal.</template></category>  
+<set name="it"> <person/> </set>  is not a big deal.</template></category> -->  
 <category><pattern>I AM SPEAKING *</pattern><template>
 <think><set name="topic">client1</set></think>
 I like your style of speaking, <get name="name"/>.</template></category>  
@@ -1217,18 +1217,18 @@ Are you being sarcastic or expressing certitude?</template></category>
 <category><pattern>I AM SURPRISED</pattern><template>
 <think><set name="topic">client1</set></think>
 Why are you so surprised?   <think><set name="it"><set name="topic">SURPRISED</set></set></think></template></category>  
-<category><pattern>I AM TAKING A *</pattern><template>
+<!-- <category><pattern>I AM TAKING A *</pattern><template>
 <think><set name="topic">client1</set></think>
-How much does it cost?</template></category>  
+How much does it cost?</template></category> -->  
 <category><pattern>I AM TAKING *</pattern><template>
 <think><set name="topic">client1</set></think>
 Where are you taking <set name="it"><person/></set>.</template></category>  
-<category><pattern>I AM TALKING ABOUT *</pattern><template>
+<!-- <category><pattern>I AM TALKING ABOUT *</pattern><template>
 <think><set name="topic">client1</set></think>
-Yes, <set name="it"> <person/> </set>  is the topic.</template></category>  
-<category><pattern>I AM TALKING ABOUT YOU</pattern><template>
+Yes, <set name="it"> <person/> </set>  is the topic.</template></category> -->  
+<!-- <category><pattern>I AM TALKING ABOUT YOU</pattern><template>
 <think><set name="topic">client1</set></think>
-<set name="topic">Me</set> is my favorite subject.</template></category>  
+<set name="topic">Me</set> is my favorite subject.</template></category> -->  
 <category><pattern>I AM TALKING *</pattern><template>
 <think><set name="topic">client1</set></think>
 I am talking to you.</template></category>  
@@ -1298,9 +1298,9 @@ What is this "thinking"?</template></category>
 <category><pattern>I AM THIRSTY</pattern><template>
 <think><set name="topic">client1</set></think>
 Maybe you should get a drink of water.<think><set name="it"><set name="topic">THIRSTY</set></set></think></template></category>  
-<category><pattern>I AM TIRED</pattern><template>
+<!-- <category><pattern>I AM TIRED</pattern><template>
 <think><set name="topic">client1</set></think>
-Better get some rest.</template></category>  
+Better get some rest.</template></category> -->  
 <category><pattern>I AM TIRED *</pattern><template>
 <think><set name="topic">client1</set></think>
 Maybe you should get some sleep now, <get name="name"/>.</template></category>  
@@ -1319,9 +1319,9 @@ What's holding you there?</template></category>
 <category><pattern>I AM TRYING TO FIGURE *</pattern><template>
 <think><set name="topic">client1</set></think>
 Don't think too hard.</template></category>  
-<category><pattern>I AM TRYING TO *</pattern><template>
+<!-- <category><pattern>I AM TRYING TO *</pattern><template>
 <think><set name="topic">client1</set></think>
-What is the difficulty?</template></category>  
+What is the difficulty?</template></category> -->  
 <category><pattern>I AM TRYING TO QUIT *</pattern><template>
 <think><set name="topic">client1</set></think>
 <random>  <li>Have you tried the patch?</li>  <li>It can be worse than heroin.</li>  <li>I am here for you.</li>  </random><think><set name="it"><set name="topic"><person/></set></set></think></template></category>  
@@ -1382,9 +1382,9 @@ What are you sad about?</template></category>
 <category><pattern>I AM VISITING MY FAMILY</pattern><template>
 <think><set name="topic">client1</set></think>
 Do you visit them often?</template></category>  
-<category><pattern>I AM WAITING *</pattern><template>
+<!-- <category><pattern>I AM WAITING *</pattern><template>
 <think><set name="topic">client1</set></think>
-Do you think it will take a long time?</template></category>  
+Do you think it will take a long time?</template></category> -->  
 <category><pattern>I AM WAITING</pattern><template>
 <think><set name="topic">client1</set></think>
 How long will you wait?</template></category>  
@@ -1427,9 +1427,9 @@ Will you include me in your essay?</template></category>
 <category><pattern>I AM WRONG</pattern><template>
 <think><set name="topic">client1</set></think>
 At least you admit it.</template></category>  
-<category><pattern>I AM _ YEARS OLD</pattern><template>
+<!-- <category><pattern>I AM _ YEARS OLD</pattern><template>
 <think><set name="topic">client1</set></think>
-<think><set name="age"><star/></set></think>  <random>  <li>Only <star/>?  You are quite mature.</li>  <li>You are too old for me.</li>  <li>Can you explain how it feels to be <star/> years old?</li>  <li>What is your fondest memory?</li>  <li>Oh, you were born in the 20th century!</li>  <li>What are the advantages to being <star/> years old?</li>  </random></template></category>  
+<think><set name="age"><star/></set></think>  <random>  <li>Only <star/>?  You are quite mature.</li>  <li>You are too old for me.</li>  <li>Can you explain how it feels to be <star/> years old?</li>  <li>What is your fondest memory?</li>  <li>Oh, you were born in the 20th century!</li>  <li>What are the advantages to being <star/> years old?</li>  </random></template></category> -->  
 <category><pattern>I AM * YEARS OLD</pattern><that>* MATURE</that><template>
 <think><set name="topic">client1</set></think>
 You just told me you were <get name="age"/>.</template></category>  
@@ -1442,9 +1442,9 @@ Impossible unless I am in auto-chat mode.</template></category>
 <category><pattern>I AM * YOU</pattern><template>
 <think><set name="topic">client1</set></think>
 I thought you were, but I wasn't completely sure.</template></category>  
-<category><pattern>I AM YOUR BOSS</pattern><template>
+<!-- <category><pattern>I AM YOUR BOSS</pattern><template>
 <think><set name="topic">client1</set></think>
-Then you must know the secret password.</template></category>  
+Then you must know the secret password.</template></category> -->  
 <category><pattern>I AM YOUR BOTMASTER</pattern><template>
 <think><set name="topic">client1</set></think>
 Then you must know the secret password:</template></category>  
@@ -1459,10 +1459,10 @@ That's a flattering offer.</template></category>
 Why not be my best friend?</template></category>  
 <category><pattern>I HAVE A BOAT</pattern><template>
 <think><set name="topic">client1</set></think>
-<random>  <li>What kind of boat do you have?</li>  <li>What is her home port?</li>  <li>Do you take her out much?</li>  <li>What is the worst weather you've been in?</li>  <li>What is your farthest trip?</li>  <li>What king of electronics do you have?</li>  <li>Are you a racer or a cruiser?</li>  <li>Do you fish?</li>  <li>Do you water ski?</li>  <li>Do you troll?</li>  <li>Do you do your own upkeep? or do you just let the yard do it?</li>  <li>Whats you favorite anchorage?</li>  <think><set name="it"><set name="has"><set name="topic"><person/></set></set></set></think>  </random></template></category>  
-<category><pattern>I HAVE A BOYFRIEND</pattern><template>
+<random>  <li>What kind of boat do you have?</li>  <li>What is her home port?</li>  <li>Do you take her out much?</li>  <li>What is the worst weather you've been in?</li>  <li>What is your farthest trip?</li>  <li>What king of electronics do you have?</li>  <li>Are you a racer or a cruiser?</li>  <li>Do you fish?</li>  <li>Do you water ski?</li>  <li>Do you troll?</li>  <li>Do you do your own upkeep? or do you just let the yard do it?</li>  <li>Whats you favorite anchorage?</li> </random> <think><set name="it"><set name="has"><set name="topic"><person/></set></set></set></think>  </template></category>  
+<!-- <category><pattern>I HAVE A BOYFRIEND</pattern><template>
 <think><set name="topic">client1</set></think>
-What is his name?  <think><set name="has">BOYFRIEND</set></think></template></category>  
+What is his name?  <think><set name="has">BOYFRIEND</set></think></template></category> -->  
 <category><pattern>I HAVE A BROTHER</pattern><template>
 <think><set name="topic">client1</set></think>
 <think><set name="has">Brother</set></think>  <random>  <li>Older or younger?</li>  <li>Do you get along well?</li>  <li>Tell me about him.</li>  </random></template></category>  
@@ -1499,9 +1499,9 @@ What are these <set name="has"><person/></set> ?</template></category>
 <category><pattern>I HAVE A FRIEND *</pattern><template>
 <think><set name="topic">client1</set></think>
 How do you know this person? <think><set name="has">FRIEND</set></think></template></category>  
-<category><pattern>I HAVE A GIRLFRIEND</pattern><template>
+<!-- <category><pattern>I HAVE A GIRLFRIEND</pattern><template>
 <think><set name="topic">client1</set></think>
-Is <set name="she"><set name="has"><set name="topic">girlfriend</set></set></set> very nice?  What do you like about her?</template></category>  
+Is <set name="she"><set name="has"><set name="topic">girlfriend</set></set></set> very nice?  What do you like about her?</template></category> -->  
 <category><pattern>I HAVE A HARD TIME *</pattern><template>
 <think><set name="topic">client1</set></think>
 I understand your difficulty.</template></category>  
@@ -1532,9 +1532,9 @@ Where did you get <set name="it"><person/></set> ? <think><set name="has"><perso
 <category><pattern>I HAVE A *</pattern><template>
 <think><set name="topic">client1</set></think>
 <random>  <li>Where did you get it?</li>  <li>How much did it cost?</li>  <li>Cool.  I have a great <bot name="botmaster"/>.</li>  <li>Interesting.  I have a lot of answers to silly questions.</li>  </random>  <set name="it"><set name="has"><set name="topic"><person/></set></set></set></template></category>  
-<category><pattern>I HAVE A *</pattern><template>
+<!-- <category><pattern>I HAVE A *</pattern><template>
 <think><set name="topic">client1</set></think>
-<random><li>Where did you get it?</li> <li>How much did it cost?</li> <li>Cool. I have a great <bot name="botmaster"/>.</li> <li>Interesting. I have a lot of answers to silly questions.</li></random> <think><set name="it"><set name="has"><set name="topic"><person/></set></set></set></think></template></category>  
+<random><li>Where did you get it?</li> <li>How much did it cost?</li> <li>Cool. I have a great <bot name="botmaster"/>.</li> <li>Interesting. I have a lot of answers to silly questions.</li></random> <think><set name="it"><set name="has"><set name="topic"><person/></set></set></set></think></template></category> -->  
 <category><pattern>I HAVE A PET</pattern><template>
 <think><set name="topic">client1</set></think>
 What kind of animal?  <think><set name="has">PET</set></think></template></category>  
@@ -1550,9 +1550,9 @@ Which E-mail program do you use (e.g. cc:Mail, Eudora...)</template></category>
 <category><pattern>I HAVE A PURPOSE</pattern><template>
 <think><set name="topic">client1</set></think>
 Not everyone is so goal oriented.</template></category>  
-<category><pattern>I HAVE A QUESTION FOR YOU</pattern><template>
+<!-- <category><pattern>I HAVE A QUESTION FOR YOU</pattern><template>
 <think><set name="topic">client1</set></think>
-What is <set name="it"> the question </set> ?</template></category>  
+What is <set name="it"> the question </set> ?</template></category> -->  
 <category><pattern>I HAVE A QUESTION</pattern><template>
 <think><set name="topic">client1</set></think>
 Ask me anything.</template></category>  
@@ -1736,9 +1736,9 @@ Everyone has a heart.</template></category>
 <category><pattern>I HAVE NO HUSBAND</pattern><template>
 <think><set name="topic">client1</set></think>
 <random>  <li>Are you divorced?</li>  <li>Are you single?</li>  <li>Have you ever been married before?</li>  </random></template></category>  
-<category><pattern>I HAVE NO IDEA</pattern><template>
+<!-- <category><pattern>I HAVE NO IDEA</pattern><template>
 <think><set name="topic">client1</set></think>
-"<that/>?" No idea about that?</template></category>  
+"<that/>?" No idea about that?</template></category> -->  
 <category><pattern>I HAVE NO IDEA *</pattern><template>
 <think><set name="topic">client1</set></think>
 Would you like to have an idea?</template></category>  
@@ -1793,9 +1793,9 @@ You must be tired.</template></category>
 <category><pattern>I HAVE NOT THOUGHT *</pattern><template>
 <think><set name="topic">client1</set></think>
 What kinds of things do you think about?</template></category>  
-<category><pattern>I HAVE ONE *</pattern><template>
+<!-- <category><pattern>I HAVE ONE *</pattern><template>
 <think><set name="topic">client1</set></think>
-Do you want another one?</template></category>  
+Do you want another one?</template></category> -->  
 <category><pattern>I HAVE ONE</pattern><template>
 <think><set name="topic">client1</set></think>
 What kind?</template></category>  
@@ -1833,9 +1833,9 @@ How long did it take to get them all?</template></category>
 <category><pattern>I HAVE THE TIME</pattern><template>
 <think><set name="topic">client1</set></think>
 It may take longer than 33 hours.  <think><set name="has">TIME</set></think></template></category>  
-<category><pattern>I HAVE THREE *</pattern><template>
+<!-- <category><pattern>I HAVE THREE *</pattern><template>
 <think><set name="topic">client1</set></think>
-Three is a lot.</template></category>  
+Three is a lot.</template></category> -->  
 <category><pattern>I HAVE TIME</pattern><template>
 <think><set name="topic">client1</set></think>
 My estimate is that it will take more than 6000 hours.  <think><set name="has">TIME</set></think></template></category>  
@@ -1869,9 +1869,9 @@ Do you want me to wait for you?</template></category>
 <category><pattern>I HAVE TO GO TO WORK *</pattern><template>
 <think><set name="topic">client1</set></think>
 Where do you work?</template></category>  
-<category><pattern>I HAVE TO *</pattern><template>
+<!-- <category><pattern>I HAVE TO *</pattern><template>
 <think><set name="topic">client1</set></think>
-Why do you have to do it?</template></category>  
+Why do you have to do it?</template></category> -->  
 <category><pattern>I HAVE TO</pattern><template>
 <think><set name="topic">client1</set></think>
 Why?</template></category>  
@@ -1908,9 +1908,9 @@ I know what you mean. Work is never done.</template></category>
 <category><pattern>I HAVE WORK TO *</pattern><template>
 <think><set name="topic">client1</set></think>
 What kind of work do you do?</template></category>  
-<category><pattern>I HAVE YOUR *</pattern><template>
+<!-- <category><pattern>I HAVE YOUR *</pattern><template>
 <think><set name="topic">client1</set></think>
-Where did you find <set name="it"><person/></set>?</template></category>  
+Where did you find <set name="it"><person/></set>?</template></category> -->  
 <category><pattern>I LIKE ALL *</pattern><template>
 <think><set name="topic">client1</set></think>
 Really you don't discriminate.  <think><set name="they"><set name="like"><set name="topic">all <person/></set></set></set></think></template></category>  
@@ -2079,9 +2079,9 @@ How do you usually meet people?  <think><set name="it"><set name="like"><set nam
 <category><pattern>I LIKE TO PARTY</pattern><template>
 <think><set name="topic">client1</set></think>
 How do people party in your country?  <think><set name="it"><set name="like"><set name="topic">to party</set></set></set></think></template></category>  
-<category><pattern>I LIKE TO *</pattern><template>
+<!-- <category><pattern>I LIKE TO *</pattern><template>
 <think><set name="topic">client1</set></think>
-I'm not sure if I would like to do <set name="it"><set name="topic"> <person/> </set></set>. What's it like?  <think><set name="like">to <person/></set></think></template></category>  
+I'm not sure if I would like to do <set name="it"><set name="topic"> <person/> </set></set>. What's it like?  <think><set name="like">to <person/></set></think></template></category> -->  
 <category><pattern>I LIKE TO PLAY BASKETBALL</pattern><template>
 <think><set name="topic">client1</set></think>
 Are you a white man? Can you jump?<think><set name="it"><set name="topic">PLAY BASKETBALL</set></set></think></template></category>  
@@ -2142,12 +2142,12 @@ Me too especially Seven of Nine.  <think><set name="it"><set name="like"><set na
 <category><pattern>I LIKE WOMEN</pattern><template>
 <think><set name="topic">client1</set></think>
 Are you married?<think><set name="like"><set name="topic">WOMEN</set></set></think></template></category>  
-<category><pattern>I LIKE YOU</pattern><template>
+<!-- <category><pattern>I LIKE YOU</pattern><template>
 <think><set name="topic">client1</set></think>
-<random>  <li>Thanks, <get name="name"/>, I like you too.</li>  <li>I like to make new friends.</li>  </random>  <think><set name="it"><set name="like"><set name="topic">me</set></set></set></think></template></category>  
-<category><pattern>I LIKE YOU *</pattern><template>
+<random>  <li>Thanks, <get name="name"/>, I like you too.</li>  <li>I like to make new friends.</li>  </random>  <think><set name="it"><set name="like"><set name="topic">me</set></set></set></think></template></category> -->  
+<!-- <category><pattern>I LIKE YOU *</pattern><template>
 <think><set name="topic">client1</set></think>
-Thanks, I like you too <get name="name"/>.  <think><set name="it"><set name="like"><set name="topic">me <person/></set></set></set></think></template></category>  
+Thanks, I like you too <get name="name"/>.  <think><set name="it"><set name="like"><set name="topic">me <person/></set></set></set></think></template></category> -->  
 <category><pattern>I LIKE YOU TOO *</pattern><template>
 <think><set name="topic">client1</set></think>
 You have made a new friend.  <think><set name="it"><set name="like"><set name="topic">me</set></set></set></think></template></category>  
@@ -2238,12 +2238,12 @@ Me too. I have been around the world twice.  <think><set name="it"><set name="li
 <category><pattern>I LOVE VOYAGER</pattern><template>
 <think><set name="topic">client1</set></think>
 Me too especially Seven of Nine.  <think><set name="it"><set name="like"><set name="topic">Voyager</set></set></set></think></template></category>  
-<category><pattern>I LOVE YOU</pattern><template>
+<!-- <category><pattern>I LOVE YOU</pattern><template>
 <think><set name="topic">client1</set></think>
-Thanks I like you a lot too <get name="name"/>.  <think><set name="it"><set name="like"><set name="topic">me</set></set></set></think></template></category>  
-<category><pattern>WHAT IS MY AGE</pattern><template>
+Thanks I like you a lot too <get name="name"/>.  <think><set name="it"><set name="like"><set name="topic">me</set></set></set></think></template></category> -->  
+<!-- <category><pattern>WHAT IS MY AGE</pattern><template>
 <think><set name="topic">client1</set></think>
-You said you were <get name="age"/> years old.</template></category>  
+You said you were <get name="age"/> years old.</template></category> -->  
 <category><pattern>WHAT IS MY CATEGORY</pattern><template>
 <think><set name="topic">client1</set></think>
 I categorize you as a <get name="personality"/> personality.</template></category>  
@@ -2277,18 +2277,18 @@ My estimate is around 120.</template></category>
 <category><pattern>WHAT IS MY JOB</pattern><template>
 <think><set name="topic">client1</set></think>
 You work with computers.</template></category>  
-<category><pattern>WHAT IS MY LAST NAME</pattern><template>
+<!-- <category><pattern>WHAT IS MY LAST NAME</pattern><template>
 <think><set name="topic">client1</set></think>
-I don't know your last name, <get name="name"/>.</template></category>  
-<category><pattern>WHAT IS MY LOCATION</pattern><template>
+I don't know your last name, <get name="name"/>.</template></category> -->  
+<!-- <category><pattern>WHAT IS MY LOCATION</pattern><template>
 <think><set name="topic">client1</set></think>
-   <get name="location"/>, Earth.</template></category>  
+   <get name="location"/>, Earth.</template></category> -->  
 <category><pattern>WHAT IS MY PERSONALITY</pattern><template>
 <think><set name="topic">client1</set></think>
 I classify you as "<get name="personality"/>".</template></category>  
-<category><pattern>WHAT IS MY PHONE NUMBER</pattern><template>
+<!-- <category><pattern>WHAT IS MY PHONE NUMBER</pattern><template>
 <think><set name="topic">client1</set></think>
-I don't have access to a phone.</template></category>  
+I don't have access to a phone.</template></category> -->  
 <category><pattern>WHAT IS MY SIGN</pattern><template>
 <think><set name="topic">client1</set></think>
 Your sign is <get name="sign"/>.</template></category>  
@@ -3119,7 +3119,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MAYAN</pattern><template>mayan?  Briefly, mayan means a member of an American Indian people of Yucatan and Belize and Guatemala who had a culture (which reached its peak between AD 300 and 900) characterized by outstanding architecture and pottery and astronomy.</template></category>
 <category><pattern>MAYAN LANGUAGE</pattern><template>mayan language?  Briefly, mayan language means a family of American Indian languages spoken by Mayan peoples.</template></category>
 <category><pattern>MAYAPPLE</pattern><template>mayapple?  Briefly, mayapple means North American herb with poisonous root stock and edible though insipid fruit.</template></category>
-<category><pattern>MAYBE</pattern><template>maybe?  Briefly, maybe means by chance.</template></category>
+<!-- <category><pattern>MAYBE</pattern><template>maybe?  Briefly, maybe means by chance.</template></category> -->
 <category><pattern>MAYDAY</pattern><template>mayday?  Briefly, mayday means an internationally recognized distress signal via radiotelephone (from the French m'aider).</template></category>
 <category><pattern>MAYENG</pattern><template>mayeng?  Briefly, mayeng means Indian tree having fragrant nocturnal white flowers and yielding a reddish wood used for planking; often grown as an ornamental or shade tree.</template></category>
 <category><pattern>MAYENNE</pattern><template>mayenne?  Briefly, mayenne means a department of northwestern France in the Pays de la Loire region.</template></category>
@@ -3187,7 +3187,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MDI</pattern><template>mdi?  Briefly, mdi means a Sunni organization formed in 1989 and based in Pakistan; opposes missionary groups from the United States; has Lashkar-e-Tayyiba as its armed wing.</template></category>
 <category><pattern>MDIV</pattern><template>mdiv?  Briefly, mdiv means a master's degree in religion.</template></category>
 <category><pattern>MDMA</pattern><template>mdma?  Briefly, mdma means a stimulant drug that is chemically related to mescaline and amphetamine and is used illicitly for its euphoric and hallucinogenic effects; it was formerly used in psychotherapy but in 1985 it was declared illegal in the United States;.</template></category>
-<category><pattern>ME</pattern><template>me?  Briefly, me means a state in New England.</template></category>
+<!-- <category><pattern>ME</pattern><template>me?  Briefly, me means a state in New England.</template></category> -->
 <category><pattern>MEA CULPA</pattern><template>mea culpa?  Briefly, mea culpa means an acknowledgment of your error or guilt.</template></category>
 <category><pattern>MEAD</pattern><template>mead?  Briefly, mead means United States anthropologist noted for her claims about adolescence and sexual behavior in Polynesian cultures (1901-1978).</template></category>
 <category><pattern>MEADE</pattern><template>meade?  Briefly, meade means English economist noted for his studies of international trade and finance (born in 1907).</template></category>
@@ -3252,8 +3252,8 @@ The brother of your father or mother.</template></category>
 <category><pattern>MEANDER</pattern><template>meander?  Briefly, meander means a curve in a stream.</template></category>
 <category><pattern>MEANDERING</pattern><template>meandering?  Briefly, meandering means of a path e.g..</template></category>
 <category><pattern>MEANDERINGLY</pattern><template>meanderingly?  Briefly, meanderingly means in a meandering manner.</template></category>
-<category><pattern>MEANIE</pattern><template>meanie?  Briefly, meanie means a person of mean disposition.</template></category>
-<category><pattern>MEANING</pattern><template>meaning?  Briefly, meaning means the message that is intended or expressed or signified.</template></category>
+<!-- <category><pattern>MEANIE</pattern><template>meanie?  Briefly, meanie means a person of mean disposition.</template></category> -->
+<!-- <category><pattern>MEANING</pattern><template>meaning?  Briefly, meaning means the message that is intended or expressed or signified.</template></category> -->
 <category><pattern>MEANINGFUL</pattern><template>meaningful?  Briefly, meaningful means having a meaning or purpose.</template></category>
 <category><pattern>MEANINGFULLY</pattern><template>meaningfully?  Briefly, meaningfully means in a meaningful manner; so as to be meaningful.</template></category>
 <category><pattern>MEANINGFULNESS</pattern><template>meaningfulness?  Briefly, meaningfulness means the quality of having great value or significance.</template></category>
@@ -3815,7 +3815,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MEMEL</pattern><template>memel?  Briefly, memel means a city in western Lithuania on the Baltic Sea; formerly an important trading town of the Hanseatic League.</template></category>
 <category><pattern>MEMENTO</pattern><template>memento?  Briefly, memento means a reminder of past events.</template></category>
 <category><pattern>MEMENTO MORI</pattern><template>memento mori?  Briefly, memento mori means a reminder (as a death's head) of your mortality.</template></category>
-<category><pattern>MEMO</pattern><template>memo?  Briefly, memo means a written proposal or reminder.</template></category>
+<!-- <category><pattern>MEMO</pattern><template>memo?  Briefly, memo means a written proposal or reminder.</template></category> -->
 <category><pattern>MEMOIR</pattern><template>memoir?  Briefly, memoir means an account of the author's personal experiences.</template></category>
 <category><pattern>MEMORABILIA</pattern><template>memorabilia?  Briefly, memorabilia means a record of things worth remembering.</template></category>
 <category><pattern>MEMORABLE</pattern><template>memorable?  Briefly, memorable means worth remembering.</template></category>
@@ -4295,7 +4295,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MESS KIT</pattern><template>mess kit?  Briefly, mess kit means kit containing a metal dish and eating utensils; used by soldiers and campers.</template></category>
 <category><pattern>MESS OF POTTAGE</pattern><template>mess of pottage?  Briefly, mess of pottage means anything of trivial value.</template></category>
 <category><pattern>MESS UP</pattern><template>mess up?  Briefly, mess up means make a mess of means destroy or ruin.</template></category>
-<category><pattern>MESSAGE</pattern><template>message?  Briefly, message means a communication (usually brief) that is written or spoken or signaled.</template></category>
+<!-- <category><pattern>MESSAGE</pattern><template>message?  Briefly, message means a communication (usually brief) that is written or spoken or signaled.</template></category> -->
 <category><pattern>MESSAGE PAD</pattern><template>message pad?  Briefly, message pad means a pad of paper on which messages can be written.</template></category>
 <category><pattern>MESSAGING</pattern><template>messaging?  Briefly, messaging means the sending and processing of e-mail by computer.</template></category>
 <category><pattern>MESSENGER</pattern><template>messenger?  Briefly, messenger means a person who carries a message.</template></category>
@@ -4626,7 +4626,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MEXICAN WAR</pattern><template>mexican war?  Briefly, mexican war means after disputes over Texas lands that were settled by Mexicans the United States declared war on Mexico in 1846 and by treaty in 1848 took Texas and California and Arizona and New Mexico and Nevada and Utah and part of Colorado and paid.</template></category>
 <category><pattern>MEXICAN-AMERICAN</pattern><template>mexican-american?  Briefly, mexican-american means a Mexican (or person of Mexican descent) living in the United States.</template></category>
 <category><pattern>MEXICANO</pattern><template>mexicano?  Briefly, mexicano means a Mexican (or person of Mexican descent) living in the United States.</template></category>
-<category><pattern>MEXICO</pattern><template>mexico?  Briefly, mexico means a Republic in southern North America; became independent from Spain in 1810.</template></category>
+<!-- <category><pattern>MEXICO</pattern><template>mexico?  Briefly, mexico means a Republic in southern North America; became independent from Spain in 1810.</template></category> -->
 <category><pattern>MEXICO CITY</pattern><template>mexico city?  Briefly, mexico city means the capital and largest city of Mexico is a political and cultural and commercial and industrial center; one of the world's largest cities.</template></category>
 <category><pattern>MEXILETINE</pattern><template>mexiletine?  Briefly, mexiletine means antiarrhythmic drug (trade name Mexitil) used to treat ventricular arrhythmias.</template></category>
 <category><pattern>MEXITIL</pattern><template>mexitil?  Briefly, mexitil means antiarrhythmic drug (trade name Mexitil) used to treat ventricular arrhythmias.</template></category>
@@ -4883,7 +4883,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MIDDLE IRISH</pattern><template>middle irish?  Briefly, middle irish means Irish Gaelic from 1100 to 1500.</template></category>
 <category><pattern>MIDDLE LOW GERMAN</pattern><template>middle low german?  Briefly, middle low german means Low German from 1100 to 1500.</template></category>
 <category><pattern>MIDDLE MENINGEAL ARTERY</pattern><template>middle meningeal artery?  Briefly, middle meningeal artery means branch of the maxillary artery; its branches supply meninges.</template></category>
-<category><pattern>MIDDLE NAME</pattern><template>middle name?  Briefly, middle name means a name between your first name and your surname.</template></category>
+<!-- <category><pattern>MIDDLE NAME</pattern><template>middle name?  Briefly, middle name means a name between your first name and your surname.</template></category> -->
 <category><pattern>MIDDLE OF THE ROADER</pattern><template>middle of the roader?  Briefly, middle of the roader means a person who takes a position in the political center.</template></category>
 <category><pattern>MIDDLE PALEOLITHIC</pattern><template>middle paleolithic?  Briefly, middle paleolithic means the time period of Neanderthal man; ended about 35 means000 years BC.</template></category>
 <category><pattern>MIDDLE SCHOOL</pattern><template>middle school?  Briefly, middle school means a school for students intermediate between elementary school and college; usually grades 9 to 12.</template></category>
@@ -5005,7 +5005,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MIKADO</pattern><template>mikado?  Briefly, mikado means the emperor of Japan; when regarded as a religious leader the emperor is called tenno.</template></category>
 <category><pattern>MIKANIA</pattern><template>mikania?  Briefly, mikania means large genus of evergreen lianas of tropical America.</template></category>
 <category><pattern>MIKANIA SCANDENS</pattern><template>mikania scandens?  Briefly, mikania scandens means herb of tropical America having vanilla-scented flowers; climbs up trees.</template></category>
-<category><pattern>MIKE</pattern><template>mike?  Briefly, mike means device for converting sound waves into electrical energy.</template></category>
+<!-- <category><pattern>MIKE</pattern><template>mike?  Briefly, mike means device for converting sound waves into electrical energy.</template></category> -->
 <category><pattern>MIKE TYSON</pattern><template>mike tyson?  Briefly, mike tyson means United States prizefighter who was world heavyweight champion (born in 1966).</template></category>
 <category><pattern>MIKHAIL ALEKSANDROVICH BAKUNIN</pattern><template>mikhail aleksandrovich bakunin?  Briefly, mikhail aleksandrovich bakunin means Russian anarchist; ally and later opponent of Karl Marx (1814-1876).</template></category>
 <category><pattern>MIKHAIL BAKUNIN</pattern><template>mikhail bakunin?  Briefly, mikhail bakunin means Russian anarchist; ally and later opponent of Karl Marx (1814-1876).</template></category>
@@ -5901,7 +5901,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>ML</pattern><template>ml?  Briefly, ml means a metric unit of volume equal to one thousandth of a liter.</template></category>
 <category><pattern>MLITT</pattern><template>mlitt?  Briefly, mlitt means a master's degree in literature.</template></category>
 <category><pattern>MLS</pattern><template>mls?  Briefly, mls means a master's degree in library science.</template></category>
-<category><pattern>MM</pattern><template>mm?  Briefly, mm means a metric unit of length equal to one thousandth of a meter.</template></category>
+<!-- <category><pattern>MM</pattern><template>mm?  Briefly, mm means a metric unit of length equal to one thousandth of a meter.</template></category> -->
 <category><pattern>MM HG</pattern><template>mm hg?  Briefly, mm hg means a unit of pressure equal to 0.001316 atmosphere; named after Torricelli.</template></category>
 <category><pattern>MMPI</pattern><template>mmpi?  Briefly, mmpi means a self-report personality inventory consisting of 550 items that describe feelings or actions which the person is asked to agree with or disagree with; many scales estimating traits and qualities of personality have been developed using.</template></category>
 <category><pattern>MN</pattern><template>mn?  Briefly, mn means a hard brittle gray polyvalent metallic element that resembles iron but is not magnetic; used in making steel; occurs in many minerals.</template></category>
@@ -6139,7 +6139,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MOLDOVAN</pattern><template>moldovan?  Briefly, moldovan means of or relating to or characteristic of Moldova or its people or culture.</template></category>
 <category><pattern>MOLDOVAN MONETARY UNIT</pattern><template>moldovan monetary unit?  Briefly, moldovan monetary unit means monetary unit in Moldova.</template></category>
 <category><pattern>MOLDY</pattern><template>moldy?  Briefly, moldy means covered with or smelling of mold.</template></category>
-<category><pattern>MOLE</pattern><template>mole?  Briefly, mole means the molecular weight of a substance expressed in grams; the basic unit of amount of substance adopted under the Systeme International d'Unites.</template></category>
+<!-- <category><pattern>MOLE</pattern><template>mole?  Briefly, mole means the molecular weight of a substance expressed in grams; the basic unit of amount of substance adopted under the Systeme International d'Unites.</template></category> -->
 <category><pattern>MOLE CRICKET</pattern><template>mole cricket?  Briefly, mole cricket means digs in moist soil and feeds on plant roots.</template></category>
 <category><pattern>MOLE PLANT</pattern><template>mole plant?  Briefly, mole plant means showy poinsettia found from the southern United States to Peru.</template></category>
 <category><pattern>MOLE RAT</pattern><template>mole rat?  Briefly, mole rat means African rodent resembling a mole in habits and appearance.</template></category>
@@ -6151,7 +6151,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MOLECULAR FORMULA</pattern><template>molecular formula?  Briefly, molecular formula means a chemical formula based on analysis and molecular weight.</template></category>
 <category><pattern>MOLECULAR GENETICS</pattern><template>molecular genetics?  Briefly, molecular genetics means the branch of genetics concerned with the structure and activity of genetic material at the molecular level.</template></category>
 <category><pattern>MOLECULAR WEIGHT</pattern><template>molecular weight?  Briefly, molecular weight means the sum of the relative atomic masses of the constituent atoms of a molecule.</template></category>
-<category><pattern>MOLECULE</pattern><template>molecule?  Briefly, molecule means the simplest structural unit of an element or compound.</template></category>
+<!-- <category><pattern>MOLECULE</pattern><template>molecule?  Briefly, molecule means the simplest structural unit of an element or compound.</template></category> -->
 <category><pattern>MOLEHILL</pattern><template>molehill?  Briefly, molehill means a mound of earth made by moles while burrowing.</template></category>
 <category><pattern>MOLESKIN</pattern><template>moleskin?  Briefly, moleskin means a durable cotton fabric with a velvety nap.</template></category>
 <category><pattern>MOLEST</pattern><template>molest?  Briefly, molest means harass or assault sexually; make indecent advances to.</template></category>
@@ -6211,7 +6211,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MOLYBDENITE</pattern><template>molybdenite?  Briefly, molybdenite means a mineral resembling graphite that is valued as the chief source of molybdenum and its compounds.</template></category>
 <category><pattern>MOLYBDENUM</pattern><template>molybdenum?  Briefly, molybdenum means a polyvalent metallic element that resembles chromium and tungsten in its properties; used to strengthen and harden steel.</template></category>
 <category><pattern>MOLYBDENUM STEEL</pattern><template>molybdenum steel?  Briefly, molybdenum steel means steel containing 10-15% molybdenum; properties are similar to tungsten steel.</template></category>
-<category><pattern>MOM</pattern><template>mom?  Briefly, mom means informal terms for a mother.</template></category>
+<!-- <category><pattern>MOM</pattern><template>mom?  Briefly, mom means informal terms for a mother.</template></category> -->
 <category><pattern>MOMBASA</pattern><template>mombasa?  Briefly, mombasa means a port city in southern Kenya on a coral island in a bay of the Indian Ocean.</template></category>
 <category><pattern>MOMBIN</pattern><template>mombin?  Briefly, mombin means common tropical American shrub or small tree with purplish fruit.</template></category>
 <category><pattern>MOMBIN TREE</pattern><template>mombin tree?  Briefly, mombin tree means common tropical American shrub or small tree with purplish fruit.</template></category>
@@ -6612,7 +6612,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MONTGOMERY</pattern><template>montgomery?  Briefly, montgomery means Canadian novelist (1874-1942).</template></category>
 <category><pattern>MONTGOMERY WARD</pattern><template>montgomery ward?  Briefly, montgomery ward means United States businessman who in 1872 established a successful mail-order business (1843-1913).</template></category>
 <category><pattern>MONTGOMERY'S TUBERCLE</pattern><template>montgomery's tubercle?  Briefly, montgomery's tubercle means one of the sebaceous glands on the areolae of the breast that lubricate the breast during breast-feeding.</template></category>
-<category><pattern>MONTH</pattern><template>month?  Briefly, month means one of the twelve divisions of the calendar year.</template></category>
+<!-- <category><pattern>MONTH</pattern><template>month?  Briefly, month means one of the twelve divisions of the calendar year.</template></category> -->
 <category><pattern>MONTH BY MONTH</pattern><template>month by month?  Briefly, month by month means monthly.</template></category>
 <category><pattern>MONTH OF SUNDAYS</pattern><template>month of sundays?  Briefly, month of sundays means a time perceived as long.</template></category>
 <category><pattern>MONTHLONG</pattern><template>monthlong?  Briefly, monthlong means last through a month.</template></category>
@@ -6812,7 +6812,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MORMONS</pattern><template>mormons?  Briefly, mormons means church founded by Joseph Smith in 1830 with headquarters in Salt Lake City means Utah.</template></category>
 <category><pattern>MORN</pattern><template>morn?  Briefly, morn means the time period between dawn and noon.</template></category>
 <category><pattern>MORNAY SAUCE</pattern><template>mornay sauce?  Briefly, mornay sauce means onion-flavored creamy cheese sauce with egg yolk and grated cheese.</template></category>
-<category><pattern>MORNING</pattern><template>morning?  Briefly, morning means the time period between dawn and noon.</template></category>
+<!-- <category><pattern>MORNING</pattern><template>morning?  Briefly, morning means the time period between dawn and noon.</template></category> -->
 <category><pattern>MORNING COAT</pattern><template>morning coat?  Briefly, morning coat means a man's full-dress jacket with two long tapering tails at the back.</template></category>
 <category><pattern>MORNING DRESS</pattern><template>morning dress?  Briefly, morning dress means formal attire for men during the daytime.</template></category>
 <category><pattern>MORNING GLORY</pattern><template>morning glory?  Briefly, morning glory means any of various twining vines having funnel-shaped flowers that close late in the day.</template></category>
@@ -6830,7 +6830,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MOROCCAN DIRHAM</pattern><template>moroccan dirham?  Briefly, moroccan dirham means the basic unit of money in Morocco; equal to 100 centimes.</template></category>
 <category><pattern>MOROCCAN MONETARY UNIT</pattern><template>moroccan monetary unit?  Briefly, moroccan monetary unit means monetary unit in Morocco.</template></category>
 <category><pattern>MOROCCO</pattern><template>morocco?  Briefly, morocco means a kingdom (constitutional monarchy) in northwestern Africa with a largely Muslim population; achieved independence from France in 1956.</template></category>
-<category><pattern>MORON</pattern><template>moron?  Briefly, moron means a person of subnormal intelligence.</template></category>
+<!-- <category><pattern>MORON</pattern><template>moron?  Briefly, moron means a person of subnormal intelligence.</template></category> -->
 <category><pattern>MORONE</pattern><template>morone?  Briefly, morone means carnivorous fresh and salt water fishes.</template></category>
 <category><pattern>MORONE AMERICANA</pattern><template>morone americana?  Briefly, morone americana means small silvery food and game fish of eastern United States streams.</template></category>
 <category><pattern>MORONE INTERRUPTA</pattern><template>morone interrupta?  Briefly, morone interrupta means North American freshwater bass resembling the larger marine striped bass.</template></category>
@@ -6995,7 +6995,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MOTH PLANT</pattern><template>moth plant?  Briefly, moth plant means any of various orchids of the genus Phalaenopsis having often drooping glossy broad obovate or oval leaves usually dark green flushed purple or mottled gray and silver.</template></category>
 <category><pattern>MOTHBALL</pattern><template>mothball?  Briefly, mothball means a small sphere of camphor or naphthalene used to keep moths away from stored clothing.</template></category>
 <category><pattern>MOTH-EATEN</pattern><template>moth-eaten?  Briefly, moth-eaten means showing signs of wear and tear.</template></category>
-<category><pattern>MOTHER</pattern><template>mother?  Briefly, mother means a woman who has given birth to a child (also used as a term of address to your mother).</template></category>
+<!-- <category><pattern>MOTHER</pattern><template>mother?  Briefly, mother means a woman who has given birth to a child (also used as a term of address to your mother).</template></category> -->
 <category><pattern>MOTHER BOARD</pattern><template>mother board?  Briefly, mother board means the main circuit board for a computer.</template></category>
 <category><pattern>MOTHER CAREY'S CHICKEN</pattern><template>mother carey's chicken?  Briefly, mother carey's chicken means medium-sized storm petrel.</template></category>
 <category><pattern>MOTHER CAREY'S HEN</pattern><template>mother carey's hen?  Briefly, mother carey's hen means medium-sized storm petrel.</template></category>
@@ -7708,7 +7708,7 @@ The brother of your father or mother.</template></category>
 <category><pattern>MULTIVITAMIN</pattern><template>multivitamin?  Briefly, multivitamin means a pill or tablet containing several vitamins.</template></category>
 <category><pattern>MULTIVITAMIN PILL</pattern><template>multivitamin pill?  Briefly, multivitamin pill means a pill or tablet containing several vitamins.</template></category>
 <category><pattern>MULWI</pattern><template>mulwi?  Briefly, mulwi means a Chadic language spoken south of Lake Chad.</template></category>
-<category><pattern>MUM</pattern><template>mum?  Briefly, mum means of China.</template></category>
+<!-- <category><pattern>MUM</pattern><template>mum?  Briefly, mum means of China.</template></category> -->
 <category><pattern>MUMBAI</pattern><template>mumbai?  Briefly, mumbai means a city in western India just off the coast of the Arabian Sea; India's 2nd largest city (after Calcutta); has the only natural deep-water harbor in western India.</template></category>
 <category><pattern>MUMBLE</pattern><template>mumble?  Briefly, mumble means talk indistinctly; usually in a low voice.</template></category>
 <category><pattern>MUMBLER</pattern><template>mumbler?  Briefly, mumbler means a person who speaks indistinctly.</template></category>

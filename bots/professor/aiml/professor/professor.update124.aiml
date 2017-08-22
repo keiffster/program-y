@@ -77,7 +77,7 @@
 
  
 
-<category>
+<!-- <category>
 <pattern>WHAT IS RELATIVITY</pattern>
 
 <template>In physics, <a href="http://en.wikipedia.org/wiki/Theory_of_relativity"
@@ -85,11 +85,11 @@
 </a> is the fact, principle, or theory of the relative, rather than absolute, character of motion, velocity, mass, etc., and the interdependence of matter, time, and space; as developed and mathematically formulated by <a href="http://en.wikipedia.org/wiki/Albert_einstein"
  target="_blank">Albert Einstein
 </a>. <think><set name="topic">the theory of relativity</set></think> <think><set name="emotion">interested</set></think></template>
-</category>
+</category> -->
 
  
 
-<topic name="GOAWAY"><category>
+<topic name="GOAWAY"><!-- <category>
 <pattern>_</pattern>
 
 <template><think><set name="inp"><star/></set></think> <condition name="inp">
@@ -187,7 +187,7 @@
   </li>
   <li><random><li>You told me to go away, remember? I'm not coming back until you apologise!</li><li> </li><li> </li></random>  </li>
 </condition></template>
-</category>
+</category> -->
 </topic>
  
 
@@ -253,19 +253,19 @@
 
  
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR DADS NAME</pattern>
 
 <template>My Dad's name is <bot name="father"/> <think><set name="topic">my Dad</set></think><think><set name="emotion">happy</set></think></template>
-</category>
+</category> -->
 
  
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR DADS NAME *</pattern>
 
 <template>My Dad's name is <bot name="father"/> <think><set name="topic">my Dad</set></think><think><set name="emotion">happy</set></think></template>
-</category>
+</category> -->
 
  
 
@@ -285,11 +285,11 @@
 
  
 
-<category>
+<!--<category>
 <pattern>_ DID YOU GO TO SCHOOL *</pattern>
 
 
-</category>
+</category> -->
 
  
 

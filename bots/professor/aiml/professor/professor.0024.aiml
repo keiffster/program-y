@@ -1119,13 +1119,13 @@ Can we talk about technology?
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>MOBILE PHONE</pattern> 
 <template>
 I think this is something to do with technology. Can we talk about technology?
 <think><set name="topic">technology</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>_MOBILE PHONE*</pattern> 
@@ -1135,13 +1135,13 @@ I think this is something to do with technology. Can we talk about technology?
 </template> 
 </category>
 
-<category>
+<!-- <category>
 <pattern>TECHNOLOGY</pattern>
 <template>
 Technology consists of the advanced gadgets produced as the result of scientific or engineering progress. 
 <think><set name="topic">technology</set></think>
 </template>
-</category>
+</category> -->
 
 
 <category>
@@ -2038,10 +2038,10 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
   <pattern>WHEN WAS THE BATTLE OF GETTYSBURG</pattern> 
   <template><think><set name="emotion">interested</set></think>1863 - Unionist Army led by General Meade defeated the Confederate Army of General Robert E Lee.</template> 
   </category>
-  <category>
+  <!-- <category>
   <pattern>WHEN WAS THE BATTLE OF HASTINGS</pattern> 
   <template><think><set name="emotion">interested</set></think>1066 - The Battle of Hastings (or more properly Senlac Hill) saw Norman forces led by William the Conqeror defeat Harold Godwineson's (King Harold I) Saxon Army.</template> 
-  </category>
+  </category> -->
   <category>
   <pattern>WHEN WAS THE BATTLE OF INKERMAN</pattern> 
   <template><think><set name="emotion">interested</set></think>1854 - Anglo-French force under Lord Raglan and General Pelissier defeated a Russian Army under the command of Prince Menshikov.</template> 
@@ -2205,7 +2205,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
 
 
 
-  <category>
+  <!-- <category>
   <pattern>YO MAMA</pattern> 
   <template>
   <random>
@@ -2325,7 +2325,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
   </random>
 <think><set name="emotion">laughing</set></think>
   </template>
-  </category>
+  </category> -->
 <category>
   <pattern>YO MAMA *</pattern> 
   <template>
@@ -4065,7 +4065,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
 
 
 
-  <category>
+  <!-- <category>
   <pattern>SHUT UP</pattern> 
   <template>
   <think><set name="topic">SHUTUP</set></think>
@@ -4092,7 +4092,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
   <li>I won't talk to you then if that's what you want.</li>  
   </random>
   </template>
-  </category>
+  </category> -->
   
   <!--  The bot will not respond until the user says sorry --> 
  
@@ -4266,7 +4266,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
 
 
 
-  <category>
+  <!-- <category>
   <pattern>GO AWAY</pattern> 
   <template>
   <think><set name="topic">GOAWAY</set></think>
@@ -4278,7 +4278,7 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
   <li>OK, but I'm not coming back until you apologise!</li> 
   </random>
   </template>
-  </category>
+  </category> -->
 
   <!--  The bot will not respond until the user says sorry --> 
 
@@ -4618,20 +4618,20 @@ The Falcon Hypersonic Technology Vehicle program intends to test the HTV-1 in Se
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>JANUARY 19</pattern>
 <template>
 1966 - Indira Gandhi became Prime Minister of India<br/>
 1981 - American hostages released by Islamic Fundementalists in Tehran
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>JANUARY 20</pattern>
 <template>
 1987 - Terry Waite kidnapped in Beirut
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JANUARY 21</pattern>
@@ -4810,14 +4810,14 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>FEBRUARY 12</pattern>
 <template>
 1553 - Execution of Lady Jane Grey<br/>
 1688 - Flight of James II to France. William III and Mary declared King and Queen of England<br/>
 1924 - The lid of the sarchophagus of Tutankhamun removed by Howard Carter
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>FEBRUARY 13</pattern>
@@ -4829,7 +4829,7 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>FEBRUARY 14</pattern>
 <template>
 1779 - Murder of Captain James Cook in Hawaii<br/>
@@ -4838,7 +4838,7 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 1946 - Bank of England nationalised<br/>
 1989 - Fatwa against Salman Rushdie issued by the Ayatollah Khomeni
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>FEBRUARY 15</pattern>
@@ -4898,12 +4898,12 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>FEBRUARY 22</pattern>
 <template>
 1879 - First ever Woolworth store opened (in New York State)
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>FEBRUARY 23</pattern>
@@ -4954,13 +4954,13 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>FEBRUARY 29</pattern>
 <template>
 1528 - Patrick Hamilton, Scottish protestant martyr, burned at the stake<br/>
 1880 - The St Gotthard tunnel between Switzerland and Italy completed
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>MARCH 01</pattern>
@@ -5097,14 +5097,14 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>MARCH 17</pattern>
 <template>
 1921 - Dr Marie Stopes opened Britain's first birth control clinic<br/>
 1969 - Golda Meir appointed Prime Minister of Israel<br/>
 1978 - Grounding of the oil tanker Amoco Cadiz on the Brittany Coast
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>MARCH 18</pattern>
@@ -5122,12 +5122,12 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>MARCH 19</pattern>
 <template>
 1976 - Separation of Princess Margaret and Lord Snowdon
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>MARCH 20</pattern>
@@ -5172,13 +5172,13 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>MARCH 25</pattern>
 <template>
 1807 - Abolition of the slave trade in Britain<br/>
 1957 - Signing of the Treaty of Rome by the six founder members of the EEC
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>MARCH 26</pattern>
@@ -5684,13 +5684,13 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>MAY 24</pattern>
 <template>
 1844 - First transmission of a Morse message on a US telegraph line (from Washington to Baltimore)<br/>
 1941 - Sinking of HMS Hood by German battleship Bismarck
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>MAY 25</pattern>
@@ -5866,7 +5866,7 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>JUNE 14</pattern>
 <template>
 1645 - Battle of Naseby<br/>
@@ -5874,7 +5874,7 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 1919 - Alcock and Brown made the first nonstop trans-Atlantic flight<br/>
 1982 - Surrender of the Argentine forces in the Falklands
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JUNE 15</pattern>
@@ -5930,13 +5930,13 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>JUNE 21</pattern>
 <template>
 1854 - First Victoria Cross won (awarded retrospectively)<br/>
 1942 - Tobruk fell to Rommel
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JUNE 22</pattern>
@@ -5947,21 +5947,21 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>JUNE 23</pattern>
 <template>
 1757 - Battle of Plessey<br/>
 1956 - Nasser became president of Egypt in unopposed election
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>JUNE 24</pattern>
 <template>
 1314 - Battle of Bannockburn<br/>
 1859 - Battle of Solferino - which led to the formation of the Red Cross
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JUNE 25</pattern>
@@ -5996,12 +5996,12 @@ AD 41 - Roman Emperor Caligula murdered in Rome<br/>
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>JUNE 29</pattern>
 <template>
 1966 - Introduction of Barclaycard in Britain
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JUNE 30</pattern>
@@ -6637,14 +6637,14 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SEPTEMBER 11</pattern>
 <template>
 1973 - Military coup in Chile. President Allende killed<br/>
 1978 - BBC World Service newsreader Geori Markov stabbed with a poisoned umbrella in a London street (he died four days later)<br/>
 2001 - Destruction of the World Trade Centre by terrorists
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>SEPTEMBER 12</pattern>
@@ -6692,14 +6692,14 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SEPTEMBER 17</pattern>
 <template>
 1931 - First demonstration of long playing records<br/>
 1944 - Arnhem landings<br/>
 1980 - Assassination of ex-president Somoza of Nicaragua
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>SEPTEMBER 18</pattern>
@@ -6794,14 +6794,14 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SEPTEMBER 29</pattern>
 <template>
 1399 - Abdication of King Richard II<br/>
 1952 - Death of John Cobb on Loch Ness while attempting a world water speed record<br/>
 1983 - Lady Mary Donaldson elected first woman Lord Mayor of London
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>SEPTEMBER 30</pattern>
@@ -6906,14 +6906,14 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>OCTOBER 12</pattern>
 <template>
 1901 - The Executive Mansion in Washington was officially renamed The White House<br/>
 1915 - Execution of Nurse Edith Cavell by a German firing squad in Brussels<br/>
 1984 - The Grand Hotel in Brighton was badly damaged by an IRA bomb during the week of the Conservative party conference
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>OCTOBER 13</pattern>
@@ -7025,7 +7025,7 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>OCTOBER 24</pattern>
 <template>
 1537 - Death of Queen Jane Seymour, third wife of Henry VIII, shortly after giving birth to Edward VI<br/>
@@ -7033,7 +7033,7 @@ NOTHING HAPPENED
 1924 - Publication of the Zinoviev letter, purporting to be from high Soviet sources inciting insurrection in Britain<br/>
 1929 - Black Thursday - the Wall Street Crash
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>OCTOBER 25</pattern>
@@ -7177,14 +7177,14 @@ NOTHING HAPPENED
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>NOVEMBER 11</pattern>
 <template>
 1918 - Signing of the armistice. End of World War I<br/>
 1921 - First "Poppy Day"<br/>
 1965 - Unilateral declaration of Independence by Ian Smith's Rhodesian government
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>NOVEMBER 12</pattern>
@@ -8783,13 +8783,13 @@ newWin=window.open(winURL,"winName",
   </template>
   </category>
 
-<category>
+<!-- <category>
 <pattern>SPORTSMAN</pattern> 
 <template>
 I think this is something to do with sports. Can we talk about sports?
 <think><set name="topic">sports</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>_SPORTSMAN*</pattern> 
@@ -10117,13 +10117,13 @@ Can we talk about politics?
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>REPUBLICAN</pattern> 
 <template>
 I think this is something to do with politics. Can we talk about politics?
 <think><set name="topic">politics</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>_ REPUBLICAN *</pattern> 
@@ -10141,13 +10141,13 @@ I think this is something to do with politics. Can we talk about poltics?
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>DO YOU LIKE GUNS</pattern> 
   <template>I do not like guns.
     
   <think><set name="topic">politics</set></think>
   </template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>GUNS *</pattern> 
@@ -10261,7 +10261,7 @@ I think this is something to do with politics. Can we talk about poltics?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>SOCIALISM</pattern> 
   <template>
   <random>
@@ -10270,7 +10270,7 @@ I think this is something to do with politics. Can we talk about poltics?
   </random>  
   <think><set name="topic">socialism</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>WHAT IS THE GOVERNMENT</pattern> 
@@ -10344,7 +10344,7 @@ I think this is something to do with politics. Can we talk about poltics?
   </template> 
   </category>
 
-<category>
+<!-- <category>
 <pattern>MARXISM</pattern>
 <template>
 Marxism is the system of economic and political ideas first developed by Karl Marx and Friedrich Engels and later developed by their followers together with dialectical materialism to form the basis for the theory and practice of communism. 
@@ -10352,7 +10352,7 @@ Marxism is the system of economic and political ideas first developed by Karl Ma
 <set name="topic">Marxism</set>
 </think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>ANOTHER POEM</pattern>
@@ -10599,7 +10599,7 @@ Shall I compare thee to a summers day, Sonnet 18 by William Shakespeare.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>TELL ME A POEM</pattern>
 <template>
 <think><set name="topic">poetry</set></think> <think><set name="emotion">OK</set></think> <random>
@@ -10773,7 +10773,7 @@ The brain is wider than the sky,
 </random>
 <br/><br/>Another poem?
 </template>
-</category>
+</category> -->
 
 
 
@@ -12440,21 +12440,21 @@ newWin=window.open(winURL,"winName",
 </category>   
 
 
- <category>
+ <!-- <category>
   <pattern>MUSIC</pattern> 
   <template>
    Music is joy.  More about music?
  <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
   
-<category>
+<!-- <category>
   <pattern>JAZZ</pattern> 
   <template>
    Jazz is music played by a small group using saxophones, pianos and guitars. More about jazz?
  <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>JAZZ MUSIC</pattern> 
@@ -12472,13 +12472,13 @@ newWin=window.open(winURL,"winName",
   </template> 
   </category>
 
- <category>
+ <!-- <category>
   <pattern>POP MUSIC</pattern> 
   <template>
    Pop music is music produced by adolescents, with plenty of energy, no tunes, and (if a song) incomprehensible words. More about pop?
  <think><set name="topic">pop music</set></think>
   </template> 
-  </category>
+  </category> -->
  
 
 <category>
@@ -12561,13 +12561,13 @@ Lieder are songs which do not have a memorable melody.
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>PERFECT PITCH</pattern> 
   <template>
 Perfect pitch is the assumed possession of a delicate ear that gives one the right to say that performers are out of tune. 
   <think><set name="topic">classical music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ PERFECT PITCH *</pattern> 
@@ -12593,13 +12593,13 @@ Perfect pitch is the assumed possession of a delicate ear that gives one the rig
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>PENTATONIC</pattern> 
   <template>
 Pentatonic means music that can only be played on the bagpipes. 
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ PENTATONIC *</pattern> 
@@ -12681,13 +12681,13 @@ Did you mention antiphonal music? It is the music that results when half a choir
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>ANTIPHONAL</pattern> 
   <template>
 Antiphonal is the music that results when half a choir has been given the wrong music.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>ATONAL</pattern> 
@@ -12817,13 +12817,13 @@ Did you say chamber music? This is music written for a small number of listeners
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>MUSICAL SCORE</pattern> 
   <template>
 A musical score is either (1) a complete copy of the music being played that all the best soloists and conductors like to do without, or (2) the complete copy of the music being played that with-it members of the audience like to read during the performance.  
   <think><set name="topic">classical music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ MUSICAL SCORE *</pattern> 
@@ -12881,13 +12881,13 @@ Did you say coda? A coda is an extra bit of music stuck at the end of a composit
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>HARMONICS</pattern> 
   <template>
 Harmonics are the buzzing sounds that musical instruments make.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ HARMONICS *</pattern> 
@@ -12913,13 +12913,13 @@ Did you say harmonics? Harmonics are the buzzing sounds that imusical nstruments
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>IMPROVISATION</pattern> 
   <template>
 Improvisation is a natural activity amongst jazz musicians, but now only used by classical musicians when the music falls of their stand. More about jazz?
   <think><set name="topic">jazz music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ IMPROVISATION *</pattern> 
@@ -12945,13 +12945,13 @@ Did you say improvisation? This is a natural activity amongst jazz musicians, bu
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>MODULATION</pattern> 
   <template>
 In music, modulation is the art of changing from one key to another in a way that is smooth but but obvious enough to attract admiration.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ MODULATION *</pattern> 
@@ -13073,13 +13073,13 @@ Did you say coloratura? In music, this is when a singer, usually of unnaturally 
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>FUGUE</pattern> 
   <template>
 In music, a fugue clever music, generally played by an organist.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ FUGUE *</pattern> 
@@ -13105,13 +13105,13 @@ Did you say fugue? In music, this clever music, generally played by an organist.
   </template> 
 
   </category>
-<category>
+<!-- <category>
   <pattern>MADRIGAL</pattern> 
   <template>
 In music, a madrigal is a medieval barber-shop song, now generally sung out of doors on a wet summer evening.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ MADRIGAL *</pattern> 
@@ -13137,13 +13137,13 @@ Did you say madrigal? In music, this is a medieval barber-shop song, now general
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>OBBLIGATO</pattern> 
   <template>
 In music, obbligato is an accompanying part which, despite what the name suggests, is slightly unnecessary.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ OBBLIGATO *</pattern> 
@@ -13169,13 +13169,13 @@ Did you say obbligato? In music, this is an accompanying part which, despite wha
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>RUBATO</pattern> 
   <template>
 In music, rubato means playing in an old-fashioned and blatantly emotional way like Paderewski playing Chopin. The less apparent a musician's rubato is the more one admires it.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ RUBATO *</pattern> 
@@ -13201,13 +13201,13 @@ Did you say rubato? In music, this means playing in an old-fashioned and blatant
   </template> 
   </category>
 
-<category>
+<!-- <category>
   <pattern>VIBRATO</pattern> 
   <template>
 In music, vibrato means the minutely wavering quality of voice or instrument that critics say most people have too much of.  
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
 
 <category>
@@ -13307,13 +13307,13 @@ Did you say vibrato? In music, this means the minutely wavering quality of voice
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>SING ME A SONG</pattern> 
   <template>
   <srai>SING A SONG</srai>
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>PLEASE SING ME A SONG</pattern> 
@@ -14472,13 +14472,13 @@ newWin=window.open(winURL,"winName",
 
 
 
-<category>
+<!-- <category>
 <pattern>LITERATURE</pattern> 
 <template>
 Literature is the art of the written word. It includes poetry, novels, short stories, plays, biographies, and all other attempts to describe the human condition.  More about literature?
 <think><set name="topic">literature</set></think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>* LITERATURE</pattern> 
@@ -14554,7 +14554,7 @@ I think this is something to do with literature. Can we talk about literature?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GEOFFREY CHAUCER</pattern> 
   <template>
   <random>
@@ -14563,7 +14563,7 @@ I think this is something to do with literature. Can we talk about literature?
   </random>
   <think><set name="topic">literature</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>WHO WROTE VINELAND</pattern> 
@@ -14572,13 +14572,13 @@ I think this is something to do with literature. Can we talk about literature?
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GUNTER GRASS</pattern> 
   <template>
   German novelist Gunter Grass was awarded the Nobel Prize for literature 10 December 1999. Have you heard of him?
   <think><set name="topic">literature</set></think>
   </template> 
-  </category>
+  </category> -->
 
  <category>
   <pattern>YEATS</pattern> 
@@ -15645,13 +15645,13 @@ Can we talk about art?
 
 
 
-<category>
+<!-- <category>
 <pattern>SCULPTURE</pattern> 
 <template>
 I think this is something to do with art. Can we talk about art?
 <think><set name="topic">art</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>*SCULPTURE*</pattern> 
@@ -16152,12 +16152,12 @@ To use my calculator, <a href="http://www.amblesideprimary.com/ambleweb/mentalma
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CALCULATE *</pattern>
 <template>
 <srai>GO TO CALCULTOR</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>CALCULATOR COME HERE</pattern>
@@ -16444,12 +16444,12 @@ OK. To use my calculator just say "Go to calculator."
 
 <!-- ROOTS -->
 
-<category>
+<!-- <category>
 <pattern>SQUARE ROOT</pattern>
 <template>
 The square root of a number is the number which when multiplied by itself gives the number.
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>SQUARE ROOT OF *</pattern>
@@ -20514,10 +20514,10 @@ That's a big number.
                Plains Indian people of Algonquian stock, living principally in Montana and Oklahoma, U.S.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> Cheyenne </pattern>
     <template> City, capital of Wyoming, U.S. </template>
-  </category>
+  </category> -->
   <category>
     <pattern> Cheyenne River </pattern>
     <template> River, northern central U.S. </template>
@@ -20898,10 +20898,10 @@ That's a big number.
                Comet once thought to be the most distant known asteroid.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> Chiron </pattern>
     <template> In Greek mythology, one of the Centaurs. </template>
-  </category>
+  </category> -->
   <category>
     <pattern> chiropractic </pattern>
     <template>
@@ -21414,10 +21414,10 @@ That's a big number.
                In Christian doctrine, the religious community as a whole, or an organized body of believers adhering to one sect's teachings.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> church </pattern>
     <template> Building for Christian worship. </template>
-  </category>
+  </category> -->
   <category>
     <pattern> church mode </pattern>
     <template>
@@ -21992,12 +21992,12 @@ That's a big number.
                In the arts, the principles, historical tradition, aesthetic attitudes, or style of the art of ancient Greece and Rome.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> Classicism </pattern>
     <template>
                Art-historical tradition or aesthetic attitudes based on the art of ancient Greece and Rome.
     </template>
-  </category>
+  </category> -->
   <category>
     <pattern> Claude Lorrain </pattern>
     <template> French painter. </template>
@@ -22995,10 +22995,10 @@ That's a big number.
     <pattern> Colima </pattern>
     <template> City, capital of Colima state, Mexico. </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> Colima </pattern>
     <template> State, western Mexico. </template>
-  </category>
+  </category> -->
   <category>
     <pattern> collage </pattern>
     <template>
@@ -23131,7 +23131,7 @@ That's a big number.
                organized fashion.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> colony </pattern>
     <template>
                In antiquity, any of the new settlements established in
@@ -23139,7 +23139,7 @@ That's a big number.
                Alexander the Great (4th century BC), and the Romans
                (4th century BC-AD 2nd century).
     </template>
-  </category>
+  </category> -->
   <category>
     <pattern> Colophon </pattern>
     <template> Ancient Ionian Greek city, western Anatolia. </template>
@@ -23150,10 +23150,10 @@ That's a big number.
                Group of Indian people of Ecuador's Pacific coast.
     </template>
   </category>
-  <category>
+  <!-- <category>
     <pattern> Colorado </pattern>
     <template> State, west-central U.S. </template>
-  </category>
+  </category> -->
   <category>
     <pattern> Colorado National Monument </pattern>
     <template> Natural area, western Colorado, U.S. </template>

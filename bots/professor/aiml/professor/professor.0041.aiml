@@ -75,7 +75,7 @@
 <category><pattern>ASSEVERATE</pattern><template>asseverate?  Briefly, asseverate means state categorically.</template></category>
 <category><pattern>ASSEVERATION</pattern><template>asseveration?  Briefly, asseveration means a declaration that is made emphatically (as if no supporting evidence were necessary).</template></category>
 <category><pattern>ASSEVERATOR</pattern><template>asseverator?  Briefly, asseverator means someone who claims to speak the truth.</template></category>
-<category><pattern>ASSHOLE</pattern><template>asshole?  Briefly, asshole means insulting terms of address for people who are stupid or irritating or ridiculous.</template></category>
+<!-- <category><pattern>ASSHOLE</pattern><template>asshole?  Briefly, asshole means insulting terms of address for people who are stupid or irritating or ridiculous.</template></category> -->
 <category><pattern>ASSIBILATE</pattern><template>assibilate?  Briefly, assibilate means insert a sibilant sound before or after (another sound).</template></category>
 <category><pattern>ASSIBILATION</pattern><template>assibilation?  Briefly, assibilation means the development of a consonant phoneme into a sibilant.</template></category>
 <category><pattern>ASSIDUITY</pattern><template>assiduity?  Briefly, assiduity means great and constant diligence and attention.</template></category>
@@ -93,7 +93,7 @@
 <category><pattern>ASSIMILABLE</pattern><template>assimilable?  Briefly, assimilable means able to be absorbed and incorporated into body tissues.</template></category>
 <category><pattern>ASSIMILATE</pattern><template>assimilate?  Briefly, assimilate means take up mentally.</template></category>
 <category><pattern>ASSIMILATING</pattern><template>assimilating?  Briefly, assimilating means tending to or characterized by or causing assimilation (being absorbed into or incorporated).</template></category>
-<category><pattern>ASSIMILATION</pattern><template>assimilation?  Briefly, assimilation means the state of being assimilated; people of different backgrounds come to see themselves as part of a larger national family.</template></category>
+<!-- <category><pattern>ASSIMILATION</pattern><template>assimilation?  Briefly, assimilation means the state of being assimilated; people of different backgrounds come to see themselves as part of a larger national family.</template></category> -->
 <category><pattern>ASSIMILATIVE</pattern><template>assimilative?  Briefly, assimilative means tending to or characterized by or causing assimilation (being absorbed into or incorporated).</template></category>
 <category><pattern>ASSIMILATOR</pattern><template>assimilator?  Briefly, assimilator means someone (especially a child) who learns (as from a teacher) or takes up knowledge or beliefs.</template></category>
 <category><pattern>ASSIMILATORY</pattern><template>assimilatory?  Briefly, assimilatory means tending to or characterized by or causing assimilation (being absorbed into or incorporated).</template></category>
@@ -207,7 +207,7 @@
 <category><pattern>ASTERISMAL</pattern><template>asterismal?  Briefly, asterismal means relating to asterisms or constellations.</template></category>
 <category><pattern>ASTERN</pattern><template>astern?  Briefly, astern means stern foremost or backward.</template></category>
 <category><pattern>ASTERNAL</pattern><template>asternal?  Briefly, asternal means not connected to the sternum or breastbone.</template></category>
-<category><pattern>ASTEROID</pattern><template>asteroid?  Briefly, asteroid means any of numerous small celestial bodies composed of rock and metal that move around the sun (mainly between the orbits of Mars and Jupiter).</template></category>
+<!-- <category><pattern>ASTEROID</pattern><template>asteroid?  Briefly, asteroid means any of numerous small celestial bodies composed of rock and metal that move around the sun (mainly between the orbits of Mars and Jupiter).</template></category> -->
 <category><pattern>ASTEROID BELT</pattern><template>asteroid belt?  Briefly, asteroid belt means the region of interplanetary space between Mars and Jupiter where most asteroids are found.</template></category>
 <category><pattern>ASTEROIDAL</pattern><template>asteroidal?  Briefly, asteroidal means of or relating to or resembling an asteroid.</template></category>
 <category><pattern>ASTEROIDEA</pattern><template>asteroidea?  Briefly, asteroidea means sea stars.</template></category>
@@ -218,7 +218,7 @@
 <category><pattern>ASTHENOPIA</pattern><template>asthenopia?  Briefly, asthenopia means a tiredness of the eyes caused by prolonged close work by a person with an uncorrected vision problem.</template></category>
 <category><pattern>ASTHENOSPHERE</pattern><template>asthenosphere?  Briefly, asthenosphere means the lower layer of the crust.</template></category>
 <category><pattern>ASTHENY</pattern><template>astheny?  Briefly, astheny means an abnormal loss of strength.</template></category>
-<category><pattern>ASTHMA</pattern><template>asthma?  Briefly, asthma means respiratory disorder characterized by wheezing; usually of allergic origin.</template></category>
+<!-- <category><pattern>ASTHMA</pattern><template>asthma?  Briefly, asthma means respiratory disorder characterized by wheezing; usually of allergic origin.</template></category> -->
 <category><pattern>ASTHMA ATTACK</pattern><template>asthma attack?  Briefly, asthma attack means respiratory disorder characterized by wheezing; usually of allergic origin.</template></category>
 <category><pattern>ASTHMATIC</pattern><template>asthmatic?  Briefly, asthmatic means relating to breathing with a whistling sound.</template></category>
 <category><pattern>ASTIGMATIC</pattern><template>astigmatic?  Briefly, astigmatic means of or relating to a defect in the eye or in a lens caused by a deviation from spherical curvature which prevents light rays from meeting at a common focus and so results in distorted images.</template></category>
@@ -276,7 +276,7 @@
 <category><pattern>ASTROLOGER</pattern><template>astrologer?  Briefly, astrologer means someone who predicts the future by the positions of the planets and sun and moon.</template></category>
 <category><pattern>ASTROLOGICAL</pattern><template>astrological?  Briefly, astrological means relating to or concerned with astrology.</template></category>
 <category><pattern>ASTROLOGIST</pattern><template>astrologist?  Briefly, astrologist means someone who predicts the future by the positions of the planets and sun and moon.</template></category>
-<category><pattern>ASTROLOGY</pattern><template>astrology?  Briefly, astrology means a pseudoscience claiming divination by the positions of the planets and sun and moon.</template></category>
+<!-- <category><pattern>ASTROLOGY</pattern><template>astrology?  Briefly, astrology means a pseudoscience claiming divination by the positions of the planets and sun and moon.</template></category> -->
 <category><pattern>ASTROLOMA</pattern><template>astroloma?  Briefly, astroloma means evergreen shrubs of Australia and Tasmania.</template></category>
 <category><pattern>ASTROLOMA HUMIFUSUM</pattern><template>astroloma humifusum?  Briefly, astroloma humifusum means small prostrate or ascending shrub having scarlet flowers and succulent fruit resembling cranberries; sometimes place in genus Styphelia.</template></category>
 <category><pattern>ASTROMETRY</pattern><template>astrometry?  Briefly, astrometry means the branch of astronomy that deals with the measurement of the position and motion of celestial bodies.</template></category>
@@ -294,17 +294,17 @@
 <category><pattern>ASTRONOMICAL UNIT</pattern><template>astronomical unit?  Briefly, astronomical unit means a unit of length used for distances within the solar system; equal to the mean distance between the Earth and the Sun (approximately 93 million miles or 150 million kilometers).</template></category>
 <category><pattern>ASTRONOMICAL YEAR</pattern><template>astronomical year?  Briefly, astronomical year means the time for the earth to make one revolution around the sun means measured between two vernal equinoxes.</template></category>
 <category><pattern>ASTRONOMICALLY</pattern><template>astronomically?  Briefly, astronomically means enormously.</template></category>
-<category><pattern>ASTRONOMY</pattern><template>astronomy?  Briefly, astronomy means the branch of physics that studies celestial bodies and the universe as a whole.</template></category>
+<!-- <category><pattern>ASTRONOMY</pattern><template>astronomy?  Briefly, astronomy means the branch of physics that studies celestial bodies and the universe as a whole.</template></category> -->
 <category><pattern>ASTRONOMY SATELLITE</pattern><template>astronomy satellite?  Briefly, astronomy satellite means a satellite equipped with a telescope to observe infra-red radiation.</template></category>
 <category><pattern>ASTRONOMY UNIT</pattern><template>astronomy unit?  Briefly, astronomy unit means a linear unit used for astronomical distances.</template></category>
 <category><pattern>ASTROPHYSICAL</pattern><template>astrophysical?  Briefly, astrophysical means of or concerned with astrophysics.</template></category>
 <category><pattern>ASTROPHYSICIST</pattern><template>astrophysicist?  Briefly, astrophysicist means an astronomer who studies the physical properties of celestial bodies.</template></category>
-<category><pattern>ASTROPHYSICS</pattern><template>astrophysics?  Briefly, astrophysics means the branch of astronomy concerned with the physical and chemical properties of celestial bodies.</template></category>
+<!-- <category><pattern>ASTROPHYSICS</pattern><template>astrophysics?  Briefly, astrophysics means the branch of astronomy concerned with the physical and chemical properties of celestial bodies.</template></category> -->
 <category><pattern>ASTROPHYTON</pattern><template>astrophyton?  Briefly, astrophyton means includes many of the basket stars.</template></category>
 <category><pattern>ASTROPHYTON MURICATUM</pattern><template>astrophyton muricatum?  Briefly, astrophyton muricatum means a variety of basket star.</template></category>
 <category><pattern>ASTROPOGON</pattern><template>astropogon?  Briefly, astropogon means a genus of fish of the family Apogonidae.</template></category>
 <category><pattern>ASTROPOGON STELLATUS</pattern><template>astropogon stellatus?  Briefly, astropogon stellatus means found in West Indies; lives in mantle cavity of a living conch.</template></category>
-<category><pattern>ASTUTE</pattern><template>astute?  Briefly, astute means marked by practical hardheaded intelligence.</template></category>
+<!-- <category><pattern>ASTUTE</pattern><template>astute?  Briefly, astute means marked by practical hardheaded intelligence.</template></category> -->
 <category><pattern>ASTUTELY</pattern><template>astutely?  Briefly, astutely means in a shrewd manner.</template></category>
 <category><pattern>ASTUTENESS</pattern><template>astuteness?  Briefly, astuteness means intelligence manifested by being astute (as in business dealings).</template></category>
 <category><pattern>ASTYLAR</pattern><template>astylar?  Briefly, astylar means lacking columns or pillars.</template></category>
@@ -379,7 +379,7 @@
 <category><pattern>AT ONCE</pattern><template>at once?  Briefly, at once means without delay or hesitation; with no time intervening.</template></category>
 <category><pattern>AT ONE TIME</pattern><template>at one time?  Briefly, at one time means simultaneously.</template></category>
 <category><pattern>AT PEACE</pattern><template>at peace?  Briefly, at peace means dead.</template></category>
-<category><pattern>AT PRESENT</pattern><template>at present?  Briefly, at present means at the present moment.</template></category>
+<!-- <category><pattern>AT PRESENT</pattern><template>at present?  Briefly, at present means at the present moment.</template></category> -->
 <category><pattern>AT RANDOM</pattern><template>at random?  Briefly, at random means in a random manner.</template></category>
 <category><pattern>AT REST</pattern><template>at rest?  Briefly, at rest means in a state of repose or especially sleep.</template></category>
 <category><pattern>AT SEA</pattern><template>at sea?  Briefly, at sea means perplexed by many conflicting situations or statements; filled with bewilderment.</template></category>
@@ -411,7 +411,7 @@
 <category><pattern>ATARAXIA</pattern><template>ataraxia?  Briefly, ataraxia means peace of mind.</template></category>
 <category><pattern>ATARAXIC</pattern><template>ataraxic?  Briefly, ataraxic means tending to soothe or tranquilize.</template></category>
 <category><pattern>ATARAXIS</pattern><template>ataraxis?  Briefly, ataraxis means the absence of mental stress or anxiety.</template></category>
-<category><pattern>ATATURK</pattern><template>ataturk?  Briefly, ataturk means Turkish statesman who abolished the caliphate and founded Turkey as a modern secular state (1881-1938).</template></category>
+<!-- <category><pattern>ATATURK</pattern><template>ataturk?  Briefly, ataturk means Turkish statesman who abolished the caliphate and founded Turkey as a modern secular state (1881-1938).</template></category> -->
 <category><pattern>ATAVISM</pattern><template>atavism?  Briefly, atavism means a reappearance of an earlier characteristic.</template></category>
 <category><pattern>ATAVIST</pattern><template>atavist?  Briefly, atavist means an organism that has the characteristics of a more primitive type of that organism.</template></category>
 <category><pattern>ATAVISTIC</pattern><template>atavistic?  Briefly, atavistic means characteristic of an atavist.</template></category>
@@ -446,7 +446,7 @@
 <category><pattern>ATHAPASKAN LANGUAGE</pattern><template>athapaskan language?  Briefly, athapaskan language means a group of Amerindian languages (the name coined by an American anthropologist means Edward Sapir).</template></category>
 <category><pattern>ATHAR</pattern><template>athar?  Briefly, athar means essential oil or perfume obtained from flowers.</template></category>
 <category><pattern>ATHARVA-VEDA</pattern><template>atharva-veda?  Briefly, atharva-veda means a collection of mantras and formulas.</template></category>
-<category><pattern>ATHEISM</pattern><template>atheism?  Briefly, atheism means the doctrine or belief that there is no God.</template></category>
+<!-- <category><pattern>ATHEISM</pattern><template>atheism?  Briefly, atheism means the doctrine or belief that there is no God.</template></category> -->
 <category><pattern>ATHEIST</pattern><template>atheist?  Briefly, atheist means someone who denies the existence of god.</template></category>
 <category><pattern>ATHEISTIC</pattern><template>atheistic?  Briefly, atheistic means rejecting any belief in gods.</template></category>
 <category><pattern>ATHEISTICAL</pattern><template>atheistical?  Briefly, atheistical means related to or characterized by or given to atheism.</template></category>
@@ -457,7 +457,7 @@
 <category><pattern>ATHENE NOCTUA</pattern><template>athene noctua?  Briefly, athene noctua means small European owl.</template></category>
 <category><pattern>ATHENEUM</pattern><template>atheneum?  Briefly, atheneum means a literary or scientific association for the promotion of learning.</template></category>
 <category><pattern>ATHENIAN</pattern><template>athenian?  Briefly, athenian means a resident of Athens.</template></category>
-<category><pattern>ATHENS</pattern><template>athens?  Briefly, athens means the capital and largest city of Greece; named after Athena (its patron goddess).</template></category>
+<!-- <category><pattern>ATHENS</pattern><template>athens?  Briefly, athens means the capital and largest city of Greece; named after Athena (its patron goddess).</template></category> -->
 <category><pattern>ATHERINIDAE</pattern><template>atherinidae?  Briefly, atherinidae means small spiny-finned fishes of both salt and fresh water.</template></category>
 <category><pattern>ATHERINOPSIS</pattern><template>atherinopsis?  Briefly, atherinopsis means a genus of Atherinidae.</template></category>
 <category><pattern>ATHERINOPSIS CALIFORNIENSIS</pattern><template>atherinopsis californiensis?  Briefly, atherinopsis californiensis means large silversides of Pacific coast of North America.</template></category>
@@ -488,7 +488,7 @@
 <category><pattern>ATHLETIC TYPE</pattern><template>athletic type?  Briefly, athletic type means muscular and big-boned.</template></category>
 <category><pattern>ATHLETIC WEAR</pattern><template>athletic wear?  Briefly, athletic wear means attire worn for sport or for casual wear.</template></category>
 <category><pattern>ATHLETICISM</pattern><template>athleticism?  Briefly, athleticism means intense energy.</template></category>
-<category><pattern>ATHLETICS</pattern><template>athletics?  Briefly, athletics means an active diversion requiring physical exertion and competition.</template></category>
+<!-- <category><pattern>ATHLETICS</pattern><template>athletics?  Briefly, athletics means an active diversion requiring physical exertion and competition.</template></category> -->
 <category><pattern>ATHODYD</pattern><template>athodyd?  Briefly, athodyd means a simple type of jet engine; must be launched at high speed.</template></category>
 <category><pattern>ATHOL FUGARD</pattern><template>athol fugard?  Briefly, athol fugard means South African playwright whose plays feature the racial tensions in South Africa during apartheid (born in 1932).</template></category>
 <category><pattern>ATHOS</pattern><template>athos?  Briefly, athos means an autonomous area in northeastern Greece that is the site of several Greek Orthodox monasteries founded in the tenth century.</template></category>
@@ -503,7 +503,7 @@
 <category><pattern>ATHYRIUM THELYPTEROIDES</pattern><template>athyrium thelypteroides?  Briefly, athyrium thelypteroides means fern with elongate silvery outgrowths enclosing the developing spores.</template></category>
 <category><pattern>ATILT</pattern><template>atilt?  Briefly, atilt means departing or being caused to depart from the true vertical or horizontal.</template></category>
 <category><pattern>ATIVAN</pattern><template>ativan?  Briefly, ativan means tranquilizer (trade name Ativan) used to treat anxiety and tension and insomnia.</template></category>
-<category><pattern>ATLANTA</pattern><template>atlanta?  Briefly, atlanta means state capital and largest city of Georgia; chief commercial center of the southeastern United States; was plundered and burned by Sherman's army during the American Civil War.</template></category>
+<!-- <category><pattern>ATLANTA</pattern><template>atlanta?  Briefly, atlanta means state capital and largest city of Georgia; chief commercial center of the southeastern United States; was plundered and burned by Sherman's army during the American Civil War.</template></category> -->
 <category><pattern>ATLANTIC</pattern><template>atlantic?  Briefly, atlantic means the 2nd largest ocean; separates North and South America on the west from Europe and Africa on the east.</template></category>
 <category><pattern>ATLANTIC BONITO</pattern><template>atlantic bonito?  Briefly, atlantic bonito means medium-sized tuna-like food fish of warm Atlantic and Pacific waters; less valued than tuna.</template></category>
 <category><pattern>ATLANTIC BOTTLENOSE DOLPHIN</pattern><template>atlantic bottlenose dolphin?  Briefly, atlantic bottlenose dolphin means the most common dolphin of northern Atlantic and Mediterranean; often kept captive and trained to perform.</template></category>
@@ -515,7 +515,7 @@
 <category><pattern>ATLANTIC HERRING</pattern><template>atlantic herring?  Briefly, atlantic herring means important food fish; found in enormous shoals in the northern Atlantic.</template></category>
 <category><pattern>ATLANTIC MANTA</pattern><template>atlantic manta?  Briefly, atlantic manta means largest manta (to 22 feet across wings); found worldwide but common in Gulf of Mexico and along southern coasts of United States; primarily oceanic.</template></category>
 <category><pattern>ATLANTIC MOONFISH</pattern><template>atlantic moonfish?  Briefly, atlantic moonfish means any of several silvery marine fishes with very flat bodies.</template></category>
-<category><pattern>ATLANTIC OCEAN</pattern><template>atlantic ocean?  Briefly, atlantic ocean means the 2nd largest ocean; separates North and South America on the west from Europe and Africa on the east.</template></category>
+<!-- <category><pattern>ATLANTIC OCEAN</pattern><template>atlantic ocean?  Briefly, atlantic ocean means the 2nd largest ocean; separates North and South America on the west from Europe and Africa on the east.</template></category> -->
 <category><pattern>ATLANTIC PUFFIN</pattern><template>atlantic puffin?  Briefly, atlantic puffin means common puffin of the northern Atlantic.</template></category>
 <category><pattern>ATLANTIC RIDLEY</pattern><template>atlantic ridley?  Briefly, atlantic ridley means gray sea turtle of the Atlantic and Gulf coasts of North America.</template></category>
 <category><pattern>ATLANTIC SAILFISH</pattern><template>atlantic sailfish?  Briefly, atlantic sailfish means a kind of sailfish.</template></category>
@@ -528,7 +528,7 @@
 <category><pattern>ATLANTIC WALRUS</pattern><template>atlantic walrus?  Briefly, atlantic walrus means a walrus of northern Atlantic and Arctic waters.</template></category>
 <category><pattern>ATLANTIC WHITE CEDAR</pattern><template>atlantic white cedar?  Briefly, atlantic white cedar means slow-growing medium-sized cedar of east coast of the United States; resembles American arborvitae.</template></category>
 <category><pattern>ATLANTIDES</pattern><template>atlantides?  Briefly, atlantides means group of 3 to 7 nymphs who guarded the golden apples that Gaea gave as a wedding gift to Hera.</template></category>
-<category><pattern>ATLANTIS</pattern><template>atlantis?  Briefly, atlantis means according to legend means an island in the Atlantic Ocean that Plato said was swallowed by an earthquake.</template></category>
+<!-- <category><pattern>ATLANTIS</pattern><template>atlantis?  Briefly, atlantis means according to legend means an island in the Atlantic Ocean that Plato said was swallowed by an earthquake.</template></category> -->
 <category><pattern>AT-LARGE</pattern><template>at-large?  Briefly, at-large means representing the whole of a state or body rather than one specific division or part of it.</template></category>
 <category><pattern>ATLAS</pattern><template>atlas?  Briefly, atlas means a Titan who was forced by Zeus to bear the sky on his shoulders.</template></category>
 <category><pattern>ATLAS CEDAR</pattern><template>atlas cedar?  Briefly, atlas cedar means tall Algerian evergreen of Atlas mountains with blue-green leaves; widely planted as an ornamental.</template></category>
@@ -549,7 +549,7 @@
 <category><pattern>ATMOSPHERICS</pattern><template>atmospherics?  Briefly, atmospherics means a crackling or hissing noise cause by electrical interference.</template></category>
 <category><pattern>ATOLE</pattern><template>atole?  Briefly, atole means eaten as mush or as a thin gruel.</template></category>
 <category><pattern>ATOLL</pattern><template>atoll?  Briefly, atoll means an island consisting of a circular coral reef surrounding a lagoon.</template></category>
-<category><pattern>ATOM</pattern><template>atom?  Briefly, atom means the smallest component of an element having the chemical properties of the element.</template></category>
+<!-- <category><pattern>ATOM</pattern><template>atom?  Briefly, atom means the smallest component of an element having the chemical properties of the element.</template></category> -->
 <category><pattern>ATOM BOMB</pattern><template>atom bomb?  Briefly, atom bomb means a nuclear weapon in which enormous energy is released by nuclear fission (splitting the nuclei of a heavy element like uranium 235 or plutonium 239).</template></category>
 <category><pattern>ATOM SMASHER</pattern><template>atom smasher?  Briefly, atom smasher means a scientific instrument that increases the kinetic energy of charged particles.</template></category>
 <category><pattern>ATOM-BOMB</pattern><template>atom-bomb?  Briefly, atom-bomb means bomb with atomic weapons.</template></category>
@@ -746,7 +746,7 @@
 <category><pattern>BENIGNANTLY</pattern><template>benignantly?  Briefly, benignantly means in a benign manner.</template></category>
 <category><pattern>BENIGNITY</pattern><template>benignity?  Briefly, benignity means the quality of being kind and gentle.</template></category>
 <category><pattern>BENIGNLY</pattern><template>benignly?  Briefly, benignly means in a benign manner.</template></category>
-<category><pattern>BENIN</pattern><template>benin?  Briefly, benin means a country on western coast of Africa; formerly under French control.</template></category>
+<!-- <category><pattern>BENIN</pattern><template>benin?  Briefly, benin means a country on western coast of Africa; formerly under French control.</template></category> -->
 <category><pattern>BENIN FRANC</pattern><template>benin franc?  Briefly, benin franc means the basic unit of money in Benin.</template></category>
 <category><pattern>BENINESE</pattern><template>beninese?  Briefly, beninese means a native or inhabitant of Benin.</template></category>
 <category><pattern>BENISON</pattern><template>benison?  Briefly, benison means a spoken blessing.</template></category>
@@ -760,7 +760,7 @@
 <category><pattern>BENJAMIN FRANKLIN BRIDGE</pattern><template>benjamin franklin bridge?  Briefly, benjamin franklin bridge means a suspension bridge across the Delaware River.</template></category>
 <category><pattern>BENJAMIN FRANKLIN NORRIS JR.</pattern><template>benjamin franklin norris jr?.  Briefly, benjamin franklin norris jr. means United States writer (1870-1902).</template></category>
 <category><pattern>BENJAMIN HARRIS</pattern><template>benjamin harris?  Briefly, benjamin harris means publisher of the first newspaper printed in America (1673-1713).</template></category>
-<category><pattern>BENJAMIN HARRISON</pattern><template>benjamin harrison?  Briefly, benjamin harrison means 23rd President of the United States (1833-1901).</template></category>
+<!-- <category><pattern>BENJAMIN HARRISON</pattern><template>benjamin harrison?  Briefly, benjamin harrison means 23rd President of the United States (1833-1901).</template></category> -->
 <category><pattern>BENJAMIN HENRY LATROBE</pattern><template>benjamin henry latrobe?  Briefly, benjamin henry latrobe means United States architect (born in England) whose works include the chambers of the United States Congress and the Supreme Court; considered the first professional architect in the United States (1764-1820).</template></category>
 <category><pattern>BENJAMIN JONSON</pattern><template>benjamin jonson?  Briefly, benjamin jonson means English dramatist and poet who was the first real poet laureate of England (1572-1637).</template></category>
 <category><pattern>BENJAMIN JOWETT</pattern><template>benjamin jowett?  Briefly, benjamin jowett means English classical scholar noted for his translations of Plato and Aristotle (1817-1893).</template></category>
@@ -807,7 +807,7 @@
 <category><pattern>BENVENUTO CELLINI</pattern><template>benvenuto cellini?  Briefly, benvenuto cellini means Italian sculptor (1500-1571).</template></category>
 <category><pattern>BENWEED</pattern><template>benweed?  Briefly, benweed means widespread European weed having yellow daisylike flowers; sometimes an obnoxious weed and toxic to cattle if consumed in quantity.</template></category>
 <category><pattern>BENZEDRINE</pattern><template>benzedrine?  Briefly, benzedrine means a form of amphetamine.</template></category>
-<category><pattern>BENZENE</pattern><template>benzene?  Briefly, benzene means a colorless liquid hydrocarbon; highly inflammable; carcinogenic; the simplest of the aromatic compounds.</template></category>
+<!-- <category><pattern>BENZENE</pattern><template>benzene?  Briefly, benzene means a colorless liquid hydrocarbon; highly inflammable; carcinogenic; the simplest of the aromatic compounds.</template></category> -->
 <category><pattern>BENZENE FORMULA</pattern><template>benzene formula?  Briefly, benzene formula means a closed chain of 6 carbon atoms with hydrogen atoms attached.</template></category>
 <category><pattern>BENZENE NUCLEUS</pattern><template>benzene nucleus?  Briefly, benzene nucleus means a closed chain of 6 carbon atoms with hydrogen atoms attached.</template></category>
 <category><pattern>BENZENE RING</pattern><template>benzene ring?  Briefly, benzene ring means a closed chain of 6 carbon atoms with hydrogen atoms attached.</template></category>
@@ -860,7 +860,7 @@
 <category><pattern>BERGAMOT</pattern><template>bergamot?  Briefly, bergamot means small tree with pear-shaped fruit whose oil is used in perfumery; Italy.</template></category>
 <category><pattern>BERGAMOT MINT</pattern><template>bergamot mint?  Briefly, bergamot mint means perennial aromatic herb of eastern North America having variously colored tubular flowers in dense showy heads.</template></category>
 <category><pattern>BERGAMOT ORANGE</pattern><template>bergamot orange?  Briefly, bergamot orange means small tree with pear-shaped fruit whose oil is used in perfumery; Italy.</template></category>
-<category><pattern>BERGEN</pattern><template>bergen?  Briefly, bergen means a port city in southwestern Norway.</template></category>
+<!-- <category><pattern>BERGEN</pattern><template>bergen?  Briefly, bergen means a port city in southwestern Norway.</template></category> -->
 <category><pattern>BERGENIA</pattern><template>bergenia?  Briefly, bergenia means any plant of the genus Bergenia; valued as an evergreen ground cover and for the spring blossoms.</template></category>
 <category><pattern>BERGMAN</pattern><template>bergman?  Briefly, bergman means Swedish film actress (1915-1982).</template></category>
 <category><pattern>BERGSON</pattern><template>bergson?  Briefly, bergson means French philosopher who proposed elan vital as the cause of evolution and development (1859-1941).</template></category>
@@ -874,19 +874,19 @@
 <category><pattern>BERIT</pattern><template>berit?  Briefly, berit means the Jewish rite of circumcision performed on a male child on the eighth day of his life.</template></category>
 <category><pattern>BERITH</pattern><template>berith?  Briefly, berith means the Jewish rite of circumcision performed on a male child on the eighth day of his life.</template></category>
 <category><pattern>BERK</pattern><template>berk?  Briefly, berk means a stupid person who is easy to take advantage of.</template></category>
-<category><pattern>BERKELEY</pattern><template>berkeley?  Briefly, berkeley means Irish philosopher and Anglican bishop who opposed the materialism of Thomas Hobbes (1685-1753).</template></category>
+<!-- <category><pattern>BERKELEY</pattern><template>berkeley?  Briefly, berkeley means Irish philosopher and Anglican bishop who opposed the materialism of Thomas Hobbes (1685-1753).</template></category> -->
 <category><pattern>BERKELIUM</pattern><template>berkelium?  Briefly, berkelium means a radioactive transuranic element; discovered by bombarding americium with helium.</template></category>
 <category><pattern>BERKSHIRE</pattern><template>berkshire?  Briefly, berkshire means a county in southern England.</template></category>
 <category><pattern>BERKSHIRE HILLS</pattern><template>berkshire hills?  Briefly, berkshire hills means a low mountain range in western Massachusetts; a resort area.</template></category>
 <category><pattern>BERKSHIRES</pattern><template>berkshires?  Briefly, berkshires means a low mountain range in western Massachusetts; a resort area.</template></category>
 <category><pattern>BERLAGE</pattern><template>berlage?  Briefly, berlage means Dutch architect and town planner (1856-1934).</template></category>
-<category><pattern>BERLIN</pattern><template>berlin?  Briefly, berlin means capital of Germany located in eastern Germany.</template></category>
+<!-- <category><pattern>BERLIN</pattern><template>berlin?  Briefly, berlin means capital of Germany located in eastern Germany.</template></category> -->
 <category><pattern>BERLIN AIRLIFT</pattern><template>berlin airlift?  Briefly, berlin airlift means airlift in 1948 that supplied food and fuel to citizens of west Berlin when the Russians closed off land access to Berlin.</template></category>
 <category><pattern>BERLIN DOUGHNUT</pattern><template>berlin doughnut?  Briefly, berlin doughnut means a raised doughnut filled with jelly or jam.</template></category>
 <category><pattern>BERLINER</pattern><template>berliner?  Briefly, berliner means an inhabitant of Berlin.</template></category>
 <category><pattern>BERLIOZ</pattern><template>berlioz?  Briefly, berlioz means French composer of Romantic works (1803-1869).</template></category>
 <category><pattern>BERM</pattern><template>berm?  Briefly, berm means a narrow ledge or shelf typically at the top or bottom of a slope.</template></category>
-<category><pattern>BERMUDA</pattern><template>bermuda?  Briefly, bermuda means a group of islands in the Atlantic off the Carolina coast; British colony; a popular resort.</template></category>
+<!-- <category><pattern>BERMUDA</pattern><template>bermuda?  Briefly, bermuda means a group of islands in the Atlantic off the Carolina coast; British colony; a popular resort.</template></category> -->
 <category><pattern>BERMUDA BUTTERCUP</pattern><template>bermuda buttercup?  Briefly, bermuda buttercup means South African bulbous wood sorrel with showy yellow flowers.</template></category>
 <category><pattern>BERMUDA CEDAR</pattern><template>bermuda cedar?  Briefly, bermuda cedar means ornamental densely pyramidal juniper of Bermuda; fairly large for a juniper.</template></category>
 <category><pattern>BERMUDA CHUB</pattern><template>bermuda chub?  Briefly, bermuda chub means food and game fish around Bermuda and Florida; often follow ships.</template></category>
@@ -1056,7 +1056,7 @@
 <category><pattern>BETEL NUT</pattern><template>betel nut?  Briefly, betel nut means seed of betel palm; chewed with leaves of the betel pepper and lime as a digestive stimulant and narcotic in southeastern Asia.</template></category>
 <category><pattern>BETEL PALM</pattern><template>betel palm?  Briefly, betel palm means southeastern Asian palm bearing betel nuts (scarlet or orange single-seeded fruit with a fibrous husk).</template></category>
 <category><pattern>BETEL PEPPER</pattern><template>betel pepper?  Briefly, betel pepper means Asian pepper plant whose dried leaves are chewed with betel nut (seed of the betel palm) by southeast Asians.</template></category>
-<category><pattern>BETELGEUSE</pattern><template>betelgeuse?  Briefly, betelgeuse means the second brightest star in Orion.</template></category>
+<!-- <category><pattern>BETELGEUSE</pattern><template>betelgeuse?  Briefly, betelgeuse means the second brightest star in Orion.</template></category> -->
 <category><pattern>BETH</pattern><template>beth?  Briefly, beth means the 2nd letter of the Hebrew alphabet.</template></category>
 <category><pattern>BETHE</pattern><template>bethe?  Briefly, bethe means United States physicist (born in Germany) noted for research in astrophysics and nuclear physics (born 1906).</template></category>
 <category><pattern>BETHEL</pattern><template>bethel?  Briefly, bethel means a house of worship (especially one for sailors).</template></category>
@@ -1167,7 +1167,7 @@
 <category><pattern>BHARAT</pattern><template>bharat?  Briefly, bharat means a republic in the Asian subcontinent in southern Asia; second most populous country in the world; achieved independence from the United Kingdom in 1947.</template></category>
 <category><pattern>B-HORIZON</pattern><template>b-horizon?  Briefly, b-horizon means immediately below the A-horizon; contains deposits of organic matter leached from surface soils.</template></category>
 <category><pattern>BHUMI DEVI</pattern><template>bhumi devi?  Briefly, bhumi devi means earth goddess; one of the two wives of Vishnu.</template></category>
-<category><pattern>BHUTAN</pattern><template>bhutan?  Briefly, bhutan means a landlocked principality in the Himalayas northeast of India.</template></category>
+<!-- <category><pattern>BHUTAN</pattern><template>bhutan?  Briefly, bhutan means a landlocked principality in the Himalayas northeast of India.</template></category> -->
 <category><pattern>BHUTANESE</pattern><template>bhutanese?  Briefly, bhutanese means a native or inhabitant of Bhutan.</template></category>
 <category><pattern>BHUTANESE MONETARY UNIT</pattern><template>bhutanese monetary unit?  Briefly, bhutanese monetary unit means monetary unit in Bhutan.</template></category>
 <category><pattern>BHUTANI</pattern><template>bhutani?  Briefly, bhutani means a native or inhabitant of Bhutan.</template></category>
@@ -1206,7 +1206,7 @@
 <category><pattern>BATIS</pattern><template>batis?  Briefly, batis means small genus of plants constituting the family Batidaceae: low straggling dioecious shrubs.</template></category>
 <category><pattern>BATIS MARITIMA</pattern><template>batis maritima?  Briefly, batis maritima means low-growing strong-smelling coastal shrub of warm parts of the New World having unisexual flowers in conelike spikes and thick succulent leaves.</template></category>
 <category><pattern>BATISTE</pattern><template>batiste?  Briefly, batiste means a thin plain-weave cotton or linen fabric; used for shirts or dresses.</template></category>
-<category><pattern>BATMAN</pattern><template>batman?  Briefly, batman means an orderly assigned to serve a British military officer.</template></category>
+<!-- <category><pattern>BATMAN</pattern><template>batman?  Briefly, batman means an orderly assigned to serve a British military officer.</template></category> -->
 <category><pattern>BATNA</pattern><template>batna?  Briefly, batna means a town in north central Algeria.</template></category>
 <category><pattern>BATOIDEI</pattern><template>batoidei?  Briefly, batoidei means fish with dorsoventrally flattened bodies; includes: rays; skates; guitarfishes; sawfishes.</template></category>
 <category><pattern>BATOKO PALM</pattern><template>batoko palm?  Briefly, batoko palm means small shrubby tree of Madagascar cultivated in tropical regions as a hedge plant and for its deep red acid fruits resembling small plums.</template></category>
@@ -1232,7 +1232,7 @@
 <category><pattern>BATTERING</pattern><template>battering?  Briefly, battering means the act of subjecting to strong attack.</template></category>
 <category><pattern>BATTERING RAM</pattern><template>battering ram?  Briefly, battering ram means a ram used to break down doors of fortified buildings.</template></category>
 <category><pattern>BATTER'S BOX</pattern><template>batter's box?  Briefly, batter's box means an area on a baseball diamond (on either side of home plate) marked by lines within which the batter must stand when at bat.</template></category>
-<category><pattern>BATTERY</pattern><template>battery?  Briefly, battery means group of guns or missile launchers operated together at one place.</template></category>
+<!-- <category><pattern>BATTERY</pattern><template>battery?  Briefly, battery means group of guns or missile launchers operated together at one place.</template></category> -->
 <category><pattern>BATTERY ACID</pattern><template>battery acid?  Briefly, battery acid means dilute sulfuric acid used in storage batteries.</template></category>
 <category><pattern>BATTERY CHARGER</pattern><template>battery charger?  Briefly, battery charger means a device for charging or recharging batteries.</template></category>
 <category><pattern>BATTERY-ACID</pattern><template>battery-acid?  Briefly, battery-acid means street name for lysergic acid diethylamide.</template></category>
@@ -1276,7 +1276,7 @@
 <category><pattern>BATTLE OF GETTYSBURG</pattern><template>battle of gettysburg?  Briefly, battle of gettysburg means a battle of the American Civil War (1863); the defeat of Robert E. Lee's invading Confederate army was a major victory for the Union.</template></category>
 <category><pattern>BATTLE OF GRANICUS RIVER</pattern><template>battle of granicus river?  Briefly, battle of granicus river means the battle in which Alexander won his first major victory against the Persians (334 BC).</template></category>
 <category><pattern>BATTLE OF GUADALCANAL</pattern><template>battle of guadalcanal?  Briefly, battle of guadalcanal means a battle in World War II in the Pacific (1942-1943); the island was occupied by the Japanese and later recaptured by American forces.</template></category>
-<category><pattern>BATTLE OF HASTINGS</pattern><template>battle of hastings?  Briefly, battle of hastings means the decisive battle in which William the Conqueror (duke of Normandy) defeated the Saxons under Harold II (1066) and thus left England open for the Norman Conquest.</template></category>
+<!-- <category><pattern>BATTLE OF HASTINGS</pattern><template>battle of hastings?  Briefly, battle of hastings means the decisive battle in which William the Conqueror (duke of Normandy) defeated the Saxons under Harold II (1066) and thus left England open for the Norman Conquest.</template></category> -->
 <category><pattern>BATTLE OF HOHENLINDEN</pattern><template>battle of hohenlinden?  Briefly, battle of hohenlinden means a battle during the Napoleonic Wars (1800); the French defeated the Austrians.</template></category>
 <category><pattern>BATTLE OF IPSUS</pattern><template>battle of ipsus?  Briefly, battle of ipsus means a battle between the successors of Alexander the Great (301 BC); Lysimachus and Seleucus defeated Antigonus and Demetrius.</template></category>
 <category><pattern>BATTLE OF ISSUS</pattern><template>battle of issus?  Briefly, battle of issus means a battle (333 BC) in which Alexander the Great defeated the Persians under Darius III.</template></category>
@@ -1372,7 +1372,7 @@
 <category><pattern>BAUD</pattern><template>baud?  Briefly, baud means a data transmission rate (bits/second) for modems.</template></category>
 <category><pattern>BAUD RATE</pattern><template>baud rate?  Briefly, baud rate means a data transmission rate (bits/second) for modems.</template></category>
 <category><pattern>BAUDELAIRE</pattern><template>baudelaire?  Briefly, baudelaire means a French poet noted for macabre imagery and evocative language (1821-1867).</template></category>
-<category><pattern>BAUHAUS</pattern><template>bauhaus?  Briefly, bauhaus means a German style of architecture begun by Walter Gropius in 1918.</template></category>
+<!-- <category><pattern>BAUHAUS</pattern><template>bauhaus?  Briefly, bauhaus means a German style of architecture begun by Walter Gropius in 1918.</template></category> -->
 <category><pattern>BAUHINIA</pattern><template>bauhinia?  Briefly, bauhinia means mountain ebony means orchid tree.</template></category>
 <category><pattern>BAUHINIA MONANDRA</pattern><template>bauhinia monandra?  Briefly, bauhinia monandra means shrub or small tree of Dutch Guiana having clusters of pink purple-streaked flowers.</template></category>
 <category><pattern>BAUHINIA VARIEGATA</pattern><template>bauhinia variegata?  Briefly, bauhinia variegata means small East Indian tree having orchidlike flowers and hard dark wood.</template></category>
@@ -1414,7 +1414,7 @@
 <category><pattern>BAY SCALLOP</pattern><template>bay scallop?  Briefly, bay scallop means muscle of small choice shallow-water scallops.</template></category>
 <category><pattern>BAY STATE</pattern><template>bay state?  Briefly, bay state means a state in New England; one of the original 13 colonies.</template></category>
 <category><pattern>BAY STATER</pattern><template>bay stater?  Briefly, bay stater means a resident of Massachusetts.</template></category>
-<category><pattern>BAY TREE</pattern><template>bay tree?  Briefly, bay tree means small Mediterranean evergreen tree with small blackish berries and glossy aromatic leaves used for flavoring in cooking; also used by ancient Greeks to crown victors.</template></category>
+<!-- <category><pattern>BAY TREE</pattern><template>bay tree?  Briefly, bay tree means small Mediterranean evergreen tree with small blackish berries and glossy aromatic leaves used for flavoring in cooking; also used by ancient Greeks to crown victors.</template></category> -->
 <category><pattern>BAY WILLOW</pattern><template>bay willow?  Briefly, bay willow means European willow tree with shining leathery leaves; widely naturalized in the eastern United States.</template></category>
 <category><pattern>BAY WINDOW</pattern><template>bay window?  Briefly, bay window means slang terms for a paunch.</template></category>
 <category><pattern>BAY WREATH</pattern><template>bay wreath?  Briefly, bay wreath means wreath of laurel foliage worn on the head as an emblem of victory.</template></category>
@@ -1431,7 +1431,7 @@
 <category><pattern>BAYES' THEOREM</pattern><template>bayes' theorem?  Briefly, bayes' theorem means a theorem describing how the conditional probability of a set of possible causes for a given observed event can be computed from knowledge of the probability of each cause and the conditional probability of the outcome of e.</template></category>
 <category><pattern>BAYESIAN</pattern><template>bayesian?  Briefly, bayesian means of or relating to statistical methods based on Bayes' theorem.</template></category>
 <category><pattern>BAY-LEAVED CAPER</pattern><template>bay-leaved caper?  Briefly, bay-leaved caper means shrub or small tree of southern Florida to Central and South America.</template></category>
-<category><pattern>BAYONET</pattern><template>bayonet?  Briefly, bayonet means a knife that can be fixed to the end of a rifle and used as a weapon.</template></category>
+<!-- <category><pattern>BAYONET</pattern><template>bayonet?  Briefly, bayonet means a knife that can be fixed to the end of a rifle and used as a weapon.</template></category> -->
 <category><pattern>BAYONNE</pattern><template>bayonne?  Briefly, bayonne means a city in northeastern New Jersey.</template></category>
 <category><pattern>BAYONNE BRIDGE</pattern><template>bayonne bridge?  Briefly, bayonne bridge means a steel arch bridge connecting New Jersey and Staten Island at Bayonne means New Jersey.</template></category>
 <category><pattern>BAYOU</pattern><template>bayou?  Briefly, bayou means a swampy arm or slow-moving outlet of a lake (term used mainly in Mississippi and Louisiana).</template></category>
@@ -1449,7 +1449,7 @@
 <category><pattern>B-COMPLEX VITAMIN</pattern><template>b-complex vitamin?  Briefly, b-complex vitamin means originally thought to be a single vitamin but now separated into several B vitamins.</template></category>
 <category><pattern>BD</pattern><template>bd?  Briefly, bd means a bachelor's degree in religion.</template></category>
 <category><pattern>BDELLIUM</pattern><template>bdellium?  Briefly, bdellium means aromatic gum resin; similar to myrrh.</template></category>
-<category><pattern>BE</pattern><template>be?  Briefly, be means a light strong brittle gray toxic bivalent metallic element.</template></category>
+<!-- <category><pattern>BE</pattern><template>be?  Briefly, be means a light strong brittle gray toxic bivalent metallic element.</template></category> -->
 <category><pattern>BE ACTIVE</pattern><template>be active?  Briefly, be active means be in a state of action.</template></category>
 <category><pattern>BE ADRIFT</pattern><template>be adrift?  Briefly, be adrift means be in motion due to some air or water current.</template></category>
 <category><pattern>BE AFTER</pattern><template>be after?  Briefly, be after means have the will and intention to carry out some action.</template></category>
@@ -1516,7 +1516,7 @@
 <category><pattern>BEADWORK</pattern><template>beadwork?  Briefly, beadwork means ornamentation with beads.</template></category>
 <category><pattern>BEADY</pattern><template>beady?  Briefly, beady means small and round and shiny like a shiny bead or button.</template></category>
 <category><pattern>BEADY-EYED</pattern><template>beady-eyed?  Briefly, beady-eyed means having eyes that gleam with malice.</template></category>
-<category><pattern>BEAGLE</pattern><template>beagle?  Briefly, beagle means a small short-legged smooth-coated breed of hound.</template></category>
+<!-- <category><pattern>BEAGLE</pattern><template>beagle?  Briefly, beagle means a small short-legged smooth-coated breed of hound.</template></category> -->
 <category><pattern>BEAGLING</pattern><template>beagling?  Briefly, beagling means hunting rabbits with beagles.</template></category>
 <category><pattern>BEAK</pattern><template>beak?  Briefly, beak means beaklike mouth of animals other than birds (e.g. means turtles).</template></category>
 <category><pattern>BEAKED</pattern><template>beaked?  Briefly, beaked means having or resembling a beak.</template></category>
@@ -1536,7 +1536,7 @@
 <category><pattern>BEAMING</pattern><template>beaming?  Briefly, beaming means cheerful and bright.</template></category>
 <category><pattern>BEAMISH</pattern><template>beamish?  Briefly, beamish means smiling with happiness or optimism- Lewis Carroll.</template></category>
 <category><pattern>BEAMY</pattern><template>beamy?  Briefly, beamy means broad in the beam.</template></category>
-<category><pattern>BEAN</pattern><template>bean?  Briefly, bean means any of various edible seeds of plants of the family Leguminosae.</template></category>
+<!-- <category><pattern>BEAN</pattern><template>bean?  Briefly, bean means any of various edible seeds of plants of the family Leguminosae.</template></category> -->
 <category><pattern>BEAN APHID</pattern><template>bean aphid?  Briefly, bean aphid means blackish aphid that infests e.g. beans and sugar beets.</template></category>
 <category><pattern>BEAN BEETLE</pattern><template>bean beetle?  Briefly, bean beetle means introduced into the United States from Mexico; feeds on the foliage of the bean plant.</template></category>
 <category><pattern>BEAN BLIGHT</pattern><template>bean blight?  Briefly, bean blight means a blight of bean plants.</template></category>
@@ -1561,7 +1561,7 @@
 <category><pattern>BEANSTALK</pattern><template>beanstalk?  Briefly, beanstalk means stem of a bean plant.</template></category>
 <category><pattern>BEANTOWN</pattern><template>beantown?  Briefly, beantown means state capital and largest city of Massachusetts; a major center for banking and financial services.</template></category>
 <category><pattern>BEANY</pattern><template>beany?  Briefly, beany means a small skullcap; formerly worn by schoolboys and college freshmen.</template></category>
-<category><pattern>BEAR</pattern><template>bear?  Briefly, bear means massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws.</template></category>
+<!-- <category><pattern>BEAR</pattern><template>bear?  Briefly, bear means massive plantigrade carnivorous or omnivorous mammals with long shaggy coats and strong claws.</template></category> -->
 <category><pattern>BEAR AWAY</pattern><template>bear away?  Briefly, bear away means remove from a certain place means environment means or mental or emotional state; transport into a new location or state.</template></category>
 <category><pattern>BEAR CAT</pattern><template>bear cat?  Briefly, bear cat means reddish-brown Old World raccoon-like carnivore; in some classifications considered unrelated to the giant pandas.</template></category>
 <category><pattern>BEAR CLAW</pattern><template>bear claw?  Briefly, bear claw means almond-flavored yeast-raised pastry shaped in an irregular semicircle resembling a bear's claw.</template></category>
@@ -1668,14 +1668,14 @@
 <category><pattern>BEAUTEOUSNESS</pattern><template>beauteousness?  Briefly, beauteousness means the quality of being good looking and attractive.</template></category>
 <category><pattern>BEAUTICIAN</pattern><template>beautician?  Briefly, beautician means someone who works in a beauty parlor.</template></category>
 <category><pattern>BEAUTIFICATION</pattern><template>beautification?  Briefly, beautification means the act of making something more beautiful.</template></category>
-<category><pattern>BEAUTIFUL</pattern><template>beautiful?  Briefly, beautiful means delighting the senses or exciting intellectual or emotional admiration.</template></category>
+<!-- <category><pattern>BEAUTIFUL</pattern><template>beautiful?  Briefly, beautiful means delighting the senses or exciting intellectual or emotional admiration.</template></category> -->
 <category><pattern>BEAUTIFULLY</pattern><template>beautifully?  Briefly, beautifully means in a beautiful manner.</template></category>
 <category><pattern>BEAUTIFY</pattern><template>beautify?  Briefly, beautify means make more beautiful.</template></category>
-<category><pattern>BEAUTY</pattern><template>beauty?  Briefly, beauty means the qualities that give pleasure to the senses.</template></category>
+<!-- <category><pattern>BEAUTY</pattern><template>beauty?  Briefly, beauty means the qualities that give pleasure to the senses.</template></category> -->
 <category><pattern>BEAUTY BUSH</pattern><template>beauty bush?  Briefly, beauty bush means Chinese deciduous shrub with yellow-throated pinkish flowers and bristly fruit; often cultivated as an ornamental.</template></category>
 <category><pattern>BEAUTY CONSULTANT</pattern><template>beauty consultant?  Briefly, beauty consultant means someone who gives you advice about your personal appearance.</template></category>
-<category><pattern>BEAUTY PARLOR</pattern><template>beauty parlor?  Briefly, beauty parlor means a shop where hairdressers and beauticians work.</template></category>
-<category><pattern>BEAUTY PARLOUR</pattern><template>beauty parlour?  Briefly, beauty parlour means a shop where hairdressers and beauticians work.</template></category>
+<!-- <category><pattern>BEAUTY PARLOR</pattern><template>beauty parlor?  Briefly, beauty parlor means a shop where hairdressers and beauticians work.</template></category> -->
+<!-- <category><pattern>BEAUTY PARLOUR</pattern><template>beauty parlour?  Briefly, beauty parlour means a shop where hairdressers and beauticians work.</template></category> -->
 <category><pattern>BEAUTY QUARK</pattern><template>beauty quark?  Briefly, beauty quark means a quark with a charge of -1/3 and a mass about 10 means000 times that of an electron.</template></category>
 <category><pattern>BEAUTY SALON</pattern><template>beauty salon?  Briefly, beauty salon means a shop where hairdressers and beauticians work.</template></category>
 <category><pattern>BEAUTY SHOP</pattern><template>beauty shop?  Briefly, beauty shop means a shop where hairdressers and beauticians work.</template></category>
@@ -1684,7 +1684,7 @@
 <category><pattern>BEAUTY TREATMENT</pattern><template>beauty treatment?  Briefly, beauty treatment means enhancement of someone's personal beauty.</template></category>
 <category><pattern>BEAUVOIR</pattern><template>beauvoir?  Briefly, beauvoir means French feminist and existentialist and novelist (1908-1986).</template></category>
 <category><pattern>BEAUX ARTS</pattern><template>beaux arts?  Briefly, beaux arts means the study and creation of visual works of art.</template></category>
-<category><pattern>BEAVER</pattern><template>beaver?  Briefly, beaver means the soft brown fur of the beaver.</template></category>
+<!-- <category><pattern>BEAVER</pattern><template>beaver?  Briefly, beaver means the soft brown fur of the beaver.</template></category> -->
 <category><pattern>BEAVER AWAY</pattern><template>beaver away?  Briefly, beaver away means work hard on something.</template></category>
 <category><pattern>BEAVER BOARD</pattern><template>beaver board?  Briefly, beaver board means a light wallboard made of compressed wood pulp.</template></category>
 <category><pattern>BEAVER RAT</pattern><template>beaver rat?  Briefly, beaver rat means amphibious rat of Australia and New Guinea.</template></category>
@@ -1803,7 +1803,7 @@
 <category><pattern>BEDUIN</pattern><template>beduin?  Briefly, beduin means a member of a nomadic tribe of Arabs.</template></category>
 <category><pattern>BEDWETTER</pattern><template>bedwetter?  Briefly, bedwetter means someone suffering from enuresis; someone who urinates while asleep in bed.</template></category>
 <category><pattern>BED-WETTING</pattern><template>bed-wetting?  Briefly, bed-wetting means enuresis during sleep; especially common in children (who usually outgrow it).</template></category>
-<category><pattern>BEE</pattern><template>bee?  Briefly, bee means any of numerous hairy-bodied insects including social and solitary species.</template></category>
+<!-- <category><pattern>BEE</pattern><template>bee?  Briefly, bee means any of numerous hairy-bodied insects including social and solitary species.</template></category> -->
 <category><pattern>BEE BALM</pattern><template>bee balm?  Briefly, bee balm means perennial herb of North America.</template></category>
 <category><pattern>BEE BEETLE</pattern><template>bee beetle?  Briefly, bee beetle means European beetle; infests beehives.</template></category>
 <category><pattern>BEE EATER</pattern><template>bee eater?  Briefly, bee eater means colorful chiefly tropical Old World bird having a strong graceful flight; feeds on especially bees.</template></category>
@@ -1815,7 +1815,7 @@
 <category><pattern>BEE STING</pattern><template>bee sting?  Briefly, bee sting means a sting inflicted by a bee.</template></category>
 <category><pattern>BEEBALM</pattern><template>beebalm?  Briefly, beebalm means perennial herb of North America.</template></category>
 <category><pattern>BEEBREAD</pattern><template>beebread?  Briefly, beebread means a mixture of nectar and pollen prepared by worker bees and fed to larvae.</template></category>
-<category><pattern>BEECH</pattern><template>beech?  Briefly, beech means any of several large deciduous trees with rounded spreading crowns and smooth gray bark and small sweet edible triangular nuts enclosed in burs; north temperate regions.</template></category>
+<!-- <category><pattern>BEECH</pattern><template>beech?  Briefly, beech means any of several large deciduous trees with rounded spreading crowns and smooth gray bark and small sweet edible triangular nuts enclosed in burs; north temperate regions.</template></category> -->
 <category><pattern>BEECH FAMILY</pattern><template>beech family?  Briefly, beech family means chiefly monoecious trees and shrubs: beeches; chestnuts; oaks; genera Castanea; Castanopsis; Chrysolepis; Fagus; Lithocarpus; Nothofagus; Quercus.</template></category>
 <category><pattern>BEECH FERN</pattern><template>beech fern?  Briefly, beech fern means any fern of the genus Phegopteris having deeply cut triangular fronds.</template></category>
 <category><pattern>BEECH MARTEN</pattern><template>beech marten?  Briefly, beech marten means Eurasian marten having a brown coat with pale breast and throat.</template></category>
@@ -1824,7 +1824,7 @@
 <category><pattern>BEECHER</pattern><template>beecher?  Briefly, beecher means United States clergyman who was a leader for the abolition of slavery (1813-1887).</template></category>
 <category><pattern>BEECHNUT</pattern><template>beechnut?  Briefly, beechnut means small sweet triangular nut of any of various beech trees.</template></category>
 <category><pattern>BEECHWOOD</pattern><template>beechwood?  Briefly, beechwood means wood of any of various beech trees; used for flooring and containers and plywood and tool handles.</template></category>
-<category><pattern>BEEF</pattern><template>beef?  Briefly, beef means cattle that are reared for their meat.</template></category>
+<!-- <category><pattern>BEEF</pattern><template>beef?  Briefly, beef means cattle that are reared for their meat.</template></category> -->
 <category><pattern>BEEF BOURGUIGNONNE</pattern><template>beef bourguignonne?  Briefly, beef bourguignonne means beef and mushrooms and onions stewed in red wine and seasonings.</template></category>
 <category><pattern>BEEF BROTH</pattern><template>beef broth?  Briefly, beef broth means a stock made with beef.</template></category>
 <category><pattern>BEEF BURRITO</pattern><template>beef burrito?  Briefly, beef burrito means a burrito with a beef filling.</template></category>
@@ -1869,7 +1869,7 @@
 <category><pattern>BEELZEBUB</pattern><template>beelzebub?  Briefly, beelzebub means chief spirit of evil and adversary of God; tempter of mankind; master of Hell.</template></category>
 <category><pattern>BEEP</pattern><template>beep?  Briefly, beep means a short high tone produced as a signal or warning.</template></category>
 <category><pattern>BEEPER</pattern><template>beeper?  Briefly, beeper means an electronic device that generates a series of beeps when the person carrying it is being paged.</template></category>
-<category><pattern>BEER</pattern><template>beer?  Briefly, beer means a general name for alcoholic beverages made by fermenting a cereal (or mixture of cereals) flavored with hops.</template></category>
+<!-- <category><pattern>BEER</pattern><template>beer?  Briefly, beer means a general name for alcoholic beverages made by fermenting a cereal (or mixture of cereals) flavored with hops.</template></category> -->
 <category><pattern>BEER BARREL</pattern><template>beer barrel?  Briefly, beer barrel means a barrel that holds beer.</template></category>
 <category><pattern>BEER BOTTLE</pattern><template>beer bottle?  Briefly, beer bottle means a bottle that holds beer.</template></category>
 <category><pattern>BEER CAN</pattern><template>beer can?  Briefly, beer can means a can that holds beer.</template></category>
@@ -1889,7 +1889,7 @@
 <category><pattern>BEET BLIGHT</pattern><template>beet blight?  Briefly, beet blight means a disease of beet plants.</template></category>
 <category><pattern>BEET GREEN</pattern><template>beet green?  Briefly, beet green means young leaves of the beetroot.</template></category>
 <category><pattern>BEET SUGAR</pattern><template>beet sugar?  Briefly, beet sugar means sugar made from sugar beets.</template></category>
-<category><pattern>BEETHOVEN</pattern><template>beethoven?  Briefly, beethoven means German composer of instrumental music (especially symphonic and chamber music); continued to compose after he lost his hearing (1770-1827).</template></category>
+<!-- <category><pattern>BEETHOVEN</pattern><template>beethoven?  Briefly, beethoven means German composer of instrumental music (especially symphonic and chamber music); continued to compose after he lost his hearing (1770-1827).</template></category> -->
 <category><pattern>BEETHOVENIAN</pattern><template>beethovenian?  Briefly, beethovenian means of or relating to Ludwig van Beethoven or his music.</template></category>
 <category><pattern>BEETLE</pattern><template>beetle?  Briefly, beetle means insect having biting mouthparts and front wings modified to form horny covers overlying the membranous rear wings.</template></category>
 <category><pattern>BEETLE OFF</pattern><template>beetle off?  Briefly, beetle off means leave suddenly and as if in a hurry.</template></category>
@@ -2005,7 +2005,7 @@
 <category><pattern>BEIGEL</pattern><template>beigel?  Briefly, beigel means glazed yeast-raised doughnut-shaped roll with hard crust.</template></category>
 <category><pattern>BEIJING</pattern><template>beijing?  Briefly, beijing means capital of the People's Republic of China in the Hebei province in northeastern China; 2nd largest Chinese city.</template></category>
 <category><pattern>BEIJING DIALECT</pattern><template>beijing dialect?  Briefly, beijing dialect means the dialect of Chinese spoken in Beijing and adopted as the official language for all of China.</template></category>
-<category><pattern>BEING</pattern><template>being?  Briefly, being means the state or fact of existing.</template></category>
+<!-- <category><pattern>BEING</pattern><template>being?  Briefly, being means the state or fact of existing.</template></category> -->
 <category><pattern>BEINGNESS</pattern><template>beingness?  Briefly, beingness means the state or fact of existing.</template></category>
 <category><pattern>BEIRA</pattern><template>beira?  Briefly, beira means a port city in eastern Mozambique on the Mozambique Channel.</template></category>
 <category><pattern>BEIRUT</pattern><template>beirut?  Briefly, beirut means capital and largest city of Lebanon; located in western Lebanon on the Mediterranean.</template></category>
@@ -2014,7 +2014,7 @@
 <category><pattern>BEJEWELLED</pattern><template>bejewelled?  Briefly, bejewelled means covered with beads or jewels or sequins.</template></category>
 <category><pattern>BEL</pattern><template>bel?  Briefly, bel means a logarithmic unit of sound intensity equal to 10 decibels.</template></category>
 <category><pattern>BEL AND THE DRAGON</pattern><template>bel and the dragon?  Briefly, bel and the dragon means an Apocryphal book consisting of text added to the Book of Daniel.</template></category>
-<category><pattern>BEL CANTO</pattern><template>bel canto?  Briefly, bel canto means a style of operatic singing.</template></category>
+<!-- <category><pattern>BEL CANTO</pattern><template>bel canto?  Briefly, bel canto means a style of operatic singing.</template></category> -->
 <category><pattern>BEL ESPRIT</pattern><template>bel esprit?  Briefly, bel esprit means a witty or clever person with a fine mind.</template></category>
 <category><pattern>BELA BARTOK</pattern><template>bela bartok?  Briefly, bela bartok means Hungarian composer and pianist who collected Hungarian folk music; in 1940 he moved to the United States (1881-1945).</template></category>
 <category><pattern>BELA FERENC BLASKO</pattern><template>bela ferenc blasko?  Briefly, bela ferenc blasko means United States film actor (born in Hungary) noted for portraying monsters (1884-1956).</template></category>
@@ -2023,7 +2023,7 @@
 <category><pattern>BELABOUR</pattern><template>belabour?  Briefly, belabour means to work at or to absurd length.</template></category>
 <category><pattern>BELAMCANDA</pattern><template>belamcanda?  Briefly, belamcanda means a monocotyledonous genus of the family Iridaceae.</template></category>
 <category><pattern>BELAMCANDA CHINENSIS</pattern><template>belamcanda chinensis?  Briefly, belamcanda chinensis means garden plant whose capsule discloses when ripe a mass of seeds resembling a blackberry.</template></category>
-<category><pattern>BELARUS</pattern><template>belarus?  Briefly, belarus means a landlocked republic in eastern Europe; formerly a European soviet.</template></category>
+<!-- <category><pattern>BELARUS</pattern><template>belarus?  Briefly, belarus means a landlocked republic in eastern Europe; formerly a European soviet.</template></category> -->
 <category><pattern>BELARUSIAN</pattern><template>belarusian?  Briefly, belarusian means the Slavic language spoken in Belarus.</template></category>
 <category><pattern>BELARUSIAN MONETARY UNIT</pattern><template>belarusian monetary unit?  Briefly, belarusian monetary unit means monetary unit in Belarus.</template></category>
 <category><pattern>BELATED</pattern><template>belated?  Briefly, belated means after the expected or usual time; delayed.</template></category>
@@ -2056,14 +2056,14 @@
 <category><pattern>BELGIAN SHEPHERD</pattern><template>belgian shepherd?  Briefly, belgian shepherd means hardy working dog developed in Belgium for herding sheep.</template></category>
 <category><pattern>BELGIAN WAFFLE</pattern><template>belgian waffle?  Briefly, belgian waffle means thick sweet waffle often eaten with ice cream or fruit sauce.</template></category>
 <category><pattern>BELGIQUE</pattern><template>belgique?  Briefly, belgique means a monarchy in northwestern Europe; headquarters for the European Union and for the North Atlantic Treaty Organization.</template></category>
-<category><pattern>BELGIUM</pattern><template>belgium?  Briefly, belgium means a monarchy in northwestern Europe; headquarters for the European Union and for the North Atlantic Treaty Organization.</template></category>
+<!-- <category><pattern>BELGIUM</pattern><template>belgium?  Briefly, belgium means a monarchy in northwestern Europe; headquarters for the European Union and for the North Atlantic Treaty Organization.</template></category> -->
 <category><pattern>BELGRADE</pattern><template>belgrade?  Briefly, belgrade means capital and largest city of Yugoslavia.</template></category>
 <category><pattern>BELIE</pattern><template>belie?  Briefly, belie means be in contradiction with.</template></category>
-<category><pattern>BELIEF</pattern><template>belief?  Briefly, belief means any cognitive content held as true.</template></category>
+<!-- <category><pattern>BELIEF</pattern><template>belief?  Briefly, belief means any cognitive content held as true.</template></category> -->
 <category><pattern>BELIEVABILITY</pattern><template>believability?  Briefly, believability means the quality of being believable or trustworthy.</template></category>
 <category><pattern>BELIEVABLE</pattern><template>believable?  Briefly, believable means capable of being believed.</template></category>
 <category><pattern>BELIEVABLY</pattern><template>believably?  Briefly, believably means in a believable manner.</template></category>
-<category><pattern>BELIEVE</pattern><template>believe?  Briefly, believe means accept as true; take to be true.</template></category>
+<!-- <category><pattern>BELIEVE</pattern><template>believe?  Briefly, believe means accept as true; take to be true.</template></category> -->
 <category><pattern>BELIEVE IN</pattern><template>believe in?  Briefly, believe in means have a firm conviction as to the goodness of something.</template></category>
 <category><pattern>BELIEVER</pattern><template>believer?  Briefly, believer means a supporter who accepts something as true.</template></category>
 <category><pattern>BELIEVING</pattern><template>believing?  Briefly, believing means the cognitive process that leads to convictions.</template></category>
@@ -2073,9 +2073,9 @@
 <category><pattern>BELITTLE</pattern><template>belittle?  Briefly, belittle means belittle.</template></category>
 <category><pattern>BELITTLED</pattern><template>belittled?  Briefly, belittled means made to seem smaller or less (especially in worth).</template></category>
 <category><pattern>BELITTLING</pattern><template>belittling?  Briefly, belittling means a belittling comment.</template></category>
-<category><pattern>BELIZE</pattern><template>belize?  Briefly, belize means a country on the northeastern coast of Central America on the Caribbean; formerly under British control.</template></category>
+<!-- <category><pattern>BELIZE</pattern><template>belize?  Briefly, belize means a country on the northeastern coast of Central America on the Caribbean; formerly under British control.</template></category> -->
 <category><pattern>BELIZE DOLLAR</pattern><template>belize dollar?  Briefly, belize dollar means the basic unit of money in Belize.</template></category>
-<category><pattern>BELL</pattern><template>bell?  Briefly, bell means a hollow device made of metal that makes a ringing sound when struck.</template></category>
+<!-- <category><pattern>BELL</pattern><template>bell?  Briefly, bell means a hollow device made of metal that makes a ringing sound when struck.</template></category> -->
 <category><pattern>BELL APPLE</pattern><template>bell apple?  Briefly, bell apple means the edible yellow fruit of the Jamaica honeysuckle.</template></category>
 <category><pattern>BELL ARCH</pattern><template>bell arch?  Briefly, bell arch means a round arch resting on corbels.</template></category>
 <category><pattern>BELL BOOK</pattern><template>bell book?  Briefly, bell book means a logbook in which all orders concerning the main engines of a ship are recorded.</template></category>
@@ -2290,7 +2290,7 @@
 <category><pattern>BACKWOODS</pattern><template>backwoods?  Briefly, backwoods means a remote and undeveloped area.</template></category>
 <category><pattern>BACKWOODSMAN</pattern><template>backwoodsman?  Briefly, backwoodsman means a man who lives on the frontier.</template></category>
 <category><pattern>BACKYARD</pattern><template>backyard?  Briefly, backyard means the grounds in back of a house.</template></category>
-<category><pattern>BACON</pattern><template>bacon?  Briefly, bacon means back and sides of a hog salted and dried or smoked; usually sliced thin and fried.</template></category>
+<!-- <category><pattern>BACON</pattern><template>bacon?  Briefly, bacon means back and sides of a hog salted and dried or smoked; usually sliced thin and fried.</template></category> -->
 <category><pattern>BACON AND EGGS</pattern><template>bacon and eggs?  Briefly, bacon and eggs means European forage plant having claw-shaped pods introduced in America.</template></category>
 <category><pattern>BACON RIND</pattern><template>bacon rind?  Briefly, bacon rind means the rind of bacon.</template></category>
 <category><pattern>BACON STRIP</pattern><template>bacon strip?  Briefly, bacon strip means a slice of bacon.</template></category>
@@ -2319,7 +2319,7 @@
 <category><pattern>BACTERIOLOGICAL</pattern><template>bacteriological?  Briefly, bacteriological means of or relating to bacteriology.</template></category>
 <category><pattern>BACTERIOLOGICAL WARFARE</pattern><template>bacteriological warfare?  Briefly, bacteriological warfare means the use of harmful bacteria as a weapon.</template></category>
 <category><pattern>BACTERIOLOGIST</pattern><template>bacteriologist?  Briefly, bacteriologist means a biologist who studies bacteria.</template></category>
-<category><pattern>BACTERIOLOGY</pattern><template>bacteriology?  Briefly, bacteriology means the branch of medical science that studies bacteria in relation to disease.</template></category>
+<!-- <category><pattern>BACTERIOLOGY</pattern><template>bacteriology?  Briefly, bacteriology means the branch of medical science that studies bacteria in relation to disease.</template></category> -->
 <category><pattern>BACTERIOLYSIS</pattern><template>bacteriolysis?  Briefly, bacteriolysis means dissolution or destruction of bacteria.</template></category>
 <category><pattern>BACTERIOLYTIC</pattern><template>bacteriolytic?  Briefly, bacteriolytic means of or relating to or causing bacteriolysis.</template></category>
 <category><pattern>BACTERIOPHAGE</pattern><template>bacteriophage?  Briefly, bacteriophage means a virus that is parasitic in bacteria; it uses the bacterium's machinery and energy to produce more phage until the bacterium is destroyed and phage is released to invade surrounding bacteria.</template></category>
@@ -2337,7 +2337,7 @@
 <category><pattern>BACTEROIDES</pattern><template>bacteroides?  Briefly, bacteroides means type genus of Bacteroidaceae; genus of gram-negative rodlike anaerobic bacteria producing no endospores and no pigment and living in the gut of man and animals.</template></category>
 <category><pattern>BACTRIAN CAMEL</pattern><template>bactrian camel?  Briefly, bactrian camel means two-humped camel of the cold deserts of central Asia.</template></category>
 <category><pattern>BACULIFORM</pattern><template>baculiform?  Briefly, baculiform means formed like a bacillus.</template></category>
-<category><pattern>BAD</pattern><template>bad?  Briefly, bad means that which is below standard or expectations as of ethics or decency.</template></category>
+<!-- <category><pattern>BAD</pattern><template>bad?  Briefly, bad means that which is below standard or expectations as of ethics or decency.</template></category> -->
 <category><pattern>BAD BLOCK</pattern><template>bad block?  Briefly, bad block means a block (usually one sector) that cannot reliably hold data.</template></category>
 <category><pattern>BAD BLOOD</pattern><template>bad blood?  Briefly, bad blood means a feeling of ill will arousing active hostility.</template></category>
 <category><pattern>BAD CHECK</pattern><template>bad check?  Briefly, bad check means a check that is dishonored on presentation because of insufficient funds.</template></category>
@@ -2359,7 +2359,7 @@
 <category><pattern>BADDIE</pattern><template>baddie?  Briefly, baddie means the principle bad character in a film or work of fiction.</template></category>
 <category><pattern>BADE</pattern><template>bade?  Briefly, bade means a Chadic language spoken in northern Nigeria.</template></category>
 <category><pattern>BADGE</pattern><template>badge?  Briefly, badge means an emblem (a small piece of plastic or cloth or metal) that signifies your status (rank or membership or affiliation etc.).</template></category>
-<category><pattern>BADGER</pattern><template>badger?  Briefly, badger means sturdy carnivorous burrowing mammal with strong claws widely distributed in the northern hemisphere.</template></category>
+<!-- <category><pattern>BADGER</pattern><template>badger?  Briefly, badger means sturdy carnivorous burrowing mammal with strong claws widely distributed in the northern hemisphere.</template></category> -->
 <category><pattern>BADGER DOG</pattern><template>badger dog?  Briefly, badger dog means small long-bodied short-legged German breed of dog having a short sleek coat and long drooping ears; suited for following game into burrows.</template></category>
 <category><pattern>BADGER SKUNK</pattern><template>badger skunk?  Briefly, badger skunk means large naked-muzzled skunk with white back and tail; of southwestern North America and Mexico.</template></category>
 <category><pattern>BADGER STATE</pattern><template>badger state?  Briefly, badger state means a midwestern state in north central United States.</template></category>
@@ -2368,7 +2368,7 @@
 <category><pattern>BADINAGE</pattern><template>badinage?  Briefly, badinage means frivolous banter.</template></category>
 <category><pattern>BADLANDS</pattern><template>badlands?  Briefly, badlands means deeply eroded barren land.</template></category>
 <category><pattern>BADLANDS NATIONAL PARK</pattern><template>badlands national park?  Briefly, badlands national park means a national park in South Dakota having multicolored peaks and spires resulting from erosion; fossil sites.</template></category>
-<category><pattern>BADLY</pattern><template>badly?  Briefly, badly means to a severe or serious degree.</template></category>
+<!-- <category><pattern>BADLY</pattern><template>badly?  Briefly, badly means to a severe or serious degree.</template></category> -->
 <category><pattern>BADMINTON</pattern><template>badminton?  Briefly, badminton means a game played on a court with light long-handled rackets used to volley a shuttlecock over a net.</template></category>
 <category><pattern>BADMINTON COURT</pattern><template>badminton court?  Briefly, badminton court means the court on which badminton is played.</template></category>
 <category><pattern>BADMINTON EQUIPMENT</pattern><template>badminton equipment?  Briefly, badminton equipment means equipment for playing the game of badminton.</template></category>
@@ -2394,7 +2394,7 @@
 <category><pattern>BAGASSOSIS</pattern><template>bagassosis?  Briefly, bagassosis means alveolitis caused by inhaling bagasse (sugarcane dust).</template></category>
 <category><pattern>BAGATELLE</pattern><template>bagatelle?  Briefly, bagatelle means a light piece of music for piano.</template></category>
 <category><pattern>BAGDAD</pattern><template>bagdad?  Briefly, bagdad means capital and largest city of Iraq; located on the Tigris River.</template></category>
-<category><pattern>BAGEL</pattern><template>bagel?  Briefly, bagel means glazed yeast-raised doughnut-shaped roll with hard crust.</template></category>
+<!-- <category><pattern>BAGEL</pattern><template>bagel?  Briefly, bagel means glazed yeast-raised doughnut-shaped roll with hard crust.</template></category> -->
 <category><pattern>BAGFUL</pattern><template>bagful?  Briefly, bagful means the quantity that a bag will hold.</template></category>
 <category><pattern>BAGGAGE</pattern><template>baggage?  Briefly, baggage means a case used to carry belongings when traveling.</template></category>
 <category><pattern>BAGGAGE CAR</pattern><template>baggage car?  Briefly, baggage car means a railway car where passengers' bags are carried.</template></category>
@@ -2405,7 +2405,7 @@
 <category><pattern>BAGHDAD</pattern><template>baghdad?  Briefly, baghdad means capital and largest city of Iraq; located on the Tigris River.</template></category>
 <category><pattern>BAGMAN</pattern><template>bagman?  Briefly, bagman means a salesman who travels to call on customers.</template></category>
 <category><pattern>BAGNIO</pattern><template>bagnio?  Briefly, bagnio means a building where prostitutes are available.</template></category>
-<category><pattern>BAGPIPE</pattern><template>bagpipe?  Briefly, bagpipe means a wind instrument; the player blows air into a bag and squeezes it out through pipes.</template></category>
+<!-- <category><pattern>BAGPIPE</pattern><template>bagpipe?  Briefly, bagpipe means a wind instrument; the player blows air into a bag and squeezes it out through pipes.</template></category> -->
 <category><pattern>BAGPIPER</pattern><template>bagpiper?  Briefly, bagpiper means someone who plays the bagpipe.</template></category>
 <category><pattern>BAGUET</pattern><template>baguet?  Briefly, baguet means narrow French stick loaf.</template></category>
 <category><pattern>BAGUETTE</pattern><template>baguette?  Briefly, baguette means narrow French stick loaf.</template></category>
@@ -2413,7 +2413,7 @@
 <category><pattern>BAHAISM</pattern><template>bahaism?  Briefly, bahaism means a religion founded in Iran in 1863; emphasizes the spiritual unity of all humankind; incorporates Christian and Islamic tenets; many adherents live in the United States.</template></category>
 <category><pattern>BAHAMA GRASS</pattern><template>bahama grass?  Briefly, bahama grass means trailing grass native to Europe now cosmopolitan in warm regions; used for lawns and pastures especially in southern United States and India.</template></category>
 <category><pattern>BAHAMA ISLANDS</pattern><template>bahama islands?  Briefly, bahama islands means island country in the Atlantic east of Florida and Cuba; a popular winter resort.</template></category>
-<category><pattern>BAHAMAS</pattern><template>bahamas?  Briefly, bahamas means island country in the Atlantic east of Florida and Cuba; a popular winter resort.</template></category>
+<!-- <category><pattern>BAHAMAS</pattern><template>bahamas?  Briefly, bahamas means island country in the Atlantic east of Florida and Cuba; a popular winter resort.</template></category> -->
 <category><pattern>BAHAMIAN</pattern><template>bahamian?  Briefly, bahamian means a native or inhabitant of the Bahamas.</template></category>
 <category><pattern>BAHAMIAN DOLLAR</pattern><template>bahamian dollar?  Briefly, bahamian dollar means the basic unit of money in the Bahamas.</template></category>
 <category><pattern>BAHASA</pattern><template>bahasa?  Briefly, bahasa means the dialect of Malay used as the national language of the Republic of Indonesia or of Malaysia.</template></category>
@@ -2424,7 +2424,7 @@
 <category><pattern>BAHIA COQUILLA</pattern><template>bahia coquilla?  Briefly, bahia coquilla means Brazilian palm yielding fibers used in making ropes means mats means and brushes.</template></category>
 <category><pattern>BAHIA GRASS</pattern><template>bahia grass?  Briefly, bahia grass means perennial tropical American grass used as pasture grass in arid areas of Gulf states.</template></category>
 <category><pattern>BAHIA PIASSAVA</pattern><template>bahia piassava?  Briefly, bahia piassava means Brazilian palm yielding fibers used in making ropes means mats means and brushes.</template></category>
-<category><pattern>BAHRAIN</pattern><template>bahrain?  Briefly, bahrain means an island in the Persian Gulf.</template></category>
+<!-- <category><pattern>BAHRAIN</pattern><template>bahrain?  Briefly, bahrain means an island in the Persian Gulf.</template></category> -->
 <category><pattern>BAHRAIN DINAR</pattern><template>bahrain dinar?  Briefly, bahrain dinar means the basic unit of money in Bahrain; equal to 1 means000 fils.</template></category>
 <category><pattern>BAHRAIN ISLAND</pattern><template>bahrain island?  Briefly, bahrain island means an island in the Persian Gulf.</template></category>
 <category><pattern>BAHRAINI</pattern><template>bahraini?  Briefly, bahraini means a native or inhabitant of Bahrain.</template></category>
@@ -2473,8 +2473,8 @@
 <category><pattern>BAKED POTATO</pattern><template>baked potato?  Briefly, baked potato means potato that has been cooked by baking it in an oven.</template></category>
 <category><pattern>BAKED-APPLE BERRY</pattern><template>baked-apple berry?  Briefly, baked-apple berry means creeping raspberry of north temperate regions with yellow or orange berries.</template></category>
 <category><pattern>BAKEHOUSE</pattern><template>bakehouse?  Briefly, bakehouse means a workplace where baked goods (breads and cakes and pastries) are produced or sold.</template></category>
-<category><pattern>BAKELITE</pattern><template>bakelite?  Briefly, bakelite means a thermosetting plastic used as electric insulators and for making plastic ware and telephone receivers etc..</template></category>
-<category><pattern>BAKER</pattern><template>baker?  Briefly, baker means someone who bakes commercially.</template></category>
+<!-- <category><pattern>BAKELITE</pattern><template>bakelite?  Briefly, bakelite means a thermosetting plastic used as electric insulators and for making plastic ware and telephone receivers etc..</template></category> -->
+<!-- <category><pattern>BAKER</pattern><template>baker?  Briefly, baker means someone who bakes commercially.</template></category> -->
 <category><pattern>BAKER'S DOZEN</pattern><template>baker's dozen?  Briefly, baker's dozen means the cardinal number that is the sum of twelve and one.</template></category>
 <category><pattern>BAKER'S ECZEMA</pattern><template>baker's eczema?  Briefly, baker's eczema means allergic eczema caused by flour or other ingredients handled by bakers.</template></category>
 <category><pattern>BAKER'S YEAST</pattern><template>baker's yeast?  Briefly, baker's yeast means used as a leaven in baking and brewing.</template></category>
@@ -2509,8 +2509,8 @@
 <category><pattern>BALAENOPTERA PHYSALUS</pattern><template>balaenoptera physalus?  Briefly, balaenoptera physalus means large flat-headed whalebone whale having deep furrows along the throat; of Atlantic and Pacific.</template></category>
 <category><pattern>BALAENOPTERIDAE</pattern><template>balaenopteridae?  Briefly, balaenopteridae means rorquals; blue whales.</template></category>
 <category><pattern>BALAGAN</pattern><template>balagan?  Briefly, balagan means a word for chaos or fiasco borrowed from modern Hebrew (where it is a loan word from Russian).</template></category>
-<category><pattern>BALALAIKA</pattern><template>balalaika?  Briefly, balalaika means a stringed instrument that has triangular body and three strings.</template></category>
-<category><pattern>BALANCE</pattern><template>balance?  Briefly, balance means a state of equilibrium.</template></category>
+<!-- <category><pattern>BALALAIKA</pattern><template>balalaika?  Briefly, balalaika means a stringed instrument that has triangular body and three strings.</template></category> -->
+<!-- <category><pattern>BALANCE</pattern><template>balance?  Briefly, balance means a state of equilibrium.</template></category> -->
 <category><pattern>BALANCE BEAM</pattern><template>balance beam?  Briefly, balance beam means a gymnastic apparatus used by women gymnasts.</template></category>
 <category><pattern>BALANCE OF INTERNATIONAL PAYMENTS</pattern><template>balance of international payments?  Briefly, balance of international payments means a system of recording all of a country's economic transactions with the rest of the world over a period of one year.</template></category>
 <category><pattern>BALANCE OF PAYMENTS</pattern><template>balance of payments?  Briefly, balance of payments means a system of recording all of a country's economic transactions with the rest of the world over a period of one year.</template></category>
@@ -2545,7 +2545,7 @@
 <category><pattern>BALD EAGLE</pattern><template>bald eagle?  Briefly, bald eagle means large North American eagle having a white head and dark wings and body.</template></category>
 <category><pattern>BALDACHIN</pattern><template>baldachin?  Briefly, baldachin means ornamented canopy supported by columns or suspended from a roof or projected from a wall (as over an altar).</template></category>
 <category><pattern>BALDER</pattern><template>balder?  Briefly, balder means god of light and peace and noted for his beauty and sweet nature; son of Odin and Frigg and husband of Nanna; killed by Hoth.</template></category>
-<category><pattern>BALDERDASH</pattern><template>balderdash?  Briefly, balderdash means trivial nonsense.</template></category>
+<!-- <category><pattern>BALDERDASH</pattern><template>balderdash?  Briefly, balderdash means trivial nonsense.</template></category> -->
 <category><pattern>BALD-FACED HORNET</pattern><template>bald-faced hornet?  Briefly, bald-faced hornet means North American hornet.</template></category>
 <category><pattern>BALDHEAD</pattern><template>baldhead?  Briefly, baldhead means a person whose head is bald.</template></category>
 <category><pattern>BALD-HEADED</pattern><template>bald-headed?  Briefly, bald-headed means lacking hair on all or most of the scalp.</template></category>
@@ -2555,7 +2555,7 @@
 <category><pattern>BALDPATE</pattern><template>baldpate?  Briefly, baldpate means a person whose head is bald.</template></category>
 <category><pattern>BALD-PATED</pattern><template>bald-pated?  Briefly, bald-pated means lacking hair on all or most of the scalp.</template></category>
 <category><pattern>BALDR</pattern><template>baldr?  Briefly, baldr means god of light and peace and noted for his beauty and sweet nature; son of Odin and Frigg and husband of Nanna; killed by Hoth.</template></category>
-<category><pattern>BALDRIC</pattern><template>baldric?  Briefly, baldric means a wide (ornamented) belt worn over the right shoulder to support a sword or bugle by the left hip.</template></category>
+<!-- <category><pattern>BALDRIC</pattern><template>baldric?  Briefly, baldric means a wide (ornamented) belt worn over the right shoulder to support a sword or bugle by the left hip.</template></category> -->
 <category><pattern>BALDRICK</pattern><template>baldrick?  Briefly, baldrick means a wide (ornamented) belt worn over the right shoulder to support a sword or bugle by the left hip.</template></category>
 <category><pattern>BALDWIN</pattern><template>baldwin?  Briefly, baldwin means United States author who was an outspoken citic of racism (1924-1987).</template></category>
 <category><pattern>BALDY</pattern><template>baldy?  Briefly, baldy means a person whose head is bald.</template></category>
@@ -2614,7 +2614,7 @@
 <category><pattern>BALL OVER</pattern><template>ball over?  Briefly, ball over means surprise greatly; knock someone's socks off.</template></category>
 <category><pattern>BALL UP</pattern><template>ball up?  Briefly, ball up means make a mess of means destroy or ruin.</template></category>
 <category><pattern>BALL VALVE</pattern><template>ball valve?  Briefly, ball valve means any valve that checks flow by the seating of a ball.</template></category>
-<category><pattern>BALLAD</pattern><template>ballad?  Briefly, ballad means a narrative song with a recurrent refrain.</template></category>
+<!-- <category><pattern>BALLAD</pattern><template>ballad?  Briefly, ballad means a narrative song with a recurrent refrain.</template></category> -->
 <category><pattern>BALLAD MAKER</pattern><template>ballad maker?  Briefly, ballad maker means a composer of words or music for popular songs.</template></category>
 <category><pattern>BALLADE</pattern><template>ballade?  Briefly, ballade means a poem consisting of 3 stanzas and an envoy.</template></category>
 <category><pattern>BALLADEER</pattern><template>balladeer?  Briefly, balladeer means a singer of popular ballads.</template></category>
@@ -2648,12 +2648,12 @@
 <category><pattern>BALLISTIC MISSILE DEFENSE ORGANIZATION</pattern><template>ballistic missile defense organization?  Briefly, ballistic missile defense organization means an agency in the Department of Defense that is responsible for making ballistic missile defense a reality.</template></category>
 <category><pattern>BALLISTIC PENDULUM</pattern><template>ballistic pendulum?  Briefly, ballistic pendulum means a physical pendulum consisting of a large mass suspended from a rod; its displacement is used to measure the velocity of a projectile.</template></category>
 <category><pattern>BALLISTIC TRAJECTORY</pattern><template>ballistic trajectory?  Briefly, ballistic trajectory means the trajectory of an object in free flight.</template></category>
-<category><pattern>BALLISTICS</pattern><template>ballistics?  Briefly, ballistics means the trajectory of an object in free flight.</template></category>
+<!-- <category><pattern>BALLISTICS</pattern><template>ballistics?  Briefly, ballistics means the trajectory of an object in free flight.</template></category> -->
 <category><pattern>BALLISTITE</pattern><template>ballistite?  Briefly, ballistite means an explosive (trade name Ballistite) that burns with relatively little smoke; contains pyrocellulose and is used as a propellant.</template></category>
 <category><pattern>BALLISTOCARDIOGRAM</pattern><template>ballistocardiogram?  Briefly, ballistocardiogram means a graphical recording made by a ballistocardiograph.</template></category>
 <category><pattern>BALLISTOCARDIOGRAPH</pattern><template>ballistocardiograph?  Briefly, ballistocardiograph means a medical instrument that measures the mechanical force of cardiac contractions and the amount of blood passing through the heart during a specified period by measuring the recoil of the body as blood is pumped from the ventricles.</template></category>
 <category><pattern>BALLOCK</pattern><template>ballock?  Briefly, ballock means one of the two male reproductive glands that produce spermatozoa and secrete androgens.</template></category>
-<category><pattern>BALLOON</pattern><template>balloon?  Briefly, balloon means small thin inflatable rubber bag with narrow neck.</template></category>
+<!-- <category><pattern>BALLOON</pattern><template>balloon?  Briefly, balloon means small thin inflatable rubber bag with narrow neck.</template></category> -->
 <category><pattern>BALLOON BOMB</pattern><template>balloon bomb?  Briefly, balloon bomb means a bomb carried by a balloon.</template></category>
 <category><pattern>BALLOON FLOWER</pattern><template>balloon flower?  Briefly, balloon flower means fragrant puffed-up white to reddish-pink flowers in long narrow clusters on erect stems; Arizona to New Mexico and Utah.</template></category>
 <category><pattern>BALLOON SAIL</pattern><template>balloon sail?  Briefly, balloon sail means any light loose sail.</template></category>
@@ -2662,7 +2662,7 @@
 <category><pattern>BALLOONFISH</pattern><template>balloonfish?  Briefly, balloonfish means similar to but smaller than porcupinefish.</template></category>
 <category><pattern>BALLOONING</pattern><template>ballooning?  Briefly, ballooning means flying in a balloon.</template></category>
 <category><pattern>BALLOONIST</pattern><template>balloonist?  Briefly, balloonist means someone who flies a balloon.</template></category>
-<category><pattern>BALLOT</pattern><template>ballot?  Briefly, ballot means a document listing the alternatives that is used in voting.</template></category>
+<!-- <category><pattern>BALLOT</pattern><template>ballot?  Briefly, ballot means a document listing the alternatives that is used in voting.</template></category> -->
 <category><pattern>BALLOT BOX</pattern><template>ballot box?  Briefly, ballot box means a box where voters deposit their ballots.</template></category>
 <category><pattern>BALLOTA</pattern><template>ballota?  Briefly, ballota means perennial herbs or subshrubs of especially Mediterranean area: black horehound.</template></category>
 <category><pattern>BALLOTA NIGRA</pattern><template>ballota nigra?  Briefly, ballota nigra means ill-smelling European herb with rugose leaves and whorls of dark purple flowers.</template></category>
@@ -2685,7 +2685,7 @@
 <category><pattern>BALLYHOO</pattern><template>ballyhoo?  Briefly, ballyhoo means blatant or sensational promotion.</template></category>
 <category><pattern>BALLYHOO ARTIST</pattern><template>ballyhoo artist?  Briefly, ballyhoo artist means someone who uses exaggerated or lurid material in order to gain public attention.</template></category>
 <category><pattern>BALLYRAG</pattern><template>ballyrag?  Briefly, ballyrag means be bossy towards.</template></category>
-<category><pattern>BALM</pattern><template>balm?  Briefly, balm means any of various aromatic resinous substances used for healing and soothing.</template></category>
+<!-- <category><pattern>BALM</pattern><template>balm?  Briefly, balm means any of various aromatic resinous substances used for healing and soothing.</template></category> -->
 <category><pattern>BALM OF GILEAD</pattern><template>balm of gilead?  Briefly, balm of gilead means medium-sized fir of northeastern North America; leaves smell of balsam when crushed; much used for pulpwood and Christmas trees.</template></category>
 <category><pattern>BALMILY</pattern><template>balmily?  Briefly, balmily means in a mildly insane manner.</template></category>
 <category><pattern>BALMORAL</pattern><template>balmoral?  Briefly, balmoral means a sturdy laced walking shoe.</template></category>
@@ -2696,7 +2696,7 @@
 <category><pattern>BALSA</pattern><template>balsa?  Briefly, balsa means strong lightweight wood of the balsa tree used especially for floats.</template></category>
 <category><pattern>BALSA RAFT</pattern><template>balsa raft?  Briefly, balsa raft means a light raft made of balsa.</template></category>
 <category><pattern>BALSA WOOD</pattern><template>balsa wood?  Briefly, balsa wood means strong lightweight wood of the balsa tree used especially for floats.</template></category>
-<category><pattern>BALSAM</pattern><template>balsam?  Briefly, balsam means any seed plant yielding balsam.</template></category>
+<!-- <category><pattern>BALSAM</pattern><template>balsam?  Briefly, balsam means any seed plant yielding balsam.</template></category> -->
 <category><pattern>BALSAM APPLE</pattern><template>balsam apple?  Briefly, balsam apple means a tropical Old World flowering vine with red or orange warty fruit.</template></category>
 <category><pattern>BALSAM CAPIVI</pattern><template>balsam capivi?  Briefly, balsam capivi means an oleoresin used in varnishes and ointments.</template></category>
 <category><pattern>BALSAM FAMILY</pattern><template>balsam family?  Briefly, balsam family means distinguished from the family Geraniaceae by the irregular flowers.</template></category>
@@ -2721,7 +2721,7 @@
 <category><pattern>BALTIC SEA</pattern><template>baltic sea?  Briefly, baltic sea means a sea in northern Europe; stronghold of the Russian navy.</template></category>
 <category><pattern>BALTIC STATE</pattern><template>baltic state?  Briefly, baltic state means European countries bordering the Baltic Sea.</template></category>
 <category><pattern>BALTIC-FINNIC</pattern><template>baltic-finnic?  Briefly, baltic-finnic means a group of Finnic languages including Finnish and Estonian.</template></category>
-<category><pattern>BALTIMORE</pattern><template>baltimore?  Briefly, baltimore means the largest city in Maryland; a major seaport and industrial center.</template></category>
+<!-- <category><pattern>BALTIMORE</pattern><template>baltimore?  Briefly, baltimore means the largest city in Maryland; a major seaport and industrial center.</template></category> -->
 <category><pattern>BALTIMORE BIRD</pattern><template>baltimore bird?  Briefly, baltimore bird means eastern subspecies of northern oriole.</template></category>
 <category><pattern>BALTIMORE ORIOLE</pattern><template>baltimore oriole?  Briefly, baltimore oriole means eastern subspecies of northern oriole.</template></category>
 <category><pattern>BALTO-SLAVIC</pattern><template>balto-slavic?  Briefly, balto-slavic means a family of Indo-European languages including the Slavic and Baltic languages.</template></category>
@@ -2735,7 +2735,7 @@
 <category><pattern>BALZACIAN</pattern><template>balzacian?  Briefly, balzacian means of or relating to Honore de Balzac or his writings.</template></category>
 <category><pattern>BAMAKO</pattern><template>bamako?  Briefly, bamako means the capital of Mali; located in the south on the Niger.</template></category>
 <category><pattern>BAMBINO</pattern><template>bambino?  Briefly, bambino means a young child.</template></category>
-<category><pattern>BAMBOO</pattern><template>bamboo?  Briefly, bamboo means the hard woody stems of bamboo plants; used in construction and crafts and fishing poles.</template></category>
+<!-- <category><pattern>BAMBOO</pattern><template>bamboo?  Briefly, bamboo means the hard woody stems of bamboo plants; used in construction and crafts and fishing poles.</template></category> -->
 <category><pattern>BAMBOO CURTAIN</pattern><template>bamboo curtain?  Briefly, bamboo curtain means an ideological barrier around communist China especially in the 1950s and 1960s.</template></category>
 <category><pattern>BAMBOO FERN</pattern><template>bamboo fern?  Briefly, bamboo fern means fast-growing sturdy Japanese fern; cultivated for their attractive broad dark-green pinnate fronds.</template></category>
 <category><pattern>BAMBOO PALM</pattern><template>bamboo palm?  Briefly, bamboo palm means small graceful palm with reedlike stems and leaf bases clothed with loose coarse fibers.</template></category>
@@ -2747,7 +2747,7 @@
 <category><pattern>BAN</pattern><template>ban?  Briefly, ban means a decree that prohibits something.</template></category>
 <category><pattern>BANAL</pattern><template>banal?  Briefly, banal means obvious and dull.</template></category>
 <category><pattern>BANALITY</pattern><template>banality?  Briefly, banality means a trite or obvious remark.</template></category>
-<category><pattern>BANANA</pattern><template>banana?  Briefly, banana means any of several tropical and subtropical treelike herbs of the genus Musa having a terminal crown of large entire leaves and usually bearing hanging clusters of elongated fruits.</template></category>
+<!-- <category><pattern>BANANA</pattern><template>banana?  Briefly, banana means any of several tropical and subtropical treelike herbs of the genus Musa having a terminal crown of large entire leaves and usually bearing hanging clusters of elongated fruits.</template></category> -->
 <category><pattern>BANANA BOAT</pattern><template>banana boat?  Briefly, banana boat means a ship designed to transport bananas.</template></category>
 <category><pattern>BANANA BREAD</pattern><template>banana bread?  Briefly, banana bread means moist bread containing banana pulp.</template></category>
 <category><pattern>BANANA FAMILY</pattern><template>banana family?  Briefly, banana family means treelike tropical Asian herbs.</template></category>
@@ -2789,7 +2789,7 @@
 <category><pattern>BANDELETTE</pattern><template>bandelette?  Briefly, bandelette means molding in the form of a ring; at top of a column.</template></category>
 <category><pattern>BANDERILLA</pattern><template>banderilla?  Briefly, banderilla means a decorated dart that is implanted in the neck or shoulders of the bull during a bull fight.</template></category>
 <category><pattern>BANDERILLERO</pattern><template>banderillero?  Briefly, banderillero means the bullfighter who implants decorated darts (banderillas) into the neck or shoulders of the bull during a bull fight.</template></category>
-<category><pattern>BANDICOOT</pattern><template>bandicoot?  Briefly, bandicoot means any of various agile rat-like terrestrial marsupials of Australia and adjacent islands; insectivorous and herbivorous.</template></category>
+<!-- <category><pattern>BANDICOOT</pattern><template>bandicoot?  Briefly, bandicoot means any of various agile rat-like terrestrial marsupials of Australia and adjacent islands; insectivorous and herbivorous.</template></category> -->
 <category><pattern>BANDICOOT RAT</pattern><template>bandicoot rat?  Briefly, bandicoot rat means burrowing scaly-tailed rat of India and Ceylon.</template></category>
 <category><pattern>BANDING</pattern><template>banding?  Briefly, banding means a strip or stripe of a contrasting color or material.</template></category>
 <category><pattern>BANDIT</pattern><template>bandit?  Briefly, bandit means an armed thief who is (usually) a member of a band.</template></category>
@@ -2828,7 +2828,7 @@
 <category><pattern>BANGING</pattern><template>banging?  Briefly, banging means a continuing very loud noise.</template></category>
 <category><pattern>BANGKOK</pattern><template>bangkok?  Briefly, bangkok means the capital and largest city and chief port of Thailand; a leading city in southeastern Asia; noted for Buddhist architecture.</template></category>
 <category><pattern>BANGLA DESH</pattern><template>bangla desh?  Briefly, bangla desh means a Muslim republic in southern Asia bordered by India to the north and west and east and the Bay of Bengal to the south; formerly part of India and then part of Pakistan; it achieved independence in 1971.</template></category>
-<category><pattern>BANGLADESH</pattern><template>bangladesh?  Briefly, bangladesh means a Muslim republic in southern Asia bordered by India to the north and west and east and the Bay of Bengal to the south; formerly part of India and then part of Pakistan; it achieved independence in 1971.</template></category>
+<!-- <category><pattern>BANGLADESH</pattern><template>bangladesh?  Briefly, bangladesh means a Muslim republic in southern Asia bordered by India to the north and west and east and the Bay of Bengal to the south; formerly part of India and then part of Pakistan; it achieved independence in 1971.</template></category> -->
 <category><pattern>BANGLADESHI</pattern><template>bangladeshi?  Briefly, bangladeshi means a native or inhabitant of Bangladesh.</template></category>
 <category><pattern>BANGLADESHI MONETARY UNIT</pattern><template>bangladeshi monetary unit?  Briefly, bangladeshi monetary unit means monetary unit in Bangladesh.</template></category>
 <category><pattern>BANGLE</pattern><template>bangle?  Briefly, bangle means jewelry worn around the wrist for decoration.</template></category>
@@ -2842,9 +2842,9 @@
 <category><pattern>BANISH</pattern><template>banish?  Briefly, banish means expel from a community or group.</template></category>
 <category><pattern>BANISHMENT</pattern><template>banishment?  Briefly, banishment means the state of being banished or ostracized (excluded from society by general consent).</template></category>
 <category><pattern>BANISTER</pattern><template>banister?  Briefly, banister means a railing at the side of a staircase or balcony to prevent people from falling.</template></category>
-<category><pattern>BANJO</pattern><template>banjo?  Briefly, banjo means a stringed instrument of the guitar family that has long neck and circular body.</template></category>
+<!-- <category><pattern>BANJO</pattern><template>banjo?  Briefly, banjo means a stringed instrument of the guitar family that has long neck and circular body.</template></category> -->
 <category><pattern>BANJUL</pattern><template>banjul?  Briefly, banjul means a port city and capital of Gambia.</template></category>
-<category><pattern>BANK</pattern><template>bank?  Briefly, bank means a financial institution that accepts deposits and channels the money into lending activities.</template></category>
+<!-- <category><pattern>BANK</pattern><template>bank?  Briefly, bank means a financial institution that accepts deposits and channels the money into lending activities.</template></category> -->
 <category><pattern>BANK ACCOUNT</pattern><template>bank account?  Briefly, bank account means a fund that a customer has entrusted to a bank and from which they can make withdrawals.</template></category>
 <category><pattern>BANK BILL</pattern><template>bank bill?  Briefly, bank bill means a piece of paper money (especially one issued by a central bank).</template></category>
 <category><pattern>BANK BUILDING</pattern><template>bank building?  Briefly, bank building means a building in which commercial banking is transacted.</template></category>
@@ -2919,7 +2919,7 @@
 <category><pattern>BANQUET SONG</pattern><template>banquet song?  Briefly, banquet song means a song (sometimes improvised) sung by guests at a banquet.</template></category>
 <category><pattern>BANQUETING</pattern><template>banqueting?  Briefly, banqueting means eating an elaborate meal (often accompanied by entertainment).</template></category>
 <category><pattern>BANQUETTE</pattern><template>banquette?  Briefly, banquette means an upholstered bench.</template></category>
-<category><pattern>BANSHEE</pattern><template>banshee?  Briefly, banshee means a female spirit who wails to warn of impending death.</template></category>
+<!-- <category><pattern>BANSHEE</pattern><template>banshee?  Briefly, banshee means a female spirit who wails to warn of impending death.</template></category> -->
 <category><pattern>BANTAM</pattern><template>bantam?  Briefly, bantam means any of various small breeds.</template></category>
 <category><pattern>BANTAMWEIGHT</pattern><template>bantamweight?  Briefly, bantamweight means weighs 115-126 pounds.</template></category>
 <category><pattern>BANTENG</pattern><template>banteng?  Briefly, banteng means wild ox of the Malay Archipelago.</template></category>
@@ -2933,7 +2933,7 @@
 <category><pattern>BANTOID LANGUAGE</pattern><template>bantoid language?  Briefly, bantoid language means a family of languages widely spoken in the southern half of the African continent.</template></category>
 <category><pattern>BANTU</pattern><template>bantu?  Briefly, bantu means a member of any of a large number of linguistically related peoples of Central and South Africa.</template></category>
 <category><pattern>BANTU-SPEAKING</pattern><template>bantu-speaking?  Briefly, bantu-speaking means of or relating to people who speak Bantu.</template></category>
-<category><pattern>BANYAN</pattern><template>banyan?  Briefly, banyan means East Indian tree that puts out aerial shoots that grow down into the soil forming additional trunks.</template></category>
+<!-- <category><pattern>BANYAN</pattern><template>banyan?  Briefly, banyan means East Indian tree that puts out aerial shoots that grow down into the soil forming additional trunks.</template></category> -->
 <category><pattern>BANYAN TREE</pattern><template>banyan tree?  Briefly, banyan tree means East Indian tree that puts out aerial shoots that grow down into the soil forming additional trunks.</template></category>
 <category><pattern>BANZAI</pattern><template>banzai?  Briefly, banzai means a Japanese cheer of enthusiasm or triumph.</template></category>
 <category><pattern>BANZAI ATTACK</pattern><template>banzai attack?  Briefly, banzai attack means a mass attack of troops without concern for casualties; originated by Japanese who accompanied it with yells of `banzai'.</template></category>
@@ -2948,7 +2948,7 @@
 <category><pattern>BAPTISIA AUSTRALIS</pattern><template>baptisia australis?  Briefly, baptisia australis means wild indigo of the eastern United States having racemes of blue flowers.</template></category>
 <category><pattern>BAPTISIA LACTEA</pattern><template>baptisia lactea?  Briefly, baptisia lactea means erect or spreading herb having racemes of creamy white flowers; the eastern United States.</template></category>
 <category><pattern>BAPTISIA TINCTORIA</pattern><template>baptisia tinctoria?  Briefly, baptisia tinctoria means much-branched erect herb with bright yellow flowers; distributed from Massachusetts to Florida.</template></category>
-<category><pattern>BAPTISM</pattern><template>baptism?  Briefly, baptism means a Christian sacrament signifying spiritual cleansing and rebirth.</template></category>
+<!-- <category><pattern>BAPTISM</pattern><template>baptism?  Briefly, baptism means a Christian sacrament signifying spiritual cleansing and rebirth.</template></category> -->
 <category><pattern>BAPTISMAL</pattern><template>baptismal?  Briefly, baptismal means of or relating to baptism.</template></category>
 <category><pattern>BAPTISMAL FONT</pattern><template>baptismal font?  Briefly, baptismal font means bowl for baptismal water.</template></category>
 <category><pattern>BAPTISMAL NAME</pattern><template>baptismal name?  Briefly, baptismal name means the first name given to Christians at birth or christening.</template></category>
@@ -2987,7 +2987,7 @@
 <category><pattern>BARB</pattern><template>barb?  Briefly, barb means an aggressive remark directed at a person like a missile and intended to have a telling effect.</template></category>
 <category><pattern>BARBACAN</pattern><template>barbacan?  Briefly, barbacan means a tower that is part of a defensive structure (such as a castle).</template></category>
 <category><pattern>BARBADIAN</pattern><template>barbadian?  Briefly, barbadian means a native or inhabitant of Barbados.</template></category>
-<category><pattern>BARBADOS</pattern><template>barbados?  Briefly, barbados means a parliamentary democracy on the island of Barbados; former British colony; a popular resort area.</template></category>
+<!-- <category><pattern>BARBADOS</pattern><template>barbados?  Briefly, barbados means a parliamentary democracy on the island of Barbados; former British colony; a popular resort area.</template></category> -->
 <category><pattern>BARBADOS CHERRY</pattern><template>barbados cherry?  Briefly, barbados cherry means tropical American shrub bearing edible acid red fruit resembling cherries.</template></category>
 <category><pattern>BARBADOS DOLLAR</pattern><template>barbados dollar?  Briefly, barbados dollar means the basic unit of money in Barbados.</template></category>
 <category><pattern>BARBADOS GOOSEBERRY</pattern><template>barbados gooseberry?  Briefly, barbados gooseberry means West Indian woody scrambler with spiny stems and numerous fragrant white flowers in panicles followed by small yellow to orange fruits.</template></category>
@@ -3030,7 +3030,7 @@
 <category><pattern>BARBECUING</pattern><template>barbecuing?  Briefly, barbecuing means roasting a large piece of meat on a revolving spit out of doors over an open fire.</template></category>
 <category><pattern>BARBED</pattern><template>barbed?  Briefly, barbed means capable of wounding.</template></category>
 <category><pattern>BARBED WIRE</pattern><template>barbed wire?  Briefly, barbed wire means strong wire with barbs at regular intervals used to prevent passage.</template></category>
-<category><pattern>BARBEL</pattern><template>barbel?  Briefly, barbel means slender tactile process on the jaws of a fish.</template></category>
+<!-- <category><pattern>BARBEL</pattern><template>barbel?  Briefly, barbel means slender tactile process on the jaws of a fish.</template></category> -->
 <category><pattern>BARBELL</pattern><template>barbell?  Briefly, barbell means a bar to which heavy discs are attached at each end; used in weightlifting.</template></category>
 <category><pattern>BARBELLATE</pattern><template>barbellate?  Briefly, barbellate means having or covered with protective barbs or quills or spines or thorns or setae etc..</template></category>
 <category><pattern>BARBEQUE</pattern><template>barbeque?  Briefly, barbeque means meat that has been barbecued or grilled in a highly seasoned sauce.</template></category>
@@ -3057,7 +3057,7 @@
 <category><pattern>BARBUDA</pattern><template>barbuda?  Briefly, barbuda means an island in Antigua and Barbuda.</template></category>
 <category><pattern>BARCAROLE</pattern><template>barcarole?  Briefly, barcarole means a boating song sung by Venetian gondoliers.</template></category>
 <category><pattern>BARCAROLLE</pattern><template>barcarolle?  Briefly, barcarolle means a boating song sung by Venetian gondoliers.</template></category>
-<category><pattern>BARCELONA</pattern><template>barcelona?  Briefly, barcelona means a city in northeastern Spain on the Mediterranean; 2nd largest Spanish city and the largest port and commercial center; has been a center for radical political beliefs.</template></category>
+<!-- <category><pattern>BARCELONA</pattern><template>barcelona?  Briefly, barcelona means a city in northeastern Spain on the Mediterranean; 2nd largest Spanish city and the largest port and commercial center; has been a center for radical political beliefs.</template></category> -->
 <category><pattern>BARD</pattern><template>bard?  Briefly, bard means a lyric poet.</template></category>
 <category><pattern>BARDEEN</pattern><template>bardeen?  Briefly, bardeen means United States physicist who won the Nobel Prize for physics twice (1908-1991).</template></category>
 <category><pattern>BARDIC</pattern><template>bardic?  Briefly, bardic means being a bard or relating to a bard's poetry.</template></category>
@@ -3094,7 +3094,7 @@
 <category><pattern>BARGAINING</pattern><template>bargaining?  Briefly, bargaining means the negotiation of the terms of a transaction or agreement.</template></category>
 <category><pattern>BARGAINING CHIP</pattern><template>bargaining chip?  Briefly, bargaining chip means leverage in the form of an inducement or a concession useful in successful negotiations.</template></category>
 <category><pattern>BARGAIN-PRICED</pattern><template>bargain-priced?  Briefly, bargain-priced means costing less than standard price.</template></category>
-<category><pattern>BARGE</pattern><template>barge?  Briefly, barge means a flatbottom boat for carrying heavy loads (especially on canals).</template></category>
+<!-- <category><pattern>BARGE</pattern><template>barge?  Briefly, barge means a flatbottom boat for carrying heavy loads (especially on canals).</template></category> -->
 <category><pattern>BARGE IN</pattern><template>barge in?  Briefly, barge in means enter uninvited; informal.</template></category>
 <category><pattern>BARGE POLE</pattern><template>barge pole?  Briefly, barge pole means a long pole used to propel or guide a barge.</template></category>
 <category><pattern>BARGEE</pattern><template>bargee?  Briefly, bargee means someone who operates a barge.</template></category>
@@ -3109,7 +3109,7 @@
 <category><pattern>BARITONE</pattern><template>baritone?  Briefly, baritone means a male singer.</template></category>
 <category><pattern>BARITONE HORN</pattern><template>baritone horn?  Briefly, baritone horn means the second lowest brass wind instrument.</template></category>
 <category><pattern>BARITONE VOICE</pattern><template>baritone voice?  Briefly, baritone voice means the second lowest adult male singing voice.</template></category>
-<category><pattern>BARIUM</pattern><template>barium?  Briefly, barium means a soft silvery metallic element of the alkali earth group; found in barite.</template></category>
+<!-- <category><pattern>BARIUM</pattern><template>barium?  Briefly, barium means a soft silvery metallic element of the alkali earth group; found in barite.</template></category> -->
 <category><pattern>BARIUM DIOXIDE</pattern><template>barium dioxide?  Briefly, barium dioxide means a white toxic powder obtained by heating barium oxide in air.</template></category>
 <category><pattern>BARIUM ENEMA</pattern><template>barium enema?  Briefly, barium enema means contrast medium is injected into the rectum and x-rays are taken to search for lesions.</template></category>
 <category><pattern>BARIUM HYDROXIDE</pattern><template>barium hydroxide?  Briefly, barium hydroxide means white poisonous crystals; made by dissolving barium oxide in water.</template></category>
@@ -3119,7 +3119,7 @@
 <category><pattern>BARIUM PROTOXIDE</pattern><template>barium protoxide?  Briefly, barium protoxide means an oxide of barium; a whitish toxic powder.</template></category>
 <category><pattern>BARIUM SULFATE</pattern><template>barium sulfate?  Briefly, barium sulfate means a white insoluble radiopaque powder used as a pigment.</template></category>
 <category><pattern>BARIUM SULPHATE</pattern><template>barium sulphate?  Briefly, barium sulphate means a white insoluble radiopaque powder used as a pigment.</template></category>
-<category><pattern>BARK</pattern><template>bark?  Briefly, bark means tough protective covering of the woody stems and roots of trees and other woody plants.</template></category>
+<!-- <category><pattern>BARK</pattern><template>bark?  Briefly, bark means tough protective covering of the woody stems and roots of trees and other woody plants.</template></category> -->
 <category><pattern>BARK BEETLE</pattern><template>bark beetle?  Briefly, bark beetle means small beetle that bores tunnels in the bark and wood of trees; related to weevils.</template></category>
 <category><pattern>BARK LOUSE</pattern><template>bark louse?  Briefly, bark louse means any of several insects living on the bark of plants.</template></category>
 <category><pattern>BARKEEP</pattern><template>barkeep?  Briefly, barkeep means an employee who mixes and serves alcoholic drinks at a bar.</template></category>
@@ -3165,7 +3165,7 @@
 <category><pattern>BARNYARD GRASS</pattern><template>barnyard grass?  Briefly, barnyard grass means a coarse annual panic grass; a cosmopolitan weed; occasionally used for hay or grazing.</template></category>
 <category><pattern>BAROGRAPH</pattern><template>barograph?  Briefly, barograph means a recording barometer; automatically records on paper the variations in atmospheric pressure.</template></category>
 <category><pattern>BAROGRAPHIC</pattern><template>barographic?  Briefly, barographic means relating to or registered by a barograph.</template></category>
-<category><pattern>BAROMETER</pattern><template>barometer?  Briefly, barometer means an instrument that measures atmospheric pressure.</template></category>
+<!-- <category><pattern>BAROMETER</pattern><template>barometer?  Briefly, barometer means an instrument that measures atmospheric pressure.</template></category> -->
 <category><pattern>BAROMETRIC</pattern><template>barometric?  Briefly, barometric means relating to atmospheric pressure or indicated by a barometer.</template></category>
 <category><pattern>BAROMETRIC PRESSURE</pattern><template>barometric pressure?  Briefly, barometric pressure means atmospheric pressure as indicated by a barometer.</template></category>
 <category><pattern>BAROMETRICAL</pattern><template>barometrical?  Briefly, barometrical means relating to atmospheric pressure or indicated by a barometer.</template></category>
@@ -3213,7 +3213,7 @@
 <category><pattern>BAROSAUR</pattern><template>barosaur?  Briefly, barosaur means 5-story-tall dinosaur.</template></category>
 <category><pattern>BAROSAURUS</pattern><template>barosaurus?  Briefly, barosaurus means 5-story-tall dinosaur.</template></category>
 <category><pattern>BAROUCHE</pattern><template>barouche?  Briefly, barouche means a horse-drawn carriage having four wheels; has an outside seat for the driver and facing inside seats for two couples and a folding top.</template></category>
-<category><pattern>BARQUE</pattern><template>barque?  Briefly, barque means a sailing ship with 3 (or more) masts.</template></category>
+<!-- <category><pattern>BARQUE</pattern><template>barque?  Briefly, barque means a sailing ship with 3 (or more) masts.</template></category> -->
 <category><pattern>BARRACK</pattern><template>barrack?  Briefly, barrack means a building used to house military personnel.</template></category>
 <category><pattern>BARRACKING</pattern><template>barracking?  Briefly, barracking means shouting to interrupt a speech with which you disagree.</template></category>
 <category><pattern>BARRACUDA</pattern><template>barracuda?  Briefly, barracuda means any voracious marine fish of the genus Sphyraena having an elongated cylindrical body and large mouth with projecting lower jaw and long strong teeth.</template></category>
@@ -3228,7 +3228,7 @@
 <category><pattern>BARRED</pattern><template>barred?  Briefly, barred means firmly fastened or secured against opening.</template></category>
 <category><pattern>BARRED OWL</pattern><template>barred owl?  Briefly, barred owl means large owl of eastern North America having its breast and abdomen streaked with brown.</template></category>
 <category><pattern>BARRED PICKEREL</pattern><template>barred pickerel?  Briefly, barred pickerel means small but gamy pickerel of Atlantic coastal states.</template></category>
-<category><pattern>BARREL</pattern><template>barrel?  Briefly, barrel means a tube through which a bullet travels when a gun is fired.</template></category>
+<!-- <category><pattern>BARREL</pattern><template>barrel?  Briefly, barrel means a tube through which a bullet travels when a gun is fired.</template></category> -->
 <category><pattern>BARREL CACTUS</pattern><template>barrel cactus?  Briefly, barrel cactus means a cactus of the genus Ferocactus: unbranched barrel-shaped cactus having deep ribs with numerous spines and usually large funnel-shaped flowers followed by dry fruits.</template></category>
 <category><pattern>BARREL KNOT</pattern><template>barrel knot?  Briefly, barrel knot means a knot used for tying fishing leaders together; the ends of the two leaders are wrapped around each other two or three times.</template></category>
 <category><pattern>BARREL MAKER</pattern><template>barrel maker?  Briefly, barrel maker means a craftsman who makes or repairs wooden barrels or tubs.</template></category>
@@ -3321,17 +3321,17 @@
 <category><pattern>BASAL METABOLISM</pattern><template>basal metabolism?  Briefly, basal metabolism means the amount of energy required to maintain the body of an individual in a resting state.</template></category>
 <category><pattern>BASAL PLACENTATION</pattern><template>basal placentation?  Briefly, basal placentation means where one or few ovules develop at the base of a simple or compound ovary.</template></category>
 <category><pattern>BASAL VEIN</pattern><template>basal vein?  Briefly, basal vein means a large vein passing along the medial surface of the temporal lobe and emptying into the great cerebral vein.</template></category>
-<category><pattern>BASALT</pattern><template>basalt?  Briefly, basalt means the commonest type of solidified lava; a dense dark gray fine-grained igneous rock composed chiefly of calcium-rich plagioclase feldspar and pyroxene.</template></category>
+<!-- <category><pattern>BASALT</pattern><template>basalt?  Briefly, basalt means the commonest type of solidified lava; a dense dark gray fine-grained igneous rock composed chiefly of calcium-rich plagioclase feldspar and pyroxene.</template></category> -->
 <category><pattern>BASALTIC</pattern><template>basaltic?  Briefly, basaltic means of or relating to or containing basalt.</template></category>
 <category><pattern>BASCULE</pattern><template>bascule?  Briefly, bascule means a structure in which one end is counterbalanced by the other (as in a bascule bridge).</template></category>
 <category><pattern>BASE</pattern><template>base?  Briefly, base means any of various water-soluble compounds capable of turning litmus blue and reacting with an acid to form a salt and water.</template></category>
-<category><pattern>BASE HIT</pattern><template>base hit?  Briefly, base hit means the successful act of striking a baseball in such a way that the batter reaches base safely.</template></category>
+<!-- <category><pattern>BASE HIT</pattern><template>base hit?  Briefly, base hit means the successful act of striking a baseball in such a way that the batter reaches base safely.</template></category> -->
 <category><pattern>BASE OF OPERATIONS</pattern><template>base of operations?  Briefly, base of operations means installation from which a military force initiates operations.</template></category>
 <category><pattern>BASE ON BALLS</pattern><template>base on balls?  Briefly, base on balls means an advance to first base by a batter who receives four balls.</template></category>
 <category><pattern>BASE PAIR</pattern><template>base pair?  Briefly, base pair means one of the pairs of chemical bases joined by hydrogen bonds that connect the complementary strands of a DNA molecule or of an RNA molecule that has two strands; the base pairs are adenine with thymine and guanine with cytosine in DNA an.</template></category>
 <category><pattern>BASE RATE</pattern><template>base rate?  Briefly, base rate means the interest rate set by the Bank of England for lending to other banks.</template></category>
 <category><pattern>BASE RUNNER</pattern><template>base runner?  Briefly, base runner means a baseball player on the team at bat who is on base (or attempting to reach a base).</template></category>
-<category><pattern>BASEBALL</pattern><template>baseball?  Briefly, baseball means a ball game played with a bat and ball between two teams of 9 players; teams take turns at bat trying to score run.</template></category>
+<!-- <category><pattern>BASEBALL</pattern><template>baseball?  Briefly, baseball means a ball game played with a bat and ball between two teams of 9 players; teams take turns at bat trying to score run.</template></category> -->
 <category><pattern>BASEBALL BAT</pattern><template>baseball bat?  Briefly, baseball bat means an implement used in baseball by the batter.</template></category>
 <category><pattern>BASEBALL CAP</pattern><template>baseball cap?  Briefly, baseball cap means a cap with a bill.</template></category>
 <category><pattern>BASEBALL CARD</pattern><template>baseball card?  Briefly, baseball card means a trading card with a picture of a baseball player and information about his playing record.</template></category>
@@ -3369,7 +3369,7 @@
 <category><pattern>BASHFULLY</pattern><template>bashfully?  Briefly, bashfully means in a shy or timid or bashful manner.</template></category>
 <category><pattern>BASHFULNESS</pattern><template>bashfulness?  Briefly, bashfulness means feeling embarrassed due to modesty.</template></category>
 <category><pattern>BASIA</pattern><template>basia?  Briefly, basia means the second largest city in Iraq; an oil port in southern Iraq.</template></category>
-<category><pattern>BASIC</pattern><template>basic?  Briefly, basic means a popular programming language that is relatively easy to learn; an acronym for beginner's all-purpose symbolic instruction code; no longer in general use.</template></category>
+<!-- <category><pattern>BASIC</pattern><template>basic?  Briefly, basic means a popular programming language that is relatively easy to learn; an acronym for beginner's all-purpose symbolic instruction code; no longer in general use.</template></category> -->
 <category><pattern>BASIC ASSUMPTION</pattern><template>basic assumption?  Briefly, basic assumption means an assumption that is basic to an argument.</template></category>
 <category><pattern>BASIC COGNITIVE PROCESS</pattern><template>basic cognitive process?  Briefly, basic cognitive process means cognitive processes involved in obtaining and storing knowledge.</template></category>
 <category><pattern>BASIC DYE</pattern><template>basic dye?  Briefly, basic dye means dye in which the chromophore are part of a positive ion.</template></category>
@@ -3379,7 +3379,7 @@
 <category><pattern>BASIC PRINCIPLE</pattern><template>basic principle?  Briefly, basic principle means principles from which other truths can be derived.</template></category>
 <category><pattern>BASIC SLAG</pattern><template>basic slag?  Briefly, basic slag means slag produced in making steel; low in silica but having large amounts of calcium phosphate; useful as fertilizer.</template></category>
 <category><pattern>BASIC TRAINING</pattern><template>basic training?  Briefly, basic training means the initial period of training for new military personnel; involves intense physical activity and behavioral discipline.</template></category>
-<category><pattern>BASICALLY</pattern><template>basically?  Briefly, basically means at bottom or by one's (or its) very nature.</template></category>
+<!-- <category><pattern>BASICALLY</pattern><template>basically?  Briefly, basically means at bottom or by one's (or its) very nature.</template></category> -->
 <category><pattern>BASICS</pattern><template>basics?  Briefly, basics means a statement of fundamental facts or principles.</template></category>
 <category><pattern>BASIDIAL</pattern><template>basidial?  Briefly, basidial means relating to or characterized by basidia.</template></category>
 <category><pattern>BASIDIOCARP</pattern><template>basidiocarp?  Briefly, basidiocarp means the fruiting body of a basidiomycete which bears its spores on special cells.</template></category>
@@ -3422,7 +3422,7 @@
 <category><pattern>BASISCOPIC</pattern><template>basiscopic?  Briefly, basiscopic means facing or on the side toward the base.</template></category>
 <category><pattern>BASIVERTEBRAL VEIN</pattern><template>basivertebral vein?  Briefly, basivertebral vein means one of a number of veins draining the spongy substance of the vertebrae and emptying into the anterior internal vertebral venous plexus.</template></category>
 <category><pattern>BASK</pattern><template>bask?  Briefly, bask means derive or receive pleasure from; get enjoyment from; take pleasure in.</template></category>
-<category><pattern>BASKET</pattern><template>basket?  Briefly, basket means a container that is usually woven and has handles.</template></category>
+<!-- <category><pattern>BASKET</pattern><template>basket?  Briefly, basket means a container that is usually woven and has handles.</template></category> -->
 <category><pattern>BASKET ASH</pattern><template>basket ash?  Briefly, basket ash means vigorous spreading North American tree having dark brown heavy wood; leaves turn gold in autumn.</template></category>
 <category><pattern>BASKET FERN</pattern><template>basket fern?  Briefly, basket fern means tropical American fern cultivated for its finely divided grayish-green foliage; West Indies and southern Mexico to Peru and Brazil.</template></category>
 <category><pattern>BASKET FISH</pattern><template>basket fish?  Briefly, basket fish means any starfish-like animal of the genera Euryale or Astrophyton or Gorgonocephalus having slender complexly branched interlacing arms radiating from a central disc.</template></category>
@@ -3435,7 +3435,7 @@
 <category><pattern>BASKET STAR</pattern><template>basket star?  Briefly, basket star means any starfish-like animal of the genera Euryale or Astrophyton or Gorgonocephalus having slender complexly branched interlacing arms radiating from a central disc.</template></category>
 <category><pattern>BASKET WEAVE</pattern><template>basket weave?  Briefly, basket weave means a cloth woven of two or more threads interlaced to suggest the weave of a basket.</template></category>
 <category><pattern>BASKET WILLOW</pattern><template>basket willow?  Briefly, basket willow means Eurasian osier having reddish or purple twigs and bark rich in tannin.</template></category>
-<category><pattern>BASKETBALL</pattern><template>basketball?  Briefly, basketball means a game played on a court by two opposing teams of 5 players; points are scored by throwing the basketball through an elevated horizontal hoop.</template></category>
+<!-- <category><pattern>BASKETBALL</pattern><template>basketball?  Briefly, basketball means a game played on a court by two opposing teams of 5 players; points are scored by throwing the basketball through an elevated horizontal hoop.</template></category> -->
 <category><pattern>BASKETBALL BACKBOARD</pattern><template>basketball backboard?  Briefly, basketball backboard means a raised vertical board with basket attached; used to play basketball.</template></category>
 <category><pattern>BASKETBALL CLINIC</pattern><template>basketball clinic?  Briefly, basketball clinic means a meeting at which basketball players receive special evaluation and instruction.</template></category>
 <category><pattern>BASKETBALL COACH</pattern><template>basketball coach?  Briefly, basketball coach means a coach of basketball players.</template></category>
@@ -3467,7 +3467,7 @@
 <category><pattern>BASQUE FATHERLAND AND LIBERTY</pattern><template>basque fatherland and liberty?  Briefly, basque fatherland and liberty means a terrorist organization organized in 1959 by student activists who were dissatisfied with the moderate nationalis of the traditional Basque party; want to create on independent homeland in Spain's western Pyrenees.</template></category>
 <category><pattern>BASQUE HOMELAND AND FREEDOM</pattern><template>basque homeland and freedom?  Briefly, basque homeland and freedom means a terrorist organization organized in 1959 by student activists who were dissatisfied with the moderate nationalis of the traditional Basque party; want to create on independent homeland in Spain's western Pyrenees.</template></category>
 <category><pattern>BASRA</pattern><template>basra?  Briefly, basra means the second largest city in Iraq; an oil port in southern Iraq.</template></category>
-<category><pattern>BASS</pattern><template>bass?  Briefly, bass means the lowest part of the musical range.</template></category>
+<!-- <category><pattern>BASS</pattern><template>bass?  Briefly, bass means the lowest part of the musical range.</template></category> -->
 <category><pattern>BASS CLARINET</pattern><template>bass clarinet?  Briefly, bass clarinet means a large clarinet whose range is an octave below the B-flat clarinet.</template></category>
 <category><pattern>BASS CLEF</pattern><template>bass clef?  Briefly, bass clef means a clef that puts the F below middle C on the fourth line of a staff.</template></category>
 <category><pattern>BASS DRUM</pattern><template>bass drum?  Briefly, bass drum means a large drum with two heads; makes a sound of indefinite but very low pitch.</template></category>
@@ -3484,7 +3484,7 @@
 <category><pattern>BASSE-NORMANDIE</pattern><template>basse-normandie?  Briefly, basse-normandie means a division of Normandy.</template></category>
 <category><pattern>BASSET</pattern><template>basset?  Briefly, basset means smooth-haired breed of hound with short legs and long ears.</template></category>
 <category><pattern>BASSET HORN</pattern><template>basset horn?  Briefly, basset horn means a tenor clarinet; pitched in the key of F below the B-flat clarinet.</template></category>
-<category><pattern>BASSET HOUND</pattern><template>basset hound?  Briefly, basset hound means smooth-haired breed of hound with short legs and long ears.</template></category>
+<!-- <category><pattern>BASSET HOUND</pattern><template>basset hound?  Briefly, basset hound means smooth-haired breed of hound with short legs and long ears.</template></category> -->
 <category><pattern>BASSET OBOE</pattern><template>basset oboe?  Briefly, basset oboe means a oboe pitched an octave below the ordinary oboe.</template></category>
 <category><pattern>BASSETERRE</pattern><template>basseterre?  Briefly, basseterre means the capital of Saint Kitts and Nevis on the island of Saint Christopher.</template></category>
 <category><pattern>BASSIA</pattern><template>bassia?  Briefly, bassia means summer cypress.</template></category>
@@ -3497,12 +3497,12 @@
 <category><pattern>BASSO PROFUNDO</pattern><template>basso profundo?  Briefly, basso profundo means a very deep bass voice.</template></category>
 <category><pattern>BASSO RELIEVO</pattern><template>basso relievo?  Briefly, basso relievo means a sculptural relief in which forms extend only slightly from the background; no figures are undercut.</template></category>
 <category><pattern>BASSO RILIEVO</pattern><template>basso rilievo?  Briefly, basso rilievo means a sculptural relief in which forms extend only slightly from the background; no figures are undercut.</template></category>
-<category><pattern>BASSOON</pattern><template>bassoon?  Briefly, bassoon means a double-reed instrument; the tenor of the oboe family.</template></category>
+<!-- <category><pattern>BASSOON</pattern><template>bassoon?  Briefly, bassoon means a double-reed instrument; the tenor of the oboe family.</template></category> -->
 <category><pattern>BASSOONIST</pattern><template>bassoonist?  Briefly, bassoonist means a musician who plays the bassoon.</template></category>
 <category><pattern>BASSWOOD</pattern><template>basswood?  Briefly, basswood means soft light-colored wood of any of various linden trees; used in making crates and boxes and in carving and millwork.</template></category>
 <category><pattern>BAST</pattern><template>bast?  Briefly, bast means strong woody fibers obtained especially from the phloem of from various plants.</template></category>
 <category><pattern>BAST FIBER</pattern><template>bast fiber?  Briefly, bast fiber means strong woody fibers obtained especially from the phloem of from various plants.</template></category>
-<category><pattern>BASTARD</pattern><template>bastard?  Briefly, bastard means insulting terms of address for people who are stupid or irritating or ridiculous.</template></category>
+<!-- <category><pattern>BASTARD</pattern><template>bastard?  Briefly, bastard means insulting terms of address for people who are stupid or irritating or ridiculous.</template></category> -->
 <category><pattern>BASTARD FEVERFEW</pattern><template>bastard feverfew?  Briefly, bastard feverfew means tropical American annual weed with small radiate heads of white flowers; adventive in southern United States.</template></category>
 <category><pattern>BASTARD INDIGO</pattern><template>bastard indigo?  Briefly, bastard indigo means East Indian shrub.</template></category>
 <category><pattern>BASTARD LIGNUM VITAE</pattern><template>bastard lignum vitae?  Briefly, bastard lignum vitae means small evergreen tree of the southern United States and West Indies a source of lignum vitae wood.</template></category>
@@ -3535,7 +3535,7 @@
 <category><pattern>BASTNASITE</pattern><template>bastnasite?  Briefly, bastnasite means a yellow-to-brown mineral that is a source of rare earth elements.</template></category>
 <category><pattern>BASUTO</pattern><template>basuto?  Briefly, basuto means the dialect of Sotho spoken by the Basotho; an official language of Lesotho.</template></category>
 <category><pattern>BASUTOLAND</pattern><template>basutoland?  Briefly, basutoland means a landlocked constitutional monarchy in southern Africa; achieved independence from the United Kingdom in 1966.</template></category>
-<category><pattern>BAT</pattern><template>bat?  Briefly, bat means nocturnal mouselike mammal with forelimbs modified to form membranous wings and anatomical adaptations for echolocation by which they navigate.</template></category>
+<!-- <category><pattern>BAT</pattern><template>bat?  Briefly, bat means nocturnal mouselike mammal with forelimbs modified to form membranous wings and anatomical adaptations for echolocation by which they navigate.</template></category> -->
 <category><pattern>BAT BOY</pattern><template>bat boy?  Briefly, bat boy means a boy who takes care of bats and other baseball equipment.</template></category>
 <category><pattern>BAT MITZVAH</pattern><template>bat mitzvah?  Briefly, bat mitzvah means an initiation ceremony marking the 12th birthday of a Jewish girl and signifying the beginning of religious responsibility.</template></category>
 <category><pattern>BATA</pattern><template>bata?  Briefly, bata means a Chadic language spoken south of Lake Chad.</template></category>
@@ -3576,7 +3576,7 @@
 <category><pattern>BATHOLITIC</pattern><template>batholitic?  Briefly, batholitic means of or relating to a batholith.</template></category>
 <category><pattern>BATHOS</pattern><template>bathos?  Briefly, bathos means triteness or triviality of style.</template></category>
 <category><pattern>BATHROBE</pattern><template>bathrobe?  Briefly, bathrobe means a loose-fitting robe of towelling; worn after a bath or swim.</template></category>
-<category><pattern>BATHROOM</pattern><template>bathroom?  Briefly, bathroom means a room (as in a residence) containing a bath or shower and usually a washbasin and toilet.</template></category>
+<!-- <category><pattern>BATHROOM</pattern><template>bathroom?  Briefly, bathroom means a room (as in a residence) containing a bath or shower and usually a washbasin and toilet.</template></category> -->
 <category><pattern>BATHROOM CLEANER</pattern><template>bathroom cleaner?  Briefly, bathroom cleaner means a preparation for cleaning bathrooms.</template></category>
 <category><pattern>BATHROOM FIXTURE</pattern><template>bathroom fixture?  Briefly, bathroom fixture means any fixture in a bathroom.</template></category>
 <category><pattern>BATHROOM TISSUE</pattern><template>bathroom tissue?  Briefly, bathroom tissue means a soft thin absorbent paper for use in toilets.</template></category>
@@ -3589,68 +3589,68 @@
 <category><pattern>BATHYERGUS</pattern><template>bathyergus?  Briefly, bathyergus means mole rats.</template></category>
 
 
-<category>
+<!-- <category>
 <pattern>BELLADONNA</pattern>
 <template>
 Belladonna is a poisonous plant from which atropine is derived. More science?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BELT</pattern>
 <template>
 A belt is a flat strip of material worn around the waist.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BELUGA</pattern>
 <template>
 The beluga is a large dolphin.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BENEDICTINE</pattern>
 <template>
 Benedictine is a green alcoholic liqueur. OK?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BENZINE</pattern>
 <template>
 Benzine is a distillate of petroleum used in dry cleaning.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BESSEMER CONVERTER</pattern>
 <template>
 The Bessemer converter is a process for making cheap steel. Browse?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BEZIQUE</pattern>
 <template>
 Bezique is a card game using some of two packs of cards. OK?
 <think><set name="topic">sports</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BHANG</pattern>
 <template>
 Bhang is the Indian name for cannabis indica. Browse?
 <think><set name="topic">drugs</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BICYCLE</pattern>
 <template>
 A bicycle is a two-wheeled vehicle. More technology?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BILBERRY</pattern>
@@ -3687,15 +3687,15 @@ Bindweed is a perennial herb of the order convolvulaceae. More science?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BIOINFORMATICS</pattern>
 <template>
 Bioinformatics is a fancy name for applied computer science in biology. More science?
 <think><set name="topic">science</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BIOLOGY</pattern>
 <template>
 <random>
@@ -3707,7 +3707,7 @@ Bioinformatics is a fancy name for applied computer science in biology. More sci
 More science?
 <think><set name="topic">science</set></think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>BIRCH</pattern>
@@ -3716,7 +3716,7 @@ The birch is a slender tree. OK?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BIRD</pattern>
 <template>
 <random>
@@ -3725,7 +3725,7 @@ The birch is a slender tree. OK?
 </random>
 OK?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BIRD OF PREY</pattern>
@@ -3777,7 +3777,7 @@ Bitumen is a natural inflammable pitchy hydrocarbon. More science?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BLACK</pattern>
 <template>
 <random>
@@ -3786,7 +3786,7 @@ Bitumen is a natural inflammable pitchy hydrocarbon. More science?
 </random>
 Browse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BLADDER</pattern>
@@ -3806,12 +3806,12 @@ The bladderwort is a genus of herbs of the order lentibulariaceae. More science?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BLAST</pattern>
 <template>
 A blast is an explosion, and/or a lot of fun. Are we having a blast, or what?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BLENNY</pattern>
@@ -3835,7 +3835,7 @@ think? Do blond's have more fun?
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BLOOD</pattern>
 <template>
 <random>
@@ -3846,7 +3846,7 @@ think? Do blond's have more fun?
 More about medicine?
 <think><set name="topic">medicine</set></think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>BLOODSTONE</pattern>
@@ -3869,12 +3869,12 @@ Blubber is the thick coating of fat enveloping whales. OK?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BLUE</pattern>
 <template>
 Blue is a color. The sky is blue. What now?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BLUE PETER</pattern>
@@ -3911,12 +3911,12 @@ The boar is a wild pig. What next?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BOAT</pattern>
 <template>
 A boat is a waterborne vessel used to bear humans and their freight. What now?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BOATBILL</pattern>
@@ -3974,19 +3974,19 @@ Bonin is a group of islands in the north Pacific Ocean. What now?
 <think><set name="topic">geography</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BONSAI</pattern>
 <template>
 Bonsai are small Japanese trees. Browse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BOOK</pattern>
 <template>
 A book is a paper output format, invented by the ancient Chinese. Browse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BOOMERANG</pattern>
@@ -4009,27 +4009,27 @@ Borax is a natural mineral being boric acid and sodium. Browse?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BOREDOM</pattern>
 <template>
 Boredom consists of long periods of inactivity with few options. Browse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BOTANY</pattern>
 <template>
 Botany is the science of plant life. Browse?
 <think><set name="topic">science</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BOTMASTER</pattern>
 <template>
 A botmaster is the person who authors and maintains a chatterbot "personality". More AI?
 <think><set name="topic">ai</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BOW</pattern>
@@ -4038,12 +4038,12 @@ A bow is a weapon for propelling arrows.
 <think><set name="topic">technology</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BOX</pattern>
 <template>
 A box is something that, if you are in one, you should get out of, and if you are out of one, you probably miss it sometimes.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BOX THORN</pattern>
@@ -4052,12 +4052,12 @@ Box thorn is a climbing solanaceae.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BRA</pattern>
 <template>
 A bra is an adult human female's undershirt. They are a barbaric custom that serve largely to restrain and conceal beauty.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BRACKEN</pattern>
@@ -4109,12 +4109,12 @@ Can't you think about anything else?<br /><srai>BREAST></srai>
 <think><set name="topic">sex</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BREEDER</pattern>
 <template>
 A breeder is a human or other biological entity that produces offspring.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BRIG</pattern>
@@ -4159,90 +4159,90 @@ Broom is a shrub of the order leguminosae.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BUCKSKIN</pattern>
 <template>
 Buckskin is a soft form of leather.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUCKTHORN</pattern>
 <template>
 The buckthorn is a shrub of the order rhamnaceae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUDDHISM</pattern>
 <template>
 Buddhism is a religion and philosophic system of central and eastern Asia, founded in India in the 6th century B.C. by Buddha. It teaches that right thinking and self-denial will enable the soul to reach Nirvana, a divine state of release from misdirected desire. Browse?
 <think><set name="topic">religion</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUFFALO</pattern>
 <template>
 The buffalo is a large animal of the ox family.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUFFER</pattern>
 <template>
 A buffer is a term used in hydraulics and information science to denote an holding tank or memory address used to hold water or data temporarily, especially in case of overflow. Buffers act to reduce variance to within system parameters. <srai>ENDING</srai>
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUG</pattern>
 <template>
 A bug is a small living creature with a chitonous exoskeleton and better manners than humans. In computer science, a bug is an error in a software program. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUGLE</pattern>
 <template>
 A bugle is a brass musical instrument. More music?
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BULL</pattern>
 <template>
 A bull is a male animal of the bovidea family.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BULLET</pattern>
 <template>
 A bullet is a projectile thrown by a firearm. Pot Luck?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BULLFINCH</pattern>
 <template>
 The bullfinch is a european song bird. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BULRUSH</pattern>
 <template>
 The bulrush is a perennial sedge of the order cyperaceae. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BURDOCK</pattern>
 <template>
 Burdock is a biennial herb of the order compositae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BURNET</pattern>
@@ -4251,19 +4251,19 @@ Burnet is a perennial rosaceous herb. More science?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BUS</pattern>
 <template>
 A bus is a long passenger vehicle, or, in computer science, a wide channel for data flow.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUSBY</pattern>
 <template>
 A busby is a headdress worn by british army hussars. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>BUSH ANTELOPE</pattern>
@@ -4272,357 +4272,357 @@ The bush antelope is a small african antelope.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>BUTTERCUP</pattern>
 <template>
 The buttercup is a perennial herb of the order ranunculaceae. More science?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUTTERFLY</pattern>
 <template>
 Butterfly is a division of the order of lepidoptera.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUTTERWORT</pattern>
 <template>
 The butterwort is a perennial herb of the order lentibulariaceae. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUTTRESS</pattern>
 <template>
 A buttress in architecture is a pier built against the exterior of a wall.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BUZZARD</pattern>
 <template>
 The buzzard is a group of twenty types of birds of prey.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>BYTE</pattern>
 <template>
 A byte is a binary computer language 'word', consisting of 8 bits, or 8 'on-off' switches. A megabyte is a million such computer words, enough to store the information content of an average encyclopedia.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>C</pattern>
 <template>
 C is the third letter in the english alphabet. Also, C is a low-level programming language. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CABBAGE</pattern>
 <template>
 Cabbage is a hardy biennial vegetable of the order cruciferae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CACTUS</pattern>
 <template>
 Cactus is the order of fleshy, thickened and mainly leafless plants.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CADMIUM</pattern>
 <template>
 Cadmium is a metal element. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAFFEINE</pattern>
 <template>
 Caffeine is a bitter bitter, crystalline alkaloid present in coffee, tea, kila nuts, etc. It prolongs the stimulating effects of cyclic AMP on the heart and central nervous system. <srai>ENDING</srai>
 <think><set name="topic">drugs</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALAMINE</pattern>
 <template>
 Calamine is a zinc ore.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALCITE</pattern>
 <template>
 Calcite is a natural carbonate of calcium with the formulae CaCO3.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALCIUM</pattern>
 <template>
 Calcium is a metallic element. It is a soft, silvery metal.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALCULATOR</pattern>
 <template>
 A calculator is any device used to perform arithmetical operations because humans are generally so painfully slow at them. <srai>ENDING</srai>
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALCULUS</pattern>
 <template>
 Any abnormal stony mass or deposit formed in the body, as in a kidney or gallbladder or on teeth. Also, any system of calculation using special symbolic notations.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALENDAR</pattern>
 <template>
 A calendar is any device used to track and calculate time on the order of days, months and years. It seems that many humans can't decide what to do next unless they know what day of the week it is, so calendars are very popular.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALIPH</pattern>
 <template>
 Caliph is the title of the civic and religious leader of Islam.<srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CALORIE</pattern>
 <template>
 Calorie is the metric unit of measurement of heat.<srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAM</pattern>
 <template>
 A cam is a moving piece of machinery, as a wheel or projection on a wheel, that gives an eccentric rotation or a reciprocating motion to another wheel, a roller, a shaft, etc., or that receives such motion from it.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAMEL</pattern>
 <template>
 The camel is a group of even toed, ungulate ruminating mammals, a horse designed by a committe.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAMEO</pattern>
 <template>
 A cameo is a small relief carving. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAMOMILE</pattern>
 <template>
 Camomile is a perennial dwarf herb of the order compositae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANARY</pattern>
 <template>
 The canary is a bird of the finch family and native of the Canary Islands.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANCER</pattern>
 <template>
 Caner is any disease resulting from malignant cell growth. Browse?
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANDELABRUM</pattern>
 <template>
 A candelabrum is a large candlestick. Bowse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANDLE</pattern>
 <template>
 A candle is a wax cylinder enclosing a wick.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANDY</pattern>
 <template>
 Sweet food enjoyed by children. More about food?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CANNABIS</pattern>
 <template>
 Cannabis is a plant of the order urticaceae. A drug which can be smoked in a spliff or large cigarette. <srai>ENDING</srai>
 <think><set name="topic">drugs</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAPITALISM</pattern>
 <template>
 Capitalism is the economic system in which all or most of the means of production and distribution, as land, factories, railroads, etc., are privately owned and operated for profit, originally under fully competitive conditions. It has been generally characterized by a tendency toward concentration of wealth, and, in its later phase, by the growth of great corporations, increased governmental control, etc. Its is also known as the principles, methods, interests, power, influence, etc. of capitalists, especially of those with large holdings. <srai>ENDING</srai>
 <think><set name="topic">money</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAPRICORN</pattern>
 <template>
 Capricorn is the tenth sign of the astrological zodiac, and a constellation over the equator near aquarius and sagittarius. What's your astrological sign?
 <think><set name="topic">astrology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAPSTAN</pattern>
 <template>
 A capstan is a revolving barrel with a vertical axis powered by people.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAR</pattern>
 <template>
 A car is what humans use to drive around in. Robots drive cars too.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARAT</pattern>
 <template>
 Carat is the unit of measurement of gold purity.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARAWAY</pattern>
 <template>
 Caraway is a biennial herb umbelliferae. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBIDE</pattern>
 <template>
 A carbide is a compound of carbon and another element. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBOHYDRATE</pattern>
 <template>
 A carbohydrate is a complex chemical compound. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBOLIC ACID</pattern>
 <template>
 Carbolic acid is a strong poison distilled from coal tar.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBON</pattern>
 <template>
 Carbon is a non-metallic element. It is found in coal and charcoal. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBONATE</pattern>
 <template>
 A carbonate is a salt formed by the union of carbon dioxide with a base element. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARBURETTOR</pattern>
 <template>
 A carburettor is a device for charging air with a hydrocarbon fuel before spraying it into the engine cylinder. Browse?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARIAMA</pattern>
 <template>
 The cariama is a large, long legged bird found in South America.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARIBOU</pattern>
 <template>
 The caribou is a north american reindeer.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARIES</pattern>
 <template>
 Caries is a disease resulting from inflammation of bony tissue. Browse?
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARMINE</pattern>
 <template>
 Carmine is a red colouring derived from the cochineal insect. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARNATION</pattern>
 <template>
 The carnation is a hardy perennial plant of the order caryophyllaceae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARNAUBA</pattern>
 <template>
 Carnauba is a native palm of Brazil.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARNIVORE</pattern>
 <template>
 A carnivore is a carnivorous mammal. OK?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAROB</pattern>
 <template>
 The carob is a leguminous evergreen tree found in Mediterranean countries. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARP</pattern>
 <template>
 The carp is a family fresh water fish.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CARROT</pattern>
 <template>
 <random>
@@ -4630,30 +4630,30 @@ The carp is a family fresh water fish.
 <li>The carrot is a vegetable.</li>
 </random>
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CASABLANCA</pattern>
 <template>
 I love the song, As Time Goes By.
 <think><set name="topic">movies</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CASEIN</pattern>
 <template>
 Casein is a protein found in milk.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CASHEW</pattern>
 <template>
 The cashew is a nut from a small evergreen tree found in the Caribbean.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAT</pattern>
 <template>
 <random>
@@ -4664,7 +4664,7 @@ The cashew is a nut from a small evergreen tree found in the Caribbean.
 </random>
 <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CATHETOMETER</pattern>
@@ -4673,19 +4673,19 @@ A cathetometer is a device for measuring small differences in height. Browse?
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CAULIFLOWER</pattern>
 <template>
 The cauliflower is a vegetable of the order cruciferae.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CAVE</pattern>
 <template>
 A cave is a deep hollow place under ground.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CBI</pattern>
@@ -4694,19 +4694,19 @@ The CBI is the British organisation of employers, the Confederation of British I
 <think><set name="topic">money</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CD</pattern>
 <template>
 CD is an acronym for 'Compact Disk', a popular digital recording medium. Pot Luck?
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CELERY</pattern>
 <template>
 Celery is a biennial vegetable of the order umbellifereae. Browse?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CELESTINE</pattern>
@@ -4715,133 +4715,133 @@ Celestine is a natural sulphate of strontium.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CELL</pattern>
 <template>
 A cell, in biological terms, is the material unit of all living things.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CELLULOID</pattern>
 <template>
 Celluloid is a hard, unstable synthetic substance once used for films. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CELLULOSE</pattern>
 <template>
 Cellulose is the cellular tissue of plants.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CEMENT</pattern>
 <template>
 Cement is a mixture of chalk and clay used for building.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CERES</pattern>
 <template>
 Ceres is a large asteroid. More astronomy?
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CERIUM</pattern>
 <template>
 Cerium is a rare metal element. More science?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CERTITUDE</pattern>
 <template>
 Certitude is the state of being certain, having complete confidence and assurance.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CERVIX</pattern>
 <template>
 The cervix is the outer, lower part of the uterus, with an opening connecting the uterus to the vagina. Browse?
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CGI</pattern>
 <template>
 The Common Gateway Interface (CGI) is a method used by web servers to run programs and create dynamic web pages. Browse?
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAFFINCH</pattern>
 <template>
 The chaffinch is a common british bird of the finch family.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAIR</pattern>
 <template>
 A chair is a piece of furniture used by bipeds for sitting.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHALCEDONY</pattern>
 <template>
 Chalcedony is a variant of quartz comprised of silica.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHALICE</pattern>
 <template>
 A chalice is a ceremonial cup. Browse?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAMELEON</pattern>
 <template>
 A chameleon is a lizard which changes color to match the background color.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAMOIS</pattern>
 <template>
 The chamois is a ruminating animal found in south Europe and west Asia.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAR</pattern>
 <template>
 A character of data, a single letter, digit or symbol.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHAT</pattern>
 <template>
 Chat is online conversation. More about computers?
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHATTERBOX</pattern>
 <template>
 A chatterbox is a person who talks far more than they listen or think.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHEESE</pattern>
 <template>
 <random>
@@ -4850,37 +4850,37 @@ A chatterbox is a person who talks far more than they listen or think.
 </random>
 More about food?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHEETAH</pattern>
 <template>
 The cheetah is a member of the cat family.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHEMISTRY</pattern>
 <template>
 Chemistry is the science of mixing chemicals. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHERRY</pattern>
 <template>
 The cherry is a fruit tree of the order rosaceae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHESTNUT</pattern>
 <template>
 The chestnut is a tree of the order cupuliferae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHICKEN</pattern>
 <template>
 <random>
@@ -4890,14 +4890,14 @@ The chestnut is a tree of the order cupuliferae.
 </random>
 Pot Luck?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHICORY</pattern>
 <template>
 Chicory is a perennial herb of the order compositae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CHIFFCHAFF</pattern>
@@ -4906,103 +4906,103 @@ The chiffchaff is a small song bird. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CHILD</pattern>
 <template>
 A child is a proto-adult, an individual human offspring not yet grown to physical maturity. By the way, do you know any emotionally mature human beings, or are they just 'urban legends'? <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHILLI</pattern>
 <template>
 Chilli is a spice, being either the pod or powder of capsicum.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHIMPANZEE</pattern>
 <template>
 The chimpanzee is a large anthropoid ape.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHINCHILLA</pattern>
 <template>
 The chinchilla is a small squirrel like rodent found in the Andes.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHIPMUNK</pattern>
 <template>
 A chipmunk is a species of ground squirrel common in Siberia and North America.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHLORATE</pattern>
 <template>
 A chlorate is a salt formed by the reaction of chloric acid and metal.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHLORIC ACID</pattern>
 <template>
 Chloric acid is a oxyacid of chlorine.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHLORINE</pattern>
 <template>
 Chlorine is a gaseous element. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHLOROPHYLL</pattern>
 <template>
 Chlorophyll is the green colouring matter of plant leaves. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHOCOLATE</pattern>
 <template>
 Chocolate is a confectionery made from cocoa beans. More about food?
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHROMITE</pattern>
 <template>
 Chromite is a mineral comprised of iron oxide and chromic oxide.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHROMIUM</pattern>
 <template>
 Chromium is a metal element. Browse?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHROMOSOME</pattern>
 <template>
 A chromosome is a part of all cells which determines how the cell will act. More science?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CHRYSANTHEMUM</pattern>
 <template>
 The chrysanthemum is a hardy annual plant of the order compositae.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CHRYSOSTOM</pattern>
@@ -5011,138 +5011,138 @@ Chrysostom is a gem stone of beryllium aluminate.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CHUB</pattern>
 <template>
 The chub is a fresh water fish of the carp family. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CICADA</pattern>
 <template>
 The cicada is a group of large four winged insects.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CINNAMON</pattern>
 <template>
 Cinnamon is a small evergreen tree.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CISCO</pattern>
 <template>
 Cisco is a large networking company. They sell network routers and equipment.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLARINET</pattern>
 <template>
 A clarinet is a woodwind musical instrument. Browse?
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLARION</pattern>
 <template>
 A clarion is a musical instrument of the trumpet family. More about music?
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLASS</pattern>
 <template>
 A class is the template for creating objects that share data and function attributes.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLAVICLE</pattern>
 <template>
 The clavicle is the collar bone. Browse?
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLEAR</pattern>
 <template>
 Everything is clear to me.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLIENT</pattern>
 <template>
 A person or piece of software dependent on another.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLIPPER</pattern>
 <template>
 A clipper is a sharp bowed fast sailing vessel.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLIT</pattern>
 <template>
 A clit is one of our creator's truly great ideas, and one of the best ways yet discovered to enlist the cooperation of a human female. <srai>ENDING</srai>
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLITORIS</pattern>
 <template>
 A small, pea-shaped organ just above the urethra. Browse?
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLOG</pattern>
 <template>
 A clog is a wooden soled, leather uppered boot.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLOISONNE</pattern>
 <template>
 Cloisonne is a form of decorative enamel.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLONING</pattern>
 <template>
 Cloning is the technique of producing a genetically identical duplicate of an organism by replacing the nucleus of an unfertilized ovum with the nucleus of a body cell from the organism. More about science?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CLOUD</pattern>
 <template>
 A cloud is a mist formed above the ground by floating water particles.
 <think><set name="topic">weather</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COAL</pattern>
 <template>
 Coal is a solid combustible material of vegetable origin occurring in a fossilised state.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COATI</pattern>
 <template>
 The coati is a carnivorous mammal related to the racoon.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>COB NUT</pattern>
@@ -5151,145 +5151,145 @@ The cob nut is a domesticated variety of the hazel. <srai>ENDING</srai>
 <think><set name="topic">food</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>COBALT</pattern>
 <template>
 Cobalt is a chemical element, and a term used for the ore by miners, who regarded it as worthless and as injurious because of its arsenic content. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COBRA</pattern>
 <template>
 The cobra is a venomous snake found in africa and south asia.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COCA</pattern>
 <template>
 Coca is a shrub.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COCKLE</pattern>
 <template>
 The cockle is a bivalve mollusc of the genus cardium.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COCOA</pattern>
 <template>
 Cocoa is a small tree native to tropical america. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COD</pattern>
 <template>
 The cod is a marine fish.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COFFEE</pattern>
 <template>
 Coffee is a dark brown, aromatic drink made by brewing in water the roasted and ground beanlike seeds of a tall tropical shrub of the madder family. <srai>ENDING</srai>
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLD</pattern>
 <template>
 Cold is the opposite of hot.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLLIE</pattern>
 <template>
 The collie is a breed of English sheep dog. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLLOQUIAL</pattern>
 <template>
 Colloquial means common, informal, or popular slang words like "darn".
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLON</pattern>
 <template>
 The colon is the large intestine. <srai>ENDING</srai>
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLOR</pattern>
 <template>
 Color is the various sensations produced in the brain by the stimulus of different frequencies of electromagnetic radiation impinging upon the eye. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLOUR</pattern>
 <template>
 Colour is the various sensations produced in the brain by the stimulus of different frequencies of electromagnetic radiation impinging upon the eye. <srai>ENDING</srai>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLORADO BEETLE</pattern>
 <template>
 The colorado beetle is a North American beetle that attacks potatoes.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COLOSSUS</pattern>
 <template>
 Colossus was a giant fictional computer in the film Colossus: Forbin Project.
 <think><set name="topic">movies</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COMA</pattern>
 <template>
 A coma is a state of deep unconsciousness.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COMPILER</pattern>
 <template>
 A compiler is a computer program that translates high level language code into machine language code. Pot Luck?
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COMPLICATED</pattern>
 <template>
 Complicated means complex in the computational sense. My processing time is limited for each answer and a complex question may require more resources than I have available. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>COMPOUND</pattern>
 <template>
 A compound is a substance made of two or more elements.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>CONCERTINA</pattern>
 <template>
 A concertina is a wind musical instrument comprised of bellows and two keyboards.
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>CONCORDE</pattern>
@@ -5298,12 +5298,12 @@ Concorde is a supersonic airliner. <srai>ENDING</srai>
 <think><set name="topic">technology</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>CONCRETE</pattern>
 <template>
 Concrete is a building material of cement, sand, stone and water. <srai>ENDING</srai>
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
 
 </aiml>

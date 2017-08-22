@@ -250,7 +250,7 @@
 <category><pattern>UNCLASP</pattern><template>unclasp?  Briefly, unclasp means release from a clasp.</template></category>
 <category><pattern>UNCLASSIFIABLE</pattern><template>unclassifiable?  Briefly, unclassifiable means not possible to classify.</template></category>
 <category><pattern>UNCLASSIFIED</pattern><template>unclassified?  Briefly, unclassified means not subject to a security classification.</template></category>
-<category><pattern>UNCLE</pattern><template>uncle?  Briefly, uncle means the brother of your father or mother; the husband of your aunt.</template></category>
+<!-- <category><pattern>UNCLE</pattern><template>uncle?  Briefly, uncle means the brother of your father or mother; the husband of your aunt.</template></category> -->
 <category><pattern>UNCLE JOE</pattern><template>uncle joe?  Briefly, uncle joe means United States general who commanded the Allied forces in China and Burma and India during World War II (1883-1946).</template></category>
 <category><pattern>UNCLE SAM</pattern><template>uncle sam?  Briefly, uncle sam means a personification of the United States government.</template></category>
 <category><pattern>UNCLE TOM</pattern><template>uncle tom?  Briefly, uncle tom means contemptuous name for a Black man who is abjectly servile and deferential to Whites.</template></category>
@@ -453,7 +453,7 @@
 <category><pattern>UNDEFERENTIAL</pattern><template>undeferential?  Briefly, undeferential means not showing courteous respect.</template></category>
 <category><pattern>UNDEFILED</pattern><template>undefiled?  Briefly, undefiled means free from stain or blemish.</template></category>
 <category><pattern>UNDEFINABLE</pattern><template>undefinable?  Briefly, undefinable means not capable of being precisely or readily described; not easily put into words.</template></category>
-<category><pattern>UNDEFINED</pattern><template>undefined?  Briefly, undefined means not precisely limited means determined means or distinguished.</template></category>
+<!-- <category><pattern>UNDEFINED</pattern><template>undefined?  Briefly, undefined means not precisely limited means determined means or distinguished.</template></category> -->
 <category><pattern>UNDELINEATED</pattern><template>undelineated?  Briefly, undelineated means not represented accurately or precisely.</template></category>
 <category><pattern>UNDEMANDING</pattern><template>undemanding?  Briefly, undemanding means not demanding; requiring little if any patience or effort or skill.</template></category>
 <category><pattern>UNDEMOCRATIC</pattern><template>undemocratic?  Briefly, undemocratic means not in agreement with or according to democratic doctrine or practice or ideals.</template></category>
@@ -3008,7 +3008,7 @@
 <category><pattern>VACANT LOT</pattern><template>vacant lot?  Briefly, vacant lot means a lot on which there are no permanent buildings.</template></category>
 <category><pattern>VACANTLY</pattern><template>vacantly?  Briefly, vacantly means in a vacant manner.</template></category>
 <category><pattern>VACATE</pattern><template>vacate?  Briefly, vacate means leave (a job means post means post means or position) voluntarily.</template></category>
-<category><pattern>VACATION</pattern><template>vacation?  Briefly, vacation means leisure time away from work devoted to rest or pleasure.</template></category>
+<!-- <category><pattern>VACATION</pattern><template>vacation?  Briefly, vacation means leisure time away from work devoted to rest or pleasure.</template></category> -->
 <category><pattern>VACATION HOME</pattern><template>vacation home?  Briefly, vacation home means a dwelling (a second home) where you live while you are on vacation.</template></category>
 <category><pattern>VACATION SPOT</pattern><template>vacation spot?  Briefly, vacation spot means an area where many people go for recreation.</template></category>
 <category><pattern>VACATIONER</pattern><template>vacationer?  Briefly, vacationer means someone on vacation; someone who is devoting time to pleasure or relaxation rather than to work.</template></category>
@@ -4106,12 +4106,12 @@
 <category><pattern>VERY LOUDLY</pattern><template>very loudly?  Briefly, very loudly means a direction in music; to be played very loudly.</template></category>
 <category><pattern>VERY LOW DENSITY LIPOPROTEIN</pattern><template>very low density lipoprotein?  Briefly, very low density lipoprotein means large lipoproteins rich in triglycerides; VLDLs circulate through the blood giving up their triglycerides to fat and muscle tissue until the VLDL remnants are modified and converted into LDL.</template></category>
 <category><pattern>VERY LOW FREQUENCY</pattern><template>very low frequency?  Briefly, very low frequency means 3 to 30 kilohertz.</template></category>
-<category><pattern>VERY MUCH</pattern><template>very much?  Briefly, very much means to a very great degree or extent.</template></category>
+<!-- <category><pattern>VERY MUCH</pattern><template>very much?  Briefly, very much means to a very great degree or extent.</template></category> -->
 <category><pattern>VERY MUCH LIKE</pattern><template>very much like?  Briefly, very much like means in a similar way.</template></category>
 <category><pattern>VERY PISTOL</pattern><template>very pistol?  Briefly, very pistol means a pistol for firing Very-light flares.</template></category>
 <category><pattern>VERY REVEREND</pattern><template>very reverend?  Briefly, very reverend means a title of respect for various ecclesiastical officials (as cathedral deans and canons and others).</template></category>
 <category><pattern>VERY SOFTLY</pattern><template>very softly?  Briefly, very softly means a direction in music; to be played very softly.</template></category>
-<category><pattern>VERY WELL</pattern><template>very well?  Briefly, very well means quite well.</template></category>
+<!-- <category><pattern>VERY WELL</pattern><template>very well?  Briefly, very well means quite well.</template></category> -->
 <category><pattern>VESALIUS</pattern><template>vesalius?  Briefly, vesalius means a Flemish surgeon who is considered the father of modern anatomy (1514-1564).</template></category>
 <category><pattern>VESEY</pattern><template>vesey?  Briefly, vesey means United States freed slave and insurrectionist in South Carolina who was involved in planning an uprising of slaves and was hanged (1767-1822).</template></category>
 <category><pattern>VESICA</pattern><template>vesica?  Briefly, vesica means a distensible membranous sac (usually containing liquid or gas).</template></category>
@@ -4957,7 +4957,7 @@
 <category><pattern>VLDL</pattern><template>vldl?  Briefly, vldl means large lipoproteins rich in triglycerides; VLDLs circulate through the blood giving up their triglycerides to fat and muscle tissue until the VLDL remnants are modified and converted into LDL.</template></category>
 <category><pattern>VLF</pattern><template>vlf?  Briefly, vlf means 3 to 30 kilohertz.</template></category>
 <category><pattern>VOCABLE</pattern><template>vocable?  Briefly, vocable means a word that is spoken aloud.</template></category>
-<category><pattern>VOCABULARY</pattern><template>vocabulary?  Briefly, vocabulary means a listing of the words used in some enterprise.</template></category>
+<!-- <category><pattern>VOCABULARY</pattern><template>vocabulary?  Briefly, vocabulary means a listing of the words used in some enterprise.</template></category> -->
 <category><pattern>VOCAL</pattern><template>vocal?  Briefly, vocal means relating to or designed for or using the singing voice.</template></category>
 <category><pattern>VOCAL BAND</pattern><template>vocal band?  Briefly, vocal band means either of two pairs of folds of mucous membrane projecting into the larynx.</template></category>
 <category><pattern>VOCAL CORD</pattern><template>vocal cord?  Briefly, vocal cord means either of two pairs of folds of mucous membrane projecting into the larynx.</template></category>
@@ -4992,7 +4992,7 @@
 
 
 
-<category>
+<!-- <category>
 <pattern>I *</pattern>
 <template>
 <think><set name="topic">iu</set></think> <random>
@@ -5005,9 +5005,9 @@
   <li>I haven't heard anything like that before.</li>
 </random> 
 </template>
-</category>  
+</category> -->  
 
-<category>
+<!-- <category>
 <pattern>YOU *</pattern>
 <template>
 <think><set name="topic">iu</set></think> <random>
@@ -5020,7 +5020,7 @@
   <li>I haven't heard anything like that before.</li>
 </random> 
 </template>
-</category>  
+</category> -->  
 
 
 

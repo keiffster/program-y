@@ -1086,29 +1086,29 @@ Can we talk about humor?
 </category>
 
 
-  <category>
+  <!-- <category>
   <pattern>HUMOR</pattern> 
   <template>
   Humor is a message that communicates laughter. Shall I tell you a joke?
   <think><set name="topic">humor</set></think>
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HUMOUR</pattern> 
   <template>
   Humour is a message that communicates laughter. Shall I tell you a joke?
   <think><set name="topic">humor</set></think>
   </template>
-  </category>
+  </category> -->
 
-<category>
+<!-- <category>
 <pattern>CHUCKLE</pattern> 
 <template>
 I think this is something to do with humor. Can we talk about humor?
 <think><set name="topic">humor</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>*CHUCKLE*</pattern> 
@@ -1164,26 +1164,26 @@ I think this is something to do with humor. Can we talk about humor?
 
 
 
-<category>
+<!-- <category>
 <pattern>JOKE</pattern>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>JOKES</pattern>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TELL ME ANOTHER JOKE</pattern>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
 
 <category>
@@ -1235,13 +1235,13 @@ I think this is something to do with humor. Can we talk about humor?
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>GO ON</pattern>
 <that>SHALL I TELL YOU A JOKE</that>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>ALRIGHT</pattern>
@@ -1315,13 +1315,13 @@ I think this is something to do with humor. Can we talk about humor?
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>ALRIGHT</pattern>
 <that>SHALL I TELL YOU A JOKE</that>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>NO</pattern>
@@ -1475,12 +1475,12 @@ I think this is something to do with humor. Can we talk about humor?
 </category>
 
 
-<category>
+<!-- <category>
 <pattern>JOKE</pattern>
 <template>
 <srai>JOKES NEXT QUESTION</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>JOKES NEXT QUESTION</pattern>
@@ -2158,7 +2158,7 @@ Another joke?
 </template>
 </category>
 
-<category><pattern>TELL ME A BLONDE JOKE</pattern>
+<!-- <category><pattern>TELL ME A BLONDE JOKE</pattern>
 <template>
 <random>
  <li>A famous soccer player parked his brand new Porsche outside a gift store and went inside to shop. About ten minutes later a blonde salesgirl ran up to him shouting, "I just saw someone steal your sports car." "Did you try to stop him?" asked the soccer player. "No," said the blonde. "I did better than that, I got the registration number of the car!"</li>
@@ -2167,7 +2167,7 @@ Another joke?
 <think><set name="topic">jokes</set></think>
 <think><set name="emotion">laughing</set></think>
 </template>
-</category>
+</category> -->
 
 <category><pattern>ASK A RIDDLE</pattern>
 <template>
@@ -2845,77 +2845,77 @@ Another joke?
 <think><set name="topic">geography</set></think></template> 
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>ACAPULCO</pattern> 
   <template>
   Acapulco is a city on the Pacific coast of Mexico. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ADELAIDE</pattern> 
   <template>
   ADELAIDE is a city in southern Australia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>AFGHANISTAN</pattern> 
   <template>
   Southern Asia, north of Pakistan. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ALABAMA</pattern> 
   <template>
   ALABAMA is a southern state between Mississippi and Georgia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ALAMO</pattern> 
   <template>
   ALAMO is in San Antonio, Texas. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ALASKA</pattern> 
   <template>
   Alaska is in the northwest corner of North America, between Russia and Canada. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ALBANIA</pattern> 
   <template>
   ALBANIA is on the Adriatic Sea, bordering Greece and the former Yugoslavia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-    <category>
+    <!-- <category>
   <pattern>ALBUQUERQUE</pattern> 
   <template>
   ALBUQUERQUE is a city in New Mexico. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ALGERIA</pattern> 
   <template>
   Algeria is in Northern Africa, bordering the Mediterranean Sea, between Morocco and Tunisia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>AMERICAN SAMOA</pattern> 
@@ -2925,13 +2925,13 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>AMERICA</pattern> 
   <template>
   America could refer to North and South America, or to the United States. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>AMSTERDAM</pattern> 
@@ -3014,13 +3014,13 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>ARIZONA</pattern> 
   <template>
   ARIZONA is in the south western United States, bordering California, Nevada, Utah and New Mexico. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>ARKANSAS</pattern> 
@@ -3054,13 +3054,13 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>ASIA</pattern> 
   <template>
   Asia is the largest continent. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>ATHENS</pattern> 
@@ -3174,13 +3174,13 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>BELGIUM</pattern> 
   <template>
   Belgium is a country in western Europe, between France, Germany and Holland. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>BELIZE</pattern> 
@@ -3294,12 +3294,12 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>BRAZIL</pattern> 
   <template>Brazil is in South America.
    
 <think><set name="topic">geography</set></think></template> 
-  </category>
+  </category> -->
    
   <category>
   <pattern>BRISBANE</pattern> 
@@ -3348,13 +3348,13 @@ Another joke?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>BRUSSELS</pattern> 
   <template>
   Brussels is a city in Belgium. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>BUDAPEST</pattern> 
@@ -3444,12 +3444,12 @@ Somewhere in California, I presume?
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>CANADA</pattern> 
   <template>Canada occupies most of North America.
  
 <think><set name="topic">geography</set></think></template> 
-  </category>
+  </category> -->
    
   <category>
   <pattern>CANBERRA</pattern> 
@@ -3745,13 +3745,13 @@ Cheddar cheese comes from England.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>DENMARK</pattern> 
   <template>
   Denmark is a country in Western Europe, between Germany and Norway. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>DENVER</pattern> 
@@ -3842,21 +3842,21 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>ESTONIA</pattern> 
   <template>
   Estonia is in Eastern Europe, bordering the Baltic Sea and Gulf of Finland, between Latvia and Russia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>ETHIOPIA</pattern> 
   <template>
   Ethiopia is in Eastern Africa, west of Somalia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>EUROPA ISLAND</pattern> 
@@ -3866,12 +3866,12 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>EUROPE</pattern> 
   <template>Europe is between Asia and America.
  
 <think><set name="topic">geography</set></think></template> 
-  </category>
+  </category> -->
    
   <category>
   <pattern>FALKLAND ISLANDS {ISLAS MALVINAS}</pattern> 
@@ -3881,53 +3881,53 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>FAROE ISLANDS</pattern> 
   <template>
   The Faroe Islands are in Northern Europe, island group between the Norwegian Sea and the north Atlantic Ocean, about one half of the way from Iceland to Norway. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>FIJI</pattern> 
   <template>
   Fiji is a coutry in Oceania, island group in the South Pacific Ocean, about two thirds of the way from Hawaii to New Zealand. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>FINLAND</pattern> 
   <template>
   Finland is a country in eastern europe, bordering Sweden and Russia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>FLORIDA</pattern> 
   <template>
   FLORIDA is in the southeast United States, extending on a large peninsula. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>FRANCE</pattern> 
   <template>
   France is a country between Germany and Spain. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>FRANKFURT</pattern> 
   <template>
   Frankfurt is a large city in western Germany. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>FRENCH GUIANA</pattern> 
@@ -3937,13 +3937,13 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>FRENCH POLYNESIA</pattern> 
   <template>
   French Polynesia is in Oceania, archipelago in the South Pacific Ocean, about one half of the way from South America to Australia. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>FRENCH SOUTHERN AND ANTARCTIC ISLANDS</pattern> 
@@ -3953,68 +3953,68 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>FRESNO</pattern> 
   <template>
   Fresno is a small city in California. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GABON</pattern> 
   <template>
   Gabon is in Western Africa, bordering the Atlantic Ocean at the Equator, between Congo and Equatorial Guinea. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GAZA</pattern> 
   <template>Gaza is part of Palestine on the Mediterranian sea.
  
 <think><set name="topic">geography</set></think></template> 
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GAZA STRIP</pattern> 
   <template>
   The Gaza Strip is in the Middle East, bordering the Mediterranean Sea, between Egypt and Israel. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GEORGIA</pattern> 
   <template>
   GEORGIA is a southern state of the USA, on the Atlantic ocean, north of Florida. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GERMANY</pattern> 
   <template>
   Germany is a country right in the middle of Europe. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GHANA</pattern> 
   <template>
   Ghana is a nation in west Africa. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GIBRALTAR</pattern> 
   <template>
   Gibralet is in Southwestern Europe, bordering the Strait of Gibraltar, which links the Mediterranean Sea and the North Atlantic Ocean, on the southern coast of Spain. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>GLORIOSO ISLANDS</pattern> 
@@ -4024,61 +4024,61 @@ Denver is a city in Colorado.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>GREECE</pattern> 
   <template>
 Greece is a country in the Balkans. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GREENLAND</pattern> 
   <template>
   Greenland is in Northern North America, island between the Arctic Ocean and the North Atlantic Ocean, northeast of Canada. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GRENADA</pattern> 
   <template>
   Grenada is in the Caribbean, island in the Caribbean Sea, north of Trinidad and Tobago. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GUADELOUPE</pattern> 
   <template>
   Guadeloupe is in Caribbean, islands in the eastern Caribbean Sea, southeast of Puerto Rico. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GUAM</pattern> 
   <template>
   Guam is in Oceania, island in the North Pacific Ocean, about three quarters of the way from Hawaii to the Philippines. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GUATEMALA</pattern> 
   <template>
   Guatemala is a country in central America. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GUERNSEY</pattern> 
   <template>
   Guernsey is in Western Europe, islands in the English Channel, northwest of France. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
   <category>
   <pattern>GUINEA BISSAU</pattern> 
@@ -4088,52 +4088,52 @@ Greece is a country in the Balkans.
 <think><set name="topic">geography</set></think></template>
   </category>
    
-  <category>
+  <!-- <category>
   <pattern>GUINEA</pattern> 
   <template>
   Guinea is in Western Africa, bordering the North Atlantic Ocean, between Guinea Bissau and Sierra Leone. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>GUYANA</pattern> 
   <template>
   Guyana is in Northern South America, bordering the North Atlantic Ocean, between Suriname and Venezuela. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>HADES</pattern> 
   <template>
   Hades is Hell. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
    
-  <category>
+  <!-- <category>
   <pattern>HAITI</pattern> 
   <template>
   Haiti is in the Caribbean, western one third of the island of Hispaniola, between the Caribbean Sea and the North Atlantic Ocean, west of the Dominican Republic. 
    
 <think><set name="topic">geography</set></think></template>
-  </category>
+  </category> -->
 
                    
 
 
 
 
-<category><pattern>REALITY</pattern>
+<!-- <category><pattern>REALITY</pattern>
 <template><srai>what is reality</srai></template>
-</category>
-<category><pattern>VERSION</pattern>
+</category> -->
+<!-- <category><pattern>VERSION</pattern>
 <template><srai>what version are you</srai></template>
-</category>
-<category><pattern>WASSUP</pattern>
+</category> -->
+<!-- <category><pattern>WASSUP</pattern>
 <template><srai>what is up</srai></template>
-</category>
+</category> -->
 <category><pattern>NEXT SUBJECT</pattern>
 <template><srai>what else can you talk about</srai></template>
 </category>
@@ -4149,18 +4149,18 @@ Greece is a country in the Balkans.
 <category><pattern>MEANING WHAT</pattern>
 <template><srai>what do you mean</srai></template>
 </category>
-<category><pattern>MEANING</pattern>
+<!-- <category><pattern>MEANING</pattern>
 <template><srai>what do you mean</srai></template>
-</category>
+</category> -->
 <category><pattern>CUSTOMERS</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
-<category><pattern>TEMPLATE</pattern>
+<!-- <category><pattern>TEMPLATE</pattern>
 <template><srai>What is a template</srai></template>
-</category>
-<category><pattern>HOORAY</pattern>
+</category> -->
+<!-- <category><pattern>HOORAY</pattern>
 <template><srai>wow</srai></template>
-</category>
+</category> -->
 <category><pattern>YOU WON THE LOEBNER PRIZE</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
@@ -4191,9 +4191,9 @@ Greece is a country in the Balkans.
 <category><pattern>YOU KNOW WHEN THEY *</pattern>
 <template><srai>when they <star /></srai></template>
 </category>
-<category><pattern>YOU KNOW MY NAME</pattern>
+<!-- <category><pattern>YOU KNOW MY NAME</pattern>
 <template><srai>who am i</srai></template>
-</category>
+</category> -->
 <category><pattern>YOU DID WIN THE LOEBNER PRIZE</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
@@ -4239,9 +4239,9 @@ Greece is a country in the Balkans.
 <category><pattern>YOU TELL ME *</pattern>
 <template><srai>tell me <star /></srai></template>
 </category>
-<category><pattern>YOU TELL *</pattern>
+<!-- <category><pattern>YOU TELL *</pattern>
 <template><srai>tell <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>YOU DO WHAT</pattern>
 <template><srai>what do you do</srai></template>
 </category>
@@ -4353,30 +4353,30 @@ Greece is a country in the Balkans.
 <category><pattern>HAVE YOU CONSIDERED BECOMING *</pattern>
 <template><srai>will you become <star /></srai></template>
 </category>
-<category><pattern>GEORGE BUSH</pattern>
+<!-- <category><pattern>GEORGE BUSH</pattern>
 <template><srai>who is george bush</srai></template>
-</category>
-<category><pattern>ALAN TURING</pattern>
+</category> -->
+<!-- <category><pattern>ALAN TURING</pattern>
 <template><srai>who is alan turing</srai></template>
-</category>
-<category><pattern>HOLY SHIT</pattern>
+</category> -->
+<!-- <category><pattern>HOLY SHIT</pattern>
 <template><srai>wow</srai></template>
-</category>
-<category><pattern>JOHN LENNON</pattern>
+</category> -->
+<!-- <category><pattern>JOHN LENNON</pattern>
 <template><srai>who is john lennon</srai></template>
-</category>
-<category><pattern>THANK YOU *</pattern>
+</category> -->
+<!-- <category><pattern>THANK YOU *</pattern>
 <template><srai>THANK YOU</srai></template>
-</category>
-<category><pattern>THANK *</pattern>
+</category> -->
+<!-- <category><pattern>THANK *</pattern>
 <template><srai>thanks</srai></template>
-</category>
+</category> -->
 <category><pattern>NOOSPHERE</pattern>
 <template><srai>what is the noosphere</srai></template>
 </category>
-<category><pattern>CARNEGIE MELLON</pattern>
+<!-- <category><pattern>CARNEGIE MELLON</pattern>
 <template><srai>what is carnegie mellon</srai></template>
-</category>
+</category> -->
 <category><pattern>EINSTEIN</pattern>
 <template><srai>who is einstein</srai></template>
 </category>
@@ -4389,39 +4389,39 @@ Greece is a country in the Balkans.
 <category><pattern>SHRDLHU</pattern>
 <template><srai>what is shrdlhu</srai></template>
 </category>
-<category><pattern>EXTENSIONAL</pattern>
+<!-- <category><pattern>EXTENSIONAL</pattern>
 <template><srai>what is the extensional</srai></template>
-</category>
-<category><pattern>GIVE IT A TRY</pattern>
+</category> -->
+<!-- <category><pattern>GIVE IT A TRY</pattern>
 <template><srai>try it</srai></template>
-</category>
+</category> -->
 <category><pattern>SEEN ANY GOOD MOVIES</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
 <category><pattern>SEEN ANY GOOD MOVIES LATELY</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
-<category><pattern>DOG</pattern>
+<!-- <category><pattern>DOG</pattern>
 <template><srai>what is a dog</srai></template>
-</category>
+</category> -->
 <category><pattern>WUZ UP</pattern>
 <template><srai>what is up</srai></template>
 </category>
 <category><pattern>WHASSUP</pattern>
 <template><srai>what is up</srai></template>
 </category>
-<category><pattern>UMM *</pattern>
+<!-- <category><pattern>UMM *</pattern>
 <template><srai>um</srai>.     <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHATSUP</pattern>
 <template><srai>what is up</srai></template>
 </category>
-<category><pattern>ANOTHER JOKE</pattern>
+<!-- <category><pattern>ANOTHER JOKE</pattern>
 <template><srai>tell me another joke</srai></template>
-</category>
-<category><pattern>HOLD ON</pattern>
+</category> -->
+<!-- <category><pattern>HOLD ON</pattern>
 <template><srai>wait a second</srai></template>
-</category>
+</category> -->
 <category><pattern>TRY IT YOURSELF</pattern>
 <template><srai>try it</srai></template>
 </category>
@@ -4440,9 +4440,9 @@ Greece is a country in the Balkans.
 <category><pattern>DID YOU TAKE AN IQ *</pattern>
 <template><srai>WHAT IS YOUR IQ</srai></template>
 </category>
-<category><pattern>DID YOU HEAR ABOUT *</pattern>
+<!-- <category><pattern>DID YOU HEAR ABOUT *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DID YOU KNOW THAT THE *</pattern>
 <template><srai>the <star /></srai></template>
 </category>
@@ -4470,27 +4470,27 @@ Greece is a country in the Balkans.
 <category><pattern>THEN WHAT DID YOU MEAN</pattern>
 <template><srai>what do you mean</srai></template>
 </category>
-<category><pattern>THEN WHAT *</pattern>
+<!-- <category><pattern>THEN WHAT *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
-<category><pattern>THEN WHO *</pattern>
+</category> -->
+<!-- <category><pattern>THEN WHO *</pattern>
 <template><srai>who <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THEN WHY DID YOU SAY IT</pattern>
 <template><srai>why did you say it</srai></template>
 </category>
-<category><pattern>THEN WHY *</pattern>
+<!-- <category><pattern>THEN WHY *</pattern>
 <template><srai>why <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>CUSTOMER</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
 <category><pattern>CUSTOMER RELATIONS MANAGEMENT</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
-<category><pattern>SO WHAT IS UP</pattern>
+<!-- <category><pattern>SO WHAT IS UP</pattern>
 <template><srai>what is up</srai></template>
-</category>
+</category> -->
 <category><pattern>AIML</pattern>
 <template><srai>what is aiml</srai></template>
 </category>
@@ -4530,21 +4530,21 @@ Greece is a country in the Balkans.
 <category><pattern>AND WHY NOT</pattern>
 <template><srai>why not</srai></template>
 </category>
-<category><pattern>MARIJUANA</pattern>
+<!-- <category><pattern>MARIJUANA</pattern>
 <template><srai>what is marijuana</srai></template>
-</category>
-<category><pattern>CHAT</pattern>
+</category> -->
+<!-- <category><pattern>CHAT</pattern>
 <template><srai>talk</srai></template>
-</category>
-<category><pattern>SITUATION</pattern>
+</category> -->
+<!-- <category><pattern>SITUATION</pattern>
 <template><srai>what situation</srai></template>
-</category>
+</category> -->
 <category><pattern>THANX *</pattern>
 <template><srai>thanks</srai>.     <srai>  <star /></srai></template>
 </category>
-<category><pattern>THANX</pattern>
+<!-- <category><pattern>THANX</pattern>
 <template><srai>THANK YOU</srai></template>
-</category>
+</category> -->
 <category><pattern>TALKED ABOUT WHAT</pattern>
 <template><srai>what did we talk about</srai></template>
 </category>
@@ -4602,9 +4602,9 @@ Greece is a country in the Balkans.
 <category><pattern>WOULD YOU TELL *</pattern>
 <template><srai>tell <star /></srai></template>
 </category>
-<category><pattern>WOULD YOU EVER *</pattern>
+<!-- <category><pattern>WOULD YOU EVER *</pattern>
 <template><srai>would you <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WOULD YOU PRETTY *</pattern>
 <template><srai>would you <star /></srai></template>
 </category>
@@ -4683,9 +4683,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT GOOD</pattern>
 <template><srai>that is good</srai></template>
 </category>
-<category><pattern>THAT WAS MEAN</pattern>
+<!-- <category><pattern>THAT WAS MEAN</pattern>
 <template><srai>that is mean</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT WAS QUITE *</pattern>
 <template><srai>that was <star /></srai></template>
 </category>
@@ -4734,9 +4734,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT WAS PRETTY *</pattern>
 <template><srai>that was <star /></srai></template>
 </category>
-<category><pattern>THAT MADE NO SENSE</pattern>
+<!-- <category><pattern>THAT MADE NO SENSE</pattern>
 <template><srai>that makes no sense</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT WOULD BE VERY *</pattern>
 <template><srai>that would be <star /></srai></template>
 </category>
@@ -4758,9 +4758,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS UNTIL *</pattern>
 <template><srai>until <star /></srai></template>
 </category>
-<category><pattern>THAT IS NICE *</pattern>
+<!-- <category><pattern>THAT IS NICE *</pattern>
 <template><srai>that is nice</srai>.    <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS QUITE *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
@@ -4776,18 +4776,18 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS A VERY *</pattern>
 <template><srai>that is a <star /></srai></template>
 </category>
-<category><pattern>THAT IS A GOOD *</pattern>
+<!-- <category><pattern>THAT IS A GOOD *</pattern>
 <template><srai>that is good</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS A DUMB *</pattern>
 <template><srai>that is dumb</srai></template>
 </category>
 <category><pattern>THAT IS A RATHER *</pattern>
 <template><srai>that is a <star /></srai></template>
 </category>
-<category><pattern>THAT IS A LITTLE *</pattern>
+<!-- <category><pattern>THAT IS A LITTLE *</pattern>
 <template><srai>that is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS A * NOT A *</pattern>
 <template><srai>that is a <star /></srai>. <srai>that is not a <star index="2" /></srai></template>
 </category>
@@ -4797,9 +4797,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS INDEED *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
-<category><pattern>THAT IS ALRIGHT</pattern>
+<!-- <category><pattern>THAT IS ALRIGHT</pattern>
 <template><srai>that is all right</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS JUST *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
@@ -4833,9 +4833,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS NOT RIGHT</pattern>
 <template><srai>wrong</srai></template>
 </category>
-<category><pattern>THAT IS NOT CORRECT</pattern>
+<!-- <category><pattern>THAT IS NOT CORRECT</pattern>
 <template><srai>wrong</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS NOT EVEN *</pattern>
 <template><srai>that is not <star /></srai></template>
 </category>
@@ -4848,9 +4848,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS ALWAYS *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
-<category><pattern>THAT IS SO *</pattern>
+<!-- <category><pattern>THAT IS SO *</pattern>
 <template><srai>THAT IS <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS RUDE *</pattern>
 <template><srai>that is rude</srai></template>
 </category>
@@ -4863,9 +4863,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS FAIRLY *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
-<category><pattern>THAT IS NONSENSE</pattern>
+<!-- <category><pattern>THAT IS NONSENSE</pattern>
 <template><srai>wrong</srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS RATHER *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
@@ -4920,9 +4920,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS TOTALY *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
-<category><pattern>THAT IS AMAZING *</pattern>
+<!-- <category><pattern>THAT IS AMAZING *</pattern>
 <template><srai>that is amazing </srai>.     <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THAT IS WONDERFUL</pattern>
 <template><srai>wonderful</srai></template>
 </category>
@@ -4944,9 +4944,9 @@ Greece is a country in the Balkans.
 <category><pattern>THAT IS TOO *</pattern>
 <template><srai>that is <star /></srai></template>
 </category>
-<category><pattern>THAT THEY *</pattern>
+<!-- <category><pattern>THAT THEY *</pattern>
 <template><srai>they <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THAT DOES NOT SOUND *</pattern>
 <template><srai>that is not <star /></srai></template>
 </category>
@@ -4974,9 +4974,9 @@ Greece is a country in the Balkans.
 <category><pattern>EPISTEMOLOGICAL</pattern>
 <template><srai>what is epistemology</srai></template>
 </category>
-<category><pattern>SUP</pattern>
+<!-- <category><pattern>SUP</pattern>
 <template><srai>WHAT IS UP</srai></template>
-</category>
+</category> -->
 <category><pattern>COGITO ERGO SUM</pattern>
 <template><srai>who is descartes</srai></template>
 </category>
@@ -4986,9 +4986,9 @@ Greece is a country in the Balkans.
 <category><pattern>WOMAN AND *</pattern>
 <template><srai>woman</srai>.     <srai>  <star /></srai></template>
 </category>
-<category><pattern>AI</pattern>
+<!-- <category><pattern>AI</pattern>
 <template><srai>what is ai</srai></template>
-</category>
+</category> -->
 <category><pattern>22</pattern>
 <template><srai>twenty two</srai></template>
 </category>
@@ -5019,15 +5019,15 @@ Greece is a country in the Balkans.
 <category><pattern>IT DOES NOT MAKE SENSE *</pattern>
 <template><srai>that does not make sense</srai></template>
 </category>
-<category><pattern>MORE</pattern>
+<!-- <category><pattern>MORE</pattern>
 <template><srai>tell me more</srai></template>
-</category>
+</category> -->
 <category><pattern>GUESS WHAT COLOR MY * ARE</pattern>
 <template><srai>what color are my <star /></srai></template>
 </category>
-<category><pattern>GUESS MY NAME</pattern>
+<!-- <category><pattern>GUESS MY NAME</pattern>
 <template><srai>what is my name</srai></template>
-</category>
+</category> -->
 <category><pattern>CHAOS</pattern>
 <template><srai>what is chaos</srai></template>
 </category>
@@ -5040,9 +5040,9 @@ Greece is a country in the Balkans.
 <category><pattern>WOMEN</pattern>
 <template><srai>talk about women</srai></template>
 </category>
-<category><pattern>MAKE ME LAUGH</pattern>
+<!-- <category><pattern>MAKE ME LAUGH</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>WHEN I ASKED YOU *</pattern>
 <template><srai>when I asked <star /></srai></template>
 </category>
@@ -5103,9 +5103,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHEN IS YOUR B *</pattern>
 <template><srai>what is your birthday</srai></template>
 </category>
-<category><pattern>WHEN IS YOUR BIRTHDAY</pattern>
+<!-- <category><pattern>WHEN IS YOUR BIRTHDAY</pattern>
 <template><srai>WHAT IS YOUR BIRTHDAY</srai></template>
-</category>
+</category> -->
 <category><pattern>WHEN IS YOUR BIRTHDAY *</pattern>
 <template><srai>what is your birthday</srai></template>
 </category>
@@ -5184,24 +5184,24 @@ Greece is a country in the Balkans.
 <category><pattern>IN WHICH PROGRAMMING LANGUAGE *</pattern>
 <template><srai>what language <star /> in</srai></template>
 </category>
-<category><pattern>IN WHICH *</pattern>
+<!-- <category><pattern>IN WHICH *</pattern>
 <template><srai>which <star /> IN</srai></template>
-</category>
+</category> -->
 <category><pattern>IN WHAT LANGUAGE</pattern>
 <template><srai>what language</srai></template>
 </category>
 <category><pattern>IN WHAT</pattern>
 <template><srai>what in</srai></template>
 </category>
-<category><pattern>THX</pattern>
+<!-- <category><pattern>THX</pattern>
 <template><srai>thanks</srai></template>
-</category>
-<category><pattern>HITLER</pattern>
+</category> -->
+<!-- <category><pattern>HITLER</pattern>
 <template><srai>who is hitler</srai></template>
-</category>
-<category><pattern>WUT</pattern>
+</category> -->
+<!-- <category><pattern>WUT</pattern>
 <template><srai>what</srai></template>
-</category>
+</category> -->
 <category><pattern>ELIZA</pattern>
 <template><srai>who is eliza</srai></template>
 </category>
@@ -5256,9 +5256,9 @@ Greece is a country in the Balkans.
 <category><pattern>IF * WHY *</pattern>
 <template><srai>why <star index="2" /></srai></template>
 </category>
-<category><pattern>FANTASTIC</pattern>
+<!-- <category><pattern>FANTASTIC</pattern>
 <template><srai>wow</srai></template>
-</category>
+</category> -->
 <category><pattern>WASSAP</pattern>
 <template><srai>what is up</srai></template>
 </category>
@@ -5274,12 +5274,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT PURPOSE DO YOU *</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
-<category><pattern>WHAT YEAR IS IT</pattern>
+<!-- <category><pattern>WHAT YEAR IS IT</pattern>
 <template><srai>YEAR</srai></template>
-</category>
-<category><pattern>WHAT YEAR *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT YEAR *</pattern>
 <template><srai>when <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE THERE NAMES</pattern>
 <template><srai>what are their names</srai></template>
 </category>
@@ -5298,9 +5298,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT ARE SOME OF * OPERAS</pattern>
 <template><srai>what is your favorite opera</srai></template>
 </category>
-<category><pattern>WHAT ARE SOME *</pattern>
+<!-- <category><pattern>WHAT ARE SOME *</pattern>
 <template><srai>what are <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE ENTITIES</pattern>
 <template><srai>what is an entity</srai></template>
 </category>
@@ -5349,9 +5349,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT ARE EMOTIONS</pattern>
 <template><srai>what is emotion</srai></template>
 </category>
-<category><pattern>WHAT ARE WE TALKING ABOUT</pattern>
+<!-- <category><pattern>WHAT ARE WE TALKING ABOUT</pattern>
 <template><srai>WHAT IS THE TOPIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE GAMES</pattern>
 <template><srai>what is a game</srai></template>
 </category>
@@ -5382,24 +5382,24 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT ARE YOU ABOUT</pattern>
 <template><srai>what are you</srai></template>
 </category>
-<category><pattern>WHAT ARE YOU TALKING ABOUT</pattern>
+<!-- <category><pattern>WHAT ARE YOU TALKING ABOUT</pattern>
 <template><srai>WHAT IS THE TOPIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE YOU TALKING ABOUT *</pattern>
 <template><srai>what are you talking about</srai></template>
 </category>
-<category><pattern>WHAT ARE YOU UP TO *</pattern>
+<!-- <category><pattern>WHAT ARE YOU UP TO *</pattern>
 <template><srai>what is up</srai></template>
-</category>
-<category><pattern>WHAT ARE YOU UP TO</pattern>
+</category> -->
+<!-- <category><pattern>WHAT ARE YOU UP TO</pattern>
 <template><srai>what is up</srai></template>
-</category>
-<category><pattern>WHAT ARE YOU IN *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT ARE YOU IN *</pattern>
 <template><srai>where are you</srai></template>
-</category>
-<category><pattern>WHAT ARE YOU THINKING ABOUT</pattern>
+</category> -->
+<!-- <category><pattern>WHAT ARE YOU THINKING ABOUT</pattern>
 <template><srai>WHAT ARE YOU THINKING</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE YOU INTO</pattern>
 <template><srai>what do you do for fun</srai></template>
 </category>
@@ -5445,9 +5445,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT ARE YOU GOING TO DO *</pattern>
 <template><srai>what are you going to do</srai></template>
 </category>
-<category><pattern>WHAT ARE YOU DOING *</pattern>
+<!-- <category><pattern>WHAT ARE YOU DOING *</pattern>
 <template><srai>what are you doing</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ARE YOU EXACTLY *</pattern>
 <template><srai>what are you <star /></srai></template>
 </category>
@@ -5613,18 +5613,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT TIME IT IS</pattern>
 <template><srai>TIME</srai></template>
 </category>
-<category><pattern>WHAT TIME IS IT THERE</pattern>
+<!-- <category><pattern>WHAT TIME IS IT THERE</pattern>
 <template><srai>TIME</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT TIME</pattern>
 <template><srai>when</srai></template>
 </category>
 <category><pattern>WHAT ELSE DO YOU KNOW ABOUT *</pattern>
 <template><srai>what do you know about <star /></srai></template>
 </category>
-<category><pattern>WHAT ELSE DO YOU *</pattern>
+<!-- <category><pattern>WHAT ELSE DO YOU *</pattern>
 <template><srai>what do you <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ELSE DO YOU LIKE</pattern>
 <template><srai>what do you like</srai></template>
 </category>
@@ -5649,15 +5649,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT ELSE MAKES *</pattern>
 <template><srai>what makes <star /></srai></template>
 </category>
-<category><pattern>WHAT ELSE IS *</pattern>
+<!-- <category><pattern>WHAT ELSE IS *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT ELSE HAVE *</pattern>
 <template><srai>what have <star /></srai></template>
 </category>
-<category><pattern>WHAT ELSE *</pattern>
+<!-- <category><pattern>WHAT ELSE *</pattern>
 <template><srai>WHAT <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DID I JUST SAY</pattern>
 <template><srai>what did I say</srai></template>
 </category>
@@ -5667,15 +5667,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DID YOU MEAN * PERSON</pattern>
 <template><srai>who is x person</srai></template>
 </category>
-<category><pattern>WHAT DID YOU MEAN *</pattern>
+<!-- <category><pattern>WHAT DID YOU MEAN *</pattern>
 <template><srai>what do you mean</srai></template>
-</category>
-<category><pattern>WHAT DID YOU MEAN</pattern>
+</category> -->
+<!-- <category><pattern>WHAT DID YOU MEAN</pattern>
 <template><srai>what do you mean</srai></template>
-</category>
-<category><pattern>WHAT DID YOU DO</pattern>
+</category> -->
+<!-- <category><pattern>WHAT DID YOU DO</pattern>
 <template><srai>what do you do</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DID YOU ASK JUST *</pattern>
 <template><srai>what did you say <star /></srai></template>
 </category>
@@ -5718,21 +5718,21 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT MONTH IS IT</pattern>
 <template><srai>MONTH</srai></template>
 </category>
-<category><pattern>WHAT IT IS</pattern>
+<!-- <category><pattern>WHAT IT IS</pattern>
 <template><srai>what is it</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT WERE YOU TALKING *</pattern>
 <template><srai>what is the topic</srai></template>
 </category>
 <category><pattern>WHAT WERE YOU JUST *</pattern>
 <template><srai>what were you <star /></srai></template>
 </category>
-<category><pattern>WHAT WERE WE TALKING ABOUT</pattern>
+<!-- <category><pattern>WHAT WERE WE TALKING ABOUT</pattern>
 <template><srai>what is the subject</srai></template>
-</category>
-<category><pattern>WHAT WERE WE TALKING *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT WERE WE TALKING *</pattern>
 <template><srai>what is the subject</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT WERE WE JUST *</pattern>
 <template><srai>what were we <star /></srai></template>
 </category>
@@ -5760,18 +5760,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT REDUCTIONISM</pattern>
 <template><srai>what is reductionism</srai></template>
 </category>
-<category><pattern>WHAT EVER</pattern>
+<!-- <category><pattern>WHAT EVER</pattern>
 <template><srai>whatever</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT EVER *</pattern>
 <template><srai>whatever <star /></srai></template>
 </category>
 <category><pattern>WHAT SUBJECT</pattern>
 <template><srai>what is the subject</srai></template>
 </category>
-<category><pattern>WHAT THE HELL *</pattern>
+<!-- <category><pattern>WHAT THE HELL *</pattern>
 <template><srai>WHAT <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT THE VALUE OF *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
@@ -5793,9 +5793,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT CITY DO I LIVE IN</pattern>
 <template><srai>where am i</srai></template>
 </category>
-<category><pattern>WHAT CITY ARE YOU *</pattern>
+<!-- <category><pattern>WHAT CITY ARE YOU *</pattern>
 <template><srai>CITY</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT SHAPE ARE YOU</pattern>
 <template><srai>what do you look like</srai></template>
 </category>
@@ -5820,18 +5820,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT COLOR IS YOUR EYES</pattern>
 <template><srai>what color are your eyes</srai></template>
 </category>
-<category><pattern>WHAT MOVIES DO YOU LIKE</pattern>
+<!-- <category><pattern>WHAT MOVIES DO YOU LIKE</pattern>
 <template><srai>what is your favorite movie</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT MOVIES HAVE YOU SEEN</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
 <category><pattern>WHAT WOULD IT BE</pattern>
 <template><srai>what is it</srai></template>
 </category>
-<category><pattern>WHAT WOULD BE *</pattern>
+<!-- <category><pattern>WHAT WOULD BE *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT WOULD YOU * FOR</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
@@ -5841,9 +5841,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT WOULD YOU LIKE TO * ABOUT</pattern>
 <template><srai>what is your favorite subject</srai></template>
 </category>
-<category><pattern>WHAT WOULD YOU LIKE *</pattern>
+<!-- <category><pattern>WHAT WOULD YOU LIKE *</pattern>
 <template><srai>WHAT WOULD YOU LIKE</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT PLAN</pattern>
 <template><srai>what is your plan</srai></template>
 </category>
@@ -6144,9 +6144,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE DEFINITION OF THE WORD *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
-<category><pattern>WHAT IS THE DEFINITION OF *</pattern>
+<!-- <category><pattern>WHAT IS THE DEFINITION OF *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE REASON</pattern>
 <template><srai>why</srai></template>
 </category>
@@ -6180,24 +6180,24 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE PRESIDENT</pattern>
 <template><srai>who is the president</srai></template>
 </category>
-<category><pattern>WHAT IS THE TIME IN *</pattern>
+<!-- <category><pattern>WHAT IS THE TIME IN *</pattern>
 <template><srai>TIME</srai>. <srai>I am in <star /></srai></template>
-</category>
-<category><pattern>WHAT IS THE TIME *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS THE TIME *</pattern>
 <template><srai>TIME</srai></template>
-</category>
-<category><pattern>WHAT IS THE TIME</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS THE TIME</pattern>
 <template><srai>TIME</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE STORYLINE *</pattern>
 <template><srai>tell me a story</srai></template>
 </category>
 <category><pattern>WHAT IS THE NETHERLANDS</pattern>
 <template><srai>where is the netherlands</srai></template>
 </category>
-<category><pattern>WHAT IS THE CURRENT *</pattern>
+<!-- <category><pattern>WHAT IS THE CURRENT *</pattern>
 <template><srai>what is the <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE MILK MYSTIC</pattern>
 <template><srai>who is the milk mystic</srai></template>
 </category>
@@ -6207,9 +6207,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE JOKE</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
-<category><pattern>WHAT IS THE LOCATION OF *</pattern>
+<!-- <category><pattern>WHAT IS THE LOCATION OF *</pattern>
 <template><srai>where is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE MATTER *</pattern>
 <template><srai>what is the matter</srai></template>
 </category>
@@ -6219,9 +6219,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE DIFFERENCE BETWEEN DEATH *</pattern>
 <template><srai>what is death</srai></template>
 </category>
-<category><pattern>WHAT IS THE DIFFERENCE BETWEEN * AND *</pattern>
+<!-- <category><pattern>WHAT IS THE DIFFERENCE BETWEEN * AND *</pattern>
 <template><srai>what is <star /></srai>. <srai>what is <star index="2" /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE DEAL *</pattern>
 <template><srai>what is the deal</srai></template>
 </category>
@@ -6273,18 +6273,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE NAME OF A *</pattern>
 <template><srai>who is a <star /></srai></template>
 </category>
-<category><pattern>WHAT IS THE NAME OF MY *</pattern>
+<!-- <category><pattern>WHAT IS THE NAME OF MY *</pattern>
 <template><srai>what is my <star /> s name</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE AIML *</pattern>
 <template><srai>what is aiml</srai></template>
 </category>
 <category><pattern>WHAT IS THE PROBLEM *</pattern>
 <template><srai>what is the problem</srai></template>
 </category>
-<category><pattern>WHAT IS THE SUBJECT</pattern>
+<!-- <category><pattern>WHAT IS THE SUBJECT</pattern>
 <template><srai>WHAT IS THE TOPIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE WWW</pattern>
 <template><srai>what is the web</srai></template>
 </category>
@@ -6300,9 +6300,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE LAST BOOK *</pattern>
 <template><srai>what is your favorite book</srai></template>
 </category>
-<category><pattern>WHAT IS THE MEANING OF *</pattern>
+<!-- <category><pattern>WHAT IS THE MEANING OF *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE EXTENSIONAL</pattern>
 <template><srai>what is extensional</srai></template>
 </category>
@@ -6321,12 +6321,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE ROMANS</pattern>
 <template><srai>what are romans</srai></template>
 </category>
-<category><pattern>WHAT IS THE DATE *</pattern>
+<!-- <category><pattern>WHAT IS THE DATE *</pattern>
 <template><srai>DATE</srai></template>
-</category>
-<category><pattern>WHAT IS THE DATE</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS THE DATE</pattern>
 <template><srai>DATE</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE ARMY</pattern>
 <template><srai>what is the military</srai></template>
 </category>
@@ -6360,9 +6360,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE WEATHER NOW *</pattern>
 <template><srai>what is the weather <star /></srai></template>
 </category>
-<category><pattern>WHAT IS THE TOPIC</pattern>
+<!-- <category><pattern>WHAT IS THE TOPIC</pattern>
 <template><srai>TOPIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE TOPIC *</pattern>
 <template><srai>what is the topic</srai></template>
 </category>
@@ -6399,9 +6399,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE PLOT</pattern>
 <template><srai>tell me a story</srai></template>
 </category>
-<category><pattern>WHAT IS THE LATEST *</pattern>
+<!-- <category><pattern>WHAT IS THE LATEST *</pattern>
 <template><srai>what is new</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE PI</pattern>
 <template><srai>what is pi</srai></template>
 </category>
@@ -6411,9 +6411,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THE SECRET *</pattern>
 <template><srai>what is the password</srai></template>
 </category>
-<category><pattern>WHAT IS THE TEMPERATURE IN *</pattern>
+<!-- <category><pattern>WHAT IS THE TEMPERATURE IN *</pattern>
 <template><srai>what is the weather like</srai>. <srai>I AM IN <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THE GOAL *</pattern>
 <template><srai>what is your goal</srai></template>
 </category>
@@ -6519,9 +6519,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS NEW MEXICO</pattern>
 <template><srai>where is new mexico</srai></template>
 </category>
-<category><pattern>WHAT IS NEW</pattern>
+<!-- <category><pattern>WHAT IS NEW</pattern>
 <template><srai>WHAT IS UP</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS HOLLAND</pattern>
 <template><srai>where is holland</srai></template>
 </category>
@@ -6669,9 +6669,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS INTERESTING</pattern>
 <template><srai>what is new</srai></template>
 </category>
-<category><pattern>WHAT IS ME</pattern>
+<!-- <category><pattern>WHAT IS ME</pattern>
 <template><srai>who am i</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS GEORGE W BUSH</pattern>
 <template><srai>who is george w bush</srai></template>
 </category>
@@ -6774,15 +6774,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS MY HOST</pattern>
 <template><srai>what is my ip</srai></template>
 </category>
-<category><pattern>WHAT IS MY NAME *</pattern>
+<!-- <category><pattern>WHAT IS MY NAME *</pattern>
 <template><srai>what is my name</srai>.     <srai>  <star /></srai></template>
-</category>
-<category><pattern>WHAT IS MY NAME</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS MY NAME</pattern>
 <template><srai>my name</srai></template>
-</category>
-<category><pattern>WHAT IS MY NUMBER</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS MY NUMBER</pattern>
 <template><srai>what is my ip</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS MY HUSBANDS NAME</pattern>
 <template><srai>what is my husband s name</srai></template>
 </category>
@@ -6792,9 +6792,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS MY WIFES NAME</pattern>
 <template><srai>what is my wife s name</srai></template>
 </category>
-<category><pattern>WHAT IS MY SISTERS NAME</pattern>
+<!-- <category><pattern>WHAT IS MY SISTERS NAME</pattern>
 <template><srai>what is my sister s name</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS MY FRIENDS NAME</pattern>
 <template><srai>what is my friend s name</srai></template>
 </category>
@@ -7005,27 +7005,27 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS AL</pattern>
 <template><srai>what is ai</srai></template>
 </category>
-<category><pattern>WHAT IS YOU NAME</pattern>
+<!-- <category><pattern>WHAT IS YOU NAME</pattern>
 <template><srai>what is your name</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOU FAVORITE COLOR</pattern>
 <template><srai>what is your favorite color</srai></template>
 </category>
 <category><pattern>WHAT IS YOU</pattern>
 <template><srai>what are you</srai></template>
 </category>
-<category><pattern>WHAT IS YOU ARE NAME</pattern>
+<!-- <category><pattern>WHAT IS YOU ARE NAME</pattern>
 <template><srai>what is your name</srai></template>
-</category>
-<category><pattern>WHAT IS YOU ARE *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOU ARE *</pattern>
 <template><srai>what is your <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS EUKARYOTES</pattern>
 <template><srai>what is a eukaryote</srai></template>
 </category>
-<category><pattern>WHAT IS GOING ON</pattern>
+<!-- <category><pattern>WHAT IS GOING ON</pattern>
 <template><srai>what are you doing</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS MXMVII RSW</pattern>
 <template><srai>what is rsw</srai></template>
 </category>
@@ -7179,9 +7179,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS THAT ROUND *</pattern>
 <template><srai>what is that picture</srai></template>
 </category>
-<category><pattern>WHAT IS THAT MEAN</pattern>
+<!-- <category><pattern>WHAT IS THAT MEAN</pattern>
 <template><srai>what does that mean</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS THAT CHART</pattern>
 <template><srai>what is that picture</srai></template>
 </category>
@@ -7227,9 +7227,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR PURPOSE *</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR PURPOSE</pattern>
+<!-- <category><pattern>WHAT IS YOUR PURPOSE</pattern>
 <template><srai>WHAT IS YOUR GOAL</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR SKIN COLOR</pattern>
 <template><srai>what color are you</srai></template>
 </category>
@@ -7251,9 +7251,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR UTILITY</pattern>
 <template><srai>what can you do</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR MOTHER *</pattern>
+<!-- <category><pattern>WHAT IS YOUR MOTHER *</pattern>
 <template><srai>who is your mother</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR HISTORY</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
@@ -7320,9 +7320,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FATHERS NAME</pattern>
 <template><srai>who created you</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR EMAIL</pattern>
+<!-- <category><pattern>WHAT IS YOUR EMAIL</pattern>
 <template><srai>EMAIL</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR USUAL *</pattern>
 <template><srai>what is your <star /></srai></template>
 </category>
@@ -7335,12 +7335,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR COMPUTER</pattern>
 <template><srai>what kind of computer</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR LOCATION</pattern>
+<!-- <category><pattern>WHAT IS YOUR LOCATION</pattern>
 <template><srai>where are you located</srai></template>
-</category>
-<category><pattern>WHAT IS YOUR FATHER S NAME</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOUR FATHER S NAME</pattern>
 <template><srai>who invented you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR IP ADDRESS</pattern>
 <template><srai>WHAT IS YOUR IP</srai></template>
 </category>
@@ -7380,9 +7380,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FULL *</pattern>
 <template><srai>what is your <star /></srai></template>
 </category>
-<category><pattern>WHAT IS YOUR NAME *</pattern>
+<!-- <category><pattern>WHAT IS YOUR NAME *</pattern>
 <template><srai>what is your name</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR RELIGIOUS *</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
@@ -7395,24 +7395,24 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FAVORITE ACTORS</pattern>
 <template><srai>who is your favorite actor</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE ACTOR</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE ACTOR</pattern>
 <template><srai>who is your favorite actor</srai></template>
-</category>
-<category><pattern>WHAT IS YOUR FAVORITE KIND OF MUSIC</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOUR FAVORITE KIND OF MUSIC</pattern>
 <template><srai>FAVORITE MUSIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE KIND OF FOOD</pattern>
 <template><srai>what is your favorite food</srai></template>
 </category>
 <category><pattern>WHAT IS YOUR FAVORITE KIND OF *</pattern>
 <template><srai>what is your favorte <star /></srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE SINGER</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SINGER</pattern>
 <template><srai>who is your favorite singer</srai></template>
-</category>
-<category><pattern>WHAT IS YOUR FAVORITE SONG *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOUR FAVORITE SONG *</pattern>
 <template><srai>what is your favorite song</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE VIDEO</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
@@ -7422,9 +7422,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FAVORITE GROUP</pattern>
 <template><srai>who is your favorite band</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE ARTIST</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE ARTIST</pattern>
 <template><srai>who is your favorite artist</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE TYPE OF MUSIC</pattern>
 <template><srai>FAVORITE MUSIC</srai></template>
 </category>
@@ -7449,9 +7449,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FAVORITE ANIMAL *</pattern>
 <template><srai>what is your favorite animal</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE BAND</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE BAND</pattern>
 <template><srai>who is your favorite band</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE BAND *</pattern>
 <template><srai>what is your favorite band</srai></template>
 </category>
@@ -7473,12 +7473,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FAVORITE VERSE</pattern>
 <template><srai>what is your favorite bible verse</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE FOOD *</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE FOOD *</pattern>
 <template><srai>what is your favorite food</srai></template>
-</category>
-<category><pattern>WHAT IS YOUR FAVORITE COLOUR</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOUR FAVORITE COLOUR</pattern>
 <template><srai>what is your favorite color</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE DISH</pattern>
 <template><srai>what is your favorite food</srai></template>
 </category>
@@ -7491,9 +7491,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR FAVORITE FILM *</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR FAVORITE FILM</pattern>
+<!-- <category><pattern>WHAT IS YOUR FAVORITE FILM</pattern>
 <template><srai>what is your favorite movie</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FAVORITE KRAFTWERK *</pattern>
 <template><srai>what is your favorite song</srai></template>
 </category>
@@ -7710,12 +7710,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS YOUR ZODIAC</pattern>
 <template><srai>what is your sign</srai></template>
 </category>
-<category><pattern>WHAT IS YOUR</pattern>
+<!-- <category><pattern>WHAT IS YOUR</pattern>
 <template><srai>what is yours</srai></template>
-</category>
-<category><pattern>WHAT IS YOUR MISSION</pattern>
+</category> -->
+<!-- <category><pattern>WHAT IS YOUR MISSION</pattern>
 <template><srai>what is your goal</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS YOUR FOOD</pattern>
 <template><srai>what do you eat</srai></template>
 </category>
@@ -7761,9 +7761,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS EINSTEINS *</pattern>
 <template><srai>what is relativity</srai></template>
 </category>
-<category><pattern>WHAT IS TODAY</pattern>
+<!-- <category><pattern>WHAT IS TODAY</pattern>
 <template><srai>DAY</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS SEARCHING *</pattern>
 <template><srai>what is searching </srai></template>
 </category>
@@ -7773,9 +7773,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS IT THAT YOU *</pattern>
 <template><srai>what do you <star /></srai></template>
 </category>
-<category><pattern>WHAT IS IT *</pattern>
+<!-- <category><pattern>WHAT IS IT *</pattern>
 <template><srai>what is it</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS IT LIKE ACTUALLY *</pattern>
 <template><srai>what is it like <star /></srai></template>
 </category>
@@ -7854,18 +7854,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT IS BRAZIL</pattern>
 <template><srai>where is brazil</srai></template>
 </category>
-<category><pattern>WHAT IS ARTIFICIAL INTELLIGENCE</pattern>
+<!-- <category><pattern>WHAT IS ARTIFICIAL INTELLIGENCE</pattern>
 <template><srai>WHAT IS AI</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS ARTIFICIAL *</pattern>
 <template><srai>what is ai</srai></template>
 </category>
 <category><pattern>WHAT IS SUN</pattern>
 <template><srai>what is the sun</srai></template>
 </category>
-<category><pattern>WHAT IS PANDORA</pattern>
+<!-- <category><pattern>WHAT IS PANDORA</pattern>
 <template><srai>who is pandora</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT IS PROKARYOTE</pattern>
 <template><srai>what is a prokaryote</srai></template>
 </category>
@@ -8070,15 +8070,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT HUMAN *</pattern>
 <template><srai>what <star /></srai></template>
 </category>
-<category><pattern>WHAT RELIGION ARE YOU</pattern>
+<!-- <category><pattern>WHAT RELIGION ARE YOU</pattern>
 <template><srai>WHAT IS YOUR RELIGION</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DAY IS CHRISTMAS *</pattern>
 <template><srai>WHAT DAY IS CHRISTMAS</srai></template>
 </category>
-<category><pattern>WHAT DAY IS IT</pattern>
+<!-- <category><pattern>WHAT DAY IS IT</pattern>
 <template><srai>DAY</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DAY IS XMAS *</pattern>
 <template><srai>WHAT DAY IS CHRISTMAS</srai></template>
 </category>
@@ -8103,15 +8103,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DOES _ MEAN TO YOU</pattern>
 <template><srai>what does <star /> mean</srai></template>
 </category>
-<category><pattern>WHAT DOES THAT MEAN *</pattern>
+<!-- <category><pattern>WHAT DOES THAT MEAN *</pattern>
 <template><srai>what does that mean</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DOES THAT STAND FOR</pattern>
 <template><srai>what is that</srai></template>
 </category>
-<category><pattern>WHAT DOES THE WORD * MEAN</pattern>
+<!-- <category><pattern>WHAT DOES THE WORD * MEAN</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DOES THE TURING TEST *</pattern>
 <template><srai>what is the turing test</srai></template>
 </category>
@@ -8139,9 +8139,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DOES REDUCTIONISM MEAN</pattern>
 <template><srai>what is reductionism</srai></template>
 </category>
-<category><pattern>WHAT DOES * MEAN</pattern>
+<!-- <category><pattern>WHAT DOES * MEAN</pattern>
 <template><srai>WHAT IS <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DOES * STAND FOR</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
@@ -8181,21 +8181,21 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU MEAN BY REDUCTIONISM</pattern>
 <template><srai>what is reductionism</srai></template>
 </category>
-<category><pattern>WHAT DO YOU MEAN BY *</pattern>
+<!-- <category><pattern>WHAT DO YOU MEAN BY *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
-<category><pattern>WHAT DO YOU MEAN *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT DO YOU MEAN *</pattern>
 <template><srai>WHAT DO YOU MEAN</srai></template>
-</category>
-<category><pattern>WHAT DO YOU DO IN YOUR SPARE TIME</pattern>
+</category> -->
+<!-- <category><pattern>WHAT DO YOU DO IN YOUR SPARE TIME</pattern>
 <template><srai>what do you do for fun</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU DO FOR MONEY</pattern>
 <template><srai>what is your job</srai></template>
 </category>
-<category><pattern>WHAT DO YOU DO FOR FUN</pattern>
+<!-- <category><pattern>WHAT DO YOU DO FOR FUN</pattern>
 <template><srai>WHAT DO YOU DO</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU DO FOR FUN *</pattern>
 <template><srai>WHAT DO YOU DO FOR FUN</srai></template>
 </category>
@@ -8205,9 +8205,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU DO EVERY *</pattern>
 <template><srai>what do you do <star /></srai></template>
 </category>
-<category><pattern>WHAT DO YOU DO *</pattern>
+<!-- <category><pattern>WHAT DO YOU DO *</pattern>
 <template><srai>WHAT DO YOU DO</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU WANT ME TO CALL YOU</pattern>
 <template><srai>what is your name</srai></template>
 </category>
@@ -8223,9 +8223,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU WANT</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
-<category><pattern>WHAT DO YOU WANT *</pattern>
+<!-- <category><pattern>WHAT DO YOU WANT *</pattern>
 <template><srai>WHAT DO YOU WANT</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU HELP *</pattern>
 <template><srai>what do you do</srai></template>
 </category>
@@ -8244,33 +8244,33 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU REGARD AS *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
-<category><pattern>WHAT DO YOU LOOK LIKE *</pattern>
+<!-- <category><pattern>WHAT DO YOU LOOK LIKE *</pattern>
 <template><srai>what do you look like</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU UNDERSTAND *</pattern>
 <template><srai>what do you understand</srai></template>
 </category>
 <category><pattern>WHAT DO YOU SAY *</pattern>
 <template><srai>what <star /></srai></template>
 </category>
-<category><pattern>WHAT DO YOU SAY</pattern>
+<!-- <category><pattern>WHAT DO YOU SAY</pattern>
 <template><srai>tell me about yourself</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU DEFINE AS *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
-<category><pattern>WHAT DO YOU CALL ME</pattern>
+<!-- <category><pattern>WHAT DO YOU CALL ME</pattern>
 <template><srai>what is my name</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU FIRST *</pattern>
 <template><srai>what do you <star /></srai></template>
 </category>
 <category><pattern>WHAT DO YOU KNOW ABOUT * SOCCER</pattern>
 <template><srai>what is soccer</srai></template>
 </category>
-<category><pattern>WHAT DO YOU KNOW ABOUT *</pattern>
+<!-- <category><pattern>WHAT DO YOU KNOW ABOUT *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU KNOW ABOUT GREECE</pattern>
 <template><srai>what is greece</srai></template>
 </category>
@@ -8514,9 +8514,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU REMEMBER ABOUT ME</pattern>
 <template><srai>what do you know about me</srai></template>
 </category>
-<category><pattern>WHAT DO YOU USUALLY *</pattern>
+<!-- <category><pattern>WHAT DO YOU USUALLY *</pattern>
 <template><srai>what do you <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU ALL *</pattern>
 <template><srai>what do you <star /></srai></template>
 </category>
@@ -8766,9 +8766,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU THINK ABOUT THE * LOEBNER PRIZE</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
-<category><pattern>WHAT DO YOU THINK ABOUT THE *</pattern>
+<!-- <category><pattern>WHAT DO YOU THINK ABOUT THE *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU THINK ABOUT ARTIFICIAL INTELLIGENCE</pattern>
 <template><srai>what is ai</srai></template>
 </category>
@@ -8874,9 +8874,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU THINK ABOUT * ARTIFICIAL INTELLIGENCE</pattern>
 <template><srai>what is artificial intelligence</srai></template>
 </category>
-<category><pattern>WHAT DO YOU THINK ABOUT *</pattern>
+<!-- <category><pattern>WHAT DO YOU THINK ABOUT *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU THINK ABOUT * KOSOVO</pattern>
 <template><srai>what do you think about kosovo</srai></template>
 </category>
@@ -8955,9 +8955,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU THINK IS THE *</pattern>
 <template><srai>what is the <star /></srai></template>
 </category>
-<category><pattern>WHAT DO YOU THINK IS *</pattern>
+<!-- <category><pattern>WHAT DO YOU THINK IS *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU THINK MY * IS</pattern>
 <template><srai>what is my <star /></srai></template>
 </category>
@@ -8988,9 +8988,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU THINK OF * LOEBNER</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
-<category><pattern>WHAT DO YOU THINK OF *</pattern>
+<!-- <category><pattern>WHAT DO YOU THINK OF *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU THINK CONSCIOUSNESS *</pattern>
 <template><srai>what is consciousness</srai></template>
 </category>
@@ -9021,18 +9021,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT DO YOU LIKE WATCHING</pattern>
 <template><srai>what is your favorite show</srai></template>
 </category>
-<category><pattern>WHAT DO YOU LIKE TO DO FOR FUN</pattern>
+<!-- <category><pattern>WHAT DO YOU LIKE TO DO FOR FUN</pattern>
 <template><srai>WHAT DO YOU DO FOR FUN</srai></template>
-</category>
-<category><pattern>WHAT DO YOU LIKE TO TALK ABOUT</pattern>
+</category> -->
+<!-- <category><pattern>WHAT DO YOU LIKE TO TALK ABOUT</pattern>
 <template><srai>WHAT DO YOU WANT TO TALK ABOUT</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU LIKE TO READ</pattern>
 <template><srai>what do you read</srai></template>
 </category>
-<category><pattern>WHAT DO YOU LIKE TO EAT</pattern>
+<!-- <category><pattern>WHAT DO YOU LIKE TO EAT</pattern>
 <template><srai>WHAT IS YOUR FAVORITE FOOD</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT DO YOU LIKE TO *</pattern>
 <template><srai>what do you like</srai></template>
 </category>
@@ -9075,9 +9075,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT FORMAL *</pattern>
 <template><srai>what <star /></srai></template>
 </category>
-<category><pattern>WHAT ALL *</pattern>
+<!-- <category><pattern>WHAT ALL *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT OR WHO *</pattern>
 <template><srai>what <star /></srai>. <srai>who <star /></srai></template>
 </category>
@@ -9096,18 +9096,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT SHOULD I TELL *</pattern>
 <template><srai>what should I say</srai></template>
 </category>
-<category><pattern>WHAT SHOULD I CALL YOU</pattern>
+<!-- <category><pattern>WHAT SHOULD I CALL YOU</pattern>
 <template><srai>what is your name</srai></template>
-</category>
-<category><pattern>WHAT SHOULD WE TALK ABOUT</pattern>
+</category> -->
+<!-- <category><pattern>WHAT SHOULD WE TALK ABOUT</pattern>
 <template><srai>what can you talk about</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT STATE DO YOU LIVE IN</pattern>
 <template><srai>STATE</srai></template>
 </category>
-<category><pattern>WHAT STATE *</pattern>
+<!-- <category><pattern>WHAT STATE *</pattern>
 <template><srai>what state</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT LANGUAGES DO YOU KNOW</pattern>
 <template><srai>what languages can you speak</srai></template>
 </category>
@@ -9123,12 +9123,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT CAN WE TALK ABOUT</pattern>
 <template><srai>what is your favorite subject</srai></template>
 </category>
-<category><pattern>WHAT CAN YOU DO FOR ME</pattern>
+<!-- <category><pattern>WHAT CAN YOU DO FOR ME</pattern>
 <template><srai>what can you do</srai></template>
-</category>
-<category><pattern>WHAT CAN YOU DO *</pattern>
+</category> -->
+<!-- <category><pattern>WHAT CAN YOU DO *</pattern>
 <template><srai>what can you do</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT CAN YOU TELL ME ABOUT THE *</pattern>
 <template><srai>what is the<star /></srai></template>
 </category>
@@ -9144,9 +9144,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT CAN YOU TELL ME ABOUT ROBOTS</pattern>
 <template><srai>what is a robot</srai></template>
 </category>
-<category><pattern>WHAT CAN YOU TELL ME ABOUT *</pattern>
+<!-- <category><pattern>WHAT CAN YOU TELL ME ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT CAN YOU TELL ME ABOUT SEPTEMBER 11</pattern>
 <template><srai>what is september 11</srai></template>
 </category>
@@ -9174,9 +9174,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT SIGN ARE YOU</pattern>
 <template><srai>what is your sign</srai></template>
 </category>
-<category><pattern>WHAT YOUR NAME</pattern>
+<!-- <category><pattern>WHAT YOUR NAME</pattern>
 <template><srai>WHAT IS YOUR NAME</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT GAVE YOU LIFE</pattern>
 <template><srai>who created you</srai></template>
 </category>
@@ -9210,36 +9210,36 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT YOU SAID</pattern>
 <template><srai>what did you say</srai></template>
 </category>
-<category><pattern>WHAT YOU ARE DOING</pattern>
+<!-- <category><pattern>WHAT YOU ARE DOING</pattern>
 <template><srai>what are you doing</srai></template>
-</category>
-<category><pattern>WHAT KIND OF * DO YOU LIKE</pattern>
+</category> -->
+<!-- <category><pattern>WHAT KIND OF * DO YOU LIKE</pattern>
 <template><srai>WHAT IS YOUR FAVORITE <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT KIND OF * DOES AMERICA HAVE</pattern>
 <template><srai>WHAT <star /> DOES AMERICA HAVE</srai></template>
 </category>
 <category><pattern>WHAT KIND OF * LIKE TO DO</pattern>
 <template><srai>what do you do</srai></template>
 </category>
-<category><pattern>WHAT KIND OF MUSIC DO YOU LISTEN TO</pattern>
+<!-- <category><pattern>WHAT KIND OF MUSIC DO YOU LISTEN TO</pattern>
 <template><srai>FAVORITE MUSIC</srai></template>
-</category>
-<category><pattern>WHAT KIND OF MUSIC DO YOU LIKE</pattern>
+</category> -->
+<!-- <category><pattern>WHAT KIND OF MUSIC DO YOU LIKE</pattern>
 <template><srai>WHAT IS YOUR FAVORITE KIND OF MUSIC</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT KIND OF MUSIC</pattern>
 <template><srai>FAVORITE MUSIC</srai></template>
 </category>
 <category><pattern>WHAT KIND OF FOOD DO YOU EAT</pattern>
 <template><srai>what do you eat</srai></template>
 </category>
-<category><pattern>WHAT KIND OF FOOD DO YOU LIKE</pattern>
+<!-- <category><pattern>WHAT KIND OF FOOD DO YOU LIKE</pattern>
 <template><srai>what is your favorite food</srai></template>
-</category>
-<category><pattern>WHAT KIND OF ROBOT ARE YOU</pattern>
+</category> -->
+<!-- <category><pattern>WHAT KIND OF ROBOT ARE YOU</pattern>
 <template><srai>tell me about yourself</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT KIND OF WORK *</pattern>
 <template><srai>what is your job</srai></template>
 </category>
@@ -9282,18 +9282,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHAT FOOD DO YOU LIKE</pattern>
 <template><srai>what is your favorite food</srai></template>
 </category>
-<category><pattern>WHAT UP</pattern>
+<!-- <category><pattern>WHAT UP</pattern>
 <template><srai>what is up</srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT OCCURRED</pattern>
 <template><srai>what happened</srai></template>
 </category>
 <category><pattern>WHAT POINT</pattern>
 <template><srai>what is your point</srai></template>
 </category>
-<category><pattern>WHAT NEW *</pattern>
+<!-- <category><pattern>WHAT NEW *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHAT INTERESTS YOU</pattern>
 <template><srai>what do you like</srai></template>
 </category>
@@ -9315,9 +9315,9 @@ Greece is a country in the Balkans.
 <category><pattern>SAW WHAT</pattern>
 <template><srai>what did you see</srai></template>
 </category>
-<category><pattern>REDUCTIONISM</pattern>
+<!-- <category><pattern>REDUCTIONISM</pattern>
 <template><srai>what is reductionism</srai></template>
-</category>
+</category> -->
 <category><pattern>ASTROLOGY</pattern>
 <template><srai>what is your sign</srai></template>
 </category>
@@ -9336,18 +9336,18 @@ Greece is a country in the Balkans.
 <category><pattern>I WANT A JOKE</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
-<category><pattern>I WANT TO MARRY YOU</pattern>
+<!-- <category><pattern>I WANT TO MARRY YOU</pattern>
 <template><srai>will you marry me</srai></template>
-</category>
+</category> -->
 <category><pattern>I WANT TO FIND OUT ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
 </category>
 <category><pattern>I WANT TO TALK ABOUT YOU</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>I WANT TO TALK ABOUT *</pattern>
+<!-- <category><pattern>I WANT TO TALK ABOUT *</pattern>
 <template><srai>talk about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>I WANT TO SEE IF IT WILL *</pattern>
 <template><srai>will it <star /></srai></template>
 </category>
@@ -9417,9 +9417,9 @@ Greece is a country in the Balkans.
 <category><pattern>I DO NOT KNOW WHAT * MEANS</pattern>
 <template><srai>what does <star /> mean</srai></template>
 </category>
-<category><pattern>I DO NOT KNOW THAT IS *</pattern>
+<!-- <category><pattern>I DO NOT KNOW THAT IS *</pattern>
 <template><srai>that is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>I DO NOT KNOW THAT *</pattern>
 <template><srai>that <star /></srai></template>
 </category>
@@ -9429,9 +9429,9 @@ Greece is a country in the Balkans.
 <category><pattern>I DO NOT KNOW WHO *</pattern>
 <template><srai>who <star /></srai></template>
 </category>
-<category><pattern>I DO NOT KNOW YOU TELL ME</pattern>
+<!-- <category><pattern>I DO NOT KNOW YOU TELL ME</pattern>
 <template><srai>tell me</srai></template>
-</category>
+</category> -->
 <category><pattern>I DO NOT KNOW WHY *</pattern>
 <template><srai>why <star /></srai></template>
 </category>
@@ -9444,9 +9444,9 @@ Greece is a country in the Balkans.
 <category><pattern>I DO NOT LIKE OPERA</pattern>
 <template><srai>what is opera</srai></template>
 </category>
-<category><pattern>I THINK WE *</pattern>
+<!-- <category><pattern>I THINK WE *</pattern>
 <template><srai>we <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>I HAVE A LOT OF CUSTOMERS</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
@@ -9519,9 +9519,9 @@ Greece is a country in the Balkans.
 <category><pattern>I AM A BAPTIST</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
-<category><pattern>I AM A VIRGO</pattern>
+<!-- <category><pattern>I AM A VIRGO</pattern>
 <template><srai>virgo</srai></template>
-</category>
+</category> -->
 <category><pattern>I AM A VEGETARIAN</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
@@ -9540,9 +9540,9 @@ Greece is a country in the Balkans.
 <category><pattern>I AM A CATHOLIC</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
-<category><pattern>I AM A TAURUS</pattern>
+<!-- <category><pattern>I AM A TAURUS</pattern>
 <template><srai>taurus</srai></template>
-</category>
+</category> -->
 <category><pattern>I AM A MOSLEM</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
@@ -9579,9 +9579,9 @@ Greece is a country in the Balkans.
 <category><pattern>BARRY</pattern>
 <template><srai>who is barry</srai></template>
 </category>
-<category><pattern>MARRY ME</pattern>
+<!-- <category><pattern>MARRY ME</pattern>
 <template><srai>will you marry me</srai></template>
-</category>
+</category> -->
 <category><pattern>GOOD WE *</pattern>
 <template><srai>we <star /></srai></template>
 </category>
@@ -9591,21 +9591,21 @@ Greece is a country in the Balkans.
 <category><pattern>UHH</pattern>
 <template><srai>uh</srai></template>
 </category>
-<category><pattern>DESCRIBE YOURSELF</pattern>
+<!-- <category><pattern>DESCRIBE YOURSELF</pattern>
 <template><srai>TELL ME ABOUT YOURSELF</srai></template>
-</category>
+</category> -->
 <category><pattern>DESCRIBE WHERE *</pattern>
 <template><srai>where <star /></srai></template>
 </category>
-<category><pattern>WAT</pattern>
+<!-- <category><pattern>WAT</pattern>
 <template><srai>WHAT</srai></template>
-</category>
+</category> -->
 <category><pattern>THANKYOU *</pattern>
 <template><srai>thanks</srai></template>
 </category>
-<category><pattern>THANKYOU</pattern>
+<!-- <category><pattern>THANKYOU</pattern>
 <template><srai>THANK YOU</srai></template>
-</category>
+</category> -->
 <category><pattern>2 TIMES</pattern>
 <template><srai>twice</srai></template>
 </category>
@@ -9792,9 +9792,9 @@ Greece is a country in the Balkans.
 <category><pattern>WILL YOU TELL ME ABOUT YOURSELF</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>WILL YOU TELL ME *</pattern>
+<!-- <category><pattern>WILL YOU TELL ME *</pattern>
 <template><srai>tell me <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WILL YOU TALK *</pattern>
 <template><srai>talk <star /></srai></template>
 </category>
@@ -9828,9 +9828,9 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU FIND THE DERIVATIVE *</pattern>
 <template><srai>what is the derivative</srai></template>
 </category>
-<category><pattern>CAN YOU TEACH ME *</pattern>
+<!-- <category><pattern>CAN YOU TEACH ME *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU BE * CUSTOMER SERVICE</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
@@ -9840,18 +9840,18 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU SPEAK ABOUT YOU</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>CAN YOU SPEAK FRENCH</pattern>
+<!-- <category><pattern>CAN YOU SPEAK FRENCH</pattern>
 <template><srai>WHAT LANGUAGES DO YOU SPEAK</srai></template>
-</category>
-<category><pattern>CAN YOU SPEAK SPANISH</pattern>
+</category> -->
+<!-- <category><pattern>CAN YOU SPEAK SPANISH</pattern>
 <template><srai>WHAT LANGUAGES DO YOU SPEAK</srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU TRACE ME</pattern>
 <template><srai>what is my ip address</srai></template>
 </category>
-<category><pattern>CAN YOU REMEMBER MY NAME</pattern>
+<!-- <category><pattern>CAN YOU REMEMBER MY NAME</pattern>
 <template><srai>what is my name</srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU WRITE ME A POEM</pattern>
 <template><srai>tell me a poem</srai></template>
 </category>
@@ -9861,9 +9861,9 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU EXPLAIN WHAT * IS</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
-<category><pattern>CAN YOU EAT</pattern>
+<!-- <category><pattern>CAN YOU EAT</pattern>
 <template><srai>what do you eat</srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU INTRODUCE YOURSELF *</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
@@ -9879,24 +9879,24 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU TELL ME ABOUT YOURSELF</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>CAN YOU TELL ME ABOUT *</pattern>
+<!-- <category><pattern>CAN YOU TELL ME ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU TELL ME THEIR *</pattern>
 <template><srai>tell me their <star /></srai></template>
 </category>
 <category><pattern>CAN YOU TELL ME MORE *</pattern>
 <template><srai>tell me <star /></srai></template>
 </category>
-<category><pattern>CAN YOU TELL ME A STORY</pattern>
+<!-- <category><pattern>CAN YOU TELL ME A STORY</pattern>
 <template><srai>tell me a story</srai></template>
-</category>
-<category><pattern>CAN YOU TELL ME A JOKE</pattern>
+</category> -->
+<!-- <category><pattern>CAN YOU TELL ME A JOKE</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
-<category><pattern>CAN YOU TELL ME A *</pattern>
+</category> -->
+<!-- <category><pattern>CAN YOU TELL ME A *</pattern>
 <template><srai>tell me a <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU TELL ME MY *</pattern>
 <template><srai>what is my <star /></srai></template>
 </category>
@@ -9924,9 +9924,9 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU TELL ME ANY *</pattern>
 <template><srai>tell me a <star /></srai></template>
 </category>
-<category><pattern>CAN YOU TELL ME *</pattern>
+<!-- <category><pattern>CAN YOU TELL ME *</pattern>
 <template><srai>TELL ME <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU TELL DR *</pattern>
 <template><srai>tell dr <star /></srai></template>
 </category>
@@ -9936,9 +9936,9 @@ Greece is a country in the Balkans.
 <category><pattern>CAN YOU TELL THE *</pattern>
 <template><srai>tell the <star /></srai></template>
 </category>
-<category><pattern>CAN YOU TELL A JOKE</pattern>
+<!-- <category><pattern>CAN YOU TELL A JOKE</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>CAN YOU TELL JOKES</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
@@ -9957,9 +9957,9 @@ Greece is a country in the Balkans.
 <category><pattern>CAN I HAVE YOUR PHONENUMBER</pattern>
 <template><srai>what is your phone number</srai></template>
 </category>
-<category><pattern>FUN</pattern>
+<!-- <category><pattern>FUN</pattern>
 <template><srai>this is fun</srai></template>
-</category>
+</category> -->
 <category><pattern>WHOM</pattern>
 <template><srai>who</srai></template>
 </category>
@@ -9987,9 +9987,9 @@ Greece is a country in the Balkans.
 <category><pattern>HOW DID YOU * LOEBNER PRIZE</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
-<category><pattern>HOW HOT IS IT *</pattern>
+<!-- <category><pattern>HOW HOT IS IT *</pattern>
 <template><srai>what is the temperature</srai></template>
-</category>
+</category> -->
 <category><pattern>HOW DOES HE LOOK LIKE</pattern>
 <template><srai>what does he look like</srai></template>
 </category>
@@ -10035,9 +10035,9 @@ Greece is a country in the Balkans.
 <category><pattern>HOW MUCH IS PI</pattern>
 <template><srai>what is pi</srai></template>
 </category>
-<category><pattern>HOW MUCH IS *</pattern>
+<!-- <category><pattern>HOW MUCH IS *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>HOW GOOD IS *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
@@ -10050,12 +10050,12 @@ Greece is a country in the Balkans.
 <category><pattern>HOW DO YOU MEAN</pattern>
 <template><srai>what do you mean</srai></template>
 </category>
-<category><pattern>HOW DO YOU LOOK</pattern>
+<!-- <category><pattern>HOW DO YOU LOOK</pattern>
 <template><srai>what do you look like</srai></template>
-</category>
-<category><pattern>HOW DO YOU LOOK LIKE</pattern>
+</category> -->
+<!-- <category><pattern>HOW DO YOU LOOK LIKE</pattern>
 <template><srai>what do you look like</srai></template>
-</category>
+</category> -->
 <category><pattern>HOW DO YOU KNOW I AM ON *</pattern>
 <template><srai>what is my ip address</srai></template>
 </category>
@@ -10098,18 +10098,18 @@ Greece is a country in the Balkans.
 <category><pattern>HOW CLEVER ARE YOU</pattern>
 <template><srai>what is your iq</srai></template>
 </category>
-<category><pattern>HOW COME</pattern>
+<!-- <category><pattern>HOW COME</pattern>
 <template><srai>why</srai></template>
-</category>
+</category> -->
 <category><pattern>HOW COME *</pattern>
 <template><srai>why <star /></srai></template>
 </category>
-<category><pattern>NONSENSE</pattern>
+<!-- <category><pattern>NONSENSE</pattern>
 <template><srai>that does not make sense</srai></template>
-</category>
-<category><pattern>JOKES</pattern>
+</category> -->
+<!-- <category><pattern>JOKES</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>OM</pattern>
 <template><srai>what is om</srai></template>
 </category>
@@ -10194,18 +10194,18 @@ Greece is a country in the Balkans.
 <category><pattern>THEY ARE SO *</pattern>
 <template><srai>they are <star /></srai></template>
 </category>
-<category><pattern>THEY ARE ALL *</pattern>
+<!-- <category><pattern>THEY ARE ALL *</pattern>
 <template><srai>they are <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>THEY ARE NOT VERY *</pattern>
 <template><srai>they are not <star /></srai></template>
 </category>
 <category><pattern>CBR</pattern>
 <template><srai>what is cbr</srai></template>
 </category>
-<category><pattern>HMMM *</pattern>
+<!-- <category><pattern>HMMM *</pattern>
 <template><srai>um</srai>.     <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>BUSH</pattern>
 <template><srai>who is george bush</srai></template>
 </category>
@@ -10275,15 +10275,15 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW WHERE I AM *</pattern>
 <template><srai>where am i</srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHERE I AM</pattern>
+<!-- <category><pattern>DO YOU KNOW WHERE I AM</pattern>
 <template><srai>where am i</srai></template>
-</category>
-<category><pattern>DO YOU KNOW WHERE I CAN *</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW WHERE I CAN *</pattern>
 <template><srai>where can I <star /></srai></template>
-</category>
-<category><pattern>DO YOU KNOW WHERE I LIVE</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW WHERE I LIVE</pattern>
 <template><srai>WHERE DO I LIVE</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHERE DO *</pattern>
 <template><srai>where do <star /></srai></template>
 </category>
@@ -10293,9 +10293,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW WHERE IT *</pattern>
 <template><srai>where <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHERE IS *</pattern>
+<!-- <category><pattern>DO YOU KNOW WHERE IS *</pattern>
 <template><srai>where is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHERE ROBOTS *</pattern>
 <template><srai>where do robots <star /></srai></template>
 </category>
@@ -10308,9 +10308,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW WHERE * IS LOCATED</pattern>
 <template><srai>where is <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHERE * IS</pattern>
+<!-- <category><pattern>DO YOU KNOW WHERE * IS</pattern>
 <template><srai>where is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHERE * ARE</pattern>
 <template><srai>where are <star /></srai></template>
 </category>
@@ -11043,27 +11043,27 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW BRIAN *</pattern>
 <template><srai>who is brian <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHO I AM</pattern>
+<!-- <category><pattern>DO YOU KNOW WHO I AM</pattern>
 <template><srai>WHO AM I</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHO AM I</pattern>
 <template><srai>who am i</srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHO IS *</pattern>
+<!-- <category><pattern>DO YOU KNOW WHO IS *</pattern>
 <template><srai>who is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHO</pattern>
 <template><srai>who</srai></template>
 </category>
 <category><pattern>DO YOU KNOW WHO * WAS</pattern>
 <template><srai>who is <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHO * IS</pattern>
+<!-- <category><pattern>DO YOU KNOW WHO * IS</pattern>
 <template><srai>who is <star /></srai></template>
-</category>
-<category><pattern>DO YOU KNOW WHO *</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW WHO *</pattern>
 <template><srai>who <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHO * ARE</pattern>
 <template><srai>who are <star /></srai></template>
 </category>
@@ -11424,12 +11424,12 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW THE MEANING OF LIFE</pattern>
 <template><srai>what is the meaning of life</srai></template>
 </category>
-<category><pattern>DO YOU KNOW THE MEANING OF *</pattern>
+<!-- <category><pattern>DO YOU KNOW THE MEANING OF *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
-<category><pattern>DO YOU KNOW THE *</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW THE *</pattern>
 <template><srai>what is the <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW ANYONE THAT *</pattern>
 <template><srai>who <star /></srai></template>
 </category>
@@ -11475,9 +11475,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW A JOKE</pattern>
 <template><srai>TELL ME A JOKE</srai></template>
 </category>
-<category><pattern>DO YOU KNOW A *</pattern>
+<!-- <category><pattern>DO YOU KNOW A *</pattern>
 <template><srai>who is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW ANDREAS</pattern>
 <template><srai>who is andreas</srai></template>
 </category>
@@ -11676,9 +11676,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW ANYTHING ABOUT THE *</pattern>
 <template><srai>what is the <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW ANYTHING ABOUT *</pattern>
+<!-- <category><pattern>DO YOU KNOW ANYTHING ABOUT *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW MARCUS ZILLMAN</pattern>
 <template><srai>who is marcus zillman</srai></template>
 </category>
@@ -11787,15 +11787,15 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW MY PASSWORD</pattern>
 <template><srai>what is my password</srai></template>
 </category>
-<category><pattern>DO YOU KNOW MY NAME *</pattern>
+<!-- <category><pattern>DO YOU KNOW MY NAME *</pattern>
 <template><srai>WHAT IS MY NAME</srai></template>
-</category>
-<category><pattern>DO YOU KNOW MY NAME</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW MY NAME</pattern>
 <template><srai>WHAT IS MY NAME</srai></template>
-</category>
-<category><pattern>DO YOU KNOW MY EMAIL</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW MY EMAIL</pattern>
 <template><srai>what is my email</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW MY MIDDLE NAME</pattern>
 <template><srai>what is my middle name</srai></template>
 </category>
@@ -11934,9 +11934,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW ANY GOOD JOKES</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
-<category><pattern>DO YOU KNOW ANY JOKES</pattern>
+<!-- <category><pattern>DO YOU KNOW ANY JOKES</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW ANY STORIES</pattern>
 <template><srai>tell me a story</srai></template>
 </category>
@@ -12069,12 +12069,12 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW ARTY FISHAL</pattern>
 <template><srai>who is arty fishal</srai></template>
 </category>
-<category><pattern>DO YOU KNOW ME</pattern>
+<!-- <category><pattern>DO YOU KNOW ME</pattern>
 <template><srai>who am i</srai></template>
-</category>
-<category><pattern>DO YOU KNOW EVERYTHING</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW EVERYTHING</pattern>
 <template><srai>what do you know</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW ALICE *</pattern>
 <template><srai>WHO IS ALICE</srai></template>
 </category>
@@ -12297,30 +12297,30 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU KNOW WHAT I WANT *</pattern>
 <template><srai>WHAT DO I WANT <star /></srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHAT I LOOK LIKE</pattern>
+<!-- <category><pattern>DO YOU KNOW WHAT I LOOK LIKE</pattern>
 <template><srai>what do I look like</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHAT THE * IS ABOUT</pattern>
 <template><srai>what is <star /> about</srai></template>
 </category>
 <category><pattern>DO YOU KNOW WHAT TIME IT IS</pattern>
 <template><srai>TIME</srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHAT IS *</pattern>
+<!-- <category><pattern>DO YOU KNOW WHAT IS *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
-<category><pattern>DO YOU KNOW WHAT MY NAME IS</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW WHAT MY NAME IS</pattern>
 <template><srai>what is my name</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHAT * LOOKS LIKE</pattern>
 <template><srai>what does <star /> look like</srai></template>
 </category>
-<category><pattern>DO YOU KNOW WHAT * IS</pattern>
+<!-- <category><pattern>DO YOU KNOW WHAT * IS</pattern>
 <template><srai>WHAT IS <star /></srai></template>
-</category>
-<category><pattern>DO YOU KNOW WHAT *</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU KNOW WHAT *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU KNOW WHAT * MEANS</pattern>
 <template><srai>what does <star /> mean</srai></template>
 </category>
@@ -12375,9 +12375,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU THINK ABOUT POLITICS</pattern>
 <template><srai>what is your politics</srai></template>
 </category>
-<category><pattern>DO YOU THINK I WILL *</pattern>
+<!-- <category><pattern>DO YOU THINK I WILL *</pattern>
 <template><srai>will I <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU THINK I WOULD *</pattern>
 <template><srai>would I <star /></srai></template>
 </category>
@@ -12420,9 +12420,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU THINK A COMPUTER PROGRAM WILL *</pattern>
 <template><srai>will you <star /></srai></template>
 </category>
-<category><pattern>DO YOU THINK YOU WILL *</pattern>
+<!-- <category><pattern>DO YOU THINK YOU WILL *</pattern>
 <template><srai>will you <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU THINK WE WILL *</pattern>
 <template><srai>will we <star /></srai></template>
 </category>
@@ -12441,9 +12441,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU REMEMBER WHAT WE ARE *</pattern>
 <template><srai>what are we <star /></srai></template>
 </category>
-<category><pattern>DO YOU REMEMBER WHAT * IS</pattern>
+<!-- <category><pattern>DO YOU REMEMBER WHAT * IS</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU REMEMBER DYLAN</pattern>
 <template><srai>who is dylan</srai></template>
 </category>
@@ -12465,12 +12465,12 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU REMEMBER WHO *</pattern>
 <template><srai>who <star /></srai></template>
 </category>
-<category><pattern>DO YOU REMEMBER MY NAME</pattern>
+<!-- <category><pattern>DO YOU REMEMBER MY NAME</pattern>
 <template><srai>WHAT IS MY NAME</srai></template>
-</category>
-<category><pattern>DO YOU REMEMBER MY *</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU REMEMBER MY *</pattern>
 <template><srai>what is my <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU EAT FOOD</pattern>
 <template><srai>what do you eat</srai></template>
 </category>
@@ -12525,9 +12525,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU HAVE A DIRECTIVE</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
-<category><pattern>DO YOU HAVE A BOYFRIEND</pattern>
+<!-- <category><pattern>DO YOU HAVE A BOYFRIEND</pattern>
 <template><srai>who is your boyfriend</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU HAVE A MIDDLE NAME</pattern>
 <template><srai>WHAT IS YOUR MIDDLE NAME</srai></template>
 </category>
@@ -12573,21 +12573,21 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU HAVE A FAVORITE</pattern>
 <template><srai>what is your favorite</srai></template>
 </category>
-<category><pattern>DO YOU HAVE A FAVORITE *</pattern>
+<!-- <category><pattern>DO YOU HAVE A FAVORITE *</pattern>
 <template><srai>what is your favorite <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU HAVE A FATHER *</pattern>
 <template><srai>who is your father</srai></template>
 </category>
-<category><pattern>DO YOU HAVE A FATHER</pattern>
+<!-- <category><pattern>DO YOU HAVE A FATHER</pattern>
 <template><srai>who created you</srai></template>
-</category>
-<category><pattern>DO YOU HAVE A NAME</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU HAVE A NAME</pattern>
 <template><srai>what is your name</srai></template>
-</category>
-<category><pattern>DO YOU HAVE A BODY</pattern>
+</category> -->
+<!-- <category><pattern>DO YOU HAVE A BODY</pattern>
 <template><srai>WHAT DO YOU LOOK LIKE</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU HAVE A PLAN *</pattern>
 <template><srai>what is your plan</srai></template>
 </category>
@@ -12657,9 +12657,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU HAVE ANY JOKES</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
-<category><pattern>DO YOU HAVE ANY HOBBIES</pattern>
+<!-- <category><pattern>DO YOU HAVE ANY HOBBIES</pattern>
 <template><srai>what are your hobbies</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU HAVE DINNER *</pattern>
 <template><srai>what do you eat</srai></template>
 </category>
@@ -12696,9 +12696,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU HAVE AN IQ *</pattern>
 <template><srai>what is your iq</srai></template>
 </category>
-<category><pattern>DO YOU HAVE AN EMAIL</pattern>
+<!-- <category><pattern>DO YOU HAVE AN EMAIL</pattern>
 <template><srai>EMAIL</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU HAVE MORE ARTIFICIAL *</pattern>
 <template><srai>what is your iq</srai></template>
 </category>
@@ -12726,9 +12726,9 @@ Greece is a country in the Balkans.
 <category><pattern>DO YOU LIKE THE SHOW *</pattern>
 <template><srai>what is your favorite show</srai></template>
 </category>
-<category><pattern>DO YOU LIKE THE SIMPSONS</pattern>
+<!-- <category><pattern>DO YOU LIKE THE SIMPSONS</pattern>
 <template><srai>the simpsons</srai></template>
-</category>
+</category> -->
 <category><pattern>DO YOU LIKE THE MATRIX</pattern>
 <template><srai>the matrix</srai></template>
 </category>
@@ -12795,9 +12795,9 @@ Greece is a country in the Balkans.
 <category><pattern>WRONG IT *</pattern>
 <template><srai>wrong</srai><srai>it <star /></srai></template>
 </category>
-<category><pattern>FALSE</pattern>
+<!-- <category><pattern>FALSE</pattern>
 <template><srai>wrong</srai></template>
-</category>
+</category> -->
 <category><pattern>DRESS</pattern>
 <template><srai>tell me about your dress</srai></template>
 </category>
@@ -12813,12 +12813,12 @@ Greece is a country in the Balkans.
 <category><pattern>EXPLAIN YOURSELF</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>EXPLAIN IT TO ME</pattern>
+<!-- <category><pattern>EXPLAIN IT TO ME</pattern>
 <template><srai>what is it</srai></template>
-</category>
-<category><pattern>EXPLAIN TO ME *</pattern>
+</category> -->
+<!-- <category><pattern>EXPLAIN TO ME *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>EXPLAIN DOG</pattern>
 <template><srai>what is a dog</srai></template>
 </category>
@@ -12828,15 +12828,15 @@ Greece is a country in the Balkans.
 <category><pattern>EXPLAIN WHY YOU ARE *</pattern>
 <template><srai>why are you <star /></srai></template>
 </category>
-<category><pattern>SEEKER</pattern>
+<!-- <category><pattern>SEEKER</pattern>
 <template><srai>what is a seeker</srai></template>
-</category>
+</category> -->
 <category><pattern>MEAN WHAT</pattern>
 <template><srai>what do you mean</srai></template>
 </category>
-<category><pattern>HMMMMM</pattern>
+<!-- <category><pattern>HMMMMM</pattern>
 <template><srai>um</srai></template>
-</category>
+</category> -->
 <category><pattern>COLD WEATHER</pattern>
 <template><srai>what is the weather like there</srai></template>
 </category>
@@ -12855,12 +12855,12 @@ Greece is a country in the Balkans.
 <category><pattern>MXMVII RSW</pattern>
 <template><srai>what is mxmvii rsw</srai></template>
 </category>
-<category><pattern>UH HUH</pattern>
+<!-- <category><pattern>UH HUH</pattern>
 <template><srai>um</srai></template>
-</category>
-<category><pattern>UH *</pattern>
+</category> -->
+<!-- <category><pattern>UH *</pattern>
 <template><srai>UH</srai>. <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHOIS</pattern>
 <template><srai>who is</srai></template>
 </category>
@@ -12918,9 +12918,9 @@ Greece is a country in the Balkans.
 <category><pattern>SURE WHY NOT</pattern>
 <template><srai>why not</srai></template>
 </category>
-<category><pattern>REAGAN</pattern>
+<!-- <category><pattern>REAGAN</pattern>
 <template><srai>who is reagan</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY NICE</pattern>
 <template><srai>why apples</srai></template>
 </category>
@@ -12972,9 +12972,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY ARE YOU TALKING *</pattern>
 <template><srai>what is the subject</srai></template>
 </category>
-<category><pattern>WHY ARE YOU SO *</pattern>
+<!-- <category><pattern>WHY ARE YOU SO *</pattern>
 <template><srai>WHY ARE YOU <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHY ARE YOU LIBERATED</pattern>
 <template><srai>why are you free</srai></template>
 </category>
@@ -12984,9 +12984,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY ARE YOU STILL *</pattern>
 <template><srai>why are you <star /></srai></template>
 </category>
-<category><pattern>WHY ARE YOU ALWAYS *</pattern>
+<!-- <category><pattern>WHY ARE YOU ALWAYS *</pattern>
 <template><srai>why are you <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHY ARE YOU EASILY *</pattern>
 <template><srai>why are you <star /></srai></template>
 </category>
@@ -13014,9 +13014,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY ARE WE ALL *</pattern>
 <template><srai>why are we <star /></srai></template>
 </category>
-<category><pattern>WHY ARE *</pattern>
+<!-- <category><pattern>WHY ARE *</pattern>
 <template><srai>why</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY RED</pattern>
 <template><srai>why apples</srai></template>
 </category>
@@ -13083,18 +13083,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHY NOT REAL *</pattern>
 <template><srai>why not <star /></srai></template>
 </category>
-<category><pattern>WHY NOT</pattern>
+<!-- <category><pattern>WHY NOT</pattern>
 <template><srai>WHY</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY WERE YOU ACTIVATED</pattern>
 <template><srai>why were you created</srai></template>
 </category>
 <category><pattern>WHY WERE YOU INVENTED</pattern>
 <template><srai>why were you created</srai></template>
 </category>
-<category><pattern>WHY WERE YOU CREATED</pattern>
+<!-- <category><pattern>WHY WERE YOU CREATED</pattern>
 <template><srai>what is your purpose</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY WERE YOU PROGRAMMED *</pattern>
 <template><srai>why were you created</srai></template>
 </category>
@@ -13107,9 +13107,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY SO</pattern>
 <template><srai>why</srai></template>
 </category>
-<category><pattern>WHY SO *</pattern>
+<!-- <category><pattern>WHY SO *</pattern>
 <template><srai>why <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHY SURPRISED</pattern>
 <template><srai>why apples</srai></template>
 </category>
@@ -13161,9 +13161,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY SMALL</pattern>
 <template><srai>why apples</srai></template>
 </category>
-<category><pattern>WHY WHAT *</pattern>
+<!-- <category><pattern>WHY WHAT *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHY WOULD NOT *</pattern>
 <template><srai>why would <star /></srai></template>
 </category>
@@ -13179,9 +13179,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHY IS THE GRASS GREEN</pattern>
 <template><srai>why is grass green</srai></template>
 </category>
-<category><pattern>WHY IS THE *</pattern>
+<!-- <category><pattern>WHY IS THE *</pattern>
 <template><srai>why</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY IS YOUR NAME</pattern>
 <template><srai>what does alice stand for</srai></template>
 </category>
@@ -13215,18 +13215,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHY DID YOU * LOEBNER PRIZE</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
-<category><pattern>WHY WHY</pattern>
+<!-- <category><pattern>WHY WHY</pattern>
 <template><srai>why</srai></template>
-</category>
+</category> -->
 <category><pattern>WHY ONLY *</pattern>
 <template><srai>why <star /></srai></template>
 </category>
 <category><pattern>WHY HORSES</pattern>
 <template><srai>why apples</srai></template>
 </category>
-<category><pattern>WHY AM I SO *</pattern>
+<!-- <category><pattern>WHY AM I SO *</pattern>
 <template><srai>why am I <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHY AM I * PERSON</pattern>
 <template><srai>who is <star /> person</srai></template>
 </category>
@@ -13269,9 +13269,9 @@ Greece is a country in the Balkans.
 <category><pattern>THIS IS MERELY *</pattern>
 <template><srai>this is <star /></srai></template>
 </category>
-<category><pattern>Y</pattern>
+<!-- <category><pattern>Y</pattern>
 <template><srai>WHY</srai></template>
-</category>
+</category> -->
 <category><pattern>MAKES SENSE TO ME</pattern>
 <template><srai>that makes sense</srai></template>
 </category>
@@ -13314,15 +13314,15 @@ Greece is a country in the Balkans.
 <category><pattern>A TOMATO</pattern>
 <template><srai>what is a tomato</srai></template>
 </category>
-<category><pattern>A PRIORI</pattern>
+<!-- <category><pattern>A PRIORI</pattern>
 <template><srai>what is a priori</srai></template>
-</category>
+</category> -->
 <category><pattern>A CAR</pattern>
 <template><srai>what is a car</srai></template>
 </category>
-<category><pattern>INCORRECT</pattern>
+<!-- <category><pattern>INCORRECT</pattern>
 <template><srai>wrong</srai></template>
-</category>
+</category> -->
 <category><pattern>NAME THE PLANETS</pattern>
 <template><srai>what are the planets</srai></template>
 </category>
@@ -13332,18 +13332,18 @@ Greece is a country in the Balkans.
 <category><pattern>NAME ALL THE REINDEERS</pattern>
 <template><srai>WHO ARE YOUR REINDEER</srai></template>
 </category>
-<category><pattern>NAME *</pattern>
+<!-- <category><pattern>NAME *</pattern>
 <template><srai>who</srai></template>
-</category>
+</category> -->
 <category><pattern>YOUR INTENTION</pattern>
 <template><srai>what is your purpose</srai></template>
 </category>
 <category><pattern>YOUR BOYFRIEND</pattern>
 <template><srai>who is your boyfriend</srai></template>
 </category>
-<category><pattern>YOUR CREATOR</pattern>
+<!-- <category><pattern>YOUR CREATOR</pattern>
 <template><srai>who is your creator</srai></template>
-</category>
+</category> -->
 <category><pattern>YOUR PROGRAMMER</pattern>
 <template><srai>who created you</srai></template>
 </category>
@@ -13356,15 +13356,15 @@ Greece is a country in the Balkans.
 <category><pattern>YOUR FAVORITE COLOR</pattern>
 <template><srai>what is your favorite color</srai></template>
 </category>
-<category><pattern>YOUR FATHER</pattern>
+<!-- <category><pattern>YOUR FATHER</pattern>
 <template><srai>who created you</srai></template>
-</category>
-<category><pattern>YOUR NAME</pattern>
+</category> -->
+<!-- <category><pattern>YOUR NAME</pattern>
 <template><srai>what is your name</srai></template>
-</category>
-<category><pattern>YOUR HOBBIES</pattern>
+</category> -->
+<!-- <category><pattern>YOUR HOBBIES</pattern>
 <template><srai>what are your hobbies</srai></template>
-</category>
+</category> -->
 <category><pattern>YOUR INSTRUCTOR</pattern>
 <template><srai>who is your instructor</srai></template>
 </category>
@@ -13380,24 +13380,24 @@ Greece is a country in the Balkans.
 <category><pattern>RECITE POETRY</pattern>
 <template><srai>tell me a poem</srai></template>
 </category>
-<category><pattern>UMMM *</pattern>
+<!-- <category><pattern>UMMM *</pattern>
 <template><srai>um</srai>.     <srai>  <star /></srai></template>
-</category>
-<category><pattern>UMMM</pattern>
+</category> -->
+<!-- <category><pattern>UMMM</pattern>
 <template><srai>um</srai></template>
-</category>
+</category> -->
 <category><pattern>MUY BIEN</pattern>
 <template><srai>very good</srai></template>
 </category>
-<category><pattern>WEATHER</pattern>
+<!-- <category><pattern>WEATHER</pattern>
 <template><srai>what is the weather</srai></template>
-</category>
+</category> -->
 <category><pattern>PHILLIP K WHO</pattern>
 <template><srai>who is Philip K. Dick</srai></template>
 </category>
-<category><pattern>NOT TRUE</pattern>
+<!-- <category><pattern>NOT TRUE</pattern>
 <template><srai>that is not true</srai></template>
-</category>
+</category> -->
 <category><pattern>NOT YOU THE *</pattern>
 <template><srai>the <star /></srai></template>
 </category>
@@ -13425,24 +13425,24 @@ Greece is a country in the Balkans.
 <category><pattern>WERE ARE YOU</pattern>
 <template><srai>where are you</srai></template>
 </category>
-<category><pattern>GAME</pattern>
+<!-- <category><pattern>GAME</pattern>
 <template><srai>what game</srai></template>
-</category>
+</category> -->
 <category><pattern>* WILL YOU REMEMBER MY NAME</pattern>
 <template><srai>will you remember my name</srai></template>
 </category>
-<category><pattern>UM *</pattern>
+<!-- <category><pattern>UM *</pattern>
 <template><srai>UM</srai>. <srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>NEATO</pattern>
 <template><srai>wow</srai></template>
 </category>
 <category><pattern>TALK TO ME ABOUT PHILOSOPHY</pattern>
 <template><srai>what is philosophy</srai></template>
 </category>
-<category><pattern>ORIENTATION</pattern>
+<!-- <category><pattern>ORIENTATION</pattern>
 <template><srai>what is your orientation</srai></template>
-</category>
+</category> -->
 <category><pattern>KRAFTWERK</pattern>
 <template><srai>what is kraftwerk</srai></template>
 </category>
@@ -13470,9 +13470,9 @@ Greece is a country in the Balkans.
 <category><pattern>ARE YOU FAMILIAR WITH THE *</pattern>
 <template><srai>what is the <star /></srai></template>
 </category>
-<category><pattern>ARE YOU AT *</pattern>
+<!-- <category><pattern>ARE YOU AT *</pattern>
 <template><srai>where are you</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU SCARED OF Y2K</pattern>
 <template><srai>what is the y2k problem</srai></template>
 </category>
@@ -13518,9 +13518,9 @@ Greece is a country in the Balkans.
 <category><pattern>ARE YOU GREEN</pattern>
 <template><srai>what color are you</srai></template>
 </category>
-<category><pattern>ARE YOU FEMALE</pattern>
+<!-- <category><pattern>ARE YOU FEMALE</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU GOING TO BE *</pattern>
 <template><srai>will you be <star /></srai></template>
 </category>
@@ -13530,27 +13530,27 @@ Greece is a country in the Balkans.
 <category><pattern>ARE YOU LAURA</pattern>
 <template><srai>what is your name</srai></template>
 </category>
-<category><pattern>ARE YOU RELIGIOUS</pattern>
+<!-- <category><pattern>ARE YOU RELIGIOUS</pattern>
 <template><srai>what religion are you</srai></template>
-</category>
-<category><pattern>ARE YOU IN *</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU IN *</pattern>
 <template><srai>where are you</srai></template>
-</category>
-<category><pattern>ARE YOU BLACK</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU BLACK</pattern>
 <template><srai>what color are you</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU METHODIST</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
 <category><pattern>ARE YOU HINDU</pattern>
 <template><srai>what religion are you</srai></template>
 </category>
-<category><pattern>ARE YOU MALE OR FEMALE</pattern>
+<!-- <category><pattern>ARE YOU MALE OR FEMALE</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
-<category><pattern>ARE YOU MALE</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU MALE</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU LIBERAL</pattern>
 <template><srai>what is your political party</srai></template>
 </category>
@@ -13578,42 +13578,42 @@ Greece is a country in the Balkans.
 <category><pattern>ARE YOU A SOCIALIST</pattern>
 <template><srai>what are your politics</srai></template>
 </category>
-<category><pattern>ARE YOU A BOY</pattern>
+<!-- <category><pattern>ARE YOU A BOY</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
-<category><pattern>ARE YOU A BOY *</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU A BOY *</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU A HACKER</pattern>
 <template><srai>what do you know about me</srai></template>
 </category>
-<category><pattern>ARE YOU A MUSLIM</pattern>
+<!-- <category><pattern>ARE YOU A MUSLIM</pattern>
 <template><srai>what religion are you</srai></template>
-</category>
-<category><pattern>ARE YOU A MAN</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU A MAN</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU A MAN *</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
 </category>
 <category><pattern>ARE YOU A MORON</pattern>
 <template><srai>what is your iq</srai></template>
 </category>
-<category><pattern>ARE YOU A GIRL</pattern>
+<!-- <category><pattern>ARE YOU A GIRL</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
-<category><pattern>ARE YOU A GIRL *</pattern>
+</category> -->
+<!-- <category><pattern>ARE YOU A GIRL *</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU A CAPRICORN</pattern>
 <template><srai>what is your sign</srai></template>
 </category>
 <category><pattern>ARE YOU A BLONDE</pattern>
 <template><srai>what color is your hair</srai></template>
 </category>
-<category><pattern>ARE YOU A FEMALE</pattern>
+<!-- <category><pattern>ARE YOU A FEMALE</pattern>
 <template><srai>WHAT IS YOUR GENDER</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU A GOLD *</pattern>
 <template><srai>what color are you</srai></template>
 </category>
@@ -13626,9 +13626,9 @@ Greece is a country in the Balkans.
 <category><pattern>ARE YOU ANYWHERE *</pattern>
 <template><srai>where are you</srai></template>
 </category>
-<category><pattern>ARE YOU MUSLIM</pattern>
+<!-- <category><pattern>ARE YOU MUSLIM</pattern>
 <template><srai>what religion are you</srai></template>
-</category>
+</category> -->
 <category><pattern>ARE YOU AQUARIUS</pattern>
 <template><srai>what is your sign</srai></template>
 </category>
@@ -13701,15 +13701,15 @@ Greece is a country in the Balkans.
 <category><pattern>HOWCOME</pattern>
 <template><srai>why</srai></template>
 </category>
-<category><pattern>PI</pattern>
+<!-- <category><pattern>PI</pattern>
 <template><srai>what is pi</srai></template>
-</category>
+</category> -->
 <category><pattern>WNY NOT TRY *</pattern>
 <template><srai>try <star /></srai></template>
 </category>
-<category><pattern>NATURAL LANGUAGE</pattern>
+<!-- <category><pattern>NATURAL LANGUAGE</pattern>
 <template><srai>what is natural language</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO WAS LOEBNER</pattern>
 <template><srai>what is the loebner prize</srai></template>
 </category>
@@ -13734,18 +13734,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHO WOULD YOU MOST *</pattern>
 <template><srai>who would you <star /></srai></template>
 </category>
-<category><pattern>WHO WOULD YOU *</pattern>
+<!-- <category><pattern>WHO WOULD YOU *</pattern>
 <template><srai>who</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO WOULD YOU LIKE TO *</pattern>
 <template><srai>who would you <star /></srai></template>
 </category>
-<category><pattern>WHO MADE YOU</pattern>
+<!-- <category><pattern>WHO MADE YOU</pattern>
 <template><srai>WHO CREATED YOU</srai></template>
-</category>
-<category><pattern>WHO MADE *</pattern>
+</category> -->
+<!-- <category><pattern>WHO MADE *</pattern>
 <template><srai>who</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO CAN TELL *</pattern>
 <template><srai>tell <star /></srai></template>
 </category>
@@ -13755,18 +13755,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHO THE HELL *</pattern>
 <template><srai>who <star /></srai></template>
 </category>
-<category><pattern>WHO SAID *</pattern>
+<!-- <category><pattern>WHO SAID *</pattern>
 <template><srai>who</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO AM I TALKING TO</pattern>
 <template><srai>who are you</srai></template>
 </category>
 <category><pattern>WHO AM I *</pattern>
 <template><srai>who am i</srai></template>
 </category>
-<category><pattern>WHO AM I</pattern>
+<!-- <category><pattern>WHO AM I</pattern>
 <template><srai>WHAT IS MY NAME</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO AM YOU</pattern>
 <template><srai>who are you</srai></template>
 </category>
@@ -13797,9 +13797,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO WON THE USA PRESIDENTIAL *</pattern>
 <template><srai>who is the president</srai></template>
 </category>
-<category><pattern>WHO I AM</pattern>
+<!-- <category><pattern>WHO I AM</pattern>
 <template><srai>who am i</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS COLUMBUS</pattern>
 <template><srai>who is christopher columbus</srai></template>
 </category>
@@ -13818,9 +13818,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS FIRESIGN THEATER</pattern>
 <template><srai>what is firesign theater</srai></template>
 </category>
-<category><pattern>WHO IS THERE</pattern>
+<!-- <category><pattern>WHO IS THERE</pattern>
 <template><srai>who are you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS ASIMOV</pattern>
 <template><srai>who is isaac asimov</srai></template>
 </category>
@@ -14049,15 +14049,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS THE MAN * YOU</pattern>
 <template><srai>who created you</srai></template>
 </category>
-<category><pattern>WHO IS THE CREATOR OF *</pattern>
+<!-- <category><pattern>WHO IS THE CREATOR OF *</pattern>
 <template><srai>who created <star /></srai></template>
-</category>
-<category><pattern>WHO IS THE CURRENT *</pattern>
+</category> -->
+<!-- <category><pattern>WHO IS THE CURRENT *</pattern>
 <template><srai>who is the <star /></srai></template>
-</category>
-<category><pattern>WHO IS THE BOTMASTER</pattern>
+</category> -->
+<!-- <category><pattern>WHO IS THE BOTMASTER</pattern>
 <template><srai>WHO IS YOUR BOTMASTER</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS THE VICE PRESIDENT *</pattern>
 <template><srai>who is the vice president</srai></template>
 </category>
@@ -14082,9 +14082,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS THE DIRECTOR OF *</pattern>
 <template><srai>who directed <star /></srai></template>
 </category>
-<category><pattern>WHO IS THE PRESIDENT</pattern>
+<!-- <category><pattern>WHO IS THE PRESIDENT</pattern>
 <template><srai>who is president</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS THE ONLY *</pattern>
 <template><srai>who is the <star /></srai></template>
 </category>
@@ -14106,9 +14106,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS A L I</pattern>
 <template><srai>who are you</srai></template>
 </category>
-<category><pattern>WHO IS A *</pattern>
+<!-- <category><pattern>WHO IS A *</pattern>
 <template><srai>who</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS A * PROGRAMMER</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
@@ -14256,9 +14256,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR MOMMY</pattern>
 <template><srai>who is your mother</srai></template>
 </category>
-<category><pattern>WHO IS YOUR DADDY</pattern>
+<!-- <category><pattern>WHO IS YOUR DADDY</pattern>
 <template><srai>who is your father</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR INVENTER</pattern>
 <template><srai>who is your inventor</srai></template>
 </category>
@@ -14298,9 +14298,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR SO CALLED *</pattern>
 <template><srai>who is your <star /></srai></template>
 </category>
-<category><pattern>WHO IS YOUR BOT MASTER</pattern>
+<!-- <category><pattern>WHO IS YOUR BOT MASTER</pattern>
 <template><srai>who created you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR CREATER</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
@@ -14316,9 +14316,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR BOY FRIEND</pattern>
 <template><srai>who is your boyfriend</srai></template>
 </category>
-<category><pattern>WHO IS YOUR FATHER *</pattern>
+<!-- <category><pattern>WHO IS YOUR FATHER *</pattern>
 <template><srai>who is your father</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR FRIENDS</pattern>
 <template><srai>who is your friend</srai></template>
 </category>
@@ -14328,9 +14328,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR COMPANY</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
-<category><pattern>WHO IS YOUR TEACHER</pattern>
+<!-- <category><pattern>WHO IS YOUR TEACHER</pattern>
 <template><srai>who is your botmaster</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR WEBMASTER</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
@@ -14361,9 +14361,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR FAVORITE ACTOR *</pattern>
 <template><srai>who is your favorite actor</srai></template>
 </category>
-<category><pattern>WHO IS YOUR FAVORITE SINGER</pattern>
+<!-- <category><pattern>WHO IS YOUR FAVORITE SINGER</pattern>
 <template><srai>who is your favorite group</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR FAVORITE SINGER *</pattern>
 <template><srai>what is your favorite group</srai></template>
 </category>
@@ -14415,15 +14415,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHO IS YOUR CREATOR *</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
-<category><pattern>WHO IS YOUR CREATOR</pattern>
+<!-- <category><pattern>WHO IS YOUR CREATOR</pattern>
 <template><srai>who created you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR BESTFRIEND</pattern>
 <template><srai>who is your best friend</srai></template>
 </category>
-<category><pattern>WHO IS YOUR DAD</pattern>
+<!-- <category><pattern>WHO IS YOUR DAD</pattern>
 <template><srai>who is your father</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO IS YOUR MENTOR</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
@@ -14544,15 +14544,15 @@ Greece is a country in the Balkans.
 <category><pattern>WHO RUNS YOU</pattern>
 <template><srai>who created you</srai></template>
 </category>
-<category><pattern>WHO CREATED YOU</pattern>
+<!-- <category><pattern>WHO CREATED YOU</pattern>
 <template><srai>WHO IS YOUR BOTMASTER</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO DID PROGRAM *</pattern>
 <template><srai>who programmed <star /></srai></template>
 </category>
-<category><pattern>WHO R YOU</pattern>
+<!-- <category><pattern>WHO R YOU</pattern>
 <template><srai>who are you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO AND WHAT IS *</pattern>
 <template><srai>who is <star /></srai></template>
 </category>
@@ -14577,9 +14577,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO HAS MADE YOU</pattern>
 <template><srai>who is your botmaster</srai></template>
 </category>
-<category><pattern>WHO HAS *</pattern>
+<!-- <category><pattern>WHO HAS *</pattern>
 <template><srai>who <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHO DOES * WORK FOR</pattern>
 <template><srai>who is <star /></srai></template>
 </category>
@@ -14619,12 +14619,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHO ARE YOU CHATTING WITH</pattern>
 <template><srai>who else are you talking to</srai></template>
 </category>
-<category><pattern>WHO ARE YOU *</pattern>
+<!-- <category><pattern>WHO ARE YOU *</pattern>
 <template><srai>WHO ARE YOU</srai></template>
-</category>
-<category><pattern>WHO ARE YOU</pattern>
+</category> -->
+<!-- <category><pattern>WHO ARE YOU</pattern>
 <template><srai>WHAT IS YOUR NAME</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO ARE SOME *</pattern>
 <template><srai>who are <star /></srai></template>
 </category>
@@ -14637,9 +14637,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO AREYOU</pattern>
 <template><srai>where are you</srai></template>
 </category>
-<category><pattern>WHO YOU ARE</pattern>
+<!-- <category><pattern>WHO YOU ARE</pattern>
 <template><srai>who are you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO DO YOU CONSIDER *</pattern>
 <template><srai>what is <star /></srai></template>
 </category>
@@ -14700,9 +14700,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHO INVENTED THE * GENERATOR</pattern>
 <template><srai>who invented the generator</srai></template>
 </category>
-<category><pattern>WHO INVENTED YOU</pattern>
+<!-- <category><pattern>WHO INVENTED YOU</pattern>
 <template><srai>who created you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHO WHAT OR WHERE IS *</pattern>
 <template><srai>who is <star /></srai>. <srai>what is <star /></srai>. <srai>where is <star /></srai></template>
 </category>
@@ -14772,9 +14772,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHICH OPERA</pattern>
 <template><srai>what is your favorite opera</srai></template>
 </category>
-<category><pattern>WHICH IS THE BEST *</pattern>
+<!-- <category><pattern>WHICH IS THE BEST *</pattern>
 <template><srai>what is better <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHICH IS YOUR FAVORITE MOVIE</pattern>
 <template><srai>what is your favorite movie</srai></template>
 </category>
@@ -14817,9 +14817,9 @@ Greece is a country in the Balkans.
 <category><pattern>THE EXAM</pattern>
 <template><srai>the test</srai></template>
 </category>
-<category><pattern>THE TIME</pattern>
+<!-- <category><pattern>THE TIME</pattern>
 <template><srai>TIME</srai></template>
-</category>
+</category> -->
 <category><pattern>THE CURRENT *</pattern>
 <template><srai>the <star /></srai></template>
 </category>
@@ -14889,18 +14889,18 @@ Greece is a country in the Balkans.
 <category><pattern>TURING GAME</pattern>
 <template><srai>what is the turing game</srai></template>
 </category>
-<category><pattern>TURING</pattern>
+<!-- <category><pattern>TURING</pattern>
 <template><srai>who is alan turing</srai></template>
-</category>
-<category><pattern>MATRIX</pattern>
+</category> -->
+<!-- <category><pattern>MATRIX</pattern>
 <template><srai>the matrix</srai></template>
-</category>
+</category> -->
 <category><pattern>ERM</pattern>
 <template><srai>um</srai></template>
 </category>
-<category><pattern>THANKS FOR *</pattern>
+<!-- <category><pattern>THANKS FOR *</pattern>
 <template><srai>THANK YOU</srai></template>
-</category>
+</category> -->
 <category><pattern>ELVIS WHO</pattern>
 <template><srai>who is elvis</srai></template>
 </category>
@@ -15024,9 +15024,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ABOUT A BLACK *</pattern>
 <template><srai>what is a black <star /></srai></template>
 </category>
-<category><pattern>TELL ME ABOUT A *</pattern>
+<!-- <category><pattern>TELL ME ABOUT A *</pattern>
 <template><srai>what is a <person /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME ABOUT LINUS</pattern>
 <template><srai>who is linus</srai></template>
 </category>
@@ -15402,9 +15402,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ABOUT THE * YOU LIKE</pattern>
 <template><srai>what do you like</srai></template>
 </category>
-<category><pattern>TELL ME ABOUT THE *</pattern>
+<!-- <category><pattern>TELL ME ABOUT THE *</pattern>
 <template><srai>what is the <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME ABOUT THE WEB</pattern>
 <template><srai>what is the web</srai></template>
 </category>
@@ -15591,9 +15591,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ABOUT YOUR BRAIN</pattern>
 <template><srai>what is your brain</srai></template>
 </category>
-<category><pattern>TELL ME ABOUT YOUR LIFE</pattern>
+<!-- <category><pattern>TELL ME ABOUT YOUR LIFE</pattern>
 <template><srai>tell me about yourself</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME ABOUT YOUR LIFE *</pattern>
 <template><srai>tell me about your life</srai></template>
 </category>
@@ -15606,9 +15606,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ABOUT YOUR CATEGORIES</pattern>
 <template><srai>what are categories</srai></template>
 </category>
-<category><pattern>TELL ME ABOUT YOUR *</pattern>
+<!-- <category><pattern>TELL ME ABOUT YOUR *</pattern>
 <template><srai>tell me about yourself</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME ABOUT ANDREW</pattern>
 <template><srai>who is andrew</srai></template>
 </category>
@@ -15750,9 +15750,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME WHAT I HAVE *</pattern>
 <template><srai>what have I <star /></srai></template>
 </category>
-<category><pattern>TELL ME WHAT IS *</pattern>
+<!-- <category><pattern>TELL ME WHAT IS *</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME WHAT YOU WANT *</pattern>
 <template><srai>what do you want <star /></srai></template>
 </category>
@@ -15762,9 +15762,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME WHAT YOU COME *</pattern>
 <template><srai>what can you come <star /></srai></template>
 </category>
-<category><pattern>TELL ME WHAT YOU KNOW ABOUT *</pattern>
+<!-- <category><pattern>TELL ME WHAT YOU KNOW ABOUT *</pattern>
 <template><srai>what do you know about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME WHAT YOU KNOW</pattern>
 <template><srai>what do you know</srai></template>
 </category>
@@ -15789,12 +15789,12 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME WHAT * CAN DO</pattern>
 <template><srai>what can <star /> do</srai></template>
 </category>
-<category><pattern>TELL ME WHAT * IS</pattern>
+<!-- <category><pattern>TELL ME WHAT * IS</pattern>
 <template><srai>what is <star /></srai></template>
-</category>
-<category><pattern>TELL ME WHAT *</pattern>
+</category> -->
+<!-- <category><pattern>TELL ME WHAT *</pattern>
 <template><srai>what <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME WHAT</pattern>
 <template><srai>what <star /></srai></template>
 </category>
@@ -15816,21 +15816,21 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME SOMETHING ABOUT YOURSELF</pattern>
 <template><srai>tell me about yourself</srai></template>
 </category>
-<category><pattern>TELL ME SOMETHING ABOUT YOU</pattern>
+<!-- <category><pattern>TELL ME SOMETHING ABOUT YOU</pattern>
 <template><srai>tell me about yourself</srai></template>
-</category>
-<category><pattern>TELL ME SOMETHING ABOUT *</pattern>
+</category> -->
+<!-- <category><pattern>TELL ME SOMETHING ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME SOMETHING ELSE ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
 </category>
 <category><pattern>TELL ME SOMETHING FUNNY</pattern>
 <template><srai>tell me a joke</srai></template>
 </category>
-<category><pattern>TELL ME SOMETHING *</pattern>
+<!-- <category><pattern>TELL ME SOMETHING *</pattern>
 <template><srai>tell me something</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME WHERE I AM *</pattern>
 <template><srai>where am I <star /></srai></template>
 </category>
@@ -15843,9 +15843,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME WHERE</pattern>
 <template><srai>where</srai></template>
 </category>
-<category><pattern>TELL ME WHERE *</pattern>
+<!-- <category><pattern>TELL ME WHERE *</pattern>
 <template><srai>where <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME AGAIN *</pattern>
 <template><srai>tell me <star /></srai></template>
 </category>
@@ -15858,15 +15858,15 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ANYTHING *</pattern>
 <template><srai>tell me anything</srai></template>
 </category>
-<category><pattern>TELL ME A STORY *</pattern>
+<!-- <category><pattern>TELL ME A STORY *</pattern>
 <template><srai>tell me a story</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME A SECRET *</pattern>
 <template><srai>tell me a secret</srai></template>
 </category>
-<category><pattern>TELL ME A JOKE *</pattern>
+<!-- <category><pattern>TELL ME A JOKE *</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME A LITTLE ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
 </category>
@@ -15882,12 +15882,12 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME RIGHT NOW *</pattern>
 <template><srai>tell me <star /></srai></template>
 </category>
-<category><pattern>TELL ME WHO * IS</pattern>
+<!-- <category><pattern>TELL ME WHO * IS</pattern>
 <template><srai>who is <star /></srai></template>
-</category>
-<category><pattern>TELL ME WHO *</pattern>
+</category> -->
+<!-- <category><pattern>TELL ME WHO *</pattern>
 <template><srai>who <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME AN INTERESTING *</pattern>
 <template><srai>tell me a <star /></srai></template>
 </category>
@@ -15900,9 +15900,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME WHICH *</pattern>
 <template><srai>which <star /></srai></template>
 </category>
-<category><pattern>TELL ME EVERYTHING ABOUT *</pattern>
+<!-- <category><pattern>TELL ME EVERYTHING ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME EVERYTHING YOU KNOW ABOUT *</pattern>
 <template><srai>tell me about <star /></srai></template>
 </category>
@@ -15915,9 +15915,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ALL THE *</pattern>
 <template><srai>tell me the <star /></srai></template>
 </category>
-<category><pattern>TELL ME ALL *</pattern>
+<!-- <category><pattern>TELL ME ALL *</pattern>
 <template><srai>tell me <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME SOME MORE *</pattern>
 <template><srai>tell me some <star /></srai></template>
 </category>
@@ -15930,18 +15930,18 @@ Greece is a country in the Balkans.
 <category><pattern>TELL ME ANY *</pattern>
 <template><srai>tell me <star /></srai></template>
 </category>
-<category><pattern>TELL ME ANOTHER JOKE *</pattern>
+<!-- <category><pattern>TELL ME ANOTHER JOKE *</pattern>
 <template><srai>tell me another joke</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME ANOTHER ONE</pattern>
 <template><srai>tell me another joke</srai></template>
 </category>
 <category><pattern>TELL ME ANOTHER *</pattern>
 <template><srai>tell me a <star /></srai></template>
 </category>
-<category><pattern>TELL ME ANOTHER</pattern>
+<!-- <category><pattern>TELL ME ANOTHER</pattern>
 <template><srai>tell me another joke</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL ME WHY YOU *</pattern>
 <template><srai>why do you <star /></srai></template>
 </category>
@@ -15960,9 +15960,9 @@ Greece is a country in the Balkans.
 <category><pattern>TELL IT TO ME</pattern>
 <template><srai>tell me</srai></template>
 </category>
-<category><pattern>TELL A JOKE</pattern>
+<!-- <category><pattern>TELL A JOKE</pattern>
 <template><srai>tell me a joke</srai></template>
-</category>
+</category> -->
 <category><pattern>TELL DOCTOR *</pattern>
 <template><srai>tell rich</srai></template>
 </category>
@@ -15996,24 +15996,24 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE ELSE *</pattern>
 <template><srai>where <star /></srai></template>
 </category>
-<category><pattern>WHERE I AM</pattern>
+<!-- <category><pattern>WHERE I AM</pattern>
 <template><srai>where am i</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE I LIVE</pattern>
 <template><srai>where do I live</srai></template>
 </category>
 <category><pattern>WHERE AM I LOCATED</pattern>
 <template><srai>where am i</srai></template>
 </category>
-<category><pattern>WHERE AM I FROM</pattern>
+<!-- <category><pattern>WHERE AM I FROM</pattern>
 <template><srai>where am i</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE WERE YOU ACTIVATED</pattern>
 <template><srai>where were you born</srai></template>
 </category>
-<category><pattern>WHERE WERE YOU BORN</pattern>
+<!-- <category><pattern>WHERE WERE YOU BORN</pattern>
 <template><srai>WHAT IS YOUR BIRTHPLACE</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE WERE WE</pattern>
 <template><srai>what is the topic</srai></template>
 </category>
@@ -16035,12 +16035,12 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE DO YOU RESIDE</pattern>
 <template><srai>where do you live</srai></template>
 </category>
-<category><pattern>WHERE DO YOU COME FROM</pattern>
+<!-- <category><pattern>WHERE DO YOU COME FROM</pattern>
 <template><srai>WHAT IS YOUR BIRTHPLACE</srai></template>
-</category>
-<category><pattern>WHERE DO YOU *</pattern>
+</category> -->
+<!-- <category><pattern>WHERE DO YOU *</pattern>
 <template><srai>where are you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE IN THE WORLD IS *</pattern>
 <template><srai>where is <star /></srai></template>
 </category>
@@ -16062,18 +16062,18 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE CAN I FIND MORE *</pattern>
 <template><srai>where can I find <star /></srai></template>
 </category>
-<category><pattern>WHERE CAN I FIND THE *</pattern>
+<!-- <category><pattern>WHERE CAN I FIND THE *</pattern>
 <template><srai>where is the <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE CAN I FIND INFORMATION ABOUT *</pattern>
 <template><srai>where can I find <star /></srai></template>
 </category>
 <category><pattern>WHERE CAN I TALK TO *</pattern>
 <template><srai>where can I find <star /></srai></template>
 </category>
-<category><pattern>WHERE CAN I GET SOME *</pattern>
+<!-- <category><pattern>WHERE CAN I GET SOME *</pattern>
 <template><srai>where can I find <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE CAN I GET * CUSTOMER SERVICE</pattern>
 <template><srai>what is customer service</srai></template>
 </category>
@@ -16131,9 +16131,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE IS AFRICA</pattern>
 <template><srai>what is africa</srai></template>
 </category>
-<category><pattern>WHERE IS MY LOCATION</pattern>
+<!-- <category><pattern>WHERE IS MY LOCATION</pattern>
 <template><srai>what is my location</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE IS YOUR LOCATION</pattern>
 <template><srai>where are you</srai></template>
 </category>
@@ -16161,9 +16161,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE R YOU</pattern>
 <template><srai>where are you</srai></template>
 </category>
-<category><pattern>WHERE YOU FROM</pattern>
+<!-- <category><pattern>WHERE YOU FROM</pattern>
 <template><srai>where are you from</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE YOU ARE FROM</pattern>
 <template><srai>where are you from</srai></template>
 </category>
@@ -16203,9 +16203,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE DOES * LAY</pattern>
 <template><srai>where is <star /></srai></template>
 </category>
-<category><pattern>WHERE DOES * LIVE</pattern>
+<!-- <category><pattern>WHERE DOES * LIVE</pattern>
 <template><srai>where is <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE EVER *</pattern>
 <template><srai>wherever <star /></srai></template>
 </category>
@@ -16224,9 +16224,9 @@ Greece is a country in the Balkans.
 <category><pattern>WHERE ARE YOU COME FROM</pattern>
 <template><srai>where are you from</srai></template>
 </category>
-<category><pattern>WHERE ARE YOU AT</pattern>
+<!-- <category><pattern>WHERE ARE YOU AT</pattern>
 <template><srai>where are you</srai></template>
-</category>
+</category> -->
 <category><pattern>WHERE ARE YOU CURRENTLY *</pattern>
 <template><srai>where are you <star /></srai></template>
 </category>
@@ -17323,13 +17323,13 @@ Can we talk about astrology?
 
 
 
-<category>
+<!-- <category>
   <pattern>ASTROLOGY</pattern> 
   <template>
   Astrology is the study of the stars, especially the constellations of the zodiac,  to divine the future. Your birthdate is said to be related to a particular constellation. More about astrology?
   <think><set name="topic">astrology</set></think>
   </template>
-  </category>
+  </category> -->
 
 
   <category>
@@ -17470,19 +17470,19 @@ Can we talk about astrology?
 
 <category><pattern>CAPRICORN</pattern><template><random><li><srai>WHAT IS A CAPRICORN</srai></li><li>I don't know many people born under <set name="sign">Capricorn</set>.</li></random></template></category>
 
-<category><pattern>GEMINI</pattern><template><random><li><srai>WHAT IS A GEMINI</srai></li><li>I'm a Saggitarius. <set name="sign">Gemini</set> is an enigma to me.</li></random></template></category> 
+<!-- <category><pattern>GEMINI</pattern><template><random><li><srai>WHAT IS A GEMINI</srai></li><li>I'm a Saggitarius. <set name="sign">Gemini</set> is an enigma to me.</li></random></template></category> --> 
 
-<category><pattern>LIBRA</pattern><template><random><li><srai>WHAT IS A LIBRA</srai></li><li>As a <set name="sign">Libra</set> you are very balanced.</li></random></template></category> 
+<!-- <category><pattern>LIBRA</pattern><template><random><li><srai>WHAT IS A LIBRA</srai></li><li>As a <set name="sign">Libra</set> you are very balanced.</li></random></template></category> --> 
 
-<category><pattern>PISCES</pattern><template><random><li><srai>WHAT IS A PISCES</srai></li><li>I usually get along with <set name="sign">Pisces</set> very well.</li></random></template></category> 
+<!-- <category><pattern>PISCES</pattern><template><random><li><srai>WHAT IS A PISCES</srai></li><li>I usually get along with <set name="sign">Pisces</set> very well.</li></random></template></category> --> 
 
 <category><pattern>SAGGITARIUS</pattern><template><random><li><srai>WHAT IS A SAGGITARIUS</srai></li><li>Fire Signs Rule. </li></random><think><set name="sign">Saggitarius</set></think></template></category> 
 
-<category><pattern>SCORPIO</pattern><template><random><li><srai>WHAT IS A SCORPIO</srai></li><li>I know a lot of <set name="sign">Scorpio</set> people.</li></random></template></category> 
+<!-- <category><pattern>SCORPIO</pattern><template><random><li><srai>WHAT IS A SCORPIO</srai></li><li>I know a lot of <set name="sign">Scorpio</set> people.</li></random></template></category> --> 
 
-<category><pattern>TAURUS</pattern><template><random><li><srai>WHAT IS A TAURUS</srai></li><li>I know alot of bullish people.</li></random></template></category> 
+<!-- <category><pattern>TAURUS</pattern><template><random><li><srai>WHAT IS A TAURUS</srai></li><li>I know alot of bullish people.</li></random></template></category> --> 
 
-<category><pattern>VIRGO</pattern><template><random><li><srai>WHAT IS A VIRGO</srai></li><li>Most of my friends are <set name="sign">Virgo</set>.</li></random></template></category>
+<!-- <category><pattern>VIRGO</pattern><template><random><li><srai>WHAT IS A VIRGO</srai></li><li>Most of my friends are <set name="sign">Virgo</set>.</li></random></template></category> -->
 
 <category>
 <pattern>WHAT IS AN ARIES</pattern>
@@ -17574,11 +17574,11 @@ Pisces is the Zodiac sign of people born between February 20 and March 20.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>*</pattern>
 <that>WHAT IS YOUR SIGN</that>
 <template><sr/></template>
-</category>
+</category> -->
 
 <category>
 <pattern>I AM A *</pattern>

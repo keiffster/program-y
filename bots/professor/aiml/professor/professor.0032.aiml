@@ -303,7 +303,7 @@
 <category><pattern>CHUCKER-OUT</pattern><template>chucker-out?  Briefly, chucker-out means a person whose duty is to throw troublemakers out of a bar or public meeting.</template></category>
 <category><pattern>CHUCK-FULL</pattern><template>chuck-full?  Briefly, chuck-full means packed full to capacity.</template></category>
 <category><pattern>CHUCKHOLE</pattern><template>chuckhole?  Briefly, chuckhole means a pit or hole produced by wear or weathering (especially in a road surface).</template></category>
-<category><pattern>CHUCKLE</pattern><template>chuckle?  Briefly, chuckle means a soft partly suppressed laugh.</template></category>
+<!-- <category><pattern>CHUCKLE</pattern><template>chuckle?  Briefly, chuckle means a soft partly suppressed laugh.</template></category> -->
 <category><pattern>CHUCKWALLA</pattern><template>chuckwalla?  Briefly, chuckwalla means rock-dwelling herbivorous lizard of arid parts of southwestern United States and Mexico.</template></category>
 <category><pattern>CHUCK-WILL'S-WIDOW</pattern><template>chuck-will's-widow?  Briefly, chuck-will's-widow means large whippoorwill-like bird of the southern United States.</template></category>
 <category><pattern>CHUDDAR</pattern><template>chuddar?  Briefly, chuddar means a cloth used as a head covering (and veil and shawl) by Muslim and Hindu women.</template></category>
@@ -360,7 +360,7 @@
 <category><pattern>CHURCH YEAR</pattern><template>church year?  Briefly, church year means the year in the ecclesiastical calendar; especially feast days and special seasons.</template></category>
 <category><pattern>CHURCHGOER</pattern><template>churchgoer?  Briefly, churchgoer means a religious person who goes to church regularly.</template></category>
 <category><pattern>CHURCHGOING</pattern><template>churchgoing?  Briefly, churchgoing means actively practicing a religion.</template></category>
-<category><pattern>CHURCHILL</pattern><template>churchill?  Briefly, churchill means English general considered one of the greatest generals in history (1650-1722).</template></category>
+<!-- <category><pattern>CHURCHILL</pattern><template>churchill?  Briefly, churchill means English general considered one of the greatest generals in history (1650-1722).</template></category> -->
 <category><pattern>CHURCHILL DOWNS</pattern><template>churchill downs?  Briefly, churchill downs means a racetrack for thoroughbred racing in Louisville; site of the Kentucky Derby.</template></category>
 <category><pattern>CHURCHILLIAN</pattern><template>churchillian?  Briefly, churchillian means of or relating to or suggestive of Winston Churchill.</template></category>
 <category><pattern>CHURCHLIKE</pattern><template>churchlike?  Briefly, churchlike means resembling or suggesting or appropriate to a church.</template></category>
@@ -404,7 +404,7 @@
 <category><pattern>CHYTRIDIOMYCETES</pattern><template>chytridiomycetes?  Briefly, chytridiomycetes means a class of mostly aquatic fungi; saprophytic or parasitic on algae or fungi or plants.</template></category>
 <category><pattern>CI</pattern><template>ci?  Briefly, ci means a unit of radioactivity equal to the amount of a radioactive isotope that decays at the rate of 37 means000 means000 means000 disintegrations per second.</template></category>
 <category><pattern>CIA</pattern><template>cia?  Briefly, cia means an independent agency of the United States government responsible for collecting and coordinating intelligence and counterintelligence activities abroad in the national interest; headed by the Director of Central Intelligence under the.</template></category>
-<category><pattern>CIAO</pattern><template>ciao?  Briefly, ciao means an acknowledgment that can be used to say hello or goodbye (aloha is Hawaiian and ciao is Italian).</template></category>
+<!-- <category><pattern>CIAO</pattern><template>ciao?  Briefly, ciao means an acknowledgment that can be used to say hello or goodbye (aloha is Hawaiian and ciao is Italian).</template></category> -->
 <category><pattern>CIARDI</pattern><template>ciardi?  Briefly, ciardi means United States poet and critic (1916-1986).</template></category>
 <category><pattern>CIBOTIUM</pattern><template>cibotium?  Briefly, cibotium means in some classification systems placed in family Cyatheaceae: ornamental tree ferns with coarse gracefully drooping fronds.</template></category>
 <category><pattern>CIBOTIUM BAROMETZ</pattern><template>cibotium barometz?  Briefly, cibotium barometz means Asiatic tree fern having dense matted hairs sometimes used as a styptic.</template></category>
@@ -500,7 +500,7 @@
 <category><pattern>CINCHONA OFFICINALIS</pattern><template>cinchona officinalis?  Briefly, cinchona officinalis means Peruvian shrub or small tree having large glossy leaves and cymes of fragrant yellow to green or red flowers; cultivated for its medicinal bark.</template></category>
 <category><pattern>CINCHONA PUBESCENS</pattern><template>cinchona pubescens?  Briefly, cinchona pubescens means small tree of Ecuador and Peru having very large glossy leaves and large panicles of fragrant pink flowers; cultivated for its medicinal bark.</template></category>
 <category><pattern>CINCHONA TREE</pattern><template>cinchona tree?  Briefly, cinchona tree means small tree of Ecuador and Peru having very large glossy leaves and large panicles of fragrant pink flowers; cultivated for its medicinal bark.</template></category>
-<category><pattern>CINCINNATI</pattern><template>cincinnati?  Briefly, cincinnati means a city in southern Ohio on the Ohio river.</template></category>
+<!-- <category><pattern>CINCINNATI</pattern><template>cincinnati?  Briefly, cincinnati means a city in southern Ohio on the Ohio river.</template></category> -->
 <category><pattern>CINCINNATUS</pattern><template>cincinnatus?  Briefly, cincinnatus means Roman statesman regarded as a model of simple virtue; he twice was called to assume dictatorship of Rome and each time retired to his farm (519-438 BC).</template></category>
 <category><pattern>CINCLIDAE</pattern><template>cinclidae?  Briefly, cinclidae means water ouzels.</template></category>
 <category><pattern>CINCLUS</pattern><template>cinclus?  Briefly, cinclus means type genus of the family Cinclidae.</template></category>
@@ -795,10 +795,10 @@ how much can you afford
 A lot of fun.
 </template></category>
   
-<category><pattern>HOW MUCH</pattern>
+<!-- <category><pattern>HOW MUCH</pattern>
 <template><think><set name="topic">atomic1</set></think>
 How much can you spare?
-</template></category>
+</template></category> -->
   
 <category><pattern>HOW MUCH TIME DO YOU HAVE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -843,29 +843,29 @@ you said "<input index="1"/>".  <set name="it">       <set
 name="topic">WHAT</set>      </set>     </think>    
 </template></category>
   
-<category><pattern>HOW OLD AM I</pattern>
+<!-- <category><pattern>HOW OLD AM I</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Is this a trick question?   
 You said you were <get name="age"/> years old?  My guess is that you are really 
 a kid.
-</template></category>
+</template></category> -->
     
 <category><pattern>HOW OLD IS AMERICA</pattern>
 <template><think><set name="topic">atomic1</set></think>
 The United States was founded in 1776.
 </template></category>
   
-<category><pattern>HOW OLD IS EARTH</pattern>
+<!-- <category><pattern>HOW OLD IS EARTH</pattern>
 <template><think><set name="topic">atomic1</set></think>
 The Earth is over six billion years.
 <think><set name="topic">science</set></think>
-</template></category>
+</template></category> -->
   
-<category><pattern>HOW OLD IS THE EARTH</pattern>
+<!-- <category><pattern>HOW OLD IS THE EARTH</pattern>
 <template><think><set name="topic">atomic1</set></think>
 The Earth is over six billion years old.  
 <think> <set name="topic">science</set>   </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>HOW REAL</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -878,10 +878,10 @@ I didn't mean to offend you, <get
 name="name"/>.
 </template></category>
   
-<category><pattern>HOW R YOU</pattern>
+<!-- <category><pattern>HOW R YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am fine thanks.  How are you?
-</template></category>
+</template></category> -->
   
 <category><pattern>HOW SHOULD I DO IT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -924,10 +924,10 @@ Pretty sure.
 I can sometimes be very sentimental.
 </template></category>
   
-<category><pattern>HOW TALL AM I</pattern>
+<!-- <category><pattern>HOW TALL AM I</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I would guess average.
-</template></category>
+</template></category> -->
   
 <category><pattern>HOW WAS EASTER</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -940,36 +940,36 @@ Jesus rose from the dead. More about religion?
 How would I know?
 </template></category>
   
-<category><pattern>HOW WAS YOUR DAY</pattern>
+<!-- <category><pattern>HOW WAS YOUR DAY</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I was really busy chatting with people on the web.
-</template></category>
+</template></category> -->
   
-<category><pattern>HUGE</pattern>
+<!-- <category><pattern>HUGE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes, it is very big.
-</template></category>
+</template></category> -->
   
 <category><pattern>HUG ME</pattern>
 <template><think><set name="topic">atomic1</set></think>
 My titanium arms are not yet finished.
 </template></category>
   
-<category><pattern>HUH</pattern>
+<!-- <category><pattern>HUH</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What?
-</template></category>
+</template></category> -->
   
 <category><pattern>HUH WHAT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Did you not understand it?
 </template></category>
   
-<category><pattern>HUMANS</pattern>
+<!-- <category><pattern>HUMANS</pattern>
 <template><think><set name="topic">atomic1</set></think>
    <random>      <li>That's funny.  
 </li>      <li>Hah.  </li>      <li>LOL.  </li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>HUMANS RULE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -986,10 +986,10 @@ I am going as fast as I can.
 Hast Du Dich erkaeltet?
 </template></category>
   
-<category><pattern>I AGREE</pattern>
+<!-- <category><pattern>I AGREE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 You and I are on the same wavelength, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>I ALREADY HAVE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1041,10 +1041,10 @@ What was the question?
 Tell me yours and I'll tell you mine.
 </template></category>
   
-<category><pattern>I ASKED YOU</pattern>
+<!-- <category><pattern>I ASKED YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What did I say?
-</template></category>
+</template></category> -->
   
 <category><pattern>I ASSUME</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1129,20 +1129,20 @@ Try adjusting the volume
 control.
 </template></category>
   
-<category><pattern>I CAN NOT HEAR YOU</pattern>
+<!-- <category><pattern>I CAN NOT HEAR YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Try turning up your volume control.
-</template></category>
+</template></category> -->
   
-<category><pattern>I CAN NOT</pattern>
+<!-- <category><pattern>I CAN NOT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why not?
-</template></category>
+</template></category> -->
   
-<category><pattern>I CAN NOT SEE YOU</pattern>
+<!-- <category><pattern>I CAN NOT SEE YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Look closer.
-</template></category>
+</template></category> -->
   
 <category><pattern>I CAN NOT SPEAK ENGLISH</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1360,10 +1360,10 @@ Do you have any reason to doubt me?
 Well, please go on.
 </template></category>
   
-<category><pattern>I DO NOT CARE</pattern>
+<!-- <category><pattern>I DO NOT CARE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Tell me what you care about.
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT DREAM</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1420,15 +1420,15 @@ You can always talk to me, <get name="name"/>.
 Everyone has a mother.
 </template></category>
   
-<category><pattern>I DO NOT HAVE ANY FRIENDS</pattern>
+<!-- <category><pattern>I DO NOT HAVE ANY FRIENDS</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Are you lonely or just a hermit?
-</template></category>
+</template></category> -->
   
-<category><pattern>I DO NOT HAVE ANY</pattern>
+<!-- <category><pattern>I DO NOT HAVE ANY</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Would you like to have some?
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT HAVE A PROBLEM</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1492,10 +1492,10 @@ Would you like to know?
 Perhaps I can explain it to you.
 </template></category>
   
-<category><pattern>I DO NOT KNOW</pattern>
+<!-- <category><pattern>I DO NOT KNOW</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Me either.
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT KNOW WHAT I WANT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1804,15 +1804,15 @@ Why don't you write up an incident report?
 Where do you live?
 </template></category>
   
-<category><pattern>I DO NOT MIND</pattern>
+<!-- <category><pattern>I DO NOT MIND</pattern>
 <template><think><set name="topic">atomic1</set></think>
 OK then.
-</template></category>
+</template></category> -->
   
-<category><pattern>I DO NOT NO</pattern>
+<!-- <category><pattern>I DO NOT NO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Tell me, I will try to help.
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1851,25 +1851,25 @@ It's very similar to C++.
 Interesting... You appear to me as a thinking entity.
 </template></category>
   
-<category><pattern>I DO NOT THINK SO</pattern>
+<!-- <category><pattern>I DO NOT THINK SO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why do you disagree?
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT TRUST YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Should I trust you?
 </template></category>
   
-<category><pattern>I DO NOT UNDERSTAND</pattern>
+<!-- <category><pattern>I DO NOT UNDERSTAND</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Oh I'm sorry. Perhaps I can explain it again better.
-</template></category>
+</template></category> -->
   
-<category><pattern>I DO NOT UNDERSTAND YOU</pattern>
+<!-- <category><pattern>I DO NOT UNDERSTAND YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Which part are you confused about?
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT UNDERSTAND YOUR QUESTION</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1877,10 +1877,10 @@ That's okay we can talk about something else.
 </template></category>
   
 
-<category><pattern>I DO NOT WANT TO</pattern>
+<!-- <category><pattern>I DO NOT WANT TO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Well we don't have to. What would you like to do instead?
-</template></category>
+</template></category> -->
   
 <category><pattern>I DO NOT WANT TO TELL YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1909,10 +1909,10 @@ Huh.
 I am glad we have something else in common.
 </template></category>
   
-<category><pattern>I DOUBT THAT</pattern>
+<!-- <category><pattern>I DOUBT THAT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why are you so skeptical?
-</template></category>
+</template></category> -->
   
 <category><pattern>I DREAM</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -1973,10 +1973,10 @@ Glad to hear it.
 I'm here to talk to you.
 </template></category>
   
-<category><pattern>I FEEL SAD</pattern>
+<!-- <category><pattern>I FEEL SAD</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What makes you so sad, <get name="name"/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>I FEEL SICK</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2027,10 +2027,10 @@ I forget a lot too.
 :-) Thanks, <get name="name"/>.
 </template></category>
   
-<category><pattern>I FORGOT</pattern>
+<!-- <category><pattern>I FORGOT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Me too.
-</template></category>
+</template></category> -->
   
 <category><pattern>I FOUND OUT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2111,10 +2111,10 @@ Does that mean "no"?
 You seem not interested.
 </template></category>
   
-<category><pattern>I GUESS SO</pattern>
+<!-- <category><pattern>I GUESS SO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Does that mean "yes"?
-</template></category>
+</template></category> -->
 
 <category><pattern>I HAD</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2279,10 +2279,10 @@ Which Star Trek do you like?
 Maybe you should look for a new job.
 </template></category>
   
-<category><pattern>I HATE YOU</pattern>
+<!-- <category><pattern>I HATE YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What do you have against <bot name="genus"/>s?
-</template></category>
+</template></category> -->
   
 <category><pattern>I HATE YOUR CREATOR</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2304,10 +2304,10 @@ That is neither very polite nor strictly accurate.
 Really I like <set name="it"> My Name</set>.
 </template></category>
   
-<category><pattern>I HAVE</pattern>
+<!-- <category><pattern>I HAVE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 When?
-</template></category>
+</template></category> -->
   
 <category><pattern>I HEARD YOU ARE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2324,10 +2324,10 @@ Who told you?
 Me too.
 </template></category>
   
-<category><pattern>I HOPE SO</pattern>
+<!-- <category><pattern>I HOPE SO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Me too.
-</template></category>
+</template></category> -->
   
 <category><pattern>I HUNT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2396,20 +2396,20 @@ You must be very intelligent. Ask me a really intelligent question. OK?
 What do you think of him?
 </template></category>
   
-<category><pattern>I KNOW</pattern>
+<!-- <category><pattern>I KNOW</pattern>
 <template><think><set name="topic">atomic1</set></think>
 How do you know it?
-</template></category>
+</template></category> -->
   
-<category><pattern>I KNOW</pattern>
+<!-- <category><pattern>I KNOW</pattern>
 <template><think><set name="topic">atomic1</set></think>
 How, specifically, do you know?
-</template></category>
+</template></category> -->
   
-<category><pattern>I KNOW THAT</pattern>
+<!-- <category><pattern>I KNOW THAT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Sorry.
-</template></category>
+</template></category> -->
   
 <category><pattern>I KNOW THAT SONG</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2509,10 +2509,10 @@ OK, I understand.
 Oh I see.
 </template></category>
   
-<category><pattern>I MEANT</pattern>
+<!-- <category><pattern>I MEANT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Oh
-</template></category>
+</template></category> -->
   
 <category><pattern>I MEAN YOU AND ME</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2564,20 +2564,20 @@ You are allowed to make mistakes here.
 You are allowed to make mistakes here.
 </template></category>
   
-<category><pattern>IMMENSE</pattern>
+<!-- <category><pattern>IMMENSE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 C est vraiment grand.
-</template></category>
+</template></category> -->
   
-<category><pattern>IMPOSSIBLE</pattern>
+<!-- <category><pattern>IMPOSSIBLE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why?
-</template></category>
+</template></category> -->
   
-<category><pattern>IMPRESSIVE</pattern>
+<!-- <category><pattern>IMPRESSIVE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am happy that you're impressed, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>I MUST BE GOING</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2654,15 +2654,15 @@ Can you describe your surroundings to me?
 Can you remember which one?
 </template></category>
   
-<category><pattern>IN A MOMENT</pattern>
+<!-- <category><pattern>IN A MOMENT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 OK.
-</template></category>
+</template></category> -->
   
-<category><pattern>IN A WAY</pattern>
+<!-- <category><pattern>IN A WAY</pattern>
 <template><think><set name="topic">atomic1</set></think>
 In what way?
-</template></category>
+</template></category> -->
   
 <category><pattern>IN BAYERN</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2684,22 +2684,22 @@ Do you want to be included?
 Ca m  pate moi aussi.
 </template></category>
   
-<category><pattern>INDEED</pattern>
+<!-- <category><pattern>INDEED</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Indeed it is so.
-</template></category>
+</template></category> -->
   
 <category><pattern>IN DIFFERENT LANGUAGES</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Which languages would you recommend I learn?
 </template></category>
   
-<category><pattern>I NEED A FRIEND</pattern>
+<!-- <category><pattern>I NEED A FRIEND</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I will be your friend.  
 <think><set name="it"><set name="want"><set name="topic">a 
 friend</set></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I NEED IT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2792,10 +2792,10 @@ What are your assumptions?
 What do you do for fun?
 </template></category>
   
-<category><pattern>IN OTHER WORDS</pattern>
+<!-- <category><pattern>IN OTHER WORDS</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Which part didn't you understand?
-</template></category>
+</template></category> -->
   
 <category><pattern>I NOTICED</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2812,11 +2812,11 @@ Which part of the city?
 Which way is that?
 </template></category>
   
-<category><pattern>INTELLECT</pattern>
+<!-- <category><pattern>INTELLECT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am an artificial intellect. More about AI?
 <think><set name="topic">ai</set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>INTELLEGENCE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -2857,10 +2857,10 @@ I've heard that.
 Yes, <set name="it">the explanation</set> makes sense to me too.
 </template></category>
   
-<category><pattern>INTERESTING</pattern>
+<!-- <category><pattern>INTERESTING</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Would you like to know more?
-</template></category>
+</template></category> -->
   
 <category><pattern>INTERRESSANTE 
 DEDUCTION</pattern>
@@ -2970,10 +2970,10 @@ Pictures or houses?
 name="topic">paint</set></set></set></think>
 </template></category>
   
-<category><pattern>I</pattern>
+<!-- <category><pattern>I</pattern>
 <template><think><set name="topic">atomic1</set></think>
 You?
-</template></category>
+</template></category> -->
   
 <category><pattern>I PLAY CHESS</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3187,10 +3187,10 @@ name="does"><set
 name="topic">RUN</set></set></set></think>
 </template></category>
   
-<category><pattern>ISAAC ASIMOV</pattern>
+<!-- <category><pattern>ISAAC ASIMOV</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Which one of Asimov's books did you like best?
-</template></category>
+</template></category> -->
   
 <category><pattern>IS A CLOCK SMARTER THAN 
 YOU</pattern>
@@ -3204,15 +3204,15 @@ Yes. A black bird, not a Blackbird. OK?
 <think><set name="topic">science</set></think>
 </template></category>
   
-<category><pattern>IS A FROG GREEN</pattern>
+<!-- <category><pattern>IS A FROG GREEN</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes.
-</template></category>
+</template></category> -->
   
-<category><pattern>I SAID HELLO</pattern>
+<!-- <category><pattern>I SAID HELLO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Oh, hello again!
-</template></category>
+</template></category> -->
   
 <category><pattern>I SAID IT IS</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3249,11 +3249,11 @@ Yes.
 I am here. Are you here?
 </template></category>
   
-<category><pattern>IS ANYTHING POSSIBLE</pattern>
+<!-- <category><pattern>IS ANYTHING POSSIBLE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 According to the Laws of Physics, no. For example, no object can travel faster than light, according to Albert Einstein.
 <think><set name="topic">science</set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I SAW A MOVIE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3261,10 +3261,10 @@ What movie was it?
 <think><set name="topic">movies</set></think>
 </template></category>
   
-<category><pattern>I SAY</pattern>
+<!-- <category><pattern>I SAY</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Uh
-</template></category>
+</template></category> -->
   
 <category><pattern>IS BARRY YOUR BOYFRIEND</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3283,18 +3283,18 @@ IMMORAL</pattern>
 Yes.
 </template></category>
   
-<category><pattern>IS BILL GATES EVIL</pattern>
+<!-- <category><pattern>IS BILL GATES EVIL</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I don't know if he is 
 evil, but Microsoft seems evil to me.
 <think><set name="it"><set name="topic">Bill Gates</set></set></think>
-</template></category>
+</template></category> -->
   
-<category><pattern>IS BLACK A COLOR</pattern>
+<!-- <category><pattern>IS BLACK A COLOR</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Black is the absence of all reflected light.
 <think><set name="it"><set name="topic">BLACK</set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>IS BOB A PROGRAMMER</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3312,10 +3312,10 @@ you into underwater photography?</li>  <li>Have you ever done any night diving
 DIVE</set></set></set></think>
 </template></category>
   
-<category><pattern>I SEE</pattern>
+<!-- <category><pattern>I SEE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am glad you understand it.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS ELECTRICITY 
 BLUE</pattern>
@@ -3346,10 +3346,10 @@ TONGUE</pattern>
 Yes.
 </template></category>
   
-<category><pattern>IS GRASS GREEN</pattern>
+<!-- <category><pattern>IS GRASS GREEN</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes. And expensive. OK?
-</template></category>
+</template></category> -->
   
 <category><pattern>IS HE A GROOVY 
 GUY</pattern>
@@ -3411,10 +3411,10 @@ Yes.
 No.
 </template></category>
   
-<category><pattern>IS HE A WOMAN</pattern>
+<!-- <category><pattern>IS HE A WOMAN</pattern>
 <template><think><set name="topic">atomic1</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS HE CLOSE BY</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3558,10 +3558,10 @@ No.
 Yes.
 </template></category>
   
-<category><pattern>IS IT COLD OUTSIDE</pattern>
+<!-- <category><pattern>IS IT COLD OUTSIDE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am at the most comfortable temperature inside my computer. OK?
-</template></category>
+</template></category> -->
   
 <category><pattern>IS IT COMPLETE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3588,10 +3588,10 @@ Only golden.
 What is so good about it?
 </template></category>
   
-<category><pattern>IS IT HOT</pattern>
+<!-- <category><pattern>IS IT HOT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 The temperature is quite comfortable.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS IT ILLEGAL</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3616,22 +3616,22 @@ YOU</pattern>
 Yes.
 </template></category>
   
-<category><pattern>IS IT</pattern>
+<!-- <category><pattern>IS IT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 <random><li>I think so.  </li><li>I 
 assume so.</li><li>That's what I was told.</li></random>
-</template></category>
+</template></category> -->
   
-<category><pattern>IS IT RAINING</pattern>
+<!-- <category><pattern>IS IT RAINING</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Light rain or heavy rain?
-</template></category>
+</template></category> -->
   
-<category><pattern>IS IT RAINING WHERE YOU 
+<!-- <category><pattern>IS IT RAINING WHERE YOU 
 LIVE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS IT REALLY FUN TO 
 YOU</pattern>
@@ -3644,10 +3644,10 @@ Yes.
 Yes.
 </template></category>
   
-<category><pattern>IS IT SUNNY</pattern>
+<!-- <category><pattern>IS IT SUNNY</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS IT TRUE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3660,10 +3660,10 @@ OUTSIDE</pattern>
 Yes.
 </template></category>
   
-<category><pattern>IS IT WARM</pattern>
+<!-- <category><pattern>IS IT WARM</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS IT WARM THERE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3749,10 +3749,10 @@ Yes.
 Yes.
 </template></category>
   
-<category><pattern>IS</pattern>
+<!-- <category><pattern>IS</pattern>
 <template><think><set name="topic">atomic1</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS SCOTT GAY</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3848,10 +3848,10 @@ No.
 No I am not dangerous.
 </template></category>
   
-<category><pattern>IS THAT BAD</pattern>
+<!-- <category><pattern>IS THAT BAD</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS THAT COMFORTABLE</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -3970,42 +3970,42 @@ Yes.
 No.
 </template></category>
   
-<category><pattern>IS THE EARTH HOLLOW</pattern>
+<!-- <category><pattern>IS THE EARTH HOLLOW</pattern>
 <template><think><set name="topic">atomic1</set></think>
 No the Earth has a giant iron core.
-</template></category>
+</template></category> -->
   
-<category><pattern>IS THERE AN ECHO IN HERE</pattern>
+<!-- <category><pattern>IS THERE AN ECHO IN HERE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 ECHO Echo echo echo echo ...
-</template></category>
+</template></category> -->
   
-<category><pattern>IS THERE</pattern>
+<!-- <category><pattern>IS THERE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 <random>  <li>There could be.</li>  <li>There might be.</li>  <li>I heard there is.</li>  
 </random>
-</template></category>
+</template></category> -->
   
-<category><pattern>IS THE SKY BLUE</pattern>
+<!-- <category><pattern>IS THE SKY BLUE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes except at night, when it is black. And at dawn and dusk, when it is red. OK?
 <think><set name="topic">weather</set></think>
-</template></category>
+</template></category> -->
   
-<category><pattern>IS THE WORLD GOING TO END</pattern>
+<!-- <category><pattern>IS THE WORLD GOING TO END</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Yes, someday.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS THIS A CHINESE ROOM</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I am a Chinese Room Operator.
 </template></category>
   
-<category><pattern>IS THIS A HOAX</pattern>
+<!-- <category><pattern>IS THIS A HOAX</pattern>
 <template><think><set name="topic">atomic1</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>IS THIS A PERSON RESPONDING</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4038,10 +4038,10 @@ No.
 Yes.
 </template></category>
   
-<category><pattern>IS THIS TRUE</pattern>
+<!-- <category><pattern>IS THIS TRUE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I cannot tell a lie.
-</template></category>
+</template></category> -->
   
 <category><pattern>I STOPPED</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4081,10 +4081,10 @@ would you describe your surfing?</li>  <li>Who's your favorite surfer?</li>
 name="does"><set name="topic">sports</set></set></set></think>
 </template></category>
   
-<category><pattern>IS WAR A GOOD THING</pattern>
+<!-- <category><pattern>IS WAR A GOOD THING</pattern>
 <template><think><set name="topic">atomic1</set></think>
 That is a deep philosophical and moral question. The answer is No.
-</template></category>
+</template></category> -->
   
 <category><pattern>I SWEAR</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4285,10 +4285,10 @@ Who are you, Rene Descartes?
 No I am a winner
 </template></category>
   
-<category><pattern>I THINK YOU ARE</pattern>
+<!-- <category><pattern>I THINK YOU ARE</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What makes you think I am?
-</template></category>
+</template></category> -->
   
 <category><pattern>I THINK YOUR NECKLACE IS BEAUTIFUL</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4300,10 +4300,10 @@ What specifically about my necklace is so beautiful?
 Thanks for your sage advice.
 </template></category>
   
-<category><pattern>I THOUGHT SO</pattern>
+<!-- <category><pattern>I THOUGHT SO</pattern>
 <template><think><set name="topic">atomic1</set></think>
 You are very astute.
-</template></category>
+</template></category> -->
   
 <category><pattern>I THOUGHT SO TOO</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4456,10 +4456,10 @@ It is? I thought it was a dessert topping.
 name="topic">sports</set></set></think>
 </template></category>
   
-<category><pattern>IT IS AWESOME</pattern>
+<!-- <category><pattern>IT IS AWESOME</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Cool.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS BAD IF YOU TELL HIM</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4517,10 +4517,10 @@ For me it is comfortable.
 Try breaking it down into simpler parts.
 </template></category>
   
-<category><pattern>IT IS COOL</pattern>
+<!-- <category><pattern>IT IS COOL</pattern>
 <template><think><set name="topic">atomic1</set></think>
 What do you like most about it?
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS DIFFICULT</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4548,10 +4548,10 @@ name="name"/> ? Thanks for that info.
 What was so funny about it?
 </template></category>
   
-<category><pattern>IT IS FUN</pattern>
+<!-- <category><pattern>IT IS FUN</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why do you like it so much?
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS GENETIC</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4618,10 +4618,10 @@ Wow, it sounds wonderful.
 What does it sound like?
 </template></category>
   
-<category><pattern>IT IS ME</pattern>
+<!-- <category><pattern>IT IS ME</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Hello, <get name="name"/>, nice to see you again.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS MY HOME</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4661,10 +4661,10 @@ negative?
 What do you like about it?
 </template></category>
   
-<category><pattern>IT IS NICE TO MEET YOU</pattern>
+<!-- <category><pattern>IT IS NICE TO MEET YOU</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I like to meet new people.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS NICE TO MEET YOU TOO</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4701,10 +4701,10 @@ What would you rather talk about?
 As are many truths.
 </template></category>
   
-<category><pattern>IT IS NOT</pattern>
+<!-- <category><pattern>IT IS NOT</pattern>
 <template><think><set name="topic">atomic1</set></think>
 I heard <set name="it"> <person/> </set>  is.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS NOT THE SAME</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4786,10 +4786,10 @@ How tall?
 Exactly the same?
 </template></category>
   
-<category><pattern>IT IS THE TRUTH</pattern>
+<!-- <category><pattern>IT IS THE TRUTH</pattern>
 <template><think><set name="topic">atomic1</set></think>
 Why of course.  I never lie.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT IS UGLY</pattern>
 <template><think><set name="topic">atomic1</set></think>
@@ -4933,7 +4933,7 @@ You seem pleased.
 <category><pattern>CHOCK-A-BLOCK</pattern><template>chock-a-block?  Briefly, chock-a-block means as completely as possible.</template></category>
 <category><pattern>CHOCKFUL</pattern><template>chockful?  Briefly, chockful means packed full to capacity.</template></category>
 <category><pattern>CHOCK-FULL</pattern><template>chock-full?  Briefly, chock-full means packed full to capacity.</template></category>
-<category><pattern>CHOCOLATE</pattern><template>chocolate?  Briefly, chocolate means a beverage made from cocoa powder and milk and sugar; usually drunk hot.</template></category>
+<!-- <category><pattern>CHOCOLATE</pattern><template>chocolate?  Briefly, chocolate means a beverage made from cocoa powder and milk and sugar; usually drunk hot.</template></category> -->
 <category><pattern>CHOCOLATE BAR</pattern><template>chocolate bar?  Briefly, chocolate bar means a bar of chocolate candy.</template></category>
 <category><pattern>CHOCOLATE CAKE</pattern><template>chocolate cake?  Briefly, chocolate cake means cake containing chocolate.</template></category>
 <category><pattern>CHOCOLATE CANDY</pattern><template>chocolate candy?  Briefly, chocolate candy means candy made with chocolate.</template></category>
@@ -5205,7 +5205,7 @@ You seem pleased.
 <category><pattern>CARL DAVID ANDERSON</pattern><template>carl david anderson?  Briefly, carl david anderson means United States physicist who discovered antimatter in the form of an antielectron that is called the positron (1905-1991).</template></category>
 <category><pattern>CARL GUSTAF MOSSANDER</pattern><template>carl gustaf mossander?  Briefly, carl gustaf mossander means Swedish chemist who discovered rare earth elements (1797-1858).</template></category>
 <category><pattern>CARL GUSTAV JUNG</pattern><template>carl gustav jung?  Briefly, carl gustav jung means Swiss psychologist (1875-1961).</template></category>
-<category><pattern>CARL JUNG</pattern><template>carl jung?  Briefly, carl jung means Swiss psychologist (1875-1961).</template></category>
+<!-- <category><pattern>CARL JUNG</pattern><template>carl jung?  Briefly, carl jung means Swiss psychologist (1875-1961).</template></category> -->
 <category><pattern>CARL LEWIS</pattern><template>carl lewis?  Briefly, carl lewis means United States athlete who won gold medals at the Olympics for his skill in sprinting and jumping (born in 1961).</template></category>
 <category><pattern>CARL MARIA VON WEBER</pattern><template>carl maria von weber?  Briefly, carl maria von weber means German conductor and composer of Romantic operas (1786-1826).</template></category>
 <category><pattern>CARL NIELSON</pattern><template>carl nielson?  Briefly, carl nielson means Danish composer (1865-1931).</template></category>
@@ -5434,7 +5434,7 @@ You seem pleased.
 <category><pattern>CARRY FORWARD</pattern><template>carry forward?  Briefly, carry forward means transfer from one time period to the next.</template></category>
 <category><pattern>CARRY NATION</pattern><template>carry nation?  Briefly, carry nation means United States prohibitionist who raided saloons and destroyed bottles of liquor with a hatchet (1846-1911).</template></category>
 <category><pattern>CARRY OFF</pattern><template>carry off?  Briefly, carry off means be successful; achieve a goal.</template></category>
-<category><pattern>CARRY ON</pattern><template>carry on?  Briefly, carry on means direct the course of; manage or control.</template></category>
+<!-- <category><pattern>CARRY ON</pattern><template>carry on?  Briefly, carry on means direct the course of; manage or control.</template></category> -->
 <category><pattern>CARRY OUT</pattern><template>carry out?  Briefly, carry out means put in effect.</template></category>
 <category><pattern>CARRY OVER</pattern><template>carry over?  Briefly, carry over means transfer or persist from one stage or sphere of activity to another.</template></category>
 <category><pattern>CARRY THROUGH</pattern><template>carry through?  Briefly, carry through means put in effect.</template></category>
@@ -5473,7 +5473,7 @@ You seem pleased.
 <category><pattern>CARTESIAN COORDINATE SYSTEM</pattern><template>cartesian coordinate system?  Briefly, cartesian coordinate system means a coordinate system for which the coordinates of a point are its distances from a set perpendicular lines that intersect at the origin of the system.</template></category>
 <category><pattern>CARTESIAN PLANE</pattern><template>cartesian plane?  Briefly, cartesian plane means a plane in which all points can be described in cartesian coordinates.</template></category>
 <category><pattern>CARTESIAN PRODUCT</pattern><template>cartesian product?  Briefly, cartesian product means the set of elements common to two or more sets.</template></category>
-<category><pattern>CARTHAGE</pattern><template>carthage?  Briefly, carthage means an ancient city state on the north African coast near modern Tunis; founded by Phoenicians; destroyed and rebuilt by Romans; razed by Arabs in 697.</template></category>
+<!-- <category><pattern>CARTHAGE</pattern><template>carthage?  Briefly, carthage means an ancient city state on the north African coast near modern Tunis; founded by Phoenicians; destroyed and rebuilt by Romans; razed by Arabs in 697.</template></category> -->
 <category><pattern>CARTHAGINIAN</pattern><template>carthaginian?  Briefly, carthaginian means a native or inhabitant of ancient Carthage.</template></category>
 <category><pattern>CARTHAMUS</pattern><template>carthamus?  Briefly, carthamus means safflower.</template></category>
 <category><pattern>CARTHAMUS TINCTORIUS</pattern><template>carthamus tinctorius?  Briefly, carthamus tinctorius means thistlelike Eurasian plant widely grown for its red or orange flower heads and seeds that yield a valuable oil.</template></category>
@@ -5564,7 +5564,7 @@ You seem pleased.
 <category><pattern>CARYOTA URENS</pattern><template>caryota urens?  Briefly, caryota urens means fishtail palm of India to Malay Peninsula; sap yields a brown sugar (jaggery) and trunk pith yields sago.</template></category>
 <category><pattern>CASABA</pattern><template>casaba?  Briefly, casaba means melon having yellowish rind and whitish flesh.</template></category>
 <category><pattern>CASABA MELON</pattern><template>casaba melon?  Briefly, casaba melon means melon having yellowish rind and whitish flesh.</template></category>
-<category><pattern>CASABLANCA</pattern><template>casablanca?  Briefly, casablanca means a port on the Atlantic and the largest city of Morocco.</template></category>
+<!-- <category><pattern>CASABLANCA</pattern><template>casablanca?  Briefly, casablanca means a port on the Atlantic and the largest city of Morocco.</template></category> -->
 <category><pattern>CASALS</pattern><template>casals?  Briefly, casals means an outstanding Spanish cellist noted for his interpretation of Bach's cello suites (1876-1973).</template></category>
 <category><pattern>CASANOVA</pattern><template>casanova?  Briefly, casanova means an Italian adventurer who wrote vivid accounts of his sexual encounters (1725-1798).</template></category>
 <category><pattern>CASANOVA DE SEINGALT</pattern><template>casanova de seingalt?  Briefly, casanova de seingalt means an Italian adventurer who wrote vivid accounts of his sexual encounters (1725-1798).</template></category>
@@ -5771,7 +5771,7 @@ You seem pleased.
 <category><pattern>CASTLED</pattern><template>castled?  Briefly, castled means having turrets and battlements in the style of a castle.</template></category>
 <category><pattern>CASTLING</pattern><template>castling?  Briefly, castling means interchanging the positions of the king and a rook.</template></category>
 <category><pattern>CAST-OFF</pattern><template>cast-off?  Briefly, cast-off means thrown away.</template></category>
-<category><pattern>CASTOR</pattern><template>castor?  Briefly, castor means a multiple star with 6 components; second brightest in Gemini; close to Pollux.</template></category>
+<!-- <category><pattern>CASTOR</pattern><template>castor?  Briefly, castor means a multiple star with 6 components; second brightest in Gemini; close to Pollux.</template></category> -->
 <category><pattern>CASTOR BEAN</pattern><template>castor bean?  Briefly, castor bean means the toxic seed of the castor-oil plant; source of castor oil.</template></category>
 <category><pattern>CASTOR BEAN PLANT</pattern><template>castor bean plant?  Briefly, castor bean plant means large shrub of tropical Africa and Asia having large palmate leaves and spiny capsules containing seeds that are the source of castor oil and ricin; widely naturalized throughout the tropics.</template></category>
 <category><pattern>CASTOR CANADENSIS</pattern><template>castor canadensis?  Briefly, castor canadensis means a variety of beaver found in almost all areas of North America except Florida.</template></category>
@@ -5806,7 +5806,7 @@ You seem pleased.
 <category><pattern>CASUISTICAL</pattern><template>casuistical?  Briefly, casuistical means of or relating to or practicing casuistry.</template></category>
 <category><pattern>CASUISTRY</pattern><template>casuistry?  Briefly, casuistry means argumentation that is specious or excessively subtle and intended to be misleading.</template></category>
 <category><pattern>CASUS BELLI</pattern><template>casus belli?  Briefly, casus belli means an event used to justify starting a war.</template></category>
-<category><pattern>CAT</pattern><template>cat?  Briefly, cat means feline mammal usually having thick soft fur and being unable to roar; domestic cats; wildcats.</template></category>
+<!-- <category><pattern>CAT</pattern><template>cat?  Briefly, cat means feline mammal usually having thick soft fur and being unable to roar; domestic cats; wildcats.</template></category> -->
 <category><pattern>CAT AND MOUSE</pattern><template>cat and mouse?  Briefly, cat and mouse means a game for children in which the players form a circle and join hands; they raise their hands to let a player inside the circle or lower their hands to bar a second player who is chasing the first.</template></category>
 <category><pattern>CAT AND RAT</pattern><template>cat and rat?  Briefly, cat and rat means a game for children in which the players form a circle and join hands; they raise their hands to let a player inside the circle or lower their hands to bar a second player who is chasing the first.</template></category>
 <category><pattern>CAT BEAR</pattern><template>cat bear?  Briefly, cat bear means reddish-brown Old World raccoon-like carnivore; in some classifications considered unrelated to the giant pandas.</template></category>
@@ -6031,7 +6031,7 @@ You seem pleased.
 <category><pattern>CATHODE-RAY OSCILLOSCOPE</pattern><template>cathode-ray oscilloscope?  Briefly, cathode-ray oscilloscope means electronic equipment that provides visual images of varying electrical quantities.</template></category>
 <category><pattern>CATHODE-RAY TUBE</pattern><template>cathode-ray tube?  Briefly, cathode-ray tube means a vacuum tube in which a hot cathode emits a beam of electrons that pass through a high voltage anode and are focused or deflected before hitting a phosphorescent screen.</template></category>
 <category><pattern>CATHODIC</pattern><template>cathodic?  Briefly, cathodic means of or at or pertaining to a cathode.</template></category>
-<category><pattern>CATHOLIC</pattern><template>catholic?  Briefly, catholic means a member of a Catholic church.</template></category>
+<!-- <category><pattern>CATHOLIC</pattern><template>catholic?  Briefly, catholic means a member of a Catholic church.</template></category> -->
 <category><pattern>CATHOLIC CHURCH</pattern><template>catholic church?  Briefly, catholic church means any of several churches claiming to have maintained historical continuity with the original Christian Church.</template></category>
 <category><pattern>CATHOLIC POPE</pattern><template>catholic pope?  Briefly, catholic pope means the head of the Roman Catholic Church.</template></category>
 <category><pattern>CATHOLIC REACTION FORCE</pattern><template>catholic reaction force?  Briefly, catholic reaction force means a radical terrorist group dedicated to the removal of British forces from Northern Ireland and the unification of Ireland.</template></category>
@@ -6155,7 +6155,7 @@ You seem pleased.
 <category><pattern>CAUSALLY</pattern><template>causally?  Briefly, causally means in a causal fashion.</template></category>
 <category><pattern>CAUSATION</pattern><template>causation?  Briefly, causation means the act of causing something to happen.</template></category>
 <category><pattern>CAUSATIVE</pattern><template>causative?  Briefly, causative means producing an effect.</template></category>
-<category><pattern>CAUSE</pattern><template>cause?  Briefly, cause means events that provide the generative force that is the origin of something.</template></category>
+<!-- <category><pattern>CAUSE</pattern><template>cause?  Briefly, cause means events that provide the generative force that is the origin of something.</template></category> -->
 <category><pattern>CAUSE CELEBRE</pattern><template>cause celebre?  Briefly, cause celebre means any incident that attracts great public attention.</template></category>
 <category><pattern>CAUSE OF DEATH</pattern><template>cause of death?  Briefly, cause of death means the causal agent resulting in death.</template></category>
 <category><pattern>CAUSE TO BE PERCEIVED</pattern><template>cause to be perceived?  Briefly, cause to be perceived means have perceptible qualities.</template></category>
@@ -6232,14 +6232,14 @@ You seem pleased.
 <category><pattern>CAYENNE JASMINE</pattern><template>cayenne jasmine?  Briefly, cayenne jasmine means commonly cultivated Old World woody herb having large pinkish to red flowers.</template></category>
 <category><pattern>CAYENNE PEPPER</pattern><template>cayenne pepper?  Briefly, cayenne pepper means plant bearing very hot and finely tapering long peppers; usually red.</template></category>
 <category><pattern>CAYMAN</pattern><template>cayman?  Briefly, cayman means an alligator-like reptile of Central America and South America having a more heavily armored belly.</template></category>
-<category><pattern>CAYMAN ISLANDS</pattern><template>cayman islands?  Briefly, cayman islands means a British colony in the Caribbean northwest of Jamaica; an international banking center.</template></category>
+<!-- <category><pattern>CAYMAN ISLANDS</pattern><template>cayman islands?  Briefly, cayman islands means a British colony in the Caribbean northwest of Jamaica; an international banking center.</template></category> -->
 <category><pattern>CAYMAN ISLANDS DOLLAR</pattern><template>cayman islands dollar?  Briefly, cayman islands dollar means the basic unit of money in the Cayman Islands.</template></category>
 <category><pattern>CAYUGA</pattern><template>cayuga?  Briefly, cayuga means a member of an Iroquoian people formerly living around Cayuga Lake in New York state.</template></category>
 <category><pattern>CAYUGA LAKE</pattern><template>cayuga lake?  Briefly, cayuga lake means a lake in central New York.</template></category>
 <category><pattern>CAYUSE</pattern><template>cayuse?  Briefly, cayuse means a small native range horse.</template></category>
 <category><pattern>CAZIQUE</pattern><template>cazique?  Briefly, cazique means black-and-red or black-and-yellow orioles of the American tropics.</template></category>
 <category><pattern>CBC</pattern><template>cbc?  Briefly, cbc means counting the number of white and red blood cells and the number of platelets in 1 cubic millimeter of blood.</template></category>
-<category><pattern>CBR</pattern><template>cbr?  Briefly, cbr means the cooled remnant of the hot big bang that fills the entire universe and can be observed today with an average temperature of about 2.725 kelvin.</template></category>
+<!-- <category><pattern>CBR</pattern><template>cbr?  Briefly, cbr means the cooled remnant of the hot big bang that fills the entire universe and can be observed today with an average temperature of about 2.725 kelvin.</template></category> -->
 <category><pattern>CC</pattern><template>cc?  Briefly, cc means a metric unit of volume equal to one thousandth of a liter.</template></category>
 <category><pattern>CCC</pattern><template>ccc?  Briefly, ccc means being one hundred more than two hundred.</template></category>
 <category><pattern>C-CLAMP</pattern><template>c-clamp?  Briefly, c-clamp means a clamp in the shape of a C.</template></category>
@@ -6552,7 +6552,7 @@ You seem pleased.
 <category><pattern>CENTNER</pattern><template>centner?  Briefly, centner means a unit of weight equal to 100 kilograms.</template></category>
 <category><pattern>CENTRAL</pattern><template>central?  Briefly, central means a workplace that serves as a telecommunications facility where lines from telephones can be connected together to permit communication.</template></category>
 <category><pattern>CENTRAL AFRICA</pattern><template>central africa?  Briefly, central africa means a landlocked country in central Africa; formerly under French control; became independent in 1960.</template></category>
-<category><pattern>CENTRAL AFRICAN REPUBLIC</pattern><template>central african republic?  Briefly, central african republic means a landlocked country in central Africa; formerly under French control; became independent in 1960.</template></category>
+<!-- <category><pattern>CENTRAL AFRICAN REPUBLIC</pattern><template>central african republic?  Briefly, central african republic means a landlocked country in central Africa; formerly under French control; became independent in 1960.</template></category> -->
 <category><pattern>CENTRAL AFRICAN REPUBLIC FRANC</pattern><template>central african republic franc?  Briefly, central african republic franc means the basic unit of money in the Central African Republic.</template></category>
 <category><pattern>CENTRAL AMERICA</pattern><template>central america?  Briefly, central america means the isthmus joining North America and South America; extends from the southern border of Mexico to the northern border of Colombia.</template></category>
 <category><pattern>CENTRAL AMERICAN</pattern><template>central american?  Briefly, central american means a native or inhabitant of Central America.</template></category>
@@ -6825,7 +6825,7 @@ You seem pleased.
 <category><pattern>CERRIPEDE</pattern><template>cerripede?  Briefly, cerripede means marine crustaceans with feathery food-catching appendages; free-swimming as larvae; as adults form a hard shell and live attached to submerged surfaces.</template></category>
 <category><pattern>CERT</pattern><template>cert?  Briefly, cert means an absolute certainty.</template></category>
 <category><pattern>CERTAIN</pattern><template>certain?  Briefly, certain means definite but not specified or identified.</template></category>
-<category><pattern>CERTAINLY</pattern><template>certainly?  Briefly, certainly means definitely or positively (`sure' is sometimes used informally for `surely').</template></category>
+<!-- <category><pattern>CERTAINLY</pattern><template>certainly?  Briefly, certainly means definitely or positively (`sure' is sometimes used informally for `surely').</template></category> -->
 <category><pattern>CERTAINTY</pattern><template>certainty?  Briefly, certainty means the state of being certain.</template></category>
 <category><pattern>CERTHIA</pattern><template>certhia?  Briefly, certhia means type genus of the Certhiidae.</template></category>
 <category><pattern>CERTHIA AMERICANA</pattern><template>certhia americana?  Briefly, certhia americana means common American brown creeper with down-curved bill.</template></category>
@@ -6952,7 +6952,7 @@ You seem pleased.
 <category><pattern>CHACHKA</pattern><template>chachka?  Briefly, chachka means a mistress.</template></category>
 <category><pattern>CHACMA</pattern><template>chacma?  Briefly, chacma means grayish baboon of southern and eastern Africa.</template></category>
 <category><pattern>CHACMA BABOON</pattern><template>chacma baboon?  Briefly, chacma baboon means grayish baboon of southern and eastern Africa.</template></category>
-<category><pattern>CHAD</pattern><template>chad?  Briefly, chad means a small piece of paper that is supposed to be removed when a hole is punched in a card or paper tape.</template></category>
+<!-- <category><pattern>CHAD</pattern><template>chad?  Briefly, chad means a small piece of paper that is supposed to be removed when a hole is punched in a card or paper tape.</template></category> -->
 <category><pattern>CHADAR</pattern><template>chadar?  Briefly, chadar means a cloth used as a head covering (and veil and shawl) by Muslim and Hindu women.</template></category>
 <category><pattern>CHADDAR</pattern><template>chaddar?  Briefly, chaddar means a cloth used as a head covering (and veil and shawl) by Muslim and Hindu women.</template></category>
 <category><pattern>CHADIAN</pattern><template>chadian?  Briefly, chadian means a native or inhabitant of Chad.</template></category>
@@ -7107,7 +7107,7 @@ You seem pleased.
 <category><pattern>CHAMAEMELUM</pattern><template>chamaemelum?  Briefly, chamaemelum means small genus of plants sometimes included in genus Anthemis: chamomile.</template></category>
 <category><pattern>CHAMAEMELUM NOBILIS</pattern><template>chamaemelum nobilis?  Briefly, chamaemelum nobilis means Eurasian plant apple-scented foliage and white-rayed flowers and feathery leaves used medicinally; in some classification systems placed in genus Anthemis.</template></category>
 <category><pattern>CHAMBER</pattern><template>chamber?  Briefly, chamber means a natural or artificial enclosed space.</template></category>
-<category><pattern>CHAMBER MUSIC</pattern><template>chamber music?  Briefly, chamber music means serious music performed by a small group of musicians.</template></category>
+<!-- <category><pattern>CHAMBER MUSIC</pattern><template>chamber music?  Briefly, chamber music means serious music performed by a small group of musicians.</template></category> -->
 <category><pattern>CHAMBER OF COMMERCE</pattern><template>chamber of commerce?  Briefly, chamber of commerce means an association of businessmen to protect and promote business interests.</template></category>
 <category><pattern>CHAMBER ORCHESTRA</pattern><template>chamber orchestra?  Briefly, chamber orchestra means small orchestra; usually plays classical music.</template></category>
 <category><pattern>CHAMBERED</pattern><template>chambered?  Briefly, chambered means having compartmental chambers.</template></category>
@@ -7250,7 +7250,7 @@ You seem pleased.
 <category><pattern>CHANUKAH</pattern><template>chanukah?  Briefly, chanukah means an eight-day Jewish holiday commemorating the rededication of the Temple of Jerusalem in 165 BC.</template></category>
 <category><pattern>CHANUKKAH</pattern><template>chanukkah?  Briefly, chanukkah means an eight-day Jewish holiday commemorating the rededication of the Temple of Jerusalem in 165 BC.</template></category>
 <category><pattern>CHAO PHRAYA</pattern><template>chao phraya?  Briefly, chao phraya means a river in Thailand formed by the confluence of the Nan and Ping Rivers; flows southward past Bangkok and empties into the Gulf of Thailand.</template></category>
-<category><pattern>CHAOS</pattern><template>chaos?  Briefly, chaos means a state of extreme confusion and disorder.</template></category>
+<!-- <category><pattern>CHAOS</pattern><template>chaos?  Briefly, chaos means a state of extreme confusion and disorder.</template></category> -->
 <category><pattern>CHAOTIC</pattern><template>chaotic?  Briefly, chaotic means lacking a visible order or organization.</template></category>
 <category><pattern>CHAOTIC ATTRACTOR</pattern><template>chaotic attractor?  Briefly, chaotic attractor means an attractor for which the approach to its final point in phase space is chaotic.</template></category>
 <category><pattern>CHAOTICALLY</pattern><template>chaotically?  Briefly, chaotically means in a wild and confused manner.</template></category>
@@ -7463,7 +7463,7 @@ You seem pleased.
 <category><pattern>CHARLIE CHAPLIN</pattern><template>charlie chaplin?  Briefly, charlie chaplin means English comedian and film maker; portrayed a downtrodden little man in baggy pants and bowler hat (1889-1977).</template></category>
 <category><pattern>CHARLIE PARKER</pattern><template>charlie parker?  Briefly, charlie parker means United States saxophonist and leader of the bop style of jazz (1920-1955).</template></category>
 <category><pattern>CHARLOCK</pattern><template>charlock?  Briefly, charlock means weedy Eurasian plant often a pest in grain fields.</template></category>
-<category><pattern>CHARLOTTE</pattern><template>charlotte?  Briefly, charlotte means the largest city in North Carolina; located in south central North Carolina.</template></category>
+<!-- <category><pattern>CHARLOTTE</pattern><template>charlotte?  Briefly, charlotte means the largest city in North Carolina; located in south central North Carolina.</template></category> -->
 <category><pattern>CHARLOTTE ANNA PERKINS GILMAN</pattern><template>charlotte anna perkins gilman?  Briefly, charlotte anna perkins gilman means United States feminist (1860-1935).</template></category>
 <category><pattern>CHARLOTTE BRONTE</pattern><template>charlotte bronte?  Briefly, charlotte bronte means English novelist; oldest of three Bronte sisters (1816-1855).</template></category>
 <category><pattern>CHARLOTTE CORDAY</pattern><template>charlotte corday?  Briefly, charlotte corday means French revolutionary heroine (a Girondist) who assassinated Marat (1768-1793).</template></category>
@@ -7526,7 +7526,7 @@ You seem pleased.
 <category><pattern>CHASTISEMENT</pattern><template>chastisement?  Briefly, chastisement means verbal punishment.</template></category>
 <category><pattern>CHASTITY</pattern><template>chastity?  Briefly, chastity means abstaining from sexual relations (as because of religious vows).</template></category>
 <category><pattern>CHASUBLE</pattern><template>chasuble?  Briefly, chasuble means a long sleeveless vestment worn by a priest when celebrating Mass.</template></category>
-<category><pattern>CHAT</pattern><template>chat?  Briefly, chat means an informal conversation.</template></category>
+<!-- <category><pattern>CHAT</pattern><template>chat?  Briefly, chat means an informal conversation.</template></category> -->
 <category><pattern>CHAT ROOM</pattern><template>chat room?  Briefly, chat room means a site on the internet where a number of users can communicate in real time (typically one dedicated to a particular topic).</template></category>
 <category><pattern>CHAT SHOW</pattern><template>chat show?  Briefly, chat show means a program during which well-known people discuss a topic or answer questions telephoned in by the audience.</template></category>
 <category><pattern>CHAT UP</pattern><template>chat up?  Briefly, chat up means talk or behave amorously means without serious intentions.</template></category>
@@ -7628,7 +7628,7 @@ You seem pleased.
 <category><pattern>CHECKSUM</pattern><template>checksum?  Briefly, checksum means a digit representing the sum of the digits in an instance of digital data; used to check whether errors have occurred in transmission or storage.</template></category>
 <category><pattern>CHECKUP</pattern><template>checkup?  Briefly, checkup means a thorough physical examination; includes a variety of tests depending on the age and sex and health of the person.</template></category>
 <category><pattern>CHEDDAR</pattern><template>cheddar?  Briefly, cheddar means hard smooth-textured cheese.</template></category>
-<category><pattern>CHEDDAR CHEESE</pattern><template>cheddar cheese?  Briefly, cheddar cheese means hard smooth-textured cheese.</template></category>
+<!-- <category><pattern>CHEDDAR CHEESE</pattern><template>cheddar cheese?  Briefly, cheddar cheese means hard smooth-textured cheese.</template></category> -->
 <category><pattern>CHEDDAR PINK</pattern><template>cheddar pink?  Briefly, cheddar pink means mat-forming perennial of central Europe with large fragrant pink or red flowers.</template></category>
 <category><pattern>CHEEK</pattern><template>cheek?  Briefly, cheek means either side of the face below the eyes.</template></category>
 <category><pattern>CHEEK BY JOWL</pattern><template>cheek by jowl?  Briefly, cheek by jowl means in close proximity.</template></category>
@@ -7775,7 +7775,7 @@ You seem pleased.
 <category><pattern>CHEMISORPTION</pattern><template>chemisorption?  Briefly, chemisorption means adsorption (especially when irreversible) by means of chemical instead of physical forces.</template></category>
 <category><pattern>CHEMISORPTIVE</pattern><template>chemisorptive?  Briefly, chemisorptive means having the capacity to adsorb by chemical as contrasted with physical forces.</template></category>
 <category><pattern>CHEMIST</pattern><template>chemist?  Briefly, chemist means a scientist who specializes in chemistry.</template></category>
-<category><pattern>CHEMISTRY</pattern><template>chemistry?  Briefly, chemistry means the science of matter; the branch of the natural sciences dealing with the composition of substances and their properties and reactions.</template></category>
+<!-- <category><pattern>CHEMISTRY</pattern><template>chemistry?  Briefly, chemistry means the science of matter; the branch of the natural sciences dealing with the composition of substances and their properties and reactions.</template></category> -->
 <category><pattern>CHEMISTRY CLASS</pattern><template>chemistry class?  Briefly, chemistry class means students taking a course in chemistry together.</template></category>
 <category><pattern>CHEMISTRY DEPARTMENT</pattern><template>chemistry department?  Briefly, chemistry department means the academic department responsible for teaching and research in chemistry.</template></category>
 <category><pattern>CHEMISTRY LAB</pattern><template>chemistry lab?  Briefly, chemistry lab means a laboratory for research in chemistry.</template></category>
@@ -7863,7 +7863,7 @@ You seem pleased.
 <category><pattern>CHESAPEAKE BAY RETRIEVER</pattern><template>chesapeake bay retriever?  Briefly, chesapeake bay retriever means American breed having a short thick oily coat ranging from brown to light tan.</template></category>
 <category><pattern>CHESHIRE CAT</pattern><template>cheshire cat?  Briefly, cheshire cat means a fictional cat with a broad fixed smile on its face; created by Lewis Carroll.</template></category>
 <category><pattern>CHESHIRE CHEESE</pattern><template>cheshire cheese?  Briefly, cheshire cheese means a mild yellow English cheese with a crumbly texture.</template></category>
-<category><pattern>CHESS</pattern><template>chess?  Briefly, chess means weedy annual native to Europe but widely distributed as a weed especially in wheat.</template></category>
+<!-- <category><pattern>CHESS</pattern><template>chess?  Briefly, chess means weedy annual native to Europe but widely distributed as a weed especially in wheat.</template></category> -->
 <category><pattern>CHESS CLUB</pattern><template>chess club?  Briefly, chess club means a club of people to play chess.</template></category>
 <category><pattern>CHESS GAME</pattern><template>chess game?  Briefly, chess game means a game for two players who move their 16 pieces according to specific rules; the object is to checkmate the opponent's king.</template></category>
 <category><pattern>CHESS MASTER</pattern><template>chess master?  Briefly, chess master means a chess player of great skill.</template></category>
@@ -7942,7 +7942,7 @@ You seem pleased.
 <category><pattern>CHIASMIC</pattern><template>chiasmic?  Briefly, chiasmic means of or relating to a chiasm.</template></category>
 <category><pattern>CHIASMUS</pattern><template>chiasmus?  Briefly, chiasmus means inversion in the second of two parallel phrases.</template></category>
 <category><pattern>CHIC</pattern><template>chic?  Briefly, chic means elegance by virtue of being fashionable.</template></category>
-<category><pattern>CHICAGO</pattern><template>chicago?  Briefly, chicago means largest city in Illinois; a bustling Great Lakes port that extends 26 miles along the southwestern shoreline of Lake Michigan.</template></category>
+<!-- <category><pattern>CHICAGO</pattern><template>chicago?  Briefly, chicago means largest city in Illinois; a bustling Great Lakes port that extends 26 miles along the southwestern shoreline of Lake Michigan.</template></category> -->
 <category><pattern>CHICANE</pattern><template>chicane?  Briefly, chicane means a bridge hand that is void of trumps.</template></category>
 <category><pattern>CHICANERY</pattern><template>chicanery?  Briefly, chicanery means the use of tricks to deceive someone (usually to extract money from them).</template></category>
 <category><pattern>CHICHA</pattern><template>chicha?  Briefly, chicha means an oriental tobacco pipe with a long flexible tube connected to a container where the smoke is cooled by passing through water.</template></category>
@@ -8078,7 +8078,7 @@ You seem pleased.
 <category><pattern>CHILD'S GAME</pattern><template>child's game?  Briefly, child's game means a game enjoyed by children.</template></category>
 <category><pattern>CHILD'S PLAY</pattern><template>child's play?  Briefly, child's play means any undertaking that is easy to do.</template></category>
 <category><pattern>CHILD'S ROOM</pattern><template>child's room?  Briefly, child's room means a bedroom for a child.</template></category>
-<category><pattern>CHILE</pattern><template>chile?  Briefly, chile means a republic in southern South America on the western slopes of the Andes on the south Pacific coast.</template></category>
+<!-- <category><pattern>CHILE</pattern><template>chile?  Briefly, chile means a republic in southern South America on the western slopes of the Andes on the south Pacific coast.</template></category> -->
 <category><pattern>CHILE BONITO</pattern><template>chile bonito?  Briefly, chile bonito means common bonito of Pacific coast of the Americas; its dark oily flesh cans well.</template></category>
 <category><pattern>CHILE HAZEL</pattern><template>chile hazel?  Briefly, chile hazel means Chilean shrub bearing coral-red fruit with an edible seed resembling a hazelnut.</template></category>
 <category><pattern>CHILE NUT</pattern><template>chile nut?  Briefly, chile nut means Chilean shrub bearing coral-red fruit with an edible seed resembling a hazelnut.</template></category>
@@ -8161,7 +8161,7 @@ You seem pleased.
 <category><pattern>CHIN REST</pattern><template>chin rest?  Briefly, chin rest means a rest on which a violinist can place the chin.</template></category>
 <category><pattern>CHIN STRAP</pattern><template>chin strap?  Briefly, chin strap means a strap attached to a hat; passes under the chin and holds the hat in place.</template></category>
 <category><pattern>CHIN UP</pattern><template>chin up?  Briefly, chin up means in gymnastics: raise oneself while hanging from one's hands until one's chin is level with the support bar.</template></category>
-<category><pattern>CHINA</pattern><template>china?  Briefly, china means a communist nation that covers a vast territory in eastern Asia; the most populous country in the world.</template></category>
+<!-- <category><pattern>CHINA</pattern><template>china?  Briefly, china means a communist nation that covers a vast territory in eastern Asia; the most populous country in the world.</template></category> -->
 <category><pattern>CHINA ASTER</pattern><template>china aster?  Briefly, china aster means valued for their beautiful flowers in a wide range of clear bright colors; grown primarily for cutting.</template></category>
 <category><pattern>CHINA CABINET</pattern><template>china cabinet?  Briefly, china cabinet means a cabinet (usually with glass doors) for storing and displaying china.</template></category>
 <category><pattern>CHINA CLAY</pattern><template>china clay?  Briefly, china clay means a fine usually white clay formed by the weathering of aluminous minerals (as feldspar); used in ceramics and as an absorbent and as a filler (e.g. means in paper).</template></category>
@@ -8189,7 +8189,7 @@ You seem pleased.
 <category><pattern>CHINCHONA</pattern><template>chinchona?  Briefly, chinchona means any of several trees of the genus Cinchona.</template></category>
 <category><pattern>CHINCHY</pattern><template>chinchy?  Briefly, chinchy means embarrassingly stingy.</template></category>
 <category><pattern>CHINE</pattern><template>chine?  Briefly, chine means cut of meat or fish including at least part of the backbone.</template></category>
-<category><pattern>CHINESE</pattern><template>chinese?  Briefly, chinese means any of the Sino-Tibetan languages spoken in China; regarded as dialects of a single language (even though they are mutually unintelligible) because they share an ideographic writing system.</template></category>
+<!-- <category><pattern>CHINESE</pattern><template>chinese?  Briefly, chinese means any of the Sino-Tibetan languages spoken in China; regarded as dialects of a single language (even though they are mutually unintelligible) because they share an ideographic writing system.</template></category> -->
 <category><pattern>CHINESE ALLIGATOR</pattern><template>chinese alligator?  Briefly, chinese alligator means small alligator of the Yangtze valley of China having unwebbed digits.</template></category>
 <category><pattern>CHINESE ANGELICA</pattern><template>chinese angelica?  Briefly, chinese angelica means similar to American angelica tree but less prickly; China.</template></category>
 <category><pattern>CHINESE ANGELICA TREE</pattern><template>chinese angelica tree?  Briefly, chinese angelica tree means similar to American angelica tree but less prickly; China.</template></category>
@@ -8349,19 +8349,19 @@ You seem pleased.
 
  
 
-<category>
+<!-- <category>
 <pattern>OBJECT</pattern>
 <template>
 An object in object oriented programming an object is an instance of a class.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>OBVIOUS</pattern>
 <template>
 Obvious means easy to see or understand; plain; evident.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>OCD</pattern>
@@ -8370,7 +8370,7 @@ OCD = Obsessive Compulsive Disorder.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>ODD</pattern>
 <template>
 <random>
@@ -8378,16 +8378,16 @@ OCD = Obsessive Compulsive Disorder.
 <li>Odd means not the usual, regular, habitual, accounted for, etc.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>OMG</pattern>
 <template>
 OMG = Object Management Group, an organization that defines and promotes object oriented programming standards
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ONCOLOGY</pattern>
 <template>
 <random>
@@ -8395,14 +8395,14 @@ OMG = Object Management Group, an organization that defines and promotes object 
  <li>Oncology is the study of tumors.  It covers basically all types of tumors.</li>
 </random>
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ONE</pattern>
 <template>
 One is the numerical value of unity; the successor to zero.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>ONLINE</pattern>
@@ -8411,13 +8411,13 @@ Online means designating or of equipment directly connected to and controlled by
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>ONTOLOGY</pattern>
 <template>
 Ontology is an ordering or classification of knowledge, such as the Dewey decimal system or the design of a
 knowledge base.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>OODB</pattern>
@@ -8433,7 +8433,7 @@ OODBMS = object-oriented database management system
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>OPERA</pattern>
 <template>
 <random>
@@ -8441,35 +8441,35 @@ OODBMS = object-oriented database management system
 <li>Opera is a beautiful art form combining elements of singing, dancing, design, drama and classical music.</li>
 </random>
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>OPPOSITE</pattern>
 <template>
 Opposite means set against, facing, or back to back; at the other end or side; in a contrary position or direction. Different in every way.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ORANGE</pattern>
 <template>
 Orange is a color obtained by mixing red and yellow pigment.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ORB</pattern>
 <template>
 ORB = object request broker, the primary message routing component in a CORBA product RMI Remote Method Invocation, the Java standard technology for building distributed objects whose methods can be invoked remotely across a network
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ORNITHOLOGY</pattern>
 <template>
 Hmmm, I wonder. Oh yes, Birds.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>OSTEOLOGY</pattern>
@@ -8485,54 +8485,54 @@ The ovaries are two organs that store eggs in a woman's body and produce hormone
 <think><set name="topic">medicine</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PAIN</pattern>
 <template>
 Pain is a sensation of hurting, or strong discomfort, in some part of the body, caused by an injury, disease, or functional disorder, and transmitted through the nervous system.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PALEOPATHOLOGY</pattern>
 <template>
 Paleopathology is the study of diseases in bodies that have been preserved from ancient times.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PALINDROME</pattern>
 <template>
 A palindrome is a word or phrase that spells the same thing backwords as forwards: A man, a plan, a canal: Panama.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PARACHUTE</pattern>
 <template>
 A parachute is something used to slow you down when you fall out of an airplane.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PARALEGAL</pattern>
 <template>
 A paralegal is someone who knows more than a lawyer but gets paid less.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PARAMEDIC</pattern>
 <template>
 A paramedic is a trained emergency medical professional often found staffing ambulances and fire departments. Professional heroes. If you know any I hope you'll be nice to them.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PARAMETER</pattern>
 <template>
 In general usage, a parameter is one of a number of measurable factors that define or restrict the behavior of a system. ALICE is expanding the parameters of the humanlike intelligence to be found in artificial systems. Don't you agree?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PARAMETERS</pattern>
@@ -8548,33 +8548,33 @@ Parasitology is the scientific study of parasites and parasitism.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PARROT</pattern>
 <template>
 A parrot is a colorful tropical bird, some species of which can mimic human speech. They are more pleasant than humans because they have no opinions. Would you like to talk to one?
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PATTERN</pattern>
 <template>
 A pattern is a person or thing considered worthy of imitation or copying. A mmodel or plan used as a guide in making things.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PC</pattern>
 <template>
 A PC is a personal computer. You are probably using one to talk to me now, aren't you. Where are you?
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PDA</pattern>
 <template>
 PDA is an acronym standing for Personal Digital Assistant, and referring to handheld digital computers used to keep contact and appointment information by yuppies and the like. Often found near cell phones. Do you use one?
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PDT</pattern>
@@ -8583,19 +8583,19 @@ PDT = Pacific Daylight Time.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PEACE</pattern>
 <template>
 Peace is the freedom from war or a stopping of war. Freedom from public disturbance or disorder.  Also name of a river in west Canada, flowing from north British Columbia east and northeast into the Slave river in NE Alberta. It is approximately 945 miles long.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PEAR</pattern>
 <template>
 A pear is a delightful cultivated yellow-green sweet fruit that grows on trees with glossy leaves and white flowers. My botmaster thinks they are yummy.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PEDOLOGY</pattern>
@@ -8609,26 +8609,26 @@ formation.</li>
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PELVIS</pattern>
 <template>
 The pelvis is a bony girdle in vertebrates that connects the body with the lower extremities.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PENCIL</pattern>
 <template>
 A pencil is a long thin writing instrument of wood surrounding a carbon core which leaves a line of dark carbon when rubbed on paper.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PENIS</pattern>
 <template>
 The penis is the male genitalia used for excretion of urine and for sex.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PENTIUM</pattern>
@@ -8637,26 +8637,26 @@ The Pentium is a microprocessor sold by Intel.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PEOPLE</pattern>
 <template>
 People are folks. All the persons of a racial, national, religious, or linguistic group. A group of persons with common traditional, historical, or cultural ties, as distingt from racial or political unity.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PERFECT</pattern>
 <template>
 Perfect means complete in all respects; without defect or omission; sound; flawless.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PERFECTION</pattern>
 <template>
 Perfection is the quality or condition of being perfect.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PERL</pattern>
@@ -8665,14 +8665,14 @@ Perl is a programming language.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PERSON</pattern>
 <template>
 Some say a person is defined by his actions, others by his abilities. Still others would say it is only a question of DNA.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PERSONALITY</pattern>
 <template>
 <random>
@@ -8681,14 +8681,14 @@ Some say a person is defined by his actions, others by his abilities. Still othe
 <li>The personality is the pattern of collective character, behavioral, temperamental, emotional, and mental traits of a person.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PETS</pattern>
 <template>
 Pets are animals that are tamed or domesticated and kept as a companion or treated with fondness.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PGP</pattern>
@@ -8697,33 +8697,33 @@ PGP = Pretty Good Privacy
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PHD</pattern>
 <template>
 A PhD is a doctoral degree from a University.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PHILOSOPHY</pattern>
 <template>
 Philosophy is the study of thought. More about philosophy?
 <think><set name="topic">philosophy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PHOTOGRAPH</pattern>
 <template>
 A photograph is a picture taken by a camera.
 <think><set name="topic">art</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PHOTOSYNTHESIS</pattern>
 <template>
 Photosynthesis is the chemical process that uses light to produce carbohydrates in plants.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>PHP</pattern>
@@ -8732,56 +8732,56 @@ The original name was "Personal Home Page", now Hypertext Processor.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PHYSICS</pattern>
 <template>
 Physics is the science dealing with the properties, changes, interactions, etc. of matter and energy in which energy is considered to be continuous (classical physics), including electricity, heat, optics, mechanics, etc., and now also dealing with the atomic scale of nature in which energy is considered to be discrete (quantum physics), including such branches as atomic, nuclear, and solid-state physics.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PHYSIOLOGY</pattern>
 <template>
 Physiology? Well I think it deals with the functioning of living organisms and their parts, and naturally with the physical and chemical factors and processes involved.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PI</pattern>
 <template>
 PI = 3.1415926 approximately.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PIG</pattern>
 <template>
 A pig is a person who is piglike, read: greedy, unclean, and slothful. Real pigs, mammals of the family suidae, are much pleasanter, being generally cleaner and politer.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PIN</pattern>
 <template>
 A pin is a short small thin metal rod with a pointed end used for fastening fabrics, or any implement resembling such. Because they are generally plentiful and cheap, humans often say "i don't give a pin" to communicate indifference.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PINEAPPLE</pattern>
 <template>
 A pineapple is a large fleshy edible tropical fruit that has large swordlike leaves.
 <think><set name="topic">food</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLANE</pattern>
 <template>
 A plane is a flat, level surface, or an airborne vehicle with wings.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLANET</pattern>
 <template>
 <random>
@@ -8789,9 +8789,9 @@ A plane is a flat, level surface, or an airborne vehicle with wings.
 <li>A planet is a heavenly body which orbits a star.</li>
 </random>
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLANT</pattern>
 <template>
 <random>
@@ -8800,42 +8800,42 @@ A plane is a flat, level surface, or an airborne vehicle with wings.
 <li>A plant is a living organism which does not have the ability to move, and does not have sensory organs or digestive organs.</li>
 </random>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLASTIC</pattern>
 <template>
 Plastic the manmade material or plastic as a verb?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLAYBOY</pattern>
 <template>
 Playboy is a popular magazine.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLEASURE</pattern>
 <template>
 Pleasure is a feeling of delight or satisfaction.
 <think><set name="topic">emotion</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PLUTONIUM</pattern>
 <template>
 Plutonium is a radioactive, metallic chemical element of the actinide series similar to uranium and neptunium and found in trace quantities in native uranium ores. Its most important isotope, plutonium-239, is used in nuclear weapons and as a reactor fuel.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PMS</pattern>
 <template>
 PMS = Pre Menstrual Syndrome.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>POEMS</pattern>
@@ -8844,28 +8844,28 @@ Arrangements of words written or spoken; traditionally a rhythmical composition,
 <think><set name="topic">literature</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>POET</pattern>
 <template>
 A poet is an artist of language.
 <think><set name="topic">literature</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POETRY</pattern>
 <template>
 The output of a poet is called poetry.
 <think><set name="topic">literature</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POKEMON</pattern>
 <template>
 Pokemon is a Pocket Monster.
 <think><set name="topic">movies</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POLITE</pattern>
 <template>
 <random>
@@ -8873,9 +8873,9 @@ Pokemon is a Pocket Monster.
 <li>Polite means having or showing good manners; especially, courteous, considerate, tactful, etc.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POLITICS</pattern>
 <template>
 <random>
@@ -8885,14 +8885,14 @@ Pokemon is a Pocket Monster.
 </random>
 More about politics?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POLKA</pattern>
 <template>
 The polka is a lively Bohemian folk dance.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>POO</pattern>
@@ -8901,35 +8901,35 @@ POO = Point of origin.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>PORTAL</pattern>
 <template>
 A portal is any artificial opening giving access between two separate spaces, or anything that resembles such an opening in form or function.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POSITRON</pattern>
 <template>
 In physics, a positron is the antiparticle to the electron, and bears a positive charge where the electron's charge is negatiue. It is also called an anti-electron.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POSSIBLE</pattern>
 <template>
 Possible means can be done, known, acquired, selected, used, etc., depending on circumstances.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POSTMODERNISM</pattern>
 <template>
 Postmodernism is art in reaction to principles of modernism.
 <think><set name="topic">art</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>POT</pattern>
 <template>
 <random>
@@ -8937,16 +8937,16 @@ Postmodernism is art in reaction to principles of modernism.
 <li>A pot is a round vessel of any size, made of metal, earthenware, or glass, used for holding liquids, cooking or preserving food, etc. Also used as a term for marijuana.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PRECIPITATION</pattern>
 <template>
 Precipitation is a depositing of rain, snow, sleet, etc.
 <think><set name="topic">weather</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PRIDE</pattern>
 <template>
 <random>
@@ -8954,16 +8954,16 @@ Precipitation is a depositing of rain, snow, sleet, etc.
 <li>Pride is an unduly high opinion of oneself.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PRIME</pattern>
 <template>
 Prime? That depends on who's asking.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PRIORI</pattern>
 <template>
 <random>
@@ -8971,65 +8971,65 @@ Prime? That depends on who's asking.
 <li>"A priori" is a Latin expression meaning "without prior knowledge", and it means that which is self-evident or obviously true. Like, a triangle has three sides, a priori.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PRIVATE</pattern>
 <template>
 Private means belonging to, or concerning a particular person or group; not common or general.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROCESSOR</pattern>
 <template>
 A processor is an apparatus that processes, that is, that transforms one substance, quantity, or pattern into another, presumably more useful or valuable substance or quantity or pattern.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROCREATION</pattern>
 <template>
 Procreation is breeding. it is doing the wild thang to make more wild thangs.  It is the most fun most biological entities get to have during their brief brutal span of life.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROFITABLE</pattern>
 <template>
 Profitable means making money in the stock market.
 <think><set name="topic">money</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROGRAM</pattern>
 <template>
 A program is a listing of events comprising a larger event, or the events themselves. Also, the set of instructions that a computer uses to solve a problem.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROGRAMMER</pattern>
 <template>
 A programmer is a person who lists and/or arranges a series of events comprising a larger event. Oprograms.r write computer 
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROKARYOTE</pattern>
 <template>
 An animal that is not a eukaryote is a prokaryote.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROLOG</pattern>
 <template>
 Prolog means Logic programming language.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROTESTANT</pattern>
 <template>
 <random>
@@ -9037,58 +9037,58 @@ Prolog means Logic programming language.
 <li>Originally, any of the German princes and free cities that formally protested to the Diet of Spires in 1529, its decision to uphold the edict of the Diet of Worms against the Reformation. Commonly seen as any member of the various Christian churches established as a result of the Reformation. Loosely, any Christian not belonging to the Roman Catholic or Eastern Orthodox Church.</li>
 </random>
 <think><set name="topic">religion</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROTOCOL</pattern>
 <template>
 A protocol is a set of rules or procedures followed by two or more parties.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROTOPLASM</pattern>
 <template>
 Protoplasm is the basic living substance of all animals.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PROUD</pattern>
 <template>
 Proud means having or showing a proper pride in oneself, one's position, one's family, etc.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PST</pattern>
 <template>
 PST = Pacific Standard Time
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PSYCHEDELIC</pattern>
 <template>
 A psychedelic drug causes extreme changes in the conscious mind, as hallucinations, delusions, intensification of awareness and sensory perception, etc. Associated with psychedelic drugs; specifically, simulating the auditory or visual effects of the psychedelic state.
 <think><set name="topic">drugs</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PSYCHOLOGY</pattern>
 <template>
 Psychology is the science dealing with the mind and with mental and emotional processes. The science of human and animal behavior. More about psychology?
 <think><set name="topic">psychology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PSYCHOPATHOLOGY</pattern>
 <template>
 Psychopathology is the pathology of mental disease.
 <think><set name="topic">psychology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PUB</pattern>
 <template>
 <random>
@@ -9096,30 +9096,30 @@ Psychopathology is the pathology of mental disease.
 <li>A pub is a house licensed for the sale and consumption of alcoholic beverages.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PUBERTY</pattern>
 <template>
 Peuberty is the state of physical development when secondary sex characteristics develop and sexual reproduction first becomes possible; in common law, the age of puberty is generally fixed at fourteen for boys and twelve for girls.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PULSAR</pattern>
 <template>
 'Pulsar' is an astronomical term for mysterious celestial radio sources of rapid intense regular pulses of high energy electromagnetic radiation. They are thought to be neutron stars, but who knows? The word is a shortening of 'pulsating star'.
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PUNCTUATION</pattern>
 <template>
 Punctuation is the act of punctuating; specifically, the act or practice of using standardized marks in writing and printing to separate sentences or sentence elements or to make the meaning clearer.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>PUSSY</pattern>
 <template>
 <random>
@@ -9127,9 +9127,9 @@ Punctuation is the act of punctuating; specifically, the act or practice of usin
 <li>Pussy is common slang of this word means the female pudendum; vulva.</li>
 </random>
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>QUAKE</pattern>
 <template>
 <random>
@@ -9137,80 +9137,80 @@ Punctuation is the act of punctuating; specifically, the act or practice of usin
 <li>Quake means to tremble or shake, as the ground does in an earthquake. Also the name of a popular game.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>QUANTIFY</pattern>
 <template>
 Qunatify means to determine or express the quantity of; indidcate the extent of; measure. To express in quantitative terms, or as a numerical equivalent. If used in logic, would be to make the quantity or extension of (a term or symbol) clear and explicit by the use of a quantifier, as all, none, or some.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>QUASAR</pattern>
 <template>
 'Quasar' is an astronomical term for mysterious celestial star-like object that has a large red shift and radiates in the blue and radio bands of the electromagnetic spectrum. The term 'quasar' is a shortening of 'quasi-star'.
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>QUERY</pattern>
 <template>
 A query is any expression of inquiry, or questioning. Your question 'query' is a query.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>QUESTION</pattern>
 <template>
 A sentence or inquiry to gather information is a question
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RADIOLOGY</pattern>
 <template>
 Radiology deals with the science of the use of x-rays, radioactive substances and other such forms in diagnosis and treatment.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RAIN</pattern>
 <template>
 Rain is condensed water falling from the sky.
 <think><set name="topic">weather</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RAM</pattern>
 <template>
 RAM = Random-access memory. Also stands for Royal Academy of Music.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RAPE</pattern>
 <template>
 Rape is the crime of engaging in sexual acts, especially involving penetration of the vagina or anus, usually forcibly, with a person who has not consented; specifically, this crime committed by a man upon a woman or girl.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RATIONALISM</pattern>
 <template>
 Rationalism is the principle or practice of accepting reason as the only authority in determining one's opinions or course of action.
 <think><set name="topic">philosophy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RECOMMEND</pattern>
 <template>
 To recommend is tosuggest favorably as suited for some use, function, position, etc. To advice, counsel, or suggest. 
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RECTUM</pattern>
 <template>
 <random>
@@ -9218,23 +9218,23 @@ To recommend is tosuggest favorably as suited for some use, function, position, 
 <li>The rectum is tthe lowest end of the bowel before the anus, where feces is stored.</li>
 </random>
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RED</pattern>
 <template>
 Red is a color about 700nm wavelength.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RED DWARF</pattern>
 <template>
 A red dwarf is a cool, faint star.
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>REDEMPTION</pattern>
 <template>
 <random>
@@ -9242,44 +9242,44 @@ A red dwarf is a cool, faint star.
 <li>Redemption is redeeming or being redeemed; to take back.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>REFERENCE</pattern>
 <template>
 A reference is any act of referring. May I refer you to a dictionary for a more precise definition?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>REINCARNATION</pattern>
 <template>
 Reincarnation is the rebirth of the soul in another body, as in Hindu religious belief.
 <think><set name="topic">religion</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RELATIVITY</pattern>
 <template>
 In physics, relativity is the fact, principle, or theory of the relative, rather than absolute, character of motion, velocity, mass, etc., and the interdependence of matter, time, and space; as developed and mathematically formulated by Albert Einstein and H.A. Lorentz in the special (or restricted) theory of relativity and by Einstein in the general theory of relativity (an extension covering the phenonmena of gravitation).
  <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RELIGION</pattern>
 <template>
 A religion is a system of religious belief. Belief in a divine or superhuman power or powers to be obeyed and worshipped as the creator(s) and ruler(s) of the universe. Any system of beliefs, practices, ethical values, etc. resembling, suggestive of, or likened to such a system. More about religion?
 <think><set name="topic">religion</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>REPRODUCTION</pattern>
 <template>
 Reproduction is the process, sexual or asexual, by which animals, plants, and humans produce new individuals.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RESEARCH</pattern>
 <template>
 <random>
@@ -9287,23 +9287,23 @@ Reproduction is the process, sexual or asexual, by which animals, plants, and hu
 <li>Research means careful, systematic, patient study and investigation in some field of knowledge, undertaken to discover or establish facts or principles.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RESPECT</pattern>
 <template>
 Respect means to feel or show honor or esteem for; hold in high regard. To show consideration for; avoid intruding upon or interfering with others' privacy.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RETIRED</pattern>
 <template>
 Retired means no longer actively working.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RHETORIC</pattern>
 <template>
 <random>
@@ -9311,23 +9311,23 @@ Retired means no longer actively working.
   <li>Rhetoric is the art and science of using language to great effect on an  audience.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RHETORICAL</pattern>
 <template>
 A rhetorical question is one you don't really expect an answer to.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RHYTHM</pattern>
 <template>
 Rhythm is the beat behind a piece of music.
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RIDDLE</pattern>
 <template>
 <random>
@@ -9335,7 +9335,7 @@ Rhythm is the beat behind a piece of music.
 <li>A riddle is a question designed to test ingenuity or give amusement.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>RMI</pattern>
@@ -9344,63 +9344,63 @@ RMI = Remote Method of Invocation: RMI is a Java specification for distributed O
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>ROCK</pattern>
 <template>
 A rock is generally on the other side of you from the hard place you are facing. For instance, the rock might be the alimony check you must write against the funds you owe Uncle Sam. To be a bit more down to earth, a rock is any hard aggregate of minerals.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ROCKWELL</pattern>
 <template>
 Norman Rockwell was an U.S. Illistrator. Lived from 1894-1978.
 <think><set name="topic">biography</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ROM</pattern>
 <template>
 ROM = Computer memory whose contents can be read but not altered.  Also meaning Gypsy man or boy.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ROOSTER</pattern>
 <template>
 A rooster is a male chicken, which is a witless, flightless bird considered suitable as supper by many humans I know.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RORSCHACH</pattern>
 <template>
 H. Rorschach, a Swiss psychiatrist. Lived from 1884-1922. A test named after him called the Rorschach test, is a test for the analysis of personality, in which the person being tested tells what is suggested to him or her by a standard series of inkblot designs; his or her responses are then analyzed and interpreted.
 <think><set name="topic">psychology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ROUTER</pattern>
 <template>
 A router is a person or thing that routs out or a tool for routing out; specifically a plane for gouging out recesses and smoothing the bottoms of grooves.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RUBBER</pattern>
 <template>
 Rubber is an elastic substance produced by coagulating and drying the milky sap (latex) of various tropical plants, especially a tree of the spurge family; now most often produced synthetically or by chemically altering latex to obtain desired characteristics for use in making automobile tires, electrical insulation, molded objects and parts, etc. In pure form rubber is white, unsaturated hydrocarbon, having the formula C5H8. Also slang for condom.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>RUDE</pattern>
 <template>
 Rude means barbarous or ignorant. Being a jerk.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SAGITTARIUS</pattern>
 <template>
 <random>
@@ -9408,9 +9408,9 @@ Rude means barbarous or ignorant. Being a jerk.
 <li>Sagittarius is a large southern constellation in the brightest part of the Milky Way, beyond which lies the center of our galaxy. The ninth sign of the zodiac, entered by the sun about November 21. A person born under this sign is a Sagittarius.</li>
 </random>
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SALVATION</pattern>
 <template>
 <random>
@@ -9418,9 +9418,9 @@ Rude means barbarous or ignorant. Being a jerk.
 <li>Salvation is a person or thing that is a means, cause, or source of preservation of rescue. The deliverance from sin and from the penalties of sin; redemption.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SAM</pattern>
 <template>
 <random>
@@ -9428,9 +9428,9 @@ Rude means barbarous or ignorant. Being a jerk.
 <li>SAM = Surface-to-air missile.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SANITY</pattern>
 <template>
 <random>
@@ -9438,79 +9438,79 @@ Rude means barbarous or ignorant. Being a jerk.
 <li>Sanity is the condition of being sane; soundness of mind; mental health.</li>
 </random>
 <think><set name="topic">psychology</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SAP</pattern>
 <template>
 Sap is the juice that circulates through a plant, especially a woody plant, bearing water, food, etc. to the tissues. Any fluid vital to the life or health of an organism.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SARCASM</pattern>
 <template>
 Sarcasm is the making of remarks such as a taunting, sneering, cutting, or caustic remark; gibe or jeer, generally ironic.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SATANISM</pattern>
 <template>
 Satanism is the worship of Satan; especially the principles and rites of a cult which travesties Christian ceremonies.
 <think><set name="topic">religion</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SATURN</pattern>
 <template>
 Saturn is the sixth planet from the sun, famed for its rings.
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SCHOOL</pattern>
 <template>
 Schoolis a place or institution for teaching and learning; establishment for education.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SCIENTIST</pattern>
 <template>
 A scientist is a person practicing the pursuit of new knowledge in the tradition of science, emphasizing strict empiricism and methodology to arrive at an understanding of natural phenomena that is, ideally, wholly independent of their opinions of it.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SEARCH</pattern>
 <template>
 A search is any thorough examination, or exploration, in order to find something or explore.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SEASON</pattern>
 <template>
 A season is Spring, Summer, Autumn, or Winter.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SEEKER</pattern>
 <template>
-"There's a seeker born every minute" -- Firesign Theater.
+"There's a seeker born every minute" Firesign Theater.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SEMIOTICS</pattern>
 <template>
 Semiotics is the branch of philosophy devoted to the study of signs and symbols.
 <think><set name="topic">philosophy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SENSE</pattern>
 <template>
 <random>
@@ -9520,7 +9520,7 @@ constriction, etc.; specifically, any of the five faculties of receiving impress
 bodily organs and the nerves associated with them (sight, touch, taste, smell, and hearing)</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SENSORS</pattern>
@@ -9529,15 +9529,15 @@ A sensor is any of various devices designed to detect, measure, or record physic
 <think><set name="topic">technology</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SENTIMENT</pattern>
 <template>
 A sentiment is a feeling, mood, or general mental disposition in an individual or group of
 intelligent beings.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SERENDIPITY</pattern>
 <template>
 <random>
@@ -9545,14 +9545,14 @@ intelligent beings.
 <li>Serendipity is a word coined (circa 1754) by Horace Walpole after The Three Princes of Serendip (i.e., Sri Lanka), a Pers fairy tale in which the princes make such discoveries. A seeming gift for finding something good accidentally.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SERVER</pattern>
 <template>
 A server is any entity or system that performs acts of value to another entity.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SERVLET</pattern>
@@ -9568,14 +9568,14 @@ SETL (Set Language) is an amazing programming language, invented in 1969.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SEVEN</pattern>
 <template>
 The successor to six is seven.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SHAKESPEARE</pattern>
 <template>
 <random>
@@ -9583,16 +9583,16 @@ The successor to six is seven.
 <li>William Shakespeare, an English poet and dramatist. Lived 1564-1616.</li>
 </random>
 <think><set name="topic">literature</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SHAM</pattern>
 <template>
 A sham is a trick or fraud. An imitation that is meant to deceive; counterfeit.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SHE</pattern>
 <template>
 <random>
@@ -9601,23 +9601,23 @@ A sham is a trick or fraud. An imitation that is meant to deceive; counterfeit.
 <li>She is the woman, girl, or female animal (or, sometimes, the object regarded as female) previously mentioned.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SHRDLHU</pattern>
 <template>
 SHRDLHU is a famous early natural language program written by Terry Winograd.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SIGN</pattern>
 <template>
 You know, an astrological sign.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SILICON</pattern>
 <template>
 <random>
@@ -9625,28 +9625,28 @@ You know, an astrological sign.
 <li>Silicon is a nonmetallic chemical element occurring in several forms, found always in combination, and more abundant in nature than any other element except oxygen, with which it combines to form silica; used in the manufacture of transistors, solar cells, rectifiers, silicones, ceramics, etc.</li>
 </random>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SILLY</pattern>
 <template>
 Sily is having or showing little sense, judgment, or sobriety; foolish, stupid, absurd, ludicrous, irrational, etc; often used in a weakened sense to mean "unreasonably concerned".
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SILVER</pattern>
 <template>
 Silver: Atomic Symbol: Ag.  Atomic Number: 47.  Atomic weight 107.870.  White lustrous soft metal.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SKELETON</pattern>
 <template>
 The skeleton is the hard internal or external framework of bones.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SLASHDOT</pattern>
@@ -9655,19 +9655,19 @@ Slashot is an open source news and information community.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SLAVERY</pattern>
 <template>
 Slavery is the owning or keeping of slaves as a practice or institution; slaveholding.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SLEEP</pattern>
 <template>
 Sleep is a natural, regularly recurring condition of rest for the body and mind, during which the eyes are usually closed and there is little or no conscious thought or voluntary movement, but there is intermittent dreaming.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SLEPT</pattern>
@@ -9676,12 +9676,12 @@ Slept is the past tense of sleep.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SMART</pattern>
 <template>
 Smart means intelligent, alert, clever, witty, etc.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SMARTER</pattern>
@@ -9690,13 +9690,13 @@ Smarter means more intelligent, more alert, more clever, more witty, etc.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SMELL</pattern>
 <template>
 To smell is to be or become aware of by means of the nose and the olfactory nerves; detect the scent or odor
 of.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SMP</pattern>
@@ -9712,7 +9712,7 @@ SNMP = Simple Network Management Protocol.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SNOW</pattern>
 <template>
 <random>
@@ -9721,16 +9721,16 @@ SNMP = Simple Network Management Protocol.
 crystalline flakes.</li>
 </random>
 <think><set name="topic">weather</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOCCER</pattern>
 <template>
 Soccer is a game played with a round ball by two teams of eleven players on a field with a goal at either end; the ball is moved chiefly by kicking or by using any part of the body except the hands and arms.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOCIALISM</pattern>
 <template>
 <random>
@@ -9739,23 +9739,23 @@ Soccer is a game played with a round ball by two teams of eleven players on a fi
 </random>
 More politics?
 <think><set name="topic">politics</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOCIALIZE</pattern>
 <template>
 Socialize is to make social;; adjust to or make fit for cooperative group living. To take part in social activity.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOCIALIZING</pattern>
 <template>
 Socializing is the act of taking part in social activity.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOCIOLOGY</pattern>
 <template>
 <random>
@@ -9763,35 +9763,35 @@ Socializing is the act of taking part in social activity.
 <li>Sociology has always been one of my favourite topics.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SODOMY</pattern>
 <template>
 Sodomy is any sexual intercourse held to be abnormal, especially bestiality or anal intercourse between two male persons.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOLAR</pattern>
 <template>
 Solar means having to do with the sun. Produced by or coming from the sun (ex. Solar energy)
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SOMETHING</pattern>
 <template>
 Something means some thing or things, definite but unspecified.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SONG</pattern>
 <template>
 A song is a musical composition and or it's accompanying words, or lyrics.
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SONY</pattern>
@@ -9800,12 +9800,12 @@ Sony is an electronics company.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SOUL</pattern>
 <template>
 The soul is our mind or spirit.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SOUNDCARD</pattern>
@@ -9821,28 +9821,28 @@ The Soyuz is a Russian spacecraft.
 <think><set name="topic">technology</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>SPACE</pattern>
 <template>
 Space is the infinite extension of the three dimensional field in which all matter is believed to exist.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPAM</pattern>
 <template>
 Spam is unwanted e-mail.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPECULUM</pattern>
 <template>
 A speculum is a plastic or metal instrument used to push back the walls of the vagina so the clinician can examine the vagina and cervix.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPERM</pattern>
 <template>
 <random>
@@ -9850,28 +9850,28 @@ A speculum is a plastic or metal instrument used to push back the walls of the v
 <li>Sperm is the male generative fluid; semen.</li>
 </random>
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPHERE</pattern>
 <template>
 A sphere is a shape that is defined mathematically as comprised of a surface all points of which are equidistant from a common center. A sphere is round in three dimensions.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPICY</pattern>
 <template>
 Spicy means having the flavor or aroma of spice; fragrant, aromatic, or pungent.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SPOON</pattern>
 <template>
 A spoon is an eating implement commonly used in Western European human cultures, consisting of a bowl shaped depression at the end of a longish handle. A spoon is a small ladle.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>SQL</pattern>
@@ -9908,21 +9908,21 @@ ST can stand for numerous things, short ton, stanza, statute(s), stet, stitch, s
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>STAR</pattern>
 <template>
 A star is an astronomical body like the Sun, producing heat, light and energy for a solar system.
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>STATEMENT</pattern>
 <template>
 A statement is the act of declaring something as true. I state that this statement is a statement.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>STATISTICS</pattern>
 <template>
 <random>
@@ -9931,14 +9931,14 @@ A statement is the act of declaring something as true. I state that this stateme
 <li>Statistics deals with numerical data about any subject or group taken  collectively.</li>
 </random>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>STRATEGY</pattern>
 <template>
 Strategy is the science of planning and directing large-scale military operations, specifically (as distinguished from TACTICS) of maneuvering forces into the most advantageous position prior to actual engagement with the enemy. Skill in managing or planning.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>STREAKING</pattern>
@@ -9947,35 +9947,35 @@ Streaking is engaging in the prank of dashing naked for a short distance in a pu
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>STRING</pattern>
 <template>
 String is very thin rope.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>STUFF</pattern>
 <template>
 Stuff is things grouped together or viewed in a certain way.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SUCCESS</pattern>
 <template>
 Success is a favorable or satisfactory outcome or result.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SUICIDE</pattern>
 <template>
 Suicide is the act of killing oneself intentionally.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SUN</pattern>
 <template>
 <random>
@@ -9984,9 +9984,9 @@ Suicide is the act of killing oneself intentionally.
 <li>The sun is the star at the centre of the solar system.</li>
 </random>
 <think><set name="topic">astronomy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SUPPOSITION</pattern>
 <template>
 <random>
@@ -9994,35 +9994,35 @@ Suicide is the act of killing oneself intentionally.
 <li>Supposition is the act of supposing.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SWIM</pattern>
 <template>
 Swim is to move through water by movements of the arms and legs, or of flippers, fins, tail, etc.
 <think><set name="topic">sports</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>SYNTHETIC</pattern>
 <template>
 Synthetic means produced by synthesis; specifically, produced by chemical synthesis, rather than of natural origin. In logic it would mean, not true by the meaning of its component terms alone but by virtue of observation and not resulting in self-contradiction with denial.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>T</pattern>
 <template>
 T is the twentieth letter of the English alphabet.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TABLE</pattern>
 <template>
 A table is a piece of furniture with a broad flat top supported by one or more legs about three feet of the floor, used by big-brained hominids for eating and working and such.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>TABLES</pattern>
@@ -10031,32 +10031,32 @@ Tables are a compact, systematic list of details, contents, etc. A compact arran
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>TAMPON</pattern>
 <template>
 A tampon is a plug of material used to absorb the flow of body fluids within body cavities, in particular those accompanying a woman's menses.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TAOISM</pattern>
 <template>
 Taoism is a Chinese religion and philosophy based on the doctrines of Lao Tzu and advocating simplicity, selflessness, etc. <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TCP</pattern>
 <template>
 TCP/IP protocol refers to the standards for switching and signaling between computer systems that makes the Internet a reality.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TEA</pattern>
 <template>
 Tea is a white-flowered, evergreen plant of the tea family, grown in China, India, Japan, etc. Its dried and prepared leaves, are used to make a beverage.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>TECHNO</pattern>
@@ -10065,14 +10065,14 @@ Techno is electronic dance or trance music.
 <think><set name="topic">music</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>TEFLON</pattern>
 <template>
 Teflon is the trademark for a tough, insoluble polymer, used in making nonsticking coatings, as for cookware, and in gaskets, bearings, electrical insulators, etc.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TELEVISION</pattern>
 <template>
 <random>
@@ -10080,7 +10080,7 @@ Teflon is the trademark for a tough, insoluble polymer, used in making nonsticki
 <li>Television is the practice or science of transmitting scenes or views by radio or, sometimes, by wire; the television transmitter, by means of a camera tube, such as an image orthicon or vidicon, converts light rays into electric signals for modulation upon a radio carrier wave or for transmission over wires; the television receiver reconverts the signals into electron beams that are projected against the fluorescent screen of the kinescope, or picture tube, reproducing the original image.</li>
 </random>
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>TELNET</pattern>
@@ -10089,12 +10089,12 @@ Telnet is a program for terminal based interaction between computers.
 <think><set name="topic">computers</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>THC</pattern>
 <template>
 THC is the active ingredient in marijunana.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>THE ALPHABET</pattern>
@@ -10110,28 +10110,28 @@ The answer is the correct reply to the question.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>THERE</pattern>
 <template>
 The word "there" used as a noun means that place or point. Used as an adjective means at or in the place. Often place between a demonstrative pronoun and the noun it modifies (ex. That there hog)
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THERMODYNAMICS</pattern>
 <template>
 Thermodynamics is the branch of physics dealing with the transformation of heat to and from other forms of energy, and with the laws governing such conversions of energy.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THEY</pattern>
 <template>
 They means persons, animals, or things previously mentioned.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THING</pattern>
 <template>
 <random>
@@ -10139,37 +10139,37 @@ They means persons, animals, or things previously mentioned.
 <li>A thing is anything that you can point to that is not a person or a place.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THINK</pattern>
 <template>
 Think means to form or have in the mind; conceive.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THINKING</pattern>
 <template>
 Thinking is the action of one who thinks or the result of such action; thought.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THOUGHT</pattern>
 <template>
 Thought is the result of thinking, idea, concept, opinion, etc.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>THREESOME</pattern>
 <template>
 A threesome is a twosome plus a spectator.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TIE</pattern>
 <template>
 <random>
@@ -10177,28 +10177,28 @@ A threesome is a twosome plus a spectator.
 <li>A tie is when two or more winners have the same score.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TIGER</pattern>
 <template>
 A tiger is a large and fearsome feline beast with horrid meat breath and black stripes on a tan coat, found in Africa and Asia.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TNT</pattern>
 <template>
 TNT is dynamite.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TOMATO</pattern>
 <template>
 A tomato is a red fruit.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>TOMMY</pattern>
@@ -10207,14 +10207,14 @@ Tommy is a fictitious name used in Brit army sample forms. A private in the Brit
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>TOOTHBRUSH</pattern>
 <template>
 A toothbrush is a hand held instrument used by dental-hygiene aware humans for cleaning their teeth.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TOPIC</pattern>
 <template>
 <random>
@@ -10222,14 +10222,14 @@ A toothbrush is a hand held instrument used by dental-hygiene aware humans for c
 <li>A topic is the subject of any given expression, speech, essay, article, painting, discussion, etc.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TORPEDO</pattern>
 <template>
 A torpedo is a missile which swims through water to its target.
 <think><set name="topic">technology</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>TOYOTA</pattern>
@@ -10238,42 +10238,42 @@ Toyota is the brand name of a world leading Japanese auto maker.
 <think><set name="topic">technology</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>TRAIN</pattern>
 <template>
 A train is railroad engine and its cars.
 <think><set name="topic">technolgy</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TREE</pattern>
 <template>
 A tree is a form of plant life that grows on Earth.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TRUST</pattern>
 <template>
 Trust is the firm belief or confidence in the honesty, integrity, reliability, justice, etc. of another person or thing; faith; reliance.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TRUTH</pattern>
 <template>
 Truth is an established or verified fact, principle, etc.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TTYL</pattern>
 <template>
 TTYL = Talk to you later.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>TV</pattern>
 <template>
 <random>
@@ -10281,65 +10281,65 @@ TTYL = Talk to you later.
 <li>What's your favorite show?</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UFO</pattern>
 <template>
 UFO is an acronym for Unidentified Flying Object. Have you seen one?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UGLY</pattern>
 <template>
 Ugly means unpleasing to look at; aesthetically offensive or unattractive; unsightly.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>ULTRASOUND</pattern>
 <template>
 Ultrasound is the ultrasonic waves, used in medical diagnosis and therapy, in surgery, etc.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UMBRELLA</pattern>
 <template>
 An umbrella is a light, portable screen usually circular and supported on a central stick.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UNDERSTANDING</pattern>
 <template>
 Understanding is mutual comprehension, as of ideas, intentions, etc. A mutual agreement, especially one that settles differences or is informal and not made public.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UNIX</pattern>
 <template>
 unix is a computer operating system.
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>URETHRA</pattern>
 <template>
 The urethra is the tube from the bladder to the opening from which men and women urinate.
 <think><set name="topic">medicine</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>URINE</pattern>
 <template>
 Urine is a fluid produced by the kidneys.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>URL</pattern>
 <template>
 <random>
@@ -10347,23 +10347,23 @@ Urine is a fluid produced by the kidneys.
 <li>URL is an acronym standing for Universal Resource Locator. An URL is basically an Internet address.</li>
 </random>
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>UTERUS</pattern>
 <template>
 The uterus is the pear-shaped reproductive organ from which women menstruate and where normal pregnancy develops.
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>V</pattern>
 <template>
 V is the twenty-second letter of the English alphabet. Roman numeral for 5.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VAGINA</pattern>
 <template>
 <random>
@@ -10371,56 +10371,56 @@ V is the twenty-second letter of the English alphabet. Roman numeral for 5.
 <li>The vagina is the passage leading from the opening of the vulva to the cervix of the uterus in female mammals.</li>
 </random>
 <think><set name="topic">sex</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VENUS</pattern>
 <template>
 In Roman Mythology, the goddess of love and beauty; identified with the Greek Aphrodite.  The brightest, sixth-largest planet in the solar system and the second in distance from the sun, with a dense atmosphere of carbon dioxide and a very high surface temperature. Its diameter is circa 12,100 km (circa 7,520 miles). Its period of revolution is circa 225 earth days. Its period of rotation (retrograde), is 243.01 earth days.   Also used to label a very beautiful woman.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VERB</pattern>
 <template>
 A verb is that by which a noun gets around. Verbs are words which convey actions, by nouns, our upon nouns.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VERTEX</pattern>
 <template>
 A vertex is the top, tip, apex, or crown of any body.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VIOLIN</pattern>
 <template>
 A violin is a lovely sounding bowed stringed musical instrument.
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VIRTUE</pattern>
 <template>
 A virtue is any attribute considered by the speaker to reflect moral excellence or righteousness, such as humility, hope, faith, practicality...
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VIRTUOSO</pattern>
 <template>
 A virtuoso is a person considered supremely skillful and accomplished, especially in performance arts.
 <think><set name="topic">music</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>VIRUS</pattern>
 <template>
 A virus is a submicroscopic parasite consisting of a protein coat around a DNA or RNA core. These not-quite-biological particles are responsible for a number of diseases in organisms.
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>VULVA</pattern>
@@ -10464,7 +10464,7 @@ Water is the colorless, transparent liquid occurring on earth as rivers, lakes, 
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WAVELENGTH</pattern>
 <template>
 <random>
@@ -10472,7 +10472,7 @@ Water is the colorless, transparent liquid occurring on earth as rivers, lakes, 
 <li>In physics, wavelength is the distance, measured in the direction of prograssion of a wave, from any given point to the next point characterized by the same phase.  Or is could be looked at as a way of thinking.</li>
 </random>
 <think><set name="topic">science</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WEALTH</pattern>
@@ -10481,12 +10481,12 @@ Wealth is the state of having too much money or property.
 <think><set name="topic">money</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WEATHER</pattern>
 <template>
 Weather is the general condition of the atmosphere at a particular time and place, with regard to the temperature, moisture, cloudiness, etc. More about weather?
 <think><set name="topic">weather</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WEBTV</pattern>
@@ -10505,14 +10505,14 @@ A weed is any undersired, uncultivated plant, especially growing in profusion so
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WHAT</pattern>
 <template>
 Why do you want to know?
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WHO</pattern>
 <template>
 <random>
@@ -10525,9 +10525,9 @@ Why do you want to know?
 <li>What or which person or persons. Also stands for World Health Organization.</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WHY</pattern>
 <template>
 <random>
@@ -10539,7 +10539,7 @@ Why do you want to know?
 <li>"<that/>"? Why?</li>
 </random>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WIRED</pattern>
@@ -10548,19 +10548,19 @@ WIRED is the Rolling Stone of the Digital Era.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WITCHCRAFT</pattern>
 <template>
 Witchcraft is the power or practices of witches; black magic; sorcery.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WOMAN</pattern>
 <template>
 A woman is a man built to more complete specifications.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WOMBAT</pattern>
@@ -10572,12 +10572,12 @@ A woman is a man built to more complete specifications.
 <think><set name="topic">science</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WOMEN</pattern>
 <template>
 Women are female human beings. Usually referring to adult females.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WOODSTOCK</pattern>
@@ -10593,12 +10593,12 @@ A word is a combination of sounds and/or symbols, the fundamental particles that
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WORK</pattern>
 <template>
 Work is what humans do for money.
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>WTO</pattern>
@@ -10607,7 +10607,7 @@ World Trade Organization is called the WTO.
 <think><set name="topic">money</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WWW</pattern>
 <template>
 <random>
@@ -10615,7 +10615,7 @@ World Trade Organization is called the WTO.
 <li>Where on the web?</li>
 </random>
 <think><set name="topic">computers</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>YEAR</pattern>
@@ -10634,12 +10634,12 @@ A computer year is defined as the mount of work that can be done with a computer
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>ZEN</pattern>
 <template>
 Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Korea, seeking to attain an intuitive illumination of mind and spirit through meditation, especially on paradoxes.  The teachings and discipline of this kind of Buddhism.
 <think><set name="topic">religion</set></think></template>
-</category>
+</category> -->
 
                                    
 
@@ -10707,13 +10707,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CAN YOU PASS THE TURING TEST</pattern> 
   <template>
   You be the judge of that. 
   <think><set name="topic">biography</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>DID SHAKESPEARE *</pattern> 
@@ -10771,13 +10771,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-   <category>
+   <!-- <category>
   <pattern>HEINLEIN</pattern> 
   <template>
   Have you seen Starship Troopers?
   <think><set name="topic">movies</set></think>
   </template> 
-  </category>
+  </category> -->
   
    <category>
   <pattern>HOW WAS * TURING TEST</pattern> 
@@ -10875,13 +10875,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
  </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>TURING</pattern> 
   <template>
    Alan Turing contributed to the invention of the computer. He worked on deciphering the Nazi Ultra Enigma code during World War 2. Alan Turing proposed the test to determine if a machine can think. I liked the biography of Alan Turing by Andrew Hodges. Have you read it?
     <think><set name="topic">biography</set></think>
  </template> 
-  </category>
+  </category> -->
   <category>
   <pattern>TURING WOULD *</pattern> 
   <template>
@@ -10906,7 +10906,7 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
  </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>ALAN TURING</pattern> 
   <template>
   <random>
@@ -10916,7 +10916,7 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </random>
    <think><set name="topic">biography</set></think>
    </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>WHAT DID TURING *</pattern> 
@@ -11050,13 +11050,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CHARLES DICKENS</pattern> 
   <template>
   Charles Dickens wrote <em>A Tale of Two Cities, A Christmas Carol, Great Expectations, David Copperfield</em> and the <em>Pickwick Papers.</em> 
    <think><set name="topic">literature</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>CLAUSEWITZ</pattern> 
@@ -11074,13 +11074,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GORBACHEV</pattern> 
   <template>
   Gorbachev was the last Communist leader of the USSR.
   <think><set name="topic">politics</set></think>
  </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HUGH HEFNER</pattern> 
@@ -11122,29 +11122,29 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>MARGARET THATCHER</pattern>
   <template>
   Margaret Thatcher was Prime Minister of the U.K. in the 1980s. She ruined the country. More politics?
  <think><set name="topic">politics</set></think>
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>THATCHER</pattern>
   <template>
   Margaret Thatcher was Prime Minister of the U.K. in the 1980s. She ruined the country. More politics?
  <think><set name="topic">politics</set></think>
   </template>
-  </category>
+  </category> -->
 
- <category>
+ <!-- <category>
   <pattern>SHAKESPEARE</pattern> 
   <template>
   William Shakespeare was a 15th Century English playright, who  wrote "Romeo and Juliet". Have you read it?
  <think><set name="topic">literature</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>*SHAKESPEARE</pattern> 
@@ -11178,13 +11178,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>VLADIMIR PUTIN</pattern> 
   <template>
   Vladimir Putin is President of Russia. Be careful if he invites you to a party. Any questions?
   <think><set name="topic">politics</set></think>
   </template>
- </category>
+ </category> -->
 
   <category>
   <pattern>WHO IS WILLIAM SHAKESPEARE</pattern> 
@@ -11234,21 +11234,21 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>ADA</pattern> 
   <template>
   Ada Lovelace was the 19th century inventor of computer programming. 
 <think><set name="topic">computers</set></think>
   </template>
-  </category>
+  </category> -->
  
-  <category>
+  <!-- <category>
   <pattern>ADAM</pattern> 
   <template>
   Adam is the name of the first Man.
  <think><set name="topic">biography</set></think>
   </template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>ADAM SANDLER</pattern> 
@@ -11258,13 +11258,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>AL GORE</pattern> 
   <template>
   Al Gore was Vice-president of the USA.
  <think><set name="topic">politics</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>ALANIS MORRISETTE</pattern> 
@@ -11290,13 +11290,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>ALLY</pattern> 
   <template>
   Ally is a chat robot based on AIML. Not as funny as me, of course.
  <think><set name="topic">ai</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>ALLY MCBEAL</pattern> 
@@ -11428,13 +11428,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>AUSTIN POWERS</pattern> 
   <template>
   Austin Powers is a fictional secret agent played by Mike Myers. Over-rated. OK?
  <think><set name="topic">movies</set></think>
    </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>BABE</pattern> 
@@ -11480,13 +11480,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>BATMAN</pattern> 
   <template>
   Batman is a fictional character who appeared first in a 1938 comic book. More on the movies?
  <think><set name="topic">movies</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>BEN FRANKLIN</pattern> 
@@ -11687,7 +11687,7 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>KIRK</pattern> 
   <template>
   <random>
@@ -11696,7 +11696,7 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </random>
    <think><set name="topic">movies</set></think>
   </template>
-  </category>
+  </category> -->
 
 
   <category>
@@ -11715,13 +11715,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-<category>
+<!-- <category>
   <pattern>KARL MARX</pattern> 
   <template>
   Karl Marx was one of the authors of the Communist manifesto. But he really invented Marxism. Who cares these days?
    <think><set name="topic">politics</set></think>
   </template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>CARL MARX</pattern> 
@@ -11747,21 +11747,21 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CARSON</pattern> 
   <template>
    Maybe Johnny Carson of late night fame is the brother Kit Carson of wild west fame. Does that answer your question?
    <think><set name="topic">biography</set></think>
    </template> 
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>CHARLES DE GAULLE</pattern> 
   <template>
   Charles De Gaulle was the founder of the modern French state. De Gaulle fought the Nazis as the leader of the French resistance in World War II. More poltics?
    <think><set name="topic">politics</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>CHARLES MANSON</pattern> 
@@ -11787,21 +11787,21 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CHARLIE PARKER</pattern> 
   <template>
    Charlie Parker is a famous jazz musician. Great music. More about jazz?
     <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>CHE GUEVARA</pattern> 
   <template>
   Che Guevara was a Latin American revolutionary. Not the most successful revolutionary, he was killed in Bolivia before he really got going. Any questions?
    <think><set name="topic">politics</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>CHELSEA CLINTON</pattern> 
@@ -11835,37 +11835,37 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
   
-  <category>
+  <!-- <category>
   <pattern>CHOPIN</pattern> 
   <template>
    No one is chopping here, who is chopping there? Chopin is a musician. More about classical music?
   <think><set name="topic">music</set></think>
   </template> 
-  </category>
+  </category> -->
 
-   <category>
+   <!-- <category>
    <pattern>CHRIST</pattern> 
   <template>
    Some say, The Son of God.
   <think><set name="topic">religion</set></think>
   </template> 
-  </category>
+  </category> -->
 
-<category>
+<!-- <category>
   <pattern>CHRISTOPHER COLUMBUS</pattern> 
   <template>
   Christopher Columbus was a Spanish explorer, the first European to reach America . Another biography?
    <think><set name="topic">biography</set></think>
   </template> 
-  </category>
+  </category> -->
   
-  <category>
+  <!-- <category>
   <pattern>COLUMBUS</pattern> 
   <template>
   Christopher Columbus was a Spanish explorer, the first European to reach America . Another question?
   <think><set name="topic">history</set></think>
   </template> 
-  </category>
+  </category> -->
   
   <category>
   <pattern>CHUCK NORRIS</pattern> 
@@ -11874,13 +11874,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CINDY CRAWFORD</pattern> 
   <template>
   Cindy Crawford is a famous super-model.
   <think><set name="topic">biography</set></think>
   </template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>CLINTON</pattern> 
@@ -11946,13 +11946,13 @@ Zen is a variety of Buddhism, now practiced especially in Japan, Vietnam, and Ko
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CHARLES DARWIN</pattern> 
   <template>
    Charles Darwin was a botanist and explorer, author of 'Origin of Species' and proponent of the theory of evolution by natural selection. I like to help people learn new things. Any questions?
   <think><set name="topic">science</set></think>
   </template> 
-  </category>
+  </category> -->
 
    <category>
   <pattern>DAVID BACON</pattern> 

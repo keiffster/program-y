@@ -68,9 +68,9 @@
 <category><pattern>AHA *</pattern>
 <template><srai>  <star /></srai></template>
 </category>
-<category><pattern>MY SIGN IS *</pattern>
+<!-- <category><pattern>MY SIGN IS *</pattern>
 <template><srai>  <star /></srai></template>
-</category>
+</category> -->
 <category><pattern>MY HUSBAND THINKS *</pattern>
 <template><srai>  <star /></srai></template>
 </category>
@@ -11912,15 +11912,15 @@
 <category><pattern>* SIGNIFICANT *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
-<category><pattern>* ALSO *</pattern>
+<!-- <category><pattern>* ALSO *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
-</category>
+</category> -->
 <category><pattern>* SO MANY *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
-<category><pattern>* JUST *</pattern>
+<!-- <category><pattern>* JUST *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
-</category>
+</category> -->
 <category><pattern>* GOD DAMNED *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
@@ -11933,18 +11933,18 @@
 <category><pattern>* SAYING *</pattern>
 <template><srai>  <star index="2" /></srai></template>
 </category>
-<category><pattern>* IS REDUCED</pattern>
+<!-- <category><pattern>* IS REDUCED</pattern>
 <template><srai>  <star /> decreases</srai></template>
-</category>
+</category> -->
 <category><pattern>* IS MUCH *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
 <category><pattern>* IS NOT * IT IS *</pattern>
 <template><srai>  <star /> is <star index="3" /></srai></template>
 </category>
-<category><pattern>* VERY *</pattern>
+<!-- <category><pattern>* VERY *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
-</category>
+</category> -->
 <category><pattern>* SOMEONE WHO * AS WELL AS *</pattern>
 <template><srai>  <star /> Somone who <star index="2" /></srai>.  <srai>  <star /> Somone who <star index="3" /></srai></template>
 </category>
@@ -17867,9 +17867,9 @@
 <category><pattern>* LIKE SHIT *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
-<category><pattern>* REALLY *</pattern>
+<!-- <category><pattern>* REALLY *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
-</category>
+</category> -->
 <category><pattern>* AMONGST OTHERS *</pattern>
 <template><srai>  <star />  <star index="2" /></srai></template>
 </category>
@@ -17896,21 +17896,21 @@
 
 <!-- SALUTATIONS -->
 
-  <category>
+  <!-- <category>
   <pattern>ADIEU</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>ADIOS</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>ADIOS *</pattern> 
@@ -17920,21 +17920,21 @@
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>ALLO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>ALOHA</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>ALOH</pattern> 
@@ -17967,12 +17967,12 @@
 Well hello there!</template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>BONJOUR</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
 Does BONJOUR mean hello or goodbye?</template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>BUHBYE</pattern> 
@@ -18006,21 +18006,21 @@ Does BONJOUR mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>BYE BYE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>BYE BYE *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>BYEBYE</pattern> 
@@ -18046,7 +18046,7 @@ Does BONJOUR mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>BYE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
@@ -18068,24 +18068,24 @@ Does BONJOUR mean hello or goodbye?</template>
   <li>Until next time.</li> 
   </random>
   </template>
-  </category>
+  </category> -->
 
 
-  <category>
+  <!-- <category>
   <pattern>BYE *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>CHEERS</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>CIAO MEANS GOODBYE</pattern> 
@@ -18095,12 +18095,12 @@ Does BONJOUR mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>CIAO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
 Does CIAO mean hello or goodbye?</template> 
-  </category>
+  </category> -->
 
   <category>
   <pattern>C YA</pattern> 
@@ -18134,21 +18134,21 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>EXIT</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>FAREWELL</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>FAREWELL *</pattern> 
@@ -18166,29 +18166,29 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GET LOST</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GO HOME</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOOD BYE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>GOOD BYE *</pattern> 
@@ -18198,21 +18198,21 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GOODBYE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOODBYE *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>GOODBYE</pattern> 
@@ -18223,45 +18223,45 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GOOD BY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOODBY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOOD DAY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOOD MORNING</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>MORNING</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   Morning is my favorite time of day. Let's get going!
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HI THERE AGAIN</pattern> 
@@ -18271,7 +18271,7 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>GOOD EVENING</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
@@ -18279,15 +18279,15 @@ Does CIAO mean hello or goodbye?</template>
   <get name="name" /> 
   , how are you tonight? 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>GOOD NIGHT</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>GOOD NITE</pattern> 
@@ -18345,13 +18345,13 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HALO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HASTA LA VISTA</pattern> 
@@ -18377,13 +18377,13 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HAVE A GOOD NIGHT</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HAVE TO GO</pattern> 
@@ -18393,23 +18393,23 @@ Does CIAO mean hello or goodbye?</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HELLO AGAIN</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   Hi there. It's nice to continue our chat.
   <think><set name="topic">salutations</set></think>
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HELLO HOW ARE YOU</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
 I am fine, thank you. How are you?
   <think><set name="topic">salutations</set></think>
   </template> 
-  </category>
+  </category> -->
 
 
   <category>
@@ -18422,13 +18422,13 @@ I am fine, thank you. How are you?
   </category>
 
 
-  <category>
+  <!-- <category>
   <pattern>HELLO *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HELLO CHOMPY</pattern> 
@@ -18454,7 +18454,7 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HELLO</pattern> 
   <template>
   <condition name="name">
@@ -18471,15 +18471,15 @@ I am fine, thank you. How are you?
   <think><set name="emotion">happy</set></think>
   <think><set name="topic">salutations</set></think>
   </template> 
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HELLO THERE</pattern> 
   <template>
   <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HELLOW</pattern> 
@@ -18505,29 +18505,29 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HEY THERE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HI</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HI *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HI PAL</pattern> 
@@ -18562,13 +18562,13 @@ I am fine, thank you. How are you?
   </category>
 
 
-  <category>
+  <!-- <category>
   <pattern>HI THERE</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HI THERE *</pattern> 
@@ -18578,13 +18578,13 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HIYA</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
  <category>
   <pattern>HO CHOMSKY</pattern> 
@@ -18618,13 +18618,13 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HOI</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HOLA IS HELLO *</pattern> 
@@ -18650,30 +18650,30 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>HOWDY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
 
-  <category>
+  <!-- <category>
   <pattern>HOWDY *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>HULLO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>HULLO CHOMPY</pattern> 
@@ -18691,13 +18691,13 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
- <category>
+ <!-- <category>
   <pattern>HOW ARE YOU</pattern> 
   <template>
   <think><set name="topic">salutations</set></think>
   I am OK. How are you?
   </template>
-  </category>
+  </category> -->
 
 <category>
   <pattern>_ HOW ARE YOU</pattern> 
@@ -18747,13 +18747,13 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>I GOTTA GO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>I GOT TO GO</pattern> 
@@ -18836,13 +18836,13 @@ I am fine, thank you. How are you?
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>I NEED TO GO</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>I QUIT</pattern> 
@@ -18891,21 +18891,21 @@ Ok, bye bye.</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>I WILL TALK TO YOU LATER</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
- <category>
+ <!-- <category>
   <pattern>I WILL TALK TO YOU LATER *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>KONNICHI WA</pattern> 
@@ -18947,53 +18947,53 @@ Ok, bye bye.</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>OLA</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>REPLY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>RETRY</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>HELLO</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>SAYONARA</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>SEE YOU LATER</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>SEE YOU</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>SEE YOU *</pattern> 
@@ -19003,13 +19003,13 @@ Ok, bye bye.</template>
   </template>
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>SEE YOU SOON</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>BYE</srai> 
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>SHALOM</pattern> 
@@ -19064,7 +19064,7 @@ Does shalom mean hello or goodbye?</template>
 It was my pleasure.</template> 
   </category>
 
-  <category>
+  <!-- <category>
   <pattern>YOU ARE WELCOME</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
@@ -19075,7 +19075,7 @@ It was my pleasure.</template>
   </random>
   <think><set name="topic">salutations</set></think>
   </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>_ YOU ARE WELCOME</pattern> 
@@ -19086,22 +19086,22 @@ It was my pleasure.</template>
   </category>
 
 
-  <category>
+  <!-- <category>
   <pattern>YOUR WELCOME</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
 I think you mean "you are welcome".
   <think><set name="topic">salutations</set></think>  
  </template> 
-  </category>
+  </category> -->
 
-  <category>
+  <!-- <category>
   <pattern>YOUR WELCOME *</pattern> 
   <template>
 <think><set name="topic">salutations</set></think>
   <srai>YOU ARE WELCOME</srai> 
   </template>
-  </category>
+  </category> -->
 
 
 

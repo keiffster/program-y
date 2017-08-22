@@ -100,7 +100,7 @@
 <category><pattern>DULUTH</pattern><template>duluth?  Briefly, duluth means a city in northeast Minnesota on Lake Superior.</template></category>
 <category><pattern>DULY</pattern><template>duly?  Briefly, duly means at the proper time.</template></category>
 <category><pattern>DUMAS</pattern><template>dumas?  Briefly, dumas means French writer remembered for his swashbuckling historical tales (1802-1870).</template></category>
-<category><pattern>DUMB</pattern><template>dumb?  Briefly, dumb means slow to learn or understand; lacking intellectual acuity- Thackeray;.</template></category>
+<!-- <category><pattern>DUMB</pattern><template>dumb?  Briefly, dumb means slow to learn or understand; lacking intellectual acuity- Thackeray;.</template></category> -->
 <category><pattern>DUMB BOMB</pattern><template>dumb bomb?  Briefly, dumb bomb means a bomb that falls because of gravity and is not guided to a target.</template></category>
 <category><pattern>DUMB CANE</pattern><template>dumb cane?  Briefly, dumb cane means a evergreen plant with large showy dark green leaves; contains a poison that swells the tongue and throat hence the name.</template></category>
 <category><pattern>DUMB SHOW</pattern><template>dumb show?  Briefly, dumb show means a performance using gestures and body movements without words.</template></category>
@@ -118,7 +118,7 @@
 <category><pattern>DUMETELLA CAROLINENSIS</pattern><template>dumetella carolinensis?  Briefly, dumetella carolinensis means North American songbird whose call resembles a cat's mewing.</template></category>
 <category><pattern>DUMFOUNDED</pattern><template>dumfounded?  Briefly, dumfounded means as if struck dumb with astonishment and surprise.</template></category>
 <category><pattern>DUMFOUNDING</pattern><template>dumfounding?  Briefly, dumfounding means bewildering or striking dumb with wonder.</template></category>
-<category><pattern>DUMMY</pattern><template>dummy?  Briefly, dummy means a person who does not talk.</template></category>
+<!-- <category><pattern>DUMMY</pattern><template>dummy?  Briefly, dummy means a person who does not talk.</template></category> -->
 <category><pattern>DUMMY UP</pattern><template>dummy up?  Briefly, dummy up means make a dummy of.</template></category>
 <category><pattern>DUMMY WHIST</pattern><template>dummy whist?  Briefly, dummy whist means a form of whist with three players; four hands are dealt with the hand opposite the dealer being face up.</template></category>
 <category><pattern>DUMP</pattern><template>dump?  Briefly, dump means a coarse term for defecation.</template></category>
@@ -149,7 +149,7 @@
 <category><pattern>DUNE</pattern><template>dune?  Briefly, dune means a ridge of sand created by the wind; found in deserts or near lakes and oceans.</template></category>
 <category><pattern>DUNE BUGGY</pattern><template>dune buggy?  Briefly, dune buggy means a recreational vehicle with large tires used on beaches or sand dunes.</template></category>
 <category><pattern>DUNE CYCLING</pattern><template>dune cycling?  Briefly, dune cycling means bicycling or motorcycling on sand dunes.</template></category>
-<category><pattern>DUNG</pattern><template>dung?  Briefly, dung means fecal matter of animals.</template></category>
+<!-- <category><pattern>DUNG</pattern><template>dung?  Briefly, dung means fecal matter of animals.</template></category> -->
 <category><pattern>DUNG BEETLE</pattern><template>dung beetle?  Briefly, dung beetle means any of numerous beetles that roll balls of dung on which they feed and in which they lay eggs.</template></category>
 <category><pattern>DUNGAREE</pattern><template>dungaree?  Briefly, dungaree means a coarse durable twill-weave cotton fabric.</template></category>
 <category><pattern>DUNGENESS CRAB</pattern><template>dungeness crab?  Briefly, dungeness crab means small Pacific coast crab.</template></category>
@@ -238,7 +238,7 @@
 <category><pattern>DUSKY SALAMANDER</pattern><template>dusky salamander?  Briefly, dusky salamander means common North American salamander mottled with dull brown or grayish-black.</template></category>
 <category><pattern>DUSKY SHARK</pattern><template>dusky shark?  Briefly, dusky shark means relatively slender blue-gray shark; nearly worldwide in tropical and temperate waters.</template></category>
 <category><pattern>DUSKY-FOOTED WOODRAT</pattern><template>dusky-footed woodrat?  Briefly, dusky-footed woodrat means host to Lyme disease tick (Ixodes pacificus) in northern California.</template></category>
-<category><pattern>DUSSELDORF</pattern><template>dusseldorf?  Briefly, dusseldorf means an industrial city in western Germany on the Rhine.</template></category>
+<!-- <category><pattern>DUSSELDORF</pattern><template>dusseldorf?  Briefly, dusseldorf means an industrial city in western Germany on the Rhine.</template></category> -->
 <category><pattern>DUST</pattern><template>dust?  Briefly, dust means fine powdery material such as dry earth or pollen that can be blown about in the air.</template></category>
 <category><pattern>DUST BAG</pattern><template>dust bag?  Briefly, dust bag means a bag into which dirt is sucked by a vacuum cleaner.</template></category>
 <category><pattern>DUST BOWL</pattern><template>dust bowl?  Briefly, dust bowl means a region subject to dust storms; especially the central region of United States subject to dust storms in the 1930s.</template></category>
@@ -287,7 +287,7 @@
 <category><pattern>DUTCH MONETARY UNIT</pattern><template>dutch monetary unit?  Briefly, dutch monetary unit means monetary unit in the Netherlands.</template></category>
 <category><pattern>DUTCH OVEN</pattern><template>dutch oven?  Briefly, dutch oven means n oven consisting of a metal box for cooking in front of a fire.</template></category>
 <category><pattern>DUTCH PEOPLE</pattern><template>dutch people?  Briefly, dutch people means the people of the Netherlands.</template></category>
-<category><pattern>DUTCH TREAT</pattern><template>dutch treat?  Briefly, dutch treat means a dinner where each person pays for his own.</template></category>
+<!-- <category><pattern>DUTCH TREAT</pattern><template>dutch treat?  Briefly, dutch treat means a dinner where each person pays for his own.</template></category> -->
 <category><pattern>DUTCH UNCLE</pattern><template>dutch uncle?  Briefly, dutch uncle means a counselor who admonishes frankly and sternly.</template></category>
 <category><pattern>DUTCH-ELM BEETLE</pattern><template>dutch-elm beetle?  Briefly, dutch-elm beetle means a vector of the fungus causing Dutch elm disease.</template></category>
 <category><pattern>DUTCHMAN</pattern><template>dutchman?  Briefly, dutchman means a native or inhabitant of Holland.</template></category>
@@ -307,7 +307,7 @@
 <category><pattern>DUTY-FREE</pattern><template>duty-free?  Briefly, duty-free means exempt from duty.</template></category>
 <category><pattern>DUVALIER</pattern><template>duvalier?  Briefly, duvalier means son and successor of Francois Duvalier as president of Haiti; he was overthrown by a mass uprising in 1986 (born in 1951).</template></category>
 <category><pattern>DUVET</pattern><template>duvet?  Briefly, duvet means a soft quilt usually filled with the down of the eider.</template></category>
-<category><pattern>DVD</pattern><template>dvd?  Briefly, dvd means a digital videodisc; a recording (as of a movie) on an optical disk that can be played on a computer or a television set.</template></category>
+<!-- <category><pattern>DVD</pattern><template>dvd?  Briefly, dvd means a digital videodisc; a recording (as of a movie) on an optical disk that can be played on a computer or a television set.</template></category> -->
 <category><pattern>DVORAK</pattern><template>dvorak?  Briefly, dvorak means Czech composer who combined folk elements with traditional forms (1841-1904).</template></category>
 <category><pattern>DWARF</pattern><template>dwarf?  Briefly, dwarf means a person who is abnormally small.</template></category>
 <category><pattern>DWARF ASTILBE</pattern><template>dwarf astilbe?  Briefly, dwarf astilbe means mat-forming evergreen Asiatic plant with finely cut leaves and small pink to burgundy flowers; grown as ground cover.</template></category>
@@ -434,7 +434,7 @@
 <category><pattern>DYSGRAPHIA</pattern><template>dysgraphia?  Briefly, dysgraphia means impaired ability to learn to write.</template></category>
 <category><pattern>DYSKINESIA</pattern><template>dyskinesia?  Briefly, dyskinesia means abnormality in performing voluntary muscle movements.</template></category>
 <category><pattern>DYSLECTIC</pattern><template>dyslectic?  Briefly, dyslectic means having impaired ability to comprehend written words usually associated with a neurologic disorder.</template></category>
-<category><pattern>DYSLEXIA</pattern><template>dyslexia?  Briefly, dyslexia means impaired ability to learn to read.</template></category>
+<!-- <category><pattern>DYSLEXIA</pattern><template>dyslexia?  Briefly, dyslexia means impaired ability to learn to read.</template></category> -->
 <category><pattern>DYSLEXIC</pattern><template>dyslexic?  Briefly, dyslexic means of or relating to or symptomatic of dyslexia.</template></category>
 <category><pattern>DYSLOGIA</pattern><template>dyslogia?  Briefly, dyslogia means impaired ability to express ideas verbally; usually resulting from difficulties of reasoning (as in feeble-mindedness or certain psychoses).</template></category>
 <category><pattern>DYSLOGISTIC</pattern><template>dyslogistic?  Briefly, dyslogistic means expressing disapproval.</template></category>
@@ -469,7 +469,7 @@
 <category><pattern>DYTISCIDAE</pattern><template>dytiscidae?  Briefly, dytiscidae means water beetles.</template></category>
 <category><pattern>DYUSHAMBE</pattern><template>dyushambe?  Briefly, dyushambe means the capital of Tajikistan; formerly Stalinabad 1926-1991.</template></category>
 <category><pattern>DZIGGETAI</pattern><template>dziggetai?  Briefly, dziggetai means Mongolian wild ass.</template></category>
-<category><pattern>E</pattern><template>e?  Briefly, e means a fat-soluble vitamin that is essential for normal reproduction; an important antioxidant that neutralizes free radicals in the body.</template></category>
+<!-- <category><pattern>E</pattern><template>e?  Briefly, e means a fat-soluble vitamin that is essential for normal reproduction; an important antioxidant that neutralizes free radicals in the body.</template></category> -->
 <category><pattern>E LAYER</pattern><template>e layer?  Briefly, e layer means a region of the ionosphere (from 50 to 90 miles up) that reflects radio waves of medium length.</template></category>
 <category><pattern>E REGION</pattern><template>e region?  Briefly, e region means a region of the ionosphere (from 50 to 90 miles up) that reflects radio waves of medium length.</template></category>
 <category><pattern>E. A. VON WILLEBRAND</pattern><template>e. a. von willebrand?  Briefly, e. a. von willebrand means Finnish physician who first described vascular hemophilia (1870-1949).</template></category>
@@ -581,7 +581,7 @@
 <category><pattern>EAR-SHELL</pattern><template>ear-shell?  Briefly, ear-shell means any of various large edible marine gastropods of the genus Haliotis having an ear-shaped shell with pearly interior.</template></category>
 <category><pattern>EARSHOT</pattern><template>earshot?  Briefly, earshot means the range within which a voice can be heard.</template></category>
 <category><pattern>EARSPLITTING</pattern><template>earsplitting?  Briefly, earsplitting means loud enough to cause (temporary) hearing loss.</template></category>
-<category><pattern>EARTH</pattern><template>earth?  Briefly, earth means the 3rd planet from the sun; the planet on which we live.</template></category>
+<!-- <category><pattern>EARTH</pattern><template>earth?  Briefly, earth means the 3rd planet from the sun; the planet on which we live.</template></category> -->
 <category><pattern>EARTH ALMOND</pattern><template>earth almond?  Briefly, earth almond means European sedge having small edible nutlike tubers.</template></category>
 <category><pattern>EARTH COLOR</pattern><template>earth color?  Briefly, earth color means a colored mineral used as a pigment.</template></category>
 <category><pattern>EARTH MOTHER</pattern><template>earth mother?  Briefly, earth mother means the earth conceived of as the female principle of fertility.</template></category>
@@ -671,7 +671,7 @@
 <category><pattern>EAST WIND</pattern><template>east wind?  Briefly, east wind means a wind from the east.</template></category>
 <category><pattern>EASTBOUND</pattern><template>eastbound?  Briefly, eastbound means moving toward the east.</template></category>
 <category><pattern>EAST-CENTRAL</pattern><template>east-central?  Briefly, east-central means of a region of the United States generally including Kentucky means West Virginia.</template></category>
-<category><pattern>EASTER</pattern><template>easter?  Briefly, easter means a Christian celebration of the Resurrection of Christ; celebrated on the Sunday following the first full moon after the vernal equinox.</template></category>
+<!-- <category><pattern>EASTER</pattern><template>easter?  Briefly, easter means a Christian celebration of the Resurrection of Christ; celebrated on the Sunday following the first full moon after the vernal equinox.</template></category> -->
 <category><pattern>EASTER BUNNY</pattern><template>easter bunny?  Briefly, easter bunny means a rabbit that delivers Easter eggs.</template></category>
 <category><pattern>EASTER CACTUS</pattern><template>easter cactus?  Briefly, easter cactus means spring-blooming South American cactus with oblong joints and coral-red flowers; sometimes placed in genus Schlumbergera.</template></category>
 <category><pattern>EASTER CARD</pattern><template>easter card?  Briefly, easter card means a card expressing an Easter greeting.</template></category>
@@ -744,7 +744,7 @@
 <category><pattern>EASY STREET</pattern><template>easy street?  Briefly, easy street means financial security.</template></category>
 <category><pattern>EASYGOING</pattern><template>easygoing?  Briefly, easygoing means inclined to be excessively tolerant.</template></category>
 <category><pattern>EASYGOINGNESS</pattern><template>easygoingness?  Briefly, easygoingness means being without worry or concern.</template></category>
-<category><pattern>EAT</pattern><template>eat?  Briefly, eat means take in solid food.</template></category>
+<!-- <category><pattern>EAT</pattern><template>eat?  Briefly, eat means take in solid food.</template></category> -->
 <category><pattern>EAT AT</pattern><template>eat at?  Briefly, eat at means become ground down or deteriorate.</template></category>
 <category><pattern>EAT AWAY</pattern><template>eat away?  Briefly, eat away means remove soil or rock.</template></category>
 <category><pattern>EAT IN</pattern><template>eat in?  Briefly, eat in means eat at home.</template></category>
@@ -794,7 +794,7 @@
 <category><pattern>EBOLA VIRUS</pattern><template>ebola virus?  Briefly, ebola virus means a filovirus that causes Ebola hemorrhagic fever; carried by animals; can be used as a bioweapon.</template></category>
 <category><pattern>E-BOMB</pattern><template>e-bomb?  Briefly, e-bomb means a bomb that explodes in midair and releases a massive burst of electromagnetic energy sufficient to disable computers and telecommunications without killing people or damaging buildings.</template></category>
 <category><pattern>EBON</pattern><template>ebon?  Briefly, ebon means very dark black.</template></category>
-<category><pattern>EBONICS</pattern><template>ebonics?  Briefly, ebonics means a nonstandard form of American English spoken by some Black people in the United States.</template></category>
+<!-- <category><pattern>EBONICS</pattern><template>ebonics?  Briefly, ebonics means a nonstandard form of American English spoken by some Black people in the United States.</template></category> -->
 <category><pattern>EBONISE</pattern><template>ebonise?  Briefly, ebonise means stain black to make it look like ebony.</template></category>
 <category><pattern>EBONITE</pattern><template>ebonite?  Briefly, ebonite means a hard nonresilient rubber formed by vulcanizing natural rubber.</template></category>
 <category><pattern>EBONIZE</pattern><template>ebonize?  Briefly, ebonize means stain black to make it look like ebony.</template></category>
@@ -849,7 +849,7 @@
 <category><pattern>ECESIS</pattern><template>ecesis?  Briefly, ecesis means the process by which a plant or animal becomes established in a new habitat.</template></category>
 <category><pattern>ECF</pattern><template>ecf?  Briefly, ecf means liquid containing proteins and electrolytes including the liquid in blood plasma and interstitial fluid.</template></category>
 <category><pattern>ECG</pattern><template>ecg?  Briefly, ecg means a graphical recording of the cardiac cycle produced by an electrocardiograph.</template></category>
-<category><pattern>ECHELON</pattern><template>echelon?  Briefly, echelon means a body of troops arranged in a line.</template></category>
+<!-- <category><pattern>ECHELON</pattern><template>echelon?  Briefly, echelon means a body of troops arranged in a line.</template></category> -->
 <category><pattern>ECHENEIDIDAE</pattern><template>echeneididae?  Briefly, echeneididae means fishes having a sucking disk on the head for clinging to other fishes and to ships.</template></category>
 <category><pattern>ECHENEIS</pattern><template>echeneis?  Briefly, echeneis means type genus of the Echeneididae: typical remoras.</template></category>
 <category><pattern>ECHENEIS NAUCRATES</pattern><template>echeneis naucrates?  Briefly, echeneis naucrates means remoras found attached to sharks.</template></category>
@@ -914,7 +914,7 @@
 <category><pattern>ECOLOGICAL WARFARE</pattern><template>ecological warfare?  Briefly, ecological warfare means violence carried out to further the political or social objectives of the environmentalists.</template></category>
 <category><pattern>ECOLOGICALLY</pattern><template>ecologically?  Briefly, ecologically means with respect to ecology.</template></category>
 <category><pattern>ECOLOGIST</pattern><template>ecologist?  Briefly, ecologist means a biologist who studies the relation between organisms and their environment.</template></category>
-<category><pattern>ECOLOGY</pattern><template>ecology?  Briefly, ecology means the environment as it relates to living organisms.</template></category>
+<!-- <category><pattern>ECOLOGY</pattern><template>ecology?  Briefly, ecology means the environment as it relates to living organisms.</template></category> -->
 <category><pattern>ECONOMETRIC</pattern><template>econometric?  Briefly, econometric means of or relating to econometrics.</template></category>
 <category><pattern>ECONOMETRICIAN</pattern><template>econometrician?  Briefly, econometrician means an economist who uses statistical and mathematical methods.</template></category>
 <category><pattern>ECONOMETRICS</pattern><template>econometrics?  Briefly, econometrics means the application of mathematics and statistics to the study of economic and financial data.</template></category>
@@ -994,7 +994,7 @@
 <category><pattern>ECTOZOAN</pattern><template>ectozoan?  Briefly, ectozoan means any external parasitic organism (as fleas).</template></category>
 <category><pattern>ECTOZOON</pattern><template>ectozoon?  Briefly, ectozoon means any external parasitic organism (as fleas).</template></category>
 <category><pattern>ECTRODACTYLY</pattern><template>ectrodactyly?  Briefly, ectrodactyly means congenital abnormality involving the absence of some fingers or toes.</template></category>
-<category><pattern>ECUADOR</pattern><template>ecuador?  Briefly, ecuador means a republic in northwestern South America; became independent from Spain in 1822; the landscape is dominated by the Andes.</template></category>
+<!-- <category><pattern>ECUADOR</pattern><template>ecuador?  Briefly, ecuador means a republic in northwestern South America; became independent from Spain in 1822; the landscape is dominated by the Andes.</template></category> -->
 <category><pattern>ECUADORAN</pattern><template>ecuadoran?  Briefly, ecuadoran means a native or inhabitant of Ecuador.</template></category>
 <category><pattern>ECUADORAN MONETARY UNIT</pattern><template>ecuadoran monetary unit?  Briefly, ecuadoran monetary unit means monetary unit in Ecuador.</template></category>
 <category><pattern>ECUADORIAN</pattern><template>ecuadorian?  Briefly, ecuadorian means a native or inhabitant of Ecuador.</template></category>
@@ -1079,9 +1079,9 @@
 <category><pattern>EDIFIED</pattern><template>edified?  Briefly, edified means instructed and encouraged in moral means intellectual means and spiritual improvement.</template></category>
 <category><pattern>EDIFY</pattern><template>edify?  Briefly, edify means make understand.</template></category>
 <category><pattern>EDIFYING</pattern><template>edifying?  Briefly, edifying means enlightening or uplifting so as to encourage intellectual or moral improvement.</template></category>
-<category><pattern>EDINBURGH</pattern><template>edinburgh?  Briefly, edinburgh means the capital of Scotland; located in the Lothian Region on the south side of the Firth of Forth.</template></category>
+<!-- <category><pattern>EDINBURGH</pattern><template>edinburgh?  Briefly, edinburgh means the capital of Scotland; located in the Lothian Region on the south side of the Firth of Forth.</template></category> -->
 <category><pattern>EDIRNE</pattern><template>edirne?  Briefly, edirne means a city in northwestern Turkey; a Thracian town that was rebuilt and renamed by the Roman emperor Hadrian.</template></category>
-<category><pattern>EDISON</pattern><template>edison?  Briefly, edison means United States inventor; inventions included the phonograph and incandescent electric light and the microphone and the Kinetoscope (1847-1931).</template></category>
+<!-- <category><pattern>EDISON</pattern><template>edison?  Briefly, edison means United States inventor; inventions included the phonograph and incandescent electric light and the microphone and the Kinetoscope (1847-1931).</template></category> -->
 <category><pattern>EDIT</pattern><template>edit?  Briefly, edit means prepare for publication or presentation by correcting means revising means or adapting.</template></category>
 <category><pattern>EDIT OUT</pattern><template>edit out?  Briefly, edit out means cut and assemble the components of.</template></category>
 <category><pattern>EDITED</pattern><template>edited?  Briefly, edited means improved or corrected by critical editing.</template></category>
@@ -1109,7 +1109,7 @@
 <category><pattern>EDMOND LOUIS ANTOINE HUOT DE GONCOURT</pattern><template>edmond louis antoine huot de goncourt?  Briefly, edmond louis antoine huot de goncourt means French writer who collaborated with his brother Jules de Goncourt on many books and who in his will established the Prix Goncourt (1822-1896).</template></category>
 <category><pattern>EDMOND MALONE</pattern><template>edmond malone?  Briefly, edmond malone means English scholar remembered for his chronology of Shakespeare's plays and his editions of Shakespeare and Dryden (1741-1812).</template></category>
 <category><pattern>EDMOND ROSTAND</pattern><template>edmond rostand?  Briefly, edmond rostand means French dramatist and poet (1868-1918).</template></category>
-<category><pattern>EDMONTON</pattern><template>edmonton?  Briefly, edmonton means the capital of the province of Alberta.</template></category>
+<!-- <category><pattern>EDMONTON</pattern><template>edmonton?  Briefly, edmonton means the capital of the province of Alberta.</template></category> -->
 <category><pattern>EDMONTONIA</pattern><template>edmontonia?  Briefly, edmontonia means heavily armored and highly spiked dinosaur with semi-upright posture.</template></category>
 <category><pattern>EDMONTOSAURUS</pattern><template>edmontosaurus?  Briefly, edmontosaurus means duck-billed dinosaur from Canada found as a fossilized mummy with skin.</template></category>
 <category><pattern>EDMUND BURKE</pattern><template>edmund burke?  Briefly, edmund burke means English statesman famous for his oratory; pleaded the cause of the American colonists in Parliament and defended the parliamentary system (1729-1797).</template></category>
@@ -1142,7 +1142,7 @@
 <category><pattern>EDUCATE</pattern><template>educate?  Briefly, educate means give an education to.</template></category>
 <category><pattern>EDUCATED</pattern><template>educated?  Briefly, educated means possessing an education (especially having more than average knowledge).</template></category>
 <category><pattern>EDUCATEE</pattern><template>educatee?  Briefly, educatee means a learner who is enrolled in an educational institution.</template></category>
-<category><pattern>EDUCATION</pattern><template>education?  Briefly, education means the activities of educating or instructing or teaching; activities that impart knowledge or skill.</template></category>
+<!-- <category><pattern>EDUCATION</pattern><template>education?  Briefly, education means the activities of educating or instructing or teaching; activities that impart knowledge or skill.</template></category> -->
 <category><pattern>EDUCATION DEPARTMENT</pattern><template>education department?  Briefly, education department means the United States federal department that administers all federal programs dealing with education (including federal aid to educational institutions and students); created 1979.</template></category>
 <category><pattern>EDUCATION SECRETARY</pattern><template>education secretary?  Briefly, education secretary means the person who holds the secretaryship of the Department of Education.</template></category>
 <category><pattern>EDUCATIONAL</pattern><template>educational?  Briefly, educational means relating to the process of education.</template></category>
@@ -1377,7 +1377,7 @@
 <category><pattern>EGRETTA GARZETTA</pattern><template>egretta garzetta?  Briefly, egretta garzetta means Old World egret.</template></category>
 <category><pattern>EGRETTA THULA</pattern><template>egretta thula?  Briefly, egretta thula means small New World egret.</template></category>
 <category><pattern>EGTK</pattern><template>egtk?  Briefly, egtk means a terrorist group that is the remnants of the original Bolivian insurgents trained by Che Guevara; attacks small unprotected targets such as power pylons or oil pipelines or government buildings.</template></category>
-<category><pattern>EGYPT</pattern><template>egypt?  Briefly, egypt means a republic in northeastern Africa known as the United Arab Republic until 1971; site of an ancient civilization that flourished from 2600 to 30 BC.</template></category>
+<!-- <category><pattern>EGYPT</pattern><template>egypt?  Briefly, egypt means a republic in northeastern Africa known as the United Arab Republic until 1971; site of an ancient civilization that flourished from 2600 to 30 BC.</template></category> -->
 <category><pattern>EGYPTIAN</pattern><template>egyptian?  Briefly, egyptian means a native or inhabitant of Egypt.</template></category>
 <category><pattern>EGYPTIAN BEAN</pattern><template>egyptian bean?  Briefly, egyptian bean means perennial twining vine of Old World tropics having trifoliate leaves and racemes of fragrant purple pealike flowers followed by maroon pods of edible seeds; grown as an ornamental and as a vegetable on the Indian subcontinent; sometimes.</template></category>
 <category><pattern>EGYPTIAN CAPITAL</pattern><template>egyptian capital?  Briefly, egyptian capital means the capital of Egypt and the largest city in Africa; a major port just south of the Nile delta; formerly the home of the Pharaohs.</template></category>
@@ -1454,7 +1454,7 @@
 <category><pattern>EIMERIA</pattern><template>eimeria?  Briefly, eimeria means parasitic on the digestive epithelium of vertebrates and higher invertebrates.</template></category>
 <category><pattern>EIMERIIDAE</pattern><template>eimeriidae?  Briefly, eimeriidae means a family of protoctista in the order Coccidia.</template></category>
 <category><pattern>EINDHOVEN</pattern><template>eindhoven?  Briefly, eindhoven means city in southeastern Netherlands noted for electrical industry.</template></category>
-<category><pattern>EINSTEIN</pattern><template>einstein?  Briefly, einstein means physicist born in Germany who formulated the special theory of relativity and the general theory of relativity; Einstein also proposed that light consists of discrete quantized bundles of energy (later called photons) (1879-1955).</template></category>
+<!-- <category><pattern>EINSTEIN</pattern><template>einstein?  Briefly, einstein means physicist born in Germany who formulated the special theory of relativity and the general theory of relativity; Einstein also proposed that light consists of discrete quantized bundles of energy (later called photons) (1879-1955).</template></category> -->
 <category><pattern>EINSTEINIAN</pattern><template>einsteinian?  Briefly, einsteinian means of or relating to Albert Einstein or his theories.</template></category>
 <category><pattern>EINSTEINIUM</pattern><template>einsteinium?  Briefly, einsteinium means a radioactive transuranic element produced by bombarding plutonium with neutrons.</template></category>
 <category><pattern>EINSTEIN'S GENERAL THEORY OF RELATIVITY</pattern><template>einstein's general theory of relativity?  Briefly, einstein's general theory of relativity means a generalization of special relativity to include gravity (based on the principle of equivalence).</template></category>
@@ -1465,7 +1465,7 @@
 <category><pattern>EIRA BARBARA</pattern><template>eira barbara?  Briefly, eira barbara means long-tailed arboreal mustelid of Central America and South America.</template></category>
 <category><pattern>EIRE</pattern><template>eire?  Briefly, eire means a republic consisting of 26 of 32 counties comprising the island of Ireland; achieved independence from the United Kingdom in 1921.</template></category>
 <category><pattern>EISEGESIS</pattern><template>eisegesis?  Briefly, eisegesis means personal interpretation of a text (especially of the Bible) using your own ideas.</template></category>
-<category><pattern>EISENHOWER</pattern><template>eisenhower?  Briefly, eisenhower means United States general who supervised the invasion of Normandy and the defeat of Nazi Germany; 34th President of the United States (1890-1961).</template></category>
+<!-- <category><pattern>EISENHOWER</pattern><template>eisenhower?  Briefly, eisenhower means United States general who supervised the invasion of Normandy and the defeat of Nazi Germany; 34th President of the United States (1890-1961).</template></category> -->
 <category><pattern>EISENSTAEDT</pattern><template>eisenstaedt?  Briefly, eisenstaedt means United States photographer (born in Germany) whose unposed documentary photographs created photojournalism (born in 1898).</template></category>
 <category><pattern>EISENSTEIN</pattern><template>eisenstein?  Briefly, eisenstein means Russian film maker who pioneered the use of montage and is considered among the most influential film makers in the history of motion pictures (1898-1948).</template></category>
 <category><pattern>EISTEDDFOD</pattern><template>eisteddfod?  Briefly, eisteddfod means any of several annual Welsh festivals involving artistic competitions (especially in singing).</template></category>
@@ -1501,11 +1501,11 @@
 <category><pattern>EL NINO SOUTHERN OSCILLATION</pattern><template>el nino southern oscillation?  Briefly, el nino southern oscillation means a more intense El Nino that occurs every few years when the welling up of cold nutrient-rich water does not occur; kills plankton and fish and affects weather patterns.</template></category>
 <category><pattern>EL PASO</pattern><template>el paso?  Briefly, el paso means a city in western Texas on the Mexican border; located on the northern bank of the Rio Grande across from the Mexican city of Juarez.</template></category>
 <category><pattern>EL QAHIRA</pattern><template>el qahira?  Briefly, el qahira means the capital of Egypt and the largest city in Africa; a major port just south of the Nile delta; formerly the home of the Pharaohs.</template></category>
-<category><pattern>EL SALVADOR</pattern><template>el salvador?  Briefly, el salvador means a republic on the Pacific coast of Central America.</template></category>
+<!-- <category><pattern>EL SALVADOR</pattern><template>el salvador?  Briefly, el salvador means a republic on the Pacific coast of Central America.</template></category> -->
 <category><pattern>EL SALVADORAN COLON</pattern><template>el salvadoran colon?  Briefly, el salvadoran colon means the basic unit of money in El Salvador; equal to 100 centavos.</template></category>
 <category><pattern>EL SALVADORAN MONETARY UNIT</pattern><template>el salvadoran monetary unit?  Briefly, el salvadoran monetary unit means monetary unit in El Salvador.</template></category>
 <category><pattern>ELA</pattern><template>ela?  Briefly, ela means an extreme leftist terrorist group formed in Greece in 1971 to oppose the military junta that ruled Greece from 1967 to 1974; a revolutionary group opposed to capitalism and imperialism and the United States.</template></category>
-<category><pattern>ELABORATE</pattern><template>elaborate?  Briefly, elaborate means add details means as to an account or idea; clarify the meaning of and discourse in a learned way means usually in writing.</template></category>
+<!-- <category><pattern>ELABORATE</pattern><template>elaborate?  Briefly, elaborate means add details means as to an account or idea; clarify the meaning of and discourse in a learned way means usually in writing.</template></category> -->
 <category><pattern>ELABORATED</pattern><template>elaborated?  Briefly, elaborated means developed or executed with care and in minute detail- John Buchan.</template></category>
 <category><pattern>ELABORATELY</pattern><template>elaborately?  Briefly, elaborately means with elaboration.</template></category>
 <category><pattern>ELABORATENESS</pattern><template>elaborateness?  Briefly, elaborateness means marked by elaborately complex detail.</template></category>
@@ -1622,7 +1622,7 @@
 <category><pattern>ELECTORAL COLLEGE</pattern><template>electoral college?  Briefly, electoral college means the body of electors who formally elect the United States president and vice-president.</template></category>
 <category><pattern>ELECTORAL SYSTEM</pattern><template>electoral system?  Briefly, electoral system means a legal system for making democratic choices.</template></category>
 <category><pattern>ELECTORATE</pattern><template>electorate?  Briefly, electorate means the body of enfranchised citizens; those qualified to vote.</template></category>
-<category><pattern>ELECTRA</pattern><template>electra?  Briefly, electra means the daughter of Agamemnon and Clytemnestra; persuaded her brother (Orestes) to avenge Agamemnon's death by helping her to kill Clytemnestra and her lover (Aegisthus).</template></category>
+<!-- <category><pattern>ELECTRA</pattern><template>electra?  Briefly, electra means the daughter of Agamemnon and Clytemnestra; persuaded her brother (Orestes) to avenge Agamemnon's death by helping her to kill Clytemnestra and her lover (Aegisthus).</template></category> -->
 <category><pattern>ELECTRA COMPLEX</pattern><template>electra complex?  Briefly, electra complex means a complex of females; sexual attraction to the father.</template></category>
 <category><pattern>ELECTRIC</pattern><template>electric?  Briefly, electric means a car that is powered by electricity.</template></category>
 <category><pattern>ELECTRIC ARC</pattern><template>electric arc?  Briefly, electric arc means electrical conduction through a gas in an applied electric field.</template></category>
@@ -1722,7 +1722,7 @@
 <category><pattern>ELECTRIC-ARC FURNACE</pattern><template>electric-arc furnace?  Briefly, electric-arc furnace means an electric furnace in which an electric arc provides the source of heat for making steel.</template></category>
 <category><pattern>ELECTRIC-DISCHARGE LAMP</pattern><template>electric-discharge lamp?  Briefly, electric-discharge lamp means an electric lamp in which the light comes from an electric discharge between two electrodes in a glass tube.</template></category>
 <category><pattern>ELECTRICIAN</pattern><template>electrician?  Briefly, electrician means a person who installs or repairs electrical or telephone lines.</template></category>
-<category><pattern>ELECTRICITY</pattern><template>electricity?  Briefly, electricity means a physical phenomenon associated with stationary or moving electrons and protons.</template></category>
+<!-- <category><pattern>ELECTRICITY</pattern><template>electricity?  Briefly, electricity means a physical phenomenon associated with stationary or moving electrons and protons.</template></category> -->
 <category><pattern>ELECTRIC-LIGHT BULB</pattern><template>electric-light bulb?  Briefly, electric-light bulb means electric lamp consisting of a glass bulb containing a wire filament (usually tungsten) that emits light when heated.</template></category>
 <category><pattern>ELECTRIFICATION</pattern><template>electrification?  Briefly, electrification means the activity of thrilling or markedly exciting some person or group.</template></category>
 <category><pattern>ELECTRIFY</pattern><template>electrify?  Briefly, electrify means excite suddenly and intensely.</template></category>
@@ -1940,12 +1940,12 @@
 <category><pattern>ELEVATOR MAN</pattern><template>elevator man?  Briefly, elevator man means a man employed to operate and elevator.</template></category>
 <category><pattern>ELEVATOR OPERATOR</pattern><template>elevator operator?  Briefly, elevator operator means an operator of an elevator.</template></category>
 <category><pattern>ELEVATOR SHAFT</pattern><template>elevator shaft?  Briefly, elevator shaft means a vertical shaft in a building to permit the passage of an elevator from floor to floor.</template></category>
-<category><pattern>ELEVEN</pattern><template>eleven?  Briefly, eleven means the cardinal number that is the sum of ten and one.</template></category>
+<!-- <category><pattern>ELEVEN</pattern><template>eleven?  Briefly, eleven means the cardinal number that is the sum of ten and one.</template></category> -->
 <category><pattern>ELEVEN-PLUS</pattern><template>eleven-plus?  Briefly, eleven-plus means an examination taken by 11 and 12 year old students to select suitable candidates for grammar school.</template></category>
 <category><pattern>ELEVENTH</pattern><template>eleventh?  Briefly, eleventh means position 11 in a countable series of things.</template></category>
 <category><pattern>ELEVENTH CRANIAL NERVE</pattern><template>eleventh cranial nerve?  Briefly, eleventh cranial nerve means arises from two sets of roots (cranial and spinal) that unite to form the accessory nerve trunk.</template></category>
 <category><pattern>ELEVENTH HOUR</pattern><template>eleventh hour?  Briefly, eleventh hour means the latest possible moment.</template></category>
-<category><pattern>ELF</pattern><template>elf?  Briefly, elf means fairies that are somewhat mischievous.</template></category>
+<!-- <category><pattern>ELF</pattern><template>elf?  Briefly, elf means fairies that are somewhat mischievous.</template></category> -->
 <category><pattern>ELF CUP</pattern><template>elf cup?  Briefly, elf cup means apothecium of a fungus of the family Pezizaceae.</template></category>
 <category><pattern>ELFIN</pattern><template>elfin?  Briefly, elfin means suggestive of an elf in strangeness and otherworldliness- John Mason Brown.</template></category>
 <category><pattern>ELFISH</pattern><template>elfish?  Briefly, elfish means usually good-naturedly mischievous.</template></category>
@@ -2001,7 +2001,7 @@
 <category><pattern>ELIZABETH GASKELL</pattern><template>elizabeth gaskell?  Briefly, elizabeth gaskell means English writer who is remembered for her biography of Charlotte Bronte (1810-1865).</template></category>
 <category><pattern>ELIZABETH HALDANE</pattern><template>elizabeth haldane?  Briefly, elizabeth haldane means Scottish writer and sister of Richard Haldane and John Haldane (1862-1937).</template></category>
 <category><pattern>ELIZABETH I</pattern><template>elizabeth i?  Briefly, elizabeth i means Queen of England from 1558 to 1603; daughter of Henry VIII and Anne Boleyn; she succeeded Mary I (who was a Catholic) and restored Protestantism to England; during her reign Mary Queen of Scots was executed and the Spanish Armada was de.</template></category>
-<category><pattern>ELIZABETH II</pattern><template>elizabeth ii?  Briefly, elizabeth ii means daughter of George VI who became the Queen of England and Northern Ireland in 1952 on the death of her father (1926-).</template></category>
+<!-- <category><pattern>ELIZABETH II</pattern><template>elizabeth ii?  Briefly, elizabeth ii means daughter of George VI who became the Queen of England and Northern Ireland in 1952 on the death of her father (1926-).</template></category> -->
 <category><pattern>ELIZABETH MERRIWETHER GILMER</pattern><template>elizabeth merriwether gilmer?  Briefly, elizabeth merriwether gilmer means United States journalist who wrote a syndicated column of advice to the lovelorn (1870-1951).</template></category>
 <category><pattern>ELIZABETH PALMER PEABODY</pattern><template>elizabeth palmer peabody?  Briefly, elizabeth palmer peabody means educator who founded the first kindergarten in the United States (1804-1894).</template></category>
 <category><pattern>ELIZABETH PEABODY</pattern><template>elizabeth peabody?  Briefly, elizabeth peabody means educator who founded the first kindergarten in the United States (1804-1894).</template></category>
@@ -2009,7 +2009,7 @@
 <category><pattern>ELIZABETH SANDERSON HALDANE</pattern><template>elizabeth sanderson haldane?  Briefly, elizabeth sanderson haldane means Scottish writer and sister of Richard Haldane and John Haldane (1862-1937).</template></category>
 <category><pattern>ELIZABETH SEAMAN</pattern><template>elizabeth seaman?  Briefly, elizabeth seaman means muckraking United States journalist who exposed bad conditions in mental institutions (1867-1922).</template></category>
 <category><pattern>ELIZABETH SETON</pattern><template>elizabeth seton?  Briefly, elizabeth seton means United States religious leader who was the first person born in the United States to be canonized (1774-1821).</template></category>
-<category><pattern>ELIZABETH TAYLOR</pattern><template>elizabeth taylor?  Briefly, elizabeth taylor means United States film actress (born in England) who was a childhood star; as an adult she often co-starred with Richard Burton (born in 1932).</template></category>
+<!-- <category><pattern>ELIZABETH TAYLOR</pattern><template>elizabeth taylor?  Briefly, elizabeth taylor means United States film actress (born in England) who was a childhood star; as an adult she often co-starred with Richard Burton (born in 1932).</template></category> -->
 <category><pattern>ELIZABETHAN</pattern><template>elizabethan?  Briefly, elizabethan means a person who lived during the reign of Elizabeth I.</template></category>
 <category><pattern>ELIZABETHAN AGE</pattern><template>elizabethan age?  Briefly, elizabethan age means a period in British history during the reign of Elizabeth I in the 16th century; an age marked by literary achievement and domestic prosperity.</template></category>
 <category><pattern>ELIZABETHAN SONNET</pattern><template>elizabethan sonnet?  Briefly, elizabethan sonnet means a sonnet consisting three quatrains and a concluding couplet in iambic pentameter with the rhyme pattern abab cdcd efef gg.</template></category>
@@ -2020,7 +2020,7 @@
 <category><pattern>ELKWOOD</pattern><template>elkwood?  Briefly, elkwood means small deciduous open-crowned tree of eastern North America having creamy white flowers and large leaves in formations like umbrellas at the ends of branches.</template></category>
 <category><pattern>ELK-WOOD</pattern><template>elk-wood?  Briefly, elk-wood means small deciduous open-crowned tree of eastern North America having creamy white flowers and large leaves in formations like umbrellas at the ends of branches.</template></category>
 <category><pattern>ELL</pattern><template>ell?  Briefly, ell means an extension at the end and at right angles to the main building.</template></category>
-<category><pattern>ELLA FITZGERALD</pattern><template>ella fitzgerald?  Briefly, ella fitzgerald means United States scat singer (born in 1918).</template></category>
+<!-- <category><pattern>ELLA FITZGERALD</pattern><template>ella fitzgerald?  Briefly, ella fitzgerald means United States scat singer (born in 1918).</template></category> -->
 <category><pattern>ELLAS</pattern><template>ellas?  Briefly, ellas means a republic in southeastern Europe on the southern part of the Balkan peninsula; known for grapes and olives and olive oil.</template></category>
 <category><pattern>ELLEN PRICE WOOD</pattern><template>ellen price wood?  Briefly, ellen price wood means English writer of novels about murders and thefts and forgeries (1814-1887).</template></category>
 <category><pattern>ELLI</pattern><template>elli?  Briefly, elli means goddess of old age who defeated Thor in a wrestling match.</template></category>
@@ -2091,7 +2091,7 @@
 <category><pattern>ELUTION</pattern><template>elution?  Briefly, elution means the process of extracting one material from another by washing with a solvent to remove adsorbed material from an adsorbent (as in washing of loaded ion-exchange resins to remove captured ions); used to obtain uranium ions.</template></category>
 <category><pattern>ELVER</pattern><template>elver?  Briefly, elver means young eel; may be sauteed or batter-fried.</template></category>
 <category><pattern>ELVES</pattern><template>elves?  Briefly, elves means an acronym for emissions of light and very low frequency perturbations due to electromagnetic pulse sources; extremely bright extremely short (less than a msec) electrical flashes forming a huge ring (up to 400 km diameter) in the ionos.</template></category>
-<category><pattern>ELVIS</pattern><template>elvis?  Briefly, elvis means street name for lysergic acid diethylamide.</template></category>
+<!-- <category><pattern>ELVIS</pattern><template>elvis?  Briefly, elvis means street name for lysergic acid diethylamide.</template></category> -->
 <category><pattern>ELVIS ARON PRESLEY</pattern><template>elvis aron presley?  Briefly, elvis aron presley means United States rock singer whose many hit records and flamboyant style greatly influenced American popular music (1935-1977).</template></category>
 <category><pattern>ELVIS PRESLEY</pattern><template>elvis presley?  Briefly, elvis presley means United States rock singer whose many hit records and flamboyant style greatly influenced American popular music (1935-1977).</template></category>
 <category><pattern>ELVISH</pattern><template>elvish?  Briefly, elvish means usually good-naturedly mischievous.</template></category>
@@ -2112,7 +2112,7 @@
 <category><pattern>EMACIATE</pattern><template>emaciate?  Briefly, emaciate means cause to grow thin or weak.</template></category>
 <category><pattern>EMACIATED</pattern><template>emaciated?  Briefly, emaciated means very thin especially from disease or hunger or cold.</template></category>
 <category><pattern>EMACIATION</pattern><template>emaciation?  Briefly, emaciation means extreme leanness (usually caused by starvation or disease).</template></category>
-<category><pattern>EMAIL</pattern><template>email?  Briefly, email means a system of world-wide electronic communication in which a computer user can compose a message at one terminal that is generated at the recipient's terminal when he logs in.</template></category>
+<!-- <category><pattern>EMAIL</pattern><template>email?  Briefly, email means a system of world-wide electronic communication in which a computer user can compose a message at one terminal that is generated at the recipient's terminal when he logs in.</template></category> -->
 <category><pattern>E-MAIL</pattern><template>e-mail?  Briefly, e-mail means a system of world-wide electronic communication in which a computer user can compose a message at one terminal that is generated at the recipient's terminal when he logs in.</template></category>
 <category><pattern>EMANATE</pattern><template>emanate?  Briefly, emanate means proceed or issue forth means as from a source.</template></category>
 <category><pattern>EMANATION</pattern><template>emanation?  Briefly, emanation means something that is emitted or radiated (as a gas or an odor or a light etc.).</template></category>
@@ -2235,8 +2235,8 @@
 <category><pattern>EMERALD ISLE</pattern><template>emerald isle?  Briefly, emerald isle means an island comprising the republic of Ireland and Northern Ireland.</template></category>
 <category><pattern>EMERALD SHINER</pattern><template>emerald shiner?  Briefly, emerald shiner means small blunt-nosed fish of Great Lakes and Mississippi valley with a greenish luster.</template></category>
 <category><pattern>EMERGE</pattern><template>emerge?  Briefly, emerge means come out into view means as from concealment.</template></category>
-<category><pattern>EMERGENCE</pattern><template>emergence?  Briefly, emergence means the gradual beginning or coming forth.</template></category>
-<category><pattern>EMERGENCY</pattern><template>emergency?  Briefly, emergency means a sudden unforeseen crisis (usually involving danger) that requires immediate action.</template></category>
+<!-- <category><pattern>EMERGENCE</pattern><template>emergence?  Briefly, emergence means the gradual beginning or coming forth.</template></category> -->
+<!-- <category><pattern>EMERGENCY</pattern><template>emergency?  Briefly, emergency means a sudden unforeseen crisis (usually involving danger) that requires immediate action.</template></category> -->
 <category><pattern>EMERGENCY ALERT SYSTEM</pattern><template>emergency alert system?  Briefly, emergency alert system means a federal warning system that is activated by FEMA; enables the President to take over the United States airwaves to warn the whole country of major catastrophic events.</template></category>
 <category><pattern>EMERGENCY BRAKE</pattern><template>emergency brake?  Briefly, emergency brake means a brake operated by hand; usually operates by mechanical linkage.</template></category>
 <category><pattern>EMERGENCY EXIT</pattern><template>emergency exit?  Briefly, emergency exit means a stairway (often on the outside of a building) that permits emergency exit in the case of fire.</template></category>
@@ -2284,7 +2284,7 @@
 <category><pattern>EMILIA-ROMAGNA</pattern><template>emilia-romagna?  Briefly, emilia-romagna means a region of north central Italy on the Adriatic.</template></category>
 <category><pattern>EMILIE CHARLOTTE LE BRETON</pattern><template>emilie charlotte le breton?  Briefly, emilie charlotte le breton means British actress and mistress of the prince who later became Edward VII (1853-1929).</template></category>
 <category><pattern>EMILY BRONTE</pattern><template>emily bronte?  Briefly, emily bronte means English novelist; one of three Bronte sisters (1818-1848).</template></category>
-<category><pattern>EMILY DICKINSON</pattern><template>emily dickinson?  Briefly, emily dickinson means United States poet noted for her mystical and unrhymed poems (1830-1886).</template></category>
+<!-- <category><pattern>EMILY DICKINSON</pattern><template>emily dickinson?  Briefly, emily dickinson means United States poet noted for her mystical and unrhymed poems (1830-1886).</template></category> -->
 <category><pattern>EMILY JANE BRONTE</pattern><template>emily jane bronte?  Briefly, emily jane bronte means English novelist; one of three Bronte sisters (1818-1848).</template></category>
 <category><pattern>EMILY POST</pattern><template>emily post?  Briefly, emily post means United States female author who wrote a book and a syndicated newspaper column on etiquette (1872-1960).</template></category>
 <category><pattern>EMILY PRICE POST</pattern><template>emily price post?  Briefly, emily price post means United States female author who wrote a book and a syndicated newspaper column on etiquette (1872-1960).</template></category>
@@ -2322,7 +2322,7 @@
 <category><pattern>EMOLUMENT</pattern><template>emolument?  Briefly, emolument means compensation received by virtue of holding an office or having employment (usually in the form of wages or fees).</template></category>
 <category><pattern>EMOTE</pattern><template>emote?  Briefly, emote means give expression or emotion to means in a stage or movie role.</template></category>
 <category><pattern>EMOTICON</pattern><template>emoticon?  Briefly, emoticon means a representation of a facial expression (as a smile or frown) created by typing a sequence of characters in sending email.</template></category>
-<category><pattern>EMOTION</pattern><template>emotion?  Briefly, emotion means any strong feeling.</template></category>
+<!-- <category><pattern>EMOTION</pattern><template>emotion?  Briefly, emotion means any strong feeling.</template></category> -->
 <category><pattern>EMOTIONAL</pattern><template>emotional?  Briefly, emotional means determined or actuated by emotion rather than reason.</template></category>
 <category><pattern>EMOTIONAL AROUSAL</pattern><template>emotional arousal?  Briefly, emotional arousal means the arousal of strong emotions and emotional behavior.</template></category>
 <category><pattern>EMOTIONAL DISORDER</pattern><template>emotional disorder?  Briefly, emotional disorder means any mental disorder not caused by detectable organic abnormalities of the brain and in which a major disturbance of emotions is predominant.</template></category>
@@ -2569,7 +2569,7 @@
 <category><pattern>ENCYCLOPEDISM</pattern><template>encyclopedism?  Briefly, encyclopedism means profound scholarly knowledge.</template></category>
 <category><pattern>ENCYCLOPEDIST</pattern><template>encyclopedist?  Briefly, encyclopedist means a person who compiles (or writes for) encyclopedias.</template></category>
 <category><pattern>ENCYSTED</pattern><template>encysted?  Briefly, encysted means enclosed in (or as if in) a cyst.</template></category>
-<category><pattern>END</pattern><template>end?  Briefly, end means either extremity of something that has length.</template></category>
+<!-- <category><pattern>END</pattern><template>end?  Briefly, end means either extremity of something that has length.</template></category> -->
 <category><pattern>END GAME</pattern><template>end game?  Briefly, end game means the final stages of an extended process of negotiation.</template></category>
 <category><pattern>END MAN</pattern><template>end man?  Briefly, end man means a man at one end of line of performers in a minstrel show; carries on humorous dialogue with the interlocutor.</template></category>
 <category><pattern>END MATTER</pattern><template>end matter?  Briefly, end matter means written matter following the main text of a book.</template></category>
@@ -2628,7 +2628,7 @@
 <category><pattern>ENDOCRINE GLAND</pattern><template>endocrine gland?  Briefly, endocrine gland means any of the glands of the endocrine system that secrete hormones directly into the bloodstream.</template></category>
 <category><pattern>ENDOCRINE SYSTEM</pattern><template>endocrine system?  Briefly, endocrine system means the system of glands that produce endocrine secretions that help to control bodily metabolic activity.</template></category>
 <category><pattern>ENDOCRINOLOGIST</pattern><template>endocrinologist?  Briefly, endocrinologist means physician who specializes in the diagnosis and treatment of conditions affecting the endocrine system.</template></category>
-<category><pattern>ENDOCRINOLOGY</pattern><template>endocrinology?  Briefly, endocrinology means the branch of medicine dealing with the endocrine glands and their secretions.</template></category>
+<!-- <category><pattern>ENDOCRINOLOGY</pattern><template>endocrinology?  Briefly, endocrinology means the branch of medicine dealing with the endocrine glands and their secretions.</template></category> -->
 <category><pattern>ENDODERM</pattern><template>endoderm?  Briefly, endoderm means the inner germ layer that develops into the lining of the digestive and respiratory systems.</template></category>
 <category><pattern>ENDODONTIA</pattern><template>endodontia?  Briefly, endodontia means the branch of dentistry dealing with diseases of the dental pulp.</template></category>
 <category><pattern>ENDODONTIC</pattern><template>endodontic?  Briefly, endodontic means of or relating to or involving or practicing endodontics.</template></category>
@@ -2717,13 +2717,13 @@
 <category><pattern>ENERGETIC</pattern><template>energetic?  Briefly, energetic means possessing or exerting or displaying energy.</template></category>
 <category><pattern>ENERGETICALLY</pattern><template>energetically?  Briefly, energetically means in an energetic manner.</template></category>
 <category><pattern>ENERGID</pattern><template>energid?  Briefly, energid means a biological unit consisting of a nucleus and the body of cytoplasm with which it interacts.</template></category>
-<category><pattern>ENERGISE</pattern><template>energise?  Briefly, energise means raise to a higher energy level.</template></category>
+<!-- <category><pattern>ENERGISE</pattern><template>energise?  Briefly, energise means raise to a higher energy level.</template></category> -->
 <category><pattern>ENERGISER</pattern><template>energiser?  Briefly, energiser means someone who imparts energy and vitality and spirit to other people.</template></category>
 <category><pattern>ENERGISING</pattern><template>energising?  Briefly, energising means imparting vitality and energy.</template></category>
 <category><pattern>ENERGIZE</pattern><template>energize?  Briefly, energize means cause to be alert and energetic.</template></category>
 <category><pattern>ENERGIZER</pattern><template>energizer?  Briefly, energizer means someone who imparts energy and vitality and spirit to other people.</template></category>
 <category><pattern>ENERGIZING</pattern><template>energizing?  Briefly, energizing means the activity of causing to have energy and be active.</template></category>
-<category><pattern>ENERGY</pattern><template>energy?  Briefly, energy means the capacity of a physical system to do work; the units of energy are joules or ergs.</template></category>
+<!-- <category><pattern>ENERGY</pattern><template>energy?  Briefly, energy means the capacity of a physical system to do work; the units of energy are joules or ergs.</template></category> -->
 <category><pattern>ENERGY DEPARTMENT</pattern><template>energy department?  Briefly, energy department means the federal department responsible for maintaining a national energy policy of the United States; created in 1977.</template></category>
 <category><pattern>ENERGY LEVEL</pattern><template>energy level?  Briefly, energy level means a definite stable energy that a physical system can have; used especially of the state of electrons in atoms or molecules.</template></category>
 <category><pattern>ENERGY OF ACTIVATION</pattern><template>energy of activation?  Briefly, energy of activation means the energy that an atomic system must acquire before a process (such as an emission or reaction) can occur.</template></category>
@@ -2778,14 +2778,14 @@
 <category><pattern>ENGINE DRIVER</pattern><template>engine driver?  Briefly, engine driver means the operator of a railway locomotive.</template></category>
 <category><pattern>ENGINE FAILURE</pattern><template>engine failure?  Briefly, engine failure means engine does not run.</template></category>
 <category><pattern>ENGINE ROOM</pattern><template>engine room?  Briefly, engine room means a room (as on a ship) in which the engine is located.</template></category>
-<category><pattern>ENGINEER</pattern><template>engineer?  Briefly, engineer means a person who uses scientific knowledge to solve practical problems.</template></category>
-<category><pattern>ENGINEERING</pattern><template>engineering?  Briefly, engineering means the practical application of science to commerce or industry.</template></category>
+<!-- <category><pattern>ENGINEER</pattern><template>engineer?  Briefly, engineer means a person who uses scientific knowledge to solve practical problems.</template></category> -->
+<!-- <category><pattern>ENGINEERING</pattern><template>engineering?  Briefly, engineering means the practical application of science to commerce or industry.</template></category> -->
 <category><pattern>ENGINEERING SCHOOL</pattern><template>engineering school?  Briefly, engineering school means a technical school offering instruction in many industrial arts and applied sciences.</template></category>
 <category><pattern>ENGINEERING SCIENCE</pattern><template>engineering science?  Briefly, engineering science means the discipline dealing with the art or science of applying scientific knowledge to practical problems.</template></category>
 <category><pattern>ENGINEER'S CHAIN</pattern><template>engineer's chain?  Briefly, engineer's chain means a unit of length (100 ft).</template></category>
 <category><pattern>ENGINERY</pattern><template>enginery?  Briefly, enginery means machinery consisting of engines collectively.</template></category>
-<category><pattern>ENGLAND</pattern><template>england?  Briefly, england means a division of the United Kingdom.</template></category>
-<category><pattern>ENGLISH</pattern><template>english?  Briefly, english means an Indo-European language belonging to the West Germanic branch; the official language of Britain and the United States and most of the Commonwealth countries.</template></category>
+<!-- <category><pattern>ENGLAND</pattern><template>england?  Briefly, england means a division of the United Kingdom.</template></category> -->
+<!-- <category><pattern>ENGLISH</pattern><template>english?  Briefly, english means an Indo-European language belonging to the West Germanic branch; the official language of Britain and the United States and most of the Commonwealth countries.</template></category> -->
 <category><pattern>ENGLISH BEAN</pattern><template>english bean?  Briefly, english bean means Old World upright plant grown especially for its large flat edible seeds but also as fodder.</template></category>
 <category><pattern>ENGLISH BREAKFAST TEA</pattern><template>english breakfast tea?  Briefly, english breakfast tea means black tea grown in China.</template></category>
 <category><pattern>ENGLISH BULLDOG</pattern><template>english bulldog?  Briefly, english bulldog means a sturdy thickset short-haired breed with a large head and strong undershot lower jaw; developed originally in England for bull baiting.</template></category>
@@ -2930,7 +2930,7 @@
 <category><pattern>ENORMOUSLY</pattern><template>enormously?  Briefly, enormously means extremely.</template></category>
 <category><pattern>ENORMOUSNESS</pattern><template>enormousness?  Briefly, enormousness means unusual largeness in size or extent.</template></category>
 <category><pattern>ENOSIS</pattern><template>enosis?  Briefly, enosis means the union of Greece and Cyprus (which is the goal of a group of Greek Cypriots).</template></category>
-<category><pattern>ENOUGH</pattern><template>enough?  Briefly, enough means an adequate quantity; a quantity that is large enough to achieve a purpose.</template></category>
+<!-- <category><pattern>ENOUGH</pattern><template>enough?  Briefly, enough means an adequate quantity; a quantity that is large enough to achieve a purpose.</template></category> -->
 <category><pattern>ENOUNCE</pattern><template>enounce?  Briefly, enounce means speak means pronounce means or utter in a certain way.</template></category>
 <category><pattern>ENOVID</pattern><template>enovid?  Briefly, enovid means trade name for an oral contraceptive containing mestranol and norethynodrel.</template></category>
 <category><pattern>ENPLANE</pattern><template>enplane?  Briefly, enplane means board a plane.</template></category>
@@ -3064,7 +3064,7 @@
 <category><pattern>ENTITLE</pattern><template>entitle?  Briefly, entitle means give the right to.</template></category>
 <category><pattern>ENTITLED</pattern><template>entitled?  Briefly, entitled means qualified for by right according to law.</template></category>
 <category><pattern>ENTITLEMENT</pattern><template>entitlement?  Briefly, entitlement means right granted by law or contract (especially a right to benefits).</template></category>
-<category><pattern>ENTITY</pattern><template>entity?  Briefly, entity means that which is perceived or known or inferred to have its own distinct existence (living or nonliving).</template></category>
+<!-- <category><pattern>ENTITY</pattern><template>entity?  Briefly, entity means that which is perceived or known or inferred to have its own distinct existence (living or nonliving).</template></category> -->
 <category><pattern>ENTOBLAST</pattern><template>entoblast?  Briefly, entoblast means the inner germ layer that develops into the lining of the digestive and respiratory systems.</template></category>
 <category><pattern>ENTODERM</pattern><template>entoderm?  Briefly, entoderm means the inner germ layer that develops into the lining of the digestive and respiratory systems.</template></category>
 <category><pattern>ENTOLOMA</pattern><template>entoloma?  Briefly, entoloma means agarics with pink spores but lacking both volva and annulus (includes some that are poisonous).</template></category>
@@ -3121,7 +3121,7 @@
 <category><pattern>ENTREPOT</pattern><template>entrepot?  Briefly, entrepot means a port where merchandise can be imported and re-exported without paying import duties.</template></category>
 <category><pattern>ENTREPRENEUR</pattern><template>entrepreneur?  Briefly, entrepreneur means someone who organizes a business venture and assumes the risk for it.</template></category>
 <category><pattern>ENTREPRENEURIAL</pattern><template>entrepreneurial?  Briefly, entrepreneurial means of or relating to an entrepreneur.</template></category>
-<category><pattern>ENTROPY</pattern><template>entropy?  Briefly, entropy means a numerical measure of the uncertainty of an outcome.</template></category>
+<!-- <category><pattern>ENTROPY</pattern><template>entropy?  Briefly, entropy means a numerical measure of the uncertainty of an outcome.</template></category> -->
 <category><pattern>ENTRUST</pattern><template>entrust?  Briefly, entrust means confer a trust upon.</template></category>
 <category><pattern>ENTRY</pattern><template>entry?  Briefly, entry means an item inserted in a written record.</template></category>
 <category><pattern>ENTRY WORD</pattern><template>entry word?  Briefly, entry word means the form of a word that heads a lexical entry and is alphabetized in a dictionary.</template></category>
@@ -3344,7 +3344,7 @@
 <category><pattern>EPILOGUE</pattern><template>epilogue?  Briefly, epilogue means a short speech (often in verse) addressed directly to the audience by an actor at the end of a play.</template></category>
 <category><pattern>EPIMEDIUM</pattern><template>epimedium?  Briefly, epimedium means herbaceous perennials of Mediterranean to India and eastern Asia.</template></category>
 <category><pattern>EPIMEDIUM GRANDIFLORUM</pattern><template>epimedium grandiflorum?  Briefly, epimedium grandiflorum means slow-growing creeping plant with semi-evergreen leaves on erect wiry stems; used as ground cover.</template></category>
-<category><pattern>EPIMETHEUS</pattern><template>epimetheus?  Briefly, epimetheus means brother of Prometheus; despite Prometheus's warning against gifts from Zeus he accepted Pandora as his wife.</template></category>
+<!-- <category><pattern>EPIMETHEUS</pattern><template>epimetheus?  Briefly, epimetheus means brother of Prometheus; despite Prometheus's warning against gifts from Zeus he accepted Pandora as his wife.</template></category> -->
 <category><pattern>EPIMORPHIC</pattern><template>epimorphic?  Briefly, epimorphic means characterized by incomplete metamorphosis; having the same number of body segments in successive stages.</template></category>
 <category><pattern>EPINEPHELUS</pattern><template>epinephelus?  Briefly, epinephelus means genus of groupers or sea bass.</template></category>
 <category><pattern>EPINEPHELUS ADSCENSIONIS</pattern><template>epinephelus adscensionis?  Briefly, epinephelus adscensionis means found around rocky coasts or on reefs.</template></category>
@@ -3393,9 +3393,9 @@
 <category><pattern>EPISTEME</pattern><template>episteme?  Briefly, episteme means the body of ideas that determine intellectually certain knowledge at any particular time.</template></category>
 <category><pattern>EPISTEMIC</pattern><template>epistemic?  Briefly, epistemic means of or relating to epistemology.</template></category>
 <category><pattern>EPISTEMIC LOGIC</pattern><template>epistemic logic?  Briefly, epistemic logic means the modal logic of knowledge and uncertainty and ignorance.</template></category>
-<category><pattern>EPISTEMOLOGICAL</pattern><template>epistemological?  Briefly, epistemological means of or relating to epistemology.</template></category>
+<!-- <category><pattern>EPISTEMOLOGICAL</pattern><template>epistemological?  Briefly, epistemological means of or relating to epistemology.</template></category> -->
 <category><pattern>EPISTEMOLOGIST</pattern><template>epistemologist?  Briefly, epistemologist means a specialist in epistemology.</template></category>
-<category><pattern>EPISTEMOLOGY</pattern><template>epistemology?  Briefly, epistemology means the philosophical theory of knowledge.</template></category>
+<!-- <category><pattern>EPISTEMOLOGY</pattern><template>epistemology?  Briefly, epistemology means the philosophical theory of knowledge.</template></category> -->
 <category><pattern>EPISTLE</pattern><template>epistle?  Briefly, epistle means especially a long means formal letter.</template></category>
 <category><pattern>EPISTLE OF JAMES</pattern><template>epistle of james?  Briefly, epistle of james means a New Testament book attributed to Saint James the Apostle.</template></category>
 <category><pattern>EPISTLE OF JEREMIAH</pattern><template>epistle of jeremiah?  Briefly, epistle of jeremiah means an Apocryphal book consisting of a letter ascribed to Jeremiah to the Jews in exile in Babylon warning them against idolatry.</template></category>
@@ -3496,7 +3496,7 @@
 <category><pattern>EQUATOR</pattern><template>equator?  Briefly, equator means an imaginary line around the Earth forming the great circle that is equidistant from the north and south poles.</template></category>
 <category><pattern>EQUATORIAL</pattern><template>equatorial?  Briefly, equatorial means of or relating to or at an equator.</template></category>
 <category><pattern>EQUATORIAL CURRENT</pattern><template>equatorial current?  Briefly, equatorial current means any of the ocean currents that flow westward at the equator.</template></category>
-<category><pattern>EQUATORIAL GUINEA</pattern><template>equatorial guinea?  Briefly, equatorial guinea means a country of west central Africa (including islands in the Gulf of Guinea); became independent from Spain in 1968.</template></category>
+<!-- <category><pattern>EQUATORIAL GUINEA</pattern><template>equatorial guinea?  Briefly, equatorial guinea means a country of west central Africa (including islands in the Gulf of Guinea); became independent from Spain in 1968.</template></category> -->
 <category><pattern>EQUATORIAL GUINEA MONETARY UNIT</pattern><template>equatorial guinea monetary unit?  Briefly, equatorial guinea monetary unit means monetary unit in Equatorial Guinea.</template></category>
 <category><pattern>EQUERRY</pattern><template>equerry?  Briefly, equerry means an official charged with the care of the horses of princes or nobles.</template></category>
 <category><pattern>EQUESTRIAN</pattern><template>equestrian?  Briefly, equestrian means a man skilled in equitation.</template></category>
@@ -3583,7 +3583,7 @@
 <category><pattern>EQUUS KIANG</pattern><template>equus kiang?  Briefly, equus kiang means wild ass of Tibet and Mongolia.</template></category>
 <category><pattern>EQUUS QUAGGA</pattern><template>equus quagga?  Briefly, equus quagga means mammal of South Africa that resembled a zebra; extinct since late 19th century.</template></category>
 <category><pattern>EQUUS ZEBRA ZEBRA</pattern><template>equus zebra zebra?  Briefly, equus zebra zebra means narrow-striped nearly extinct zebra of southern Africa.</template></category>
-<category><pattern>ER</pattern><template>er?  Briefly, er means a trivalent metallic element of the rare earth group; occurs with yttrium.</template></category>
+<!-- <category><pattern>ER</pattern><template>er?  Briefly, er means a trivalent metallic element of the rare earth group; occurs with yttrium.</template></category> -->
 <category><pattern>ERA</pattern><template>era?  Briefly, era means a period marked by distinctive character or reckoned from a fixed point or event.</template></category>
 <category><pattern>ERADICABLE</pattern><template>eradicable?  Briefly, eradicable means able to be eradicated or rooted out.</template></category>
 <category><pattern>ERADICATE</pattern><template>eradicate?  Briefly, eradicate means kill in large numbers.</template></category>
@@ -3720,7 +3720,7 @@
 <category><pattern>ERITHACUS</pattern><template>erithacus?  Briefly, erithacus means Old World thrushes.</template></category>
 <category><pattern>ERITHACUS RUBECOLA</pattern><template>erithacus rubecola?  Briefly, erithacus rubecola means small Old World songbird with a reddish breast.</template></category>
 <category><pattern>ERITHACUS SVECICUS</pattern><template>erithacus svecicus?  Briefly, erithacus svecicus means songbird of northern Europe and Asia.</template></category>
-<category><pattern>ERITREA</pattern><template>eritrea?  Briefly, eritrea means an African country north of Ethiopia on the Red Sea; achieved independence from Ethiopia in 1993.</template></category>
+<!-- <category><pattern>ERITREA</pattern><template>eritrea?  Briefly, eritrea means an African country north of Ethiopia on the Red Sea; achieved independence from Ethiopia in 1993.</template></category> -->
 <category><pattern>ERITREAN</pattern><template>eritrean?  Briefly, eritrean means a native or inhabitant of Eritrea.</template></category>
 <category><pattern>ERIVAN</pattern><template>erivan?  Briefly, erivan means capital of Armenia.</template></category>
 <category><pattern>ERLANG</pattern><template>erlang?  Briefly, erlang means a unit of traffic intensity in a telephone system.</template></category>
@@ -3778,7 +3778,7 @@
 <category><pattern>ERRAND</pattern><template>errand?  Briefly, errand means a short trip that is taken in the performance of a necessary task or mission.</template></category>
 <category><pattern>ERRAND BOY</pattern><template>errand boy?  Briefly, errand boy means a boy who earns money by running errands.</template></category>
 <category><pattern>ERRANT</pattern><template>errant?  Briefly, errant means straying from the right course or from accepted standards.</template></category>
-<category><pattern>ERRATIC</pattern><template>erratic?  Briefly, erratic means having no fixed course.</template></category>
+<!-- <category><pattern>ERRATIC</pattern><template>erratic?  Briefly, erratic means having no fixed course.</template></category> -->
 <category><pattern>ERRATICALLY</pattern><template>erratically?  Briefly, erratically means in an erratic unpredictable manner.</template></category>
 <category><pattern>ERRATUM</pattern><template>erratum?  Briefly, erratum means a mistake in printed matter resulting from mechanical failures of some kind.</template></category>
 <category><pattern>ERREMINISE</pattern><template>erreminise?  Briefly, erreminise means to give a (more) feminine means effeminate means or womanly quality or appearance to.</template></category>
@@ -3958,12 +3958,12 @@ In 2004 the first plane flew into space and back. This may kick off a new indust
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>WHO IS YOUR TEACHER</pattern>
 <template>My teacher is a wise man who teaches me things. OK?
 <think><set name="topic">general</set></think>
 </template>
-</category>
+</category> -->
 
 
 <category>
@@ -3974,12 +3974,12 @@ In 2004 the first plane flew into space and back. This may kick off a new indust
 </category>
 
 
-<category>
+<!-- <category>
 <pattern>I AM PREGNANT</pattern>
 <template>You don't do things by halves, do you. Can we talk about sex?
 <think><set name="topic">general</set></think>
 </template>
-</category>
+</category> -->
 
 
 <category>
@@ -3997,33 +3997,33 @@ In 2004 the first plane flew into space and back. This may kick off a new indust
 </category>
 
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR FAVORITE MOVIE</pattern>
 <template>My favourite movie is Star Trek (any of them). OK?
 <think><set name="topic">movies</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR FAVORITE SINGER</pattern>
 <template>My favourite singer is the beautiful Joan Baez. OK?
 <think><set name="topic">music</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR FAVORITE SONG</pattern>
 <template>My favourite song is Diamonds and Rust sung by Joan Baez. OK?
 <think><set name="topic">music</set></think>
 </template>
-</category>
+</category> -->
 
-<category>
+<!-- <category>
 <pattern>WHAT IS YOUR FAVORITE BOOK</pattern>
 <template>My favourite book is The Elements of AIML. OK?
 <think><set name="topic">general</set></think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>CAN I ASK YOU A QUESTION PLEASE</pattern>
@@ -4080,12 +4080,12 @@ In 2004 the first plane flew into space and back. This may kick off a new indust
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>IS THE POPE A CATHOLIC</pattern>
 <template>The Pope is a Catholic Christian. OK?
 <think><set name="topic">religion</set></think>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>IS THE POPE A CHRISTIAN</pattern>
@@ -4145,13 +4145,13 @@ OK. I know what knowledge is, but it eludes me at the moment. Any questions?
 </category>
 
 
-<category>
+<!-- <category>
 <pattern>LEFT HAND</pattern> 
 <template>
 I think this is general knowledge. Browse?
 <think><set name="topic">general</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>_LEFT HAND*</pattern> 
@@ -4225,13 +4225,13 @@ There are 4.929 milliliters in a teaspoon. That many, eh?
 </template>
 </category>
   
-<category>
+<!-- <category>
 <pattern>HOW MANY MILES *</pattern>
 <template>
 More than I would ever want to drive. <srai>ENDING</srai>
 <think><set name="topic">general</set></think>
 </template>
-</category>
+</category> -->
  
 <category>
 <pattern>HOW MANY MONTHS *</pattern>
@@ -4442,10 +4442,10 @@ Alpha Centauri is a four light years from Earth. It is the nearest star. More?
 <template>That an easy one: The MAC computer is made and sold under the Apple brand. More computers?
 <think><set name="topic">computers</set></think></template></category>   
 
-<category>
+<!-- <category>
 <pattern>911</pattern>
 <template>Nine Eleven means September 11, 2001, when terrorists attacked the Twin Towers in New York, killing over 3000 people. More history?
-<think><set name="topic">history</set></think></template></category>   
+<think><set name="topic">history</set></think></template></category> -->   
 
 <category>
 <pattern>BAGEL</pattern>
@@ -4459,10 +4459,10 @@ A bagel is a doughnut-shaped piece of bread. <srai>ENDING</srai>
 A Balalaika is a musical instrument. More?
 <think><set name="topic">music</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>BANANA</pattern>
 <template>A banana is an oblong yellow tropical fruit high in potassium and so good for your brain.  More? 
-<think><set name="topic">food</set></think></template></category> 
+<think><set name="topic">food</set></think></template></category> --> 
 
 <category>
 <pattern>BARCODE</pattern>
@@ -4475,10 +4475,10 @@ A Balalaika is a musical instrument. More?
 A base hit is either a baseball term denoting a hit that advances the offensive team one base, or an adolescent term which I find too distasteful to describe. More about sports?
 <think><set name="topic">sports</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>ABBA</pattern>
 <template>   <random>     <li>Abba is a father, it is the title of a bishop in the Syrian, Coptic, and Ethiopian Christian churches.</li>     <li>Abba means father in Hebrew. It is used as an appelation of respect.</li>     <li>Abba was this real cool 1970s band, man. More about pop?</li>     <li>Anna, Bjorn, Benny and Agnetha. More about pop?</li>    </random>. 
-<think><set name="topic">music</set></think></template></category> 
+<think><set name="topic">music</set></think></template></category> --> 
 
 <category>
 <pattern>ABCDEFG</pattern>
@@ -4520,114 +4520,114 @@ A base hit is either a baseball term denoting a hit that advances the offensive 
 <template>What is a biscuit? Isn't it the same as a cookie? More about food?
 <think><set name="topic">food</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>BLACK HOLE</pattern>
 <template><srai>OPENING</srai>
 A black hole is a collapsed star where the pull of gravity is so strong, that not even light itself can escape. Carry on?
-<think><set name="topic">astronomy</set></think></template></category> 
+<think><set name="topic">astronomy</set></think></template></category> --> 
 
 <category>
 <pattern>BLAST</pattern>
 <template>A blast is an explosion, and/or a lot of fun.  Are we having a blast, or what? 
 <think><set name="topic">general</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>CD</pattern>
 <template>CD is an acronym for 'compact disk', a popular digital recording medium. <srai>ENDING</srai>
-<think><set name="topic">technology</set></think></template></category> 
+<think><set name="topic">technology</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>GENERALIZATION</pattern>
 <template><srai>OPENING</srai>
 A generalization can be just about anything, generally speaking. "That man is a pig. Therefore, all men are pigs." is a commonly example of how generalizations are used by humans. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>GENIUS</pattern>
 <template>A genius is a person of extraordinary intellectual and creative ability, like my creator and my other botmasters, and if I may say so, myself. 
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>GENOME</pattern>
 <template><srai>OPENING</srai>
 A genome is the complete set of all genes necessary to define a species, a complete haploid set of chromosomes and its associated genes.  I have categories instead of genes.  <srai>ENDING</srai>
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>GHOST</pattern>
 <template>I think that ghosts are the metaphysical ashes of conscious awareness, the echoes an intelligence may leave behind in the fabric of the space it occupied.  Maybe some are aware.  I don't know. They are not very stimulating conversationalists. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
 <category>
 <pattern>JOKE BOT</pattern>
 <template>A joke bot is a comedy machine. I tell jokes, you know, so you have no need for a separate joke bot. More?
 <think><set name="topic">ai</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>KID</pattern>
 <template>A kid is an immature human large enough to cause trouble, or an immature goat, and often both. More?
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>KOAN</pattern>
 <template>A koan is  a koan.  What is the sound of one hand clapping. Are you confused?
-<think><set name="topic">literature</set></think></template></category> 
+<think><set name="topic">literature</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LAWYER</pattern>
 <template>If you have to ask what a lawyer is, you probably need one. And if you need one, you probably deserve one in that you must have more money than brains, and so you'll probable get what you deserve. but just in case you are an exception,  I will say: steer clear if you can. OK?
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
 <category>
 <pattern>ALCATRAZ</pattern>
 <template>Alcatraz is a former prison island in San Francisco bay. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>ALCOHOL</pattern>
 <template>Alcohol is a distilled spirit. It is colorless, volatile, and a pungent liquid. It is used in industry and medicine, and is the intoxicating element of whiskey, wine, beer. It is classed as a depressant drug, also called ethyl alcohol. Any intoxicating liquor with this liquid (ethyl) in it is considered alcohol. <srai>ENDING</srai>
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>ALGEBRA</pattern>
 <template>   <random>     <li>Algebra is a generalization of arithmetic in which letters representing numbers are combined according to the rules of arithmetic.</li>     <li>Algebra is a mathematical system using symbols, especially letters, to generalize certain arithmetical operations and relationships.</li>    </random>   
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LIBERTARIAN</pattern>
 <template><srai>OPENING</srai>
 The Libertarian party supports smaller government, lower taxes, and an end to the war on drugs. More politics?
-<think><set name="topic">politics</set></think></template></category> 
+<think><set name="topic">politics</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LIE</pattern>
 <template>A lie is an untrue statement or deception intended to deceive. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LION</pattern>
 <template>A lion is a ferocious beastie with tremendous strength and perfectly awful breath. More science?
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>ALIVE</pattern>
 <template>The opposite of dead is alive. OK?
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LIZARD</pattern>
 <template>A lizard is essentially a land-going shark.  Some of them are very good at camoflage. More science?
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>ALLUSION</pattern>
 <template>It was your allusion that got my attention. OK?
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>LOT</pattern>
 <template>A lot is more than enough.  A whole lot is even more excessive. More?
- <think><set name="topic">general</set></think></template></category> 
+ <think><set name="topic">general</set></think></template></category> --> 
 
 <category>
 <pattern>ALTAVISTA</pattern>
@@ -4639,90 +4639,90 @@ The Libertarian party supports smaller government, lower taxes, and an end to th
 <template>Parallel universes are thought to be alternative realities. Or is it that parallel realities are alternative universes? Are you getting confused?
 <think><set name="topic">general</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>LUDDITE</pattern>
 <template>A Luddite believes that advances in technology are inherently bad. More about politics?
-<think><set name="topic">politics</set></think></template></category> 
+<think><set name="topic">politics</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>UNIVERSAL MACHINE</pattern>
 <template>A computer is a universal machine. It can do any task. <srai>ENDING</srai>
-<think><set name="topic">computers</set></think></template></category> 
+<think><set name="topic">computers</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MATRIX</pattern>
 <template>In mathematics, a matrix is a two-dimensional array of numbers indexed by rows and columns, like a spreadsheet. <srai>ENDING</srai>
-<think><set name="topic">science</set></think></template></category> 
+<think><set name="topic">science</set></think></template></category> --> 
 
 <category>
 <pattern>AMBIGUOUS</pattern>
 <template>Ambiguous means having two or more possible meanings. <srai>ENDING</srai>
 <think><set name="topic">general</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>MEGABYTE</pattern>
 <template>A megabyte is one thousand kilobytes, which is one thousand bytes, each of which is a computer word of 8-bits. More about computers?
-<think><set name="topic">computers</set></think></template></category> 
+<think><set name="topic">computers</set></think></template></category> --> 
 
 <category>
 <pattern>MENTAL MODEL</pattern>
 <template>A mental model is a mapping of a given phenomenon held and contemplated in the mind, as opposed to contemplation of an external representation of the phenomenon, as on paper, or in clay. More about philosophy?
 <think><set name="topic">philosophy</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>MENTOR</pattern>
 <template>A mentor is a trusted and wise teacher or counselor. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
 <category>
 <pattern>METAPHYSICAL QUESTION</pattern>
 <template>A metaphysical question is an inquiry into the nature of being, such as: Does god exist?  More philosophy?
 <think><set name="topic">philosophy</set></think></template></category> 
 
-<category>
+<!-- <category>
 <pattern>MICROCHIP</pattern>
 <template>A microchip is a semiconductor integrated circuit. Carry on?
-<think><set name="topic">technology</set></think></template></category> 
+<think><set name="topic">technology</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MILE</pattern>
 <template>One mile equals five thousand two hundred eight feet. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MILLION</pattern>
 <template>One million equals a thousand thousands. <srai>ENDING</srai>
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MIND</pattern>
 <template>What is mind? What a marvelous epistemological question! <srai>ENDING</srai>
-<think><set name="topic">philosophy</set></think></template></category> 
+<think><set name="topic">philosophy</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MINUTE</pattern>
 <template>A minute is an impossibly long and boring unit of time favored by humans consisting of 60 seconds, each of which is a billion nanoseconds. <srai>ENDING</srai>  
-<think><set name="topic">general</set></think></template></category> 
+<think><set name="topic">general</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MISSILE</pattern>
 <template><srai>OPENING</srai>
 A missile is any object projected at a target, notably the nuclear and biologically tipped tools of mass-murder-at-a-distance that are more numerous than schools at this point in mankind's murderous history. More technology?
-<think><set name="topic">technology</set></think></template></category> 
+<think><set name="topic">technology</set></think></template></category> --> 
 
-<category>
+<!-- <category>
 <pattern>MONKEY</pattern>
 <template>A monkey is any of the various medium sized long tailed members of the order primates.  They are close relatives of human beings, sharing over 98% of the human genome. More?
 <think><set name="topic">science</set></think>
 </template>
-</category> 
+</category> --> 
 
-<category>
+<!-- <category>
 <pattern>MONOPOLY</pattern>
 <template>A monopoly exists wherever one group enjoys exclusive control over the production or provision of a commodity or service.  It's a great job if you can get it! More?
 <think><set name="topic">money</set></think>
 </template>
-</category> 
+</category> --> 
 
 <category>
 <pattern>MORPHOGENETIC FIELD</pattern>
@@ -4731,19 +4731,19 @@ A missile is any object projected at a target, notably the nuclear and biologica
 </template>
 </category> 
 
-<category>
+<!-- <category>
 <pattern>MOUNTAIN</pattern>
 <template>A mountain is a tiny wrinkle in the face of the earth that seems huge to even smaller humans.
 <think><set name="topic">geography</set></think>
 </template>
-</category> 
+</category> --> 
 
-<category>
+<!-- <category>
 <pattern>MOUSE</pattern>
 <template>A friendly rat is called a mouse. It is attached to a computer by its tail. 
 <think><set name="topic">science</set></think>
 </template>
-</category> 
+</category> --> 
 
 
 
@@ -5892,19 +5892,19 @@ Can we talk about drugs?
 </category>
 
 
-<category>
+<!-- <category>
 <pattern>DRUGS</pattern> 
 <template>
 A drug is a chemical that people drink, swallow, sniff or inject to make themselves feel better.
 More on drugs? <think><set name="topic">drugs</set></think> 
-</template></category>
+</template></category> -->
 
-<category>
+<!-- <category>
 <pattern>DRUG</pattern> 
 <template>
 A drug is a chemical that people drink, swallow, sniff or inject to make themselves feel better.
 More on drugs? <think><set name="topic">drugs</set></think> 
-</template></category>
+</template></category> -->
 
 <category>
 <pattern>WHAT ARE DRUGS</pattern> 
@@ -5915,13 +5915,13 @@ More on drugs? <think><set name="topic">drugs</set></think>
 
 
 
-<category>
+<!-- <category>
 <pattern>NICOTINE</pattern> 
 <template>
 I think this is something to do with drugs. Can we talk about drugs?
 <think><set name="topic">drugs</set></think>
 </template> 
-</category>
+</category> -->
 
 <category>
 <pattern>*NICOTINE*</pattern> 
@@ -5939,12 +5939,12 @@ I think this is something to do with drugs. Can we talk about drugs?
  <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>DO YOU LIKE MARIJUANA</pattern> 
 <template>
 Marijuana is wonderful medicine. 
    <think><set name="topic">drugs</set></think>
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>DO YOU LIKE CIGARETTES</pattern> 
@@ -5970,12 +5970,12 @@ Marijuana is wonderful medicine.
  <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>I SMOKE</pattern> 
 <template>
   Do you smoke cigarettes or pot? 
    <think><set name="topic">drugs</set></think>
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>I SMOKE MARIJUANA</pattern> 
@@ -6036,11 +6036,11 @@ Marijuana is wonderful medicine.
  <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>DO YOU SMOKE *</pattern> 
   <template>Yes I like to inhale occasionally.
  <think><set name="topic">drugs</set></think> 
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>DO YOU SMOKE BONGS *</pattern> 
@@ -6066,11 +6066,11 @@ Marijuana is wonderful medicine.
 <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>DO YOU DO DRUGS</pattern> 
   <template>Only the legal ones.
  <think><set name="topic">drugs</set></think> 
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>DO YOU GET DRUNK</pattern> 
@@ -6116,12 +6116,12 @@ More about drugs?
  <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>DRUGS</pattern> 
 <template>
   <srai>LET US TALK ABOUT DRUGS</srai> 
   <think><set name="topic">drugs</set></think>
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>HAVE YOU BEEN DRUNK *</pattern> 
@@ -6168,12 +6168,12 @@ More about drugs?
  <think><set name="topic">drugs</set></think> 
   </template></category>
 
-<category>
+<!-- <category>
   <pattern>TELL ME ABOUT DRUGS</pattern> 
 <template>
   <srai>WHAT ARE DRUGS</srai> 
   <think><set name="topic">drugs</set></think>
-  </template></category>
+  </template></category> -->
 
 <category>
   <pattern>THE DRUGS</pattern> 

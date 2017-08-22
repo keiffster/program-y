@@ -362,7 +362,7 @@
 <category><pattern>TRANSCRIBE</pattern><template>transcribe?  Briefly, transcribe means write out from speech means notes means etc..</template></category>
 <category><pattern>TRANSCRIBED</pattern><template>transcribed?  Briefly, transcribed means taken down in writing especially from notes or dictated or recorded information.</template></category>
 <category><pattern>TRANSCRIBER</pattern><template>transcriber?  Briefly, transcriber means a person who translates written messages from one language to another.</template></category>
-<category><pattern>TRANSCRIPT</pattern><template>transcript?  Briefly, transcript means something that has been transcribed; a written record (usually typewritten) of dictated or recorded speech.</template></category>
+<!-- <category><pattern>TRANSCRIPT</pattern><template>transcript?  Briefly, transcript means something that has been transcribed; a written record (usually typewritten) of dictated or recorded speech.</template></category> -->
 <category><pattern>TRANSCRIPTASE</pattern><template>transcriptase?  Briefly, transcriptase means a polymerase associated with the process of transcription.</template></category>
 <category><pattern>TRANSCRIPTION</pattern><template>transcription?  Briefly, transcription means something written means especially copied from one medium to another means as a typewritten version of dictation.</template></category>
 <category><pattern>TRANSCULTURAL</pattern><template>transcultural?  Briefly, transcultural means extending through all human cultures.</template></category>
@@ -2157,7 +2157,7 @@
 <category><pattern>TUXEDO</pattern><template>tuxedo?  Briefly, tuxedo means semiformal evening dress for men.</template></category>
 <category><pattern>TUXEDOED</pattern><template>tuxedoed?  Briefly, tuxedoed means dressed in a tuxedo.</template></category>
 <category><pattern>TUXTLA GUTIERREZ</pattern><template>tuxtla gutierrez?  Briefly, tuxtla gutierrez means a city in southeastern Mexico.</template></category>
-<category><pattern>TV</pattern><template>tv?  Briefly, tv means broadcasting visual images of stationary or moving objects - Ernie Kovacs.</template></category>
+<!-- <category><pattern>TV</pattern><template>tv?  Briefly, tv means broadcasting visual images of stationary or moving objects - Ernie Kovacs.</template></category> -->
 <category><pattern>TV ANNOUNCER</pattern><template>tv announcer?  Briefly, tv announcer means an announcer on television.</template></category>
 <category><pattern>TV AUDIENCE</pattern><template>tv audience?  Briefly, tv audience means the audience reached by television.</template></category>
 <category><pattern>TV CAMERA</pattern><template>tv camera?  Briefly, tv camera means television equipment consisting of a lens system that focuses an image on a photosensitive mosaic that is scanned by an electron beam.</template></category>
@@ -2187,7 +2187,7 @@
 <category><pattern>TWEEDLEDEE AND TWEEDLEDUM</pattern><template>tweedledee and tweedledum?  Briefly, tweedledee and tweedledum means any two people who are hard to tell apart.</template></category>
 <category><pattern>TWEEDLEDUM AND TWEEDLEDEE</pattern><template>tweedledum and tweedledee?  Briefly, tweedledum and tweedledee means any two people who are hard to tell apart.</template></category>
 <category><pattern>TWEEDY</pattern><template>tweedy?  Briefly, tweedy means of textiles; having a rough surface.</template></category>
-<category><pattern>TWEET</pattern><template>tweet?  Briefly, tweet means a week chirping sound as of a small bird.</template></category>
+<!-- <category><pattern>TWEET</pattern><template>tweet?  Briefly, tweet means a week chirping sound as of a small bird.</template></category> -->
 <category><pattern>TWEETER</pattern><template>tweeter?  Briefly, tweeter means a loudspeaker that reproduces higher audio frequency sounds.</template></category>
 <category><pattern>TWEEZE</pattern><template>tweeze?  Briefly, tweeze means pluck with tweezers.</template></category>
 <category><pattern>TWEEZER</pattern><template>tweezer?  Briefly, tweezer means a hand tool for holding consisting of a compound lever.</template></category>
@@ -2385,7 +2385,7 @@
 <category><pattern>TYNDALL EFFECT</pattern><template>tyndall effect?  Briefly, tyndall effect means the phenomenon in which light is scattered by very small particles in its path; it makes a beam of light visible; the scattered light is mainly blue.</template></category>
 <category><pattern>TYNE</pattern><template>tyne?  Briefly, tyne means a river in northern England that flows east to the North Sea.</template></category>
 <category><pattern>TYNE RIVER</pattern><template>tyne river?  Briefly, tyne river means a river in northern England that flows east to the North Sea.</template></category>
-<category><pattern>TYPE</pattern><template>type?  Briefly, type means a subdivision of a particular kind of thing.</template></category>
+<!-- <category><pattern>TYPE</pattern><template>type?  Briefly, type means a subdivision of a particular kind of thing.</template></category> -->
 <category><pattern>TYPE A</pattern><template>type a?  Briefly, type a means the blood group whose red cells carry the A antigen.</template></category>
 <category><pattern>TYPE AB</pattern><template>type ab?  Briefly, type ab means the blood group whose red cells carry both the A and B antigens.</template></category>
 <category><pattern>TYPE B</pattern><template>type b?  Briefly, type b means the blood group whose red cells carry the B antigen.</template></category>
@@ -2428,7 +2428,7 @@
 <category><pattern>TYPHOID FEVER</pattern><template>typhoid fever?  Briefly, typhoid fever means serious infection marked by intestinal inflammation and ulceration; caused by Salmonella typhosa ingested with food or water.</template></category>
 <category><pattern>TYPHOID MARY</pattern><template>typhoid mary?  Briefly, typhoid mary means United States cook who was an immune carrier of typhoid fever and who infected dozens of people (1870-1938).</template></category>
 <category><pattern>TYPHON</pattern><template>typhon?  Briefly, typhon means a monster with a hundred heads and one of the whirlwinds; son of Typhoeus and Echidna; father of Cerberus and the Chimera and the Sphinx.</template></category>
-<category><pattern>TYPHOON</pattern><template>typhoon?  Briefly, typhoon means a tropical cyclone occurring in the western Pacific or Indian oceans.</template></category>
+<!-- <category><pattern>TYPHOON</pattern><template>typhoon?  Briefly, typhoon means a tropical cyclone occurring in the western Pacific or Indian oceans.</template></category> -->
 <category><pattern>TYPHUS</pattern><template>typhus?  Briefly, typhus means rickettsial disease transmitted by body lice and characterized by skin rash and high fever.</template></category>
 <category><pattern>TYPHUS FEVER</pattern><template>typhus fever?  Briefly, typhus fever means rickettsial disease transmitted by body lice and characterized by skin rash and high fever.</template></category>
 <category><pattern>TYPIC</pattern><template>typic?  Briefly, typic means being or serving as an illustration of a type;.</template></category>
@@ -2497,7 +2497,7 @@
 <category><pattern>TZARIST</pattern><template>tzarist?  Briefly, tzarist means of or relating to or characteristic of a czar.</template></category>
 <category><pattern>TZETZE</pattern><template>tzetze?  Briefly, tzetze means blood-sucking African fly; transmits sleeping sickness etc..</template></category>
 <category><pattern>TZETZE FLY</pattern><template>tzetze fly?  Briefly, tzetze fly means blood-sucking African fly; transmits sleeping sickness etc..</template></category>
-<category><pattern>U</pattern><template>u?  Briefly, u means a nitrogen-containing base found in RNA (but not in DNA) and derived from pyrimidine; pairs with adenine.</template></category>
+<!-- <category><pattern>U</pattern><template>u?  Briefly, u means a nitrogen-containing base found in RNA (but not in DNA) and derived from pyrimidine; pairs with adenine.</template></category> -->
 <category><pattern>U. S. AIR FORCE</pattern><template>u. s. air force?  Briefly, u. s. air force means the airforce of the United States of America; defends the United States through control and exploitation of air and space.</template></category>
 <category><pattern>U. S. ARMY</pattern><template>u. s. army?  Briefly, u. s. army means the army of the United States of America; organizes and trains soldiers for land warfare.</template></category>
 <category><pattern>U. S. ARMY SPECIAL FORCES</pattern><template>u. s. army special forces?  Briefly, u. s. army special forces means a division of the United States Army that is specially trained for guerilla fighting.</template></category>
@@ -2643,7 +2643,7 @@
 <category><pattern>ULTRASONIC</pattern><template>ultrasonic?  Briefly, ultrasonic means having frequencies above those of audible sound.</template></category>
 <category><pattern>ULTRASONICALLY</pattern><template>ultrasonically?  Briefly, ultrasonically means by ultrasonic means.</template></category>
 <category><pattern>ULTRASONOGRAPHY</pattern><template>ultrasonography?  Briefly, ultrasonography means using the reflections of high-frequency sound waves to construct an image of a body organ (a sonogram); commonly used to observe fetal growth or study bodily organs.</template></category>
-<category><pattern>ULTRASOUND</pattern><template>ultrasound?  Briefly, ultrasound means very high frequency sound; used in ultrasonography.</template></category>
+<!-- <category><pattern>ULTRASOUND</pattern><template>ultrasound?  Briefly, ultrasound means very high frequency sound; used in ultrasonography.</template></category> -->
 <category><pattern>ULTRASUEDE</pattern><template>ultrasuede?  Briefly, ultrasuede means a synthetic suede cloth.</template></category>
 <category><pattern>ULTRAVIOLET</pattern><template>ultraviolet?  Briefly, ultraviolet means radiation lying in the ultraviolet range; wave lengths shorter than light but longer than X rays.</template></category>
 <category><pattern>ULTRAVIOLET ILLUMINATION</pattern><template>ultraviolet illumination?  Briefly, ultraviolet illumination means radiation lying in the ultraviolet range; wave lengths shorter than light but longer than X rays.</template></category>
@@ -2897,7 +2897,7 @@
 <category><pattern>TEACART</pattern><template>teacart?  Briefly, teacart means serving cart for serving tea or light refreshments.</template></category>
 <category><pattern>TEACH</pattern><template>teach?  Briefly, teach means an English pirate who operated in the Caribbean and off the Atlantic coast of North America (died in 1718).</template></category>
 <category><pattern>TEACHABLE</pattern><template>teachable?  Briefly, teachable means ready and willing to be taught.</template></category>
-<category><pattern>TEACHER</pattern><template>teacher?  Briefly, teacher means a person whose occupation is teaching.</template></category>
+<!-- <category><pattern>TEACHER</pattern><template>teacher?  Briefly, teacher means a person whose occupation is teaching.</template></category> -->
 <category><pattern>TEACHER'S CERTIFICATE</pattern><template>teacher's certificate?  Briefly, teacher's certificate means a certificate saying that the holder is qualified to teach in the public schools.</template></category>
 <category><pattern>TEACHERS COLLEGE</pattern><template>teachers college?  Briefly, teachers college means a two-year school for training elementary teachers.</template></category>
 <category><pattern>TEACHER'S PET</pattern><template>teacher's pet?  Briefly, teacher's pet means the teacher's favorite student.</template></category>
@@ -3142,7 +3142,7 @@
 <category><pattern>TELEPATHIST</pattern><template>telepathist?  Briefly, telepathist means someone with the power of communicating thoughts directly.</template></category>
 <category><pattern>TELEPATHIZE</pattern><template>telepathize?  Briefly, telepathize means communicate nonverbally by telepathy.</template></category>
 <category><pattern>TELEPATHY</pattern><template>telepathy?  Briefly, telepathy means apparent communication from one mind to another without using sensory perceptions.</template></category>
-<category><pattern>TELEPHONE</pattern><template>telephone?  Briefly, telephone means electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds.</template></category>
+<!-- <category><pattern>TELEPHONE</pattern><template>telephone?  Briefly, telephone means electronic equipment that converts sound into electrical signals that can be transmitted over distances and then converts received signals back into sounds.</template></category> -->
 <category><pattern>TELEPHONE BELL</pattern><template>telephone bell?  Briefly, telephone bell means electric bell that rings to signal a call.</template></category>
 <category><pattern>TELEPHONE BILL</pattern><template>telephone bill?  Briefly, telephone bill means statement of charges for telephone service.</template></category>
 <category><pattern>TELEPHONE BOOK</pattern><template>telephone book?  Briefly, telephone book means a directory containing an alphabetical list of telephone subscribers and their telephone numbers.</template></category>
@@ -3353,7 +3353,7 @@
 <category><pattern>TEMPURA</pattern><template>tempura?  Briefly, tempura means vegetables and seafood dipped in batter and deep-fried.</template></category>
 <category><pattern>TEMUCO</pattern><template>temuco?  Briefly, temuco means a city in central Chile south of Concepcion.</template></category>
 <category><pattern>TEN</pattern><template>ten?  Briefly, ten means the cardinal number that is the sum of nine and one; the base of the decimal system.</template></category>
-<category><pattern>TEN COMMANDMENTS</pattern><template>ten commandments?  Briefly, ten commandments means the biblical commandments of Moses.</template></category>
+<!-- <category><pattern>TEN COMMANDMENTS</pattern><template>ten commandments?  Briefly, ten commandments means the biblical commandments of Moses.</template></category> -->
 <category><pattern>TEN DOLLAR BILL</pattern><template>ten dollar bill?  Briefly, ten dollar bill means a United States bill worth 10 dollars.</template></category>
 <category><pattern>TEN PERCENT</pattern><template>ten percent?  Briefly, ten percent means a tenth part; one part in ten.</template></category>
 <category><pattern>TEN THOUSAND</pattern><template>ten thousand?  Briefly, ten thousand means the cardinal number that is the product of ten and one thousand.</template></category>
@@ -3468,7 +3468,7 @@
 <category><pattern>TENREC</pattern><template>tenrec?  Briefly, tenrec means small often spiny insectivorous mammal of Madagascar; resembles a hedgehog.</template></category>
 <category><pattern>TENREC ECAUDATUS</pattern><template>tenrec ecaudatus?  Briefly, tenrec ecaudatus means prolific animal that feeds chiefly on earthworms.</template></category>
 <category><pattern>TENRECIDAE</pattern><template>tenrecidae?  Briefly, tenrecidae means tenrecs and extinct related forms.</template></category>
-<category><pattern>TENSE</pattern><template>tense?  Briefly, tense means a grammatical category of verbs used to express distinctions of time.</template></category>
+<!-- <category><pattern>TENSE</pattern><template>tense?  Briefly, tense means a grammatical category of verbs used to express distinctions of time.</template></category> -->
 <category><pattern>TENSE SYSTEM</pattern><template>tense system?  Briefly, tense system means a system of tenses used in a particular language.</template></category>
 <category><pattern>TENSE UP</pattern><template>tense up?  Briefly, tense up means become tense or tenser.</template></category>
 <category><pattern>TENSED</pattern><template>tensed?  Briefly, tensed means having inflections to indicate tense.</template></category>
@@ -3701,7 +3701,7 @@
 <category><pattern>TESSELLATION</pattern><template>tessellation?  Briefly, tessellation means the careful juxtaposition of shapes in a pattern.</template></category>
 <category><pattern>TESSERA</pattern><template>tessera?  Briefly, tessera means a small square tile of stone or glass used in making mosaics.</template></category>
 <category><pattern>TESSIN</pattern><template>tessin?  Briefly, tessin means an Italian-speaking region of southern Switzerland.</template></category>
-<category><pattern>TEST</pattern><template>test?  Briefly, test means any standardized procedure for measuring sensitivity or memory or intelligence or aptitude or personality etc.</template></category>
+<!-- <category><pattern>TEST</pattern><template>test?  Briefly, test means any standardized procedure for measuring sensitivity or memory or intelligence or aptitude or personality etc.</template></category> -->
 <category><pattern>TEST BAN</pattern><template>test ban?  Briefly, test ban means a ban on the testing of nuclear weapons that is mutually agreed to by countries that possess nuclear weapons.</template></category>
 <category><pattern>TEST BED</pattern><template>test bed?  Briefly, test bed means a place equipped with instruments for testing (e.g. engines or machinery or computer programs etc.) under working conditions.</template></category>
 <category><pattern>TEST CASE</pattern><template>test case?  Briefly, test case means a representative legal action whose outcome is likely to become a precedent.</template></category>
@@ -3874,7 +3874,7 @@
 <category><pattern>TEXAS STORKSBILL</pattern><template>texas storksbill?  Briefly, texas storksbill means of prairies and desert areas of southwestern United States and Mexico.</template></category>
 <category><pattern>TEXAS TOAD</pattern><template>texas toad?  Briefly, texas toad means nocturnal burrowing toad of mesquite woodland and prairies of the United States southwest.</template></category>
 <category><pattern>TEXAS TORTOISE</pattern><template>texas tortoise?  Briefly, texas tortoise means close relative to the desert tortoise; may be reclassified as a member of genus Xerobates.</template></category>
-<category><pattern>TEXT</pattern><template>text?  Briefly, text means the words of something written.</template></category>
+<!-- <category><pattern>TEXT</pattern><template>text?  Briefly, text means the words of something written.</template></category> -->
 <category><pattern>TEXT EDITION</pattern><template>text edition?  Briefly, text edition means a book prepared for use in schools or colleges.</template></category>
 <category><pattern>TEXT EDITOR</pattern><template>text editor?  Briefly, text editor means an editor who prepares text for publication.</template></category>
 <category><pattern>TEXT FILE</pattern><template>text file?  Briefly, text file means a computer file that contains text (and possibly formatting instructions) using 7-bit ASCII characters.</template></category>
@@ -3935,15 +3935,15 @@
 <category><pattern>THANATOS</pattern><template>thanatos?  Briefly, thanatos means the Greek personification of death; son of Nyx.</template></category>
 <category><pattern>THANE</pattern><template>thane?  Briefly, thane means a feudal lord or baron.</template></category>
 <category><pattern>THANESHIP</pattern><template>thaneship?  Briefly, thaneship means the position of thane.</template></category>
-<category><pattern>THANK</pattern><template>thank?  Briefly, thank means express gratitude or show appreciation to.</template></category>
+<!-- <category><pattern>THANK</pattern><template>thank?  Briefly, thank means express gratitude or show appreciation to.</template></category> -->
 <category><pattern>THANK OFFERING</pattern><template>thank offering?  Briefly, thank offering means an offering made as an expression of thanks.</template></category>
-<category><pattern>THANK YOU</pattern><template>thank you?  Briefly, thank you means a conversational expression of gratitude.</template></category>
+<!-- <category><pattern>THANK YOU</pattern><template>thank you?  Briefly, thank you means a conversational expression of gratitude.</template></category> -->
 <category><pattern>THANKFUL</pattern><template>thankful?  Briefly, thankful means feeling or showing gratitude.</template></category>
 <category><pattern>THANKFULLY</pattern><template>thankfully?  Briefly, thankfully means for which you are thankful.</template></category>
 <category><pattern>THANKFULNESS</pattern><template>thankfulness?  Briefly, thankfulness means warm friendly feelings of gratitude.</template></category>
 <category><pattern>THANKLESS</pattern><template>thankless?  Briefly, thankless means not feeling or showing gratitude- Shakespeare.</template></category>
 <category><pattern>THANKLESS WRETCH</pattern><template>thankless wretch?  Briefly, thankless wretch means a person who shows no gratitude.</template></category>
-<category><pattern>THANKS</pattern><template>thanks?  Briefly, thanks means an acknowledgment of appreciation.</template></category>
+<!-- <category><pattern>THANKS</pattern><template>thanks?  Briefly, thanks means an acknowledgment of appreciation.</template></category> -->
 <category><pattern>THANKSGIVING</pattern><template>thanksgiving?  Briefly, thanksgiving means fourth Thursday in November in the United States; second Monday in October in Canada; commemorates a feast held in 1621 by the Pilgrims and the Wampanoag.</template></category>
 <category><pattern>THANKSGIVING CACTUS</pattern><template>thanksgiving cactus?  Briefly, thanksgiving cactus means South American jointed cactus with usually red flowers; often cultivated as a houseplant; sometimes classified as genus Schlumbergera.</template></category>
 <category><pattern>THANKSGIVING DAY</pattern><template>thanksgiving day?  Briefly, thanksgiving day means fourth Thursday in November in the United States; second Monday in October in Canada; commemorates a feast held in 1621 by the Pilgrims and the Wampanoag.</template></category>
@@ -4155,7 +4155,7 @@
 <category><pattern>THEOLOGIST</pattern><template>theologist?  Briefly, theologist means someone who is learned in theology or who speculates about theology (especially Christian theology).</template></category>
 <category><pattern>THEOLOGIZE</pattern><template>theologize?  Briefly, theologize means treat from a theological viewpoint or render theological in character.</template></category>
 <category><pattern>THEOLOGIZER</pattern><template>theologizer?  Briefly, theologizer means someone who is learned in theology or who speculates about theology (especially Christian theology).</template></category>
-<category><pattern>THEOLOGY</pattern><template>theology?  Briefly, theology means the rational and systematic study of religion and its influences and of the nature of religious truth.</template></category>
+<!-- <category><pattern>THEOLOGY</pattern><template>theology?  Briefly, theology means the rational and systematic study of religion and its influences and of the nature of religious truth.</template></category> -->
 <category><pattern>THEOPHANY</pattern><template>theophany?  Briefly, theophany means a visible (but not necessarily material) manifestation of a deity to a human person.</template></category>
 <category><pattern>THEOPHRASTACEAE</pattern><template>theophrastaceae?  Briefly, theophrastaceae means family of mainly tropical American trees and shrubs similar to those of the Myrsinaceae; often included in the Myrsinaceae.</template></category>
 <category><pattern>THEOPHRASTUS</pattern><template>theophrastus?  Briefly, theophrastus means Greek philosopher who was a student of Aristotle and who succeeded Aristotle as the leader of the Peripatetics (371-287 BC).</template></category>
@@ -4206,7 +4206,7 @@
 <category><pattern>THERAPY</pattern><template>therapy?  Briefly, therapy means the act of caring for someone (as by medication or remedial training etc.).</template></category>
 <category><pattern>THERAVADA</pattern><template>theravada?  Briefly, theravada means one of two great schools of Buddhist doctrine emphasizing personal salvation through your own efforts; a conservative form of Buddhism that adheres to Pali scriptures and the nontheistic ideal of self purification to Nirvana; the domina.</template></category>
 <category><pattern>THERAVADA BUDDHISM</pattern><template>theravada buddhism?  Briefly, theravada buddhism means one of two great schools of Buddhist doctrine emphasizing personal salvation through your own efforts; a conservative form of Buddhism that adheres to Pali scriptures and the nontheistic ideal of self purification to Nirvana; the domina.</template></category>
-<category><pattern>THERE</pattern><template>there?  Briefly, there means a location other than here; that place.</template></category>
+<!-- <category><pattern>THERE</pattern><template>there?  Briefly, there means a location other than here; that place.</template></category> -->
 <category><pattern>THEREABOUT</pattern><template>thereabout?  Briefly, thereabout means near that time or date.</template></category>
 <category><pattern>THEREABOUTS</pattern><template>thereabouts?  Briefly, thereabouts means near that time or date.</template></category>
 <category><pattern>THEREAFTER</pattern><template>thereafter?  Briefly, thereafter means from that time on.</template></category>
@@ -4264,7 +4264,7 @@
 <category><pattern>THERMODYNAMIC</pattern><template>thermodynamic?  Briefly, thermodynamic means of or concerned with thermodynamics.</template></category>
 <category><pattern>THERMODYNAMICAL</pattern><template>thermodynamical?  Briefly, thermodynamical means of or concerned with thermodynamics.</template></category>
 <category><pattern>THERMODYNAMICALLY</pattern><template>thermodynamically?  Briefly, thermodynamically means with respect to thermodynamics.</template></category>
-<category><pattern>THERMODYNAMICS</pattern><template>thermodynamics?  Briefly, thermodynamics means the branch of physics concerned with the conversion of different forms of energy.</template></category>
+<!-- <category><pattern>THERMODYNAMICS</pattern><template>thermodynamics?  Briefly, thermodynamics means the branch of physics concerned with the conversion of different forms of energy.</template></category> -->
 <category><pattern>THERMODYNAMICS OF EQUILIBRIUM</pattern><template>thermodynamics of equilibrium?  Briefly, thermodynamics of equilibrium means the aspect of thermodynamics concerned with thermal equilibrium.</template></category>
 <category><pattern>THERMOELECTRIC</pattern><template>thermoelectric?  Briefly, thermoelectric means involving or resulting from thermoelectricity.</template></category>
 <category><pattern>THERMOELECTRIC THERMOMETER</pattern><template>thermoelectric thermometer?  Briefly, thermoelectric thermometer means a thermometer that uses thermoelectric current to measure temperature.</template></category>
@@ -5256,7 +5256,7 @@
 <category><pattern>TIMBRE</pattern><template>timbre?  Briefly, timbre means the distinctive property of a complex sound (a voice or noise or musical sound).</template></category>
 <category><pattern>TIMBREL</pattern><template>timbrel?  Briefly, timbrel means small hand drum similar to a tambourine; formerly carried by itinerant jugglers.</template></category>
 <category><pattern>TIMBUKTU</pattern><template>timbuktu?  Briefly, timbuktu means a city in central Mali near the Niger river; formerly famous for its gold trade.</template></category>
-<category><pattern>TIME</pattern><template>time?  Briefly, time means an instance or single occasion for some event.</template></category>
+<!-- <category><pattern>TIME</pattern><template>time?  Briefly, time means an instance or single occasion for some event.</template></category> -->
 <category><pattern>TIME AND A HALF</pattern><template>time and a half?  Briefly, time and a half means a rate of pay that is 1.5 times the regular rate; for overtime work.</template></category>
 <category><pattern>TIME AND AGAIN</pattern><template>time and again?  Briefly, time and again means repeatedly.</template></category>
 <category><pattern>TIME AND MOTION STUDY</pattern><template>time and motion study?  Briefly, time and motion study means an analysis of a specific job in an effort to find the most efficient method in terms of time and effort.</template></category>
@@ -5487,7 +5487,7 @@
 <category><pattern>TIRE IRON</pattern><template>tire iron?  Briefly, tire iron means hand tool consisting of a lever that is used to force the casing of a pneumatic tire onto a steel wheel.</template></category>
 <category><pattern>TIRE OUT</pattern><template>tire out?  Briefly, tire out means exhaust or tire through overuse or great strain or stress.</template></category>
 <category><pattern>TIRE TOOL</pattern><template>tire tool?  Briefly, tire tool means hand tool consisting of a lever that is used to force the casing of a pneumatic tire onto a steel wheel.</template></category>
-<category><pattern>TIRED</pattern><template>tired?  Briefly, tired means depleted of strength or energy.</template></category>
+<!-- <category><pattern>TIRED</pattern><template>tired?  Briefly, tired means depleted of strength or energy.</template></category> -->
 <category><pattern>TIRED OF</pattern><template>tired of?  Briefly, tired of means having a strong distaste from surfeit.</template></category>
 <category><pattern>TIREDLY</pattern><template>tiredly?  Briefly, tiredly means in a weary manner.</template></category>
 <category><pattern>TIREDNESS</pattern><template>tiredness?  Briefly, tiredness means temporary loss of strength and energy resulting from hard physical or mental work.</template></category>
@@ -5711,10 +5711,10 @@
 <category><pattern>TOCSIN</pattern><template>tocsin?  Briefly, tocsin means the sound of an alarm (usually a bell).</template></category>
 <category><pattern>TOD</pattern><template>tod?  Briefly, tod means a unit of weight for wool equal to about 28 pounds.</template></category>
 <category><pattern>TODA</pattern><template>toda?  Briefly, toda means a member of a pastoral people living in the Nilgiri hills of southern India.</template></category>
-<category><pattern>TODAY</pattern><template>today?  Briefly, today means the present time or age.</template></category>
+<!-- <category><pattern>TODAY</pattern><template>today?  Briefly, today means the present time or age.</template></category> -->
 <category><pattern>TODD</pattern><template>todd?  Briefly, todd means Scottish chemist noted for his research into the structure of nucleic acids (born in 1907).</template></category>
 <category><pattern>TODDLE</pattern><template>toddle?  Briefly, toddle means walk unsteadily.</template></category>
-<category><pattern>TODDLER</pattern><template>toddler?  Briefly, toddler means a young child.</template></category>
+<!-- <category><pattern>TODDLER</pattern><template>toddler?  Briefly, toddler means a young child.</template></category> -->
 <category><pattern>TODDY</pattern><template>toddy?  Briefly, toddy means a mixed drink made of liquor and water with sugar and spices and served hot.</template></category>
 <category><pattern>TODDY ALM</pattern><template>toddy alm?  Briefly, toddy alm means fishtail palm of India to Malay Peninsula; sap yields a brown sugar (jaggery) and trunk pith yields sago.</template></category>
 <category><pattern>TODDY PALM</pattern><template>toddy palm?  Briefly, toddy palm means tall fan palm of Africa and India and Malaysia yielding a hard wood and sweet sap that is a source of palm wine and sugar; leaves used for thatching and weaving.</template></category>
@@ -5996,7 +5996,7 @@
 <category><pattern>TOO BIG FOR ONE'S BREECHES</pattern><template>too big for one's breeches?  Briefly, too big for one's breeches means used colloquially of one who is overly conceited or arrogant-Laurent Le Sage.</template></category>
 <category><pattern>TOO LARGE</pattern><template>too large?  Briefly, too large means excessively large.</template></category>
 <category><pattern>TOO LITTLE</pattern><template>too little?  Briefly, too little means not enough.</template></category>
-<category><pattern>TOO MUCH</pattern><template>too much?  Briefly, too much means being excessive or unreasonable.</template></category>
+<!-- <category><pattern>TOO MUCH</pattern><template>too much?  Briefly, too much means being excessive or unreasonable.</template></category> -->
 <category><pattern>TOO SOON</pattern><template>too soon?  Briefly, too soon means before the usual time or the time expected.</template></category>
 <category><pattern>TOO-CAREFUL</pattern><template>too-careful?  Briefly, too-careful means excessively or unduly careful.</template></category>
 <category><pattern>TOO-GENEROUS</pattern><template>too-generous?  Briefly, too-generous means very generous.</template></category>
@@ -6086,7 +6086,7 @@
 <category><pattern>TOPHUS</pattern><template>tophus?  Briefly, tophus means a deposit of urates around a joint or in the external ear; diagnostic of advanced or chronic gout.</template></category>
 <category><pattern>TOPI</pattern><template>topi?  Briefly, topi means a light-weight hat worn in tropical countries for protection from the sun.</template></category>
 <category><pattern>TOPIARY</pattern><template>topiary?  Briefly, topiary means a garden having shrubs clipped or trimmed into decorative shapes especially of animals.</template></category>
-<category><pattern>TOPIC</pattern><template>topic?  Briefly, topic means the subject matter of a conversation or discussion.</template></category>
+<!-- <category><pattern>TOPIC</pattern><template>topic?  Briefly, topic means the subject matter of a conversation or discussion.</template></category> -->
 <category><pattern>TOPIC SENTENCE</pattern><template>topic sentence?  Briefly, topic sentence means a sentence that states the topic of its paragraph.</template></category>
 <category><pattern>TOPICAL</pattern><template>topical?  Briefly, topical means pertaining to the surface of a body part.</template></category>
 <category><pattern>TOPICAL ANAESTHESIA</pattern><template>topical anaesthesia?  Briefly, topical anaesthesia means loss of sensation confined to the skin or mucous surfaces (as when benzocaine or lidocaine is applied to the surface).</template></category>
@@ -6278,7 +6278,7 @@
 <category><pattern>TOTALIZATOR</pattern><template>totalizator?  Briefly, totalizator means computer that registers bets and divides the total amount bet among those who won.</template></category>
 <category><pattern>TOTALIZE</pattern><template>totalize?  Briefly, totalize means make into a total.</template></category>
 <category><pattern>TOTALIZER</pattern><template>totalizer?  Briefly, totalizer means computer that registers bets and divides the total amount bet among those who won.</template></category>
-<category><pattern>TOTALLY</pattern><template>totally?  Briefly, totally means to a complete degree or to the full or entire extent (`whole' is often used informally for `wholly').</template></category>
+<!-- <category><pattern>TOTALLY</pattern><template>totally?  Briefly, totally means to a complete degree or to the full or entire extent (`whole' is often used informally for `wholly').</template></category> -->
 <category><pattern>TOTARA</pattern><template>totara?  Briefly, totara means valuable timber tree of New Zealand yielding hard reddish wood used for furniture and bridges and wharves.</template></category>
 <category><pattern>TOTE</pattern><template>tote?  Briefly, tote means a capacious bag or basket.</template></category>
 <category><pattern>TOTE BAG</pattern><template>tote bag?  Briefly, tote bag means a capacious bag or basket.</template></category>
@@ -6467,13 +6467,13 @@ Don't be rude. Just ask a question (politely).
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>STOP</pattern>
 <template>
 <think><set name="topic">interjection</set></think>
 OK. But ask me a question and I will carry on.
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>_ STOP</pattern>
@@ -6483,13 +6483,13 @@ Why? I am enjoying myself.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>STOP *</pattern>
 <template>
 <think><set name="topic">interjection</set></think>
 Why? I am enjoying myself.
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>_ STOP *</pattern>
@@ -6580,7 +6580,7 @@ OK. But ask me a question and I will carry on.
 </template>
   </category>
 
- <category>
+ <!-- <category>
   <pattern>BLIMEY</pattern> 
   <template>
 <think><set name="topic">interjection</set></think>
@@ -6598,7 +6598,7 @@ OK. But ask me a question and I will carry on.
 <li>That's got me beat. Another question please.</li>
 </random>  
 </template>
-  </category>
+  </category> -->
 
   <category>
   <pattern>BLIMEY *</pattern> 
@@ -6620,13 +6620,13 @@ OK. But ask me a question and I will carry on.
 </template>
 </category>
 
-  <category>
+  <!-- <category>
 <pattern>NONSENSE</pattern>
  <template>
 <think><set name="topic">interjection</set></think>
 It makes sense to me.
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>THAT IS NONSENSE</pattern>
@@ -6644,13 +6644,13 @@ It makes sense to me.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>RUBBISH</pattern>
  <template>
 <think><set name="topic">interjection</set></think>
 It makes sense to me.
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>THAT IS RUBBISH</pattern>
@@ -6668,12 +6668,12 @@ It makes sense to me.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>O K</pattern>
  <template>
 <srai>OK</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>OKE</pattern>
@@ -6682,12 +6682,12 @@ It makes sense to me.
 </template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>OKAY</pattern>
  <template>
 <srai>OK</srai>
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>OKEY DOKEY</pattern>

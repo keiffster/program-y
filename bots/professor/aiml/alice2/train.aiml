@@ -283,7 +283,7 @@ Ok.  I think I got that.
 </think>
 <learn>
   <category><pattern>RANDOM GOSSIP</pattern>
-<template><random><eval><get name="gossiplist"/></eval></random></template>
+<template><eval><get name="gossiplist"/></eval></template>
 </category>
 </learn>
 <srai>RANDOM GOSSIP</srai></template>

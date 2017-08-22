@@ -408,7 +408,7 @@
             </condition>
         </template>
     </category>
-    <category>
+ <!--   <category> (node missing object attribue/element in )
         <pattern>ADDTRIPLE TEST</pattern>
         <template>Adding triples:
             <addtriple>
@@ -436,8 +436,8 @@
                 <pred>capitalOf</pred>
             </addtriple>
         </template>
-    </category>
-    <category>
+    </category> -->
+ <!--   <category>  ( node missing object attribue/element )
         <pattern>DELETETRIPLE TEST</pattern>
         <template>Adding triples:
             <addtriple>
@@ -494,7 +494,7 @@
                 </q>
             </select>
         </template>
-    </category>
+    </category> -->
     <category>
         <pattern>WHICH IS LARGER ^ <set>entity</set> OR ^
             <set>entity</set>
@@ -3018,7 +3018,7 @@
             </condition>
         </template>
     </category>
-    <category>
+<!--    <category>  (SRAIX node, service attribute missing)
         <pattern>NAME <set>number</set> *
         </pattern>
         <template>
@@ -3098,7 +3098,7 @@
                 </li>
             </condition>
         </template>
-    </category>
+    </category>  -->
     <category>
         <pattern>
             <set>name</set>

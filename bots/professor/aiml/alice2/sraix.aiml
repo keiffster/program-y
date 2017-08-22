@@ -1819,6 +1819,6 @@
 <template><sraix service="pannous">WHY DO WE <star/></sraix></template>
 </category>
 <category><pattern>HOW DO YOU FIND *</pattern>
-<template><sraix services="pannous">HOW DO YOU FIND <star/></sraix></template>
+<template><sraix service="pannous">HOW DO YOU FIND <star/></sraix></template>
 </category>
 </aiml>

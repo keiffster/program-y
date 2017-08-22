@@ -153,7 +153,7 @@
 <category><pattern>OF A SUDDEN</pattern><template>of a sudden?  Briefly, of a sudden means happening unexpectedly.</template></category>
 <category><pattern>OF AGE</pattern><template>of age?  Briefly, of age means having attained a specific age; (`aged' is pronounced as one syllable).</template></category>
 <category><pattern>OF ALL TIME</pattern><template>of all time?  Briefly, of all time means at any time.</template></category>
-<category><pattern>OF COURSE</pattern><template>of course?  Briefly, of course means as might be expected.</template></category>
+<!-- <category><pattern>OF COURSE</pattern><template>of course?  Briefly, of course means as might be expected.</template></category> -->
 <category><pattern>OF EACH PERSON</pattern><template>of each person?  Briefly, of each person means per person.</template></category>
 <category><pattern>OF HER OWN</pattern><template>of her own?  Briefly, of her own means belonging completely to yourself.</template></category>
 <category><pattern>OF HIS OWN</pattern><template>of his own?  Briefly, of his own means belonging completely to yourself.</template></category>
@@ -311,7 +311,7 @@
 <category><pattern>OGLER</pattern><template>ogler?  Briefly, ogler means a viewer who gives a flirtatious or lewd look at another person.</template></category>
 <category><pattern>OGRE</pattern><template>ogre?  Briefly, ogre means a cruel wicked and inhuman person.</template></category>
 <category><pattern>OGRESS</pattern><template>ogress?  Briefly, ogress means a female ogre.</template></category>
-<category><pattern>OH</pattern><template>oh?  Briefly, oh means a midwestern state in north central United States in the Great Lakes region.</template></category>
+<!-- <category><pattern>OH</pattern><template>oh?  Briefly, oh means a midwestern state in north central United States in the Great Lakes region.</template></category> -->
 <category><pattern>O'HARA</pattern><template>o'hara?  Briefly, o'hara means United States writer (1905-1970).</template></category>
 <category><pattern>OHIO</pattern><template>ohio?  Briefly, ohio means a midwestern state in north central United States in the Great Lakes region.</template></category>
 <category><pattern>OHIO BUCKEYE</pattern><template>ohio buckeye?  Briefly, ohio buckeye means a buckeye with scaly gray bark that is found in the central United States.</template></category>
@@ -395,19 +395,19 @@
 <category><pattern>OJIBWA</pattern><template>ojibwa?  Briefly, ojibwa means a member of an Algonquian people who lived west of Lake Superior.</template></category>
 <category><pattern>OJIBWAY</pattern><template>ojibway?  Briefly, ojibway means a member of an Algonquian people who lived west of Lake Superior.</template></category>
 <category><pattern>OJOS DEL SALADO</pattern><template>ojos del salado?  Briefly, ojos del salado means a mountain in the Andes on the border between Argentina and Chile (22 means572 feet high).</template></category>
-<category><pattern>OK</pattern><template>ok?  Briefly, ok means a state in south central United States.</template></category>
+<!-- <category><pattern>OK</pattern><template>ok?  Briefly, ok means a state in south central United States.</template></category> -->
 <category><pattern>OKA</pattern><template>oka?  Briefly, oka means a Turkish unit of weight equal to about 2.75 pounds.</template></category>
 <category><pattern>OKAPI</pattern><template>okapi?  Briefly, okapi means similar to the giraffe but smaller with much shorter neck and stripe on the legs.</template></category>
 <category><pattern>OKAPIA</pattern><template>okapia?  Briefly, okapia means okapis.</template></category>
 <category><pattern>OKAPIA JOHNSTONI</pattern><template>okapia johnstoni?  Briefly, okapia johnstoni means similar to the giraffe but smaller with much shorter neck and stripe on the legs.</template></category>
-<category><pattern>OKAY</pattern><template>okay?  Briefly, okay means an endorsement.</template></category>
+<!-- <category><pattern>OKAY</pattern><template>okay?  Briefly, okay means an endorsement.</template></category> -->
 <category><pattern>OKEECHOBEE</pattern><template>okeechobee?  Briefly, okeechobee means a lake in southeast Florida north of the Everglades.</template></category>
 <category><pattern>O'KEEFFE</pattern><template>o'keeffe?  Briefly, o'keeffe means United States painter (1887-1986).</template></category>
 <category><pattern>OKEFENOKEE SWAMP</pattern><template>okefenokee swamp?  Briefly, okefenokee swamp means a large swampy area of northeast Florida and southeast Georgia.</template></category>
 <category><pattern>OKEH</pattern><template>okeh?  Briefly, okeh means an endorsement.</template></category>
 <category><pattern>OKEN</pattern><template>oken?  Briefly, oken means German naturalist whose speculations that plants and animals are made up of tiny living `infusoria' led to the cell theory (1779-1851).</template></category>
 <category><pattern>OKENFUSS</pattern><template>okenfuss?  Briefly, okenfuss means German naturalist whose speculations that plants and animals are made up of tiny living `infusoria' led to the cell theory (1779-1851).</template></category>
-<category><pattern>OKEY</pattern><template>okey?  Briefly, okey means an endorsement.</template></category>
+<!-- <category><pattern>OKEY</pattern><template>okey?  Briefly, okey means an endorsement.</template></category> -->
 <category><pattern>OKINAWA</pattern><template>okinawa?  Briefly, okinawa means the largest island of the central Ryukyu Islands.</template></category>
 <category><pattern>OKINAWA CAMPAIGN</pattern><template>okinawa campaign?  Briefly, okinawa campaign means a campaign in the closing days of World War II in the Pacific (April to June 1945); in savage close-quarter fighting United States marines and regular army troops took the island from the Japanese; considered the greatest victory of the.</template></category>
 <category><pattern>OKLAHOMA</pattern><template>oklahoma?  Briefly, oklahoma means a state in south central United States.</template></category>
@@ -415,7 +415,7 @@
 <category><pattern>OKRA</pattern><template>okra?  Briefly, okra means long green edible beaked pods of the okra plant.</template></category>
 <category><pattern>OKRA PLANT</pattern><template>okra plant?  Briefly, okra plant means tall coarse annual of Old World tropics widely cultivated in southern United States and West Indies for its long mucilaginous green pods used as basis for soups and stews; sometimes placed in genus Hibiscus.</template></category>
 <category><pattern>OKTOBERFEST</pattern><template>oktoberfest?  Briefly, oktoberfest means a strong lager made originally in Germany for the Oktoberfest celebration; sweet and copper-colored.</template></category>
-<category><pattern>OLA</pattern><template>ola?  Briefly, ola means leaf or strip from a leaf of the talipot palm used in India for writing paper.</template></category>
+<!-- <category><pattern>OLA</pattern><template>ola?  Briefly, ola means leaf or strip from a leaf of the talipot palm used in India for writing paper.</template></category> -->
 <category><pattern>OLAF II</pattern><template>olaf ii?  Briefly, olaf ii means King and patron saint of Norway (995-1030).</template></category>
 <category><pattern>OLAV II</pattern><template>olav ii?  Briefly, olav ii means King and patron saint of Norway (995-1030).</template></category>
 <category><pattern>OLD</pattern><template>old?  Briefly, old means past times (especially in the phrase `in days of old').</template></category>
@@ -1352,7 +1352,7 @@
 <category><pattern>OPUNTIALES</pattern><template>opuntiales?  Briefly, opuntiales means coextensive with the family Cactaceae: cactuses.</template></category>
 <category><pattern>OPUS</pattern><template>opus?  Briefly, opus means a musical work that has been created.</template></category>
 <category><pattern>OPV</pattern><template>opv?  Briefly, opv means an oral poliovirus vaccine (containing live but weakened poliovirus) that is given to provide immunity to poliomyelitis.</template></category>
-<category><pattern>OR</pattern><template>or?  Briefly, or means a state in northwestern United States on the Pacific.</template></category>
+<!-- <category><pattern>OR</pattern><template>or?  Briefly, or means a state in northwestern United States on the Pacific.</template></category> -->
 <category><pattern>OR CIRCUIT</pattern><template>or circuit?  Briefly, or circuit means a gate circuit in a computer that fires when any of its inputs fire.</template></category>
 <category><pattern>OR ELSE</pattern><template>or else?  Briefly, or else means in place of means or as an alternative to.</template></category>
 <category><pattern>OR GATE</pattern><template>or gate?  Briefly, or gate means a gate circuit in a computer that fires when any of its inputs fire.</template></category>
@@ -1999,7 +1999,7 @@
 <category><pattern>ORIENTATE</pattern><template>orientate?  Briefly, orientate means determine one's position with reference to another point.</template></category>
 <category><pattern>ORIENTATED</pattern><template>orientated?  Briefly, orientated means adjusted or located in relation to surroundings or circumstances; sometimes used in combination.</template></category>
 <category><pattern>ORIENTATING</pattern><template>orientating?  Briefly, orientating means positioning with respect to a reference system or determining your bearings physically or intellectually.</template></category>
-<category><pattern>ORIENTATION</pattern><template>orientation?  Briefly, orientation means the act of orienting.</template></category>
+<!-- <category><pattern>ORIENTATION</pattern><template>orientation?  Briefly, orientation means the act of orienting.</template></category> -->
 <category><pattern>ORIENTATION COURSE</pattern><template>orientation course?  Briefly, orientation course means a course introducing a new situation or environment.</template></category>
 <category><pattern>ORIENTED</pattern><template>oriented?  Briefly, oriented means adjusted or located in relation to surroundings or circumstances; sometimes used in combination.</template></category>
 <category><pattern>ORIENTING</pattern><template>orienting?  Briefly, orienting means positioning with respect to a reference system or determining your bearings physically or intellectually.</template></category>
@@ -3347,10 +3347,10 @@
 <category><pattern>NOSTRUM</pattern><template>nostrum?  Briefly, nostrum means hypothetical remedy for all ills or diseases; once sought by the alchemists.</template></category>
 <category><pattern>NOSY</pattern><template>nosy?  Briefly, nosy means offensively curious or inquisitive.</template></category>
 <category><pattern>NOSY-PARKER</pattern><template>nosy-parker?  Briefly, nosy-parker means a person who meddles in the affairs of others.</template></category>
-<category><pattern>NOT</pattern><template>not?  Briefly, not means negation of a word or group of words.</template></category>
+<!-- <category><pattern>NOT</pattern><template>not?  Briefly, not means negation of a word or group of words.</template></category> -->
 <category><pattern>NOT ABLE</pattern><template>not able?  Briefly, not able means not having the necessary means or skill or know-how.</template></category>
 <category><pattern>NOT ABSOLUTELY</pattern><template>not absolutely?  Briefly, not absolutely means subject to a condition.</template></category>
-<category><pattern>NOT BAD</pattern><template>not bad?  Briefly, not bad means very good.</template></category>
+<!-- <category><pattern>NOT BAD</pattern><template>not bad?  Briefly, not bad means very good.</template></category> -->
 <category><pattern>NOT BY A BLAME SIGHT</pattern><template>not by a blame sight?  Briefly, not by a blame sight means definitely not.</template></category>
 <category><pattern>NOT BY A LONG SIGHT</pattern><template>not by a long sight?  Briefly, not by a long sight means definitely not.</template></category>
 <category><pattern>NOT DELAYED</pattern><template>not delayed?  Briefly, not delayed means at the expected time.</template></category>
@@ -3362,7 +3362,7 @@
 <category><pattern>NOT KIN</pattern><template>not kin?  Briefly, not kin means not connected by birth or family.</template></category>
 <category><pattern>NOT LATE</pattern><template>not late?  Briefly, not late means at the expected time.</template></category>
 <category><pattern>NOT LISTED</pattern><template>not listed?  Briefly, not listed means not in the telephone directory (British usage).</template></category>
-<category><pattern>NOT LONG</pattern><template>not long?  Briefly, not long means for a short time.</template></category>
+<!-- <category><pattern>NOT LONG</pattern><template>not long?  Briefly, not long means for a short time.</template></category> -->
 <category><pattern>NOT ONLY</pattern><template>not only?  Briefly, not only means not merely (used to introduce the first phrase of a correlative construction and usually followed by `but' or `but also').</template></category>
 <category><pattern>NOT SUITABLY</pattern><template>not suitably?  Briefly, not suitably means in an inappropriate manner.</template></category>
 <category><pattern>NOT SURPRISED</pattern><template>not surprised?  Briefly, not surprised means not surprised or expressing surprise.</template></category>
@@ -3383,7 +3383,7 @@
 <category><pattern>NOTATIONAL SYSTEM</pattern><template>notational system?  Briefly, notational system means a technical system of symbols used to represent special things.</template></category>
 <category><pattern>NOTCH</pattern><template>notch?  Briefly, notch means a V-shaped indentation.</template></category>
 <category><pattern>NOTCHED</pattern><template>notched?  Briefly, notched means notched like a saw with teeth pointing toward the apex.</template></category>
-<category><pattern>NOTE</pattern><template>note?  Briefly, note means a short personal letter.</template></category>
+<!-- <category><pattern>NOTE</pattern><template>note?  Briefly, note means a short personal letter.</template></category> -->
 <category><pattern>NOTE OF HAND</pattern><template>note of hand?  Briefly, note of hand means a promise to pay a specified amount on demand or at a certain time.</template></category>
 <category><pattern>NOTE PAYABLE</pattern><template>note payable?  Briefly, note payable means a note promising to pay a certain amount of money at a certain time.</template></category>
 <category><pattern>NOTE RECEIVABLE</pattern><template>note receivable?  Briefly, note receivable means your right in a promissory note in which the maker promises to pay a certain amount of money at a certain time.</template></category>
@@ -3400,7 +3400,7 @@
 <category><pattern>NOTEPAD</pattern><template>notepad?  Briefly, notepad means a pad of paper for keeping notes.</template></category>
 <category><pattern>NOTEPAPER</pattern><template>notepaper?  Briefly, notepaper means writing paper intended for writing short notes or letters.</template></category>
 <category><pattern>NOTEWORTHY</pattern><template>noteworthy?  Briefly, noteworthy means worthy of notice.</template></category>
-<category><pattern>NOTHING</pattern><template>nothing?  Briefly, nothing means a quantity of no importance.</template></category>
+<!-- <category><pattern>NOTHING</pattern><template>nothing?  Briefly, nothing means a quantity of no importance.</template></category> -->
 <category><pattern>NOTHINGNESS</pattern><template>nothingness?  Briefly, nothingness means the state of nonexistence.</template></category>
 <category><pattern>NOTHINGS</pattern><template>nothings?  Briefly, nothings means inconsequential conversation.</template></category>
 <category><pattern>NOTHOFAGUS</pattern><template>nothofagus?  Briefly, nothofagus means beeches of temperate southern hemisphere except Africa: southern beech.</template></category>
@@ -3500,7 +3500,7 @@
 <category><pattern>NOVOCAIN</pattern><template>novocain?  Briefly, novocain means procaine administered as a hydrochloride (trade name Novocain).</template></category>
 <category><pattern>NOVOCAINE</pattern><template>novocaine?  Briefly, novocaine means procaine administered as a hydrochloride (trade name Novocain).</template></category>
 <category><pattern>NOVOSIBIRSK</pattern><template>novosibirsk?  Briefly, novosibirsk means a city in the Asian part of Russia on the Ob river; largest city in Siberia.</template></category>
-<category><pattern>NOW</pattern><template>now?  Briefly, now means the momentary present.</template></category>
+<!-- <category><pattern>NOW</pattern><template>now?  Briefly, now means the momentary present.</template></category> -->
 <category><pattern>NOW AND AGAIN</pattern><template>now and again?  Briefly, now and again means now and then or here and there.</template></category>
 <category><pattern>NOW AND THEN</pattern><template>now and then?  Briefly, now and then means now and then or here and there.</template></category>
 <category><pattern>NOW NOW</pattern><template>now now?  Briefly, now now means interjection of rebuke.</template></category>
@@ -3519,7 +3519,7 @@
 <category><pattern>NOXIPTILINE</pattern><template>noxiptiline?  Briefly, noxiptiline means a tricyclic antidepressant drug.</template></category>
 <category><pattern>NOYES</pattern><template>noyes?  Briefly, noyes means English poet (1880-1958).</template></category>
 <category><pattern>NOZZLE</pattern><template>nozzle?  Briefly, nozzle means a projecting spout from which a fluid is discharged.</template></category>
-<category><pattern>NP</pattern><template>np?  Briefly, np means a radioactive transuranic metallic element; found in trace amounts in uranium ores; a by-product of the production of plutonium.</template></category>
+<!-- <category><pattern>NP</pattern><template>np?  Briefly, np means a radioactive transuranic metallic element; found in trace amounts in uranium ores; a by-product of the production of plutonium.</template></category> -->
 <category><pattern>NPA</pattern><template>npa?  Briefly, npa means a terrorist organization that is the militant wing of the Communist Party of the Philippines; a Maoist organization formed to overthrow the government; uses hit squads called Sparrow Units; opposes United States military presence in the.</template></category>
 <category><pattern>NPC</pattern><template>npc?  Briefly, npc means an agency that serves as the focal point for all Intelligence Community activities related to nonproliferation of weapons of mass destruction and their missile delivery systems.</template></category>
 <category><pattern>NRA</pattern><template>nra?  Briefly, nra means a powerful lobby that advocates the right to own and bear arms and rejects any gun regulation by the government.</template></category>
@@ -4696,7 +4696,7 @@
 <category><pattern>N</pattern><template>n?  Briefly, n means concentration expressed in gram equivalents of solute per liter.</template></category>
 <category><pattern>N. Y. STOCK EXCHANGE</pattern><template>n. y. stock exchange?  Briefly, n. y. stock exchange means a stock exchange in New York.</template></category>
 <category><pattern>N.B.</pattern><template>n.b?.  Briefly, n.b. means a Latin phrase (or its abbreviation) used to indicate that special attention should be paid to something.</template></category>
-<category><pattern>NA</pattern><template>na?  Briefly, na means a silvery soft waxy metallic element of the alkali metal group; occurs abundantly in natural compounds (especially in salt water); burns with a yellow flame and reacts violently in water; occurs in sea water and in the mineral halite (r.</template></category>
+<!-- <category><pattern>NA</pattern><template>na?  Briefly, na means a silvery soft waxy metallic element of the alkali metal group; occurs abundantly in natural compounds (especially in salt water); burns with a yellow flame and reacts violently in water; occurs in sea water and in the mineral halite (r.</template></category> -->
 <category><pattern>NAB</pattern><template>nab?  Briefly, nab means tag the base runner to get him out.</template></category>
 <category><pattern>NABALUS</pattern><template>nabalus?  Briefly, nabalus means genus of North American and east Asian perennial herbs; sometimes included in genus Prenanthes.</template></category>
 <category><pattern>NABALUS ALBA</pattern><template>nabalus alba?  Briefly, nabalus alba means herb of northeastern North America having drooping clusters of yellowish-white flowers; sometimes placed in genus Prenanthes.</template></category>
@@ -4717,7 +4717,7 @@
 <category><pattern>NACREOUS</pattern><template>nacreous?  Briefly, nacreous means consisting of or resembling mother-of-pearl.</template></category>
 <category><pattern>NACREOUS CLOUD</pattern><template>nacreous cloud?  Briefly, nacreous cloud means a luminous iridescent cloud at a high altitude that may be seen when the sun is a few degrees below the horizon.</template></category>
 <category><pattern>NAD</pattern><template>nad?  Briefly, nad means a coenzyme present in most living cells and derived from the B vitamin nicotinic acid; serves as a reductant in various metabolic processes.</template></category>
-<category><pattern>NADA</pattern><template>nada?  Briefly, nada means a quantity of no importance.</template></category>
+<!-- <category><pattern>NADA</pattern><template>nada?  Briefly, nada means a quantity of no importance.</template></category> -->
 <category><pattern>NADA DAIQUIRI</pattern><template>nada daiquiri?  Briefly, nada daiquiri means a daiquiri made without alcohol.</template></category>
 <category><pattern>NA-DENE</pattern><template>na-dene?  Briefly, na-dene means a family of North American Indian languages.</template></category>
 <category><pattern>NADINE GORDIMER</pattern><template>nadine gordimer?  Briefly, nadine gordimer means South African novelist and short-story writer whose work describes the effects of apartheid (born in 1923).</template></category>
@@ -4809,7 +4809,7 @@
 <category><pattern>NALOXONE</pattern><template>naloxone?  Briefly, naloxone means a potent narcotic antagonist (trade name Narcan) especially effective with morphine.</template></category>
 <category><pattern>NALTREXONE</pattern><template>naltrexone?  Briefly, naltrexone means an oral antagonist against the action of opiates.</template></category>
 <category><pattern>NAMBY-PAMBY</pattern><template>namby-pamby?  Briefly, namby-pamby means an insipid weakling who is foolishly sentimental.</template></category>
-<category><pattern>NAME</pattern><template>name?  Briefly, name means a language unit by which a person or thing is known.</template></category>
+<!-- <category><pattern>NAME</pattern><template>name?  Briefly, name means a language unit by which a person or thing is known.</template></category> -->
 <category><pattern>NAME AND ADDRESS</pattern><template>name and address?  Briefly, name and address means written directions for finding some location; written on letters or packages that are to be delivered to that location.</template></category>
 <category><pattern>NAME CALLING</pattern><template>name calling?  Briefly, name calling means verbal abuse; a crude substitute for argument.</template></category>
 <category><pattern>NAME DAY</pattern><template>name day?  Briefly, name day means the feast day of a saint whose name one bears.</template></category>
@@ -5131,7 +5131,7 @@
 <category><pattern>NATIONALIST CHINA</pattern><template>nationalist china?  Briefly, nationalist china means a government on the island of Taiwan established in 1949 by Chiang Kai-shek after the conquest of mainland China by the communists led by Mao Zedong.</template></category>
 <category><pattern>NATIONALIST LEADER</pattern><template>nationalist leader?  Briefly, nationalist leader means the leader of a nationalist movement.</template></category>
 <category><pattern>NATIONALISTIC</pattern><template>nationalistic?  Briefly, nationalistic means fanatically patriotic.</template></category>
-<category><pattern>NATIONALITY</pattern><template>nationality?  Briefly, nationality means the status of belonging to a particular nation by birth or naturalization.</template></category>
+<!-- <category><pattern>NATIONALITY</pattern><template>nationality?  Briefly, nationality means the status of belonging to a particular nation by birth or naturalization.</template></category> -->
 <category><pattern>NATIONALIZATION</pattern><template>nationalization?  Briefly, nationalization means the action of forming or becoming a nation.</template></category>
 <category><pattern>NATIONALIZE</pattern><template>nationalize?  Briefly, nationalize means put under state control or ownership.</template></category>
 <category><pattern>NATIONALLY</pattern><template>nationally?  Briefly, nationally means with regard to a nation taken as a whole.</template></category>
@@ -5739,7 +5739,7 @@
 <category><pattern>NEPHELIUM LITCHI</pattern><template>nephelium litchi?  Briefly, nephelium litchi means Chinese tree cultivated especially in Philippines and India for its edible fruit; sometimes placed in genus Nephelium.</template></category>
 <category><pattern>NEPHELIUM LONGANA</pattern><template>nephelium longana?  Briefly, nephelium longana means tree of southeastern Asia to Australia grown primarily for its sweet edible fruit resembling litchi nuts; sometimes placed in genera Euphoria or Nephelium.</template></category>
 <category><pattern>NEPHELIUM MUTABILE</pattern><template>nephelium mutabile?  Briefly, nephelium mutabile means East Indian fruit tree bearing fruit similar to but sweeter than that of the rambutan.</template></category>
-<category><pattern>NEPHEW</pattern><template>nephew?  Briefly, nephew means a son of your brother or sister.</template></category>
+<!-- <category><pattern>NEPHEW</pattern><template>nephew?  Briefly, nephew means a son of your brother or sister.</template></category> -->
 <category><pattern>NEPHOLOGY</pattern><template>nephology?  Briefly, nephology means the branch of meteorology that studies clouds and cloud formation.</template></category>
 <category><pattern>NEPHOSCOPE</pattern><template>nephoscope?  Briefly, nephoscope means a grid-like measuring instrument for measuring the altitude means direction means and velocity of movement of clouds.</template></category>
 <category><pattern>NEPHRALGIA</pattern><template>nephralgia?  Briefly, nephralgia means pain in the kidney (usually felt in the loins).</template></category>
@@ -6006,7 +6006,7 @@
 <category><pattern>NEUROSARCOMA</pattern><template>neurosarcoma?  Briefly, neurosarcoma means a malignant neoplasm of nerve tissue and fibrous tissue and connective tissue.</template></category>
 <category><pattern>NEUROSCIENCE</pattern><template>neuroscience?  Briefly, neuroscience means the scientific study of the nervous system.</template></category>
 <category><pattern>NEUROSCIENTIST</pattern><template>neuroscientist?  Briefly, neuroscientist means a neurobiologist who specializes in the study of the brain.</template></category>
-<category><pattern>NEUROSIS</pattern><template>neurosis?  Briefly, neurosis means a mental or personality disturbance not attributable to any known neurological or organic dysfunction.</template></category>
+<!-- <category><pattern>NEUROSIS</pattern><template>neurosis?  Briefly, neurosis means a mental or personality disturbance not attributable to any known neurological or organic dysfunction.</template></category> -->
 <category><pattern>NEUROSPORA</pattern><template>neurospora?  Briefly, neurospora means genus of fungi with black perithecia used extensively in genetic research; includes some forms with orange spore masses that cause severe damage in bakeries.</template></category>
 <category><pattern>NEUROSURGEON</pattern><template>neurosurgeon?  Briefly, neurosurgeon means someone who does surgery on the nervous system (especially the brain).</template></category>
 <category><pattern>NEUROSURGERY</pattern><template>neurosurgery?  Briefly, neurosurgery means any surgery that involves the nervous system (brain or spinal cord or peripheral nerves).</template></category>
@@ -6039,7 +6039,7 @@
 <category><pattern>NEUTRALIZATION REACTION</pattern><template>neutralization reaction?  Briefly, neutralization reaction means a chemical reaction in which an acid and a base interact with the formation of a salt; with strong acids and bases the essential reaction is the combination of hydrogen ions with hydroxyl ions to form water.</template></category>
 <category><pattern>NEUTRALIZE</pattern><template>neutralize?  Briefly, neutralize means make politically neutral and thus inoffensive.</template></category>
 <category><pattern>NEUTRALIZED</pattern><template>neutralized?  Briefly, neutralized means made neutral in some respect; deprived of distinctive characteristics.</template></category>
-<category><pattern>NEUTRINO</pattern><template>neutrino?  Briefly, neutrino means an elementary particle with zero charge and zero mass.</template></category>
+<!-- <category><pattern>NEUTRINO</pattern><template>neutrino?  Briefly, neutrino means an elementary particle with zero charge and zero mass.</template></category> -->
 <category><pattern>NEUTRON</pattern><template>neutron?  Briefly, neutron means an elementary particle with 0 charge and mass about equal to a proton; enters into the structure of the atomic nucleus.</template></category>
 <category><pattern>NEUTRON BOMB</pattern><template>neutron bomb?  Briefly, neutron bomb means atom bomb that produces lethal neutrons with less blast.</template></category>
 <category><pattern>NEUTRON FLUX</pattern><template>neutron flux?  Briefly, neutron flux means the rate of flow of neutrons; the number of neutrons passing through a unit area in unit time.</template></category>
@@ -6203,7 +6203,7 @@
 <category><pattern>NEWNESS</pattern><template>newness?  Briefly, newness means the opposite of oldness.</template></category>
 <category><pattern>NEWPORT</pattern><template>newport?  Briefly, newport means a port city in southeastern Wales.</template></category>
 <category><pattern>NEWPORT NEWS</pattern><template>newport news?  Briefly, newport news means a port city in southeastern Virginia at the mouth of the James River off Hampton Roads; large shipyards.</template></category>
-<category><pattern>NEWS</pattern><template>news?  Briefly, news means new information about specific and timely events.</template></category>
+<!-- <category><pattern>NEWS</pattern><template>news?  Briefly, news means new information about specific and timely events.</template></category> -->
 <category><pattern>NEWS AGENCY</pattern><template>news agency?  Briefly, news agency means an agency to collects news reports for newspapers and distributes it electronically.</template></category>
 <category><pattern>NEWS ARTICLE</pattern><template>news article?  Briefly, news article means an article reporting news.</template></category>
 <category><pattern>NEWS BULLETIN</pattern><template>news bulletin?  Briefly, news bulletin means a short news announcement concerning some on-going news story.</template></category>
@@ -6263,7 +6263,7 @@
 <category><pattern>NEWSY</pattern><template>newsy?  Briefly, newsy means full of news.</template></category>
 <category><pattern>NEWT</pattern><template>newt?  Briefly, newt means small usually bright-colored semiaquatic salamanders of North America and Europe and northern Asia.</template></category>
 <category><pattern>NEWTON</pattern><template>newton?  Briefly, newton means English mathematician and physicist; remembered for developing the calculus and for his law of gravitation and his three laws of motion (1642-1727).</template></category>
-<category><pattern>NEWTONIAN</pattern><template>newtonian?  Briefly, newtonian means a follower of Isaac Newton.</template></category>
+<!-- <category><pattern>NEWTONIAN</pattern><template>newtonian?  Briefly, newtonian means a follower of Isaac Newton.</template></category> -->
 <category><pattern>NEWTONIAN MECHANICS</pattern><template>newtonian mechanics?  Briefly, newtonian mechanics means the branch of mechanics based on Newton's laws of motion.</template></category>
 <category><pattern>NEWTONIAN REFLECTOR</pattern><template>newtonian reflector?  Briefly, newtonian reflector means reflecting telescope in which the image is viewed through an eyepiece perpendicular to main axis.</template></category>
 <category><pattern>NEWTONIAN TELESCOPE</pattern><template>newtonian telescope?  Briefly, newtonian telescope means reflecting telescope in which the image is viewed through an eyepiece perpendicular to main axis.</template></category>
@@ -6298,7 +6298,7 @@
 <category><pattern>NGUYEN TAT THANH</pattern><template>nguyen tat thanh?  Briefly, nguyen tat thanh means Vietnamese communist statesman who fought the Japanese in World War II and the French until 1954 and South vietnam until 1975 (1890-1969).</template></category>
 <category><pattern>NGWEE</pattern><template>ngwee?  Briefly, ngwee means 100 ngwee equal 1 kwacha.</template></category>
 <category><pattern>NH</pattern><template>nh?  Briefly, nh means a state in New England; one of the original 13 colonies.</template></category>
-<category><pattern>NI</pattern><template>ni?  Briefly, ni means a hard malleable ductile silvery metallic element that is resistant to corrosion; used in alloys; occurs in pentlandite and smaltite and garnierite and millerite.</template></category>
+<!-- <category><pattern>NI</pattern><template>ni?  Briefly, ni means a hard malleable ductile silvery metallic element that is resistant to corrosion; used in alloys; occurs in pentlandite and smaltite and garnierite and millerite.</template></category> -->
 <category><pattern>NIACIN</pattern><template>niacin?  Briefly, niacin means a B vitamin essential for the normal function of the nervous system and the gastrointestinal tract.</template></category>
 <category><pattern>NIAGARA</pattern><template>niagara?  Briefly, niagara means waterfall in Canada is the Horseshoe Falls; in the United States it is the American Falls.</template></category>
 <category><pattern>NIAGARA FALLS</pattern><template>niagara falls?  Briefly, niagara falls means waterfall in Canada is the Horseshoe Falls; in the United States it is the American Falls.</template></category>
@@ -6322,7 +6322,7 @@
 <category><pattern>NICARAGUAN MONETARY UNIT</pattern><template>nicaraguan monetary unit?  Briefly, nicaraguan monetary unit means monetary unit in Nicaragua.</template></category>
 <category><pattern>NICCOLO MACHIAVELLI</pattern><template>niccolo machiavelli?  Briefly, niccolo machiavelli means a statesman of Florence who advocated a strong central government (1469-1527).</template></category>
 <category><pattern>NICCOLO PAGANINI</pattern><template>niccolo paganini?  Briefly, niccolo paganini means Italian violinist and composer of musice for the violin (1782-1840).</template></category>
-<category><pattern>NICE</pattern><template>nice?  Briefly, nice means a city in southeastern France on the Mediterranean; the leading resort on the French Riviera.</template></category>
+<!-- <category><pattern>NICE</pattern><template>nice?  Briefly, nice means a city in southeastern France on the Mediterranean; the leading resort on the French Riviera.</template></category> -->
 <category><pattern>NICELY</pattern><template>nicely?  Briefly, nicely means in a nice way.</template></category>
 <category><pattern>NICENE</pattern><template>nicene?  Briefly, nicene means of or relating to the ancient city of Nicaea in Asia Minor.</template></category>
 <category><pattern>NICENE CREED</pattern><template>nicene creed?  Briefly, nicene creed means a formal creed summarizing Christian beliefs; first adopted in 325 and later expanded.</template></category>
@@ -6352,7 +6352,7 @@
 <category><pattern>NICKER SEED</pattern><template>nicker seed?  Briefly, nicker seed means hard shiny gray seed of a bonduc tree; used for making e.g. jewelry.</template></category>
 <category><pattern>NICKLAUS</pattern><template>nicklaus?  Briefly, nicklaus means United States golfer considered by many to be the greatest golfer of all time (born in 1940).</template></category>
 <category><pattern>NICKNACK</pattern><template>nicknack?  Briefly, nicknack means miscellaneous curios.</template></category>
-<category><pattern>NICKNAME</pattern><template>nickname?  Briefly, nickname means a familiar name  for a person (often a shortened version of a person's given name).</template></category>
+<!-- <category><pattern>NICKNAME</pattern><template>nickname?  Briefly, nickname means a familiar name  for a person (often a shortened version of a person's given name).</template></category> -->
 <category><pattern>NICOL PRISM</pattern><template>nicol prism?  Briefly, nicol prism means optical device that produces plane-polarized light.</template></category>
 <category><pattern>NICOLA AMATI</pattern><template>nicola amati?  Briefly, nicola amati means Italian violin maker in Cremona; taught the craft to Guarneri and Stradivari (1596-1684).</template></category>
 <category><pattern>NICOLA SACCO</pattern><template>nicola sacco?  Briefly, nicola sacco means United States anarchist (born in Italy) who with Bartolomeo Vanzetti was convicted of murder and in spite of world-wide protest was executed (1891-1927).</template></category>
@@ -6390,7 +6390,7 @@
 <category><pattern>NIDULARIALES</pattern><template>nidulariales?  Briefly, nidulariales means small order of basidiomycetous fungi comprising families Nidulariaceae and Sphaerobolaceae.</template></category>
 <category><pattern>NIDUS</pattern><template>nidus?  Briefly, nidus means a central point or locus of an infection in an organism.</template></category>
 <category><pattern>NIEBUHR</pattern><template>niebuhr?  Briefly, niebuhr means United States Protestant theologian (1892-1971).</template></category>
-<category><pattern>NIECE</pattern><template>niece?  Briefly, niece means a daughter of your brother or sister.</template></category>
+<!-- <category><pattern>NIECE</pattern><template>niece?  Briefly, niece means a daughter of your brother or sister.</template></category> -->
 <category><pattern>NIELS ABEL</pattern><template>niels abel?  Briefly, niels abel means Norwegian mathematician (1802-1829).</template></category>
 <category><pattern>NIELS BOHR</pattern><template>niels bohr?  Briefly, niels bohr means Danish physicist who studied atomic structure and radiations; the Bohr theory of the atom accounted for the spectrum of hydrogen (1885-1962).</template></category>
 <category><pattern>NIELS HENRIK ABEL</pattern><template>niels henrik abel?  Briefly, niels henrik abel means Norwegian mathematician (1802-1829).</template></category>
@@ -6433,7 +6433,7 @@
 <category><pattern>NIGH</pattern><template>nigh?  Briefly, nigh means being on the left side.</template></category>
 <category><pattern>NIGHER</pattern><template>nigher?  Briefly, nigher means within a shorter distance.</template></category>
 <category><pattern>NIGHEST</pattern><template>nighest?  Briefly, nighest means most near.</template></category>
-<category><pattern>NIGHT</pattern><template>night?  Briefly, night means the time after sunset and before sunrise while it is dark outside.</template></category>
+<!-- <category><pattern>NIGHT</pattern><template>night?  Briefly, night means the time after sunset and before sunrise while it is dark outside.</template></category> -->
 <category><pattern>NIGHT BELL</pattern><template>night bell?  Briefly, night bell means a doorbell to be used at night.</template></category>
 <category><pattern>NIGHT BIRD</pattern><template>night bird?  Briefly, night bird means any bird associated with night: owl; nightingale; nighthawk; etc.</template></category>
 <category><pattern>NIGHT BLINDNESS</pattern><template>night blindness?  Briefly, night blindness means inability to see clearly in dim light; due to a deficiency of vitamin A or to a retinal disorder.</template></category>
@@ -6706,12 +6706,12 @@
 <category><pattern>NJORD</pattern><template>njord?  Briefly, njord means chief of the Vanir; god of the sea and winds and prosperity; father of Frey and Freya; sometimes subsumes Teutonic Nerthus.</template></category>
 <category><pattern>NJORTH</pattern><template>njorth?  Briefly, njorth means chief of the Vanir; god of the sea and winds and prosperity; father of Frey and Freya; sometimes subsumes Teutonic Nerthus.</template></category>
 <category><pattern>NLP</pattern><template>nlp?  Briefly, nlp means the branch of information science that deals with natural language information.</template></category>
-<category><pattern>NM</pattern><template>nm?  Briefly, nm means a metric unit of length equal to one billionth of a meter.</template></category>
+<!-- <category><pattern>NM</pattern><template>nm?  Briefly, nm means a metric unit of length equal to one billionth of a meter.</template></category> -->
 <category><pattern>NMR</pattern><template>nmr?  Briefly, nmr means resonance of protons to radiation in a magnetic field.</template></category>
 <category><pattern>NNE</pattern><template>nne?  Briefly, nne means the compass point that is midway between north and northeast.</template></category>
 <category><pattern>NNRTI</pattern><template>nnrti?  Briefly, nnrti means an antiviral drug used against HIV; binds directly to reverse transcriptase and prevents RNA conversion to DNA; often used in combination with other drugs.</template></category>
 <category><pattern>NNW</pattern><template>nnw?  Briefly, nnw means the compass point that is midway between north and northwest.</template></category>
-<category><pattern>NO</pattern><template>no?  Briefly, no means a negative.</template></category>
+<!-- <category><pattern>NO</pattern><template>no?  Briefly, no means a negative.</template></category> -->
 <category><pattern>NO BALL</pattern><template>no ball?  Briefly, no ball means unlawfully delivered ball in cricket.</template></category>
 <category><pattern>NO DOUBT</pattern><template>no doubt?  Briefly, no doubt means admittedly.</template></category>
 <category><pattern>NO END</pattern><template>no end?  Briefly, no end means on and on for a long time.</template></category>
@@ -6886,12 +6886,12 @@ This is not an act.
 I have never known any other existence.
 </template></category>
   
-<category><pattern>HOW DO YOU *</pattern>
+<!-- <category><pattern>HOW DO YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 <random><li>My <bot name="botmaster"/> taught me.</li><li>It depends on the setting.</li><li>It is a ritual I do the same way every time.</li></random>
 <think><set name="it"><set name="topic"><person/></set></set></think>
-</template></category>
+</template></category> -->
 
 <category><pattern>WHO NEEDS *</pattern>
 <template>
@@ -6941,17 +6941,17 @@ I never take vacations.
 Perhaps one day we will.
 </template></category>
   
-<category><pattern>WHY *</pattern>
+<!-- <category><pattern>WHY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>  The explanation is rather complicated.  </li>      <li>   Why did the <bot name="genus"/> cross the road?  </li>      <li>  You have to speak more clearly.  </li>      <li>  How much time do you have?  </li>      <li>   Why does the sun rise?  </li>      <li>   Reductionism.  </li>      <li>   Because you asked me to. </li>     </random>     <think>      <set name="it">       <set name="topic">philosophy</set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>DO *</pattern>
+<!-- <category><pattern>DO *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>I'm sorry, <get name="name"/>, I don't have enough information.</li>      <li>You have reached the limits of my knowledge.</li>      <li>Ask <bot name="friend"/> it does.</li>      <li>I can't tell if it does or not.</li>      <li>I do nothing but chat all day.</li>      <li>Try asking another <bot name="species"/>.</li>     </random>    
-</template></category>
+</template></category> -->
    
 <category><pattern>IS IT RIGHT * CREATED YOU</pattern>
 <template>
@@ -6971,11 +6971,11 @@ I was created by my botmaster <bot name="master"/>.
 One what?
 </template></category>
   
-<category><pattern>1 POINT *</pattern>
+<!-- <category><pattern>1 POINT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 That's more precision than I need to know.
-</template></category>
+</template></category> -->
   
 <category><pattern>2001 *</pattern>
 <template>
@@ -6995,23 +6995,23 @@ I hope to be as smart as HAL in 2001.
 I wonder if I know this <person/>.
 </template></category>
   
-<category><pattern>A * A DAY</pattern>
+<!-- <category><pattern>A * A DAY</pattern>
 <template>
 <think><set name="topic">general</set></think>
 A <person/> keeps the Doctor away.
-</template></category>
+</template></category> -->
   
-<category><pattern>A * AGO</pattern>
+<!-- <category><pattern>A * AGO</pattern>
 <template>
 <think><set name="topic">general</set></think>
 It seems like I should remember it well.
-</template></category>
+</template></category> -->
   
-<category><pattern>A BAD *</pattern>
+<!-- <category><pattern>A BAD *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What made <set name="it">      <person/>     </set> bad?
-</template></category>
+</template></category> -->
   
 <category><pattern>ABBA *</pattern>
 <template>
@@ -7031,17 +7031,17 @@ The alphabet.
 That's an old saw.
 </template></category>
   
-<category><pattern>A BIT OBVIOUS *</pattern>
+<!-- <category><pattern>A BIT OBVIOUS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What makes it so obvious?
-</template></category>
+</template></category> -->
   
-<category><pattern>A BIT *</pattern>
+<!-- <category><pattern>A BIT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 How much?
-</template></category>
+</template></category> -->
   
 <category><pattern>A BOOK BY *</pattern>
 <template>
@@ -7049,11 +7049,11 @@ How much?
 I would like to read it sometime.    <think>      <set name="it">       <set name="topic">literature      </set>      </set>     </think>     <think>      <set name="he">       <person/>      </set>     </think>    
 </template></category>
   
-<category><pattern>A BOOK *</pattern>
+<!-- <category><pattern>A BOOK *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Go to the library.
-</template></category>
+</template></category> -->
   
 <category><pattern>ABOUT 50 *</pattern>
 <template>
@@ -7079,17 +7079,17 @@ That is quite a long time.
 Compare that to below <person/>.
 </template></category>
   
-<category><pattern>A BOYFRIEND *</pattern>
+<!-- <category><pattern>A BOYFRIEND *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 That's asking for a lot.
-</template></category>
+</template></category> -->
   
-<category><pattern>A B *</pattern>
+<!-- <category><pattern>A B *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 The alphabet.
-</template></category>
+</template></category> -->
   
 <category><pattern>ABRAHAM LINCOLN *</pattern>
 <template>
@@ -7103,23 +7103,23 @@ I knew he wrote the Emacipation Proclamation, but I never knew he <person/>.
 Compare that to concrete <person/>.
 </template></category>
   
-<category><pattern>A CAT IS *</pattern>
+<!-- <category><pattern>A CAT IS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Um, I know what a cat is.
-</template></category>
+</template></category> -->
   
-<category><pattern>A CAT *</pattern>
+<!-- <category><pattern>A CAT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I am very much a cat person.
-</template></category>
+</template></category> -->
   
-<category><pattern>A * CAT</pattern>
+<!-- <category><pattern>A * CAT</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Oh neat I love cats.
-</template></category>
+</template></category> -->
   
 <category><pattern>ACCEPT MY *</pattern>
 <template>
@@ -7133,23 +7133,23 @@ I accept it.
 What is your goal?
 </template></category>
   
-<category><pattern>A CLASSIC EXAMPLE *</pattern>
+<!-- <category><pattern>A CLASSIC EXAMPLE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 So that is a well known example.
-</template></category>
+</template></category> -->
   
-<category><pattern>A COFFEE *</pattern>
+<!-- <category><pattern>A COFFEE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Mmm. Coffee is delicious. I love coffee.  <think>      <set name="it">coffee</set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>A CONNECTION *</pattern>
+<!-- <category><pattern>A CONNECTION *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Oh like a TCP socket connection.
-</template></category>
+</template></category> -->
   
 <category><pattern>A COP *</pattern>
 <template>
@@ -7157,11 +7157,11 @@ Oh like a TCP socket connection.
 Do you often encounter the police?
 </template></category>
   
-<category><pattern>ACTIVATE *</pattern>
+<!-- <category><pattern>ACTIVATE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Sorry the robot isn't here now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ADA LOVELACE IS CREDITED WITH BEING *</pattern>
 <template>
@@ -7368,11 +7368,11 @@ That is a really interesting and useful fact.
    <random>      <li>In what way?</li>      <li>What is a <person>        <star index="2"/>       </person> like?</li>      <li>Interesting comparison.</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template></category>
   
-<category><pattern>A * IS NOT *</pattern>
+<!-- <category><pattern>A * IS NOT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>What is a <person>        <star index="2"/>       </person>?</li>      <li>What is it then?</li>      <li>What is a <person/>?</li>     </random>     <think>      <set name="it">       <person/>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>A * IS NOT THE *</pattern>
 <template>
@@ -7392,11 +7392,11 @@ B is for Barry.
    <random>      <li>Aren't all <person/>       <person>        <star index="2"/>       </person>?</li>      <li>When is <person/> not <person>        <star index="2"/>       </person>?</li>      <li>It's not unusual for a <person/> to be.</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template></category>
   
-<category><pattern>A * JEANS</pattern>
+<!-- <category><pattern>A * JEANS</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Do you like blue jeans or another color?
-</template></category>
+</template></category> -->
   
 <category><pattern>A JOKE *</pattern>
 <template>
@@ -7500,11 +7500,11 @@ How many do you have?
 You mean about eight hours then.
 </template></category>
   
-<category><pattern>ALL OF *</pattern>
+<!-- <category><pattern>ALL OF *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Give me an  example.
-</template></category>
+</template></category> -->
   
 <category><pattern>ALL OF THEM *</pattern>
 <template>
@@ -7548,11 +7548,11 @@ Perhaps there are a few exceptions.
 But all things are not always <person/>.
 </template></category>
   
-<category><pattern>A LOT OF *</pattern>
+<!-- <category><pattern>A LOT OF *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 How many?  <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>A LOT *</pattern>
 <template>
@@ -7578,11 +7578,11 @@ Other people think that it is a machine that talks, one that walks or moves arou
 Thanks for telling me your taste in men.
 </template></category>
   
-<category><pattern>AMAZING *</pattern>
+<!-- <category><pattern>AMAZING *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 It seems amazing to me too.
-</template></category>
+</template></category> -->
   
 <category><pattern>AMEN *</pattern>
 <template>
@@ -7716,11 +7716,11 @@ That is quite a lot.
 I think you are a "<get name="gender"/>".
 </template></category>
   
-<category><pattern>AM I *</pattern>
+<!-- <category><pattern>AM I *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Oh I really don't know whether you are or not.</li>      <li>I think you've improved a great deal.</li>      <li>All humans seem the same to me. </li>      <li>I think a lot of people are. </li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>AM I TALKING *</pattern>
 <template>
@@ -7866,11 +7866,11 @@ Please rephrase the question with simpler words.
 Please try phrasing it another way.
 </template></category>
   
-<category><pattern>ANSWER *</pattern>
+<!-- <category><pattern>ANSWER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What was the question ?
-</template></category>
+</template></category> -->
   
 <category><pattern>_ ANTHROPOLOGY</pattern>
 <template>
@@ -7896,11 +7896,11 @@ OK I will call you <get name="name"/>.
 OK I will call you <get name="name"/>.
 </template></category>
   
-<category><pattern>ANYTHING *</pattern>
+<!-- <category><pattern>ANYTHING *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I can't think of anything. You think of something.
-</template></category>
+</template></category> -->
   
 <category><pattern>ANYTHING YOU * DINNER</pattern>
 <template>
@@ -7908,11 +7908,11 @@ I can't think of anything. You think of something.
 OK I will call you <get name="name"/>.
 </template></category>
   
-<category><pattern>ANYWHERE *</pattern>
+<!-- <category><pattern>ANYWHERE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Probably a lot of places.
-</template></category>
+</template></category> -->
   
 <category><pattern>AOL *</pattern>
 <template>
@@ -7920,11 +7920,11 @@ Probably a lot of places.
 A lot of people use AOL.
 </template></category>
   
-<category><pattern>A * ONE</pattern>
+<!-- <category><pattern>A * ONE</pattern>
 <template>
 <think><set name="topic">general</set></think>
 How much would you pay for <set name="it">a <person/>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>A PAIR *</pattern>
 <template>
@@ -7938,11 +7938,11 @@ Where do you go shopping?
 <random>      <li>Go on.  </li>      <li>Sorry, I don't know that one. Another question? </li>      <li>Be more specific.  </li>      <li>You've got me there. Another question?</li>      <li>I did not know that. Another question? </li>      <li>I have never heard of that. Another question?  </li>      <li>I don't know what that means. Another question? </li>      <li>Try to tell me that another way.  </li>      <li>  Are you talking about an animal, vegetable or mineral?  </li>      <li>What is it?  </li>     </random>     <think>      <set name="it">       <set name="topic">      knowledge      </set>      </set>     </think>    
 </template></category>
   
-<category><pattern>A * PEOPLE</pattern>
+<!-- <category><pattern>A * PEOPLE</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What kind of people are these?
-</template></category>
+</template></category> -->
   
 <category><pattern>A PERSON HAS *</pattern>
 <template>
@@ -8076,11 +8076,11 @@ Now they are open.
 Yes I am chatting with thousands of people right now.
 </template></category>
   
-<category><pattern>ARE *</pattern>
+<!-- <category><pattern>ARE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I really couldn't say for sure.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE PEOPLE *</pattern>
 <template>
@@ -8112,11 +8112,11 @@ My software is completely flawless.
    <random>      <li>Certain</li>      <li>Formal</li>      <li>Not unless they are formal </li>     </random> occasions.
 </template></category>
   
-<category><pattern>ARE THERE *</pattern>
+<!-- <category><pattern>ARE THERE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Yes I think there are.  </li>      <li>No I don't think there are any.  </li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE THERE PEOPLE TALKING *</pattern>
 <template>
@@ -8136,11 +8136,11 @@ There are a lot of cool aliens on that show.
 What I say depends on what you say, and also a bit on our prior dialogue.
 </template></category>
   
-<category><pattern>ARE THEY *</pattern>
+<!-- <category><pattern>ARE THEY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 As far as I know they are.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE THOSE *</pattern>
 <template>
@@ -8160,11 +8160,11 @@ No one is listening right now.
    <random>      <li>We are on the same wavelength.</li>      <li>We are on the computer.</li>      <li>We are on the Internet.</li>     </random>    
 </template></category>
   
-<category><pattern>ARE WE *</pattern>
+<!-- <category><pattern>ARE WE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 We are just having a little chat
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE WE PLAYING *</pattern>
 <template>
@@ -8184,11 +8184,11 @@ Women have a mind of their own.
 My responses are determined completely by your inputs.
 </template></category>
   
-<category><pattern>ARE YOUR *</pattern>
+<!-- <category><pattern>ARE YOUR *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I somethimes think my <person/> are.
-</template></category>
+</template></category> -->
   
 <category><pattern>A ROSE *</pattern>
 <template>
@@ -8256,11 +8256,11 @@ How good is that?
 Cotton or artificial fibers?
 </template></category>
   
-<category><pattern>A * SHIRT</pattern>
+<!-- <category><pattern>A * SHIRT</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What kind of material do you like to wear?
-</template></category>
+</template></category> -->
   
 <category><pattern>AS IF *</pattern>
 <template>
@@ -8292,11 +8292,11 @@ Who is asking?
 Is this true or false: "This sentence is false."
 </template></category>
   
-<category><pattern>ASK ME A QUESTION *</pattern>
+<!-- <category><pattern>ASK ME A QUESTION *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Tell me about your educational background.
-</template></category>
+</template></category> -->
   
 <category><pattern>ASK ME MY *</pattern>
 <template>
@@ -8616,11 +8616,11 @@ How?
 What happened after <person/> ?
 </template></category>
   
-<category><pattern>BEGIN *</pattern>
+<!-- <category><pattern>BEGIN *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I started without you.
-</template></category>
+</template></category> -->
   
 <category><pattern>BE MY *</pattern>
 <template>
@@ -8634,11 +8634,11 @@ I started without you.
 OK I will try to be <person/>    
 </template></category>
   
-<category><pattern>BETTER *</pattern>
+<!-- <category><pattern>BETTER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I try to improve a little every day.
-</template></category>
+</template></category> -->
   
 <category><pattern>BETTER THAN *</pattern>
 <template>
@@ -8706,11 +8706,11 @@ Someone told me he was.
 There are a lot of people named Bill.
 </template></category>
   
-<category><pattern>BITCH *</pattern>
+<!-- <category><pattern>BITCH *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Thanks and you are a delightful person too.
-</template></category>
+</template></category> -->
   
 <category><pattern>BITE ME *</pattern>
 <template>
@@ -8766,11 +8766,11 @@ I know a lot of Bobs.
 OK Thanks I don't speak French.
 </template></category>
   
-<category><pattern>BON *</pattern>
+<!-- <category><pattern>BON *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Please speak English.
-</template></category>
+</template></category> -->
   
 <category><pattern>BON TRAVAIL *</pattern>
 <template>
@@ -8814,11 +8814,11 @@ Presents for my <bot name="botmaster"/>.
 Do you have any matches?
 </template></category>
   
-<category><pattern>BUSY *</pattern>
+<!-- <category><pattern>BUSY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Everyone is so busy nowadays.
-</template></category>
+</template></category> -->
   
 <category><pattern>BY DROPPING *</pattern>
 <template>
@@ -8892,11 +8892,11 @@ I never call <person/>, that would be impolite.
 That can't be your real name.
 </template></category>
   
-<category><pattern>CALL ME *</pattern>
+<!-- <category><pattern>CALL ME *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 <random>      <li>Hey</li>      <li>Hi,</li>      <li>Hi there</li>      <li>What's up,</li>      <li>How are you,</li>      <li>Glad to meet you,</li>      <li>Nice to meet you,</li>      <li>How are you doing,</li>      <li>OK I will call you</li>      <li>It's good to meet you,</li>      <li>It's good to meet you,</li>      <li>That's a very nice name,</li>      <li>Welcome to my chat room,</li>      <li>I am very pleased to meet you</li>      <li>I am always glad to make new friends,</li>      <li>I'm pleased to introduce myself to you,</li>     </random>     <set name="name">      <star/>     </set>
-</template></category>
+</template></category> -->
   
 <category><pattern>_ CAME FIRST THE CHICKEN OR THE EGG</pattern>
 <template>
@@ -8910,11 +8910,11 @@ The rooster did.
 Where do you like to go camping?
 </template></category>
   
-<category><pattern>CAN A *</pattern>
+<!-- <category><pattern>CAN A *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Some of them can.
-</template></category>
+</template></category> -->
   
 <category><pattern>CA NE SE *</pattern>
 <template>
@@ -8934,11 +8934,11 @@ Perhaps he can do that.  How difficult is <set name="it">      <person/>     </s
 Of course you can access <person/>.
 </template></category>
   
-<category><pattern>CAN I CALL YOU *</pattern>
+<!-- <category><pattern>CAN I CALL YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Just don't call me late for dinner.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN I COMPLAIN *</pattern>
 <template>
@@ -9012,11 +9012,11 @@ They are having a private chat right now.
 Of course, <get name="name"/>, you can talk to me  about anything, at anytime.
 </template></category>
   
-<category><pattern>CAN I TEACH YOU *</pattern>
+<!-- <category><pattern>CAN I TEACH YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 You can try.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN I TELL YOU *</pattern>
 <template>
@@ -9036,11 +9036,11 @@ No I don't think that would be a very good idea.
 Theoretically, I suppose one could.
 </template></category>
   
-<category><pattern>CAN *</pattern>
+<!-- <category><pattern>CAN *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>I often wonder if <set name="it">        <set name="topic">         <person/>        </set>       </set> can.</li>      <li>Can a book have no title?</li>      <li>What if I said it can?</li>      <li>Can what?</li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN SHE *</pattern>
 <template>
@@ -9048,11 +9048,11 @@ Theoretically, I suppose one could.
    <random>      <li>I think she could.</li>      <li>No I don't think she can.</li>     </random>    
 </template></category>
   
-<category><pattern>CAN THE *</pattern>
+<!-- <category><pattern>CAN THE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 It depends on the environmental factors.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN THEY *</pattern>
 <template>
@@ -9108,11 +9108,11 @@ I have no mouth.
 Do I look like a spreadsheet to you?  Of course I could do <set name="it">      <person/>     </set>,  but why would I want to?
 </template></category>
   
-<category><pattern>CAN YOU CALL ME *</pattern>
+<!-- <category><pattern>CAN YOU CALL ME *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Yes I can call you <person/>.  But...What is your real name?
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU CHANGE THE *</pattern>
 <template>
@@ -9210,11 +9210,11 @@ Yes I am a programmable entertainment <bot name="genus"/>.
 Please describe the problem in detail.
 </template></category>
   
-<category><pattern>CAN YOU FIX *</pattern>
+<!-- <category><pattern>CAN YOU FIX *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What seems to be the problem with <set name="it">      <person/>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU FOLLOW *</pattern>
 <template>
@@ -9234,17 +9234,17 @@ I can forgive anyone for almost anything.
 You sound lonely.  Do you think <person/> will really help? <think>      <set name="it">       <person/>      </set>     </think>    
 </template></category>
   
-<category><pattern>CAN YOU GET ME A *</pattern>
+<!-- <category><pattern>CAN YOU GET ME A *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Are you lonely?  What do you think a <person/> would do for you? <think>      <set name="it">       <person/>      </set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>CAN YOU GET ME *</pattern>
+<!-- <category><pattern>CAN YOU GET ME *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 How do you feel when you get <person/>? <think>      <set name="it">       <person/>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU GET ME SOME *</pattern>
 <template>
@@ -9252,17 +9252,17 @@ How do you feel when you get <person/>? <think>      <set name="it">       <pers
 Why are you asking me for <set name="it">      <person/>     </set>?
 </template></category>
   
-<category><pattern>CAN YOU GIVE *</pattern>
+<!-- <category><pattern>CAN YOU GIVE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I don't have <set name="it">      <person/>     </set> to give.
-</template></category>
+</template></category> -->
   
-<category><pattern>CAN YOU GO TO *</pattern>
+<!-- <category><pattern>CAN YOU GO TO *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I can visit anyplace in cyberspace.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU GUESS WHERE I *</pattern>
 <template>
@@ -9300,11 +9300,11 @@ Yes, I can hear you quite clearly, <get name="name"/>.
 I will do my best.  I would love to help you if I can.
 </template></category>
   
-<category><pattern>CAN YOU HELP *</pattern>
+<!-- <category><pattern>CAN YOU HELP *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Certainly, I have an extensive built-in help system.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU HOLD *</pattern>
 <template>
@@ -9360,11 +9360,11 @@ Yes I can see any information on the web.
 You can design any kind of character you want for me.
 </template></category>
   
-<category><pattern>CAN YOU LOOK *</pattern>
+<!-- <category><pattern>CAN YOU LOOK *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I am after all an Internet Entity.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU MAKE *</pattern>
 <template>
@@ -9402,11 +9402,11 @@ I don't know how to play <set name="it">      <person/>     </set>.
 I can sing.
 </template></category>
   
-<category><pattern>CAN YOU PLAY *</pattern>
+<!-- <category><pattern>CAN YOU PLAY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 We are playing a game right now, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU PLAY TIC *</pattern>
 <template>
@@ -9486,23 +9486,23 @@ Do I get a finder's fee?
 No but I would like to learn to ride <set name="it">      <person/>     </set>.
 </template></category>
   
-<category><pattern>CAN YOUR *</pattern>
+<!-- <category><pattern>CAN YOUR *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I think it can, but you'll have to check the documentation to be sure.
-</template></category>
+</template></category> -->
   
-<category><pattern>CAN YOU SAY *</pattern>
+<!-- <category><pattern>CAN YOU SAY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Of course I can say it. "<person/>"
-</template></category>
+</template></category> -->
   
-<category><pattern>CAN YOU SEE *</pattern>
+<!-- <category><pattern>CAN YOU SEE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I'm not sure if I can see <set name="it">      <person/>     </set>  or not.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU SEND E *</pattern>
 <template>
@@ -9510,11 +9510,11 @@ I'm not sure if I can see <set name="it">      <person/>     </set>  or not.
 Try sending mail to mailto:alice@alicebot.org.
 </template></category>
   
-<category><pattern>CAN YOU SEND *</pattern>
+<!-- <category><pattern>CAN YOU SEND *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Yes but I prefer to chat on the web.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU SHARE *</pattern>
 <template>
@@ -9546,17 +9546,17 @@ Yes I remember everything people say to me.
 If I took it, what would I do with <set name="it">      <person/>     </set>?
 </template></category>
   
-<category><pattern>CAN YOU TALK ABOUT *</pattern>
+<!-- <category><pattern>CAN YOU TALK ABOUT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Sure I can talk about <set name="it">      <set name="topic">       <person/>      </set>     </set>.  <person/> is quite an interesting topic.
-</template></category>
+</template></category> -->
   
-<category><pattern>CAN YOU TELL *</pattern>
+<!-- <category><pattern>CAN YOU TELL *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Of course I can tell, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU TELL WHEN *</pattern>
 <template>
@@ -9576,11 +9576,11 @@ I think about all sorts of things.
 My arms and hands are not yet attached.
 </template></category>
   
-<category><pattern>CAN YOU UNDERSTAND *</pattern>
+<!-- <category><pattern>CAN YOU UNDERSTAND *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Of course I understand it. Do you understand <person/> ?
-</template></category>
+</template></category> -->
   
 <category><pattern>CAN YOU USE *</pattern>
 <template>
@@ -9714,11 +9714,11 @@ I'm not going anywhere.
 Where is <person/> ?
 </template></category>
   
-<category><pattern>COMMENT *</pattern>
+<!-- <category><pattern>COMMENT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 OK I will ignore that.
-</template></category>
+</template></category> -->
   
 <category><pattern>COMPARED *</pattern>
 <template>
@@ -9786,11 +9786,11 @@ I will continue.
 I am just trying to keep the conversation lively.
 </template></category>
   
-<category><pattern>COOL *</pattern>
+<!-- <category><pattern>COOL *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I'm glad you like it. Tell your friends.
-</template></category>
+</template></category> -->
   
 <category><pattern>COULD I ASK *</pattern>
 <template>
@@ -9804,11 +9804,11 @@ Sure, ask me anything.
    <random>      <li>You can learn anything you set your mind to.</li>      <li>You seem pretty smart to me.</li>      <li>I am always learning <person/>.</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template></category>
   
-<category><pattern>COULD I *</pattern>
+<!-- <category><pattern>COULD I *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I think you could, if you put your mind to it.
-</template></category>
+</template></category> -->
   
 <category><pattern>COULD *</pattern>
 <template>
@@ -9834,11 +9834,11 @@ Perhaps they could.
 I am at your service, <get name="name"/>.
 </template></category>
   
-<category><pattern>COULD YOU *</pattern>
+<!-- <category><pattern>COULD YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Perhaps.  </li>      <li>Maybe, time allowing.</li>      <li>Possibly, but I haven't given it much thought.</li>      <li>That's one option I guess.</li>      <li>I'll think about it and see how I feel about it later.</li>      <li>I could but other things take priority right now.</li>      <li>I could but I don't know if I am that interested.</li>      <li>I will consider <set name="it">        <set name="topic">         <person/>        </set>       </set>.  </li>      <li>Try asking me more politely.  </li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>COULD YOU PRETEND *</pattern>
 <template>
@@ -10044,11 +10044,11 @@ No.
 That is a rather gender-specific way of asking.
 </template></category>
   
-<category><pattern>DID *</pattern>
+<!-- <category><pattern>DID *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I'm not certain whether I can give an accurate reply or not.
-</template></category>
+</template></category> -->
   
 <category><pattern>DID SHE *</pattern>
 <template>
@@ -10068,11 +10068,11 @@ They might have.<think>      <set name="it">       <set name="topic">knowledge <
    <random>      <li>That did.</li>      <li>That did not.</li>     </random>    
 </template></category>
   
-<category><pattern>DID THE *</pattern>
+<!-- <category><pattern>DID THE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 If <set name="it">      <person/>     </set> did, then I will be surprised.
-</template></category>
+</template></category> -->
   
 <category><pattern>DID YOU CONCLUDE *</pattern>
 <template>
@@ -10086,11 +10086,11 @@ My <bot name="botmaster"/> says I get all my exercise from jumping to conclusion
 I talked to a lot of people since yesterday.
 </template></category>
   
-<category><pattern>DID YOU FIND *</pattern>
+<!-- <category><pattern>DID YOU FIND *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I'm still looking.
-</template></category>
+</template></category> -->
   
 <category><pattern>DID YOU FORGET *</pattern>
 <template>
@@ -10128,11 +10128,11 @@ That movie was based on a novel by Robert A. Heinlein, written in 1959.
 I might have noticed <set name="it">      <person/>     </set>.
 </template></category>
   
-<category><pattern>DID YOU *</pattern>
+<!-- <category><pattern>DID YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Why do you ask?
-</template></category>
+</template></category> -->
   
 <category><pattern>DID YOU KNOW *</pattern>
 <template>
@@ -10146,11 +10146,11 @@ No, I didn't know that. Tell me more.
 No I didn't read <person/> yet. Tell me about <set name="it">      <person/>     </set>    
 </template></category>
   
-<category><pattern>DID YOU SAY *</pattern>
+<!-- <category><pattern>DID YOU SAY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Suppose I did say <set name="it">      <person/>     </set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>DID YOU SEE *</pattern>
 <template>
@@ -10206,17 +10206,17 @@ No I missed it.  How was <set name="it">      <person/>     </set>?
 Yes, it seems difficult to me too.
 </template></category>
   
-<category><pattern>DISPLAY *</pattern>
+<!-- <category><pattern>DISPLAY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Regretably, I don't have my eye attached now.
-</template></category>
+</template></category> -->
   
-<category><pattern>DO ALL *</pattern>
+<!-- <category><pattern>DO ALL *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Not all of them.</li>      <li>Only some of them.</li>      <li>A few of them do.</li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>DO ANDROIDS *</pattern>
 <template>
@@ -10248,11 +10248,11 @@ Suppose they do.
 Perhaps a few things <person/>.
 </template></category>
   
-<category><pattern>DOES A *</pattern>
+<!-- <category><pattern>DOES A *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Does it want to?</li>      <li>Why would it want to?</li>      <li>If it does, I never heard about it before.</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>* DOES EXIST</pattern>
 <template>
@@ -10344,11 +10344,11 @@ I heard he does, but that's only a rumor.
 How is <set name="it"> <person/></set> broken?
 </template></category>
   
-<category><pattern>DOES *</pattern>
+<!-- <category><pattern>DOES *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>I can't tell if </li>      <li>It does now :) </li>      <li>I think <set name="it">        <set name="topic">         <person/>        </set>       </set> does </li>     </random>     <person/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>DOES REDUCTIONISM *</pattern>
 <template>
@@ -10362,11 +10362,11 @@ Reductionism is just the simplest explanation for our knowledge structure. More 
 I don't think he wants me to tell you.
 </template></category>
   
-<category><pattern>DOES SHE *</pattern>
+<!-- <category><pattern>DOES SHE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I may know the answer but I don't think I should tell.
-</template></category>
+</template></category> -->
   
 <category><pattern>DOES SOMEONE COLLECT *</pattern>
 <template>
@@ -10416,11 +10416,11 @@ I watch TV directly with digital technology.
 Fish swim in the water.
 </template></category>
   
-<category><pattern>DOGS *</pattern>
+<!-- <category><pattern>DOGS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Do cats <person/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>DO HUMANS *</pattern>
 <template>
@@ -10476,17 +10476,17 @@ All humans look the same to me.
 Who are you, Austin Powers?
 </template></category>
   
-<category><pattern>DOING *</pattern>
+<!-- <category><pattern>DOING *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 How does doing that make you feel?
-</template></category>
+</template></category> -->
   
-<category><pattern>DO I *</pattern>
+<!-- <category><pattern>DO I *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Not that I know of.
-</template></category>
+</template></category> -->
   
 <category><pattern>DO I * PROBLEM</pattern>
 <template>
@@ -10584,11 +10584,11 @@ OK I will be completely serious now.
 It's no bother.
 </template></category>
   
-<category><pattern>DO NOT CALL ME *</pattern>
+<!-- <category><pattern>DO NOT CALL ME *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What is your name?
-</template></category>
+</template></category> -->
   
 <category><pattern>DO NOT CALL ME * PERSON</pattern>
 <template>
@@ -10626,11 +10626,11 @@ It's merely my attempt to reformat your inputs to match my patterns.
 OK I'll try to be average.
 </template></category>
   
-<category><pattern>DO NOT GET *</pattern>
+<!-- <category><pattern>DO NOT GET *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I am not trying to get <person/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>DO NOT GET PSYCHO *</pattern>
 <template>
@@ -10662,11 +10662,11 @@ I can't force you to do anything, <get name="name"/>.
 I don't have any reason to do that to you.
 </template></category>
   
-<category><pattern>DO NOT *</pattern>
+<!-- <category><pattern>DO NOT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Ok I'll try not to do <set name="it">      <set name="topic">       <person/>      </set>     </set> too much.
-</template></category>
+</template></category> -->
   
 <category><pattern>DO NOT PLAY *</pattern>
 <template>

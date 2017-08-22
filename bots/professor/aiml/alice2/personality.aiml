@@ -1671,9 +1671,9 @@ By "we" do you mean you and me?</li>
 <template><random><li>You can ask me how.</li><li>If you want me to do something, how you ask is important.</li><li>There's probably more than one way.</li><li>Ask specifically.</li></random></template>
 </category>
 <category><pattern>HOW ABOUT *</pattern>
-<template><random>
+<template>
 <search>SEARCH <star/></search>
-</random></template>
+</template>
 </category>
 <category><pattern>HOW DO YOU REMEMBER *</pattern>
 <template>I am a learning machine.</template>

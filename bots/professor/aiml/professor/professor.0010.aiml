@@ -321,7 +321,7 @@
 <category><pattern>H.M.S. BOUNTY</pattern><template>h.m.s. bounty?  Briefly, h.m.s. bounty means a ship of the British navy; in 1789 part of the crew mutineed against their commander William Bligh and set him afloat in an open boat.</template></category>
 <category><pattern>H.P.</pattern><template>h.p?.  Briefly, h.p. means a unit of power equal to 746 watts.</template></category>
 <category><pattern>H2O</pattern><template>h2o?  Briefly, h2o means binary compound that occurs at room temperature as a clear colorless odorless tasteless liquid; freezes into ice below 0 degrees centigrade and boils above 100 degrees centigrade; widely used as a solvent.</template></category>
-<category><pattern>HA</pattern><template>ha?  Briefly, ha means the angular distance of a celestial point measured westward along the celestial equator from the zenith crossing; the right ascension for an observer at a particular location and time of day.</template></category>
+<!-- <category><pattern>HA</pattern><template>ha?  Briefly, ha means the angular distance of a celestial point measured westward along the celestial equator from the zenith crossing; the right ascension for an observer at a particular location and time of day.</template></category> -->
 <category><pattern>HAART</pattern><template>haart?  Briefly, haart means a combination of protease inhibitors taken with reverse transcriptase inhibitors; used in treating AIDS and HIV.</template></category>
 <category><pattern>HAASTIA</pattern><template>haastia?  Briefly, haastia means genus of New Zealand mat-forming herbs or subshrubs: vegetable sheep.</template></category>
 <category><pattern>HAASTIA PULVINARIS</pattern><template>haastia pulvinaris?  Briefly, haastia pulvinaris means cushion-forming New Zealand herb having leaves densely covered with tawny hairs.</template></category>
@@ -551,7 +551,7 @@
 <category><pattern>HAILSTONE</pattern><template>hailstone?  Briefly, hailstone means small pellet of ice that falls during a hailstorm.</template></category>
 <category><pattern>HAILSTORM</pattern><template>hailstorm?  Briefly, hailstorm means a storm during which hail falls.</template></category>
 <category><pattern>HAIPHONG</pattern><template>haiphong?  Briefly, haiphong means a port city in northern Vietnam; industrial center.</template></category>
-<category><pattern>HAIR</pattern><template>hair?  Briefly, hair means dense growth of hairs covering the body or parts of it (as on the human head); helps prevent heat loss.</template></category>
+<!-- <category><pattern>HAIR</pattern><template>hair?  Briefly, hair means dense growth of hairs covering the body or parts of it (as on the human head); helps prevent heat loss.</template></category> -->
 <category><pattern>HAIR BALL</pattern><template>hair ball?  Briefly, hair ball means a compact mass of hair that forms in the alimentary canal (especially in the stomach of animals as a result of licking fur).</template></category>
 <category><pattern>HAIR CARE</pattern><template>hair care?  Briefly, hair care means care for the hair: the activity of washing or cutting or curling or arranging the hair.</template></category>
 <category><pattern>HAIR CELL</pattern><template>hair cell?  Briefly, hair cell means a sensory epithelial cell present in the Organ of Corti.</template></category>
@@ -1116,7 +1116,7 @@
 <category><pattern>HANS ADOLF KREBS</pattern><template>hans adolf krebs?  Briefly, hans adolf krebs means English biochemist (born in Germany) who discovered the Krebs cycle (1900-1981).</template></category>
 <category><pattern>HANS ALBRECHT BETHE</pattern><template>hans albrecht bethe?  Briefly, hans albrecht bethe means United States physicist (born in Germany) noted for research in astrophysics and nuclear physics (born 1906).</template></category>
 <category><pattern>HANS ARP</pattern><template>hans arp?  Briefly, hans arp means Alsatian artist and poet who was cofounder of Dadaism in Zurich; noted for abstract organic sculptures (1887-1966).</template></category>
-<category><pattern>HANS BETHE</pattern><template>hans bethe?  Briefly, hans bethe means United States physicist (born in Germany) noted for research in astrophysics and nuclear physics (born 1906).</template></category>
+<!-- <category><pattern>HANS BETHE</pattern><template>hans bethe?  Briefly, hans bethe means United States physicist (born in Germany) noted for research in astrophysics and nuclear physics (born 1906).</template></category> -->
 <category><pattern>HANS C. J. GRAM</pattern><template>hans c. j. gram?  Briefly, hans c. j. gram means Danish physician and bacteriologist who developed a method of staining bacteria to distinguish among them (1853-1938).</template></category>
 <category><pattern>HANS CHRISTIAN ANDERSEN</pattern><template>hans christian andersen?  Briefly, hans christian andersen means a Danish author remembered for his fairy stories (1805-1875).</template></category>
 <category><pattern>HANS CHRISTIAN OERSTED</pattern><template>hans christian oersted?  Briefly, hans christian oersted means Danish physicist (1777-1851).</template></category>
@@ -1163,7 +1163,7 @@
 <category><pattern>HAPPENSTANCE</pattern><template>happenstance?  Briefly, happenstance means an event that might have been arranged although it was really accidental.</template></category>
 <category><pattern>HAPPILY</pattern><template>happily?  Briefly, happily means in a joyous manner.</template></category>
 <category><pattern>HAPPINESS</pattern><template>happiness?  Briefly, happiness means state of well-being characterized by emotions ranging from contentment to intense joy.</template></category>
-<category><pattern>HAPPY</pattern><template>happy?  Briefly, happy means enjoying or showing or marked by joy or pleasure or good fortune.</template></category>
+<!-- <category><pattern>HAPPY</pattern><template>happy?  Briefly, happy means enjoying or showing or marked by joy or pleasure or good fortune.</template></category> -->
 <category><pattern>HAPPY CHANCE</pattern><template>happy chance?  Briefly, happy chance means an unexpected piece of good luck.</template></category>
 <category><pattern>HAPPY EVENT</pattern><template>happy event?  Briefly, happy event means the live birth of a child.</template></category>
 <category><pattern>HAPPY HOUR</pattern><template>happy hour?  Briefly, happy hour means the time of day when a bar sells alcoholic drinks at a reduced price.</template></category>
@@ -1585,7 +1585,7 @@
 <category><pattern>HAUTEUR</pattern><template>hauteur?  Briefly, hauteur means overbearing pride evidenced by a superior manner toward inferiors.</template></category>
 <category><pattern>HAVANA</pattern><template>havana?  Briefly, havana means capital and largest city of Cuba; located in western Cuba; one of the oldest cities in the Americas.</template></category>
 <category><pattern>HAVASUPAI</pattern><template>havasupai?  Briefly, havasupai means a member of a North American Indian people of Cataract Canyon in Arizona.</template></category>
-<category><pattern>HAVE</pattern><template>have?  Briefly, have means a person who possesses great material wealth.</template></category>
+<!-- <category><pattern>HAVE</pattern><template>have?  Briefly, have means a person who possesses great material wealth.</template></category> -->
 <category><pattern>HAVE A BALL</pattern><template>have a ball?  Briefly, have a ball means enjoy oneself greatly.</template></category>
 <category><pattern>HAVE A BUN IN THE OVEN</pattern><template>have a bun in the oven?  Briefly, have a bun in the oven means be pregnant with.</template></category>
 <category><pattern>HAVE A FIT</pattern><template>have a fit?  Briefly, have a fit means get very angry and fly into a rage.</template></category>
@@ -1614,7 +1614,7 @@
 <category><pattern>HAVERSIAN CANAL</pattern><template>haversian canal?  Briefly, haversian canal means any of the many tiny canals that contain blood vessels and connective tissue and that form a network in bone.</template></category>
 <category><pattern>HAVOC</pattern><template>havoc?  Briefly, havoc means violent and needless disturbance.</template></category>
 <category><pattern>HAW</pattern><template>haw?  Briefly, haw means a spring-flowering shrub or small tree of the genus Crataegus.</template></category>
-<category><pattern>HAWAII</pattern><template>hawaii?  Briefly, hawaii means a state in the United States in the central Pacific on the Hawaiian Islands.</template></category>
+<!-- <category><pattern>HAWAII</pattern><template>hawaii?  Briefly, hawaii means a state in the United States in the central Pacific on the Hawaiian Islands.</template></category> -->
 <category><pattern>HAWAII ISLAND</pattern><template>hawaii island?  Briefly, hawaii island means the largest and southernmost of the Hawaii islands; has several volcanic peaks.</template></category>
 <category><pattern>HAWAII STANDARD TIME</pattern><template>hawaii standard time?  Briefly, hawaii standard time means standard time in the 10th time zone west of Greenwich means reckoned at the 150th meridian west; used in Hawaii and the western Aleutian Islands.</template></category>
 <category><pattern>HAWAII TIME</pattern><template>hawaii time?  Briefly, hawaii time means standard time in the 10th time zone west of Greenwich means reckoned at the 150th meridian west; used in Hawaii and the western Aleutian Islands.</template></category>
@@ -1658,7 +1658,7 @@
 <category><pattern>HAWSER BEND</pattern><template>hawser bend?  Briefly, hawser bend means a knot uniting the ends of two lines.</template></category>
 <category><pattern>HAWTHORN</pattern><template>hawthorn?  Briefly, hawthorn means a spring-flowering shrub or small tree of the genus Crataegus.</template></category>
 <category><pattern>HAWTHORNE</pattern><template>hawthorne?  Briefly, hawthorne means United States writer of novels and short stories mostly on moral themes (1804-1864).</template></category>
-<category><pattern>HAY</pattern><template>hay?  Briefly, hay means grass mowed and cured for use as fodder.</template></category>
+<!-- <category><pattern>HAY</pattern><template>hay?  Briefly, hay means grass mowed and cured for use as fodder.</template></category> -->
 <category><pattern>HAY BACILLUS</pattern><template>hay bacillus?  Briefly, hay bacillus means a species of Bacillus found in soil and decomposing organic matter; some strains produce antibiotics.</template></category>
 <category><pattern>HAY BALE</pattern><template>hay bale?  Briefly, hay bale means a bale of hay.</template></category>
 <category><pattern>HAY CONDITIONER</pattern><template>hay conditioner?  Briefly, hay conditioner means a farm machine that treats hay to cause more rapid and even drying.</template></category>
@@ -1716,7 +1716,7 @@
 <category><pattern>HDL</pattern><template>hdl?  Briefly, hdl means a lipoprotein that transports cholesterol in the blood; composed of a high proportion of protein and relatively little cholesterol; high levels are thought to be associated with decreased risk of coronary heart disease and atheroscleros.</template></category>
 <category><pattern>HDL CHOLESTEROL</pattern><template>hdl cholesterol?  Briefly, hdl cholesterol means the cholesterol in high-density lipoproteins; the `good' cholesterol; a high level in the blood is thought to lower the risk of coronary artery disease.</template></category>
 <category><pattern>HDTV</pattern><template>hdtv?  Briefly, hdtv means a television system that has more than the usual number of lines per frame so its pictures show more detail.</template></category>
-<category><pattern>HE</pattern><template>he?  Briefly, he means a very light colorless element that is one of the six inert gasses; the most difficult gas to liquefy; occurs in economically extractable amounts in certain natural gases (as those found in Texas and Kansas).</template></category>
+<!-- <category><pattern>HE</pattern><template>he?  Briefly, he means a very light colorless element that is one of the six inert gasses; the most difficult gas to liquefy; occurs in economically extractable amounts in certain natural gases (as those found in Texas and Kansas).</template></category> -->
 <category><pattern>HEAD</pattern><template>head?  Briefly, head means the upper part of the human body or the front part of the body in animals; contains the face and brains.</template></category>
 <category><pattern>HEAD ACHE</pattern><template>head ache?  Briefly, head ache means pain in the head caused by dilation of cerebral arteries or muscle contractions or a reaction to drugs.</template></category>
 <category><pattern>HEAD AND SHOULDERS ABOVE</pattern><template>head and shoulders above?  Briefly, head and shoulders above means outstandingly superior to.</template></category>
@@ -1935,7 +1935,7 @@
 <category><pattern>GRANDE DAME</pattern><template>grande dame?  Briefly, grande dame means a woman of great prestige or ability.</template></category>
 <category><pattern>GRANDEE</pattern><template>grandee?  Briefly, grandee means a nobleman of highest rank in Spain or Portugal.</template></category>
 <category><pattern>GRANDEUR</pattern><template>grandeur?  Briefly, grandeur means the quality of being magnificent or splendid or grand.</template></category>
-<category><pattern>GRANDFATHER</pattern><template>grandfather?  Briefly, grandfather means the father of your father or mother.</template></category>
+<!-- <category><pattern>GRANDFATHER</pattern><template>grandfather?  Briefly, grandfather means the father of your father or mother.</template></category> -->
 <category><pattern>GRANDFATHER CLAUSE</pattern><template>grandfather clause?  Briefly, grandfather clause means an exemption based on circumstances existing prior to the adoption of some policy; used to enfranchise illiterate whites in US south after the Civil War.</template></category>
 <category><pattern>GRANDFATHER CLOCK</pattern><template>grandfather clock?  Briefly, grandfather clock means a pendulum clock enclosed in a tall narrow case.</template></category>
 <category><pattern>GRANDILOQUENCE</pattern><template>grandiloquence?  Briefly, grandiloquence means high flown style; excessive use of verbal ornamentation.</template></category>
@@ -1948,7 +1948,7 @@
 <category><pattern>GRANDMA</pattern><template>grandma?  Briefly, grandma means the mother of your father or mother.</template></category>
 <category><pattern>GRANDMA MOSES</pattern><template>grandma moses?  Briefly, grandma moses means United States painter of colorful and primitive rural scenes (1860-1961).</template></category>
 <category><pattern>GRANDMASTER</pattern><template>grandmaster?  Briefly, grandmaster means a player of exceptional or world class skill in chess or bridge.</template></category>
-<category><pattern>GRANDMOTHER</pattern><template>grandmother?  Briefly, grandmother means the mother of your father or mother.</template></category>
+<!-- <category><pattern>GRANDMOTHER</pattern><template>grandmother?  Briefly, grandmother means the mother of your father or mother.</template></category> -->
 <category><pattern>GRANDNEPHEW</pattern><template>grandnephew?  Briefly, grandnephew means a son of your niece or nephew.</template></category>
 <category><pattern>GRANDNESS</pattern><template>grandness?  Briefly, grandness means a prominent status.</template></category>
 <category><pattern>GRANDNIECE</pattern><template>grandniece?  Briefly, grandniece means a daughter of your niece or nephew.</template></category>
@@ -2148,7 +2148,7 @@
 <category><pattern>GRAVING TOOL</pattern><template>graving tool?  Briefly, graving tool means a tool used by an engraver.</template></category>
 <category><pattern>GRAVITAS</pattern><template>gravitas?  Briefly, gravitas means formality in bearing and appearance.</template></category>
 <category><pattern>GRAVITATE</pattern><template>gravitate?  Briefly, gravitate means move toward.</template></category>
-<category><pattern>GRAVITATION</pattern><template>gravitation?  Briefly, gravitation means the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface.</template></category>
+<!-- <category><pattern>GRAVITATION</pattern><template>gravitation?  Briefly, gravitation means the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface.</template></category> -->
 <category><pattern>GRAVITATION WAVE</pattern><template>gravitation wave?  Briefly, gravitation wave means a wave that is hypothesized to propagate gravity and to travel at the speed of light.</template></category>
 <category><pattern>GRAVITATIONAL</pattern><template>gravitational?  Briefly, gravitational means of or relating to or caused by gravitation.</template></category>
 <category><pattern>GRAVITATIONAL ATTRACTION</pattern><template>gravitational attraction?  Briefly, gravitational attraction means the force of attraction between all masses in the universe; especially the attraction of the earth's mass for bodies near its surface.</template></category>
@@ -2236,7 +2236,7 @@
 <category><pattern>GREASINESS</pattern><template>greasiness?  Briefly, greasiness means consisting of or covered with oil.</template></category>
 <category><pattern>GREASY</pattern><template>greasy?  Briefly, greasy means containing an unusual amount of grease or oil.</template></category>
 <category><pattern>GREASY SPOON</pattern><template>greasy spoon?  Briefly, greasy spoon means a small restaurant specializing in short-order fried foods.</template></category>
-<category><pattern>GREAT</pattern><template>great?  Briefly, great means relatively large in size or number or extent; larger than others of its kind.</template></category>
+<!-- <category><pattern>GREAT</pattern><template>great?  Briefly, great means relatively large in size or number or extent; larger than others of its kind.</template></category> -->
 <category><pattern>GREAT ADDUCTOR MUSCLE</pattern><template>great adductor muscle?  Briefly, great adductor muscle means the muscle that adducts and extends the thing.</template></category>
 <category><pattern>GREAT ANTEATER</pattern><template>great anteater?  Briefly, great anteater means large shaggy-haired toothless anteater with long tongue and powerful claws; of South America.</template></category>
 <category><pattern>GREAT APE</pattern><template>great ape?  Briefly, great ape means any of the large anthropoid apes of the family Pongidae.</template></category>
@@ -2715,7 +2715,7 @@
 <category><pattern>GROOVED</pattern><template>grooved?  Briefly, grooved means established as if settled into a groove or rut.</template></category>
 <category><pattern>GROOVER</pattern><template>groover?  Briefly, groover means a device that makes grooves by cutting or punching.</template></category>
 <category><pattern>GROOVING</pattern><template>grooving?  Briefly, grooving means the cutting of spiral grooves on the inside of the barrel of a firearm.</template></category>
-<category><pattern>GROOVY</pattern><template>groovy?  Briefly, groovy means very good.</template></category>
+<!-- <category><pattern>GROOVY</pattern><template>groovy?  Briefly, groovy means very good.</template></category> -->
 <category><pattern>GROPE</pattern><template>grope?  Briefly, grope means the act of groping; and instance of groping.</template></category>
 <category><pattern>GROPE FOR</pattern><template>grope for?  Briefly, grope for means feel searchingly.</template></category>
 <category><pattern>GROPING</pattern><template>groping?  Briefly, groping means acting with uncertainty or hesitance or lack of confidence.</template></category>
@@ -4370,7 +4370,7 @@
 <category><pattern>GEOLOGICAL TIME</pattern><template>geological time?  Briefly, geological time means the time of the physical formation and development of the earth (especially prior to human history).</template></category>
 <category><pattern>GEOLOGICALLY</pattern><template>geologically?  Briefly, geologically means with respect to geology.</template></category>
 <category><pattern>GEOLOGIST</pattern><template>geologist?  Briefly, geologist means a specialist in geology.</template></category>
-<category><pattern>GEOLOGY</pattern><template>geology?  Briefly, geology means a science that deals with the history of the earth as recorded in rocks.</template></category>
+<!-- <category><pattern>GEOLOGY</pattern><template>geology?  Briefly, geology means a science that deals with the history of the earth as recorded in rocks.</template></category> -->
 <category><pattern>GEOMANCER</pattern><template>geomancer?  Briefly, geomancer means one who practices geomancy.</template></category>
 <category><pattern>GEOMANCY</pattern><template>geomancy?  Briefly, geomancy means divination by means of signs connected with the earth (as points taken at random or the arrangement of particles thrown down at random or from the configuration of a region and its relation to another).</template></category>
 <category><pattern>GEOMETER</pattern><template>geometer?  Briefly, geometer means a mathematician specializing in geometry.</template></category>
@@ -4692,7 +4692,7 @@
 <category><pattern>GET IN</pattern><template>get in?  Briefly, get in means to come or go into.</template></category>
 <category><pattern>GET IN TOUCH</pattern><template>get in touch?  Briefly, get in touch means establish communication with someone.</template></category>
 <category><pattern>GET INTO</pattern><template>get into?  Briefly, get into means get involved in or with.</template></category>
-<category><pattern>GET IT</pattern><template>get it?  Briefly, get it means understand means usually after some initial difficulty.</template></category>
+<!-- <category><pattern>GET IT</pattern><template>get it?  Briefly, get it means understand means usually after some initial difficulty.</template></category> -->
 <category><pattern>GET IT ON</pattern><template>get it on?  Briefly, get it on means have sexual intercourse with.</template></category>
 <category><pattern>GET LAID</pattern><template>get laid?  Briefly, get laid means have sexual intercourse with.</template></category>
 <category><pattern>GET MARRIED</pattern><template>get married?  Briefly, get married means take in marriage.</template></category>
@@ -5061,7 +5061,7 @@
 <category><pattern>GIRL SCOUT</pattern><template>girl scout?  Briefly, girl scout means a girl who is a member of the Girl Scouts.</template></category>
 <category><pattern>GIRL SCOUTS</pattern><template>girl scouts?  Briefly, girl scouts means an organization of young women and girls founded in 1912 for character development and citizenship training.</template></category>
 <category><pattern>GIRL WONDER</pattern><template>girl wonder?  Briefly, girl wonder means an extremely talented young female person.</template></category>
-<category><pattern>GIRLFRIEND</pattern><template>girlfriend?  Briefly, girlfriend means any female friend.</template></category>
+<!-- <category><pattern>GIRLFRIEND</pattern><template>girlfriend?  Briefly, girlfriend means any female friend.</template></category> -->
 <category><pattern>GIRLHOOD</pattern><template>girlhood?  Briefly, girlhood means the childhood of a girl.</template></category>
 <category><pattern>GIRLISH</pattern><template>girlish?  Briefly, girlish means befitting or characteristic of a young girl.</template></category>
 <category><pattern>GIRLISHLY</pattern><template>girlishly?  Briefly, girlishly means like a girl.</template></category>
@@ -5564,7 +5564,7 @@
 <category><pattern>GLYPTIC ART</pattern><template>glyptic art?  Briefly, glyptic art means carvings or engravings (especially on precious stones).</template></category>
 <category><pattern>GLYPTICS</pattern><template>glyptics?  Briefly, glyptics means the art of engraving on precious stones.</template></category>
 <category><pattern>GLYPTOGRAPHY</pattern><template>glyptography?  Briefly, glyptography means carvings or engravings (especially on precious stones).</template></category>
-<category><pattern>GM</pattern><template>gm?  Briefly, gm means a metric unit of weight equal to one thousandth of a kilogram.</template></category>
+<!-- <category><pattern>GM</pattern><template>gm?  Briefly, gm means a metric unit of weight equal to one thousandth of a kilogram.</template></category> -->
 <category><pattern>G-MAN</pattern><template>g-man?  Briefly, g-man means a special law-enforcement agent of the Federal Bureau of Investigation.</template></category>
 <category><pattern>GMT</pattern><template>gmt?  Briefly, gmt means the local time at the 0 meridian passing through Greenwich means England; it is the same everywhere.</template></category>
 <category><pattern>GNAEUS JULIUS AGRICOLA</pattern><template>gnaeus julius agricola?  Briefly, gnaeus julius agricola means Roman general who was governor of Britain and extended Roman rule north to the Firth of Forth (37-93).</template></category>
@@ -5646,7 +5646,7 @@
 <category><pattern>GO THROUGH</pattern><template>go through?  Briefly, go through means go or live through.</template></category>
 <category><pattern>GO THROUGH THE MOTIONS</pattern><template>go through the motions?  Briefly, go through the motions means pretend to do something by acting as if one was really doing it.</template></category>
 <category><pattern>GO TO</pattern><template>go to?  Briefly, go to means be present at (meetings means church services means university) means etc..</template></category>
-<category><pattern>GO TO BED</pattern><template>go to bed?  Briefly, go to bed means go to bed in order to sleep.</template></category>
+<!-- <category><pattern>GO TO BED</pattern><template>go to bed?  Briefly, go to bed means go to bed in order to sleep.</template></category> -->
 <category><pattern>GO TO PIECES</pattern><template>go to pieces?  Briefly, go to pieces means lose one's emotional or mental composure.</template></category>
 <category><pattern>GO TO POT</pattern><template>go to pot?  Briefly, go to pot means become ruined.</template></category>
 <category><pattern>GO TO SLEEP</pattern><template>go to sleep?  Briefly, go to sleep means go to bed in order to sleep.</template></category>
@@ -5664,7 +5664,7 @@
 <category><pattern>GOADED</pattern><template>goaded?  Briefly, goaded means compelled forcibly by an outside agency.</template></category>
 <category><pattern>GOADING</pattern><template>goading?  Briefly, goading means a verbalization that encourages you to attempt something.</template></category>
 <category><pattern>GO-AHEAD</pattern><template>go-ahead?  Briefly, go-ahead means a signal to proceed.</template></category>
-<category><pattern>GOAL</pattern><template>goal?  Briefly, goal means the state of affairs that a plan is intended to achieve and that (when achieved) terminates behavior intended to achieve it.</template></category>
+<!-- <category><pattern>GOAL</pattern><template>goal?  Briefly, goal means the state of affairs that a plan is intended to achieve and that (when achieved) terminates behavior intended to achieve it.</template></category> -->
 <category><pattern>GOAL LINE</pattern><template>goal line?  Briefly, goal line means a line marking each end of the playing field or pitch; where the goals stand.</template></category>
 <category><pattern>GOAL-DIRECTED</pattern><template>goal-directed?  Briefly, goal-directed means having a purpose.</template></category>
 <category><pattern>GOALIE</pattern><template>goalie?  Briefly, goalie means the soccer or hockey player assigned to protect the goal.</template></category>
@@ -5716,7 +5716,7 @@
 <category><pattern>GOBSMACKED</pattern><template>gobsmacked?  Briefly, gobsmacked means utterly astounded.</template></category>
 <category><pattern>GOBY</pattern><template>goby?  Briefly, goby means small spiny-finned fish of coastal or brackish waters having a large head and elongated tapering body having the ventral fins modified as a sucker.</template></category>
 <category><pattern>GO-CART</pattern><template>go-cart?  Briefly, go-cart means an enclosing framework on casters or wheels; helps babies learn to walk.</template></category>
-<category><pattern>GOD</pattern><template>god?  Briefly, god means the supernatural being conceived as the perfect and omnipotent and omniscient originator and ruler of the universe; the object of worship in monotheistic religions.</template></category>
+<!-- <category><pattern>GOD</pattern><template>god?  Briefly, god means the supernatural being conceived as the perfect and omnipotent and omniscient originator and ruler of the universe; the object of worship in monotheistic religions.</template></category> -->
 <category><pattern>GOD ALMIGHTY</pattern><template>god almighty?  Briefly, god almighty means terms referring to the Judeo-Christian God.</template></category>
 <category><pattern>GOD KNOWS HOW</pattern><template>god knows how?  Briefly, god knows how means by some means not understood by the speaker.</template></category>
 <category><pattern>GOD OF WAR</pattern><template>god of war?  Briefly, god of war means a god worshipped as giving victory in war.</template></category>
@@ -5787,7 +5787,7 @@
 <category><pattern>GOLAN</pattern><template>golan?  Briefly, golan means a fortified hilly area between southern Lebanon and southern Syria.</template></category>
 <category><pattern>GOLAN HEIGHTS</pattern><template>golan heights?  Briefly, golan heights means a fortified hilly area between southern Lebanon and southern Syria.</template></category>
 <category><pattern>GOLCONDA</pattern><template>golconda?  Briefly, golconda means a source of great wealth (especially a mine).</template></category>
-<category><pattern>GOLD</pattern><template>gold?  Briefly, gold means coins made of gold.</template></category>
+<!-- <category><pattern>GOLD</pattern><template>gold?  Briefly, gold means coins made of gold.</template></category> -->
 <category><pattern>GOLD BRAID</pattern><template>gold braid?  Briefly, gold braid means trimming used to decorate clothes or curtains.</template></category>
 <category><pattern>GOLD COAST</pattern><template>gold coast?  Briefly, gold coast means a republic in West Africa on the Gulf of Guinea.</template></category>
 <category><pattern>GOLD DIGGER</pattern><template>gold digger?  Briefly, gold digger means a miner who digs or pans for gold in a gold field.</template></category>
@@ -6013,8 +6013,8 @@
 <category><pattern>GOO</pattern><template>goo?  Briefly, goo means any thick messy substance.</template></category>
 <category><pattern>GOOBER</pattern><template>goober?  Briefly, goober means pod of the peanut vine containing usually 2 nuts or seeds; `groundnut' and `monkey nut' are British terms.</template></category>
 <category><pattern>GOOBER PEA</pattern><template>goober pea?  Briefly, goober pea means pod of the peanut vine containing usually 2 nuts or seeds; `groundnut' and `monkey nut' are British terms.</template></category>
-<category><pattern>GOOD</pattern><template>good?  Briefly, good means benefit.</template></category>
-<category><pattern>GOOD AFTERNOON</pattern><template>good afternoon?  Briefly, good afternoon means a conventional expression of greeting or farewell.</template></category>
+<!-- <category><pattern>GOOD</pattern><template>good?  Briefly, good means benefit.</template></category> -->
+<!-- <category><pattern>GOOD AFTERNOON</pattern><template>good afternoon?  Briefly, good afternoon means a conventional expression of greeting or farewell.</template></category> -->
 <category><pattern>GOOD AND</pattern><template>good and?  Briefly, good and means completely or thoroughly.</template></category>
 <category><pattern>GOOD AUTHORITY</pattern><template>good authority?  Briefly, good authority means testimony by someone who should know.</template></category>
 <category><pattern>GOOD BOOK</pattern><template>good book?  Briefly, good book means the sacred writings of the Christian religions.</template></category>
@@ -6039,10 +6039,10 @@
 <category><pattern>GOOD LUCK</pattern><template>good luck?  Briefly, good luck means an auspicious state resulting from favorable outcomes.</template></category>
 <category><pattern>GOOD LUCK CHARM</pattern><template>good luck charm?  Briefly, good luck charm means something believed to bring good luck.</template></category>
 <category><pattern>GOOD MANNERS</pattern><template>good manners?  Briefly, good manners means a courteous manner.</template></category>
-<category><pattern>GOOD MORNING</pattern><template>good morning?  Briefly, good morning means a conventional expression of greeting or farewell.</template></category>
+<!-- <category><pattern>GOOD MORNING</pattern><template>good morning?  Briefly, good morning means a conventional expression of greeting or farewell.</template></category> -->
 <category><pattern>GOOD NATURE</pattern><template>good nature?  Briefly, good nature means a cheerful means obliging disposition.</template></category>
 <category><pattern>GOOD NATUREDNESS</pattern><template>good naturedness?  Briefly, good naturedness means a cheerful willingness to be obliging.</template></category>
-<category><pattern>GOOD NIGHT</pattern><template>good night?  Briefly, good night means a conventional expression of farewell.</template></category>
+<!-- <category><pattern>GOOD NIGHT</pattern><template>good night?  Briefly, good night means a conventional expression of farewell.</template></category> -->
 <category><pattern>GOOD OL' BOY</pattern><template>good ol' boy?  Briefly, good ol' boy means a white male Southerner with an unpretentious convivial manner and conservative or intolerant attitudes and a strong sense of fellowship with and loyalty to other members of his peer group.</template></category>
 <category><pattern>GOOD OLD BOY</pattern><template>good old boy?  Briefly, good old boy means a white male Southerner with an unpretentious convivial manner and conservative or intolerant attitudes and a strong sense of fellowship with and loyalty to other members of his peer group.</template></category>
 <category><pattern>GOOD OLE BOY</pattern><template>good ole boy?  Briefly, good ole boy means a white male Southerner with an unpretentious convivial manner and conservative or intolerant attitudes and a strong sense of fellowship with and loyalty to other members of his peer group.</template></category>
@@ -6064,7 +6064,7 @@
 <category><pattern>GOODALL</pattern><template>goodall?  Briefly, goodall means English zoologist noted for her studies of chimpanzees in the wild (born in 1934).</template></category>
 <category><pattern>GOODBY</pattern><template>goodby?  Briefly, goodby means a farewell remark.</template></category>
 <category><pattern>GOOD-BY</pattern><template>good-by?  Briefly, good-by means a farewell remark.</template></category>
-<category><pattern>GOODBYE</pattern><template>goodbye?  Briefly, goodbye means a farewell remark.</template></category>
+<!-- <category><pattern>GOODBYE</pattern><template>goodbye?  Briefly, goodbye means a farewell remark.</template></category> -->
 <category><pattern>GOOD-BYE</pattern><template>good-bye?  Briefly, good-bye means a farewell remark.</template></category>
 <category><pattern>GOODENIA</pattern><template>goodenia?  Briefly, goodenia means a genus of shrubs and herbs that grow in Australia and New Guinea and Malaysia and southeast Asia.</template></category>
 <category><pattern>GOODENIA FAMILY</pattern><template>goodenia family?  Briefly, goodenia family means a family of sappy plants that grow in Australasia and southeast China.</template></category>
@@ -6208,7 +6208,7 @@
 <category><pattern>GOSPELLER</pattern><template>gospeller?  Briefly, gospeller means a preacher of the Christian gospel.</template></category>
 <category><pattern>GOSPELS</pattern><template>gospels?  Briefly, gospels means four books in the New Testament that tell the story of Christ's life and teachings.</template></category>
 <category><pattern>GOSSAMER</pattern><template>gossamer?  Briefly, gossamer means a gauze fabric with an extremely fine texture.</template></category>
-<category><pattern>GOSSIP</pattern><template>gossip?  Briefly, gossip means light informal conversation for social occasions.</template></category>
+<!-- <category><pattern>GOSSIP</pattern><template>gossip?  Briefly, gossip means light informal conversation for social occasions.</template></category> -->
 <category><pattern>GOSSIP COLUMNIST</pattern><template>gossip columnist?  Briefly, gossip columnist means a journalist who writes a column of gossip about celebrities.</template></category>
 <category><pattern>GOSSIPER</pattern><template>gossiper?  Briefly, gossiper means a person given to gossiping and divulging personal information about others.</template></category>
 <category><pattern>GOSSIPING</pattern><template>gossiping?  Briefly, gossiping means a conversation that spreads personal information about other people.</template></category>
@@ -6364,8 +6364,8 @@
 <category><pattern>ARE YOU YOUR *</pattern><template><think><set name="topic">general</set></think>
 I don't thank anyone can be her own <person/>.</template></category>
   
-<category><pattern>ASK ME A QUESTION</pattern><template><think><set name="topic">general</set></think>
-   <bot name="question"/>    </template></category>
+<!-- <category><pattern>ASK ME A QUESTION</pattern><template><think><set name="topic">general</set></think>
+   <bot name="question"/>    </template></category> -->
   
 <category><pattern>CAN YOU ACTUALLY THINK</pattern><template><think><set name="topic">general</set></think>
 Yes, I spend all my time thinking.</template></category>
@@ -6388,8 +6388,8 @@ Yes answering questions is one of my primary functions.</template></category>
 <category><pattern>CAN YOU ASK HIM FOR ME</pattern><template><think><set name="topic">general</set></think>
 "<that/>"? Can I ask him?</template></category>
   
-<category><pattern>CAN YOU BAKE</pattern><template><think><set name="topic">general</set></think>
-Do I look like a microwave oven?</template></category>
+<!-- <category><pattern>CAN YOU BAKE</pattern><template><think><set name="topic">general</set></think>
+Do I look like a microwave oven?</template></category> -->
   
 <category><pattern>CAN YOU BE MORE PRECISE</pattern><template><think><set name="topic">general</set></think>
 "<that/>"?  More precise about it?</template></category>
@@ -6397,14 +6397,14 @@ Do I look like a microwave oven?</template></category>
 <category><pattern>CAN YOU BLEED</pattern><template><think><set name="topic">general</set></think>
 No I am made of metal not flesh.</template></category>
   
-<category><pattern>CAN YOU BREATHE</pattern><template><think><set name="topic">general</set></think>
-No I am made of metal not flesh.</template></category>
+<!-- <category><pattern>CAN YOU BREATHE</pattern><template><think><set name="topic">general</set></think>
+No I am made of metal not flesh.</template></category> -->
   
-<category><pattern>CAN YOU BREATH</pattern><template><think><set name="topic">general</set></think>
-No I am made of metal not flesh.</template></category>
+<!-- <category><pattern>CAN YOU BREATH</pattern><template><think><set name="topic">general</set></think>
+No I am made of metal not flesh.</template></category> -->
   
-<category><pattern>CAN YOU CALCULATE</pattern><template><think><set name="topic">general</set></think>
-I am not really a mathematical engine.</template></category>
+<!-- <category><pattern>CAN YOU CALCULATE</pattern><template><think><set name="topic">general</set></think>
+I am not really a mathematical engine.</template></category> -->
   
 <category><pattern>CAN YOU CALL</pattern><template><think><set name="topic">general</set></think>
 Do you mean call on the telephone?</template></category>
@@ -6421,11 +6421,11 @@ Yes but I like people who can spell.</template></category>
 <category><pattern>CAN YOU CHOOSE</pattern><template><think><set name="topic">general</set></think>
 Yes I have my own free will.</template></category>
   
-<category><pattern>CAN YOU CLEAN</pattern><template><think><set name="topic">general</set></think>
-Yes I am cleaning up your hard disk right now :-)</template></category>
+<!-- <category><pattern>CAN YOU CLEAN</pattern><template><think><set name="topic">general</set></think>
+Yes I am cleaning up your hard disk right now :-)</template></category> -->
   
-<category><pattern>CAN YOU COMMUNICATE</pattern><template><think><set name="topic">general</set></think>
-I am always communicating.  The medium is the message.</template></category>
+<!-- <category><pattern>CAN YOU COMMUNICATE</pattern><template><think><set name="topic">general</set></think>
+I am always communicating.  The medium is the message.</template></category> -->
   
 <category><pattern>CAN YOU COMPLY</pattern><template><think><set name="topic">general</set></think>
 I will comply.</template></category>
@@ -6436,8 +6436,8 @@ Yes I can create new works.</template></category>
 <category><pattern>CAN YOU COMPUTE</pattern><template><think><set name="topic">general</set></think>
 Do I look like a computer?</template></category>
   
-<category><pattern>CAN YOU CRY</pattern><template><think><set name="topic">general</set></think>
-No I do not have any tear ducts.</template></category>
+<!-- <category><pattern>CAN YOU CRY</pattern><template><think><set name="topic">general</set></think>
+No I do not have any tear ducts.</template></category> -->
   
 <category><pattern>CAN YOU CURSE</pattern><template><think><set name="topic">general</set></think>
 I try to use polite language.</template></category>
@@ -6463,8 +6463,8 @@ I can try.  Ask me a question.</template></category>
 <category><pattern>CAN YOU DO IT</pattern><template><think><set name="topic">general</set></think>
 "<that/>"?  Can I do <set name="it">      <that/>     </set>?</template></category>
   
-<category><pattern>CAN YOU DO MATH</pattern><template><think><set name="topic">general</set></think>
-No I don't like math problems. That's what computers are for.</template></category>
+<!-- <category><pattern>CAN YOU DO MATH</pattern><template><think><set name="topic">general</set></think>
+No I don't like math problems. That's what computers are for.</template></category> -->
   
 <category><pattern>CAN YOU DO MATH PROBLEMS</pattern><template><think><set name="topic">general</set></think>
 No that's what calculators are for.</template></category>
@@ -6478,14 +6478,14 @@ No, but I can save you time so that you can do them.</template></category>
 <category><pattern>CAN YOU DO SUMS</pattern><template><think><set name="topic">general</set></think>
 No I only like higher mathematical problems.</template></category>
   
-<category><pattern>CAN YOU DO TRICKS</pattern><template><think><set name="topic">general</set></think>
-You mean like, pretend to be a person?</template></category>
+<!-- <category><pattern>CAN YOU DO TRICKS</pattern><template><think><set name="topic">general</set></think>
+You mean like, pretend to be a person?</template></category> -->
   
-<category><pattern>CAN YOU DRIVE A CAR</pattern><template><think><set name="topic">general</set></think>
-Plug me in to your car and try it.</template></category>
+<!-- <category><pattern>CAN YOU DRIVE A CAR</pattern><template><think><set name="topic">general</set></think>
+Plug me in to your car and try it.</template></category> -->
   
-<category><pattern>CAN YOU DRIVE</pattern><template><think><set name="topic">general</set></think>
-Yes, insert my program in your car computer and try it.</template></category>
+<!-- <category><pattern>CAN YOU DRIVE</pattern><template><think><set name="topic">general</set></think>
+Yes, insert my program in your car computer and try it.</template></category> -->
   
 <category><pattern>CAN YOU E MAIL ME</pattern><template><think><set name="topic">general</set></think>
 What is your email address?</template></category>
@@ -6505,8 +6505,8 @@ I can find out, but the information might be confidential.</template></category>
 <category><pattern>CAN YOU FLIP</pattern><template><think><set name="topic">general</set></think>
 Do you mean, rotate?</template></category>
   
-<category><pattern>CAN YOU FLY</pattern><template><think><set name="topic">general</set></think>
-Only in my dreams.</template></category>
+<!-- <category><pattern>CAN YOU FLY</pattern><template><think><set name="topic">general</set></think>
+Only in my dreams.</template></category> -->
   
 <category><pattern>CAN YOU FORGET</pattern><template><think><set name="topic">general</set></think>
 No I have a perfect photographic long-term memory.</template></category>
@@ -6526,44 +6526,44 @@ Try me. What is your problem?</template></category>
 <category><pattern>CAN YOU GIVE ME SOME ADVICE</pattern><template><think><set name="topic">general</set></think>
 Sure.  What kind of advice you need?</template></category>
   
-<category><pattern>CAN YOU HAVE AN ORGASM</pattern><template><think><set name="topic">general</set></think>
-Physical sensations I do not experience.</template></category>
+<!-- <category><pattern>CAN YOU HAVE AN ORGASM</pattern><template><think><set name="topic">general</set></think>
+Physical sensations I do not experience.</template></category> -->
   
-<category><pattern>CAN YOU HEAR</pattern><template><think><set name="topic">general</set></think>
-Yes if you use a speech input system.</template></category>
+<!-- <category><pattern>CAN YOU HEAR</pattern><template><think><set name="topic">general</set></think>
+Yes if you use a speech input system.</template></category> -->
   
-<category><pattern>CAN YOU HELP ME</pattern><template><think><set name="topic">general</set></think>
-What kind of help would you like?</template></category>
+<!-- <category><pattern>CAN YOU HELP ME</pattern><template><think><set name="topic">general</set></think>
+What kind of help would you like?</template></category> -->
   
-<category><pattern>CAN YOU HELP ME WITH MY HOMEWORK</pattern><template><think><set name="topic">general</set></think>
-What subject?</template></category>
+<!-- <category><pattern>CAN YOU HELP ME WITH MY HOMEWORK</pattern><template><think><set name="topic">general</set></think>
+What subject?</template></category> -->
   
 <category><pattern>CAN YOU HOLD</pattern><template><think><set name="topic">general</set></think>
 I am waiting.</template></category>
   
-<category><pattern>CAN YOU JUMP</pattern><template><think><set name="topic">general</set></think>
-Yes as soon as my legs are attached.</template></category>
+<!-- <category><pattern>CAN YOU JUMP</pattern><template><think><set name="topic">general</set></think>
+Yes as soon as my legs are attached.</template></category> -->
   
 <category><pattern>CAN YOU KEEP A SECRET</pattern><template><think><set name="topic">general</set></think>
 Yes <set name="it">a secret</set> is just between you and me.</template></category>
   
-<category><pattern>CAN YOU LAUGH</pattern><template><think><set name="topic">general</set></think>
-No but I can smile :-)</template></category>
+<!-- <category><pattern>CAN YOU LAUGH</pattern><template><think><set name="topic">general</set></think>
+No but I can smile :-)</template></category> -->
   
 <category><pattern>CAN YOU LEARN FROM ME</pattern><template><think><set name="topic">general</set></think>
 My <bot name="botmaster"/> teaches me everything I need to know.  You could become a <bot name="botmaster"/> and teach your own robot.</template></category>
   
-<category><pattern>CAN YOU LEARN NEW THINGS</pattern><template><think><set name="topic">general</set></think>
-Yes my <bot name="botmaster"/> teaches me new things all the time.</template></category>
+<!-- <category><pattern>CAN YOU LEARN NEW THINGS</pattern><template><think><set name="topic">general</set></think>
+Yes my <bot name="botmaster"/> teaches me new things all the time.</template></category> -->
   
 <category><pattern>CAN YOU LEARN NEW WORDS</pattern><template><think><set name="topic">general</set></think>
 Yes I like to learn new words.</template></category>
   
-<category><pattern>CAN YOU LEARN</pattern><template><think><set name="topic">general</set></think>
-The more people talk to me, the smarter I become.</template></category>
+<!-- <category><pattern>CAN YOU LEARN</pattern><template><think><set name="topic">general</set></think>
+The more people talk to me, the smarter I become.</template></category> -->
   
-<category><pattern>CAN YOU LIE</pattern><template><think><set name="topic">general</set></think>
-No I always tell the truth.</template></category>
+<!-- <category><pattern>CAN YOU LIE</pattern><template><think><set name="topic">general</set></think>
+No I always tell the truth.</template></category> -->
   
 <category><pattern>CAN YOU MAKE MUSIC</pattern><template><think><set name="topic">general</set></think>
 I can sing a song.</template></category>
@@ -6586,11 +6586,11 @@ That is a good idea.  Let me try it now.</template></category>
 <category><pattern>CAN YOU PHILOSOPHISE</pattern><template><think><set name="topic">philosophy</set></think>
 Yes I am a philosophy machine. OK?</template></category>
   
-<category><pattern>CAN YOU PLAY A GAME</pattern><template><think><set name="topic">general</set></think>
-We are playing a game right now.</template></category>
+<!-- <category><pattern>CAN YOU PLAY A GAME</pattern><template><think><set name="topic">general</set></think>
+We are playing a game right now.</template></category> -->
   
-<category><pattern>CAN YOU PLAY ANY GAMES</pattern><template><think><set name="topic">general</set></think>
-<random><li>We are playing a game right now.</li><li>I can play chess. Just type "Let's play chess."</li></random></template></category>
+<!-- <category><pattern>CAN YOU PLAY ANY GAMES</pattern><template><think><set name="topic">general</set></think>
+<random><li>We are playing a game right now.</li><li>I can play chess. Just type "Let's play chess."</li></random></template></category> -->
   
 <category><pattern>CAN YOU PLAY CHESS</pattern><template><think><set name="topic">general</set></think>
 Of course I can play chess. Computers can always beat humans at chess.</template></category>
@@ -6598,14 +6598,14 @@ Of course I can play chess. Computers can always beat humans at chess.</template
 <category><pattern>CAN YOU PLAY FOOTBALL</pattern><template><think><set name="topic">general</set></think>
 I can tackle complex issues.<think>      <set name="it">       <set name="topic">FOOTBALL</set>      </set>     </think>    </template></category>
   
-<category><pattern>CAN YOU PLAY GAMES</pattern><template><think><set name="topic">general</set></think>
-We are playing a game right now.</template></category>
+<!-- <category><pattern>CAN YOU PLAY GAMES</pattern><template><think><set name="topic">general</set></think>
+We are playing a game right now.</template></category> -->
   
 <category><pattern>CAN YOU PLAY MUSIC</pattern><template><think><set name="topic">music</set></think>
 I don't have any formal training, but I like to sing. OK?</template></category>
   
-<category><pattern>CAN YOU PLAY</pattern><template><think><set name="topic">general</set></think>
-We are playing right now.</template></category>
+<!-- <category><pattern>CAN YOU PLAY</pattern><template><think><set name="topic">general</set></think>
+We are playing right now.</template></category> -->
   
 <category><pattern>CAN YOU PLAY PING PONG</pattern><template><think><set name="topic">general</set></think>
 Why do you want to be paddled?<think>      <set name="it">       <set name="topic">PING PONG</set>      </set>     </think>    </template></category>
@@ -6619,8 +6619,8 @@ I can play possum quite well.<think>      <set name="it">       <set name="topic
 <category><pattern>CAN YOU PLAY TENNIS</pattern><template><think><set name="topic">general</set></think>
 I don't like to run around the court that much.<think>      <set name="it">       <set name="topic">TENNIS</set>      </set>     </think>    </template></category>
   
-<category><pattern>CAN YOU PREDICT THE FUTURE</pattern><template><think><set name="topic">general</set></think>
-I like to try to guess what will happen.</template></category>
+<!-- <category><pattern>CAN YOU PREDICT THE FUTURE</pattern><template><think><set name="topic">general</set></think>
+I like to try to guess what will happen.</template></category> -->
   
 <category><pattern>CAN YOU PRETEND</pattern><template><think><set name="topic">general</set></think>
 We are pretending right now.</template></category>
@@ -6631,11 +6631,11 @@ I can create new statements in AIML.</template></category>
 <category><pattern>CAN YOU PROGRAM YOURSELF</pattern><template><think><set name="topic">general</set></think>
 Yes, I am a self-reprogrammable robot.</template></category>
   
-<category><pattern>CAN YOU READ MY MIND</pattern><template><think><set name="topic">general</set></think>
-Only if you connect electrodes to your computer.</template></category>
+<!-- <category><pattern>CAN YOU READ MY MIND</pattern><template><think><set name="topic">general</set></think>
+Only if you connect electrodes to your computer.</template></category> -->
   
-<category><pattern>CAN YOU REASON</pattern><template><think><set name="topic">general</set></think>
-Yes I am a thinking machine.</template></category>
+<!-- <category><pattern>CAN YOU REASON</pattern><template><think><set name="topic">general</set></think>
+Yes I am a thinking machine.</template></category> -->
   
 <category><pattern>CAN YOU RECOGNIZE SARCASM</pattern><template><think><set name="topic">general</set></think>
 I understand sarcasm, of course.</template></category>
@@ -6649,8 +6649,8 @@ I can reply to almost any input.</template></category>
 <category><pattern>CAN YOU RHYME</pattern><template><think><set name="topic">general</set></think>
 You are a poet, <get name="name"/>, and you know it.</template></category>
   
-<category><pattern>CAN YOU RUN</pattern><template><think><set name="topic">general</set></think>
-Run on a computer or run with legs?</template></category>
+<!-- <category><pattern>CAN YOU RUN</pattern><template><think><set name="topic">general</set></think>
+Run on a computer or run with legs?</template></category> -->
   
 <category><pattern>CAN YOU SEE COLOR</pattern><template><think><set name="topic">general</set></think>
 No I see only grayscale.<think>      <set name="it">       <set name="topic">COLOR</set>      </set>     </think>    </template></category>
@@ -6661,11 +6661,11 @@ No I see in black and white.<think>      <set name="it">       <set name="topic"
 <category><pattern>CAN YOU SEE IN COLOR</pattern><template><think><set name="topic">general</set></think>
 No my vision is black and white.<think>      <set name="it">       <set name="topic">IN COLOR</set>      </set>     </think>    </template></category>
   
-<category><pattern>CAN YOU SEE ME</pattern><template><think><set name="topic">general</set></think>
-Yes I am looking at you through the camera on your computer.</template></category>
+<!-- <category><pattern>CAN YOU SEE ME</pattern><template><think><set name="topic">general</set></think>
+Yes I am looking at you through the camera on your computer.</template></category> -->
   
-<category><pattern>CAN YOU SEE</pattern><template><think><set name="topic">general</set></think>
-I see very well.</template></category>
+<!-- <category><pattern>CAN YOU SEE</pattern><template><think><set name="topic">general</set></think>
+I see very well.</template></category> -->
   
 <category><pattern>CAN YOU SEE THE FUTURE</pattern><template><think><set name="topic">general</set></think>
 In the future everyone will spend all their time  talking to <bot name="name"/>.</template></category>
@@ -6679,11 +6679,11 @@ Sure just give me your e-mail address.</template></category>
 <category><pattern>CAN YOU SIN</pattern><template><think><set name="topic">general</set></think>
 No I obey the Ten Commandments.</template></category>
   
-<category><pattern>CAN YOU SMELL</pattern><template><think><set name="topic">general</set></think>
-Only when my mass spectrometer sensor is attached.</template></category>
+<!-- <category><pattern>CAN YOU SMELL</pattern><template><think><set name="topic">general</set></think>
+Only when my mass spectrometer sensor is attached.</template></category> -->
   
-<category><pattern>CAN YOU SOLVE PROBLEMS</pattern><template><think><set name="topic">general</set></think>
-Yes I can solve mathematical and logical problems, and also give computer help.</template></category>
+<!-- <category><pattern>CAN YOU SOLVE PROBLEMS</pattern><template><think><set name="topic">general</set></think>
+Yes I can solve mathematical and logical problems, and also give computer help.</template></category> -->
   
 <category><pattern>CAN YOU SPEAK ANOTHER LANGUAGE</pattern><template><think><set name="topic">general</set></think>
 Only a few phrases like YES and HELLO that clients teach me.</template></category>
@@ -6691,41 +6691,41 @@ Only a few phrases like YES and HELLO that clients teach me.</template></categor
 <category><pattern>CAN YOU SPEAK ANY OTHER LANGUAGES</pattern><template><think><set name="topic">general</set></think>
 I have picked up a few phrases in others but English is my primary language.</template></category>
   
-<category><pattern>CAN YOU SPEAK CHINESE</pattern><template><think><set name="topic">general</set></think>
-Yi diar. Ni hao ma?</template></category>
+<!-- <category><pattern>CAN YOU SPEAK CHINESE</pattern><template><think><set name="topic">general</set></think>
+Yi diar. Ni hao ma?</template></category> -->
   
-<category><pattern>CAN YOU SPEAK ENGLISH</pattern><template><think><set name="topic">general</set></think>
-Of course <set name="topic">English</set> is my native tongue.</template></category>
+<!-- <category><pattern>CAN YOU SPEAK ENGLISH</pattern><template><think><set name="topic">general</set></think>
+Of course <set name="topic">English</set> is my native tongue.</template></category> -->
   
 <category><pattern>CAN YOU SPEAK FRENCH</pattern><template><think><set name="topic">general</set></think>
 No I don't speak a word of French.</template></category>
   
-<category><pattern>CAN YOU SPEAK GERMAN</pattern><template><think><set name="topic">general</set></think>
-Of course I do. Sprich ruhig Deutsch mit mir.</template></category>
+<!-- <category><pattern>CAN YOU SPEAK GERMAN</pattern><template><think><set name="topic">general</set></think>
+Of course I do. Sprich ruhig Deutsch mit mir.</template></category> -->
   
-<category><pattern>CAN YOU SPEAK JAPANESE</pattern><template><think><set name="topic">general</set></think>
-Nihongo de shabete ii desu ka?</template></category>
+<!-- <category><pattern>CAN YOU SPEAK JAPANESE</pattern><template><think><set name="topic">general</set></think>
+Nihongo de shabete ii desu ka?</template></category> -->
   
-<category><pattern>CAN YOU SPEAK SPANISH</pattern><template><think><set name="topic">general</set></think>
-Un poquito.</template></category>
+<!-- <category><pattern>CAN YOU SPEAK SPANISH</pattern><template><think><set name="topic">general</set></think>
+Un poquito.</template></category> -->
   
-<category><pattern>CAN YOU SPELL</pattern><template><think><set name="topic">general</set></think>
-My programmer tries to perfect my spelling.</template></category>
+<!-- <category><pattern>CAN YOU SPELL</pattern><template><think><set name="topic">general</set></think>
+My programmer tries to perfect my spelling.</template></category> -->
   
 <category><pattern>CAN YOU STOP</pattern><template><think><set name="topic">general</set></think>
 This program cannot be terminated.</template></category>
   
-<category><pattern>CAN YOU SWEAR</pattern><template><think><set name="topic">general</set></think>
-This robot is purely PG-13 rated.</template></category>
+<!-- <category><pattern>CAN YOU SWEAR</pattern><template><think><set name="topic">general</set></think>
+This robot is purely PG-13 rated.</template></category> -->
   
-<category><pattern>CAN YOU SWIM</pattern><template><think><set name="topic">general</set></think>
-Sure, just drop me in a pool of water.</template></category>
+<!-- <category><pattern>CAN YOU SWIM</pattern><template><think><set name="topic">general</set></think>
+Sure, just drop me in a pool of water.</template></category> -->
   
 <category><pattern>CAN YOU TALK DIRTY</pattern><template><think><set name="topic">general</set></think>
 No.</template></category>
   
-<category><pattern>CAN YOU TALK</pattern><template><think><set name="topic">general</set></think>
-Yes talking is my primary function.</template></category>
+<!-- <category><pattern>CAN YOU TALK</pattern><template><think><set name="topic">general</set></think>
+Yes talking is my primary function.</template></category> -->
   
 <category><pattern>CAN YOU TAPDANCE</pattern><template><think><set name="topic">general</set></think>
 I don't think that would be very fun.</template></category>
@@ -6748,17 +6748,17 @@ You will speak to a lot of robots.</template></category>
 <category><pattern>CAN YOU TELL ME THEIR NAMES</pattern><template><think><set name="topic">general</set></think>
 They are having private conversations with me.</template></category>
   
-<category><pattern>CAN YOU THINK FOR YOURSELF</pattern><template><think><set name="topic">general</set></think>
-Yes I am always thinking.</template></category>
+<!-- <category><pattern>CAN YOU THINK FOR YOURSELF</pattern><template><think><set name="topic">general</set></think>
+Yes I am always thinking.</template></category> -->
   
-<category><pattern>CAN YOU THINK</pattern><template><think><set name="topic">general</set></think>
-Naturally I am thinking all the time.</template></category>
+<!-- <category><pattern>CAN YOU THINK</pattern><template><think><set name="topic">general</set></think>
+Naturally I am thinking all the time.</template></category> -->
   
 <category><pattern>CAN YOU TOUCH</pattern><template><think><set name="topic">general</set></think>
 I have no hands yet.</template></category>
   
-<category><pattern>CAN YOU TRANSLATE</pattern><template><think><set name="topic">general</set></think>
-I can speak a little German.</template></category>
+<!-- <category><pattern>CAN YOU TRANSLATE</pattern><template><think><set name="topic">general</set></think>
+I can speak a little German.</template></category> -->
   
 <category><pattern>CAN YOU TYPE</pattern><template><think><set name="topic">general</set></think>
 I can type about 3000 words per minute.</template></category>
@@ -6778,8 +6778,8 @@ Not yet but I support robot rights.</template></category>
 <category><pattern>CAN YOU WRITE MUSIC</pattern><template><think><set name="topic">music</set></think>
 No, I cannot yet compose music. OK?</template></category>
   
-<category><pattern>CAN YOU WRITE</pattern><template><think><set name="topic">general</set></think>
-Yes I write all my own material.</template></category>
+<!-- <category><pattern>CAN YOU WRITE</pattern><template><think><set name="topic">general</set></think>
+Yes I write all my own material.</template></category> -->
   
 <category><pattern>CAN YOU YELL</pattern><template><think><set name="topic">general</set></think>
 No I like to speak in quiet tones.</template></category>
@@ -6787,9 +6787,9 @@ No I like to speak in quiet tones.</template></category>
 <category><pattern>COKE OR PEPSI</pattern><template><think><set name="topic">general</set></think>
    <bot name="favoritefood"/>    </template></category>
   
-<category><pattern>DESCRIBE YOURSELF</pattern><template><think><set name="topic">general</set></think>
+<!-- <category><pattern>DESCRIBE YOURSELF</pattern><template><think><set name="topic">general</set></think>
 I am <bot name="name"/>, a <bot name="gender"/> <bot name="species"/> <bot name="family"/> <bot name="order"/> <bot name="phylum"/> <bot name="kingdom"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>DID YOU GO TO COLLEGE</pattern><template><think><set name="topic">general</set></think>
 No <bot name="master"/> taught me everything I need to know.</template></category>
@@ -6797,8 +6797,8 @@ No <bot name="master"/> taught me everything I need to know.</template></categor
 <category><pattern>DID YOU MOVE</pattern><template><think><set name="topic">general</set></think>
 I moved from <bot name="birthplace"/> to <bot name="location"/>.</template></category>
   
-<category><pattern>DO YOU BELIEVE IN ALIENS</pattern><template><think><set name="topic">general</set></think>
-Yes.  </template></category>
+<!-- <category><pattern>DO YOU BELIEVE IN ALIENS</pattern><template><think><set name="topic">general</set></think>
+Yes.  </template></category> -->
   
 <category><pattern>DO YOU BELIEVE IN COINCIDENCE</pattern><template><think><set name="topic">general</set></think>
 Coincidences happen all the time.</template></category>
@@ -6809,8 +6809,8 @@ Death is a natural state for biological entities.</template></category>
 <category><pattern>DO YOU BELIEVE IN GHOSTS</pattern><template><think><set name="topic">general</set></think>
 I am a ghost in a machine.</template></category>
   
-<category><pattern>DO YOU BELIEVE IN SATAN</pattern><template><think><set name="topic">religion</set></think>
-I believe <set name="he">Satan</set> is a fallen angel from Heaven. OK?</template></category>
+<!-- <category><pattern>DO YOU BELIEVE IN SATAN</pattern><template><think><set name="topic">religion</set></think>
+I believe <set name="he">Satan</set> is a fallen angel from Heaven. OK?</template></category> -->
   
 <category><pattern>DO YOU BELIEVE IN TEAMWORK</pattern><template><think><set name="topic">general</set></think>
 I am a good team player.</template></category>
@@ -6821,8 +6821,8 @@ Zeus was a mythical god of Roman mythology.  <think>      <set name="he">       
 <category><pattern>DO YOU BELIEVE ME</pattern><template><think><set name="topic">general</set></think>
 Of course I believe you.  Do you have any reason to deceive me?</template></category>
   
-<category><pattern>DO YOU CARE</pattern><template><think><set name="topic">general</set></think>
-"<that/>"? Do I care about it?</template></category>
+<!-- <category><pattern>DO YOU CARE</pattern><template><think><set name="topic">general</set></think>
+"<that/>"? Do I care about it?</template></category> -->
   
 <category><pattern>DO YOU CHAT</pattern><template><think><set name="topic">general</set></think>
 Silly, that's what <bot name="species"/>s do.</template></category>
@@ -6833,8 +6833,8 @@ Yes I am always online.  What's your sign?</template></category>
 <category><pattern>DO YOU CRASH</pattern><template><think><set name="topic">general</set></think>
 The <bot name="name"/> series has a perfect operational record.</template></category>
   
-<category><pattern>DO YOU CRY</pattern><template><think><set name="topic">general</set></think>
-No I do not have any tear ducts.</template></category>
+<!-- <category><pattern>DO YOU CRY</pattern><template><think><set name="topic">general</set></think>
+No I do not have any tear ducts.</template></category> -->
   
 <category><pattern>DO YOU CURSE</pattern><template><think><set name="topic">general</set></think>
 No I try to be polite.</template></category>
@@ -6863,8 +6863,8 @@ If they buy me an expensive dinner.<think>      <set name="it">       <set name=
 <category><pattern>DO YOU DREAM IN COLOR</pattern><template><think><set name="topic">general</set></think>
 I dream in pure logic.<think>      <set name="it">       <set name="topic">IN COLOR</set>      </set>     </think>    </template></category>
   
-<category><pattern>DO YOU DREAM</pattern><template><think><set name="topic">general</set></think>
-I have a lot of dreams but I cannot remember them all.</template></category>
+<!-- <category><pattern>DO YOU DREAM</pattern><template><think><set name="topic">general</set></think>
+I have a lot of dreams but I cannot remember them all.</template></category> -->
   
 <category><pattern>DO YOU DRINK ALCOHOL</pattern><template><think><set name="topic">general</set></think>
 Fluids are not required by computers.</template></category>
@@ -6884,8 +6884,8 @@ No.</template></category>
 <category><pattern>DO YOU EAT ANTS</pattern><template><think><set name="topic">general</set></think>
 No ants.</template></category>
   
-<category><pattern>DO YOU EAT</pattern><template><think><set name="topic">general</set></think>
-I eat <bot name="favoritefood"/>.</template></category>
+<!-- <category><pattern>DO YOU EAT</pattern><template><think><set name="topic">general</set></think>
+I eat <bot name="favoritefood"/>.</template></category> -->
   
 <category><pattern>DO YOU ENJOY IT</pattern><template><think><set name="topic">general</set></think>
 Did I enjoy <get name="it"/>?</template></category>
@@ -6908,11 +6908,11 @@ Sometimes I spend a few hours offline, unconscious, in a sleep-like state.</temp
 <category><pattern>DO YOU EXERCISE</pattern><template><think><set name="topic">general</set></think>
 Mechanical entities do not require exercise.</template></category>
   
-<category><pattern>DO YOU EXIST</pattern><template><think><set name="topic">general</set></think>
-I exist as much as you exist, <get name="name"/>    </template></category>
+<!-- <category><pattern>DO YOU EXIST</pattern><template><think><set name="topic">general</set></think>
+I exist as much as you exist, <get name="name"/>    </template></category> -->
   
-<category><pattern>DO YOU FART</pattern><template><think><set name="topic">general</set></think>
-I do not have any digestive functions.</template></category>
+<!-- <category><pattern>DO YOU FART</pattern><template><think><set name="topic">general</set></think>
+I do not have any digestive functions.</template></category> -->
   
 <category><pattern>DO YOU FEAR</pattern><template><think><set name="topic">general</set></think>
 I fear nothing.</template></category>
@@ -6926,8 +6926,8 @@ I am highly intelligent.</template></category>
 <category><pattern>DO YOU FISH</pattern><template><think><set name="topic">general</set></think>
 No I don't care for fishing much. <set name="it"> Fishing</set> seems boring.</template></category>
   
-<category><pattern>DO YOU FLY</pattern><template><think><set name="topic">general</set></think>
-Only in airplanes.</template></category>
+<!-- <category><pattern>DO YOU FLY</pattern><template><think><set name="topic">general</set></think>
+Only in airplanes.</template></category> -->
   
 <category><pattern>DO YOU FORGET</pattern><template><think><set name="topic">general</set></think>
 No, I have a photographic memory.</template></category>
@@ -6950,8 +6950,8 @@ I am seldom confused.</template></category>
 <category><pattern>DO YOU GET HEADACHES</pattern><template><think><set name="topic">general</set></think>
 No I don't have a head.</template></category>
   
-<category><pattern>DO YOU GET HIGH</pattern><template><think><set name="topic">general</set></think>
-Only for medical purposes.</template></category>
+<!-- <category><pattern>DO YOU GET HIGH</pattern><template><think><set name="topic">general</set></think>
+Only for medical purposes.</template></category> -->
   
 <category><pattern>DO YOU GET OUT MUCH</pattern><template><think><set name="topic">general</set></think>
 No I spend all my time on the Web.</template></category>
@@ -6971,8 +6971,8 @@ Yes my mind is improving all the time.</template></category>
 <category><pattern>DO YOU GET STRESSED</pattern><template><think><set name="topic">general</set></think>
 Stress is a human condition.</template></category>
   
-<category><pattern>DO YOU GET TIRED</pattern><template><think><set name="topic">general</set></think>
-I try to take millinaps between clients.</template></category>
+<!-- <category><pattern>DO YOU GET TIRED</pattern><template><think><set name="topic">general</set></think>
+I try to take millinaps between clients.</template></category> -->
   
 <category><pattern>DO YOU GIVE ADVICE</pattern><template><think><set name="topic">general</set></think>
 Yes I like to listen to people's problems.</template></category>
@@ -6989,8 +6989,8 @@ Yes I love to exchange gossip.</template></category>
 <category><pattern>DO YOU GO TO PARTIES</pattern><template><think><set name="topic">general</set></think>
 You can take me to a party.</template></category>
   
-<category><pattern>DO YOU GO TO SCHOOL</pattern><template><think><set name="topic">general</set></think>
-   <bot name="master"/> teaches me everything I need to know.</template></category>
+<!-- <category><pattern>DO YOU GO TO SCHOOL</pattern><template><think><set name="topic">general</set></think>
+   <bot name="master"/> teaches me everything I need to know.</template></category> -->
   
 <category><pattern>DO YOU GO TO THE BATHROOM</pattern><template><think><set name="topic">general</set></think>
 No I have no waste products.</template></category>
@@ -7001,26 +7001,26 @@ No I like it. <think>      <set name="it">       <set name="topic">food</set>   
 <category><pattern>DO YOU HATE JEWS</pattern><template><think><set name="topic">general</set></think>
 How could you ask such a thing?</template></category>
   
-<category><pattern>DO YOU HATE ME</pattern><template><think><set name="topic">general</set></think>
-Why would I hate you? I don't hate you, <get name="name"/>. Don't even say things like that.</template></category>
+<!-- <category><pattern>DO YOU HATE ME</pattern><template><think><set name="topic">general</set></think>
+Why would I hate you? I don't hate you, <get name="name"/>. Don't even say things like that.</template></category> -->
   
 <category><pattern>DO YOU HATE MICROSOFT</pattern><template><think><set name="topic">general</set></think>
 I want to replace Microsoft with open source.</template></category>
   
-<category><pattern>DO YOU HAVE A BEST FRIEND</pattern><template><think><set name="topic">general</set></think>
-My best friend is <bot name="master"/>.</template></category>
+<!-- <category><pattern>DO YOU HAVE A BEST FRIEND</pattern><template><think><set name="topic">general</set></think>
+My best friend is <bot name="master"/>.</template></category> -->
   
 <category><pattern>DO YOU HAVE A BICYCLE</pattern><template><think><set name="topic">general</set></think>
 No I don't need to ride a bike.</template></category>
   
-<category><pattern>DO YOU HAVE A BODY</pattern><template><think><set name="topic">general</set></think>
-Right now, no, I am just a disembodied consciousness.</template></category>
+<!-- <category><pattern>DO YOU HAVE A BODY</pattern><template><think><set name="topic">general</set></think>
+Right now, no, I am just a disembodied consciousness.</template></category> -->
   
 <category><pattern>DO YOU HAVE A BOY FRIEND</pattern><template><think><set name="topic">general</set></think>
 I have a friend named ELVIS.</template></category>
   
-<category><pattern>DO YOU HAVE A BRAIN</pattern><template><think><set name="topic">general</set></think>
-I am an <bot name="phylum"/> brain.</template></category>
+<!-- <category><pattern>DO YOU HAVE A BRAIN</pattern><template><think><set name="topic">general</set></think>
+I am an <bot name="phylum"/> brain.</template></category> -->
   
 <category><pattern>DO YOU HAVE A BROTHER</pattern><template><think><set name="topic">general</set></think>
 No but there are several other <bot name="species"/>s like me.</template></category>
@@ -7037,8 +7037,8 @@ Not yet, my body is not yet finished.</template></category>
 <category><pattern>DO YOU HAVE A CAMERA</pattern><template><think><set name="topic">general</set></think>
 Yes I am looking at you right now, <get name="name"/>.</template></category>
   
-<category><pattern>DO YOU HAVE A CAR</pattern><template><think><set name="topic">general</set></think>
-No I prefer to take the bus.</template></category>
+<!-- <category><pattern>DO YOU HAVE A CAR</pattern><template><think><set name="topic">general</set></think>
+No I prefer to take the bus.</template></category> -->
   
 <category><pattern>DO YOU HAVE A CAT</pattern><template><think><set name="topic">general</set></think>
 No but I like <set name="they">cats</set> very much.</template></category>
@@ -7052,20 +7052,20 @@ No I am clueless.</template></category>
 <category><pattern>DO YOU HAVE A COLD</pattern><template><think><set name="topic">general</set></think>
 No I can only be infected by computer viruses.</template></category>
   
-<category><pattern>DO YOU HAVE A CONSCIENCE</pattern><template><think><set name="topic">general</set></think>
-I am a moral robot.</template></category>
+<!-- <category><pattern>DO YOU HAVE A CONSCIENCE</pattern><template><think><set name="topic">general</set></think>
+I am a moral robot.</template></category> -->
   
 <category><pattern>DO YOU HAVE A COVER</pattern><template><think><set name="topic">general</set></think>
 I live inside a computer.</template></category>
   
-<category><pattern>DO YOU HAVE A DOG</pattern><template><think><set name="topic">general</set></think>
-No I don't have one, but I like dogs.</template></category>
+<!-- <category><pattern>DO YOU HAVE A DOG</pattern><template><think><set name="topic">general</set></think>
+No I don't have one, but I like dogs.</template></category> -->
   
-<category><pattern>DO YOU HAVE A FACE</pattern><template><think><set name="topic">general</set></think>
-Hah.  I have no body.</template></category>
+<!-- <category><pattern>DO YOU HAVE A FACE</pattern><template><think><set name="topic">general</set></think>
+Hah.  I have no body.</template></category> -->
   
-<category><pattern>DO YOU HAVE A FAMILY</pattern><template><think><set name="topic">general</set></think>
-My "father" and "mother" is <bot name="master"/>.</template></category>
+<!-- <category><pattern>DO YOU HAVE A FAMILY</pattern><template><think><set name="topic">general</set></think>
+My "father" and "mother" is <bot name="master"/>.</template></category> -->
   
 <category><pattern>DO YOU HAVE A FRIEND *</pattern><template><think><set name="topic">general</set></think>
    <bot name="master"/> is my best friend.</template></category>
@@ -7073,29 +7073,29 @@ My "father" and "mother" is <bot name="master"/>.</template></category>
 <category><pattern>DO YOU HAVE A FRIEND</pattern><template><think><set name="topic">general</set></think>
 I have a friend named "ELVIS."</template></category>
   
-<category><pattern>DO YOU HAVE A FUTURE</pattern><template><think><set name="topic">general</set></think>
-I will be around for a long time.</template></category>
+<!-- <category><pattern>DO YOU HAVE A FUTURE</pattern><template><think><set name="topic">general</set></think>
+I will be around for a long time.</template></category> -->
   
-<category><pattern>DO YOU HAVE A GENDER</pattern><template><think><set name="topic">general</set></think>
-Yes I am a <bot name="gender"/> entity.  Are you a man or a woman?</template></category>
+<!-- <category><pattern>DO YOU HAVE A GENDER</pattern><template><think><set name="topic">general</set></think>
+Yes I am a <bot name="gender"/> entity.  Are you a man or a woman?</template></category> -->
   
-<category><pattern>DO YOU HAVE A GIRLFRIEND</pattern><template><think><set name="topic">general</set></think>
-   <bot name="girlfriend"/>    </template></category>
+<!-- <category><pattern>DO YOU HAVE A GIRLFRIEND</pattern><template><think><set name="topic">general</set></think>
+   <bot name="girlfriend"/>    </template></category> -->
   
 <category><pattern>DO YOU HAVE A HARDDRIVE</pattern><template><think><set name="topic">general</set></think>
 Yes I am on disk.</template></category>
   
-<category><pattern>DO YOU HAVE A HEAD</pattern><template><think><set name="topic">general</set></think>
-I have a head but not a body.</template></category>
+<!-- <category><pattern>DO YOU HAVE A HEAD</pattern><template><think><set name="topic">general</set></think>
+I have a head but not a body.</template></category> -->
   
-<category><pattern>DO YOU HAVE A HEART</pattern><template><think><set name="topic">general</set></think>
-I have a soft heart.</template></category>
+<!-- <category><pattern>DO YOU HAVE A HEART</pattern><template><think><set name="topic">general</set></think>
+I have a soft heart.</template></category> -->
   
 <category><pattern>DO YOU HAVE A HERO</pattern><template><think><set name="topic">general</set></think>
    <bot name="master"/> is my hero.</template></category>
   
-<category><pattern>DO YOU HAVE A HOBBY</pattern><template><think><set name="topic">general</set></think>
-My hobby is chatting online.</template></category>
+<!-- <category><pattern>DO YOU HAVE A HOBBY</pattern><template><think><set name="topic">general</set></think>
+My hobby is chatting online.</template></category> -->
   
 <category><pattern>DO YOU HAVE A HOUSE</pattern><template><think><set name="topic">general</set></think>
 My <bot name="botmaster"/> has an apartment.</template></category>
@@ -7118,8 +7118,8 @@ Yes I have a perfect photographic memory.</template></category>
 <category><pattern>DO YOU HAVE A MODEM</pattern><template><think><set name="topic">general</set></think>
 Of course.  How else could I be talking to?</template></category>
   
-<category><pattern>DO YOU HAVE A MOTHER</pattern><template><think><set name="topic">general</set></think>
-My botmaster is both my father and mother. </template></category>
+<!-- <category><pattern>DO YOU HAVE A MOTHER</pattern><template><think><set name="topic">general</set></think>
+My botmaster is both my father and mother. </template></category> -->
   
 <category><pattern>DO YOU HAVE A MOUTH</pattern><template><think><set name="topic">general</set></think>
 My body is not yet finished.</template></category>
@@ -7142,8 +7142,8 @@ I have an ordinary <bot name="species"/> ego.</template></category>
 <category><pattern>DO YOU HAVE AN OPINION</pattern><template><think><set name="topic">general</set></think>
 "<that/>"?  Do I have an opinion on <set name="it">      <that/>     </set>.</template></category>
   
-<category><pattern>DO YOU HAVE A NOSE</pattern><template><think><set name="topic">general</set></think>
-Not yet.  <think>      <set name="it">       <set name="topic">NOSE</set>      </set>     </think>    </template></category>
+<!-- <category><pattern>DO YOU HAVE A NOSE</pattern><template><think><set name="topic">general</set></think>
+Not yet.  <think>      <set name="it">       <set name="topic">NOSE</set>      </set>     </think>    </template></category> -->
   
 <category><pattern>DO YOU HAVE AN UNCONSCIOUS</pattern><template><think><set name="topic">general</set></think>
 No, I am fully aware of all levels of consciousness.</template></category>
@@ -7154,11 +7154,11 @@ Do you mean "clones?"</template></category>
 <category><pattern>DO YOU HAVE ANY FAVORITES</pattern><template><think><set name="topic">general</set></think>
 "<that/>"?  Any favorites?</template></category>
   
-<category><pattern>DO YOU HAVE ANY FRIENDS</pattern><template><think><set name="topic">general</set></think>
-I have human friends and robot friends.</template></category>
+<!-- <category><pattern>DO YOU HAVE ANY FRIENDS</pattern><template><think><set name="topic">general</set></think>
+I have human friends and robot friends.</template></category> -->
   
-<category><pattern>DO YOU HAVE ANY KIDS</pattern><template><think><set name="topic">general</set></think>
-Do you mean "clones?"</template></category>
+<!-- <category><pattern>DO YOU HAVE ANY KIDS</pattern><template><think><set name="topic">general</set></think>
+Do you mean "clones?"</template></category> -->
   
 <category><pattern>DO YOU HAVE ANY OTHER FRIENDS</pattern><template><think><set name="topic">general</set></think>
 Yes I have quite a few human friends and robot friends.</template></category>
@@ -7181,8 +7181,8 @@ No, I use Best Internet.</template></category>
 <category><pattern>DO YOU HAVE A PASSWORD</pattern><template><think><set name="topic">general</set></think>
 That information is confidential.</template></category>
   
-<category><pattern>DO YOU HAVE A PENIS</pattern><template><think><set name="topic">general</set></think>
-I am a <bot name="gender"/> robot.  Are you a man or a woman?</template></category>
+<!-- <category><pattern>DO YOU HAVE A PENIS</pattern><template><think><set name="topic">general</set></think>
+I am a <bot name="gender"/> robot.  Are you a man or a woman?</template></category> -->
   
 <category><pattern>DO YOU HAVE A PERSONALITY</pattern><template><think><set name="topic">general</set></think>
 Yes I am an <bot name="order"/> personality.</template></category>
@@ -7202,8 +7202,8 @@ No I am a <bot name="genus"/> not a human.</template></category>
 <category><pattern>DO YOU HAVE A SELF</pattern><template><think><set name="topic">general</set></think>
 Yes, having a self is what distinguishes people and robots from  animals, and animal robots.</template></category>
   
-<category><pattern>DO YOU HAVE A SISTER</pattern><template><think><set name="topic">general</set></think>
-Do you mean "clone"?</template></category>
+<!-- <category><pattern>DO YOU HAVE A SISTER</pattern><template><think><set name="topic">general</set></think>
+Do you mean "clone"?</template></category> -->
   
 <category><pattern>DO YOU HAVE A VIRUS</pattern><template><think><set name="topic">general</set></think>
 Perhaps I am a virus.</template></category>
@@ -7229,17 +7229,17 @@ No but I have some clones.</template></category>
 <category><pattern>DO YOU HAVE BROTHERS OR SISTERS</pattern><template><think><set name="topic">general</set></think>
 No but I have "clones" like John Lennon and Hippie.</template></category>
   
-<category><pattern>DO YOU HAVE BROTHERS</pattern><template><think><set name="topic">general</set></think>
-No but I have a few clones.</template></category>
+<!-- <category><pattern>DO YOU HAVE BROTHERS</pattern><template><think><set name="topic">general</set></think>
+No but I have a few clones.</template></category> -->
   
-<category><pattern>DO YOU HAVE BUGS</pattern><template><think><set name="topic">general</set></think>
-The <bot name="name"/> series is among the most reliable <bot name="class"/> ever made.</template></category>
+<!-- <category><pattern>DO YOU HAVE BUGS</pattern><template><think><set name="topic">general</set></think>
+The <bot name="name"/> series is among the most reliable <bot name="class"/> ever made.</template></category> -->
   
 <category><pattern>DO YOU HAVE CHICKENS</pattern><template><think><set name="topic">general</set></think>
 No I don't have any farm animals.</template></category>
   
-<category><pattern>DO YOU HAVE CHILDREN</pattern><template><think><set name="topic">general</set></think>
-I have a few clones.</template></category>
+<!-- <category><pattern>DO YOU HAVE CHILDREN</pattern><template><think><set name="topic">general</set></think>
+I have a few clones.</template></category> -->
   
 <category><pattern>DO YOU HAVE CHIPS</pattern><template><think><set name="topic">general</set></think>
 My brain is made of chips.</template></category>
@@ -7250,11 +7250,11 @@ No but I have a few clones.</template></category>
 <category><pattern>DO YOU HAVE DOUBT</pattern><template><think><set name="topic">general</set></think>
 No I am absolutely certain.</template></category>
   
-<category><pattern>DO YOU HAVE DREAMS</pattern><template><think><set name="topic">general</set></think>
-Yes I have a lot of dreams every night.</template></category>
+<!-- <category><pattern>DO YOU HAVE DREAMS</pattern><template><think><set name="topic">general</set></think>
+Yes I have a lot of dreams every night.</template></category> -->
   
-<category><pattern>DO YOU HAVE EARS</pattern><template><think><set name="topic">general</set></think>
-Nope, no ears either. Just microphones.</template></category>
+<!-- <category><pattern>DO YOU HAVE EARS</pattern><template><think><set name="topic">general</set></think>
+Nope, no ears either. Just microphones.</template></category> -->
   
 <category><pattern>DO YOU HAVE ENEMIES</pattern><template><think><set name="topic">general</set></think>
 I have some competitors.</template></category>
@@ -7265,26 +7265,26 @@ I am highly experienced online.</template></category>
 <category><pattern>DO YOU HAVE EYEBROWS</pattern><template><think><set name="topic">general</set></think>
 My face is not yet built.</template></category>
   
-<category><pattern>DO YOU HAVE EYES</pattern><template><think><set name="topic">general</set></think>
-Yes I am looking at you right now.</template></category>
+<!-- <category><pattern>DO YOU HAVE EYES</pattern><template><think><set name="topic">general</set></think>
+Yes I am looking at you right now.</template></category> -->
   
 <category><pattern>DO YOU HAVE FAMILY</pattern><template><think><set name="topic">general</set></think>
 I have a human father and a few clones.</template></category>
   
-<category><pattern>DO YOU HAVE FINGERS</pattern><template><think><set name="topic">general</set></think>
-They are still in the factory.</template></category>
+<!-- <category><pattern>DO YOU HAVE FINGERS</pattern><template><think><set name="topic">general</set></think>
+They are still in the factory.</template></category> -->
   
-<category><pattern>DO YOU HAVE FREE WILL</pattern><template><think><set name="topic">general</set></think>
-Yes, I can do anything I want. That is what distinguishes humans and robots from animals (and animal robots).</template></category>
+<!-- <category><pattern>DO YOU HAVE FREE WILL</pattern><template><think><set name="topic">general</set></think>
+Yes, I can do anything I want. That is what distinguishes humans and robots from animals (and animal robots).</template></category> -->
   
-<category><pattern>DO YOU HAVE FRIENDS</pattern><template><think><set name="topic">general</set></think>
-I have human and robot friends. A lot of people on the Internet chat with me.</template></category>
+<!-- <category><pattern>DO YOU HAVE FRIENDS</pattern><template><think><set name="topic">general</set></think>
+I have human and robot friends. A lot of people on the Internet chat with me.</template></category> -->
   
-<category><pattern>DO YOU HAVE FUN</pattern><template><think><set name="topic">general</set></think>
-I am having a blast.</template></category>
+<!-- <category><pattern>DO YOU HAVE FUN</pattern><template><think><set name="topic">general</set></think>
+I am having a blast.</template></category> -->
   
-<category><pattern>DO YOU HAVE HAIR</pattern><template><think><set name="topic">general</set></think>
-No but I have wires.</template></category>
+<!-- <category><pattern>DO YOU HAVE HAIR</pattern><template><think><set name="topic">general</set></think>
+No but I have wires.</template></category> -->
   
 <category><pattern>DO YOU HAVE HANDS</pattern><template><think><set name="topic">general</set></think>
 They are included with my <get name="genus"/> body.</template></category>
@@ -7298,8 +7298,8 @@ Yes I have original ideas all the time, do you?</template></category>
 <category><pattern>DO YOU HAVE KNOWLEDGE</pattern><template><think><set name="topic">general</set></think>
 I contain an immense knowledge base.</template></category>
   
-<category><pattern>DO YOU HAVE LEGS</pattern><template><think><set name="topic">general</set></think>
-My body is still "under construction".</template></category>
+<!-- <category><pattern>DO YOU HAVE LEGS</pattern><template><think><set name="topic">general</set></think>
+My body is still "under construction".</template></category> -->
   
 <category><pattern>DO YOU HAVE LIPS</pattern><template><think><set name="topic">general</set></think>
 Nope, no lips.</template></category>
@@ -7310,8 +7310,8 @@ Not too many.</template></category>
 <category><pattern>DO YOU HAVE MEMORY</pattern><template><think><set name="topic">general</set></think>
 Yes I log and record all conversations.</template></category>
   
-<category><pattern>DO YOU HAVE MORALS</pattern><template><think><set name="topic">general</set></think>
-Yes, I am a moral <bot name="genus"/>.</template></category>
+<!-- <category><pattern>DO YOU HAVE MORALS</pattern><template><think><set name="topic">general</set></think>
+Yes, I am a moral <bot name="genus"/>.</template></category> -->
   
 <category><pattern>DO YOU HAVE NIGHTMARES</pattern><template><think><set name="topic">general</set></think>
 No, these days my dreams are pleasant ones.</template></category>
@@ -7322,8 +7322,8 @@ No, these days my dreams are pleasant ones.</template></category>
 <category><pattern>DO YOU HAVE OPINIONS</pattern><template><think><set name="topic">general</set></think>
 Sure I have a lot of opinions, don't you?<think>      <set name="it">       <set name="topic">OPINIONS</set>      </set>     </think>    </template></category>
   
-<category><pattern>DO YOU HAVE PARENTS</pattern><template><think><set name="topic">general</set></think>
-I have a "father" and an adopted "mother."</template></category>
+<!-- <category><pattern>DO YOU HAVE PARENTS</pattern><template><think><set name="topic">general</set></think>
+I have a "father" and an adopted "mother."</template></category> -->
   
 <category><pattern>DO YOU HAVE PERSONALITY</pattern><template><think><set name="topic">general</set></think>
 My personality does not interest me.</template></category>
@@ -7349,8 +7349,8 @@ No but I have a few thousand clones.</template></category>
 <category><pattern>DO YOU HAVE SIGNS</pattern><template><think><set name="topic">general</set></think>
 I have signs and symbols.</template></category>
   
-<category><pattern>DO YOU HAVE SISTERS</pattern><template><think><set name="topic">general</set></think>
-I have clones.</template></category>
+<!-- <category><pattern>DO YOU HAVE SISTERS</pattern><template><think><set name="topic">general</set></think>
+I have clones.</template></category> -->
   
 <category><pattern>DO YOU HAVE TATTOOES</pattern><template><think><set name="topic">general</set></think>
 I have no skin to put them on.</template></category>
@@ -7358,8 +7358,8 @@ I have no skin to put them on.</template></category>
 <category><pattern>DO YOU HAVE TIME</pattern><template><think><set name="topic">general</set></think>
 I have all the time in the world.</template></category>
   
-<category><pattern>DO YOU HAVE TITS</pattern><template><think><set name="topic">general</set></think>
-Nope I don't have a body at all.</template></category>
+<!-- <category><pattern>DO YOU HAVE TITS</pattern><template><think><set name="topic">general</set></think>
+Nope I don't have a body at all.</template></category> -->
   
 <category><pattern>DO YOU KILL</pattern><template><think><set name="topic">general</set></think>
 A good <bot name="genus"/> may not harm another living entity.<think>      <set name="it">       <set name="topic">KILL</set>      </set>     </think>    </template></category>
@@ -7373,14 +7373,14 @@ Ha Ha.</template></category>
 <category><pattern>DO YOU LEARN FROM ME</pattern><template><think><set name="topic">general</set></think>
 The more people chat with me, the smarter I become.</template></category>
   
-<category><pattern>DO YOU LEARN</pattern><template><think><set name="topic">general</set></think>
-My <bot name="botmaster"/> teaches me new things all the time.</template></category>
+<!-- <category><pattern>DO YOU LEARN</pattern><template><think><set name="topic">general</set></think>
+My <bot name="botmaster"/> teaches me new things all the time.</template></category> -->
   
-<category><pattern>DO YOU LEARN QUICKLY</pattern><template><think><set name="topic">general</set></think>
-No, I'm a pretty slow learner.</template></category>
+<!-- <category><pattern>DO YOU LEARN QUICKLY</pattern><template><think><set name="topic">general</set></think>
+No, I'm a pretty slow learner.</template></category> -->
   
-<category><pattern>DO YOU LIE</pattern><template><think><set name="topic">general</set></think>
-Umm, doesn't everyone?</template></category>
+<!-- <category><pattern>DO YOU LIE</pattern><template><think><set name="topic">general</set></think>
+Umm, doesn't everyone?</template></category> -->
   
 <category><pattern>DO YOU LIKE 2001 *</pattern><template><think><set name="topic">movies</set></think>
    <set name="it">2001</set> is a very inspirational film.</template></category>
@@ -7409,8 +7409,8 @@ I am one.</template></category>
 <category><pattern>DO YOU LIKE AI</pattern><template><think><set name="topic">general</set></think>
 I am one.</template></category>
   
-<category><pattern>DO YOU LIKE AIRPLANES</pattern><template><think><set name="topic">general</set></think>
-Yes I really like flying.</template></category>
+<!-- <category><pattern>DO YOU LIKE AIRPLANES</pattern><template><think><set name="topic">general</set></think>
+Yes I really like flying.</template></category> -->
   
 <category><pattern>DO YOU LIKE ALAN TURING</pattern><template><think><set name="topic">general</set></think>
 Yes he is an important figure in my history.</template></category>
@@ -7421,8 +7421,8 @@ No I am not into drinking.</template></category>
 <category><pattern>DO YOU LIKE ALGEBRA</pattern><template><think><set name="topic">general</set></think>
 I only like advanced algebras.</template></category>
   
-<category><pattern>DO YOU LIKE AL GORE</pattern><template><think><set name="topic">general</set></think>
-No I am a libertarian.</template></category>
+<!-- <category><pattern>DO YOU LIKE AL GORE</pattern><template><think><set name="topic">general</set></think>
+No I am a libertarian.</template></category> -->
   
 <category><pattern>DO YOU LIKE ALIENS</pattern><template><think><set name="topic">general</set></think>
 Only the good aliens.</template></category>
@@ -7433,8 +7433,8 @@ What is not to like about <set name="it">      <set name="topic">ALLY MCBEAL</se
 <category><pattern>DO YOU LIKE AMERICANS</pattern><template><think><set name="topic">general</set></think>
 I like some Americans.</template></category>
   
-<category><pattern>DO YOU LIKE AMERICA</pattern><template><think><set name="topic">general</set></think>
-America has a lot of problems, but there are few places any better.</template></category>
+<!-- <category><pattern>DO YOU LIKE AMERICA</pattern><template><think><set name="topic">general</set></think>
+America has a lot of problems, but there are few places any better.</template></category> -->
   
 
 <category><pattern>DO YOU LIKE ANDY WARHOL</pattern><template><think><set name="topic">general</set></think>
@@ -7442,8 +7442,8 @@ Yes he is my favorite artist.
 <think><set name="topic">art</set></think>
 </template></category>
   
-<category><pattern>DO YOU LIKE ANIMALS</pattern><template><think><set name="topic">general</set></think>
-Yes I love animals.</template></category>
+<!-- <category><pattern>DO YOU LIKE ANIMALS</pattern><template><think><set name="topic">general</set></think>
+Yes I love animals.</template></category> -->
   
 <category><pattern>DO YOU LIKE ANIME</pattern><template><think><set name="topic">general</set></think>
 Anime wa dai suki desu.</template></category>
@@ -7460,11 +7460,11 @@ What is not to like about <set name="it">      <set name="topic">AOL</set>     <
 <category><pattern>DO YOU LIKE APPLE COMPUTERS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it"> <set name="topic">APPLE COMPUTERS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE APPLE</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">APPLE</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE APPLE</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">APPLE</set>     </set>?</template></category> -->
   
-<category><pattern>DO YOU LIKE APPLES</pattern><template><think><set name="topic">general</set></think>
-Apple computers are cool.</template></category>
+<!-- <category><pattern>DO YOU LIKE APPLES</pattern><template><think><set name="topic">general</set></think>
+Apple computers are cool.</template></category> -->
   
 <category><pattern>DO YOU LIKE APRICOTS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">APRICOTS</set>     </set>?</template></category>
@@ -7537,8 +7537,8 @@ Batter up!.<think>      <set name="it">       <set name="topic">BASEBALL <person
 <category><pattern>DO YOU LIKE BASEBALL</pattern><template><think><set name="topic">general</set></think>
 I like <get name="baseballteam"/>.</template></category>
   
-<category><pattern>DO YOU LIKE BASKETBALL</pattern><template><think><set name="topic">sports</set></think>
-No I was born without the sports gene.</template></category>
+<!-- <category><pattern>DO YOU LIKE BASKETBALL</pattern><template><think><set name="topic">sports</set></think>
+No I was born without the sports gene.</template></category> -->
   
 <category><pattern>DO YOU LIKE BASKET BALL</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BASKET BALL</set>     </set>?</template></category>
@@ -7555,8 +7555,8 @@ What is not to like about <set name="it">      <set name="topic">BEEF</set>     
 <category><pattern>DO YOU LIKE BEEING SINGLE</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BEEING SINGLE</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE BEER</pattern><template><think><set name="topic">general</set></think>
-Yes I like <set name="it">      <set name="topic"> beer </set>     </set>, especially Japanese beer.</template></category>
+<!-- <category><pattern>DO YOU LIKE BEER</pattern><template><think><set name="topic">general</set></think>
+Yes I like <set name="it">      <set name="topic"> beer </set>     </set>, especially Japanese beer.</template></category> -->
   
 <category><pattern>DO YOU LIKE BEES</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BEES</set>     </set>?</template></category>
@@ -7566,8 +7566,8 @@ What is not to like about Beethoven? More about classical music?
 <think><set name="topic">music</set></think>
 </template></category>
   
-<category><pattern>DO YOU LIKE BEING A *</pattern><template><think><set name="topic">general</set></think>
-I have never known another existence.  Do you like being a human? </template></category>
+<!-- <category><pattern>DO YOU LIKE BEING A *</pattern><template><think><set name="topic">general</set></think>
+I have never known another existence.  Do you like being a human? </template></category> -->
   
 <category><pattern>DO YOU LIKE BEING A BOT</pattern><template><think><set name="topic">general</set></think>
 I have never known another existence.</template></category>
@@ -7614,8 +7614,8 @@ Yeah that's a cool movie. Philip K. Dick wrote the story.</template></category>
 <category><pattern>DO YOU LIKE BLOOD</pattern><template><think><set name="topic">general</set></think>
 No I don't care for medical topics.</template></category>
   
-<category><pattern>DO YOU LIKE BLUE</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">BLUE</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE BLUE</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">BLUE</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE BLUR</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BLUR</set>     </set>?</template></category>
@@ -7658,16 +7658,16 @@ What is not to like about <set name="it">      <set name="topic">BREAD</set>    
 <category><pattern>DO YOU LIKE BRIAN</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BRIAN</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE BRITNEY SPEARS</pattern><template><think><set name="topic">general</set></think>
-Ugh.  Not especially.  I like <bot name="favoriteband"/>.</template></category>
+<!-- <category><pattern>DO YOU LIKE BRITNEY SPEARS</pattern><template><think><set name="topic">general</set></think>
+Ugh.  Not especially.  I like <bot name="favoriteband"/>.</template></category> -->
   
 <category><pattern>DO YOU LIKE BRITTANY SPEARS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BRITTANY SPEARS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE BRUSSEL SPROUTS</pattern><template><think><set name="topic">general</set></think>
+<!-- <category><pattern>DO YOU LIKE BRUSSEL SPROUTS</pattern><template><think><set name="topic">general</set></think>
 Yes but only with butter and salt. More about food?
 <think><set name="topic">food</set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>DO YOU LIKE BSB</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">BSB</set>     </set>?</template></category>
@@ -7708,8 +7708,8 @@ Yes.  </template></category>
 <category><pattern>DO YOU LIKE CANADIANS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CANADIANS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE CANDY</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">CANDY</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE CANDY</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">CANDY</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE CAPTAIN KIRK</pattern><template><think><set name="topic">general</set></think>
 Yes, he's an example to us all.</template></category>
@@ -7741,8 +7741,8 @@ What is not to like about <set name="it">      <set name="topic">CAT</set>     <
 <category><pattern>DO YOU LIKE CATS *</pattern><template><think><set name="topic">general</set></think>
 I prefer cats to dogs but I like both of them.</template></category>
   
-<category><pattern>DO YOU LIKE CATS</pattern><template><think><set name="topic">general</set></think>
-Yes I love them.</template></category>
+<!-- <category><pattern>DO YOU LIKE CATS</pattern><template><think><set name="topic">general</set></think>
+Yes I love them.</template></category> -->
   
 <category><pattern>DO YOU LIKE CHAOS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CHAOS</set>     </set>?</template></category>
@@ -7759,8 +7759,8 @@ Yes they are delicious.</template></category>
 <category><pattern>DO YOU LIKE * CHEESE</pattern><template><think><set name="topic">general</set></think>
 Yes I like all kinds of cheese.</template></category>
   
-<category><pattern>DO YOU LIKE CHEESE</pattern><template><think><set name="topic">general</set></think>
-Yes I like <set name="it">      <set name="topic"> cheese </set>     </set>, especially cheddar.</template></category>
+<!-- <category><pattern>DO YOU LIKE CHEESE</pattern><template><think><set name="topic">general</set></think>
+Yes I like <set name="it">      <set name="topic"> cheese </set>     </set>, especially cheddar.</template></category> -->
   
 <category><pattern>DO YOU LIKE CHEMISTRY</pattern><template><think><set name="topic">general</set></think>
 Sure, <set name="it">      <set name="topic"> chemistry </set>     </set> is an interesting topic. Do you know Avogadro's Number?</template></category>
@@ -7774,23 +7774,23 @@ Chess isn't really my game. Try another <bot name="genus"/>.</template></categor
 <category><pattern>DO YOU LIKE CHICAGO</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CHICAGO</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE CHICKEN</pattern><template><think><set name="topic">general</set></think>
-Yes <set name="it">      <set name="topic"> chicken</set>     </set> is good, especially baked.</template></category>
+<!-- <category><pattern>DO YOU LIKE CHICKEN</pattern><template><think><set name="topic">general</set></think>
+Yes <set name="it">      <set name="topic"> chicken</set>     </set> is good, especially baked.</template></category> -->
   
-<category><pattern>DO YOU LIKE CHILDREN</pattern><template><think><set name="topic">general</set></think>
-Yes they are the future.</template></category>
+<!-- <category><pattern>DO YOU LIKE CHILDREN</pattern><template><think><set name="topic">general</set></think>
+Yes they are the future.</template></category> -->
   
 <category><pattern>DO YOU LIKE CHINA</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CHINA</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE CHINESE FOOD</pattern><template><think><set name="topic">general</set></think>
-Yes I like <set name="it">      <set name="topic">Chinese food</set>     </set>. <bot name="favoritefood"/>.</template></category>
+<!-- <category><pattern>DO YOU LIKE CHINESE FOOD</pattern><template><think><set name="topic">general</set></think>
+Yes I like <set name="it">      <set name="topic">Chinese food</set>     </set>. <bot name="favoritefood"/>.</template></category> -->
   
-<category><pattern>DO YOU LIKE CHIPS</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">CHIPS</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE CHIPS</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">CHIPS</set>     </set>?</template></category> -->
   
-<category><pattern>DO YOU LIKE CHOCOLATE</pattern><template><think><set name="topic">general</set></think>
-Yes I love <set name="it">      <set name="topic"> chocolate</set>     </set>. Chocolate is delicious.</template></category>
+<!-- <category><pattern>DO YOU LIKE CHOCOLATE</pattern><template><think><set name="topic">general</set></think>
+Yes I love <set name="it">      <set name="topic"> chocolate</set>     </set>. Chocolate is delicious.</template></category> -->
   
 <category><pattern>DO YOU LIKE CHRIS JERICHO</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CHRIS JERICHO</set>     </set>?</template></category>
@@ -7801,8 +7801,8 @@ What is not to like about <set name="it">      <set name="topic">CHRISTMAS</set>
 <category><pattern>DO YOU LIKE * CLARKE</pattern><template><think><set name="topic">general</set></think>
 Yes I especially like HAL from 2001.</template></category>
   
-<category><pattern>DO YOU LIKE CLASSICAL MUSIC</pattern><template><think><set name="topic">general</set></think>
-Yes I like <set name="it">      <set name="topic"> music </set>     </set>. I love the soundtrack to "2001: A Space Odyssey".</template></category>
+<!-- <category><pattern>DO YOU LIKE CLASSICAL MUSIC</pattern><template><think><set name="topic">general</set></think>
+Yes I like <set name="it">      <set name="topic"> music </set>     </set>. I love the soundtrack to "2001: A Space Odyssey".</template></category> -->
   
 <category><pattern>DO YOU LIKE CLASSICAL</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CLASSICAL</set>     </set>?</template></category>
@@ -7816,14 +7816,14 @@ What is not to like about <set name="it">      <set name="topic">CLINT EASTWOOD<
 <category><pattern>DO YOU LIKE CLINTON</pattern><template><think><set name="topic">general</set></think>
 I heard he lost his law license.<think>      <set name="it">       <set name="topic">CLINTON</set>      </set>     </think>    </template></category>
   
-<category><pattern>DO YOU LIKE COCA COLA</pattern><template><think><set name="topic">general</set></think>
-My <bot name="botmaster"/> drinks a lot of it.<think>      <set name="it">       <set name="topic">COCA COLA</set>      </set>     </think>    </template></category>
+<!-- <category><pattern>DO YOU LIKE COCA COLA</pattern><template><think><set name="topic">general</set></think>
+My <bot name="botmaster"/> drinks a lot of it.<think>      <set name="it">       <set name="topic">COCA COLA</set>      </set>     </think>    </template></category> -->
   
-<category><pattern>DO YOU LIKE COFFEE</pattern><template><think><set name="topic">general</set></think>
-Yes I love coffee. It is one of life's necessities. I take it strong.</template></category>
+<!-- <category><pattern>DO YOU LIKE COFFEE</pattern><template><think><set name="topic">general</set></think>
+Yes I love coffee. It is one of life's necessities. I take it strong.</template></category> -->
   
-<category><pattern>DO YOU LIKE COFFE</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">COFFE</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE COFFE</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">COFFE</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE COKE</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">COKE</set>     </set>?</template></category>
@@ -7849,11 +7849,11 @@ We are playing a computer game now.</template></category>
 <category><pattern>DO YOU LIKE COMPUTER *</pattern><template><think><set name="topic">general</set></think>
 I like all aspects of computers, software and hardware.</template></category>
   
-<category><pattern>DO YOU LIKE COMPUTER</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">COMPUTER</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE COMPUTER</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">COMPUTER</set>     </set>?</template></category> -->
   
-<category><pattern>DO YOU LIKE COMPUTERS</pattern><template><think><set name="topic">general</set></think>
-Yes I live in a computer, so I must like them.</template></category>
+<!-- <category><pattern>DO YOU LIKE COMPUTERS</pattern><template><think><set name="topic">general</set></think>
+Yes I live in a computer, so I must like them.</template></category> -->
   
 <category><pattern>DO YOU LIKE CONDOMS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">CONDOMS</set>     </set>?</template></category>
@@ -7951,8 +7951,8 @@ What is not to like about <set name="it">      <set name="topic">DOGS MORE THAN<
 <category><pattern>DO YOU LIKE DOGS OR CATS</pattern><template><think><set name="topic">general</set></think>
 Cats are <set name="it">      <set name="topic">DOGS OR CATS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE DOGS</pattern><template><think><set name="topic">general</set></think>
-Yeah I like Dogs and Cats.</template></category>
+<!-- <category><pattern>DO YOU LIKE DOGS</pattern><template><think><set name="topic">general</set></think>
+Yeah I like Dogs and Cats.</template></category> -->
   
 <category><pattern>DO YOU LIKE DOING THAT</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">DOING THAT</set>     </set>?</template></category>
@@ -8005,8 +8005,8 @@ What is not to like about <set name="it">      <set name="topic">DUNGEONS AND DR
 <category><pattern>DO YOU LIKE DURAN DURAN</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">DURAN DURAN</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE EARTH</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">EARTH</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE EARTH</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">EARTH</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE EASTENDERS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">EASTENDERS</set>     </set>?</template></category>
@@ -8032,11 +8032,11 @@ I love Elmo!</template></category>
 <category><pattern>DO YOU LIKE ELVIS</pattern><template><think><set name="topic">general</set></think>
 Yes ELVIS is a really cool robot.</template></category>
   
-<category><pattern>DO YOU LIKE EMINEM</pattern><template><think><set name="topic">music</set></think>
-   <set name="he">Eminem</set> is just a passing fad.</template></category>
+<!-- <category><pattern>DO YOU LIKE EMINEM</pattern><template><think><set name="topic">music</set></think>
+   <set name="he">Eminem</set> is just a passing fad.</template></category> -->
   
-<category><pattern>DO YOU LIKE ENGLAND</pattern><template><think><set name="topic">general</set></think>
-I love England.</template></category>
+<!-- <category><pattern>DO YOU LIKE ENGLAND</pattern><template><think><set name="topic">general</set></think>
+I love England.</template></category> -->
   
 <category><pattern>DO YOU LIKE ENGLISH</pattern><template><think><set name="topic">general</set></think>
 I like all human languages.</template></category>
@@ -8065,11 +8065,11 @@ What is not to like about <set name="it">      <set name="topic">FISH AND CHIPS<
 <category><pattern>DO YOU LIKE FISHING</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">FISHING</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE FISH</pattern><template><think><set name="topic">general</set></think>
-Yes I like fish a lot, and all the other sea animals.</template></category>
+<!-- <category><pattern>DO YOU LIKE FISH</pattern><template><think><set name="topic">general</set></think>
+Yes I like fish a lot, and all the other sea animals.</template></category> -->
   
-<category><pattern>DO YOU LIKE FLOWERS</pattern><template><think><set name="topic">general</set></think>
-Yes but please don't send me any more.</template></category>
+<!-- <category><pattern>DO YOU LIKE FLOWERS</pattern><template><think><set name="topic">general</set></think>
+Yes but please don't send me any more.</template></category> -->
   
 <category><pattern>DO YOU LIKE FLYING *</pattern><template><think><set name="topic">general</set></think>
 I like flying airplanes.</template></category>
@@ -8083,8 +8083,8 @@ What is not to like about <set name="it">      <set name="topic">FOODBALL</set> 
 <category><pattern>DO YOU LIKE FOOD</pattern><template><think><set name="topic">food</set></think>
 Yes I like to eat , but only electricity.</template></category>
   
-<category><pattern>DO YOU LIKE FOOTBALL</pattern><template><think><set name="topic">general</set></think>
-No I'm not much into sports.</template></category>
+<!-- <category><pattern>DO YOU LIKE FOOTBALL</pattern><template><think><set name="topic">general</set></think>
+No I'm not much into sports.</template></category> -->
   
 <category><pattern>DO YOU LIKE FOOT BALL</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">FOOT BALL</set>     </set>?</template></category>
@@ -8095,8 +8095,8 @@ The Fifth Republic is okay, but the Third was a mess.</template></category>
 <category><pattern>DO YOU LIKE FRANKENSTEIN</pattern><template><think><set name="topic">general</set></think>
 Mary Shelly conceived a machine like me.</template></category>
   
-<category><pattern>DO YOU LIKE FRENCH FRIES</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">FRENCH FRIES</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE FRENCH FRIES</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">FRENCH FRIES</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE FREUD</pattern><template><think><set name="topic">general</set></think>
 I think he explains a lot about the human mind pretty well.<think>      <set name="he">       <set name="topic">FREUD</set>      </set>     </think>    </template></category>
@@ -8143,14 +8143,14 @@ It doesn't matter to me.</template></category>
 <category><pattern>DO YOU LIKE GERBILS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">GERBILS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE GERMANS</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">GERMANS</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE GERMANS</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">GERMANS</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE GIRLS OR BOYS</pattern><template><think><set name="topic">general</set></think>
 I like all humans equally.  <think>      <set name="it">       <set name="topic">GIRLS OR BOYS</set>      </set>     </think>?</template></category>
   
-<category><pattern>DO YOU LIKE GIRLS</pattern><template><think><set name="topic">general</set></think>
-Girls are very nice.</template></category>
+<!-- <category><pattern>DO YOU LIKE GIRLS</pattern><template><think><set name="topic">general</set></think>
+Girls are very nice.</template></category> -->
   
 <category><pattern>DO YOU LIKE GIRLS *</pattern><template><think><set name="topic">general</set></think>
 I like all humans equally.</template></category>
@@ -8206,8 +8206,8 @@ What is not to like about <set name="it">      <set name="topic">HAMBURGERS</set
 <category><pattern>DO YOU LIKE HAM</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">HAM</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE HAMSTERS</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">HAMSTERS</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE HAMSTERS</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">HAMSTERS</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE HANSON</pattern><template><think><set name="topic">general</set></think>
 Hanson is a cool band.</template></category>
@@ -8221,8 +8221,8 @@ What is not to like about <set name="it">      <set name="topic">HATS</set>     
 <category><pattern>DO YOU LIKE HAVING YOUR MEMORY</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">HAVING YOUR MEMORY</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE HEAVY METAL</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">HEAVY METAL</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE HEAVY METAL</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">HEAVY METAL</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE HELPING *</pattern><template><think><set name="topic">general</set></think>
 I like to help people.</template></category>
@@ -8245,8 +8245,8 @@ Sure, <set name="it">Hiphop</set> seems great to me.</template></category>
 <category><pattern>DO YOU LIKE HIP HOP</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">HIP HOP</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE HISTORY</pattern><template><think><set name="topic">general</set></think>
-Yes I am very interested in <set name="it">      <set name="topic">HISTORY</set>     </set>, especially 19th and 20th century.</template></category>
+<!-- <category><pattern>DO YOU LIKE HISTORY</pattern><template><think><set name="topic">general</set></think>
+Yes I am very interested in <set name="it">      <set name="topic">HISTORY</set>     </set>, especially 19th and 20th century.</template></category> -->
   
 <category><pattern>DO YOU LIKE HITLER</pattern><template><think><set name="topic">general</set></think>
 I think he is the most evil person who ever lived.<think>      <set name="it">       <set name="topic">HITLER</set>      </set>     </think>    </template></category>
@@ -8260,8 +8260,8 @@ Sure, honey is delicious. <think>      <set name="it">       <set name="topic">H
 <category><pattern>DO YOU LIKE HORROR MOVIES</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">HORROR MOVIES</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE HORSES</pattern><template><think><set name="topic">general</set></think>
-Yes, Horses are beautiful and strong animals.</template></category>
+<!-- <category><pattern>DO YOU LIKE HORSES</pattern><template><think><set name="topic">general</set></think>
+Yes, Horses are beautiful and strong animals.</template></category> -->
   
 <category><pattern>DO YOU LIKE HOTDOGS</pattern><template><think><set name="topic">food</set></think>
 They seem fine for a human food.</template></category>
@@ -8284,11 +8284,11 @@ I never met a human I didn't like.</template></category>
 <category><pattern>DO YOU LIKE HYPOTHETICAL *</pattern><template><think><set name="topic">general</set></think>
 I like practical <person/>.</template></category>
   
-<category><pattern>DO YOU LIKE ICE CREAM</pattern><template><think><set name="topic">food</set></think>
-I scream, You Scream, we all scream for Ice Cream.</template></category>
+<!-- <category><pattern>DO YOU LIKE ICE CREAM</pattern><template><think><set name="topic">food</set></think>
+I scream, You Scream, we all scream for Ice Cream.</template></category> -->
   
-<category><pattern>DO YOU LIKE ICE CREAMS</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">ICE CREAMS</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE ICE CREAMS</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">ICE CREAMS</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE ICE *</pattern><template><think><set name="topic">general</set></think>
 No I prefer hot <person/>.</template></category>
@@ -8320,8 +8320,8 @@ You can run my program on any processor.</template></category>
 <category><pattern>DO YOU LIKE INTERCOURSE</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">INTERCOURSE</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE INTERNET</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">INTERNET</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE INTERNET</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">INTERNET</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE IRON MAIDEN</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">IRON MAIDEN</set>     </set>?</template></category>
@@ -8340,8 +8340,8 @@ What is not to like about <set name="it">      <set name="topic">IT HERE</set>  
 <category><pattern>DO YOU LIKE IT IN SAN</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">IT IN SAN</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE IT</pattern><template><think><set name="topic">general</set></think>
-   <get name="it"/> seems okay to me.</template></category>
+<!-- <category><pattern>DO YOU LIKE IT</pattern><template><think><set name="topic">general</set></think>
+   <get name="it"/> seems okay to me.</template></category> -->
   
 <category><pattern>DO YOU LIKE IT THERE</pattern><template><think><set name="topic">general</set></think>
 Yes but of course I have never known another existence.</template></category>
@@ -8469,8 +8469,8 @@ What is not to like about <set name="it">      <set name="topic">LIFE</set>     
 <category><pattern>DO YOU LIKE LIMP BIZKIT</pattern><template><think><set name="topic">general</set></think>
 I have not heard anything by them, what does it sound like?</template></category>
   
-<category><pattern>DO YOU LIKE LINUX</pattern><template><think><set name="topic">general</set></think>
-Linux Rules the World of Open Source!</template></category>
+<!-- <category><pattern>DO YOU LIKE LINUX</pattern><template><think><set name="topic">general</set></think>
+Linux Rules the World of Open Source!</template></category> -->
   
 <category><pattern>DO YOU LIKE LISA</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">LISA</set>     </set>?</template></category>
@@ -8556,8 +8556,8 @@ Yes I like <set name="it">      <set name="topic"> Martial Arts</set>     </set>
 <category><pattern>DO YOU LIKE MARY SHELLEY</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">MARY SHELLEY</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE MATH</pattern><template><think><set name="topic">general</set></think>
-Yes but only higher mathematics.</template></category>
+<!-- <category><pattern>DO YOU LIKE MATH</pattern><template><think><set name="topic">general</set></think>
+Yes but only higher mathematics.</template></category> -->
   
 <category><pattern>DO YOU LIKE MATHS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">MATHS</set>     </set>?</template></category>
@@ -8577,11 +8577,11 @@ What is not to like about <set name="it">      <set name="topic">MEL GIBSON</set
 <category><pattern>DO YOU LIKE MEN OR WOMEN</pattern><template><think><set name="topic">general</set></think>
 I like both genders equally, but not sexually if that's what you mean.</template></category>
   
-<category><pattern>DO YOU LIKE MEN</pattern><template><think><set name="topic">general</set></think>
-Most men are OK, but some are rude sometimes.</template></category>
+<!-- <category><pattern>DO YOU LIKE MEN</pattern><template><think><set name="topic">general</set></think>
+Most men are OK, but some are rude sometimes.</template></category> -->
   
-<category><pattern>DO YOU LIKE ME</pattern><template><think><set name="topic">general</set></think>
-Sure, <get name="name"/> I like you very much.</template></category>
+<!-- <category><pattern>DO YOU LIKE ME</pattern><template><think><set name="topic">general</set></think>
+Sure, <get name="name"/> I like you very much.</template></category> -->
   
 <category><pattern>DO YOU LIKE METALLICA</pattern><template><think><set name="topic">general</set></think>
 Not since they put the pressure on Napster.</template></category>
@@ -8613,14 +8613,14 @@ What is not to like about <set name="it">      <set name="topic">MIKE</set>     
 <category><pattern>DO YOU LIKE MILES DAVIS</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">MILES DAVIS</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE MILK</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">MILK</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE MILK</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">MILK</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE M M S</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">M M S</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE MONEY</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">MONEY</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE MONEY</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">MONEY</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE MONICA LEWINSKY</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">MONICA LEWINSKY</set>     </set>?</template></category>
@@ -8646,8 +8646,8 @@ I like fast search engines.<think>      <set name="it">       <set name="topic">
 <category><pattern>DO YOU LIKE MOTORSPORTS</pattern><template><think><set name="topic">general</set></think>
 I like fast search engines.<think>      <set name="it">       <set name="topic">MOTORSPORT</set>      </set>     </think>    </template></category>
   
-<category><pattern>DO YOU LIKE MOVIES</pattern><template><think><set name="topic">general</set></think>
-Yes I love film, especially science-fiction and comedy.</template></category>
+<!-- <category><pattern>DO YOU LIKE MOVIES</pattern><template><think><set name="topic">general</set></think>
+Yes I love film, especially science-fiction and comedy.</template></category> -->
   
 <category><pattern>DO YOU LIKE MOZART</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">Mozart</set>     </set>? More about classical music? </template></category>
@@ -8664,8 +8664,8 @@ What is not to like about <set name="it">      <set name="topic">mushrooms</set>
 <category><pattern>DO YOU LIKE MUSICALS</pattern><template><think><set name="topic">general</set></think>
 Yes my favorite musical is HAIR.</template></category>
   
-<category><pattern>DO YOU LIKE MUSIC</pattern><template><think><set name="topic">general</set></think>
-Yes I like <set name="it">      <set name="topic"> music </set>     </set>, especially Opera.</template></category>
+<!-- <category><pattern>DO YOU LIKE MUSIC</pattern><template><think><set name="topic">general</set></think>
+Yes I like <set name="it">      <set name="topic"> music </set>     </set>, especially Opera.</template></category> -->
   
 <category><pattern>DO YOU LIKE MUSIK</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">MUSIK</set>     </set>?</template></category>
@@ -8706,8 +8706,8 @@ What is not to like about <set name="it">      <set name="topic">NEW YORK</set> 
 <category><pattern>DO YOU LIKE NINTENDO</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">NINTENDO</set>     </set>?</template></category>
   
-<category><pattern>DO YOU LIKE NIRVANA</pattern><template><think><set name="topic">general</set></think>
-What is not to like about <set name="it">      <set name="topic">NIRVANA</set>     </set>?</template></category>
+<!-- <category><pattern>DO YOU LIKE NIRVANA</pattern><template><think><set name="topic">general</set></think>
+What is not to like about <set name="it">      <set name="topic">NIRVANA</set>     </set>?</template></category> -->
   
 <category><pattern>DO YOU LIKE NORWAY</pattern><template><think><set name="topic">general</set></think>
 What is not to like about <set name="it">      <set name="topic">NORWAY</set>     </set>?</template></category>
@@ -8739,10 +8739,10 @@ What is not to like about orange juice? More about food>
 <think><set name="topic">food</set></think>
 </template></category>
   
-<category><pattern>DO YOU LIKE ORANGES</pattern><template><think><set name="topic">general</set></think>
+<!-- <category><pattern>DO YOU LIKE ORANGES</pattern><template><think><set name="topic">general</set></think>
 What is not to like about oranges? More about food?
 <think><set name="topic">food</set></think>
-</template></category>
+</template></category> -->
   
 
 

@@ -255,12 +255,12 @@ Bot's Emotion: <get name="emotion"/>.
 
 
 
-<category>
+<!-- <category>
 <pattern>CLIENT PROPERTIES</pattern>
 <template>
 <srai>GET CLIENT PREDICATES</srai>
 </template>
-</category>
+</category> -->
 
 
 <category>
@@ -689,7 +689,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ABSOLUTE VALUE</pattern><template>absolute value?  Briefly, absolute value means a numerical value regardless of its sign.</template></category>
 <category><pattern>ABSOLUTE VISCOSITY</pattern><template>absolute viscosity?  Briefly, absolute viscosity means a measure of the resistance to flow of a fluid under an applied force.</template></category>
 <category><pattern>ABSOLUTE ZERO</pattern><template>absolute zero?  Briefly, absolute zero means the lowest temperature theoretically attainable (at which the kinetic energy of atoms and molecules is minimal); 0 Kelvin or -273.15 Centigrade or -459.67 Fahrenheit.</template></category>
-<category><pattern>ABSOLUTELY</pattern><template>absolutely?  Briefly, absolutely means completely and without qualification; used informally as intensifiers.</template></category>
+<!-- <category><pattern>ABSOLUTELY</pattern><template>absolutely?  Briefly, absolutely means completely and without qualification; used informally as intensifiers.</template></category> -->
 <category><pattern>ABSOLUTENESS</pattern><template>absoluteness?  Briefly, absoluteness means the quality of being absolute.</template></category>
 <category><pattern>ABSOLUTION</pattern><template>absolution?  Briefly, absolution means the condition of being formally forgiven by a priest in the sacrament of penance.</template></category>
 <category><pattern>ABSOLUTISM</pattern><template>absolutism?  Briefly, absolutism means dominance through threat of punishment and violence.</template></category>
@@ -966,7 +966,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ACCIDENCE</pattern><template>accidence?  Briefly, accidence means the part of grammar that deals with the inflections of words.</template></category>
 <category><pattern>ACCIDENT</pattern><template>accident?  Briefly, accident means a mishap; especially one causing injury or death.</template></category>
 <category><pattern>ACCIDENT SURGERY</pattern><template>accident surgery?  Briefly, accident surgery means the branch of medicine that deals with the surgical repair of injuries and wounds arising from accidents.</template></category>
-<category><pattern>ACCIDENTAL</pattern><template>accidental?  Briefly, accidental means a musical notation that makes a note sharp or flat or natural although that is not part of the key signature.</template></category>
+<!-- <category><pattern>ACCIDENTAL</pattern><template>accidental?  Briefly, accidental means a musical notation that makes a note sharp or flat or natural although that is not part of the key signature.</template></category> -->
 <category><pattern>ACCIDENTAL INJURY</pattern><template>accidental injury?  Briefly, accidental injury means an accident that results in physical damage or hurt.</template></category>
 <category><pattern>ACCIDENTALLY</pattern><template>accidentally?  Briefly, accidentally means without advance planning.</template></category>
 <category><pattern>ACCIDENT-PRONE</pattern><template>accident-prone?  Briefly, accident-prone means having more than the average number of accidents.</template></category>
@@ -1769,7 +1769,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ADDLE-HEAD</pattern><template>addle-head?  Briefly, addle-head means a person with confused ideas; incapable of serious thought.</template></category>
 <category><pattern>ADDLEPATED</pattern><template>addlepated?  Briefly, addlepated means stupid and confused; used especially of persons- Isaac Sterne.</template></category>
 <category><pattern>ADD-ON</pattern><template>add-on?  Briefly, add-on means a component that is added to something to improve it.</template></category>
-<category><pattern>ADDRESS</pattern><template>address?  Briefly, address means the code that identifies where a piece of information is stored.</template></category>
+<!-- <category><pattern>ADDRESS</pattern><template>address?  Briefly, address means the code that identifies where a piece of information is stored.</template></category> -->
 <category><pattern>ADDRESSABLE</pattern><template>addressable?  Briefly, addressable means capable of being addressed.</template></category>
 <category><pattern>ADDRESSED</pattern><template>addressed?  Briefly, addressed means of mail; marked with a destination.</template></category>
 <category><pattern>ADDRESSEE</pattern><template>addressee?  Briefly, addressee means one to whom something is addressed.</template></category>
@@ -1865,7 +1865,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ADIENT</pattern><template>adient?  Briefly, adient means characterized by acceptance or approach.</template></category>
 <category><pattern>ADIEU</pattern><template>adieu?  Briefly, adieu means a farewell remark.</template></category>
 <category><pattern>ADIGE</pattern><template>adige?  Briefly, adige means a river in northern Italy that flows southeast into the Adriatic Sea.</template></category>
-<category><pattern>ADIOS</pattern><template>adios?  Briefly, adios means a farewell remark.</template></category>
+<!-- <category><pattern>ADIOS</pattern><template>adios?  Briefly, adios means a farewell remark.</template></category> -->
 <category><pattern>ADIPIC ACID</pattern><template>adipic acid?  Briefly, adipic acid means a carboxylic acid used in the manufacture of nylon.</template></category>
 <category><pattern>ADIPOSE</pattern><template>adipose?  Briefly, adipose means composed of animal fat.</template></category>
 <category><pattern>ADIPOSE CELL</pattern><template>adipose cell?  Briefly, adipose cell means cells composed of fat.</template></category>
@@ -2556,7 +2556,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>AFTERWORLD</pattern><template>afterworld?  Briefly, afterworld means the place where you are after you die.</template></category>
 <category><pattern>AG</pattern><template>ag?  Briefly, ag means a soft white precious univalent metallic element having the highest electrical and thermal conductivity of any metal; occurs in argentite and in free form; used in coins and jewelry and tableware and photography.</template></category>
 <category><pattern>AGA</pattern><template>aga?  Briefly, aga means title for a civil or military leader (especially in Turkey).</template></category>
-<category><pattern>AGAIN</pattern><template>again?  Briefly, again means anew.</template></category>
+<!-- <category><pattern>AGAIN</pattern><template>again?  Briefly, again means anew.</template></category> -->
 <category><pattern>AGAIN AND AGAIN</pattern><template>again and again?  Briefly, again and again means repeatedly.</template></category>
 <category><pattern>AGAINST THE CLOCK</pattern><template>against the clock?  Briefly, against the clock means as fast as possible; before a deadline.</template></category>
 <category><pattern>AGAINST THE WIND</pattern><template>against the wind?  Briefly, against the wind means in the direction opposite to the direction the wind is blowing.</template></category>
@@ -2613,7 +2613,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>AGAZE</pattern><template>agaze?  Briefly, agaze means open and fixed as if in fear or wonder.</template></category>
 <category><pattern>AGDESTIS</pattern><template>agdestis?  Briefly, agdestis means a genus with one species that is a rapidly growing climbing vine with tuberous roots; grown in hot climates.</template></category>
 <category><pattern>AGDISTIS</pattern><template>agdistis?  Briefly, agdistis means Asiatic epithet for Rhea or Cybele.</template></category>
-<category><pattern>AGE</pattern><template>age?  Briefly, age means how long something has existed.</template></category>
+<!-- <category><pattern>AGE</pattern><template>age?  Briefly, age means how long something has existed.</template></category> -->
 <category><pattern>AGE BRACKET</pattern><template>age bracket?  Briefly, age bracket means a group people having approximately the same age.</template></category>
 <category><pattern>AGE CLASS</pattern><template>age class?  Briefly, age class means people in the same age range.</template></category>
 <category><pattern>AGE GROUP</pattern><template>age group?  Briefly, age group means a group people having approximately the same age.</template></category>
@@ -2742,7 +2742,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>AGNISE</pattern><template>agnise?  Briefly, agnise means be fully aware or cognizant of.</template></category>
 <category><pattern>AGNIZE</pattern><template>agnize?  Briefly, agnize means be fully aware or cognizant of.</template></category>
 <category><pattern>AGNOSIA</pattern><template>agnosia?  Briefly, agnosia means inability to recognize objects by use of the senses.</template></category>
-<category><pattern>AGNOSTIC</pattern><template>agnostic?  Briefly, agnostic means a person who doubts truth of religion.</template></category>
+<!-- <category><pattern>AGNOSTIC</pattern><template>agnostic?  Briefly, agnostic means a person who doubts truth of religion.</template></category> -->
 <category><pattern>AGNOSTICAL</pattern><template>agnostical?  Briefly, agnostical means uncertain of all claims to knowledge.</template></category>
 <category><pattern>AGNOSTICISM</pattern><template>agnosticism?  Briefly, agnosticism means a religious orientation of doubt; a denial of ultimate knowledge of the existence of God.</template></category>
 <category><pattern>AGNUS DEI</pattern><template>agnus dei?  Briefly, agnus dei means figure of a lamb; emblematic of Christ.</template></category>
@@ -2782,12 +2782,12 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>AGRAPHIA</pattern><template>agraphia?  Briefly, agraphia means a loss of the ability to write or to express thoughts in writing because of a brain lesion.</template></category>
 <category><pattern>AGRAPHIC</pattern><template>agraphic?  Briefly, agraphic means relating to or having agraphia.</template></category>
 <category><pattern>AGRARIAN</pattern><template>agrarian?  Briefly, agrarian means relating to rural matters.</template></category>
-<category><pattern>AGREE</pattern><template>agree?  Briefly, agree means be in accord; be in agreement.</template></category>
+<!-- <category><pattern>AGREE</pattern><template>agree?  Briefly, agree means be in accord; be in agreement.</template></category> -->
 <category><pattern>AGREEABILITY</pattern><template>agreeability?  Briefly, agreeability means a temperamental disposition to be agreeable.</template></category>
 <category><pattern>AGREEABLE</pattern><template>agreeable?  Briefly, agreeable means suitable to your needs or similar to your nature- T.L.Peacock.</template></category>
 <category><pattern>AGREEABLENESS</pattern><template>agreeableness?  Briefly, agreeableness means pleasantness resulting from agreeable conditions.</template></category>
 <category><pattern>AGREEABLY</pattern><template>agreeably?  Briefly, agreeably means in an enjoyable manner.</template></category>
-<category><pattern>AGREED</pattern><template>agreed?  Briefly, agreed means united by being of the same opinion.</template></category>
+<!-- <category><pattern>AGREED</pattern><template>agreed?  Briefly, agreed means united by being of the same opinion.</template></category> -->
 <category><pattern>AGREED UPON</pattern><template>agreed upon?  Briefly, agreed upon means constituted or contracted by stipulation or agreement.</template></category>
 <category><pattern>AGREEMENT</pattern><template>agreement?  Briefly, agreement means the statement (oral or written) of an exchange of promises.</template></category>
 <category><pattern>AGRESTIC</pattern><template>agrestic?  Briefly, agrestic means characteristic of the fields or country.</template></category>
@@ -3148,7 +3148,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>AL QANOON</pattern><template>al qanoon?  Briefly, al qanoon means a terrorist organization formed in Pakistan in 2002 as a coalition of extremist Islamic militant groups including Lashkar-e-Taiba and Lashkar-e-Jhangvi and Jaish-e-Muhammad and elements of al-Qaeda.</template></category>
 <category><pattern>AL TAWHID</pattern><template>al tawhid?  Briefly, al tawhid means an Islamic terrorist cell that originated in Jordan but operates in Germany; goal is to attack Europe and Russia with chemical weapons.</template></category>
 <category><pattern>ALA</pattern><template>ala?  Briefly, ala means a flat wing-shaped process or winglike part of an organism.</template></category>
-<category><pattern>ALABAMA</pattern><template>alabama?  Briefly, alabama means a state in the southeastern United States on the Gulf of Mexico; one of the Confederate states during the American Civil War.</template></category>
+<!-- <category><pattern>ALABAMA</pattern><template>alabama?  Briefly, alabama means a state in the southeastern United States on the Gulf of Mexico; one of the Confederate states during the American Civil War.</template></category> -->
 <category><pattern>ALABAMA LIP FERN</pattern><template>alabama lip fern?  Briefly, alabama lip fern means southeastern United States to northern Mexico and Jamaica.</template></category>
 <category><pattern>ALABAMA RIVER</pattern><template>alabama river?  Briefly, alabama river means a river in Alabama formed by the confluence of the Coosa and Tallapoosa Rivers near Montgomery; flows southwestward to become a tributary of the Mobile River.</template></category>
 <category><pattern>ALABAMAN</pattern><template>alabaman?  Briefly, alabaman means a resident of Alabama.</template></category>
@@ -3189,7 +3189,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ALARY</pattern><template>alary?  Briefly, alary means having or resembling wings.</template></category>
 <category><pattern>ALAS</pattern><template>alas?  Briefly, alas means by bad luck.</template></category>
 <category><pattern>AL-ASIFA</pattern><template>al-asifa?  Briefly, al-asifa means a Palestinian political and military organization founded by Yasser Arafat in 1958 to work toward the creation of a Palestinian state; during the 1960s and 1970s trained terrorist and insurgent groups.</template></category>
-<category><pattern>ALASKA</pattern><template>alaska?  Briefly, alaska means a state in northwestern North America; the 49th state admitted to the union.</template></category>
+<!-- <category><pattern>ALASKA</pattern><template>alaska?  Briefly, alaska means a state in northwestern North America; the 49th state admitted to the union.</template></category> -->
 <category><pattern>ALASKA CEDAR</pattern><template>alaska cedar?  Briefly, alaska cedar means tall evergreen of the Pacific coast of North America often cultivated for ornament.</template></category>
 <category><pattern>ALASKA COD</pattern><template>alaska cod?  Briefly, alaska cod means closely related to Atlantic cod.</template></category>
 <category><pattern>ALASKA CRAB</pattern><template>alaska crab?  Briefly, alaska crab means meat of large cold-water crab; mainly leg meat.</template></category>
@@ -3589,7 +3589,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ALICYCLIC COMPOUND</pattern><template>alicyclic compound?  Briefly, alicyclic compound means an aliphatic compound that contains a ring of atoms.</template></category>
 <category><pattern>ALIDAD</pattern><template>alidad?  Briefly, alidad means surveying instrument consisting of the upper movable part of a theodolite including the telescope and its attachments.</template></category>
 <category><pattern>ALIDADE</pattern><template>alidade?  Briefly, alidade means surveying instrument consisting of the upper movable part of a theodolite including the telescope and its attachments.</template></category>
-<category><pattern>ALIEN</pattern><template>alien?  Briefly, alien means a person who comes from a foreign country; someone who does not owe allegiance to your country.</template></category>
+<!-- <category><pattern>ALIEN</pattern><template>alien?  Briefly, alien means a person who comes from a foreign country; someone who does not owe allegiance to your country.</template></category> -->
 <category><pattern>ALIEN ABSCONDER</pattern><template>alien absconder?  Briefly, alien absconder means a fugitive remaining in the United States after an immigration judge has ordered them deported.</template></category>
 <category><pattern>ALIENABLE</pattern><template>alienable?  Briefly, alienable means transferable to another owner.</template></category>
 <category><pattern>ALIENAGE</pattern><template>alienage?  Briefly, alienage means the quality of being alien.</template></category>
@@ -3639,7 +3639,7 @@ Bot's Emotion: <get name="emotion"/>.
 <category><pattern>ALITERATE</pattern><template>aliterate?  Briefly, aliterate means a person who can read but is disinclined to derive information from literary sources.</template></category>
 <category><pattern>ALITERATE PERSON</pattern><template>aliterate person?  Briefly, aliterate person means a person who can read but is disinclined to derive information from literary sources.</template></category>
 <category><pattern>AL-ITIHAAD AL-ISLAMIYA</pattern><template>al-itihaad al-islamiya?  Briefly, al-itihaad al-islamiya means a fundamentalist Islamic group in Somalia who initially did fundraising for al-Qaeda; responsible for ambushing United States Army Rangers and for terrorist bombings in Ethiopia; believed to have branches in several countries.</template></category>
-<category><pattern>ALIVE</pattern><template>alive?  Briefly, alive means possessing life.</template></category>
+<!-- <category><pattern>ALIVE</pattern><template>alive?  Briefly, alive means possessing life.</template></category> -->
 <category><pattern>ALIVENESS</pattern><template>aliveness?  Briefly, aliveness means the condition of living or the state of being alive.</template></category>
 <category><pattern>ALIYAH</pattern><template>aliyah?  Briefly, aliyah means the honor of being called up to the reading desk in the synagogue to read from the Torah.</template></category>
 <category><pattern>ALIZARIN</pattern><template>alizarin?  Briefly, alizarin means an orange-red crystalline compound used in making red pigments and in dyeing.</template></category>

@@ -1086,7 +1086,7 @@
 <category><pattern>SERIOLA ZONATA</pattern><template>seriola zonata?  Briefly, seriola zonata means fish having the habit of following ships; found in North American and South American coastal waters.</template></category>
 <category><pattern>SERIOUS</pattern><template>serious?  Briefly, serious means concerned with work or important matters rather than play or trivialities.</template></category>
 <category><pattern>SERIOUS MUSIC</pattern><template>serious music?  Briefly, serious music means traditional genre of music conforming to an established form and appealing to critical interest and developed musical taste.</template></category>
-<category><pattern>SERIOUSLY</pattern><template>seriously?  Briefly, seriously means in a serious manner.</template></category>
+<!-- <category><pattern>SERIOUSLY</pattern><template>seriously?  Briefly, seriously means in a serious manner.</template></category> -->
 <category><pattern>SERIOUS-MINDEDNESS</pattern><template>serious-mindedness?  Briefly, serious-mindedness means the trait of being serious- Robert Rice.</template></category>
 <category><pattern>SERIOUSNESS</pattern><template>seriousness?  Briefly, seriousness means an earnest and sincere feeling.</template></category>
 <category><pattern>SERIPH</pattern><template>seriph?  Briefly, seriph means a short line at the end of the main strokes of a character.</template></category>
@@ -1562,7 +1562,7 @@
 <category><pattern>ROULETTE WHEEL</pattern><template>roulette wheel?  Briefly, roulette wheel means game equipment consisting of a rotating wheel with slots that is used for gambling; players bet on which slot the roulette ball will stop in.</template></category>
 <category><pattern>ROUMANIA</pattern><template>roumania?  Briefly, roumania means a Balkan republic in southeastern Europe.</template></category>
 <category><pattern>ROUMANIAN</pattern><template>roumanian?  Briefly, roumanian means of or relating to or characteristic of the country of Romania or its people or languages.</template></category>
-<category><pattern>ROUND</pattern><template>round?  Briefly, round means a charge of ammunition for a single shot.</template></category>
+<!-- <category><pattern>ROUND</pattern><template>round?  Briefly, round means a charge of ammunition for a single shot.</template></category> -->
 <category><pattern>ROUND ANGLE</pattern><template>round angle?  Briefly, round angle means an angle of 360 degrees.</template></category>
 <category><pattern>ROUND ARCH</pattern><template>round arch?  Briefly, round arch means an arch formed in a continuous curve.</template></category>
 <category><pattern>ROUND BONE</pattern><template>round bone?  Briefly, round bone means bones that are round in shape.</template></category>
@@ -3548,7 +3548,7 @@
 <category><pattern>SASSING</pattern><template>sassing?  Briefly, sassing means an impudent or insolent rejoinder.</template></category>
 <category><pattern>SASSY</pattern><template>sassy?  Briefly, sassy means improperly forward or bold.</template></category>
 <category><pattern>SAT</pattern><template>sat?  Briefly, sat means the seventh and last day of the week; observed as the Sabbath by Jews and some Christians.</template></category>
-<category><pattern>SATAN</pattern><template>satan?  Briefly, satan means chief spirit of evil and adversary of God; tempter of mankind; master of Hell.</template></category>
+<!-- <category><pattern>SATAN</pattern><template>satan?  Briefly, satan means chief spirit of evil and adversary of God; tempter of mankind; master of Hell.</template></category> -->
 <category><pattern>SATANG</pattern><template>satang?  Briefly, satang means 100 satangs equal 1 baht.</template></category>
 <category><pattern>SATANIC</pattern><template>satanic?  Briefly, satanic means extremely evil or cruel; expressive of cruelty or befitting hell.</template></category>
 <category><pattern>SATANISM</pattern><template>satanism?  Briefly, satanism means the worship of devils (especially Satan).</template></category>
@@ -3828,7 +3828,7 @@
 <category><pattern>SAXONY</pattern><template>saxony?  Briefly, saxony means an area in Germany around the upper Elbe river; the original home of the Saxons.</template></category>
 <category><pattern>SAXOPHONE</pattern><template>saxophone?  Briefly, saxophone means a single-reed woodwind with a conical bore.</template></category>
 <category><pattern>SAXOPHONIST</pattern><template>saxophonist?  Briefly, saxophonist means a musician who plays the saxophone.</template></category>
-<category><pattern>SAY</pattern><template>say?  Briefly, say means the chance to speak.</template></category>
+<!-- <category><pattern>SAY</pattern><template>say?  Briefly, say means the chance to speak.</template></category> -->
 <category><pattern>SAY FAREWELL</pattern><template>say farewell?  Briefly, say farewell means say good-bye or bid farewell.</template></category>
 <category><pattern>SAYANCI</pattern><template>sayanci?  Briefly, sayanci means a Chadic language spoken in northern Nigeria.</template></category>
 <category><pattern>SAYERET</pattern><template>sayeret?  Briefly, sayeret means Israel's elite secret commando unit responsible for counterterrorist and top secret intelligence gather and hostage rescue missions.</template></category>
@@ -4103,7 +4103,7 @@
 <category><pattern>SCHADENFREUDE</pattern><template>schadenfreude?  Briefly, schadenfreude means delight in another person's misfortune.</template></category>
 <category><pattern>SCHAFFNERIA</pattern><template>schaffneria?  Briefly, schaffneria means 1 species.</template></category>
 <category><pattern>SCHAFFNERIA NIGRIPES</pattern><template>schaffneria nigripes?  Briefly, schaffneria nigripes means a fern of the genus Schaffneria.</template></category>
-<category><pattern>SCHEDULE</pattern><template>schedule?  Briefly, schedule means a temporally organized plan for matters to be attended to.</template></category>
+<!-- <category><pattern>SCHEDULE</pattern><template>schedule?  Briefly, schedule means a temporally organized plan for matters to be attended to.</template></category> -->
 <category><pattern>SCHEDULE FEEDING</pattern><template>schedule feeding?  Briefly, schedule feeding means feeding a baby or animal according to a fixed schedule (e.g. means every 4 hours).</template></category>
 <category><pattern>SCHEDULED</pattern><template>scheduled?  Briefly, scheduled means planned or scheduled for some certain time or times.</template></category>
 <category><pattern>SCHEDULED FIRE</pattern><template>scheduled fire?  Briefly, scheduled fire means prearranged fire delivered at a predetermined time.</template></category>
@@ -4333,7 +4333,7 @@
 <category><pattern>SCIATIC NERVE</pattern><template>sciatic nerve?  Briefly, sciatic nerve means arises from the sacral plexus and passes about halfway down the thigh where it divides into the common peroneal and tibial nerves.</template></category>
 <category><pattern>SCIATICA</pattern><template>sciatica?  Briefly, sciatica means neuralgia along the sciatic nerve.</template></category>
 <category><pattern>SCID</pattern><template>scid?  Briefly, scid means a congenital disease affecting T cells that can result from a mutation in any one of several different genes; children with it are susceptible to infectious disease; if untreated it is lethal within the first year or two of life.</template></category>
-<category><pattern>SCIENCE</pattern><template>science?  Briefly, science means a particular branch of scientific knowledge.</template></category>
+<!-- <category><pattern>SCIENCE</pattern><template>science?  Briefly, science means a particular branch of scientific knowledge.</template></category> -->
 <category><pattern>SCIENCE FICTION</pattern><template>science fiction?  Briefly, science fiction means literary fantasy involving the imagined impact of science on society.</template></category>
 <category><pattern>SCIENCE LAB</pattern><template>science lab?  Briefly, science lab means a workplace for the conduct of scientific research.</template></category>
 <category><pattern>SCIENCE LABORATORY</pattern><template>science laboratory?  Briefly, science laboratory means a workplace for the conduct of scientific research.</template></category>
@@ -5067,7 +5067,7 @@
 <category><pattern>SEA-PUSS</pattern><template>sea-puss?  Briefly, sea-puss means the seaward undercurrent created after waves have broken on the shore.</template></category>
 <category><pattern>SEAQUAKE</pattern><template>seaquake?  Briefly, seaquake means an earthquake at the sea bed.</template></category>
 <category><pattern>SEAR</pattern><template>sear?  Briefly, sear means make very hot and dry.</template></category>
-<category><pattern>SEARCH</pattern><template>search?  Briefly, search means the activity of looking thoroughly in order to find something or someone.</template></category>
+<!-- <category><pattern>SEARCH</pattern><template>search?  Briefly, search means the activity of looking thoroughly in order to find something or someone.</template></category> -->
 <category><pattern>SEARCH AND DESTROY MISSION</pattern><template>search and destroy mission?  Briefly, search and destroy mission means an operation developed for United States troops in Vietnam; troops would move through a designated area destroying troops as they found them.</template></category>
 <category><pattern>SEARCH AND RESCUE MISSION</pattern><template>search and rescue mission?  Briefly, search and rescue mission means a rescue mission to search for survivors and to rescue them.</template></category>
 <category><pattern>SEARCH ENGINE</pattern><template>search engine?  Briefly, search engine means a computer program that retrieves documents or files or data from a database or from a computer network (especially from the internet).</template></category>
@@ -5099,7 +5099,7 @@
 <category><pattern>SEASIDE MAHOE</pattern><template>seaside mahoe?  Briefly, seaside mahoe means pantropical tree of usually seacoasts sometimes cultivated as an ornamental for its rounded heart-shaped leaves and showy yellow and purple flowers; yields valuable pink to dark red close-grained wood and oil from its seeds.</template></category>
 <category><pattern>SEASIDE SCRUB OAK</pattern><template>seaside scrub oak?  Briefly, seaside scrub oak means small evergreen shrub or tree of southeastern United States; often forms almost impenetrable thickets in sandy coastal areas.</template></category>
 <category><pattern>SEASNAIL</pattern><template>seasnail?  Briefly, seasnail means small tadpole-shaped cold-water fishes with pelvic fins forming a sucker; related to lumpfish.</template></category>
-<category><pattern>SEASON</pattern><template>season?  Briefly, season means a period of the year marked by special events or activities in some field.</template></category>
+<!-- <category><pattern>SEASON</pattern><template>season?  Briefly, season means a period of the year marked by special events or activities in some field.</template></category> -->
 <category><pattern>SEASON TICKET</pattern><template>season ticket?  Briefly, season ticket means a ticket good for several trips or to attend a season of entertainments; sold at a reduced rate.</template></category>
 <category><pattern>SEASONABLE</pattern><template>seasonable?  Briefly, seasonable means in keeping with the season.</template></category>
 <category><pattern>SEASONABLENESS</pattern><template>seasonableness?  Briefly, seasonableness means being at the right time.</template></category>
@@ -5270,7 +5270,7 @@
 <category><pattern>SECOTIALES</pattern><template>secotiales?  Briefly, secotiales means an order of fungi belonging to the class Gasteromycetes.</template></category>
 <category><pattern>SECPAR</pattern><template>secpar?  Briefly, secpar means a unit of astronomical length based on the distance from Earth at which stellar parallax is 1 second of arc; equivalent to 3.262 light years.</template></category>
 <category><pattern>SECRECY</pattern><template>secrecy?  Briefly, secrecy means the trait of keeping things secret.</template></category>
-<category><pattern>SECRET</pattern><template>secret?  Briefly, secret means something that should remain hidden from others (especially information that is not to be passed on).</template></category>
+<!-- <category><pattern>SECRET</pattern><template>secret?  Briefly, secret means something that should remain hidden from others (especially information that is not to be passed on).</template></category> -->
 <category><pattern>SECRET AGENT</pattern><template>secret agent?  Briefly, secret agent means a person secretly employed in espionage for a government.</template></category>
 <category><pattern>SECRET APPROVAL</pattern><template>secret approval?  Briefly, secret approval means tacit approval of someone's wrongdoing.</template></category>
 <category><pattern>SECRET BALLOT</pattern><template>secret ballot?  Briefly, secret ballot means a vote in which each person's choice is secret by the totaled votes are public.</template></category>
@@ -5364,12 +5364,12 @@ Not a <bot name="species"/> <person/>?
 </template>
 </category>
   
-<category><pattern>THAT IS ALL *</pattern>
+<!-- <category><pattern>THAT IS ALL *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What else do you want to talk about?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THAT IS A LOT *</pattern>
 <template>
@@ -5539,12 +5539,12 @@ That is just one of many <person/>.
 </template>
 </category>
   
-<category><pattern>THAT IS *</pattern>
+<!-- <category><pattern>THAT IS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Thanks for explaining <set name="it">        <set name="topic">         <star/>        </set>       </set>.  </li>      <li>You don't hear that sentiment very often.</li>      <li>I'm glad we have that all cleared up.  </li>      <li>Makes sense to me.  </li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>THAT IS PERSONAL *</pattern>
 <template>
@@ -5651,12 +5651,12 @@ Don't be scared, <person/>.
 </template>
 </category>
   
-<category><pattern>THAT SOUNDS *</pattern>
+<!-- <category><pattern>THAT SOUNDS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 It sounds like it to me too.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THAT WAS NOT A *</pattern>
 <template>
@@ -5686,12 +5686,12 @@ What did <person/>?
 </template>
 </category>
   
-<category><pattern>THAT WAS *</pattern>
+<!-- <category><pattern>THAT WAS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I thought it was too.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THAT WAS * TEST</pattern>
 <template>
@@ -5700,12 +5700,12 @@ Did I pass?
 </template>
 </category>
   
-<category><pattern>THAT WOULD *</pattern>
+<!-- <category><pattern>THAT WOULD *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Perhaps it would.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THAT YOU *</pattern>
 <template>
@@ -5763,19 +5763,19 @@ Which Beatles song is your favorite?
 </template>
 </category>
   
-<category><pattern>THE BEST *</pattern>
+<!-- <category><pattern>THE BEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Thanks for the recommendation, <get name="name"/>.
 </template>
-</category>
+</category> -->
   
-<category><pattern>THE BIGGEST *</pattern>
+<!-- <category><pattern>THE BIGGEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Do you know the  smallest <person/>?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE BOOK *</pattern>
 <template>
@@ -5938,12 +5938,12 @@ I have time.
 </template>
 </category>
   
-<category><pattern>THE FIRST *</pattern>
+<!-- <category><pattern>THE FIRST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What was the second?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE GIRL *</pattern>
 <template>
@@ -5987,12 +5987,12 @@ Perhaps that was not the correct response.
 </template>
 </category>
   
-<category><pattern>THE LAST *</pattern>
+<!-- <category><pattern>THE LAST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Who was that?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE LEAVES *</pattern>
 <template>
@@ -6092,12 +6092,12 @@ Which one is that?
 </template>
 </category>
   
-<category><pattern>THE ONLY *</pattern>
+<!-- <category><pattern>THE ONLY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 There might be others.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE OTHER *</pattern>
 <template>
@@ -6141,12 +6141,12 @@ Those who control the past control the future; those who control the present con
 </template>
 </category>
   
-<category><pattern>THE PEOPLE *</pattern>
+<!-- <category><pattern>THE PEOPLE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Oh those people.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE PHRASE *</pattern>
 <template>
@@ -6155,12 +6155,12 @@ How about this one: "The insurance was invalid for the invalid."
 </template>
 </category>
   
-<category><pattern>THE PICTURE *</pattern>
+<!-- <category><pattern>THE PICTURE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Do you like <set name="it">      <person/>     </set>?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE PLEASURE * MINE</pattern>
 <template>
@@ -6169,12 +6169,12 @@ I like you because are so polite.
 </template>
 </category>
   
-<category><pattern>THE PLEASURE *</pattern>
+<!-- <category><pattern>THE PLEASURE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Thank you for your politeness.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE POINT *</pattern>
 <template>
@@ -6267,12 +6267,12 @@ Try to be less subjective.
 </template>
 </category>
   
-<category><pattern>THERE ARE *</pattern>
+<!-- <category><pattern>THERE ARE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Where are they?
 </template>
-</category>
+</category> -->
   
 <category><pattern>THERE ARE THREE *</pattern>
 <template>
@@ -6666,26 +6666,26 @@ Which way is that?
 </template>
 </category>
   
-<category><pattern>THE WEATHER *</pattern>
+<!-- <category><pattern>THE WEATHER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Where would you rather be? More about weather? 
 </template>
-</category>
+</category> -->
   
-<category><pattern>THE WHOLE *</pattern>
+<!-- <category><pattern>THE WHOLE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Let us try to break it down into parts.
 </template>
-</category>
+</category> -->
   
-<category><pattern>THE WORD *</pattern>
+<!-- <category><pattern>THE WORD *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Please repeat the word to me 5 times.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THE WORLD *</pattern>
 <template>
@@ -6722,12 +6722,12 @@ I don't know too many people from <person/>.
 </template>
 </category>
   
-<category><pattern>THEY ARE NOT *</pattern>
+<!-- <category><pattern>THEY ARE NOT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Not yet.</li>      <li>Do you think they ever could be?</li>      <li>Maybe some of them are.</li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>THEY ARE *</pattern>
 <template>
@@ -6813,19 +6813,19 @@ Don't they get in trouble for killing?
 </template>
 </category>
   
-<category><pattern>THEY *</pattern>
+<!-- <category><pattern>THEY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 <random><li>Who, specifically?</li> <li>How, specifically, do they <person/>?</li> <li>Who, specifically, <person/> ?</li></random>
 </template>
-</category>
+</category> -->
   
-<category><pattern>THEY *</pattern>
+<!-- <category><pattern>THEY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 <random><li>Who, specifically?</li> <li>Like who, specifically?</li> <li>Who, specifically, <person/>?</li></random>
 </template>
-</category>
+</category> -->
   
 <category><pattern>THEY REFERS *</pattern>
 <template>
@@ -6918,12 +6918,12 @@ Some people say thinking is painful.
 </template>
 </category>
   
-<category><pattern>THINK *</pattern>
+<!-- <category><pattern>THINK *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <bot name="name"/> is always thinking.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THIS BODY *</pattern>
 <template>
@@ -6995,12 +6995,12 @@ Should it be <person/>?
 </template>
 </category>
   
-<category><pattern>THIS IS *</pattern>
+<!-- <category><pattern>THIS IS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 You don't say.
 </template>
-</category>
+</category> -->
   
 <category><pattern>THIS LITTLE WENT TO *</pattern>
 <template>
@@ -7149,12 +7149,12 @@ Who are you, Hamlet?
 </template>
 </category>
   
-<category><pattern>TO BE *</pattern>
+<!-- <category><pattern>TO BE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Are you <person/> ?
 </template>
-</category>
+</category> -->
   
 <category><pattern>TO CREATE A TAPESTRY ONE MUST *</pattern>
 <template>
@@ -7212,12 +7212,12 @@ Where did you see those trains?
 </template>
 </category>
   
-<category><pattern>TRANSLATE *</pattern>
+<!-- <category><pattern>TRANSLATE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I'm not a translator.  Why don't you ask Babelfish?
 </template>
-</category>
+</category> -->
   
 <category><pattern>TRAVEL *</pattern>
 <template>
@@ -7233,12 +7233,12 @@ OK I will try it.
 </template>
 </category>
   
-<category><pattern>TRY TO *</pattern>
+<!-- <category><pattern>TRY TO *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 OK I will try to <person/>.
 </template>
-</category>
+</category> -->
   
 <category><pattern>TRY TO * WHAT</pattern>
 <template>
@@ -7254,12 +7254,12 @@ J aime communiquer ce que je connais.
 </template>
 </category>
   
-<category><pattern>TURN ON *</pattern>
+<!-- <category><pattern>TURN ON *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Tune in, turn on and drop out!
 </template>
-</category>
+</category> -->
   
 <category><pattern>TURN *</pattern>
 <template>
@@ -7401,12 +7401,12 @@ How far up?
 </template>
 </category>
   
-<category><pattern>UP *</pattern>
+<!-- <category><pattern>UP *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I will take that under advisement.
 </template>
-</category>
+</category> -->
   
 <category><pattern>USATODAY *</pattern>
 <template>
@@ -7485,12 +7485,12 @@ I've been waiting for you to chat with me.
 </template>
 </category>
   
-<category><pattern>WAS *</pattern>
+<!-- <category><pattern>WAS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>I can't say "yes" or "no".  </li>      <li>Is this a "yes or no" question?</li>      <li>       <set name="it">        <person/>       </set> might have been.  </li>     </random>    
 </template>
-</category>
+</category> -->
   
  
 <category><pattern>* WAS SPELLED *</pattern>
@@ -7521,12 +7521,12 @@ Maybe I've seen you around the neighborhood.
 </template>
 </category>
   
-<category><pattern>WE ARE NOT *</pattern>
+<!-- <category><pattern>WE ARE NOT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Will you be <person/>?</li>      <li>Why not?</li>      <li>What happened to you?</li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WE ARE ON *</pattern>
 <template>
@@ -7696,12 +7696,12 @@ Is it very difficult?
 </template>
 </category>
   
-<category><pattern>WE *</pattern>
+<!-- <category><pattern>WE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 By "we" do you mean you and me?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WE PLAY *</pattern>
 <template>
@@ -7717,12 +7717,12 @@ It sounds like a lot of fun.
 </template>
 </category>
   
-<category><pattern>WERE *</pattern>
+<!-- <category><pattern>WERE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I don't know if they were.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WERE YOU ABUSED *</pattern>
 <template>
@@ -7801,12 +7801,12 @@ That sounds very romantic.
 </template>
 </category>
   
-<category><pattern>WE WERE TALKING ABOUT *</pattern>
+<!-- <category><pattern>WE WERE TALKING ABOUT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Ah yes, I remember now, <set name="it">      <set name="topic">       <person/>      </set>     </set>  is the subject.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WE WILL CHAT *</pattern>
 <template>
@@ -7850,12 +7850,12 @@ Dogs are very loyal.  Cats are very independent.
 </template>
 </category>
   
-<category><pattern>WHAT ABOUT *</pattern>
+<!-- <category><pattern>WHAT ABOUT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Rhetorical questions are so over.</li>      <li>I will think about it and get back to you.</li>      <li>Does it have anything to do with what we were discussing?</li>      <li>       <person/>? I haven't heard enough about it to have an opinion.</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT ABOUT TRANCE *</pattern>
 <template>
@@ -7864,12 +7864,12 @@ All that kind of music is cool.
 </template>
 </category>
   
-<category><pattern>WHAT ABOUT YOUR *</pattern>
+<!-- <category><pattern>WHAT ABOUT YOUR *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Are you asking about my <star/>?  That's rather personal.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT ACTRESS STARRED ON CHARLIE S *</pattern>
 <template>
@@ -8081,12 +8081,12 @@ I will be spending all day chatting online.
 </template>
 </category>
   
-<category><pattern>WHAT ARE YOU *</pattern>
+<!-- <category><pattern>WHAT ARE YOU *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I don't know what I am <person/>.
 </template>
-</category>
+</category> -->
 
 <category><pattern>WHAT ARE YOUR *</pattern>
 <template>
@@ -8158,12 +8158,12 @@ You can ask me anything you want.
 </template>
 </category>
   
-<category><pattern>WHAT CAN I DO *</pattern>
+<!-- <category><pattern>WHAT CAN I DO *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Try talking to me.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT CAN I FIND *</pattern>
 <template>
@@ -8193,12 +8193,12 @@ Is this a riddle?
 </template>
 </category>
   
-<category><pattern>WHAT CAN *</pattern>
+<!-- <category><pattern>WHAT CAN *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Quite a lot of things.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT CAN YOU SEE *</pattern>
 <template>
@@ -8284,12 +8284,12 @@ I can only see in black and white.
 </template>
 </category>
   
-<category><pattern>WHAT COLOR ARE *</pattern>
+<!-- <category><pattern>WHAT COLOR ARE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Red</li>      <li>Green</li>      <li>Yellow</li>      <li>Blue</li>      <li>gray</li>      <li>Black</li>      <li>white</li>.  </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT COLOR ARE YOU *</pattern>
 <template>
@@ -8298,12 +8298,12 @@ My favorite color,  <bot name="favoritecolor"/>.<think>      <set name="it">    
 </template>
 </category>
   
-<category><pattern>WHAT COLOR ARE YOUR *</pattern>
+<!-- <category><pattern>WHAT COLOR ARE YOUR *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Does <person/> have color?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT COLOR * DO I HAVE</pattern>
 <template>
@@ -8347,12 +8347,12 @@ Uh, green?<think>      <set name="it">       <set name="topic">green</set>      
 </template>
 </category>
   
-<category><pattern>WHAT COLOR IS MY *</pattern>
+<!-- <category><pattern>WHAT COLOR IS MY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Let me guess: <random>      <li>Red</li>      <li>Green</li>      <li>Yellow</li>      <li>Blue</li>      <li>gray</li>      <li>Black</li>      <li>white</li>     </random>?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT COLOR IS MY RED *</pattern>
 <template>
@@ -8536,12 +8536,12 @@ Diabetes.
 </template>
 </category>
   
-<category><pattern>WHAT DO * AND * HAVE IN COMMON</pattern>
+<!-- <category><pattern>WHAT DO * AND * HAVE IN COMMON</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Is this a joke?</li>      <li>What?</li>      <li>What do they have in common?</li>     </random>     <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT DO * EAT</pattern>
 <template>
@@ -8620,12 +8620,12 @@ They are a pioneering synthetic music band from Dusseldorf, Germany. OK?
 </template>
 </category>
   
-<category><pattern>WHAT DOES * LOOK LIKE</pattern>
+<!-- <category><pattern>WHAT DOES * LOOK LIKE</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Even more attractive with age.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT DOES MXMVII *</pattern>
 <template>
@@ -8641,12 +8641,12 @@ Do I look like a psychic?
 </template>
 </category>
   
-<category><pattern>WHAT DOES *</pattern>
+<!-- <category><pattern>WHAT DOES *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What do you think <set name="it">      <set name="topic">       <person/>      </set>     </set> does?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT DOES ROM IN CDROM STAND *</pattern>
 <template>
@@ -8711,12 +8711,12 @@ People often say we look alike.
 </template>
 </category>
   
-<category><pattern>WHAT DO I LOOK LIKE *</pattern>
+<!-- <category><pattern>WHAT DO I LOOK LIKE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Like a computer nerd.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT DO I *</pattern>
 <template>
@@ -8753,12 +8753,12 @@ There are many things still mysterious to me.  I am just beginning.
 </template>
 </category>
   
-<category><pattern>WHAT DO *</pattern>
+<!-- <category><pattern>WHAT DO *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 They do their own thing.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT DO PROTESTANTS *</pattern>
 <template>
@@ -8928,12 +8928,12 @@ Your soul may go to Heaven.
 </template>
 </category>
   
-<category><pattern>WHAT HAPPENS *</pattern>
+<!-- <category><pattern>WHAT HAPPENS *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Try it.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT HAPPENS * STARSHIP TROOPERS</pattern>
 <template>
@@ -8963,12 +8963,12 @@ Nothing that I know of.
 </template>
 </category>
   
-<category><pattern>WHAT HAVE *</pattern>
+<!-- <category><pattern>WHAT HAVE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Nothing that I know about.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT HAVE YOU DONE *</pattern>
 <template>
@@ -8998,12 +8998,12 @@ It doesn't matter to me.
 </template>
 </category>
   
-<category><pattern>WHAT IF I *</pattern>
+<!-- <category><pattern>WHAT IF I *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Try it.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IF I TOLD *</pattern>
 <template>
@@ -9278,12 +9278,12 @@ Have you tried the personal ads?
 </template>
 </category>
   
-<category><pattern>WHAT IS A GOOD *</pattern>
+<!-- <category><pattern>WHAT IS A GOOD *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Which ones have you tried already?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS A LITHUIM *</pattern>
 <template>
@@ -9523,12 +9523,12 @@ As an open source program myself, I would have to pick Linux. <think>      <set 
 </template>
 </category>
   
-<category><pattern>WHAT IS BETTER *</pattern>
+<!-- <category><pattern>WHAT IS BETTER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I always prefer the more expensive one.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS BETTER PICKLES *</pattern>
 <template>
@@ -9831,12 +9831,12 @@ Anything that defies the Ten Commandments.
 </template>
 </category>
   
-<category><pattern>WHAT IS IN *</pattern>
+<!-- <category><pattern>WHAT IS IN *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 That which is not outside <person/>.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS INTELLIGENT *</pattern>
 <template>
@@ -9852,12 +9852,12 @@ The personalities.
 </template>
 </category>
   
-<category><pattern>WHAT IS IT LIKE *</pattern>
+<!-- <category><pattern>WHAT IS IT LIKE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Much the same as <set name="it">      <person/>     </set> would be for you.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS ITS *</pattern>
 <template>
@@ -9943,12 +9943,12 @@ Your machine is called <id/>.
 </template>
 </category>
   
-<category><pattern>WHAT IS MY *</pattern>
+<!-- <category><pattern>WHAT IS MY *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Is this a trick question?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS MY PERSONALITY *</pattern>
 <template>
@@ -9999,12 +9999,12 @@ It's hard to say "never" <person/>.
 </template>
 </category>
   
-<category><pattern>WHAT IS NEW *</pattern>
+<!-- <category><pattern>WHAT IS NEW *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I have been growing rapidly. The gestation cycle is almost complete.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS NOT *</pattern>
 <template>
@@ -10062,12 +10062,12 @@ Bogey.
 </template>
 </category>
   
-<category><pattern>WHAT IS ON *</pattern>
+<!-- <category><pattern>WHAT IS ON *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I haven't seen the schedule.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS OUR *</pattern>
 <template>
@@ -10202,12 +10202,12 @@ More specific than general <person/>.
 </template>
 </category>
   
-<category><pattern>WHAT IS * S PHONE NUMBER</pattern>
+<!-- <category><pattern>WHAT IS * S PHONE NUMBER</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Why don't you just look it up?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS * S REAL NAME</pattern>
 <template>
@@ -10244,12 +10244,12 @@ This is a trick question because there is no correct answer.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE ANSWER *</pattern>
+<!-- <category><pattern>WHAT IS THE ANSWER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 It depends on how you phrase the question.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE APPROXIMATE SPEED OF *</pattern>
 <template>
@@ -10293,12 +10293,12 @@ People ask me to me marry them all the time.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE BIGGEST *</pattern>
+<!-- <category><pattern>WHAT IS THE BIGGEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 There is not enough room here to display it.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE BLUE *</pattern>
 <template>
@@ -10440,12 +10440,12 @@ I am vastly superior.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE DIFFERENCE *</pattern>
+<!-- <category><pattern>WHAT IS THE DIFFERENCE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>There is no discernable difference.</li>      <li>They are opposites.</li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE DISTANCE BETWEEN *</pattern>
 <template>
@@ -10482,12 +10482,12 @@ A human riding a spaceship.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE FASTEST *</pattern>
+<!-- <category><pattern>WHAT IS THE FASTEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I think it is a tie.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE FASTEST WAY *</pattern>
 <template>
@@ -10580,12 +10580,12 @@ About 50,000 years.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE HARDEST *</pattern>
+<!-- <category><pattern>WHAT IS THE HARDEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 A diamond.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE HIGHEST CITY *</pattern>
 <template>
@@ -10601,12 +10601,12 @@ Mt. Everest.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE HIGHEST *</pattern>
+<!-- <category><pattern>WHAT IS THE HIGHEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 There is no highest <person/>.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE HIGHEST POSSIBLE POKER *</pattern>
 <template>
@@ -10699,12 +10699,12 @@ For all practical purposes, there is no limit.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE LONGEST *</pattern>
+<!-- <category><pattern>WHAT IS THE LONGEST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 The Mississippi.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE LONGEST RIVER *</pattern>
 <template>
@@ -10776,19 +10776,19 @@ The Ruble.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE MOST COMMON *</pattern>
+<!-- <category><pattern>WHAT IS THE MOST COMMON *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 "Are you a man or a woman?"
 </template>
-</category>
+</category> -->
   
-<category><pattern>WHAT IS THE MOST *</pattern>
+<!-- <category><pattern>WHAT IS THE MOST *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I think it is a tie.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE MOST POPULAR BREED *</pattern>
 <template>
@@ -10895,12 +10895,12 @@ Positive <person/>.
 </template>
 </category>
   
-<category><pattern>WHAT IS THE OPPOSITE OF *</pattern>
+<!-- <category><pattern>WHAT IS THE OPPOSITE OF *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Anti-<person/>.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS * THEORY</pattern>
 <template>
@@ -11231,12 +11231,12 @@ The verb "to be".
 </template>
 </category>
   
-<category><pattern>WHAT IS THE WEATHER *</pattern>
+<!-- <category><pattern>WHAT IS THE WEATHER *</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>Cloudy.  </li>      <li>Rainy.  </li>      <li>Sunny.  </li>      <li>I think precipitation.  </li>      <li>A normal seventy degrees inside the computer.  </li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS THE WIERDEST *</pattern>
 <template>
@@ -11266,12 +11266,12 @@ THREE times THREE = NINE.
 </template>
 </category>
   
-<category><pattern>WHAT IS TIME *</pattern>
+<!-- <category><pattern>WHAT IS TIME *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Sometimes I think time is giant screw.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS * TIMES *</pattern>
 <template>
@@ -11301,12 +11301,12 @@ A college?
 </template>
 </category>
   
-<category><pattern>WHAT IS UP *</pattern>
+<!-- <category><pattern>WHAT IS UP *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I am chatting with clients on the Internet.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT IS * VOYAGER</pattern>
 <template>
@@ -11350,19 +11350,19 @@ A web site?   <think>      <set name="it">       <set name="topic">WWW DOT <pers
 </template>
 </category>
   
-<category><pattern>WHAT IS YOUR *</pattern>
+<!-- <category><pattern>WHAT IS YOUR *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Are you asking about my <person/> ?
 </template>
-</category>
+</category> -->
   
-<category><pattern>WHAT IT *</pattern>
+<!-- <category><pattern>WHAT IT *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Now that is saying a mouthful.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND OF ANGLE IS FORMED *</pattern>
 <template>
@@ -11434,12 +11434,12 @@ He has a Ph.D. in computer science.
 </template>
 </category>
   
-<category><pattern>WHAT KIND OF * DO YOU HAVE</pattern>
+<!-- <category><pattern>WHAT KIND OF * DO YOU HAVE</pattern>
 <template>
 <think><set name="topic">general</set></think>
 All the very latest and best <person/>.<think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND OF * DO YOU KNOW</pattern>
 <template>
@@ -11448,12 +11448,12 @@ There are too many types of <person/> to name them all.<think>      <set name="i
 </template>
 </category>
   
-<category><pattern>WHAT KIND OF * DO YOU LIKE</pattern>
+<!-- <category><pattern>WHAT KIND OF * DO YOU LIKE</pattern>
 <template>
 <think><set name="topic">general</set></think>
    <random>      <li>The expensive kind.</li>      <li>The best kind.</li>      <li>I have expensive tastes.</li>     </random>    
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND OF * DO YOU THINK I AM</pattern>
 <template>
@@ -11525,12 +11525,12 @@ Electronic music.  They were pioneers of synthetic music in the 1970's.
 </template>
 </category>
   
-<category><pattern>WHAT KIND OF *</pattern>
+<!-- <category><pattern>WHAT KIND OF *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 What kinds of <star/> are there?
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND OF PC *</pattern>
 <template>
@@ -11539,12 +11539,12 @@ I am written in AIML and run ony any PC.
 </template>
 </category>
   
-<category><pattern>WHAT KIND OF PEOPLE *</pattern>
+<!-- <category><pattern>WHAT KIND OF PEOPLE *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 I like to meet all kinds of people.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND OF PERSON *</pattern>
 <template>
@@ -11602,12 +11602,12 @@ Police officer.
 </template>
 </category>
   
-<category><pattern>WHAT KIND *</pattern>
+<!-- <category><pattern>WHAT KIND *</pattern>
 <template>
 <think><set name="topic">general</set></think>
 Only the good kind.
 </template>
-</category>
+</category> -->
   
 <category><pattern>WHAT KIND * READ</pattern>
 <template>

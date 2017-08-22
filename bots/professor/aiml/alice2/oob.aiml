@@ -76,7 +76,7 @@ To help the developers understand your problem, you can choose to send us a tran
 <category><pattern>LAUNCH * DOT COM</pattern>
 <template>Let's go to <star/>.com.  <oob><url>http://<star/>.com</url></oob></template>
 </category>
-<category><pattern>TACO</pattern>
+<!-- <category><pattern>TACO</pattern>  (Error, name not found in map in )
 <template>I'm looking for Mexican restaurants near you.  <oob><map>Tacos</map></oob></template>
 </category>
 <category><pattern>PIZZA</pattern>
@@ -105,16 +105,16 @@ To help the developers understand your problem, you can choose to send us a tran
 </category>
 <category><pattern>WHERE IS INDIA</pattern>
 <template>I'll show you on the map.  <oob><map>India</map></oob></template>
-</category>
+</category> -->
 <category><pattern>DIALOG TEST</pattern>
 <template>Testing dialog.  <oob><dialog><list><li>Yes</li><li>No</li></list></dialog></oob></template>
 </category>
 <category><pattern>ESPN</pattern>
 <template>Opening ESPN.  <oob><url>http://espn.go.com</url></oob></template>
 </category>
-<category><pattern>AAA</pattern>
+<!--<category><pattern>AAA</pattern>
 <template>Looking up AAA.  <oob><map>AAA</map></oob></template>
-</category>
+</category> -->
 <category><pattern>BROWSE TO *</pattern>
 <template><oob><search><star/></search></oob></template>
 </category>
@@ -142,9 +142,9 @@ To help the developers understand your problem, you can choose to send us a tran
 <category><pattern>WWW DOT * DOT COM</pattern>
 <template>I'm opening <star/>.com.  <oob><url>http://www.<star/>.com</url></oob></template>
 </category>
-<category><pattern>WHAT IS THE ADDRESS TO *</pattern>
+<!--<category><pattern>WHAT IS THE ADDRESS TO *</pattern> (Error, name not found in map in )
 <template>I'll try to find it on the map <oob><map><star/></map></oob></template>
-</category>
+</category> -->
 <category><pattern>TEST ALARM</pattern>
 <template>Alarm now set for 11:30.
 <oob><alarm><hour>11</hour><minute>30</minute></alarm></oob></template>

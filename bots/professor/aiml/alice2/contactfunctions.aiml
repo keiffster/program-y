@@ -35,18 +35,18 @@
 <category><pattern>DISPLAYNAME *</pattern>
 <template><displayname><star/></displayname></template>
 </category>
-<category><pattern>DIALNUMBER * *</pattern>
-<template><dialnumber><type><star/></type><id><star index="2"/></id></dialnumber></template>
-</category>
+<!--<category><pattern>DIALNUMBER * *</pattern>
+<template><dialnumber><type><star/></type><id <star index="2"/></id></dialnumber></template> (<id> node should not contains child text)
+</category> -->
 <category><pattern>DIALNUMBER *</pattern>
 <template>unknown</template>
 </category>
 <category><pattern>CONTACTBIRTHDAY *</pattern>
 <template><contactbirthday><star/></contactbirthday></template>
 </category>
-<category><pattern>EMAILADDRESS * *</pattern>
-<template><emailaddress><type><star/></type><id><star index="2"/></id></emailaddress></template>
-</category>
+<!-- <category><pattern>EMAILADDRESS * *</pattern>
+<template><emailaddress><type><star/></type><id><star index="2"/></id></emailaddress></template> (<id> node should not contains child text)
+</category> -->
 <category><pattern>EMAILADDRESS *</pattern>
 <template>unknown</template>
 </category>

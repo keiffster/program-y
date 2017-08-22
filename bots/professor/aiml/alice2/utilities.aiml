@@ -30,7 +30,7 @@
 
 </condition></template>
 </category>
-<category><pattern>ANAGRAMWORDS *</pattern>
+<!-- <category><pattern>ANAGRAMWORDS *</pattern> (SRAIX node, service attribute missing)
 <template><think><set var="list"><srai>ANAGRAM <star/></srai></set></think>
 <condition var="list">
 <li value="too long">I can only do anagrams up to 8 letters.</li>
@@ -43,7 +43,7 @@
     </condition>
 </li>
 </condition></template>
-</category>
+</category> -->
 <category><pattern>JSTEST *</pattern>
 <template><javascript>
 function foo() {
@@ -193,7 +193,7 @@ upper = <set var="upper"><srai>LARGEROF <star index="2"/> <star index="4"/></sra
 <learn>
 <category>
 <pattern>PICKNUMBER</pattern>
-<template><random><eval><get var="lilist"/></eval></random>
+<template><eval><get var="lilist"/></eval>
 </template>
 </category>
 </learn>

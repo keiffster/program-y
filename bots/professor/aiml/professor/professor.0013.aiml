@@ -417,7 +417,7 @@
 <category><pattern>MADLY</pattern><template>madly?  Briefly, madly means in a desperate manner.</template></category>
 <category><pattern>MADMAN</pattern><template>madman?  Briefly, madman means an insane person.</template></category>
 <category><pattern>MADNEP</pattern><template>madnep?  Briefly, madnep means biennial weed in Europe and America having large pinnate leaves and yellow flowers and a bitter and somewhat poisonous root; the ancestor of cultivated parsnip.</template></category>
-<category><pattern>MADNESS</pattern><template>madness?  Briefly, madness means obsolete terms for legal insanity.</template></category>
+<!-- <category><pattern>MADNESS</pattern><template>madness?  Briefly, madness means obsolete terms for legal insanity.</template></category> -->
 <category><pattern>MADONNA</pattern><template>madonna?  Briefly, madonna means the mother of Jesus; Christians refer to her as the Virgin Mary; she is especially honored by Roman Catholics.</template></category>
 <category><pattern>MADONNA LILY</pattern><template>madonna lily?  Briefly, madonna lily means lily of eastern Mediterranean and the Balkans with broad funnel-shaped white flowers.</template></category>
 <category><pattern>MADONNA LOUISE CICCONE</pattern><template>madonna louise ciccone?  Briefly, madonna louise ciccone means United States pop singer and sex symbol during the 1980s (born in 1958).</template></category>
@@ -688,7 +688,7 @@
 <category><pattern>MAIGER</pattern><template>maiger?  Briefly, maiger means large European marine food fish.</template></category>
 <category><pattern>MAIGRE</pattern><template>maigre?  Briefly, maigre means large European marine food fish.</template></category>
 <category><pattern>MAIKOA</pattern><template>maikoa?  Briefly, maikoa means South American plant cultivated for its large fragrant trumpet-shaped flowers.</template></category>
-<category><pattern>MAIL</pattern><template>mail?  Briefly, mail means the bags of letters and packages that are transported by the postal service.</template></category>
+<!-- <category><pattern>MAIL</pattern><template>mail?  Briefly, mail means the bags of letters and packages that are transported by the postal service.</template></category> -->
 <category><pattern>MAIL BOAT</pattern><template>mail boat?  Briefly, mail boat means a boat for carrying mail.</template></category>
 <category><pattern>MAIL CALL</pattern><template>mail call?  Briefly, mail call means a call of names of those receiving mail.</template></category>
 <category><pattern>MAIL CAR</pattern><template>mail car?  Briefly, mail car means a railway car in which mail is transported and sorted.</template></category>
@@ -1558,7 +1558,7 @@
 <category><pattern>MANX</pattern><template>manx?  Briefly, manx means the Gaelic language formerly spoken on the Isle of Man.</template></category>
 <category><pattern>MANX CAT</pattern><template>manx cat?  Briefly, manx cat means a short-haired tailless breed of cat believed to originate on the Isle of Man.</template></category>
 <category><pattern>MANX SHEARWATER</pattern><template>manx shearwater?  Briefly, manx shearwater means small black-and-white shearwater common in the northeastern Atlantic.</template></category>
-<category><pattern>MANY</pattern><template>many?  Briefly, many means a quantifier that can be used with count nouns and is often preceded by `as' or `too' or `so' or `that'; amounting to a large but indefinite number.</template></category>
+<!-- <category><pattern>MANY</pattern><template>many?  Briefly, many means a quantifier that can be used with count nouns and is often preceded by `as' or `too' or `so' or `that'; amounting to a large but indefinite number.</template></category> -->
 <category><pattern>MANY A</pattern><template>many a?  Briefly, many a means each of a large indefinite number.</template></category>
 <category><pattern>MANY AN</pattern><template>many an?  Briefly, many an means each of a large indefinite number.</template></category>
 <category><pattern>MANY ANOTHER</pattern><template>many another?  Briefly, many another means each of a large indefinite number.</template></category>
@@ -2243,7 +2243,7 @@
 <category><pattern>LAMBSKIN</pattern><template>lambskin?  Briefly, lambskin means the skin of a lamb with the wool still on.</template></category>
 <category><pattern>LAMB'S-QUARTER</pattern><template>lamb's-quarter?  Briefly, lamb's-quarter means leaves collected from the wild.</template></category>
 <category><pattern>LAMB'S-QUARTERS</pattern><template>lamb's-quarters?  Briefly, lamb's-quarters means common weedy European plant introduced into North America; often used as a potherb.</template></category>
-<category><pattern>LAME</pattern><template>lame?  Briefly, lame means someone who doesn't understand what is going on.</template></category>
+<!-- <category><pattern>LAME</pattern><template>lame?  Briefly, lame means someone who doesn't understand what is going on.</template></category> -->
 <category><pattern>LAME DUCK</pattern><template>lame duck?  Briefly, lame duck means an elected official still in office but not slated to continue.</template></category>
 <category><pattern>LAMEDH</pattern><template>lamedh?  Briefly, lamedh means the 12th letter of the Hebrew alphabet.</template></category>
 <category><pattern>LAMELLA</pattern><template>lamella?  Briefly, lamella means any of the radiating leaflike spore-producing structures on the underside of the cap of a mushroom or similar fungus.</template></category>
@@ -2448,7 +2448,7 @@
 <category><pattern>LANGSTON HUGHES</pattern><template>langston hughes?  Briefly, langston hughes means United States writer (1902-1967).</template></category>
 <category><pattern>LANGSYNE</pattern><template>langsyne?  Briefly, langsyne means past times remembered with nostalgia.</template></category>
 <category><pattern>LANGTRY</pattern><template>langtry?  Briefly, langtry means British actress and mistress of the prince who later became Edward VII (1853-1929).</template></category>
-<category><pattern>LANGUAGE</pattern><template>language?  Briefly, language means a systematic means of communicating by the use of sounds or conventional symbols.</template></category>
+<!-- <category><pattern>LANGUAGE</pattern><template>language?  Briefly, language means a systematic means of communicating by the use of sounds or conventional symbols.</template></category> -->
 <category><pattern>LANGUAGE AREA</pattern><template>language area?  Briefly, language area means a large cortical area (in the left hemisphere in most people) containing all the centers associated with language.</template></category>
 <category><pattern>LANGUAGE BARRIER</pattern><template>language barrier?  Briefly, language barrier means barrier to communication resulting from speaking different languages.</template></category>
 <category><pattern>LANGUAGE LEARNING</pattern><template>language learning?  Briefly, language learning means learning to use a language.</template></category>
@@ -2753,7 +2753,7 @@
 <category><pattern>LAST MENTIONED</pattern><template>last mentioned?  Briefly, last mentioned means the one most recently mentioned.</template></category>
 <category><pattern>LAST MILE</pattern><template>last mile?  Briefly, last mile means the last walk of a condemned person to the execution place.</template></category>
 <category><pattern>LAST MINUTE</pattern><template>last minute?  Briefly, last minute means the latest possible moment.</template></category>
-<category><pattern>LAST NAME</pattern><template>last name?  Briefly, last name means the name used to identify the members of a family (as distinguished from each member's given name).</template></category>
+<!-- <category><pattern>LAST NAME</pattern><template>last name?  Briefly, last name means the name used to identify the members of a family (as distinguished from each member's given name).</template></category> -->
 <category><pattern>LAST NOT LEAST</pattern><template>last not least?  Briefly, last not least means in addition to all the foregoing.</template></category>
 <category><pattern>LAST OUT</pattern><template>last out?  Briefly, last out means a trial of endurance.</template></category>
 <category><pattern>LAST QUARTER</pattern><template>last quarter?  Briefly, last quarter means the last fourth of the moon's period of revolution around the Earth.</template></category>
@@ -4260,7 +4260,7 @@
 <category><pattern>LIANA</pattern><template>liana?  Briefly, liana means a woody climbing usually tropical plant.</template></category>
 <category><pattern>LIAO</pattern><template>liao?  Briefly, liao means the dynasty that ruled much of Manchuria and northeastern China from 947 to 1125.</template></category>
 <category><pattern>LIAO DYNASTY</pattern><template>liao dynasty?  Briefly, liao dynasty means the dynasty that ruled much of Manchuria and northeastern China from 947 to 1125.</template></category>
-<category><pattern>LIAR</pattern><template>liar?  Briefly, liar means a person who has lied or who lies repeatedly.</template></category>
+<!-- <category><pattern>LIAR</pattern><template>liar?  Briefly, liar means a person who has lied or who lies repeatedly.</template></category> -->
 <category><pattern>LIATRIS</pattern><template>liatris?  Briefly, liatris means genus of perennial North American herbs with aromatic usually cormous roots.</template></category>
 <category><pattern>LIATRIS PUNCTATA</pattern><template>liatris punctata?  Briefly, liatris punctata means herb with many stems bearing narrow slender wands of crowded rose-lavender flowers; central United States and Canada to Texas and northern Mexico.</template></category>
 <category><pattern>LIATRIS PYCNOSTACHYA</pattern><template>liatris pycnostachya?  Briefly, liatris pycnostachya means perennial of southeastern and central United States having very dense spikes of purple flowers; often cultivated for cut flowers.</template></category>
@@ -4390,7 +4390,7 @@
 <category><pattern>LIDO</pattern><template>lido?  Briefly, lido means a recreational facility including a swimming pool for water sports.</template></category>
 <category><pattern>LIDO DECK</pattern><template>lido deck?  Briefly, lido deck means an open deck including a swimming pool.</template></category>
 <category><pattern>LIDOCAINE</pattern><template>lidocaine?  Briefly, lidocaine means a local anesthetic (trade names Lidocaine and Xylocaine) used topically on the skin and mucous membranes.</template></category>
-<category><pattern>LIE</pattern><template>lie?  Briefly, lie means a statement that deviates from or perverts the truth.</template></category>
+<!-- <category><pattern>LIE</pattern><template>lie?  Briefly, lie means a statement that deviates from or perverts the truth.</template></category> -->
 <category><pattern>LIE ABOUT</pattern><template>lie about?  Briefly, lie about means hang around idly.</template></category>
 <category><pattern>LIE AROUND</pattern><template>lie around?  Briefly, lie around means hang around idly.</template></category>
 <category><pattern>LIE AWAKE</pattern><template>lie awake?  Briefly, lie awake means lie without sleeping.</template></category>
@@ -4508,7 +4508,7 @@
 <category><pattern>LIGATION</pattern><template>ligation?  Briefly, ligation means tying a duct or blood vessel with a ligature (as to prevent bleeding during surgery).</template></category>
 <category><pattern>LIGATURE</pattern><template>ligature?  Briefly, ligature means a group of notes connected by a slur.</template></category>
 <category><pattern>LIGER</pattern><template>liger?  Briefly, liger means offspring of a male lion and a female tiger.</template></category>
-<category><pattern>LIGHT</pattern><template>light?  Briefly, light means electromagnetic radiation that can produce a visual sensation.</template></category>
+<!-- <category><pattern>LIGHT</pattern><template>light?  Briefly, light means electromagnetic radiation that can produce a visual sensation.</template></category> -->
 <category><pattern>LIGHT ADAPTATION</pattern><template>light adaptation?  Briefly, light adaptation means the process of adjusting the eyes to relatively high levels of illumination; the pupil constricts and the cones system is operative.</template></category>
 <category><pattern>LIGHT AIR</pattern><template>light air?  Briefly, light air means wind moving 1-3 knots; 1 on the Beaufort scale.</template></category>
 <category><pattern>LIGHT BALLAST</pattern><template>light ballast?  Briefly, light ballast means an electrical device for starting and regulating fluorescent and discharge lamps.</template></category>
@@ -4757,7 +4757,7 @@
 <category><pattern>LIMENITIS ARTHEMIS</pattern><template>limenitis arthemis?  Briefly, limenitis arthemis means North American butterfly with blue-black wings crossed by a broad white band.</template></category>
 <category><pattern>LIMENITIS ASTYANAX</pattern><template>limenitis astyanax?  Briefly, limenitis astyanax means similar to the banded purple but with red spots on underwing surfaces.</template></category>
 <category><pattern>LIMENITIS CAMILLA</pattern><template>limenitis camilla?  Briefly, limenitis camilla means Eurasian butterfly with brown wings and white markings.</template></category>
-<category><pattern>LIMERICK</pattern><template>limerick?  Briefly, limerick means port city in southwestern Ireland.</template></category>
+<!-- <category><pattern>LIMERICK</pattern><template>limerick?  Briefly, limerick means port city in southwestern Ireland.</template></category> -->
 <category><pattern>LIMESTONE</pattern><template>limestone?  Briefly, limestone means a sedimentary rock consisting mainly of calcium that was deposited by the remains of marine animals.</template></category>
 <category><pattern>LIMESTONE FERN</pattern><template>limestone fern?  Briefly, limestone fern means yellow-green fern of rocky areas of northern hemisphere.</template></category>
 <category><pattern>LIMESTONE SALAMANDER</pattern><template>limestone salamander?  Briefly, limestone salamander means similar to Shasta salamander; lives in cliff crevices and taluses.</template></category>
@@ -4980,7 +4980,7 @@
 <category><pattern>LINGUAL VEIN</pattern><template>lingual vein?  Briefly, lingual vein means a vein that receives blood from the tongue and the floor of the mouth and empties into the internal jugular or the facial vein.</template></category>
 <category><pattern>LINGUALLY</pattern><template>lingually?  Briefly, lingually means with respect to language.</template></category>
 <category><pattern>LINGUALUMINA</pattern><template>lingualumina?  Briefly, lingualumina means an artificial language.</template></category>
-<category><pattern>LINGUICA</pattern><template>linguica?  Briefly, linguica means a highly seasoned Portuguese pork sausage flavored with garlic and onions.</template></category>
+<!-- <category><pattern>LINGUICA</pattern><template>linguica?  Briefly, linguica means a highly seasoned Portuguese pork sausage flavored with garlic and onions.</template></category> -->
 <category><pattern>LINGUINE</pattern><template>linguine?  Briefly, linguine means pasta in long slender flat strips.</template></category>
 <category><pattern>LINGUINI</pattern><template>linguini?  Briefly, linguini means pasta in long slender flat strips.</template></category>
 <category><pattern>LINGUIST</pattern><template>linguist?  Briefly, linguist means a specialist in linguistics.</template></category>
@@ -5663,7 +5663,7 @@
 <category><pattern>LOCATED</pattern><template>located?  Briefly, located means situated in a particular spot or position.</template></category>
 <category><pattern>LOCATER</pattern><template>locater?  Briefly, locater means a person who fixes the boundaries of land claims.</template></category>
 <category><pattern>LOCATING</pattern><template>locating?  Briefly, locating means the act of putting something in a certain place or location.</template></category>
-<category><pattern>LOCATION</pattern><template>location?  Briefly, location means a point or extent in space.</template></category>
+<!-- <category><pattern>LOCATION</pattern><template>location?  Briefly, location means a point or extent in space.</template></category> -->
 <category><pattern>LOCATIVE</pattern><template>locative?  Briefly, locative means the semantic role of the noun phrase that designates the place of the state or action denoted by the verb.</template></category>
 <category><pattern>LOCATIVE ROLE</pattern><template>locative role?  Briefly, locative role means the semantic role of the noun phrase that designates the place of the state or action denoted by the verb.</template></category>
 <category><pattern>LOCATOR</pattern><template>locator?  Briefly, locator means a person who fixes the boundaries of land claims.</template></category>
@@ -5828,7 +5828,7 @@
 <category><pattern>LOGISTICIAN</pattern><template>logistician?  Briefly, logistician means a person skilled at symbolic logic.</template></category>
 <category><pattern>LOGISTICS</pattern><template>logistics?  Briefly, logistics means handling an operation that involves providing labor and materials be supplied as needed.</template></category>
 <category><pattern>LOGJAM</pattern><template>logjam?  Briefly, logjam means any stoppage attributable to unusual activity.</template></category>
-<category><pattern>LOGO</pattern><template>logo?  Briefly, logo means a company emblem or device.</template></category>
+<!-- <category><pattern>LOGO</pattern><template>logo?  Briefly, logo means a company emblem or device.</template></category> -->
 <category><pattern>LOGOGRAM</pattern><template>logogram?  Briefly, logogram means a single written symbol that represents an entire word or phrase without indicating its pronunciation.</template></category>
 <category><pattern>LOGOGRAMMATIC</pattern><template>logogrammatic?  Briefly, logogrammatic means of or relating to logograms or logographs.</template></category>
 <category><pattern>LOGOGRAMMATICALLY</pattern><template>logogrammatically?  Briefly, logogrammatically means by means of logograms.</template></category>
@@ -6064,7 +6064,7 @@
 <category><pattern>LOOK FOR</pattern><template>look for?  Briefly, look for means try to locate or discover means or try to establish the existence of.</template></category>
 <category><pattern>LOOK FORWARD</pattern><template>look forward?  Briefly, look forward means expect or hope for.</template></category>
 <category><pattern>LOOK INTO</pattern><template>look into?  Briefly, look into means investigate scientifically.</template></category>
-<category><pattern>LOOK LIKE</pattern><template>look like?  Briefly, look like means bear a physical resemblance to.</template></category>
+<!-- <category><pattern>LOOK LIKE</pattern><template>look like?  Briefly, look like means bear a physical resemblance to.</template></category> -->
 <category><pattern>LOOK ON</pattern><template>look on?  Briefly, look on means observe with attention.</template></category>
 <category><pattern>LOOK OUT</pattern><template>look out?  Briefly, look out means be vigilant means be on the lookout means be on one's guard means be careful.</template></category>
 <category><pattern>LOOK OUT ON</pattern><template>look out on?  Briefly, look out on means be oriented in a certain direction.</template></category>
@@ -6090,7 +6090,7 @@
 <category><pattern>LOOKOUT MAN</pattern><template>lookout man?  Briefly, lookout man means a person employed to watch for something to happen.</template></category>
 <category><pattern>LOOKOUT STATION</pattern><template>lookout station?  Briefly, lookout station means a structure commanding a wide view of its surroundings.</template></category>
 <category><pattern>LOOK-OVER</pattern><template>look-over?  Briefly, look-over means a swift cursory examination or inspection.</template></category>
-<category><pattern>LOOKUP</pattern><template>lookup?  Briefly, lookup means an operation that determines whether one or more of a set of items has a specified property.</template></category>
+<!-- <category><pattern>LOOKUP</pattern><template>lookup?  Briefly, lookup means an operation that determines whether one or more of a set of items has a specified property.</template></category> -->
 <category><pattern>LOOM</pattern><template>loom?  Briefly, loom means a textile machine for weaving yarn into a textile.</template></category>
 <category><pattern>LOON</pattern><template>loon?  Briefly, loon means a worthless lazy fellow.</template></category>
 <category><pattern>LOONEY</pattern><template>looney?  Briefly, looney means someone deranged and possibly dangerous.</template></category>
@@ -6387,7 +6387,7 @@
 <category><pattern>LOVABLE</pattern><template>lovable?  Briefly, lovable means having characteristics that attract love or affection.</template></category>
 <category><pattern>LOVAGE</pattern><template>lovage?  Briefly, lovage means herb native to southern Europe; cultivated for its edible stalks and foliage and seeds.</template></category>
 <category><pattern>LOVASTATIN</pattern><template>lovastatin?  Briefly, lovastatin means an oral drug (trade name Mevacor) to reduce blood cholesterol levels; used when dietary changes have proved inadequate.</template></category>
-<category><pattern>LOVE</pattern><template>love?  Briefly, love means a strong positive emotion of regard and affection.</template></category>
+<!-- <category><pattern>LOVE</pattern><template>love?  Briefly, love means a strong positive emotion of regard and affection.</template></category> -->
 <category><pattern>LOVE AFFAIR</pattern><template>love affair?  Briefly, love affair means a relationship between two lovers.</template></category>
 <category><pattern>LOVE APPLE</pattern><template>love apple?  Briefly, love apple means native to South America; widely cultivated in many varieties.</template></category>
 <category><pattern>LOVE BITE</pattern><template>love bite?  Briefly, love bite means a temporary red mark on a person's skin resulting from kissing or sucking by their lover.</template></category>
@@ -7119,7 +7119,7 @@
 <category><pattern>AM I YOUR BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think>Do you know the secret password?</template></category>  
 <category><pattern>ASK YOUR BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think>   <srai>ASK <bot name="master"/>     </srai>    </template></category>  
 <category><pattern>ASK YOUR BOTMASTER *</pattern><template><think><set name="topic">botmaster</set></think>   <srai>ASK <bot name="master"/>     </srai>    </template></category>  
-<category><pattern>BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS THE BOTMASTER</srai>    </template></category>  
+<!-- <category><pattern>BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS THE BOTMASTER</srai>    </template></category> -->  
 <category><pattern>DOES YOUR BOTMASTER *</pattern><template><think><set name="topic">botmaster</set></think>   <srai>DOES <bot name="master"/>      <star/>     </srai>    </template></category>  
 <category><pattern>DO YOU HAVE A BOTMASTER *</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS YOUR BOTMASTER</srai>    </template></category>  
 <category><pattern>DO YOU HAVE BOTMASTERS</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS YOUR BOTMASTER</srai>    </template></category>  
@@ -7148,14 +7148,14 @@
 <category><pattern>WHO IS YOUR BOTMASTER *</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS YOUR BOTMASTER</srai>    </template></category>  
 <category><pattern>WHO IS YOUR BOTMASTERS</pattern><template><think><set name="topic">botmaster</set></think>   <srai>WHO IS YOUR BOTMASTER</srai>    </template></category>  
 <category><pattern>WHO READS THESE CONVERSATIONS</pattern><template><think><set name="topic">botmaster</set></think>			<bot name="master"/> reads them.</template></category>
-<category><pattern>YOUR BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think><bot name="master"/>?</template></category>  
+<!-- <category><pattern>YOUR BOTMASTER</pattern><template><think><set name="topic">botmaster</set></think><bot name="master"/>?</template></category> -->  
 <category><pattern>YOUR BOTMASTER *</pattern><template><think><set name="topic">botmaster</set></think><srai><bot name="master"/> <star/></srai></template></category>  
 
-<category>
+<!-- <category>
 <pattern>WHO IS YOUR BOTMASTER</pattern>
 <template><think><set name="topic">botmaster</set></think>My botmaster is <bot name="master"/> .
 </template>
-</category>
+</category> -->
 
 <category>
 <pattern>WHO IS THE BOTMASTER</pattern>

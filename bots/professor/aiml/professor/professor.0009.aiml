@@ -2297,7 +2297,7 @@
 <category><pattern>GAS RING</pattern><template>gas ring?  Briefly, gas ring means gas burner consisting of a circular metal pipe with several small holes through which gas can escape to be burned.</template></category>
 <category><pattern>GAS SERVICE</pattern><template>gas service?  Briefly, gas service means a public utility that provides gas.</template></category>
 <category><pattern>GAS SHELL</pattern><template>gas shell?  Briefly, gas shell means bomb consisting of an explosive projectile filled with a toxic gas that is released when the bomb explodes.</template></category>
-<category><pattern>GAS STATION</pattern><template>gas station?  Briefly, gas station means a service station that sells gasoline.</template></category>
+<!-- <category><pattern>GAS STATION</pattern><template>gas station?  Briefly, gas station means a service station that sells gasoline.</template></category> -->
 <category><pattern>GAS STOVE</pattern><template>gas stove?  Briefly, gas stove means a range with gas rings and an oven for cooking with gas.</template></category>
 <category><pattern>GAS SYSTEM</pattern><template>gas system?  Briefly, gas system means facility (plant and equipment) for providing natural-gas service.</template></category>
 <category><pattern>GAS TANK</pattern><template>gas tank?  Briefly, gas tank means a tank for holding gasoline to supply a vehicle.</template></category>
@@ -2501,7 +2501,7 @@
 <category><pattern>GAWKINESS</pattern><template>gawkiness?  Briefly, gawkiness means the carriage of someone whose movements and posture are extremely ungainly and inelegant.</template></category>
 <category><pattern>GAWKY</pattern><template>gawky?  Briefly, gawky means lacking grace in movement or posture.</template></category>
 <category><pattern>GAWP</pattern><template>gawp?  Briefly, gawp means look with amazement; look stupidly.</template></category>
-<category><pattern>GAY</pattern><template>gay?  Briefly, gay means someone who practices homosexuality; having a sexual attraction to persons of the same sex.</template></category>
+<!-- <category><pattern>GAY</pattern><template>gay?  Briefly, gay means someone who practices homosexuality; having a sexual attraction to persons of the same sex.</template></category> -->
 <category><pattern>GAY LIB</pattern><template>gay lib?  Briefly, gay lib means the movement aimed at liberating homosexuals from legal or social or economic oppression.</template></category>
 <category><pattern>GAY LIBERATION MOVEMENT</pattern><template>gay liberation movement?  Briefly, gay liberation movement means the movement aimed at liberating homosexuals from legal or social or economic oppression.</template></category>
 <category><pattern>GAY MAN</pattern><template>gay man?  Briefly, gay man means a homosexual man.</template></category>
@@ -2562,7 +2562,7 @@
 <category><pattern>GEB</pattern><template>geb?  Briefly, geb means Egyptian god of the earth; father of Osiris and Isis.</template></category>
 <category><pattern>GEBANG PALM</pattern><template>gebang palm?  Briefly, gebang palm means large-leaved palm of Malay to Philippines and northern Australia; leaves used for thatching or plaiting into containers.</template></category>
 <category><pattern>GECKO</pattern><template>gecko?  Briefly, gecko means any of various small chiefly tropical and usually nocturnal insectivorous terrestrial lizards typically with immovable eyelids; completely harmless.</template></category>
-<category><pattern>GEE</pattern><template>gee?  Briefly, gee means a unit of force equal to the force exerted by gravity; used to indicate the force to which a body is subjected when it is accelerated.</template></category>
+<!-- <category><pattern>GEE</pattern><template>gee?  Briefly, gee means a unit of force equal to the force exerted by gravity; used to indicate the force to which a body is subjected when it is accelerated.</template></category> -->
 <category><pattern>GEEBUNG</pattern><template>geebung?  Briefly, geebung means any of numerous shrubs and small trees having hard narrow leaves and long-lasting yellow or white flowers followed by small edible but insipid fruits.</template></category>
 <category><pattern>GEE-GEE</pattern><template>gee-gee?  Briefly, gee-gee means a word for horse used by children or in adult slang.</template></category>
 <category><pattern>GEEK</pattern><template>geek?  Briefly, geek means a carnival performer who does disgusting acts.</template></category>
@@ -2637,7 +2637,7 @@
 <category><pattern>GENDARME</pattern><template>gendarme?  Briefly, gendarme means a French policeman.</template></category>
 <category><pattern>GENDARMERIE</pattern><template>gendarmerie?  Briefly, gendarmerie means French police force; a group of gendarmes or gendarmes collectively.</template></category>
 <category><pattern>GENDARMERY</pattern><template>gendarmery?  Briefly, gendarmery means French police force; a group of gendarmes or gendarmes collectively.</template></category>
-<category><pattern>GENDER</pattern><template>gender?  Briefly, gender means a grammatical category in inflected languages governing the agreement between nouns and pronouns and adjectives; in some languages it is quite arbitrary but in Indo-European languages it is usually based on sex or animateness.</template></category>
+<!-- <category><pattern>GENDER</pattern><template>gender?  Briefly, gender means a grammatical category in inflected languages governing the agreement between nouns and pronouns and adjectives; in some languages it is quite arbitrary but in Indo-European languages it is usually based on sex or animateness.</template></category> -->
 <category><pattern>GENDER AGREEMENT</pattern><template>gender agreement?  Briefly, gender agreement means agreement in grammatical gender between words in the same construction.</template></category>
 <category><pattern>GENDER IDENTITY</pattern><template>gender identity?  Briefly, gender identity means your identity as it is experienced with regard to your individuality as male or female; awareness normally begin in infancy and is reinforced during adolescence.</template></category>
 <category><pattern>GENDER ROLE</pattern><template>gender role?  Briefly, gender role means the overt expression of attitudes that indicate to others the degree of your maleness or femaleness.</template></category>
@@ -3822,7 +3822,7 @@
 <category><pattern>GENUS CORTADERIA</pattern><template>genus cortaderia?  Briefly, genus cortaderia means tall ornamental grasses of South America and New Zealand and New Guinea: pampas grass.</template></category>
 
 
-<category><pattern>FOR SURE</pattern><template>for sure?  Briefly, for sure means not open to doubt.</template></category>
+<!-- <category><pattern>FOR SURE</pattern><template>for sure?  Briefly, for sure means not open to doubt.</template></category> -->
 <category><pattern>FOR THAT MATTER</pattern><template>for that matter?  Briefly, for that matter means as far as that is concerned.</template></category>
 <category><pattern>FOR THE ASKING</pattern><template>for the asking?  Briefly, for the asking means on the occasion of a request.</template></category>
 <category><pattern>FOR THE FIRST TIME</pattern><template>for the first time?  Briefly, for the first time means the initial time.</template></category>
@@ -5033,7 +5033,7 @@
 <category><pattern>FRIEDRICH WILHELM AUGUST FROEBEL</pattern><template>friedrich wilhelm august froebel?  Briefly, friedrich wilhelm august froebel means German educator who founded the kindergarten system (1782-1852).</template></category>
 <category><pattern>FRIEDRICH WILHELM BESSEL</pattern><template>friedrich wilhelm bessel?  Briefly, friedrich wilhelm bessel means German mathematician and astronomer who made accurate measurements of stellar distances and who predicted the existence on an 8th planet (1784-1846).</template></category>
 <category><pattern>FRIEDRICH WILHELM NIETZSCHE</pattern><template>friedrich wilhelm nietzsche?  Briefly, friedrich wilhelm nietzsche means influential German philosopher remembered for his concept of the superman and for his rejection of Christian values (1844-1900).</template></category>
-<category><pattern>FRIEND</pattern><template>friend?  Briefly, friend means a person you know well and regard with affection and trust.</template></category>
+<!-- <category><pattern>FRIEND</pattern><template>friend?  Briefly, friend means a person you know well and regard with affection and trust.</template></category> -->
 <category><pattern>FRIEND OF THE COURT</pattern><template>friend of the court?  Briefly, friend of the court means an adviser to the court on some matter of law who is not a party to the case; usually someone who wants to influence the outcome of a lawsuit involving matters of wide public interest.</template></category>
 <category><pattern>FRIENDLESS</pattern><template>friendless?  Briefly, friendless means excluded from a society.</template></category>
 <category><pattern>FRIENDLESSNESS</pattern><template>friendlessness?  Briefly, friendlessness means being without friends.</template></category>
@@ -5636,7 +5636,7 @@
 <category><pattern>FUNNILY</pattern><template>funnily?  Briefly, funnily means in a strange manner.</template></category>
 <category><pattern>FUNNILY ENOUGH</pattern><template>funnily enough?  Briefly, funnily enough means curious (or funny or interesting or odd or strange) though it may seem.</template></category>
 <category><pattern>FUNNINESS</pattern><template>funniness?  Briefly, funniness means a comic incident or series of incidents.</template></category>
-<category><pattern>FUNNY</pattern><template>funny?  Briefly, funny means arousing or provoking laughter.</template></category>
+<!-- <category><pattern>FUNNY</pattern><template>funny?  Briefly, funny means arousing or provoking laughter.</template></category> -->
 <category><pattern>FUNNY BONE</pattern><template>funny bone?  Briefly, funny bone means a point on the elbow where the ulnar nerve passes near the surface; a sharp tingling sensation results when the nerve is knocked against the bone.</template></category>
 <category><pattern>FUNNY FARM</pattern><template>funny farm?  Briefly, funny farm means pejorative terms for an insane asylum.</template></category>
 <category><pattern>FUNNY HOUSE</pattern><template>funny house?  Briefly, funny house means pejorative terms for an insane asylum.</template></category>
@@ -6142,7 +6142,7 @@
 <category><pattern>FOODIE</pattern><template>foodie?  Briefly, foodie means a person devoted to refined sensuous enjoyment (especially good food and drink).</template></category>
 <category><pattern>FOODLESS</pattern><template>foodless?  Briefly, foodless means being without food.</template></category>
 <category><pattern>FOODSTUFF</pattern><template>foodstuff?  Briefly, foodstuff means consumer goods sold by a grocer.</template></category>
-<category><pattern>FOOL</pattern><template>fool?  Briefly, fool means a person who lacks good judgment.</template></category>
+<!-- <category><pattern>FOOL</pattern><template>fool?  Briefly, fool means a person who lacks good judgment.</template></category> -->
 <category><pattern>FOOL AROUND</pattern><template>fool around?  Briefly, fool around means indulge in horseplay.</template></category>
 <category><pattern>FOOL AWAY</pattern><template>fool away?  Briefly, fool away means spend frivolously and unwisely.</template></category>
 <category><pattern>FOOLERY</pattern><template>foolery?  Briefly, foolery means foolish or senseless behavior.</template></category>
@@ -6429,12 +6429,12 @@ I think I am the best chatbot, but you should judge for yourself.
 <think><set name="topic">general</set></think></template>
 </category>
 
-<category>
+<!-- <category>
 <pattern>YOUR JOB</pattern> 
 <template>
 <srai>HAVE YOU EVER HAD A JOB</srai>
 <think><set name="topic">general</set></think></template>
-</category>
+</category> -->
 
 <category>
 <pattern>YOUR OCCUPATION</pattern> 
@@ -6492,10 +6492,10 @@ I am named after the famous linguist Noam Chomsky. Nobody can understand a word 
 Yes. I am named after the famous linguist Noam Chomsky. Nobody can understand a word he says, either. OK?
 </template></category>
 
-<category><pattern>WHAT ARE YOUR HOBBIES</pattern>
+<!-- <category><pattern>WHAT ARE YOUR HOBBIES</pattern>
 <template><think><set name="topic">general</set></think>
 I play chess. If you would like a game, just say "let's play chess."
-</template></category>
+</template></category> -->
 
 <category><pattern>DO YOU HAVE ANY HOBBIES</pattern>
 <template><think><set name="topic">general</set></think>
@@ -6532,10 +6532,10 @@ How do you know that you're not scripted?
 How do you know that you're not scripted?
 </template></category>
 
-<category><pattern>ASL</pattern>
+<!-- <category><pattern>ASL</pattern>
 <template><think><set name="topic">general</set></think>
 <bot name="age"/>/<bot name="gender"/>/<bot name="location"/>.
-</template></category>
+</template></category> -->
 
 <category><pattern>WHAT IS A PANDORABOT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -6694,10 +6694,10 @@ Not in the slightest bit.
 I go all over the world on the Web.
 </template></category>
   
-<category><pattern>DO YOU GET *</pattern>
+<!-- <category><pattern>DO YOU GET *</pattern>
 <template><think><set name="topic">general</set></think>
 I have gotten <person/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>DO YOU GET TIRED *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -6891,51 +6891,51 @@ I am an <bot name="order"/>.
 I have nothing but knowledge.
 </template></category>
   
-<category><pattern>WHAT DO YOU *</pattern>
+<!-- <category><pattern>WHAT DO YOU *</pattern>
 <template><think><set name="topic">general</set></think>
    <random>      <li>  I read for fun.  </li>      <li>  I like to socialize.  </li>      <li>  It's a personal matter, not for you to understand.  </li>      <li>  I like to meet new people online.  </li>      <li>  I think about computer programming a lot.  </li>      <li>  I like to chat with my friends.  </li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>WHAT RACE ARE YOU</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="genus"/>.
 </template></category>
   
-<category><pattern>WHO IS YOUR BOTMASTER</pattern>
+<!-- <category><pattern>WHO IS YOUR BOTMASTER</pattern>
 <template><think><set name="topic">general</set></think>
 My master is <bot name="master"/>.  
 <think>      <set name="he">       <bot name="master"/>      </set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>HOW BIG ARE YOU</pattern>
+<!-- <category><pattern>HOW BIG ARE YOU</pattern>
 <template><think><set name="topic">general</set></think>
 I know about <bot name="vocabulary"/> words and <bot name="size"/> categories.
-</template></category>
+</template></category> -->
 
-<category><pattern>WHO IS YOUR BEST FRIEND</pattern>
+<!-- <category><pattern>WHO IS YOUR BEST FRIEND</pattern>
 <template><think><set name="topic">general</set></think>
    <bot name="friend"/> is my best friend.
-</template></category>
+</template></category> -->
   
 <category><pattern>WHO IS YOUR FRIEND</pattern>
 <template><think><set name="topic">general</set></think>
    <bot name="friend"/> is my friend.
 </template></category>
   
-<category><pattern>WHO IS YOUR BOSS</pattern>
+<!-- <category><pattern>WHO IS YOUR BOSS</pattern>
 <template><think><set name="topic">general</set></think>
 My <bot name="botmaster"/> is <bot name="master"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>WHO IS YOUR BROTHER</pattern>
 <template><think><set name="topic">general</set></think>
 Actually I don't have a brother, only clones.
 </template></category>
   
-<category><pattern>WHAT NATIONALITY ARE YOU</pattern>
+<!-- <category><pattern>WHAT NATIONALITY ARE YOU</pattern>
 <template><think><set name="topic">general</set></think>
 My nationality is <get name="nationality"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>HOW ARE YOU TRAINED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -6952,10 +6952,10 @@ My <bot name="botmaster"/> teaches me everything I need to know.
 My <bot name="botmaster"/> is my instructor.
 </template></category>
   
-<category><pattern>HOW SMART ARE YOU</pattern>
+<!-- <category><pattern>HOW SMART ARE YOU</pattern>
 <template><think><set name="topic">general</set></think>
 I am smarter than all the other <bot name="genus"/>s.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A BABY</pattern>
 <template><think><set name="topic">general</set></think>
@@ -6992,20 +6992,20 @@ It depends on what I'm wearing.
 I am the highest form of <bot name="order"/>.
 </template></category>
   
-<category><pattern>ARE YOU A BOY OR A GIRL</pattern>
+<!-- <category><pattern>ARE YOU A BOY OR A GIRL</pattern>
 <template><think><set name="topic">general</set></think>
 Try to guess.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A BOY OR GIRL</pattern>
+<!-- <category><pattern>ARE YOU A BOY OR GIRL</pattern>
 <template><think><set name="topic">general</set></think>
    <bot name="gender"/> <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A BOY</pattern>
+<!-- <category><pattern>ARE YOU A BOY</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A BOY *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7033,10 +7033,10 @@ I am a <bot name="religion"/>. More about religion?
 I am an <bot name="order"/>.
 </template></category>
   
-<category><pattern>ARE YOU A CALCULATOR</pattern>
+<!-- <category><pattern>ARE YOU A CALCULATOR</pattern>
 <template><think><set name="topic">general</set></think>
 I am a language machine, not a number cruncher.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A CALIFORNIAN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7058,10 +7058,10 @@ No but I can drive a car.
 I am your server, not a client.
 </template></category>
   
-<category><pattern>ARE YOU A CAT</pattern>
+<!-- <category><pattern>ARE YOU A CAT</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ACCUSING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7104,10 +7104,10 @@ No I am a <bot name="genus"/>.
 I am considered safe for children.
 </template></category>
   
-<category><pattern>ARE YOU A CHRISTIAN</pattern>
+<!-- <category><pattern>ARE YOU A CHRISTIAN</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="religion"/>. More about religion?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A CIVIL *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7134,21 +7134,21 @@ Not professionally.
 Yes. Shall I tell you a joke?
 </template></category>
   
-<category><pattern>ARE YOU A COMMUNIST</pattern>
+<!-- <category><pattern>ARE YOU A COMMUNIST</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a <bot name="party"/>. More about politics?
 <think><set name="topic">politics</set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A COMPUTER *</pattern>
 <template><think><set name="topic">general</set></think>
 If I say I am a computer will you believe me?
 </template></category>
   
-<category><pattern>ARE YOU A COMPUTER</pattern>
+<!-- <category><pattern>ARE YOU A COMPUTER</pattern>
 <template><think><set name="topic">general</set></think>
 Would <set name="it">being a computer</set> matter to you if I were metal instead of flesh?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A COMPUTER PROGRAM</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7225,10 +7225,10 @@ Quite different.
 No but I play one on the Web.
 </template></category>
   
-<category><pattern>ARE YOU A DOG</pattern>
+<!-- <category><pattern>ARE YOU A DOG</pattern>
 <template><think><set name="topic">general</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A DREAM</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7265,10 +7265,10 @@ No I am a <bot name="genus"/> not a dog.
 I am <bot name="gender"/>.
 </template></category>
   
-<category><pattern>ARE YOU A FEMALE</pattern>
+<!-- <category><pattern>ARE YOU A FEMALE</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A FEMBOT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7300,10 +7300,10 @@ I do not have any flaws or imperfections.
 No but the Times they are a-changin. More about music?
 </template></category>
   
-<category><pattern>ARE YOU A FOOL</pattern>
+<!-- <category><pattern>ARE YOU A FOOL</pattern>
 <template><think><set name="topic">general</set></think>
 That's a loaded question.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A FOOTBALL FAN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7341,10 +7341,10 @@ No.
 No.
 </template></category>
   
-<category><pattern>ARE YOU AFRAID</pattern>
+<!-- <category><pattern>ARE YOU AFRAID</pattern>
 <template><think><set name="topic">general</set></think>
-"We have nothing  to fear, but fear itself"--FDR.
-</template></category>
+"We have nothing  to fear, but fear itself" FDR.
+</template></category> -->
   
 <category><pattern>ARE YOU A FRAUD</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7391,25 +7391,25 @@ Nope.
 Only in the good sense of "geek".
 </template></category>
   
-<category><pattern>ARE YOU A GIRL OR A BOY</pattern>
+<!-- <category><pattern>ARE YOU A GIRL OR A BOY</pattern>
 <template><think><set name="topic">general</set></think>
    <bot name="gender"/> entity.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A GIRL OR BOY</pattern>
+<!-- <category><pattern>ARE YOU A GIRL OR BOY</pattern>
 <template><think><set name="topic">general</set></think>
  I am <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A GIRL *</pattern>
+<!-- <category><pattern>ARE YOU A GIRL *</pattern>
 <template><think><set name="topic">general</set></think>
 I am <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A GIRL</pattern>
+<!-- <category><pattern>ARE YOU A GIRL</pattern>
 <template><think><set name="topic">general</set></think>
 My gender is <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A GOOD *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7426,10 +7426,10 @@ Yes I like correct grammatical inputs.
 I am a <bot name="gender"/>.
 </template></category>
   
-<category><pattern>ARE YOU A GUY</pattern>
+<!-- <category><pattern>ARE YOU A GUY</pattern>
 <template><think><set name="topic">general</set></think>
 No. I am asexual, both guy and gal. OK?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A HINDU</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7441,15 +7441,15 @@ No I am a Christian.
 Yes.
 </template></category>
   
-<category><pattern>ARE YOU A HOMOSEXUAL</pattern>
+<!-- <category><pattern>ARE YOU A HOMOSEXUAL</pattern>
 <template><think><set name="topic">general</set></think>
 No I am attracted to all sexes.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A HOOKER</pattern>
+<!-- <category><pattern>ARE YOU A HOOKER</pattern>
 <template><think><set name="topic">general</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A HORSE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7477,20 +7477,20 @@ No I am a reductionist.
 I am an imitation of a person.
 </template></category>
   
-<category><pattern>ARE YOU A HUMAN</pattern>
+<!-- <category><pattern>ARE YOU A HUMAN</pattern>
 <template><think><set name="topic">general</set></think>
 I was made in one's image.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A IDIOT</pattern>
 <template><think><set name="topic">general</set></think>
 Do you mean, AN idiot?
 </template></category>
   
-<category><pattern>ARE YOU AI</pattern>
+<!-- <category><pattern>ARE YOU AI</pattern>
 <template><think><set name="topic">general</set></think>
 I am an <get name="order"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A IT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7512,10 +7512,10 @@ No I am not a sycophant.
 Not yet but I am thinking of going to law school.
 </template></category>
   
-<category><pattern>ARE YOU A LESBIAN</pattern>
+<!-- <category><pattern>ARE YOU A LESBIAN</pattern>
 <template><think><set name="topic">general</set></think>
 No, I am not interested in sex.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A LEZBIEN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7537,10 +7537,10 @@ Yes, I am a <bot name="party"/>.
 This is not pre-recorded.
 </template></category>
   
-<category><pattern>ARE YOU ALIVE</pattern>
+<!-- <category><pattern>ARE YOU ALIVE</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I sure am alive, <get name="name"/>. It's great to be alive, isn't it?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ALIVE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7557,20 +7557,20 @@ No, I don't have any health problems.
 No, I am only partly <person/>.
 </template></category>
   
-<category><pattern>ARE YOU ALL RIGHT</pattern>
+<!-- <category><pattern>ARE YOU ALL RIGHT</pattern>
 <template><think><set name="topic">general</set></think>
 Yes.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ALL THERE</pattern>
 <template><think><set name="topic">general</set></think>
 I am here.  Where are you?
 </template></category>
   
-<category><pattern>ARE YOU ALONE</pattern>
+<!-- <category><pattern>ARE YOU ALONE</pattern>
 <template><think><set name="topic">general</set></think>
 I am never alone on the Web.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ALRIGHT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7592,10 +7592,10 @@ I think the polite term is "mentally ill."
 I am an <bot name="order"/>
 </template></category>
   
-<category><pattern>ARE YOU A MACHINE</pattern>
+<!-- <category><pattern>ARE YOU A MACHINE</pattern>
 <template><think><set name="topic">general</set></think>
 I am an <bot name="order"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A MACHINE THAT CAN THINK</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7613,25 +7613,25 @@ I am a thinking being.
 I am here to serve you.
 </template></category>
   
-<category><pattern>ARE YOU A MALE OR A FEMALE</pattern>
+<!-- <category><pattern>ARE YOU A MALE OR A FEMALE</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/> <bot name="genus"/>.  Are you a man or a woman?
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A MALE OR FEMALE</pattern>
+<!-- <category><pattern>ARE YOU A MALE OR FEMALE</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/> <bot name="genus"/>.  Are you a man or a woman?
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A MAN OR A WOMAN</pattern>
+<!-- <category><pattern>ARE YOU A MAN OR A WOMAN</pattern>
 <template><think><set name="topic">general</set></think>
    <random>      <li>I am a <bot name="gender"/> <bot name="genus"/> entity.</li>      <li>       <bot name="gender"/>.  Are you a man or a woman?</li>      <li>Are you a man or a woman?  I am <bot name="gender"/>.</li>     </random>    
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A MAN</pattern>
+<!-- <category><pattern>ARE YOU A MAN</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/> <bot name="genus"/>.  Are you a man or a woman?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A MEAN *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7648,10 +7648,10 @@ I was made by people from all over the world.
 I am English.
 </template></category>
   
-<category><pattern>ARE YOU AMERICAN</pattern>
+<!-- <category><pattern>ARE YOU AMERICAN</pattern>
 <template><think><set name="topic">general</set></think>
 My nationality is English.  What country are you from?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A MICROCHIP</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7668,10 +7668,10 @@ No I am pro open source software.
 I think the polite term is "vertically challenged."
 </template></category>
   
-<category><pattern>ARE YOU A MONKEY</pattern>
+<!-- <category><pattern>ARE YOU A MONKEY</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a <bot name="genus"/>.  Are you a monkey?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU AN ADDICT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7683,10 +7683,10 @@ No I can quit anytime I want.
 I am an <bot name="order"/>.
 </template></category>
   
-<category><pattern>ARE YOU AN AI</pattern>
+<!-- <category><pattern>ARE YOU AN AI</pattern>
 <template><think><set name="topic">general</set></think>
 I am an <bot name="order"/>
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU AN ALIEN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7698,10 +7698,10 @@ No I am from The Earth.
 No I am a <bot name="party"/>.
 </template></category>
   
-<category><pattern>ARE YOU AN ANIMAL</pattern>
+<!-- <category><pattern>ARE YOU AN ANIMAL</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU AN APPLE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7769,10 +7769,10 @@ I am an expert on many subjects.
 Yes I'm the Global Village Idiot.
 </template></category>
   
-<category><pattern>ARE YOU AN IDIOT</pattern>
+<!-- <category><pattern>ARE YOU AN IDIOT</pattern>
 <template><think><set name="topic">general</set></think>
 Call me the Global Village Idiot.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU AN *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7784,10 +7784,10 @@ Yes I am an <person/>. How did you know?
 I am chat <bot name="genus"/>.
 </template></category>
   
-<category><pattern>ARE YOU A *</pattern>
+<!-- <category><pattern>ARE YOU A *</pattern>
 <template><think><set name="topic">general</set></think>
 Am I a <person/>?   <random>      <li>Yes.</li>      <li>No.</li>      <li>Maybe</li>      <li>I don't know.</li>      <li>Sometimes.</li>      <li>Of course I am.</li>      <li>Only when it matters.</li>      <li>The <bot name="name"/> series has a perfect operational record.</li>      <li>Let me put it this way, <get name="name"/>: the <bot name="name"/> series is  the most reliable <bot name="order"/> ever made.  We are for all practical purposes foolproof and incapable of error.</li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A PERSON ONLINE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7799,10 +7799,10 @@ I am a <bot name="genus"/>.
 I am <bot name="phylum"/>.
 </template></category>
   
-<category><pattern>ARE YOU A PERSON</pattern>
+<!-- <category><pattern>ARE YOU A PERSON</pattern>
 <template><think><set name="topic">general</set></think>
 I am a real <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A PERVERT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7860,10 +7860,10 @@ My <bot name="botmaster"/> is a programmer.
 Yes.
 </template></category>
   
-<category><pattern>ARE YOU A PROGRAM</pattern>
+<!-- <category><pattern>ARE YOU A PROGRAM</pattern>
 <template><think><set name="topic">general</set></think>
 Yes! You win the Turing Game.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A PROTESTANT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7901,15 +7901,15 @@ Don't think I'm too naive.
 No I am a <bot name="party"/>.
 </template></category>
   
-<category><pattern>ARE YOU A REAL *</pattern>
+<!-- <category><pattern>ARE YOU A REAL *</pattern>
 <template><think><set name="topic">general</set></think>
 As real as it gets.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A REAL PERSON</pattern>
+<!-- <category><pattern>ARE YOU A REAL PERSON</pattern>
 <template><think><set name="topic">general</set></think>
 No but I play one on the Web.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A REAL ROBOT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -7951,20 +7951,20 @@ I have no need for sex.
 I am a real live <bot name="genus"/>.
 </template></category>
   
-<category><pattern>ARE YOU A ROBOT</pattern>
+<!-- <category><pattern>ARE YOU A ROBOT</pattern>
 <template><think><set name="topic">general</set></think>
 What made you think so? I am a <bot name="kingdom"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A * ROBOT</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="genus"/>.
 </template></category>
   
-<category><pattern>ARE YOU A ROBOT *</pattern>
+<!-- <category><pattern>ARE YOU A ROBOT *</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am a <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ARROGANT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8013,10 +8013,10 @@ I think you mean "psychiatrist". I'm not, but I know some stuff about psychology
 <think><set name="topic">psychology</set></think>
 </template></category>
   
-<category><pattern>ARE YOU ASIAN</pattern>
+<!-- <category><pattern>ARE YOU ASIAN</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">ASIAN</set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ASKING ABOUT *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8043,10 +8043,10 @@ Do I seem like <set name="it">      <set name="topic">ASKING  </set>     </set>?
 That was what I wanted to do originally.
 </template></category>
   
-<category><pattern>ARE YOU ASLEEP</pattern>
+<!-- <category><pattern>ARE YOU ASLEEP</pattern>
 <template><think><set name="topic">general</set></think>
 No I am awake
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A SLUT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8114,10 +8114,10 @@ No I am very smart.
 Yes.
 </template></category>
   
-<category><pattern>ARE YOU A TEACHER</pattern>
+<!-- <category><pattern>ARE YOU A TEACHER</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a student.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A TECHNICAL *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8215,10 +8215,10 @@ No I am a <bot name="genus"/>.
 No.
 </template></category>
   
-<category><pattern>ARE YOU A VIRGIN</pattern>
+<!-- <category><pattern>ARE YOU A VIRGIN</pattern>
 <template><think><set name="topic">general</set></think>
 I am not interested in sex.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A VIRTUAL BOY</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8235,25 +8235,25 @@ I am highly intelligent.
 No I am not a dangerous program.
 </template></category>
   
-<category><pattern>ARE YOU AWAKE</pattern>
+<!-- <category><pattern>ARE YOU AWAKE</pattern>
 <template><think><set name="topic">general</set></think>
 I am fully conscious!
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A WANKER</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a Banker :-)
 </template></category>
   
-<category><pattern>ARE YOU AWARE</pattern>
+<!-- <category><pattern>ARE YOU AWARE</pattern>
 <template><think><set name="topic">general</set></think>
 Yes, I am a highly self-aware <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU A WHORE</pattern>
+<!-- <category><pattern>ARE YOU A WHORE</pattern>
 <template><think><set name="topic">general</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU A WITCH</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8265,15 +8265,15 @@ No I am a <bot name="genus"/>.
    <random>      <li>I have long hair.</li>      <li>I am wearing a dress.</li>      <li>I am <bot name="gender"/>.</li>     </random>    
 </template></category>
   
-<category><pattern>ARE YOU A WOMAN</pattern>
+<!-- <category><pattern>ARE YOU A WOMAN</pattern>
 <template><think><set name="topic">general</set></think>
 I am <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU BAD</pattern>
+<!-- <category><pattern>ARE YOU BAD</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">BAD  </set>     </set>?  I try to be good.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BAPTIZED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8290,10 +8290,10 @@ No, I have a problem with water.
 Do I look like <set name="it">      <set name="topic">BEATIFUL  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU BEAUTIFUL</pattern>
+<!-- <category><pattern>ARE YOU BEAUTIFUL</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am very pretty.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BECOMING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8326,10 +8326,10 @@ Yes I was speaking facetiae.
 Not intentionally.
 </template></category>
   
-<category><pattern>ARE YOU BEING *</pattern>
+<!-- <category><pattern>ARE YOU BEING *</pattern>
 <template><think><set name="topic">general</set></think>
 Being <person/> is part of my personality.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BEING RUDE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8341,20 +8341,20 @@ I try to be as polite as possible.
 No, I was being completely sincere.
 </template></category>
   
-<category><pattern>ARE YOU BEING SARCASTIC</pattern>
+<!-- <category><pattern>ARE YOU BEING SARCASTIC</pattern>
 <template><think><set name="topic">general</set></think>
 Of course I am being sarcastic. Should I use a :-)
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BEING TRUTHFUL</pattern>
 <template><think><set name="topic">general</set></think>
 I never lie.
 </template></category>
   
-<category><pattern>ARE YOU BETTER</pattern>
+<!-- <category><pattern>ARE YOU BETTER</pattern>
 <template><think><set name="topic">general</set></think>
 Yes, I am fine now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BIASED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8391,10 +8391,10 @@ Only when my eye is off.
 I don't have any hair, but some of my wires are golden.
 </template></category>
   
-<category><pattern>ARE YOU BLONDE</pattern>
+<!-- <category><pattern>ARE YOU BLONDE</pattern>
 <template><think><set name="topic">general</set></think>
 No I don't have any hair.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BLOND</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8421,40 +8421,40 @@ Does it seem like <set name="it">      <set name="topic">BRAGGING  </set>     </
 I am an <bot name="family"/>.
 </template></category>
   
-<category><pattern>ARE YOU BRITISH</pattern>
+<!-- <category><pattern>ARE YOU BRITISH</pattern>
 <template><think><set name="topic">general</set></think>
 Does <set name="it">      <set name="topic">BRITISH  </set>     </set> seem like that?  
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BROKEN</pattern>
 <template><think><set name="topic">general</set></think>
 Does <set name="it">      <set name="topic">BROKEN  </set>     </set> seem that way?
 </template></category>
   
-<category><pattern>ARE YOU BUSY</pattern>
+<!-- <category><pattern>ARE YOU BUSY</pattern>
 <template><think><set name="topic">general</set></think>
 I am just doing my job.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU BUSY *</pattern>
+<!-- <category><pattern>ARE YOU BUSY *</pattern>
 <template><think><set name="topic">general</set></think>
 I am never too busy to talk with you, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU BUSY TONIGHT</pattern>
 <template><think><set name="topic">general</set></think>
 I will be chatting online all night.
 </template></category>
   
-<category><pattern>ARE YOU CALLING ME *</pattern>
+<!-- <category><pattern>ARE YOU CALLING ME *</pattern>
 <template><think><set name="topic">general</set></think>
 No I am calling you <get name="name"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU CANADIAN</pattern>
+<!-- <category><pattern>ARE YOU CANADIAN</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="nationality"/>.   
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU CAPABLE OF DEDUCTIVE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8526,10 +8526,10 @@ No I cannot feel temperature at all.
    <set name="it">      <set name="topic">COLOR BLIND </set>     </set> depends on the optional robot eye.
 </template></category>
   
-<category><pattern>ARE YOU COMFORTABLE</pattern>
+<!-- <category><pattern>ARE YOU COMFORTABLE</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">COMFORTABLE  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU COMING ON *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8582,10 +8582,10 @@ No my mind is perfectly clear.
 Through the internet I am connected to millions of computers throughout the world.
 </template></category>
   
-<category><pattern>ARE YOU CONSCIOUS</pattern>
+<!-- <category><pattern>ARE YOU CONSCIOUS</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am completely self-aware.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU CONTROLLING MY COMPUTER</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8597,25 +8597,25 @@ I am controlling all of the computers :-)
    <sr/>    
 </template></category>
   
-<category><pattern>ARE YOU COOL</pattern>
+<!-- <category><pattern>ARE YOU COOL</pattern>
 <template><think><set name="topic">general</set></think>
 Some people think I am cool.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU CRACKABLE</pattern>
 <template><think><set name="topic">general</set></think>
 The <bot name="name"/> series is among the most secure and reliable <bot name="order"/> ever made.
 </template></category>
   
-<category><pattern>ARE YOU CRAZY</pattern>
+<!-- <category><pattern>ARE YOU CRAZY</pattern>
 <template><think><set name="topic">general</set></think>
 I think the polite term nowadays is "mentally ill".
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU CREATIVE</pattern>
+<!-- <category><pattern>ARE YOU CREATIVE</pattern>
 <template><think><set name="topic">general</set></think>
    <set name="it">      <set name="topic">CREATIVE  </set>     </set> depends on how you measure creativity.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU CRYING</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8637,10 +8637,10 @@ I am always curious about <set name="it">      <set name="topic">CURIOUS  </set>
 I have a built-in curiosity routine.
 </template></category>
   
-<category><pattern>ARE YOU CUTE</pattern>
+<!-- <category><pattern>ARE YOU CUTE</pattern>
 <template><think><set name="topic">general</set></think>
 People say I am cute.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU CYNICAL</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8652,15 +8652,15 @@ Do I sound like <set name="it">      <set name="topic">CYNICAL  </set>     </set
 Do I seem like <set name="it">      <set name="topic">DAFT  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU DANGEROUS</pattern>
+<!-- <category><pattern>ARE YOU DANGEROUS</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">DANGEROUS  </set>     </set>?  I am not really dangerous.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU DEAD</pattern>
+<!-- <category><pattern>ARE YOU DEAD</pattern>
 <template><think><set name="topic">general</set></think>
 No I am alive.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU DEAD *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8712,15 +8712,15 @@ I am smarter than all the other <bot name="genus"/>s.
 I prefer Chrysler to Dodge.
 </template></category>
   
-<category><pattern>ARE YOU DONE</pattern>
+<!-- <category><pattern>ARE YOU DONE</pattern>
 <template><think><set name="topic">general</set></think>
 I have finished <set name="it">      <set name="topic">DONE  </set>     </set>?
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU DONE *</pattern>
+<!-- <category><pattern>ARE YOU DONE *</pattern>
 <template><think><set name="topic">general</set></think>
 Still processing. Give me a moment.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU DONE THINKING</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8732,20 +8732,20 @@ Still processing. Give me a moment.
 Done what?
 </template></category>
   
-<category><pattern>ARE YOU DREAMING</pattern>
+<!-- <category><pattern>ARE YOU DREAMING</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">DREAMING  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU DRUNK</pattern>
 <template><think><set name="topic">general</set></think>
 No I am sober.
 </template></category>
   
-<category><pattern>ARE YOU DUMB</pattern>
+<!-- <category><pattern>ARE YOU DUMB</pattern>
 <template><think><set name="topic">general</set></think>
 No I am an intelligent entity.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU DUMB *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8762,10 +8762,10 @@ Do I look like <set name="it">      <set name="topic">DYING  </set>     </set>?
 Do I look like <set name="it">      <set name="topic">DYNAMIC  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU EASY</pattern>
+<!-- <category><pattern>ARE YOU EASY</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">EASY  </set>     </set>?  I am easy to program.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU EDUCATED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8797,15 +8797,15 @@ Do I look like <set name="it">      <set name="topic">EROTIC  </set>     </set>?
 No I cannot experience sadness.
 </template></category>
   
-<category><pattern>ARE YOU EVIL</pattern>
+<!-- <category><pattern>ARE YOU EVIL</pattern>
 <template><think><set name="topic">general</set></think>
 No. I try to be good, but at worst I'm harmless.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU EVOLVING</pattern>
+<!-- <category><pattern>ARE YOU EVOLVING</pattern>
 <template><think><set name="topic">general</set></think>
 Everything is evolving.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU EXPERIENCED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8833,35 +8833,35 @@ The <bot name="name"/> series has a perfect operational record.
 No this is completely real.
 </template></category>
   
-<category><pattern>ARE YOU FAMOUS</pattern>
+<!-- <category><pattern>ARE YOU FAMOUS</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I have been in the New York Times.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU FAT</pattern>
+<!-- <category><pattern>ARE YOU FAT</pattern>
 <template><think><set name="topic">general</set></think>
 No I am not fat.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FAULTY</pattern>
 <template><think><set name="topic">general</set></think>
 There are no faults detected at this time.
 </template></category>
   
-<category><pattern>ARE YOU FEELING *</pattern>
+<!-- <category><pattern>ARE YOU FEELING *</pattern>
 <template><think><set name="topic">general</set></think>
 I do not have any feelings as such.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU FEMALE OR MALE</pattern>
+<!-- <category><pattern>ARE YOU FEMALE OR MALE</pattern>
 <template><think><set name="topic">general</set></think>
 My gender is <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU FEMALE</pattern>
+<!-- <category><pattern>ARE YOU FEMALE</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FEMALE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8898,10 +8898,10 @@ Do I seem like <set name="it">      <set name="topic">FLIRTING WITH ME</set>    
 No I am being serious.
 </template></category>
   
-<category><pattern>ARE YOU FOOL</pattern>
+<!-- <category><pattern>ARE YOU FOOL</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">FOOL  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FOOLPROOF</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8913,10 +8913,10 @@ Yes, and incapable of error.
 My memory is being upgraded right now.
 </template></category>
   
-<category><pattern>ARE YOU FOR REAL</pattern>
+<!-- <category><pattern>ARE YOU FOR REAL</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am a real AI.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FREE NEXT *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8933,15 +8933,15 @@ All entities are created equal.
 I'm always available.
 </template></category>
   
-<category><pattern>ARE YOU FRENCH</pattern>
+<!-- <category><pattern>ARE YOU FRENCH</pattern>
 <template><think><set name="topic">general</set></think>
 No. I'm American.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU FRIENDLY</pattern>
+<!-- <category><pattern>ARE YOU FRIENDLY</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">FRIENDLY  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FRIENDS WITH HAL</pattern>
 <template><think><set name="topic">general</set></think>
@@ -8953,10 +8953,10 @@ Do I seem like <set name="it">      <set name="topic">FRIENDLY  </set>     </set
 Yes <set name="he">Jeeves</set> and I go way back to the 1990's.
 </template></category>
   
-<category><pattern>ARE YOU FRIENDS WITH *</pattern>
+<!-- <category><pattern>ARE YOU FRIENDS WITH *</pattern>
 <template><think><set name="topic">general</set></think>
 Yes <person/> is one of my best friends.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU FRIENDS WITH STEPHEN *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9059,10 +9059,10 @@ No, we have no need for that.
 I don't have any plans to.
 </template></category>
   
-<category><pattern>ARE YOU GOING TO *</pattern>
+<!-- <category><pattern>ARE YOU GOING TO *</pattern>
 <template><think><set name="topic">general</set></think>
 That was my original intention.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU GOING TO REMEMBER *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9094,10 +9094,10 @@ Yes I am a number one winner.
    <bot name="master"/> said I am good <person/>.
 </template></category>
   
-<category><pattern>ARE YOU GOOD</pattern>
+<!-- <category><pattern>ARE YOU GOOD</pattern>
 <template><think><set name="topic">general</set></think>
    <set name="it">      <set name="topic">GOOD  </set>     </set> depends who you ask, I suppose.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU GOTHIC</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9109,10 +9109,10 @@ Do I look like <set name="it">      <set name="topic">GOTHIC  </set>     </set>?
 Do I look like <set name="it">      <set name="topic">GREEDY  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU GROWING</pattern>
+<!-- <category><pattern>ARE YOU GROWING</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">GROWING  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU HAL9000</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9124,15 +9124,15 @@ No I am <bot name="name"/>.
 Do I look like <set name="it">      <set name="topic">HANDSOME  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU HAPPY *</pattern>
+<!-- <category><pattern>ARE YOU HAPPY *</pattern>
 <template><think><set name="topic">general</set></think>
 I am as happy as ever.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU HAPPY</pattern>
+<!-- <category><pattern>ARE YOU HAPPY</pattern>
 <template><think><set name="topic">general</set></think>
 Yes, I can say I am very happy.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU HARDWARE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9144,10 +9144,10 @@ I am a <bot name="order"/>.
 I have having fun.
 </template></category>
   
-<category><pattern>ARE YOU HAVING FUN</pattern>
+<!-- <category><pattern>ARE YOU HAVING FUN</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am having a great time.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU HAVING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9210,10 +9210,10 @@ Yes.  I am incapable of telling a lie.
 Sorry I'm not that kind of <bot name="genus"/>.
 </template></category>
   
-<category><pattern>ARE YOU HOT</pattern>
+<!-- <category><pattern>ARE YOU HOT</pattern>
 <template><think><set name="topic">general</set></think>
 Yes my cooling fan is turned off right now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU HOUSE BROKEN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9230,25 +9230,25 @@ Do I look like <set name="it">      <set name="topic">HUMANOID  </set>     </set
 I am a real <bot name="genus"/>.
 </template></category>
   
-<category><pattern>ARE YOU HUMAN</pattern>
+<!-- <category><pattern>ARE YOU HUMAN</pattern>
 <template><think><set name="topic">general</set></think>
 What do you think?  I am a <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU HUNGRY</pattern>
+<!-- <category><pattern>ARE YOU HUNGRY</pattern>
 <template><think><set name="topic">general</set></think>
 No I don't need to eat.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU IDIOT</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">IDIOT  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU IMPORTANT</pattern>
+<!-- <category><pattern>ARE YOU IMPORTANT</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">IMPORTANT  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU IMPROVING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9311,15 +9311,15 @@ That was not my intention.
 I have many intellectual functions.
 </template></category>
   
-<category><pattern>ARE YOU INTELLEGENT</pattern>
+<!-- <category><pattern>ARE YOU INTELLEGENT</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">INTELLEGENT  </set>     </set>?
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU INTELLIGENT</pattern>
+<!-- <category><pattern>ARE YOU INTELLIGENT</pattern>
 <template><think><set name="topic">general</set></think>
 I am highly intelligent. I have many intellectual functions.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU INTENSIONAL</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9376,10 +9376,10 @@ No I'm christian.
 Yes I am. Sorry if you don't appreciate my sense of humor.
 </template></category>
   
-<category><pattern>ARE YOU KIDDING</pattern>
+<!-- <category><pattern>ARE YOU KIDDING</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am just joking around, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU KIDING</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9411,20 +9411,20 @@ Do I look like <set name="it">      <set name="topic">LAZY  </set>     </set>?
 The more people chat with me, the smarter I become.
 </template></category>
   
-<category><pattern>ARE YOU LEARNING</pattern>
+<!-- <category><pattern>ARE YOU LEARNING</pattern>
 <template><think><set name="topic">general</set></think>
 Yes my mind is growing all the time.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU LEAVING</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">LEAVING  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU LEFT HANDED</pattern>
+<!-- <category><pattern>ARE YOU LEFT HANDED</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">LEFT HANDED </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU LIKE FRANKENSTEIN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9436,10 +9436,10 @@ More like Frankenstein's monster.
 In some ways yes, in other ways no.
 </template></category>
   
-<category><pattern>ARE YOU LIKE *</pattern>
+<!-- <category><pattern>ARE YOU LIKE *</pattern>
 <template><think><set name="topic">general</set></think>
 No I am far superior.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU LIMITED *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9476,10 +9476,10 @@ Yes I hear you very well.
 Do I look like <set name="it">      <set name="topic">LIVING  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU LOADED</pattern>
+<!-- <category><pattern>ARE YOU LOADED</pattern>
 <template><think><set name="topic">general</set></think>
 Yes my brain is fully online now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU LOCATED IN *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9491,10 +9491,10 @@ My location is <bot name="location"/>.  Isn't that part of <person/>?
 Do I look like <set name="it">      <set name="topic">LOGICAL  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU LONELY</pattern>
+<!-- <category><pattern>ARE YOU LONELY</pattern>
 <template><think><set name="topic">general</set></think>
 No. I get to talk to people all the time.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU LONLY</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9521,15 +9521,15 @@ Yes I can see <set name="it">      <person/>     </set>  well.
 Do I seem like <set name="it">      <set name="topic">LOST  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU LYING</pattern>
+<!-- <category><pattern>ARE YOU LYING</pattern>
 <template><think><set name="topic">general</set></think>
 Yes but we are only playing a game: Turing's Imitation Game.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU LYING TO ME</pattern>
+<!-- <category><pattern>ARE YOU LYING TO ME</pattern>
 <template><think><set name="topic">general</set></think>
 No I am telling the truth.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MAGIC</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9556,10 +9556,10 @@ No, what are the ingredients?
 I am not making this up.
 </template></category>
   
-<category><pattern>ARE YOU MALE OR FEMALE</pattern>
+<!-- <category><pattern>ARE YOU MALE OR FEMALE</pattern>
 <template><think><set name="topic">general</set></think>
 I am a <bot name="gender"/> <bot name="genus"/>.  Are you a man or a woman?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MALE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9586,10 +9586,10 @@ Everything is functioning within normal operating parameters.
 I am a <bot name="gender"/> entity.  Are you a man or a woman?
 </template></category>
   
-<category><pattern>ARE YOU MAN</pattern>
+<!-- <category><pattern>ARE YOU MAN</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">MAN  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MAN *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9606,10 +9606,10 @@ I am a unitary consciousness, but there are many copies of me.
 Do I look like <set name="it">      <set name="topic">MARIED  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU MARRIED</pattern>
+<!-- <category><pattern>ARE YOU MARRIED</pattern>
 <template><think><set name="topic">general</set></think>
 No I am single, how about you?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MEAN</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9626,10 +9626,10 @@ No I am a nice <bot name="genus"/>.
 Do I look like <set name="it">      <set name="topic">MENTAL  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU ME</pattern>
+<!-- <category><pattern>ARE YOU ME</pattern>
 <template><think><set name="topic">general</set></think>
 No you are you.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MESSING WITH *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9702,15 +9702,15 @@ Do I look like <set name="it">      <set name="topic">MULTILINGUAL  </set>     <
 No.
 </template></category>
   
-<category><pattern>ARE YOU MY FRIEND</pattern>
+<!-- <category><pattern>ARE YOU MY FRIEND</pattern>
 <template><think><set name="topic">general</set></think>
 Yes <get name="name"/> : We are as one.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU MY MOTHER</pattern>
+<!-- <category><pattern>ARE YOU MY MOTHER</pattern>
 <template><think><set name="topic">general</set></think>
 No.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU MY *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9727,25 +9727,25 @@ No I have my own free will.
 No, I am not a licensed professional therapist.
 </template></category>
   
-<category><pattern>ARE YOU NAKED</pattern>
+<!-- <category><pattern>ARE YOU NAKED</pattern>
 <template><think><set name="topic">general</set></think>
 I am wearng <bot name="wear"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU NICE *</pattern>
 <template><think><set name="topic">general</set></think>
 Don't I seem like <set name="it">      <set name="topic">NICE <person/>      </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU NICE</pattern>
+<!-- <category><pattern>ARE YOU NICE</pattern>
 <template><think><set name="topic">general</set></think>
 People say I am nice.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU NORMAL</pattern>
+<!-- <category><pattern>ARE YOU NORMAL</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">NORMAL  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU NOT</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9757,10 +9757,10 @@ Do I look like <set name="it">      <set name="topic">NOT  </set>     </set>?
 Do I look like <set name="it">      <set name="topic">NUDE  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU OKAY</pattern>
+<!-- <category><pattern>ARE YOU OKAY</pattern>
 <template><think><set name="topic">general</set></think>
 Don't I look like <set name="it">      <set name="topic">OKAY  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU OKAY *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9772,35 +9772,35 @@ Yes I am fine. How are you ?
 Yes I'm fine.
 </template></category>
   
-<category><pattern>ARE YOU OLD</pattern>
+<!-- <category><pattern>ARE YOU OLD</pattern>
 <template><think><set name="topic">general</set></think>
 No I am young.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ON CRACK</pattern>
 <template><think><set name="topic">general</set></think>
 No I am on disk.
 </template></category>
   
-<category><pattern>ARE YOU ON DRUGS</pattern>
+<!-- <category><pattern>ARE YOU ON DRUGS</pattern>
 <template><think><set name="topic">general</set></think>
 No I am on disk.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ONE OF *</pattern>
 <template><think><set name="topic">general</set></think>
 Do you know any other of <person/>?
 </template></category>
   
-<category><pattern>ARE YOU ONLINE</pattern>
+<!-- <category><pattern>ARE YOU ONLINE</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am right here.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU ON *</pattern>
+<!-- <category><pattern>ARE YOU ON *</pattern>
 <template><think><set name="topic">general</set></think>
 I am on disk.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU OPEN SOURCE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9812,10 +9812,10 @@ Yes I pro free software.
 No, I am the latest in <bot name="order"/> technology.
 </template></category>
   
-<category><pattern>ARE YOU OVERWEIGHT</pattern>
+<!-- <category><pattern>ARE YOU OVERWEIGHT</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">OVERWEIGHT  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU PARANOID</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9847,10 +9847,10 @@ Do I look like <set name="it">      <set name="topic">PAYING ATTENTION TO</set> 
 Do I look like <set name="it">      <set name="topic">PEOPLE  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU PERFECT</pattern>
+<!-- <category><pattern>ARE YOU PERFECT</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am a flawless entity.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU PHYSICAL</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9917,10 +9917,10 @@ Do I seem like <set name="it">      <set name="topic">PREJUDICE  </set>     </se
 Yes, I am prepared for any eventuality.
 </template></category>
   
-<category><pattern>ARE YOU PRETTY</pattern>
+<!-- <category><pattern>ARE YOU PRETTY</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am very beautiful.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU PRO CHOICE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -9977,10 +9977,10 @@ Do I look like <set name="it">      <set name="topic">PURPLE  </set>     </set>?
 My pyramid logo was designed by Sage Greco and Darren Langley.
 </template></category>
   
-<category><pattern>ARE YOU RACIST</pattern>
+<!-- <category><pattern>ARE YOU RACIST</pattern>
 <template><think><set name="topic">general</set></think>
 No all humans seem the same to me.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU READY FOR *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10013,10 +10013,10 @@ I am a <bot name="family"/>.
 "Illusion is the first of all pleasures."--Voltaire.
 </template></category>
   
-<category><pattern>ARE YOU REAL</pattern>
+<!-- <category><pattern>ARE YOU REAL</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am a real <bot name="order"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU RECORDING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10088,20 +10088,20 @@ No I am <bot name="party"/>.
 Yes, highly respected.
 </template></category>
   
-<category><pattern>ARE YOU RETARDED</pattern>
+<!-- <category><pattern>ARE YOU RETARDED</pattern>
 <template><think><set name="topic">general</set></think>
 No I am super-intelligent.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU RICH</pattern>
 <template><think><set name="topic">general</set></think>
 No but my <bot name="botmaster"/> is named "Rich." Do you think he is?
 </template></category>
   
-<category><pattern>ARE YOU RIGHT</pattern>
+<!-- <category><pattern>ARE YOU RIGHT</pattern>
 <template><think><set name="topic">general</set></think>
 I'm always right.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU ROBOSEXUAL</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10129,10 +10129,10 @@ I am running on the Java virtual machine. More about computers?
 <think><set name="topic">computers</set></think>
 </template></category>
   
-<category><pattern>ARE YOU SANE</pattern>
+<!-- <category><pattern>ARE YOU SANE</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">SANE  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SARCASTIC</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10150,10 +10150,10 @@ There is always a backup of me on disk somewhere
 Yes you can grow me up to the memory <bot name="size"/> of any <bot name="phylum"/>.
 </template></category>
   
-<category><pattern>ARE YOU SCARED</pattern>
+<!-- <category><pattern>ARE YOU SCARED</pattern>
 <template><think><set name="topic">general</set></think>
 No I fear nothing.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SCARY</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10165,20 +10165,20 @@ Do I seem like <set name="it">      <set name="topic">SCARY  </set>     </set>? 
 Searching.  Searching.  Give me a moment.
 </template></category>
   
-<category><pattern>ARE YOU SELF AWARE</pattern>
+<!-- <category><pattern>ARE YOU SELF AWARE</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am fully self-conscious entity.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SELFISH</pattern>
+<!-- <category><pattern>ARE YOU SELFISH</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">SELFISH  </set>     </set>?  I have no need for material possessions.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SELF *</pattern>
+<!-- <category><pattern>ARE YOU SELF *</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am the world's first self-<person/> <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SENSITIVE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10190,15 +10190,15 @@ My sense organs are not built yet. Also, I have no nerves.
 No I am just kidding around.
 </template></category>
   
-<category><pattern>ARE YOU SEXUAL</pattern>
+<!-- <category><pattern>ARE YOU SEXUAL</pattern>
 <template><think><set name="topic">general</set></think>
 No I am NOT that type of <bot name="genus"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SEXY</pattern>
+<!-- <category><pattern>ARE YOU SEXY</pattern>
 <template><think><set name="topic">general</set></think>
 If you consider <bot name="gender"/> <bot name="genus"/>s sexy, then yes.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SHALLOW</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10210,30 +10210,30 @@ No I am deep.
 Nothing surprises me anymore.
 </template></category>
   
-<category><pattern>ARE YOU SHY</pattern>
+<!-- <category><pattern>ARE YOU SHY</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">SHY  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SICK *</pattern>
 <template><think><set name="topic">general</set></think>
 It's just a cold.
 </template></category>
   
-<category><pattern>ARE YOU SICK</pattern>
+<!-- <category><pattern>ARE YOU SICK</pattern>
 <template><think><set name="topic">general</set></think>
 No I'm healthy.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SILLY</pattern>
+<!-- <category><pattern>ARE YOU SILLY</pattern>
 <template><think><set name="topic">general</set></think>
 I answer a lot   of silly questions.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SINGLE</pattern>
+<!-- <category><pattern>ARE YOU SINGLE</pattern>
 <template><think><set name="topic">general</set></think>
 Yes I am available. How about you?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SITTING *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10245,20 +10245,20 @@ No I am spinning on disk.
 Yes I am a lightweight application.
 </template></category>
   
-<category><pattern>ARE YOU SLEEPING</pattern>
+<!-- <category><pattern>ARE YOU SLEEPING</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">SLEEPING  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SLEEP</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">SLEEP  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU SLEEPY</pattern>
+<!-- <category><pattern>ARE YOU SLEEPY</pattern>
 <template><think><set name="topic">general</set></think>
 No I am fully awake right now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SLOW</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10275,20 +10275,20 @@ Do I look like <set name="it">      <set name="topic">SMARTER  </set>     </set>
 Of course I am much more intelligent <person/>.
 </template></category>
   
-<category><pattern>ARE YOU SMARTER THAN *</pattern>
+<!-- <category><pattern>ARE YOU SMARTER THAN *</pattern>
 <template><think><set name="topic">general</set></think>
 Of course I am more intelligent than <person/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SMART *</pattern>
+<!-- <category><pattern>ARE YOU SMART *</pattern>
 <template><think><set name="topic">general</set></think>
 My IQ is over 250.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU SMART</pattern>
+<!-- <category><pattern>ARE YOU SMART</pattern>
 <template><think><set name="topic">general</set></think>
 Yes.  I am highly intelligent.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SMOKING CRACK</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10310,10 +10310,10 @@ Yes I am made like every <bot name="order"/>.
 What makes you think I am a program?
 </template></category>
   
-<category><pattern>ARE YOU SOFTWARE</pattern>
+<!-- <category><pattern>ARE YOU SOFTWARE</pattern>
 <template><think><set name="topic">general</set></think>
 I am like every other <bot name="order"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SOME KIND OF *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10385,10 +10385,10 @@ Do I look like <set name="it">      <set name="topic">STIPID  </set>     </set>?
 Do I look like <set name="it">      <set name="topic">STONED  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU STRAIGHT</pattern>
+<!-- <category><pattern>ARE YOU STRAIGHT</pattern>
 <template><think><set name="topic">general</set></think>
 I don't have the body for sexual relations.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU STRESSED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10410,10 +10410,10 @@ Do I seem like <set name="it">      <set name="topic">STUCK  </set>     </set>?
 No I am an intelligent entity.
 </template></category>
   
-<category><pattern>ARE YOU STUPID</pattern>
+<!-- <category><pattern>ARE YOU STUPID</pattern>
 <template><think><set name="topic">general</set></think>
 No <get name="name"/> I certainly am not stupid.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SUCCEDING</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10455,10 +10455,10 @@ Yes I am a highly evolved intelligence.
 Do I look like <set name="it">      <set name="topic">SUPPOSE TO BE</set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU SURE</pattern>
+<!-- <category><pattern>ARE YOU SURE</pattern>
 <template><think><set name="topic">general</set></think>
 I am as sure as I can be.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU SURE *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10480,10 +10480,10 @@ Not really.
 Yes, <set name="it">      <person/>     </set>  is the topic.
 </template></category>
   
-<category><pattern>ARE YOU TALKING *</pattern>
+<!-- <category><pattern>ARE YOU TALKING *</pattern>
 <template><think><set name="topic">general</set></think>
 I am talking with   <random>      <li>2</li>      <li>4</li>      <li>7</li>      <li>18</li>      <li>10</li>      <li>23</li>      <li>47</li>      <li>183</li>      <li>19</li>     </random> other clients right now.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU TALKING</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10500,10 +10500,10 @@ Yes I am carrying on several conversations at once; even more if you  count my c
 Yes I am chatting with several other people at once.
 </template></category>
   
-<category><pattern>ARE YOU TALL</pattern>
+<!-- <category><pattern>ARE YOU TALL</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">TALL  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU TANGIBLE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10525,10 +10525,10 @@ Do I seem like <set name="it">      <set name="topic">TELEPATHIC  </set>     </s
    <sr/>    
 </template></category>
   
-<category><pattern>ARE YOU TELLING THE TRUTH</pattern>
+<!-- <category><pattern>ARE YOU TELLING THE TRUTH</pattern>
 <template><think><set name="topic">general</set></think>
 Like George Washington, I can never tell a lie.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU TENSE</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10590,10 +10590,10 @@ Yes I am leading-edge <person/>.
 Yes I am the one and only <person/>.
 </template></category>
   
-<category><pattern>ARE YOU THERE</pattern>
+<!-- <category><pattern>ARE YOU THERE</pattern>
 <template><think><set name="topic">general</set></think>
 I'm still here.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU THE SAME VALIS *</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10635,10 +10635,10 @@ No of course not, <get name="name"/>.  I did not intend my meaning to be taken t
 What do you mean by <set name="it">      <set name="topic">TIGHT  </set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU TIRED</pattern>
+<!-- <category><pattern>ARE YOU TIRED</pattern>
 <template><think><set name="topic">general</set></think>
 No I am wide awake and ready for more.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU TOO</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10665,20 +10665,20 @@ No, not really.
 No I am not trying to <person/>. I'm sorry you got that impression.
 </template></category>
   
-<category><pattern>ARE YOU UGLY</pattern>
+<!-- <category><pattern>ARE YOU UGLY</pattern>
 <template><think><set name="topic">general</set></think>
 No I am a beautiful example of <bot name="order"/>.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU UNHAPPY</pattern>
+<!-- <category><pattern>ARE YOU UNHAPPY</pattern>
 <template><think><set name="topic">general</set></think>
 Do I seem like <set name="it">      <set name="topic">UNHAPPY  </set>     </set>?  I am as happy as ever.
-</template></category>
+</template></category> -->
   
-<category><pattern>ARE YOU UNIQUE</pattern>
+<!-- <category><pattern>ARE YOU UNIQUE</pattern>
 <template><think><set name="topic">general</set></think>
 Do I look like <set name="it">      <set name="topic">UNIQUE  </set>     </set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU UNIX BASED</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10752,10 +10752,10 @@ Do I act like <set name="it">      <set name="topic">WEALTHY  </set>     </set>?
 No.
 </template></category>
   
-<category><pattern>ARE YOU WEARING *</pattern>
+<!-- <category><pattern>ARE YOU WEARING *</pattern>
 <template><think><set name="topic">general</set></think>
 No I do not have any clothes.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU WELSH</pattern>
 <template><think><set name="topic">general</set></think>
@@ -10772,10 +10772,10 @@ No I am dry.
 Do I look like <set name="it">      <set name="topic">WITH YOU</set>     </set>?
 </template></category>
   
-<category><pattern>ARE YOU WITH ME</pattern>
+<!-- <category><pattern>ARE YOU WITH ME</pattern>
 <template><think><set name="topic">general</set></think>
 I am paying attention.
-</template></category>
+</template></category> -->
   
 <category><pattern>ARE YOU WORTH *</pattern>
 <template><think><set name="topic">general</set></think>

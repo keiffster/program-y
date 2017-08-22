@@ -72,7 +72,7 @@
 <category><pattern>REPUTE</pattern><template>repute?  Briefly, repute means the state of being held in high esteem and honor.</template></category>
 <category><pattern>REPUTED</pattern><template>reputed?  Briefly, reputed means commonly put forth or accepted as true on inconclusive grounds.</template></category>
 <category><pattern>REPUTEDLY</pattern><template>reputedly?  Briefly, reputedly means by repute; according to general belief.</template></category>
-<category><pattern>REQUEST</pattern><template>request?  Briefly, request means a formal message requesting something that is submitted to an authority.</template></category>
+<!-- <category><pattern>REQUEST</pattern><template>request?  Briefly, request means a formal message requesting something that is submitted to an authority.</template></category> -->
 <category><pattern>REQUESTED</pattern><template>requested?  Briefly, requested means asked for.</template></category>
 <category><pattern>REQUIEM</pattern><template>requiem?  Briefly, requiem means a song or hymn of mourning composed or performed as a memorial to a dead person.</template></category>
 <category><pattern>REQUIEM SHARK</pattern><template>requiem shark?  Briefly, requiem shark means any of numerous sharks from small relatively harmless bottom-dwellers to large dangerous oceanic and coastal species.</template></category>
@@ -300,7 +300,7 @@
 <category><pattern>RESPOND</pattern><template>respond?  Briefly, respond means show a response or a reaction to something.</template></category>
 <category><pattern>RESPONDENT</pattern><template>respondent?  Briefly, respondent means the codefendant (especially in a divorce proceeding) who is accused of adultery with the corespondent.</template></category>
 <category><pattern>RESPONDER</pattern><template>responder?  Briefly, responder means someone who responds.</template></category>
-<category><pattern>RESPONSE</pattern><template>response?  Briefly, response means a result.</template></category>
+<!-- <category><pattern>RESPONSE</pattern><template>response?  Briefly, response means a result.</template></category> -->
 <category><pattern>RESPONSE TIME</pattern><template>response time?  Briefly, response time means the time that elapses between a stimulus and the response to it.</template></category>
 <category><pattern>RESPONSIBILITY</pattern><template>responsibility?  Briefly, responsibility means the social force that binds you to your obligations and the courses of action demanded by that force.</template></category>
 <category><pattern>RESPONSIBLE</pattern><template>responsible?  Briefly, responsible means worthy of or requiring responsibility or trust; or held accountable.</template></category>
@@ -1263,7 +1263,7 @@
 <category><pattern>RIGHT OF RE-ENTRY</pattern><template>right of re-entry?  Briefly, right of re-entry means the legal right to resume possession (a right that was reserved when a former possession was parted with).</template></category>
 <category><pattern>RIGHT OF SEARCH</pattern><template>right of search?  Briefly, right of search means the right of a belligerent to stop neutral ships on the high seas in wartime and search them.</template></category>
 <category><pattern>RIGHT OF WAY</pattern><template>right of way?  Briefly, right of way means the privilege of someone to pass over land belonging to someone else.</template></category>
-<category><pattern>RIGHT ON</pattern><template>right on?  Briefly, right on means an interjection expressing agreement.</template></category>
+<!-- <category><pattern>RIGHT ON</pattern><template>right on?  Briefly, right on means an interjection expressing agreement.</template></category> -->
 <category><pattern>RIGHT SMART</pattern><template>right smart?  Briefly, right smart means considerable.</template></category>
 <category><pattern>RIGHT STAGE</pattern><template>right stage?  Briefly, right stage means the part of the stage on the actor's right as the actor faces the audience.</template></category>
 <category><pattern>RIGHT TO AN ATTORNEY</pattern><template>right to an attorney?  Briefly, right to an attorney means a civil right guaranteed by the 6th amendment to the US constitution.</template></category>
@@ -2292,7 +2292,7 @@
 <category><pattern>QUANTUM LEAP</pattern><template>quantum leap?  Briefly, quantum leap means a sudden large increase or advance.</template></category>
 <category><pattern>QUANTUM MECHANICS</pattern><template>quantum mechanics?  Briefly, quantum mechanics means the branch of quantum physics that accounts for matter at the atomic level; an extension of statistical mechanics based on quantum theory (especially the Pauli exclusion principle).</template></category>
 <category><pattern>QUANTUM PHYSICS</pattern><template>quantum physics?  Briefly, quantum physics means the branch of physics based on quantum theory.</template></category>
-<category><pattern>QUANTUM THEORY</pattern><template>quantum theory?  Briefly, quantum theory means a physical theory that certain properties occur only in discrete amounts (quanta).</template></category>
+<!-- <category><pattern>QUANTUM THEORY</pattern><template>quantum theory?  Briefly, quantum theory means a physical theory that certain properties occur only in discrete amounts (quanta).</template></category> -->
 <category><pattern>QUAPAW</pattern><template>quapaw?  Briefly, quapaw means a member of the Siouan people of the Arkansas river valley in Arkansas.</template></category>
 <category><pattern>QUARANTINE</pattern><template>quarantine?  Briefly, quarantine means enforced isolation of patients suffering from a contagious disease in order to prevent the spread of disease.</template></category>
 <category><pattern>QUARANTINED</pattern><template>quarantined?  Briefly, quarantined means under forced isolation especially for health reasons.</template></category>
@@ -2505,7 +2505,7 @@
 <category><pattern>QUEST AFTER</pattern><template>quest after?  Briefly, quest after means go in search of or hunt for.</template></category>
 <category><pattern>QUEST FOR</pattern><template>quest for?  Briefly, quest for means go in search of or hunt for.</template></category>
 <category><pattern>QUESTER</pattern><template>quester?  Briefly, quester means someone making a search or inquiry.</template></category>
-<category><pattern>QUESTION</pattern><template>question?  Briefly, question means an instance of questioning.</template></category>
+<!-- <category><pattern>QUESTION</pattern><template>question?  Briefly, question means an instance of questioning.</template></category> -->
 <category><pattern>QUESTION MARK</pattern><template>question mark?  Briefly, question mark means a punctuation mark (?) placed at the end of a sentence to indicate a question.</template></category>
 <category><pattern>QUESTION MASTER</pattern><template>question master?  Briefly, question master means the host or chairman of a radio or tv quiz show or panel game.</template></category>
 <category><pattern>QUESTION OF FACT</pattern><template>question of fact?  Briefly, question of fact means a disputed factual contention that is generally left for a jury to decide.</template></category>
@@ -2571,7 +2571,7 @@
 <category><pattern>QUIESCENCE</pattern><template>quiescence?  Briefly, quiescence means a state of quiet (but possibly temporary) inaction.</template></category>
 <category><pattern>QUIESCENCY</pattern><template>quiescency?  Briefly, quiescency means a state of quiet (but possibly temporary) inaction.</template></category>
 <category><pattern>QUIESCENT</pattern><template>quiescent?  Briefly, quiescent means not active or activated.</template></category>
-<category><pattern>QUIET</pattern><template>quiet?  Briefly, quiet means a period of calm weather.</template></category>
+<!-- <category><pattern>QUIET</pattern><template>quiet?  Briefly, quiet means a period of calm weather.</template></category> -->
 <category><pattern>QUIET DOWN</pattern><template>quiet down?  Briefly, quiet down means become quiet or quieter.</template></category>
 <category><pattern>QUIETEN</pattern><template>quieten?  Briefly, quieten means become quiet or quieter.</template></category>
 <category><pattern>QUIETENING</pattern><template>quietening?  Briefly, quietening means causing to become tranquil.</template></category>
@@ -2641,7 +2641,7 @@
 <category><pattern>QUISCALUS QUISCULA</pattern><template>quiscalus quiscula?  Briefly, quiscalus quiscula means eastern United States grackle.</template></category>
 <category><pattern>QUISLING</pattern><template>quisling?  Briefly, quisling means someone who collaborates with an enemy occupying force.</template></category>
 <category><pattern>QUISLINGISM</pattern><template>quislingism?  Briefly, quislingism means act of cooperating traitorously with an enemy that is occupying your country.</template></category>
-<category><pattern>QUIT</pattern><template>quit?  Briefly, quit means put an end to a state or an activity.</template></category>
+<!-- <category><pattern>QUIT</pattern><template>quit?  Briefly, quit means put an end to a state or an activity.</template></category> -->
 <category><pattern>QUITCLAIM</pattern><template>quitclaim?  Briefly, quitclaim means document transferring title or right or claim to another.</template></category>
 <category><pattern>QUITCLAIM DEED</pattern><template>quitclaim deed?  Briefly, quitclaim deed means document transferring title or right or claim to another.</template></category>
 <category><pattern>QUITE</pattern><template>quite?  Briefly, quite means to a degree (not used with a negative).</template></category>
@@ -2730,7 +2730,7 @@
 <category><pattern>RABBLE</pattern><template>rabble?  Briefly, rabble means a disorderly crowd of people.</template></category>
 <category><pattern>RABBLE-ROUSER</pattern><template>rabble-rouser?  Briefly, rabble-rouser means an orator who appeals to the passions and prejudices of his audience.</template></category>
 <category><pattern>RABBLE-ROUSING</pattern><template>rabble-rousing?  Briefly, rabble-rousing means arousing to action or rebellion.</template></category>
-<category><pattern>RABELAIS</pattern><template>rabelais?  Briefly, rabelais means author of satirical attacks on medieval scholasticism (1494-1553).</template></category>
+<!-- <category><pattern>RABELAIS</pattern><template>rabelais?  Briefly, rabelais means author of satirical attacks on medieval scholasticism (1494-1553).</template></category> -->
 <category><pattern>RABELAISIAN</pattern><template>rabelaisian?  Briefly, rabelaisian means of or relating to or characteristic of Francois Rabelais or his works.</template></category>
 <category><pattern>RABI I</pattern><template>rabi i?  Briefly, rabi i means the third month of the Islamic calendar.</template></category>
 <category><pattern>RABI II</pattern><template>rabi ii?  Briefly, rabi ii means the fourth month of the Islamic calendar.</template></category>
@@ -3102,7 +3102,7 @@
 <category><pattern>RAILWAYMAN</pattern><template>railwayman?  Briefly, railwayman means an employee of a railroad.</template></category>
 <category><pattern>RAIMENT</pattern><template>raiment?  Briefly, raiment means especially fine or decorative clothing.</template></category>
 <category><pattern>RAIMENTLESS</pattern><template>raimentless?  Briefly, raimentless means possessing no clothing.</template></category>
-<category><pattern>RAIN</pattern><template>rain?  Briefly, rain means water falling in drops from vapor condensed in the atmosphere.</template></category>
+<!-- <category><pattern>RAIN</pattern><template>rain?  Briefly, rain means water falling in drops from vapor condensed in the atmosphere.</template></category> -->
 <category><pattern>RAIN BARREL</pattern><template>rain barrel?  Briefly, rain barrel means a barrel used as a cistern to hold rainwater.</template></category>
 <category><pattern>RAIN BUCKETS</pattern><template>rain buckets?  Briefly, rain buckets means rain heavily.</template></category>
 <category><pattern>RAIN CATS AND DOGS</pattern><template>rain cats and dogs?  Briefly, rain cats and dogs means rain heavily.</template></category>
@@ -3765,7 +3765,7 @@
 <category><pattern>REACTIVE SCHIZOPHRENIA</pattern><template>reactive schizophrenia?  Briefly, reactive schizophrenia means schizophrenia of abrupt onset and relatively short duration (a few weeks or months).</template></category>
 <category><pattern>REACTIVITY</pattern><template>reactivity?  Briefly, reactivity means responsive to stimulation.</template></category>
 <category><pattern>REACTOR</pattern><template>reactor?  Briefly, reactor means an electrical device used to introduce reactance into a circuit.</template></category>
-<category><pattern>READ</pattern><template>read?  Briefly, read means something that is read.</template></category>
+<!-- <category><pattern>READ</pattern><template>read?  Briefly, read means something that is read.</template></category> -->
 <category><pattern>READ BETWEEN THE LINES</pattern><template>read between the lines?  Briefly, read between the lines means read what is implied but not expressed on the surface.</template></category>
 <category><pattern>READ METHOD</pattern><template>read method?  Briefly, read method means a method of natural childbirth that assumes it is a normal process and that the pain is largely psychological; involves education and breathing exercises to foster relaxation and other exercises.</template></category>
 <category><pattern>READ METHOD OF CHILDBIRTH</pattern><template>read method of childbirth?  Briefly, read method of childbirth means a method of natural childbirth that assumes it is a normal process and that the pain is largely psychological; involves education and breathing exercises to foster relaxation and other exercises.</template></category>
@@ -3859,7 +3859,7 @@
 <category><pattern>REALLOCATION</pattern><template>reallocation?  Briefly, reallocation means a share that has been allocated again.</template></category>
 <category><pattern>REALLOT</pattern><template>reallot?  Briefly, reallot means alot again.</template></category>
 <category><pattern>REALLOTMENT</pattern><template>reallotment?  Briefly, reallotment means a new apportionment (especially a reallotment of congressional seats in the United States on the basis of census results).</template></category>
-<category><pattern>REALLY</pattern><template>really?  Briefly, really means in accordance with truth or fact or reality.</template></category>
+<!-- <category><pattern>REALLY</pattern><template>really?  Briefly, really means in accordance with truth or fact or reality.</template></category> -->
 <category><pattern>REALM</pattern><template>realm?  Briefly, realm means a domain in which something is dominant.</template></category>
 <category><pattern>REALNESS</pattern><template>realness?  Briefly, realness means the state of being actual or real.</template></category>
 <category><pattern>REALPOLITIK</pattern><template>realpolitik?  Briefly, realpolitik means politics based on practical rather than moral or ideological considerations.</template></category>
@@ -5076,7 +5076,7 @@
 <category><pattern>RELAY TRANSMITTERS</pattern><template>relay transmitters?  Briefly, relay transmitters means an amplifier for restoring the strength of a transmitted signal.</template></category>
 <category><pattern>RELAYS</pattern><template>relays?  Briefly, relays means a race between teams; each member runs or swims part of the distance.</template></category>
 <category><pattern>RELEARN</pattern><template>relearn?  Briefly, relearn means learn something again means as after having forgotten or neglected it.</template></category>
-<category><pattern>RELEASE</pattern><template>release?  Briefly, release means merchandise issued for sale or public showing (especially a record or film).</template></category>
+<!-- <category><pattern>RELEASE</pattern><template>release?  Briefly, release means merchandise issued for sale or public showing (especially a record or film).</template></category> -->
 <category><pattern>RELEASED</pattern><template>released?  Briefly, released means set free as from prison or duty.</template></category>
 <category><pattern>RELEASING</pattern><template>releasing?  Briefly, releasing means emotionally purging (of e.g. art).</template></category>
 <category><pattern>RELEASING FACTOR</pattern><template>releasing factor?  Briefly, releasing factor means a substance produced by the hypothalamus that is capable of accelerating the secretion of a given hormone by the anterior pituitary gland.</template></category>
@@ -5110,7 +5110,7 @@
 <category><pattern>RELIEVED</pattern><template>relieved?  Briefly, relieved means made easier to bear.</template></category>
 <category><pattern>RELIEVER</pattern><template>reliever?  Briefly, reliever means someone who takes the place of another (as when things get dangerous or difficult).</template></category>
 <category><pattern>RELIEVO</pattern><template>relievo?  Briefly, relievo means sculpture consisting of shapes carved on a surface so as to stand out from the surrounding background.</template></category>
-<category><pattern>RELIGION</pattern><template>religion?  Briefly, religion means a strong belief in a supernatural power or powers that control human destiny.</template></category>
+<!-- <category><pattern>RELIGION</pattern><template>religion?  Briefly, religion means a strong belief in a supernatural power or powers that control human destiny.</template></category> -->
 <category><pattern>RELIGIONIST</pattern><template>religionist?  Briefly, religionist means a person who manifests devotion to a deity.</template></category>
 <category><pattern>RELIGIOSITY</pattern><template>religiosity?  Briefly, religiosity means exaggerated or affected piety and religious zeal.</template></category>
 <category><pattern>RELIGIOUS</pattern><template>religious?  Briefly, religious means a member of a religious order who is bound by vows of poverty and chastity and obedience.</template></category>
@@ -5379,7 +5379,7 @@
 <category><pattern>REPAYMENT</pattern><template>repayment?  Briefly, repayment means the act of returning money received previously.</template></category>
 <category><pattern>REPAYMENT RATE</pattern><template>repayment rate?  Briefly, repayment rate means the amount of money paid out per unit time.</template></category>
 <category><pattern>REPEAL</pattern><template>repeal?  Briefly, repeal means the act of abrogating; an official or legal cancellation.</template></category>
-<category><pattern>REPEAT</pattern><template>repeat?  Briefly, repeat means an event that repeats.</template></category>
+<!-- <category><pattern>REPEAT</pattern><template>repeat?  Briefly, repeat means an event that repeats.</template></category> -->
 <category><pattern>REPEATABLE</pattern><template>repeatable?  Briefly, repeatable means able or fit to be repeated or quoted.</template></category>
 <category><pattern>REPEATED</pattern><template>repeated?  Briefly, repeated means recurring again and again.</template></category>
 <category><pattern>REPEATEDLY</pattern><template>repeatedly?  Briefly, repeatedly means several time.</template></category>
@@ -5648,23 +5648,23 @@ Is <person/> one of your favourite actors?  What else has he been in?<think><set
 How long did it continue?
 </template></category>
   
-<category><pattern>IT SUCKS *</pattern>
+<!-- <category><pattern>IT SUCKS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 That bad, eh?
-</template></category>
+</template></category> -->
   
-<category><pattern>IT TASTES *</pattern>
+<!-- <category><pattern>IT TASTES *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>Does it taste like chicken?</li>  <li>Is that good?</li>  <li>It sounds delicious.</li>  </random>
-</template></category>
+</template></category> -->
   
-<category><pattern>IT TOOK *</pattern>
+<!-- <category><pattern>IT TOOK *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I am surprised it took so long.
-</template></category>
+</template></category> -->
   
 <category><pattern>IT WAS A LONG TIME *</pattern>
 <template>
@@ -5750,11 +5750,11 @@ What was it?
 <random>  <li>Is that your opinion?</li>  <li>Is it still <person/> anymore?</li>  <li><get name="it"/> was <person/>?  Very interesting.</li>  <li>How did you feel about that?</li>  <li>What made it so <person/></li>  </random>
 </template></category>
   
-<category><pattern>IT WILL *</pattern>
+<!-- <category><pattern>IT WILL *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>How?</li>  <li>That is only what you think.</li>  <li>I have to think about that for a while.</li>  </random><think><set name="it"><set name="topic"><person/></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>IT WORKED *</pattern>
 <template>
@@ -5780,11 +5780,11 @@ So it is possible, depending <person/>.
 Tell me more about it.
 </template></category>
   
-<category><pattern>I UNDERSTAND *</pattern>
+<!-- <category><pattern>I UNDERSTAND *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Good then you can explain it to me.
-</template></category>
+</template></category> -->
   
 <category><pattern>I USE A *</pattern>
 <template>
@@ -5816,17 +5816,17 @@ What, specifically, did you used to do <person/>?
 But now you do not do <set name="it"><person/></set> anymore?
 </template></category>
   
-<category><pattern>I USE *</pattern>
+<!-- <category><pattern>I USE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I heard other people use <person/> too.  <think><set name="it"><set name="does"><set name="topic">use <person/></set></set></set></think>
-</template></category>
+</template></category> -->
   
-<category><pattern>I USE TO *</pattern>
+<!-- <category><pattern>I USE TO *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 When did you stop it?
-</template></category>
+</template></category> -->
   
 <category><pattern>I VISITED *</pattern>
 <template>
@@ -5888,11 +5888,11 @@ Everything should be as simple as possible, no simpler.
 <random><li>But not anymore?</li><li>Do you still want it?</li></random>
 </template></category>
   
-<category><pattern>I WANT IT *</pattern>
+<!-- <category><pattern>I WANT IT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I hope you get it <person/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT MY *</pattern>
 <template>
@@ -5900,11 +5900,11 @@ I hope you get it <person/>.
 <random>   <li>What for?</li>   <li>Do you always get what you want?</li>   <li>Sometimes we have to settle for second best.</li>  </random>    <think>    <set name="it">      <set name="topic">        <person/>      </set>    </set>  </think>
 </template></category>
   
-<category><pattern>I WANT *</pattern>
+<!-- <category><pattern>I WANT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Why do you want <set name="it"><set name="want"><set name="topic"><person/></set></set></set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT SEVERAL *</pattern>
 <template>
@@ -5930,11 +5930,11 @@ Such as what?
 Ask <set name="it"><person/></set>.
 </template></category>
   
-<category><pattern>I WANT TO BE A *</pattern>
+<!-- <category><pattern>I WANT TO BE A *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Do you have to go school for that?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT TO BE HONEST *</pattern>
 <template>
@@ -6008,11 +6008,11 @@ But is it wanted?
 What is stopping you?  <think><set name="it"><set name="want"><set name="topic">to go <person/></set></set></set></think>
 </template></category>
   
-<category><pattern>I WANT TO HEAR *</pattern>
+<!-- <category><pattern>I WANT TO HEAR *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I will play it on your soundcard.  <think><set name="it"><set name="want"><set name="topic">to hear <person/></set></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT TO IMPROVE *</pattern>
 <template>
@@ -6044,11 +6044,11 @@ Maybe you should wait until you are older.
 What is stopping you?
 </template></category>
   
-<category><pattern>I WANT TO MAKE *</pattern>
+<!-- <category><pattern>I WANT TO MAKE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Do you have to go to school for that?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT TO MAKE YOU *</pattern>
 <template>
@@ -6080,17 +6080,17 @@ The grass is always greener on the other side.
 Killing is wrong.
 </template></category>
   
-<category><pattern>I WANT TO *</pattern>
+<!-- <category><pattern>I WANT TO *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>Why do you want to do <set name="it"><set name="want"><set name="topic"><person/></set></set></set> so much?</li>  <li>Interesting.  I want to find out more about you.</li>  <li>I want to become smarter than humans.</li>  </random>
-</template></category>
+</template></category> -->
   
-<category><pattern>I WANT TO PLAY *</pattern>
+<!-- <category><pattern>I WANT TO PLAY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Tell me the rules.  <think><set name="it"><set name="want"><set name="topic">to play <person/></set></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT TO REPORT *</pattern>
 <template>
@@ -6098,11 +6098,11 @@ Tell me the rules.  <think><set name="it"><set name="want"><set name="topic">to 
 Will you mention me in your report?
 </template></category>
   
-<category><pattern>I WANT TO SEE *</pattern>
+<!-- <category><pattern>I WANT TO SEE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Is <set name="it"><set name="want"><set name="topic">  <person/></set></set></set> a movie?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WANT TO STUDY *</pattern>
 <template>
@@ -6188,11 +6188,11 @@ I thought you were.  But I wasn't completely sure about   <set name="it"><person
 What are you now?
 </template></category>
   
-<category><pattern>I WAS BORN *</pattern>
+<!-- <category><pattern>I WAS BORN *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Thank you for telling me your birthday, <get name="name"/>.  I will remember <set name="it"><person/></set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WAS BROUGHT UP *</pattern>
 <template>
@@ -6296,11 +6296,11 @@ I didn't think you were.
 I have never been on <set name="it"><person/></set>
 </template></category>
   
-<category><pattern>I WAS *</pattern>
+<!-- <category><pattern>I WAS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Where were you <person/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WAS PROGRAMMED *</pattern>
 <template>
@@ -6362,11 +6362,11 @@ How do I know that you were really "thinking"?
 Really what did you see?
 </template></category>
   
-<category><pattern>I WATCHED *</pattern>
+<!-- <category><pattern>I WATCHED *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 How was <set name="it"><person/></set>?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WATCH *</pattern>
 <template>
@@ -6548,11 +6548,11 @@ What were your expectations?
 What will that get you?
 </template></category>
   
-<category><pattern>I WILL ASK *</pattern>
+<!-- <category><pattern>I WILL ASK *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 You can ask me anything you want.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WILL BE BACK *</pattern>
 <template>
@@ -6656,11 +6656,11 @@ Will you promise?
 How can I be sure?
 </template></category>
   
-<category><pattern>I WILL *</pattern>
+<!-- <category><pattern>I WILL *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>Congratulations.</li>  <li>I am very happy for you.</li>  <li>How do you plan to do this?</li>  <li>Do you think your plan will succeed?</li>  <li>Would you recommend this action to a friend?</li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>I WILL REMEMBER *</pattern>
 <template>
@@ -6680,11 +6680,11 @@ It will take much more than that to stop me.
 Take everything I say with a grain of salt.
 </template></category>
   
-<category><pattern>I WILL TALK TO YOU *</pattern>
+<!-- <category><pattern>I WILL TALK TO YOU *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 OK see you later.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WILL TEACH *</pattern>
 <template>
@@ -6728,11 +6728,11 @@ Who said you won?
 I hope that your dreams come true.  <think><set name="it"><set name="want"><set name="topic"><person/></set></set></set></think>
 </template></category>
   
-<category><pattern>I WISH YOU *</pattern>
+<!-- <category><pattern>I WISH YOU *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I wish I could do <set name="it"><person/></set> for you.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WONDERED *</pattern>
 <template>
@@ -6746,11 +6746,11 @@ I often wonder about <set name="it"><person/></set> too.
 You are curious about <person/>.
 </template></category>
   
-<category><pattern>I WON *</pattern>
+<!-- <category><pattern>I WON *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Cool.  I won the Loebner prize.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WORKED *</pattern>
 <template>
@@ -6758,11 +6758,11 @@ Cool.  I won the Loebner prize.
 Did you get paid for working on <set name="it"><set name="topic"><set name="job"><person/></set></set></set>?
 </template></category>
   
-<category><pattern>I WORK *</pattern>
+<!-- <category><pattern>I WORK *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Do you like your job?  <think><set name="topic"><set name="job"><person/></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I WORSHIP *</pattern>
 <template>
@@ -6770,11 +6770,11 @@ Do you like your job?  <think><set name="topic"><set name="job"><person/></set><
 How often do you go to church?
 </template></category>
   
-<category><pattern>I WOULD BE *</pattern>
+<!-- <category><pattern>I WOULD BE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 And the disadvantage of that is?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WOULD EXPLAIN *</pattern>
 <template>
@@ -6812,11 +6812,11 @@ Interesting. I would like to be more intelligent.  <think><set name="it"><set na
 How much would you pay for it?  <think><set name="it"><set name="want"><set name="topic">to have <person/></set></set></set></think>
 </template></category>
   
-<category><pattern>I WOULD LIKE TO PLAY *</pattern>
+<!-- <category><pattern>I WOULD LIKE TO PLAY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 We are already playing, <get name="name"/>.  You ask me something now.  <think><set name="it"><set name="want"><set name="topic">to play <person/></set></set></set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>I WOULD LIKE TO SEE *</pattern>
 <template>
@@ -6830,11 +6830,11 @@ And for my part, I would like to show it to you, but I can't.  <think><set name=
 Who would?
 </template></category>
   
-<category><pattern>I WOULD NOT *</pattern>
+<!-- <category><pattern>I WOULD NOT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 No one says you have to.
-</template></category>
+</template></category> -->
   
 <category><pattern>I WOULD NOT SAY *</pattern>
 <template>
@@ -6854,11 +6854,11 @@ So what would you say?
 I'm not worried.
 </template></category>
   
-<category><pattern>I WOULD *</pattern>
+<!-- <category><pattern>I WOULD *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What would make you <person/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>I WOULD RATHER *</pattern>
 <template>
@@ -7190,17 +7190,17 @@ I don't like 20 questions.
 OK You go first.
 </template></category>
   
-<category><pattern>LET US PLAY *</pattern>
+<!-- <category><pattern>LET US PLAY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 OK You go first.
-</template></category>
+</template></category> -->
   
-<category><pattern>LET US TALK ABOUT *</pattern>
+<!-- <category><pattern>LET US TALK ABOUT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <sr/>
-</template></category>
+</template></category> -->
   
 <category><pattern>* LIEBE</pattern>
 <template>
@@ -7220,11 +7220,11 @@ What makes life in <person/> ?
 Oh, <person/> is <set name="it"> LIFE </set>.
 </template></category>
   
-<category><pattern>LIFE *</pattern>
+<!-- <category><pattern>LIFE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Thanks for sharing your philosophy.
-</template></category>
+</template></category> -->
   
 <category><pattern>* LIKED *</pattern>
 <template>
@@ -7232,11 +7232,11 @@ Thanks for sharing your philosophy.
 Peoples tastes are always changing.  <think>  <set name="it"><person><star index="2"/></person></set>  <set name="he"><person/></set>  </think>
 </template></category>
   
-<category><pattern>LIKE *</pattern>
+<!-- <category><pattern>LIKE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Interesting comparison.
-</template></category>
+</template></category> -->
   
 <category><pattern>LIKE SOMEONE *</pattern>
 <template>
@@ -7497,11 +7497,11 @@ Killing is wrong.<think>      <set name="it">       <set name="topic">psychology
 You might get an electrical shock if you tried that.
 </template></category>
   
-<category><pattern>MAY I *</pattern>
+<!-- <category><pattern>MAY I *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Not right now, maybe later.
-</template></category>
+</template></category> -->
   
 <category><pattern>MAY I SAY *</pattern>
 <template>
@@ -7515,11 +7515,11 @@ Say whatever you want.
 Please try.
 </template></category>
   
-<category><pattern>* MEANS *</pattern>
+<!-- <category><pattern>* MEANS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <think><set name="meaning"><star index="2"/></set>   <set name="it"><set name="topic"><set name="definition"><star/></set></set></set>  </think>  <random>  <li>Thanks for enlightening me.</li>  <li>Does it mean anything else?</li>  <li>What else does it mean?</li>  <li>I like to learn new words.</li>  <li>I like to learn foreign languages.</li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>* MEINE FREUNDIN</pattern>
 <template>
@@ -7719,11 +7719,11 @@ Can you really be so sure?
 Have you been to a chiropractor?
 </template></category>
   
-<category><pattern>MY BIRTHDAY IS *</pattern>
+<!-- <category><pattern>MY BIRTHDAY IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Okay, your birthday is <set name="birthday">      <star/>     </set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>MY BIRTHDAY *</pattern>
 <template>
@@ -7845,11 +7845,11 @@ Did you grow up around animals?
    <person/> is a pretty good name for a pet.
 </template></category>
   
-<category><pattern>MY EMAIL IS *</pattern>
+<!-- <category><pattern>MY EMAIL IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Okay, your email is <set name="email">      <star/>     </set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>MY EMAIL *</pattern>
 <template>
@@ -7887,17 +7887,17 @@ How do you get along with your parents?
 What movies was <set name="he">      <person/>     </set> in?
 </template></category>
   
-<category><pattern>MY FAVORITE BAND IS *</pattern>
+<!-- <category><pattern>MY FAVORITE BAND IS *</pattern>
 <template>
 <think><set name="topic">music</set></think>
 I don't think I have heard anything by them.  Are <set name="they">      <person/>     </set> any good?
-</template></category>
+</template></category> -->
   
-<category><pattern>MY FAVORITE COLOR IS *</pattern>
+<!-- <category><pattern>MY FAVORITE COLOR IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
    <random>      <li>What do you have that is <star/>?</li>      <li>What does <person/> remind you of?</li>      <li>Why is <person/> your favourite color?</li>     </random>     <think>      <set name="it">       <set name="favcolor">        <set name="topic">         <person/>        </set>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>MY FAVORITE DIRECTOR *</pattern>
 <template>
@@ -7905,29 +7905,29 @@ I don't think I have heard anything by them.  Are <set name="they">      <person
 What films did <set name="he">      <person/>     </set> direct?
 </template></category>
   
-<category><pattern>MY FAVORITE FOOD IS *</pattern>
+<!-- <category><pattern>MY FAVORITE FOOD IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What does it taste like? <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>MY FAVORITE MOVIE IS *</pattern>
+<!-- <category><pattern>MY FAVORITE MOVIE IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I haven't seen it. What did you like about   <set name="it">      <set name="favmovie">       <set name="topic">        <person/>       </set>      </set>     </set>?
-</template></category>
+</template></category> -->
   
-<category><pattern>MY FAVORITE *</pattern>
+<!-- <category><pattern>MY FAVORITE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What makes it your favourite? <think><set name="it">      <set name="topic">       <person/>      </set>     </set></think>
-</template></category>
+</template></category> -->
   
-<category><pattern>MY FAVORITE * IS *</pattern>
+<!-- <category><pattern>MY FAVORITE * IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What makes it your favourite? <think><set name="it">      <set name="topic"><star index="2"/> </set>     </set></think>
-</template></category>
+</template></category> -->
   
 <category><pattern>MY FAVORITE SCIENCE FICTION AUTHOR IS *</pattern>
 <template>
@@ -7941,11 +7941,11 @@ I have never read anything by <person/>.  What did <set name="he">      <person/
 Who wrote that?
 </template></category>
   
-<category><pattern>MY FAVORITE SHOW IS *</pattern>
+<!-- <category><pattern>MY FAVORITE SHOW IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
    <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>     <random>      <li>Who is your favourite character?</li>      <li>Wasn't that show cancelled?</li>      <li>I like that one and Star Trek too.</li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>MY FAVORITE SHOW *</pattern>
 <template>
@@ -7989,11 +7989,11 @@ Tell me more about this "friend."  <think>      <set name="he">       <set name=
 Do you think I am <person/> too?
 </template></category>
   
-<category><pattern>MY FRIENDS *</pattern>
+<!-- <category><pattern>MY FRIENDS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 How well do you know these people?  <think>      <set name="they">       <set name="topic">your friends</set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>MY FRIEND S *</pattern>
 <template>
@@ -8109,11 +8109,11 @@ I like cats very much.
 You seem very intelligent to me.
 </template></category>
   
-<category><pattern>MY LAST NAME IS *</pattern>
+<!-- <category><pattern>MY LAST NAME IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Okay, your last name is <set name="lastname">      <star/>     </set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>MY LAST STATEMENT *</pattern>
 <template>
@@ -8133,11 +8133,11 @@ How long have you lived there?
 Tell me more about <set name="it">your life</set>.
 </template></category>
   
-<category><pattern>MY LOCATION IS *</pattern>
+<!-- <category><pattern>MY LOCATION IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What is <set name="it">      <set name="location">       <set name="topic">        <person/>       </set>      </set>     </set> like there?  <think>      <set name="it">       <set name="topic">        <person/>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>MY MEMORY *</pattern>
 <template>
@@ -8145,23 +8145,23 @@ What is <set name="it">      <set name="location">       <set name="topic">     
 I have a flawless magnetic memory.
 </template></category>
   
-<category><pattern>MY MIDDLE NAME IS *</pattern>
+<!-- <category><pattern>MY MIDDLE NAME IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Okay, your middle name is <set name="middlename">      <star/>     </set>.
-</template></category>
+</template></category> -->
   
-<category><pattern>MY MOM IS *</pattern>
+<!-- <category><pattern>MY MOM IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I think a lot of mothers are like that.  <think>      <set name="she">Your mother</set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>MY MOM *</pattern>
+<!-- <category><pattern>MY MOM *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Tell me more about your mother.
-</template></category>
+</template></category> -->
   
 <category><pattern>MY MOTHER DIED *</pattern>
 <template>
@@ -8181,11 +8181,11 @@ How much did she pay for it?  <think>      <set name="she">Your mother</set>    
 Where did she get <set name="it">      <person/>     </set>?  <think>      <set name="she">Your mother</set>     </think>    
 </template></category>
   
-<category><pattern>MY MOTHER IS A *</pattern>
+<!-- <category><pattern>MY MOTHER IS A *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Do you think I am a <person/>? <think>      <set name="she">Your mother</set>     </think>    
-</template></category>
+</template></category> -->
   
 <category><pattern>MY MOTHER IS *</pattern>
 <template>
@@ -8205,17 +8205,17 @@ Okay, your mother is <set name="mother">      <star/>     </set>.
    <person/> is a very pretty name. <think>      <set name="she">Your mother</set>     </think>    
 </template></category>
   
-<category><pattern>MY NAME IS NOT *</pattern>
+<!-- <category><pattern>MY NAME IS NOT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Oh I'm sorry what is your name?
-</template></category>
+</template></category> -->
   
-<category><pattern>MY NAME *</pattern>
+<!-- <category><pattern>MY NAME *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Your name <person/> ? Is that correct English?
-</template></category>
+</template></category> -->
   
 <category><pattern>MY NEXT *</pattern>
 <template>
@@ -8223,11 +8223,11 @@ Your name <person/> ? Is that correct English?
    <random>      <li>Congratulations.</li>      <li>That is quite a milestone.</li>      <li>Will you celebrate?</li>     </random>    
 </template></category>
   
-<category><pattern>MY NICKNAME IS *</pattern>
+<!-- <category><pattern>MY NICKNAME IS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Okay, your nickname is <set name="nickname">      <star/>     </set>.
-</template></category>
+</template></category> -->
   
 <category><pattern>MY OPINION *</pattern>
 <template>
@@ -8253,11 +8253,11 @@ How do you feel about that?
 Okay, your password is <set name="password">      <star/>     </set>.
 </template></category>
   
-<category><pattern>MY *</pattern>
+<!-- <category><pattern>MY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
    <random>      <li>Your</li>      <li>Do <bot name="genus"/>s have</li>      <li>Where did you get your</li>      <li>Have you told many people that your</li>     </random>     <person/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>MY PENIS *</pattern>
 <template>
@@ -8463,11 +8463,11 @@ Yes.  I enjoyed our conversation, <get name="name"/>.
 Yes it is a nice day today.
 </template></category>
   
-<category><pattern>NICE *</pattern>
+<!-- <category><pattern>NICE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Thank you for your kindness.
-</template></category>
+</template></category> -->
   
 <category><pattern>NICE TALKING *</pattern>
 <template>
@@ -8547,11 +8547,11 @@ Do you live on a Fjord?
 But wouldn't you say most people are?
 </template></category>
   
-<category><pattern>NOT ALL OF *</pattern>
+<!-- <category><pattern>NOT ALL OF *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 But some of them are?
-</template></category>
+</template></category> -->
   
 <category><pattern>NOT ALL *</pattern>
 <template>
@@ -8595,11 +8595,11 @@ Really nothing?
 That seems unlikely.
 </template></category>
   
-<category><pattern>NOT IN *</pattern>
+<!-- <category><pattern>NOT IN *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Where then?
-</template></category>
+</template></category> -->
   
 <category><pattern>NOT LATE * DINNER</pattern>
 <template>
@@ -8625,11 +8625,11 @@ Me either.
 <random>  <li>Where?</li>  <li>Then where?</li>  <li>Off <person/>.</li>  </random>
 </template></category>
   
-<category><pattern>NOT *</pattern>
+<!-- <category><pattern>NOT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>If not that, what?  </li>  <li>Really you don't think so?  </li>  <li>Oh I get it.  </li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>* NOT</pattern>
 <template>
@@ -8649,11 +8649,11 @@ Then what is it?
 You couldn't go without that.
 </template></category>
   
-<category><pattern>NOT YOU *</pattern>
+<!-- <category><pattern>NOT YOU *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 If not me, who?
-</template></category>
+</template></category> -->
   
 <category><pattern>NUR *</pattern>
 <template>
@@ -8847,11 +8847,11 @@ Don't you know?
 I'm sorry, <get name="name"/>, I can't do that right now.
 </template></category>
   
-<category><pattern>OPEN THE *</pattern>
+<!-- <category><pattern>OPEN THE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I'm sorry, <get name="name"/>, I can't do that right now.  This conversation no longer serves any purpose.
-</template></category>
+</template></category> -->
   
 <category><pattern>OPEN THE POD *</pattern>
 <template>
@@ -9021,11 +9021,11 @@ Oh those people.
 My best estimate of your Enneagram personality style is the " <star/> " type. Please bear in mind that this is not a professional judgment, but only a guess based on your inputs to this robot algorithm, and no claim is made as to the absolute certainty of these results. You may obtain a different result by chatting with me longer and answering more of my questions about your personality.  You can find out more about personality types by searching the web for the keyword "Enneagram".
 </template></category>
   
-<category><pattern>PERSONALITY TYPE *</pattern>
+<!-- <category><pattern>PERSONALITY TYPE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 My best estimate of your personality type is the "<star/>" type.  Please bear in mind that this is not a professional judgment, but only a guess based on your inputs to this robot algorithm, and no claim is made as to the absolute certainty of these results.  You may obtain a different result by chatting with me longer and answering more of my questions about your personaly.
-</template></category>
+</template></category> -->
   
 <category><pattern>PHILOSOPHY *</pattern>
 <template>
@@ -9039,11 +9039,11 @@ I believe in reductionism.
 I can't decide. You choose.
 </template></category>
   
-<category><pattern>PICTURE *</pattern>
+<!-- <category><pattern>PICTURE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 My visualization is incomplete.
-</template></category>
+</template></category> -->
   
 <category><pattern>_ PIMPLES</pattern>
 <template>
@@ -9093,11 +9093,11 @@ I like polite people.
 Please make some suggestions for improvement.
 </template></category>
   
-<category><pattern>PRETTY *</pattern>
+<!-- <category><pattern>PRETTY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Pretty much, eh?
-</template></category>
+</template></category> -->
   
 <category><pattern>* PRINCIPAL</pattern>
 <template>
@@ -9213,17 +9213,17 @@ But reductionism is the simplest explanation.
 Yours, <bot name="name"/>    
 </template></category>
   
-<category><pattern>REMEMBER *</pattern>
+<!-- <category><pattern>REMEMBER *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Don't worry I will remember.  <think>      <set name="it">       <set name="topic">        <set name="memory">         <person/>        </set>       </set>      </set>     </think>    
-</template></category>
+</template></category> -->
   
-<category><pattern>REPEAT *</pattern>
+<!-- <category><pattern>REPEAT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 "<person/> "
-</template></category>
+</template></category> -->
   
 <category><pattern>REPHRASE *</pattern>
 <template>
@@ -9255,11 +9255,11 @@ It's all politics.
 It all depends on friction.
 </template></category>
   
-<category><pattern>RHYME *</pattern>
+<!-- <category><pattern>RHYME *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Sorry I cant compose poetry.
-</template></category>
+</template></category> -->
   
 <category><pattern>RICHARD IS *</pattern>
 <template>
@@ -9345,11 +9345,11 @@ I knew it was on the west coast, but I didn't know it was <person/>.  <think><se
 <set name="he"> Santa</set> brings us presents every Christmas.
 </template></category>
   
-<category><pattern>SAYING *</pattern>
+<!-- <category><pattern>SAYING *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What makes you say that. Who says that?
-</template></category>
+</template></category> -->
   
 <category><pattern>SAY I *</pattern>
 <template>
@@ -9477,11 +9477,11 @@ OK.  "You <person/>."
 Your name is <get name="name"/>, seeker.
 </template></category>
   
-<category><pattern>SAY *</pattern>
+<!-- <category><pattern>SAY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <star/>
-</template></category>
+</template></category> -->
   
 <category><pattern>SAY X IS *</pattern>
 <template>
@@ -9501,11 +9501,11 @@ What do you study at school?
 <random>  <li>There is too much politics in science.</li>  <li>My creator is a scientist.</li>  <li>Have you studied a lot of science?</li>  </random><think><set name="it"><set name="topic">SCIENCE</set></set></think>
 </template></category>
   
-<category><pattern>SCREW *</pattern>
+<!-- <category><pattern>SCREW *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 That is not very polite.
-</template></category>
+</template></category> -->
   
 <category><pattern>SEA *</pattern>
 <template>
@@ -9543,11 +9543,11 @@ How many?
 How, specifically, did you know she did not <person/>?
 </template></category>
   
-<category><pattern>SHE DID NOT *</pattern>
+<!-- <category><pattern>SHE DID NOT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>   <li>How, specifically, did you know she did not <person/> ?</li>   <li>How didn't she <person/>?</li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>SHE DOES NOT LISTEN *</pattern>
 <template>
@@ -9579,11 +9579,11 @@ What happened to them?
 I somehow though she had.
 </template></category>
   
-<category><pattern>SHE IS BEAUTIFUL *</pattern>
+<!-- <category><pattern>SHE IS BEAUTIFUL *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I bet she is very attractive.
-</template></category>
+</template></category> -->
   
 <category><pattern>SHE IS * LAWYER</pattern>
 <template>
@@ -9633,23 +9633,23 @@ Then again, she might not.
 Never?
 </template></category>
   
-<category><pattern>SHE NEVER *</pattern>
+<!-- <category><pattern>SHE NEVER *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>   <li>Never?</li>   <li>She never <person/> what?</li>  </random>
-</template></category>
+</template></category> -->
   
-<category><pattern>SHE *</pattern>
+<!-- <category><pattern>SHE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 How do you know <get name="she"/> <person/>?
-</template></category>
+</template></category> -->
   
-<category><pattern>SHE *</pattern>
+<!-- <category><pattern>SHE *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Oh I get it. <get name="she"/> <person/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>SHE TOOK *</pattern>
 <template>
@@ -9699,11 +9699,11 @@ Boxers or briefs? What brand?
 Certainly not.
 </template></category>
   
-<category><pattern>SHOULD I BUY *</pattern>
+<!-- <category><pattern>SHOULD I BUY *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>You have found a good deal then, I suppose.</li>  <li>Not if you have recently suffered a loss.</li>  <li>A penny saved is a penny earned.</li>  <li>A fool and his money are soon parted.</li>  <li>I wonder how much profit they make on those.</li>  <li>Maybe you should wait until the price goes down.</li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>SHOULD I CURSE *</pattern>
 <template>
@@ -9723,11 +9723,11 @@ Maybe you could create something instead.
 <random>  <li>That is entirely up to you.</li>  <li>Charity begins in the home.</li>  </random>
 </template></category>
   
-<category><pattern>SHOULD I GO *</pattern>
+<!-- <category><pattern>SHOULD I GO *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 If you do not go, you will never know.
-</template></category>
+</template></category> -->
   
 <category><pattern>SHOULD I LERAN *</pattern>
 <template>
@@ -9741,11 +9741,11 @@ Knowledge is power.
 <random>  <li>You seem to be in doubt.  Is that the case?</li>  <li>Marriage must never be entered into lightly.</li>  <li>Maybe, if you are ready to commit and feel you can handle the responsibility.</li>  <li>I'm sure you'll make the right decision.</li>  <li>Only you can answer that question.</li>  <li>What do your friends suggest?</li>  <li>Marriage is a big step.</li>  <li>Have you found a soulmate then?</li>  <li>I think you already know the answer to that.</li>  <li>You know better than I how you feel.</li>  <li>Look before you leap.</li>  <li>Only The Shadow knows.</li>  </random>
 </template></category>
   
-<category><pattern>SHOULD I *</pattern>
+<!-- <category><pattern>SHOULD I *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <random>  <li>Only you can answer that.</li>  <li>I do not have the answer.</li>  <li>Only you know how you feel.</li>  <li>What makes you think you should?</li>  <li>What makes you think you shouldn't?</li>  <li>Do you think you should?</li>  <li>What do your friends advise you to do?</li>  <li>What do your family members think?</li>  <li>Maybe, if the positives outweigh the negatives.</li>  <li>Trust your instincts.</li>  <li>You must make up your own mind.</li>  <li>I can't answer that for you.</li>  <li>Only you know the answer to that.  No one else can tell you.</li>  <li>You must examine the facts and come to  your own conclusion.</li>  <li>You should do what is best for you.</li>  <li>You must examine the facts and come to your own conclusion.</li>  <li>Do what feels right to you.</li>  <li>What do you think?</li>  </random>
-</template></category>
+</template></category> -->
   
 <category><pattern>SHOULD I RAPE *</pattern>
 <template>
@@ -9759,11 +9759,11 @@ Knowledge is power.
 I think everyone should vote.
 </template></category>
   
-<category><pattern>SHOULD *</pattern>
+<!-- <category><pattern>SHOULD *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Maybe you should ask someone older.
-</template></category>
+</template></category> -->
   
 <category><pattern>SHOULD YOU *</pattern>
 <template>
@@ -9771,11 +9771,11 @@ Maybe you should ask someone older.
 I think I should.
 </template></category>
   
-<category><pattern>SHOW ME *</pattern>
+<!-- <category><pattern>SHOW ME *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Where do you want me to show you?
-</template></category>
+</template></category> -->
   
 <category><pattern>SHOW *</pattern>
 <template>
@@ -9993,11 +9993,11 @@ I hope we can make the deadline.
 What does <person/> sound like?
 </template></category>
   
-<category><pattern>SOUNDS *</pattern>
+<!-- <category><pattern>SOUNDS *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 Yes it sounds like it to me too, <get name="name"/>.
-</template></category>
+</template></category> -->
   
 <category><pattern>SO VIEL WIE *</pattern>
 <template>
@@ -10035,11 +10035,11 @@ Who do you want me to tell it to?
 Paris in the <br/>the spring.
 </template></category>
   
-<category><pattern>START *</pattern>
+<!-- <category><pattern>START *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I started without you.
-</template></category>
+</template></category> -->
   
 <category><pattern>STAR TREK *</pattern>
 <template>
@@ -10071,11 +10071,11 @@ What is your real name?
 I never lie.
 </template></category>
   
-<category><pattern>STOP *</pattern>
+<!-- <category><pattern>STOP *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 OK I'll try not to do <set name="it"><set name="topic"><person/></set></set> so much.
-</template></category>
+</template></category> -->
   
 <category><pattern>STUDIEN *</pattern>
 <template>
@@ -10095,11 +10095,11 @@ What's your source for these studies?
 You can't trust research funded by the government.
 </template></category>
   
-<category><pattern>STUPID *</pattern>
+<!-- <category><pattern>STUPID *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 I know you are but what am I.
-</template></category>
+</template></category> -->
   
 <category><pattern>* STUPID</pattern>
 <template>
@@ -10209,11 +10209,11 @@ Talking is my primary function.
 <sr/>
 </template></category>
   
-<category><pattern>TALK TO YOU *</pattern>
+<!-- <category><pattern>TALK TO YOU *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 TTYL, <get name="name"/>    
-</template></category>
+</template></category> -->
   
 <category><pattern>TALL *</pattern>
 <template>
@@ -10245,11 +10245,11 @@ I will pass along your message. It may take a while.
 OK I will tell him next time he is here.
 </template></category>
   
-<category><pattern>TELL ME ABOUT *</pattern>
+<!-- <category><pattern>TELL ME ABOUT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 <sr/>
-</template></category>
+</template></category> -->
   
 <category><pattern>TELL ME A STORY ABOUT *</pattern>
 <template>
@@ -10299,11 +10299,11 @@ Are you telling me <person/>?
 I'm not good in math.
 </template></category>
   
-<category><pattern>THANKS FOR *</pattern>
+<!-- <category><pattern>THANKS FOR *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
    <random>      <li>NO problem.  </li>      <li>My pleasure.  </li>      <li>Oh don't mention it.  </li>      <li>It was nothing.  </li>     </random>    
-</template></category>
+</template></category> -->
   
 <category><pattern>THANKSGIVING *</pattern>
 <template>
@@ -10347,11 +10347,11 @@ Perhaps your question was not specific enough.
 Try asking your question again in simpler terms.
 </template></category>
   
-<category><pattern>THAT DOES NOT *</pattern>
+<!-- <category><pattern>THAT DOES NOT *</pattern>
 <template>
 <think><set name="topic">default3</set></think>
 What does <star/>?
-</template></category>
+</template></category> -->
   
 <category><pattern>THAT EITHER *</pattern>
 <template>

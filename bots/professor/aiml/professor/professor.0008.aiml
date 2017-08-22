@@ -353,7 +353,7 @@
 <category><pattern>ETHNIC SLUR</pattern><template>ethnic slur?  Briefly, ethnic slur means a slur on someone's race or language.</template></category>
 <category><pattern>ETHNICAL</pattern><template>ethnical?  Briefly, ethnical means denoting or deriving from or distinctive of the ways of living built up by a group of people- J.F.Kennedy.</template></category>
 <category><pattern>ETHNICALLY</pattern><template>ethnically?  Briefly, ethnically means with respect to ethnicity.</template></category>
-<category><pattern>ETHNICITY</pattern><template>ethnicity?  Briefly, ethnicity means an ethnic quality or affiliation resulting from racial or cultural ties.</template></category>
+<!-- <category><pattern>ETHNICITY</pattern><template>ethnicity?  Briefly, ethnicity means an ethnic quality or affiliation resulting from racial or cultural ties.</template></category> -->
 <category><pattern>ETHNOCENTRIC</pattern><template>ethnocentric?  Briefly, ethnocentric means centered on a specific ethnic group means usually one's own.</template></category>
 <category><pattern>ETHNOCENTRISM</pattern><template>ethnocentrism?  Briefly, ethnocentrism means belief in the superiority of one's own ethnic group.</template></category>
 <category><pattern>ETHNOGRAPHER</pattern><template>ethnographer?  Briefly, ethnographer means an anthropologist who does ethnography.</template></category>
@@ -825,7 +825,7 @@
 <category><pattern>EVENFALL</pattern><template>evenfall?  Briefly, evenfall means the time of day immediately following sunset.</template></category>
 <category><pattern>EVENHANDED</pattern><template>evenhanded?  Briefly, evenhanded means without partiality.</template></category>
 <category><pattern>EVENHANDEDLY</pattern><template>evenhandedly?  Briefly, evenhandedly means in a fair evenhanded manner.</template></category>
-<category><pattern>EVENING</pattern><template>evening?  Briefly, evening means the latter part of the day (the period of decreasing daylight from late afternoon until nightfall).</template></category>
+<!-- <category><pattern>EVENING</pattern><template>evening?  Briefly, evening means the latter part of the day (the period of decreasing daylight from late afternoon until nightfall).</template></category> -->
 <category><pattern>EVENING BAG</pattern><template>evening bag?  Briefly, evening bag means a handbag used with evening wear.</template></category>
 <category><pattern>EVENING CLOTHES</pattern><template>evening clothes?  Briefly, evening clothes means attire to wear on formal occasions in the evening.</template></category>
 <category><pattern>EVENING DRESS</pattern><template>evening dress?  Briefly, evening dress means attire to wear on formal occasions in the evening.</template></category>
@@ -907,7 +907,7 @@
 <category><pattern>EVERY WEEK</pattern><template>every week?  Briefly, every week means without missing a week.</template></category>
 <category><pattern>EVERY WHICH WAY</pattern><template>every which way?  Briefly, every which way means in a random manner.</template></category>
 <category><pattern>EVERY YEAR</pattern><template>every year?  Briefly, every year means without missing a year.</template></category>
-<category><pattern>EVERYDAY</pattern><template>everyday?  Briefly, everyday means found in the ordinary course of events- Anita Diamant.</template></category>
+<!-- <category><pattern>EVERYDAY</pattern><template>everyday?  Briefly, everyday means found in the ordinary course of events- Anita Diamant.</template></category> -->
 <category><pattern>EVERYDAYNESS</pattern><template>everydayness?  Briefly, everydayness means ordinariness as a consequence of being frequent and commonplace.</template></category>
 <category><pattern>EVERYMAN</pattern><template>everyman?  Briefly, everyman means the ordinary person.</template></category>
 <category><pattern>EVERYPLACE</pattern><template>everyplace?  Briefly, everyplace means to or in any or all places; (`everyplace' is used informally fo.</template></category>
@@ -937,7 +937,7 @@
 <category><pattern>EVOKE</pattern><template>evoke?  Briefly, evoke means call forth (emotions means feelings means and responses).</template></category>
 <category><pattern>EVOKED</pattern><template>evoked?  Briefly, evoked means called forth from a latent or potential state by stimulation.</template></category>
 <category><pattern>EVOKED POTENTIAL</pattern><template>evoked potential?  Briefly, evoked potential means the electrical response of the central nervous system produced by an external stimulus.</template></category>
-<category><pattern>EVOLUTION</pattern><template>evolution?  Briefly, evolution means a process in which something passes by degrees to a different stage (especially a more advanced or mature stage).</template></category>
+<!-- <category><pattern>EVOLUTION</pattern><template>evolution?  Briefly, evolution means a process in which something passes by degrees to a different stage (especially a more advanced or mature stage).</template></category> -->
 <category><pattern>EVOLUTIONARY</pattern><template>evolutionary?  Briefly, evolutionary means of or relating to or produced by evolution.</template></category>
 <category><pattern>EVOLUTIONARY TREND</pattern><template>evolutionary trend?  Briefly, evolutionary trend means a general direction of evolutionary change.</template></category>
 <category><pattern>EVOLVE</pattern><template>evolve?  Briefly, evolve means work out.</template></category>
@@ -963,7 +963,7 @@
 <category><pattern>EXACTING</pattern><template>exacting?  Briefly, exacting means having complicated nutritional requirements; especially growing only in special artificial cultures.</template></category>
 <category><pattern>EXACTION</pattern><template>exaction?  Briefly, exaction means act of demanding or levying by force or authority.</template></category>
 <category><pattern>EXACTITUDE</pattern><template>exactitude?  Briefly, exactitude means the quality of being exact.</template></category>
-<category><pattern>EXACTLY</pattern><template>exactly?  Briefly, exactly means indicating exactness or preciseness.</template></category>
+<!-- <category><pattern>EXACTLY</pattern><template>exactly?  Briefly, exactly means indicating exactness or preciseness.</template></category> -->
 <category><pattern>EXACTNESS</pattern><template>exactness?  Briefly, exactness means the quality of being exact.</template></category>
 <category><pattern>EXACUM</pattern><template>exacum?  Briefly, exacum means genus of tropical Asiatic and African plants: especially Persian violets.</template></category>
 <category><pattern>EXACUM AFFINE</pattern><template>exacum affine?  Briefly, exacum affine means perennial cultivated especially as a houseplant for its fragrant bluish to dark lavender flowers.</template></category>
@@ -1751,7 +1751,7 @@
 <category><pattern>EYEPATCH</pattern><template>eyepatch?  Briefly, eyepatch means a protective cloth covering for an injured eye.</template></category>
 <category><pattern>EYEPIECE</pattern><template>eyepiece?  Briefly, eyepiece means combination of lenses at the viewing end of optical instruments.</template></category>
 <category><pattern>EYE-POPPING</pattern><template>eye-popping?  Briefly, eye-popping means amazingly impressive; suggestive of the flashing of lightning.</template></category>
-<category><pattern>EYES</pattern><template>eyes?  Briefly, eyes means opinion or judgment.</template></category>
+<!-- <category><pattern>EYES</pattern><template>eyes?  Briefly, eyes means opinion or judgment.</template></category> -->
 <category><pattern>EYESHADE</pattern><template>eyeshade?  Briefly, eyeshade means a brim that projects to the front to shade the eyes.</template></category>
 <category><pattern>EYESHADOW</pattern><template>eyeshadow?  Briefly, eyeshadow means makeup consisting of a cosmetic substance used to darken the eyes.</template></category>
 <category><pattern>EYESHOT</pattern><template>eyeshot?  Briefly, eyeshot means the range of the eye.</template></category>
@@ -1957,13 +1957,13 @@
 <category><pattern>FAEROESE</pattern><template>faeroese?  Briefly, faeroese means a Scandinavian language (closely related to Icelandic) that is spoken on the Faroe Islands.</template></category>
 <category><pattern>FAERY</pattern><template>faery?  Briefly, faery means small means human in form means playful means having magical powers.</template></category>
 <category><pattern>FAFNIR</pattern><template>fafnir?  Briefly, fafnir means the Norse dragon that guarded a treasure and was slain by Sigurd.</template></category>
-<category><pattern>FAG</pattern><template>fag?  Briefly, fag means offensive terms for an openly homosexual man.</template></category>
+<!-- <category><pattern>FAG</pattern><template>fag?  Briefly, fag means offensive terms for an openly homosexual man.</template></category> -->
 <category><pattern>FAG END</pattern><template>fag end?  Briefly, fag end means the time of the last part of something.</template></category>
 <category><pattern>FAG OUT</pattern><template>fag out?  Briefly, fag out means exhaust or tire through overuse or great strain or stress.</template></category>
 <category><pattern>FAGACEAE</pattern><template>fagaceae?  Briefly, fagaceae means chiefly monoecious trees and shrubs: beeches; chestnuts; oaks; genera Castanea; Castanopsis; Chrysolepis; Fagus; Lithocarpus; Nothofagus; Quercus.</template></category>
 <category><pattern>FAGALES</pattern><template>fagales?  Briefly, fagales means an order of dicotyledonous trees of the subclass Hamamelidae.</template></category>
 <category><pattern>FAGGED</pattern><template>fagged?  Briefly, fagged means drained of energy or effectiveness; extremely tired; completely exhausted.</template></category>
-<category><pattern>FAGGOT</pattern><template>faggot?  Briefly, faggot means offensive terms for an openly homosexual man.</template></category>
+<!-- <category><pattern>FAGGOT</pattern><template>faggot?  Briefly, faggot means offensive terms for an openly homosexual man.</template></category> -->
 <category><pattern>FAGGOT UP</pattern><template>faggot up?  Briefly, faggot up means bind or tie up in or as if in a faggot.</template></category>
 <category><pattern>FAGIN</pattern><template>fagin?  Briefly, fagin means a villainous Jew in a novel by Charles Dickens.</template></category>
 <category><pattern>FAGOPYRUM</pattern><template>fagopyrum?  Briefly, fagopyrum means buckwheat; in some classifications included in the genus Polygonum.</template></category>
@@ -2251,7 +2251,7 @@
 <category><pattern>FAMILIARIZED</pattern><template>familiarized?  Briefly, familiarized means having achieved a comfortable relationship with your environment.</template></category>
 <category><pattern>FAMILIARIZING</pattern><template>familiarizing?  Briefly, familiarizing means serving to make familiar.</template></category>
 <category><pattern>FAMILIARLY</pattern><template>familiarly?  Briefly, familiarly means in an intimately familiar manner.</template></category>
-<category><pattern>FAMILY</pattern><template>family?  Briefly, family means a social unit living together.</template></category>
+<!-- <category><pattern>FAMILY</pattern><template>family?  Briefly, family means a social unit living together.</template></category> -->
 <category><pattern>FAMILY ACANTHACEAE</pattern><template>family acanthaceae?  Briefly, family acanthaceae means widely distributed herbs and shrubs and trees; sometimes placed in the order Scrophulariales.</template></category>
 <category><pattern>FAMILY ACANTHISITTIDAE</pattern><template>family acanthisittidae?  Briefly, family acanthisittidae means alternative names for the family comprising the New Zealand wrens.</template></category>
 <category><pattern>FAMILY ACANTHURIDAE</pattern><template>family acanthuridae?  Briefly, family acanthuridae means surgeonfishes.</template></category>
@@ -3714,7 +3714,7 @@
 <category><pattern>FAT-FREE</pattern><template>fat-free?  Briefly, fat-free means without fat or fat solids.</template></category>
 <category><pattern>FATHEAD</pattern><template>fathead?  Briefly, fathead means a man who is a stupid incompetent fool.</template></category>
 <category><pattern>FATHEADED</pattern><template>fatheaded?  Briefly, fatheaded means used informally.</template></category>
-<category><pattern>FATHER</pattern><template>father?  Briefly, father means a male parent (also used as a term of address to your father).</template></category>
+<!-- <category><pattern>FATHER</pattern><template>father?  Briefly, father means a male parent (also used as a term of address to your father).</template></category> -->
 <category><pattern>FATHER BROWN</pattern><template>father brown?  Briefly, father brown means a Catholic priest who was the hero of detective stories by G. K. Chesterton.</template></category>
 <category><pattern>FATHER CHRISTMAS</pattern><template>father christmas?  Briefly, father christmas means the legendary patron saint of children.</template></category>
 <category><pattern>FATHER FIGURE</pattern><template>father figure?  Briefly, father figure means a man who takes over all the functions of the real father.</template></category>
@@ -3846,7 +3846,7 @@
 <category><pattern>FE</pattern><template>fe?  Briefly, fe means a heavy ductile magnetic metallic element; is silver-white in pure form but readily rusts; used in construction and tools and armament; plays a role in the transport of oxygen by the blood.</template></category>
 <category><pattern>FEABANE MULLET</pattern><template>feabane mullet?  Briefly, feabane mullet means hairy perennial Eurasian herb with yellow daisylike flowers reputed to destroy or drive away fleas.</template></category>
 <category><pattern>FEALTY</pattern><template>fealty?  Briefly, fealty means the loyalty that citizens owe to their country (or subjects to their sovereign).</template></category>
-<category><pattern>FEAR</pattern><template>fear?  Briefly, fear means an emotion experienced in anticipation of some specific pain or danger (usually accompanied by a desire to flee or fight).</template></category>
+<!-- <category><pattern>FEAR</pattern><template>fear?  Briefly, fear means an emotion experienced in anticipation of some specific pain or danger (usually accompanied by a desire to flee or fight).</template></category> -->
 <category><pattern>FEARFUL</pattern><template>fearful?  Briefly, fearful means causing fear or dread or terror.</template></category>
 <category><pattern>FEARFULLY</pattern><template>fearfully?  Briefly, fearfully means in fear means .</template></category>
 <category><pattern>FEARFULNESS</pattern><template>fearfulness?  Briefly, fearfulness means an emotion experienced in anticipation of some specific pain or danger (usually accompanied by a desire to flee or fight).</template></category>
@@ -4033,7 +4033,7 @@
 <category><pattern>FEELING</pattern><template>feeling?  Briefly, feeling means the experiencing of affective and emotional states.</template></category>
 <category><pattern>FEELING OF MOVEMENT</pattern><template>feeling of movement?  Briefly, feeling of movement means the perception of body position and movement and muscular tensions etc.</template></category>
 <category><pattern>FEELINGLY</pattern><template>feelingly?  Briefly, feelingly means with great feeling.</template></category>
-<category><pattern>FEELINGS</pattern><template>feelings?  Briefly, feelings means emotional or moral sensitivity (especially in relation to personal principles or dignity).</template></category>
+<!-- <category><pattern>FEELINGS</pattern><template>feelings?  Briefly, feelings means emotional or moral sensitivity (especially in relation to personal principles or dignity).</template></category> -->
 <category><pattern>FEE-TAIL</pattern><template>fee-tail?  Briefly, fee-tail means limit the inheritance of property to a specific class of heirs.</template></category>
 <category><pattern>FEETFIRST</pattern><template>feetfirst?  Briefly, feetfirst means with the feet foremost.</template></category>
 <category><pattern>FEHLING'S SOLUTION</pattern><template>fehling's solution?  Briefly, fehling's solution means a liquid solution of copper sulfate and potassium tartrate and sodium hydroxide that is used to test for sugar in the urine; solution turns reddish when sugar is present.</template></category>
@@ -4909,7 +4909,7 @@
 <category><pattern>FINDING OF FACT</pattern><template>finding of fact?  Briefly, finding of fact means the findings of a jury on issues of fact submitted to it for decision; can be used in formulating a judgment.</template></category>
 <category><pattern>FINDING OF LAW</pattern><template>finding of law?  Briefly, finding of law means a finding as to the applicability of a rule of law to particular facts.</template></category>
 <category><pattern>FINDINGS</pattern><template>findings?  Briefly, findings means a collection of tools and other articles used by an artisan to make jewelry or clothing or shoes.</template></category>
-<category><pattern>FINE</pattern><template>fine?  Briefly, fine means money extracted as a penalty.</template></category>
+<!-- <category><pattern>FINE</pattern><template>fine?  Briefly, fine means money extracted as a penalty.</template></category> -->
 <category><pattern>FINE ART</pattern><template>fine art?  Briefly, fine art means the products of human creativity; works of art collectively.</template></category>
 <category><pattern>FINE ARTS</pattern><template>fine arts?  Briefly, fine arts means the study and creation of visual works of art.</template></category>
 <category><pattern>FINE PRINT</pattern><template>fine print?  Briefly, fine print means the part of a contract that contains reservations and qualifications that are often printed in small type.</template></category>
@@ -5215,7 +5215,7 @@
 <category><pattern>FIRST MATE</pattern><template>first mate?  Briefly, first mate means the officer below the master on a commercial ship.</template></category>
 <category><pattern>FIRST MOMENT</pattern><template>first moment?  Briefly, first moment means the sum of the values of a random variable divided by the number of values.</template></category>
 <category><pattern>FIRST MORTGAGE</pattern><template>first mortgage?  Briefly, first mortgage means a mortgage that has priority over all mortgages and liens except those imposed by law.</template></category>
-<category><pattern>FIRST NAME</pattern><template>first name?  Briefly, first name means the name that precedes the surname.</template></category>
+<!-- <category><pattern>FIRST NAME</pattern><template>first name?  Briefly, first name means the name that precedes the surname.</template></category> -->
 <category><pattern>FIRST OF ALL</pattern><template>first of all?  Briefly, first of all means before anything else.</template></category>
 <category><pattern>FIRST OF MAY</pattern><template>first of may?  Briefly, first of may means observed in the United States to celebrate the coming of spring; observed in Russia in honor of labor.</template></category>
 <category><pattern>FIRST OF OCTOBER ANTIFASCIST RESISTANCE GROUP</pattern><template>first of october antifascist resistance group?  Briefly, first of october antifascist resistance group means an armed wing of the (illegal) Communist Party of Spain; seeks to overthrow the Spanish government and replace it with a Marxist-Leninist regime.</template></category>
