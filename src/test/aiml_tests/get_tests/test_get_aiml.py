@@ -19,6 +19,7 @@ class GetAIMLTests(unittest.TestCase):
         GetAIMLTests.test_client.bot.brain.properties.load_from_text("""
              default-get:unknown
          """)
+        GetAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_var('gettime', "programy.dynamic.variables.datetime.GetTime", None)
 
     def test_unknown_get(self):
         response = GetAIMLTests.test_client.bot.ask_question("test",  "UNKNOWN GET")
@@ -60,4 +61,13 @@ class GetAIMLTests(unittest.TestCase):
         response = GetAIMLTests.test_client.bot.ask_question("test", "VAR UNKNOWN")
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
+
+    #################################################################################################################
+    #
+
+    def test_dynamic_get(self):
+        response = GetAIMLTests.test_client.bot.ask_question("test", "DYNAMIC GET")
+        self.assertIsNotNone(response)
+        self.assertTrue(response.startswith("The time is "))
+
 

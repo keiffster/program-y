@@ -69,19 +69,21 @@ class PatternSetNode(PatternNode):
     def equals(self, bot, client, words, word_no):
         word = words.word(word_no)
 
-        if self.set_is_numeric():
-            return EqualsMatch(word.isnumeric(), word_no, word)
-        elif self.set_is_known(bot):
-            match = self.words_in_set(bot, words, word_no)
-            if match.matched is True:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
-                return match
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] found in set [%s]"%(word, self.set_name))
-                return EqualsMatch(False, word_no)
+        if bot.brain.configuration.dynamics.is_dynamic_set(self._set_name) is True:
+            result = bot.brain.configuration.dynamics.dynamic_set(bot, client, self._set_name, word)
+            return EqualsMatch(result, word_no, word)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No set named [%s] in sets collection"%(self.set_name))
-            return EqualsMatch(False, word_no)
+            if self.set_is_known(bot):
+                match = self.words_in_set(bot, words, word_no)
+                if match.matched is True:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
+                    return match
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] found in set [%s]"%(word, self.set_name))
+                    return EqualsMatch(False, word_no)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No set named [%s] in sets collection"%(self.set_name))
+                return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:

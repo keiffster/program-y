@@ -16,10 +16,11 @@ Programy-Y is fully cross plaform, running on
 
 * Full support for al AIML 2.0 Tags
 * RDF Support through addtriple, deletetriple, select, uniq and uniq
-* List processing with first and rest
-* Advanced learn support with resetlearn and resetlearnf
-* Full OOB Support
+* List processing with First and Rest
+* Advanced learn support including resetlearn and resetlearnf
+* Full Out Of Band Support
 * Full embedded XML/HTML Support
+* Dynamic Sets, Maps and Variables
 
 Program-Y is extremely extensible, you can
 
@@ -27,7 +28,10 @@ Program-Y is extremely extensible, you can
 * Add you own Spelling Checker
 * Support User Authorisation
 * Support User Authentication
-* Add you own Out Out Band (OOB) tags
+* Add your own Out Out Band (OOB) tags
+* Add Dynamic Sets in Python
+* Add Dynamic Maps in Python
+* Add Dynamic Variables in Python
 * Run a variety of clients, including
   * Console
   * REST

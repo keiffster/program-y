@@ -43,4 +43,12 @@ For more information see [url]
         </template>
     </category>
 
+    <category>
+        <pattern>Is <set name="number" /> a number
+        </pattern>
+        <template>
+            Yes <star/> is a number
+        </template>
+    </category>
+
 </aiml>

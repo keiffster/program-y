@@ -18,6 +18,7 @@ class PatternsetAIMLTests(unittest.TestCase):
 
     def setUp(cls):
         PatternsetAIMLTests.test_client = BasicTestClient()
+        PatternsetAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
     def test_patten_set_match(self):
         response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS AMBER")
@@ -58,3 +59,6 @@ class PatternsetAIMLTests(unittest.TestCase):
         response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "SACRAMENTO STATE GREEN IS A NICE COLOUR")
         self.assertEqual(response, "YES Sacramento State green IS A LOVELY COLOUR.")
 
+    def test_inbuilt_set_number(self):
+        response = PatternsetAIMLTests.test_client.bot.ask_question("test",  "Is 666 a number")
+        self.assertEqual(response, "Yes 666 is a number")

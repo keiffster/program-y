@@ -93,6 +93,8 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
 
     def test_number(self):
+        self.bot.brain.configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+
         node = PatternSetNode("NUMBER")
         self.assertIsNotNone(node)
 

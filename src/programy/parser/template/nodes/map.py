@@ -62,7 +62,9 @@ class TemplateMapNode(TemplateNode):
             name = self.name.resolve(bot, clientid).upper()
             var = self.resolve_children(bot, clientid).upper()
 
-            if name in self._internal_maps:
+            if bot.brain.configuration.dynamics.is_dynamic_map(name) is True:
+                value = bot.brain.configuration.dynamics.dynamic_map(bot, clientid, name, var)
+            elif name in self._internal_maps:
                 map = self._internal_maps[name]
                 value = map.map(var)
             else:

@@ -17,6 +17,7 @@ class SraiAIMLTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         SraiAIMLTests.test_client = SraiTestClient()
+        SraiAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
     def test_srai_response(self):
         response = SraiAIMLTests.test_client.bot.ask_question("test", "HELLO")

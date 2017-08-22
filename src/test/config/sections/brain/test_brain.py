@@ -74,6 +74,16 @@ class BrainConfigurationTests(unittest.TestCase):
                   email:
                     classname: programy.utils.oob.email.EmailOutOfBandProcessor
 
+                dynamic:
+                    variables:
+                        gettime: programy.dynamic.variables.datetime.GetTime
+                    sets:
+                        number: programy.dynamic.sets.numeric.IsNumeric
+                        roman:   programy.dynamic.sets.roman.IsRomanNumeral
+                    maps:
+                        romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
+                        dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
+
                 services:
                     REST:
                         classname: programy.utils.services.rest.GenericRESTService
@@ -146,15 +156,25 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(brain_config.security.authorisation)
         self.assertIsNotNone(brain_config.security.authentication)
 
-        self.assertIsNotNone(brain_config.oob)
-        self.assertIsNotNone(brain_config.oob.oobs())
-        self.assertIsNotNone(brain_config.oob.default())
-        self.assertIsNotNone(brain_config.oob.oob("dial"))
-        self.assertIsNotNone(brain_config.oob.oob("email"))
-
         self.assertIsNotNone(brain_config.services)
         self.assertTrue(brain_config.services.exists("REST"))
         self.assertTrue(brain_config.services.exists("Pannous"))
         self.assertTrue(brain_config.services.exists("Pandora"))
         self.assertTrue(brain_config.services.exists("Wikipedia"))
         self.assertFalse(brain_config.services.exists("Other"))
+
+        self.assertIsNotNone(brain_config.oob)
+        self.assertIsNotNone(brain_config.oob.oobs())
+        self.assertIsNotNone(brain_config.oob.default())
+        self.assertIsNotNone(brain_config.oob.oob("dial"))
+        self.assertIsNotNone(brain_config.oob.oob("email"))
+
+        self.assertIsNotNone(brain_config.dynamics)
+        self.assertIsNotNone(brain_config.dynamics.dynamic_sets)
+        self.assertTrue("NUMBER" in brain_config.dynamics.dynamic_sets)
+        self.assertTrue("ROMAN" in brain_config.dynamics.dynamic_sets)
+        self.assertIsNotNone(brain_config.dynamics.dynamic_maps)
+        self.assertTrue("ROMANTODEC" in brain_config.dynamics.dynamic_maps)
+        self.assertTrue("DECTOROMAN" in brain_config.dynamics.dynamic_maps)
+        self.assertIsNotNone(brain_config.dynamics.dynamic_vars)
+        self.assertTrue("GETTIME" in brain_config.dynamics.dynamic_vars)

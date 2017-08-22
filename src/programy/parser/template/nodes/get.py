@@ -70,16 +70,19 @@ class TemplateGetNode(TemplateNode):
                         value = ""
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
-            value = bot.get_conversation(clientid).property(name)
-            if value is None:
-                value = bot.brain.properties.property(name)
+            if bot.brain.configuration.dynamics.is_dynamic_var(name) is True:
+                value = bot.brain.configuration.dynamics.dynamic_var(bot, clientid, name)
+            else:
+                value = bot.get_conversation(clientid).property(name)
                 if value is None:
-                    value = bot.brain.properties.property("default-property")
+                    value = bot.brain.properties.property(name)
                     if value is None:
-                        value = bot.brain.configuration.defaults.default_property
+                        value = bot.brain.properties.property("default-property")
                         if value is None:
-                            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value for default-get defined, empty string returned")
-                            value = ""
+                            value = bot.brain.configuration.defaults.default_property
+                            if value is None:
+                                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value for default-get defined, empty string returned")
+                                value = ""
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
 
         return value

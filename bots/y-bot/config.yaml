@@ -8,13 +8,11 @@ brain:
       allow_learnf_aiml: true
 
     # Defaults
-    # These have not been added to the system yet
     defaults:
       default-get: unknown
       default-property: unknown
       default-map: unknown
       learn-filename: y-bot-learnf.aiml
-    # These have not been added to the system yet
 
     # Nodes
     nodes:
@@ -108,6 +106,16 @@ brain:
         classname: programy.utils.oob.url.URLOutOfBandProcessor
       wifi:
         classname: programy.utils.oob.wifi.WifiOutOfBandProcessor
+
+    dynamic:
+        variables:
+            gettime: programy.dynamic.variables.datetime.GetTime
+        sets:
+            numeric: programy.dynamic.sets.numeric.IsNumeric
+            roman:   programy.dynamic.sets.roman.IsRomanNumeral
+        maps:
+            romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
+            dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
 
 bot:
     license_keys: $BOT_ROOT/config/license.keys

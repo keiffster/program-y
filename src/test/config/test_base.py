@@ -1,7 +1,8 @@
 import unittest
+import os
 
 from programy.config.base import BaseConfigurationData
-import os
+
 class BaseConfigurationDataTests(unittest.TestCase):
 
     def test_sub_bot_root(self):

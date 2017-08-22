@@ -8,13 +8,11 @@ brain:
       allow_learnf_aiml: true
 
     # Defaults
-    # These have not been added to the system yet
     defaults:
       default-get: unknown
       default-property: unknown
       default-map: unknown
       learn-filename: alice2-learnf.aiml
-    # These have not been added to the system yet
 
     # Nodes
     nodes:
