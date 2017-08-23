@@ -17,7 +17,6 @@ import logging
 import wikipedia
 
 from programy.utils.services.service import Service
-from programy.config.sections.brain.service import BrainServiceConfiguration
 
 class WikipediaAPI(object):
 
