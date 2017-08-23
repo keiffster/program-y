@@ -41,7 +41,7 @@ class TemplateNode(object):
 
     def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            output_func("%s{%s}%s" % (tabs, child.to_string(), eol))
+            output_func("{0}{{1}}{2}".format(tabs, child.to_string(), eol))
             self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, bot, clientid):
