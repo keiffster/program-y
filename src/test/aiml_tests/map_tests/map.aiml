@@ -22,7 +22,35 @@ For more information see [url]
 	<category>
 		<pattern>STATIC MAP TEST</pattern>
 		<template>
-		    <map name="XXX">sometihng</map>
+		    <map name="testmap">1</map>
+		</template>
+	</category>
+
+	<category>
+		<pattern>SINGULAR MAP TEST</pattern>
+		<template>
+		    <map name="singular">Twos</map>
+		</template>
+	</category>
+
+	<category>
+		<pattern>PLURAL MAP TEST</pattern>
+		<template>
+		    <map name="plural">Two</map>
+		</template>
+	</category>
+
+	<category>
+		<pattern>SUCCESSOR MAP TEST</pattern>
+		<template>
+		    <map name="successor">666</map>
+		</template>
+	</category>
+
+	<category>
+		<pattern>PREDECESSOR MAP TEST</pattern>
+		<template>
+		    <map name="predecessor">667</map>
 		</template>
 	</category>
 

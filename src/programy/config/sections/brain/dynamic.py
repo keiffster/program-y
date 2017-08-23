@@ -17,7 +17,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.config.base import BaseConfigurationData
-from programy.utils.classes.loader import ClassLoader
 
 class BrainDynamicsConfiguration(BaseConfigurationData):
 
@@ -31,22 +30,13 @@ class BrainDynamicsConfiguration(BaseConfigurationData):
     def dynamic_sets(self):
         return self._dynamic_sets
 
-    def add_dynamic_set(self, name, classname, config_file):
-        self._dynamic_sets[name.upper()] = (ClassLoader.instantiate_class(classname))(config_file)
-
     @property
     def dynamic_maps(self):
         return self._dynamic_maps
 
-    def add_dynamic_map(self, name, classname, config_file):
-        self._dynamic_maps[name.upper()] = (ClassLoader.instantiate_class(classname))(config_file)
-
     @property
     def dynamic_vars(self):
         return self._dynamic_vars
-
-    def add_dynamic_var(self, name, classname, config_file):
-        self._dynamic_vars[name.upper()] = (ClassLoader.instantiate_class(classname))(config_file)
 
     def load_config_section(self, config_file, brain_config, bot_root):
         dynamic_config = config_file.get_section("dynamic", brain_config)
@@ -56,66 +46,26 @@ class BrainDynamicsConfiguration(BaseConfigurationData):
             self.load_dynamic_vars(config_file, dynamic_config)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Config section [dynamic] missing from Brain, using defaults")
-        self.check_default_sets(config_file)
 
     def load_dynamic_sets(self, config_file, dynamic_config):
         sets_config = config_file.get_option(dynamic_config, "sets")
         if sets_config is not None:
             for set in sets_config.keys():
-                dyn_set = sets_config[set]
-                self._dynamic_sets[set.upper()] = (ClassLoader.instantiate_class(dyn_set))(config_file)
-
-    def check_default_sets(self, config_file):
-        if 'NUMBER' not in self._dynamic_sets:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Dynamic set NUMBER not defined, adding default implementation")
-            self._dynamic_sets['NUMBER'] = (ClassLoader.instantiate_class("programy.dynamic.sets.numeric.IsNumeric"))(config_file)
-
-    def is_dynamic_set(self, name):
-        return bool(name.upper() in self._dynamic_sets)
-
-    def dynamic_set(self, bot, clientid, name, value):
-        name = name.upper()
-        if name in self._dynamic_sets:
-            dynamic_set = self._dynamic_sets[name]
-            return dynamic_set.is_member(bot, clientid, value)
-        else:
-            return None
-
-    def is_dynamic_map(self, name):
-        return bool(name.upper() in self._dynamic_maps)
+                dyn_set_class = sets_config[set]
+                self._dynamic_sets[set.upper()] = dyn_set_class
 
     def load_dynamic_maps(self, config_file, dynamic_config):
         maps_config = config_file.get_option(dynamic_config, "maps")
         if maps_config is not None:
             for map in maps_config.keys():
-                dyn_map = maps_config[map]
-                self._dynamic_maps[map.upper()] = (ClassLoader.instantiate_class(dyn_map))(config_file)
-
-    def dynamic_map(self, bot, clientid, name, value):
-        name = name.upper()
-        if name in self._dynamic_maps:
-            dynamic_map = self._dynamic_maps[name]
-            return dynamic_map.map_value(bot, clientid, value)
-        else:
-            return None
-
-    def is_dynamic_var(self, name):
-        return bool(name.upper() in self._dynamic_vars)
+                dyn_map_class = maps_config[map]
+                self._dynamic_maps[map.upper()] = dyn_map_class
 
     def load_dynamic_vars(self, config_file, dynamic_config):
         vars_config = config_file.get_option(dynamic_config, "variables")
         if vars_config is not None:
             for var in vars_config.keys():
-                dyn_var = vars_config[var]
-                self._dynamic_vars[var.upper()] = (ClassLoader.instantiate_class(dyn_var))(config_file)
-
-    def dynamic_var(self, bot, clientid, name, value=None):
-        name = name.upper()
-        if name in self._dynamic_vars:
-            dynamic_var = self._dynamic_vars[name]
-            return dynamic_var.get_value(bot, clientid, value)
-        else:
-            return None
-
+                dyn_var_class = vars_config[var]
+                self._dynamic_vars[var.upper()] = dyn_var_class
 
 

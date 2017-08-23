@@ -14,20 +14,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import ABCMeta, abstractmethod
+import logging
 
-class TemplateMap(object):
-    __metaclass__ = ABCMeta
+from programy.dynamic.maps.map import DynamicMap
 
-    @abstractmethod
-    def get_name(self):
-        """
-        Never Implemented
-        """
+class SuccessorMap(DynamicMap):
 
-    @abstractmethod
-    def map(self, value):
-        """
-        Never Implemented
-        """
+    NAME = "SUCCESSOR"
+
+    def __init__(self, config):
+        DynamicMap.__init__(self, config)
+
+    def map_value(self, bot, clientid, value):
+        try:
+            int_value = int(value)
+            str_value = str(int_value + 1)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SuccessorMap converted %s to %s" % (value, str_value))
+            return str_value
+        except:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("SuccessorMap could not convert %s to integer string" % (value))
+            return ""
+
 

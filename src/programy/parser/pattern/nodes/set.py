@@ -69,8 +69,8 @@ class PatternSetNode(PatternNode):
     def equals(self, bot, client, words, word_no):
         word = words.word(word_no)
 
-        if bot.brain.configuration.dynamics.is_dynamic_set(self._set_name) is True:
-            result = bot.brain.configuration.dynamics.dynamic_set(bot, client, self._set_name, word)
+        if bot.brain.dynamics.is_dynamic_set(self._set_name) is True:
+            result = bot.brain.dynamics.dynamic_set(bot, client, self._set_name, word)
             return EqualsMatch(result, word_no, word)
         else:
             if self.set_is_known(bot):

@@ -16,20 +16,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.maps.map import TemplateMap
+from programy.dynamic.maps.map import DynamicMap
 
-class PredecessorMap(TemplateMap):
+class PredecessorMap(DynamicMap):
 
     NAME = "PREDECESSOR"
 
-    def __init__(self):
-        TemplateMap.__init__(self)
+    def __init__(self, config):
+        DynamicMap.__init__(self, config)
 
-    @staticmethod
-    def get_name():
-        return PredecessorMap.NAME
-
-    def map(self, value):
+    def map_value(self, bot, clientid, value):
         try:
             int_value = int(value)
             str_value = str(int_value - 1)

@@ -62,7 +62,7 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
         self.assertEqual("MOTOR BIKES", context.star(2))
 
     def test_basic_set_number_match(self):
-        self.bot.brain.configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+        self.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
         self.add_pattern_to_graph(pattern="I AM <set>number</set> YEARS OLD", topic="X", that="Y", template="1")
 

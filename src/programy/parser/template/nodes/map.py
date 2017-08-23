@@ -16,10 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.maps.plural import PluralMap
-from programy.parser.template.maps.singular import SingularMap
-from programy.parser.template.maps.predecessor import PredecessorMap
-from programy.parser.template.maps.successor import SuccessorMap
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
@@ -29,10 +25,6 @@ class TemplateMapNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._name = None
-        self._internal_maps = {PluralMap.get_name(): PluralMap(),
-                               SingularMap.get_name(): SingularMap(),
-                               PredecessorMap.get_name(): PredecessorMap(),
-                               SuccessorMap.get_name(): SuccessorMap()}
 
     @property
     def name(self):
@@ -62,11 +54,8 @@ class TemplateMapNode(TemplateNode):
             name = self.name.resolve(bot, clientid).upper()
             var = self.resolve_children(bot, clientid).upper()
 
-            if bot.brain.configuration.dynamics.is_dynamic_map(name) is True:
-                value = bot.brain.configuration.dynamics.dynamic_map(bot, clientid, name, var)
-            elif name in self._internal_maps:
-                map = self._internal_maps[name]
-                value = map.map(var)
+            if bot.brain.dynamics.is_dynamic_map(name) is True:
+                value = bot.brain.dynamics.dynamic_map(bot, clientid, name, var)
             else:
                 if bot.brain.maps.contains(name) is False:
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No map defined for [%s], using default-map as value" % var)

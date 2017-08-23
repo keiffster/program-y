@@ -17,7 +17,7 @@ class StarAIMLTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         StarAIMLTests.test_client = BasicTestClient()
-        StarAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+        StarAIMLTests.test_client.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
     def test_star_first(self):
         response = StarAIMLTests.test_client.bot.ask_question("test",  "SAY HEY")

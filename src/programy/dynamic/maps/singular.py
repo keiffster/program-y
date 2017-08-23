@@ -16,27 +16,23 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.maps.map import TemplateMap
+from programy.dynamic.maps.map import DynamicMap
 
-class SingularMap(TemplateMap):
+class SingularMap(DynamicMap):
 
     NAME = "SINGULAR"
     STATICS = {"MICE": "MOUSE"
               }
 
-    def __init__(self):
-        TemplateMap.__init__(self)
-
-    @staticmethod
-    def get_name():
-        return SingularMap.NAME
+    def __init__(self, config):
+        DynamicMap.__init__(self, config)
 
     def static_map(self, value):
         if value in SingularMap.STATICS:
             return SingularMap.STATICS[value]
         return None
 
-    def map(self, value):
+    def map_value(self, bot, clientid, value):
         singular_value = self.static_map(value)
         if singular_value is None:
             if value.endswith('IES'):

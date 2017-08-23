@@ -57,6 +57,9 @@ class MapCollection(object):
         map_name = name.upper()
         return self._maps[map_name]
 
+    def add_map(self, name, values):
+        self._maps[name.upper()] = values
+
     def contains(self, name):
         map_name = name.upper()
         return bool(map_name in self._maps)

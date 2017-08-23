@@ -16,27 +16,31 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.maps.map import TemplateMap
+from programy.dynamic.maps.map import DynamicMap
 
-class SuccessorMap(TemplateMap):
 
-    NAME = "SUCCESSOR"
+class PluralMap(DynamicMap):
 
-    def __init__(self):
-        TemplateMap.__init__(self)
+    NAME = "PLURAL"
+    STATICS = {"MOUSE": "MICE"
+              }
 
-    @staticmethod
-    def get_name():
-        return SuccessorMap.NAME
+    def __init__(self, config):
+        DynamicMap.__init__(self, config)
 
-    def map(self, value):
-        try:
-            int_value = int(value)
-            str_value = str(int_value + 1)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SuccessorMap converted %s to %s" % (value, str_value))
-            return str_value
-        except:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("SuccessorMap could not convert %s to integer string" % (value))
-            return ""
+    def static_map(self, value):
+        if value in PluralMap.STATICS:
+            return PluralMap.STATICS[value]
+        return None
 
+    def map_value(self, bot, clientid, value):
+        plural_value = self.static_map(value)
+        if plural_value is None:
+            if value.endswith('Y'):
+                plural_value = value[:-1] + 'IES'
+            else:
+                plural_value = value + "S"
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("PluralMap converted %s to %s" % (value, plural_value))
+        return plural_value
 

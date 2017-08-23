@@ -20,7 +20,6 @@ class BasicTestClient(TestClient):
         self.configuration.brain_configuration.files.set_files._extension=".txt"
         self.configuration.brain_configuration.files.map_files._files = os.path.dirname(__file__)+ os.sep + "maps"
         self.configuration.brain_configuration.files.map_files._extension=".txt"
-        self.configuration.brain_configuration.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
 
 class DateTimeAIMLTests(unittest.TestCase):
@@ -29,6 +28,7 @@ class DateTimeAIMLTests(unittest.TestCase):
 
     def setUp(self):
         DateTimeAIMLTests.test_client = BasicTestClient()
+        DateTimeAIMLTests.test_client.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
         self.date = DateFormatter()
 
     def test_season(self):

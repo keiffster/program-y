@@ -70,8 +70,8 @@ class TemplateGetNode(TemplateNode):
                         value = ""
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
-            if bot.brain.configuration.dynamics.is_dynamic_var(name) is True:
-                value = bot.brain.configuration.dynamics.dynamic_var(bot, clientid, name)
+            if bot.brain.dynamics.is_dynamic_var(name) is True:
+                value = bot.brain.dynamics.dynamic_var(bot, clientid, name)
             else:
                 value = bot.get_conversation(clientid).property(name)
                 if value is None:

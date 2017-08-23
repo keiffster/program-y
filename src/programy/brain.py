@@ -32,6 +32,7 @@ from programy.mappings.normal import NormalCollection
 from programy.mappings.person import PersonCollection
 from programy.mappings.properties import PropertiesCollection
 from programy.mappings.sets import SetCollection
+from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.utils.services.service import ServiceFactory
@@ -63,6 +64,8 @@ class Brain(object):
 
         self._default_oob = None
         self._oob = {}
+
+        self._dynamics_collection = DynamicsCollection()
 
         self.load(self._configuration)
 
@@ -134,6 +137,10 @@ class Brain(object):
     def oobs(self):
         return self._oob
 
+    @property
+    def dynamics(self):
+        return self._dynamics_collection
+
     def load_binary(self, brain_configuration):
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
         try:
@@ -189,6 +196,9 @@ class Brain(object):
 
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading oob processors")
         self.load_oob_processors(brain_configuration)
+
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading dynamics sets, maps and vars")
+        self.load_dynamics(brain_configuration)
 
     def _load_denormals(self, brain_configuration):
         if brain_configuration.files.denormal is not None:
@@ -306,6 +316,12 @@ class Brain(object):
 
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("No security configuration defined, running open...")
+
+    def load_dynamics(self, brain_configuration):
+        if brain_configuration.dynamics is not None:
+            self._dynamics_collection.load_from_configuration(brain_configuration.dynamics)
+        else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("No dynamics configuration defined...")
 
     def pre_process_question(self, bot, clientid, question):
         return self.preprocessors.process(bot, clientid, question)

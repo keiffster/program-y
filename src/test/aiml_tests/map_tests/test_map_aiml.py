@@ -19,8 +19,29 @@ class MapAIMLTests(unittest.TestCase):
         MapAIMLTests.test_client.bot.brain.properties.load_from_text("""
              default-get:unknown
          """)
-        MapAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_map('romantodec', "programy.dynamic.maps.roman.MapRomanToDecimal", None)
-        MapAIMLTests.test_client.bot.brain.configuration.dynamics.add_dynamic_map('dectoroman', "programy.dynamic.maps.roman.MapDecimalToRoman", None)
+        MapAIMLTests.test_client.bot.brain.dynamics.add_dynamic_map('romantodec', "programy.dynamic.maps.roman.MapRomanToDecimal", None)
+        MapAIMLTests.test_client.bot.brain.dynamics.add_dynamic_map('dectoroman', "programy.dynamic.maps.roman.MapDecimalToRoman", None)
+        MapAIMLTests.test_client.bot.brain.maps.add_map("testmap", {"1": "One", "2": "Two", "3": "Three"})
+
+    def test_static_map(self):
+        response = MapAIMLTests.test_client.bot.ask_question("test",  "STATIC MAP TEST")
+        self.assertEqual(response, "One")
+
+    def test_plural_map(self):
+        response = MapAIMLTests.test_client.bot.ask_question("test",  "PLURAL MAP TEST")
+        self.assertEqual(response, "TWOS")
+
+    def test_singular_map(self):
+        response = MapAIMLTests.test_client.bot.ask_question("test",  "SINGULAR MAP TEST")
+        self.assertEqual(response, "TWO")
+
+    def test_successor_map(self):
+        response = MapAIMLTests.test_client.bot.ask_question("test",  "SUCCESSOR MAP TEST")
+        self.assertEqual(response, "667")
+
+    def test_predessor_map(self):
+        response = MapAIMLTests.test_client.bot.ask_question("test",  "PREDECESSOR MAP TEST")
+        self.assertEqual(response, "666")
 
     def test_dynamic_map(self):
         response = MapAIMLTests.test_client.bot.ask_question("test",  "DYNAMIC MAP DECIMAL TO ROMAN")
