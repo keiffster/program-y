@@ -372,7 +372,7 @@ class PatternNode(object):
 
     def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
-        output_func("%s%s%s" % (tabs, self.to_string(verbose), eol))
+        output_func("{0}{{1}}{2}".format(tabs, self.to_string(verbose), eol))
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)
