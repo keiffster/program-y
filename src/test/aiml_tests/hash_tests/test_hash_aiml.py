@@ -61,3 +61,12 @@ class HashAIMLTests(unittest.TestCase):
         response = HashAIMLTests.test_client.bot.ask_question("test", "WELL I WAS THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'HASH IS I WAS')
+
+    def test_hash_middle_and_end(self):
+        response = HashAIMLTests.test_client.bot.ask_question("test", "ARE YOU FUN")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'I AM FUNNY')
+
+        response = HashAIMLTests.test_client.bot.ask_question("test", "DO FUN YOU")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'I AM FUNNY')

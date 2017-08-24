@@ -40,7 +40,7 @@
                 <li>I am made up of beautiful Python 3.x code</li>
                 <li>I am written in Python</li>
                 <li>Python 3</li>
-                <li>I consist of over 100,000 lines of Python 3</li>
+                <li>I consist of thousands of lines of Python 3 and XML</li>
             </random>
         </template>
     </category>
@@ -53,9 +53,16 @@
     </category>
 
     <category>
+        <pattern>WHATISXML</pattern>
+        <template>
+            XML stands for eXtensible Markup Language and is a web standard for the definition and exchange of data
+        </template>
+    </category>
+
+    <category>
         <pattern>PYTHONVERSION</pattern>
         <template>
-            Currently I am built using Python 3.5
+            Currently I am built using Python 3.6
         </template>
     </category>
 
