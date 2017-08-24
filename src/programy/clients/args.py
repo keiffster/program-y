@@ -80,7 +80,7 @@ class CommandLineClientArguments(ClientArguments):
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
-        self.parser.add_argument('--bot_type', dest='bot_type', help='texting or talking bot type', type=int)
+        self.parser.add_argument('--bot_type', dest='bot_type', help='texting or talking bot type', type=int, default=0)
         client.add_client_arguments(self.parser)
 
     def parse_args(self):
