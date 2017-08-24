@@ -120,6 +120,7 @@ class BotConfiguration(BaseConfigurationData):
 
     @property
     def default_response(self):
+        #if _default_response is a list we choose a random one
         if type(self._default_response) is list:
             return random.choice(self._default_response)
 

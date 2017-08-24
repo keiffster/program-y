@@ -21,9 +21,11 @@ from programy.config.sections.client.console import ConsoleConfiguration
 
 import pyttsx3
 import speech_recognition as sr
-import webbrowser
 
 class ConsoleBotClient(BotClient):
+
+    TEXT_TYPE_VALUE = 0
+    LISTEN_SPEECH_VALUE = 1
 
     def __init__(self, argument_parser=None):
         BotClient.__init__(self, argument_parser)
@@ -44,66 +46,56 @@ class ConsoleBotClient(BotClient):
         engine.say(response)
         engine.runAndWait()
 
-    def checkSpeech(self, speechRecorded, response):
-        if 'Aurora' in speechRecorded:
-            self.talkSpeech('Alright, I am opening aurora for you now.')
-            webbrowser.open('http://aurora.umanitoba.ca')
-
-        elif 'League of Legends' in speechRecorded:
-            self.talkSpeech('Ok, opening League of Legends.')
-
-        elif 'suspicious partner' in speechRecorded:
-            self.talkSpeech('Ok, opening suspicious partner for you.')
-            webbrowser.open("http://newasiantv.me/drama/suspicious-partner.2605.html")
-
-        else:
-            self.talkSpeech(response)
-
-    def listenSpeech(self):
-
-        if self.arguments.noloop is False:
-            logging.info("Entering conversation loop...")
-            running = True
-            self.display_response(self.bot.get_version_string)
-            self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
-
+    def listen_speech_bot(self):
             record = sr.Recognizer()
-            with sr.Microphone() as source:
-                while running is True:
-                    audio = record.listen(source)
-                    try:
-                        speechRecorded = record.recognize_google(audio)
-                        response = self.bot.ask_question(self.clientid, speechRecorded)
-                        if response is None:
-                            self.talkSpeech(self.bot.default_response)
+            try:
+                with sr.Microphone() as source:
+                    # initialize bot starting message #
+                    if self.arguments.noloop is False:
+                        logging.info("Entering conversation loop...")
+                        running = True
+                        self.display_response(self.bot.get_version_string)
+                        self.display_response(
+                            self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
+
+                    while running is True:
+                        audio = record.listen(source)
+                        try:
+                            speechRecorded = record.recognize_google(audio)
+                            response = self.bot.ask_question(self.clientid, speechRecorded)
+                            if response is None:
+                                self.talkSpeech(self.bot.default_response)
+                                self.log_unknown_response(speechRecorded)
+                            else:
+                                self.talkSpeech(response)
+                                self.log_response(speechRecorded, response)
+                                self.display_response(response)
+
+                        except LookupError as e:
+                            print(e)
+                        except sr.UnknownValueError:
+                            print("Google Speech Recognition could not understand audio")
+                        except sr.RequestError as e:
+                            print("Could not request results from Speech Recognition service; {0}".format(e))
+                        except KeyboardInterrupt:
+                            running = False
+                            self.display_response(self.bot.exit_response)
+                        except Exception as excep:
+                            logging.exception(excep)
+                            logging.error("Oops something bad happened !")
+                            self.display_response(self.bot.default_response)
                             self.log_unknown_response(speechRecorded)
-                        else:
-                            self.checkSpeech(speechRecorded, response)
-                            self.log_response(speechRecorded, response)
-                            self.display_response(response)
-                        # check(speechRecorded)
 
-                    except LookupError as e:
-                        print(e)
-                    except sr.UnknownValueError:
-                        print("Google Speech Recognition could not understand audio")
-                    except sr.RequestError as e:
-                        print("Could not request results from Google Speech Recognition service; {0}".format(e))
-                    except KeyboardInterrupt:
-                        running = False
-                        self.display_response(self.bot.exit_response)
-                    except Exception as excep:
-                        logging.exception(excep)
-                        logging.error("Oops something bad happened !")
-                        self.display_response(self.bot.default_response)
-                        self.log_unknown_response(speechRecorded)
+            # error occured when user has no microphone
+            except OSError:
+                print("No default input devices available.")
+                print("Switching to text type bot only.")
+                print()
+                self.text_type_bot()
 
 
 
-
-
-
-    def run(self):
+    def text_type_bot(self):
         if self.arguments.noloop is False:
             logging.info("Entering conversation loop...")
             running = True
@@ -120,7 +112,6 @@ class ConsoleBotClient(BotClient):
                     else:
                         self.display_response(response)
                         self.log_response(question, response)
-                        self.talkSpeech(response)
 
                 except KeyboardInterrupt:
                     running = False
@@ -131,6 +122,13 @@ class ConsoleBotClient(BotClient):
                     self.display_response(self.bot.default_response)
                     self.log_unknown_response(question)
 
+
+    def run(self):
+        if self.arguments.bot_type is self.TEXT_TYPE_VALUE:
+            self.text_type_bot()
+        elif self.arguments.bot_type is self.LISTEN_SPEECH_VALUE:
+            self.listen_speech_bot()
+
     def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt
         return input_func(ask)
@@ -139,11 +137,8 @@ class ConsoleBotClient(BotClient):
         output_func(response)
 
 if __name__ == '__main__':
-
     def run():
         print("Loading, please wait...")
         console_app = ConsoleBotClient()
-       # console_app.run()
-        console_app.listenSpeech()
-
+        console_app.run()
     run()
