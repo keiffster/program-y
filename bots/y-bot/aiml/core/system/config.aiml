@@ -30,6 +30,7 @@
             </set>
         </template>
     </category>
+
     <category>
         <pattern>XSET DEVICE *</pattern>
         <template>Device is

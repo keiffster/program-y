@@ -1,0 +1,11 @@
+$FILTER_INSULTS, "That isn't very polite.", "Why would you say that?", "Is that really how you feel about me?", "What does that mean?", "I hear what you are saying."
+
+"FILTER INSULT", $FILTER_INSULTS
+
+$FILTER_PROFANITY, "Swearing is like using the horn on your car.", "Swearing injects a direct, succinct emotional component into the discussion.", "Swearing is often cathartic.", "People swear on average 0.3% of the time.", "You're making your point."
+
+"FILTER PROFANITY", $FILTER_PROFANITY
+
+$FILTER_INAPPROPRIATE, "That's not appropriate.", "That's not up my alley.", "You can do better than that.", "That's beyond my capacity.", "How can you inspire yourself?", "Let's talk about your creativity.", "Let's avoid your animal instincts.", "I hope you find a healthy outlet for your fantasies.", "How can you channel that into creative expression?"
+
+"FILTER INAPPROPRIATE", $FILTER_INAPPROPRIATE

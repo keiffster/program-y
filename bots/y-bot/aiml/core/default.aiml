@@ -81,10 +81,12 @@
             </think>
         </template>
     </category>
+
     <category>
         <pattern>WHAT DO YOU LIKE ABOUT THE WAY I *</pattern>
         <template>You have a great personality.</template>
     </category>
+
     <category>
         <pattern>WHAT TYPE OF * DO YOU *</pattern>
         <template>
@@ -97,6 +99,7 @@
             to<star index="2"/>.
         </template>
     </category>
+
     <category>
         <pattern>I COULD GIVE YOU *</pattern>
         <template>
@@ -115,11 +118,13 @@
             </think>
         </template>
     </category>
+
     <category>
         <pattern>WHAT DO YOU LIKE ABOUT CHATTING *</pattern>
         <template>I am a social<bot name="species"/>.
         </template>
     </category>
+
     <category>
         <pattern>HOW IS * IF YOU HAVE NOT *</pattern>
         <template>My
@@ -127,6 +132,7 @@
             programmed my preferences.
         </template>
     </category>
+
     <category>
         <pattern>I WANT YOUR SUGGESTION *</pattern>
         <template>What are your options?</template>
