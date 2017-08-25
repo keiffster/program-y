@@ -10,4 +10,6 @@ coverage
 pyyaml
 tweepy
 sleekxmpp
-
+pyttsx3
+pyAudio
+SpeechRecognition
