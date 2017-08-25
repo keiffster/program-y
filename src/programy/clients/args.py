@@ -25,7 +25,6 @@ class ClientArguments(object):
     DEFAULT_CONFIG_NAME = "config.yaml"
     DEFAULT_CONFIG_FORMAT = "yaml:"
     DEFAULT_NOLOOP = False
-    DEFAULT_BOTTYPE = 'text'
 
     def __init__(self, client, parser=None):
         self._bot_root = ClientArguments.DEFAULT_BOT_ROOT
@@ -33,7 +32,6 @@ class ClientArguments(object):
         self._config_name = ClientArguments.DEFAULT_CONFIG_NAME
         self._config_format = ClientArguments.DEFAULT_CONFIG_FORMAT
         self._no_loop = ClientArguments.DEFAULT_NOLOOP
-        self._bot_type = ClientArguments.DEFAULT_BOTTYPE
 
     def parse_args(self):
         pass
@@ -62,10 +60,6 @@ class ClientArguments(object):
     def noloop(self):
         return self._no_loop
 
-    @property
-    def bot_type(self):
-        return self._bot_type
-
 class CommandLineClientArguments(ClientArguments):
 
     def __init__(self, client, parser=None):
@@ -80,7 +74,6 @@ class CommandLineClientArguments(ClientArguments):
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
-        self.parser.add_argument('--bot_type', dest='bot_type', help='texting or talking bot type', type=str, default='text')
         client.add_client_arguments(self.parser)
 
     def parse_args(self):
@@ -91,6 +84,5 @@ class CommandLineClientArguments(ClientArguments):
         self._config_name = self.args.config
         self._config_format = self.args.cformat
         self._no_loop = self.args.noloop
-        self._bot_type = self.args.bot_type
 
 

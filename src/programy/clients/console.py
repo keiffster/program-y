@@ -43,55 +43,7 @@ class ConsoleBotClient(BotClient):
         engine.say(response)
         engine.runAndWait()
 
-    def listen_speech_bot(self):
-            record = sr.Recognizer()
-            try:
-                with sr.Microphone() as source:
-                    # initialize bot starting message #
-                    if self.arguments.noloop is False:
-                        logging.info("Entering conversation loop...")
-                        running = True
-                        self.display_response(self.bot.get_version_string)
-                        self.display_response(
-                            self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
-
-                    while running is True:
-                        audio = record.listen(source)
-                        try:
-                            speechRecorded = record.recognize_google(audio)
-                            response = self.bot.ask_question(self.clientid, speechRecorded)
-                            if response is None:
-                                self.talkSpeech(self.bot.default_response)
-                                self.log_unknown_response(speechRecorded)
-                            else:
-                                self.talkSpeech(response)
-                                self.log_response(speechRecorded, response)
-                                self.display_response(response)
-
-                        except LookupError as e:
-                            print(e)
-                        except sr.UnknownValueError:
-                            print("Google Speech Recognition could not understand audio")
-                        except sr.RequestError as e:
-                            print("Could not request results from Speech Recognition service; {0}".format(e))
-                        except KeyboardInterrupt:
-                            running = False
-                            self.display_response(self.bot.exit_response)
-                        except Exception as excep:
-                            logging.exception(excep)
-                            logging.error("Oops something bad happened !")
-                            self.display_response(self.bot.default_response)
-                            self.log_unknown_response(speechRecorded)
-
-            # error occured when user has no microphone
-            except OSError:
-                print("\nNo default input devices available.")
-                print("Switching to text type bot only.\n")
-                self.text_type_bot()
-
-
-
-    def text_type_bot(self):
+    def run(self):
         if self.arguments.noloop is False:
             logging.info("Entering conversation loop...")
             running = True
@@ -116,15 +68,6 @@ class ConsoleBotClient(BotClient):
                     logging.error("Oops something bad happened !")
                     self.display_response(self.bot.default_response)
                     self.log_unknown_response(question)
-
-
-    def run(self):
-        if 'text' in self.arguments.bot_type:
-            self.text_type_bot()
-        elif 'talk' in self.arguments.bot_type:
-            self.listen_speech_bot()
-        else:
-            print('No bot type specified')
 
     def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt
