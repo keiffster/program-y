@@ -24,9 +24,6 @@ import speech_recognition as sr
 
 class ConsoleBotClient(BotClient):
 
-    TEXT_TYPE_VALUE = 0
-    LISTEN_SPEECH_VALUE = 1
-
     def __init__(self, argument_parser=None):
         BotClient.__init__(self, argument_parser)
         self.clientid = "Console"
@@ -88,9 +85,8 @@ class ConsoleBotClient(BotClient):
 
             # error occured when user has no microphone
             except OSError:
-                print("No default input devices available.")
-                print("Switching to text type bot only.")
-                print()
+                print("\nNo default input devices available.")
+                print("Switching to text type bot only.\n")
                 self.text_type_bot()
 
 
@@ -108,7 +104,6 @@ class ConsoleBotClient(BotClient):
                     if response is None:
                         self.display_response(self.bot.default_response)
                         self.log_unknown_response(question)
-                        #talk(response)
                     else:
                         self.display_response(response)
                         self.log_response(question, response)
@@ -124,10 +119,12 @@ class ConsoleBotClient(BotClient):
 
 
     def run(self):
-        if self.arguments.bot_type is self.TEXT_TYPE_VALUE:
+        if 'text' in self.arguments.bot_type:
             self.text_type_bot()
-        elif self.arguments.bot_type is self.LISTEN_SPEECH_VALUE:
+        elif 'talk' in self.arguments.bot_type:
             self.listen_speech_bot()
+        else:
+            print('No bot type specified')
 
     def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt
