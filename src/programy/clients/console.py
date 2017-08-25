@@ -34,15 +34,6 @@ class ConsoleBotClient(BotClient):
     def get_client_configuration(self):
         return ConsoleConfiguration()
 
-    def talkSpeech(self, response):
-        engine = pyttsx3.init()
-        voices = engine.getProperty('voices')
-        engine.setProperty('voice', voices[1].id)
-        rate = engine.getProperty('rate')
-        engine.setProperty('rate', rate-50)
-        engine.say(response)
-        engine.runAndWait()
-
     def run(self):
         if self.arguments.noloop is False:
             logging.info("Entering conversation loop...")
