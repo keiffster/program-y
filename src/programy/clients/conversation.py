@@ -6,6 +6,7 @@ from programy.config.sections.client.console import ConsoleConfiguration
 import pyttsx3
 import speech_recognition as sr
 
+
 class ConversationBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
@@ -38,11 +39,12 @@ class ConversationBotClient(BotClient):
                     self.display_response(self.bot.get_version_string)
                     self.display_response(
                         self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
+                    self.talkSpeech('hi how can i help you today')
 
                 while running is True:
                     audio = record.listen(source)
                     try:
-                        speechRecorded = record.recognize_google(audio)
+                        speechRecorded = record.recognize_sphinx(audio)
                         response = self.bot.ask_question(self.clientid, speechRecorded)
                         if response is None:
                             self.talkSpeech(self.bot.default_response)
