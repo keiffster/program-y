@@ -430,7 +430,7 @@ class PatternNode(object):
             tabs = ""
 
         if context.search_time_exceeded() is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_time))
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_timeout))
             return None
 
         if context.search_depth_exceeded(depth) is True:

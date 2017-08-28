@@ -29,17 +29,17 @@ class BrainConfigurationTests(unittest.TestCase):
                 binaries:
                   save_binary: false
                   load_binary: false
-                  binary_filename: $BOT_ROOT/output/y-bot.brain
+                  binary_filename: /tmp/y-bot.brain
                   load_aiml_on_binary_fail: false
-                  dump_to_file: $BOT_ROOT/output/braintree.txt
+                  dump_to_file: /tmp/braintree.txt
             
                 files:
                     aiml:
                         files: $BOT_ROOT/aiml
                         extension: .aiml
                         directories: true
-                        errors: $BOT_ROOT/output/y-bot_errors.txt
-                        duplicates: $BOT_ROOT/output/y-bot_duplicates.txt
+                        errors: /tmp/y-bot_errors.txt
+                        duplicates: /tmp/y-bot_duplicates.txt
                     sets:
                         files: $BOT_ROOT/sets
                         extension: .txt
@@ -120,17 +120,17 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(brain_config.binaries)
         self.assertFalse(brain_config.binaries.save_binary)
         self.assertFalse(brain_config.binaries.load_binary)
-        self.assertEquals("./output/y-bot.brain", brain_config.binaries.binary_filename)
+        self.assertEquals("/tmp/y-bot.brain", brain_config.binaries.binary_filename)
         self.assertFalse(brain_config.binaries.load_aiml_on_binary_fail)
-        self.assertEquals("./output/braintree.txt", brain_config.binaries.dump_to_file)
+        self.assertEquals("/tmp/braintree.txt", brain_config.binaries.dump_to_file)
 
         self.assertIsNotNone(brain_config.files)
         self.assertIsNotNone(brain_config.files.aiml_files)
         self.assertEqual("./aiml", brain_config.files.aiml_files.files)
         self.assertEqual(".aiml", brain_config.files.aiml_files.extension)
         self.assertTrue(brain_config.files.aiml_files.directories)
-        self.assertEqual("./output/y-bot_errors.txt", brain_config.files.aiml_files.errors)
-        self.assertEqual("./output/y-bot_duplicates.txt", brain_config.files.aiml_files.duplicates)
+        self.assertEqual("/tmp/y-bot_errors.txt", brain_config.files.aiml_files.errors)
+        self.assertEqual("/tmp/y-bot_duplicates.txt", brain_config.files.aiml_files.duplicates)
 
         self.assertIsNotNone(brain_config.files.set_files)
         self.assertEqual("./sets", brain_config.files.set_files.files)

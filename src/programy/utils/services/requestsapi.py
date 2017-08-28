@@ -17,5 +17,5 @@ import requests
 
 class RequestsAPI(object):
 
-    def get(url, params):
+    def get(self, url, params):
         return requests.get(url, params=params)

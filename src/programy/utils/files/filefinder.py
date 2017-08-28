@@ -74,15 +74,17 @@ class FileFinder(object):
 
     def get_just_filename_from_filepath(self, filepath):
 
-        last_slash = filepath.rfind(os.sep)
-        if last_slash == -1:
-            last_slash = 0
+        if os.sep in filepath:
+            pathsplits = filepath.split(os.sep)
+            filename_ext = pathsplits[-1]
+        else:
+            filename_ext = filepath
 
-        filename_ext = filepath[last_slash:]
-
-        last_dot = filename_ext.rfind(".")
-
-        filename = filename_ext[:last_dot]
+        if "." in filename_ext:
+            filesplits = filename_ext.split(".")
+            filename = filesplits[0]
+        else:
+            filename = filename_ext
 
         return filename.upper()
 
