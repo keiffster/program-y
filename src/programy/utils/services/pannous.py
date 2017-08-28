@@ -67,6 +67,8 @@ class PannousService(Service):
         self.url = None
         if config.url is None:
             raise Exception("Undefined url parameter")
+        else:
+            self.url = config.url
 
     def ask_question(self, bot, clientid: str, question: str):
 

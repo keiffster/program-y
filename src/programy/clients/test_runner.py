@@ -1,4 +1,3 @@
-import logging
 import csv
 import re
 import datetime
@@ -9,13 +8,18 @@ from programy.config.sections.client.console import ConsoleConfiguration
 
 class TestQuestion(object):
 
-    def __init__(self, question, answers):
+    def __init__(self, question, answers, topic=None, that=None):
         self._question = question
         self._answers = answers
         self._answers_regex = []
+        self._topic = topic
+        self._that = that
         for answer in answers:
             if answer is not None and len(answer) > 0:
-                self._answers_regex.append(re.compile(answer))
+                if answer[0] == "!":
+                    self._answers_regex.append(("-", re.compile(answer)))
+                else:
+                    self._answers_regex.append(("+", re.compile(answer)))
         self._response = None
 
     @property
@@ -50,6 +54,13 @@ class TestQuestion(object):
     def response(self, response):
         self._response = response
 
+    @property
+    def topic(self):
+        return self._topic
+
+    @property
+    def that(self):
+        return self._that
 
 class TestFileFileFinder(FileFinder):
 
@@ -71,6 +82,7 @@ class TestFileFileFinder(FileFinder):
     def add_answers_to_template(self, row, question, templates):
         answers = []
         for answer in row[1:]:
+            print(answer)
             answers.append(self.clean_up_answer(answer))
         templates[question] = answers
 
@@ -91,19 +103,28 @@ class TestFileFileFinder(FileFinder):
             for row in csvreader:
                 if self.empty_row(row) is False:
                     question = row[0]
-                    #print("{", question, "}")
                     if self.is_comment(question) is False:
                         if self.is_template(question) is True:
                             self.add_answers_to_template(row, question, templates)
                         else:
                             answers = []
+                            that = None
+                            topic = None
                             for answer in row[1:]:
                                 answer = answer.strip()
-                                if self.is_template(answer) is True:
-                                    self.add_template_answers(templates, answer, answers)
-                                else:
-                                    answers.append(self.clean_up_answer(answer))
-                            questions.append(TestQuestion(question, answers))
+                                if len(answer) > 0:
+                                    if self.is_template(answer) is True:
+                                        self.add_template_answers(templates, answer, answers)
+                                    else:
+                                        if answer.startswith("\"THAT="):
+                                            thatsplits = self.clean_up_answer(answer).split("=")
+                                            that = thatsplits[1]
+                                        elif answer.startswith("\"TOPIC="):
+                                            topicsplits = self.clean_up_answer(answer).split("=")
+                                            topic = topicsplits[1]
+                                        else:
+                                            answers.append(self.clean_up_answer(answer))
+                            questions.append(TestQuestion(question, answers, topic=topic, that=that))
         return questions
 
 
@@ -143,38 +164,56 @@ class TestRunnerBotClient(BotClient):
         file_finder = TestFileFileFinder()
         if self.test_dir is not None:
             print ("Loading Tests from directory [%s]" % self.test_dir)
-            collection = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
+            questions = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
         else:
-            collection = file_finder.load_single_file_contents(self.test_file)
+            questions = file_finder.load_single_file_contents(self.test_file)
 
         successes = []
         failures = []
         warnings = 0
         start = datetime.datetime.now()
-        for category in collection.keys():
-            for test in collection[category]:
+        for category in questions.keys():
+            for test in questions[category]:
                 test.category = category
+
                 if self.verbose:
                     print(test.question)
+
                 if any((c in '*$_^,') for c in test.question):
                     print ("WARNING: Wildcards in question! [%s]"%test.question)
                     warnings = warnings +1
+
+                if test.topic is not None:
+                    conversation = self.bot.get_conversation(self.clientid)
+                    conversation.set_property("topic", test.topic)
+
+                if test.that is not None:
+                    response = self.bot.ask_question(self.clientid, test.that)
+
                 response = self.bot.ask_question(self.clientid, test.question)
                 success = False
                 test.response = response
+
                 if len(test.answers_regex) == 0:
                     if test.response == "":
-                        success = True
                         break
                 else:
                     for expected_regex in test.answers_regex:
-                        if expected_regex.search(response):
+                        type = expected_regex[0]
+                        expression = expected_regex[1]
+                        match = expression.search(response)
+                        if match is not None and type == "+":
                             success = True
                             break
+                        elif match is None and type == "-":
+                            success = True
+                            break
+
                 if success is True:
                     successes.append(test)
                 else:
                     failures.append(test)
+
         stop = datetime.datetime.now()
         diff = stop-start
         total_tests = len(successes)+len(failures)

@@ -20,7 +20,7 @@
     -->
 
     <category>
-        <pattern>ACCESS_DENIED</pattern>
+        <pattern>ACCESS DENIED</pattern>
         <template>
             Unfortunately you are not authorised to use this system
         </template>
