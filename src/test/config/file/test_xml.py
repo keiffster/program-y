@@ -82,8 +82,11 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 			<load_binary>true</load_binary>
 			<binary_filename>$BOT_ROOT/output/test-y-bot.brain</binary_filename>
 			<load_aiml_on_binary_fail>true</load_aiml_on_binary_fail>
-			<dump_to_file>$BOT_ROOT/output/test-braintree.txt</dump_to_file>
 		</binaries>
+        <braintree>
+              <file>/tmp/braintree.xml</file>
+              <content>xml</content>
+        </braintree>
 		<files>
 			<aiml>
 				<files>$BOT_ROOT/test-aiml</files>

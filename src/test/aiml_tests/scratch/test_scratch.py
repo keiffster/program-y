@@ -24,7 +24,15 @@ class ScratchAIMLTests(unittest.TestCase):
         ScratchAIMLTests.test_client = ScratchTestsClient()
 
     def test_response(self):
-        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "SCRATCH TEST")
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "ARE YOU FRED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'OK')
+        self.assertEqual(response, 'RESULT 1')
+
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "ARE YOU FRED WEST")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'RESULT 2')
+
+        response = ScratchAIMLTests.test_client.bot.ask_question("testif", "ARE YOU WRITTEN IN C#")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'RESULT 3')
 

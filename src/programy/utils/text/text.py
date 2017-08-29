@@ -25,6 +25,14 @@ class TextUtils:
     STRIP_WHITESPACE        = '[\n\t\r+]'
     STRIP_ALL_PUNCTUATION   = r'[:\'";,.?!\(\)\-"]'
 
+    HTML_ESCAPE_TABLE = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&apos;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+
     @staticmethod
     def get_tabs(depth: int, tabs=DEFAULT_TAB_SPACE):
         return tabs * depth
@@ -84,4 +92,8 @@ class TextUtils:
     def tag_from_text(text):
         tag, _ = TextUtils.tag_and_namespace_from_text(text)
         return tag
+
+    @staticmethod
+    def html_escape(text):
+        return "".join(TextUtils.HTML_ESCAPE_TABLE.get(c, c) for c in text)
 

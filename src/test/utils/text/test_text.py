@@ -62,3 +62,9 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEquals(os.sep, TextUtils.replace_path_seperator("/"))
         self.assertEquals(".."+os.sep, TextUtils.replace_path_seperator("../"))
         self.assertEquals("\\", TextUtils.replace_path_seperator("/", "/", "\\"))
+
+    def test_html_escape(self):
+        self.assertEquals("", TextUtils.html_escape(""))
+        self.assertEquals(" ", TextUtils.html_escape(" "))
+        self.assertEquals("&lt;&gt;", TextUtils.html_escape("<>"))
+        self.assertEquals("&lt;regex/&gt;", TextUtils.html_escape("<regex/>"))

@@ -28,6 +28,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
     def __init__(self, wildcard):
         PatternWildCardNode.__init__(self, wildcard)
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<zerormore wildcard="%s">\n' % self.wildcard
+        str += super(PatternZeroOrMoreWildCardNode, self).to_xml(bot, clientid)
+        str += "</zerormore>\n"
+        return str
+
     def is_zero_or_more(self):
         return True
 

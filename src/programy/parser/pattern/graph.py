@@ -235,6 +235,17 @@ class PatternGraph(object):
         self.root.dump("", output_func, eol, verbose)
         output_func("")
 
-    def dump_to_file(self, filename):
-        with open(filename, "w+") as dump_file:
-            self.dump(output_func=dump_file.write, eol="\n")
+    def save_braintree(self, bot, clientid, filename, content):
+        if content == 'txt':
+            with open(filename, "w+") as dump_file:
+                self.dump(output_func=dump_file.write, eol="\n")
+        elif content == 'xml':
+            braintree = '<?xml version="1.0" encoding="UTF-8"?>\n'
+            braintree += '<aiml>\n'
+            braintree += self.root.to_xml(bot, clientid)
+            braintree += '</aiml>\n'
+            with open('/tmp/braintree.xml', "w+") as dump_file:
+                dump_file.write(braintree)
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                "Unknown braintree content type [%s]"%content)

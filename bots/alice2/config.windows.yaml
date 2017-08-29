@@ -25,7 +25,11 @@ brain:
       load_binary: false
       binary_filename: C:\Windows\Temp\alice2.brain
       load_aiml_on_binary_fail: false
-      dump_to_file: C:\Windows\Temp\braintree.txt
+
+    # Braintree
+    braintree:
+      file: C:\Windows\Temp\braintree.xml
+      content: xml
 
     files:
         aiml:

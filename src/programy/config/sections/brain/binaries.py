@@ -27,7 +27,6 @@ class BrainBinariesConfiguration(BaseConfigurationData):
         self._load_binary = False
         self._binary_filename = None
         self._load_aiml_on_binary_fail = False
-        self._dump_to_file = None
 
     @property
     def save_binary(self):
@@ -45,10 +44,6 @@ class BrainBinariesConfiguration(BaseConfigurationData):
     def load_aiml_on_binary_fail(self):
         return self._load_aiml_on_binary_fail
 
-    @property
-    def dump_to_file(self):
-        return self._dump_to_file
-
     def load_config_section(self, file_config, bot_config, bot_root):
         binaries = file_config.get_section("binaries", bot_config)
         if binaries is not None:
@@ -58,8 +53,5 @@ class BrainBinariesConfiguration(BaseConfigurationData):
             if binary_filename is not None:
                self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
             self._load_aiml_on_binary_fail = file_config.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
-            dump_to_file = file_config.get_option(binaries, "dump_to_file", missing_value=None)
-            if dump_to_file is not None:
-                self._dump_to_file = self.sub_bot_root(dump_to_file, bot_root)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'binaries' section missing from bot config, using to defaults")

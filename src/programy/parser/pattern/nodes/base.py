@@ -215,6 +215,11 @@ class PatternNode(object):
 
     ########################################################################
     #
+    def is_regex(self):
+        return False
+
+    ########################################################################
+    #
     def equivalent(self, other):
         return False
 
@@ -283,6 +288,9 @@ class PatternNode(object):
                         # Equivalent node already exists, use this one instead
                         return existing_node
 
+        if new_node.is_regex() is True:
+            return None
+
         if new_node.is_word():
             if new_node.word in self._children_words:
                 existing_node = self._children_words[new_node.word]
@@ -327,6 +335,8 @@ class PatternNode(object):
             elif new_node.is_bot():
                self.children.append(new_node)
                self._bot_properties[new_node.property] = new_node
+            elif new_node.is_regex():
+               self.children.append(new_node)
             else:
                 self.children.insert(0, new_node)
                 if new_node.is_word():
@@ -372,7 +382,8 @@ class PatternNode(object):
 
     def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
-        output_func("{0}{{1}}{2}".format(tabs, self.to_string(verbose), eol))
+        str = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
+        output_func(str)
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)
@@ -394,6 +405,32 @@ class PatternNode(object):
 
         for child in self.children:
             child.dump(tabs+"\t", output_func, eol, verbose)
+
+    def to_xml(self, bot, clientid):
+        str = ""
+
+        for priority in self._priority_words:
+            str += priority.to_xml(bot, clientid)
+
+        if self._0ormore_arrow is not None:
+            str += self._0ormore_arrow.to_xml(bot, clientid)
+        if self._0ormore_hash is not None:
+            str += self._0ormore_hash.to_xml(bot, clientid)
+        if self._1ormore_underline is not None:
+            str += self._1ormore_underline.to_xml(bot, clientid)
+        if self._1ormore_star is not None:
+            str += self._1ormore_star.to_xml(bot, clientid)
+        if self._topic is not None:
+            str += self._topic.to_xml(bot, clientid)
+        if self._that is not None:
+            str += self._that.to_xml(bot, clientid)
+        if self._template is not None:
+            str += self._template.to_xml(bot, clientid)
+
+        for child in self.children:
+            str += child.to_xml(bot, clientid)
+
+        return str
 
     def match_children(self, bot, clientid, children, child_type, words, word_no, context, type, depth):
 

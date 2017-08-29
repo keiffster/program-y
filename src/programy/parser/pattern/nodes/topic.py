@@ -27,6 +27,13 @@ class PatternTopicNode(PatternNode):
     def __init__(self):
         PatternNode.__init__(self)
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<topic>'
+        str += super(PatternTopicNode, self).to_xml(bot, clientid)
+        str += '</topic>\n'
+        return str
+
     def can_add(self, new_node):
         if new_node.is_root():
             raise ParserException("Cannot add root node to topic node")

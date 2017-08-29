@@ -31,7 +31,10 @@ class BrainConfigurationTests(unittest.TestCase):
                   load_binary: false
                   binary_filename: /tmp/y-bot.brain
                   load_aiml_on_binary_fail: false
-                  dump_to_file: /tmp/braintree.txt
+
+                braintree:
+                  file: /tmp/braintree.xml
+                  content: xml
             
                 files:
                     aiml:
@@ -122,7 +125,10 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertFalse(brain_config.binaries.load_binary)
         self.assertEquals("/tmp/y-bot.brain", brain_config.binaries.binary_filename)
         self.assertFalse(brain_config.binaries.load_aiml_on_binary_fail)
-        self.assertEquals("/tmp/braintree.txt", brain_config.binaries.dump_to_file)
+
+        self.assertIsNotNone(brain_config.braintree)
+        self.assertEquals("/tmp/braintree.xml", brain_config.braintree.file)
+        self.assertEquals("xml", brain_config.braintree.content)
 
         self.assertIsNotNone(brain_config.files)
         self.assertIsNotNone(brain_config.files.aiml_files)

@@ -27,7 +27,10 @@ brain:
       load_binary: true
       binary_filename: $BOT_ROOT/output/test-y-bot.brain
       load_aiml_on_binary_fail: true
-      dump_to_file: $BOT_ROOT/output/test-braintree.txt
+
+    braintree:
+      file: /tmp/braintree.xml
+      content: xml
 
     files:
         aiml:

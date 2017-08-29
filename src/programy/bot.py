@@ -237,3 +237,4 @@ class Bot(object):
             conversation.pop_dialog()
 
         return ". ".join([sentence for sentence in answers if sentence is not None])
+

@@ -22,8 +22,8 @@ from programy.config.sections.client.console import ConsoleConfiguration
 class ConsoleBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, argument_parser)
         self.clientid = "Console"
+        BotClient.__init__(self, argument_parser)
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Console")

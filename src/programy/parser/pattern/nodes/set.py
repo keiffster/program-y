@@ -32,6 +32,13 @@ class PatternSetNode(PatternNode):
     def is_set(self):
         return True
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<set name="%s">\n' % self.set_name
+        str += super(PatternSetNode, self).to_xml(bot, clientid)
+        str += "</set>"
+        return str
+
     def equivalent(self, other):
         if other.is_set():
             if self.set_name == other.set_name:

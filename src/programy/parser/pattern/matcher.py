@@ -131,7 +131,8 @@ class MatchContext(object):
                 ( match._matched_node.is_wildcard() or
                   match._matched_node.is_set() or
                   match._matched_node.is_iset() or
-                  match._matched_node.is_bot()):
+                  match._matched_node.is_bot() or
+                  match._matched_node.is_regex()):
                 if count == index:
                     return match.joined_words()
                 count += 1

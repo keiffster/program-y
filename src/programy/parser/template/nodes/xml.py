@@ -16,8 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-
-from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.atttrib import TemplateAttribNode
 from programy.utils.text.text import TextUtils
 
@@ -29,12 +27,17 @@ class TemplateXMLNode(TemplateAttribNode):
         self._name = None
         self._attribs = {}
 
+    def set_attrib(self, attrib_name, attrib_value):
+        self._attribs[attrib_name] = attrib_value
+
     def resolve(self, bot, clientid):
         try:
             xml = "<%s" % self._name
             for attrib_name in self._attribs:
                 attrib_value = self._attribs[attrib_name]
-                xml += ' %s="%s"' % (attrib_name, attrib_value)
+                escaped = TextUtils.html_escape(attrib_value)
+                #TODO We could have nodes here, make sure they are resolved
+                xml += ' %s="%s"' % (attrib_name, escaped)
             xml += ">"
             xml += self.resolve_children_to_string(bot, clientid)
             xml += "</%s>" % self._name
@@ -46,16 +49,15 @@ class TemplateXMLNode(TemplateAttribNode):
     def to_string(self):
         return "XML"
 
-    def set_attrib(self, attrib_name, attrib_value):
-        self._attribs[attrib_name] = attrib_value
-
     def to_xml(self, bot, clientid):
         xml = "<%s"%self._name
         for attrib_name in self._attribs:
             attrib_value = self._attribs[attrib_name]
-            xml += ' %s="%s"'%(attrib_name, attrib_value)
+            escaped = TextUtils.html_escape(attrib_value)
+            xml += ' %s="%s"' % (attrib_name, escaped)
         xml += ">"
-        xml += self.children_to_xml(bot, clientid)
+        child_xml = self.children_to_xml(bot, clientid)
+        xml += child_xml
         xml += "</%s>"%self._name
         return xml
 

@@ -15,45 +15,51 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import re
+
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 
-class PatternBotNode(PatternNode):
 
-    def __init__(self, property):
+class PatternRegexNode(PatternNode):
+
+    def __init__(self, pattern_text):
         PatternNode.__init__(self)
-        self._property = property
-
-    def is_bot(self):
-        return True
+        self._pattern_text = pattern_text
+        self._pattern = re.compile(pattern_text)
 
     @property
-    def property(self):
-        return self._property
+    def pattern(self):
+        return self._pattern
+
+    def is_regex(self):
+        return True
 
     def to_xml(self, bot, clientid):
         str = ""
-        str += '<bot property="%s">\n' % self.property
-        str += super(PatternBotNode, self).to_xml(bot, clientid)
-        str += "</bot>"
+        str += '<regex pattern="%s">'% self._pattern_text
+        str += super(PatternRegexNode, self).to_xml(bot, clientid)
+        str += "</iset>\n"
         return str
 
     def equivalent(self, other):
-        if other.is_bot():
-            if self.property == other.property:
-                return True
+        if other.is_regex():
+            return bool(self.pattern == other.pattern)
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, bot, client, words, word_no):
         word = words.word(word_no)
-        if bot.brain.properties.has_property(self.property):
-            if word == bot.brain.properties.property(self.property):
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Found word [%s] as bot property"%(word))
-                return EqualsMatch(True, word_no, word)
-        return EqualsMatch(False, word_no)
+        result = self.pattern.match(word)
+        if result is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Match word [%s] regex" % (word))
+            return EqualsMatch(True, word_no, word)
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] matched refex" % (word))
+            return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "BOT [%s] property=[%s]" % (self._child_count(verbose), self.property)
+            return "REGEX [%s] pattern=[%s]" % (self._child_count(verbose), self._pattern_text)
         else:
-            return "BOT property=[%s]" % (self.property)
+            return "REGEX pattern=[%s]" % self._pattern_text
+

@@ -44,6 +44,13 @@ class PatternISetNode(PatternNode):
     def iset_name(self):
         return self._iset_name
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<iset words="%s">'% ". ".join(self.words)
+        str += super(PatternISetNode, self).to_xml(bot, clientid)
+        str += "</iset>\n"
+        return str
+
     def is_iset(self):
         return True
 

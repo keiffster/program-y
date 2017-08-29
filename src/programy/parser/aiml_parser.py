@@ -128,11 +128,6 @@ class AIMLParser(object):
         else:
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No AIML files or file defined in configuration to load")
 
-
-        if brain_configuration.binaries.dump_to_file is not None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Dumping AIML Graph as tree to [%s]"%brain_configuration.binaries.dump_to_file)
-            self.pattern_parser.dump_to_file(brain_configuration.binaries.dump_to_file)
-
     def tag_and_namespace_from_text(self, text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml

@@ -31,7 +31,11 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertTrue(configuration.brain_configuration.binaries.load_binary)
         self.assertEqual(configuration.brain_configuration.binaries.binary_filename, "./output/test-y-bot.brain")
         self.assertTrue(configuration.brain_configuration.binaries.load_aiml_on_binary_fail)
-        self.assertEqual(configuration.brain_configuration.binaries.dump_to_file, "./output/test-braintree.txt")
+
+        self.assertIsNotNone(configuration.brain_configuration.braintree)
+
+        self.assertEqual(configuration.brain_configuration.braintree.file, "/tmp/braintree.xml")
+        self.assertEqual(configuration.brain_configuration.braintree.content, "xml")
 
         self.assertIsNotNone(configuration.brain_configuration.files)
 
