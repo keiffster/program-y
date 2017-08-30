@@ -31,8 +31,8 @@ class OOBAIMLTests(unittest.TestCase):
 
     def test_oob_xml_and_content(self):
         response = OOBAIMLTests.test_client.bot.ask_question("test",  "SAY HELLO")
-        self.assertEqual(response, "<?xml version='1.0' encoding='utf8'?>\n<message>HOLA!</message>")
+        self.assertEqual(response, "")
 
     def test_oob_complex(self):
         response = OOBAIMLTests.test_client.bot.ask_question("test",  "FILE BUG REPORT")
-        self.assertEqual(response, "To help the developers blah blah blah <?xml version='1.0' encoding='utf8'?>\n<dialog><title>Would you like to send a bug report?</title> <list><item>Yes</item> <item>No</item></list></dialog>")
+        self.assertEqual(response, "To help the developers blah blah blah")
