@@ -22,7 +22,7 @@ class ConversationBotClient(BotClient):
     def talkSpeech(self, response):
         engine = pyttsx3.init()
         voices = engine.getProperty('voices')
-        engine.setProperty('voice', voices[1].id)
+        #engine.setProperty('voice', voices[1].id) for windows
         rate = engine.getProperty('rate')
         engine.setProperty('rate', rate-50)
         engine.say(response)
@@ -37,10 +37,16 @@ class ConversationBotClient(BotClient):
                     logging.info("Entering conversation loop...")
                     running = True
                     self.display_response(self.bot.get_version_string)
-                    self.display_response(
-                        self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
-                    self.talkSpeech('hi how can i help you today')
 
+                    # caliberate microphone
+                    self.display_response('caliberating microphone...')
+                    record.adjust_for_ambient_noise(source, 2)
+
+                    # show and speak default response
+                    default_response = self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question)
+                    self.display_response(default_response)
+                    self.talkSpeech(default_response)
+                    
                 while running is True:
                     audio = record.listen(source)
                     try:
