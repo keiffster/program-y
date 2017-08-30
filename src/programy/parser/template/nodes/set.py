@@ -80,9 +80,9 @@ class TemplateSetNode(TemplateNode):
     def to_xml(self, bot, clientid):
         xml = "<set"
         if self.local:
-            xml += ' var="%s"' % self.name.resolve(None, None)
+            xml += ' var="%s"' % self.name.resolve(bot, clientid)
         else:
-            xml += ' name="%s"' % self.name.resolve(None, None)
+            xml += ' name="%s"' % self.name.resolve(bot, clientid)
         xml += ">"
         xml += self.children_to_xml(bot, clientid)
         xml += "</set>"

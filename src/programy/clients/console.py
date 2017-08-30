@@ -37,7 +37,6 @@ class ConsoleBotClient(BotClient):
 
     def parse_args(self, arguments, parsed_args):
         arguments.context = parsed_args.context
-        print(arguments.context)
 
     def run(self):
         if self.arguments.noloop is False:

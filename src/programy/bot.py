@@ -221,7 +221,7 @@ class Bot(object):
             if srai is False:
                 self.check_spelling_before(each_sentence)
 
-            response = self.brain.ask_question(self, clientid, each_sentence, srai, brain_context_question)
+            response = self.brain.ask_question(self, clientid, each_sentence, srai=srai, brain_question_context=brain_context_question)
 
             if response is None and srai is False:
                 response = self.check_spelling_and_retry(clientid, each_sentence)

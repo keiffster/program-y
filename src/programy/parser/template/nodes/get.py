@@ -22,7 +22,6 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
-
 class TemplateGetNode(TemplateNode):
 
     def __init__(self):
@@ -59,7 +58,10 @@ class TemplateGetNode(TemplateNode):
         name = self.name.resolve(bot, clientid)
 
         if self.local is True:
-            value = bot.get_conversation(clientid).current_question().property(name)
+            if bot.get_conversation(clientid).has_current_question():
+                value = bot.get_conversation(clientid).current_question().property(name)
+            else:
+                value = None
             if value is None:
                 if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No local var for %s, default-get used", name)
                 value = bot.brain.properties.property("default-get")
