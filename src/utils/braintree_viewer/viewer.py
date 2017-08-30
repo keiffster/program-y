@@ -9,7 +9,7 @@ except ImportError:
 
 import xml.etree.ElementTree as ET
 import sys
-
+from operator import attrgetter
 
 def autoscroll(sbar, first, last):
     """Hide and show scrollbar as needed."""
@@ -146,8 +146,8 @@ class XML_Viewer(Frame):
                 for line in text.splitlines():
                     self._treeview.insert(item, END, text=line)
 
-        #child_nodes = sorted(list(node), key=attrgetter('tag'))
-        for child_node in node:
+        sorted_nodes = sorted(list(node), key=attrgetter('tag'))
+        for child_node in sorted_nodes:
             self._walk_xml(child_node, depth + 1, parent=item)
 
         if node.tail:
