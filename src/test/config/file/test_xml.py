@@ -80,7 +80,7 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 		<binaries>
 			<save_binary>true</save_binary>
 			<load_binary>true</load_binary>
-			<binary_filename>$BOT_ROOT/output/test-y-bot.brain</binary_filename>
+			<binary_filename>/tmp/y-bot.brain</binary_filename>
 			<load_aiml_on_binary_fail>true</load_aiml_on_binary_fail>
 		</binaries>
         <braintree>
@@ -92,8 +92,9 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 				<files>$BOT_ROOT/test-aiml</files>
 				<extension>.test-aiml</extension>
 				<directories>true</directories>
-				<errors>$BOT_ROOT/output/test-y-bot_errors.txt</errors>
-				<duplicates>$BOT_ROOT/output/test-y-bot_duplicates.txt</duplicates>
+				<errors>/tmp/y-bot_errors.txt</errors>
+				<duplicates>/tmp/y-bot_duplicates.txt</duplicates>
+				<conversation>/tmp/y-bot_conversation.txt</conversation>
 			</aiml>
 			<sets>
 				<files>$BOT_ROOT/test-sets</files>

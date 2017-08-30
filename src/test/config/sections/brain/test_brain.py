@@ -43,6 +43,7 @@ class BrainConfigurationTests(unittest.TestCase):
                         directories: true
                         errors: /tmp/y-bot_errors.txt
                         duplicates: /tmp/y-bot_duplicates.txt
+                        conversation: /tmp/y-bot_conversation.txt
                     sets:
                         files: $BOT_ROOT/sets
                         extension: .txt
@@ -137,6 +138,7 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertTrue(brain_config.files.aiml_files.directories)
         self.assertEqual("/tmp/y-bot_errors.txt", brain_config.files.aiml_files.errors)
         self.assertEqual("/tmp/y-bot_duplicates.txt", brain_config.files.aiml_files.duplicates)
+        self.assertEqual("/tmp/y-bot_conversation.txt", brain_config.files.aiml_files.conversation)
 
         self.assertIsNotNone(brain_config.files.set_files)
         self.assertEqual("./sets", brain_config.files.set_files.files)

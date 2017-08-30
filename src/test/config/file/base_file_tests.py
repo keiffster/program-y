@@ -29,7 +29,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertTrue(configuration.brain_configuration.binaries.save_binary)
         self.assertTrue(configuration.brain_configuration.binaries.load_binary)
-        self.assertEqual(configuration.brain_configuration.binaries.binary_filename, "./output/test-y-bot.brain")
+        self.assertEqual(configuration.brain_configuration.binaries.binary_filename, "/tmp/y-bot.brain")
         self.assertTrue(configuration.brain_configuration.binaries.load_aiml_on_binary_fail)
 
         self.assertIsNotNone(configuration.brain_configuration.braintree)
@@ -44,8 +44,9 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertIsNone(configuration.brain_configuration.files.aiml_files.file)
         self.assertEqual(configuration.brain_configuration.files.aiml_files.extension, ".test-aiml")
         self.assertTrue(configuration.brain_configuration.files.aiml_files.directories)
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.errors, "./output/test-y-bot_errors.txt")
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.duplicates, "./output/test-y-bot_duplicates.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.errors, "/tmp/y-bot_errors.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.duplicates, "/tmp/y-bot_duplicates.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.conversation, "/tmp/y-bot_conversation.txt")
 
         self.assertIsNotNone(configuration.brain_configuration.files.set_files)
         self.assertEqual(configuration.brain_configuration.files.set_files.files, "./test-sets")

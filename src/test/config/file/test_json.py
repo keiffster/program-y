@@ -80,7 +80,7 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
 		"binaries": {
 			"save_binary": true,
 			"load_binary": true,
-			"binary_filename": "$BOT_ROOT/output/test-y-bot.brain",
+			"binary_filename": "/tmp/y-bot.brain",
 			"load_aiml_on_binary_fail": true
 		},
         "braintree": {
@@ -92,8 +92,9 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
 				"files": "$BOT_ROOT/test-aiml",
 				"extension": ".test-aiml",
 				"directories": true,
-				"errors": "$BOT_ROOT/output/test-y-bot_errors.txt",
-				"duplicates": "$BOT_ROOT/output/test-y-bot_duplicates.txt"
+				"errors": "/tmp/y-bot_errors.txt",
+				"duplicates": "/tmp/y-bot_duplicates.txt",
+				"conversation": "/tmp/y-bot_conversation.txt"
 			},
 			"sets": {
 				"files": "$BOT_ROOT/test-sets",

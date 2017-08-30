@@ -38,6 +38,7 @@ brain:
             directories: true
             errors: /tmp/y-bot_errors.txt
             duplicates: /tmp/y-bot_duplicates.txt
+            conversation: /tmp/y-bot-conversation.txt
         sets:
             files: $BOT_ROOT/sets
             extension: .txt

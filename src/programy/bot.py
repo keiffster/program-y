@@ -253,4 +253,15 @@ class Bot(object):
         if bot_question_context is not None:
             bot_question_context.final_response = response
 
+        self.log_question_and_answer(clientid, text, response )
+
         return response
+
+    def log_question_and_answer(self, clientid, question, answer):
+
+        filename = self.brain.configuration.files.aiml_files.conversation
+        if filename is not None:
+            with open(filename, "w+") as file:
+                timestamp = "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
+                output = "%s - %s - Question[%s] - Response[%s]\n"%(timestamp, clientid, question, answer)
+                file.write(output)

@@ -47,6 +47,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
 class XmppBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
+        self.clientid = "xmpp"
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self, env='xmpp'):

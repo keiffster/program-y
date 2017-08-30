@@ -7,6 +7,7 @@ from programy.config.sections.client.webchat import WebChatConfiguration
 class WebChatBotClient(BotClient):
 
     def __init__(self):
+        self.clientid = "WebChat"
         BotClient.__init__(self)
 
     def set_environment(self):
