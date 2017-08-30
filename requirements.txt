@@ -13,3 +13,4 @@ sleekxmpp
 pyttsx3
 pyAudio
 SpeechRecognition
+pocketsphinx
