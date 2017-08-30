@@ -18,6 +18,7 @@ import logging
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.console import ConsoleConfiguration
+from programy.context import BotQuestionContext
 
 class ConsoleBotClient(BotClient):
 
@@ -31,6 +32,13 @@ class ConsoleBotClient(BotClient):
     def get_client_configuration(self):
         return ConsoleConfiguration()
 
+    def add_client_arguments(self, parser):
+        parser.add_argument('--context', dest='context', action='store_true', help='displays additional conversation context')
+
+    def parse_args(self, arguments, parsed_args):
+        arguments.context = parsed_args.context
+        print(arguments.context)
+
     def run(self):
         if self.arguments.noloop is False:
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
@@ -40,13 +48,24 @@ class ConsoleBotClient(BotClient):
             while running is True:
                 try:
                     question = self.get_question()
-                    response = self.bot.ask_question(self.clientid, question)
+
+                    context = None
+                    if self.arguments.context is True:
+                        context = BotQuestionContext()
+
+                    response = self.bot.ask_question(self.clientid, question, bot_question_context=context)
                     if response is None:
                         self.display_response(self.bot.default_response)
                         self.log_unknown_response(question)
+
                     else:
                         self.display_response(response)
+
+                        if context is not None:
+                            context.display(output_func=print)
+
                         self.log_response(question, response)
+
                 except KeyboardInterrupt:
                     running = False
                     self.display_response(self.bot.exit_response)

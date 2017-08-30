@@ -1,11 +1,12 @@
 class MockArguments(object):
 
-    def __init__(self, bot_root = ".", logging=None, config=None, cformat="yaml", noloop = False ):
+    def __init__(self, bot_root = ".", logging=None, config=None, cformat="yaml", noloop = False, context=None ):
         self.bot_root = bot_root
         self.logging = logging
         self.config = config
         self.cformat = cformat
         self.noloop = noloop
+        self.context = context
 
 class MockArgumentParser(object):
 

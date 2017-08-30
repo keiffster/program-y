@@ -1,11 +1,15 @@
 try:
+    from Tkinter import Tk
     from ttk import Treeview, Scrollbar, Frame
     from Tkconstants import HORIZONTAL, VERTICAL, N, S, E, W, END, BOTH, YES
 except ImportError:
+    from tkinter import Tk
     from tkinter.ttk import Treeview, Scrollbar, Frame
     from tkinter.constants import HORIZONTAL, VERTICAL, N, S, E, W, END, BOTH, YES
 
 import xml.etree.ElementTree as ET
+import sys
+
 
 def autoscroll(sbar, first, last):
     """Hide and show scrollbar as needed."""
@@ -154,13 +158,15 @@ class XML_Viewer(Frame):
 
 
 if __name__ == "__main__":
-    try:
-        from Tkinter import Tk
-    except ImportError:
-        from tkinter import Tk
+
+    if len(sys.argv) != 2 or sys.argv[1] is None or sys.argv[1] == "":
+        print("No xml file name specified!")
+        exit(0)
+
+    filename = sys.argv[1]
 
     root = Tk()
-    with open("/tmp/braintree.xml", "r+") as xml_file:
+    with open(filename, "r+") as xml_file:
         xml = xml_file.read()
     XML_Viewer(root, xml, heading_text="Braintree").pack(fill=BOTH, expand=YES)
     root.mainloop()

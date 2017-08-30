@@ -33,7 +33,7 @@ class ClientArguments(object):
         self._config_format = ClientArguments.DEFAULT_CONFIG_FORMAT
         self._no_loop = ClientArguments.DEFAULT_NOLOOP
 
-    def parse_args(self):
+    def parse_args(self, client):
         pass
 
     @property
@@ -77,7 +77,7 @@ class CommandLineClientArguments(ClientArguments):
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
         client.add_client_arguments(self.parser)
 
-    def parse_args(self):
+    def parse_args(self, client):
         self.args = self.parser.parse_args()
 
         self._bot_root = self.args.bot_root
@@ -85,4 +85,6 @@ class CommandLineClientArguments(ClientArguments):
         self._config_name = self.args.config
         self._config_format = self.args.cformat
         self._no_loop = self.args.noloop
+        client.parse_args(self, self.args)
+
 

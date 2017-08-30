@@ -173,9 +173,14 @@ class Bot(object):
             return response
         return None
 
-    def ask_question(self, clientid: str, text: str, srai=False):
+    def ask_question(self, clientid: str, text: str, srai=False, bot_question_context=None):
 
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Question (%s): %s", clientid, text)
+
+        if bot_question_context is not None:
+            bot_question_context.clientid = clientid
+            bot_question_context.srai = srai
+            bot_question_context.raw_question = text
 
         if srai is False:
             pre_processed = self.brain.pre_process_question(self, clientid, text)
@@ -185,6 +190,9 @@ class Bot(object):
 
         if len(pre_processed) == 0:
             pre_processed = self._configuration.empty_string
+
+        if bot_question_context is not None:
+            bot_question_context.preprocessed_question = pre_processed
 
         conversation = self.get_conversation(clientid)
 
@@ -206,10 +214,14 @@ class Bot(object):
 
             self.check_max_timeout()
 
+            brain_context_question = None
+            if bot_question_context is not None:
+                brain_context_question = bot_question_context.next_brain_question_context()
+
             if srai is False:
                 self.check_spelling_before(each_sentence)
 
-            response = self.brain.ask_question(self, clientid, each_sentence)
+            response = self.brain.ask_question(self, clientid, each_sentence, srai, brain_context_question)
 
             if response is None and srai is False:
                 response = self.check_spelling_and_retry(clientid, each_sentence)
@@ -236,5 +248,9 @@ class Bot(object):
         if srai is True:
             conversation.pop_dialog()
 
-        return ". ".join([sentence for sentence in answers if sentence is not None])
+        response = ". ".join([sentence for sentence in answers if sentence is not None])
 
+        if bot_question_context is not None:
+            bot_question_context.final_response = response
+
+        return response

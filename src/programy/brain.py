@@ -336,59 +336,6 @@ class Brain(object):
         that_pattern = that_pattern.strip()
         return that_pattern
 
-    def ask_question(self, bot, clientid, sentence) -> str:
-
-        if self.authentication is not None:
-            if self.authentication.authenticate(clientid) is False:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("[%s] failed authentication!")
-                return self.authentication.configuration.denied_srai
-
-        conversation = bot.get_conversation(clientid)
-
-        topic_pattern = conversation.property("topic")
-        if topic_pattern is None:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No Topic pattern default to [*]")
-            topic_pattern = "*"
-        else:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Topic pattern = [%s]", topic_pattern)
-
-        try:
-            that_question = conversation.previous_nth_question(1)
-            that_sentence = that_question.current_sentence()
-
-            # If the last response was valid, i.e not none and not empty string, then use
-            # that as the that_pattern, otherwise we default to '*' as pattern
-            if that_sentence.response is not None and that_sentence.response != '':
-                that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
-                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern = [%s]", that_pattern)
-            else:
-                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern, no response, default to [*]")
-                that_pattern = "*"
-
-        except Exception:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No That pattern default to [*]")
-            that_pattern = "*"
-
-        match_context = self._aiml_parser.match_sentence(bot, clientid,
-                                                         sentence,
-                                                         topic_pattern=topic_pattern,
-                                                         that_pattern=that_pattern)
-
-        if match_context is not None:
-            template_node = match_context.template_node()
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
-            response = template_node.template.resolve(bot, clientid)
-
-            if "<oob>" in response:
-                response, oob = self.strip_oob(response)
-                if oob is not None:
-                    oob_response = self.process_oob(bot, clientid, oob)
-                    response = response + " " + oob_response
-
-            return response
-
-        return None
-
     def load_oob_processors(self, brain_configuration):
         if brain_configuration.oob is not None:
             if brain_configuration.oob.default() is not None:
@@ -440,3 +387,80 @@ class Brain(object):
 
     def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")
+
+    def ask_question(self, bot, clientid, sentence, srai=False, brain_question_context=None):
+
+        if brain_question_context is not None:
+            brain_question_context.clientid = clientid
+            brain_question_context.srai = srai
+            brain_question_context.sentence = sentence
+
+        if self.authentication is not None:
+            if self.authentication.authenticate(clientid) is False:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("[%s] failed authentication!")
+                return self.authentication.configuration.denied_srai
+
+        conversation = bot.get_conversation(clientid)
+
+        topic_pattern = conversation.property("topic")
+        if topic_pattern is None:
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No Topic pattern default to [*]")
+            topic_pattern = "*"
+        else:
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Topic pattern = [%s]", topic_pattern)
+
+        if brain_question_context is not None:
+            brain_question_context.topic = topic_pattern
+
+        try:
+            that_question = conversation.previous_nth_question(1)
+            that_sentence = that_question.current_sentence()
+
+            # If the last response was valid, i.e not none and not empty string, then use
+            # that as the that_pattern, otherwise we default to '*' as pattern
+            if that_sentence.response is not None and that_sentence.response != '':
+                that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
+                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern = [%s]", that_pattern)
+            else:
+                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("That pattern, no response, default to [*]")
+                that_pattern = "*"
+
+        except Exception:
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No That pattern default to [*]")
+            that_pattern = "*"
+
+        if brain_question_context is not None:
+            brain_question_context.that = that_pattern
+
+        match_context = self._aiml_parser.match_sentence(bot, clientid,
+                                                         sentence,
+                                                         topic_pattern=topic_pattern,
+                                                         that_pattern=that_pattern)
+
+        if match_context is not None:
+
+            if brain_question_context is not None:
+                brain_question_context.match_context = match_context
+
+            template_node = match_context.template_node()
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+            response = template_node.template.resolve(bot, clientid)
+
+            if brain_question_context is not None:
+                brain_question_context.raw_response = response
+
+            if "<oob>" in response:
+                response, oob = self.strip_oob(response)
+                if oob is not None:
+                    oob_response = self.process_oob(bot, clientid, oob)
+
+                    if brain_question_context is not None:
+                        brain_question_context.raw_response = response
+                        brain_question_context.oob_response = oob_response
+
+                    response = response + " " + oob_response
+
+            return response
+
+        return None
+

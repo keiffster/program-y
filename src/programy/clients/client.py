@@ -53,9 +53,13 @@ class BotClient(object):
         # Nothing to add
         pass
 
+    def parse_args(self, arguments, parsed_args):
+        # Nothing to add
+        pass
+
     def parse_arguments(self, argument_parser):
         client_args = CommandLineClientArguments(self, parser=argument_parser)
-        client_args.parse_args()
+        client_args.parse_args(self)
         return client_args
 
     def initiate_logging(self, arguments):
@@ -96,7 +100,7 @@ class BotClient(object):
         pass
 
     def log_unknown_response(self, question):
-        pass
+        return
 
     def log_response(self, question, answer):
-        pass
+        return
