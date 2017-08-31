@@ -65,6 +65,8 @@ class Brain(object):
         self._default_oob = None
         self._oob = {}
 
+        self._regex_templates = {}
+
         self._dynamics_collection = DynamicsCollection()
 
         self.load(self._configuration)
@@ -138,6 +140,10 @@ class Brain(object):
         return self._oob
 
     @property
+    def regex_templates(self):
+        return self._regex_templates
+
+    @property
     def dynamics(self):
         return self._dynamics_collection
 
@@ -196,6 +202,9 @@ class Brain(object):
 
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading oob processors")
         self.load_oob_processors(brain_configuration)
+
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading regex templates")
+        self.load_regex_templates(brain_configuration)
 
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading dynamics sets, maps and vars")
         self.load_dynamics(brain_configuration)
@@ -353,6 +362,26 @@ class Brain(object):
                     self._oob[oob_name] = classobject()
                 except Exception as excep:
                     logging.exception(excep)
+
+    def load_regex_templates(self, brain_configuration):
+        if brain_configuration.files.regex_templates is not None:
+            collection = PropertiesCollection ()
+            total = collection.load_from_filename(brain_configuration.files.regex_templates)
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d regex templates", total)
+
+            for pair in collection.pairs:
+                name = pair[0]
+                pattern = pair[1]
+                try:
+                    self._regex_templates[name] = re.compile(pattern)
+                except Exception:
+                    if logging.getLogger().isEnabledFor(logging.INFO): logging.error("Invalid regex template [%s]"%pattern)
+
+    def regex_template(self, name):
+        if name in self._regex_templates:
+            return self._regex_templates[name]
+        else:
+            return None
 
     def strip_oob(self, response):
         m = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")

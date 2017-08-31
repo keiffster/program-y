@@ -19,7 +19,6 @@ import logging
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.parser.pattern.factory import PatternNodeFactory
-from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
@@ -70,11 +69,20 @@ class PatternGraph(object):
         if self._pattern_factory.exists(node_name) is False:
             raise ParserException ("Unknown node name [%s]"%node_name)
 
-        node_instance = self._pattern_factory.new_node_class(node_name)
-        if 'name' in element.attrib:
-            return node_instance(element.attrib['name'])
-        else:
-            return node_instance(TextUtils.strip_whitespace(element.text))
+        text = None
+        if element.text is not None:
+            text = TextUtils.strip_whitespace(element.text)
+
+        node_class_instance = self._pattern_factory.new_node_class(node_name)
+        node_instance = node_class_instance(element.attrib, text)
+
+        return node_instance
+
+
+        #if 'name' in element.attrib:
+        #    return node_instance(element.attrib['name'])
+        #else:
+        #    return node_instance(TextUtils.strip_whitespace(element.text))
 
     def _parse_text(self, pattern_text, current_node):
 

@@ -61,6 +61,7 @@ class BrainConfigurationTests(unittest.TestCase):
                     triples: $BOT_ROOT/config/triples.txt
                     preprocessors: $BOT_ROOT/config/preprocessors.conf
                     postprocessors: $BOT_ROOT/config/postprocessors.conf
+                    regex_templates: $BOT_ROOT/config/regex-templates.txt
             
                 security:
                     authentication:
@@ -159,6 +160,7 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertEqual(brain_config.files.triples, "./config/triples.txt")
         self.assertEqual(brain_config.files.preprocessors, "./config/preprocessors.conf")
         self.assertEqual(brain_config.files.postprocessors, "./config/postprocessors.conf")
+        self.assertEqual(brain_config.files.regex_templates, "./config/regex-templates.txt")
 
         self.assertIsNotNone(brain_config.security)
         self.assertIsNotNone(brain_config.security.authorisation)

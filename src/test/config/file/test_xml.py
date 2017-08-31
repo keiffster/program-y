@@ -117,6 +117,7 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 			<triples>$BOT_ROOT/config/test-triples.txt</triples>
 			<preprocessors>$BOT_ROOT/config/test-preprocessors.conf</preprocessors>
 			<postprocessors>$BOT_ROOT/config/test-postprocessors.conf</postprocessors>
+			<regex_templates>$BOT_ROOT/config/regex-templates.txt</regex_templates>
 		</files>
 		<services>
 			<REST>

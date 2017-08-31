@@ -18,15 +18,24 @@ import logging
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
+from programy.parser.exceptions import ParserException
 
 
 class PatternISetNode(PatternNode):
 
     iset_count = 1
 
-    def __init__(self, words):
+    def __init__(self, attribs, text):
         PatternNode.__init__(self)
         self._words = []
+
+        if 'words' in attribs:
+            words = attribs['words'].upper()
+        elif len(text) > 0:
+            words = text.upper()
+        else:
+            raise ParserException ("Invalid iset node, no words specified as attribute or text")
+
         self._parse_words(words)
         self._iset_name = "iset_%d"%(PatternISetNode.iset_count)
         PatternISetNode.iset_count += 1

@@ -59,6 +59,7 @@ brain:
             directories: false
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
+        regex_templates: $BOT_ROOT/config/regex-templates.txt
 
     services:
         REST:

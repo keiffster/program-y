@@ -17,12 +17,20 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
+from programy.parser.exceptions import ParserException
 
 class PatternBotNode(PatternNode):
 
-    def __init__(self, property):
+    def __init__(self, attribs, text):
         PatternNode.__init__(self)
-        self._property = property
+        if 'name' in attribs:
+            self._property = attribs['name']
+        elif 'property' in attribs:
+            self._property = attribs['property']
+        elif len(text) > 0:
+            self._property = text
+        else:
+            raise ParserException ("Invalid bot node, neither name or property specified as attribute or text")
 
     def is_bot(self):
         return True

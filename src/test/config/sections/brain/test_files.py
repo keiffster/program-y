@@ -36,6 +36,7 @@ class BrainFilesConfigurationTests(unittest.TestCase):
                 triples: $BOT_ROOT/config/triples.txt
                 preprocessors: $BOT_ROOT/config/preprocessors.conf
                 postprocessors: $BOT_ROOT/config/postprocessors.conf
+                regex_templates: $BOT_ROOT/config/regex-templates.txt
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -70,3 +71,4 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         self.assertEqual(files_config.triples, "./config/triples.txt")
         self.assertEqual(files_config.preprocessors, "./config/preprocessors.conf")
         self.assertEqual(files_config.postprocessors, "./config/postprocessors.conf")
+        self.assertEqual(files_config.regex_templates, "./config/regex-templates.txt")

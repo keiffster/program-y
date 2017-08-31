@@ -69,6 +69,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(configuration.brain_configuration.files.triples, "./config/test-triples.txt")
         self.assertEqual(configuration.brain_configuration.files.preprocessors, "./config/test-preprocessors.conf")
         self.assertEqual(configuration.brain_configuration.files.postprocessors, "./config/test-postprocessors.conf")
+        self.assertEqual(configuration.brain_configuration.files.regex_templates, "./config/regex-templates.txt")
 
         self.assertIsNotNone(configuration.brain_configuration.services)
 

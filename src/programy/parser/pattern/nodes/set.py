@@ -18,12 +18,18 @@ import logging
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
+from programy.parser.exceptions import ParserException
 
 class PatternSetNode(PatternNode):
 
-    def __init__(self, name):
+    def __init__(self, attribs, text):
         PatternNode.__init__(self)
-        self._set_name = name.upper()
+        if 'name' in attribs:
+            self._set_name = attribs['name'].upper()
+        elif len(text) > 0:
+            self._set_name = text.upper()
+        else:
+            raise ParserException ("Invalid set node, no name specified as attribute or text")
 
     @property
     def set_name(self):

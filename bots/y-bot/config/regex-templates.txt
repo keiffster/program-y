@@ -1,0 +1,2 @@
+anything:^.*$
+legion:^LEGION$

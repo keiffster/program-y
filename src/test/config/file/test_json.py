@@ -116,7 +116,8 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
 			"properties": "$BOT_ROOT/config/test-properties.txt",
 			"triples": "$BOT_ROOT/config/test-triples.txt",
 			"preprocessors": "$BOT_ROOT/config/test-preprocessors.conf",
-			"postprocessors": "$BOT_ROOT/config/test-postprocessors.conf"
+			"postprocessors": "$BOT_ROOT/config/test-postprocessors.conf",
+			"regex_templates": "$BOT_ROOT/config/regex-templates.txt"
 		},
 		"services": {
 			"REST": {

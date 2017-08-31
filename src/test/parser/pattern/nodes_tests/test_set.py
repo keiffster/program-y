@@ -3,8 +3,29 @@ from test.parser.pattern.base import PatternTestBaseClass
 from programy.parser.pattern.nodes.set import PatternSetNode
 from programy.dialog import Sentence
 from programy.mappings.sets import SetLoader
+from programy.parser.exceptions import ParserException
 
 class PatternSetNodeTests(PatternTestBaseClass):
+
+    def test_init_with_text(self):
+        node = PatternSetNode({}, "test1")
+        self.assertIsNotNone(node)
+        self.assertEqual("TEST1", node.set_name)
+
+    def test_init_with_attribs(self):
+        node = PatternSetNode({"name": "test1"}, "")
+        self.assertIsNotNone(node)
+        self.assertEqual("TEST1", node.set_name)
+
+    def test_init_with_invalid_attribs(self):
+        with self.assertRaises(ParserException) as raised:
+            node = PatternSetNode({"unknwon": "test1"}, "")
+        self.assertEqual(str(raised.exception), "Invalid set node, no name specified as attribute or text")
+
+    def test_init_with_nothing(self):
+        with self.assertRaises(ParserException) as raised:
+            node = PatternSetNode({}, "")
+        self.assertEqual(str(raised.exception), "Invalid set node, no name specified as attribute or text")
 
     def test_init(self):
         loader = SetLoader()
@@ -16,7 +37,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
             VALUE4
         """)
 
-        node = PatternSetNode("test1")
+        node = PatternSetNode([], "test1")
         self.assertIsNotNone(node)
 
         self.assertFalse(node.is_root())
@@ -36,7 +57,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
 
         sentence = Sentence("VALUE1 VALUE2 VALUE3 VALUE4")
 
-        self.assertTrue(node.equivalent(PatternSetNode("TEST1")))
+        self.assertTrue(node.equivalent(PatternSetNode([], "TEST1")))
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertTrue(result.matched)
         result = node.equals(self.bot, "testid", sentence, 1)
@@ -56,7 +77,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
             Red Brown
         """)
 
-        node = PatternSetNode("test1")
+        node = PatternSetNode([], "test1")
         self.assertIsNotNone(node)
 
         self.assertFalse(node.is_root())
@@ -71,7 +92,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertFalse(node.is_topic())
         self.assertFalse(node.is_wildcard())
 
-        self.assertTrue(node.equivalent(PatternSetNode("TEST1")))
+        self.assertTrue(node.equivalent(PatternSetNode([], "TEST1")))
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
@@ -95,7 +116,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
     def test_number(self):
         self.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
-        node = PatternSetNode("NUMBER")
+        node = PatternSetNode([], "NUMBER")
         self.assertIsNotNone(node)
 
         sentence = Sentence("12 XY")

@@ -116,7 +116,8 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
                     triples: $BOT_ROOT/config/test-triples.txt
                     preprocessors: $BOT_ROOT/config/test-preprocessors.conf
                     postprocessors: $BOT_ROOT/config/test-postprocessors.conf
-            
+                    regex_templates: $BOT_ROOT/config/regex-templates.txt
+                    
                 services:
                     REST:
                         classname: programy.utils.services.rest.GenericRESTService
