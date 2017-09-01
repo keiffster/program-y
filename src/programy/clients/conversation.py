@@ -10,14 +10,20 @@ import speech_recognition as sr
 class ConversationBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
+        self.clientid = "Conversation"
         BotClient.__init__(self, argument_parser)
-        self.clientid = "Console"
 
     def set_environment(self):
-        self.bot.brain.properties.add_property("env", "Console")
+        self.bot.brain.properties.add_property("env", "Conversation")
 
     def get_client_configuration(self):
         return ConsoleConfiguration()
+
+    def add_client_arguments(self, parser):
+        parser.add_argument('--context', dest='context', action='store_true', help='displays additional conversation context')
+
+    def parse_args(self, arguments, parsed_args):
+        arguments.context = parsed_args.context
 
     def talkSpeech(self, response):
         engine = pyttsx3.init()
