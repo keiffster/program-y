@@ -60,7 +60,8 @@ class ConversationBotClient(BotClient):
                         speechRecorded = record.recognize_sphinx(audio)
                         response = self.bot.ask_question(self.clientid, speechRecorded)
                         if response is None:
-                            self.talkSpeech(self.bot.default_response)
+                            response = self.bot.ask_question(self.clientid, 'default aiml response')
+                            self.talkSpeech(response)
                             self.log_unknown_response(speechRecorded)
                         else:
                             self.talkSpeech(response)

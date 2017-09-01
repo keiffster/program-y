@@ -61,13 +61,12 @@ class BotConfiguration(BaseConfigurationData):
             self._empty_string = config_file.get_option(bot, "empty_string", BotConfiguration.DEFAULT_EMPTY_STRING)
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
+            self._default_response = config_file.get_int_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
             self._override_properties = config_file.get_option(bot, "override_properties", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
             self._max_question_recursion = config_file.get_int_option(bot, "max_question_recursion", BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION)
             self._max_question_timeout = config_file.get_int_option(bot, "max_question_timeout", BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT)
             self._max_search_depth = config_file.get_int_option(bot, "max_search_depth", BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH)
             self._max_search_timeout = config_file.get_int_option(bot, "max_search_timeout", BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT)
-            # additional addon default values
-            self._default_response = self.load_all_default_values(bot, config_file)
 
             self._spelling.load_config_section(config_file, bot, bot_root)
 
@@ -85,22 +84,6 @@ class BotConfiguration(BaseConfigurationData):
             self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
             self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
             self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
-
-
-    # additional addon, randomize unknown values
-    def load_all_default_values(self, bot, config_file):
-        default_response = []
-        default_response1 = config_file.get_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
-        default_response.append(default_response1)
-        default_response2 = config_file.get_option(bot, "default_response2", BotConfiguration.DEFAULT_RESPONSE)
-        default_response.append(default_response2)
-        default_response3 = config_file.get_option(bot, "default_response3", BotConfiguration.DEFAULT_RESPONSE)
-        default_response.append(default_response3)
-        default_response4 = config_file.get_option(bot, "default_response4", BotConfiguration.DEFAULT_RESPONSE)
-        default_response.append(default_response4)
-        default_response5 = config_file.get_option(bot, "default_response5", BotConfiguration.DEFAULT_RESPONSE)
-        default_response.append(default_response5)
-        return default_response
 
     @property
     def bot_root(self):
@@ -120,11 +103,6 @@ class BotConfiguration(BaseConfigurationData):
 
     @property
     def default_response(self):
-        #if _default_response is a list we choose a random one
-        if type(self._default_response) is list:
-            return random.choice(self._default_response)
-
-        # if not list we just return the string
         return self._default_response
 
     @default_response.setter

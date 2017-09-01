@@ -56,8 +56,10 @@ class ConsoleBotClient(BotClient):
                         context = BotQuestionContext()
 
                     response = self.bot.ask_question(self.clientid, question, bot_question_context=context)
+
                     if response is None:
-                        self.display_response(self.bot.default_response)
+                        response = self.bot.ask_question(self.clientid, 'default aiml response')
+                        self.display_response(response)
                         self.log_unknown_response(question)
 
                     else:

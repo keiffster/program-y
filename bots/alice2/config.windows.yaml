@@ -77,10 +77,6 @@ bot:
     prompt: ">>>"
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!
-    default_response2: I don't know.
-    default_response3: I have no idea.
-    default_response4: Hmm.. maybe you should Google search that!
-    default_response5: Haha... it's funny that I don't know the answer to this question.
     empty_string_srai: YEMPTY
     exit_response: So long, and thanks for the fish!
     override_properties: true

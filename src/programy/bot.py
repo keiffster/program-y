@@ -233,14 +233,14 @@ class Bot(object):
                 if srai is False:
                     answer = self.brain.post_process_response(self, clientid, response).strip()
                     if len(answer) == 0:
-                        answer = self.default_response
+                        answer = self.ask_question(clientid, 'default aiml response')
                 else:
                     answer = response
 
                 answers.append(answer)
                 if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
-                each_sentence.response = self.default_response
+                each_sentence.response = self.ask_question(clientid, 'default aiml response')
                 answers.append(self.default_response)
 
         self._question_depth = 0
