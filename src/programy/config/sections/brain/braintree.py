@@ -16,30 +16,30 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.utils.text.text import TextUtils
+from programy.config.base import BaseConfigurationData
 
-class TemplateWordNode(TemplateNode):
 
-    def __init__(self, word):
-        TemplateNode.__init__(self)
-        self._word = word
+class BrainBraintreeConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, "braintree")
+        self._file = None
+        self._content = None
 
     @property
-    def word(self):
-        return self._word
+    def file(self):
+        return self._file
 
-    @word.setter
-    def word(self, word):
-        self._word = word
+    @property
+    def content(self):
+        return self._content
 
-    def resolve(self, bot, clientid):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), self.word)
-        return self.word
-
-    def to_string(self):
-        return "[WORD]" + self.word
-
-    def to_xml(self, bot, clientid):
-        return TextUtils.html_escape(self.word)
-
+    def load_config_section(self, file_config, bot_config, bot_root):
+        braintree = file_config.get_section("braintree", bot_config)
+        if braintree is not None:
+            file = file_config.get_option(braintree, "file", missing_value=None)
+            if file is not None:
+                self._file = self.sub_bot_root(file, bot_root)
+            self._content = file_config.get_option(braintree, "content", missing_value="txt")
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'braintree' section missing from bot config, using to defaults")

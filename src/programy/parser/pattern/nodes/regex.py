@@ -1,0 +1,103 @@
+"""
+Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
+
+import logging
+import re
+
+from programy.parser.pattern.nodes.base import PatternNode
+from programy.parser.pattern.matcher import EqualsMatch
+from programy.parser.exceptions import ParserException
+
+
+class PatternRegexNode(PatternNode):
+
+    def __init__(self, attribs, text):
+        PatternNode.__init__(self)
+        self._pattern_text = None
+        self._pattern_template = None
+        if 'pattern' in attribs:
+            self._pattern_text = attribs['pattern']
+        elif 'template' in attribs:
+            self._pattern_template = attribs['template']
+        elif len(text) > 0:
+            self._pattern_text = text
+        else:
+            raise ParserException ("Invalid regex node, neither pattern or template specified as attribute or text")
+
+        if self._pattern_text is not None:
+            self._pattern = re.compile(self._pattern_text)
+
+    @property
+    def pattern(self):
+        return self._pattern
+
+    def is_regex(self):
+        return True
+
+    def to_xml(self, bot, clientid):
+        str = ""
+        if self._pattern_template is not None:
+            str += '<regex template="%s">'% self._pattern_template
+        else:
+            str += '<regex pattern="%s">'% self._pattern_text
+        str += super(PatternRegexNode, self).to_xml(bot, clientid)
+        str += "</regex>\n"
+        return str
+
+    def equivalent(self, other):
+        if other.is_regex():
+            if self._pattern_template is not None:
+                return bool(self._pattern_template == other._pattern_template)
+            else:
+                return bool(self.pattern == other.pattern)
+        return False
+
+    def equals(self, bot, client, words, word_no):
+        word = words.word(word_no)
+        if self._pattern_template is not None:
+            template = bot.brain.regex_templates[self._pattern_template]
+            if template is not None:
+                result = template.match(word)
+                if result is not None:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Match word [%s] regex" % (word))
+                    return EqualsMatch(True, word_no, word)
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                        "No word [%s] matched refex" % (word))
+                    return EqualsMatch(False, word_no)
+            else:
+                return EqualsMatch(False, word_no)
+        else:
+            result = self.pattern.match(word)
+            if result is not None:
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Match word [%s] regex" % (word))
+                return EqualsMatch(True, word_no, word)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] matched refex" % (word))
+                return EqualsMatch(False, word_no)
+
+    def to_string(self, verbose=True):
+        if verbose is True:
+            if self._pattern_template is not None:
+                return "REGEX [%s] template=[%s]" % (self._child_count(verbose), self._pattern_template)
+            else:
+                return "REGEX [%s] pattern=[%s]" % (self._child_count(verbose), self._pattern_text)
+        else:
+            if self._pattern_template is not None:
+                return "REGEX template=[%s]" % self._pattern_template
+            else:
+                return "REGEX pattern=[%s]" % self._pattern_text
+

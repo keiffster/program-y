@@ -18,6 +18,7 @@ class BrainAIMLFileConfigurationTests(unittest.TestCase):
                     directories: true
                     errors: /tmp/y-bot_errors.txt
                     duplicates: /tmp/y-bot_duplicates.txt
+                    conversation: /tmp/y-bot_conversation.txt
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -33,6 +34,7 @@ class BrainAIMLFileConfigurationTests(unittest.TestCase):
         self.assertTrue(aiml_config.directories)
         self.assertEqual("/tmp/y-bot_errors.txt", aiml_config.errors)
         self.assertEqual("/tmp/y-bot_duplicates.txt", aiml_config.duplicates)
+        self.assertEqual("/tmp/y-bot_conversation.txt", aiml_config.conversation)
 
     def test_with_file_data(self):
         yaml = YamlConfigurationFile()
@@ -44,6 +46,7 @@ class BrainAIMLFileConfigurationTests(unittest.TestCase):
                     file: $BOT_ROOT/aiml/test.aiml
                     errors: /tmp/y-bot_errors.txt
                     duplicates: /tmp/y-bot_duplicates.txt
+                    conversation: /tmp/y-bot_conversation.txt
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")

@@ -19,7 +19,6 @@ import logging
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.parser.pattern.factory import PatternNodeFactory
-from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
@@ -70,11 +69,20 @@ class PatternGraph(object):
         if self._pattern_factory.exists(node_name) is False:
             raise ParserException ("Unknown node name [%s]"%node_name)
 
-        node_instance = self._pattern_factory.new_node_class(node_name)
-        if 'name' in element.attrib:
-            return node_instance(element.attrib['name'])
-        else:
-            return node_instance(TextUtils.strip_whitespace(element.text))
+        text = None
+        if element.text is not None:
+            text = TextUtils.strip_whitespace(element.text)
+
+        node_class_instance = self._pattern_factory.new_node_class(node_name)
+        node_instance = node_class_instance(element.attrib, text)
+
+        return node_instance
+
+
+        #if 'name' in element.attrib:
+        #    return node_instance(element.attrib['name'])
+        #else:
+        #    return node_instance(TextUtils.strip_whitespace(element.text))
 
     def _parse_text(self, pattern_text, current_node):
 
@@ -235,6 +243,17 @@ class PatternGraph(object):
         self.root.dump("", output_func, eol, verbose)
         output_func("")
 
-    def dump_to_file(self, filename):
-        with open(filename, "w+") as dump_file:
-            self.dump(output_func=dump_file.write, eol="\n")
+    def save_braintree(self, bot, clientid, filename, content):
+        if content == 'txt':
+            with open(filename, "w+") as dump_file:
+                self.dump(output_func=dump_file.write, eol="\n")
+        elif content == 'xml':
+            braintree = '<?xml version="1.0" encoding="UTF-8"?>\n'
+            braintree += '<aiml>\n'
+            braintree += self.root.to_xml(bot, clientid)
+            braintree += '</aiml>\n'
+            with open('/tmp/braintree.xml', "w+") as dump_file:
+                dump_file.write(braintree)
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                "Unknown braintree content type [%s]"%content)

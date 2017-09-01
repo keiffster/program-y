@@ -21,6 +21,7 @@ from programy.config.sections.brain.overrides import BrainOverridesConfiguration
 from programy.config.sections.brain.defaults import BrainDefaultsConfiguration
 from programy.config.sections.brain.nodes import BrainNodesConfiguration
 from programy.config.sections.brain.binaries import BrainBinariesConfiguration
+from programy.config.sections.brain.braintree import BrainBraintreeConfiguration
 from programy.config.sections.brain.files import BrainFilesConfiguration
 from programy.config.sections.brain.services import BrainServicesConfiguration
 from programy.config.sections.brain.securities import BrainSecuritiesConfiguration
@@ -36,6 +37,7 @@ class BrainConfiguration(BaseConfigurationData):
         self._defaults = BrainDefaultsConfiguration()
         self._nodes = BrainNodesConfiguration()
         self._binaries = BrainBinariesConfiguration()
+        self._braintree = BrainBraintreeConfiguration()
         self._files = BrainFilesConfiguration()
         self._services = BrainServicesConfiguration()
         self._security = BrainSecuritiesConfiguration()
@@ -57,6 +59,10 @@ class BrainConfiguration(BaseConfigurationData):
     @property
     def binaries(self):
         return self._binaries
+
+    @property
+    def braintree(self):
+        return self._braintree
 
     @property
     def files(self):
@@ -85,6 +91,7 @@ class BrainConfiguration(BaseConfigurationData):
             self._defaults.load_config_section(file_config, brain_config, bot_root)
             self._nodes.load_config_section(file_config, brain_config, bot_root)
             self._binaries.load_config_section(file_config, brain_config, bot_root)
+            self._braintree.load_config_section(file_config, brain_config, bot_root)
             self._files.load_config_section(file_config, brain_config, bot_root)
             self._services.load_config_section(file_config, brain_config, bot_root)
             self._security.load_config_section(file_config, brain_config, bot_root)

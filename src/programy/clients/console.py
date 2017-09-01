@@ -18,6 +18,7 @@ import logging
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.console import ConsoleConfiguration
+from programy.context import BotQuestionContext
 
 import pyttsx3
 import speech_recognition as sr
@@ -25,14 +26,20 @@ import speech_recognition as sr
 class ConsoleBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, argument_parser)
         self.clientid = "Console"
+        BotClient.__init__(self, argument_parser)
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Console")
 
     def get_client_configuration(self):
         return ConsoleConfiguration()
+
+    def add_client_arguments(self, parser):
+        parser.add_argument('--context', dest='context', action='store_true', help='displays additional conversation context')
+
+    def parse_args(self, arguments, parsed_args):
+        arguments.context = parsed_args.context
 
     def run(self):
         if self.arguments.noloop is False:
@@ -43,12 +50,22 @@ class ConsoleBotClient(BotClient):
             while running is True:
                 try:
                     question = self.get_question()
-                    response = self.bot.ask_question(self.clientid, question)
+
+                    context = None
+                    if self.arguments.context is True:
+                        context = BotQuestionContext()
+
+                    response = self.bot.ask_question(self.clientid, question, bot_question_context=context)
                     if response is None:
                         self.display_response(self.bot.default_response)
                         self.log_unknown_response(question)
+
                     else:
                         self.display_response(response)
+
+                        if context is not None:
+                            context.display(output_func=print)
+
                         self.log_response(question, response)
 
                 except KeyboardInterrupt:

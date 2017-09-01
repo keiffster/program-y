@@ -181,6 +181,9 @@ class Conversation(object):
     def questions(self):
         return self._questions
 
+    def has_current_question(self):
+        return bool(len(self._questions) > 0)
+
     def current_question(self):
         if len(self._questions) > 0:
             return self._questions[-1]

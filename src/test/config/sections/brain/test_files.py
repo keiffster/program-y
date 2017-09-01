@@ -18,6 +18,7 @@ class BrainFilesConfigurationTests(unittest.TestCase):
                     directories: true
                     errors: /tmp/y-bot_errors.txt
                     duplicates: /tmp/y-bot_duplicates.txt
+                    conversation: /tmp/y-bot_conversation.txt
                 sets:
                     files: $BOT_ROOT/sets
                     extension: .txt
@@ -35,6 +36,7 @@ class BrainFilesConfigurationTests(unittest.TestCase):
                 triples: $BOT_ROOT/config/triples.txt
                 preprocessors: $BOT_ROOT/config/preprocessors.conf
                 postprocessors: $BOT_ROOT/config/postprocessors.conf
+                regex_templates: $BOT_ROOT/config/regex-templates.txt
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -48,6 +50,7 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         self.assertTrue(files_config.aiml_files.directories)
         self.assertEqual("/tmp/y-bot_errors.txt", files_config.aiml_files.errors)
         self.assertEqual("/tmp/y-bot_duplicates.txt", files_config.aiml_files.duplicates)
+        self.assertEqual("/tmp/y-bot_conversation.txt", files_config.aiml_files.conversation)
 
         self.assertIsNotNone(files_config.set_files)
         self.assertEqual("./sets", files_config.set_files.files)
@@ -68,3 +71,4 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         self.assertEqual(files_config.triples, "./config/triples.txt")
         self.assertEqual(files_config.preprocessors, "./config/preprocessors.conf")
         self.assertEqual(files_config.postprocessors, "./config/postprocessors.conf")
+        self.assertEqual(files_config.regex_templates, "./config/regex-templates.txt")

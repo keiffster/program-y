@@ -29,6 +29,7 @@ from programy.config.sections.client.rest import RestConfiguration
 class RestBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
+        self.clientid = "Rest"
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self):

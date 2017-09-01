@@ -32,6 +32,7 @@ class MyStreamListener(tweepy.StreamListener):
 class TwitterBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
+        self.clientid = "Twitter"
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self):

@@ -39,3 +39,17 @@ class TemplateGraphXMLTests(TemplateGraphTestClient):
         node = root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateXMLNode)
+
+    def test_attrib_with_html(self):
+        template = ET.fromstring("""
+        			<template>
+        				<a target="_new" href="http://www.google.com/search?q=&gt;personf/&lt;"> Google Search </a>
+        			</template>
+        			""")
+
+        root = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(root)
+        self.assertIsInstance(root, TemplateNode)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 1)
+

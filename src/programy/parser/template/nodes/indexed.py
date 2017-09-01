@@ -110,7 +110,7 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
         elif self.question > 1 and self.sentence == -1:
             xml += ' index="%d,*"'%self.question
         elif self.question == 1 and self.sentence > 1:
-            xml += ' index="1,*"'%self.sentence
+            xml += ' index="1,*"'# %self.sentence
         elif self.question > 1 and self.sentence == 1:
             xml += ' index="%d"'%self.question
         return xml

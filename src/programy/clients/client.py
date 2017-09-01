@@ -36,6 +36,10 @@ class BotClient(object):
         self._brain = Brain(self.configuration.brain_configuration)
         self.bot = Bot(self._brain, self.configuration.bot_configuration)
 
+        if self.configuration.brain_configuration.braintree.file is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Dumping AIML Graph as tree to [%s]"%self.configuration.brain_configuration.braintree.file)
+            self._brain._aiml_parser.pattern_parser.save_braintree(self.bot, self.clientid, self.configuration.brain_configuration.braintree.file, self.configuration.brain_configuration.braintree.content)
+
         self.set_environment()
 
     @property
@@ -49,9 +53,13 @@ class BotClient(object):
         # Nothing to add
         pass
 
+    def parse_args(self, arguments, parsed_args):
+        # Nothing to add
+        pass
+
     def parse_arguments(self, argument_parser):
         client_args = CommandLineClientArguments(self, parser=argument_parser)
-        client_args.parse_args()
+        client_args.parse_args(self)
         return client_args
 
     def initiate_logging(self, arguments):
@@ -92,7 +100,7 @@ class BotClient(object):
         pass
 
     def log_unknown_response(self, question):
-        pass
+        return
 
     def log_response(self, question, answer):
-        pass
+        return

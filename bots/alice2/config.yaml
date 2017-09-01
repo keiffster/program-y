@@ -25,7 +25,11 @@ brain:
       load_binary: false
       binary_filename: /tmp/alice2.brain
       load_aiml_on_binary_fail: false
-      dump_to_file: /tmp/braintree.txt
+
+    # Braintree
+    braintree:
+      file: /tmp/braintree.xml
+      content: xml
 
     files:
         aiml:

@@ -9,7 +9,7 @@ class DefaultOutOfBandProcessorTests(unittest.TestCase):
         oob_processor = DefaultOutOfBandProcessor()
         self.assertIsNotNone(oob_processor)
 
-        self.assertEqual("DEFAULT", oob_processor.execute_oob_command(None, "testid"))
+        self.assertEqual("", oob_processor.execute_oob_command(None, "testid"))
 
         oob_content = ET.fromstring("<something>process</something>")
-        self.assertEqual("<?xml version='1.0' encoding='utf8'?>\n<something>process</something>", oob_processor.process_out_of_bounds(None, "testid", oob_content))
+        self.assertEqual("", oob_processor.process_out_of_bounds(None, "testid", oob_content))

@@ -2,7 +2,7 @@
 <aiml version="2.0">
 
     <category>
-        <pattern>OOB ALARM</pattern>
+        <pattern>OOB ALARM *</pattern>
         <template>
             <oob>
                 <alarm>
@@ -16,10 +16,19 @@
     </category>
 
     <category>
-        <pattern>OOB CAMERA</pattern>
+        <pattern>OOB CAMERA ON</pattern>
         <template>
             <oob>
                 <camera>on</camera>
+            </oob>
+        </template>
+    </category>
+
+    <category>
+        <pattern>OOB CAMERA OFF</pattern>
+        <template>
+            <oob>
+                <camera>off</camera>
             </oob>
         </template>
     </category>
@@ -34,19 +43,10 @@
     </category>
 
     <category>
-        <pattern>OOB DIAL</pattern>
+        <pattern>OOB DIAL *</pattern>
         <template>
             <oob>
-                <dial>911</dial>
-            </oob>
-        </template>
-    </category>
-
-    <category>
-        <pattern>OOB DIAL</pattern>
-        <template>
-            <oob>
-                <dial>911</dial>
+                <dial><star /></dial>
             </oob>
         </template>
     </category>

@@ -55,7 +55,7 @@ class UserGroupLoader(object):
                         if role_name not in user._roles:
                             user._roles.append(role_name)
                         else:
-                            print ("Role [%s] already exists in user [%s]"%(role_name, user_name))
+                            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Role [%s] already exists in user [%s]"%(role_name, user_name))
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -65,7 +65,7 @@ class UserGroupLoader(object):
                         if group_name not in user._groups:
                             user._groups.append(group_name)
                         else:
-                            print("Group [%s] already exists in user [%s]" % (group_name, user_name))
+                            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Group [%s] already exists in user [%s]" % (group_name, user_name))
 
                 users[user.id] = user
         return users
@@ -86,7 +86,7 @@ class UserGroupLoader(object):
                         if role_name not in group._roles:
                             group._roles.append(role_name)
                         else:
-                            print("Role [%s] already exists in group [%s]" % (role_name, group_name))
+                            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Role [%s] already exists in group [%s]" % (role_name, group_name))
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -96,7 +96,7 @@ class UserGroupLoader(object):
                         if group_name not in group._groups:
                             group._groups.append(group_name)
                         else:
-                            print("Group [%s] already exists in group [%s]" % (group_name, group_name))
+                            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Group [%s] already exists in group [%s]" % (group_name, group_name))
 
                 if 'users' in yaml_obj:
                     users_list= yaml_obj['groups']
@@ -106,7 +106,7 @@ class UserGroupLoader(object):
                         if user_name not in group._users:
                             group._users.append(user_name)
                         else:
-                            print("User [%s] already exists in group [%s]" % (user_name, group_name))
+                            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("User [%s] already exists in group [%s]" % (user_name, group_name))
 
                 groups[group.id] = group
         return groups
@@ -122,7 +122,7 @@ class UserGroupLoader(object):
                     group = groups[group_id]
                     new_groups.append(group)
                 else:
-                    print("Unknown group id [%s] in user [%s]"%(group_id, user_id))
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown group id [%s] in user [%s]"%(group_id, user_id))
             user._groups = new_groups[:]
 
         for group_id in groups.keys():
@@ -134,7 +134,7 @@ class UserGroupLoader(object):
                     new_group = groups[sub_group_id]
                     new_groups.append(new_group)
                 else:
-                    print("Unknown group id [%s] in group [%s]" % (sub_group_id, group_id))
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown group id [%s] in group [%s]" % (sub_group_id, group_id))
             group._groups = new_groups[:]
 
             new_users = []
@@ -143,45 +143,44 @@ class UserGroupLoader(object):
                     new_user = users[sub_user_id]
                     new_users.append(new_user)
                 else:
-                    print("Unknown user id [%s] in group [%s]" % (sub_user_id, user_id))
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown user id [%s] in group [%s]" % (sub_user_id, user_id))
             group._users = new_users[:]
 
     def dump_users_and_groups(self, users, groups):
 
-        print()
-        print("Users:")
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Users:")
         for user_id in users.keys():
             user = users[user_id]
 
-            print("\t"+user.id)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+user.id)
 
             if len(user.roles) > 0:
-                print("\t\tRoles:")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
                 for role in user.roles:
-                    print("\t\t\t"+role)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
 
             if len(user.groups) > 0:
-                print("\t\tGroups:")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
                 for group in user.groups:
-                    print("\t\t\t" + group.id)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
 
-        print("Groups:")
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Groups:")
         for group_id in groups.keys():
             group = groups[group_id]
 
-            print("\t"+group.id)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+group.id)
 
             if len(group.roles):
-                print("\t\tRoles:")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
                 for role in group.roles:
-                    print("\t\t\t"+role)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
 
             if len(group.groups):
-                print("\t\tGroups:")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
                 for group in group.groups:
-                    print("\t\t\t" + group.id)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
 
             if len(group.users):
-                print("\t\tUsers:")
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tUsers:")
                 for user in group.users:
-                    print("\t\t\t" + user.id)
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + user.id)

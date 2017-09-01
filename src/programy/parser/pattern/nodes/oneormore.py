@@ -35,6 +35,13 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
     def matching_wildcards(self):
         return PatternOneOrMoreWildCardNode.MATCH_CHARS
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<oneormore wildcard="%s">\n' % self.wildcard
+        str += super(PatternOneOrMoreWildCardNode, self).to_xml(bot, clientid)
+        str += "</oneormore>\n"
+        return str
+
     @staticmethod
     def is_wild_card(text):
         return bool(text in PatternOneOrMoreWildCardNode.MATCH_CHARS)

@@ -29,9 +29,13 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertTrue(configuration.brain_configuration.binaries.save_binary)
         self.assertTrue(configuration.brain_configuration.binaries.load_binary)
-        self.assertEqual(configuration.brain_configuration.binaries.binary_filename, "./output/test-y-bot.brain")
+        self.assertEqual(configuration.brain_configuration.binaries.binary_filename, "/tmp/y-bot.brain")
         self.assertTrue(configuration.brain_configuration.binaries.load_aiml_on_binary_fail)
-        self.assertEqual(configuration.brain_configuration.binaries.dump_to_file, "./output/test-braintree.txt")
+
+        self.assertIsNotNone(configuration.brain_configuration.braintree)
+
+        self.assertEqual(configuration.brain_configuration.braintree.file, "/tmp/braintree.xml")
+        self.assertEqual(configuration.brain_configuration.braintree.content, "xml")
 
         self.assertIsNotNone(configuration.brain_configuration.files)
 
@@ -40,8 +44,9 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertIsNone(configuration.brain_configuration.files.aiml_files.file)
         self.assertEqual(configuration.brain_configuration.files.aiml_files.extension, ".test-aiml")
         self.assertTrue(configuration.brain_configuration.files.aiml_files.directories)
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.errors, "./output/test-y-bot_errors.txt")
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.duplicates, "./output/test-y-bot_duplicates.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.errors, "/tmp/y-bot_errors.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.duplicates, "/tmp/y-bot_duplicates.txt")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.conversation, "/tmp/y-bot_conversation.txt")
 
         self.assertIsNotNone(configuration.brain_configuration.files.set_files)
         self.assertEqual(configuration.brain_configuration.files.set_files.files, "./test-sets")
@@ -64,6 +69,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(configuration.brain_configuration.files.triples, "./config/test-triples.txt")
         self.assertEqual(configuration.brain_configuration.files.preprocessors, "./config/test-preprocessors.conf")
         self.assertEqual(configuration.brain_configuration.files.postprocessors, "./config/test-postprocessors.conf")
+        self.assertEqual(configuration.brain_configuration.files.regex_templates, "./config/regex-templates.txt")
 
         self.assertIsNotNone(configuration.brain_configuration.services)
 

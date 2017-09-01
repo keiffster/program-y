@@ -2,14 +2,40 @@ from test.parser.pattern.base import PatternTestBaseClass
 
 from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.dialog import Sentence
+from programy.parser.exceptions import ParserException
 
 class PatternBotNodeTests(PatternTestBaseClass):
+
+    def test_init_with_text(self):
+        node = PatternBotNode({}, "test1")
+        self.assertIsNotNone(node)
+        self.assertEqual("test1", node.property)
+
+    def test_init_with_attribs_name(self):
+        node = PatternBotNode({"name": "test1"}, "")
+        self.assertIsNotNone(node)
+        self.assertEqual("test1", node.property)
+
+    def test_init_with_attribs_property(self):
+        node = PatternBotNode({"property": "test1"}, "")
+        self.assertIsNotNone(node)
+        self.assertEqual("test1", node.property)
+
+    def test_init_with_invalid_attribs(self):
+        with self.assertRaises(ParserException) as raised:
+            node = PatternBotNode({"unknwon": "test1"}, "")
+        self.assertEqual(str(raised.exception), "Invalid bot node, neither name or property specified as attribute or text")
+
+    def test_init_with_nothing(self):
+        with self.assertRaises(ParserException) as raised:
+            node = PatternBotNode({}, "")
+        self.assertEqual(str(raised.exception), "Invalid bot node, neither name or property specified as attribute or text")
 
     def test_init(self):
 
         self.bot.brain.properties.add_property("test1", "value1")
 
-        node = PatternBotNode("test1")
+        node = PatternBotNode([], "test1")
         self.assertIsNotNone(node)
 
         self.assertFalse(node.is_root())
@@ -24,14 +50,15 @@ class PatternBotNodeTests(PatternTestBaseClass):
         self.assertFalse(node.is_topic())
         self.assertFalse(node.is_wildcard())
 
-        self.assertTrue(node.equivalent(PatternBotNode("test1")))
-        self.assertFalse(node.equivalent(PatternBotNode("test2")))
+        self.assertTrue(node.equivalent(PatternBotNode([], "test1")))
+        self.assertFalse(node.equivalent(PatternBotNode([], "test2")))
 
         sentence = Sentence("value1 value2")
 
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertTrue(result.matched)
         self.assertEquals(0, result.word_no)
+
         result = node.equals(self.bot, "testid", sentence, 1)
         self.assertFalse(result.matched)
         self.assertEquals(1, result.word_no)

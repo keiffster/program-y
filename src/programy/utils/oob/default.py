@@ -1,7 +1,8 @@
 import logging
-import xml.etree.ElementTree as ET
 
 from programy.utils.oob.oob import OutOfBandProcessor
+
+# Default OOB Processor consumes XML and returns nothing
 
 class DefaultOutOfBandProcessor(OutOfBandProcessor):
 
@@ -11,6 +12,6 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
     def execute_oob_command(self, bot, clientid):
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Default OOB Processing....")
         if self._xml is not None:
-            return ET.tostring(self._xml, encoding='utf8', method='xml').decode('utf-8')
+            return ""
         else:
-            return "DEFAULT"
+            return ""

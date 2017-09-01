@@ -18,3 +18,4 @@ root:
     level: DEBUG
     handlers:
         - file
+

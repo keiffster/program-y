@@ -11,11 +11,24 @@
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
     <category>
-        <pattern>SCRATCH TEST</pattern>
+        <pattern>ARE YOU WRITTEN IN C#</pattern>
         <template>
-            OK
+            RESULT 3
         </template>
     </category>
 
+    <category>
+        <pattern>ARE YOU *</pattern>
+        <template>
+            RESULT 1
+        </template>
+    </category>
+
+    <category>
+        <pattern>ARE YOU * *</pattern>
+        <template>
+            RESULT 2
+        </template>
+    </category>
 
 </aiml>

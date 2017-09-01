@@ -38,6 +38,7 @@ class BrainFilesConfiguration(BaseConfigurationData):
         self._triples           = None
         self._preprocessors     = None
         self._postprocessors    = None
+        self._regex_templates   = None
 
     @property
     def aiml_files(self):
@@ -91,6 +92,10 @@ class BrainFilesConfiguration(BaseConfigurationData):
     def postprocessors(self):
         return self._postprocessors
 
+    @property
+    def regex_templates(self):
+        return self._regex_templates
+
     def load_config_section(self, config_file, brain_config, bot_root):
         files_config = config_file.get_section("files", brain_config)
         if files_config is not None:
@@ -108,5 +113,6 @@ class BrainFilesConfiguration(BaseConfigurationData):
             self._triples = self._get_file_option(config_file, "triples", files_config, bot_root)
             self._preprocessors = self._get_file_option(config_file, "preprocessors", files_config, bot_root)
             self._postprocessors = self._get_file_option(config_file, "postprocessors", files_config, bot_root)
+            self._regex_templates = self._get_file_option(config_file, "regex_templates", files_config, bot_root)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Config section [files] missing from Brain, default values not appropriate")

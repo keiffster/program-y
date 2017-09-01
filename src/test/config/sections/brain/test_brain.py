@@ -31,7 +31,10 @@ class BrainConfigurationTests(unittest.TestCase):
                   load_binary: false
                   binary_filename: /tmp/y-bot.brain
                   load_aiml_on_binary_fail: false
-                  dump_to_file: /tmp/braintree.txt
+
+                braintree:
+                  file: /tmp/braintree.xml
+                  content: xml
             
                 files:
                     aiml:
@@ -40,6 +43,7 @@ class BrainConfigurationTests(unittest.TestCase):
                         directories: true
                         errors: /tmp/y-bot_errors.txt
                         duplicates: /tmp/y-bot_duplicates.txt
+                        conversation: /tmp/y-bot_conversation.txt
                     sets:
                         files: $BOT_ROOT/sets
                         extension: .txt
@@ -57,6 +61,7 @@ class BrainConfigurationTests(unittest.TestCase):
                     triples: $BOT_ROOT/config/triples.txt
                     preprocessors: $BOT_ROOT/config/preprocessors.conf
                     postprocessors: $BOT_ROOT/config/postprocessors.conf
+                    regex_templates: $BOT_ROOT/config/regex-templates.txt
             
                 security:
                     authentication:
@@ -122,7 +127,10 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertFalse(brain_config.binaries.load_binary)
         self.assertEquals("/tmp/y-bot.brain", brain_config.binaries.binary_filename)
         self.assertFalse(brain_config.binaries.load_aiml_on_binary_fail)
-        self.assertEquals("/tmp/braintree.txt", brain_config.binaries.dump_to_file)
+
+        self.assertIsNotNone(brain_config.braintree)
+        self.assertEquals("/tmp/braintree.xml", brain_config.braintree.file)
+        self.assertEquals("xml", brain_config.braintree.content)
 
         self.assertIsNotNone(brain_config.files)
         self.assertIsNotNone(brain_config.files.aiml_files)
@@ -131,6 +139,7 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertTrue(brain_config.files.aiml_files.directories)
         self.assertEqual("/tmp/y-bot_errors.txt", brain_config.files.aiml_files.errors)
         self.assertEqual("/tmp/y-bot_duplicates.txt", brain_config.files.aiml_files.duplicates)
+        self.assertEqual("/tmp/y-bot_conversation.txt", brain_config.files.aiml_files.conversation)
 
         self.assertIsNotNone(brain_config.files.set_files)
         self.assertEqual("./sets", brain_config.files.set_files.files)
@@ -151,6 +160,7 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertEqual(brain_config.files.triples, "./config/triples.txt")
         self.assertEqual(brain_config.files.preprocessors, "./config/preprocessors.conf")
         self.assertEqual(brain_config.files.postprocessors, "./config/postprocessors.conf")
+        self.assertEqual(brain_config.files.regex_templates, "./config/regex-templates.txt")
 
         self.assertIsNotNone(brain_config.security)
         self.assertIsNotNone(brain_config.security.authorisation)

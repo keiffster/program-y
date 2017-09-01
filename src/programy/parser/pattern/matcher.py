@@ -131,7 +131,8 @@ class MatchContext(object):
                 ( match._matched_node.is_wildcard() or
                   match._matched_node.is_set() or
                   match._matched_node.is_iset() or
-                  match._matched_node.is_bot()):
+                  match._matched_node.is_bot() or
+                  match._matched_node.is_regex()):
                 if count == index:
                     return match.joined_words()
                 count += 1
@@ -146,16 +147,17 @@ class MatchContext(object):
     def thatstar(self, index):
         return self._get_indexed_match_by_type(index,  Match.THAT)
 
-    def list_matches(self, output_func=logging.debug):
-        output_func("Matches...")
+    def list_matches(self, output_func=logging.debug, tabs="\t", include_template=True):
+        output_func("%sMatches..."%tabs)
         count = 1
         for match in self._matched_nodes:
-            output_func("\t%d - %s"%(count, match.to_string()))
+            output_func("%s\t%d - %s"%(tabs, count, match.to_string()))
             count += 1
-        if self.matched() is True:
-            output_func("\tT - %s"%(self._template_node.to_string()))
-        else:
-            output_func("\tT - None")
+        if include_template is True:
+            if self.matched() is True:
+                output_func("%s\tT - %s"%(tabs, self._template_node.to_string()))
+            else:
+                output_func("%s\tT - None"%tabs)
 
 
 class EqualsMatch(object):

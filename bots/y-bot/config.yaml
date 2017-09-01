@@ -25,7 +25,11 @@ brain:
       load_binary: false
       binary_filename: /tmp/y-bot.brain
       load_aiml_on_binary_fail: false
-      dump_to_file: /tmp/braintree.txt
+
+    # Braintree
+    braintree:
+      file: /tmp/braintree.xml
+      content: xml
 
     files:
         aiml:
@@ -34,6 +38,7 @@ brain:
             directories: true
             errors: /tmp/y-bot_errors.txt
             duplicates: /tmp/y-bot_duplicates.txt
+            conversation: /tmp/y-bot-conversation.txt
         sets:
             files: $BOT_ROOT/sets
             extension: .txt
@@ -48,13 +53,13 @@ brain:
         person: $BOT_ROOT/config/person.txt
         person2: $BOT_ROOT/config/person2.txt
         properties: $BOT_ROOT/config/properties.txt
-        #triples: $BOT_ROOT/rdf/triples.txt
         rdf:
             files:  $BOT_ROOT/rdf
             extension: .txt
             directories: false
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
+        regex_templates: $BOT_ROOT/config/regex-templates.txt
 
     services:
         REST:

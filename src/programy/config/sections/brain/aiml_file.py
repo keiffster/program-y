@@ -24,6 +24,7 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
         BrainFileConfiguration.__init__(self, name, extension="aiml", directories=False)
         self._errors = None
         self._duplicates = None
+        self._conversation = None
 
     @property
     def errors(self):
@@ -32,6 +33,10 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
     @property
     def duplicates(self):
         return self._duplicates
+
+    @property
+    def conversation(self):
+        return self._conversation
 
     def load_config_section(self, file_config, brain_config, bot_root):
         files_config = file_config.get_option(brain_config, self.section_name)
@@ -52,6 +57,9 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
             duplicates = file_config.get_option(files_config, "duplicates", missing_value=None)
             if duplicates is not None:
                 self._duplicates = self.sub_bot_root(duplicates, bot_root)
+            conversation = file_config.get_option(files_config, "conversation", missing_value=None)
+            if conversation is not None:
+                self._conversation = self.sub_bot_root(conversation, bot_root)
 
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))

@@ -5,16 +5,41 @@ from programy.mappings.sets import SetLoader
 
 class PatternMatcherSetTests(PatternMatcherBaseClass):
 
-    def test_basic_set_match(self):
+    def test_basic_set_match_as_text(self):
 
         loader = SetLoader()
 
-        self.bot.brain.sets.add_set("SEX", loader.load_from_text("""
-        Man
-        Woman
-        """))
+        if self.bot.brain.sets.contains("SEX") is False:
+            self.bot.brain.sets.add_set("SEX", loader.load_from_text("""
+            Man
+            Woman
+            """))
 
         self.add_pattern_to_graph(pattern="I AM A <set>sex</set>", topic="X", that="Y", template="1")
+
+        context = self.match_sentence("I AM A MAN", topic="X", that="Y")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node())
+        self.assertEqual("1", context.template_node().template.word)
+        self.assertEqual("Man", context.star(1))
+
+        context = self.match_sentence("I AM A WOMAN", topic="X", that="Y")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node())
+        self.assertEqual("1", context.template_node().template.word)
+        self.assertEqual("Woman", context.star(1))
+
+    def test_basic_set_match_as_name(self):
+
+        loader = SetLoader()
+
+        if self.bot.brain.sets.contains("SEX") is False:
+            self.bot.brain.sets.add_set("SEX", loader.load_from_text("""
+            Man
+            Woman
+            """))
+
+        self.add_pattern_to_graph(pattern='I AM A <set name="sex" />', topic="X", that="Y", template="1")
 
         context = self.match_sentence("I AM A MAN", topic="X", that="Y")
         self.assertIsNotNone(context)

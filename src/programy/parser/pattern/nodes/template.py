@@ -30,6 +30,14 @@ class PatternTemplateNode(PatternNode):
     def template(self):
         return self._template
 
+    def to_xml(self, bot, clientid):
+        str = ""
+        str += '<template>'
+        str2 = super(PatternTemplateNode, self).to_xml(bot, clientid)
+        str += str2
+        str += '</template>\n'
+        return str
+
     def is_template(self):
         return True
 
