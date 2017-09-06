@@ -1,0 +1,17 @@
+<aiml>
+
+<category>
+   <pattern>default aiml response</pattern>
+  <template>
+    <random>
+       <li>I don't know</li>
+       <li>Sorry, I don't have an answer for that!</li>
+       <li>I have no idea.</li>
+       <li>Hmm.. maybe you should Google search that!</li>
+       <li>Haha... it's funny that I don't know the answer to this question.</li>
+       </random>
+  </template>
+</category>
+
+
+</aiml>

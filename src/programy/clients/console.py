@@ -20,6 +20,9 @@ from programy.clients.client import BotClient
 from programy.config.sections.client.console import ConsoleConfiguration
 from programy.context import BotQuestionContext
 
+import pyttsx3
+import speech_recognition as sr
+
 class ConsoleBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
@@ -40,7 +43,7 @@ class ConsoleBotClient(BotClient):
 
     def run(self):
         if self.arguments.noloop is False:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
+            logging.info("Entering conversation loop...")
             running = True
             self.display_response(self.bot.get_version_string)
             self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
@@ -53,8 +56,10 @@ class ConsoleBotClient(BotClient):
                         context = BotQuestionContext()
 
                     response = self.bot.ask_question(self.clientid, question, bot_question_context=context)
+
                     if response is None:
-                        self.display_response(self.bot.default_response)
+                        response = self.bot.ask_question(self.clientid, 'default aiml response')
+                        self.display_response(response)
                         self.log_unknown_response(question)
 
                     else:
@@ -70,7 +75,7 @@ class ConsoleBotClient(BotClient):
                     self.display_response(self.bot.exit_response)
                 except Exception as excep:
                     logging.exception(excep)
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
+                    logging.error("Oops something bad happened !")
                     self.display_response(self.bot.default_response)
                     self.log_unknown_response(question)
 
@@ -82,10 +87,8 @@ class ConsoleBotClient(BotClient):
         output_func(response)
 
 if __name__ == '__main__':
-
     def run():
         print("Loading, please wait...")
         console_app = ConsoleBotClient()
         console_app.run()
-
     run()

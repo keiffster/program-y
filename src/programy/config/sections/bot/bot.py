@@ -15,6 +15,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import random
 
 from programy.config.base import BaseConfigurationData
 from programy.config.sections.bot.spelling import BotSpellingConfiguration
@@ -33,7 +34,6 @@ class BotConfiguration(BaseConfigurationData):
     DEFAULT_MAX_QUESTION_TIMEOUT    = -1
     DEFAULT_MAX_SEARCH_DEPTH        = 100
     DEFAULT_MAX_SEARCH_TIMEOUT      = -1
-    DEFAULT_TAB_PARSE_OUTPUT        = True
 
     def __init__(self):
         self._license_keys          = None
@@ -48,30 +48,30 @@ class BotConfiguration(BaseConfigurationData):
         self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
         self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
         self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
-        self._tab_parse_output      = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
+        self._tab_parse_output      = False
         self._spelling              = BotSpellingConfiguration()
         BaseConfigurationData.__init__(self, "bot")
 
     def load_config_section(self, config_file, bot_root):
         bot = config_file.get_section(self.section_name)
+
         if bot is not None:
             self._license_keys = self._get_file_option(config_file, "license_keys", bot, bot_root)
             self._prompt = config_file.get_option(bot, "prompt", BotConfiguration.DEFAULT_PROMPT)
-            self._default_response = config_file.get_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
             self._empty_string = config_file.get_option(bot, "empty_string", BotConfiguration.DEFAULT_EMPTY_STRING)
             self._exit_response = config_file.get_option(bot, "exit_response", BotConfiguration.DEFAULT_EXIT_RESPONSE)
             self._initial_question = config_file.get_option(bot, "initial_question", BotConfiguration.DEFAULT_INITIAL_QUESTION)
+            self._default_response = config_file.get_int_option(bot, "default_response", BotConfiguration.DEFAULT_RESPONSE)
             self._override_properties = config_file.get_option(bot, "override_properties", BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
             self._max_question_recursion = config_file.get_int_option(bot, "max_question_recursion", BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION)
             self._max_question_timeout = config_file.get_int_option(bot, "max_question_timeout", BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT)
             self._max_search_depth = config_file.get_int_option(bot, "max_search_depth", BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH)
             self._max_search_timeout = config_file.get_int_option(bot, "max_search_timeout", BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT)
-            self._tab_parse_output = config_file.get_bool_option(bot, "tab_parse_output", BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT)
 
             self._spelling.load_config_section(config_file, bot, bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Config section [%s] missing, using default values", self.section_name)
+            logging.warning("Config section [%s] missing, using default values", self.section_name)
             self._license_keys          = None
             self._bot_root              = BotConfiguration.DEFAULT_ROOT
             self._prompt                = BotConfiguration.DEFAULT_PROMPT
@@ -84,7 +84,6 @@ class BotConfiguration(BaseConfigurationData):
             self._max_question_timeout  = BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT
             self._max_search_depth      = BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH
             self._max_search_timeout    = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
-            self._tab_parse_output      = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
 
     @property
     def bot_root(self):

@@ -60,7 +60,6 @@ class ClientArguments(object):
     def noloop(self):
         return self._no_loop
 
-
 class CommandLineClientArguments(ClientArguments):
 
     def __init__(self, client, parser=None):
@@ -86,5 +85,6 @@ class CommandLineClientArguments(ClientArguments):
         self._config_format = self.args.cformat
         self._no_loop = self.args.noloop
         client.parse_args(self, self.args)
+
 
 
