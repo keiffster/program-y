@@ -35,22 +35,27 @@ class TemplateSystemNode(TemplateAttribNode):
     def timeout(self, timeout):
         self._timeout = timeout
 
+    def resolve_to_string(self, bot, clientid):
+        if bot.brain.configuration.overrides.allow_system_aiml is True:
+            command = self.resolve_children_to_string(bot, clientid)
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            result = []
+            for line in process.stdout.readlines():
+                byte_string = line.decode("utf-8")
+                result.append(byte_string.strip())
+            process.wait()
+            resolved = " ".join(result)
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning(
+                "System command node disabled in config")
+            resolved = ""
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            if bot.brain.configuration.overrides.allow_system_aiml is True:
-                command = self.resolve_children_to_string(bot, clientid)
-                process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-                result = []
-                for line in process.stdout.readlines():
-                    byte_string = line.decode("utf-8")
-                    result.append(byte_string.strip())
-                process.wait()
-                resolved = " ".join(result)
-            else:
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("System command node disabled in config")
-                resolved = ""
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

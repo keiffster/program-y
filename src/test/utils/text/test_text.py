@@ -68,3 +68,20 @@ class TextUtilsTests(unittest.TestCase):
         self.assertEquals(" ", TextUtils.html_escape(" "))
         self.assertEquals("&lt;&gt;", TextUtils.html_escape("<>"))
         self.assertEquals("&lt;regex/&gt;", TextUtils.html_escape("<regex/>"))
+
+    def test_tag_and_namespace_from_text(self):
+        tag, name = TextUtils.tag_and_namespace_from_text("")
+        self.assertIsNotNone(tag)
+        self.assertEquals("", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("text")
+        self.assertIsNotNone(tag)
+        self.assertEquals("text", tag)
+        self.assertIsNone(name)
+
+        tag, name = TextUtils.tag_and_namespace_from_text("{http://alicebot.org/2001/AIML}aiml ")
+        self.assertIsNotNone(tag)
+        self.assertEquals("aiml", tag)
+        self.assertIsNotNone(name)
+        self.assertEquals("{http://alicebot.org/2001/AIML}", name)

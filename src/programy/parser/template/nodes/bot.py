@@ -33,17 +33,21 @@ class TemplateBotNode(TemplateNode):
     def name(self, name):
         self._name = name
 
+    def resolve_to_string(self, bot, clientid):
+        name = self.name.resolve(bot, clientid)
+        value = bot.brain.properties.property(name)
+        if value is None:
+            value = bot.brain.properties.property("default-property")
+            if value is None:
+                value = ""
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(),
+                                                                          name, value)
+        return value
+
     def resolve(self, bot, clientid):
         try:
-            name = self.name.resolve(bot, clientid)
-            value = bot.brain.properties.property(name)
-            if value is None:
-                value = bot.brain.properties.property("default-property")
-                if value is None:
-                    value = ""
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-            return value
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

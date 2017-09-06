@@ -30,6 +30,8 @@ class PatternTopicNodeTests(PatternTestBaseClass):
         self.assertEqual(node.to_string(), "TOPIC [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
         self.assertEqual(node.to_string(verbose=False), "TOPIC")
 
+        self.assertEqual("<topic></topic>\n", node.to_xml(self.bot, self.clientid))
+
     def test_root_to_topic(self):
         node1 = PatternTopicNode()
         node2 = PatternRootNode()

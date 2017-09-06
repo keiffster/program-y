@@ -6,6 +6,12 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateImplodeNode(TemplateImplodeNode):
+    def __init__(self):
+        TemplateImplodeNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateImplodeNodeTests(TemplateTestsBaseClass):
 
@@ -35,3 +41,11 @@ class TemplateImplodeNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><implode>Test</implode></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateImplodeNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

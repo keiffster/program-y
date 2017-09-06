@@ -6,6 +6,13 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateGenderNode(TemplateGenderNode):
+    def __init__(self):
+        TemplateGenderNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TemplateGenderNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
@@ -36,3 +43,11 @@ class TemplateGenderNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><gender>Test</gender></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateGenderNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

@@ -6,6 +6,12 @@ from programy.dialog import Conversation, Question
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateThatNode(TemplateThatNode):
+    def __init__(self):
+        TemplateThatNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateThatNodeTests(TemplateTestsBaseClass):
 
@@ -107,3 +113,11 @@ class TemplateThatNodeTests(TemplateTestsBaseClass):
 
         self.assertEqual("Hello matey", node.resolve(self.bot, "testid"))
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateThatNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

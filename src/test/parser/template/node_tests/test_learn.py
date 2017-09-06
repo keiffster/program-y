@@ -7,6 +7,13 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateLearnNode(TemplateLearnNode):
+    def __init__(self):
+        TemplateLearnNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TestLearnCategory(unittest.TestCase):
 
     def test_init(self):
@@ -71,3 +78,11 @@ class TemplateLearnNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><learn><category><pattern>HELLO LEARN</pattern><topic>*</topic><that>*</that><template>LEARN</template></category></learn></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateLearnNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

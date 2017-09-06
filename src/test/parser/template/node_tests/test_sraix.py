@@ -18,6 +18,13 @@ class MockService(Service):
     def ask_question(self, bot, clientid: str, question: str):
         return "asked"
 
+class MockTemplateSRAIXNode(TemplateSRAIXNode):
+    def __init__(self):
+        TemplateSRAIXNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
 
     def test_node_unsupported_attributes(self):
@@ -135,3 +142,12 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         node.append(TemplateWordNode("Hello"))
 
         self.assertEqual("", node.resolve(self.bot, self.clientid))
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateSRAIXNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

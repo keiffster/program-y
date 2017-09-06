@@ -7,6 +7,14 @@ from programy.parser.template.nodes.word import TemplateWordNode
 from test.parser.template.base import TemplateTestsBaseClass
 
 
+class MockTemplateMapNode(TemplateMapNode):
+    def __init__(self):
+        TemplateMapNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
+
 class TemplateMapNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
@@ -164,3 +172,11 @@ class TemplateMapNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><map name="COLOURS">BLACK</map></template>', xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateMapNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

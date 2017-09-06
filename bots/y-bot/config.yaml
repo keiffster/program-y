@@ -144,6 +144,18 @@ bot:
       check_before: false
       check_and_retry: false
 
+voice:
+  tts: osx
+  stt: azhang
+  osx:
+    classname: talky.clients.voice.tts.osxsay.OSXSayTextToSpeach
+  pytts:
+    classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
+    rate_adjust: 50
+  azhang:
+    classname: talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText
+    ambient_adjust: 2
+    service: google
 
 rest:
   host: 0.0.0.0

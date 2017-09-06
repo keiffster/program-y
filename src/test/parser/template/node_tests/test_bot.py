@@ -6,6 +6,13 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateBotNode(TemplateBotNode):
+
+    def __init__(self):
+        TemplateBotNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is a failure")
 
 class TemplateBotNodeTests(TemplateTestsBaseClass):
 
@@ -56,4 +63,22 @@ class TemplateBotNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><bot name="name" /></template>', xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = MockTemplateBotNode()
+        self.assertIsNotNone(node)
+        node.name = TemplateWordNode("location")
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        self.bot.brain.properties.add_property("location", "Scotland")
+
+        with self.assertRaises(Exception):
+            node.resolve_to_string(self.bot, self.clientid)
+
+        self.assertEquals("", root.resolve(self.bot, self.clientid))
 

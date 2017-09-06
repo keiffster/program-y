@@ -35,38 +35,46 @@ class RDFEntity(object):
 
     def to_xml(self, bot, clientid):
         xml = ""
-        xml += "<subj>%s</subj>"%self._subject.to_xml(bot, clientid)
-        xml += "<pred>%s</pred>"%self._predicate.to_xml(bot, clientid)
-        xml += "<obj>%s</obj>"%self._object.to_xml(bot, clientid)
+        xml += "<subj>%s</subj>"%(self._subject if self._subject is not None else "")
+        xml += "<pred>%s</pred>"%(self._predicate if self._predicate is not None else "")
+        xml += "<obj>%s</obj>"%(self._object if self._object is not None else "")
         return xml
 
     def to_string(self, resultset):
         str = "( "
 
-        if resultset.subject.startswith("?"):
-            str += resultset.subject
-        else:
-            str += "_"
-        str += "="
-        str += self.subject
+        comma = False
+        if self.subject is not None:
+            if resultset.subject.startswith("?"):
+                str += resultset.subject
+            else:
+                str += "_"
+            str += "="
+            str += self.subject
+            comma = True
 
-        str += ", "
+        if comma is True:
+            str += ", "
 
-        if resultset.predicate.startswith("?"):
-            str += resultset.predicate
-        else:
-            str += "_"
-        str += "="
-        str += self.predicate
+        if self.predicate is not None:
+            if resultset.predicate.startswith("?"):
+                str += resultset.predicate
+            else:
+                str += "_"
+            str += "="
+            str += self.predicate
+            comma = True
 
-        str += ", "
+        if comma is True:
+            str += ", "
 
-        if resultset.object.startswith("?"):
-            str += resultset.object
-        else:
-            str += "_"
-        str += "="
-        str += self.object
+        if self.object is not None:
+            if resultset.object.startswith("?"):
+                str += resultset.object
+            else:
+                str += "_"
+            str += "="
+            str += self.object
 
         str += " )"
         return str

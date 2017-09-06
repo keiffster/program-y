@@ -1,5 +1,6 @@
 import unittest
 import os
+import datetime
 
 from programy.brain import Brain
 from programy.bot import Bot
@@ -210,4 +211,40 @@ class BotTests(unittest.TestCase):
         bot.configuration._max_question_recursion = 0
 
         with self.assertRaises(Exception):
-            response = bot.ask_question("testid", "hello")
+            bot.ask_question("testid", "hello")
+
+    def test_total_search_time(self):
+
+        test_brain = Brain(BrainConfiguration())
+        self.assertIsNotNone(test_brain)
+
+        bot = Bot(test_brain, BotConfiguration())
+        self.assertIsNotNone(bot)
+
+        bot._question_start_time = datetime.datetime.now()
+        self.assertTrue(bot.total_search_time() > 0)
+
+
+        bot.configuration._max_question_timeout = -1
+        bot.check_max_timeout()
+
+        bot.configuration._max_question_timeout = 0
+        with self.assertRaises(Exception):
+            bot.check_max_timeout()
+
+    def test_log_question_and_answer(self):
+
+        brain_config = BrainConfiguration()
+        brain_config.files.aiml_files._conversation = "/tmp/tmp-conversation.txt"
+        test_brain = Brain(brain_config)
+
+        bot = Bot(test_brain, BotConfiguration())
+
+        if os.path.exists(brain_config.files.aiml_files._conversation):
+            os.remove( brain_config.files.aiml_files._conversation)
+
+        self.assertFalse(os.path.exists(brain_config.files.aiml_files._conversation))
+
+        bot.log_question_and_answer("testid", "question","answer")
+
+        self.assertTrue(os.path.exists(brain_config.files.aiml_files._conversation))

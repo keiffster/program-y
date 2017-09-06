@@ -27,13 +27,16 @@ class ClientIdAuthenticationService(Authenticator):
             "console"
         ]
 
+    def user_auth_service(self, clientid):
+        return False
+
     # Its at this point that we would call a user auth service, and if that passes
     # return true, appending the user to the known authorised list of user
     # This is a very naive approach, and does not cater for users that log out, invalidate
     # their credentials, or have a TTL on their credentials
     # #Exercise for the reader......
     def _auth_clientid(self, clientid):
-        authorised = False # call user_auth_service()
+        authorised = self.user_auth_service(clientid)
         if authorised is True:
             self.authorised.append(clientid)
         return authorised

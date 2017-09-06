@@ -36,21 +36,25 @@ class TemplateLogNode(TemplateAttribNode):
     def level(self, level):
         self._level = level
 
+    def resolve_to_string(self, bot, clientid):
+        resolved = self.resolve_children_to_string(bot, clientid)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        if self._level == "debug":
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(resolved)
+        elif self._level == "warning":
+            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning(resolved)
+        elif self._level == "error":
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(resolved)
+        elif self._level == "info":
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info(resolved)
+        else:
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info(resolved)
+        return ""
+
     def resolve(self, bot, clientid):
         try:
-            resolved = self.resolve_children_to_string(bot, clientid)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            if self._level == "debug":
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(resolved)
-            elif self._level == "warning":
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning(resolved)
-            elif self._level == "error":
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(resolved)
-            elif self._level == "info":
-                if logging.getLogger().isEnabledFor(logging.INFO): logging.info(resolved)
-            else:
-                if logging.getLogger().isEnabledFor(logging.INFO): logging.info(resolved)
-            return ""
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

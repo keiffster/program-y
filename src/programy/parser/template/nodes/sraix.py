@@ -35,20 +35,25 @@ class TemplateSRAIXNode(TemplateNode):
     def service(self, service):
         self._service = service
 
+    def resolve_to_string(self, bot, clientid):
+        resolved = self.resolve_children_to_string(bot, clientid)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+
+        if self._service is not None:
+            bot_service = ServiceFactory.get_service(self._service)
+            response = bot_service.ask_question(bot, clientid, resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SRAIX service [%s] return [%s]",
+                                                                              self._service, response)
+            return response
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+            return ""
+
     def resolve(self, bot, clientid):
         try:
-            resolved = self.resolve_children_to_string(bot, clientid)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-
-            if self._service is not None:
-                bot_service = ServiceFactory.get_service(self._service)
-                response = bot_service.ask_question(bot, clientid, resolved)
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SRAIX service [%s] return [%s]", self._service, response)
-                return response
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
-                return ""
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

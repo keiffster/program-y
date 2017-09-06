@@ -24,7 +24,7 @@ class RestAPI(object):
     def get(self, host, data):
         return requests.get(host, data=data)
 
-    def post(host, data):
+    def post(self, host, data):
         return requests.post(host, data=data)
 
 class GenericRESTService(Service):
@@ -56,7 +56,7 @@ class GenericRESTService(Service):
             elif self.method == 'POST':
                 response = self.api.post(self.host, data=self.payload)
             else:
-                raise Exception("Unsupported REST method [%s]", self.method)
+                raise Exception("Unsupported REST method [%s]"%self.method)
 
             if response.status_code != 200:
                 if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("[%s] return status code [%d]", self.host, response.status_code)

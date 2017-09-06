@@ -26,11 +26,10 @@ class TemplateIdNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, bot, clientid):
-        try:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
+        if clientid is not None:
             return clientid
-        except Exception as excep:
-            logging.exception(excep)
+        else:
             return ""
 
     def to_string(self):

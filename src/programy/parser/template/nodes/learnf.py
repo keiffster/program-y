@@ -26,12 +26,15 @@ class TemplateLearnfNode(TemplateLearnNode):
     def __init__(self):
         TemplateLearnNode.__init__(self)
 
+    def resolve_to_string(self, bot, clientid):
+        for category in self.children:
+            new_node = self._create_new_category(bot, clientid, category)
+            self.write_learnf_to_file(bot, clientid, new_node)
+        return ""
+
     def resolve(self, bot, clientid):
         try:
-            for category in self.children:
-                new_node = self._create_new_category(bot, clientid, category)
-                self.write_learnf_to_file(bot, clientid, new_node)
-            return ""
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

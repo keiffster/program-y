@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 
 class RDFQueryResultSet(object):
+
     def __init__(self, subject, predicate, object, results):
         self._subject = subject
         self._predicate = predicate

@@ -30,18 +30,21 @@ class TemplateXMLNode(TemplateAttribNode):
     def set_attrib(self, attrib_name, attrib_value):
         self._attribs[attrib_name] = attrib_value
 
+    def resolve_to_string(self, bot, clientid):
+        xml = "<%s" % self._name
+        for attrib_name in self._attribs:
+            attrib_value = self._attribs[attrib_name]
+            escaped = TextUtils.html_escape(attrib_value)
+            # TODO We could have nodes here, make sure they are resolved
+            xml += ' %s="%s"' % (attrib_name, escaped)
+        xml += ">"
+        xml += self.resolve_children_to_string(bot, clientid)
+        xml += "</%s>" % self._name
+        return xml
+
     def resolve(self, bot, clientid):
         try:
-            xml = "<%s" % self._name
-            for attrib_name in self._attribs:
-                attrib_value = self._attribs[attrib_name]
-                escaped = TextUtils.html_escape(attrib_value)
-                #TODO We could have nodes here, make sure they are resolved
-                xml += ' %s="%s"' % (attrib_name, escaped)
-            xml += ">"
-            xml += self.resolve_children_to_string(bot, clientid)
-            xml += "</%s>" % self._name
-            return xml
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

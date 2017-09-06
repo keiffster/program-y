@@ -6,6 +6,12 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateSRAINode(TemplateSRAINode):
+    def __init__(self):
+        TemplateSRAINode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateSRAINodeTests(TemplateTestsBaseClass):
 
@@ -38,3 +44,11 @@ class TemplateSRAINodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><srai>Hello</srai></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateSRAINode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

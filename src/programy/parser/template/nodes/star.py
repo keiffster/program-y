@@ -23,35 +23,41 @@ class TemplateStarNode(TemplateIndexedNode):
     def __init__(self, index=1):
         TemplateIndexedNode.__init__(self, index)
 
+    def resolve_to_string(self, bot, clientid):
+        conversation = bot.get_conversation(clientid)
+
+        if conversation.has_current_question():
+
+            current_question = conversation.current_question()
+
+            current_sentence = current_question.current_sentence()
+
+            matched_context = current_sentence.matched_context
+            if matched_context is None:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                    "Star node has no matched context for clientid %s" % (clientid))
+                resolved = ""
+            else:
+                try:
+                    resolved = matched_context.star(self.index)
+                    if resolved is None:
+                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                            "Star index not in range [%d]" % (self.index))
+                        resolved = ""
+                except:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                        "Star index not in range [%d]" % (self.index))
+                    resolved = ""
+        else:
+            resolved = ""
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Star Node [%s] resolved to [%s]",
+                                                                          self.to_string(), resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            conversation = bot.get_conversation(clientid)
-
-            if conversation.has_current_question():
-
-                current_question = conversation.current_question()
-
-                current_sentence = current_question.current_sentence()
-
-                matched_context = current_sentence.matched_context
-                if matched_context is None:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Star node has no matched context for clientid %s" % (clientid))
-                    resolved = ""
-                else:
-                    try:
-                        resolved = matched_context.star(self.index)
-                        if resolved is None:
-                            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Star index not in range [%d]" % (self.index))
-                            resolved = ""
-                    except:
-                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Star index not in range [%d]"%(self.index))
-                        resolved = ""
-            else:
-                resolved = ""
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Star Node [%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

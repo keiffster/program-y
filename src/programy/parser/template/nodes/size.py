@@ -24,11 +24,15 @@ class TemplateSizeNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
+    def resolve_to_string(self, bot, clientid):
+        resolved = str(bot.brain.aiml_parser.num_categories)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            resolved = str(bot.brain.aiml_parser.num_categories)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

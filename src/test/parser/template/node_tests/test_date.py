@@ -9,6 +9,14 @@ from test.parser.template.base import TemplateTestsBaseClass
 from test.custom import CustomAssertions
 
 
+class MockTemplateDateNode(TemplateDateNode):
+
+    def __init__(self, date_format=None):
+        TemplateDateNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is a failure")
+
 class TemplateDateNodeTests(TemplateTestsBaseClass, CustomAssertions):
 
     DEFAULT_DATETIME_REGEX = "^.{3}\s*.{3}\s*\d{1,}\s\d{2}:\d{2}:\d{2}\s\d{4}"
@@ -88,3 +96,19 @@ class TemplateDateNodeTests(TemplateTestsBaseClass, CustomAssertions):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><date format="%c">Mon Sep 30 07:06:05 2013</date></template>', xml_str)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = MockTemplateDateNode()
+        self.assertIsNotNone(node)
+
+        root.append(node)
+
+        with self.assertRaises(Exception):
+            node.resolve_to_string(self.bot, self.clientid)
+
+        self.assertEquals("", root.resolve(self.bot, self.clientid))

@@ -15,7 +15,7 @@ class DialOutOfBandProcessor(OutOfBandProcessor):
         self._number = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        if oob.text is not None:
+        if oob is not None and oob.text is not None:
             self._number = oob.text
             return True
         else:

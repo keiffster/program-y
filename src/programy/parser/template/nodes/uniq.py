@@ -35,15 +35,19 @@ class TemplateUniqNode(TemplateNode):
     def query(self):
         return self._query
 
+    def resolve_to_string(self, bot, clientid):
+        results = self._query.execute(bot, clientid)
+        outer = []
+        for inner in results:
+            outer += inner
+        resolved = " ".join(outer)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            results = self._query.execute(bot, clientid)
-            outer = []
-            for inner in results:
-                outer += inner
-            resolved = " ".join(outer)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

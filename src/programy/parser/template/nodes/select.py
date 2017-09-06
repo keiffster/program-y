@@ -33,7 +33,6 @@ class TemplateSelectNode(TemplateNode):
         else:
             self._query = query
 
-
     @property
     def query(self):
         return self._query
@@ -42,12 +41,16 @@ class TemplateSelectNode(TemplateNode):
         return json.dumps(tuples)
         #return pickle._dumps(tuples)
 
+    def resolve_to_string(self, bot, clientid):
+        results = self.query.execute(bot, clientid)
+        resolved = json.dumps(results)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            results = self.query.execute(bot, clientid)
-            resolved = json.dumps(results)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

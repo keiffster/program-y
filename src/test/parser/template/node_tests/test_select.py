@@ -6,6 +6,12 @@ from programy.rdf.select import RDFSelectStatement
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateSelectNode(TemplateSelectNode):
+    def __init__(self):
+        TemplateSelectNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateSelectNodeTests(TemplateTestsBaseClass):
 
@@ -29,6 +35,15 @@ class TemplateSelectNodeTests(TemplateTestsBaseClass):
         node = TemplateSelectNode()
         self.assertIsNotNone(node.query)
         self.assertIsInstance(node.query, RDFSelectStatement)
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateSelectNode()
         root.append(node)
 
         result = root.resolve(self.bot, self.clientid)

@@ -26,12 +26,16 @@ class TemplateDenormalizeNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
+    def resolve_to_string(self, bot, clientid):
+        string = self.resolve_children_to_string(bot, clientid)
+        resolved = bot.brain.denormals.denormalise_string(string)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            string = self.resolve_children_to_string(bot, clientid)
-            resolved = bot.brain.denormals.denormalise_string(string)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

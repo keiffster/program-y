@@ -29,17 +29,17 @@ class TemplateThatNode(TemplateDoubleIndexedNode):
     def __init__(self, question=1, sentence=1):
         TemplateDoubleIndexedNode.__init__(self, question, sentence)
 
+    def resolve_to_string(self, bot, clientid):
+        conversation = bot.get_conversation(clientid)
+        question = conversation.previous_nth_question(self.question)
+        resolved = question.combine_answers()
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            conversation = bot.get_conversation(clientid)
-
-            question = conversation.previous_nth_question(self.question)
-
-            resolved = question.combine_answers()
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

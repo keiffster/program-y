@@ -1,5 +1,6 @@
 import unittest
 import os
+import yaml
 
 from programy.utils.security.authorise.usergrouploader import UserGroupLoader
 
@@ -32,6 +33,51 @@ class UserGroupLoaderTests(unittest.TestCase):
         self.assertEqual(0, len(groups[1].groups))
         self.assertEqual(0, len(groups[1].users))
 
+    def test_load_no_data(self):
+        loader = UserGroupLoader()
+        with self.assertRaises(Exception):
+            loader.load_users_and_groups_from_text("")
+
+    def test_load_from_text_no_users(self):
+        loader = UserGroupLoader()
+        yaml_data = yaml.load("""
+        groups:
+           sysadmin:
+             roles:
+               root, admin, system
+             groups:
+               user
+
+           user:
+             roles:
+               ask
+         """)
+        users = loader.load_users(yaml_data)
+        self.assertIsNotNone(users)
+        self.assertEqual({}, users)
+
+        loader.dump_users_and_groups(users, None)
+
+    def test_load_from_text_no_groups(self):
+        loader = UserGroupLoader()
+        yaml_data = yaml.load("""
+        users:
+          console:
+            roles:
+              user
+            groups:
+              sysadmin
+
+        user:
+          roles:
+            ask
+         """)
+        groups = loader.load_groups(yaml_data)
+        self.assertIsNotNone(groups)
+        self.assertEqual({}, groups)
+
+        loader.dump_users_and_groups(None, groups)
+
     def test_load_from_text(self):
 
         loader = UserGroupLoader()
@@ -55,6 +101,7 @@ class UserGroupLoaderTests(unittest.TestCase):
               ask
         """)
 
+        loader.dump_users_and_groups(users_dict, groups_dict)
 
         users = list(users_dict.values())
         self.assertIsNotNone(users)
@@ -77,6 +124,8 @@ class UserGroupLoaderTests(unittest.TestCase):
         self.assertEqual(1, len(groups[1].roles))
         self.assertEqual(0, len(groups[1].groups))
         self.assertEqual(0, len(groups[1].users))
+
+
 
     def test_load_from_text_multiples(self):
 
@@ -103,6 +152,7 @@ class UserGroupLoaderTests(unittest.TestCase):
                     role10
         """)
 
+        loader.dump_users_and_groups(users_dict, groups_dict)
 
         users = list(users_dict.values())
         self.assertIsNotNone(users)
@@ -142,6 +192,8 @@ class UserGroupLoaderTests(unittest.TestCase):
         """)
 
 
+        loader.dump_users_and_groups(users_dict, groups_dict)
+
         users = list(users_dict.values())
         self.assertIsNotNone(users)
 
@@ -165,6 +217,8 @@ class UserGroupLoaderTests(unittest.TestCase):
                     role2
         """)
 
+
+        loader.dump_users_and_groups(users_dict, groups_dict)
 
         users = list(users_dict.values())
         self.assertIsNotNone(users)

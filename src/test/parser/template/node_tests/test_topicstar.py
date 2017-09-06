@@ -8,6 +8,12 @@ from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateTopicStarNode(TemplateTopicStarNode):
+    def __init__(self):
+        TemplateTopicStarNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateNodeTests(TemplateTestsBaseClass):
 
@@ -104,3 +110,12 @@ class TemplateNodeTests(TemplateTestsBaseClass):
         self.bot._conversations["testid"] = conversation
 
         self.assertEqual("Matched", node.resolve(self.bot, "testid"))
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateTopicStarNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

@@ -38,17 +38,20 @@ class TemplateExtensionNode(TemplateNode):
     def path(self, path):
         self._path = path
 
+    def resolve_to_string(self, bot, clientid):
+        data = self.resolve_children_to_string(bot, clientid)
+
+        new_class = ClassLoader.instantiate_class(self._path)
+        instance = new_class()
+        resolved = instance.execute(bot, clientid, data)
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            data = self.resolve_children_to_string(bot, clientid)
-
-            new_class = ClassLoader.instantiate_class(self._path)
-            instance = new_class()
-            resolved = instance.execute(bot, clientid, data)
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

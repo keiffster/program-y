@@ -1,4 +1,5 @@
 import unittest
+import unittest.mock
 
 from programy.extensions.maps.maps import GoogleMapsExtension
 from test.aiml_tests.client import TestClient
@@ -19,7 +20,6 @@ class MapsExtensionTests(unittest.TestCase):
         GOOGLE_MAPS_DIRECTIONS=%s
         """%(latlong, distance, directions))
 
-
     def test_maps_distance(self):
         googlemaps = GoogleMapsExtension()
         self.assertIsNotNone(googlemaps)
@@ -35,3 +35,30 @@ class MapsExtensionTests(unittest.TestCase):
         result = googlemaps.execute(self.test_client.bot, "testid", "DIRECTIONS EDINBURGH KINGHORN")
         self.assertIsNotNone(result)
         self.assertTrue(result.startswith("DIRECTIONS Head west on Leith St/A900 toward Leith"))
+
+    def test_maps_unknown(self):
+        googlemaps = GoogleMapsExtension()
+        self.assertIsNotNone(googlemaps)
+
+        result = googlemaps.execute(self.test_client.bot, "testid", "SOMETHINGELSE EDINBURGH KINGHORN")
+        self.assertIsNone(result)
+
+    def test_format_distance_for_programy(self):
+        googlemaps = GoogleMapsExtension()
+        self.assertIsNotNone(googlemaps)
+
+        distance = unittest.mock.Mock()
+        distance._distance_text = "10 miles"
+        self.assertEquals("DISTANCE DEC 10 FRAC 0 UNITS miles", googlemaps._format_distance_for_programy(distance))
+
+        distance = unittest.mock.Mock()
+        distance._distance_text = "22.45 km"
+        self.assertEquals("DISTANCE DEC 22 FRAC 45 UNITS km", googlemaps._format_distance_for_programy(distance))
+
+    def test_format_directions_for_programy(self):
+        googlemaps = GoogleMapsExtension()
+        self.assertIsNotNone(googlemaps)
+
+        directions = unittest.mock.Mock()
+        directions.legs_as_a_string = lambda : "Leg As String"
+        self.assertEquals("DIRECTIONS Leg As String", googlemaps._format_directions_for_programy(directions))

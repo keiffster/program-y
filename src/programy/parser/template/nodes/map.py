@@ -49,27 +49,33 @@ class TemplateMapNode(TemplateNode):
                 value = ""
         return value
 
+    def resolve_to_string(self, bot, clientid):
+        name = self.name.resolve(bot, clientid).upper()
+        var = self.resolve_children(bot, clientid).upper()
+
+        if bot.brain.dynamics.is_dynamic_map(name) is True:
+            value = bot.brain.dynamics.dynamic_map(bot, clientid, name, var)
+        else:
+            if bot.brain.maps.contains(name) is False:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                    "No map defined for [%s], using default-map as value" % var)
+                value = self.get_default_value(bot)
+            else:
+                the_map = bot.brain.maps.map(name)
+                if var in the_map:
+                    value = the_map[var]
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                        "No value defined for [%s], using default-map as value" % var)
+                    value = self.get_default_value(bot)
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("MAP [%s] resolved to [%s] = [%s]",
+                                                                          self.to_string(), name, value)
+        return value
+
     def resolve(self, bot, clientid):
         try:
-            name = self.name.resolve(bot, clientid).upper()
-            var = self.resolve_children(bot, clientid).upper()
-
-            if bot.brain.dynamics.is_dynamic_map(name) is True:
-                value = bot.brain.dynamics.dynamic_map(bot, clientid, name, var)
-            else:
-                if bot.brain.maps.contains(name) is False:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No map defined for [%s], using default-map as value" % var)
-                    value = self.get_default_value(bot)
-                else:
-                    the_map = bot.brain.maps.map(name)
-                    if var in the_map:
-                        value = the_map[var]
-                    else:
-                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value defined for [%s], using default-map as value" % var)
-                        value = self.get_default_value(bot)
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
-            return value
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

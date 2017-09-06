@@ -78,7 +78,8 @@ class RDFQuery(object):
 
         return str
 
-    def get_parameter_value(self, name, parameters):
+    @staticmethod
+    def get_parameter_value(name, parameters):
         for pair in parameters:
             if name == pair[0]:
                 return pair[1]
@@ -93,7 +94,7 @@ class RDFQuery(object):
         # Now see if any are variables rather than data
         if subject.startswith("?"):
             if parameters is not None:
-                subj_val = self.get_parameter_value(subject, parameters)
+                subj_val = RDFQuery.get_parameter_value(subject, parameters)
             else:
                 subj_val = None
         else:
@@ -101,7 +102,7 @@ class RDFQuery(object):
 
         if predicate.startswith("?"):
             if parameters is not None:
-                pred_val = self.get_parameter_value(predicate, parameters)
+                pred_val = RDFQuery.get_parameter_value(predicate, parameters)
             else:
                 pred_val = None
         else:
@@ -109,7 +110,7 @@ class RDFQuery(object):
 
         if object.startswith("?"):
             if parameters is not None:
-                obj_val = self.get_parameter_value(object, parameters)
+                obj_val = RDFQuery.get_parameter_value(object, parameters)
             else:
                 obj_val = None
         else:

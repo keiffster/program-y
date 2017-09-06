@@ -6,6 +6,13 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateIntervalNode(TemplateIntervalNode):
+    def __init__(self):
+        TemplateIntervalNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 
 class TemplateIntervalNodeTests(TemplateTestsBaseClass):
 
@@ -277,3 +284,12 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><interval format="%c" style="years"><from>Thu Oct 6 16:35:11 2014</from><to>Fri Oct 7 16:35:11 2016</to></interval></template>', xml_str)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateIntervalNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

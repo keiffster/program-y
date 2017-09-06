@@ -43,26 +43,30 @@ class TemplateAuthoriseNode(TemplateNode):
     def denied_srai(self, denied_srai):
         self._denied_srai = denied_srai
 
+    def resolve_to_string(self, bot, clientid):
+        # Check if the user, role or group exists, assumption being, that if defined
+        # in the tag and exists then we can execute the inner children
+        # Assumption is that user has been authenticated and passed and is value
+        if bot.brain.authorisation is not None:
+            if bot.brain.authorisation.authorise(clientid, self.role) is False:
+                if self._denied_srai is not None:
+                    srai_text = self._denied_srai
+                else:
+                    srai_text = bot.brain.authorisation.get_default_denied_srai()
+                resolved = bot.ask_question(clientid, srai_text, srai=True)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]",
+                                                                                  self.to_string(), resolved)
+                return resolved
+
+        # Resolve afterwards, as pointless resolving before checking for authorisation
+        resolved = self.resolve_children_to_string(bot, clientid)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            # Check if the user, role or group exists, assumption being, that if defined
-            # in the tag and exists then we can execute the inner children
-            # Assumption is that user has been authenticated and passed and is value
-            if bot.brain.authorisation is not None:
-                if bot.brain.authorisation.authorise(clientid, self.role) is False:
-                    if self._denied_srai is not None:
-                        srai_text = self._denied_srai
-                    else:
-                        srai_text = bot.brain.authorisation.get_default_denied_srai()
-                    resolved = bot.ask_question(clientid, srai_text, srai=True)
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-                    return resolved
-
-            # Resolve afterwards, as pointless resolving before checking for authorisation
-            resolved = self.resolve_children_to_string(bot, clientid)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

@@ -380,6 +380,12 @@ class PatternNode(object):
         else:
             return "NODE"
 
+    def get_tabs(self, bot, depth):
+        if bot.configuration.tab_parse_output is True:
+            return TextUtils.get_tabs(depth)
+        else:
+            return ""
+
     def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
         str = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
@@ -461,10 +467,7 @@ class PatternNode(object):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        if bot.configuration.tab_parse_output is True:
-            tabs = TextUtils.get_tabs(depth)
-        else:
-            tabs = ""
+        tabs = self.get_tabs(bot, depth)
 
         if context.search_time_exceeded() is True:
             if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_timeout))

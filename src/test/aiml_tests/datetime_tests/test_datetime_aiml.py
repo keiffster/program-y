@@ -34,7 +34,7 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_season(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "SEASON")
         self.assertIsNotNone(response)
-        self.assertRegex(response, "[Winter|Spring|Summer|Autumn]")
+        self.assertRegex(response, "[Winter|Spring|Summer|Autumn|Fall]")
 
     def test_day(self):
         response = DateTimeAIMLTests.test_client.bot.ask_question("test", "DAY")

@@ -16,17 +16,18 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
         self._description = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        for child in oob:
-            if child.tag == 'title':
-                self._title = child.text
-            elif child.tag == 'description':
-                self._description = child.text
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Unknown child element [%s] in schedule oob"%(child.tag))
+        if oob is not None:
+            for child in oob:
+                if child.tag == 'title':
+                    self._title = child.text
+                elif child.tag == 'description':
+                    self._description = child.text
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Unknown child element [%s] in schedule oob"%(child.tag))
 
-        if self._title is not None and \
-            self._description is not None:
-            return True
+            if self._title is not None and \
+                self._description is not None:
+                return True
 
         if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid email schedule command")
         return False

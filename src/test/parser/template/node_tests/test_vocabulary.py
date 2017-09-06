@@ -9,6 +9,12 @@ from programy.mappings.sets import SetLoader
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateVocabularyNode(TemplateVocabularyNode):
+    def __init__(self):
+        TemplateVocabularyNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
 
@@ -52,3 +58,11 @@ class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><vocabulary>Test</vocabulary></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateVocabularyNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

@@ -8,6 +8,12 @@ from programy.parser.exceptions import ParserException
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateSystemNode(TemplateSystemNode):
+    def __init__(self):
+        TemplateSystemNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateSystemNodeTests(TemplateTestsBaseClass):
 
@@ -114,3 +120,12 @@ class TemplateSystemNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><system timeout="1000">echo "Hello World"</system></template>', xml_str)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateSystemNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

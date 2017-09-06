@@ -8,6 +8,12 @@ from programy.rdf.unique import RDFUniqueStatement
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateUniqNode(TemplateUniqNode):
+    def __init__(self):
+        TemplateUniqNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateUniqNodeTests(TemplateTestsBaseClass):
 
@@ -49,6 +55,15 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
         self.assertEquals(node.query, statement)
 
         root.append(node)
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateUniqNode()
+        root.append(node)
+
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

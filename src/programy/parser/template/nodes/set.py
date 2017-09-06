@@ -21,7 +21,6 @@ from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
 
-
 class TemplateSetNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
@@ -50,26 +49,34 @@ class TemplateSetNode(TemplateNode):
         else:
             return ""
 
+    def resolve_to_string(self, bot, clientid):
+        name = self.name.resolve(bot, clientid)
+        value = self.resolve_children(bot, clientid)
+
+        if self.local is True:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to local: [%s] => [%s]",
+                                                                              self.to_string(), name, value)
+            bot.get_conversation(clientid).current_question().set_property(name, value)
+        else:
+            if bot.override_properties is False and bot.brain.properties.has_property(name):
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
+                    "Global property already exists for name [%s], ignoring set!", name)
+                value = bot.brain.properties.property(name)
+            else:
+                if bot.brain.properties.has_property(name):
+                    if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning(
+                        "Global property already exists for name [%s], over writing!", name)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(
+                    "[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
+                bot.get_conversation(clientid).set_property(name, value)
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          value)
+        return value
+
     def resolve(self, bot, clientid):
         try:
-            name = self.name.resolve(bot, clientid)
-            value = self.resolve_children(bot, clientid)
-
-            if self.local is True:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
-                bot.get_conversation(clientid).current_question().set_property(name, value)
-            else:
-                if bot.override_properties is False and bot.brain.properties.has_property(name):
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Global property already exists for name [%s], ignoring set!", name)
-                    value = bot.brain.properties.property(name)
-                else:
-                    if bot.brain.properties.has_property(name):
-                        if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Global property already exists for name [%s], over writing!", name)
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
-                    bot.get_conversation(clientid).set_property(name, value)
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), value)
-            return value
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

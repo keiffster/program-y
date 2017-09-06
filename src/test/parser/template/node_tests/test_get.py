@@ -9,6 +9,13 @@ from programy.dialog import Question
 from test.parser.template.base import TemplateTestsBaseClass
 
 
+class MockTemplateGetNode(TemplateGetNode):
+    def __init__(self):
+        TemplateGetNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TemplateGetNodeTests(TemplateTestsBaseClass):
 
     def test_local_get(self):
@@ -177,3 +184,12 @@ class TemplateGetNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><get var="?x ?y"><select><vars /></select></get></template>', xml_str)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateGetNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

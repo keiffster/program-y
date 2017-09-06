@@ -4,9 +4,15 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.request import TemplateRequestNode
 from programy.dialog import Question, Conversation
 
-
 from test.parser.template.base import TemplateTestsBaseClass
 
+
+class MockTemplateRequestNode(TemplateRequestNode):
+    def __init__(self):
+        TemplateRequestNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateRequestNodeTests(TemplateTestsBaseClass):
 
@@ -122,3 +128,12 @@ class TemplateRequestNodeTests(TemplateTestsBaseClass):
         response = root.resolve(self.bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateRequestNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

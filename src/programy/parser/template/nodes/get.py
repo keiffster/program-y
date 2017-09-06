@@ -117,13 +117,16 @@ class TemplateGetNode(TemplateNode):
 
         return resolved
 
+    def resolve_to_string(self, bot, clientid):
+        if self.tuples is None:
+            value = self.resolve_variable(bot, clientid)
+        else:
+            value = self.resolve_tuple(bot, clientid)
+        return value
+
     def resolve(self, bot, clientid):
         try:
-            if self.tuples is None:
-                value = self.resolve_variable(bot, clientid)
-            else:
-                value = self.resolve_tuple(bot, clientid)
-            return value
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

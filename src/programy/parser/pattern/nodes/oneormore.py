@@ -60,10 +60,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
-        if bot.configuration.tab_parse_output is True:
-            tabs = TextUtils.get_tabs(depth)
-        else:
-            tabs = ""
+        tabs = self.get_tabs(bot, depth)
 
         if context.search_time_exceeded() is True:
             if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_timeout))

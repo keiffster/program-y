@@ -16,10 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import json
-import os
 import urllib.request
+
 from programy.utils.geo.latlong import LatLong
-from programy.utils.text.text import TextUtils
+
 
 class GeoNamesApi(object):
 
@@ -86,22 +86,4 @@ class GeoNamesApi(object):
             raise Exception("Invalid/Unknown post code")
 
         return LatLong(data['postalCodes'][0]['lat'], data['postalCodes'][0]['lng'])
-
-
-if __name__ == '__main__':
-
-    # Only to be used to create test data for unit aiml_tests
-
-    from programy.utils.license.keys import LicenseKeys
-
-    license_keys = LicenseKeys()
-    license_keys.load_license_key_file(os.path.dirname(__file__) + TextUtils.replace_path_seperator('/../../../../bots/y-bot/config/license.keys'))
-
-    geonamesapi = GeoNamesApi(license_keys)
-
-    # Running these tools drops test files into the geocode test folder
-    geonamesapi.store_get_latlong_for_postcode_to_file("KY39UR", TextUtils.replace_path_seperator("../../../test/utils/geocode/geonames_latlong.json"))
-    geonamesapi.store_get_latlong_for_postcode_to_file("KY39UR", TextUtils.replace_path_seperator("../../../test/utils/geo/geonames_latlong.json"))
-
-    # Only to be used to create test data for unit aiml_tests
 

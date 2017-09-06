@@ -30,23 +30,9 @@ class Authorisable(object):
     def roles(self):
         return self._roles
 
-    @property
-    def groups(self):
-        return self._groups
-
     def add_role(self, role):
         if role not in self._roles:
             self.roles.append(role)
-
-    def add_role(self, role):
-        if role not in self._roles:
-            self._roles.append(role)
-
-    def available_roles(self):
-        roles = self._roles[:]
-        for group in self._groups:
-            roles += group.available_roles()
-        return roles
 
     def has_role(self, role):
         if role in self._roles:
@@ -60,6 +46,10 @@ class Authorisable(object):
     def groups(self):
         return self._groups
 
+    def add_group(self, group):
+        if group not in self._groups:
+            self._groups.append(group)
+
     def has_group(self, id):
         for group in self._groups:
             if id == group.id:
@@ -67,6 +57,12 @@ class Authorisable(object):
             else:
                 return group.has_group(id)
         return False
+
+    def available_roles(self):
+        roles = self._roles[:]
+        for group in self._groups:
+            roles += group.available_roles()
+        return roles
 
 
 class Group(Authorisable):
@@ -87,6 +83,11 @@ class Group(Authorisable):
         if user not in self._users:
             self._users.append(user)
 
+    def has_user(self, id):
+        for user in self._users:
+            if user.id == id:
+                return True
+        return False
 
 class User(Authorisable):
 

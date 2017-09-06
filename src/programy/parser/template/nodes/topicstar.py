@@ -31,19 +31,18 @@ class TemplateTopicStarNode(TemplateIndexedNode):
     def __init__(self, index=1):
         TemplateIndexedNode.__init__(self, index)
 
+    def resolve_to_string(self, bot, clientid):
+        conversation = bot.get_conversation(clientid)
+        question = conversation.current_question()
+        sentence = question.current_sentence()
+        resolved = sentence.matched_context.topicstar(self.index)
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            conversation= bot.get_conversation(clientid)
-
-            question = conversation.current_question()
-
-            sentence = question.current_sentence()
-
-            resolved = sentence.matched_context.topicstar(self.index)
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

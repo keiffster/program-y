@@ -139,11 +139,14 @@ class TemplateLearnNode(TemplateNode):
 
         return LearnCategory(new_pattern, new_topic, new_that, new_template)
 
+    def resolve_to_string(self, bot, clientid):
+        for category in self.children:
+            self._create_new_category(bot, clientid, category)
+        return ""
+
     def resolve(self, bot, clientid):
         try:
-            for category in self.children:
-                self._create_new_category(bot, clientid, category)
-            return ""
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

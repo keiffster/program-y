@@ -6,6 +6,12 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from test.parser.template.base import TemplateTestsBaseClass
 
+class MockTemplateXMLNode(TemplateXMLNode):
+    def __init__(self):
+        TemplateXMLNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
 
 class TemplateXMLNodeTests(TemplateTestsBaseClass):
 
@@ -66,3 +72,12 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><dial leave_message="true">07777777777</dial></template>', xml_str)
+
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateXMLNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

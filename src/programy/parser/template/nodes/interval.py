@@ -62,54 +62,56 @@ class TemplateIntervalNode(TemplateNode):
     def style(self, style):
         self._style = style
 
+    def resolve_to_string(self, bot, clientid):
+        format_str = self._format.resolve(bot, clientid)
+
+        from_str = self.interval_from.resolve(bot, clientid)
+        from_time = datetime.datetime.strptime(from_str, format_str)
+
+        to_str = self.interval_to.resolve(bot, clientid)
+        to_time = datetime.datetime.strptime(to_str, format_str)
+
+        style = self._style.resolve(bot, clientid)
+
+        diff = to_time - from_time
+        difference = relativedelta(to_time, from_time)
+
+        if style == "years":
+            resolved = str(difference.years)
+        elif style == "months":
+            resolved = str(difference.months)
+        elif style == "weeks":
+            resolved = str(difference.weeks)
+        elif style == "days":
+            resolved = str(diff.days)
+        elif style == "hours":
+            resolved = str(difference.hours)
+        elif style == "minutes":
+            resolved = str(difference.minutes)
+        elif style == "seconds":
+            resolved = str(difference.seconds)
+        elif style == "microseconds":
+            resolved = str(difference.microseconds)
+        elif style == "ymd":
+            resolved = "%d years, %d months, %d days" % \
+                       (difference.years, difference.months, difference.days)
+        elif style == "hms":
+            resolved = "%d hours, %d minutes, %d seconds" % \
+                       (difference.hours, difference.minutes, difference.seconds)
+        elif style == "ymdhms":
+            resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
+                       (difference.years, difference.months, difference.days,
+                        difference.hours, difference.minutes, difference.seconds)
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown interval style [%s]", style)
+            resolved = ""
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[INTERVAL] resolved to [%s]", resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            format_str = self._format.resolve(bot, clientid)
-
-            from_str = self.interval_from.resolve(bot, clientid)
-            from_time = datetime.datetime.strptime(from_str, format_str)
-
-            to_str = self.interval_to.resolve(bot, clientid)
-            to_time = datetime.datetime.strptime(to_str, format_str)
-
-            style = self._style.resolve(bot, clientid)
-
-            diff = to_time - from_time
-            difference = relativedelta(to_time, from_time)
-
-            if style == "years":
-                resolved = str(difference.years)
-            elif style == "months":
-                resolved = str(difference.months)
-            elif style == "weeks":
-                resolved = str(difference.weeks)
-            elif style == "days":
-                resolved = str(diff.days)
-            elif style == "hours":
-                resolved = str(difference.hours)
-            elif style == "minutes":
-                resolved = str(difference.minutes)
-            elif style == "seconds":
-                resolved = str(difference.seconds)
-            elif style == "microseconds":
-                resolved = str(difference.microseconds)
-            elif style == "ymd":
-                resolved = "%d years, %d months, %d days" % \
-                           (difference.years, difference.months, difference.days)
-            elif style == "hms":
-                resolved = "%d hours, %d minutes, %d seconds" % \
-                           (difference.hours, difference.minutes, difference.seconds)
-            elif style == "ymdhms":
-                resolved = "%d years, %d months, %d days, %d hours, %d minutes, %d seconds" % \
-                           (difference.years, difference.months, difference.days,
-                            difference.hours, difference.minutes, difference.seconds)
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown interval style [%s]", style)
-                resolved = ""
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[INTERVAL] resolved to [%s]", resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

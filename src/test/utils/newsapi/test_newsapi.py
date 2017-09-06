@@ -31,7 +31,7 @@ class MockNewsApiApi(object):
     def get_news(self, url):
         return self._repsonse
 
-class NewsAPIExtensionTests(unittest.TestCase):
+class NewsAPITests(unittest.TestCase):
 
     def test_missing_license_keys(self):
         with self.assertRaises(Exception):

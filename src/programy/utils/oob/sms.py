@@ -20,17 +20,18 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
         self._message = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        for child in oob:
-            if child.tag == 'recipient':
-                self._recipient = child.text
-            elif child.tag == 'message':
-                self._message = child.text
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Unknown child element [%s] in sms oob"%(child.tag))
+        if oob is not None:
+            for child in oob:
+                if child.tag == 'recipient':
+                    self._recipient = child.text
+                elif child.tag == 'message':
+                    self._message = child.text
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Unknown child element [%s] in sms oob"%(child.tag))
 
-        if self._recipient is not None and \
-            self._message is not None :
-            return True
+            if self._recipient is not None and \
+                self._message is not None :
+                return True
 
         if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid sms oob command")
         return False

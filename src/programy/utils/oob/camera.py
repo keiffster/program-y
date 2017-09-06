@@ -16,7 +16,7 @@ class CameraOutOfBandProcessor(OutOfBandProcessor):
         self._command = None
 
     def parse_oob_xml(self, oob):
-        if oob.text is not None:
+        if oob is not None and oob.text is not None:
             self._command = oob.text
             return True
         else:

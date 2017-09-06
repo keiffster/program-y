@@ -3,10 +3,17 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.authorise import TemplateAuthoriseNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.brain.security import BrainSecurityConfiguration
 
 from test.parser.template.base import TemplateTestsBaseClass
+
+
+class MockTemplateAuthoriseNode(TemplateAuthoriseNode):
+
+    def __init__(self):
+        TemplateAuthoriseNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception ("This is a failure")
 
 class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
 
@@ -94,3 +101,21 @@ class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><authorise denied_srai="ACCESS_DENIED" role="root" /></template>', xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        self.assertIsNotNone(root)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 0)
+
+        node = MockTemplateAuthoriseNode()
+        node.role = "root"
+        self.assertIsNotNone(node)
+        self.assertEqual("root", node.role)
+
+        root.append(node)
+        self.assertEqual(len(root.children), 1)
+
+        with self.assertRaises(Exception):
+            node.resolve_to_string(self.bot, self.clientid)
+
+        self.assertEquals("", root.resolve(self.bot, self.clientid))

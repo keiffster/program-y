@@ -39,9 +39,8 @@ class GoogleMapsExtension(object):
             directions = googlemaps.get_directions_between_addresses(from_place, to_place)
             return self._format_directions_for_programy(directions)
         else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown Google Maps Extension command [%s]" %command)
             return None
-
-        return "OK"
 
     def _format_distance_for_programy(self, distance):
         distance_splits = distance._distance_text.split(" ")

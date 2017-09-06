@@ -7,6 +7,13 @@ from programy.dialog import Question, Conversation
 from test.parser.template.base import TemplateTestsBaseClass
 
 
+class MockTemplateResponseNode(TemplateResponseNode):
+    def __init__(self):
+        TemplateResponseNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TemplateResponseNodeTests(TemplateTestsBaseClass):
 
     def test_to_str_defaults(self):
@@ -95,3 +102,11 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello1 response")
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateResponseNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

@@ -8,6 +8,13 @@ from programy.brain import Brain, BrainConfiguration
 from test.parser.template.base import TemplateTestsBaseClass
 
 
+class MockTemplateProgramNode(TemplateProgramNode):
+    def __init__(self):
+        TemplateProgramNode.__init__(self)
+
+    def resolve_to_string(self, bot, clientid):
+        raise Exception("This is an error")
+
 class TemplateProgramNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
@@ -39,3 +46,11 @@ class TemplateProgramNodeTests(TemplateTestsBaseClass):
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><program /></template>", xml_str)
 
+    def test_node_exception_handling(self):
+        root = TemplateNode()
+        node = MockTemplateProgramNode()
+        root.append(node)
+
+        result = root.resolve(self.bot, self.clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("", result)

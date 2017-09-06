@@ -34,20 +34,20 @@ class TemplateInputNode(TemplateIndexedNode):
     def get_default_index(self):
         return 0
 
+    def resolve_to_string(self, bot, clientid):
+        conversation = bot.get_conversation(clientid)
+        question = conversation.current_question()
+        if self.index == 0:
+            resolved = question.combine_sentences()
+        else:
+            resolved = question.previous_nth_sentence(self.index).text()
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            conversation = bot.get_conversation(clientid)
-
-            question = conversation.current_question()
-
-            if self.index == 0:
-                resolved = question.combine_sentences()
-            else:
-                resolved = question.previous_nth_sentence(self.index).text()
-
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
-
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

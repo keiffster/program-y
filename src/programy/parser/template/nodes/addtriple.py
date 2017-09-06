@@ -23,16 +23,20 @@ class TemplateAddTripleNode(TemplateTripleNode):
     def __init__(self, entity=None):
         TemplateTripleNode.__init__(self, node_name="addtriple", entity=entity)
 
+    def resolve_to_string(self, bot, clientid):
+        subject = self.entity.subject.resolve(bot, clientid)
+        predicate = self.entity.predicate.resolve(bot, clientid)
+        object = self.entity.object.resolve(bot, clientid)
+
+        bot.brain.rdf.add_entity(subject, predicate, object)
+        resolved = ""
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
+                                                                          resolved)
+        return resolved
+
     def resolve(self, bot, clientid):
         try:
-            subject = self.entity.subject.resolve(bot, clientid)
-            predicate = self.entity.predicate.resolve(bot, clientid)
-            object = self.entity.object.resolve(bot, clientid)
-
-            bot.brain.rdf.add_entity(subject, predicate, object)
-            resolved = ""
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-            return resolved
+            return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)
             return ""

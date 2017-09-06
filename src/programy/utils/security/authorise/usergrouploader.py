@@ -148,39 +148,41 @@ class UserGroupLoader(object):
 
     def dump_users_and_groups(self, users, groups):
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Users:")
-        for user_id in users.keys():
-            user = users[user_id]
+        if users is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Users:")
+            for user_id in users.keys():
+                user = users[user_id]
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+user.id)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+user.id)
 
-            if len(user.roles) > 0:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
-                for role in user.roles:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
+                if len(user.roles) > 0:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
+                    for role in user.roles:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
 
-            if len(user.groups) > 0:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
-                for group in user.groups:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
+                if len(user.groups) > 0:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
+                    for group in user.groups:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Groups:")
-        for group_id in groups.keys():
-            group = groups[group_id]
+        if groups is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Groups:")
+            for group_id in groups.keys():
+                group = groups[group_id]
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+group.id)
+                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t"+group.id)
 
-            if len(group.roles):
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
-                for role in group.roles:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
+                if len(group.roles):
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tRoles:")
+                    for role in group.roles:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t"+role)
 
-            if len(group.groups):
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
-                for group in group.groups:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
+                if len(group.groups):
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tGroups:")
+                    for group in group.groups:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + group.id)
 
-            if len(group.users):
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tUsers:")
-                for user in group.users:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + user.id)
+                if len(group.users):
+                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\tUsers:")
+                    for user in group.users:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("\t\t\t" + user.id)
