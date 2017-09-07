@@ -20,8 +20,8 @@ class MultipleSentencesAIMLTests(unittest.TestCase):
 
     def test_multiple_questions(self):
         MultipleSentencesAIMLTests.test_client.bot.brain.dump_tree()
-        response = MultipleSentencesAIMLTests.test_client.bot.ask_question("test", "TICKET SET FRED. TICKET ANALYSE")
+        response = MultipleSentencesAIMLTests.test_client.bot.ask_question("test", "TICKET SET 01453675. TICKET ANALYSE")
         self.assertIsNotNone(response)
-        self.assertEqual("SET TO FRED. NUMBER ANALYSE", response)
+        self.assertEqual("TICKET SET TO 01453675. ANALYSING TICKET", response)
 
 

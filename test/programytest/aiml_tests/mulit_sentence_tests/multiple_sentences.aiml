@@ -23,14 +23,14 @@
     <category>
         <pattern>TICKET SET *</pattern>
         <template>
-            SET TO <star />
+            TICKET SET TO <star />
          </template>
     </category>
 
         <category>
         <pattern>TICKET *</pattern>
         <template>
-            NUMBER <star />
+            ANALYSING TICKET
          </template>
     </category>
 
