@@ -207,7 +207,10 @@ class Bot(object):
         self._question_depth += 1
 
         answers = []
+        sentence_no = 0
         for each_sentence in question.sentences:
+
+            question.set_current_sentence_no(sentence_no)
 
             self.check_max_recursion()
             self.check_max_timeout()
@@ -240,6 +243,8 @@ class Bot(object):
             else:
                 each_sentence.response = self.default_response
                 answers.append(self.default_response)
+
+            sentence_no += 1
 
         self._question_depth = 0
 

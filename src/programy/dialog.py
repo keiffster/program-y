@@ -111,10 +111,14 @@ class Question(object):
     def __init__(self):
         self._sentences = []
         self._properties = {}
+        self._current_sentence_no = -1
 
     @property
     def sentences(self):
         return self._sentences
+
+    def set_current_sentence_no(self, sentence_no):
+        self._current_sentence_no = sentence_no
 
     def set_property(self, name: str, value: str):
         self._properties[name] = value
@@ -135,7 +139,8 @@ class Question(object):
         if len(self._sentences) == 0:
             raise Exception("Num sentence array violation !")
         else:
-            return self._sentences[-1]
+            return self._sentences[self._current_sentence_no]
+            #return self._sentences[-1]
 
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:

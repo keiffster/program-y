@@ -7,4 +7,4 @@ SET PYTHONPATH=Y:\src;Y:\libs\MetOffer-1.3.2;Y:\bots\y-bot
 
 nosetests --with-coverage --cover-erase --with-xunit --cover-branches --cover-package=programy
 
-coverage html -d cover
+coverage html -d cover --omit=src\programy\clients\facebook.py,src\programy\clients\test_runner.py,*__init__.py
