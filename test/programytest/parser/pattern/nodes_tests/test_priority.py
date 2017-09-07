@@ -34,7 +34,9 @@ class PatternPriorityWordNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 1)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "PWORD [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
+        self.assertEqual('<priority word="test1"></priority>\n', node.to_xml(self.bot, self.clientid))
 
         node.add_child(PatternWordNode("test2"))
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.to_string(), "PWORD [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
+        self.assertEqual('<priority word="test1"><word word="test2"></word>\n</priority>\n', node.to_xml(self.bot, self.clientid))

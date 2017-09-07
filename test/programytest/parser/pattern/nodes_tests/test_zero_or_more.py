@@ -36,6 +36,7 @@ class PatternZeroOrMoreWildCardNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[#]")
+        self.assertEqual('<zerormore wildcard="#">\n</zerormore>\n', node.to_xml(self.bot, self.clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 
@@ -63,5 +64,6 @@ class PatternZeroOrMoreWildCardNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]")
+        self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node.to_xml(self.bot, self.clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))

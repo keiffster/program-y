@@ -57,6 +57,7 @@ class PatternRegexNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternRegexNode({}, "^LEGION$")))
 
         self.assertEqual(node.to_string(), "REGEX [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] pattern=[^LEGION$]")
+        self.assertEqual('<regex pattern="^LEGION$"></regex>\n', node.to_xml(self.bot, self.clientid))
 
     def test_init_template(self):
 
@@ -82,3 +83,4 @@ class PatternRegexNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternRegexNode({"template": "LEGION"}, "")))
 
         self.assertEqual(node.to_string(), "REGEX [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] template=[LEGION]")
+        self.assertEqual('<regex template="LEGION"></regex>\n', node.to_xml(self.bot, self.clientid))

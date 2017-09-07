@@ -188,19 +188,18 @@ class Bot(object):
         else:
             pre_processed = text
 
-        if len(pre_processed) == 0:
+        if pre_processed is None or len(pre_processed) == 0:
             pre_processed = self._configuration.empty_string
 
         if bot_question_context is not None:
             bot_question_context.preprocessed_question = pre_processed
-
-        conversation = self.get_conversation(clientid)
 
         if srai is False:
             question = Question.create_from_text(pre_processed)
         else:
             question = Question.create_from_text(pre_processed, split=False)
 
+        conversation = self.get_conversation(clientid)
         conversation.record_dialog(question)
 
         if self._question_depth == 0:
@@ -211,7 +210,6 @@ class Bot(object):
         for each_sentence in question.sentences:
 
             self.check_max_recursion()
-
             self.check_max_timeout()
 
             brain_context_question = None

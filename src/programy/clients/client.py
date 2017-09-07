@@ -51,11 +51,11 @@ class BotClient(object):
 
     def add_client_arguments(self, parser=None):
         # Nothing to add
-        pass
+        return
 
     def parse_args(self, arguments, parsed_args):
         # Nothing to add
-        pass
+        return
 
     def parse_arguments(self, argument_parser):
         client_args = CommandLineClientArguments(self, parser=argument_parser)
@@ -97,7 +97,7 @@ class BotClient(object):
         self.bot.brain.properties.add_property("env", "Unknown")
 
     def run(self):
-        pass
+        return
 
     def log_unknown_response(self, question):
         return

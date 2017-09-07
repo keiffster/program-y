@@ -73,6 +73,9 @@ class NewsAPIExtension(object):
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid value for NewAPI Data parameter reverse [%s]"%splits[count])
                     reverse = False
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown News API Command [%s]" % splits[count])
+
             count += 1
 
         return source, max, sort, reverse

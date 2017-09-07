@@ -67,6 +67,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 3)
         self.assertTrue(result.matched)
         self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
+        self.assertEqual('<set name="TEST1">\n</set>', node.to_xml(self.bot, self.clientid))
 
     def test_multi_word_set(self):
         loader = SetLoader()
@@ -112,6 +113,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertEquals(result.matched_phrase, "Red Amber")
 
         self.assertEqual(node.to_string(), "SET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
+        self.assertEqual('<set name="TEST1">\n</set>', node.to_xml(self.bot, self.clientid))
 
     def test_number(self):
         self.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)

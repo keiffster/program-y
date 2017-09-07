@@ -70,6 +70,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertFalse(result.matched)
 
         self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
+        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self.bot, self.clientid))
 
     def test_parse_words(self):
         node = PatternISetNode([], "test1")

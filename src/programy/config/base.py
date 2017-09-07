@@ -52,6 +52,7 @@ class BaseConfigurationData(object):
         """
         Never Implemented
         """
+        raise NotImplemented()
 
     def additionals_to_add(self):
         return []

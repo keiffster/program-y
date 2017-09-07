@@ -31,5 +31,13 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.test_client.bot, self.clientid, "LOCATION KY39UR WHEN NOW")
         self.assertIsNotNone(result)
-
         self.assertEquals("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
+
+        result = weather.execute(self.test_client.bot, self.clientid, "OTHER KY39UR WHEN NOW")
+        self.assertIsNone(result)
+
+        result = weather.execute(self.test_client.bot, self.clientid, "LOCATION KY39UR OTHER NOW")
+        self.assertIsNone(result)
+
+        result = weather.execute(self.test_client.bot, self.clientid, "")
+        self.assertIsNone(result)

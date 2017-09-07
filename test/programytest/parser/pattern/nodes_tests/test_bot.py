@@ -64,4 +64,5 @@ class PatternBotNodeTests(PatternTestBaseClass):
         self.assertEquals(1, result.word_no)
 
         self.assertEqual(node.to_string(), "BOT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test1]")
+        self.assertEqual('<bot property="test1">\n</bot>', node.to_xml(self.bot, self.clientid))
 

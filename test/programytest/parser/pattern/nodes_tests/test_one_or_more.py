@@ -38,6 +38,7 @@ class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ONEORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]")
+        self.assertEqual('<oneormore wildcard="*">\n</oneormore>\n', node.to_xml(self.bot, self.clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 
@@ -67,6 +68,7 @@ class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
         result = node.equals(self.bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ONEORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[_]")
+        self.assertEqual('<oneormore wildcard="_">\n</oneormore>\n', node.to_xml(self.bot, self.clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 

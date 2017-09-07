@@ -38,48 +38,64 @@ class ConsoleBotClient(BotClient):
     def parse_args(self, arguments, parsed_args):
         arguments.context = parsed_args.context
 
+    def get_question(self, input_func=input):
+        ask = "%s "%self.bot.prompt
+        return input_func(ask)
+
+    def display_startup_messages(self):
+        self.display_response(self.bot.get_version_string)
+        self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
+
+    def display_unknown_response(self, question):
+        self.display_response(self.bot.default_response)
+        self.log_unknown_response(question)
+
+    def display_response(self, response, output_func=print):
+        output_func(response)
+
+    def ask_question(self, question, context):
+        return self.bot.ask_question(self.clientid, question, bot_question_context=context)
+
+    def process_question_answer(self):
+        question = self.get_question()
+
+        context = None
+        if self.arguments.context is True:
+            context = BotQuestionContext()
+
+        response = self.ask_question(question, context)
+
+        if response is None:
+            self.display_unknown_response(question)
+        else:
+            if context is not None:
+                context.display(output_func=print)
+
+            self.display_response(response)
+            self.log_response(question, response)
+
+        return question
+
     def run(self):
         if self.arguments.noloop is False:
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
             running = True
-            self.display_response(self.bot.get_version_string)
-            self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
+
+            self.display_startup_messages()
+
             while running is True:
                 try:
-                    question = self.get_question()
-
-                    context = None
-                    if self.arguments.context is True:
-                        context = BotQuestionContext()
-
-                    response = self.bot.ask_question(self.clientid, question, bot_question_context=context)
-                    if response is None:
-                        self.display_response(self.bot.default_response)
-                        self.log_unknown_response(question)
-
-                    else:
-                        self.display_response(response)
-
-                        if context is not None:
-                            context.display(output_func=print)
-
-                        self.log_response(question, response)
-
+                    question = self.process_question_answer()
                 except KeyboardInterrupt:
                     running = False
                     self.display_response(self.bot.exit_response)
                 except Exception as excep:
                     logging.exception(excep)
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
-                    self.display_response(self.bot.default_response)
-                    self.log_unknown_response(question)
+                    self.display_unknown_response(question)
+        else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("noloop set to True, exiting...")
 
-    def get_question(self, input_func=input):
-        ask = "%s "%self.bot.prompt
-        return input_func(ask)
-
-    def display_response(self, response, output_func=print):
-        output_func(response)
 
 if __name__ == '__main__':
 

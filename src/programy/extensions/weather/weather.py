@@ -26,6 +26,8 @@ class WeatherExtension(object):
     def execute(self, bot, clientid, data):
 
         splits = data.split()
+        if len(splits) < 4:
+            return None
 
         if splits[0] == 'LOCATION':
             postcode = splits[1]
