@@ -75,7 +75,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertTrue(configuration.brain_configuration.services.exists('REST'))
         rest_config =configuration.brain_configuration.services.service('REST')
-        self.assertEqual("programy.utils.services.rest.GenericRESTService", rest_config.classname)
+        self.assertEqual("programy.services.rest.GenericRESTService", rest_config.classname)
 
         self.assertTrue(configuration.brain_configuration.services.exists('Pannous'))
         self.assertTrue(configuration.brain_configuration.services.exists('Pandora'))
@@ -97,7 +97,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertIsNotNone(configuration.bot_configuration.spelling)
         self.assertEqual(configuration.bot_configuration.spelling.section_name, "spelling")
-        self.assertEqual(configuration.bot_configuration.spelling.classname, "programy.utils.spelling.checker.TestSpellingChecker")
+        self.assertEqual(configuration.bot_configuration.spelling.classname, "programy.spelling.checker.TestSpellingChecker")
         self.assertEqual(configuration.bot_configuration.spelling.corpus, "./spelling/test-corpus.txt")
         self.assertTrue(configuration.bot_configuration.spelling.check_before)
         self.assertTrue(configuration.bot_configuration.spelling.check_and_retry)

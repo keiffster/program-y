@@ -13,9 +13,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import logging
-from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.rest import RestConfiguration
@@ -23,8 +21,8 @@ from programy.config.sections.client.rest import RestConfiguration
 class RestBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        self.clientid = "Rest"
         BotClient.__init__(self, argument_parser)
+        self.api_keys = []
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "REST")
@@ -32,94 +30,75 @@ class RestBotClient(BotClient):
     def get_client_configuration(self):
         return RestConfiguration()
 
-rest_client = None
+    def load_api_keys(self):
+        if self.configuration.client_configuration.api_key_file is not None:
+            with open(self.configuration.client_configuration.api_key_file, "r+") as api_key_file:
+                for api_key in api_key_file:
+                    self.api_keys.append(api_key.strip())
 
-print("Initiating REST Service...")
-app = Flask(__name__)
+    def initialise(self):
+        self.load_api_keys()
 
-# Enter you API keys, here, alternatively store in a db or file and load at startup
-# This is an exmaple, and therefore not suitable for production
-api_keys = [
-]
+    def is_apikey_valid(self, apikey):
+        return bool(apikey in self.api_keys)
 
-def is_apikey_valid(apikey):
-    if apikey in api_keys:
-        return True
-    else:
-        return False
+    def verify_api_key_usage(self, request):
+        if self.configuration.client_configuration.use_api_keys is True:
 
-# Example Usage
-#
-# curl 'http://localhost:5000/api/v1.0/ask?question=hello+world&sessionid=1234567890'
-#
-@app.route('/api/v1.0/ask', methods=['GET'])
-def ask():
+            apikey = self.get_api_key(request)
 
-    if rest_client.configuration.client_configuration.use_api_keys is True:
-        if 'apikey' not in request.args or request.args['apikey'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unauthorised access - api required but missing")
-            return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+            if apikey is None:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unauthorised access - api required but missing")
+                return {'error': 'Unauthorized access'}, 401
 
-        apikey = request.args['apikey']
-        if is_apikey_valid(apikey) is False:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'Unauthorised access - invalid api key")
-            return make_response(jsonify({'error': 'Unauthorized access'}), 401)
+            if self.is_apikey_valid(apikey) is False:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'Unauthorised access - invalid api key")
+                return {'error': 'Unauthorized access'}, 401
 
-    if 'question' not in request.args or request.args['question'] is None:
-        print("'question' missing from request")
-        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'question' missing from request")
-        abort(400)
+        return None, None
 
-    question = request.args['question']
+    def ask_question(self, sessionid, question):
+        return self.bot.ask_question(sessionid, question)
 
-    if 'sessionid' not in request.args or request.args['sessionid'] is None:
-        print("'sessionid' missing from request")
-        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'sessionid' missing from request")
-        abort(400)
+    def format_success_response(self, sessionid, question, answer):
+        return {"question": question,
+                "answer": answer,
+                "sessionid": sessionid
+                }
 
-    sessionid = request.args['sessionid']
+    def format_error_response(self, sessionid, question, error):
+        return {"question": question,
+                "answer": self.bot.default_response,
+                "sessionid": sessionid,
+                "error": error
+                }
 
-    try:
-        response = rest_client.bot.ask_question(sessionid, question)
-        if response is None:
-            answer = rest_client.bot.default_response
-            rest_client.log_unknown_response(question)
+    def process_response(self, sessionid, question, answer):
+        if answer is None:
+            answer = self.bot.default_response
+            self.log_unknown_response(question)
         else:
-            answer = response
-            rest_client.log_response(question, response)
+            self.log_response(question, answer)
 
-        response = {"question": question,
-                    "answer": answer,
-                    "sessionid": sessionid
-                   }
+        return self.format_success_response(sessionid, question, answer)
 
-        return jsonify({'response': response})
+    def process_request(self, request):
+        question = "Unknown"
+        sessionid = "Unknown"
+        try:
+            response, status = self.verify_api_key_usage(request)
+            if response is not None:
+                return response, status
 
-    except Exception as excep:
+            question = self.get_question(request)
+            sessionid = self.get_sessionid(request)
 
-        response = {"question": question,
-                    "answer": rest_client.bot.default_response,
-                    "sessionid": sessionid,
-                    "error": str(excep)
-                   }
+            response = self.ask_question(sessionid, question)
 
-        return jsonify({'response': response})
+            return self.process_response(sessionid, question, response), 200
 
-if __name__ == '__main__':
+        except Exception as excep:
 
-    print("Loading, please wait...")
-    rest_client = RestBotClient()
+            return self.format_error_response(sessionid, question, str(excep)), 500
 
-    def run():
 
-        print("REST Client running on %s:%s" % (rest_client.configuration.client_configuration.host,
-                                                rest_client.configuration.client_configuration.port))
-
-        if rest_client.configuration.client_configuration.debug is True:
-            print("REST Client running in debug mode")
-
-        app.run(host=rest_client.configuration.client_configuration.host,
-                port=rest_client.configuration.client_configuration.port,
-                debug=rest_client.configuration.client_configuration.debug)
-
-    run()

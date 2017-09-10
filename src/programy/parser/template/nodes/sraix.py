@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.utils.services.service import ServiceFactory
+from programy.services.service import ServiceFactory
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 

@@ -13,7 +13,7 @@ class OOBTestClient(TestClient):
         super(OOBTestClient, self).load_configuration(arguments)
         self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
         default = BrainOOBConfiguration("default")
-        default._classname = "programy.utils.oob.default.DefaultOutOfBandProcessor"
+        default._classname = "programy.oob.default.DefaultOutOfBandProcessor"
         self.configuration.brain_configuration.oob._default = default
 
 class OOBAIMLTests(unittest.TestCase):

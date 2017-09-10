@@ -26,6 +26,7 @@ class RestConfiguration(BaseConfigurationData):
         self._debug = False
         self._workers = 1
         self._use_api_keys = False
+        self._api_key_file = None
 
     @property
     def host(self):
@@ -47,6 +48,10 @@ class RestConfiguration(BaseConfigurationData):
     def use_api_keys(self):
         return self._use_api_keys
 
+    @property
+    def api_key_file(self):
+        return self._api_key_file
+
     def load_config_section(self, config_file, bot_root):
         rest = config_file.get_section(self.section_name)
         if rest is not None:
@@ -55,3 +60,6 @@ class RestConfiguration(BaseConfigurationData):
             self._debug = config_file.get_bool_option(rest, "debug", missing_value=False)
             self._workers = config_file.get_option(rest, "workers", missing_value=1)
             self._use_api_keys = config_file.get_bool_option(rest, "use_api_keys", missing_value=False)
+            self._api_key_file = config_file.get_option(rest, "api_key_file")
+            if self._api_key_file is not None:
+                self._api_key_file = self.sub_bot_root(self._api_key_file, bot_root)

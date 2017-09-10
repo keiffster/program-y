@@ -13,7 +13,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         brain:
             services:
                 REST:
-                    classname: programy.utils.services.rest.GenericRESTService
+                    classname: programy.services.rest.GenericRESTService
                     method: GET
                     host: 0.0.0.0
         """, ConsoleConfiguration(), ".")
@@ -26,7 +26,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         service_config = BrainServiceConfiguration("REST")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.services.rest.GenericRESTService", service_config.classname)
+        self.assertEqual("programy.services.rest.GenericRESTService", service_config.classname)
         self.assertEqual("GET", service_config.method)
         self.assertEqual("0.0.0.0", service_config.host)
         self.assertIsNone(service_config.port)
@@ -39,7 +39,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         brain:
             services:
                 Pannous:
-                    classname: programy.utils.services.pannous.PannousService
+                    classname: programy.services.pannous.PannousService
                     url: http://weannie.pannous.com/api
         """, ConsoleConfiguration(), ".")
 
@@ -51,7 +51,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         service_config = BrainServiceConfiguration("Pannous")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.services.pannous.PannousService", service_config.classname)
+        self.assertEqual("programy.services.pannous.PannousService", service_config.classname)
         self.assertEqual("http://weannie.pannous.com/api", service_config.url)
         self.assertIsNone(service_config.method)
         self.assertIsNone(service_config.host)
@@ -64,7 +64,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         brain:
             services:
                 Pandora:
-                    classname: programy.utils.services.pandora.PandoraService
+                    classname: programy.services.pandora.PandoraService
                     url: http://www.pandorabots.com/pandora/talk-xml
         """, ConsoleConfiguration(), ".")
 
@@ -76,7 +76,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         service_config = BrainServiceConfiguration("Pandora")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.services.pandora.PandoraService", service_config.classname)
+        self.assertEqual("programy.services.pandora.PandoraService", service_config.classname)
         self.assertEqual("http://www.pandorabots.com/pandora/talk-xml", service_config.url)
         self.assertIsNone(service_config.method)
         self.assertIsNone(service_config.host)
@@ -89,7 +89,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         brain:
             services:
                 Wikipedia:
-                    classname: programy.utils.services.wikipediaservice.WikipediaService
+                    classname: programy.services.wikipediaservice.WikipediaService
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -100,7 +100,7 @@ class BrainServiceConfigurationTests(unittest.TestCase):
         service_config = BrainServiceConfiguration("Wikipedia")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.services.wikipediaservice.WikipediaService", service_config.classname)
+        self.assertEqual("programy.services.wikipediaservice.WikipediaService", service_config.classname)
         self.assertIsNone(service_config.method)
         self.assertIsNone(service_config.host)
         self.assertIsNone(service_config.port)

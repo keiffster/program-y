@@ -21,7 +21,9 @@ of the customer. Currently contains no authentication
 """
 import logging
 
-class TelecomMinutesExtension(object):
+from programy.extensions.base import Extension
+
+class TelecomMinutesExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):

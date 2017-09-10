@@ -61,17 +61,17 @@ brain:
 
     services:
         REST:
-            classname: programy.utils.services.rest.GenericRESTService
+            classname: programy.services.rest.GenericRESTService
             method: GET
             host: 0.0.0.0
         Pannous:
-            classname: programy.utils.services.pannous.PannousService
+            classname: programy.services.pannous.PannousService
             url: http://weannie.pannous.com/api
         Pandora:
-            classname: programy.utils.services.pandora.PandoraService
+            classname: programy.services.pandora.PandoraService
             url: http://www.pandorabots.com/pandora/talk-xml
         Wikipedia:
-            classname: programy.utils.services.wikipediaservice.WikipediaService
+            classname: programy.services.wikipediaservice.WikipediaService
 
 bot:
     license_keys: $BOT_ROOT/config/test-license.keys
@@ -88,7 +88,7 @@ bot:
     max_search_timeout: 60
 
     spelling:
-      classname: programy.utils.spelling.checker.TestSpellingChecker
+      classname: programy.spelling.checker.TestSpellingChecker
       corpus: $BOT_ROOT/spelling/test-corpus.txt
       check_before: true
       check_and_retry: true

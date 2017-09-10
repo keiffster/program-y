@@ -13,10 +13,10 @@ class BrainSecuritiesConfigurationTests(unittest.TestCase):
         brain:
             security:
                 authentication:
-                    classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+                    classname: programy.security.authenticate.passthrough.PassThroughAuthenticationService
                     denied_srai: AUTHENTICATION_FAILED
                 authorisation:
-                    classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+                    classname: programy.security.authorise.passthrough.PassThroughAuthorisationService
                     denied_srai: AUTHORISATION_FAILED
         """, ConsoleConfiguration(), ".")
 

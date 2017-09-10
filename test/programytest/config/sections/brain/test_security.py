@@ -13,7 +13,7 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         brain:
             security:
                 authorisation:
-                    classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+                    classname: programy.security.authorise.passthrough.PassThroughAuthorisationService
                     denied_srai: AUTHORISATION_FAILED
         """, ConsoleConfiguration(), ".")
 
@@ -25,7 +25,7 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         service_config = BrainSecurityConfiguration("authorisation")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.security.authorise.passthrough.PassThroughAuthorisationService", service_config.classname)
+        self.assertEqual("programy.security.authorise.passthrough.PassThroughAuthorisationService", service_config.classname)
         self.assertEqual("AUTHORISATION_FAILED", service_config.denied_srai)
 
     def test_authentication_with_data(self):
@@ -35,7 +35,7 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         brain:
             security:
                 authentication:
-                    classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+                    classname: programy.security.authenticate.passthrough.PassThroughAuthenticationService
                     denied_srai: AUTHENTICATION_FAILED
         """, ConsoleConfiguration(), ".")
 
@@ -47,5 +47,5 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         service_config = BrainSecurityConfiguration("authentication")
         service_config.load_config_section(yaml, services_config, ".")
 
-        self.assertEqual("programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
+        self.assertEqual("programy.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
         self.assertEqual("AUTHENTICATION_FAILED", service_config.denied_srai)

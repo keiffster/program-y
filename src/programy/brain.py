@@ -35,7 +35,7 @@ from programy.mappings.sets import SetCollection
 from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
-from programy.utils.services.service import ServiceFactory
+from programy.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
 import datetime

@@ -19,10 +19,10 @@ brain:
 
     security:
         authentication:
-            classname: programy.utils.security.authenticate.clientidauth.ClientIdAuthenticationService
+            classname: programy.security.authenticate.clientidauth.ClientIdAuthenticationService
             denied_srai: AUTHENTICATION_FAILED
         authorisation:
-            classname: programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
+            classname: programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService
             denied_srai: AUTHORISATION_FAILED
             usergroups: $BOT_ROOT/usergroups.yaml
 

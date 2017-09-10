@@ -19,9 +19,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 This is an example extension that allow you to call an external service to save the results of a survey
 Currently contains no authentication
 """
-import logging
 
-class SurveyExtension(object):
+import logging
+from programy.extensions.base import Extension
+
+class SurveyExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):

@@ -13,17 +13,17 @@ class BrainServicesConfigurationTests(unittest.TestCase):
         brain:
             services:
                 REST:
-                    classname: programy.utils.services.rest.GenericRESTService
+                    classname: programy.services.rest.GenericRESTService
                     method: GET
                     host: 0.0.0.0
                 Pannous:
-                    classname: programy.utils.services.pannous.PannousService
+                    classname: programy.services.pannous.PannousService
                     url: http://weannie.pannous.com/api
                 Pandora:
-                    classname: programy.utils.services.pandora.PandoraService
+                    classname: programy.services.pandora.PandoraService
                     url: http://www.pandorabots.com/pandora/talk-xml
                 Wikipedia:
-                    classname: programy.utils.services.wikipediaservice.WikipediaService
+                    classname: programy.services.wikipediaservice.WikipediaService
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")

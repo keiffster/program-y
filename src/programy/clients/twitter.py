@@ -15,19 +15,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import tweepy
-from tweepy.error import RateLimitError
 import time
 import os
+import tweepy
+from tweepy.error import RateLimitError
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.twitter import TwitterConfiguration
-
-class MyStreamListener(tweepy.StreamListener):
-
-    def on_status(self, status):
-        #print(status.text)
-        pass
 
 class TwitterBotClient(BotClient):
 
@@ -41,9 +35,36 @@ class TwitterBotClient(BotClient):
     def get_client_configuration(self):
         return TwitterConfiguration()
 
-    def process_direct_messages(self, last_message_id):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Processing direct messages since [%s]"%last_message_id)
+    def get_username(self, bot):
+        self._username = bot.license_keys.get_key("TWITTER_USERNAME")
+        self._username_len = len(self._username) # Going to get used quite a lot
 
+    def get_consumer_secrets(self, bot):
+        consumer_key = bot.license_keys.get_key("TWITTER_CONSUMER_KEY")
+        consumer_secret = bot.license_keys.get_key("TWITTER_CONSUMER_SECRET")
+        return consumer_key, consumer_secret
+
+    def get_access_secrets(self, bot):
+        access_token = bot.license_keys.get_key("TWITTER_ACCESS_TOKEN")
+        access_token_secret = bot.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
+        return access_token, access_token_secret
+
+    def create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        return tweepy.API(auth)
+
+    def initialise(self):
+        self._welcome_message = self.configuration.client_configuration.welcome_message
+        self.get_username(self.bot)
+        consumer_key, consumer_secret = self.get_consumer_secrets(self.bot)
+        access_token, access_token_secret = self.get_access_secrets(self.bot)
+        self._api = self.create_api(consumer_key, consumer_secret,  access_token, access_token_secret)
+
+    #############################################################################################
+    # Direct Messages
+
+    def get_direct_messages(self, last_message_id):
         if last_message_id == -1:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Getting latest direct messages")
             messages = self._api.direct_messages()
@@ -51,6 +72,17 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Getting latest direct messages since : %s" % last_message_id)
             messages = self._api.direct_messages(since_id=last_message_id)
         messages.sort(key=lambda msg: msg.id)
+        return messages
+
+    def process_direct_message_question(self, userid, text):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Direct Messages: %s -> %s"%(userid, text))
+        response = self.bot.ask_question(userid, text)
+        self._api.send_direct_message(userid, text=response)
+
+    def process_direct_messages(self, last_message_id):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Processing direct messages since [%s]"%last_message_id)
+
+        messages = self.get_direct_messages(last_message_id)
 
         for message in messages:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("message: %s"% message.text)
@@ -64,19 +96,16 @@ class TwitterBotClient(BotClient):
 
         return last_message_id
 
-    def process_followers(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processing followers")
-        followers = self._api.followers()
-        followers_ids = [x.id for x in followers]
-        friends = self._api.friends_ids()
+    #############################################################################################
+    # Followers
 
-        # Unfollow anyone I follow that does not follow me
+    def unfollow_non_followers(self, friends, followers_ids):
         for friend_id in friends:
             if friend_id not in followers_ids:
                 if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Removing previous friendship with [%d]"%(friend_id))
                 self._api.destroy_friendship(friend_id)
 
-        # Next follow those new fellows following me
+    def follow_new_followers(self, followers, friends):
         for follower in followers:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Checking follower [%s]"%follower.screen_name)
             if follower.id not in friends:
@@ -84,21 +113,35 @@ class TwitterBotClient(BotClient):
                 follower.follow()
                 self._api.send_direct_message(follower.id, text=self._welcome_message)
 
-    def process_direct_message_question(self, userid, text):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Direct Messages: %s -> %s"%(userid, text))
-        response = self.bot.ask_question(userid, text)
-        self._api.send_direct_message(userid, text=response)
+    def process_followers(self):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processing followers")
+        followers = self._api.followers()
+        followers_ids = [x.id for x in followers]
+        friends = self._api.friends_ids()
 
-    def process_statuses(self, last_status_id):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Processing status updates since [%s]"%last_status_id)
+        # Unfollow anyone I follow that does not follow me
+        self.unfollow_non_followers(friends, followers_ids)
 
+        # Next follow those new fellows following me
+        self.follow_new_followers(followers, friends)
+
+    #############################################################################################
+    # Status (Tweets)
+
+    def get_statuses(self, last_status_id):
         if last_status_id == -1:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Getting latest statuses")
             statuses = self._api.home_timeline()
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Getting latest statuses since : %s" % last_status_id)
             statuses = self._api.home_timeline(since_id=last_status_id)
-            statuses.sort(key=lambda msg: msg.id)
+        statuses.sort(key=lambda msg: msg.id)
+        return statuses
+
+    def process_statuses(self, last_status_id):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Processing status updates since [%s]"%last_status_id)
+
+        statuses = self.get_statuses(last_status_id)
 
         for status in statuses:
             print ("[%s] - [%s]"%(status.author.screen_name, self._username))
@@ -114,16 +157,18 @@ class TwitterBotClient(BotClient):
 
         return last_status_id
 
-    def process_status_question(self, userid, text):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Status Update: %s -> %s"%(userid, text))
-
+    def get_question_from_text(self, text):
         text = text.strip()
         pos = text.find(self._username)
         if pos == -1:
             return
         pos = pos - 1   # Take into account @ sign
+        return text[(pos+self._username_len)+1:]
 
-        question = text[(pos+self._username_len)+1:]
+    def process_status_question(self, userid, text):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Status Update: %s -> %s"%(userid, text))
+
+        question = self.get_question_from_text(text)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s -> %s"%(userid, question))
 
@@ -135,22 +180,8 @@ class TwitterBotClient(BotClient):
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(status)
         self._api.update_status(status)
 
-    def initialise(self):
-        consumer_key = self.bot.license_keys.get_key("TWITTER_CONSUMER_KEY")
-        consumer_secret = self.bot.license_keys.get_key("TWITTER_CONSUMER_SECRET")
-
-        access_token = self.bot.license_keys.get_key("TWITTER_ACCESS_TOKEN")
-        access_token_secret = self.bot.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
-
-        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        auth.set_access_token(access_token, access_token_secret)
-
-        self._welcome_message = self.configuration.client_configuration.welcome_message
-
-        self._api = tweepy.API(auth)
-
-        self._username = self.bot.license_keys.get_key("TWITTER_USERNAME")
-        self._username_len = len(self._username) # Going to get used quite a lot
+    #############################################################################################
+    # Message ID Storage
 
     def get_last_message_ids(self):
         last_direct_message_id = -1
@@ -177,6 +208,9 @@ class TwitterBotClient(BotClient):
                     idfile.write("%d\n"%last_status_id)
             except Exception as e:
                 logging.exception(e)
+
+    #############################################################################################
+    # Execution
 
     def use_polling(self):
 
@@ -213,7 +247,7 @@ class TwitterBotClient(BotClient):
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Exiting gracefully...")
 
     def use_streaming(self):
-        pass
+        raise NotImplemented("Streaming currently not supported in this release")
 
     def run(self):
 

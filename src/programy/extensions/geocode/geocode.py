@@ -18,8 +18,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.geo.google import GoogleMaps
+from programy.extensions.base import Extension
 
-class GeoCodeExtension(object):
+class GeoCodeExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):

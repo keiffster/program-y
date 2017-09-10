@@ -6,10 +6,10 @@ from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.sections.client.console import ConsoleConfiguration
-from programy.utils.security.authorise.authorisor import AuthorisationException
-from programy.utils.oob.default import DefaultOutOfBandProcessor
-from programy.utils.oob.dial import DialOutOfBandProcessor
-from programy.utils.oob.email import EmailOutOfBandProcessor
+from programy.security.authorise.authorisor import AuthorisationException
+from programy.oob.default import DefaultOutOfBandProcessor
+from programy.oob.dial import DialOutOfBandProcessor
+from programy.oob.email import EmailOutOfBandProcessor
 
 class BrainTests(unittest.TestCase):
 

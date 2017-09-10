@@ -65,19 +65,19 @@ class BrainConfigurationTests(unittest.TestCase):
             
                 security:
                     authentication:
-                        classname: programy.utils.security.authenticate.passthrough.PassThroughAuthenticationService
+                        classname: programy.security.authenticate.passthrough.PassThroughAuthenticationService
                         denied_srai: AUTHENTICATION_FAILED
                     authorisation:
-                        classname: programy.utils.security.authorise.passthrough.PassThroughAuthorisationService
+                        classname: programy.security.authorise.passthrough.PassThroughAuthorisationService
                         denied_srai: AUTHORISATION_FAILED
 
                 oob:
                   default:
-                    classname: programy.utils.oob.default.DefaultOutOfBandProcessor
+                    classname: programy.oob.default.DefaultOutOfBandProcessor
                   dial:
-                    classname: programy.utils.oob.dial.DialOutOfBandProcessor
+                    classname: programy.oob.dial.DialOutOfBandProcessor
                   email:
-                    classname: programy.utils.oob.email.EmailOutOfBandProcessor
+                    classname: programy.oob.email.EmailOutOfBandProcessor
 
                 dynamic:
                     variables:
@@ -91,17 +91,17 @@ class BrainConfigurationTests(unittest.TestCase):
 
                 services:
                     REST:
-                        classname: programy.utils.services.rest.GenericRESTService
+                        classname: programy.services.rest.GenericRESTService
                         method: GET
                         host: 0.0.0.0
                     Pannous:
-                        classname: programy.utils.services.pannous.PannousService
+                        classname: programy.services.pannous.PannousService
                         url: http://weannie.pannous.com/api
                     Pandora:
-                        classname: programy.utils.services.pandora.PandoraService
+                        classname: programy.services.pandora.PandoraService
                         url: http://www.pandorabots.com/pandora/talk-xml
                     Wikipedia:
-                        classname: programy.utils.services.wikipediaservice.WikipediaService        
+                        classname: programy.services.wikipediaservice.WikipediaService        
         """, ConsoleConfiguration(), ".")
 
         brain_config = BrainConfiguration()

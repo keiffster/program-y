@@ -14,7 +14,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
     def get_brain_config(self):
         brain_config = BrainConfiguration()
         brain_config.security._authorisation = BrainSecurityConfiguration("authorisation")
-        brain_config.security.authorisation._classname = "programy.utils.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
+        brain_config.security.authorisation._classname = "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
         brain_config.security.authorisation._denied_srai = "ACCESS_DENIED"
         brain_config.security.authorisation._usergroups = "$BOT_ROOT/usergroups.yaml"
         return brain_config

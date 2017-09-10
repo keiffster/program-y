@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.utils.services.service import Service, ServiceFactory
+from programy.services.service import Service, ServiceFactory
 from programy.config.sections.brain.brain import BrainConfiguration
 from programy.config.sections.brain.service import BrainServiceConfiguration
 
@@ -106,7 +106,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
     def test_call_service(self):
 
         service_config = BrainServiceConfiguration("mock")
-        service_config._classname = 'programytest.utils.services.test_service.MockService'
+        service_config._classname = 'programytest.services.test_service.MockService'
 
         brain_config = BrainConfiguration()
         brain_config.services._services['mock'] = service_config

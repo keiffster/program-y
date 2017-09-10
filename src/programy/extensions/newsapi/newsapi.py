@@ -18,8 +18,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.utils.newsapi.newsapi import NewsAPI
+from programy.extensions.base import Extension
 
-class NewsAPIExtension(object):
+class NewsAPIExtension(Extension):
 
     def get_news_api_api(self, bot, clientid):
         return  NewsAPI(bot.license_keys)

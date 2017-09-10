@@ -16,6 +16,7 @@ class RestConfigurationTests(unittest.TestCase):
           debug: false
           workers: 4
           use_api_keys: false
+          api_key_file: apikeys.txt
         """, ConsoleConfiguration(), ".")
 
         rest_config = RestConfiguration()
@@ -26,6 +27,7 @@ class RestConfigurationTests(unittest.TestCase):
         self.assertEqual(False, rest_config.debug)
         self.assertEqual(4, rest_config.workers)
         self.assertEqual(False, rest_config.use_api_keys)
+        self.assertEqual("apikeys.txt", rest_config.api_key_file)
 
     def test_init_no_values(self):
         yaml = YamlConfigurationFile()

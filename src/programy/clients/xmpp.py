@@ -25,7 +25,9 @@ class XmppClient(sleekxmpp.ClientXMPP):
     def __init__(self, bot_client, jid, password):
         self.bot_client = bot_client
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
+        self.add_event_handlers()
 
+    def add_event_handlers(self):
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
 
@@ -40,9 +42,28 @@ class XmppClient(sleekxmpp.ClientXMPP):
             userid = msg['from']
 
             response =  self.bot_client.bot.ask_question(userid, question)
+            if response is not None:
+                msg.reply(response).send()
 
-            msg.reply(response).send()
+    def register_plugins(self, configuration):
+        if configuration.client_configuration.xep_0030 is True:
+            self.register_plugin('xep_0030')
 
+        if configuration.client_configuration.xep_0004 is True:
+            self.register_plugin('xep_0004')
+
+        if configuration.client_configuration.xep_0060 is True:
+            self.register_plugin('xep_0060')
+
+        if configuration.client_configuration.xep_0199 is True:
+            self.register_plugin('xep_0199')
+
+    def run(self, server, port, block=True):
+        if self.connect((server, port)):
+            print("Connected, running...")
+            self.process(block=block)
+        else:
+            print("Failed to connect, exiting...")
 
 class XmppBotClient(BotClient):
 
@@ -56,30 +77,28 @@ class XmppBotClient(BotClient):
     def get_client_configuration(self):
         return XmppConfiguration()
 
+    def get_username_password(self, license_keys):
+        username = license_keys.get_key("XMPP_USERNAME")
+        password = license_keys.get_key("XMPP_PASSWORD")
+        return username, password
+
+    def get_server_port(self, configuration):
+        server = configuration.client_configuration.server
+        port = configuration.client_configuration.port
+        return server, port
+
+    def create_client(self, username, password):
+        return XmppClient(self, username, password)
+
     def run(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s App Running.."%self.bot.brain.properties.property("env"))
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("XMPP Client is running....")
 
-        username = self.bot.license_keys.get_key("XMPP_USERNAME")
-        password = self.bot.license_keys.get_key("XMPP_PASSWORD")
+        username, password = self.get_username_password(self.bot.license_keys)
+        server, port = self.get_server_port(self.configuration)
 
-        server = self.configuration.client_configuration.server
-        port = self.configuration.client_configuration.port
-
-        self._client = XmppClient(self, username, password)
-        if self.configuration.client_configuration.xep_0030 is True:
-            self._client.register_plugin('xep_0030')
-        if self.configuration.client_configuration.xep_0004 is True:
-            self._client.register_plugin('xep_0004')
-        if self.configuration.client_configuration.xep_0060 is True:
-            self._client.register_plugin('xep_0060')
-        if self.configuration.client_configuration.xep_0199 is True:
-            self._client.register_plugin('xep_0199')
-
-        if self._client.connect((server, port)):
-            print("Connected, running...")
-            self._client.process(block=True)
-        else:
-            print("Failed to connect, exiting...")
+        self._client = self.create_client(username, password)
+        self._client.register_plugins(self.configuration)
+        self._client.run(server, port, block=True)
 
 if __name__ == '__main__':
 

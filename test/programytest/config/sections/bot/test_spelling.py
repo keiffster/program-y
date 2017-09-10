@@ -12,7 +12,7 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             spelling:
-              classname: programy.utils.spelling.checker.SpellingChecker
+              classname: programy.spelling.norvig.NorvigSpellingChecker
               corpus: $BOT_ROOT/corpus.txt
               alphabet: abcdefghijklmnopqrstuvwxyz
               check_before: true
@@ -24,7 +24,7 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals("programy.utils.spelling.checker.SpellingChecker", spelling_config.classname)
+        self.assertEquals("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
         self.assertEquals("./corpus.txt", spelling_config.corpus)
         self.assertEquals("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
         self.assertTrue(spelling_config.check_before)

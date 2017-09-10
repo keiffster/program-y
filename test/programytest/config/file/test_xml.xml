@@ -60,20 +60,20 @@
 		</files>
 		<services>
 			<REST>
-				<classname>programy.utils.services.rest.GenericRESTService</classname>
+				<classname>programy.services.rest.GenericRESTService</classname>
 				<method>GET</method>
 				<host>0.0.0.0</host>
 			</REST>
 			<Pannous>
-				<classname>programy.utils.services.pannous.PannousService</classname>
+				<classname>programy.services.pannous.PannousService</classname>
 				<url>http://weannie.pannous.com/api</url>
 			</Pannous>
 			<Pandora>
-				<classname>programy.utils.services.pandora.PandoraService</classname>
+				<classname>programy.services.pandora.PandoraService</classname>
 				<url>http://www.pandorabots.com/pandora/talk-xml</url>
 			</Pandora>
 			<Wikipedia>
-				<classname>programy.utils.services.wikipediaservice.WikipediaService</classname>
+				<classname>programy.services.wikipediaservice.WikipediaService</classname>
 			</Wikipedia>
 		</services>
 	</brain>
@@ -90,7 +90,7 @@
         <max_search_depth>100</max_search_depth>
         <max_search_timeout>60</max_search_timeout>
 		<spelling>
-			<classname>programy.utils.spelling.checker.TestSpellingChecker</classname>
+			<classname>programy.spelling.checker.TestSpellingChecker</classname>
 			<corpus>$BOT_ROOT/spelling/test-corpus.txt</corpus>
 			<check_before>true</check_before>
 			<check_and_retry>true</check_and_retry>

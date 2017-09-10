@@ -66,14 +66,14 @@ class BotTests(unittest.TestCase):
     def test_bot_init_with_invalid_spellchecker(self):
         test_brain = Brain(BrainConfiguration())
         bot_config = BotConfiguration()
-        bot_config.spelling._classname = "programy.utils.spelling.checker.SpellingCheckerX"
+        bot_config.spelling._classname = "programy.spelling.checker.SpellingCheckerX"
         bot = Bot(test_brain, bot_config)
         self.assertIsNotNone(bot)
 
     def test_bot_init_with_spellchecker(self):
         test_brain = Brain(BrainConfiguration())
         bot_config = BotConfiguration()
-        bot_config.spelling._classname = "programy.utils.spelling.checker.SpellingChecker"
+        bot_config.spelling._classname = "programy.spelling.norvig.NorvigSpellingChecker"
         bot_config.spelling._corpus = os.path.dirname(__file__) + os.sep + "test_corpus.txt"
         bot_config.spelling._check_before = True
         bot_config.spelling._check_and_retry = True

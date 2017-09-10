@@ -24,7 +24,7 @@ class BotConfigurationTests(unittest.TestCase):
             max_search_depth: 100
             max_search_timeout: 60
             spelling:
-              classname: programy.utils.spelling.checker.SpellingChecker
+              classname: programy.spelling.norvig.NorvigSpellingChecker
               alphabet: 'abcdefghijklmnopqrstuvwxyz'
               corpus: $BOT_ROOT/corpus.txt
               check_before: true
@@ -46,7 +46,7 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertTrue(bot_config.override_properties)
 
         self.assertIsNotNone(bot_config.spelling)
-        self.assertEqual("programy.utils.spelling.checker.SpellingChecker", bot_config.spelling.classname)
+        self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", bot_config.spelling.classname)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

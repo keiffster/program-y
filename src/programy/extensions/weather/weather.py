@@ -19,8 +19,9 @@ import logging
 
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
+from programy.extensions.base import Extension
 
-class WeatherExtension(object):
+class WeatherExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):

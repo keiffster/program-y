@@ -24,6 +24,7 @@ class ConsoleBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
         self.clientid = "Console"
+        self.running = True
         BotClient.__init__(self, argument_parser)
 
     def set_environment(self):
@@ -79,20 +80,20 @@ class ConsoleBotClient(BotClient):
     def run(self):
         if self.arguments.noloop is False:
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
-            running = True
+            self.running = True
 
             self.display_startup_messages()
 
-            while running is True:
+            while self.running is True:
                 try:
                     question = self.process_question_answer()
                 except KeyboardInterrupt:
-                    running = False
+                    self.running = False
                     self.display_response(self.bot.exit_response)
                 except Exception as excep:
                     logging.exception(excep)
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
-                    self.display_unknown_response(question)
+                    #self.display_unknown_response(question)
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("noloop set to True, exiting...")
 
