@@ -35,15 +35,45 @@ class XmppClient(sleekxmpp.ClientXMPP):
         self.send_presence()
         self.get_roster()
 
-    def message(self, msg):
-        if msg['type'] in ('chat', 'normal'):
+    def is_valid_message(self, msg):
+        if 'type' in msg:
+            return bool(msg['type'] in ('chat', 'normal'))
+        else:
+            return False
 
-            question = msg['body']
-            userid = msg['from']
+    def get_question(self, msg):
+        if 'body' in msg:
+            return msg['body']
+        else:
+            return None
+
+    def get_userid(self, msg):
+        if 'from' in msg:
+            return msg['from']
+        else:
+            return None
+
+    def send_response(self, msg, response):
+        if response is not None:
+            msg.reply(response).send()
+
+    def message(self, msg):
+        if self.is_valid_message(msg):
+            question = self.get_question(msg)
+            if question is None:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Missing 'question' from XMPP message")
+                return
+
+            userid = self.get_userid(msg)
+            if userid is None:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Missing 'userid' from XMPP message")
+                return
 
             response =  self.bot_client.bot.ask_question(userid, question)
-            if response is not None:
-                msg.reply(response).send()
+            self.send_response(msg, response)
+
+        else:
+            if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Invalid XMPP message")
 
     def register_plugins(self, configuration):
         if configuration.client_configuration.xep_0030 is True:

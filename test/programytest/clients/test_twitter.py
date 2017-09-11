@@ -120,6 +120,9 @@ class TwitterBotClientTests(unittest.TestCase):
         client.initialise()
         self.assertIsNotNone(client._api)
 
+    #############################################################################################
+    # Direct Messages
+
     def test_get_direct_messages_no_previous(self):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
@@ -191,6 +194,24 @@ class TwitterBotClientTests(unittest.TestCase):
         last_message_id = client.process_direct_messages(-1)
         self.assertEqual(31, last_message_id)
 
+    #############################################################################################
+    # Followers
+
+    #def unfollow_non_followers(self, friends, followers_ids):
+    #def follow_new_followers(self, followers, friends):
+    #def process_followers(self):
+
+    #############################################################################################
+    # Status (Tweets)
+
+    #def get_statuses(self, last_status_id):
+    #def process_statuses(self, last_status_id):
+    #def get_question_from_text(self, text):
+    #def process_status_question(self, userid, text):
+
+    #############################################################################################
+    # Message ID Storage
+
     def test_message_ids_save_load(self):
         arguments = MockArgumentParser()
         client = TwitterBotClient(arguments)
@@ -211,6 +232,11 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertEquals(ids[0], 666)
         self.assertEquals(ids[1], 667)
 
+    #############################################################################################
+    # Execution
+
+    #def use_polling(self):
+
     def test_twitter_user_streaming(self):
         arguments = MockArgumentParser()
         client = TwitterBotClient(arguments)
@@ -219,3 +245,4 @@ class TwitterBotClientTests(unittest.TestCase):
         with self.assertRaises(Exception):
             client.use_streaming()
 
+    #def run(self):
