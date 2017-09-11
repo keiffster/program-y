@@ -236,6 +236,8 @@ class TwitterBotClient(BotClient):
 
     def use_polling(self):
 
+        print("Twitter client running as [%s]..."%self._username)
+
         (last_direct_message_id, last_status_id) = self.get_last_message_ids()
 
         running = True
