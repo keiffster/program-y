@@ -226,7 +226,7 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(
                 "Last message id = %d" % last_direct_message_id)
 
-        if self.configuration.client_configuration._use_status is True:
+        if self.configuration.client_configuration.use_status is True:
             last_status_id = self.process_statuses(last_status_id)
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Last status id = %d" % last_status_id)
 

@@ -63,9 +63,17 @@ class MockTwitterBotClient(TwitterBotClient):
 
     def __init__(self, argument_parser=None):
         TwitterBotClient.__init__(self, argument_parser)
+        self._use_polling_real = True
+        self._polled = False
 
     def create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         return MockTwitterApi()
+
+    def use_polling(self):
+        if self._use_polling_real:
+            super(MockTwitterBotClient, self).use_polling(self)
+        else:
+            self._polled = True
 
 class MockLicenseKeys(object):
 
@@ -436,9 +444,6 @@ class TwitterBotClientTests(unittest.TestCase):
     #############################################################################################
     # Execution
 
-    #def use_polling(self):
-    #def poll(self, last_direct_message_id, last_status_id):
-
     def test_twitter_user_streaming(self):
         arguments = MockArgumentParser()
         client = TwitterBotClient(arguments)
@@ -447,4 +452,59 @@ class TwitterBotClientTests(unittest.TestCase):
         with self.assertRaises(Exception):
             client.use_streaming()
 
-    #def run(self):
+    def test_poll(self):
+        arguments = MockArgumentParser()
+        client = MockTwitterBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.bot = MockBot()
+        client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
+                                                   "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
+                                                   "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
+                                                   })
+        client.initialise()
+        client.bot.answer = "Hiya"
+        client._username = "Keiffster"
+        client._username_len = 9
+
+        client.configuration.client_configuration._use_direct_message = True
+        client.configuration.client_configuration._auto_follow = True
+        client.configuration.client_configuration._use_status = True
+        client.configuration.client_configuration._polling_interval = 0
+
+        client.poll( -1, -1)
+
+    def test_run_with_streaming(self):
+        arguments = MockArgumentParser()
+        client = MockTwitterBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.bot = MockBot()
+        client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
+                                                   "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
+                                                   "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
+                                                   })
+
+        client.configuration.client_configuration._streaming = True
+        client.configuration.client_configuration._polling = False
+
+        with self.assertRaises(Exception):
+            client.run()
+
+    def test_run_with_polling(self):
+        arguments = MockArgumentParser()
+        client = MockTwitterBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.bot = MockBot()
+        client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
+                                                   "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
+                                                   "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
+                                                   })
+
+        client.configuration.client_configuration._streaming = False
+        client.configuration.client_configuration._polling = True
+
+        client._use_polling_real = False
+        client.run()
+        self.assertTrue(client._polled)
