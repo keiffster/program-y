@@ -138,6 +138,34 @@ class TwitterBotClient(BotClient):
         statuses.sort(key=lambda msg: msg.id)
         return statuses
 
+    def get_question_from_text(self, text):
+        if '@' not in text:
+            return None
+
+        text = text.strip()
+        pos = text.find(self._username)
+        if pos == -1:
+            return None
+
+        pos = pos - 1   # Take into account @ sign
+        question = text[(pos+self._username_len)+1:]
+        return question.strip()
+
+    def process_status_question(self, userid, text):
+        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Status Update: %s -> %s"%(userid, text))
+
+        question = self.get_question_from_text(text)
+        if question is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s -> %s"%(userid, question))
+
+            response = self.bot.ask_question(userid, question)
+
+            user = self._api.get_user(userid)
+            status = "@%s %s"%(user.screen_name, response)
+
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(status)
+            self._api.update_status(status)
+
     def process_statuses(self, last_status_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Processing status updates since [%s]"%last_status_id)
 
@@ -156,29 +184,6 @@ class TwitterBotClient(BotClient):
             last_status_id = statuses[-1].id
 
         return last_status_id
-
-    def get_question_from_text(self, text):
-        text = text.strip()
-        pos = text.find(self._username)
-        if pos == -1:
-            return
-        pos = pos - 1   # Take into account @ sign
-        return text[(pos+self._username_len)+1:]
-
-    def process_status_question(self, userid, text):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Status Update: %s -> %s"%(userid, text))
-
-        question = self.get_question_from_text(text)
-
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s -> %s"%(userid, question))
-
-        response = self.bot.ask_question(userid, question)
-
-        user = self._api.get_user(userid)
-        status = "@%s %s"%(user.screen_name, response)
-
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(status)
-        self._api.update_status(status)
 
     #############################################################################################
     # Message ID Storage
@@ -212,6 +217,23 @@ class TwitterBotClient(BotClient):
     #############################################################################################
     # Execution
 
+    def poll(self, last_direct_message_id, last_status_id):
+        if self.configuration.client_configuration.use_direct_message is True:
+            if self.configuration.client_configuration.auto_follow is True:
+                self.process_followers()
+
+            last_direct_message_id = self.process_direct_messages(last_direct_message_id)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug(
+                "Last message id = %d" % last_direct_message_id)
+
+        if self.configuration.client_configuration._use_status is True:
+            last_status_id = self.process_statuses(last_status_id)
+            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Last status id = %d" % last_status_id)
+
+        self.store_last_message_ids(last_direct_message_id, last_status_id)
+
+        time.sleep(self.configuration.client_configuration.polling_interval)
+
     def use_polling(self):
 
         (last_direct_message_id, last_status_id) = self.get_last_message_ids()
@@ -219,26 +241,14 @@ class TwitterBotClient(BotClient):
         running = True
         while running is True:
             try:
-                if self.configuration.client_configuration.use_direct_message is True:
-                    if self.configuration.client_configuration.auto_follow is True:
-                        self.process_followers()
-
-                    last_direct_message_id = self.process_direct_messages(last_direct_message_id)
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Last message id = %d"% last_direct_message_id)
-
-                if self.configuration.client_configuration._use_status is True:
-                    last_status_id = self.process_statuses(last_status_id)
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Last status id = %d"% last_status_id)
-
-                self.store_last_message_ids(last_direct_message_id, last_status_id)
-
-                time.sleep(self.configuration.client_configuration.polling_interval)
+                self.poll(last_direct_message_id, last_status_id)
 
             except KeyboardInterrupt:
                 running = False
 
             except RateLimitError as re:
                 if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Rate limit exceeded, sleeping for 15 minutes")
+                # TODO Set this to be configurable
                 time.sleep(15*60)
 
             except Exception as e:
