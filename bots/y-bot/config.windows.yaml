@@ -52,7 +52,10 @@ brain:
         person: $BOT_ROOT\config\person.txt
         person2: $BOT_ROOT\config\person2.txt
         properties: $BOT_ROOT\config\properties.txt
-        triples: $BOT_ROOT\config\triples.txt
+        rdf:
+            files:  $BOT_ROOT\rdf
+            extension: .txt
+            directories: false
         preprocessors: $BOT_ROOT\config\preprocessors.conf
         postprocessors: $BOT_ROOT\config\postprocessors.conf
 

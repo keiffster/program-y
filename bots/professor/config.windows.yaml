@@ -28,8 +28,8 @@ brain:
 
      # Braintree
     braintree:
-      file: C:\Windows\Temp\braintree.xml
-      content: xml
+      file: C:\Windows\Temp\braintree.txt
+      content: txt
 
     files:
         aiml:

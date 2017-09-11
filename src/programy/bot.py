@@ -153,7 +153,7 @@ class Bot(object):
 
     def check_max_timeout(self):
         if self._configuration.max_question_timeout != -1:
-            if self.total_search_time() > self._configuration.max_question_timeout:
+            if self.total_search_time() >= self._configuration.max_question_timeout:
                 raise Exception ("Maximum search time limit [%d] exceeded"%(self._configuration.max_question_timeout))
 
     def check_spelling_before(self, each_sentence):

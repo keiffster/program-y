@@ -427,7 +427,10 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
 
         client.configuration.client_configuration._storage = 'file'
-        client.configuration.client_configuration._storage_location = "/tmp/twitter.txt"
+        if os.name == 'posix':
+            client.configuration.client_configuration._storage_location = "/tmp/twitter.txt"
+        else:
+            client.configuration.client_configuration._storage_location = "C:\Windows\Temp/twitter.txt"
 
         if os.path.exists(client.configuration.client_configuration.storage_location):
             os.remove(client.configuration.client_configuration.storage_location)

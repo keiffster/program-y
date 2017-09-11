@@ -252,7 +252,7 @@ class PatternGraph(object):
             braintree += '<aiml>\n'
             braintree += self.root.to_xml(bot, clientid)
             braintree += '</aiml>\n'
-            with open('/tmp/braintree.xml', "w+") as dump_file:
+            with open(filename, "w+") as dump_file:
                 dump_file.write(braintree)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(

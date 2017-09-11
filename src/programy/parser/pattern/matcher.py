@@ -95,7 +95,7 @@ class MatchContext(object):
         if self._max_search_timeout == -1:
             return False
         else:
-            return bool(self.total_search_time() > self._max_search_timeout)
+            return bool(self.total_search_time() >= self._max_search_timeout)
 
     def add_match(self, match):
         self._matched_nodes.append(match)

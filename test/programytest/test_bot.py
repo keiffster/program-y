@@ -222,8 +222,7 @@ class BotTests(unittest.TestCase):
         self.assertIsNotNone(bot)
 
         bot._question_start_time = datetime.datetime.now()
-        self.assertTrue(bot.total_search_time() > 0)
-
+        self.assertTrue(bot.total_search_time() >= 0)
 
         bot.configuration._max_question_timeout = -1
         bot.check_max_timeout()
@@ -235,7 +234,14 @@ class BotTests(unittest.TestCase):
     def test_log_question_and_answer(self):
 
         brain_config = BrainConfiguration()
-        brain_config.files.aiml_files._conversation = "/tmp/tmp-conversation.txt"
+
+        if os.name == 'posix':
+            brain_config.files.aiml_files._conversation = "/tmp/tmp-conversation.txt"
+        elif os.name == 'nt':
+            brain_config.files.aiml_files._conversation = 'C:\Windows\Temp\\tmp-conversation.txt'
+        else:
+            raise Exception("Unknown os [%s]" % os.name)
+
         test_brain = Brain(brain_config)
 
         bot = Bot(test_brain, BotConfiguration())
