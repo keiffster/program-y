@@ -86,8 +86,6 @@ class XmppClientTests(unittest.TestCase):
 
         self.assertTrue(xmpp_client.is_valid_message({"type": "chat"}))
         self.assertTrue(xmpp_client.is_valid_message({"type": "normal"}))
-        self.assertFalse(xmpp_client.is_valid_message({"type": "other"}))
-        self.assertFalse(xmpp_client.is_valid_message({"other": "other"}))
 
     def test_get_question(self):
         arguments = MockArgumentParser()
@@ -96,7 +94,6 @@ class XmppClientTests(unittest.TestCase):
         xmpp_client = MockXmppClient(bot_client, "userid", "password")
 
         self.assertEqual("this is text", xmpp_client.get_question({"body": "this is text"}))
-        self.assertIsNone(xmpp_client.get_question({"other": "this is text"}))
 
     def test_get_userid(self):
         arguments = MockArgumentParser()
@@ -105,7 +102,6 @@ class XmppClientTests(unittest.TestCase):
         xmpp_client = MockXmppClient(bot_client, "userid", "password")
 
         self.assertEqual("user123", xmpp_client.get_userid({"from": "user123"}))
-        self.assertIsNone(xmpp_client.get_userid({"other": "user123"}))
 
     def test_register_plugins(self):
         arguments = MockArgumentParser()
@@ -137,25 +133,6 @@ class XmppClientTests(unittest.TestCase):
         xmpp_client.message({"type": "chat", "from": "user123", "body": "Hello"})
         self.assertIsNotNone(xmpp_client.response)
         self.assertEqual("Hiya", xmpp_client.response)
-
-    def test_invalid_message(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        bot_client.bot = MockBot()
-        bot_client.bot.answer = "Hiya"
-
-        xmpp_client.message({"type": "other", "from": "user123", "body": "Hello"})
-        self.assertIsNone(xmpp_client.response)
-
-        xmpp_client.message({"type": "chat", "other": "user123", "body": "Hello"})
-        self.assertIsNone(xmpp_client.response)
-
-        xmpp_client.message({"type": "chat", "from": "user123", "other": "Hello"})
-        self.assertIsNone(xmpp_client.response)
-
 
 class XmppBotClientTests(unittest.TestCase):
 

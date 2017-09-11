@@ -36,29 +36,20 @@ class XmppClient(sleekxmpp.ClientXMPP):
         self.get_roster()
 
     def is_valid_message(self, msg):
-        if 'type' in msg:
-            return bool(msg['type'] in ('chat', 'normal'))
-        else:
-            return False
+        return bool(msg['type'] in ('chat', 'normal'))
 
     def get_question(self, msg):
-        if 'body' in msg:
-            return msg['body']
-        else:
-            return None
+        return msg['body']
 
     def get_userid(self, msg):
-        if 'from' in msg:
-            return msg['from']
-        else:
-            return None
+        return msg['from']
 
     def send_response(self, msg, response):
         if response is not None:
             msg.reply(response).send()
 
     def message(self, msg):
-        if self.is_valid_message(msg):
+        if self.is_valid_message(msg) is True:
             question = self.get_question(msg)
             if question is None:
                 if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Missing 'question' from XMPP message")
@@ -90,7 +81,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
 
     def run(self, server, port, block=True):
         if self.connect((server, port)):
-            print("Connected, running...")
+            print("Connected, running as [%s]..."%self.requested_jid )
             self.process(block=block)
         else:
             print("Failed to connect, exiting...")
