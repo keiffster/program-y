@@ -23,6 +23,7 @@ class TwitterConfiguration(BaseConfigurationData):
         BaseConfigurationData.__init__(self, "twitter")
         self._polling = False
         self._polling_interval = 0
+        self._rate_limit_sleep = -1
         self._streaming = False
         self._use_status = False
         self._use_direct_message = False
@@ -38,6 +39,10 @@ class TwitterConfiguration(BaseConfigurationData):
     @property
     def polling_interval(self):
         return self._polling_interval
+
+    @property
+    def rate_limit_sleep(self):
+        return self._rate_limit_sleep
 
     @property
     def streaming(self):
@@ -73,6 +78,7 @@ class TwitterConfiguration(BaseConfigurationData):
             self._polling = config_file.get_bool_option(twitter, "polling")
             if self._polling is True:
                 self._polling_interval = config_file.get_int_option(twitter, "polling_interval")
+                self._rate_limit_sleep = config_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
             self._streaming = config_file.get_bool_option(twitter, "streaming")
             self._use_status = config_file.get_bool_option(twitter, "use_status")
             self._use_direct_message = config_file.get_bool_option(twitter, "use_direct_message")

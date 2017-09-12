@@ -172,8 +172,6 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(result)
         self.assertEqual("Word2", result)
 
-    # TODO Add unit aiml_tests for <loop /> construct
-
     def test_type2_to_xml_global(self):
         root = TemplateNode()
 
@@ -250,8 +248,6 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         result = root.resolve(self.bot, self.clientid)
         self.assertIsNotNone(result)
         self.assertEqual("Word1", result)
-
-    # TODO Add unit aiml_tests for <loop /> construct
 
     def test_type3_to_xml(self):
         root = TemplateNode()

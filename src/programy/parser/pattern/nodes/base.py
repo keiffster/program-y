@@ -238,13 +238,12 @@ class PatternNode(object):
 
     def _node_exists(self, new_node):
 
-        # TODO This can be optimised, but returning None early if node is specific type but not equivalent
-
         if new_node.is_priority() is True:
             for priority in self._priority_words:
                 if priority.equivalent(new_node) is True:
                     # Equivalent node already exists, use this one instead
                     return priority
+            return None
 
         if new_node.is_zero_or_more() is True:
             if self._0ormore_arrow is not None:
@@ -253,6 +252,7 @@ class PatternNode(object):
             if self._0ormore_hash is not None:
                 if self._0ormore_hash.equivalent(new_node) is True:
                     return self._0ormore_hash
+            return None
 
         if new_node.is_one_or_more() is True:
             if self._1ormore_underline is not None:
@@ -261,18 +261,22 @@ class PatternNode(object):
             if self._1ormore_star is not None:
                 if self._1ormore_star.equivalent(new_node) is True:
                     return self._1ormore_star
+            return None
 
         if new_node.is_topic() is True:
             if self._topic is not None:
                 return self._topic
+            return None
 
         if new_node.is_that():
             if self._that is not None:
                 return self._that
+            return None
 
         if new_node.is_template() is True:
             if self._template is not None:
                 return self._template
+            return None
 
         if new_node.is_iset() is True:
             return None
@@ -283,6 +287,7 @@ class PatternNode(object):
                 if existing_node.equivalent(new_node):
                     # Equivalent node already exists, use this one instead
                     return existing_node
+            return None
 
         if new_node.is_bot() is True:
             if new_node.property in self._bot_properties:
@@ -290,8 +295,10 @@ class PatternNode(object):
                 if existing_node.equivalent(new_node):
                     # Equivalent node already exists, use this one instead
                     return existing_node
+            return None
 
         if new_node.is_regex() is True:
+            # TODO Indentical regexs should be supported both pattern and template
             return None
 
         if new_node.is_word():

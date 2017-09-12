@@ -184,7 +184,6 @@ class TemplateLearnNode(TemplateNode):
                 self.children.append(learn_category)
 
             elif tag_name == 'topic':
-                # TODO Handle case when its not a category
                 raise ParserException("Not supported yet")
 
             else:

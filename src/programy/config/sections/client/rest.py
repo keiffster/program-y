@@ -24,7 +24,7 @@ class RestConfiguration(BaseConfigurationData):
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
-        self._workers = 1
+        self._workers = 4
         self._use_api_keys = False
         self._api_key_file = None
 
@@ -58,7 +58,7 @@ class RestConfiguration(BaseConfigurationData):
             self._host = config_file.get_option(rest, "host", missing_value="0.0.0.0")
             self._port = config_file.get_option(rest, "port", missing_value=80)
             self._debug = config_file.get_bool_option(rest, "debug", missing_value=False)
-            self._workers = config_file.get_option(rest, "workers", missing_value=1)
+            self._workers = config_file.get_option(rest, "workers", missing_value=4)
             self._use_api_keys = config_file.get_bool_option(rest, "use_api_keys", missing_value=False)
             self._api_key_file = config_file.get_option(rest, "api_key_file")
             if self._api_key_file is not None:

@@ -250,8 +250,10 @@ class TwitterBotClient(BotClient):
 
             except RateLimitError as re:
                 if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Rate limit exceeded, sleeping for 15 minutes")
-                # TODO Set this to be configurable
-                time.sleep(15*60)
+                if self.configuration.client_configuration.poll_sleep != -1:
+                    time.sleep(self.configuration.client_configuration.rate_limit_sleep)
+                else:
+                    time.sleep(15*60)
 
             except Exception as e:
                 logging.exception(e)

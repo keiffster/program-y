@@ -42,5 +42,5 @@ class RestConfigurationTests(unittest.TestCase):
         self.assertEqual("0.0.0.0", rest_config.host)
         self.assertEqual(80, rest_config.port)
         self.assertEqual(False, rest_config.debug)
-        self.assertEqual(1, rest_config.workers)
+        self.assertEqual(4, rest_config.workers)
         self.assertEqual(False, rest_config.use_api_keys)

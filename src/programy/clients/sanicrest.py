@@ -61,13 +61,9 @@ app = Sanic()
 
 @app.route('/api/v1.0/ask', methods=['GET'])
 async def ask(request):
-    #TODO Add config option to all GET or throw exception
     global rest_client
     response, status = rest_client.process_request(request)
     return json(response, status=status)
-
-#TODO Add POST Option
-    #TODO Add config option to all POST or throw exception
 
 if __name__ == '__main__':
 
@@ -84,10 +80,9 @@ if __name__ == '__main__':
         if rest_client.configuration.client_configuration.debug is True:
             print("REST Client running in debug mode")
 
-        #TODO Set works as configurable option
         app.run(host=rest_client.configuration.client_configuration.host,
                 port=rest_client.configuration.client_configuration.port,
                 debug=rest_client.configuration.client_configuration.debug,
-                workers=4)
+                workers=rest_client.configuration.client_configuration.workers)
 
     run()

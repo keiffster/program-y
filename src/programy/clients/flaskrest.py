@@ -54,13 +54,9 @@ app = Flask(__name__)
 
 @app.route('/api/v1.0/ask', methods=['GET'])
 def ask():
-    #TODO Add config option to all GET or throw exception
     global rest_client
     response, status = rest_client.process_request(request)
     return make_response(jsonify({'response': response}, status))
-
-#TODO Add POST Option
-    #TODO Add config option to all POST or throw exception
 
 if __name__ == '__main__':
 
