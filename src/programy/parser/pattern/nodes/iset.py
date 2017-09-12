@@ -65,7 +65,11 @@ class PatternISetNode(PatternNode):
 
     def equivalent(self, other):
         # All isets are never equivalent, as they are inline and are unique regardless of set content
-        return False
+        #return False
+        for word in self.words:
+            if word not in other.words:
+                return False
+        return True
 
     def equals(self, bot, client, words, word_no):
         word = words.word(word_no)

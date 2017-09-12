@@ -234,7 +234,7 @@ class PatternBotNodeTests(PatternTestBaseClass):
 
         self.assert_child_node_exists(node, PatternSetNode({}, "setname"), PatternSetNode([], "setname"))
         self.assert_child_node_exists(node, PatternBotNode({}, "botname"), PatternBotNode([], "botname"))
-        self.assert_child_node_exists(node, PatternISetNode({}, "word1 word2"), PatternISetNode([], "word1 word2"), child_equal=False)
+        self.assert_child_node_exists(node, PatternISetNode({}, "word1 word2"), PatternISetNode([], "word1 word2"))
 
         self.assert_child_node_exists(node, PatternRegexNode({"pattern": "^LEGION$"}, None), PatternRegexNode({"pattern": "^LEGION$"},  None))
         self.assert_child_node_exists(node, PatternRegexNode({"template": "LEGION"}, None), PatternRegexNode({"template": "LEGION"},  None))

@@ -279,6 +279,10 @@ class PatternNode(object):
             return None
 
         if new_node.is_iset() is True:
+            for existing_node in self.children:
+                if existing_node.is_iset():
+                    if existing_node.equivalent(new_node):
+                        return existing_node
             return None
 
         if new_node.is_set() is True:

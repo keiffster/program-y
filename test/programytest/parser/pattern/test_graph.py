@@ -518,9 +518,8 @@ class PatternGraphTests(PatternTestBaseClass):
         self.assertIsNotNone(graph.root.children)
         self.assertEqual(len(graph.root.children), 1)
         self.assertIsInstance(graph.root.children[0], PatternWordNode)
-        self.assertEqual(len(graph.root.children[0].children), 2)
+        self.assertEqual(len(graph.root.children[0].children), 1)
         self.assertIsInstance(graph.root.children[0].children[0], PatternISetNode)
-        self.assertIsInstance(graph.root.children[0].children[1], PatternISetNode)
 
     def test_add_pattern_to_graph_basic_bot_text(self):
         graph = PatternGraph()

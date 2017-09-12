@@ -56,7 +56,7 @@ class PatternSetNodeTests(PatternTestBaseClass):
         self.assertEquals("TEST2", node.words[1])
         self.assertEquals("TEST3", node.words[2])
 
-        self.assertFalse(node.equivalent(PatternISetNode([], "test1, test2, test3")))
+        self.assertTrue(node.equivalent(PatternISetNode([], "test1, test2, test3")))
 
         sentence = Sentence("TEST1 TEST2 TEST3")
 
