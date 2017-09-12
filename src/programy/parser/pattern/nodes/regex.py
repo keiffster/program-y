@@ -28,6 +28,7 @@ class PatternRegexNode(PatternNode):
         PatternNode.__init__(self)
         self._pattern_text = None
         self._pattern_template = None
+        self._pattern = None
         if 'pattern' in attribs:
             self._pattern_text = attribs['pattern']
         elif 'template' in attribs:
@@ -60,9 +61,11 @@ class PatternRegexNode(PatternNode):
     def equivalent(self, other):
         if other.is_regex():
             if self._pattern_template is not None:
-                return bool(self._pattern_template == other._pattern_template)
+                if other._pattern_template is not None:
+                    return bool(self._pattern_template == other._pattern_template)
             else:
-                return bool(self.pattern == other.pattern)
+                if other.pattern is not None:
+                    return bool(self.pattern == other.pattern)
         return False
 
     def equals(self, bot, client, words, word_no):

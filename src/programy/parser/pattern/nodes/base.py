@@ -298,7 +298,10 @@ class PatternNode(object):
             return None
 
         if new_node.is_regex() is True:
-            # TODO Indentical regexs should be supported both pattern and template
+            for existing_node in self.children:
+                if existing_node.is_regex():
+                    if existing_node.equivalent(new_node):
+                        return existing_node
             return None
 
         if new_node.is_word():

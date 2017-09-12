@@ -232,10 +232,12 @@ class PatternBotNodeTests(PatternTestBaseClass):
         self.assert_child_node_exists(node, PatternZeroOrMoreWildCardNode('#'), PatternZeroOrMoreWildCardNode('#'))
         self.assert_child_node_exists(node, PatternZeroOrMoreWildCardNode('^'), PatternZeroOrMoreWildCardNode('^'))
 
-        self.assert_child_node_exists(node, PatternSetNode([], "setname"), PatternSetNode([], "setname"))
-        self.assert_child_node_exists(node, PatternBotNode([], "botname"), PatternBotNode([], "botname"))
-        self.assert_child_node_exists(node, PatternISetNode([], "word1 word2"), PatternISetNode([], "word1 word2"), child_equal=False)
-        self.assert_child_node_exists(node, PatternRegexNode([], "pattern"), PatternRegexNode([], "pattern"), child_equal=False)
+        self.assert_child_node_exists(node, PatternSetNode({}, "setname"), PatternSetNode([], "setname"))
+        self.assert_child_node_exists(node, PatternBotNode({}, "botname"), PatternBotNode([], "botname"))
+        self.assert_child_node_exists(node, PatternISetNode({}, "word1 word2"), PatternISetNode([], "word1 word2"), child_equal=False)
+
+        self.assert_child_node_exists(node, PatternRegexNode({"pattern": "^LEGION$"}, None), PatternRegexNode({"pattern": "^LEGION$"},  None))
+        self.assert_child_node_exists(node, PatternRegexNode({"template": "LEGION"}, None), PatternRegexNode({"template": "LEGION"},  None))
 
         topic1 = PatternTopicNode()
         topic2 = PatternTopicNode()
@@ -288,7 +290,8 @@ class PatternBotNodeTests(PatternTestBaseClass):
 <set name="SETNAME">
 </set><bot property="botname">
 </bot><iset words="WORD1 WORD2"></iset>
-<regex pattern="pattern"></regex>
+<regex pattern="^LEGION$"></regex>
+<regex template="LEGION"></regex>
 """)
 
     def assert_child_node_exists(self, base_node, first_node, second_node, child_equal=True):
