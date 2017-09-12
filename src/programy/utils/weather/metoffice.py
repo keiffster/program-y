@@ -28,7 +28,7 @@ DIRECTIONS = { 'N':     'North',
                'E':     'East',
                'ESE':   'East South East',
                'SE':    'South East',
-               'ESE':   'SouthSouth East',
+               'SSE':   'South South East',
                'S':     'South',
                'SSW':   'South South West',
                'SW':    'South West',
@@ -44,7 +44,7 @@ PRESSURE_TENDANCY = { 'F': "Falling",
 
 class DataPoint(object):
 
-    def extract_attribute(self, json, name, data_type, time_period):
+    def extract_attribute(self, json, name, data_type, time_period=None):
         if name in json:
             return json[name]
         else:
@@ -64,18 +64,19 @@ class DataPoint(object):
             return "Unknown"
 
 class DailyForecastDayDataPoint(DataPoint):
-    def __int__(self):
-        self._type                                      # $
+
+    def __init__(self):
+        self._type = None                               # $
         self._wind_direction = None                     # D
         self._temp_max = None                           # Dm
         self._temperature_feels_like_max = None         # FDm
         self._wind_gust_noon = None                     # Gn
         self._screen_relative_humidity_noon = None      # Hn
-        self._precipitation_probability                 # PPd
+        self._precipitation_probability = None          # PPd
         self._wind_speed = None                         # S
         self._uv_index_max = None                       # U
         self._uv_guidance = None
-        self._visibility_code                           # V
+        self._visibility_code = None                    # V
         self._visibility_text = None
         self._weather_type_code = None                  # W
         self._weather_type_text = None
@@ -109,16 +110,17 @@ class DailyForecastDayDataPoint(DataPoint):
             self._weather_type_text = metoffer.WEATHER_CODES[int(self._weather_type_code)]
 
 class DailyForecastNightDataPoint(DataPoint):
-    def __int__(self):
-        self._type                                      # $
+
+    def __init__(self):
+        self._type = None                               # $
         self._wind_direction = None                     # D
         self._temperature_feels_like_min = None         # FNm
         self._wind_gust_midnight = None                 # Gm
         self._screen_relative_humidity_midnight = None  # Hm
         self._temp_min = None                           # Nm
-        self._precipitation_probability                 # PPn
+        self._precipitation_probability = None          # PPn
         self._wind_speed = None                         # S
-        self._visibility_code                           # V
+        self._visibility_code = None                    # V
         self._visibility_text = None
         self._weather_type_code = None                  # W
         self._weather_type_text = None
@@ -137,7 +139,7 @@ class DailyForecastNightDataPoint(DataPoint):
         self._wind_direction = self.extract_attribute(json, 'D', data_type, time_period)
         self._temperature_feels_like_min = self.extract_attribute(json, 'FNm', data_type, time_period)
         self._wind_gust_midnight = self.extract_attribute(json, 'Gm', data_type, time_period)
-        self._temp__min = self.extract_attribute(json, 'Nm', data_type, time_period)
+        self._temp_min = self.extract_attribute(json, 'Nm', data_type, time_period)
         self._screen_relative_humidity_midnight = self.extract_attribute(json, 'Hm', data_type, time_period)
         self._precipitation_probability = self.extract_attribute(json, 'PPn', data_type, time_period)
         self._wind_speed = self.extract_attribute(json, 'S', data_type, time_period)
@@ -149,7 +151,8 @@ class DailyForecastNightDataPoint(DataPoint):
             self._weather_type_text = metoffer.WEATHER_CODES[int(self._weather_type_code)]
 
 class ThreeHourlyForecastDataPoint(DataPoint):
-    def __int__(self):
+
+    def __init__(self):
         self._time = None                       # $
 
         self._weather_type_code = None          # W
@@ -201,7 +204,7 @@ class ThreeHourlyForecastDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER %s TEMP % TF %s WIND D %s F %s S %s VISIBILITY %s UV I %s G %s RAIN %s HUMIDITY %s"%(
+        return "WEATHER %s TEMP %s TF %s WIND D %s F %s S %s VISIBILITY %s UV I %s G %s RAIN %s HUMIDITY %s"%(
             self._weather_type_text,
             self._temperature, self._temperature_feels_like,
             self._wind_direction, self._wind_direction_full, self._wind_speed,
@@ -212,6 +215,7 @@ class ThreeHourlyForecastDataPoint(DataPoint):
         )
 
 class ObservationDataPoint(DataPoint):
+
     def __init__(self):
         self._time = None                       # $
         self._temperature = None                # T
@@ -287,6 +291,7 @@ class ObservationDataPoint(DataPoint):
             return "Unknown"
 
 class Report(object):
+
     def __init__(self, data_type, time_period):
         self._data_type = data_type
         self._time_period = time_period
@@ -356,6 +361,7 @@ class Report(object):
 
 
 class Location(object):
+
     def __init__(self, data_type, time_period):
         self._data_type = data_type
         self._time_period = time_period
@@ -381,7 +387,7 @@ class Location(object):
                     return report
         return None
 
-    def parse_jason(self, json):
+    def parse_json(self, json):
         for element in json['Period']:
             report = Report(self._data_type, self._time_period)
             report.parse_json(element)
@@ -429,6 +435,7 @@ class Location(object):
             raise ValueError("name missing from Location data")
 
 class DV(object):
+
     def __init__(self, data_type, time_period):
         self._data_type = data_type
         self._time_period = time_period
@@ -436,12 +443,12 @@ class DV(object):
         self._type = None
         self._location = None
 
-    def parse_jason(self, json):
+    def parse_json(self, json):
 
         if "Location" not in json:
             raise ValueError("Location missing from DV data")
         self._location = Location(self._data_type, self._time_period)
-        self._location.parse_jason(json['Location'])
+        self._location.parse_json(json['Location'])
 
         if 'dataDate' in json:
             try:
@@ -455,6 +462,7 @@ class DV(object):
             raise ValueError("type missing from DV data")
 
 class SiteReport(object):
+
     def __init__(self, data_type, time_period):
         self._time_period = time_period
         self._data_type = data_type
@@ -464,7 +472,8 @@ class SiteReport(object):
         if "DV" not in json:
             raise ValueError("DV missing from site report data")
         self._dv = DV(self._data_type, self._time_period)
-        self._dv.parse_jason(json['DV'])
+        self._dv.parse_json(json['DV'])
+
 
 class MetOfficeWeatherReport(object):
 

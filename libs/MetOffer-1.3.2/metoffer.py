@@ -107,6 +107,7 @@ WEATHER_CODES = {"NA": "Not available",
                  28: "Thunder shower (night)",
                  29: "Thunder shower (day)",
                  30: "Thunder"}
+
 VISIBILITY = {"UN": "Unknown",
               "VP": "Very poor - Less than 1 km",
               "PO": "Poor - Between 1-4 km",
