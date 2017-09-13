@@ -79,13 +79,6 @@ class JSONConfigurationFile(BaseConfigurationFile):
             if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
-    def get_multi_line_option(self, section, option_name, missing_value=[]):
-        value = self. get_option(section, option_name, missing_value)
-        if isinstance(value, list):
-            return value
-        else:
-            return [value]
-
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=[]):
         value = self. get_option(section, option_name, missing_value)
         if isinstance(value, list):

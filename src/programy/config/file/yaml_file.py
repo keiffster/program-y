@@ -80,19 +80,6 @@ class YamlConfigurationFile(BaseConfigurationFile):
             if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
-    def get_multi_line_option(self, section, option_name, missing_value=[]):
-        if option_name in section:
-            values = section[option_name]
-            splits = values.split('\n')
-            multis = []
-            for value in splits:
-                if value is not None and value != '':
-                    multis.append(value)
-            return multis
-        else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Missing value for [%s] in config, return default value", option_name)
-            return missing_value
-
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=[]):
         if option_name in section:
             values = section[option_name]
