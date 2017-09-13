@@ -101,8 +101,6 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%s Looking for a %s, none give, no match found!" % (tabs, PatternNode.THAT))
                 return None
 
-        # TODO Add priority words first
-
         word_no += 1
         if word_no >= words.num_words():
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sNo more words" % (tabs))

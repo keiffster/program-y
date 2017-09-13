@@ -65,3 +65,14 @@ class PriorityAIMLTests(unittest.TestCase):
         response = PriorityAIMLTests.test_client.bot.ask_question("test", "THIS TEST2 IS PRIORITY6")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'PRIORITY6 TEST2 SUCCESS')
+
+    def test_priority_catch_all(self):
+        response = PriorityAIMLTests.test_client.bot.ask_question("test", "THIS IS NOY A TEST")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'CATCH ALL TEST')
+
+    def test_priority_not_a_test(self):
+        response = PriorityAIMLTests.test_client.bot.ask_question("test", "THIS IS PRIORITY TEST")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'NOT A PRIORITY TEST')
+

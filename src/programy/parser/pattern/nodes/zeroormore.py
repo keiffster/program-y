@@ -77,8 +77,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         if match is not None:
             return match
 
-        # TODO Add priority words first
-
         word = words.word(word_no)
 
         if len(self._children) > 0:

@@ -55,6 +55,20 @@ For more information see [url]
 	</category>
 
 	<category>
+		<pattern>THIS IS PRIORITY TEST</pattern>
+		<template>
+		    NOT A PRIORITY TEST
+		</template>
+	</category>
+
+	<category>
+		<pattern>THIS IS * TEST</pattern>
+		<template>
+		    CATCH ALL TEST
+		</template>
+	</category>
+
+	<category>
 		<pattern>THIS IS $PRIORITY4 TEST1</pattern>
 		<template>
 		    PRIORITY4 TEST1 SUCCESS
