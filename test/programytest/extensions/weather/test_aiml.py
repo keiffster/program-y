@@ -10,7 +10,7 @@ class WeathersTestsClient(TestClient):
 
     def load_configuration(self, arguments):
         super(WeathersTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = files=os.path.dirname(__file__)
+        self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
 
 class WeathersAIMLTests(unittest.TestCase):
 

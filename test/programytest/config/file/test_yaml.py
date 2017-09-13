@@ -54,6 +54,108 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 
+    def test_load_from_text_single_files(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        configuration = yaml.load_from_text("""
+            brain:
+
+                files:
+                    aiml:
+                        files: $BOT_ROOT/test-aiml
+                        extension: .test-aiml
+                        directories: true
+                        errors: /tmp/y-bot_errors.txt
+                        duplicates: /tmp/y-bot_duplicates.txt
+                        conversation: /tmp/y-bot_conversation.txt
+                    sets:
+                        files: $BOT_ROOT/test-sets
+                        extension: .test-txt
+                        directories: true
+                    maps:
+                        files: $BOT_ROOT/test-maps
+                        extension: .test-txt
+                        directories: true
+            """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ["./test-aiml"])
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
+    def test_load_from_text_multi_files(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        configuration = yaml.load_from_text("""
+            brain:
+
+                files:
+                    aiml:
+                        files: |
+                                $BOT_ROOT/test-aiml
+                                $BOT_ROOT/my-aiml
+                        extension: .test-aiml
+                        directories: true
+                        errors: /tmp/y-bot_errors.txt
+                        duplicates: /tmp/y-bot_duplicates.txt
+                        conversation: /tmp/y-bot_conversation.txt
+                    sets:
+                        files: $BOT_ROOT/test-sets
+                        extension: .test-txt
+                        directories: true
+                    maps:
+                        files: $BOT_ROOT/test-maps
+                        extension: .test-txt
+                        directories: true
+            """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ['./test-aiml', './my-aiml'])
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
+    def test_load_from_text_single_file(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        configuration = yaml.load_from_text("""
+            brain:
+
+                files:
+                    aiml:
+                        file: $BOT_ROOT/test-aiml/test.aiml
+                        extension: .test-aiml
+                        directories: true
+                        errors: /tmp/y-bot_errors.txt
+                        duplicates: /tmp/y-bot_duplicates.txt
+                        conversation: /tmp/y-bot_conversation.txt
+                    sets:
+                        files: $BOT_ROOT/test-sets
+                        extension: .test-txt
+                        directories: true
+                    maps:
+                        files: $BOT_ROOT/test-maps
+                        extension: .test-txt
+                        directories: true
+            """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.file, "./test-aiml/test.aiml")
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
+
     def test_load_from_text(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)

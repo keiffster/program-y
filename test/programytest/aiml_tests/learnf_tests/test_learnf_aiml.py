@@ -13,7 +13,7 @@ class LearnfTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(LearnfTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files =os.path.dirname(__file__)
+        self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
         self.configuration.brain_configuration.overrides._allow_learn_aiml = True
         self.configuration.brain_configuration.overrides._allow_learnf_aiml = True
 

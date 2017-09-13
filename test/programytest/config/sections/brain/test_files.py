@@ -45,7 +45,7 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         files_config.load_config_section(yaml, brain_config, ".")
 
         self.assertIsNotNone(files_config.aiml_files)
-        self.assertEqual("./aiml", files_config.aiml_files.files)
+        self.assertEqual(["./aiml"], files_config.aiml_files.files)
         self.assertEqual(".aiml", files_config.aiml_files.extension)
         self.assertTrue(files_config.aiml_files.directories)
         self.assertEqual("/tmp/y-bot_errors.txt", files_config.aiml_files.errors)
@@ -53,12 +53,12 @@ class BrainFilesConfigurationTests(unittest.TestCase):
         self.assertEqual("/tmp/y-bot_conversation.txt", files_config.aiml_files.conversation)
 
         self.assertIsNotNone(files_config.set_files)
-        self.assertEqual("./sets", files_config.set_files.files)
+        self.assertEqual(["./sets"], files_config.set_files.files)
         self.assertEqual(".txt", files_config.set_files.extension)
         self.assertFalse(files_config.set_files.directories)
 
         self.assertIsNotNone(files_config.map_files)
-        self.assertEqual("./maps", files_config.map_files.files)
+        self.assertEqual(["./maps"], files_config.map_files.files)
         self.assertEqual(".txt", files_config.map_files.extension)
         self.assertFalse(files_config.map_files.directories)
 

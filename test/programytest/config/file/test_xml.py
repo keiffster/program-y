@@ -56,6 +56,126 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
         self.assertIsNotNone(configuration)
         self.assert_configuration(configuration)
 
+    def test_load_from_text_single_files(self):
+        xml = XMLConfigurationFile()
+        self.assertIsNotNone(xml)
+        configuration=xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<brain>
+		<files>
+			<aiml>
+				<files>$BOT_ROOT/test-aiml</files>
+				<extension>.test-aiml</extension>
+				<directories>true</directories>
+				<errors>/tmp/y-bot_errors.txt</errors>
+				<duplicates>/tmp/y-bot_duplicates.txt</duplicates>
+				<conversation>/tmp/y-bot_conversation.txt</conversation>
+			</aiml>
+			<sets>
+				<files>$BOT_ROOT/test-sets</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</sets>
+			<maps>
+				<files>$BOT_ROOT/test-maps</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</maps>
+		</files>
+	</brain>
+</root>
+        """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ["./test-aiml"])
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
+    def test_load_from_text_multi_files(self):
+        xml = XMLConfigurationFile()
+        self.assertIsNotNone(xml)
+        configuration=xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<brain>
+		<files>
+			<aiml>
+				<files>
+				    <file>$BOT_ROOT/test-aiml</file>
+				    <file>$BOT_ROOT/my-aiml</file>
+				</files>
+				<extension>.test-aiml</extension>
+				<directories>true</directories>
+				<errors>/tmp/y-bot_errors.txt</errors>
+				<duplicates>/tmp/y-bot_duplicates.txt</duplicates>
+				<conversation>/tmp/y-bot_conversation.txt</conversation>
+			</aiml>
+			<sets>
+				<files>$BOT_ROOT/test-sets</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</sets>
+			<maps>
+				<files>$BOT_ROOT/test-maps</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</maps>
+		</files>
+	</brain>
+</root>
+        """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ["./test-aiml", "./my-aiml"])
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
+    def test_load_from_text_single_file(self):
+        xml = XMLConfigurationFile()
+        self.assertIsNotNone(xml)
+        configuration=xml.load_from_text("""<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+	<brain>
+		<files>
+			<aiml>
+				<file>$BOT_ROOT/test-aiml/test.aiml</file>
+				<extension>.test-aiml</extension>
+				<directories>true</directories>
+				<errors>/tmp/y-bot_errors.txt</errors>
+				<duplicates>/tmp/y-bot_duplicates.txt</duplicates>
+				<conversation>/tmp/y-bot_conversation.txt</conversation>
+			</aiml>
+			<sets>
+				<files>$BOT_ROOT/test-sets</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</sets>
+			<maps>
+				<files>$BOT_ROOT/test-maps</files>
+				<extension>.test-txt</extension>
+				<directories>true</directories>
+			</maps>
+		</files>
+	</brain>
+</root>
+        """, ConsoleConfiguration(), ".")
+
+        self.assertIsNotNone(configuration)
+
+        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_multiple_files())
+        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_single_file())
+
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.file, "./test-aiml/test.aiml")
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+
     def test_load_from_text(self):
         xml = XMLConfigurationFile()
         self.assertIsNotNone(xml)

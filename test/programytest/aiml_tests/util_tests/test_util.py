@@ -11,7 +11,7 @@ class UtiltyTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(UtiltyTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = os.path.dirname(__file__)
+        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
 
 
 class UtiltyAIMLTests(unittest.TestCase):

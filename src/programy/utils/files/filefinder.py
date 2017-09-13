@@ -45,9 +45,9 @@ class FileFinder(object):
 
         return sorted(found_files, key=lambda element: (element[1], element[0]))
 
-    def load_dir_contents(self, path_to_sets, subdir=False, extension=".txt"):
+    def load_dir_contents(self, paths, subdir=False, extension=".txt"):
 
-        files = self.find_files(path_to_sets, subdir, extension)
+        files = self.find_files(paths, subdir, extension)
 
         collection = {}
         for file in files:

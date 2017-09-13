@@ -26,7 +26,7 @@ class BrainFileConfigurationTests(unittest.TestCase):
         sets_config = BrainFileConfiguration("sets")
         sets_config.load_config_section(yaml, files_config, ".")
 
-        self.assertEqual("./sets", sets_config.files)
+        self.assertEqual(["./sets"], sets_config.files)
         self.assertEqual(".txt", sets_config.extension)
         self.assertFalse(sets_config.directories)
 

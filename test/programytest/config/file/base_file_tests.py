@@ -40,7 +40,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertIsNotNone(configuration.brain_configuration.files)
 
         self.assertIsNotNone(configuration.brain_configuration.files.aiml_files)
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, "./test-aiml")
+        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ["./test-aiml"])
         self.assertIsNone(configuration.brain_configuration.files.aiml_files.file)
         self.assertEqual(configuration.brain_configuration.files.aiml_files.extension, ".test-aiml")
         self.assertTrue(configuration.brain_configuration.files.aiml_files.directories)
@@ -49,13 +49,13 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(configuration.brain_configuration.files.aiml_files.conversation, "/tmp/y-bot_conversation.txt")
 
         self.assertIsNotNone(configuration.brain_configuration.files.set_files)
-        self.assertEqual(configuration.brain_configuration.files.set_files.files, "./test-sets")
+        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
         self.assertIsNone(configuration.brain_configuration.files.set_files.file)
         self.assertEqual(configuration.brain_configuration.files.set_files.extension, ".test-txt")
         self.assertTrue(configuration.brain_configuration.files.set_files.directories)
 
         self.assertIsNotNone(configuration.brain_configuration.files.map_files)
-        self.assertEqual(configuration.brain_configuration.files.map_files.files, "./test-maps")
+        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
         self.assertIsNone(configuration.brain_configuration.files.map_files.file)
         self.assertEqual(configuration.brain_configuration.files.map_files.extension, ".test-txt")
         self.assertTrue(configuration.brain_configuration.files.map_files.directories)

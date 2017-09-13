@@ -67,7 +67,13 @@ class MapCollection(object):
     def load(self, configuration):
         loader = MapLoader()
         if configuration.files is not None:
-            self._maps = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+            self._maps = {}
+            for file in configuration.files:
+                maps = loader.load_dir_contents(file, configuration.directories, configuration.extension)
+                for key in maps.keys():
+                    if key in self._maps:
+                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Duplicate map [%s] found in [%s]"%(key, file))
+                    self._maps[key] = maps[key]
         else:
             self._maps = {}
         return len(self._maps)

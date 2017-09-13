@@ -91,7 +91,13 @@ class SetCollection(object):
     def load(self, configuration):
         loader = SetLoader()
         if configuration.files is not None:
-            self._sets = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+            self._sets = {}
+            for file in configuration.files:
+                sets = loader.load_dir_contents(file, configuration.directories, configuration.extension)
+                for key in sets.keys():
+                    if key in self._sets:
+                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Duplicate set [%s] found in [%s]"%(key, file))
+                    self._sets[key] = sets[key]
         else:
             self._sets = {}
         return len(self._sets)

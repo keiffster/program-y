@@ -21,12 +21,21 @@ from programy.config.base import BaseConfigurationData
 
 class BrainFileConfiguration(BaseConfigurationData):
 
-    def __init__(self, name="files", files=None, file=None, extension=None, directories=False):
+    def __init__(self, name="files", files=[], file=None, extension=None, directories=False):
         BaseConfigurationData.__init__(self, name)
-        self._file = files
-        self._files = file
+        self._files = files
+        self._file = file
         self._extension = extension
         self._directories = directories
+
+    def has_multiple_files(self):
+        if self._files is not None and len(self._files) > 0:
+            return True
+        else:
+            return False
+
+    def has_single_file(self):
+        return bool(self._file is not None)
 
     @property
     def file(self):
@@ -50,9 +59,9 @@ class BrainFileConfiguration(BaseConfigurationData):
     def load_config_section(self, file_config, brain_config, bot_root):
         files_config = file_config.get_option(brain_config, self.section_name)
         if files_config is not None:
-            files = file_config.get_option(files_config, "files")
-            if files is not None:
-                self._files = self.sub_bot_root(files, bot_root)
+            files = file_config.get_multi_file_option(files_config, "files",bot_root)
+            if files is not None and len(files) > 0:
+                self._files = files
                 self._extension = file_config.get_option(files_config, "extension")
                 self._directories = file_config.get_option(files_config, "directories")
             else:

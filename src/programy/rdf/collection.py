@@ -184,7 +184,10 @@ class RDFCollection(BaseCollection):
     def load(self, configuration):
         loader = RDFLoader(self)
         if configuration.files is not None:
-            files = loader.load_dir_contents(configuration.files, configuration.directories, configuration.extension)
+            files = []
+            for file in configuration.files:
+                # TODO Check for duplicates rdfs
+                files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
             return len(files)
         else:
             self._subjects = {}

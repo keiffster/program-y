@@ -10,8 +10,8 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files=os.path.dirname(__file__)
-        self.configuration.brain_configuration.files.set_files._files = os.path.dirname(__file__)+ os.sep + "sets"
+        self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
+        self.configuration.brain_configuration.files.set_files._files =[os.path.dirname(__file__)+ os.sep + "sets"]
         self.configuration.brain_configuration.files.set_files._extension=".txt"
 
 class PatternsetAIMLTests(unittest.TestCase):

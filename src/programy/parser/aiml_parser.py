@@ -88,15 +88,18 @@ class AIMLParser(object):
 
     def load_files_from_directory(self, brain_configuration):
         start = datetime.datetime.now()
-        aimls_loaded = self._aiml_loader.load_dir_contents(brain_configuration.files.aiml_files.files,
-                                                           brain_configuration.files.aiml_files.directories,
-                                                           brain_configuration.files.aiml_files.extension)
+        total_aimls_loaded = 0
+        for file in brain_configuration.files.aiml_files.files:
+            aimls_loaded = self._aiml_loader.load_dir_contents(file,
+                                                               brain_configuration.files.aiml_files.directories,
+                                                               brain_configuration.files.aiml_files.extension)
+            total_aimls_loaded = len(aimls_loaded)
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Total processing time %.6f secs" % diff.total_seconds())
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d aiml files with %d categories" % (len(aimls_loaded), self.num_categories))
+        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loaded a total of %d aiml files with %d categories" % (total_aimls_loaded, self.num_categories))
         if diff.total_seconds() > 0:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Thats approx %f aiml files per sec" % (len(aimls_loaded) / diff.total_seconds()))
+            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Thats approx %f aiml files per sec" % (total_aimls_loaded / diff.total_seconds()))
 
     def load_single_file(self, brain_configuration):
         start = datetime.datetime.now()
@@ -112,10 +115,10 @@ class AIMLParser(object):
 
             self.create_debug_storage(brain_configuration)
 
-            if brain_configuration.files.aiml_files.files is not None:
+            if brain_configuration.files.aiml_files.has_multiple_files():
                 self.load_files_from_directory(brain_configuration)
 
-            elif brain_configuration.files.aiml_files.file is not None:
+            elif brain_configuration.files.aiml_files.has_single_file():
                 self.load_single_file(brain_configuration)
 
             else:

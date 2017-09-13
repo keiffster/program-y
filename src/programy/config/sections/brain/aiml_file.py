@@ -41,9 +41,9 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
     def load_config_section(self, file_config, brain_config, bot_root):
         files_config = file_config.get_option(brain_config, self.section_name)
         if files_config is not None:
-            files = file_config.get_option(files_config, "files")
-            if files is not None:
-                self._files = self.sub_bot_root(files, bot_root)
+            files = file_config.get_multi_file_option(files_config, "files", bot_root)
+            if files is not None and len(files) > 0:
+                self._files = files
                 self._extension = file_config.get_option(files_config, "extension")
                 self._directories = file_config.get_option(files_config, "directories")
             else:
