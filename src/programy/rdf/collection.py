@@ -186,7 +186,6 @@ class RDFCollection(BaseCollection):
         if configuration.files is not None:
             files = []
             for file in configuration.files:
-                # TODO Check for duplicates rdfs
                 files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
             return len(files)
         else:
