@@ -104,8 +104,8 @@ class XMLConfigurationFileTests(ConfigurationBaseFileTests):
 		<files>
 			<aiml>
 				<files>
-				    <file>$BOT_ROOT/test-aiml</file>
-				    <file>$BOT_ROOT/my-aiml</file>
+				    <dir>$BOT_ROOT/test-aiml</dir>
+				    <dir>$BOT_ROOT/my-aiml</dir>
 				</files>
 				<extension>.test-aiml</extension>
 				<directories>true</directories>

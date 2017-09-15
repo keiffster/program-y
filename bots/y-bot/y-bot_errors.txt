@@ -1,0 +1,3 @@
+Error, unsupported random child tag: search in [../program-y/bots/y-bot/aiml/core/personality.aiml] at [line(3033), column(12)]
+Error, unsupported random child tag: eval in [../program-y/bots/y-bot/aiml/core/system/utilities.aiml] at [line(377), column(24)]
+Error, name not found in map in [../program-y/bots/y-bot/aiml/oob/oob.aiml] at [line(80), column(29)]

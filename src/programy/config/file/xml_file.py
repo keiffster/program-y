@@ -110,7 +110,8 @@ class XMLConfigurationFile(BaseConfigurationFile):
         else:
             values = []
             for child in value._children:
-                values.append(child.text)
+                if child.tag == "dir":
+                    values.append(child.text)
         multis = []
         for value in values:
             multis.append(value.replace('$BOT_ROOT', bot_root))

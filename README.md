@@ -3,7 +3,7 @@
 For full documentation, tutorials and other helpful information, see the [Programy-Y Wiki](https://github.com/keiffster/program-y/wiki)
 
 Program-Y is an Python 3.x implementation of an AIML 2.0 Specification, but its much much more than that. It is a complete 
-greenfield implementation of the entire AIML 2.0 spec in Python 3. it has extensive unit tests coverage (>85% at all 
+greenfield implementation of the entire AIML 2.0 spec in Python 3. it has extensive unit tests coverage (>90% at all 
 times) and a full suite of documentation to get you up and running, learn AIML and build you own ChatBots
 
 Programy-Y is fully cross plaform, running on 
