@@ -33,26 +33,28 @@ class BaseCollection(object):
         Never Implemented
         """
 
+    def process_line(self, line):
+        line = line.strip()
+        if line is not None and len(line) > 0:
+            if line.startswith("#") is False:
+                splits = self.split_line(line)
+                return self.process_splits(splits)
+        return False
+
     def load_from_filename(self, filename):
         count = 0
         with open(filename, "r+") as data_file:
             for line in data_file:
-                line = line.strip()
-                if line is not None and len(line) > 0:
-                    splits = self.split_line(line)
-                    if self.process_splits(splits) is True:
-                        count += 1
+                if self.process_line(line):
+                    count += 1
         return count
 
     def load_from_text(self, text):
         count = 0
         lines = text.split("\n")
         for line in lines:
-            line = line.strip()
-            if line is not None and len(line) > 0:
-                splits = self.split_line(line)
-                if self.process_splits(splits) is True:
-                    count += 1
+            if self.process_line(line):
+                count += 1
         return count
 
 
