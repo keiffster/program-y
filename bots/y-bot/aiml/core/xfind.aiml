@@ -41,13 +41,13 @@
 
     <category>
         <pattern>GOOGLE *</pattern>
-        <template><![CDATA[<a target="_new"   href="http://www.google.com/search?q=<personf/>">]]>  Google Search
-            <![CDATA[</a>]]></template>
+        <template><a target="_new" href="http://www.google.com/search?q=&lt;star /&gt;">Google Search</a></template>
     </category>
 
     <category>
         <pattern>XDMOZ *</pattern>
-        <template><![CDATA[<a target="_new"   href="http://search.dmoz.org/cgi-bin/search?search=<personf/>">]]>
+        <template>
+            <a target="_new" href="http://search.dmoz.org/cgi-bin/search?search=&lt;star /&gt;">
             <random>
                 <li>Click.</li>
                 <li>Start.</li>
@@ -58,7 +58,7 @@
                 <li>Don't Click Me.</li>
                 <li>Don't Click Here.</li>
             </random>
-            <![CDATA[</a>]]>
+            </a>
         </template>
     </category>
 
@@ -135,7 +135,6 @@
 
     <category>
         <pattern>XGOOGLE *</pattern>
-        <template><![CDATA[<a target="_new"   href="http://www.google.com/search?q=<personf/>">]]>  Google Search
-            <![CDATA[</a>]]></template>
+        <template><a target="_new" href="http://www.google.com/search?q=&lt;star /&gt;">Google Search</a></template>
     </category>
 </aiml>
