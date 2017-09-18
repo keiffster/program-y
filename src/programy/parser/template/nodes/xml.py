@@ -15,8 +15,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.atttrib import TemplateAttribNode
+from programy.parser.template.nodes.word import TemplateWordNode
+from programy.parser.template.nodes.word import TemplateNode
 from programy.utils.text.text import TextUtils
 
 
@@ -33,8 +36,12 @@ class TemplateXMLNode(TemplateAttribNode):
     def resolve_to_string(self, bot, clientid):
         xml = "<%s" % self._name
         for attrib_name in self._attribs:
-            attrib_value = self._attribs[attrib_name]
+            if isinstance(self._attribs[attrib_name], str):
+                attrib_value = self._attribs[attrib_name]
+            else:
+                attrib_value = self._attribs[attrib_name].resolve(bot, clientid)
             escaped = TextUtils.html_escape(attrib_value)
+            escaped = escaped.replace(" ", "")
             xml += ' %s="%s"' % (attrib_name, escaped)
         xml += ">"
         xml += self.resolve_children_to_string(bot, clientid)
@@ -54,7 +61,10 @@ class TemplateXMLNode(TemplateAttribNode):
     def to_xml(self, bot, clientid):
         xml = "<%s"%self._name
         for attrib_name in self._attribs:
-            attrib_value = self._attribs[attrib_name]
+            if isinstance(self._attribs[attrib_name], str):
+                attrib_value = self._attribs[attrib_name]
+            else:
+                attrib_value = self._attribs[attrib_name].resolve(bot, clientid)
             escaped = TextUtils.html_escape(attrib_value)
             xml += ' %s="%s"' % (attrib_name, escaped)
         xml += ">"
@@ -71,7 +81,29 @@ class TemplateXMLNode(TemplateAttribNode):
         self._name = TextUtils.tag_from_text(expression.tag)
 
         for attrib_name in expression.attrib:
-            self.set_attrib(attrib_name, expression.attrib[attrib_name])
+            attrib_value = expression.attrib[attrib_name]
+            if "<" in attrib_value and ">" in attrib_value:
+                start = attrib_value.find("<")
+                end = attrib_value.rfind(">")
+
+                front = attrib_value[:start]
+                middle = attrib_value[start:end+1]
+                back = attrib_value[end+1:]
+
+                root = TemplateNode()
+                root.append(TemplateWordNode(front))
+
+                xml = ET.fromstring(middle)
+                xml_node = TemplateNode()
+                graph.parse_tag_expression(xml, xml_node)
+                root.append(xml_node)
+
+                root.append(TemplateWordNode(back))
+
+                self.set_attrib(attrib_name, root)
+
+            else:
+                self.set_attrib(attrib_name, TemplateWordNode(attrib_value))
 
         self.parse_text(graph, self.get_text_from_element(expression))
 

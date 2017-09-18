@@ -9,8 +9,10 @@ Rosie - A second bot created by the creators of AIML. Rosie has less grammars bu
 the foundation for AIML 2.0 bot development. Easier to work with than Alice2, but still has one or 2 tags which are not
 AIML 2 compliant and only work with Pandora bots
 
-Roise_fixed - My attempt to provide a full AIML 2.0 compliant version of Rosie which only uses AIML 2.0 tags. A work in
-progress
+Professor - A bot that is managed by user gimisa@yahoo.fr. He took a poorly defined and inaccurate version of WordNet
+grammar called The Professor, make them entirely AIML 2.0 compliant and fixed a wide range of bugs, duplications and
+other areas of inconsistency. A huge effort and a big shout out to him from the Program-Y Team who count him as one
+of our own now
 
 Y-Bot - This is my bot, being developed slowly with a complete set of grammar tests. Y-Bot is designed to both have a
 good core knowledge for general discussions, a personality and also support a set of industry extensions such for use

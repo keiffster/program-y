@@ -373,7 +373,7 @@ class Brain(object):
                 name = pair[0]
                 pattern = pair[1]
                 try:
-                    self._regex_templates[name] = re.compile(pattern)
+                    self._regex_templates[name] = re.compile(pattern, re.IGNORECASE)
                 except Exception:
                     if logging.getLogger().isEnabledFor(logging.INFO): logging.error("Invalid regex template [%s]"%pattern)
 

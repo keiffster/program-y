@@ -43,7 +43,7 @@ class TemplateGraphXMLTests(TemplateGraphTestClient):
     def test_attrib_with_html(self):
         template = ET.fromstring("""
         			<template>
-        				<a target="_new" href="http://www.google.com/search?q=&gt;personf/&lt;"> Google Search </a>
+        				<a target="_new" href="http://www.google.com/search?q=&lt;star /&gt;"> Google Search </a>
         			</template>
         			""")
 
@@ -52,4 +52,3 @@ class TemplateGraphXMLTests(TemplateGraphTestClient):
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 1)
-
