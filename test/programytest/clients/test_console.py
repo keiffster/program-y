@@ -25,7 +25,7 @@ class MockConsoleBotClient(ConsoleBotClient):
         super (MockConsoleBotClient, self).display_response(response, output_func)
         self.response += response
 
-    def ask_question(self, question, context):
+    def ask_question(self, question):
         return self.question
 
     def process_question_answer(self):

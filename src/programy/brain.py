@@ -417,12 +417,7 @@ class Brain(object):
     def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")
 
-    def ask_question(self, bot, clientid, sentence, srai=False, brain_question_context=None):
-
-        if brain_question_context is not None:
-            brain_question_context.clientid = clientid
-            brain_question_context.srai = srai
-            brain_question_context.sentence = sentence
+    def ask_question(self, bot, clientid, sentence, srai=False):
 
         if self.authentication is not None:
             if self.authentication.authenticate(clientid) is False:
@@ -437,9 +432,6 @@ class Brain(object):
             topic_pattern = "*"
         else:
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Topic pattern = [%s]", topic_pattern)
-
-        if brain_question_context is not None:
-            brain_question_context.topic = topic_pattern
 
         try:
             that_question = conversation.previous_nth_question(1)
@@ -458,9 +450,6 @@ class Brain(object):
             if logging.getLogger().isEnabledFor(logging.INFO): logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
-        if brain_question_context is not None:
-            brain_question_context.that = that_pattern
-
         match_context = self._aiml_parser.match_sentence(bot, clientid,
                                                          sentence,
                                                          topic_pattern=topic_pattern,
@@ -468,25 +457,14 @@ class Brain(object):
 
         if match_context is not None:
 
-            if brain_question_context is not None:
-                brain_question_context.match_context = match_context
-
             template_node = match_context.template_node()
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
             response = template_node.template.resolve(bot, clientid)
-
-            if brain_question_context is not None:
-                brain_question_context.raw_response = response
 
             if "<oob>" in response:
                 response, oob = self.strip_oob(response)
                 if oob is not None:
                     oob_response = self.process_oob(bot, clientid, oob)
-
-                    if brain_question_context is not None:
-                        brain_question_context.raw_response = response
-                        brain_question_context.oob_response = oob_response
-
                     response = response + " " + oob_response
 
             return response

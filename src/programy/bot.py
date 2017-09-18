@@ -173,14 +173,9 @@ class Bot(object):
             return response
         return None
 
-    def ask_question(self, clientid: str, text: str, srai=False, bot_question_context=None):
+    def ask_question(self, clientid: str, text: str, srai=False):
 
         if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Question (%s): %s", clientid, text)
-
-        if bot_question_context is not None:
-            bot_question_context.clientid = clientid
-            bot_question_context.srai = srai
-            bot_question_context.raw_question = text
 
         if srai is False:
             pre_processed = self.brain.pre_process_question(self, clientid, text)
@@ -190,9 +185,6 @@ class Bot(object):
 
         if pre_processed is None or len(pre_processed) == 0:
             pre_processed = self._configuration.empty_string
-
-        if bot_question_context is not None:
-            bot_question_context.preprocessed_question = pre_processed
 
         if srai is False:
             question = Question.create_from_text(pre_processed)
@@ -215,14 +207,10 @@ class Bot(object):
             self.check_max_recursion()
             self.check_max_timeout()
 
-            brain_context_question = None
-            if bot_question_context is not None:
-                brain_context_question = bot_question_context.next_brain_question_context()
-
             if srai is False:
                 self.check_spelling_before(each_sentence)
 
-            response = self.brain.ask_question(self, clientid, each_sentence, srai=srai, brain_question_context=brain_context_question)
+            response = self.brain.ask_question(self, clientid, each_sentence, srai=srai)
 
             if response is None and srai is False:
                 response = self.check_spelling_and_retry(clientid, each_sentence)
@@ -234,15 +222,16 @@ class Bot(object):
                 if srai is False:
                     answer = self.brain.post_process_response(self, clientid, response).strip()
                     if len(answer) == 0:
-                        answer = self.default_response
+                        answer = self.get_default_response()
                 else:
                     answer = response
 
                 answers.append(answer)
                 if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
-                each_sentence.response = self.default_response
-                answers.append(self.default_response)
+                default_response = self.get_default_response()
+                each_sentence.response = default_response
+                answers.append(default_response)
 
             sentence_no += 1
 
@@ -253,12 +242,12 @@ class Bot(object):
 
         response = ". ".join([sentence for sentence in answers if sentence is not None])
 
-        if bot_question_context is not None:
-            bot_question_context.final_response = response
-
         self.log_question_and_answer(clientid, text, response )
 
         return response
+
+    def get_default_response(self):
+        return self.default_response
 
     def log_question_and_answer(self, clientid, question, answer):
 

@@ -18,7 +18,6 @@ import logging
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.console import ConsoleConfiguration
-from programy.context import BotQuestionContext
 
 class ConsoleBotClient(BotClient):
 
@@ -34,10 +33,10 @@ class ConsoleBotClient(BotClient):
         return ConsoleConfiguration()
 
     def add_client_arguments(self, parser):
-        parser.add_argument('--context', dest='context', action='store_true', help='displays additional conversation context')
+        return
 
     def parse_args(self, arguments, parsed_args):
-        arguments.context = parsed_args.context
+        return
 
     def get_question(self, input_func=input):
         ask = "%s "%self.bot.prompt
@@ -54,24 +53,17 @@ class ConsoleBotClient(BotClient):
     def display_response(self, response, output_func=print):
         output_func(response)
 
-    def ask_question(self, question, context):
-        return self.bot.ask_question(self.clientid, question, bot_question_context=context)
+    def ask_question(self, question):
+        return self.bot.ask_question(self.clientid, question)
 
     def process_question_answer(self):
         question = self.get_question()
 
-        context = None
-        if self.arguments.context is True:
-            context = BotQuestionContext()
-
-        response = self.ask_question(question, context)
+        response = self.ask_question(question)
 
         if response is None:
             self.display_unknown_response(question)
         else:
-            if context is not None:
-                context.display(output_func=print)
-
             self.display_response(response)
             self.log_response(question, response)
 
