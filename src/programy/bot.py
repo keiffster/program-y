@@ -21,6 +21,7 @@ from programy.dialog import Conversation, Question
 from programy.config.sections.bot.bot import BotConfiguration
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
+from programy.dialog import Sentence
 
 class Bot(object):
 
@@ -96,6 +97,13 @@ class Bot(object):
             return BotConfiguration.DEFAULT_RESPONSE
 
     @property
+    def default_response_srai(self):
+        if self._configuration is not None:
+            return self._configuration.default_response_srai
+        else:
+            return None
+
+    @property
     def exit_response(self):
         if self._configuration is not None:
             return self._configuration.exit_response
@@ -103,11 +111,25 @@ class Bot(object):
             return BotConfiguration.DEFAULT_EXIT_RESPONSE
 
     @property
+    def exit_response_srai(self):
+        if self._configuration is not None:
+            return self._configuration.exit_response_srai
+        else:
+            return BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI
+
+    @property
     def initial_question(self):
         if self._configuration is not None:
             return self._configuration.initial_question
         else:
             return BotConfiguration.DEFAULT_INITIAL_QUESTION
+
+    @property
+    def initial_question_srai(self):
+        if self._configuration is not None:
+            return self._configuration.initial_question_srai
+        else:
+            return BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI
 
     @property
     def override_properties(self):
@@ -222,14 +244,14 @@ class Bot(object):
                 if srai is False:
                     answer = self.brain.post_process_response(self, clientid, response).strip()
                     if len(answer) == 0:
-                        answer = self.get_default_response()
+                        answer = self.get_default_response(clientid)
                 else:
                     answer = response
 
                 answers.append(answer)
                 if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Processed Response (%s): %s", clientid, answer)
             else:
-                default_response = self.get_default_response()
+                default_response = self.get_default_response(clientid)
                 each_sentence.response = default_response
                 answers.append(default_response)
 
@@ -246,8 +268,35 @@ class Bot(object):
 
         return response
 
-    def get_default_response(self):
-        return self.default_response
+    def get_default_response(self, clientid):
+        if self.default_response_srai is not None:
+            sentence = Sentence(self.default_response_srai)
+            default_response = self.brain.ask_question(self, clientid, sentence, srai=False)
+            if default_response is None or len (default_response) == 0:
+                default_response = self.default_response
+            return default_response
+        else:
+            return self.default_response
+
+    def get_initial_question(self, clientid):
+        if self.initial_question_srai is not None:
+            sentence = Sentence(self.initial_question_srai)
+            initial_question = self.brain.ask_question(self, clientid, sentence, srai=False)
+            if initial_question is None or len (initial_question) == 0:
+                initial_question = self.initial_question
+            return initial_question
+        else:
+            return self.initial_question
+
+    def get_exit_response(self, clientid):
+        if self.exit_response_srai is not None:
+            sentence = Sentence(self.exit_response_srai)
+            exit_response = self.brain.ask_question(self, clientid, sentence, srai=False)
+            if exit_response is None or len (exit_response) == 0:
+                exit_response = self.exit_response
+            return exit_response
+        else:
+            return self.exit_response
 
     def log_question_and_answer(self, clientid, question, answer):
 

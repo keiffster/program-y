@@ -15,9 +15,12 @@ class BotConfigurationTests(unittest.TestCase):
             license_keys: $BOT_ROOT/config/license.keys
             prompt: ">>>"
             initial_question: Hi, how can I help you today?
+            initial_question_srai: YINITIALQUESTION
             default_response: Sorry, I don't have an answer for that!
+            default_response_srai: YDEFAULTRESPONSE
             empty_string: YEMPTY
             exit_response: So long, and thanks for the fish!
+            exit_response_srai: YEXITRESPONSE
             override_properties: true
             max_question_recursion: 1000
             max_question_timeout: 60
@@ -37,7 +40,11 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("./config/license.keys", bot_config.license_keys)
         self.assertEqual(">>>", bot_config.prompt)
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
+        self.assertEqual("YINITIALQUESTION", bot_config.initial_question_srai)
         self.assertEqual("Sorry, I don't have an answer for that!", bot_config.default_response)
+        self.assertEqual("YDEFAULTRESPONSE", bot_config.default_response_srai)
+        self.assertEqual("So long, and thanks for the fish!", bot_config.exit_response)
+        self.assertEqual("YEXITRESPONSE", bot_config.exit_response_srai)
         self.assertEqual("YEMPTY", bot_config.empty_string)
         self.assertEqual(bot_config.max_question_recursion, 1000)
         self.assertEqual(bot_config.max_question_timeout, 60)
@@ -61,7 +68,11 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertIsNone(bot_config.license_keys)
         self.assertEqual(">>> ", bot_config.prompt)
         self.assertEqual("Hello", bot_config.initial_question)
+        self.assertEqual("", bot_config.initial_question_srai)
         self.assertEqual("", bot_config.default_response)
+        self.assertEqual("", bot_config.default_response_srai)
+        self.assertEqual("Bye!", bot_config.exit_response)
+        self.assertEqual("", bot_config.exit_response_srai)
         self.assertEqual("", bot_config.empty_string)
         self.assertEqual(bot_config.max_question_recursion, 100)
         self.assertEqual(bot_config.max_question_timeout, -1)

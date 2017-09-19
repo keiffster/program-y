@@ -44,7 +44,7 @@ class ConsoleBotClient(BotClient):
 
     def display_startup_messages(self):
         self.display_response(self.bot.get_version_string)
-        self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.initial_question))
+        self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.get_initial_question(self.clientid)))
 
     def display_unknown_response(self, question):
         self.display_response(self.bot.default_response)
@@ -81,7 +81,7 @@ class ConsoleBotClient(BotClient):
                     question = self.process_question_answer()
                 except KeyboardInterrupt:
                     self.running = False
-                    self.display_response(self.bot.exit_response)
+                    self.display_response(self.bot.get_exit_response(self.clientid))
                 except Exception as excep:
                     logging.exception(excep)
                     if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")

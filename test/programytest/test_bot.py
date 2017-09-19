@@ -10,6 +10,16 @@ from programy.config.programy import ProgramyConfiguration
 from programy.config.sections.client.console import ConsoleConfiguration
 from programy.dialog import Sentence
 
+
+class MockBrain(Brain):
+    def __init__(self, configuration):
+        Brain.__init__(self, configuration)
+        self._response = ""
+
+    def ask_question(self, bot, clientid, sentence, srai=False):
+        return self._response
+
+
 class BotTests(unittest.TestCase):
 
     def test_bot_init_blank(self):
@@ -254,3 +264,181 @@ class BotTests(unittest.TestCase):
         bot.log_question_and_answer("testid", "question","answer")
 
         self.assertTrue(os.path.exists(brain_config.files.aiml_files._conversation))
+
+    def test_get_default_response_empty_string(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("", bot.get_default_response("testid"))
+
+    def test_get_default_response_default_response_only(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.default_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_default_response("testid"))
+
+    def test_get_default_response_default_response_srai_no_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.default_response_srai = "YDEFAULTRESPONSE"
+        bot_config.default_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_default_response("testid"))
+
+    def test_get_default_response_default_response_srai_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = MockBrain(brain_config)
+        test_brain._response = "Y DEFAULT RESPONSE"
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.default_response_srai = "YDEFAULTRESPONSE"
+        bot_config.default_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Y DEFAULT RESPONSE", bot.get_default_response("testid"))
+
+    ############################
+
+    def test_get_initial_question_empty_string(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Hello", bot.get_initial_question("testid"))
+
+    def test_get_initial_question_initial_question_only(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.initial_question = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_initial_question("testid"))
+
+    def test_get_initial_question_initial_question_srai_no_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.initial_question_srai = "YDEFAULTRESPONSE"
+        bot_config.initial_question = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_initial_question("testid"))
+
+    def test_get_initial_question_initial_question_srai_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = MockBrain(brain_config)
+        test_brain._response = "Y DEFAULT RESPONSE"
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.initial_question_srai = "YDEFAULTRESPONSE"
+        bot_config.initial_question = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Y DEFAULT RESPONSE", bot.get_initial_question("testid"))
+
+    ###################
+
+    def test_get_exit_response_empty_string(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Bye!", bot.get_exit_response("testid"))
+
+    def test_get_exit_response_exit_response_only(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.exit_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_exit_response("testid"))
+
+    def test_get_exit_response_exit_response_srai_no_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = Brain(brain_config)
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.exit_response_srai = "YDEFAULTRESPONSE"
+        bot_config.exit_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Default response!", bot.get_exit_response("testid"))
+
+    def test_get_exit_response_exit_response_srai_match(self):
+
+        brain_config = BrainConfiguration()
+        self.assertIsNotNone(brain_config)
+        test_brain = MockBrain(brain_config)
+        test_brain._response = "Y DEFAULT RESPONSE"
+        self.assertIsNotNone(test_brain)
+        bot_config = BotConfiguration()
+        self.assertIsNotNone(bot_config)
+        bot_config.exit_response_srai = "YDEFAULTRESPONSE"
+        bot_config.exit_response = "Default response!"
+        bot = Bot(test_brain,  bot_config)
+        self.assertIsNotNone(bot)
+
+        self.assertEquals("Y DEFAULT RESPONSE", bot.get_exit_response("testid"))
