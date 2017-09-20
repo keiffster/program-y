@@ -213,11 +213,20 @@ class TemplateConditionNode(TemplateNode):
     #
 
     # Type 2
-    # <condition name="property">...</condition>
-    # <condition><name>property</name>...</condition>
+    # <condition name="property">
     # 	<li value="a">X</li>
     # 	<li value="b">Y</li>
-    # 	<li>Z</li>				<- Default value if no condition met
+    # 	<li>Z</li>				<- Optional default value if no condition met
+    # </ condition>
+    #
+    # or
+    #
+    # <condition>
+    #   <name>property</name>
+    # 	<li value="a">X</li>
+    # 	<li value="b">Y</li>
+    # 	<li>Z</li>				<- Optional default value if no condition met
+    # </ condition>
     #
 
     # Type 3
@@ -226,7 +235,7 @@ class TemplateConditionNode(TemplateNode):
     # 	<li value="b"><name>1</name>Y</li>
     # 	<li name="1"><value>b</value>Z</li>
     # 	<li><name>1</name><value>b</value>Z</li>
-    # 	<li>Z<l/i>				<- Default value if no condition met
+    # 	<li>Z<l/i>				<- Optional default value if no condition met
     #  </condition>
     #
 
