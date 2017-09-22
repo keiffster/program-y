@@ -40,7 +40,10 @@ class NodeFactory(object):
                 return
             class_name = splits[1].strip()
             if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Pre-instantiating %s Node [%s]"%(self._type, class_name))
-            self._nodes_config[node_name] =  ClassLoader.instantiate_class(class_name)
+            try:
+                self._nodes_config[node_name] =  ClassLoader.instantiate_class(class_name)
+            except Exception as excep:
+                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to pre-instantiating %s Node [%s]" % (self._type, class_name))
 
     def valid_config_line(self, line):
 
