@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import argparse
 import logging
-import logging.config
 
 class ClientArguments(object):
 

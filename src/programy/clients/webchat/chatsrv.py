@@ -1,6 +1,11 @@
 import logging
 
-from flask import Flask, jsonify, request, make_response, abort, current_app
+from flask import Flask
+from flask import jsonify
+from flask import request
+from flask import make_response
+from flask import abort
+from flask import current_app
 from programy.clients.client import BotClient
 from programy.config.sections.client.webchat import WebChatConfiguration
 
@@ -96,7 +101,8 @@ def ask():
 
 if __name__ == '__main__':
 
-    import os, signal, sys
+    import signal
+    import sys
 
     def set_exit_handler(func):
         signal.signal(signal.SIGTERM, func)

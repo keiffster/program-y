@@ -22,4 +22,4 @@ class Extension(object):
 
     @abstractmethod
     def execute(self, bot, clientid, data):
-        raise NotImplemented()
+        raise NotImplementedError()

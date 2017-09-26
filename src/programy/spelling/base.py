@@ -25,6 +25,6 @@ class SpellingChecker(object):
 
     @abstractmethod
     def correct(self, phrase):
-        raise NotImplemented()
+        raise NotImplementedError()
 
 

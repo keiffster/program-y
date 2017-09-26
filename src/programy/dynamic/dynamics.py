@@ -53,7 +53,7 @@ class DynamicsCollection(object):
     def load_default_dynamic_sets(self, dynamics_configuration):
         if IsNumeric.NAME not in self._dynamic_sets:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%IsNumeric.NAME)
+                logging.warning("Dynamic set %s not defined, adding default implementation"%(IsNumeric.NAME))
             self._dynamic_sets[IsNumeric.NAME] = IsNumeric(dynamics_configuration)
 
     def load_default_dynamic_maps(self, dynamics_configuration):

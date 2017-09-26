@@ -29,4 +29,4 @@ class DynamicVariable(object):
 
     @abstractmethod
     def get_value(self, bot, clientid, value):
-        raise NotImplemented()
+        raise NotImplementedError()

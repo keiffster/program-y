@@ -284,7 +284,7 @@ class TwitterBotClient(BotClient):
             logging.debug("Exiting gracefully...")
 
     def use_streaming(self):
-        raise NotImplemented("Streaming currently not supported in this release")
+        raise NotImplementedError("Streaming currently not supported in this release")
 
     def run(self):
 

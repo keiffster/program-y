@@ -84,7 +84,7 @@ class BotClient(object):
         and stil use the dynamic loader capabilities
         :return: Client configuration object
         """
-        raise NotImplemented("You must override this and return a config string")
+        raise NotImplementedError("You must override this and return a config string")
 
     def load_configuration(self, arguments):
         if arguments.bot_root is None:

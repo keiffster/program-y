@@ -28,4 +28,4 @@ class DynamicMap(object):
 
     @abstractmethod
     def map_value(self, bot, clientid, value):
-        raise NotImplemented()
+        raise NotImplementedError()

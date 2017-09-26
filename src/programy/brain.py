@@ -22,6 +22,7 @@ try:
 except:
     import pickle
 import gc
+import datetime
 
 from programy.processors.processing import ProcessorLoader
 from programy.config.sections.brain.brain import BrainConfiguration
@@ -38,7 +39,6 @@ from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
-import datetime
 
 
 class Brain(object):

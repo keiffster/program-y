@@ -25,56 +25,56 @@ class BaseConfigurationFile(object):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def load_from_file(self, filename, bot_root):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_section(self, section_name, parent_section=None):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_keys(self, child_section):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_child_section_keys(self, section_name, parent_section):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_option(self, section, option_name, missing_value=None):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_multi_line_option(self, section, option_name, missing_value=[]):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     @abstractmethod
     def get_multi_file_option(self, section, option_name, missing_value=[]):
         """
         Never Implemented
         """
-        raise NotImplemented()
+        raise NotImplementedError()
 
     def convert_to_bool(self, value):
         if value.upper() == 'TRUE':

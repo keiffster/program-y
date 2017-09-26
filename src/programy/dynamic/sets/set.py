@@ -28,4 +28,4 @@ class DynamicSet(object):
 
     @abstractmethod
     def is_member(self, bot, clientid, value):
-        raise NotImplemented()
+        raise NotImplementedError()
