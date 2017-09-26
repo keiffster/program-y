@@ -41,13 +41,13 @@ class WeatherExtension(Extension):
             return None
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting weather for %s at time %s"%(postcode, when))
+            logging.debug("Getting weather for %s at time %s", postcode, when)
 
         googlemaps = GoogleMaps(bot.license_keys)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Weather - Calling external weather service for with extra data [%s]"%(data))
+            logging.debug ("Weather - Calling external weather service for with extra data [%s]", data)
 
         met_office = MetOffice(bot.license_keys)
 

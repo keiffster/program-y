@@ -149,7 +149,7 @@ class Brain(object):
 
     def load_binary(self, brain_configuration):
         if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading binary brain from [%s]" % brain_configuration.binaries.binary_filename)
+            logging.info("Loading binary brain from [%s]", brain_configuration.binaries.binary_filename)
         try:
             start = datetime.datetime.now()
             gc.disable()
@@ -160,7 +160,7 @@ class Brain(object):
             stop = datetime.datetime.now()
             diff = stop - start
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Brain load took a total of %.2f sec" % diff.total_seconds())
+                logging.info("Brain load took a total of %.2f sec", diff.total_seconds())
             load_aiml = False
         except Exception as e:
             logging.exception(e)
@@ -176,7 +176,7 @@ class Brain(object):
 
     def save_binary(self, brain_configuration):
         if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Saving binary brain to [%s]" % brain_configuration.binaries.binary_filename)
+            logging.info("Saving binary brain to [%s]", brain_configuration.binaries.binary_filename)
         start = datetime.datetime.now()
         f = open(brain_configuration.binaries.binary_filename, "wb")
         pickle.dump(self._aiml_parser, f)
@@ -184,7 +184,7 @@ class Brain(object):
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Brain save took a total of %.2f sec" % diff.total_seconds())
+            logging.info("Brain save took a total of %.2f sec", diff.total_seconds())
 
     def load(self, brain_configuration: BrainConfiguration):
 
@@ -395,7 +395,7 @@ class Brain(object):
             for oob_name in  brain_configuration.oob.oobs():
                 try:
                     if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.info("Loading oob: %s"%oob_name)
+                        logging.info("Loading oob: %s", oob_name)
                     classobject = ClassLoader.instantiate_class(brain_configuration.oob.oob(oob_name).classname)
                     self._oob[oob_name] = classobject()
                 except Exception as excep:
@@ -415,7 +415,7 @@ class Brain(object):
                     self._regex_templates[name] = re.compile(pattern, re.IGNORECASE)
                 except Exception:
                     if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.error("Invalid regex template [%s]"%pattern)
+                        logging.error("Invalid regex template [%s]", pattern)
 
     def regex_template(self, name):
         if name in self._regex_templates:

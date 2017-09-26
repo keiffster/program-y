@@ -59,7 +59,7 @@ class TemplateMapNode(TemplateNode):
         else:
             if bot.brain.maps.contains(name) is False:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No map defined for [%s], using default-map as value" % var)
+                    logging.error("No map defined for [%s], using default-map as value", var)
                 value = self.get_default_value(bot)
             else:
                 the_map = bot.brain.maps.map(name)
@@ -67,7 +67,7 @@ class TemplateMapNode(TemplateNode):
                     value = the_map[var]
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("No value defined for [%s], using default-map as value" % var)
+                        logging.error("No value defined for [%s], using default-map as value", var)
                     value = self.get_default_value(bot)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):

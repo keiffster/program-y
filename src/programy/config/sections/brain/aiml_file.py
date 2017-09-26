@@ -63,5 +63,5 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
 
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
+                logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
 

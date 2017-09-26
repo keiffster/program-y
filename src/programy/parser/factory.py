@@ -37,16 +37,16 @@ class NodeFactory(object):
             node_name = splits[0].strip()
             if node_name in self._nodes_config:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Node already exists in config [%s]"%line)
+                    logging.error("Node already exists in config [%s]", line)
                 return
             class_name = splits[1].strip()
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Pre-instantiating %s Node [%s]"%(self._type, class_name))
+                logging.debug("Pre-instantiating %s Node [%s]", self._type, class_name)
             try:
                 self._nodes_config[node_name] =  ClassLoader.instantiate_class(class_name)
             except Exception as excep:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Failed to pre-instantiating %s Node [%s]" % (self._type, class_name))
+                    logging.error("Failed to pre-instantiating %s Node [%s]", self._type, class_name)
 
     def valid_config_line(self, line):
 
@@ -62,7 +62,7 @@ class NodeFactory(object):
 
         if "=" not in line:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error ("Config line missing '=' [%s]"%line)
+                logging.error ("Config line missing '=' [%s]", line)
             return False
 
         return True
@@ -79,7 +79,7 @@ class NodeFactory(object):
 
         except Exception as e:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load %s Node Factory config file [%s]"%(self._type, filename))
+                logging.error("Failed to load %s Node Factory config file [%s]", self._type, filename)
             logging.exception(e)
 
     def load_nodes_config_from_text(self, text):

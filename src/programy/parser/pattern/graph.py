@@ -222,7 +222,8 @@ class PatternGraph(object):
             else:
                 if pattern_element.text is not None:
                     if logging.getLogger().isEnabledFor(logging.WARNING):
-                        logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text.strip()))
+                        logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing",
+                                        pattern_element.text.strip())
                 else:
                     if logging.getLogger().isEnabledFor(logging.WARNING):
                         logging.warning("Dupicate grammar tree found for bot/set in learn, replacing existing")
@@ -259,4 +260,4 @@ class PatternGraph(object):
                 dump_file.write(braintree)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unknown braintree content type [%s]"%content)
+                logging.error("Unknown braintree content type [%s]",content)

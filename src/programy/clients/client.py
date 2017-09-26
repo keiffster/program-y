@@ -38,7 +38,7 @@ class BotClient(object):
 
         if self.configuration.brain_configuration.braintree.file is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Dumping AIML Graph as tree to [%s]"%
+                logging.debug("Dumping AIML Graph as tree to [%s]",
                               self.configuration.brain_configuration.braintree.file)
             self._brain._aiml_parser.pattern_parser.save_braintree(
                 self.bot,

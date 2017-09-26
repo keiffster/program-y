@@ -53,28 +53,28 @@ class DynamicsCollection(object):
     def load_default_dynamic_sets(self, dynamics_configuration):
         if IsNumeric.NAME not in self._dynamic_sets:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%(IsNumeric.NAME))
+                logging.warning("Dynamic set %s not defined, adding default implementation", IsNumeric.NAME)
             self._dynamic_sets[IsNumeric.NAME] = IsNumeric(dynamics_configuration)
 
     def load_default_dynamic_maps(self, dynamics_configuration):
         if PluralMap.NAME not in self._dynamic_maps:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%PluralMap.NAME)
+                logging.warning("Dynamic set %s not defined, adding default implementation", PluralMap.NAME)
             self._dynamic_maps[PluralMap.NAME] = PluralMap(dynamics_configuration)
 
         if SingularMap.NAME not in self._dynamic_maps:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%SingularMap.NAME)
+                logging.warning("Dynamic set %s not defined, adding default implementation", SingularMap.NAME)
             self._dynamic_maps[SingularMap.NAME] = SingularMap(dynamics_configuration)
 
         if SuccessorMap.NAME not in self._dynamic_maps:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%SuccessorMap.NAME)
+                logging.warning("Dynamic set %s not defined, adding default implementation", SuccessorMap.NAME)
             self._dynamic_maps[SuccessorMap.NAME] = SuccessorMap(dynamics_configuration)
 
         if PredecessorMap.NAME not in self._dynamic_maps:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Dynamic set %s not defined, adding default implementation"%PredecessorMap.NAME)
+                logging.warning("Dynamic set %s not defined, adding default implementation", PredecessorMap.NAME)
             self._dynamic_maps[PredecessorMap.NAME] = PredecessorMap(dynamics_configuration)
 
     def load_default_dynamic_vars(self, dynamics_configuration):

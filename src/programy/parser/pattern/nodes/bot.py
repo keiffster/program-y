@@ -57,7 +57,7 @@ class PatternBotNode(PatternNode):
         if bot.brain.properties.has_property(self.property):
             if word == bot.brain.properties.property(self.property):
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("Found word [%s] as bot property"%(word))
+                    logging.debug("Found word [%s] as bot property", word)
                 return EqualsMatch(True, word_no, word)
         return EqualsMatch(False, word_no)
 

@@ -100,7 +100,7 @@ class SetCollection(object):
                 for key in sets.keys():
                     if key in self._sets:
                         if logging.getLogger().isEnabledFor(logging.ERROR):
-                            logging.error("Duplicate set [%s] found in [%s]"%(key, file))
+                            logging.error("Duplicate set [%s] found in [%s]", key, file)
                     self._sets[key] = sets[key]
         else:
             self._sets = {}

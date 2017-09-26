@@ -2,35 +2,41 @@
 
 <aiml>
 
-    <category>
-        <pattern>
-            <set>blender</set>
-        </pattern>
-         
-        <template>The definition of
-            <star/>
-            is the first definition of render
-            <think>
-                <set name="topic">BLENDER</set>
-            </think>
-        </template>
-    </category>
+   <category>
+       <pattern>
+          hello
+       </pattern>
 
-    <topic name="BLENDER">
+       <template>hi .. setting topic to blender....
+           <think>
+               <set name="topic">BLENDER</set>
+           </think>
+       </template>
+   </category>
 
-        <category>
-            <pattern>
-                <set>blender</set>
-            </pattern>
-             
-            <template>The definition of
-                <star/>
-                is
-                the second definition of render
-            </template>
-        </category>
+   <category>
+       <pattern>
+          render
+       </pattern>
 
-    </topic>
+       <template>some definition of render as per professor ....
+       </template>
+   </category>
 
+   <topic name="BLENDER">
+
+       <category>
+           <pattern>
+               <set>blender</set>
+           </pattern>
+
+           <template>  the  definition of  <star /> in blender is <map name="blender"><star /></map>
+               <think>
+                   <set name="topic">BLENDER</set>
+               </think>
+           </template>
+       </category>
+
+   </topic>
 
 </aiml>

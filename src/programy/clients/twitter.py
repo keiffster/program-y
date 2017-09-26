@@ -71,26 +71,26 @@ class TwitterBotClient(BotClient):
             messages = self._api.direct_messages()
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Getting latest direct messages since : %s" % last_message_id)
+                logging.debug("Getting latest direct messages since : %s", last_message_id)
             messages = self._api.direct_messages(since_id=last_message_id)
         messages.sort(key=lambda msg: msg.id)
         return messages
 
     def process_direct_message_question(self, userid, text):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Direct Messages: %s -> %s"%(userid, text))
+            logging.debug("Direct Messages: %s -> %s", userid, text)
         response = self.bot.ask_question(userid, text)
         self._api.send_direct_message(userid, text=response)
 
     def process_direct_messages(self, last_message_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Processing direct messages since [%s]"%last_message_id)
+            logging.debug ("Processing direct messages since [%s]",last_message_id)
 
         messages = self.get_direct_messages(last_message_id)
 
         for message in messages:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("message: %s"% message.text)
+                logging.debug("message: %s", message.text)
             try:
                 self.process_direct_message_question(message.sender_id, message.text)
             except Exception as err:
@@ -109,16 +109,16 @@ class TwitterBotClient(BotClient):
         for friend_id in friends:
             if friend_id not in followers_ids:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug ("Removing previous friendship with [%d]"%(friend_id))
+                    logging.debug ("Removing previous friendship with [%d]", friend_id)
                 self._api.destroy_friendship(friend_id)
 
     def follow_new_followers(self, followers, friends):
         for follower in followers:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug ("Checking follower [%s]"%follower.screen_name)
+                logging.debug ("Checking follower [%s]", follower.screen_name)
             if follower.id not in friends:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("Following %s"%follower.screen_name)
+                    logging.debug("Following %s", follower.screen_name)
                 follower.follow()
                 self._api.send_direct_message(follower.id, text=self._welcome_message)
 
@@ -145,7 +145,7 @@ class TwitterBotClient(BotClient):
             statuses = self._api.home_timeline()
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Getting latest statuses since : %s" % last_status_id)
+                logging.debug("Getting latest statuses since : %s", last_status_id)
             statuses = self._api.home_timeline(since_id=last_status_id)
         statuses.sort(key=lambda msg: msg.id)
         return statuses
@@ -165,12 +165,12 @@ class TwitterBotClient(BotClient):
 
     def process_status_question(self, userid, text):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Status Update: %s -> %s"%(userid, text))
+            logging.debug("Status Update: %s -> %s", userid, text)
 
         question = self.get_question_from_text(text)
         if question is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("%s -> %s"%(userid, question))
+                logging.debug("%s -> %s", userid, question)
 
             response = self.bot.ask_question(userid, question)
 
@@ -183,7 +183,7 @@ class TwitterBotClient(BotClient):
 
     def process_statuses(self, last_status_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Processing status updates since [%s]"%last_status_id)
+            logging.debug ("Processing status updates since [%s]", last_status_id)
 
         statuses = self.get_statuses(last_status_id)
 
@@ -191,7 +191,7 @@ class TwitterBotClient(BotClient):
             print ("[%s] - [%s]"%(status.author.screen_name, self._username))
             if status.author.screen_name != self._username:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("status: %s" % status.text)
+                    logging.debug("status: %s", status.text)
                 try:
                     self.process_status_question(status.user.id, status.text)
                 except Exception as err:
@@ -212,7 +212,7 @@ class TwitterBotClient(BotClient):
 
         if self.configuration.client_configuration.storage == 'file':
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Reads messages ids from [%s]" % self.configuration.client_configuration.storage_location)
+                logging.debug("Reads messages ids from [%s]", self.configuration.client_configuration.storage_location)
             if os.path.exists(self.configuration.client_configuration.storage_location):
                 try:
                     with open(self.configuration.client_configuration.storage_location, "r+") as idfile:
@@ -226,7 +226,7 @@ class TwitterBotClient(BotClient):
     def store_last_message_ids(self, last_direct_message_id, last_status_id):
         if self.configuration.client_configuration.storage == 'file':
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Writing messages ids to [%s]" % self.configuration.client_configuration.storage_location)
+                logging.debug("Writing messages ids to [%s]", self.configuration.client_configuration.storage_location)
             try:
                 with open(self.configuration.client_configuration.storage_location, "w+") as idfile:
                     idfile.write("%d\n"%last_direct_message_id)
@@ -244,12 +244,12 @@ class TwitterBotClient(BotClient):
 
             last_direct_message_id = self.process_direct_messages(last_direct_message_id)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Last message id = %d" % last_direct_message_id)
+                logging.debug("Last message id = %d", last_direct_message_id)
 
         if self.configuration.client_configuration.use_status is True:
             last_status_id = self.process_statuses(last_status_id)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Last status id = %d" % last_status_id)
+                logging.debug("Last status id = %d", last_status_id)
 
         self.store_last_message_ids(last_direct_message_id, last_status_id)
 

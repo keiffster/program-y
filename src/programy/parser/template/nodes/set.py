@@ -55,7 +55,7 @@ class TemplateSetNode(TemplateNode):
 
         if self.local is True:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to local: [%s] => [%s]"%(self.to_string(), name, value))
+                logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
             bot.get_conversation(clientid).current_question().set_property(name, value)
         else:
             if bot.override_properties is False and bot.brain.properties.has_property(name):

@@ -32,7 +32,7 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
                     self._message = child.text
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error ("Unknown child element [%s] in alarm oob"%(child.tag))
+                        logging.error ("Unknown child element [%s] in alarm oob", child.tag)
 
             if self._hour is not None and self._min is not None:
                 return True
@@ -49,5 +49,5 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
                 logging.info("AlarmOutOfBandProcessor: Showing alarm=%s", self._message)
         elif self._hour is not None and self._min is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("AlarmOutOfBandProcessor: Setting alarm for %s:%s"%(self._hour, self._min))
+                logging.info("AlarmOutOfBandProcessor: Setting alarm for %s:%s", self._hour, self._min)
         return "ALARM"

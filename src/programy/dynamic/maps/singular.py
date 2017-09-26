@@ -43,5 +43,5 @@ class SingularMap(DynamicMap):
                 singular_value = value
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("SingleMap converted %s to %s" % (value, singular_value))
+            logging.debug("SingleMap converted %s to %s", value, singular_value)
         return singular_value

@@ -125,9 +125,9 @@ class TemplateNode(object):
         if head_result is False and found_sub is False:
             if hasattr(pattern, '_end_line_number'):
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("No context in template tag at [line(%d), column(%d)]" %
-                                    (pattern._end_line_number,
-                                    pattern._end_column_number))
+                    logging.warning("No context in template tag at [line(%d), column(%d)]",
+                                    pattern._end_line_number,
+                                    pattern._end_column_number)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
                     logging.warning("No context in template tag")

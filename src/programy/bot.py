@@ -54,7 +54,7 @@ class Bot(object):
             if self._configuration.spelling.classname is not None:
                 try:
                     if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.info("Loading spelling checker from class [%s]"%self._configuration.spelling.classname)
+                        logging.info("Loading spelling checker from class [%s]", self._configuration.spelling.classname)
                     spell_class = ClassLoader.instantiate_class(self._configuration.spelling.classname)
                     self._spell_checker = spell_class(self._configuration.spelling)
                 except Exception as e:
@@ -189,7 +189,7 @@ class Bot(object):
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug ("Spell Checker corrected [%s] to [%s]"%(text, corrected))
+                logging.debug ("Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
 
     def check_spelling_and_retry(self, clientid, each_sentence):
@@ -197,7 +197,7 @@ class Bot(object):
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Spell Checker corrected [%s] to [%s]" % (text, corrected))
+                logging.debug("Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
             response = self.brain.ask_question(self, clientid, each_sentence)
             return response

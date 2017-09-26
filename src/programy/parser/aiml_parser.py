@@ -37,7 +37,7 @@ class AIMLLoader(FileFinder):
         try:
             return self.aiml_parser.parse_from_file(filename)
         except Exception as e:
-            logging.exception("Failed to load contents of file from [%s]"%filename, e)
+            logging.exception("Failed to load contents of file from [%s]", filename, e)
 
 class AIMLParser(object):
 
@@ -64,7 +64,7 @@ class AIMLParser(object):
 
         if brain_configuration.files.aiml_files.errors is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Saving aiml errors to file [%s]"%brain_configuration.files.aiml_files.errors)
+                logging.info("Saving aiml errors to file [%s]", brain_configuration.files.aiml_files.errors)
             try:
                 with open(brain_configuration.files.aiml_files.errors, "w+") as errors_file:
                     for error in self._errors:
@@ -74,7 +74,7 @@ class AIMLParser(object):
 
         if brain_configuration.files.aiml_files.duplicates is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Saving aiml duplicates to file [%s]"%brain_configuration.files.aiml_files.duplicates)
+                logging.info("Saving aiml duplicates to file [%s]", brain_configuration.files.aiml_files.duplicates)
             try:
                 with open(brain_configuration.files.aiml_files.duplicates, "w+") as duplicates_file:
                     for duplicate in self._duplicates:
@@ -85,12 +85,12 @@ class AIMLParser(object):
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Found a total of %d errors in your grammrs, check out [%s] for details"%
-                             (len(self._errors), brain_configuration.files.aiml_files.errors))
+                logging.info("Found a total of %d errors in your grammrs, check out [%s] for details",
+                             len(self._errors), brain_configuration.files.aiml_files.errors)
         if self._duplicates is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details"%
-                             (len(self._duplicates), brain_configuration.files.aiml_files.duplicates))
+                logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details",
+                             len(self._duplicates), brain_configuration.files.aiml_files.duplicates)
 
     def load_files_from_directory(self, brain_configuration):
         start = datetime.datetime.now()
@@ -103,11 +103,11 @@ class AIMLParser(object):
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Total processing time %.6f secs" % diff.total_seconds())
-            logging.info("Loaded a total of %d aiml files with %d categories" % (total_aimls_loaded, self.num_categories))
+            logging.info("Total processing time %.6f secs", diff.total_seconds())
+            logging.info("Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
         if diff.total_seconds() > 0:
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Thats approx %f aiml files per sec" % (total_aimls_loaded / diff.total_seconds()))
+                logging.info("Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
 
     def load_single_file(self, brain_configuration):
         start = datetime.datetime.now()
@@ -115,8 +115,8 @@ class AIMLParser(object):
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Total processing time %.6f secs" % diff.total_seconds())
-            logging.info("Loaded a single aiml file with %d categories" % (self.num_categories))
+            logging.info("Total processing time %.6f secs", diff.total_seconds())
+            logging.info("Loaded a single aiml file with %d categories", self.num_categories)
 
     def load_aiml(self, brain_configuration: BrainConfiguration):
 
@@ -197,12 +197,12 @@ class AIMLParser(object):
             stop = datetime.datetime.now()
             diff = stop - start
             if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Processed %s with %d categories in %f.2 secs" %(filename, num_categories, diff.total_seconds()))
+                logging.info("Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
 
         except Exception as e:
             logging.exception(e)
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load contents of AIML file from [%s] - [%s]"%(filename, e))
+                logging.error("Failed to load contents of AIML file from [%s] - [%s]", filename, e)
 
 
     def parse_from_text(self, text):
@@ -436,7 +436,7 @@ class AIMLParser(object):
         sentence.append_word('__THAT__')
         sentence.append_sentence(that_sentence)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Matching [%s]"%sentence.words_from_current_pos(0))
+            logging.debug("Matching [%s]", sentence.words_from_current_pos(0))
 
         context = MatchContext(max_search_depth=bot.configuration.max_search_depth,
                                max_search_timeout=bot.configuration.max_search_timeout)

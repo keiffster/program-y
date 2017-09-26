@@ -75,7 +75,7 @@ class MapCollection(object):
                 for key in maps.keys():
                     if key in self._maps:
                         if logging.getLogger().isEnabledFor(logging.ERROR):
-                            logging.error("Duplicate map [%s] found in [%s]"%(key, file))
+                            logging.error("Duplicate map [%s] found in [%s]", key, file)
                     self._maps[key] = maps[key]
         else:
             self._maps = {}

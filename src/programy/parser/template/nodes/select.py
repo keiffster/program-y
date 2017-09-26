@@ -90,7 +90,7 @@ class TemplateSelectNode(TemplateNode):
                 obj = self.parse_children_as_word_node(graph, child)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning ("Unknown tag name [%s] in select query"%tag_name)
+                    logging.warning ("Unknown tag name [%s] in select query",tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")

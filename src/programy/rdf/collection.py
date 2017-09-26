@@ -100,7 +100,7 @@ class RDFCollection(BaseCollection):
             self._entities.append(entity)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Duplicate RDF Entity [%s][%s][%s]"%(subject, predicate, object))
+                logging.warning("Duplicate RDF Entity [%s][%s][%s]", subject, predicate, object)
 
     def delete_entity(self, subject, predicate=None, object=None):
 

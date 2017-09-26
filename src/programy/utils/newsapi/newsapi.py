@@ -22,7 +22,7 @@ class NewsArticle(object):
             return data[name]
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Attribute [%s] missing from New API Article data"%name)
+                logging.debug("Attribute [%s] missing from New API Article data", name)
             return def_value
 
     def parse_json(self, data):
@@ -213,7 +213,7 @@ class NewsAPI(object):
     @staticmethod
     def _get_news_feed_articles(url, max_articles, sort, reverse):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("News API URL: [%s]"%url)
+            logging.debug("News API URL: [%s]", url)
         response = NewsAPI._news_api_api.get_news(url)
         articles = []
         if response.status_code == 200:
@@ -230,12 +230,12 @@ class NewsAPI(object):
 
                     if sort is True:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Sorting articles,, reverse=%s" % str(reverse))
+                            logging.debug("Sorting articles,, reverse=%s", str(reverse))
                         articles.sort(key=lambda article: article.published_at, reverse=reverse)
 
                     if max_articles != 0:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Returning max_articles %d articles" % max_articles)
+                            logging.debug("Returning max_articles %d articles", max_articles)
                         articles = articles[:max_articles]
                     else:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -249,7 +249,7 @@ class NewsAPI(object):
 
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("NewsAPI request returned error code %d"%response.status_code)
+                logging.error("NewsAPI request returned error code %d", response.status_code)
 
         return articles
 
@@ -260,7 +260,7 @@ class NewsAPI(object):
             return function(self.api_key, max_articles, sort, reverse)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No source available for %s"%source)
+                logging.error("No source available for %s", source)
             return []
 
     @staticmethod

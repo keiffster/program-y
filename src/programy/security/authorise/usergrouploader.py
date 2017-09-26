@@ -56,7 +56,7 @@ class UserGroupLoader(object):
                             user._roles.append(role_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug ("Role [%s] already exists in user [%s]"%(role_name, user_name))
+                                logging.debug ("Role [%s] already exists in user [%s]", role_name, user_name)
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -67,7 +67,7 @@ class UserGroupLoader(object):
                             user._groups.append(group_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("Group [%s] already exists in user [%s]" % (group_name, user_name))
+                                logging.debug("Group [%s] already exists in user [%s]", group_name, user_name)
 
                 users[user.id] = user
         return users
@@ -89,7 +89,7 @@ class UserGroupLoader(object):
                             group._roles.append(role_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("Role [%s] already exists in group [%s]" % (role_name, group_name))
+                                logging.debug("Role [%s] already exists in group [%s]", role_name, group_name)
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -100,7 +100,7 @@ class UserGroupLoader(object):
                             group._groups.append(group_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("Group [%s] already exists in group [%s]" % (group_name, group_name))
+                                logging.debug("Group [%s] already exists in group [%s]", group_name, group_name)
 
                 if 'users' in yaml_obj:
                     users_list= yaml_obj['groups']
@@ -111,7 +111,7 @@ class UserGroupLoader(object):
                             group._users.append(user_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("User [%s] already exists in group [%s]" % (user_name, group_name))
+                                logging.debug("User [%s] already exists in group [%s]", user_name, group_name)
 
                 groups[group.id] = group
         return groups
@@ -128,7 +128,7 @@ class UserGroupLoader(object):
                     new_groups.append(group)
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown group id [%s] in user [%s]"%(group_id, user_id))
+                        logging.error("Unknown group id [%s] in user [%s]", group_id, user_id)
             user._groups = new_groups[:]
 
         for group_id in groups.keys():
@@ -141,7 +141,7 @@ class UserGroupLoader(object):
                     new_groups.append(new_group)
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown group id [%s] in group [%s]" % (sub_group_id, group_id))
+                        logging.error("Unknown group id [%s] in group [%s]", sub_group_id, group_id)
             group._groups = new_groups[:]
 
             new_users = []
@@ -151,7 +151,7 @@ class UserGroupLoader(object):
                     new_users.append(new_user)
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown user id [%s] in group [%s]" % (sub_user_id, user_id))
+                        logging.error("Unknown user id [%s] in group [%s]", sub_user_id, user_id)
             group._users = new_users[:]
 
     def dump_users_and_groups(self, users, groups):
