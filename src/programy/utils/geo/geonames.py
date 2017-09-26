@@ -31,12 +31,12 @@ class GeoNamesApi(object):
         if license_keys.has_key('GEO_NAMES_ACCOUNTNAME'):
             self.account_name = license_keys.get_key('GEO_NAMES_ACCOUNTNAME')
         else:
-            raise Exception ("No valid license key GEO_NAMES_ACCOUNTNAME")
+            raise Exception("No valid license key GEO_NAMES_ACCOUNTNAME")
 
         if license_keys.has_key('GEO_NAMES_COUNTRY'):
             self.country = license_keys.get_key('GEO_NAMES_COUNTRY')
         else:
-            raise Exception ("No valid license key GEO_NAMES_COUNTRY")
+            raise Exception("No valid license key GEO_NAMES_COUNTRY")
 
         self.latlong_response_file = None
         if license_keys.has_key('GEONAMES_LATLONG'):

@@ -210,7 +210,7 @@ class GoogleMaps(object):
 
     def _get_response_as_json(self, url):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GoogleMaps Request = [%s]", url)
+            logging.debug("GoogleMaps Request = [%s]", url)
         response = urllib.request.urlopen(url)
         content = response.read()
         decoded = content.decode('utf8')
@@ -222,7 +222,7 @@ class GoogleMaps(object):
 
     def set_response_file_for_get_latlong_for_location(self, filename):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GoogleMaps: setting response file for get_latlong_for_location = [%s]", filename)
+            logging.debug("GoogleMaps: setting response file for get_latlong_for_location = [%s]", filename)
         self.response_file_for_get_latlong_for_location = filename
 
     def _get_latlong_for_location_response(self, location):
@@ -254,7 +254,7 @@ class GoogleMaps(object):
 
     def set_response_file_for_get_distance_between_addresses(self, filename):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GoogleMaps: setting response file for get_distance_between_addresses = [%s]", filename)
+            logging.debug("GoogleMaps: setting response file for get_distance_between_addresses = [%s]", filename)
         self.response_file_for_get_distance_between_addresses = filename
 
     def _get_distance_between_addresses(self, origin, destination, country, mode, units):
@@ -294,7 +294,7 @@ class GoogleMaps(object):
 
     def set_response_file_for_get_directions_between_addresses(self, filename):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GoogleMaps; setting response file for get_directions_between_addresses = [%s]", filename)
+            logging.debug("GoogleMaps; setting response file for get_directions_between_addresses = [%s]", filename)
         self.response_file_for_get_directions_between_addresses = filename
 
     def _get_directions_between_addresses_response(self, origin, destination, country, mode, units):

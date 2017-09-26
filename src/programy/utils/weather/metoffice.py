@@ -516,7 +516,7 @@ class MetOffice(object):
         if license_keys.has_key('METOFFICE_API_KEY'):
             api_key = license_keys.get_key('METOFFICE_API_KEY')
         else:
-            raise Exception ("No valid license key METOFFICE_API_KEY found")
+            raise Exception("No valid license key METOFFICE_API_KEY found")
 
         if license_keys.has_key('CURRENT_OBSERVATION_RESPONSE_FILE'):
             self.current_observation_response_file = license_keys.get_key('CURRENT_OBSERVATION_RESPONSE_FILE')

@@ -123,7 +123,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 if result.matched is True:
                     word_no = result.word_no
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
-                        logging.debug ("%sWildcard child matched %s", tabs, result.matched_phrase)
+                        logging.debug("%sWildcard child matched %s", tabs, result.matched_phrase)
 
                     context_match2 = Match(Match.WORD, child, result.matched_phrase)
 
@@ -138,7 +138,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 return None
 
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug ("%sWildcard %s matched %s", tabs, self._wildcard, word)
+                logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             word_no += 1

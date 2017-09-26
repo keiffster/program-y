@@ -36,7 +36,7 @@ class PatternRegexNode(PatternNode):
         elif len(text) > 0:
             self._pattern_text = text
         else:
-            raise ParserException ("Invalid regex node, neither pattern or template specified as attribute or text")
+            raise ParserException("Invalid regex node, neither pattern or template specified as attribute or text")
 
         if self._pattern_text is not None:
             self._pattern = re.compile(self._pattern_text)

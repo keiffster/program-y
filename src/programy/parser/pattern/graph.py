@@ -68,7 +68,7 @@ class PatternGraph(object):
 
         node_name = TextUtils.tag_from_text(element.tag)
         if self._pattern_factory.exists(node_name) is False:
-            raise ParserException ("Unknown node name [%s]"%node_name)
+            raise ParserException("Unknown node name [%s]"%node_name)
 
         text = None
         if element.text is not None:

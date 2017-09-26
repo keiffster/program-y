@@ -25,7 +25,7 @@ class GoogleMapsExtension(Extension):
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GoogleMaps [%s]",data)
+            logging.debug("GoogleMaps [%s]",data)
 
         splits = data.split(" ")
         command = splits[0]

@@ -149,7 +149,7 @@ class TemplateNode(object):
         if expression_text is False and expression_children is False:
             if self.add_default_star() is True:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug ("Node has no content (text or children), default to <star/>")
+                    logging.debug("Node has no content (text or children), default to <star/>")
                 star_class = graph.get_node_class_by_name('star')
                 star_node = star_class()
                 self.append(star_node)

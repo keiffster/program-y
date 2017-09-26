@@ -47,7 +47,7 @@ class WeatherExtension(Extension):
         latlng = googlemaps.get_latlong_for_location(postcode)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Weather - Calling external weather service for with extra data [%s]", data)
+            logging.debug("Weather - Calling external weather service for with extra data [%s]", data)
 
         met_office = MetOffice(bot.license_keys)
 

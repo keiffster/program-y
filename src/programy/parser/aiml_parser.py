@@ -70,7 +70,7 @@ class AIMLParser(object):
                     for error in self._errors:
                         errors_file.write(error)
             except Exception as e:
-                logging.exception (e)
+                logging.Exception(e)
 
         if brain_configuration.files.aiml_files.duplicates is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
@@ -80,7 +80,7 @@ class AIMLParser(object):
                     for duplicate in self._duplicates:
                         duplicates_file.write(duplicate)
             except Exception as e:
-                logging.exception (e)
+                logging.Exception(e)
 
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:

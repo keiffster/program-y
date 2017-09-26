@@ -29,7 +29,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
     def load_from_text(self, text, client_configuration, bot_root):
         self.yaml_data = yaml.load(text)
         if self.yaml_data is None:
-            raise Exception ("Yaml data is missing")
+            raise Exception("Yaml data is missing")
         configuration = ProgramyConfiguration(client_configuration)
         configuration.load_config_data(self, bot_root)
         return configuration

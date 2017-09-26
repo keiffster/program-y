@@ -194,12 +194,12 @@ class NewsAPI(object):
         }
 
         if license_keys is None:
-            raise Exception ("Missing license keys")
+            raise Exception("Missing license keys")
 
         if license_keys.has_key('NEWSAPI_API_KEY'):
             self.api_key = license_keys.get_key('NEWSAPI_API_KEY')
         else:
-            raise Exception ("No valid license key METOFFICE_API_KEY found")
+            raise Exception("No valid license key METOFFICE_API_KEY found")
 
     @staticmethod
     def _format_url(service, api_key, sort_by="top"):

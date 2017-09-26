@@ -30,7 +30,7 @@ class PatternBotNode(PatternNode):
         elif len(text) > 0:
             self._property = text
         else:
-            raise ParserException ("Invalid bot node, neither name or property specified as attribute or text")
+            raise ParserException("Invalid bot node, neither name or property specified as attribute or text")
 
     def is_bot(self):
         return True

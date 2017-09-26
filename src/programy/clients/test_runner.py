@@ -163,7 +163,7 @@ class TestRunnerBotClient(BotClient):
     def run(self):
         file_finder = TestFileFileFinder()
         if self.test_dir is not None:
-            print ("Loading Tests from directory [%s]" % self.test_dir)
+            print("Loading Tests from directory [%s]" % self.test_dir)
             questions = file_finder.load_dir_contents(self.test_dir, extension=".tests", subdir=True)
         else:
             questions = file_finder.load_single_file_contents(self.test_file)
@@ -180,7 +180,7 @@ class TestRunnerBotClient(BotClient):
                     print(test.question)
 
                 if any((c in '*$_^,') for c in test.question):
-                    print ("WARNING: Wildcards in question! [%s]"%test.question)
+                    print("WARNING: Wildcards in question! [%s]"%test.question)
                     warnings = warnings +1
 
                 if test.topic is not None:
@@ -218,14 +218,14 @@ class TestRunnerBotClient(BotClient):
         diff = stop-start
         total_tests = len(successes)+len(failures)
 
-        print ("Successes: %d" % len(successes))
-        print ("Failures:  %d" % len(failures))
+        print("Successes: %d" % len(successes))
+        print("Failures:  %d" % len(failures))
         if warnings > 0:
-            print ("Warnings:  %d" % warnings)
+            print("Warnings:  %d" % warnings)
         for failure in failures:
-            print ("\t%s: [%s] expected [%s], got [%s]" % (failure.category, failure.question, failure.answers_string, failure.response))
-        print ("Total processing time %f.2 secs"%diff.total_seconds())
-        print ("Thats approx %f aiml_tests per sec"%(total_tests/diff.total_seconds()))
+            print("\t%s: [%s] expected [%s], got [%s]" % (failure.category, failure.question, failure.answers_string, failure.response))
+        print("Total processing time %f.2 secs"%diff.total_seconds())
+        print("Thats approx %f aiml_tests per sec"%(total_tests/diff.total_seconds()))
 
 if __name__ == '__main__':
 

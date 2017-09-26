@@ -84,7 +84,7 @@ class TwitterBotClient(BotClient):
 
     def process_direct_messages(self, last_message_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Processing direct messages since [%s]",last_message_id)
+            logging.debug("Processing direct messages since [%s]",last_message_id)
 
         messages = self.get_direct_messages(last_message_id)
 
@@ -109,13 +109,13 @@ class TwitterBotClient(BotClient):
         for friend_id in friends:
             if friend_id not in followers_ids:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug ("Removing previous friendship with [%d]", friend_id)
+                    logging.debug("Removing previous friendship with [%d]", friend_id)
                 self._api.destroy_friendship(friend_id)
 
     def follow_new_followers(self, followers, friends):
         for follower in followers:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug ("Checking follower [%s]", follower.screen_name)
+                logging.debug("Checking follower [%s]", follower.screen_name)
             if follower.id not in friends:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("Following %s", follower.screen_name)
@@ -183,12 +183,12 @@ class TwitterBotClient(BotClient):
 
     def process_statuses(self, last_status_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("Processing status updates since [%s]", last_status_id)
+            logging.debug("Processing status updates since [%s]", last_status_id)
 
         statuses = self.get_statuses(last_status_id)
 
         for status in statuses:
-            print ("[%s] - [%s]"%(status.author.screen_name, self._username))
+            print("[%s] - [%s]"%(status.author.screen_name, self._username))
             if status.author.screen_name != self._username:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("status: %s", status.text)

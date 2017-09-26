@@ -34,7 +34,7 @@ class PatternISetNode(PatternNode):
         elif len(text) > 0:
             words = text.upper()
         else:
-            raise ParserException ("Invalid iset node, no words specified as attribute or text")
+            raise ParserException("Invalid iset node, no words specified as attribute or text")
 
         self._parse_words(words)
         self._iset_name = "iset_%d"%(PatternISetNode.iset_count)

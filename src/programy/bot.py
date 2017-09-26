@@ -57,8 +57,8 @@ class Bot(object):
                         logging.info("Loading spelling checker from class [%s]", self._configuration.spelling.classname)
                     spell_class = ClassLoader.instantiate_class(self._configuration.spelling.classname)
                     self._spell_checker = spell_class(self._configuration.spelling)
-                except Exception as e:
-                    logging.exception(e)
+                except Exception as excep:
+                    logging.exception(excep)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
                     logging.warning("No configuration setting for spelling checker!")
@@ -90,57 +90,49 @@ class Bot(object):
     def prompt(self):
         if self._configuration is not None:
             return self._configuration.prompt
-        else:
-            return BotConfiguration.DEFAULT_PROMPT
+        return BotConfiguration.DEFAULT_PROMPT
 
     @property
     def default_response(self):
         if self._configuration is not None:
             return self._configuration.default_response
-        else:
-            return BotConfiguration.DEFAULT_RESPONSE
+        return BotConfiguration.DEFAULT_RESPONSE
 
     @property
     def default_response_srai(self):
         if self._configuration is not None:
             return self._configuration.default_response_srai
-        else:
-            return None
+        return None
 
     @property
     def exit_response(self):
         if self._configuration is not None:
             return self._configuration.exit_response
-        else:
-            return BotConfiguration.DEFAULT_EXIT_RESPONSE
+        return BotConfiguration.DEFAULT_EXIT_RESPONSE
 
     @property
     def exit_response_srai(self):
         if self._configuration is not None:
             return self._configuration.exit_response_srai
-        else:
-            return BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI
+        return BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI
 
     @property
     def initial_question(self):
         if self._configuration is not None:
             return self._configuration.initial_question
-        else:
-            return BotConfiguration.DEFAULT_INITIAL_QUESTION
+        return BotConfiguration.DEFAULT_INITIAL_QUESTION
 
     @property
     def initial_question_srai(self):
         if self._configuration is not None:
             return self._configuration.initial_question_srai
-        else:
-            return BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI
+        return BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI
 
     @property
     def override_properties(self):
         if self._configuration is not None:
             return self._configuration.override_properties
-        else:
-            return False
+        return False
 
     @property
     def get_version_string(self):
@@ -149,8 +141,7 @@ class Bot(object):
                 self.brain.properties.property("name"),
                 self.brain.properties.property("version"),
                 self.brain.properties.property("birthdate"))
-        else:
-            return ""
+        return ""
 
     def has_conversation(self, clientid):
         return bool(clientid in self._conversations)
@@ -173,7 +164,7 @@ class Bot(object):
     def check_max_recursion(self):
         if self._configuration.max_question_recursion != -1:
             if self._question_depth > self._configuration.max_question_recursion:
-                raise Exception ("Maximum recursion limit [%d] exceeded"%(self._configuration.max_question_recursion))
+                raise Exception("Maximum recursion limit [%d] exceeded"%(self._configuration.max_question_recursion))
 
     def total_search_time(self):
         delta = datetime.datetime.now() - self._question_start_time
@@ -182,14 +173,14 @@ class Bot(object):
     def check_max_timeout(self):
         if self._configuration.max_question_timeout != -1:
             if self.total_search_time() >= self._configuration.max_question_timeout:
-                raise Exception ("Maximum search time limit [%d] exceeded"%(self._configuration.max_question_timeout))
+                raise Exception("Maximum search time limit [%d] exceeded"%(self._configuration.max_question_timeout))
 
     def check_spelling_before(self, each_sentence):
         if self._configuration.spelling.check_before is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug ("Spell Checker corrected [%s] to [%s]", text, corrected)
+                logging.debug("Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
 
     def check_spelling_and_retry(self, clientid, each_sentence):
@@ -276,7 +267,7 @@ class Bot(object):
 
         response = ". ".join([sentence for sentence in answers if sentence is not None])
 
-        self.log_question_and_answer(clientid, text, response )
+        self.log_question_and_answer(clientid, text, response)
 
         return response
 
@@ -284,7 +275,7 @@ class Bot(object):
         if self.default_response_srai is not None:
             sentence = Sentence(self.default_response_srai)
             default_response = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if default_response is None or len (default_response) == 0:
+            if default_response is None or len(default_response) == 0:
                 default_response = self.default_response
             return default_response
         else:
@@ -294,7 +285,7 @@ class Bot(object):
         if self.initial_question_srai is not None:
             sentence = Sentence(self.initial_question_srai)
             initial_question = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if initial_question is None or len (initial_question) == 0:
+            if initial_question is None or len(initial_question) == 0:
                 initial_question = self.initial_question
             return initial_question
         else:
@@ -304,7 +295,7 @@ class Bot(object):
         if self.exit_response_srai is not None:
             sentence = Sentence(self.exit_response_srai)
             exit_response = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if exit_response is None or len (exit_response) == 0:
+            if exit_response is None or len(exit_response) == 0:
                 exit_response = self.exit_response
             return exit_response
         else:

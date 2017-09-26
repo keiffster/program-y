@@ -25,7 +25,7 @@ class UserGroupLoader(object):
     def load_users_and_groups_from_text(self, text):
         yaml_data = yaml.load(text)
         if yaml_data is None:
-            raise Exception ("Yaml data is missing")
+            raise Exception("Yaml data is missing")
         return self.load_users_and_groups_from_yaml(yaml_data)
 
     def load_users_and_groups_from_file(self, filename):
@@ -56,7 +56,7 @@ class UserGroupLoader(object):
                             user._roles.append(role_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug ("Role [%s] already exists in user [%s]", role_name, user_name)
+                                logging.debug("Role [%s] already exists in user [%s]", role_name, user_name)
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']

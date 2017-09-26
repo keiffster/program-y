@@ -97,7 +97,7 @@ class BotClient(object):
         if arguments.config_filename is not None:
             self.configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(), arguments.config_filename, arguments.config_format, arguments.bot_root)
         else:
-            print ("No configuration file specified, using defaults only !")
+            print("No configuration file specified, using defaults only !")
             self.configuration = ProgramyConfiguration(self.get_client_configuration())
 
     def set_environment(self):

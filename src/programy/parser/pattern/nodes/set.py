@@ -29,7 +29,7 @@ class PatternSetNode(PatternNode):
         elif len(text) > 0:
             self._set_name = text.upper()
         else:
-            raise ParserException ("Invalid set node, no name specified as attribute or text")
+            raise ParserException("Invalid set node, no name specified as attribute or text")
 
     @property
     def set_name(self):

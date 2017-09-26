@@ -25,7 +25,7 @@ class GeoCodeExtension(Extension):
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug ("GeoCode [%s]",(data))
+            logging.debug("GeoCode [%s]",(data))
 
         words = data.split(" ")
         if words[0] == 'POSTCODE1':
