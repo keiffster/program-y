@@ -45,7 +45,8 @@ class TemplateMapNode(TemplateNode):
         if value is None:
             value = bot.brain.properties.property("default-map")
             if value is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No value for default-map defined, empty string returned")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No value for default-map defined, empty string returned")
                 value = ""
         return value
 
@@ -57,20 +58,20 @@ class TemplateMapNode(TemplateNode):
             value = bot.brain.dynamics.dynamic_map(bot, clientid, name, var)
         else:
             if bot.brain.maps.contains(name) is False:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
-                    "No map defined for [%s], using default-map as value" % var)
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No map defined for [%s], using default-map as value" % var)
                 value = self.get_default_value(bot)
             else:
                 the_map = bot.brain.maps.map(name)
                 if var in the_map:
                     value = the_map[var]
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
-                        "No value defined for [%s], using default-map as value" % var)
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("No value defined for [%s], using default-map as value" % var)
                     value = self.get_default_value(bot)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("MAP [%s] resolved to [%s] = [%s]",
-                                                                          self.to_string(), name, value)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, bot, clientid):

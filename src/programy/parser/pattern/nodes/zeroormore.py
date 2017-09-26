@@ -62,11 +62,13 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         tabs = self.get_tabs(bot, depth)
 
         if context.search_time_exceeded() is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_timeout))
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("%sMax search time [%d]secs exceeded" % (tabs, context.max_search_timeout))
             return None
 
         if context.search_depth_exceeded(depth) is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("%sMax search depth [%d] exceeded" % (tabs, context.max_search_depth))
             return None
 
         context_match = Match(type, self, None)
@@ -85,7 +87,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 result = child.equals(bot, clientid, words, word_no)
                 if result.matched is True:
                     word_no = result.word_no
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("%sWildcard child matched %s"%(tabs, result.matched_phrase))
+                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                        logging.debug ("%sWildcard child matched %s"%(tabs, result.matched_phrase))
 
                     context_match2 = Match(Match.WORD, child, result.matched_phrase)
 
@@ -99,7 +102,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                         return None
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
             context_match.add_word(word)
 
             match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
@@ -112,7 +116,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
             context_match.add_word(word)
 
             match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
@@ -125,7 +130,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 return None
             word = words.word(word_no)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sNo children, consume words until next break point" % (tabs))
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("%sNo children, consume words until next break point" % (tabs))
         while word_no < words.num_words() - 1:
             match = super(PatternZeroOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
             if match is not None:
@@ -134,7 +140,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("%sWildcard %s matched %s" % (tabs, self._wildcard, word))
             context_match.add_word(word)
 
             word_no += 1

@@ -80,7 +80,8 @@ class BotConfiguration(BaseConfigurationData):
             self._spelling.load_config_section(config_file, bot, bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Config section [%s] missing, using default values", self.section_name)
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("Config section [%s] missing, using default values", self.section_name)
 
     @property
     def bot_root(self):

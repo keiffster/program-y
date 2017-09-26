@@ -23,14 +23,16 @@ class MapLoader(FileFinder):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Loading map [%s]", filename)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Loading map [%s]", filename)
         the_map = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
                     self.process_line(line, the_map)
         except Exception as excep:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to load map [%s] - %s", filename, excep)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Failed to load map [%s] - %s", filename, excep)
         return the_map
 
     def load_from_text(self, text):
@@ -72,7 +74,8 @@ class MapCollection(object):
                 maps = loader.load_dir_contents(file, configuration.directories, configuration.extension)
                 for key in maps.keys():
                     if key in self._maps:
-                        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Duplicate map [%s] found in [%s]"%(key, file))
+                        if logging.getLogger().isEnabledFor(logging.ERROR):
+                            logging.error("Duplicate map [%s] found in [%s]"%(key, file))
                     self._maps[key] = maps[key]
         else:
             self._maps = {}

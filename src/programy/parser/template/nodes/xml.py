@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.atttrib import TemplateAttribNode
+from programy.parser.template.nodes.attrib import TemplateAttribNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.word import TemplateNode
 from programy.utils.text.text import TextUtils

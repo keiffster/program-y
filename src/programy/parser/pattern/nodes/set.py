@@ -89,13 +89,16 @@ class PatternSetNode(PatternNode):
             if self.set_is_known(bot):
                 match = self.words_in_set(bot, words, word_no)
                 if match.matched is True:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
+                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                        logging.debug("Found word [%s] in set [%s]"%(word, self.set_name))
                     return match
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] found in set [%s]"%(word, self.set_name))
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("No word [%s] found in set [%s]"%(word, self.set_name))
                     return EqualsMatch(False, word_no)
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No set named [%s] in sets collection"%(self.set_name))
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No set named [%s] in sets collection"%(self.set_name))
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

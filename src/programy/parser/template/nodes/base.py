@@ -50,7 +50,8 @@ class TemplateNode(object):
     def resolve(self, bot, clientid):
         try:
             resolved = self.resolve_children_to_string(bot, clientid)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
             logging.exception(excep)
@@ -123,11 +124,13 @@ class TemplateNode(object):
 
         if head_result is False and found_sub is False:
             if hasattr(pattern, '_end_line_number'):
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No context in template tag at [line(%d), column(%d)]" %
-                                (pattern._end_line_number,
-                                 pattern._end_column_number))
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("No context in template tag at [line(%d), column(%d)]" %
+                                    (pattern._end_line_number,
+                                    pattern._end_column_number))
             else:
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("No context in template tag")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("No context in template tag")
 
     #######################################################################################################
 
@@ -145,34 +148,11 @@ class TemplateNode(object):
 
         if expression_text is False and expression_children is False:
             if self.add_default_star() is True:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Node has no content (text or children), default to <star/>")
+                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                    logging.debug ("Node has no content (text or children), default to <star/>")
                 star_class = graph.get_node_class_by_name('star')
                 star_node = star_class()
                 self.append(star_node)
-
-    #######################################################################################################
-
-    def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
-
-        attrib_found = True
-        if attrib_name in expression.attrib:
-            self.set_attrib(attrib_name, expression.attrib[attrib_name])
-
-        self.parse_text(graph, self.get_text_from_element(expression))
-
-        for child in expression:
-            tag_name = TextUtils.tag_from_text(child.tag)
-
-            if tag_name == attrib_name:
-                self.set_attrib(attrib_name, self.get_text_from_element(child))
-            else:
-                graph.parse_tag_expression(child, self)
-
-            self.parse_text(graph, self.get_tail_from_element(child))
-
-        if attrib_found is False:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Setting default value for attrib [%s]", attrib_name)
-            self.set_attrib(attrib_name, default_value)
 
     #######################################################################################################
 

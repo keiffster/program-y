@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.exceptions import ParserException
-from programy.parser.template.nodes.atttrib import TemplateAttribNode
+from programy.parser.template.nodes.attrib import TemplateAttribNode
 
 
 ######################################################################################################################

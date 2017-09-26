@@ -35,8 +35,8 @@ class TemplateThatStarNode(TemplateDoubleIndexedNode):
 
         resolved = sentence.matched_context.thatstar(self.sentence)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):

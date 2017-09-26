@@ -33,8 +33,8 @@ class TemplateResponseNode(TemplateIndexedNode):
         conversation = bot.get_conversation(clientid)
         question = conversation.previous_nth_question(self.index)
         resolved = question.combine_answers()
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):
@@ -62,6 +62,7 @@ class TemplateResponseNode(TemplateIndexedNode):
     def parse_expression(self, graph, expression):
         self._parse_node_with_attrib(graph, expression, "index", "1")
         if len(self.children) > 0:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("<response> node should not contains child text, use <response /> or <response></response> only")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("<response> node should not contains child text, use <response /> or <response></response> only")
 
 

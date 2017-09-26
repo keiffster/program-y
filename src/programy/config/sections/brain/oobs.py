@@ -57,4 +57,5 @@ class BrainOOBSConfiguration(BaseConfigurationData):
                     self._oobs[name] = oob
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Config section [oobs] missing from Brain, no oobs loaded")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("Config section [oobs] missing from Brain, no oobs loaded")

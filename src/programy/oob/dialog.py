@@ -24,15 +24,18 @@ class DialogOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'list':
                     self._list = child.text
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Unknown child element [%s] in dialog oob"%(child.tag))
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error ("Unknown child element [%s] in dialog oob"%(child.tag))
 
             if self._title is not None and \
                 self._list is not None:
                 return True
 
-        if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid dialog oob command")
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.error("Invalid dialog oob command")
         return False
 
     def execute_oob_command(self, bot, clientid):
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("DialogOutOfBandProcessor: Dialog=%s", self._title)
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("DialogOutOfBandProcessor: Dialog=%s", self._title)
         return "DIALOG"

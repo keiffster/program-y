@@ -38,7 +38,8 @@ class PatternGraph(object):
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
 
         if root_node is None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Defaulting root to PatternRootNode")
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Defaulting root to PatternRootNode")
             self._root_node = self._pattern_factory.get_root_node()
         else:
             if root_node.is_root() is False:
@@ -220,9 +221,11 @@ class PatternGraph(object):
                     raise DuplicateGrammarException("Dupicate grammar tree found for bot/set")
             else:
                 if pattern_element.text is not None:
-                    if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text.strip()))
+                    if logging.getLogger().isEnabledFor(logging.WARNING):
+                        logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing" % (pattern_element.text.strip()))
                 else:
-                    if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("Dupicate grammar tree found for bot/set in learn, replacing existing")
+                    if logging.getLogger().isEnabledFor(logging.WARNING):
+                        logging.warning("Dupicate grammar tree found for bot/set in learn, replacing existing")
 
                 self.add_template_to_node(template_graph_root, that_node)
         else:
@@ -255,5 +258,5 @@ class PatternGraph(object):
             with open(filename, "w+") as dump_file:
                 dump_file.write(braintree)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
-                "Unknown braintree content type [%s]"%content)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Unknown braintree content type [%s]"%content)

@@ -44,8 +44,8 @@ class TemplateSelectNode(TemplateNode):
     def resolve_to_string(self, bot, clientid):
         results = self.query.execute(bot, clientid)
         resolved = json.dumps(results)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):
@@ -89,7 +89,8 @@ class TemplateSelectNode(TemplateNode):
             elif tag_name == 'obj':
                 obj = self.parse_children_as_word_node(graph, child)
             else:
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning ("Unknown tag name [%s] in select query"%tag_name)
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning ("Unknown tag name [%s] in select query"%tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -108,7 +109,8 @@ class TemplateSelectNode(TemplateNode):
 
         if len(vars) > 0:
             if len(vars) > 1:
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning ("Multiple <vars> found in select tag, using first")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning ("Multiple <vars> found in select tag, using first")
             self.parse_vars(vars[0].text)
 
         queries = expression.findall('./')

@@ -41,6 +41,7 @@ class PluralMap(DynamicMap):
             else:
                 plural_value = value + "S"
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("PluralMap converted %s to %s" % (value, plural_value))
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("PluralMap converted %s to %s" % (value, plural_value))
         return plural_value
 

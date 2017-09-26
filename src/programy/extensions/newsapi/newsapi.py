@@ -31,12 +31,14 @@ class NewsAPIExtension(Extension):
 
         headlines = newsapi.get_headlines(source, max, sort, reverse)
         if headlines is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewsAPIExtension no headlines found!")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("NewsAPIExtension no headlines found!")
             return ""
 
         results = newsapi.to_program_y_text(headlines)
         if results is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewsAPIExtension no results returned!")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("NewsAPIExtension no results returned!")
             return ""
 
         return results
@@ -63,7 +65,8 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     sort = False
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid value for NewAPI Data parameter sort [%s]"%splits[count])
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("Invalid value for NewAPI Data parameter sort [%s]"%splits[count])
                     sort = False
             elif splits[count] == "REVERSE":
                 count += 1
@@ -72,10 +75,12 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     reverse = False
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid value for NewAPI Data parameter reverse [%s]"%splits[count])
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("Invalid value for NewAPI Data parameter reverse [%s]"%splits[count])
                     reverse = False
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown News API Command [%s]" % splits[count])
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Unknown News API Command [%s]" % splits[count])
 
             count += 1
 
@@ -87,7 +92,8 @@ class NewsAPIExtension(Extension):
         source, max, sort, reverse = self.parse_data(data)
 
         if source is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("NewsAPIExtension no source passed in as data parameter!")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("NewsAPIExtension no source passed in as data parameter!")
             return ""
 
         return self.get_news(bot, clientid, source, max, sort, reverse)

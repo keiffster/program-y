@@ -37,8 +37,14 @@ class BotClient(object):
         self.bot = Bot(self._brain, self.configuration.bot_configuration)
 
         if self.configuration.brain_configuration.braintree.file is not None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Dumping AIML Graph as tree to [%s]"%self.configuration.brain_configuration.braintree.file)
-            self._brain._aiml_parser.pattern_parser.save_braintree(self.bot, self.clientid, self.configuration.brain_configuration.braintree.file, self.configuration.brain_configuration.braintree.content)
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Dumping AIML Graph as tree to [%s]"%
+                              self.configuration.brain_configuration.braintree.file)
+            self._brain._aiml_parser.pattern_parser.save_braintree(
+                self.bot,
+                self.clientid,
+                self.configuration.brain_configuration.braintree.file,
+                self.configuration.brain_configuration.braintree.content)
 
         self.set_environment()
 
@@ -67,7 +73,8 @@ class BotClient(object):
             with open(arguments.logging, 'r+') as yml_data_file:
                 logging_config = yaml.load(yml_data_file)
                 logging.config.dictConfig(logging_config)
-                if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Now logging under configuration")
+                if logging.getLogger().isEnabledFor(logging.INFO):
+                    logging.info("Now logging under configuration")
         else:
             print("Warning. No logging configuration file defined, using defaults...")
 

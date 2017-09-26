@@ -19,7 +19,8 @@ class NorvigSpellingChecker(SpellingChecker):
         else:
             corpus_filename = spelling_config.corpus
 
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Loading spelling corpus [%s]"%corpus_filename)
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("Loading spelling corpus [%s]"%corpus_filename)
         self.words = Counter(self._all_words(open(corpus_filename).read()))
         self.sum_of_words = sum(self.words.values())
 

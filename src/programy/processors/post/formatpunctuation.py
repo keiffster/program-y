@@ -46,7 +46,8 @@ class FormatPunctuationProcessor(PostProcessor):
         return splits
 
     def process(self, bot, clientid, word_str):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Formatting punctuation...")
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Formatting punctuation...")
 
         word_list = self.spaceSplit(word_str)
         new_word_list = []

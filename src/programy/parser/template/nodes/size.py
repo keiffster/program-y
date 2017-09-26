@@ -26,8 +26,8 @@ class TemplateSizeNode(TemplateNode):
 
     def resolve_to_string(self, bot, clientid):
         resolved = str(bot.brain.aiml_parser.num_categories)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(),resolved)
         return resolved
 
     def resolve(self, bot, clientid):

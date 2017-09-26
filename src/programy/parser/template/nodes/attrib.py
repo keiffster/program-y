@@ -14,6 +14,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+import logging
+from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.base import TemplateNode
 
 class TemplateAttribNode(TemplateNode):
@@ -23,4 +25,29 @@ class TemplateAttribNode(TemplateNode):
 
     def set_attrib(self, attrib_name, attrib_value):
         raise NotImplemented("Should not call this base method, implementation missing")
+
+    #######################################################################################################
+
+    def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
+
+        attrib_found = True
+        if attrib_name in expression.attrib:
+            self.set_attrib(attrib_name, expression.attrib[attrib_name])
+
+        self.parse_text(graph, self.get_text_from_element(expression))
+
+        for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            if tag_name == attrib_name:
+                self.set_attrib(attrib_name, self.get_text_from_element(child))
+            else:
+                graph.parse_tag_expression(child, self)
+
+            self.parse_text(graph, self.get_tail_from_element(child))
+
+        if attrib_found is False:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Setting default value for attrib [%s]", attrib_name)
+            self.set_attrib(attrib_name, default_value)
 

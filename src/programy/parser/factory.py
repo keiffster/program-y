@@ -36,27 +36,33 @@ class NodeFactory(object):
             splits = line.split("=")
             node_name = splits[0].strip()
             if node_name in self._nodes_config:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Node already exists in config [%s]"%line)
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Node already exists in config [%s]"%line)
                 return
             class_name = splits[1].strip()
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Pre-instantiating %s Node [%s]"%(self._type, class_name))
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Pre-instantiating %s Node [%s]"%(self._type, class_name))
             try:
                 self._nodes_config[node_name] =  ClassLoader.instantiate_class(class_name)
             except Exception as excep:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to pre-instantiating %s Node [%s]" % (self._type, class_name))
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Failed to pre-instantiating %s Node [%s]" % (self._type, class_name))
 
     def valid_config_line(self, line):
 
         if len(line) == 0:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Config line empty")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error ("Config line empty")
             return False
 
         if line.startswith('#'):
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Config line is comment")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error ("Config line is comment")
             return False
 
         if "=" not in line:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Config line missing '=' [%s]"%line)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error ("Config line missing '=' [%s]"%line)
             return False
 
         return True
@@ -72,7 +78,8 @@ class NodeFactory(object):
                     self.process_config_line(line)
 
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Failed to load %s Node Factory config file [%s]"%(self._type, filename))
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Failed to load %s Node Factory config file [%s]"%(self._type, filename))
             logging.exception(e)
 
     def load_nodes_config_from_text(self, text):

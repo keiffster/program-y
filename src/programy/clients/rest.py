@@ -48,11 +48,13 @@ class RestBotClient(BotClient):
             apikey = self.get_api_key(request)
 
             if apikey is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unauthorised access - api required but missing")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Unauthorised access - api required but missing")
                 return {'error': 'Unauthorized access'}, 401
 
             if self.is_apikey_valid(apikey) is False:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'Unauthorised access - invalid api key")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("'Unauthorised access - invalid api key")
                 return {'error': 'Unauthorized access'}, 401
 
         return None, None

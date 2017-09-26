@@ -37,18 +37,18 @@ class TemplateSRAIXNode(TemplateNode):
 
     def resolve_to_string(self, bot, clientid):
         resolved = self.resolve_children_to_string(bot, clientid)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         if self._service is not None:
             bot_service = ServiceFactory.get_service(self._service)
             response = bot_service.ask_question(bot, clientid, resolved)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("SRAIX service [%s] return [%s]",
-                                                                              self._service, response)
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("SRAIX service [%s] return [%s]", self._service, response)
             return response
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
-                "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
             return ""
 
     def resolve(self, bot, clientid):
@@ -81,13 +81,17 @@ class TemplateSRAIXNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         if 'host' in expression.attrib:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
         if 'botid' in expression.attrib:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
         if 'hint' in expression.attrib:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
         if 'apikey' in expression.attrib:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
 
         if 'service' in expression.attrib:
             self.service = expression.attrib['service']
@@ -99,13 +103,17 @@ class TemplateSRAIXNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'host':
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'host' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("'host' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'botid':
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'hint':
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'apikey':
-                if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'service':
                 self.service = self.get_text_from_element(child)
             else:

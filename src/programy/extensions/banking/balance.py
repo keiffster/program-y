@@ -19,6 +19,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 This is an example extension that allow syou to call an external service to retreive the bank balance
 of the customer. Currently contains no authentication
 """
+
 import logging
 
 from programy.extensions.base import Extension
@@ -27,7 +28,8 @@ class BankingBalanceExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("Bank Balance - Calling external service for with extra data [%s]"%(data))
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug ("Bank Balance - Calling external service for with extra data [%s]"%(data))
 
         #
         # Add the logic to receive the balance and format it into pounds and pence and either CREDIT|DEBIT

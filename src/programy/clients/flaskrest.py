@@ -37,13 +37,15 @@ class FlaskRestBotClient(RestBotClient):
 
     def get_question(self, request):
         if 'question' not in request.args or request.args['question'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'question' missing from request")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'question' missing from request")
             self.server_abort(400)
         return request.args['question']
 
     def get_sessionid(self, request):
         if 'sessionid' not in request.args or request.args['sessionid'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'sessionid' missing from request")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'sessionid' missing from request")
             self.server_abort(400)
         return request.args['sessionid']
 

@@ -10,38 +10,28 @@ class TopicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(TopicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.brain_configuration.files.aiml_files._file = os.path.dirname(__file__) + os.sep + "gimisa_test.aiml"
+        self.configuration.brain_configuration.files.set_files._files = [os.path.dirname(__file__)]
+        self.configuration.brain_configuration.files.set_files._extension = ".txt"
 
-class TopicAIMLTests(unittest.TestCase):
+class GimisaAIMLTests(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        TopicAIMLTests.test_client = TopicTestClient()
+        GimisaAIMLTests.test_client = TopicTestClient()
 
-    def test_topic_single_topic_word(self):
+    def test_ask_blender_twice(self):
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "HI THERE")
+        response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'OUTSIDE OF TEST1TOPIC')
+        self.assertEqual(response, 'The definition of render is the first definition of render')
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "HELLO")
+        response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'INSIDE OF TEST1TOPIC')
+        self.assertEqual(response, 'The definition of render is the second definition of render')
 
-    def test_topic_multiple_topic_words(self):
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "SEEYA")
+        response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'OUTSIDE OF TEST2 TOPIC')
+        self.assertEqual(response, 'The definition of render is the second definition of render')
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "GOODBYE")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'INSIDE OF TEST2 TOPIC')
 
-    def test_topic_wildcard_topic_words(self):
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD1")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'WILDCARD1 TEST OK')
-
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD2")
-        self.assertIsNotNone(response)
-        self.assertEqual(response, 'WILDCARD2 TEST OK')

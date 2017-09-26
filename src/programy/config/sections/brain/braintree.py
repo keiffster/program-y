@@ -42,4 +42,5 @@ class BrainBraintreeConfiguration(BaseConfigurationData):
                 self._file = self.sub_bot_root(file, bot_root)
             self._content = file_config.get_option(braintree, "content", missing_value="txt")
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'braintree' section missing from bot config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'braintree' section missing from bot config, using to defaults")

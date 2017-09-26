@@ -71,7 +71,8 @@ class ConsoleBotClient(BotClient):
 
     def run(self):
         if self.arguments.noloop is False:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Entering conversation loop...")
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Entering conversation loop...")
             self.running = True
 
             self.display_startup_messages()
@@ -84,10 +85,11 @@ class ConsoleBotClient(BotClient):
                     self.display_response(self.bot.get_exit_response(self.clientid))
                 except Exception as excep:
                     logging.exception(excep)
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Oops something bad happened !")
-                    #self.display_unknown_response(question)
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("Oops something bad happened !")
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("noloop set to True, exiting...")
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("noloop set to True, exiting...")
 
 
 if __name__ == '__main__':

@@ -54,4 +54,5 @@ class BrainBinariesConfiguration(BaseConfigurationData):
                self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
             self._load_aiml_on_binary_fail = file_config.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'binaries' section missing from bot config, using to defaults")
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'binaries' section missing from bot config, using to defaults")

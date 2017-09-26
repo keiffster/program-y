@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+    <category>
+        <pattern>
+            <set>blender</set>
+        </pattern>
+         
+        <template>The definition of
+            <star/>
+            is the first definition of render
+            <think>
+                <set name="topic">BLENDER</set>
+            </think>
+        </template>
+    </category>
+
+    <topic name="BLENDER">
+
+        <category>
+            <pattern>
+                <set>blender</set>
+            </pattern>
+             
+            <template>The definition of
+                <star/>
+                is
+                the second definition of render
+            </template>
+        </category>
+
+    </topic>
+
+
+</aiml>

@@ -1,4 +1,4 @@
-from programy.parser.template.nodes.atttrib import TemplateAttribNode
+from programy.parser.template.nodes.attrib import TemplateAttribNode
 
 from programytest.parser.template.base import TemplateTestsBaseClass
 

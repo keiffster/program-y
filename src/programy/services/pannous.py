@@ -77,11 +77,13 @@ class PannousService(Service):
             if bot.license_keys.has_key('PANNOUS_LOGIN') is True:
                 login = bot.license_keys.get_key('PANNOUS_LOGIN')
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No variable PANNOUS_LOGIN found in license key file")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No variable PANNOUS_LOGIN found in license key file")
                 return ""
 
             return self.api.ask_question(self.url, question, login)
 
         except Exception as excep:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(str(excep))
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error(str(excep))
             return ""

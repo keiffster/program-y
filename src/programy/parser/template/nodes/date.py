@@ -18,7 +18,7 @@ import logging
 import datetime
 
 from programy.parser.exceptions import ParserException
-from programy.parser.template.nodes.atttrib import TemplateAttribNode
+from programy.parser.template.nodes.attrib import TemplateAttribNode
 
 
 class TemplateDateNode(TemplateAttribNode):
@@ -41,8 +41,8 @@ class TemplateDateNode(TemplateAttribNode):
     def resolve_to_string(self, bot, clientid):
         time_now = datetime.datetime.now()
         resolved = time_now.strftime(self._format)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):

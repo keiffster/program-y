@@ -29,8 +29,10 @@ class PredecessorMap(DynamicMap):
         try:
             int_value = int(value)
             str_value = str(int_value - 1)
-            if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("PredecessorMap converted %s to %s" % (value, str_value))
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("PredecessorMap converted %s to %s" % (value, str_value))
             return str_value
         except:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("PredecessorMap could not convert %s to integer string" % (value))
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("PredecessorMap could not convert %s to integer string" % (value))
             return ""

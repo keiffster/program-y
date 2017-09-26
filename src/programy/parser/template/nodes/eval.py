@@ -26,8 +26,8 @@ class TemplateEvalNode(TemplateNode):
 
     def resolve_to_string(self, bot, clientid):
         resolved = self.resolve_children_to_string(bot, clientid)
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("[%s] resolved to [%s]", self.to_string(),
-                                                                          resolved)
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):

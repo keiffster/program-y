@@ -24,7 +24,8 @@ class GoogleMapsExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug ("GoogleMaps [%s]"%(data))
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug ("GoogleMaps [%s]"%(data))
 
         splits = data.split(" ")
         command = splits[0]
@@ -40,7 +41,8 @@ class GoogleMapsExtension(Extension):
             directions = googlemaps.get_directions_between_addresses(from_place, to_place)
             return self._format_directions_for_programy(directions)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unknown Google Maps Extension command [%s]" %command)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Unknown Google Maps Extension command [%s]" %command)
             return None
 
     def _format_distance_for_programy(self, distance):

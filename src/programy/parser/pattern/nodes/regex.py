@@ -75,21 +75,24 @@ class PatternRegexNode(PatternNode):
             if template is not None:
                 result = template.match(word)
                 if result is not None:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Match word [%s] regex" % (word))
+                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                        logging.debug("Match word [%s] regex" % (word))
                     return EqualsMatch(True, word_no, word)
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR): logging.error(
-                        "No word [%s] matched refex" % (word))
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("No word [%s] matched refex" % (word))
                     return EqualsMatch(False, word_no)
             else:
                 return EqualsMatch(False, word_no)
         else:
             result = self.pattern.match(word)
             if result is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("Match word [%s] regex" % (word))
+                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                    logging.debug("Match word [%s] regex" % (word))
                 return EqualsMatch(True, word_no, word)
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No word [%s] matched refex" % (word))
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No word [%s] matched refex" % (word))
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

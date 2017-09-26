@@ -38,12 +38,15 @@ class WikipediaService(Service):
             search = self._api.summary(question, sentences=1)
             return search
         except wikipedia.exceptions.DisambiguationError as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Wikipedia search is ambiguous for question [%s]", question)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Wikipedia search is ambiguous for question [%s]", question)
             return ""
         except wikipedia.exceptions.PageError as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("No page on Wikipedia for question [%s]", question)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("No page on Wikipedia for question [%s]", question)
             return ""
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("General error querying Wikipedia for question [%s]", question)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("General error querying Wikipedia for question [%s]", question)
             return ""
 

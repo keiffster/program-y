@@ -20,9 +20,11 @@ class CameraOutOfBandProcessor(OutOfBandProcessor):
             self._command = oob.text
             return True
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid camera oob command - missing command")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Invalid camera oob command - missing command")
             return False
 
     def execute_oob_command(self, bot, clientid):
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("CameraOutOfBandProcessor: Setting camera to=%s", self._command)
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("CameraOutOfBandProcessor: Setting camera to=%s", self._command)
         return "CAMERA"

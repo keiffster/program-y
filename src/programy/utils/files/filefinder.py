@@ -56,7 +56,8 @@ class FileFinder(object):
                 collection[just_filename] = self.load_file_contents(file[1])
             except Exception as e:
                 logging.exception(e)
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Failed to load file contents for file [%s]"%file[1])
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error ("Failed to load file contents for file [%s]"%file[1])
 
         return collection
 
@@ -68,7 +69,8 @@ class FileFinder(object):
             collection[just_filename] = self.load_file_contents(filename)
         except Exception as e:
             logging.exception(e)
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error ("Failed to load file contents for file [%s]"%filename)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error ("Failed to load file contents for file [%s]"%filename)
 
         return collection
 

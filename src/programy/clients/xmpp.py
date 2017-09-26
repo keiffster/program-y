@@ -52,19 +52,22 @@ class XmppClient(sleekxmpp.ClientXMPP):
         if self.is_valid_message(msg) is True:
             question = self.get_question(msg)
             if question is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Missing 'question' from XMPP message")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.debug("Missing 'question' from XMPP message")
                 return
 
             userid = self.get_userid(msg)
             if userid is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Missing 'userid' from XMPP message")
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.debug("Missing 'userid' from XMPP message")
                 return
 
             response =  self.bot_client.bot.ask_question(userid, question)
             self.send_response(msg, response)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.debug("Invalid XMPP message")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.debug("Invalid XMPP message")
 
     def register_plugins(self, configuration):
         if configuration.client_configuration.xep_0030 is True:
@@ -112,7 +115,8 @@ class XmppBotClient(BotClient):
         return XmppClient(self, username, password)
 
     def run(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG): logging.debug("XMPP Client is running....")
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("XMPP Client is running....")
 
         username, password = self.get_username_password(self.bot.license_keys)
         server, port = self.get_server_port(self.configuration)

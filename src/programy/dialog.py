@@ -218,7 +218,8 @@ class Conversation(object):
 
     def record_dialog(self, question: Question):
         if len(self._questions) == self._max_histories:
-            if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
             self._questions.remove(self._questions[0])
         self._questions.append(question)
 

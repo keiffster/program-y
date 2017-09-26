@@ -62,5 +62,6 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
                 self._conversation = self.sub_bot_root(conversation, bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING): logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("'%s' section missing from bot config, using to defaults"%(self.section_name))
 

@@ -196,7 +196,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         alreadys.append(pair[2])
 
             except Exception as excep:
-                if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Invalid regular expression [%s]", pair[1])
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Invalid regular expression [%s]", pair[1])
                 logging.exception(excep)
 
         return re.sub(' +', ' ', replacable.strip())

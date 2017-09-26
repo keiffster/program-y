@@ -43,14 +43,16 @@ class SanicRestBotClient(RestBotClient):
     def get_question(self, request):
         if 'question' not in request.raw_args or request.raw_args['question'] is None:
             print("'question' missing from request")
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'question' missing from request")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'question' missing from request")
             self.server_abort("'question' missing from request", 500)
         return request.raw_args['question']
 
     def get_sessionid(self, request):
         if 'sessionid' not in request.raw_args or request.raw_args['sessionid'] is None:
             print("'sessionid' missing from request")
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("'sessionid' missing from request")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'sessionid' missing from request")
             self.server_abort("'sessionid' missing from request", 500)
         return request.raw_args['sessionid']
 

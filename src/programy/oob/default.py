@@ -10,7 +10,8 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
         OutOfBandProcessor.__init__(self)
 
     def execute_oob_command(self, bot, clientid):
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("Default OOB Processing....")
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("Default OOB Processing....")
         if self._xml is not None:
             return ""
         else:

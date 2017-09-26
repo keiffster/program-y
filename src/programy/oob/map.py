@@ -19,9 +19,11 @@ class MapOutOfBandProcessor(OutOfBandProcessor):
             self._location = oob.text
             return True
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR): logging.error("Unvalid map oob command - missing location text!")
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Unvalid map oob command - missing location text!")
             return False
 
     def execute_oob_command(self, bot, clientid):
-        if logging.getLogger().isEnabledFor(logging.INFO): logging.info("MapOutOfBandProcessor: Showing a map for location=%s", self._location)
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("MapOutOfBandProcessor: Showing a map for location=%s", self._location)
         return "MAP"
