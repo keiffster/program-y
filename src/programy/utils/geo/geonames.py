@@ -80,7 +80,7 @@ class GeoNamesApi(object):
 
         if 'postalCodes' not in data:
             raise Exception("Invalid/Unknown post code")
-        if len(data['postalCodes']) == 0:
+        if not data['postalCodes']:
             raise Exception("Invalid/Unknown post code")
         if 'lat' not in data['postalCodes'][0] or 'lng' not in data['postalCodes'][0]:
             raise Exception("Invalid/Unknown post code")

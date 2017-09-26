@@ -77,7 +77,7 @@ class Sentence(object):
             return []
         else:
             sentence = sentence.strip()
-            if len(sentence) == 0:
+            if not sentence:
                 return []
             else:
                 return sentence.split(split_chars)
@@ -136,7 +136,7 @@ class Question(object):
             raise Exception("Num sentence array violation !")
 
     def current_sentence(self):
-        if len(self._sentences) == 0:
+        if not self._sentences:
             raise Exception("Num sentence array violation !")
         else:
             return self._sentences[self._current_sentence_no]

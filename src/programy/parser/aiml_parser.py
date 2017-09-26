@@ -327,7 +327,7 @@ class AIMLParser(object):
 
         if 'name' in topic_element.attrib:
             name = topic_element.attrib['name']
-            if name is None or len(name) == 0:
+            if name is None or not name:
                 raise ParserException("Topic name empty or null", xml_element=topic_element)
             xml = "<topic>%s</topic>" % name
             if logging.getLogger().isEnabledFor(logging.INFO):
@@ -388,7 +388,7 @@ class AIMLParser(object):
 
     def get_template(self, category_xml, namespace):
         templates = self.find_all(category_xml, "template", namespace)
-        if len(templates) == 0:
+        if not templates:
             raise ParserException("Error, no template node found in category", xml_element=category_xml)
         elif len(templates) > 1:
             raise ParserException("Error, multiple <template> nodes found in category", xml_element=category_xml)
@@ -397,7 +397,7 @@ class AIMLParser(object):
 
     def get_pattern(self, category_xml, namespace):
         patterns = self.find_all(category_xml, "pattern", namespace)
-        if len(patterns) == 0:
+        if not patterns:
             raise ParserException("Error, no pattern node found in category", xml_element=category_xml)
         elif len(patterns) > 1:
             raise ParserException("Error, multiple <pattern> nodes found in category", xml_element=category_xml)

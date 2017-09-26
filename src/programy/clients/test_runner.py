@@ -194,7 +194,7 @@ class TestRunnerBotClient(BotClient):
                 success = False
                 test.response = response
 
-                if len(test.answers_regex) == 0:
+                if not test.answers_regex:
                     if test.response == "":
                         break
                 else:

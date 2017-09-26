@@ -176,7 +176,7 @@ class TemplateConditionNode(TemplateNode):
         else:
             names = condition.findall('name')
             variables = condition.findall('var')
-            if len(names) == 0 and len(variables) == 0:
+            if not names and not variables:
                 return None, False
             elif len(names) > 1:
                 raise ParserException("Error, condition element has multiple name elements", xml_element=condition)
@@ -197,7 +197,7 @@ class TemplateConditionNode(TemplateNode):
             return value_node
         else:
             values = condition.findall('value')
-            if len(values) == 0:
+            if not values:
                 return None
             elif len(values) > 1:
                 raise ParserException("Error, element has multiple value elements", xml_element=condition)

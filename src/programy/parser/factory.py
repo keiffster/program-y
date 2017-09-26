@@ -50,7 +50,7 @@ class NodeFactory(object):
 
     def valid_config_line(self, line):
 
-        if len(line) == 0:
+        if not line:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error ("Config line empty")
             return False

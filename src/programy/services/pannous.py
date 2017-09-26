@@ -39,7 +39,7 @@ class PannousAPI(object):
         if 'output' not in json_data:
             raise Exception("'output' section missing from pannous json_data")
 
-        if json_data["output"] is None or len(json_data["output"]) == 0:
+        if json_data["output"] is None or not json_data["output"]:
             raise Exception("'output' section has no elements in pannous json_data")
 
         if 'actions' not in json_data["output"][0]:

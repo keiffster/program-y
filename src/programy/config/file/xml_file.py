@@ -69,7 +69,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_option(self, section, option_name, missing_value=None):
         child = section.find(option_name)
         if child is not None:
-            if len(child._children) == 0:
+            if not child._children:
                 return self._infer_type_from_string(child.text)
             else:
                 return child
@@ -108,7 +108,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=[]):
         value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):
-            if len(value) == 0:
+            if not value:
                 return value
         if isinstance(value, str):
             values = [value]

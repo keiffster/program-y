@@ -206,7 +206,7 @@ class Bot(object):
         else:
             pre_processed = text
 
-        if pre_processed is None or len(pre_processed) == 0:
+        if pre_processed is None or not pre_processed:
             pre_processed = self._configuration.empty_string
 
         if srai is False:
@@ -245,7 +245,7 @@ class Bot(object):
 
                 if srai is False:
                     answer = self.brain.post_process_response(self, clientid, response).strip()
-                    if len(answer) == 0:
+                    if not answer:
                         answer = self.get_default_response(clientid)
                 else:
                     answer = response
@@ -275,7 +275,7 @@ class Bot(object):
         if self.default_response_srai is not None:
             sentence = Sentence(self.default_response_srai)
             default_response = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if default_response is None or len(default_response) == 0:
+            if default_response is None or not default_response:
                 default_response = self.default_response
             return default_response
         else:
@@ -285,7 +285,7 @@ class Bot(object):
         if self.initial_question_srai is not None:
             sentence = Sentence(self.initial_question_srai)
             initial_question = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if initial_question is None or len(initial_question) == 0:
+            if initial_question is None or not initial_question:
                 initial_question = self.initial_question
             return initial_question
         else:
@@ -295,7 +295,7 @@ class Bot(object):
         if self.exit_response_srai is not None:
             sentence = Sentence(self.exit_response_srai)
             exit_response = self.brain.ask_question(self, clientid, sentence, srai=False)
-            if exit_response is None or len(exit_response) == 0:
+            if exit_response is None or not exit_response:
                 exit_response = self.exit_response
             return exit_response
         else:

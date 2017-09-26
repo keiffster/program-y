@@ -24,7 +24,7 @@ class ConfigurationFactory(object):
     @classmethod
     def load_configuration_from_file(cls, client_configuration, filename, file_format=None, bot_root="."):
 
-        if file_format is None or len(file_format) == 0:
+        if file_format is None or not file_format:
             file_format = ConfigurationFactory.guess_format_from_filename(filename)
 
         config_file = ConfigurationFactory.get_config_by_name(file_format)
