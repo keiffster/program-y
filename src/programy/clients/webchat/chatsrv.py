@@ -41,7 +41,7 @@ def is_apikey_valid(apikey):
 @APP.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if WEBCHAT_CLIENT.configuration.client_configuration.use_API_KEYS is True:
+    if WEBCHAT_CLIENT.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Unauthorised access - api required but missing")
