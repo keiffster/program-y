@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -51,7 +52,7 @@ class BrainBinariesConfiguration(BaseConfigurationData):
             self._load_binary = file_config.get_option(binaries, "load_binary", missing_value=None)
             binary_filename = file_config.get_option(binaries, "binary_filename", missing_value=None)
             if binary_filename is not None:
-               self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
+                self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
             self._load_aiml_on_binary_fail = file_config.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):

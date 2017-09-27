@@ -14,14 +14,15 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
+
+from programy.extensions.base import Extension
+
 
 """
 This is an example extension that allow syou to call an external service to retreive the bank balance
 of the customer. Currently contains no authentication
 """
-import logging
-
-from programy.extensions.base import Extension
 
 class TelecomMinutesExtension(Extension):
 

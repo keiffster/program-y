@@ -2,12 +2,11 @@ import os
 
 from programy.utils.text.text import TextUtils
 from programy.utils.geo.geonames import GeoNamesApi
+from programy.utils.license.keys import LicenseKeys
 
 if __name__ == '__main__':
 
     # Only to be used to create test data for unit aiml_tests
-
-    from programy.utils.license.keys import LicenseKeys
 
     license_keys = LicenseKeys()
     license_keys.load_license_key_file(os.path.dirname(__file__) + TextUtils.replace_path_seperator('/../../../../bots/y-bot/config/license.keys'))

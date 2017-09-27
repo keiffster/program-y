@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -42,7 +43,7 @@ class TemplateUniqNode(TemplateNode):
             outer += inner
         resolved = " ".join(outer)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(),resolved)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):
@@ -81,7 +82,7 @@ class TemplateUniqNode(TemplateNode):
                 obj = self.parse_children_as_word_node(graph, child)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning ("Unknown tag name [%s] in select query",tag_name)
+                    logging.warning("Unknown tag name [%s] in select query", tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -93,4 +94,3 @@ class TemplateUniqNode(TemplateNode):
             raise ParserException("<obj> element missing from select query")
 
         self._query = RDFUniqueStatement(RDFQuery(subj, pred, obj, RDFQuery.QUERY))
-

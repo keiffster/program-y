@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,6 @@ import logging
 
 from programy.utils.text.text import TextUtils
 from programy.parser.pattern.matcher import Match, EqualsMatch
-import datetime
 
 #######################################################################################################################
 #
@@ -58,7 +58,7 @@ class PatternNode(object):
         return self._priority_words
 
     def has_priority_words(self):
-        return True if len(self._priority_words) > 0 else False
+        return True if self._priority_words else False
 
     def is_priority(self):
         return False
@@ -87,10 +87,7 @@ class PatternNode(object):
         return False
 
     def has_zero_or_more(self):
-        if self._0ormore_arrow is not None or self._0ormore_hash is not None:
-            return True
-        else:
-            return False
+        return bool(self._0ormore_arrow is not None or self._0ormore_hash is not None)
 
     def has_0ormore_arrow(self):
         return bool(self._0ormore_arrow is not None)
@@ -99,10 +96,7 @@ class PatternNode(object):
         return bool(self._0ormore_hash is not None)
 
     def has_one_or_more(self):
-        if self._1ormore_star is not None or self._1ormore_underline is not None:
-            return True
-        else:
-            return False
+        return bool(self._1ormore_star is not None or self._1ormore_underline is not None)
 
     def has_1ormore_star(self):
         return bool(self._1ormore_star is not None)
@@ -126,19 +120,18 @@ class PatternNode(object):
     #
     @property
     def children(self):
-         return self._children
+        return self._children
 
     def child(self, num):
         return self._children[num]
 
     def has_children(self):
-        if len(self._children) > 0:
+        if self._children:
             return True
-
         return False
 
     def has_nodes(self):
-        if len(self._children) > 0:
+        if self._children:
             return True
 
         if self.has_priority_words():
@@ -387,20 +380,17 @@ class PatternNode(object):
                 1 if self._that is not None else 0,
                 1 if self._template is not None else 0
             )
-        else:
-            return ""
+        return ""
 
     def to_string(self, verbose=True):
         if verbose is True:
             return "NODE [%s]" % self._child_count(verbose)
-        else:
-            return "NODE"
+        return "NODE"
 
     def get_tabs(self, bot, depth):
         if bot.configuration.tab_parse_output is True:
             return TextUtils.get_tabs(depth)
-        else:
-            return ""
+        return ""
 
     def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
@@ -476,7 +466,7 @@ class PatternNode(object):
                         logging.debug("%sMatched %s child, success!", tabs, child_type)
                     return match, word_no
                 else:
-                    context.pop_match ()
+                    context.pop_match()
 
         return None, word_no
 
@@ -566,4 +556,3 @@ class PatternNode(object):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sNo match for %s, trying another path", tabs, words.word(word_no))
         return None
-

@@ -29,10 +29,9 @@ class NorvigSpellingChecker(SpellingChecker):
 
     def _probability(self, word):
         "Probability of `word`.dont handle null well ..."
-        if self.sum_of_words==0:
+        if self.sum_of_words == 0:
             return 0.0
-        else:
-            return self.words[word] / self.sum_of_words
+        return self.words[word] / self.sum_of_words
 
     def _correction(self, word):
         "Most probable spelling _correction for word."
@@ -40,7 +39,7 @@ class NorvigSpellingChecker(SpellingChecker):
 
     def _candidates(self, word):
         "Generate possible spelling _corrections for word."
-        return (self._known([word]) or self._known(self._edits1(word)) or self._known(self._edits2(word)) or [word])
+        return self._known([word]) or self._known(self._edits1(word)) or self._known(self._edits2(word)) or [word]
 
     def _known(self, words):
         "The subset of `words` that appear in the dictionary of WORDS."
@@ -48,11 +47,11 @@ class NorvigSpellingChecker(SpellingChecker):
 
     def _edits1(self, word):
         "All edits that are one edit away from `word`."
-        splits     = [(word[:i], word[i:])    for i in range(len(word) + 1)]
-        deletes    = [L + R[1:]               for L, R in splits if R]
-        transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R)>1]
-        replaces   = [L + c + R[1:]           for L, R in splits if R for c in NorvigSpellingChecker.DefaultLetters]
-        inserts    = [L + c + R               for L, R in splits for c in NorvigSpellingChecker.DefaultLetters]
+        splits = [(word[:i], word[i:]) for i in range(len(word) + 1)]
+        deletes = [L + R[1:] for L, R in splits if R]
+        transposes = [L + R[1] + R[0] + R[2:] for L, R in splits if len(R) > 1]
+        replaces = [L + c + R[1:] for L, R in splits if R for c in NorvigSpellingChecker.DefaultLetters]
+        inserts = [L + c + R  for L, R in splits for c in NorvigSpellingChecker.DefaultLetters]
         return set(deletes + transposes + replaces + inserts)
 
     def _edits2(self, word):
@@ -61,7 +60,8 @@ class NorvigSpellingChecker(SpellingChecker):
 
     def correct(self, phrase):
         "split sentence in into word to be check by _correction"
-        phras=''
+        phras = ''
         for wrd in phrase.split():
-            phras=phras+self._correction(wrd.upper())+' '
+            phras = phras+self._correction(wrd.upper())+' '
         return phras.strip()
+

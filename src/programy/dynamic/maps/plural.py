@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,15 +34,14 @@ class PluralMap(DynamicMap):
             return PluralMap.STATICS[value]
         return None
 
-    def map_value(self, bot, clientid, value):
-        plural_value = self.static_map(value)
+    def map_value(self, bot, clientid, input_value):
+        plural_value = self.static_map(input_value)
         if plural_value is None:
-            if value.endswith('Y'):
-                plural_value = value[:-1] + 'IES'
+            if input_value.endswith('Y'):
+                plural_value = input_value[:-1] + 'IES'
             else:
-                plural_value = value + "S"
+                plural_value = input_value + "S"
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("PluralMap converted %s to %s", value, plural_value)
+            logging.debug("PluralMap converted %s to %s", input_value, plural_value)
         return plural_value
-

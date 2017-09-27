@@ -33,5 +33,5 @@ class GimisaAIMLTests(unittest.TestCase):
 
         response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
         self.assertIsNotNone(response)
-        #self.assertEqual(response, 'The definition of render is the second definition of render')
+        self.assertEqual(response, 'the definition of render in blender is')
 

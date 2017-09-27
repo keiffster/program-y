@@ -12,8 +12,7 @@ from programy.config.sections.client.webchat import WebChatConfiguration
 class WebChatBotClient(BotClient):
 
     def __init__(self):
-        self.clientid = "WebChat"
-        BotClient.__init__(self)
+        BotClient.__init__(self, "WebChat")
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "REST")
@@ -22,30 +21,27 @@ class WebChatBotClient(BotClient):
         return WebChatConfiguration()
 
 print("Loading, please wait...")
-webchat_client = WebChatBotClient()
+WEBCHAT_CLIENT = WebChatBotClient()
 
 print("Initiating Webchat Client...")
-app = Flask(__name__)
+APP = Flask(__name__)
 
-@app.route('/')
+@APP.route('/')
 def hello_world():
     return current_app.send_static_file('webchat.html')
 
 # Enter you API keys, here, alternatively store in a db or file and load at startup
 # This is an exmaple, and therefore not suitable for production
-api_keys = [
+API_KEYS = [
 ]
 
 def is_apikey_valid(apikey):
-    if apikey in api_keys:
-        return True
-    else:
-        return False
+    return bool(apikey in API_KEYS)
 
-@app.route('/api/v1.0/ask', methods=['GET'])
+@APP.route('/api/v1.0/ask', methods=['GET'])
 def ask():
 
-    if webchat_client.configuration.client_configuration.use_api_keys is True:
+    if WEBCHAT_CLIENT.configuration.client_configuration.use_API_KEYS is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Unauthorised access - api required but missing")
@@ -74,13 +70,13 @@ def ask():
     sessionid = request.args['sessionid']
 
     try:
-        response = webchat_client.bot.ask_question(sessionid, question)
+        response = WEBCHAT_CLIENT.bot.ask_question(sessionid, question)
         if response is None:
-            answer = webchat_client.bot.default_response
-            webchat_client.log_unknown_response(question)
+            answer = WEBCHAT_CLIENT.bot.default_response
+            WEBCHAT_CLIENT.log_unknown_response(question)
         else:
             answer = response
-            webchat_client.log_response(question, response)
+            WEBCHAT_CLIENT.log_response(question, response)
 
         response = {"question": question,
                     "answer": answer,
@@ -92,7 +88,7 @@ def ask():
     except Exception as excep:
 
         response = {"question": question,
-                    "answer": webchat_client.bot.default_response,
+                    "answer": WEBCHAT_CLIENT.bot.default_response,
                     "sessionid": sessionid,
                     "error": str(excep)
                    }
@@ -112,14 +108,14 @@ if __name__ == '__main__':
         sys.exit(1)
 
     def run():
-        print("WebChat Client running on %s:%s" % (webchat_client.configuration.client_configuration.host,
-                                                   webchat_client.configuration.client_configuration.port))
-        if webchat_client.configuration.client_configuration.debug is True:
+        print("WebChat Client running on %s:%s" % (WEBCHAT_CLIENT.configuration.client_configuration.host,
+                                                   WEBCHAT_CLIENT.configuration.client_configuration.port))
+        if WEBCHAT_CLIENT.configuration.client_configuration.debug is True:
             print("WebChat Client running in debug mode")
 
-        app.run(host=webchat_client.configuration.client_configuration.host,
-                port=webchat_client.configuration.client_configuration.port,
-                debug=webchat_client.configuration.client_configuration.debug)
+        APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
+                port=WEBCHAT_CLIENT.configuration.client_configuration.port,
+                debug=WEBCHAT_CLIENT.configuration.client_configuration.debug)
 
 
     set_exit_handler(on_exit)

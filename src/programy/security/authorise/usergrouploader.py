@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -103,7 +104,7 @@ class UserGroupLoader(object):
                                 logging.debug("Group [%s] already exists in group [%s]", group_name, group_name)
 
                 if 'users' in yaml_obj:
-                    users_list= yaml_obj['groups']
+                    users_list = yaml_obj['groups']
                     splits = users_list.split(",")
                     for user_name in splits:
                         user_name = user_name.strip()
@@ -165,14 +166,14 @@ class UserGroupLoader(object):
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("\t"+user.id)
 
-                if len(user.roles) > 0:
+                if user.roles:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tRoles:")
                     for role in user.roles:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
                             logging.debug("\t\t\t"+role)
 
-                if len(user.groups) > 0:
+                if user.groups:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tGroups:")
                     for group in user.groups:
@@ -188,21 +189,21 @@ class UserGroupLoader(object):
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("\t"+group.id)
 
-                if len(group.roles):
+                if group.roles:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tRoles:")
                     for role in group.roles:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
                             logging.debug("\t\t\t"+role)
 
-                if len(group.groups):
+                if group.groups:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tGroups:")
                     for group in group.groups:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
                             logging.debug("\t\t\t" + group.id)
 
-                if len(group.users):
+                if group.users:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tUsers:")
                     for user in group.users:

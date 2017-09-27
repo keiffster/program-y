@@ -1,7 +1,6 @@
 import logging
 
 from programy.oob.oob import OutOfBandProcessor
-import xml.etree.ElementTree as ET
 
 """
 <oob>
@@ -32,7 +31,7 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
                     self._message = child.text
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error ("Unknown child element [%s] in alarm oob", child.tag)
+                        logging.error("Unknown child element [%s] in alarm oob", child.tag)
 
             if self._hour is not None and self._min is not None:
                 return True

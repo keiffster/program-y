@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -16,10 +17,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.utils.text.text import TextUtils
-
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.matcher import Match
+
 
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
@@ -54,8 +54,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
     def to_string(self, verbose=True):
         if verbose is True:
             return "ZEROORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
-        else:
-            return "ZEROORMORE [%s]" % (self.wildcard)
+        return "ZEROORMORE [%s]" % (self.wildcard)
 
     def consume(self, bot, clientid, context, words, word_no, type, depth):
 
@@ -81,7 +80,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
         word = words.word(word_no)
 
-        if len(self._children) > 0:
+        if self._children:
             for child in self._children:
 
                 result = child.equals(bot, clientid, words, word_no)
@@ -154,6 +153,5 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
         if match is not None:
             return match
-        else:
-            context.pop_matches(matches_added)
-            return None
+        context.pop_matches(matches_added)
+        return None

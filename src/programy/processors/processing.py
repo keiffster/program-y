@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,7 +33,7 @@ class ProcessorLoader(ClassLoader):
         with open(filename, "r+") as file:
             for line in file:
                 line = line.strip()
-                if len(line) > 0:
+                if line:
                     if line[0] != '#':
                         new_class = ClassLoader.instantiate_class(line)
                         if new_class is not None:
@@ -77,5 +78,5 @@ class PostProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, bot, clientid, string):
+    def process(self, bot, clientid, word_string):
         pass

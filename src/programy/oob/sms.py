@@ -1,7 +1,7 @@
 import logging
+import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
-import xml.etree.ElementTree as ET
 
 """
 <oob>
@@ -28,10 +28,9 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
                     self._message = child.text
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error ("Unknown child element [%s] in sms oob",child.tag)
+                        logging.error("Unknown child element [%s] in sms oob", child.tag)
 
-            if self._recipient is not None and \
-                self._message is not None :
+            if self._recipient is not None and self._message is not None:
                 return True
 
         if logging.getLogger().isEnabledFor(logging.ERROR):

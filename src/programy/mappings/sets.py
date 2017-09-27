@@ -6,7 +6,8 @@ documentation files(the "Software"), to deal in the Software without restriction
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -52,14 +53,13 @@ class SetLoader(FileFinder):
 
     def process_line(self, line, the_set):
         text = line.strip()
-        if text is not None and len(text) > 0:
+        if text is not None and text:
             splits = text.split()
             key = splits[0].upper()
             if key not in the_set:
                 the_set[key] = []
-            #for word in splits:
-            #    the_set[key].append(word.upper())
             the_set[key].append(splits)
+
 
 class SetCollection(object):
 

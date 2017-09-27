@@ -4,6 +4,7 @@ from programy.mappings.base import BaseCollection
 from programy.rdf.entity import RDFEntity
 from programy.utils.files.filefinder import FileFinder
 
+
 class RDFLoader(FileFinder):
     def __init__(self, collection):
         FileFinder.__init__(self)
@@ -18,6 +19,7 @@ class RDFLoader(FileFinder):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Failed to load rdf [%s] - %s", filename, excep)
 
+
 class RDFCollection(BaseCollection):
 
     def __init__(self):
@@ -29,8 +31,7 @@ class RDFCollection(BaseCollection):
         splits = self.split_line_by_char(line)
         if len(splits) > 3:
             return [splits[0], splits[1], self.get_split_char().join(splits[2:])]
-        else:
-            return splits
+        return splits
 
     def get_split_char(self):
         return ":"
@@ -66,7 +67,7 @@ class RDFCollection(BaseCollection):
         return bool(subject in self._subjects)
 
     def subjects(self):
-        return self._subjects.keys ()
+        return self._subjects.keys()
 
     def has_predicate(self, subject, predicate):
         if self.has_subject(subject):
@@ -75,7 +76,7 @@ class RDFCollection(BaseCollection):
         return False
 
     def predicates(self, subject):
-        return list(self._subjects[subject].keys ())
+        return list(self._subjects[subject].keys())
 
     def has_object(self, subject, predicate, object):
         if self.has_subject(subject):
@@ -85,7 +86,7 @@ class RDFCollection(BaseCollection):
         return False
 
     def objects(self, subject, predicate):
-        return list(self._subjects[subject][predicate].keys ())
+        return list(self._subjects[subject][predicate].keys())
 
     def add_entity(self, subject, predicate, object):
         if self.has_subject(subject) is False:
@@ -95,7 +96,7 @@ class RDFCollection(BaseCollection):
             self._subjects[subject][predicate] = {}
 
         if self.has_object(subject, predicate, object) is False:
-            entity =  RDFEntity(subject, predicate, object)
+            entity = RDFEntity(subject, predicate, object)
             self._subjects[subject][predicate][object] = entity
             self._entities.append(entity)
         else:
@@ -110,9 +111,9 @@ class RDFCollection(BaseCollection):
 
         elif predicate is not None and self.has_predicate(subject, predicate):
             obj_keys = []
-            for object in self._subjects[subject][predicate]:
-                self._entities.remove(self._subjects[subject][predicate][object])
-                obj_keys.append(object)
+            for pred_object in self._subjects[subject][predicate]:
+                self._entities.remove(self._subjects[subject][predicate][pred_object])
+                obj_keys.append(pred_object)
             for key in obj_keys:
                 del self._subjects[subject][predicate][key]
             del self._subjects[subject][predicate]
@@ -191,7 +192,6 @@ class RDFCollection(BaseCollection):
             for file in configuration.files:
                 files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
             return len(files)
-        else:
-            self._subjects = {}
-            self._entities = []
-            return 0
+        self._subjects = {}
+        self._entities = []
+        return 0

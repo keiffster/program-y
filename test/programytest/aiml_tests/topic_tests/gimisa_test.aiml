@@ -16,7 +16,7 @@
 
    <category>
        <pattern>
-          render
+          <set>blender</set>
        </pattern>
 
        <template>some definition of render as per professor ....

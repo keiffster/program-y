@@ -21,26 +21,25 @@ import logging
 
 import metoffer
 
-DIRECTIONS = { 'N':     'North',
-               'NNE':   'North North East',
-               'NE':    'North East',
-               'ENE':   'East North East',
-               'E':     'East',
-               'ESE':   'East South East',
-               'SE':    'South East',
-               'SSE':   'South South East',
-               'S':     'South',
-               'SSW':   'South South West',
-               'SW':    'South West',
-               'WSW':   'West South West',
-               'W':     'West',
-               'WNW':   'West North West',
-               'NW':    'North West',
-               'NNW':   'North North West',
-               }
+DIRECTIONS = {'N': 'North',
+              'NNE': 'North North East',
+              'NE': 'North East',
+              'ENE': 'East North East',
+              'E': 'East',
+              'ESE': 'East South East',
+              'SE': 'South East',
+              'SSE': 'South South East',
+              'S': 'South',
+              'SSW': 'South South West',
+              'SW': 'South West',
+              'WSW': 'West South West',
+              'W': 'West',
+              'WNW': 'West North West',
+              'NW': 'North West',
+              'NNW': 'North North West'}
 
-PRESSURE_TENDANCY = { 'F': "Falling",
-                      'R': 'Rising'}
+PRESSURE_TENDANCY = {'F': "Falling",
+                     'R': 'Rising'}
 
 class DataPoint(object):
 
@@ -63,8 +62,7 @@ class DataPoint(object):
     def direction_to_full_text(self, direction):
         if direction in DIRECTIONS:
             return DIRECTIONS[direction]
-        else:
-            return "Unknown"
+        return "Unknown"
 
 class DailyForecastDayDataPoint(DataPoint):
 
@@ -290,8 +288,7 @@ class ObservationDataPoint(DataPoint):
     def parse_pressure_tendancy(self, tendancy):
         if tendancy in PRESSURE_TENDANCY:
             return PRESSURE_TENDANCY[tendancy]
-        else:
-            return "Unknown"
+        return "Unknown"
 
 class Report(object):
 
@@ -327,7 +324,7 @@ class Report(object):
             self._time_periods.append(period)
 
         if self._data_type == MetOfficeWeatherReport.ObservationDataPoint or self._time_period == metoffer.THREE_HOURLY:
-            if len(self._time_periods) > 0:
+            if self._time_periods:
                 self._time_periods.sort(key=lambda period: int(period._time))
 
         if 'type' in json:
@@ -344,19 +341,19 @@ class Report(object):
             raise ValueError("value missing from Report data")
 
     def get_last_time_period(self):
-        if len(self._time_periods) > 0:
+        if self._time_periods:
             return self._time_periods[-1]
         return None
 
     def get_time_period_by_type(self, type):
-        if len(self._time_periods) > 0:
+        if self._time_periods:
             for time_period in self._time_periods:
                 if time_period._type == type:
                     return time_period
         return None
 
     def get_time_period_by_time(self, time):
-        if len(self._time_periods) > 0:
+        if self._time_periods:
             for time_period in self._time_periods:
                 if time_period._time == time:
                     return time_period
@@ -379,12 +376,12 @@ class Location(object):
         self._name = None
 
     def get_latest_report(self):
-        if len(self._reports) > 0:
+        if self._reports:
             return self._reports[-1]
         return None
 
     def get_report_for_date(self, report_date):
-        if len(self._reports) > 0:
+        if self._reports:
             for report in self._reports:
                 if report._report_date == report_date:
                     return report
@@ -399,7 +396,7 @@ class Location(object):
         # Sort Reports by _report_date which is is either
         # a) The date of the observation
         # b) The date of the daily forecast
-        if len(self._reports) > 0:
+        if self._reports:
             self._reports.sort(key=lambda report: report._report_date)
 
         if 'continent' in json:
@@ -493,7 +490,7 @@ class MetOfficeWeatherReport(object):
             raise ValueError("SiteRep missing from weather report")
         else:
             self._site_report = SiteReport(self._data_type, self._time_period)
-            self._site_report.parse_json(json["SiteRep" ])
+            self._site_report.parse_json(json["SiteRep"])
 
     def get_latest_report(self):
         return self._site_report._dv._location.get_latest_report()
@@ -602,4 +599,3 @@ class MetOffice(object):
         with open(filename, 'r+') as json_data_file:
             json_data = json.load(json_data_file)
             return json_data
-

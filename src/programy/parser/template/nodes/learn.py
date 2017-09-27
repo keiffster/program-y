@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -116,7 +117,7 @@ class TemplateLearnNode(TemplateNode):
             else:
                 new_element.append(child)
 
-        new_element.text = new_element.text.upper ()
+        new_element.text = new_element.text.upper()
 
         if element.tail is not None:
             new_element.tail = TextUtils.strip_whitespace(element.tail)
@@ -134,9 +135,9 @@ class TemplateLearnNode(TemplateNode):
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
-                      ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
-                      ET.tostring(new_topic, 'utf-8').decode('utf-8'),
-                      ET.tostring(new_that, 'utf-8').decode('utf-8'))
+                          ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
+                          ET.tostring(new_topic, 'utf-8').decode('utf-8'),
+                          ET.tostring(new_that, 'utf-8').decode('utf-8'))
 
         return LearnCategory(new_pattern, new_topic, new_that, new_template)
 

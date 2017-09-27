@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,8 +29,7 @@ class BrainOOBSConfiguration(BaseConfigurationData):
     def exists(self, name):
         if name == 'default':
             return bool(self._default is not None)
-        else:
-            return bool(name in self._oobs)
+        return bool(name in self._oobs)
 
     def default(self):
         return self._default
@@ -37,8 +37,7 @@ class BrainOOBSConfiguration(BaseConfigurationData):
     def oob(self, name):
         if name in self._oobs:
             return self._oobs[name]
-        else:
-            return None
+        return None
 
     def oobs(self):
         return self._oobs.keys()

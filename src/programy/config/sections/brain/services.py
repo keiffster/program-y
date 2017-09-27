@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,6 +20,7 @@ import logging
 from programy.config.base import BaseConfigurationData
 from programy.config.sections.brain.service import BrainServiceConfiguration
 
+
 class BrainServicesConfiguration(BaseConfigurationData):
     def __init__(self):
         BaseConfigurationData.__init__(self, "services")
@@ -30,8 +32,7 @@ class BrainServicesConfiguration(BaseConfigurationData):
     def service(self, name):
         if name in self._services:
             return self._services[name]
-        else:
-            return None
+        return None
 
     def services(self):
         return self._services.keys()

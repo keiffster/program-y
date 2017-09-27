@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,7 +27,7 @@ class PatternSetNode(PatternNode):
         PatternNode.__init__(self)
         if 'name' in attribs:
             self._set_name = attribs['name'].upper()
-        elif len(text) > 0:
+        elif text:
             self._set_name = text.upper()
         else:
             raise ParserException("Invalid set node, no name specified as attribute or text")
@@ -104,6 +105,4 @@ class PatternSetNode(PatternNode):
     def to_string(self, verbose=True):
         if verbose is True:
             return "SET [%s] name=[%s]" % (self._child_count(verbose), self.set_name)
-        else:
-            return "SET name=[%s]" % (self.set_name)
-
+        return "SET name=[%s]" % (self.set_name)

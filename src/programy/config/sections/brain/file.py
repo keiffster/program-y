@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,18 +22,18 @@ from programy.config.base import BaseConfigurationData
 
 class BrainFileConfiguration(BaseConfigurationData):
 
-    def __init__(self, name="files", files=[], file=None, extension=None, directories=False):
+    def __init__(self, name="files", files=None, file=None, extension=None, directories=False):
         BaseConfigurationData.__init__(self, name)
-        self._files = files
+        if files is None:
+            self._files = []
+        else:
+            self._files = files
         self._file = file
         self._extension = extension
         self._directories = directories
 
     def has_multiple_files(self):
-        if self._files is not None and len(self._files) > 0:
-            return True
-        else:
-            return False
+        return bool(self._files is not None and self._files)
 
     def has_single_file(self):
         return bool(self._file is not None)
@@ -59,8 +60,8 @@ class BrainFileConfiguration(BaseConfigurationData):
     def load_config_section(self, file_config, brain_config, bot_root):
         files_config = file_config.get_option(brain_config, self.section_name)
         if files_config is not None:
-            files = file_config.get_multi_file_option(files_config, "files",bot_root)
-            if files is not None and len(files) > 0:
+            files = file_config.get_multi_file_option(files_config, "files", bot_root)
+            if files is not None and files:
                 self._files = files
                 self._extension = file_config.get_option(files_config, "extension")
                 self._directories = file_config.get_option(files_config, "directories")
@@ -71,5 +72,3 @@ class BrainFileConfiguration(BaseConfigurationData):
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
-
-

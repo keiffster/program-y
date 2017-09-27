@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -16,7 +17,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import xml.etree.ElementTree as ET
-from programy.utils.text.text import TextUtils
 
 
 ######################################################################################################################
@@ -82,10 +82,10 @@ class TemplateNode(object):
     def parse_text(self, graph, text):
         if text is not None:
             string = text.strip()
-            if len(string) > 0:
+            if string:
                 words = string.split(" ")
                 for word in words:
-                    if word is not None and len(word) > 0:
+                    if word is not None and word:
                         word_class = graph.get_node_class_by_name('word')
                         word_node = word_class(word.strip())
                         self.children.append(word_node)

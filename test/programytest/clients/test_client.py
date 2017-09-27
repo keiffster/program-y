@@ -17,8 +17,7 @@ class MockBaseConfigurationData(BaseConfigurationData):
 class MockBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        self.clientid = "Mock"
-        BotClient.__init__(self, argument_parser=argument_parser)
+        BotClient.__init__(self, "Mock", argument_parser=argument_parser)
 
     def get_client_configuration(self):
         return MockBaseConfigurationData("mock")
@@ -37,7 +36,7 @@ class BotClientTests(unittest.TestCase):
     def test_client_init(self):
         arguments = MockArgumentParser()
         with self.assertRaises(Exception):
-            client = BotClient(arguments)
+            client = BotClient("test", arguments)
 
     def test_sub_classed_client(self):
 

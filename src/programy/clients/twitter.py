@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,8 +27,11 @@ from programy.config.sections.client.twitter import TwitterConfiguration
 class TwitterBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        self.clientid = "Twitter"
-        BotClient.__init__(self, argument_parser)
+        self._username = "unknown"
+        self._username_len = 0
+        self._welcome_message = None
+        self._api = None
+        BotClient.__init__(self, "Twitter", argument_parser)
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Twitter")
@@ -59,7 +63,7 @@ class TwitterBotClient(BotClient):
         self.get_username(self.bot)
         consumer_key, consumer_secret = self.get_consumer_secrets(self.bot)
         access_token, access_token_secret = self.get_access_secrets(self.bot)
-        self._api = self.create_api(consumer_key, consumer_secret,  access_token, access_token_secret)
+        self._api = self.create_api(consumer_key, consumer_secret, access_token, access_token_secret)
 
     #############################################################################################
     # Direct Messages
@@ -84,7 +88,7 @@ class TwitterBotClient(BotClient):
 
     def process_direct_messages(self, last_message_id):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Processing direct messages since [%s]",last_message_id)
+            logging.debug("Processing direct messages since [%s]", last_message_id)
 
         messages = self.get_direct_messages(last_message_id)
 
@@ -97,7 +101,7 @@ class TwitterBotClient(BotClient):
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error(err)
 
-        if len(messages) > 0:
+        if messages:
             last_message_id = messages[-1].id
 
         return last_message_id
@@ -198,7 +202,7 @@ class TwitterBotClient(BotClient):
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error(err)
 
-        if len(statuses) > 0:
+        if statuses:
             last_status_id = statuses[-1].id
 
         return last_status_id
@@ -218,8 +222,8 @@ class TwitterBotClient(BotClient):
                     with open(self.configuration.client_configuration.storage_location, "r+") as idfile:
                         last_direct_message_id = int(idfile.readline().strip())
                         last_status_id = int(idfile.readline().strip())
-                except Exception as e:
-                    logging.exception(e)
+                except Exception as excep:
+                    logging.exception(excep)
 
         return (last_direct_message_id, last_status_id)
 
@@ -231,8 +235,8 @@ class TwitterBotClient(BotClient):
                 with open(self.configuration.client_configuration.storage_location, "w+") as idfile:
                     idfile.write("%d\n"%last_direct_message_id)
                     idfile.write("%d\n"%last_status_id)
-            except Exception as e:
-                logging.exception(e)
+            except Exception as excep:
+                logging.exception(excep)
 
     #############################################################################################
     # Execution
@@ -269,7 +273,7 @@ class TwitterBotClient(BotClient):
             except KeyboardInterrupt:
                 running = False
 
-            except RateLimitError as re:
+            except RateLimitError:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("Rate limit exceeded, sleeping for 15 minutes")
                 if self.configuration.client_configuration.poll_sleep != -1:
@@ -277,8 +281,8 @@ class TwitterBotClient(BotClient):
                 else:
                     time.sleep(15*60)
 
-            except Exception as e:
-                logging.exception(e)
+            except Exception as excep:
+                logging.exception(excep)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Exiting gracefully...")

@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -23,6 +24,7 @@ from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
 from programy.dialog import Sentence
 
+
 class Bot(object):
 
     def __init__(self, brain, config: BotConfiguration):
@@ -31,9 +33,10 @@ class Bot(object):
         self._conversations = {}
         self._question_depth = 0
         self._question_start_time = None
+        self._spell_checker = None
+        self._license_keys = None
 
         self.load_license_keys()
-
         self.initiate_spellchecker()
 
     @property
@@ -49,7 +52,6 @@ class Bot(object):
                 logging.warning("No configuration defined when loading license keys")
 
     def initiate_spellchecker(self):
-        self._spell_checker = None
         if self._configuration is not None:
             if self._configuration.spelling.classname is not None:
                 try:
@@ -137,7 +139,7 @@ class Bot(object):
     @property
     def get_version_string(self):
         if self._configuration is not None:
-            return "%s version %s, initiated %s" %(
+            return "%s version %s, initiated %s" % (
                 self.brain.properties.property("name"),
                 self.brain.properties.property("version"),
                 self.brain.properties.property("birthdate"))
@@ -164,7 +166,7 @@ class Bot(object):
     def check_max_recursion(self):
         if self._configuration.max_question_recursion != -1:
             if self._question_depth > self._configuration.max_question_recursion:
-                raise Exception("Maximum recursion limit [%d] exceeded"%(self._configuration.max_question_recursion))
+                raise Exception("Maximum recursion limit [%d] exceeded" % self._configuration.max_question_recursion)
 
     def total_search_time(self):
         delta = datetime.datetime.now() - self._question_start_time
@@ -173,7 +175,7 @@ class Bot(object):
     def check_max_timeout(self):
         if self._configuration.max_question_timeout != -1:
             if self.total_search_time() >= self._configuration.max_question_timeout:
-                raise Exception("Maximum search time limit [%d] exceeded"%(self._configuration.max_question_timeout))
+                raise Exception("Maximum search time limit [%d] exceeded" % self._configuration.max_question_timeout)
 
     def check_spelling_before(self, each_sentence):
         if self._configuration.spelling.check_before is True:

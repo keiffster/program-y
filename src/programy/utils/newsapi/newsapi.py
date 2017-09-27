@@ -1,6 +1,6 @@
 import logging
-import requests
 import json
+import requests
 
 class NewsApiApi(object):
 
@@ -595,4 +595,3 @@ class NewsAPI(object):
         articles.extend(NewsAPI.independent(api_key, max_articles, sort, reverse))
         articles.extend(NewsAPI.metro(api_key, max_articles, sort, reverse))
         return articles
-

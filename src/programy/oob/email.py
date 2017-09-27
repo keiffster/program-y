@@ -32,7 +32,7 @@ class EmailOutOfBandProcessor(OutOfBandProcessor):
                     self._body = child.text
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error ("Unknown child element [%s] in email oob",child.tag)
+                        logging.error("Unknown child element [%s] in email oob", child.tag)
 
             if self._to is not None and \
                 self._subject is not None and \

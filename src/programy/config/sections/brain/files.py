@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,21 +25,21 @@ class BrainFilesConfiguration(BaseConfigurationData):
 
     def __init__(self):
         BaseConfigurationData.__init__(self, "files")
-        self._aiml_files        = BrainAIMLFileConfiguration()
-        self._set_files         = BrainFileConfiguration("sets")
-        self._map_files         = BrainFileConfiguration("maps")
-        self._rdf_files         = BrainFileConfiguration("rdf")
+        self._aiml_files = BrainAIMLFileConfiguration()
+        self._set_files = BrainFileConfiguration("sets")
+        self._map_files = BrainFileConfiguration("maps")
+        self._rdf_files = BrainFileConfiguration("rdf")
 
-        self._denormal          = None
-        self._normal            = None
-        self._gender            = None
-        self._person            = None
-        self._person2           = None
-        self._properties        = None
-        self._triples           = None
-        self._preprocessors     = None
-        self._postprocessors    = None
-        self._regex_templates   = None
+        self._denormal = None
+        self._normal = None
+        self._gender = None
+        self._person = None
+        self._person2 = None
+        self._properties = None
+        self._triples = None
+        self._preprocessors = None
+        self._postprocessors = None
+        self._regex_templates = None
 
     @property
     def aiml_files(self):

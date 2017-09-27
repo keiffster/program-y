@@ -28,7 +28,8 @@ from programy.config.programy import ProgramyConfiguration
 
 class BotClient(object):
 
-    def __init__(self, argument_parser=None):
+    def __init__(self, clientid, argument_parser=None):
+        self._clientid = clientid
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
         self.initiate_logging(self.arguments)
         self.load_configuration(self.arguments)
@@ -40,7 +41,7 @@ class BotClient(object):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Dumping AIML Graph as tree to [%s]",
                               self.configuration.brain_configuration.braintree.file)
-            self._brain._aiml_parser.pattern_parser.save_braintree(
+            self.brain.aiml_parser.pattern_parser.save_braintree(
                 self.bot,
                 self.clientid,
                 self.configuration.brain_configuration.braintree.file,
@@ -49,8 +50,16 @@ class BotClient(object):
         self.set_environment()
 
     @property
+    def clientid(self):
+        return self._clientid
+
+    @property
     def arguments(self):
         return self._arguments
+
+    @property
+    def brain(self):
+        return self._brain
 
     def get_description(self):
         return 'ProgramY AIML2.0 Console Client'
@@ -95,7 +104,10 @@ class BotClient(object):
             print("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
 
         if arguments.config_filename is not None:
-            self.configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(), arguments.config_filename, arguments.config_format, arguments.bot_root)
+            self.configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
+                                                                                   arguments.config_filename,
+                                                                                   arguments.config_format,
+                                                                                   arguments.bot_root)
         else:
             print("No configuration file specified, using defaults only !")
             self.configuration = ProgramyConfiguration(self.get_client_configuration())

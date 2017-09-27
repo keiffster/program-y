@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,7 +29,7 @@ class TemplateLowercaseNode(TemplateNode):
         resolved = self.resolve_children_to_string(bot, clientid)
         resolved = resolved.lower()
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(),resolved)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, bot, clientid):
@@ -55,4 +56,3 @@ class TemplateLowercaseNode(TemplateNode):
 
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
-

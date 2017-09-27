@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -14,23 +15,17 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import argparse
 import logging
+import argparse
 
 class ClientArguments(object):
 
-    DEFAULT_BOT_ROOT = "."
-    DEFAULT_LOGGING = logging.DEBUG
-    DEFAULT_CONFIG_NAME = "config.yaml"
-    DEFAULT_CONFIG_FORMAT = "yaml:"
-    DEFAULT_NOLOOP = False
-
     def __init__(self, client, parser=None):
-        self._bot_root = ClientArguments.DEFAULT_BOT_ROOT
-        self._logging = ClientArguments.DEFAULT_LOGGING
-        self._config_name = ClientArguments.DEFAULT_CONFIG_NAME
-        self._config_format = ClientArguments.DEFAULT_CONFIG_FORMAT
-        self._no_loop = ClientArguments.DEFAULT_NOLOOP
+        self._bot_root = "."
+        self._logging = logging.DEBUG
+        self._config_name = "config.yaml"
+        self._config_format = "yaml"
+        self._no_loop = False
 
     def parse_args(self, client):
         pass
@@ -63,8 +58,14 @@ class ClientArguments(object):
 class CommandLineClientArguments(ClientArguments):
 
     def __init__(self, client, parser=None):
-        ClientArguments.__init__(self, client)
+        self.args = None
+        self._bot_root = None
+        self._logging = None
+        self._config_name = None
+        self._config_format = None
+        self._no_loop = False
 
+        ClientArguments.__init__(self, client)
         if parser is None:
             self.parser = argparse.ArgumentParser(description=client.get_description())
         else:
@@ -78,12 +79,9 @@ class CommandLineClientArguments(ClientArguments):
 
     def parse_args(self, client):
         self.args = self.parser.parse_args()
-
         self._bot_root = self.args.bot_root
         self._logging = self.args.logging
         self._config_name = self.args.config
         self._config_format = self.args.cformat
         self._no_loop = self.args.noloop
         client.parse_args(self, self.args)
-
-

@@ -14,5 +14,4 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
             logging.info("Default OOB Processing....")
         if self._xml is not None:
             return ""
-        else:
-            return ""
+        return ""

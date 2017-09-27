@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -47,8 +48,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
             return self.xml_data.find(section_name)
-        else:
-            return parent_section.find(section_name)
+        return parent_section.find(section_name)
 
     def get_keys(self, section):
         keys = []
@@ -63,16 +63,14 @@ class XMLConfigurationFile(BaseConfigurationFile):
             for child in found:
                 keys.append(child.tag)
             return keys
-        else:
-            return None
+        return None
 
     def get_option(self, section, option_name, missing_value=None):
         child = section.find(option_name)
         if child is not None:
             if not child._children:
                 return self._infer_type_from_string(child.text)
-            else:
-                return child
+            return child
         else:
             if missing_value is not None:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
@@ -84,8 +82,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return True
         elif text == 'False' or text == 'false':
             return False
-        else:
-            return text
+        return text
 
     def get_bool_option(self, section, option_name, missing_value=False):
         child = section.find(option_name)
@@ -105,7 +102,9 @@ class XMLConfigurationFile(BaseConfigurationFile):
                 logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=[]):
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+        if missing_value is None:
+            missing_value = []
         value = self.get_option(section, option_name, missing_value)
         if isinstance(value, list):
             if not value:

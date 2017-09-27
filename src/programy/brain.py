@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -153,21 +154,21 @@ class Brain(object):
         try:
             start = datetime.datetime.now()
             gc.disable()
-            f = open(brain_configuration.binaries.binary_filename, "rb")
-            self._aiml_parser = pickle.load(f)
+            bin_file = open(brain_configuration.binaries.binary_filename, "rb")
+            self._aiml_parser = pickle.load(bin_file)
             gc.enable()
-            f.close()
+            bin_file.close()
             stop = datetime.datetime.now()
             diff = stop - start
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Brain load took a total of %.2f sec", diff.total_seconds())
-            load_aiml = False
-        except Exception as e:
-            logging.exception(e)
+            return False   # Tell caller, load succeeded and skip aiml load
+        except Exception as excep:
+            logging.exception(excep)
             if brain_configuration.binaries.load_aiml_on_binary_fail is True:
-                load_aiml = True
+                return True   # Tell caller, load failed and to load aiml directly
             else:
-                raise e
+                raise excep
 
     def load_aiml(self, brain_configuration):
         if logging.getLogger().isEnabledFor(logging.INFO):
@@ -178,9 +179,9 @@ class Brain(object):
         if logging.getLogger().isEnabledFor(logging.INFO):
             logging.info("Saving binary brain to [%s]", brain_configuration.binaries.binary_filename)
         start = datetime.datetime.now()
-        f = open(brain_configuration.binaries.binary_filename, "wb")
-        pickle.dump(self._aiml_parser, f)
-        f.close()
+        bin_file = open(brain_configuration.binaries.binary_filename, "wb")
+        pickle.dump(self._aiml_parser, bin_file)
+        bin_file.close()
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO):
@@ -188,10 +189,12 @@ class Brain(object):
 
     def load(self, brain_configuration: BrainConfiguration):
 
+        load_aiml = True
         if brain_configuration.binaries.load_binary is True:
-            self.load_binary(brain_configuration)
+            load_aiml = self.load_binary(brain_configuration)
 
-        self.load_aiml(brain_configuration)
+        if load_aiml is True:
+            self.load_aiml(brain_configuration)
 
         if brain_configuration.binaries.save_binary is True:
             self.save_binary(brain_configuration)
@@ -403,7 +406,7 @@ class Brain(object):
 
     def load_regex_templates(self, brain_configuration):
         if brain_configuration.files.regex_templates is not None:
-            collection = PropertiesCollection ()
+            collection = PropertiesCollection()
             total = collection.load_from_filename(brain_configuration.files.regex_templates)
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Loaded a total of %d regex templates", total)
@@ -420,20 +423,19 @@ class Brain(object):
     def regex_template(self, name):
         if name in self._regex_templates:
             return self._regex_templates[name]
-        else:
-            return None
+        return None
 
     def strip_oob(self, response):
-        m = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
-        g = m.match(response)
-        if g is not None:
-            front =  g.group(1).strip()
-            back = g.group(3).strip()
+        match = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
+        groupings = match.match(response)
+        if groupings is not None:
+            front = groupings.group(1).strip()
+            back = groupings.group(3).strip()
             response = ""
             if front != "":
                 response = front + " "
             response += back
-            oob = g.group(2)
+            oob = groupings.group(2)
             return response, oob
         return response, None
 
@@ -446,8 +448,7 @@ class Brain(object):
                 if child.tag in self._oob:
                     oob_class = self._oob[child.tag]
                     return oob_class.process_out_of_bounds(bot, clientid, child)
-                else:
-                    return self._default_oob.process_out_of_bounds(bot, clientid, child)
+                return self._default_oob.process_out_of_bounds(bot, clientid, child)
 
         return ""
 
@@ -517,4 +518,3 @@ class Brain(object):
             return response
 
         return None
-

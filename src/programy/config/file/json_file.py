@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -55,8 +56,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
     def get_child_section_keys(self, child_section_name, parent_section):
         if child_section_name in parent_section:
             return parent_section[child_section_name].keys()
-        else:
-            return None
+        return None
 
     def get_option(self, section, option_name, missing_value=None):
         if option_name in section:
@@ -82,7 +82,9 @@ class JSONConfigurationFile(BaseConfigurationFile):
                 logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=[]):
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+        if missing_value is None:
+            missing_value = []
         value = self. get_option(section, option_name, missing_value)
         if isinstance(value, list):
             values = value

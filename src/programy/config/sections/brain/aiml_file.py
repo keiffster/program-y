@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -42,7 +43,7 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
         files_config = file_config.get_option(brain_config, self.section_name)
         if files_config is not None:
             files = file_config.get_multi_file_option(files_config, "files", bot_root)
-            if files is not None and len(files) > 0:
+            if files is not None and files:
                 self._files = files
                 self._extension = file_config.get_option(files_config, "extension")
                 self._directories = file_config.get_option(files_config, "directories")
@@ -64,4 +65,3 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
-

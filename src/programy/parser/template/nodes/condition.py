@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -17,7 +18,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
@@ -72,11 +72,9 @@ class TemplateConditionListItemNode(TemplateNode):
     def to_string(self):
         if self.name is not None:
             return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value.to_string())
-        else:
-            if self.value is not None:
-                return "[CONDITIONLIST(%s)]" % (self.value.to_string())
-            else:
-                return "[CONDITIONLIST]"
+        if self.value is not None:
+            return "[CONDITIONLIST(%s)]" % (self.value.to_string())
+        return "[CONDITIONLIST]"
 
     def to_xml(self, bot, clientid):
         xml = '<li'
@@ -157,7 +155,7 @@ class TemplateConditionNode(TemplateNode):
     # CONDITION_EXPRESSION ::== <condition( CONDITION_ATTRIBUTES)>(CONDITION_ITEM_EXPRESSION)*</condition>
     #
 
-    def parse_condition_attributes(expression):
+    def parse_condition_attributes(self, expression):
         name = None
         value = None
 
@@ -186,9 +184,8 @@ class TemplateConditionNode(TemplateNode):
                 if len(names) == 1:
                     name_text = self.get_text_from_element(condition.find('name'))
                     return name_text, False
-                else:
-                    var_text = self.get_text_from_element(condition.find('var'))
-                    return var_text, True
+                var_text = self.get_text_from_element(condition.find('var'))
+                return var_text, True
 
     def get_condition_value(self, graph, condition):
         if 'value' in condition.attrib:
@@ -201,10 +198,9 @@ class TemplateConditionNode(TemplateNode):
                 return None
             elif len(values) > 1:
                 raise ParserException("Error, element has multiple value elements", xml_element=condition)
-            else:
-                value_node = graph.get_base_node()
-                value_node.parse_template_node(graph, values[0])
-                return value_node
+            value_node = graph.get_base_node()
+            value_node.parse_template_node(graph, values[0])
+            return value_node
 
     # Type 1
     # <condition name="property" value="v">X</condition>,
@@ -428,8 +424,7 @@ class TemplateConditionNode(TemplateNode):
             return self.resolve_type2_condition(bot, clientid)
         elif self._type == 3:
             return self.resolve_type3_condition(bot, clientid)
-        else:
-            return None
+        return None
 
     def resolve_type1_condition(self, bot, clientid):
         try:
@@ -519,6 +514,3 @@ class TemplateConditionNode(TemplateNode):
         except Exception as excep:
             logging.exception(excep)
             return ""
-
-
-

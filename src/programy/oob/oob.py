@@ -19,7 +19,4 @@ class OutOfBandProcessor(object):
     def process_out_of_bounds(self, bot, clientid, oob: ET.Element):
         if self.parse_oob_xml(oob) is True:
             return self.execute_oob_command(bot, clientid)
-        else:
-            return ""
-
-
+        return ""

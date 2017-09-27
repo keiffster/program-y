@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -15,8 +16,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-from programy.dialog import Sentence
 import datetime
+
 
 class Match(object):
 
@@ -57,11 +58,11 @@ class Match(object):
             return "Topic"
         elif type == Match.THAT:
             return "That"
-        else:
-            return "Unknown"
+        return "Unknown"
 
     def to_string(self):
-        return "Match=(%s) Node=(%s) Matched=(%s)"%(Match.type_to_string(self._match_type), self._matched_node.to_string(verbose=False), self.joined_words())
+        return "Match=(%s) Node=(%s) Matched=(%s)"%(Match.type_to_string(self._match_type),
+                                                    self._matched_node.to_string(verbose=False), self.joined_words())
 
 
 class MatchContext(object):
@@ -80,8 +81,7 @@ class MatchContext(object):
     def search_depth_exceeded(self, depth):
         if self._max_search_depth == -1:
             return False
-        else:
-            return bool(depth > self._max_search_depth)
+        return bool(depth > self._max_search_depth)
 
     @property
     def max_search_timeout(self):
@@ -94,14 +94,13 @@ class MatchContext(object):
     def search_time_exceeded(self):
         if self._max_search_timeout == -1:
             return False
-        else:
-            return bool(self.total_search_time() >= self._max_search_timeout)
+        return bool(self.total_search_time() >= self._max_search_timeout)
 
     def add_match(self, match):
         self._matched_nodes.append(match)
 
     def pop_match(self):
-        if len(self._matched_nodes) > 0:
+        if self._matched_nodes:
             self._matched_nodes.pop()
 
     def pop_matches(self, matches_add):
@@ -119,33 +118,30 @@ class MatchContext(object):
         return self._template_node
 
     def matched(self):
-        if self._template_node is not None:
-            return True
-        else:
-            return False
+        return bool(self._template_node is not None)
 
     def _get_indexed_match_by_type(self, index, type):
         count = 1
         for match in self._matched_nodes:
             if match._match_type == type and \
-                ( match._matched_node.is_wildcard() or
-                  match._matched_node.is_set() or
-                  match._matched_node.is_iset() or
-                  match._matched_node.is_bot() or
-                  match._matched_node.is_regex()):
+                    (match._matched_node.is_wildcard() or
+                     match._matched_node.is_set() or
+                     match._matched_node.is_iset() or
+                     match._matched_node.is_bot() or
+                     match._matched_node.is_regex()):
                 if count == index:
                     return match.joined_words()
                 count += 1
         return None
 
     def star(self, index):
-        return self._get_indexed_match_by_type(index,  Match.WORD)
+        return self._get_indexed_match_by_type(index, Match.WORD)
 
     def topicstar(self, index):
-        return self._get_indexed_match_by_type(index,  Match.TOPIC)
+        return self._get_indexed_match_by_type(index, Match.TOPIC)
 
     def thatstar(self, index):
-        return self._get_indexed_match_by_type(index,  Match.THAT)
+        return self._get_indexed_match_by_type(index, Match.THAT)
 
     def list_matches(self, output_func=logging.debug, tabs="\t", include_template=True):
         output_func("%sMatches..."%tabs)

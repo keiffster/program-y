@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,7 +21,6 @@ from random import randint
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
-from programy.parser.template.factory import TemplateNodeFactory
 from programy.utils.text.text import TextUtils
 
 
@@ -73,4 +73,3 @@ class TemplateRandomNode(TemplateNode):
 
         if li_found is False:
             raise ParserException("Error, no li children of random element!", xml_element=expression)
-

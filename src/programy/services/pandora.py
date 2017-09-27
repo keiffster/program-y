@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,6 +20,7 @@ from xml.etree import ElementTree
 from programy.services.service import Service
 from programy.config.sections.brain.service import BrainServiceConfiguration
 from programy.services.requestsapi import RequestsAPI
+
 
 class PandoraAPI(object):
 
@@ -43,6 +45,7 @@ class PandoraAPI(object):
 
         return that.text
 
+
 class PandoraService(Service):
 
     def __init__(self, config: BrainServiceConfiguration, api=None):
@@ -58,7 +61,7 @@ class PandoraService(Service):
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
-            if bot.license_keys.has_key('PANDORA_BOTID') is True:
+            if bot.license_keys.has_key('PANDORA_BOTID'):
                 botid = bot.license_keys.get_key('PANDORA_BOTID')
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
@@ -71,4 +74,3 @@ class PandoraService(Service):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error(str(excep))
             return ""
-

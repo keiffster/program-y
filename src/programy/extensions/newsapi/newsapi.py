@@ -66,7 +66,7 @@ class NewsAPIExtension(Extension):
                     sort = False
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Invalid value for NewAPI Data parameter sort [%s]",splits[count])
+                        logging.error("Invalid value for NewAPI Data parameter sort [%s]", splits[count])
                     sort = False
             elif splits[count] == "REVERSE":
                 count += 1
@@ -76,11 +76,11 @@ class NewsAPIExtension(Extension):
                     reverse = False
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Invalid value for NewAPI Data parameter reverse [%s]",splits[count])
+                        logging.error("Invalid value for NewAPI Data parameter reverse [%s]", splits[count])
                     reverse = False
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Unknown News API Command [%s]",splits[count])
+                    logging.error("Unknown News API Command [%s]", splits[count])
 
             count += 1
 
@@ -97,4 +97,3 @@ class NewsAPIExtension(Extension):
             return ""
 
         return self.get_news(bot, clientid, source, max, sort, reverse)
-

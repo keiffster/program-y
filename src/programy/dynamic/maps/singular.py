@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,30 +19,31 @@ import logging
 
 from programy.dynamic.maps.map import DynamicMap
 
+
 class SingularMap(DynamicMap):
 
     NAME = "SINGULAR"
-    STATICS = {"MICE": "MOUSE"
-              }
+    STATICS = {"MICE": "MOUSE"}
 
     def __init__(self, config):
         DynamicMap.__init__(self, config)
 
-    def static_map(self, value):
+    @staticmethod
+    def static_map(value):
         if value in SingularMap.STATICS:
             return SingularMap.STATICS[value]
         return None
 
-    def map_value(self, bot, clientid, value):
-        singular_value = self.static_map(value)
+    def map_value(self, bot, clientid, input_value):
+        singular_value = SingularMap.static_map(input_value)
         if singular_value is None:
-            if value.endswith('IES'):
-                singular_value = value[:-3] + "Y"
-            elif value.endswith('S'):
-                singular_value = value[:-1]
+            if input_value.endswith('IES'):
+                singular_value = input_value[:-3] + "Y"
+            elif input_value.endswith('S'):
+                singular_value = input_value[:-1]
             else:
-                singular_value = value
+                singular_value = input_value
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("SingleMap converted %s to %s", value, singular_value)
+            logging.debug("SingleMap converted %s to %s", input_value, singular_value)
         return singular_value

@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -14,14 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import logging
+from abc import ABCMeta, abstractmethod
 
 from programy.clients.client import BotClient
 from programy.config.sections.client.rest import RestConfiguration
 
 class RestBotClient(BotClient):
+    __metaclass__ = ABCMeta
 
-    def __init__(self, argument_parser=None):
-        BotClient.__init__(self, argument_parser)
+    def __init__(self, clientid, argument_parser=None):
+        BotClient.__init__(self, clientid, argument_parser)
         self.api_keys = []
 
     def set_environment(self):
@@ -38,6 +41,18 @@ class RestBotClient(BotClient):
 
     def initialise(self):
         self.load_api_keys()
+
+    @abstractmethod
+    def get_api_key(self, rest_request):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_question(self, rest_request):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_sessionid(self, rest_request):
+        raise NotImplementedError()
 
     def is_apikey_valid(self, apikey):
         return bool(apikey in self.api_keys)
@@ -63,17 +78,10 @@ class RestBotClient(BotClient):
         return self.bot.ask_question(sessionid, question)
 
     def format_success_response(self, sessionid, question, answer):
-        return {"question": question,
-                "answer": answer,
-                "sessionid": sessionid
-                }
+        return {"question": question, "answer": answer, "sessionid": sessionid}
 
     def format_error_response(self, sessionid, question, error):
-        return {"question": question,
-                "answer": self.bot.default_response,
-                "sessionid": sessionid,
-                "error": error
-                }
+        return {"question": question, "answer": self.bot.default_response, "sessionid": sessionid, "error": error}
 
     def process_response(self, sessionid, question, answer):
         if answer is None:
@@ -102,5 +110,3 @@ class RestBotClient(BotClient):
         except Exception as excep:
 
             return self.format_error_response(sessionid, question, str(excep)), 500
-
-

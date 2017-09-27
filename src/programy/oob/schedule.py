@@ -24,7 +24,7 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
                     self._description = child.text
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error ("Unknown child element [%s] in schedule oob", child.tag)
+                        logging.error("Unknown child element [%s] in schedule oob", child.tag)
 
             if self._title is not None and \
                 self._description is not None:

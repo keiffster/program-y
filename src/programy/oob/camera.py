@@ -1,7 +1,6 @@
 import logging
 
 from programy.oob.oob import OutOfBandProcessor
-import xml.etree.ElementTree as ET
 
 """
 <oob>

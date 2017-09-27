@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -62,14 +63,14 @@ class XmppClient(sleekxmpp.ClientXMPP):
                     logging.debug("Missing 'userid' from XMPP message")
                 return
 
-            response =  self.bot_client.bot.ask_question(userid, question)
+            response = self.bot_client.bot.ask_question(userid, question)
             self.send_response(msg, response)
 
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.debug("Invalid XMPP message")
 
-    def register_plugins(self, configuration):
+    def register_xep_plugins(self, configuration):
         if configuration.client_configuration.xep_0030 is True:
             self.register_plugin('xep_0030')
 
@@ -84,7 +85,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
 
     def run(self, server, port, block=True):
         if self.connect((server, port)):
-            print("Connected, running as [%s]..."%self.requested_jid )
+            print("Connected, running as [%s]..."%self.requested_jid)
             self.process(block=block)
         else:
             print("Failed to connect, exiting...")
@@ -92,12 +93,12 @@ class XmppClient(sleekxmpp.ClientXMPP):
 class XmppBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        self.clientid = "xmpp"
-        BotClient.__init__(self, argument_parser)
+        self._xmpp_client = None
+        BotClient.__init__(self, "XMPP", argument_parser)
 
-    def set_environment(self, env='xmpp'):
-        self.bot.brain.properties.add_property("env", env)
-        
+    def set_environment(self):
+        self.bot.brain.properties.add_property("env", 'xmpp')
+
     def get_client_configuration(self):
         return XmppConfiguration()
 
@@ -121,9 +122,9 @@ class XmppBotClient(BotClient):
         username, password = self.get_username_password(self.bot.license_keys)
         server, port = self.get_server_port(self.configuration)
 
-        self._client = self.create_client(username, password)
-        self._client.register_plugins(self.configuration)
-        self._client.run(server, port, block=True)
+        self._xmpp_client = self.create_client(username, password)
+        self._xmpp_client.register_xep_plugins(self.configuration)
+        self._xmpp_client.run(server, port, block=True)
 
 if __name__ == '__main__':
 

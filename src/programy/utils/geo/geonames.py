@@ -86,4 +86,3 @@ class GeoNamesApi(object):
             raise Exception("Invalid/Unknown post code")
 
         return LatLong(data['postalCodes'][0]['lat'], data['postalCodes'][0]['lng'])
-

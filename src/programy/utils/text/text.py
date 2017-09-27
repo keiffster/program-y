@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,18 +20,18 @@ import os
 
 class TextUtils:
 
-    DEFAULT_TAB_SPACE       = "  "
+    DEFAULT_TAB_SPACE = "  "
 
-    STRIP_ALL_WHITESPACE    = '[\s+]'
-    STRIP_WHITESPACE        = '[\n\t\r+]'
-    STRIP_ALL_PUNCTUATION   = r'[:\'";,.?!\(\)\-"]'
+    STRIP_ALL_WHITESPACE = r'[\s+]'
+    STRIP_WHITESPACE = r'[\n\t\r+]'
+    STRIP_ALL_PUNCTUATION = r'[:\'";,.?!\(\)\-"]'
 
     HTML_ESCAPE_TABLE = {
-    "&": "&amp;",
-    '"': "&quot;",
-    "'": "&apos;",
-    ">": "&gt;",
-    "<": "&lt;",
+        "&": "&amp;",
+        '"': "&quot;",
+        "'": "&apos;",
+        ">": "&gt;",
+        "<": "&lt;",
     }
 
     @staticmethod
@@ -66,8 +67,7 @@ class TextUtils:
     def replace_path_seperator(path, old="/", new=os.sep):
         if old in path:
             return path.replace(old, new)
-        else:
-            return path
+        return path
 
     @staticmethod
     def tag_and_namespace_from_text(text):
@@ -85,8 +85,7 @@ class TextUtils:
             namespace = g.group(1).strip()
             tag_name = g.group(2).strip()
             return tag_name, namespace
-        else:
-            return None, None
+        return None, None
 
     @staticmethod
     def tag_from_text(text):
@@ -96,4 +95,3 @@ class TextUtils:
     @staticmethod
     def html_escape(text):
         return "".join(TextUtils.HTML_ESCAPE_TABLE.get(c, c) for c in text)
-

@@ -11,7 +11,7 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_init(self):
         arguments = MockArgumentParser()
-        client = RestBotClient(arguments)
+        client = RestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), RestConfiguration)
@@ -25,7 +25,7 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_api_keys(self):
         arguments = MockArgumentParser()
-        client = RestBotClient(arguments)
+        client = RestBotClient("testrest", arguments)
         self.assertIsNotNone(client)
 
         client.configuration.client_configuration._use_api_keys = True

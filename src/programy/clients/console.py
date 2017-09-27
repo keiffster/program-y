@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -19,12 +20,12 @@ import logging
 from programy.clients.client import BotClient
 from programy.config.sections.client.console import ConsoleConfiguration
 
+
 class ConsoleBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        self.clientid = "Console"
         self.running = True
-        BotClient.__init__(self, argument_parser)
+        BotClient.__init__(self, "Console", argument_parser)
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Console")
@@ -32,19 +33,20 @@ class ConsoleBotClient(BotClient):
     def get_client_configuration(self):
         return ConsoleConfiguration()
 
-    def add_client_arguments(self, parser):
+    def add_client_arguments(self, parser=None):
         return
 
     def parse_args(self, arguments, parsed_args):
         return
 
     def get_question(self, input_func=input):
-        ask = "%s "%self.bot.prompt
+        ask = "%s " % self.bot.prompt
         return input_func(ask)
 
     def display_startup_messages(self):
         self.display_response(self.bot.get_version_string)
-        self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid, self.bot.get_initial_question(self.clientid)))
+        self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid,
+                                                                   self.bot.get_initial_question(self.clientid)))
 
     def display_unknown_response(self, question):
         self.display_response(self.bot.default_response)
@@ -79,7 +81,7 @@ class ConsoleBotClient(BotClient):
 
             while self.running is True:
                 try:
-                    question = self.process_question_answer()
+                    self.process_question_answer()
                 except KeyboardInterrupt:
                     self.running = False
                     self.display_response(self.bot.get_exit_response(self.clientid))

@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,7 +36,7 @@ class BaseCollection(object):
 
     def process_line(self, line):
         line = line.strip()
-        if line is not None and len(line) > 0:
+        if line is not None and line:
             if line.startswith("#") is False:
                 splits = self.split_line(line)
                 return self.process_splits(splits)
@@ -109,8 +110,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         splits = self.split_line_by_char(line)
         if len(splits) > 2:
             return [splits[0], self.get_split_char().join(splits[1:])]
-        else:
-            return splits
+        return splits
 
     def split_line_by_char(self, line):
         splits = line.split(self.get_split_char())
@@ -147,7 +147,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
 
     def split_line_by_pattern(self, line):
         line = line.strip()
-        if line is not None and len(line) > 0:
+        if line is not None and line:
             pattern = re.compile(self.get_split_pattern())
             match = pattern.search(line)
             lhs = match.group(1)
@@ -213,8 +213,7 @@ class TripleStringCollection(BaseCollection):
         splits = self.split_line_by_char(line)
         if len(splits) > 3:
             return [splits[0], splits[1], self.get_split_char().join(splits[2:])]
-        else:
-            return splits
+        return splits
 
     def get_split_char(self):
         return ":"

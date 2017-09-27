@@ -40,9 +40,9 @@ class MockXmppClient(XmppClient):
     def add_event_handler(self, name, pointer):
         self.event_handlers.append(name)
 
-    def register_plugins(self, configuration):
+    def register_xep_plugins(self, configuration):
         self.registered = True
-        super(MockXmppClient, self).register_plugins(configuration)
+        super(MockXmppClient, self).register_xep_plugins(configuration)
 
     def run(self, server, port, block=True):
         self.server_url = server
@@ -114,7 +114,7 @@ class XmppClientTests(unittest.TestCase):
         bot_client.configuration.client_configuration._xep_0060 = True
         bot_client.configuration.client_configuration._xep_0199 = True
 
-        xmpp_client.register_plugins(bot_client.configuration)
+        xmpp_client.register_xep_plugins(bot_client.configuration)
 
         self.assertTrue(bool("xep_0030" in xmpp_client.registered_plugins))
         self.assertTrue(bool("xep_0004" in xmpp_client.registered_plugins))

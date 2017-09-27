@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -14,11 +15,11 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.utils.parsing.linenumxml import LineNumberingParser
-import xml.etree.ElementTree as ET
 import logging
 import datetime
 import re
+from programy.utils.parsing.linenumxml import LineNumberingParser
+import xml.etree.ElementTree as ET
 
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.config.sections.brain.brain import BrainConfiguration
@@ -36,8 +37,8 @@ class AIMLLoader(FileFinder):
     def load_file_contents(self, filename):
         try:
             return self.aiml_parser.parse_from_file(filename)
-        except Exception as e:
-            logging.exception("Failed to load contents of file from [%s]", filename, e)
+        except Exception as excep:
+            logging.exception("Failed to load contents of file from [%s]", filename, excep)
 
 class AIMLParser(object):
 
@@ -69,8 +70,8 @@ class AIMLParser(object):
                 with open(brain_configuration.files.aiml_files.errors, "w+") as errors_file:
                     for error in self._errors:
                         errors_file.write(error)
-            except Exception as e:
-                logging.Exception(e)
+            except Exception as excep:
+                logging.exception(excep)
 
         if brain_configuration.files.aiml_files.duplicates is not None:
             if logging.getLogger().isEnabledFor(logging.INFO):
@@ -79,8 +80,8 @@ class AIMLParser(object):
                 with open(brain_configuration.files.aiml_files.duplicates, "w+") as duplicates_file:
                     for duplicate in self._duplicates:
                         duplicates_file.write(duplicate)
-            except Exception as e:
-                logging.Exception(e)
+            except Exception as excep:
+                logging.exception(excep)
 
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:
@@ -157,8 +158,7 @@ class AIMLParser(object):
             namespace = g.group(1).strip()
             tag_name = g.group(2).strip()
             return tag_name, namespace
-        else:
-            return None, None
+        return None, None
 
     def tag_from_text(self, text):
         tag, _ = self.tag_and_namespace_from_text(text)
@@ -166,14 +166,14 @@ class AIMLParser(object):
 
     def check_aiml_tag(self, aiml, filename=None):
         # Null check just to be sure
-        if aiml is None :
+        if aiml is None:
             raise ParserException("Error, null root tag", filename=filename)
 
         tag_name, namespace = self.tag_and_namespace_from_text(aiml.tag)
 
         # Then if check is just <aiml>, thats OK
         if tag_name != 'aiml':
-                raise ParserException("Error, root tag is not <aiml>", filename=filename)
+            raise ParserException("Error, root tag is not <aiml>", filename=filename)
 
         return tag_name, namespace
 
@@ -199,10 +199,10 @@ class AIMLParser(object):
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
 
-        except Exception as e:
-            logging.exception(e)
+        except Exception as excep:
+            logging.exception(excep)
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load contents of AIML file from [%s] - [%s]", filename, e)
+                logging.error("Failed to load contents of AIML file from [%s] - [%s]", filename, excep)
 
 
     def parse_from_text(self, text):
@@ -356,14 +356,13 @@ class AIMLParser(object):
         if namespace is not None:
             search = '%s%s'%(namespace, name)
             return element.findall(search)
-        else:
-            return element.findall(name)
+        return element.findall(name)
 
     def find_topic(self, category_xml, namespace, topic_element=None):
         topics = self.find_all(category_xml, "topic", namespace)
 
         if topic_element is not None:
-            if len(topics) > 0:
+            if topics:
                 raise ParserException("Error, topic exists in category AND as parent node", xml_element=category_xml)
 
         else:

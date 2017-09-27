@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,7 +19,7 @@ import logging
 
 class Sentence(object):
 
-    def __init__(self, text: str=None, split_chars: str=" "):
+    def __init__(self, text: str = None, split_chars: str = " "):
         self._words = self._split_into_words(text, split_chars)
         self._response = None
         self._matched_context = None
@@ -31,7 +32,7 @@ class Sentence(object):
         self._words.append(word)
 
     def append_sentence(self, sentence):
-        for word in sentence._words:
+        for word in sentence.words:
             self._words.append(word)
 
     def replace_words(self, text):
@@ -59,15 +60,12 @@ class Sentence(object):
     def word(self, num: int):
         if num < self.num_words():
             return self.words[num]
-        else:
-            return None
+        return None
 
     def words_from_current_pos(self, current_pos: int):
-        if len(self._words) > 0:
+        if self._words:
             return " ".join(self._words[current_pos:])
-        else:
-            # return ""
-            raise Exception("Num word array violation !")
+        raise Exception("Num word array violation !")
 
     def text(self):
         return " ".join(self._words)
@@ -79,20 +77,18 @@ class Sentence(object):
             sentence = sentence.strip()
             if not sentence:
                 return []
-            else:
-                return sentence.split(split_chars)
+            return sentence.split(split_chars)
 
 
 class Question(object):
 
     @staticmethod
-    def create_from_text(text: str, sentence_split_chars: str=".", word_split_chars: str=" ", split=True):
+    def create_from_text(text: str, sentence_split_chars: str = ".", word_split_chars: str = " ", split=True):
         question = Question()
         if split is True:
-            question._split_into_sentences(text, sentence_split_chars, word_split_chars)
+            question.split_into_sentences(text, sentence_split_chars, word_split_chars)
         else:
-            question._sentences = []
-            question._sentences.append(Sentence(text))
+            question.sentences.append(Sentence(text))
         return question
 
     @staticmethod
@@ -126,28 +122,23 @@ class Question(object):
     def property(self, name: str):
         if name in self._properties:
             return self._properties[name]
-        else:
-            return None
+        return None
 
     def sentence(self, num: int):
         if num < len(self._sentences):
             return self._sentences[num]
-        else:
-            raise Exception("Num sentence array violation !")
+        raise Exception("Num sentence array violation !")
 
     def current_sentence(self):
         if not self._sentences:
             raise Exception("Num sentence array violation !")
-        else:
-            return self._sentences[self._current_sentence_no]
-            #return self._sentences[-1]
+        return self._sentences[self._current_sentence_no]
 
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
             raise Exception("Num sentence array violation !")
-        else:
-            previous = -1 - num
-            return self._sentences[previous]
+        previous = -1 - num
+        return self._sentences[previous]
 
     def combine_sentences(self):
         return ". ".join([sentence.text() for sentence in self._sentences])
@@ -155,8 +146,8 @@ class Question(object):
     def combine_answers(self):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
-    def _split_into_sentences(self, text: str, sentence_split_chars: str, word_split_chars: str):
-        if text is not None and len(text.strip()) > 0:
+    def split_into_sentences(self, text: str, sentence_split_chars: str, word_split_chars: str):
+        if text is not None and text.strip():
             self._sentences = []
             all_sentences = text.split(sentence_split_chars)
             for each_sentence in all_sentences:
@@ -187,20 +178,18 @@ class Conversation(object):
         return self._questions
 
     def has_current_question(self):
-        return bool(len(self._questions) > 0)
+        return bool(self._questions)
 
     def current_question(self):
-        if len(self._questions) > 0:
+        if self._questions:
             return self._questions[-1]
-        else:
-            raise Exception("Invalid question index")
+        raise Exception("Invalid question index")
 
     def previous_nth_question(self, num: int):
         if len(self._questions) < num:
             raise Exception("Num question array violation !")
-        else:
-            previous = -1 - num
-            return self._questions[previous]
+        previous = -1 - num
+        return self._questions[previous]
 
     def set_property(self, name: str, value: str):
         if name == 'topic':
@@ -213,7 +202,6 @@ class Conversation(object):
         if self._properties is not None:
             if name in self._properties:
                 return self._properties[name]
-
         return None
 
     def record_dialog(self, question: Question):
@@ -224,5 +212,5 @@ class Conversation(object):
         self._questions.append(question)
 
     def pop_dialog(self):
-        if len(self._questions) > 0:
+        if self._questions:
             self._questions.pop()

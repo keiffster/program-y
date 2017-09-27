@@ -9,13 +9,14 @@ from programy.config.sections.client.console import ConsoleConfiguration
 class TestQuestion(object):
 
     def __init__(self, question, answers, topic=None, that=None):
+        self._category = None
         self._question = question
         self._answers = answers
         self._answers_regex = []
         self._topic = topic
         self._that = that
         for answer in answers:
-            if answer is not None and len(answer) > 0:
+            if answer is not None and answer:
                 if answer[0] == "!":
                     self._answers_regex.append(("-", re.compile(answer)))
                 else:
@@ -68,10 +69,10 @@ class TestFileFileFinder(FileFinder):
         FileFinder.__init__(self)
 
     def empty_row(self, row):
-        return bool(len(row)<2)
+        return bool(len(row) < 2)
 
     def is_comment(self, question):
-        return bool(question[0]=='#')
+        return bool(question[0] == '#')
 
     def is_template(self, question):
         return bool(question[0] == '$')
@@ -112,7 +113,7 @@ class TestFileFileFinder(FileFinder):
                             topic = None
                             for answer in row[1:]:
                                 answer = answer.strip()
-                                if len(answer) > 0:
+                                if answer:
                                     if self.is_template(answer) is True:
                                         self.add_template_answers(templates, answer, answers)
                                     else:
@@ -131,8 +132,7 @@ class TestFileFileFinder(FileFinder):
 class TestRunnerBotClient(BotClient):
 
     def __init__(self):
-        BotClient.__init__(self)
-        self.clientid = "TestRunner"
+        BotClient.__init__(self, "TestRunner")
 
     @property
     def test_dir(self):
@@ -149,10 +149,11 @@ class TestRunnerBotClient(BotClient):
     def get_description(self):
         return 'ProgramY Test Runner Client'
 
-    def add_client_arguments(self, parser):
-        parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
-        parser.add_argument('--test_file', dest='test_file', help='Single file ot aiml_tests to run against grammar')
-        parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
+    def add_client_arguments(self, parser=None):
+        if parser is not None:
+            parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
+            parser.add_argument('--test_file', dest='test_file', help='Single file ot aiml_tests to run against grammar')
+            parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "TestRunner")
@@ -199,13 +200,13 @@ class TestRunnerBotClient(BotClient):
                         break
                 else:
                     for expected_regex in test.answers_regex:
-                        type = expected_regex[0]
+                        regex_type = expected_regex[0]
                         expression = expected_regex[1]
                         match = expression.search(response)
-                        if match is not None and type == "+":
+                        if match is not None and regex_type == "+":
                             success = True
                             break
-                        elif match is None and type == "-":
+                        elif match is None and regex_type == "-":
                             success = True
                             break
 
@@ -235,4 +236,3 @@ if __name__ == '__main__':
         console_app.run()
 
     run()
-

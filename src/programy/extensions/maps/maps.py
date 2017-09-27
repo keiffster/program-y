@@ -25,7 +25,7 @@ class GoogleMapsExtension(Extension):
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("GoogleMaps [%s]",data)
+            logging.debug("GoogleMaps [%s]", data)
 
         splits = data.split(" ")
         command = splits[0]
@@ -62,3 +62,4 @@ class GoogleMapsExtension(Extension):
 
     def _format_directions_for_programy(self, directions):
         return "DIRECTIONS %s"%directions.legs_as_a_string()
+

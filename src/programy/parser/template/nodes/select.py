@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -15,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import pickle
 import json
 
 from programy.parser.template.nodes.base import TemplateNode
@@ -90,7 +90,7 @@ class TemplateSelectNode(TemplateNode):
                 obj = self.parse_children_as_word_node(graph, child)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning ("Unknown tag name [%s] in select query",tag_name)
+                    logging.warning("Unknown tag name [%s] in select query", tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -106,11 +106,10 @@ class TemplateSelectNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         vars = expression.findall('vars')
-
-        if len(vars) > 0:
+        if vars:
             if len(vars) > 1:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning ("Multiple <vars> found in select tag, using first")
+                    logging.warning("Multiple <vars> found in select tag, using first")
             self.parse_vars(vars[0].text)
 
         queries = expression.findall('./')
@@ -119,7 +118,5 @@ class TemplateSelectNode(TemplateNode):
             if tag_name == 'q' or tag_name == 'notq':
                 self.parse_query(graph, tag_name, query)
 
-        if len(self.children) > 0:
+        if self.children:
             raise ParserException("<select> node should not contains child text, use <select><vars></vars><q></q></select> only")
-
-

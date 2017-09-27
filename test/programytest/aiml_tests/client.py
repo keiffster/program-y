@@ -9,7 +9,7 @@ class TestClient(BotClient):
     def __init__(self, debug=False, level=logging.DEBUG):
         if debug is True:
             logging.getLogger().setLevel(level)
-        BotClient.__init__(self)
+        BotClient.__init__(self, "testclient")
 
     def parse_arguments(self, argument_parser):
         client_args = {}

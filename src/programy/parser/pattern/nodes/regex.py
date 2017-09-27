@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -33,7 +34,7 @@ class PatternRegexNode(PatternNode):
             self._pattern_text = attribs['pattern']
         elif 'template' in attribs:
             self._pattern_template = attribs['template']
-        elif len(text) > 0:
+        elif text:
             self._pattern_text = text
         else:
             raise ParserException("Invalid regex node, neither pattern or template specified as attribute or text")
@@ -99,11 +100,8 @@ class PatternRegexNode(PatternNode):
         if verbose is True:
             if self._pattern_template is not None:
                 return "REGEX [%s] template=[%s]" % (self._child_count(verbose), self._pattern_template)
-            else:
-                return "REGEX [%s] pattern=[%s]" % (self._child_count(verbose), self._pattern_text)
-        else:
-            if self._pattern_template is not None:
-                return "REGEX template=[%s]" % self._pattern_template
-            else:
-                return "REGEX pattern=[%s]" % self._pattern_text
+            return "REGEX [%s] pattern=[%s]" % (self._child_count(verbose), self._pattern_text)
 
+        if self._pattern_template is not None:
+            return "REGEX template=[%s]" % self._pattern_template
+        return "REGEX pattern=[%s]" % self._pattern_text

@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -18,6 +19,7 @@ import logging
 
 from programy.dynamic.maps.map import DynamicMap
 
+
 class PredecessorMap(DynamicMap):
 
     NAME = "PREDECESSOR"
@@ -25,14 +27,14 @@ class PredecessorMap(DynamicMap):
     def __init__(self, config):
         DynamicMap.__init__(self, config)
 
-    def map_value(self, bot, clientid, value):
+    def map_value(self, bot, clientid, input_value):
         try:
-            int_value = int(value)
+            int_value = int(input_value)
             str_value = str(int_value - 1)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("PredecessorMap converted %s to %s", value, str_value)
+                logging.debug("PredecessorMap converted %s to %s", input_value, str_value)
             return str_value
-        except:
+        except Exception:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("PredecessorMap could not convert %s to integer string", value)
+                logging.error("PredecessorMap could not convert %s to integer string", input_value)
             return ""

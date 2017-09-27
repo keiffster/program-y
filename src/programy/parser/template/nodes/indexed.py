@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -130,7 +131,8 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                     self._sentence = int(splits[0])
                 except Exception as excep:
                     logging.exception(excep)
-                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'", attrib_value, attrib_name)
+                    raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'",
+                                          attrib_value, attrib_name)
             elif len(splits) == 2:
                 try:
                     self._question = int(splits[0])
@@ -140,7 +142,8 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                         self._sentence = int(splits[1])
                 except Exception as excep:
                     logging.exception(excep)
-                    raise ParserException("None numeric format [%s] for this node [%s], either 'x', 'x,y', or 'x,*'", attrib_value, attrib_name)
+                    raise ParserException("None numeric format [%s] for this node [%s], either 'x', 'x,y', or 'x,*'",
+                                          attrib_value, attrib_name)
 
         if self._sentence == 0:
             raise ParserException("Sentence values are 1 based, cannot be 0")

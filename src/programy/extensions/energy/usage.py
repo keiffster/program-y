@@ -15,20 +15,21 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+import logging
+
+from programy.extensions.base import Extension
+
 """
 This is an example extension that allow you to call an external service to retreive the energy consumption data
 of the customer. Currently contains no authentication
 """
-import logging
-
-from programy.extensions.base import Extension
 
 class EnergyUsageExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Energy Usage - Calling external service for with extra data [%s]",data)
+            logging.debug("Energy Usage - Calling external service for with extra data [%s]", data)
 
         #
         # Add the logic to receive the balance and format it into KWh for Gas and Electricity consumption

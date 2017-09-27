@@ -189,8 +189,10 @@ class GoogleDirections(object):
 
 class GoogleMaps(object):
 
-    DIRECTIONS = "http://maps.googleapis.com/maps/api/directions/json?origin={0}&destination={1}&country={2}&sensor=false&mode={3}"
-    DISTANCE = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}&country={2}&sensor=false&mode={3}&units={4}"
+    DIRECTIONS = "http://maps.googleapis.com/maps/api/directions/json?origin={0}&destination={1}" \
+                 "&country={2}&sensor=false&mode={3}"
+    DISTANCE = "http://maps.googleapis.com/maps/api/distancematrix/json?origins={0}&destinations={1}" \
+               "&country={2}&sensor=false&mode={3}&units={4}"
     GEOCODE = "http://maps.google.com/maps/api/geocode/json?address={0}&sensor=false"
 
     def __init__(self, license_keys):
@@ -238,7 +240,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_latlong_for_location - using mock file")
-            with open (self.response_file_for_get_latlong_for_location, "r+") as response_file:
+            with open(self.response_file_for_get_latlong_for_location, "r+") as response_file:
                 response = json.load(response_file)
 
         geodata = GoogelMapsResult()
@@ -285,7 +287,8 @@ class GoogleMaps(object):
                 logging.error("get_distance_between_addresses - [%s]", response['status'])
             return None
 
-    def store_get_distance_between_addresses_as_file(self, origin, destination, filename, country="UK", mode="driving", units="imperial"):
+    def store_get_distance_between_addresses_as_file(self, origin, destination, filename, country="UK",
+                                                     mode="driving", units="imperial"):
         response = self._get_distance_between_addresses(origin, destination, country, mode, units)
         with open(filename, "w+") as data_file:
             json.dump(response, data_file, sort_keys=True, indent=2)
@@ -325,23 +328,8 @@ class GoogleMaps(object):
                 logging.error("get_directions_between_addresses - %s", response['status'])
             return None
 
-    def store_get_directions_between_addresses_as_file(self, origin, destination, filename, country="UK", mode="driving", units="imperial"):
+    def store_get_directions_between_addresses_as_file(self, origin, destination, filename, country="UK",
+                                                       mode="driving", units="imperial"):
         response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
         with open(filename, "w+") as data_file:
             json.dump(response, data_file, sort_keys=True, indent=2)
-
-
-if __name__ == '__main__':
-
-    # Only to be used to create test data for unit aiml_tests
-    googlemaps = GoogleMaps()
-
-    # Running these tools drops test files into the geocode test folder
-    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", TextUtils.replace_path_seperator("../../../test/utils/geo/google_latlong.json"))
-    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/geo/distance.json"))
-    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/geo/directions.json"))
-
-    googlemaps.store_get_latlong_for_location_to_file("KY3 9UR", TextUtils.replace_path_seperator("../../../test/utils/weather/google_latlong.json"))
-    googlemaps.store_get_distance_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/weather/distance.json"))
-    googlemaps.store_get_directions_between_addresses_as_file("Edinburgh", "Kinghorn", TextUtils.replace_path_seperator("../../../test/utils/weather/directions.json"))
-    # Only to be used to create test data for unit aiml_tests

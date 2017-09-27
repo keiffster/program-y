@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -15,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import pickle
 import json
 
 from programy.parser.template.nodes.base import TemplateNode
@@ -105,11 +105,11 @@ class TemplateGetNode(TemplateNode):
         tuples = self.decode_tuples(bot, raw_tuples)
 
         resolved = ""
-        if len(tuples) > 0:
+        if tuples:
             if len(tuples) == 1:
                 for var in vars:
-                        if tuples[0][0] == var:
-                            resolved += tuples[0][1]
+                    if tuples[0][0] == var:
+                        resolved += tuples[0][1]
             else:
                 space = False
                 for tuple in tuples:
@@ -205,4 +205,3 @@ class TemplateGetNode(TemplateNode):
 
         if name_found is True and var_found is True:
             raise ParserException("Error, get node has both name AND var values", xml_element=expression)
-

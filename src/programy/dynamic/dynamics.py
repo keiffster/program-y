@@ -6,7 +6,8 @@ documentation files (the "Software"), to deal in the Software without restrictio
 the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
 and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
 THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -26,9 +27,9 @@ from programy.dynamic.maps.successor import SuccessorMap
 class DynamicsCollection(object):
 
     def __init__(self):
-        self._dynamic_sets      = {}
-        self._dynamic_maps      = {}
-        self._dynamic_vars      = {}
+        self._dynamic_sets = {}
+        self._dynamic_maps = {}
+        self._dynamic_vars = {}
 
     def load_from_configuration(self, dynamics_configuration):
 
@@ -98,8 +99,7 @@ class DynamicsCollection(object):
         if name in self._dynamic_sets:
             dynamic_set = self._dynamic_sets[name]
             return dynamic_set.is_member(bot, clientid, value)
-        else:
-            return None
+        return None
 
     ###################################################################################################
     # Dynamic Maps
@@ -119,8 +119,7 @@ class DynamicsCollection(object):
         if name in self._dynamic_maps:
             dynamic_map = self._dynamic_maps[name]
             return dynamic_map.map_value(bot, clientid, value)
-        else:
-            return None
+        return None
 
     ###################################################################################################
     # Dynamic Vars
@@ -140,6 +139,4 @@ class DynamicsCollection(object):
         if name in self._dynamic_vars:
             dynamic_var = self._dynamic_vars[name]
             return dynamic_var.get_value(bot, clientid, value)
-        else:
-            return None
-
+        return None
