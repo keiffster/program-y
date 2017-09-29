@@ -25,7 +25,7 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         root = TemplateNode()
-        node = TemplateDeleteTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = TemplateDeleteTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
@@ -35,7 +35,7 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
-        node = TemplateDeleteTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = TemplateDeleteTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         result = root.resolve(self.bot, self.clientid)
@@ -44,7 +44,7 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
 
     def test_node_exception_handling(self):
         root = TemplateNode()
-        node = MockTemplateDeleteTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = MockTemplateDeleteTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         result = root.resolve(self.bot, self.clientid)

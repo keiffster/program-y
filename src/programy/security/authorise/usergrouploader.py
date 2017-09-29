@@ -53,8 +53,8 @@ class UserGroupLoader(object):
                     splits = roles_list.split(",")
                     for role_name in splits:
                         role_name = role_name.strip()
-                        if role_name not in user._roles:
-                            user._roles.append(role_name)
+                        if role_name not in user.roles:
+                            user.roles.append(role_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                 logging.debug("Role [%s] already exists in user [%s]", role_name, user_name)
@@ -64,13 +64,13 @@ class UserGroupLoader(object):
                     splits = groups_list.split(",")
                     for group_name in splits:
                         group_name = group_name.strip()
-                        if group_name not in user._groups:
-                            user._groups.append(group_name)
+                        if group_name not in user.groups:
+                            user.groups.append(group_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                 logging.debug("Group [%s] already exists in user [%s]", group_name, user_name)
 
-                users[user.id] = user
+                users[user.userid] = user
         return users
 
     def load_groups(self, yaml_data):
@@ -86,8 +86,8 @@ class UserGroupLoader(object):
                     splits = roles_list.split(",")
                     for role_name in splits:
                         role_name = role_name.strip()
-                        if role_name not in group._roles:
-                            group._roles.append(role_name)
+                        if role_name not in group.roles:
+                            group.roles.append(role_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                 logging.debug("Role [%s] already exists in group [%s]", role_name, group_name)
@@ -95,26 +95,26 @@ class UserGroupLoader(object):
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
                     splits = groups_list.split(",")
-                    for group_name in splits:
-                        group_name = group_name.strip()
-                        if group_name not in group._groups:
-                            group._groups.append(group_name)
+                    for element in splits:
+                        inner_group_name = element.strip()
+                        if inner_group_name not in group.groups:
+                            group.groups.append(inner_group_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("Group [%s] already exists in group [%s]", group_name, group_name)
+                                logging.debug("Group [%s] already exists in group [%s]", inner_group_name, group_name)
 
                 if 'users' in yaml_obj:
                     users_list = yaml_obj['groups']
                     splits = users_list.split(",")
                     for user_name in splits:
                         user_name = user_name.strip()
-                        if user_name not in group._users:
-                            group._users.append(user_name)
+                        if user_name not in group.users:
+                            group.users.append(user_name)
                         else:
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                 logging.debug("User [%s] already exists in group [%s]", user_name, group_name)
 
-                groups[group.id] = group
+                groups[group.groupid] = group
         return groups
 
     def combine_users_and_groups(self, users, groups):
@@ -130,7 +130,7 @@ class UserGroupLoader(object):
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error("Unknown group id [%s] in user [%s]", group_id, user_id)
-            user._groups = new_groups[:]
+            user.add_groups(new_groups[:])
 
         for group_id in groups.keys():
             group = groups[group_id]
@@ -143,7 +143,7 @@ class UserGroupLoader(object):
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error("Unknown group id [%s] in group [%s]", sub_group_id, group_id)
-            group._groups = new_groups[:]
+            group.add_groups(new_groups[:])
 
             new_users = []
             for sub_user_id in group.users:
@@ -152,8 +152,8 @@ class UserGroupLoader(object):
                     new_users.append(new_user)
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown user id [%s] in group [%s]", sub_user_id, user_id)
-            group._users = new_users[:]
+                        logging.error("Unknown user id [%s] in group [%s]", sub_user_id, group_id)
+            group.add_users(new_users[:])
 
     def dump_users_and_groups(self, users, groups):
 
@@ -164,7 +164,7 @@ class UserGroupLoader(object):
                 user = users[user_id]
 
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("\t"+user.id)
+                    logging.debug("\t"+user.userid)
 
                 if user.roles:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -178,7 +178,7 @@ class UserGroupLoader(object):
                         logging.debug("\t\tGroups:")
                     for group in user.groups:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("\t\t\t" + group.id)
+                            logging.debug("\t\t\t" + group.groupid)
 
         if groups is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -187,7 +187,7 @@ class UserGroupLoader(object):
                 group = groups[group_id]
 
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("\t"+group.id)
+                    logging.debug("\t"+group.groupid)
 
                 if group.roles:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -201,11 +201,11 @@ class UserGroupLoader(object):
                         logging.debug("\t\tGroups:")
                     for group in group.groups:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("\t\t\t" + group.id)
+                            logging.debug("\t\t\t" + group.groupid)
 
                 if group.users:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("\t\tUsers:")
                     for user in group.users:
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("\t\t\t" + user.id)
+                            logging.debug("\t\t\t" + user.userid)

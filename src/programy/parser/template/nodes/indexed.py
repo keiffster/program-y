@@ -41,10 +41,10 @@ class TemplateIndexedNode(TemplateAttribNode):
         self._index = index
 
     def get_index_as_str(self):
-        str = ""
+        string = ""
         if self.index != self.get_default_index():
-            str += " index=%d"%self.index
-        return str
+            string += " index=%d"%self.index
+        return string
 
     def get_index_as_xml(self):
         xml = ""
@@ -94,15 +94,15 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
         self._sentence = sentence
 
     def get_question_and_sentence_as_str(self):
-        str = ""
+        string = ""
         if self.question != 1:
-            str += " question=%d"%self.question
+            string += " question=%d"%self.question
         if self.sentence != 1:
             if self.sentence == -1:
-                str += " sentence=*"
+                string += " sentence=*"
             else:
-                str += " sentence=%d"%self.sentence
-        return str
+                string += " sentence=%d"%self.sentence
+        return string
 
     def get_question_and_sentence_as_index_xml(self):
         xml = ""

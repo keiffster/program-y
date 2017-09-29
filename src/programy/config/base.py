@@ -25,8 +25,8 @@ class BaseConfigurationData(object):
         self._section_name = name
         self._additionals = {}
 
-    def exists(self, key):
-        return bool(key in self._additionals)
+    def exists(self, name):
+        return bool(name in self._additionals)
 
     def value(self, key):
         if key in self._additionals:
@@ -49,13 +49,6 @@ class BaseConfigurationData(object):
     def sub_bot_root(self, text, root):
         return text.replace('$BOT_ROOT', root)
 
-    @abstractmethod
-    def load_config_section(self, config_file, bot_root):
-        """
-        Never Implemented
-        """
-        raise NotImplementedError()
-
     def additionals_to_add(self):
         return []
 
@@ -64,3 +57,29 @@ class BaseConfigurationData(object):
             if key in self.additionals_to_add():
                 value = file_config.get_option(service, key)
                 self._additionals[key] = value
+
+
+class BaseContainerConfigurationData(BaseConfigurationData):
+
+    def __init__(self, name):
+        BaseConfigurationData.__init__(self, name)
+
+    @abstractmethod
+    def load_configuration(self, configuration_file, bot_root):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+
+class BaseSectionConfigurationData(BaseConfigurationData):
+
+    def __init__(self, name):
+        BaseConfigurationData.__init__(self, name)
+
+    @abstractmethod
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()

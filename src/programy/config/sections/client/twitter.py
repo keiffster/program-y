@@ -15,12 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class TwitterConfiguration(BaseConfigurationData):
+class TwitterConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "twitter")
+        BaseContainerConfigurationData.__init__(self, "twitter")
         self._polling = False
         self._polling_interval = 0
         self._rate_limit_sleep = -1
@@ -72,22 +72,22 @@ class TwitterConfiguration(BaseConfigurationData):
     def welcome_message(self):
         return self._welcome_message
 
-    def load_config_section(self, config_file, bot_root):
-        twitter = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        twitter = configuration_file.get_section(self.section_name)
         if twitter is not None:
-            self._polling = config_file.get_bool_option(twitter, "polling")
+            self._polling = configuration_file.get_bool_option(twitter, "polling")
             if self._polling is True:
-                self._polling_interval = config_file.get_int_option(twitter, "polling_interval")
-                self._rate_limit_sleep = config_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
-            self._streaming = config_file.get_bool_option(twitter, "streaming")
-            self._use_status = config_file.get_bool_option(twitter, "use_status")
-            self._use_direct_message = config_file.get_bool_option(twitter, "use_direct_message")
+                self._polling_interval = configuration_file.get_int_option(twitter, "polling_interval")
+                self._rate_limit_sleep = configuration_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
+            self._streaming = configuration_file.get_bool_option(twitter, "streaming")
+            self._use_status = configuration_file.get_bool_option(twitter, "use_status")
+            self._use_direct_message = configuration_file.get_bool_option(twitter, "use_direct_message")
             if self._use_direct_message is True:
-                self._auto_follow = config_file.get_bool_option(twitter, "auto_follow")
+                self._auto_follow = configuration_file.get_bool_option(twitter, "auto_follow")
 
-            self._storage = config_file.get_option(twitter, "storage")
+            self._storage = configuration_file.get_option(twitter, "storage")
             if self._storage == 'file':
-                storage_loc = config_file.get_option(twitter, "storage_location")
+                storage_loc = configuration_file.get_option(twitter, "storage_location")
                 self._storage_location = self.sub_bot_root(storage_loc, bot_root)
 
-            self._welcome_message = config_file.get_option(twitter, "welcome_message")
+            self._welcome_message = configuration_file.get_option(twitter, "welcome_message")

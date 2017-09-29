@@ -2,6 +2,7 @@ import unittest
 import unittest.mock
 
 from programy.extensions.maps.maps import GoogleMapsExtension
+from programy.utils.geo.google import GoogleDistance
 from programytest.aiml_tests.client import TestClient
 import os
 
@@ -47,11 +48,11 @@ class MapsExtensionTests(unittest.TestCase):
         googlemaps = GoogleMapsExtension()
         self.assertIsNotNone(googlemaps)
 
-        distance = unittest.mock.Mock()
+        distance = GoogleDistance("here", "there")
         distance._distance_text = "10 miles"
         self.assertEquals("DISTANCE DEC 10 FRAC 0 UNITS miles", googlemaps._format_distance_for_programy(distance))
 
-        distance = unittest.mock.Mock()
+        distance = GoogleDistance("here", "there")
         distance._distance_text = "22.45 km"
         self.assertEquals("DISTANCE DEC 22 FRAC 45 UNITS km", googlemaps._format_distance_for_programy(distance))
 

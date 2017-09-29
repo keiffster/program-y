@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import os
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainDefaultsConfiguration(BaseConfigurationData):
+class BrainDefaultsConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "defaults")
+        BaseSectionConfigurationData.__init__(self, "defaults")
         self._default_get = "unknown"
         self._default_property = "unknown"
         self._default_map = "unknown"
@@ -48,13 +48,13 @@ class BrainDefaultsConfiguration(BaseConfigurationData):
     def learn_filename(self):
         return self._learn_filename
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        binaries = file_config.get_section("defaults", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        binaries = configuration_file.get_section("defaults", configuration)
         if binaries is not None:
-            self._default_get = file_config.get_option(binaries, "default-get", missing_value=None)
-            self._default_property = file_config.get_option(binaries, "default-property", missing_value=None)
-            self._default_map = file_config.get_option(binaries, "default-map", missing_value=None)
-            learn_filename = file_config.get_option(binaries, "learn-filename", missing_value=None)
+            self._default_get = configuration_file.get_option(binaries, "default-get", missing_value=None)
+            self._default_property = configuration_file.get_option(binaries, "default-property", missing_value=None)
+            self._default_map = configuration_file.get_option(binaries, "default-map", missing_value=None)
+            learn_filename = configuration_file.get_option(binaries, "learn-filename", missing_value=None)
             if learn_filename is not None:
                 self._learn_filename = self.sub_bot_root(learn_filename, bot_root)
         else:

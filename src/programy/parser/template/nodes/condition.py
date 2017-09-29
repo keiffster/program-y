@@ -94,14 +94,15 @@ class TemplateConditionListItemNode(TemplateNode):
         xml += '</li>'
         return xml
 
+
 class TemplateConditionNode(TemplateNode):
 
-    def __init__(self, name=None, value=None, local=None, type=1):
+    def __init__(self, name=None, value=None, local=None, condition_type=1):
         TemplateNode.__init__(self)
         self._name = name
         self._value = value
         self._local = local
-        self._type = type
+        self._type = condition_type
 
     @property
     def name(self):

@@ -44,134 +44,134 @@ class RDFCollection(BaseCollection):
         return splits
 
     def process_splits(self, splits):
-        subject = splits[0]
-        predicate = splits[1]
-        object = splits[2]
+        rdf_subject = splits[0]
+        rdf_predicate = splits[1]
+        rdf_object = splits[2]
 
-        if subject not in self._subjects:
-            self._subjects[subject] = {}
+        if rdf_subject not in self._subjects:
+            self._subjects[rdf_subject] = {}
 
-        if predicate not in self._subjects[subject]:
-            self._subjects[subject][predicate] = {}
+        if rdf_predicate not in self._subjects[rdf_subject]:
+            self._subjects[rdf_subject][rdf_predicate] = {}
 
-        if object not in self._subjects[subject][predicate]:
-            self._subjects[subject][predicate][object] = {}
+        if object not in self._subjects[rdf_subject][rdf_predicate]:
+            self._subjects[rdf_subject][rdf_predicate][rdf_object] = {}
 
-        entity = RDFEntity(subject, predicate, object)
-        self._subjects[subject][predicate][object] = entity
+        entity = RDFEntity(rdf_subject, rdf_predicate, rdf_object)
+        self._subjects[rdf_subject][rdf_predicate][rdf_object] = entity
         self._entities.append(entity)
 
         return True
 
-    def has_subject(self, subject):
-        return bool(subject in self._subjects)
+    def has_subject(self, rdf_subject):
+        return bool(rdf_subject in self._subjects)
 
     def subjects(self):
         return self._subjects.keys()
 
-    def has_predicate(self, subject, predicate):
-        if self.has_subject(subject):
-            predicates = self._subjects[subject]
-            return bool(predicate in predicates)
+    def has_predicate(self, rdf_subject, rdf_predicate):
+        if self.has_subject(rdf_subject):
+            predicates = self._subjects[rdf_subject]
+            return bool(rdf_predicate in predicates)
         return False
 
-    def predicates(self, subject):
-        return list(self._subjects[subject].keys())
+    def predicates(self, rdf_subject):
+        return list(self._subjects[rdf_subject].keys())
 
-    def has_object(self, subject, predicate, object):
-        if self.has_subject(subject):
-            if self.has_predicate(subject, predicate):
-                objects = self._subjects[subject][predicate]
-                return bool(object in objects)
+    def has_object(self, rdf_subject, rdf_predicate, rdf_object):
+        if self.has_subject(rdf_subject):
+            if self.has_predicate(rdf_subject, rdf_predicate):
+                objects = self._subjects[rdf_subject][rdf_predicate]
+                return bool(rdf_object in objects)
         return False
 
-    def objects(self, subject, predicate):
-        return list(self._subjects[subject][predicate].keys())
+    def objects(self, rdf_subject, rdf_predicate):
+        return list(self._subjects[rdf_subject][rdf_predicate].keys())
 
-    def add_entity(self, subject, predicate, object):
-        if self.has_subject(subject) is False:
-            self._subjects[subject] = {}
+    def add_entity(self, rdf_subject, rdf_predicate, rdf_object):
+        if self.has_subject(rdf_subject) is False:
+            self._subjects[rdf_subject] = {}
 
-        if self.has_predicate(subject, predicate) is False:
-            self._subjects[subject][predicate] = {}
+        if self.has_predicate(rdf_subject, rdf_predicate) is False:
+            self._subjects[rdf_subject][rdf_predicate] = {}
 
-        if self.has_object(subject, predicate, object) is False:
-            entity = RDFEntity(subject, predicate, object)
-            self._subjects[subject][predicate][object] = entity
+        if self.has_object(rdf_subject, rdf_predicate, rdf_object) is False:
+            entity = RDFEntity(rdf_subject, rdf_predicate, rdf_object)
+            self._subjects[rdf_subject][rdf_predicate][rdf_object] = entity
             self._entities.append(entity)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Duplicate RDF Entity [%s][%s][%s]", subject, predicate, object)
+                logging.warning("Duplicate RDF Entity [%s][%s][%s]", rdf_subject, rdf_predicate, rdf_object)
 
-    def delete_entity(self, subject, predicate=None, object=None):
+    def delete_entity(self, rdf_subject, rdf_predicate=None, rdf_object=None):
 
-        if predicate is not None and object is not None and self.has_object(subject, predicate, object):
-            self._entities.remove(self._subjects[subject][predicate][object])
-            del self._subjects[subject][predicate][object]
+        if rdf_predicate is not None and rdf_object is not None and self.has_object(rdf_subject, rdf_predicate, rdf_object):
+            self._entities.remove(self._subjects[rdf_subject][rdf_predicate][rdf_object])
+            del self._subjects[rdf_subject][rdf_predicate][rdf_object]
 
-        elif predicate is not None and self.has_predicate(subject, predicate):
+        elif rdf_predicate is not None and self.has_predicate(rdf_subject, rdf_predicate):
             obj_keys = []
-            for pred_object in self._subjects[subject][predicate]:
-                self._entities.remove(self._subjects[subject][predicate][pred_object])
+            for pred_object in self._subjects[rdf_subject][rdf_predicate]:
+                self._entities.remove(self._subjects[rdf_subject][rdf_predicate][pred_object])
                 obj_keys.append(pred_object)
             for key in obj_keys:
-                del self._subjects[subject][predicate][key]
-            del self._subjects[subject][predicate]
+                del self._subjects[rdf_subject][rdf_predicate][key]
+            del self._subjects[rdf_subject][rdf_predicate]
 
-        elif self.has_subject(subject):
+        elif self.has_subject(rdf_subject):
             pred_keys = []
-            for predicate in self._subjects[subject]:
+            for predicate in self._subjects[rdf_subject]:
                 obj_keys = []
-                for object in self._subjects[subject][predicate]:
-                    self._entities.remove(self._subjects[subject][predicate][object])
-                    obj_keys.append(object)
+                for subj_object in self._subjects[rdf_subject][predicate]:
+                    self._entities.remove(self._subjects[rdf_subject][predicate][subj_object])
+                    obj_keys.append(subj_object)
                 for key in obj_keys:
-                    del self._subjects[subject][predicate][key]
+                    del self._subjects[rdf_subject][predicate][key]
                 pred_keys.append(predicate)
             for key in pred_keys:
-                del self._subjects[subject][key]
-            del self._subjects[subject]
+                del self._subjects[rdf_subject][key]
+            del self._subjects[rdf_subject]
 
-    def match(self, subject=None, predicate=None, object=None):
+    def match(self, rdf_subject=None, rdf_predicate=None, rdf_object=None):
 
         entities = []
-        if subject is None:
+        if rdf_subject is None:
             for for_subject in self._subjects:
-                if predicate is None:
+                if rdf_predicate is None:
                     for for_predicate in self._subjects[for_subject]:
-                        if object is None:
+                        if rdf_object is None:
                             for for_object in self._subjects[for_subject][for_predicate]:
                                 entities.append(self._subjects[for_subject][for_predicate][for_object])
-                        elif self.has_object(for_subject, for_predicate, object):
-                            entities.append(self._subjects[for_subject][for_predicate][object])
-                elif self.has_predicate(for_subject, predicate):
-                    if object is None:
-                        for for_object in self._subjects[for_subject][predicate]:
-                            entities.append(self._subjects[for_subject][predicate][for_object])
-                    elif self.has_object(for_subject, predicate, object):
-                        entities.append(self._subjects[for_subject][predicate][object])
+                        elif self.has_object(for_subject, for_predicate, rdf_object):
+                            entities.append(self._subjects[for_subject][for_predicate][rdf_object])
+                elif self.has_predicate(for_subject, rdf_predicate):
+                    if rdf_object is None:
+                        for for_object in self._subjects[for_subject][rdf_predicate]:
+                            entities.append(self._subjects[for_subject][rdf_predicate][for_object])
+                    elif self.has_object(for_subject, rdf_predicate, rdf_object):
+                        entities.append(self._subjects[for_subject][rdf_predicate][rdf_object])
         else:
-            if self.has_subject(subject):
-                if predicate is None:
-                    for for_predicate in self._subjects[subject]:
-                        if object is None:
-                            for for_object in self._subjects[subject][for_predicate]:
-                                entities.append(self._subjects[subject][for_predicate][for_object])
-                        elif self.has_object(subject, for_predicate, object):
-                            entities.append(self._subjects[subject][for_predicate][object])
-                elif self.has_predicate(subject, predicate):
-                    if object is None:
-                        for for_object in self._subjects[subject][predicate]:
-                            entities.append(self._subjects[subject][predicate][for_object])
-                    elif self.has_object(subject, predicate, object):
-                        entities.append(self._subjects[subject][predicate][object])
+            if self.has_subject(rdf_subject):
+                if rdf_predicate is None:
+                    for for_predicate in self._subjects[rdf_subject]:
+                        if rdf_object is None:
+                            for for_object in self._subjects[rdf_subject][for_predicate]:
+                                entities.append(self._subjects[rdf_subject][for_predicate][for_object])
+                        elif self.has_object(rdf_subject, for_predicate, rdf_object):
+                            entities.append(self._subjects[rdf_subject][for_predicate][rdf_object])
+                elif self.has_predicate(rdf_subject, rdf_predicate):
+                    if rdf_object is None:
+                        for for_object in self._subjects[rdf_subject][rdf_predicate]:
+                            entities.append(self._subjects[rdf_subject][rdf_predicate][for_object])
+                    elif self.has_object(rdf_subject, rdf_predicate, rdf_object):
+                        entities.append(self._subjects[rdf_subject][rdf_predicate][rdf_object])
 
         return entities
 
-    def not_match(self, subject=None, predicate=None, object=None):
+    def not_match(self, rdf_subject=None, rdf_predicate=None, rdf_object=None):
 
         entities = self._entities[:]
-        matched = self.match(subject, predicate, object)
+        matched = self.match(rdf_subject, rdf_predicate, rdf_object)
 
         to_remove = []
         for match in matched:

@@ -24,7 +24,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         root = TemplateNode()
-        query = RDFQuery(subject=TemplateWordNode("S"), predicate=TemplateWordNode("P"), object=TemplateWordNode("O"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("S"), rdf_predicate=TemplateWordNode("P"), rdf_object=TemplateWordNode("O"))
         statement = RDFUniqueStatement(query)
         node = TemplateUniqNode(statement)
         root.append(node)
@@ -47,7 +47,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
 
     def test_node_no_defaults(self):
         root = TemplateNode()
-        query = RDFQuery(subject=TemplateWordNode("S"), predicate=TemplateWordNode("P"), object=TemplateWordNode("O"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("S"), rdf_predicate=TemplateWordNode("P"), rdf_object=TemplateWordNode("O"))
         statement = RDFUniqueStatement(query)
         node = TemplateUniqNode(statement)
         self.assertIsNotNone(node.query)

@@ -18,14 +18,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class Authorisable(object):
 
-    def __init__(self, id):
-        self._id = id
+    def __init__(self, identifier):
+        self._id = identifier
         self._roles = []
         self._groups = []
-
-    @property
-    def id(self):
-        return self._id
 
     @property
     def roles(self):
@@ -47,15 +43,18 @@ class Authorisable(object):
     def groups(self):
         return self._groups
 
+    def add_groups(self, groups):
+        self._groups = groups[:]
+
     def add_group(self, group):
         if group not in self._groups:
             self._groups.append(group)
 
-    def has_group(self, id):
+    def has_group(self, groupid):
         for group in self._groups:
-            if id == group.id:
+            if groupid == group.groupid:
                 return True
-            elif group.has_group(id):
+            elif group.has_group(groupid):
                 return True
         return False
 
@@ -80,15 +79,19 @@ class Group(Authorisable):
     def users(self):
         return self._users
 
+    def add_users(self, users):
+        self._users = users[:]
+
     def add_user(self, user):
         if user not in self._users:
             self._users.append(user)
 
-    def has_user(self, id):
+    def has_user(self, userid):
         for user in self._users:
-            if user.id == id:
+            if user.userid == userid:
                 return True
         return False
+
 
 class User(Authorisable):
 

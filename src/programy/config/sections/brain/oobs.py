@@ -17,12 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 from programy.config.sections.brain.oob import BrainOOBConfiguration
 
-class BrainOOBSConfiguration(BaseConfigurationData):
+
+class BrainOOBSConfiguration(BaseSectionConfigurationData):
     def __init__(self):
-        BaseConfigurationData.__init__(self, "oob")
+        BaseSectionConfigurationData.__init__(self, "oob")
         self._default = None
         self._oobs = {}
 
@@ -42,14 +43,14 @@ class BrainOOBSConfiguration(BaseConfigurationData):
     def oobs(self):
         return self._oobs.keys()
 
-    def load_config_section(self, file_config, brain_config, bot_root):
-        oobs = file_config.get_section("oob", brain_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        oobs = configuration_file.get_section("oob", configuration)
         if oobs is not None:
-            oob_keys = file_config.get_keys(oobs)
+            oob_keys = configuration_file.get_keys(oobs)
 
             for name in oob_keys:
                 oob = BrainOOBConfiguration(name)
-                oob.load_config_section(file_config, oobs, bot_root)
+                oob.load_config_section(configuration_file, oobs, bot_root)
                 if name == 'default':
                     self._default = oob
                 else:

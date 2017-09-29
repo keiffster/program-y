@@ -41,11 +41,11 @@ class PatternBotNode(PatternNode):
         return self._property
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<bot property="%s">\n' % self.property
-        str += super(PatternBotNode, self).to_xml(bot, clientid)
-        str += "</bot>"
-        return str
+        string = ""
+        string += '<bot property="%s">\n' % self.property
+        string += super(PatternBotNode, self).to_xml(bot, clientid)
+        string += "</bot>"
+        return string
 
     def equivalent(self, other):
         if other.is_bot():

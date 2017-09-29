@@ -25,7 +25,7 @@ class TwitterConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         twitter_config = TwitterConfiguration()
-        twitter_config.load_config_section(yaml, ".")
+        twitter_config.load_configuration(yaml, ".")
 
         self.assertTrue(twitter_config.polling)
         self.assertEqual(59, twitter_config.polling_interval)

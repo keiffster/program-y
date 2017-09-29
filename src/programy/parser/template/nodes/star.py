@@ -43,11 +43,11 @@ class TemplateStarNode(TemplateIndexedNode):
                     resolved = matched_context.star(self.index)
                     if resolved is None:
                         if logging.getLogger().isEnabledFor(logging.ERROR):
-                            logging.error("Star index not in range [%d]", self.indexord)
+                            logging.error("Star index not in range [%d]", self.index)
                         resolved = ""
-                except:
+                except Exception:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Star index not in range [%d]", self.indexord)
+                        logging.error("Star index not in range [%d]", self.index)
                     resolved = ""
         else:
             resolved = ""
@@ -64,9 +64,9 @@ class TemplateStarNode(TemplateIndexedNode):
             return ""
 
     def to_string(self):
-        str = "STAR"
-        str += self.get_index_as_str()
-        return str
+        string = "STAR"
+        string += self.get_index_as_str()
+        return string
 
     def to_xml(self, bot, clientid):
         xml = "<star"

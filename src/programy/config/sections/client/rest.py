@@ -15,12 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class RestConfiguration(BaseConfigurationData):
+class RestConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "rest")
+        BaseContainerConfigurationData.__init__(self, "rest")
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
@@ -52,14 +52,14 @@ class RestConfiguration(BaseConfigurationData):
     def api_key_file(self):
         return self._api_key_file
 
-    def load_config_section(self, config_file, bot_root):
-        rest = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        rest = configuration_file.get_section(self.section_name)
         if rest is not None:
-            self._host = config_file.get_option(rest, "host", missing_value="0.0.0.0")
-            self._port = config_file.get_option(rest, "port", missing_value=80)
-            self._debug = config_file.get_bool_option(rest, "debug", missing_value=False)
-            self._workers = config_file.get_option(rest, "workers", missing_value=4)
-            self._use_api_keys = config_file.get_bool_option(rest, "use_api_keys", missing_value=False)
-            self._api_key_file = config_file.get_option(rest, "api_key_file")
+            self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0")
+            self._port = configuration_file.get_option(rest, "port", missing_value=80)
+            self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False)
+            self._workers = configuration_file.get_option(rest, "workers", missing_value=4)
+            self._use_api_keys = configuration_file.get_bool_option(rest, "use_api_keys", missing_value=False)
+            self._api_key_file = configuration_file.get_option(rest, "api_key_file")
             if self._api_key_file is not None:
                 self._api_key_file = self.sub_bot_root(self._api_key_file, bot_root)

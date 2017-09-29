@@ -46,30 +46,38 @@ class PatternRegexNode(PatternNode):
     def pattern(self):
         return self._pattern
 
+    @property
+    def pattern_text(self):
+        return self._pattern_text
+
+    @property
+    def pattern_template(self):
+        return self._pattern_template
+
     def is_regex(self):
         return True
 
     def to_xml(self, bot, clientid):
-        str = ""
+        string = ""
         if self._pattern_template is not None:
-            str += '<regex template="%s">'% self._pattern_template
+            string += '<regex template="%s">'% self._pattern_template
         else:
-            str += '<regex pattern="%s">'% self._pattern_text
-        str += super(PatternRegexNode, self).to_xml(bot, clientid)
-        str += "</regex>\n"
-        return str
+            string += '<regex pattern="%s">'% self._pattern_text
+        string += super(PatternRegexNode, self).to_xml(bot, clientid)
+        string += "</regex>\n"
+        return string
 
     def equivalent(self, other):
         if other.is_regex():
             if self._pattern_template is not None:
-                if other._pattern_template is not None:
-                    return bool(self._pattern_template == other._pattern_template)
+                if other.pattern_template is not None:
+                    return bool(self._pattern_template == other.pattern_template)
             else:
                 if other.pattern is not None:
                     return bool(self.pattern == other.pattern)
         return False
 
-    def equals(self, bot, client, words, word_no):
+    def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
         if self._pattern_template is not None:
             template = bot.brain.regex_templates[self._pattern_template]

@@ -18,7 +18,7 @@ class RDFEntityTests(unittest.TestCase):
         self.assertEquals("<subj></subj><pred></pred><obj></obj>", entity.to_xml(None, None))
 
     def test_entity_no_variables(self):
-        entity = RDFEntity(subject="Subject", predicate="Predicate", object="Object")
+        entity = RDFEntity(rdf_subject="Subject", rdf_predicate="Predicate", rdf_object="Object")
         self.assertIsNotNone(entity)
         self.assertIsNotNone(entity.subject)
         self.assertEquals("Subject", entity.subject)
@@ -32,7 +32,7 @@ class RDFEntityTests(unittest.TestCase):
         self.assertEquals("<subj>Subject</subj><pred>Predicate</pred><obj>Object</obj>", entity.to_xml(None, None))
 
     def test_entity_variables(self):
-        entity = RDFEntity(subject="Subject", predicate="Predicate", object="Object")
+        entity = RDFEntity(rdf_subject="Subject", rdf_predicate="Predicate", rdf_object="Object")
         self.assertIsNotNone(entity)
         self.assertIsNotNone(entity.subject)
         self.assertEquals("Subject", entity.subject)

@@ -82,12 +82,12 @@ class TemplateLearnNode(TemplateNode):
 
     def evaluate_eval_nodes(self, bot, clientid, template):
 
-        new_template = bot.brain._aiml_parser.template_parser.get_base_node()
+        new_template = bot.brain.aiml_parser.template_parser.get_base_node()
 
         count = 0
         for child in template.children:
             if isinstance(child, TemplateEvalNode):
-                new_word_node = bot.brain._aiml_parser.template_parser.get_word_node(child.resolve(bot, clientid))
+                new_word_node = bot.brain.aiml_parser.template_parser.get_word_node(child.resolve(bot, clientid))
                 new_template.children.append(new_word_node)
             else:
                 new_template.children.append(child)
@@ -160,11 +160,11 @@ class TemplateLearnNode(TemplateNode):
         xml = ""
         for category in self.children:
             xml += "<category>"
-            xml += ET.tostring(category._pattern, 'utf-8').decode('utf-8')
-            xml += ET.tostring(category._topic, 'utf-8').decode('utf-8')
-            xml += ET.tostring(category._that, 'utf-8').decode('utf-8')
+            xml += ET.tostring(category.pattern, 'utf-8').decode('utf-8')
+            xml += ET.tostring(category.topic, 'utf-8').decode('utf-8')
+            xml += ET.tostring(category.that, 'utf-8').decode('utf-8')
             xml += "<template>"
-            xml += category._template.to_xml(bot, clientid)
+            xml += category.template.to_xml(bot, clientid)
             xml += "</template>"
             xml += "</category>"
         return xml
@@ -181,7 +181,7 @@ class TemplateLearnNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'category':
-                parsed = graph._aiml_parser.parse_category(child, namespace=None, topic_element=None, add_to_graph=False)
+                parsed = graph.aiml_parser.parse_category(child, namespace=None, topic_element=None, add_to_graph=False)
                 learn_category = LearnCategory(parsed[0], parsed[1], parsed[2], parsed[3])
                 self.children.append(learn_category)
 

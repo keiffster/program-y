@@ -47,6 +47,6 @@ class ProgramyConfiguration(object):
         return self._client_config
 
     def load_config_data(self, config_file, bot_root):
-        self._brain_config.load_config_section(config_file, bot_root)
-        self._bot_config.load_config_section(config_file, bot_root)
-        self._client_config.load_config_section(config_file, bot_root)
+        self._brain_config.load_configuration(config_file, bot_root)
+        self._bot_config.load_configuration(config_file, bot_root)
+        self._client_config.load_configuration(config_file, bot_root)

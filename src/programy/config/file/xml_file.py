@@ -56,8 +56,8 @@ class XMLConfigurationFile(BaseConfigurationFile):
             keys.append(child.tag)
         return keys
 
-    def get_child_section_keys(self, section_name, parent_section):
-        found = parent_section.find(section_name)
+    def get_child_section_keys(self, child_section_name, parent_section):
+        found = parent_section.find(child_section_name)
         if found is not None:
             keys = []
             for child in found:

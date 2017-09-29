@@ -38,7 +38,8 @@ class AIMLLoader(FileFinder):
         try:
             return self.aiml_parser.parse_from_file(filename)
         except Exception as excep:
-            logging.exception("Failed to load contents of file from [%s]", filename, excep)
+            logging.error("Failed to load contents of file from [%s]", filename)
+            logging.exception(excep)
 
 class AIMLParser(object):
 
@@ -50,6 +51,10 @@ class AIMLParser(object):
         self._num_categories = 0
         self._duplicates = None
         self._errors = None
+
+    @property
+    def brain(self):
+        return self._brain
 
     @property
     def num_categories(self):
@@ -152,11 +157,11 @@ class AIMLParser(object):
             return text, None
 
         # Otherwise, extract namespace and tag name
-        m = re.compile("^({.*})(.*)$")
-        g = m.match(text)
-        if g is not None:
-            namespace = g.group(1).strip()
-            tag_name = g.group(2).strip()
+        match = re.compile("^({.*})(.*)$")
+        groupings = match.match(text)
+        if groupings is not None:
+            namespace = groupings.group(1).strip()
+            tag_name = groupings.group(2).strip()
             return tag_name, namespace
         return None, None
 
@@ -190,7 +195,7 @@ class AIMLParser(object):
             tree = ET.parse(filename, parser=LineNumberingParser())
             aiml = tree.getroot()
 
-            tag_name, namespace = self.check_aiml_tag(aiml, filename=filename)
+            _, namespace = self.check_aiml_tag(aiml, filename=filename)
 
             start = datetime.datetime.now()
             num_categories = self.parse_aiml(aiml, namespace, filename)
@@ -214,7 +219,7 @@ class AIMLParser(object):
 
         aiml = ET.fromstring(text)
 
-        tag_name, namespace = self.check_aiml_tag(aiml)
+        _, namespace = self.check_aiml_tag(aiml)
 
         self.parse_aiml(aiml, namespace)
 

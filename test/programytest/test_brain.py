@@ -46,7 +46,7 @@ class BrainTests(unittest.TestCase):
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_configuration(yaml, ".")
 
         brain = Brain(brain_config)
         self.assertIsNotNone(brain)
@@ -92,7 +92,7 @@ class BrainTests(unittest.TestCase):
         self.load_os_specific_configuration(yaml, "test_secure_brain.yaml", "test_secure_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, os.path.dirname(__file__))
+        brain_config.load_configuration(yaml, os.path.dirname(__file__))
 
         brain = Brain(brain_config)
         self.assertIsNotNone(brain)
@@ -111,7 +111,7 @@ class BrainTests(unittest.TestCase):
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_configuration(yaml, ".")
 
         brain = Brain(brain_config)
 
@@ -125,7 +125,7 @@ class BrainTests(unittest.TestCase):
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_configuration(yaml, ".")
 
         brain = Brain(brain_config)
 
@@ -147,7 +147,7 @@ class BrainTests(unittest.TestCase):
         self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_configuration(yaml, ".")
 
         brain = Brain(brain_config)
 

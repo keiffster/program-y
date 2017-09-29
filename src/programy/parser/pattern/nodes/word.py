@@ -34,11 +34,11 @@ class PatternWordNode(PatternNode):
         return self._word
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<word word="%s">'% self.word
-        str += super(PatternWordNode, self).to_xml(bot, clientid)
-        str += '</word>\n'
-        return str
+        string = ""
+        string += '<word word="%s">'% self.word
+        string += super(PatternWordNode, self).to_xml(bot, clientid)
+        string += '</word>\n'
+        return string
 
     def can_add(self, new_node):
         if new_node.is_root():

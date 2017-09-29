@@ -35,11 +35,11 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         return PatternOneOrMoreWildCardNode.MATCH_CHARS
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<oneormore wildcard="%s">\n' % self.wildcard
-        str += super(PatternOneOrMoreWildCardNode, self).to_xml(bot, clientid)
-        str += "</oneormore>\n"
-        return str
+        string = ""
+        string += '<oneormore wildcard="%s">\n' % self.wildcard
+        string += super(PatternOneOrMoreWildCardNode, self).to_xml(bot, clientid)
+        string += "</oneormore>\n"
+        return string
 
     @staticmethod
     def is_wild_card(text):
@@ -56,7 +56,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
         return "ONEORMORE [%s]" % (self.wildcard)
 
-    def consume(self, bot, clientid, context, words, word_no, type, depth):
+    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
 
         tabs = self.get_tabs(bot, depth)
 
@@ -76,11 +76,11 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         word = words.word(word_no)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
-        context_match = Match(type, self, word)
+        context_match = Match(match_type, self, word)
         context.add_match(context_match)
         matches_added = 1
 
-        match = self.check_child_is_wildcard(tabs, bot, clientid, context, words, word_no, type, depth)
+        match = self.check_child_is_wildcard(tabs, bot, clientid, context, words, word_no, match_type, depth)
         if match is not None:
             return match
 
@@ -111,7 +111,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sNo more words", tabs)
             return super(PatternOneOrMoreWildCardNode, self).consume(bot,
-                                                                     clientid, context, words, word_no, type, depth+1)
+                                                                     clientid, context, words, word_no, match_type, depth+1)
         word = words.word(word_no)
 
         if self._children:
@@ -128,7 +128,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(bot, clientid, context, words, word_no+1, type, depth+1)
+                    match = child.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
                     if match is not None:
                         return match
 
@@ -147,8 +147,9 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sNo children, consume words until next break point", tabs)
+
         while word_no < words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, match_type, depth+1)
             if match is not None:
                 return match
 
@@ -167,9 +168,9 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         context_match.add_word(word)
 
         if word_no == words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
         else:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, match_type, depth+1)
 
         if match is not None:
             return match

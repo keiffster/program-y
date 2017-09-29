@@ -33,11 +33,11 @@ class PatternPriorityWordNode(PatternNode):
         return True
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<priority word="%s">'% self.priority_word
-        str += super(PatternPriorityWordNode, self).to_xml(bot, clientid)
-        str += '</priority>\n'
-        return str
+        string = ""
+        string += '<priority word="%s">'% self.priority_word
+        string += super(PatternPriorityWordNode, self).to_xml(bot, clientid)
+        string += '</priority>\n'
+        return string
 
     def equivalent(self, other):
         if other.is_priority():

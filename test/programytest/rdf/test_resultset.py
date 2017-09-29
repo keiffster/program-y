@@ -17,7 +17,7 @@ class RDFQueryResultSetTests(unittest.TestCase):
 
     def test_resultset_with_result(self):
 
-        results = [RDFEntity(subject="Subject1", predicate="Predicate1", object="Object1")]
+        results = [RDFEntity(rdf_subject="Subject1", rdf_predicate="Predicate1", rdf_object="Object1")]
 
         resultset = RDFQueryResultSet("Subject", "Predicate", "Object", results)
         self.assertIsNotNone(resultset)
@@ -33,8 +33,8 @@ class RDFQueryResultSetTests(unittest.TestCase):
 
     def test_resultset_with_result2(self):
 
-        results = [RDFEntity(subject="Subject1", predicate="Predicate1", object="Object1"),
-                   RDFEntity(subject="Subject2", predicate="Predicate2", object="Object2")]
+        results = [RDFEntity(rdf_subject="Subject1", rdf_predicate="Predicate1", rdf_object="Object1"),
+                   RDFEntity(rdf_subject="Subject2", rdf_predicate="Predicate2", rdf_object="Object2")]
 
         resultset = RDFQueryResultSet("Subject", "Predicate", "Object", results)
         self.assertIsNotNone(resultset)

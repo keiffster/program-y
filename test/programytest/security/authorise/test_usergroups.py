@@ -9,7 +9,6 @@ class UserGroupTests(unittest.TestCase):
 
     def test_users(self):
         user = User("keith")
-        self.assertEquals("keith", user.id)
         self.assertEquals("keith", user.userid)
         user.roles.append("admin1")
         self.assertTrue(user.has_role("admin1"))
@@ -69,7 +68,7 @@ class UserGroupTests(unittest.TestCase):
 
     def test_authorisable(self):
         authorisable = Authorisable("testid")
-        self.assertEquals("testid", authorisable.id)
+        self.assertEquals("testid", authorisable._id)
         self.assertEquals([], authorisable.roles)
         self.assertEquals([], authorisable.groups)
 

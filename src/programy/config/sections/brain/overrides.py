@@ -17,12 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
-class BrainOverridesConfiguration(BaseConfigurationData):
+
+class BrainOverridesConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "overrides")
+        BaseSectionConfigurationData.__init__(self, "overrides")
         self._allow_system_aiml = False
         self._allow_learn_aiml = False
         self._allow_learnf_aiml = False
@@ -39,12 +40,12 @@ class BrainOverridesConfiguration(BaseConfigurationData):
     def allow_learnf_aiml(self):
         return self._allow_learnf_aiml
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        overrides = file_config.get_section("overrides", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        overrides = configuration_file.get_section("overrides", configuration)
         if overrides is not None:
-            self._allow_system_aiml = file_config.get_option(overrides, "allow_system_aiml", missing_value=None)
-            self._allow_learn_aiml = file_config.get_option(overrides, "allow_learn_aiml", missing_value=None)
-            self._allow_learnf_aiml = file_config.get_option(overrides, "allow_learnf_aiml", missing_value=None)
+            self._allow_system_aiml = configuration_file.get_option(overrides, "allow_system_aiml", missing_value=None)
+            self._allow_learn_aiml = configuration_file.get_option(overrides, "allow_learn_aiml", missing_value=None)
+            self._allow_learnf_aiml = configuration_file.get_option(overrides, "allow_learnf_aiml", missing_value=None)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'overrides' section missing from brain config, using to defaults")

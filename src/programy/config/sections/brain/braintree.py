@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainBraintreeConfiguration(BaseConfigurationData):
+class BrainBraintreeConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "braintree")
+        BaseSectionConfigurationData.__init__(self, "braintree")
         self._file = None
         self._content = None
 
@@ -35,13 +35,13 @@ class BrainBraintreeConfiguration(BaseConfigurationData):
     def content(self):
         return self._content
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        braintree = file_config.get_section("braintree", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
-            file = file_config.get_option(braintree, "file", missing_value=None)
+            file = configuration_file.get_option(braintree, "file", missing_value=None)
             if file is not None:
                 self._file = self.sub_bot_root(file, bot_root)
-            self._content = file_config.get_option(braintree, "content", missing_value="txt")
+            self._content = configuration_file.get_option(braintree, "content", missing_value="txt")
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'braintree' section missing from bot config, using to defaults")

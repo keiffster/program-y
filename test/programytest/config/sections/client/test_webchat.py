@@ -17,7 +17,7 @@ class WebChatConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         webchat_config = WebChatConfiguration()
-        webchat_config.load_config_section(yaml, ".")
+        webchat_config.load_configuration(yaml, ".")
 
         self.assertEqual("127.0.0.1", webchat_config.host)
         self.assertEqual(5000, webchat_config.port)

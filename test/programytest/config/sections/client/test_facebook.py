@@ -17,7 +17,7 @@ class FacebookConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         facebook_config = FacebookConfiguration()
-        facebook_config.load_config_section(yaml, ".")
+        facebook_config.load_configuration(yaml, ".")
 
         self.assertTrue(facebook_config.polling)
         self.assertEqual(30, facebook_config.polling_interval)

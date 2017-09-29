@@ -55,11 +55,11 @@ class PatternISetNode(PatternNode):
         return self._iset_name
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<iset words="%s">'% ". ".join(self.words)
-        str += super(PatternISetNode, self).to_xml(bot, clientid)
-        str += "</iset>\n"
-        return str
+        string = ""
+        string += '<iset words="%s">'% ". ".join(self.words)
+        string += super(PatternISetNode, self).to_xml(bot, clientid)
+        string += "</iset>\n"
+        return string
 
     def is_iset(self):
         return True
@@ -72,7 +72,7 @@ class PatternISetNode(PatternNode):
                 return False
         return True
 
-    def equals(self, bot, client, words, word_no):
+    def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
         for set_word in self._words:
             if word == set_word:

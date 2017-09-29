@@ -40,11 +40,11 @@ class PatternSetNode(PatternNode):
         return True
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<set name="%s">\n' % self.set_name
-        str += super(PatternSetNode, self).to_xml(bot, clientid)
-        str += "</set>"
-        return str
+        string = ""
+        string += '<set name="%s">\n' % self.set_name
+        string += super(PatternSetNode, self).to_xml(bot, clientid)
+        string += "</set>"
+        return string
 
     def equivalent(self, other):
         if other.is_set():
@@ -80,11 +80,11 @@ class PatternSetNode(PatternNode):
 
         return EqualsMatch(False, word_no)
 
-    def equals(self, bot, client, words, word_no):
+    def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
 
         if bot.brain.dynamics.is_dynamic_set(self._set_name) is True:
-            result = bot.brain.dynamics.dynamic_set(bot, client, self._set_name, word)
+            result = bot.brain.dynamics.dynamic_set(bot, clientid, self._set_name, word)
             return EqualsMatch(result, word_no, word)
         else:
             if self.set_is_known(bot):

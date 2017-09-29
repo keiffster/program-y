@@ -20,7 +20,7 @@ class XmppConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         xmpp_config = XmppConfiguration()
-        xmpp_config.load_config_section(yaml, ".")
+        xmpp_config.load_configuration(yaml, ".")
 
         self.assertEquals('talk.google.com', xmpp_config.server)
         self.assertEquals(5222, xmpp_config.port)

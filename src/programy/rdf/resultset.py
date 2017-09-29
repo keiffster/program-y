@@ -40,6 +40,10 @@ class RDFQueryResultSet(object):
     def results(self):
         return self._results
 
+    @results.setter
+    def results(self, results):
+        self._results = results
+
     def get_variable_value(self, var_name, result):
         if self.subject == var_name:
             return result.subject

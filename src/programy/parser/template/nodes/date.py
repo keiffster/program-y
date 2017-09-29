@@ -31,14 +31,6 @@ class TemplateDateNode(TemplateAttribNode):
         else:
             self._format = date_format
 
-    @property
-    def format(self):
-        return self._format
-
-    @format.setter
-    def format(self, format):
-        self._format = format
-
     def resolve_to_string(self, bot, clientid):
         time_now = datetime.datetime.now()
         resolved = time_now.strftime(self._format)

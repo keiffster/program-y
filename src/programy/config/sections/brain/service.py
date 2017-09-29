@@ -17,14 +17,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
-class BrainServiceConfiguration(BaseConfigurationData):
+
+class BrainServiceConfiguration(BaseSectionConfigurationData):
 
     additionals = ['denied_srai']
 
     def __init__(self, service_name):
-        BaseConfigurationData.__init__(self, service_name)
+        BaseSectionConfigurationData.__init__(self, service_name)
         self._classname = None
         self._method = None
         self._host = None
@@ -54,15 +55,15 @@ class BrainServiceConfiguration(BaseConfigurationData):
     def additionals_to_add(self):
         return BrainServiceConfiguration.additionals
 
-    def load_config_section(self, file_config, service_config, bot_root):
-        service = file_config.get_section(self.section_name, service_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:
-            self._classname = file_config.get_option(service, "classname", missing_value=None)
-            self._method = file_config.get_option(service, "method", missing_value=None)
-            self._host = file_config.get_option(service, "host", missing_value=None)
-            self._port = file_config.get_option(service, "port", missing_value=None)
-            self._url = file_config.get_option(service, "url", missing_value=None)
-            self.load_additional_key_values(file_config, service)
+            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
+            self._method = configuration_file.get_option(service, "method", missing_value=None)
+            self._host = configuration_file.get_option(service, "host", missing_value=None)
+            self._port = configuration_file.get_option(service, "port", missing_value=None)
+            self._url = configuration_file.get_option(service, "url", missing_value=None)
+            self.load_additional_key_values(configuration_file, service)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'services' section missing from brain config, using to defaults")

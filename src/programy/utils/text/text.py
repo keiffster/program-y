@@ -60,8 +60,8 @@ class TextUtils:
 
     @staticmethod
     def strip_html(data, replace_with=''):
-        p = re.compile(r'<.*?>')
-        return p.sub(replace_with, data)
+        pattern = re.compile(r'<.*?>')
+        return pattern.sub(replace_with, data)
 
     @staticmethod
     def replace_path_seperator(path, old="/", new=os.sep):
@@ -79,11 +79,11 @@ class TextUtils:
             return text, None
 
         # Otherwise, extract namespace and tag name
-        m = re.compile("^({.*})(.*)$")
-        g = m.match(text)
-        if g is not None:
-            namespace = g.group(1).strip()
-            tag_name = g.group(2).strip()
+        match = re.compile("^({.*})(.*)$")
+        groupings = match.match(text)
+        if groupings is not None:
+            namespace = groupings.group(1).strip()
+            tag_name = groupings.group(2).strip()
             return tag_name, namespace
         return None, None
 

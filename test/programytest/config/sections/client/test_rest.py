@@ -20,7 +20,7 @@ class RestConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         rest_config = RestConfiguration()
-        rest_config.load_config_section(yaml, ".")
+        rest_config.load_configuration(yaml, ".")
 
         self.assertEqual("127.0.0.1", rest_config.host)
         self.assertEqual(5000, rest_config.port)
@@ -37,7 +37,7 @@ class RestConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         rest_config = RestConfiguration()
-        rest_config.load_config_section(yaml, ".")
+        rest_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", rest_config.host)
         self.assertEqual(80, rest_config.port)

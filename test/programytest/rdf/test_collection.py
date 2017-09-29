@@ -117,7 +117,7 @@ class RDFCollectionTests(unittest.TestCase):
         subjects = collection.subjects()
         self.assertEquals(4, len(subjects))
 
-        object = collection.objects(subject="MONKEY", predicate="legs")
+        object = collection.objects(rdf_subject="MONKEY", rdf_predicate="legs")
         self.assertEqual(["2"], object)
 
     def add_data(self, collection):
@@ -132,7 +132,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(subject="MONKEY")
+        matches = collection.match(rdf_subject="MONKEY")
         self.assertEquals(2, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -146,7 +146,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(predicate="legs")
+        matches = collection.match(rdf_predicate="legs")
         self.assertEquals(3, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -163,7 +163,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(subject="MONKEY", predicate="legs")
+        matches = collection.match(rdf_subject="MONKEY", rdf_predicate="legs")
         self.assertEquals(1, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -174,7 +174,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(predicate="legs", object="2")
+        matches = collection.match(rdf_predicate="legs", rdf_object="2")
         self.assertEquals(2, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -188,7 +188,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(subject="MONKEY", object="2")
+        matches = collection.match(rdf_subject="MONKEY", rdf_object="2")
         self.assertEquals(1, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -199,7 +199,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.match(object="2")
+        matches = collection.match(rdf_object="2")
         self.assertEquals(2, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -221,7 +221,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(subject="MONKEY")
+        matches = collection.not_match(rdf_subject="MONKEY")
         self.assertEquals(3, len(matches))
 
     def test_not_match_predicate(self):
@@ -229,7 +229,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(predicate="legs")
+        matches = collection.not_match(rdf_predicate="legs")
         self.assertEquals(1, len(matches))
         self.assertEqual("ELEPHANT", matches[0].subject)
         self.assertEqual("trunk", matches[0].predicate)
@@ -240,7 +240,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(object="4")
+        matches = collection.not_match(rdf_object="4")
         self.assertEquals(4, len(matches))
         self.assertEqual("MONKEY", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -260,7 +260,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(subject="MONKEY", predicate="legs")
+        matches = collection.not_match(rdf_subject="MONKEY", rdf_predicate="legs")
 
         self.assertEquals(3, len(matches))
         self.assertEqual("ZEBRA", matches[0].subject)
@@ -278,7 +278,7 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(predicate="legs", object="2")
+        matches = collection.not_match(rdf_predicate="legs", rdf_object="2")
         self.assertEquals(2, len(matches))
         self.assertEqual("ZEBRA", matches[0].subject)
         self.assertEqual("legs", matches[0].predicate)
@@ -292,6 +292,6 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertIsNotNone(collection)
         self.add_data(collection)
 
-        matches = collection.not_match(subject="MONKEY", predicate="legs", object="2")
+        matches = collection.not_match(rdf_subject="MONKEY", rdf_predicate="legs", rdf_object="2")
         self.assertEquals(3, len(matches))
 

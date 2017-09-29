@@ -11,7 +11,7 @@ class MockBaseConfigurationData(BaseConfigurationData):
     def __init__(self, name):
         BaseConfigurationData.__init__(self, name)
 
-    def load_config_section(self, config_file, bot_root):
+    def load_configuration(self, config_file, bot_root):
         return
 
 class MockBotClient(BotClient):

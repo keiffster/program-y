@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainFileConfiguration(BaseConfigurationData):
+class BrainFileConfiguration(BaseSectionConfigurationData):
 
     def __init__(self, name="files", files=None, file=None, extension=None, directories=False):
-        BaseConfigurationData.__init__(self, name)
+        BaseSectionConfigurationData.__init__(self, name)
         if files is None:
             self._files = []
         else:
@@ -57,16 +57,16 @@ class BrainFileConfiguration(BaseConfigurationData):
     def directories(self):
         return self._directories
 
-    def load_config_section(self, file_config, brain_config, bot_root):
-        files_config = file_config.get_option(brain_config, self.section_name)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        files_config = configuration_file.get_option(configuration, self.section_name)
         if files_config is not None:
-            files = file_config.get_multi_file_option(files_config, "files", bot_root)
+            files = configuration_file.get_multi_file_option(files_config, "files", bot_root)
             if files is not None and files:
                 self._files = files
-                self._extension = file_config.get_option(files_config, "extension")
-                self._directories = file_config.get_option(files_config, "directories")
+                self._extension = configuration_file.get_option(files_config, "extension")
+                self._directories = configuration_file.get_option(files_config, "directories")
             else:
-                file = file_config.get_option(files_config, "file")
+                file = configuration_file.get_option(files_config, "file")
                 if file is not None:
                     self._file = self.sub_bot_root(file, bot_root)
         else:

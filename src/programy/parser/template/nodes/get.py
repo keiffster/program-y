@@ -99,7 +99,7 @@ class TemplateGetNode(TemplateNode):
         #return pickle._dumps(tuples)
 
     def resolve_tuple(self, bot, clientid):
-        vars = self._name.resolve(bot, clientid).split(" ")
+        variables = self._name.resolve(bot, clientid).split(" ")
 
         raw_tuples = self._tuples.resolve(bot, clientid)
         tuples = self.decode_tuples(bot, raw_tuples)
@@ -107,17 +107,17 @@ class TemplateGetNode(TemplateNode):
         resolved = ""
         if tuples:
             if len(tuples) == 1:
-                for var in vars:
+                for var in variables:
                     if tuples[0][0] == var:
                         resolved += tuples[0][1]
             else:
                 space = False
-                for tuple in tuples:
+                for pair in tuples:
                     if space is True:
                         resolved += " "
-                    for var in vars:
-                        if var == tuple[0]:
-                            resolved += tuple[1]
+                    for var in variables:
+                        if var == pair[0]:
+                            resolved += pair[1]
                     space = True
 
         return resolved

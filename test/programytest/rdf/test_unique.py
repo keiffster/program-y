@@ -29,7 +29,7 @@ class RDFUniqueStatementTests(unittest.TestCase):
             ACT:hasPurpose:to entertain by performing
         """)
 
-        query = RDFQuery(subject=TemplateWordNode("ACCOUNT"), predicate=TemplateWordNode("hasSize"), object=TemplateWordNode("?x"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("ACCOUNT"), rdf_predicate=TemplateWordNode("hasSize"), rdf_object=TemplateWordNode("?x"))
 
         uniq = RDFUniqueStatement(query)
 

@@ -66,10 +66,10 @@ class MockTwitterBotClient(TwitterBotClient):
         self._use_polling_real = True
         self._polled = False
 
-    def create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
+    def _create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         return MockTwitterApi()
 
-    def use_polling(self):
+    def _use_polling(self):
         if self._use_polling_real:
             super(MockTwitterBotClient, self).use_polling(self)
         else:
@@ -107,7 +107,7 @@ class TwitterBotClientTests(unittest.TestCase):
         bot = MockBot()
         bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username"})
 
-        client.get_username(bot)
+        client._get_username(bot)
         self.assertEquals("Username", client._username)
         self.assertEquals(8, client._username_len)
 
@@ -119,7 +119,7 @@ class TwitterBotClientTests(unittest.TestCase):
         bot = MockBot()
         bot.license_keys = MockLicenseKeys({"TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret"})
 
-        consumer_key, consumer_secret = client.get_consumer_secrets(bot)
+        consumer_key, consumer_secret = client._get_consumer_secrets(bot)
         self.assertIsNotNone(consumer_key)
         self.assertEquals("Key", consumer_key)
         self.assertIsNotNone(consumer_secret)
@@ -133,7 +133,7 @@ class TwitterBotClientTests(unittest.TestCase):
         bot = MockBot()
         bot.license_keys = MockLicenseKeys({"TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"})
 
-        access_token, access_token_secret = client.get_access_secrets(bot)
+        access_token, access_token_secret = client._get_access_secrets(bot)
         self.assertIsNotNone(access_token)
         self.assertEquals("Access", access_token)
         self.assertIsNotNone(access_token_secret)
@@ -149,7 +149,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
         self.assertIsNotNone(client._api)
 
     #############################################################################################
@@ -165,11 +165,11 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         client._api._mock_direct_messages = [MockMessage(1, "Message1", 1)]
 
-        messages = client.get_direct_messages(-1)
+        messages = client._get_direct_messages(-1)
         self.assertEquals(1, len(messages))
 
     def test_get_direct_messages_previous(self):
@@ -182,11 +182,11 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
 
-        messages = client.get_direct_messages(30)
+        messages = client._get_direct_messages(30)
         self.assertEquals(1, len(messages))
 
     def test_process_direct_message_question(self):
@@ -199,10 +199,10 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         client.bot.answer = "Hiya"
-        client.process_direct_message_question("userid1", "Hello")
+        client._process_direct_message_question("userid1", "Hello")
 
         self.assertEqual(1, len(client._api._messages_sent_to))
         self.assertTrue(bool("userid1" in client._api._messages_sent_to))
@@ -217,12 +217,12 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         client.bot.answer = "Hiya"
         client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
 
-        last_message_id = client.process_direct_messages(-1)
+        last_message_id = client._process_direct_messages(-1)
         self.assertEqual(31, last_message_id)
 
     #############################################################################################
@@ -238,12 +238,12 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         friends = [1, 2, 3, 4]
         followers_ids = [1, 2, 4]
 
-        client.unfollow_non_followers(friends, followers_ids)
+        client._unfollow_non_followers(friends, followers_ids)
 
         self.assertEquals(1, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
@@ -258,7 +258,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         follower1 = unittest.mock.Mock()
         follower1.follow.return_value = None
@@ -267,7 +267,7 @@ class TwitterBotClientTests(unittest.TestCase):
         followers = [follower1]
         friends = [1, 2, 4]
 
-        client.follow_new_followers(followers, friends)
+        client._follow_new_followers(followers, friends)
 
         self.assertEquals(1, len(client._api._messages_sent_to))
         self.assertTrue(bool(3 in client._api._messages_sent_to))
@@ -282,7 +282,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                             })
-        client.initialise()
+        client._initialise()
 
         follower1 = unittest.mock.Mock()
         follower1.follow.return_value = None
@@ -295,7 +295,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._followers = [follower1, follower2]
         client._api._friends_ids = [2, 3, 4]
 
-        client.process_followers()
+        client._process_followers()
 
         self.assertEquals(2, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
@@ -316,11 +316,11 @@ class TwitterBotClientTests(unittest.TestCase):
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                                    })
-        client.initialise()
+        client._initialise()
 
         client._api._statuses = []
 
-        statuses = client.get_statuses(-1)
+        statuses = client._get_statuses(-1)
         self.assertIsNotNone(statuses)
 
     def test_get_statuses_no(self):
@@ -334,11 +334,11 @@ class TwitterBotClientTests(unittest.TestCase):
                                                    "TWITTER_ACCESS_TOKEN": "Access",
                                                    "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                                    })
-        client.initialise()
+        client._initialise()
 
         client._api._statuses = []
 
-        statuses = client.get_statuses(666)
+        statuses = client._get_statuses(666)
         self.assertIsNotNone(statuses)
 
     def test_get_question_from_text(self):
@@ -349,9 +349,9 @@ class TwitterBotClientTests(unittest.TestCase):
         client._username = "keiffster"
         client._username_len = 9
 
-        self.assertEquals("Hello", client.get_question_from_text("@keiffster Hello"))
-        self.assertIsNone(client.get_question_from_text("keiffster Hello"))
-        self.assertIsNone(client.get_question_from_text("Hello"))
+        self.assertEquals("Hello", client._get_question_from_text("@keiffster Hello"))
+        self.assertIsNone(client._get_question_from_text("keiffster Hello"))
+        self.assertIsNone(client._get_question_from_text("Hello"))
 
     def test_process_status_question(self):
         arguments = MockArgumentParser()
@@ -364,7 +364,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                                    "TWITTER_ACCESS_TOKEN": "Access",
                                                    "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                                    })
-        client.initialise()
+        client._initialise()
         client.bot.answer = "Hiya"
         client._username = "keiffster"
         client._username_len = 9
@@ -372,7 +372,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._user = unittest.mock.Mock()
         client._api._user.screen_name = "BigFred"
 
-        client.process_status_question("userid1", "@keiffster Hello")
+        client._process_status_question("userid1", "@keiffster Hello")
 
         self.assertIsNotNone(client._api._status)
         self.assertEqual("@BigFred Hiya", client._api._status)
@@ -387,7 +387,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                                    })
-        client.initialise()
+        client._initialise()
         client.bot.answer = "Hiya"
         client._username = "Keiffster"
         client._username_len = 9
@@ -413,7 +413,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._api._statuses = [status1, status2]
 
-        client.process_statuses(-1)
+        client._process_statuses(-1)
 
         self.assertIsNotNone(client._api._status)
         self.assertEqual("@BigFred Hiya", client._api._status)
@@ -436,11 +436,11 @@ class TwitterBotClientTests(unittest.TestCase):
             os.remove(client.configuration.client_configuration.storage_location)
         self.assertFalse(os.path.exists(client.configuration.client_configuration.storage_location))
 
-        client.store_last_message_ids(666, 667)
+        client._store_last_message_ids(666, 667)
 
         self.assertTrue(os.path.exists(client.configuration.client_configuration.storage_location))
 
-        ids = client.get_last_message_ids()
+        ids = client._get_last_message_ids()
         self.assertEquals(ids[0], 666)
         self.assertEquals(ids[1], 667)
 
@@ -453,7 +453,7 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
 
         with self.assertRaises(Exception):
-            client.use_streaming()
+            client._use_streaming()
 
     def test_poll(self):
         arguments = MockArgumentParser()
@@ -465,7 +465,7 @@ class TwitterBotClientTests(unittest.TestCase):
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
                                                    })
-        client.initialise()
+        client._initialise()
         client.bot.answer = "Hiya"
         client._username = "Keiffster"
         client._username_len = 9
@@ -475,7 +475,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client.configuration.client_configuration._use_status = True
         client.configuration.client_configuration._polling_interval = 0
 
-        client.poll( -1, -1)
+        client._poll( -1, -1)
 
     def test_run_with_streaming(self):
         arguments = MockArgumentParser()
@@ -492,7 +492,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client.configuration.client_configuration._polling = False
 
         with self.assertRaises(Exception):
-            client.run()
+            client._run()
 
     def test_run_with_polling(self):
         arguments = MockArgumentParser()

@@ -32,8 +32,8 @@ class GoogleAddressComponent(object):
         self.long_name = data['long_name']
         self.short_name = data['short_name']
         self.types = []
-        for type in data['types']:
-            self.types.append(type)
+        for address_type in data['types']:
+            self.types.append(address_type)
 
 
 class GoogleBounds(object):
@@ -114,6 +114,10 @@ class GoogleDistance(object):
         self._duration = None
         self._duration_text = None
 
+    @property
+    def distance_text(self):
+        return self._distance_text
+
     def parse_json(self, json_data):
         result = json_data[0]
 
@@ -139,6 +143,10 @@ class DirectionLegStep(object):
         self._duration = None
         self._duration_text = None
         self._instructions = None
+
+    @property
+    def instructions(self):
+        return self._instructions
 
     def parse_json(self, data):
         self._distance = data['distance']['value']
@@ -166,7 +174,7 @@ class DirectionLeg(object):
             self._steps.append(dirlegstep)
 
     def steps_as_a_string(self):
-        return ", ".join([step._instructions for step in self._steps])
+        return ", ".join([step.instructions for step in self._steps])
 
 class GoogleDirections(object):
     def __init__(self, origin, destination, country="UK", mode="driving", units="imperial"):

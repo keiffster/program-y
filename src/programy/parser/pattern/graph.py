@@ -32,8 +32,8 @@ class PatternGraph(object):
 
         pattern_nodes = None
         if aiml_parser is not None:
-            if aiml_parser._brain is not None:
-                pattern_nodes = aiml_parser._brain.configuration.nodes.pattern_nodes
+            if aiml_parser.brain is not None:
+                pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
 
         self._pattern_factory = PatternNodeFactory()
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
@@ -137,7 +137,7 @@ class PatternGraph(object):
             return current_node
 
         except ParserException as parser_excep:
-            parser_excep._xml_element = pattern_element
+            parser_excep.xml_element = pattern_element
             raise parser_excep
 
     def add_topic_to_node(self, topic_element, base_node):
@@ -167,7 +167,7 @@ class PatternGraph(object):
             return current_node
 
         except ParserException as parser_excep:
-            parser_excep._xml_element = topic_element
+            parser_excep.xml_element = topic_element
             raise parser_excep
 
     def add_that_to_node(self, that_element, base_node):
@@ -197,7 +197,7 @@ class PatternGraph(object):
             return current_node
 
         except ParserException as parser_excep:
-            parser_excep._xml_element = that_element
+            parser_excep.xml_element = that_element
             raise parser_excep
 
     def add_template_to_node(self, template_graph_root, current_node):

@@ -14,11 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import logging
 
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
+
 
 class GoogleMapsExtension(Extension):
 
@@ -46,7 +46,7 @@ class GoogleMapsExtension(Extension):
             return None
 
     def _format_distance_for_programy(self, distance):
-        distance_splits = distance._distance_text.split(" ")
+        distance_splits = distance.distance_text.split(" ")
         value = distance_splits[0]
         if "." in value:
             value_splits = distance_splits[0].split(".")
@@ -62,4 +62,3 @@ class GoogleMapsExtension(Extension):
 
     def _format_directions_for_programy(self, directions):
         return "DIRECTIONS %s"%directions.legs_as_a_string()
-

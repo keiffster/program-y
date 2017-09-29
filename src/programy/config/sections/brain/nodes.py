@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainNodesConfiguration(BaseConfigurationData):
+class BrainNodesConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "nodes")
+        BaseSectionConfigurationData.__init__(self, "nodes")
         self._pattern_nodes = None
         self._template_nodes = None
 
@@ -35,13 +35,13 @@ class BrainNodesConfiguration(BaseConfigurationData):
     def template_nodes(self):
         return self._template_nodes
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        nodes = file_config.get_section("nodes", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        nodes = configuration_file.get_section("nodes", configuration)
         if nodes is not None:
-            pattern_nodes = file_config.get_option(nodes, "pattern_nodes", missing_value=None)
+            pattern_nodes = configuration_file.get_option(nodes, "pattern_nodes", missing_value=None)
             if pattern_nodes is not None:
                 self._pattern_nodes = self.sub_bot_root(pattern_nodes, bot_root)
-            template_nodes = file_config.get_option(nodes, "template_nodes", missing_value=None)
+            template_nodes = configuration_file.get_option(nodes, "template_nodes", missing_value=None)
             if template_nodes is not None:
                 self._template_nodes = self.sub_bot_root(template_nodes, bot_root)
         else:

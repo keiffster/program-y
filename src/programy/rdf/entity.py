@@ -17,10 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class RDFEntity(object):
 
-    def __init__(self, subject=None, predicate=None, object=None):
-        self._subject = subject
-        self._predicate = predicate
-        self._object = object
+    def __init__(self, rdf_subject=None, rdf_predicate=None, rdf_object=None):
+        self._subject = rdf_subject
+        self._predicate = rdf_predicate
+        self._object = rdf_object
 
     @property
     def subject(self):
@@ -42,40 +42,40 @@ class RDFEntity(object):
         return xml
 
     def to_string(self, resultset):
-        str = "( "
+        string = "( "
 
         comma = False
         if self.subject is not None:
             if resultset.subject.startswith("?"):
-                str += resultset.subject
+                string += resultset.subject
             else:
-                str += "_"
-            str += "="
-            str += self.subject
+                string += "_"
+            string += "="
+            string += self.subject
             comma = True
 
         if comma is True:
-            str += ", "
+            string += ", "
 
         if self.predicate is not None:
             if resultset.predicate.startswith("?"):
-                str += resultset.predicate
+                string += resultset.predicate
             else:
-                str += "_"
-            str += "="
-            str += self.predicate
+                string += "_"
+            string += "="
+            string += self.predicate
             comma = True
 
         if comma is True:
-            str += ", "
+            string += ", "
 
         if self.object is not None:
             if resultset.object.startswith("?"):
-                str += resultset.object
+                string += resultset.object
             else:
-                str += "_"
-            str += "="
-            str += self.object
+                string += "_"
+            string += "="
+            string += self.object
 
-        str += " )"
-        return str
+        string += " )"
+        return string

@@ -15,12 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class WebChatConfiguration(BaseConfigurationData):
+class WebChatConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "webchat")
+        BaseContainerConfigurationData.__init__(self, "webchat")
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
@@ -42,10 +42,10 @@ class WebChatConfiguration(BaseConfigurationData):
     def use_api_keys(self):
         return self._use_api_keys
 
-    def load_config_section(self, config_file, bot_root):
-        webchat = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        webchat = configuration_file.get_section(self.section_name)
         if webchat is not None:
-            self._host = config_file.get_option(webchat, "host")
-            self._port = config_file.get_option(webchat, "port")
-            self._debug = config_file.get_bool_option(webchat, "debug")
-            self._use_api_keys = config_file.get_bool_option(webchat, "use_api_keys")
+            self._host = configuration_file.get_option(webchat, "host")
+            self._port = configuration_file.get_option(webchat, "port")
+            self._debug = configuration_file.get_bool_option(webchat, "debug")
+            self._use_api_keys = configuration_file.get_bool_option(webchat, "use_api_keys")

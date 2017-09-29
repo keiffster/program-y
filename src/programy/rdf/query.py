@@ -23,10 +23,10 @@ class RDFQuery(object):
     QUERY = 1
     NOT_QUERY = 2
 
-    def __init__(self, subject, predicate, object, query_type=QUERY):
-        self._subject_node = subject
-        self._predicate_node = predicate
-        self._object_node = object
+    def __init__(self, rdf_subject, rdf_predicate, rdf_object, query_type=QUERY):
+        self._subject_node = rdf_subject
+        self._predicate_node = rdf_predicate
+        self._object_node = rdf_object
         self._query_type = query_type
 
     @property
@@ -61,23 +61,23 @@ class RDFQuery(object):
         return xml
 
     def to_string(self, bot, clientid):
-        subject = self._subject_node.resolve(bot, clientid)
-        predicate = self._predicate_node.resolve(bot, clientid)
-        object = self._object_node.resolve(bot, clientid)
+        rdf_subject = self._subject_node.resolve(bot, clientid)
+        rdf_predicate = self._predicate_node.resolve(bot, clientid)
+        rdf_object = self._object_node.resolve(bot, clientid)
 
-        str = ""
+        string = ""
         if self.query_type == RDFQuery.QUERY:
-            str += "query=( "
+            string += "query=( "
         else:
-            str += "not=( "
+            string += "not=( "
 
-        str += "subj=" + subject + ", "
-        str += "pred=" + predicate + ", "
-        str += "obj=" + object
+        string += "subj=" + rdf_subject + ", "
+        string += "pred=" + rdf_predicate + ", "
+        string += "obj=" + rdf_object
 
-        str += " )"
+        string += " )"
 
-        return str
+        return string
 
     @staticmethod
     def get_parameter_value(name, parameters):
@@ -88,59 +88,59 @@ class RDFQuery(object):
 
     def execute(self, bot, clientid, parameters=None):
 
-        subject = self._subject_node.resolve(bot, clientid)
-        predicate = self._predicate_node.resolve(bot, clientid)
-        object = self._object_node.resolve(bot, clientid)
+        rdf_subject = self._subject_node.resolve(bot, clientid)
+        rdf_predicate = self._predicate_node.resolve(bot, clientid)
+        rdf_object = self._object_node.resolve(bot, clientid)
 
         # Now see if any are variables rather than data
-        if subject.startswith("?"):
+        if rdf_subject.startswith("?"):
             if parameters is not None:
-                subj_val = RDFQuery.get_parameter_value(subject, parameters)
+                subj_val = RDFQuery.get_parameter_value(rdf_subject, parameters)
             else:
                 subj_val = None
         else:
-            subj_val = subject
+            subj_val = rdf_subject
 
-        if predicate.startswith("?"):
+        if rdf_predicate.startswith("?"):
             if parameters is not None:
-                pred_val = RDFQuery.get_parameter_value(predicate, parameters)
+                pred_val = RDFQuery.get_parameter_value(rdf_predicate, parameters)
             else:
                 pred_val = None
         else:
-            pred_val = predicate
+            pred_val = rdf_predicate
 
-        if object.startswith("?"):
+        if rdf_object.startswith("?"):
             if parameters is not None:
-                obj_val = RDFQuery.get_parameter_value(object, parameters)
+                obj_val = RDFQuery.get_parameter_value(rdf_object, parameters)
             else:
                 obj_val = None
         else:
-            obj_val = object
+            obj_val = rdf_object
 
         # Query using subj, pred and obj data
         if self.query_type == RDFQuery.QUERY:
-            entities = bot.brain.rdf.match(subject=subj_val, predicate=pred_val, object=obj_val)
+            entities = bot.brain.rdf.match(rdf_subject=subj_val, rdf_predicate=pred_val, rdf_object=obj_val)
         else:
-            entities = bot.brain.rdf.not_match(subject=subj_val, predicate=pred_val, object=obj_val)
+            entities = bot.brain.rdf.not_match(rdf_subject=subj_val, rdf_predicate=pred_val, rdf_object=obj_val)
 
         results = []
         for entity in entities:
             result = []
-            if subject.startswith("?"):
-                result.append([subject, entity.subject])
+            if rdf_subject.startswith("?"):
+                result.append([rdf_subject, entity.subject])
             else:
                 result.append([None, entity.subject])
 
-            if predicate.startswith("?"):
-                result.append([predicate, entity.predicate])
+            if rdf_predicate.startswith("?"):
+                result.append([rdf_predicate, entity.predicate])
             else:
                 result.append([None, entity.predicate])
 
-            if object.startswith("?"):
-                result.append([object, entity.object])
+            if rdf_object.startswith("?"):
+                result.append([rdf_object, entity.object])
             else:
                 result.append([None, entity.object])
 
             results.append(result)
 
-        return RDFQueryResultSet(subject, predicate, object, results)
+        return RDFQueryResultSet(rdf_subject, rdf_predicate, rdf_object, results)

@@ -17,22 +17,23 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
-class BrainOOBConfiguration(BaseConfigurationData):
+
+class BrainOOBConfiguration(BaseSectionConfigurationData):
 
     def __init__(self, oob_name):
-        BaseConfigurationData.__init__(self, oob_name)
+        BaseSectionConfigurationData.__init__(self, oob_name)
         self._classname = None
 
     @property
     def classname(self):
         return self._classname
 
-    def load_config_section(self, file_config, service_config, bot_root):
-        service = file_config.get_section(self.section_name, service_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:
-            self._classname = file_config.get_option(service, "classname", missing_value=None)
+            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'oob' section missing from brain config, using to defaults")

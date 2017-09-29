@@ -27,11 +27,11 @@ class PatternTopicNode(PatternNode):
         PatternNode.__init__(self)
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<topic>'
-        str += super(PatternTopicNode, self).to_xml(bot, clientid)
-        str += '</topic>\n'
-        return str
+        string = ""
+        string += '<topic>'
+        string += super(PatternTopicNode, self).to_xml(bot, clientid)
+        string += '</topic>\n'
+        return string
 
     def can_add(self, new_node):
         if new_node.is_root():
@@ -54,7 +54,7 @@ class PatternTopicNode(PatternNode):
             return "TOPIC [%s]" % self._child_count(verbose)
         return "TOPIC"
 
-    def consume(self, bot, clientid, context, words, word_no, type, depth):
+    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
 
         tabs = self.get_tabs(bot, depth)
 
@@ -66,7 +66,7 @@ class PatternTopicNode(PatternNode):
         if words.word(word_no) == PatternTopicNode.TOPIC:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sTopic matched %s", tabs, words.word(word_no))
-            return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            return super(PatternTopicNode, self).consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sTopic NOT matched %s", tabs, words.word(word_no))

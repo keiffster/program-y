@@ -14,22 +14,22 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 import logging
 
 from programy.utils.newsapi.newsapi import NewsAPI
 from programy.extensions.base import Extension
+
 
 class NewsAPIExtension(Extension):
 
     def get_news_api_api(self, bot, clientid):
         return  NewsAPI(bot.license_keys)
 
-    def get_news(self, bot, clientid, source, max, sort, reverse):
+    def get_news(self, bot, clientid, source, max_num, sort, reverse):
 
         newsapi = self.get_news_api_api(bot, clientid)
 
-        headlines = newsapi.get_headlines(source, max, sort, reverse)
+        headlines = newsapi.get_headlines(source, max_num, sort, reverse)
         if headlines is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("NewsAPIExtension no headlines found!")
@@ -45,7 +45,7 @@ class NewsAPIExtension(Extension):
 
     def parse_data(self, data):
         source = None
-        max = 10
+        max_num = 10
         sort = False
         reverse = False
 
@@ -57,7 +57,7 @@ class NewsAPIExtension(Extension):
                 source = splits[count]
             elif splits[count] == "MAX":
                 count += 1
-                max = int(splits[count])
+                max_num = int(splits[count])
             elif splits[count] == "SORT":
                 count += 1
                 if splits[count].upper() == 'TRUE':
@@ -84,16 +84,16 @@ class NewsAPIExtension(Extension):
 
             count += 1
 
-        return source, max, sort, reverse
+        return source, max_num, sort, reverse
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
 
-        source, max, sort, reverse = self.parse_data(data)
+        source, max_num, sort, reverse = self.parse_data(data)
 
         if source is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("NewsAPIExtension no source passed in as data parameter!")
             return ""
 
-        return self.get_news(bot, clientid, source, max, sort, reverse)
+        return self.get_news(bot, clientid, source, max_num, sort, reverse)

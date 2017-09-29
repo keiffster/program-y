@@ -24,9 +24,9 @@ from programy.utils.classes.loader import ClassLoader
 class NodeFactory(object):
     __metaclass__ = ABCMeta
 
-    def __init__(self, type):
+    def __init__(self, node_type):
         self._nodes_config = {}
-        self._type = type
+        self._type = node_type
 
     @abstractmethod
     def default_config_file(self):

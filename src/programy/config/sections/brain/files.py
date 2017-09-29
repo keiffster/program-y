@@ -17,14 +17,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 from programy.config.sections.brain.aiml_file import BrainAIMLFileConfiguration
 from programy.config.sections.brain.file import BrainFileConfiguration
 
-class BrainFilesConfiguration(BaseConfigurationData):
+
+class BrainFilesConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "files")
+        BaseSectionConfigurationData.__init__(self, "files")
         self._aiml_files = BrainAIMLFileConfiguration()
         self._set_files = BrainFileConfiguration("sets")
         self._map_files = BrainFileConfiguration("maps")
@@ -97,24 +98,24 @@ class BrainFilesConfiguration(BaseConfigurationData):
     def regex_templates(self):
         return self._regex_templates
 
-    def load_config_section(self, config_file, brain_config, bot_root):
-        files_config = config_file.get_section("files", brain_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        files_config = configuration_file.get_section("files", configuration)
         if files_config is not None:
-            self._aiml_files.load_config_section(config_file, files_config, bot_root)
-            self._set_files.load_config_section(config_file, files_config, bot_root)
-            self._map_files.load_config_section(config_file, files_config, bot_root)
-            self._rdf_files.load_config_section(config_file, files_config, bot_root)
+            self._aiml_files.load_config_section(configuration_file, files_config, bot_root)
+            self._set_files.load_config_section(configuration_file, files_config, bot_root)
+            self._map_files.load_config_section(configuration_file, files_config, bot_root)
+            self._rdf_files.load_config_section(configuration_file, files_config, bot_root)
 
-            self._denormal = self._get_file_option(config_file, "denormal", files_config, bot_root)
-            self._normal = self._get_file_option(config_file, "normal", files_config, bot_root)
-            self._gender = self._get_file_option(config_file, "gender", files_config, bot_root)
-            self._person = self._get_file_option(config_file, "person", files_config, bot_root)
-            self._person2 = self._get_file_option(config_file, "person2", files_config, bot_root)
-            self._properties = self._get_file_option(config_file, "properties", files_config, bot_root)
-            self._triples = self._get_file_option(config_file, "triples", files_config, bot_root)
-            self._preprocessors = self._get_file_option(config_file, "preprocessors", files_config, bot_root)
-            self._postprocessors = self._get_file_option(config_file, "postprocessors", files_config, bot_root)
-            self._regex_templates = self._get_file_option(config_file, "regex_templates", files_config, bot_root)
+            self._denormal = self._get_file_option(configuration_file, "denormal", files_config, bot_root)
+            self._normal = self._get_file_option(configuration_file, "normal", files_config, bot_root)
+            self._gender = self._get_file_option(configuration_file, "gender", files_config, bot_root)
+            self._person = self._get_file_option(configuration_file, "person", files_config, bot_root)
+            self._person2 = self._get_file_option(configuration_file, "person2", files_config, bot_root)
+            self._properties = self._get_file_option(configuration_file, "properties", files_config, bot_root)
+            self._triples = self._get_file_option(configuration_file, "triples", files_config, bot_root)
+            self._preprocessors = self._get_file_option(configuration_file, "preprocessors", files_config, bot_root)
+            self._postprocessors = self._get_file_option(configuration_file, "postprocessors", files_config, bot_root)
+            self._regex_templates = self._get_file_option(configuration_file, "regex_templates", files_config, bot_root)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Config section [files] missing from Brain, default values not appropriate")

@@ -15,12 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class ConsoleConfiguration(BaseConfigurationData):
+
+class ConsoleConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "console")
+        BaseContainerConfigurationData.__init__(self, "console")
 
-    def load_config_section(self, config_file, bot_root):
+    def load_configuration(self, configuration_file, bot_root):
         return

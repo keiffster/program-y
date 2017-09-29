@@ -49,9 +49,9 @@ class TemplateTopicStarNode(TemplateIndexedNode):
             return ""
 
     def to_string(self):
-        str = "TOPICSTAR"
-        str += self.get_index_as_str()
-        return str
+        string = "TOPICSTAR"
+        string += self.get_index_as_str()
+        return string
 
     def to_xml(self, bot, clientid):
         xml = "<topicstar"

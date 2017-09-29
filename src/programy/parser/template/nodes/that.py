@@ -46,9 +46,9 @@ class TemplateThatNode(TemplateDoubleIndexedNode):
             return ""
 
     def to_string(self):
-        str = "THAT"
-        str += self.get_question_and_sentence_as_str()
-        return str
+        string = "THAT"
+        string += self.get_question_and_sentence_as_str()
+        return string
 
     def to_xml(self, bot, clientid):
         xml = "<that"

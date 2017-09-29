@@ -105,7 +105,7 @@ class BrainConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         brain_config = BrainConfiguration()
-        brain_config.load_config_section(yaml, ".")
+        brain_config.load_configuration(yaml, ".")
 
         self.assertIsNotNone(brain_config.overrides)
         self.assertTrue(brain_config.overrides.allow_system_aiml)

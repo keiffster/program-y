@@ -15,12 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class FacebookConfiguration(BaseConfigurationData):
+class FacebookConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "facebook")
+        BaseContainerConfigurationData.__init__(self, "facebook")
         self._polling = False
         self._polling_interval = 0
         self._streaming = False
@@ -37,10 +37,10 @@ class FacebookConfiguration(BaseConfigurationData):
     def streaming(self):
         return self._streaming
 
-    def load_config_section(self, config_file, bot_root):
-        facebook = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        facebook = configuration_file.get_section(self.section_name)
         if facebook is not None:
-            self._polling = config_file.get_bool_option(facebook, "polling")
+            self._polling = configuration_file.get_bool_option(facebook, "polling")
             if self._polling is True:
-                self._polling_interval = config_file.get_int_option(facebook, "polling_interval")
-            self._streaming = config_file.get_bool_option(facebook, "streaming")
+                self._polling_interval = configuration_file.get_int_option(facebook, "polling_interval")
+            self._streaming = configuration_file.get_bool_option(facebook, "streaming")

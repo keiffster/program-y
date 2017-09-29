@@ -24,7 +24,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
 
         node = TemplateIntervalNode()
         self.assertEqual("[INTERVAL]", node.to_string())
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("years")
         node.interval_from = TemplateWordNode("Thu Oct 06 16:35:11 2014")
         node.interval_to = TemplateWordNode("Fri Oct 07 16:35:11 2016")
@@ -46,7 +46,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("months")
         node.interval_from = TemplateWordNode("Thu Jul  6 16:35:11 2014")
         node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
@@ -67,7 +67,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("weeks")
         node.interval_from = TemplateWordNode("Thu Oct  1 16:35:11 2016")
         node.interval_to = TemplateWordNode("Fri Oct  14 16:35:11 2016")
@@ -88,7 +88,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("days")
         node.interval_from = TemplateWordNode("Thu Oct  6 16:35:11 2016")
         node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
@@ -109,7 +109,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("hours")
         node.interval_from = TemplateWordNode("Thu Oct  7 12:35:11 2016")
         node.interval_to = TemplateWordNode("Fri Oct  7 16:35:11 2016")
@@ -130,7 +130,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("minutes")
         node.interval_from = TemplateWordNode("Thu Oct 7 16:33:09 2016")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -151,7 +151,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("seconds")
         node.interval_from = TemplateWordNode("Thu Oct 7 16:35:09 2016")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -172,7 +172,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("microseconds")
         node.interval_from = TemplateWordNode("Thu Oct 7 16:35:09 2016")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:09 2016")
@@ -193,7 +193,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("ymd")
         node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -214,7 +214,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("hms")
         node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -235,7 +235,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("unknown")
         node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -256,7 +256,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("ymdhms")
         node.interval_from = TemplateWordNode("Thu Jul 14 16:33:09 2014")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
@@ -274,7 +274,7 @@ class TemplateIntervalNodeTests(TemplateTestsBaseClass):
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateIntervalNode()
-        node.format = TemplateWordNode("%c")
+        node.interval_format = TemplateWordNode("%c")
         node.style = TemplateWordNode("years")
         node.interval_from = TemplateWordNode("Thu Oct 6 16:35:11 2014")
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")

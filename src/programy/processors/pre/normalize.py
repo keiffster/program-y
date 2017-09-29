@@ -24,8 +24,8 @@ class NormalizePreProcessor(PreProcessor):
     def __init__(self):
         PreProcessor.__init__(self)
 
-    def process(self, bot, clientid, string):
-        normalized = bot.brain.normals.normalise_string(string)
+    def process(self, bot, clientid, word_string):
+        normalized = bot.brain.normals.normalise_string(word_string)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Normalising input from [%s] to [%s]", string, normalized)
+            logging.debug("Normalising input from [%s] to [%s]", word_string, normalized)
         return normalized

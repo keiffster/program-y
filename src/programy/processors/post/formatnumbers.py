@@ -25,10 +25,10 @@ class FormatNumbersPostProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
-    def process(self, bot, clientid, word_str):
+    def process(self, bot, clientid, word_string):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Formatting numbers...")
-        word_str = re.sub(r'(\d)([\.|,])\s+(\d)', r'\1\2\3', word_str)
-        word_str = re.sub(r'(\d)\s+([\.|,])(\d)', r'\1\2\3', word_str)
-        word_str = re.sub(r'(\d)\s+([\.|,])\s+(\d)', r'\1\2\3', word_str)
-        return word_str
+        word_string = re.sub(r'(\d)([\.|,])\s+(\d)', r'\1\2\3', word_string)
+        word_string = re.sub(r'(\d)\s+([\.|,])(\d)', r'\1\2\3', word_string)
+        word_string = re.sub(r'(\d)\s+([\.|,])\s+(\d)', r'\1\2\3', word_string)
+        return word_string

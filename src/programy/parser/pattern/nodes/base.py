@@ -394,8 +394,8 @@ class PatternNode(object):
 
     def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
 
-        str = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
-        output_func(str)
+        string = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
+        output_func(string)
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)
@@ -419,32 +419,32 @@ class PatternNode(object):
             child.dump(tabs+"\t", output_func, eol, verbose)
 
     def to_xml(self, bot, clientid):
-        str = ""
+        string = ""
 
         for priority in self._priority_words:
-            str += priority.to_xml(bot, clientid)
+            string += priority.to_xml(bot, clientid)
 
         if self._0ormore_arrow is not None:
-            str += self._0ormore_arrow.to_xml(bot, clientid)
+            string += self._0ormore_arrow.to_xml(bot, clientid)
         if self._0ormore_hash is not None:
-            str += self._0ormore_hash.to_xml(bot, clientid)
+            string += self._0ormore_hash.to_xml(bot, clientid)
         if self._1ormore_underline is not None:
-            str += self._1ormore_underline.to_xml(bot, clientid)
+            string += self._1ormore_underline.to_xml(bot, clientid)
         if self._1ormore_star is not None:
-            str += self._1ormore_star.to_xml(bot, clientid)
+            string += self._1ormore_star.to_xml(bot, clientid)
         if self._topic is not None:
-            str += self._topic.to_xml(bot, clientid)
+            string += self._topic.to_xml(bot, clientid)
         if self._that is not None:
-            str += self._that.to_xml(bot, clientid)
+            string += self._that.to_xml(bot, clientid)
         if self._template is not None:
-            str += self._template.to_xml(bot, clientid)
+            string += self._template.to_xml(bot, clientid)
 
         for child in self.children:
-            str += child.to_xml(bot, clientid)
+            string += child.to_xml(bot, clientid)
 
-        return str
+        return string
 
-    def match_children(self, bot, clientid, children, child_type, words, word_no, context, type, depth):
+    def match_children(self, bot, clientid, children, child_type, words, word_no, context, match_type, depth):
 
         tabs = self.get_tabs(bot, depth)
 
@@ -456,11 +456,11 @@ class PatternNode(object):
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%s%s matched %s", tabs, child_type, result.matched_phrase)
 
-                match_node = Match(type, child, result.matched_phrase)
+                match_node = Match(match_type, child, result.matched_phrase)
 
                 context.add_match(match_node)
 
-                match = child.consume(bot, clientid, context, words, word_no + 1, type, depth+1)
+                match = child.consume(bot, clientid, context, words, word_no + 1, match_type, depth+1)
                 if match is not None:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("%sMatched %s child, success!", tabs, child_type)
@@ -470,7 +470,7 @@ class PatternNode(object):
 
         return None, word_no
 
-    def consume(self, bot, clientid, context, words, word_no, type, depth):
+    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
 
         tabs = self.get_tabs(bot, depth)
 
@@ -517,37 +517,37 @@ class PatternNode(object):
                     logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
-        match, word_no = self.match_children(bot, clientid, self._priority_words, "Priority", words, word_no, context, type, depth)
+        match, word_no = self.match_children(bot, clientid, self._priority_words, "Priority", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_hash is not None:
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 0 or more hash, success!", tabs)
                 return match
 
         if self._1ormore_underline is not None:
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 1 or more underline, success!", tabs)
                 return match
 
-        match, word_no = self.match_children(bot, clientid, self._children, "Word", words, word_no, context, type, depth)
+        match, word_no = self.match_children(bot, clientid, self._children, "Word", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_arrow is not None:
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 0 or more arrow, success!", tabs)
                 return match
 
         if self._1ormore_star is not None:
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, type, depth+1)
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 1 or more star, success!", tabs)

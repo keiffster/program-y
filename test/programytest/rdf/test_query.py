@@ -24,14 +24,14 @@ class RDFQueryTests(unittest.TestCase):
         self.assertIsNone(RDFQuery.get_parameter_value("name3", parameters))
 
     def test_query(self):
-        query = RDFQuery(subject=TemplateWordNode("Subject"), predicate=TemplateWordNode("Predicate"), object=TemplateWordNode("Object"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("Subject"), rdf_predicate=TemplateWordNode("Predicate"), rdf_object=TemplateWordNode("Object"))
         self.assertIsNotNone(query)
         self.assertEquals(query.query_type, RDFQuery.QUERY)
         self.assertEquals("<q><subj>Subject</subj><pred>Predicate</pred><obj>Object</obj></q>", query.to_xml(None, None))
         self.assertEquals("query=( subj=Subject, pred=Predicate, obj=Object )", query.to_string(None, None))
 
     def test_not_query(self):
-        query = RDFQuery(subject=TemplateWordNode("Subject"), predicate=TemplateWordNode("Predicate"), object=TemplateWordNode("Object"), query_type=RDFQuery.NOT_QUERY)
+        query = RDFQuery(rdf_subject=TemplateWordNode("Subject"), rdf_predicate=TemplateWordNode("Predicate"), rdf_object=TemplateWordNode("Object"), query_type=RDFQuery.NOT_QUERY)
         self.assertIsNotNone(query)
         self.assertEquals(query.query_type, RDFQuery.NOT_QUERY)
         self.assertEquals("<notq><subj>Subject</subj><pred>Predicate</pred><obj>Object</obj></notq>", query.to_xml(None, None))
@@ -47,7 +47,7 @@ class RDFQueryTests(unittest.TestCase):
             ACCOUNT:lifeArea:Finances
             ACT:hasPurpose:to entertain by performing
         """)
-        query = RDFQuery(subject=TemplateWordNode("ACCOUNT"), predicate=TemplateWordNode("hasSize"), object=TemplateWordNode("?x"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("ACCOUNT"), rdf_predicate=TemplateWordNode("hasSize"), rdf_object=TemplateWordNode("?x"))
 
         self.assertEquals("query=( subj=ACCOUNT, pred=hasSize, obj=?x )", query.to_string(None, None))
 
@@ -69,7 +69,7 @@ class RDFQueryTests(unittest.TestCase):
             ACCOUNT:lifeArea:Finances
             ACT:hasPurpose:to entertain by performing
         """)
-        query = RDFQuery(subject=TemplateWordNode("ACCOUNT"), predicate=TemplateWordNode("?x"), object=TemplateWordNode("?y"))
+        query = RDFQuery(rdf_subject=TemplateWordNode("ACCOUNT"), rdf_predicate=TemplateWordNode("?x"), rdf_object=TemplateWordNode("?y"))
 
         self.assertEquals("query=( subj=ACCOUNT, pred=?x, obj=?y )", query.to_string(None, None))
 

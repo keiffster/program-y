@@ -15,16 +15,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-# -*- coding: UTF-8 -*-
-
-"""
-    programy
-    ~~~~~~
-    AIML Interpreter for Python 3.x
-    :copyright: (c) 2016-17 by Keith Sterling
-    :license: MIT, see LICENSE for more details.
-"""
-
 
 __copyright__ = 'Copyright 2016-17 by Keith Sterling'
 __version__ = '0.9.0'
@@ -34,5 +24,4 @@ __email__ = 'keiffster@gmail.com'
 __source__ = 'https://github.com/keiffster/programy/'
 
 __all__ = [
-    'Client',
 ]

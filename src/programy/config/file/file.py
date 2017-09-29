@@ -22,14 +22,14 @@ class BaseConfigurationFile(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
-    def load_from_text(self, text, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root):
         """
         Never Implemented
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def load_from_file(self, filename, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root):
         """
         Never Implemented
         """
@@ -43,14 +43,14 @@ class BaseConfigurationFile(object):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_keys(self, child_section):
+    def get_keys(self, section):
         """
         Never Implemented
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def get_child_section_keys(self, section_name, parent_section):
+    def get_child_section_keys(self, child_section_name, parent_section):
         """
         Never Implemented
         """
@@ -64,7 +64,7 @@ class BaseConfigurationFile(object):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_multi_file_option(self, section, option_name, missing_value=None):
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
         """
         Never Implemented
         """

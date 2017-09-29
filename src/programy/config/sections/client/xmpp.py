@@ -15,12 +15,12 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 
-class XmppConfiguration(BaseConfigurationData):
+class XmppConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "xmpp")
+        BaseContainerConfigurationData.__init__(self, "xmpp")
         self._server = None
         self._port = 5222
         self._xep_0030 = False
@@ -52,12 +52,12 @@ class XmppConfiguration(BaseConfigurationData):
     def xep_0199(self):
         return self._xep_0199
 
-    def load_config_section(self, config_file, bot_root):
-        xmpp = config_file.get_section(self.section_name)
+    def load_configuration(self, configuration_file, bot_root):
+        xmpp = configuration_file.get_section(self.section_name)
         if xmpp is not None:
-            self._server = config_file.get_option(xmpp, "server")
-            self._port = config_file.get_int_option(xmpp, "port", missing_value=5222)
-            self._xep_0030 = config_file.get_bool_option(xmpp, "xep_0030")
-            self._xep_0004 = config_file.get_bool_option(xmpp, "xep_0004")
-            self._xep_0060 = config_file.get_bool_option(xmpp, "xep_0060")
-            self._xep_0199 = config_file.get_bool_option(xmpp, "xep_0199")
+            self._server = configuration_file.get_option(xmpp, "server")
+            self._port = configuration_file.get_int_option(xmpp, "port", missing_value=5222)
+            self._xep_0030 = configuration_file.get_bool_option(xmpp, "xep_0030")
+            self._xep_0004 = configuration_file.get_bool_option(xmpp, "xep_0004")
+            self._xep_0060 = configuration_file.get_bool_option(xmpp, "xep_0060")
+            self._xep_0199 = configuration_file.get_bool_option(xmpp, "xep_0199")

@@ -25,8 +25,8 @@ class Match(object):
     TOPIC = 2
     THAT = 3
 
-    def __init__(self, type, node, word):
-        self._match_type = type
+    def __init__(self, match_type, node, word):
+        self._match_type = match_type
         self._matched_node = node
         self._matched_words = []
         if word is not None:
@@ -51,12 +51,12 @@ class Match(object):
         return join_char.join(self.matched_words)
 
     @staticmethod
-    def type_to_string(type):
-        if type == Match.WORD:
+    def type_to_string(match_type):
+        if match_type == Match.WORD:
             return "Word"
-        elif type == Match.TOPIC:
+        elif match_type == Match.TOPIC:
             return "Topic"
-        elif type == Match.THAT:
+        elif match_type == Match.THAT:
             return "That"
         return "Unknown"
 
@@ -104,7 +104,7 @@ class MatchContext(object):
             self._matched_nodes.pop()
 
     def pop_matches(self, matches_add):
-        for x in range(0, matches_add):
+        for match in range(0, matches_add):
             self.pop_match()
 
     def set_template(self, template):
@@ -120,15 +120,15 @@ class MatchContext(object):
     def matched(self):
         return bool(self._template_node is not None)
 
-    def _get_indexed_match_by_type(self, index, type):
+    def _get_indexed_match_by_type(self, index, match_type):
         count = 1
         for match in self._matched_nodes:
-            if match._match_type == type and \
-                    (match._matched_node.is_wildcard() or
-                     match._matched_node.is_set() or
-                     match._matched_node.is_iset() or
-                     match._matched_node.is_bot() or
-                     match._matched_node.is_regex()):
+            if match.match_type == match_type and \
+                    (match.matched_node.is_wildcard() or
+                     match.matched_node.is_set() or
+                     match.matched_node.is_iset() or
+                     match.matched_node.is_bot() or
+                     match.matched_node.is_regex()):
                 if count == index:
                     return match.joined_words()
                 count += 1

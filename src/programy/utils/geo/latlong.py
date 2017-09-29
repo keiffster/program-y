@@ -24,6 +24,6 @@ class LatLong(object):
         return self.to_string(precision=6)
 
     def to_string(self, precision=2):
-        format = "%." + str(precision) + "f"
-        string = "Latitude: " + format + ", Longitude: " + format
+        string_format = "%." + str(precision) + "f"
+        string = "Latitude: " + string_format + ", Longitude: " + string_format
         return string % (self.latitude, self.longitude)

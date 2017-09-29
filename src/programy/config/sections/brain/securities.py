@@ -15,12 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 from programy.config.sections.brain.security import BrainSecurityConfiguration
 
-class BrainSecuritiesConfiguration(BaseConfigurationData):
+
+class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
     def __init__(self):
-        BaseConfigurationData.__init__(self, "security")
+        BaseSectionConfigurationData.__init__(self, "security")
         self._authorisation = None
         self._authentication = None
 
@@ -32,11 +33,11 @@ class BrainSecuritiesConfiguration(BaseConfigurationData):
     def authentication(self):
         return self._authentication
 
-    def load_config_section(self, file_config, brain_config, bot_root):
-        securities = file_config.get_section(self.section_name, brain_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        securities = configuration_file.get_section(self.section_name, configuration)
         if securities is not None:
             self._authentication = BrainSecurityConfiguration("authentication")
-            self._authentication.load_config_section(file_config, securities, bot_root)
+            self._authentication.load_config_section(configuration_file, securities, bot_root)
 
             self._authorisation = BrainSecurityConfiguration("authorisation")
-            self._authorisation.load_config_section(file_config, securities, bot_root)
+            self._authorisation.load_config_section(configuration_file, securities, bot_root)

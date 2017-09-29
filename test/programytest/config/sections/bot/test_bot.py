@@ -35,7 +35,7 @@ class BotConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         bot_config = BotConfiguration()
-        bot_config.load_config_section(yaml, ".")
+        bot_config.load_configuration(yaml, ".")
 
         self.assertEqual("./config/license.keys", bot_config.license_keys)
         self.assertEqual(">>>", bot_config.prompt)
@@ -63,7 +63,7 @@ class BotConfigurationTests(unittest.TestCase):
         """, ConsoleConfiguration(), ".")
 
         bot_config = BotConfiguration()
-        bot_config.load_config_section(yaml, ".")
+        bot_config.load_configuration(yaml, ".")
 
         self.assertIsNone(bot_config.license_keys)
         self.assertEqual(">>> ", bot_config.prompt)

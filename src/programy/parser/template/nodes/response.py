@@ -46,9 +46,9 @@ class TemplateResponseNode(TemplateIndexedNode):
             return ""
 
     def to_string(self):
-        str = "RESPONSE"
-        str += self.get_index_as_str()
-        return str
+        string = "RESPONSE"
+        string += self.get_index_as_str()
+        return string
 
     def to_xml(self, bot, clientid):
         xml = "<response"

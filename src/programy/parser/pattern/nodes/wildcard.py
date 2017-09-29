@@ -60,32 +60,32 @@ class PatternWildCardNode(PatternNode):
 
         return False
 
-    def check_child_is_wildcard(self, tabs, bot, clientid, context, words, word_no, type, depth):
+    def check_child_is_wildcard(self, tabs, bot, clientid, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard # is next node, moving on!", tabs)
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard _ is next node, moving on!", tabs)
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard ^ is next node, moving on!", tabs)
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard * is next node, moving on!", tabs)
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, type, depth+1)
+            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 

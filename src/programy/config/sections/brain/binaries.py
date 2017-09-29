@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainBinariesConfiguration(BaseConfigurationData):
+class BrainBinariesConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "binaries")
+        BaseSectionConfigurationData.__init__(self, "binaries")
         self._save_binary = False
         self._load_binary = False
         self._binary_filename = None
@@ -45,15 +45,15 @@ class BrainBinariesConfiguration(BaseConfigurationData):
     def load_aiml_on_binary_fail(self):
         return self._load_aiml_on_binary_fail
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        binaries = file_config.get_section("binaries", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        binaries = configuration_file.get_section("binaries", configuration)
         if binaries is not None:
-            self._save_binary = file_config.get_option(binaries, "save_binary", missing_value=None)
-            self._load_binary = file_config.get_option(binaries, "load_binary", missing_value=None)
-            binary_filename = file_config.get_option(binaries, "binary_filename", missing_value=None)
+            self._save_binary = configuration_file.get_option(binaries, "save_binary", missing_value=None)
+            self._load_binary = configuration_file.get_option(binaries, "load_binary", missing_value=None)
+            binary_filename = configuration_file.get_option(binaries, "binary_filename", missing_value=None)
             if binary_filename is not None:
                 self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
-            self._load_aiml_on_binary_fail = file_config.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
+            self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'binaries' section missing from bot config, using to defaults")

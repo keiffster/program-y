@@ -50,7 +50,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         return xml
 
     def write_learnf_to_file(self, bot, clientid, category):
-        learnf_path = bot.brain._configuration.defaults.learn_filename
+        learnf_path = bot.brain.configuration.defaults.learn_filename
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Writing learnf to %s", learnf_path)
 

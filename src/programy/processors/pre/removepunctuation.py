@@ -25,7 +25,7 @@ class RemovePunctuationPreProcessor(PreProcessor):
     def __init__(self):
         PreProcessor.__init__(self)
 
-    def process(self, bot, clientid, string):
+    def process(self, bot, clientid, word_string):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Removing punctuation...")
-        return TextUtils.strip_all_punctuation(string)
+        return TextUtils.strip_all_punctuation(word_string)

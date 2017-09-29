@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseContainerConfigurationData
 from programy.config.sections.brain.overrides import BrainOverridesConfiguration
 from programy.config.sections.brain.defaults import BrainDefaultsConfiguration
 from programy.config.sections.brain.nodes import BrainNodesConfiguration
@@ -28,10 +28,10 @@ from programy.config.sections.brain.oobs import BrainOOBSConfiguration
 from programy.config.sections.brain.dynamic import BrainDynamicsConfiguration
 
 
-class BrainConfiguration(BaseConfigurationData):
+class BrainConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
-        BaseConfigurationData.__init__(self, "brain")
+        BaseContainerConfigurationData.__init__(self, "brain")
         self._overrides = BrainOverridesConfiguration()
         self._defaults = BrainDefaultsConfiguration()
         self._nodes = BrainNodesConfiguration()
@@ -83,16 +83,16 @@ class BrainConfiguration(BaseConfigurationData):
     def dynamics(self):
         return self._dynamics
 
-    def load_config_section(self, file_config, bot_root):
-        brain_config = file_config.get_section("brain")
+    def load_configuration(self, configuration_file, bot_root):
+        brain_config = configuration_file.get_section("brain")
         if brain_config is not None:
-            self._overrides.load_config_section(file_config, brain_config, bot_root)
-            self._defaults.load_config_section(file_config, brain_config, bot_root)
-            self._nodes.load_config_section(file_config, brain_config, bot_root)
-            self._binaries.load_config_section(file_config, brain_config, bot_root)
-            self._braintree.load_config_section(file_config, brain_config, bot_root)
-            self._files.load_config_section(file_config, brain_config, bot_root)
-            self._services.load_config_section(file_config, brain_config, bot_root)
-            self._security.load_config_section(file_config, brain_config, bot_root)
-            self._oob.load_config_section(file_config, brain_config, bot_root)
-            self._dynamics.load_config_section(file_config, brain_config, bot_root)
+            self._overrides.load_config_section(configuration_file, brain_config, bot_root)
+            self._defaults.load_config_section(configuration_file, brain_config, bot_root)
+            self._nodes.load_config_section(configuration_file, brain_config, bot_root)
+            self._binaries.load_config_section(configuration_file, brain_config, bot_root)
+            self._braintree.load_config_section(configuration_file, brain_config, bot_root)
+            self._files.load_config_section(configuration_file, brain_config, bot_root)
+            self._services.load_config_section(configuration_file, brain_config, bot_root)
+            self._security.load_config_section(configuration_file, brain_config, bot_root)
+            self._oob.load_config_section(configuration_file, brain_config, bot_root)
+            self._dynamics.load_config_section(configuration_file, brain_config, bot_root)

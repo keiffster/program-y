@@ -67,10 +67,10 @@ class TemplateSelectNode(TemplateNode):
     #######################################################################################################
     # SELECT_EXPRESSION ::== <person>TEMPLATE_EXPRESSION</person>
 
-    def parse_vars(self, vars):
-        var_splits = vars.split(" ")
+    def parse_vars(self, variables):
+        var_splits = variables.split(" ")
         for var_name in var_splits:
-            self._query._vars.append(var_name)
+            self._query.vars.append(var_name)
 
     def parse_query(self, graph, query_name, query):
 
@@ -101,16 +101,16 @@ class TemplateSelectNode(TemplateNode):
         if obj is None:
             raise ParserException("<obj> element missing from select query")
 
-        self._query._queries.append(RDFQuery(subj, pred, obj, query_type))
+        self._query.queries.append(RDFQuery(subj, pred, obj, query_type))
 
     def parse_expression(self, graph, expression):
 
-        vars = expression.findall('vars')
-        if vars:
-            if len(vars) > 1:
+        variables = expression.findall('vars')
+        if variables:
+            if len(variables) > 1:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("Multiple <vars> found in select tag, using first")
-            self.parse_vars(vars[0].text)
+                    logging.warning("Multiple <variables> found in select tag, using first")
+            self.parse_vars(variables[0].text)
 
         queries = expression.findall('./')
         for query in queries:

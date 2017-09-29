@@ -40,11 +40,11 @@ class BasicUserGroupAuthorisationService(Authoriser):
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("No user groups defined, authorisation tag will not work!")
 
-    def authorise(self, clientid, role):
-        if clientid not in self._users:
-            raise AuthorisationException("User [%s] unknown to system!"%clientid)
+    def authorise(self, userid, role):
+        if userid not in self._users:
+            raise AuthorisationException("User [%s] unknown to system!"%userid)
 
-        if clientid in self._users:
-            user = self._users[clientid]
+        if userid in self._users:
+            user = self._users[userid]
             return user.has_role(role)
         return False

@@ -18,11 +18,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class RDFSelectStatement(object):
 
-    def __init__(self, vars=None, queries=None):
-        if vars is None:
+    def __init__(self, variables=None, queries=None):
+        if variables is None:
             self._vars = []
         else:
-            self._vars = vars[:]
+            self._vars = variables[:]
         if queries is None:
             self._queries = []
         else:
@@ -63,7 +63,7 @@ class RDFSelectStatement(object):
                         if next_result[0][1] == result[0][1]:
                             matched.append(next_result)
 
-                resultset._results = matched
+                resultset.results = matched
 
         values = []
         for result in resultset.results:

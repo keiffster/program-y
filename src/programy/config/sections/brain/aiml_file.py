@@ -39,26 +39,26 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
     def conversation(self):
         return self._conversation
 
-    def load_config_section(self, file_config, brain_config, bot_root):
-        files_config = file_config.get_option(brain_config, self.section_name)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        files_config = configuration_file.get_option(configuration, self.section_name)
         if files_config is not None:
-            files = file_config.get_multi_file_option(files_config, "files", bot_root)
+            files = configuration_file.get_multi_file_option(files_config, "files", bot_root)
             if files is not None and files:
                 self._files = files
-                self._extension = file_config.get_option(files_config, "extension")
-                self._directories = file_config.get_option(files_config, "directories")
+                self._extension = configuration_file.get_option(files_config, "extension")
+                self._directories = configuration_file.get_option(files_config, "directories")
             else:
-                file = file_config.get_option(files_config, "file")
+                file = configuration_file.get_option(files_config, "file")
                 if file is not None:
                     self._file = self.sub_bot_root(file, bot_root)
 
-            errors = file_config.get_option(files_config, "errors", missing_value=None)
+            errors = configuration_file.get_option(files_config, "errors", missing_value=None)
             if errors is not None:
                 self._errors = self.sub_bot_root(errors, bot_root)
-            duplicates = file_config.get_option(files_config, "duplicates", missing_value=None)
+            duplicates = configuration_file.get_option(files_config, "duplicates", missing_value=None)
             if duplicates is not None:
                 self._duplicates = self.sub_bot_root(duplicates, bot_root)
-            conversation = file_config.get_option(files_config, "conversation", missing_value=None)
+            conversation = configuration_file.get_option(files_config, "conversation", missing_value=None)
             if conversation is not None:
                 self._conversation = self.sub_bot_root(conversation, bot_root)
 

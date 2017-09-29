@@ -25,6 +25,7 @@ class TemplateBotNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
         self._name = None
+        self.local = False
 
     @property
     def name(self):
@@ -55,9 +56,6 @@ class TemplateBotNode(TemplateNode):
 
     def to_string(self):
         return "[BOT (%s)]" % (self.name.to_string())
-
-    def output(self, tabs="", output=logging.debug):
-        self.output_child(self, tabs, output)
 
     def to_xml(self, bot, clientid):
         xml = "<bot "

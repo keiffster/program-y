@@ -25,18 +25,18 @@ class TemplateIntervalNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
-        self._format = None
+        self._interval_format = None
         self._style = None
         self._interval_from = None
         self._interval_to = None
 
     @property
-    def format(self):
-        return self._format
+    def interval_format(self):
+        return self._interval_format
 
-    @format.setter
-    def format(self, format):
-        self._format = format
+    @interval_format.setter
+    def interval_format(self, interval_format):
+        self._interval_format = interval_format
 
     @property
     def interval_from(self):
@@ -63,7 +63,7 @@ class TemplateIntervalNode(TemplateNode):
         self._style = style
 
     def resolve_to_string(self, bot, clientid):
-        format_str = self._format.resolve(bot, clientid)
+        format_str = self._interval_format.resolve(bot, clientid)
 
         from_str = self.interval_from.resolve(bot, clientid)
         from_time = datetime.datetime.strptime(from_str, format_str)
@@ -123,7 +123,7 @@ class TemplateIntervalNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = '<interval'
-        xml += ' format="%s"' % self._format.to_xml(bot, clientid)
+        xml += ' format="%s"' % self._interval_format.to_xml(bot, clientid)
         xml += ' style="%s"' % self._style.to_xml(bot, clientid)
         xml += '>'
         xml += '<from>'
@@ -146,7 +146,7 @@ class TemplateIntervalNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         if 'format' in expression.attrib:
-            self.format = graph.get_word_node(expression.attrib['format'])
+            self.interval_format = graph.get_word_node(expression.attrib['format'])
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -155,7 +155,7 @@ class TemplateIntervalNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'format':
-                self.format = graph.get_word_node(self.get_text_from_element(child))
+                self.interval_format = graph.get_word_node(self.get_text_from_element(child))
 
             elif tag_name == 'style':
                 node = graph.get_base_node()
@@ -186,10 +186,10 @@ class TemplateIntervalNode(TemplateNode):
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if self.format is None:
+        if self.interval_format is None:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("Interval node, format missing, defaulting to 'c%%'!")
-            self.format = "%c"
+            self.interval_format = "%c"
         if self.style is None:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("style node, format missing, defaulting to 'days'!")

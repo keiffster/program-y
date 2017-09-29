@@ -56,7 +56,7 @@ class Processor:
         pass
 
     @abstractmethod
-    def process(self, bot, clientid, string):
+    def process(self, bot, clientid, word_string):
         pass
 
 
@@ -68,7 +68,7 @@ class PreProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, bot, clientid, string):
+    def process(self, bot, clientid, word_string):
         pass
 
 ##################################################################

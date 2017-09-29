@@ -27,11 +27,15 @@ class TemplateGraph(object):
 
         template_nodes = None
         if aiml_parser is not None:
-            if aiml_parser._brain is not None:
-                template_nodes = aiml_parser._brain.configuration.nodes.template_nodes
+            if aiml_parser.brain is not None:
+                template_nodes = aiml_parser.brain.configuration.nodes.template_nodes
 
         self._template_factory = TemplateNodeFactory()
         self._template_factory.load_nodes_config_from_file(template_nodes)
+
+    @property
+    def aiml_parser(self):
+        return self._aiml_parser
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*

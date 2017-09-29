@@ -26,12 +26,12 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
         TemplateTripleNode.__init__(self, node_name="deletetriple", entity=entity)
 
     def resolve_to_string(self, bot, clientid):
-        subject = self.entity.subject.resolve(bot, clientid)
-        predicate = self.entity.predicate.resolve(bot, clientid)
-        object = self.entity.object.resolve(bot, clientid)
+        rdf_subject = self.entity.subject.resolve(bot, clientid)
+        rdf_predicate = self.entity.predicate.resolve(bot, clientid)
+        rdf_object = self.entity.object.resolve(bot, clientid)
 
         resolved = ""
-        bot.brain.rdf.delete_entity(subject, predicate, object)
+        bot.brain.rdf.delete_entity(rdf_subject, rdf_predicate, rdf_object)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

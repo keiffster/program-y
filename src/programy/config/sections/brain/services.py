@@ -17,13 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 from programy.config.sections.brain.service import BrainServiceConfiguration
 
 
-class BrainServicesConfiguration(BaseConfigurationData):
+class BrainServicesConfiguration(BaseSectionConfigurationData):
     def __init__(self):
-        BaseConfigurationData.__init__(self, "services")
+        BaseSectionConfigurationData.__init__(self, "services")
         self._services = {}
 
     def exists(self, name):
@@ -37,14 +37,14 @@ class BrainServicesConfiguration(BaseConfigurationData):
     def services(self):
         return self._services.keys()
 
-    def load_config_section(self, file_config, brain_config, bot_root):
-        services = file_config.get_section("services", brain_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        services = configuration_file.get_section("services", configuration)
         if services is not None:
-            service_keys = file_config.get_keys(services)
+            service_keys = configuration_file.get_keys(services)
 
             for name in service_keys:
                 service = BrainServiceConfiguration(name)
-                service.load_config_section(file_config, services, bot_root)
+                service.load_config_section(configuration_file, services, bot_root)
                 self._services[name] = service
 
         else:

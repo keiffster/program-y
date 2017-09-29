@@ -49,15 +49,15 @@ class BotSpellingConfiguration(BaseConfigurationData):
     def check_and_retry(self):
         return self._check_and_retry
 
-    def load_config_section(self, file_config, bot_config, bot_root):
-        spelling = file_config.get_section("spelling", bot_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        spelling = configuration_file.get_section("spelling", configuration)
         if spelling is not None:
-            self._classname = file_config.get_option(spelling, "classname", missing_value=None)
-            self._alphabet = file_config.get_option(spelling, "alphabet", missing_value=None)
-            corpus = file_config.get_option(spelling, "corpus", missing_value=None)
+            self._classname = configuration_file.get_option(spelling, "classname", missing_value=None)
+            self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None)
+            corpus = configuration_file.get_option(spelling, "corpus", missing_value=None)
             self._corpus = self.sub_bot_root(corpus, bot_root)
-            self._check_before = file_config.get_bool_option(spelling, "check_before", missing_value=False)
-            self._check_and_retry = file_config.get_option(spelling, "check_and_retry", missing_value=False)
+            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False)
+            self._check_and_retry = configuration_file.get_option(spelling, "check_and_retry", missing_value=False)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'spelling' section missing from bot config, using to defaults")

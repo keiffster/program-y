@@ -118,7 +118,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateConditionNode("cond1", type=2)
+        node = TemplateConditionNode("cond1", condition_type=2)
         self.assertIsNotNone(node)
         cond1 = TemplateConditionListItemNode(value=TemplateWordNode("value1"))
         cond1.append(TemplateWordNode("Word1"))
@@ -149,7 +149,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateConditionNode("var1", local=True, type=2)
+        node = TemplateConditionNode("var1", local=True, condition_type=2)
         self.assertIsNotNone(node)
         cond1 = TemplateConditionListItemNode(value=TemplateWordNode("value1"))
         cond1.append(TemplateWordNode("Word1"))
@@ -175,7 +175,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
     def test_type2_to_xml_global(self):
         root = TemplateNode()
 
-        node = TemplateConditionNode("cond1", type=2)
+        node = TemplateConditionNode("cond1", condition_type=2)
         self.assertIsNotNone(node)
         cond1 = TemplateConditionListItemNode(value=TemplateWordNode("value1"))
         cond1.append(TemplateWordNode("Word1"))
@@ -200,7 +200,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateConditionNode("var1", local=True, type=2)
+        node = TemplateConditionNode("var1", local=True, condition_type=2)
         self.assertIsNotNone(node)
         cond1 = TemplateConditionListItemNode(value=TemplateWordNode("value1"))
         cond1.append(TemplateWordNode("Word1"))
@@ -225,7 +225,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateConditionNode(type=3)
+        node = TemplateConditionNode(condition_type=3)
         self.assertIsNotNone(node)
 
         cond1 = TemplateConditionListItemNode(name="name1", value=TemplateWordNode("value1") )
@@ -252,7 +252,7 @@ class TemplateConditionNodeTests(TemplateTestsBaseClass):
     def test_type3_to_xml(self):
         root = TemplateNode()
 
-        node = TemplateConditionNode(type=3)
+        node = TemplateConditionNode(condition_type=3)
         self.assertIsNotNone(node)
 
         cond1 = TemplateConditionListItemNode(name="name1", value=TemplateWordNode("value1"))

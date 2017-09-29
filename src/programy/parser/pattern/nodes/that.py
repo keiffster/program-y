@@ -27,11 +27,11 @@ class PatternThatNode(PatternNode):
         PatternNode.__init__(self)
 
     def to_xml(self, bot, clientid):
-        str = ""
-        str += '<that>'
-        str += super(PatternThatNode, self).to_xml(bot, clientid)
-        str += '</that>\n'
-        return str
+        string = ""
+        string += '<that>'
+        string += super(PatternThatNode, self).to_xml(bot, clientid)
+        string += '</that>\n'
+        return string
 
     def can_add(self, new_node):
         if new_node.is_root():
@@ -54,7 +54,7 @@ class PatternThatNode(PatternNode):
             return "THAT [%s]" % self._child_count(verbose)
         return "THAT"
 
-    def consume(self, bot, clientid, context, words, word_no, type, depth):
+    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
 
         tabs = self.get_tabs(bot, depth)
 
@@ -67,7 +67,7 @@ class PatternThatNode(PatternNode):
         if words.word(word_no) == PatternThatNode.THAT:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sThat matched %s", tabs, words.word(word_no))
-            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, type, depth+1)
+            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, match_type, depth+1)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sTHAT NOT matched %s", tabs, words.word(word_no))

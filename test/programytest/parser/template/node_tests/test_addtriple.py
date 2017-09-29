@@ -23,7 +23,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         root = TemplateNode()
-        node = TemplateAddTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = TemplateAddTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
@@ -33,7 +33,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
-        node = TemplateAddTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = TemplateAddTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         result = root.resolve(self.bot, self.clientid)
@@ -43,7 +43,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
     def test_exception_handling(self):
 
         root = TemplateNode()
-        node = MockTemplateAddTripleNode(RDFEntity(subject="S", predicate="P", object="O"))
+        node = MockTemplateAddTripleNode(RDFEntity(rdf_subject="S", rdf_predicate="P", rdf_object="O"))
         root.append(node)
 
         with self.assertRaises(Exception):

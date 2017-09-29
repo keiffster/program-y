@@ -43,18 +43,18 @@ class TemplateTripleNode(TemplateNode):
         return self.entity.to_xml(bot, clientid)
 
     def parse_expression(self, graph, expression):
-        subject = None
-        predicate = None
-        object = None
+        rdf_subject = None
+        rdf_predicate = None
+        rdf_object = None
 
         if 'subj' in expression.attrib:
-            subject = graph.get_word_node(expression.attrib['subj'])
+            rdf_subject = graph.get_word_node(expression.attrib['subj'])
 
         if 'pred' in expression.attrib:
-            predicate = graph.get_word_node(expression.attrib['pred'])
+            rdf_predicate = graph.get_word_node(expression.attrib['pred'])
 
         if 'obj' in expression.attrib:
-            object = graph.get_word_node(expression.attrib['obj'])
+            rdf_object = graph.get_word_node(expression.attrib['obj'])
 
         head_text = self.get_text_from_element(expression)
         self.parse_text(graph, head_text)
@@ -63,24 +63,24 @@ class TemplateTripleNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'subj':
-                subject = self.parse_children_as_word_node(graph, child)
+                rdf_subject = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
-                predicate = self.parse_children_as_word_node(graph, child)
+                rdf_predicate = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
-                object = self.parse_children_as_word_node(graph, child)
+                rdf_object = self.parse_children_as_word_node(graph, child)
             else:
                 graph.parse_tag_expression(child, self)
 
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if subject is None:
+        if rdf_subject is None:
             raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
 
-        if predicate is None:
+        if rdf_predicate is None:
             raise ParserException("<%s> node missing predicate attribue/element"%self.node_name)
 
-        if object is None:
+        if rdf_object is None:
             raise ParserException("<%s> node missing object attribue/element"%self.node_name)
 
-        self._entity = RDFEntity(subject=subject, predicate=predicate, object=object)
+        self._entity = RDFEntity(rdf_subject=rdf_subject, rdf_predicate=rdf_predicate, rdf_object=rdf_object)

@@ -57,5 +57,5 @@ class TemplateSentenceNode(TemplateNode):
     def add_default_star(self):
         return True
 
-    def parse_expression(self, graph, branch):
-        self._parse_node(graph, branch)
+    def parse_expression(self, graph, expression):
+        self._parse_node(graph, expression)

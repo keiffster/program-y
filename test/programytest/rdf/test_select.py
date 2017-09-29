@@ -34,7 +34,7 @@ class RDFQueryTests(unittest.TestCase):
         self.load_data(bot.brain.rdf)
 
         select = RDFSelectStatement(["?x"], [
-            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("legs"), object=TemplateWordNode("2"))
+            RDFQuery(rdf_subject=TemplateWordNode("?x"), rdf_predicate=TemplateWordNode("legs"), rdf_object=TemplateWordNode("2"))
         ])
         self.assertIsNotNone(select)
 
@@ -47,7 +47,7 @@ class RDFQueryTests(unittest.TestCase):
         self.load_data(bot.brain.rdf)
 
         select = RDFSelectStatement(["?x"], [
-            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("legs"), object=TemplateWordNode("2"), query_type=RDFQuery.NOT_QUERY)
+            RDFQuery(rdf_subject=TemplateWordNode("?x"), rdf_predicate=TemplateWordNode("legs"), rdf_object=TemplateWordNode("2"), query_type=RDFQuery.NOT_QUERY)
         ])
         self.assertIsNotNone(select)
 
@@ -60,8 +60,8 @@ class RDFQueryTests(unittest.TestCase):
         self.load_data(bot.brain.rdf)
 
         select = RDFSelectStatement(["?x"], [
-            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("legs"), object=TemplateWordNode("2")),
-            RDFQuery(subject=TemplateWordNode("?x"), predicate=TemplateWordNode("feathers"), object=TemplateWordNode("yes"))
+            RDFQuery(rdf_subject=TemplateWordNode("?x"), rdf_predicate=TemplateWordNode("legs"), rdf_object=TemplateWordNode("2")),
+            RDFQuery(rdf_subject=TemplateWordNode("?x"), rdf_predicate=TemplateWordNode("feathers"), rdf_object=TemplateWordNode("yes"))
         ])
         self.assertIsNotNone(select)
 

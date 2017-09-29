@@ -17,12 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseConfigurationData
+from programy.config.base import BaseSectionConfigurationData
 
-class BrainSecurityConfiguration(BaseConfigurationData):
+
+class BrainSecurityConfiguration(BaseSectionConfigurationData):
 
     def __init__(self, service_name):
-        BaseConfigurationData.__init__(self, service_name)
+        BaseSectionConfigurationData.__init__(self, service_name)
         self._classname = None
         self._denied_srai = None
         self._usergroups = None
@@ -39,15 +40,15 @@ class BrainSecurityConfiguration(BaseConfigurationData):
     def usergroups(self):
         return self._usergroups
 
-    def load_config_section(self, file_config, service_config, bot_root):
-        service = file_config.get_section(self.section_name, service_config)
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:
-            self._classname = file_config.get_option(service, "classname", missing_value=None)
-            self._denied_srai = file_config.get_option(service, "denied_srai", missing_value=None)
-            usergroups = file_config.get_option(service, "usergroups", missing_value=None)
+            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
+            self._denied_srai = configuration_file.get_option(service, "denied_srai", missing_value=None)
+            usergroups = configuration_file.get_option(service, "usergroups", missing_value=None)
             if usergroups is not None:
                 self._usergroups = self.sub_bot_root(usergroups, bot_root)
-            self.load_additional_key_values(file_config, service)
+            self.load_additional_key_values(configuration_file, service)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'security' section missing from bot config, using to defaults")
