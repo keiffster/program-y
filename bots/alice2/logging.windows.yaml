@@ -9,7 +9,7 @@ handlers:
     file:
         class: logging.handlers.RotatingFileHandler
         formatter: simple
-        filename: C:\Windows\Temp\alice2.log
+        filename: C:\Temp\alice2.log
         maxBytes: 20972152
         backupCount: 10
         encoding: utf-8

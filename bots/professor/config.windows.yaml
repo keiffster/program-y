@@ -23,12 +23,12 @@ brain:
     binaries:
       save_binary: false
       load_binary: false
-      binary_filename: C:\Windows\Temp\professor.brain
+      binary_filename: $BOT_ROOT\professor.brain
       load_aiml_on_binary_fail: false
 
      # Braintree
     braintree:
-      file: C:\Windows\Temp\braintree.txt
+      file: $BOT_ROOT\braintree.txt
       content: txt
 
     files:
@@ -36,8 +36,8 @@ brain:
             files: $BOT_ROOT\aiml
             extension: .aiml
             directories: true
-            errors: C:\Windows\Temp\professor_errors.txt
-            duplicates: C:\Windows\Temp\professor_duplicates.txt
+            errors: $BOT_ROOT\professor_errors.txt
+            duplicates: $BOT_ROOT\professor_duplicates.txt
         sets:
             files: $BOT_ROOT\sets
             extension: .txt

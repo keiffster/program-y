@@ -23,12 +23,12 @@ brain:
     binaries:
       save_binary: false
       load_binary: false
-      binary_filename: C:\Windows\Temp\rosie.brain
+      binary_filename: $BOT_ROOT\rosie.brain
       load_aiml_on_binary_fail: false
 
     # Braintree
     braintree:
-      file: C:\Windows\Temp\braintree.xml
+      file: $BOT_ROOT\braintree.xml
       content: xml
 
     files:
@@ -36,8 +36,8 @@ brain:
             files: $BOT_ROOT\aiml
             extension: .aiml
             directories: true
-            errors: C:\Windows\Temp\rosie_errors.txt
-            duplicates: C:\Windows\Temp\rosie_duplicates.txt
+            errors: $BOT_ROOT\rosie_errors.txt
+            duplicates: $BOT_ROOT\rosie_duplicates.txt
         sets:
             files: $BOT_ROOT\sets
             extension: .txt

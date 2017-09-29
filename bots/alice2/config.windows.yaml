@@ -23,12 +23,12 @@ brain:
     binaries:
       save_binary: false
       load_binary: false
-      binary_filename: C:\Windows\Temp\alice2.brain
+      binary_filename: $BOT_ROOT\alice2.brain
       load_aiml_on_binary_fail: false
 
     # Braintree
     braintree:
-      file: C:\Windows\Temp\braintree.xml
+      file: $BOT_ROOT\braintree.xml
       content: xml
 
     files:
@@ -36,8 +36,8 @@ brain:
             files: $BOT_ROOT\aiml
             extension: .aiml
             directories: true
-            errors: C:\Windows\Temp\alice2_errors.txt
-            duplicates: C:\Windows\Temp\alice2_duplicates.txt
+            errors: $BOT_ROOT\alice2_errors.txt
+            duplicates: $BOT_ROOT\alice2_duplicates.txt
         sets:
             files: $BOT_ROOT\sets
             extension: .txt
