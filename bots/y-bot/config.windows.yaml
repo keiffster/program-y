@@ -28,7 +28,7 @@ brain:
 
     # Braintree
     braintree:
-      file: $BOT_ROOT\braintree.xml
+      file: $BOT_ROOT\temp\braintree.xml
       content: xml
 
     files:
@@ -36,8 +36,8 @@ brain:
             files: $BOT_ROOT\aiml
             extension: .aiml
             directories: true
-            errors: $BOT_ROOT\y-bot_errors.txt
-            duplicates: $BOT_ROOT\y-bot_duplicates.txt
+            errors: $BOT_ROOT\temp\y-bot_errors.txt
+            duplicates: $BOT_ROOT\temp\y-bot_duplicates.txt
         sets:
             files: $BOT_ROOT\sets
             extension: .txt
