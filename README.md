@@ -2,7 +2,7 @@
 
 Version: 1.0.0 <br/>
 Authors: Keith Sterling <br/>
-Date: June 19th 2014 <br/>
+Date: 1st October 2017 <br/>
 NEWS: Version 1.0.0 Release 1st October 2017
 
 # Introduction
