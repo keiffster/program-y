@@ -426,7 +426,7 @@ class Brain(object):
         return None
 
     def strip_oob(self, response):
-        match = re.compile("(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
+        match = re.compile(r"(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
         groupings = match.match(response)
         if groupings is not None:
             front = groupings.group(1).strip()

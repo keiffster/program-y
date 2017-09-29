@@ -1,10 +1,14 @@
-# Program-Y 
+# Readme info:
 
-For full documentation, tutorials and other helpful information, see the [Programy-Y Wiki](https://github.com/keiffster/program-y/wiki)
+Version: 1.0.0
+Authors: Keith Sterling
+Date: June 19th 2014
+NEWS: Version 1.0.0 is the culmination of 2 years of work in my spare time, its out, its ready, enjoy !
 
-Program-Y is an Python 3.x implementation of an AIML 2.0 Specification, but its much much more than that. It is a complete 
-greenfield implementation of the entire AIML 2.0 spec in Python 3. it has extensive unit tests coverage (>90% at all 
-times) and a full suite of documentation to get you up and running, learn AIML and build you own ChatBots
+# Introduction
+
+Program Y is an AIML interpretor written in Python. It includes an entire Python 3 framework for building you own chat bots using
+Artificial Intelligence Markup Language, or AIML for short. 
 
 Programy-Y is fully cross plaform, running on 
 
@@ -22,7 +26,7 @@ Programy-Y is fully cross plaform, running on
 * Full embedded XML/HTML Support
 * Dynamic Sets, Maps and Variables
 
-Program-Y is extremely extensible, you can
+Program Y is extremely extensible, you can
 
 * Add you own AIML tags
 * Add you own Spelling Checker
@@ -52,18 +56,48 @@ Program-Y comes with a base set of grammars for various industry sectors, includ
 * News Feeds
 * Maps
 
-Program-Y Ships with a number of Bots preconfigured
 
-* Alice2 - The original Alice Chatbot updated for AIML 2.0
-* Rosie - A starter chat bot from the inventors of AIML
-* Professor - A very knowledgable ChatBot with lots of answers
-* Y-Bot - My own personal bot that I am building to support AIML development
+# System Requirements
 
-The project is maintained via a [Kanban Board](https://github.com/keiffster/program-y/projects/1). Here you can see a list of the active tasks plus the items in the backlog that we'll be adding next
+Program Y is built using Python 3.6 and has dependencies upon the following Python libraries
 
-All issues are maintained in the [Program-Y Issue Tracker](https://github.com/keiffster/program-y/issues)
+* requests
+* flask
+* python-dateutil
+* beautifulsoup4
+* lxml
+* wikipedia
+* pylint
+* nose
+* coverage
+* pyyaml
+* tweepy
+* sleekxmpp
 
-For more details of what AIML is, head over to the 
-* [AIML 2.0 Spec](http://alicebot.blogspot.co.uk/2013/01/aiml-20-draft-specification-released.html)
-* [Pandora Bots](http://docs.pandorabots.com/)
+In addition, there are a number of additional libraries for use with Sanic version of the REST server, specifically
+
+* sanic
+
+# Using Program-Y
+
+Full documentation is available on [Program Y Wiki](https://github.com/keiffster/program-y/wiki)
+
+After installation from the Github repository you can chat with your Program Y by running one of the many bots found in the 
+\bot folder. These include
+
+* Y-Bot - My own bot under development
+* Professor - A huge knowledge base of questions and answers
+* Alice2 - AIML 2 version of the famous Alice chat bot
+* Roise - An AIML base set of grammars for creating your own bot
+
+See the individual folders for unix and windows scripts required to run a bot.
+
+# Tutorial
+
+Once you have got the system installed and have run one or more of the bots, head over to the [Tutorial](https://github.com/keiffster/program-y/wiki/AIML-Tutorial) on the Wiki for a full 
+run down of everything possible in AIML
+
+
+
+
 
