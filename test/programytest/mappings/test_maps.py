@@ -26,13 +26,15 @@ class MapTests(unittest.TestCase):
         KEY2:VAL2
         KEY3:VAL3
         KEY4:VAL4
+        KEY5:VAL5:VAL6
         """)
         self.assertIsNotNone(map)
-        self.assertEqual(len(map.keys()), 4)
+        self.assertEqual(len(map.keys()), 5)
         self.assertEqual(map['KEY1'], 'VAL1')
         self.assertEqual(map['KEY2'], 'VAL2')
         self.assertEqual(map['KEY3'], 'VAL3')
         self.assertEqual(map['KEY4'], 'VAL4')
+        self.assertEqual(map['KEY5'], 'VAL5:VAL6')
 
     def test_collection(self):
         collection = MapCollection()
@@ -46,6 +48,7 @@ class MapTests(unittest.TestCase):
             KEY2:VAL2
             KEY3:VAL3
             KEY4:VAL4
+            KEY5:VAL5:VAL6
         """)
         self.assertIsNotNone(collection._maps)
         self.assertTrue(collection.contains('KEY1'))
@@ -56,4 +59,6 @@ class MapTests(unittest.TestCase):
         self.assertEqual(collection.map('KEY3'), 'VAL3')
         self.assertTrue(collection.contains('KEY4'))
         self.assertEqual(collection.map('KEY4'), 'VAL4')
-        self.assertFalse(collection.contains('KEY5'))
+        self.assertTrue(collection.contains('KEY5'))
+        self.assertEqual(collection.map('KEY5'), 'VAL5:VAL6')
+        self.assertFalse(collection.contains('KEY6'))

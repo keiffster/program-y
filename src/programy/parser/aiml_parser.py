@@ -38,7 +38,7 @@ class AIMLLoader(FileFinder):
         try:
             return self.aiml_parser.parse_from_file(filename)
         except Exception as excep:
-            logging.error("Failed to load contents of file from [%s]", filename)
+            logging.exception("Failed to load contents of file from [%s]", filename)
             logging.exception(excep)
 
 class AIMLParser(object):
@@ -238,22 +238,32 @@ class AIMLParser(object):
     #   </aiml>
     #
 
-    def handle_aiml_duplicate(self, dupe_excep, filename):
+    def handle_aiml_duplicate(self, dupe_excep, filename, expression):
         if self._duplicates is not None:
             dupe_excep.filename = filename
             msg = dupe_excep.format_message()
-            self._duplicates.append(msg + "\n")
+            if hasattr(expression, "_start_line_number"):
+                msg += " start line [" + str(expression._start_line_number)+"] "
+            if hasattr(expression, "_end_line_number"):
+                msg += " end line [" + str(expression._end_line_number)+"] "
+            msg += "\n"
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error(msg)
+            if self._duplicates is not None:
+                self._duplicates.append(msg)
 
-    def handle_aiml_error(self, parser_excep, filename):
+    def handle_aiml_error(self, parser_excep, filename, expression):
         parser_excep.filename = filename
         msg = parser_excep.format_message()
+        if hasattr(expression, "_start_line_number"):
+            msg += " start line [" + str(expression._start_line_number) + "] "
+        if hasattr(expression, "_end_line_number"):
+            msg += " end line [" + str(expression._end_line_number) + "] "
+        msg += "\n"
         if logging.getLogger().isEnabledFor(logging.ERROR):
             logging.error(msg)
-
         if self._errors is not None:
-            self._errors.append(msg + "\n")
+            self._errors.append(msg)
 
     def parse_aiml(self, aiml_xml, namespace, filename=None):
         self.parse_version(aiml_xml)
@@ -269,10 +279,10 @@ class AIMLParser(object):
                     categories_found = True
 
                 except DuplicateGrammarException as dupe_excep:
-                    self.handle_aiml_duplicate(dupe_excep, filename)
+                    self.handle_aiml_duplicate(dupe_excep, filename, expression)
 
                 except ParserException as parser_excep:
-                    self.handle_aiml_error(parser_excep, filename)
+                    self.handle_aiml_error(parser_excep, filename, expression)
 
             elif tag_name == 'category':
                 try:
@@ -281,10 +291,10 @@ class AIMLParser(object):
                     num_category += 1
 
                 except DuplicateGrammarException as dupe_excep:
-                    self.handle_aiml_duplicate(dupe_excep, filename)
+                    self.handle_aiml_duplicate(dupe_excep, filename, expression)
 
                 except ParserException as parser_excep:
-                    self.handle_aiml_error(parser_excep, filename)
+                    self.handle_aiml_error(parser_excep, filename, expression)
 
             else:
                 raise ParserException("Error, unknown top level tag, %s" % expression.tag, xml_element=expression)

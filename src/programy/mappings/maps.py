@@ -19,8 +19,12 @@ import logging
 
 from programy.utils.files.filefinder import FileFinder
 
+
 class MapLoader(FileFinder):
-    def __init__(self):
+
+    def __init__(self, split_char=":", eol="\n"):
+        self._split_char = split_char
+        self._eol = eol
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
@@ -38,7 +42,7 @@ class MapLoader(FileFinder):
 
     def load_from_text(self, text):
         the_map = {}
-        lines = text.split("\n")
+        lines = text.split(self._eol)
         for line in lines:
             self.process_line(line, the_map)
         return the_map
@@ -46,14 +50,16 @@ class MapLoader(FileFinder):
     def process_line(self, line, the_map):
         text = line.strip()
         if text is not None and text:
-            splits = text.split(":")
+            splits = text.split(self._split_char)
             name = splits[0].upper()
-            the_map[name] = splits[1]
+            the_map[name] = self._split_char.join(splits[1:])
 
 
 class MapCollection(object):
 
-    def __init__(self):
+    def __init__(self, split_char=":", eol="\n"):
+        self._split_char = split_char
+        self._eol = eol
         self._maps = {}
 
     def map(self, name):
@@ -68,7 +74,7 @@ class MapCollection(object):
         return bool(map_name in self._maps)
 
     def load(self, configuration):
-        loader = MapLoader()
+        loader = MapLoader(split_char=self._split_char, eol=self._eol)
         if configuration.files is not None:
             self._maps = {}
             for file in configuration.files:
