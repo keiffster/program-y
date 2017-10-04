@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+    <category>
+        <pattern>MY FAVORITE COLOR IS <iset>RED, WHITE, BLUE</iset>
+        </pattern>
+        <template>
+            <star /> IS A NICE COLOR.
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS * <iset>COLOR, COLOUR</iset> *</pattern>
+        <template>
+            My favourite <lowercase><star index="2"/></lowercase> is Red
+        </template>
+    </category>
+
+    <category>
+        <pattern># <iset>EAT, MUNCH, CHOW</iset> #</pattern>
+        <template>
+            Wow, I like to <lowercase><star index="2"/> <star index="3" /></lowercase> too.
+        </template>
+    </category>
+
+    <category>
+        <pattern>I LIKE RIDING <iset words="KAWASAKI, TRIUMPH, BMW"/> MOTORCYCLES</pattern>
+        <template>
+            I prefer a Harley Davidson to a <star index="1" />
+        </template>
+    </category>
+</aiml>
