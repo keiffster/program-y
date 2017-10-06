@@ -62,21 +62,21 @@ brain:
             extension: .aiml
             directories: true
             errors:
-              file: /tmp/y-bot_errors.txt
-              #file: /tmp/y-bot_errors.csv
-              #format: csv
-              #encoding: utf-8
+              #file: /tmp/y-bot_errors.txt
+              file: /tmp/y-bot_errors.csv
+              format: csv
+              encoding: utf-8
               delete_on_start: true
             duplicates:
-              file: /tmp/y-bot_duplicates.txt
-              #file: /tmp/y-bot_duplicates.csv
-              #format: csv
-              #encoding: utf-8
+              #file: /tmp/y-bot_duplicates.txt
+              file: /tmp/y-bot_duplicates.csv
+              format: csv
+              encoding: utf-8
               delete_on_start: true
             conversation:
-              file: /tmp/y-bot-conversation.txt
-              #file: /tmp/y-bot-conversation.csv
-              #format: csv
+              #file: /tmp/y-bot-conversation.txt
+              file: /tmp/y-bot-conversation.csv
+              format: csv
               delete_on_start: true
         sets:
             files: $BOT_ROOT/sets
