@@ -138,7 +138,7 @@ class TemplateSetNode(TemplateNode):
             self.parse_text(graph, self.get_tail_from_element(child))
 
         if name_found is True and var_found is True:
-            raise ParserException("Error, set node has both name AND var values", xml_element=expression)
+            raise ParserException("Set node has both name AND var values", xml_element=expression)
 
         if name_found is False and var_found is False:
-            raise ParserException("Error, set node has both name AND var values", xml_element=expression)
+            raise ParserException("Set node has both name AND var values", xml_element=expression)

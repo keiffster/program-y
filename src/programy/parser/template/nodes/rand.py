@@ -69,7 +69,7 @@ class TemplateRandomNode(TemplateNode):
                 self.children.append(li_node)
                 li_node.parse_template_node(graph, child)
             else:
-                raise ParserException("Error, unsupported random child tag: %s" % (tag_name), xml_element=expression)
+                raise ParserException("Unsupported random child tag: %s" % (tag_name), xml_element=expression)
 
         if li_found is False:
-            raise ParserException("Error, no li children of random element!", xml_element=expression)
+            raise ParserException("No li children of random element!", xml_element=expression)

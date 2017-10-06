@@ -70,6 +70,9 @@ class BaseConfigurationFile(object):
         """
         raise NotImplementedError()
 
+    def is_string(self, section):
+        return bool(isinstance(section, str))
+
     def convert_to_bool(self, value):
         if value.upper() == 'TRUE':
             return True

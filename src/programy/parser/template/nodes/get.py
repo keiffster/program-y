@@ -201,7 +201,7 @@ class TemplateGetNode(TemplateNode):
                 self._tuples = self.parse_children_as_word_node(graph, child)
 
         if name_found is False and var_found is False:
-            raise ParserException("Error, invalid get, missing either name or var", xml_element=expression)
+            raise ParserException("Invalid get, missing either name or var", xml_element=expression)
 
         if name_found is True and var_found is True:
-            raise ParserException("Error, get node has both name AND var values", xml_element=expression)
+            raise ParserException("Get node has both name AND var values", xml_element=expression)

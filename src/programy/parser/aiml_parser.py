@@ -28,6 +28,9 @@ from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog import Sentence
 from programy.parser.pattern.matcher import MatchContext
+from programy.utils.files.filewriter import ErrorsFileWriter
+from programy.utils.files.filewriter import DuplicatesFileWriter
+
 
 class AIMLLoader(FileFinder):
     def __init__(self, aiml_parser):
@@ -40,6 +43,7 @@ class AIMLLoader(FileFinder):
         except Exception as excep:
             logging.exception("Failed to load contents of file from [%s]", filename)
             logging.exception(excep)
+
 
 class AIMLParser(object):
 
@@ -62,41 +66,21 @@ class AIMLParser(object):
 
     def create_debug_storage(self, brain_configuration):
         if brain_configuration.files.aiml_files.errors is not None:
-            self._errors = []
+            self._errors = ErrorsFileWriter(brain_configuration.files.aiml_files.errors)
         if brain_configuration.files.aiml_files.duplicates is not None:
-            self._duplicates = []
+            self._duplicates = DuplicatesFileWriter(brain_configuration.files.aiml_files.duplicates)
 
     def save_debug_files(self, brain_configuration):
-
         if brain_configuration.files.aiml_files.errors is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Saving aiml errors to file [%s]", brain_configuration.files.aiml_files.errors)
-            try:
-                with open(brain_configuration.files.aiml_files.errors, "w+") as errors_file:
-                    for error in self._errors:
-                        errors_file.write(error)
-            except Exception as excep:
-                logging.exception(excep)
-
+            self._errors.save_content()
         if brain_configuration.files.aiml_files.duplicates is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Saving aiml duplicates to file [%s]", brain_configuration.files.aiml_files.duplicates)
-            try:
-                with open(brain_configuration.files.aiml_files.duplicates, "w+") as duplicates_file:
-                    for duplicate in self._duplicates:
-                        duplicates_file.write(duplicate)
-            except Exception as excep:
-                logging.exception(excep)
+            self._duplicates.save_content()
 
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Found a total of %d errors in your grammrs, check out [%s] for details",
-                             len(self._errors), brain_configuration.files.aiml_files.errors)
+            self._errors.display_debug_info()
         if self._duplicates is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Found a total of %d duplicate patterns in your grammrs, check out [%s] for details",
-                             len(self._duplicates), brain_configuration.files.aiml_files.duplicates)
+            self._duplicates.display_debug_info()
 
     def load_files_from_directory(self, brain_configuration):
         start = datetime.datetime.now()
@@ -172,13 +156,13 @@ class AIMLParser(object):
     def check_aiml_tag(self, aiml, filename=None):
         # Null check just to be sure
         if aiml is None:
-            raise ParserException("Error, null root tag", filename=filename)
+            raise ParserException("Null root tag", filename=filename)
 
         tag_name, namespace = self.tag_and_namespace_from_text(aiml.tag)
 
         # Then if check is just <aiml>, thats OK
         if tag_name != 'aiml':
-            raise ParserException("Error, root tag is not <aiml>", filename=filename)
+            raise ParserException("Root tag is not <aiml>", filename=filename)
 
         return tag_name, namespace
 
@@ -240,30 +224,37 @@ class AIMLParser(object):
 
     def handle_aiml_duplicate(self, dupe_excep, filename, expression):
         if self._duplicates is not None:
-            dupe_excep.filename = filename
-            msg = dupe_excep.format_message()
-            if hasattr(expression, "_start_line_number"):
-                msg += " start line [" + str(expression._start_line_number)+"] "
-            if hasattr(expression, "_end_line_number"):
-                msg += " end line [" + str(expression._end_line_number)+"] "
-            msg += "\n"
             if logging.getLogger().isEnabledFor(logging.ERROR):
+                dupe_excep.filename = filename
+                msg = dupe_excep.format_message()
                 logging.error(msg)
-            if self._duplicates is not None:
-                self._duplicates.append(msg)
+
+            startline = None
+            if hasattr(expression, "_start_line_number"):
+                startline = str(expression._start_line_number)
+
+            endline = None
+            if hasattr(expression, "_end_line_number"):
+                endline = str(expression._end_line_number)
+
+            self._duplicates.save_entry(dupe_excep.message, filename, startline, endline)
 
     def handle_aiml_error(self, parser_excep, filename, expression):
-        parser_excep.filename = filename
-        msg = parser_excep.format_message()
-        if hasattr(expression, "_start_line_number"):
-            msg += " start line [" + str(expression._start_line_number) + "] "
-        if hasattr(expression, "_end_line_number"):
-            msg += " end line [" + str(expression._end_line_number) + "] "
-        msg += "\n"
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error(msg)
         if self._errors is not None:
-            self._errors.append(msg)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                parser_excep.filename = filename
+                msg = parser_excep.format_message()
+                logging.error(msg)
+
+            startline = None
+            if hasattr(expression, "_start_line_number"):
+                startline = str(expression._start_line_number)
+
+            endline = None
+            if hasattr(expression, "_end_line_number"):
+                endline = str(expression._end_line_number)
+
+            self._errors.save_entry(parser_excep.message, filename, startline, endline)
 
     def parse_aiml(self, aiml_xml, namespace, filename=None):
         self.parse_version(aiml_xml)
@@ -297,7 +288,7 @@ class AIMLParser(object):
                     self.handle_aiml_error(parser_excep, filename, expression)
 
             else:
-                raise ParserException("Error, unknown top level tag, %s" % expression.tag, xml_element=expression)
+                raise ParserException("Unknown top level tag, %s" % expression.tag, xml_element=expression)
 
         if categories_found is False:
             if logging.getLogger().isEnabledFor(logging.WARNING):
@@ -349,7 +340,7 @@ class AIMLParser(object):
                 logging.info("Topic attrib converted to %s", xml)
             topic_pattern = ET.fromstring(xml)
         else:
-            raise ParserException("Error, missing name attribute for topic", xml_element=topic_element)
+            raise ParserException("Missing name attribute for topic", xml_element=topic_element)
 
         category_found = False
         num_category = 0
@@ -360,10 +351,10 @@ class AIMLParser(object):
                 category_found = True
                 num_category += 1
             else:
-                raise ParserException("Error unknown child node of topic, %s" % child.tag, xml_element=topic_element)
+                raise ParserException("Unknown child node of topic, %s" % child.tag, xml_element=topic_element)
 
         if category_found is False:
-            raise ParserException("Error, no categories in topic", xml_element=topic_element)
+            raise ParserException("No categories in topic", xml_element=topic_element)
 
         return num_category
 
@@ -378,11 +369,11 @@ class AIMLParser(object):
 
         if topic_element is not None:
             if topics:
-                raise ParserException("Error, topic exists in category AND as parent node", xml_element=category_xml)
+                raise ParserException("Topic exists in category AND as parent node", xml_element=category_xml)
 
         else:
             if len(topics) > 1:
-                raise ParserException("Error, multiple <topic> nodes found in category", xml_element=category_xml)
+                raise ParserException("Multiple <topic> nodes found in category", xml_element=category_xml)
             elif len(topics) == 1:
                 topic_element = topics[0]
             else:
@@ -393,7 +384,7 @@ class AIMLParser(object):
     def find_that(self, category_xml, namespace):
         thats = self.find_all(category_xml, "that", namespace)
         if len(thats) > 1:
-            raise ParserException("Error, multiple <that> nodes found in category", xml_element=category_xml)
+            raise ParserException("Multiple <that> nodes found in category", xml_element=category_xml)
         elif len(thats) == 1:
             that_element = thats[0]
         else:
@@ -403,18 +394,18 @@ class AIMLParser(object):
     def get_template(self, category_xml, namespace):
         templates = self.find_all(category_xml, "template", namespace)
         if not templates:
-            raise ParserException("Error, no template node found in category", xml_element=category_xml)
+            raise ParserException("No template node found in category", xml_element=category_xml)
         elif len(templates) > 1:
-            raise ParserException("Error, multiple <template> nodes found in category", xml_element=category_xml)
+            raise ParserException("Multiple <template> nodes found in category", xml_element=category_xml)
         else:
             return self.template_parser.parse_template_expression(templates[0])
 
     def get_pattern(self, category_xml, namespace):
         patterns = self.find_all(category_xml, "pattern", namespace)
         if not patterns:
-            raise ParserException("Error, no pattern node found in category", xml_element=category_xml)
+            raise ParserException("No pattern node found in category", xml_element=category_xml)
         elif len(patterns) > 1:
-            raise ParserException("Error, multiple <pattern> nodes found in category", xml_element=category_xml)
+            raise ParserException("Multiple <pattern> nodes found in category", xml_element=category_xml)
         else:
             return patterns[0]
 

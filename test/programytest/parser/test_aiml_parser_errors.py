@@ -5,12 +5,19 @@ from xml.etree.ElementTree import ParseError
 from programy.parser.aiml_parser import AIMLParser
 from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.sections.brain.debugfile import DebugFileConfiguration
 
 class AIMLParserErrorTests(unittest.TestCase):
 
     def setUp(self):
         config = BrainConfiguration()
-        config.files.aiml_files._errors =  os.sep + "tmp" + os.sep + "errors.txt"
+
+        if os.name == 'posix':
+            config.files.aiml_files._errors = DebugFileConfiguration("conversation", filename="/tmp/tmp-errors.txt.txt")
+        elif os.name == 'nt':
+            config.files.aiml_files._errors = DebugFileConfiguration("conversation", filename='C:\Windows\Temp\\tmp-errors.txt.txt')
+        else:
+            raise Exception("Unknown os [%s]" % os.name)
 
         test_brain = Brain(configuration=config)
         self.parser = AIMLParser(brain=test_brain)
@@ -49,8 +56,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, no template node found in category\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals('No template node found in category', self.parser._errors.entries[0][1])
 
     def test_base_aiml_category_no_template(self):
         self.parser.parse_from_text(
@@ -62,8 +70,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, no template node found in category\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("No template node found in category", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_empty_parent_node(self):
         self.parser.parse_from_text(
@@ -78,8 +87,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Topic name empty or null\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Topic name empty or null", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_with_something_else(self):
         self.parser.parse_from_text(
@@ -94,8 +104,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error unknown child node of topic, xxxx\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Unknown child node of topic, xxxx", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_empty_child_node1(self):
         self.parser.parse_from_text(
@@ -109,8 +120,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Topic node text is empty\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Topic node text is empty", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_empty_child_node2(self):
         self.parser.parse_from_text(
@@ -124,8 +136,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Topic node text is empty\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Topic node text is empty", self.parser._errors.entries[0][1])
 
     def test_base_aiml_that_empty_child_node(self):
         self.parser.parse_from_text(
@@ -139,8 +152,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("That node text is empty\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("That node text is empty", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_no_name(self):
         self.parser.parse_from_text(
@@ -151,8 +165,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, missing name attribute for topic\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Missing name attribute for topic", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_no_category(self):
         self.parser.parse_from_text(
@@ -163,8 +178,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, no categories in topic\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("No categories in topic", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_category_no_content(self):
         self.parser.parse_from_text(
@@ -177,8 +193,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, no template node found in category\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("No template node found in category", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_at_multiple_levels(self):
         self.parser.parse_from_text(
@@ -194,8 +211,9 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, topic exists in category AND as parent node\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("Topic exists in category AND as parent node", self.parser._errors.entries[0][1])
 
     def test_base_aiml_topic_category_no_template(self):
         self.parser.parse_from_text(
@@ -209,5 +227,6 @@ class AIMLParserErrorTests(unittest.TestCase):
             </aiml>
             """)
         self.assertIsNotNone(self.parser._errors)
-        self.assertEquals(1, len(self.parser._errors))
-        self.assertEquals("Error, no template node found in category\n", self.parser._errors[0])
+        self.assertIsNotNone(self.parser._errors.entries)
+        self.assertEquals(1, len(self.parser._errors.entries))
+        self.assertEquals("No template node found in category", self.parser._errors.entries[0][1])

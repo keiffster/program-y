@@ -9,7 +9,7 @@ from programy.config.sections.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.config.sections.client.console import ConsoleConfiguration
 from programy.dialog import Sentence
-
+from programy.config.sections.brain.debugfile import DebugFileConfiguration
 
 class MockBrain(Brain):
     def __init__(self, configuration):
@@ -240,30 +240,6 @@ class BotTests(unittest.TestCase):
         bot.configuration._max_question_timeout = 0
         with self.assertRaises(Exception):
             bot.check_max_timeout()
-
-    def test_log_question_and_answer(self):
-
-        brain_config = BrainConfiguration()
-
-        if os.name == 'posix':
-            brain_config.files.aiml_files._conversation = "/tmp/tmp-conversation.txt"
-        elif os.name == 'nt':
-            brain_config.files.aiml_files._conversation = 'C:\Windows\Temp\\tmp-conversation.txt'
-        else:
-            raise Exception("Unknown os [%s]" % os.name)
-
-        test_brain = Brain(brain_config)
-
-        bot = Bot(test_brain, BotConfiguration())
-
-        if os.path.exists(brain_config.files.aiml_files._conversation):
-            os.remove( brain_config.files.aiml_files._conversation)
-
-        self.assertFalse(os.path.exists(brain_config.files.aiml_files._conversation))
-
-        bot.log_question_and_answer("testid", "question","answer")
-
-        self.assertTrue(os.path.exists(brain_config.files.aiml_files._conversation))
 
     def test_get_default_response_empty_string(self):
 

@@ -45,6 +45,11 @@ class XMLConfigurationFile(BaseConfigurationFile):
             configuration.load_config_data(self, bot_root)
         return configuration
 
+    def is_string(self, section):
+        if section._children:
+            return False
+        return True
+
     def get_section(self, section_name, parent_section=None):
         if parent_section is None:
             return self.xml_data.find(section_name)

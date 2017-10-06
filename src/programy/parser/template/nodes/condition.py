@@ -178,9 +178,9 @@ class TemplateConditionNode(TemplateNode):
             if not names and not variables:
                 return None, False
             elif len(names) > 1:
-                raise ParserException("Error, condition element has multiple name elements", xml_element=condition)
+                raise ParserException("Condition element has multiple name elements", xml_element=condition)
             elif len(variables) > 1:
-                raise ParserException("Error, condition element has multiple var elements", xml_element=condition)
+                raise ParserException("Condition element has multiple var elements", xml_element=condition)
             else:
                 if len(names) == 1:
                     name_text = self.get_text_from_element(condition.find('name'))
@@ -198,7 +198,7 @@ class TemplateConditionNode(TemplateNode):
             if not values:
                 return None
             elif len(values) > 1:
-                raise ParserException("Error, element has multiple value elements", xml_element=condition)
+                raise ParserException("Element has multiple value elements", xml_element=condition)
             value_node = graph.get_base_node()
             value_node.parse_template_node(graph, values[0])
             return value_node
@@ -280,11 +280,11 @@ class TemplateConditionNode(TemplateNode):
                 pass
 
             elif tag_name == 'li':
-                raise ParserException("Error, li element not allowed as child of condition element",
+                raise ParserException("li element not allowed as child of condition element",
                                       xml_element=expression)
 
             elif tag_name == 'loop':
-                raise ParserException("Error, this type of condition cannot have <loop /> element",
+                raise ParserException("This type of condition cannot have <loop /> element",
                                       xml_element=expression)
 
             else:
@@ -337,7 +337,7 @@ class TemplateConditionNode(TemplateNode):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Error, invalid element <%s> in condition element" % (tag_name),
+                raise ParserException("Invalid element <%s> in condition element" % (tag_name),
                                       xml_element=expression)
 
     def parse_type3_condition(self, graph, expression):
@@ -383,7 +383,7 @@ class TemplateConditionNode(TemplateNode):
                     list_item.parse_text(graph, tail_text)
 
             else:
-                raise ParserException("Error, invalid element <%s> in condition element" % (tag_name), xml_element=expression)
+                raise ParserException("Invalid element <%s> in condition element" % (tag_name), xml_element=expression)
 
 
     def to_string(self):

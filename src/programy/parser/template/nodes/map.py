@@ -120,4 +120,4 @@ class TemplateMapNode(TemplateNode):
             self.parse_text(graph, self.get_tail_from_element(child))
 
         if name_found is False:
-            raise ParserException("Error, name not found in map", xml_element=expression)
+            raise ParserException("Name not found in map", xml_element=expression)

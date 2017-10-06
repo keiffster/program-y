@@ -23,6 +23,7 @@ from programy.config.sections.bot.bot import BotConfiguration
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
 from programy.dialog import Sentence
+from programy.utils.files.filewriter import ConversationFileWriter
 
 
 class Bot(object):
@@ -36,7 +37,12 @@ class Bot(object):
         self._spell_checker = None
         self._license_keys = None
 
+        self.conversation_logger = None
+        if self.brain.configuration.files.aiml_files.conversation is not None:
+            self.conversation_logger = ConversationFileWriter(self.brain.configuration.files.aiml_files.conversation)
+
         self.load_license_keys()
+
         self.initiate_spellchecker()
 
     @property
@@ -44,6 +50,7 @@ class Bot(object):
         return self._configuration
 
     def load_license_keys(self):
+        # TODO Move this to License keys base class
         self._license_keys = LicenseKeys()
         if self._configuration is not None:
             self._load_license_keys(self._configuration)
@@ -52,6 +59,7 @@ class Bot(object):
                 logging.warning("No configuration defined when loading license keys")
 
     def initiate_spellchecker(self):
+        # TODO Move this to Spelling bass class
         if self._configuration is not None:
             if self._configuration.spelling.classname is not None:
                 try:
@@ -152,6 +160,7 @@ class Bot(object):
         return self.get_conversation(clientid)
 
     def get_conversation(self, clientid: str):
+        # TODO move this to Conversations base class
         if clientid in self._conversations:
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Retrieving conversation for client %s", clientid)
@@ -178,6 +187,7 @@ class Bot(object):
                 raise Exception("Maximum search time limit [%d] exceeded" % self._configuration.max_question_timeout)
 
     def check_spelling_before(self, each_sentence):
+        # TODO Move this to spelliing base class
         if self._configuration.spelling.check_before is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
@@ -186,6 +196,7 @@ class Bot(object):
             each_sentence.replace_words(corrected)
 
     def check_spelling_and_retry(self, clientid, each_sentence):
+        # TODO Move this to spelling base class
         if self._configuration.spelling.check_and_retry is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
@@ -197,6 +208,7 @@ class Bot(object):
         return None
 
     def ask_question(self, clientid: str, text: str, srai=False):
+        # TODO Method too big, convert to smaller methods
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Question (%s): %s", clientid, text)
@@ -269,7 +281,8 @@ class Bot(object):
 
         response = ". ".join([sentence for sentence in answers if sentence is not None])
 
-        self.log_question_and_answer(clientid, text, response)
+        if self.conversation_logger is not None:
+            self.conversation_logger.log_question_and_answer(clientid, text, response)
 
         return response
 
@@ -303,11 +316,3 @@ class Bot(object):
         else:
             return self.exit_response
 
-    def log_question_and_answer(self, clientid, question, answer):
-
-        filename = self.brain.configuration.files.aiml_files.conversation
-        if filename is not None:
-            with open(filename, "a+") as file:
-                timestamp = "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
-                output = "%s - %s - Question[%s] - Response[%s]\n"%(timestamp, clientid, question, answer)
-                file.write(output)
