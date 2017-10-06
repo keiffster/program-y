@@ -81,24 +81,28 @@ class DoubleStringCharSplitCollection(BaseCollection):
 
     def __init__(self):
         BaseCollection.__init__(self)
-        self.pairs = []
+        self._pairs = []
+
+    @property
+    def pairs(self):
+        return self._pairs
 
     def add_value(self, key, value):
-        self.pairs.append([key, value])
+        self._pairs.append([key, value])
 
     def set_value(self, key, value):
-        for pair in self.pairs:
+        for pair in self._pairs:
             if pair[0] == key:
                 pair[1] = value
 
     def has_key(self, key):
-        for pair in self.pairs:
+        for pair in self._pairs:
             if pair[0] == key:
                 return True
         return False
 
     def value(self, key):
-        for pair in self.pairs:
+        for pair in self._pairs:
             if pair[0] == key:
                 return pair[1]
         return None
@@ -117,7 +121,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         return splits
 
     def process_splits(self, splits):
-        self.pairs.append([splits[0], splits[1]])
+        self._pairs.append([splits[0], splits[1]])
         return True
 
 
@@ -125,16 +129,16 @@ class DoubleStringPatternSplitCollection(BaseCollection):
 
     def __init__(self):
         BaseCollection.__init__(self)
-        self.pairs = []
+        self._pairs = []
 
     def has_key(self, key):
-        for pair in self.pairs:
+        for pair in self._pairs:
             if pair[0] == key:
                 return True
         return False
 
     def value(self, key):
-        for pair in self.pairs:
+        for pair in self._pairs:
             if pair[0] == key:
                 return pair[1]
         return None
@@ -177,12 +181,12 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         end = pattern_text.rstrip()
         pattern = "(^%s|%s|%s$)" % (start, middle, end)
         replacement = splits[1]
-        self.pairs.append([splits[0], pattern, replacement])
+        self._pairs.append([splits[0], pattern, replacement])
         return True
 
     def replace_by_pattern(self, replacable):
         alreadys = []
-        for pair in self.pairs:
+        for pair in self._pairs:
             try:
                 pattern = re.compile(pair[1], re.IGNORECASE)
                 if pattern.findall(replacable):

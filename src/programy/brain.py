@@ -56,6 +56,7 @@ class Brain(object):
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
         self._properties_collection = PropertiesCollection()
+        self._variables_collection = PropertiesCollection()
 
         self._preprocessors = ProcessorLoader()
         self._postprocessors = ProcessorLoader()
@@ -115,6 +116,10 @@ class Brain(object):
     @property
     def properties(self):
         return self._properties_collection
+
+    @property
+    def variables(self):
+        return self._variables_collection
 
     @property
     def preprocessors(self):
@@ -277,6 +282,15 @@ class Brain(object):
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("No configuration setting for properties")
 
+    def _load_variables(self, brain_configuration):
+        if brain_configuration.files.variables is not None:
+            total = self._variables_collection.load_from_filename(brain_configuration.files.variables)
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Loaded a total of %d variables", total)
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("No configuration setting for variables")
+
     def _load_rdf(self, brain_configuration):
         if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files is not None:
             total = self._rdf_collection.load(brain_configuration.files.rdf_files)
@@ -325,6 +339,7 @@ class Brain(object):
         self._load_persons(brain_configuration)
         self._load_person2s(brain_configuration)
         self._load_properties(brain_configuration)
+        self._load_variables(brain_configuration)
         self._load_rdf(brain_configuration)
         self._load_sets(brain_configuration)
         self._load_maps(brain_configuration)

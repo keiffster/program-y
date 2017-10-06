@@ -37,6 +37,7 @@ class BrainFilesConfiguration(BaseSectionConfigurationData):
         self._person = None
         self._person2 = None
         self._properties = None
+        self._variables = None
         self._triples = None
         self._preprocessors = None
         self._postprocessors = None
@@ -79,6 +80,10 @@ class BrainFilesConfiguration(BaseSectionConfigurationData):
         return self._properties
 
     @property
+    def variables(self):
+        return self._variables
+
+    @property
     def rdf_files(self):
         return self._rdf_files
 
@@ -112,6 +117,7 @@ class BrainFilesConfiguration(BaseSectionConfigurationData):
             self._person = self._get_file_option(configuration_file, "person", files_config, bot_root)
             self._person2 = self._get_file_option(configuration_file, "person2", files_config, bot_root)
             self._properties = self._get_file_option(configuration_file, "properties", files_config, bot_root)
+            self._variables = self._get_file_option(configuration_file, "variables", files_config, bot_root)
             self._triples = self._get_file_option(configuration_file, "triples", files_config, bot_root)
             self._preprocessors = self._get_file_option(configuration_file, "preprocessors", files_config, bot_root)
             self._postprocessors = self._get_file_option(configuration_file, "postprocessors", files_config, bot_root)

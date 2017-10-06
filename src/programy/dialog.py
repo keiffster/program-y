@@ -214,3 +214,9 @@ class Conversation(object):
     def pop_dialog(self):
         if self._questions:
             self._questions.pop()
+
+    def load_initial_variables(self, variables_collection):
+        for pair in variables_collection.pairs:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
+            self._properties[pair[0]] = pair[1]

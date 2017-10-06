@@ -36,3 +36,4 @@ class PropertiesCollection(DoubleStringCharSplitCollection):
             self.set_value(key, value)
         else:
             self.pairs.append([key, value])
+

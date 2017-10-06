@@ -169,6 +169,8 @@ class Bot(object):
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Creating new conversation for client %s", clientid)
             conversation = Conversation(clientid, self)
+            if self.brain.properties is not None:
+                conversation.load_initial_variables(self.brain.variables)
             self._conversations[clientid] = conversation
             return conversation
 
