@@ -11,3 +11,7 @@ pyyaml
 tweepy
 sleekxmpp
 
+# Uncomment this line on Osx or Linux if you want to use sanic rest client
+# Sanic is not supported on Windows !
+# sanic
+

@@ -7,7 +7,7 @@
 
 <div id="wrapper">
     <div id="menu">
-        <p class="welcome">Hello, my name is Y-Bot, how can I help you today? <b></b></p>
+        <p class="welcome">Hello, my name is Bot, how can I help you today? <b></b></p>
         <div style="clear:both"></div>
     </div>
 
@@ -36,7 +36,9 @@ $(document).ready(function(){
         var response = JSON.parse(xhttp.responseText);
 
         $("#chatbox").append ("<p><b>You:</b> "+response.response.question+"</p>" );
-        $("#chatbox").append ("<p><b>Y-Bot:</b> "+response.response.answer+"</p>" );
+        $("#chatbox").append ("<p><b>Bot:</b> "+response.response.answer+"</p>" );
+        $("#chatbox").append ("<p></p>" );
+
         $("#chatbox")[0].scrollTop = $("#chatbox")[0].scrollHeight;
 
         $("#usermsg").attr("value", "");

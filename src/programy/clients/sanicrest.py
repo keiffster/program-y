@@ -19,6 +19,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 # curl 'http://localhost:5000/api/v1.0/ask?question=hello+world&sessionid=1234567890'
 #
 
+
+##############################################################
+# IMPORTANT
+# Sanic is not supported on windows due to a dependency on
+# uvloop. This code will not run on Windows
+#
+
 import logging
 from sanic import Sanic
 from sanic.response import json
