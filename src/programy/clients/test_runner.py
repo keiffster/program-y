@@ -83,7 +83,6 @@ class TestFileFileFinder(FileFinder):
     def add_answers_to_template(self, row, question, templates):
         answers = []
         for answer in row[1:]:
-            print(answer)
             answers.append(self.clean_up_answer(answer))
         templates[question] = answers
 
