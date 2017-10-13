@@ -3,12 +3,19 @@ import sys
 
 if __name__ == '__main__':
 
-    print(sys.argv)
-
     input = sys.argv[1]
     output = sys.argv[2]
+    default = None
+    if len(sys.argv) > 3:
+        default = sys.argv[3]
+
+    print("Input:", input)
+    print("Output:", output)
+    print("Default:", default)
 
     with open(output, "w+") as output_file:
+        if default is not None:
+            output_file.write('$DEFAULT, "%s"\n\n'%default)
         try:
             tree = ET.parse(input)
             aiml = tree.getroot()
@@ -33,8 +40,11 @@ if __name__ == '__main__':
                         pattern_text += pattern.tail.strip()
                 else:
                     pattern_text = pattern.text
-                template = category.find('template')
-                test_line = '"%s", "%s"'%(pattern_text, template.text)
+                if default is not None:
+                    test_line = '"%s", $DEFAULT'%(pattern_text)
+                else:
+                    template = category.find('template')
+                    test_line = '"%s", "%s"'%(pattern_text, template.text)
                 output_file.write(test_line)
                 output_file.write("\n")
 

@@ -179,7 +179,7 @@ class TestRunnerBotClient(BotClient):
                 if self.verbose:
                     print(test.question)
 
-                if any((c in '*$_^,') for c in test.question):
+                if any((c in '$*_^#') for c in test.question):
                     print("WARNING: Wildcards in question! [%s]"%test.question)
                     warnings = warnings +1
 
