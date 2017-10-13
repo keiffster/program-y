@@ -28,7 +28,7 @@ class ClientIdAuthenticationService(Authenticator):
             "console"
         ]
 
-    def user_auth_service(self, clientid):
+    def user_auth_service(self, bot, clientid):
         return False
 
     # Its at this point that we would call a user auth service, and if that passes
@@ -36,18 +36,18 @@ class ClientIdAuthenticationService(Authenticator):
     # This is a very naive approach, and does not cater for users that log out, invalidate
     # their credentials, or have a TTL on their credentials
     # #Exercise for the reader......
-    def _auth_clientid(self, clientid):
-        authorised = self.user_auth_service(clientid)
+    def _auth_clientid(self, bot, clientid):
+        authorised = self.user_auth_service(bot, clientid)
         if authorised is True:
             self.authorised.append(clientid)
         return authorised
 
-    def authenticate(self, clientid: str):
+    def authenticate(self, bot, clientid: str):
         try:
             if clientid in self.authorised:
                 return True
             else:
-                if self._auth_clientid(clientid) is True:
+                if self._auth_clientid(bot, clientid) is True:
                     return True
 
                 return False

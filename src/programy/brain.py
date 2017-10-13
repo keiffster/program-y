@@ -476,7 +476,7 @@ class Brain(object):
     def ask_question(self, bot, clientid, sentence, srai=False):
 
         if self.authentication is not None:
-            if self.authentication.authenticate(clientid) is False:
+            if self.authentication.authenticate(bot, clientid) is False:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("[%s] failed authentication!")
                 return self.authentication.configuration.denied_srai
