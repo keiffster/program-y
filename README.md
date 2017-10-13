@@ -1,9 +1,43 @@
 # Readme info:
 
-Version: 1.0.0 <br/>
+Version: 1.0.1 <br/>
 Authors: Keith Sterling <br/>
-Date: 1st October 2017 <br/>
-NEWS: Version 1.0.0 Released
+Date: 13th October 2017 <br/>
+NEWS: Version 1.1.0 Released
+
+# WHATS NEW IN 1.1
+
+1) CSV Output.
+
+By specifying the following config options, Program-Y can now output errors, duplicates and conversation in csv format
+
+    files:
+        aiml:
+           errors:
+              file: /tmp/y-bot_errors.csv
+              format: csv
+              encoding: utf-8
+              delete_on_start: true
+           duplicates:
+              file: /tmp/y-bot_duplicates.csv
+              format: csv
+              encoding: utf-8
+              delete_on_start: true
+           conversation:
+              file: /tmp/y-bot-conversation.csv
+              format: csv
+              delete_on_start: true
+
+2) Default Variables
+
+New config option properties which will load a set of default property values into each new conversation as it is initiated.
+New conversations are defined by a unique clientid
+
+    files:
+        aiml:
+            properties: $BOT_ROOT/config/properties.txt
+
+
 
 # Introduction
 
