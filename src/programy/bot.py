@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import datetime
 
-from programy.dialog import Conversation, Question
+from programy.dialog import Conversation, Question, ConversationFileStorage
 from programy.config.sections.bot.bot import BotConfiguration
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
@@ -35,6 +35,7 @@ class Bot(object):
         self._question_depth = 0
         self._question_start_time = None
         self._spell_checker = None
+        self._conversation_storage = None
         self._license_keys = None
 
         self.conversation_logger = None
@@ -44,6 +45,8 @@ class Bot(object):
         self.load_license_keys()
 
         self.initiate_spellchecker()
+
+        self.initiate_conversation_storage()
 
     @property
     def configuration(self):
@@ -168,11 +171,34 @@ class Bot(object):
         else:
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Creating new conversation for client %s", clientid)
+
             conversation = Conversation(clientid, self)
+
             if self.brain.properties is not None:
                 conversation.load_initial_variables(self.brain.variables)
+
+            if self._conversation_storage is not None:
+                self._conversation_storage.load_conversation(conversation, clientid, self.configuration.conversations.restore_last_topic)
+
             self._conversations[clientid] = conversation
             return conversation
+
+    def initiate_conversation_storage(self):
+        if self._configuration.conversations is not None:
+            if self._configuration.conversations.type == "file":
+                self._conversation_storage = ConversationFileStorage(self._configuration.conversations.storage)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
+
+    def save_conversation(self, clientid):
+        if self._conversation_storage is not None:
+            if clientid in self._conversations:
+                conversation = self._conversations[clientid]
+                self._conversation_storage.save_conversation(conversation, clientid)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Unknown conversation id type [%s] unable tonot persist!" % clientid)
 
     def check_max_recursion(self):
         if self._configuration.max_question_recursion != -1:

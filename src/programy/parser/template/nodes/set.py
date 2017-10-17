@@ -76,7 +76,9 @@ class TemplateSetNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
-            return self.resolve_to_string(bot, clientid)
+            str = self.resolve_to_string(bot, clientid)
+            bot.save_conversation(clientid)
+            return str
         except Exception as excep:
             logging.exception(excep)
             return ""

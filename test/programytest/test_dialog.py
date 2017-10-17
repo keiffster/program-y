@@ -156,10 +156,13 @@ class QuestionTests(unittest.TestCase):
 class ConversationTests(unittest.TestCase):
 
     def test_conversation(self):
-        test_brain = Brain(BrainConfiguration())
-        test_bot = Bot(test_brain, BotConfiguration())
+        brain_config = BrainConfiguration()
+        test_brain = Brain(brain_config)
+        bot_config = BotConfiguration()
+        bot_config.conversations.max_histories = 3
+        test_bot = Bot(test_brain, bot_config)
 
-        conversation = Conversation("test", test_bot, max_histories=3)
+        conversation = Conversation("test", test_bot)
         self.assertIsNotNone(conversation)
         self.assertIsNotNone(conversation._bot)
         self.assertIsNotNone(conversation._clientid)

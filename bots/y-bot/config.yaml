@@ -24,6 +24,13 @@ bot:
       check_before: false
       check_and_retry: false
 
+    conversations:
+      type: file
+      config_name: file_storage
+
+    file_storage:
+      dir: $BOT_ROOT/conversations
+
 brain:
 
     # Overrides
