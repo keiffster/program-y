@@ -235,7 +235,7 @@ class Bot(object):
             return response
         return None
 
-    def ask_question(self, clientid: str, text: str, srai=False):
+    def ask_question(self, responselogger, clientid: str, text: str, srai=False):
         # TODO Method too big, convert to smaller methods
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -295,10 +295,17 @@ class Bot(object):
                 answers.append(answer)
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("Processed Response (%s): %s", clientid, answer)
+
+                if responselogger is not None:
+                    responselogger.log_response(each_sentence.text, answer)
+
             else:
                 default_response = self.get_default_response(clientid)
                 each_sentence.response = default_response
                 answers.append(default_response)
+
+                if responselogger is not None:
+                    responselogger.log_unknown_response(each_sentence)
 
             sentence_no += 1
 

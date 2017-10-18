@@ -30,7 +30,7 @@ class TemplateSRAINode(TemplateNode):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] SRAI Text [%s]", self.to_string(), srai_text)
 
-        resolved = bot.ask_question(clientid, srai_text, srai=True)
+        resolved = bot.ask_question(None, clientid, srai_text, srai=True)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

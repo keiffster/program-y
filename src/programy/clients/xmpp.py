@@ -63,7 +63,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
                     logging.debug("Missing 'userid' from XMPP message")
                 return
 
-            response = self.bot_client.bot.ask_question(userid, question)
+            response = self.bot_client.bot.ask_question(self, userid, question)
             self.send_response(msg, response)
 
         else:

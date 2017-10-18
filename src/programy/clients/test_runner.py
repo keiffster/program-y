@@ -188,9 +188,9 @@ class TestRunnerBotClient(BotClient):
                     conversation.set_property("topic", test.topic)
 
                 if test.that is not None:
-                    response = self.bot.ask_question(self.clientid, test.that)
+                    response = self.bot.ask_question(self, self.clientid, test.that)
 
-                response = self.bot.ask_question(self.clientid, test.question)
+                response = self.bot.ask_question(self, self.clientid, test.question)
                 success = False
                 test.response = response
 

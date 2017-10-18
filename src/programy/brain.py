@@ -390,6 +390,8 @@ class Brain(object):
         return self.preprocessors.process(bot, clientid, question)
 
     def parse_last_sentences_from_response(self, response):
+        # TODO Issue here when the response is more than just a simple sentence
+        # If the response contains punctuation such as "Hello. There" then THAT is none
         response = re.sub(r'<\s*br\s*/>\s*', ".", response)
         response = re.sub(r'<br></br>*', ".", response)
         sentences = response.split(".")
@@ -397,6 +399,9 @@ class Brain(object):
         last_sentence = sentences[-1]
         that_pattern = TextUtils.strip_all_punctuation(last_sentence)
         that_pattern = that_pattern.strip()
+        # TODO Added this to catch a failed sentence
+        if that_pattern == "":
+            that_pattern = '*'
         return that_pattern
 
     def load_oob_processors(self, brain_configuration):

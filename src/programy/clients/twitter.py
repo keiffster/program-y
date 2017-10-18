@@ -83,7 +83,7 @@ class TwitterBotClient(BotClient):
     def _process_direct_message_question(self, userid, text):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Direct Messages: %s -> %s", userid, text)
-        response = self.bot.ask_question(userid, text)
+        response = self.bot.ask_question(self, userid, text)
         self._api.send_direct_message(userid, text=response)
 
     def _process_direct_messages(self, last_message_id):
@@ -176,7 +176,7 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%s -> %s", userid, question)
 
-            response = self.bot.ask_question(userid, question)
+            response = self.bot.ask_question(self, userid, question)
 
             user = self._api.get_user(userid)
             status = "@%s %s"%(user.screen_name, response)
