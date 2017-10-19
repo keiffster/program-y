@@ -159,7 +159,7 @@ class ConversationTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         test_brain = Brain(brain_config)
         bot_config = BotConfiguration()
-        bot_config.conversations.max_histories = 3
+        bot_config.conversations._max_histories = 3
         test_bot = Bot(test_brain, bot_config)
 
         conversation = Conversation("test", test_bot)

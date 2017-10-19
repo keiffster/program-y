@@ -16,11 +16,10 @@ class AIMLToCSVGenerator(object):
             tree = ET.parse(self._input)
             csv_file = open(self._output, "w+")
             csv_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL)
-            csv_writer.writerow(["Pattern", "Template", "Topic", "That"])
             root = tree.getroot()
             for element in root:
                 if element.tag == 'category':
-                    self.parse_category_to_file(csv_writer, element, topic="")
+                    self.parse_category_to_file(csv_writer, element, topic="*")
                 elif element.tag == 'topic':
                     for child in element:
                         if child.tag == 'category':
@@ -35,7 +34,7 @@ class AIMLToCSVGenerator(object):
 
     def parse_category_to_file(self, csv_writer, category, topic):
         pattern = None
-        that = ""
+        that = "*"
         template = None
         for element in category:
             if element.tag == 'pattern':
@@ -50,7 +49,7 @@ class AIMLToCSVGenerator(object):
         topic = AIMLToCSVGenerator.strip_all_whitespace(topic)
         that = AIMLToCSVGenerator.strip_all_whitespace(that)
 
-        csv_writer.writerow([pattern, template, topic, that])
+        csv_writer.writerow([pattern, topic, that, template])
 
     @staticmethod
     def element_to_string(element):
