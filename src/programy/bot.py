@@ -184,12 +184,13 @@ class Bot(object):
             return conversation
 
     def initiate_conversation_storage(self):
-        if self._configuration.conversations is not None:
-            if self._configuration.conversations.type == "file":
-                self._conversation_storage = ConversationFileStorage(self._configuration.conversations.storage)
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
+        if self._configuration is not None:
+            if self._configuration.conversations is not None:
+                if self._configuration.conversations.type == "file":
+                    self._conversation_storage = ConversationFileStorage(self._configuration.conversations.storage)
+                else:
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
 
     def save_conversation(self, clientid):
         if self._conversation_storage is not None:
@@ -235,7 +236,7 @@ class Bot(object):
             return response
         return None
 
-    def ask_question(self, responselogger, clientid: str, text: str, srai=False):
+    def ask_question(self, clientid: str, text: str, srai=False, responselogger=None):
         # TODO Method too big, convert to smaller methods
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):

@@ -53,7 +53,7 @@ class TemplateAuthoriseNode(TemplateNode):
                     srai_text = self._denied_srai
                 else:
                     srai_text = bot.brain.authorisation.get_default_denied_srai()
-                resolved = bot.ask_question(None, clientid, srai_text, srai=True)
+                resolved = bot.ask_question(clientid, srai_text, srai=True)
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
                 return resolved

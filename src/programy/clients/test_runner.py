@@ -142,6 +142,10 @@ class TestRunnerBotClient(BotClient):
         return self.arguments.args.test_file
 
     @property
+    def qna_file(self):
+        return self.arguments.args.qna_file
+
+    @property
     def verbose(self):
         return self.arguments.args.verbose
 
@@ -152,6 +156,7 @@ class TestRunnerBotClient(BotClient):
         if parser is not None:
             parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
             parser.add_argument('--test_file', dest='test_file', help='Single file ot aiml_tests to run against grammar')
+            parser.add_argument('--qna_file', dest='qna_file', help='A file containing questions and answers')
             parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
     def set_environment(self):
@@ -168,6 +173,8 @@ class TestRunnerBotClient(BotClient):
         else:
             questions = file_finder.load_single_file_contents(self.test_file)
 
+        question_and_answers = open(self.qna_file, "w+")
+
         successes = []
         failures = []
         warnings = 0
@@ -175,9 +182,6 @@ class TestRunnerBotClient(BotClient):
         for category in questions.keys():
             for test in questions[category]:
                 test.category = category
-
-                if self.verbose:
-                    print(test.question)
 
                 if any((c in '$*_^#') for c in test.question):
                     print("WARNING: Wildcards in question! [%s]"%test.question)
@@ -188,11 +192,15 @@ class TestRunnerBotClient(BotClient):
                     conversation.set_property("topic", test.topic)
 
                 if test.that is not None:
-                    response = self.bot.ask_question(self, self.clientid, test.that)
+                    response = self.bot.ask_question(self.clientid, test.that, responselogger=self)
 
-                response = self.bot.ask_question(self, self.clientid, test.question)
+                response = self.bot.ask_question(self.clientid, test.question, responselogger=self)
                 success = False
                 test.response = response
+
+                if self.verbose:
+                    print(test.question, "->", test.response)
+                question_and_answers.write('"%s", "%s"\n'%(test.question, test.response))
 
                 if not test.answers_regex:
                     if test.response == "":
@@ -213,6 +221,9 @@ class TestRunnerBotClient(BotClient):
                     successes.append(test)
                 else:
                     failures.append(test)
+
+        question_and_answers.flush ()
+        question_and_answers.close ()
 
         stop = datetime.datetime.now()
         diff = stop-start

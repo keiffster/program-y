@@ -53,7 +53,7 @@ class ConsoleBotClient(BotClient):
 
     def process_question_answer(self):
         question = self.get_question()
-        response = self.bot.ask_question(self, self.clientid, question)
+        response = self.bot.ask_question(self.clientid, question, responselogger=self)
         self.display_response(response)
         return question
 

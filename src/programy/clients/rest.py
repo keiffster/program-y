@@ -80,6 +80,9 @@ class RestBotClient(BotClient):
     def format_error_response(self, sessionid, question, error):
         return {"question": question, "answer": self.bot.default_response, "sessionid": sessionid, "error": error}
 
+    def ask_question(self, sessionid, question):
+        return self.bot.ask_question(sessionid, question, responselogger=self)
+
     def process_request(self, request):
         question = "Unknown"
         sessionid = "Unknown"
@@ -91,7 +94,7 @@ class RestBotClient(BotClient):
             question = self.get_question(request)
             sessionid = self.get_sessionid(request)
 
-            response = self.bot.ask_question(self, sessionid, question)
+            response = self.ask_question(sessionid, question)
 
             return self.format_success_response(sessionid, question, response), 200
 

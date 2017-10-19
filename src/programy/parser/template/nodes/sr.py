@@ -30,7 +30,7 @@ class TemplateSrNode(TemplateNode):
         sentence = bot.get_conversation(clientid).current_question().current_sentence()
         star = sentence.matched_context.star(1)
         if star is not None:
-            resolved = bot.ask_question(None, clientid, star, srai=True)
+            resolved = bot.ask_question(clientid, star, srai=True)
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Sr node has no stars available")
