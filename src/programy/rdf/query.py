@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
+import logging
 
 from programy.rdf.resultset import RDFQueryResultSet
 
@@ -92,6 +92,8 @@ class RDFQuery(object):
         rdf_predicate = self._predicate_node.resolve(bot, clientid)
         rdf_object = self._object_node.resolve(bot, clientid)
 
+        logging.debug("RDF Query executing (%s, %s, %s)"%(rdf_subject, rdf_predicate, rdf_object))
+
         # Now see if any are variables rather than data
         if rdf_subject.startswith("?"):
             if parameters is not None:
@@ -117,6 +119,8 @@ class RDFQuery(object):
         else:
             obj_val = rdf_object
 
+        logging.debug("RDF Query parameters (%s, %s, %s)"%(subj_val, pred_val, obj_val))
+
         # Query using subj, pred and obj data
         if self.query_type == RDFQuery.QUERY:
             entities = bot.brain.rdf.match(rdf_subject=subj_val, rdf_predicate=pred_val, rdf_object=obj_val)
@@ -125,6 +129,7 @@ class RDFQuery(object):
 
         results = []
         for entity in entities:
+            logging.debug("Matched: (%s, %s, %s)"%(entity.subject, entity.predicate, entity.object))
             result = []
             if rdf_subject.startswith("?"):
                 result.append([rdf_subject, entity.subject])

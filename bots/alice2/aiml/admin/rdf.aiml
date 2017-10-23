@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <category>
+        <pattern>RDF LIST SUBJECTS</pattern>
+        <template>
+            <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
+                SUBJECTS
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RDF LIST PREDICATES SUBJECT *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
+                PREDICATES <star/>
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>RDF LIST OBJECTS SUBJECT * PREDICATE *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
+                OBJECT <star index="1" /> <star index="2" />
+            </extension>
+        </template>
+    </category>
+
+</aiml>

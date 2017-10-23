@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <category>
+        <pattern>BOT PROPERTIES</pattern>
+        <template>
+            <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
+                BOT
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>USER PROPERTIES</pattern>
+        <template>
+            <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
+                USER
+            </extension>
+        </template>
+    </category>
+
+
+</aiml>

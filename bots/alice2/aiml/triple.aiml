@@ -17,6 +17,16 @@
     <!-- For more information see http://www.alicebot.org -->
     <!--  -->
     <category>
+		<pattern>TRIPLE TEST * *</pattern>
+		<template>
+			<select>
+				<vars>?x</vars>
+				<q><subj><star index="1"/></subj><pred><star index="2"/></pred><obj>?x</obj></q>
+			</select>
+		</template>
+	</category>
+
+    <category>
         <pattern>GENSYM</pattern>
         <template>
             <condition name="symcount">

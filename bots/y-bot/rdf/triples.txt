@@ -1362,6 +1362,13 @@ DOG:hasSyllables:1
 DOG:isa:Animal
 DOG:isa:Pet
 DOG:lifeArea:Physical
+DOG:hasPlural:dogs
+DOG:maleName:dog
+DOG:femaleName:bitch
+DOG:youngName:puppy or  pup
+DOG:collective:a pack of dogs
+DOG:legs:4
+DOG:sound:woof
 DOLL:hasPurpose:to play with
 DOLL:hasSize:4
 DOLL:hasSyllables:1
@@ -5507,13 +5514,6 @@ cow:youngName:calf
 cow:collective:a herd of cattle
 cow:legs:4
 cow:sound:moo
-dog:hasPlural:dogs
-dog:maleName:dog
-dog:femaleName:bitch
-dog:youngName:puppy or  pup
-dog:collective:a pack of dogs
-dog:legs:4
-dog:sound:woof
 dolphin:hasPlural:dolphins
 dolphin:maleName:bull
 dolphin:femaleName:cow

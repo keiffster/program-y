@@ -2,11 +2,11 @@
 <aiml version="2.0">
 
     <category>
-		<pattern>TRIPLE TEST</pattern>
+		<pattern>TRIPLE TEST * *</pattern>
 		<template>
 			<select>
 				<vars>?x</vars>
-				<q><subj>ACCOUNT</subj><pred>hasPurpose</pred><obj>?x</obj></q>
+				<q><subj><star index="1"/></subj><pred><star index="2"/></pred><obj>?x</obj></q>
 			</select>
 		</template>
 	</category>

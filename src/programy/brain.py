@@ -292,7 +292,7 @@ class Brain(object):
                 logging.warning("No configuration setting for variables")
 
     def _load_rdf(self, brain_configuration):
-        if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files is not None:
+        if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files:
             total = self._rdf_collection.load(brain_configuration.files.rdf_files)
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Loaded a total of %d rdf files", total)
