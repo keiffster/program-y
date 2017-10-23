@@ -66,3 +66,48 @@ BRAIN:hasSyllables:1
 BRAIN:isa:Body Part
 BRAIN:isa:Organ
 BRAIN:lifeArea:Physical
+MIND:hasPurpose:to think
+MIND:hasSize:0
+MIND:hasSyllables:1
+MIND:isa:Concept
+MIND:lifeArea:Spiritual
+Microorganism:isa:Body Part
+MEMORY:hasPurpose:to remember things
+MEMORY:hasSize:0
+MEMORY:hasSyllables:3
+MEMORY:isa:Concept
+MEMORY:lifeArea:Spiritual
+Hand Part:isa:Body Part
+Hand Tool:isa:Tool
+HAND:hasPurpose:to grasp things
+HAND:hasSize:4
+HAND:hasSyllables:1
+HAND:isa:Arm Part
+HAND:isa:Body Part
+HAND:lifeArea:Physical
+BUTT:hasPurpose:to be a rear end
+BUTT:hasSize:3
+BUTT:hasSyllables:1
+BUTT:isa:Body Part
+BUTT:lifeArea:Physical
+Eye Part:isa:Body Part
+EYE:hasPurpose:to see things
+EYE:hasSize:3
+EYE:hasSyllables:1
+EYE:isa:Body Part
+EYE:isa:Face Part
+EYE:lifeArea:Physical
+Face Part:isa:Body Part
+FACE:hasPurpose:to show our appearance
+FACE:hasSize:4
+FACE:hasSyllables:1
+FACE:isa:Body Part
+FACE:isa:Head Part
+FACE:lifeArea:Physical
+Foot Part:isa:Body Part
+HUMAN:hasPurpose:to live a meaningful life
+HUMAN:hasSize:7
+HUMAN:hasSyllables:2
+HUMAN:isa:Person
+HUMAN:lifeArea:Physical
+Organ:isa:Body Part

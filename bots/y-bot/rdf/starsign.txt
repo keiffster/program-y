@@ -53,3 +53,8 @@ TAURUS:hasSize:0
 TAURUS:hasSyllables:5
 TAURUS:isa:Star Sign
 TAURUS:lifeArea:Spiritual
+LEO:hasPurpose:to give us personality based on birth
+LEO:hasSize:0
+LEO:hasSyllables:2
+LEO:isa:Star Sign
+LEO:lifeArea:Spiritual

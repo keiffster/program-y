@@ -30,3 +30,39 @@ CHARGE:hasSyllables:1
 CHARGE:isa:Electrical Measurement
 CHARGE:isa:Physical Unit
 CHARGE:lifeArea:Education
+Particle:isa:Physical Unit
+Power Storage:isa:Electrical device
+RADAR:hasPurpose:to measure distance to objects
+RADAR:hasSize:0
+RADAR:hasSyllables:2
+RADAR:lifeArea:Physical
+RADIO:hasPurpose:to transmit music and voice wirelessly
+RADIO:hasSize:3
+RADIO:hasSyllables:3
+RADIO:lifeArea:Physical
+BATTERY:hasPurpose:to store electricity
+BATTERY:hasSize:4
+BATTERY:hasSyllables:3
+BATTERY:isa:Electrical device
+BATTERY:isa:Power Storage
+BATTERY:lifeArea:Education
+CURRENT:hasSize:0
+CURRENT:hasSyllables:2
+CURRENT:isa:Measurement
+CURRENT:isa:Physical Unit
+CURRENT:lifeArea:Education
+Electrical Measurement:isa:Physical Unit
+ELECTRICITY:hasPurpose:to provide power
+ELECTRICITY:hasSize:0
+ELECTRICITY:hasSyllables:5
+ELECTRICITY:lifeArea:Physical
+ELECTRON:hasPurpose:to make up an atom
+ELECTRON:hasSize:1
+ELECTRON:hasSyllables:3
+ELECTRON:isa:Entity
+ELECTRON:lifeArea:Physical
+Light Effect:isa:Physical Effect
+LIGHT:hasPurpose:to provide illumination
+LIGHT:hasSize:0
+LIGHT:hasSyllables:1
+LIGHT:lifeArea:Physical

@@ -441,3 +441,27 @@ BUFFALO:hasSyllables:3
 BUFFALO:isa:Animal
 BUFFALO:isa:Wild Animal
 BUFFALO:lifeArea:Physical
+PET:hasPurpose:to keep us company
+PET:hasSize:0
+PET:hasSyllables:1
+Pet:isa:Animal
+PET:isa:Animal
+PET:lifeArea:Physical
+PONY:hasPurpose:to be a young horse
+PONY:hasSize:6
+PONY:hasSyllables:2
+PONY:isa:Animal
+PONY:isa:Horse
+PONY:lifeArea:Physical
+Rabbit:isa:Animal
+Insect:isa:Animal
+Farm Animal:isa:Animal
+Shellfish:isa:Animal
+Snake:isa:Animal
+SPIDER:hasPurpose:to build webs
+SPIDER:hasSize:3
+SPIDER:hasSyllables:2
+SPIDER:isa:Animal
+SPIDER:isa:Arachnid
+SPIDER:lifeArea:Physical
+

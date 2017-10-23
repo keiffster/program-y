@@ -1,0 +1,30 @@
+CHECK:hasPurpose:to pay from a bank account
+CHECK:hasSize:0
+CHECK:hasSyllables:1
+CHECK:isa:Contract
+CHECK:isa:Payment Instrument
+CHECK:lifeArea:Finances
+Currency:isa:Money
+DOLLAR:hasPurpose:to pay for things
+DOLLAR:hasSize:4
+DOLLAR:hasSyllables:2
+DOLLAR:isa:Currency
+DOLLAR:isa:Money
+DOLLAR:lifeArea:Physical
+MONEY:hasPurpose:to pay for things
+MONEY:hasSize:0
+MONEY:hasSyllables:2
+Money:isa:Currency
+MONEY:lifeArea:Finances
+Payment Instrument:isa:Contract
+Payment:isa:Money Amount
+PRICE:hasPurpose:to provide a cost
+PRICE:hasSize:0
+PRICE:hasSyllables:1
+PRICE:isa:Money Amount
+PRICE:lifeArea:Business
+RATE:hasPurpose:to provide a percentage in payment
+RATE:hasSize:0
+RATE:hasSyllables:1
+RATE:isa:Money Amount
+RATE:lifeArea:Business

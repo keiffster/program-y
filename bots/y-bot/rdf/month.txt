@@ -1,3 +1,4 @@
+Month:isa:Time Quantity
 APRIL:hasPurpose:to measure time
 APRIL:hasSize:0
 APRIL:hasSyllables:2

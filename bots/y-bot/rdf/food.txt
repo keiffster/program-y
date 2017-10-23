@@ -157,3 +157,47 @@ COCA:hasSyllables:2
 COCA:isa:Crop
 COCA:isa:Plant
 COCA:lifeArea:Diet
+PIE:hasPurpose:to provide nourishment
+PIE:hasSize:4
+PIE:hasSyllables:1
+PIE:isa:Dessert
+PIE:lifeArea:Diet
+PEPPER:hasPurpose:to add taste
+PEPPER:hasSize:2
+PEPPER:hasSyllables:2
+PEPPER:isa:Condiment
+PEPPER:lifeArea:Diet
+LUNCH:hasPurpose:to be a meal at mid day
+LUNCH:hasSize:4
+LUNCH:hasSyllables:1
+LUNCH:isa:Meal
+LUNCH:lifeArea:Diet
+Ingredient:isa:Flavoring
+HONEY:hasPurpose:to provide a sweet taste
+HONEY:hasSize:3
+HONEY:hasSyllables:2
+HONEY:isa:Ingredient
+HONEY:lifeArea:Diet
+GRAIN:hasPurpose:to be an ingredient in baked goods
+GRAIN:hasSize:2
+GRAIN:hasSyllables:1
+GRAIN:lifeArea:Diet
+HAY:hasPurpose:to feed horses
+HAY:hasSize:0
+HAY:hasSyllables:1
+HAY:isa:Crop
+HAY:lifeArea:Physical
+RELISH:hasPurpose:to add taste
+RELISH:hasSize:2
+RELISH:hasSyllables:2
+RELISH:isa:Condiment
+RELISH:lifeArea:Diet
+SALT:hasPurpose:to add taste
+SALT:hasSize:2
+SALT:hasSyllables:1
+SALT:isa:Condiment
+SALT:lifeArea:Diet
+SOUP:hasPurpose:to provide a liquid meal
+SOUP:hasSize:3
+SOUP:hasSyllables:1
+SOUP:lifeArea:Diet

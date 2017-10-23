@@ -49,3 +49,13 @@ PURPLE:hasSize:0
 PURPLE:hasSyllables:2
 PURPLE:isa:Color
 PURPLE:lifeArea:Physical
+RED:hasPurpose:to color like a ripe tomato
+RED:hasSize:0
+RED:hasSyllables:1
+RED:isa:Color
+RED:lifeArea:Physical
+COLOR:hasPurpose:to perceive the wavelength of light
+COLOR:hasSize:0
+COLOR:hasSyllables:2
+COLOR:isa:Physical Measurement
+COLOR:lifeArea:Physical

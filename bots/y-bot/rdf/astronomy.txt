@@ -59,6 +59,7 @@ PLUTO:hasSyllables:2
 PLUTO:isa:Astronomical Body
 PLUTO:isa:Planet
 PLUTO:lifeArea:Physical
+PLUTO:hasPurpose:to give us something to explore
 PLANET:hasPurpose:to orbit a star
 PLANET:hasSize:12
 PLANET:hasSyllables:2

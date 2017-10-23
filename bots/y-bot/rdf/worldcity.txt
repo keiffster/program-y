@@ -1,3 +1,11 @@
+CITY:hasPurpose:to provide culture and civilization
+CITY:hasSize:10
+CITY:hasSyllables:2
+City:isa:Geographic Location
+CITY:isa:Geographic Location
+City:isa:Georgaphical Feature
+CITY:isa:Political Unit
+CITY:lifeArea:Education
 BRAZIL:hasPurpose:to form a nation
 BRAZIL:hasSize:11
 BRAZIL:hasSyllables:2

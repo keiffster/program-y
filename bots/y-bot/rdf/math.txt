@@ -10,3 +10,11 @@ NUMBER:isa:Math Concept
 NUMBER:isa:Symbol
 NUMBER:lifeArea:Education
 Math Concept:isa:Concept
+COUNT:hasPurpose:to associate with numbers
+COUNT:hasSize:0
+COUNT:hasSyllables:1
+COUNT:lifeArea:Education
+SQUARE:hasPurpose:to have four equal sides
+SQUARE:hasSize:0
+SQUARE:hasSyllables:1
+SQUARE:lifeArea:Education

@@ -13,3 +13,176 @@ FISHING:hasSize:0
 FISHING:hasSyllables:2
 FISHING:isa:Activity
 FISHING:lifeArea:Recreation
+POLITICS:hasPurpose:to compete
+POLITICS:hasSize:0
+POLITICS:hasSyllables:3
+POLITICS:isa:Activity
+POLITICS:lifeArea:Social
+PEE:hasPurpose:to empty the bladder
+PEE:hasSize:0
+PEE:hasSyllables:1
+PEE:isa:Body Function
+PEE:lifeArea:Physical
+PEEING:hasPurpose:to empty the bladder
+PEEING:hasSize:0
+PEEING:hasSyllables:1
+PEEING:isa:Body Function
+PEEING:lifeArea:Physical
+READING:hasPurpose:to gather information through words
+READING:hasSize:0
+READING:hasSyllables:2
+READING:lifeArea:Education
+POKER:hasPurpose:to gamble
+POKER:hasSize:0
+POKER:hasSyllables:2
+POKER:isa:Game
+POKER:lifeArea:Recreation
+HOLIDAY:hasPurpose:to give us a break from work
+HOLIDAY:hasPurpose:to give us time to remember and celebrate
+HOLIDAY:hasSize:0
+HOLIDAY:hasSyllables:3
+HOLIDAY:isa:Annual Event
+HOLIDAY:isa:Time Quantity
+HOLIDAY:lifeArea:Social
+BREAK:hasPurpose:to relax
+BREAK:hasSize:0
+BREAK:hasSyllables:1
+BREAK:isa:Activity
+BREAK:lifeArea:Recreation
+CHEER:hasPurpose:to praise
+CHEER:hasSize:0
+CHEER:hasSyllables:1
+CHEER:isa:Activity
+CHEER:isa:Group Activity
+CHEER:lifeArea:Recreation
+COOKING:hasPurpose:to prepare food
+COOKING:hasSize:0
+COOKING:hasSyllables:2
+COOKING:isa:Activity
+COOKING:lifeArea:Diet
+DANCE:hasPurpose:to move our bodies gracefully
+DANCE:hasSize:0
+DANCE:hasSyllables:1
+DANCE:isa:Activity
+DANCE:lifeArea:Recreation
+DREAM:hasPurpose:to reveal mysteries of the unconscious
+DREAM:hasSize:0
+DREAM:hasSyllables:1
+DREAM:isa:Activity
+DREAM:isa:Unconscious Mental Process
+DREAM:lifeArea:Spiritual
+DYING:hasPurpose:to end life
+DYING:hasSize:0
+DYING:hasSyllables:2
+DYING:isa:Activity
+DYING:lifeArea:Spiritual
+EATING:hasPurpose:to nourish the body
+EATING:hasSize:0
+EATING:hasSyllables:2
+EATING:isa:Activity
+FLIGHT:hasPurpose:to transport us a long distance
+FLIGHT:hasSize:0
+FLIGHT:hasSyllables:2
+FLIGHT:isa:Activity
+FLIGHT:lifeArea:Business
+Group Activity:isa:Activity
+Habit:isa:Activity
+Initimate Activity:isa:Activity
+JOB:hasPurpose:to give us work
+JOB:hasSize:0
+JOB:hasSyllables:1
+JOB:isa:Activity
+JOB:lifeArea:Business
+MEETING:hasPurpose:to discuss matters with other people
+MEETING:hasSize:0
+MEETING:hasSyllables:2
+MEETING:isa:Activity
+MEETING:lifeArea:Business
+MASSAGE:hasPurpose:to relax the muscles
+MASSAGE:hasSize:0
+MASSAGE:hasSyllables:2
+MASSAGE:isa:Activity
+MASSAGE:lifeArea:Recreation
+MISSION:hasPurpose:to provide a goal for work
+MISSION:hasSize:0
+MISSION:hasSyllables:2
+MISSION:isa:Activity
+MISSION:lifeArea:Business
+NAVIGATION:hasPurpose:to follow directions
+NAVIGATION:hasSize:0
+NAVIGATION:hasSyllables:4
+NAVIGATION:isa:Activity
+NAVIGATION:lifeArea:Education
+PARTY:hasPurpose:to have fun with a group
+PARTY:hasSize:0
+PARTY:hasSyllables:2
+PARTY:isa:Activity
+PARTY:lifeArea:Recreation
+SEX:hasPurpose:to gain pleasure reproduce
+SEX:hasSize:0
+SEX:hasSyllables:1
+SEX:isa:Activity
+SEX:isa:Initimate Activity
+SEX:lifeArea:Physical
+SHOPPING:hasPurpose:to buy things
+SHOPPING:hasSize:0
+SHOPPING:hasSyllables:2
+SHOPPING:isa:Activity
+SHOPPING:lifeArea:Recreation
+SINGING:hasPurpose:to express emotion
+SINGING:hasSize:0
+SINGING:hasSyllables:2
+SINGING:isa:Activity
+SINGING:lifeArea:Creative
+SMOKING:hasPurpose:to ruin your health
+SMOKING:hasSize:0
+SMOKING:hasSyllables:2
+SMOKING:isa:Activity
+SMOKING:isa:Habit
+SMOKING:lifeArea:Diet
+SWALLOWING:hasPurpose:to nourish the body
+SWALLOWING:hasSize:0
+SWALLOWING:hasSyllables:2
+SWALLOWING:isa:Activity
+SWALLOWING:lifeArea:Diet
+TRAVEL:hasPurpose:to reach distant places
+TRAVEL:hasSize:0
+TRAVEL:hasSyllables:2
+TRAVEL:isa:Activity
+TRAVEL:lifeArea:Recreation
+Unconscious Mental Process:isa:Activity
+WORK:hasPurpose:to make money
+WORK:hasSize:0
+WORK:hasSyllables:1
+WORK:isa:Activity
+WORK:lifeArea:Business
+COPYING:hasPurpose:to make duplicates
+COPYING:hasSize:0
+COPYING:hasSyllables:3
+COPYING:lifeArea:Education
+CRYING:hasPurpose:to express sadness
+CRYING:hasSize:0
+CRYING:hasSyllables:1
+CRYING:isa:Body Function
+CRYING:lifeArea:Physical
+DATING:hasPurpose:to play at romance
+DATING:hasSize:0
+DATING:hasSyllables:3
+DATING:lifeArea:Social
+DIAL:hasPurpose:to rotate a switch
+DIAL:hasSize:0
+DIAL:hasSyllables:2
+DIAL:isa:Tool
+DIAL:lifeArea:Physical
+EATING:lifeArea:Diet
+FIGHT:hasPurpose:to conflict physically
+FIGHT:hasSize:0
+FIGHT:hasSyllables:1
+FIGHT:lifeArea:Social
+FIGHTING:hasPurpose:to conflict physically
+FIGHTING:hasSize:0
+FIGHTING:hasSyllables:2
+FIGHTING:lifeArea:Social
+
+
+

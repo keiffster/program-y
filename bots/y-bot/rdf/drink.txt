@@ -69,3 +69,9 @@ MILK:hasSyllables:1
 MILK:isa:Beverage
 MILK:lifeArea:Diet
 Soda:isa:Beverage
+DRUNK:hasPurpose:to be intoxicated
+DRUNK:hasSize:7
+DRUNK:hasSyllables:1
+DRUNK:isa:Intoxicated Person
+DRUNK:isa:Person
+DRUNK:lifeArea:Social

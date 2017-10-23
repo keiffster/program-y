@@ -3,3 +3,8 @@ CHEMICAL:hasSize:0
 CHEMICAL:hasSyllables:3
 CHEMICAL:isa:Chemistry
 CHEMICAL:lifeArea:Education
+CRYSTAL:hasPurpose:to look pretty
+CRYSTAL:hasSize:0
+CRYSTAL:hasSyllables:2
+CRYSTAL:isa:Chemistry
+CRYSTAL:lifeArea:Education

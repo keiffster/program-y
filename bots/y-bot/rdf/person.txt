@@ -125,3 +125,30 @@ PARENT:hasSize:7
 PARENT:hasSyllables:2
 PARENT:isa:Person
 PARENT:lifeArea:Family
+PERSON:hasPurpose:to live a meaningful life
+PERSON:hasSize:7
+PERSON:hasSyllables:2
+PERSON:isa:Animal
+PERSON:isa:Mammal
+PERSON:lifeArea:Physical
+PERSONALITY:hasPurpose:to express behavior patterns
+PERSONALITY:hasSize:0
+PERSONALITY:hasSyllables:5
+PERSONALITY:isa:Concept
+PERSONALITY:lifeArea:Spiritual
+PAPA:hasPurpose:to raise a child
+PAPA:hasSize:7
+PAPA:hasSyllables:2
+PAPA:isa:Male Parent
+PAPA:isa:Parent
+PAPA:lifeArea:Family
+MALE:hasPurpose:to carry the XY chromosome
+MALE:hasSize:0
+MALE:hasSyllables:1
+MALE:isa:Gender
+MALE:lifeArea:Physical
+RELATIONSHIP:hasPurpose:to form a bond of two people
+RELATIONSHIP:hasSize:0
+RELATIONSHIP:hasSyllables:4
+RELATIONSHIP:isa:Activity
+RELATIONSHIP:lifeArea:Social

@@ -49,3 +49,181 @@ FALSEHOOD:hasSyllables:2
 FALSEHOOD:isa:Concept
 FALSEHOOD:isa:Logical Concept
 FALSEHOOD:lifeArea:Education
+BRAND:hasPurpose:to name a product
+BRAND:hasSize:0
+BRAND:hasSyllables:1
+BRAND:isa:Concept
+BRAND:lifeArea:Business
+CAUSE:hasPurpose:to make something happen
+CAUSE:hasSize:0
+CAUSE:hasSyllables:4
+CAUSE:isa:Concept
+CAUSE:lifeArea:Physical
+CENTER:hasPurpose:to be the middle
+CENTER:hasSize:0
+CENTER:hasSyllables:2
+CENTER:isa:Concept
+CENTER:lifeArea:Physical
+CHANGE:hasPurpose:to transition from one thing to another
+CHANGE:hasSize:0
+CHANGE:hasSyllables:1
+CHANGE:isa:Concept
+CHANGE:lifeArea:Physical
+CLUE:hasPurpose:to reveal information
+CLUE:hasSize:0
+CLUE:hasSyllables:1
+CLUE:isa:Concept
+CLUE:lifeArea:Education
+COLLECTION:hasPurpose:to gather items
+COLLECTION:hasSize:0
+COLLECTION:hasSyllables:3
+COLLECTION:isa:Concept
+COLLECTION:lifeArea:Education
+COMEBACK:hasPurpose:to recover from a setback
+COMEBACK:hasSize:0
+COMEBACK:hasSyllables:2
+COMEBACK:isa:Concept
+COMEBACK:lifeArea:Social
+END:hasPurpose:to be the last
+END:hasSize:0
+END:hasSyllables:2
+END:isa:Concept
+END:lifeArea:Physical
+FIRST:hasPurpose:to be the origin
+FIRST:hasSize:0
+FIRST:hasSyllables:1
+FIRST:isa:Concept
+FIRST:lifeArea:Physical
+FLOW:hasPurpose:to move smoothly
+FLOW:hasSize:0
+FLOW:hasSyllables:1
+FLOW:isa:Concept
+FLOW:lifeArea:Spiritual
+FORECAST:hasPurpose:to predict the future
+FORECAST:hasSize:0
+FORECAST:hasSyllables:2
+FORECAST:isa:Concept
+FORECAST:lifeArea:Physical
+FOREVER:hasPurpose:to never end
+FOREVER:hasSize:0
+FOREVER:hasSyllables:3
+FOREVER:isa:Concept
+FOREVER:lifeArea:Physical
+FREEDOM:hasPurpose:to make individual choices
+FREEDOM:hasSize:0
+FREEDOM:hasSyllables:1
+FREEDOM:isa:Concept
+FREEDOM:lifeArea:Spiritual
+FRONT:hasPurpose:to show a forward face
+FRONT:hasSize:0
+FRONT:hasSyllables:1
+FRONT:isa:Concept
+FRONT:lifeArea:Physical
+GATE:hasPurpose:to permit or deny entry
+GATE:hasSize:0
+GATE:hasSyllables:1
+GATE:isa:Concept
+GATE:lifeArea:Physical
+GATEWAY:hasPurpose:to permit or deny entry
+GATEWAY:hasSize:0
+GATEWAY:hasSyllables:2
+GATEWAY:isa:Concept
+GATEWAY:lifeArea:Physical
+HOPE:hasPurpose:to wish for better times
+HOPE:hasSize:0
+HOPE:hasSyllables:1
+HOPE:isa:Concept
+HOPE:lifeArea:Spiritual
+INTELLIGENCE:hasPurpose:to make us smart
+INTELLIGENCE:hasSize:0
+INTELLIGENCE:hasSyllables:4
+INTELLIGENCE:isa:Concept
+INTELLIGENCE:lifeArea:Education
+LIFE:hasPurpose:to give us existence in the world
+LIFE:hasPurpose:to make us alive
+LIFE:hasSize:0
+LIFE:hasSyllables:1
+LIFE:isa:Concept
+LIFE:isa:Spiritual State
+LIFE:lifeArea:Spiritual
+Logical Concept:isa:Concept
+LUCK:hasPurpose:to have good fortune
+LUCK:hasSize:0
+LUCK:hasSyllables:1
+LUCK:isa:Concept
+LUCK:lifeArea:Spiritual
+MISTAKE:hasPurpose:to make an error
+MISTAKE:hasSize:0
+MISTAKE:hasSyllables:2
+MISTAKE:isa:Concept
+MISTAKE:lifeArea:Spiritual
+NEED:hasPurpose:to have something to strive for
+NEED:hasSize:0
+NEED:hasSyllables:1
+NEED:isa:Concept
+NEED:lifeArea:Spiritual
+OPINION:hasPurpose:to express a belief
+OPINION:hasSize:0
+OPINION:hasSyllables:3
+OPINION:isa:Concept
+OPINION:lifeArea:Spiritual
+PASSION:hasPurpose:to be enthusiastic
+PASSION:hasSize:0
+PASSION:hasSyllables:2
+PASSION:isa:Concept
+PASSION:lifeArea:Spiritual
+SECRET:hasPurpose:to keep facts confidential
+SECRET:hasSize:0
+SECRET:hasSyllables:2
+SECRET:isa:Concept
+SECRET:lifeArea:Spiritual
+SELF:hasPurpose:to be a unique individual
+SELF:hasSize:7
+SELF:hasSyllables:1
+SELF:isa:Concept
+SELF:lifeArea:Spiritual
+SET:hasPurpose:to collect items
+SET:hasSize:0
+SET:hasSyllables:1
+SET:isa:Concept
+SET:isa:Math Concept
+SET:lifeArea:Education
+SHAME:hasPurpose:to make us feel guilty
+SHAME:hasSize:0
+SHAME:hasSyllables:1
+SHAME:isa:Concept
+SHAME:lifeArea:Spiritual
+SIGN:hasPurpose:to reveal information
+SIGN:hasSize:0
+SIGN:hasSyllables:1
+SIGN:isa:Concept
+SIGN:lifeArea:Spiritual
+Symbol:isa:Concept
+Symbol:isa:Math Concept
+THINKING:hasPurpose:to have thoughts
+THINKING:hasSize:0
+THINKING:hasSyllables:2
+THINKING:isa:Concept
+THINKING:lifeArea:Spiritual
+THOUGHT:hasPurpose:to be thinking
+THOUGHT:hasSize:0
+THOUGHT:hasSyllables:1
+THOUGHT:isa:Concept
+THOUGHT:lifeArea:Spiritual
+TRUTH:hasPurpose:to express what is true
+TRUTH:hasSize:0
+TRUTH:hasSyllables:1
+TRUTH:isa:Concept
+TRUTH:isa:Logical Concept
+TRUTH:lifeArea:Education
+WISH:hasPurpose:to hope for something
+WISH:hasSize:0
+WISH:hasSyllables:1
+WISH:isa:Concept
+WISH:lifeArea:Spiritual
+WORD:hasPurpose:to say things
+WORD:hasSize:0
+WORD:hasSyllables:1
+WORD:isa:Concept
+WORD:isa:Symbol
+WORD:lifeArea:Education

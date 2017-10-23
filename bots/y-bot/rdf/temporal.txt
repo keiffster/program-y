@@ -163,9 +163,25 @@ MAY:hasSyllables:1
 MAY:isa:Month
 MAY:isa:Time Quantity
 MAY:lifeArea:Physical
-
 MINUTE:hasPurpose:to measure time
 MINUTE:hasSize:0
 MINUTE:hasSyllables:2
 MINUTE:isa:Time Interval
 MINUTE:lifeArea:Physical
+PAST:hasPurpose:to be history
+PAST:hasSize:0
+PAST:hasSyllables:1
+PAST:lifeArea:Physical
+SECOND:hasPurpose:to measure time
+SECOND:hasSize:0
+SECOND:hasSyllables:2
+SECOND:isa:Time Quantity
+SECOND:lifeArea:Physical
+Duration:isa:Time Quantity
+EVENING:hasPurpose:to end the day
+EVENING:hasSize:0
+EVENING:hasSyllables:2
+EVENING:isa:Time Measurement
+Evening:isa:Time Quantity
+EVENING:lifeArea:Physical
+

@@ -304,3 +304,9 @@ MONTANA:hasSyllables:3
 MONTANA:isa:Geographic Location
 MONTANA:isa:State
 MONTANA:lifeArea:Education
+STATE:hasPurpose:to form a state
+STATE:hasSize:11
+STATE:hasSyllables:1
+STATE:isa:Geographic Feature
+State:isa:Geographic Location
+STATE:lifeArea:Education

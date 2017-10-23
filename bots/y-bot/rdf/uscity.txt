@@ -160,3 +160,9 @@ PASADENA:hasSyllables:4
 PASADENA:isa:City
 PASADENA:isa:Geographic Location
 PASADENA:lifeArea:Education
+RENO:hasPurpose:to form a city
+RENO:hasSize:10
+RENO:hasSyllables:2
+RENO:isa:City
+RENO:isa:Geographic Location
+RENO:lifeArea:Education

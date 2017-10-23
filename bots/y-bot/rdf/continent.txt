@@ -25,3 +25,8 @@ NORTH AMERICA:isa:Continent
 NORTH AMERICA:isa:Geographic Location
 NORTH AMERICA:lifeArea:Education
 Continent:isa:Geographic Location
+EUROPE:hasPurpose:to form a continent
+EUROPE:hasSize:11
+EUROPE:isa:Continent
+EUROPE:isa:Geographic Location
+EUROPE:lifeArea:Education

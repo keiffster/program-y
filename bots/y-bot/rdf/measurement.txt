@@ -1,6 +1,22 @@
-AGE:hasPurpose:to count years of life
+Measurement:isa:Number
+Measurement:isa:Physical Unit
+MILE:hasPurpose:to measure distance
+MILE:hasSize:9
+MILE:hasSyllables:1
+MILE:lifeArea:PhysicalAGE:hasPurpose:to count years of life
 AGE:hasSize:0
 AGE:hasSyllables:1
 AGE:isa:Measurement
 AGE:isa:Number
 AGE:lifeArea:Physical
+GALLON:hasPurpose:to measure liquid
+GALLON:hasSize:5
+GALLON:hasSyllables:2
+GALLON:isa:Physical Measurement
+GALLON:lifeArea:Physical
+DISTANCE:hasPurpose:to measure length between locations
+DISTANCE:hasSize:0
+DISTANCE:hasSyllables:2
+DISTANCE:isa:Physical Measurement
+DISTANCE:lifeArea:Physical
+

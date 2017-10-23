@@ -1,3 +1,8 @@
+FLOWER:hasPurpose:to give us beauty
+FLOWER:hasSize:4
+FLOWER:hasSyllables:1
+FLOWER:isa:Plant
+FLOWER:lifeArea:Physical
 DAISY:hasPurpose:to signal springtime
 DAISY:hasSize:3
 DAISY:hasSyllables:2

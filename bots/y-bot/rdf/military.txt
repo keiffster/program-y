@@ -3,3 +3,10 @@ ARMY:hasSize:10
 ARMY:hasSyllables:2
 ARMY:isa:Military
 ARMY:lifeArea:Social
+NAVY:hasPurpose:to protect the seas
+NAVY:hasSize:10
+NAVY:hasSyllables:2
+NAVY:isa:Military Organization
+NAVY:lifeArea:Social
+Military action:isa:Conflict
+Military Officer:isa:Person

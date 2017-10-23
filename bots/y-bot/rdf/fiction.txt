@@ -53,3 +53,28 @@ PIRATE:hasSize:7
 PIRATE:hasSyllables:2
 PIRATE:isa:Fictional Character
 PIRATE:lifeArea:Recreation
+PANDORA:hasPurpose:to open her box
+PANDORA:hasSize:7
+PANDORA:hasSyllables:3
+PANDORA:isa:Mythology
+PANDORA:lifeArea:Education
+Living Dead:isa:Fictional Character
+MONSTER:hasPurpose:to scare people
+MONSTER:hasSize:9
+MONSTER:hasSyllables:1
+MONSTER:isa:Fictional Character
+MONSTER:lifeArea:Recreation
+GHOST:hasPurpose:to haunt us
+GHOST:hasSize:7
+GHOST:hasSyllables:1
+GHOST:isa:Entity
+GHOST:lifeArea:Spiritual
+Fictional Person:isa:Fictional Character
+Flying Elephant:isa:Fictional Character
+Flying Lizard:isa:Fictional Character
+GIANT:hasPurpose:to be a very large person
+GIANT:hasSize:8
+GIANT:hasSyllables:2
+GIANT:isa:Fictional Character
+GIANT:isa:Oversize Person
+GIANT:lifeArea:Recreation

@@ -45,3 +45,17 @@ COSTCO:hasSize:0
 COSTCO:hasSyllables:2
 COSTCO:isa:Company
 COSTCO:lifeArea:Physical
+NGO:hasPurpose:to provide services outside government
+NGO:hasSize:0
+NGO:hasSyllables:3
+NGO:lifeArea:Social
+HALLIBURTON:hasPurpose:to service oilfields
+HALLIBURTON:hasSize:0
+HALLIBURTON:hasSyllables:4
+HALLIBURTON:isa:Business
+HALLIBURTON:lifeArea:Physical
+GUCCI:hasPurpose:to make quality handbags
+GUCCI:hasSize:0
+GUCCI:hasSyllables:2
+GUCCI:isa:Manufacturer
+GUCCI:lifeArea:Business

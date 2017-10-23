@@ -1,3 +1,9 @@
+COUNTRY:hasPurpose:to form a nation
+COUNTRY:hasSize:11
+COUNTRY:hasSyllables:2
+Country:isa:Geographic Location
+COUNTRY:isa:Poltical Unit
+COUNTRY:lifeArea:Social
 AMERICA:hasPurpose:to form a more perfect union
 AMERICA:hasSize:11
 AMERICA:hasSyllables:3
@@ -118,6 +124,7 @@ IRAN:hasSyllables:2
 IRAN:isa:Country
 IRAN:isa:Geographic Location
 IRAN:lifeArea:Education
+IRAN:hasPurpose:to form a nation
 IRELAND:hasPurpose:to form a nation
 IRELAND:hasSize:11
 IRELAND:hasSyllables:3
@@ -297,3 +304,9 @@ PHILIPPINES:hasSyllables:3
 PHILIPPINES:isa:Country
 PHILIPPINES:isa:Geographic Location
 PHILIPPINES:lifeArea:Education
+POLAND:hasPurpose:to form a city
+POLAND:hasSize:11
+POLAND:hasSyllables:2
+POLAND:isa:Country
+POLAND:isa:Geographic Location
+POLAND:lifeArea:Education

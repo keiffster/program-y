@@ -51,3 +51,12 @@ SOFTWARE:isa:Computer Program
 Software:isa:Programming Language
 SOFTWARE:isa:Technology
 SOFTWARE:lifeArea:Business
+PROGRAM:hasPurpose:to control a computer
+PROGRAM:hasSize:0
+PROGRAM:hasSyllables:2
+PROGRAM:isa:Software
+PROGRAM:lifeArea:Education
+SILICON:hasPurpose:to make microchips
+SILICON:hasSize:0
+SILICON:hasSyllables:3
+SILICON:lifeArea:Physical

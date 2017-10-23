@@ -19,3 +19,12 @@ MUSIC:hasSize:0
 MUSIC:hasSyllables:2
 MUSIC:isa:Sound
 MUSIC:lifeArea:Creative
+SONATA:hasPurpose:to please the ear
+SONATA:hasSize:0
+SONATA:hasSyllables:3
+SONATA:lifeArea:Recreation
+SONG:hasPurpose:to entertain us
+SONG:hasSize:0
+SONG:hasSyllables:1
+SONG:isa:Creative Work
+SONG:lifeArea:Creative

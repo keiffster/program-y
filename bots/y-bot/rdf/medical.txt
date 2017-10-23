@@ -23,3 +23,30 @@ CANCER:hasSize:0
 CANCER:hasSyllables:2
 CANCER:isa:Disease
 CANCER:lifeArea:Physical
+COLD:hasPurpose:to make us ill
+COLD:hasSize:0
+COLD:hasSyllables:1
+COLD:isa:Disease
+COLD:lifeArea:Physical
+DISEASE:hasPurpose:to make us ill
+DISEASE:hasSize:0
+DISEASE:hasSyllables:2
+DISEASE:isa:Physical Condition
+DISEASE:lifeArea:Physical
+DNA:hasPurpose:to code genetic information
+DNA:hasSize:1
+DNA:hasSyllables:3
+DNA:isa:Body Part
+DNA:lifeArea:Physical
+DOCTOR:hasPurpose:to heal the sick
+DOCTOR:hasSize:7
+DOCTOR:hasSyllables:2
+DOCTOR:isa:Health Care Provider
+DOCTOR:isa:Person
+DOCTOR:lifeArea:Physical
+SICKNESS:hasPurpose:to make us ill
+SICKNESS:hasSize:0
+SICKNESS:hasSyllables:2
+SICKNESS:isa:Disease
+SICKNESS:lifeArea:Physical
+

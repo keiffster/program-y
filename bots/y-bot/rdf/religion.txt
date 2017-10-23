@@ -146,3 +146,19 @@ LUCIFER:hasSize:14
 LUCIFER:hasSyllables:3
 LUCIFER:isa:Deity
 LUCIFER:lifeArea:Spiritual
+CROSS:hasPurpose:to crucify Jesus
+CROSS:hasSize:7
+CROSS:hasSyllables:1
+CROSS:isa:Symbol
+CROSS:lifeArea:Spiritual
+VICE:hasPurpose:to sin
+VICE:hasSize:0
+VICE:hasSyllables:1
+VICE:isa:Activity
+VICE:lifeArea:Spiritual
+Evil Entity:isa:Deity
+EVIL:hasPurpose:to tempt us with bad living
+EVIL:hasSize:0
+EVIL:hasSyllables:2
+EVIL:isa:Concept
+EVIL:lifeArea:Spiritual
