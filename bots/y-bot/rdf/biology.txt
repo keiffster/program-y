@@ -1,0 +1,6 @@
+CELL:hasPurpose:to form larger organisms
+CELL:hasSize:2
+CELL:hasSyllables:1
+CELL:isa:Body Part
+CELL:isa:Microorganism
+CELL:lifeArea:Physical

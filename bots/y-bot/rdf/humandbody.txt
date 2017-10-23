@@ -1,0 +1,68 @@
+BLOOD:hasPurpose:to circulate fluid
+BLOOD:hasSize:0
+BLOOD:hasSyllables:1
+BLOOD:isa:Body Part
+BLOOD:lifeArea:Physical
+BODY:hasPurpose:to contain our souls
+BODY:hasSize:7
+BODY:hasSyllables:2
+BODY:lifeArea:Physical
+BACK:hasPurpose:to support the torso
+BACK:hasSize:5
+BACK:hasSyllables:1
+BACK:isa:Body Part
+BACK:lifeArea:Physical
+FINGER:hasPurpose:to point
+FINGER:hasSize:3
+FINGER:hasSyllables:2
+FINGER:isa:Body Part
+FINGER:isa:Hand Part
+FINGER:lifeArea:Physical
+Head Part:isa:Body Part
+HEAD:hasPurpose:to contain our brain and face
+HEAD:hasSize:5
+HEAD:hasSyllables:1
+HEAD:isa:Body Part
+HEAD:lifeArea:Physical
+HEART:hasPurpose:to pump blood
+HEART:hasSize:4
+HEART:hasSyllables:1
+HEART:isa:Body Part
+HEART:isa:Organ
+HEART:lifeArea:Physical
+LEG:hasPurpose:to stand on
+LEG:hasSize:4
+LEG:hasSyllables:1
+LEG:isa:Body Part
+LEG:lifeArea:Physical
+Arm Part:isa:Body Part
+IRIS:hasPurpose:to sense visual information
+IRIS:hasSize:3
+IRIS:hasSyllables:2
+IRIS:isa:Body Part
+IRIS:isa:Eye Part
+IRIS:lifeArea:Physical
+STOMACH:hasPurpose:to digest food
+STOMACH:hasSize:4
+STOMACH:hasSyllables:2
+STOMACH:isa:Body Part
+STOMACH:isa:Organ
+STOMACH:lifeArea:Physical
+TOE:hasPurpose:to help us balance
+TOE:hasSize:3
+TOE:hasSyllables:1
+TOE:isa:Body Part
+TOE:isa:Foot Part
+TOE:lifeArea:Physical
+MOUTH:hasPurpose:to taste speak and kiss
+MOUTH:hasSize:3
+MOUTH:hasSyllables:1
+MOUTH:isa:Body Part
+MOUTH:isa:Face Part
+MOUTH:lifeArea:Physical
+BRAIN:hasPurpose:to think
+BRAIN:hasSize:5
+BRAIN:hasSyllables:1
+BRAIN:isa:Body Part
+BRAIN:isa:Organ
+BRAIN:lifeArea:Physical

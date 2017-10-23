@@ -75,7 +75,7 @@ class GeoNamesApi(object):
         if GeoNamesApi.get_latlong_for_postcode_response_file is None:
             data = self._get_latlong_for_postcode_response(postcode)
         else:
-            with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r+") as datafile:
+            with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r") as datafile:
                 data = json.load(datafile)
 
         if 'postalCodes' not in data:

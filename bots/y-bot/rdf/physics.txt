@@ -1,0 +1,32 @@
+QUANTUM:hasPurpose:to form subatomic particles
+QUANTUM:hasSize:1
+QUANTUM:hasSyllables:2
+QUANTUM:isa:Particle
+QUANTUM:isa:Physical Unit
+QUANTUM:lifeArea:Education
+PHYSICS:hasPurpose:to study the physical world
+PHYSICS:hasSize:0
+PHYSICS:hasSyllables:2
+PHYSICS:isa:Field of Study
+PHYSICS:lifeArea:Education
+MATTER:hasPurpose:to make up physical things
+MATTER:hasSize:0
+MATTER:hasSyllables:2
+MATTER:lifeArea:Physical
+NEWTON:hasPurpose:to measure force
+NEWTON:hasSize:0
+NEWTON:hasSyllables:2
+NEWTON:isa:Measurement
+NEWTON:isa:Physical Unit
+NEWTON:lifeArea:Education
+MASS:hasPurpose:to measure matter
+MASS:hasSize:0
+MASS:hasSyllables:1
+MASS:isa:Physical Measurement
+MASS:lifeArea:Physical
+CHARGE:hasPurpose:to store electricity
+CHARGE:hasSize:0
+CHARGE:hasSyllables:1
+CHARGE:isa:Electrical Measurement
+CHARGE:isa:Physical Unit
+CHARGE:lifeArea:Education

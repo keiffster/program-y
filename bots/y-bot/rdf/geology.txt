@@ -1,0 +1,15 @@
+AMBER:hasPurpose:to make jewelry
+AMBER:hasSize:0
+AMBER:hasSyllables:2
+AMBER:isa:Stone
+AMBER:lifeArea:Physical
+DIAMOND:hasPurpose:to be the hardest material
+DIAMOND:hasSize:0
+DIAMOND:hasSyllables:3
+DIAMOND:isa:Rock
+DIAMOND:lifeArea:Physical
+RUBY:hasPurpose:to make slippers
+RUBY:hasSize:0
+RUBY:hasSyllables:2
+RUBY:isa:Rock
+RUBY:lifeArea:Physical

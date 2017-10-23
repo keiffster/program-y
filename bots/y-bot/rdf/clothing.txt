@@ -1,0 +1,15 @@
+BIKINI:hasPurpose:to wear at the beach
+BIKINI:hasSize:4
+BIKINI:hasSyllables:3
+BIKINI:isa:Clothing
+BIKINI:lifeArea:Physical
+CLOTHES:hasPurpose:to cover the body
+CLOTHES:hasSize:5
+CLOTHES:hasSyllables:1
+CLOTHES:isa:Clothing
+CLOTHES:lifeArea:Physical
+BOOT:hasPurpose:to cover the feet
+BOOT:hasSize:4
+BOOT:hasSyllables:1
+BOOT:isa:Clothing
+BOOT:lifeArea:Physical

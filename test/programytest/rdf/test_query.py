@@ -56,7 +56,7 @@ class RDFQueryTests(unittest.TestCase):
         result = resultset.results[0]
         self.assertIsNotNone(result)
         self.assertEquals(result[0][1], "ACCOUNT")
-        self.assertEquals(result[1][1], "hasSize")
+        self.assertEquals(result[1][1], "HASSIZE")
         self.assertEquals(result[2][1], "0")
 
     def test_execute_multi_vars(self):

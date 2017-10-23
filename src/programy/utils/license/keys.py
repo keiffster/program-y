@@ -46,7 +46,7 @@ class LicenseKeys(object):
         try:
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Loading license key file: [%s]", license_key_filename)
-            with open(license_key_filename, "r+") as license_file:
+            with open(license_key_filename, "r") as license_file:
                 for line in license_file:
                     self._process_license_key_line(line)
         except Exception:

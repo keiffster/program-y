@@ -326,16 +326,16 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEquals("C", query1.object.resolve(None, None))
 
     def test_query_no_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
-                        <q><subj>MONKEY</subj><pred>legs</pred><obj>2</obj></q>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>2</obj></q>
                     </select>
                 </template>
                 """)
@@ -344,19 +344,19 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["MONKEY", "legs", "2"]]', result)
+        self.assertEquals('[["MONKEY", "LEGS", "2"]]', result)
 
     def test_not_query_no_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
-                        <notq><subj>MONKEY</subj><pred>legs</pred><obj>2</obj></notq>
+                        <notq><subj>MONKEY</subj><pred>LEGS</pred><obj>2</obj></notq>
                     </select>
                 </template>
                 """)
@@ -365,20 +365,20 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["ZEBRA", "legs", "4"], ["BIRD", "legs", "2"], ["ELEPHANT", "trunk", "true"]]', result)
+        self.assertEquals('[["ZEBRA", "LEGS", "4"], ["BIRD", "LEGS", "2"], ["ELEPHANT", "TRUNK", "true"]]', result)
 
     def test_query_var(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
                     </select>
                 </template>
                 """)
@@ -390,17 +390,17 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEquals('[["?x", "MONKEY"], ["?x", "BIRD"]]', result)
 
     def test_not_query_var(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <notq><subj>?x</subj><pred>legs</pred><obj>2</obj></notq>
+                        <notq><subj>?x</subj><pred>LEGS</pred><obj>2</obj></notq>
                     </select>
                 </template>
                 """)
@@ -412,11 +412,11 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEquals('[["?x", "ZEBRA"], ["?x", "ELEPHANT"]]', result)
 
     def test_query_multi_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
@@ -431,21 +431,21 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"], ["?y", "legs"], ["?x", "BIRD"], ["?y", "legs"]]', result)
+        self.assertEquals('[["?x", "MONKEY"], ["?y", "LEGS"], ["?x", "BIRD"], ["?y", "LEGS"]]', result)
 
     def test_query_var_multi_queries(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
-                        <q><subj>?x</subj><pred>hasFur</pred><obj>true</obj></q>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
+                        <q><subj>?x</subj><pred>HASFUR</pred><obj>true</obj></q>
                     </select>
                 </template>
                 """)
@@ -457,18 +457,18 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEquals('[["?x", "MONKEY"]]', result)
 
     def test_query_var_mixed_queries(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
-                        <notq><subj>?x</subj><pred>hasFur</pred><obj>true</obj></notq>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
+                        <notq><subj>?x</subj><pred>HASFUR</pred><obj>true</obj></notq>
                     </select>
                 </template>
                 """)

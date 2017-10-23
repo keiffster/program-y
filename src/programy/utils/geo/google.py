@@ -248,7 +248,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_latlong_for_location - using mock file")
-            with open(self.response_file_for_get_latlong_for_location, "r+") as response_file:
+            with open(self.response_file_for_get_latlong_for_location, "r") as response_file:
                 response = json.load(response_file)
 
         geodata = GoogelMapsResult()
@@ -281,7 +281,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_distance_between_addresses - using mock file")
-            with open(self.response_file_for_get_distance_between_addresses, "r+") as response_file:
+            with open(self.response_file_for_get_distance_between_addresses, "r") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':
@@ -322,7 +322,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_directions_between_addresses - using mock file")
-            with open(self.response_file_for_get_directions_between_addresses, "r+") as response_file:
+            with open(self.response_file_for_get_directions_between_addresses, "r") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':

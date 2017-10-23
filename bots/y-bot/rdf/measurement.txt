@@ -1,0 +1,6 @@
+AGE:hasPurpose:to count years of life
+AGE:hasSize:0
+AGE:hasSyllables:1
+AGE:isa:Measurement
+AGE:isa:Number
+AGE:lifeArea:Physical

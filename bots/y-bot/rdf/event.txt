@@ -1,0 +1,5 @@
+APPOINTMENT:hasPurpose:to schedule a meeting
+APPOINTMENT:hasSize:0
+APPOINTMENT:hasSyllables:3
+APPOINTMENT:isa:Event
+APPOINTMENT:lifeArea:Business

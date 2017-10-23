@@ -1,0 +1,5 @@
+CHEMICAL:hasPurpose:to make compounds
+CHEMICAL:hasSize:0
+CHEMICAL:hasSyllables:3
+CHEMICAL:isa:Chemistry
+CHEMICAL:lifeArea:Education

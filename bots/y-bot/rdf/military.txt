@@ -1,0 +1,5 @@
+ARMY:hasPurpose:to defend a nation
+ARMY:hasSize:10
+ARMY:hasSyllables:2
+ARMY:isa:Military
+ARMY:lifeArea:Social

@@ -1,0 +1,64 @@
+HUT:hasPurpose:to provide a home
+HUT:hasSize:9
+HUT:hasSyllables:1
+HUT:isa:Dwelling
+HUT:lifeArea:Physical
+HOUSE:hasPurpose:to live in
+HOUSE:hasSize:8
+HOUSE:hasSyllables:1
+HOUSE:isa:Building
+HOUSE:isa:Dwelling
+HOUSE:lifeArea:Physical
+INN:hasPurpose:to provide shelter when traveling
+INN:hasSize:9
+INN:hasSyllables:1
+INN:isa:Building
+INN:lifeArea:Recreation
+LIBRARY:hasPurpose:to load books
+LIBRARY:hasSize:9
+LIBRARY:hasSyllables:3
+LIBRARY:isa:Building
+LIBRARY:lifeArea:Education
+RESTAURANT:hasPurpose:to serve food
+RESTAURANT:hasSize:9
+RESTAURANT:hasSyllables:4
+RESTAURANT:isa:Business
+RESTAURANT:lifeArea:Diet
+BANK:hasPurpose:to save and borrow money
+BANK:hasSize:9
+BANK:hasSyllables:1
+BANK:isa:Business
+BANK:lifeArea:Finances
+BAR:hasPurpose:to serve alcohol
+BAR:hasSize:9
+BAR:hasSyllables:1
+BAR:isa:Business
+BAR:lifeArea:Recreation
+TEMPLE:hasPurpose:to gather worshippers
+TEMPLE:hasSize:9
+TEMPLE:hasSyllables:1
+TEMPLE:isa:Building
+TEMPLE:isa:Worship Facility
+TEMPLE:lifeArea:Spiritual
+Supermarket:isa:Retail Business
+MALL:hasPurpose:to gather shoppers and stores
+MALL:hasSize:9
+MALL:hasSyllables:1
+MALL:isa:Building
+MALL:lifeArea:Business
+BUILDING:hasPurpose:to provide shelter
+BUILDING:hasSize:9
+BUILDING:hasSyllables:2
+BUILDING:isa:Shelter
+BUILDING:lifeArea:Physical
+CINEMA:hasPurpose:to show movies
+CINEMA:hasSize:9
+CINEMA:hasSyllables:3
+CINEMA:isa:Building
+CINEMA:isa:Entertainment Facility
+CINEMA:lifeArea:Recreation
+COLLEGE:hasPurpose:to provide higher education
+COLLEGE:hasSize:9
+COLLEGE:hasSyllables:2
+COLLEGE:isa:School
+COLLEGE:lifeArea:Education

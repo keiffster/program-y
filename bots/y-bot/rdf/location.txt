@@ -1,0 +1,5 @@
+ADDRESS:hasPurpose:to locate a residence or business
+ADDRESS:hasSize:0
+ADDRESS:hasSyllables:2
+ADDRESS:isa:Location
+ADDRESS:lifeArea:Physical

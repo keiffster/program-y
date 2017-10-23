@@ -1,0 +1,15 @@
+ACT:hasPurpose:to entertain by performing
+ACT:hasSize:0
+ACT:hasSyllables:1
+ACT:isa:Activity
+ACT:lifeArea:Recreation
+ADVENTURE:hasPurpose:to provide new experience
+ADVENTURE:hasSize:0
+ADVENTURE:hasSyllables:3
+ADVENTURE:isa:Activity
+ADVENTURE:lifeArea:Recreation
+FISHING:hasPurpose:to hunt for fish
+FISHING:hasSize:0
+FISHING:hasSyllables:2
+FISHING:isa:Activity
+FISHING:lifeArea:Recreation

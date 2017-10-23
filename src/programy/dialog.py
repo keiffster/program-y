@@ -251,7 +251,7 @@ class ConversationFileStorage(object):
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
         try:
             filename = self._config._dir + os.sep + clientid + ".convo"
-            with open(filename, "r+") as convo_file:
+            with open(filename, "r") as convo_file:
                 for line in convo_file:
                     if ':' in line:
                         splits = line.split(":")

@@ -1,0 +1,51 @@
+ACCOUNT:hasPurpose:to track money
+ACCOUNT:hasSize:0
+ACCOUNT:hasSyllables:2
+ACCOUNT:isa:Concept
+ACCOUNT:lifeArea:Finances
+ADVICE:hasPurpose:to transfer knowedge
+ADVICE:hasSize:0
+ADVICE:hasSyllables:1
+ADVICE:isa:Concept
+ADVICE:lifeArea:Spiritual
+AVERAGE:hasPurpose:to compute the middle
+AVERAGE:hasSize:0
+AVERAGE:hasSyllables:2
+AVERAGE:isa:Concept
+AVERAGE:lifeArea:Education
+BEING:hasPurpose:to exist
+BEING:hasSize:0
+BEING:hasSyllables:2
+BEING:isa:Concept
+BEING:lifeArea:Spiritual
+EVERYBODY:hasPurpose:to include every person
+EVERYBODY:hasSize:0
+EVERYBODY:hasSyllables:5
+EVERYBODY:isa:Concept
+EVERYBODY:lifeArea:Physical
+EVERYONE:hasPurpose:to include every person
+EVERYONE:hasSize:0
+EVERYONE:hasSyllables:4
+EVERYONE:isa:Concept
+EVERYONE:lifeArea:Physical
+EVERYTHING:hasPurpose:to include all things
+EVERYTHING:hasSize:0
+EVERYTHING:hasSyllables:4
+EVERYTHING:isa:Concept
+EVERYTHING:lifeArea:Physical
+EVER:hasPurpose:to be always
+EVER:hasSize:0
+EVER:hasSyllables:2
+EVER:isa:Concept
+EVER:lifeArea:Physical
+EXISTENCE:hasPurpose:to live
+EXISTENCE:hasSize:0
+EXISTENCE:hasSyllables:2
+EXISTENCE:isa:Concept
+EXISTENCE:lifeArea:Spiritual
+FALSEHOOD:hasPurpose:to express what is not ture
+FALSEHOOD:hasSize:0
+FALSEHOOD:hasSyllables:2
+FALSEHOOD:isa:Concept
+FALSEHOOD:isa:Logical Concept
+FALSEHOOD:lifeArea:Education

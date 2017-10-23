@@ -1,0 +1,25 @@
+HOSPITAL:hasPurpose:to heal the sick
+HOSPITAL:hasSize:9
+HOSPITAL:hasSyllables:3
+HOSPITAL:isa:Building
+HOSPITAL:isa:Health Care Facilty
+HOSPITAL:lifeArea:Physical
+MEDICINE:hasPurpose:to heal us
+MEDICINE:hasSize:0
+MEDICINE:hasSyllables:2
+MEDICINE:lifeArea:Physical
+NURSE:hasPurpose:to heal the sick
+NURSE:hasSize:7
+NURSE:hasSyllables:1
+NURSE:isa:Health Care Provider
+NURSE:isa:Person
+NURSE:lifeArea:Physical
+MRI:hasPurpose:to see inside the body
+MRI:hasSize:0
+MRI:hasSyllables:3
+MRI:lifeArea:Physical
+CANCER:hasPurpose:to make us very ill
+CANCER:hasSize:0
+CANCER:hasSyllables:2
+CANCER:isa:Disease
+CANCER:lifeArea:Physical

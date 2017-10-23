@@ -97,4 +97,4 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("legs", result)
+        self.assertEquals("LEGS", result)

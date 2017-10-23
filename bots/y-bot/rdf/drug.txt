@@ -1,0 +1,5 @@
+COCAINE:hasPurpose:to make us intoxicated
+COCAINE:hasSize:3
+COCAINE:hasSyllables:2
+COCAINE:isa:Drug
+COCAINE:lifeArea:Diet

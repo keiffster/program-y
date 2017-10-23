@@ -1,0 +1,41 @@
+BASEBALL:hasPurpose:to score home runs
+BASEBALL:hasSize:0
+BASEBALL:hasSyllables:2
+BASEBALL:isa:Sport
+BASEBALL:lifeArea:Recreation
+Basketball Team:isa:Sports Team
+BASKETBALL:hasPurpose:to score baskets
+BASKETBALL:hasSize:0
+BASKETBALL:hasSyllables:3
+BASKETBALL:isa:Sport
+BASKETBALL:lifeArea:Recreation
+FOOTBALL:hasPurpose:to score touchdowns
+FOOTBALL:hasSize:0
+FOOTBALL:hasSyllables:2
+FOOTBALL:isa:Sport
+FOOTBALL:lifeArea:Recreation
+GOLF:hasPurpose:to hit balls in holes
+GOLF:hasSize:0
+GOLF:hasSyllables:1
+GOLF:isa:Game
+GOLF:isa:Sport
+GOLF:lifeArea:Recreation
+SOCCER:hasPurpose:to score goals
+SOCCER:hasSize:0
+SOCCER:hasSyllables:2
+SOCCER:lifeArea:Recreation
+SPORT:hasPurpose:to play physical games
+SPORT:hasSize:0
+SPORT:hasSyllables:1
+Sport:isa:Game
+SPORT:lifeArea:Recreation
+NFL:hasPurpose:to be a football league
+NFL:hasSize:0
+NFL:hasSyllables:3
+NFL:isa:Organization
+NFL:lifeArea:Recreation
+NBA:hasPurpose:to be a basketball league
+NBA:hasSize:0
+NBA:hasSyllables:3
+NBA:isa:Organization
+NBA:lifeArea:Recreation

@@ -1,0 +1,10 @@
+DAISY:hasPurpose:to signal springtime
+DAISY:hasSize:3
+DAISY:hasSyllables:2
+DAISY:isa:Flower
+DAISY:lifeArea:Physical
+ROSE:hasPurpose:to send a message of love
+ROSE:hasSize:3
+ROSE:hasSyllables:1
+ROSE:isa:Flower
+ROSE:lifeArea:Physical

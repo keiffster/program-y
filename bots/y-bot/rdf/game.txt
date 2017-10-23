@@ -1,0 +1,5 @@
+BLACKJACK:hasPurpose:to gamble
+BLACKJACK:hasSize:0
+BLACKJACK:hasSyllables:2
+BLACKJACK:isa:Game
+BLACKJACK:lifeArea:Recreation

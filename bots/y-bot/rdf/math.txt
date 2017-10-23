@@ -1,0 +1,12 @@
+PI:hasPurpose:to find the area of a circle
+PI:hasSize:0
+PI:hasSyllables:1
+PI:isa:Number
+PI:lifeArea:Education
+NUMBER:hasPurpose:to form a state
+NUMBER:hasSize:0
+NUMBER:hasSyllables:2
+NUMBER:isa:Math Concept
+NUMBER:isa:Symbol
+NUMBER:lifeArea:Education
+Math Concept:isa:Concept
