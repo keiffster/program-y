@@ -1,10 +1,16 @@
 # Readme info:
 
-Version: 1.0.0 <br/>
+Version: 1.2.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 1st October 2017 <br/>
-NEWS: Version 1.0.0 Released
+Date: 8th November 2017 <br/>
 
+### Whats New
+* RDF Engine completely rewritten to be fully compatible with Alice grammar
+* Refactored Y-Bot triples.txt into more understandable and workable files based on category
+* New RDF Formatter  tool in utils 
+* Updated use of file handling to open all but neccassary files in readonly mode
+* Conversations now persistent between bot restarts
+ 
 # Introduction
 
 Program Y is an AIML interpretor written in Python. It includes an entire Python 3 framework for building you own chat bots using
