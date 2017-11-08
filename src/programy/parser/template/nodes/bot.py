@@ -35,14 +35,29 @@ class TemplateBotNode(TemplateNode):
     def name(self, name):
         self._name = name
 
-    def resolve_to_string(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
+    @staticmethod
+    def get_bot_variable(bot, client, name):
         value = bot.brain.properties.property(name)
         if value is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("No bot property for [%s]"%name)
+
             value = bot.brain.properties.property("default-property")
             if value is None:
-                value = ""
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No value for default-property")
 
+                value = bot.brain.configuration.defaults.default_get
+                if value is None:
+                    if logging.getLogger().isEnabledFor(logging.ERROR):
+                        logging.error("No value for default default-property, return 'unknown'")
+                    value = "unknown"
+
+        return value
+
+    def resolve_to_string(self, bot, clientid):
+        name = self.name.resolve(bot, clientid)
+        value = TemplateBotNode.get_bot_variable(bot, clientid, name)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value

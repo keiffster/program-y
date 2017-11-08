@@ -21,29 +21,138 @@ import json
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
-from programy.rdf.select import RDFSelectStatement
-from programy.rdf.query import RDFQuery
+
+class QueryBase(object):
+
+    def __init__(self, subj, pred, obj):
+        self._subj = subj
+        self._pred = pred
+        self._obj = obj
+
+    @property
+    def subj(self):
+        return self._subj
+
+    @property
+    def pred(self):
+        return self._pred
+
+    @property
+    def obj(self):
+        return self._obj
+
+    def to_xml(self, bot, clientid):
+        xml = "<subj>%s</subj>"%self._subj
+        xml += "<pred>%s</pred>"%self._pred
+        xml += "<obj>%s</obj>"%self._obj
+        return xml
+
+    def execute(self, bot, clientid):
+        return []
+
+    def get_rdf(self, bot, clientid):
+        subj = self.subj.resolve(bot, clientid)
+        if subj.startswith("?") is False:
+            subj = subj.upper()
+        pred = self.pred.resolve(bot, clientid)
+        if pred.startswith("?") is False:
+            pred = pred.upper()
+        obj = self.obj.resolve(bot, clientid)
+        return subj, pred, obj
+
+
+class Query(QueryBase):
+
+    def __init__(self, subj, pred, obj):
+        QueryBase.__init__(self, subj, pred, obj)
+
+    def to_xml(self, bot, clientid):
+        xml = "<q>"
+        xml += super(Query, self).to_xml(bot, clientid)
+        xml + "</q>"
+        return xml
+
+    def execute(self, bot, clientid, vars=None):
+        subj, pred, obj = self.get_rdf(bot, clientid)
+        if vars is None:
+            tuples = bot.brain.rdf.matched_as_tuples(subj, pred, obj)
+            results = []
+            for atuple in tuples:
+                results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
+            return results
+        else:
+            tuples = bot.brain.rdf.match_to_vars(subj, pred, obj)
+            return tuples
+
+
+class NotQuery(QueryBase):
+
+    def __init__(self, subj, pred, obj):
+        QueryBase.__init__(self, subj, pred, obj)
+
+    def get_xml_type(self):
+        return "notq"
+
+    def to_xml(self, bot, clientid):
+        xml = "<notq>"
+        xml += super(NotQuery, self).to_xml(bot, clientid)
+        xml += "</notq>"
+        return xml
+
+    def execute(self, bot, clientid, vars=None):
+        subj, pred, obj = self.get_rdf(bot, clientid)
+        if vars is None:
+            tuples = bot.brain.rdf.not_matched_as_tuples(subj, pred, obj)
+            results = []
+            for atuple in tuples:
+                results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
+            return results
+        else:
+            tuples = bot.brain.rdf.not_match_to_vars(subj, pred, obj)
+            return tuples
+
 
 class TemplateSelectNode(TemplateNode):
 
-    def __init__(self, query=None):
+    def __init__(self, queries=None, vars=None):
         TemplateNode.__init__(self)
-        if query is None:
-            self._query = RDFSelectStatement()
+        if queries is None:
+            self._queries = []
         else:
-            self._query = query
+            self._queries = queries[:]
+        if vars is None:
+            self._vars = []
+        else:
+            self._vars = vars[:]
 
     @property
-    def query(self):
-        return self._query
+    def queries(self):
+        return self._queries
 
-    def encode_tuples(self, bot, tuples):
-        return json.dumps(tuples)
-        #return pickle._dumps(tuples)
+    @property
+    def vars(self):
+        return self._vars
+
+    def encode_results(self, bot, results):
+        # At some point put a config item here that allows us to switch between
+        # XML, JSON, Yaml, and Picke
+        return json.dumps(results)
 
     def resolve_to_string(self, bot, clientid):
-        results = self.query.execute(bot, clientid)
-        resolved = json.dumps(results)
+
+        resolved = ""
+        if self._queries:
+            results = []
+
+            for query in self._queries:
+                query_results = query.execute(bot, clientid, self.vars)
+                results.append(query_results)
+
+            if self._vars:
+                results = bot.brain.rdf.unify(self.vars, results)
+
+            resolved = self.encode_results(bot, results)
+
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
@@ -60,7 +169,13 @@ class TemplateSelectNode(TemplateNode):
 
     def to_xml(self, bot, clientid):
         xml = "<select>"
-        xml += self.query.to_xml(bot, clientid)
+        if self._vars:
+            xml += "<vars>"
+            xml += " ".join(self._vars)
+            xml += "</vars>"
+        if self._queries:
+            for query in self._queries:
+                xml += query.to_xml(bot, clientid)
         xml += "</select>"
         return xml
 
@@ -70,23 +185,33 @@ class TemplateSelectNode(TemplateNode):
     def parse_vars(self, variables):
         var_splits = variables.split(" ")
         for var_name in var_splits:
-            self._query.vars.append(var_name)
+            self.vars.append(var_name)
 
     def parse_query(self, graph, query_name, query):
-
-        if query_name == "q":
-            query_type = RDFQuery.QUERY
-        else:
-            query_type = RDFQuery.NOT_QUERY
 
         for child in query:
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'subj':
+                if child.text is not None and child.text.startswith("?"):
+                    if child.text not in self.vars:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG):
+                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        self.vars.append(child.text)
                 subj = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
+                if child.text is not None and child.text.startswith("?"):
+                    if child.text not in self.vars:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG):
+                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        self.vars.append(child.text)
                 pred = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
+                if child.text is not None and child.text.startswith("?"):
+                    if child.text not in self.vars:
+                        if logging.getLogger().isEnabledFor(logging.DEBUG):
+                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        self.vars.append(child.text)
                 obj = self.parse_children_as_word_node(graph, child)
             else:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
@@ -101,18 +226,22 @@ class TemplateSelectNode(TemplateNode):
         if obj is None:
             raise ParserException("<obj> element missing from select query")
 
-        self._query.queries.append(RDFQuery(subj, pred, obj, query_type))
+        if query_name == "q":
+            self._queries.append(Query(subj, pred, obj))
+        else:
+            self._queries.append(NotQuery(subj, pred, obj))
+
 
     def parse_expression(self, graph, expression):
 
-        variables = expression.findall('vars')
+        variables = expression.findall('./vars')
         if variables:
             if len(variables) > 1:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("Multiple <variables> found in select tag, using first")
+                    logging.warning("Multiple <vars> found in select tag, using first")
             self.parse_vars(variables[0].text)
 
-        queries = expression.findall('./')
+        queries = expression.findall('./*')
         for query in queries:
             tag_name = TextUtils.tag_from_text(query.tag)
             if tag_name == 'q' or tag_name == 'notq':

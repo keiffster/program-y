@@ -1,0 +1,10 @@
+TEST1:hasPurpose:to test
+TEST1:hasSize:9
+TEST1:isA:TEST2
+TEST2:hasPurpose:to test
+TEST2:hasSize:9
+TEST2:isA:TEST3
+TEST3:hasPurpose:to test
+TEST3:hasSize:1
+TEST3:isA:TEST4
+

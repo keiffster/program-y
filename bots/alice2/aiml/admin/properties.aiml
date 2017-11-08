@@ -2,7 +2,7 @@
 <aiml>
 
     <category>
-        <pattern>BOT PROPERTIES</pattern>
+        <pattern>YADMIN BOT PROPERTIES</pattern>
         <template>
             <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
                 BOT
@@ -11,7 +11,16 @@
     </category>
 
     <category>
-        <pattern>USER PROPERTIES</pattern>
+        <pattern>YADMIN GET BOT PROPERTY *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
+                GET BOT <star/>
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN USER PROPERTIES</pattern>
         <template>
             <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
                 USER
@@ -19,5 +28,13 @@
         </template>
     </category>
 
+    <category>
+        <pattern>YADMIN GET USER PROPERTY *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.properties.PropertiesAdminExtension">
+                GET USER <star/>
+            </extension>
+        </template>
+    </category>
 
 </aiml>

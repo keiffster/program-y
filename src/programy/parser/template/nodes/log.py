@@ -28,6 +28,7 @@ class TemplateLogNode(TemplateAttribNode):
     def __init__(self):
         TemplateAttribNode.__init__(self)
         self._level = "debug"
+        self._output = "logging"
 
     @property
     def level(self):
@@ -39,23 +40,27 @@ class TemplateLogNode(TemplateAttribNode):
 
     def resolve_to_string(self, bot, clientid):
         resolved = self.resolve_children_to_string(bot, clientid)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
-        if self._level == "debug":
+
+        if self._output == "logging":
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug(resolved)
-        elif self._level == "warning":
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning(resolved)
-        elif self._level == "error":
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error(resolved)
-        elif self._level == "info":
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info(resolved)
+                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            if self._level == "debug":
+                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                    logging.debug(resolved)
+            elif self._level == "warning":
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning(resolved)
+            elif self._level == "error":
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error(resolved)
+            elif self._level == "info":
+                if logging.getLogger().isEnabledFor(logging.INFO):
+                    logging.info(resolved)
+            else:
+                if logging.getLogger().isEnabledFor(logging.INFO):
+                    logging.info(resolved)
         else:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info(resolved)
+            print(resolved)
         return ""
 
     def resolve(self, bot, clientid):
@@ -69,9 +74,10 @@ class TemplateLogNode(TemplateAttribNode):
         return "LOG level=%s" % (self._level)
 
     def set_attrib(self, attrib_name, attrib_value):
-        if attrib_name != 'level':
+        if attrib_name != 'level' and attrib_name != 'output':
             raise ParserException("Invalid attribute name %s for this node", attrib_name)
-        if attrib_value not in ['debug', 'info', 'warning', 'error']:
+        if attrib_value not in ['debug', 'info', 'warning', 'error'] and \
+            attrib_value not in ["logging", "print"]:
             raise ParserException("Invalid attribute value %s for this node %s", attrib_value, attrib_name)
         self._level = attrib_value
 
@@ -90,4 +96,4 @@ class TemplateLogNode(TemplateAttribNode):
     #
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attrib(graph, expression, "level", "debug")
+        self._parse_node_with_attribs(graph, expression, [["level", "debug"],["output", "logging"]])

@@ -43,6 +43,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>I HAVE A <set>color</set> *
         </pattern>
@@ -105,6 +106,7 @@
             is a nice color of<star index="2"/>.
         </template>
     </category>
+
     <category>
         <pattern>WHAT DO I HAVE ^</pattern>
         <template>
@@ -160,6 +162,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>WHAT COLOR IS MY *</pattern>
         <template>
@@ -205,6 +208,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>WHAT <set>color</set> ^ DO I HAVE
         </pattern>
@@ -250,6 +254,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>
             <set>entity</set>
@@ -259,6 +264,7 @@
             is an enity.
         </template>
     </category>
+
     <category>
         <pattern>SIZE TABLE</pattern>
         <template>
@@ -321,16 +327,19 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>COMMAFY NIL</pattern>
         <template>
             <template/>
         </template>
     </category>
+
     <category>
         <pattern>COMMAFY *</pattern>
         <template>,</template>
     </category>
+
     <category>
         <pattern>UNIQ TEST</pattern>
         <template>
@@ -341,6 +350,7 @@
             </uniq>
         </template>
     </category>
+
     <category>
         <pattern>UNIQ TEST 2</pattern>
         <template>
@@ -375,6 +385,7 @@
             </uniq>
         </template>
     </category>
+
     <category>
         <pattern>UNIQ TEST 3</pattern>
         <template>
@@ -393,6 +404,7 @@
             </uniq>
         </template>
     </category>
+
     <category>
         <pattern>WHAT IS THE PURPOSE OF *</pattern>
         <template>
@@ -418,6 +430,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>ADDTRIPLE TEST</pattern>
         <template>Adding triples:
@@ -447,6 +460,7 @@
             </addtriple>
         </template>
     </category>
+
     <category>
         <pattern>DELETETRIPLE TEST</pattern>
         <template>Adding triples:
@@ -505,6 +519,7 @@
             </select>
         </template>
     </category>
+
     <category>
         <pattern>WHICH IS LARGER ^ <set>entity</set> OR ^
             <set>entity</set>
@@ -531,6 +546,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>WHICH IS FASTER <set>entity</set> OR
             <set>entity</set>
@@ -557,6 +573,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>ALL ISA</pattern>
         <template>
@@ -623,6 +640,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST</pattern>
         <template>
@@ -666,6 +684,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST NOTQ</pattern>
         <template>
@@ -681,6 +700,7 @@
             </set>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST NOT</pattern>
         <template>
@@ -724,6 +744,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST NOT 2</pattern>
         <template>
@@ -777,6 +798,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST NOT 3</pattern>
         <template>
@@ -830,6 +852,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST 3</pattern>
         <template>
@@ -894,6 +917,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>SELECT TEST 2</pattern>
         <template>
@@ -942,6 +966,7 @@
             </condition>
         </template>
     </category>
+
     <category>
         <pattern>* IS <set>erdown</set> THAN *
         </pattern>
@@ -972,6 +997,7 @@
             </srai>
         </template>
     </category>
+
     <category>
         <pattern>
             <set>name</set>

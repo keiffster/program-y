@@ -3,8 +3,6 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.uniq import TemplateUniqNode
-from programy.rdf.query import RDFQuery
-from programy.rdf.unique import RDFUniqueStatement
 
 from programytest.parser.template.base import TemplateTestsBaseClass
 
@@ -24,9 +22,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         root = TemplateNode()
-        query = RDFQuery(rdf_subject=TemplateWordNode("S"), rdf_predicate=TemplateWordNode("P"), rdf_object=TemplateWordNode("O"))
-        statement = RDFUniqueStatement(query)
-        node = TemplateUniqNode(statement)
+        node = TemplateUniqNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
         xml = root.xml_tree(self.bot, self.clientid)
@@ -37,8 +33,6 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
     def test_node_defaults(self):
         root = TemplateNode()
         node = TemplateUniqNode()
-        self.assertIsNotNone(node.query)
-        self.assertIsInstance(node.query, RDFUniqueStatement)
 
         root.append(node)
         result = root.resolve(self.bot, self.clientid)
@@ -47,12 +41,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
 
     def test_node_no_defaults(self):
         root = TemplateNode()
-        query = RDFQuery(rdf_subject=TemplateWordNode("S"), rdf_predicate=TemplateWordNode("P"), rdf_object=TemplateWordNode("O"))
-        statement = RDFUniqueStatement(query)
-        node = TemplateUniqNode(statement)
-        self.assertIsNotNone(node.query)
-        self.assertIsInstance(node.query, RDFUniqueStatement)
-        self.assertEquals(node.query, statement)
+        node = TemplateUniqNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
 
         root.append(node)
         result = root.resolve(self.bot, self.clientid)

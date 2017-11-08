@@ -21,13 +21,13 @@ from programy.parser.template.nodes.triple import TemplateTripleNode
 
 class TemplateAddTripleNode(TemplateTripleNode):
 
-    def __init__(self, entity=None):
-        TemplateTripleNode.__init__(self, node_name="addtriple", entity=entity)
+    def __init__(self, subj=None, pred=None, obj=None):
+        TemplateTripleNode.__init__(self, node_name="addtriple", subj=subj, pred=pred, obj=obj)
 
     def resolve_to_string(self, bot, clientid):
-        rdf_subject = self.entity.subject.resolve(bot, clientid)
-        rdf_predicate = self.entity.predicate.resolve(bot, clientid)
-        rdf_object = self.entity.object.resolve(bot, clientid)
+        rdf_subject = self._subj.resolve(bot, clientid)
+        rdf_predicate = self._pred.resolve(bot, clientid)
+        rdf_object = self._obj.resolve(bot, clientid)
 
         bot.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
         resolved = ""

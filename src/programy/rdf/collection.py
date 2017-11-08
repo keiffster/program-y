@@ -1,9 +1,7 @@
 import logging
 
 from programy.mappings.base import BaseCollection
-from programy.rdf.entity import RDFEntity
 from programy.utils.files.filefinder import FileFinder
-
 
 class RDFLoader(FileFinder):
     def __init__(self, collection):
@@ -19,13 +17,27 @@ class RDFLoader(FileFinder):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Failed to load RDF File [%s] - %s", filename, excep)
 
+class RDFEntity(object):
+
+    def __init__(self, subject):
+        self._subject = subject
+        self._predicates = {}
 
 class RDFCollection(BaseCollection):
 
+
     def __init__(self):
         BaseCollection.__init__(self)
-        self._subjects = {}
-        self._entities = []
+        self._entities = {}
+
+    def load(self, configuration):
+        loader = RDFLoader(self)
+        if configuration.files is not None:
+            files = []
+            for file in configuration.files:
+                files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
+            return len(files)
+        return 0
 
     def split_line(self, line):
         splits = self.split_line_by_char(line)
@@ -44,175 +56,253 @@ class RDFCollection(BaseCollection):
         return splits
 
     def process_splits(self, splits):
-        self.add_entity(splits[0], splits[1], splits[2])
+
+        subject = splits[0]
+        predicate = splits[1]
+        obj = splits[2]
+
+        self.add_entity(subject, predicate, obj)
         return True
 
-    def has_subject(self, rdf_subject):
-        return bool(rdf_subject.upper() in self._subjects)
-
     def subjects(self):
-        return self._subjects.keys()
+        return self._entities.keys()
 
-    def has_predicate(self, rdf_subject, rdf_predicate):
-        if self.has_subject(rdf_subject):
-            return bool(rdf_predicate.upper() in self._subjects[rdf_subject.upper()])
+    def predicates(self, subject):
+        if subject in self._entities:
+            return self._entities[subject]._predicates.keys()
+        return []
+
+    def objects(self, subject, predicate):
+        if subject in self._entities:
+            if predicate in self._entities[subject]._predicates:
+                return [self._entities[subject]._predicates[predicate]]
+        return []
+
+    def add_entity(self, subject, predicate, obj):
+        subject = subject.upper()
+        predicate = predicate.upper()
+
+        if subject not in self._entities:
+            self._entities[subject] = RDFEntity(subject)
+
+        entity = self._entities[subject]
+
+        entity._predicates[predicate] = obj
+
+    def has_subject(self, subject):
+        return bool(subject.upper() in self._entities)
+
+    def has_predicate(self, subject, predicate):
+        if self.has_subject(subject):
+            entity = self._entities[subject.upper()]
+            return bool(predicate.upper() in entity._predicates)
         return False
 
-    def predicates(self, rdf_subject):
-        return list(self._subjects[rdf_subject.upper()].keys())
-
-    def has_object(self, rdf_subject, rdf_predicate, rdf_object):
-        if self.has_subject(rdf_subject):
-            if self.has_predicate(rdf_subject, rdf_predicate):
-                return bool(rdf_object in self._subjects[rdf_subject.upper()][rdf_predicate.upper()])
+    def has_object(self, subject, predicate, obj):
+        if self.has_subject(subject):
+            entity = self._entities[subject.upper()]
+            if self.has_predicate(subject, predicate):
+                return bool(entity._predicates[predicate.upper()] == obj)
         return False
 
-    def objects(self, rdf_subject, rdf_predicate):
-        return list(self._subjects[rdf_subject.upper()][rdf_predicate.upper()].keys())
+    def delete_entity(self, subject, predicate=None, obj=None):
 
-    def add_entity(self, rdf_subject, rdf_predicate, rdf_object):
+        if self.has_subject(subject):
+            if predicate is None and obj is None:
+                del self._entities[subject.upper()]
+                return
+            entity = self._entities[subject.upper()]
+            if self.has_predicate(subject, predicate):
+                if obj is None or obj == entity._predicates[predicate.upper()]:
+                    del entity._predicates[predicate.upper()]
+            if bool(entity._predicates) is False :
+                del self._entities[subject.upper()]
 
-        if rdf_subject is not None:
-            rdf_subject = rdf_subject.upper()
-        if rdf_predicate is not None:
-            rdf_predicate = rdf_predicate.upper()
+    def all_as_tuples(self):
+        all = []
+        for subject, entity in self._entities.items():
+            for predicate, obj in entity._predicates.items():
+                all.append ([subject, predicate, obj])
+        return all
 
-        if self.has_subject(rdf_subject) is False:
-            logging.debug("Adding new RDF Subject (%s)"%rdf_subject)
-            self._subjects[rdf_subject] = {}
+    def matched_as_tuples(self, subject=None, predicate=None, obj=None):
+        all = []
+        for entity_subject, entity in self._entities.items():
+            if subject is None or subject == entity_subject:
+                for entity_predicate, entity_obj in entity._predicates.items():
+                    if predicate is None or predicate == entity_predicate:
+                        if obj is None or obj == entity_obj:
+                            all.append([entity_subject, entity_predicate, entity_obj])
+        return all
 
-        if self.has_predicate(rdf_subject, rdf_predicate) is False:
-            logging.debug("Adding new RDF Predicate (%s, %s)"%(rdf_subject, rdf_predicate))
-            self._subjects[rdf_subject][rdf_predicate] = {}
+    def remove(self, entities, subject=None, predicate=None, obj=None):
+        removes = []
+        for entity in entities:
+            if subject is not None:
+                if predicate is not None:
+                    if obj is not None:
+                        if subject == entity[0] and predicate == entity[1] and obj == entity[2]:
+                            removes.append(entity)
+                    else:
+                        if subject == entity[0] and predicate == entity[1]:
+                            removes.append(entity)
+                else:
+                    if obj is not None:
+                        if subject == entity[0] and obj == entity[2]:
+                            removes.append(entity)
+                    else:
+                        if subject == entity[0]:
+                            removes.append(entity)
+            elif predicate is not None:
+                if obj is not None:
+                    if predicate == entity[1] and obj == entity[2]:
+                        removes.append(entity)
+                else:
+                    if predicate == entity[1]:
+                        removes.append(entity)
+            elif obj is not None:
+                if obj == entity[2]:
+                    removes.append(entity)
 
-        if self.has_object(rdf_subject, rdf_predicate, rdf_object) is False:
-            entity = RDFEntity(rdf_subject, rdf_predicate, rdf_object)
-            logging.debug("Adding RDF Entity (%s, %s, %s)" % (rdf_subject, rdf_predicate, rdf_object))
-            self._subjects[rdf_subject][rdf_predicate][rdf_object] = entity
-            self._entities.append(entity)
+        return [entity for entity in entities if entity not in removes]
+
+    def match_to_vars(self, subject=None, predicate=None, obj=None):
+        results = []
+        for entity_subject, entity in self._entities.items():
+            subj_element = None
+            if subject is not None:
+                if subject.startswith("?"):
+                    subj_element = [subject, entity_subject]
+                elif subject == entity_subject:
+                    subj_element = ["subj", entity_subject]
+            else:
+                subj_element = ["subj", entity_subject]
+
+            for entity_pred in entity._predicates:
+                pred_element = None
+                obj_element = None
+                if predicate is not None:
+                    if predicate.startswith("?"):
+                        pred_element = [predicate, entity_pred]
+                    elif predicate == entity_pred:
+                        pred_element = ["pred", entity_pred]
+
+                    if obj is not None:
+                        if obj.startswith("?"):
+                            obj_element = [obj, entity._predicates[entity_pred]]
+                        elif obj == entity._predicates[entity_pred]:
+                            obj_element = ["obj", entity._predicates[entity_pred]]
+                    else:
+                        obj_element = ["obj", entity._predicates[entity_pred]]
+
+                else:
+                    pred_element = ["pred", entity_pred]
+
+                    if obj is not None:
+                        if obj.startswith("?"):
+                            obj_element = [obj, entity._predicates[entity_pred]]
+                        elif subject == entity_subject:
+                            obj_element = [obj, entity._predicates[entity_pred]]
+                    else:
+                        obj_element = ["obj", entity._predicates[entity_pred]]
+
+                if subj_element is not None and pred_element is not None and obj_element is not None:
+                    results.append([subj_element, pred_element, obj_element])
+
+        return results
+
+    def not_match_to_vars(self, subject=None, predicate=None, obj=None):
+
+        if subject is not None and subject.startswith("?") is True:
+            all_subject = subject
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Duplicate RDF Entity [%s][%s][%s]", rdf_subject, rdf_predicate, rdf_object)
-
-    def delete_entity(self, rdf_subject, rdf_predicate=None, rdf_object=None):
-
-        if rdf_subject is not None:
-            rdf_subject = rdf_subject.upper()
-        if rdf_predicate is not None:
-            rdf_predicate = rdf_predicate.upper()
-
-        if rdf_predicate is not None and rdf_object is not None and self.has_object(rdf_subject, rdf_predicate, rdf_object):
-            logging.debug ("Removing RDF Entity (%s, %s, %s)"%(rdf_subject, rdf_predicate, rdf_object))
-            self._entities.remove(self._subjects[rdf_subject][rdf_predicate][rdf_object])
-            del self._subjects[rdf_subject][rdf_predicate][rdf_object]
-
-        elif rdf_predicate is not None and self.has_predicate(rdf_subject, rdf_predicate):
-            obj_keys = []
-            for pred_object in self._subjects[rdf_subject][rdf_predicate]:
-                self._entities.remove(self._subjects[rdf_subject][rdf_predicate][pred_object])
-                obj_keys.append(pred_object)
-            for key in obj_keys:
-                logging.debug("Removing RDF Entity (%s, %s, %s)" % (rdf_subject, rdf_predicate, key))
-                del self._subjects[rdf_subject][rdf_predicate][key]
-            logging.debug("Removing RDF Predicate (%s, %s)" % (rdf_subject, rdf_predicate))
-            del self._subjects[rdf_subject][rdf_predicate]
-
-        elif self.has_subject(rdf_subject):
-            pred_keys = []
-            for predicate in self._subjects[rdf_subject]:
-                obj_keys = []
-                for subj_object in self._subjects[rdf_subject][predicate]:
-                    self._entities.remove(self._subjects[rdf_subject][predicate][subj_object])
-                    obj_keys.append(subj_object)
-                for key in obj_keys:
-                    logging.debug("Removing RDF Entity (%s, %s, %s)" % (rdf_subject, predicate, key))
-                    del self._subjects[rdf_subject][predicate][key]
-                pred_keys.append(predicate)
-            for key in pred_keys:
-                logging.debug("Removing RDF Predicate (%s, %s)" % (rdf_subject, key))
-                del self._subjects[rdf_subject][key]
-            logging.debug("Removing RDF Subject (%s)" % (rdf_subject))
-            del self._subjects[rdf_subject]
-
-    def match(self, rdf_subject=None, rdf_predicate=None, rdf_object=None):
-
-        if rdf_subject is not None:
-            rdf_subject = rdf_subject.upper()
-        if rdf_predicate is not None:
-            rdf_predicate = rdf_predicate.upper()
-
-        logging.debug("RDF Matching (%s, %s, %s)"%(rdf_subject, rdf_predicate, rdf_object))
-
-        entities = []
-        if rdf_subject is None:
-            for for_subject in self._subjects:
-                if rdf_predicate is None:
-                    for for_predicate in self._subjects[for_subject]:
-                        if rdf_object is None:
-                            for for_object in self._subjects[for_subject][for_predicate]:
-                                logging.debug("RDF Matched (%s, %s, %s)" % (for_subject, for_predicate, for_object))
-                                entities.append(self._subjects[for_subject][for_predicate][for_object])
-                        elif self.has_object(for_subject, for_predicate, rdf_object):
-                            logging.debug("RDF Matched (%s, %s, %s)" % (for_subject, for_predicate, rdf_object))
-                            entities.append(self._subjects[for_subject][for_predicate][rdf_object])
-                elif self.has_predicate(for_subject, rdf_predicate):
-                    if rdf_object is None:
-                        for for_object in self._subjects[for_subject][rdf_predicate]:
-                            logging.debug("RDF Matched (%s, %s, %s)" % (for_subject, rdf_predicate, for_object))
-                            entities.append(self._subjects[for_subject][rdf_predicate][for_object])
-                    elif self.has_object(for_subject, rdf_predicate, rdf_object):
-                        logging.debug("RDF Matched (%s, %s, %s)" % (for_subject, rdf_predicate, rdf_object))
-                        entities.append(self._subjects[for_subject][rdf_predicate][rdf_object])
+            all_subject = None
+        if predicate  is not None and predicate.startswith("?") is True:
+            all_predicate = predicate
         else:
-            if self.has_subject(rdf_subject):
-                if rdf_predicate is None:
-                    for for_predicate in self._subjects[rdf_subject]:
-                        if rdf_object is None:
-                            for for_object in self._subjects[rdf_subject][for_predicate]:
-                                logging.debug("RDF Matched (%s, %s, %s)" % (rdf_subject, for_predicate, for_object))
-                                entities.append(self._subjects[rdf_subject][for_predicate][for_object])
-                        elif self.has_object(rdf_subject, for_predicate, rdf_object):
-                            logging.debug("RDF Matched (%s, %s, %s)" % (rdf_subject, for_predicate, rdf_object))
-                            entities.append(self._subjects[rdf_subject][for_predicate][rdf_object])
-                elif self.has_predicate(rdf_subject, rdf_predicate):
-                    if rdf_object is None:
-                        for for_object in self._subjects[rdf_subject][rdf_predicate]:
-                            logging.debug("RDF Matched (%s, %s, %s)" % (rdf_subject, rdf_predicate, for_object))
-                            entities.append(self._subjects[rdf_subject][rdf_predicate][for_object])
-                    elif self.has_object(rdf_subject, rdf_predicate, rdf_object):
-                        logging.debug("RDF Matched (%s, %s, %s)" % (rdf_subject, rdf_predicate, rdf_object))
-                        entities.append(self._subjects[rdf_subject][rdf_predicate][rdf_object])
+            all_predicate = None
+        if obj  is not None and obj.startswith("?") is True:
+            all_obj = obj
+        else:
+            all_obj = None
+        all = self.match_to_vars(all_subject, all_predicate, all_obj)
+        matched = self.match_to_vars(subject, predicate, obj)
 
-        logging.debug("RDF Matched a total of %d entities"%len(entities))
-        return entities
+        #for atuple in matched:
+        #    print("Remove", atuple[0][1])
 
-    def not_match(self, rdf_subject=None, rdf_predicate=None, rdf_object=None):
+        to_remove =[]
+        for entity in all:
+           for atuple in matched:
+               if entity[0][1] == atuple[0][1]:
+                   #print("Removing from all", entity)
+                   to_remove.append(entity)
 
-        logging.debug("RDF Not Matching (%s, %s, %s)"%(rdf_subject, rdf_predicate, rdf_object))
+        return [entity for entity in all if entity not in to_remove]
 
-        entities = self._entities[:]
-        matched = self.match(rdf_subject, rdf_predicate, rdf_object)
+    def match_only_vars(self, subject=None, predicate=None, obj=None):
+        results = self.match_to_vars(subject, predicate, obj)
+        returns = []
+        for atuple in results:
+            aset = []
+            for pair in atuple:
+                if pair[0].startswith("?"):
+                    aset.append(pair)
+            if aset:
+                returns.append(aset)
 
-        to_remove = []
-        for match in matched:
-            for entity in entities:
-                if entity.subject == match.subject:
-                    to_remove.append(entity)
+        return returns
 
-        for rem in to_remove:
-            if rem in entities:
-                entities.remove(rem)
+    def get_unify_vars(self, vars):
+        unified_vars = {}
+        for var in vars:
+            unified_vars[var] = None
+        return unified_vars
 
-        logging.debug("RDF Not Matched a total of %d entities"%len(entities))
-        return entities
+    def dict_to_array(self, adict):
+        atuple = []
+        for name, value in adict.items():
+            atuple.append([name, value])
+        return atuple
 
-    def load(self, configuration):
-        loader = RDFLoader(self)
-        if configuration.files is not None:
-            files = []
-            for file in configuration.files:
-                files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
-            return len(files)
-        self._subjects = {}
-        self._entities = []
-        return 0
+    def unify(self, vars, sets):
+        unifications = []
+        if sets:
+            # For each tuple in the first set
+            for atuple in sets[0]:
+                # Check to see if there are vars thay need unifying
+                unified_vars = self.get_unify_vars(vars)
+                if unified_vars:
+                    # Get the value of the tuples which match the vars
+                    if self.unify_tuple(atuple, unified_vars) is True:
+                        # If we have more sets, keep checking that the vars are still matching
+                        unified = True
+                        if len(sets) > 1:
+                            unified = self.unify_set(1, sets, unified_vars, 0)
+                            #print("Unified?", unified_vars, unified)
+                        # If we have unified all variables then we have a match
+                        if unified is True and None not in unified_vars.values():
+                            unifications.append(self.dict_to_array(unified_vars))
+        return unifications
+
+    def unify_set(self, num_set, sets, unified_vars, depth):
+        aset = sets[num_set]
+        unified = False
+        for atuple in aset:
+            if self.unify_tuple(atuple, unified_vars) is False:
+                continue
+            else:
+                unified = True
+            if num_set < len(sets)-1:
+                return self.unify_set(num_set+1, sets, unified_vars, depth+1)
+        return unified
+
+    def unify_tuple(self, tuple, vars):
+        for name, value in tuple:
+            if name in vars:
+                if vars[name] is None:
+                    vars[name] = value
+                else:
+                    if vars[name] != value:
+                        return False
+        return True

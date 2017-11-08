@@ -1,9 +1,5 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.get import TemplateGetNode
-from programy.parser.exceptions import ParserException
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -121,3 +117,25 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
         self.assertEquals("MONKEY LEGS BIRD LEGS", result)
+
+    def test_get_from_tuple_from_get_from_var(self):
+        template = ET.fromstring("""
+        			<template>
+        			    <think>
+        			        <set var="head">[["?x", "TEST1"]]</set>
+        			    </think>
+        				<get var="?x">
+        				    <tuple> 
+        				        <get var="head"/>
+        				    </tuple>
+        				</get>
+        			</template>
+        			""")
+        self.assertIsNotNone(template)
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("TEST1", result)

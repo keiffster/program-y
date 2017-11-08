@@ -29,6 +29,7 @@ class BotConversationsConfiguration(BaseConfigurationData):
         self._initial_topic = "*"
         self._type = None
         self._storage = None
+        self._empty_on_start = False
 
     @property
     def max_histories(self):
@@ -50,6 +51,10 @@ class BotConversationsConfiguration(BaseConfigurationData):
     def storage(self):
         return self._storage
 
+    @property
+    def empty_on_start(self):
+        return self._empty_on_start
+
     def load_config_section(self, configuration_file, configuration, bot_root):
         Conversations = configuration_file.get_section(self._section_name, configuration)
         if Conversations is not None:
@@ -66,6 +71,7 @@ class BotConversationsConfiguration(BaseConfigurationData):
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.warning("Invalid Conversations file storage type [%s]"%self._type)
+            self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start", missing_value=False)
 
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):

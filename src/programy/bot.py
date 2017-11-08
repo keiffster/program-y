@@ -188,6 +188,8 @@ class Bot(object):
             if self._configuration.conversations is not None:
                 if self._configuration.conversations.type == "file":
                     self._conversation_storage = ConversationFileStorage(self._configuration.conversations.storage)
+                    if self._configuration.conversations.empty_on_start is True:
+                        self._conversation_storage.empty ()
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
