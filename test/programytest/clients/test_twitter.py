@@ -13,7 +13,7 @@ class MockBot(object):
         self.license_keys = {}
         self.answer = None
 
-    def ask_question(self, userid, text):
+    def ask_question(self, userid, text, responselogger=None):
         return self.answer
 
 class MockMessage(object):

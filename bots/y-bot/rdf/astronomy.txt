@@ -1,0 +1,80 @@
+JUPITER:hasPurpose:to give us something to explore
+JUPITER:hasSize:12
+JUPITER:hasSyllables:3
+JUPITER:isa:Astronomical Body
+JUPITER:isa:Planet
+JUPITER:lifeArea:Physical
+VENUS:hasPurpose:to give us something to explore
+VENUS:hasSize:12
+VENUS:hasSyllables:2
+VENUS:isa:Astronomical Body
+VENUS:isa:Planet
+VENUS:lifeArea:Physical
+URANUS:hasPurpose:to give us something to explore
+URANUS:hasSize:12
+URANUS:hasSyllables:3
+URANUS:isa:Astronomical Body
+URANUS:isa:Planet
+URANUS:lifeArea:Physical
+SATURN:hasPurpose:to give us something to explore
+SATURN:hasSize:12
+SATURN:hasSyllables:2
+SATURN:isa:Astronomical Body
+SATURN:isa:Planet
+SATURN:lifeArea:Physical
+MARS:hasPurpose:to give us something to explore
+MARS:hasSize:12
+MARS:hasSyllables:1
+MARS:isa:Astronomical Body
+MARS:isa:Planet
+MARS:lifeArea:Physical
+MOON:hasPurpose:to make tides
+MOON:hasSize:12
+MOON:hasSyllables:1
+MOON:isa:Astronomical Body
+MOON:lifeArea:Physical
+NEPTUNE:hasPurpose:to give us something to explore
+NEPTUNE:hasSize:12
+NEPTUNE:hasSyllables:2
+NEPTUNE:isa:Astronomical Body
+NEPTUNE:isa:Planet
+NEPTUNE:lifeArea:Physical
+SUN:hasPurpose:to provide light and heat
+SUN:hasSize:13
+SUN:hasSyllables:1
+SUN:isa:Astronomical Body
+SUN:isa:Star
+SUN:lifeArea:Physical
+STAR:hasPurpose:to be a distant sun
+STAR:hasSize:13
+STAR:hasSyllables:1
+Star:isa:Astronomical Body
+STAR:lifeArea:Physical
+SPACE:hasPurpose:to be a void
+SPACE:hasSize:14
+SPACE:hasSyllables:1
+SPACE:lifeArea:Physical
+PLUTO:hasSize:12
+PLUTO:hasSyllables:2
+PLUTO:isa:Astronomical Body
+PLUTO:isa:Planet
+PLUTO:lifeArea:Physical
+PLUTO:hasPurpose:to give us something to explore
+PLANET:hasPurpose:to orbit a star
+PLANET:hasSize:12
+PLANET:hasSyllables:2
+Planet:isa:Astronomical Body
+PLANET:isa:Astronomical Body
+PLANET:lifeArea:Education
+MERCURY:hasPurpose:to give us something to explore
+MERCURY:hasSize:12
+MERCURY:hasSyllables:3
+MERCURY:isa:Astronomical Body
+MERCURY:isa:Planet
+MERCURY:lifeArea:Physical
+Atmosphere:isa:Astronomical Body
+UNIVERSE:hasPurpose:to contain everything
+UNIVERSE:hasSize:15
+UNIVERSE:hasSyllables:3
+UNIVERSE:isa:Astronomical Body
+UNIVERSE:lifeArea:Education

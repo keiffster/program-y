@@ -24,5 +24,5 @@ class BasicPassThroughAuthenticationService(Authenticator):
     def __init__(self, configuration: BrainSecurityConfiguration):
         Authenticator.__init__(self, configuration)
 
-    def authenticate(self, clientid: str):
+    def authenticate(self, bot, clientid: str):
         return True

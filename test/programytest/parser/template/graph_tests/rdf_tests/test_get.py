@@ -1,9 +1,5 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.template.nodes.get import TemplateGetNode
-from programy.parser.exceptions import ParserException
-
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
@@ -11,10 +7,10 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
     def test_tuples_single_var_single_result(self):
 
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
 			<template>
@@ -22,7 +18,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				    <tuple> 
 				        <select>
                             <vars>?x</vars>
-                            <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
+                            <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
                         </select>
 				    </tuple>
 				</get>
@@ -38,10 +34,10 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertEquals("MONKEY", result)
 
     def test_tuples_multi_vars_single_results(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
             <template>
@@ -62,15 +58,15 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY legs", result)
+        self.assertEquals("MONKEY LEGS", result)
 
     def test_tuples_single_var_multi_resultss(self):
 
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
 			<template>
@@ -78,7 +74,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				    <tuple> 
 				        <select>
                             <vars>?x</vars>
-                            <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
+                            <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
                         </select>
 				    </tuple>
 				</get>
@@ -95,11 +91,11 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
     def test_tuples_multi_vars_multi_resultss(self):
 
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
 			<template>
@@ -120,4 +116,26 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY legs BIRD legs", result)
+        self.assertEquals("MONKEY LEGS BIRD LEGS", result)
+
+    def test_get_from_tuple_from_get_from_var(self):
+        template = ET.fromstring("""
+        			<template>
+        			    <think>
+        			        <set var="head">[["?x", "TEST1"]]</set>
+        			    </think>
+        				<get var="?x">
+        				    <tuple> 
+        				        <get var="head"/>
+        				    </tuple>
+        				</get>
+        			</template>
+        			""")
+        self.assertIsNotNone(template)
+
+        ast = self.parser.parse_template_expression(template)
+        self.assertIsNotNone(ast)
+
+        result = ast.resolve(self.test_bot, self.test_clientid)
+        self.assertIsNotNone(result)
+        self.assertEquals("TEST1", result)

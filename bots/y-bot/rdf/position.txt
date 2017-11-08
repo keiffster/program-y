@@ -1,0 +1,34 @@
+LEFT:hasPurpose:to specifiy a side
+LEFT:hasSize:0
+LEFT:hasSyllables:1
+LEFT:isa:Direction
+LEFT:lifeArea:Education
+MIDDLE:hasPurpose:to be the center
+MIDDLE:hasSize:0
+MIDDLE:hasSyllables:2
+MIDDLE:lifeArea:Physical
+RIGHT:hasPurpose:to provide guidance
+RIGHT:hasSize:0
+RIGHT:hasSyllables:1
+RIGHT:isa:Direction
+RIGHT:lifeArea:Physical
+DIRECTION:hasPurpose:to specify a course
+DIRECTION:hasSize:0
+DIRECTION:hasSyllables:3
+Direction:isa:Compass Point
+LAST:hasPurpose:to be the final
+LAST:hasSize:0
+LAST:hasSyllables:1
+LAST:lifeArea:Education
+LOCATION:hasPurpose:to identify a place
+LOCATION:hasSize:0
+LOCATION:hasSyllables:3
+LOCATION:lifeArea:Physical
+SIDE:hasPurpose:to be a boundary
+SIDE:hasSize:0
+SIDE:hasSyllables:1
+SIDE:lifeArea:Education
+START:hasPurpose:to begin
+START:hasSize:0
+START:hasSyllables:1
+START:lifeArea:Physical

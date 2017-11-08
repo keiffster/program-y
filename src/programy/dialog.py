@@ -16,6 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import os
+from os import listdir
+from os.path import isfile, join
+
 
 class Sentence(object):
 
@@ -157,13 +161,13 @@ class Question(object):
 #
 class Conversation(object):
 
-    def __init__(self, clientid: str, bot: object, max_histories=100):
+    def __init__(self, clientid: str, bot: object):
         self._bot = bot
         self._clientid = clientid
         self._questions = []
-        self._max_histories = max_histories
+        self._max_histories = bot.configuration.conversations.max_histories
         self._properties = {}
-        self._properties['topic'] = '*'
+        self._properties['topic'] = bot.configuration.conversations.initial_topic
 
     @property
     def bot(self):
@@ -176,6 +180,14 @@ class Conversation(object):
     @property
     def questions(self):
         return self._questions
+
+    @property
+    def max_histories(self):
+        return self._max_histories
+
+    @property
+    def properties(self):
+        return self._properties
 
     def has_current_question(self):
         return bool(self._questions)
@@ -220,3 +232,54 @@ class Conversation(object):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
+
+
+class ConversationFileStorage(object):
+
+    def __init__(self, config):
+        self._config = config
+
+    def empty(self):
+        convo_files = [f for f in listdir(self._config._dir) if isfile(join(self._config._dir, f))]
+        for file in convo_files:
+            fullpath = self._config._dir + os.sep + file
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Removing conversation file: [%s]"%fullpath)
+            os.remove(fullpath)
+
+    def save_conversation(self, conversation, clientid):
+        try:
+            filename = self._config._dir + os.sep + clientid + ".convo"
+            with open(filename, "w+") as convo_file:
+                for name, value in conversation._properties.items():
+                    convo_file.write("%s:%s\n"%(name, value))
+                convo_file.write("\n")
+        except Exception as e:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Failed to save conversation for clientid [%s]"%clientid)
+                logging.exception(e)
+
+    def load_conversation(self, conversation, clientid, restore_last_topic=False):
+        try:
+            filename = self._config._dir + os.sep + clientid + ".convo"
+            if os.path.exists(filename):
+                with open(filename, "r") as convo_file:
+                    for line in convo_file:
+                        if ':' in line:
+                            splits = line.split(":")
+                            name = splits[0].strip()
+                            value = splits[1].strip()
+                            if name == "topic":
+                                if restore_last_topic is True:
+                                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                                        logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
+                                    conversation._properties[name] = value
+                            else:
+                                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                                    logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
+                                conversation._properties[name] = value
+        except Exception as e:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Failed to load conversation for clientid [%s]"%clientid)
+                logging.exception(e)
+

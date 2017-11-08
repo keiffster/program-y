@@ -29,6 +29,37 @@ class TemplateAttribNode(TemplateNode):
 
     #######################################################################################################
 
+    def _parse_node_with_attribs(self, graph, expression, attribs):
+
+        attribs_found = []
+        for attrib in attribs:
+            attrib_name = attrib[0]
+            if attrib_name in expression.attrib:
+                self.set_attrib(attrib_name, expression.attrib[attrib_name])
+                attribs_found.append(attrib_name)
+
+        self.parse_text(graph, self.get_text_from_element(expression))
+
+        for child in expression:
+            tag_name = TextUtils.tag_from_text(child.tag)
+
+            for attrib in attribs:
+                attrib_name = attrib[0]
+                if tag_name == attrib_name:
+                    self.set_attrib(attrib[0], self.get_text_from_element(child))
+                else:
+                    graph.parse_tag_expression(child, self)
+
+            self.parse_text(graph, self.get_tail_from_element(child))
+
+        for attrib in attribs:
+            attrib_name = attrib[0]
+            if attrib_name not in attribs_found:
+                if attrib[1] is not None:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                        logging.debug("Setting default value for attrib [%s]", attrib_name)
+                    self.set_attrib(attrib_name, attrib[1])
+
     def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
 
         attrib_found = True

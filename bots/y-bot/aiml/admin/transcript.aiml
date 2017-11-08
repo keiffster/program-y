@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <category>
+        <pattern>TRANSCRIPT</pattern>
+        <template>
+            <srai>YADMIN TRANSCRIPT</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN TRANSCRIPT</pattern>
+        <template>
+            <extension path="programy.extensions.admin.transcript.TranscriptAdminExtension">
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN TRANSCRIPT # PROPERTIES</pattern>
+        <template>
+            <extension path="programy.extensions.admin.transcript.TranscriptAdminExtension">
+                PROPERTIES
+            </extension>
+        </template>
+    </category>
+
+</aiml>

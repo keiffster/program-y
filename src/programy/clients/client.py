@@ -26,7 +26,15 @@ from programy.bot import Bot
 from programy.brain import Brain
 from programy.config.programy import ProgramyConfiguration
 
-class BotClient(object):
+class ResponseLogger(object):
+
+    def log_unknown_response(self, question):
+        return
+
+    def log_response(self, question, answer):
+        return
+
+class BotClient(ResponseLogger):
 
     def __init__(self, clientid, argument_parser=None):
         self._clientid = clientid
@@ -116,10 +124,4 @@ class BotClient(object):
         self.bot.brain.properties.add_property("env", "Unknown")
 
     def run(self):
-        return
-
-    def log_unknown_response(self, question):
-        return
-
-    def log_response(self, question, answer):
         return

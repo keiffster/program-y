@@ -1,0 +1,12 @@
+COLUMBUS:hasPurpose:to discover America
+COLUMBUS:hasSize:7
+COLUMBUS:hasSyllables:3
+COLUMBUS:isa:Explorer
+COLUMBUS:isa:Person
+COLUMBUS:lifeArea:Education
+SHAKESPEARE:hasPurpose:to write plays
+SHAKESPEARE:hasSize:7
+SHAKESPEARE:hasSyllables:2
+SHAKESPEARE:isa:Author
+SHAKESPEARE:isa:Person
+SHAKESPEARE:lifeArea:Education

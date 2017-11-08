@@ -1,42 +1,19 @@
 # Readme info:
 
-Version: 1.0.1 <br/>
+Version: 1.2.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 13th October 2017 <br/>
-NEWS: Version 1.1.0 Released
+Date: 8th November 2017 <br/>
 
-# WHATS NEW IN 1.1
-
-1) CSV Output.
-
-By specifying the following config options, Program-Y can now output errors, duplicates and conversation in csv format
-
-    files:
-        aiml:
-           errors:
-              file: /tmp/y-bot_errors.csv
-              format: csv
-              encoding: utf-8
-              delete_on_start: true
-           duplicates:
-              file: /tmp/y-bot_duplicates.csv
-              format: csv
-              encoding: utf-8
-              delete_on_start: true
-           conversation:
-              file: /tmp/y-bot-conversation.csv
-              format: csv
-              delete_on_start: true
-
-2) Default Variables
-
-New config option properties which will load a set of default property values into each new conversation as it is initiated.
-New conversations are defined by a unique clientid
-
-    files:
-        aiml:
-            properties: $BOT_ROOT/config/properties.txt
-
+### Whats New in 1.2
+* RDF Engine completely rewritten to be fully compatible with Alice grammar
+* Refactored Y-Bot triples.txt into more understandable and workable files based on category
+* New RDF Formatter  tool in utils 
+* Updated use of file handling to open all but neccassary files in readonly mode
+* Conversations now persistent between bot restarts
+ 
+### Whats New in 1.1
+* CSV Output.
+* Default Variables
 
 
 # Introduction

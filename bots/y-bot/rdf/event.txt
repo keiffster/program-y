@@ -1,0 +1,10 @@
+APPOINTMENT:hasPurpose:to schedule a meeting
+APPOINTMENT:hasSize:0
+APPOINTMENT:hasSyllables:3
+APPOINTMENT:isa:Event
+APPOINTMENT:lifeArea:Business
+CARNIVAL:hasPurpose:to provide rides and games
+CARNIVAL:hasSize:9
+CARNIVAL:hasSyllables:3
+CARNIVAL:isa:Event
+CARNIVAL:lifeArea:Recreation

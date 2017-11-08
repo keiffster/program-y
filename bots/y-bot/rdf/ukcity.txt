@@ -1,0 +1,30 @@
+BELFAST:hasPurpose:to form a city
+BELFAST:hasSize:10
+BELFAST:hasSyllables:2
+BELFAST:isa:City
+BELFAST:isa:Geographic Location
+BELFAST:lifeArea:Education
+CHELSEA:hasPurpose:to form a city
+CHELSEA:hasSize:10
+CHELSEA:hasSyllables:2
+CHELSEA:isa:City
+CHELSEA:isa:Geographic Location
+CHELSEA:lifeArea:Education
+LEEDS:hasPurpose:to form a city
+LEEDS:hasSize:10
+LEEDS:hasSyllables:1
+LEEDS:isa:City
+LEEDS:isa:Geographic Location
+LEEDS:lifeArea:Education
+LONDON:hasPurpose:to form a city
+LONDON:hasSize:10
+LONDON:hasSyllables:2
+LONDON:isa:City
+LONDON:isa:Geographic Location
+LONDON:lifeArea:Education
+YORK:hasPurpose:to form a city
+YORK:hasSize:10
+YORK:hasSyllables:1
+YORK:isa:City
+YORK:isa:Geographic Location
+YORK:lifeArea:Education

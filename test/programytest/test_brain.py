@@ -75,12 +75,6 @@ class BrainTests(unittest.TestCase):
         self.assertTrue(os.path.exists(brain_config.binaries.binary_filename))
         brain.load_binary(brain_config)
 
-        self.assertTrue(brain.authentication.authenticate("console"))
-        self.assertTrue(brain.authentication.authenticate("someone"))
-
-        self.assertTrue(brain.authorisation.authorise("console", "somthing"))
-        self.assertTrue(brain.authorisation.authorise("someone", "other"))
-
         oob_content = ET.fromstring("<oob><something>other</something></oob>")
         self.assertEqual("", brain.default_oob.process_out_of_bounds(None, "console", oob_content))
         oob_content = ET.fromstring("<oob><dial>07777777777</dial></oob>")
@@ -96,14 +90,6 @@ class BrainTests(unittest.TestCase):
 
         brain = Brain(brain_config)
         self.assertIsNotNone(brain)
-
-        self.assertTrue(brain.authentication.authenticate("console"))
-        self.assertFalse(brain.authentication.authenticate("someone"))
-
-        self.assertTrue(brain.authorisation.authorise("console", "root"))
-        self.assertFalse(brain.authorisation.authorise("console", "unknown"))
-        with self.assertRaises(AuthorisationException):
-            brain.authorisation.authorise("someone", "root")
 
     def test_oob_loading(self):
 

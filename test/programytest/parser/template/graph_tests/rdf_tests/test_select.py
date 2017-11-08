@@ -1,13 +1,18 @@
 import xml.etree.ElementTree as ET
+import json
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.select import TemplateSelectNode
-from programy.rdf.query import RDFQuery
+from programy.parser.template.nodes.select import Query, NotQuery
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
 class TemplateGraphSelectTests(TemplateGraphTestClient):
+
+    ################################################################################################################
+    # Test Node Construction
+    #
 
     def test_select_single_vars_single_query(self):
         template = ET.fromstring("""
@@ -29,22 +34,22 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(1, len(select_node.query.vars))
-        self.assertTrue("?x" in select_node.query.vars)
 
-        self.assertEquals(1, len(select_node.query.queries))
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("?x", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("Y", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("Z", query1.object.resolve(None, None))
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(1, len(select_node.vars))
+        self.assertTrue("?x" in select_node.vars)
+
+        self.assertEquals(1, len(select_node.queries))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("?x", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("Y", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("Z", query1.obj.resolve(None, None))
 
     def test_select_multi_vars_single_query(self):
         template = ET.fromstring("""
@@ -66,23 +71,23 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(2, len(select_node.query.vars))
-        self.assertTrue("?x" in select_node.query.vars)
-        self.assertTrue("?y" in select_node.query.vars)
 
-        self.assertEquals(1, len(select_node.query.queries))
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("?x", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("?y", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("Z", query1.object.resolve(None, None))
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(2, len(select_node.vars))
+        self.assertTrue("?x" in select_node.vars)
+        self.assertTrue("?y" in select_node.vars)
+
+        self.assertEquals(1, len(select_node.queries))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("?x", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("?y", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("Z", query1.obj.resolve(None, None))
 
     def test_select_single_vars_multie_query(self):
         template = ET.fromstring("""
@@ -105,34 +110,33 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(1, len(select_node.query.vars))
-        self.assertTrue("?x" in select_node.query.vars)
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(1, len(select_node.vars))
+        self.assertTrue("?x" in select_node.vars)
 
-        self.assertEquals(2, len(select_node.query.queries))
+        self.assertEquals(2, len(select_node.queries))
 
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("A", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("B", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("C", query1.object.resolve(None, None))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("A", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("B", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("C", query1.obj.resolve(None, None))
 
-        query2 = select_node.query.queries[1]
-        self.assertEquals(RDFQuery.QUERY, query2.query_type)
-        self.assertIsInstance(query2.subject, TemplateNode)
-        self.assertEquals(1, len(query2.subject.children))
-        self.assertIsInstance(query2.subject.children[0], TemplateWordNode)
-        self.assertEquals("?x", query2.subject.resolve(None, None))
-        self.assertIsInstance(query2.predicate, TemplateNode)
-        self.assertEquals("Y", query2.predicate.resolve(None, None))
-        self.assertIsInstance(query2.object, TemplateNode)
-        self.assertEquals("Z", query2.object.resolve(None, None))
+        query2 = select_node.queries[1]
+        self.assertIsInstance(query2, Query)
+        self.assertIsInstance(query2.subj, TemplateNode)
+        self.assertEquals(1, len(query2.subj.children))
+        self.assertIsInstance(query2.subj.children[0], TemplateWordNode)
+        self.assertEquals("?x", query2.subj.resolve(None, None))
+        self.assertIsInstance(query2.pred, TemplateNode)
+        self.assertEquals("Y", query2.pred.resolve(None, None))
+        self.assertIsInstance(query2.obj, TemplateNode)
+        self.assertEquals("Z", query2.obj.resolve(None, None))
 
     def test_select_multi_vars_multi_query(self):
         template = ET.fromstring("""
@@ -155,35 +159,34 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(2, len(select_node.query.vars))
-        self.assertTrue("?x" in select_node.query.vars)
-        self.assertTrue("?y" in select_node.query.vars)
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(2, len(select_node.vars))
+        self.assertTrue("?x" in select_node.vars)
+        self.assertTrue("?y" in select_node.vars)
 
-        self.assertEquals(2, len(select_node.query.queries))
+        self.assertEquals(2, len(select_node.queries))
 
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("A", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("B", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("C", query1.object.resolve(None, None))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("A", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("B", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("C", query1.obj.resolve(None, None))
 
-        query2 = select_node.query.queries[1]
-        self.assertEquals(RDFQuery.QUERY, query2.query_type)
-        self.assertIsInstance(query2.subject, TemplateNode)
-        self.assertEquals(1, len(query2.subject.children))
-        self.assertIsInstance(query2.subject.children[0], TemplateWordNode)
-        self.assertEquals("?x", query2.subject.resolve(None, None))
-        self.assertIsInstance(query2.predicate, TemplateNode)
-        self.assertEquals("?y", query2.predicate.resolve(None, None))
-        self.assertIsInstance(query2.object, TemplateNode)
-        self.assertEquals("Z", query2.object.resolve(None, None))
+        query2 = select_node.queries[1]
+        self.assertIsInstance(query2, Query)
+        self.assertIsInstance(query2.subj, TemplateNode)
+        self.assertEquals(1, len(query2.subj.children))
+        self.assertIsInstance(query2.subj.children[0], TemplateWordNode)
+        self.assertEquals("?x", query2.subj.resolve(None, None))
+        self.assertIsInstance(query2.pred, TemplateNode)
+        self.assertEquals("?y", query2.pred.resolve(None, None))
+        self.assertIsInstance(query2.obj, TemplateNode)
+        self.assertEquals("Z", query2.obj.resolve(None, None))
 
     def test_select_single_vars_mixed_query(self):
         template = ET.fromstring("""
@@ -200,41 +203,39 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
-        self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSelectNode)
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(1, len(select_node.query.vars))
-        self.assertTrue("?x" in select_node.query.vars)
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(1, len(select_node.vars))
+        self.assertTrue("?x" in select_node.vars)
 
-        self.assertEquals(2, len(select_node.query.queries))
+        self.assertEquals(2, len(select_node.queries))
 
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("A", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("B", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("C", query1.object.resolve(None, None))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("A", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("B", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("C", query1.obj.resolve(None, None))
 
-        query2 = select_node.query.queries[1]
-        self.assertEquals(RDFQuery.NOT_QUERY, query2.query_type)
-        self.assertIsInstance(query2.subject, TemplateNode)
-        self.assertEquals(1, len(query2.subject.children))
-        self.assertIsInstance(query2.subject.children[0], TemplateWordNode)
-        self.assertEquals("?x", query2.subject.resolve(None, None))
-        self.assertIsInstance(query2.predicate, TemplateNode)
-        self.assertEquals("?x", query2.predicate.resolve(None, None))
-        self.assertIsInstance(query2.object, TemplateNode)
-        self.assertEquals("Z", query2.object.resolve(None, None))
+        query2 = select_node.queries[1]
+        self.assertIsInstance(query2, NotQuery)
+        self.assertIsInstance(query2.subj, TemplateNode)
+        self.assertEquals(1, len(query2.subj.children))
+        self.assertIsInstance(query2.subj.children[0], TemplateWordNode)
+        self.assertEquals("?x", query2.subj.resolve(None, None))
+        self.assertIsInstance(query2.pred, TemplateNode)
+        self.assertEquals("?x", query2.pred.resolve(None, None))
+        self.assertIsInstance(query2.obj, TemplateNode)
+        self.assertEquals("Z", query2.obj.resolve(None, None))
 
     def test_select_multi_vars_mixed_query(self):
         template = ET.fromstring("""
@@ -251,42 +252,41 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
-        self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSelectNode)
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(2, len(select_node.query.vars))
-        self.assertTrue("?A" in select_node.query.vars)
-        self.assertTrue("?X" in select_node.query.vars)
+        self.assertIsNotNone(select_node)
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(2, len(select_node.vars))
+        self.assertTrue("?A" in select_node.vars)
+        self.assertTrue("?X" in select_node.vars)
 
-        self.assertEquals(2, len(select_node.query.queries))
+        self.assertEquals(2, len(select_node.queries))
 
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("?A", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("B", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("C", query1.object.resolve(None, None))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("?A", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("B", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("C", query1.obj.resolve(None, None))
 
-        query2 = select_node.query.queries[1]
-        self.assertEquals(RDFQuery.NOT_QUERY, query2.query_type)
-        self.assertIsInstance(query2.subject, TemplateNode)
-        self.assertEquals(1, len(query2.subject.children))
-        self.assertIsInstance(query2.subject.children[0], TemplateWordNode)
-        self.assertEquals("?X", query2.subject.resolve(None, None))
-        self.assertIsInstance(query2.predicate, TemplateNode)
-        self.assertEquals("Y", query2.predicate.resolve(None, None))
-        self.assertIsInstance(query2.object, TemplateNode)
-        self.assertEquals("Z", query2.object.resolve(None, None))
+        query2 = select_node.queries[1]
+        self.assertIsInstance(query2, NotQuery)
+        self.assertIsInstance(query2.subj, TemplateNode)
+        self.assertEquals(1, len(query2.subj.children))
+        self.assertIsInstance(query2.subj.children[0], TemplateWordNode)
+        self.assertEquals("?X", query2.subj.resolve(None, None))
+        self.assertIsInstance(query2.pred, TemplateNode)
+        self.assertEquals("Y", query2.pred.resolve(None, None))
+        self.assertIsInstance(query2.obj, TemplateNode)
+        self.assertEquals("Z", query2.obj.resolve(None, None))
 
     def test_select_no_vars_single_query(self):
         template = ET.fromstring("""
@@ -308,34 +308,38 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
         select_node = ast.children[0]
-        self.assertIsNotNone(select_node.query)
-        self.assertIsNotNone(select_node.query.vars)
-        self.assertEquals(0, len(select_node.query.vars))
+        self.assertIsNotNone(select_node)
+        self.assertIsNotNone(select_node.vars)
+        self.assertEquals(0, len(select_node.vars))
 
-        self.assertEquals(1, len(select_node.query.queries))
+        self.assertEquals(1, len(select_node.queries))
 
-        query1 = select_node.query.queries[0]
-        self.assertEquals(RDFQuery.QUERY, query1.query_type)
-        self.assertIsInstance(query1.subject, TemplateNode)
-        self.assertEquals(1, len(query1.subject.children))
-        self.assertIsInstance(query1.subject.children[0], TemplateWordNode)
-        self.assertEquals("A", query1.subject.resolve(None, None))
-        self.assertIsInstance(query1.predicate, TemplateNode)
-        self.assertEquals("B", query1.predicate.resolve(None, None))
-        self.assertIsInstance(query1.object, TemplateNode)
-        self.assertEquals("C", query1.object.resolve(None, None))
+        query1 = select_node.queries[0]
+        self.assertIsInstance(query1, Query)
+        self.assertIsInstance(query1.subj, TemplateNode)
+        self.assertEquals(1, len(query1.subj.children))
+        self.assertIsInstance(query1.subj.children[0], TemplateWordNode)
+        self.assertEquals("A", query1.subj.resolve(None, None))
+        self.assertIsInstance(query1.pred, TemplateNode)
+        self.assertEquals("B", query1.pred.resolve(None, None))
+        self.assertIsInstance(query1.obj, TemplateNode)
+        self.assertEquals("C", query1.obj.resolve(None, None))
+
+    ################################################################################################################
+    # Test Matching Evaluation
+    #
 
     def test_query_no_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
-                        <q><subj>MONKEY</subj><pred>legs</pred><obj>2</obj></q>
+                        <q><subj>MONKEY</subj><pred>LEGS</pred><obj>2</obj></q>
                     </select>
                 </template>
                 """)
@@ -344,19 +348,26 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["MONKEY", "legs", "2"]]', result)
+
+        query_results = json.loads(result)
+        query1_results = query_results[0]
+        query1_results_result1 = query1_results[0]
+
+        self.assertTrue(["subj", "MONKEY"] in query1_results_result1)
+        self.assertTrue(["pred", "LEGS"] in query1_results_result1)
+        self.assertTrue(["obj", "2"] in query1_results_result1)
 
     def test_not_query_no_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
-                        <notq><subj>MONKEY</subj><pred>legs</pred><obj>2</obj></notq>
+                        <notq><subj>MONKEY</subj><pred>LEGS</pred><obj>2</obj></notq>
                     </select>
                 </template>
                 """)
@@ -365,20 +376,25 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["ZEBRA", "legs", "4"], ["BIRD", "legs", "2"], ["ELEPHANT", "trunk", "true"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+
+        self.assertTrue([['subj', 'ZEBRA'], ['pred', 'LEGS'], ['obj', '4']] in query_results[0])
+        self.assertTrue([['subj', 'BIRD'], ['pred', 'LEGS'], ['obj', '2']] in query_results[0])
+        self.assertTrue([['subj', 'ELEPHANT'], ['pred', 'TRUNK'], ['obj', 'true']] in query_results[0])
 
     def test_query_var(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
                     </select>
                 </template>
                 """)
@@ -387,20 +403,24 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"], ["?x", "BIRD"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+        self.assertEqual(2, len(query_results))
+        self.assertTrue([["?x", "MONKEY"]] in query_results)
+        self.assertTrue([["?x", "BIRD"]] in query_results)
 
     def test_not_query_var(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <notq><subj>?x</subj><pred>legs</pred><obj>2</obj></notq>
+                        <notq><subj>?x</subj><pred>LEGS</pred><obj>2</obj></notq>
                     </select>
                 </template>
                 """)
@@ -409,14 +429,18 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "ZEBRA"], ["?x", "ELEPHANT"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+        self.assertEqual(2, len(query_results))
+        self.assertTrue([["?x", "ZEBRA"]] in query_results)
+        self.assertTrue([["?x", "ELEPHANT"]] in query_results)
 
     def test_query_multi_vars(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
@@ -431,21 +455,25 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"], ["?y", "legs"], ["?x", "BIRD"], ["?y", "legs"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+        self.assertEquals(2, len(query_results))
+        self.assertTrue([["?x", "MONKEY"], ["?y", "LEGS"]] in query_results)
+        self.assertTrue([["?x", "BIRD"], ["?y", "LEGS"]] in query_results)
 
     def test_query_var_multi_queries(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
-                        <q><subj>?x</subj><pred>hasFur</pred><obj>true</obj></q>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
+                        <q><subj>?x</subj><pred>HASFUR</pred><obj>true</obj></q>
                     </select>
                 </template>
                 """)
@@ -454,21 +482,25 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+        self.assertEquals(1, len(query_results))
+
+        self.assertTrue([["?x", "MONKEY"]] in query_results)
 
     def test_query_var_mixed_queries(self):
-        self.test_bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self.test_bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self.test_bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self.test_bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
+        self.test_bot.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
+        self.test_bot.brain.rdf.add_entity("BIRD", "LEGS", "2")
+        self.test_bot.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
 
         template = ET.fromstring("""
                 <template>
                     <select>
                         <vars>?x</vars>
-                        <q><subj>?x</subj><pred>legs</pred><obj>2</obj></q>
-                        <notq><subj>?x</subj><pred>hasFur</pred><obj>true</obj></notq>
+                        <q><subj>?x</subj><pred>LEGS</pred><obj>2</obj></q>
+                        <notq><subj>?x</subj><pred>HASFUR</pred><obj>true</obj></notq>
                     </select>
                 </template>
                 """)
@@ -477,4 +509,8 @@ class TemplateGraphSelectTests(TemplateGraphTestClient):
 
         result = ast.resolve(self.test_bot, self.test_clientid)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "BIRD"]]', result)
+        query_results = json.loads(result)
+        self.assertIsNotNone(query_results)
+        self.assertEquals(1, len(query_results))
+
+        self.assertTrue([["?x", "BIRD"]] in query_results)

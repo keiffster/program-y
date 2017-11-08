@@ -1,0 +1,54 @@
+APPLE:hasPurpose:to provide nourishment
+APPLE:hasSize:4
+APPLE:hasSyllables:2
+APPLE:isa:Fruit
+APPLE:lifeArea:Diet
+BANANA:hasPurpose:to provide nourishment
+BANANA:hasSize:4
+BANANA:hasSyllables:3
+BANANA:isa:Fruit
+BANANA:isa:Tropical Fruit
+BANANA:lifeArea:Diet
+CHERRY:hasPurpose:to provide nourishment
+CHERRY:hasSize:3
+CHERRY:hasSyllables:2
+CHERRY:isa:Fruit
+CHERRY:lifeArea:Diet
+COCONUT:hasPurpose:to provide nourishment
+COCONUT:hasSize:4
+COCONUT:hasSyllables:3
+COCONUT:isa:Fruit
+COCONUT:isa:Tropical Fruit
+COCONUT:lifeArea:Diet
+FRUIT:hasPurpose:to provide nourishment
+FRUIT:hasSize:4
+FRUIT:hasSyllables:1
+FRUIT:isa:Food Group
+FRUIT:lifeArea:Diet
+GRAPE:hasPurpose:to provide nourishment
+GRAPE:hasSize:3
+GRAPE:hasSyllables:1
+GRAPE:isa:Fruit
+GRAPE:isa:Vine Fruit
+GRAPE:lifeArea:Diet
+GRAPEFRUIT:hasPurpose:to provide nourishment
+GRAPEFRUIT:hasSize:4
+GRAPEFRUIT:hasSyllables:2
+GRAPEFRUIT:isa:Citrus
+GRAPEFRUIT:isa:Fruit
+GRAPEFRUIT:lifeArea:Diet
+LEMON:hasPurpose:to provide nourishment
+LEMON:hasSize:4
+LEMON:isa:Citrus
+LEMON:isa:Fruit
+LEMON:lifeArea:Diet
+WATERMELON:hasPurpose:to provide nourishment
+WATERMELON:hasSize:5
+WATERMELON:hasSyllables:4
+WATERMELON:isa:Fruit
+WATERMELON:isa:Summer Fruit
+WATERMELON:lifeArea:Diet
+Summer Fruit:isa:Fruit
+Tropical Fruit:isa:Fruit
+Vine Fruit:isa:Fruit
+Citrus:isa:Fruit

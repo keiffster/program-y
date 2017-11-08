@@ -83,7 +83,7 @@ class TwitterBotClient(BotClient):
     def _process_direct_message_question(self, userid, text):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Direct Messages: %s -> %s", userid, text)
-        response = self.bot.ask_question(userid, text)
+        response = self.bot.ask_question(userid, text, responselogger=self)
         self._api.send_direct_message(userid, text=response)
 
     def _process_direct_messages(self, last_message_id):
@@ -176,7 +176,7 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%s -> %s", userid, question)
 
-            response = self.bot.ask_question(userid, question)
+            response = self.bot.ask_question(userid, question, responselogger=self)
 
             user = self._api.get_user(userid)
             status = "@%s %s"%(user.screen_name, response)
@@ -219,7 +219,7 @@ class TwitterBotClient(BotClient):
                 logging.debug("Reads messages ids from [%s]", self.configuration.client_configuration.storage_location)
             if os.path.exists(self.configuration.client_configuration.storage_location):
                 try:
-                    with open(self.configuration.client_configuration.storage_location, "r+") as idfile:
+                    with open(self.configuration.client_configuration.storage_location, "r") as idfile:
                         last_direct_message_id = int(idfile.readline().strip())
                         last_status_id = int(idfile.readline().strip())
                 except Exception as excep:

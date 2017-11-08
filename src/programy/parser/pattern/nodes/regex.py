@@ -89,7 +89,7 @@ class PatternRegexNode(PatternNode):
                     return EqualsMatch(True, word_no, word)
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("No word [%s] matched refex", word)
+                        logging.error("No word [%s] matched regex", word)
                     return EqualsMatch(False, word_no)
             else:
                 return EqualsMatch(False, word_no)
@@ -101,7 +101,7 @@ class PatternRegexNode(PatternNode):
                 return EqualsMatch(True, word_no, word)
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No word [%s] matched refex", word)
+                    logging.error("No word [%s] matched regex", word)
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

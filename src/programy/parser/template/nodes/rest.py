@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
-
+import json
 
 
 class TemplateRestNode(TemplateNode):
@@ -28,14 +28,21 @@ class TemplateRestNode(TemplateNode):
 
     def resolve_to_string(self, bot, clientid):
         result = self.resolve_children_to_string(bot, clientid)
+        resolved = "NIL"
         if result != "":
-            words = result.split(" ")
-            if len(words) > 1:
-                resolved = " ".join(words[1:])
-            else:
-                resolved = "NIL"
-        else:
-            resolved = "NIL"
+            try:
+                data = json.loads(result)
+                if isinstance(data, list):
+                    if len(data) > 1:
+                        resolved = json.dumps(data[1:])
+                else:
+                    raise Exception("Not what I wanted")
+            except Exception as e:
+                words = result.split(" ")
+                if words:
+                    if len(words) > 1:
+                        resolved = " ".join(words[1:])
+
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

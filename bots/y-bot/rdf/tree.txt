@@ -1,0 +1,16 @@
+PINE TREE:hasPurpose:to stay green all winter
+PINE TREE:hasSize:9
+PINE TREE:hasSyllables:2
+PINE TREE:isa:Evergreen Tree
+PINE TREE:isa:Tree
+PINE TREE:lifeArea:Physical
+TREE:hasPurpose:to provide wood leaves and bark
+TREE:hasSize:9
+TREE:hasSyllables:1
+TREE:isa:Plant
+TREE:lifeArea:Physical
+Evergreen Tree:isa:Tree
+STICK:hasPurpose:to be a branch from a tree
+STICK:hasSize:4
+STICK:hasSyllables:1
+STICK:lifeArea:Physical

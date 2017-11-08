@@ -18,6 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
@@ -133,21 +134,6 @@ class TemplateConditionNode(TemplateNode):
             if child.is_default() is True:
                 return child
         return None
-
-    def _get_property_value(self, bot, clientid, name, local):
-
-        if local is False:
-            value = bot.conversation(clientid).property(name)
-        else:
-            value = bot.conversation(clientid).current_question().property(name)
-
-        if value is None:
-            value = bot.brain.properties.property("default-get")
-            if value is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No value for default-get defined, empty string returned")
-                value = ""
-        return value
 
     #######################################################################################################
     # CONDITION_ITEM_COMPONENT ::== <name>TEMPLATE_EXPRESSION</name> | <value>TEMPLATE_EXPRESSION</value> | <loop/> | TEMPLATE_EXPRESSION
@@ -429,7 +415,7 @@ class TemplateConditionNode(TemplateNode):
 
     def resolve_type1_condition(self, bot, clientid):
         try:
-            value = self._get_property_value(bot, clientid, self.name, self.local)
+            value = TemplateGetNode.get_property_value(bot, clientid, self.local, self.name)
 
             # Condition comparison is always case insensetive
             if value.upper() == self.value.resolve(bot, clientid).upper():
@@ -440,13 +426,14 @@ class TemplateConditionNode(TemplateNode):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
+
         except Exception as excep:
             logging.exception(excep)
             return ""
 
     def resolve_type2_condition(self, bot, clientid):
         try:
-            value = self._get_property_value(bot, clientid, self.name, self.local)
+            value = TemplateGetNode.get_property_value(bot, clientid, self.local, self.name)
 
             for condition in self.children:
                 if condition.is_default() is False:
@@ -483,7 +470,7 @@ class TemplateConditionNode(TemplateNode):
     def resolve_type3_condition(self, bot, clientid):
         try:
             for condition in self.children:
-                value = self._get_property_value(bot, clientid, condition.name, condition.local)
+                value = TemplateGetNode.get_property_value(bot, clientid, condition.local, condition.name)
                 if condition.value is not None:
                     condition_value = condition.value.resolve(bot, clientid)
 

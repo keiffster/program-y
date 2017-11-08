@@ -1,0 +1,44 @@
+BIKINI:hasPurpose:to wear at the beach
+BIKINI:hasSize:4
+BIKINI:hasSyllables:3
+BIKINI:isa:Clothing
+BIKINI:lifeArea:Physical
+CLOTHES:hasPurpose:to cover the body
+CLOTHES:hasSize:5
+CLOTHES:hasSyllables:1
+CLOTHES:isa:Clothing
+CLOTHES:lifeArea:Physical
+BOOT:hasPurpose:to cover the feet
+BOOT:hasSize:4
+BOOT:hasSyllables:1
+BOOT:isa:Clothing
+BOOT:lifeArea:Physical
+COTTON:hasPurpose:to provide material for clothing
+COTTON:hasSize:0
+COTTON:hasSyllables:2
+COTTON:isa:Textile
+COTTON:lifeArea:Physical
+SHIRT:hasPurpose:to cover the upper body
+SHIRT:hasSize:4
+SHIRT:hasSyllables:1
+SHIRT:isa:Clothing
+SHIRT:lifeArea:Physical
+SHOE:hasPurpose:to cover the feet
+SHOE:hasSize:4
+SHOE:hasSyllables:1
+SHOE:isa:Clothing
+SHOE:lifeArea:Physical
+DRESS:hasPurpose:to cover the body
+DRESS:hasSize:4
+DRESS:hasSyllables:1
+DRESS:isa:Clothing
+DRESS:lifeArea:Physical
+FASHION:hasPurpose:to dress attractively
+FASHION:hasSize:4
+FASHION:hasSyllables:2
+FASHION:isa:Clothing
+FASHION:lifeArea:Physical
+STYLE:hasPurpose:to have class
+STYLE:hasSize:0
+STYLE:hasSyllables:1
+STYLE:lifeArea:Recreation

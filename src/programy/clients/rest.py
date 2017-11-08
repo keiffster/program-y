@@ -35,7 +35,7 @@ class RestBotClient(BotClient):
 
     def load_api_keys(self):
         if self.configuration.client_configuration.api_key_file is not None:
-            with open(self.configuration.client_configuration.api_key_file, "r+") as api_key_file:
+            with open(self.configuration.client_configuration.api_key_file, "r") as api_key_file:
                 for api_key in api_key_file:
                     self.api_keys.append(api_key.strip())
 
@@ -74,23 +74,14 @@ class RestBotClient(BotClient):
 
         return None, None
 
-    def ask_question(self, sessionid, question):
-        return self.bot.ask_question(sessionid, question)
-
     def format_success_response(self, sessionid, question, answer):
         return {"question": question, "answer": answer, "sessionid": sessionid}
 
     def format_error_response(self, sessionid, question, error):
         return {"question": question, "answer": self.bot.default_response, "sessionid": sessionid, "error": error}
 
-    def process_response(self, sessionid, question, answer):
-        if answer is None:
-            answer = self.bot.default_response
-            self.log_unknown_response(question)
-        else:
-            self.log_response(question, answer)
-
-        return self.format_success_response(sessionid, question, answer)
+    def ask_question(self, sessionid, question):
+        return self.bot.ask_question(sessionid, question, responselogger=self)
 
     def process_request(self, request):
         question = "Unknown"
@@ -105,7 +96,7 @@ class RestBotClient(BotClient):
 
             response = self.ask_question(sessionid, question)
 
-            return self.process_response(sessionid, question, response), 200
+            return self.format_success_response(sessionid, question, response), 200
 
         except Exception as excep:
 

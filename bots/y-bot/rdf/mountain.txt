@@ -1,0 +1,6 @@
+EVEREST:hasPurpose:to challenge us to climb
+EVEREST:hasSize:9
+EVEREST:hasSyllables:3
+EVEREST:isa:Geographic Location
+EVEREST:isa:Mountain
+EVEREST:lifeArea:Education

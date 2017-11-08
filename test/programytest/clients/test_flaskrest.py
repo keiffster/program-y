@@ -18,7 +18,7 @@ class MockFlaskRestBotClient(FlaskRestBotClient):
         self.aborted = True
         raise Exception("Pretending to abort!")
 
-    def ask_question(self, sessionid, question):
+    def ask_question(self, sessionid, question, responselogger=None):
         if self.ask_question_exception is True:
             raise Exception("Something bad happened")
         return self.answer
@@ -182,28 +182,6 @@ class RestBotClientTests(unittest.TestCase):
         self.assertEquals("Hello", response['question'])
         self.assertEquals("", response['answer'])
         self.assertEquals("Something Bad", response['error'])
-
-    def test_process_response(self):
-        arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        response = client.process_response("1234567890", "Hello", "Hi")
-        self.assertIsNotNone(response)
-        self.assertEquals("1234567890", response['sessionid'])
-        self.assertEquals("Hello", response['question'])
-        self.assertEquals("Hi", response['answer'])
-
-    def test_process_response_no_anwser(self):
-        arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        response = client.process_response("1234567890", "Hello", None)
-        self.assertIsNotNone(response)
-        self.assertEquals("1234567890", response['sessionid'])
-        self.assertEquals("Hello", response['question'])
-        self.assertEquals("", response['answer'])
 
     def test_process_request(self):
         arguments = MockArgumentParser()

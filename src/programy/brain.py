@@ -292,7 +292,7 @@ class Brain(object):
                 logging.warning("No configuration setting for variables")
 
     def _load_rdf(self, brain_configuration):
-        if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files is not None:
+        if brain_configuration.files.rdf_files is not None and brain_configuration.files.rdf_files.files:
             total = self._rdf_collection.load(brain_configuration.files.rdf_files)
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Loaded a total of %d rdf files", total)
@@ -390,6 +390,8 @@ class Brain(object):
         return self.preprocessors.process(bot, clientid, question)
 
     def parse_last_sentences_from_response(self, response):
+        # TODO Issue here when the response is more than just a simple sentence
+        # If the response contains punctuation such as "Hello. There" then THAT is none
         response = re.sub(r'<\s*br\s*/>\s*', ".", response)
         response = re.sub(r'<br></br>*', ".", response)
         sentences = response.split(".")
@@ -397,6 +399,9 @@ class Brain(object):
         last_sentence = sentences[-1]
         that_pattern = TextUtils.strip_all_punctuation(last_sentence)
         that_pattern = that_pattern.strip()
+        # TODO Added this to catch a failed sentence
+        if that_pattern == "":
+            that_pattern = '*'
         return that_pattern
 
     def load_oob_processors(self, brain_configuration):
@@ -476,7 +481,7 @@ class Brain(object):
     def ask_question(self, bot, clientid, sentence, srai=False):
 
         if self.authentication is not None:
-            if self.authentication.authenticate(clientid) is False:
+            if self.authentication.authenticate(bot, clientid) is False:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("[%s] failed authentication!")
                 return self.authentication.configuration.denied_srai

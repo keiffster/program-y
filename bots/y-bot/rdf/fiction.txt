@@ -1,0 +1,85 @@
+Alien:isa:Fictional Character
+BATMAN:hasPurpose:to fight crime
+BATMAN:hasSize:7
+BATMAN:hasSyllables:2
+BATMAN:isa:Fictional Character
+BATMAN:isa:Superhero
+BATMAN:lifeArea:Recreation
+GENIE:hasPurpose:to grant wishes
+GENIE:hasSize:7
+GENIE:hasSyllables:1
+GENIE:isa:Fictional Character
+GENIE:isa:Fictional Person
+GENIE:lifeArea:Recreation
+ZOMBIE:hasPurpose:to scare people
+ZOMBIE:hasSize:7
+ZOMBIE:hasSyllables:2
+ZOMBIE:isa:Fictional Character
+ZOMBIE:isa:Living Dead
+ZOMBIE:lifeArea:Recreation
+DRAGON:hasPurpose:to spew fire
+DRAGON:hasSize:9
+DRAGON:hasSyllables:2
+DRAGON:isa:Fictional Character
+DRAGON:isa:Flying Lizard
+DRAGON:lifeArea:Recreation
+DUMBO:hasPurpose:to fly with his ears
+DUMBO:hasSize:0
+DUMBO:hasSyllables:2
+DUMBO:isa:Fictional Character
+DUMBO:isa:Flying Elephant
+DUMBO:lifeArea:Recreation
+SUPERMAN:hasPurpose:to fight supervillians
+SUPERMAN:hasSize:7
+SUPERMAN:hasSyllables:3
+SUPERMAN:isa:Alien
+SUPERMAN:isa:Fictional Character
+SUPERMAN:lifeArea:Recreation
+TERMINATOR:hasPurpose:to fight mankind
+TERMINATOR:hasSize:7
+TERMINATOR:hasSyllables:4
+TERMINATOR:isa:Fictional Character
+TERMINATOR:isa:Robot
+TERMINATOR:lifeArea:Recreation
+WIZARD:hasPurpose:to cast magic spells
+WIZARD:hasSize:7
+WIZARD:hasSyllables:2
+WIZARD:isa:Fictional Character
+WIZARD:isa:Fictional Person
+WIZARD:lifeArea:Recreation
+Superhero:isa:Fictional Character
+PIRATE:hasPurpose:to plunder
+PIRATE:hasSize:7
+PIRATE:hasSyllables:2
+PIRATE:isa:Fictional Character
+PIRATE:lifeArea:Recreation
+PANDORA:hasPurpose:to open her box
+PANDORA:hasSize:7
+PANDORA:hasSyllables:3
+PANDORA:isa:Mythology
+PANDORA:lifeArea:Education
+Living Dead:isa:Fictional Character
+MONSTER:hasPurpose:to scare people
+MONSTER:hasSize:9
+MONSTER:hasSyllables:1
+MONSTER:isa:Fictional Character
+MONSTER:lifeArea:Recreation
+GHOST:hasPurpose:to haunt us
+GHOST:hasSize:7
+GHOST:hasSyllables:1
+GHOST:isa:Entity
+GHOST:lifeArea:Spiritual
+Fictional Person:isa:Fictional Character
+Flying Elephant:isa:Fictional Character
+Flying Lizard:isa:Fictional Character
+GIANT:hasPurpose:to be a very large person
+GIANT:hasSize:8
+GIANT:hasSyllables:2
+GIANT:isa:Fictional Character
+GIANT:isa:Oversize Person
+GIANT:lifeArea:Recreation
+Oversize Person:isa:Fictional Character
+MAGIC:hasPurpose:to make the impossible happen
+MAGIC:hasSize:0
+MAGIC:hasSyllables:2
+MAGIC:lifeArea:Recreation

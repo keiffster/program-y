@@ -48,27 +48,13 @@ class ConsoleBotClient(BotClient):
         self.display_response(self.bot.brain.post_process_response(self.bot, self.clientid,
                                                                    self.bot.get_initial_question(self.clientid)))
 
-    def display_unknown_response(self, question):
-        self.display_response(self.bot.default_response)
-        self.log_unknown_response(question)
-
     def display_response(self, response, output_func=print):
         output_func(response)
 
-    def ask_question(self, question):
-        return self.bot.ask_question(self.clientid, question)
-
     def process_question_answer(self):
         question = self.get_question()
-
-        response = self.ask_question(question)
-
-        if response is None:
-            self.display_unknown_response(question)
-        else:
-            self.display_response(response)
-            self.log_response(question, response)
-
+        response = self.bot.ask_question(self.clientid, question, responselogger=self)
+        self.display_response(response)
         return question
 
     def run(self):

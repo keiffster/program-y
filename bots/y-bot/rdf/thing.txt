@@ -1,0 +1,177 @@
+BOX:hasPurpose:to store things
+BOX:hasSize:5
+BOX:hasSyllables:1
+BOX:isa:Container
+BOX:lifeArea:Physical
+
+CARD:hasPurpose:to play card games
+CARD:hasSize:4
+CARD:hasSyllables:1
+CARD:isa:Paper
+CARD:isa:Tool
+CARD:lifeArea:Recreation
+
+CORNER:hasPurpose:to join two boundaries
+CORNER:hasSize:0
+CORNER:hasSyllables:1
+CORNER:lifeArea:Education
+
+DOOR:hasPurpose:to cover the entrance to a room or building
+DOOR:hasSize:7
+DOOR:hasSyllables:1
+DOOR:isa:Entrance or Exit
+DOOR:lifeArea:Physical
+
+DRAWING:hasPurpose:to represent in a picture
+DRAWING:hasSize:5
+DRAWING:hasSyllables:2
+DRAWING:isa:Picture
+DRAWING:lifeArea:Creative
+
+DVD:hasPurpose:to play videos
+DVD:hasSize:4
+DVD:hasSyllables:3
+DVD:isa:Entertainment
+DVD:lifeArea:Recreation
+
+FIGURE:hasPurpose:to illustrate with a diagram
+FIGURE:hasSize:0
+FIGURE:hasSyllables:2
+FIGURE:lifeArea:Education
+
+FILM:hasPurpose:to provide entertainment
+FILM:hasSize:0
+FILM:hasSyllables:1
+FILM:lifeArea:Recreation
+
+HOLE:hasPurpose:to be a cavity
+HOLE:hasSize:0
+HOLE:hasSyllables:1
+HOLE:lifeArea:Physical
+
+HOTLINE:hasPurpose:to make emergency calls
+HOTLINE:hasSize:0
+HOTLINE:hasSyllables:2
+HOTLINE:isa:Tool
+HOTLINE:lifeArea:Business
+
+MEDIA:hasPurpose:to provide information
+MEDIA:hasSize:0
+MEDIA:hasSyllables:3
+MEDIA:lifeArea:Recreation
+
+NEWS:hasPurpose:to provide current information
+NEWS:hasSize:0
+NEWS:hasSyllables:1
+NEWS:lifeArea:Social
+
+PART:hasPurpose:to be a piece of something
+PART:hasSize:0
+PART:hasSyllables:1
+PART:lifeArea:Physical
+
+PHOTO:hasPurpose:to remember a scene
+PHOTO:hasSize:3
+PHOTO:hasSyllables:2
+PHOTO:isa:Picture
+PHOTO:lifeArea:Physical
+
+PIC:hasPurpose:to remember a scene
+PIC:hasSize:3
+PIC:hasSyllables:1
+PIC:isa:Picture
+PIC:lifeArea:Physical
+
+PICTURE:hasPurpose:to remember a scene
+PICTURE:hasSize:5
+PICTURE:hasSyllables:2
+PICTURE:isa:Memory Storage
+PICTURE:lifeArea:Physical
+
+SHADOW:hasPurpose:to show what is blocked by light
+SHADOW:hasSize:7
+SHADOW:hasSyllables:2
+SHADOW:isa:Light Effect
+SHADOW:isa:Physical Effect
+SHADOW:lifeArea:Physical
+
+SHEET:hasPurpose:to make a bed
+SHEET:hasSize:0
+SHEET:hasSyllables:1
+SHEET:lifeArea:Physical
+
+SOAP:hasPurpose:to make us clean
+SOAP:hasSize:4
+SOAP:hasSyllables:1
+SOAP:lifeArea:Physical
+
+STORY:hasPurpose:to entertain us
+STORY:hasSize:0
+STORY:hasSyllables:2
+STORY:isa:Creative Work
+STORY:lifeArea:Creative
+
+STRING:hasPurpose:to tie things up
+STRING:hasSize:4
+STRING:hasSyllables:1
+STRING:lifeArea:Physical
+
+TABLE:hasPurpose:to work or eat on
+TABLE:hasSize:6
+TABLE:hasSyllables:2
+TABLE:lifeArea:Physical
+
+TAPE:hasPurpose:to measure or connect
+TAPE:hasSize:0
+TAPE:hasSyllables:1
+TAPE:lifeArea:Education
+
+TELEPHONE:hasPurpose:to make calls
+TELEPHONE:hasSize:4
+TELEPHONE:hasSyllables:3
+TELEPHONE:lifeArea:Physical
+
+THING:hasPurpose:to be an entity
+THING:hasSize:0
+THING:hasSyllables:1
+THING:lifeArea:Physical
+
+TIRE:hasPurpose:to make a wheel smooth
+TIRE:hasSize:5
+TIRE:hasSyllables:1
+TIRE:isa:Auto Part
+TIRE:lifeArea:Physical
+
+TUBE:hasPurpose:to transport liquid
+TUBE:hasSize:0
+TUBE:hasSyllables:1
+TUBE:lifeArea:Physical
+
+VIDEO:hasPurpose:to record and playback TV
+VIDEO:hasSize:0
+VIDEO:hasSyllables:3
+VIDEO:isa:Creative Work
+VIDEO:lifeArea:Recreation
+
+WALL:hasPurpose:to form a boundary
+WALL:hasSize:8
+WALL:hasSyllables:1
+WALL:lifeArea:Physical
+
+WEB:hasPurpose:to connect many objects
+WEB:hasSize:0
+WEB:hasSyllables:1
+WEB:lifeArea:Education
+
+WIRE:hasPurpose:to conduct electricity
+WIRE:hasSize:3
+WIRE:hasSyllables:1
+WIRE:isa:Material
+WIRE:lifeArea:Physical
+
+WOOD:hasPurpose:to build things
+WOOD:hasSize:3
+WOOD:hasSyllables:1
+WOOD:isa:Material
+WOOD:lifeArea:Physical
+

@@ -1,0 +1,36 @@
+RAIN:hasPurpose:to water the earth
+RAIN:hasSize:0
+RAIN:hasSyllables:1
+RAIN:isa:Water Droplets
+RAIN:isa:Weather Effect
+RAIN:lifeArea:Physical
+RAINBOW:hasPurpose:to display a beautiful spectrum in the sky
+RAINBOW:hasSize:9
+RAINBOW:hasSyllables:2
+RAINBOW:isa:Light Effect
+RAINBOW:isa:Physical Effect
+RAINBOW:lifeArea:Physical
+SNOW:hasPurpose:to cover the ground in white
+SNOW:hasSize:0
+SNOW:hasSyllables:1
+SNOW:isa:Frozen Water Crystals
+SNOW:isa:Weather Effect
+SNOW:lifeArea:Physical
+Water Droplets:isa:Weather Effect
+WEATHER:hasPurpose:to make meteorological effects
+WEATHER:hasSize:0
+WEATHER:hasSyllables:2
+WEATHER:lifeArea:Physical
+WIND:hasPurpose:to blow air
+WIND:hasSize:0
+WIND:hasSyllables:1
+WIND:isa:Weather Effect
+WIND:lifeArea:Physical
+Frozen Water Crystals:isa:Weather Effect
+Frozen Water:isa:Water
+ICE:hasPurpose:to be a solid form of water
+ICE:hasSize:0
+ICE:hasSyllables:1
+ICE:isa:Frozen Water
+ICE:isa:Water
+ICE:lifeArea:Physical

@@ -1,0 +1,168 @@
+ARLINGTON:hasPurpose:to form a city
+ARLINGTON:hasSize:10
+ARLINGTON:hasSyllables:3
+ARLINGTON:isa:City
+ARLINGTON:isa:Geographic Location
+ARLINGTON:lifeArea:Education
+ATLANTA:hasPurpose:to form a city
+ATLANTA:hasSize:10
+ATLANTA:hasSyllables:3
+ATLANTA:isa:City
+ATLANTA:isa:Geographic Location
+ATLANTA:lifeArea:Education
+AUSTIN:hasPurpose:to form a city
+AUSTIN:hasSize:10
+AUSTIN:hasSyllables:2
+AUSTIN:isa:City
+AUSTIN:isa:Geographic Location
+AUSTIN:lifeArea:Education
+BOSTON:hasPurpose:to form a city
+BOSTON:hasSize:10
+BOSTON:hasSyllables:2
+BOSTON:isa:City
+BOSTON:isa:Geographic Location
+BOSTON:lifeArea:Education
+BURBANK:hasPurpose:to form a city
+BURBANK:hasSize:10
+BURBANK:hasSyllables:2
+BURBANK:isa:City
+BURBANK:isa:Geographic Location
+BURBANK:lifeArea:Education
+CHICAGO:hasPurpose:to form a city
+CHICAGO:hasSize:10
+CHICAGO:hasSyllables:3
+CHICAGO:isa:City
+CHICAGO:isa:Geographic Location
+CHICAGO:lifeArea:Education
+CINCINNATI:hasPurpose:to form a city
+CINCINNATI:hasSize:10
+CINCINNATI:hasSyllables:4
+CINCINNATI:isa:City
+CINCINNATI:isa:Geographic Location
+CINCINNATI:lifeArea:Education
+CLEVELAND:hasPurpose:to form a city
+CLEVELAND:hasSize:10
+CLEVELAND:hasSyllables:2
+CLEVELAND:isa:City
+CLEVELAND:isa:Geographic Location
+CLEVELAND:lifeArea:Education
+DALLAS:hasPurpose:to form a city
+DALLAS:hasSize:10
+DALLAS:hasSyllables:2
+DALLAS:isa:City
+DALLAS:isa:Geographic Location
+DALLAS:lifeArea:Education
+DAVENPORT:hasPurpose:to form a city
+DAVENPORT:hasSize:10
+DAVENPORT:hasSyllables:3
+DAVENPORT:isa:City
+DAVENPORT:isa:Geographic Location
+DAVENPORT:lifeArea:Education
+INDIANAPOLIS:hasPurpose:to form a city
+INDIANAPOLIS:hasSize:10
+INDIANAPOLIS:hasSyllables:6
+INDIANAPOLIS:isa:City
+INDIANAPOLIS:isa:Geographic Location
+INDIANAPOLIS:lifeArea:Education
+JACKSON:hasPurpose:to form a city
+JACKSON:hasSize:10
+JACKSON:hasSyllables:2
+JACKSON:isa:City
+JACKSON:isa:Geographic Location
+JACKSON:lifeArea:Education
+JACKSONVILLE:hasPurpose:to form a city
+JACKSONVILLE:hasSize:10
+JACKSONVILLE:hasSyllables:3
+JACKSONVILLE:isa:City
+JACKSONVILLE:isa:Geographic Location
+JACKSONVILLE:lifeArea:Education
+LAS VEGAS:hasPurpose:to form a city
+LAS VEGAS:hasSize:10
+LAS VEGAS:hasSyllables:3
+LAS VEGAS:isa:City
+LAS VEGAS:isa:Georgaphical Feature
+LAS VEGAS:lifeArea:Education
+LEXINGTON:hasPurpose:to form a city
+LEXINGTON:hasSize:10
+LEXINGTON:hasSyllables:3
+LEXINGTON:isa:City
+LEXINGTON:isa:Geographic Location
+LEXINGTON:lifeArea:Education
+MANHATTAN:hasPurpose:to be the center of New York City
+MANHATTAN:hasSize:10
+MANHATTAN:hasSyllables:3
+MANHATTAN:isa:Borough
+MANHATTAN:isa:Geographic Location
+MANHATTAN:lifeArea:Education
+SACRAMENTO:hasPurpose:to form a city
+SACRAMENTO:hasSize:10
+SACRAMENTO:hasSyllables:4
+SACRAMENTO:isa:City
+SACRAMENTO:isa:Geographic Location
+SACRAMENTO:lifeArea:Education
+MIAMI:hasPurpose:to form a city
+MIAMI:hasSize:10
+MIAMI:hasSyllables:3
+MIAMI:isa:City
+MIAMI:isa:Geographic Location
+MIAMI:lifeArea:Education
+MILWAUKEE:hasPurpose:to form a city
+MILWAUKEE:hasSize:10
+MILWAUKEE:hasSyllables:3
+MILWAUKEE:isa:City
+MILWAUKEE:isa:Geographic Location
+MILWAUKEE:lifeArea:Education
+OAKLAND:hasPurpose:to form a city
+OAKLAND:hasSize:10
+OAKLAND:hasSyllables:2
+OAKLAND:isa:City
+OAKLAND:isa:Geographic Location
+OAKLAND:lifeArea:Education
+ORLANDO:hasPurpose:to form a city
+ORLANDO:hasSize:10
+ORLANDO:hasSyllables:3
+ORLANDO:isa:City
+ORLANDO:isa:Geographic Location
+ORLANDO:lifeArea:Education
+PORTLAND:hasPurpose:to form a city
+PORTLAND:hasSize:10
+PORTLAND:hasSyllables:2
+PORTLAND:isa:City
+PORTLAND:isa:Geographic Location
+PORTLAND:lifeArea:Education
+PROVIDENCE:hasPurpose:to form a city
+PROVIDENCE:hasSize:10
+PROVIDENCE:hasSyllables:3
+PROVIDENCE:isa:City
+PROVIDENCE:isa:Geographic Location
+PROVIDENCE:lifeArea:Education
+SPRINGFIELD:hasPurpose:to form a city
+SPRINGFIELD:hasSize:10
+SPRINGFIELD:hasSyllables:2
+SPRINGFIELD:isa:City
+SPRINGFIELD:isa:Geographic Location
+SPRINGFIELD:lifeArea:Education
+PHOENIX:hasPurpose:to form a city
+PHOENIX:hasSize:10
+PHOENIX:hasSyllables:2
+PHOENIX:isa:City
+PHOENIX:isa:Geographic Location
+PHOENIX:lifeArea:Education
+PHILADELPHIA:hasPurpose:to form a city
+PHILADELPHIA:hasSize:10
+PHILADELPHIA:hasSyllables:5
+PHILADELPHIA:isa:City
+PHILADELPHIA:isa:Geographic Location
+PHILADELPHIA:lifeArea:Education
+PASADENA:hasPurpose:to form a city
+PASADENA:hasSize:10
+PASADENA:hasSyllables:4
+PASADENA:isa:City
+PASADENA:isa:Geographic Location
+PASADENA:lifeArea:Education
+RENO:hasPurpose:to form a city
+RENO:hasSize:10
+RENO:hasSyllables:2
+RENO:isa:City
+RENO:isa:Geographic Location
+RENO:lifeArea:Education

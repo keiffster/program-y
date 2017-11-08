@@ -1,0 +1,18 @@
+LEGO:hasPurpose:to build toys
+LEGO:hasSize:3
+LEGO:hasSyllables:2
+LEGO:isa:Toy
+LEGO:lifeArea:Recreation
+DOLL:hasPurpose:to play with
+DOLL:hasSize:4
+DOLL:hasSyllables:1
+DOLL:isa:Toy
+DOLL:lifeArea:Recreation
+DOMINO:hasPurpose:to play a game
+DOMINO:hasSize:3
+DOMINO:hasSyllables:3
+DOMINO:lifeArea:Recreation
+TOY:hasPurpose:to occupy children
+TOY:hasSize:4
+TOY:hasSyllables:1
+TOY:lifeArea:Recreation

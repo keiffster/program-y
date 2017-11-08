@@ -63,12 +63,13 @@ class XmppClient(sleekxmpp.ClientXMPP):
                     logging.debug("Missing 'userid' from XMPP message")
                 return
 
-            response = self.bot_client.bot.ask_question(userid, question)
+            response = self.bot_client.bot.ask_question(userid, question, responselogger=self.bot_client)
             self.send_response(msg, response)
 
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.debug("Invalid XMPP message")
+                self.send_response(msg, "Sorry, no idea")
 
     def register_xep_plugins(self, configuration):
         if configuration.client_configuration.xep_0030 is True:

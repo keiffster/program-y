@@ -70,13 +70,7 @@ def ask():
     sessionid = request.args['sessionid']
 
     try:
-        response = WEBCHAT_CLIENT.bot.ask_question(sessionid, question)
-        if response is None:
-            answer = WEBCHAT_CLIENT.bot.default_response
-            WEBCHAT_CLIENT.log_unknown_response(question)
-        else:
-            answer = response
-            WEBCHAT_CLIENT.log_response(question, response)
+        answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
 
         response = {"question": question,
                     "answer": answer,
@@ -86,6 +80,8 @@ def ask():
         return jsonify({'response': response})
 
     except Exception as excep:
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.exception(excep)
 
         response = {"question": question,
                     "answer": WEBCHAT_CLIENT.bot.default_response,

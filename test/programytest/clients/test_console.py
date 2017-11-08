@@ -75,14 +75,6 @@ class ConsoleBotClientTests(unittest.TestCase):
         client.display_startup_messages()
         self.assertEquals("None version None, initiated NoneHello", client.response)
 
-    def test_display_unknown_response(self):
-        arguments = MockArgumentParser()
-        client =    MockConsoleBotClient(arguments)
-        self.assertIsNotNone(client)
-        client._arguments.context = True
-        client.display_unknown_response("Question")
-        self.assertEquals("", client.response)
-
     def test_process_question_answer(self):
         arguments = MockArgumentParser()
         client = MockConsoleBotClient(arguments)

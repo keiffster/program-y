@@ -1,0 +1,24 @@
+SOUTH:hasPurpose:to specify a direction
+SOUTH:hasSize:0
+SOUTH:hasSyllables:1
+SOUTH:isa:Compass Point
+SOUTH:isa:Direction
+SOUTH:lifeArea:Physical
+NORTH:hasPurpose:to specify a direction
+NORTH:hasSize:0
+NORTH:hasSyllables:1
+NORTH:isa:Compass Point
+NORTH:isa:Direction
+NORTH:lifeArea:Physical
+EAST:hasPurpose:to specify a direction
+EAST:hasSize:0
+EAST:hasSyllables:1
+EAST:isa:Compass Point
+EAST:isa:Direction
+EAST:lifeArea:Physical
+WEST:hasPurpose:to specify a direction
+WEST:hasSize:0
+WEST:hasSyllables:1
+WEST:isa:Compass Point
+WEST:isa:Direction
+WEST:lifeArea:Physical

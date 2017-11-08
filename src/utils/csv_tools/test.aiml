@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+<category>
+	<pattern>HELLO</pattern>
+	<template>
+		Hello there
+	</template>
+</category>
+
+<category>
+	<pattern>HELLO *</pattern>
+	<template>
+		<srai>HELLO</srai>
+	</template>
+</category>
+
+<topic name="FAREWELL">
+	<category>
+		<pattern>BYE</pattern>
+		<template>
+			See ya
+		</template>
+	</category>
+</topic>
+
+<category>
+	<pattern>MAYBE</pattern>
+	<that>THINKING</that>
+	<template>
+		OK THEN
+	</template>
+</category>
+
+<topic name="SINGING">
+	<category>
+		<pattern>LA LA LA</pattern>
+		<that>SING A SONG</that>
+		<template>
+			Ouch that hurts
+		</template>
+	</category>
+</topic>
+
+</aiml>

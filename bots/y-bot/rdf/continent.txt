@@ -1,0 +1,32 @@
+AFRICA:hasPurpose:to form a continent
+AFRICA:hasSize:11
+AFRICA:hasSyllables:3
+AFRICA:isa:Continent
+AFRICA:isa:Geographic Location
+AFRICA:lifeArea:Education
+ANTARCTICA:hasPurpose:to form a continent
+ANTARCTICA:hasSize:11
+ANTARCTICA:isa:Continent
+ANTARCTICA:isa:Geographic Location
+ANTARCTICA:lifeArea:Education
+ASIA:hasPurpose:to form a continent
+ASIA:hasSize:11
+ASIA:isa:Continent
+ASIA:isa:Geographic Location
+ASIA:lifeArea:Education
+SOUTH AMERICA:hasPurpose:to form a continent
+SOUTH AMERICA:hasSize:11
+SOUTH AMERICA:isa:Continent
+SOUTH AMERICA:isa:Geographic Location
+SOUTH AMERICA:lifeArea:Education
+NORTH AMERICA:hasPurpose:to form a continent
+NORTH AMERICA:hasSize:11
+NORTH AMERICA:isa:Continent
+NORTH AMERICA:isa:Geographic Location
+NORTH AMERICA:lifeArea:Education
+Continent:isa:Geographic Location
+EUROPE:hasPurpose:to form a continent
+EUROPE:hasSize:11
+EUROPE:isa:Continent
+EUROPE:isa:Geographic Location
+EUROPE:lifeArea:Education

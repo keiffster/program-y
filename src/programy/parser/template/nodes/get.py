@@ -54,76 +54,110 @@ class TemplateGetNode(TemplateNode):
     def tuples(self, tuples):
         self._tuples = tuples
 
-    def resolve_variable(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
+    @staticmethod
+    def get_default_value(bot):
+        value = bot.brain.properties.property("default-get")
+        if value is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("No property defined for default-get")
 
-        if self.local is True:
-            if bot.get_conversation(clientid).has_current_question():
-                value = bot.get_conversation(clientid).current_question().property(name)
-            else:
-                value = None
+            value = bot.brain.configuration.defaults.default_get
             if value is None:
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("No local var for %s, default-get used", name)
-                value = bot.brain.properties.property("default-get")
-                if value is None:
-                    value = bot.brain.configuration.defaults.default_get
-                    if value is None:
-                        if logging.getLogger().isEnabledFor(logging.ERROR):
-                            logging.error("No value for default-get defined, empty string returned")
-                        value = ""
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No value defined for default default-get, returning 'unknown'")
+                value = "unknown"
+
+        return value
+
+    @staticmethod
+    def get_property_value(bot, clientid, local, name):
+
+        if local is True:
+
+            value = None
+            #TODO Why would you need this test, when is get_conversation(clientid) == None ?
+            if bot.get_conversation(clientid) is not None:
+                if bot.get_conversation(clientid).has_current_question():
+                    value = bot.get_conversation(clientid).current_question().property(name)
+
         else:
-            if bot.brain.dynamics.is_dynamic_var(name) is True:
+
+            if name is not None and bot.brain.dynamics.is_dynamic_var(name) is True:
                 value = bot.brain.dynamics.dynamic_var(bot, clientid, name)
             else:
                 value = bot.get_conversation(clientid).property(name)
                 if value is None:
                     value = bot.brain.properties.property(name)
-                    if value is None:
-                        value = bot.brain.properties.property("default-property")
-                        if value is None:
-                            value = bot.brain.configuration.defaults.default_property
-                            if value is None:
-                                if logging.getLogger().isEnabledFor(logging.ERROR):
-                                    logging.error("No value for default-get defined, empty string returned")
-                                value = ""
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+
+        if value is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("No property for [%s]"%name)
+
+            value = TemplateGetNode.get_default_value(bot)
 
         return value
 
+    def resolve_variable(self, bot, clientid):
+        name = self.name.resolve(bot, clientid)
+        value = TemplateGetNode.get_property_value(bot, clientid, self.local, name)
+        if self.local:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
+        else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+        return value
+
     def decode_tuples(self, bot, tuples):
-        return json.loads(tuples)
-        #return pickle._dumps(tuples)
+        if isinstance(tuples, str):
+            return json.loads(tuples)
+        else:
+            return tuples
 
     def resolve_tuple(self, bot, clientid):
         variables = self._name.resolve(bot, clientid).split(" ")
 
         raw_tuples = self._tuples.resolve(bot, clientid)
-        tuples = self.decode_tuples(bot, raw_tuples)
+        try:
+            tuples = self.decode_tuples(bot, raw_tuples)
+        except:
+            tuples = []
 
         resolved = ""
         if tuples:
-            if len(tuples) == 1:
-                for var in variables:
-                    if tuples[0][0] == var:
-                        resolved += tuples[0][1]
-            else:
-                space = False
-                for pair in tuples:
-                    if space is True:
+
+            if isinstance(tuples, list): # Is tuples an array of results in the form [[[subj, val],[pred, val],[obj, val]], [[subj, val],[pred, val],[obj, val]]...]
+
+                if variables: #If we are asking for variables, pull out the vars
+                    for atuple in tuples:
+                        if isinstance(atuple[0], list) is True:
+                            for pair in atuple:
+                                for var in variables:
+                                    if pair[0] == var:
+                                        resolved += pair[1]
+                                        resolved += " "
+                        else:
+                            for var in variables:
+                                if atuple[0] == var:
+                                    resolved += atuple[1]
+                                    resolved += " "
+
+                else:
+                    for atuple in tuples:
+                        resolved += atuple[0][1]
                         resolved += " "
-                    for var in variables:
-                        if var == pair[0]:
-                            resolved += pair[1]
-                    space = True
+                        resolved += atuple[1][1]
+                        resolved += " "
+                        resolved += atuple[2][1]
+                        resolved += " "
+
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 
     def resolve_to_string(self, bot, clientid):
-        if self.tuples is None:
+        if self._tuples is None:
             value = self.resolve_variable(bot, clientid)
         else:
             value = self.resolve_tuple(bot, clientid)

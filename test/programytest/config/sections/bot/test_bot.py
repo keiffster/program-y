@@ -26,12 +26,21 @@ class BotConfigurationTests(unittest.TestCase):
             max_question_timeout: 60
             max_search_depth: 100
             max_search_timeout: 60
+            
             spelling:
               classname: programy.spelling.norvig.NorvigSpellingChecker
               alphabet: 'abcdefghijklmnopqrstuvwxyz'
               corpus: $BOT_ROOT/corpus.txt
               check_before: true
               check_and_retry: true
+              
+            conversations:
+              type: file
+              config_name: file_storage
+        
+            file_storage:
+              dir: $BOT_ROOT/conversations
+
         """, ConsoleConfiguration(), ".")
 
         bot_config = BotConfiguration()
@@ -54,6 +63,11 @@ class BotConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(bot_config.spelling)
         self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", bot_config.spelling.classname)
+
+        self.assertIsNotNone(bot_config.conversations)
+        self.assertEquals(bot_config.conversations.type, "file")
+        self.assertIsNotNone(bot_config.conversations.storage)
+        self.assertEquals(bot_config.conversations.storage.dir, "./conversations")
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -79,8 +93,8 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(bot_config.max_search_depth, 100)
         self.assertEqual(bot_config.max_search_timeout, -1)
         self.assertTrue(bot_config.override_properties)
-
         self.assertIsNotNone(bot_config.spelling)
+        self.assertIsNotNone(bot_config.conversations)
 
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()

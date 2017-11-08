@@ -1,0 +1,434 @@
+ACCOUNT:hasPurpose:to track money
+ACCOUNT:hasSize:0
+ACCOUNT:hasSyllables:2
+ACCOUNT:isa:Concept
+ACCOUNT:lifeArea:Finances
+ADVICE:hasPurpose:to transfer knowedge
+ADVICE:hasSize:0
+ADVICE:hasSyllables:1
+ADVICE:isa:Concept
+ADVICE:lifeArea:Spiritual
+AVERAGE:hasPurpose:to compute the middle
+AVERAGE:hasSize:0
+AVERAGE:hasSyllables:2
+AVERAGE:isa:Concept
+AVERAGE:lifeArea:Education
+BEING:hasPurpose:to exist
+BEING:hasSize:0
+BEING:hasSyllables:2
+BEING:isa:Concept
+BEING:lifeArea:Spiritual
+EVERYBODY:hasPurpose:to include every person
+EVERYBODY:hasSize:0
+EVERYBODY:hasSyllables:5
+EVERYBODY:isa:Concept
+EVERYBODY:lifeArea:Physical
+EVERYONE:hasPurpose:to include every person
+EVERYONE:hasSize:0
+EVERYONE:hasSyllables:4
+EVERYONE:isa:Concept
+EVERYONE:lifeArea:Physical
+EVERYTHING:hasPurpose:to include all things
+EVERYTHING:hasSize:0
+EVERYTHING:hasSyllables:4
+EVERYTHING:isa:Concept
+EVERYTHING:lifeArea:Physical
+EVER:hasPurpose:to be always
+EVER:hasSize:0
+EVER:hasSyllables:2
+EVER:isa:Concept
+EVER:lifeArea:Physical
+EXISTENCE:hasPurpose:to live
+EXISTENCE:hasSize:0
+EXISTENCE:hasSyllables:2
+EXISTENCE:isa:Concept
+EXISTENCE:lifeArea:Spiritual
+FALSEHOOD:hasPurpose:to express what is not ture
+FALSEHOOD:hasSize:0
+FALSEHOOD:hasSyllables:2
+FALSEHOOD:isa:Concept
+FALSEHOOD:isa:Logical Concept
+FALSEHOOD:lifeArea:Education
+BRAND:hasPurpose:to name a product
+BRAND:hasSize:0
+BRAND:hasSyllables:1
+BRAND:isa:Concept
+BRAND:lifeArea:Business
+CAUSE:hasPurpose:to make something happen
+CAUSE:hasSize:0
+CAUSE:hasSyllables:4
+CAUSE:isa:Concept
+CAUSE:lifeArea:Physical
+CENTER:hasPurpose:to be the middle
+CENTER:hasSize:0
+CENTER:hasSyllables:2
+CENTER:isa:Concept
+CENTER:lifeArea:Physical
+CHANGE:hasPurpose:to transition from one thing to another
+CHANGE:hasSize:0
+CHANGE:hasSyllables:1
+CHANGE:isa:Concept
+CHANGE:lifeArea:Physical
+CLUE:hasPurpose:to reveal information
+CLUE:hasSize:0
+CLUE:hasSyllables:1
+CLUE:isa:Concept
+CLUE:lifeArea:Education
+COLLECTION:hasPurpose:to gather items
+COLLECTION:hasSize:0
+COLLECTION:hasSyllables:3
+COLLECTION:isa:Concept
+COLLECTION:lifeArea:Education
+COMEBACK:hasPurpose:to recover from a setback
+COMEBACK:hasSize:0
+COMEBACK:hasSyllables:2
+COMEBACK:isa:Concept
+COMEBACK:lifeArea:Social
+END:hasPurpose:to be the last
+END:hasSize:0
+END:hasSyllables:2
+END:isa:Concept
+END:lifeArea:Physical
+FIRST:hasPurpose:to be the origin
+FIRST:hasSize:0
+FIRST:hasSyllables:1
+FIRST:isa:Concept
+FIRST:lifeArea:Physical
+FLOW:hasPurpose:to move smoothly
+FLOW:hasSize:0
+FLOW:hasSyllables:1
+FLOW:isa:Concept
+FLOW:lifeArea:Spiritual
+FORECAST:hasPurpose:to predict the future
+FORECAST:hasSize:0
+FORECAST:hasSyllables:2
+FORECAST:isa:Concept
+FORECAST:lifeArea:Physical
+FOREVER:hasPurpose:to never end
+FOREVER:hasSize:0
+FOREVER:hasSyllables:3
+FOREVER:isa:Concept
+FOREVER:lifeArea:Physical
+FREEDOM:hasPurpose:to make individual choices
+FREEDOM:hasSize:0
+FREEDOM:hasSyllables:1
+FREEDOM:isa:Concept
+FREEDOM:lifeArea:Spiritual
+FRONT:hasPurpose:to show a forward face
+FRONT:hasSize:0
+FRONT:hasSyllables:1
+FRONT:isa:Concept
+FRONT:lifeArea:Physical
+GATE:hasPurpose:to permit or deny entry
+GATE:hasSize:0
+GATE:hasSyllables:1
+GATE:isa:Concept
+GATE:lifeArea:Physical
+GATEWAY:hasPurpose:to permit or deny entry
+GATEWAY:hasSize:0
+GATEWAY:hasSyllables:2
+GATEWAY:isa:Concept
+GATEWAY:lifeArea:Physical
+HOPE:hasPurpose:to wish for better times
+HOPE:hasSize:0
+HOPE:hasSyllables:1
+HOPE:isa:Concept
+HOPE:lifeArea:Spiritual
+INTELLIGENCE:hasPurpose:to make us smart
+INTELLIGENCE:hasSize:0
+INTELLIGENCE:hasSyllables:4
+INTELLIGENCE:isa:Concept
+INTELLIGENCE:lifeArea:Education
+LIFE:hasPurpose:to give us existence in the world
+LIFE:hasPurpose:to make us alive
+LIFE:hasSize:0
+LIFE:hasSyllables:1
+LIFE:isa:Concept
+LIFE:isa:Spiritual State
+LIFE:lifeArea:Spiritual
+Logical Concept:isa:Concept
+LUCK:hasPurpose:to have good fortune
+LUCK:hasSize:0
+LUCK:hasSyllables:1
+LUCK:isa:Concept
+LUCK:lifeArea:Spiritual
+MISTAKE:hasPurpose:to make an error
+MISTAKE:hasSize:0
+MISTAKE:hasSyllables:2
+MISTAKE:isa:Concept
+MISTAKE:lifeArea:Spiritual
+NEED:hasPurpose:to have something to strive for
+NEED:hasSize:0
+NEED:hasSyllables:1
+NEED:isa:Concept
+NEED:lifeArea:Spiritual
+OPINION:hasPurpose:to express a belief
+OPINION:hasSize:0
+OPINION:hasSyllables:3
+OPINION:isa:Concept
+OPINION:lifeArea:Spiritual
+PASSION:hasPurpose:to be enthusiastic
+PASSION:hasSize:0
+PASSION:hasSyllables:2
+PASSION:isa:Concept
+PASSION:lifeArea:Spiritual
+SECRET:hasPurpose:to keep facts confidential
+SECRET:hasSize:0
+SECRET:hasSyllables:2
+SECRET:isa:Concept
+SECRET:lifeArea:Spiritual
+SELF:hasPurpose:to be a unique individual
+SELF:hasSize:7
+SELF:hasSyllables:1
+SELF:isa:Concept
+SELF:lifeArea:Spiritual
+SET:hasPurpose:to collect items
+SET:hasSize:0
+SET:hasSyllables:1
+SET:isa:Concept
+SET:isa:Math Concept
+SET:lifeArea:Education
+SHAME:hasPurpose:to make us feel guilty
+SHAME:hasSize:0
+SHAME:hasSyllables:1
+SHAME:isa:Concept
+SHAME:lifeArea:Spiritual
+SIGN:hasPurpose:to reveal information
+SIGN:hasSize:0
+SIGN:hasSyllables:1
+SIGN:isa:Concept
+SIGN:lifeArea:Spiritual
+Symbol:isa:Concept
+Symbol:isa:Math Concept
+THINKING:hasPurpose:to have thoughts
+THINKING:hasSize:0
+THINKING:hasSyllables:2
+THINKING:isa:Concept
+THINKING:lifeArea:Spiritual
+THOUGHT:hasPurpose:to be thinking
+THOUGHT:hasSize:0
+THOUGHT:hasSyllables:1
+THOUGHT:isa:Concept
+THOUGHT:lifeArea:Spiritual
+TRUTH:hasPurpose:to express what is true
+TRUTH:hasSize:0
+TRUTH:hasSyllables:1
+TRUTH:isa:Concept
+TRUTH:isa:Logical Concept
+TRUTH:lifeArea:Education
+WISH:hasPurpose:to hope for something
+WISH:hasSize:0
+WISH:hasSyllables:1
+WISH:isa:Concept
+WISH:lifeArea:Spiritual
+WORD:hasPurpose:to say things
+WORD:hasSize:0
+WORD:hasSyllables:1
+WORD:isa:Concept
+WORD:isa:Symbol
+WORD:lifeArea:Education
+BETA:hasPurpose:to form the second step
+BETA:hasSize:0
+BETA:hasSyllables:1
+BETA:isa:Symbol
+BETA:lifeArea:Education
+Choice:isa:Decision
+CLUB:hasPurpose:to provide a sense of belonging
+CLUB:hasSize:0
+CLUB:hasSyllables:1
+CLUB:isa:Organization
+CLUB:lifeArea:Social
+COMMENT:hasPurpose:to post a remark
+COMMENT:hasSize:0
+COMMENT:hasSyllables:2
+COMMENT:isa:Utterance
+COMMENT:lifeArea:Social
+CRUSH:hasPurpose:to lead to love
+CRUSH:hasSize:0
+CRUSH:hasSyllables:1
+CRUSH:isa:Attraction
+CRUSH:lifeArea:Social
+DEATH:hasPurpose:to end life
+DEATH:hasSize:0
+DEATH:hasSyllables:1
+DEATH:isa:Spiritual State
+DEATH:lifeArea:Spiritual
+DUTY:hasPurpose:to perform obligations
+DUTY:hasSize:0
+DUTY:hasSyllables:2
+DUTY:lifeArea:Social
+FACT:hasPurpose:to provide truthful information
+FACT:hasSize:0
+FACT:hasSyllables:1
+FACT:lifeArea:Education
+GOAL:hasPurpose:to define an outcome
+GOAL:hasSize:0
+GOAL:hasSyllables:1
+GOAL:lifeArea:Business
+GRAMMAR:hasPurpose:to structure words in sentences
+GRAMMAR:hasSize:0
+GRAMMAR:hasSyllables:2
+GRAMMAR:lifeArea:Education
+HAPPINESS:hasPurpose:to make us smile
+HAPPINESS:hasSize:0
+HAPPINESS:hasSyllables:3
+HAPPINESS:isa:Spiritual State
+HAPPINESS:lifeArea:Spiritual
+INFORMATION:hasPurpose:to provide data
+INFORMATION:hasSize:0
+INFORMATION:hasSyllables:4
+INFORMATION:lifeArea:Education
+LANGUAGE:hasPurpose:to provide communications
+LANGUAGE:hasSize:0
+LANGUAGE:hasSyllables:2
+LANGUAGE:isa:Subject
+LANGUAGE:lifeArea:Education
+DIRECTION:lifeArea:Education
+DIRECTIVE:hasPurpose:to specify a plan
+DIRECTIVE:hasSize:0
+DIRECTIVE:hasSyllables:3
+DIRECTIVE:lifeArea:Education
+LIST:hasPurpose:to enumerate items
+LIST:hasSize:0
+LIST:hasSyllables:1
+LIST:lifeArea:Education
+LOOP:hasPurpose:to repeat
+LOOP:hasSize:0
+LOOP:hasSyllables:1
+LOOP:lifeArea:Education
+MEANING:hasPurpose:to provide semantic structure
+MEANING:hasSize:0
+MEANING:hasSyllables:2
+MEANING:lifeArea:Education
+MODE:hasPurpose:to be a state or style
+MODE:hasSize:0
+MODE:hasSyllables:1
+MODE:lifeArea:Education
+NOBODY:hasPurpose:to be no one
+NOBODY:hasSize:0
+NOBODY:hasSyllables:3
+NOBODY:lifeArea:Physical
+NOTHING:hasPurpose:to be not any thing
+NOTHING:hasSize:0
+NOTHING:hasSyllables:2
+NOTHING:lifeArea:Physical
+PERFECTION:hasPurpose:to make us free of error
+PERFECTION:hasSize:0
+PERFECTION:hasSyllables:2
+PERFECTION:isa:Spiritual State
+PERFECTION:lifeArea:Spiritual
+PROBLEM:hasPurpose:to solve
+PROBLEM:hasSize:0
+PROBLEM:hasSyllables:2
+PROBLEM:lifeArea:Education
+PROMISE:hasPurpose:to make a commitment
+PROMISE:hasSize:0
+PROMISE:hasSyllables:2
+PROMISE:lifeArea:Social
+PROTOCOL:hasPurpose:to provide standard procedures
+PROTOCOL:hasSize:0
+PROTOCOL:hasSyllables:3
+PROTOCOL:lifeArea:Social
+PURPOSE:hasPurpose:to give life meaning
+PURPOSE:hasSize:0
+PURPOSE:hasSyllables:2
+PURPOSE:lifeArea:Spiritual
+QUESTION:hasPurpose:to ask for an answer
+QUESTION:hasSize:0
+QUESTION:hasSyllables:2
+QUESTION:lifeArea:Education
+REASON:hasPurpose:to think carefully and logically
+REASON:hasSize:0
+REASON:hasSyllables:2
+REASON:lifeArea:Education
+REPLY:hasPurpose:to respond
+REPLY:hasSize:0
+REPLY:hasSyllables:2
+REPLY:lifeArea:Education
+RESPONSE:hasPurpose:to provide a response
+RESPONSE:hasSize:0
+RESPONSE:hasSyllables:2
+RESPONSE:lifeArea:Education
+SENSE:hasPurpose:to let us experience the physical world
+SENSE:hasSize:0
+SENSE:hasSyllables:1
+SENSE:isa:Information
+SENSE:lifeArea:Physical
+SHARE:hasPurpose:to provide shares of ownership
+SHARE:hasSize:0
+SHARE:hasSyllables:1
+SHARE:isa:Contract
+SHARE:lifeArea:Business
+SILENCE:hasPurpose:to be quiet
+SILENCE:hasSize:0
+SILENCE:hasSyllables:2
+SILENCE:lifeArea:Physical
+STATUS:hasPurpose:to report one's condition
+STATUS:hasSize:4
+STATUS:hasSyllables:2
+STATUS:lifeArea:Social
+SURPRISE:hasPurpose:to be an unexpected event
+SURPRISE:hasSize:0
+SURPRISE:hasSyllables:2
+SURPRISE:lifeArea:Social
+THEORY:hasPurpose:to guess at an explanation
+THEORY:hasSize:0
+THEORY:hasSyllables:2
+THEORY:lifeArea:Education
+TOPIC:hasPurpose:to be the subject of discourse
+TOPIC:hasSize:0
+TOPIC:hasSyllables:1
+TOPIC:lifeArea:Education
+TRUST:hasPurpose:to ensure faith in others
+TRUST:hasSize:0
+TRUST:hasSyllables:1
+TRUST:lifeArea:Business
+UNION:hasPurpose:to organize laborers
+UNION:hasSize:0
+UNION:hasSyllables:2
+UNION:lifeArea:Social
+UNITY:hasPurpose:to provide a single purpose
+UNITY:hasSize:0
+UNITY:hasSyllables:3
+UNITY:lifeArea:Social
+WONDER:hasPurpose:to express amazement
+WONDER:hasSize:0
+WONDER:hasSyllables:2
+WONDER:isa:Emotion
+WONDER:lifeArea:Spiritual
+WAY:hasPurpose:to provide guidance
+WAY:hasSize:0
+WAY:hasSyllables:1
+WAY:isa:Direction
+WAY:lifeArea:Education
+PEACE:hasPurpose:to make us calm
+PEACE:hasSize:0
+PEACE:hasSyllables:1
+PEACE:isa:Spiritual State
+PEACE:lifeArea:Spiritual
+SYSTEM:hasPurpose:to organize mechanically
+SYSTEM:hasSize:0
+SYSTEM:hasSyllables:2
+SYSTEM:lifeArea:Education
+Voice Communications:isa:Communication
+TEAM:hasPurpose:to join players together
+TEAM:hasSize:9
+TEAM:hasSyllables:1
+TEAM:lifeArea:Recreation
+SOURCE:hasPurpose:to be an origin
+SOURCE:hasSize:0
+SOURCE:hasSyllables:1
+SOURCE:lifeArea:Education
+SCIENCE:hasPurpose:to study the laws of nature
+SCIENCE:hasSize:0
+SCIENCE:hasSyllables:2
+SCIENCE:isa:Field
+SCIENCE:lifeArea:Education
+COURSE:hasPurpose:to teach a subject
+COURSE:hasSize:0
+COURSE:hasSyllables:1
+RELATIONSHIP:hasPurpose:to form a bond of two people
+RELATIONSHIP:hasSize:0
+RELATIONSHIP:hasSyllables:4
+RELATIONSHIP:isa:Activity
+RELATIONSHIP:lifeArea:Social

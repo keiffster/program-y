@@ -50,7 +50,7 @@ class BotSpellingConfiguration(BaseConfigurationData):
         return self._check_and_retry
 
     def load_config_section(self, configuration_file, configuration, bot_root):
-        spelling = configuration_file.get_section("spelling", configuration)
+        spelling = configuration_file.get_section(self._section_name, configuration)
         if spelling is not None:
             self._classname = configuration_file.get_option(spelling, "classname", missing_value=None)
             self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None)
@@ -60,4 +60,4 @@ class BotSpellingConfiguration(BaseConfigurationData):
             self._check_and_retry = configuration_file.get_option(spelling, "check_and_retry", missing_value=False)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'spelling' section missing from bot config, using to defaults")
+                logging.warning("'spelling' section missing from bot config, using defaults")

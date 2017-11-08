@@ -1,0 +1,213 @@
+BACON:hasPurpose:to provide nourishment
+BACON:hasSize:3
+BACON:hasSyllables:2
+BACON:isa:Meat
+BACON:lifeArea:Diet
+Baked Dish:isa:Italian Food
+Bakery Item:isa:Dessert
+BURGER:hasPurpose:to provide nourishment
+BURGER:hasSize:4
+BURGER:hasSyllables:2
+BURGER:isa:Meat
+BURGER:lifeArea:Diet
+BREAD:hasPurpose:to provide nourishment
+BREAD:hasSize:4
+BREAD:hasSyllables:1
+BREAD:isa:Grain Product
+BREAD:lifeArea:Diet
+BREAKFAST:hasPurpose:to provide nourishment
+BREAKFAST:hasSize:4
+BREAKFAST:hasSyllables:2
+BREAKFAST:isa:Meal
+BREAKFAST:lifeArea:Diet
+CARROT:hasPurpose:to provide nourishment
+CARROT:hasSize:3
+CARROT:hasSyllables:2
+CARROT:isa:Vegetable
+CARROT:lifeArea:Diet
+CHEESE:hasPurpose:to provide nourishment
+CHEESE:hasSize:4
+CHEESE:hasSyllables:1
+CHEESE:isa:Dairy
+CHEESE:lifeArea:Diet
+CHICKEN:hasPurpose:to provide nourishment
+CHICKEN:hasSize:4
+CHICKEN:hasSyllables:2
+CHICKEN:isa:Meat
+CHICKEN:lifeArea:Diet
+COOKIE:hasPurpose:to provide nourishment
+COOKIE:hasSize:3
+COOKIE:hasSyllables:2
+COOKIE:isa:Bakery Item
+COOKIE:isa:Dessert
+COOKIE:lifeArea:Diet
+CORN:hasPurpose:to provide nourishment
+CORN:hasSize:4
+CORN:hasSyllables:1
+CORN:isa:Vegetable
+CORN:lifeArea:Diet
+CREAM:hasPurpose:to put in coffee
+CREAM:hasSize:4
+CREAM:hasSyllables:1
+CREAM:isa:Dairy product
+CREAM:isa:Food
+CREAM:lifeArea:Diet
+EGG:hasPurpose:to provide nourishment
+EGG:hasSize:3
+EGG:hasSyllables:1
+EGG:isa:Dairy
+EGG:lifeArea:Diet
+KETCHUP:hasPurpose:to add taste
+KETCHUP:hasSize:2
+KETCHUP:hasSyllables:2
+KETCHUP:isa:Condiment
+KETCHUP:lifeArea:Diet
+TOMATO:hasPurpose:to make spaghetti sauce
+TOMATO:hasSize:4
+TOMATO:hasSyllables:3
+TOMATO:isa:Vegetable
+TOMATO:lifeArea:Diet
+Spaghetti ingredient:isa:Grain Product
+SPAGHETTI:hasPurpose:to provide nourishment
+SPAGHETTI:hasSize:4
+SPAGHETTI:hasSyllables:3
+SPAGHETTI:isa:Italian Food
+SPAGHETTI:isa:Pasta
+SPAGHETTI:lifeArea:Diet
+SAUSAGE:hasPurpose:to provide nourishment
+SAUSAGE:hasSize:4
+SAUSAGE:hasSyllables:2
+SAUSAGE:isa:Meat
+SAUSAGE:isa:Processed Food
+SAUSAGE:lifeArea:Diet
+SANDWICH:hasPurpose:to provide nourishment
+SANDWICH:hasSize:4
+SANDWICH:hasSyllables:2
+SANDWICH:isa:Lunch item
+SANDWICH:lifeArea:Diet
+Dairy product:isa:Food
+FOOD:hasPurpose:to provide nourishment
+FOOD:hasSize:0
+FOOD:hasSyllables:2
+FOOD:lifeArea:Diet
+HOT SAUCE:hasPurpose:to add taste
+HOT SAUCE:hasSize:2
+HOT SAUCE:hasSyllables:2
+HOT SAUCE:isa:Condiment
+HOT SAUCE:lifeArea:Diet
+PINEAPPLE:hasPurpose:to provide nourishment
+PINEAPPLE:hasSize:5
+PINEAPPLE:hasSyllables:3
+PINEAPPLE:isa:Fruit
+PINEAPPLE:isa:Tropical Fruit
+PINEAPPLE:lifeArea:Diet
+PIZZA:hasPurpose:to provide nourishment
+PIZZA:hasSize:4
+PIZZA:hasSyllables:2
+PIZZA:isa:Baked Dish
+PIZZA:isa:Italian Food
+PIZZA:lifeArea:Diet
+RICE:hasPurpose:to provide nourishment
+RICE:hasSize:4
+RICE:hasSyllables:1
+RICE:isa:Grain Product
+RICE:lifeArea:Diet
+STEAK SAUCE:hasPurpose:to add taste
+STEAK SAUCE:hasSize:2
+STEAK SAUCE:hasSyllables:2
+STEAK SAUCE:isa:Condiment
+STEAK SAUCE:lifeArea:Diet
+STEAK:hasPurpose:to provide nourishment
+STEAK:hasSize:4
+STEAK:hasSyllables:1
+STEAK:isa:Meat
+STEAK:lifeArea:Diet
+SUGAR:hasPurpose:to provide a sweet taste
+SUGAR:hasSize:0
+SUGAR:hasSyllables:2
+SUGAR:isa:Flavoring
+SUGAR:isa:Ingredient
+SUGAR:lifeArea:Diet
+TACO:hasPurpose:to provide nourishment
+TACO:hasSize:4
+TACO:hasSyllables:2
+TACO:isa:Mexican Food
+TACO:lifeArea:Diet
+MUFFIN:hasPurpose:to provide nourishment
+MUFFIN:hasSize:4
+MUFFIN:hasSyllables:2
+MUFFIN:isa:Bakery Item
+MUFFIN:lifeArea:Diet
+PASTA:hasPurpose:to provide nourishment
+PASTA:hasSize:4
+PASTA:hasSyllables:2
+PASTA:isa:Grain Product
+Pasta:isa:Italian Food
+PASTA:isa:Spaghetti ingredient
+PASTA:lifeArea:Diet
+MUSTARD:hasPurpose:to add taste
+MUSTARD:hasSize:2
+MUSTARD:hasSyllables:2
+MUSTARD:isa:Condiment
+MUSTARD:lifeArea:Diet
+Meat:isa:Processed Food
+COCA:hasPurpose:to make Cocaine
+COCA:hasSize:3
+COCA:hasSyllables:2
+COCA:isa:Crop
+COCA:isa:Plant
+COCA:lifeArea:Diet
+PIE:hasPurpose:to provide nourishment
+PIE:hasSize:4
+PIE:hasSyllables:1
+PIE:isa:Dessert
+PIE:lifeArea:Diet
+PEPPER:hasPurpose:to add taste
+PEPPER:hasSize:2
+PEPPER:hasSyllables:2
+PEPPER:isa:Condiment
+PEPPER:lifeArea:Diet
+LUNCH:hasPurpose:to be a meal at mid day
+LUNCH:hasSize:4
+LUNCH:hasSyllables:1
+LUNCH:isa:Meal
+LUNCH:lifeArea:Diet
+Ingredient:isa:Flavoring
+HONEY:hasPurpose:to provide a sweet taste
+HONEY:hasSize:3
+HONEY:hasSyllables:2
+HONEY:isa:Ingredient
+HONEY:lifeArea:Diet
+GRAIN:hasPurpose:to be an ingredient in baked goods
+GRAIN:hasSize:2
+GRAIN:hasSyllables:1
+GRAIN:lifeArea:Diet
+HAY:hasPurpose:to feed horses
+HAY:hasSize:0
+HAY:hasSyllables:1
+HAY:isa:Crop
+HAY:lifeArea:Physical
+RELISH:hasPurpose:to add taste
+RELISH:hasSize:2
+RELISH:hasSyllables:2
+RELISH:isa:Condiment
+RELISH:lifeArea:Diet
+SALT:hasPurpose:to add taste
+SALT:hasSize:2
+SALT:hasSyllables:1
+SALT:isa:Condiment
+SALT:lifeArea:Diet
+SOUP:hasPurpose:to provide a liquid meal
+SOUP:hasSize:3
+SOUP:hasSyllables:1
+SOUP:lifeArea:Diet
+ROLL:hasPurpose:to provide nourishment
+ROLL:hasSize:4
+ROLL:hasSyllables:1
+ROLL:isa:Bakery Item
+ROLL:lifeArea:Diet
+SWEET:hasPurpose:to please the taste buds
+SWEET:hasSize:3
+SWEET:hasSyllables:1
+SWEET:isa:Candy
+SWEET:lifeArea:Diet

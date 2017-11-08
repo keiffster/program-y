@@ -52,7 +52,6 @@ class TemplateSetNode(TemplateNode):
     def resolve_to_string(self, bot, clientid):
         name = self.name.resolve(bot, clientid)
         value = self.resolve_children(bot, clientid)
-
         if self.local is True:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
@@ -72,11 +71,14 @@ class TemplateSetNode(TemplateNode):
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), value)
+
         return value
 
     def resolve(self, bot, clientid):
         try:
-            return self.resolve_to_string(bot, clientid)
+            str = self.resolve_to_string(bot, clientid)
+            bot.save_conversation(clientid)
+            return str
         except Exception as excep:
             logging.exception(excep)
             return ""

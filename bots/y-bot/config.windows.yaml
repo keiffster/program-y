@@ -55,7 +55,7 @@ brain:
         rdf:
             files:  $BOT_ROOT\rdf
             extension: .txt
-            directories: false
+            directories: true
         preprocessors: $BOT_ROOT\config\preprocessors.conf
         postprocessors: $BOT_ROOT\config\postprocessors.conf
 

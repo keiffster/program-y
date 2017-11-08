@@ -30,5 +30,5 @@ class Authenticator(object):
     def get_default_denied_srai(self):
         return self.configuration.denied_srai
 
-    def authenticate(self, clientid: str):
+    def authenticate(self, bot, clientid: str):
         return False
