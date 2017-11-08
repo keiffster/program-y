@@ -136,3 +136,14 @@ SHUTTLE:hasSyllables:2
 SHUTTLE:isa:Aircraft
 SHUTTLE:isa:Transportation
 SHUTTLE:lifeArea:Physical
+TAXI:hasPurpose:to transport us for a fee
+TAXI:hasSize:8
+TAXI:hasSyllables:2
+TAXI:isa:Automobile
+TAXI:isa:Transportation
+TAXI:lifeArea:Physical
+TRAFFIC:hasPurpose:to hinder movement
+TRAFFIC:hasSize:9
+TRAFFIC:hasSyllables:2
+TRAFFIC:lifeArea:Physical
+Train Station:isa:Building

@@ -1,0 +1,18 @@
+FAT:hasPurpose:to be too heavy
+FAT:hasSize:0
+FAT:hasSyllables:3
+FAT:isa:Physical State
+FAT:lifeArea:Physical
+IQ:hasPurpose:to measure intelligence
+IQ:hasSize:0
+IQ:hasSyllables:2
+IQ:lifeArea:Education
+NAME:hasPurpose:to identify someone
+NAME:hasSize:0
+NAME:hasSyllables:1
+NAME:lifeArea:Social
+VIRGIN:hasPurpose:to be inexperienced
+VIRGIN:hasSize:7
+VIRGIN:hasSyllables:2
+VIRGIN:isa:Person
+VIRGIN:lifeArea:Social

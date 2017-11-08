@@ -78,3 +78,8 @@ GIANT:hasSyllables:2
 GIANT:isa:Fictional Character
 GIANT:isa:Oversize Person
 GIANT:lifeArea:Recreation
+Oversize Person:isa:Fictional Character
+MAGIC:hasPurpose:to make the impossible happen
+MAGIC:hasSize:0
+MAGIC:hasSyllables:2
+MAGIC:lifeArea:Recreation

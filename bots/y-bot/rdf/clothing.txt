@@ -28,3 +28,17 @@ SHOE:hasSize:4
 SHOE:hasSyllables:1
 SHOE:isa:Clothing
 SHOE:lifeArea:Physical
+DRESS:hasPurpose:to cover the body
+DRESS:hasSize:4
+DRESS:hasSyllables:1
+DRESS:isa:Clothing
+DRESS:lifeArea:Physical
+FASHION:hasPurpose:to dress attractively
+FASHION:hasSize:4
+FASHION:hasSyllables:2
+FASHION:isa:Clothing
+FASHION:lifeArea:Physical
+STYLE:hasPurpose:to have class
+STYLE:hasSize:0
+STYLE:hasSyllables:1
+STYLE:lifeArea:Recreation

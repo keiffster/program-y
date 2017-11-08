@@ -10,3 +10,15 @@ NAVY:isa:Military Organization
 NAVY:lifeArea:Social
 Military action:isa:Conflict
 Military Officer:isa:Person
+GENERAL:hasPurpose:to lead an army
+GENERAL:hasSize:0
+GENERAL:hasSyllables:3
+GENERAL:isa:Military Officer
+GENERAL:isa:Person
+GENERAL:lifeArea:Social
+WAR:hasPurpose:to conquer another country
+WAR:hasSize:11
+WAR:hasSyllables:1
+WAR:isa:Conflict
+WAR:isa:Military action
+WAR:lifeArea:Social

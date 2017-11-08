@@ -112,3 +112,37 @@ STORE:hasSize:9
 STORE:hasSyllables:1
 STORE:isa:Retail Business
 STORE:lifeArea:Business
+ROOM:hasPurpose:to divide a house or buidling
+ROOM:hasSize:8
+ROOM:hasSyllables:1
+ROOM:lifeArea:Physical
+SHOP:hasPurpose:to sell things
+SHOP:hasSize:9
+SHOP:hasSyllables:1
+SHOP:isa:Retail Business
+SHOP:lifeArea:Business
+SUBWAY:hasPurpose:to move us underground
+SUBWAY:hasSize:9
+SUBWAY:hasSyllables:2
+SUBWAY:isa:Railroad
+SUBWAY:isa:Transportation
+SUBWAY:lifeArea:Physical
+UNIVERSITY:hasPurpose:to provide higher education
+UNIVERSITY:hasSize:9
+UNIVERSITY:hasSyllables:5
+UNIVERSITY:isa:School
+UNIVERSITY:lifeArea:Education
+Entertainment Facility:isa:Building
+GALLERY:hasPurpose:to display art
+GALLERY:hasSize:9
+GALLERY:hasSyllables:3
+GALLERY:isa:Building
+GALLERY:lifeArea:Creative
+LOUNGE:hasPurpose:to provide a place for rest
+LOUNGE:hasSize:8
+LOUNGE:hasSyllables:1
+LOUNGE:lifeArea:Social
+INSIDE:hasPurpose:to be the unseen part
+INSIDE:hasSize:0
+INSIDE:hasSyllables:2
+INSIDE:lifeArea:Education

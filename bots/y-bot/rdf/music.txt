@@ -28,3 +28,10 @@ SONG:hasSize:0
 SONG:hasSyllables:1
 SONG:isa:Creative Work
 SONG:lifeArea:Creative
+Rock Band:isa:Band
+SINGER:hasPurpose:to perform with her voice
+SINGER:hasSize:7
+SINGER:hasSyllables:2
+SINGER:isa:Entertainer
+SINGER:isa:Person
+SINGER:lifeArea:Recreation

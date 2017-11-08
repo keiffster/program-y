@@ -91,3 +91,9 @@ SON:hasSyllables:1
 SON:isa:Male Person
 SON:isa:Person
 SON:lifeArea:Family
+MARRIAGE:hasPurpose:to share vows of love
+MARRIAGE:hasSize:0
+MARRIAGE:hasSyllables:2
+MARRIAGE:isa:Contract
+MARRIAGE:isa:Partership
+MARRIAGE:lifeArea:Family

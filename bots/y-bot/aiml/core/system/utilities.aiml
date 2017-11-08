@@ -180,7 +180,6 @@
     <category>
         <pattern>REMOVENILS NIL</pattern>
         <template>
-            <template/>
         </template>
     </category>
     <category>
@@ -770,7 +769,6 @@
     <category>
         <pattern>IMPLODE</pattern>
         <template>
-            <template/>
         </template>
     </category>
     <category>

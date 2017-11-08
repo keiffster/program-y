@@ -48,3 +48,7 @@ WATERMELON:hasSyllables:4
 WATERMELON:isa:Fruit
 WATERMELON:isa:Summer Fruit
 WATERMELON:lifeArea:Diet
+Summer Fruit:isa:Fruit
+Tropical Fruit:isa:Fruit
+Vine Fruit:isa:Fruit
+Citrus:isa:Fruit

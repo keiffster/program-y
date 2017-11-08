@@ -1,0 +1,28 @@
+CONSTITUTION:hasPurpose:to document rights
+CONSTITUTION:hasSize:4
+CONSTITUTION:hasSyllables:4
+CONSTITUTION:isa:Law
+CONSTITUTION:lifeArea:Social
+JUDGE:hasPurpose:to decide guilt or innocence
+JUDGE:hasSize:7
+JUDGE:hasSyllables:1
+JUDGE:isa:Person
+JUDGE:lifeArea:Social
+JUSTICE:hasPurpose:to punish for crime
+JUSTICE:hasSize:0
+JUSTICE:hasSyllables:2
+JUSTICE:lifeArea:Social
+LAW:hasPurpose:to write down a rule
+LAW:hasSize:0
+LAW:hasSyllables:1
+LAW:lifeArea:Social
+LIBERTY:hasPurpose:to be free
+LIBERTY:hasSize:0
+LIBERTY:hasSyllables:3
+LIBERTY:lifeArea:Social
+Partership:isa:Contract
+STOCK:hasPurpose:to provide shares of ownership
+STOCK:hasSize:0
+STOCK:hasSyllables:1
+STOCK:isa:Contract
+STOCK:lifeArea:Business

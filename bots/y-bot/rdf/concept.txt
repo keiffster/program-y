@@ -227,3 +227,208 @@ WORD:hasSyllables:1
 WORD:isa:Concept
 WORD:isa:Symbol
 WORD:lifeArea:Education
+BETA:hasPurpose:to form the second step
+BETA:hasSize:0
+BETA:hasSyllables:1
+BETA:isa:Symbol
+BETA:lifeArea:Education
+Choice:isa:Decision
+CLUB:hasPurpose:to provide a sense of belonging
+CLUB:hasSize:0
+CLUB:hasSyllables:1
+CLUB:isa:Organization
+CLUB:lifeArea:Social
+COMMENT:hasPurpose:to post a remark
+COMMENT:hasSize:0
+COMMENT:hasSyllables:2
+COMMENT:isa:Utterance
+COMMENT:lifeArea:Social
+CRUSH:hasPurpose:to lead to love
+CRUSH:hasSize:0
+CRUSH:hasSyllables:1
+CRUSH:isa:Attraction
+CRUSH:lifeArea:Social
+DEATH:hasPurpose:to end life
+DEATH:hasSize:0
+DEATH:hasSyllables:1
+DEATH:isa:Spiritual State
+DEATH:lifeArea:Spiritual
+DUTY:hasPurpose:to perform obligations
+DUTY:hasSize:0
+DUTY:hasSyllables:2
+DUTY:lifeArea:Social
+FACT:hasPurpose:to provide truthful information
+FACT:hasSize:0
+FACT:hasSyllables:1
+FACT:lifeArea:Education
+GOAL:hasPurpose:to define an outcome
+GOAL:hasSize:0
+GOAL:hasSyllables:1
+GOAL:lifeArea:Business
+GRAMMAR:hasPurpose:to structure words in sentences
+GRAMMAR:hasSize:0
+GRAMMAR:hasSyllables:2
+GRAMMAR:lifeArea:Education
+HAPPINESS:hasPurpose:to make us smile
+HAPPINESS:hasSize:0
+HAPPINESS:hasSyllables:3
+HAPPINESS:isa:Spiritual State
+HAPPINESS:lifeArea:Spiritual
+INFORMATION:hasPurpose:to provide data
+INFORMATION:hasSize:0
+INFORMATION:hasSyllables:4
+INFORMATION:lifeArea:Education
+LANGUAGE:hasPurpose:to provide communications
+LANGUAGE:hasSize:0
+LANGUAGE:hasSyllables:2
+LANGUAGE:isa:Subject
+LANGUAGE:lifeArea:Education
+DIRECTION:lifeArea:Education
+DIRECTIVE:hasPurpose:to specify a plan
+DIRECTIVE:hasSize:0
+DIRECTIVE:hasSyllables:3
+DIRECTIVE:lifeArea:Education
+LIST:hasPurpose:to enumerate items
+LIST:hasSize:0
+LIST:hasSyllables:1
+LIST:lifeArea:Education
+LOOP:hasPurpose:to repeat
+LOOP:hasSize:0
+LOOP:hasSyllables:1
+LOOP:lifeArea:Education
+MEANING:hasPurpose:to provide semantic structure
+MEANING:hasSize:0
+MEANING:hasSyllables:2
+MEANING:lifeArea:Education
+MODE:hasPurpose:to be a state or style
+MODE:hasSize:0
+MODE:hasSyllables:1
+MODE:lifeArea:Education
+NOBODY:hasPurpose:to be no one
+NOBODY:hasSize:0
+NOBODY:hasSyllables:3
+NOBODY:lifeArea:Physical
+NOTHING:hasPurpose:to be not any thing
+NOTHING:hasSize:0
+NOTHING:hasSyllables:2
+NOTHING:lifeArea:Physical
+PERFECTION:hasPurpose:to make us free of error
+PERFECTION:hasSize:0
+PERFECTION:hasSyllables:2
+PERFECTION:isa:Spiritual State
+PERFECTION:lifeArea:Spiritual
+PROBLEM:hasPurpose:to solve
+PROBLEM:hasSize:0
+PROBLEM:hasSyllables:2
+PROBLEM:lifeArea:Education
+PROMISE:hasPurpose:to make a commitment
+PROMISE:hasSize:0
+PROMISE:hasSyllables:2
+PROMISE:lifeArea:Social
+PROTOCOL:hasPurpose:to provide standard procedures
+PROTOCOL:hasSize:0
+PROTOCOL:hasSyllables:3
+PROTOCOL:lifeArea:Social
+PURPOSE:hasPurpose:to give life meaning
+PURPOSE:hasSize:0
+PURPOSE:hasSyllables:2
+PURPOSE:lifeArea:Spiritual
+QUESTION:hasPurpose:to ask for an answer
+QUESTION:hasSize:0
+QUESTION:hasSyllables:2
+QUESTION:lifeArea:Education
+REASON:hasPurpose:to think carefully and logically
+REASON:hasSize:0
+REASON:hasSyllables:2
+REASON:lifeArea:Education
+REPLY:hasPurpose:to respond
+REPLY:hasSize:0
+REPLY:hasSyllables:2
+REPLY:lifeArea:Education
+RESPONSE:hasPurpose:to provide a response
+RESPONSE:hasSize:0
+RESPONSE:hasSyllables:2
+RESPONSE:lifeArea:Education
+SENSE:hasPurpose:to let us experience the physical world
+SENSE:hasSize:0
+SENSE:hasSyllables:1
+SENSE:isa:Information
+SENSE:lifeArea:Physical
+SHARE:hasPurpose:to provide shares of ownership
+SHARE:hasSize:0
+SHARE:hasSyllables:1
+SHARE:isa:Contract
+SHARE:lifeArea:Business
+SILENCE:hasPurpose:to be quiet
+SILENCE:hasSize:0
+SILENCE:hasSyllables:2
+SILENCE:lifeArea:Physical
+STATUS:hasPurpose:to report one's condition
+STATUS:hasSize:4
+STATUS:hasSyllables:2
+STATUS:lifeArea:Social
+SURPRISE:hasPurpose:to be an unexpected event
+SURPRISE:hasSize:0
+SURPRISE:hasSyllables:2
+SURPRISE:lifeArea:Social
+THEORY:hasPurpose:to guess at an explanation
+THEORY:hasSize:0
+THEORY:hasSyllables:2
+THEORY:lifeArea:Education
+TOPIC:hasPurpose:to be the subject of discourse
+TOPIC:hasSize:0
+TOPIC:hasSyllables:1
+TOPIC:lifeArea:Education
+TRUST:hasPurpose:to ensure faith in others
+TRUST:hasSize:0
+TRUST:hasSyllables:1
+TRUST:lifeArea:Business
+UNION:hasPurpose:to organize laborers
+UNION:hasSize:0
+UNION:hasSyllables:2
+UNION:lifeArea:Social
+UNITY:hasPurpose:to provide a single purpose
+UNITY:hasSize:0
+UNITY:hasSyllables:3
+UNITY:lifeArea:Social
+WONDER:hasPurpose:to express amazement
+WONDER:hasSize:0
+WONDER:hasSyllables:2
+WONDER:isa:Emotion
+WONDER:lifeArea:Spiritual
+WAY:hasPurpose:to provide guidance
+WAY:hasSize:0
+WAY:hasSyllables:1
+WAY:isa:Direction
+WAY:lifeArea:Education
+PEACE:hasPurpose:to make us calm
+PEACE:hasSize:0
+PEACE:hasSyllables:1
+PEACE:isa:Spiritual State
+PEACE:lifeArea:Spiritual
+SYSTEM:hasPurpose:to organize mechanically
+SYSTEM:hasSize:0
+SYSTEM:hasSyllables:2
+SYSTEM:lifeArea:Education
+Voice Communications:isa:Communication
+TEAM:hasPurpose:to join players together
+TEAM:hasSize:9
+TEAM:hasSyllables:1
+TEAM:lifeArea:Recreation
+SOURCE:hasPurpose:to be an origin
+SOURCE:hasSize:0
+SOURCE:hasSyllables:1
+SOURCE:lifeArea:Education
+SCIENCE:hasPurpose:to study the laws of nature
+SCIENCE:hasSize:0
+SCIENCE:hasSyllables:2
+SCIENCE:isa:Field
+SCIENCE:lifeArea:Education
+COURSE:hasPurpose:to teach a subject
+COURSE:hasSize:0
+COURSE:hasSyllables:1
+RELATIONSHIP:hasPurpose:to form a bond of two people
+RELATIONSHIP:hasSize:0
+RELATIONSHIP:hasSyllables:4
+RELATIONSHIP:isa:Activity
+RELATIONSHIP:lifeArea:Social

@@ -19,18 +19,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 class RDFSelectStatement(object):
 
     def __init__(self, variables=None, queries=None):
+        self.set_variables(variables)
+        self.set_queries(queries)
+
+    def set_variables(self, variables):
         if variables is None:
             self._vars = []
         else:
             self._vars = variables[:]
-        if queries is None:
-            self._queries = []
-        else:
-            self._queries = queries[:]
 
     @property
     def vars(self):
         return self._vars
+
+    def set_queries(self, queries):
+        if queries is None:
+            self._queries = []
+        else:
+            self._queries = queries[:]
 
     @property
     def queries(self):
@@ -40,7 +46,7 @@ class RDFSelectStatement(object):
         xml = ""
         xml += "<vars>"
         for var in self._vars:
-            xml += "?%s "%var
+            xml += "%s"%var
         xml += "</vars>"
         for query in self._queries:
             xml += query.to_xml(bot, clientid)
@@ -48,36 +54,9 @@ class RDFSelectStatement(object):
 
     def execute(self, bot, clientid):
 
-        query = self._queries[0]
-        resultset = query.execute(bot, clientid)
+        query_params = []
+        for query in self._queries:
+            query_params.append([query.subject.resolve(bot, clientid), query.predicate.resolve(bot, clientid), query.obj.resolve(bot, clientid)])
 
-        if len(self._queries) > 1:
-            for query in self._queries[1:]:
-                matched = []
-
-                for result in resultset.results:
-
-                    next_resultset = query.execute(bot, clientid, result)
-
-                    for next_result in next_resultset.results:
-                        if next_result[0][1] == result[0][1]:
-                            matched.append(next_result)
-
-                resultset.results = matched
-
-        values = []
-        for result in resultset.results:
-            if self._vars:
-                value = []
-                for var in self.vars:
-                    if result[0][0] == var:
-                        values.append([var, result[0][1]])
-                    if result[1][0] == var:
-                        values.append([var, result[1][1]])
-                    if result[2][0] == var:
-                        values.append([var, result[2][1]])
-                if value:
-                    values.append(value)
-            else:
-                values.append([result[0][1], result[1][1], result[2][1]])
-        return values
+        results = bot.brain.rdf.multi_match(query_params)
+        return results

@@ -73,3 +73,8 @@ MERCURY:isa:Astronomical Body
 MERCURY:isa:Planet
 MERCURY:lifeArea:Physical
 Atmosphere:isa:Astronomical Body
+UNIVERSE:hasPurpose:to contain everything
+UNIVERSE:hasSize:15
+UNIVERSE:hasSyllables:3
+UNIVERSE:isa:Astronomical Body
+UNIVERSE:lifeArea:Education

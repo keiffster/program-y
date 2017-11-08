@@ -184,4 +184,29 @@ EVENING:hasSyllables:2
 EVENING:isa:Time Measurement
 Evening:isa:Time Quantity
 EVENING:lifeArea:Physical
+TWILIGHT:hasPurpose:to end the day
+TWILIGHT:hasSize:0
+TWILIGHT:hasSyllables:2
+TWILIGHT:lifeArea:Physical
+DECEMBER:hasPurpose:to measure time
+DECEMBER:hasSize:0
+DECEMBER:hasSyllables:3
+DECEMBER:isa:Month
+DECEMBER:isa:Time Quantity
+DECEMBER:lifeArea:Physical
+Event:isa:Time Quantity
+FUTURE:hasPurpose:to unfold
+FUTURE:hasSize:0
+FUTURE:hasSyllables:2
+FUTURE:isa:Time Measurement
+FUTURE:lifeArea:Physical
+HISTORY:hasPurpose:to chronicle the past
+HISTORY:hasSize:0
+HISTORY:hasSyllables:3
+HISTORY:isa:Subject
+HISTORY:lifeArea:Education
+NEVER:hasPurpose:to not occur at any time
+NEVER:hasSize:0
+NEVER:hasSyllables:2
+NEVER:lifeArea:Physical
 

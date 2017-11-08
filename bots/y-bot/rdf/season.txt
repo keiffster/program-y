@@ -20,3 +20,8 @@ SPRING:hasSize:0
 SPRING:hasSyllables:1
 SPRING:isa:Season
 SPRING:lifeArea:Physical
+FALL:hasPurpose:to make leaves fall
+FALL:hasSize:0
+FALL:hasSyllables:1
+FALL:isa:Season
+FALL:lifeArea:Physical

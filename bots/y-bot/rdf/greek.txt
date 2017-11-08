@@ -1,0 +1,6 @@
+
+KAPPA:hasPurpose:to be a Greek letter
+KAPPA:hasSize:0
+KAPPA:hasSyllables:2
+KAPPA:isa:Symbol
+KAPPA:lifeArea:Education

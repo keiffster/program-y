@@ -24,3 +24,13 @@ BEAT:hasSize:0
 BEAT:hasSyllables:1
 BEAT:isa:Sound
 BEAT:lifeArea:Physical
+RING:hasPurpose:to make a tone
+RING:hasSize:0
+RING:hasSyllables:1
+RING:isa:Physical Effect
+RING:isa:Sound
+RING:lifeArea:Physical
+ECHO:hasPurpose:to repeat a sound
+ECHO:hasSize:0
+ECHO:hasSyllables:2
+ECHO:lifeArea:Education

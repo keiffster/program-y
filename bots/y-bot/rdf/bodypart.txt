@@ -111,3 +111,18 @@ HUMAN:hasSyllables:2
 HUMAN:isa:Person
 HUMAN:lifeArea:Physical
 Organ:isa:Body Part
+TAIL:hasPurpose:to wag
+TAIL:hasSize:4
+TAIL:hasSyllables:1
+TAIL:isa:Animal Part
+TAIL:isa:Body Part
+TAIL:lifeArea:Physical
+JOINT:hasPurpose:to flex
+JOINT:hasSize:3
+JOINT:hasSyllables:1
+JOINT:isa:Body Part
+JOINT:lifeArea:Physical
+VOICE:hasPurpose:to speak
+VOICE:hasSize:0
+VOICE:hasSyllables:1
+VOICE:lifeArea:Physical

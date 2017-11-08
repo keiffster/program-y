@@ -2,7 +2,7 @@
 <aiml>
 
     <category>
-        <pattern>RDF LIST SUBJECTS</pattern>
+        <pattern>YADMIN RDF LIST SUBJECTS</pattern>
         <template>
             <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
                 SUBJECTS
@@ -11,7 +11,7 @@
     </category>
 
     <category>
-        <pattern>RDF LIST PREDICATES SUBJECT *</pattern>
+        <pattern>YADMIN RDF LIST PREDICATES SUBJECT *</pattern>
         <template>
             <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
                 PREDICATES <star/>
@@ -20,7 +20,7 @@
     </category>
 
     <category>
-        <pattern>RDF LIST OBJECTS SUBJECT * PREDICATE *</pattern>
+        <pattern>YADMIN RDF LIST OBJECTS SUBJECT * PREDICATE *</pattern>
         <template>
             <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
                 OBJECT <star index="1" /> <star index="2" />

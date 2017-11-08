@@ -201,3 +201,13 @@ SOUP:hasPurpose:to provide a liquid meal
 SOUP:hasSize:3
 SOUP:hasSyllables:1
 SOUP:lifeArea:Diet
+ROLL:hasPurpose:to provide nourishment
+ROLL:hasSize:4
+ROLL:hasSyllables:1
+ROLL:isa:Bakery Item
+ROLL:lifeArea:Diet
+SWEET:hasPurpose:to please the taste buds
+SWEET:hasSize:3
+SWEET:hasSyllables:1
+SWEET:isa:Candy
+SWEET:lifeArea:Diet

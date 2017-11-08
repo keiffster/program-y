@@ -51,6 +51,7 @@ CURRENT:hasSyllables:2
 CURRENT:isa:Measurement
 CURRENT:isa:Physical Unit
 CURRENT:lifeArea:Education
+CURRENT:hasPurpose:to measure electricity
 Electrical Measurement:isa:Physical Unit
 ELECTRICITY:hasPurpose:to provide power
 ELECTRICITY:hasSize:0
@@ -66,3 +67,8 @@ LIGHT:hasPurpose:to provide illumination
 LIGHT:hasSize:0
 LIGHT:hasSyllables:1
 LIGHT:lifeArea:Physical
+BEAM:hasPurpose:to carry light
+BEAM:hasSize:0
+BEAM:hasSyllables:1
+BEAM:isa:Physical Effect
+BEAM:lifeArea:Education

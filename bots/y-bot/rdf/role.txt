@@ -75,3 +75,61 @@ CHARACTER:hasSize:7
 CHARACTER:hasSyllables:3
 CHARACTER:isa:Entity
 CHARACTER:lifeArea:Recreation
+Philosopher:isa:Person
+Politician:isa:Person
+STUDENT:hasPurpose:to study in school
+STUDENT:hasSize:7
+STUDENT:hasSyllables:2
+STUDENT:lifeArea:Education
+Teacher:isa:Person
+Team Member:isa:Person
+Visiting Person:isa:Person
+BUDDY:hasPurpose:to be a friend
+BUDDY:hasSize:7
+BUDDY:hasSyllables:2
+BUDDY:isa:Friend
+BUDDY:lifeArea:Social
+Citizen:isa:Person
+Entertainer:isa:Person
+Explorer:isa:Person
+GUEST:hasPurpose:to visit us
+GUEST:hasSize:7
+GUEST:hasSyllables:1
+GUEST:isa:Person
+GUEST:isa:Visiting Person
+GUEST:lifeArea:Social
+KILLER:hasPurpose:to murder
+KILLER:hasSize:7
+KILLER:hasSyllables:2
+KILLER:isa:Criminal
+KILLER:isa:Person
+KILLER:lifeArea:Social
+LEADER:hasPurpose:to be the boss
+LEADER:hasSize:7
+LEADER:hasSyllables:2
+LEADER:isa:Person
+LEADER:lifeArea:Social
+LOVER:hasPurpose:to be a boyfriend or girlfriend
+LOVER:hasSize:7
+LOVER:hasSyllables:2
+LOVER:isa:Person
+LOVER:lifeArea:Social
+SPEAKER:hasPurpose:to address an audience
+SPEAKER:hasSize:7
+SPEAKER:hasSyllables:2
+SPEAKER:isa:Person
+SPEAKER:lifeArea:Social
+STALKER:hasPurpose:to follow us around
+STALKER:hasSize:7
+STALKER:hasSyllables:2
+STALKER:isa:Criminal
+STALKER:isa:Person
+STALKER:lifeArea:Social
+BOSS:hasPurpose:to manage people
+BOSS:hasSize:7
+BOSS:hasSyllables:1
+BOSS:isa:Person
+BOSS:lifeArea:Business
+Criminal:isa:Person
+
+

@@ -162,3 +162,8 @@ EVIL:hasSize:0
 EVIL:hasSyllables:2
 EVIL:isa:Concept
 EVIL:lifeArea:Spiritual
+GRACE:hasPurpose:to be one with God
+GRACE:hasSize:0
+GRACE:hasSyllables:1
+GRACE:isa:Spiritual State
+GRACE:lifeArea:Spiritual

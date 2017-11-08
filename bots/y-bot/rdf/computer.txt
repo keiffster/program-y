@@ -60,3 +60,10 @@ SILICON:hasPurpose:to make microchips
 SILICON:hasSize:0
 SILICON:hasSyllables:3
 SILICON:lifeArea:Physical
+ROBOT:hasPurpose:to serve humans
+ROBOT:hasSize:7
+ROBOT:hasSyllables:2
+Robot:isa:Fictional Character
+ROBOT:isa:Machine
+ROBOT:isa:Tool
+ROBOT:lifeArea:Physical

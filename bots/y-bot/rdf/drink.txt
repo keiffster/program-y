@@ -75,3 +75,14 @@ DRUNK:hasSyllables:1
 DRUNK:isa:Intoxicated Person
 DRUNK:isa:Person
 DRUNK:lifeArea:Social
+TEA:hasPurpose:to perk us up
+TEA:hasSize:3
+TEA:hasSyllables:1
+TEA:isa:Beverage
+TEA:isa:Caffeine Drink
+TEA:lifeArea:Diet
+STILL:hasPurpose:to make liquor
+STILL:hasSize:8
+STILL:hasSyllables:1
+STILL:isa:Tool
+STILL:lifeArea:Diet

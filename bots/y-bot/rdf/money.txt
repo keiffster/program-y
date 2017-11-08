@@ -28,3 +28,31 @@ RATE:hasSize:0
 RATE:hasSyllables:1
 RATE:isa:Money Amount
 RATE:lifeArea:Business
+CASH:hasPurpose:to pay for things
+CASH:hasSize:4
+CASH:hasSyllables:1
+CASH:isa:Currency
+CASH:isa:Money
+CASH:lifeArea:Finances
+BOND:hasPurpose:to raise money
+BOND:hasSize:4
+BOND:hasSyllables:1
+BOND:isa:Contract
+BOND:lifeArea:Finances
+COST:hasPurpose:to provide a price
+COST:hasSize:0
+COST:hasSyllables:1
+COST:isa:Money Amount
+COST:lifeArea:Business
+INTEREST:hasPurpose:to charge a percentage
+INTEREST:hasSize:0
+INTEREST:hasSyllables:3
+INTEREST:lifeArea:Finances
+LOTTERY:hasPurpose:to gamble
+LOTTERY:hasSize:0
+LOTTERY:hasSyllables:3
+LOTTERY:lifeArea:Social
+SPECIAL:hasPurpose:to decrease prices
+SPECIAL:hasSize:0
+SPECIAL:hasSyllables:2
+SPECIAL:lifeArea:Business

@@ -464,4 +464,10 @@ SPIDER:hasSyllables:2
 SPIDER:isa:Animal
 SPIDER:isa:Arachnid
 SPIDER:lifeArea:Physical
+Predator:isa:Wild Animal
+Rodent:isa:Animal
+Vermin:isa:Animal
+Water Animal:isa:Animal
+Extinct Species:isa:Animal
+Juvenile animal:isa:Animal
 

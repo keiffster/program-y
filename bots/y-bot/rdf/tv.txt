@@ -1,0 +1,41 @@
+SIMPSONS:hasPurpose:to mock modern life
+SIMPSONS:hasSize:0
+SIMPSONS:hasSyllables:2
+SIMPSONS:isa:Comedy
+SIMPSONS:isa:TV Show
+SIMPSONS:lifeArea:Recreation
+ESPN:hasPurpose:to broadcast sports
+ESPN:hasSize:0
+ESPN:hasSyllables:4
+ESPN:isa:TV Network
+ESPN:lifeArea:Recreation
+CHANNEL:hasPurpose:to provide entertainment
+CHANNEL:hasSize:0
+CHANNEL:hasSyllables:2
+CHANNEL:lifeArea:Recreation
+COMEDY:hasPurpose:to make us laugh
+COMEDY:hasSize:0
+COMEDY:hasSyllables:3
+Comedy:isa:TV Show
+COMEDY:lifeArea:Recreation
+MOVIE:hasPurpose:to put meat cheese and lettuce in a shell
+MOVIE:hasSize:0
+MOVIE:hasSyllables:2
+MOVIE:isa:Creative Work
+MOVIE:lifeArea:Recreation
+SERIES:hasPurpose:to provide enetrtainment
+SERIES:hasSize:0
+SERIES:hasSyllables:2
+SERIES:lifeArea:Recreation
+TV:hasPurpose:to provide entertainment
+TV:hasSize:6
+TV:hasSyllables:2
+TV:isa:Machine
+TV:isa:Tool
+TV:lifeArea:Physical
+TELEVISION:hasPurpose:to provide entertainment
+TELEVISION:hasSize:6
+TELEVISION:hasSyllables:3
+TELEVISION:isa:Machine
+TELEVISION:isa:Tool
+TELEVISION:lifeArea:Recreation

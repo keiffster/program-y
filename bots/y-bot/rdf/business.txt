@@ -59,3 +59,23 @@ GUCCI:hasSize:0
 GUCCI:hasSyllables:2
 GUCCI:isa:Manufacturer
 GUCCI:lifeArea:Business
+TARGET:hasPurpose:to sell household goods
+TARGET:hasSize:0
+TARGET:hasSyllables:2
+TARGET:isa:Department Store
+TARGET:isa:Retail Business
+TARGET:lifeArea:Business
+WALMART:hasPurpose:to sell household goods
+WALMART:hasSize:0
+WALMART:hasSyllables:2
+WALMART:isa:Business
+WALMART:lifeArea:Physical
+DISNEY:hasPurpose:to provide entertainment
+DISNEY:hasSize:0
+DISNEY:hasSyllables:2
+DISNEY:lifeArea:Recreation
+ENTERPRISE:hasPurpose:to organize a business
+ENTERPRISE:hasSize:0
+ENTERPRISE:hasSyllables:3
+ENTERPRISE:isa:Organization
+ENTERPRISE:lifeArea:Business

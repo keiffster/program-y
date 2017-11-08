@@ -1,154 +1,236 @@
-ACTOR:hasPurpose:to play a role
-ACTOR:hasSize:7
-ACTOR:hasSpeed:7
-ACTOR:hasSyllables:2
-ACTOR:isa:Man
-ACTOR:isa:Person
-ACTOR:lifeArea:Recreation
-ACTRESS:hasPurpose:to play a role
-ACTRESS:hasSize:7
-ACTRESS:hasSpeed:7
-ACTRESS:hasSyllables:2
-ACTRESS:isa:Person
-ACTRESS:isa:Woman
-ACTRESS:lifeArea:Recreation
-Adored Person:isa:Person
-ARTIST:hasPurpose:to create new things
-ARTIST:hasSize:7
-ARTIST:hasSyllables:2
-ARTIST:isa:Person
-ARTIST:lifeArea:Creative
-ASSISTANT:hasPurpose:to help with projects
-ASSISTANT:hasSize:7
-ASSISTANT:hasSyllables:3
-ASSISTANT:isa:Person
-ASSISTANT:lifeArea:Creative
-AUTHOR:hasPurpose:to write books
-AUTHOR:hasSize:7
-AUTHOR:hasSyllables:4
-Author:isa:Person
-AUTHOR:isa:Person
-AUTHOR:lifeArea:Creative
-BABY:hasPurpose:to grow up
-BABY:hasSize:6
-BABY:hasSyllables:2
-BABY:isa:Child
-BABY:isa:Person
-BABY:lifeArea:Family
-BOY:hasPurpose:to be a young man
-BOY:hasSize:6
-BOY:hasSyllables:1
-BOY:isa:Male Person
-BOY:isa:Person
-BOY:lifeArea:Social
-WOMAN:hasPurpose:to be feminine
-WOMAN:hasSize:7
-WOMAN:hasSyllables:1
-Woman:isa:Person
-WOMAN:isa:Person
-WOMAN:lifeArea:Social
-Female Parent:isa:Parent
-Female Parent:isa:Person
-Female Person:isa:Person
-Female Person:isa:Sibling
-FEMALE:hasPurpose:to carry the XX chromosome
-FEMALE:hasSize:0
-FEMALE:hasSyllables:2
-FEMALE:isa:Gender
-FEMALE:lifeArea:Physical
-FRIEND:hasPurpose:to provide companionship
-FRIEND:hasSize:7
-FRIEND:hasSyllables:1
-FRIEND:isa:Person
-FRIEND:lifeArea:Social
-GIRLFRIEND:hasPurpose:to offer companionship in a relationship
-GIRLFRIEND:hasSize:7
-GIRLFRIEND:hasSyllables:2
-GIRLFRIEND:isa:Person
-GIRLFRIEND:lifeArea:Social
-GUY:hasPurpose:to be a male person
-GUY:hasSize:7
-GUY:hasSyllables:1
-GUY:isa:Male Person
-GUY:isa:Person
-GUY:lifeArea:Social
-MAIDEN:hasPurpose:to be a young woman
-MAIDEN:hasSize:7
-MAIDEN:hasSyllables:2
-MAIDEN:isa:Female Person
-MAIDEN:isa:Person
-MAIDEN:lifeArea:Social
-Male Parent:isa:Parent
-Male Person:isa:Person
-MAN:hasPurpose:to be a male person
-MAN:hasSize:7
-MAN:hasSyllables:1
-MAN:isa:Male Person
-Man:isa:Person
-MAN:isa:Person
-MAN:lifeArea:Social
-MOM:hasPurpose:to raise a child
-MOM:hasSize:7
-MOM:hasSyllables:2
-MOM:isa:Female Parent
-MOM:isa:Parent
-MOM:lifeArea:Family
-MOMMA:hasPurpose:to raise a child
-MOMMA:hasSize:7
-MOMMA:hasSyllables:2
-MOMMA:isa:Female Parent
-MOMMA:isa:Parent
-MOMMA:lifeArea:Family
-MOMMY:hasPurpose:to raise a child
-MOMMY:hasSize:7
-MOMMY:hasSyllables:2
-MOMMY:isa:Female Parent
-MOMMY:isa:Parent
-MOMMY:lifeArea:Family
-TEEN:hasPurpose:to be a child over 12 but under 20
-TEEN:hasSize:7
-TEEN:hasSyllables:1
-TEEN:lifeArea:Family
-Young Person:isa:Person
-MOTHER:hasPurpose:to raise a child
-MOTHER:hasSize:7
-MOTHER:hasSyllables:2
-MOTHER:isa:Female Parent
-MOTHER:isa:Person
-MOTHER:lifeArea:Family
-MAMA:hasPurpose:to be a mother
-MAMA:hasSize:7
-MAMA:hasSyllables:2
-MAMA:lifeArea:Family
-PARENT:hasPurpose:to raise a child
-PARENT:hasSize:7
-PARENT:hasSyllables:2
-PARENT:isa:Person
-PARENT:lifeArea:Family
-PERSON:hasPurpose:to live a meaningful life
-PERSON:hasSize:7
-PERSON:hasSyllables:2
-PERSON:isa:Animal
-PERSON:isa:Mammal
-PERSON:lifeArea:Physical
-PERSONALITY:hasPurpose:to express behavior patterns
-PERSONALITY:hasSize:0
-PERSONALITY:hasSyllables:5
-PERSONALITY:isa:Concept
-PERSONALITY:lifeArea:Spiritual
-PAPA:hasPurpose:to raise a child
-PAPA:hasSize:7
-PAPA:hasSyllables:2
-PAPA:isa:Male Parent
-PAPA:isa:Parent
-PAPA:lifeArea:Family
-MALE:hasPurpose:to carry the XY chromosome
-MALE:hasSize:0
-MALE:hasSyllables:1
-MALE:isa:Gender
-MALE:lifeArea:Physical
-RELATIONSHIP:hasPurpose:to form a bond of two people
-RELATIONSHIP:hasSize:0
-RELATIONSHIP:hasSyllables:4
-RELATIONSHIP:isa:Activity
-RELATIONSHIP:lifeArea:Social
+#ACTOR
+ACTOR:CATEGORY:PERSON
+ACTOR:HASPURPOSE:to play a role
+ACTOR:HASSIZE:7
+ACTOR:HASSPEED:7
+ACTOR:HASSYLLABLES:2
+ACTOR:ISA:Person
+ACTOR:LIFEAREA:Recreation
+
+#ACTRESS
+ACTRESS:CATEGORY:PERSON
+ACTRESS:HASPURPOSE:to play a role
+ACTRESS:HASSIZE:7
+ACTRESS:HASSPEED:7
+ACTRESS:HASSYLLABLES:2
+ACTRESS:ISA:Woman
+ACTRESS:LIFEAREA:Recreation
+
+#ADORED PERSON
+ADORED PERSON:CATEGORY:PERSON
+ADORED PERSON:ISA:Person
+
+#ARTIST
+ARTIST:CATEGORY:PERSON
+ARTIST:HASPURPOSE:to create new things
+ARTIST:HASSIZE:7
+ARTIST:HASSYLLABLES:2
+ARTIST:ISA:Person
+ARTIST:LIFEAREA:Creative
+
+#ASSISTANT
+ASSISTANT:CATEGORY:PERSON
+ASSISTANT:HASPURPOSE:to help with projects
+ASSISTANT:HASSIZE:7
+ASSISTANT:HASSYLLABLES:3
+ASSISTANT:ISA:Person
+ASSISTANT:LIFEAREA:Creative
+
+#AUTHOR
+AUTHOR:CATEGORY:PERSON
+AUTHOR:HASPURPOSE:to write books
+AUTHOR:HASSIZE:7
+AUTHOR:HASSYLLABLES:4
+AUTHOR:ISA:Person
+AUTHOR:LIFEAREA:Creative
+
+#BABY
+BABY:CATEGORY:PERSON
+BABY:HASPURPOSE:to grow up
+BABY:HASSIZE:6
+BABY:HASSYLLABLES:2
+BABY:ISA:Person
+BABY:LIFEAREA:Family
+
+#BOY
+BOY:CATEGORY:PERSON
+BOY:HASPURPOSE:to be a young man
+BOY:HASSIZE:6
+BOY:HASSYLLABLES:1
+BOY:ISA:Person
+BOY:LIFEAREA:Social
+
+#WOMAN
+WOMAN:CATEGORY:PERSON
+WOMAN:HASPURPOSE:to be feminine
+WOMAN:HASSIZE:7
+WOMAN:HASSYLLABLES:1
+WOMAN:ISA:Person
+WOMAN:LIFEAREA:Social
+
+#FEMALE PARENT
+FEMALE PARENT:CATEGORY:PERSON
+FEMALE PARENT:ISA:Person
+
+#FEMALE PERSON
+FEMALE PERSON:CATEGORY:PERSON
+FEMALE PERSON:ISA:Sibling
+
+#FEMALE
+FEMALE:CATEGORY:PERSON
+FEMALE:HASPURPOSE:to carry the XX chromosome
+FEMALE:HASSIZE:0
+FEMALE:HASSYLLABLES:2
+FEMALE:ISA:Gender
+FEMALE:LIFEAREA:Physical
+
+#FRIEND
+FRIEND:CATEGORY:PERSON
+FRIEND:HASPURPOSE:to provide companionship
+FRIEND:HASSIZE:7
+FRIEND:HASSYLLABLES:1
+FRIEND:ISA:Person
+FRIEND:LIFEAREA:Social
+
+#GIRLFRIEND
+GIRLFRIEND:CATEGORY:PERSON
+GIRLFRIEND:HASPURPOSE:to offer companionship in a relationship
+GIRLFRIEND:HASSIZE:7
+GIRLFRIEND:HASSYLLABLES:2
+GIRLFRIEND:ISA:Person
+GIRLFRIEND:LIFEAREA:Social
+
+#GUY
+GUY:CATEGORY:PERSON
+GUY:HASPURPOSE:to be a male person
+GUY:HASSIZE:7
+GUY:HASSYLLABLES:1
+GUY:ISA:Person
+GUY:LIFEAREA:Social
+
+#MAIDEN
+MAIDEN:CATEGORY:PERSON
+MAIDEN:HASPURPOSE:to be a young woman
+MAIDEN:HASSIZE:7
+MAIDEN:HASSYLLABLES:2
+MAIDEN:ISA:Person
+MAIDEN:LIFEAREA:Social
+
+#MALE PARENT
+MALE PARENT:CATEGORY:PERSON
+MALE PARENT:ISA:Parent
+
+#MALE PERSON
+MALE PERSON:CATEGORY:PERSON
+MALE PERSON:ISA:Person
+
+#MAN
+MAN:CATEGORY:PERSON
+MAN:HASPURPOSE:to be a male person
+MAN:HASSIZE:7
+MAN:HASSYLLABLES:1
+MAN:ISA:Person
+MAN:LIFEAREA:Social
+
+#MOM
+MOM:CATEGORY:PERSON
+MOM:HASPURPOSE:to raise a child
+MOM:HASSIZE:7
+MOM:HASSYLLABLES:2
+MOM:ISA:Parent
+MOM:LIFEAREA:Family
+
+#MOMMA
+MOMMA:CATEGORY:PERSON
+MOMMA:HASPURPOSE:to raise a child
+MOMMA:HASSIZE:7
+MOMMA:HASSYLLABLES:2
+MOMMA:ISA:Parent
+MOMMA:LIFEAREA:Family
+
+#MOMMY
+MOMMY:CATEGORY:PERSON
+MOMMY:HASPURPOSE:to raise a child
+MOMMY:HASSIZE:7
+MOMMY:HASSYLLABLES:2
+MOMMY:ISA:Parent
+MOMMY:LIFEAREA:Family
+
+#TEEN
+TEEN:CATEGORY:PERSON
+TEEN:HASPURPOSE:to be a child over 12 but under 20
+TEEN:HASSIZE:7
+TEEN:HASSYLLABLES:1
+TEEN:LIFEAREA:Family
+
+#YOUNG PERSON
+YOUNG PERSON:CATEGORY:PERSON
+YOUNG PERSON:ISA:Person
+
+#MOTHER
+MOTHER:CATEGORY:PERSON
+MOTHER:HASPURPOSE:to raise a child
+MOTHER:HASSIZE:7
+MOTHER:HASSYLLABLES:2
+MOTHER:ISA:Person
+MOTHER:LIFEAREA:Family
+
+#MAMA
+MAMA:CATEGORY:PERSON
+MAMA:HASPURPOSE:to be a mother
+MAMA:HASSIZE:7
+MAMA:HASSYLLABLES:2
+MAMA:LIFEAREA:Family
+
+#PARENT
+PARENT:CATEGORY:PERSON
+PARENT:HASPURPOSE:to raise a child
+PARENT:HASSIZE:7
+PARENT:HASSYLLABLES:2
+PARENT:ISA:Person
+PARENT:LIFEAREA:Family
+
+#PERSON
+PERSON:CATEGORY:PERSON
+PERSON:HASPURPOSE:to live a meaningful life
+PERSON:HASSIZE:7
+PERSON:HASSYLLABLES:2
+PERSON:ISA:Mammal
+PERSON:LIFEAREA:Physical
+
+#PERSONALITY
+PERSONALITY:CATEGORY:PERSON
+PERSONALITY:HASPURPOSE:to express behavior patterns
+PERSONALITY:HASSIZE:0
+PERSONALITY:HASSYLLABLES:5
+PERSONALITY:ISA:Concept
+PERSONALITY:LIFEAREA:Spiritual
+
+#PAPA
+PAPA:CATEGORY:PERSON
+PAPA:HASPURPOSE:to raise a child
+PAPA:HASSIZE:7
+PAPA:HASSYLLABLES:2
+PAPA:ISA:Parent
+PAPA:LIFEAREA:Family
+
+#MALE
+MALE:CATEGORY:PERSON
+MALE:HASPURPOSE:to carry the XY chromosome
+MALE:HASSIZE:0
+MALE:HASSYLLABLES:1
+MALE:ISA:Gender
+MALE:LIFEAREA:Physical
+
+#INTOXICATED PERSON
+INTOXICATED PERSON:CATEGORY:PERSON
+INTOXICATED PERSON:ISA:Person
+
+#DARLING
+DARLING:CATEGORY:PERSON
+DARLING:HASPURPOSE:to indicate affection
+DARLING:HASSIZE:7
+DARLING:HASSYLLABLES:2
+DARLING:ISA:Person
+DARLING:LIFEAREA:Social
+

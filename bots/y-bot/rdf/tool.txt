@@ -87,3 +87,22 @@ CAMERA:hasSize:4
 CAMERA:hasSyllables:3
 CAMERA:isa:Tool
 CAMERA:lifeArea:Physical
+Writing Instrument:isa:Tool
+Dishware:isa:Tool
+Eating Utensil:isa:Tool
+MATCH:hasPurpose:to start a fire
+MATCH:hasSize:0
+MATCH:hasSyllables:1
+MATCH:isa:Tool
+MATCH:lifeArea:Physical
+SCANNER:hasPurpose:to search for radio signals
+SCANNER:hasSize:0
+SCANNER:hasSyllables:1
+SCANNER:lifeArea:Physical
+PHONE:hasPurpose:to make calls
+PHONE:hasSize:4
+PHONE:hasSyllables:1
+PHONE:isa:Communications device
+PHONE:isa:Machine
+PHONE:lifeArea:Physical
+Communications device:isa:Machine
