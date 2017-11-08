@@ -70,7 +70,7 @@ def ask():
     sessionid = request.args['sessionid']
 
     try:
-        answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, logger=WEBCHAT_CLIENT)
+        answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
 
         response = {"question": question,
                     "answer": answer,
