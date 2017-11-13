@@ -23990,7 +23990,7 @@
     </category>
     <category>
         <pattern>* YOU</pattern>
-        <template>Enough about me, let's talk about my dress.</template>
+        <template>Enough about me, let's talk about you.</template>
     </category>
     <category>
         <pattern>* MILK</pattern>
