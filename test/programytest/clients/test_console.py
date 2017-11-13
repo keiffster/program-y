@@ -73,7 +73,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         client._arguments.context = False
         client.display_startup_messages()
-        self.assertEquals("None version None, initiated NoneHello", client.response)
+        self.assertEquals("None, App: vNone Grammar vNone, initiated NoneHello", client.response)
 
     def test_process_question_answer(self):
         arguments = MockArgumentParser()

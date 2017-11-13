@@ -150,10 +150,20 @@ class Bot(object):
     @property
     def get_version_string(self):
         if self._configuration is not None:
-            return "%s version %s, initiated %s" % (
-                self.brain.properties.property("name"),
-                self.brain.properties.property("version"),
-                self.brain.properties.property("birthdate"))
+            if self.brain.properties.has_property("version"):
+                # The old version of returning the version string, did not distinquish
+                # between App and Grammar version
+                return "%s, v%s, initiated %s" % (
+                    self.brain.properties.property("name"),
+                    self.brain.properties.property("version"),
+                    self.brain.properties.property("birthdate"))
+            else:
+                # This version now does
+                return "%s, App: v%s Grammar v%s, initiated %s" % (
+                    self.brain.properties.property("name"),
+                    self.brain.properties.property("app_version"),
+                    self.brain.properties.property("grammar_version"),
+                    self.brain.properties.property("birthdate"))
         return ""
 
     def has_conversation(self, clientid):

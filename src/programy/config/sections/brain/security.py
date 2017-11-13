@@ -22,10 +22,13 @@ from programy.config.base import BaseSectionConfigurationData
 
 class BrainSecurityConfiguration(BaseSectionConfigurationData):
 
+    DEFAULT_ACCESS_DENIED = "Access denied!"
+
     def __init__(self, service_name):
         BaseSectionConfigurationData.__init__(self, service_name)
         self._classname = None
         self._denied_srai = None
+        self._denied_text = None
         self._usergroups = None
 
     @property
@@ -37,6 +40,10 @@ class BrainSecurityConfiguration(BaseSectionConfigurationData):
         return self._denied_srai
 
     @property
+    def denied_text(self):
+        return self._denied_text
+
+    @property
     def usergroups(self):
         return self._usergroups
 
@@ -45,6 +52,7 @@ class BrainSecurityConfiguration(BaseSectionConfigurationData):
         if service is not None:
             self._classname = configuration_file.get_option(service, "classname", missing_value=None)
             self._denied_srai = configuration_file.get_option(service, "denied_srai", missing_value=None)
+            self._denied_text = configuration_file.get_option(service, "denied_text", missing_value=BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED)
             usergroups = configuration_file.get_option(service, "usergroups", missing_value=None)
             if usergroups is not None:
                 self._usergroups = self.sub_bot_root(usergroups, bot_root)

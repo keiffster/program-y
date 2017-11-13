@@ -40,7 +40,7 @@ from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
-
+from programy.dialog import Sentence
 
 class Brain(object):
     def __init__(self, configuration: BrainConfiguration):
@@ -478,13 +478,38 @@ class Brain(object):
     def dump_tree(self):
         self._aiml_parser.pattern_parser.root.dump(tabs="")
 
+    def resolve_matched_template(self, bot, clientid, match_context):
+        template_node = match_context.template_node()
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+        response = template_node.template.resolve(bot, clientid)
+
+        if "<oob>" in response:
+            response, oob = self.strip_oob(response)
+            if oob is not None:
+                oob_response = self.process_oob(bot, clientid, oob)
+                response = response + " " + oob_response
+
+        return response
+
+    def failed_authentication(self, bot, clientid):
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.error("[%s] failed authentication!")
+        if self.authentication.configuration.denied_srai is not None:
+            match_context = self._aiml_parser.match_sentence(bot, clientid,
+                                                             Sentence(self.authentication.configuration.denied_srai),
+                                                             topic_pattern="*",
+                                                             that_pattern="*")
+            if match_context is not None:
+                return self.resolve_matched_template(bot, clientid, match_context)
+
+        return self.authentication.configuration.denied_text
+
     def ask_question(self, bot, clientid, sentence, srai=False):
 
         if self.authentication is not None:
             if self.authentication.authenticate(bot, clientid) is False:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("[%s] failed authentication!")
-                return self.authentication.configuration.denied_srai
+                return self.failed_authentication(bot, clientid)
 
         conversation = bot.get_conversation(clientid)
 
@@ -523,18 +548,6 @@ class Brain(object):
                                                          that_pattern=that_pattern)
 
         if match_context is not None:
-
-            template_node = match_context.template_node()
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
-            response = template_node.template.resolve(bot, clientid)
-
-            if "<oob>" in response:
-                response, oob = self.strip_oob(response)
-                if oob is not None:
-                    oob_response = self.process_oob(bot, clientid, oob)
-                    response = response + " " + oob_response
-
-            return response
-
+            return self.resolve_matched_template(bot, clientid, match_context)
         return None
+

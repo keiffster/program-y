@@ -39,7 +39,8 @@ phone-number:0777 777 7777
 address:A macbook pro near you
 
 botmaster:Keith Sterling
-version:0.0.1
+grammar_version:1.0.0
+app_version: 1.2.2
 
 family:family
 siblings:Tilly
