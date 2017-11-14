@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>SEND A MESSAGE TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>$TEXT MY *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$TEXT TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SAY HELLO TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+                SAYING Hello
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND MY * A TEXT MESSAGE SAYING *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+                SAYING
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND * A MESSAGE</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEXT * HI</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+                SAYING HI
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEXT MESSAGES</pattern>
+        <template>
+            <srai>SEND A TEXT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEND A TEXT MESSAGE</pattern>
+        <template>
+            <srai>TEXT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEND A TEXT</pattern>
+        <template>
+            <srai>TEXT</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>SEND * A TEXT</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEXT MESSAGE *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEXT MESSAGE</pattern>
+        <template>
+            <srai>SEND A TEXT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND A TEXT MESSAGE TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND MESSAGE TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND TEXT MESSAGE</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND A TEXT</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND A TEXT TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND TEXT</pattern>
+        <template>
+            <srai>TEXT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND TEXT TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TEXT</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND * A TEXT SAYING *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+                SAYING
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SAY HI TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+                SAYING Hi
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TEXT *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND TEXT MESSAGE TO *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND A TEXT MESSAGE TO MY *</pattern>
+        <template>
+            <srai>TEXT MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND A TEXT *</pattern>
+        <template>
+            <srai>TEXT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND AN SMS</pattern>
+        <template>
+            <srai>SEND A TEXT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MESSAGE</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$TEXT * * I *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                <star index="2"/>
+                SMESSAGE I
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$TEXT * I *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE I
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL * I *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE I
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL * *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$TEXT * *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$TEXT *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SMS MY *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COMPOSE MESSAGE</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND SMS</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND SMS TO *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND MESSAGE</pattern>
+        <template>
+            <srai>SMS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$MESSAGE *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>$SEND TEXT MESSAGE TO *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS MY
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE Where are you
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET * KNOW *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET * KNOW * VIA TEXT</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET MY * KNOW *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET MY * KNOW * VIA TEXT</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+                SMESSAGE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND TEXT *</pattern>
+        <template>
+            <srai>SMS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

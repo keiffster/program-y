@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>THANK YOU THANK YOU *</pattern>
+        <template>
+            <srai>THANK YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANKS SO MUCH</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THX *</pattern>
+        <template>
+            <srai>THANKS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANX</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK *</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THX</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANKS *</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOOD THANKS *</pattern>
+        <template>
+            <srai>I AM GOOD</srai>
+            <srai>THANKS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THNX</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANKS FOR *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>THANK</pattern>
+        <template>
+            <srai>THANKS</srai> <!-- REDUCTION -->
+        </template>
+    </category>
+    <category>
+        <pattern>THANKS FOR THE *</pattern>
+        <template>
+            <srai>THANKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FINE THANK YOU</pattern>
+        <template>
+            <srai>I AM FINE</srai>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU THAT WAS *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+            <srai>THAT WAS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GRACIAS</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU SO MUCH</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MERCI</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>THANKYOU</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU I *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU GOOD NIGHT</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+            <srai>GOOD NIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU FOR YOUR *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TY</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU FOR *</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THANK YOU THANK YOU</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHY THANK YOU *</pattern>
+        <template>
+            <srai>THANK YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>THANKS YOU</pattern>
+        <template>
+            <srai>THANK YOU</srai>
+        </template>
+    </category>
+
+
+
+</aiml>

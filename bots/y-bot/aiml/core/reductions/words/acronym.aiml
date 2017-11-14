@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT _ INITIAL LETTERS OF * AND *</pattern>
+        <template>
+            <srai>ACRONYM
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ ACRONYM <set>preposition</set> * AND *
+        </pattern>
+        <template>
+            <srai>ACRONYM
+                <star index="3"/>
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ ACRONYM <set>preposition</set> *
+        </pattern>
+        <template>
+            <srai>ACRONYM
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

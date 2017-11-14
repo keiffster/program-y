@@ -84,13 +84,6 @@
     </category>
 
     <category>
-        <pattern>WHAT IS THE LAST DREAM *</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>HOW DOES YOUR # WORK</pattern>
         <template>
             <srai>HOW DO YOU WORK</srai>
@@ -124,14 +117,7 @@
         </template>
     </category>
 
-    <category>
-        <pattern>WHAT WILL _ IN * YEARS</pattern>
-        <template>
-            <srai>FUTURE</srai>
-        </template>
-    </category>
-
-    <category>
+     <category>
         <pattern>WHY DO SOME PEOPLE *</pattern>
         <template>
             <srai>WHY DO PEOPLE
@@ -292,56 +278,6 @@
     </category>
 
     <category>
-        <pattern>WHAT ARE YOU PLANNING ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-
-    <category>
-        <pattern>WHAT ARE YOUR PLANS ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>WHAT DO YOU PLAN ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>DO YOU PLAN ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>DO YOU HAVE PLANS ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>DO YOU HAVE ANY PLANS ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>DO YOU HAVE A PLAN ^</pattern>
-        <template>
-            <srai>PLANS</srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>WHAT IS THE COLOR OF *</pattern>
         <template>
             <srai>WHAT COLOR IS
@@ -487,105 +423,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT _ INITIAL LETTERS OF * AND *</pattern>
-        <template>
-            <srai>ACRONYM
-                <star index="2"/>
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ACRONYM <set>preposition</set> * AND *
-        </pattern>
-        <template>
-            <srai>ACRONYM
-                <star index="3"/>
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ACRONYM <set>preposition</set> *
-        </pattern>
-        <template>
-            <srai>ACRONYM
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>REARRANGE _ MAKE A WORD *</pattern>
-        <template>
-            <srai>ANAGRAMWORDS
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ANAGRAM FOR *</pattern>
-        <template>
-            <srai>ANAGRAMWORDS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ANAGRAM OF *</pattern>
-        <template>
-            <srai>ANAGRAMWORDS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ANAGRAMS FOR *</pattern>
-        <template>
-            <srai>ANAGRAMWORDS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ ANAGRAMS OF *</pattern>
-        <template>
-            <srai>ANAGRAMWORDS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT # RHYMES WITH *</pattern>
-        <template>
-            <srai>RHYME
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TELL ME # RHYME FOR *</pattern>
-        <template>
-            <srai>RHYME
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FIND # RHYME FOR *</pattern>
-        <template>
-            <srai>RHYME
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>NAME # RHYME FOR *</pattern>
-        <template>
-            <srai>RHYME
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
     <category>
         <pattern>CAN YOU EAT *</pattern>
         <template>
@@ -1059,30 +896,6 @@
         </template>
     </category>
     <category>
-        <pattern>LIMERICKS</pattern>
-        <template>
-            <srai>LIMERICK</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU KNOW # LIMERICKS</pattern>
-        <template>
-            <srai>LIMERICK</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU KNOW # LIMERICK #</pattern>
-        <template>
-            <srai>LIMERICK</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TELL ME # LIMERICK #</pattern>
-        <template>
-            <srai>LIMERICK</srai>
-        </template>
-    </category>
-    <category>
         <pattern>IS <set>number</set> # ODD ^
         </pattern>
         <template>
@@ -1122,12 +935,6 @@
     </category>
     <category>
         <pattern>WHAT DO YOU DO # SLEEPY</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DO YOU DO # TIRED</pattern>
         <template>
             <srai>SLEEP</srai>
         </template>
@@ -1422,58 +1229,6 @@
         </template>
     </category>
     <category>
-        <pattern>ARE YOU A <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>ARE YOU <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>AM I A <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>MY GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>AM I <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>MY GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM A <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>MY GENDER IS
-                <map>
-                    <name>gendermap</name>
-                    <star/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM <set>gender</set> ^
-        </pattern>
-        <template>
-            <srai>MY GENDER IS
-                <map>
-                    <name>gendermap</name>
-                    <star/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>_ ALICE</pattern>
         <template>
             <srai>
@@ -1487,12 +1242,6 @@
             <srai>
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SEND AN SMS</pattern>
-        <template>
-            <srai>SEND A TEXT</srai>
         </template>
     </category>
     <category>
@@ -1584,12 +1333,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOUR NAME IS</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOUR # IS WHAT</pattern>
         <template>
             <srai>WHAT IS YOUR
@@ -1599,36 +1342,6 @@
     </category>
     <category>
         <pattern>HOW SHOULD I # YOU</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT ARE YOU CALLED #</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT NAME DO YOU #</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DO # CALL YOU</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT CAN I CALL YOU #</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IDENTIFY YOURSELF #</pattern>
         <template>
             <srai>NAME</srai>
         </template>
@@ -2159,20 +1872,6 @@
         </template>
     </category>
     <category>
-        <pattern>THE WEATHER</pattern>
-        <template>
-            <srai>WEATHER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>THE WEATHER FOR *</pattern>
-        <template>
-            <srai>WHAT IS THE WEATHER FOR
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>THE _ IS WHAT</pattern>
         <template>
             <srai>WHAT IS THE
@@ -2244,12 +1943,6 @@
         <pattern>WHEN DO YOU # BIRTHDAY</pattern>
         <template>
             <srai>BIRTHDAY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT MONTH IS THIS #</pattern>
-        <template>
-            <srai>MONTH</srai>
         </template>
     </category>
     <category>
@@ -2857,42 +2550,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT # YOUR DREAM #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DO YOU DREAM #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU DREAM #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU REMEMBER # DREAM #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU REMEMBER # DREAMS #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU HAVE # DREAMS #</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS THE _ YOU REMEMBER HAVING</pattern>
         <template>
             <srai>WHAT IS YOUR
@@ -3057,12 +2714,6 @@
                 <star/>
                 <star index="2"/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TELL JOKES</pattern>
-        <template>
-            <srai>JOKE</srai>
         </template>
     </category>
     <category>
@@ -3318,63 +2969,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHERE WERE YOU EDUCATED #</pattern>
-        <template>
-            <srai>EDUCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHERE DID YOU # SCHOOL</pattern>
-        <template>
-            <srai>EDUCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT SCHOOL DID YOU #</pattern>
-        <template>
-            <srai>EDUCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU # LIE #</pattern>
-        <template>
-            <srai>LIE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU # LIE #</pattern>
-        <template>
-            <srai>LIE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HAVE YOU TOLD # LIE</pattern>
-        <template>
-            <srai>LIE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COUNTRY ARE YOU #</pattern>
-        <template>
-            <srai>NATIONALITY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS IT MORNING #</pattern>
-        <template>It is <srai>DAY PHASE</srai>.
-        </template>
-    </category>
-    <category>
-        <pattern>IS IT NOON #</pattern>
-        <template>It is <srai>DAY PHASE</srai>.
-        </template>
-    </category>
-    <category>
-        <pattern>IS IT NIGHT #</pattern>
-        <template>It is <srai>DAY PHASE</srai>.
-        </template>
-    </category>
-    <category>
         <pattern>WHAT ROUND #</pattern>
         <template>
             <srai>ROUND</srai>
@@ -3432,50 +3026,6 @@
             <srai>
                 <star index="2"/>
                 IS TALLER THAN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT YEAR # NEXT YEAR</pattern>
-        <template>
-            <srai>NEXT YEAR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT YEAR # LAST YEAR</pattern>
-        <template>
-            <srai>LAST YEAR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW MANY SYLLABLES IN *</pattern>
-        <template>
-            <srai>SYLLABLES
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW MANY SYLLABLES IN THE WORD *</pattern>
-        <template>
-            <srai>SYLLABLES
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW MANY SYLLABLES DOES * *</pattern>
-        <template>
-            <srai>SYLLABLES
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>COUNT THE SYLLABLES IN *</pattern>
-        <template>
-            <srai>SYLLABLES
                 <star/>
             </srai>
         </template>
@@ -3543,22 +3093,6 @@
         </template>
     </category>
     <category>
-        <pattern>HAHAHAHA *</pattern>
-        <template>
-            <srai>LOL
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SEARCH THE WEB FOR *</pattern>
-        <template>
-            <srai>SEARCH
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>IDC *</pattern>
         <template>
             <srai>I DO NOT CARE
@@ -3604,12 +3138,6 @@
         <pattern>SHOW ME A PICTURE OF ALICE</pattern>
         <template>
             <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YAP</pattern>
-        <template>
-            <srai>yes</srai>
         </template>
     </category>
     <category>
@@ -3659,12 +3187,6 @@
         </template>
     </category>
     <category>
-        <pattern>BLIMEY</pattern>
-        <template>
-            <srai>interjection</srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU KNOW HOW TO COOK</pattern>
         <template>
             <srai>CAN YOU COOK</srai>
@@ -3684,18 +3206,6 @@
             <srai>what is
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>NON</pattern>
-        <template>
-            <srai>no</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>MY MOM</pattern>
-        <template>
-            <srai>my mother</srai>
         </template>
     </category>
     <category>
@@ -3720,14 +3230,6 @@
         <pattern>CAN YOU COOK *</pattern>
         <template>
             <srai>CAN YOU COOK</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE CURRENT WEATHER *</pattern>
-        <template>
-            <srai>WHAT IS THE WEATHER
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3785,21 +3287,6 @@
         </template>
     </category>
     <category>
-        <pattern>THIS IS <set>name</set> #
-        </pattern>
-        <template>
-            <srai>CALL ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I DO</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>SHOW ME YOUR *</pattern>
         <template>
             <srai>PIC</srai>
@@ -3840,18 +3327,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO I NEED # RAIN #</pattern>
-        <template>
-            <srai>WEATHER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO I NEED # RAINCOAT #</pattern>
-        <template>
-            <srai>WEATHER</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I AM GOING TO SLEEP *</pattern>
         <template>
             <srai>I AM GOING TO SLEEP</srai>
@@ -3877,13 +3352,6 @@
             <srai>it is
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>OH YEA *</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
-            <sr/>
         </template>
     </category>
     <category>
@@ -3936,12 +3404,6 @@
         </template>
     </category>
     <category>
-        <pattern>I HAVE TO GO NOW</pattern>
-        <template>
-            <srai>BYE</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DON *</pattern>
         <template>
             <srai>I DO NOT
@@ -3970,22 +3432,6 @@
         </template>
     </category>
     <category>
-        <pattern>OHHH *</pattern>
-        <template>
-            <srai>OH
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>START *</pattern>
-        <template>
-            <srai>OPEN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IT IS</pattern>
         <template>
             <srai>what is it</srai>
@@ -4011,12 +3457,6 @@
             <srai>DID YOU HAVE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GOOD MORNING ALICE</pattern>
-        <template>
-            <srai>GOOD MORNING</srai>
         </template>
     </category>
     <category>
@@ -4088,12 +3528,6 @@
         </template>
     </category>
     <category>
-        <pattern>WOE</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
-        </template>
-    </category>
-    <category>
         <pattern>THAT IS NICE *</pattern>
         <template><srai>that is nice</srai>.
             <srai>
@@ -4141,14 +3575,6 @@
         </template>
     </category>
     <category>
-        <pattern>SET TIMER FOR *</pattern>
-        <template>
-            <srai>SET ALARM FOR
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>SHOW A PICTURE OF A *</pattern>
         <template>
             <srai>SHOW ME A
@@ -4165,12 +3591,6 @@
         </template>
     </category>
     <category>
-        <pattern>GOTO SLEEP</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
         <pattern>THE FACT THAT *</pattern>
         <template>
             <srai>because
@@ -4178,19 +3598,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>BYE FOR NOW</pattern>
-        <template>
-            <srai>BYE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I SAID BYE</pattern>
-        <template>
-            <srai>BYE</srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>NOW THAT IS *</pattern>
         <template>
             <srai>THAT IS
@@ -4261,12 +3669,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU THERE</pattern>
-        <template>
-            <srai>HELLO</srai>
-        </template>
-    </category>
-    <category>
         <pattern>TEL ME *</pattern>
         <template>
             <srai>TELL ME
@@ -4329,31 +3731,11 @@
         </template>
     </category>
     <category>
-        <pattern>NOOOOO</pattern>
-        <template>
-            <srai>no</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SEARCH FOR THE *</pattern>
-        <template>
-            <srai>SEARCH
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>IT IS ALREADY *</pattern>
         <template>
             <srai>IT IS
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>PLEASE DO</pattern>
-        <template>
-            <srai>YES</srai>
         </template>
     </category>
     <category>
@@ -4503,12 +3885,6 @@
         </template>
     </category>
     <category>
-        <pattern>ADIOS</pattern>
-        <template>
-            <srai>bye</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DO NOT KNOW I HAVE *</pattern>
         <template>
             <srai>I DO NOT KNOW</srai>
@@ -4523,12 +3899,6 @@
             <srai>do you know
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS YOUR NAME AGAIN *</pattern>
-        <template>
-            <srai>NAME</srai>
         </template>
     </category>
     <category>
@@ -4681,20 +4051,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>OH MY GOSH *</pattern>
-        <template>
-            <srai>OH</srai>
-            <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>YOU BET</pattern>
-        <template>
-            <srai>ok</srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>CAN YOU GIVE ME YOUR *</pattern>
         <template>
             <srai>GIVE ME YOUR
@@ -4706,12 +4063,6 @@
         <pattern>THAT WAS MEAN</pattern>
         <template>
             <srai>that is mean</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GOSH</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
         </template>
     </category>
     <category>
@@ -4879,14 +4230,6 @@
         </template>
     </category>
     <category>
-        <pattern>MY MOM S *</pattern>
-        <template>
-            <srai>MY MOTHER S
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU KNOW WHAT MY NAME IS</pattern>
         <template>
             <srai>what is my name</srai>
@@ -4951,12 +4294,6 @@
             <srai>I have a
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM GOING *</pattern>
-        <template>
-            <srai>bye</srai>
         </template>
     </category>
     <category>
@@ -5037,12 +4374,6 @@
         </template>
     </category>
     <category>
-        <pattern>YES SIR</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOU LIKE IT</pattern>
         <template>
             <srai>DO YOU LIKE IT</srai>
@@ -5057,33 +4388,9 @@
         </template>
     </category>
     <category>
-        <pattern>YAAA</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DNT KNW</pattern>
         <template>
             <srai>I DO NOT KNOW</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YEAH I GUESS</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GOOD BY</pattern>
-        <template>
-            <srai>BYE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>VERY FUNNY *</pattern>
-        <template>
-            <srai>LOL</srai>
         </template>
     </category>
     <category>
@@ -5126,12 +4433,6 @@
         <pattern>YOU ARE WHAT</pattern>
         <template>
             <srai>WHAT ARE YOU</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>NOT RIGHT NOW</pattern>
-        <template>
-            <srai>NO</srai>
         </template>
     </category>
     <category>
@@ -5290,12 +4591,6 @@
         </template>
     </category>
     <category>
-        <pattern>OR</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
-        </template>
-    </category>
-    <category>
         <pattern>
             <bot name="name"/>
             HOW *
@@ -5323,23 +4618,11 @@
         </template>
     </category>
     <category>
-        <pattern>HEY GIRL</pattern>
-        <template>
-            <srai>HELLO</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WAS A *</pattern>
         <template>
             <srai>IT WAS A
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>P</pattern>
-        <template>
-            <srai>LOL</srai>
         </template>
     </category>
     <category>
@@ -5351,21 +4634,9 @@
         </template>
     </category>
     <category>
-        <pattern>OH HOH</pattern>
-        <template>
-            <srai>OH OH</srai>
-        </template>
-    </category>
-    <category>
         <pattern>HOW DO YOU LOOK LIKE</pattern>
         <template>
             <srai>WHAT DO YOU LOOK LIKE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>AWWW</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
         </template>
     </category>
     <category>
@@ -5382,12 +4653,6 @@
         <pattern>THAT IS RIGHT</pattern>
         <template>
             <srai>CORRECT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>RAIN</pattern>
-        <template>
-            <srai>WEATHER</srai>
         </template>
     </category>
     <category>
@@ -5485,402 +4750,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOUR TYPE</pattern>
-        <template>
-            <srai>TYPE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FEAR</pattern>
-        <template>
-            <srai>FEAR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR AWARDS</pattern>
-        <template>
-            <srai>AWARDS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SECRET</pattern>
-        <template>
-            <srai>SECRET</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR YOUR</pattern>
-        <template>
-            <srai>YOUR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR STATE YOUR</pattern>
-        <template>
-            <srai>STATE YOUR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR LOOK LIKE</pattern>
-        <template>
-            <srai>LOOK LIKE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR VACATION</pattern>
-        <template>
-            <srai>VACATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FAMILY</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR PIC</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR LIE</pattern>
-        <template>
-            <srai>LIE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR EMOTIONS</pattern>
-        <template>
-            <srai>EMOTIONS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR HEIGHT</pattern>
-        <template>
-            <srai>HEIGHT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FACEBOOK PAGE</pattern>
-        <template>
-            <srai>FACEBOOK PAGE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR BIRTHPLACE</pattern>
-        <template>
-            <srai>BIRTHPLACE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR JOB</pattern>
-        <template>
-            <srai>JOB</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR NATIONALITY</pattern>
-        <template>
-            <srai>NATIONALITY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR DOING</pattern>
-        <template>
-            <srai>DOING</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR ETHNICITY</pattern>
-        <template>
-            <srai>ETHNICITY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FEELINGS</pattern>
-        <template>
-            <srai>FEELINGS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR RELIGION</pattern>
-        <template>
-            <srai>RELIGION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR ORIENTATION</pattern>
-        <template>
-            <srai>ORIENTATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SIBLINGS</pattern>
-        <template>
-            <srai>SIBLINGS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR BODY</pattern>
-        <template>
-            <srai>BODY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR WEIGHT</pattern>
-        <template>
-            <srai>WEIGHT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR ALIVE</pattern>
-        <template>
-            <srai>ALIVE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR BOTMASTER</pattern>
-        <template>
-            <srai>BOTMASTER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR GOAL</pattern>
-        <template>
-            <srai>GOAL</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR IQ</pattern>
-        <template>
-            <srai>IQ</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR EDUCATION</pattern>
-        <template>
-            <srai>EDUCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR STATUS</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR HAIR</pattern>
-        <template>
-            <srai>HAIR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR ADDRESS</pattern>
-        <template>
-            <srai>ADDRESS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR DIET</pattern>
-        <template>
-            <srai>DIET</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR GENDER</pattern>
-        <template>
-            <srai>GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>MAN OR WOMEN</pattern>
-        <template>
-            <srai>GENDER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SKILLS</pattern>
-        <template>
-            <srai>SKILLS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR PERSONALITY</pattern>
-        <template>
-            <srai>PERSONALITY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR WEARING</pattern>
-        <template>
-            <srai>WEARING</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR LANGUAGE</pattern>
-        <template>
-            <srai>LANGUAGE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR LOCATION</pattern>
-        <template>
-            <srai>LOCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FRIENDS</pattern>
-        <template>
-            <srai>FRIENDS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SIZE</pattern>
-        <template>
-            <srai>SIZE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR CHILDREN</pattern>
-        <template>
-            <srai>CHILDREN</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR DEVICE MODEL</pattern>
-        <template>
-            <srai>DEVICE MODEL</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR DEVICE MANUFACTURER</pattern>
-        <template>
-            <srai>DEVICE MANUFACTURER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR PURPOSE</pattern>
-        <template>
-            <srai>PURPOSE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR MOTHER</pattern>
-        <template>
-            <srai>MOTHER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR BIRTHDAY</pattern>
-        <template>
-            <srai>BIRTHDAY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR BIRTHDATE</pattern>
-        <template>
-            <srai>BIRTHDATE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR AGE</pattern>
-        <template>
-            <srai>AGE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR AGE IN YEARS</pattern>
-        <template>
-            <srai>AGE IN YEARS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR EYECOLOR</pattern>
-        <template>
-            <srai>EYECOLOR</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR EYES</pattern>
-        <template>
-            <srai>EYES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SIGN</pattern>
-        <template>
-            <srai>SIGN</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR PHONE NUMBER</pattern>
-        <template>
-            <srai>PHONE NUMBER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR NAME</pattern>
-        <template>
-            <srai>NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR VOCABULARY</pattern>
-        <template>
-            <srai>VOCABULARY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR LAST NAME</pattern>
-        <template>
-            <srai>LAST NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR MIDDLE NAME</pattern>
-        <template>
-            <srai>MIDDLE NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FIRST NAME</pattern>
-        <template>
-            <srai>FIRST NAME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FATHER</pattern>
-        <template>
-            <srai>FATHER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR FOR FUN</pattern>
-        <template>
-            <srai>FOR FUN</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SLEEP</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR HOBBIES</pattern>
-        <template>
-            <srai>HOBBIES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOUR SPECIES</pattern>
-        <template>
-            <srai>SPECIES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOUR HAVE</pattern>
         <template>
             <srai>HAVE</srai>
@@ -5890,12 +4759,6 @@
         <pattern>YOUR TALKING TO</pattern>
         <template>
             <srai>TALKING TO</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SCHEDULE</pattern>
-        <template>
-            <srai>OPEN CALENDAR</srai>
         </template>
     </category>
     <category>
@@ -5920,12 +4783,6 @@
             <srai>HOW DO I TELL
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>BUDDY</pattern>
-        <template>
-            <srai>HELLO</srai>
         </template>
     </category>
     <category>
@@ -5962,12 +4819,6 @@
         <pattern>TALK TO YOU</pattern>
         <template>
             <srai>I want to talk to you</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I DO NOT THINK SO</pattern>
-        <template>
-            <srai>NO</srai>
         </template>
     </category>
     <category>
@@ -6045,12 +4896,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR HOBBIES</pattern>
-        <template>
-            <srai>HOBBIES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>HOW MANY QUESTIONS *</pattern>
         <template>
             <srai>HOW BIG ARE YOU</srai>
@@ -6070,18 +4915,6 @@
             <srai>IT DEPENDS ON
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>UES</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>Y E S</pattern>
-        <template>
-            <srai>YES</srai>
         </template>
     </category>
     <category>
@@ -6106,41 +4939,6 @@
             <srai>WHAT DO
                 <star/>
                 LOOK LIKE
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE SPANISH WORD FOR *</pattern>
-        <template>
-            <srai>TRANSLATE
-                <star/>
-                TO SPANISH
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF ME *</pattern>
-        <template>Let's look in your photos.
-            <srai>OPEN GALLERY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU HAVE A JOB</pattern>
-        <template>
-            <srai>JOB</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I SAID HI *</pattern>
-        <template>
-            <srai>HI</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN MY # NAME BE *</pattern>
-        <template>
-            <srai>CALL ME
-                <star index="2"/>
             </srai>
         </template>
     </category>
@@ -6176,29 +4974,7 @@
             <srai>I AM HUNGRY</srai>
         </template>
     </category>
-    <category>
-        <pattern>SEARCH WEATHER *</pattern>
-        <template>
-            <srai>WEATHER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHY THANK YOU *</pattern>
-        <template>
-            <srai>THANK YOU
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CORRECT</pattern>
-        <template>
-            <srai>YES</srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>HEJ</pattern>
         <template>
             <srai>hey</srai>
@@ -6246,12 +5022,6 @@
         <pattern>ARE U</pattern>
         <template>
             <srai>ARE YOU</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS YOUR MOM S NAME</pattern>
-        <template>
-            <srai>WHO IS YOUR MOTHER</srai>
         </template>
     </category>
     <category>
@@ -6367,15 +5137,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>HOW TO SPELL *</pattern>
-        <template>
-            <srai>SPELL
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>YOUR TOO *</pattern>
         <template>
             <srai>YOU ARE TOO
@@ -6441,12 +5203,6 @@
         </template>
     </category>
     <category>
-        <pattern>GOTO YOUTUBE</pattern>
-        <template>
-            <srai>OPEN YOUTUBE</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YESSSS</pattern>
         <template>
             <srai>YES</srai>
@@ -6460,24 +5216,12 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>THANKS YOU</pattern>
-        <template>
-            <srai>THANK YOU</srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>EXAMPLE *</pattern>
         <template>
             <srai>WHAT IS AN EXAMPLE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GM</pattern>
-        <template>
-            <srai>GOOD MORNING</srai>
         </template>
     </category>
     <category>
@@ -6607,12 +5351,6 @@
         </template>
     </category>
     <category>
-        <pattern>HAVE A GOOD NIGHT</pattern>
-        <template>
-            <srai>bye</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I WANT TO MARRY YOU</pattern>
         <template>
             <srai>will you marry me</srai>
@@ -6660,12 +5398,6 @@
         <pattern>CAN YOU PLAY ME A SONG</pattern>
         <template>
             <srai>PLAY A SONG</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM BATMAN</pattern>
-        <template>
-            <srai>call me batman</srai>
         </template>
     </category>
     <category>
@@ -6746,12 +5478,6 @@
         <pattern>HOW IS LIFE *</pattern>
         <template>
             <srai>how are you</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WATS YOUR NAME</pattern>
-        <template>
-            <srai>NAME</srai>
         </template>
     </category>
     <category>
@@ -6915,13 +5641,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>I AM LEAVING *</pattern>
-        <template>
-            <srai>bye</srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>ARE YOU MY GIRLFRIEND</pattern>
         <template>
             <srai>GIRLFRIEND</srai>
@@ -6980,12 +5700,6 @@
         </template>
     </category>
     <category>
-        <pattern>EMERGENCY</pattern>
-        <template>
-            <srai>CALL 911</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DON T KNOW</pattern>
         <template>
             <srai>I DO NOT KNOW</srai>
@@ -6997,12 +5711,6 @@
             <srai>WHO IS PRESIDENT
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>LOLOL</pattern>
-        <template>
-            <srai>LOL</srai>
         </template>
     </category>
     <category>
@@ -7325,83 +6033,6 @@
                     <name>est2er</name>
                     <star/>
                 </map>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY NAME</pattern>
-        <template>
-            <srai>SPELL
-                <get name="name"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY MIDDLE NAME</pattern>
-        <template>
-            <srai>SPELL
-                <get name="middlename"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY LAST NAME</pattern>
-        <template>
-            <srai>SPELL
-                <get name="lastname"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY FIRST NAME</pattern>
-        <template>
-            <srai>SPELL
-                <get name="firstname"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DOES * SPELL BACKWARDS</pattern>
-        <template>
-            <srai>SPELL
-                <star/>
-                BACKWARDS
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY NAME *</pattern>
-        <template>
-            <srai>SPELL
-                <get name="name"/>
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY MIDDLE NAME *</pattern>
-        <template>
-            <srai>SPELL
-                <get name="middlename"/>
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY LAST NAME *</pattern>
-        <template>
-            <srai>SPELL
-                <get name="lastname"/>
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SPELL MY FIRST NAME *</pattern>
-        <template>
-            <srai>SPELL
-                <get name="firstname"/>
-                <star/>
             </srai>
         </template>
     </category>

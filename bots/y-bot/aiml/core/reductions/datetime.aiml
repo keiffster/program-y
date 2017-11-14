@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHAT DAY OF THE WEEK IS IT</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS TODAY</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT TODAY</pattern>
+        <template>
+            <srai>TODAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL IT BE TOMORROW</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS TOMORROW</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL TOMORROW BE</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH * IS IT</pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH <set>preposition</set>
+            <set>article</set> YEAR IS IT
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH <set>preposition</set>
+            <set>article</set> YEAR IS *
+        </pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAYS DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH IS THIS #</pattern>
+        <template>
+            <srai>MONTH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR</pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS IT</pattern>
+        <template>
+            <srai>YEAR</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT WILL _ IN * YEARS</pattern>
+        <template>
+            <srai>FUTURE</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT YEAR # NEXT YEAR</pattern>
+        <template>
+            <srai>NEXT YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR # LAST YEAR</pattern>
+        <template>
+            <srai>LAST YEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MORNING #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT NOON #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT NIGHT #</pattern>
+        <template>It is <srai>DAY PHASE</srai>.
+        </template>
+    </category>
+
+
+
+
+</aiml>

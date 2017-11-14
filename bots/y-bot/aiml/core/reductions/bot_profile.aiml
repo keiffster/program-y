@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>YOUR TYPE</pattern>
+        <template>
+            <srai>TYPE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FEAR</pattern>
+        <template>
+            <srai>FEAR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR AWARDS</pattern>
+        <template>
+            <srai>AWARDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SECRET</pattern>
+        <template>
+            <srai>SECRET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR YOUR</pattern>
+        <template>
+            <srai>YOUR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR STATE YOUR</pattern>
+        <template>
+            <srai>STATE YOUR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LOOK LIKE</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR VACATION</pattern>
+        <template>
+            <srai>VACATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FAMILY</pattern>
+        <template>
+            <srai>FAMILY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR PIC</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LIE</pattern>
+        <template>
+            <srai>LIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR EMOTIONS</pattern>
+        <template>
+            <srai>EMOTIONS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR HEIGHT</pattern>
+        <template>
+            <srai>HEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FACEBOOK PAGE</pattern>
+        <template>
+            <srai>FACEBOOK PAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BIRTHPLACE</pattern>
+        <template>
+            <srai>BIRTHPLACE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR JOB</pattern>
+        <template>
+            <srai>JOB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR NATIONALITY</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR DOING</pattern>
+        <template>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR ETHNICITY</pattern>
+        <template>
+            <srai>ETHNICITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FEELINGS</pattern>
+        <template>
+            <srai>FEELINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR RELIGION</pattern>
+        <template>
+            <srai>RELIGION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR ORIENTATION</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SIBLINGS</pattern>
+        <template>
+            <srai>SIBLINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BODY</pattern>
+        <template>
+            <srai>BODY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR WEIGHT</pattern>
+        <template>
+            <srai>WEIGHT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR ALIVE</pattern>
+        <template>
+            <srai>ALIVE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BOTMASTER</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR GOAL</pattern>
+        <template>
+            <srai>GOAL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR IQ</pattern>
+        <template>
+            <srai>IQ</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR EDUCATION</pattern>
+        <template>
+            <srai>EDUCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR STATUS</pattern>
+        <template>
+            <srai>STATUS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR HAIR</pattern>
+        <template>
+            <srai>HAIR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR ADDRESS</pattern>
+        <template>
+            <srai>ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR DIET</pattern>
+        <template>
+            <srai>DIET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SKILLS</pattern>
+        <template>
+            <srai>SKILLS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR PERSONALITY</pattern>
+        <template>
+            <srai>PERSONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR WEARING</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LANGUAGE</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LOCATION</pattern>
+        <template>
+            <srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FRIENDS</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SIZE</pattern>
+        <template>
+            <srai>SIZE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR CHILDREN</pattern>
+        <template>
+            <srai>CHILDREN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR DEVICE MODEL</pattern>
+        <template>
+            <srai>DEVICE MODEL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR DEVICE MANUFACTURER</pattern>
+        <template>
+            <srai>DEVICE MANUFACTURER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR PURPOSE</pattern>
+        <template>
+            <srai>PURPOSE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BIRTHDAY</pattern>
+        <template>
+            <srai>BIRTHDAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR BIRTHDATE</pattern>
+        <template>
+            <srai>BIRTHDATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR AGE</pattern>
+        <template>
+            <srai>AGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR AGE IN YEARS</pattern>
+        <template>
+            <srai>AGE IN YEARS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR EYECOLOR</pattern>
+        <template>
+            <srai>EYECOLOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR EYES</pattern>
+        <template>
+            <srai>EYES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SIGN</pattern>
+        <template>
+            <srai>SIGN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR PHONE NUMBER</pattern>
+        <template>
+            <srai>PHONE NUMBER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR NAME</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR VOCABULARY</pattern>
+        <template>
+            <srai>VOCABULARY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR LAST NAME</pattern>
+        <template>
+            <srai>LAST NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR MIDDLE NAME</pattern>
+        <template>
+            <srai>MIDDLE NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FIRST NAME</pattern>
+        <template>
+            <srai>FIRST NAME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FATHER</pattern>
+        <template>
+            <srai>FATHER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR FOR FUN</pattern>
+        <template>
+            <srai>FOR FUN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SLEEP</pattern>
+        <template>
+            <srai>SLEEP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR HOBBIES</pattern>
+        <template>
+            <srai>HOBBIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR SPECIES</pattern>
+        <template>
+            <srai>SPECIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR HOBBIES</pattern>
+        <template>
+            <srai>HOBBIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A JOB</pattern>
+        <template>
+            <srai>JOB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS MY BATTERY STATUS</pattern>
+        <template>
+            <srai>BATTERY LEVEL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR FAVORITE HOBBY</pattern>
+        <template>
+            <srai>HOBBIES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO INVENTED YOU</pattern>
+        <template>
+            <srai>BOTMASTER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE WERE YOU EDUCATED #</pattern>
+        <template>
+            <srai>EDUCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE DID YOU # SCHOOL</pattern>
+        <template>
+            <srai>EDUCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT SCHOOL DID YOU #</pattern>
+        <template>
+            <srai>EDUCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU # LIE #</pattern>
+        <template>
+            <srai>LIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU # LIE #</pattern>
+        <template>
+            <srai>LIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU TOLD # LIE</pattern>
+        <template>
+            <srai>LIE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COUNTRY ARE YOU #</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

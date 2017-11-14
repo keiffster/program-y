@@ -1,0 +1,533 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>GIVE ME A LINK *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WALGREENS *</pattern>
+        <template>
+            <srai>SEARCH WALGREENS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NIKE *</pattern>
+        <template>
+            <srai>SEARCH NIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>XBOX *</pattern>
+        <template>
+            <srai>SEARCH XBOX
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ANIMATION</pattern>
+        <template>
+            <srai>SEARCH ANIMATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BATMAN</pattern>
+        <template>
+            <srai>SEARCH BATMAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEARCH FOR *</pattern>
+        <template>
+            <srai>SEARCH FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COLDPLAY</pattern>
+        <template>
+            <srai>SEARCH COLDPLAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW TO FIND *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME 1 *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME AN *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH THE WEB FOR *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH FOR THE *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH WEATHER *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STAR TREK</pattern>
+        <template>
+            <srai>SEARCH STAR TREK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE CAN I FIND SOME *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BUY ME A *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>INFORMATION ABOUT *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BASKETBALL</pattern>
+        <template>
+            <srai>SEARCH BASKETBALL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW SOME *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOLD</pattern>
+        <template>
+            <srai>SEARCH GOLD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TACO *</pattern>
+        <template>
+            <srai>SEARCH TACO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WEBSITE *</pattern>
+        <template>
+            <srai>SEARCH WEBSITE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PET *</pattern>
+        <template>
+            <srai>SEARCH PET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PULL UP *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RECHERCHE *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME EVERYTHING ABOUT *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>OPEN A *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RESEARCH *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND ME SOME *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK ABOUT THE *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOGLE SEARCH *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEARCH *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOOK FOR *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ANY *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH FOR *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME A *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LINGUICA</pattern>
+        <template>
+            <srai>SEARCH LINGUICA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHECK FOR EMAIL THAT CONTAIN THE WORD *</pattern>
+        <template>
+            <srai>SEARCH EMAIL FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME A GIRLFRIEND</pattern>
+        <template>
+            <srai>SEARCH DATING SERVICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOOKUP</pattern>
+        <template>
+            <srai>SEARCH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH FOR</pattern>
+        <template>
+            <srai>SEARCH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A LIST OF *</pattern>
+        <template>
+            <srai>SEARCH FOR A LIST OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOOK UP A *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEARCH THE INTERNET FOR *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YAHOO *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL ME A *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOOK UP *</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME THE *</pattern>
+        <template>
+            <srai>SEARCH FOR THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * *</pattern>
+        <template>
+            <think>
+                <set name="isanumber">
+                    <srai>ISANUMBER
+                        <star/>
+                    </srai>
+                </set>
+            </think>
+            <condition name="isanumber">
+                <li value="true">
+                    <srai>MAP
+                        <star/>
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>
+                    <srai>SEARCH
+                        <star/>
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * ON EBAY</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+                ON EBAY
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * TIMES</pattern>
+        <template>
+            <srai>SEARCH
+                <star/>
+                TIMES
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A CHEAP *</pattern>
+        <template>
+            <srai>SEARCH FOR A CHEAP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A DOWNLOAD *</pattern>
+        <template>
+            <srai>SEARCH FOR A DOWNLOAD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A JOB</pattern>
+        <template>
+            <srai>SEARCH FOR JOB</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A SONG</pattern>
+        <template>
+            <srai>SEARCH FOR A SONG</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A VIDEO *</pattern>
+        <template>
+            <srai>SEARCH FOR A VIDEO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A WOMAN</pattern>
+        <template>
+            <srai>SEARCH FOR DATING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND AN ONLINE *</pattern>
+        <template>
+            <srai>SEARCH FOR AN ONLINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME A VIDEO OF *</pattern>
+        <template>
+            <srai>SEARCH FOR A VIDEO OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHICKEN *</pattern>
+        <template>
+            <srai>SEARCH CHICKEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SAMSUNG *</pattern>
+        <template>
+            <srai>SEARCH SAMSUNG
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+</aiml>
