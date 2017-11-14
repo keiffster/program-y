@@ -145,6 +145,160 @@
         <template>It is <srai>DAY PHASE</srai>.
         </template>
     </category>
+    <category>
+        <pattern>TODAY</pattern>
+        <template>
+            <srai>DAY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAY IN <set>number</set> DAYS
+        </pattern>
+        <template>
+            <srai>WEEKDAY IN
+                <star/>
+                DAYS
+            </srai>
+            <srai>DATE IN
+                <star/>
+                DAYS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAYS UNTIL * <set>ordinal</set> *
+        </pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+                <map name="ordinal2number">
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DAYS UNTIL *
+            <set>ordinal</set>
+        </pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+                <map name="ordinal2number">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY DAYS UNTIL *</pattern>
+        <template>
+            <srai>DAYS UNTIL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAY AFTER TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAY AFTER TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # DATE # DAY AFTER TOMORROW #</pattern>
+        <template>
+            <srai>DAYAFTERTOMORROWDATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY WILL IT BE IN <set>number</set> DAYS
+        </pattern>
+        <template>
+            <srai>WEEKDAY IN
+                <star/>
+                DAYS
+            </srai>
+            <srai>DATE IN
+                <star/>
+                DAYS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR COMES AFTER *</pattern>
+        <template>
+            <srai>WHAT COMES AFTER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DATE IS TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY S DATE</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT # DATE # TOMORROW ^</pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT # TOMORROW S DATE ^</pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT WILL # TOMORROW #</pattern>
+        <template>
+            <srai>TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO I NEED AN UMBRELLA *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>IS IT GOING TO RAIN TODAY</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FORECAST FOR *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER FORECAST FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

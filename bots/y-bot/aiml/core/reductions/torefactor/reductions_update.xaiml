@@ -70,20 +70,6 @@
     </category>
 
     <category>
-        <pattern>WHAT # DATE # TOMORROW ^</pattern>
-        <template>
-            <srai>DATE TOMORROW</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>WHAT # TOMORROW S DATE ^</pattern>
-        <template>
-            <srai>DATE TOMORROW</srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>HOW DOES YOUR # WORK</pattern>
         <template>
             <srai>HOW DO YOU WORK</srai>
@@ -602,26 +588,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHICH IS THE
-            <set>estup</set>
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS THE
-            <set>estdown</set>
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHICH OF THEM IS *</pattern>
         <template>
             <srai>WHICH IS
@@ -637,43 +603,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            IS <set>erup</set> THAN <set>name</set> BUT <set>erdown</set> THAN
-            <set>name</set>
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS
-                <star index="2"/>
-                THAN
-                <star index="3"/>
-            </srai>
-            <srai>
-                <star index="5"/>
-                IS
-                <star index="2"/>
-                THAN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS
-            <set>estup</set>
-        </pattern>
-        <template>
-            <srai>WHO IS
-                <map>
-                    <name>est2er</name>
-                    <star/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
+   <category>
         <pattern>WEN IZ *</pattern>
         <template>
             <srai>WHEN IS
@@ -840,44 +770,6 @@
         </template>
     </category>
     <category>
-        <pattern>
-            <set>name</set>
-            IS <set>name</set> S
-            <set>familiarname</set>
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS THE
-                <map>
-                    <name>familiarpredicate</name>
-                    <star index="3"/>
-                </map>
-                OF
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            S <set>familiarname</set> IS
-            <set>name</set>
-        </pattern>
-        <template>
-            <srai>
-                <star index="3"/>
-                IS THE
-                <map>
-                    <name>familiarpredicate</name>
-                    <star index="2"/>
-                </map>
-                OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS THE TOPIC</pattern>
         <template>
             <srai>TOPIC</srai>
@@ -931,12 +823,6 @@
         <pattern>WHAT DO YOU DO # EAT</pattern>
         <template>
             <srai>DIET</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DO YOU DO # SLEEPY</pattern>
-        <template>
-            <srai>SLEEP</srai>
         </template>
     </category>
     <category>
@@ -1065,86 +951,6 @@
             <srai>WHAT IS THE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DAY WILL IT BE IN <set>number</set> DAYS
-        </pattern>
-        <template>
-            <srai>WEEKDAY IN
-                <star/>
-                DAYS
-            </srai>
-            <srai>DATE IN
-                <star/>
-                DAYS
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DAY IN <set>number</set> DAYS
-        </pattern>
-        <template>
-            <srai>WEEKDAY IN
-                <star/>
-                DAYS
-            </srai>
-            <srai>DATE IN
-                <star/>
-                DAYS
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DAYS UNTIL * <set>ordinal</set> *
-        </pattern>
-        <template>
-            <srai>DAYS UNTIL
-                <star/>
-                <map name="ordinal2number">
-                    <star index="2"/>
-                </map>
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DAYS UNTIL *
-            <set>ordinal</set>
-        </pattern>
-        <template>
-            <srai>DAYS UNTIL
-                <star/>
-                <map name="ordinal2number">
-                    <star index="2"/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW MANY DAYS UNTIL *</pattern>
-        <template>
-            <srai>DAYS UNTIL
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE DAY AFTER TOMORROW #</pattern>
-        <template>
-            <srai>DAY AFTER TOMORROW</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DAY # DAY AFTER TOMORROW #</pattern>
-        <template>
-            <srai>DAY AFTER TOMORROW</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT # DATE # DAY AFTER TOMORROW #</pattern>
-        <template>
-            <srai>DAYAFTERTOMORROWDATE</srai>
         </template>
     </category>
     <category>
@@ -2304,14 +2110,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT YEAR COMES AFTER *</pattern>
-        <template>
-            <srai>WHAT COMES AFTER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS THE NEXT * AFTER *</pattern>
         <template>
             <srai>WHAT COMES AFTER
@@ -2420,12 +2218,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT WILL # TOMORROW #</pattern>
-        <template>
-            <srai>TOMORROW</srai>
-        </template>
-    </category>
-    <category>
         <pattern>
             <set>name</set>
             IS _ BUT <set>name</set> IS *
@@ -2440,19 +2232,6 @@
                 <star index="3"/>
                 IS
                 <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS <set>estup</set> *
-        </pattern>
-        <template>
-            <srai>WHO IS
-                <map>
-                    <name>est2er</name>
-                    <star/>
-                </map>
-                <star index="2"/>
             </srai>
         </template>
     </category>
@@ -2491,12 +2270,6 @@
         <pattern>DO YOU HAVE A SIGNIFICANT OTHER</pattern>
         <template>
             <srai>ARE YOU MARRIED</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHEN DO YOU # GO TO BED</pattern>
-        <template>
-            <srai>SLEEP</srai>
         </template>
     </category>
     <category>
@@ -2723,12 +2496,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME YOU</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
         <pattern>ARE YOU A BOT</pattern>
         <template>
             <srai>ARE YOU A ROBOT</srai>
@@ -2779,32 +2546,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>IS * <set>erup</set> THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>IS
-                <star/>
-                <star index="2"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS <set>erup</set>
-            <set>article</set> * OR *
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-                <star index="3"/>
-                OR
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>WHICH IS <set>erup</set> * OR <set>article</set> *
         </pattern>
         <template>
@@ -2813,142 +2555,6 @@
                 <star index="2"/>
                 OR
                 <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS <set>erup</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS <set>erup</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS <set>erdown</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS <set>erdown</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>article</set>
-            * IS <set>erup</set> THAN *
-        </pattern>
-        <template>
-            <srai>
-                <star index="2"/>
-                IS
-                <star index="3"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>article</set>
-            * IS <set>erdown</set> THAN *
-        </pattern>
-        <template>
-            <srai>
-                <star index="2"/>
-                IS
-                <star index="3"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>* IS <set>erup</set> THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS
-                <star index="2"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>* IS <set>erdown</set> THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS
-                <star index="2"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            IS <set>erup</set> THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS
-                <star index="2"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            IS <set>erdown</set> THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS
-                <star index="2"/>
-                THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE DIFFERENCE BETWEEN * AND *</pattern>
-        <template>
-            <srai>HOW DOES
-                <star/>
-                DIFFER FROM
-                <star index="2"/>
             </srai>
         </template>
     </category>
@@ -2978,88 +2584,6 @@
         <pattern>WHICH ROUND #</pattern>
         <template>
             <srai>ROUND</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I HAVE A <set>familiarname</set> NAMED * WHO *
-        </pattern>
-        <template>
-            <srai>MY
-                <star/>
-                <star index="2"/>
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE NAME OF <set>article</set>
-            <set>familiarname</set> #
-        </pattern>
-        <template>
-            <srai>MY FRIEND</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            IS TALLER THAN * AND * IS TALLER THAN *
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                IS TALLER THAN
-                <star index="2"/>
-            </srai>
-            <srai>
-                <star index="3"/>
-                IS TALLER THAN
-                <star index="4"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>
-            <set>name</set>
-            IS SHORTER THAN *
-        </pattern>
-        <template>
-            <srai>
-                <star index="2"/>
-                IS TALLER THAN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW DO * AND * DIFFER</pattern>
-        <template>
-            <srai>HOW DOES
-                <star/>
-                DIFFER FROM
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW DOES <set>article</set> * DIFFER FROM *
-        </pattern>
-        <template>
-            <srai>HOW DOES
-                <star index="2"/>
-                DIFFER FROM
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW DOES * DIFFER FROM <set>article</set> *
-        </pattern>
-        <template>
-            <srai>HOW DOES
-                <star/>
-                DIFFER FROM
-                <star index="3"/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3121,23 +2645,11 @@
         </template>
     </category>
     <category>
-        <pattern>I AM SLEEPY</pattern>
-        <template>
-            <srai>I am tired</srai>
-        </template>
-    </category>
-    <category>
         <pattern>CAN YOU SHOW *</pattern>
         <template>
             <srai>SHOW
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF ALICE</pattern>
-        <template>
-            <srai>PIC</srai>
         </template>
     </category>
     <category>
@@ -3174,14 +2686,6 @@
         <pattern>UNFORTUNATELY *</pattern>
         <template>
             <srai>
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SLEEP *</pattern>
-        <template>
-            <srai>DO YOU SLEEP
                 <star/>
             </srai>
         </template>
@@ -3287,12 +2791,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME YOUR *</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
         <pattern>GREAT</pattern>
         <template>
             <srai>GOOD</srai>
@@ -3324,12 +2822,6 @@
             <srai>CAN YOU SEE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM GOING TO SLEEP *</pattern>
-        <template>
-            <srai>I AM GOING TO SLEEP</srai>
         </template>
     </category>
     <category>
@@ -3572,14 +3064,6 @@
         <pattern>YOU ARE PRETTY SMART</pattern>
         <template>
             <srai>YOU ARE SMART</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW A PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3951,14 +3435,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME THE PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WAT R YOU *</pattern>
         <template>
             <srai>WHAT ARE YOU
@@ -4120,14 +3596,6 @@
         </template>
     </category>
     <category>
-        <pattern>DISPLAY *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I THOUGHT YOU *</pattern>
         <template>
             <srai>YOU
@@ -4183,14 +3651,6 @@
         <pattern>I WAS KIDDING</pattern>
         <template>
             <srai>just kidding</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A MAP *</pattern>
-        <template>
-            <srai>MAP
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -4380,14 +3840,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PIC OF A *</pattern>
-        <template>
-            <srai>SHOE ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DNT KNW</pattern>
         <template>
             <srai>I DO NOT KNOW</srai>
@@ -4479,94 +3931,6 @@
             <srai>I DO NOT KNOW</srai>
             <srai>THAT IS
                 <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS GREATER <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS LARGER <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS BIGGER <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS BIGGEST <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS LARGEST <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS GREATEST <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>LARGEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS SMALLER <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>SMALLEROF
-                <star/>
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS SMALLEST <set>number</set> OR
-            <set>number</set>
-        </pattern>
-        <template>
-            <srai>SMALLEROF
-                <star/>
-                <star index="2"/>
             </srai>
         </template>
     </category>
@@ -4794,20 +4158,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME YOUR BODY</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS IT RAINING IN *</pattern>
-        <template>
-            <srai>WHAT IS THE WEATHER IN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>NOT GOING TO *</pattern>
         <template>
             <srai>I AM NOT GOING TO
@@ -5025,31 +4375,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR <set>familiarname</set> S NAME
-        </pattern>
-        <template>
-            <srai>WHO IS YOUR
-                <map>
-                    <name>familiarpredicate</name>
-                    <star/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS YOUR
-            <set>familiarname</set>
-        </pattern>
-        <template>
-            <srai>
-                <map>
-                    <name>familiarpredicate</name>
-                    <star/>
-                </map>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOU MUST HAVE *</pattern>
         <template>
             <srai>YOU HAVE
@@ -5101,12 +4426,6 @@
             <srai>YOU ARE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SLEEPING</pattern>
-        <template>
-            <srai>are you sleeping</srai>
         </template>
     </category>
     <category>
@@ -5444,14 +4763,6 @@
         </template>
     </category>
     <category>
-        <pattern>A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHY DO NOT WE *</pattern>
         <template>
             <srai>LET US
@@ -5593,20 +4904,6 @@
         <pattern>OH GOD *</pattern>
         <template>
             <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF NAKED *</pattern>
-        <template>
-            <srai>FILTER INAPPROPRIATE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME SOME *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -5752,14 +5049,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME ANOTHER PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I LOVE YOU MORE *</pattern>
         <template>
             <srai>I LOVE YOU</srai>
@@ -5777,12 +5066,6 @@
             <srai>I DO NOT WANT
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM SLEEPING *</pattern>
-        <template>
-            <srai>I AM SLEEPING</srai>
         </template>
     </category>
     <category>
@@ -5985,22 +5268,6 @@
         <template>
             <srai>I AM SO
                 <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS
-            <set>estdown</set>
-        </pattern>
-        <template>
-            <think>
-                <set var="whowhat">what</set>
-            </think>
-            <srai>WHICH IS
-                <map>
-                    <name>est2er</name>
-                    <star/>
-                </map>
             </srai>
         </template>
     </category>

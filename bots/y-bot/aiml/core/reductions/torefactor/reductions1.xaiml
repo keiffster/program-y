@@ -49,16 +49,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU DISTINGUISH BETWEEN * AND *</pattern>
-        <template>
-            <srai>WHAT IS THE DIFFERENCE BETWEEN
-                <star/>
-                AND
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO U</pattern>
         <template>
             <srai>DO YOU</srai>
@@ -189,14 +179,6 @@
         <that>WHO IS SHE</that>
         <template>
             <srai>HER NAME IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOE ME</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -539,14 +521,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PHOTO *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT CITY AM I IN</pattern>
         <template>
             <srai>MY CITY</srai>
@@ -640,14 +614,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF SOME *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOU ARE USELESS *</pattern>
         <template>
             <srai>YOU ARE USELESS</srai>
@@ -687,14 +653,6 @@
         <pattern>B QUIET *</pattern>
         <template>
             <srai>BE QUIET
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU FIND ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -767,12 +725,6 @@
         <pattern>I AM A MALE *</pattern>
         <template>
             <srai>I AM A MALE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I AM SLEEPY *</pattern>
-        <template>
-            <srai>I AM TIRED</srai>
         </template>
     </category>
     <category>
@@ -870,22 +822,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A FUNNY PICTURE ABOUT A *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PIC *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>SPEAK SPANISH *</pattern>
         <template>
             <srai>LANGUAGE</srai>
@@ -936,14 +872,6 @@
         <pattern>WICH *</pattern>
         <template>
             <srai>WHICH
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WILL YOU SHOW ME YOUR *</pattern>
-        <template>
-            <srai>SHOW ME YOUR
                 <star/>
             </srai>
         </template>
@@ -1014,14 +942,6 @@
         <pattern>CAN YOU BE QUIET</pattern>
         <template>
             <srai>BE QUIET</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU PLEASE SHOW ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -1415,24 +1335,6 @@
     </category>
     <category>
     <category>
-        <pattern>SHOW ME A PICTURE OF A GIRL</pattern>
-        <template>
-            <srai>SHOW ME A GIRL</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF A HORSE</pattern>
-        <template>
-            <srai>SHOW ME A HORSE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF A ZOMBIE</pattern>
-        <template>
-            <srai>SHOW ME A ZOMBIE</srai>
-        </template>
-    </category>
-    <category>
         <pattern>SHUT THE * UP</pattern>
         <template>
             <srai>SHUT UP</srai>
@@ -1469,14 +1371,6 @@
         <pattern>TELL ME A LITTLE BIT ABOUT YOURSELF</pattern>
         <template>
             <srai>DESCRIBE YOURSELF</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TELL ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -1755,12 +1649,6 @@
         </template>
     </category>
     <category>
-        <pattern>WILL I NEED AN UMBRELLA TOMORROW</pattern>
-        <template>
-            <srai>WEATHER FORECAST</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WOULD YOU MARRY ME</pattern>
         <template>
             <srai>MARRY ME</srai>
@@ -1925,14 +1813,6 @@
         <pattern>BRAND NEW CONTACTS</pattern>
         <template>
             <srai>NEW CONTACT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN I SEE A PICTURE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -2402,14 +2282,6 @@
         </template>
     </category>
     <category>
-        <pattern>PICTURE OF THE *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>PLS</pattern>
         <template>
             <srai>PLEASE</srai>
@@ -2506,12 +2378,6 @@
             <srai>WHO ARE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DATE IS TODAY</pattern>
-        <template>
-            <srai>DATE</srai>
         </template>
     </category>
     <category>
@@ -2935,14 +2801,6 @@
         </template>
     </category>
     <category>
-        <pattern>LET ME SEE A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>LETS GO *</pattern>
         <template>
             <srai>LET US
@@ -3243,14 +3101,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO I NEED AN UMBRELLA *</pattern>
-        <template>
-            <srai>WEATHER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU GOT *</pattern>
         <template>
             <srai>DO YOU HAVE
@@ -3473,14 +3323,6 @@
         <pattern>SHH</pattern>
         <template>
             <srai>BE QUIET</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME SHOW ME *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3739,14 +3581,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU PLEASE SHOW ME *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>CAN YOU SPEAK JAPANESE</pattern>
         <template>
             <srai>LANGUAGE</srai>
@@ -3929,14 +3763,6 @@
         <pattern>MARRY ME *</pattern>
         <template>
             <srai>WILL YOU MARRY ME</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>MAY I SEE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -4298,22 +4124,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF THE WORLDS *</pattern>
-        <template>
-            <srai>SHOW ME THE WORLD S
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME ANOTHER *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>TELL ME ANOTHER JOKE *</pattern>
         <template>
             <srai>JOKE</srai>
@@ -4552,14 +4362,6 @@
         </template>
     </category>
     <category>
-        <pattern>I WANT TO SEE A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>ILL BE *</pattern>
         <template>
             <srai>I WILL BE
@@ -4708,14 +4510,6 @@
         <pattern>CAN I PLEASE *</pattern>
         <template>
             <srai>PLEASE CAN I
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN I SEE A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -4944,14 +4738,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU SHOW ME A PICTURE OF THE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU HAVE A NAME</pattern>
         <template>
             <srai>NAME</srai>
@@ -4961,14 +4747,6 @@
         <pattern>DO YOU KNOW SPANISH</pattern>
         <template>
             <srai>LANGUAGE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GIVE ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -5179,12 +4957,6 @@
             </srai>
         </template>
     </category>
-     <category>
-        <pattern>IS IT GOING TO RAIN TODAY</pattern>
-        <template>
-            <srai>WEATHER FORECAST</srai>
-        </template>
-    </category>
     <category>
         <pattern>IT IS BEEN *</pattern>
         <template>
@@ -5248,12 +5020,6 @@
             <srai>MY
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME YOUR PICTURE</pattern>
-        <template>
-            <srai>PIC</srai>
         </template>
     </category>
     <category>
@@ -5378,14 +5144,6 @@
         <pattern>CAN YOU LOOK *</pattern>
         <template>
             <srai>LOOK
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SEND ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -5831,14 +5589,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PHOTO OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>SHOW ME WHERE *</pattern>
         <template>
             <srai>WHERE
@@ -5873,12 +5623,6 @@
         <pattern>WHAT DO YOU DOING</pattern>
         <template>
             <srai>DOING</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE DATE</pattern>
-        <template>
-            <srai>DATE</srai>
         </template>
     </category>
     <category>
@@ -6324,14 +6068,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU HAVE A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU KNOW WHERE *</pattern>
         <template>
             <srai>WHERE
@@ -6534,14 +6270,6 @@
         <template>
             <srai>I DO NOT KNOW</srai>
             <srai>YOU
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>PLEASE SHOW ME *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -6822,18 +6550,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF A DOG</pattern>
-        <template>
-            <srai>SHOW ME A DOG</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF YOURSELF</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS YOUR BATTERY LEVEL</pattern>
         <template>
             <srai>BATTERY LEVEL</srai>
@@ -6901,14 +6617,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN I SEE A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>HOW ARE YOU DOING *</pattern>
         <template>
             <srai>HOW ARE YOU</srai>
@@ -6918,14 +6626,6 @@
         <pattern>I ALSO *</pattern>
         <template>
             <srai>I
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A MAP OF *</pattern>
-        <template>
-            <srai>MAP
                 <star/>
             </srai>
         </template>
@@ -7039,14 +6739,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN I SEE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU HAVE KIDS</pattern>
         <template>
             <srai>CHILDREN</srai>
@@ -7062,22 +6754,6 @@
         <pattern>HOW DO I GET TO *</pattern>
         <template>
             <srai>DIRECTIONS TO
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF AN *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -7376,14 +7052,6 @@
         </template>
     </category>
     <category>
-        <pattern>PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS MY NAME *</pattern>
         <template>
             <srai>WHAT IS MY NAME</srai>
@@ -7419,14 +7087,6 @@
         <pattern>LEARN THAT *</pattern>
         <template>
             <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PIC OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -7632,12 +7292,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS TODAY S DATE</pattern>
-        <template>
-            <srai>DATE</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHY CAN NOT YOU *</pattern>
         <template>
             <srai>CAN YOU
@@ -7677,14 +7331,6 @@
         <pattern>I AM TRYING TO *</pattern>
         <template>
             <srai>I WANT TO
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -7806,14 +7452,6 @@
             <srai>TELL
                 <star/>
                 <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME A PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
             </srai>
         </template>
     </category>
@@ -7987,33 +7625,9 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU SHOW ME A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I WANT TO SEE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>MAY I *</pattern>
         <template>
             <srai>CAN I
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -8068,14 +7682,6 @@
         <pattern>WHEN IS YOUR BIRTHDAY</pattern>
         <template>
             <srai>BIRTHDAY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SEND ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -8340,14 +7946,6 @@
         <pattern>ARE YOU A ROBOT</pattern>
         <template>
             <srai>SPECIES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -8765,14 +8363,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF THE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU KNOW MY NAME</pattern>
         <template>
             <srai>WHAT IS MY NAME</srai>
@@ -8992,22 +8582,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>AND *</pattern>
         <template>
             <sr/>
@@ -9107,14 +8681,6 @@
         <pattern>42</pattern>
         <template>
             <srai>WHAT IS 42</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>

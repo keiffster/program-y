@@ -226,6 +226,20 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>WILL I NEED AN UMBRELLA TOMORROW</pattern>
+        <template>
+            <srai>WEATHER FORECAST</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT RAINING IN *</pattern>
+        <template>
+            <srai>WHAT IS THE WEATHER IN
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

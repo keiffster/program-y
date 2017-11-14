@@ -779,6 +779,88 @@
             <srai>MY FATHER</srai>
         </template>
     </category>
+    <category>
+        <pattern>WHAT IS YOUR <set>familiarname</set> S NAME
+        </pattern>
+        <template>
+            <srai>WHO IS YOUR
+                <map>
+                    <name>familiarpredicate</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>familiarpredicate</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            IS <set>name</set> S
+            <set>familiarname</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                IS THE
+                <map>
+                    <name>familiarpredicate</name>
+                    <star index="3"/>
+                </map>
+                OF
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>name</set>
+            S <set>familiarname</set> IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="3"/>
+                IS THE
+                <map>
+                    <name>familiarpredicate</name>
+                    <star index="2"/>
+                </map>
+                OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE NAME OF <set>article</set>
+            <set>familiarname</set> #
+        </pattern>
+        <template>
+            <srai>MY FRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HAVE A <set>familiarname</set> NAMED * WHO *
+        </pattern>
+        <template>
+            <srai>MY
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
 
 
 

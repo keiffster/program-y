@@ -75,12 +75,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT TIME * YOU * BED *</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
-    <category>
         <pattern>_ 60 MINUTES</pattern>
         <template>
             <srai>
@@ -107,131 +101,9 @@
         </template>
     </category>
     <category>
-        <pattern>_ WHO IS <set>article</set> SHORTER
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                WHO IS SHORTER
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>_ WHO IS <set>article</set> TALLER
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-                WHO IS TALLER
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS LARGER * AND *</pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star/>
-                OR
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * LARGER THAN *</pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star/>
-                OR
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * SMALLER THAN *</pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-                OR
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * BIGGER THAN *</pattern>
-        <template>
-            <srai>WHICH IS BIGGER
-                <star/>
-                OR
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS SMALLER * OR *</pattern>
-        <template>
-            <think>
-                <set var="smaller">
-                    <srai>SMALLEROF
-                        <star/>
-                        AND
-                        <star index="2"/>
-                    </srai>
-                </set>
-            </think>
-            <condition var="smaller">
-                <li value="unknown">I can't tell which one is smaller.</li>
-                <li value="same">They are about the same size.</li>
-                <li>
-                    <formal>
-                        <get var="smaller"/>
-                    </formal>
-                    is smaller.
-                </li>
-            </condition>
-        </template>
-    </category>
-    <category>
-        <pattern>IS <set>article</set> * LARGER THAN *
-        </pattern>
-        <template>
-            <srai>IS
-                <star index="2"/>
-                LARGER THAN
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * LARGER THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>IS
-                <star/>
-                LARGER THAN
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TODAY</pattern>
-        <template>
-            <srai>DAY</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHERE ARE YOU</pattern>
         <template>
             <srai>LOCATION</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HOW IS * DIFFERENT FROM *</pattern>
-        <template>
-            <srai>HOW DOES
-                <star/>
-                DIFFER FROM
-                <star index="2"/>
-            </srai>
         </template>
     </category>
     <category>
@@ -912,14 +784,6 @@
         <pattern>WHAT COUNTY IS THIS</pattern>
         <template>
             <srai>MY COUNTY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DOES AN * LOOK LIKE</pattern>
-        <template>
-            <srai>SHOW ME AN
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -1806,14 +1670,6 @@
         </template>
     </category>
     <category>
-        <pattern>SEND ME A PIC *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT FUNCTIONS DO YOU HAVE</pattern>
         <template>
             <srai>WHAT CAN YOU DO</srai>
@@ -1889,14 +1745,6 @@
         <pattern>ARE YOU CANADIAN</pattern>
         <template>
             <srai>NATIONALITY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME A PICTURE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -2211,12 +2059,6 @@
         </template>
     </category>
     <category>
-        <pattern>ARE YOU SLEEPING</pattern>
-        <template>
-            <srai>TIRED</srai>
-        </template>
-    </category>
-    <category>
         <pattern>ARE YOU STRAIGHT</pattern>
         <template>
             <srai>ORIENTATION</srai>
@@ -2226,14 +2068,6 @@
         <pattern>CAN YOU COUNT</pattern>
         <template>
             <srai>COUNT TO 10</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU FIND ME A PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -2351,12 +2185,6 @@
         <pattern>I AM FINE THANKS</pattern>
         <template>
             <srai>I AM FINE</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I CAN NOT SLEEP *</pattern>
-        <template>
-            <srai>I CAN NOT SLEEP</srai>
         </template>
     </category>
     <category>
@@ -2723,12 +2551,6 @@
         </template>
     </category>
     <category>
-        <pattern>I AM SO TIRED</pattern>
-        <template>
-            <srai>I AM TIRED</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I DID NOT SAY THAT I SAID *</pattern>
         <template>
             <srai>I DID NOT SAY THAT</srai>
@@ -2763,22 +2585,6 @@
         </template>
     </category>
     <category>
-        <pattern>I NEED TO SEE *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>I WANT A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I WOULD LIKE TO PLAY *</pattern>
         <template>
             <srai>I WANT TO PLAY
@@ -2794,15 +2600,6 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>PICTURES *</pattern>
-        <template>
-            <srai>SHOW ME PICTURES
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
     <category>
         <pattern>SEND AN EMAIL</pattern>
         <template>
@@ -2877,12 +2674,6 @@
             <srai>WHERE IS
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAN YOU SHOW ME A PICTURE OF YOU</pattern>
-        <template>
-            <srai>PIC</srai>
         </template>
     </category>
     <category>
@@ -3041,12 +2832,6 @@
         </template>
     </category>
     <category>
-        <pattern>I WANT TO SLEEP</pattern>
-        <template>
-            <srai>I AM TIRED</srai>
-        </template>
-    </category>
-    <category>
         <pattern>IDK YOU *</pattern>
         <template>
             <srai>I DO NOT KNOW</srai>
@@ -3132,14 +2917,6 @@
         <pattern>WE WERE TALKING ABOUT *</pattern>
         <template>
             <srai>THE TOPIC IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DO * LOOK LIKE</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -3379,14 +3156,6 @@
         <pattern>WALMART *</pattern>
         <template>
             <srai>FIND THE NEAREST WALMART</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DOES THE * LOOK LIKE</pattern>
-        <template>
-            <srai>SHOW ME THE
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3673,12 +3442,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU SHOW ME A PICTURE</pattern>
-        <template>
-            <srai>HELP PICTURE</srai>
-        </template>
-    </category>
-    <category>
         <pattern>FINE THANKS *</pattern>
         <template>
             <srai>I AM FINE THANKS
@@ -3720,14 +3483,6 @@
         <pattern>NOTHING NOTHING</pattern>
         <template>
             <srai>NOTHING</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -3816,14 +3571,6 @@
             <srai>NICE TO MEET YOU TOO</srai>
         </template>
     </category>
-     <category>
-        <pattern>SEND ME A PICTURE OF YOUR *</pattern>
-        <template>
-            <srai>SHOW ME YOUR
-                <star/>
-            </srai>
-        </template>
-    </category>
     <category>
         <pattern>TODAY I *</pattern>
         <template>
@@ -3844,14 +3591,6 @@
             <srai>WHAT IS
                 <star/>
                 S PHONE NUMBER
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE FORECAST FOR *</pattern>
-        <template>
-            <srai>WHAT IS THE WEATHER FORECAST FOR
-                <star/>
             </srai>
         </template>
     </category>
@@ -4008,14 +3747,6 @@
         </template>
     </category>
     <category>
-        <pattern>SEND ME A PICTURE *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS THE CLOSEST *</pattern>
         <template>
             <srai>FIND THE NEAREST
@@ -4056,14 +3787,6 @@
         <template>
             <srai>I AGREE</srai>
             <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME HOW *</pattern>
-        <template>
-            <srai>HOW
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -4191,14 +3914,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN YOU SHOW ME YOUR *</pattern>
-        <template>
-            <srai>SHOW ME YOUR
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I GUESS I *</pattern>
         <template>
             <srai>I
@@ -4210,14 +3925,6 @@
         <pattern>I WOULD SAY *</pattern>
         <template>
             <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT DOES A * LOOK LIKE</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -4546,14 +4253,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT DOES * LOOK LIKE</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>CUZ *</pattern>
         <template>
             <srai>BECAUSE
@@ -4771,22 +4470,6 @@
         <pattern>PLAY SOME *</pattern>
         <template>
             <srai>PLAY
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME AN *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME PICTURES OF *</pattern>
-        <template>
-            <srai>SHOW ME
                 <star/>
             </srai>
         </template>
@@ -5171,12 +4854,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF YOU</pattern>
-        <template>
-            <srai>PIC</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WANT TO *</pattern>
         <template>
             <srai>DO YOU WANT TO
@@ -5452,14 +5129,6 @@
         </template>
     </category>
     <category>
-        <pattern>FIND A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>FIND A PLACE TO *</pattern>
         <template>
             <srai>MAP
@@ -5512,14 +5181,6 @@
             <srai>FIND THE NEAREST
                 <star/>
                 RESTAURANT
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FIND ANOTHER PICTURE *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE
-                <star/>
             </srai>
         </template>
     </category>
@@ -5609,12 +5270,6 @@
         <pattern>YOU SUCK *</pattern>
         <template>
             <srai>YOU SUCK</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE</pattern>
-        <template>
-            <srai>PIC</srai>
         </template>
     </category>
     <category>
@@ -6386,12 +6041,6 @@
         </template>
     </category>
     <category>
-        <pattern>I AM GOING TO BED GOODNIGHT</pattern>
-        <template>
-            <srai>I AM GOING TO BED</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WUT DOES *</pattern>
         <template>
             <srai>WHAT DOES
@@ -6450,14 +6099,6 @@
         <pattern>WHAT IS MY BOYFRIEND S NAME</pattern>
         <template>
             <srai>MY BOYFRIEND</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOU LOOK LIKE A *</pattern>
-        <template>You mean like this?
-            <srai>SHOW ME A
-                <star/>
-            </srai>
         </template>
     </category>
      <category>
@@ -6578,14 +6219,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME A PICTURE OF THE BIGGEST *</pattern>
-        <template>
-            <srai>SHOE ME THE BIGGEST
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>GET IT</pattern>
         <template>
             <srai>DO YOU UNDERSTAND</srai>
@@ -6659,12 +6292,6 @@
         <pattern>HOW TALL AM I</pattern>
         <template>
             <srai>MY HEIGHT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME A PICTURE OF A CAT</pattern>
-        <template>
-            <srai>SHOW ME A CAT</srai>
         </template>
     </category>
     <category>
@@ -6754,14 +6381,6 @@
         <pattern>SEND TEXT TO</pattern>
         <template>
             <srai>SEND TEXT</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FIND ME A PICTURE OF *</pattern>
-        <template>
-            <srai>SHOW ME A PICTURE OF
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -7049,14 +6668,6 @@
         <pattern>ACTUALLY I *</pattern>
         <template>
             <srai>I
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SEND ME A PICTURE OF A *</pattern>
-        <template>
-            <srai>SHOW ME A
                 <star/>
             </srai>
         </template>
@@ -7517,12 +7128,6 @@
             <srai>TELL ME</srai>
         </template>
     </category>
-     <category>
-        <pattern>DO YOU SLEEP</pattern>
-        <template>
-            <srai>SLEEP</srai>
-        </template>
-    </category>
     <category>
         <pattern>ME AND * ARE *</pattern>
         <template>
@@ -7811,14 +7416,6 @@
             <srai>HEY
                 <star/>
             </srai> <!-- REDUCTION -->
-        </template>
-    </category>
-    <category>
-        <pattern>SHOW ME AN IMAGE OF A *</pattern>
-        <template>
-            <srai>SHOW ME A
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -8312,14 +7909,6 @@
         </template>
     </category>
     <category>
-        <pattern>SHOW ME AN IMAGE OF *</pattern>
-        <template>
-            <srai>SHOW ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I AM ALSO A *</pattern>
         <template>
             <srai>I AM A
@@ -8511,153 +8100,6 @@
         <pattern>CAN YOU REMEMBER MY NAME</pattern>
         <template>
             <srai>what is my name</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS LARGER <set>article</set> * OR *
-        </pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star index="2"/>
-                OR
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS LARGER * OR <set>article</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star/>
-                OR
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS BIGGER *</pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH THE BIGGER OF *</pattern>
-        <template>
-            <srai>WHICH IS LARGER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>OF * AND * WHICH IS *</pattern>
-        <template>
-            <srai>WHICH IS
-                <star index="3"/>
-                <star/>
-                OR
-                <star index="2"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS SMALLER <set>article</set> * OR *
-        </pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star index="2"/>
-                OR
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS SMALLER * OR <set>article</set> *
-        </pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-                OR
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS TINIER *</pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH IS BIGGEST *</pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH THE LARGEST OF *</pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHICH THE TINIER OF *</pattern>
-        <template>
-            <srai>WHICH IS SMALLER
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS <set>article</set> * SMALLER THAN *
-        </pattern>
-        <template>
-            <srai>IS
-                <star index="2"/>
-                SMALLER THAN
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * SMALLER THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>IS
-                <star/>
-                SMALLER THAN
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS <set>article</set> * BIGGER THAN *
-        </pattern>
-        <template>
-            <srai>IS
-                <star index="2"/>
-                BIGGER THAN
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>IS * BIGGGER THAN <set>article</set> *
-        </pattern>
-        <template>
-            <srai>IS
-                <star/>
-                BIGGER THAN
-                <star index="3"/>
-            </srai>
         </template>
     </category>
 </aiml>
