@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>SPEAK SPANISH *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK OTHER LANGUAGES</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MOI *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPEAK JAPANESE</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK IN
+            <set>language</set>
+        </pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ET TU *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK JAPANESE</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK CHINESE</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LANGUAGES DO YOU SPEAK</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UN *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK GERMAN</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW SPANISH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>CAN YOU SPEAK SPANISH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK ENGLISH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK
+            <set>language</set>
+        </pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK SPANISH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SPEAK *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT YOU SPEAK *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SAY * IN
+            <set>language</set>
+        </pattern>
+        <template>
+            <srai>TRANSLATE
+                <star/>
+                TO
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COMMENT A VA</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK CANADIAN</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK ENGLISH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NA *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COMMENT TU T APPELLES</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BON *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MTO *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT LANGUAGES DO YOU SPEAK</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TU PARLE FRANAIS</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SPEAK IN *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NADA *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JE *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TU *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>QUE *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COMO *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU SPEAK FRENCH</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW HOW TO SPEAK *</pattern>
+        <template>
+            <srai>LANGUAGE</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

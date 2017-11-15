@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>CAN WE BE FRIENDS *</pattern>
+        <template>
+            <srai>CAN WE BE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO BE YOUR FRIEND *</pattern>
+        <template>
+            <srai>I WANT TO BE YOUR FRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE TO BE MY FRIEND</pattern>
+        <template>
+            <srai>ARE WE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN WE BE FRIENDS</pattern>
+        <template>
+            <srai>ARE WE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE FRIENDS</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY FRIENDS DO YOU HAVE</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY FRIENDS</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AM I YOUR FRIEND</pattern>
+        <template>
+            <srai>can we be friends</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO BE YOUR FRIEND</pattern>
+        <template>
+            <srai>CAN WE BE FRIENDS</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>MY FRIEND * WANTS TO KNOW *</pattern>
+        <template>
+            <srai>MY FRIEND S NAME IS
+                <star/>
+            </srai>
+            <srai>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY FRIENDS NAME IS *</pattern>
+        <template>
+            <srai>MY friend S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A BEST FRIEND</pattern>
+        <template>
+            <srai>WHO IS YOUR BEST FRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY FRIENDS *</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU FRIENDS WITH *</pattern>
+        <template>
+            <srai>FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WANT TO BE MY FRIEND</pattern>
+        <template>
+            <srai>ARE WE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WANT TO BE FRIENDS</pattern>
+        <template>
+            <srai>ARE WE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU MY FRIEND</pattern>
+        <template>
+            <srai>ARE WE FRIENDS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS YOUR BEST FRIEND</pattern>
+        <template>
+            <srai>BEST FRIEND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BESTFRIENDS NAME IS *</pattern>
+        <template>
+            <srai>MY bestfriend S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BEST FRIENDS *</pattern>
+        <template>
+            <srai>MY BEST FRIEND S
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

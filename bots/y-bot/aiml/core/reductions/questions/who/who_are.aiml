@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WHO ARE YOU *</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHO IS THERE</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO R YOU</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHO R U *</pattern>
+        <template>
+            <srai>WHO ARE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU TALKING TO *</pattern>
+        <template>
+            <srai>WHO ELSE ARE YOU TALKING TO</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT ARE THE NAMES OF *</pattern>
+        <template>
+            <srai>WHO ARE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ALICE</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+       <pattern>WHO AM I SPEAKING TO</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO AM I SPEAKING WITH</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO YOU ARE</pattern>
+        <template>
+            <srai>who are you</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO ARE YOU TALKING TO *</pattern>
+        <template>
+            <srai>WHO ARE YOU TALKING TO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AND YOU ARE</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

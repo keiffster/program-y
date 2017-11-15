@@ -692,6 +692,190 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>IS <set>article</set> * <set>erup</set> THAN *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                <star index="3"/>
+                THAN
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHICH IS <set>erup</set> * OR <set>article</set> *
+        </pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+                <star index="2"/>
+                OR
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS
+            <set>estdown</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="whowhat">who</set>
+            </think>
+            <srai>WHICH IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS
+            <set>estup</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="whowhat">who</set>
+            </think>
+            <srai>WHICH IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * LIKE *</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * AND * ALIKE</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE <set>article</set> * AND <set>article</set> * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE * AND <set>article</set> * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE <set>article</set> * AND * ALIKE
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS <set>article</set> * LIKE <set>article</set> *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS * LIKE <set>article</set> *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS <set>article</set> * LIKE *
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO * AND * HAVE IN COMMON</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO <set>article</set> * AND <set>article</set> * HAVE IN COMMON
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES * AND * HAVE IN COMMON</pattern>
+        <template>
+            <srai>HOW IS
+                <star/>
+                LIKE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DOES <set>article</set> * AND <set>article</set> * HAVE IN COMMON
+        </pattern>
+        <template>
+            <srai>HOW IS
+                <star index="2"/>
+                LIKE
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
 
 
 

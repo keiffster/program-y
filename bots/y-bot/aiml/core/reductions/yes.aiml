@@ -542,6 +542,42 @@
         </template>
     </category>
 
+    <category>
+        <pattern>YEAH BECAUSE *</pattern>
+        <template>
+            <srai>YES BECAUSE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SI *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DEFINITELY *</pattern>
+        <template>
+            <srai>YES
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YESSSS</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YES I MEAN</pattern>
+        <template>
+            <srai>YES</srai>
+        </template>
+    </category>
 
 
 </aiml>

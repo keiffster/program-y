@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+     <category>
+        <pattern>FIND THE NEAREST * TO ME</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ABLE TO FIND *</pattern>
+        <template>
+            <srai>CAN YOU FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BEST BUY</pattern>
+        <template>
+            <srai>FIND THE NEAREST BEST BUY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BANK</pattern>
+        <template>
+            <srai>FIND THE NEAREST BANK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND OUT *</pattern>
+        <template>
+            <srai>FIND OUT
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>CAN YOU HELP ME FIND *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COULD YOU FIND *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME THE *</pattern>
+        <template>
+            <srai>FIND THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND THE CLOSEST *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I FIND *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED TO FIND A *</pattern>
+        <template>
+            <srai>FIND A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND ME THE *</pattern>
+        <template>
+            <srai>FIND THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND A *</pattern>
+        <template>
+            <srai>FIND A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND ME A *</pattern>
+        <template>
+            <srai>FIND ME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIND *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LET US GET * DELIVERED</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+                DELIVERY
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS THE BEST PLACE TO GET PIZZA</pattern>
+        <template>
+            <srai>FIND THE NEAREST PIZZA</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY HEAD HURTS</pattern>
+        <template>
+            <srai>FIND THE NEAREST HOSPITAL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND GAS STATIONS</pattern>
+        <template>
+            <srai>MAP GAS STATIONS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND WALMART</pattern>
+        <template>
+            <srai>FIND THE NEAREST WALMART</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE CAN I BUY BEER</pattern>
+        <template>
+            <srai>FIND THE NEAREST BEER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS MCDONALD S</pattern>
+        <template>
+            <srai>FIND THE NEAREST MCDONALD S</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WALMART *</pattern>
+        <template>
+            <srai>FIND THE NEAREST WALMART</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MCDONALD S *</pattern>
+        <template>
+            <srai>FIND MCDONALD S
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAN YOU FIND MY *</pattern>
+        <template>
+            <srai>FIND MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEAREST *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * FOR ME</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * CLOEST TO YOU</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * CLOSEST TO THIS LOCATION</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * CLOSEST TO ME</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A LOCAL *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * CLOSE BY</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A NEW VOICE</pattern>
+        <template>
+            <srai>HELP VOICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * FOR ME</pattern>
+        <template>
+            <srai>FIND A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A RECIPE *</pattern>
+        <template>
+            <srai>WHAT IS A RECIPE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * NEAR ME</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A * NEARBY</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A VOICE</pattern>
+        <template>
+            <srai>HELP VOICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * AVENUE</pattern>
+        <template>
+            <srai>MAP
+                <star/>
+                AVENUE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND AN * RESTAURANT</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+                RESTAURANT
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND * RECIPE</pattern>
+        <template>
+            <srai>WHAT IS A RECIPE FOR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND ME *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KEBABS</pattern>
+        <template>
+            <srai>FIND THE NEAREST KEBABS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE CAN I GET SOME *</pattern>
+        <template>
+            <srai>where can I find
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LIST OF *</pattern>
+        <template>
+            <srai>FIND A LIST OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE DO I FIND *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

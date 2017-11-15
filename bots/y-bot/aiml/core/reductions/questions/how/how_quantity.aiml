@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>HOW MUCH FOR *</pattern>
+        <template>
+            <srai>HOW MUCH DOES
+                <star/>
+                COST
+            </srai>
+        </template>
+    </category>
+
+       <category>
+        <pattern>YOU HAVE A BIG *</pattern>
+        <template>
+            <srai>HOW BIG ARE YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HOW MANY LETTERS ARE THERE IN *</pattern>
+        <template>
+            <srai>HOW MANY LETTERS IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN THE WORD *</pattern>
+        <template>
+            <srai>HOW MANY LETTERS IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS * IN *</pattern>
+        <template>
+            <srai>HOW MANY LETTERS IN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IS *</pattern>
+        <template>
+            <srai>HOW MANY LETTERS IN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS _ FROM YOU</pattern>
+        <template>
+            <srai>HOW FAR IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HOW MANY QUESTIONS *</pattern>
+        <template>
+            <srai>HOW BIG ARE YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HOW BIG ARE YOUR *</pattern>
+        <template>
+            <srai>HOW BIG ARE YOU</srai>
+        </template>
+    </category>
+
+   <category>
+        <pattern>HOW BIG IS YOUR *</pattern>
+        <template>
+            <srai>HOW BIG ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW HOW FAR AWAY * IS</pattern>
+        <template>
+            <srai>HOW FAR IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

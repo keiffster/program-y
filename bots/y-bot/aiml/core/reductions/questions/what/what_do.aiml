@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>DO YOU KNOW ANYTHING ABOUT ME</pattern>
+        <template>
+            <srai>WHAT DO YOU KNOW ABOUT ME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>I DO NOT KNOW WHAT DO YOU *</pattern>
+        <template>
+            <srai>I DO NOT KNOW</srai>
+            <srai>WHAT DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU WANT</pattern>
+        <template>
+            <srai>WHAT DO YOU WANT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU EAT *</pattern>
+        <template>
+            <srai>WHAT DO YOU EAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR OPINION OF *</pattern>
+        <template>
+            <srai>WHAT DO YOU THINK OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU SEE</pattern>
+        <template>
+            <srai>WHAT DO YOU SEE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU DO *</pattern>
+        <template>
+            <srai>WHAT DO YOU DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME EVERYTHING YOU KNOW ABOUT ME</pattern>
+        <template>
+            <srai>WHAT DO YOU KNOW ABOUT ME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU THINK *</pattern>
+        <template>
+            <srai>WHAT DO YOU THINK
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU USUALLY *</pattern>
+        <template>
+            <srai>what do you
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID YOU MEAN *</pattern>
+        <template>
+            <srai>what do you mean</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU ENJOY ^</pattern>
+        <template>
+            <srai>WHAT DO YOU LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU MEAN *</pattern>
+        <template>
+            <srai>WHAT DO YOU MEAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID I TELL YOU I <set>be</set> *
+        </pattern>
+        <template>
+            <srai>WHAT DO I
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CAN YOU *</pattern>
+        <template>
+            <srai>what do you
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU WANT *</pattern>
+        <template>
+            <srai>WHAT DO YOU WANT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU EAT</pattern>
+        <template>
+            <srai>WHAT DO YOU EAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU FEEL ABOUT *</pattern>
+        <template>
+            <srai>WHAT DO YOU THINK ABOUT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME WHAT YOU <set>be</set> *
+        </pattern>
+        <template>
+            <srai>WHAT DO YOU
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF THINGS DO YOU *</pattern>
+        <template>
+            <srai>WHAT DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU WANT TO DO *</pattern>
+        <template>
+            <srai>WHAT DO YOU WANT TO DO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DID YOU MEAN</pattern>
+        <template>
+            <srai>what do you mean</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT INFORMATION _ ABOUT *</pattern>
+        <template>
+            <srai>WHAT DO YOU KNOW ABOUT
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YOU WANT *</pattern>
+        <template>
+            <srai>WHAT DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT YOU KNOW ABOUT *</pattern>
+        <template>
+            <srai>WHAT DO YOU KNOW ABOUT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME * THAT * HAVE</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+                DO
+                <star index="2"/>
+                HAVE
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

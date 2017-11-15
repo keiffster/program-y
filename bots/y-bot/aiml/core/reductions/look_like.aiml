@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT COLORS YOUR *</pattern>
+        <template>
+            <srai>WHAT COLOR IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I LOOK LIKE *</pattern>
+        <template>
+            <srai>WHAT DO I LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LOOK LIKE *</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU CUTE</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU BEAUTIFUL</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU PRETTY</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU UGLY</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU LOOK LIKE</pattern>
+        <template>
+            <srai>LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LOOK *</pattern>
+        <template>
+            <srai>WHAT DO YOU LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT I LOOK LIKE</pattern>
+        <template>
+            <srai>WHAT DO I LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU LOOK</pattern>
+        <template>
+            <srai>what do you look like</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU LOOK LIKE</pattern>
+        <template>
+            <srai>WHAT DO YOU LOOK LIKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SEE WHAT * LOOK LIKE</pattern>
+        <template>
+            <srai>WHAT DO
+                <star/>
+                LOOK LIKE
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

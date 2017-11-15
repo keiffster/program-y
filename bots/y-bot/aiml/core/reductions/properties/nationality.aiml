@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>ARE YOU BRITISH</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU AMERICAN</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU CHINESE</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU JAPANESE</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU CANADIAN</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM MEXICAN</pattern>
+        <template>
+            <srai>MY NATIONALITY IS MEXICAN</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NATIONALITY ARE YOU</pattern>
+        <template>
+            <srai>NATIONALITY</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

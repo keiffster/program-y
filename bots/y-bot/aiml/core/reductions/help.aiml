@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CAN YOU HELP *</pattern>
+        <template>
+            <srai>HELP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HELP ME</pattern>
+        <template>
+            <srai>HELP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU HELP ME</pattern>
+        <template>
+            <srai>HELP</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAN YOU HELP ME *</pattern>
+        <template>
+            <srai>HELP ME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY OTHER VOICES</pattern>
+        <template>
+            <srai>HELP VOICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU CALL SOMEBODY FOR ME</pattern>
+        <template>
+            <srai>HELP CALL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I CHANGE YOUR VOICE</pattern>
+        <template>
+            <srai>HELP VOICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW CAN I TEACH YOU *</pattern>
+        <template>
+            <srai>HELP LEARN</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>I NEED HELP</pattern>
+        <template>
+            <srai>HELP</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>CAN YOU HELP ME WITH MY *</pattern>
+        <template>
+            <srai>I NEED HELP WITH MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHANGE YOUR VOICE</pattern>
+        <template>
+            <srai>HELP VOICE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SEND A TEXT *</pattern>
+        <template>
+            <srai>HELP TEXT</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

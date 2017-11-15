@@ -53,10 +53,11 @@
     </category>
 
     <category>
-    <pattern>I WILL TALK TO YOU LATER</pattern>
-    <template>
-        <srai>BYE</srai>
-    </template>
+        <pattern>I WILL TALK TO YOU LATER</pattern>
+        <template>
+            <srai>BYE</srai>
+        </template>
+    </category>
 
     <category>
         <pattern>BYE BYE *</pattern>
@@ -307,6 +308,13 @@
         <pattern>GOOD NIGHT *</pattern>
         <template>
             <srai>GOOD NIGHT</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>NIGHT</pattern>
+        <template>
+            <srai>GOODNIGHT</srai>
         </template>
     </category>
 

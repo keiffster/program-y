@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT WHO *</pattern>
+        <template>
+            <srai>WHO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WUT</pattern>
+        <template>
+            <srai>WHAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COME ON WHAT</pattern>
+        <template>
+            <srai>COME ON</srai>
+            <srai>WHAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IDK WHAT *</pattern>
+        <template>
+            <srai>I DO NOT KNOW</srai>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT HAPPEN TO *</pattern>
+        <template>
+            <srai>WHAT HAPPENED TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT TIME *</pattern>
+        <template>
+            <srai>WHAT TIME
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>REALLY WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU REMEMBER WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NOW WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KINDA *</pattern>
+        <template>
+            <srai>WHAT KIND OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WUT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE HELL *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT UNDERSTAND WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THEN WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS <set>article</set> *
+        </pattern>
+        <template>
+            <srai>WHAT COLOR IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHY WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* IS WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star index="2"/>
+                is
+                <star/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK IT WOULD BE *</pattern>
+        <template>
+            <srai>WHAT WOULD IT BE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WTF *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAIT WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WATH *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHAT TO *</pattern>
+        <template>
+            <srai>WHAT SHOULD I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WAT YOU *</pattern>
+        <template>
+            <srai>WHAT YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WAT</pattern>
+        <template>
+            <srai>WHAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE COLOR OF *</pattern>
+        <template>
+            <srai>WHAT COLOR IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ALL *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HUH</pattern>
+        <template>
+            <srai>WHAT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AT WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+                AT
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO I HAVE THAT IS
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+                OBJECT DO I HAVE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DO YOU THINK * WILL BE *</pattern>
+        <template>
+            <srai>WHAT WILL
+                <star/>
+                BE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT U *</pattern>
+        <template>
+            <srai>WHAT YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT WHAT *</pattern>
+        <template>
+            <srai>WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHT</pattern>
+        <template>
+            <srai>WHAT</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

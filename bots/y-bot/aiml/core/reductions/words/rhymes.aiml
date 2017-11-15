@@ -79,5 +79,47 @@
         </template>
     </category>
 
+    <category>
+        <pattern>POEM</pattern>
+        <template>
+            <srai>LIMERICK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME # POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME A POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>RECITE ^ POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ^ POEM</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ^ POEMS</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU ^ POETRY</pattern>
+        <template>
+            <srai>POEM</srai>
+        </template>
+    </category>
 
 </aiml>

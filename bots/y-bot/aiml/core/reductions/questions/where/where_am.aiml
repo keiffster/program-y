@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>DO YOU KNOW WHERE I AM</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE I AM *</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE AM I AT</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE AM I NOW</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS WHERE I *</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHERE AM I LOCATED *</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE AM I WHERE AM I</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHERE AM I *</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOCATE ME</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE IS HERE</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM LOST *</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE I AM</pattern>
+        <template>
+            <srai>WHERE AM I</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

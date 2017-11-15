@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>* * S * EMAIL IS *</pattern>
+        <template>
+            <srai>
+                <star/>
+                <star index="2"/>
+                S
+                <star index="3"/>
+                EMAILADDRESS IS
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* S * EMAIL IS *</pattern>
+        <template>
+            <srai>
+                <star/>
+                S
+                <star index="2"/>
+                EMAILADDRESS IS
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * S EMAIL</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+                S EMAIL ADDRESS
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* S EMAIL IS *</pattern>
+        <template>
+            <srai>
+                <star/>
+                S HOME EMAILADDRESS IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE AN EMAIL ADDRESS</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE AN EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE EMAIL *</pattern>
+        <template>
+            <srai>WHAT IS YOUR EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS YOUR EMAIL *</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY EMAIL ADRESS *</pattern>
+        <template>
+            <srai>MY EMAIL ADDRESS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TO WHAT EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT EMAIL CAN I EMAIL YOU *</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT EMAIL SHOULD I EMAIL THAT TO</pattern>
+        <template>
+            <srai>WHAT IS YOUR EMAIL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE SHOULD I SEND THE EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU HAVE AN EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A EMAIL</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR EMAIL *</pattern>
+        <template>
+            <srai>EMAIL ADDRESS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MY EMAIL</pattern>
+        <template>
+            <srai>MY EMAIL</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

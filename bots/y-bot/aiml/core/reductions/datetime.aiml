@@ -299,6 +299,141 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>DO YOU HAVE THE # TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE TIME IS *</pattern>
+        <template>I have <srai>TIME</srai>.
+        </template>
+    </category>
+     <category>
+        <pattern>THE TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TIME *</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT RIGHT NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT TIME IS IT THERE</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE TIME NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT WHAT TIME IS IT</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT NOW</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT *</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS THE TIME</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IS IT</pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE DATE TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE DAY *</pattern>
+        <template>
+            <srai>WHAT IS THE DAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT THE DATE *</pattern>
+        <template>
+            <srai>WHAT IS THE DATE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DATE IS IT TODAY</pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ 60 MINUTES</pattern>
+        <template>
+            <srai>
+                <star/>
+                ONE HOUR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ AN HOUR</pattern>
+        <template>
+            <srai>
+                <star/>
+                ONE HOUR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT TIME IT IS #</pattern>
+        <template>
+            <srai>WHAT TIME IS IT</srai>
+        </template>
+    </category>
 
 
 

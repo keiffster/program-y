@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+   <category>
+        <pattern>WHO * IS</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW JUSTIN BIEBER</pattern>
+        <template>
+            <srai>WHO IS JUSTIN BIEBER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHO IS *</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHO IS YOU *</pattern>
+        <template>
+            <srai>WHO IS YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS HIS NAME</pattern>
+        <template>
+            <condition name="he">
+                <li value="unknown">Who does "him" refer to?</li>
+                <li>
+                    <srai>WHO IS
+                        <get name="he"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO DO YOU THINK IS *</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW WHO * IS</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR CREATOR</pattern>
+        <template>
+            <srai>who is your creator</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE PRESIDENT</pattern>
+        <template>
+            <srai>WHO IS THE PRESIDENT OF THE UNITED STATES</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MITSUKU</pattern>
+        <template>
+            <srai>WHO IS MITSUKU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THIS</pattern>
+        <template>
+            <srai>WHO ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW MITSUKU</pattern>
+        <template>
+            <srai>WHO IS MITSUKU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS <set>estdown</set> *
+        </pattern>
+        <template>
+            <srai>WHO IS
+                <map>
+                    <name>est2er</name>
+                    <star/>
+                </map>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PRESIDENT *</pattern>
+        <template>
+            <srai>WHO IS PRESIDENT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE NAME OF MY *</pattern>
+        <template>
+            <srai>WHO IS MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHO IS THE WORLD S *</pattern>
+        <template>
+            <srai>WHO IS THE
+                <star/>
+                IN THE WORLD
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME WHO * IS</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW WHO IS *</pattern>
+        <template>
+            <srai>WHO IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NICKI MINAJ</pattern>
+        <template>
+            <srai>WHO IS NICKI MINAJ</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* WHO IS *</pattern>
+        <template>
+            <srai>WHO IS
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>JUSTIN BIEBER</pattern>
+        <template>
+            <srai>WHO IS JUSTIN BIEBER</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

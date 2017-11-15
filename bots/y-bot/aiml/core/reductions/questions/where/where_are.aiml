@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>ARE YOU FROM</pattern>
+        <template>
+            <srai>WHERE ARE YOU FROM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT CITY * YOU *</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE YOU FROM *</pattern>
+        <template>
+            <srai>WHERE ARE YOU FROM</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHERE YOU *</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE ARE YOU *</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU FROM *</pattern>
+        <template>
+            <srai>WHERE ARE YOU FROM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ON *</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai><!-- REDUCTION -->
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIVE *</pattern>
+        <template>
+            <srai>WHERE ARE YOU LOCATED</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE YOU AT</pattern>
+        <template>
+            <srai>WHERE ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE YOU FROM</pattern>
+        <template>
+            <srai>WHERE ARE YOU FROM</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU AT *</pattern>
+        <template>
+            <srai>where are you</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHERE DO YOU *</pattern>
+        <template>
+            <srai>where are you</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHERE YOU COME FROM</pattern>
+        <template>
+            <srai>WHERE ARE YOU FROM</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

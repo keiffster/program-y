@@ -70,7 +70,207 @@
         </template>
     </category>
 
+    <category>
+        <pattern>IS <set>number</set> # ODD ^
+        </pattern>
+        <template>
+            <srai>ODDEVEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> # EVEN ^
+        </pattern>
+        <template>
+            <srai>ODDEVEN
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
+    <category>
+        <pattern>HOW MUCH SHOULD I TIP * <set>number</set> DOLLARS
+        </pattern>
+        <template>
+            <srai>WHAT IS 15 PERCENT OF
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS <set>number</set> PERCENT OF
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>WHAT IS 0.
+                <star/>
+                *
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW _ <set>number</set>
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>HOW
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>HOW _ <set>number</set>
+            <set>number</set> *
+        </pattern>
+        <template>
+            <srai>HOW
+                <star/>
+                <star index="2"/>
+                <star index="3"/>
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+
+   <category>
+        <pattern>
+            <set>number</set>
+            DIVIDED BY
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                SLASH
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>number</set>
+            TIMES
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                ASTERISK
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>number</set> IN ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONVERT <set>number</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WRITE <set>number</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE ROMAN #
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS <set>numbername</set> IN ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CONVERT <set>numbername</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WRITE <set>numbername</set>
+            <set>preposition</set> ROMAN #
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE ROMAN #
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>ROMAN
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM <set>number</set> *
+        </pattern>
+        <template>
+            <srai>MY AGE IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM ONLY
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>I AM
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COUNT UP TO *</pattern>
+        <template>
+            <srai>COUNT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 </aiml>

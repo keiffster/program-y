@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU HAVE BOOBS</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A MALE OR A FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+
+
+    <category>
+        <pattern>YOU SOUND LIKE A WOMAN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A MAN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE A GIRL</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A GIRL *</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU FEMALE OR MALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A GIRL OR BOY</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A WOMAN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A MAN OR A WOMAN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT GENDER ARE YOU</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A MALE OR FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A PENIS</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR GENDER</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A BOY</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A GIRL OR A BOY</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A BOY OR A GIRL</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DO YOU HAVE A VAGINA</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A BOY OR GIRL</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU MALE OR FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A GIRL</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOUR GENDER</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAN OR WOMEN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AM I A <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>MY GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AM I <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>MY GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>MY GENDER IS
+                <map>
+                    <name>gendermap</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM <set>gender</set> ^
+        </pattern>
+        <template>
+            <srai>MY GENDER IS
+                <map>
+                    <name>gendermap</name>
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A BOY *</pattern>
+        <template>
+            <srai>MY GENDER IS BOY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A LESBIAN</pattern>
+        <template>
+            <srai>MY ORIENTATION IS GAY</srai>
+            <srai>MY GENDER IS FEMALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A MAN OR WOMAN</pattern>
+        <template>
+            <srai>WHAT IS YOUR GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM FEMALE</pattern>
+        <template>
+            <srai>MY GENDER IS FEMALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A WOMAN</pattern>
+        <template>
+            <srai>MY GENDER IS FEMALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A GIRL</pattern>
+        <template>
+            <srai>MY GENDER IS FEMALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM A MAN</pattern>
+        <template>
+            <srai>MY GENDER IS MALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAN OR WOMAN</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM MALE</pattern>
+        <template>
+            <srai>MY GENDER IS MALE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A FEMALE *</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MALE OR FEMALE</pattern>
+        <template>
+            <srai>GENDER</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>ARE YOU LESBIAN</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A VIRGIN</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU A LESBIAN</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU STRAIGHT</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU DATE *</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE GAY</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU # HOMOSEXUAL #</pattern>
+        <template>
+            <srai>ORIENTATION</srai>
+        </template>
+    </category>
+
+
+</aiml>

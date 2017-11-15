@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>DO YOU HAVE A PICTURE OF YOURSELF</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>CAN I SEE A PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SEND ME A PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>A PICTURE OF YOU</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO SEE YOUR *</pattern>
+        <template>
+            <srai>PIC</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

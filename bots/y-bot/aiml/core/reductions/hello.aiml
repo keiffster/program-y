@@ -423,5 +423,131 @@
             <srai>GOOD EVENING</srai>
         </template>
     </category>
+        <category>
+        <pattern>HEY DUDE *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HEYA</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI DEAR *</pattern>
+        <template>
+            <srai>HI
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HAY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI HONEY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI BABY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HII</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI SEXY</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAI</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI THERE</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI *</pattern>
+        <template>
+            <srai>HI</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>HOI</pattern>
+        <template>
+            <srai>HI</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI BABY *</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI HOW ARE YOU</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HI MY *</pattern>
+        <template>
+            <srai>HI</srai>
+            <srai>MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+        <category>
+        <pattern>HEYY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HEEY</pattern>
+        <template>
+            <srai>HEY</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HEJ</pattern>
+        <template>
+            <srai>hey</srai>
+        </template>
+    </category>
 
 </aiml>

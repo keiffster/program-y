@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CAN YOU TEACH ME HOW TO *</pattern>
+        <template>
+            <srai>HOW DO I
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>CAN YOU MAKE ME A SANDWICH</pattern>
+        <template>
+            <srai>HOW DO I MAKE A SANDWICH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MAKE ME A SANDWICH</pattern>
+        <template>
+            <srai>HOW DO I MAKE A SANDWICH</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DOES YOUR # WORK</pattern>
+        <template>
+            <srai>HOW DO YOU WORK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU FIX *</pattern>
+        <template>
+            <srai>HOW DO I FIX
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW YOU *</pattern>
+        <template>
+            <srai>HOW DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW WOULD YOU *</pattern>
+        <template>
+            <srai>HOW DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW TO TELL *</pattern>
+        <template>
+            <srai>HOW DO I TELL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DID U *</pattern>
+        <template>
+            <srai>HOW DID YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

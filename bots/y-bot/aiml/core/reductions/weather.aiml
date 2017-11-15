@@ -240,6 +240,74 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>IS IT <set>season</set> #
+        </pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>IS IT WINTER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUMMER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FALL #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT AUTUMN #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS WINTER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS SUMMER #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS FALL #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS THIS AUTUMN #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SPRING #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHAT SEASON #</pattern>
+        <template>
+            <srai>SEASON</srai>
+        </template>
+    </category>
 
 
 

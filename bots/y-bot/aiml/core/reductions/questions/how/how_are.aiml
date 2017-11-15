@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>HOW ARE YOU ALICE</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU FEELING TODAY</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU THIS EVENING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW HAVE YOU BEEN *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+
+     <category>
+        <pattern>HOW ARE U</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM FINE HOW ARE YOU</pattern>
+        <template>
+            <srai>I AM FINE</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU HOW *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+            <srai>HOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU THIS MORNING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NI HAO</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU HOW ARE YOU</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU FEEL</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HOW IS YOUR DAY</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+            <srai>DOING</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HOW IS IT GOING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HOW DO YOU DO</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU DOING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU TODAY</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU GOING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HOW ARE YOU MY *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM _ HOW ARE *</pattern>
+        <template>
+            <srai>I AM
+                <star/>
+            </srai>
+            <srai>HOW ARE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU TODAY *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM FINE AND YOU</pattern>
+        <template>
+            <srai>I AM FINE</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FINE AND YOU</pattern>
+        <template>
+            <srai>I AM FINE</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS LIFE</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS LIFE *</pattern>
+        <template>
+            <srai>how are you</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW R U</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU HOW ARE YOU *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS YOU</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD HOW ARE YOU</pattern>
+        <template>
+            <srai>I AM GOOD</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>HOW YOU DOING</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW WAS YOUR DAY</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+            <srai>DOING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU DOING TODAY *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW R YOU</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW YOU DOIN</pattern>
+        <template>
+            <srai>how are you doing</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW IS IT HANGING ^</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD AND YOU</pattern>
+        <template>
+            <srai>I AM GOOD</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FINE N YOU</pattern>
+        <template>
+            <srai>I AM FINE</srai>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU DOING *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* HOW ARE *</pattern>
+        <template>
+            <srai>HOW ARE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NI HAO MA</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW YOU DOING *</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW R YOU *</pattern>
+        <template>
+            <srai>HOW ARE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW ARE YOU DOING TODAY</pattern>
+        <template>
+            <srai>HOW ARE YOU</srai>
+        </template>
+    </category>
+
+
+</aiml>
