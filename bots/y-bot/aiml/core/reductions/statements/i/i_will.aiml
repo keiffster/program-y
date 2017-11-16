@@ -110,6 +110,7 @@
             </srai>
         </template>
     </category>
+    <category>
         <pattern>I AM ABOUT TO *</pattern>
         <template>
             <srai>I WILL
@@ -117,9 +118,4 @@
             </srai>
         </template>
     </category>
-
-
-
-
-
 </aiml>

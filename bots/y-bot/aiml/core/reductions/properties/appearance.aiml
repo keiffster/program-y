@@ -65,8 +65,6 @@
             <srai>WEIGHT</srai>
         </template>
     </category>
-
-
     <category>
         <pattern>ARE YOU BLONDE</pattern>
         <template>
@@ -78,14 +76,14 @@
         <template>
             <srai>HAIR</srai>
         </template>
-    </category
-        <category>
+    </category>
+    <category>
         <pattern>ARE YOU BRUNETTE</pattern>
         <template>
             <srai>HAIR</srai>
         </template>
     </category>
-        <category>
+    <category>
         <pattern>ARE YOU BALD</pattern>
         <template>
             <srai>HAIR</srai>

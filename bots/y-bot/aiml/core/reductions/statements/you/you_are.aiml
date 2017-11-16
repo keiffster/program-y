@@ -845,9 +845,5 @@
         <template>
             <srai>you are right</srai>
         </template>
-
-
-
-
-
+    </category>
 </aiml>

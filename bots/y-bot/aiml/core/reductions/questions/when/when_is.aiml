@@ -69,6 +69,7 @@
             </srai>
         </template>
     </category>
+     <category>
         <pattern>_ WHEN IS UR *</pattern>
         <template>
             <sr/>

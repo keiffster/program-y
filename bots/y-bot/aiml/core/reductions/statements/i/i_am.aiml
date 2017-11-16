@@ -617,6 +617,7 @@
         <template>
             <srai>I AM BORED</srai>
         </template>
+    </category>
     <category>
         <pattern>I THINK I AM *</pattern>
         <template>

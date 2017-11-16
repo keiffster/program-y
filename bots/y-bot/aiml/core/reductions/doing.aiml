@@ -83,6 +83,7 @@
             <srai>DOING</srai>
         </template>
     </category>
+    <category>
         <pattern>WHAT IS NEW</pattern>
         <template>
             <srai>DOING</srai>

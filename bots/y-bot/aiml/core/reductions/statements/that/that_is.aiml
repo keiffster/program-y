@@ -161,6 +161,7 @@
         <template>
             <srai>THAT IS GOOD</srai>
         </template>
+    </category>
     <category>
         <pattern>THAT IS COOL I *</pattern>
         <template>

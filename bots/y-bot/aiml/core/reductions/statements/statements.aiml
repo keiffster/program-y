@@ -42,7 +42,6 @@
         </template>
     </category>
     <category>
-    <category>
         <pattern>HE IS *</pattern>
         <that>WHO IS HE</that>
         <template>

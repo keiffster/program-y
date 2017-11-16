@@ -108,6 +108,7 @@
             </srai>
         </template>
     </category>
+    <category>
         <template>
             <srai>WHAT
                 <star index="4"/>
