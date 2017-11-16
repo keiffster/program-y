@@ -1195,6 +1195,16 @@
         </template>
     </category>
 
+    <category>
+        <pattern>MY WIFE IS
+            <set>name</set>
+        </pattern>
+        <template>
+            <srai>MY WIFE S NAME IS
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 </aiml>

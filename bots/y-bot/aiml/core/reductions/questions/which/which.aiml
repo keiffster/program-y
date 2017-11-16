@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WICH *</pattern>
+        <template>
+            <srai>WHICH
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WHICH 1</pattern>
+        <template>
+            <srai>WHICH ONE</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHICH OF THEM IS *</pattern>
+        <template>
+            <srai>WHICH IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ON WHICH * IS *</pattern>
+        <template>
+            <srai>WHICH
+                <star/>
+                IS
+                <star index="2"/>
+                ON
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH 1 *</pattern>
+        <template>
+            <srai>WHICH ONE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS BETTER *</pattern>
+        <template>
+            <srai>WHICH DO YOU PREFER
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

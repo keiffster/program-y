@@ -47,6 +47,12 @@
         </template>
     </category>
 
+    <category>
+        <pattern>EMAIL YOUR CREATOR</pattern>
+        <template>
+            <srai>REPORT A PROBLEM</srai>
+        </template>
+    </category>
 
 
 

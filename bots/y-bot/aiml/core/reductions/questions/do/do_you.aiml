@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO U</pattern>
+        <template>
+            <srai>DO YOU</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DO YOU BELIEVE IN ALIENS *</pattern>
+        <template>
+            <srai>DO YOU BELIEVE IN ALIENS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU PLAY ANY *</pattern>
+        <template>
+            <srai>DO YOU PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU EVEN *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT UNDERSTAND *</pattern>
+        <template>
+            <srai>DO YOU UNDERSTAND
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DO ROBOTS *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU DO NOT LOVE ME</pattern>
+        <template>
+            <srai>DO YOU LOVE ME</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU STILL *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU EVER *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU FEEL *</pattern>
+        <template>
+            <srai>DO YOU FEEL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* DO YOU *</pattern>
+        <template>
+            <srai>DO YOU
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>UNDERSTAND *</pattern>
+        <template>
+            <srai>DO YOU UNDERSTAND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GET IT</pattern>
+        <template>
+            <srai>DO YOU UNDERSTAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YO *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH DO YOU LIKE BETTER * OR *</pattern>
+        <template>
+            <srai>DO YOU PREFER
+                <star/>
+                OR
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU SEE</pattern>
+        <template>
+            <srai>do you see</srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DID YOU MAKE *</pattern>
+        <template>
+            <srai>DO YOU MAKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I WANT TO TO KNOW IF YOU <set>be</set> *
+        </pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU SMOKE *</pattern>
+        <template>
+            <srai>DO YOU SMOKE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I ASKED IF YOU *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU DO NOT REMEMBER *</pattern>
+        <template>
+            <srai>DO YOU REMEMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU NOT *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DO NOT YOU *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU MEAN *</pattern>
+        <template>
+            <srai>DO YOU MEAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU LOVE *</pattern>
+        <template>
+            <srai>DO YOU LOVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU _ TOO</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU DO YOU *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU EVER GET *</pattern>
+        <template>
+            <srai>DO YOU GET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU LOVE ME</pattern>
+        <template>
+            <srai>DO YOU LOVE ME</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>DO U *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU SAYING *</pattern>
+        <template>
+            <srai>DO YOU MEAN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO *</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT UNDERSTAND</pattern>
+        <template>
+            <srai>DO YOU UNDERSTAND</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HEARD YOU <set>be</set> *
+        </pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT _ DO YOU</pattern>
+        <template>
+            <srai>DO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>CAN YOU UNDERSTAND *</pattern>
+        <template>
+            <srai>DO YOU UNDERSTAND</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

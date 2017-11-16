@@ -134,6 +134,80 @@
     </category>
 
 
+    <category>
+        <pattern>WHAT DOES * SPELL</pattern>
+        <template>
+            <srai>IMPLODE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>* S NAME IS SPELLED *</pattern>
+        <template>
+            <srai>
+                <star/>
+                MEANS
+                <srai>IMPLODE
+                    <star index="2"/>
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+         <category>
+        <pattern>HOW MANY LETTERS IN *</pattern>
+        <template>The word "<star/>" has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <star/>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN THE NAME *</pattern>
+        <template>The word
+            <star/>
+            has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <star/>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN MY *</pattern>
+        <template>The word "
+            <srai>MY
+                <star/>
+            </srai>
+            " has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <srai>MY
+                        <star/>
+                    </srai>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW MANY LETTERS IN MY NAME</pattern>
+        <template>The word "<get name="name"/>" has
+            <srai>SENTENCELENGTH
+                <explode>
+                    <get name="name"/>
+                </explode>
+            </srai>
+            letters.
+        </template>
+    </category>
 
 
 </aiml>

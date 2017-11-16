@@ -22,6 +22,30 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
+     <category>
+        <pattern>WHY D YOU *</pattern>
+        <template>
+            <srai>WHY DID YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>Y DID *</pattern>
+        <template>
+            <srai>WHY DID
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MADE YOU *</pattern>
+        <template>
+            <srai>WHY DID YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

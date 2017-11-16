@@ -29,6 +29,12 @@
         </template>
     </category>
 
+     <category>
+        <pattern>HOW BIG ARE YOU</pattern>
+        <template>
+            <srai>SIZE</srai>
+        </template>
+    </category>
 
 
 

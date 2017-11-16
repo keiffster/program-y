@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+   <category>
+        <pattern>DICKS</pattern>
+        <template>
+            <srai>FIND THE NEAREST DICKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CALL * PIZZA</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+                PIZZA
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ANY GOOD * AROUND HERE</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOW ME THE NEAREST *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STARBUCKS</pattern>
+        <template>
+            <srai>FIND THE NEAREST STARBUCKS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM LOOKING FOR *</pattern>
+        <template>
+            <srai>FIND
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOSPITAL</pattern>
+        <template>
+            <srai>FIND THE NEAREST HOSPITAL</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MCDONALD S</pattern>
+        <template>
+            <srai>FIND THE NEAREST MCDONALD S</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>MY BACK HURTS</pattern>
+        <template>
+            <srai>FIND THE NEAREST CHIROPRACTOR</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>THE NEAREST *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NEARBY *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE CLOSEST *</pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+§
+
+
+
+</aiml>

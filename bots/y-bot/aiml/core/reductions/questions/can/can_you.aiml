@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>DO YOU KNOW HOW TO PLAY *</pattern>
+        <template>
+            <srai>CAN YOU PLAY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN NOT YOU *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU ABLE TO *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW HOW TO *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW HOW TO COOK</pattern>
+        <template>
+            <srai>CAN YOU COOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SING A *</pattern>
+        <template>
+            <srai>CAN YOU SING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU * FOR ME</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>COULD YOU *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I DO NOT KNOW CAN YOU *</pattern>
+        <template>
+            <srai>I DO NOT KNOW</srai>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHY SHOULD YOU WIN *</pattern>
+        <template>
+            <srai>CAN YOU WIN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU COOK *</pattern>
+        <template>
+            <srai>CAN YOU COOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU CAN SEE ME</pattern>
+        <template>
+            <srai>can you see me</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU CAN</pattern>
+        <template>
+            <srai>can you</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN U *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU CAN SPEAK *</pattern>
+        <template>
+            <srai>CAN YOU SPEAK
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WHY CAN NOT YOU *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW CHINESE</pattern>
+        <template>
+            <srai>CAN YOU SPEAK CHINESE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SING *</pattern>
+        <template>
+            <srai>CAN YOU SING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW HOW TO COOK</pattern>
+        <template>
+            <srai>CAN YOU COOK</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN YOU *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU THINK YOU CAN *</pattern>
+        <template>
+            <srai>can you
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU NOT *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU SING ME A SONG</pattern>
+        <template>
+            <srai>CAN YOU SING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU SEE *</pattern>
+        <template>
+            <srai>CAN YOU SEE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU CAN *</pattern>
+        <template>
+            <srai>CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU CAN NOT DO *</pattern>
+        <template>
+            <srai>can you do
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

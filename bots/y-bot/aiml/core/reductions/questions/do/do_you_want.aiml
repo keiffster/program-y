@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU NEED A *</pattern>
+        <template>
+            <srai>DO YOU WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>YOU WANT</pattern>
+        <template>
+            <srai>DO YOU WANT IT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE A *</pattern>
+        <template>
+            <srai>DO YOU WANT A
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DO YOU NEED *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT MY *</pattern>
+        <template>
+            <srai>DO YOU WANT MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE TO GO *</pattern>
+        <template>
+            <srai>DO YOU WANT TO GO
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>WOULD YOU LIKE TO *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WANT TO *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WANT *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WANT ME TO *</pattern>
+        <template>
+            <srai>DO YOU WANT ME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WANT TO FUCK *</pattern>
+        <template>
+            <srai>do you want to fuck</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD NOT YOU RATHER *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT TO KNOW *</pattern>
+        <template>
+            <srai>DO YOU WANT TO KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE TO HAVE *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT ME TO *</pattern>
+        <template>
+            <srai>DO YOU WANT ME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>WANT TO BE MY *</pattern>
+        <template>
+            <srai>DO YOU WANT TO BE MY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+      <pattern>YOU DO NOT WANT TO *</pattern>
+        <template>
+            <srai>do you want to
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT TO BE *</pattern>
+        <template>
+            <srai>DO YOU WANT TO BE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO NOT YOU WANT TO *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WANA *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU WANT TO *</pattern>
+        <template>
+            <srai>DO YOU WANT TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I CAN GIVE YOU *</pattern>
+        <template>
+            <srai>DO YOU WANT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WANT TO KNOW *</pattern>
+        <template>
+            <srai>DO YOU WANT TO KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WOULD YOU LIKE ME TO *</pattern>
+        <template>
+            <srai>DO YOU WANT ME TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

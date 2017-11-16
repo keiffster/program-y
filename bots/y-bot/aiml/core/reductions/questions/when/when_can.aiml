@@ -23,6 +23,14 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
 
+   <category>
+        <pattern>WHEN YOU CAN *</pattern>
+        <template>
+            <srai>WHEN CAN YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

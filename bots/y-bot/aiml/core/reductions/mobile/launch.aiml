@@ -909,6 +909,50 @@
             <srai>OPEN MYSPACE</srai>
         </template>
     </category>
+    <category>
+        <pattern>LAUNCH BROWSER *</pattern>
+        <template>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>GOTO SKYPE</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU LAUNCH *</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LAUNCH * APP</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SKYPE</pattern>
+        <template>
+            <srai>LAUNCH
+                <star/>
+            </srai>
+        </template>
+    </category>
 
+    <category>
+        <pattern>ANGRY BIRDS</pattern>
+        <template>
+            <srai>LANUCH ANGRY BIRDS</srai>
+        </template>
+    </category>
 
 </aiml>

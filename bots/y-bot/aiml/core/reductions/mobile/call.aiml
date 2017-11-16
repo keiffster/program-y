@@ -194,6 +194,12 @@
     </category>
 
 
+    <category>
+        <pattern>CHAT</pattern>
+        <template>
+            <srai>talk</srai>
+        </template>
+    </category>
 
 
 

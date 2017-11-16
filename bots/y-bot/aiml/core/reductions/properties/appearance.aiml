@@ -128,5 +128,29 @@
             <srai>EYES</srai>
         </template>
     </category>
+    <category>
+        <pattern>ARE YOU WEARING *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WEAR *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT ARE YOU WEARING</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU WEAR A *</pattern>
+        <template>
+            <srai>WEARING</srai>
+        </template>
+    </category>
 
 </aiml>

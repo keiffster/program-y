@@ -22,6 +22,101 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
+    <category>
+        <pattern>ALRIGHT I WILL *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK I WILL *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WILL BE *</pattern>
+        <template>
+            <srai>I WILL BE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ILL BE *</pattern>
+        <template>
+            <srai>I WILL BE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ILL *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOING TO *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HUMANS WILL *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOING TO BE *</pattern>
+        <template>
+            <srai>I WILL BE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM GOING TO HAVE *</pattern>
+        <template>
+            <srai>I WILL HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I TALK TO YOU *</pattern>
+        <template>
+            <srai>I WILL TALK TO YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I SHALL *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
+        <pattern>I AM ABOUT TO *</pattern>
+        <template>
+            <srai>I WILL
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

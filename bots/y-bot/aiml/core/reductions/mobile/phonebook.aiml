@@ -254,6 +254,12 @@
         </template>
     </category>
 
+     <category>
+        <pattern>ADD A CONTACT</pattern>
+        <template>
+            <srai>ADDACTION</srai>
+        </template>
+    </category>
 
 
 

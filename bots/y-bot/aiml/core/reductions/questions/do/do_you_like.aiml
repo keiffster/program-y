@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>I LIKE * WHAT ABOUT YOU</pattern>
+        <template>
+            <srai>I LIKE
+                <star/>
+            </srai>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU LIKE THE *</pattern>
+        <template>
+            <srai>DO YOU LIKE THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU ENJOY *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU LIKE *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>DO YOU LOVE *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ENJOY *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU LIKE IT</pattern>
+        <template>
+            <srai>DO YOU LIKE IT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LOVE YOUR *</pattern>
+        <template>
+            <srai>DO YOU LIKE YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU DO NOT LIKE *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO LIKE *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO U LIKE IT</pattern>
+        <template>
+            <srai>DO YOU LIKE IT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU LIKE *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIK *</pattern>
+        <template>
+            <srai>DO YOU LIKE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

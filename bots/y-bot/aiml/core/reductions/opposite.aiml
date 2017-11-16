@@ -23,6 +23,39 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
 
+    <category>
+        <pattern>OPPOSITE OF <set>article</set> *
+        </pattern>
+        <template>
+            <srai>OPPOSITE OF
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE OPPOSITE OF *</pattern>
+        <template>
+            <srai>OPPOSITE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>TELL ME THE OPPOSITE OF *</pattern>
+        <template>
+            <srai>OPPOSITE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GIVE ME THE OPPOSITE OF *</pattern>
+        <template>
+            <srai>OPPOSITE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU EVER HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO HAVE A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU GOT *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>DO NOT YOU HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE ANY *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU GOT A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU GOT *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A LOT OF *</pattern>
+        <template>
+            <srai>do you have
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU ANY *</pattern>
+        <template>
+            <srai>DO YOU HAVE ANY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GOT ANY *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU HAVE NO *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ANY MORE *</pattern>
+        <template>
+            <srai>DO YOU HAVE ANY MORE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO U HAV A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT HAVE ANY *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU GOT A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT HAVE A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A BIG *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>HAVE YOU GOT *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai><!-- REDUCTION -->
+        </template>
+    </category>
+    <category>
+        <pattern>YOU ARE HAVING *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU HAVE A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU HAVE A *</pattern>
+        <template>
+            <srai>DO YOU HAVE A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU HAVE A NICE *</pattern>
+        <template>
+            <srai>do you have a
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU HAVE ANY *</pattern>
+        <template>
+            <srai>DO YOU HAVE ANY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU HAVE *</pattern>
+        <template>
+            <srai>DO YOU HAVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+</aiml>

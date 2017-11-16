@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>CAN YOU BE QUIET</pattern>
+        <template>
+            <srai>BE QUIET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHH</pattern>
+        <template>
+            <srai>BE QUIET</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHHH</pattern>
+        <template>
+            <srai>BE QUIET</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>B QUIET</pattern>
+        <template>
+            <srai>BE QUIET</srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>STOP TALKING</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STOP TALKING *</pattern>
+        <template>
+            <srai>STOP TALKING</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>B QUIET *</pattern>
+        <template>
+            <srai>BE QUIET
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT THE * UP</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>SHUTUP *</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT THE HELL UP</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT UP YOU *</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT UP AND *</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT YOUR MOUTH</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>STFU</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SHUT UP *</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>QUIET</pattern>
+        <template>
+            <srai>SHUT UP</srai>
+        </template>
+    </category>
+
+
+
+
+
+</aiml>

@@ -578,6 +578,12 @@
             <srai>YES</srai>
         </template>
     </category>
+   <category>
+        <pattern>SURE IS</pattern>
+        <template>
+            <srai>YES IT IS</srai>
+        </template>
+    </category>
 
 
 </aiml>

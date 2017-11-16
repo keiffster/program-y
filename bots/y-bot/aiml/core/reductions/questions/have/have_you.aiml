@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>SEEN *</pattern>
+        <template>
+            <srai>HAVE YOU SEEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER SEEN *</pattern>
+        <template>
+            <srai>HAVE YOU SEEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAD YOUR *</pattern>
+        <template>
+            <srai>HAVE YOU HAD YOUR
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER BEEN *</pattern>
+        <template>
+            <srai>HAVE YOU BEEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU EVER <set>be</set> *
+        </pattern>
+        <template>
+            <srai>HAVE YOU EVER
+                <map>
+                    <name>be2been</name>
+                    <star/>
+                </map>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER WATCH *</pattern>
+        <template>
+            <srai>HAVE YOU SEEN
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER HEARD OF *</pattern>
+        <template>
+            <srai>HAVE YOU HEARD OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER BEEN TO THE *</pattern>
+        <template>
+            <srai>HAVE YOU BEEN TO THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU EVER *</pattern>
+        <template>
+            <srai>HAVE YOU EVER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HOW DO YOU EVER *</pattern>
+        <template>
+            <srai>HAVE YOU EVER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HAVE YOU EVER *</pattern>
+        <template>
+            <srai>HAVE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>WORD THAT STARTS WITH *</pattern>
+        <template>
+            <srai>WORD STARTING WITH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WORD STARTING WITH THE LETTER *</pattern>
+        <template>
+            <srai>WORD STARTING WITH
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME A WORD *</pattern>
+        <template>
+            <srai>WORD
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU TELL ME THE NAME OF A *</pattern>
+        <template>
+            <srai>NAME A
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LAST LETTER <set>preposition</set> *
+        </pattern>
+        <template>
+            <srai>LASTLETTER
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> WORD *
+        </pattern>
+        <template>
+            <srai>WORD
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WORD THAT STARTS WITH THE LETTER *</pattern>
+        <template>
+            <srai>WORD STARTING WITH
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

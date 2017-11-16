@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>
+            <set>article</set>
+            * IS
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                is
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>quantifier</set>
+            * IS
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                is
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>quantifier</set>
+            * ARE
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>singular</name>
+                    <star index="2"/>
+                </map>
+                is
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* ARE
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>singular</name>
+                    <star/>
+                </map>
+                is
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>article</set>
+            * IS <set>color</set> AND
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                is
+                <star index="3"/>
+                and
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>quantifier</set>
+            * IS <set>color</set> AND
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="2"/>
+                is
+                <star index="3"/>
+                and
+                <star index="4"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>quantifier</set>
+            * ARE <set>color</set> AND
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>singular</name>
+                    <star index="2"/>
+                </map>
+                and
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* ARE <set>color</set> AND
+            <set>color</set>
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>singular</name>
+                    <star/>
+                </map>
+                is
+                <star index="2"/>
+                and
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

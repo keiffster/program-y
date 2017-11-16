@@ -301,5 +301,12 @@
         </template>
     </category>
 
+        <category>
+        <pattern>HOW SHOULD I # YOU</pattern>
+        <template>
+            <srai>NAME</srai>
+        </template>
+    </category>
+
 
 </aiml>

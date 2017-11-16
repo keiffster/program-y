@@ -273,4 +273,124 @@
         </template>
     </category>
 
+        <category>
+        <pattern>PICK A NUMBER # <set>numbername</set> #
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+                <map name="name2number">
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+                <map name="name2number">
+                    <star index="4"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>NAME A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CHOOSE A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+     <category>
+        <pattern>THINK OF A NUMBER *</pattern>
+        <template>
+            <srai>PICK A NUMBER
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS HALF OF *</pattern>
+        <template>
+            <srai><star/>/2.0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT A QUARTER OF *</pattern>
+        <template>
+            <srai><star/>/4.0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT A THIRD OF *</pattern>
+        <template>
+            <srai><star/>/3.0
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>numbername</set>
+            _
+        </pattern>
+        <template>
+            <srai>
+                <map>
+                    <name>name2number</name>
+                    <star/>
+                </map>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_ <set>numbername</set> *
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                <map>
+                    <name>name2number</name>
+                    <star index="2"/>
+                </map>
+                <star index="3"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>_
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>
+                <star/>
+                <map>
+                    <name>name2number</name>
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>
+            <set>numbername</set>
+        </pattern>
+        <template>
+            <srai>
+                <map name="name2number">
+                    <star/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
 </aiml>

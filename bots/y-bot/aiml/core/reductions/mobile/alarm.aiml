@@ -97,6 +97,22 @@
     </category>
 
 
+    <category>
+        <pattern>CAN YOU WAKE ME UP *</pattern>
+        <template>
+            <srai>WAKE ME UP
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>CAN YOU WAKE ME UP AT *</pattern>
+        <template>
+            <srai>WAKE ME UP AT
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 </aiml>

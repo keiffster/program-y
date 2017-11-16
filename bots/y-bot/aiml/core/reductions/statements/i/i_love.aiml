@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>I LOVE YOU AND *</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU I *</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU TOO *</pattern>
+        <template>
+            <srai>I LOVE YOU TOO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK I LOVE YOU</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM IN LOVE WITH *</pattern>
+        <template>
+            <srai>I LOVE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU SO MUCH *</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+            <sr/>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU I LOVE YOU</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BECAUSE I LOVE YOU</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOVE YOU</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU *</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU SO MUCH</pattern>
+        <template>
+            <srai>I _ SO MUCH</srai>
+            <srai>I
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU MORE *</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>* I LOVE *</pattern>
+        <template>
+            <srai>I LOVE
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE THE *</pattern>
+        <template>
+            <srai>I LIKE THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HATE YOU *</pattern>
+        <template>
+            <srai>I HATE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I HATE YOU YOU *</pattern>
+        <template>
+            <srai>I HATE YOU</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>HATE YOU</pattern>
+        <template>
+            <srai>I HATE YOU</srai>
+        </template>
+    </category>
+     <category>
+        <pattern>LOVE YOU *</pattern>
+        <template>
+            <srai>I LOVE YOU
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I LOVE YOU A LOT</pattern>
+        <template>
+            <srai>I LOVE YOU</srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>

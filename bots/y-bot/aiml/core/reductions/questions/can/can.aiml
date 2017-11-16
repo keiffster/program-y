@@ -22,9 +22,13 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
-
-
-
-
+    <category>
+        <pattern>CAN WE PLEASE *</pattern>
+        <template>
+            <srai>CAN WE
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 </aiml>

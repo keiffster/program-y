@@ -98,6 +98,22 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>HELLO IN *</pattern>
+        <template>
+            <srai>TRANSLATE HELLO TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SAY HELLO IN *</pattern>
+        <template>
+            <srai>TRANSLATE HELLO TO
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

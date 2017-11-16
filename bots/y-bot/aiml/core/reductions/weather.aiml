@@ -308,6 +308,20 @@
             <srai>SEASON</srai>
         </template>
     </category>
+   <category>
+        <pattern>IS IT GOING TO RAIN TOMORROW</pattern>
+        <template>
+            <srai>WEATHER FOR TOMORROW</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT RAINING *</pattern>
+        <template>
+            <srai>WEATHER
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 

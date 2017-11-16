@@ -102,6 +102,12 @@
         </template>
     </category>
 
+    <category>
+        <pattern>WHAT ARE THE 10 COMMANDMENTS</pattern>
+        <template>
+            <srai>TEN COMMANDMENTS</srai>
+        </template>
+    </category>
 
 
 

@@ -31,6 +31,21 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>NEED TO *</pattern>
+        <template>
+            <srai>I NEED TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I NEED TO PEE *</pattern>
+        <template>
+            <srai>I NEED TO PEE</srai>
+            <sr/>
+        </template>
+    </category>
 
 
 

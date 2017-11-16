@@ -199,6 +199,18 @@
         </template>
     </category>
 
+    <category>
+        <pattern>I AM A VIRGO</pattern>
+        <template>
+            <srai>MY SIGN IS VIRGO</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM AQUARIUS</pattern>
+        <template>
+            <srai>MY SIGN IS AQUARIUS</srai>
+        </template>
+    </category>
 
 
 </aiml>

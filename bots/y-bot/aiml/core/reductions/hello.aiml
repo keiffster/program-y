@@ -550,4 +550,22 @@
         </template>
     </category>
 
+        <category>
+        <pattern>HIIII *</pattern>
+        <template>
+            <srai>HI
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+        <category>
+        <pattern>CAN YOU SAY HELLO *</pattern>
+        <template>
+            <srai>SAY HELLO
+                <star/>
+            </srai>
+        </template>
+    </category>
+
 </aiml>

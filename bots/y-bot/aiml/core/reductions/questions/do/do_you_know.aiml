@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+    <!-- File: reductions1.aiml -->
+    <!-- Last modified: September 5, 2014 -->
+    <!--  -->
+    <!-- This AIML file is part of the Rosie knowledge base. -->
+    <!--  -->
+    <!-- Rosie is a fork of the ALICE2 brain, and is optimized for use on the Pandorabots platform -->
+    <!--  -->
+    <!-- Rosie is Copyright &copy; 2014 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- The Rosie brain is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  http://www.alicebot.org -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+
+    <category>
+        <pattern>DO YOU KNOW OF ANY *</pattern>
+        <template>
+            <srai>DO YOU KNOW ANY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>I THINK YOU KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+   <category>
+        <pattern>YOU KNOW ANY *</pattern>
+        <template>
+            <srai>DO YOU KNOW ANY
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW HOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW HOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ARE YOU KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW HOW TO *</pattern>
+        <template>
+            <srai>DO YOU KNOW HOW TO
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KNOW HOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW HOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU DO NOT EVEN KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KNOW *</pattern>
+        <template>
+            <srai>DO YOU KNOW
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>KNOW WHAT *</pattern>
+        <template>
+            <srai>DO YOU KNOW WHAT
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW OF *</pattern>
+        <template>
+            <srai>do you know
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YOU KNOW THE *</pattern>
+        <template>
+            <srai>DO YOU KNOW THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW ANY GOOD *</pattern>
+        <template>
+            <srai>do you know
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+
+
+
+</aiml>
