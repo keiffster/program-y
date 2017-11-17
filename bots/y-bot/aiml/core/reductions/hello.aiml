@@ -195,13 +195,6 @@
     </category>
 
     <category>
-        <pattern>HELLO *</pattern>
-        <template>
-            <srai>HELLO</srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>HELLO CAN *</pattern>
         <template>
             <srai>HELLO</srai>

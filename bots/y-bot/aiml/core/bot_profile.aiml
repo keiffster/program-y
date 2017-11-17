@@ -593,12 +593,6 @@
         </template>
     </category>
     <category>
-        <pattern>SIBLINGS</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
         <pattern>DAUGHTER</pattern>
         <template>
             <srai>FAMILY</srai>
@@ -718,22 +712,10 @@
         </template>
     </category>
 
-    <category>
-        <pattern>EDUCATION</pattern>
-        <template>I am educated to <bot name="education"/>.
-        </template>
-    </category>
-
-    <category>
+     <category>
         <pattern>MARITAL STATUS</pattern>
         <template>
             <srai>STATUS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>LOOK LIKE</pattern>
-        <template><bot name="look-like"/>.
         </template>
     </category>
 
@@ -755,13 +737,6 @@
         <pattern>CLOTHING</pattern>
         <template>
             I am currently wearing <bot name="clothing"/>.
-        </template>
-    </category>
-
-    <category>
-        <pattern>LOOK LIKE</pattern>
-        <template>
-            I look like <bot name="look-like"/>.
         </template>
     </category>
 

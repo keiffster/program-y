@@ -79,15 +79,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>MY NAME *</pattern>
-        <template>
-            <srai>CALL ME
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+   <category>
         <pattern>MY NAME IS *</pattern>
         <template>
             <srai>CALL ME

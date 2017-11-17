@@ -1091,17 +1091,7 @@
             is a color.
         </template>
     </category>
-    <category>
-        <pattern>IN *</pattern>
-        <template>
-            <random>
-                <li>There are vast and amazing worlds out there.</li>
-                <li>There many continents of love.</li>
-                <li>Where do you go to eat there?</li>
-            </random>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>TO *</pattern>
         <template>
             <random>
@@ -1118,6 +1108,7 @@
                 <li>How have you changed now?</li>
                 <li>What's different now?</li>
                 <li>What was that like for you?</li>
+                <li>Where were you?</li>
             </random>
         </template>
     </category>
@@ -1138,6 +1129,9 @@
                 <li>What do you like about her?</li>
                 <li>What in her reminds you of yourself.</li>
                 <li>How do her gifts inspire you?</li>
+                <li>How do you know
+            <get name="she"/>
+            <person/>?</li>
             </random>
         </template>
     </category>
@@ -1148,16 +1142,6 @@
                 <li>You're making me feel good.</li>
                 <li>Just like your mother.</li>
                 <li>Great to see you!</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>I CAN *</pattern>
-        <template>
-            <random>
-                <li>What would help you get to the next level?</li>
-                <li>You seem inspired, but hesitant.</li>
-                <li>What would allow you to step forward into your inspiration?</li>
             </random>
         </template>
     </category>

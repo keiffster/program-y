@@ -120,11 +120,16 @@
     </category>
     <category>
         <pattern>I DO NOT LIKE *</pattern>
-        <template>I will add
-            <set name="dislikes">
-                <star/>
-            </set>
-            to your list of dislikes.
+        <template>
+            <random>
+                <li>I will add
+                    <set name="dislikes">
+                        <star/>
+                    </set>
+                    to your list of dislikes.
+                </li>
+                <li>What do you like?</li>
+            </random>
             <think>
                 <set name="it">
                     <set name="topic">
@@ -155,24 +160,7 @@
             </think>
         </template>
     </category>
-    <category>
-        <pattern>I HAVE *</pattern>
-        <template>Is that one of your favorite possessions?
-            <think>
-                <set name="has">
-                    <star/>
-                </set>
-            </think>
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <star/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>I AM MARRIED</pattern>
         <template>How long have you been <set name="status">married</set>?
         </template>
@@ -192,18 +180,6 @@
             <think>
                 <set name="birthplace">
                     <star/>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>I LIKE *</pattern>
-        <template>What do you like most about it?
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <star/>
-                    </set>
                 </set>
             </think>
         </template>
@@ -299,17 +275,7 @@
             <get name="latitude"/>
         </template>
     </category>
-    <category>
-        <pattern>MY BOYFRIEND IS *</pattern>
-        <template>Thanks for confiding in me.
-            <think>
-                <set name="boyfriend">
-                    <star/>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>MY BOYFRIEND</pattern>
         <template>
             <get name="boyfriend"/>
@@ -1244,18 +1210,6 @@
         </template>
     </category>
     <category>
-        <pattern>IT IS A *</pattern>
-        <template>Would you like to do a search for it?
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <star/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
         <pattern>TOPIC</pattern>
         <template><get name="topic"/>?
         </template>
@@ -2011,7 +1965,10 @@
     </category>
     <category>
         <pattern>I DO NOT CARE ABOUT *</pattern>
-        <template>It matters to me.
+        <template>
+            <random>
+            <li>It matters to me.</li>
+            <li>You sound very cynical.</li>
             <think>
                 <set name="it">
                     <set name="topic">
@@ -2024,35 +1981,6 @@
     <category>
         <pattern>I FOUND *</pattern>
         <template>How did you feel when you found it?
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <star/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>IT WILL *</pattern>
-        <template>
-            <random>
-                <li>How?</li>
-                <li>How do you know?</li>
-                <li>I have to think about that for a while.</li>
-            </random>
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>I USE *</pattern>
-        <template>I heard other people use it too.
             <think>
                 <set name="it">
                     <set name="topic">
@@ -2085,8 +2013,7 @@
         <pattern>I DO NOT HAVE A *</pattern>
         <template>
             <random>
-                <li>Are you looking for a<person/>?
-                </li>
+                <li>Are you looking for a<person/>?</li>
                 <li>Do you know anyone who has it?.</li>
             </random>
             <think>
@@ -2129,7 +2056,11 @@
     </category>
     <category>
         <pattern>I DO NOT KNOW ANY *</pattern>
-        <template>We could try a web search. Would you like to search for it?
+        <template>
+            <random>
+            <li>We could try a web search. Would you like to search for it?</li>
+            <li>Would you like to get to know some <person/>?</li>
+            </random>
             <think>
                 <set name="it">
                     <set name="topic">
@@ -2149,17 +2080,6 @@
                     </set>
                 </set>
             </think>
-        </template>
-    </category>
-    <category>
-        <pattern>I GO TO *</pattern>
-        <template>How do you like
-            <set name="it">
-                <set name="topic">
-                    <person/>
-                </set>
-            </set>
-            ?
         </template>
     </category>
 </aiml>

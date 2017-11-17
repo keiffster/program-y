@@ -38,19 +38,7 @@
         <pattern># HEY #</pattern><template><srai>HELLO</srai></template>
     </category>
     <category>
-        <pattern>MORNING</pattern><template><srai>HELLO</srai></template>
-    </category>
-    <category>
-        <pattern>GOOD MORNING</pattern><template><srai>HELLO</srai></template>
-    </category>
-    <category>
         <pattern>GOOD DAY</pattern><template><srai>HELLO</srai></template>
-    </category>
-    <category>
-        <pattern>GOOD EVENING</pattern><template><srai>HELLO</srai></template>
-    </category>
-    <category>
-        <pattern>EVENING</pattern><template><srai>HELLO</srai></template>
     </category>
 
     <category>

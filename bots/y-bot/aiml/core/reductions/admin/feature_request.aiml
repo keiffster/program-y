@@ -131,15 +131,6 @@
             <srai>FEATURE REQUEST PLAY GAMES</srai>
         </template>
     </category>
-    <category>
-        <pattern>LET US PLAY *</pattern>
-        <template>
-            <srai>FEATURE REQUEST PLAY
-                <star/>
-            </srai>
-        </template>
-    </category>
-
 
 
 

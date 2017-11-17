@@ -5,6 +5,27 @@ body {
     text-align:center;
     padding:35px; }
 
+.page-header {
+  color: #fff;
+  text-align: center;
+  width: 640px;
+  neight: 226px;
+  background-color: #2048d8;
+  background-image: url("brain.jpg");
+}
+
+@media screen and (min-width: 64em) {
+  .page-header {
+    padding: 5rem 6rem; } }
+
+@media screen and (min-width: 42em) and (max-width: 64em) {
+  .page-header {
+    padding: 3rem 4rem; } }
+
+@media screen and (max-width: 42em) {
+  .page-header {
+    padding: 2rem 1rem; } }
+
 form, p, span {
     margin:0;
     padding:0; }
