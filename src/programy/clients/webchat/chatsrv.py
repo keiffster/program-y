@@ -27,7 +27,7 @@ print("Initiating Webchat Client...")
 APP = Flask(__name__)
 
 @APP.route('/')
-def hello_world():
+def index():
     return current_app.send_static_file('webchat.html')
 
 # Enter you API keys, here, alternatively store in a db or file and load at startup

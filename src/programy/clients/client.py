@@ -38,22 +38,18 @@ class BotClient(ResponseLogger):
 
     def __init__(self, clientid, argument_parser=None):
         self._clientid = clientid
+
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
+
         self.initiate_logging(self.arguments)
+
         self.load_configuration(self.arguments)
 
         self._brain = Brain(self.configuration.brain_configuration)
+
         self.bot = Bot(self._brain, self.configuration.bot_configuration)
 
-        if self.configuration.brain_configuration.braintree.file is not None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Dumping AIML Graph as tree to [%s]",
-                              self.configuration.brain_configuration.braintree.file)
-            self.brain.aiml_parser.pattern_parser.save_braintree(
-                self.bot,
-                self.clientid,
-                self.configuration.brain_configuration.braintree.file,
-                self.configuration.brain_configuration.braintree.content)
+        self.dump_brain_tree()
 
         self.set_environment()
 
@@ -68,6 +64,18 @@ class BotClient(ResponseLogger):
     @property
     def brain(self):
         return self._brain
+
+    def dump_brain_tree(self):
+        if self.configuration.brain_configuration.braintree.file is not None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Dumping AIML Graph as tree to [%s]",
+                              self.configuration.brain_configuration.braintree.file)
+            self.brain.aiml_parser.pattern_parser.save_braintree(
+                self.bot,
+                self.clientid,
+                self.configuration.brain_configuration.braintree.file,
+                self.configuration.brain_configuration.braintree.content)
+
 
     def get_description(self):
         return 'ProgramY AIML2.0 Console Client'
