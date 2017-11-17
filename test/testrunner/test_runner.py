@@ -155,7 +155,7 @@ class TestRunnerBotClient(BotClient):
     def add_client_arguments(self, parser=None):
         if parser is not None:
             parser.add_argument('--test_dir', dest='test_dir', help='directory containing test files to run against grammar')
-            parser.add_argument('--test_file', dest='test_file', help='Single file ot aiml_tests to run against grammar')
+            parser.add_argument('--test_file', dest='test_file', help='Single file of aiml_tests to run against grammar')
             parser.add_argument('--qna_file', dest='qna_file', help='A file containing questions and answers')
             parser.add_argument('--verbose', dest='verbose', action='store_true', help='print out each question to be asked')
 
