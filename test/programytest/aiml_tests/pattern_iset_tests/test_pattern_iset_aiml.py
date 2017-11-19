@@ -43,3 +43,13 @@ class PatternISetAIMLTests(unittest.TestCase):
     def test_patten_alternative_set_match(self):
         response = PatternISetAIMLTests.test_client.bot.ask_question("test",  "I LIKE RIDING BMW MOTORCYCLES")
         self.assertEqual(response, "I prefer a Harley Davidson to a BMW")
+
+    def test_united_kingdom(self):
+        response = PatternISetAIMLTests.test_client.bot.ask_question("test",  "I live in wales")
+        self.assertEqual(response, "Thats great, I live in the UK too!")
+
+        response = PatternISetAIMLTests.test_client.bot.ask_question("test",  "I live in WALES")
+        self.assertEqual(response, "Thats great, I live in the UK too!")
+
+        response = PatternISetAIMLTests.test_client.bot.ask_question("test",  "I live in Wales")
+        self.assertEqual(response, "Thats great, I live in the UK too!")

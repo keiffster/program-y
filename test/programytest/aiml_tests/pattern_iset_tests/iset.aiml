@@ -47,4 +47,12 @@ For more information see [url]
             I prefer a Harley Davidson to a <star index="1" />
         </template>
     </category>
+
+    <category>
+        <pattern>I LIVE IN <iset words="ENGLAND, IRELAND, SCOTLAND, WALES" /></pattern>
+        <template>
+            Thats great, I live in the UK too!
+        </template>
+    </category>
+
 </aiml>

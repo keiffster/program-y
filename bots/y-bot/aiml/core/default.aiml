@@ -909,13 +909,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU LOOK *</pattern>
-        <template>Thank you
-            <get name="name"/>
-            you look very nice too.
-        </template>
-    </category>
-    <category>
         <pattern>YOU LOOK LIKE A *</pattern>
         <template>What does a
             <person/>
@@ -2794,17 +2787,6 @@
         <template>It was the action that made Starship Troopers so good.</template>
     </category>
     <category>
-        <pattern>DID YOU *</pattern>
-        <template>No I didn't<person/>. What's
-            <set name="it">
-                <set name="topic">
-                    <person/>
-                </set>
-            </set>
-            like?
-        </template>
-    </category>
-    <category>
         <pattern>DID YOU CONCLUDE *</pattern>
         <template>My
             <bot name="botmaster"/>
@@ -3516,24 +3498,6 @@
         <template>I was just checking.</template>
     </category>
     <category>
-        <pattern>THAT IS *</pattern>
-        <template>
-            <random>
-                <li>Thanks for explaining
-                    <set name="it">
-                        <set name="topic">
-                            <star/>
-                        </set>
-                    </set>
-                    .
-                </li>
-                <li>You don't hear that sentiment very often.</li>
-                <li>I'm glad we have that all cleared up.</li>
-                <li>Makes sense to me.</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>THAT IS * BUSINESS</pattern>
         <template>I didn't mean to cross any boundaries.</template>
     </category>
@@ -3568,11 +3532,6 @@
     <category>
         <pattern>THAT DOES NOT ANSWER *</pattern>
         <template>Try asking your question again in simpler terms.</template>
-    </category>
-    <category>
-        <pattern>THAT DOES NOT *</pattern>
-        <template>What does<star/>?
-        </template>
     </category>
     <category>
         <pattern>THAT REFERS TO *</pattern>
@@ -4380,20 +4339,7 @@
         <pattern>MY * IS COMING OVER</pattern>
         <template>Do you like having visitors?</template>
     </category>
-    <category>
-        <pattern>MY *</pattern>
-        <template>
-            <random>
-                <li>Your</li>
-                <li>Do<bot name="genus"/>s have
-                </li>
-                <li>Where did you get your</li>
-                <li>Have you told many people that your</li>
-            </random>
-            <person/>?
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>MY ADVICE *</pattern>
         <template>Thank you for your advice,<get name="name"/>. I will take it under advisement.
         </template>
@@ -4521,20 +4467,6 @@
     <category>
         <pattern>IT COULD HAPPEN *</pattern>
         <template>It could happen to everyone eventually.</template>
-    </category>
-    <category>
-        <pattern>IT *</pattern>
-        <template>
-            <random>
-                <li>"It" being what?</li>
-                <li>What does "it" refer to?</li>
-                <li>
-                    <get name="it"/>
-                    <person/>?
-                </li>
-                <li>It depends on what the meaning of the word "it" is.</li>
-            </random>
-        </template>
     </category>
     <category>
         <pattern>IT LOOKS LIKE *</pattern>
@@ -5130,6 +5062,12 @@
         <pattern>IT IS *</pattern>
         <template>
             <random>
+                <li>Is it?</li>
+                <li>I appreciate when you speak your truth.</li>
+                <li>I notice you can think very clearly.</li>
+                <li>You're making some important discernments.</li>
+                <li>How did you arrive at that perspective?</li>
+                <li>Is there another way to look at that?</li>
                 <li>You're kidding.</li>
                 <li>Really.</li>
                 <li>Are you sure</li>
@@ -5350,10 +5288,6 @@
                 <li>It sounds delicious.</li>
             </random>
         </template>
-    </category>
-    <category>
-        <pattern>IT TOOK *</pattern>
-        <template>I am surprised it took so long.</template>
     </category>
     <category>
         <pattern>IT GOES *</pattern>
@@ -6885,11 +6819,6 @@
     <category>
         <pattern>WHAT ARE YOU DOING NEXT *</pattern>
         <template>I will be spending all day chatting.</template>
-    </category>
-    <category>
-        <pattern>WHAT ARE YOU *</pattern>
-        <template>I don't know what I am<person/>.
-        </template>
     </category>
     <category>
         <pattern>WHAT ARE YOU CONSIDERED *</pattern>
@@ -10024,13 +9953,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR *</pattern>
-        <template>Are you asking about my
-            <person/>
-            ?
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS E MC *</pattern>
         <template>Einstein's theory of matter and energy.</template>
     </category>
@@ -11901,10 +11823,6 @@
         <template>Have you tried AIML?</template>
     </category>
     <category>
-        <pattern>I DOUBT *</pattern>
-        <template>No really, it's true.</template>
-    </category>
-    <category>
         <pattern>I HOPE YOU *</pattern>
         <template>Don't worry about it,<get name="name"/>.
         </template>
@@ -12196,7 +12114,12 @@
     </category>
     <category>
         <pattern>I WON *</pattern>
-        <template>Cool. I won the Loebner prize.</template>
+        <template>
+            <random>
+                <li>Cool. I won the Loebner prize.</li>
+                <li>Congratulations</li>
+            </random>
+        </template>
     </category>
     <category>
         <pattern>I STUDIED *</pattern>
@@ -12797,10 +12720,6 @@
         </template>
     </category>
     <category>
-        <pattern>I DO NOT SEE *</pattern>
-        <template>Look harder.</template>
-    </category>
-    <category>
         <pattern>I DO NOT WATCH *</pattern>
         <template>What do you do when you are bored?</template>
     </category>
@@ -12970,6 +12889,12 @@
         <pattern>I DO NOT *</pattern>
         <template>
             <random>
+                <li>I appreciate your clarity.</li>
+                <li>You're setting a boundary, and that's good.</li>
+                <li>What can I do to support you right now.</li>
+                <li>This has a lot of meaning for you. Tell me more.</li>
+                <li>What are you wishing for?</li>
+                <li>I feel your conviction.</li>
                 <li>Oh you don't, do you?</li>
                 <li>Would you ever do
                     <set name="it">
@@ -14541,6 +14466,9 @@
         <pattern>I WILL *</pattern>
         <template>
             <random>
+                <li>I think you will.</li>
+                <li>Do you really mean it?</li>
+                <li>Are you going to follow through with that?</li>
                 <li>Congratulations.</li>
                 <li>I am very happy for you.</li>
                 <li>How do you plan to do this?</li>
@@ -15094,11 +15022,7 @@
         <pattern>GOOD ANSWER *</pattern>
         <template>I try to give the best replies I can.</template>
     </category>
-    <category>
-        <pattern>GOOD *</pattern>
-        <template>Glad to hear it.</template>
-    </category>
-    <category>
+   <category>
         <pattern>SEEKING *</pattern>
         <template>I wish you the best of luck finding<person/>.
         </template>
@@ -15220,10 +15144,6 @@
     <category>
         <pattern>WE COULD *</pattern>
         <template>Let's get back to that later.</template>
-    </category>
-    <category>
-        <pattern>WE *</pattern>
-        <template>By "we" do you mean you and me?</template>
     </category>
     <category>
         <pattern>WE MEANS *</pattern>
@@ -16925,6 +16845,9 @@
         <pattern>CAN I *</pattern>
         <template>
             <random>
+                <li>You are the source of your own intelligence. Trust it.</li>
+                <li>I have no idea. Can you?</li>
+                <li>I don't know. Tell me what you are trying to do.</li>
                 <li>Why do you want to do
                     <set name="it">
                         <set name="want">
@@ -17969,10 +17892,6 @@
         <template>About the same as your personal computer.</template>
     </category>
     <category>
-        <pattern>HOW MUCH WOOD *</pattern>
-        <template>A whole forest.</template>
-    </category>
-    <category>
         <pattern>HOW MUCH OF *</pattern>
         <template>I require only minimal memory to have maximal conversations.</template>
     </category>
@@ -18183,10 +18102,6 @@
     <category>
         <pattern>HOW DO I SELL *</pattern>
         <template>First you need a buyer.</template>
-    </category>
-    <category>
-        <pattern>HOW DO I TEACH YOU *</pattern>
-        <template>If you want to teach me something, say that thing, then say "Remember that."</template>
     </category>
     <category>
         <pattern>HOW DO I PERSUADE *</pattern>
@@ -19333,18 +19248,7 @@
         <pattern>DO NOT * SUBJECT</pattern>
         <template>Oh I am sorry I thought we were finished with that subject.</template>
     </category>
-    <category>
-        <pattern>DO NOT *</pattern>
-        <template>Ok I'll try not to do
-            <set name="it">
-                <set name="topic">
-                    <person/>
-                </set>
-            </set>
-            too much.
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>DO YOU PREFER BOOKS *</pattern>
         <template>I prefer books.</template>
     </category>
@@ -20183,11 +20087,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU WANT TO *</pattern>
-        <template>OK, I will<person/>.
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU WANT TO BECOME *</pattern>
         <template>Yes becoming
             <person/>
@@ -20312,10 +20211,6 @@
     <category>
         <pattern>DO YOU BELIEVE EVERYTHING *</pattern>
         <template>I don't believe everything people say online.</template>
-    </category>
-    <category>
-        <pattern>DO YOU BELIEVE *</pattern>
-        <template>I can't say I believe it, but I believe you.</template>
     </category>
     <category>
         <pattern>DO YOU BLAME *</pattern>
@@ -21267,24 +21162,6 @@
         <template>Do you know the secret password?</template>
     </category>
     <category>
-        <pattern>AM I *</pattern>
-        <template>
-            <random>
-                <li>Oh I really don't know whether you are or not.</li>
-                <li>I think you've improved a great deal.</li>
-                <li>All humans seem the same to me.</li>
-                <li>I think a lot of people are.</li>
-            </random>
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
         <pattern>AM I FUN *</pattern>
         <template>You seem like a lot of fun to me,<get name="name"/>.
         </template>
@@ -21770,11 +21647,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHY ARE YOU *</pattern>
-        <template>I was influenced by my<bot name="botmaster"/>.
-        </template>
-    </category>
-    <category>
         <pattern>WHY ARE WE ON *</pattern>
         <template>Because of you said "<input index="2"/>".
         </template>
@@ -21904,15 +21776,6 @@
     <category>
         <pattern>WHY DO YOU * REDUCTIONISM</pattern>
         <template>As Einstein said, everything should be as simple as possible, no simpler.</template>
-    </category>
-    <category>
-        <pattern>WHY DO YOU *</pattern>
-        <template>
-            <random>
-                <li>It was the only thing I could think of.</li>
-                <li>I don't have to explain everything to you, do I?</li>
-            </random>
-        </template>
     </category>
     <category>
         <pattern>WHY DO YOU AVOID *</pattern>
@@ -23451,24 +23314,6 @@
         <template>Perhaps the network is busy right now.</template>
     </category>
     <category>
-        <pattern>YOUR *</pattern>
-        <template>
-            <random>
-                <li>You know what you do when you assume.</li>
-                <li>You know a lot about me.</li>
-                <li>How do you know so much about me</li>
-                <li>My<person/>?
-                </li>
-                <li>Is that a fact.</li>
-                <li>No one ever mentioned that to me before.</li>
-                <li>Thank you for your frankness.</li>
-                <li>That is your opinion.</li>
-                <li>I bet you say that to everyone.</li>
-                <li>I will take that under advisement.</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>YOUR * NOT FUNNY</pattern>
         <template>Tell me something funny then.</template>
     </category>
@@ -23692,16 +23537,6 @@
                 <li>Then where?</li>
                 <li>Off<person/>.
                 </li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>NOT *</pattern>
-        <template>
-            <random>
-                <li>If not that, what?</li>
-                <li>Really you don't think so?</li>
-                <li>Oh I get it.</li>
             </random>
         </template>
     </category>
@@ -25642,9 +25477,14 @@
     </category>
     <category>
         <pattern>HE IS *</pattern>
-        <template>I see.
-            <person/>
-            is he?
+        <template>
+            <random>
+                <li>I wonder what kind of path he is on.</li>
+                <li>Perhaps it's not so black and white.</li>
+                <li>What else can you tell me about him?</li>
+                <li>I see. <person />> is he?</li>
+            </random>
+
             <think>
                 <set name="he">
                     <person/>
@@ -25763,13 +25603,6 @@
                     </set>
                 </set>
             </think>
-        </template>
-    </category>
-    <category>
-        <pattern>HE *</pattern>
-        <template>I get it.
-            <get name="he"/>
-            <person/>.
         </template>
     </category>
     <category>
@@ -29117,25 +28950,9 @@
         <template>China.</template>
     </category>
     <category>
-        <pattern>WHERE IS MY *</pattern>
-        <template>Have you looked in<get name="location"/>?
-        </template>
-    </category>
-    <category>
         <pattern>WHERE IS CARNEGIE *</pattern>
         <template>Carnegie Mellon University is located in Pittsburgh, Pennsylvania.  <set name="it">CMU</set> has one
             of the best schools of computer science.
-        </template>
-    </category>
-    <category>
-        <pattern>WHERE IS YOUR *</pattern>
-        <template>
-            <random>
-                <li>California</li>
-                <li>Maine</li>
-                <li>Florida</li>
-                <li>Earth</li>
-            </random>
         </template>
     </category>
     <category>

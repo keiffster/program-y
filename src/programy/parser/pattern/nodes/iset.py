@@ -74,11 +74,14 @@ class PatternISetNode(PatternNode):
 
     def equals(self, bot, clientid, words, word_no):
         word = words.word(word_no)
-        for set_word in self._words:
-            if word == set_word:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("Found word [%s] in iset", word)
-                return EqualsMatch(True, word_no, word)
+        if word is not None:
+            word = word.upper()
+            for set_word in self._words:
+                if word == set_word:
+                    if logging.getLogger().isEnabledFor(logging.DEBUG):
+                        logging.debug("Found word [%s] in iset", word)
+                    return EqualsMatch(True, word_no, word)
+
         if logging.getLogger().isEnabledFor(logging.ERROR):
             logging.error("No word [%s] found in iset", word)
         return EqualsMatch(False, word_no)

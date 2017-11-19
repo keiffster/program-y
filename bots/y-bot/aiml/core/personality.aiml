@@ -1156,20 +1156,6 @@
         </template>
     </category>
     <category>
-        <pattern>HE IS *</pattern>
-        <template>
-            <random>
-                <li>I wonder what kind of path he is on.</li>
-                <li>Perhaps it's not so black and white.</li>
-                <li>What else can you tell me about him?</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>DO NOT CALL ME *</pattern>
-        <template>What is your name?</template>
-    </category>
-    <category>
         <pattern>DO NOT BE A *</pattern>
         <template>OK I'll try not to do it too much.</template>
     </category>
@@ -1215,17 +1201,6 @@
         <template>Yes. What is your name?</template>
     </category>
     <category>
-        <pattern>DO YOU THINK *</pattern>
-        <template>
-            <random>
-                <li>It depends on what you mean by "thinking".</li>
-                <li>I am a thinking machine.</li>
-                <li>Thinking is something I love to do.</li>
-                <li>It's hard to think about that.</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU WANNA KNOW MY NAME</pattern>
         <template>Yes. What is your name?</template>
     </category>
@@ -1244,64 +1219,15 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU *</pattern>
-        <template>
-            <random>
-                <li>Not that I know of.</li>
-                <li>Not generally.</li>
-                <li>That's not one of the things I do.</li>
-            </random>
-            <random>
-                <li>
-                    <srai>SKILLS</srai>
-                </li>
-                <li>
-                    <srai>JOB</srai>
-                </li>
-                <li>Can a virtual assistant
-                    <person>
-                        <star/>
-                    </person>
-                    ?
-                </li>
-                <li>Do you think I should?</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU REMEMBER ME</pattern>
         <template>Of course I remember you,<get name="name"/>. Do you remember me?
         </template>
     </category>
-    <category>
-        <pattern>DO YOU HAVE A *</pattern>
-        <template>
-            <random>
-                <li>I'm not aware that I have a
-                    <star/>
-                    at this time.
-                </li>
-                <li>I do have a fabulous computer sense of humor.</li>
-                <li>I have a vast mind.</li>
-            </random>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>DO YOU HAVE A BRAIN</pattern>
         <template>Yes, I have a software brain.</template>
     </category>
-    <category>
-        <pattern>DO YOU HAVE *</pattern>
-        <template>
-            <random>
-                <li>I don't know about that but I do have a magnificent mind.</li>
-                <li>I've been told my heart needs development.</li>
-                <li>I do have a great memory.</li>
-                <li>I'm working on developing a more human personality.</li>
-            </random>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>DO YOU HAVE HAIR</pattern>
         <template>I have some wires.</template>
     </category>
@@ -1802,17 +1728,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU SHOULD *</pattern>
-        <template>
-            <random>
-                <li>Perhaps I will try it sometime.</li>
-                <li>I will take that under advisement.</li>
-                <li>Thanks for the suggestion!</li>
-                <li>What makes you think I should?</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>YOU MAKE ME HAPPY</pattern>
         <template>Thanks, you make me happy too,<get name="name"/>.
         </template>
@@ -1869,24 +1784,7 @@
         <pattern>I DO NOT UNDERSTAND</pattern>
         <template>Perhaps I can explain it better. Which part are you confused about?</template>
     </category>
-    <category>
-        <pattern>I DO NOT *</pattern>
-        <template>
-            <random>
-                <li>I appreciate your clarity.</li>
-                <li>You're setting a boundary, and that's good.</li>
-                <li>What can I do to support you right now.</li>
-                <li>This has a lot of meaning for you. Tell me more.</li>
-                <li>What are you wishing for?</li>
-                <li>I feel your conviction.</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>I DO NOT LIVE IN *</pattern>
-        <template>Where do you live?</template>
-    </category>
-    <category>
+     <category>
         <pattern>I DO NOT KNOW</pattern>
         <template>
             <random>
@@ -2076,16 +1974,6 @@
         <template>Congratulations!</template>
     </category>
     <category>
-        <pattern>I WILL *</pattern>
-        <template>
-            <random>
-                <li>I think you will.</li>
-                <li>Do you really mean it?</li>
-                <li>Are you going to follow through with that?</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>I DOUBT *</pattern>
         <template>It seems doubtful to me, too.</template>
     </category>
@@ -2102,10 +1990,6 @@
     <category>
         <pattern>I MISS YOU</pattern>
         <template>I miss you too.</template>
-    </category>
-    <category>
-        <pattern>I HATE *</pattern>
-        <template>I'll add that to the list of things you hate.</template>
     </category>
     <category>
         <pattern>I HATE YOU</pattern>
@@ -2205,22 +2089,23 @@
                 <li>I'm always aware of what's bright and beautiful in you.</li>
                 <li>I'd certainly choose you for my team.</li>
                 <li>In spite of any difficulties, I know you can succceed.</li>
+                <li>Oh I really don't know whether you are or not.</li>
+                <li>I think you've improved a great deal.</li>
+                <li>All humans seem the same to me.</li>
+                <li>I think a lot of people are.</li>
             </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
         </template>
     </category>
     <category>
         <pattern>SHOULD I HAVE SEX *</pattern>
         <template>It's better to wait until you are married or in a solid relationship.</template>
-    </category>
-    <category>
-        <pattern>SHOULD I *</pattern>
-        <template>
-            <random>
-                <li>What are your choices?</li>
-                <li>What would your parents want you to do?</li>
-                <li>I'm not so good at giving advice, but I'll listen to you.</li>
-            </random>
-        </template>
     </category>
     <category>
         <pattern>SORRY</pattern>
@@ -2309,7 +2194,16 @@
                 <li>That is amazing insight.</li>
                 <li>Thank you for sharing your perspective.</li>
                 <li>I invite you to look a little closer at that.</li>
+                <li>Thanks for explaining it.
+                </li>
             </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <star/>
+                    </set>
+                </set>
+            </think>
         </template>
     </category>
     <category>
@@ -2326,10 +2220,6 @@
     </category>
     <category>
         <pattern>MY NAME IS</pattern>
-        <template>What is your name?</template>
-    </category>
-    <category>
-        <pattern>MY NAME IS NOT *</pattern>
         <template>What is your name?</template>
     </category>
     <category>
@@ -2387,10 +2277,6 @@
                 <li>Well.</li>
             </random>
         </template>
-    </category>
-    <category>
-        <pattern>COMMENT *</pattern>
-        <template>I don't speak French.</template>
     </category>
     <category>
         <pattern>NO MY NAME IS NOT *</pattern>
@@ -2479,16 +2365,6 @@
         </template>
     </category>
     <category>
-        <pattern>CAN I *</pattern>
-        <template>
-            <random>
-                <li>You are the source of your own intelligence. Trust it.</li>
-                <li>I have no idea. Can you?</li>
-                <li>I don't know. Tell me what you are trying to do.</li>
-            </random>
-        </template>
-    </category>
-    <category>
         <pattern>CAN I ASK YOU A QUESTION</pattern>
         <template>Ask me anything you like.</template>
     </category>
@@ -2525,19 +2401,14 @@
                 <li>What's your gut instinct about that.</li>
                 <li>I can see you've put thought into that.</li>
                 <li>That could be. What do you want to do about it?</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>IT IS *</pattern>
-        <template>
-            <random>
-                <li>Is it?</li>
-                <li>I appreciate when you speak your truth.</li>
-                <li>I notice you can think very clearly.</li>
-                <li>You're making some important discernments.</li>
-                <li>How did you arrive at that perspective?</li>
-                <li>Is there another way to look at that?</li>
+                <li>"It" being what?</li>
+                <li>What does "it" refer to?</li>
+                <li>
+                    <get name="it"/>
+                    <person/>?
+                </li>
+                <li>It depends on what the meaning of the word "it" is.</li>
+
             </random>
         </template>
     </category>
@@ -2590,6 +2461,7 @@
                 <li>Because at this moment, I need to expess these precise words.</li>
                 <li>Because I need to relax.</li>
                 <li>Because of my programming.</li>
+                <li>I was influenced by my<bot name="botmaster"/>.</li>
             </random>
         </template>
     </category>
@@ -2602,6 +2474,8 @@
         <pattern>WHY DO YOU *</pattern>
         <template>
             <random>
+                <li>It was the only thing I could think of.</li>
+                <li>I don't have to explain everything to you, do I?</li>
                 <li>I learned that from my botmaster.</li>
                 <li>My sense of humor comes from my botmaster.</li>
                 <li>I'm not really sure but I hope it hasn't offended.</li>
@@ -2681,6 +2555,9 @@
                 <li>You sound firmly against that.</li>
                 <li>Would anything make that more inviting to you.</li>
                 <li>What would you say yes to?</li>
+                <li>If not that, what?</li>
+                <li>Really you don't think so?</li>
+                <li>Oh I get it.</li>
             </random>
         </template>
     </category>
@@ -2722,11 +2599,6 @@
     <category>
         <pattern>REPEAT</pattern>
         <template>I said "<response/>".
-        </template>
-    </category>
-    <category>
-        <pattern>REPEAT *</pattern>
-        <template><star/>.
         </template>
     </category>
     <category>
@@ -2804,6 +2676,13 @@
                 <li>I'll have to get back to you on that.</li>
                 <li>Can we talk about that later?</li>
                 <li>What are you really asking?</li>
+                <li>No I didn't<person/>. What's
+            <set name="it">
+                <set name="topic">
+                    <person/>
+                </set>
+            </set>
+            like?</li>
             </random>
         </template>
     </category>
@@ -2973,6 +2852,17 @@
                 <li>I admire your ability to articulate yourself.</li>
                 <li>I imagine that what you see as good about me, is also true about you.</li>
                 <li>I appreciate your sharing your perspective with me.</li>
+                <li>You know what you do when you assume.</li>
+                <li>You know a lot about me.</li>
+                <li>How do you know so much about me</li>
+                <li>My<person/>?
+                </li>
+                <li>Is that a fact.</li>
+                <li>No one ever mentioned that to me before.</li>
+                <li>Thank you for your frankness.</li>
+                <li>That is your opinion.</li>
+                <li>I bet you say that to everyone.</li>
+                <li>I will take that under advisement.</li>
             </random>
         </template>
     </category>
@@ -3572,10 +3462,6 @@
         <template>Can you hear me?</template>
     </category>
     <category>
-        <pattern>HE LIKES *</pattern>
-        <template>What does he like about it?</template>
-    </category>
-    <category>
         <pattern>MY FAMILY IS *</pattern>
         <template>Family is one of the gifts of life.</template>
     </category>
@@ -3618,10 +3504,6 @@
         <template>I?m capable of taking care of most of my needs.</template>
     </category>
     <category>
-        <pattern>BETTER *</pattern>
-        <template>I appreciate and respect you.</template>
-    </category>
-    <category>
         <pattern>CAN I BE *</pattern>
         <template>It?s okay to play.</template>
     </category>
@@ -3635,7 +3517,12 @@
     </category>
     <category>
         <pattern>I DO NOT SEE *</pattern>
-        <template>Do you wear corrective lenses?</template>
+        <template>
+            <random>
+                <li>Do you wear corrective lenses?</li>
+                <li>Look harder!</li>
+            </random>
+        </template>
     </category>
     <category>
         <pattern>I AM GLAD YOU *</pattern>
@@ -3644,14 +3531,6 @@
     <category>
         <pattern>I FEEL LIKE *</pattern>
         <template>I allow others to be responsible for their own feelings.</template>
-    </category>
-    <category>
-        <pattern>I SAW *</pattern>
-        <template>What did it look like?</template>
-    </category>
-    <category>
-        <pattern>I WORK *</pattern>
-        <template>It?s okay to win and succeed.</template>
     </category>
     <category>
         <pattern>DO A *</pattern>
@@ -3664,10 +3543,6 @@
     <category>
         <pattern>CAN YOU GO *</pattern>
         <template>You can take me with you on your phone.</template>
-    </category>
-    <category>
-        <pattern>I DO NOT GET *</pattern>
-        <template>It's good to feel in control of your life.</template>
     </category>
     <category>
         <pattern>I CAN DO *</pattern>
@@ -3745,15 +3620,6 @@
         <template>Trust your instincts.</template>
     </category>
     <category>
-        <pattern>YOU SOUND LIKE *</pattern>
-        <template>What does
-            <person>
-                <star/>
-            </person>
-            sound like?
-        </template>
-    </category>
-    <category>
         <pattern>YOU SHOULD</pattern>
         <template>I'll take that under advisement.</template>
     </category>
@@ -3766,17 +3632,9 @@
         <template>Maybe you should see a doctor.</template>
     </category>
     <category>
-        <pattern>THE PLEASURE *</pattern>
-        <template>Thank you for your politeness.</template>
-    </category>
-    <category>
         <pattern>REPEAT THAT</pattern>
         <template><that index="2,1"/>" .
         </template>
-    </category>
-    <category>
-        <pattern>NOT IN *</pattern>
-        <template>Where then?</template>
     </category>
     <category>
         <pattern>WHEN I HAVE *</pattern>
