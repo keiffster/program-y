@@ -1028,18 +1028,6 @@
     </category>
 
     <category>
-        <pattern>IS * <set>article</set> *
-        </pattern>
-        <template>
-            <srai>IS
-                <star/>
-                MEMBEROF
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>IS * MEMBEROF *</pattern>
         <template>
             <think>

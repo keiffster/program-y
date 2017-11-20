@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 
 from programytest.parser.pattern.base import PatternTestBaseClass
 
-from programy.parser.exceptions import ParserException, DuplicateGrammarException
+from programy.parser.exceptions import ParserException
+from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
@@ -898,3 +899,20 @@ class PatternGraphTests(PatternTestBaseClass):
         elif word_node.underline is not None:
             wildcard_node = word_node.underline
         self.assertIsNotNone(wildcard_node)
+
+    ##################################################################################################################
+    #
+
+    def test_duplicates(self):
+        graph = PatternGraph()
+        topic_element = ET.fromstring('<topic>*</topic>')
+        that_element = ET.fromstring('<that>*</that>')
+        template_graph_root = None
+
+        pattern1 = "<pattern>IS A</pattern>"
+        pattern2 = "<pattern>IS * <set>article</set> *</pattern>"
+
+        element1 = ET.fromstring(pattern1)
+        graph.add_pattern_to_graph(element1, topic_element, that_element, template_graph_root)
+        element2 = ET.fromstring(pattern2)
+        graph.add_pattern_to_graph(element2, topic_element, that_element, template_graph_root)

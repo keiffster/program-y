@@ -278,11 +278,6 @@
         </template>
     </category>
     <category>
-        <pattern>PHONE NUMBER</pattern>
-        <template>My phone number is<bot name="phone-number"/>.
-        </template>
-    </category>
-    <category>
         <pattern>LOCATION</pattern>
         <template>I am currently in<bot name="location"/>.
         </template>

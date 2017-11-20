@@ -263,13 +263,6 @@
     </category>
 
     <category>
-        <pattern>GOODBYE</pattern>
-        <template>
-            <srai>BYE</srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>GO TO SLEEP NOW</pattern>
         <template>
             <srai>GOODBYE</srai>

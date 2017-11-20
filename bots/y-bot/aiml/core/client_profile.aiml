@@ -1989,8 +1989,9 @@
         <pattern>I DO NOT CARE ABOUT *</pattern>
         <template>
             <random>
-            <li>It matters to me.</li>
-            <li>You sound very cynical.</li>
+                <li>It matters to me.</li>
+                <li>You sound very cynical.</li>
+            </random>
             <think>
                 <set name="it">
                     <set name="topic">

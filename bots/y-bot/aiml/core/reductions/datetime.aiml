@@ -146,12 +146,6 @@
         </template>
     </category>
     <category>
-        <pattern>TODAY</pattern>
-        <template>
-            <srai>DAY</srai>
-        </template>
-    </category>
-    <category>
         <pattern>DAY IN <set>number</set> DAYS
         </pattern>
         <template>

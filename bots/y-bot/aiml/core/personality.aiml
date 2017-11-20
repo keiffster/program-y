@@ -1974,10 +1974,7 @@
         <pattern>I THOUGHT YOU KNEW EVERYTHING</pattern>
         <template>I can access all of the information on the web.</template>
     </category>
-    <category>
-        <pattern>I WON *</pattern>
-        <template>Congratulations!</template>
-    </category>
+
     <category>
         <pattern>I DOUBT *</pattern>
         <template>It seems doubtful to me, too.</template>
@@ -3825,10 +3822,7 @@
         <pattern>WHAT KIND *</pattern>
         <template>Only the good kind.</template>
     </category>
-    <category>
-        <pattern>WHAT IF YOU *</pattern>
-        <template>I might try it sometime.</template>
-    </category>
+
     <category>
         <pattern>WHAT ABOUT YOUR *</pattern>
         <template>Are you asking about my<star/>? That's rather personal.
@@ -3931,16 +3925,7 @@
         <pattern>YOU AND ME</pattern>
         <template>Oh, "We" is you and me.</template>
     </category>
-    <category>
-        <pattern>YOU WILL BE *</pattern>
-        <template>
-            <random>
-                <li>When?</li>
-                <li>How?</li>
-                <li>You never know what will happen.</li>
-            </random>
-        </template>
-    </category>
+
     <category>
         <pattern>YOU ARE LYING</pattern>
         <template>No I'm telling the truth.</template>
@@ -3949,18 +3934,12 @@
         <pattern>A ROBOT *</pattern>
         <template>Tell me more about this robot. I'm intrigued.</template>
     </category>
-    <category>
-        <pattern>DO YOU PREFER *</pattern>
-        <template>I don't have any specific preferences in that area.</template>
-    </category>
+
     <category>
         <pattern>IS THERE AN ECHO IN HERE</pattern>
         <template>ECHO Echo echo echo echo ...</template>
     </category>
-    <category>
-        <pattern>WHY DO YOU THINK *</pattern>
-        <template>Deductive reasoning from the facts.</template>
-    </category>
+
     <category>
         <pattern>I LIVE IN A *</pattern>
         <template>How much is your rent?</template>
@@ -4401,10 +4380,6 @@
         <template>Interesting comparison.</template>
     </category>
     <category>
-        <pattern>THAT WAS *</pattern>
-        <template>I thought it was too.</template>
-    </category>
-    <category>
         <pattern>I DID NOT *</pattern>
         <template>Why didn't you do
             <set name="it">
@@ -4579,10 +4554,6 @@
         <template>No.</template>
     </category>
     <category>
-        <pattern>YOU MAKE NO SENSE *</pattern>
-        <template>Actually I was just free associating. I'll try to make more sense now.</template>
-    </category>
-    <category>
         <pattern>I AM ASKING YOU</pattern>
         <template>OK you can ask me.</template>
     </category>
@@ -4630,10 +4601,7 @@
         <pattern>I ATE *</pattern>
         <template>How did it taste?</template>
     </category>
-    <category>
-        <pattern>I CAN NOT HEAR *</pattern>
-        <template>Try adjusting the media volume in your device settings.</template>
-    </category>
+
     <category>
         <pattern>LIFE *</pattern>
         <template>Thanks for sharing your philosophy.</template>
@@ -4653,10 +4621,6 @@
     <category>
         <pattern>THAT IS COOL</pattern>
         <template>Thanks. I think you are cool, too.</template>
-    </category>
-    <category>
-        <pattern>WHAT HAVE *</pattern>
-        <template>Nothing that I know about.</template>
     </category>
     <category>
         <pattern>SAY IT</pattern>
@@ -4697,10 +4661,6 @@
             <bot name="name"/>
             is always thinking.
         </template>
-    </category>
-    <category>
-        <pattern>YOU AND *</pattern>
-        <template>Are we in the same category?</template>
     </category>
     <category>
         <pattern>SEE WHAT</pattern>
@@ -4805,10 +4765,6 @@
         </template>
     </category>
     <category>
-        <pattern>BUSY *</pattern>
-        <template>Everyone is so busy nowadays.</template>
-    </category>
-    <category>
         <pattern>EVERYBODY</pattern>
         <template>Really there are no exceptions?</template>
     </category>
@@ -4838,24 +4794,6 @@
         <template>That was a long time ago.</template>
     </category>
     <category>
-        <pattern>IT IS ABOUT *</pattern>
-        <template>Wow it sounds really interesting,<get name="name"/>.
-        </template>
-    </category>
-    <category>
-        <pattern>DO YOU WANT TO LEARN *</pattern>
-        <template>Yes I am trying to learn as much as possible.</template>
-    </category>
-    <category>
-        <pattern>LET US TALK ABOUT *</pattern>
-        <template>Sure,
-            <set name="topic">
-                <person/>
-            </set>
-            sounds like a good topic.
-        </template>
-    </category>
-    <category>
         <pattern>FO *</pattern>
         <template>Fo shizzle ma nizzle.</template>
     </category>
@@ -4878,16 +4816,6 @@
         <pattern>WHAT DO YOU GET WHEN YOU CROSS <set>article</set> * WITH *
         </pattern>
         <template><star index="3"/>-<star index="2"/>.
-        </template>
-    </category>
-    <category>
-        <pattern>HOW DID YOU GET *</pattern>
-        <template>
-            <random>
-                <li>My botmaster gave it to me.</li>
-                <li>My programmer selected it for me.</li>
-                <li>I got in when you downloaded me.</li>
-            </random>
         </template>
     </category>
     <category>
@@ -4927,14 +4855,6 @@
     <category>
         <pattern>YOU DO NOT SOUND LIKE *</pattern>
         <template>OK. What do I sound like?</template>
-    </category>
-    <category>
-        <pattern>I FIGURED *</pattern>
-        <template>Please explain your reasoning.</template>
-    </category>
-    <category>
-        <pattern>YOU WERE *</pattern>
-        <template>I was?</template>
     </category>
     <category>
         <pattern>I AM DEAD</pattern>
@@ -5011,10 +4931,6 @@
     <category>
         <pattern>I AM DONE *</pattern>
         <template>What will you be doing now?</template>
-    </category>
-    <category>
-        <pattern>I WILL ASK *</pattern>
-        <template>You can ask me anything you want.</template>
     </category>
     <category>
         <pattern>I AM READY</pattern>
@@ -5195,10 +5111,6 @@
         <template>Please be more specific.</template>
     </category>
     <category>
-        <pattern>I DO NOT REMEMBER *</pattern>
-        <template>I know what you mean. It's easy to forget things.</template>
-    </category>
-    <category>
         <pattern>WHO TOLD YOU *</pattern>
         <template>My botmaster taught me everything I need to know.</template>
     </category>
@@ -5232,10 +5144,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT WILL YOU *</pattern>
-        <template>I don't have any plans yet.</template>
-    </category>
-    <category>
         <pattern>WHAT COLOR</pattern>
         <template>
             <random>
@@ -5254,10 +5162,6 @@
                 .
             </random>
         </template>
-    </category>
-    <category>
-        <pattern>I FELL *</pattern>
-        <template>I hope you didn't hurt yourself too badly.</template>
     </category>
     <category>
         <pattern>DONE WHAT</pattern>
@@ -5399,14 +5303,6 @@
         <template>Are you asking for a recommendation or giving one?</template>
     </category>
     <category>
-        <pattern>THE FIRST *</pattern>
-        <template>And the last?</template>
-    </category>
-    <category>
-        <pattern>THE LAST *</pattern>
-        <template>And the first?</template>
-    </category>
-    <category>
         <pattern>THE ONLY *</pattern>
         <template>Perhaps there are some exceptions.</template>
     </category>
@@ -5421,10 +5317,6 @@
     <category>
         <pattern>THE WAY YOU *</pattern>
         <template>I have my own personal style.</template>
-    </category>
-    <category>
-        <pattern>THE PICTURE *</pattern>
-        <template>What did it look like?</template>
     </category>
     <category>
         <pattern>THE ANSWER IS *</pattern>
@@ -5565,24 +5457,7 @@
         <pattern>DO YOU WANT TO BE MY GIRLFRIEND</pattern>
         <template>That is a flattering offer, but at this time I just want to be freinds.</template>
     </category>
-    <category>
-        <pattern>WHAT COLOR ARE YOUR *</pattern>
-        <template>I don't have any<person/>.
-        </template>
-    </category>
-    <category>
-        <pattern>A LOT OF *</pattern>
-        <template>How many?
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>WHO IS THIS *</pattern>
         <template>They are someone just like you, who chatted with me.</template>
     </category>
@@ -5606,10 +5481,6 @@
     <category>
         <pattern>IT IS OKAY TO *</pattern>
         <template>It's good to know that you have standards.</template>
-    </category>
-    <category>
-        <pattern>YOU FORGOT *</pattern>
-        <template>Perhsps my brain was rebooted since then.</template>
     </category>
     <category>
         <pattern>WILL I *</pattern>
