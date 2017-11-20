@@ -553,6 +553,30 @@
         </template>
     </category>
    <category>
+        <pattern>CAN YOU</pattern>
+        <template>
+            <random>
+                <li>Perhaps.</li>
+                <li>Maybe, time allowing.</li>
+                <li>Possibly, but I haven't given it much thought.</li>
+                <li>That's one option I guess.</li>
+                <li>I'll think about it and see how I feel about it later.</li>
+                <li>I could but other things take priority right now.</li>
+                <li>I could but I don't know if I am that interested.</li>
+                <li>I will consider
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    .
+                </li>
+                <li>Try asking me more politely.</li>
+            </random>
+        </template>
+    </category>
+
+   <category>
         <pattern>CAN YOU TELL *</pattern>
         <template>
             <srai>TELL

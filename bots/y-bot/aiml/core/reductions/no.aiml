@@ -221,13 +221,6 @@
         </template>
     </category>
     <category>
-        <pattern>NO *</pattern>
-        <template>
-            <srai>NO</srai>
-            <sr/>
-        </template>
-    </category>
-    <category>
         <pattern>NON</pattern>
         <template>
             <srai>no</srai>

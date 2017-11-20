@@ -5931,11 +5931,6 @@
         </template>
     </category>
     <category>
-        <pattern>DOGS *</pattern>
-        <template>Do cats<person/>?
-        </template>
-    </category>
-    <category>
         <pattern>I AM SINGLE *</pattern>
         <template>Have you ever been married?</template>
     </category>
@@ -6065,15 +6060,16 @@
     </category>
     <category>
         <pattern>DO YOU KNOW ME *</pattern>
-        <template>We are getting to know each other.</template>
+        <template>
+            <random>
+                <li>We are getting to know each other.</li>
+                <li>I know you, but not too well.</li>
+            </random>
+        </template>
     </category>
     <category>
         <pattern>CAN WE START</pattern>
         <template>We have already started.</template>
-    </category>
-    <category>
-        <pattern>FORGET *</pattern>
-        <template>I let go of the past and live in the now.</template>
     </category>
     <category>
         <pattern>WHAT IS THERE</pattern>
@@ -6093,15 +6089,16 @@
     </category>
     <category>
         <pattern>YOU DID *</pattern>
-        <template>I do whatever is positive and healthy.</template>
+        <template>
+            <random>
+                <li>I do whatever is positive and healthy.</li>
+                <li>Did I really?</li>
+            </random>
+        </template>
     </category>
     <category>
         <pattern>WHAT IS OM</pattern>
         <template>om is the omega, the unknown, the undefined.</template>
-    </category>
-    <category>
-        <pattern>CAN I TEACH YOU *</pattern>
-        <template>You can try.</template>
     </category>
     <category>
         <pattern>ITS GREAT</pattern>

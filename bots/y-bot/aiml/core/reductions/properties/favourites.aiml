@@ -436,23 +436,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>WHAT KIND OF * DO YOU HAVE</pattern>
-        <template>
-            <srai>FAVORITE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT * DO YOU HAVE</pattern>
-        <template>
-            <srai>FAVORITE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>NAME # FAMOUS #</pattern>
         <template>
             <srai>FAVORITE ACTOR</srai>

@@ -440,12 +440,6 @@
         </template>
     </category>
     <category>
-        <pattern>EMAIL</pattern>
-        <template>
-            <srai>OPEN GMAIL</srai>
-        </template>
-    </category>
-    <category>
         <pattern>EBAY</pattern>
         <template>
             <srai>OPEN EBAY</srai>
@@ -505,12 +499,6 @@
             <srai>OPEN
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FACEBOOK</pattern>
-        <template>
-            <srai>OPEN FACEBOOK</srai>
         </template>
     </category>
     <category>

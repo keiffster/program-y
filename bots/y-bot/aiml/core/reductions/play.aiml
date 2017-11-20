@@ -155,14 +155,6 @@
         </template>
     </category>
     <category>
-        <pattern>PLAY THE SONG *</pattern>
-        <template>
-            <srai>PLAY
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>PLAY SONG *</pattern>
         <template>
             <srai>PLAY
