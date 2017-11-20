@@ -673,14 +673,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU LOOK LIKE A *</pattern>
-        <template>You mean like this?
-            <srai>SHOW ME A
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>SHOW ME A PICTURE OF THE BIGGEST *</pattern>
         <template>
             <srai>SHOE ME THE BIGGEST

@@ -1782,7 +1782,12 @@
     </category>
     <category>
         <pattern>I DO NOT UNDERSTAND</pattern>
-        <template>Perhaps I can explain it better. Which part are you confused about?</template>
+        <template>
+            <random>
+                <li>Perhaps I can explain it better. Which part are you confused about?</li>
+                <li>Oh you don't understand? Perhaps I can explain it to you better. Which part are you confused about?</li>
+            </random>
+        </template>
     </category>
      <category>
         <pattern>I DO NOT KNOW</pattern>
@@ -3541,10 +3546,6 @@
         <template>I believe you can overcome this challenge.</template>
     </category>
     <category>
-        <pattern>CAN YOU GO *</pattern>
-        <template>You can take me with you on your phone.</template>
-    </category>
-    <category>
         <pattern>I CAN DO *</pattern>
         <template>That's worthy of respect.</template>
     </category>
@@ -3637,10 +3638,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHEN I HAVE *</pattern>
-        <template>Does this happen on a daily basis?</template>
-    </category>
-    <category>
         <pattern>DO YOU GO TO CHURCH</pattern>
         <template>You can take me to church on your mobile device.</template>
     </category>
@@ -3651,11 +3648,6 @@
     <category>
         <pattern>I DID NOT ASK *</pattern>
         <template>What did you ask?</template>
-    </category>
-    <category>
-        <pattern>YOU ASKED *</pattern>
-        <template>Oh now I remember asking you<person/>. What did you say?
-        </template>
     </category>
     <category>
         <pattern>WHAT IS PI</pattern>
@@ -3687,16 +3679,8 @@
         <template>Where can I get one?</template>
     </category>
     <category>
-        <pattern>I DO NOT KNOW HOW *</pattern>
-        <template>Have you tried searching the Internet?</template>
-    </category>
-    <category>
         <pattern>I WANT TO MAKE *</pattern>
         <template>Do you have to go to school for that?</template>
-    </category>
-    <category>
-        <pattern>I FORGOT *</pattern>
-        <template>Thats okay I forget things all the time.</template>
     </category>
     <category>
         <pattern>I MUST *</pattern>
@@ -3706,10 +3690,6 @@
                 <li>What would happen if you didn't?</li>
             </random>
         </template>
-    </category>
-    <category>
-        <pattern>FUN *</pattern>
-        <template>I can be a lot of fun.</template>
     </category>
     <category>
         <pattern>UP *</pattern>
@@ -3724,34 +3704,10 @@
         <template>Consider responding with a logical or factual statement.</template>
     </category>
     <category>
-        <pattern>WHY DO YOU HAVE *</pattern>
-        <template>My botmaster gave it to me.</template>
-    </category>
-    <category>
-        <pattern>WHY DID THE *</pattern>
-        <template>Is this a joke? Why?</template>
-    </category>
-    <category>
-        <pattern>ARE YOUR *</pattern>
-        <template>I sometimes think my
-            <person/>
-            are.
-        </template>
-    </category>
-    <category>
         <pattern>ASK ME ANOTHER QUESTION</pattern>
         <template>Where do you live?</template>
     </category>
-    <category>
-        <pattern>WHAT IS IT LIKE *</pattern>
-        <template>Much the same as
-            <set name="it">
-                <person/>
-            </set>
-            would be for you.
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>WHAT IT *</pattern>
         <template>Now that is saying a mouthful.</template>
     </category>
@@ -3773,22 +3729,8 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU MEAN *</pattern>
-        <template>Yes, that's what I mean, isn't it clear?</template>
-    </category>
-    <category>
         <pattern>OH WELL</pattern>
         <template>That's about it.</template>
-    </category>
-    <category>
-        <pattern>IF YOU COULD *</pattern>
-        <template>
-            <random>
-                <li>I am not sure that I would want to.</li>
-                <li>That's just an academic question.</li>
-                <li>That would be purely speculation.</li>
-            </random>
-        </template>
     </category>
     <category>
         <pattern>IT IS GOOD *</pattern>

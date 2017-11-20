@@ -46,15 +46,5 @@
             <srai>SKILLS</srai>
         </template>
     </category>
-    <category>
-        <pattern>WHAT DO YOU LIKE</pattern>
-        <template>
-            <srai>SKILLS</srai>
-        </template>
-    </category>
 
-
-
-
-
-</aiml>
+ </aiml>

@@ -129,14 +129,6 @@
         </template>
     </category>
     <category>
-        <pattern>I NEED *</pattern>
-        <template>
-            <srai>I WANT
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>I WOULD LIKE TO *</pattern>
         <template>
             <srai>I WANT TO

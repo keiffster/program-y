@@ -234,12 +234,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHY DO NOT YOU HAVE A MOTHER</pattern>
-        <template>
-            <srai>SPECIES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU HAVE A MOM</pattern>
         <template>
             <srai>MOTHER</srai>

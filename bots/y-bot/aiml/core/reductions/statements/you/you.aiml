@@ -105,15 +105,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>YOU HAVE TO *</pattern>
-        <template>
-            <srai>YOU MUST
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+   <category>
         <pattern>YOU GOT A *</pattern>
         <template>
             <srai>YOU HAVE A
@@ -133,12 +125,6 @@
             <srai>YOU LOOK
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>YOU SUCK *</pattern>
-        <template>
-            <srai>YOU SUCK</srai>
         </template>
     </category>
    <category>

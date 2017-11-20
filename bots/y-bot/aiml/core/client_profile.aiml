@@ -207,6 +207,28 @@
         </template>
     </category>
     <category>
+        <pattern>I LIKE MY *</pattern>
+        <template>
+            <think>
+                <set name="likes">
+                    <star/>
+                </set>
+            </think>
+            <random>
+                <li>How long have you had it?</li>
+                <li>Do you get to use it very often?</li>
+                <li>Do you think I would like it to?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <star/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
         <pattern>I WOULD RATHER BE IN *</pattern>
         <template>What would be better about it?
             <think>

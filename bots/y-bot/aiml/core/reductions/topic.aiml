@@ -57,14 +57,6 @@
         </template>
     </category>
     <category>
-        <pattern>WE WERE TALKING ABOUT *</pattern>
-        <template>
-            <srai>THE TOPIC IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>TALK ABOUT *</pattern>
         <template>
             <srai>THE TOPIC IS

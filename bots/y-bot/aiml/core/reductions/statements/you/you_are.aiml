@@ -334,14 +334,6 @@
             <srai>YOU ARE STUPID</srai>
         </template>
     </category>
-     <category>
-        <pattern>YOU SOUND *</pattern>
-        <template>
-            <srai>YOU ARE
-                <star/>
-            </srai>
-        </template>
-    </category>
     <category>
         <pattern>YOUR UGLY</pattern>
         <template>
@@ -432,14 +424,6 @@
         <pattern>YOU R</pattern>
         <template>
             <srai>YOU ARE</srai>
-        </template>
-    </category>
-     <category>
-        <pattern>YOU DO NOT SOUND *</pattern>
-        <template>
-            <srai>YOU ARE NOT
-                <star/>
-            </srai>
         </template>
     </category>
     <category>
@@ -620,12 +604,6 @@
             <srai>YOU ARE
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>STUPID *</pattern>
-        <template>
-            <srai>YOU ARE STUPID</srai>
         </template>
     </category>
      <category>

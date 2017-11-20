@@ -723,12 +723,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR FAVORITE HOBBY</pattern>
-        <template>
-            <srai>HOBBIES</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHO INVENTED YOU</pattern>
         <template>
             <srai>BOTMASTER</srai>

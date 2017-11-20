@@ -59,12 +59,6 @@
         </template>
     </category>
     <category>
-        <pattern>I KNOW RIGHT</pattern>
-        <template>
-            <srai>I KNOW</srai>
-        </template>
-    </category>
-    <category>
         <pattern>I NO</pattern>
         <template>
             <srai>I KNOW</srai>

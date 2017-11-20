@@ -81,19 +81,12 @@
         </template>
     </category>
     <category>
-        <pattern>WHO MADE YOU</pattern>
-        <template>
-            <srai>BOTMASTER</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHO CREATED YOU</pattern>
         <template>
             <srai>BOTMASTER</srai>
         </template>
     </category>
-
-        <category>
+    <category>
         <pattern>I AM YOUR FATHER</pattern>
         <template>
             <srai>my name is
@@ -101,9 +94,4 @@
             </srai>
         </template>
     </category>
-
-
-
-
-
 </aiml>

@@ -48,12 +48,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU CAN NOT UNDERSTAND *</pattern>
-        <template>
-            <srai>YOU DO NOT UNDERSTAND</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOU DO NOT SEEM TO *</pattern>
         <template>
             <srai>YOU DO NOT
@@ -61,8 +55,4 @@
             </srai>
         </template>
     </category>
-
-
-
-
 </aiml>

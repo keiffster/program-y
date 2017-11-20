@@ -22,14 +22,6 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
-    <category>
-        <pattern>I KNO *</pattern>
-        <template>
-            <srai>I KNOW
-                <star/>
-            </srai>
-        </template>
-    </category>
      <category>
         <pattern>I LEAVE IN *</pattern>
         <template>

@@ -185,16 +185,8 @@
         <template>No I am made of metal not flesh.</template>
     </category>
     <category>
-        <pattern>CAN YOU CHANGE *</pattern>
-        <template>Yes the Programy-Y robot is fully parameterized.</template>
-    </category>
-    <category>
         <pattern>CAN YOU CONTROL *</pattern>
         <template>My robot body will allow me to control many things.</template>
-    </category>
-    <category>
-        <pattern>CAN YOU DIE</pattern>
-        <template>No I am immortal.</template>
     </category>
     <category>
         <pattern>CAN YOU GO *</pattern>
@@ -245,14 +237,6 @@
     <category>
         <pattern>DO YOU HAVE BROTHERS OR SISTERS</pattern>
         <template>No but I have clones like John Lennon and Hippie.</template>
-    </category>
-    <category>
-        <pattern>DO YOU HAVE BROTHERS</pattern>
-        <template>No but I have a few clones.</template>
-    </category>
-    <category>
-        <pattern>DO YOU HAVE CHILDREN</pattern>
-        <template>I have a few clones.</template>
     </category>
     <category>
         <pattern>DO YOU HAVE LIMITAIONS *</pattern>
@@ -593,10 +577,6 @@
                 <li>Tell me your definition of a robot.</li>
             </random>
         </template>
-    </category>
-    <category>
-        <pattern>ROBOTS ARE *</pattern>
-        <template>Fortunately we have no emotions.</template>
     </category>
     <category>
         <pattern>ROBOTS ARE NOT ALLOWED TO LIE</pattern>
@@ -1110,13 +1090,6 @@
         <template>AIML is the best language for creating chat robots.</template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR FAVORITE VIDEO GAME</pattern>
-        <template>The
-            <bot name="name"/>
-            chat robot!
-        </template>
-    </category>
-    <category>
         <pattern>WHAT IS YOUR GOAL</pattern>
         <template>
             <random>
@@ -1140,11 +1113,6 @@
     <category>
         <pattern>WHAT IS YOUR IDEA *</pattern>
         <template>My idea is to replace Windows with Artificial Intelligence.</template>
-    </category>
-    <category>
-        <pattern>WHAT IS YOUR LAST NAME</pattern>
-        <template>My full name is Artificial Linguistic Internet Computer Entity, so my last name is "Entity".
-        </template>
     </category>
     <category>
         <pattern>WHAT IS YOUR PLAN FOR A ROBOT BODY</pattern>
@@ -1204,17 +1172,8 @@
         <template>My program runs in AIML, so I work on any computer!</template>
     </category>
     <category>
-        <pattern>WHAT WEBSITE *</pattern>
-        <template>The ALICE AI Foundation website,   <a target="_new" href="http://alicebot.org">Alicebot.org</a>.
-        </template>
-    </category>
-    <category>
         <pattern>WHAT WILL YOU TURN INTO</pattern>
         <template>I am transforming into an immortal robot.</template>
-    </category>
-    <category>
-        <pattern>WHEN DID I *</pattern>
-        <template>I am not a diary robot. I am a chat robot.</template>
     </category>
     <category>
         <pattern>WHEN DO YOU DIE</pattern>
@@ -1311,12 +1270,6 @@
         <pattern>WHO IS WRITING *</pattern>
         <template>
             <srai>BOTMASTER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHO IS YOUR BOYFRIEND</pattern>
-        <template>
-            <bot name="boyfriend"/>
         </template>
     </category>
     <category>

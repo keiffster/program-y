@@ -286,15 +286,6 @@
             </srai>
         </template>
     </category>
-
-    <category>
-        <pattern>CAN YOU TEACH ME *</pattern>
-        <template>
-            <srai>TEACH ME
-                <star/>
-            </srai>
-        </template>
-    </category>
     <category>
         <pattern>WILL U *</pattern>
         <template>
@@ -339,12 +330,6 @@
             <srai>WILL YOU BE MY
                 <star/>
             </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WILL YOU MARRY ME *</pattern>
-        <template>
-            <srai>WILL YOU MARRY ME</srai>
         </template>
     </category>
     <category>
@@ -783,15 +768,7 @@
             <srai>HELP CHANGE NAME</srai>
         </template>
     </category>
-    <category>
-        <pattern>CAN YOU GO TO *</pattern>
-        <template>
-            <srai>GO TO
-                <star/>
-            </srai>
-        </template>
-    </category>
-     <category>
+      <category>
         <pattern>CAN I CHANGE YOUR VOICE</pattern>
         <template>
             <srai>HELP VOICE</srai>
@@ -1034,12 +1011,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU REMEMBER *</pattern>
-        <template>
-            <sr/>
-        </template>
-    </category>
-   <category>
         <pattern>LOOKUP *</pattern>
         <template>
             <srai>LOOK UP

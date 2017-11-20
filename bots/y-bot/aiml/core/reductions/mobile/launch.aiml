@@ -779,15 +779,7 @@
             <srai>OPEN EMAIL</srai>
         </template>
     </category>
-    <category>
-        <pattern>ACCESS *</pattern>
-        <template>
-            <srai>OPEN
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>CAMERA</pattern>
         <template>
             <srai>OPEN CAMERA</srai>
