@@ -318,6 +318,8 @@
             </condition>
         </template>
     </category>
+
+    <!-- ERROR: Unsupported random child tag: eval
     <category>
         <pattern>PICK A NUMBER # <set>number</set> #
             <set>number</set>
@@ -383,6 +385,8 @@
             </set>
         </template>
     </category>
+    -->
+
     <category>
         <pattern>WHAT NUMBER DID YOU *</pattern>
         <template>

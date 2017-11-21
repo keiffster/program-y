@@ -18,6 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.parser.template.nodes.triple import TemplateTripleNode
+from programy.parser.exceptions import ParserException
 
 
 class TemplateDeleteTripleNode(TemplateTripleNode):
@@ -57,3 +58,14 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
 
     def parse_expression(self, graph, expression):
         super(TemplateDeleteTripleNode, self).parse_expression(graph, expression)
+
+        if self._subj is None:
+            raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
+
+        if  self._pred is None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("<%s> node missing predicate attribue/element"%self.node_name)
+
+        if self._obj is None:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("<%s> node missing object attribue/element"%self.node_name)

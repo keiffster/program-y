@@ -228,19 +228,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR NAME WHAT IS YOUR NAME</pattern>
-        <template>
-            <srai>WHAT IS YOUR NAME</srai>
-        </template>
-    </category>
-    <category>
-        <template>
-            <srai>YOUR NAME IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>CHANGE YOUR NAME *</pattern>
         <template>
             <srai>CHANGE YOUR NAME</srai>

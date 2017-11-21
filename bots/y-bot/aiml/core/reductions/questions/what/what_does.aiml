@@ -108,21 +108,4 @@
             </srai>
         </template>
     </category>
-    <category>
-        <template>
-            <srai>WHAT
-                <star index="4"/>
-                DOES
-                <star/>
-                <map>
-                    <name>is2be</name>
-                    <star index="2"/>
-                </map>
-                <star index="3"/>
-            </srai>
-        </template>
-    </category>
-
-
-
 </aiml>

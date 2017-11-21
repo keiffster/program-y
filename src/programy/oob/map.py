@@ -22,9 +22,9 @@ from programy.oob.oob import OutOfBandProcessor
 
 class MapOutOfBandProcessor(OutOfBandProcessor):
     """
-    <oob>
+    <geooob>
         <map>Kinghorn</map>
-    </oob>
+    </geooob>
     """
     def __init__(self):
         OutOfBandProcessor.__init__(self)
@@ -36,7 +36,7 @@ class MapOutOfBandProcessor(OutOfBandProcessor):
             return True
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unvalid map oob command - missing location text!")
+                logging.error("Unvalid geomap oob command - missing location text!")
             return False
 
     def execute_oob_command(self, bot, clientid):

@@ -122,6 +122,7 @@
             <addtriple>
                 <subj>Los Angeles</subj>
                 <pred>capitalOf</pred>
+                <obj>California</obj>
             </addtriple>
         </template>
     </category>

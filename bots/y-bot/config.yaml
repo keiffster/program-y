@@ -146,7 +146,7 @@ brain:
         classname: programy.oob.dialog.DialogOutOfBandProcessor
       email:
         classname: programy.oob.email.EmailOutOfBandProcessor
-      map:
+      geomap:
         classname: programy.oob.map.MapOutOfBandProcessor
       schedule:
         classname: programy.oob.schedule.ScheduleOutOfBandProcessor

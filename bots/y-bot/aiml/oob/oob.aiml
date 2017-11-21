@@ -77,7 +77,7 @@
         <pattern>OOB MAP</pattern>
         <template>
             <oob>
-                <map>Kinghorn</map>
+                <geomap>Kinghorn</geomap>
             </oob>
         </template>
     </category>

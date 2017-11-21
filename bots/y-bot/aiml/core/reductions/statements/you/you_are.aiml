@@ -729,6 +729,7 @@
                 <star/>
             </srai>
         </template>
+    </category>
     <category>
         <pattern>YOU MUST BE *</pattern>
         <template>

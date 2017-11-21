@@ -17,7 +17,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
-from programy.parser.exceptions import ParserException
 
 
 class TemplateTripleNode(TemplateNode):
@@ -34,13 +33,16 @@ class TemplateTripleNode(TemplateNode):
         return self._node_name
 
     def children_to_xml(self, bot, clientid):
-        subj = self._subj.resolve(bot, clientid)
-        pred = self._pred.resolve(bot, clientid)
-        obj = self._obj.resolve(bot, clientid)
         xml = ""
-        xml += "<subj>" + subj + "</subj>"
-        xml += "<pred>" + pred + "</pred>"
-        xml += "<obj>" + obj + "</obj>"
+        if self._subj is not None:
+            subj = self._subj.resolve(bot, clientid)
+            xml += "<subj>" + subj + "</subj>"
+        if self._pred is not None:
+            pred = self._pred.resolve(bot, clientid)
+            xml += "<pred>" + pred + "</pred>"
+        if self._obj is not None:
+            obj = self._obj.resolve(bot, clientid)
+            xml += "<obj>" + obj + "</obj>"
         return xml
 
     def parse_expression(self, graph, expression):
@@ -72,11 +74,3 @@ class TemplateTripleNode(TemplateNode):
             tail_text = self.get_tail_from_element(child)
             self.parse_text(graph, tail_text)
 
-        if self._subj is None:
-            raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
-
-        if  self._pred is None:
-            raise ParserException("<%s> node missing predicate attribue/element"%self.node_name)
-
-        if self._obj is None:
-            raise ParserException("<%s> node missing object attribue/element"%self.node_name)

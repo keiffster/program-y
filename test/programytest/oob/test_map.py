@@ -24,5 +24,5 @@ class MapOutOfBandProcessorTests(unittest.TestCase):
         oob_processor = MapOutOfBandProcessor()
         self.assertIsNotNone(oob_processor)
 
-        oob_content = ET.fromstring("<map>Kinghorn</map>")
+        oob_content = ET.fromstring("<geomap>Kinghorn</geomap>")
         self.assertEqual("MAP", oob_processor.process_out_of_bounds(None, "console", oob_content))

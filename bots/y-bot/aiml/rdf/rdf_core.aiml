@@ -1178,8 +1178,7 @@
     </category>
 
     <category>
-        <pattern>NAME <set>number</set> *
-        </pattern>
+        <pattern>NAME <set>number</set> *</pattern>
         <template>
             <think>
                 <set var="number">
@@ -1211,10 +1210,10 @@
             </think>
             <condition var="tuples">
                 <li value="NIL">
-                    <sraix>NAME
+                    <srai>NAME
                         <star/>
                         <star index="2"/>
-                    </sraix>
+                    </srai>
                 </li>
                 <li>I know
                     <get var="count"/>

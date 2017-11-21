@@ -77,8 +77,8 @@
                 <star/>
             </srai>
         </template>
-    <category>
     </category>
+    <category>
         <pattern>THAT MADE NO SENSE</pattern>
         <template>
             <srai>that makes no sense</srai>

@@ -2899,6 +2899,7 @@
         </template>
     </category>
 
+    <!-- ERROR: Unsupported random child tag: search
     <category>
         <pattern>HOW ABOUT *</pattern>
         <template>
@@ -2909,6 +2910,7 @@
             </random>
         </template>
     </category>
+    -->
 
     <category>
         <pattern>HOW DO YOU REMEMBER *</pattern>
