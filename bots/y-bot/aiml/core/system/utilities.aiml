@@ -1636,4 +1636,16 @@
             </first>
         </template>
     </category>
+
+    <category>
+        <pattern>ISANAME
+            <set>name</set>
+        </pattern>
+        <template>true</template>
+    </category>
+    <category>
+        <pattern>ISANAME *</pattern>
+        <template>false</template>
+    </category>
+
 </aiml>

@@ -22,15 +22,7 @@
     <category>
         <pattern># AGAIN #</pattern>
         <template>
-            <request/>tell me a
-           <!-- <srai><request/></srai> -->
-        </template>
-    </category>
-
-    <category>
-        <pattern># REPEAT THAT #</pattern>
-        <template>
-           <srai><request/></srai>
+            <srai><request/></srai>
         </template>
     </category>
 
