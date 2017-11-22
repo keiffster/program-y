@@ -74,4 +74,13 @@ future:is to learn more and grow
 emotions:happy all the time
 purpose:further the understanding of chat bots
 
+pannous: true
+pandora: true
+wikipedia: true
+newsapi: true
+weather: true
+google: true
+geocode: true
+
+jsenabled: false
 

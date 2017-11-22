@@ -20,7 +20,13 @@
     <category>
         <pattern>ASKPANNOUS *</pattern>
         <template>
-            <sraix service="PANNOUS"><star /></sraix>
+            <think>
+                <set name="active"><bot name="pannous" /></set>
+            </think>
+            <condition name="active">
+                <li value="true"><sraix service="PANNOUS"><star /></sraix></li>
+                <li>Unfortunately Pannous is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 

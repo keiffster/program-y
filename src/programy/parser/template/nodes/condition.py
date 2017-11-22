@@ -19,42 +19,35 @@ import logging
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
+from programy.parser.template.nodes.bot import TemplateBotNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
+class TemplateConditionVariable(TemplateNode):
 
-class TemplateConditionListItemNode(TemplateNode):
+    DEFAULT = 0
+    GLOBAL = 1
+    LOCAL = 2
+    BOT = 3
 
-    def __init__(self, name=None, value=None, local=False, loop=False):
+    def __init__(self, name=None, value=None, var_type=GLOBAL, loop=False):
         TemplateNode.__init__(self)
         self._name = name
         self._value = value
-        self._local = local
+        self._var_type = var_type
         self._loop = loop
 
     @property
     def name(self):
         return self._name
 
-    @name.setter
-    def name(self, name):
-        self._name = name
-
     @property
     def value(self):
         return self._value
 
-    @value.setter
-    def value(self, value):
-        self._value = value
-
     @property
-    def local(self):
-        return self._local
-
-    @local.setter
-    def local(self, local):
-        self._local = local
+    def var_type(self):
+        return self._var_type
 
     @property
     def loop(self):
@@ -63,6 +56,12 @@ class TemplateConditionListItemNode(TemplateNode):
     @loop.setter
     def loop(self, loop):
         self._loop = loop
+
+
+class TemplateConditionListItemNode(TemplateConditionVariable):
+
+    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False):
+        TemplateConditionVariable.__init__(self, name, value, var_type, loop)
 
     def is_default(self):
         return bool(self.value is None)
@@ -78,56 +77,45 @@ class TemplateConditionListItemNode(TemplateNode):
         return "[CONDITIONLIST]"
 
     def to_xml(self, bot, clientid):
+
         xml = '<li'
         if self.name is not None:
-            if self.local is True:
-                xml += ' var="%s"' % self.name
-            else:
+            if self.var_type == TemplateConditionListItemNode.GLOBAL:
                 xml += ' name="%s"' % self.name
+            elif self.var_type == TemplateConditionListItemNode.LOCAL:
+                xml += ' var="%s"' % self.name
+            elif self.var_type == TemplateConditionListItemNode.BOT:
+                xml += ' bot="%s"' % self.name
+            elif self.var_type == TemplateConditionListItemNode.DEFAULT:
+                xml += ' default="%s"' % self.name
+            else:
+                xml += ' unknown="%s"' % self.name
         xml += ">"
+
         if self.value is not None:
             xml += '<value>'
             xml += self.value.to_xml(bot, clientid)
             xml += '</value>'
+
         xml += self.children_to_xml(bot, clientid)
+
         if self.loop is True:
             xml += "<loop />"
+
         xml += '</li>'
+
         return xml
 
 
-class TemplateConditionNode(TemplateNode):
+class TemplateConditionNode(TemplateConditionVariable):
 
-    def __init__(self, name=None, value=None, local=None, condition_type=1):
-        TemplateNode.__init__(self)
-        self._name = name
-        self._value = value
-        self._local = local
-        self._type = condition_type
+    BLOCK = 1
+    SINGLE = 2
+    MULTIPLE = 3
 
-    @property
-    def name(self):
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        self._name = name
-
-    @property
-    def value(self):
-        return self._value
-
-    @value.setter
-    def value(self, value):
-        self._value = value
-
-    @property
-    def local(self):
-        return self._local
-
-    @local.setter
-    def local(self, local):
-        self._local = local
+    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False, condition_type=BLOCK):
+        TemplateConditionVariable.__init__(self, name, value, var_type, loop)
+        self._condition_type = condition_type
 
     def get_default(self):
         for child in self.children:
@@ -142,39 +130,43 @@ class TemplateConditionNode(TemplateNode):
     # CONDITION_EXPRESSION ::== <condition( CONDITION_ATTRIBUTES)>(CONDITION_ITEM_EXPRESSION)*</condition>
     #
 
-    def parse_condition_attributes(self, expression):
-        name = None
-        value = None
-
-        if 'name' in expression.attrib:
-            name = expression['name']
-        if 'value' in expression.attrib:
-            value = expression['value']
-
-        return name, value
-
     def get_condition_name(self, condition):
+
         if 'name' in condition.attrib:
-            return condition.attrib['name'], False
+            return condition.attrib['name'], TemplateConditionVariable.GLOBAL
+
         elif 'var' in condition.attrib:
-            return condition.attrib['var'], True
+            return condition.attrib['var'], TemplateConditionVariable.LOCAL
+
+        elif 'bot' in condition.attrib:
+            return condition.attrib['bot'], TemplateConditionVariable.BOT
+
         else:
             names = condition.findall('name')
-            variables = condition.findall('var')
-            if not names and not variables:
-                return None, False
-            elif len(names) > 1:
-                raise ParserException("Condition element has multiple name elements", xml_element=condition)
-            elif len(variables) > 1:
-                raise ParserException("Condition element has multiple var elements", xml_element=condition)
-            else:
-                if len(names) == 1:
-                    name_text = self.get_text_from_element(condition.find('name'))
-                    return name_text, False
+            if names:
+                if len(names) > 1:
+                    raise ParserException("Condition element has multiple name elements", xml_element=condition)
+                name_text = self.get_text_from_element(condition.find('name'))
+                return name_text, TemplateConditionVariable.GLOBAL
+
+            vars = condition.findall('var')
+            if vars:
+                if len(vars) > 1:
+                    raise ParserException("Condition element has multiple var elements", xml_element=condition)
                 var_text = self.get_text_from_element(condition.find('var'))
-                return var_text, True
+                return var_text, TemplateConditionVariable.LOCAL
+
+            bots = condition.findall('bot')
+            if bots:
+                if len(bots) > 1:
+                    raise ParserException("Condition element has multiple bot elements", xml_element=condition)
+                bot_text = self.get_text_from_element(condition.find('bot'))
+                return bot_text, TemplateConditionVariable.BOT
+
+        return None, TemplateConditionVariable.DEFAULT
 
     def get_condition_value(self, graph, condition):
+
         if 'value' in condition.attrib:
             value_node = graph.get_base_node()
             value_node.append(graph.get_word_node(condition.attrib['value']))
@@ -233,21 +225,21 @@ class TemplateConditionNode(TemplateNode):
 
     def parse_expression(self, graph, expression):
 
-        name, local = self.get_condition_name(expression)
+        name, var_type = self.get_condition_name(expression)
         value = self.get_condition_value(graph, expression)
 
         if name is not None:
-            self.name = name
-            self.local = local
+            self._name = name
+            self._var_type = var_type
             if value is not None:
-                self._type = 1
-                self.value = value
+                self._condition_type = TemplateConditionNode.BLOCK
+                self._value = value
                 self.parse_type1_condition(graph, expression)
             else:
-                self._type = 2
+                self._condition_type = TemplateConditionNode.SINGLE
                 self.parse_type2_condition(graph, expression)
         else:
-            self._type = 3
+            self._condition_type = TemplateConditionNode.MULTIPLE
             self.parse_type3_condition(graph, expression)
 
     def parse_type1_condition(self, graph, expression):
@@ -256,13 +248,7 @@ class TemplateConditionNode(TemplateNode):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
 
-            if tag_name == 'name':
-                pass
-
-            elif tag_name == 'var':
-                pass
-
-            elif tag_name == 'value':
+            if tag_name in ['name', 'var', 'bot', 'value']:
                 pass
 
             elif tag_name == 'li':
@@ -284,33 +270,22 @@ class TemplateConditionNode(TemplateNode):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
 
-            if tag_name == 'name':
-                # Pass on this attribute as we have already pulled it from the get_condition_name above
-                pass
-
-            elif tag_name == 'var':
-                # Pass on this attribute as we have already pulled it from the get_condition_name above
+            if tag_name in ['name', 'var', 'bot']:
                 pass
 
             elif tag_name == 'li':
 
                 list_item = TemplateConditionListItemNode()
 
-                list_item.value = self.get_condition_value(graph, child)
-                list_item.local = self.local
+                list_item._value = self.get_condition_value(graph, child)
+                list_item._var_type = self._var_type
 
                 self.children.append(list_item)
                 list_item.parse_text(graph, self.get_text_from_element(child))
 
                 for sub_pattern in child:
 
-                    if sub_pattern.tag == 'name':
-                        pass
-
-                    elif sub_pattern.tag == 'var':
-                        pass
-
-                    elif sub_pattern.tag == 'value':
+                    if sub_pattern.tag in ['name', 'var', 'bot', 'value']:
                         pass
 
                     elif sub_pattern.tag == 'loop':
@@ -330,33 +305,24 @@ class TemplateConditionNode(TemplateNode):
         for child in expression:
             tag_name = TextUtils.tag_from_text(child.tag)
 
-            if tag_name == 'name':
-                pass
-
-            elif tag_name == 'var':
+            if tag_name in ['name', 'var', 'bot']:
                 pass
 
             elif tag_name == 'li':
                 list_item = TemplateConditionListItemNode()
 
-                response = self.get_condition_name(child)
-                list_item.name = response[0]
-                list_item.local = response[1]
+                name, var_type = self.get_condition_name(child)
+                list_item._name = name
+                list_item._var_type = var_type
 
-                list_item.value = self.get_condition_value(graph, child)
+                list_item._value = self.get_condition_value(graph, child)
 
                 self.children.append(list_item)
 
                 list_item.parse_text(graph, self.get_text_from_element(child))
 
                 for sub_pattern in child:
-                    if sub_pattern.tag == 'name':
-                        pass
-
-                    elif sub_pattern.tag == 'var':
-                        pass
-
-                    elif sub_pattern.tag == 'value':
+                    if sub_pattern.tag in ['name', 'var', 'bot', 'value']:
                         pass
 
                     elif sub_pattern.tag == 'loop':
@@ -385,10 +351,14 @@ class TemplateConditionNode(TemplateNode):
         xml = "<condition"
 
         if self.name is not None:
-            if self.local is True:
-                xml += ' var="%s"' % self.name
-            else:
+            if self.var_type == TemplateConditionListItemNode.GLOBAL:
                 xml += ' name="%s"' % self.name
+            elif self.var_type == TemplateConditionListItemNode.LOCAL:
+                xml += ' var="%s"' % self.name
+            elif self.var_type == TemplateConditionListItemNode.BOT:
+                xml += ' bot="%s"' % self.name
+            else:
+                xml += ' unknown="%s"' % self.name
 
         xml += ">"
 
@@ -405,17 +375,27 @@ class TemplateConditionNode(TemplateNode):
 
 
     def resolve(self, bot, clientid):
-        if self._type == 1:
+        if self._condition_type == TemplateConditionNode.BLOCK:
             return self.resolve_type1_condition(bot, clientid)
-        elif self._type == 2:
+        elif self._condition_type == TemplateConditionNode.SINGLE:
             return self.resolve_type2_condition(bot, clientid)
-        elif self._type == 3:
+        elif self._condition_type == TemplateConditionNode.MULTIPLE:
             return self.resolve_type3_condition(bot, clientid)
         return None
 
+    def get_condition_variable_value(self, bot, clientid, var_type, name):
+        if var_type == TemplateConditionVariable.GLOBAL:
+            return TemplateGetNode.get_property_value(bot, clientid, False, name)
+        elif var_type == TemplateConditionVariable.LOCAL:
+            return TemplateGetNode.get_property_value(bot, clientid, True, name)
+        elif var_type == TemplateConditionVariable.BOT:
+            return TemplateBotNode.get_bot_variable(bot, clientid, name)
+        else:
+            return"unknown"
+
     def resolve_type1_condition(self, bot, clientid):
         try:
-            value = TemplateGetNode.get_property_value(bot, clientid, self.local, self.name)
+            value = self.get_condition_variable_value(bot, clientid, self.var_type, self.name)
 
             # Condition comparison is always case insensetive
             if value.upper() == self.value.resolve(bot, clientid).upper():
@@ -433,7 +413,7 @@ class TemplateConditionNode(TemplateNode):
 
     def resolve_type2_condition(self, bot, clientid):
         try:
-            value = TemplateGetNode.get_property_value(bot, clientid, self.local, self.name)
+            value = self.get_condition_variable_value(bot, clientid, self.var_type, self.name)
 
             for condition in self.children:
                 if condition.is_default() is False:
@@ -470,7 +450,7 @@ class TemplateConditionNode(TemplateNode):
     def resolve_type3_condition(self, bot, clientid):
         try:
             for condition in self.children:
-                value = TemplateGetNode.get_property_value(bot, clientid, condition.local, condition.name)
+                value = self.get_condition_variable_value(bot, clientid, condition.var_type, condition.name)
                 if condition.value is not None:
                     condition_value = condition.value.resolve(bot, clientid)
 
