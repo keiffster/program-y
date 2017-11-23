@@ -21,8 +21,8 @@ class RestConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
         BaseContainerConfigurationData.__init__(self, "rest")
-        self._host = "0.0.0.0"
-        self._port = 80
+        self._host = "127.0.0.1"
+        self._port = 5000
         self._debug = False
         self._workers = 4
         self._use_api_keys = False
