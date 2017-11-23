@@ -1,0 +1,3 @@
+"YADMIN RDF LIST SUBJECTS",                                 "<ul><li>ACT</li>.*"
+"YADMIN RDF LIST PREDICATES SUBJECT OHIO",                  "<ul><li>HASPURPOSE</li><li>HASSIZE</li>.*"
+"YADMIN RDF LIST OBJECTS SUBJECT OHIO PREDICATE HASSIZE",   "<ul><li>11</li></ul>"
