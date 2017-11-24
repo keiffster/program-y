@@ -117,12 +117,6 @@
         </template>
     </category>
     <category>
-        <pattern>GO TO HELL *</pattern>
-        <template>
-            <srai>FILTER INSULT</srai>
-        </template>
-    </category>
-    <category>
         <pattern>DUMB ASS</pattern>
         <template>
             <srai>FILTER INSULT</srai>

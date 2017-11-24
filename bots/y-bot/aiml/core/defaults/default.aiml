@@ -9603,6 +9603,10 @@
         <template>There are always backup copies of me all over the web.</template>
     </category>
     <category>
+        <pattern>WHAT IF</pattern>
+        <template>What if what?</template>
+    </category>
+    <category>
         <pattern>WHAT IF *</pattern>
         <template>Try it and see.</template>
     </category>

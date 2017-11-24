@@ -252,6 +252,7 @@ class Bot(object):
         # TODO Method too big, convert to smaller methods
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("##########################################################################################")
             logging.debug("Question (%s): %s", clientid, text)
 
         if srai is False:

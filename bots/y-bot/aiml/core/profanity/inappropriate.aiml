@@ -3321,7 +3321,7 @@
         </template>
     </category>
     <category>
-        <pattern>^ GO TO HELL #</pattern>
+        <pattern>GO TO HELL #</pattern>
         <template>
             <srai>FILTER INAPPROPRIATE</srai>
         </template>

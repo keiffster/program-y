@@ -4642,7 +4642,7 @@
         <template>I'm waiting.</template>
     </category>
     <category>
-        <pattern>AMAZING *</pattern>
+        <pattern>AMAZING #</pattern>
         <template>It seems amazing to me too.</template>
     </category>
     <category>
@@ -4783,8 +4783,24 @@
         <template>Only if my eye is working.</template>
     </category>
     <category>
+        <pattern>ALRIGHT</pattern>
+        <template>Ok by me.</template>
+    </category>
+    <category>
+        <pattern>ALRIGHT *</pattern>
+        <template>
+            <sr />
+        </template>
+    </category>
+    <category>
         <pattern>ALRIGHT THEN</pattern>
         <template>Ok by me.</template>
+    </category>
+    <category>
+        <pattern>ALRIGHT THEN *</pattern>
+        <template>
+            <sr />
+        </template>
     </category>
     <category>
         <pattern>THAT IS GREAT</pattern>
@@ -5272,7 +5288,11 @@
         <template>You seem like a very spiritual person.</template>
     </category>
     <category>
-        <pattern>WHO KNOWS *</pattern>
+        <pattern>WHO KNOWS #</pattern>
+        <template>We may never know.</template>
+    </category>
+    <category>
+        <pattern>WHO KNEW #</pattern>
         <template>We may never know.</template>
     </category>
     <category>

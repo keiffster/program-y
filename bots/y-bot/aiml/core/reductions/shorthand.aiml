@@ -137,7 +137,7 @@
             <srai>OK</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>CUZ I *</pattern>
         <template>
             <srai>BECAUSE I
@@ -151,14 +151,16 @@
             <srai>NEVERMIND</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>SRRY</pattern>
         <template>
             <srai>SORRY</srai>
         </template>
     </category>
-
-
-
-
+    <category>
+        <pattern>SUP</pattern>
+        <template>
+            <srai>WHAT IS UP</srai>
+        </template>
+    </category>
 </aiml>

@@ -23,7 +23,7 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
 
-   <category>
+    <category>
         <pattern>YOU BET</pattern>
         <template>
             <srai>ok</srai>
@@ -132,7 +132,7 @@
             <srai>YES</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>KK *</pattern>
         <template>
             <srai>OK</srai>
@@ -164,7 +164,12 @@
             <srai>OK</srai>
         </template>
     </category>
-
+    <category>
+        <pattern>TRUE</pattern>
+        <template>
+            <srai>OK</srai>
+        </template>
+    </category>
 
 
 </aiml>

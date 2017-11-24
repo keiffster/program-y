@@ -290,6 +290,13 @@
         </template>
     </category>
     <category>
+        <pattern>NOPES</pattern>
+        <template>
+            <srai>NO
+            </srai>
+        </template>
+    </category>
+    <category>
         <pattern>NO THANK YOU *</pattern>
         <template>
             <srai>NO THANK YOU</srai>
