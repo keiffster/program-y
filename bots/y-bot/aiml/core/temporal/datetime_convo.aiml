@@ -178,6 +178,15 @@
 
     <category>
         <pattern>
+            # WHAT # DATE ^ TOMORROW ^
+        </pattern>
+        <template>
+            <srai>DATE TOMORROW</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
             # WHAT # TIME ^
         </pattern>
         <template>

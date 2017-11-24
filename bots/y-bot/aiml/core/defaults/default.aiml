@@ -4719,6 +4719,18 @@
         <template>What are you usually doing at this time of day?</template>
     </category>
     <category>
+        <pattern>IT IS <set name="sizes" /></pattern>
+        <template>
+            How <star /> is it ?
+        </template>
+    </category>
+    <category>
+        <pattern>IT IS <set name="temperatures" /></pattern>
+        <template>
+            How <star /> is it ?
+        </template>
+    </category>
+    <category>
         <pattern>IT IS *</pattern>
         <template>
             <random>
@@ -9142,10 +9154,6 @@
         <pattern>WHAT IS MY CATEGORY *</pattern>
         <template>You are a "<get name="personality"/>" person.
         </template>
-    </category>
-    <category>
-        <pattern>WHAT IS MY *</pattern>
-        <template>Is this a trick question?</template>
     </category>
     <category>
         <pattern>WHAT IS MY HEART *</pattern>
@@ -18374,14 +18382,7 @@
         <pattern>DO YOU *</pattern>
         <template>
             <random>
-                <li>I have never considered
-                    <set name="it">
-                        <set name="topic">
-                            <person/>
-                        </set>
-                    </set>
-                    .
-                </li>
+                <li>I have never really considered it.</li>
                 <li>How old are you?</li>
                 <li>What is your purpose in asking?</li>
                 <li>No I do not<person/>. Do you?

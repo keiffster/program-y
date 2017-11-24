@@ -738,6 +738,7 @@
             </srai>
         </template>
     </category>
+    <category>
         <pattern>YOUR MAKING ME *</pattern>
         <template>
             <srai>YOU ARE MAKING ME

@@ -117,6 +117,7 @@ class ContentFileWriter(FileWriter):
             self._file.write_line(self, entry)
 
         self._file.flush()
+        return len(self._entries)
 
     def format_row_as_text(self, row):
         if len(row) == 5:

@@ -24,8 +24,10 @@
 
 
     <category>
-        <pattern>WHAT <set>modal</set>
-            <set>pronoun</set> DO WITH *
+        <pattern>WHAT
+            <set>modal</set>
+            <set>pronoun</set>
+            DO WITH *
         </pattern>
         <template>
             <srai>WHAT IS THE PURPOSE OF
@@ -34,8 +36,10 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT <set>modal</set>
-            <set>pronoun</set> USE <set>article</set> * FOR
+        <pattern>WHAT
+            <set>modal</set>
+            <set>pronoun</set>
+            USE <set>article</set> * FOR
         </pattern>
         <template>
             <srai>WHAT IS THE PURPOSE OF
@@ -165,6 +169,25 @@
         </template>
     </category>
     <category>
+        <pattern>WHAT IS A *</pattern>
+        <template>
+            A <star /> IS
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS *</pattern>
+        <template>
+            A <star /> IS
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
         <pattern>HOW IS A * USED</pattern>
         <template>
             <srai>WHAT IS THE PURPOSE OF
@@ -172,6 +195,7 @@
             </srai>
         </template>
     </category>
+
     <category>
         <pattern>OF WHAT USE IS A *</pattern>
         <template>
@@ -187,8 +211,6 @@
             <srai>what is your purpose</srai>
         </template>
     </category>
-
-
 
 
 </aiml>

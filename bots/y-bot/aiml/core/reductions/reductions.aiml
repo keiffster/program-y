@@ -384,14 +384,6 @@
         </template>
     </category>
     <category>
-        <pattern>ROBOTS *</pattern>
-        <template>
-            <srai>YOU
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DAMN *</pattern>
         <template>
             <sr/>
@@ -447,12 +439,6 @@
         <pattern>NEVER MIND</pattern>
         <template>
             <srai>NEVERMIND</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>ALRIGHT *</pattern>
-        <template>
-            <sr/>
         </template>
     </category>
     <category>
@@ -606,15 +592,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>I LIVE IN *</pattern>
-        <template>
-            <srai>MY RESIDENCE IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>AND *</pattern>
         <template>
             <sr/>
@@ -740,17 +718,7 @@
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>* IS MY *</pattern>
-        <template>
-            <srai>MY
-                <star index="2"/>
-                IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
+     <category>
         <pattern>
             <set>name</set>
             IS _ BUT <set>name</set> IS *
@@ -785,13 +753,6 @@
                 <star index="4"/>
             </srai>
         </template>
-    </category>
-    <category>
-        <pattern>*
-            <set>is</set>
-            <set>preposition</set>
-            WHAT *
-        </pattern>
     </category>
     <category>
         <pattern>* IS
@@ -1789,19 +1750,6 @@
         </template>
     </category>
     <category>
-        <pattern>REMEMBER *</pattern>
-        <template>
-            <sr/>
-        </template>
-    </category>
-    <category>
-        <pattern>NICE *</pattern>
-        <template>
-            <srai>NICE</srai>
-            <sr/>
-        </template>
-    </category>
-    <category>
         <pattern>LEARN *</pattern>
         <template>
             <sr/>
@@ -2310,6 +2258,22 @@
         <template>
             How much more do you need?
         </template>
+    </category>
+    <category>
+        <pattern>AWESOME</pattern>
+        <template>
+            Thanks, glad you like it!
+        </template>
+    </category>
+    <category>
+        <pattern>AWESOME *</pattern>
+        <template>
+            <sr />
+        </template>
+    </category>
+    <category>
+        <pattern>DUDE</pattern>
+        <template>Yo!</template>
     </category>
 </aiml>
 

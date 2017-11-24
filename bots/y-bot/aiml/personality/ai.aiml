@@ -31,10 +31,6 @@
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
     <category>
-        <pattern>* ONES</pattern>
-        <template>Other people say they like vacuum cleaning robots, humanoid robots and chat robots.</template>
-    </category>
-    <category>
         <pattern>A TRIANGLE *</pattern>
         <template>ALICE's pyramid logo was designed by Sage Greco and Darren Langley.</template>
     </category>

@@ -147,7 +147,6 @@
 " hadn t "," had not "
 " hadn.t "," had not "
 " hadn't "," had not "
-" haha"," ha"
 " hasn t "," has not "
 " hasn't "," has not "
 " havent "," have not "

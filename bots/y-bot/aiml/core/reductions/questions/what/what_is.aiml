@@ -966,6 +966,28 @@
         </template>
     </category>
     <category>
+        <pattern>DO YOU KNOW THAT</pattern>
+        <template>
+            I am pretty certain
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THAT *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW THAT FOR *</pattern>
+        <template>
+            <srai>WHAT IS THE
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
         <pattern>DO YOU KNOW *</pattern>
         <template>
             <srai>WHAT IS

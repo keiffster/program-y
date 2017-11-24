@@ -4413,12 +4413,7 @@
         <pattern>I CAN NOT *</pattern>
         <template>
             <random>
-                <li>Why can't you do
-                    <set name="it">
-                        <person/>
-                    </set>
-                    ?
-                </li>
+                <li>Why can't you?</li>
                 <li>What is stopping you?</li>
             </random>
         </template>
@@ -4795,12 +4790,6 @@
     <category>
         <pattern>ALRIGHT THEN</pattern>
         <template>Ok by me.</template>
-    </category>
-    <category>
-        <pattern>ALRIGHT THEN *</pattern>
-        <template>
-            <sr />
-        </template>
     </category>
     <category>
         <pattern>THAT IS GREAT</pattern>

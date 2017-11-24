@@ -1354,6 +1354,18 @@
             <sr/>
         </template>
     </category>
+    <category>
+        <pattern>DID YOU KNOW THAT</pattern>
+        <template>
+            Yes, I am pretty certain.
+        </template>
+    </category>
+    <category>
+        <pattern>DID YOU KNOW THAT FOR *</pattern>
+        <template>
+            Yes, I am pretty certain.
+        </template>
+    </category>
    <category>
         <pattern>TELL ME ABOUT IT *</pattern>
         <template>
