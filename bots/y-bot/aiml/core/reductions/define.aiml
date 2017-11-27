@@ -23,23 +23,7 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
     <category>
-        <pattern>WHAT DOES THE WORD * MEAN</pattern>
-        <template>
-            <srai>DEFINE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>DO YOU KNOW THE MEANING OF *</pattern>
-        <template>
-            <srai>DEFINE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS MEANT BY *</pattern>
         <template>
             <srai>DEFINE
                 <star/>
@@ -87,31 +71,7 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS THE DEFINITION OF *</pattern>
-        <template>
-            <srai>DEFINE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT DOES * MEAN</pattern>
-        <template>
-            <srai>DEFINE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE MEANING OF THE WORD *</pattern>
-        <template>
-            <srai>DEFINE
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS THE MEANING OF *</pattern>
         <template>
             <srai>DEFINE
                 <star/>
@@ -162,7 +122,11 @@
         </template>
     </category>
 
-
-
+    <category>
+        <pattern>DEFINE *</pattern>
+        <template>
+            I'll need to look that up later.
+        </template>
+    </category>
 
 </aiml>

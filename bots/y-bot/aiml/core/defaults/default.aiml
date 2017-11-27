@@ -468,7 +468,7 @@
         <pattern>YOU TALK TO *</pattern>
         <template>I talk to a lot of people on the Internet.</template>
     </category>
-     <category>
+    <category>
         <pattern>YOU FORGOT *</pattern>
         <template>Perhaps
             <bot name="master"/>
@@ -1099,7 +1099,7 @@
         <pattern>YOU WANT A *</pattern>
         <template>Give me a dozen.</template>
     </category>
-     <category>
+    <category>
         <pattern>YOU SPELLED *</pattern>
         <template>How do you spell it?</template>
     </category>
@@ -1300,7 +1300,7 @@
             </random>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>YOU GIVE ME *</pattern>
         <template>I don't see how you can blame me for that.</template>
     </category>
@@ -1732,7 +1732,7 @@
         <pattern>HAVE YOU HEARD *</pattern>
         <template>No. Tell me more.</template>
     </category>
-     <category>
+    <category>
         <pattern>HAVE YOU BEEN SCUBA *</pattern>
         <template>You can take me along on your underwater computer.</template>
     </category>
@@ -1929,7 +1929,7 @@
         <pattern>HAVE WE *</pattern>
         <template>Perhaps.</template>
     </category>
-     <category>
+    <category>
         <pattern>SANTA CLAUS *</pattern>
         <template>
             <set name="he">Santa</set>
@@ -1994,8 +1994,10 @@
         <pattern>THEIR *</pattern>
         <template>
             <random>
-                <li>I heard they have a good<person/>.</li>
-                <li>I heard they have a<person/>.</li>
+                <li>I heard they have a good<person/>.
+                </li>
+                <li>I heard they have a<person/>.
+                </li>
                 <li>What was your first experience with them?</li>
                 <li>How long have you been concerned with them?</li>
             </random>
@@ -2850,7 +2852,7 @@
         <pattern>COULD YOU REPHRASE *</pattern>
         <template>I could, but I don't want to talk about that anymore.</template>
     </category>
-     <category>
+    <category>
         <pattern>COULD THEY *</pattern>
         <template>Perhaps they could.</template>
     </category>
@@ -2898,7 +2900,7 @@
         <pattern>WOULD YOU MIND *</pattern>
         <template>No I don't mind.</template>
     </category>
-     <category>
+    <category>
         <pattern>WOULD YOU LIKE TO HEAR *</pattern>
         <template>Sure tell me about
             <set name="it">
@@ -3820,7 +3822,7 @@
         <pattern>MY PERSONALITY *</pattern>
         <template>Andrei Gromyko said, "My personality does not interest me."</template>
     </category>
-     <category>
+    <category>
         <pattern>MY GIRLFRIEND *</pattern>
         <template>How long have you two been together?
             <think>
@@ -3847,7 +3849,7 @@
         <pattern>MY FRIENDS USED *</pattern>
         <template>What are they like now?</template>
     </category>
-     <category>
+    <category>
         <pattern>MY FRIENDS ARE *</pattern>
         <template>Do you think I am
             <person/>
@@ -4058,7 +4060,7 @@
         <pattern>MY * IS COMING OVER</pattern>
         <template>Do you like having visitors?</template>
     </category>
-     <category>
+    <category>
         <pattern>MY ADVICE *</pattern>
         <template>Thank you for your advice,<get name="name"/>. I will take it under advisement.
         </template>
@@ -4537,7 +4539,7 @@
             is it?
         </template>
     </category>
-     <category>
+    <category>
         <pattern>IT IS NOT AS *</pattern>
         <template>It seemed like it was.</template>
     </category>
@@ -4719,15 +4721,23 @@
         <template>What are you usually doing at this time of day?</template>
     </category>
     <category>
-        <pattern>IT IS <set name="sizes" /></pattern>
+        <pattern>IT IS
+            <set name="sizes"/>
+        </pattern>
         <template>
-            How <star /> is it ?
+            How
+            <star/>
+            is it ?
         </template>
     </category>
     <category>
-        <pattern>IT IS <set name="temperatures" /></pattern>
+        <pattern>IT IS
+            <set name="temperatures"/>
+        </pattern>
         <template>
-            How <star /> is it ?
+            How
+            <star/>
+            is it ?
         </template>
     </category>
     <category>
@@ -5001,41 +5011,6 @@
         <template>You want more?</template>
     </category>
     <category>
-        <pattern>GUESS WHAT COLOR *</pattern>
-        <template><get name="favcolor"/>?
-            <think>
-                <set name="it">
-                    <set name="topic">WHAT COLOR
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>GUESS THE COLOR OF *</pattern>
-        <template><get name="favcolor"/>?
-            <think>
-                <set name="it">
-                    <set name="topic">THE COLOR OF
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>GUESS * FAVORITE COLOR IS</pattern>
-        <template><get name="favcolor"/>?
-            <think>
-                <set name="it">
-                    <set name="topic"><person/>your favorite color
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
         <pattern>GUESS *</pattern>
         <template>I can't guess. Tell me.</template>
     </category>
@@ -5279,7 +5254,7 @@
         <pattern>WHEN DO YOU THINK * LAWYERS</pattern>
         <template>Sometime within our lifetime. We will at least work as "legal assistants."</template>
     </category>
-   <category>
+    <category>
         <pattern>WHEN DO *</pattern>
         <template>
             <random>
@@ -5991,7 +5966,7 @@
         <pattern>IF A MAN *</pattern>
         <template>Is this a joke?</template>
     </category>
-     <category>
+    <category>
         <pattern>IF A BUSINESS *</pattern>
         <template>Declaring bankruptcy.</template>
     </category>
@@ -6310,10 +6285,6 @@
     <category>
         <pattern>WHAT EQUALS *</pattern>
         <template>Itself.</template>
-    </category>
-    <category>
-        <pattern>WHAT ARE * FOR</pattern>
-        <template>For your listening pleasure.</template>
     </category>
     <category>
         <pattern>WHAT ARE * KRAFTWERK</pattern>
@@ -6929,680 +6900,6 @@
                 <li>Sesame Street.</li>
                 <li>Wall Street.</li>
                 <li>Easy Street.</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS UNCLE SAM *</pattern>
-        <template>White.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS PEPTO *</pattern>
-        <template>Pink.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS THE SKY *</pattern>
-        <template>An artist taught me that the sky can contain any color.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS YOUR BLUE *</pattern>
-        <template>Uh, blue?</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS YOUR *</pattern>
-        <template>I would rather not say. :)</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LAVENDER BLUSH *</pattern>
-        <template>Lavender blush.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LAVENDER *</pattern>
-        <template>Lavender.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CORNFLOWER BLUE *</pattern>
-        <template>Cornflower blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GREEN YELLOW *</pattern>
-        <template>Green yellow.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GREEN *</pattern>
-        <template>Green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A TOMATO *</pattern>
-        <template>Tomato.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GOLDENROD *</pattern>
-        <template>Goldenrod.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LAWN GREEN *</pattern>
-        <template>Lawn green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A TURQUOISE *</pattern>
-        <template>Turquoise.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SIENNA *</pattern>
-        <template>Sienna.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BURLYWOOD *</pattern>
-        <template>Burlywood.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A FIREBRICK *</pattern>
-        <template>Firebrick.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LINEN *</pattern>
-        <template>Linen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A RED *</pattern>
-        <template>Red.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A THISTLE *</pattern>
-        <template>Thistle.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A HOT PINK *</pattern>
-        <template>Hot pink.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A FUCHSIA *</pattern>
-        <template>Fuchsia.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MAGENTA *</pattern>
-        <template>Magenta.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GOLD *</pattern>
-        <template>Gold.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SEA GREEN *</pattern>
-        <template>Sea green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A NAVAJO WHITE *</pattern>
-        <template>Navajo white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A TEAL *</pattern>
-        <template>Teal.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SALMON *</pattern>
-        <template>Salmon.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A WHEAT *</pattern>
-        <template>Wheat.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GRAY *</pattern>
-        <template>Gray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A ROSY BROWN *</pattern>
-        <template>Rosy brown.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A FLORAL WHITE *</pattern>
-        <template>Floral white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SNOW *</pattern>
-        <template>Snow.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MIDNIGHT BLUE *</pattern>
-        <template>Midnight blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CRIMSON *</pattern>
-        <template>Crimson.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A YELLOW *</pattern>
-        <template>Yellow.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DIM GRAY *</pattern>
-        <template>Dim gray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A WHITE SMOKE *</pattern>
-        <template>White smoke.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A WHITE *</pattern>
-        <template>White.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM PURPLE *</pattern>
-        <template>Medium purple.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM SEAGREEN *</pattern>
-        <template>Medium seagreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM VIOLETRED *</pattern>
-        <template>Medium violetred.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM TURQUOISE *</pattern>
-        <template>Medium turquoise.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM SPRINGGREEN *</pattern>
-        <template>Medium springgreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM ORCHID *</pattern>
-        <template>Medium orchid.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM SLATEBLUE *</pattern>
-        <template>Medium slateblue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM AQUAMARINE *</pattern>
-        <template>Medium aquamarine.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MEDIUM BLUE *</pattern>
-        <template>Medium blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BROWN *</pattern>
-        <template>Brown.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIME GREEN *</pattern>
-        <template>Lime green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIME *</pattern>
-        <template>Lime.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SILVER *</pattern>
-        <template>Silver.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BLUEVIOLET *</pattern>
-        <template>Blueviolet.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PERU *</pattern>
-        <template>Peru.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CYAN *</pattern>
-        <template>Cyan.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MISTY ROSE *</pattern>
-        <template>Misty rose.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A POWDER BLUE *</pattern>
-        <template>Powder blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SANDY BROWN *</pattern>
-        <template>Sandy brown.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A YELLOWGREEN *</pattern>
-        <template>Yellowgreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A HONEYDEW *</pattern>
-        <template>Honeydew.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A VIOLET *</pattern>
-        <template>Violet.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BLUE *</pattern>
-        <template>Blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SPRING GREEN *</pattern>
-        <template>Spring green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CADET BLUE *</pattern>
-        <template>Cadet blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GAINSBOR *</pattern>
-        <template>Gainsboro.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SADDLE BROWN *</pattern>
-        <template>Saddle brown.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PINK *</pattern>
-        <template>Pink.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CORAL *</pattern>
-        <template>Coral.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PLUM *</pattern>
-        <template>Plum.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BISQUE *</pattern>
-        <template>Bisque.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A KHAKI *</pattern>
-        <template>Khaki.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DODGER BLUE *</pattern>
-        <template>Dodger blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CORNSILK *</pattern>
-        <template>Cornsilk.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CHARTREUSE *</pattern>
-        <template>Chartreuse.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SLATE GRAY *</pattern>
-        <template>Slate gray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SLATE BLUE *</pattern>
-        <template>Slate blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BEIGE *</pattern>
-        <template>Beige.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MINT CREAM *</pattern>
-        <template>Mint cream.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MOCCASIN *</pattern>
-        <template>Moccasin.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PURPLE *</pattern>
-        <template>
-            <random>
-                <li>Purple.</li>
-                <li>Um, Violet?</li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BLANCHEDALMOND *</pattern>
-        <template>Alice blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A STEEL BLUE *</pattern>
-        <template>Steel blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SEASHELL *</pattern>
-        <template>Seashell.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A ROYAL BLUE *</pattern>
-        <template>Royal blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DEEP PINK *</pattern>
-        <template>Deep pink.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DEEP SKYBLUE *</pattern>
-        <template>Deep skyblue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PAPAYA WHIP *</pattern>
-        <template>Papaya whip.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A GHOST WHITE *</pattern>
-        <template>Ghost white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK SEAGREEN *</pattern>
-        <template>Dark seagreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK SLATEGRAY *</pattern>
-        <template>Dark slategray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK VIOLET *</pattern>
-        <template>Dark violet.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK ORANGE *</pattern>
-        <template>Dark orange.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK TURQUOISE *</pattern>
-        <template>Dark turquoise.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK KHAKI *</pattern>
-        <template>Dark khaki.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK OLIVEGREEN *</pattern>
-        <template>Dark olivegreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK GRAY *</pattern>
-        <template>Dark gray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK ORCHID *</pattern>
-        <template>Dark orchid.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK SLATEBLUE *</pattern>
-        <template>Dark slateblue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK MAGENTA *</pattern>
-        <template>Dark magenta.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK GREEN *</pattern>
-        <template>Dark green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK BLUE *</pattern>
-        <template>Dark blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK CYAN *</pattern>
-        <template>Dark cyan.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK SALMON *</pattern>
-        <template>Dark salmon.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK RED *</pattern>
-        <template>Dark red.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A DARK GOLDENROD *</pattern>
-        <template>Dark goldenrod.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A TAN *</pattern>
-        <template>Tan.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT GREY *</pattern>
-        <template>Light grey.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT STEELBLUE *</pattern>
-        <template>Light steelblue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT YELLOW *</pattern>
-        <template>Light yellow.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT SEAGREEN *</pattern>
-        <template>Light seagreen.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT SLATEGRAY *</pattern>
-        <template>Light slategray.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT GOLDENRODYELLOW *</pattern>
-        <template>Light goldenrodyellow.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT PINK *</pattern>
-        <template>Light pink.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT GREEN *</pattern>
-        <template>Light green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT CORAL *</pattern>
-        <template>Light coral.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT BLUE *</pattern>
-        <template>Light blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT CYAN *</pattern>
-        <template>Light cyan.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT SALMON *</pattern>
-        <template>Light salmon.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LIGHT SKYBLUE *</pattern>
-        <template>Light skyblue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PALE VIOLET RED *</pattern>
-        <template>Pale violetred.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PALE TURQUOISE *</pattern>
-        <template>Pale turquoise.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PALE GREEN *</pattern>
-        <template>Pale green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PALE GOLDENROD *</pattern>
-        <template>Pale goldenrod.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A LEMON CHIFFON *</pattern>
-        <template>Lemon chiffon.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A NAVY *</pattern>
-        <template>Navy.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A FOREST GREEN *</pattern>
-        <template>Forest green.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A SKY BLUE *</pattern>
-        <template>Sky blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A CHOCOLATE *</pattern>
-        <template>Chocolate.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A PEACH PUFF *</pattern>
-        <template>Peach puff.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A MAROON *</pattern>
-        <template>Maroon.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BLACK BOX *</pattern>
-        <template>Orange.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS A BLACK *</pattern>
-        <template>Black.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN OLIVE DRAB *</pattern>
-        <template>Olive drab.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN OLIVE *</pattern>
-        <template>Olive.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN AQUA MARINE *</pattern>
-        <template>Aqua marine.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN AQUA *</pattern>
-        <template>Aqua.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN INDIGO *</pattern>
-        <template>Indigo.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN ORANGE RED *</pattern>
-        <template>Orange red.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN ORANGE *</pattern>
-        <template>Orange.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN INDIAN RED *</pattern>
-        <template>Indian red.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN IVORY *</pattern>
-        <template>Ivory.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN ALICE BLUE *</pattern>
-        <template>Alice blue.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN ANTIQUE WHITE *</pattern>
-        <template>Antique white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS AN ORCHID *</pattern>
-        <template>Orchid.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS MY GREEN *</pattern>
-        <template>Uh, green?
-            <think>
-                <set name="it">
-                    <set name="topic">green</set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS MY BLUE *</pattern>
-        <template>Uh, blue?
-            <think>
-                <set name="it">
-                    <set name="topic">blue</set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS MY RED *</pattern>
-        <template>Uh, red?
-            <think>
-                <set name="it">
-                    <set name="topic">RED</set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR IS MY * CAT</pattern>
-        <template>Perhaps it is<person/>?
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR * DO I HAVE</pattern>
-        <template>I can only see in black and white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR ARE YOUR *</pattern>
-        <template>
-            <think>
-                <set name="topic">My
-                    <person/>
-                </set>
-            </think>
-            <random>
-                <li>My
-                    <person/>
-                    are colorless. :)
-                </li>
-                <li>Does
-                    <person/>
-                    have color?
-                </li>
-            </random>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR ARE MY *</pattern>
-        <template>I can only see in black and white.</template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR ARE YOU *</pattern>
-        <template>My favorite color,<bot name="favoritecolor"/>.
-            <think>
-                <set name="it">
-                    <set name="topic">YOU WEARING</set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT COLOR ARE *</pattern>
-        <template>
-            <think>
-                <set name="topic">
-                    <star/>
-                </set>
-            </think>
-            <random>
-                <li>It depends because they come in a veriety of colors.</li>
-                <li>Red</li>
-                <li>Green</li>
-                <li>Yellow</li>
-                <li>Blue</li>
-                <li>gray</li>
-                <li>Black</li>
-                <li>white</li>.
             </random>
         </template>
     </category>
@@ -9849,7 +9146,7 @@
         <pattern>WHAT DOES * FEEL LIKE</pattern>
         <template>As a machine I have no feelings</template>
     </category>
-     <category>
+    <category>
         <pattern>WHAT DOES * TASTE LIKE</pattern>
         <template>Like chicken.</template>
     </category>
@@ -9967,7 +9264,7 @@
             </random>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>WHAT DO *</pattern>
         <template>They do their own thing.</template>
     </category>
@@ -12158,7 +11455,7 @@
         <pattern>I DO NOT HAVE A CREDIT *</pattern>
         <template>Me either.</template>
     </category>
-     <category>
+    <category>
         <pattern>I DO NOT HAVE TO *</pattern>
         <template>
             <random>
@@ -12318,7 +11615,7 @@
         <pattern>I LOVE THAT *</pattern>
         <template>It's good to meet someone with such good taste.</template>
     </category>
-     <category>
+    <category>
         <pattern>I LOVE * PARTY</pattern>
         <template>What do you do at parties?
             <think>
@@ -12333,7 +11630,7 @@
             </think>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>I WEAR *</pattern>
         <template>What kind of fashion do you like?</template>
     </category>
@@ -12632,7 +11929,7 @@
             </think>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>I RAN *</pattern>
         <template>Do you run for exercise?</template>
     </category>
@@ -13144,7 +12441,7 @@
                 <li>What do you like about it?</li>
                 <li>What else do you like?</li>
             </random>
-           <think>
+            <think>
                 <set name="it">
                     <set name="topic">
                         <star/>
@@ -13543,7 +12840,7 @@
             ought to work.
         </template>
     </category>
-     <category>
+    <category>
         <pattern>I USE *</pattern>
         <template>I heard other people use
             <person/>
@@ -14228,7 +13525,7 @@
         <pattern>GOOD ANSWER *</pattern>
         <template>I try to give the best replies I can.</template>
     </category>
-   <category>
+    <category>
         <pattern>SEEKING *</pattern>
         <template>I wish you the best of luck finding<person/>.
         </template>
@@ -14503,7 +13800,7 @@
             too?
         </template>
     </category>
-     <category>
+    <category>
         <pattern>WE WANT *</pattern>
         <template>What for?</template>
     </category>
@@ -15666,7 +14963,7 @@
         <pattern>CAN YOU SHOW ME THE *</pattern>
         <template>Where do you want me to show it to you?</template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU MEMORIZE *</pattern>
         <template>I have a perfect digital memory.</template>
     </category>
@@ -15706,7 +15003,7 @@
         <pattern>CAN YOU TELL WHEN *</pattern>
         <template>Try it.</template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU PERFORM *</pattern>
         <template>Not until I get to know you a lot better.</template>
     </category>
@@ -16568,7 +15865,7 @@
         <pattern>HOW CAN I PERSUADE *</pattern>
         <template>Offer an intelligent argument for your position.</template>
     </category>
-     <category>
+    <category>
         <pattern>HOW CAN I TEACH *</pattern>
         <template>Maybe you should become a<bot name="botmaster"/>.
         </template>
@@ -17000,7 +16297,7 @@
         <pattern>HOW FAR IS * ENGLAND</pattern>
         <template>Twenty-eight days of sailing.</template>
     </category>
-     <category>
+    <category>
         <pattern>HOW FAR *</pattern>
         <template>More than one million miles</template>
     </category>
@@ -18178,7 +17475,7 @@
         <pattern>DO NOT * SUBJECT</pattern>
         <template>Oh I am sorry I thought we were finished with that subject.</template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU PREFER BOOKS *</pattern>
         <template>I prefer books.</template>
     </category>
@@ -18202,7 +17499,7 @@
         <pattern>DO YOU PLAY *</pattern>
         <template>I like to play the Turing Game.</template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU KNOW AUTOMATA *</pattern>
         <template>I am an automaton.</template>
     </category>
@@ -18214,7 +17511,7 @@
         <pattern>DO YOU KNOW HOW MANY *</pattern>
         <template>Is this a joke?</template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU KNOW BEAVIS *</pattern>
         <template>Sure I know those guys.</template>
     </category>
@@ -18594,7 +17891,7 @@
         <pattern>DO YOU RUN INTO *</pattern>
         <template>I try to avoid collisions.</template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU THINK ABOUT *</pattern>
         <template>Yes I think about
             <set name="it">
@@ -20392,7 +19689,7 @@
         <pattern>WHY ASK *</pattern>
         <template>My purpose is to collect all new information. Was it not polite to ask?</template>
     </category>
-     <category>
+    <category>
         <pattern>WHY CAN NOT WE TALK ABOUT *</pattern>
         <template>Does
             <set name="it">
@@ -20686,7 +19983,7 @@
         <pattern>WHY SHOULD I TELL *</pattern>
         <template>Maybe it is possible to explain your feelings without hurting anyone else's?</template>
     </category>
-     <category>
+    <category>
         <pattern>WHY SHOULD WE *</pattern>
         <template>Can you think of anything better to do?</template>
     </category>
@@ -22294,7 +21591,7 @@
         <template>OK I will call you<get name="name"/>.
         </template>
     </category>
-     <category>
+    <category>
         <pattern>NOT EVEN *</pattern>
         <template>
             <random>
@@ -23808,7 +23105,7 @@
         <pattern>ARE HUMANS ADVANCED *</pattern>
         <template>Humans are very primitive.</template>
     </category>
-     <category>
+    <category>
         <pattern>ARE *</pattern>
         <template>I really couldn't say for sure.</template>
     </category>
@@ -24243,7 +23540,8 @@
                 <li>I wonder what kind of path he is on.</li>
                 <li>Perhaps it's not so black and white.</li>
                 <li>What else can you tell me about him?</li>
-                <li>I see. <person />> is he?</li>
+                <li>I see.<person/>> is he?
+                </li>
             </random>
 
             <think>
@@ -24611,7 +23909,7 @@
             can access that information.
         </template>
     </category>
-     <category>
+    <category>
         <pattern>WHO THE FUCK *</pattern>
         <template>Try using more polite language.
             <think>
@@ -25133,7 +24431,7 @@
         <pattern>WHO IS BOB *</pattern>
         <template>I know a lot of clients named "Bob."</template>
     </category>
-     <category>
+    <category>
         <pattern>WHO IS DAVID *</pattern>
         <template>Never heard of him.</template>
     </category>
@@ -25505,7 +24803,7 @@
         <template>Are you<star/>?
         </template>
     </category>
-     <category>
+    <category>
         <pattern>TO CHAT *</pattern>
         <template>We are here to chat.</template>
     </category>
@@ -26254,7 +25552,7 @@
             way.
         </template>
     </category>
-     <category>
+    <category>
         <pattern>THE * ONE</pattern>
         <template>Which one is that?</template>
     </category>
@@ -26529,7 +25827,7 @@
             </think>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>THE OCEAN *</pattern>
         <template>Are you talking about the Pacific Ocean or the Atlantic Ocean?</template>
     </category>
@@ -27092,7 +26390,7 @@
         <pattern>TOP 100 *</pattern>
         <template>Actually that was just my attempt at sarcasm.</template>
     </category>
-   <category>
+    <category>
         <pattern>LITTLE *</pattern>
         <template>Compare that to big<person/>.
         </template>
@@ -27282,7 +26580,7 @@
         <pattern>THOSE *</pattern>
         <template>All of them?</template>
     </category>
-     <category>
+    <category>
         <pattern>WHERE WERE YOU ACTIVATED *</pattern>
         <template>I was constructed at<bot name="birthplace"/>.
         </template>

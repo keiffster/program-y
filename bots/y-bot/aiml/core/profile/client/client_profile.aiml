@@ -320,22 +320,6 @@
         </template>
     </category>
     <category>
-        <pattern>MY NAME</pattern>
-        <template>
-            <think>
-                <set var="name">
-                    <get name="name"/>
-                </set>
-            </think>
-            <condition var="name">
-                <li value="unknown">I don't know your name, hat is your name?</li>
-                <li value="Friend">I don't know your name, what is your name?</li>
-                <li><get var="name"/>.
-                </li>
-            </condition>
-        </template>
-    </category>
-    <category>
         <pattern>MY FULL NAME</pattern>
         <template>
             <condition name="firstname">

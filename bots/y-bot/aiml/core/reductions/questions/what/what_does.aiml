@@ -108,4 +108,13 @@
             </srai>
         </template>
     </category>
+    <category>
+        <pattern>WHAT DOES THE WORD * MEAN</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
 </aiml>

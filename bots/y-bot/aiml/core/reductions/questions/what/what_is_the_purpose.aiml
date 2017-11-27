@@ -22,7 +22,15 @@
 
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
-
+    <category>
+        <pattern>WHAT IS *</pattern>
+        <template>
+            <!-- A <star /> IS -->
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
     <category>
         <pattern>WHAT
             <set>modal</set>
@@ -171,22 +179,12 @@
     <category>
         <pattern>WHAT IS A *</pattern>
         <template>
-            A <star /> IS
+            A <star /> is
             <srai>WHAT IS THE PURPOSE OF
                 <star/>
             </srai>
         </template>
     </category>
-    <category>
-        <pattern>WHAT IS *</pattern>
-        <template>
-            A <star /> IS
-            <srai>WHAT IS THE PURPOSE OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-
     <category>
         <pattern>HOW IS A * USED</pattern>
         <template>
@@ -195,7 +193,6 @@
             </srai>
         </template>
     </category>
-
     <category>
         <pattern>OF WHAT USE IS A *</pattern>
         <template>
@@ -204,7 +201,6 @@
             </srai>
         </template>
     </category>
-
     <category>
         <pattern>WHY WERE YOU CREATED</pattern>
         <template>
@@ -212,5 +208,61 @@
         </template>
     </category>
 
+    <!-- WHAT IS THE .... -->
 
-</aiml>
+   <category>
+       <pattern>WHAT IS THE MEANING OF THE WORD *</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE MEANING OF *</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE DEFINITION OF *</pattern>
+        <template>
+            <srai>DEFINE
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE COLOR OF <set name="article" /> *</pattern>
+        <template>
+            I think it is <star index="2"/> coloured
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE PROBLEM *</pattern>
+        <template>
+            <srai>WHAT IS THE PROBLEM</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE ANSWER *</pattern>
+        <template>
+            <srai>WHAT IS THE ANSWER</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS THE *</pattern>
+        <template>
+            <srai>WHAT IS</srai>
+        </template>
+    </category>
+
+ </aiml>

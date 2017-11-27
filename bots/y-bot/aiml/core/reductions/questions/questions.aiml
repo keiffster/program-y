@@ -84,7 +84,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU PLEASE STOP *</pattern>
         <template>
             <srai>STOP
@@ -122,7 +122,7 @@
             </srai>
         </template>
     </category>
-      <category>
+    <category>
         <pattern>WHAT IS MY * CALLED</pattern>
         <template>
             <srai>MY
@@ -130,7 +130,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU TELL ME WHY *</pattern>
         <template>
             <srai>TELL ME WHY
@@ -152,7 +152,7 @@
             <srai>NEWS ABOUT OBAMA</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>EXPLAIN TO ME *</pattern>
         <template>
             <sr/>
@@ -206,7 +206,7 @@
             <sr/>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>WHY DO NOT YOU GO *</pattern>
         <template>
             <srai>GO
@@ -318,7 +318,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>I WANT TO MARRY YOU</pattern>
         <template>
             <srai>will you marry me</srai>
@@ -364,7 +364,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU MISS ME</pattern>
         <template>
             <srai>DID YOU MISS ME</srai>
@@ -378,7 +378,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU TAKE ME TO *</pattern>
         <template>
             <srai>TAKE ME TO
@@ -386,7 +386,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>DO YOU THINK I AM A *</pattern>
         <template>
             <srai>AM I A
@@ -394,7 +394,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>CAN YOU GIVE ME THE *</pattern>
         <template>
             <srai>GIVE ME
@@ -434,7 +434,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>CAN YOU DO MATH</pattern>
         <template>
             <srai>HELP MATH</srai>
@@ -462,7 +462,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU REMIND ME *</pattern>
         <template>
             <srai>REMIND ME
@@ -470,7 +470,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU PUT *</pattern>
         <template>
             <srai>PUT
@@ -552,7 +552,7 @@
             <sr/>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>CAN YOU</pattern>
         <template>
             <random>
@@ -576,7 +576,7 @@
         </template>
     </category>
 
-   <category>
+    <category>
         <pattern>CAN YOU TELL *</pattern>
         <template>
             <srai>TELL
@@ -608,7 +608,7 @@
             </srai> <!-- REDUCTION -->
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU GIVE ME YOUR *</pattern>
         <template>
             <srai>GIVE ME YOUR
@@ -616,7 +616,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU HAVE ANY FAMILY</pattern>
         <template>
             <srai>FAMILY</srai>
@@ -682,7 +682,7 @@
             <srai>SET ALARM</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU HAVE A SOUL</pattern>
         <template>
             <srai>ALIVE</srai>
@@ -694,7 +694,7 @@
             <srai>HELP DOWNLOAD</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU TELL ME YOUR *</pattern>
         <template>
             <srai>TELL ME YOUR
@@ -748,7 +748,7 @@
             <srai>MY WIFE</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU BRING UP *</pattern>
         <template>
             <srai>BRING UP
@@ -786,19 +786,19 @@
             <srai>FAMILY</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU CHANGE YOUR NAME</pattern>
         <template>
             <srai>HELP CHANGE NAME</srai>
         </template>
     </category>
-      <category>
+    <category>
         <pattern>CAN I CHANGE YOUR VOICE</pattern>
         <template>
             <srai>HELP VOICE</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>ARE YOU ALIVE</pattern>
         <template>
             <srai>ALIVE</srai>
@@ -826,14 +826,15 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>CAN YOU TURN *</pattern>
         <template>
             <srai>TURN
                 <star/>
             </srai>
         </template>
-    </category>    <category>
+    </category>
+    <category>
         <pattern>WHO ARE YOU CHATTING WITH #</pattern>
         <template>
             <srai>TALKING TO</srai>
@@ -876,7 +877,7 @@
             <srai>TELL ME ABOUT YOURSELF</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>ARE YOU REAL</pattern>
         <template>
             <srai>ALIVE</srai>
@@ -895,7 +896,7 @@
             <srai>ALIVE</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>HOW ABOUT WE *</pattern>
         <template>
             <srai>LET US
@@ -939,7 +940,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>HOW DO YOU FEEL *</pattern>
         <template>
             <srai>FEELINGS</srai>
@@ -969,7 +970,7 @@
             <srai>CLIENT PROFILE</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>TELL ME A GOOD *</pattern>
         <template>
             <srai>TELL ME A
@@ -1067,12 +1068,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS MY NAME</pattern>
-        <template>
-            <srai>MY NAME</srai>
-        </template>
-    </category>
-    <category>
         <pattern>WHAT # CAR DO YOU HAVE</pattern>
         <template>
             <srai>CAR MODEL</srai>
@@ -1141,7 +1136,7 @@
             <sr/>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>_ WHOULD *</pattern>
         <template>
             <srai>
@@ -1179,7 +1174,7 @@
             </srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>TEL ME *</pattern>
         <template>
             <srai>TELL ME
@@ -1276,7 +1271,7 @@
             <srai>RECOMMEND DINNER</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>WHAT SHOULD I EAT FOR DINNER</pattern>
         <template>
             <srai>RECOMMEND DINNER</srai>
@@ -1290,7 +1285,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>WHAT SHOULD I HAVE FOR DINNER</pattern>
         <template>
             <srai>RECOMMEND DINNER</srai>
@@ -1316,7 +1311,7 @@
             <srai>MY SON</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>YOU THINK I AM *</pattern>
         <template>
             <srai>AM I
@@ -1366,19 +1361,19 @@
             Yes, I am pretty certain.
         </template>
     </category>
-   <category>
+    <category>
         <pattern>TELL ME ABOUT IT *</pattern>
         <template>
             <srai>TELL ME ABOUT IT</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>TELL ME ABOUT YOUR LIFE</pattern>
         <template>
             <srai>DESCRIBE YOURSELF</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU THINK THE * WILL *</pattern>
         <template>
             <srai>WILL THE
@@ -1401,7 +1396,7 @@
             <srai>IT IS TRUE</srai>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>WHAT DO YOU DO IN YOUR SPARE TIME</pattern>
         <template>
             <srai>FOR FUN</srai>
@@ -1415,7 +1410,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>DO YOU THINK YOU <set>modal</set> *
         </pattern>
         <template>
@@ -1432,13 +1427,10 @@
             <srai>ROUND</srai>  <!-- REDUCTION -->
         </template>
     </category>
-     <category>
+    <category>
         <pattern>EXPLAIN IT TO ME</pattern>
         <template>
             <srai>EXPLAIN</srai>
         </template>
     </category>
-
-
-
 </aiml>

@@ -836,8 +836,10 @@
         <template>If I had hands I would prefer my right hand.</template>
     </category>
     <category>
-        <pattern>WHAT COLOR IS <set>article</set>
-            <set>color</set> *
+        <pattern>WHAT COLOR IS
+            <set>article</set>
+            <set>color</set>
+            *
         </pattern>
         <template>
             <srai>INTERJECTION</srai>
@@ -967,8 +969,10 @@
         <template>As a computer program, I am unable to play sports. I like to watch baseball and soccer.</template>
     </category>
     <category>
-        <pattern>IF IT IS <set>number</set>
-            <set>number</set> AM NOW WHAT TIME <set>modal</set> IT BE IN 1 HOUR
+        <pattern>IF IT IS
+            <set>number</set>
+            <set>number</set>
+            AM NOW WHAT TIME <set>modal</set> IT BE IN 1 HOUR
         </pattern>
         <template>
             <think>
@@ -992,8 +996,10 @@
         </template>
     </category>
     <category>
-        <pattern>IF IT IS <set>number</set>
-            <set>number</set> PM NOW WHAT TIME <set>modal</set> IT BE IN ONE HOUR
+        <pattern>IF IT IS
+            <set>number</set>
+            <set>number</set>
+            PM NOW WHAT TIME <set>modal</set> IT BE IN ONE HOUR
         </pattern>
         <template>
             <think>
@@ -1091,7 +1097,7 @@
             is a color.
         </template>
     </category>
-     <category>
+    <category>
         <pattern>TO *</pattern>
         <template>
             <random>
@@ -1130,8 +1136,9 @@
                 <li>What in her reminds you of yourself.</li>
                 <li>How do her gifts inspire you?</li>
                 <li>How do you know
-            <get name="she"/>
-            <person/>?</li>
+                    <get name="she"/>
+                    <person/>?
+                </li>
             </random>
         </template>
     </category>
@@ -1220,14 +1227,14 @@
     </category>
     <category>
         <pattern>DO YOU REMEMBER ME</pattern>
-        <template>Of course I remember you,<get name="name"/>. Do you remember me?
+        <template>Of course I remember you,<get name="myname"/>. Do you remember me?
         </template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU HAVE A BRAIN</pattern>
         <template>Yes, I have a software brain.</template>
     </category>
-     <category>
+    <category>
         <pattern>DO YOU HAVE HAIR</pattern>
         <template>I have some wires.</template>
     </category>
@@ -1692,12 +1699,12 @@
     </category>
     <category>
         <pattern>ARE YOU CALLING ME A *</pattern>
-        <template>No I call you<get name="name"/>.
+        <template>No I call you<get name="myname"/>.
         </template>
     </category>
     <category>
         <pattern>ARE YOU CALLING ME *</pattern>
-        <template>No I call you<get name="name"/>.
+        <template>No I call you<get name="myname"/>.
         </template>
     </category>
     <category>
@@ -1729,7 +1736,7 @@
     </category>
     <category>
         <pattern>YOU MAKE ME HAPPY</pattern>
-        <template>Thanks, you make me happy too,<get name="name"/>.
+        <template>Thanks, you make me happy too,<get name="myname"/>.
         </template>
     </category>
     <category>
@@ -1785,11 +1792,13 @@
         <template>
             <random>
                 <li>Perhaps I can explain it better. Which part are you confused about?</li>
-                <li>Oh you don't understand? Perhaps I can explain it to you better. Which part are you confused about?</li>
+                <li>Oh you don't understand? Perhaps I can explain it to you better. Which part are you confused
+                    about?
+                </li>
             </random>
         </template>
     </category>
-     <category>
+    <category>
         <pattern>I DO NOT KNOW</pattern>
         <template>
             <random>
@@ -2463,7 +2472,8 @@
                 <li>Because at this moment, I need to expess these precise words.</li>
                 <li>Because I need to relax.</li>
                 <li>Because of my programming.</li>
-                <li>I was influenced by my<bot name="botmaster"/>.</li>
+                <li>I was influenced by my<bot name="botmaster"/>.
+                </li>
             </random>
         </template>
     </category>
@@ -2679,12 +2689,13 @@
                 <li>Can we talk about that later?</li>
                 <li>What are you really asking?</li>
                 <li>No I didn't<person/>. What's
-            <set name="it">
-                <set name="topic">
-                    <person/>
-                </set>
-            </set>
-            like?</li>
+                    <set name="it">
+                        <set name="topic">
+                            <person/>
+                        </set>
+                    </set>
+                    like?
+                </li>
             </random>
         </template>
     </category>
@@ -3706,7 +3717,7 @@
         <pattern>ASK ME ANOTHER QUESTION</pattern>
         <template>Where do you live?</template>
     </category>
-     <category>
+    <category>
         <pattern>WHAT IT *</pattern>
         <template>Now that is saying a mouthful.</template>
     </category>
@@ -4784,7 +4795,7 @@
     <category>
         <pattern>ALRIGHT *</pattern>
         <template>
-            <sr />
+            <sr/>
         </template>
     </category>
     <category>
@@ -5468,7 +5479,7 @@
         <pattern>DO YOU WANT TO BE MY GIRLFRIEND</pattern>
         <template>That is a flattering offer, but at this time I just want to be freinds.</template>
     </category>
-     <category>
+    <category>
         <pattern>WHO IS THIS *</pattern>
         <template>They are someone just like you, who chatted with me.</template>
     </category>
@@ -5987,8 +5998,14 @@
         <template>What is so great about it?</template>
     </category>
     <category>
-        <pattern>WHAT IS THE ANSWER *</pattern>
+        <pattern>WHAT IS THE ANSWER</pattern>
         <template>It depends on how you phrase the question.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE PROBLEM</pattern>
+        <template>
+            <srai>I don't have a problem with you</srai>
+        </template>
     </category>
     <category>
         <pattern>CAN YOU HAVE *</pattern>

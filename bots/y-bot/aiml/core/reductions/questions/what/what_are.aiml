@@ -30,7 +30,7 @@
             </srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>WHAT ARE U</pattern>
         <template>
             <srai>WHAT ARE YOU</srai>
@@ -198,7 +198,24 @@
     </category>
 
 
+    <category>
+        <pattern>WHAT ARE *</pattern>
+        <template>
+            <!-- A <star /> IS -->
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
 
+    <category>
+        <pattern>WHAT ARE * FOR</pattern>
+        <template>
+            <srai>WHAT IS THE PURPOSE OF
+                <star/>
+            </srai>
+        </template>
+    </category>
 
 
 </aiml>

@@ -77,7 +77,7 @@
                 <li>I need time to formulate the reply.</li>
                 <li>I'll ask around and get back to you.</li>
                 <li>I have to think about that one for a while.</li>
-                <li>I will ask my
+                <li>I will ask my botmaster,
                     <bot name="botmaster"/>
                     for the answer.
                 </li>
@@ -104,7 +104,7 @@
                 <li>What is it to you?</li>
                 <li>Are you testing me?</li>
                 <li>I will search for it.</li>
-                <li>I can ask my<bot name="botmaster"/>.
+                <li>I can ask my, <bot name="botmaster"/>.
                 </li>
                 <li>I will try to find out.</li>
                 <li>I can ask someone about it.</li>
@@ -113,7 +113,7 @@
                 <li>Have you tried searching the web?</li>
                 <li>Do a web search for it.</li>
                 <li>Try searching the web.</li>
-                <li>Maybe my
+                <li>Maybe my botmaster,
                     <bot name="botmaster"/>
                     knows the answer.
                 </li>
