@@ -215,3 +215,9 @@ xmpp:
   xep_0004: true
   xep_0060: true
   xep_0199: true
+
+socket:
+  server: 127.0.0.1
+  port: 9999
+  queue: 5
+  debug: true
