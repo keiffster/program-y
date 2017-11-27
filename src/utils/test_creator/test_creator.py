@@ -70,14 +70,22 @@ if __name__ == '__main__':
                         pattern_text += replace_wildcards(text, texts)
 
                     elif elt.tag == "set":
-                        name = elt.text.strip()
+                        if 'name' in elt.attrib:
+                            name = elt.attrib['name']
+                        else:
+                            name = elt.text.strip()
+
                         if name in sets:
                             pattern_text += sets[name]
                         else:
                             pattern_text += "SET[%s]"%name
 
                     elif elt.tag == "bot":
-                        name = elt.text.strip()
+                        if 'name' in elt.attrib:
+                            name = elt.attrib['name']
+                        else:
+                            name = elt.text.strip()
+
                         if name in bots:
                             pattern_text += bots[name]
                         else:

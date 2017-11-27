@@ -106,3 +106,4 @@ bots/y-bot/output/
 /scratch/
 temp/
 conversations/
+/src/utils/pattern_lister/y-bot.csv

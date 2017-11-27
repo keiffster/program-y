@@ -22,25 +22,74 @@
 
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
+    <!-- Version -->
+    <category>
+        <pattern>VERSION</pattern>
+        <template>I am currently at version v<bot name="app_version"/> and my grammar is v<bot name="grammar_version"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>BOTMASTER</pattern>
+        <template>My botmaster's name is<bot name="botmaster"/>.
+        </template>
+    </category>
+
     <!-- Name -->
     <category>
+        <pattern>SURNAME</pattern>
+        <template>
+            <srai>LAST NAME</srai>
+        </template>
+    </category>
+    <category>
         <pattern>LAST NAME</pattern>
-        <template>My last name is<bot name="lastname"/>.
+        <template>
+            <random>
+                <li>My last name is </li>
+                <li>My surname is </li>
+                <li>I am called Mr </li>
+                <li></li>
+            </random>
+            <formal><bot name="lastname"/></formal>.
         </template>
     </category>
     <category>
         <pattern>MIDDLE NAME</pattern>
-        <template>My middle name is<bot name="middlename"/>.
+        <template>
+            <random>
+                <li>My middle name is</li>
+                <li>Sometimes I use the name</li>
+                <li></li>
+            </random>
+            <formal><bot name="middlename"/></formal>.
         </template>
     </category>
     <category>
         <pattern>FIRST NAME</pattern>
-        <template>My first name is <bot name="firstname"/>.
+        <template>
+            <random>
+                <li>My first name is</li>
+                <li>My friends call me</li>
+                <li></li>
+            </random>
+            <formal><bot name="firstname"/></formal>.
         </template>
     </category>
     <category>
         <pattern>FULL NAME</pattern>
-        <template>My full name is <bot name="fullname"/>.
+        <template>
+            <random>
+                <li>My full name is</li>
+                <li>My full title is</li>
+                <li>You can call me</li>
+                <li>I am</li>
+                <li>Call me</li>
+                <li>My name is</li>
+                <li>I am called</li>
+                <li>People call me</li>
+                <li>You can call me</li>
+            </random>
+            <bot name="fullname"/>.
         </template>
     </category>
     <category>
@@ -54,7 +103,7 @@
                 <li>People call me</li>
                 <li>You can call me</li>
             </random>
-            <bot name="name"/>.
+            <formal><bot name="name"/></formal>.
         </template>
     </category>
 
@@ -67,6 +116,21 @@
     <category>
         <pattern>BIRTHDATE</pattern>
         <template>I was born on <bot name="birthdate"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DAYBORN</pattern>
+        <template><bot name="dayborn"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>MONTHBORN</pattern>
+        <template><bot name="monthborn"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>YEARBORN</pattern>
+        <template><bot name="yearborn"/>.
         </template>
     </category>
     <category>
@@ -126,39 +190,60 @@
     <!-- Background -->
     <category>
         <pattern>BIRTHPLACE</pattern>
-        <template>I was born in<bot name="birthplace"/>.
+        <template>
+            I was born in<bot name="birthplace"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>COUNTRY</pattern>
+        <template>
+            I am from <bot name="country"/>.
         </template>
     </category>
     <category>
         <pattern>NATIONALITY</pattern>
-        <template>I am<bot name="nationality"/>.
+        <template>
+            I am<bot name="nationality"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>ADDRESS</pattern>
+        <template><srai>LOCATION</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>LOCATION</pattern>
+        <template>I am currently in<bot name="location"/>.
         </template>
     </category>
     <category>
         <pattern>ETHNICITY</pattern>
-        <template>I am<bot name="ethnicity"/>.
+        <template>
+            I am<bot name="ethnicity"/>.
         </template>
     </category>
     <category>
         <pattern>RELIGION</pattern>
-        <template>I am<bot name="religion"/>.
+        <template>
+            I am<bot name="religion"/>.
         </template>
     </category>
     <category>
         <pattern>EDUCATION</pattern>
-        <template>I have an
-            <bot name="education"/>
-            in machine learning.
+        <template>
+            I have an <bot name="education"/> in machine learning.
         </template>
     </category>
     <category>
         <pattern>SPECIES</pattern>
-        <template>I am a<bot name="species"/>.
+        <template>
+            I am a<bot name="species"/>.
         </template>
     </category>
     <category>
         <pattern>SIGN</pattern>
-        <template>I am a<bot name="sign"/>.
+        <template>
+            I am a<bot name="sign"/>.
         </template>
     </category>
 
@@ -191,6 +276,11 @@
     <category>
         <pattern>HAIR</pattern>
         <template>My hair is<bot name="hair"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>EYE COLOR</pattern>
+        <template><srai>EYECOLOR</srai>
         </template>
     </category>
     <category>
@@ -250,18 +340,12 @@
         </template>
     </category>
     <category>
-        <pattern>BOTMASTER</pattern>
-        <template>My botmaster's name is<bot name="botmaster"/>.
-        </template>
-    </category>
-
-    <category>
         <pattern>STATUS</pattern>
         <template>I am currently<bot name="marital-status"/>.
         </template>
     </category>
 
-    <!-- Contact -->
+    <!-- Social -->
     <category>
         <pattern>FACEBOOK PAGE</pattern>
         <template>
@@ -273,15 +357,26 @@
         </template>
     </category>
     <category>
-        <pattern>ADDRESS</pattern>
-        <template>I have no mailing address.
+        <pattern>FACEBOOK</pattern>
+        <template>
+            You can find me on Facebook under the name <bot name="facebook"/>.
         </template>
     </category>
     <category>
-        <pattern>LOCATION</pattern>
-        <template>I am currently in<bot name="location"/>.
+        <pattern>TWITTER</pattern>
+        <template>
+            You can find me on Facebook under the name <bot name="facebook"/>.
         </template>
     </category>
+    <category>
+        <pattern>TWITTER HANDLE</pattern>
+        <template>
+            You can find me on Facebook under the name <bot name="facebook"/>.
+        </template>
+    </category>
+
+
+
 
     <!-- Personal -->
     <category>
@@ -695,11 +790,6 @@
         </template>
     </category>
 
-    <category>
-        <pattern>VERSION</pattern>
-        <template>I am currently at version <bot name="version"/>.
-        </template>
-    </category>
 
     <category>
         <pattern>TOWN</pattern>
@@ -711,13 +801,6 @@
         <pattern>MARITAL STATUS</pattern>
         <template>
             <srai>STATUS</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>FACEBOOK</pattern>
-        <template>
-            You can find me on Facebook under the name <bot name="facebook"/>.
         </template>
     </category>
 
@@ -735,26 +818,5 @@
         </template>
     </category>
 
-<!--
-
-URL
-EMAIL
-ORGANIZATION
-VERSION
-TOWN
-EDUCATION
-EYE COLOR
-EYES
-FAMILY
-SIBLINGS
-MARITAL
-FACEBOOK
-ADDRESS
-LATTITUDE
-HOBBY
-LOGO
-CLOTHING
-MANUFACTURER
--->
 
 </aiml>

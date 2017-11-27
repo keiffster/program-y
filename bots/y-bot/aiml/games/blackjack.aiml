@@ -53,7 +53,7 @@
             <think>
                 <set name="topic">BLACKJACK</set>
             </think>
-            Type "QUIT" to end the game.
+            Type 'QUIT' to end the game.
             <br/>
             <br/>
             Bank:
