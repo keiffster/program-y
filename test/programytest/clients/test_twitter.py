@@ -144,7 +144,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -160,7 +160,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -177,7 +177,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -194,7 +194,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -212,7 +212,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -233,7 +233,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -253,7 +253,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -277,7 +277,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                             "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                             "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -311,7 +311,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -328,7 +328,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access",
@@ -358,7 +358,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access",
@@ -382,7 +382,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -460,7 +460,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -482,7 +482,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"
@@ -499,7 +499,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"TWITTER_USERNAME": "Username",
                                                    "TWITTER_CONSUMER_KEY": "Key", "TWITTER_CONSUMER_SECRET": "Secret",
                                                    "TWITTER_ACCESS_TOKEN": "Access", "TWITTER_ACCESS_TOKEN_SECRET": "Secret"

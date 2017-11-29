@@ -13,6 +13,26 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
     <category>
+        <pattern>WHAT # NEXT # 2 4 6 8</pattern>
+        <template>10</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 2 4 6</pattern>
+        <template>8</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 1 3 5 7</pattern>
+        <template>9</template>
+    </category>
+    <category>
+        <pattern>WHAT # NEXT # 1 3 5</pattern>
+        <template>7</template>
+    </category>
+    <category>
+        <pattern>IS * A # NUMBER</pattern>
+        <template>No</template>
+    </category>
+    <category>
         <pattern>HOW MUCH IS
             <set>number</set>
         </pattern>
@@ -199,6 +219,67 @@
     <category>
         <pattern>TEN *</pattern>
         <template>I'm not good in math.</template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> A # NUMBER
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>number</set>
+        </pattern>
+        <template>
+            <star/>
+            is a number.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A NUMBER</pattern>
+        <template>
+            <star/>
+            is not a number I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> A NUMBER
+        </pattern>
+        <template>
+            <star/>
+            is a number.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>number</set> A NUMBER
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A NUMBER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>number</set> * NUMBER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A NUMBER
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>number</set> * NUMBER *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A NUMBER
+            </srai>
+        </template>
     </category>
 
  </aiml>

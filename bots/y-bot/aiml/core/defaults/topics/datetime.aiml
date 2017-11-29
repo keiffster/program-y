@@ -118,5 +118,111 @@
             </random>
         </template>
     </category>
+    <category>
+        <pattern>WHAT IS THE <set>ordinal</set> MONTH ^
+        </pattern>
+        <template>
+            <srai>NTHWORD
+                <map name="ordinal2number">
+                    <star/>
+                </map>
+                January February March April May June July August September October November December
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LAST MONTH ^</pattern>
+        <template>
+            <srai>NTHWORD 12 January February March April May June July August September October November December
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FIRST MONTH *</pattern>
+        <template>January.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # S</pattern>
+        <template>Saturday, Sunday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAYS # START WITH # S</pattern>
+        <template>Saturday, Sunday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # M</pattern>
+        <template>Monday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # W</pattern>
+        <template>Wednesday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # F</pattern>
+        <template>Friday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAY # STARTS WITH # T</pattern>
+        <template>Tuesday, Thursday.</template>
+    </category>
+    <category>
+        <pattern>WHAT DAYS # START WITH # T</pattern>
+        <template>Tuesday, Thursday.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE 1ST MONTH *</pattern>
+        <template>January.</template>
+    </category>
+    <category>
+        <pattern>IS * A MONTH</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>IS <set>month</set> A MONTH
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>month</set>
+        </pattern>
+        <template>
+            <star/>
+            is a month.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>month</set> A MONTH
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>month</set> * MONTH *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>month</set> * MONTH *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A MONTH
+            </srai>
+        </template>
+    </category>
+
 
  </aiml>

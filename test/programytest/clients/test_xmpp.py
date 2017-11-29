@@ -127,7 +127,7 @@ class XmppClientTests(unittest.TestCase):
         self.assertIsNotNone(bot_client)
         xmpp_client = MockXmppClient(bot_client, "userid", "password")
 
-        bot_client.bot = MockBot()
+        bot_client._bot = MockBot()
         bot_client.bot.answer = "Hiya"
 
         xmpp_client.message({"type": "chat", "from": "user123", "body": "Hello"})
@@ -179,7 +179,7 @@ class XmppBotClientTests(unittest.TestCase):
         client.configuration.client_configuration._server = "Server"
         client.configuration.client_configuration._port = 8080
 
-        client.bot = MockBot()
+        client._bot = MockBot()
         client.bot.license_keys = MockLicenseKeys({"XMPP_USERNAME": "Username", "XMPP_PASSWORD": "Password"})
 
         client.run()

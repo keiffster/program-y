@@ -37,5 +37,9 @@
         <pattern>AS A PROTESTANT *</pattern>
         <template>This is becoming a deep theological discussion.</template>
     </category>
+    <category>
+        <pattern>WHAT IS LAST # BIBLE #</pattern>
+        <template>Revelations</template>
+    </category>
 
  </aiml>

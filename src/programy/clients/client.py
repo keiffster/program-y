@@ -45,9 +45,9 @@ class BotClient(ResponseLogger):
 
         self.load_configuration(self.arguments)
 
-        self._brain = Brain(self.configuration.brain_configuration)
+        self.create_brain()
 
-        self.bot = Bot(self._brain, self.configuration.bot_configuration)
+        self.create_bot()
 
         self.dump_brain_tree()
 
@@ -61,9 +61,19 @@ class BotClient(ResponseLogger):
     def arguments(self):
         return self._arguments
 
+    def create_brain(self):
+        self._brain = Brain(self.configuration.brain_configuration)
+
     @property
     def brain(self):
         return self._brain
+
+    def create_bot(self):
+        self._bot = Bot(self._brain, self.configuration.bot_configuration)
+
+    @property
+    def bot(self):
+        return self._bot
 
     def dump_brain_tree(self):
         if self.configuration.brain_configuration.braintree.file is not None:

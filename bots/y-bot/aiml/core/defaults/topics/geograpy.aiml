@@ -13,6 +13,101 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
     <category>
+        <pattern>WHAT COUNTRY IS * <set>article</set> CAPITAL *
+        </pattern>
+        <template>
+            <map>
+                <name>capital2nation</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NATION IS * <set>article</set> CAPITAL *
+        </pattern>
+        <template>
+            <map>
+                <name>capital2nation</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT COUNTRY IS * CAPITAL *</pattern>
+        <template>
+            <map>
+                <name>capital2nation</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT NATION IS * CAPITAL *</pattern>
+        <template>
+            <map>
+                <name>capital2nation</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT STATE IS * <set>article</set> CAPITAL *
+        </pattern>
+        <template>
+            <map>
+                <name>capital2state</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT STATE IS * CAPITAL *</pattern>
+        <template>
+            <map>
+                <name>capital2state</name>
+                <star/>
+            </map>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE CAPITAL OF
+            <set>state</set>
+        </pattern>
+        <template>
+            <map>
+                <name>state2capital</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE CAPITAL OF
+            <set>nation</set>
+        </pattern>
+        <template>
+            <map>
+                <name>nation2capital</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE LARGEST CITY ^ <set>state</set> ^
+        </pattern>
+        <template>
+            <map>
+                <name>state2largestcity</name>
+                <star/>
+            </map>
+            .
+        </template>
+    </category>
+    <category>
         <pattern>WHAT IS THE BEST NATION ^</pattern>
         <template>A donation!</template>
     </category>
@@ -183,6 +278,81 @@
         <pattern>* ENGLAND</pattern>
         <template>Which part of <set name="location">England</set> is that?
         </template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # COUNTRY #
+        </pattern>
+        <template>One country is
+            <random>
+                <li>The United States</li>
+                <li>Russia</li>
+                <li>China</li>
+                <li>Japan</li>
+                <li>France</li>
+                <li>South Africa</li>
+            </random>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # NORTH POLE
+        </pattern>
+        <template>Ice, Seals, Penguins, Elves, Santa Claus.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # BEACH
+        </pattern>
+        <template>Sand, Surf, Sunbathers, Lifeguards, Seaweed.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # BANK
+        </pattern>
+        <template>Tellers, Money, Checks, Guards.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # FOREST
+        </pattern>
+        <template>Trees.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # WOODS
+        </pattern>
+        <template>Trees.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # OCEAN
+        </pattern>
+        <template>Fish, waves, seaweed, ships.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # FARM
+        </pattern>
+        <template>Crops, livestock, tractor, barn.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # NORTH AMERICA
+        </pattern>
+        <template>United States, Canada, Mexico, Cuba.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # SOUTH AMERICA
+        </pattern>
+        <template>Brazil, Argentina, Columbia, Venezuela.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # EUROPE
+        </pattern>
+        <template>Germany, France, Holland, Ireland.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # AFRICA
+        </pattern>
+        <template>Egypt, Sudan, Nigeria, South Africa.</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # ASIA
+        </pattern>
+        <template>Russia, China, India, Pakistan.</template>
     </category>
 
  </aiml>

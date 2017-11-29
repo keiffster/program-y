@@ -93,6 +93,7 @@ class RestBotClient(BotClient):
 
             question = self.get_question(request)
             sessionid = self.get_sessionid(request)
+            print("sessionid:", sessionid)
 
             response = self.ask_question(sessionid, question)
 

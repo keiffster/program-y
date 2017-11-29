@@ -32,6 +32,7 @@ from sanic.response import json
 from sanic.exceptions import ServerError
 
 from programy.clients.rest import RestBotClient
+from programy.bot import Bot
 
 class SanicRestBotClient(RestBotClient):
 

@@ -791,5 +791,52 @@
             </random>
         </template>
     </category>
+    <category>
+        <pattern>IS * A COLOR</pattern>
+        <template>
+            <star/>
+            is not a color I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>color</set> A COLOR
+        </pattern>
+        <template>
+            <star/>
+            is a color.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>color</set> A COLOR
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>color</set> * COLOR *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>color</set> * COLOR *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A COLOR
+            </srai>
+        </template>
+    </category>
 
 </aiml>

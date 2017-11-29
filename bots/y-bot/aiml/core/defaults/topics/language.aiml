@@ -174,6 +174,71 @@
         <pattern>* LANGUAGE</pattern>
         <template>Can you speak any other languages?</template>
     </category>
+    <category>
+        <pattern>IS * A # LANGUAGE</pattern>
+        <template>No</template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> A # LANGUAGE
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>
+            <set>language</set>
+        </pattern>
+        <template>
+            <star/>
+            is a language.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A LANGUAGE</pattern>
+        <template>
+            <star/>
+            is not a language I know.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> A LANGUAGE
+        </pattern>
+        <template>
+            <star/>
+            is a language.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>language</set> A LANGUAGE
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>language</set> * LANGUAGE *
+        </pattern>
+        <template>
+            <srai>IS
+                <star/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>article</set>
+            <set>language</set> * LANGUAGE *
+        </pattern>
+        <template>
+            <srai>IS
+                <star index="2"/>
+                A LANGUAGE
+            </srai>
+        </template>
+    </category>
 
 
  </aiml>

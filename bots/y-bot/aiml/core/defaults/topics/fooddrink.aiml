@@ -243,5 +243,19 @@
         <pattern>* TASTE LIKE *</pattern>
         <template>Sounds delicious.</template>
     </category>
+    <category>
+        <pattern>IS * A # FOOD</pattern>
+        <template>Not that I know of.</template>
+    </category>
+    <category>
+        <pattern>IS <set>food</set> A # FOOD
+        </pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # ORANGE
+        </pattern>
+        <template>Carrots</template>
+    </category>
 
  </aiml>

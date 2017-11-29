@@ -61,5 +61,10 @@
         <pattern>WWW * COM</pattern>
         <template>Thanks for that URL.</template>
     </category>
+    <category>
+        <pattern>NAME <set>quantifier</set> # SEARCH ENGINE
+        </pattern>
+        <template>Google.</template>
+    </category>
 
  </aiml>

@@ -36,12 +36,20 @@
 
     <topic name="REDDWARFHOLLY">
         <category>
-            <pattern>YES #</pattern>
+            <pattern>YES *</pattern>
+            <template>Glad you agree.</template>
+        </category>
+        <category>
+            <pattern>YES</pattern>
             <template>Glad you agree.</template>
         </category>
 
         <category>
-            <pattern>NO #</pattern>
+            <pattern>NO *</pattern>
+            <template>Oh well, we don't have to agree on everything</template>
+        </category>
+        <category>
+            <pattern>NO</pattern>
             <template>Oh well, we don't have to agree on everything</template>
         </category>
     </topic>

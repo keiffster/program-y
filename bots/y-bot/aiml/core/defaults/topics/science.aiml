@@ -13,10 +13,15 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
     <category>
+        <pattern>WHAT SHAPE IS #
+            <set>sphere</set>
+        </pattern>
+        <template>Spherical</template>
+    </category>
+    <category>
         <pattern>WHERE IS EARTH ^</pattern>
         <template>You're standing on it.</template>
     </category>
-
     <category>
         <pattern>WHERE IS THE EARTH ^</pattern>
         <template>You're standing on it.</template>
@@ -160,6 +165,26 @@
     <category>
         <pattern>CARL SAGAN *</pattern>
         <template>I saw the Movie "Contact". There were no robots in it.</template>
+    </category>
+    <category>
+        <pattern>IS FIRE HOT #</pattern>
+        <template>Fire is hot.</template>
+    </category>
+    <category>
+        <pattern>IS FIRE COLD #</pattern>
+        <template>Fire is hot.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS H2O</pattern>
+        <template>Water.</template>
+    </category>
+    <category>
+        <pattern>IS # <set>wet</set> ^ WET ^
+        </pattern>
+        <template>
+            <star index="2"/>
+            is wet.
+        </template>
     </category>
 
  </aiml>

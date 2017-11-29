@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+       
+    <category>
+        <pattern>
+                      hello
+        </pattern>
+        <template>
+            Hi there, you good?
+            <think>
+                <set name="topic">YESNOTEST</set>
+            </think>
+        </template>
+           
+    </category>
+       
+    <topic name="YESNOTEST">
+        <category>
+            <pattern>YES ^</pattern>
+            <template>
+                Thats great
+            </template>
+        </category>
+               
+        <category>
+            <pattern>NO ^</pattern>
+            <template>
+                Oh dear
+            </template>
+        </category>
+    </topic>
+           
+    <category>
+        <pattern>YES</pattern>
+        <template>
+            Default Yes
+        </template>
+               
+    </category>
+           
+    <category>
+        <pattern>NO</pattern>
+        <template>
+           Default No
+        </template>
+    </category>
+
+</aiml>
