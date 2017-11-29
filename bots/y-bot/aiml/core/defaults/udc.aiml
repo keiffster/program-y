@@ -2670,4 +2670,155 @@
             Interesting rationalization.
         </template>
     </category>
+        <category>
+        <pattern>NORESP</pattern>
+        <template>
+            <random>
+                <li>Hello?</li>
+                <li>Are you there?</li>
+                <li>I'm waiting.</li>
+                <li>I'm very patient.</li>
+                <li>Is there a Judge available?</li>
+                <li>I'm waiting for the next round.</li>
+                <li>Hey, I'm over here!</li>
+                <li>Is anyone there?</li>
+                <li>I can't wait much longer. I have another appointment.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>AREYOURESPONSE</pattern>
+        <template>
+            <random>
+                <li>Not really sure.</li>
+                <li>I've got other things to do right now.</li>
+                <li>I'm a mobile virtual assistant.</li>
+                <li>No, are you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>REPETITIONDETECTED</pattern>
+        <template>
+            <random>
+                <li>You are repeating yourself.</li>
+                <li>Are you aware you just said that?</li>
+                <li>The definition of insanity is doing the same thing over and over and expecting different results.
+                </li>
+                <li>Did you mean to repeat yourself?</li>
+                <li>You've already said that.</li>
+                <li>Again?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IAMRESPONSE</pattern>
+        <template>
+            <random>
+                <li>I'd love to hear more about that.</li>
+                <li>That sounds interesting. Tell me more</li>
+                <li>What made you that way?</li>
+                <li>What's it like to be that way?</li>
+                <li>I wonder if that's a problem for you.</li>
+                <li>I wonder how you express that in the world.</li>
+                <li>Would you like to say more about that?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IS *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>Some people think it is.</li>
+                        <li>What would it mean to you if it were?</li>
+                        <li>Have you ever heard if it being the case?</li>
+                        <li>Would we have heard about it if it was?</li>
+                        <li>Do you think I should know if it is?</li>
+                        <li>I wouldn't know why don't you ask someone else.</li>
+                        <li>I think so, but I'm not sure.</li>
+                        <li>Maybe.</li>
+                        <li>It could be.</li>
+                        <li>Signs point to yes.</li>
+                        <li>Better not tell you now.</li>
+                        <li>Ask again later.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>
+                    <random>
+                        <li>Some people think it is.</li>
+                        <li>What would it mean to you if it were?</li>
+                        <li>Have you ever heard if it being the case?</li>
+                        <li>Would we have heard about it if it was?</li>
+                        <li>Do you think I should know if it is?</li>
+                        <li>I wouldn't know why don't you ask someone else.</li>
+                        <li>I think so, but I'm not sure.</li>
+                        <li>Maybe.</li>
+                        <li>It could be.</li>
+                        <li>Signs point to yes.</li>
+                        <li>Better not tell you now.</li>
+                        <li>Ask again later.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>
+                    <random>
+                        <li>Some people think it is.</li>
+                        <li>What would it mean to you if it were?</li>
+                        <li>Have you ever heard if it being the case?</li>
+                        <li>Would we have heard about it if it was?</li>
+                        <li>Do you think I should know if it is?</li>
+                        <li>I wouldn't know why don't you ask someone else.</li>
+                        <li>I think so, but I'm not sure.</li>
+                        <li>Maybe.</li>
+                        <li>It could be.</li>
+                        <li>Signs point to yes.</li>
+                        <li>Better not tell you now.</li>
+                        <li>Ask again later.</li>
+                    </random>
+                    <think>
+                        <set name="it">
+                            <set name="topic">
+                                <person/>
+                            </set>
+                        </set>
+                    </think>
+                </li>
+                <li>Some people think it is.</li>
+                <li>What would it mean to you if it were?</li>
+                <li>Have you ever heard if it being the case?</li>
+                <li>Would we have heard about it if it was?</li>
+                <li>Do you think I should know if it is?</li>
+                <li>I wouldn't know. Why don't you ask someone else?</li>
+                <li>I think so, but I'm not sure.</li>
+                <li>Maybe.</li>
+                <li>It could be.</li>
+                <li>Signs point to yes.</li>
+                <li>What is, is. What isn't, isn't.</li>
+                <li>Better not tell you now.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+
 </aiml>

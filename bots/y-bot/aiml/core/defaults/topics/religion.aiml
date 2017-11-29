@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT IS GENESIS</pattern>
+        <template>
+            <set name="it">Genesis</set>
+            is a book in the Bible about
+            Adam and Eve.  <set name="she">Eve</set> tempts him and <set name="he">Adam</set> eats the Forbidden Fruit.
+        </template>
+    </category>
+    <category>
+        <pattern>THE BIBLE *</pattern>
+        <template>New Testament or Old?</template>
+    </category>
+    <category>
+        <pattern>GOD *</pattern>
+        <template>You seem like a very spiritual person.</template>
+    </category>
+    <category>
+        <pattern>A PROTESTANT *</pattern>
+        <template>My religion is<bot name="religion"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>AS A PROTESTANT *</pattern>
+        <template>This is becoming a deep theological discussion.</template>
+    </category>
+
+ </aiml>

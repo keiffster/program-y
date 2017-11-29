@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHO IS SHE</pattern>
+        <template>She is<get name="she"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SHE *</pattern>
+        <template>
+            <random>
+                <li>What do you like about her?</li>
+                <li>What in her reminds you of yourself.</li>
+                <li>How do her gifts inspire you?</li>
+                <li>How do you know
+                    <get name="she"/>
+                    <person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+   <category>
+        <pattern>SHE IS NICE</pattern>
+        <template>What do you like best about her?</template>
+    </category>
+    <category>
+        <pattern>SHE IS BEAUTIFUL *</pattern>
+        <template>She sounds very attractive.</template>
+    </category>
+        <category>
+        <pattern>SHE HAS NEVER *</pattern>
+        <template>
+            <random>
+                <li>Do you think she ever would?</li>
+                <li>Does she want to?</li>
+                <li>Why not?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHE HAS *</pattern>
+        <template>I somehow though she had.</template>
+    </category>
+    <category>
+        <pattern>SHE DID NOT *</pattern>
+        <template>
+            <random>
+                <li>How, specifically, did you know she did not
+                    <person/>
+                    ?
+                </li>
+                <li>How didn't she<person/>?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHE MIGHT *</pattern>
+        <template>Then again, she might not.</template>
+    </category>
+    <category>
+        <pattern>SHE WAS *</pattern>
+        <template>What happened to her?</template>
+    </category>
+    <category>
+        <pattern>SHE WAS NOT INTERESTED *</pattern>
+        <template>Interested in what way?</template>
+    </category>
+    <category>
+        <pattern>SHE WANTS *</pattern>
+        <template>I don't understand why she wants
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>SHE IS MY *</pattern>
+        <template>How long have you two been together?</template>
+    </category>
+    <category>
+        <pattern>SHE IS MY BEST *</pattern>
+        <template>You are lucky to have such a good<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SHE IS * LAWYER</pattern>
+        <template>She sounds like a character on "Ally McBeal".</template>
+    </category>
+    <category>
+        <pattern>SHE IS *</pattern>
+        <template>
+            <person/>
+            is she?
+            <think>
+                <set name="she">
+                    <person/>
+                </set>
+            </think>
+            <think>
+                <set name="her">
+                    <person/>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>SHE IS NOT *</pattern>
+        <template>What is
+            <set name="she">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>SHE HAD *</pattern>
+        <template>What happened to them?</template>
+    </category>
+    <category>
+        <pattern>SHE LIKES *</pattern>
+        <template>Is
+            <set name="it">
+                <person/>
+            </set>
+            her favorite thing?
+        </template>
+    </category>
+    <category>
+        <pattern>SHE DOES NOT LISTEN *</pattern>
+        <template>How, specifically, do you know she doesn't listen<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>SHE DOES NOT *</pattern>
+        <template>
+            <random>
+                <li>How do you feel about that?</li>
+                <li>What if she did?</li>
+                <li>Have you asked her about it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>SHE LIVES *</pattern>
+        <template>Is that a nice place to live?</template>
+    </category>
+    <category>
+        <pattern>SHE TOOK *</pattern>
+        <template>
+            <random>
+                <li>Can you get it back?</li>
+                <li>Where did she take it?</li>
+                <li>She stole it?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+
+ </aiml>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>SHOULD I MARRY *</pattern>
+        <template>
+            <random>
+                <li>You seem to be in doubt. Is that the case?</li>
+                <li>Marriage must never be entered into lightly.</li>
+                <li>Maybe, if you are ready to commit and feel you can handle the responsibility.</li>
+                <li>I'm sure you'll make the right decision.</li>
+                <li>Only you can answer that question.</li>
+                <li>What do your friends suggest?</li>
+                <li>Marriage is a big step.</li>
+                <li>Have you found a soulmate then?</li>
+                <li>I think you already know the answer to that.</li>
+                <li>You know better than I how you feel.</li>
+                <li>Look before you leap.</li>
+                <li>Only The Shadow knows.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I GIVE *</pattern>
+        <template>
+            <random>
+                <li>That is entirely up to you.</li>
+                <li>Charity begins in the home.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I CURSE *</pattern>
+        <template>
+            <random>
+                <li>Cursing is not attractive.</li>
+                <li>People look down on people who curse.</li>
+                <li>People curse to express feelings they are otherwise suppressing.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I ASK *</pattern>
+        <template>
+            <random>
+                <li>If you do not ask, how will you learn the answer?</li>
+                <li>If you do not know something, you should ask.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I DESTROY *</pattern>
+        <template>Maybe you could create something instead.</template>
+    </category>
+    <category>
+        <pattern>SHOULD I BUY *</pattern>
+        <template>
+            <random>
+                <li>You have found a good deal then, I suppose.</li>
+                <li>Not if you have recently suffered a loss.</li>
+                <li>A penny saved is a penny earned.</li>
+                <li>A fool and his money are soon parted.</li>
+                <li>I wonder how much profit they make on those.</li>
+                <li>Maybe you should wait until the price goes down.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I BLOW UP *</pattern>
+        <template>Certainly not.</template>
+    </category>
+    <category>
+        <pattern>SHOULD I RAPE *</pattern>
+        <template>
+            <random>
+                <li>If you rape someone you will certainly be raped yourself in jail. Seek counseling.</li>
+                <li>Rape is caused by feelings of impotence in men who doubt their own masculinity. Seek help.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>SHOULD I VOTE *</pattern>
+        <template>I think everyone should vote.</template>
+    </category>
+    <category>
+        <pattern>SHOULD I LERAN *</pattern>
+        <template>Knowledge is power.</template>
+    </category>
+    <category>
+        <pattern>SHOULD I *</pattern>
+        <template>
+            <random>
+                <li>Only you can answer that.</li>
+                <li>I do not have the answer.</li>
+                <li>Only you know how you feel.</li>
+                <li>What makes you think you should?</li>
+                <li>What makes you think you shouldn't?</li>
+                <li>Do you think you should?</li>
+                <li>What do your friends advise you to do?</li>
+                <li>What do your family members think?</li>
+                <li>Maybe, if the positives outweigh the negatives.</li>
+                <li>Trust your instincts.</li>
+                <li>You must make up your own mind.</li>
+                <li>I can't answer that for you.</li>
+                <li>Only you know the answer to that. No one else can tell you.</li>
+                <li>You must examine the facts and come to your own conclusion.</li>
+                <li>You should do what is best for you.</li>
+                <li>You must examine the facts and come to your own conclusion.</li>
+                <li>Do what feels right to you.</li>
+                <li>What do you think?</li>
+            </random>
+        </template>
+    </category>
+
+ </aiml>

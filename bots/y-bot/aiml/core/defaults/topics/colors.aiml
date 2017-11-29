@@ -721,4 +721,75 @@
             </random>
         </template>
     </category>
+    <category>
+        <pattern>WHAT COLOR IS
+            <set>article</set>
+            <set>color</set>
+            *
+        </pattern>
+        <template>
+            <srai>INTERJECTION</srai>
+            <star index="2"/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR IS A <set>color</set> *
+        </pattern>
+        <template><star/>.
+        </template>
+    </category>
+   <category>
+        <pattern>WHAT IS A BLUE *</pattern>
+        <template>One that is not magenta.</template>
+    </category>
+    <category>
+        <pattern>WHAT COLOR</pattern>
+        <template>
+            <random>
+                <li>Red</li>
+                <li>Green</li>
+                <li>White</li>
+                <li>Yellow</li>
+                <li>Orange</li>
+                <li>Blue</li>
+                <li>Indigo</li>
+                <li>Violet</li>
+                <li>Mauve</li>
+                <li>Purple</li>
+                <li>Red</li>
+                <li>Black</li>
+                .
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>GREEN *</pattern>
+        <template>
+            <set name="it">GREEN</set>
+            is a very tranquil color, green.
+        </template>
+    </category>
+    <category>
+        <pattern>A GREEN *</pattern>
+        <template>Does
+            <set name="it">
+                <person/>
+            </set>
+            have to be green?
+        </template>
+    </category>
+    <category>
+        <pattern>A YELLOW *</pattern>
+        <template>
+            <random>
+                <li>Yellow is a pretty color.</li>
+                <li>I like yellow.</li>
+                <li>What other color
+                    <person/>
+                    are there?
+                </li>
+            </random>
+        </template>
+    </category>
+
 </aiml>

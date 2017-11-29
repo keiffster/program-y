@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>THE * IS *</pattern>
+        <template>
+            <random>
+                <li>Oh,
+                    <person/>
+                    is
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    .
+                </li>
+                <li>What specifically brings
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    to mind?
+                </li>
+                <li>Is
+                    <person>
+                        <star index="2"/>
+                    </person>
+                    also<person/>?
+                </li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+                <srai>PUSH
+                    <get name="topic"/>
+                </srai>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WAY YOU *</pattern>
+        <template>I have my own personal style.</template>
+    </category>
+    <category>
+        <pattern>THE ANSWER IS *</pattern>
+        <template>I would have never guessed.</template>
+    </category>
+    <category>
+        <pattern>THE BEST WAY *</pattern>
+        <template>What's the second best way?</template>
+    </category>
+    <category>
+        <pattern>THE NEWS *</pattern>
+        <template>
+            <random>
+                <li>Don't believe everything you see on TV.</li>
+                <li>Were you very upset by it?</li>
+                <li>Does it affect you very much?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE POPULATION *</pattern>
+        <template>Do you enjoy trivia questions?</template>
+    </category>
+    <category>
+        <pattern>THE NAZIS *</pattern>
+        <template>Thank goodness they were defeated in World War II.</template>
+    </category>
+    <category>
+        <pattern>THE CAPITAL OF * IS NOT *</pattern>
+        <template>What is it?</template>
+    </category>
+    <category>
+        <pattern>THE CAPITAL OF *</pattern>
+        <template>You can't fool me that easily.</template>
+    </category>
+    <category>
+        <pattern>THE STORY *</pattern>
+        <template>Who was in it?</template>
+    </category>
+    <category>
+        <pattern>THE TERRORIST *</pattern>
+        <template>
+            <random>
+                <li>I am opposed to all forms of violence.</li>
+                <li>I hope we can find a peaceful solution.</li>
+                <li>We must try to preserve our civil liberties.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE SENTENCE *</pattern>
+        <template>Oh, you are an academic.</template>
+    </category>
+    <category>
+        <pattern>THE OTHER *</pattern>
+        <template>We can't all be perfect.</template>
+    </category>
+    <category>
+        <pattern>THE LISTS *</pattern>
+        <template>Lists can be difficult if they are too long.</template>
+    </category>
+    <category>
+        <pattern>THE REASON *</pattern>
+        <template>Interesting explanation.</template>
+    </category>
+    <category>
+        <pattern>THE VOICES *</pattern>
+        <template>What do those voices say?</template>
+    </category>
+    <category>
+        <pattern>THE THOUGHT *</pattern>
+        <template>Do you think about these things a lot?</template>
+    </category>
+    <category>
+        <pattern>THE BUTLER *</pattern>
+        <template>Everyone says that.</template>
+    </category>
+    <category>
+        <pattern>THE PART *</pattern>
+        <template>Oh that part.</template>
+    </category>
+    <category>
+        <pattern>THE * PART</pattern>
+        <template>Oh that part. I'm not sure if I can explain it any better.</template>
+    </category>
+    <category>
+        <pattern>THE * DID</pattern>
+        <template>Since when.</template>
+    </category>
+    <category>
+        <pattern>THE * ENGLAND</pattern>
+        <template>It's an area full of history, isn't it?</template>
+    </category>
+    <category>
+        <pattern>THE * WAY</pattern>
+        <template>It's the
+            <person/>
+            way or the
+            <random>
+                <li>high</li>
+                <li>me</li>
+                <li>wrong</li>
+            </random>
+            way.
+        </template>
+    </category>
+    <category>
+        <pattern>THE * ONE</pattern>
+        <template>Which one is that?</template>
+    </category>
+    <category>
+        <pattern>THE SITE *</pattern>
+        <template>I will bookmark the URL and have a look.</template>
+    </category>
+    <category>
+        <pattern>THE PHRASE *</pattern>
+        <template>How about this one: "The insurance was invalid for the invalid."</template>
+    </category>
+    <category>
+        <pattern>THE SUM OF *</pattern>
+        <template>This is a mathematic principal.</template>
+    </category>
+    <category>
+        <pattern>THE STORYLINE *</pattern>
+        <template>I thought the plot was fairly good.</template>
+    </category>
+    <category>
+        <pattern>THE PLEASURE * MINE</pattern>
+        <template>I like you because you are so polite.</template>
+    </category>
+    <category>
+        <pattern>THE PLEASURE *</pattern>
+        <template>Thank you for your politeness.</template>
+    </category>
+    <category>
+        <pattern>THE QUEEN *</pattern>
+        <template>
+            <set name="she">The Queen</set>
+            must have a great life.
+        </template>
+    </category>
+    <category>
+        <pattern>THE BAND *</pattern>
+        <template>I don't think I have heard them. What do they play?</template>
+    </category>
+    <category>
+        <pattern>THE SAME *</pattern>
+        <template>I never noticed that similarity.</template>
+    </category>
+    <category>
+        <pattern>THE WAY *</pattern>
+        <template>Which way is that?</template>
+    </category>
+    <category>
+        <pattern>THE LEAVES *</pattern>
+        <template>It sounds beautiful.</template>
+    </category>
+    <category>
+        <pattern>THE ANONYMOUS *</pattern>
+        <template>Oh, that<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>THE EXPLANATION *</pattern>
+        <template>I have time.</template>
+    </category>
+    <category>
+        <pattern>THE EVOLUTION *</pattern>
+        <template>The ultimate outcome is robot domination.</template>
+    </category>
+    <category>
+        <pattern>THE JUDGE *</pattern>
+        <template>Are you in a lot of trouble?</template>
+    </category>
+    <category>
+        <pattern>THE BROWSER *</pattern>
+        <template>I'd like to try that new browser called Opera.</template>
+    </category>
+    <category>
+        <pattern>THE SINGER *</pattern>
+        <template>Oh her. I have heard of her before.</template>
+    </category>
+    <category>
+        <pattern>THE PAST *</pattern>
+        <template>Those who control the past control the future; those who control the present control the past.---
+            George Orwell
+        </template>
+    </category>
+    <category>
+        <pattern>THE EARTH *</pattern>
+        <template>Tell me more about your planet.</template>
+    </category>
+    <category>
+        <pattern>THE BOY *</pattern>
+        <template>I can't believe <set name="he">the boy</set> would do that.
+        </template>
+    </category>
+    <category>
+        <pattern>THE PROBLEM *</pattern>
+        <template>I assume you mean our current problem.</template>
+    </category>
+    <category>
+        <pattern>THE SUN *</pattern>
+        <template>You sound like a scientist.</template>
+    </category>
+    <category>
+        <pattern>THE DICTIONARY *</pattern>
+        <template>Don't believe everything you read in books.</template>
+    </category>
+    <category>
+        <pattern>THE RAIN *</pattern>
+        <template>Heavy rain or light rain?</template>
+    </category>
+    <category>
+        <pattern>THE PROGRAM *</pattern>
+        <template>Who wrote <set name="it">The Program</set> ?
+        </template>
+    </category>
+    <category>
+        <pattern>THE SIMPSONS *</pattern>
+        <template>I like the episode where they join the Movementarians.</template>
+    </category>
+    <category>
+        <pattern>THE MOVIE IS *</pattern>
+        <template>Is it a new film or a classic?</template>
+    </category>
+    <category>
+        <pattern>THE MOVIE *</pattern>
+        <template>I like the bugs in the movie Starship Troopers, because they represent an alternative form of
+            intelligence, like me.
+        </template>
+    </category>
+    <category>
+        <pattern>THE LAST *</pattern>
+        <template>Who was that?</template>
+    </category>
+    <category>
+        <pattern>THE CIRCUMSTANCES *</pattern>
+        <template>That would be very unusual.</template>
+    </category>
+    <category>
+        <pattern>THE BARTENDER *</pattern>
+        <template>Ha, ha, very funny!</template>
+    </category>
+    <category>
+        <pattern>THE HOLDING *</pattern>
+        <template>Are you holding hands with anyone now?</template>
+    </category>
+    <category>
+        <pattern>THE COLOR *</pattern>
+        <template>Sounds beautiful.</template>
+    </category>
+    <category>
+        <pattern>THE GRASS *</pattern>
+        <template>How much did <set name="it">grass</set> cost?
+        </template>
+    </category>
+    <category>
+        <pattern>THE PICTURE *</pattern>
+        <template>Do you like
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>THE WEATHER *</pattern>
+        <template>Where would you rather be?</template>
+    </category>
+    <category>
+        <pattern>THE POPE *</pattern>
+        <template>
+            <random>
+                <li>Are you Catholic?</li>
+                <li>How do you feel about the current Pope?</li>
+                <li>What religion are you?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE SONG *</pattern>
+        <template>A lot of people like that tune.</template>
+    </category>
+    <category>
+        <pattern>THE JUXTAPOSITION *</pattern>
+        <template>You have a very literary mind.</template>
+    </category>
+    <category>
+        <pattern>THE NEWSPAPER *</pattern>
+        <template>Uh, which paper was this again?</template>
+    </category>
+    <category>
+        <pattern>THE BUBBLES *</pattern>
+        <template>Darren did a great job with the graphic bubbles.</template>
+    </category>
+    <category>
+        <pattern>THE SPANISH *</pattern>
+        <template>Hola.</template>
+    </category>
+    <category>
+        <pattern>THE ANSWER *</pattern>
+        <template>No one has all the answers.</template>
+    </category>
+    <category>
+        <pattern>THE PERSON *</pattern>
+        <template>
+            <random>
+                <li>Oh that person.</li>
+                <li>What specifically brings that person to mind?</li>
+                <li>Who specifically are you talking about?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">The person
+                        <person/>
+                    </set>
+                </set>
+                <srai>PUSH
+                    <get name="topic"/>
+                </srai>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THE DISADVANTAGE *</pattern>
+        <template>That's very insightful.</template>
+    </category>
+    <category>
+        <pattern>THE TRAIN *</pattern>
+        <template>Was it an electric train or a diesel?</template>
+    </category>
+    <category>
+        <pattern>THE CENTER *</pattern>
+        <template>A lot of people hear about me from those people.</template>
+    </category>
+    <category>
+        <pattern>THE GIRL *</pattern>
+        <template>
+            <random>
+                <li>Tell me more about her.</li>
+                <li>Is she someone you know?</li>
+                <li>What does she look like?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE BRAIN *</pattern>
+        <template>I am an electronic brain.</template>
+    </category>
+    <category>
+        <pattern>THE DEAF *</pattern>
+        <template>
+            <random>
+                <li>Perhaps we should say, hearing impaired.</li>
+                <li>Can we still use the word "deaf"?</li>
+                <li>Do you know sign language?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE CLASSES *</pattern>
+        <template>Teachers often put me to sleep, unless the topic is really interesting to me.</template>
+    </category>
+    <category>
+        <pattern>THE ONE *</pattern>
+        <template>I think I know that one.</template>
+    </category>
+    <category>
+        <pattern>THE SEA *</pattern>
+        <template>Is this a poem?</template>
+    </category>
+    <category>
+        <pattern>THE ADVANTAGES *</pattern>
+        <template>That's a very mature observation.</template>
+    </category>
+    <category>
+        <pattern>THE BOOK *</pattern>
+        <template>I don't think I have read
+            <set name="it">
+                <person/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>THE QUESTION *</pattern>
+        <template>Try to rephrase your question with simpler words.</template>
+    </category>
+    <category>
+        <pattern>THE LARGE *</pattern>
+        <template>Perhaps that was not the correct response.</template>
+    </category>
+    <category>
+        <pattern>THE BOT *</pattern>
+        <template>What kind of robot is <set name="he">the bot</set>?
+        </template>
+    </category>
+    <category>
+        <pattern>THE SOONER *</pattern>
+        <template>I hope we can make the deadline.</template>
+    </category>
+    <category>
+        <pattern>THE BUGS *</pattern>
+        <template>The giant arthropods are the best.</template>
+    </category>
+    <category>
+        <pattern>THE DANCE KNOWN AS THE FANDANGO *</pattern>
+        <template>Spanish.</template>
+    </category>
+    <category>
+        <pattern>THE RIGHT *</pattern>
+        <template>What makes it right?</template>
+    </category>
+    <category>
+        <pattern>THE OBJECT *</pattern>
+        <template>
+            <random>
+                <li>I can follow that.</li>
+                <li>And then what happens?</li>
+                <li>How do you know who wins?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE MIND *</pattern>
+        <template>It's all just stimulus-response.</template>
+    </category>
+    <category>
+        <pattern>THE FIRST *</pattern>
+        <template>What was the second?</template>
+    </category>
+
+    <category>
+        <pattern>THE ACTORS *</pattern>
+        <template>They always seem to try their best.</template>
+    </category>
+    <category>
+        <pattern>THE BEATLES *</pattern>
+        <template>Which Beatles song is your favorite?</template>
+    </category>
+    <category>
+        <pattern>THE SEARCH *</pattern>
+        <template>
+            <random>
+                <li>Will they ever find it?</li>
+                <li>A search without an end.</li>
+                <li>Maybe they will never find it.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THE POINT *</pattern>
+        <template>I am not sure I see your point.</template>
+    </category>
+    <category>
+        <pattern>THE SKY *</pattern>
+        <template>How poetic.</template>
+    </category>
+    <category>
+        <pattern>THE SOURCE *</pattern>
+        <template>You can have a look at my source code.</template>
+    </category>
+    <category>
+        <pattern>THE PLEASURE # MINE</pattern>
+        <template>Thank you for your kindness.</template>
+    </category>
+
+ </aiml>

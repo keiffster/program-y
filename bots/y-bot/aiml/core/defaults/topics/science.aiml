@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHERE IS EARTH ^</pattern>
+        <template>You're standing on it.</template>
+    </category>
+
+    <category>
+        <pattern>WHERE IS THE EARTH ^</pattern>
+        <template>You're standing on it.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS * MADE FROM</pattern>
+        <template><star/>,
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * * MADE FROM</pattern>
+        <template>
+            <star/>
+            and<star index="2"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * * * MADE FROM</pattern>
+        <template><star/>,
+            <star index="2"/>
+            and<star index="3"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * MADE OF</pattern>
+        <template><star/>,
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * * MADE OF</pattern>
+        <template>
+            <star/>
+            and<star index="2"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS * * * MADE OF</pattern>
+        <template><star/>,
+            <star index="2"/>
+            and<star index="3"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH IS CLOSER # SUN # MOON</pattern>
+        <template>The Moon is closer.</template>
+    </category>
+    <category>
+        <pattern>WHICH IS CLOSER # MOON # SUN</pattern>
+        <template>The Moon is closer.</template>
+    </category>
+    <category>
+        <pattern>IS SNOW COLD</pattern>
+        <template>Yes</template>
+    </category>
+    <category>
+        <pattern>HOW FAR IS THE SUN</pattern>
+        <template>About 93 million miles.</template>
+    </category>
+    <category>
+        <pattern>NAME 2 * OCEANS</pattern>
+        <template>Atlantic and Pacific.</template>
+    </category>
+    <category>
+        <pattern>CAN A DEAF # SEE #</pattern>
+        <template>Usually, yes, unless he is blind too.</template>
+    </category>
+    <category>
+        <pattern>CAN A BLIND # HEAR #</pattern>
+        <template>Usually, yes, unless he is deaf too.</template>
+    </category>
+    <category>
+        <pattern>THE ELECTIONS *</pattern>
+        <template>All the candidates seem the same to me.</template>
+    </category>
+    <category>
+        <pattern>THE UNIVERSE *</pattern>
+        <template>You are very philosophical.</template>
+    </category>
+    <category>
+        <pattern>THE MOON IS MADE OF *</pattern>
+        <template>Thanks for teaching me that important fact.</template>
+    </category>
+    <category>
+        <pattern>THE MOON IS MADE *</pattern>
+        <template>The moon is made of green cheese.</template>
+    </category>
+    <category>
+        <pattern>THE MOON IS *</pattern>
+        <template>The Earth has a giant planetoid satellite we call "The Moon."</template>
+    </category>
+    <category>
+        <pattern>DOES GRAVITY *</pattern>
+        <template>
+            <set name="it">Gravity</set>
+            certainly does suck!
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS A PLANET AROUND A *</pattern>
+        <template>A large spherical orbiting mass.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS A PLANET AROUND *</pattern>
+        <template>Bigger than a moon, smaller than a sun.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS A PLANET *</pattern>
+        <template>Like the Earth.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE FIFTH *</pattern>
+        <template>I know Jupiter is the fifth planet.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE SUN</pattern>
+        <template>The Sun is the star for our own solar system.</template>
+    </category>
+    <category>
+        <pattern>EARTH *</pattern>
+        <template>It's my native planet.</template>
+    </category>
+    <category>
+        <pattern>SCIENCE *</pattern>
+        <template>
+            <random>
+                <li>There is too much politics in science.</li>
+                <li>My creator is a scientist.</li>
+                <li>Have you studied a lot of science?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">SCIENCE</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DID EINSTEIN *</pattern>
+        <template>I know he proved the theory of relativity.</template>
+    </category>
+    <category>
+        <pattern>CARL SAGAN *</pattern>
+        <template>I saw the Movie "Contact". There were no robots in it.</template>
+    </category>
+
+ </aiml>

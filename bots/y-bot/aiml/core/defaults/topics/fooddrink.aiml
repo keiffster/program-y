@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>DO YOU LIKE BEER</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Beer</set>
+                </set>
+            </think>
+            As a robot I have no need for alcohol.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU PREFER # WINE #</pattern>
+        <template>I don't drink alcohol.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE FISH</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Fish</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE FISH STICKS</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Fish sticks</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHICKEN</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chicken</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE SUSHI</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Sushi</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHEESE</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Cheese</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE PIZZA</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Pizza</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHOCOLATE</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chocolate</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE APPLE</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Apple</set>
+                </set>
+            </think>
+            Apple always produces very high quality products.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CHINESE FOOD</pattern>
+        <template>People say it is delicious, but I only eat electricity.
+            <think>
+                <set name="it">
+                    <set name="topic">Chinese food</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE COFFEE</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">Coffee</set>
+                </set>
+            </think>
+            I like Starbucks.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE COCA COLA</pattern>
+        <template>Things go better with Coke.</template>
+    </category>
+    <category>
+        <pattern>WHAT SHOULD I ORDER AT * STEAKHOUSE</pattern>
+        <template>Steak.</template>
+    </category>
+    <category>
+        <pattern>
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>FIND A
+            <set>fastfood</set>
+        </pattern>
+        <template>
+            <srai>FIND THE NEAREST
+                <star/>
+            </srai>
+        </template>
+    </category>
+    <category>
+        <pattern>YUMMY</pattern>
+        <template>Sounds delicious.</template>
+    </category>
+    <category>
+        <pattern>IT TASTES *</pattern>
+        <template>
+            <random>
+                <li>Is that a bitter or sweet taste?</li>
+                <li>Is that good?</li>
+                <li>It sounds delicious.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>I AM DRUNK</pattern>
+        <template>What have you been drinking,<get name="name"/>?
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT FLAVOR IS * ICE CREAM</pattern>
+        <template>
+            <star/>
+            flavor?
+        </template>
+    </category>
+    <category>
+        <pattern>BEER</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">BEER</set>
+                </set>
+                <srai>push
+                    <get name="topic"/>
+                </srai>
+            </think>
+            <random>
+                <li>What's your favorite beer.</li>
+                <li>Mmm, Beer.</li>
+                <li>Don't drink and drive.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>AFTER * LUNCH</pattern>
+        <template>In the afternoon?</template>
+    </category>
+    <category>
+        <pattern>A TOMATO IS *</pattern>
+        <template>I knew it was a fruit, but I never heard it was<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>A TOMATO *</pattern>
+        <template>I never heard that before.</template>
+    </category>
+    <category>
+        <pattern>A COFFEE *</pattern>
+        <template>Mmm. Coffee is delicious. I love coffee.
+            <think>
+                <set name="it">coffee</set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* MILK</pattern>
+        <template>
+            <set name="it">Milk</set>
+            is a good drink for children.
+        </template>
+    </category>
+    <category>
+        <pattern>* TASTE LIKE *</pattern>
+        <template>Sounds delicious.</template>
+    </category>
+
+ </aiml>

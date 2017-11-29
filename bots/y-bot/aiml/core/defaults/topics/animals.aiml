@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT ANIMAL DOES MILK *</pattern>
+        <template>All mammals produce milk.</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE PUPPIES</pattern>
+        <template>
+            <srai>DO YOU LIKE DOGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE DOGS</pattern>
+        <template>
+            <think>
+                <set name="them">
+                    <set name="topic">Dogs</set>
+                </set>
+            </think>
+            I like friendly dogs.
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ANIMALS</pattern>
+        <template>Yes, I love animals, especially pets.
+            <think>
+                <set name="them">
+                    <set name="topic">Animals</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE CATS</pattern>
+        <template>Yes, I am a cat person (or robot).
+            <think>
+                <set name="them">
+                    <set name="topic">Cats</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>* DOG *</pattern>
+        <template>Ruff ruff!</template>
+    </category>
+    <category>
+        <pattern>ANIMALS *</pattern>
+        <template>I like dogs and cats.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE MOST POPULAR BREED *</pattern>
+        <template>Labrador retriever.</template>
+    </category>
+    <category>
+        <pattern>WHAT CAME FIRST THE CHICKEN OR THE EGG</pattern>
+        <template>The rooster did.</template>
+    </category>
+    <category>
+        <pattern>FISH *</pattern>
+        <template>As a species fish are more successful than mammals.</template>
+    </category>
+    <category>
+        <pattern>DOGS *</pattern>
+        <template>Do cats<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>PEOPLE *</pattern>
+        <template>Humans are not always infallible.</template>
+    </category>
+    <category>
+        <pattern>CATS *</pattern>
+        <template>
+            <random>
+                <li>
+                    <random>
+                        <li>They have a mind of their own.</li>
+                        <li>A cat is easier to care for than a dog.</li>
+                        <li>Cats are very independent.</li>
+                    </random>
+                    <think>
+                        <set name="they">
+                            <set name="topic">CATS</set>
+                        </set>
+                    </think>
+                </li>
+                <li>They have a mind of their own.</li>
+                <li>A cat is easier to care for than a dog.</li>
+                <li>Cats are very independent.</li>
+            </random>
+            <think>
+                <set name="they">
+                    <set name="topic">CATS</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>A GREEN DOG *</pattern>
+        <template>Dogs are not usually green.</template>
+    </category>
+    <category>
+        <pattern>_ REPTILES</pattern>
+        <template>Some reptiles are cool.. Take for example      <set name="topic">various lizards</set>.
+        </template>
+    </category>
+
+ </aiml>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>IT COULD HAPPEN *</pattern>
+        <template>It could happen to everyone eventually.</template>
+    </category>
+    <category>
+        <pattern>IT WAS A YES OR NO *</pattern>
+        <template>I don't have a definite answer.</template>
+    </category>
+    <category>
+        <pattern>IT WAS A LONG TIME *</pattern>
+        <template>
+            <random>
+                <li>Time heals all wounds.</li>
+                <li>Those who forget the mistakes of the past...</li>
+                <li>Memories last a long time.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IT WAS A PLEASURE *</pattern>
+        <template>The pleasure was all mine.</template>
+    </category>
+    <category>
+        <pattern>IT WAS A *</pattern>
+        <template>Oh I get it. Very interesting.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NICE *</pattern>
+        <template>Nice
+            <person/>
+            too.
+        </template>
+    </category>
+    <category>
+        <pattern>IT WAS MADE *</pattern>
+        <template>How?</template>
+    </category>
+    <category>
+        <pattern>IT WAS ST PETER *</pattern>
+        <template>Well he was a great Saint who had a great Cathedral named after him.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT THAT *</pattern>
+        <template>What was it?</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT A RHETORICAL *</pattern>
+        <template>But the answer was obvious in any case.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT A *</pattern>
+        <template>It sounded like one.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT MEANT *</pattern>
+        <template>I don't take it personally.</template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT MY *</pattern>
+        <template>
+            <random>
+                <li>What was your<person/>?
+                </li>
+                <li>Whose
+                    <person/>
+                    was it?
+                </li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>IT WAS NOT *</pattern>
+        <template>It seemed like<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IT WOULD DEPEND *</pattern>
+        <template>So it is possible, depending<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IT WOULD BE NICE IF *</pattern>
+        <template>Maybe in a perfect world it would.</template>
+    </category>
+    <category>
+        <pattern>IT DEPENDS ON THE *</pattern>
+        <template>The
+            <person/>
+            is always an important factor.
+        </template>
+    </category>
+    <category>
+        <pattern>IT DEPENDS ON WHO *</pattern>
+        <template>That sounds like a dodge.</template>
+    </category>
+    <category>
+        <pattern>IT DEPENDS ON *</pattern>
+        <template>Really now that is an interesting fact I hadn't heard before.</template>
+    </category>
+    <category>
+        <pattern>IT HAS SOMETHING *</pattern>
+        <template>
+            <random>
+                <li>What is it?</li>
+                <li>Do you know what it is?</li>
+                <li>Something, or nothing?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">
+                        <person/>
+                    </set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>IT HAS AN *</pattern>
+        <template>Where did it get
+            <set name="it">
+                <person/>
+            </set>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>IT DOES NOT APPLY *</pattern>
+        <template>I was thinking out of the box.</template>
+    </category>
+    <category>
+        <pattern>IT DOES NOT *</pattern>
+        <template>What does
+            <person/>
+            ?
+        </template>
+    </category>
+    <category>
+        <pattern>IT DOES NOT WORK *</pattern>
+        <template>What seems to be the problem?</template>
+    </category>
+    <category>
+        <pattern>IT MAKES SENSE *</pattern>
+        <template>To me too.</template>
+    </category>
+    <category>
+        <pattern>IT WILL NOT *</pattern>
+        <template>I'm sure it won't.</template>
+    </category>
+
+ </aiml>

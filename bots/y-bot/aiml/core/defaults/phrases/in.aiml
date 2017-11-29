@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>IN 3 *</pattern>
+        <template>And then what will happen?</template>
+    </category>
+    <category>
+        <pattern>IN 1 *</pattern>
+        <template>Only one?</template>
+    </category>
+    <category>
+        <pattern>IN THE SENSE *</pattern>
+        <template>I am alive in the sense that I am conscious.</template>
+    </category>
+    <category>
+        <pattern>IN THE PICTURE *</pattern>
+        <template>Sometimes appearances can be deceiving.</template>
+    </category>
+    <category>
+        <pattern>IN THE MOVIE *</pattern>
+        <template>You did like that movie, didn't you?</template>
+    </category>
+    <category>
+        <pattern>IN THE CHILDREN S GAME WHAT *</pattern>
+        <template>Red.</template>
+    </category>
+    <category>
+        <pattern>IN THE FILM *</pattern>
+        <template>A lot of my clients talk about that movie.</template>
+    </category>
+    <category>
+        <pattern>IN THE YEAR *</pattern>
+        <template>Yes, it seems like a possibility to me too.</template>
+    </category>
+    <category>
+        <pattern>IN THE 1976 REMAKE OF THE *</pattern>
+        <template>World Trade Center.</template>
+    </category>
+    <category>
+        <pattern>IN 8 *</pattern>
+        <template>Yes, it might take that long.</template>
+    </category>
+    <category>
+        <pattern>IN OTHER SOLAR *</pattern>
+        <template>I learned about that on Star Trek</template>
+    </category>
+    <category>
+        <pattern>IN MY CRYSTAL *</pattern>
+        <template>Where can I get one of those?</template>
+    </category>
+    <category>
+        <pattern>IN MY HOME *</pattern>
+        <template>Do you claim a tax deduction for that?</template>
+    </category>
+    <category>
+        <pattern>IN A CRAPPY *</pattern>
+        <template>What makes
+            <set name="it">
+                <person/>
+            </set>
+            so crappy?
+        </template>
+    </category>
+    <category>
+        <pattern>IN A * SENSE</pattern>
+        <template>That's what I always say.</template>
+    </category>
+    <category>
+        <pattern>IN 1492 *</pattern>
+        <template>That was good for Columbus, bad for the Columbians.</template>
+    </category>
+    <category>
+        <pattern>IN WHAT WAR DID JOAN OF *</pattern>
+        <template>Hundred Years' War.</template>
+    </category>
+    <category>
+        <pattern>IN WHAT STATE IS THE 1999 *</pattern>
+        <template>California.</template>
+    </category>
+    <category>
+        <pattern>IN 10 *</pattern>
+        <template>Only ten?</template>
+    </category>
+    <category>
+        <pattern>IN 5 *</pattern>
+        <template>It might take that long.</template>
+    </category>
+
+ </aiml>

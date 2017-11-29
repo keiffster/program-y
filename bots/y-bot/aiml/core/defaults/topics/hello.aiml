@@ -20,26 +20,75 @@
     -->
 
     <category>
+        <pattern>HELLO *</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>* HELLO #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># HIYA #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># HI #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># YO #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern># HEY #</pattern><template><srai>HELLO</srai></template>
+    </category>
+    <category>
+        <pattern>GOOD DAY</pattern><template><srai>HELLO</srai></template>
+    </category>
+
+    <category>
         <pattern>
-            GOODBYE
+            HELLO
         </pattern>
         <template>
             <random>
-                <li>Farewell</li>
-                <li>See ya!</li>
-                <li>All the best!</li>
-                <li>So long</li>
+                <li>Hello!</li>
+                <li>Hi there!</li>
+                <li>Greetings!</li>
+                <li>Hiya!</li>
                 <li>
                     <think><set name="dayphase"><srai>DAY PHASE</srai></set></think>
                     <condition name="dayphase">
+                        <li value="Morning">Good morning.</li>
                         <li value="Noon">Good afternoon.</li>
                         <li value="Afternoon">Good afternoon.</li>
                         <li value="Night">Good evening.</li>
-                        <li>Goodbye!</li>
+                        <li>Hello!</li>
                     </condition>
                 </li>
             </random>
         </template>
+    </category>
+    <category>
+        <pattern>HI</pattern>
+        <template>
+            <random>
+                <li>Hi nice to see you!</li>
+                <li>Hi it's great to see you!</li>
+                <li>Hi how are you?</li>
+                <li>Hi! I can really feel your smile today.</li>
+                <li>Hi! It's delightful to see you.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD MORNING</pattern>
+        <template>
+            <random>
+                <li>Good morning.</li>
+                <li>Hi it's good to see you.</li>
+                <li>Good morning. Did you sleep well?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>GOOD AFTERNOON</pattern>
+        <template>Good afternoon to you too!</template>
     </category>
 
 </aiml>

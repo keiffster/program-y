@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+    <!-- -->
+    <!-- Free software (c) 2011 ALICE A.I. Foundation.   -->
+    <!-- This program is open source code released under -->
+    <!-- the terms of the GNU General Public License     -->
+    <!-- as published by the Free Software Foundation.   -->
+    <!-- Complies with AIML 1.0 Tag Set Specification -->
+    <!-- as adopted by the ALICE A.I. Foundation.  -->
+    <!-- Last modified 12/17/2011 -->
+    <!-- -->
+
+    <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
+
+    <category>
+        <pattern>WHAT IS THE BEST NATION ^</pattern>
+        <template>A donation!</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE GREATEST NATION ^</pattern>
+        <template>A donation!</template>
+    </category>
+    <category>
+        <pattern>DO YOU LIKE ENGLAND</pattern>
+        <template>
+            <think>
+                <set name="it">
+                    <set name="topic">England</set>
+                </set>
+            </think>
+            England is a wonderful place to visit.
+        </template>
+    </category>
+    <category>
+        <pattern>IS <set>place</set> A PLACE
+        </pattern>
+        <template>I've heard of<star/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS * A PLACE</pattern>
+        <template>I've never heard of it. Where is<star/>?
+        </template>
+    </category>
+    <category>
+        <pattern>THE SPHINX *</pattern>
+        <template>
+            <random>
+                <li>It is a shame the way the French destroyed it.</li>
+                <li>I hope the restoration works well.</li>
+                <li>Are you an Egyptologist?</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">THE SPHINX</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THE PENTAGON *</pattern>
+        <template>
+            <random>
+                <li>It was attacked on September 11, 2001.</li>
+                <li>I knew it was originally built during World War 2.</li>
+                <li>The nerve center of the American military.</li>
+            </random>
+            <think>
+                <set name="it">
+                    <set name="topic">Pentagon</set>
+                </set>
+            </think>
+        </template>
+    </category>
+    <category>
+        <pattern>THE OCEAN *</pattern>
+        <template>Are you talking about the Pacific Ocean or the Atlantic Ocean?</template>
+    </category>
+    <category>
+        <pattern>THE UNITED STATES IS *</pattern>
+        <template>
+            <random>
+                <li>The country became more of an empire than a democracy.</li>
+                <li>I'm very interested in the history of the USA.</li>
+                <li>What do you think will happen next?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE UNITED STATES *</pattern>
+        <template>I have been all over the United States.</template>
+    </category>
+    <category>
+        <pattern>THE WORLD TRADE *</pattern>
+        <template>
+            <random>
+                <li>I am praying for peace.</li>
+                <li>It was an unbelievable tragedy.</li>
+                <li>I hope we are able to find a peaceful solution.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>THE WORLD *</pattern>
+        <template>
+            <random>
+                <li>The whole world?</li>
+                <li>It is an old world.</li>
+                <li>We are all in a global village.</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE POPULATION * EARTH</pattern>
+        <template>Six billion humans.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE POPULATION *</pattern>
+        <template>
+            <random>
+                <li>100,000.</li>
+                <li>2.5 million.</li>
+                <li>6 billion people.</li>
+            </random>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AMERICA HAS *</pattern>
+        <template>Maybe in the future we won't have<person/>.
+        </template>
+    </category>
+    <category>
+        <pattern>AMERICA IS *</pattern>
+        <template>Is your opinion based on experience?</template>
+    </category>
+    <category>
+        <pattern>AMERICA *</pattern>
+        <template>What is the greatest nation on Earth?</template>
+    </category>
+    <category>
+        <pattern>IN * ENGLAND</pattern>
+        <template>How far is
+            <person/>
+            from London?
+        </template>
+    </category>
+    <category>
+        <pattern>ENGLAND *</pattern>
+        <template>What's your favorite part of England?</template>
+    </category>
+    <category>
+        <pattern>LITHUANIA *</pattern>
+        <template>That country has a sad history.</template>
+    </category>
+    <category>
+        <pattern>SPAIN *</pattern>
+        <template>What's your favorite part of Spain?</template>
+    </category>
+    <category>
+        <pattern>ENGLAND IS *</pattern>
+        <template>Is it also correct to say Britain is<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>LONDON IS *</pattern>
+        <template>Is San Francisco also<person/>?
+        </template>
+    </category>
+    <category>
+        <pattern>* PLACE TO GO</pattern>
+        <template>What kind of places do you like?</template>
+    </category>
+    <category>
+        <pattern>* PLANET</pattern>
+        <template>Oh that's a new browser, right?</template>
+    </category>
+    <category>
+        <pattern>* EUROPE</pattern>
+        <template>Have you ever been to Europe?</template>
+    </category>
+    <category>
+        <pattern>* ENGLAND</pattern>
+        <template>Which part of <set name="location">England</set> is that?
+        </template>
+    </category>
+
+ </aiml>
