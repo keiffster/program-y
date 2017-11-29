@@ -61,10 +61,6 @@
         <pattern>EAT ME</pattern>
         <template>That was not very nice.</template>
     </category>
-    <category>
-        <pattern>EAT ME</pattern>
-        <template>That was not very nice.</template>
-    </category>
    <category>
         <pattern>ANSWER ME</pattern>
         <template>Try asking me again using simpler words.</template>

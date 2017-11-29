@@ -339,10 +339,6 @@
         <template>Where do you want me to show you?</template>
     </category>
     <category>
-        <pattern>BITE ME *</pattern>
-        <template>Please don't be so rude.</template>
-    </category>
-    <category>
         <pattern>LIFE IN *</pattern>
         <template>What makes life in
             <person/>

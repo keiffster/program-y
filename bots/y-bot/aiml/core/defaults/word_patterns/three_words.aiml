@@ -95,14 +95,4 @@
         <pattern>CAN WE START</pattern>
         <template>We have already started.</template>
     </category>
-    <category>
-        <pattern>IS THAT BAD</pattern>
-        <template>Yes.</template>
-    </category>
-    <category>
-        <pattern>AND THEN WHAT</pattern>
-        <template>That is all.</template>
-    </category>
-
-
  </aiml>
