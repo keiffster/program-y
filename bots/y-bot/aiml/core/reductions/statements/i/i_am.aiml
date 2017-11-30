@@ -258,12 +258,6 @@
             </srai>
         </template>
     </category>
-     <category>
-        <pattern>IM GAY</pattern>
-        <template>
-            <srai>I AM GAY</srai>
-        </template>
-    </category>
     <category>
         <pattern>IM YOUR *</pattern>
         <template>

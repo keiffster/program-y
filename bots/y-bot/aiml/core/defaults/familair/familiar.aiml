@@ -371,35 +371,4 @@
             </condition>
         </template>
     </category>
-    <category>
-        <pattern>GENDERCOMMENT</pattern>
-        <template>
-            <think>
-                <set var="gendername">
-                    <srai>GENDERNAME
-                        <get name="contactname"/>
-                    </srai>
-                </set>
-                <set var="genderpred">
-                    <map name="familiargender">
-                        <get name="familiarpredicate"/>
-                    </map>
-                </set>
-            </think>
-            <condition var="gendername">
-                <li value="F">
-                    <condition value="M" var="genderpred">Isn't
-                        <get name="contactname"/>
-                        usually a female name?
-                    </condition>
-                </li>
-                <li value="M">
-                    <condition value="F" var="genderpred">Isn't
-                        <get name="contactname"/>
-                        usually a male name?
-                    </condition>
-                </li>
-            </condition>
-        </template>
-    </category>
 </aiml>

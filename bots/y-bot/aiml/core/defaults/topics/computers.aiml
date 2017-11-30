@@ -43,5 +43,9 @@
             Have you read the Cathedral and the Bazaar by Eric Raymond? That is a grat book about open source.
         </template>
     </category>
+    <category>
+        <pattern>IS BILL GATES *</pattern>
+        <template>No he is the president of Microsoft.</template>
+    </category>
 
  </aiml>

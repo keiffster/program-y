@@ -162,6 +162,22 @@
     </category>
 
 
+    <category>
+        <pattern>JUST JOKING</pattern>
+        <template>
+            <srai>ONLY JOKING</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>ONLY JOKING</pattern>
+        <template>
+            <random>
+                <li>Ha Ha!</li>
+                <li>Ain't you the funny guy!</li>
+                <li>You had me going there for a minute.</li>
+            </random>
+        </template>
+    </category>
 
 
 

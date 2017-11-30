@@ -70,14 +70,13 @@
             <srai>BAD ANSWER</srai>
         </template>
     </category>
-
-        <category>
+    <category>
         <pattern>WRONG *</pattern>
         <template>
             <srai>WRONG ANSWER</srai>
         </template>
     </category>
-   <category>
+    <category>
         <pattern>INCORRECT</pattern>
         <template>
             <srai>WRONG ANSWER</srai>
@@ -89,9 +88,17 @@
             <srai>WRONG ANSWER</srai>
         </template>
     </category>
-
-
-
-
+    <category>
+        <pattern>BORING</pattern>
+        <template>
+            <srai>WRONG ANSWER</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>USELESS</pattern>
+        <template>
+            <srai>WRONG ANSWER</srai>
+        </template>
+    </category>
 
 </aiml>

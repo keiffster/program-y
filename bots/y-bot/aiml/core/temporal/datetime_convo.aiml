@@ -194,4 +194,22 @@
         </template>
     </category>
 
+    <category>
+        <pattern>
+            TIME NOW
+        </pattern>
+        <template>
+            <srai>TIME</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            DATE NOW
+        </pattern>
+        <template>
+            <srai>DATE</srai>
+        </template>
+    </category>
+
 </aiml>

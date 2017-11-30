@@ -109,10 +109,6 @@
         </template>
     </category>
     <category>
-        <pattern>ARE CATS *</pattern>
-        <template>What would a cat say?</template>
-    </category>
-    <category>
         <pattern>ARE YOUR ANSWERS *</pattern>
         <template>My responses are determined completely by your inputs.</template>
     </category>

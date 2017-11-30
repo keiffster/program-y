@@ -947,10 +947,6 @@
         <template>All that kind of music is cool.</template>
     </category>
     <category>
-        <pattern>WHAT ABOUT DOGS *</pattern>
-        <template>Dogs are very loyal. Cats are very independent.</template>
-    </category>
-    <category>
         <pattern>WHAT ABOUT *</pattern>
         <template>
             <random>

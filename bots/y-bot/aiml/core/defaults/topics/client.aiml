@@ -647,10 +647,6 @@
         <template>But I have no mouth at this time.</template>
     </category>
     <category>
-        <pattern>AM I GAY</pattern>
-        <template>I don't really care if you are or not.</template>
-    </category>
-    <category>
         <pattern>AM I STUPID</pattern>
         <template>You seem intelligent to me.</template>
     </category>

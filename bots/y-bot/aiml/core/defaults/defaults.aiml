@@ -844,10 +844,6 @@
         <template>Yes, it is interesting.</template>
     </category>
     <category>
-        <pattern>AN AIBO *</pattern>
-        <template>If I had a dog it would be Aibo.</template>
-    </category>
-    <category>
         <pattern>AN ARTICLE *</pattern>
         <template>
             <random>
@@ -1399,10 +1395,6 @@
     <category>
         <pattern>A * JEANS</pattern>
         <template>Do you like blue jeans or another color?</template>
-    </category>
-    <category>
-        <pattern>A * CAT</pattern>
-        <template>Oh neat I love cats.</template>
     </category>
     <category>
         <pattern>A * VIRUS</pattern>

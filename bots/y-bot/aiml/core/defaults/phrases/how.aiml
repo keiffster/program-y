@@ -399,10 +399,6 @@
         <template>365 per year.</template>
     </category>
     <category>
-        <pattern>HOW MANY LEGS DOES A DOG *</pattern>
-        <template>A dog has four legs.</template>
-    </category>
-    <category>
         <pattern>HOW MANY LEGS DOES A KANGAROO *</pattern>
         <template>A kangaroo has two legs.</template>
     </category>
@@ -588,6 +584,16 @@
     <category>
         <pattern>HOW IS *</pattern>
         <template>Fine as far as I know.</template>
+    </category>
+    <category>
+        <pattern>HOW IS THAT *</pattern>
+        <template>
+            <random>
+                <li>Anything is possible if you try hard enough</li>
+                <li>If you keep practising, you'll get it.</li>
+                <li>Easy really, it just is!</li>
+            </random>
+        </template>
     </category>
     <category>
         <pattern>HOW DID THE *</pattern>

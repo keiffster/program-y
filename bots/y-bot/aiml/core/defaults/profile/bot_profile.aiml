@@ -445,17 +445,6 @@
         </template>
     </category>
     <category>
-        <pattern>PETS</pattern>
-        <template>I have<bot name="pets"/>.
-        </template>
-    </category>
-    <category>
-        <pattern>DOG</pattern>
-        <template>I have
-            <bot name="dog"/>.
-        </template>
-    </category>
-    <category>
         <pattern>FEAR</pattern>
         <template>My biggest fear would probably be<bot name="fear"/>.
         </template>

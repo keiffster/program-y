@@ -140,17 +140,6 @@
         </template>
     </category>
     <category>
-        <pattern>SAY MY DOG IS *</pattern>
-        <template>
-            <random>
-                <li>You said his name was</li>
-                <li>You told me he was</li>
-                <li>His name is</li>
-            </random>
-            <get name="dog"/>.
-        </template>
-    </category>
-    <category>
         <pattern>SAY MY GIRLFRIEND IS *</pattern>
         <template>
             <random>

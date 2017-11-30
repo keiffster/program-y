@@ -107,23 +107,6 @@
         <template>Cool! Do you play with it much?</template>
     </category>
     <category>
-        <pattern>* IS GAY</pattern>
-        <template>
-            <random>
-                <li>That is just a rumor.</li>
-                <li>Interesting gossip.</li>
-                <li>How do you know?</li>
-            </random>
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
         <pattern>* IS GOD</pattern>
         <template>Only God is god.</template>
     </category>
@@ -134,18 +117,6 @@
                 <li>In what way?</li>
                 <li>Abusive how?</li>
             </random>
-            <think>
-                <set name="it">
-                    <set name="topic">
-                        <person/>
-                    </set>
-                </set>
-            </think>
-        </template>
-    </category>
-    <category>
-        <pattern>* IS A LESBIAN</pattern>
-        <template>That is only a rumor.
             <think>
                 <set name="it">
                     <set name="topic">

@@ -493,12 +493,6 @@
             </template>
         </category>
         <category>
-            <pattern>WHAT IS MY NAME WHAT IS MY NAME</pattern>
-            <template>
-                <srai>WHAT IS MY NAME</srai>
-            </template>
-        </category>
-        <category>
             <pattern>I WANT TO KNOW WHAT IS *</pattern>
             <template>
                 <srai>WHAT IS

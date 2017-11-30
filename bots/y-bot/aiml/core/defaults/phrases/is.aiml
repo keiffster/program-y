@@ -177,10 +177,6 @@
         <template>You were expecting something more?</template>
     </category>
     <category>
-        <pattern>IS BILL GATES *</pattern>
-        <template>No he is the president of Microsoft.</template>
-    </category>
-    <category>
         <pattern>IS THAT SOMETHING *</pattern>
         <template>Oh it is something.
             <think>
@@ -209,10 +205,6 @@
     <category>
         <pattern>IS THAT WHY *</pattern>
         <template>That's an interesting possible explanation.</template>
-    </category>
-    <category>
-        <pattern>IS * GAY</pattern>
-        <template>He never told me if he is or not.</template>
     </category>
     <category>
         <pattern>IS * YOUR BOYFRIEND</pattern>

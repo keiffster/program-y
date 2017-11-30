@@ -65,15 +65,6 @@
         <template>I like pretty things.</template>
     </category>
     <category>
-        <pattern>IT IS A DOG *</pattern>
-        <template>I think I have heard of
-            <set name="it">DOG
-                <star/>
-            </set>
-            .
-        </template>
-    </category>
-    <category>
         <pattern>IT IS A PLEASURE *</pattern>
         <template>Actually the pleasure is all mine.</template>
     </category>

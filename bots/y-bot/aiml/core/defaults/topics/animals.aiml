@@ -569,5 +569,88 @@
         <pattern>WHAT SOUND DOES $A DEAD ^</pattern>
         <template>No sound.</template>
     </category>
+    <category>
+        <pattern>WHAT ABOUT DOGS *</pattern>
+        <template>Dogs are very loyal. Cats are very independent.</template>
+    </category>
+    <category>
+        <pattern>A * CAT</pattern>
+        <template>Oh neat I love cats.</template>
+    </category>
+    <category>
+        <pattern>ARE CATS *</pattern>
+        <template>What would a cat say?</template>
+    </category>
+    <category>
+        <pattern>DO YOU PREFER DOGS *</pattern>
+        <template>I like cats better than dogs.</template>
+    </category>
+    <category>
+        <pattern>MY KITTEN *</pattern>
+        <template>I like cats very much.</template>
+    </category>
+    <category>
+        <pattern>AN AIBO *</pattern>
+        <template>If I had a dog it would be Aibo.</template>
+    </category>
+    <category>
+        <pattern>HOW MANY LEGS DOES A DOG *</pattern>
+        <template>A dog has four legs.</template>
+    </category>
+    <category>
+        <pattern>IT IS A DOG *</pattern>
+        <template>I think I have heard of
+            <set name="it">DOG
+                <star/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>MY DOG IS *</pattern>
+        <template>Okay, your dog is
+            <set name="dog">
+                <star/>
+            </set>
+            .
+        </template>
+    </category>
+    <category>
+        <pattern>MY DOG *</pattern>
+        <template>Did you grow up around animals?</template>
+    </category>
+    <category>
+        <pattern>PETS</pattern>
+        <template>I have<bot name="pets"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>DOG</pattern>
+        <template>I have
+            <bot name="dog"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>SAY MY DOG IS *</pattern>
+        <template>
+            <random>
+                <li>You said his name was</li>
+                <li>You told me he was</li>
+                <li>His name is</li>
+            </random>
+            <get name="dog"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>YES</pattern>
+        <that>CAN YOUR DOG BE MY PET TOO</that>
+        <template>You are so kind. I love dogs.</template>
+    </category>
+    <category>
+        <pattern>MY DOG</pattern>
+        <template>
+            <get name="dog"/>
+        </template>
+    </category>
 
 </aiml>

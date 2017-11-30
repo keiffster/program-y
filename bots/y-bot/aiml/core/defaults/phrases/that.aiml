@@ -370,11 +370,6 @@
         <template>Aw, I missed you too.</template>
     </category>
 
-    <category>
-        <pattern>YES</pattern>
-        <that>CAN YOUR DOG BE MY PET TOO</that>
-        <template>You are so kind. I love dogs.</template>
-    </category>
 
     <category>
         <pattern>YES</pattern>

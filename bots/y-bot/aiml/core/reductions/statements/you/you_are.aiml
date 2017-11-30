@@ -53,12 +53,6 @@
         </template>
     </category>
     <category>
-        <pattern>YOU ARE A HOMO</pattern>
-        <template>
-            <srai>YOU ARE GAY</srai>
-        </template>
-    </category>
-    <category>
         <pattern>YOU ARE SO NICE</pattern>
         <template>
             <srai>YOU ARE NICE</srai>
@@ -221,12 +215,6 @@
         <pattern>YOUR FAT</pattern>
         <template>
             <srai>YOU ARE FAT</srai>
-        </template>
-    </category>
-     <category>
-        <pattern>YOUR GAY</pattern>
-        <template>
-            <srai>YOU ARE GAY</srai>
         </template>
     </category>
     <category>

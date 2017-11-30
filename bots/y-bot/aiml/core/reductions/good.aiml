@@ -101,9 +101,46 @@
             <srai>GOOD</srai>
         </template>
     </category>
-
-
-
-
-
+    <category>
+        <pattern>INTERESTING</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>BRAVO</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUPER</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>SUPERB</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AMAZING</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>PERFECT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+        <category>
+        <pattern>EXCELLENT</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
 </aiml>

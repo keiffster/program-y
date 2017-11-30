@@ -64,19 +64,6 @@
         </template>
     </category>
     <category>
-        <pattern>MY DOG IS *</pattern>
-        <template>Okay, your dog is
-            <set name="dog">
-                <star/>
-            </set>
-            .
-        </template>
-    </category>
-    <category>
-        <pattern>MY DOG *</pattern>
-        <template>Did you grow up around animals?</template>
-    </category>
-    <category>
         <pattern>MY EMAIL *</pattern>
         <template>Do you file or delete your old emails?</template>
     </category>
@@ -488,10 +475,6 @@
                 </set>
             </think>
         </template>
-    </category>
-    <category>
-        <pattern>MY KITTEN *</pattern>
-        <template>I like cats very much.</template>
     </category>
     <category>
         <pattern>MY TEACHER *</pattern>

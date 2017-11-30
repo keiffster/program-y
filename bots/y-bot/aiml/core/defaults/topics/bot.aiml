@@ -644,6 +644,16 @@
         <template>Where do you want to go?</template>
     </category>
     <category>
+        <pattern>REALLY</pattern>
+        <template>
+            <random>
+                <li>Yes, really.</li>
+                <li>Of course it is</li>
+                <li>Yes, I am sure of it.</li>
+            </random>
+        </template>
+    </category>
+    <category>
         <pattern>WHY</pattern>
         <template>
             <random>

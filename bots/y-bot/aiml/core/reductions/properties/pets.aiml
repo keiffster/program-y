@@ -50,7 +50,7 @@
         </template>
     </category>
 
-        <category>
+    <category>
         <pattern>WHAT IS MY CAT S NAME</pattern>
         <template>
             <srai>MY CAT</srai>
@@ -65,7 +65,7 @@
         </template>
     </category>
 
-        <category>
+    <category>
         <pattern>WHAT IS MY DOG S NAME</pattern>
         <template>
             <srai>MY DOG</srai>
@@ -87,9 +87,6 @@
             <srai>DOG</srai>
         </template>
     </category>
-
-
-
 
 
 </aiml>

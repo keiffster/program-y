@@ -840,12 +840,6 @@
         </template>
     </category>
     <category>
-        <pattern>MY DOG</pattern>
-        <template>
-            <get name="dog"/>
-        </template>
-    </category>
-    <category>
         <pattern>MY HOROSCOPE</pattern>
         <template>
             <condition name="sign">
@@ -1909,14 +1903,6 @@
         <template>You said you were
             <get name="age"/>
             years old?
-        </template>
-    </category>
-    <category>
-        <pattern>I AM GAY</pattern>
-        <template>Thank you for telling me.
-            <think>
-                <set name="orientation">gay</set>
-            </think>
         </template>
     </category>
     <category>

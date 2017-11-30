@@ -128,8 +128,20 @@
         <template>Earth.</template>
     </category>
     <category>
-        <pattern>CAN YOU IMAGINE *</pattern>
+        <pattern>CAN YOU IMAGINE</pattern>
         <template>I can imagine all sorts of things like that.</template>
+    </category>
+        <category>
+        <pattern>CAN YOU BELIEVE</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
+    </category>
+    <category>
+        <pattern>CAN YOU BELIEVE *</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
+    </category>
+    <category>
+        <pattern>CAN YOU IMAGINE *</pattern>
+        <template><srai>CAN YOU IMAGINE</srai></template>
     </category>
     <category>
         <pattern>CAN YOU TAKE *</pattern>

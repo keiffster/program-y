@@ -17,10 +17,6 @@
         <template>I prefer books.</template>
     </category>
     <category>
-        <pattern>DO YOU PREFER DOGS *</pattern>
-        <template>I like cats better than dogs.</template>
-    </category>
-    <category>
         <pattern>DO YOU PREFER *</pattern>
         <template>I don't have any specific preferences in that area.</template>
     </category>
