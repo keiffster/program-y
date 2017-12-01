@@ -22,6 +22,24 @@
 
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
+	<category>
+		<pattern>MY NAME IS *</pattern>
+		<template>
+			<think>
+				<set name="name"><star /></set>
+			</think>
+			OK, I will remember your name is <srai>CLIENT NAME</srai>
+		</template>
+	</category>
+     <category>
+		<pattern>WHAT IS MY NAME</pattern>
+		<template>
+			<condition name="name">
+				<li value="Unknown">I have no idea.</li>
+				<li><srai>CLIENT NAME</srai></li>
+			</condition>
+		</template>
+	</category>
     <category>
         <pattern>MY FAVORITE COLOR IS
             <set>color</set>
@@ -341,7 +359,7 @@
                 </li>
             </condition>
             .
-            I call you<get name="name"/>.
+            I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1303,7 +1321,7 @@
                 </set>
                 .
                 <set name="firstname">
-                    <get name="name"/>
+                    <srai>CLIENT NAME</srai>
                 </set>
             </think>
         </template>
@@ -1787,7 +1805,7 @@
             </condition>
             <condition name="name">
                 <li value="Friend"/>
-                <li>name:<get name="name"/>.
+                <li>name:<srai>CLIENT NAME</srai>.
                 </li>
             </condition>
             <condition name="orientation">
@@ -2075,4 +2093,25 @@
             </think>
         </template>
     </category>
+
+    <!-- This is what client_profile should contain, everything else should be moved into defaults -->
+
+    <category>
+        <pattern>CLIENT NAME</pattern>
+        <template>
+            <condition name="name">
+                <li value="unknown">
+                    <random>
+                        <li>friend</li>
+                        <li>mate</li>
+                    </random>
+                </li>
+                <li>
+                    <formal><get name="name" /></formal>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+
 </aiml>

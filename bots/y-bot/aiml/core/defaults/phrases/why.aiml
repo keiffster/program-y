@@ -27,7 +27,7 @@
     </category>
     <category>
         <pattern>WHY CAN NOT WE TALK *</pattern>
-        <template>I would rather talk about you,<get name="name"/>.
+        <template>I would rather talk about you,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -527,7 +527,7 @@
     <category>
         <pattern>WHY DID YOU CALL ME *</pattern>
         <template>Your name is
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             right?
         </template>
     </category>

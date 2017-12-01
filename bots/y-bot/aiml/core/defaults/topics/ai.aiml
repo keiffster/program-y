@@ -36,7 +36,7 @@
     </category>
     <category>
         <pattern>ACTIVATE THE ROBOT</pattern>
-        <template>Robot activated. Awaiting your command<get name="name"/>.
+        <template>Robot activated. Awaiting your command<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

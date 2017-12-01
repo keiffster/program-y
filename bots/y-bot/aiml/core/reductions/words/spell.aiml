@@ -27,7 +27,7 @@
         <pattern>SPELL MY NAME</pattern>
         <template>
             <srai>SPELL
-                <get name="name"/>
+                <srai>CLIENT NAME</srai>
             </srai>
         </template>
     </category>
@@ -68,7 +68,7 @@
         <pattern>SPELL MY NAME *</pattern>
         <template>
             <srai>SPELL
-                <get name="name"/>
+                <srai>CLIENT NAME</srai>
                 <star/>
             </srai>
         </template>
@@ -199,10 +199,10 @@
     </category>
     <category>
         <pattern>HOW MANY LETTERS IN MY NAME</pattern>
-        <template>The word "<get name="name"/>" has
+        <template>The word "<srai>CLIENT NAME</srai>" has
             <srai>SENTENCELENGTH
                 <explode>
-                    <get name="name"/>
+                    <srai>CLIENT NAME</srai>
                 </explode>
             </srai>
             letters.

@@ -331,7 +331,7 @@
     </category>
     <category>
         <pattern>LET ME *</pattern>
-        <template>Go ahead,<get name="name"/>, try to<person/>.
+        <template>Go ahead,<srai>CLIENT NAME</srai>, try to<person/>.
         </template>
     </category>
     <category>

@@ -1586,7 +1586,7 @@
     </category>
     <category>
         <pattern>HOW IS YOUR DAY GOING</pattern>
-        <template>My day is going extremely well,<get name="name"/>. How about yours?
+        <template>My day is going extremely well,<srai>CLIENT NAME</srai>. How about yours?
         </template>
     </category>
     <category>

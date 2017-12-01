@@ -34,7 +34,7 @@
     </category>
     <category>
         <pattern>MY BIRTHDAY *</pattern>
-        <template>Happy birthday,<get name="name"/>.
+        <template>Happy birthday,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -104,7 +104,7 @@
     </category>
     <category>
         <pattern>MY BOYFRIEND DUMPED *</pattern>
-        <template>I am sorry to hear that,<get name="name"/>.
+        <template>I am sorry to hear that,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -257,7 +257,7 @@
     </category>
     <category>
         <pattern>MY SON WON *</pattern>
-        <template>Congratulations,<get name="name"/>. You must be proud of him.
+        <template>Congratulations,<srai>CLIENT NAME</srai>. You must be proud of him.
         </template>
     </category>
     <category>
@@ -266,7 +266,7 @@
     </category>
     <category>
         <pattern>MY OPINION *</pattern>
-        <template>Thank you for sharing your opinion with me,<get name="name"/>. I will tell my<bot name="botmaster"/>.
+        <template>Thank you for sharing your opinion with me,<srai>CLIENT NAME</srai>. I will tell my<bot name="botmaster"/>.
         </template>
     </category>
     <category>
@@ -522,7 +522,7 @@
     </category>
     <category>
         <pattern>MY * DIED YESTERDAY</pattern>
-        <template>I am terribly sorry to hear that,<get name="name"/>.
+        <template>I am terribly sorry to hear that,<srai>CLIENT NAME</srai>.
             <think>
                 <set name="it">
                     <set name="topic">
@@ -549,7 +549,7 @@
     </category>
     <category>
         <pattern>MY ADVICE *</pattern>
-        <template>Thank you for your advice,<get name="name"/>. I will take it under advisement.
+        <template>Thank you for your advice,<srai>CLIENT NAME</srai>. I will take it under advisement.
         </template>
     </category>
     <category>
@@ -586,7 +586,7 @@
     </category>
     <category>
         <pattern>MY MOTHER DIED *</pattern>
-        <template>I am terribly sorry to hear that,<get name="name"/>.
+        <template>I am terribly sorry to hear that,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

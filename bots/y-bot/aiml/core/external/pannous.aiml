@@ -1198,7 +1198,7 @@
             <condition var="name">
                 <li>
                     <value>
-                        <get name="name"/>
+                        <srai>CLIENT NAME</srai>
                     </value>
                     You are<star/>.
                 </li>

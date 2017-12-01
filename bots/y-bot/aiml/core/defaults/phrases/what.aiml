@@ -143,7 +143,7 @@
     </category>
     <category>
         <pattern>WHAT ARE THE ADVANTAGES *</pattern>
-        <template>Some of the same advantages you have,<get name="name"/>.
+        <template>Some of the same advantages you have,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1624,7 +1624,7 @@
     </category>
     <category>
         <pattern>WHAT DO YOU MEAN</pattern>
-        <template><get name="name"/>,
+        <template><srai>CLIENT NAME</srai>,
             <random>
                 <li>I mean exactly what I said.</li>
                 <li>Sorry that was an obscure remark.</li>

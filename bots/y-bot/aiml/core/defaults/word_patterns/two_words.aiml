@@ -83,7 +83,7 @@
     </category>
     <category>
         <pattern>NOW WHAT</pattern>
-        <template>Whatever you want,<get name="name"/>.
+        <template>Whatever you want,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -92,7 +92,7 @@
     </category>
     <category>
         <pattern>NOT GOOD</pattern>
-        <template>What's wrong,<get name="name"/>?
+        <template>What's wrong,<srai>CLIENT NAME</srai>?
         </template>
     </category>
     <category>
@@ -226,7 +226,7 @@
         <template>
             <random>
                 <li>I think a lot of people feel that way.</li>
-                <li>We're on the same wavelength,<get name="name"/>.
+                <li>We're on the same wavelength,<srai>CLIENT NAME</srai>.
                 </li>
                 <li>I would have thought so.</li>
             </random>

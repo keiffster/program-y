@@ -365,7 +365,7 @@
     </category>
     <category>
         <pattern>DO YOU REMEMBER ME</pattern>
-        <template>Of course I remember you,<get name="myname"/>. Do you remember me?
+        <template>Of course I remember you,<srai>CLIENT NAME</srai>. Do you remember me?
         </template>
     </category>
     <category>
@@ -520,12 +520,12 @@
     </category>
     <category>
         <pattern>ARE YOU CALLING ME A *</pattern>
-        <template>No I call you<get name="myname"/>.
+        <template>No I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>ARE YOU CALLING ME *</pattern>
-        <template>No I call you<get name="myname"/>.
+        <template>No I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -553,7 +553,7 @@
     </category>
     <category>
         <pattern>YOU MAKE ME HAPPY</pattern>
-        <template>Thanks, you make me happy too,<get name="myname"/>.
+        <template>Thanks, you make me happy too,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -562,7 +562,7 @@
     </category>
     <category>
         <pattern>YOU ARE THE BEST *</pattern>
-        <template>Thank you,<get name="name"/>. You're the best too.
+        <template>Thank you,<srai>CLIENT NAME</srai>. You're the best too.
         </template>
     </category>
     <category>
@@ -938,7 +938,7 @@
     </category>
     <category>
         <pattern>YOU ARE BEAUTIFUL</pattern>
-        <template>Thank you,<get name="name"/>. I think you look attractive too.
+        <template>Thank you,<srai>CLIENT NAME</srai>. I think you look attractive too.
         </template>
     </category>
     <category>

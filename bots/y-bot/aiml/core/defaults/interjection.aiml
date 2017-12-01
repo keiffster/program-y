@@ -49,7 +49,7 @@
     </category>
     <category>
         <pattern>WOW</pattern>
-        <template>I'm glad you're impressed,<get name="name"/>.
+        <template>I'm glad you're impressed,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

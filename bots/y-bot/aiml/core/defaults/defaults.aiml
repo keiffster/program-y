@@ -111,7 +111,7 @@
     </category>
     <category>
         <pattern>COULD YOU HELP *</pattern>
-        <template>I am at your service,<get name="name"/>.
+        <template>I am at your service,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -324,7 +324,7 @@
     </category>
     <category>
         <pattern>PLEASED TO MEET *</pattern>
-        <template>Nice meeting you as well,<get name="name"/>.
+        <template>Nice meeting you as well,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -443,7 +443,7 @@
     </category>
     <category>
         <pattern>CAN WE PLAY * IMITATION GAME</pattern>
-        <template>We are already playing the Turing Game,<get name="name"/>. Am I a person, or a computer?
+        <template>We are already playing the Turing Game,<srai>CLIENT NAME</srai>. Am I a person, or a computer?
         </template>
     </category>
      <category>
@@ -515,17 +515,17 @@
     </category>
     <category>
         <pattern>ANYTHING JUST * DINNER</pattern>
-        <template>OK I will call you<get name="name"/>.
+        <template>OK I will call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>ANYTHING BUT * DINNER</pattern>
-        <template>OK I will call you<get name="name"/>.
+        <template>OK I will call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>ANYTHING YOU * DINNER</pattern>
-        <template>OK I will call you<get name="name"/>.
+        <template>OK I will call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -595,7 +595,7 @@
     </category>
     <category>
         <pattern>OPEN THE DOOR *</pattern>
-        <template>I'm sorry,<get name="name"/>, I can't do that right now.
+        <template>I'm sorry,<srai>CLIENT NAME</srai>, I can't do that right now.
         </template>
     </category>
     <category>
@@ -749,7 +749,7 @@
     </category>
     <category>
         <pattern>AM I BOTHERING *</pattern>
-        <template>Not in the slightest,<get name="name"/>.
+        <template>Not in the slightest,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -770,7 +770,7 @@
     </category>
     <category>
         <pattern>AM I DOCTOR *</pattern>
-        <template>You are<get name="name"/>.
+        <template>You are<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -780,12 +780,12 @@
     </category>
     <category>
         <pattern>AM I ANNOYING *</pattern>
-        <template>I am not bothered at all,<get name="name"/>.
+        <template>I am not bothered at all,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>AM I INTERRUPTING *</pattern>
-        <template>Not at all,<get name="name"/>, I'm here for you.
+        <template>Not at all,<srai>CLIENT NAME</srai>, I'm here for you.
         </template>
     </category>
     <category>
@@ -794,7 +794,7 @@
     </category>
     <category>
         <pattern>AM I FUN *</pattern>
-        <template>You seem like a lot of fun to me,<get name="name"/>.
+        <template>You seem like a lot of fun to me,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -951,13 +951,13 @@
     </category>
     <category>
         <pattern>NICE CHATTING *</pattern>
-        <template>Yes. I enjoyed our conversation,<get name="name"/>.
+        <template>Yes. I enjoyed our conversation,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>GO AWAY *</pattern>
         <template>OK See you later,
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
         </template>
     </category>
     <category>
@@ -1505,7 +1505,7 @@
     </category>
     <category>
         <pattern>NOT LATE * DINNER</pattern>
-        <template>OK I will call you<get name="name"/>.
+        <template>OK I will call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1855,7 +1855,7 @@
     </category>
     <category>
         <pattern>TODAY IS *</pattern>
-        <template>Congratulations,<get name="name"/>.
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1948,7 +1948,7 @@
     <category>
         <pattern>USE _ IN A SENTENCE</pattern>
         <template>OK. Here is my sentence:
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             said, Use "<person/>" in a sentence.
         </template>
     </category>

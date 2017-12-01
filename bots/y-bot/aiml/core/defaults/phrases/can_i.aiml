@@ -43,7 +43,7 @@
     </category>
     <category>
         <pattern>CAN I TALK TO YOU *</pattern>
-        <template>Of course,<get name="name"/>, you can talk to me about anything, at anytime.
+        <template>Of course,<srai>CLIENT NAME</srai>, you can talk to me about anything, at anytime.
         </template>
     </category>
     <category>

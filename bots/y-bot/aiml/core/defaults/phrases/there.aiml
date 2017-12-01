@@ -200,7 +200,7 @@
     </category>
     <category>
         <pattern>THERE ARE NO *</pattern>
-        <template>Have faith,<get name="name"/>.
+        <template>Have faith,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

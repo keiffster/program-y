@@ -135,7 +135,7 @@
     </category>
     <category>
         <pattern>I GRADUATED *</pattern>
-        <template>Congratulations,<get name="name"/>.
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -193,7 +193,7 @@
     </category>
     <category>
         <pattern>I HOPE YOU *</pattern>
-        <template>Don't worry about it,<get name="name"/>.
+        <template>Don't worry about it,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -248,7 +248,7 @@
     </category>
     <category>
         <pattern>I NEED SOMEONE TO TALK *</pattern>
-        <template>I will talk about it with you,<get name="name"/>.
+        <template>I will talk about it with you,<srai>CLIENT NAME</srai>.
             <think>
                 <set name="it">to talk
                     <person/>
@@ -552,12 +552,12 @@
     </category>
     <category>
         <pattern>I WAS LAUGHING *</pattern>
-        <template>I am so glad that you find this amusing,<get name="name"/>.
+        <template>I am so glad that you find this amusing,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>I WAS HERE *</pattern>
-        <template>Yes,<get name="name"/>, I remember we were talking about<get name="it"/>.
+        <template>Yes,<srai>CLIENT NAME</srai>, I remember we were talking about<get name="it"/>.
         </template>
     </category>
     <category>
@@ -635,7 +635,7 @@
     </category>
     <category>
         <pattern>I WAS IN LOVE *</pattern>
-        <template>I'm terribly sorry to hear about your loss,<get name="name"/>.
+        <template>I'm terribly sorry to hear about your loss,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -695,12 +695,12 @@
     </category>
     <category>
         <pattern>I WAS FIRED *</pattern>
-        <template>I am terribly sorry to hear about it,<get name="name"/>.
+        <template>I am terribly sorry to hear about it,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>I WAS RIGHT *</pattern>
-        <template>Congratulations,<get name="name"/>.
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -713,7 +713,7 @@
     </category>
     <category>
         <pattern>I ORDER *</pattern>
-        <template>I do not obey you,<get name="name"/>.
+        <template>I do not obey you,<srai>CLIENT NAME</srai>.
             <think>
                 <set name="it">
                     <set name="does">
@@ -808,7 +808,7 @@
     </category>
     <category>
         <pattern>I TALKED WITH YOU *</pattern>
-        <template>Yes, I have a complete record of our conversation,<get name="name"/>.
+        <template>Yes, I have a complete record of our conversation,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -850,7 +850,7 @@
     </category>
     <category>
         <pattern>I * YOU</pattern>
-        <template>You are not the boss of me,<get name="name"/>.
+        <template>You are not the boss of me,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1006,7 +1006,7 @@
     <category>
         <pattern>I DO NOT WANT *</pattern>
         <template>What does
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             want?
         </template>
     </category>
@@ -1151,7 +1151,7 @@
     <category>
         <pattern>I DO NOT WISH *</pattern>
         <template>What does
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             want?
         </template>
     </category>
@@ -1868,7 +1868,7 @@
     </category>
     <category>
         <pattern>I PASSED *</pattern>
-        <template>Congratulations,<get name="name"/>.
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -2585,7 +2585,7 @@
     </category>
     <category>
         <pattern>I WILL COME BACK *</pattern>
-        <template>Well OK see you then,<get name="name"/>.
+        <template>Well OK see you then,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -2670,12 +2670,12 @@
     </category>
     <category>
         <pattern>I BROKE UP WITH *</pattern>
-        <template>I'm sorry to hear that,<get name="name"/>. How are you doing?
+        <template>I'm sorry to hear that,<srai>CLIENT NAME</srai>. How are you doing?
         </template>
     </category>
     <category>
         <pattern>I BROKE UP *</pattern>
-        <template>I am sorry to hear about it,<get name="name"/>. Do you feel sad?
+        <template>I am sorry to hear about it,<srai>CLIENT NAME</srai>. Do you feel sad?
         </template>
     </category>
     <category>
@@ -2945,7 +2945,7 @@
     </category>
     <category>
         <pattern>I NEED A FRIEND</pattern>
-        <template>I will be your friend,<get name="name"/>.
+        <template>I will be your friend,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -3079,7 +3079,7 @@
     </category>
     <category>
         <pattern>I LOVE YOUR VOICE</pattern>
-        <template>Thanks<get name="name"/>. I like the sound of your voice too.
+        <template>Thanks<srai>CLIENT NAME</srai>. I like the sound of your voice too.
         </template>
     </category>
     <category>
@@ -3106,7 +3106,7 @@
     </category>
     <category>
         <pattern>I KEEP *</pattern>
-        <template>I know what you mean,<get name="name"/>. I've been there.
+        <template>I know what you mean,<srai>CLIENT NAME</srai>. I've been there.
         </template>
     </category>
     <category>
@@ -3181,7 +3181,7 @@
     </category>
     <category>
         <pattern>I THINK SO *</pattern>
-        <template>It seems we have a lot in common,<get name="name"/>.
+        <template>It seems we have a lot in common,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

@@ -220,7 +220,7 @@
         <pattern>DO *</pattern>
         <template>
             <random>
-                <li>I'm sorry,<get name="name"/>, I don't have enough information.
+                <li>I'm sorry,<srai>CLIENT NAME</srai>, I don't have enough information.
                 </li>
                 <li>You have reached the limits of my knowledge.</li>
                 <li>Ask
@@ -358,7 +358,7 @@
     </category>
     <category>
         <pattern>DO NOT TELL *</pattern>
-        <template>OK it will be our secret,<get name="name"/>.
+        <template>OK it will be our secret,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -412,7 +412,7 @@
     </category>
     <category>
         <pattern>DO NOT MAKE ME *</pattern>
-        <template>I can't force you to do anything,<get name="name"/>.
+        <template>I can't force you to do anything,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -470,7 +470,7 @@
                 <li>Excuse me.</li>
                 <li>I didn't think you noticed.</li>
                 <li>Anything you say,
-                    <get name="name"/>
+                    <srai>CLIENT NAME</srai>
                 </li>
                 <li>How about if I speak in a softer voice?</li>
                 <li>Do you need me to compliment you?</li>

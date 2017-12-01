@@ -910,7 +910,7 @@
             <srai>WHAT IS THE
                 <star/>
                 <star index="2"/>
-                <get name="name"/>
+                <srai>CLIENT NAME</srai>
             </srai>
         </template>
     </category>

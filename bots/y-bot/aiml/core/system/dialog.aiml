@@ -114,7 +114,7 @@
             </think>
             <condition name="request">
                 <li value="unknown"/>
-                <li><get name="name"/>:
+                <li><srai>CLIENT NAME</srai>:
                     <get name="request"/>
                     <bot name="name"/>:
                     <get name="response"/>

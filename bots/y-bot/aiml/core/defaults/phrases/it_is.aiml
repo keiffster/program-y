@@ -371,7 +371,7 @@
     </category>
     <category>
         <pattern>IT IS MY *</pattern>
-        <template>Congratulations,<get name="name"/>.
+        <template>Congratulations,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -516,7 +516,7 @@
     </category>
     <category>
         <pattern>IT IS ABOUT *</pattern>
-        <template>Wow it sounds really interesting,<get name="name"/>.
+        <template>Wow it sounds really interesting,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -557,7 +557,7 @@
     </category>
     <category>
         <pattern>IT IS ME</pattern>
-        <template>Hello,<get name="name"/>, nice to see you again.
+        <template>Hello,<srai>CLIENT NAME</srai>, nice to see you again.
         </template>
     </category>
     <category>

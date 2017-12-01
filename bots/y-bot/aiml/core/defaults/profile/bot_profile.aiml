@@ -375,9 +375,6 @@
         </template>
     </category>
 
-
-
-
     <!-- Personal -->
     <category>
         <pattern>LANGUAGE</pattern>
@@ -477,12 +474,6 @@
     <category>
         <pattern>EMOTIONS</pattern>
         <template>I feel a great sense of<bot name="emotions"/>.
-        </template>
-    </category>
-    <category>
-        <pattern>FEELINGS</pattern>
-        <template>
-            <srai>EMOTIONS</srai>
         </template>
     </category>
     <category>
@@ -623,145 +614,6 @@
             </random>
         </template>
     </category>
-
-    <!-- Recursive categories -->
-    <category>
-        <pattern>STATE YOUR
-            <set>profile</set>
-        </pattern>
-        <template>
-            <srai>
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>AUNT</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>BESTFRIEND</pattern>
-        <template>
-            <srai>FRIENDS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>BOSS</pattern>
-        <template>
-            <srai>BOTMASTER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>BOYFRIEND</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>BROTHER</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>CAT</pattern>
-        <template>
-            <srai>PETS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>DAUGHTER</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FRIEND</pattern>
-        <template>
-            <srai>FRIENDS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GIRLFRIEND</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GRANDFATHER</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>GRANDMOTHER</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>HUSBAND</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>NEPHEW</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>NIECE</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SISTER</pattern>
-        <template>
-            <srai>SIBLINGS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>SON</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>TEACHER</pattern>
-        <template>
-            <srai>BOTMASTER</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>UNCLE</pattern>
-        <template>
-            <srai>FAMILY</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WIFE</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>FOR FUN</pattern>
-        <template>
-            <srai>HOBBIES</srai>
-        </template>
-    </category>
-    <category>
-        <pattern>INTEREST</pattern>
-        <template>
-            <bot name="interest"/>.
-        </template>
-    </category>
-
     <category>
         <pattern>LATTITUDE</pattern>
         <template>I am <bot name="lattitude"/>.
@@ -772,40 +624,26 @@
         <template>You can email me at <bot name="email"/>.
         </template>
     </category>
-
     <category>
         <pattern>ORGANIZATION</pattern>
         <template><bot name="organization"/>.
         </template>
     </category>
-
-
     <category>
         <pattern>TOWN</pattern>
         <template><bot name="town"/>.
         </template>
     </category>
-
-     <category>
-        <pattern>MARITAL STATUS</pattern>
-        <template>
-            <srai>STATUS</srai>
-        </template>
-    </category>
-
     <category>
         <pattern>PHONE NUMBER</pattern>
         <template>
             You can call me on <bot name="phone-number"/>.
         </template>
     </category>
-
     <category>
         <pattern>CLOTHING</pattern>
         <template>
             I am currently wearing <bot name="clothing"/>.
         </template>
     </category>
-
-
 </aiml>

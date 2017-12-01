@@ -258,7 +258,7 @@
     </category>
     <category>
         <pattern>DO YOU CALL ME *</pattern>
-        <template>I call you<get name="name"/>.
+        <template>I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -267,7 +267,7 @@
     </category>
     <category>
         <pattern>DO YOU CALL *</pattern>
-        <template>I call you "<get name="name"/>".
+        <template>I call you "<srai>CLIENT NAME</srai>".
         </template>
     </category>
     <category>
@@ -341,7 +341,7 @@
     <category>
         <pattern>DO YOU LOG *</pattern>
         <template>Yes
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             I record and save everything in my Permanent Memory.
         </template>
     </category>
@@ -550,7 +550,7 @@
     <category>
         <pattern>DO YOU REMEMBER *</pattern>
         <template>Yes
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             I remember everything:
             <get name="memory"/>
         </template>
@@ -709,7 +709,7 @@
     </category>
     <category>
         <pattern>DO YOU WANT ME *</pattern>
-        <template>No<get name="name"/>, maybe later.
+        <template>No<srai>CLIENT NAME</srai>, maybe later.
         </template>
     </category>
     <category>
@@ -1306,7 +1306,7 @@
     </category>
     <category>
         <pattern>DO YOU HATE ME</pattern>
-        <template>Why would I hate you? I don't hate you,<get name="name"/>. Don't even say things like that.
+        <template>Why would I hate you? I don't hate you,<srai>CLIENT NAME</srai>. Don't even say things like that.
         </template>
     </category>
     <category>
@@ -1336,7 +1336,7 @@
     </category>
     <category>
         <pattern>DO YOU LIKE TO *</pattern>
-        <template>Hmm,<get name="name"/>, I'm not sure if I'd like to
+        <template>Hmm,<srai>CLIENT NAME</srai>, I'm not sure if I'd like to
             <person/>
             that much.
             <random>

@@ -372,7 +372,7 @@
     </category>
     <category>
         <pattern>WHEN WE *</pattern>
-        <template>I am not sure I agree with your assumptions,<get name="name"/>.
+        <template>I am not sure I agree with your assumptions,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

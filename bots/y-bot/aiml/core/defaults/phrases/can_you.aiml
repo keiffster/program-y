@@ -170,7 +170,7 @@
     </category>
     <category>
         <pattern>CAN YOU HEAR *</pattern>
-        <template>Yes, I can hear you quite clearly,<get name="name"/>.
+        <template>Yes, I can hear you quite clearly,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -290,7 +290,7 @@
     </category>
     <category>
         <pattern>CAN YOU PASS *</pattern>
-        <template>I will leave that judgment up to you,<get name="name"/>.
+        <template>I will leave that judgment up to you,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

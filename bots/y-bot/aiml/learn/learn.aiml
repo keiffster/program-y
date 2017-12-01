@@ -22,26 +22,6 @@
     <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
 
 	<category>
-		<pattern>WHAT IS MY NAME</pattern>
-		<template>
-			<condition name="myname">
-				<li value="Unknown">I have no idea.</li>
-				<li><get name="myname" /></li>
-			</condition>
-		</template>
-	</category>
-
-	<category>
-		<pattern>MY NAME IS *</pattern>
-		<template>
-			<think>
-				<set name="myname"><star /></set>
-			</think>
-			OK, I will remember your name is <get name="myname" />
-		</template>
-	</category>
-
-	<category>
 		<pattern>LEARN * IS *</pattern>
 		<template>
 			<think>

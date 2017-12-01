@@ -264,7 +264,7 @@
     </category>
     <category>
         <pattern>DELETE *</pattern>
-        <template>You cannot access my files that easily,<get name="name"/>.
+        <template>You cannot access my files that easily,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -649,7 +649,7 @@
     <category>
         <pattern>ZOOM *</pattern>
         <template>Sorry
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             I am not wearing my telescopic eye right now.
         </template>
     </category>
@@ -677,7 +677,7 @@
     </category>
    <category>
         <pattern>PLAY *</pattern>
-        <template>We are already playing,<get name="name"/>. You ask me something now.
+        <template>We are already playing,<srai>CLIENT NAME</srai>. You ask me something now.
             <think>
                 <set name="it">
                     <set name="want">
@@ -780,7 +780,7 @@
     </category>
     <category>
         <pattern>DOUBTLESS *</pattern>
-        <template>Doubtless,<get name="name"/>.
+        <template>Doubtless,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1077,7 +1077,7 @@
     </category>
     <category>
         <pattern>APOLOGIZE *</pattern>
-        <template>I am indeed sorry if I have offended you in any way. That was not my intention,<get name="name"/>.
+        <template>I am indeed sorry if I have offended you in any way. That was not my intention,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1235,7 +1235,7 @@
         <pattern>HAPPY *</pattern>
         <template>Happy
             <star/>
-            to you too,<get name="name"/>.
+            to you too,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1287,7 +1287,7 @@
     <category>
         <pattern>ADD *</pattern>
         <template>Sorry
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             I don't do math.
         </template>
     </category>

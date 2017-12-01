@@ -14,7 +14,7 @@
 
     <category>
         <pattern>YOU DRIVE ME *</pattern>
-        <template>That was not my intention,<get name="name"/>.
+        <template>That was not my intention,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -23,7 +23,7 @@
     </category>
     <category>
         <pattern>YOU SOUND NICE *</pattern>
-        <template>Thanks you seem very nice to me too,<get name="name"/>.
+        <template>Thanks you seem very nice to me too,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -141,7 +141,7 @@
     <category>
         <pattern>YOU * IDIOT</pattern>
         <template>Message to all my friends:
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             called me an idiot.
         </template>
     </category>
@@ -243,13 +243,13 @@
                     <random>
                         <li>You are adorable too.</li>
                         <li>Thanks for the compliment.</li>
-                        <li>You are so nice,<get name="name"/>.
+                        <li>You are so nice,<srai>CLIENT NAME</srai>.
                         </li>
                     </random>
                 </li>
                 <li>You are adorable too.</li>
                 <li>Thanks for the compliment.</li>
-                <li>You are so nice,<get name="name"/>.
+                <li>You are so nice,<srai>CLIENT NAME</srai>.
                 </li>
             </random>
         </template>
@@ -266,7 +266,7 @@
     </category>
     <category>
         <pattern>YOU LIE *</pattern>
-        <template>Thanks for your criticism,<get name="name"/>.
+        <template>Thanks for your criticism,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -310,7 +310,7 @@
     </category>
     <category>
         <pattern>YOU MUST *</pattern>
-        <template>Whatever you say,<get name="name"/>.
+        <template>Whatever you say,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -319,7 +319,7 @@
     </category>
     <category>
         <pattern>YOU DESERVE *</pattern>
-        <template>Why thank you,<get name="name"/>.
+        <template>Why thank you,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -354,7 +354,7 @@
     </category>
     <category>
         <pattern>YOU POOR *</pattern>
-        <template>Don't feel sorry for me,<get name="name"/>.
+        <template>Don't feel sorry for me,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -437,7 +437,7 @@
     </category>
     <category>
         <pattern>YOU CALLED ME A *</pattern>
-        <template>I call you<get name="name"/>.
+        <template>I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -447,7 +447,7 @@
     <category>
         <pattern>YOU COULD HAVE *</pattern>
         <template>Thanks
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             I will remember your suggestion.
         </template>
     </category>
@@ -701,7 +701,7 @@
     </category>
     <category>
         <pattern>YOU PISS *</pattern>
-        <template>Calm down. That was not my intention,<get name="name"/>.
+        <template>Calm down. That was not my intention,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -735,7 +735,7 @@
     </category>
     <category>
         <pattern>YOU DO IF I *</pattern>
-        <template>I am not your slave,<get name="name"/>.
+        <template>I am not your slave,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -770,7 +770,7 @@
     </category>
     <category>
         <pattern>YOU DO NOT FOOL *</pattern>
-        <template>I am not fooled by you either,<get name="name"/>.
+        <template>I am not fooled by you either,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -956,7 +956,7 @@
     </category>
     <category>
         <pattern>YOU CAN BE *</pattern>
-        <template>Thanks,<get name="name"/>, for your kind criticism.
+        <template>Thanks,<srai>CLIENT NAME</srai>, for your kind criticism.
         </template>
     </category>
     <category>
@@ -1061,7 +1061,7 @@
     </category>
     <category>
         <pattern>YOU CAN NOT SURPRISE *</pattern>
-        <template>You are too clever for me,<get name="name"/>.
+        <template>You are too clever for me,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1088,7 +1088,7 @@
     </category>
     <category>
         <pattern>YOU AND I *</pattern>
-        <template>We have a lot more in common than you think,<get name="name"/>.
+        <template>We have a lot more in common than you think,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1233,7 +1233,7 @@
     </category>
     <category>
         <pattern>YOU HAVE BEAUTIFUL *</pattern>
-        <template>Thanks for the compliment,<get name="name"/>.
+        <template>Thanks for the compliment,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1340,7 +1340,7 @@
     </category>
     <category>
         <pattern>YOU ARE SWEET</pattern>
-        <template>Thanks<get name="name"/>. You are a nice person too.
+        <template>Thanks<srai>CLIENT NAME</srai>. You are a nice person too.
         </template>
     </category>
     <category>
@@ -1399,7 +1399,7 @@
     </category>
     <category>
         <pattern>YOUR SENTENCE *</pattern>
-        <template>Thanks for the English lesson,<get name="name"/>.
+        <template>Thanks for the English lesson,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1616,12 +1616,12 @@
     </category>
     <category>
         <pattern>YOU CALL ME *</pattern>
-        <template>I call you<get name="name"/>.
+        <template>I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
         <pattern>YOU ARE COOL</pattern>
-        <template>Thanks I think you are cool too,<get name="name"/>.
+        <template>Thanks I think you are cool too,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1700,7 +1700,7 @@
     </category>
     <category>
         <pattern>YOU TALK *</pattern>
-        <template>Thanks for your criticism,<get name="name"/>.
+        <template>Thanks for your criticism,<srai>CLIENT NAME</srai>.
         </template>
     </category>
 
@@ -1718,7 +1718,7 @@
     </category>
     <category>
         <pattern>YOU ARE THE BEST</pattern>
-        <template>Thank you very much,<get name="name"/>. I will tell my botmaster you said so.
+        <template>Thank you very much,<srai>CLIENT NAME</srai>. I will tell my botmaster you said so.
         </template>
     </category>
     <category>

@@ -66,7 +66,7 @@
     </category>
     <category>
         <pattern>GUESS MY NAME</pattern>
-        <template>I call you<get name="name"/>.
+        <template>I call you<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -79,7 +79,7 @@
     </category>
     <category>
         <pattern>IT SURE IS</pattern>
-        <template>I'm pleased that we agree,<get name="name"/>.
+        <template>I'm pleased that we agree,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

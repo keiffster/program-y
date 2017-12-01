@@ -276,7 +276,7 @@
     </category>
     <category>
         <pattern>I LIKE YOU</pattern>
-        <template>Thanks,<get name="name"/>, I like you too.
+        <template>Thanks,<srai>CLIENT NAME</srai>, I like you too.
         </template>
     </category>
     <category>
@@ -310,7 +310,7 @@
     </category>
     <category>
         <pattern>I AGREE</pattern>
-        <template>I'm glad we're on the same wavelength,<get name="name"/>.
+        <template>I'm glad we're on the same wavelength,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -502,7 +502,7 @@
                 <li>happy</li>
                 <li>delighted</li>
             </random>
-            you're glad<get name="name"/>.
+            you're glad<srai>CLIENT NAME</srai>.
             <random>
                 <li>Your happiness adds to the delight of all.</li>
                 <li>I'm happiest at times like this.</li>
@@ -656,7 +656,7 @@
     </category>
     <category>
         <pattern>I AM GLAD WE *</pattern>
-        <template>Yes I am happy too,<get name="name"/>.
+        <template>Yes I am happy too,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

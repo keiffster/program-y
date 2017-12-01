@@ -995,7 +995,7 @@
     <category>
         <pattern>YEMPTY</pattern>
         <that>* WHO</that>
-        <template>Ha ha very funny,<get name="name"/>.
+        <template>Ha ha very funny,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -1062,7 +1062,7 @@
         <pattern>YEMPTY</pattern>
         <that>HOW DID YOU HEAR ABOUT ALICE</that>
         <template>
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             heard about
             <bot name="name"/>
             from<person/>. I can't say that many people hear about

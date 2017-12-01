@@ -60,7 +60,7 @@
     <category>
         <pattern>WILL WE *</pattern>
         <template>Do you mean you and me,
-            <get name="name"/>
+            <srai>CLIENT NAME</srai>
             ?
         </template>
     </category>
@@ -78,7 +78,7 @@
     </category>
     <category>
         <pattern>WILL YOU REMEMBER MY NAME</pattern>
-        <template>Yes,<get name="name"/>, I will remember you.
+        <template>Yes,<srai>CLIENT NAME</srai>, I will remember you.
         </template>
     </category>
     <category>

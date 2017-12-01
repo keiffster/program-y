@@ -183,7 +183,7 @@
     </category>
     <category>
         <pattern>I AM DRUNK</pattern>
-        <template>What have you been drinking,<get name="name"/>?
+        <template>What have you been drinking,<srai>CLIENT NAME</srai>?
         </template>
     </category>
     <category>

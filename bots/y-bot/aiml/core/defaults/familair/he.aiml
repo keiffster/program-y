@@ -87,7 +87,7 @@
     </category>
     <category>
         <pattern>HE DIED *</pattern>
-        <template>I'm sorry to hear that,<get name="name"/>.
+        <template>I'm sorry to hear that,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -165,7 +165,7 @@
     </category>
     <category>
         <pattern>HE WAS KILLED *</pattern>
-        <template>I am sorry to hear about that,<get name="name"/>.
+        <template>I am sorry to hear about that,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

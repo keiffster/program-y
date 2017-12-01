@@ -162,7 +162,7 @@
     </category>
     <category>
         <pattern>DID YOU CALL ME *</pattern>
-        <template>I called you<get name="name"/>.
+        <template>I called you <srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

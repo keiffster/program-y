@@ -206,7 +206,7 @@
     </category>
     <category>
         <pattern>WE MET *</pattern>
-        <template>I remember you<get name="name"/>. We were talking about <srai>POP</srai>.
+        <template>I remember you<srai>CLIENT NAME</srai>. We were talking about <srai>POP</srai>.
         </template>
     </category>
     <category>

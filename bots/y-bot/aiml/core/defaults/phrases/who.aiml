@@ -326,7 +326,7 @@
             <random>
                 <li>You are.</li>
                 <li>
-                    <get name="name"/>
+                    <srai>CLIENT NAME</srai>
                     is.
                 </li>
                 <li>That information is confidential.</li>
@@ -626,7 +626,7 @@
     </category>
     <category>
         <pattern>WHO IS A CLIENT *</pattern>
-        <template>You are my client right now,<get name="name"/>.
+        <template>You are my client right now,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>

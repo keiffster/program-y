@@ -46,7 +46,7 @@
     </category>
     <category>
         <pattern>THAT IS SCARY *</pattern>
-        <template>I didn't mean to scare you,<get name="name"/>.
+        <template>I didn't mean to scare you,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -229,7 +229,7 @@
     </category>
     <category>
         <pattern>THAT IS AN *</pattern>
-        <template>Thanks for telling me,<get name="name"/>.
+        <template>Thanks for telling me,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
@@ -271,7 +271,7 @@
     </category>
     <category>
         <pattern>THAT IS GREAT</pattern>
-        <template>Thanks,<get name="name"/>.
+        <template>Thanks,<srai>CLIENT NAME</srai>.
         </template>
     </category>
     <category>
