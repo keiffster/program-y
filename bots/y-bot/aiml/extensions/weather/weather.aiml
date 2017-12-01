@@ -21,6 +21,28 @@
 
     <category>
         <pattern>
+            WEATHER LOCATION * WHEN *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="weather" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <srai>
+                        SHOW_WEATHER
+                        <extension path="programy.extensions.weather.weather.WeatherExtension">
+                            LOCATION <star index="1"/> WHEN <star index="2"/>
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my Weather Feed is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
             # WEATHER # IN * #
         </pattern>
         <template>
@@ -37,20 +59,6 @@
         <template>
             <srai>
                WEATHER LOCATION UK WHEN NOW
-            </srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>
-            WEATHER LOCATION * WHEN *
-        </pattern>
-        <template>
-            <srai>
-                SHOW_WEATHER
-                <extension path="programy.extensions.weather.weather.WeatherExtension">
-                    LOCATION <star index="1"/> WHEN <star index="2"/>
-                </extension>
             </srai>
         </template>
     </category>

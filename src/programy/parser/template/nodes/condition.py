@@ -340,9 +340,15 @@ class TemplateConditionNode(TemplateConditionVariable):
 
     def to_string(self):
         text = "[CONDITION"
-        if self.name is not None:
-            text += " name=%s"%(self.name)
-        if self.name is not None:
+        if self.var_type == TemplateConditionListItemNode.GLOBAL:
+            text += ' name="%s"' % self.name
+        elif self.var_type == TemplateConditionListItemNode.LOCAL:
+            text += ' var="%s"' % self.name
+        elif self.var_type == TemplateConditionListItemNode.BOT:
+            text += ' bot="%s"' % self.name
+        else:
+            text += ' unknown="%s"' % self.name
+        if self.value is not None:
             text += " value=%s" % (self.value)
         text += "]"
         return text

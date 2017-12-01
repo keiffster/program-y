@@ -19,11 +19,18 @@
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 
-    <category>
+     <category>
         <pattern>ASKWIKIPEDIA *</pattern>
         <template>
-            <sraix service="WIKIPEDIA"><star /></sraix>
+            <think>
+                <set name="active"><bot name="wikipedia" /></set>
+            </think>
+            <condition name="active">
+                <li value="true"><sraix service="WIKIPEDIA"><star /></sraix></li>
+                <li>Unfortunately Wikipedia is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
+
 
 </aiml>

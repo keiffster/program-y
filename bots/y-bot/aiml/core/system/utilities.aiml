@@ -247,7 +247,7 @@
     <category>
         <pattern>GOOGLEURL *</pattern>
         <template>
-            <condition name="env">
+            <condition bot="env">
                 <li value="browser">
                     <![CDATA[<a href="https://www.google.com/search?q=]]>
                     <srai>PLUSIFY

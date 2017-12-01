@@ -22,7 +22,13 @@
     <category>
         <pattern>ASKPANDORA *</pattern>
         <template>
-            <sraix service="PANDORA"><star /></sraix>
+            <think>
+                <set name="active"><bot name="pandora" /></set>
+            </think>
+            <condition name="active">
+                <li value="true"><sraix service="PANDORA"><star /></sraix></li>
+                <li>Unfortunately Pandora is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 

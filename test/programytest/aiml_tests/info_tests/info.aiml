@@ -36,7 +36,7 @@ For more information see [url]
 	<category>
 		<pattern>TEST ENVIRONMENT</pattern>
 		<template>
-		    ENVIRONMET IS <get name="env" />
+		    ENVIRONMENT IS <bot name="env" />
 		</template>
 	</category>
 

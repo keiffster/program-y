@@ -24,9 +24,17 @@
             POSTCODE *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
-                POSTCODE1 <star />
-            </extension>
+            <think>
+                <set name="active"><bot name="geocode" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+                        POSTCODE1 <star />
+                    </extension>
+                </li>
+                <li>Unfortunately my geocoder is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
@@ -35,9 +43,17 @@
             POSTCODE * *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
-                POSTCODE2 <star index="1"/> <star index="2"/>
-            </extension>
+            <think>
+                <set name="active"><bot name="geocode" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+                        POSTCODE2 <star index="1"/> <star index="2"/>
+                    </extension>
+                </li>
+                <li>Unfortunately my geocoder is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
@@ -46,9 +62,17 @@
             ZIPCODE *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
-                POSTCODE1 <star />
-            </extension>
+            <think>
+                <set name="active"><bot name="geocode" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+                        POSTCODE1 <star />
+                    </extension>
+                </li>
+                <li>Unfortunately my geocoder is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
@@ -57,9 +81,17 @@
             LOCATION *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
-                LOCATION <star index="1"/>
-            </extension>
+            <think>
+                <set name="active"><bot name="geocode" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+                        LOCATION <star index="1"/>
+                    </extension>
+                </li>
+                <li>Unfortunately my geocoder is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 

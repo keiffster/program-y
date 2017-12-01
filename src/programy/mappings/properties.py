@@ -32,6 +32,8 @@ class PropertiesCollection(DoubleStringCharSplitCollection):
         return self.value(key)
 
     def add_property(self, key, value):
+        key = key.strip()
+        value = value.strip()
         if self.has_property(key):
             self.set_value(key, value)
         else:

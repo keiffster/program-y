@@ -304,7 +304,7 @@
     <category>
         <pattern>PIC</pattern>
         <template>
-            <condition name="env">
+            <condition bot="env">
                 <li value="browser">My picture:
                     <bot name="picture"/>
                 </li>
@@ -349,7 +349,7 @@
     <category>
         <pattern>FACEBOOK PAGE</pattern>
         <template>
-            <condition name="env">
+            <condition bot="env">
                 <li value="browser"><bot name="facebook"/>.
                 </li>
                 <li>You'll have to connect to a browser if you want to see my Facebook page.</li>
@@ -454,7 +454,7 @@
     <category>
         <pattern>LOGO</pattern>
         <template>
-            <condition name="env">
+            <condition bot="env">
                 <li value="browser"><bot name="logo"/>.
                 </li>
                 <li>You'll have to connect me to a browser if you want to see a picture.</li>
@@ -464,7 +464,7 @@
     <category>
         <pattern>URL</pattern>
         <template>
-            <condition name="env">
+            <condition bot="env">
                 <li value="browser"><bot name="url"/>.
                 </li>
                 <li>You'll have to connect me to a browser if you want click my url.</li>

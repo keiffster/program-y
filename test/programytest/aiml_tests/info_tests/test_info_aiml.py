@@ -34,4 +34,4 @@ class InfoAIMLTests(unittest.TestCase):
 
         response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ENVIRONMENT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "ENVIRONMET IS test")
+        self.assertEqual(response, "ENVIRONMENT IS test")

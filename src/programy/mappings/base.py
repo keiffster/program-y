@@ -88,9 +88,13 @@ class DoubleStringCharSplitCollection(BaseCollection):
         return self._pairs
 
     def add_value(self, key, value):
+        key = key.strip()
+        value = value.strip()
         self._pairs.append([key, value])
 
     def set_value(self, key, value):
+        key = key.strip()
+        value = value.strip()
         for pair in self._pairs:
             if pair[0] == key:
                 pair[1] = value
@@ -121,7 +125,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         return splits
 
     def process_splits(self, splits):
-        self._pairs.append([splits[0], splits[1]])
+        self.add_value(splits[0], splits[1])
         return True
 
 

@@ -20,6 +20,25 @@
     -->
 
     <category>
+        <pattern>
+           NEWS * MAX * SORT * REVERSE *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="newsapi" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <extension path="programy.extensions.newsapi.newsapi.NewsAPIExtension">
+                        SOURCE <star index="1"/> MAX <star index="2"/> SORT <star index="3"/> REVERSE <star index="4"/>
+                    </extension>
+                </li>
+                <li>Unfortunately my News Feed is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
         <pattern>ABC NEWS</pattern>
         <template>
             <srai>NEWS abc-news-au MAX 10 SORT False REVERSE False</srai>
@@ -407,17 +426,6 @@
         <pattern>UK NEWSPAPERS NEWS</pattern>
         <template>
             <srai>NEWS uk_newspapers MAX 10 SORT False REVERSE False</srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>
-           NEWS * MAX * SORT * REVERSE *
-        </pattern>
-        <template>
-            <extension path="programy.extensions.newsapi.newsapi.NewsAPIExtension">
-                SOURCE <star index="1"/> MAX <star index="2"/> SORT <star index="3"/> REVERSE <star index="4"/>
-            </extension>
         </template>
     </category>
 

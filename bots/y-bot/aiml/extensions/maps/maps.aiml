@@ -80,12 +80,20 @@
             DISTANCE * *
         </pattern>
         <template>
-            <srai>
-                SHOW_DISTANCE
-                <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
-                    DISTANCE <star index="1"/> <star index="2"/>
-                </extension>
-            </srai>
+            <think>
+                <set name="active"><bot name="mapping" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <srai>
+                        SHOW_DISTANCE
+                        <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
+                            DISTANCE <star index="1"/> <star index="2"/>
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my mapping software is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
@@ -113,12 +121,20 @@
             DIRECTIONS * *
         </pattern>
         <template>
-            <srai>
-                SHOW_DIRECTIONS
-                <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
-                    DIRECTIONS <star index="1"/> <star index="2"/>
-                </extension>
-            </srai>
+            <think>
+                <set name="active"><bot name="mapping" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <srai>
+                        SHOW_DIRECTIONS
+                        <extension path="programy.extensions.maps.maps.GoogleMapsExtension">
+                            DIRECTIONS <star index="1"/> <star index="2"/>
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my mapping software is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
