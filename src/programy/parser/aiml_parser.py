@@ -71,14 +71,18 @@ class AIMLParser(object):
             self._duplicates = DuplicatesFileWriter(brain_configuration.files.aiml_files.duplicates)
 
     def save_debug_files(self, brain_configuration):
+
         if brain_configuration.files.aiml_files.errors is not None:
             num_errors = self._errors.save_content()
             if num_errors > 0:
                 print("WARNING:%d errors detected"%num_errors)
+                self._errors.print_content()
+
         if brain_configuration.files.aiml_files.duplicates is not None:
             num_dupes = self._duplicates.save_content()
             if num_dupes > 0:
                 print("WARNING: %d duplicated grammars detected"%num_dupes)
+                self._duplicates.print_content()
 
     def display_debug_info(self, brain_configuration):
         if self._errors is not None:

@@ -119,6 +119,10 @@ class ContentFileWriter(FileWriter):
         self._file.flush()
         return len(self._entries)
 
+    def print_content(self):
+        for entry in self._entries:
+            print(entry)
+
     def format_row_as_text(self, row):
         if len(row) == 5:
             return "%s [%s] [%s] [%s] [%s]\n"%(row[0], row[1], row[2], row[3], row[4])

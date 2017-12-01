@@ -200,12 +200,6 @@
         </template>
     </category>
     <category>
-        <pattern>REALLY</pattern>
-        <template>
-            <srai>INTERJECTION</srai>
-        </template>
-    </category>
-    <category>
         <pattern>BUT</pattern>
         <template>
             <srai>INTERJECTION</srai>

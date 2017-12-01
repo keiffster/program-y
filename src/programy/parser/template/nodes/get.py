@@ -86,8 +86,8 @@ class TemplateGetNode(TemplateNode):
                 value = bot.brain.dynamics.dynamic_var(bot, clientid, name)
             else:
                 value = bot.get_conversation(clientid).property(name)
-                if value is None:
-                    value = bot.brain.properties.property(name)
+                #if value is None:
+                #    value = bot.brain.properties.property(name)
 
         if value is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):

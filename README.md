@@ -1,8 +1,18 @@
 # Readme info:
 
-Version: 1.2.0 <br/>
+Version: 1.4.1 <br/>
 Authors: Keith Sterling <br/>
-Date: 8th November 2017 <br/>
+Date: 1st December 2017 <br/>
+
+### Whats New in 1.4
+The next stage of refactoring sees defaults.aiml and personality.aiml refactored out into specific files grouped around topics, subjects and patterns.
+In the same way that 1.3 introduced a easier way to manage reductions, 1.4 introduces the same easy way to manage actual responses.
+Subsequent point releases will see this refactoring continue.
+
+### Whats New in 1.3
+1.3 saw the compete refactoring of the reductions AIML files. These contained over 27K lines of AIML, making
+it almost impossible to edit and maintain. This releases breaks these files into subject specific files.
+Further releases will see the refactoring continue in more detail
 
 ### Whats New in 1.2
 * RDF Engine completely rewritten to be fully compatible with Alice grammar
