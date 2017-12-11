@@ -275,8 +275,6 @@ class ConversationFileStorage(object):
                 logging.exception(e)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Loading Conversation")
         try:
             if self._config._dir is not None:
                 if os.path.exists(self._config._dir):
@@ -291,7 +289,9 @@ class ConversationFileStorage(object):
                         self._last_modified = last_modified
 
                         if should_open is True:
-                            print("Loading conversation")
+                            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                                logging.debug("Loading Conversation")
+
                             with open(filename, "r") as convo_file:
                                 for line in convo_file:
                                     if ':' in line:
