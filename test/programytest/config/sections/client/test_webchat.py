@@ -14,6 +14,9 @@ class WebChatConfigurationTests(unittest.TestCase):
           host: 127.0.0.1
           port: 5000
           debug: false
+          use_api_keys: false
+          cookie_id: ProgramYSession
+          cookie_expires: 90
         """, ConsoleConfiguration(), ".")
 
         webchat_config = WebChatConfiguration()
@@ -22,4 +25,7 @@ class WebChatConfigurationTests(unittest.TestCase):
         self.assertEqual("127.0.0.1", webchat_config.host)
         self.assertEqual(5000, webchat_config.port)
         self.assertEqual(False, webchat_config.debug)
+        self.assertEqual(False, webchat_config.use_api_keys)
+        self.assertEqual("ProgramYSession", webchat_config.cookie_id)
+        self.assertEqual(90, webchat_config.cookie_expires)
 
