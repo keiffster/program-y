@@ -160,7 +160,7 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS YOUR LOCATION</pattern>
+        <pattern>WHAT IS YOUR # LOCATION</pattern>
         <template>
             <srai>WHERE ARE YOU</srai>
         </template>

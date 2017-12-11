@@ -42,6 +42,12 @@
         </template>
     </category>
     <category>
+        <pattern>LASTNAME</pattern>
+        <template>
+            <srai>LAST NAME</srai>
+        </template>
+    </category>
+    <category>
         <pattern>LAST NAME</pattern>
         <template>
             <random>
@@ -73,6 +79,12 @@
                 <li></li>
             </random>
             <formal><bot name="firstname"/></formal>.
+        </template>
+    </category>
+    <category>
+        <pattern>FULLNAME</pattern>
+        <template>
+            <srai>FULL NAME</srai>
         </template>
     </category>
     <category>
@@ -109,8 +121,18 @@
 
     <!-- Age -->
     <category>
+        <pattern>BIRTH DAY</pattern>
+        <template><srai>BIRTHDAY</srai>
+        </template>
+    </category>
+    <category>
         <pattern>BIRTHDAY</pattern>
         <template>My birthday is <bot name="birthday"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>BIRTH DATE</pattern>
+        <template><srai>BIRTHDATE</srai>
         </template>
     </category>
     <category>
@@ -119,8 +141,18 @@
         </template>
     </category>
     <category>
+        <pattern>DAY BORN</pattern>
+        <template><srai>DAYBORN</srai>
+        </template>
+    </category>
+    <category>
         <pattern>DAYBORN</pattern>
         <template><bot name="dayborn"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>MONTH BORN</pattern>
+        <template><srai>MONTHBORN</srai>
         </template>
     </category>
     <category>
@@ -129,8 +161,23 @@
         </template>
     </category>
     <category>
+        <pattern>YEAR BORN</pattern>
+        <template><srai>YEARBORN</srai>
+        </template>
+    </category>
+    <category>
         <pattern>YEARBORN</pattern>
         <template><bot name="yearborn"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>HOW OLD #</pattern>
+        <template><srai>AGE</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS YOUR AGE</pattern>
+        <template><srai>AGE</srai>
         </template>
     </category>
     <category>
@@ -173,6 +220,11 @@
         </template>
     </category>
     <category>
+        <pattern>WHAT IS YOUR AGE IN YEARS</pattern>
+        <template><srai>AGE IN YEARS</srai>
+        </template>
+    </category>
+    <category>
         <pattern>AGE IN YEARS</pattern>
         <template>
             <interval format="%B %d, %Y" jformat="MMMMMMMMM dd, yyyy">
@@ -192,6 +244,17 @@
         <pattern>BIRTHPLACE</pattern>
         <template>
             I was born in<bot name="birthplace"/>.
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHICH COUNTRY WHERE YOU BORN IN</pattern>
+        <template><srai>COUNTRY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>WHICH COUNTRY DO YOU LIVE IN</pattern>
+        <template><srai>COUNTRY</srai>
         </template>
     </category>
     <category>

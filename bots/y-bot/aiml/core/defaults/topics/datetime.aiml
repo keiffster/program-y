@@ -192,8 +192,10 @@
         </template>
     </category>
     <category>
-        <pattern>IS <set>article</set>
-            <set>month</set> A MONTH
+        <pattern>IS
+            <set>article</set>
+            <set>month</set>
+            A MONTH
         </pattern>
         <template>
             <srai>IS
@@ -213,8 +215,10 @@
         </template>
     </category>
     <category>
-        <pattern>IS <set>article</set>
-            <set>month</set> * MONTH *
+        <pattern>IS
+            <set>article</set>
+            <set>month</set>
+            * MONTH *
         </pattern>
         <template>
             <srai>IS
@@ -224,5 +228,184 @@
         </template>
     </category>
 
-
- </aiml>
+    <category>
+        <pattern>WHAT YEAR IS THIS</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS THIS *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT YEAR IS IT *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT MONTH IS IT *</pattern>
+        <template><date format="%B"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE YEAR *</pattern>
+        <template><date format="%Y"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS THE HOUR *</pattern>
+        <template><date format="%I %p"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT IS TODAY *</pattern>
+        <template><date format="%x"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT DAY IS IT *</pattern>
+        <template><date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SUNDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SUNDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY FRIDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY FRIDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY TUESDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY TUESDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY THURSDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY THURSDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SATURDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY SATURDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY WEDNESDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY WEDNESDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY MONDAY</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS TODAY MONDAY *</pattern>
+        <template>Today is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MONDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT MONDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT WEDNESDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT WEDNESDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FRIDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT FRIDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SATURDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SATURDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT THURSDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT THURSDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUNDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT SUNDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT TUESDAY</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+    <category>
+        <pattern>IS IT TUESDAY *</pattern>
+        <template>It is<date format="%A"/>.
+        </template>
+    </category>
+</aiml>

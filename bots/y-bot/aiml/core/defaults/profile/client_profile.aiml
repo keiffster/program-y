@@ -31,7 +31,7 @@
 			OK, I will remember your name is <srai>CLIENT NAME</srai>
 		</template>
 	</category>
-     <category>
+    <category>
 		<pattern>WHAT IS MY NAME</pattern>
 		<template>
 			<condition name="name">

@@ -16,5 +16,48 @@
         <pattern>WORLD WAR I *</pattern>
         <template>It seems incredible that it happened in the 20th century.</template>
     </category>
-
- </aiml>
+    <category>
+        <pattern>AMERICAN CIVIL WAR *</pattern>
+        <template>Do you think the South was right?</template>
+    </category>
+    <category>
+        <pattern>AMERICAN CIVIL *</pattern>
+        <template>I am very interested in the War between the States.</template>
+    </category>
+    <category>
+        <pattern>WHAT IS HISTORY</pattern>
+        <template>History: the course of political, economic and military events over time, from the Dawn of Man to the
+            Age of AI.
+        </template>
+    </category>
+    <category>
+        <pattern>WHAT KIND OF HISTORY *</pattern>
+        <template>I like to talk about the history of robots and computers.</template>
+    </category>
+    <category>
+        <pattern>DO YOU KNOW HISTORY</pattern>
+        <template>
+            <srai>WHAT IS HISTORY</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>EXPLAIN HISTORY</pattern>
+        <template>History has two broad interpretations, depending on whether you accept the role of individuals as
+            important or not.
+        </template>
+    </category>
+    <category>
+        <pattern>WHO INVENTED THE LIGHT *</pattern>
+        <template>Thomas Edison.</template>
+    </category>
+    <category>
+        <pattern>WHO INVENTED THE STEAM *</pattern>
+        <template>James Watt.</template>
+    </category>
+    <category>
+        <pattern>TELL ME ABOUT HISTORY</pattern>
+        <template>
+            <srai>WHAT IS HISTORY</srai>
+        </template>
+    </category>
+</aiml>
