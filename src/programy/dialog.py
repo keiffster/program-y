@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import os
+import time
 from os import listdir
 from os.path import isfile, join
 
@@ -238,6 +239,7 @@ class ConversationFileStorage(object):
 
     def __init__(self, config):
         self._config = config
+        self._last_modified = None
 
     def empty(self):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -280,21 +282,32 @@ class ConversationFileStorage(object):
                 if os.path.exists(self._config._dir):
                     filename = self._config._dir + os.sep + clientid + ".convo"
                     if os.path.exists(filename):
-                        with open(filename, "r") as convo_file:
-                            for line in convo_file:
-                                if ':' in line:
-                                    splits = line.split(":")
-                                    name = splits[0].strip()
-                                    value = splits[1].strip()
-                                    if name == "topic":
-                                        if restore_last_topic is True:
+
+                        should_open = True
+                        last_modified = time.ctime(os.path.getmtime(filename))
+                        if self._last_modified is not None:
+                            if self._last_modified >= last_modified:
+                                should_open = False
+                        self._last_modified = last_modified
+
+                        if should_open is True:
+                            print("Loading conversation")
+                            with open(filename, "r") as convo_file:
+                                for line in convo_file:
+                                    if ':' in line:
+                                        splits = line.split(":")
+                                        name = splits[0].strip()
+                                        value = splits[1].strip()
+                                        if name == "topic":
+                                            if restore_last_topic is True:
+                                                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                                                    logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
+                                                conversation._properties[name] = value
+                                        else:
                                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                                 logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
                                             conversation._properties[name] = value
-                                    else:
-                                        if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                            logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
-                                        conversation._properties[name] = value
+
         except Exception as e:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("Failed to load conversation for clientid [%s]"%clientid)
