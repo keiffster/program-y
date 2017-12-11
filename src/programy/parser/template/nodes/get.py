@@ -165,6 +165,7 @@ class TemplateGetNode(TemplateNode):
 
     def resolve(self, bot, clientid):
         try:
+            bot.load_conversation(clientid)
             return self.resolve_to_string(bot, clientid)
         except Exception as excep:
             logging.exception(excep)

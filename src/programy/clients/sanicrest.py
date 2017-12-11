@@ -80,8 +80,10 @@ if __name__ == '__main__':
 
     def run():
 
-        print("REST Client running on %s:%s" % (REST_CLIENT.configuration.client_configuration.host,
-                                                REST_CLIENT.configuration.client_configuration.port))
+        print("REST Client running on %s:%s with %d workers" % (
+            REST_CLIENT.configuration.client_configuration.host,
+            REST_CLIENT.configuration.client_configuration.port,
+            REST_CLIENT.configuration.client_configuration.workers))
 
         if REST_CLIENT.configuration.client_configuration.debug is True:
             print("REST Client running in debug mode")

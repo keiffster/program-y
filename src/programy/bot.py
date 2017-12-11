@@ -187,10 +187,10 @@ class Bot(object):
             if self.brain.properties is not None:
                 conversation.load_initial_variables(self.brain.variables)
 
-            if self._conversation_storage is not None:
-                self._conversation_storage.load_conversation(conversation, clientid, self.configuration.conversations.restore_last_topic)
-
             self._conversations[clientid] = conversation
+
+            self.load_conversation(clientid)
+
             return conversation
 
     def initiate_conversation_storage(self):
@@ -203,6 +203,12 @@ class Bot(object):
                 else:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
+
+    def load_conversation(self, clientid):
+        if self._conversation_storage is not None:
+            conversation = self._conversations[clientid]
+            self._conversation_storage.load_conversation(conversation, clientid,
+                                                         self.configuration.conversations.restore_last_topic)
 
     def save_conversation(self, clientid):
         if self._conversation_storage is not None:
