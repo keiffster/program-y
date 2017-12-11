@@ -149,12 +149,24 @@ class MatchContext(object):
         for match in self._matched_nodes:
             output_func("%s\t%d - %s"%(tabs, count, match.to_string()))
             count += 1
+        output_func("%sMatch score %.2f"%(tabs, self.calculate_match_score()))
         if include_template is True:
             if self.matched() is True:
                 output_func("%s\tT - %s"%(tabs, self._template_node.to_string()))
             else:
                 output_func("%s\tT - None"%tabs)
 
+    def calculate_match_score(self):
+        wildcards = 0
+        words = 0
+        for match in self._matched_nodes:
+            if match.match_type == Match.WORD:
+                if match.matched_node.is_wildcard():
+                    wildcards += 1
+                else:
+                    words += 1
+        percentage = (words/(wildcards+words))*100.00
+        return percentage
 
 class EqualsMatch(object):
     def __init__(self, matched, word_no, matched_phrase=None):
