@@ -1,6 +1,6 @@
 # Readme info:
 
-Version: 1.4.1 <br/>
+Version: 1.4.3 <br/>
 Authors: Keith Sterling <br/>
 Date: 1st December 2017 <br/>
 
