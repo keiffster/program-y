@@ -165,8 +165,10 @@ class MatchContext(object):
                     wildcards += 1
                 else:
                     words += 1
-        percentage = (words/(wildcards+words))*100.00
-        return percentage
+        total = wildcards+words
+        if total > 0:
+            return (words/(wildcards+words))*100.00
+        return 0.00
 
 class EqualsMatch(object):
     def __init__(self, matched, word_no, matched_phrase=None):
