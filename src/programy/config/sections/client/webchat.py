@@ -25,6 +25,8 @@ class WebChatConfiguration(BaseContainerConfigurationData):
         self._port = 80
         self._debug = False
         self._use_api_keys = False
+        self._cookie_id = "ProgramYSession"
+        self._cookie_expires = 90
 
     @property
     def host(self):
@@ -42,10 +44,20 @@ class WebChatConfiguration(BaseContainerConfigurationData):
     def use_api_keys(self):
         return self._use_api_keys
 
+    @property
+    def cookie_id(self):
+        return self._cookie_id
+
+    @property
+    def cookie_expires(self):
+        return self._cookie_expires
+
     def load_configuration(self, configuration_file, bot_root):
         webchat = configuration_file.get_section(self.section_name)
         if webchat is not None:
-            self._host = configuration_file.get_option(webchat, "host")
-            self._port = configuration_file.get_option(webchat, "port")
-            self._debug = configuration_file.get_bool_option(webchat, "debug")
-            self._use_api_keys = configuration_file.get_bool_option(webchat, "use_api_keys")
+            self._host = configuration_file.get_option(webchat, "host", missing_value="0.0.0.0")
+            self._port = configuration_file.get_int_option(webchat, "port", missing_value=80)
+            self._debug = configuration_file.get_bool_option(webchat, "debug", missing_value=False)
+            self._use_api_keys = configuration_file.get_bool_option(webchat, "use_api_keys", missing_value=False)
+            self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession")
+            self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90)

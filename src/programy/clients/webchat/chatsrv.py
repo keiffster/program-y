@@ -61,35 +61,59 @@ def ask():
 
     question = request.args['question']
 
-    if 'sessionid' not in request.args or request.args['sessionid'] is None:
-        print("'sessionid' missing from request")
+    if 'clientid' not in request.args or request.args['clientid'] is None:
+        print("'clientid' missing from request")
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("'sessionid' missing from request")
+            logging.error("'clientid' missing from request")
         abort(400)
 
-    sessionid = request.args['sessionid']
+    clientid = request.args['clientid']
+
+    sessionid = request.cookies.get(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id)
+    expire_date = None
+    if sessionid is None:
+        import uuid
+        import datetime
+
+        expire_date = datetime.datetime.now()
+        expire_date = expire_date + datetime.timedelta(days=WEBCHAT_CLIENT.configuration.client_configuration.cookie_expires)
+
+        sessionid = str(uuid.uuid4().hex)
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.debug("Setting client cookie to :%s"%sessionid)
+    else:
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.debug("Found client cookie : %s"%sessionid)
 
     try:
         answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
 
-        response = {"question": question,
+        response_data = {"question": question,
                     "answer": answer,
-                    "sessionid": sessionid
+                    "clientid": clientid
                    }
 
-        return jsonify({'response': response})
+        response = jsonify({'response': response_data})
+        if expire_date is not None:
+            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, sessionid,
+                                expires=expire_date)
 
     except Exception as excep:
         if logging.getLogger().isEnabledFor(logging.ERROR):
             logging.exception(excep)
 
-        response = {"question": question,
+        response_data = {"question": question,
                     "answer": WEBCHAT_CLIENT.bot.default_response,
-                    "sessionid": sessionid,
+                    "clientid": clientid,
                     "error": str(excep)
                    }
 
-        return jsonify({'response': response})
+        repsonse = jsonify({'response': response_data})
+        if expire_date is not None:
+            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, sessionid,
+                                expires=expire_date)
+
+    return response
 
 if __name__ == '__main__':
 

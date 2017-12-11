@@ -23,7 +23,7 @@ $(document).ready(function(){
             }
         }
 
-        xhttp.open("GET", "/api/v1.0/ask?question="+question+"&sessionid=1234567890");
+        xhttp.open("GET", "/api/v1.0/ask?question="+question+"&clientid=webchat");
         xhttp.setRequestHeader("Content-type", "application/json");
         xhttp.send();
 
