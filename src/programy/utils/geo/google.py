@@ -248,7 +248,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_latlong_for_location - using mock file")
-            with open(self.response_file_for_get_latlong_for_location, "r") as response_file:
+            with open(self.response_file_for_get_latlong_for_location, "r", encoding="utf-8") as response_file:
                 response = json.load(response_file)
 
         geodata = GoogelMapsResult()
@@ -257,7 +257,7 @@ class GoogleMaps(object):
 
     def store_get_latlong_for_location_to_file(self, location, filename):
         response = self._get_latlong_for_location_response(location)
-        with open(filename, "w+") as data_file:
+        with open(filename, "w+", encoding="utf-8") as data_file:
             json.dump(response, data_file, sort_keys=True, indent=2)
 
     ##################
@@ -281,7 +281,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_distance_between_addresses - using mock file")
-            with open(self.response_file_for_get_distance_between_addresses, "r") as response_file:
+            with open(self.response_file_for_get_distance_between_addresses, "r", encoding="utf-8") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':
@@ -298,7 +298,7 @@ class GoogleMaps(object):
     def store_get_distance_between_addresses_as_file(self, origin, destination, filename, country="UK",
                                                      mode="driving", units="imperial"):
         response = self._get_distance_between_addresses(origin, destination, country, mode, units)
-        with open(filename, "w+") as data_file:
+        with open(filename, "w+", encoding="utf-8") as data_file:
             json.dump(response, data_file, sort_keys=True, indent=2)
 
     ##################
@@ -322,7 +322,7 @@ class GoogleMaps(object):
         else:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("get_directions_between_addresses - using mock file")
-            with open(self.response_file_for_get_directions_between_addresses, "r") as response_file:
+            with open(self.response_file_for_get_directions_between_addresses, "r", encoding="utf-8") as response_file:
                 response = json.load(response_file)
 
         if response['status'] == 'OK':
@@ -339,5 +339,5 @@ class GoogleMaps(object):
     def store_get_directions_between_addresses_as_file(self, origin, destination, filename, country="UK",
                                                        mode="driving", units="imperial"):
         response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
-        with open(filename, "w+") as data_file:
+        with open(filename, "w+", encoding="utf-8") as data_file:
             json.dump(response, data_file, sort_keys=True, indent=2)

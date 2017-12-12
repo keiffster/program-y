@@ -39,7 +39,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
     def load_from_file(self, filename, client_configuration, bot_root):
         configuration = ProgramyConfiguration(client_configuration)
-        with open(filename, 'r+') as xml_data_file:
+        with open(filename, 'r+', encoding="utf-8") as xml_data_file:
             tree = ET.parse(xml_data_file, parser=LineNumberingParser())
             self.xml_data = tree.getroot()
             configuration.load_config_data(self, bot_root)

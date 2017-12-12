@@ -44,7 +44,7 @@ class BaseCollection(object):
 
     def load_from_filename(self, filename):
         count = 0
-        with open(filename, "r") as data_file:
+        with open(filename, "r", encoding="utf-8") as data_file:
             for line in data_file:
                 if self.process_line(line):
                     count += 1

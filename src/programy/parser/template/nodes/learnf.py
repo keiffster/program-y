@@ -55,7 +55,7 @@ class TemplateLearnfNode(TemplateLearnNode):
             logging.debug("Writing learnf to %s", learnf_path)
 
         if os.path.isfile(learnf_path) is False:
-            file = open(learnf_path, "w+")
+            file = open(learnf_path, "w+", encoding="utf-8")
             file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
             file.write('<aiml>\n')
             file.write('</aiml>\n')

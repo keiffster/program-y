@@ -592,7 +592,7 @@ class MetOffice(object):
         return self.nearest_location_observation(lat, lon)
 
     def write_datapoints_to_file(self, datapoints, filename):
-        with open(filename, "w+") as data_file:
+        with open(filename, "w+", encoding="utf-8") as data_file:
             json.dump(datapoints, data_file, sort_keys=True, indent=2)
 
     def load_datapoints_from_file(self, filename):

@@ -36,7 +36,7 @@ class JSONConfigurationFile(BaseConfigurationFile):
 
     def load_from_file(self, filename, client_configuration, bot_root):
         configuration = ProgramyConfiguration(client_configuration)
-        with open(filename, 'r+') as json_data_file:
+        with open(filename, 'r+', encoding="utf-8") as json_data_file:
             self.json_data = json.load(json_data_file)
             configuration.load_config_data(self, bot_root)
         return configuration

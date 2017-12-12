@@ -35,7 +35,7 @@ class RestBotClient(BotClient):
 
     def load_api_keys(self):
         if self.configuration.client_configuration.api_key_file is not None:
-            with open(self.configuration.client_configuration.api_key_file, "r") as api_key_file:
+            with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
                 for api_key in api_key_file:
                     self.api_keys.append(api_key.strip())
 

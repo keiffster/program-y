@@ -265,7 +265,7 @@ class ConversationFileStorage(object):
             if self._config._dir is not None:
                 if os.path.exists(self._config._dir):
                     filename = self._config._dir + os.sep + clientid + ".convo"
-                    with open(filename, "w+") as convo_file:
+                    with open(filename, "w+", encoding="utf-8") as convo_file:
                         for name, value in conversation._properties.items():
                             convo_file.write("%s:%s\n"%(name, value))
                         convo_file.write("\n")
@@ -292,7 +292,7 @@ class ConversationFileStorage(object):
                             if logging.getLogger().isEnabledFor(logging.DEBUG):
                                 logging.debug("Loading Conversation")
 
-                            with open(filename, "r") as convo_file:
+                            with open(filename, "r", encoding="utf-8") as convo_file:
                                 for line in convo_file:
                                     if ':' in line:
                                         splits = line.split(":")

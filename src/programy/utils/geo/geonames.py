@@ -62,12 +62,12 @@ class GeoNamesApi(object):
         return json.loads(content.decode('utf8'))
 
     def load_get_latlong_for_postcode_from_file(self, filename):
-        with open(filename, "w+") as response_file:
+        with open(filename, "w+", encoding="utf-8") as response_file:
             return json.load(response_file)
 
     def store_get_latlong_for_postcode_to_file(self, postcode, filename):
         content = self._get_latlong_for_postcode_response(postcode)
-        with open(filename, "w+") as response_file:
+        with open(filename, "w+", encoding="utf-8") as response_file:
             json.dump(content, response_file, sort_keys=True, indent=2)
 
     def get_latlong_for_postcode(self, postcode):
@@ -75,7 +75,7 @@ class GeoNamesApi(object):
         if GeoNamesApi.get_latlong_for_postcode_response_file is None:
             data = self._get_latlong_for_postcode_response(postcode)
         else:
-            with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r") as datafile:
+            with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r", encoding="utf-8") as datafile:
                 data = json.load(datafile)
 
         if 'postalCodes' not in data:

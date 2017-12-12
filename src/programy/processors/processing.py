@@ -30,7 +30,7 @@ class ProcessorLoader(ClassLoader):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Loading processors from file [%s]", filename)
         count = 0
-        with open(filename, "r") as file:
+        with open(filename, "r", encoding="utf-8") as file:
             for line in file:
                 line = line.strip()
                 if line:

@@ -219,7 +219,7 @@ class TwitterBotClient(BotClient):
                 logging.debug("Reads messages ids from [%s]", self.configuration.client_configuration.storage_location)
             if os.path.exists(self.configuration.client_configuration.storage_location):
                 try:
-                    with open(self.configuration.client_configuration.storage_location, "r") as idfile:
+                    with open(self.configuration.client_configuration.storage_location, "r", encoding="utf-8") as idfile:
                         last_direct_message_id = int(idfile.readline().strip())
                         last_status_id = int(idfile.readline().strip())
                 except Exception as excep:
@@ -232,7 +232,7 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Writing messages ids to [%s]", self.configuration.client_configuration.storage_location)
             try:
-                with open(self.configuration.client_configuration.storage_location, "w+") as idfile:
+                with open(self.configuration.client_configuration.storage_location, "w+", encoding="utf-8") as idfile:
                     idfile.write("%d\n"%last_direct_message_id)
                     idfile.write("%d\n"%last_status_id)
             except Exception as excep:

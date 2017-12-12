@@ -73,7 +73,7 @@ class NodeFactory(object):
             if filename is None or os.path.exists(filename) is False:
                 filename = self.default_config_file()
 
-            with open(filename, "r") as node_file:
+            with open(filename, "r", encoding="utf-8") as node_file:
                 for line in node_file:
                     line = line.strip()
                     self.process_config_line(line)

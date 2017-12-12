@@ -273,12 +273,12 @@ class NewsAPI(object):
 
     @staticmethod
     def json_to_file(filename, json_data):
-        with open(filename, 'w+') as json_file:
+        with open(filename, 'w+', encoding="utf-8") as json_file:
             json.dump(json_data, json_file)
 
     @staticmethod
     def json_from_file(filename):
-        with open(filename, 'r+') as json_file:
+        with open(filename, 'r+', encoding="utf-8") as json_file:
             return json.load(json_file)
 
     @staticmethod

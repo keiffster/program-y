@@ -30,7 +30,7 @@ class UserGroupLoader(object):
         return self.load_users_and_groups_from_yaml(yaml_data)
 
     def load_users_and_groups_from_file(self, filename):
-        with open(filename, 'r+') as yml_data_file:
+        with open(filename, 'r+', encoding="utf-8") as yml_data_file:
             yaml_data = yaml.load(yml_data_file)
         return self.load_users_and_groups_from_yaml(yaml_data)
 
