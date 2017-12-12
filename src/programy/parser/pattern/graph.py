@@ -249,7 +249,7 @@ class PatternGraph(object):
 
     def save_braintree(self, bot, clientid, filename, content):
         if content == 'txt':
-            with open(filename, "w+") as dump_file:
+            with open(filename, "w+", encoding="utf-8") as dump_file:
                 self.dump(output_func=dump_file.write, eol="\n")
         elif content == 'xml':
             braintree = '<?xml version="1.0" encoding="UTF-8"?>\n'

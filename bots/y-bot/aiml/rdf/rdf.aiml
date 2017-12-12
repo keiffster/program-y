@@ -245,7 +245,7 @@
                 </set>
             </think>
             <condition var="purpose">
-                <li value="unknown">I don't know what
+                <li value="">I don't know what
                     <star/>
                     is for.
                 </li>

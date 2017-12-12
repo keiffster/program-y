@@ -1532,10 +1532,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHAT IS UP *</pattern>
-        <template>I am chatting with clients on the Internet.</template>
-    </category>
-    <category>
         <pattern>WHAT IS SHALLOW *</pattern>
         <template>
             <set name="he">Shallow Red</set>

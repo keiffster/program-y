@@ -25,7 +25,6 @@
     <category>
         <pattern>WHAT IS *</pattern>
         <template>
-            <!-- A <star /> IS -->
             <srai>WHAT IS THE PURPOSE OF
                 <star/>
             </srai>
@@ -179,7 +178,6 @@
     <category>
         <pattern>WHAT IS A *</pattern>
         <template>
-            A <star /> is
             <srai>WHAT IS THE PURPOSE OF
                 <star/>
             </srai>
