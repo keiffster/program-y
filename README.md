@@ -1,30 +1,37 @@
 # Readme info:
 
-Version: 1.4.3 <br/>
+Version: 1.5.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 1st December 2017 <br/>
+Date: 12th December 2017 <br/>
 
-### Whats New in 1.4
-The next stage of refactoring sees defaults.aiml and personality.aiml refactored out into specific files grouped around topics, subjects and patterns.
-In the same way that 1.3 introduced a easier way to manage reductions, 1.4 introduces the same easy way to manage actual responses.
+### What's new in 1.5
+This version sees a huge increase in the number of categories, adding an additional 45K to the Y-Bot bain
+Also in this release sees the socket bot client first major outing and updates to the get/set nodes to support multi 
+threading and multi client support, fixing an issue in the sanic rest client along the way
+Finally this release also sees the webchat client get multi user support through the use of session cookies
+
+### What's New in 1.4
+The next stage of refactoring sees defaults.aiml and personality.aiml refactored out into specific files grouped around 
+topics, subjects and patterns.
+In the same way that 1.3 introduced a easier way to manage reductions, 1.4 introduces the same easy way to manage actual 
+responses.
 Subsequent point releases will see this refactoring continue.
 
-### Whats New in 1.3
+### What's New in 1.3
 1.3 saw the compete refactoring of the reductions AIML files. These contained over 27K lines of AIML, making
 it almost impossible to edit and maintain. This releases breaks these files into subject specific files.
 Further releases will see the refactoring continue in more detail
 
-### Whats New in 1.2
+### What's New in 1.2
 * RDF Engine completely rewritten to be fully compatible with Alice grammar
 * Refactored Y-Bot triples.txt into more understandable and workable files based on category
 * New RDF Formatter  tool in utils 
 * Updated use of file handling to open all but neccassary files in readonly mode
 * Conversations now persistent between bot restarts
  
-### Whats New in 1.1
+### What's New in 1.1
 * CSV Output.
 * Default Variables
-
 
 # Introduction
 
