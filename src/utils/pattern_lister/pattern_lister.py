@@ -8,10 +8,6 @@ if __name__ == '__main__':
     aiml_dir = sys.argv[1]
     csv_file = sys.argv[2]
 
-    default = None
-    if len(sys.argv) > 5:
-        default = sys.argv[5]
-
     print("aiml_dir:", aiml_dir)
     print("csv_file:", csv_file)
 

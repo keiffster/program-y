@@ -22,20 +22,20 @@ class CSVToAIMLGenerator(object):
             for line in csv_reader:
                 if line:
                     tab = ""
-                    template = line[0].strip(' "')
+                    pattern = line[0].strip(' "')
                     topic = line[1].strip(' "')
                     that = line[2].strip(' "')
-                    pattern = line[3].strip(' "')
+                    template = line[3].strip(' "')
 
                     if topic != "*":
                         aiml_file.write('<topic name="%s">\n'%topic)
                         tab = "\t"
                     aiml_file.write('%s<category>\n'%tab)
-                    aiml_file.write('%s\t<pattern>%s</pattern>\n'%(tab, template))
+                    aiml_file.write('%s\t<pattern>%s</pattern>\n'%(tab, pattern))
                     if that != "*":
                         aiml_file.write('%s\t<that>%s</that>\n' % (tab, that))
                     aiml_file.write('%s\t<template>\n'%tab)
-                    aiml_file.write('%s\t\t%s\n'%(tab, pattern))
+                    aiml_file.write('%s\t\t%s\n'%(tab, template))
                     aiml_file.write('%s\t</template>\n'%tab)
                     aiml_file.write('%s</category>\n'%tab)
 

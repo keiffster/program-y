@@ -6,10 +6,6 @@ if __name__ == '__main__':
     rdf_dir = sys.argv[1]
     csv_file = sys.argv[2]
 
-    default = None
-    if len(sys.argv) > 5:
-        default = sys.argv[5]
-
     print("rdf_dir:", rdf_dir)
     print("csv_file:", csv_file)
 

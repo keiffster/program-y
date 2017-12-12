@@ -166,7 +166,7 @@ if __name__ == "__main__":
     filename = sys.argv[1]
 
     root = Tk()
-    with open(filename, "r+") as xml_file:
+    with open(filename, "r") as xml_file:
         xml = xml_file.read()
     XML_Viewer(root, xml, heading_text="Braintree").pack(fill=BOTH, expand=YES)
     root.mainloop()
