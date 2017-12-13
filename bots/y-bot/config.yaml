@@ -122,6 +122,9 @@ brain:
             url: http://www.pandorabots.com/pandora/talk-xml
         Wikipedia:
             classname: programy.services.wikipediaservice.WikipediaService
+        DuckDuckGo:
+            classname: programy.services.duckduckgo.DuckDuckGoService
+            url: http://api.duckduckgo.com
 
     security:
         authentication:

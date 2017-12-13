@@ -1,4 +1,3 @@
-
 """
 Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
 
@@ -23,8 +22,14 @@ from programy.services.service import Service
 
 class WikipediaAPI(object):
 
+    # Provide a summary of a single article
     def summary(self, title, sentences=0, chars=0, auto_suggest=True, redirect=True):
         return wikipedia.summary(title, sentences, chars, auto_suggest, redirect)
+
+    # Provide a list of articles matching the query
+    # Use summary to return the neccassary action
+    def search(self, query, results=10, suggestion=False):
+        return wikipedia.search(query, results, suggestion)
 
 
 class WikipediaService(Service):
@@ -39,7 +44,17 @@ class WikipediaService(Service):
 
     def ask_question(self, bot, clientid: str, question: str):
         try:
-            search = self._api.summary(question, sentences=1)
+            words  = question.split()
+            question = " ".join(words[1:])
+            if words[0] == 'SUMMARY':
+                search = self._api.summary(question, sentences=1)
+            elif words[0] == 'SEARCH':
+                results = self._api.search(question)
+                search = ", ".join(results)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Unknown Wikipedia command [%s]", words[0])
+                search = ""
             return search
         except wikipedia.exceptions.DisambiguationError:
             if logging.getLogger().isEnabledFor(logging.ERROR):

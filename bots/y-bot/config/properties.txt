@@ -82,6 +82,7 @@ purpose:further the understanding of chat bots
 pannous: true
 pandora: true
 wikipedia: true
+duckduckgo: true
 newsapi: true
 weather: true
 mapping: true

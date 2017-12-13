@@ -4,6 +4,7 @@ import wikipedia
 
 from programy.utils.license.keys import LicenseKeys
 from programy.services.wikipediaservice import WikipediaService
+from programytest.settings import external_services
 
 class TestBot:
 
@@ -42,7 +43,7 @@ class WikipediaServiceTests(unittest.TestCase):
         service = WikipediaService(api=MockWikipediaAPI(response="Test Wikipedia response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self.bot, "testid", "SUMMARY what is a cat")
         self.assertEquals("Test Wikipedia response", response)
 
     def test_ask_question_disambiguous(self):
@@ -65,3 +66,21 @@ class WikipediaServiceTests(unittest.TestCase):
 
         response = service.ask_question(self.bot, "testid", "what is a cat")
         self.assertEquals("", response)
+
+    @unittest.skipIf(not external_services, "External service testing disabled")
+    def test_ask_question_summary(self):
+        service = WikipediaService()
+        self.assertIsNotNone(service)
+
+        response = service.ask_question(self.bot, "testid", "SUMMARY cat")
+        self.assertIsNotNone(response)
+        self.assertEqual("The domestic cat (Felis silvestris catus or Felis catus) is a small, typically furry, carnivorous mammal.", response)
+
+    @unittest.skipIf(not external_services, "External service testing disabled")
+    def test_ask_question_search(self):
+        service = WikipediaService()
+        self.assertIsNotNone(service)
+
+        response = service.ask_question(self.bot, "testid", "SEARCH cat")
+        self.assertIsNotNone(response)
+        self.assertTrue(response.startswith("Cat"))

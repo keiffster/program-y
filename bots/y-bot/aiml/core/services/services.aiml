@@ -19,18 +19,46 @@
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
 
-     <category>
-        <pattern>ASKWIKIPEDIA *</pattern>
+    <category>
+        <pattern>ASKASERVICE *</pattern>
         <template>
+            I was not able to locate that information in my brain, but I could look it up using the following
+            services Pandora, Pannous DuckDuckGo or Wikipedia, which one would you like to use
             <think>
-                <set name="active"><bot name="wikipedia" /></set>
+                <set name="topic">SELECTSERVICE</set>
+                <set name="query"><star/></set>
             </think>
-            <condition name="active">
-                <li value="true"><sraix service="WIKIPEDIA"><star /></sraix></li>
-                <li>Unfortunately Wikipedia is not listening right now, you will need to speak to my bot master to enable it.</li>
-            </condition>
         </template>
     </category>
 
+    <topic name="SELECTSERVICE">
+        <category>
+            <pattern>PANDORA</pattern>
+            <template>
+                <srai>ASKPANDORA <get name="query" /></srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>PANNOUS</pattern>
+            <template>
+                <srai>ASKPANNOUS <get name="query" /></srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>WIKIPEDIA</pattern>
+            <template>
+                <srai>ASKWIKIPEDIA <get name="query" /></srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>DUCKDUCKGO</pattern>
+            <template>
+                <srai>ASKDUCKDUCKGO <get name="query" /></srai>
+            </template>
+        </category>
+    </topic>
 
 </aiml>
