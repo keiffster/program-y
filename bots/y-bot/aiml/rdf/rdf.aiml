@@ -231,6 +231,32 @@
     </category>
 
     <category>
+        <pattern>WHAT IS THE DESCRIPTION OF * *</pattern>
+        <template>
+            <think>
+                <set var="purpose">
+                    <uniq>
+                        <subj>
+                            <star index="2"/>
+                        </subj>
+                        <pred>description</pred>
+                        <obj>?purpose</obj>
+                    </uniq>
+                </set>
+            </think>
+            <condition var="purpose">
+                <li value="">I don't know what <lowercase><star index="1" /></lowercase>
+                    <star index="2"/>
+                    is.
+                </li>
+                <li>
+                    <get var="purpose"/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
         <pattern>WHAT IS THE PURPOSE OF *</pattern>
         <template>
             <think>

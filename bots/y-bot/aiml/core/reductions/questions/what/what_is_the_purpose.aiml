@@ -23,6 +23,24 @@
     <!-- Modified for Y-Bot by Keith Sterling July 2017 -->
 
     <category>
+        <pattern>WHAT IS A *</pattern>
+        <template>
+            <srai>WHAT IS THE DESCRIPTION OF A
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>WHAT IS AN *</pattern>
+        <template>
+            <srai>WHAT IS THE DESCRIPTION OF AN
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
         <pattern>WHAT IS *</pattern>
         <template>
             <srai>WHAT IS THE PURPOSE OF
@@ -30,6 +48,7 @@
             </srai>
         </template>
     </category>
+
     <category>
         <pattern>WHAT
             <set>modal</set>
@@ -42,6 +61,7 @@
             </srai>
         </template>
     </category>
+
     <category>
         <pattern>WHAT
             <set>modal</set>
@@ -169,14 +189,6 @@
     </category>
     <category>
         <pattern>WHAT IS A * USED FOR</pattern>
-        <template>
-            <srai>WHAT IS THE PURPOSE OF
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
-        <pattern>WHAT IS A *</pattern>
         <template>
             <srai>WHAT IS THE PURPOSE OF
                 <star/>

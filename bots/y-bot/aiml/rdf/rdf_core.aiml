@@ -43,8 +43,9 @@
             <set>entity</set>
         </pattern>
         <template>
-            <star/>
-            is an enity.
+            <srai>WHAT IS A
+                <star/>
+            </srai>
         </template>
     </category>
 
