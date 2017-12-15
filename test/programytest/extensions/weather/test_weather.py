@@ -29,15 +29,34 @@ class WeatherExtensionTests(unittest.TestCase):
         weather = WeatherExtension()
         self.assertIsNotNone(weather)
 
-        result = weather.execute(self.test_client.bot, self.clientid, "LOCATION KY39UR WHEN NOW")
+        result = weather.execute(self.test_client.bot, self.clientid, "OBSERVATION LOCATION KY39UR WHEN NOW")
         self.assertIsNotNone(result)
         self.assertEquals("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
 
-        result = weather.execute(self.test_client.bot, self.clientid, "OTHER KY39UR WHEN NOW")
+        result = weather.execute(self.test_client.bot, self.clientid, "OBSERVATION OTHER KY39UR WHEN NOW")
         self.assertIsNone(result)
 
-        result = weather.execute(self.test_client.bot, self.clientid, "LOCATION KY39UR OTHER NOW")
+        result = weather.execute(self.test_client.bot, self.clientid, "OBSERVATION LOCATION KY39UR OTHER NOW")
         self.assertIsNone(result)
 
         result = weather.execute(self.test_client.bot, self.clientid, "")
         self.assertIsNone(result)
+
+    def test_forecast3(self):
+
+        weather = WeatherExtension()
+        self.assertIsNotNone(weather)
+
+        result = weather.execute(self.test_client.bot, self.clientid, "FORECAST3 LOCATION KY39UR WHEN NOW")
+        self.assertIsNotNone(result)
+        print(result)
+        self.assertEquals("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)
+
+    def test_forecast24(self):
+
+        weather = WeatherExtension()
+        self.assertIsNotNone(weather)
+
+        result = weather.execute(self.test_client.bot, self.clientid, "FORECAST24 LOCATION KY39UR WHEN NOW")
+        self.assertIsNotNone(result)
+        self.assertEquals("WEATHER TYPE Cloudy WINDDIR NW WINDGUST 7 WINDSPEED 4 TEMP 8 FEELS 8 HUMID 76 RAINPROB 8 VISTEXT Very good - Between 20-40 km WEATHER Cloudy", result)

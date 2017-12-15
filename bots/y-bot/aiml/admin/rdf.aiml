@@ -5,8 +5,19 @@
         <pattern>YADMIN RDF LIST SUBJECTS</pattern>
         <template>
             <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
-                SUBJECTS
+                SUBJECTS LIST
             </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN RDF COUNT SUBJECTS</pattern>
+        <template>
+            I know
+            <extension path="programy.extensions.admin.rdf.RDFAdminExtension">
+                SUBJECTS COUNT
+            </extension>
+            subjects
         </template>
     </category>
 

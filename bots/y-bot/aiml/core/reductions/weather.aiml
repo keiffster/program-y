@@ -103,12 +103,6 @@
         </template>
     </category>
     <category>
-        <pattern>WEATHER</pattern>
-        <template>
-            <srai>WHAT IS THE WEATHER</srai>
-        </template>
-    </category>
-    <category>
         <pattern>ACCESS THE WEATHER *</pattern>
         <template>
             <srai>WHAT IS THE WEATHER</srai>

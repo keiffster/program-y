@@ -23,34 +23,86 @@ from programy.extensions.base import Extension
 
 class WeatherExtension(Extension):
 
+    # WEATHER [OBSERVATION|FORECAST3|FORECAST24] LOCATION * WHEN *
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
 
         splits = data.split()
-        if len(splits) < 4:
+        if len(splits) != 5:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Weather - Not enough paramters passed, [%d] expected 5"%len(splits))
             return None
 
-        if splits[0] == 'LOCATION':
-            postcode = splits[1]
+        type = splits[0]
+        if type not in ['OBSERVATION', 'FORECAST3', 'FORECAST24']:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Weather - Type not understood [%s]"%type)
+            return None
+
+        if splits[1] == 'LOCATION':
+            postcode = splits[2]
         else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Weather - LOCATION missing")
             return None
 
-        if splits[2] == 'WHEN':
-            when = splits[3]
+        if splits[3] == 'WHEN':
+            when = splits[4]
         else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Weather - WHEN missing")
             return None
 
+        if type == 'OBSERVATION':
+            return self.get_observation(bot, clientid, postcode, when)
+        elif type == 'FORECAST3':
+            return self.get_forecast3(bot, clientid, postcode, when)
+        elif type == 'FORECAST24':
+            return self.get_forecast24(bot, clientid, postcode, when)
+
+    def get_observation(self, bot, clientid, postcode, when):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting weather for %s at time %s", postcode, when)
+            logging.debug("Getting weather observation for [%s] at time [%s]"%(postcode, when))
 
         googlemaps = GoogleMaps(bot.license_keys)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Weather - Calling external weather service for with extra data [%s]", data)
-
         met_office = MetOffice(bot.license_keys)
 
         observation = met_office.current_observation(latlng.latitude, latlng.longitude)
+        if observation is not None:
+            return observation.get_latest().to_program_y_text()
+        else:
+            return None
 
-        return observation.get_latest().to_program_y_text()
+    def get_forecast3(self, bot, clientid, postcode, when):
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Getting 3 hourly weather forecast for [%s] at time [%s]"%(postcode, when))
+
+        googlemaps = GoogleMaps(bot.license_keys)
+        latlng = googlemaps.get_latlong_for_location(postcode)
+
+        met_office = MetOffice(bot.license_keys)
+
+        forecast = met_office.three_hourly_forecast(latlng.latitude, latlng.longitude)
+        if forecast is not None:
+            return forecast.get_latest().to_program_y_text()
+        else:
+            return None
+
+    def get_forecast24(self, bot, clientid, postcode, when):
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Getting 24 hour weather forecast for [%s] at time [%s]"%(postcode, when))
+
+        googlemaps = GoogleMaps(bot.license_keys)
+        latlng = googlemaps.get_latlong_for_location(postcode)
+
+        met_office = MetOffice(bot.license_keys)
+
+        forecast = met_office.daily_forecast(latlng.latitude, latlng.longitude)
+        if forecast is not None:
+            return forecast.get_latest().to_program_y_text()
+        else:
+            return None
+

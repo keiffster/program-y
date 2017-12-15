@@ -157,8 +157,9 @@
             </sentence>
         </template>
     </category>
+
     <category>
-        <pattern>DAYS UNTIL CHRISTMAS</pattern>
+        <pattern>DAYS <iset words="UNTIL, TILL" /> CHRISTMAS</pattern>
         <template>
             <interval format="%B %d" jformat="MMMMMMMMM dd">
                 <style>days</style>

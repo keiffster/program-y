@@ -41,6 +41,7 @@ DIRECTIONS = {'N': 'North',
 PRESSURE_TENDANCY = {'F': "Falling",
                      'R': 'Rising'}
 
+
 class DataPoint(object):
 
     def extract_attribute(self, json_data, name, data_type, time_period=None):
@@ -63,6 +64,7 @@ class DataPoint(object):
         if direction in DIRECTIONS:
             return DIRECTIONS[direction]
         return "Unknown"
+
 
 class DailyForecastDayDataPoint(DataPoint):
 
@@ -87,7 +89,18 @@ class DailyForecastDayDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER %s"%(
+        return "WEATHER TYPE %s WINDDIR %s WINDSPEED %s WINDGUST %s TEMP %s FEELS %s HUMID %d RAINPROB %s UVINDEX %s UVGUIDE %s VIS %s WEATHER %s"%(
+            self._type,
+            self._wind_direction,
+            self._wind_speed,
+            self._wind_gust_noon,
+            self._temp_max,
+            self._temperature_feels_like_max,
+            self._screen_relative_humidity_noon,
+            self._precipitation_probability,
+            self._uv_index_max,
+            self._uv_guidance,
+            self._visibility_text,
             self._weather_type_text
         )
 
@@ -110,6 +123,7 @@ class DailyForecastDayDataPoint(DataPoint):
         if self._weather_type_code is not None:
             self._weather_type_text = metoffer.WEATHER_CODES[int(self._weather_type_code)]
 
+
 class DailyForecastNightDataPoint(DataPoint):
 
     def __init__(self):
@@ -131,7 +145,16 @@ class DailyForecastNightDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER %s"%(
+        return "WEATHER TYPE %s WINDDIR %s WINDGUST %s WINDSPEED %s TEMP %s FEELS %s HUMID %s RAINPROB %s VISTEXT %s WEATHER %s"%(
+            self._weather_type_text,
+            self._wind_direction,
+            self._wind_gust_midnight,
+            self._wind_speed,
+            self._temp_min,
+            self._temperature_feels_like_min,
+            self._screen_relative_humidity_midnight,
+            self._precipitation_probability,
+            self._visibility_text,
             self._weather_type_text
         )
 
@@ -150,6 +173,7 @@ class DailyForecastNightDataPoint(DataPoint):
         self._weather_type_code = self.extract_attribute(json_data, 'W', data_type, time_period)
         if self._weather_type_code is not None:
             self._weather_type_text = metoffer.WEATHER_CODES[int(self._weather_type_code)]
+
 
 class ThreeHourlyForecastDataPoint(DataPoint):
 
@@ -205,15 +229,20 @@ class ThreeHourlyForecastDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER %s TEMP %s TF %s WIND D %s F %s S %s VISIBILITY %s UV I %s G %s RAIN %s HUMIDITY %s"%(
+        return "WEATHER %s TEMP %s FEELS %s WINDDIR %s WINDDIRFULL %s WINDSPEED %s VIS %s UVINDEX %s UVGUIDE %s RAINPROB %s HUMIDITY %s"%(
             self._weather_type_text,
-            self._temperature, self._temperature_feels_like,
-            self._wind_direction, self._wind_direction_full, self._wind_speed,
+            self._temperature,
+            self._temperature_feels_like,
+            self._wind_direction,
+            self._wind_direction_full,
+            self._wind_speed,
             self._visibility_text,
-            self._uv_index_max, self._uv_guidance,
+            self._uv_index_max,
+            self._uv_guidance,
             self._precipitation_probability,
             self._screen_relative_humidity
         )
+
 
 class ObservationDataPoint(DataPoint):
 
@@ -289,6 +318,7 @@ class ObservationDataPoint(DataPoint):
         if tendancy in PRESSURE_TENDANCY:
             return PRESSURE_TENDANCY[tendancy]
         return "Unknown"
+
 
 class Report(object):
 
@@ -434,6 +464,7 @@ class Location(object):
         else:
             raise ValueError("name missing from Location data")
 
+
 class DV(object):
 
     def __init__(self, data_type, time_period):
@@ -460,6 +491,7 @@ class DV(object):
             self._type = json_data['type']
         else:
             raise ValueError("type missing from DV data")
+
 
 class SiteReport(object):
 

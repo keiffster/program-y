@@ -31,10 +31,13 @@ class RDFAdminExtension(Extension):
         segments = data.split()
         if segments[0] == 'SUBJECTS':
             subjects = bot.brain.rdf.subjects()
-            rdf += "<ul>"
-            for subject in subjects:
-                rdf += "<li>%s</li>"%subject
-            rdf += "</ul>"
+            if segments[1] == 'LIST':
+                rdf += "<ul>"
+                for subject in subjects:
+                    rdf += "<li>%s</li>"%subject
+                rdf += "</ul>"
+            else:
+                return str(len(subjects))
 
         elif segments[0] == "PREDICATES":
             subject = segments[1]
