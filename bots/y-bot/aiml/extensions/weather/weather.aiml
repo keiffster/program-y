@@ -61,7 +61,7 @@
         </pattern>
         <template>
             <think>
-                <set name="active"><bot name="weather" />
+                <set name="active"><bot name="weather" /></set>
             </think>
             <condition name="active">
                 <li value="true">
