@@ -15,7 +15,7 @@ class WebChatBotClient(BotClient):
         BotClient.__init__(self, "WebChat")
 
     def set_environment(self):
-        self.bot.brain.properties.add_property("env", "REST")
+        self.bot.brain.properties.add_property("env", "webchat")
 
     def get_client_configuration(self):
         return WebChatConfiguration()
