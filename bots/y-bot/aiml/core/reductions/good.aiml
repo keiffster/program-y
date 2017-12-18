@@ -84,6 +84,12 @@
         </template>
     </category>
     <category>
+        <pattern>TERRIFIC</pattern>
+        <template>
+            <srai>GOOD</srai>
+        </template>
+    </category>
+    <category>
         <pattern>GREAT</pattern>
         <template>
             <srai>GOOD</srai>

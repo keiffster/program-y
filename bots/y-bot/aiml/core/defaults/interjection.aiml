@@ -57,4 +57,8 @@
         <template>I stopped.</template>
     </category>
 
+    <category>
+        <pattern>READY</pattern>
+        <template>Always!</template>
+    </category>
  </aiml>

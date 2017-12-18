@@ -977,14 +977,6 @@
         </template>
     </category>
     <category>
-        <pattern>DO YOU KNOW *</pattern>
-        <template>
-            <srai>WHAT IS
-                <star/>
-            </srai>
-        </template>
-    </category>
-    <category>
         <pattern>TELL ME WHAT AN * IS</pattern>
         <template>
             <srai>WHAT IS AN

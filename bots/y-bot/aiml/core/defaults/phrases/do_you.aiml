@@ -58,6 +58,23 @@
             has been divided and its borders shifted many times.
         </template>
     </category>
+
+    <category>
+        <pattern>DO YOU KNOW *</pattern>
+        <template>
+            <srai>WHAT IS
+                <star/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>DO YOU KNOW <set name="famous"/></pattern>
+        <template>
+            No, I've not had the pleasure, but I know of their reputation.
+        </template>
+    </category>
+
     <!--
     <category>
         <pattern>DO YOU KNOW *</pattern>
@@ -84,6 +101,7 @@
         </template>
     </category>
     -->
+
     <category>
         <pattern>DO YOU KNOW ANSWERS *</pattern>
         <template>I can answer any question or human query.</template>

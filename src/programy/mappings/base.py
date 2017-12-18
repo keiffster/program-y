@@ -158,9 +158,12 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         if line is not None and line:
             pattern = re.compile(self.get_split_pattern())
             match = pattern.search(line)
-            lhs = match.group(1)
-            rhs = match.group(2)
-            return [lhs, rhs]
+            if match is not None:
+                lhs = match.group(1)
+                rhs = match.group(2)
+                return [lhs, rhs]
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Pattern is bad [%s]"%line)
         return None
 
     def normalise_pattern(self, pattern):
@@ -179,14 +182,16 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         return pattern
 
     def process_splits(self, splits):
-        pattern_text = self.normalise_pattern(splits[0])
-        start = pattern_text.lstrip()
-        middle = pattern_text
-        end = pattern_text.rstrip()
-        pattern = "(^%s|%s|%s$)" % (start, middle, end)
-        replacement = splits[1]
-        self._pairs.append([splits[0], pattern, replacement])
-        return True
+        if splits is not None and len(splits) > 0:
+            pattern_text = self.normalise_pattern(splits[0])
+            start = pattern_text.lstrip()
+            middle = pattern_text
+            end = pattern_text.rstrip()
+            pattern = "(^%s|%s|%s$)" % (start, middle, end)
+            replacement = splits[1]
+            self._pairs.append([splits[0], pattern, replacement])
+            return True
+        return False
 
     def replace_by_pattern(self, replacable):
         alreadys = []

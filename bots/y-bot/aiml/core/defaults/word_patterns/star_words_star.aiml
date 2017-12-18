@@ -756,4 +756,8 @@
         </template>
     </category>
 
+    <category>
+        <pattern>MAN MADE *</pattern>
+        <template>Was it any good?</template>
+    </category>
  </aiml>

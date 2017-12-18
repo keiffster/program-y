@@ -293,6 +293,7 @@
 " u."," u "
 " u.s. "," USA "
 " u.s.a. "," USA "
+" u "," you "
 " ur "," your "
 " v."," v "
 " v.i.s "," v i s "

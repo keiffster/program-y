@@ -248,6 +248,22 @@
     </category>
 
     <category>
+        <pattern>HAHAH</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>AHAHA</pattern>
+        <template>
+            <srai>LOL</srai>
+            <sr/>
+        </template>
+    </category>
+
+    <category>
         <pattern>HAHAHA *</pattern>
         <template>
             <srai>LOL</srai>
