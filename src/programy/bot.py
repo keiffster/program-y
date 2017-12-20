@@ -61,6 +61,13 @@ class Bot(object):
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("No configuration defined when loading license keys")
 
+    def _load_license_keys(self, bot_configuration):
+        if bot_configuration.license_keys is not None:
+            self._license_keys.load_license_key_file(bot_configuration.license_keys)
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("No configuration setting for license_keys")
+
     def initiate_spellchecker(self):
         # TODO Move this to Spelling bass class
         if self._configuration is not None:
@@ -91,13 +98,6 @@ class Bot(object):
     @property
     def license_keys(self):
         return self._license_keys
-
-    def _load_license_keys(self, bot_configuration):
-        if bot_configuration.license_keys is not None:
-            self._license_keys.load_license_key_file(bot_configuration.license_keys)
-        else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for license_keys")
 
     @property
     def prompt(self):

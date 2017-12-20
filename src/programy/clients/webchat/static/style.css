@@ -1,4 +1,120 @@
 /* CSS Document */
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.columnsContainer, footer, header {
+    position: relative; margin: .5em;
+}
+
+.leftColumn, .rightColumn, footer, header {
+  border: 1px solid  #ccc;
+  padding: .25em;
+}
+
+.leftColumn {
+    margin-bottom: .5em;
+}
+
+.nav {
+  list-style: none;
+  margin-left: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+.nav > li,
+.nav > li > a {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+.inline-items {
+  margin-top: 0;
+}
+
+.inline-items li {
+  margin-left: 0;
+  border-left: 1px solid black;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.inline-items li:first-child {
+  margin-left: 0;
+  border: none;
+  padding-left: 0;
+  padding-right: 10px;
+}
+
+.inline-items li:last-child {
+  padding-right: 0;
+}
+
+/* Chat Window Style */
+
+form, p, span {
+    margin:0;
+    padding:0; }
+
+input {
+    font:12px arial;
+}
+
+a {
+    color:#0000FF;
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:underline;
+}
+
+#wrapper, #loginform {
+    margin:0 auto;
+    padding-bottom:5px;
+    background:#EBF4FB;
+    border:1px solid #ACD8F0;
+}
+
+#loginform { padding-top:18px; }
+
+#loginform p { margin: 5px; }
+
+#chatbox {
+    text-align:left;
+    margin:0 auto;
+    margin-bottom:25px;
+    padding:5px;
+    background:#fff;
+    height: 270px;
+    width: 100%;
+    /* border:1px solid #ACD8F0; */
+    overflow: scroll;
+    }
+
+#usermsg {
+    width:90%;
+    border:1px solid #ACD8F0;
+    }
+
+#submit { width: 60px; align: right}
+
+
+/* MEDIA QUERIES */
+@media screen and (min-width: 47.5em ) {
+  .leftColumn { margin-right: 19.5em; }
+
+	.rightColumn { position: absolute; top: 0; right: 0; width: 18.75em; }
+}
+
+/*
 body {
     font:12px arial;
     color: #222;
@@ -87,3 +203,5 @@ clear:both;
 .question {
     text-align: left;
 }
+
+*/

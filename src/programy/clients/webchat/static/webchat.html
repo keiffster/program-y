@@ -1,5 +1,76 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+        <title>Y-Bot Chat Window</title>
+		<meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link type="text/css" rel="stylesheet" href="static/style.css" />
+    </head>
+
+  <body>
+
+    <header>
+  	<h1>Welcome to Program-Y Demonstration</h1>
+    <h3>A Fully 2.x AIML Complaint Python 3 based Open Source Chatbot Framework</h3>
+        <!--
+       <nav>
+          <ul class="nav inline-items">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Photos</a></li>
+            <li><a href="#">My Trips</a></li>
+         </ul>
+      </nav>
+      -->
+    </header>
+
+  	<div class="columnsContainer">
+
+	  	<div class="leftColumn">
+
+            <div id="wrapper">
+                <div id="menu">
+                    <p class="welcome">Chat Window<b></b></p>
+                    <div style="clear:both"></div>
+                </div>
+
+                <div id="chatbox"></div>
+
+                <form name="message" action="">
+                    <input name="usermsg" type="text" id="usermsg" size="63" />
+                    <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+                </form>
+            </div>
+	  	</div>
+
+	  	<div class="rightColumn">
+            <div id="wrapper">
+    	  		<p class="welcome">Popular Questions<b></b></p>
+                <ul>
+                    <li class="question"><a href="#">Who are you?</a></li>
+                    <li class="question"><a href="#">What are you?</a></li>
+                    <li class="question"><a href="#">Where are you?</a></li>
+                </ul>
+            </div>
+	  	</div>
+
+  	</div>
+
+    <footer>
+        <a href="https://github.com/keiffster/program-y">Program-Y on GitHub</a> |
+        <a href="https://github.com/keiffster/program-y/wiki">Documentation</a> |
+        <a href="http://www.keithsterling.com">Meet the Author</a> |
+        <a href="http://servusai.com">Professional Services</a>
+  	</footer>
+
+    <script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="static/y-bot.js"></script>
+
+  </body>
+
+<!--
     <head>
         <title>Y-Bot Chat Window</title>
         <link type="text/css" rel="stylesheet" href="static/style.css" />
@@ -45,4 +116,7 @@
         <script type="text/javascript" src="static/jquery-3.2.1.min.js"></script>
         <script type="text/javascript" src="static/y-bot.js"></script>
     </body>
+
+-->
+
 </html>
