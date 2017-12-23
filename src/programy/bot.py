@@ -25,12 +25,17 @@ from programy.utils.classes.loader import ClassLoader
 from programy.dialog import Sentence
 from programy.utils.files.filewriter import ConversationFileWriter
 
-
 class Bot(object):
 
     def __init__(self, brain, config: BotConfiguration):
         self._brain = brain
         self._configuration = config
+
+        if logging.getLogger().isEnabledFor(logging.INFO):
+            logging.info("Loading tokenizer from class [%s]", self._configuration.tokenizer.classname)
+        tokenizer = ClassLoader.instantiate_class(self._configuration.tokenizer.classname)
+        self._tokenizer = tokenizer(self._configuration.tokenizer.split_chars)
+    
         self._conversations = {}
         self._question_depth = 0
         self._question_start_time = None
@@ -272,9 +277,9 @@ class Bot(object):
             pre_processed = self._configuration.empty_string
 
         if srai is False:
-            question = Question.create_from_text(pre_processed)
+            question = Question.create_from_text(pre_processed, tokenizer=self._tokenizer)
         else:
-            question = Question.create_from_text(pre_processed, split=False)
+            question = Question.create_from_text(pre_processed, tokenizer=self._tokenizer, split=False)
 
         conversation = self.get_conversation(clientid)
         conversation.record_dialog(question)
@@ -343,7 +348,7 @@ class Bot(object):
 
     def get_default_response(self, clientid):
         if self.default_response_srai is not None:
-            sentence = Sentence(self.default_response_srai)
+            sentence = Sentence(self.default_response_srai, tokenizer = self._tokenizer)
             default_response = self.brain.ask_question(self, clientid, sentence, srai=False)
             if default_response is None or not default_response:
                 default_response = self.default_response
@@ -353,7 +358,7 @@ class Bot(object):
 
     def get_initial_question(self, clientid):
         if self.initial_question_srai is not None:
-            sentence = Sentence(self.initial_question_srai)
+            sentence = Sentence(self.initial_question_srai, tokenizer = self._tokenizer)
             initial_question = self.brain.ask_question(self, clientid, sentence, srai=False)
             if initial_question is None or not initial_question:
                 initial_question = self.initial_question
@@ -363,7 +368,7 @@ class Bot(object):
 
     def get_exit_response(self, clientid):
         if self.exit_response_srai is not None:
-            sentence = Sentence(self.exit_response_srai)
+            sentence = Sentence(self.exit_response_srai, tokenizer = self._tokenizer)
             exit_response = self.brain.ask_question(self, clientid, sentence, srai=False)
             if exit_response is None or not exit_response:
                 exit_response = self.exit_response
