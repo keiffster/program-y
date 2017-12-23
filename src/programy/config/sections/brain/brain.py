@@ -27,6 +27,7 @@ from programy.config.sections.brain.services import BrainServicesConfiguration
 from programy.config.sections.brain.securities import BrainSecuritiesConfiguration
 from programy.config.sections.brain.oobs import BrainOOBSConfiguration
 from programy.config.sections.brain.dynamic import BrainDynamicsConfiguration
+from programy.config.sections.brain.tokenizer import BrainTokenizerConfiguration
 
 
 class BrainConfiguration(BaseContainerConfigurationData):
@@ -44,6 +45,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._security = BrainSecuritiesConfiguration()
         self._oob = BrainOOBSConfiguration()
         self._dynamics = BrainDynamicsConfiguration()
+        self._tokenizer = BrainTokenizerConfiguration()
 
     @property
     def language(self):
@@ -89,6 +91,10 @@ class BrainConfiguration(BaseContainerConfigurationData):
     def dynamics(self):
         return self._dynamics
 
+    @property
+    def tokenizer(self):
+        return self._tokenizer
+
     def load_configuration(self, configuration_file, bot_root):
         brain_config = configuration_file.get_section("brain")
         if brain_config is not None:
@@ -103,3 +109,4 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._security.load_config_section(configuration_file, brain_config, bot_root)
             self._oob.load_config_section(configuration_file, brain_config, bot_root)
             self._dynamics.load_config_section(configuration_file, brain_config, bot_root)
+            self._tokenizer.load_config_section(configuration_file, brain_config, bot_root)

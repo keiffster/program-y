@@ -20,6 +20,7 @@ import logging
 from programy.config.base import BaseContainerConfigurationData
 from programy.config.sections.bot.spelling import BotSpellingConfiguration
 from programy.config.sections.bot.conversations import BotConversationsConfiguration
+from programy.config.sections.bot.tokenizer import BotTokenizerConfiguration
 
 
 class BotConfiguration(BaseContainerConfigurationData):
@@ -59,6 +60,7 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._tab_parse_output = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
         self._spelling = BotSpellingConfiguration()
         self._conversations = BotConversationsConfiguration()
+        self._tokenizer = BotTokenizerConfiguration()
         BaseContainerConfigurationData.__init__(self, "bot")
 
     def load_configuration(self, configuration_file, bot_root):
@@ -96,6 +98,7 @@ class BotConfiguration(BaseContainerConfigurationData):
 
             self._spelling.load_config_section(configuration_file, bot, bot_root)
             self._conversations.load_config_section(configuration_file, bot, bot_root)
+            self._tokenizer.load_config_section(configuration_file, bot, bot_root)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("Config section [%s] missing, using default values", self.section_name)
@@ -207,3 +210,7 @@ class BotConfiguration(BaseContainerConfigurationData):
     @property
     def conversations(self):
         return self._conversations
+
+    @property
+    def tokenizer(self):
+        return self._tokenizer

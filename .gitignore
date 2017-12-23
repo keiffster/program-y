@@ -108,7 +108,12 @@ temp/
 conversations/
 /src/utils/pattern_lister/y-bot.csv
 /src/utils/rdf_lister/rdfs.csv
+
 /bots/scratch/
 bots/scratch/
 /bots/multibot/
 bots/multibot/
+
+# Visual Studio code
+.vscode
+
