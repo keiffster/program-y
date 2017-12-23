@@ -89,3 +89,4 @@ class CjkTokenizer(Tokenizer):
         raise Exception("Num word array violation !")
 
 DEFAULT_TOKENIZER = Tokenizer()
+
