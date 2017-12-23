@@ -22,6 +22,8 @@ from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.bot import TemplateBotNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class TemplateConditionVariable(TemplateNode):
 
@@ -30,12 +32,13 @@ class TemplateConditionVariable(TemplateNode):
     LOCAL = 2
     BOT = 3
 
-    def __init__(self, name=None, value=None, var_type=GLOBAL, loop=False):
+    def __init__(self, name=None, value=None, var_type=GLOBAL, loop=False, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
         TemplateNode.__init__(self)
         self._name = name
         self._value = value
         self._var_type = var_type
         self._loop = loop
+        self._tokenizer = tokenizer
 
     @property
     def name(self):
@@ -113,8 +116,9 @@ class TemplateConditionNode(TemplateConditionVariable):
     SINGLE = 2
     MULTIPLE = 3
 
-    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False, condition_type=BLOCK):
-        TemplateConditionVariable.__init__(self, name, value, var_type, loop)
+    def __init__(self, name=None, value=None, var_type=TemplateConditionVariable.GLOBAL, loop=False, condition_type=BLOCK, 
+                tokenizer: Tokenizer = DEFAULT_TOKENIZER):
+        TemplateConditionVariable.__init__(self, name, value, var_type, loop, tokenizer)
         self._condition_type = condition_type
 
     def get_default(self):
@@ -405,7 +409,7 @@ class TemplateConditionNode(TemplateConditionVariable):
 
             # Condition comparison is always case insensetive
             if value.upper() == self.value.resolve(bot, clientid).upper():
-                resolved = " ".join([child.resolve(bot, clientid) for child in self.children])
+                resolved = self._tokenizer.words_to_texts([child.resolve(bot, clientid) for child in self.children])
             else:
                 resolved = ""
 
@@ -427,7 +431,7 @@ class TemplateConditionNode(TemplateConditionVariable):
 
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():
-                        resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                        resolved = self._tokenizer.words_to_texts([child_node.resolve(bot, clientid) for child_node in condition.children])
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
                             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
@@ -438,7 +442,7 @@ class TemplateConditionNode(TemplateConditionVariable):
 
             default = self.get_default()
             if default is not None:
-                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
+                resolved = self._tokenizer.words_to_texts([child_node.resolve(bot, clientid) for child_node in default.children])
 
                 if default.loop is True:
                     resolved = resolved.strip() + " " + self.resolve(bot, clientid)
@@ -462,7 +466,7 @@ class TemplateConditionNode(TemplateConditionVariable):
 
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():
-                        resolved = " ".join([child_node.resolve(bot, clientid) for child_node in condition.children])
+                        resolved = self._tokenizer.words_to_texts([child_node.resolve(bot, clientid) for child_node in condition.children])
                         if logging.getLogger().isEnabledFor(logging.DEBUG):
                             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
@@ -473,7 +477,7 @@ class TemplateConditionNode(TemplateConditionVariable):
 
             default = self.get_default()
             if default is not None:
-                resolved = " ".join([child_node.resolve(bot, clientid) for child_node in default.children])
+                resolved = self._tokenizer.words_to_texts([child_node.resolve(bot, clientid) for child_node in default.children])
 
                 if default.loop is True:
                     resolved = resolved.strip() + " " + self.resolve(bot, clientid).strip()

@@ -30,6 +30,8 @@ from programy.dialog import Sentence
 from programy.parser.pattern.matcher import MatchContext
 from programy.utils.files.filewriter import ErrorsFileWriter
 from programy.utils.files.filewriter import DuplicatesFileWriter
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 
 class AIMLLoader(FileFinder):
@@ -47,10 +49,11 @@ class AIMLLoader(FileFinder):
 
 class AIMLParser(object):
 
-    def __init__(self, brain=None):
+    def __init__(self, brain=None, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
         self._brain = brain
-        self.pattern_parser = PatternGraph(aiml_parser=self)
-        self.template_parser = TemplateGraph(aiml_parser=self)
+        self._tokenizer = tokenizer
+        self.pattern_parser = PatternGraph(aiml_parser=self, tokenizer=tokenizer)
+        self.template_parser = TemplateGraph(aiml_parser=self, tokenizer=tokenizer)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
         self._duplicates = None
@@ -446,14 +449,14 @@ class AIMLParser(object):
 
     def match_sentence(self, bot, clientid, pattern_sentence, topic_pattern, that_pattern):
 
-        topic_sentence = Sentence(topic_pattern)
-        that_sentence = Sentence(that_pattern)
+        topic_sentence = Sentence(topic_pattern, tokenizer = self._tokenizer)
+        that_sentence = Sentence(that_pattern, tokenizer = self._tokenizer)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
                           pattern_sentence.text(), topic_pattern, that_pattern)
 
-        sentence = Sentence()
+        sentence = Sentence(tokenizer = self._tokenizer)
         sentence.append_sentence(pattern_sentence)
         sentence.append_word('__TOPIC__')
         sentence.append_sentence(topic_sentence)

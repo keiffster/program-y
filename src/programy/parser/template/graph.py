@@ -18,12 +18,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.parser.exceptions import ParserException
 from programy.parser.template.factory import TemplateNodeFactory
 from programy.utils.text.text import TextUtils
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class TemplateGraph(object):
 
-    def __init__(self, aiml_parser=None):
+    def __init__(self, aiml_parser=None, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
         self._aiml_parser = aiml_parser
         self.node_lookups = None
+        self._tokenizer = tokenizer
 
         template_nodes = None
         if aiml_parser is not None:
@@ -54,7 +57,7 @@ class TemplateGraph(object):
     # Helper function to return TemplateNode
     def get_base_node(self):
         base_class = self.get_node_class_by_name('base')
-        return base_class()
+        return base_class(tokenizer=self._tokenizer)
 
     # Helper function to return TemplateWordNode
     def get_word_node(self, text):
@@ -64,7 +67,10 @@ class TemplateGraph(object):
     def parse_tag_expression(self, expression, branch):
         tag_name = TextUtils.tag_from_text(expression.tag)
         if self._template_factory.exists(tag_name):
-            node_instance = self._template_factory.new_node_class(tag_name)()
+            if tag_name == "condition":
+                node_instance = self._template_factory.new_node_class(tag_name)(tokenizer=self._tokenizer)
+            else:
+                node_instance = self._template_factory.new_node_class(tag_name)()
             node_instance.parse_expression(self, expression)
             branch.children.append(node_instance)
         else:
