@@ -88,5 +88,5 @@ class CjkTokenizer(Tokenizer):
             return self.words_to_texts(words[current_pos:])
         raise Exception("Num word array violation !")
 
-
 DEFAULT_TOKENIZER = Tokenizer()
+
