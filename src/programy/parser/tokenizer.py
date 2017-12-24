@@ -67,14 +67,20 @@ class CjkTokenizer(Tokenizer):
     
     def words_to_texts(self, words):
         texts = ''
-
+        prev_is_cjk = True
+        
         for word in words:
             if self._is_chinese_word(word):
+                if prev_is_cjk == False:
+                    texts += ' '
                 texts += word
+                prev_is_cjk = True
             elif len(texts) > 0:
                 texts += ' ' + word
+                prev_is_cjk = False
             else:
                 texts += word
+                prev_is_cjk = False
         return texts
 
     def words_from_current_pos(self, words, current_pos):
