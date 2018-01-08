@@ -49,7 +49,7 @@
             <srai>
                 SHOW_WEATHER
                 <extension path="programy.extensions.weather.weather.WeatherExtension">
-                    LOCATION <star index="1"/> WHEN <star index="2"/>
+                    OBSERVATION LOCATION <star index="1"/> WHEN <star index="2"/>
                 </extension>
             </srai>
         </template>
