@@ -117,7 +117,7 @@ class DailyForecastDayDataPointTests(unittest.TestCase):
         self.assertEqual("1", dp._weather_type_code)
         self.assertEqual("Sunny day", dp._weather_type_text )
 
-        self.assertEquals("WEATHER Sunny day", dp.to_program_y_text())
+        self.assertEquals("WEATHER TYPE Day WINDDIR S WINDSPEED 9 WINDGUST 16 TEMP 15 FEELS 13 HUMID 54 RAINPROB 0 UVINDEX 4 UVGUIDE Moderate exposure. Seek shade during midday hours, cover up and wear sunscreen VIS Very good - Between 20-40 km WEATHER Sunny day", dp.to_program_y_text())
 
 class DailyForecastNightDataPointTests(unittest.TestCase):
 
@@ -168,7 +168,7 @@ class DailyForecastNightDataPointTests(unittest.TestCase):
         self.assertEqual("7", dp._weather_type_code)
         self.assertEqual("Cloudy", dp._weather_type_text)
 
-        self.assertEquals("WEATHER Cloudy", dp.to_program_y_text())
+        self.assertEquals("WEATHER TYPE Cloudy WINDDIR SSW WINDGUST 16 WINDSPEED 7 TEMP 9 FEELS 7 HUMID 86 RAINPROB 57 VISTEXT Good - Between 10-20 km WEATHER Cloudy", dp.to_program_y_text())
 
 class ThreeHourlyForecastDataPointTests(unittest.TestCase):
 
@@ -226,7 +226,8 @@ class ThreeHourlyForecastDataPointTests(unittest.TestCase):
         self.assertEqual("0", dp._precipitation_probability)
         self.assertEqual("96", dp._screen_relative_humidity)
 
-        self.assertEquals("WEATHER Sunny day TEMP 4 TF 3 WIND D S F South S 2 VISIBILITY Moderate - Between 4-10 km UV I 1 G Low exposure. No protection required. You can safely stay outside RAIN 0 HUMIDITY 96", dp.to_program_y_text())
+        self.assertEquals("WEATHER Sunny day TEMP 4 FEELS 3 WINDDIR S WINDDIRFULL South WINDSPEED 2 VIS Moderate - Between 4-10 km UVINDEX 1 UVGUIDE Low exposure. No protection required. You can safely stay outside RAINPROB 0 HUMIDITY 96", dp.to_program_y_text())
+
 
 class ObservationDataPointTests(unittest.TestCase):
 

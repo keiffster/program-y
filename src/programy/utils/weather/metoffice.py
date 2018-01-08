@@ -89,7 +89,7 @@ class DailyForecastDayDataPoint(DataPoint):
     # <pattern></pattern>
     #
     def to_program_y_text(self):
-        return "WEATHER TYPE %s WINDDIR %s WINDSPEED %s WINDGUST %s TEMP %s FEELS %s HUMID %d RAINPROB %s UVINDEX %s UVGUIDE %s VIS %s WEATHER %s"%(
+        return "WEATHER TYPE %s WINDDIR %s WINDSPEED %s WINDGUST %s TEMP %s FEELS %s HUMID %s RAINPROB %s UVINDEX %s UVGUIDE %s VIS %s WEATHER %s"%(
             self._type,
             self._wind_direction,
             self._wind_speed,

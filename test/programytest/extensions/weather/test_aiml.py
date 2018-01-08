@@ -34,5 +34,6 @@ class WeathersAIMLTests(unittest.TestCase):
     def test_weather(self):
         response = WeathersAIMLTests.test_client.bot.ask_question("testid", "WEATHER LOCATION KY39UR WHEN TODAY")
         self.assertIsNotNone(response)
+        print(response)
         self.assertEqual(response, "Today the weather is Partly cloudy (day) , with a temperature of 12 dot 3 \'C")
 
