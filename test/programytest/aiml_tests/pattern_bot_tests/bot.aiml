@@ -26,4 +26,12 @@ For more information see [url]
         </template>
     </category>
 
+    <category>
+        <pattern>MY OTHER FAVORITE COLOR USED TO BE <bot name="favouritecolor" /></pattern>
+        <template>
+            YES <star /> WAS A NICE COLOR.
+        </template>
+    </category>
+
+
 </aiml>

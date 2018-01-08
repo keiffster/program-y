@@ -25,3 +25,9 @@ class PatternBotAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "RED IS A NICE COLOR.")
 
+    def test_pattern_bot_match_name_variant(self):
+        PatternBotAIMLTests.test_client.bot.brain.dump_tree()
+
+        response = PatternBotAIMLTests.test_client.bot.ask_question("test",  "MY OTHER FAVORITE COLOR USED TO BE RED")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "YES RED WAS A NICE COLOR.")
