@@ -31,11 +31,8 @@ RUN su -c 'git clone https://github.com/keiffster/program-y.git /home/program-y/
 # Get pip to download and install requirements:
 RUN pip3.6 install -r /home/program-y/program-y/requirements.txt
 
-# Expose ports for webchat if launched as program-y user (access through http://localhost:8080)
-# EXPOSE 8080
-
-# Expose ports for webchat if launched as root user (access through http://localhost:80)
-EXPOSE 80
+# Expose ports for webchat if launched as program-y user
+EXPOSE 8080
 
 # Copy the launch script inside the container
 # launch.sh is : su -c 'cd /home/program-y/program-y/bots/y-bot/ && /home/program-y/program-y/bots/y-bot/y-bot-webchat.sh' - program-y
