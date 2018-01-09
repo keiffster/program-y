@@ -56,6 +56,15 @@ class AIMLParser(object):
         self._duplicates = None
         self._errors = None
 
+    def __getstate__(self):
+        # We don't need to pickle the File Writes for duplicates and errors,
+        # __getstate__ is called during the pickling process to determin whih
+        # attributes to load, so we remove the ones we don't want pickling
+        d = dict(self.__dict__)
+        del d['_errors']
+        del d['_duplicates']
+        return d
+
     @property
     def brain(self):
         return self._brain
