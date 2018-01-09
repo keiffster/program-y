@@ -108,3 +108,4 @@ temp/
 conversations/
 /src/utils/pattern_lister/y-bot.csv
 /src/utils/rdf_lister/rdfs.csv
+/src/utils/botflow/
