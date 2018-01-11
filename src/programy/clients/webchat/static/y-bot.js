@@ -1,9 +1,6 @@
 // jQuery Document
 $(document).ready(function(){
 
-    $("#chatbox").append ("<p><b>Bot:</b>Hello, my name is Y-Bot, how can I help you today?</p>" );
-    $("#chatbox").append ("<p><hr /></p>" );
-
     $(".question").click(function() {
 
         var question = $(this).text()
