@@ -8,6 +8,8 @@ from flask import abort
 from flask import current_app
 from programy.clients.client import BotClient
 from programy.config.sections.client.webchat import WebChatConfiguration
+from templateprocessing import process_htmltemplate
+import os
 
 class WebChatBotClient(BotClient):
 
@@ -28,7 +30,9 @@ APP = Flask(__name__)
 
 @APP.route('/')
 def index():
-    return current_app.send_static_file('webchat.html')
+    url = os.path.join(current_app.root_path, current_app.static_folder, 'webchat.html')
+    return process_htmltemplate(url)
+
 
 # Enter you API keys, here, alternatively store in a db or file and load at startup
 # This is an exmaple, and therefore not suitable for production
