@@ -86,7 +86,10 @@ def ask():
             logging.debug("Found client cookie : %s"%sessionid)
 
     try:
-        answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
+        if question == 'YINITIALQUESTION':
+            answer = WEBCHAT_CLIENT.bot.get_initial_question(sessionid)
+        else:
+            answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
 
         response_data = {"question": question,
                     "answer": answer,

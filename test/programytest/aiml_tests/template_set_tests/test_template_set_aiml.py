@@ -58,3 +58,11 @@ class TemplateSetAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK topic2 topic3")
         self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "topic2 topic3")
+
+    def test_var_transience(self):
+        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "VAR TEST STEP1")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "STEP1 Val1")
+        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "VAR TEST STEP2")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "STEP2 unknown")
