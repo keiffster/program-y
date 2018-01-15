@@ -1,0 +1,1243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <!-- File: aimlstandardlibrary.aiml -->
+    <!-- Last modified: March 15, 2016 -->
+    <!-- -->
+    <!-- This file is Copyright &copy; 2016 by Pandorabots, Inc. -->
+    <!--  -->
+    <!-- This file is released under the terms of the GNU Lesser General -->
+    <!-- Public License, as published by the Free Software Foundation. -->
+    <!--  -->
+    <!-- This file is distributed WITHOUT ANY WARRANTY; without even the  -->
+    <!-- implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.   -->
+    <!--  -->
+    <!-- For more information: -->
+    <!-- http://www.pandorabots.com -->
+    <!--  -->
+
+    <!-- Modified for Y-Bot by Keith Sterling March 2017 -->
+
+    <!-- FALSE-->
+    <category>
+        <pattern>
+            XFALSE *
+        </pattern>
+        <template>FALSE</template>
+    </category>
+
+    <!-- TRUE-->
+    <category>
+        <pattern>
+            XTRUE *
+        </pattern>
+        <template>TRUE
+        </template>
+    </category>
+
+    <!-- NUMBER-->
+    <category>
+        <pattern>
+            XNUMBER
+            <set>number</set>
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <!-- STRING-->
+    <category>
+        <pattern>
+            XSTRING *
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+
+    <!-- TRUE IF TRUE-->
+    <category>
+        <pattern>
+            XISTRUE *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <star index="1"/>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">TRUE</li>
+                <li>FALSE</li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- TRUE IF FALSE    -->
+    <category>
+        <pattern>
+            XISFALSE *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <star index="1"/>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="FALSE">TRUE</li>
+                <li>FALSE</li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- TRUE IF NUMBER    -->
+    <category>
+        <pattern>
+            XISNUMBER
+            <set>number</set>
+        </pattern>
+        <template>TRUE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XISNUMBER *
+        </pattern>
+        <template>FALSE
+        </template>
+    </category>
+
+    <!-- CHECK DATA TYPE (NUMBER OR STRING)-->
+    <category>
+        <pattern>
+            XTYPEOF
+            <set>number</set>
+        </pattern>
+        <template>XNUMBER
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XTYPEOF *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <star index="1"/>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="FALSE">XBOOL</li>
+                <li value="TRUE">XBOOL</li>
+                <li>XSTRING</li>
+            </condition>
+        </template>
+    </category>
+
+
+    <!-- ADDITION-->
+    <category>
+        <pattern>
+            XADD <set>number</set> XS 0
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XADD <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XADD
+                <map name="successor">
+                    <star index="1"/>
+                </map>
+                XS
+                <map name="predecessor">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+    <!-- SUBTRACTION-->
+    <category>
+        <pattern>
+            XSUB 0 XS
+            <set>number</set>
+        </pattern>
+        <template>0
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XSUB <set>number</set> XS 0
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XSUB <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XSUB
+                <map name="predecessor">
+                    <star index="1"/>
+                </map>
+                XS
+                <map name="predecessor">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+    <!-- MULTIPLICATION-->
+    <category>
+        <pattern>
+            XMUL <set>number</set> XS 0
+        </pattern>
+        <template>0
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XMUL <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XADD
+                <star index="1"/>
+                XS
+                <srai>XMUL
+                    <star index="1"/>
+                    XS
+                    <map name="predecessor">
+                        <star index="2"/>
+                    </map>
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- DIVISION-->
+    <category>
+        <pattern>
+            XDIV 0 XS 0
+        </pattern>
+        <template>undefined
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XDIV <set>number</set> XS 0
+        </pattern>
+        <template>infinite
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XDIV <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XLT
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">0</li>
+                <li>
+                    <map name="successor">
+                        <srai>XDIV
+                            <srai>XSUB
+                                <star index="1"/>
+                                XS
+                                <star index="2"/>
+                            </srai>
+                            XS
+                            <star index="2"/>
+                        </srai>
+                    </map>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- MOD-->
+    <category>
+        <pattern>
+            XMOD 0 XS 0
+        </pattern>
+        <template>undefined
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XMOD <set>number</set> XS 0
+        </pattern>
+        <template>infinite
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XMOD <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XSUB
+                <star index="1"/>
+                XS
+                <srai>XMUL
+                    <star index="2"/>
+                    XS
+                    <srai>XDIV
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- LESS THAN-->
+    <category>
+        <pattern>
+            XLT 0 XS 0
+        </pattern>
+        <template>FALSE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLT <set>number</set> XS 0
+        </pattern>
+        <template>FALSE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLT 0 XS
+            <set>number</set>
+        </pattern>
+        <template>TRUE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLT <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XLT
+                <map name="predecessor">
+                    <star index="1"/>
+                </map>
+                XS
+                <map name="predecessor">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+
+    <!-- GREATER THAN-->
+    <category>
+        <pattern>
+            XGT 0 XS 0
+        </pattern>
+        <template>FALSE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XGT <set>number</set> XS 0
+        </pattern>
+        <template>TRUE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XGT 0 XS
+            <set>number</set>
+        </pattern>
+        <template>FALSE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XGT <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XGT
+                <map name="predecessor">
+                    <star index="1"/>
+                </map>
+                XS
+                <map name="predecessor">
+                    <star index="2"/>
+                </map>
+            </srai>
+        </template>
+    </category>
+
+    <!-- LESS THAN OR EQUAL TO-->
+    <category>
+        <pattern>
+            XLE <set>number</set> XS <set>number</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XEQ
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">TRUE</li>
+                <li>
+                    <srai>XLT
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- GREATER THAN OR EQUAL TO-->
+    <category>
+        <pattern>
+            XGE <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XEQ
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">TRUE</li>
+                <li>
+                    <srai>XGT
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+
+    <!-- STRING CONCATINATION-->
+    <category>
+        <pattern>
+            XADD * XS *
+        </pattern>
+        <template>
+            <star index="1"/>
+            <star index="2"/>
+        </template>
+    </category>
+
+    <!-- STRING EQUALS-->
+    <category>
+        <pattern>
+            XEQ * XS *
+        </pattern>
+        <template>
+            <learn>
+                <category>
+                    <pattern>
+                        <eval>
+                            <uppercase>XFALSE
+                                <star/>
+                            </uppercase>
+                        </eval>
+                    </pattern>
+                    <template>TRUE</template>
+                </category>
+            </learn>
+
+            <srai>XFALSE
+                <star index="2"/>
+            </srai>
+
+            <learn>
+                <category>
+                    <pattern>
+                        <eval>
+                            <uppercase>XFALSE
+                                <star/>
+                            </uppercase>
+                        </eval>
+                    </pattern>
+                    <template>FALSE</template>
+                </category>
+            </learn>
+
+        </template>
+    </category>
+
+    <!-- STRING NOT EQUAL-->
+    <category>
+        <pattern>
+            XNE * XS *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XEQ
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            [<get var="matched"/>]
+            <condition var="matched">
+                <li value="TRUE">FALSE</li>
+                <li>TRUE</li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- NOT-->
+    <category>
+        <pattern>
+            XNOT *
+        </pattern>
+        <template>
+            <srai>XISFALSE
+                <star index="1"/>
+            </srai>
+        </template>
+    </category>
+
+    <!-- LOGICAL AND [COMING SOON] -->
+    <!-- LOGICAL OR [COMING SOON] -->
+
+    <!-- COUNT CHARACTERS-->
+    <category>
+        <pattern>
+            XLENGTH
+        </pattern>
+        <template>0
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLENGTH *
+        </pattern>
+        <template>
+            <srai>XXLENGTH
+                <explode>
+                    <star index="1"/>
+                </explode>
+                XS 0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXLENGTH * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            X{*1=<star index="1"/>, *2=<star index="2"/>}
+            <srai>XADD
+                <star index="2"/>
+                XS 1
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXLENGTH * * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            Y{*1=[<star index="1"/>]*2=[<star index="2"/>]*3=<star index="3"/>}
+            <srai>XXLENGTH
+                <star index="2"/>
+                XS
+                <srai>XADD
+                    <star index="3"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- RANDOM NUMBER-->
+    <category>
+        <pattern>
+            XRANDOM
+        </pattern>
+        <template>
+            <random>
+                <li>0</li>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+            </random>
+        </template>
+    </category>
+
+    <!-- EXTRACT SUBSTRING-->
+    <category>
+        <pattern>
+            XSUBSTRING * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <implode>
+            <srai>XXSUBSTRINGHead
+                <explode>
+                    <star index="1"/>
+                </explode>
+                XS
+                <star index="2"/>
+                XS 0
+            </srai>
+            </implode>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XSUBSTRING * XS <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XXSUBSTRINGTail
+                <explode>
+                    <srai>XXSUBSTRINGHead
+                        <explode>
+                            <star index="1"/>
+                        </explode>
+                        XS
+                        <star index="2"/>
+                        XS 0
+                    </srai>
+                </explode>
+                XS
+                <srai>XSUB
+                    <star index="3"/>
+                    XS 1
+                </srai>
+                XS
+                <srai>XSUB
+                    <star index="3"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXSUBSTRINGHead * XS <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXSUBSTRINGHead * * XS <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XGE
+                        <star index="4"/>
+                        XS
+                        <star index="3"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <star index="1"/>
+                </li>
+                <li></li>
+            </condition>
+            <srai>XXSUBSTRINGHead
+                <star index="2"/>
+                XS
+                <star index="3"/>
+                XS
+                <srai>XADD
+                    <star index="4"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXSUBSTRINGTail * XS <set>number</set> XS 0
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXSUBSTRINGTail * * XS <set>number</set> XS 0
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXSUBSTRINGTail * * XS <set>number</set> XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <star index="1"/>
+            <srai>XXSUBSTRINGTail
+                <star index="2"/>
+                XS
+                <star index="3"/>
+                XS
+                <srai>XSUB
+                    <star index="4"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- ABS [COMING SOON] -->
+
+    <!-- Mth POWER OF N [COMING SOON] -->
+
+    <!-- MAXIMUM NUMBER-->
+    <category>
+        <pattern>
+            XMAX *
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XMAX * *
+        </pattern>
+        <template>
+            <srai>XXMAX
+                <star index="2"/>
+                XS
+                <star index="1"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXMAX * XS *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XGE
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <star index="1"/>
+                </li>
+                <li>
+                    <star index="2"/>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXMAX * * XS *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XGE
+                        <star index="1"/>
+                        XS
+                        <star index="3"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <srai>XXMAX
+                        <star index="2"/>
+                        XS
+                        <star index="1"/>
+                    </srai>
+                </li>
+                <li>
+                    <srai>XXMAX
+                        <star index="2"/>
+                        XS
+                        <star index="3"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- MINIMUM NUMBER-->
+    <category>
+        <pattern>
+            XMIN *
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XMIN * *
+        </pattern>
+        <template>
+            <srai>XXMIN
+                <star index="1"/>
+                <star index="2"/>
+                XS
+                <star index="1"/>
+                <star index="2"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXMIN * XS *
+        </pattern>
+        <template>
+            <think>
+                <set var="bool">
+                    <srai>XEQ
+                        <srai>XCOUNT
+                            <star index="1"/>
+                        </srai>
+                        XS 2
+                    </srai>
+                </set>
+            </think>
+            <think>
+                <set var="matched">
+                    <srai>XXMINiSMin
+                        <srai>XCAR
+                            <star index="1"/>
+                        </srai>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <condition var="bool">
+                        <li value="TRUE">
+                            <srai>XCDR
+                                <star index="1"/>
+                            </srai>
+                        </li>
+                        <li>
+                            <srai>XCAR
+                                <star index="1"/>
+                            </srai>
+                        </li>
+                    </condition>
+                </li>
+                <li>
+                    <srai>XXMIN
+                        <srai>XCDR
+                            <star index="1"/>
+                        </srai>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXMINiSMin *
+        </pattern>
+        <template>TRUE
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXMINiSMin * XS * *
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>XLE
+                        <star index="1"/>
+                        XS
+                        <star index="2"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <srai>XXMINiSMin
+                        <star index="1"/>
+                        XS
+                        <star index="3"/>
+                    </srai>
+                </li>
+                <li>FALSE</li>
+            </condition>
+        </template>
+    </category>
+
+
+    <!-- FIRST WORD    -->
+    <category>
+        <pattern>
+            XCAR *
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XCAR * *
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <!-- REMAINING WORDS AFTER FIRST-->
+    <category>
+        <pattern>
+            XCDR *
+        </pattern>
+        <template></template>
+    </category>
+
+    <category>
+        <pattern>
+            XCDR * *
+        </pattern>
+        <template>
+            <star index="2"/>
+        </template>
+    </category>
+
+    <!-- CONCATENATE STRINGS-->
+    <category>
+        <pattern>
+            XIMPLODE *
+        </pattern>
+        <template>
+            <implode><star index="1"/></implode>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XIMPLODE * *
+        </pattern>
+        <template>
+            <implode>
+            <star index="1"/>
+            <srai>XIMPLODE
+                <star index="2"/>
+            </srai>
+            </implode>
+        </template>
+    </category>
+
+    <!-- REVERSE STRING-->
+    <category>
+        <pattern>XREVERSE *</pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XREVERSE * *
+        </pattern>
+        <template>
+            <srai>XREVERSE
+                <star index="2"/>
+            </srai>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <!-- NULL-->
+    <category>
+        <pattern>
+            XBLACKHOLE
+        </pattern>
+        <template> </template>
+    </category>
+
+    <category>
+        <pattern>
+            XBLACKHOLE *
+        </pattern>
+        <template></template>
+    </category>
+
+    <!-- REPEAT FUNCTION N TIMES-->
+    <category>
+        <pattern>
+            XLOOP [ * ] XS 0
+        </pattern>
+        <template></template>
+    </category>
+
+    <category>
+        <pattern>
+            XLOOP [ * ] XS 1
+        </pattern>
+        <template>
+            <srai>
+                <star index="1"/>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLOOP [ * ] XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>
+                <star index="1"/>
+            </srai>
+            <srai>XLOOP [
+                <star index="1"/>
+                ] XS
+                <srai>XSUB
+                    <star index="2"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- OUTPUT STRINGS N TIMES-->
+    <category>
+        <pattern>
+            XLOOP * XS 0
+        </pattern>
+        <template></template>
+    </category>
+
+    <category>
+        <pattern>
+            XLOOP * XS 1
+        </pattern>
+        <template>
+            <star index="1"/>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XLOOP * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <star index="1"/>
+            <srai>XLOOP
+                <star index="1"/>
+                XS
+                <srai>XSUB
+                    <star index="2"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+    <!-- IF THEN-->
+    <category>
+        <pattern>
+            XIF [ * ] XS [ * ]
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>
+                        <star index="1"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <srai>
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li></li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- IF THEN ELSE-->
+    <category>
+        <pattern>
+            XIF [ * ] XS [ * ] XS [ * ]
+        </pattern>
+        <template>
+            <think>
+                <set var="matched">
+                    <srai>
+                        <star index="1"/>
+                    </srai>
+                </set>
+            </think>
+            <condition var="matched">
+                <li value="TRUE">
+                    <srai>
+                        <star index="2"/>
+                    </srai>
+                </li>
+                <li>
+                    <srai>
+                        <star index="3"/>
+                    </srai>
+                </li>
+            </condition>
+        </template>
+    </category>
+
+    <!-- WORDS COUNT-->
+    <category>
+        <pattern>
+            XCOUNT
+        </pattern>
+        <template>0
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XCOUNT *
+        </pattern>
+        <template>
+            <srai>XXCOUNT
+                <star index="1"/>
+                XS 0
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXCOUNT * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XADD
+                <star index="2"/>
+                XS 1
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            XXCOUNT * * XS
+            <set>number</set>
+        </pattern>
+        <template>
+            <srai>XXCOUNT
+                <star index="2"/>
+                XS
+                <srai>XADD
+                    <star index="3"/>
+                    XS 1
+                </srai>
+            </srai>
+        </template>
+    </category>
+
+
+</aiml>
