@@ -202,7 +202,7 @@ class PatternGraph(object):
 
     def add_template_to_node(self, template_graph_root, current_node):
         template_node = self._pattern_factory.new_node_class('template')(template_graph_root)
-        current_node = current_node.add_child(template_node)
+        current_node = current_node.add_child(template_node, replace_existing=True)
         return current_node
 
     def add_pattern_to_graph(self, pattern_element, topic_element, that_element, template_graph_root, learn=False):
@@ -231,6 +231,7 @@ class PatternGraph(object):
                 self.add_template_to_node(template_graph_root, that_node)
         else:
             self.add_template_to_node(template_graph_root, that_node)
+
         return that_node
 
     def count_words_in_patterns(self):

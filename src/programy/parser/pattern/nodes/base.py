@@ -353,14 +353,14 @@ class PatternNode(object):
 
         return new_node
 
-    def add_child(self, new_node):
+    def add_child(self, new_node, replace_existing=False):
 
         # Check the rules allow this now to be a child of the current node
         self.can_add(new_node)
 
         # Next check for duplicates, returning original if one exists
         exists = self._node_exists(new_node)
-        if exists is not None:
+        if exists is not None and replace_existing is False:
             return exists
 
         # Otherwise add the new node to the appropriate container
