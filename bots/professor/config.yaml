@@ -75,7 +75,7 @@ bot:
     prompt: ">>>"
     initial_question: Hi, how can I help you today?
     default_response: Sorry, I don't have an answer for that!
-    empty_string_srai: YEMPTY
+    empty_string: YEMPTY
     exit_response: So long, and thanks for the fish!
     override_properties: true
 

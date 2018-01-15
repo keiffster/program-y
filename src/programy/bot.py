@@ -268,7 +268,7 @@ class Bot(object):
         else:
             pre_processed = text
 
-        if pre_processed is None or not pre_processed:
+        if pre_processed is None or pre_processed == "":
             pre_processed = self._configuration.empty_string
 
         if srai is False:

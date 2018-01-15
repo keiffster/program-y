@@ -18,7 +18,7 @@
 				FLIGHTBOOK STEP SOURCE
 			</pattern>
 			<template>
-				Where would you like to fly from - (London Stanstead, London Heathrow, London Gatwick, Edinburgh, Glasgow, Manchester)
+				Where would you like to fly from - (London, Edinburgh, Glasgow, Manchester)
 			</template>
 		</category>
 
@@ -34,6 +34,29 @@
 					<li value="Edinburgh"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Glasgow"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Manchester"><srai>FLIGHTBOOK STEP  DEST</srai></li>
+					<li><srai>FLIGHTBOOK STEP SOURCE</srai></li>
+				</condition>
+			</template>
+		</category>
+
+        <category>
+            <pattern>London</pattern>
+			<that>Where would you like to fly from *</that>
+			<template>
+                Which airport in London (Stanstead, Heathrow, Gatwick, Luton)
+			</template>
+        </category>
+
+		<category>
+			<pattern>*</pattern>
+			<that>Which airport in London *</that>
+			<template>
+				<think><set name="Source"><star /></set></think>
+				<condition name="Source">
+					<li value="Stanstead"><srai>FLIGHTBOOK STEP  DEST</srai></li>
+					<li value="Heathrow"><srai>FLIGHTBOOK STEP  DEST</srai></li>
+					<li value="Gatwick"><srai>FLIGHTBOOK STEP  DEST</srai></li>
+					<li value="Luton"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li><srai>FLIGHTBOOK STEP SOURCE</srai></li>
 				</condition>
 			</template>
