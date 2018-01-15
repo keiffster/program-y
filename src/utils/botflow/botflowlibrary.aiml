@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+    <!-- Date Validation -->
+	<category>
+		<pattern>VALID DATE * slash * slash *</pattern>
+		<template>
+			<think><set var="var1"><srai>XISNUMBER <star index="1"/></srai></set></think>
+		    <condition var="var1">
+		        <li value="TRUE">
+        		    <think><set var="var2"><srai>XISNUMBER <star index="2"/></srai></set></think>
+                    <condition var="var2">
+                        <li value="TRUE">
+                            <think><set var="var3"><srai>XISNUMBER <star index="2"/></srai></set></think>
+                            <condition var="var3">
+                                <li value="TRUE">
+									<think><set var="day"><srai>VALID INT <star index="1" /> 1 31</srai></set></think>
+                                    <condition var="day">
+                                        <li value="TRUE">
+                                            <think><set var="month"><srai>VALID INT <star index="2" /> 1 12</srai></set></think>
+                                            <condition var="month">
+                                                <li value="TRUE">TRUE</li>
+                                            </condition>
+                                        </li>
+                                    </condition>
+
+                                </li>
+                            </condition>
+                        </li>
+                    </condition>
+        		</li>
+        	</condition>
+
+		</template>
+	</category>
+
+	<!-- Integer Validation -->
+
+    <!-- No Min or Max Range -->
+	<category>
+		<pattern>VALID INT *</pattern>
+		<template>
+		    <srai>XISNUMBER <star /></srai>
+		</template>
+	</category>
+
+    <!-- Max Range -->
+	<category>
+		<pattern>VALID INT * *</pattern>
+		<template>
+		    <think><set var="var1"><srai>XISNUMBER <star index="1"/></srai></set></think>
+		    <condition var="var1">
+		        <li value="TRUE">
+        		    <think><set var="var2"><srai>XISNUMBER <star index="2"/></srai></set></think>
+                    <condition var="var2">
+                        <li value="TRUE">
+							<think><set var="xle"><srai>XLE <star index="1" /> XS <star index="2"/></srai></set></think>
+							<condition var="xle">
+								<li value="TRUE">
+									TRUE
+								</li>
+							</condition>
+                        </li>
+                    </condition>
+        		</li>
+        	</condition>
+		</template>
+	</category>
+
+    <!-- Min and Max Range -->
+	<category>
+		<pattern>VALID INT * * *</pattern>
+		<template>
+		    <think><set var="var1"><srai>XISNUMBER <star index="1"/></srai></set></think>
+		    <condition var="var1">
+		        <li value="TRUE">
+        		    <think><set var="var2"><srai>XISNUMBER <star index="2"/></srai></set></think>
+                    <condition var="var2">
+                        <li value="TRUE">
+                            <think><set var="var3"><srai>XISNUMBER <star index="2"/></srai></set></think>
+                            <condition var="var3">
+                                <li value="TRUE">
+                                    <think><set var="xge"><srai>XGE <star index="1" /> XS <star index="2"/></srai></set></think>
+                                    <condition var="xge">
+                                        <li value="TRUE">
+                                            <think><set var="xle"><srai>XLE <star index="1" /> XS <star index="3"/></srai></set></think>
+                                            <condition var="xle">
+                                                <li value="TRUE">
+                                                    TRUE
+                                                </li>
+                                            </condition>
+                                        </li>
+                                    </condition>
+                                </li>
+                            </condition>
+                        </li>
+                    </condition>
+        		</li>
+        	</condition>
+		</template>
+	</category>
+
+</aiml>
