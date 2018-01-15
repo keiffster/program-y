@@ -1,3 +1,36 @@
+bot:
+    license_keys: $BOT_ROOT/config/license.keys
+
+    prompt: ">>>"
+
+    initial_question: Hi, how can I help you today?
+    initial_question_srai: YINITIALQUESTION
+    default_response: Sorry, I don't have an answer for that!
+    default_response_srai: YEMPTY
+    empty_string: YEMPTY
+    exit_response: So long, and thanks for the fish!
+    exit_response_srai: YEXITRESPONSE
+
+    override_properties: true
+
+    max_question_recursion: 1000
+    max_question_timeout: 60
+    max_search_depth: 100
+    max_search_timeout: 60
+
+    spelling:
+      classname: programy.spelling.norvig.NorvigSpellingChecker
+      corpus: $BOT_ROOT/spelling/corpus.txt
+      check_before: false
+      check_and_retry: false
+
+    conversations:
+      type: file
+      config_name: file_storage
+      empty_on_start: true
+
+    file_storage:
+      dir: $BOT_ROOT/conversations
 
 brain:
 
@@ -12,7 +45,7 @@ brain:
       default-get: unknown
       default-property: unknown
       default-map: unknown
-      learn-filename: y-bot-learnf.aiml
+      learn-filename: scratch-learnf.aiml
 
     # Nodes
     nodes:
@@ -23,7 +56,7 @@ brain:
     binaries:
       save_binary: false
       load_binary: false
-      binary_filename: /tmp/y-bot.brain
+      binary_filename: /tmp/scratch.brain
       load_aiml_on_binary_fail: false
 
     # Braintree
@@ -36,8 +69,20 @@ brain:
             files: $BOT_ROOT/aiml
             extension: .aiml
             directories: true
-            errors: /tmp/y-bot_errors.txt
-            duplicates: /tmp/y-bot_duplicates.txt
+            errors:
+              file: /tmp/scratch_errors.csv
+              format: csv
+              encoding: utf-8
+              delete_on_start: true
+            duplicates:
+              file: /tmp/scratch_duplicates.csv
+              format: csv
+              encoding: utf-8
+              delete_on_start: true
+            conversation:
+              file: /tmp/scratch-conversation.csv
+              format: csv
+              delete_on_start: true
         sets:
             files: $BOT_ROOT/sets
             extension: .txt
@@ -55,9 +100,11 @@ brain:
         rdf:
             files:  $BOT_ROOT/rdf
             extension: .txt
-            directories: false
+            directories: true
         preprocessors: $BOT_ROOT/config/preprocessors.conf
         postprocessors: $BOT_ROOT/config/postprocessors.conf
+        regex_templates: $BOT_ROOT/config/regex-templates.txt
+        variables: $BOT_ROOT/config/default-variables.txt
 
     services:
         REST:
@@ -72,6 +119,9 @@ brain:
             url: http://www.pandorabots.com/pandora/talk-xml
         Wikipedia:
             classname: programy.services.wikipediaservice.WikipediaService
+        DuckDuckGo:
+            classname: programy.services.duckduckgo.DuckDuckGoService
+            url: http://api.duckduckgo.com
 
     security:
         authentication:
@@ -97,7 +147,7 @@ brain:
         classname: programy.oob.dialog.DialogOutOfBandProcessor
       email:
         classname: programy.oob.email.EmailOutOfBandProcessor
-      map:
+      geomap:
         classname: programy.oob.map.MapOutOfBandProcessor
       schedule:
         classname: programy.oob.schedule.ScheduleOutOfBandProcessor
@@ -110,37 +160,38 @@ brain:
       wifi:
         classname: programy.oob.wifi.WifiOutOfBandProcessor
 
-bot:
-    license_keys: $BOT_ROOT/config/license.keys
+    dynamic:
+        variables:
+            gettime: programy.dynamic.variables.datetime.GetTime
+        sets:
+            numeric: programy.dynamic.sets.numeric.IsNumeric
+            roman:   programy.dynamic.sets.roman.IsRomanNumeral
+        maps:
+            romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
+            dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
 
-    prompt: ">>>"
-    initial_question: Hi, how can I help you today?
-    default_response: Sorry, I don't have an answer for that!
-    empty_string: YEMPTY
-    exit_response: So long, and thanks for the fish!
-
-    override_properties: true
-
-    max_question_recursion: 1000
-    max_question_timeout: 60
-    max_search_depth: 100
-    max_search_timeout: 60
-
-    spelling:
-      classname: programy.spelling.norvig.NorvigSpellingChecker
-      corpus: $BOT_ROOT/spelling/corpus.txt
-      check_before: false
-      check_and_retry: false
-
+voice:
+  tts: osx
+  stt: azhang
+  osx:
+    classname: talky.clients.voice.tts.osxsay.OSXSayTextToSpeach
+  pytts:
+    classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
+    rate_adjust: 50
+  azhang:
+    classname: talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText
+    ambient_adjust: 3
+    service: ibm
 
 rest:
   host: 0.0.0.0
   port: 5000
   debug: false
+  workers: 4
 
 webchat:
   host: 0.0.0.0
-  port: 5000
+  port: 8080
   debug: false
 
 twitter:
@@ -166,3 +217,9 @@ xmpp:
   xep_0004: true
   xep_0060: true
   xep_0199: true
+
+socket:
+  host: 127.0.0.1
+  port: 9999
+  queue: 5
+  debug: true

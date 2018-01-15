@@ -6,8 +6,8 @@ bot:
     initial_question: Hi, how can I help you today?
     initial_question_srai: YINITIALQUESTION
     default_response: Sorry, I don't have an answer for that!
-    default_response_srai: YDEFAULTRESPONSE
-    empty_string_srai: YEMPTY
+    default_response_srai: YEMPTY
+    empty_string: YEMPTY
     exit_response: So long, and thanks for the fish!
     exit_response_srai: YEXITRESPONSE
 
