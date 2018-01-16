@@ -12,12 +12,12 @@
         <pattern>EXECUTE FLIGHTBOOK</pattern>
         <template>
             Ok, I'll book a flight matching the following:
-            <get name="City" />,
+            flying from <get name="City" />,
             <get name="London" />,
-            <get name="Destination" />,
-            <get name="Date" />,
-            <get name="Passengers" />,
-            <get name="Class" />,
+            to <get name="Destination" />,
+            on <get name="Date" />,
+            with <get name="Passengers" /> passengers,
+            in <get name="Class" /> Class,
         </template>
     </category>
 
