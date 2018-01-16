@@ -32,7 +32,9 @@ class SelectVar(VarType):
         self._values = [x.strip() for x in values.split(",")]
 
     def type_values_to_str(self):
-        return ", ".join(self._values)
+        text = ", ".join(self._values)
+        text += " or exit"
+        return text
 
     def get_next_step(self, step, value):
         for condition in step._conditions:
@@ -64,7 +66,9 @@ class DateVar(VarType):
         self._values.append(self.extract_values_between_brackets(text, "Date"))
 
     def type_values_to_str(self):
-        return self._values[0]
+        text = self._values[0]
+        text += " or exit"
+        return text
 
     def output_template(self, aiml_file, topic_name, step):
         if step._conditions:
@@ -96,9 +100,11 @@ class IntVar(VarType):
 
     def type_values_to_str(self):
         if len(self._values) == 2:
-            return " to ".join(self._values)
+            text = " to ".join(self._values)
         else:
-            return " max %s" % self._values[0]
+            text = " max %s" % self._values[0]
+        text += " or exit"
+        return text
 
     def output_template(self, aiml_file, topic_name, step):
         if step._conditions:
@@ -216,6 +222,18 @@ class Step(object):
 
         self._type.output_template(aiml_file, topic_name, self)
 
+
+        aiml_file.write('\t\t\t</template>\n')
+        aiml_file.write('\t\t</category>\n\n')
+
+        aiml_file.write('\t\t<category>\n')
+        aiml_file.write('\t\t\t<pattern>EXIT</pattern>\n')
+        if self._type._values:
+            aiml_file.write('\t\t\t<that>%s *</that>\n' % self._prompt)
+        else:
+            aiml_file.write('\t\t\t<that>%s</that>\n' % self._prompt)
+        aiml_file.write('\t\t\t<template>\n')
+        aiml_file.write('\t\t\t\t<srai>EXIT FLIGHTBOOK</srai>\n')
         aiml_file.write('\t\t\t</template>\n')
         aiml_file.write('\t\t</category>\n\n')
 
@@ -258,7 +276,7 @@ class BotFlow(object):
         aiml_file.write('\t\t\t\t<set name="topic">%s</set>\n' % self._name)
         # Clear variables before we start
         for step in self._steps:
-            aiml_file.write('\t\t\t\t<set name="%s" />, \n' % step._variable)
+            aiml_file.write('\t\t\t\t<set name="%s" />\n' % step._variable)
         aiml_file.write('\t\t\t</think>\n')
         # Jump to the first step
         aiml_file.write('\t\t\t<srai>%s STEP %s</srai>\n' % (self._name, first_step))
@@ -297,6 +315,7 @@ class BotFlow(object):
 
 
 if __name__ == '__main__':
+
     parser = argparse.ArgumentParser(description='Program-Y Flow Bot')
 
     parser.add_argument('-flow', dest='flowfile', help='Flow file to load')
