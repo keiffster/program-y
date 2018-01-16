@@ -6,12 +6,6 @@
 		<template>
 			<think>
 				<set name="topic">FLIGHTBOOK</set>
-				<set name="City" />, 
-				<set name="London" />, 
-				<set name="Destination" />, 
-				<set name="Date" />, 
-				<set name="Passengers" />, 
-				<set name="Class" />, 
 			</think>
 			<srai>FLIGHTBOOK STEP SOURCE</srai>
 		</template>
@@ -34,7 +28,7 @@
 			<template>
 				<think><set name="City"><star /></set></think>
 				<condition name="City">
-					<li value="London"><srai>FLIGHTBOOK STEP  LONDON</srai></li>
+					<li value="London"><srai>FLIGHTBOOK STEP LONDON</srai></li>
 					<li value="Edinburgh"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Glasgow"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Manchester"><srai>FLIGHTBOOK STEP  DEST</srai></li>
@@ -43,25 +37,24 @@
 			</template>
 		</category>
 
-		<category>
-			<pattern>
-				FLIGHTBOOK STEP LONDON
-			</pattern>
+        <category>
+            <pattern>FLIGHTBOOK STEP LONDON</pattern>
 			<template>
-				Where from in London are you flying from - (Stanstead, Heathrow, Gatwick)
+                Which airport in London (Stanstead, Heathrow, Gatwick, Luton)
 			</template>
-		</category>
+        </category>
 
 		<category>
 			<pattern>*</pattern>
-			<that>Where from in London are you flying from *</that>
+			<that>Which airport in London *</that>
 			<template>
 				<think><set name="London"><star /></set></think>
 				<condition name="London">
 					<li value="Stanstead"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Heathrow"><srai>FLIGHTBOOK STEP  DEST</srai></li>
 					<li value="Gatwick"><srai>FLIGHTBOOK STEP  DEST</srai></li>
-					<li><srai>FLIGHTBOOK STEP LONDON</srai></li>
+					<li value="Luton"><srai>FLIGHTBOOK STEP  DEST</srai></li>
+					<li><srai>FLIGHTBOOK STEP SOURCE</srai></li>
 				</condition>
 			</template>
 		</category>
@@ -160,9 +153,9 @@
 		<category>
 			<pattern>EXIT FLIGHTBOOK</pattern>
 			<template>
-				<get name="City" />, 
-				<get name="London" />, 
-				<get name="Destination" />, 
+				<get name="City" />,
+				<get name="London" />,
+				<get name="Destination" />,
 				<get name="Date" />, 
 				<get name="Passengers" />, 
 				<get name="Class" />, 
