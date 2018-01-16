@@ -6,12 +6,12 @@
 		<template>
 			<think>
 				<set name="topic">FLIGHTBOOK</set>
-				<set name="City" />, 
-				<set name="London" />, 
-				<set name="Destination" />, 
-				<set name="Date" />, 
-				<set name="Passengers" />, 
-				<set name="Class" />, 
+				<set name="City" />
+				<set name="London" />
+				<set name="Destination" />
+				<set name="Date" />
+				<set name="Passengers" />
+				<set name="Class" />
 			</think>
 			<srai>FLIGHTBOOK STEP SOURCE</srai>
 		</template>
@@ -24,7 +24,7 @@
 				FLIGHTBOOK STEP SOURCE
 			</pattern>
 			<template>
-				Where would you like to fly from - (London, Edinburgh, Glasgow, Manchester)
+				Where would you like to fly from - (London, Edinburgh, Glasgow, Manchester or exit)
 			</template>
 		</category>
 
@@ -44,11 +44,19 @@
 		</category>
 
 		<category>
+			<pattern>EXIT</pattern>
+			<that>Where would you like to fly from *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
+			</template>
+		</category>
+
+		<category>
 			<pattern>
 				FLIGHTBOOK STEP LONDON
 			</pattern>
 			<template>
-				Where from in London are you flying from - (Stanstead, Heathrow, Gatwick)
+				Where from in London are you flying from - (Stanstead, Heathrow, Gatwick or exit)
 			</template>
 		</category>
 
@@ -67,11 +75,19 @@
 		</category>
 
 		<category>
+			<pattern>EXIT</pattern>
+			<that>Where from in London are you flying from *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
+			</template>
+		</category>
+
+		<category>
 			<pattern>
 				FLIGHTBOOK STEP DEST
 			</pattern>
 			<template>
-				Where would you  like to fly to - (New York, Washington, San Francisco)
+				Where would you  like to fly to - (New York, Washington, San Francisco or exit)
 			</template>
 		</category>
 
@@ -90,11 +106,19 @@
 		</category>
 
 		<category>
+			<pattern>EXIT</pattern>
+			<that>Where would you  like to fly to *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
+			</template>
+		</category>
+
+		<category>
 			<pattern>
 				FLIGHTBOOK STEP DATE
 			</pattern>
 			<template>
-				When would you like to fly - (DD/MM/YYYY)
+				When would you like to fly - (DD/MM/YYYY or exit)
 			</template>
 		</category>
 
@@ -112,11 +136,19 @@
 		</category>
 
 		<category>
+			<pattern>EXIT</pattern>
+			<that>When would you like to fly *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
+			</template>
+		</category>
+
+		<category>
 			<pattern>
 				FLIGHTBOOK STEP PASSENGERS
 			</pattern>
 			<template>
-				How many people are flying - (1 to 5)
+				How many people are flying - (1 to 5 or exit)
 			</template>
 		</category>
 
@@ -134,11 +166,19 @@
 		</category>
 
 		<category>
+			<pattern>EXIT</pattern>
+			<that>How many people are flying *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
+			</template>
+		</category>
+
+		<category>
 			<pattern>
 				FLIGHTBOOK STEP CLASS
 			</pattern>
 			<template>
-				What class do you want to fly - (Economy, Premium Economy, Business, First)
+				What class do you want to fly - (Economy, Premium Economy, Business, First or exit)
 			</template>
 		</category>
 
@@ -154,6 +194,14 @@
 					<li value="First"><srai>EXECUTE FLIGHTBOOK</srai></li>
 					<li><srai>FLIGHTBOOK STEP CLASS</srai></li>
 				</condition>
+			</template>
+		</category>
+
+		<category>
+			<pattern>EXIT</pattern>
+			<that>What class do you want to fly *</that>
+			<template>
+				<srai>EXIT FLIGHTBOOK</srai>
 			</template>
 		</category>
 
