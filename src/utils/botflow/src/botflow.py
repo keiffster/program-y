@@ -34,11 +34,18 @@ class SelectVar(VarType):
     def type_values_to_str(self):
         return ", ".join(self._values)
 
+    def get_next_step(self, step, value):
+        for condition in step._conditions:
+            compare = condition._condition[2:]
+            if compare == value:
+                return condition._next_step
+        return step._conditions[0]._next_step
+
     def output_template(self, aiml_file, topic_name, step):
         if step._conditions:
-            next_step = step._conditions[0]._next_step
             aiml_file.write('\t\t\t\t<condition name="%s">\n' % step._variable)
             for value in self._values:
+                next_step = self.get_next_step(step, value)
                 aiml_file.write(
                     '\t\t\t\t\t<li value="%s"><srai>%s STEP %s</srai></li>\n' % (value, topic_name, next_step))
             aiml_file.write('\t\t\t\t\t<li><srai>%s STEP %s</srai></li>\n' % (topic_name, step._step))
@@ -46,7 +53,7 @@ class SelectVar(VarType):
         else:
             aiml_file.write('\t\t\t\t<condition name="%s">\n' % step._variable)
             for value in self._values:
-                aiml_file.write('\t\t\t\t\t<li value="%s"><srai>EXIT %s</srai></li>\n' % (value, topic_name))
+                aiml_file.write('\t\t\t\t\t<li value="%s"><srai>EXECUTE %s</srai></li>\n' % (value, topic_name))
             aiml_file.write('\t\t\t\t\t<li><srai>%s STEP %s</srai></li>\n' % (topic_name, step._step))
             aiml_file.write('\t\t\t\t</condition>\n')
 
@@ -70,7 +77,7 @@ class DateVar(VarType):
         else:
             aiml_file.write('\t\t\t\t<think><set name="Valid"><srai>VALID DATE <star /></srai></set></think>\n')
             aiml_file.write('\t\t\t\t<condition name="Valid">\n')
-            aiml_file.write('\t\t\t\t\t<li value="TRUE"><srai>EXIT %s</srai></li>\n' % (topic_name))
+            aiml_file.write('\t\t\t\t\t<li value="TRUE"><srai>EXECUTE %s</srai></li>\n' % (topic_name))
             aiml_file.write('\t\t\t\t\t<li><srai>%s STEP %s</srai></li>\n' % (topic_name, step._step))
             aiml_file.write('\t\t\t\t</condition>\n')
 
@@ -121,7 +128,7 @@ class IntVar(VarType):
             else:
                 aiml_file.write('\t\t\t\t<think><set name="Valid"><srai>VALID INT <star /></srai></set></think>\n')
             aiml_file.write('\t\t\t\t<condition name="Valid">\n')
-            aiml_file.write('\t\t\t\t\t<li value="TRUE"><srai>EXIT %s</srai></li>\n' % (topic_name))
+            aiml_file.write('\t\t\t\t\t<li value="TRUE"><srai>EXECUTE %s</srai></li>\n' % (topic_name))
             aiml_file.write('\t\t\t\t\t<li><srai>%s STEP %s</srai></li>\n' % (topic_name, step._step))
             aiml_file.write('\t\t\t\t</condition>\n')
 
@@ -138,7 +145,7 @@ class TextVar(VarType):
         if step is not None:
             aiml_file.write('\t\t\t\t<srai>%s STEP %s</srai>\n' % (topic_name, step._next_step))
         else:
-            aiml_file.write('\t\t\t\t<srai>EXIT %s</srai>\n' % topic_name)
+            aiml_file.write('\t\t\t\t<srai>EXECUTE %s</srai>\n' % topic_name)
 
 
 class StepCondition(object):
@@ -169,7 +176,7 @@ class Step(object):
         if self._conditions:
             next_steps = ", ".join("%s %s"(x._next_step, x.condition) for x in self._conditions)
         else:
-            next_steps = "EXIT"
+            next_steps = "EXECUTE"
         return "[%s] - %s -> %s" % (self._step, self._prompt, next_steps)
 
     @staticmethod
@@ -247,8 +254,13 @@ class BotFlow(object):
         aiml_file.write('\t\t<pattern>START %s</pattern>\n' % self._name)
         aiml_file.write('\t\t<template>\n')
         aiml_file.write('\t\t\t<think>\n')
+        # Set the topic
         aiml_file.write('\t\t\t\t<set name="topic">%s</set>\n' % self._name)
+        # Clear variables before we start
+        for step in self._steps:
+            aiml_file.write('\t\t\t\t<set name="%s" />, \n' % step._variable)
         aiml_file.write('\t\t\t</think>\n')
+        # Jump to the first step
         aiml_file.write('\t\t\t<srai>%s STEP %s</srai>\n' % (self._name, first_step))
         aiml_file.write('\t\t</template>\n')
         aiml_file.write('\t</category>\n\n')
@@ -258,15 +270,6 @@ class BotFlow(object):
 
     def write_topic_close(self, aiml_file):
         aiml_file.write('\t</topic>\n')
-
-    def write_exit_category(self, aiml_file):
-        aiml_file.write('\t\t<category>\n')
-        aiml_file.write('\t\t\t<pattern>EXIT %s</pattern>\n' % self._name)
-        aiml_file.write('\t\t\t<template>\n')
-        for step in self._steps:
-            aiml_file.write('\t\t\t\t<get name="%s" />, \n' % step._variable)
-        aiml_file.write('\t\t\t</template>\n')
-        aiml_file.write('\t\t</category>\n\n')
 
     def write_dialog_flow(self, aiml_file):
         for step in self._steps:
@@ -284,15 +287,13 @@ class BotFlow(object):
 
             self.write_dialog_flow(aiml_file)
 
-            self.write_exit_category(aiml_file)
-
             self.write_topic_close(aiml_file)
 
             self.write_aiml_footer(aiml_file)
 
-    def copy_supporting_files(self, aimldir):
-        shutil.copyfile("./aimlstandardlibrary.aiml", aimldir + os.sep + "aimlstandardlibrary.aiml")
-        shutil.copyfile("./botflowlibrary.aiml", aimldir + os.sep + "botflowlibrary.aiml")
+    def copy_supporting_files(self, from_dir, to_dir):
+        shutil.copyfile(from_dir + os.sep + "aimlstandardlibrary.aiml", to_dir + os.sep + "aimlstandardlibrary.aiml")
+        shutil.copyfile(from_dir + os.sep + "botflowlibrary.aiml", to_dir + os.sep + "botflowlibrary.aiml")
 
 
 if __name__ == '__main__':
@@ -300,6 +301,7 @@ if __name__ == '__main__':
 
     parser.add_argument('-flow', dest='flowfile', help='Flow file to load')
     parser.add_argument('-topic', dest='topic', help='Topic name')
+    parser.add_argument('-lib', dest='lib', help='Library of aiml files')
     parser.add_argument('-aiml', dest='aimldir', help='Directory to create aiml files in')
 
     args = parser.parse_args()
@@ -310,4 +312,4 @@ if __name__ == '__main__':
 
     botflow.generate_aiml(args.aimldir)
 
-    botflow.copy_supporting_files(args.aimldir)
+    botflow.copy_supporting_files(args.lib, args.aimldir)
