@@ -1,0 +1,24 @@
+<?xml version="1" encoding="UTF-8" ?>
+<aiml>
+
+    <category>
+        <pattern>I WANT TO BOOK A FLIGHT</pattern>
+        <template>
+            <srai>START FLIGHTBOOK</srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>EXECUTE FLIGHTBOOK</pattern>
+        <template>
+            Ok, I'll book a flight matching the following:
+            <get name="City" />,
+            <get name="London" />,
+            <get name="Destination" />,
+            <get name="Date" />,
+            <get name="Passengers" />,
+            <get name="Class" />,
+        </template>
+    </category>
+
+</aiml>
