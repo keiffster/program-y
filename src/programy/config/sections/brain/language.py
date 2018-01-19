@@ -20,32 +20,26 @@ import logging
 from programy.config.base import BaseSectionConfigurationData
 
 
-class BrainOverridesConfiguration(BaseSectionConfigurationData):
+class BrainLanguageConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
-        BaseSectionConfigurationData.__init__(self, "overrides")
-        self._allow_system_aiml = False
-        self._allow_learn_aiml = False
-        self._allow_learnf_aiml = False
+        BaseSectionConfigurationData.__init__(self, "language")
+        self._english = True
+        self._chinese = False
 
     @property
-    def allow_system_aiml(self):
-        return self._allow_system_aiml
+    def english(self):
+        return self._english
 
     @property
-    def allow_learn_aiml(self):
-        return self._allow_learn_aiml
-
-    @property
-    def allow_learnf_aiml(self):
-        return self._allow_learnf_aiml
+    def chinese(self):
+        return self._chinese
 
     def load_config_section(self, configuration_file, configuration, bot_root):
-        overrides = configuration_file.get_section(self._section_name, configuration)
-        if overrides is not None:
-            self._allow_system_aiml = configuration_file.get_bool_option(overrides, "allow_system_aiml", missing_value=False)
-            self._allow_learn_aiml = configuration_file.get_bool_option(overrides, "allow_learn_aiml", missing_value=False)
-            self._allow_learnf_aiml = configuration_file.get_bool_option(overrides, "allow_learnf_aiml", missing_value=False)
+        language = configuration_file.get_section(self._section_name, configuration)
+        if language is not None:
+            self._english = configuration_file.get_bool_option(language, "english", missing_value=True)
+            self._chinese = configuration_file.get_bool_option(language, "chinese", missing_value=True)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'overrides' section missing from brain config, using to defaults")
+                logging.warning("'language' section missing from brain config, using to defaults")
