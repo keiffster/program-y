@@ -23,6 +23,9 @@ from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
+from programy.utils.language.chinese import ChineseLanguage
+
+
 #######################################################################################################################
 #
 class PatternGraph(object):
@@ -79,16 +82,16 @@ class PatternGraph(object):
 
         return node_instance
 
-
-        #if 'name' in element.attrib:
-        #    return node_instance(element.attrib['name'])
-        #else:
-        #    return node_instance(TextUtils.strip_whitespace(element.text))
-
     def _parse_text(self, pattern_text, current_node):
 
         stripped = pattern_text.strip()
-        words = stripped.split(" ")
+        if self._aiml_parser is not None and \
+                        self._aiml_parser.brain is not None and \
+                        self._aiml_parser.brain.configuration.language.chinese is True:
+            words = ChineseLanguage.split_unicode(stripped)
+        else:
+            words = stripped.split(" ")
+
         for word in words:
             if word != '': # Blank nodes add no value, ignore them
                 word = TextUtils.strip_whitespace(word)

@@ -1,8 +1,8 @@
 from distutils.core import setup
 
 setup(
-  name = 'program-y',
-  packages = ['program-y'],
+  name = 'programy',
+  packages = ['programy'],
   version = '1.8.0',
   description = 'AIML 2.0 Framework and Platform',
   author = 'Keith Sterling',
