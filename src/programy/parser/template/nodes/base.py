@@ -83,7 +83,16 @@ class TemplateNode(object):
         if text is not None:
             string = text.strip()
             if string:
-                words = string.split(" ")
+
+                if graph._aiml_parser is not None and \
+                                graph._aiml_parser.brain is not None and \
+                                graph._aiml_parser.brain.configuration.language.chinese is True:
+                    from programy.utils.language.chinese import ChineseLanguage
+                    words = ChineseLanguage.split_unicode(string)
+                else:
+                    words = string.split(" ")
+                #words = string.split(" ")
+
                 for word in words:
                     if word is not None and word:
                         word_class = graph.get_node_class_by_name('word')

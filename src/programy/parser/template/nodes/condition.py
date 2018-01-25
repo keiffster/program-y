@@ -420,10 +420,12 @@ class TemplateConditionNode(TemplateConditionVariable):
     def resolve_type2_condition(self, bot, clientid):
         try:
             value = self.get_condition_variable_value(bot, clientid, self.var_type, self.name)
+            print("C2 Value = [%s]"%value)
 
             for condition in self.children:
                 if condition.is_default() is False:
                     condition_value = condition.value.resolve(bot, clientid)
+                    print("C2 Condition = [%s]" % condition_value)
 
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():

@@ -110,3 +110,5 @@ conversations/
 /src/utils/rdf_lister/rdfs.csv
 /bots/scratch/
 bots/scratch/
+/bots/multibot/
+bots/multibot/

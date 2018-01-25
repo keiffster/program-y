@@ -30,15 +30,19 @@ class ProcessorLoader(ClassLoader):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Loading processors from file [%s]", filename)
         count = 0
-        with open(filename, "r", encoding="utf-8") as file:
-            for line in file:
-                line = line.strip()
-                if line:
-                    if line[0] != '#':
-                        new_class = ClassLoader.instantiate_class(line)
-                        if new_class is not None:
-                            self.processors.append(new_class(*args, **kw))
-                            count += 1
+        try:
+            with open(filename, "r", encoding="utf-8") as file:
+                for line in file:
+                    line = line.strip()
+                    if line:
+                        if line[0] != '#':
+                            new_class = ClassLoader.instantiate_class(line)
+                            if new_class is not None:
+                                self.processors.append(new_class(*args, **kw))
+                                count += 1
+        except FileNotFoundError:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("File not found [%s]", filename)
         return count
 
     def process(self, bot, clientid, string):
