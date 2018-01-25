@@ -44,10 +44,15 @@ class BaseCollection(object):
 
     def load_from_filename(self, filename):
         count = 0
-        with open(filename, "r", encoding="utf-8") as data_file:
-            for line in data_file:
-                if self.process_line(line):
-                    count += 1
+        try:
+            with open(filename, "r", encoding="utf-8") as data_file:
+                for line in data_file:
+                    if self.process_line(line):
+                        count += 1
+        except FileNotFoundError:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("File not found [%s]", filename)
+
         return count
 
     def load_from_text(self, text):

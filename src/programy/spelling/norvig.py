@@ -14,15 +14,23 @@ class NorvigSpellingChecker(SpellingChecker):
     def __init__(self, spelling_config=None):
         SpellingChecker.__init__(self, spelling_config)
 
+        self.words = []
+        self.sum_of_words = 0
+
         if spelling_config is None:
             corpus_filename = os.path.dirname(__file__) + os.sep + "corpus.txt"
         else:
             corpus_filename = spelling_config.corpus
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading spelling corpus [%s]", corpus_filename)
-        self.words = Counter(self._all_words(open(corpus_filename, encoding="utf-8").read()))
-        self.sum_of_words = sum(self.words.values())
+        if os.path.exists(corpus_filename) is True:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Loading spelling corpus [%s]", corpus_filename)
+
+            self.words = Counter(self._all_words(open(corpus_filename, encoding="utf-8").read()))
+            self.sum_of_words = sum(self.words.values())
+        else:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.error("No spelling corpus found[%s]", corpus_filename)
 
     def _all_words(self, text):
         return re.findall(r'\w+', text.upper())
