@@ -23,7 +23,7 @@ class MockRestAPI(object):
         self.status_code = status_code
         self.response = response
 
-    def get(self, host, data):
+    def get(self, host):
         return MockRestResponse(self.status_code, self.response)
 
     def post(self, host, data):

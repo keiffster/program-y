@@ -23,11 +23,11 @@ from programy.config.sections.brain.service import BrainServiceConfiguration
 
 class RestAPI(object):
 
-    def get(self, host, data):
-        return requests.get(host, data=data)
+    def get(self, url):
+        return requests.get(url)
 
-    def post(self, host, data):
-        return requests.post(host, data=data)
+    def post(self, url, data):
+        return requests.post(url, data=data)
 
 
 class GenericRESTService(Service):
@@ -40,8 +40,6 @@ class GenericRESTService(Service):
         else:
             self.api = api
 
-        self.payload = {}
-
         if config.method is None:
             self.method = "GET"
         else:
@@ -51,13 +49,45 @@ class GenericRESTService(Service):
             raise Exception("Undefined host parameter")
         self.host = config.host
 
+        self.port = None
+        if config.port is not None:
+           self.port = config.port
+
+        self.url = None
+        if config.url is not None:
+           self.url = config.url
+
+    def _format_url(self):
+        if self.port is not None:
+            host_port = "http://%s:%s"%(self.host, self.port)
+        else:
+            host_port = "http://%s"%self.host
+
+        if self.url is not None:
+            return "%s%s"%(host_port, self.url)
+        else:
+            return host_port
+
+    def _format_payload(self, bot, clientid, question):
+        return {}
+
+    def _format_get_url(self, url, bot, clientid, question):
+        return url
+
+    def _parse_response(self, text):
+        return text
+
     def ask_question(self, bot, clientid: str, question: str):
 
         try:
+            url = self._format_url()
+
             if self.method == 'GET':
-                response = self.api.get(self.host, data=self.payload)
+                full_url = self._format_get_url(url, bot, clientid, question)
+                response = self.api.get(full_url)
             elif self.method == 'POST':
-                response = self.api.post(self.host, data=self.payload)
+                payload = self._format_payload(bot, clientid, question)
+                response = self.api.post(url, data=payload)
             else:
                 raise Exception("Unsupported REST method [%s]"%self.method)
 
@@ -65,7 +95,7 @@ class GenericRESTService(Service):
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("[%s] return status code [%d]", self.host, response.status_code)
             else:
-                return response.text
+                return self._parse_response(response.text)
 
         except Exception as excep:
             logging.exception(excep)

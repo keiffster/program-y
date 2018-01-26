@@ -208,11 +208,6 @@ twitter:
   storage_location: $BOT_ROOT/storage/twitter.data
   welcome_message: Thanks for following me, send me a message and I'll try and help
 
-facebook:
-  polling: false
-  polling_interval: 30
-  streaming: true
-
 xmpp:
   server: talk.google.com
   port: 5222

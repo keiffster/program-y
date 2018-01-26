@@ -53,10 +53,6 @@ class TemplateSetNode(TemplateNode):
         name = self.name.resolve(bot, clientid)
         value = self.resolve_children(bot, clientid)
 
-        #ChineseLanguage
-        #import re
-        #value = re.sub(r'\s+', '', value)
-
         if self.local is True:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)

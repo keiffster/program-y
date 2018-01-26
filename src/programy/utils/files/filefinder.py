@@ -34,15 +34,19 @@ class FileFinder(object):
 
     def find_files(self, path, subdir=False, extension=None):
         found_files = []
-        if subdir is False:
-            paths = os.listdir(path)
-            for filename in paths:
-                if filename.endswith(extension):
-                    found_files.append((filename, os.path.join(path, filename)))
-        else:
-            for dirpath, _, filenames in os.walk(path):
-                for filename in [f for f in filenames if f.endswith(extension)]:
-                    found_files.append((filename, os.path.join(dirpath, filename)))
+        try:
+            if subdir is False:
+                paths = os.listdir(path)
+                for filename in paths:
+                    if filename.endswith(extension):
+                        found_files.append((filename, os.path.join(path, filename)))
+            else:
+                for dirpath, _, filenames in os.walk(path):
+                    for filename in [f for f in filenames if f.endswith(extension)]:
+                        found_files.append((filename, os.path.join(dirpath, filename)))
+        except FileNotFoundError:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("No directory found [%s]", path)
 
         return sorted(found_files, key=lambda element: (element[1], element[0]))
 
