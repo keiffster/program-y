@@ -24,9 +24,7 @@ from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 from programy.parser.tokenizer import Tokenizer
 from programy.parser.tokenizer import DEFAULT_TOKENIZER
-
 from programy.utils.language.chinese import ChineseLanguage
-
 
 #######################################################################################################################
 #
