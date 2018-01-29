@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.config.base import BaseContainerConfigurationData
-from programy.config.sections.brain.language import BrainLanguageConfiguration
 from programy.config.sections.brain.overrides import BrainOverridesConfiguration
 from programy.config.sections.brain.defaults import BrainDefaultsConfiguration
 from programy.config.sections.brain.nodes import BrainNodesConfiguration
@@ -27,13 +26,13 @@ from programy.config.sections.brain.services import BrainServicesConfiguration
 from programy.config.sections.brain.securities import BrainSecuritiesConfiguration
 from programy.config.sections.brain.oobs import BrainOOBSConfiguration
 from programy.config.sections.brain.dynamic import BrainDynamicsConfiguration
+from programy.config.sections.brain.tokenizer import BrainTokenizerConfiguration
 
 
 class BrainConfiguration(BaseContainerConfigurationData):
 
     def __init__(self):
         BaseContainerConfigurationData.__init__(self, "brain")
-        self._language = BrainLanguageConfiguration()
         self._overrides = BrainOverridesConfiguration()
         self._defaults = BrainDefaultsConfiguration()
         self._nodes = BrainNodesConfiguration()
@@ -44,10 +43,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._security = BrainSecuritiesConfiguration()
         self._oob = BrainOOBSConfiguration()
         self._dynamics = BrainDynamicsConfiguration()
-
-    @property
-    def language(self):
-        return self._language
+        self._tokenizer = BrainTokenizerConfiguration()
 
     @property
     def overrides(self):
@@ -89,10 +85,13 @@ class BrainConfiguration(BaseContainerConfigurationData):
     def dynamics(self):
         return self._dynamics
 
+    @property
+    def tokenizer(self):
+        return self._tokenizer
+
     def load_configuration(self, configuration_file, bot_root):
         brain_config = configuration_file.get_section("brain")
         if brain_config is not None:
-            self._language.load_config_section(configuration_file, brain_config, bot_root)
             self._overrides.load_config_section(configuration_file, brain_config, bot_root)
             self._defaults.load_config_section(configuration_file, brain_config, bot_root)
             self._nodes.load_config_section(configuration_file, brain_config, bot_root)
@@ -103,3 +102,4 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._security.load_config_section(configuration_file, brain_config, bot_root)
             self._oob.load_config_section(configuration_file, brain_config, bot_root)
             self._dynamics.load_config_section(configuration_file, brain_config, bot_root)
+            self._tokenizer.load_config_section(configuration_file, brain_config, bot_root)

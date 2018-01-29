@@ -17,7 +17,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import datetime
-
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class Match(object):
 
@@ -25,10 +26,11 @@ class Match(object):
     TOPIC = 2
     THAT = 3
 
-    def __init__(self, match_type, node, word):
+    def __init__(self, match_type, node, word, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
         self._match_type = match_type
         self._matched_node = node
         self._matched_words = []
+        self._tokenizer = tokenizer
         if word is not None:
             self.add_word(word)
 
@@ -47,8 +49,8 @@ class Match(object):
     def matched_words(self):
         return self._matched_words
 
-    def joined_words(self, join_char=" "):
-        return join_char.join(self.matched_words)
+    def joined_words(self):
+        return self._tokenizer.words_to_texts(self.matched_words)
 
     @staticmethod
     def type_to_string(match_type):

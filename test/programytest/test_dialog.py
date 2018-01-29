@@ -53,14 +53,15 @@ class SentenceTests(unittest.TestCase):
         self.assertEqual("One Two", sentence.text())
 
     def test_sentence_creation_two_words_diff_split_char(self):
-        sentence = Sentence("One,Two", ",")
+        from programy.parser.tokenizer import Tokenizer
+        sentence = Sentence("One,Two", Tokenizer(","))
         self.assertIsNotNone(sentence)
         self.assertEqual(2, sentence.num_words())
         self.assertEqual("One", sentence.word(0))
         self.assertEqual("Two", sentence.word(1))
         with self.assertRaises(Exception):
             sentence.sentence.word(2)
-        self.assertEqual("One Two", sentence.text())
+        self.assertEqual("One,Two", sentence.text())
 
     def test_words_from_current_pos(self):
         sentence = Sentence("One Two Three")

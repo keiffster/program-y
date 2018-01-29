@@ -24,6 +24,7 @@ except:
     import pickle
 import gc
 import datetime
+import programy.parser.tokenizer
 
 from programy.processors.processing import ProcessorLoader
 from programy.config.sections.brain.brain import BrainConfiguration
@@ -45,7 +46,18 @@ from programy.dialog import Sentence
 class Brain(object):
     def __init__(self, configuration: BrainConfiguration):
         self._configuration = configuration
-        self._aiml_parser = AIMLParser(self)
+
+
+        if self._configuration is not None and self._configuration.tokenizer.classname is not None:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Loading tokenizer from class [%s]", self._configuration.tokenizer.classname)
+            tokenizer = ClassLoader.instantiate_class(self._configuration.tokenizer.classname)
+            self._tokenizer = tokenizer(self._configuration.tokenizer.split_chars)
+            programy.parser.tokenizer.DEFAULT_TOKENIZER = self._tokenizer
+        else:
+            self._tokenizer = programy.parser.tokenizer.DEFAULT_TOKENIZER
+
+        self._aiml_parser = AIMLParser(self, tokenizer = self._tokenizer)
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()

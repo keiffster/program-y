@@ -78,10 +78,7 @@ bot:
 
 brain:
 
-    language:
-      chinese: true
-
-    # Overrides
+     # Overrides
     overrides:
       allow_system_aiml: true
       allow_learn_aiml: true

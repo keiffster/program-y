@@ -22,16 +22,17 @@ from programy.parser.exceptions import ParserException, DuplicateGrammarExceptio
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-
-from programy.utils.language.chinese import ChineseLanguage
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 
 #######################################################################################################################
 #
 class PatternGraph(object):
 
-    def __init__(self, aiml_parser=None, root_node=None):
+    def __init__(self, aiml_parser=None, root_node=None, tokenizer: Tokenizer=DEFAULT_TOKENIZER):
         self._aiml_parser = aiml_parser
+        self._tokenizer = tokenizer
 
         pattern_nodes = None
         if aiml_parser is not None:
@@ -63,7 +64,7 @@ class PatternGraph(object):
             return node_class(word)
         elif PatternOneOrMoreWildCardNode.is_wild_card(word):
             node_class = self._pattern_factory.new_node_class('oneormore')
-            return node_class(word)
+            return node_class(word, tokenizer=self._tokenizer)
         node_class = self._pattern_factory.new_node_class('word')
         return node_class(word)
 
@@ -85,12 +86,8 @@ class PatternGraph(object):
     def _parse_text(self, pattern_text, current_node):
 
         stripped = pattern_text.strip()
-        if self._aiml_parser is not None and \
-                        self._aiml_parser.brain is not None and \
-                        self._aiml_parser.brain.configuration.language.chinese is True:
-            words = ChineseLanguage.split_unicode(stripped)
-        else:
-            words = stripped.split(" ")
+
+        words = self._tokenizer.texts_to_words(stripped)
 
         for word in words:
             if word != '': # Blank nodes add no value, ignore them

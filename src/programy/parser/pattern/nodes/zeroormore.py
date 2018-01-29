@@ -19,14 +19,16 @@ import logging
 
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.matcher import Match
-
+from programy.parser.tokenizer import Tokenizer
+from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
     MATCH_CHARS = ['^', '#']
 
-    def __init__(self, wildcard):
+    def __init__(self, wildcard, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
         PatternWildCardNode.__init__(self, wildcard)
+        self._tokenizer = tokenizer
 
     def to_xml(self, bot, clientid):
         string = ""
@@ -70,7 +72,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
             return None
 
-        context_match = Match(match_type, self, None)
+        context_match = Match(match_type, self, None, tokenizer=self._tokenizer)
         context.add_match(context_match)
         matches_added = 1
 
