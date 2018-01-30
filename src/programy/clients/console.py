@@ -68,7 +68,7 @@ class ConsoleBotClient(BotClient):
             while self.running is True:
                 try:
                     self.process_question_answer()
-                except KeyboardInterrupt:
+                except KeyboardInterrupt as keye:
                     self.running = False
                     self.display_response(self.bot.get_exit_response(self.clientid))
                 except Exception as excep:

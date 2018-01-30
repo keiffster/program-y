@@ -69,7 +69,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
         else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.debug("Invalid XMPP message")
-                self.send_response(msg, "Sorry, no idea")
+            self.send_response(msg, "Sorry, no idea!")
 
     def register_xep_plugins(self, configuration):
         if configuration.client_configuration.xep_0030 is True:

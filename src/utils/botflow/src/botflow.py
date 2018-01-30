@@ -233,7 +233,7 @@ class Step(object):
         else:
             aiml_file.write('\t\t\t<that>%s</that>\n' % self._prompt)
         aiml_file.write('\t\t\t<template>\n')
-        aiml_file.write('\t\t\t\t<srai>EXIT FLIGHTBOOK</srai>\n')
+        aiml_file.write('\t\t\t\t<srai>EXIT %s</srai>\n' % topic_name)
         aiml_file.write('\t\t\t</template>\n')
         aiml_file.write('\t\t</category>\n\n')
 
@@ -296,7 +296,7 @@ class BotFlow(object):
     def generate_aiml(self, aiml_dir):
         print("Generating aiml in [%s]" % aiml_dir)
 
-        with open(aiml_dir + os.sep + self._name + ".aiml", "w+") as aiml_file:
+        with open(aiml_dir + os.sep + self._name + ".aiml", "w+", encoding="utf-8") as aiml_file:
             self.write_aiml_header(aiml_file)
 
             self.write_entry_category(aiml_file, self._steps[0]._step)

@@ -221,3 +221,6 @@ socket:
   port: 9999
   queue: 5
   debug: true
+
+telegram:
+  unknown_command: Sorry, that is not a command I have been taught yet!

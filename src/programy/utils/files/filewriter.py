@@ -22,7 +22,7 @@ import os
 
 class TextFile(object):
 
-    def __init__(self, filename, mode="a+", encoding="utf-8"):
+    def __init__(self, filename, mode="a", encoding="utf-8"):
         self._filename = filename
         self._encoding = encoding
         self._file = open(self._filename, mode, encoding=self._encoding)
@@ -37,7 +37,7 @@ class TextFile(object):
 
 class CSVFile(object):
 
-    def __init__(self, filename, mode="a+", encoding="utf-8", delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL):
+    def __init__(self, filename, mode="a", encoding="utf-8", delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL):
         self._filename = filename
         self._encoding = encoding
         self._file = open(self._filename, mode, encoding=self._encoding)

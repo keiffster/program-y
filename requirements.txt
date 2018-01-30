@@ -1,18 +1,19 @@
-requests
-flask
-python-dateutil
-beautifulsoup4
-lxml
-wikipedia
-pylint
-nose
-coverage
-pyyaml
-tweepy
-sleekxmpp
-metoffer
+requests==2.18.1
+Flask==0.12.2
+python-dateutil==2.6.1
+beautifulsoup4==4.6.0
+lxml==3.8.0
+wikipedia==1.4.0
+pylint==1.7.2
+nose==1.3.7
+coverage==4.4.1
+PyYAML==3.12
+tweepy==3.5.0
+sleekxmpp==1.3.2
+MetOffer==1.3.2
+python-telegram-bot==9.0.0
 
 # Uncomment this line on Osx or Linux if you want to use sanic rest client
 # Sanic is not supported on Windows !
-# sanic
+# sanic==0.6.0
 
