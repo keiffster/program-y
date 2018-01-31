@@ -135,25 +135,23 @@ class DoubleStringCharSplitCollection(BaseCollection):
 
 
 class DoubleStringPatternSplitCollection(BaseCollection):
+    RE_OF_SPLIT_PATTERN = re.compile("\"(.*?)\",\"(.*?)\"")
 
     def __init__(self):
         BaseCollection.__init__(self)
-        self._pairs = []
+        self._pairs = {}
 
     def has_key(self, key):
-        for pair in self._pairs:
-            if pair[0] == key:
-                return True
-        return False
+        return key in self._paris
 
     def value(self, key):
-        for pair in self._pairs:
-            if pair[0] == key:
-                return pair[1]
-        return None
+        if has_key(key):
+            return self._pairs[key]
+        else:
+            return None
 
     def get_split_pattern(self):
-        return r"\"(.*?)\",\"(.*?)\""
+        return DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN
 
     def split_line(self, line):
         return self.split_line_by_pattern(line)
@@ -161,7 +159,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
     def split_line_by_pattern(self, line):
         line = line.strip()
         if line is not None and line:
-            pattern = re.compile(self.get_split_pattern())
+            pattern = self.get_split_pattern()
             match = pattern.search(line)
             if match is not None:
                 lhs = match.group(1)
@@ -194,28 +192,29 @@ class DoubleStringPatternSplitCollection(BaseCollection):
             end = pattern_text.rstrip()
             pattern = "(^%s|%s|%s$)" % (start, middle, end)
             replacement = splits[1]
-            self._pairs.append([splits[0], pattern, replacement])
+            #self._pairs.append([splits[0], pattern, replacement])
+            self._pairs[splits[0]] = [re.compile(pattern, re.IGNORECASE), replacement]
             return True
         return False
 
     def replace_by_pattern(self, replacable):
         alreadys = []
-        for pair in self._pairs:
+        for key, pair in self._pairs.items():
             try:
-                pattern = re.compile(pair[1], re.IGNORECASE)
+                pattern = pair[0]
                 if pattern.findall(replacable):
                     found = False
                     for already in alreadys:
-                        stripped = pair[0].strip()
+                        stripped = key.strip()
                         if stripped in already:
                             found = True
                     if found is not True:
-                        replacable = pattern.sub(pair[2]+" ", replacable)
-                        alreadys.append(pair[2])
+                        replacable = pattern.sub(pair[1]+" ", replacable)
+                        alreadys.append(pair[1])
 
             except Exception as excep:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Invalid regular expression [%s]", pair[1])
+                    logging.error("Invalid regular expression [%s]", str(pair[0]))
                 logging.exception(excep)
 
         return re.sub(' +', ' ', replacable.strip())
