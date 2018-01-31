@@ -22,9 +22,13 @@ class TextUtils:
 
     DEFAULT_TAB_SPACE = "  "
 
-    STRIP_ALL_WHITESPACE = r'[\s+]'
-    STRIP_WHITESPACE = r'[\n\t\r+]'
-    STRIP_ALL_PUNCTUATION = r'[:\'";,.?!\(\)\-"]'
+    RE_STRIP_ALL_WHITESPACE = re.compile('[\s+]')
+    RE_STRIP_WHITESPACE = re.compile('[\n\t\r+]')
+    RE_STRIP_ALL_PUNCTUATION1 = re.compile('[:\'";,.?!\(\)\-"]')
+    RE_STRIP_ALL_PUNCTUATION2 = re.compile('\s+')
+    RE_STRIP_HTML = re.compile(r'<.*?>')
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
 
     HTML_ESCAPE_TABLE = {
         "&": "&amp;",
@@ -40,18 +44,18 @@ class TextUtils:
 
     @staticmethod
     def strip_whitespace(string):
-        first_pass = re.sub(TextUtils.STRIP_WHITESPACE, ' ', string)
+        first_pass = TextUtils.RE_STRIP_WHITESPACE.sub(' ', string)
         return ' '.join(first_pass.split())
 
     @staticmethod
     def strip_all_whitespace(string):
-        first_pass = re.sub(TextUtils.STRIP_ALL_WHITESPACE, '', string)
+        first_pass = TextUtils.RE_STRIP_ALL_WHITESPACE.sub('', string)
         return ' '.join(first_pass.split())
 
     @staticmethod
     def strip_all_punctuation(string):
-        first_pass = re.sub(TextUtils.STRIP_ALL_PUNCTUATION, ' ', string)
-        second_pass = re.sub(r'\s+', ' ', first_pass)
+        first_pass = TextUtils.RE_STRIP_ALL_PUNCTUATION1.sub(' ', string)
+        second_pass = TextUtils.RE_STRIP_ALL_PUNCTUATION2.sub(' ', first_pass)
         return second_pass.strip()
 
     @staticmethod
@@ -60,8 +64,7 @@ class TextUtils:
 
     @staticmethod
     def strip_html(data, replace_with=''):
-        pattern = re.compile(r'<.*?>')
-        return pattern.sub(replace_with, data)
+        return TextUtils.RE_STRIP_HTML.sub(replace_with, data)
 
     @staticmethod
     def replace_path_seperator(path, old="/", new=os.sep):
@@ -73,14 +76,12 @@ class TextUtils:
     def tag_and_namespace_from_text(text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml
-        pattern = re.compile("^{.*}.*$")
-        if pattern.match(text) is None:
+        if TextUtils.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
             # If that pattern does not exist, assume that the text is the tag name
             return text, None
 
         # Otherwise, extract namespace and tag name
-        match = re.compile("^({.*})(.*)$")
-        groupings = match.match(text)
+        groupings = TextUtils.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
         if groupings is not None:
             namespace = groupings.group(1).strip()
             tag_name = groupings.group(2).strip()

@@ -33,6 +33,7 @@ from programy.utils.files.filewriter import DuplicatesFileWriter
 
 
 class AIMLLoader(FileFinder):
+    
     def __init__(self, aiml_parser):
         FileFinder.__init__(self)
         self.aiml_parser = aiml_parser
@@ -46,6 +47,8 @@ class AIMLLoader(FileFinder):
 
 
 class AIMLParser(object):
+    RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^{.*}.*$")
+    RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT = re.compile("^({.*})(.*)$")
 
     def __init__(self, brain=None):
         self._brain = brain
@@ -154,14 +157,12 @@ class AIMLParser(object):
     def tag_and_namespace_from_text(self, text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml
-        pattern = re.compile("^{.*}.*$")
-        if pattern.match(text) is None:
+        if AIMLParser.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
             # If that pattern does not exist, assume that the text is the tag name
             return text, None
 
         # Otherwise, extract namespace and tag name
-        match = re.compile("^({.*})(.*)$")
-        groupings = match.match(text)
+        groupings = AIMLParser.RE_MATCH_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text)
         if groupings is not None:
             namespace = groupings.group(1).strip()
             tag_name = groupings.group(2).strip()
