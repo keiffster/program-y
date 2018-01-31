@@ -14,7 +14,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
 				<interval>Text</interval>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -35,7 +35,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
                 </interval>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -44,7 +44,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateIntervalNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "2")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "2")
 
     def test_interval_style_with_child(self):
         template = ET.fromstring("""
@@ -57,7 +57,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
                 </interval>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -66,7 +66,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateIntervalNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "2")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "2")
 
     def test_interval_with_child(self):
         template = ET.fromstring("""
@@ -80,7 +80,7 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
                 </interval>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -89,4 +89,4 @@ class TemplateGraphIntervalTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateIntervalNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "2")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "2")

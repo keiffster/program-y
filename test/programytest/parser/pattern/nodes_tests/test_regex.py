@@ -1,9 +1,9 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.regex import PatternRegexNode
 from programy.parser.exceptions import ParserException
 
-class PatternRegexNodeTests(PatternTestBaseClass):
+class PatternRegexNodeTests(ParserTestsBaseClass):
 
     def test_init_with_text(self):
         node = PatternRegexNode({}, "^LEGION$")
@@ -57,7 +57,7 @@ class PatternRegexNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternRegexNode({}, "^LEGION$")))
 
         self.assertEqual(node.to_string(), "REGEX [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] pattern=[^LEGION$]")
-        self.assertEqual('<regex pattern="^LEGION$"></regex>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<regex pattern="^LEGION$"></regex>\n', node.to_xml(self._bot, self._clientid))
 
     def test_init_template(self):
 
@@ -83,4 +83,4 @@ class PatternRegexNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternRegexNode({"template": "LEGION"}, "")))
 
         self.assertEqual(node.to_string(), "REGEX [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] template=[LEGION]")
-        self.assertEqual('<regex template="LEGION"></regex>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<regex template="LEGION"></regex>\n', node.to_xml(self._bot, self._clientid))

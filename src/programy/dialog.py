@@ -17,18 +17,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import os
-import sys
 import time
 from os import listdir
 from os.path import isfile, join
 from programy.parser.tokenizer import Tokenizer
-from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class Sentence(object):
 
-    def __init__(self, text: str = None, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
+    def __init__(self, tokenizer: Tokenizer, text: str = None ):
         self._tokenizer = tokenizer
-        self._words = self._split_into_words(text)
+        self._words = self._tokenizer.texts_to_words(text)
         self._response = None
         self._matched_context = None
 
@@ -79,18 +77,19 @@ class Sentence(object):
     def _split_into_words(self, text):
         if text is None:
             return []
-        else:
-            return self._tokenizer.texts_to_words(text)
+        return self._tokenizer.texts_to_words(text)
+
 
 class Question(object):
 
+    #TODO Move sentence_split_charts into a property of tokenizer and move functionality into that class
     @staticmethod
-    def create_from_text(text: str, sentence_split_chars: str = ".", split=True, tokenizer=DEFAULT_TOKENIZER):
+    def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True):
         question = Question()
         if split is True:
-            question.split_into_sentences(text, sentence_split_chars, tokenizer=tokenizer)
+            question.split_into_sentences(text, sentence_split_chars, tokenizer)
         else:
-            question.sentences.append(Sentence(text, tokenizer=tokenizer))
+            question.sentences.append(Sentence(tokenizer, text))
         return question
 
     @staticmethod
@@ -148,12 +147,14 @@ class Question(object):
     def combine_answers(self):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
-    def split_into_sentences(self, text: str, sentence_split_chars: str, tokenizer: Tokenizer):
+    def split_into_sentences(self, text: str, sentence_split_chars: str, tokenizer):
         if text is not None and text.strip():
             self._sentences = []
             all_sentences = text.split(sentence_split_chars)
             for each_sentence in all_sentences:
-                self._sentences.append(Sentence(each_sentence, tokenizer))
+                self._sentences.append(Sentence(tokenizer, each_sentence))
+
+
 #
 # A Conversation is made up of questions, each question is made up of sentences
 #
@@ -164,8 +165,7 @@ class Conversation(object):
         self._clientid = clientid
         self._questions = []
         self._max_histories = bot.configuration.conversations.max_histories
-        self._properties = {}
-        self._properties['topic'] = bot.configuration.conversations.initial_topic
+        self._properties = {'topic': bot.configuration.conversations.initial_topic}
 
     @property
     def bot(self):

@@ -1,11 +1,11 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.dialog import Sentence
 
 
-class PatternPriorityWordNodeTests(PatternTestBaseClass):
+class PatternPriorityWordNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         node = PatternPriorityWordNode("test1")
@@ -27,16 +27,16 @@ class PatternPriorityWordNodeTests(PatternTestBaseClass):
         self.assertFalse(node.has_children())
 
 
-        sentence = Sentence("test1 test2")
+        sentence = Sentence(self._bot.brain.tokenizer, "test1 test2")
         self.assertTrue(node.equivalent(PatternPriorityWordNode("test1")))
-        result = node.equals(self.bot, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertTrue(result.matched)
-        result = node.equals(self.bot, "testid", sentence, 1)
+        result = node.equals(self._bot, "testid", sentence, 1)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "PWORD [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
-        self.assertEqual('<priority word="test1"></priority>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<priority word="test1"></priority>\n', node.to_xml(self._bot, self._clientid))
 
         node.add_child(PatternWordNode("test2"))
         self.assertEqual(len(node.children), 1)
         self.assertEqual(node.to_string(), "PWORD [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
-        self.assertEqual('<priority word="test1"><word word="test2"></word>\n</priority>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<priority word="test1"><word word="test2"></word>\n</priority>\n', node.to_xml(self._bot, self._clientid))

@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.rest import TemplateRestNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateRestNode(TemplateRestNode):
@@ -14,7 +14,7 @@ class MockTemplateRestNode(TemplateRestNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateRestNodeTests(TemplateTestsBaseClass):
+class TemplateRestNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -33,7 +33,7 @@ class TemplateRestNodeTests(TemplateTestsBaseClass):
         word3 = TemplateWordNode("Word3")
         node.append(word3)
 
-        self.assertEqual(root.resolve(None, "clientid"), "Word2 Word3")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "Word2 Word3")
 
     def test_node_one_word(self):
         root = TemplateNode()
@@ -48,7 +48,7 @@ class TemplateRestNodeTests(TemplateTestsBaseClass):
         word1 = TemplateWordNode("Word1")
         node.append(word1)
 
-        self.assertEqual(root.resolve(None, "clientid"), "NIL")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "NIL")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -59,7 +59,7 @@ class TemplateRestNodeTests(TemplateTestsBaseClass):
         word2 = TemplateWordNode("Word2")
         node.append(word2)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><rest>Word1 Word2</rest></template>", xml_str)
@@ -75,14 +75,14 @@ class TemplateRestNodeTests(TemplateTestsBaseClass):
 
         root.append(node)
 
-        self.assertEqual(root.resolve(None, "clientid"), "NIL")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "NIL")
 
     def test_to_xml_no_words(self):
         root = TemplateNode()
         node = TemplateRestNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><rest /></template>", xml_str)
@@ -92,6 +92,6 @@ class TemplateRestNodeTests(TemplateTestsBaseClass):
         node = MockTemplateRestNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -1,6 +1,7 @@
 import re
 
 class Tokenizer(object):
+
     def __init__(self, split_chars=' '):
         self.split_chars = split_chars
 
@@ -23,17 +24,21 @@ class Tokenizer(object):
     def compare(self, value1, value2):
         return value1 == value2
 
-class CjkTokenizer(Tokenizer):
-    def __init__(self, split_chars=' '):
-        self.split_chars = split_chars
 
-    def _is_chinese_word(self, word):
+class CjkTokenizer(Tokenizer):
+
+    def __init__(self, split_chars=' '):
+        Tokenizer.__init__(self, split_chars)
+
+    @staticmethod
+    def _is_chinese_word(word):
         for ch in word:
-            if self._is_chinese_char(ch):
+            if CjkTokenizer._is_chinese_char(ch):
                 return True
         return False
 
-    def _is_chinese_char(self, c):
+    @staticmethod
+    def _is_chinese_char(c):
         r = [
             # 标准CJK文字
             (0x3400, 0x4DB5), (0x4E00, 0x9FA5), (0x9FA6, 0x9FBB), (0xF900, 0xFA2D),
@@ -55,7 +60,7 @@ class CjkTokenizer(Tokenizer):
         words = []
         last_word = ''
         for ch in texts:
-            if self._is_chinese_char(ch):
+            if CjkTokenizer._is_chinese_char(ch):
                 if len(last_word) > 0:
                     words.append(last_word)
                     last_word = ch
@@ -76,26 +81,18 @@ class CjkTokenizer(Tokenizer):
     
     def words_to_texts(self, words):
         texts = ''
-        prev_is_cjk = True
-        prev_is_num = False
 
         for word in words:
-            if self._is_chinese_word(word):
-                if prev_is_cjk == False:
-                    if prev_is_num is False:
-                        texts += ' '
+            if CjkTokenizer._is_chinese_word(word):
                 texts += word
-                prev_is_cjk = True
             elif len(texts) > 0:
                 texts += ' ' + word
-                prev_is_cjk = False
             else:
                 texts += word
-                prev_is_cjk = False
-            prev_is_num = word.isdigit()
 
         texts = re.sub(r'\s+', ' ', texts)
-        return texts.strip()
+        stripped_text = texts.strip()
+        return stripped_text
 
     def words_from_current_pos(self, words, current_pos):
         if words:
@@ -106,6 +103,4 @@ class CjkTokenizer(Tokenizer):
         cjk_value1 = self.words_to_texts(self.texts_to_words(value1.upper()))
         cjk_value2 = self.words_to_texts(self.texts_to_words(value2.upper()))
         return cjk_value1 == cjk_value2
-
-DEFAULT_TOKENIZER = Tokenizer()
 

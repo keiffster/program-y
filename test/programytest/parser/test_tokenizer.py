@@ -45,4 +45,5 @@ class FactoryTests(unittest.TestCase):
         self.assertEquals(["200", "万"], tokenizer.texts_to_words("200万"))
         self.assertEquals("200万", tokenizer.words_to_texts(["200", "万"]))
 
+        self.assertEquals("(200万 ,100万 ,50万 )", tokenizer.words_to_texts(["(", "200万", ",", "100万", ",", "50万", ")"]))
 

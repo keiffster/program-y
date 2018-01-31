@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sr import TemplateSrNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateSrNode(TemplateSrNode):
     def __init__(self):
@@ -12,7 +12,7 @@ class MockTemplateSrNode(TemplateSrNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateSrNodeTests(TemplateTestsBaseClass):
+class TemplateSrNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -26,14 +26,14 @@ class TemplateSrNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("", node.resolve(self.bot, self.clientid))
+        self.assertEqual("", node.resolve(self._bot, self._clientid))
 
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateSrNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><sr /></template>", xml_str)
@@ -43,6 +43,6 @@ class TemplateSrNodeTests(TemplateTestsBaseClass):
         node = MockTemplateSrNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

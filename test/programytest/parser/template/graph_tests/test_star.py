@@ -15,12 +15,12 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
                 <star></star>
             </template>
         """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "one")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
 
     def test_star_no_index_full_embedded(self):
         template = ET.fromstring("""
@@ -28,13 +28,13 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
                 Hello <star></star>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(2, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateWordNode)
         self.assertIsInstance(ast.children[1], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "Hello one")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "Hello one")
 
     def test_star_no_index_short(self):
         template = ET.fromstring("""
@@ -42,12 +42,12 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
 				<star />
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "one")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
 
     def test_star_index_as_child(self):
         template = ET.fromstring("""
@@ -55,12 +55,12 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
 				<star><index>2</index></star>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "two")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "two")
 
     def test_star_index_as_attrib_full(self):
         template = ET.fromstring("""
@@ -68,13 +68,13 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
 				<star index="3"></star>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "three")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "three")
 
     def test_star_index_as_attrib_short(self):
         template = ET.fromstring("""
@@ -82,10 +82,10 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
 				<star index="4" />
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self.test_bot, self.test_clientid), "four")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "four")
 

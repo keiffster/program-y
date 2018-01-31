@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.extension import TemplateExtensionNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockExtension(object):
@@ -24,7 +24,7 @@ class MockTemplateExtensionNode(TemplateExtensionNode):
         raise Exception("This is an error")
 
 
-class TemplateExtensionNodeTests(TemplateTestsBaseClass):
+class TemplateExtensionNodeTests(ParserTestsBaseClass):
 
     def test_node_no_data(self):
         root = TemplateNode()
@@ -42,7 +42,7 @@ class TemplateExtensionNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "VALID")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "VALID")
 
     def test_node_with_data(self):
         root = TemplateNode()
@@ -62,14 +62,14 @@ class TemplateExtensionNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "Test")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "Test")
 
     def test_node_invalid_class(self):
         root = TemplateNode()
         node = TemplateExtensionNode()
         node.path = "programytest.parser.template.node_tests.test_extension.MockExtensionOther"
         root.append(node)
-        self.assertEqual(root.resolve(self.bot, self.clientid), "")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "")
 
 
     def test_to_xml(self):
@@ -83,7 +83,7 @@ class TemplateExtensionNodeTests(TemplateTestsBaseClass):
         node.append(TemplateWordNode("Test"))
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><extension path="programytest.parser.template.node_tests.test_extension.MockExtension">Test</extension></template>', xml_str)
@@ -93,6 +93,6 @@ class TemplateExtensionNodeTests(TemplateTestsBaseClass):
         node = MockTemplateExtensionNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

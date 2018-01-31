@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.first import TemplateFirstNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateFirstNode(TemplateFirstNode):
@@ -15,7 +15,7 @@ class MockTemplateFirstNode(TemplateFirstNode):
         raise Exception("This is an error")
 
 
-class TemplateFirstNodeTests(TemplateTestsBaseClass):
+class TemplateFirstNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -34,7 +34,7 @@ class TemplateFirstNodeTests(TemplateTestsBaseClass):
         word3 = TemplateWordNode("Word3")
         node.append(word3)
 
-        self.assertEqual(root.resolve(None, "clientid"), "Word1")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "Word1")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -45,7 +45,7 @@ class TemplateFirstNodeTests(TemplateTestsBaseClass):
         word2 = TemplateWordNode("Word2")
         node.append(word2)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><first>Word1 Word2</first></template>", xml_str)
@@ -61,14 +61,14 @@ class TemplateFirstNodeTests(TemplateTestsBaseClass):
 
         root.append(node)
 
-        self.assertEqual(root.resolve(None, "clientid"), "NIL")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "NIL")
 
     def test_to_xml_no_words(self):
         root = TemplateNode()
         node = TemplateFirstNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><first /></template>", xml_str)
@@ -78,6 +78,6 @@ class TemplateFirstNodeTests(TemplateTestsBaseClass):
         node = MockTemplateFirstNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

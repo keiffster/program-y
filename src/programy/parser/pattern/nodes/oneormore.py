@@ -20,16 +20,13 @@ import logging
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.matcher import Match
 from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.tokenizer import Tokenizer
-from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     MATCH_CHARS = ['_', '*']
 
-    def __init__(self, wildcard, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
+    def __init__(self, wildcard):
         PatternWildCardNode.__init__(self, wildcard)
-        self._tokenizer = tokenizer
 
     def is_one_or_more(self):
         return True
@@ -79,7 +76,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         word = words.word(word_no)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
-        context_match = Match(match_type, self, word, tokenizer=self._tokenizer)
+        context_match = Match(match_type, self, word)
         context.add_match(context_match)
         matches_added = 1
 

@@ -15,7 +15,7 @@ class TemplateGraphIdTests(TemplateGraphTestClient):
 				<id />
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -31,7 +31,7 @@ class TemplateGraphIdTests(TemplateGraphTestClient):
 				<id></id>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -48,4 +48,4 @@ class TemplateGraphIdTests(TemplateGraphTestClient):
         			</template>
         			""")
         with self.assertRaises(ParserException):
-            root = self.parser.parse_template_expression(template)
+            root = self._graph.parse_template_expression(template)

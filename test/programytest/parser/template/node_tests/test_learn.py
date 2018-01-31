@@ -5,7 +5,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import TemplateLearnNode, LearnCategory
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateLearnNode(TemplateLearnNode):
     def __init__(self):
@@ -41,7 +41,7 @@ class TestLearnCategory(unittest.TestCase):
         learncat.append("category2")
         self.assertEqual(2, len(learncat.children))
 
-class TemplateLearnNodeTests(TemplateTestsBaseClass):
+class TemplateLearnNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -59,7 +59,7 @@ class TemplateLearnNodeTests(TemplateTestsBaseClass):
         root.append(learn)
         self.assertEqual(1, len(root.children))
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
 
@@ -73,7 +73,7 @@ class TemplateLearnNodeTests(TemplateTestsBaseClass):
         learn.append(learn_cat)
         root.append(learn)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><learn><category><pattern>HELLO LEARN</pattern><topic>*</topic><that>*</that><template>LEARN</template></category></learn></template>", xml_str)
@@ -83,6 +83,6 @@ class TemplateLearnNodeTests(TemplateTestsBaseClass):
         node = MockTemplateLearnNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

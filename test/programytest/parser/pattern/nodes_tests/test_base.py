@@ -1,6 +1,6 @@
 import unittest.mock
 
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.word import PatternWordNode
@@ -16,7 +16,7 @@ from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.pattern.nodes.regex import PatternRegexNode
 
 
-class PatternBotNodeTests(PatternTestBaseClass):
+class PatternBotNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
 
@@ -98,20 +98,20 @@ class PatternBotNodeTests(PatternTestBaseClass):
         node = PatternNode()
         self.assertIsNotNone(node)
 
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "", ""))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "", ""))
 
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "test", "test"))
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "Test", "test"))
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "test", "Test"))
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "TEST", "test"))
-        self.assertTrue(node.equals_ignore_case(self.bot, "testid", "test", "TEST"))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "test"))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "Test", "test"))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "Test"))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "TEST", "test"))
+        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self.bot, "testid", "test", "TESTX"))
-        self.assertFalse(node.equals_ignore_case(self.bot, "testid", "testX", "TEST"))
+        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "test", "TESTX"))
+        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "testX", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self.bot, "testid", None, "TEST"))
-        self.assertFalse(node.equals_ignore_case(self.bot, "testid", "testX", None))
-        self.assertFalse(node.equals_ignore_case(self.bot, "testid", None, None))
+        self.assertFalse(node.equals_ignore_case(self._bot, "testid", None, "TEST"))
+        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "testX", None))
+        self.assertFalse(node.equals_ignore_case(self._bot, "testid", None, None))
 
     def test_nodes(self):
 

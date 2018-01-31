@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.response import TemplateResponseNode
 from programy.dialog import Question, Conversation
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateResponseNode(TemplateResponseNode):
@@ -14,7 +14,7 @@ class MockTemplateResponseNode(TemplateResponseNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateResponseNodeTests(TemplateTestsBaseClass):
+class TemplateResponseNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateResponseNode()
@@ -29,7 +29,7 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         node = TemplateResponseNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><response /></template>", xml_str)
@@ -39,7 +39,7 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         node = TemplateResponseNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><response index="3" /></template>', xml_str)
@@ -57,19 +57,19 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
 
-        question = Question.create_from_text("Hello1 question")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello1 question")
         question.current_sentence()._response = "Hello1 response"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text("Hello quesiton2")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello quesiton2")
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        response = root.resolve(self.bot, "testid")
+        response = root.resolve(self._bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello1 response")
 
@@ -86,19 +86,19 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
 
-        question = Question.create_from_text("Hello1 question")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello1 question")
         question.current_sentence()._response = "Hello1 response"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text("Hello quesiton2")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello quesiton2")
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        response = root.resolve(self.bot, "testid")
+        response = root.resolve(self._bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello1 response")
 
@@ -107,6 +107,6 @@ class TemplateResponseNodeTests(TemplateTestsBaseClass):
         node = MockTemplateResponseNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

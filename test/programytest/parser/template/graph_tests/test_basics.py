@@ -11,7 +11,7 @@ class TemplateGraphBasicTests(TemplateGraphTestClient):
 			<template>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertEqual(0, len(ast.children))

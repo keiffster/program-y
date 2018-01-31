@@ -1,4 +1,4 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.that import PatternThatNode
@@ -6,7 +6,7 @@ from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.root import PatternRootNode
 
 
-class PatternThatNodeTests(PatternTestBaseClass):
+class PatternThatNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         node = PatternThatNode()
@@ -31,7 +31,7 @@ class PatternThatNodeTests(PatternTestBaseClass):
         self.assertEqual(node.to_string(), "THAT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
         self.assertEqual(node.to_string(verbose=False), "THAT")
 
-        self.assertEqual("<that></that>\n", node.to_xml(self.bot, self.clientid))
+        self.assertEqual("<that></that>\n", node.to_xml(self._bot, self._clientid))
 
     def test_root_to_that(self):
         node1 = PatternThatNode()

@@ -7,7 +7,7 @@ from programy.bot import Bot, BotConfiguration
 from programy.brain import Brain, BrainConfiguration
 from programy.mappings.sets import SetLoader
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateVocabularyNode(TemplateVocabularyNode):
     def __init__(self):
@@ -16,7 +16,7 @@ class MockTemplateVocabularyNode(TemplateVocabularyNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
+class TemplateVocabularyNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         test_bot = Bot(Brain(BrainConfiguration()), BotConfiguration())
@@ -53,7 +53,7 @@ class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><vocabulary>Test</vocabulary></template>", xml_str)
@@ -63,6 +63,6 @@ class TemplateVocabularyNodeTests(TemplateTestsBaseClass):
         node = MockTemplateVocabularyNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

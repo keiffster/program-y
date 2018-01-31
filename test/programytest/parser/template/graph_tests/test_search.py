@@ -17,7 +17,7 @@ class TemplateGraphSearchTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
@@ -25,6 +25,6 @@ class TemplateGraphSearchTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSearchNode)
 
-        result = ast.resolve(self.test_bot, self.test_clientid)
+        result = ast.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("https://www.google.co.uk/search?q=keith+sterling", result)

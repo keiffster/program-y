@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.addtriple import TemplateAddTripleNode
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateAddTripleNode(TemplateAddTripleNode):
 
@@ -13,7 +13,7 @@ class MockTemplateAddTripleNode(TemplateAddTripleNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception ("This is a failure!")
 
-class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
+class TemplateAddTripleNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         root = TemplateAddTripleNode()
@@ -25,7 +25,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
         node = TemplateAddTripleNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><addtriple><subj>S</subj><pred>P</pred><obj>O</obj></addtriple></template>", xml_str)
@@ -35,7 +35,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
         node = TemplateAddTripleNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -46,7 +46,7 @@ class TemplateAddTripleNodeTests(TemplateTestsBaseClass):
         root.append(node)
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self.bot, self.clientid)
+            node.resolve_to_string(self._bot, self._clientid)
 
-        self.assertEquals("", root.resolve(self.bot, self.clientid))
+        self.assertEquals("", root.resolve(self._bot, self._clientid))
 

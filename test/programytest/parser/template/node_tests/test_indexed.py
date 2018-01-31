@@ -3,10 +3,10 @@ from programy.parser.template.nodes.indexed import TemplateIndexedNode
 from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
 from programy.parser.exceptions import ParserException
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
-class TemplateIndexedNodeTests(TemplateTestsBaseClass):
+class TemplateIndexedNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         root = TemplateNode()
@@ -38,7 +38,7 @@ class TemplateIndexedNodeTests(TemplateTestsBaseClass):
             node.set_attrib('rubbish', 3)
 
 
-class TemplateDoubleIndexedNodeTests(TemplateTestsBaseClass):
+class TemplateDoubleIndexedNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         root = TemplateNode()

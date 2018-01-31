@@ -7,7 +7,7 @@ from programy.services.service import Service, ServiceFactory
 from programy.config.sections.brain.brain import BrainConfiguration
 from programy.config.sections.brain.service import BrainServiceConfiguration
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockService(Service):
@@ -25,7 +25,7 @@ class MockTemplateSRAIXNode(TemplateSRAIXNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
+class TemplateSRAIXNodeTests(ParserTestsBaseClass):
 
     def test_node_unsupported_attributes(self):
         root = TemplateNode()
@@ -85,7 +85,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><sraix service="api">Hello</sraix></template>', xml_str)
@@ -98,7 +98,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><sraix>Hello</sraix></template>', xml_str)
@@ -120,7 +120,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("asked", node.resolve(self.bot, self.clientid))
+        self.assertEqual("asked", node.resolve(self._bot, self._clientid))
 
     def test_call_no_service_exists(self):
 
@@ -131,7 +131,7 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("", node.resolve(self.bot, self.clientid))
+        self.assertEqual("", node.resolve(self._bot, self._clientid))
 
     def test_call_no_service_defined(self):
 
@@ -141,13 +141,13 @@ class TemplateSRAIXNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("", node.resolve(self.bot, self.clientid))
+        self.assertEqual("", node.resolve(self._bot, self._clientid))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateSRAIXNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

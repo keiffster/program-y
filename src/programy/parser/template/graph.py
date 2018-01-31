@@ -18,20 +18,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.parser.exceptions import ParserException
 from programy.parser.template.factory import TemplateNodeFactory
 from programy.utils.text.text import TextUtils
-from programy.parser.tokenizer import Tokenizer
-from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 class TemplateGraph(object):
 
-    def __init__(self, aiml_parser=None, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
+    def __init__(self, aiml_parser):
         self._aiml_parser = aiml_parser
-        self.node_lookups = None
-        self._tokenizer = tokenizer
 
-        template_nodes = None
-        if aiml_parser is not None:
-            if aiml_parser.brain is not None:
-                template_nodes = aiml_parser.brain.configuration.nodes.template_nodes
+        template_nodes = aiml_parser.brain.configuration.nodes.template_nodes
 
         self._template_factory = TemplateNodeFactory()
         self._template_factory.load_nodes_config_from_file(template_nodes)
@@ -39,6 +32,10 @@ class TemplateGraph(object):
     @property
     def aiml_parser(self):
         return self._aiml_parser
+
+    @property
+    def template_factory(self):
+        return self._template_factory
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*
@@ -57,7 +54,7 @@ class TemplateGraph(object):
     # Helper function to return TemplateNode
     def get_base_node(self):
         base_class = self.get_node_class_by_name('base')
-        return base_class(tokenizer=self._tokenizer)
+        return base_class()
 
     # Helper function to return TemplateWordNode
     def get_word_node(self, text):
@@ -68,7 +65,7 @@ class TemplateGraph(object):
         tag_name = TextUtils.tag_from_text(expression.tag)
         if self._template_factory.exists(tag_name):
             if tag_name == "condition":
-                node_instance = self._template_factory.new_node_class(tag_name)(tokenizer=self._tokenizer)
+                node_instance = self._template_factory.new_node_class(tag_name)()
             else:
                 node_instance = self._template_factory.new_node_class(tag_name)()
             node_instance.parse_expression(self, expression)

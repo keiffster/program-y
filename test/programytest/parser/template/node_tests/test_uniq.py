@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.uniq import TemplateUniqNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateUniqNode(TemplateUniqNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateUniqNode(TemplateUniqNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateUniqNodeTests(TemplateTestsBaseClass):
+class TemplateUniqNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         root = TemplateUniqNode()
@@ -25,7 +25,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
         node = TemplateUniqNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><uniq><subj>S</subj><pred>P</pred><obj>O</obj></uniq></template>", xml_str)
@@ -35,7 +35,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
         node = TemplateUniqNode()
 
         root.append(node)
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -44,7 +44,7 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
         node = TemplateUniqNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
 
         root.append(node)
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -53,6 +53,6 @@ class TemplateUniqNodeTests(TemplateTestsBaseClass):
         node = MockTemplateUniqNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

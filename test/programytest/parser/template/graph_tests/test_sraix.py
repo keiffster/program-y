@@ -19,7 +19,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
                 </sraix>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
@@ -39,7 +39,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
                 </sraix>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
@@ -56,7 +56,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
             """)
 
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
 
     def test_sraix_template_with_children(self):
         template = ET.fromstring("""
@@ -67,7 +67,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
                 </sraix>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])

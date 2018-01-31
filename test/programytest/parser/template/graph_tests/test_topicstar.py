@@ -14,12 +14,12 @@ class TemplateGraphTopicStarTests(TemplateGraphTestClient):
 				<topicstar index="1"></topicstar>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         node = root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateTopicStarNode)
 
         self.assertEqual(root.children[0].to_string(), "TOPICSTAR")
-        self.assertEqual(root.resolve(self.test_bot, self.test_clientid), "*")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "*")
 

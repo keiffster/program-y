@@ -15,7 +15,7 @@ class TemplateGraphPerson2Tests(TemplateGraphTestClient):
 				<person2>Text</person2>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -31,7 +31,7 @@ class TemplateGraphPerson2Tests(TemplateGraphTestClient):
 				<person2 />
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)

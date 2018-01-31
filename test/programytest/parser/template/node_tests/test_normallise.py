@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.normalise import TemplateNormalizeNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateNormalizeNode(TemplateNormalizeNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateNormalizeNode(TemplateNormalizeNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateNormalizeNodeTests(TemplateTestsBaseClass):
+class TemplateNormalizeNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -28,9 +28,9 @@ class TemplateNormalizeNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("shouldnt"))
-        self.bot.brain.normals.process_splits(["shouldnt","should not"])
+        self._bot.brain.normals.process_splits(["shouldnt","should not"])
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "should not")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "should not")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -38,7 +38,7 @@ class TemplateNormalizeNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><normalize>Test</normalize></template>", xml_str)
@@ -48,6 +48,6 @@ class TemplateNormalizeNodeTests(TemplateTestsBaseClass):
         node = MockTemplateNormalizeNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

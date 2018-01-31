@@ -9,8 +9,8 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         loader = SetLoader()
 
-        if self.bot.brain.sets.contains("SEX") is False:
-            self.bot.brain.sets.add_set("SEX", loader.load_from_text("""
+        if self._bot.brain.sets.contains("SEX") is False:
+            self._bot.brain.sets.add_set("SEX", loader.load_from_text("""
             Man
             Woman
             """))
@@ -33,8 +33,8 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         loader = SetLoader()
 
-        if self.bot.brain.sets.contains("SEX") is False:
-            self.bot.brain.sets.add_set("SEX", loader.load_from_text("""
+        if self._bot.brain.sets.contains("SEX") is False:
+            self._bot.brain.sets.add_set("SEX", loader.load_from_text("""
             Man
             Woman
             """))
@@ -56,7 +56,7 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
     def test_multi_word_set_match(self):
         loader = SetLoader()
 
-        self.bot.brain.sets.add_set("COLOR", loader.load_from_text("""
+        self._bot.brain.sets.add_set("COLOR", loader.load_from_text("""
         RED
         RED AMBER
         RED BURNT OAK
@@ -87,7 +87,7 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
         self.assertEqual("MOTOR BIKES", context.star(2))
 
     def test_basic_set_number_match(self):
-        self.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+        self._bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
         self.add_pattern_to_graph(pattern="I AM <set>number</set> YEARS OLD", topic="X", that="Y", template="1")
 

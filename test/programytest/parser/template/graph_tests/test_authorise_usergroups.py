@@ -28,7 +28,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -40,7 +40,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
         self.assertIsNotNone(auth_node.role)
         self.assertEqual("root", auth_node.role)
 
-        result = auth_node.resolve(self.test_bot, "console")
+        result = auth_node.resolve(self._bot, "console")
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 
@@ -53,7 +53,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
             </template>
             """)
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -65,7 +65,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
         self.assertIsNotNone(auth_node.role)
         self.assertEqual("root", auth_node.role)
 
-        result = auth_node.resolve(self.test_bot, "console")
+        result = auth_node.resolve(self._bot, "console")
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 
@@ -78,7 +78,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
                 </template>
                 """)
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -99,7 +99,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
                 </template>
                 """)
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)

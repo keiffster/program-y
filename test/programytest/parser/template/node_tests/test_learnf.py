@@ -7,7 +7,7 @@ from programy.parser.template.nodes.learnf import TemplateLearnfNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.config.sections.brain.file import BrainFileConfiguration
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateLearnfNode(TemplateLearnfNode):
     def __init__(self):
@@ -16,7 +16,7 @@ class MockTemplateLearnfNode(TemplateLearnfNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateLearnfNodeTests(TemplateTestsBaseClass):
+class TemplateLearnfNodeTests(ParserTestsBaseClass):
 
     def get_os_specific_filename(self):
         if os.name == 'posix':
@@ -44,8 +44,8 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         root.append(learn)
         self.assertEqual(1, len(root.children))
 
-        self.bot.brain.configuration.defaults._learn_filename = self.get_os_specific_filename()
-        resolved = root.resolve(self.bot, self.clientid)
+        self._bot.brain.configuration.defaults._learn_filename = self.get_os_specific_filename()
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
 
@@ -61,7 +61,7 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         learn.append(learn_cat)
         root.append(learn)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><learnf><category><pattern>HELLO LEARN</pattern><topic>*</topic><that>*</that><template>LEARN</template></category></learnf></template>", xml_str)
@@ -71,6 +71,6 @@ class TemplateLearnfNodeTests(TemplateTestsBaseClass):
         node = MockTemplateLearnfNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

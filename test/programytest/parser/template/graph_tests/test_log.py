@@ -14,7 +14,7 @@ class TemplateGraphLogTests(TemplateGraphTestClient):
 				<log>Text</log>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -30,7 +30,7 @@ class TemplateGraphLogTests(TemplateGraphTestClient):
 				<log output="logging">Text</log>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -46,7 +46,7 @@ class TemplateGraphLogTests(TemplateGraphTestClient):
     				<log output="logging" level="debug>Text</log>
     			</template>
     			""")
-            root = self.parser.parse_template_expression(template)
+            root = self._graph.parse_template_expression(template)
             self.assertIsNotNone(root)
             self.assertIsInstance(root, TemplateNode)
             self.assertIsNotNone(root.children)
@@ -62,7 +62,7 @@ class TemplateGraphLogTests(TemplateGraphTestClient):
 				<log output="print">Text</log>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)

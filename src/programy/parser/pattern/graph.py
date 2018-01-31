@@ -22,22 +22,16 @@ from programy.parser.exceptions import ParserException, DuplicateGrammarExceptio
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-from programy.parser.tokenizer import Tokenizer
-from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 
 #######################################################################################################################
 #
 class PatternGraph(object):
 
-    def __init__(self, aiml_parser=None, root_node=None, tokenizer: Tokenizer=DEFAULT_TOKENIZER):
+    def __init__(self, aiml_parser, root_node=None):
         self._aiml_parser = aiml_parser
-        self._tokenizer = tokenizer
 
-        pattern_nodes = None
-        if aiml_parser is not None:
-            if aiml_parser.brain is not None:
-                pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
+        pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
 
         self._pattern_factory = PatternNodeFactory()
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
@@ -55,6 +49,14 @@ class PatternGraph(object):
     def root(self):
         return self._root_node
 
+    @property
+    def aiml_parser(self):
+        return self._aiml_parser
+
+    @property
+    def pattern_factory(self):
+        return self._pattern_factory
+
     def node_from_text(self, word):
         if word.startswith("$"):
             node_class = self._pattern_factory.new_node_class('priority')
@@ -64,7 +66,7 @@ class PatternGraph(object):
             return node_class(word)
         elif PatternOneOrMoreWildCardNode.is_wild_card(word):
             node_class = self._pattern_factory.new_node_class('oneormore')
-            return node_class(word, tokenizer=self._tokenizer)
+            return node_class(word)
         node_class = self._pattern_factory.new_node_class('word')
         return node_class(word)
 
@@ -87,7 +89,7 @@ class PatternGraph(object):
 
         stripped = pattern_text.strip()
 
-        words = self._tokenizer.texts_to_words(stripped)
+        words = self._aiml_parser.brain.tokenizer.texts_to_words(stripped)
 
         for word in words:
             if word != '': # Blank nodes add no value, ignore them

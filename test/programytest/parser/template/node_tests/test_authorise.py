@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.authorise import TemplateAuthoriseNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateAuthoriseNode(TemplateAuthoriseNode):
@@ -15,7 +15,7 @@ class MockTemplateAuthoriseNode(TemplateAuthoriseNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception ("This is a failure")
 
-class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
+class TemplateAuthoriseNodeTests(ParserTestsBaseClass):
 
     def test_node_init(self):
         root = TemplateNode()
@@ -63,7 +63,7 @@ class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><authorise role="root" /></template>', xml_str)
@@ -80,7 +80,7 @@ class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><authorise role="root">Hello</authorise></template>', xml_str)
@@ -96,7 +96,7 @@ class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><authorise denied_srai="ACCESS_DENIED" role="root" /></template>', xml_str)
@@ -116,6 +116,6 @@ class TemplateAuthoriseNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self.bot, self.clientid)
+            node.resolve_to_string(self._bot, self._clientid)
 
-        self.assertEquals("", root.resolve(self.bot, self.clientid))
+        self.assertEquals("", root.resolve(self._bot, self._clientid))

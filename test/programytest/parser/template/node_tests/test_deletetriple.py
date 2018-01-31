@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.deletetriple import TemplateDeleteTripleNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateDeleteTripleNode(TemplateDeleteTripleNode):
@@ -15,7 +15,7 @@ class MockTemplateDeleteTripleNode(TemplateDeleteTripleNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is a failure")
 
-class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
+class TemplateDeleteTripleNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         root = TemplateDeleteTripleNode()
@@ -27,7 +27,7 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
         node = TemplateDeleteTripleNode(TemplateWordNode("S"), TemplateWordNode("P"), TemplateWordNode("O"))
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><deletetriple><subj>S</subj><pred>P</pred><obj>O</obj></deletetriple></template>", xml_str)
@@ -37,7 +37,7 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
         node = TemplateDeleteTripleNode(TemplateWordNode("S"), TemplateWordNode("P"), TemplateWordNode("O"))
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -46,6 +46,6 @@ class TemplateDeleteTripleNodeTests(TemplateTestsBaseClass):
         node = MockTemplateDeleteTripleNode(TemplateWordNode("S"), TemplateWordNode("P"), TemplateWordNode("O"))
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

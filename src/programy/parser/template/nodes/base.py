@@ -17,16 +17,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 import xml.etree.ElementTree as ET
-from programy.parser.tokenizer import Tokenizer
-from programy.parser.tokenizer import DEFAULT_TOKENIZER
 
 ######################################################################################################################
 #
 class TemplateNode(object):
 
-    def __init__(self, tokenizer: Tokenizer = DEFAULT_TOKENIZER):
+    def __init__(self):
         self._children = []
-        self._tokenizer = tokenizer
 
     @property
     def children(self):
@@ -48,7 +45,7 @@ class TemplateNode(object):
 
     def resolve_children_to_string(self, bot, clientid):
         words = [child.resolve(bot, clientid) for child in self._children]
-        return self._tokenizer.words_to_texts(words)
+        return bot.brain.tokenizer.words_to_texts(words)
 
     def resolve(self, bot, clientid):
         try:
@@ -86,7 +83,7 @@ class TemplateNode(object):
         if text is not None:
             string = text.strip()
             if string:
-                words = self._tokenizer.texts_to_words(string)
+                words = graph.aiml_parser.brain.tokenizer.texts_to_words(string)
 
                 for word in words:
                     if word is not None and word:

@@ -90,14 +90,14 @@ class BotTests(unittest.TestCase):
         bot = Bot(test_brain, bot_config)
         self.assertIsNotNone(bot)
 
-        test_sentence = Sentence("locetion")
+        test_sentence = Sentence(bot.brain.tokenizer, "locetion")
         bot.check_spelling_before(test_sentence)
         self.assertIsNotNone(test_sentence)
         self.assertEqual("LOCATION", test_sentence.text())
 
-        test_sentence = Sentence("locetion")
+        test_sentence = Sentence(bot.brain.tokenizer, "locetion")
         response = bot.check_spelling_and_retry("testid", test_sentence)
-        self.assertIsNone(None)
+        self.assertIsNone(response)
 
     def test_bot_init_no_license_keys(self):
         test_brain = Brain(BrainConfiguration())

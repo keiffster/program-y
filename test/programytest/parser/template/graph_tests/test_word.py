@@ -9,7 +9,7 @@ class TemplateGraphWordNodeTests(TemplateGraphTestClient):
         template = ET.fromstring("""
     			<template>HELLO</template>
     			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
 
         self.assertIsNotNone(ast)
         self.assertEqual(1, len(ast.children))
@@ -19,7 +19,7 @@ class TemplateGraphWordNodeTests(TemplateGraphTestClient):
         template = ET.fromstring("""
 			<template>HELLO WORLD</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
 
         self.assertIsNotNone(ast)
         self.assertEqual(2, len(ast.children))
