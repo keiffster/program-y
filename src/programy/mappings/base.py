@@ -142,13 +142,13 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         self._pairs = {}
 
     def has_key(self, key):
-        for pair in self._pairs:
+        for pair in self._pairs.items():
             if pair[0] == key:
                 return True
         return False
 
     def value(self, key):
-        if has_key(key):
+        if self.has_key(key):
             return self._pairs[key]
         else:
             return None
