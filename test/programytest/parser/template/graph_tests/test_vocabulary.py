@@ -15,7 +15,7 @@ class TemplateGraphVocabularyTests(TemplateGraphTestClient):
 				<vocabulary>Text</vocabulary>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -31,7 +31,7 @@ class TemplateGraphVocabularyTests(TemplateGraphTestClient):
 				<vocabulary />
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)

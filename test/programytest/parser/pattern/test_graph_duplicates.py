@@ -1,6 +1,6 @@
 import xml.etree.ElementTree as ET
 
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import DuplicateGrammarException
 from programy.parser.pattern.graph import PatternGraph
@@ -9,10 +9,10 @@ from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 
 
-class PatternGraphDuplicateTests(PatternTestBaseClass):
+class PatternGraphDuplicateTests(ParserTestsBaseClass):
 
     def test_duplicate_pattern(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -30,7 +30,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_pattern_same_topics(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>X Y</topic>")
@@ -48,7 +48,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_pattern_same_thats(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -66,7 +66,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_pattern_different_topics(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>A B</topic>")
@@ -83,7 +83,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_pattern_different_thats(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A # *</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -100,7 +100,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_priority(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>$A</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -118,7 +118,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_priority_and_word(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -135,7 +135,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_priority_and_word_otherwayround(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>$A</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -152,7 +152,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_set(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -170,7 +170,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_set_and_word(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -187,7 +187,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_set_and_word_otherwayround(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern><set>A</set></pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -204,7 +204,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_bot(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -222,7 +222,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
             graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_bot_and_word(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern>A</pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")
@@ -239,7 +239,7 @@ class PatternGraphDuplicateTests(PatternTestBaseClass):
         graph.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def test_duplicate_bot_and_word_otherwayround(self):
-        graph = PatternGraph()
+        graph = PatternGraph(self._aiml_parser)
 
         pattern_element = ET.fromstring("<pattern><bot>A</bot></pattern>")
         topic_element = ET.fromstring("<topic>*</topic>")

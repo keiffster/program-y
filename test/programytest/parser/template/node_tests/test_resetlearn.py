@@ -1,7 +1,7 @@
 from programy.parser.template.nodes.resetlearn import TemplateResetLearnNode
 from programy.parser.template.nodes.base import TemplateNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateResetLearnNode(TemplateResetLearnNode):
     def __init__(self):
@@ -10,19 +10,19 @@ class MockTemplateResetLearnNode(TemplateResetLearnNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateResetLearnNodeTests(TemplateTestsBaseClass):
+class TemplateResetLearnNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateResetLearnNode()
         self.assertIsNotNone(root)
-        self.assertEquals("", root.resolve(self.bot, self.clientid))
+        self.assertEquals("", root.resolve(self._bot, self._clientid))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateResetLearnNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -32,4 +32,4 @@ class TemplateResetLearnNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         node = TemplateResetLearnNode()
-        self.assertEquals("<resetlearn />", node.to_xml(self.bot, self.clientid))
+        self.assertEquals("<resetlearn />", node.to_xml(self._bot, self._clientid))

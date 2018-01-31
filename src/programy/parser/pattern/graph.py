@@ -23,20 +23,15 @@ from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
-from programy.utils.language.chinese import ChineseLanguage
-
 
 #######################################################################################################################
 #
 class PatternGraph(object):
 
-    def __init__(self, aiml_parser=None, root_node=None):
+    def __init__(self, aiml_parser, root_node=None):
         self._aiml_parser = aiml_parser
 
-        pattern_nodes = None
-        if aiml_parser is not None:
-            if aiml_parser.brain is not None:
-                pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
+        pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
 
         self._pattern_factory = PatternNodeFactory()
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
@@ -53,6 +48,14 @@ class PatternGraph(object):
     @property
     def root(self):
         return self._root_node
+
+    @property
+    def aiml_parser(self):
+        return self._aiml_parser
+
+    @property
+    def pattern_factory(self):
+        return self._pattern_factory
 
     def node_from_text(self, word):
         if word.startswith("$"):
@@ -85,12 +88,8 @@ class PatternGraph(object):
     def _parse_text(self, pattern_text, current_node):
 
         stripped = pattern_text.strip()
-        if self._aiml_parser is not None and \
-                        self._aiml_parser.brain is not None and \
-                        self._aiml_parser.brain.configuration.language.chinese is True:
-            words = ChineseLanguage.split_unicode(stripped)
-        else:
-            words = stripped.split(" ")
+
+        words = self._aiml_parser.brain.tokenizer.texts_to_words(stripped)
 
         for word in words:
             if word != '': # Blank nodes add no value, ignore them

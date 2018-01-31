@@ -16,7 +16,7 @@ class TemplateGraphEvalTests(TemplateGraphTestClient):
 				<eval>Text</eval>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -32,7 +32,7 @@ class TemplateGraphEvalTests(TemplateGraphTestClient):
 				<eval>Some Text</eval>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -54,7 +54,7 @@ class TemplateGraphEvalTests(TemplateGraphTestClient):
 				<eval>Some <get name="SomeGet" /> Text</eval>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)

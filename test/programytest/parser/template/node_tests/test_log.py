@@ -5,7 +5,7 @@ from programy.parser.template.nodes.log import TemplateLogNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.exceptions import ParserException
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateLogNode(TemplateLogNode):
     def __init__(self):
@@ -14,7 +14,7 @@ class MockTemplateLogNode(TemplateLogNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateLogNodeTests(TemplateTestsBaseClass):
+class TemplateLogNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         log = TemplateLogNode()
@@ -72,7 +72,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         root.append(log)
         self.assertEqual(1, len(root.children))
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
 
@@ -84,7 +84,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="debug">Log Test</log></template>', xml_str)
@@ -98,7 +98,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="debug">Log Test</log></template>', xml_str)
@@ -112,7 +112,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="error">Log Test</log></template>', xml_str)
@@ -126,7 +126,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="info">Log Test</log></template>', xml_str)
@@ -140,7 +140,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log level="warning">Log Test</log></template>', xml_str)
@@ -154,7 +154,7 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><log>Log Test</log></template>', xml_str)
@@ -164,6 +164,6 @@ class TemplateLogNodeTests(TemplateTestsBaseClass):
         node = MockTemplateLogNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

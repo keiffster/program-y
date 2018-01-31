@@ -3,10 +3,10 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
-class TemplateWordNodeTests(TemplateTestsBaseClass):
+class TemplateWordNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -20,12 +20,12 @@ class TemplateWordNodeTests(TemplateTestsBaseClass):
         root.append(node2)
         self.assertEqual(len(root.children), 2)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual(resolved, "Hello World!")
 
         node2.word = "Again!"
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual(resolved, "Hello Again!")
 
@@ -33,7 +33,7 @@ class TemplateWordNodeTests(TemplateTestsBaseClass):
         root = TemplateNode()
         root.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template>Hello</template>", xml_str)

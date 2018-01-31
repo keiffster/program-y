@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.search import TemplateSearchNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateSearchNode(TemplateSearchNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateSearchNode(TemplateSearchNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateSearchNodeTests(TemplateTestsBaseClass):
+class TemplateSearchNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         root = TemplateSearchNode()
@@ -26,7 +26,7 @@ class TemplateSearchNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("programy"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><search>programy</search></template>", xml_str)
@@ -37,7 +37,7 @@ class TemplateSearchNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("programy"))
 
-        result = node.resolve(self.bot, self.clientid)
+        result = node.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEqual("https://www.google.co.uk/search?q=programy", result)
 
@@ -46,6 +46,6 @@ class TemplateSearchNodeTests(TemplateTestsBaseClass):
         node = MockTemplateSearchNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

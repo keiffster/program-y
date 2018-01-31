@@ -14,7 +14,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
                 <first>one two three four</first>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertEquals(1, len(ast.children))
@@ -27,7 +27,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
         self.assertEquals(4, len(first_node.children))
         self.assertIsInstance(first_node.children[0], TemplateWordNode)
 
-        self.assertEqual(ast.resolve(None, None), "one")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
 
     def test_first_one_word(self):
         template = ET.fromstring("""
@@ -35,9 +35,9 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
                 <first>one</first>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
 
-        self.assertEqual(ast.resolve(None, None), "one")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
 
     def test_first_empty(self):
         template = ET.fromstring("""
@@ -45,8 +45,8 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
                 <first></first>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
 
-        self.assertEqual(ast.resolve(None, None), "NIL")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "NIL")
 
 

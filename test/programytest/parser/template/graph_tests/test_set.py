@@ -15,7 +15,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
 				<set name="somepred">Value1</set>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -26,11 +26,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somepred")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
 
     def test_set_template_multi_word_predicate_as_attrib(self):
         template = ET.fromstring("""
@@ -38,7 +38,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
                 <set name="somepred other">Value1</set>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -49,11 +49,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somepred other")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred other")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
 
     def test_set_template_predicate_nested(self):
         template = ET.fromstring("""
@@ -63,7 +63,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
 				Some text there
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -74,11 +74,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somepred")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
 
     def test_set_template_local_as_attrib(self):
         template = ET.fromstring("""
@@ -86,7 +86,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
 				<set var="somevar">Value2</set>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -97,11 +97,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somevar")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somevar")
         self.assertTrue(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value2")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value2")
 
     def test_set_template_predicate_as_child(self):
         template = ET.fromstring("""
@@ -109,7 +109,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
 				<set><name>somepred</name>Value3</set>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -120,11 +120,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somepred")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value3")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value3")
 
     def test_set_template_local_as_child(self):
         template = ET.fromstring("""
@@ -132,7 +132,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
 				<set><var>somepred</var>Value4</set>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -143,11 +143,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somepred")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertTrue(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "Value4")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value4")
 
     def test_set_name_and_var(self):
         template = ET.fromstring("""
@@ -156,7 +156,7 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
                 </template>
                 """)
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
 
     def test_set_no_name_or_var(self):
         template = ET.fromstring("""
@@ -165,4 +165,4 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
                 </template>
                 """)
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)

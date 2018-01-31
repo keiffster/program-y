@@ -1,7 +1,7 @@
 
 from programy.parser.template.nodes.resetlearnf import TemplateResetLearnfNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 from programy.parser.template.nodes.base import TemplateNode
 
 class MockTemplateResetLearnfNode(TemplateResetLearnfNode):
@@ -12,19 +12,19 @@ class MockTemplateResetLearnfNode(TemplateResetLearnfNode):
         raise Exception("This is an error")
 
 
-class TemplateResetLearnfNodeTests(TemplateTestsBaseClass):
+class TemplateResetLearnfNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateResetLearnfNode()
         self.assertIsNotNone(root)
-        self.assertEquals("", root.resolve(self.bot, self.clientid))
+        self.assertEquals("", root.resolve(self._bot, self._clientid))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateResetLearnfNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -34,4 +34,4 @@ class TemplateResetLearnfNodeTests(TemplateTestsBaseClass):
 
     def test_to_xml(self):
         node = TemplateResetLearnfNode()
-        self.assertEquals("<resetlearnf />", node.to_xml(self.bot, self.clientid))
+        self.assertEquals("<resetlearnf />", node.to_xml(self._bot, self._clientid))

@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.input import TemplateInputNode
 from programy.dialog import Conversation, Question
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateInputNode(TemplateInputNode):
@@ -15,7 +15,7 @@ class MockTemplateInputNode(TemplateInputNode):
         raise Exception("This is an error")
 
 
-class TemplateInputNodeTests(TemplateTestsBaseClass):
+class TemplateInputNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateInputNode()
@@ -30,7 +30,7 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         node = TemplateInputNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><input /></template>", xml_str)
@@ -40,7 +40,7 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         node = TemplateInputNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><input index="3" /></template>', xml_str)
@@ -58,15 +58,15 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(0, node.index)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
 
-        question = Question.create_from_text("Hello world")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        response = root.resolve(self.bot, "testid")
+        response = root.resolve(self._bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello world")
 
@@ -83,19 +83,19 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(1, node.index)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
 
-        question = Question.create_from_text("Hello world")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text("How are you. Are you well")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        response = root.resolve(self.bot, "testid")
+        response = root.resolve(self._bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "How are you")
 
@@ -112,19 +112,19 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(3, node.index)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
 
-        question = Question.create_from_text("Hello world")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text("How are you. Are you well")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        response = root.resolve(self.bot, "testid")
+        response = root.resolve(self._bot, "testid")
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
@@ -133,6 +133,6 @@ class TemplateInputNodeTests(TemplateTestsBaseClass):
         node = MockTemplateInputNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

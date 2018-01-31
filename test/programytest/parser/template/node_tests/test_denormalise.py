@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.denormalise import TemplateDenormalizeNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateDenormalizeNode(TemplateDenormalizeNode):
@@ -15,7 +15,7 @@ class MockTemplateDenormalizeNode(TemplateDenormalizeNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception ("This is an error")
 
-class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
+class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -30,9 +30,9 @@ class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("keiff dot uk"))
-        self.bot.brain.denormals.process_splits([" dot uk",".uk"])
+        self._bot.brain.denormals.process_splits([" dot uk",".uk"])
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "keiff.uk")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "keiff.uk")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -40,7 +40,7 @@ class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><denormalize>Test</denormalize></template>", xml_str)
@@ -50,7 +50,7 @@ class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
         node = MockTemplateDenormalizeNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -59,6 +59,6 @@ class TemplateDenormalizeNodeTests(TemplateTestsBaseClass):
         node = MockTemplateDenormalizeNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

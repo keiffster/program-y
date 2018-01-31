@@ -15,7 +15,7 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
 				<map name="somemap">sometext</map>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -26,10 +26,10 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateMapNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somemap")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somemap")
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "sometext")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "sometext")
 
     def test_map_name_as_child(self):
         template = ET.fromstring("""
@@ -37,7 +37,7 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
 				<map><name>somemap</name>sometext</map>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -48,10 +48,10 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateMapNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(None, None), "somemap")
+        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somemap")
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(None, None), "sometext")
+        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "sometext")
 
     def test_map_no_name(self):
         template = ET.fromstring("""
@@ -60,4 +60,4 @@ class TemplateGraphMapTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)

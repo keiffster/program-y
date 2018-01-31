@@ -1,10 +1,10 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
-class PatternNodeTests(PatternTestBaseClass):
+class PatternNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
         node = PatternNode()

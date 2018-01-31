@@ -7,6 +7,7 @@ from programy.utils.language.default import DefaultLangauge
 #
 
 class DefaultTests(unittest.TestCase):
+
     def test_split_into_sentences(self):
         sentences = DefaultLangauge.split_into_sentences("")
         self.assertEquals([], sentences)

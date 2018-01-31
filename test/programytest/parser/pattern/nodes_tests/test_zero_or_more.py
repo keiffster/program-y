@@ -1,11 +1,11 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.dialog import Sentence
 
-class PatternZeroOrMoreWildCardNodeTests(PatternTestBaseClass):
+class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
     def test_invalid_wildcard(self):
         with self.assertRaises(ParserException) as raised:
@@ -29,14 +29,14 @@ class PatternZeroOrMoreWildCardNodeTests(PatternTestBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence("*")
+        sentence = Sentence(self._bot.brain.tokenizer, "*")
 
         self.assertEqual(node.wildcard, "#")
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("#")))
-        result = node.equals(self.bot, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[#]")
-        self.assertEqual('<zerormore wildcard="#">\n</zerormore>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<zerormore wildcard="#">\n</zerormore>\n', node.to_xml(self._bot, self._clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 
@@ -57,13 +57,13 @@ class PatternZeroOrMoreWildCardNodeTests(PatternTestBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence("*")
+        sentence = Sentence(self._bot.brain.tokenizer, "*")
 
         self.assertEqual(node.wildcard, "^")
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("^")))
-        result = node.equals(self.bot, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]")
-        self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node.to_xml(self._bot, self._clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))

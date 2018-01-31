@@ -18,7 +18,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import datetime
 
-
 class Match(object):
 
     WORD = 0
@@ -47,8 +46,8 @@ class Match(object):
     def matched_words(self):
         return self._matched_words
 
-    def joined_words(self, join_char=" "):
-        return join_char.join(self.matched_words)
+    def joined_words(self, tokenizer):
+        return tokenizer.words_to_texts(self.matched_words)
 
     @staticmethod
     def type_to_string(match_type):
@@ -60,14 +59,16 @@ class Match(object):
             return "That"
         return "Unknown"
 
-    def to_string(self):
+    def to_string(self, tokenizer):
         return "Match=(%s) Node=(%s) Matched=(%s)"%(Match.type_to_string(self._match_type),
-                                                    self._matched_node.to_string(verbose=False), self.joined_words())
+                                                    self._matched_node.to_string(verbose=False),
+                                                    self.joined_words(tokenizer))
 
 
 class MatchContext(object):
 
-    def __init__(self, max_search_depth, max_search_timeout):
+    def __init__(self, max_search_depth, max_search_timeout, tokenizer):
+        self._tokenizer = tokenizer
         self._matched_nodes = []
         self._template_node = None
         self._max_search_depth = max_search_depth
@@ -130,7 +131,7 @@ class MatchContext(object):
                      match.matched_node.is_bot() or
                      match.matched_node.is_regex()):
                 if count == index:
-                    return match.joined_words()
+                    return match.joined_words(self._tokenizer)
                 count += 1
         return None
 
@@ -147,7 +148,7 @@ class MatchContext(object):
         output_func("%sMatches..."%tabs)
         count = 1
         for match in self._matched_nodes:
-            output_func("%s\t%d - %s"%(tabs, count, match.to_string()))
+            output_func("%s\t%d - %s"%(tabs, count, match.to_string(self._tokenizer)))
             count += 1
         output_func("%sMatch score %.2f"%(tabs, self.calculate_match_score()))
         if include_template is True:

@@ -4,10 +4,10 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.rand import TemplateRandomNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
-class TemplateNodeMixedTests(TemplateTestsBaseClass):
+class TemplateNodeMixedTests(ParserTestsBaseClass):
 
     def test_multirandom(self):
         root = TemplateNode()
@@ -26,7 +26,7 @@ class TemplateNodeMixedTests(TemplateTestsBaseClass):
         root.append(random1)
         root.append(random2)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Test1 Test3",
                                     "Test1 Test4",
@@ -54,7 +54,7 @@ class TemplateNodeMixedTests(TemplateTestsBaseClass):
 
         root.append(random3)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Test1",
                                     "Test2",
@@ -77,7 +77,7 @@ class TemplateNodeMixedTests(TemplateTestsBaseClass):
 
         self.assertEqual(len(root.children), 3)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Hello Test1 World!", "Hello Test2 World!", "Hello Test3 World!"])
 

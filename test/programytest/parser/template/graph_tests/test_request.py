@@ -15,7 +15,7 @@ class TemplateGraphRequestTests(TemplateGraphTestClient):
 				<request index="8"></request>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -32,4 +32,4 @@ class TemplateGraphRequestTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)

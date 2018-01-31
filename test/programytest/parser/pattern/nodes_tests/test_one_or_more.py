@@ -1,11 +1,11 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.dialog import Sentence
 
-class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
+class PatternOneOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
     def test_invalid_wildcard(self):
         with self.assertRaises(ParserException) as raised:
@@ -32,13 +32,13 @@ class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
 
         self.assertEqual(node.wildcard, "*")
 
-        sentence = Sentence("*")
+        sentence = Sentence(self._bot.brain.tokenizer, "*")
 
         self.assertTrue(node.equivalent(PatternOneOrMoreWildCardNode("*")))
-        result = node.equals(self.bot, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ONEORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]")
-        self.assertEqual('<oneormore wildcard="*">\n</oneormore>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<oneormore wildcard="*">\n</oneormore>\n', node.to_xml(self._bot, self._clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 
@@ -62,13 +62,13 @@ class PatternOneOrMoreWildCardNodeTests(PatternTestBaseClass):
 
         self.assertEqual(node.wildcard, "_")
 
-        sentence = Sentence("*")
+        sentence = Sentence(self._bot.brain.tokenizer, "*")
 
         self.assertTrue(node.equivalent(PatternOneOrMoreWildCardNode("_")))
-        result = node.equals(self.bot, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertFalse(result.matched)
         self.assertEqual(node.to_string(), "ONEORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[_]")
-        self.assertEqual('<oneormore wildcard="_">\n</oneormore>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<oneormore wildcard="_">\n</oneormore>\n', node.to_xml(self._bot, self._clientid))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
 

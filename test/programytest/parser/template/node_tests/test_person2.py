@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.person2 import TemplatePerson2Node
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplatePerson2Node(TemplatePerson2Node):
@@ -14,7 +14,7 @@ class MockTemplatePerson2Node(TemplatePerson2Node):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplatePerson2NodeTests(TemplateTestsBaseClass):
+class TemplatePerson2NodeTests(ParserTestsBaseClass):
 
     def test_node(self):
 
@@ -30,9 +30,9 @@ class TemplatePerson2NodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("me"))
-        self.bot.brain.person2s.process_splits(["me","him or her"])
+        self._bot.brain.person2s.process_splits(["me","him or her"])
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "him or her")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "him or her")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -40,7 +40,7 @@ class TemplatePerson2NodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><person2>Test</person2></template>", xml_str)
@@ -50,7 +50,7 @@ class TemplatePerson2NodeTests(TemplateTestsBaseClass):
         node = MockTemplatePerson2Node()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 #

@@ -1,4 +1,4 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
@@ -8,7 +8,7 @@ from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
 
 
-class PatternTemplateNodeTests(PatternTestBaseClass):
+class PatternTemplateNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
 
@@ -33,7 +33,7 @@ class PatternTemplateNodeTests(PatternTestBaseClass):
         self.assertTrue(node.equivalent(PatternTemplateNode(TemplateNode())))
         self.assertEqual(node.to_string(), "PTEMPLATE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)] <template></template>\n")
         self.assertEqual(node.to_string(verbose=False), "PTEMPLATE")
-        self.assertEqual('<template></template>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<template></template>\n', node.to_xml(self._bot, self._clientid))
 
         self.assertFalse(node.equivalent(PatternTopicNode()))
 

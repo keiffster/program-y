@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.bot import TemplateBotNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateBotNode(TemplateBotNode):
 
@@ -14,7 +14,7 @@ class MockTemplateBotNode(TemplateBotNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is a failure")
 
-class TemplateBotNodeTests(TemplateTestsBaseClass):
+class TemplateBotNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -28,9 +28,9 @@ class TemplateBotNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.bot.brain.properties.add_property("location", "Scotland")
+        self._bot.brain.properties.add_property("location", "Scotland")
 
-        result = node.resolve(self.bot, self.clientid)
+        result = node.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEqual("Scotland", result)
 
@@ -46,9 +46,9 @@ class TemplateBotNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.bot.brain.properties.add_property("default-property", "unknown")
+        self._bot.brain.properties.add_property("default-property", "unknown")
 
-        result = node.resolve(self.bot, self.clientid)
+        result = node.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
 
@@ -58,7 +58,7 @@ class TemplateBotNodeTests(TemplateTestsBaseClass):
         node.name = TemplateWordNode("name")
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><bot name="name" /></template>', xml_str)
@@ -75,10 +75,10 @@ class TemplateBotNodeTests(TemplateTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.bot.brain.properties.add_property("location", "Scotland")
+        self._bot.brain.properties.add_property("location", "Scotland")
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self.bot, self.clientid)
+            node.resolve_to_string(self._bot, self._clientid)
 
-        self.assertEquals("", root.resolve(self.bot, self.clientid))
+        self.assertEquals("", root.resolve(self._bot, self._clientid))
 

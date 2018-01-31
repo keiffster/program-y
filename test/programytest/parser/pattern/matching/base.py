@@ -1,28 +1,16 @@
 import logging
 import xml.etree.ElementTree as ET
 
-from programytest.parser.pattern.base import PatternTestBaseClass, TestBot
+from programytest.parser.base import ParserTestsBaseClass, TestBot
 from programy.dialog import Sentence
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.parser.aiml_parser import AIMLParser
 
-class PatternMatcherBaseClass(PatternTestBaseClass):
-
-    @classmethod
-    def setUpClass(cls):
-        logging.getLogger().setLevel(logging.DEBUG)
-        PatternMatcherBaseClass.bot = TestBot()
-        PatternMatcherBaseClass.clientid = "matcher_test"
+class PatternMatcherBaseClass(ParserTestsBaseClass):
 
     def setUp(self):
-        self._dump_graph = True
-        self.graph = PatternGraph()
-        self.matcher =  AIMLParser()
-
-    def dump_graph(self):
-        if self._dump_graph is True:
-            self.graph.dump()
+        super(PatternMatcherBaseClass, self).setUp()
+        self._graph = PatternGraph(self._aiml_parser)
 
     def add_pattern_to_graph(self, pattern, topic="*", that="*", template="test"):
 
@@ -31,12 +19,12 @@ class PatternMatcherBaseClass(PatternTestBaseClass):
         that_element = ET.fromstring("<that>%s</that>"%(that))
         template_node = TemplateWordNode(template)
 
-        self.matcher.pattern_parser.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
+        self._aiml_parser.pattern_parser.add_pattern_to_graph(pattern_element, topic_element, that_element, template_node)
 
     def match_sentence(self, sentence, topic="*", that="*"):
 
-        return self.matcher.match_sentence( PatternMatcherBaseClass.bot,
-                                            PatternMatcherBaseClass.clientid,
-                                            Sentence(sentence),
-                                            topic,
-                                            that)
+        return self._aiml_parser.match_sentence(self._bot,
+                                                self._clientid,
+                                                Sentence(self._bot.brain.tokenizer, sentence),
+                                                topic,
+                                                that)

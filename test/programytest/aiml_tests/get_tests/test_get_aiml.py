@@ -47,7 +47,7 @@ class GetAIMLTests(unittest.TestCase):
     def test_name_get_with_topic(self):
         response = GetAIMLTests.test_client.bot.ask_question("test", "NAME GET AFTER TOPIC UNSET")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "VAR1 is test3   AND NOW VAR1 is test4  AND FINALLY NOW VAR 1 is test4")
+        self.assertEqual(response, "VAR1 is test3 AND NOW VAR1 is test4 AND FINALLY NOW VAR 1 is test4")
 
     #################################################################################################################
     #

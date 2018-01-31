@@ -21,7 +21,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -41,8 +41,8 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         self.assertIsNotNone(learn_node.children[0].template)
         self.assertIsInstance(learn_node.children[0].template, TemplateNode)
 
-        resolved = learn_node.resolve(self.test_bot, self.test_clientid)
+        resolved = learn_node.resolve(self._bot, self._clientid)
         self.assertEqual(resolved, "")
 
-        response = self.test_bot.ask_question(self.test_clientid, "HELLO WORLD THERE")
+        response = self._bot.ask_question(self._clientid, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)

@@ -10,23 +10,23 @@ class TemplateGraphSystemTests(TemplateGraphTestClient):
 
     def test_system_timeout_as_attrib_full(self):
 
-        self.test_bot.brain.configuration.overrides._allow_system_aiml = True
+        self._bot.brain.configuration.overrides._allow_system_aiml = True
 
         template = ET.fromstring("""
 			<template>
 				<system timeout="1000">echo "Hello World"</system>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         node = root.children[0]
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateSystemNode)
 
         if os.name == 'posix':
-            self.assertEqual(root.resolve(self.test_bot, self.test_clientid), "Hello World")
+            self.assertEqual(root.resolve(self._bot, self._clientid), "Hello World")
         elif os.name == 'nt':
-            self.assertEqual(root.resolve(self.test_bot, self.test_clientid), '"Hello World"')
+            self.assertEqual(root.resolve(self._bot, self._clientid), '"Hello World"')
         else:
             self.assertFalse(True)
 

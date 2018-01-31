@@ -18,7 +18,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import xml.etree.ElementTree as ET
 
-
 ######################################################################################################################
 #
 class TemplateNode(object):
@@ -45,7 +44,8 @@ class TemplateNode(object):
             self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, bot, clientid):
-        return (" ".join([child.resolve(bot, clientid) for child in self._children])).strip()
+        words = [child.resolve(bot, clientid) for child in self._children]
+        return bot.brain.tokenizer.words_to_texts(words)
 
     def resolve(self, bot, clientid):
         try:
@@ -83,15 +83,7 @@ class TemplateNode(object):
         if text is not None:
             string = text.strip()
             if string:
-
-                if graph._aiml_parser is not None and \
-                                graph._aiml_parser.brain is not None and \
-                                graph._aiml_parser.brain.configuration.language.chinese is True:
-                    from programy.utils.language.chinese import ChineseLanguage
-                    words = ChineseLanguage.split_unicode(string)
-                else:
-                    words = string.split(" ")
-                #words = string.split(" ")
+                words = graph.aiml_parser.brain.tokenizer.texts_to_words(string)
 
                 for word in words:
                     if word is not None and word:

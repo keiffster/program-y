@@ -19,7 +19,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
 
     def test_random_template_none_li(self):
         template = ET.fromstring("""
@@ -30,7 +30,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
             </template>
             """)
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
 
     def test_random_template(self):
         template = ET.fromstring("""
@@ -42,7 +42,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
 				</random>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
@@ -55,7 +55,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0].children[1], TemplateNode)
         self.assertIsInstance(ast.children[0].children[2], TemplateNode)
 
-        selection = ast.children[0].resolve(self.test_bot, self.test_clientid)
+        selection = ast.children[0].resolve(self._bot, self._clientid)
         self.assertIsNotNone(selection)
         self.assertIn(selection, ['1', '2', '3'])
 
@@ -78,7 +78,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
 				</random>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
 
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
@@ -97,7 +97,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0].children[1].children[0], TemplateRandomNode)
         self.assertEqual(2, len(ast.children[0].children[1].children[0].children))
 
-        selection = ast.children[0].resolve(self.test_bot, self.test_clientid)
+        selection = ast.children[0].resolve(self._bot, self._clientid)
         self.assertIsNotNone(selection)
         self.assertIn(selection, ['Say something', 'Say the other', 'Hello world!', 'Goodbye cruel world'])
 

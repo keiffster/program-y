@@ -24,6 +24,7 @@ except:
     import pickle
 import gc
 import datetime
+import programy.parser.tokenizer
 
 from programy.processors.processing import ProcessorLoader
 from programy.config.sections.brain.brain import BrainConfiguration
@@ -41,10 +42,14 @@ from programy.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
 from programy.dialog import Sentence
+from programy.parser.tokenizer import Tokenizer
 
 class Brain(object):
     def __init__(self, configuration: BrainConfiguration):
         self._configuration = configuration
+
+        self._tokenizer = self.load_tokenizer()
+
         self._aiml_parser = AIMLParser(self)
 
         self._denormal_collection = DenormalCollection()
@@ -152,6 +157,19 @@ class Brain(object):
     @property
     def dynamics(self):
         return self._dynamics_collection
+
+    @property
+    def tokenizer(self):
+        return self._tokenizer
+
+    def load_tokenizer(self):
+        if self._configuration is not None and self._configuration.tokenizer.classname is not None:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Loading tokenizer from class [%s]", self._configuration.tokenizer.classname)
+            tokenizer_class = ClassLoader.instantiate_class(self._configuration.tokenizer.classname)
+            return tokenizer_class(self._configuration.tokenizer.split_chars)
+        else:
+            return Tokenizer(self._configuration.tokenizer.split_chars)
 
     def load_binary(self, brain_configuration):
         if logging.getLogger().isEnabledFor(logging.INFO):
@@ -497,7 +515,7 @@ class Brain(object):
             logging.error("[%s] failed authentication!")
         if self.authentication.configuration.denied_srai is not None:
             match_context = self._aiml_parser.match_sentence(bot, clientid,
-                                                             Sentence(self.authentication.configuration.denied_srai),
+                                                             Sentence(bot.brain.tokenizer, self.authentication.configuration.denied_srai),
                                                              topic_pattern="*",
                                                              that_pattern="*")
             if match_context is not None:

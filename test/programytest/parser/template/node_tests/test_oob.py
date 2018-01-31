@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.oob import TemplateOOBNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateOOBNode(TemplateOOBNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateOOBNode(TemplateOOBNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateOOBNodeTests(TemplateTestsBaseClass):
+class TemplateOOBNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -26,7 +26,7 @@ class TemplateOOBNodeTests(TemplateTestsBaseClass):
 
         self.assertEqual(len(root.children), 1)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("<oob>hello</oob>", resolved)
 
@@ -36,7 +36,7 @@ class TemplateOOBNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><oob>Test</oob></template>", xml_str)
@@ -46,6 +46,6 @@ class TemplateOOBNodeTests(TemplateTestsBaseClass):
         node = MockTemplateOOBNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

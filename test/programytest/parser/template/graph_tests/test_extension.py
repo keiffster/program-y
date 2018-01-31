@@ -23,7 +23,7 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
 				</extension>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -35,7 +35,7 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsNotNone(ext_node._path)
 
         self.assertEqual(len(ext_node.children), 3)
-        self.assertEqual("executed", ext_node.resolve(None, None))
+        self.assertEqual("executed", ext_node.resolve(self._bot, self._clientid))
 
     def test_extension_as_child(self):
         template = ET.fromstring("""
@@ -46,7 +46,7 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
                 </extension>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -58,5 +58,5 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsNotNone(ext_node._path)
 
         self.assertEqual(len(ext_node.children), 3)
-        self.assertEqual("executed", ext_node.resolve(None, None))
+        self.assertEqual("executed", ext_node.resolve(self._bot, self._clientid))
 

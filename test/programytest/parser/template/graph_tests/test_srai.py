@@ -19,7 +19,7 @@ class TemplateGraphSraiTests(TemplateGraphTestClient):
                 </srai>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
@@ -41,7 +41,7 @@ class TemplateGraphSraiTests(TemplateGraphTestClient):
                 </srai>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)

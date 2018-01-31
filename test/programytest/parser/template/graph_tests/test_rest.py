@@ -13,7 +13,7 @@ class TemplateGraphRestTests(TemplateGraphTestClient):
                 <rest>one two three four</rest>
             </template>
             """)
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -24,5 +24,5 @@ class TemplateGraphRestTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateRestNode)
 
         self.assertIsNotNone(ast)
-        self.assertEqual(ast.resolve(None, None), "two three four")
+        self.assertEqual(ast.resolve(self._bot, self._clientid), "two three four")
 

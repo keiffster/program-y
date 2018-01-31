@@ -35,11 +35,11 @@ from programy.utils.files.filewriter import DuplicatesFileWriter
 class AIMLLoader(FileFinder):
     def __init__(self, aiml_parser):
         FileFinder.__init__(self)
-        self.aiml_parser = aiml_parser
+        self._aiml_parser = aiml_parser
 
     def load_file_contents(self, filename):
         try:
-            return self.aiml_parser.parse_from_file(filename)
+            return self._aiml_parser.parse_from_file(filename)
         except Exception as excep:
             logging.exception("Failed to load contents of file from [%s]", filename)
             logging.exception(excep)
@@ -47,10 +47,10 @@ class AIMLLoader(FileFinder):
 
 class AIMLParser(object):
 
-    def __init__(self, brain=None):
+    def __init__(self, brain):
         self._brain = brain
-        self.pattern_parser = PatternGraph(aiml_parser=self)
-        self.template_parser = TemplateGraph(aiml_parser=self)
+        self._pattern_parser = PatternGraph(aiml_parser=self)
+        self._template_parser = TemplateGraph(aiml_parser=self)
         self._aiml_loader = AIMLLoader(self)
         self._num_categories = 0
         self._duplicates = None
@@ -74,6 +74,14 @@ class AIMLParser(object):
     @property
     def num_categories(self):
         return self._num_categories
+
+    @property
+    def pattern_parser(self):
+        return self._pattern_parser
+
+    @property
+    def template_parser(self):
+        return self._template_parser
 
     def create_debug_storage(self, brain_configuration):
         if brain_configuration.files.aiml_files.errors is not None:
@@ -417,7 +425,7 @@ class AIMLParser(object):
         elif len(templates) > 1:
             raise ParserException("Multiple <template> nodes found in category", xml_element=category_xml)
         else:
-            return self.template_parser.parse_template_expression(templates[0])
+            return self._template_parser.parse_template_expression(templates[0])
 
     def get_pattern(self, category_xml, namespace):
         patterns = self.find_all(category_xml, "pattern", namespace)
@@ -439,21 +447,21 @@ class AIMLParser(object):
         pattern = self.get_pattern(category_xml, namespace)
 
         if add_to_graph is True:
-            self.pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root)
+            self._pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root)
             self._num_categories += 1
 
         return (pattern, topic_element, that_element, template_graph_root)
 
     def match_sentence(self, bot, clientid, pattern_sentence, topic_pattern, that_pattern):
 
-        topic_sentence = Sentence(topic_pattern)
-        that_sentence = Sentence(that_pattern)
+        topic_sentence = Sentence(bot.brain.tokenizer, topic_pattern)
+        that_sentence = Sentence(bot.brain.tokenizer, that_pattern)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
                           pattern_sentence.text(), topic_pattern, that_pattern)
 
-        sentence = Sentence()
+        sentence = Sentence(bot.brain.tokenizer)
         sentence.append_sentence(pattern_sentence)
         sentence.append_word('__TOPIC__')
         sentence.append_sentence(topic_sentence)
@@ -463,9 +471,10 @@ class AIMLParser(object):
             logging.debug("Matching [%s]", sentence.words_from_current_pos(0))
 
         context = MatchContext(max_search_depth=bot.configuration.max_search_depth,
-                               max_search_timeout=bot.configuration.max_search_timeout)
+                               max_search_timeout=bot.configuration.max_search_timeout,
+                               tokenizer=bot.brain.tokenizer)
 
-        template = self.pattern_parser._root_node.match(bot, clientid, context, sentence)
+        template = self._pattern_parser._root_node.match(bot, clientid, context, sentence)
 
         if template is not None:
             context._template_node = template

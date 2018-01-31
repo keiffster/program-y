@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.lowercase import TemplateLowercaseNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 
 class MockTemplateLowercaseNode(TemplateLowercaseNode):
@@ -14,7 +14,7 @@ class MockTemplateLowercaseNode(TemplateLowercaseNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateLowercaseNodeTests(TemplateTestsBaseClass):
+class TemplateLowercaseNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -31,7 +31,7 @@ class TemplateLowercaseNodeTests(TemplateTestsBaseClass):
         word = TemplateWordNode("This is a Sentence")
         node.append(word)
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "this is a sentence")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "this is a sentence")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -39,7 +39,7 @@ class TemplateLowercaseNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><lowercase>Test</lowercase></template>", xml_str)
@@ -49,6 +49,6 @@ class TemplateLowercaseNodeTests(TemplateTestsBaseClass):
         node = MockTemplateLowercaseNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -15,7 +15,7 @@ class TemplateGraphResetLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
@@ -31,7 +31,7 @@ class TemplateGraphResetLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
         self.assertIsInstance(ast, TemplateNode)
@@ -47,4 +47,4 @@ class TemplateGraphResetLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)

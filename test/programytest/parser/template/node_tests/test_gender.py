@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.gender import TemplateGenderNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateGenderNode(TemplateGenderNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateGenderNode(TemplateGenderNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateGenderNodeTests(TemplateTestsBaseClass):
+class TemplateGenderNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -28,9 +28,9 @@ class TemplateGenderNodeTests(TemplateTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("to him"))
-        self.bot.brain.genders.process_splits(["to him","to her"])
+        self._bot.brain.genders.process_splits(["to him","to her"])
 
-        self.assertEqual(root.resolve(self.bot, self.clientid), "to her")
+        self.assertEqual(root.resolve(self._bot, self._clientid), "to her")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -38,7 +38,7 @@ class TemplateGenderNodeTests(TemplateTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><gender>Test</gender></template>", xml_str)
@@ -48,6 +48,6 @@ class TemplateGenderNodeTests(TemplateTestsBaseClass):
         node = MockTemplateGenderNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

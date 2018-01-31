@@ -1,10 +1,10 @@
-from programytest.parser.pattern.base import PatternTestBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.dialog import Sentence
 from programy.parser.exceptions import ParserException
 
-class PatternSetNodeTests(PatternTestBaseClass):
+class PatternSetNodeTests(ParserTestsBaseClass):
 
     def test_init_with_text(self):
         node = PatternISetNode({}, "test1, test2, test3")
@@ -58,19 +58,19 @@ class PatternSetNodeTests(PatternTestBaseClass):
 
         self.assertTrue(node.equivalent(PatternISetNode([], "test1, test2, test3")))
 
-        sentence = Sentence("TEST1 TEST2 TEST3")
+        sentence = Sentence(self._bot.brain.tokenizer, "TEST1 TEST2 TEST3")
 
-        result = node.equals(None, "testid", sentence, 0)
+        result = node.equals(self._bot, "testid", sentence, 0)
         self.assertTrue(result.matched)
-        result = node.equals(None, "testid", sentence, 1)
+        result = node.equals(self._bot, "testid", sentence, 1)
         self.assertTrue(result.matched)
-        result = node.equals(None, "testid", sentence, 2)
+        result = node.equals(self._bot, "testid", sentence, 2)
         self.assertTrue(result.matched)
-        result = node.equals(None, "testid", sentence, 3)
+        result = node.equals(self._bot, "testid", sentence, 3)
         self.assertFalse(result.matched)
 
         self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
-        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self.bot, self.clientid))
+        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self._bot, self._clientid))
 
     def test_parse_words(self):
         node = PatternISetNode([], "test1")

@@ -17,29 +17,28 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.base import BaseSectionConfigurationData
+from programy.config.base import BaseConfigurationData
 
-
-class BrainLanguageConfiguration(BaseSectionConfigurationData):
+class BrainTokenizerConfiguration(BaseConfigurationData):
 
     def __init__(self):
-        BaseSectionConfigurationData.__init__(self, "language")
-        self._english = True
-        self._chinese = False
+        BaseConfigurationData.__init__(self, name="tokenizer")
+        self._classname = None
+        self._split_chars = " "
 
     @property
-    def english(self):
-        return self._english
+    def classname(self):
+        return self._classname
 
     @property
-    def chinese(self):
-        return self._chinese
+    def split_chars(self):
+        return self._split_chars
 
     def load_config_section(self, configuration_file, configuration, bot_root):
-        language = configuration_file.get_section(self._section_name, configuration)
-        if language is not None:
-            self._english = configuration_file.get_bool_option(language, "english", missing_value=True)
-            self._chinese = configuration_file.get_bool_option(language, "chinese", missing_value=True)
+        tokenizer = configuration_file.get_section(self._section_name, configuration)
+        if tokenizer is not None:
+            self._classname = configuration_file.get_option(tokenizer, "classname", missing_value="programy.parser.tokenizer.Tokenizer")
+            self._split_chars = configuration_file.get_option(tokenizer, "split_chars", missing_value=" ")
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'language' section missing from brain config, using to defaults")
+                logging.warning("'tokenizer' section missing from bot config, using defaults")

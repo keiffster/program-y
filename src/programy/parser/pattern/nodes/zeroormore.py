@@ -20,7 +20,6 @@ import logging
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.matcher import Match
 
-
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
     MATCH_CHARS = ['^', '#']

@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.xml import TemplateXMLNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateXMLNode(TemplateXMLNode):
     def __init__(self):
@@ -13,7 +13,7 @@ class MockTemplateXMLNode(TemplateXMLNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateXMLNodeTests(TemplateTestsBaseClass):
+class TemplateXMLNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         root = TemplateNode()
@@ -27,7 +27,7 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
 
         self.assertEqual(len(root.children), 1)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual("<dial>07777777777</dial>", resolved)
 
@@ -44,7 +44,7 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
 
         self.assertEqual(len(root.children), 1)
 
-        resolved = root.resolve(self.bot, self.clientid)
+        resolved = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(resolved)
         self.assertEqual('<dial leave_message="true">07777777777</dial>', resolved)
 
@@ -55,7 +55,7 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
         root.append(xml)
         xml.append(TemplateWordNode("07777777777"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><dial>07777777777</dial></template>", xml_str)
@@ -68,7 +68,7 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
         root.append(xml)
         xml.append(TemplateWordNode("07777777777"))
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><dial leave_message="true">07777777777</dial></template>', xml_str)
@@ -78,6 +78,6 @@ class TemplateXMLNodeTests(TemplateTestsBaseClass):
         node = MockTemplateXMLNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

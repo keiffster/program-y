@@ -15,7 +15,7 @@ class TemplateGraphProgramTests(TemplateGraphTestClient):
 				<program />
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -32,4 +32,4 @@ class TemplateGraphProgramTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            root = self.parser.parse_template_expression(template)
+            root = self._graph.parse_template_expression(template)

@@ -6,7 +6,7 @@ from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.template.nodes.base import TemplateNode
 
-from programytest.parser.template.base import TemplateTestsBaseClass
+from programytest.parser.base import ParserTestsBaseClass
 
 class MockTemplateStarNode(TemplateStarNode):
     def __init__(self):
@@ -15,7 +15,7 @@ class MockTemplateStarNode(TemplateStarNode):
     def resolve_to_string(self, bot, clientid):
         raise Exception("This is an error")
 
-class TemplateStarNodeTests(TemplateTestsBaseClass):
+class TemplateStarNodeTests(ParserTestsBaseClass):
 
     def test_node_defaults(self):
         root = TemplateNode()
@@ -34,74 +34,74 @@ class TemplateStarNodeTests(TemplateTestsBaseClass):
         node = TemplateStarNode()
         root.append(node)
 
-        self.assertEqual("", root.resolve(self.bot,  self.clientid))
+        self.assertEqual("", root.resolve(self._bot,  self._clientid))
 
     def test_node_no_question(self):
         root = TemplateNode()
         node = TemplateStarNode()
         root.append(node)
 
-        conversation = Conversation("testid", self.bot)
-        self.bot._conversations["testid"] = conversation
+        conversation = Conversation("testid", self._bot)
+        self._bot._conversations["testid"] = conversation
 
-        self.assertEqual("", root.resolve(self.bot, self.clientid))
+        self.assertEqual("", root.resolve(self._bot, self._clientid))
 
     def test_node_no_sentences(self):
         root = TemplateNode()
         node = TemplateStarNode()
         root.append(node)
 
-        conversation = Conversation("testid", self.bot)
+        conversation = Conversation("testid", self._bot)
         question = Question()
         conversation.record_dialog(question)
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        self.assertEqual("", root.resolve(self.bot, self.clientid))
+        self.assertEqual("", root.resolve(self._bot, self._clientid))
 
     def test_node_no_star(self):
         root = TemplateNode()
         node = TemplateStarNode()
         root.append(node)
 
-        conversation = Conversation("testid", self.bot)
-        question = Question.create_from_text("Hello world")
+        conversation = Conversation("testid", self._bot)
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
-        question = Question.create_from_text("How are you")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        self.assertEqual("", root.resolve(self.bot, self.clientid))
+        self.assertEqual("", root.resolve(self._bot, self._clientid))
 
     def test_node_with_star(self):
         root = TemplateNode()
         node = TemplateStarNode()
         root.append(node)
 
-        conversation = Conversation("testid", self.bot)
-        question = Question.create_from_text("Hello world")
+        conversation = Conversation("testid", self._bot)
+        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
-        question = Question.create_from_text("How are you")
+        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._bot.brain.tokenizer)
         context.add_match(Match(Match.WORD, match, "Matched"))
         question.current_sentence()._matched_context = context
 
         conversation.record_dialog(question)
-        self.bot._conversations["testid"] = conversation
+        self._bot._conversations["testid"] = conversation
 
-        self.assertEqual("Matched", root.resolve(self.bot, self.clientid))
+        self.assertEqual("Matched", root.resolve(self._bot, self._clientid))
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
         node = TemplateStarNode()
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><star /></template>", xml_str)
@@ -124,7 +124,7 @@ class TemplateStarNodeTests(TemplateTestsBaseClass):
         node = TemplateStarNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self.bot, self.clientid)
+        xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><star index="3" /></template>', xml_str)
@@ -134,6 +134,6 @@ class TemplateStarNodeTests(TemplateTestsBaseClass):
         node = MockTemplateStarNode()
         root.append(node)
 
-        result = root.resolve(self.bot, self.clientid)
+        result = root.resolve(self._bot, self._clientid)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -14,7 +14,7 @@ class TemplateGraphThatTests(TemplateGraphTestClient):
                 <that index="1"></that>
             </template>
             """)
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         node = root.children[0]
         self.assertIsNotNone(node)

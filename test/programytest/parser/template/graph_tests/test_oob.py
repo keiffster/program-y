@@ -16,7 +16,7 @@ class TemplateGraphOOBTests(TemplateGraphTestClient):
 				<oob>Text</oob>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -32,7 +32,7 @@ class TemplateGraphOOBTests(TemplateGraphTestClient):
 				<oob>Some Text</oob>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -54,7 +54,7 @@ class TemplateGraphOOBTests(TemplateGraphTestClient):
 				<oob>Some <get name="SomeGet" /> Text</oob>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
         self.assertIsNotNone(root.children)
@@ -77,5 +77,5 @@ class TemplateGraphOOBTests(TemplateGraphTestClient):
 				<oob><dial><star /></dial></oob>
 			</template>
 			""")
-        root = self.parser.parse_template_expression(template)
+        root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)

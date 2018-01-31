@@ -15,7 +15,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				<get name="somepred" />
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -26,7 +26,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
         self.assertIsInstance(get_node.name, TemplateNode)
-        self.assertEqual(get_node.name.resolve(None, None), "somepred")
+        self.assertEqual(get_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertFalse(get_node.local)
 
     def test_get_template_predicate_as_attrib_mixed(self):
@@ -35,7 +35,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				Hello <get name="somepred" /> how are you
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -46,7 +46,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
         self.assertIsInstance(get_node.name, TemplateNode)
-        self.assertEqual(get_node.name.resolve(None, None), "somepred")
+        self.assertEqual(get_node.name.resolve(self._bot, self._clientid), "somepred")
         self.assertFalse(get_node.local)
 
     def test_get_template_var_as_attrib(self):
@@ -55,7 +55,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				<get var="somevar" />
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -66,7 +66,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
         self.assertIsInstance(get_node.name, TemplateNode)
-        self.assertEqual(get_node.name.resolve(None, None), "somevar")
+        self.assertEqual(get_node.name.resolve(self._bot, self._clientid), "somevar")
         self.assertTrue(get_node.local)
 
     def test_get_template_predicate_as_child(self):
@@ -75,7 +75,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				<get><name>somepred as text</name></get>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -86,7 +86,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
         self.assertIsInstance(get_node.name, TemplateNode)
-        self.assertEqual(get_node.name.resolve(None, None), "somepred as text")
+        self.assertEqual(get_node.name.resolve(self._bot, self._clientid), "somepred as text")
         self.assertFalse(get_node.local)
 
     def test_get_template_local_as_child(self):
@@ -95,7 +95,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 				<get><var>somevar</var></get>
 			</template>
 			""")
-        ast = self.parser.parse_template_expression(template)
+        ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertIsNotNone(ast.children)
@@ -106,7 +106,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
         self.assertIsInstance(get_node, TemplateGetNode)
         self.assertIsNotNone(get_node.name)
         self.assertIsInstance(get_node.name, TemplateNode)
-        self.assertEqual(get_node.name.resolve(None, None), "somevar")
+        self.assertEqual(get_node.name.resolve(self._bot, self._clientid), "somevar")
         self.assertTrue(get_node.local)
 
     def test_get_template_name_and_var(self):
@@ -116,7 +116,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
 
     def test_get_template_other_than_name_and_var(self):
         template = ET.fromstring("""
@@ -125,4 +125,4 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 			</template>
 			""")
         with self.assertRaises(ParserException):
-            ast = self.parser.parse_template_expression(template)
+            ast = self._graph.parse_template_expression(template)
