@@ -1,0 +1,11 @@
+[Unit]
+Description=Y-Bot Demonstration Web Chat
+
+[Service]
+User=ubuntu
+ExecStart=/opt/program-y/bots/multibot/servusai-rest.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

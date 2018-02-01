@@ -3,7 +3,7 @@ Description=Y-Bot Demonstration Web Chat
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/y-bot/servusai.sh
+ExecStart=/opt/program-y/bots/multibot/socket/servusai-socket.sh
 Restart=always
 
 [Install]

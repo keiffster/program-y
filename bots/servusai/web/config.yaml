@@ -1,0 +1,69 @@
+bot:
+    prompt: ">>>"
+
+    initial_question: Hi, how can I help you today?
+    default_response: Sorry, I don't have an answer for that!
+    default_response_srai: YEMPTY
+    empty_string: YEMPTY
+    exit_response: So long, and thanks for the fish!
+    exit_response_srai: YEXITRESPONSE
+
+    override_properties: true
+
+    max_question_recursion: 1000
+    max_question_timeout: 60
+    max_search_depth: 100
+    max_search_timeout: 60
+
+    conversations:
+      type: file
+      config_name: file_storage
+      empty_on_start: true
+
+    file_storage:
+      dir: $BOT_ROOT/conversations
+
+brain:
+
+    # Overrides
+    overrides:
+      allow_system_aiml: false
+      allow_learn_aiml: false
+      allow_learnf_aiml: false
+
+    # Defaults
+    defaults:
+      default-get: unknown
+      default-property: unknown
+      default-map: unknown
+
+    # Nodes
+    nodes:
+      pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
+      template_nodes: $BOT_ROOT/config/template_nodes.conf
+
+    files:
+        aiml:
+            files: $BOT_ROOT/aiml
+            extension: .aiml
+            directories: true
+            conversation:
+              file: /tmp/multibot-conversation.csv
+              format: csv
+              delete_on_start: true
+        properties: $BOT_ROOT/config/properties.txt
+        preprocessors: $BOT_ROOT/config/preprocessors.conf
+        postprocessors: $BOT_ROOT/config/postprocessors.conf
+
+    services:
+        PROGRAMY:
+            classname: programy.services.programy.ProgramyRESTService
+            method: GET
+            host: 0.0.0.0
+            port: 8989
+            url: /api/v1.0/ask
+
+webchat:
+  host: 0.0.0.0
+  port: 8080
+  debug: false

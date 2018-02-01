@@ -87,9 +87,17 @@ class XmppClient(sleekxmpp.ClientXMPP):
     def run(self, server, port, block=True):
         if self.connect((server, port)):
             print("Connected, running as [%s]..."%self.requested_jid)
-            self.process(block=block)
+            try:
+                self.process(block=block)
+                print("Xmpp connection closed...")
+            except Exception as excep:
+                print("Xmpp connection terminated...")
+                logging.exception(excep)
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Oops something bad happened !")
         else:
             print("Failed to connect, exiting...")
+
 
 class XmppBotClient(BotClient):
 
@@ -126,6 +134,7 @@ class XmppBotClient(BotClient):
         self._xmpp_client = self.create_client(username, password)
         self._xmpp_client.register_xep_plugins(self.configuration)
         self._xmpp_client.run(server, port, block=True)
+
 
 if __name__ == '__main__':
 

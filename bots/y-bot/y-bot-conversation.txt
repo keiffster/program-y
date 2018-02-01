@@ -1,3 +1,0 @@
-2017-09-13 17:19:43 - Console - Question[HELLO] - Response[Hi there!]
-2017-09-13 17:19:43 - Console - Question[hi] - Response[Hi there!]
-2017-09-13 17:19:48 - Console - Question[location] - Response[I'm currently in Kinghorn.]

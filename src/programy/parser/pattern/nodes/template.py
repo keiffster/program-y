@@ -57,5 +57,5 @@ class PatternTemplateNode(PatternNode):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "PTEMPLATE [%s] " % (self._child_count(verbose)) + self.to_xml(None, None)
+            return "PTEMPLATE [%s] " % self._child_count(verbose)
         return "PTEMPLATE"
