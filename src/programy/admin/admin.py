@@ -221,7 +221,7 @@ if __name__ == '__main__':
     parser.add_argument('-r',   '--replace',   action='store_true', default=False, help='Replace current structure')
     parser.add_argument('-d',   '--default',   action='store_true', default=False, help="Create default files")
     parser.add_argument('-a',   '--app',       default="console", help="Type of app to create", choices=['console', 'webchat', 'rest', 'xmpp', 'twitter', 'socket'])
-    parser.add_argument('-o',   '--os',        default="unix", help="Type of app to create", choices=['unix', 'windows'])
+    parser.add_argument('-o',   '--os',        default="unix", help="Type of os to support", choices=['unix', 'windows'])
     parser.add_argument('-p',   '--path',      help="Add PYTHONPATH to script")
 
     args = parser.parse_args()
