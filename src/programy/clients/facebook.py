@@ -32,13 +32,15 @@ class FacebookBotClient(BotClient):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Facebook Client is running....")
 
-        self.access_token = self.bot.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")
-        self.verify_token = self.bot.license_keys.get_key("FACEBOOK_VERIFY_TOKEN")
+        self.get_license_keys()
 
-        self.facebook_bot = Bot(self.access_token)
-        
+        self.facebook_bot = self.create_facebook_bot()
+
         print("Facebook Client loaded")
 
+    def get_license_keys(self):
+        self.access_token = self.bot.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")
+        self.verify_token = self.bot.license_keys.get_key("FACEBOOK_VERIFY_TOKEN")
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Facebook")
@@ -49,6 +51,9 @@ class FacebookBotClient(BotClient):
     def ask_question(self, sessionid, question):
         response = self.bot.ask_question(sessionid, question, responselogger=self)
         return response
+
+    def create_facebook_bot(self):
+        return Bot(self.access_token)
 
     def verify_fb_token(self, token_sent):
         # take token sent by facebook and verify it matches the verify token you sent

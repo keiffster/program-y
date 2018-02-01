@@ -31,7 +31,7 @@ class PatternTemplateNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.has_children())
 
         self.assertTrue(node.equivalent(PatternTemplateNode(TemplateNode())))
-        self.assertEqual(node.to_string(), "PTEMPLATE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)] <template></template>\n")
+        self.assertEqual(node.to_string(), "PTEMPLATE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)] ")
         self.assertEqual(node.to_string(verbose=False), "PTEMPLATE")
         self.assertEqual('<template></template>\n', node.to_xml(self._bot, self._clientid))
 
