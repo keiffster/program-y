@@ -10,16 +10,29 @@ class FacebookConfigurationTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
-            facebook:
-              polling: true
-              polling_interval: 30
-              streaming: true
+        facebook:
+          host: 127.0.0.1
+          port: 5000
+          debug: false
         """, ConsoleConfiguration(), ".")
 
         facebook_config = FacebookConfiguration()
         facebook_config.load_configuration(yaml, ".")
 
-        self.assertTrue(facebook_config.polling)
-        self.assertEqual(30, facebook_config.polling_interval)
-        self.assertTrue(facebook_config.streaming)
+        self.assertEqual("127.0.0.1", facebook_config.host)
+        self.assertEqual(5000, facebook_config.port)
+        self.assertEqual(False, facebook_config.debug)
 
+    def test_init_no_values(self):
+        yaml = YamlConfigurationFile()
+        self.assertIsNotNone(yaml)
+        yaml.load_from_text("""
+        facebook:
+        """, ConsoleConfiguration(), ".")
+
+        facebook_config = FacebookConfiguration()
+        facebook_config.load_configuration(yaml, ".")
+
+        self.assertEqual("0.0.0.0", facebook_config.host)
+        self.assertEqual(5000, facebook_config.port)
+        self.assertEqual(False, facebook_config.debug)

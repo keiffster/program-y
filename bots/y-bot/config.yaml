@@ -224,3 +224,8 @@ socket:
 
 telegram:
   unknown_command: Sorry, that is not a command I have been taught yet!
+
+facebook:
+  host: 127.0.0.1
+  port: 5000
+  debug: false

@@ -18,29 +18,28 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.config.base import BaseContainerConfigurationData
 
 class FacebookConfiguration(BaseContainerConfigurationData):
-
+    
     def __init__(self):
         BaseContainerConfigurationData.__init__(self, "facebook")
-        self._polling = False
-        self._polling_interval = 0
-        self._streaming = False
+        self._host = "0.0.0.0"
+        self._port = 5000
+        self._debug = False
 
     @property
-    def polling(self):
-        return self._polling
+    def host(self):
+        return self._host
 
     @property
-    def polling_interval(self):
-        return self._polling_interval
+    def port(self):
+        return self._port
 
     @property
-    def streaming(self):
-        return self._streaming
+    def debug(self):
+        return self._debug
 
     def load_configuration(self, configuration_file, bot_root):
-        facebook = configuration_file.get_section(self.section_name)
-        if facebook is not None:
-            self._polling = configuration_file.get_bool_option(facebook, "polling")
-            if self._polling is True:
-                self._polling_interval = configuration_file.get_int_option(facebook, "polling_interval")
-            self._streaming = configuration_file.get_bool_option(facebook, "streaming")
+        rest = configuration_file.get_section(self.section_name)
+        if rest is not None:
+            self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0")
+            self._port = configuration_file.get_option(rest, "port", missing_value=5000)
+            self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False)
