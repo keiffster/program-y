@@ -27,6 +27,8 @@ class WebChatConfiguration(BaseContainerConfigurationData):
         self._use_api_keys = False
         self._cookie_id = "ProgramYSession"
         self._cookie_expires = 90
+        self._ssl_cert_file = None
+        self._ssl_key_file = None
 
     @property
     def host(self):
@@ -52,6 +54,14 @@ class WebChatConfiguration(BaseContainerConfigurationData):
     def cookie_expires(self):
         return self._cookie_expires
 
+    @property
+    def ssl_cert_file(self):
+        return self._ssl_cert_file
+
+    @property
+    def ssl_key_file(self):
+        return self._ssl_key_file
+
     def load_configuration(self, configuration_file, bot_root):
         webchat = configuration_file.get_section(self.section_name)
         if webchat is not None:
@@ -61,3 +71,9 @@ class WebChatConfiguration(BaseContainerConfigurationData):
             self._use_api_keys = configuration_file.get_bool_option(webchat, "use_api_keys", missing_value=False)
             self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession")
             self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90)
+            self._ssl_cert_file = configuration_file.get_option(webchat, "ssl_cert_file")
+            if self._ssl_cert_file is not None:
+                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
+            self._ssl_key_file = configuration_file.get_option(webchat, "ssl_key_file")
+            if self._ssl_key_file is not None:
+                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)

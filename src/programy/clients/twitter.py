@@ -192,7 +192,7 @@ class TwitterBotClient(BotClient):
         statuses = self._get_statuses(last_status_id)
 
         for status in statuses:
-            print("[%s] - [%s]"%(status.author.screen_name, self._username))
+            #print("[%s] - [%s]"%(status.author.screen_name, self._username))
             if status.author.screen_name != self._username:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("status: %s", status.text)

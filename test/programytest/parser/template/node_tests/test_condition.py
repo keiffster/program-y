@@ -572,6 +572,5 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._bot, self._clientid)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        print(xml_str)
         self.assertEqual('<template><condition><li name="name1"><value>value1</value>Word1</li> <li var="name2"><value>value1</value>Word2</li> <li bot="name3"><value>value3</value>Word3</li> <li name="name4">Word4</li></condition></template>', xml_str)
 

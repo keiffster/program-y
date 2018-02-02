@@ -1,9 +1,9 @@
 [Unit]
-Description=Y-Bot Demonstration Web Chat
+Description=Y-Bot REST Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/multibot/servusai-rest.sh
+ExecStart=/opt/program-y/bots/servusai/rest/servusai-rest.sh
 Restart=always
 
 [Install]

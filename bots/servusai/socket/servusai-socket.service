@@ -1,9 +1,9 @@
 [Unit]
-Description=Y-Bot Demonstration Web Chat
+Description=Y-Bot TCP Socket Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/multibot/socket/servusai-socket.sh
+ExecStart=/opt/program-y/bots/servusai/socket/servusai-socket.sh
 Restart=always
 
 [Install]

@@ -24,6 +24,8 @@ class FacebookConfiguration(BaseContainerConfigurationData):
         self._host = "0.0.0.0"
         self._port = 5000
         self._debug = False
+        self._ssl_cert_file = None
+        self._ssl_key_file = None
 
     @property
     def host(self):
@@ -37,9 +39,23 @@ class FacebookConfiguration(BaseContainerConfigurationData):
     def debug(self):
         return self._debug
 
+    @property
+    def ssl_cert_file(self):
+        return self._ssl_cert_file
+
+    @property
+    def ssl_key_file(self):
+        return self._ssl_key_file
+
     def load_configuration(self, configuration_file, bot_root):
-        rest = configuration_file.get_section(self.section_name)
-        if rest is not None:
-            self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0")
-            self._port = configuration_file.get_option(rest, "port", missing_value=5000)
-            self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False)
+        facebook = configuration_file.get_section(self.section_name)
+        if facebook is not None:
+            self._host = configuration_file.get_option(facebook, "host", missing_value="0.0.0.0")
+            self._port = configuration_file.get_option(facebook, "port", missing_value=5000)
+            self._debug = configuration_file.get_bool_option(facebook, "debug", missing_value=False)
+            self._ssl_cert_file = configuration_file.get_option(facebook, "ssl_cert_file")
+            if self._ssl_cert_file is not None:
+                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
+            self._ssl_key_file = configuration_file.get_option(facebook, "ssl_key_file")
+            if self._ssl_key_file is not None:
+                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)

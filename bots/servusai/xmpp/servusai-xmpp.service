@@ -1,9 +1,9 @@
 [Unit]
-Description=Y-Bot Demonstration Web Chat
+Description=Y-Bot Google Talk Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/y-bot/servusai-web.sh
+ExecStart=/opt/program-y/bots/servusai/servusai-xmpp.sh
 Restart=always
 
 [Install]

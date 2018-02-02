@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git tag x.y -m "Comments"
+git tag 1.9 -m "Version 1.9 Release"
 
 git push --tags github master
 

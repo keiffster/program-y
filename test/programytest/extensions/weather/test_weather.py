@@ -49,7 +49,6 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.test_client.bot, self.clientid, "FORECAST3 LOCATION KY39UR WHEN NOW")
         self.assertIsNotNone(result)
-        print(result)
         self.assertEquals("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)
 
     def test_forecast24(self):

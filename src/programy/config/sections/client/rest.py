@@ -27,6 +27,8 @@ class RestConfiguration(BaseContainerConfigurationData):
         self._workers = 4
         self._use_api_keys = False
         self._api_key_file = None
+        self._ssl_cert_file = None
+        self._ssl_key_file = None
 
     @property
     def host(self):
@@ -52,6 +54,14 @@ class RestConfiguration(BaseContainerConfigurationData):
     def api_key_file(self):
         return self._api_key_file
 
+    @property
+    def ssl_cert_file(self):
+        return self._ssl_cert_file
+
+    @property
+    def ssl_key_file(self):
+        return self._ssl_key_file
+
     def load_configuration(self, configuration_file, bot_root):
         rest = configuration_file.get_section(self.section_name)
         if rest is not None:
@@ -63,3 +73,9 @@ class RestConfiguration(BaseContainerConfigurationData):
             self._api_key_file = configuration_file.get_option(rest, "api_key_file")
             if self._api_key_file is not None:
                 self._api_key_file = self.sub_bot_root(self._api_key_file, bot_root)
+            self._ssl_cert_file = configuration_file.get_option(rest, "ssl_cert_file")
+            if self._ssl_cert_file is not None:
+                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
+            self._ssl_key_file = configuration_file.get_option(rest, "ssl_key_file")
+            if self._ssl_key_file is not None:
+                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)

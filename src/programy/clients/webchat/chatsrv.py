@@ -136,10 +136,24 @@ if __name__ == '__main__':
         if WEBCHAT_CLIENT.configuration.client_configuration.debug is True:
             print("WebChat Client running in debug mode")
 
-        APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
-                port=WEBCHAT_CLIENT.configuration.client_configuration.port,
-                debug=WEBCHAT_CLIENT.configuration.client_configuration.debug)
+        if WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
+           WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file is not None:
 
+            print ("SSL using Cert:%s and Key: %s"%(WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file,
+                                                    WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file))
+            context = (WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file,
+                       WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file)
+
+            print("Webchat Client running in https mode")
+            APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
+                    port=WEBCHAT_CLIENT.configuration.client_configuration.port,
+                    debug=WEBCHAT_CLIENT.configuration.client_configuration.debug,
+                    ssl_context=context)
+        else:
+            print("Webchat Client running in http mode, careful now !")
+            APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
+                    port=WEBCHAT_CLIENT.configuration.client_configuration.port,
+                    debug=WEBCHAT_CLIENT.configuration.client_configuration.debug)
 
     set_exit_handler(on_exit)
 

@@ -123,6 +123,18 @@ if __name__ == "__main__":
     if FACEBOOK_CLIENT.configuration.client_configuration.debug is True:
         print("REST Client running in debug mode")
 
-    APP.run(host=FACEBOOK_CLIENT.configuration.client_configuration.host,
-            port=FACEBOOK_CLIENT.configuration.client_configuration.port,
-            debug=FACEBOOK_CLIENT.configuration.client_configuration.debug)
+    if FACEBOOK_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
+            FACEBOOK_CLIENT.configuration.client_configuration.ssl_key_file is not None:
+        context = (FACEBOOK_CLIENT.configuration.client_configuration.ssl_cert_file,
+                   FACEBOOK_CLIENT.configuration.client_configuration.ssl_key_file)
+
+        print("Facebook Client running in https mode")
+        APP.run(host=FACEBOOK_CLIENT.configuration.client_configuration.host,
+                port=FACEBOOK_CLIENT.configuration.client_configuration.port,
+                debug=FACEBOOK_CLIENT.configuration.client_configuration.debug,
+                ssl_context=context)
+    else:
+        print("Facebook Client running in http mode, careful now !")
+        APP.run(host=FACEBOOK_CLIENT.configuration.client_configuration.host,
+                port=FACEBOOK_CLIENT.configuration.client_configuration.port,
+                debug=FACEBOOK_CLIENT.configuration.client_configuration.debug)
