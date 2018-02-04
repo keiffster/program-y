@@ -3,7 +3,7 @@ Description=Y-Bot Web Chat Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/servusai-web.sh
+ExecStart=/opt/program-y/bots/servusai/web/servusai-web.sh
 Restart=always
 
 [Install]

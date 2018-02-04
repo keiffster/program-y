@@ -3,7 +3,7 @@ Description=Y-Bot Twitter Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/servusai-twitter.sh
+ExecStart=/opt/program-y/bots/servusai/twitter/servusai-twitter.sh
 Restart=always
 
 [Install]

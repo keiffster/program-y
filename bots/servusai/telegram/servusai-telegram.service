@@ -3,7 +3,7 @@ Description=Y-Bot Telegram Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/servusai-telegram.sh
+ExecStart=/opt/program-y/bots/servusai/telegram/servusai-telegram.sh
 Restart=always
 
 [Install]

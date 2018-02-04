@@ -3,7 +3,7 @@ Description=Y-Bot Google Talk Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/servusai-xmpp.sh
+ExecStart=/opt/program-y/bots/servusai/xmpp/servusai-xmpp.sh
 Restart=always
 
 [Install]
