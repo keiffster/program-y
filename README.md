@@ -1,8 +1,8 @@
 # Readme info:
 
-Version: 1.8.0 <br/>
+Version: 1.9.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 16th January 2018 <br/>
+Date: 4th February 2018 <br/>
 
 # Introduction
 
@@ -41,9 +41,9 @@ Program Y is extremely extensible, you can
   * Web Chat
   * Twitter
   * Google Hangouts (XMPP)
-  * SMS ( coming soon )
-  * Facebook ( coming )
-  * Slack ( coming soon )
+  * Facebook
+  * Telegram
+  * TCP Socket
 
 Program-Y comes with a base set of grammars for various industry sectors, including
 
