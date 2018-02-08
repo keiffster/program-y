@@ -22,6 +22,9 @@ from programy.extensions.base import Extension
 
 class GoogleMapsExtension(Extension):
 
+    def get_geo_locator(self):
+        return GoogleMaps()
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -32,7 +35,7 @@ class GoogleMapsExtension(Extension):
         from_place = splits[1]
         to_place = splits[2]
 
-        googlemaps = GoogleMaps(bot.license_keys)
+        googlemaps = self.get_geo_locator()
 
         if command == "DISTANCE":
             distance = googlemaps.get_distance_between_addresses(from_place, to_place)

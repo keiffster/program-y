@@ -53,6 +53,10 @@ class CjkTokenizer(Tokenizer):
             (0x31C0, 0x31EF)]
         return any(s <= ord(c) <= e for s, e in r)
 
+    def _is_wildchar(self, ch):
+        MATCH_CHARS = ['^', '#', '', '*']
+        return bool(ch in MATCH_CHARS)
+
     def texts_to_words(self, texts):
         if not texts:
             return []
@@ -63,16 +67,21 @@ class CjkTokenizer(Tokenizer):
             if CjkTokenizer._is_chinese_char(ch):
                 if len(last_word) > 0:
                     words.append(last_word)
-                    last_word = ch
-                else:
-                    words.append(ch)
+                    last_word = ''
+                words.append(ch)
             else:
-                if ch == self.split_chars:
+                if self._is_wildchar(ch):
                     if len(last_word) > 0:
                         words.append(last_word)
                         last_word = ''
+                    words.append(ch)
                 else:
-                    last_word += ch
+                    if ch == self.split_chars:
+                        if len(last_word) > 0:
+                            words.append(last_word)
+                            last_word = ''
+                    else:
+                        last_word += ch
 
         if len(last_word) > 0:
             words.append(last_word)

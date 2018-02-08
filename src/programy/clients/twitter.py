@@ -189,7 +189,7 @@ class TwitterBotClient(BotClient):
                 logging.debug(status)
 
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Sending status response [@%s] [%s]", (user.screen_name, response))
+                logging.debug("Sending status response [@%s] [%s]",user.screen_name, response)
 
             self._api.update_status(status)
 

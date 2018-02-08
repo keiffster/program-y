@@ -1,8 +1,27 @@
 import unittest
 import os
-from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+import json
 
+from programy.extensions.maps.maps import GoogleMapsExtension
+from programy.utils.geo.google import GoogleMaps
+from programytest.aiml_tests.client import TestClient
+
+class MockGoogleMaps(GoogleMaps):
+
+    def __init__(self, response_file):
+        self._response_file = response_file
+
+    def _get_response_as_json(self, url):
+        with open(self._response_file) as response_data:
+            return json.load(response_data)
+
+
+class MockGoogleMapsExtension(GoogleMapsExtension):
+
+    response_file = None
+
+    def get_geo_locator(self):
+        return MockGoogleMaps(MockGoogleMapsExtension.response_file)
 
 class MapsTestsClient(TestClient):
 
@@ -13,27 +32,22 @@ class MapsTestsClient(TestClient):
         super(MapsTestsClient, self).load_configuration(arguments)
         self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
 
+
 class MapsAIMLTests(unittest.TestCase):
 
     def setUp (self):
         MapsAIMLTests.test_client = MapsTestsClient()
 
-        latlong     = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
-        distance    = os.path.dirname(__file__) +  os.sep + "distance.json"
-        directions  = os.path.dirname(__file__) +  os.sep + "directions.json"
-
-        MapsAIMLTests.test_client.bot.license_keys.load_license_key_data("""
-        GOOGLE_LATLONG=%s
-        GOOGLE_MAPS_DISTANCE=%s
-        GOOGLE_MAPS_DIRECTIONS=%s
-        """%(latlong, distance, directions))
-
     def test_distance(self):
+        MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "distance.json"
+
         response = MapsAIMLTests.test_client.bot.ask_question("testif", "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'It is 25 . 1 miles')
 
     def test_directions(self):
+        MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "directions.json"
+
         response = MapsAIMLTests.test_client.bot.ask_question("testif", "DIRECTIONS EDINBURGH KINGHORN")
         self.assertIsNotNone(response)
         self.assertTrue(response.startswith("To get there Head west on Leith St"))
