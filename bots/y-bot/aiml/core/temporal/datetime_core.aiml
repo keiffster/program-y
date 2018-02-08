@@ -425,6 +425,16 @@
     </category>
 
     <category>
+        <pattern>DAYS UNTIL TODAY</pattern>
+        <template>0</template>
+    </category>
+
+    <category>
+        <pattern>DAYS UNTIL TOMORROW</pattern>
+        <template>1</template>
+    </category>
+
+    <category>
         <pattern>DAYS UNTIL <set>weekday</set>
         </pattern>
         <template>

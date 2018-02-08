@@ -10,7 +10,6 @@
     documentation files (the "Software"), to deal in the Software without restriction, including without limitation
     the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
     and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
@@ -18,24 +17,6 @@
     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     -->
-
-    <category>
-        <pattern># WEATHER # IN * #</pattern>
-        <template>
-            <srai>
-               WEATHER LOCATION <star index="3" /> WHEN NOW
-            </srai>
-        </template>
-    </category>
-
-    <category>
-        <pattern>WHAT IS THE WEATHER #</pattern>
-        <template>
-            <srai>
-               WEATHER LOCATION UK WHEN NOW
-            </srai>
-        </template>
-    </category>
 
     <category>
         <pattern>WEATHER</pattern>
@@ -47,10 +28,10 @@
     </category>
 
     <category>
-        <pattern># WEATHER TODAY</pattern>
+        <pattern>WEATHER IN *</pattern>
         <template>
             <srai>
-               WEATHER LOCATION UK WHEN NOW
+               WEATHER LOCATION <star /> WHEN NOW
             </srai>
         </template>
     </category>
@@ -66,7 +47,7 @@
             <condition name="active">
                 <li value="true">
                     <srai>
-                        SHOW_OBSERVATION
+                        SHOW OBSERVATION
                         <extension path="programy.extensions.weather.weather.WeatherExtension">
                             OBSERVATION LOCATION <star index="1"/> WHEN <star index="2"/>
                         </extension>
@@ -79,7 +60,16 @@
 
     <category>
         <pattern>
-            SHOW_OBSERVATION WEATHER * TEMP * * VISIBILITY V * VF * WIND D * DF * S * PRESSURE P * PT * PTF * HUMIDITY * *
+            SHOW OBSERVATION UNAVAILABLE
+        </pattern>
+        <template>
+            Sorry, weather observastion not available at the moment
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            SHOW OBSERVATION WEATHER * TEMP * * VISIBILITY V * VF * WIND D * DF * S * PRESSURE P * PT * PTF * HUMIDITY * *
         </pattern>
         <template>
             <think>
@@ -106,34 +96,46 @@
 
     <category>
         <pattern>
-            SHOW_FORECAST3 WEATHER * TEMP * FEELS * WINDDIR * WINDDIRFULL * WINDSPEED * VIS * UVINDEX * UVGUIDE * RAINPROB * HUMIDITY *
+            FORECAST LOCATION * DAY *
         </pattern>
         <template>
             <think>
-                <set name="weather"><star index="1" /></set>
-                <set name="temperature"><star index="2" /></set>
-                <set name="feels"><star index="3" /></set>
-                <set name="winddir"><star index="4" /></set>
-                <set name="winddirfull"><star index="5" /></set>
-                <set name="windspeed"><star index="6" /></set>
-                <set name="visibility"><star index="7" /></set>
-                <set name="uvindex"><star index="8" /></set>
-                <set name="uvguide"><star index="9" /></set>
-                <set name="rainprob"><star index="10" /></set>
-                <set name="humidity"><star index="11" /></set>
+                <set name="active"><bot name="weather" /></set>
             </think>
-
+            <condition name="active">
+                <li value="true">
+                    <think>
+                        <set name="daysforward"><srai>DAYS UNTIL <star index="2"/></srai></set>
+                    </think>
+                    <srai>
+                        SHOW FORECAST5DAY
+                        <extension path="programy.extensions.weather.weather.WeatherExtension">
+                            FORECAST5DAY LOCATION <star index="1"/> WHEN <get name="daysforward" />
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my Weather Feed is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
         </template>
     </category>
 
     <category>
         <pattern>
-            SHOW_FORECAST24 WEATHER TYPE * WINDDIR * WINDGUST * WINDSPEED * TEMP * FEELS * HUMID * RAINPROB * VISTEXT * WEATHER *
+            SHOW FORECAST5DAY UNAVAILABLE
+        </pattern>
+        <template>
+            Sorry, forecasting not available at the moment
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+             SHOW FORECAST5DAY WEATHER TYPE * WINDDIR * WINDGUST * WINDSPEED * TEMP * FEELS * HUMID * RAINPROB * VISTEXT * WEATHER *
         </pattern>
         <template>
             <think>
                 <set name="type"><star index="1" /></set>
-                <set name="windir"><star index="2" /></set>
+                <set name="winddir"><star index="2" /></set>
                 <set name="windgust"><star index="3" /></set>
                 <set name="windspeed"><star index="4" /></set>
                 <set name="temp"><star index="5" /></set>
@@ -143,7 +145,123 @@
                 <set name="visibility"><star index="9" /></set>
                 <set name="weather"><star index="10" /></set>
             </think>
+            According to th UK Met Office, it will be <get name="weather" />,
+            with a temperature of <get name="temp" />'C,
+            but it will feel like <get name="feels" />'C,
+            with wind from <get name="winddir" />  at <get name="windspeed" /> mph.
+            There will be a <get name="rainprob" />% chance of rain.
         </template>
     </category>
+
+    <category>
+        <pattern>
+            FORECAST LOCATION * TIME *
+        </pattern>
+        <template>
+            <think>
+                <set name="active"><bot name="weather" /></set>
+            </think>
+            <condition name="active">
+                <li value="true">
+                    <think>
+                        <set name="hoursforward"><star index="2"/></set>
+                        <!-- <set name="hoursforward"><srai>HOURS UNTIL <star index="2"/></srai></set> -->
+                    </think>
+                    <srai>
+                        SHOW FORECAST24HOUR
+                        <extension path="programy.extensions.weather.weather.WeatherExtension">
+                            FORECAST24HOUR LOCATION <star index="1"/> WHEN <get name="hoursforward" />
+                        </extension>
+                    </srai>
+                </li>
+                <li>Unfortunately my Weather Feed is not listening right now, you will need to speak to my bot master to enable it.</li>
+            </condition>
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            SHOW FORECAST24HOUR UNAVAILABLE
+        </pattern>
+        <template>
+            Sorry, forecasting not available at the moment
+        </template>
+    </category>
+
+    <category>
+        <pattern>
+            SHOW FORECAST24HOUR WEATHER * TEMP * FEELS * WINDDIR * WINDDIRFULL * WINDSPEED * VIS * UVINDEX * UVGUIDE * RAINPROB * HUMIDITY *
+        </pattern>
+        <template>
+            <think>
+                <set name="weather"><star index="1" /></set>
+                <set name="temp"><star index="2" /></set>
+                <set name="feels"><star index="3" /></set>
+                <set name="windir"><star index="4" /></set>
+                <set name="winddirfull"><star index="5" /></set>
+                <set name="windspeed"><star index="6" /></set>
+                <set name="visibility"><star index="7" /></set>
+                <set name="uvindex"><star index="8" /></set>
+                <set name="uvguide"><star index="9" /></set>
+                <set name="rainprob"><star index="10" /></set>
+                <set name="humidity"><star index="11" /></set>
+            </think>
+            According to th UK Met Office, it will be <get name="weather" />,
+            with a temperature of <get name="temp" />'C,
+            but it will feel like <get name="feels" />'C,
+            Wind will be <get name="windspeed" /> mph,
+            and there will be a <get name="rainprob" />% chance of rain.
+        </template>
+    </category>
+
+    <category>
+        <pattern>WILL IT RAIN TODAY IN *</pattern>
+        <template>
+            <think><set name="topic">RAINTODAYPROB</set></think>
+            <srai>FORECAST LOCATION <star /> TIME 1 </srai>
+        </template>
+    </category>
+
+    <topic name="RAINTODAYPROB">
+        <category>
+            <pattern>
+                SHOW FORECAST24HOUR WEATHER * TEMP * FEELS * WINDDIR * WINDDIRFULL * WINDSPEED * VIS * UVINDEX * UVGUIDE * RAINPROB * HUMIDITY *
+            </pattern>
+            <template>
+                <think>
+                    <set name="temp"><star index="2" /></set>
+                    <set name="feels"><star index="3" /></set>
+                    <set name="rainprob"><star index="10" /></set>
+                    <set name="topic" />
+                </think>
+                <sentence>There is a <star index="10" /> percent chance of rain today</sentence>
+            </template>
+        </category>
+    </topic>
+    
+    <category>
+        <pattern>WILL IT RAIN TOMORROW IN *</pattern>
+        <template>
+            <think><set name="topic">RAINTOMORROWPROB</set></think>
+            <srai>FORECAST LOCATION <star /> TIME 12 </srai>
+        </template>
+    </category>
+
+    <topic name="RAINTOMORROWPROB">
+        <category>
+            <pattern>
+                SHOW FORECAST24HOUR WEATHER * TEMP * FEELS * WINDDIR * WINDDIRFULL * WINDSPEED * VIS * UVINDEX * UVGUIDE * RAINPROB * HUMIDITY *
+            </pattern>
+            <template>
+                <think>
+                    <set name="temp"><star index="2" /></set>
+                    <set name="feels"><star index="3" /></set>
+                    <set name="rainprob"><star index="10" /></set>
+                    <set name="topic" />
+                </think>
+                <sentence>There is a <star index="10" /> percent chance of rain today</sentence>
+            </template>
+        </category>
+    </topic>
 
 </aiml>

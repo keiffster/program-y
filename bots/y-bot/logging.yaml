@@ -3,7 +3,7 @@ disable_existing_loggers: False
 
 formatters:
   simple:
-    format: '%(asctime)s  %(name)-10s %(levelname)-7s %(message)s'
+    format: '%(asctime)s  %(name)-10s %(levelname)-7s - %(message)s'
 
 handlers:
     file:

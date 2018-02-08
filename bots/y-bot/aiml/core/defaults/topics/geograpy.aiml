@@ -6620,10 +6620,6 @@
         </template>
     </category>
     <category>
-        <pattern>WHERE IS SCOTLAND</pattern>
-        <template>Scotland shares an island with England and Wales, off the coast of Europe.</template>
-    </category>
-    <category>
         <pattern>WHERE IS ICELAND</pattern>
         <template>
             <set name="it">

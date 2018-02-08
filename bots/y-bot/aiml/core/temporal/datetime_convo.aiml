@@ -97,7 +97,7 @@
 
     <category>
         <pattern>
-            # WHAT # TODAY ^
+            # WHAT * TODAY ^
         </pattern>
         <template>
             <srai>DAY</srai>
