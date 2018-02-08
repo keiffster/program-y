@@ -10,21 +10,14 @@ class WeatherExtensionTests(unittest.TestCase):
     def setUp(self):
         self.test_client = TestClient()
 
-        latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
-        observation = os.path.dirname(__file__) + os.sep + "observation.json"
-        threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
-        daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
-
         self.test_client.bot.license_keys.load_license_key_data("""
-        GOOGLE_LATLONG=%s
         METOFFICE_API_KEY=TESTKEY
-        CURRENT_OBSERVATION_RESPONSE_FILE=%s
-        THREE_HOURLY_FORECAST_RESPONSE_FILE=%s
-        DAILY_FORECAST_RESPONSE_FILE=%s
-        """%(latlong, observation, threehourly, daily))
+        """)
         self.clientid = "testid"
 
     def test_observation(self):
+        latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
+        observation = os.path.dirname(__file__) + os.sep + "observation.json"
 
         weather = WeatherExtension()
         self.assertIsNotNone(weather)
@@ -43,6 +36,8 @@ class WeatherExtensionTests(unittest.TestCase):
         self.assertIsNone(result)
 
     def test_forecast3(self):
+        latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
+        threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
 
         weather = WeatherExtension()
         self.assertIsNotNone(weather)
@@ -52,6 +47,8 @@ class WeatherExtensionTests(unittest.TestCase):
         self.assertEquals("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)
 
     def test_forecast24(self):
+        latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
+        daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
 
         weather = WeatherExtension()
         self.assertIsNotNone(weather)

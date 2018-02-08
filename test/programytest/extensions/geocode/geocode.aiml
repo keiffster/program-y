@@ -24,7 +24,7 @@
             POSTCODE *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+            <extension path="programytest.extensions.geocode.test_aiml.MockGeoCodeExtension">
                 POSTCODE1 <star />
             </extension>
         </template>
@@ -35,7 +35,7 @@
             POSTCODE * *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+            <extension path="programytest.extensions.geocode.test_aiml.MockGeoCodeExtension">
                 POSTCODE2 <star index="1"/> <star index="2"/>
             </extension>
         </template>
@@ -46,7 +46,7 @@
             LOCATION *
         </pattern>
         <template>
-            <extension path="programy.extensions.geocode.geocode.GeoCodeExtension">
+            <extension path="programytest.extensions.geocode.test_aiml.MockGeoCodeExtension">
                 LOCATION <star index="1"/>
             </extension>
         </template>

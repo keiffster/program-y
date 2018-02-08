@@ -206,9 +206,10 @@ class Bot(object):
 
     def load_conversation(self, clientid):
         if self._conversation_storage is not None:
-            conversation = self._conversations[clientid]
-            self._conversation_storage.load_conversation(conversation, clientid,
-                                                         self.configuration.conversations.restore_last_topic)
+            if clientid in self._conversations:
+                conversation = self._conversations[clientid]
+                self._conversation_storage.load_conversation(conversation, clientid,
+                                                             self.configuration.conversations.restore_last_topic)
 
     def save_conversation(self, clientid):
         if self._conversation_storage is not None:

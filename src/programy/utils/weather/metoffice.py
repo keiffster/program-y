@@ -48,7 +48,7 @@ class DataPoint(object):
         if name in json_data:
             return json_data[name]
         else:
-            if data_type == MetOfficeWeatherReport.ObservationDataPoint:
+            if data_type == MetOfficeWeatherReport.OBSERVATION:
                 if logging.getLogger().isEnabledFor(logging.WARNING):
                     logging.warning('%s attribute missing from ObservationDataPoint data point', name)
             elif data_type == MetOfficeWeatherReport.FORECAST:
@@ -333,7 +333,7 @@ class Report(object):
 
     def parse_json(self, json_data):
         for element in json_data['Rep']:
-            if self._data_type == MetOfficeWeatherReport.ObservationDataPoint:
+            if self._data_type == MetOfficeWeatherReport.OBSERVATION:
                 period = ObservationDataPoint()
             elif self._data_type == MetOfficeWeatherReport.FORECAST:
                 if self._time_period == metoffer.DAILY:
@@ -353,7 +353,7 @@ class Report(object):
             period.parse_json(element, self._data_type, self._time_period)
             self._time_periods.append(period)
 
-        if self._data_type == MetOfficeWeatherReport.ObservationDataPoint or self._time_period == metoffer.THREE_HOURLY:
+        if self._data_type == MetOfficeWeatherReport.OBSERVATION or self._time_period == metoffer.THREE_HOURLY:
             if self._time_periods:
                 self._time_periods.sort(key=lambda period: int(period._time))
 
@@ -510,12 +510,13 @@ class SiteReport(object):
 class MetOfficeWeatherReport(object):
 
     FORECAST = 1
-    ObservationDataPoint = 2
+    OBSERVATION = 2
 
     def __init__(self, data_type, time_period=0):
         self._data_type = data_type
         self._time_period = time_period
         self._site_report = None
+        self._time_periods = {}
 
     def parse_json(self, json_data):
         if "SiteRep" not in json_data:
@@ -524,110 +525,124 @@ class MetOfficeWeatherReport(object):
             self._site_report = SiteReport(self._data_type, self._time_period)
             self._site_report.parse_json(json_data["SiteRep"])
 
-    def get_latest_report(self):
-        return self._site_report._dv._location.get_latest_report()
+        self.cache_time_periods()
 
-    def get_latest(self):
-        return self.get_latest_report().get_last_time_period()
 
-    def get_report_for_date(self, report_date):
-        return self._site_report._dv._location.get_report_for_date(report_date)
+class MetOfficeObservation(MetOfficeWeatherReport):
 
+    def __init__(self):
+        MetOfficeWeatherReport.__init__(self, MetOfficeWeatherReport.OBSERVATION)
+
+    def cache_time_periods(self):
+        self._time_periods.clear()
+        for report in self._site_report._dv._location._reports:
+            for time_period in report._time_periods:
+                fulltime = report._report_date + datetime.timedelta(minutes=int(time_period._time))
+                self._time_periods[fulltime] = time_period
+
+    def get_observations(self):
+        return self._time_periods
+
+    def get_latest_observation(self):
+        items = list(self._time_periods.items())
+        return items[-1][1]
+
+    def get_last_n_observations(self, n):
+        return self._time_periods[-n]
+
+
+class MetOfficeForecast(MetOfficeWeatherReport):
+
+    def __init__(self, time_period):
+        MetOfficeWeatherReport.__init__(self, MetOfficeWeatherReport.FORECAST, time_period)
+
+    def get_forecasts(self):
+        return self._time_periods
+
+    def get_forecasts(self):
+        return self._time_periods
+
+    def get_latest_forecast(self):
+        items = list(self._time_periods.items())
+        return items[-1][1]
+
+
+class MetOffice5DayForecast(MetOfficeForecast):
+
+    def __init__(self):
+        MetOfficeForecast.__init__(self, metoffer.DAILY)
+
+    def cache_time_periods(self):
+        self._time_periods.clear()
+        for report in self._site_report._dv._location._reports:
+            daytime = report._report_date + datetime.timedelta(hours=6)
+            self._time_periods[daytime] = report._time_periods[0]
+            nighttime = report._report_date + datetime.timedelta(hours=18)
+            self._time_periods[nighttime] = report._time_periods[1]
+
+    def get_forecast_for_n_days_ahead(self, days):
+        search_date = datetime.datetime.now() + datetime.timedelta(days=days)
+        for day_forecast in self._time_periods.keys():
+            if day_forecast > search_date:
+                return self._time_periods[day_forecast].to_program_y_text()
+        return None
+
+class MetOffice24HourForecast(MetOfficeForecast):
+
+    def __init__(self):
+        MetOfficeForecast.__init__(self, metoffer.THREE_HOURLY)
+
+    def cache_time_periods(self):
+        self._time_periods.clear()
+        for report in self._site_report._dv._location._reports:
+            for time_period in report._time_periods:
+                period_datetime = report._report_date + datetime.timedelta(minutes=int(time_period._time))
+                self._time_periods[period_datetime] = time_period
+
+    def get_forecast_for_n_hours_ahead(self, hours):
+        search_date = datetime.datetime.now() + datetime.timedelta(hours=hours)
+        for hour_forecast in self._time_periods.keys():
+            if hour_forecast > search_date:
+                return self._time_periods[hour_forecast].to_program_y_text()
+        return None
 
 class MetOffice(object):
 
     def __init__(self, license_keys):
-
-        self.current_observation_response_file = None
-        self.three_hourly_forecast_response_file = None
-        self.daily_forecast_response_file = None
 
         if license_keys.has_key('METOFFICE_API_KEY'):
             api_key = license_keys.get_key('METOFFICE_API_KEY')
         else:
             raise Exception("No valid license key METOFFICE_API_KEY found")
 
-        if license_keys.has_key('CURRENT_OBSERVATION_RESPONSE_FILE'):
-            self.current_observation_response_file = license_keys.get_key('CURRENT_OBSERVATION_RESPONSE_FILE')
-        if license_keys.has_key('THREE_HOURLY_FORECAST_RESPONSE_FILE'):
-            self.three_hourly_forecast_response_file = license_keys.get_key('THREE_HOURLY_FORECAST_RESPONSE_FILE')
-        if license_keys.has_key('DAILY_FORECAST_RESPONSE_FILE'):
-            self.daily_forecast_response_file = license_keys.get_key('DAILY_FORECAST_RESPONSE_FILE')
-
         self._met_office_api = metoffer.MetOffer(api_key)
 
-    def set_current_observation_response_file(self, filename):
-        self.current_observation_response_file = filename
+    def get_forecast_data(self, lat, lon, forecast_type):
+        return self._met_office_api.nearest_loc_forecast(lat, lon, forecast_type)
 
-    def set_three_hourly_forecast_response_file(self, filename):
-        self.three_hourly_forecast_response_file = filename
-
-    def set_daily_forecast_response_file(self, filename):
-        self.daily_forecast_response_file = filename
+    def get_observation_data(self, lat, lon):
+        return self._met_office_api.nearest_loc_obs(lat, lon)
 
     def nearest_location_forecast(self, lat, lon, forecast_type):
-        if forecast_type == metoffer.THREE_HOURLY and self.three_hourly_forecast_response_file is not None:
-            json_data = self.load_datapoints_from_file(self.three_hourly_forecast_response_file)
-        elif forecast_type == metoffer.DAILY and self.daily_forecast_response_file is not None:
-            json_data = self.load_datapoints_from_file(self.daily_forecast_response_file)
-        else:
-            json_data = self._met_office_api.nearest_loc_forecast(lat, lon, forecast_type)
-        forecast = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST, forecast_type)
+        if forecast_type == metoffer.THREE_HOURLY:
+            forecast = MetOffice24HourForecast()
+        elif forecast_type == metoffer.DAILY:
+            forecast = MetOffice5DayForecast()
+        json_data = self.get_forecast_data(lat, lon, forecast_type)
         forecast.parse_json(json_data)
         return forecast
 
-    def nearest_location_forecast_to_file(self, lat, lon, forecast_type, filename):
-        json_data = self._met_office_api.nearest_loc_forecast(lat, lon, forecast_type)
-        self.write_datapoints_to_file(json_data, filename)
-        forecast = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST, forecast_type)
-        forecast.parse_json(json_data)
-        return forecast
+    def twentyfour_hour_forecast(self, lat, lon):
+        return self.nearest_location_forecast(lat, lon, metoffer.THREE_HOURLY)
 
-    def nearest_location_forecast_from_file(self, forecast_type, filename):
-        json_data = self.load_datapoints_from_file(filename)
-        return self.nearest_location_forecast_from_json(forecast_type, json_data)
-
-    def nearest_location_forecast_from_json(self, forecast_type, json_data):
-        forecast = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST, forecast_type)
-        forecast.parse_json(json_data)
-        return forecast
-
-    def nearest_location_observation(self, lat, lon):
-        if self.current_observation_response_file is None:
-            json_data = self._met_office_api.nearest_loc_obs(lat, lon)
-        else:
-            json_data = self.load_datapoints_from_file(self.current_observation_response_file)
-        report = MetOfficeWeatherReport(MetOfficeWeatherReport.ObservationDataPoint)
-        report.parse_json(json_data)
-        return report
-
-    def nearest_location_observation_to_file(self, lat, lon, filename):
-        json_data = self._met_office_api.nearest_loc_obs(lat, lon)
-        self.write_datapoints_to_file(json_data, filename)
-
-    def nearest_location_observation_from_file(self, filename):
-        json_data = self.load_datapoints_from_file(filename)
-        return self.nearest_location_observation_from_json(json_data)
-
-    def nearest_location_observation_from_json(self, json_data):
-        report = MetOfficeWeatherReport(MetOfficeWeatherReport.ObservationDataPoint)
-        report.parse_json(json_data)
-        return report
-
-    def daily_forecast(self, lat, lon):
+    def five_day_forecast(self, lat, lon):
         return self.nearest_location_forecast(lat, lon, metoffer.DAILY)
 
-    def three_hourly_forecast(self, lat, lon):
-        return self.nearest_location_forecast(lat, lon, metoffer.THREE_HOURLY)
+    def nearest_location_observation(self, lat, lon):
+        report = MetOfficeObservation()
+        json_data = self.get_observation_data(lat, lon)
+        report.parse_json(json_data)
+        return report
 
     def current_observation(self, lat, lon):
         return self.nearest_location_observation(lat, lon)
-
-    def write_datapoints_to_file(self, datapoints, filename):
-        with open(filename, "w+", encoding="utf-8") as data_file:
-            json.dump(datapoints, data_file, sort_keys=True, indent=2)
-
-    def load_datapoints_from_file(self, filename):
-        with open(filename, 'r+') as json_data_file:
-            json_data = json.load(json_data_file)
-            return json_data

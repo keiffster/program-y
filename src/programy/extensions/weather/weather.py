@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import logging
+import datetime
 
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
@@ -22,6 +23,12 @@ from programy.extensions.base import Extension
 
 
 class WeatherExtension(Extension):
+
+    def get_geo_locator(self, bot):
+        return GoogleMaps()
+
+    def get_met_office(self, bot):
+        return MetOffice(bot.license_keys)
 
     # WEATHER [OBSERVATION|FORECAST3|FORECAST24] LOCATION * WHEN *
 
@@ -35,7 +42,7 @@ class WeatherExtension(Extension):
             return None
 
         type = splits[0]
-        if type not in ['OBSERVATION', 'FORECAST3', 'FORECAST24']:
+        if type not in ['OBSERVATION', 'FORECAST5DAY', 'FORECAST24HOUR']:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Weather - Type not understood [%s]"%type)
             return None
@@ -55,54 +62,61 @@ class WeatherExtension(Extension):
             return None
 
         if type == 'OBSERVATION':
-            return self.get_observation(bot, clientid, postcode, when)
-        elif type == 'FORECAST3':
-            return self.get_forecast3(bot, clientid, postcode, when)
-        elif type == 'FORECAST24':
-            return self.get_forecast24(bot, clientid, postcode, when)
+            return self.current_observation(bot, postcode)
+        elif type == 'FORECAST5DAY':
+            return self.five_day_forecast(bot, postcode, when)
+        elif type == 'FORECAST24HOUR':
+            return self.twentyfour_hour_forecast(bot, postcode, when)
 
-    def get_observation(self, bot, clientid, postcode, when):
+    def current_observation(self, bot, postcode):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting weather observation for [%s] at time [%s]"%(postcode, when))
+            logging.debug("Getting weather observation for [%s]"%(postcode))
 
-        googlemaps = GoogleMaps(bot.license_keys)
+        googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        met_office = MetOffice(bot.license_keys)
+        met_office = self.get_met_office(bot)
 
         observation = met_office.current_observation(latlng.latitude, latlng.longitude)
         if observation is not None:
-            return observation.get_latest().to_program_y_text()
+            #TODO Use 'when" paramter to extract datapoints
+            return observation.get_latest_observation().to_program_y_text()
         else:
-            return None
+            return "UNAVAILABLE"
 
-    def get_forecast3(self, bot, clientid, postcode, when):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting 3 hourly weather forecast for [%s] at time [%s]"%(postcode, when))
-
-        googlemaps = GoogleMaps(bot.license_keys)
-        latlng = googlemaps.get_latlong_for_location(postcode)
-
-        met_office = MetOffice(bot.license_keys)
-
-        forecast = met_office.three_hourly_forecast(latlng.latitude, latlng.longitude)
-        if forecast is not None:
-            return forecast.get_latest().to_program_y_text()
-        else:
-            return None
-
-    def get_forecast24(self, bot, clientid, postcode, when):
+    def twentyfour_hour_forecast(self, bot, postcode, when):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Getting 24 hour weather forecast for [%s] at time [%s]"%(postcode, when))
 
-        googlemaps = GoogleMaps(bot.license_keys)
+        googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        met_office = MetOffice(bot.license_keys)
+        met_office = self.get_met_office(bot)
 
-        forecast = met_office.daily_forecast(latlng.latitude, latlng.longitude)
+        forecast = met_office.twentyfour_hour_forecast(latlng.latitude, latlng.longitude)
         if forecast is not None:
-            return forecast.get_latest().to_program_y_text()
+            datapoint = forecast.get_forecast_for_n_hours_ahead(int(when))
+            if datapoint is None:
+                datapoint = forecast.get_latest_forecast().to_program_y_text()
+            return datapoint
         else:
-            return None
+            return "UNAVAILABLE"
+
+    def five_day_forecast(self, bot, postcode, when):
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Getting 5 day forecast for [%s] at time [%s]"%(postcode, when))
+
+        googlemaps = self.get_geo_locator(bot)
+        latlng = googlemaps.get_latlong_for_location(postcode)
+
+        met_office = self.get_met_office(bot)
+
+        forecast = met_office.five_day_forecast(latlng.latitude, latlng.longitude)
+        if forecast is not None:
+            datapoint = forecast.get_forecast_for_n_days_ahead(int(when))
+            if datapoint is None:
+                datapoint = forecast.get_latest_forecast().to_program_y_text()
+            return datapoint
+        else:
+            return "UNAVAILABLE"
 

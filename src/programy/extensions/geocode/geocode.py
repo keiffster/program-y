@@ -22,6 +22,9 @@ from programy.extensions.base import Extension
 
 class GeoCodeExtension(Extension):
 
+    def get_geo_locator(self):
+        return  GoogleMaps()
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, bot, clientid, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -37,7 +40,8 @@ class GeoCodeExtension(Extension):
         else:
             return None
 
-        googlemaps = GoogleMaps(bot.license_keys)
+        googlemaps = self.get_geo_locator()
+
         latlng = googlemaps.get_latlong_for_location(location)
         if latlng is not None:
             str_lat = str(latlng.latitude)

@@ -1,6 +1,8 @@
 import unittest
 import os
 import datetime
+import json
+
 import metoffer
 
 from programy.utils.weather.metoffice import DataPoint
@@ -12,10 +14,11 @@ from programy.utils.weather.metoffice import Report
 from programy.utils.weather.metoffice import Location
 from programy.utils.weather.metoffice import DV
 from programy.utils.weather.metoffice import SiteReport
-from programy.utils.weather.metoffice import MetOfficeWeatherReport
+from programy.utils.weather.metoffice import MetOffice24HourForecast, MetOffice5DayForecast, MetOfficeObservation, MetOfficeWeatherReport
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.text.dateformat import DateFormatter
 from programy.utils.license.keys import LicenseKeys
+
 
 class DataPointTets(unittest.TestCase):
 
@@ -27,8 +30,8 @@ class DataPointTets(unittest.TestCase):
         dp = DataPoint()
         self.assertIsNotNone(dp)
 
-        self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.ObservationDataPoint))
-        self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.ObservationDataPoint, None))
+        self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.OBSERVATION))
+        self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.OBSERVATION, None))
 
         self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.FORECAST, metoffer.THREE_HOURLY))
         self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.FORECAST, metoffer.THREE_HOURLY))
@@ -62,6 +65,7 @@ class DataPointTets(unittest.TestCase):
         self.assertEquals(dp.direction_to_full_text(''), "Unknown")
         self.assertEquals(dp.direction_to_full_text('other'), "Unknown")
         self.assertEquals(dp.direction_to_full_text(None), "Unknown")
+
 
 class DailyForecastDayDataPointTests(unittest.TestCase):
 
@@ -119,6 +123,7 @@ class DailyForecastDayDataPointTests(unittest.TestCase):
 
         self.assertEquals("WEATHER TYPE Day WINDDIR S WINDSPEED 9 WINDGUST 16 TEMP 15 FEELS 13 HUMID 54 RAINPROB 0 UVINDEX 4 UVGUIDE Moderate exposure. Seek shade during midday hours, cover up and wear sunscreen VIS Very good - Between 20-40 km WEATHER Sunny day", dp.to_program_y_text())
 
+
 class DailyForecastNightDataPointTests(unittest.TestCase):
 
     def test_init(self):
@@ -169,6 +174,7 @@ class DailyForecastNightDataPointTests(unittest.TestCase):
         self.assertEqual("Cloudy", dp._weather_type_text)
 
         self.assertEquals("WEATHER TYPE Cloudy WINDDIR SSW WINDGUST 16 WINDSPEED 7 TEMP 9 FEELS 7 HUMID 86 RAINPROB 57 VISTEXT Good - Between 10-20 km WEATHER Cloudy", dp.to_program_y_text())
+
 
 class ThreeHourlyForecastDataPointTests(unittest.TestCase):
 
@@ -317,6 +323,7 @@ class ObservationDataPointTests(unittest.TestCase):
         self.assertEqual("Unknown", dp.parse_pressure_tendancy(None))
         self.assertEqual("Unknown", dp.parse_pressure_tendancy(''))
         self.assertEqual("Unknown", dp.parse_pressure_tendancy('X'))
+
 
 class ReportTests(unittest.TestCase):
 
@@ -949,287 +956,1155 @@ class SiteReportTests(unittest.TestCase):
         self.assertEquals(metoffer.DAILY, report._time_period)
         self.assertIsNotNone("", report._dv)
 
-class MetOfficeWeatherReportTests(unittest.TestCase):
 
-    def test_init(self):
-        report = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST)
-        self.assertIsNotNone(report)
-
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, report._data_type)
-        self.assertEquals(0, report._time_period)
-        self.assertIsNone(report._site_report)
-
-    def test_init_with_timeperiod(self):
-        report = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST, metoffer.DAILY)
-        self.assertIsNotNone(report)
-
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, report._data_type)
-        self.assertEquals(metoffer.DAILY, report._time_period)
-        self.assertIsNone(report._site_report)
+class MetOffice24HourForecastTests(unittest.TestCase):
 
     def test_parse_json(self):
-        report = MetOfficeWeatherReport(MetOfficeWeatherReport.FORECAST, metoffer.DAILY)
-        self.assertIsNotNone(report)
+        forecast = MetOffice24HourForecast()
+        self.assertIsNotNone(forecast)
 
-        json = {
-            "SiteRep": {
-                "DV": {
-                    "Location": {
-                        "Period": [
-                            {
+        json_data = { "SiteRep": { "DV": { "Location": { "Period": [ { "Rep": [ { "$": "360",
+                                                              "D": "S",
+                                                              "F": "3",
+                                                              "G": "4",
+                                                              "H": "96",
+                                                              "Pp": "0",
+                                                              "S": "2",
+                                                              "T": "4",
+                                                              "U": "1",
+                                                              "V": "MO",
+                                                              "W": "1"},
+                                                            { "$": "540",
+                                                              "D": "S",
+                                                              "F": "11",
+                                                              "G": "4",
+                                                              "H": "77",
+                                                              "Pp": "0",
+                                                              "S": "2",
+                                                              "T": "11",
+                                                              "U": "2",
+                                                              "V": "GO",
+                                                              "W": "1"},
+                                                            { "$": "720",
+                                                              "D": "S",
+                                                              "F": "13",
+                                                              "G": "16",
+                                                              "H": "54",
+                                                              "Pp": "0",
+                                                              "S": "9",
+                                                              "T": "15",
+                                                              "U": "4",
+                                                              "V": "VG",
+                                                              "W": "1"},
+                                                            { "$": "900",
+                                                              "D": "SSW",
+                                                              "F": "13",
+                                                              "G": "18",
+                                                              "H": "55",
+                                                              "Pp": "0",
+                                                              "S": "11",
+                                                              "T": "15",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "1"},
+                                                            { "$": "1080",
+                                                              "D": "SSW",
+                                                              "F": "10",
+                                                              "G": "16",
+                                                              "H": "71",
+                                                              "Pp": "1",
+                                                              "S": "9",
+                                                              "T": "12",
+                                                              "U": "1",
+                                                              "V": "GO",
+                                                              "W": "3"},
+                                                            { "$": "1260",
+                                                              "D": "SSW",
+                                                              "F": "7",
+                                                              "G": "16",
+                                                              "H": "84",
+                                                              "Pp": "3",
+                                                              "S": "7",
+                                                              "T": "9",
+                                                              "U": "0",
+                                                              "V": "GO",
+                                                              "W": "7"}],
+                                                   "type": "Day",
+                                                   "value": "2017-04-03Z"},
+                                                 { "Rep": [ { "$": "0",
+                                                              "D": "SSW",
+                                                              "F": "7",
+                                                              "G": "16",
+                                                              "H": "86",
+                                                              "Pp": "16",
+                                                              "S": "7",
+                                                              "T": "9",
+                                                              "U": "0",
+                                                              "V": "GO",
+                                                              "W": "7"},
+                                                            { "$": "180",
+                                                              "D": "SSW",
+                                                              "F": "8",
+                                                              "G": "11",
+                                                              "H": "92",
+                                                              "Pp": "57",
+                                                              "S": "4",
+                                                              "T": "9",
+                                                              "U": "0",
+                                                              "V": "GO",
+                                                              "W": "12"},
+                                                            { "$": "360",
+                                                              "D": "SW",
+                                                              "F": "8",
+                                                              "G": "9",
+                                                              "H": "94",
+                                                              "Pp": "56",
+                                                              "S": "4",
+                                                              "T": "9",
+                                                              "U": "1",
+                                                              "V": "GO",
+                                                              "W": "12"},
+                                                            { "$": "540",
+                                                              "D": "NW",
+                                                              "F": "10",
+                                                              "G": "9",
+                                                              "H": "91",
+                                                              "Pp": "44",
+                                                              "S": "4",
+                                                              "T": "10",
+                                                              "U": "1",
+                                                              "V": "GO",
+                                                              "W": "8"},
+                                                            { "$": "720",
+                                                              "D": "N",
+                                                              "F": "11",
+                                                              "G": "11",
+                                                              "H": "82",
+                                                              "Pp": "43",
+                                                              "S": "7",
+                                                              "T": "12",
+                                                              "U": "2",
+                                                              "V": "GO",
+                                                              "W": "8"},
+                                                            { "$": "900",
+                                                              "D": "N",
+                                                              "F": "11",
+                                                              "G": "16",
+                                                              "H": "79",
+                                                              "Pp": "19",
+                                                              "S": "9",
+                                                              "T": "13",
+                                                              "U": "1",
+                                                              "V": "GO",
+                                                              "W": "8"},
+                                                            { "$": "1080",
+                                                              "D": "N",
+                                                              "F": "9",
+                                                              "G": "20",
+                                                              "H": "79",
+                                                              "Pp": "14",
+                                                              "S": "11",
+                                                              "T": "11",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1260",
+                                                              "D": "NNE",
+                                                              "F": "8",
+                                                              "G": "13",
+                                                              "H": "73",
+                                                              "Pp": "5",
+                                                              "S": "7",
+                                                              "T": "10",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "7"}],
+                                                   "type": "Day",
+                                                   "value": "2017-04-04Z"},
+                                                 { "Rep": [ { "$": "0",
+                                                              "D": "NNW",
+                                                              "F": "6",
+                                                              "G": "11",
+                                                              "H": "81",
+                                                              "Pp": "1",
+                                                              "S": "4",
+                                                              "T": "8",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "2"},
+                                                            { "$": "180",
+                                                              "D": "NW",
+                                                              "F": "4",
+                                                              "G": "11",
+                                                              "H": "84",
+                                                              "Pp": "1",
+                                                              "S": "4",
+                                                              "T": "6",
+                                                              "U": "0",
+                                                              "V": "GO",
+                                                              "W": "0"},
+                                                            { "$": "360",
+                                                              "D": "NW",
+                                                              "F": "4",
+                                                              "G": "11",
+                                                              "H": "82",
+                                                              "Pp": "1",
+                                                              "S": "4",
+                                                              "T": "6",
+                                                              "U": "1",
+                                                              "V": "GO",
+                                                              "W": "3"},
+                                                            { "$": "540",
+                                                              "D": "NW",
+                                                              "F": "7",
+                                                              "G": "18",
+                                                              "H": "68",
+                                                              "Pp": "4",
+                                                              "S": "9",
+                                                              "T": "9",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "720",
+                                                              "D": "NW",
+                                                              "F": "9",
+                                                              "G": "20",
+                                                              "H": "59",
+                                                              "Pp": "9",
+                                                              "S": "11",
+                                                              "T": "12",
+                                                              "U": "3",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "900",
+                                                              "D": "NW",
+                                                              "F": "10",
+                                                              "G": "22",
+                                                              "H": "57",
+                                                              "Pp": "9",
+                                                              "S": "11",
+                                                              "T": "12",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1080",
+                                                              "D": "NNW",
+                                                              "F": "9",
+                                                              "G": "18",
+                                                              "H": "62",
+                                                              "Pp": "8",
+                                                              "S": "9",
+                                                              "T": "11",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1260",
+                                                              "D": "NW",
+                                                              "F": "8",
+                                                              "G": "13",
+                                                              "H": "70",
+                                                              "Pp": "6",
+                                                              "S": "7",
+                                                              "T": "10",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "7"}],
+                                                   "type": "Day",
+                                                   "value": "2017-04-05Z"},
+                                                 { "Rep": [ { "$": "0",
+                                                              "D": "NNW",
+                                                              "F": "7",
+                                                              "G": "11",
+                                                              "H": "79",
+                                                              "Pp": "8",
+                                                              "S": "7",
+                                                              "T": "8",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "180",
+                                                              "D": "NW",
+                                                              "F": "6",
+                                                              "G": "9",
+                                                              "H": "83",
+                                                              "Pp": "5",
+                                                              "S": "4",
+                                                              "T": "7",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "360",
+                                                              "D": "WNW",
+                                                              "F": "6",
+                                                              "G": "7",
+                                                              "H": "88",
+                                                              "Pp": "3",
+                                                              "S": "4",
+                                                              "T": "7",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "3"},
+                                                            { "$": "540",
+                                                              "D": "NW",
+                                                              "F": "9",
+                                                              "G": "9",
+                                                              "H": "77",
+                                                              "Pp": "5",
+                                                              "S": "4",
+                                                              "T": "10",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "720",
+                                                              "D": "WNW",
+                                                              "F": "12",
+                                                              "G": "11",
+                                                              "H": "61",
+                                                              "Pp": "4",
+                                                              "S": "4",
+                                                              "T": "13",
+                                                              "U": "4",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "900",
+                                                              "D": "WNW",
+                                                              "F": "13",
+                                                              "G": "13",
+                                                              "H": "58",
+                                                              "Pp": "8",
+                                                              "S": "7",
+                                                              "T": "14",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1080",
+                                                              "D": "WNW",
+                                                              "F": "12",
+                                                              "G": "9",
+                                                              "H": "69",
+                                                              "Pp": "5",
+                                                              "S": "4",
+                                                              "T": "12",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "1260",
+                                                              "D": "WNW",
+                                                              "F": "9",
+                                                              "G": "9",
+                                                              "H": "77",
+                                                              "Pp": "9",
+                                                              "S": "4",
+                                                              "T": "10",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "8"}],
+                                                   "type": "Day",
+                                                   "value": "2017-04-06Z"},
+                                                 { "Rep": [ { "$": "0",
+                                                              "D": "NW",
+                                                              "F": "7",
+                                                              "G": "9",
+                                                              "H": "81",
+                                                              "Pp": "9",
+                                                              "S": "4",
+                                                              "T": "9",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "180",
+                                                              "D": "WNW",
+                                                              "F": "7",
+                                                              "G": "9",
+                                                              "H": "85",
+                                                              "Pp": "7",
+                                                              "S": "4",
+                                                              "T": "8",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "7"},
+                                                            { "$": "360",
+                                                              "D": "WNW",
+                                                              "F": "7",
+                                                              "G": "7",
+                                                              "H": "85",
+                                                              "Pp": "10",
+                                                              "S": "2",
+                                                              "T": "8",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "540",
+                                                              "D": "WNW",
+                                                              "F": "9",
+                                                              "G": "9",
+                                                              "H": "75",
+                                                              "Pp": "11",
+                                                              "S": "4",
+                                                              "T": "10",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "720",
+                                                              "D": "WNW",
+                                                              "F": "11",
+                                                              "G": "11",
+                                                              "H": "66",
+                                                              "Pp": "9",
+                                                              "S": "4",
+                                                              "T": "12",
+                                                              "U": "3",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "900",
+                                                              "D": "WNW",
+                                                              "F": "12",
+                                                              "G": "11",
+                                                              "H": "62",
+                                                              "Pp": "9",
+                                                              "S": "4",
+                                                              "T": "13",
+                                                              "U": "2",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1080",
+                                                              "D": "NW",
+                                                              "F": "12",
+                                                              "G": "7",
+                                                              "H": "65",
+                                                              "Pp": "8",
+                                                              "S": "2",
+                                                              "T": "12",
+                                                              "U": "1",
+                                                              "V": "VG",
+                                                              "W": "8"},
+                                                            { "$": "1260",
+                                                              "D": "NW",
+                                                              "F": "10",
+                                                              "G": "7",
+                                                              "H": "73",
+                                                              "Pp": "8",
+                                                              "S": "4",
+                                                              "T": "10",
+                                                              "U": "0",
+                                                              "V": "VG",
+                                                              "W": "8"}],
+                                                   "type": "Day",
+                                                   "value": "2017-04-07Z"}],
+                                     "continent": "EUROPE",
+                                     "country": "ENGLAND",
+                                     "elevation": "4.0",
+                                     "i": "351747",
+                                     "lat": "51.4007",
+                                     "lon": "-0.3337",
+                                     "name": "HAMPTON COURT PALACE"},
+                       "dataDate": "2017-04-03T09:00:00Z",
+                       "type": "Forecast"},
+               "Wx": { "Param": [ { "$": "Feels Like Temperature",
+                                    "name": "F",
+                                    "units": "C"},
+                                  { "$": "Wind Gust",
+                                    "name": "G",
+                                    "units": "mph"},
+                                  { "$": "Screen Relative Humidity",
+                                    "name": "H",
+                                    "units": "%"},
+                                  { "$": "Temperature",
+                                    "name": "T",
+                                    "units": "C"},
+                                  {"$": "Visibility", "name": "V", "units": ""},
+                                  { "$": "Wind Direction",
+                                    "name": "D",
+                                    "units": "compass"},
+                                  { "$": "Wind Speed",
+                                    "name": "S",
+                                    "units": "mph"},
+                                  { "$": "Max UV Index",
+                                    "name": "U",
+                                    "units": ""},
+                                  { "$": "Weather Type",
+                                    "name": "W",
+                                    "units": ""},
+                                  { "$": "Precipitation Probability",
+                                    "name": "Pp",
+                                    "units": "%"}]}}}
+
+        forecast.parse_json(json_data)
+
+
+class MetOffice5DayForecastTests(unittest.TestCase):
+
+    def test_parse_json(self):
+        forecast = MetOffice5DayForecast()
+        self.assertIsNotNone(forecast)
+
+        json_data = {"SiteRep": {
+                        "DV": {
+                          "Location": {
+                            "Period": [
+                              {
                                 "Rep": [
-                                    {
-                                        "$": "Day",
-                                        "D": "S",
-                                        "Dm": "15",
-                                        "FDm": "13",
-                                        "Gn": "16",
-                                        "Hn": "54",
-                                        "PPd": "0",
-                                        "S": "9",
-                                        "U": "4",
-                                        "V": "VG",
-                                        "W": "1"
-                                    },
-                                    {
-                                        "$": "Night",
-                                        "D": "SSW",
-                                        "FNm": "7",
-                                        "Gm": "16",
-                                        "Hm": "86",
-                                        "Nm": "9",
-                                        "PPn": "57",
-                                        "S": "7",
-                                        "V": "GO",
-                                        "W": "7"
-                                    }
+                                  {
+                                    "$": "Day",
+                                    "D": "S",
+                                    "Dm": "15",
+                                    "FDm": "13",
+                                    "Gn": "16",
+                                    "Hn": "54",
+                                    "PPd": "0",
+                                    "S": "9",
+                                    "U": "4",
+                                    "V": "VG",
+                                    "W": "1"
+                                  },
+                                  {
+                                    "$": "Night",
+                                    "D": "SSW",
+                                    "FNm": "7",
+                                    "Gm": "16",
+                                    "Hm": "86",
+                                    "Nm": "9",
+                                    "PPn": "57",
+                                    "S": "7",
+                                    "V": "GO",
+                                    "W": "7"
+                                  }
                                 ],
                                 "type": "Day",
                                 "value": "2017-04-03Z"
-                            },
-                            {
+                              },
+                              {
                                 "Rep": [
-                                    {
-                                        "$": "Day",
-                                        "D": "N",
-                                        "Dm": "13",
-                                        "FDm": "11",
-                                        "Gn": "11",
-                                        "Hn": "82",
-                                        "PPd": "49",
-                                        "S": "7",
-                                        "U": "2",
-                                        "V": "GO",
-                                        "W": "8"
-                                    },
-                                    {
-                                        "$": "Night",
-                                        "D": "NNW",
-                                        "FNm": "4",
-                                        "Gm": "11",
-                                        "Hm": "81",
-                                        "Nm": "5",
-                                        "PPn": "9",
-                                        "S": "4",
-                                        "V": "VG",
-                                        "W": "2"
-                                    }
+                                  {
+                                    "$": "Day",
+                                    "D": "N",
+                                    "Dm": "13",
+                                    "FDm": "11",
+                                    "Gn": "11",
+                                    "Hn": "82",
+                                    "PPd": "49",
+                                    "S": "7",
+                                    "U": "2",
+                                    "V": "GO",
+                                    "W": "8"
+                                  },
+                                  {
+                                    "$": "Night",
+                                    "D": "NNW",
+                                    "FNm": "4",
+                                    "Gm": "11",
+                                    "Hm": "81",
+                                    "Nm": "5",
+                                    "PPn": "9",
+                                    "S": "4",
+                                    "V": "VG",
+                                    "W": "2"
+                                  }
                                 ],
                                 "type": "Day",
                                 "value": "2017-04-04Z"
-                            },
-                            {
+                              },
+                              {
                                 "Rep": [
-                                    {
-                                        "$": "Day",
-                                        "D": "NW",
-                                        "Dm": "12",
-                                        "FDm": "10",
-                                        "Gn": "20",
-                                        "Hn": "59",
-                                        "PPd": "9",
-                                        "S": "11",
-                                        "U": "3",
-                                        "V": "VG",
-                                        "W": "8"
-                                    },
-                                    {
-                                        "$": "Night",
-                                        "D": "NNW",
-                                        "FNm": "6",
-                                        "Gm": "11",
-                                        "Hm": "79",
-                                        "Nm": "6",
-                                        "PPn": "8",
-                                        "S": "7",
-                                        "V": "VG",
-                                        "W": "7"
-                                    }
+                                  {
+                                    "$": "Day",
+                                    "D": "NW",
+                                    "Dm": "12",
+                                    "FDm": "10",
+                                    "Gn": "20",
+                                    "Hn": "59",
+                                    "PPd": "9",
+                                    "S": "11",
+                                    "U": "3",
+                                    "V": "VG",
+                                    "W": "8"
+                                  },
+                                  {
+                                    "$": "Night",
+                                    "D": "NNW",
+                                    "FNm": "6",
+                                    "Gm": "11",
+                                    "Hm": "79",
+                                    "Nm": "6",
+                                    "PPn": "8",
+                                    "S": "7",
+                                    "V": "VG",
+                                    "W": "7"
+                                  }
                                 ],
                                 "type": "Day",
                                 "value": "2017-04-05Z"
-                            },
-                            {
+                              },
+                              {
                                 "Rep": [
-                                    {
-                                        "$": "Day",
-                                        "D": "WNW",
-                                        "Dm": "14",
-                                        "FDm": "13",
-                                        "Gn": "11",
-                                        "Hn": "61",
-                                        "PPd": "8",
-                                        "S": "4",
-                                        "U": "4",
-                                        "V": "VG",
-                                        "W": "7"
-                                    },
-                                    {
-                                        "$": "Night",
-                                        "D": "NW",
-                                        "FNm": "7",
-                                        "Gm": "9",
-                                        "Hm": "81",
-                                        "Nm": "7",
-                                        "PPn": "10",
-                                        "S": "4",
-                                        "V": "VG",
-                                        "W": "8"
-                                    }
+                                  {
+                                    "$": "Day",
+                                    "D": "WNW",
+                                    "Dm": "14",
+                                    "FDm": "13",
+                                    "Gn": "11",
+                                    "Hn": "61",
+                                    "PPd": "8",
+                                    "S": "4",
+                                    "U": "4",
+                                    "V": "VG",
+                                    "W": "7"
+                                  },
+                                  {
+                                    "$": "Night",
+                                    "D": "NW",
+                                    "FNm": "7",
+                                    "Gm": "9",
+                                    "Hm": "81",
+                                    "Nm": "7",
+                                    "PPn": "10",
+                                    "S": "4",
+                                    "V": "VG",
+                                    "W": "8"
+                                  }
                                 ],
                                 "type": "Day",
                                 "value": "2017-04-06Z"
-                            },
-                            {
+                              },
+                              {
                                 "Rep": [
-                                    {
-                                        "$": "Day",
-                                        "D": "WNW",
-                                        "Dm": "13",
-                                        "FDm": "12",
-                                        "Gn": "11",
-                                        "Hn": "66",
-                                        "PPd": "11",
-                                        "S": "4",
-                                        "U": "3",
-                                        "V": "VG",
-                                        "W": "8"
-                                    },
-                                    {
-                                        "$": "Night",
-                                        "D": "NW",
-                                        "FNm": "8",
-                                        "Gm": "7",
-                                        "Hm": "76",
-                                        "Nm": "8",
-                                        "PPn": "8",
-                                        "S": "4",
-                                        "V": "VG",
-                                        "W": "7"
-                                    }
+                                  {
+                                    "$": "Day",
+                                    "D": "WNW",
+                                    "Dm": "13",
+                                    "FDm": "12",
+                                    "Gn": "11",
+                                    "Hn": "66",
+                                    "PPd": "11",
+                                    "S": "4",
+                                    "U": "3",
+                                    "V": "VG",
+                                    "W": "8"
+                                  },
+                                  {
+                                    "$": "Night",
+                                    "D": "NW",
+                                    "FNm": "8",
+                                    "Gm": "7",
+                                    "Hm": "76",
+                                    "Nm": "8",
+                                    "PPn": "8",
+                                    "S": "4",
+                                    "V": "VG",
+                                    "W": "7"
+                                  }
                                 ],
                                 "type": "Day",
                                 "value": "2017-04-07Z"
+                              }
+                            ],
+                            "continent": "EUROPE",
+                            "country": "ENGLAND",
+                            "elevation": "4.0",
+                            "i": "351747",
+                            "lat": "51.4007",
+                            "lon": "-0.3337",
+                            "name": "HAMPTON COURT PALACE"
+                          },
+                          "dataDate": "2017-04-03T09:00:00Z",
+                          "type": "Forecast"
+                        },
+                        "Wx": {
+                          "Param": [
+                            {
+                              "$": "Feels Like Day Maximum Temperature",
+                              "name": "FDm",
+                              "units": "C"
+                            },
+                            {
+                              "$": "Feels Like Night Minimum Temperature",
+                              "name": "FNm",
+                              "units": "C"
+                            },
+                            {
+                              "$": "Day Maximum Temperature",
+                              "name": "Dm",
+                              "units": "C"
+                            },
+                            {
+                              "$": "Night Minimum Temperature",
+                              "name": "Nm",
+                              "units": "C"
+                            },
+                            {
+                              "$": "Wind Gust Noon",
+                              "name": "Gn",
+                              "units": "mph"
+                            },
+                            {
+                              "$": "Wind Gust Midnight",
+                              "name": "Gm",
+                              "units": "mph"
+                            },
+                            {
+                              "$": "Screen Relative Humidity Noon",
+                              "name": "Hn",
+                              "units": "%"
+                            },
+                            {
+                              "$": "Screen Relative Humidity Midnight",
+                              "name": "Hm",
+                              "units": "%"
+                            },
+                            {
+                              "$": "Visibility",
+                              "name": "V",
+                              "units": ""
+                            },
+                            {
+                              "$": "Wind Direction",
+                              "name": "D",
+                              "units": "compass"
+                            },
+                            {
+                              "$": "Wind Speed",
+                              "name": "S",
+                              "units": "mph"
+                            },
+                            {
+                              "$": "Max UV Index",
+                              "name": "U",
+                              "units": ""
+                            },
+                            {
+                              "$": "Weather Type",
+                              "name": "W",
+                              "units": ""
+                            },
+                            {
+                              "$": "Precipitation Probability Day",
+                              "name": "PPd",
+                              "units": "%"
+                            },
+                            {
+                              "$": "Precipitation Probability Night",
+                              "name": "PPn",
+                              "units": "%"
                             }
-                        ],
-                        "continent": "EUROPE",
-                        "country": "ENGLAND",
-                        "elevation": "4.0",
-                        "i": "351747",
-                        "lat": "51.4007",
-                        "lon": "-0.3337",
-                        "name": "HAMPTON COURT PALACE"
-                    },
-                    "dataDate": "2017-04-03T09:00:00Z",
-                    "type": "Forecast"
-                },
-                "Wx": {
-                    "Param": [
-                        {
-                            "$": "Feels Like Day Maximum Temperature",
-                            "name": "FDm",
-                            "units": "C"
-                        },
-                        {
-                            "$": "Feels Like Night Minimum Temperature",
-                            "name": "FNm",
-                            "units": "C"
-                        },
-                        {
-                            "$": "Day Maximum Temperature",
-                            "name": "Dm",
-                            "units": "C"
-                        },
-                        {
-                            "$": "Night Minimum Temperature",
-                            "name": "Nm",
-                            "units": "C"
-                        },
-                        {
-                            "$": "Wind Gust Noon",
-                            "name": "Gn",
-                            "units": "mph"
-                        },
-                        {
-                            "$": "Wind Gust Midnight",
-                            "name": "Gm",
-                            "units": "mph"
-                        },
-                        {
-                            "$": "Screen Relative Humidity Noon",
-                            "name": "Hn",
-                            "units": "%"
-                        },
-                        {
-                            "$": "Screen Relative Humidity Midnight",
-                            "name": "Hm",
-                            "units": "%"
-                        },
-                        {
-                            "$": "Visibility",
-                            "name": "V",
-                            "units": ""
-                        },
-                        {
-                            "$": "Wind Direction",
-                            "name": "D",
-                            "units": "compass"
-                        },
-                        {
-                            "$": "Wind Speed",
-                            "name": "S",
-                            "units": "mph"
-                        },
-                        {
-                            "$": "Max UV Index",
-                            "name": "U",
-                            "units": ""
-                        },
-                        {
-                            "$": "Weather Type",
-                            "name": "W",
-                            "units": ""
-                        },
-                        {
-                            "$": "Precipitation Probability Day",
-                            "name": "PPd",
-                            "units": "%"
-                        },
-                        {
-                            "$": "Precipitation Probability Night",
-                            "name": "PPn",
-                            "units": "%"
+                          ]
                         }
-                    ]
+                      }
+                    }
+
+
+        forecast.parse_json(json_data)
+
+
+class MetOfficeObservationTests(unittest.TestCase):
+
+    def test_parse_json(self):
+        observation = MetOfficeObservation()
+        self.assertIsNotNone(observation)
+
+        json_data = { "SiteRep": {
+                        "DV": {
+                            "Location": {
+                                "Period": [
+                                    {
+                                        "Rep": [
+                                            {
+                                                "$": "660",
+                                                "D": "W",
+                                                "Dp": "3.2",
+                                                "H": "57.3",
+                                                "P": "1021",
+                                                "Pt": "R",
+                                                "S": "11",
+                                                "T": "11.2",
+                                                "V": "35000",
+                                                "W": "3"
+                                            },
+                                            {
+                                                "$": "720",
+                                                "D": "WSW",
+                                                "Dp": "2.2",
+                                                "H": "51.6",
+                                                "P": "1021",
+                                                "Pt": "R",
+                                                "S": "9",
+                                                "T": "11.7",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "780",
+                                                "D": "WSW",
+                                                "Dp": "2.6",
+                                                "H": "50.7",
+                                                "P": "1021",
+                                                "Pt": "F",
+                                                "S": "10",
+                                                "T": "12.4",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "840",
+                                                "D": "W",
+                                                "Dp": "2.9",
+                                                "H": "49.4",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "14",
+                                                "T": "13.1",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "900",
+                                                "D": "WSW",
+                                                "Dp": "3.7",
+                                                "H": "50.3",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "9",
+                                                "T": "13.7",
+                                                "V": "35000",
+                                                "W": "3"
+                                            },
+                                            {
+                                                "$": "960",
+                                                "D": "W",
+                                                "Dp": "3.8",
+                                                "H": "51.0",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "13",
+                                                "T": "13.6",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "1020",
+                                                "D": "WSW",
+                                                "Dp": "3.4",
+                                                "H": "52.6",
+                                                "P": "1021",
+                                                "Pt": "R",
+                                                "S": "11",
+                                                "T": "12.7",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "1080",
+                                                "D": "WSW",
+                                                "Dp": "3.3",
+                                                "H": "56.2",
+                                                "P": "1021",
+                                                "Pt": "R",
+                                                "S": "9",
+                                                "T": "11.6",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "1140",
+                                                "D": "WSW",
+                                                "Dp": "3.1",
+                                                "H": "63.9",
+                                                "P": "1022",
+                                                "Pt": "R",
+                                                "S": "3",
+                                                "T": "9.5",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "1200",
+                                                "D": "SSW",
+                                                "Dp": "3.2",
+                                                "H": "70.8",
+                                                "P": "1022",
+                                                "Pt": "R",
+                                                "S": "6",
+                                                "T": "8.1",
+                                                "V": "29000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "1260",
+                                                "D": "SSW",
+                                                "Dp": "2.8",
+                                                "H": "73.7",
+                                                "P": "1022",
+                                                "Pt": "R",
+                                                "S": "6",
+                                                "T": "7.1",
+                                                "V": "29000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "1320",
+                                                "D": "SSW",
+                                                "Dp": "2.2",
+                                                "H": "69.6",
+                                                "P": "1022",
+                                                "Pt": "R",
+                                                "S": "8",
+                                                "T": "7.3",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "1380",
+                                                "D": "SSW",
+                                                "Dp": "2.4",
+                                                "H": "71.7",
+                                                "P": "1022",
+                                                "Pt": "F",
+                                                "S": "10",
+                                                "T": "7.1",
+                                                "V": "29000",
+                                                "W": "0"
+                                            }
+                                        ],
+                                        "type": "Day",
+                                        "value": "2017-04-02Z"
+                                    },
+                                    {
+                                        "Rep": [
+                                            {
+                                                "$": "0",
+                                                "D": "SSW",
+                                                "Dp": "2.5",
+                                                "H": "73.2",
+                                                "P": "1021",
+                                                "Pt": "F",
+                                                "S": "9",
+                                                "T": "6.9",
+                                                "V": "29000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "60",
+                                                "D": "SW",
+                                                "Dp": "2.4",
+                                                "H": "74.7",
+                                                "P": "1021",
+                                                "Pt": "F",
+                                                "S": "7",
+                                                "T": "6.5",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "120",
+                                                "D": "SW",
+                                                "Dp": "3.0",
+                                                "H": "76.0",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "8",
+                                                "T": "6.9",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "180",
+                                                "D": "WSW",
+                                                "Dp": "1.9",
+                                                "H": "71.1",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "6",
+                                                "T": "6.7",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "240",
+                                                "D": "WSW",
+                                                "Dp": "2.0",
+                                                "H": "79.5",
+                                                "P": "1020",
+                                                "Pt": "F",
+                                                "S": "5",
+                                                "T": "5.2",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "300",
+                                                "D": "SW",
+                                                "Dp": "2.1",
+                                                "G": "19",
+                                                "H": "73.2",
+                                                "P": "1019",
+                                                "Pt": "F",
+                                                "S": "8",
+                                                "T": "6.5",
+                                                "V": "30000",
+                                                "W": "0"
+                                            },
+                                            {
+                                                "$": "360",
+                                                "D": "WNW",
+                                                "Dp": "1.8",
+                                                "H": "79.5",
+                                                "P": "1019",
+                                                "Pt": "F",
+                                                "S": "2",
+                                                "T": "5.0",
+                                                "V": "30000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "420",
+                                                "D": "NNW",
+                                                "Dp": "2.5",
+                                                "H": "80.7",
+                                                "P": "1019",
+                                                "Pt": "F",
+                                                "S": "1",
+                                                "T": "5.5",
+                                                "V": "30000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "480",
+                                                "D": "SSW",
+                                                "Dp": "3.0",
+                                                "H": "65.2",
+                                                "P": "1018",
+                                                "Pt": "F",
+                                                "S": "7",
+                                                "T": "9.1",
+                                                "V": "35000",
+                                                "W": "1"
+                                            },
+                                            {
+                                                "$": "540",
+                                                "D": "SW",
+                                                "Dp": "3.6",
+                                                "H": "62.3",
+                                                "P": "1018",
+                                                "Pt": "F",
+                                                "S": "15",
+                                                "T": "10.4",
+                                                "V": "35000",
+                                                "W": "7"
+                                            },
+                                            {
+                                                "$": "600",
+                                                "D": "SW",
+                                                "Dp": "3.9",
+                                                "H": "61.6",
+                                                "P": "1018",
+                                                "Pt": "F",
+                                                "S": "15",
+                                                "T": "10.9",
+                                                "V": "35000",
+                                                "W": "7"
+                                            },
+                                            {
+                                                "$": "660",
+                                                "D": "SW",
+                                                "Dp": "4.2",
+                                                "H": "57.3",
+                                                "P": "1017",
+                                                "Pt": "F",
+                                                "S": "10",
+                                                "T": "12.3",
+                                                "V": "35000",
+                                                "W": "3"
+                                            }
+                                        ],
+                                        "type": "Day",
+                                        "value": "2017-04-03Z"
+                                    }
+                                ],
+                                "continent": "EUROPE",
+                                "country": "SCOTLAND",
+                                "elevation": "57.0",
+                                "i": "3166",
+                                "lat": "55.928",
+                                "lon": "-3.343",
+                                "name": "EDINBURGH/GOGARBANK"
+                            },
+                            "dataDate": "2017-04-03T11:00:00Z",
+                            "type": "Obs"
+                        },
+                        "Wx": {
+                            "Param": [
+                                {
+                                    "$": "Wind Gust",
+                                    "name": "G",
+                                    "units": "mph"
+                                },
+                                {
+                                    "$": "Temperature",
+                                    "name": "T",
+                                    "units": "C"
+                                },
+                                {
+                                    "$": "Visibility",
+                                    "name": "V",
+                                    "units": "m"
+                                },
+                                {
+                                    "$": "Wind Direction",
+                                    "name": "D",
+                                    "units": "compass"
+                                },
+                                {
+                                    "$": "Wind Speed",
+                                    "name": "S",
+                                    "units": "mph"
+                                },
+                                {
+                                    "$": "Weather Type",
+                                    "name": "W",
+                                    "units": ""
+                                },
+                                {
+                                    "$": "Pressure",
+                                    "name": "P",
+                                    "units": "hpa"
+                                },
+                                {
+                                    "$": "Pressure Tendency",
+                                    "name": "Pt",
+                                    "units": "Pa/s"
+                                },
+                                {
+                                    "$": "Dew Point",
+                                    "name": "Dp",
+                                    "units": "C"
+                                },
+                                {
+                                    "$": "Screen Relative Humidity",
+                                    "name": "H",
+                                    "units": "%"
+                                }
+                            ]
+                        }
+                    }
                 }
-            }
-        }
 
-        report.parse_json(json)
+        observation.parse_json(json_data)
 
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, report._data_type)
-        self.assertEquals(metoffer.DAILY, report._time_period)
-        self.assertIsNotNone(report._site_report)
+
+class MockMetOffice(MetOffice):
+
+    def __init__(self, license_keys):
+        MetOffice.__init__(self, license_keys)
+        self._observation_file = None
+        self._forecast_file = None
+
+    def get_forecast_data(self, lat, lon, forecast_type):
+        with open(self._forecast_file) as json_forecast_file:
+            return json.load(json_forecast_file)
+
+    def get_observation_data(self, lat, lon):
+        with open(self._observation_file) as json_observation_file:
+            return json.load(json_observation_file)
+
 
 class MetOfficeTests(unittest.TestCase):
 
@@ -1243,11 +2118,6 @@ class MetOfficeTests(unittest.TestCase):
     def test_init(self):
         met_office = MetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
-
-        self.assertIsNone(met_office.current_observation_response_file)
-        self.assertIsNone(met_office.three_hourly_forecast_response_file)
-        self.assertIsNone(met_office.daily_forecast_response_file)
-
         self.assertIsNotNone(met_office._met_office_api)
 
     def test_init_no_license_keys(self):
@@ -1255,66 +2125,29 @@ class MetOfficeTests(unittest.TestCase):
             met_office = MetOffice(None)
 
     def test_observation(self):
-        met_office = MetOffice(self.license_keys)
+        met_office = MockMetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
-
-        met_office.set_current_observation_response_file(os.path.dirname(__file__) +  os.sep + "observation.json")
+        met_office._observation_file = os.path.dirname(__file__) +  os.sep + "observation.json"
+        self.assertTrue(os.path.exists(met_office._observation_file))
 
         observation = met_office.current_observation(self.lat, self.lng)
         self.assertIsNotNone(observation)
 
-        report = observation.get_latest_report()
-        self.assertIsNotNone(report)
-
-        date = DateFormatter.year_month_day(2017, 4, 3)
-        report = observation.get_report_for_date(date)
-        self.assertIsNotNone(report)
-
-        datapoint = report.get_time_period_by_time("300")
-        self.assertIsNotNone(datapoint)
-        self.assertIsInstance(datapoint, ObservationDataPoint)
-
-    def test_threehourly_forecast(self):
-        met_office = MetOffice(self.license_keys)
+    def tes_five_day_forecast(self):
+        met_office = MockMetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
+        met_office._forecast_file = os.path.dirname(__file__) +  os.sep + "forecast_3hourly.json"
+        self.assertTrue(os.path.exists(met_office._forecast_file))
 
-        met_office.set_three_hourly_forecast_response_file(os.path.dirname(__file__) +  os.sep + "forecast_3hourly.json")
-
-        forecast = met_office.three_hourly_forecast(self.lat, self.lng)
+        forecast = met_office.five_day_forecast(self.lat, self.lng)
         self.assertIsNotNone(forecast)
 
-        report = forecast.get_latest_report()
-        self.assertIsNotNone(report)
-
-        date = DateFormatter.year_month_day(2017, 4, 3)
-        report = forecast.get_report_for_date(date)
-        self.assertIsNotNone(report)
-
-        datapoint = report.get_time_period_by_time("540")
-        self.assertIsNotNone(datapoint)
-        self.assertIsInstance(datapoint, ThreeHourlyForecastDataPoint)
-
-    def test_daily_forecast(self):
-        met_office = MetOffice(self.license_keys)
+    def tets_twentyfour_hour_forecast(self):
+        met_office = MockMetOffice(self.license_keys)
         self.assertIsNotNone(met_office)
+        met_office._forecast_file = os.path.dirname(__file__) +  os.sep + "forecast_daily.json"
+        self.assertTrue(os.path.exists(met_office._forecast_file))
 
-        met_office.set_daily_forecast_response_file(os.path.dirname(__file__) +  os.sep + "forecast_daily.json")
-
-        forecast = met_office.daily_forecast(self.lat, self.lng)
+        forecast = met_office.twentyfour_hour_forecast(self.lat, self.lng)
         self.assertIsNotNone(forecast)
-
-        report = forecast.get_latest_report()
-        self.assertIsNotNone(report)
-
-        date = DateFormatter.year_month_day(2017, 4, 3)
-        report = forecast.get_report_for_date(date)
-        self.assertIsNotNone(report)
-
-        day_datapoint = report.get_time_period_by_type('Day')
-        self.assertIsNotNone(day_datapoint)
-        self.assertIsInstance(day_datapoint, DailyForecastDayDataPoint)
-
-        night_datapoint = report.get_time_period_by_type('Night')
-        self.assertIsNotNone(night_datapoint)
-        self.assertIsInstance(night_datapoint, DailyForecastNightDataPoint)
 

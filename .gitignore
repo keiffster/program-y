@@ -103,7 +103,6 @@ license.keys
 bots/y-bot/output/
 /bots/alice2/output/
 /bots/professor/output/
-/scratch/
 temp/
 conversations/
 /src/utils/pattern_lister/y-bot.csv
@@ -111,6 +110,8 @@ conversations/
 
 /bots/scratch/
 bots/scratch/
+/scratch/
+/src/scratch
 
 /bots/multibot/
 bots/multibot/

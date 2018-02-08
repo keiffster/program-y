@@ -52,13 +52,9 @@ class NodeFactory(object):
     def valid_config_line(self, line):
 
         if not line:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Config line empty")
             return False
 
         if line.startswith('#'):
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Config line is comment")
             return False
 
         if "=" not in line:

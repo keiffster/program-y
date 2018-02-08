@@ -58,8 +58,8 @@ class TemplateGetNode(TemplateNode):
     def get_default_value(bot):
         value = bot.brain.properties.property("default-get")
         if value is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No property defined for default-get")
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.error("No property defined for default-get, checking defaults")
 
             value = bot.brain.configuration.defaults.default_get
             if value is None:
