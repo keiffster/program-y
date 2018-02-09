@@ -24,7 +24,6 @@ except:
     import pickle
 import gc
 import datetime
-import programy.parser.tokenizer
 
 from programy.processors.processing import ProcessorLoader
 from programy.config.sections.brain.brain import BrainConfiguration
