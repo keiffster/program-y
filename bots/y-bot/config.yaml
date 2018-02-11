@@ -24,13 +24,23 @@ bot:
       check_before: false
       check_and_retry: false
 
-    conversations:
-      type: file
-      config_name: file_storage
-      empty_on_start: true
+    #conversations:
+    #  type: file
+    #  config_name: file_storage
+    #  empty_on_start: true
 
     file_storage:
       dir: $BOT_ROOT/conversations
+
+    conversations:
+      type: redis
+      config_name: redis_storage
+      empty_on_start: true
+
+    redis_storage:
+      host: localhost
+      port: 6379
+
 
 brain:
 
