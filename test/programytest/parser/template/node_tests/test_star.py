@@ -1,7 +1,7 @@
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.star import TemplateStarNode
-from programy.dialog import Conversation, Question
+from programy.dialog.dialog import Conversation, Question
 from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.template.nodes.base import TemplateNode

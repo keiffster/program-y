@@ -19,22 +19,26 @@ import logging
 
 from programy.config.base import BaseConfigurationData
 
-class BotConversationsFileStorageConfiguration(BaseConfigurationData):
+class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
 
     def __init__(self, config_name):
         BaseConfigurationData.__init__(self, name=config_name)
-        self._dir = None
+        self._host = None
+        self._port = None
 
     @property
-    def dir(self):
-        return self._dir
+    def host(self):
+        return self._host
+
+    @property
+    def port(self):
+        return self._port
 
     def load_config_section(self, configuration_file, configuration, bot_root):
         ConversationsFileStorage = configuration_file.get_section(self._section_name, configuration)
         if ConversationsFileStorage is not None:
-            dir = configuration_file.get_option(ConversationsFileStorage, "dir", missing_value=None)
-            if dir is not None:
-                self._dir = self.sub_bot_root(dir, bot_root)
+            self._host = configuration_file.get_option(ConversationsFileStorage, "host", missing_value="localhost")
+            self._port = configuration_file.get_option(ConversationsFileStorage, "dir", missing_value=None)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'ConversationsFileStorage' section missing from bot config, using defaults")
+                logging.warning("'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")

@@ -16,10 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import os
-import time
-from os import listdir
-from os.path import isfile, join
 from programy.parser.tokenizer import Tokenizer
 
 class Sentence(object):
@@ -205,7 +201,6 @@ class Conversation(object):
         if name == 'topic':
             if value == "":
                 value = '*'
-
         self._properties[name] = value
 
     def property(self, name: str):
@@ -231,82 +226,4 @@ class Conversation(object):
                 logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
 
-
-class ConversationFileStorage(object):
-
-    def __init__(self, config):
-        self._config = config
-        self._last_modified = None
-
-    def empty(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Emptying Conversation Folder")
-        try:
-            if self._config._dir is not None:
-                if os.path.exists(self._config._dir):
-                    convo_files = [f for f in listdir(self._config._dir) if isfile(join(self._config._dir, f))]
-                    for file in convo_files:
-                        fullpath = self._config._dir + os.sep + file
-                        if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Removing conversation file: [%s]"%fullpath)
-                        os.remove(fullpath)
-        except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed emptying conversation directory [%s]"%self._config._dir)
-                logging.exception(e)
-
-    def save_conversation(self, conversation, clientid):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Saving conversation")
-        try:
-            if self._config._dir is not None:
-                if os.path.exists(self._config._dir):
-                    filename = self._config._dir + os.sep + clientid + ".convo"
-                    with open(filename, "w+", encoding="utf-8") as convo_file:
-                        for name, value in conversation._properties.items():
-                            convo_file.write("%s:%s\n"%(name, value))
-                        convo_file.write("\n")
-        except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to save conversation for clientid [%s]"%clientid)
-                logging.exception(e)
-
-    def load_conversation(self, conversation, clientid, restore_last_topic=False):
-        try:
-            if self._config._dir is not None:
-                if os.path.exists(self._config._dir):
-                    filename = self._config._dir + os.sep + clientid + ".convo"
-                    if os.path.exists(filename):
-
-                        should_open = True
-                        last_modified = time.ctime(os.path.getmtime(filename))
-                        if self._last_modified is not None:
-                            if self._last_modified >= last_modified:
-                                should_open = False
-                        self._last_modified = last_modified
-
-                        if should_open is True:
-                            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                logging.debug("Loading Conversation")
-
-                            with open(filename, "r", encoding="utf-8") as convo_file:
-                                for line in convo_file:
-                                    if ':' in line:
-                                        splits = line.split(":")
-                                        name = splits[0].strip()
-                                        value = splits[1].strip()
-                                        if name == "topic":
-                                            if restore_last_topic is True:
-                                                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                                    logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
-                                                conversation._properties[name] = value
-                                        else:
-                                            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                                                logging.debug("Loading stored property [%s]=[%s] for %s" % (name, value, clientid))
-                                            conversation._properties[name] = value
-
-        except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load conversation for clientid [%s]"%clientid)
-                logging.exception(e)
 

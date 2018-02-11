@@ -8,7 +8,7 @@ from programy.config.sections.brain.brain import BrainConfiguration
 from programy.config.sections.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.config.sections.client.console import ConsoleConfiguration
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.config.sections.brain.debugfile import DebugFileConfiguration
 
 class MockBrain(Brain):

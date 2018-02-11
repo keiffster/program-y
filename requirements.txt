@@ -13,6 +13,7 @@ sleekxmpp==1.3.2
 MetOffer==1.3.2
 python-telegram-bot==9.0.0
 pymessenger==0.0.7.0
+redis
 
 # Uncomment this line on Osx or Linux if you want to use sanic rest client
 # Sanic is not supported on Windows !

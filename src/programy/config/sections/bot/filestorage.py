@@ -37,4 +37,4 @@ class BotConversationsFileStorageConfiguration(BaseConfigurationData):
                 self._dir = self.sub_bot_root(dir, bot_root)
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'ConversationsFileStorage' section missing from bot config, using defaults")
+                logging.warning("'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")

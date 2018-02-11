@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 
 from programy.config.base import BaseConfigurationData
-from programy.config.sections.bot.filestorage import BotConversationsFileStorageConfiguration
+from programy.dialog.storage.factory import ConversationStorageFactory
 
 class BotConversationsConfiguration(BaseConfigurationData):
 
@@ -65,13 +65,10 @@ class BotConversationsConfiguration(BaseConfigurationData):
 
             self._type = configuration_file.get_option(Conversations, "type", missing_value=None)
             config_name = configuration_file.get_option(Conversations, "config_name", missing_value=None)
-            if self._type == 'file':
-                self._storage = BotConversationsFileStorageConfiguration(config_name=config_name)
-                self._storage.load_config_section(configuration_file, configuration, bot_root)
-            else:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.warning("Invalid Conversations file storage type [%s]"%self._type)
             self._empty_on_start = configuration_file.get_bool_option(Conversations, "empty_on_start", missing_value=False)
+
+            self._storage = ConversationStorageFactory.get_storage_config(self._type, config_name, configuration_file, configuration, bot_root)
+
 
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):

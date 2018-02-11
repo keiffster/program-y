@@ -1,7 +1,7 @@
 from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.bot import PatternBotNode
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.parser.exceptions import ParserException
 
 class PatternBotNodeTests(ParserTestsBaseClass):

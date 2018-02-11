@@ -1,6 +1,6 @@
 import unittest
 
-from programy.dialog import Sentence, Question, Conversation
+from programy.dialog.dialog import Sentence, Question, Conversation
 from programy.bot import Bot
 from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration

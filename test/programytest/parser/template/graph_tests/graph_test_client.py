@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.dialog import Question, Sentence
+from programy.dialog.dialog import Question, Sentence
 from programy.parser.template.graph import TemplateGraph
 from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
