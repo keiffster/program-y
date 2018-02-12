@@ -47,7 +47,7 @@ class SlackBotClient(BotClient):
         self._running = True
 
     def set_environment(self):
-        self.bot.brain.properties.add_property("env", 'slack')
+        self.bot.brain.properties.add_property("env", 'Slack')
 
     def get_client_configuration(self):
         return SlackConfiguration()
@@ -72,10 +72,18 @@ class SlackBotClient(BotClient):
         """
         for event in slack_events:
             if event["type"] == "message" and not "subtype" in event:
-                user_id, message = self.parse_direct_mention(event["text"])
+                text = event["text"]
+
+                if logging.getLogger().isEnabledFor(logging.DEBUG):
+                    logging.debug("Slack received [%s] "%text)
+
+                user_id, message = self.parse_direct_mention(text)
+
                 if user_id == self._starterbot_id:
                     return message, event["channel"], event['user']
+
         return None, None, None
+
 
     def parse_direct_mention(self, message_text):
         """
@@ -95,6 +103,9 @@ class SlackBotClient(BotClient):
         # Finds and executes the given message, filling in response
         response = self.ask_question(user_id, message)
 
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Slack sending [%s] to [%s]" % (message, user_id))
+
         # Sends the response back to the channel
         self._slack_client.api_call(
             "chat.postMessage",
@@ -111,10 +122,19 @@ class SlackBotClient(BotClient):
             self._starterbot_id = self.get_bot_id()
 
             while self._running:
-                message, channel, user_id = self.parse_bot_messages(self._slack_client.rtm_read())
-                if message:
-                    self.handle_message(message, channel, user_id)
-                time.sleep(self._polling_interval)
+                try:
+                    message, channel, user_id = self.parse_bot_messages(self._slack_client.rtm_read())
+                    if message:
+                        self.handle_message(message, channel, user_id)
+                    time.sleep(self._polling_interval)
+                except KeyboardInterrupt:
+                    self._running = False
+                except Exception as excep:
+                    logging.exception(excep)
+
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Exiting gracefully...")
+
         else:
             print("Connection failed. Exception traceback printed above.")
 

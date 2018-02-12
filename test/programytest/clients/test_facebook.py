@@ -19,8 +19,8 @@ class TestFacebookBotClient(FacebookBotClient):
         self.test_question = question
 
     def get_license_keys(self):
-        self.access_token = "FACEBOOK_ACCESS_TOKEN"
-        self.verify_token = "FACEBOOK_VERIFY_TOKEN"
+        self._access_token = "FACEBOOK_ACCESS_TOKEN"
+        self._verify_token = "FACEBOOK_VERIFY_TOKEN"
 
     def ask_question(self, sessionid, question):
         if self.test_question is not None:
@@ -39,11 +39,11 @@ class FacebookBotClientTests(unittest.TestCase):
         client = TestFacebookBotClient(arguments)
         self.assertIsNotNone(client)
 
-        self.assertEquals("FACEBOOK_VERIFY_TOKEN", client.verify_token)
-        self.assertEquals("FACEBOOK_ACCESS_TOKEN", client.access_token)
+        self.assertEquals("FACEBOOK_VERIFY_TOKEN", client._verify_token)
+        self.assertEquals("FACEBOOK_ACCESS_TOKEN", client._access_token)
 
         self.assertEquals("Facebook", client.bot.brain.properties.property("env"))
 
         self.assertIsInstance(client.get_client_configuration(), FacebookConfiguration)
 
-        self.assertIsInstance(client.facebook_bot, Bot)
+        self.assertIsInstance(client._facebook_bot, Bot)
