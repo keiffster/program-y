@@ -39,8 +39,8 @@ class FacebookBotClient(BotClient):
         print("Facebook Client loaded")
 
     def get_license_keys(self):
-        self._access_token = self.bot.license_keys.get_key("FACEBOOK__access_token")
-        self._verify_token = self.bot.license_keys.get_key("FACEBOOK__verify_token")
+        self._access_token = self.bot.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")
+        self._verify_token = self.bot.license_keys.get_key("FACEBOOK_VERIFY_TOKEN")
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Facebook")
