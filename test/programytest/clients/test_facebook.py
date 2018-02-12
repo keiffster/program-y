@@ -32,9 +32,9 @@ class TestFacebookBotClient(FacebookBotClient):
             return self.test_facebook_bot
         return super(TestFacebookBotClient,self).create_facebook_bot()
 
-class RestBotClientTests(unittest.TestCase):
+class FacebookBotClientTests(unittest.TestCase):
 
-    def test_rest_client_init(self):
+    def test_facebook_client_init(self):
         arguments = MockArgumentParser()
         client = TestFacebookBotClient(arguments)
         self.assertIsNotNone(client)

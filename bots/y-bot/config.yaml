@@ -229,3 +229,8 @@ facebook:
   host: 127.0.0.1
   port: 5000
   debug: false
+
+twilio:
+  host: 127.0.0.1
+  port: 5000
+  debug: false

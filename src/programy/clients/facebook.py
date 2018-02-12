@@ -34,13 +34,13 @@ class FacebookBotClient(BotClient):
 
         self.get_license_keys()
 
-        self.facebook_bot = self.create_facebook_bot()
+        self._facebook_bot = self.create_facebook_bot()
 
         print("Facebook Client loaded")
 
     def get_license_keys(self):
-        self.access_token = self.bot.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")
-        self.verify_token = self.bot.license_keys.get_key("FACEBOOK_VERIFY_TOKEN")
+        self._access_token = self.bot.license_keys.get_key("FACEBOOK__access_token")
+        self._verify_token = self.bot.license_keys.get_key("FACEBOOK__verify_token")
 
     def set_environment(self):
         self.bot.brain.properties.add_property("env", "Facebook")
@@ -53,26 +53,26 @@ class FacebookBotClient(BotClient):
         return response
 
     def create_facebook_bot(self):
-        return Bot(self.access_token)
+        return Bot(self._access_token)
 
     def verify_fb_token(self, token_sent):
         # take token sent by facebook and verify it matches the verify token you sent
         # if they match, allow the request, else return an error
-        if token_sent == self.verify_token:
+        if token_sent == self._verify_token:
             return request.args.get("hub.challenge")
         return 'Invalid verification token'
 
     # uses PyMessenger to send response to user
     def send_message(self, recipient_id, response):
         # sends user the text message provided via input response parameter
-        self.facebook_bot.send_text_message(recipient_id, response)
+        self._facebook_bot.send_text_message(recipient_id, response)
         return "success"
 
     def receive_message(self, request):
         if request.method == 'GET':
             """Before allowing people to message your bot, Facebook has implemented a verify token
             that confirms all requests that your bot receives came from Facebook."""
-            token_sent = request.args.get("hub.verify_token")
+            token_sent = request.args.get("hub._verify_token")
             return self.verify_fb_token(token_sent)
         # if the request was not get, it must be POST and we can just proceed with sending a message back to user
         else:
@@ -121,7 +121,7 @@ if __name__ == "__main__":
                                                 FACEBOOK_CLIENT.configuration.client_configuration.port))
 
     if FACEBOOK_CLIENT.configuration.client_configuration.debug is True:
-        print("REST Client running in debug mode")
+        print("Twilio Client running in debug mode")
 
     if FACEBOOK_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
             FACEBOOK_CLIENT.configuration.client_configuration.ssl_key_file is not None:
