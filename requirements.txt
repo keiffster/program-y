@@ -15,6 +15,7 @@ python-telegram-bot==9.0.0
 pymessenger==0.0.7.0
 twilio==6.10.3
 slackclient==1.1.2
+redis==2.10.6
 
 # Uncomment this line on Osx or Linux if you want to use sanic rest client
 # Sanic is not supported on Windows !

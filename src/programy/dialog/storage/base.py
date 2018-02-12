@@ -15,26 +15,27 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from abc import ABCMeta, abstractmethod
 
-from programy.config.base import BaseConfigurationData
+class ConversationStorage(object):
 
-class BotConversationsFileStorageConfiguration(BaseConfigurationData):
+    def __init__(self, config):
+        self._config = config
 
-    def __init__(self, config_name):
-        BaseConfigurationData.__init__(self, name=config_name)
-        self._dir = None
+    @abstractmethod
+    def empty(self):
+        """
+        Never Implemented
+        """
 
-    @property
-    def dir(self):
-        return self._dir
+    @abstractmethod
+    def save_conversation(self, conversation, clientid):
+        """
+        Never Implemented
+        """
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        ConversationsFileStorage = configuration_file.get_section(self._section_name, configuration)
-        if ConversationsFileStorage is not None:
-            dir = configuration_file.get_option(ConversationsFileStorage, "dir", missing_value=None)
-            if dir is not None:
-                self._dir = self.sub_bot_root(dir, bot_root)
-        else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")
+    @abstractmethod
+    def load_conversation(self, conversation, clientid, restore_last_topic=False):
+        """
+        Never Implemented
+        """

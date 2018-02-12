@@ -1,7 +1,7 @@
 from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.iset import PatternISetNode
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.parser.exceptions import ParserException
 
 class PatternSetNodeTests(ParserTestsBaseClass):

@@ -10,7 +10,7 @@ from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.matcher import MatchContext, Match
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 
 
 class MockPatternWildCardNode(PatternWildCardNode):

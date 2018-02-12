@@ -26,7 +26,7 @@ from programy.config.sections.brain.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.parser.pattern.matcher import MatchContext
 from programy.utils.files.filewriter import ErrorsFileWriter
 from programy.utils.files.filewriter import DuplicatesFileWriter

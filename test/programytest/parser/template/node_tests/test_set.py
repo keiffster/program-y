@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.set import TemplateSetNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.dialog import Question
+from programy.dialog.dialog import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 

@@ -40,7 +40,7 @@ from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
 from programy.utils.text.text import TextUtils
 from programy.utils.classes.loader import ClassLoader
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.parser.tokenizer import Tokenizer
 
 class Brain(object):

@@ -16,25 +16,35 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import time
 
-from programy.config.base import BaseConfigurationData
+from programy.dialog.storage.base import ConversationStorage
+import redis
 
-class BotConversationsFileStorageConfiguration(BaseConfigurationData):
+class ConversationRedisStorage(ConversationStorage):
 
-    def __init__(self, config_name):
-        BaseConfigurationData.__init__(self, name=config_name)
-        self._dir = None
+    def __init__(self, config):
+        ConversationStorage.__init__(self, config)
+        self._redis = redis.StrictRedis(host=config.host, port=config.port, db=0)
 
-    @property
-    def dir(self):
-        return self._dir
+    def empty(self):
+        pass
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        ConversationsFileStorage = configuration_file.get_section(self._section_name, configuration)
-        if ConversationsFileStorage is not None:
-            dir = configuration_file.get_option(ConversationsFileStorage, "dir", missing_value=None)
-            if dir is not None:
-                self._dir = self.sub_bot_root(dir, bot_root)
-        else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")
+    def save_conversation(self, conversation, clientid):
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Saving conversation to Redis for %s"%clientid)
+        print("Writing to redis for %s"%clientid)
+        self._redis.hmset(clientid, conversation._properties)
+
+    def load_conversation(self, conversation, clientid, restore_last_topic=False):
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Loading Conversation from file for %s"%clientid)
+
+        print("Reading from redis for %s"%clientid)
+        result = self._redis.hgetall(clientid)
+        if result is not None:
+            conversation._properties = result
+
+    def remove_conversation(self, clientid):
+        pass
+

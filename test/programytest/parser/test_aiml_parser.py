@@ -10,7 +10,7 @@ from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 
-from programy.dialog import Sentence
+from programy.dialog.dialog import Sentence
 from programy.bot import Bot
 from programy.brain import Brain
 from programy.config.sections.brain.brain import BrainConfiguration

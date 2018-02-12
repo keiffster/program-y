@@ -18,11 +18,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import logging
 import datetime
 
-from programy.dialog import Conversation, Question, ConversationFileStorage
+from programy.dialog.dialog import Conversation, Question, Sentence
+from programy.dialog.storage.factory import ConversationStorageFactory
 from programy.config.sections.bot.bot import BotConfiguration
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
-from programy.dialog import Sentence
 from programy.utils.files.filewriter import ConversationFileWriter
 
 class Bot(object):
@@ -196,13 +196,10 @@ class Bot(object):
     def initiate_conversation_storage(self):
         if self._configuration is not None:
             if self._configuration.conversations is not None:
-                if self._configuration.conversations.type == "file":
-                    self._conversation_storage = ConversationFileStorage(self._configuration.conversations.storage)
+                self._conversation_storage = ConversationStorageFactory.get_storage(self._configuration)
+                if self._conversation_storage is not None:
                     if self._configuration.conversations.empty_on_start is True:
                         self._conversation_storage.empty ()
-                else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown conversation storage type [%s], conversations will not persist!"%self._configuration.conversations.type)
 
     def load_conversation(self, clientid):
         if self._conversation_storage is not None:
