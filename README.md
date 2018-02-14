@@ -2,7 +2,7 @@
 
 Version: 1.10.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 13th February 2018 <br/>
+Date: 14th February 2018 <br/>
 
 # Introduction
 
@@ -39,12 +39,14 @@ Program Y is extremely extensible, you can
   * Console
   * Facebook
   * Google Hangouts (XMPP)
+  * Line
   * REST
   * Slack
   * SMS (Twilio)
   * Twitter
   * Telegram
   * TCP Socket
+  * Viber
   * Web Chat
 
 Program-Y comes with a base set of grammars for various industry sectors, including
