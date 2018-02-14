@@ -58,9 +58,10 @@ class LicenseKeys(object):
         if line:
             if line.startswith('#') is False:
                 splits = line.split("=")
-                if len(splits) == 2:
+                if len(splits) > 1:
                     key_name = splits[0].strip()
-                    key = splits[1].strip()
+                    # If key has = signs in it, then combine all elements past the first
+                    key = "".join(splits[1:]).strip()
                     self._keys[key_name] = key
                 else:
                     if logging.getLogger().isEnabledFor(logging.WARNING):

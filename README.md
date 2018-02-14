@@ -1,8 +1,8 @@
 # Readme info:
 
-Version: 1.9.1 <br/>
+Version: 1.10.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 8th February 2018 <br/>
+Date: 13th February 2018 <br/>
 
 # Introduction
 
@@ -37,13 +37,15 @@ Program Y is extremely extensible, you can
 * Add Dynamic Variables in Python
 * Run a variety of clients, including
   * Console
-  * REST
-  * Web Chat
-  * Twitter
-  * Google Hangouts (XMPP)
   * Facebook
+  * Google Hangouts (XMPP)
+  * REST
+  * Slack
+  * SMS (Twilio)
+  * Twitter
   * Telegram
   * TCP Socket
+  * Web Chat
 
 Program-Y comes with a base set of grammars for various industry sectors, including
 
@@ -58,7 +60,7 @@ Program-Y comes with a base set of grammars for various industry sectors, includ
 
 # System Requirements
 
-Program Y is built using Python 3.6 and has dependencies upon the following Python libraries
+Program Y is built using Python 3.x and has dependencies upon the following Python libraries
 
 * requests
 * flask
@@ -72,10 +74,12 @@ Program Y is built using Python 3.6 and has dependencies upon the following Pyth
 * pyyaml
 * tweepy
 * sleekxmpp
+* pymessenger
+* slackclient
+* twilio
+* redis
+* sanic (optional OSX/Unix only )
 
-In addition, there are a number of additional libraries for use with Sanic version of the REST server, specifically
-
-* sanic
 
 # Using Program-Y
 

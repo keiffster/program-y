@@ -244,3 +244,12 @@ twilio:
 
 slack:
   polling_interval: 1
+
+viber:
+  name: Servusai
+  avatar: http://viber.com/avatar.jpg
+
+line:
+  host: 127.0.0.1
+  port: 5000
+  debug: false

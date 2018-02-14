@@ -211,7 +211,10 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         if stripped in already:
                             found = True
                     if found is not True:
-                        replacable = pattern.sub(pair[1]+" ", replacable)
+                        if pair[1].endswith("."):
+                            replacable = pattern.sub(pair[1], replacable)
+                        else:
+                            replacable = pattern.sub(pair[1]+" ", replacable)
                         alreadys.append(pair[1])
 
             except Exception as excep:

@@ -16,6 +16,8 @@ pymessenger==0.0.7.0
 twilio==6.10.3
 slackclient==1.1.2
 redis==2.10.6
+viberbot==1.0.11
+line-bot-sdk==1.5.0
 
 # Uncomment this line on Osx or Linux if you want to use sanic rest client
 # Sanic is not supported on Windows !

@@ -4,7 +4,6 @@ import os
 import shutil
 
 from programy.admin.admin import AdminTool
-from programy.admin.templates import *
 
 
 class AdminToolTests(unittest.TestCase):

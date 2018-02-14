@@ -10,6 +10,8 @@ class DenormaliseTests(unittest.TestCase):
         self.assertIsNotNone(collection)
 
         count = collection.load_from_text("""
+            " www dot ","www."
+            " dot com ",".com "
             " dot co ",".co"
             " dot uk ",".uk"
             " dot net ",".net"
@@ -25,10 +27,12 @@ class DenormaliseTests(unittest.TestCase):
             " could not "," couldn't "
             " could have "," could've "
          """)
-        self.assertEqual(count, 14)
+        self.assertEqual(count, 16)
 
         self.assertEqual(collection.denormalise_string("You are not him"), "You aren't him")
         self.assertEqual(collection.denormalise_string("keithsterling dot co dot uk"), "keithsterling.co.uk")
 
-        #self.assertEqual("(^dot co | dot co | dot co$)", collection.denormalise(" dot co "))
+        self.assertEqual(collection.denormalise_string("www dot google dot com"), "www.google.com")
+
         self.assertIsNone(collection.denormalise(" dot cox "))
+

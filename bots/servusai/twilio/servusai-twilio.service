@@ -3,7 +3,7 @@ Description=Y-Bot Twilio Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/facebook/servusai-twilio.sh
+ExecStart=/opt/program-y/bots/servusai/twilio/servusai-twilio.sh
 Restart=always
 
 [Install]

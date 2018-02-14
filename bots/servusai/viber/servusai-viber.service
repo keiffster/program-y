@@ -1,0 +1,11 @@
+[Unit]
+Description=Y-Bot Viber Client
+
+[Service]
+User=ubuntu
+ExecStart=/opt/program-y/bots/servusai/viber/servusai-twilio.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

@@ -9,6 +9,9 @@ class NormaliseTests(unittest.TestCase):
         self.assertIsNotNone(collection)
 
         count = collection.load_from_text("""
+            " www. ","www dot "
+            " www."," www dot "
+            ".com "," dot com "
             "%24"," dollars "
             "%27","'"
             "%2A","*"
@@ -23,10 +26,11 @@ class NormaliseTests(unittest.TestCase):
             " are'nt "," are not "
             " arn t "," are not "
         """)
-        self.assertEqual(count, 13)
+        self.assertEqual(count, 16)
 
         self.assertEqual(collection.normalise_string("That will be 24 %24"), "That will be 24 dollars")
         self.assertEqual(collection.normalise_string("You aren't him"), "You are not him")
 
-        #self.assertEqual("(^aren t | aren t | aren t$)", collection.normalise(" aren t "))
+        self.assertEqual(collection.normalise_string("www.google.com"), "www dot google dot com")
+
         self.assertIsNone(collection.normalise(" other "))

@@ -212,23 +212,32 @@ class AdminTool(object):
     def create_script(args):
         AdminTool.create_shell_script(args.location, args.app, args.os, args.path)
 
+    @staticmethod
+    def create_arguments():
+        parser = argparse.ArgumentParser(description='Program-Y Flow Bot')
+
+        parser.add_argument('-c', '--create', default="app", help="What to create", choices=['app', 'script'])
+        parser.add_argument('-l', '--location', default=".", help='Destination for new structure')
+        parser.add_argument('-r', '--replace', action='store_true', default=False, help='Replace current structure')
+        parser.add_argument('-d', '--default', action='store_true', default=False, help="Create default files")
+        parser.add_argument('-a', '--app', default="console", help="Type of app to create",
+                            choices=['console', 'webchat', 'rest', 'xmpp', 'twitter', 'socket'])
+        parser.add_argument('-o', '--os', default="unix", help="Type of os to support", choices=['unix', 'windows'])
+        parser.add_argument('-p', '--path', help="Add PYTHONPATH to script")
+
+        return parser
+
+    @staticmethod
+    def run():
+        try:
+            parser = AdminTool.create_arguments()
+            app = AdminTool()
+            app.execute(parser.parse_args())
+        except Exception as e:
+            parser.print_help()
+
+
 if __name__ == '__main__':
 
-    parser = argparse.ArgumentParser(description='Program-Y Flow Bot')
-
-    parser.add_argument('-c',   '--create',    default="app", help="What to create", choices=['app', 'script'])
-    parser.add_argument('-l',   '--location',  default=".", help='Destination for new structure')
-    parser.add_argument('-r',   '--replace',   action='store_true', default=False, help='Replace current structure')
-    parser.add_argument('-d',   '--default',   action='store_true', default=False, help="Create default files")
-    parser.add_argument('-a',   '--app',       default="console", help="Type of app to create", choices=['console', 'webchat', 'rest', 'xmpp', 'twitter', 'socket'])
-    parser.add_argument('-o',   '--os',        default="unix", help="Type of os to support", choices=['unix', 'windows'])
-    parser.add_argument('-p',   '--path',      help="Add PYTHONPATH to script")
-
-    args = parser.parse_args()
-
-    try:
-        app = AdminTool()
-        app.execute(args)
-    except Exception as e:
-        parser.print_help()
+    AdminTool.run()
 

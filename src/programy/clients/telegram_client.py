@@ -51,7 +51,6 @@ class TelegramBotClient(BotClient):
     _running = False
 
     def __init__(self, argument_parser=None):
-        self._xmpp_client = None
         BotClient.__init__(self, "telegram", argument_parser)
 
     def set_environment(self):
