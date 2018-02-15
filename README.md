@@ -2,7 +2,7 @@
 
 Version: 1.10.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 14th February 2018 <br/>
+Date: 15th February 2018 <br/>
 
 # Introduction
 
@@ -39,6 +39,7 @@ Program Y is extremely extensible, you can
   * Console
   * Facebook
   * Google Hangouts (XMPP)
+  * Kik
   * Line
   * REST
   * Slack
