@@ -3,7 +3,7 @@ Description=Y-Bot Line Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/line/servusai-kik.sh
+ExecStart=/opt/program-y/bots/servusai/kik/servusai-kik.sh
 Restart=always
 
 [Install]

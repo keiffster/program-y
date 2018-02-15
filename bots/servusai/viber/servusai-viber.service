@@ -3,7 +3,7 @@ Description=Y-Bot Viber Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/viber/servusai-twilio.sh
+ExecStart=/opt/program-y/bots/servusai/viber/servusai-kik.sh
 Restart=always
 
 [Install]

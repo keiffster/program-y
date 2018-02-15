@@ -253,3 +253,10 @@ line:
   host: 127.0.0.1
   port: 5000
   debug: false
+
+kik:
+  bot_name: servusai
+  webhook: https://4264d3b1.ngrok.io/incoming
+  host: 127.0.0.1
+  port: 5000
+  debug: false
