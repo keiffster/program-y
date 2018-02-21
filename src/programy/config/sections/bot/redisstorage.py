@@ -25,6 +25,8 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
         BaseConfigurationData.__init__(self, name=config_name)
         self._host = None
         self._port = None
+        self._password = None
+        self._prefix = None
 
     @property
     def host(self):
@@ -34,11 +36,22 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
     def port(self):
         return self._port
 
+    @property
+    def password(self):
+        return self._password
+
+    @property
+    def prefix(self):
+        return self._prefix
+
     def load_config_section(self, configuration_file, configuration, bot_root):
         ConversationsFileStorage = configuration_file.get_section(self._section_name, configuration)
         if ConversationsFileStorage is not None:
             self._host = configuration_file.get_option(ConversationsFileStorage, "host", missing_value="localhost")
             self._port = configuration_file.get_int_option(ConversationsFileStorage, "port", missing_value=6379)
+            self._password = configuration_file.get_option(ConversationsFileStorage, "password", missing_value=None)
+            self._prefix = configuration_file.get_option(ConversationsFileStorage, "prefix", missing_value="program_y:bot_cache")
+
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")
