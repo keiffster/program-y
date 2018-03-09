@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class TopicTestClient(TestClient):
 
@@ -10,38 +13,39 @@ class TopicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(TopicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
 
 class TopicAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        TopicAIMLTests.test_client = TopicTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(TopicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_topic_single_topic_word(self):
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "HI THERE")
+        response = self._client_context.bot.ask_question(self._client_context, "HI THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'OUTSIDE OF TEST1TOPIC')
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "HELLO")
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'INSIDE OF TEST1TOPIC')
 
     def test_topic_multiple_topic_words(self):
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "SEEYA")
+        response = self._client_context.bot.ask_question(self._client_context, "SEEYA")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'OUTSIDE OF TEST2 TOPIC')
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "GOODBYE")
+        response = self._client_context.bot.ask_question(self._client_context, "GOODBYE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'INSIDE OF TEST2 TOPIC')
 
     def test_topic_wildcard_topic_words(self):
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD1")
+        response = self._client_context.bot.ask_question(self._client_context, "WILDCARD1")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'WILDCARD1 TEST OK')
 
-        response = TopicAIMLTests.test_client.bot.ask_question("test", "WILDCARD2")
+        response = self._client_context.bot.ask_question(self._client_context, "WILDCARD2")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'WILDCARD2 TEST OK')

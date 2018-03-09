@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,7 +34,7 @@ class SingularMap(DynamicMap):
             return SingularMap.STATICS[value]
         return None
 
-    def map_value(self, bot, clientid, input_value):
+    def map_value(self, client_context, input_value):
         singular_value = SingularMap.static_map(input_value)
         if singular_value is None:
             if input_value.endswith('IES'):

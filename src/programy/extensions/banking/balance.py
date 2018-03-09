@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,7 +25,7 @@ from programy.extensions.base import Extension
 class BankingBalanceExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, context, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Bank Balance - Calling external service for with extra data [%s]", data)
 

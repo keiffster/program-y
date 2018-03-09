@@ -101,7 +101,7 @@ class PatternMatcherTests(PatternMatcherBaseClass):
         self.assertEqual("Y1 Y2 Y3 Y4", context.star(2))
 
     def test_star_with_set_matching(self):
-        self._bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+        self._client_context.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
         self.add_pattern_to_graph(pattern="XXLENGTH * XS <set>number</set>", topic="*", that="*", template="1")
         self.add_pattern_to_graph(pattern="XXLENGTH * * XS <set>number</set>", topic="*", that="*", template="2")

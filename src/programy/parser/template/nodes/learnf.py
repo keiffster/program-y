@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -27,15 +27,15 @@ class TemplateLearnfNode(TemplateLearnNode):
     def __init__(self):
         TemplateLearnNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, client_context):
         for category in self.children:
-            new_node = self._create_new_category(bot, clientid, category)
-            self.write_learnf_to_file(bot, clientid, new_node)
+            new_node = self._create_new_category(client_context, category)
+            self.write_learnf_to_file(client_context, new_node)
         return ""
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -43,14 +43,14 @@ class TemplateLearnfNode(TemplateLearnNode):
     def to_string(self):
         return "LEARNF"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<learnf>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</learnf>"
         return xml
 
-    def write_learnf_to_file(self, bot, clientid, category):
-        learnf_path = bot.brain.configuration.defaults.learn_filename
+    def write_learnf_to_file(self, client_context, category):
+        learnf_path = client_context.brain.configuration.defaults.learn_filename
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Writing learnf to %s", learnf_path)
 
@@ -69,7 +69,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         child.append(category.pattern)
         child.append(category.topic)
         child.append(category.that)
-        child.append(category.template.xml_tree(bot, clientid))
+        child.append(category.template.xml_tree(client_context))
 
         root.append(child)
 

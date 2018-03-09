@@ -13,16 +13,19 @@ from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.dialog.dialog import Sentence
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.brain.brain import BrainConfiguration
+from programy.config.bot.bot import BotConfiguration
+from programy.context import ClientContext
+
+from programytest.aiml_tests.client import TestClient
 
 class AIMLParserTests(unittest.TestCase):
 
     def setUp(self):
-        self._brain = Brain(BrainConfiguration())
-        self._bot = Bot(self._brain, BotConfiguration())
-        self.parser = AIMLParser(self._brain)
-        self.assertIsNotNone(self.parser)
+        self._client_context = ClientContext(TestClient(), "testid")
+        self._client_context.bot = Bot(BotConfiguration())
+        self._client_context.brain = self._client_context.bot.brain
+        self.parser = self._client_context.brain.aiml_parser
 
     def test_tag_name_from_namespace(self):
         tag, namespace = self.parser.tag_and_namespace_from_text("aiml")
@@ -78,7 +81,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.star.template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(bot=self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_topic_category_template(self):
         self.parser.parse_from_text(
@@ -121,7 +124,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.star.template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_topic_category_template_multi_line(self):
         self.parser.parse_from_text(
@@ -168,7 +171,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.star.template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE1, RESPONSE2. RESPONSE3")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE1, RESPONSE2. RESPONSE3")
 
     def test_base_aiml_category_template(self):
         self.parser.parse_from_text(
@@ -208,7 +211,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.star.template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_category_template_that(self):
         self.parser.parse_from_text(
@@ -250,7 +253,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.children[0].template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_category_template_topic(self):
         self.parser.parse_from_text(
@@ -292,7 +295,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.star.template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_category_template_topic_that(self):
         self.parser.parse_from_text(
@@ -336,7 +339,7 @@ class AIMLParserTests(unittest.TestCase):
         template = that.children[0].template
         self.assertIsNotNone(template)
         self.assertIsInstance(template, PatternTemplateNode)
-        self.assertEqual(template.template.resolve(self._bot, clientid="test"), "RESPONSE")
+        self.assertEqual(template.template.resolve(self._client_context), "RESPONSE")
 
     def test_base_aiml_multiple_categories(self):
         self.parser.parse_from_text(
@@ -573,11 +576,11 @@ class AIMLParserTests(unittest.TestCase):
 
         self.parser.pattern_parser.dump()
 
-        bot = Bot(Brain(BrainConfiguration()), config=BotConfiguration())
+        bot = Bot(BotConfiguration())
 
-        context = self.parser.match_sentence(bot, "test", Sentence(bot.brain.tokenizer, "HELLO"), "*", "*")
+        context = self.parser.match_sentence(self._client_context, Sentence(bot.brain.tokenizer, "HELLO"), "*", "*")
         self.assertIsNotNone(context)
-        self.assertEqual("Hiya", context.template_node().template.resolve(bot, "testid"))
+        self.assertEqual("Hiya", context.template_node().template.resolve(self._client_context))
 
     def test_inline_br_html(self):
 

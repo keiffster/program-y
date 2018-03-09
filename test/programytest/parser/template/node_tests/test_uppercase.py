@@ -11,7 +11,7 @@ class MockTemplateUppercaseNode(TemplateUppercaseNode):
     def __init__(self):
         TemplateUppercaseNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is a failure!")
 
 class TemplateUppercaseNodeTests(ParserTestsBaseClass):
@@ -31,7 +31,7 @@ class TemplateUppercaseNodeTests(ParserTestsBaseClass):
         word = TemplateWordNode("This is a Sentence")
         node.append(word)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "THIS IS A SENTENCE")
+        self.assertEqual(root.resolve(self._client_context), "THIS IS A SENTENCE")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -39,7 +39,7 @@ class TemplateUppercaseNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><uppercase>Test</uppercase></template>", xml_str)
@@ -60,15 +60,15 @@ class TemplateUppercaseNodeTests(ParserTestsBaseClass):
         node.append(word)
 
         with self.assertRaises(Exception):
-            root.resolve_to_string(self._bot, self._clientid)
+            root.resolve_to_string(self._client_context)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "")
+        self.assertEqual(root.resolve(self._client_context), "")
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateUppercaseNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

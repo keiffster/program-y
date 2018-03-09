@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -29,10 +29,10 @@ class PatternTemplateNode(PatternNode):
     def template(self):
         return self._template
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<template>'
-        string2 = super(PatternTemplateNode, self).to_xml(bot, clientid)
+        string2 = super(PatternTemplateNode, self).to_xml(client_context)
         string += string2
         string += '</template>\n'
         return string

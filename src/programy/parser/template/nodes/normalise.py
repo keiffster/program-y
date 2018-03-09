@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -27,16 +27,16 @@ class TemplateNormalizeNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
-        string = self.resolve_children_to_string(bot, clientid)
-        resolved = bot.brain.normals.normalise_string(string)
+    def resolve_to_string(self, client_context):
+        string = self.resolve_children_to_string(client_context)
+        resolved = client_context.brain.normals.normalise_string(string)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -44,9 +44,9 @@ class TemplateNormalizeNode(TemplateNode):
     def to_string(self):
         return "NORMALIZE"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<normalize>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</normalize>"
         return xml
 

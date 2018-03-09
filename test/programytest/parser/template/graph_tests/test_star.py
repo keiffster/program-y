@@ -20,7 +20,7 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
+        self.assertEqual(ast.resolve(self._client_context), "one")
 
     def test_star_no_index_full_embedded(self):
         template = ET.fromstring("""
@@ -34,7 +34,7 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertEqual(2, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateWordNode)
         self.assertIsInstance(ast.children[1], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "Hello one")
+        self.assertEqual(ast.resolve(self._client_context), "Hello one")
 
     def test_star_no_index_short(self):
         template = ET.fromstring("""
@@ -47,7 +47,7 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "one")
+        self.assertEqual(ast.resolve(self._client_context), "one")
 
     def test_star_index_as_child(self):
         template = ET.fromstring("""
@@ -60,7 +60,7 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "two")
+        self.assertEqual(ast.resolve(self._client_context), "two")
 
     def test_star_index_as_attrib_full(self):
         template = ET.fromstring("""
@@ -74,7 +74,7 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "three")
+        self.assertEqual(ast.resolve(self._client_context), "three")
 
     def test_star_index_as_attrib_short(self):
         template = ET.fromstring("""
@@ -87,5 +87,5 @@ class TemplateGraphStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertEqual(1, len(ast.children))
         self.assertIsInstance(ast.children[0], TemplateStarNode)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "four")
+        self.assertEqual(ast.resolve(self._client_context), "four")
 

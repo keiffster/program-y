@@ -5,9 +5,10 @@ import json
 
 from programy.extensions.maps.maps import GoogleMapsExtension
 from programy.utils.geo.google import GoogleDistance
-from programytest.aiml_tests.client import TestClient
-
 from programy.utils.geo.google import GoogleMaps
+from programy.context import ClientContext
+
+from programytest.aiml_tests.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -31,7 +32,7 @@ class MockGoogleMapsExtension(GoogleMapsExtension):
 class MapsExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.test_client = TestClient()
+        self.context = ClientContext(TestClient(), "testid")
 
     def test_maps_distance(self):
         distance    = os.path.dirname(__file__) +  os.sep + "distance.json"
@@ -39,7 +40,7 @@ class MapsExtensionTests(unittest.TestCase):
         googlemaps = MockGoogleMapsExtension(distance)
         self.assertIsNotNone(googlemaps)
 
-        result = googlemaps.execute(self.test_client.bot, "testid", "DISTANCE EDINBURGH KINGHORN")
+        result = googlemaps.execute(self.context, "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(result)
         self.assertEquals("DISTANCE DEC 25 FRAC 1 UNITS miles", result)
 
@@ -49,7 +50,7 @@ class MapsExtensionTests(unittest.TestCase):
         googlemaps = MockGoogleMapsExtension(directions)
         self.assertIsNotNone(googlemaps)
 
-        result = googlemaps.execute(self.test_client.bot, "testid", "DIRECTIONS EDINBURGH KINGHORN")
+        result = googlemaps.execute(self.context, "DIRECTIONS EDINBURGH KINGHORN")
         self.assertIsNotNone(result)
         self.assertTrue(result.startswith("DIRECTIONS Head west on Leith St/A900 toward Leith"))
 
@@ -59,7 +60,7 @@ class MapsExtensionTests(unittest.TestCase):
         googlemaps = MockGoogleMapsExtension(latlong)
         self.assertIsNotNone(googlemaps)
 
-        result = googlemaps.execute(self.test_client.bot, "testid", "SOMETHINGELSE EDINBURGH KINGHORN")
+        result = googlemaps.execute(self.context, "SOMETHINGELSE EDINBURGH KINGHORN")
         self.assertIsNone(result)
 
     def test_format_distance_for_programy(self):

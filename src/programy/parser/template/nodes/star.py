@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -24,8 +24,8 @@ class TemplateStarNode(TemplateIndexedNode):
     def __init__(self, index=1):
         TemplateIndexedNode.__init__(self, index)
 
-    def resolve_to_string(self, bot, clientid):
-        conversation = bot.get_conversation(clientid)
+    def resolve_to_string(self, client_context):
+        conversation = client_context.bot.get_conversation(client_context)
 
         if conversation.has_current_question():
 
@@ -36,7 +36,7 @@ class TemplateStarNode(TemplateIndexedNode):
             matched_context = current_sentence.matched_context
             if matched_context is None:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Star node has no matched context for clientid %s", clientid)
+                    logging.error("Star node has no matched context for clientid %s", client_context.userid)
                 resolved = ""
             else:
                 try:
@@ -56,9 +56,9 @@ class TemplateStarNode(TemplateIndexedNode):
             logging.debug("Star Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -68,7 +68,7 @@ class TemplateStarNode(TemplateIndexedNode):
         string += self.get_index_as_str()
         return string
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<star"
         xml += self.get_index_as_xml()
         xml += ">"

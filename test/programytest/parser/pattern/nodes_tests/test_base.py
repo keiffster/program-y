@@ -71,47 +71,44 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertEquals("NODE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node.to_string(verbose=True))
         self.assertEquals("NODE", node.to_string(verbose=False))
 
-
-        self.assertEquals("", node.to_xml(None, "testid"))
-        self.assertEquals("", node.to_xml(None, "testid"))
+        self.assertEquals("", node.to_xml(self._client_context))
+        self.assertEquals("", node.to_xml(self._client_context))
 
     def test_get_tabs(self):
         node = PatternNode()
         self.assertIsNotNone(node)
 
-        bot = unittest.mock.Mock()
-        bot.configuration = unittest.mock.Mock()
-        bot.configuration.tab_parse_output = True
+        self._client_context.bot.configuration._tab_parse_output = True
 
-        self.assertEquals("", node.get_tabs(bot, 0))
-        self.assertEquals("  ", node.get_tabs(bot, 1))
-        self.assertEquals("          ", node.get_tabs(bot, 5))
+        self.assertEquals("", node.get_tabs(self._client_context, 0))
+        self.assertEquals("  ", node.get_tabs(self._client_context, 1))
+        self.assertEquals("          ", node.get_tabs(self._client_context, 5))
 
-        bot.configuration.tab_parse_output = False
+        self._client_context.bot.configuration._tab_parse_output = False
 
-        self.assertEquals("", node.get_tabs(bot, 0))
-        self.assertEquals("", node.get_tabs(bot, 1))
-        self.assertEquals("", node.get_tabs(bot, 5))
+        self.assertEquals("", node.get_tabs(self._client_context, 0))
+        self.assertEquals("", node.get_tabs(self._client_context, 1))
+        self.assertEquals("", node.get_tabs(self._client_context, 5))
 
     def test_equals_ignore_case(self):
 
         node = PatternNode()
         self.assertIsNotNone(node)
 
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "", ""))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "", ""))
 
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "test"))
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "Test", "test"))
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "Test"))
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "TEST", "test"))
-        self.assertTrue(node.equals_ignore_case(self._bot, "testid", "test", "TEST"))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "test"))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "Test", "test"))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "Test"))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "TEST", "test"))
+        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "test", "TESTX"))
-        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "testX", "TEST"))
+        self.assertFalse(node.equals_ignore_case(self._client_context, "test", "TESTX"))
+        self.assertFalse(node.equals_ignore_case(self._client_context, "testX", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self._bot, "testid", None, "TEST"))
-        self.assertFalse(node.equals_ignore_case(self._bot, "testid", "testX", None))
-        self.assertFalse(node.equals_ignore_case(self._bot, "testid", None, None))
+        self.assertFalse(node.equals_ignore_case(self._client_context, None, "TEST"))
+        self.assertFalse(node.equals_ignore_case(self._client_context, "testX", None))
+        self.assertFalse(node.equals_ignore_case(self._client_context, None, None))
 
     def test_nodes(self):
 
@@ -274,7 +271,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         node.dump("")
 
-        self.assertEqual(node.to_xml(None, None), """<priority word="priority"></priority>
+        self.assertEqual(node.to_xml(self._client_context), """<priority word="priority"></priority>
 <zerormore wildcard="^">
 </zerormore>
 <zerormore wildcard="#">

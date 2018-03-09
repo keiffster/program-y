@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,7 +22,7 @@ from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
-from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.brain.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
@@ -52,12 +52,21 @@ class AIMLParser(object):
 
     def __init__(self, brain):
         self._brain = brain
-        self._pattern_parser = PatternGraph(aiml_parser=self)
-        self._template_parser = TemplateGraph(aiml_parser=self)
-        self._aiml_loader = AIMLLoader(self)
+        self._pattern_parser = self.create_pattern_graph()
+        self._template_parser = self.create_template_graph()
+        self._aiml_loader = self.create_aiml_loader()
         self._num_categories = 0
         self._duplicates = None
         self._errors = None
+
+    def create_pattern_graph(self):
+        return PatternGraph(aiml_parser=self)
+
+    def create_template_graph(self):
+        return TemplateGraph(aiml_parser=self)
+
+    def create_aiml_loader(self):
+        return AIMLLoader(self)
 
     def __getstate__(self):
         # We don't need to pickle the File Writes for duplicates and errors,
@@ -86,39 +95,39 @@ class AIMLParser(object):
     def template_parser(self):
         return self._template_parser
 
-    def create_debug_storage(self, brain_configuration):
-        if brain_configuration.files.aiml_files.errors is not None:
-            self._errors = ErrorsFileWriter(brain_configuration.files.aiml_files.errors)
-        if brain_configuration.files.aiml_files.duplicates is not None:
-            self._duplicates = DuplicatesFileWriter(brain_configuration.files.aiml_files.duplicates)
+    def create_debug_storage(self, configuration):
+        if configuration.files.aiml_files.errors is not None:
+            self._errors = ErrorsFileWriter(configuration.files.aiml_files.errors)
+        if configuration.files.aiml_files.duplicates is not None:
+            self._duplicates = DuplicatesFileWriter(configuration.files.aiml_files.duplicates)
 
-    def save_debug_files(self, brain_configuration):
+    def save_debug_files(self, configuration):
 
-        if brain_configuration.files.aiml_files.errors is not None:
+        if configuration.files.aiml_files.errors is not None:
             num_errors = self._errors.save_content()
             if num_errors > 0:
                 print("WARNING:%d errors detected"%num_errors)
                 self._errors.print_content()
 
-        if brain_configuration.files.aiml_files.duplicates is not None:
+        if configuration.files.aiml_files.duplicates is not None:
             num_dupes = self._duplicates.save_content()
             if num_dupes > 0:
                 print("WARNING: %d duplicated grammars detected"%num_dupes)
                 self._duplicates.print_content()
 
-    def display_debug_info(self, brain_configuration):
+    def display_debug_info(self, configuration):
         if self._errors is not None:
             self._errors.display_debug_info()
         if self._duplicates is not None:
             self._duplicates.display_debug_info()
 
-    def load_files_from_directory(self, brain_configuration):
+    def load_files_from_directory(self, configuration):
         start = datetime.datetime.now()
         total_aimls_loaded = 0
-        for file in brain_configuration.files.aiml_files.files:
+        for file in configuration.files.aiml_files.files:
             aimls_loaded = self._aiml_loader.load_dir_contents(file,
-                                                               brain_configuration.files.aiml_files.directories,
-                                                               brain_configuration.files.aiml_files.extension)
+                                                               configuration.files.aiml_files.directories,
+                                                               configuration.files.aiml_files.extension)
             total_aimls_loaded = len(aimls_loaded)
         stop = datetime.datetime.now()
         diff = stop - start
@@ -129,34 +138,34 @@ class AIMLParser(object):
             if logging.getLogger().isEnabledFor(logging.INFO):
                 logging.info("Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
 
-    def load_single_file(self, brain_configuration):
+    def load_single_file(self, configuration):
         start = datetime.datetime.now()
-        self._aiml_loader.load_single_file_contents(brain_configuration.files.aiml_files.file)
+        self._aiml_loader.load_single_file_contents(configuration.files.aiml_files.file)
         stop = datetime.datetime.now()
         diff = stop - start
         if logging.getLogger().isEnabledFor(logging.INFO):
             logging.info("Total processing time %.6f secs", diff.total_seconds())
             logging.info("Loaded a single aiml file with %d categories", self.num_categories)
 
-    def load_aiml(self, brain_configuration: BrainConfiguration):
+    def load_aiml(self, configuration: BrainConfiguration):
 
-        if brain_configuration.files.aiml_files is not None:
+        if configuration.files.aiml_files is not None:
 
-            self.create_debug_storage(brain_configuration)
+            self.create_debug_storage(configuration)
 
-            if brain_configuration.files.aiml_files.has_multiple_files():
-                self.load_files_from_directory(brain_configuration)
+            if configuration.files.aiml_files.has_multiple_files():
+                self.load_files_from_directory(configuration)
 
-            elif brain_configuration.files.aiml_files.has_single_file():
-                self.load_single_file(brain_configuration)
+            elif configuration.files.aiml_files.has_single_file():
+                self.load_single_file(configuration)
 
             else:
                 if logging.getLogger().isEnabledFor(logging.INFO):
                     logging.info("No AIML files or file defined in configuration to load")
 
-            self.save_debug_files(brain_configuration)
+            self.save_debug_files(configuration)
 
-            self.display_debug_info(brain_configuration)
+            self.display_debug_info(configuration)
 
         else:
             if logging.getLogger().isEnabledFor(logging.INFO):
@@ -453,16 +462,16 @@ class AIMLParser(object):
 
         return (pattern, topic_element, that_element, template_graph_root)
 
-    def match_sentence(self, bot, clientid, pattern_sentence, topic_pattern, that_pattern):
+    def match_sentence(self, client_context, pattern_sentence, topic_pattern, that_pattern):
 
-        topic_sentence = Sentence(bot.brain.tokenizer, topic_pattern)
-        that_sentence = Sentence(bot.brain.tokenizer, that_pattern)
+        topic_sentence = Sentence(client_context.brain.tokenizer, topic_pattern)
+        that_sentence = Sentence(client_context.brain.tokenizer, that_pattern)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
                           pattern_sentence.text(), topic_pattern, that_pattern)
 
-        sentence = Sentence(bot.brain.tokenizer)
+        sentence = Sentence(client_context.brain.tokenizer)
         sentence.append_sentence(pattern_sentence)
         sentence.append_word('__TOPIC__')
         sentence.append_sentence(topic_sentence)
@@ -471,11 +480,11 @@ class AIMLParser(object):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Matching [%s]", sentence.words_from_current_pos(0))
 
-        context = MatchContext(max_search_depth=bot.configuration.max_search_depth,
-                               max_search_timeout=bot.configuration.max_search_timeout,
-                               tokenizer=bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=client_context.bot.configuration.max_search_depth,
+                               max_search_timeout=client_context.bot.configuration.max_search_timeout,
+                               tokenizer=client_context.brain.tokenizer)
 
-        template = self._pattern_parser._root_node.match(bot, clientid, context, sentence)
+        template = self._pattern_parser._root_node.match(client_context, context, sentence)
 
         if template is not None:
             context._template_node = template

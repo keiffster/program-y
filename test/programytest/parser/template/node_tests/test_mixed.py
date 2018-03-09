@@ -26,7 +26,7 @@ class TemplateNodeMixedTests(ParserTestsBaseClass):
         root.append(random1)
         root.append(random2)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Test1 Test3",
                                     "Test1 Test4",
@@ -54,7 +54,7 @@ class TemplateNodeMixedTests(ParserTestsBaseClass):
 
         root.append(random3)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Test1",
                                     "Test2",
@@ -77,7 +77,7 @@ class TemplateNodeMixedTests(ParserTestsBaseClass):
 
         self.assertEqual(len(root.children), 3)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Hello Test1 World!", "Hello Test2 World!", "Hello Test3 World!"])
 

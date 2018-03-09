@@ -12,14 +12,12 @@ class MockTemplateProgramNode(TemplateProgramNode):
     def __init__(self):
         TemplateProgramNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateProgramNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
-        test_bot = Bot(Brain(BrainConfiguration()), BotConfiguration())
-
         root = TemplateNode()
         self.assertIsNotNone(root)
         self.assertIsNotNone(root.children)
@@ -31,17 +29,17 @@ class TemplateProgramNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        test_bot.brain.properties.add_property("fullname", "testbot")
-        test_bot.brain.properties.add_property("version", "1.0.0")
+        self._client_context.brain.properties.add_property("fullname", "testbot")
+        self._client_context.brain.properties.add_property("version", "1.0.0")
 
-        self.assertEqual(root.resolve(test_bot, "testid"), "testbot 1.0.0")
+        self.assertEqual(root.resolve(self._client_context), "testbot 1.0.0")
 
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateProgramNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><program /></template>", xml_str)
@@ -51,6 +49,6 @@ class TemplateProgramNodeTests(ParserTestsBaseClass):
         node = MockTemplateProgramNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

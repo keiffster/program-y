@@ -1,7 +1,9 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
 
 class BasicTestClient(TestClient):
 
@@ -10,28 +12,30 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class InfoAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        InfoAIMLTests.test_client = BasicTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(BasicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_program(self):
-        response = InfoAIMLTests.test_client.bot.ask_question("test",  "TEST PROGRAM")
+        response = self._client_context.bot.ask_question(self._client_context,  "TEST PROGRAM")
         self.assertIsNotNone(response)
         self.assertEqual(response, "AIMLBot")
 
     def test_id(self):
-        response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ID")
+        response = self._client_context.bot.ask_question(self._client_context, "TEST ID")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "test")
+        self.assertEqual(response, "testclient")
 
     def test_env(self):
 
-        InfoAIMLTests.test_client.bot.brain.properties.add_property("env","test")
+        self._client_context.bot.brain.properties.add_property("env", "test")
 
-        response = InfoAIMLTests.test_client.bot.ask_question("test", "TEST ENVIRONMENT")
+        response = self._client_context.bot.ask_question(self._client_context, "TEST ENVIRONMENT")
         self.assertIsNotNone(response)
         self.assertEqual(response, "ENVIRONMENT IS test")

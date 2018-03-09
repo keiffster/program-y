@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -54,10 +54,10 @@ class PatternISetNode(PatternNode):
     def iset_name(self):
         return self._iset_name
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<iset words="%s">'% ". ".join(self.words)
-        string += super(PatternISetNode, self).to_xml(bot, clientid)
+        string += super(PatternISetNode, self).to_xml(client_context)
         string += "</iset>\n"
         return string
 
@@ -72,7 +72,7 @@ class PatternISetNode(PatternNode):
                 return False
         return True
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
         if word is not None:
             word = word.upper()

@@ -1,7 +1,10 @@
 import unittest
 import os
 
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
+
 
 class XMLTestClient(TestClient):
 
@@ -10,28 +13,31 @@ class XMLTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(XMLTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class XMLAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        XMLAIMLTests.test_client = XMLTestClient()
+        self._client_context = ClientContext(XMLTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_basic_xml(self):
-        response = XMLAIMLTests.test_client.bot.ask_question("test",  "HELLO")
+        response = self._client_context.bot.ask_question(self._client_context,  "HELLO")
         self.assertEqual(response, "I said <b>how are you</b> ?")
 
     def test_html_link(self):
-        response = XMLAIMLTests.test_client.bot.ask_question("test",  "PICTURE")
+        response = self._client_context.bot.ask_question(self._client_context,  "PICTURE")
         self.assertEqual(response, 'You can see my picture at <a href="http://someurl/image.png">Here</a>')
 
     def test_html_link_with_star(self):
-        response = XMLAIMLTests.test_client.bot.ask_question("test",  "GOOGLE AIML")
+        response = self._client_context.bot.ask_question(self._client_context,  "GOOGLE AIML")
         self.assertEqual(response, '<a target="_new" href="http://www.google.com/search?q=AIML">Google Search</a>')
 
     def test_html_br(self):
-        response = XMLAIMLTests.test_client.bot.ask_question("test",  "TEST1")
+        response = self._client_context.bot.ask_question(self._client_context,  "TEST1")
         self.assertEqual(response, 'Line1\n\t\t\tLine2')
 
-        response = XMLAIMLTests.test_client.bot.ask_question("test",  "TEST2")
+        response = self._client_context.bot.ask_question(self._client_context,  "TEST2")
         self.assertEqual(response, 'Line1 <br></br> Line2')

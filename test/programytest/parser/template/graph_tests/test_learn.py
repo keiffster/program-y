@@ -41,8 +41,8 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         self.assertIsNotNone(learn_node.children[0].template)
         self.assertIsInstance(learn_node.children[0].template, TemplateNode)
 
-        resolved = learn_node.resolve(self._bot, self._clientid)
+        resolved = learn_node.resolve(self._client_context)
         self.assertEqual(resolved, "")
 
-        response = self._bot.ask_question(self._clientid, "HELLO WORLD THERE")
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)

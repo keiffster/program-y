@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -26,10 +26,10 @@ class PatternThatNode(PatternNode):
     def __init__(self):
         PatternNode.__init__(self)
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<that>'
-        string += super(PatternThatNode, self).to_xml(bot, clientid)
+        string += super(PatternThatNode, self).to_xml(client_context)
         string += '</that>\n'
         return string
 
@@ -54,9 +54,9 @@ class PatternThatNode(PatternNode):
             return "THAT [%s]" % self._child_count(verbose)
         return "THAT"
 
-    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth):
 
-        tabs = self.get_tabs(bot, depth)
+        tabs = self.get_tabs(client_context, depth)
 
         if context.search_depth_exceeded(depth) is True:
         # if depth > context.max_search_depth:
@@ -67,7 +67,7 @@ class PatternThatNode(PatternNode):
         if words.word(word_no) == PatternThatNode.THAT:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sThat matched %s", tabs, words.word(word_no))
-            return super(PatternThatNode, self).consume(bot, clientid, context, words, word_no + 1, match_type, depth+1)
+            return super(PatternThatNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("%sTHAT NOT matched %s", tabs, words.word(word_no))

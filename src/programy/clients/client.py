@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -23,8 +23,10 @@ import yaml
 from programy.config.file.factory import ConfigurationFactory
 from programy.clients.args import CommandLineClientArguments
 from programy.bot import Bot
-from programy.brain import Brain
 from programy.config.programy import ProgramyConfiguration
+from programy.context import ClientContext
+from programy.utils.license.keys import LicenseKeys
+
 
 class ResponseLogger(object):
 
@@ -34,10 +36,28 @@ class ResponseLogger(object):
     def log_response(self, question, answer):
         return
 
+
+class BotFactory(object):
+
+    def __init__(self, configuration):
+        self._bots = {}
+        self.loads_bots(configuration)
+
+    def loads_bots(self, configuration):
+        for config in configuration.configurations:
+            bot = Bot(config)
+            self._bots[bot.id] = bot
+
+    # TODO Replace this with a bot selector
+    def select_bot(self):
+        return next (iter (self._bots.values()))
+
+
 class BotClient(ResponseLogger):
 
-    def __init__(self, clientid, argument_parser=None):
-        self._clientid = clientid
+    def __init__(self, id, argument_parser=None):
+        self._id = id
+        self._configuration = None
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
 
@@ -45,50 +65,31 @@ class BotClient(ResponseLogger):
 
         self.load_configuration(self.arguments)
 
-        self.create_brain()
+        self._license_keys = None
+        self.load_license_keys()
 
-        self.create_bot()
+        self.get_license_keys()
 
-        self.dump_brain_tree()
-
-        self.set_environment()
+        self._bot_factory = BotFactory(self.configuration.client_configuration)
 
     @property
-    def clientid(self):
-        return self._clientid
+    def configuration(self):
+        return self._configuration
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def arguments(self):
         return self._arguments
 
-    def create_brain(self):
-        self._brain = Brain(self.configuration.brain_configuration)
-
     @property
-    def brain(self):
-        return self._brain
-
-    def create_bot(self):
-        self._bot = Bot(self._brain, self.configuration.bot_configuration)
-
-    @property
-    def bot(self):
-        return self._bot
-
-    def dump_brain_tree(self):
-        if self.configuration.brain_configuration.braintree.file is not None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Dumping AIML Graph as tree to [%s]",
-                              self.configuration.brain_configuration.braintree.file)
-            self.brain.aiml_parser.pattern_parser.save_braintree(
-                self.bot,
-                self.clientid,
-                self.configuration.brain_configuration.braintree.file,
-                self.configuration.brain_configuration.braintree.content)
-
+    def license_keys(self):
+        return self._license_keys
 
     def get_description(self):
-        return 'ProgramY AIML2.0 Console Client'
+        raise NotImplementedError("You must override this and return a client description")
 
     def add_client_arguments(self, parser=None):
         # Nothing to add
@@ -102,6 +103,21 @@ class BotClient(ResponseLogger):
         client_args = CommandLineClientArguments(self, parser=argument_parser)
         client_args.parse_args(self)
         return client_args
+
+    def load_license_keys(self):
+        self._license_keys = LicenseKeys()
+        if self.configuration is not None:
+            self._load_license_keys(self.configuration)
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("No configuration defined when loading license keys")
+
+    def _load_license_keys(self, botconfiguration):
+        if self.configuration.client_configuration.license_keys is not None:
+            self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
+        else:
+            if logging.getLogger().isEnabledFor(logging.WARNING):
+                logging.warning("No client configuration setting for license_keys")
 
     def initiate_logging(self, arguments):
         if arguments.logging is not None:
@@ -119,7 +135,7 @@ class BotClient(ResponseLogger):
         and stil use the dynamic loader capabilities
         :return: Client configuration object
         """
-        raise NotImplementedError("You must override this and return a config string")
+        raise NotImplementedError("You must override this and return a subclassed client configuration")
 
     def load_configuration(self, arguments):
         if arguments.bot_root is None:
@@ -130,16 +146,22 @@ class BotClient(ResponseLogger):
             print("No bot root argument set, defaulting to [%s]" % arguments.bot_root)
 
         if arguments.config_filename is not None:
-            self.configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
+            self._configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
                                                                                    arguments.config_filename,
                                                                                    arguments.config_format,
                                                                                    arguments.bot_root)
         else:
             print("No configuration file specified, using defaults only !")
-            self.configuration = ProgramyConfiguration(self.get_client_configuration())
+            self._configuration = ProgramyConfiguration(self.get_client_configuration())
 
-    def set_environment(self):
-        self.bot.brain.properties.add_property("env", "Unknown")
+    def get_license_keys(self):
+        return
+
+    def create_client_context(self, userid):
+        client_context = ClientContext(self, userid)
+        client_context.bot = self._bot_factory.select_bot()
+        return client_context
 
     def run(self):
-        return
+        raise NotImplementedError("You must override this and implement the logic to run the client")
+

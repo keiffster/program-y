@@ -1,16 +1,16 @@
 import unittest
 
 from programy.bot import Bot
-from programy.brain import Brain
 from programytest.custom import CustomAssertions
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
-from programy.parser.aiml_parser import AIMLParser
+from programy.config.bot.bot import BotConfiguration
+from programy.context import ClientContext
+from programytest.aiml_tests.client import TestClient
+
 
 class TestBot(Bot):
 
-    def __init__(self, brain, bot_config):
-        Bot.__init__(self, brain, bot_config)
+    def __init__(self, bot_config):
+        Bot.__init__(self, bot_config)
         self._response = "Unknown"
 
     @property
@@ -28,7 +28,7 @@ class TestBot(Bot):
 class ParserTestsBaseClass(unittest.TestCase, CustomAssertions):
 
     def setUp(self):
-        self._clientid = "testid"
-        self._brain = Brain(BrainConfiguration())
-        self._bot = TestBot(self._brain, BotConfiguration())
-        self._aiml_parser = AIMLParser(self._brain)
+        self._client_context = ClientContext(TestClient(), "testid")
+        self._client_context.bot = TestBot(BotConfiguration())
+        self._client_context.brain = self._client_context.bot.brain
+

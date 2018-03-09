@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,10 +34,10 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
     def matching_wildcards(self):
         return PatternOneOrMoreWildCardNode.MATCH_CHARS
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<oneormore wildcard="%s">\n' % self.wildcard
-        string += super(PatternOneOrMoreWildCardNode, self).to_xml(bot, clientid)
+        string += super(PatternOneOrMoreWildCardNode, self).to_xml(client_context)
         string += "</oneormore>\n"
         return string
 
@@ -56,9 +56,9 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
         return "ONEORMORE [%s]" % (self.wildcard)
 
-    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth):
 
-        tabs = self.get_tabs(bot, depth)
+        tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
             if logging.getLogger().isEnabledFor(logging.ERROR):
@@ -80,12 +80,12 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         context.add_match(context_match)
         matches_added = 1
 
-        match = self.check_child_is_wildcard(tabs, bot, clientid, context, words, word_no, match_type, depth)
+        match = self.check_child_is_wildcard(tabs, client_context, context, words, word_no, match_type, depth)
         if match is not None:
             return match
 
         if self._topic is not None:
-            match = self._topic.consume(bot, clientid, context, words, word_no+1, Match.TOPIC, depth+1)
+            match = self._topic.consume(client_context, context, words, word_no+1, Match.TOPIC, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched topic, success!", tabs)
@@ -96,7 +96,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 return None
 
         if self._that is not None:
-            match = self._that.consume(bot, clientid, context, words, word_no+1, Match.THAT, depth+1)
+            match = self._that.consume(client_context, context, words, word_no+1, Match.THAT, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched that, success!", tabs)
@@ -110,14 +110,13 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         if word_no >= words.num_words():
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sNo more words", tabs)
-            return super(PatternOneOrMoreWildCardNode, self).consume(bot,
-                                                                     clientid, context, words, word_no, match_type, depth+1)
+            return super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
         word = words.word(word_no)
 
         if self._children:
             for child in self._children:
 
-                result = child.equals(bot, clientid, words, word_no)
+                result = child.equals(client_context, words, word_no)
                 if result.matched is True:
                     word_no = result.word_no
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -128,7 +127,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                     context.add_match(context_match2)
                     matches_added += 1
 
-                    match = child.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+                    match = child.consume(client_context, context, words, word_no+1, match_type, depth+1)
                     if match is not None:
                         return match
 
@@ -149,7 +148,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             logging.debug("%sNo children, consume words until next break point", tabs)
 
         while word_no < words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 return match
 
@@ -168,9 +167,9 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         context_match.add_word(word)
 
         if word_no == words.num_words()-1:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
         else:
-            match = super(PatternOneOrMoreWildCardNode, self).consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
 
         if match is not None:
             return match

@@ -31,7 +31,7 @@ class PatternThatNodeTests(ParserTestsBaseClass):
         self.assertEqual(node.to_string(), "THAT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
         self.assertEqual(node.to_string(verbose=False), "THAT")
 
-        self.assertEqual("<that></that>\n", node.to_xml(self._bot, self._clientid))
+        self.assertEqual("<that></that>\n", node.to_xml(self._client_context))
 
     def test_root_to_that(self):
         node1 = PatternThatNode()

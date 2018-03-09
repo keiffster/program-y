@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import logging
 
-from programy.config.sections.brain.security import BrainSecurityConfiguration
+from programy.config.brain.security import BrainSecurityConfiguration
 from programy.security.authenticate.authenticator import Authenticator
 
 
@@ -28,7 +28,7 @@ class ClientIdAuthenticationService(Authenticator):
             "console"
         ]
 
-    def user_auth_service(self, bot, clientid):
+    def user_auth_service(self, client_context):
         return False
 
     # Its at this point that we would call a user auth service, and if that passes
@@ -36,18 +36,18 @@ class ClientIdAuthenticationService(Authenticator):
     # This is a very naive approach, and does not cater for users that log out, invalidate
     # their credentials, or have a TTL on their credentials
     # #Exercise for the reader......
-    def _auth_clientid(self, bot, clientid):
-        authorised = self.user_auth_service(bot, clientid)
+    def _auth_clientid(self, client_context):
+        authorised = self.user_auth_service(client_context)
         if authorised is True:
-            self.authorised.append(clientid)
+            self.authorised.append(client_context.userid)
         return authorised
 
-    def authenticate(self, bot, clientid: str):
+    def authenticate(self, client_context):
         try:
-            if clientid in self.authorised:
+            if client_context.userid in self.authorised:
                 return True
             else:
-                if self._auth_clientid(bot, clientid) is True:
+                if self._auth_clientid(client_context) is True:
                     return True
 
                 return False

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -26,17 +26,17 @@ class TemplateIdNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), clientid)
-        if clientid is not None:
-            return clientid
+            logging.debug("[%s] resolved to [%s]", self.to_string(), client_context.client.id)
+        if client_context.client.id is not None:
+            return client_context.client.id
         return ""
 
     def to_string(self):
         return "ID"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         return "<id />"
 
     #######################################################################################################

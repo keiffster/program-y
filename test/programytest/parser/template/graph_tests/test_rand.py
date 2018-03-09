@@ -55,7 +55,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0].children[1], TemplateNode)
         self.assertIsInstance(ast.children[0].children[2], TemplateNode)
 
-        selection = ast.children[0].resolve(self._bot, self._clientid)
+        selection = ast.children[0].resolve(self._client_context)
         self.assertIsNotNone(selection)
         self.assertIn(selection, ['1', '2', '3'])
 
@@ -97,7 +97,7 @@ class TemplateGraphRandomTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0].children[1].children[0], TemplateRandomNode)
         self.assertEqual(2, len(ast.children[0].children[1].children[0].children))
 
-        selection = ast.children[0].resolve(self._bot, self._clientid)
+        selection = ast.children[0].resolve(self._client_context)
         self.assertIsNotNone(selection)
         self.assertIn(selection, ['Say something', 'Say the other', 'Hello world!', 'Goodbye cruel world'])
 

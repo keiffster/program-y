@@ -10,7 +10,7 @@ class MockTemplateSRAINode(TemplateSRAINode):
     def __init__(self):
         TemplateSRAINode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSRAINodeTests(ParserTestsBaseClass):
@@ -30,8 +30,8 @@ class TemplateSRAINodeTests(ParserTestsBaseClass):
         node.append(TemplateWordNode("Hello"))
         self.assertEqual(len(node.children), 1)
 
-        self._bot.response = "Hiya"
-        self.assertEqual(root.resolve(self._bot, self._clientid), "Hiya")
+        self._client_context.bot.response = "Hiya"
+        self.assertEqual(root.resolve(self._client_context), "Hiya")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -39,7 +39,7 @@ class TemplateSRAINodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><srai>Hello</srai></template>", xml_str)
@@ -49,6 +49,6 @@ class TemplateSRAINodeTests(ParserTestsBaseClass):
         node = MockTemplateSRAINode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

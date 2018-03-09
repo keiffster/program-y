@@ -10,6 +10,7 @@ from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
 
+
 class PatternRootNodeTests(ParserTestsBaseClass):
 
     def test_init(self):

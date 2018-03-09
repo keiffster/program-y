@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -43,13 +43,13 @@ class TemplateNode(object):
             output_func("{0}{1}{2}".format(tabs, child.to_string(), eol))
             self.output_child(child, tabs + "\t", eol, output_func)
 
-    def resolve_children_to_string(self, bot, clientid):
-        words = [child.resolve(bot, clientid) for child in self._children]
-        return bot.brain.tokenizer.words_to_texts(words)
+    def resolve_children_to_string(self, client_context):
+        words = [child.resolve(client_context) for child in self._children]
+        return client_context.brain.tokenizer.words_to_texts(words)
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            resolved = self.resolve_children_to_string(bot, clientid)
+            resolved = self.resolve_children_to_string(client_context)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
@@ -60,23 +60,23 @@ class TemplateNode(object):
     def to_string(self):
         return "[NODE]"
 
-    def to_xml(self, bot, clientid):
-        return self.children_to_xml(bot, clientid)
+    def to_xml(self, client_context):
+        return self.children_to_xml(client_context)
 
-    def xml_tree(self, bot, clientid):
+    def xml_tree(self, client_context):
         xml = "<template>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</template>"
         return ET.fromstring(xml)
 
-    def children_to_xml(self, bot, clientid):
+    def children_to_xml(self, client_context):
         xml = ""
         first = True
         for child in self.children:
             if first is not True:
                 xml += " "
             first = False
-            xml += child.to_xml(bot, clientid)
+            xml += child.to_xml(client_context)
         return xml
 
     def parse_text(self, graph, text):

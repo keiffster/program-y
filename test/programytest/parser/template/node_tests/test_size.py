@@ -9,7 +9,7 @@ class MockTemplateSizeNode(TemplateSizeNode):
     def __init__(self):
         TemplateSizeNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSizeNodeTests(ParserTestsBaseClass):
@@ -26,7 +26,7 @@ class TemplateSizeNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "0")
 
@@ -35,7 +35,7 @@ class TemplateSizeNodeTests(ParserTestsBaseClass):
         node = TemplateSizeNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><size /></template>", xml_str)
@@ -45,6 +45,6 @@ class TemplateSizeNodeTests(ParserTestsBaseClass):
         node = MockTemplateSizeNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -250,14 +250,14 @@ class PatternGraph(object):
         self.root.dump("", output_func, eol, verbose)
         output_func("")
 
-    def save_braintree(self, bot, clientid, filename, content):
+    def save_braintree(self, client_context, filename, content):
         if content == 'txt':
             with open(filename, "w+", encoding="utf-8") as dump_file:
                 self.dump(output_func=dump_file.write, eol="\n")
         elif content == 'xml':
             braintree = '<?xml version="1.0" encoding="UTF-8"?>\n'
             braintree += '<aiml>\n'
-            braintree += self.root.to_xml(bot, clientid)
+            braintree += self.root.to_xml(client_context)
             braintree += '</aiml>\n'
             with open(filename, "w+", encoding="utf-8") as dump_file:
                 dump_file.write(braintree)

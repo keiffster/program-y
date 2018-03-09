@@ -15,5 +15,5 @@ class TemplateGraphBasicTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
         self.assertEqual(0, len(ast.children))
-        self.assertEqual("", ast.resolve(None, None))
+        self.assertEqual("", ast.resolve(self._client_context))
 

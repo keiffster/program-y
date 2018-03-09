@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -216,10 +216,10 @@ class PatternNode(object):
     def equivalent(self, other):
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         return EqualsMatch(False, word_no)
 
-    def equals_ignore_case(self, bot, client, word1, word2):
+    def equals_ignore_case(self, client_context, word1, word2):
         if word1 is not None and word2 is not None:
             return bool(word1.upper() == word2.upper())
         return False
@@ -387,8 +387,8 @@ class PatternNode(object):
             return "NODE [%s]" % self._child_count(verbose)
         return "NODE"
 
-    def get_tabs(self, bot, depth):
-        if bot.configuration.tab_parse_output is True:
+    def get_tabs(self, client_context, depth):
+        if client_context.bot.configuration.tab_parse_output is True:
             return TextUtils.get_tabs(depth)
         return ""
 
@@ -418,39 +418,39 @@ class PatternNode(object):
         for child in self.children:
             child.dump(tabs+"\t", output_func, eol, verbose)
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
 
         for priority in self._priority_words:
-            string += priority.to_xml(bot, clientid)
+            string += priority.to_xml(client_context)
 
         if self._0ormore_arrow is not None:
-            string += self._0ormore_arrow.to_xml(bot, clientid)
+            string += self._0ormore_arrow.to_xml(client_context)
         if self._0ormore_hash is not None:
-            string += self._0ormore_hash.to_xml(bot, clientid)
+            string += self._0ormore_hash.to_xml(client_context)
         if self._1ormore_underline is not None:
-            string += self._1ormore_underline.to_xml(bot, clientid)
+            string += self._1ormore_underline.to_xml(client_context)
         if self._1ormore_star is not None:
-            string += self._1ormore_star.to_xml(bot, clientid)
+            string += self._1ormore_star.to_xml(client_context)
         if self._topic is not None:
-            string += self._topic.to_xml(bot, clientid)
+            string += self._topic.to_xml(client_context)
         if self._that is not None:
-            string += self._that.to_xml(bot, clientid)
+            string += self._that.to_xml(client_context)
         if self._template is not None:
-            string += self._template.to_xml(bot, clientid)
+            string += self._template.to_xml(client_context)
 
         for child in self.children:
-            string += child.to_xml(bot, clientid)
+            string += child.to_xml(client_context)
 
         return string
 
-    def match_children(self, bot, clientid, children, child_type, words, word_no, context, match_type, depth):
+    def match_children(self, client_context, children, child_type, words, word_no, context, match_type, depth):
 
-        tabs = self.get_tabs(bot, depth)
+        tabs = self.get_tabs(client_context, depth)
 
         for child in children:
 
-            result = child.equals(bot, clientid, words, word_no)
+            result = child.equals(client_context, words, word_no)
             if result.matched is True:
                 word_no = result.word_no
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -460,7 +460,7 @@ class PatternNode(object):
 
                 context.add_match(match_node)
 
-                match = child.consume(bot, clientid, context, words, word_no + 1, match_type, depth+1)
+                match = child.consume(client_context, context, words, word_no + 1, match_type, depth+1)
                 if match is not None:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("%sMatched %s child, success!", tabs, child_type)
@@ -470,9 +470,9 @@ class PatternNode(object):
 
         return None, word_no
 
-    def consume(self, bot, clientid, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth):
 
-        tabs = self.get_tabs(bot, depth)
+        tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
             if logging.getLogger().isEnabledFor(logging.ERROR):
@@ -496,7 +496,7 @@ class PatternNode(object):
                 return None
 
         if self._topic is not None:
-            match = self._topic.consume(bot, clientid, context, words, word_no, Match.TOPIC, depth+1)
+            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched topic, success!", tabs)
@@ -507,7 +507,7 @@ class PatternNode(object):
                 return None
 
         if self._that is not None:
-            match = self._that.consume(bot, clientid, context, words, word_no, Match.THAT, depth+1)
+            match = self._that.consume(client_context, context, words, word_no, Match.THAT, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched that, success!", tabs)
@@ -517,37 +517,37 @@ class PatternNode(object):
                     logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
-        match, word_no = self.match_children(bot, clientid, self._priority_words, "Priority", words, word_no, context, match_type, depth)
+        match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_hash is not None:
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 0 or more hash, success!", tabs)
                 return match
 
         if self._1ormore_underline is not None:
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 1 or more underline, success!", tabs)
                 return match
 
-        match, word_no = self.match_children(bot, clientid, self._children, "Word", words, word_no, context, match_type, depth)
+        match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context, match_type, depth)
         if match is not None:
             return match
 
         if self._0ormore_arrow is not None:
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 0 or more arrow, success!", tabs)
                 return match
 
         if self._1ormore_star is not None:
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no, match_type, depth+1)
+            match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("%sMatched 1 or more star, success!", tabs)

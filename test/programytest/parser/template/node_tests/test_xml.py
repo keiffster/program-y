@@ -10,7 +10,7 @@ class MockTemplateXMLNode(TemplateXMLNode):
     def __init__(self):
         TemplateXMLNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateXMLNodeTests(ParserTestsBaseClass):
@@ -27,7 +27,7 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
 
         self.assertEqual(len(root.children), 1)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual("<dial>07777777777</dial>", resolved)
 
@@ -44,7 +44,7 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
 
         self.assertEqual(len(root.children), 1)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual('<dial leave_message="true">07777777777</dial>', resolved)
 
@@ -55,7 +55,7 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
         root.append(xml)
         xml.append(TemplateWordNode("07777777777"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><dial>07777777777</dial></template>", xml_str)
@@ -68,7 +68,7 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
         root.append(xml)
         xml.append(TemplateWordNode("07777777777"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><dial leave_message="true">07777777777</dial></template>', xml_str)
@@ -78,6 +78,6 @@ class TemplateXMLNodeTests(ParserTestsBaseClass):
         node = MockTemplateXMLNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

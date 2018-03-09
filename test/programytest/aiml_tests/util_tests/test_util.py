@@ -1,8 +1,10 @@
 import unittest
 import os
 
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class UtiltyTestClient(TestClient):
 
@@ -11,15 +13,17 @@ class UtiltyTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(UtiltyTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
 
 
 class UtiltyAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        UtiltyAIMLTests.test_client = UtiltyTestClient()
+        self._client_context = ClientContext(UtiltyTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_util_function(self):
-        response = UtiltyAIMLTests.test_client.bot.ask_question("test", "KEITH IS A PROGRAMMER")
+        response = self._client_context.bot.ask_question(self._client_context, "KEITH IS A PROGRAMMER")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Ok, I will remember KEITH is a PROGRAMMER .')

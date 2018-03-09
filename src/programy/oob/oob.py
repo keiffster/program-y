@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -30,10 +30,10 @@ class OutOfBandProcessor(object):
 
     # Override this method in your own class to do something
     # useful with the command data
-    def execute_oob_command(self, bot, clientid):
+    def execute_oob_command(self, client_context):
         return ""
 
-    def process_out_of_bounds(self, bot, clientid, oob: ET.Element):
+    def process_out_of_bounds(self, client_context, oob: ET.Element):
         if self.parse_oob_xml(oob) is True:
-            return self.execute_oob_command(bot, clientid)
+            return self.execute_oob_command(client_context)
         return ""

@@ -3,15 +3,22 @@ import os
 import xml.etree.ElementTree as ET
 
 from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.sections.client.console import ConsoleConfiguration
-from programy.security.authorise.authorisor import AuthorisationException
+from programy.clients.events.console.config import ConsoleConfiguration
 from programy.oob.default import DefaultOutOfBandProcessor
 from programy.oob.dial import DialOutOfBandProcessor
 from programy.oob.email import EmailOutOfBandProcessor
+from programy.context import ClientContext
+
+from programytest.aiml_tests.client import TestClient
 
 class BrainTests(unittest.TestCase):
+
+    def setUp(self):
+        self._client_context = ClientContext(TestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def load_os_specific_configuration(self, yaml, linux_filename, windows_filename):
         if os.name == 'posix':
@@ -22,7 +29,7 @@ class BrainTests(unittest.TestCase):
             raise Exception("Unknown os [%s]"%os.name)
 
     def test_brain_init_no_config(self):
-        brain = Brain(BrainConfiguration() )
+        brain = Brain(None, BrainConfiguration() )
         self.assertIsNotNone(brain)
 
         self.assertIsNotNone(brain.aiml_parser)
@@ -48,7 +55,7 @@ class BrainTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_configuration(yaml, ".")
 
-        brain = Brain(brain_config)
+        brain = Brain(None, brain_config)
         self.assertIsNotNone(brain)
 
         self.assertIsNotNone(brain.aiml_parser)
@@ -76,9 +83,9 @@ class BrainTests(unittest.TestCase):
         brain.load_binary(brain_config)
 
         oob_content = ET.fromstring("<oob><something>other</something></oob>")
-        self.assertEqual("", brain.default_oob.process_out_of_bounds(None, "console", oob_content))
+        self.assertEqual("", brain.default_oob.process_out_of_bounds(self._client_context, oob_content))
         oob_content = ET.fromstring("<oob><dial>07777777777</dial></oob>")
-        self.assertEqual("", brain.oobs['dial'].process_out_of_bounds(None, "console", oob_content))
+        self.assertEqual("", brain.oobs['dial'].process_out_of_bounds(self._client_context, oob_content))
 
     def test_brain_init_with_secure_config(self):
 
@@ -88,8 +95,10 @@ class BrainTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_configuration(yaml, os.path.dirname(__file__))
 
-        brain = Brain(brain_config)
+        brain = Brain(None, brain_config)
         self.assertIsNotNone(brain)
+
+        #TODO Add tests here
 
     def test_oob_loading(self):
 
@@ -99,7 +108,7 @@ class BrainTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_configuration(yaml, ".")
 
-        brain = Brain(brain_config)
+        brain = Brain(None, brain_config)
 
         self.assertIsInstance(brain.default_oob, DefaultOutOfBandProcessor)
         self.assertIsInstance(brain.oobs['dial'], DialOutOfBandProcessor)
@@ -113,7 +122,7 @@ class BrainTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_configuration(yaml, ".")
 
-        brain = Brain(brain_config)
+        brain = Brain(None, brain_config)
 
         response, oob = brain.strip_oob("<oob>command</oob>")
         self.assertEqual("", response)
@@ -135,6 +144,6 @@ class BrainTests(unittest.TestCase):
         brain_config = BrainConfiguration()
         brain_config.load_configuration(yaml, ".")
 
-        brain = Brain(brain_config)
+        brain = Brain(None, brain_config)
 
-        self.assertEqual("", brain.process_oob(None, "console", "<oob></oob>"))
+        self.assertEqual("", brain.process_oob("console", "<oob></oob>"))

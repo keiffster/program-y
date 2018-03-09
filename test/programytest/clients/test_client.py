@@ -4,32 +4,40 @@ import os
 from programy.clients.client import BotClient
 
 from programytest.clients.arguments import MockArgumentParser
-from programy.config.base import BaseConfigurationData
+from programy.config.client.config import ClientConfigurationData
 
-class MockBaseConfigurationData(BaseConfigurationData):
 
-    def __init__(self, name):
-        BaseConfigurationData.__init__(self, name)
+class MockClientConfiguration(ClientConfigurationData):
 
-    def load_configuration(self, config_file, bot_root):
-        return
+    def __init__(self):
+        ClientConfigurationData.__init__(self, "console")
+
+    def load_configuration(self, configuration_file, bot_root):
+        console = configuration_file.get_section(self.section_name)
+        super(MockClientConfiguration, self).load_configuration(configuration_file, console, bot_root)
+
 
 class MockBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "Mock", argument_parser=argument_parser)
+        BotClient.__init__(self, "Mock", argument_parser)
+
+    def get_description(self):
+        return "ProgramY Test Client"
+
+    def set_environment(self):
+        self.bot.brain.properties.add_property("env", "Mock")
 
     def get_client_configuration(self):
-        return MockBaseConfigurationData("mock")
+        return MockClientConfiguration()
 
-    def load_configuration(self, arguments):
-        super(MockBotClient, self).load_configuration(arguments)
-        if os.name == 'posix':
-            self.configuration.brain_configuration.braintree._file = "/tmp/tmp_braintree.txt"
-        elif os.name == 'nt':
-            self.configuration.brain_configuration.braintree._file = "C:\Windows\Temp\tmp_braintree.txt"
-        else:
-            raise Exception("Unknown os [%s]" % os.name)
+    def set_environment(self):
+        """For testing purposes we do nothing"""
+        return
+
+    def run(self):
+        """For testing purposes we do nothing"""
+        return
 
 class BotClientTests(unittest.TestCase):
 
@@ -49,7 +57,7 @@ class BotClientTests(unittest.TestCase):
         else:
             raise Exception("Unknown os [%s]" % os.name)
 
-        arguments = MockArgumentParser(bot_root = ".",
+        arguments = MockArgumentParser(bot_root=".",
                                        logging=logging_file,
                                        config=config_file,
                                        cformat="yaml",
@@ -59,7 +67,7 @@ class BotClientTests(unittest.TestCase):
         self.assertIsNotNone(client.arguments)
 
         self.assertIsNotNone(client.arguments)
-        self.assertEquals("ProgramY AIML2.0 Console Client", client.get_description())
+        self.assertEquals("ProgramY Test Client", client.get_description())
 
         client.run()
         client.log_response(None, None)

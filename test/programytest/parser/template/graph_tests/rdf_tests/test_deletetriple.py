@@ -9,9 +9,9 @@ from programytest.parser.template.graph_tests.graph_test_client import TemplateG
 class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
 
     def test_delete_triple_type1(self):
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
-        self._bot.brain.rdf.add_entity("X", "Y", "Z")
-        self.assertTrue(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""
 			<template>
@@ -32,14 +32,14 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateDeleteTripleNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
     def test_delete_triple_type2(self):
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
-        self._bot.brain.rdf.add_entity("X", "Y", "Z")
-        self.assertTrue(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""
 			<template>
@@ -57,14 +57,14 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateDeleteTripleNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
     def test_delete_triple_type3(self):
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
-        self._bot.brain.rdf.add_entity("X", "Y", "Z")
-        self.assertTrue(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""
 			<template>
@@ -81,6 +81,6 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
         self.assertIsInstance(ast.children[0], TemplateDeleteTripleNode)
         self.assertEqual(0, len(ast.children[0].children))
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertFalse(self._bot.brain.rdf.has_object("X", "Y", "Z"))
+        self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))

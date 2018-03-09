@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -22,12 +22,12 @@ from programy.extensions.base import Extension
 
 class NewsAPIExtension(Extension):
 
-    def get_news_api_api(self, bot, clientid):
-        return  NewsAPI(bot.license_keys)
+    def get_news_api_api(self, context):
+        return  NewsAPI(context.bot.license_keys)
 
-    def get_news(self, bot, clientid, source, max_num, sort, reverse):
+    def get_news(self, context, source, max_num, sort, reverse):
 
-        newsapi = self.get_news_api_api(bot, clientid)
+        newsapi = self.get_news_api_api(context)
 
         headlines = newsapi.get_headlines(source, max_num, sort, reverse)
         if headlines is None:
@@ -87,7 +87,7 @@ class NewsAPIExtension(Extension):
         return source, max_num, sort, reverse
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, context, data):
 
         source, max_num, sort, reverse = self.parse_data(data)
 
@@ -96,4 +96,4 @@ class NewsAPIExtension(Extension):
                 logging.error("NewsAPIExtension no source passed in as data parameter!")
             return ""
 
-        return self.get_news(bot, clientid, source, max_num, sort, reverse)
+        return self.get_news(context, source, max_num, sort, reverse)

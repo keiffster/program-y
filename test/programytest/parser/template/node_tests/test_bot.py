@@ -11,7 +11,7 @@ class MockTemplateBotNode(TemplateBotNode):
     def __init__(self):
         TemplateBotNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is a failure")
 
 class TemplateBotNodeTests(ParserTestsBaseClass):
@@ -28,9 +28,9 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("location", "Scotland")
+        self._client_context.brain.properties.add_property("location", "Scotland")
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("Scotland", result)
 
@@ -46,9 +46,9 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("default-property", "unknown")
+        self._client_context.brain.properties.add_property("default-property", "unknown")
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
 
@@ -58,7 +58,7 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         node.name = TemplateWordNode("name")
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><bot name="name" /></template>', xml_str)
@@ -75,10 +75,10 @@ class TemplateBotNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("location", "Scotland")
+        self._client_context.brain.properties.add_property("location", "Scotland")
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self._bot, self._clientid)
+            node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._bot, self._clientid))
+        self.assertEquals("", root.resolve(self._client_context))
 

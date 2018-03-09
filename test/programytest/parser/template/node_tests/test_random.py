@@ -10,7 +10,7 @@ class MockTemplateRandomNode(TemplateRandomNode):
     def __init__(self):
         TemplateRandomNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateRandomNodeTests(ParserTestsBaseClass):
@@ -29,7 +29,7 @@ class TemplateRandomNodeTests(ParserTestsBaseClass):
 
         root.append(random)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertOneOf(resolved, ["Test1", "Test2", "Test3"])
 
@@ -40,7 +40,7 @@ class TemplateRandomNodeTests(ParserTestsBaseClass):
         random.append(TemplateWordNode("Test1"))
         random.append(TemplateWordNode("Test2"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><random><li>Test1</li><li>Test2</li></random></template>", xml_str)
@@ -50,6 +50,6 @@ class TemplateRandomNodeTests(ParserTestsBaseClass):
         node = MockTemplateRandomNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

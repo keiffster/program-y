@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from abc import ABCMeta, abstractmethod
 import logging
+
 
 class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
@@ -40,6 +40,10 @@ class BaseConfigurationData(object):
     def section_name(self):
         return self._section_name
 
+    @property
+    def id(self):
+        return self._section_name
+
     def _get_file_option(self, config_file, option_name, section, bot_root):
         option = config_file.get_option(section, option_name)
         if option is not None:
@@ -59,27 +63,3 @@ class BaseConfigurationData(object):
                 self._additionals[key] = value
 
 
-class BaseContainerConfigurationData(BaseConfigurationData):
-
-    def __init__(self, name):
-        BaseConfigurationData.__init__(self, name)
-
-    @abstractmethod
-    def load_configuration(self, configuration_file, bot_root):
-        """
-        Never Implemented
-        """
-        raise NotImplementedError()
-
-
-class BaseSectionConfigurationData(BaseConfigurationData):
-
-    def __init__(self, name):
-        BaseConfigurationData.__init__(self, name)
-
-    @abstractmethod
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        """
-        Never Implemented
-        """
-        raise NotImplementedError()

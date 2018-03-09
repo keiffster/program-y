@@ -7,7 +7,7 @@ from programy.utils.files.filewriter import FileWriter
 from programy.utils.files.filewriter import ConversationFileWriter
 from programy.utils.files.filewriter import ErrorsFileWriter
 from programy.utils.files.filewriter import DuplicatesFileWriter
-from programy.config.sections.brain.debugfile import DebugFileConfiguration
+from programy.config.brain.debugfile import DebugFileConfiguration
 
 class MockFileWriter:
 

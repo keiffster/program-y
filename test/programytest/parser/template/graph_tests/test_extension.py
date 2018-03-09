@@ -9,7 +9,7 @@ from programytest.parser.template.graph_tests.graph_test_client import TemplateG
 
 class TestExtension(object):
 
-    def execute(self, bot, clientid, data):
+    def execute(self, context, data):
         return "executed"
 
 
@@ -35,7 +35,7 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsNotNone(ext_node._path)
 
         self.assertEqual(len(ext_node.children), 3)
-        self.assertEqual("executed", ext_node.resolve(self._bot, self._clientid))
+        self.assertEqual("executed", ext_node.resolve(self._client_context))
 
     def test_extension_as_child(self):
         template = ET.fromstring("""
@@ -58,5 +58,5 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsNotNone(ext_node._path)
 
         self.assertEqual(len(ext_node.children), 3)
-        self.assertEqual("executed", ext_node.resolve(self._bot, self._clientid))
+        self.assertEqual("executed", ext_node.resolve(self._client_context))
 

@@ -20,12 +20,12 @@ class TemplateWordNodeTests(ParserTestsBaseClass):
         root.append(node2)
         self.assertEqual(len(root.children), 2)
 
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual(resolved, "Hello World!")
 
         node2.word = "Again!"
-        resolved = root.resolve(self._bot, self._clientid)
+        resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual(resolved, "Hello Again!")
 
@@ -33,7 +33,7 @@ class TemplateWordNodeTests(ParserTestsBaseClass):
         root = TemplateNode()
         root.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template>Hello</template>", xml_str)

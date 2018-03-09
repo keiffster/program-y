@@ -10,8 +10,9 @@ class MockTemplateAddTripleNode(TemplateAddTripleNode):
     def __init__(self, subj=None, pred=None, obj=None):
         TemplateAddTripleNode.__init__(self, subj, pred, obj)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception ("This is a failure!")
+
 
 class TemplateAddTripleNodeTests(ParserTestsBaseClass):
 
@@ -25,7 +26,7 @@ class TemplateAddTripleNodeTests(ParserTestsBaseClass):
         node = TemplateAddTripleNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><addtriple><subj>S</subj><pred>P</pred><obj>O</obj></addtriple></template>", xml_str)
@@ -35,7 +36,7 @@ class TemplateAddTripleNodeTests(ParserTestsBaseClass):
         node = TemplateAddTripleNode(subj=TemplateWordNode("S"), pred=TemplateWordNode("P"), obj=TemplateWordNode("O"))
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -46,7 +47,7 @@ class TemplateAddTripleNodeTests(ParserTestsBaseClass):
         root.append(node)
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self._bot, self._clientid)
+            node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._bot, self._clientid))
+        self.assertEquals("", root.resolve(self._client_context))
 

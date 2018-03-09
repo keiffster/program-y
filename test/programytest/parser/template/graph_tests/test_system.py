@@ -10,7 +10,7 @@ class TemplateGraphSystemTests(TemplateGraphTestClient):
 
     def test_system_timeout_as_attrib_full(self):
 
-        self._bot.brain.configuration.overrides._allow_system_aiml = True
+        self._client_context.brain.configuration.overrides._allow_system_aiml = True
 
         template = ET.fromstring("""
 			<template>
@@ -24,9 +24,9 @@ class TemplateGraphSystemTests(TemplateGraphTestClient):
         self.assertIsInstance(node, TemplateSystemNode)
 
         if os.name == 'posix':
-            self.assertEqual(root.resolve(self._bot, self._clientid), "Hello World")
+            self.assertEqual(root.resolve(self._client_context), "Hello World")
         elif os.name == 'nt':
-            self.assertEqual(root.resolve(self._bot, self._clientid), '"Hello World"')
+            self.assertEqual(root.resolve(self._client_context), '"Hello World"')
         else:
             self.assertFalse(True)
 

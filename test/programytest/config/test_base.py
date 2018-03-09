@@ -3,6 +3,7 @@ import os
 
 from programy.config.base import BaseConfigurationData
 
+
 class BaseConfigurationDataTests(unittest.TestCase):
 
     def test_sub_bot_root(self):

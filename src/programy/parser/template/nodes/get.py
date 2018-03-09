@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -70,22 +70,22 @@ class TemplateGetNode(TemplateNode):
         return value
 
     @staticmethod
-    def get_property_value(bot, clientid, local, name):
+    def get_property_value(client_context, local, name):
 
         if local is True:
 
             value = None
             #TODO Why would you need this test, when is get_conversation(clientid) == None ?
-            if bot.get_conversation(clientid) is not None:
-                if bot.get_conversation(clientid).has_current_question():
-                    value = bot.get_conversation(clientid).current_question().property(name)
+            if client_context.bot.get_conversation(client_context) is not None:
+                if client_context.bot.get_conversation(client_context).has_current_question():
+                    value = client_context.bot.get_conversation(client_context).current_question().property(name)
 
         else:
 
-            if name is not None and bot.brain.dynamics.is_dynamic_var(name) is True:
-                value = bot.brain.dynamics.dynamic_var(bot, clientid, name)
+            if name is not None and client_context.brain.dynamics.is_dynamic_var(name) is True:
+                value = client_context.brain.dynamics.dynamic_var(client_context, name)
             else:
-                value = bot.get_conversation(clientid).property(name)
+                value = client_context.bot.get_conversation(client_context).property(name)
                 #if value is None:
                 #    value = bot.brain.properties.property(name)
 
@@ -93,13 +93,13 @@ class TemplateGetNode(TemplateNode):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("No property for [%s]"%name)
 
-            value = TemplateGetNode.get_default_value(bot)
+            value = TemplateGetNode.get_default_value(client_context.bot)
 
         return value
 
-    def resolve_variable(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
-        value = TemplateGetNode.get_property_value(bot, clientid, self.local, name)
+    def resolve_variable(self, client_context):
+        name = self.name.resolve(client_context)
+        value = TemplateGetNode.get_property_value(client_context, self.local, name)
         if self.local:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
@@ -108,18 +108,18 @@ class TemplateGetNode(TemplateNode):
                 logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
         return value
 
-    def decode_tuples(self, bot, tuples):
+    def decode_tuples(self, tuples):
         if isinstance(tuples, str):
             return json.loads(tuples)
         else:
             return tuples
 
-    def resolve_tuple(self, bot, clientid):
-        variables = self._name.resolve(bot, clientid).split(" ")
+    def resolve_tuple(self, client_context):
+        variables = self._name.resolve(client_context).split(" ")
 
-        raw_tuples = self._tuples.resolve(bot, clientid)
+        raw_tuples = self._tuples.resolve(client_context)
         try:
-            tuples = self.decode_tuples(bot, raw_tuples)
+            tuples = self.decode_tuples(raw_tuples)
         except:
             tuples = []
 
@@ -156,17 +156,17 @@ class TemplateGetNode(TemplateNode):
 
         return resolved
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, client_context):
         if self._tuples is None:
-            value = self.resolve_variable(bot, clientid)
+            value = self.resolve_variable(client_context)
         else:
-            value = self.resolve_tuple(bot, clientid)
+            value = self.resolve_tuple(client_context)
         return value
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            bot.load_conversation(clientid)
-            return self.resolve_to_string(bot, clientid)
+            client_context.bot.load_conversation(client_context.userid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -181,19 +181,19 @@ class TemplateGetNode(TemplateNode):
         else:
             return "[GET [Tuples] - (%s)]" %self.name.to_string()
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         if self.tuples is None:
             xml = "<get"
             if self.local:
-                xml += ' var="%s"' % self.name.resolve(bot, clientid)
+                xml += ' var="%s"' % self.name.resolve(client_context)
             else:
-                xml += ' name="%s"' % self.name.resolve(bot, clientid)
+                xml += ' name="%s"' % self.name.resolve(client_context)
             xml += " />"
         else:
             xml = "<get"
-            xml += ' var="%s"' % self.name.resolve(bot, clientid)
+            xml += ' var="%s"' % self.name.resolve(client_context)
             xml += " >"
-            xml += self.tuples.to_xml(bot, clientid)
+            xml += self.tuples.to_xml(client_context)
             xml += "</get>"
         return xml
 

@@ -4,7 +4,7 @@ import datetime
 
 from programy.clients.client import BotClient
 from programy.utils.files.filefinder import FileFinder
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.clients.events.console.console import ConsoleConfiguration
 
 class TestQuestion(object):
 

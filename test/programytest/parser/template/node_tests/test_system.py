@@ -12,14 +12,14 @@ class MockTemplateSystemNode(TemplateSystemNode):
     def __init__(self):
         TemplateSystemNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSystemNodeTests(ParserTestsBaseClass):
 
     def test_node_no_timeout(self):
 
-        self._bot.brain.configuration.overrides._allow_system_aiml = True
+        self._client_context.brain.configuration.overrides._allow_system_aiml = True
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -33,7 +33,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
 
         if os.name == 'posix':
@@ -45,7 +45,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
 
     def test_node_with_timeout(self):
 
-        self._bot.brain.configuration.overrides._allow_system_aiml = True
+        self._client_context.brain.configuration.overrides._allow_system_aiml = True
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -60,7 +60,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         if os.name == 'posix':
             self.assertEqual(response, "Hello World")
@@ -71,7 +71,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
 
     def test_node_with_system_switched_off(self):
 
-        self._bot.brain.configuration.overrides._allow_system_aiml = False
+        self._client_context.brain.configuration.overrides._allow_system_aiml = False
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -86,7 +86,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
@@ -104,7 +104,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode('echo "Hello World"'))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><system>echo "Hello World"</system></template>', xml_str)
@@ -116,7 +116,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode('echo "Hello World"'))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><system timeout="1000">echo "Hello World"</system></template>', xml_str)
@@ -126,6 +126,6 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
         node = MockTemplateSystemNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

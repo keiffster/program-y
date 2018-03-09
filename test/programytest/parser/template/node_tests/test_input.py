@@ -11,7 +11,7 @@ class MockTemplateInputNode(TemplateInputNode):
     def __init__(self):
         TemplateInputNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 
@@ -30,7 +30,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         node = TemplateInputNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><input /></template>", xml_str)
@@ -40,7 +40,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         node = TemplateInputNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><input index="3" /></template>', xml_str)
@@ -58,15 +58,15 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(0, node.index)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        response = root.resolve(self._bot, "testid")
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello world")
 
@@ -83,19 +83,19 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(1, node.index)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you. Are you well")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        response = root.resolve(self._bot, "testid")
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "How are you")
 
@@ -112,19 +112,19 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
         self.assertEqual(3, node.index)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you. Are you well")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        response = root.resolve(self._bot, "testid")
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
@@ -133,6 +133,6 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         node = MockTemplateInputNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -40,7 +40,9 @@ class LicenseKeys(object):
     def load_license_key_data(self, license_key_data):
         lines = license_key_data.split('\n')
         for line in lines:
-            self._process_license_key_line(line)
+            line = line.strip()
+            if line:
+                self._process_license_key_line(line)
 
     def load_license_key_file(self, license_key_filename):
         try:

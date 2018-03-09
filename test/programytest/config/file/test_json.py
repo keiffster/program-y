@@ -1,8 +1,7 @@
-import unittest
 import os
 
 from programy.config.file.json_file import JSONConfigurationFile
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.clients.events.console.config import ConsoleConfiguration
 
 from programytest.config.file.base_file_tests import ConfigurationBaseFileTests
 
@@ -86,12 +85,12 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
         """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
-        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_single_file())
 
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ["./test-aiml"])
-        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
-        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.files, ["./test-aiml"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.map_files.files, ["./test-maps"])
 
     def test_load_from_text_multi_files(self):
         json = JSONConfigurationFile()
@@ -124,12 +123,12 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
                 """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_multiple_files())
-        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_single_file())
+        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_multiple_files())
+        self.assertFalse(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_single_file())
 
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.files, ['./test-aiml', '/my-aiml/test.aiml'])
-        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
-        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.files, ['./test-aiml', '/my-aiml/test.aiml'])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.map_files.files, ["./test-maps"])
 
     def test_load_from_text_single_file(self):
         json = JSONConfigurationFile()
@@ -162,12 +161,12 @@ class JsonConfigurationFileTests(ConfigurationBaseFileTests):
             """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertFalse(configuration.brain_configuration.files.aiml_files.has_multiple_files())
-        self.assertTrue(configuration.brain_configuration.files.aiml_files.has_single_file())
+        self.assertFalse(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_multiple_files())
+        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.has_single_file())
 
-        self.assertEqual(configuration.brain_configuration.files.aiml_files.file, "./test-aiml/test.aiml")
-        self.assertEqual(configuration.brain_configuration.files.set_files.files, ["./test-sets"])
-        self.assertEqual(configuration.brain_configuration.files.map_files.files, ["./test-maps"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.aiml_files.file, "./test-aiml/test.aiml")
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.set_files.files, ["./test-sets"])
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].files.map_files.files, ["./test-maps"])
 
     def test_load_from_text(self):
         json = JSONConfigurationFile()

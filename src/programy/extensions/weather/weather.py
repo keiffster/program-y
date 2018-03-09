@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -33,7 +33,7 @@ class WeatherExtension(Extension):
     # WEATHER [OBSERVATION|FORECAST3|FORECAST24] LOCATION * WHEN *
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, context, data):
 
         splits = data.split()
         if len(splits) != 5:
@@ -62,11 +62,11 @@ class WeatherExtension(Extension):
             return None
 
         if type == 'OBSERVATION':
-            return self.current_observation(bot, postcode)
+            return self.current_observation(context.bot, postcode)
         elif type == 'FORECAST5DAY':
-            return self.five_day_forecast(bot, postcode, when)
+            return self.five_day_forecast(context.bot, postcode, when)
         elif type == 'FORECAST24HOUR':
-            return self.twentyfour_hour_forecast(bot, postcode, when)
+            return self.twentyfour_hour_forecast(context.bot, postcode, when)
 
     def current_observation(self, bot, postcode):
         if logging.getLogger().isEnabledFor(logging.DEBUG):

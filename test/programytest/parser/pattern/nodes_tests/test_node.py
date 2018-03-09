@@ -4,6 +4,7 @@ from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
+
 class PatternNodeTests(ParserTestsBaseClass):
 
     def test_init(self):

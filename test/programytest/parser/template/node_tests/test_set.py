@@ -11,7 +11,7 @@ class MockTemplateSetNode(TemplateSetNode):
     def __init__(self):
         TemplateSetNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSetNodeTests(ParserTestsBaseClass):
@@ -31,13 +31,13 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
@@ -51,7 +51,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("keith"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><set var="name">keith</set></template>', xml_str)
@@ -62,7 +62,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self._bot._configuration.override_propertys = True
+        self._client_context.bot.configuration.override_propertys = True
 
         node = TemplateSetNode()
         self.assertIsNotNone(node)
@@ -73,13 +73,13 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
@@ -91,8 +91,8 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self._bot._configuration.override_propertys = True
-        self._bot.brain.properties.pairs.append(["name", "fred"])
+        self._client_context.bot.configuration.override_propertys = True
+        self._client_context.brain.properties.pairs.append(["name", "fred"])
 
         node = TemplateSetNode()
         self.assertIsNotNone(node)
@@ -103,13 +103,13 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
@@ -121,8 +121,8 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        self._bot._configuration.override_properties = False
-        self._bot.brain.properties.pairs.append(["name", "fred"])
+        self._client_context.bot.configuration.override_properties = False
+        self._client_context.brain.properties.pairs.append(["name", "fred"])
 
         node = TemplateSetNode()
         self.assertIsNotNone(node)
@@ -133,13 +133,13 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
-        result = node.resolve(self._bot, self._clientid)
+        result = node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("fred", result)
 
@@ -153,7 +153,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("keith"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><set name="name">keith</set></template>', xml_str)
@@ -163,6 +163,6 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
         node = MockTemplateSetNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

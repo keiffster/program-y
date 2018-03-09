@@ -1,7 +1,7 @@
 import unittest
 
 from programy.dynamic.sets.set import DynamicSet
-from programy.config.sections.brain.brain import BrainDynamicsConfiguration
+from programy.config.brain.brain import BrainDynamicsConfiguration
 
 
 class DynamicSetTests(unittest.TestCase):

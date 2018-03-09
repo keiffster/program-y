@@ -28,11 +28,11 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         self.assertEqual(0, len(ast.children[0].children))
 
     def test_uniq_query_on_object(self):
-        self._bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self._bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self._bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self._bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self._bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "legs", "2")
+        self._client_context.brain.rdf.add_entity("MONKEY", "hasFur", "true")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "legs", "4")
+        self._client_context.brain.rdf.add_entity("BIRD", "legs", "2")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
 
         template = ET.fromstring("""
      			<template>
@@ -47,16 +47,16 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("2", result)
 
     def test_uniq_query_on_subject(self):
-        self._bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self._bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self._bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self._bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self._bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "legs", "2")
+        self._client_context.brain.rdf.add_entity("MONKEY", "hasFur", "true")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "legs", "4")
+        self._client_context.brain.rdf.add_entity("BIRD", "legs", "2")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
 
         template = ET.fromstring("""
      			<template>
@@ -71,16 +71,16 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("MONKEY BIRD", result)
 
     def test_uniq_query_on_predicate(self):
-        self._bot.brain.rdf.add_entity("MONKEY", "legs", "2")
-        self._bot.brain.rdf.add_entity("MONKEY", "hasFur", "true")
-        self._bot.brain.rdf.add_entity("ZEBRA", "legs", "4")
-        self._bot.brain.rdf.add_entity("BIRD", "legs", "2")
-        self._bot.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "legs", "2")
+        self._client_context.brain.rdf.add_entity("MONKEY", "hasFur", "true")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "legs", "4")
+        self._client_context.brain.rdf.add_entity("BIRD", "legs", "2")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "trunk", "true")
 
         template = ET.fromstring("""
      			<template>
@@ -95,6 +95,6 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
 
-        result = ast.resolve(self._bot, self._clientid)
+        result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("LEGS", result)

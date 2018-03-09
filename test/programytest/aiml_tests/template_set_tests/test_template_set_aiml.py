@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class BasicTestClient(TestClient):
 
@@ -10,59 +13,61 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class TemplateSetAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        TemplateSetAIMLTests.test_client = BasicTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(BasicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_name_set_topic(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "NAME SET")
+        response = self._client_context.bot.ask_question(self._client_context,  "NAME SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test1")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var1"), "test1")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("var1"), "test1")
 
     def test_multi_word_name_set_topic(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "MULTI WORD NAME SET")
+        response = self._client_context.bot.ask_question(self._client_context,  "MULTI WORD NAME SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test1 test2")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var1 var2"), "test1 test2")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("var1 var2"), "test1 test2")
 
     def test_var_set_topic(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "VAR SET")
+        response = self._client_context.bot.ask_question(self._client_context,  "VAR SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test2")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var2"), "test2")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("var2"), "test2")
 
     def test_multi_word_var_set_topic(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test",  "MULTI WORD VAR SET")
+        response = self._client_context.bot.ask_question(self._client_context,  "MULTI WORD VAR SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK test2 test3")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("var2 var3"), "test2 test3")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("var2 var3"), "test2 test3")
 
     def test_topic_set(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "TOPIC SET")
+        response = self._client_context.bot.ask_question(self._client_context, "TOPIC SET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK topic1")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "topic1")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("topic"), "topic1")
 
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "TOPIC UNSET")
+        response = self._client_context.bot.ask_question(self._client_context, "TOPIC UNSET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "*")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("topic"), "*")
 
     def test_multi_word_topic_set(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "SET MULTI WORD TOPIC")
+        response = self._client_context.bot.ask_question(self._client_context, "SET MULTI WORD TOPIC")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK topic2 topic3")
-        self.assertEqual(TemplateSetAIMLTests.test_client.bot.conversation("test").property("topic"), "topic2 topic3")
+        self.assertEqual(self._client_context.bot.conversation(self._client_context).property("topic"), "topic2 topic3")
 
     def test_var_transience(self):
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "VAR TEST STEP1")
+        response = self._client_context.bot.ask_question(self._client_context, "VAR TEST STEP1")
         self.assertIsNotNone(response)
         self.assertEqual(response, "STEP1 Val1")
-        response = TemplateSetAIMLTests.test_client.bot.ask_question("test", "VAR TEST STEP2")
+        response = self._client_context.bot.ask_question(self._client_context, "VAR TEST STEP2")
         self.assertIsNotNone(response)
         self.assertEqual(response, "STEP2 unknown")

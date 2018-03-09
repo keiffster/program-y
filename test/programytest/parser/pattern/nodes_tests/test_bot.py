@@ -33,7 +33,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
     def test_init(self):
 
-        self._bot.brain.properties.add_property("test1", "value1")
+        self._client_context.brain.properties.add_property("test1", "value1")
 
         node = PatternBotNode([], "test1")
         self.assertIsNotNone(node)
@@ -53,16 +53,16 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertTrue(node.equivalent(PatternBotNode([], "test1")))
         self.assertFalse(node.equivalent(PatternBotNode([], "test2")))
 
-        sentence = Sentence(self._bot.brain.tokenizer, "value1 value2")
+        sentence = Sentence(self._client_context.brain.tokenizer, "value1 value2")
 
-        result = node.equals(self._bot, "testid", sentence, 0)
+        result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
         self.assertEquals(0, result.word_no)
 
-        result = node.equals(self._bot, "testid", sentence, 1)
+        result = node.equals(self._client_context, sentence, 1)
         self.assertFalse(result.matched)
         self.assertEquals(1, result.word_no)
 
         self.assertEqual(node.to_string(), "BOT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] property=[test1]")
-        self.assertEqual('<bot property="test1">\n</bot>', node.to_xml(self._bot, self._clientid))
+        self.assertEqual('<bot property="test1">\n</bot>', node.to_xml(self._client_context))
 

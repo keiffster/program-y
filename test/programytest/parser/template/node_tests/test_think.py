@@ -10,7 +10,7 @@ class MockTemplateThinkNode(TemplateThinkNode):
     def __init__(self):
         TemplateThinkNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateThinkNodeTests(ParserTestsBaseClass):
@@ -33,7 +33,7 @@ class TemplateThinkNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><think>Test</think></template>", xml_str)
@@ -43,6 +43,6 @@ class TemplateThinkNodeTests(ParserTestsBaseClass):
         node = MockTemplateThinkNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

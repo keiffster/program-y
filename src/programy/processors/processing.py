@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -45,9 +45,9 @@ class ProcessorLoader(ClassLoader):
                 logging.error("File not found [%s]", filename)
         return count
 
-    def process(self, bot, clientid, string):
+    def process(self, client_context, string):
         for processor in self.processors:
-            string = processor.process(bot, clientid, string)
+            string = processor.process(client_context, string)
         return string
 
 
@@ -60,7 +60,7 @@ class Processor:
         pass
 
     @abstractmethod
-    def process(self, bot, clientid, word_string):
+    def process(self, client_context, word_string):
         pass
 
 
@@ -72,7 +72,7 @@ class PreProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, bot, clientid, word_string):
+    def process(self, client_context, word_string):
         pass
 
 ##################################################################
@@ -82,5 +82,5 @@ class PostProcessor(Processor):
         Processor.__init__(self)
 
     @abstractmethod
-    def process(self, bot, clientid, word_string):
+    def process(self, client_context, word_string):
         pass

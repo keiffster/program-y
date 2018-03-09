@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class MultipleSentencesTestClient(TestClient):
 
@@ -10,17 +13,18 @@ class MultipleSentencesTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(MultipleSentencesTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class MultipleSentencesAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        MultipleSentencesAIMLTests.test_client = MultipleSentencesTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(MultipleSentencesTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_multiple_questions(self):
-        MultipleSentencesAIMLTests.test_client.bot.brain.dump_tree()
-        response = MultipleSentencesAIMLTests.test_client.bot.ask_question("test", "TICKET SET 01453675. TICKET ANALYSE")
+        response = self._client_context.bot.ask_question(self._client_context, "TICKET SET 01453675. TICKET ANALYSE")
         self.assertIsNotNone(response)
         self.assertEqual("TICKET SET TO 01453675. ANALYSING TICKET", response)
 

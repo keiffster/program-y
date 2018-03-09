@@ -1,7 +1,9 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
 
 
 class SurveyTestsClient(TestClient):
@@ -11,23 +13,26 @@ class SurveyTestsClient(TestClient):
 
     def load_configuration(self, arguments):
         super(SurveyTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
+
 
 class SurveyAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        SurveyAIMLTests.test_client = SurveyTestsClient()
+        self._client_context = ClientContext(SurveyTestsClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_survey(self):
         # Question 1
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "START SURVEY")
+        response = self._client_context.bot.ask_question(self._client_context, "START SURVEY")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Question 1. What do you like about AIML?')
 
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Its really cool")
+        response = self._client_context.bot.ask_question(self._client_context, "Its really cool")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Thanks, now Question 2. What do you dislike about AIML?')
 
-        response = SurveyAIMLTests.test_client.bot.ask_question("testif", "Too many undocmented features by the creators")
+        response = self._client_context.bot.ask_question(self._client_context, "Too many undocmented features by the creators")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Thanks, thats the end of the survey')

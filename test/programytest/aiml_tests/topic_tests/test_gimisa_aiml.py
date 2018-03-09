@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class TopicTestClient(TestClient):
 
@@ -10,28 +13,27 @@ class TopicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(TopicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._file = os.path.dirname(__file__) + os.sep + "gimisa_test.aiml"
-        self.configuration.brain_configuration.files.set_files._files = [os.path.dirname(__file__)]
-        self.configuration.brain_configuration.files.set_files._extension = ".txt"
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._file = os.path.dirname(__file__) + os.sep + "gimisa_test.aiml"
+        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._extension = ".txt"
 
 class GimisaAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        GimisaAIMLTests.test_client = TopicTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(TopicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_ask_blender_twice(self):
-        GimisaAIMLTests.test_client.bot.brain.dump_tree()
-
-        response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
+        response = self._client_context.bot.ask_question(self._client_context, "render")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'some definition of render as per professor ....')
 
-        response = GimisaAIMLTests.test_client.bot.ask_question("test", "hello")
+        response = self._client_context.bot.ask_question(self._client_context, "hello")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'hi .. setting topic to blender....')
 
-        response = GimisaAIMLTests.test_client.bot.ask_question("test", "render")
+        response = self._client_context.bot.ask_question(self._client_context, "render")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'the definition of render in blender is')
 

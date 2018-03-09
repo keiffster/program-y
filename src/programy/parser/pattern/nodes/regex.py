@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -57,13 +57,13 @@ class PatternRegexNode(PatternNode):
     def is_regex(self):
         return True
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         if self._pattern_template is not None:
             string += '<regex template="%s">'% self._pattern_template
         else:
             string += '<regex pattern="%s">'% self._pattern_text
-        string += super(PatternRegexNode, self).to_xml(bot, clientid)
+        string += super(PatternRegexNode, self).to_xml(client_context)
         string += "</regex>\n"
         return string
 
@@ -77,10 +77,10 @@ class PatternRegexNode(PatternNode):
                     return bool(self.pattern == other.pattern)
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
         if self._pattern_template is not None:
-            template = bot.brain.regex_templates[self._pattern_template]
+            template = client_context.brain.regex_templates[self._pattern_template]
             if template is not None:
                 result = template.match(word)
                 if result is not None:

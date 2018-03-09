@@ -10,7 +10,7 @@ class MockTemplateIntervalNode(TemplateIntervalNode):
     def __init__(self):
         TemplateIntervalNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 
@@ -34,7 +34,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2")
 
@@ -56,7 +56,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "3")
 
@@ -77,7 +77,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "1")
 
@@ -98,7 +98,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "1")
 
@@ -119,7 +119,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "4")
 
@@ -140,7 +140,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2")
 
@@ -161,7 +161,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2")
 
@@ -182,7 +182,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "0")
 
@@ -203,7 +203,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2 years, 2 months, 23 days")
 
@@ -224,7 +224,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "0 hours, 2 minutes, 2 seconds")
 
@@ -245,7 +245,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
@@ -266,7 +266,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        response = root.resolve(self._bot, self._clientid)
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "2 years, 2 months, 23 days, 0 hours, 2 minutes, 2 seconds")
 
@@ -280,7 +280,7 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         node.interval_to = TemplateWordNode("Fri Oct 7 16:35:11 2016")
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><interval format="%c" style="years"><from>Thu Oct 6 16:35:11 2014</from><to>Fri Oct 7 16:35:11 2016</to></interval></template>', xml_str)
@@ -290,6 +290,6 @@ class TemplateIntervalNodeTests(ParserTestsBaseClass):
         node = MockTemplateIntervalNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

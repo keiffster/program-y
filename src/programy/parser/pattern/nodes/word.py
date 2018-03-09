@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -33,10 +33,10 @@ class PatternWordNode(PatternNode):
     def word(self):
         return self._word
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<word word="%s">'% self.word
-        string += super(PatternWordNode, self).to_xml(bot, clientid)
+        string += super(PatternWordNode, self).to_xml(client_context)
         string += '</word>\n'
         return string
 
@@ -50,9 +50,9 @@ class PatternWordNode(PatternNode):
                 return True
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
-        return EqualsMatch(self.equals_ignore_case(bot, clientid, self._word, word), word_no, word)
+        return EqualsMatch(self.equals_ignore_case(client_context, self._word, word), word_no, word)
 
     def to_string(self, verbose=True):
         if verbose is True:

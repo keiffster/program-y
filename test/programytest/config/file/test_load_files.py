@@ -1,7 +1,7 @@
 import os
 
 from programy.config.file.factory import ConfigurationFactory
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.clients.events.console.config import ConsoleConfiguration
 
 from programytest.config.file.base_file_tests import ConfigurationBaseFileTests
 

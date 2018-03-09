@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class ThatStarTestClient(TestClient):
 
@@ -10,21 +13,24 @@ class ThatStarTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(ThatStarTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class ThatStarAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        ThatStarAIMLTests.test_client = ThatStarTestClient()
+        self._client_context = ClientContext(ThatStarTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_single_thatstar_word_default(self):
         # We need to ask 2 questions, first we get a response which is stored in the <that> clause, we then return it
         # on the second question
 
-        response = ThatStarAIMLTests.test_client.bot.ask_question("test", "HELLO THERE")
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'HI THERE')
 
-        response = ThatStarAIMLTests.test_client.bot.ask_question("test", "I SAID HI THERE")
+        response = self._client_context.bot.ask_question(self._client_context, "I SAID HI THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'HEARD YOU SAY HI THERE')

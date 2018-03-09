@@ -11,7 +11,7 @@ class MockTemplateResponseNode(TemplateResponseNode):
     def __init__(self):
         TemplateResponseNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateResponseNodeTests(ParserTestsBaseClass):
@@ -29,7 +29,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         node = TemplateResponseNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><response /></template>", xml_str)
@@ -39,7 +39,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         node = TemplateResponseNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><response index="3" /></template>', xml_str)
@@ -57,19 +57,19 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello1 question")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello1 question")
         question.current_sentence()._response = "Hello1 response"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello quesiton2")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello quesiton2")
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        response = root.resolve(self._bot, "testid")
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello1 response")
 
@@ -86,19 +86,19 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello1 question")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello1 question")
         question.current_sentence()._response = "Hello1 response"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello quesiton2")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello quesiton2")
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        response = root.resolve(self._bot, "testid")
+        response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
         self.assertEqual(response, "Hello1 response")
 
@@ -107,6 +107,6 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         node = MockTemplateResponseNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

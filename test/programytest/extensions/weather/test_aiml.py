@@ -3,9 +3,12 @@ import os
 import json
 
 from programy.extensions.weather.weather import WeatherExtension
-from programytest.aiml_tests.client import TestClient
+from programy.context import ClientContext
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
+
+from programytest.aiml_tests.client import TestClient
+
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -52,15 +55,16 @@ class WeathersTestsClient(TestClient):
 
     def load_configuration(self, arguments):
         super(WeathersTestsClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files=[os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
 
 
 class WeathersAIMLTests(unittest.TestCase):
 
 
     def setUp (self):
-        WeathersAIMLTests.test_client = WeathersTestsClient()
-        WeathersAIMLTests.test_client.bot.get_conversation("testid").properties["active"] = "true"
+        self._client_context = ClientContext(WeathersTestsClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_weather(self):
         MockWeatherExtension.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"
@@ -68,7 +72,7 @@ class WeathersAIMLTests(unittest.TestCase):
         threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
         daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
 
-        response = WeathersAIMLTests.test_client.bot.ask_question("testid", "WEATHER LOCATION KY39UR WHEN TODAY")
+        response = self._client_context.bot.ask_question(self._client_context, "WEATHER LOCATION KY39UR WHEN TODAY")
         self.assertIsNotNone(response)
         self.assertEqual(response, "According to the UK Met Office, this it is partly cloudy (day) , with a temperature of around 12dot3'C , humidty is 57.3% , with pressure at 1017mb and falling .")
 

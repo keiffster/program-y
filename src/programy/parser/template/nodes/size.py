@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,15 +25,15 @@ class TemplateSizeNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
-        resolved = str(bot.brain.aiml_parser.num_categories)
+    def resolve_to_string(self, client_context):
+        resolved = str(client_context.brain.aiml_parser.num_categories)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -41,7 +41,7 @@ class TemplateSizeNode(TemplateNode):
     def to_string(self):
         return "SIZE"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<size />"
         return xml
 

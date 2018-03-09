@@ -3,8 +3,16 @@ import unittest.mock
 
 from programy.oob.search import SearchOutOfBandProcessor
 import xml.etree.ElementTree as ET
+from programy.context import ClientContext
+
+from programytest.aiml_tests.client import TestClient
 
 class SearchOutOfBandProcessorTests(unittest.TestCase):
+
+    def setUp(self):
+        self._client_context = ClientContext(TestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_processor_xml_parsing(self):
         oob_processor = SearchOutOfBandProcessor()
@@ -25,4 +33,4 @@ class SearchOutOfBandProcessorTests(unittest.TestCase):
         self.assertIsNotNone(oob_processor)
 
         oob_content = ET.fromstring("<search>process</search>")
-        self.assertEqual("SEARCH", oob_processor.process_out_of_bounds(None, "console", oob_content))
+        self.assertEqual("SEARCH", oob_processor.process_out_of_bounds(self._client_context, oob_content))

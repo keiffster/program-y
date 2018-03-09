@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 import os
 
-from programy.config.sections.brain.file import BrainFileConfiguration
+from programy.config.brain.file import BrainFileConfiguration
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
@@ -23,7 +23,7 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        self._bot.brain._configuration._aiml_files = BrainFileConfiguration( os.sep + "tmp", ".aiml", False)
+        self._client_context.brain.configuration._aiml_files = BrainFileConfiguration( os.sep + "tmp", ".aiml", False)
 
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
@@ -45,8 +45,8 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
         self.assertIsNotNone(learn_node.children[0].template)
         self.assertIsInstance(learn_node.children[0].template, TemplateNode)
 
-        resolved = learn_node.resolve(self._bot, self._clientid)
+        resolved = learn_node.resolve(self._client_context)
         self.assertEqual(resolved, "")
 
-        response = self._bot.ask_question(self._clientid, "HELLO WORLD THERE")
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)

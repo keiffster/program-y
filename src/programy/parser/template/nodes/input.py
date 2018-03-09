@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -35,8 +35,8 @@ class TemplateInputNode(TemplateIndexedNode):
     def get_default_index(self):
         return 0
 
-    def resolve_to_string(self, bot, clientid):
-        conversation = bot.get_conversation(clientid)
+    def resolve_to_string(self, client_context):
+        conversation = client_context.bot.get_conversation(client_context)
         question = conversation.current_question()
         if self.index == 0:
             resolved = question.combine_sentences()
@@ -46,9 +46,9 @@ class TemplateInputNode(TemplateIndexedNode):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -58,7 +58,7 @@ class TemplateInputNode(TemplateIndexedNode):
         string += self.get_index_as_str()
         return string
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<input"
         xml += self.get_index_as_xml()
         xml += ">"

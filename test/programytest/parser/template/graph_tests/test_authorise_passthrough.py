@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.authorise import TemplateAuthoriseNode
-from programy.config.sections.brain.brain import BrainConfiguration
+from programy.config.brain.brain import BrainConfiguration
 
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
@@ -34,7 +34,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
         self.assertIsNotNone(auth_node.role)
         self.assertEqual("root", auth_node.role)
 
-        result = auth_node.resolve(self._bot, "console")
+        result = auth_node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 
@@ -59,7 +59,7 @@ class TemplateGraphAuthoriseTests(TemplateGraphTestClient):
         self.assertIsNotNone(auth_node.role)
         self.assertEqual("root", auth_node.role)
 
-        result = auth_node.resolve(self._bot, "console")
+        result = auth_node.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 

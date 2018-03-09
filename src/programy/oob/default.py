@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -24,7 +24,7 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
     def __init__(self):
         OutOfBandProcessor.__init__(self)
 
-    def execute_oob_command(self, bot, clientid):
+    def execute_oob_command(self, client_context):
         if logging.getLogger().isEnabledFor(logging.INFO):
             logging.info("Default OOB Processing....")
         if self._xml is not None:

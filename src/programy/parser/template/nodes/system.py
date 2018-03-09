@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -36,9 +36,9 @@ class TemplateSystemNode(TemplateAttribNode):
     def timeout(self, timeout):
         self._timeout = timeout
 
-    def resolve_to_string(self, bot, clientid):
-        if bot.brain.configuration.overrides.allow_system_aiml is True:
-            command = self.resolve_children_to_string(bot, clientid)
+    def resolve_to_string(self, client_context):
+        if client_context.brain.configuration.overrides.allow_system_aiml is True:
+            command = self.resolve_children_to_string(client_context)
             process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             result = []
             for line in process.stdout.readlines():
@@ -54,9 +54,9 @@ class TemplateSystemNode(TemplateAttribNode):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -71,12 +71,12 @@ class TemplateSystemNode(TemplateAttribNode):
             logging.warning("System node timeout attrib currently ignored")
         self._timeout = attrib_value
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<system"
         if self._timeout != 0:
             xml += ' timeout="%d"' % self._timeout
         xml += ">"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</system>"
         return xml
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-__copyright__ = 'Copyright 2016-17 by Keith Sterling'
+__copyright__ = 'Copyright 2016-2018 by Keith Sterling'
 __version__ = '0.9.0'
 __license__ = 'MIT'
 __author__ = 'Keith Sterling'

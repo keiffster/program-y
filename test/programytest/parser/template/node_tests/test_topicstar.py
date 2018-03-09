@@ -12,7 +12,7 @@ class MockTemplateTopicStarNode(TemplateTopicStarNode):
     def __init__(self):
         TemplateTopicStarNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateNodeTests(ParserTestsBaseClass):
@@ -30,7 +30,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         node = TemplateTopicStarNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><topicstar /></template>", xml_str)
@@ -40,7 +40,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         node = TemplateTopicStarNode(index=3)
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><topicstar index="3" /></template>', xml_str)
@@ -58,25 +58,25 @@ class TemplateNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         context.add_match(Match(Match.TOPIC, match, "Matched"))
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        self.assertEquals("Matched", root.resolve(self._bot, "testid"))
+        self.assertEquals("Matched", root.resolve(self._client_context))
 
     def test_resolve_no_defaults_inside_topic(self):
         root = TemplateNode()
@@ -91,31 +91,31 @@ class TemplateNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = Conversation("testid", self._bot)
+        conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._bot.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         context.add_match(Match(Match.TOPIC, match, "Matched"))
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._bot._conversations["testid"] = conversation
+        self._client_context.bot._conversations["testid"] = conversation
 
-        self.assertEqual("Matched", node.resolve(self._bot, "testid"))
+        self.assertEqual("Matched", node.resolve(self._client_context))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateTopicStarNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

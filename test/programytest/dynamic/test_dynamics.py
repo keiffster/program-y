@@ -2,8 +2,8 @@ import unittest
 
 from programy.dynamic.dynamics import DynamicsCollection
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.sections.brain.dynamic import BrainDynamicsConfiguration
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.config.brain.dynamic import BrainDynamicsConfiguration
+from programy.clients.events.console.config import ConsoleConfiguration
 
 class DynamicsCollectionTests(unittest.TestCase):
 

@@ -4,8 +4,8 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.sraix import TemplateSRAIXNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.services.service import Service, ServiceFactory
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.brain.service import BrainServiceConfiguration
+from programy.config.brain.brain import BrainConfiguration
+from programy.config.brain.service import BrainServiceConfiguration
 
 from programytest.parser.base import ParserTestsBaseClass
 
@@ -15,14 +15,14 @@ class MockService(Service):
     def __init__(self, config):
         Service.__init__(self, config)
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, context: str, question: str):
         return "asked"
 
 class MockTemplateSRAIXNode(TemplateSRAIXNode):
     def __init__(self):
         TemplateSRAIXNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSRAIXNodeTests(ParserTestsBaseClass):
@@ -85,7 +85,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><sraix service="api">Hello</sraix></template>', xml_str)
@@ -98,7 +98,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><sraix>Hello</sraix></template>', xml_str)
@@ -120,7 +120,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("asked", node.resolve(self._bot, self._clientid))
+        self.assertEqual("asked", node.resolve(self._client_context))
 
     def test_call_no_service_exists(self):
 
@@ -131,7 +131,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("", node.resolve(self._bot, self._clientid))
+        self.assertEqual("", node.resolve(self._client_context))
 
     def test_call_no_service_defined(self):
 
@@ -141,13 +141,13 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Hello"))
 
-        self.assertEqual("", node.resolve(self._bot, self._clientid))
+        self.assertEqual("", node.resolve(self._client_context))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
         node = MockTemplateSRAIXNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

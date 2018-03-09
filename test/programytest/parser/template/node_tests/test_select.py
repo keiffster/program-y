@@ -9,7 +9,7 @@ class MockTemplateSelectNode(TemplateSelectNode):
     def __init__(self):
         TemplateSelectNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSelectNodeTests(ParserTestsBaseClass):
@@ -24,7 +24,7 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
         node = TemplateSelectNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><select /></template>", xml_str)
@@ -34,7 +34,7 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
         node = TemplateSelectNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)
 
@@ -43,6 +43,6 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
         node = MockTemplateSelectNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

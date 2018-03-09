@@ -13,7 +13,7 @@ class MockTemplateGetNode(TemplateGetNode):
     def __init__(self):
         TemplateGetNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateGetNodeTests(ParserTestsBaseClass):
@@ -33,14 +33,14 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
         question.set_property("name", "keith")
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
@@ -51,7 +51,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         node.local = True
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><get var="name" /></template>', xml_str)
@@ -71,14 +71,14 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default-get", "unknown")
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
 
@@ -97,14 +97,14 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        conversation = self._bot.get_conversation(self._clientid)
+        conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._bot.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
         conversation.set_property("name", "keith")
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("keith", result)
 
@@ -115,7 +115,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         node.local = False
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><get name="name" /></template>', xml_str)
@@ -136,9 +136,9 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default-get", "unknown")
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("unknown", result)
 
@@ -156,9 +156,9 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.properties.add_property("default-get", "unknown")
+        self._client_context.brain.properties.add_property("default-get", "unknown")
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
 
@@ -180,7 +180,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
 
         self.assertEqual("[GET [Tuples] - ([WORD]?x ?y)]", node.to_string())
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><get var="?x ?y"><select /></get></template>', xml_str)
@@ -190,6 +190,6 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
         node = MockTemplateGetNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

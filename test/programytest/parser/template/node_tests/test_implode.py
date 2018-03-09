@@ -10,7 +10,7 @@ class MockTemplateImplodeNode(TemplateImplodeNode):
     def __init__(self):
         TemplateImplodeNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateImplodeNodeTests(ParserTestsBaseClass):
@@ -28,7 +28,7 @@ class TemplateImplodeNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("H e l l o W o r l d"))
-        self.assertEqual(root.resolve(self._bot, self._clientid), "HelloWorld")
+        self.assertEqual(root.resolve(self._client_context), "HelloWorld")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -36,7 +36,7 @@ class TemplateImplodeNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><implode>Test</implode></template>", xml_str)
@@ -46,6 +46,6 @@ class TemplateImplodeNodeTests(ParserTestsBaseClass):
         node = MockTemplateImplodeNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

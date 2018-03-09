@@ -2,7 +2,7 @@ import logging
 
 from programy.clients.client import BotClient
 from programy.config.programy import ProgramyConfiguration
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.clients.events.console.config import ConsoleConfiguration
 
 class TestClient(BotClient):
 
@@ -19,7 +19,12 @@ class TestClient(BotClient):
         pass
 
     def load_configuration(self, arguments):
-        self.configuration = ProgramyConfiguration(ConsoleConfiguration())
+        self._configuration = ProgramyConfiguration(ConsoleConfiguration())
 
-    def dump_bot_brain_tree(self):
-        self.bot.brain.dump_tree()
+    def set_environment(self):
+        """For testing purposes we do nothing"""
+        return
+
+    def run(self):
+        """For testing purposes we do nothing"""
+        return

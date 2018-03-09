@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -36,14 +36,14 @@ class TemplateSRAIXNode(TemplateNode):
     def service(self, service):
         self._service = service
 
-    def resolve_to_string(self, bot, clientid):
-        resolved = self.resolve_children_to_string(bot, clientid)
+    def resolve_to_string(self, client_context):
+        resolved = self.resolve_children_to_string(client_context)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         if self._service is not None:
             bot_service = ServiceFactory.get_service(self._service)
-            response = bot_service.ask_question(bot, clientid, resolved)
+            response = bot_service.ask_question(client_context, resolved)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("SRAIX service [%s] return [%s]", self._service, response)
             return response
@@ -52,9 +52,9 @@ class TemplateSRAIXNode(TemplateNode):
                 logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
             return ""
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -64,12 +64,12 @@ class TemplateSRAIXNode(TemplateNode):
             return "SRAIX (service=%s)" % (self._service)
         return "SRAIX ()"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = '<sraix'
         if self._service is not None:
             xml += ' service="%s"' % self.service
         xml += '>'
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += '</sraix>'
         return xml
 

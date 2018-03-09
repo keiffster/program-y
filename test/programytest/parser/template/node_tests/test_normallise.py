@@ -10,7 +10,7 @@ class MockTemplateNormalizeNode(TemplateNormalizeNode):
     def __init__(self):
         TemplateNormalizeNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateNormalizeNodeTests(ParserTestsBaseClass):
@@ -28,9 +28,9 @@ class TemplateNormalizeNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("shouldnt"))
-        self._bot.brain.normals.process_splits(["shouldnt","should not"])
+        self._client_context.brain.normals.process_splits(["shouldnt","should not"])
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "should not")
+        self.assertEqual(root.resolve(self._client_context), "should not")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -38,7 +38,7 @@ class TemplateNormalizeNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><normalize>Test</normalize></template>", xml_str)
@@ -48,6 +48,6 @@ class TemplateNormalizeNodeTests(ParserTestsBaseClass):
         node = MockTemplateNormalizeNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

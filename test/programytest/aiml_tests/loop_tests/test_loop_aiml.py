@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class BasicTestClient(TestClient):
 
@@ -10,20 +13,22 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class ConditionLoopAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        ConditionLoopAIMLTests.test_client = BasicTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(BasicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_condition_type2_loop(self):
-        response = ConditionLoopAIMLTests.test_client.bot.ask_question("test", "TYPE2 LOOP")
+        response = self._client_context.bot.ask_question(self._client_context, "TYPE2 LOOP")
         self.assertIsNotNone(response)
         self.assertEquals(response, "Y Z")
 
     def test_condition_type3_loop(self):
-        response = ConditionLoopAIMLTests.test_client.bot.ask_question("test", "TYPE3 LOOP")
+        response = self._client_context.bot.ask_question(self._client_context, "TYPE3 LOOP")
         self.assertIsNotNone(response)
         self.assertEquals(response, "B D")

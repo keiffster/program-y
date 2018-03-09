@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -34,7 +34,7 @@ class TemplateWordNode(TemplateNode):
     def word(self, word):
         self._word = word
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), self.word)
         if self.word is not None:
@@ -44,5 +44,5 @@ class TemplateWordNode(TemplateNode):
     def to_string(self):
         return "[WORD]" + self.word
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         return TextUtils.html_escape(self.word)

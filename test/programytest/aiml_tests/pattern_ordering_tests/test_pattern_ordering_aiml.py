@@ -1,8 +1,10 @@
 import unittest
 import os
 
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class OrderingTestClient(TestClient):
 
@@ -11,32 +13,33 @@ class OrderingTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(OrderingTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class OrderingAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        OrderingAIMLTests.test_client = OrderingTestClient()
-        OrderingAIMLTests.test_client.bot.brain.sets._sets["COLOR"] = {"RED": [["RED"]]}
-        OrderingAIMLTests.test_client.bot.brain.sets._sets["ANIMAL"] = {"DOLPHIN": [["DOLPHIN"]]}
+        self._client_context = ClientContext(OrderingTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
+        self._client_context.brain.sets._sets["COLOR"] = {"RED": [["RED"]]}
+        self._client_context.brain.sets._sets["ANIMAL"] = {"DOLPHIN": [["DOLPHIN"]]}
 
     def test_basic_no_match(self):
-        response = OrderingAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS BLUE")
+        response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS BLUE")
         self.assertEqual(response, "i didn't recognize BLUE AS A COLOR.")
 
     def test_basic_match(self):
-        response = OrderingAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS RED")
+        response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS RED")
         self.assertEqual(response, "Red IS A NICE COLOR.")
 
     def test_basic_exact_match(self):
-        response = OrderingAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE COLOR IS GREEN")
+        response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS GREEN")
         self.assertEqual(response, "Green IS MY FAVORITE COLOR TOO!")
 
     def test_hash_v_star(self):
-        OrderingAIMLTests.test_client.bot.brain.dump_tree()
-        response = OrderingAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE ANIMAL IS A DOLPHIN")
+        response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS A DOLPHIN")
         self.assertEqual(response, "HASH SELECTED")
 
-        OrderingAIMLTests.test_client.bot.brain.dump_tree()
-        response = OrderingAIMLTests.test_client.bot.ask_question("test",  "MY FAVORITE ANIMAL IS AN AARDVARK")
+        response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS AN AARDVARK")
         self.assertEqual(response, "SELECTED ONCE")

@@ -1,9 +1,12 @@
 import unittest
 import os
-from programytest.aiml_tests.client import TestClient
+
+from programy.context import ClientContext
 from programy.config.file.factory import ConfigurationFactory
-from programy.config.programy import ProgramyConfiguration
-from programy.config.sections.client.console import ConsoleConfiguration
+from programy.clients.events.console.config import ConsoleConfiguration
+
+from programytest.aiml_tests.client import TestClient
+
 
 class TrainTestClient(TestClient):
 
@@ -11,53 +14,49 @@ class TrainTestClient(TestClient):
         TestClient.__init__(self)
 
     def load_configuration(self, arguments):
-        self.configuration = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(),
+        self._configuration = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(),
                                                                                os.path.dirname(__file__)+ os.sep + "testconfig.yaml",
                                                                                bot_root=os.path.dirname(__file__))
 
 class TrainAIMLTests(unittest.TestCase):
 
-    def setUp(cls):
-        TrainAIMLTests.test_client = TrainTestClient()
+    def setUp(self):
+        self._client_context = ClientContext(TrainTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_train_noun(self):
-
-        TrainAIMLTests.test_client.bot.brain.dump_tree()
-
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "jessica likes to smoke cigars")
+        response = self._client_context.bot.ask_question(self._client_context, "jessica likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Do you smoke cigars too?", response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")
+        response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")
+        response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "what does jessica like")
+        response = self._client_context.bot.ask_question(self._client_context, "what does jessica like")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "what does jessica smoke")
+        response = self._client_context.bot.ask_question(self._client_context, "what does jessica smoke")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "who smokes")
+        response = self._client_context.bot.ask_question(self._client_context, "who smokes")
         self.assertIsNotNone(response)
         self.assertEqual("Jessica likes to smoke cigars", response)
 
     def test_train_pronoun(self):
-
-        TrainAIMLTests.test_client.bot.brain.dump_tree()
-
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "mommy likes to smoke cigars")
+        response = self._client_context.bot.ask_question(self._client_context, "mommy likes to smoke cigars")
         self.assertIsNotNone(response)
 
         self.assertEqual('Now you can ask me: "Who likes TO SMOKE CIGARS?" and "What does my mommy like?"', response)
 
-        response = TrainAIMLTests.test_client.bot.ask_question("test", "who likes to smoke cigars")
+        response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
         self.assertEqual("Your mommy", response)
 

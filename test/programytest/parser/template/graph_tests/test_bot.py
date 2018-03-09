@@ -26,10 +26,10 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateBotNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somebot")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somebot")
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "sometext")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "sometext")
 
     def test_bot_name_as_child(self):
         template = ET.fromstring("""
@@ -48,10 +48,10 @@ class TemplateGraphBotTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateBotNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somebot")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somebot")
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "sometext")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "sometext")
 
     def test_invalid_bot_no_name(self):
         template = ET.fromstring("""

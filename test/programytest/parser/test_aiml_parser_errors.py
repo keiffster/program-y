@@ -3,25 +3,26 @@ import os
 from xml.etree.ElementTree import ParseError
 
 from programy.parser.aiml_parser import AIMLParser
-from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.brain.debugfile import DebugFileConfiguration
+from programy.bot import Bot
+from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.debugfile import DebugFileConfiguration
 
 class AIMLParserErrorTests(unittest.TestCase):
 
     def setUp(self):
-        config = BrainConfiguration()
+        bot_config = BotConfiguration()
 
         if os.name == 'posix':
-            config.files.aiml_files._errors = DebugFileConfiguration("conversation", filename="/tmp/tmp-errors.txt.txt")
+            bot_config.configurations[0].files.aiml_files._errors = DebugFileConfiguration("conversation", filename="/tmp/tmp-errors.txt.txt")
         elif os.name == 'nt':
-            config.files.aiml_files._errors = DebugFileConfiguration("conversation", filename='C:\Windows\Temp\\tmp-errors.txt.txt')
+            bot_config.configurations[0].files.aiml_files._errors = DebugFileConfiguration("conversation", filename='C:\Windows\Temp\\tmp-errors.txt.txt')
         else:
             raise Exception("Unknown os [%s]" % os.name)
 
-        test_brain = Brain(configuration=config)
-        self.parser = AIMLParser(brain=test_brain)
-        self.parser.create_debug_storage(config)
+        bot = Bot(bot_config)
+
+        self.parser = bot.brain.aiml_parser
+        self.parser.create_debug_storage(bot_config.configurations[0])
         self.assertIsNotNone(self.parser)
 
     def test_parse_from_file_invalid(self):

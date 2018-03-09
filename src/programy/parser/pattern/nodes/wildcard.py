@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -60,32 +60,32 @@ class PatternWildCardNode(PatternNode):
 
         return False
 
-    def check_child_is_wildcard(self, tabs, bot, clientid, context, words, word_no, match_type, depth):
+    def check_child_is_wildcard(self, tabs, client_context, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard # is next node, moving on!", tabs)
-            match = self._0ormore_hash.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+            match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard _ is next node, moving on!", tabs)
-            match = self._1ormore_underline.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+            match = self._1ormore_underline.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard ^ is next node, moving on!", tabs)
-            match = self._0ormore_arrow.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+            match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%sWildcard * is next node, moving on!", tabs)
-            match = self._1ormore_star.consume(bot, clientid, context, words, word_no+1, match_type, depth+1)
+            match = self._1ormore_star.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 

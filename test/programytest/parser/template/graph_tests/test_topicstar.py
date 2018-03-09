@@ -21,5 +21,5 @@ class TemplateGraphTopicStarTests(TemplateGraphTestClient):
         self.assertIsInstance(node, TemplateTopicStarNode)
 
         self.assertEqual(root.children[0].to_string(), "TOPICSTAR")
-        self.assertEqual(root.resolve(self._bot, self._clientid), "*")
+        self.assertEqual(root.resolve(self._client_context), "*")
 

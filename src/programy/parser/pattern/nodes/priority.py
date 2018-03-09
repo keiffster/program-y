@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -32,10 +32,10 @@ class PatternPriorityWordNode(PatternNode):
     def is_priority(self):
         return True
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<priority word="%s">'% self.priority_word
-        string += super(PatternPriorityWordNode, self).to_xml(bot, clientid)
+        string += super(PatternPriorityWordNode, self).to_xml(client_context)
         string += '</priority>\n'
         return string
 
@@ -45,7 +45,7 @@ class PatternPriorityWordNode(PatternNode):
                 return True
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
         if self.priority_word == word:
             return EqualsMatch(True, word_no, word)

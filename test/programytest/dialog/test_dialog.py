@@ -2,19 +2,18 @@ import unittest
 
 from programy.dialog.dialog import Sentence, Question, Conversation
 from programy.bot import Bot
-from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.bot.bot import BotConfiguration
 from programy.parser.tokenizer import Tokenizer
+from programy.context import ClientContext
 
+from programytest.aiml_tests.client import TestClient
 
 #############################################################################
 #
 class SentenceTests(unittest.TestCase):
 
     def setUp(self):
-        test_brain = Brain(BrainConfiguration())
-        self._bot = Bot(test_brain, None)
+        self._bot = Bot(BotConfiguration())
 
     def test_sentence_creation_empty(self):
         sentence = Sentence(self._bot.brain.tokenizer, "")
@@ -85,11 +84,9 @@ class SentenceTests(unittest.TestCase):
 class QuestionTests(unittest.TestCase):
 
     def setUp(self):
-        brain_config = BrainConfiguration()
-        test_brain = Brain(brain_config)
         bot_config = BotConfiguration()
         bot_config.conversations._max_histories = 3
-        self._bot = Bot(test_brain, bot_config)
+        self._bot = Bot(bot_config)
 
     def test_question_no_sentences_empty(self):
         question = Question.create_from_text(self._bot.brain.tokenizer, "")
@@ -170,17 +167,14 @@ class QuestionTests(unittest.TestCase):
 class ConversationTests(unittest.TestCase):
 
     def test_conversation(self):
-        brain_config = BrainConfiguration()
-        test_brain = Brain(brain_config)
-        bot_config = BotConfiguration()
-        bot_config.conversations._max_histories = 3
-        test_bot = Bot(test_brain, bot_config)
 
-        conversation = Conversation("test", test_bot)
+        client_context = ClientContext(TestClient(), "testid")
+        client_context.bot = Bot(BotConfiguration())
+        client_context.bot.configuration.conversations._max_histories = 3
+        client_context.brain = client_context.bot.brain
+
+        conversation = Conversation(client_context)
         self.assertIsNotNone(conversation)
-        self.assertIsNotNone(conversation._bot)
-        self.assertIsNotNone(conversation._clientid)
-        self.assertEqual(conversation._clientid, "test")
         self.assertEqual(0, len(conversation._questions))
         self.assertEqual(3, conversation._max_histories)
         self.assertEqual(1, len(conversation._properties))
@@ -190,20 +184,20 @@ class ConversationTests(unittest.TestCase):
         with self.assertRaises(Exception):
             conversation.previous_nth_question(0)
 
-        question1 = Question.create_from_text(test_bot.brain.tokenizer, "Hello There")
+        question1 = Question.create_from_text(client_context.brain.tokenizer, "Hello There")
         conversation.record_dialog(question1)
         self.assertEqual(question1, conversation.current_question())
         with self.assertRaises(Exception):
             conversation.previous_nth_question(1)
 
-        question2 = Question.create_from_text(test_bot.brain.tokenizer, "Hello There Again")
+        question2 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again")
         conversation.record_dialog(question2)
         self.assertEqual(question2, conversation.current_question())
         self.assertEqual(question1, conversation.previous_nth_question(1))
         with self.assertRaises(Exception):
             conversation.previous_nth_question(3)
 
-        question3 = Question.create_from_text(test_bot.brain.tokenizer, "Hello There Again Again")
+        question3 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again Again")
         conversation.record_dialog(question3)
         self.assertEqual(question3, conversation.current_question())
         self.assertEqual(question2, conversation.previous_nth_question(1))
@@ -213,7 +207,7 @@ class ConversationTests(unittest.TestCase):
         # Max Histories for this test is 3
         # Therefore we should see the first question, pop of the stack
 
-        question4 = Question.create_from_text(test_bot.brain.tokenizer, "Hello There Again Again Again")
+        question4 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again Again Again")
         conversation.record_dialog(question4)
         self.assertEqual(question4, conversation.current_question())
         self.assertEqual(question3, conversation.previous_nth_question(1))

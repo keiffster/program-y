@@ -9,7 +9,7 @@ class MockTemplateSrNode(TemplateSrNode):
     def __init__(self):
         TemplateSrNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSrNodeTests(ParserTestsBaseClass):
@@ -26,14 +26,14 @@ class TemplateSrNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("", node.resolve(self._bot, self._clientid))
+        self.assertEqual("", node.resolve(self._client_context))
 
     def test_to_xml(self):
         root = TemplateNode()
         node = TemplateSrNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><sr /></template>", xml_str)
@@ -43,6 +43,6 @@ class TemplateSrNodeTests(ParserTestsBaseClass):
         node = MockTemplateSrNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

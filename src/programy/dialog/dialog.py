@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,7 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import re
+
 from programy.parser.tokenizer import Tokenizer
+from programy.utils.text.text import TextUtils
 
 class Sentence(object):
 
@@ -156,20 +159,11 @@ class Question(object):
 #
 class Conversation(object):
 
-    def __init__(self, clientid: str, bot: object):
-        self._bot = bot
-        self._clientid = clientid
+    def __init__(self, client_context):
+        self._client_context = client_context
         self._questions = []
-        self._max_histories = bot.configuration.conversations.max_histories
-        self._properties = {'topic': bot.configuration.conversations.initial_topic}
-
-    @property
-    def bot(self):
-        return self._bot
-
-    @property
-    def clientid(self):
-        return self._clientid
+        self._max_histories = client_context.bot.configuration.conversations.max_histories
+        self._properties = {'topic': client_context.bot.configuration.conversations.initial_topic}
 
     @property
     def questions(self):
@@ -226,4 +220,53 @@ class Conversation(object):
                 logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
 
+    def get_topic_pattern(self):
+        topic_pattern = self.property("topic")
 
+        if topic_pattern is None:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("No Topic pattern default to [*]")
+            topic_pattern = "*"
+        else:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Topic pattern = [%s]", topic_pattern)
+
+        return topic_pattern
+
+    def parse_last_sentences_from_response(self, response):
+        # TODO Issue here when the response is more than just a simple sentence
+        # If the response contains punctuation such as "Hello. There" then THAT is none
+        response = re.sub(r'<\s*br\s*/>\s*', ".", response)
+        response = re.sub(r'<br></br>*', ".", response)
+        sentences = response.split(".")
+        sentences = [x for x in sentences if x]
+        last_sentence = sentences[-1]
+        that_pattern = TextUtils.strip_all_punctuation(last_sentence)
+        that_pattern = that_pattern.strip()
+        # TODO Added this to catch a failed sentence
+        if that_pattern == "":
+            that_pattern = '*'
+        return that_pattern
+
+    def get_that_pattern(self):
+        try:
+            that_question = self.previous_nth_question(1)
+            that_sentence = that_question.current_sentence()
+
+            # If the last response was valid, i.e not none and not empty string, then use
+            # that as the that_pattern, otherwise we default to '*' as pattern
+            if that_sentence.response is not None and that_sentence.response != '':
+                that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
+                if logging.getLogger().isEnabledFor(logging.INFO):
+                    logging.info("That pattern = [%s]", that_pattern)
+            else:
+                if logging.getLogger().isEnabledFor(logging.INFO):
+                    logging.info("That pattern, no response, default to [*]")
+                that_pattern = "*"
+
+        except Exception as e:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("No That pattern default to [*]")
+            that_pattern = "*"
+
+        return that_pattern

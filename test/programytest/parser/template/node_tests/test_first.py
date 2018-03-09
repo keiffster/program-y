@@ -11,7 +11,7 @@ class MockTemplateFirstNode(TemplateFirstNode):
     def __init__(self):
         TemplateFirstNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 
@@ -34,7 +34,7 @@ class TemplateFirstNodeTests(ParserTestsBaseClass):
         word3 = TemplateWordNode("Word3")
         node.append(word3)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "Word1")
+        self.assertEqual(root.resolve(self._client_context), "Word1")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -45,7 +45,7 @@ class TemplateFirstNodeTests(ParserTestsBaseClass):
         word2 = TemplateWordNode("Word2")
         node.append(word2)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><first>Word1 Word2</first></template>", xml_str)
@@ -61,14 +61,14 @@ class TemplateFirstNodeTests(ParserTestsBaseClass):
 
         root.append(node)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "NIL")
+        self.assertEqual(root.resolve(self._client_context), "NIL")
 
     def test_to_xml_no_words(self):
         root = TemplateNode()
         node = TemplateFirstNode()
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><first /></template>", xml_str)
@@ -78,6 +78,6 @@ class TemplateFirstNodeTests(ParserTestsBaseClass):
         node = MockTemplateFirstNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

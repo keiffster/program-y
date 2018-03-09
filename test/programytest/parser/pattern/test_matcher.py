@@ -9,8 +9,8 @@ from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.template.nodes.base import TemplateNode
 from programy.bot import Bot
 from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.brain.brain import BrainConfiguration
+from programy.config.bot.bot import BotConfiguration
 from programy.parser.aiml_parser import AIMLParser
 
 
@@ -18,9 +18,7 @@ class PatternFactoryTests(unittest.TestCase):
 
     def setUp(self):
         self._clientid = "testid"
-        self._brain = Brain(BrainConfiguration())
-        self._bot = Bot(self._brain, BotConfiguration())
-        self._aiml_parser = AIMLParser(self._brain)
+        self._bot = Bot(BotConfiguration())
 
     def test_match_no_word(self):
         topic = PatternOneOrMoreWildCardNode("*")

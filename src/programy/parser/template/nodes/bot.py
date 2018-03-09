@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -36,18 +36,18 @@ class TemplateBotNode(TemplateNode):
         self._name = name
 
     @staticmethod
-    def get_bot_variable(bot, client, name):
-        value = bot.brain.properties.property(name)
+    def get_bot_variable(client_context, name):
+        value = client_context.brain.properties.property(name)
         if value is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 logging.error("No bot property for [%s]"%name)
 
-            value = bot.brain.properties.property("default-property")
+            value = client_context.brain.properties.property("default-property")
             if value is None:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("No value for default-property")
 
-                value = bot.brain.configuration.defaults.default_get
+                value = client_context.brain.configuration.defaults.default_get
                 if value is None:
                     if logging.getLogger().isEnabledFor(logging.ERROR):
                         logging.error("No value for default default-property, return 'unknown'")
@@ -55,16 +55,16 @@ class TemplateBotNode(TemplateNode):
 
         return value
 
-    def resolve_to_string(self, bot, clientid):
-        name = self.name.resolve(bot, clientid)
-        value = TemplateBotNode.get_bot_variable(bot, clientid, name)
+    def resolve_to_string(self, client_context):
+        name = self.name.resolve(client_context)
+        value = TemplateBotNode.get_bot_variable(client_context, name)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -72,9 +72,9 @@ class TemplateBotNode(TemplateNode):
     def to_string(self):
         return "[BOT (%s)]" % (self.name.to_string())
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<bot "
-        xml += ' name="%s"' % self.name.resolve(bot, clientid)
+        xml += ' name="%s"' % self.name.resolve(client_context)
         xml += " />"
         return xml
 

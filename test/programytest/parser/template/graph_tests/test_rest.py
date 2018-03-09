@@ -24,5 +24,5 @@ class TemplateGraphRestTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateRestNode)
 
         self.assertIsNotNone(ast)
-        self.assertEqual(ast.resolve(self._bot, self._clientid), "two three four")
+        self.assertEqual(ast.resolve(self._client_context), "two three four")
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -39,10 +39,10 @@ class PatternSetNode(PatternNode):
     def is_set(self):
         return True
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<set name="%s">\n' % self.set_name
-        string += super(PatternSetNode, self).to_xml(bot, clientid)
+        string += super(PatternSetNode, self).to_xml(client_context)
         string += "</set>"
         return string
 
@@ -55,13 +55,13 @@ class PatternSetNode(PatternNode):
     def set_is_numeric(self):
         return bool(self.set_name.upper() == 'NUMBER')
 
-    def set_is_known(self, bot):
-        return bool(bot.brain.sets.contains(self.set_name))
+    def set_is_known(self, client_context):
+        return bool(client_context.brain.sets.contains(self.set_name))
 
-    def words_in_set(self, bot, words, word_no):
+    def words_in_set(self, client_context, words, word_no):
 
         word = words.word(word_no).upper()
-        set_words = bot.brain.sets.set(self.set_name)
+        set_words = client_context.brain.sets.set(self.set_name)
 
         if word in set_words:
             phrases = set_words[word]
@@ -80,15 +80,15 @@ class PatternSetNode(PatternNode):
 
         return EqualsMatch(False, word_no)
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
 
-        if bot.brain.dynamics.is_dynamic_set(self._set_name) is True:
-            result = bot.brain.dynamics.dynamic_set(bot, clientid, self._set_name, word)
+        if client_context.brain.dynamics.is_dynamic_set(self._set_name) is True:
+            result = client_context.brain.dynamics.dynamic_set(client_context, self._set_name, word)
             return EqualsMatch(result, word_no, word)
         else:
-            if self.set_is_known(bot):
-                match = self.words_in_set(bot, words, word_no)
+            if self.set_is_known(client_context):
+                match = self.words_in_set(client_context, words, word_no)
                 if match.matched is True:
                     if logging.getLogger().isEnabledFor(logging.DEBUG):
                         logging.debug("Found word [%s] in set [%s]", word, self.set_name)

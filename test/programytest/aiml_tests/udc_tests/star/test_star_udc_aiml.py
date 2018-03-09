@@ -1,7 +1,10 @@
 import unittest
 import os
+
+from programy.context import ClientContext
+
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class BasicTestClient(TestClient):
 
@@ -10,24 +13,27 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._file = os.path.dirname(__file__)+os.sep+'star_udc.aiml'
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._file = os.path.dirname(__file__)+os.sep+'star_udc.aiml'
+
 
 class UDCAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        UDCAIMLTests.test_client = BasicTestClient()
+        self._client_context = ClientContext(BasicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
 
     def test_udc_multi_word_question(self):
-        response = UDCAIMLTests.test_client.bot.ask_question("test", "Ask Question")
+        response = self._client_context.bot.ask_question(self._client_context, "Ask Question")
         self.assertIsNotNone(response)
         self.assertEqual(response, "UDC Star Response")
 
     def test_udc_single_word_question(self):
-        response = UDCAIMLTests.test_client.bot.ask_question("test", "Question")
+        response = self._client_context.bot.ask_question(self._client_context, "Question")
         self.assertIsNotNone(response)
         self.assertEqual(response, "UDC Star Response")
 
     def test_udc_empty_string_question(self):
-        response = UDCAIMLTests.test_client.bot.ask_question("test", "")
+        response = self._client_context.bot.ask_question(self._client_context, "")
         self.assertIsNotNone(response)
         self.assertEqual(response, "")

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -32,16 +32,16 @@ class TemplateTripleNode(TemplateNode):
     def node_name(self):
         return self._node_name
 
-    def children_to_xml(self, bot, clientid):
+    def children_to_xml(self, client_context):
         xml = ""
         if self._subj is not None:
-            subj = self._subj.resolve(bot, clientid)
+            subj = self._subj.resolve(client_context)
             xml += "<subj>" + subj + "</subj>"
         if self._pred is not None:
-            pred = self._pred.resolve(bot, clientid)
+            pred = self._pred.resolve(client_context)
             xml += "<pred>" + pred + "</pred>"
         if self._obj is not None:
-            obj = self._obj.resolve(bot, clientid)
+            obj = self._obj.resolve(client_context)
             xml += "<obj>" + obj + "</obj>"
         return xml
 

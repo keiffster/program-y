@@ -4,27 +4,30 @@ from programy.processors.post.formatpunctuation import FormatPunctuationProcesso
 from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
 from programy.bot import Bot
-from programy.brain import Brain
-from programy.config.sections.brain.brain import BrainConfiguration
-from programy.config.sections.bot.bot import BotConfiguration
+from programy.config.bot.bot import BotConfiguration
+from programy.context import ClientContext
+
+from programytest.aiml_tests.client import TestClient
 
 
 class PostProcessingTests(unittest.TestCase):
 
-    def setUp(self):
-        self.bot = Bot(Brain(BrainConfiguration()), config=BotConfiguration())
-        self.bot.brain.denormals.process_splits([" dot com ",".com"])
-        self.bot.brain.denormals.process_splits([" atsign ","@"])
-        self.denormalize = DenormalizePostProcessor()
-        self.punctuation = FormatPunctuationProcessor()
-        self.numbers = FormatNumbersPostProcessor()
-        self.multispaces = RemoveMultiSpacePostProcessor()
-
     def post_process(self, output_str):
-        output_str = self.denormalize.process(self.bot, "testid", output_str)
-        output_str = self.punctuation.process(self.bot, "testid", output_str)
-        output_str = self.numbers.process(self.bot, "testid", output_str)
-        output_str = self.multispaces.process(self.bot, "testid", output_str)
+        context = ClientContext(TestClient(), "testid")
+   
+        context.bot = Bot(config=BotConfiguration())
+        context.brain = context.bot.brain
+        context.bot.brain.denormals.process_splits([" dot com ",".com"])
+        context.bot.brain.denormals.process_splits([" atsign ","@"])
+        denormalize = DenormalizePostProcessor()
+        punctuation = FormatPunctuationProcessor()
+        numbers = FormatNumbersPostProcessor()
+        multispaces = RemoveMultiSpacePostProcessor()
+
+        output_str = denormalize.process(context, output_str)
+        output_str = punctuation.process(context, output_str)
+        output_str = numbers.process(context, output_str)
+        output_str = multispaces.process(context, output_str)
         return output_str
 
     def test_post_cleanup(self):

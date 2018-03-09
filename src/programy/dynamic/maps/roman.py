@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -32,7 +32,7 @@ class MapRomanToDecimal(DynamicMap):
     def __init__(self, config):
         DynamicMap.__init__(self, config)
 
-    def map_value(self, bot, clientid, input_value):
+    def map_value(self, client_context, input_value):
         if not isinstance(input_value, str):
             raise TypeError("expected string, got %s" % type(input_value))
         input_value = input_value.upper()
@@ -69,7 +69,7 @@ class MapDecimalToRoman(DynamicMap):
     def __init__(self, config):
         DynamicMap.__init__(self, config)
 
-    def map_value(self, bot, clientid, input_value):
+    def map_value(self, client_context, input_value):
         input_value = int(input_value)
         if not 0 < input_value < 4000:
             raise ValueError("Argument must be between 1 and 3999")

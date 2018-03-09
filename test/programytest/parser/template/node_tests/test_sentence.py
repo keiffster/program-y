@@ -10,7 +10,7 @@ class MockTemplateSentenceNode(TemplateSentenceNode):
     def __init__(self):
         TemplateSentenceNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 class TemplateSentenceNodeTests(ParserTestsBaseClass):
@@ -30,7 +30,7 @@ class TemplateSentenceNodeTests(ParserTestsBaseClass):
         word = TemplateWordNode("this is a sentence")
         node.append(word)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "This is a sentence")
+        self.assertEqual(root.resolve(self._client_context), "This is a sentence")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -38,7 +38,7 @@ class TemplateSentenceNodeTests(ParserTestsBaseClass):
         root.append(node)
         node.append(TemplateWordNode("Test"))
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual("<template><sentence>Test</sentence></template>", xml_str)
@@ -48,6 +48,6 @@ class TemplateSentenceNodeTests(ParserTestsBaseClass):
         node = MockTemplateSentenceNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

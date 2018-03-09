@@ -58,19 +58,19 @@ class PatternSetNodeTests(ParserTestsBaseClass):
 
         self.assertTrue(node.equivalent(PatternISetNode([], "test1, test2, test3")))
 
-        sentence = Sentence(self._bot.brain.tokenizer, "TEST1 TEST2 TEST3")
+        sentence = Sentence(self._client_context.brain.tokenizer, "TEST1 TEST2 TEST3")
 
-        result = node.equals(self._bot, "testid", sentence, 0)
+        result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
-        result = node.equals(self._bot, "testid", sentence, 1)
+        result = node.equals(self._client_context, sentence, 1)
         self.assertTrue(result.matched)
-        result = node.equals(self._bot, "testid", sentence, 2)
+        result = node.equals(self._client_context, sentence, 2)
         self.assertTrue(result.matched)
-        result = node.equals(self._bot, "testid", sentence, 3)
+        result = node.equals(self._client_context, sentence, 3)
         self.assertFalse(result.matched)
 
         self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
-        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self._bot, self._clientid))
+        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self._client_context))
 
     def test_parse_words(self):
         node = PatternISetNode([], "test1")

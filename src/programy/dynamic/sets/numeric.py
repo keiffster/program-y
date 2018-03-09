@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,7 +25,7 @@ class IsNumeric(DynamicSet):
     def __init__(self, config):
         DynamicSet.__init__(self, config)
 
-    def is_member(self, bot, clientid, value):
+    def is_member(self, client_context, value):
         if value is not None:
             return value.isnumeric()
         return False

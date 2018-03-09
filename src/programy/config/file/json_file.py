@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -81,6 +81,19 @@ class JSONConfigurationFile(BaseConfigurationFile):
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
+
+    def get_multi_option(self, section, option_name, missing_value=None):
+        if missing_value is None:
+            missing_value = []
+        value = self. get_option(section, option_name, missing_value)
+        if isinstance(value, list):
+            values = value
+        else:
+            values = [value]
+        multis = []
+        for value in values:
+            multis.append(value)
+        return multis
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
         if missing_value is None:

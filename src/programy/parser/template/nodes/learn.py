@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -80,14 +80,14 @@ class TemplateLearnNode(TemplateNode):
     def __init__(self):
         TemplateNode.__init__(self)
 
-    def evaluate_eval_nodes(self, bot, clientid, template):
+    def evaluate_eval_nodes(self, client_context, template):
 
-        new_template = bot.brain.aiml_parser.template_parser.get_base_node()
+        new_template = client_context.brain.aiml_parser.template_parser.get_base_node()
 
         count = 0
         for child in template.children:
             if isinstance(child, TemplateEvalNode):
-                new_word_node = bot.brain.aiml_parser.template_parser.get_word_node(child.resolve(bot, clientid))
+                new_word_node = client_context.brain.aiml_parser.template_parser.get_word_node(child.resolve(client_context))
                 new_template.children.append(new_word_node)
             else:
                 new_template.children.append(child)
@@ -95,7 +95,7 @@ class TemplateLearnNode(TemplateNode):
 
         return new_template
 
-    def resolve_element_evals(self, bot, clientid, element):
+    def resolve_element_evals(self, client_context, element):
 
         new_element = ET.Element(element.tag)
 
@@ -110,8 +110,8 @@ class TemplateLearnNode(TemplateNode):
                 str_val = "<template>%s</template>" % eval_str
                 template = ET.fromstring(str_val)
 
-                ast = bot.brain.aiml_parser.template_parser.parse_template_expression(template)
-                resolved = ast.resolve(bot, clientid)
+                ast = client_context.brain.aiml_parser.template_parser.parse_template_expression(template)
+                resolved = ast.resolve(client_context)
 
                 new_element.text += " " + resolved
             else:
@@ -124,14 +124,14 @@ class TemplateLearnNode(TemplateNode):
 
         return new_element
 
-    def _create_new_category(self, bot, clientid, category):
-        new_pattern = self.resolve_element_evals(bot, clientid, category.pattern)
-        new_topic = self.resolve_element_evals(bot, clientid, category.topic)
-        new_that = self.resolve_element_evals(bot, clientid, category.that)
+    def _create_new_category(self, client_context, category):
+        new_pattern = self.resolve_element_evals(client_context, category.pattern)
+        new_topic = self.resolve_element_evals(client_context, category.topic)
+        new_that = self.resolve_element_evals(client_context, category.that)
 
-        new_template = self.evaluate_eval_nodes(bot, clientid, category.template)
+        new_template = self.evaluate_eval_nodes(client_context, category.template)
 
-        bot.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
+        client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
@@ -141,14 +141,14 @@ class TemplateLearnNode(TemplateNode):
 
         return LearnCategory(new_pattern, new_topic, new_that, new_template)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, client_context):
         for category in self.children:
-            self._create_new_category(bot, clientid, category)
+            self._create_new_category(client_context, category)
         return ""
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -156,7 +156,7 @@ class TemplateLearnNode(TemplateNode):
     def to_string(self):
         return "LEARN"
 
-    def children_to_xml(self, bot, clientid):
+    def children_to_xml(self, client_context):
         xml = ""
         for category in self.children:
             xml += "<category>"
@@ -164,14 +164,14 @@ class TemplateLearnNode(TemplateNode):
             xml += ET.tostring(category.topic, 'utf-8').decode('utf-8')
             xml += ET.tostring(category.that, 'utf-8').decode('utf-8')
             xml += "<template>"
-            xml += category.template.to_xml(bot, clientid)
+            xml += category.template.to_xml(client_context)
             xml += "</template>"
             xml += "</category>"
         return xml
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<learn>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</learn>"
         return xml
 

@@ -26,11 +26,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value1")
 
     def test_set_template_multi_word_predicate_as_attrib(self):
         template = ET.fromstring("""
@@ -49,11 +49,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred other")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somepred other")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value1")
 
     def test_set_template_predicate_nested(self):
         template = ET.fromstring("""
@@ -74,11 +74,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value1")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value1")
 
     def test_set_template_local_as_attrib(self):
         template = ET.fromstring("""
@@ -97,11 +97,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somevar")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somevar")
         self.assertTrue(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value2")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value2")
 
     def test_set_template_predicate_as_child(self):
         template = ET.fromstring("""
@@ -120,11 +120,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somepred")
         self.assertFalse(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value3")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value3")
 
     def test_set_template_local_as_child(self):
         template = ET.fromstring("""
@@ -143,11 +143,11 @@ class TemplateGraphSetTests(TemplateGraphTestClient):
         self.assertIsInstance(set_node, TemplateSetNode)
         self.assertIsNotNone(set_node.name)
         self.assertIsInstance(set_node.name, TemplateNode)
-        self.assertEqual(set_node.name.resolve(self._bot, self._clientid), "somepred")
+        self.assertEqual(set_node.name.resolve(self._client_context), "somepred")
         self.assertTrue(set_node.local)
 
         self.assertEqual(len(set_node.children), 1)
-        self.assertEqual(set_node.children[0].resolve(self._bot, self._clientid), "Value4")
+        self.assertEqual(set_node.children[0].resolve(self._client_context), "Value4")
 
     def test_set_name_and_var(self):
         template = ET.fromstring("""

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -26,20 +26,20 @@ class TemplateAddTripleNode(TemplateTripleNode):
     def __init__(self, subj=None, pred=None, obj=None):
         TemplateTripleNode.__init__(self, node_name="addtriple", subj=subj, pred=pred, obj=obj)
 
-    def resolve_to_string(self, bot, clientid):
-        rdf_subject = self._subj.resolve(bot, clientid)
-        rdf_predicate = self._pred.resolve(bot, clientid)
-        rdf_object = self._obj.resolve(bot, clientid)
+    def resolve_to_string(self, client_context):
+        rdf_subject = self._subj.resolve(client_context)
+        rdf_predicate = self._pred.resolve(client_context)
+        rdf_object = self._obj.resolve(client_context)
 
-        bot.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
+        client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
         resolved = ""
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -47,9 +47,9 @@ class TemplateAddTripleNode(TemplateTripleNode):
     def to_string(self):
         return "ADDTRIPLE"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<addtriple>"
-        xml += self.children_to_xml(bot, clientid)
+        xml += self.children_to_xml(client_context)
         xml += "</addtriple>"
         return xml
 

@@ -1,7 +1,9 @@
 import unittest
 import os
+
+from programy.context import ClientContext
 from programytest.aiml_tests.client import TestClient
-from programy.config.sections.brain.file import BrainFileConfiguration
+
 
 class BasicTestClient(TestClient):
 
@@ -10,14 +12,16 @@ class BasicTestClient(TestClient):
 
     def load_configuration(self, arguments):
         super(BasicTestClient, self).load_configuration(arguments)
-        self.configuration.brain_configuration.files.aiml_files._files = [os.path.dirname(__file__)]
+        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+
 
 class BotAIMLTests(unittest.TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        BotAIMLTests.test_client = BasicTestClient()
-        BotAIMLTests.test_client.bot.brain.properties.load_from_text("""
+    def setUp(self):
+        self._client_context = ClientContext(BasicTestClient(), "testid")
+        self._client_context.bot = self._client_context.client.bot
+        self._client_context.brain = self._client_context.bot.brain
+        self._client_context.bot.brain.properties.load_from_text("""
             url:http://www.keithsterling.com/aiml
             name:KeiffBot 1.0
             firstname:Keiff
@@ -44,116 +48,116 @@ class BotAIMLTests(unittest.TestCase):
         """)
 
     def test_bot_property_xxx(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test",  "BOT PROPERTY XXX")
+        response = self._client_context.bot.ask_question(self._client_context,  "BOT PROPERTY XXX")
         self.assertIsNotNone(response)
         self.assertEqual(response, "unknown")
 
     def test_bot_property_url(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY URL")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY URL")
         self.assertIsNotNone(response)
         self.assertEqual(response, "http://www.keithsterling.com/aiml")
 
     def test_bot_property_name(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY NAME")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY NAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "KeiffBot 1.0")
 
     def test_bot_property_firstname(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY FIRSTNAME")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY FIRSTNAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Keiff")
 
     def test_bot_property_middlename(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY MIDDLENAME")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY MIDDLENAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "AIML")
 
     def test_bot_property_lastname(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY LASTNAME")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY LASTNAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "BoT")
 
     def test_bot_property_email(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY EMAIL")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY EMAIL")
         self.assertIsNotNone(response)
         self.assertEqual(response, "info@keiffbot.org")
 
     def test_bot_property_gender(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY GENDER")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY GENDER")
         self.assertIsNotNone(response)
         self.assertEqual(response, "male")
 
     def test_bot_property_botmaster(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY BOTMASTER")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY BOTMASTER")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Keith Sterling")
 
     def test_bot_property_organisation(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY ORGANISATION")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY ORGANISATION")
         self.assertIsNotNone(response)
         self.assertEqual(response, "keithsterling.com")
 
     def test_bot_property_version(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY VERSION")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY VERSION")
         self.assertIsNotNone(response)
         self.assertEqual(response, "0.0.1")
 
     def test_bot_property_birthplace(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY BIRTHPLACE")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY BIRTHPLACE")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Edinburgh, Scotland")
 
     def test_bot_property_birthday(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY BIRTHDAY")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY BIRTHDAY")
         self.assertIsNotNone(response)
         self.assertEqual(response, "September 9th")
 
     def test_bot_property_sign(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY SIGN")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY SIGN")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Virgo")
 
     def test_bot_property_birthdate(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY BIRTHDATE")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY BIRTHDATE")
         self.assertIsNotNone(response)
         self.assertEqual(response, "September 9th, 2016")
 
     def test_bot_property_job(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY JOB")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY JOB")
         self.assertIsNotNone(response)
         self.assertEqual(response, "mobile virtual assistant")
 
     def test_bot_property_species(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY SPECIES")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY SPECIES")
         self.assertIsNotNone(response)
         self.assertEqual(response, "robot")
 
     def test_bot_property_religion(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY RELIGION")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY RELIGION")
         self.assertIsNotNone(response)
         self.assertEqual(response, "No religion, I am an Atheist")
 
     def test_bot_property_logo(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY LOGO")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY LOGO")
         self.assertIsNotNone(response)
         self.assertEqual(response, '<img src="http://www.keithsterling.com/aiml/logo.png" width="128"/>')
 
     def test_bot_property_default_get(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY DEFAULT GET")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY DEFAULT GET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "unknown")
 
     def test_bot_property_default_map(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY DEFAULT MAP")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY DEFAULT MAP")
         self.assertIsNotNone(response)
         self.assertEqual(response, "unknown")
 
     def test_bot_property_default_property(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY DEFAULT PROPERTY")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY DEFAULT PROPERTY")
         self.assertIsNotNone(response)
         self.assertEqual(response, "unknown")
 
     def test_bot_property_default_learn_filename(self):
-        response = BotAIMLTests.test_client.bot.ask_question("test", "BOT PROPERTY LEARN FILENAME")
+        response = self._client_context.bot.ask_question(self._client_context, "BOT PROPERTY LEARN FILENAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "learn.aiml")

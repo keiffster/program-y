@@ -5,7 +5,7 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
     def test_basic_bot_match_as_text(self):
 
-        self._bot.brain.properties.add_property('firstname', 'testbot')
+        self._client_context.brain.properties.add_property('firstname', 'testbot')
 
         self.add_pattern_to_graph(pattern="<bot>firstname</bot>", topic="X", that="Y", template="1")
 
@@ -18,7 +18,7 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
     def test_basic_bot_match_as_name(self):
 
-        self._bot.brain.properties.add_property('firstname', 'testbot')
+        self._client_context.brain.properties.add_property('firstname', 'testbot')
 
         self.add_pattern_to_graph(pattern='<bot name="firstname" />', topic="X", that="Y", template="1")
 
@@ -31,7 +31,7 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
     def test_basic_bot_match_as_property(self):
 
-        self._bot.brain.properties.add_property('firstname', 'testbot')
+        self._client_context.brain.properties.add_property('firstname', 'testbot')
 
         self.add_pattern_to_graph(pattern='<bot property="firstname" />', topic="X", that="Y", template="1")
 

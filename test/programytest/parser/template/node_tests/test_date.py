@@ -14,7 +14,7 @@ class MockTemplateDateNode(TemplateDateNode):
     def __init__(self, date_format=None):
         TemplateDateNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is a failure")
 
 class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
@@ -32,7 +32,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertRegex(root.resolve(self._bot, self._clientid), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
+        self.assertRegex(root.resolve(self._client_context), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
     def test_node_customformat_constructor(self):
         root = TemplateNode()
@@ -45,7 +45,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertRegex(root.resolve(self._bot, self._clientid), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
+        self.assertRegex(root.resolve(self._client_context), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
     def test_node_customformat_parameter(self):
         root = TemplateNode()
@@ -60,7 +60,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
 
         self.assertEqual(len(root.children), 1)
         self.assertEquals("%c", node.format)
-        self.assertRegex(root.resolve(self._bot, self._clientid), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
+        self.assertRegex(root.resolve(self._client_context), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
     def test_node_customformat_set_attrib(self):
         root = TemplateNode()
@@ -74,7 +74,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertRegex(root.resolve(self._bot, self._clientid), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
+        self.assertRegex(root.resolve(self._client_context), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
     def test_node_customformat_set_attrib_invalid(self):
         root = TemplateNode()
@@ -92,7 +92,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
         node = TemplateDateNode()
         root.append(node)
         node.append(TemplateWordNode("Mon Sep 30 07:06:05 2013"))
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><date format="%c">Mon Sep 30 07:06:05 2013</date></template>', xml_str)
@@ -109,6 +109,6 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
         root.append(node)
 
         with self.assertRaises(Exception):
-            node.resolve_to_string(self._bot, self._clientid)
+            node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._bot, self._clientid))
+        self.assertEquals("", root.resolve(self._client_context))

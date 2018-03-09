@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -40,10 +40,10 @@ class PatternBotNode(PatternNode):
     def property(self):
         return self._property
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         string = ""
         string += '<bot property="%s">\n' % self.property
-        string += super(PatternBotNode, self).to_xml(bot, clientid)
+        string += super(PatternBotNode, self).to_xml(client_context)
         string += "</bot>"
         return string
 
@@ -53,10 +53,10 @@ class PatternBotNode(PatternNode):
                 return True
         return False
 
-    def equals(self, bot, clientid, words, word_no):
+    def equals(self, client_context, words, word_no):
         word = words.word(word_no)
-        if bot.brain.properties.has_property(self.property):
-            if word == bot.brain.properties.property(self.property):
+        if client_context.brain.properties.has_property(self.property):
+            if word == client_context.brain.properties.property(self.property):
                 if logging.getLogger().isEnabledFor(logging.DEBUG):
                     logging.debug("Found word [%s] as bot property", word)
                 return EqualsMatch(True, word_no, word)

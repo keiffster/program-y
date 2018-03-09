@@ -1,4 +1,93 @@
+console:
+  bot:  bot
+
+voice:
+  tts: osx
+  stt: azhang
+  osx:
+    classname: talky.clients.voice.tts.osxsay.OSXSayTextToSpeach
+  pytts:
+    classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
+    rate_adjust: 50
+  azhang:
+    classname: talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText
+    ambient_adjust: 3
+    service: ibm
+
+rest:
+  host: 0.0.0.0
+  port: 8989
+  debug: false
+  workers: 4
+
+webchat:
+  host: 0.0.0.0
+  port: 8080
+  debug: false
+
+twitter:
+  polling: true
+  polling_interval: 49
+  streaming: false
+  use_status: true
+  use_direct_message: true
+  auto_follow: true
+  storage: file
+  storage_location: $BOT_ROOT/storage/twitter.data
+  welcome_message: Thanks for following me, send me a message and I'll try and help
+
+xmpp:
+  server: talk.google.com
+  port: 5222
+  xep_0030: true
+  xep_0004: true
+  xep_0060: true
+  xep_0199: true
+
+socket:
+  host: 127.0.0.1
+  port: 9999
+  queue: 5
+  debug: true
+
+telegram:
+  unknown_command: Sorry, that is not a command I have been taught yet!
+
+facebook:
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+
+twilio:
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+
+slack:
+  polling_interval: 1
+
+viber:
+  name: Servusai
+  avatar: http://viber.com/avatar.jpg
+
+line:
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+
+kik:
+  bot_name: servusai
+  webhook: https://4264d3b1.ngrok.io/incoming
+  host: 127.0.0.1
+  port: 5000
+  debug: false
+
+#####################################################################################################
+#
+
 bot:
+    brain: brain
+
     license_keys: $BOT_ROOT/config/license.keys
 
     prompt: ">>>"
@@ -38,6 +127,8 @@ bot:
       host: localhost
       port: 6379
 
+#####################################################################################################
+#
 
 brain:
 
@@ -52,7 +143,7 @@ brain:
       default-get: unknown
       default-property: unknown
       default-map: unknown
-      learn-filename: y-bot-learnf.aiml
+      learn-filename: $BOT_ROOT/aiml/y-bot-learnf.aiml
 
     # Nodes
     nodes:
@@ -67,9 +158,9 @@ brain:
       load_aiml_on_binary_fail: false
 
     # Braintree
-    braintree:
-      file: /tmp/braintree.xml
-      content: xml
+    #braintree:
+    #  file: /tmp/braintree.xml
+    #  content: xml
 
     files:
         aiml:
@@ -77,19 +168,16 @@ brain:
             extension: .aiml
             directories: true
             errors:
-              #file: /tmp/y-bot_errors.txt
               file: /tmp/y-bot_errors.csv
               format: csv
               encoding: utf-8
               delete_on_start: true
             duplicates:
-              #file: /tmp/y-bot_duplicates.txt
               file: /tmp/y-bot_duplicates.csv
               format: csv
               encoding: utf-8
               delete_on_start: true
             conversation:
-              #file: /tmp/y-bot-conversation.txt
               file: /tmp/y-bot-conversation.csv
               format: csv
               delete_on_start: true
@@ -180,83 +268,3 @@ brain:
             romantodec: programy.dynamic.maps.roman.MapRomanToDecimal
             dectoroman: programy.dynamic.maps.roman.MapDecimalToRoman
 
-voice:
-  tts: osx
-  stt: azhang
-  osx:
-    classname: talky.clients.voice.tts.osxsay.OSXSayTextToSpeach
-  pytts:
-    classname: talky.clients.voice.tts.pyttssay.PyTTSSayTextToSpeach
-    rate_adjust: 50
-  azhang:
-    classname: talky.clients.voice.stt.azhang.AnthonyZhangSpeechToText
-    ambient_adjust: 3
-    service: ibm
-
-rest:
-  host: 0.0.0.0
-  port: 8989
-  debug: false
-  workers: 4
-
-webchat:
-  host: 0.0.0.0
-  port: 8080
-  debug: false
-
-twitter:
-  polling: true
-  polling_interval: 49
-  streaming: false
-  use_status: true
-  use_direct_message: true
-  auto_follow: true
-  storage: file
-  storage_location: $BOT_ROOT/storage/twitter.data
-  welcome_message: Thanks for following me, send me a message and I'll try and help
-
-xmpp:
-  server: talk.google.com
-  port: 5222
-  xep_0030: true
-  xep_0004: true
-  xep_0060: true
-  xep_0199: true
-
-socket:
-  host: 127.0.0.1
-  port: 9999
-  queue: 5
-  debug: true
-
-telegram:
-  unknown_command: Sorry, that is not a command I have been taught yet!
-
-facebook:
-  host: 127.0.0.1
-  port: 5000
-  debug: false
-
-twilio:
-  host: 127.0.0.1
-  port: 5000
-  debug: false
-
-slack:
-  polling_interval: 1
-
-viber:
-  name: Servusai
-  avatar: http://viber.com/avatar.jpg
-
-line:
-  host: 127.0.0.1
-  port: 5000
-  debug: false
-
-kik:
-  bot_name: servusai
-  webhook: https://4264d3b1.ngrok.io/incoming
-  host: 127.0.0.1
-  port: 5000
-  debug: false

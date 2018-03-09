@@ -9,7 +9,7 @@ from programytest.parser.base import ParserTestsBaseClass
 
 class MockExtension(object):
 
-    def execute(self, bot, clientid, data):
+    def execute(self, context, data):
         if data is None or data is "":
             return "VALID"
         else:
@@ -20,7 +20,7 @@ class MockTemplateExtensionNode(TemplateExtensionNode):
     def __init__(self):
         TemplateExtensionNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 
@@ -42,7 +42,7 @@ class TemplateExtensionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "VALID")
+        self.assertEqual(root.resolve(self._client_context), "VALID")
 
     def test_node_with_data(self):
         root = TemplateNode()
@@ -62,14 +62,14 @@ class TemplateExtensionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual(root.resolve(self._bot, self._clientid), "Test")
+        self.assertEqual(root.resolve(self._client_context), "Test")
 
     def test_node_invalid_class(self):
         root = TemplateNode()
         node = TemplateExtensionNode()
         node.path = "programytest.parser.template.node_tests.test_extension.MockExtensionOther"
         root.append(node)
-        self.assertEqual(root.resolve(self._bot, self._clientid), "")
+        self.assertEqual(root.resolve(self._client_context), "")
 
 
     def test_to_xml(self):
@@ -83,7 +83,7 @@ class TemplateExtensionNodeTests(ParserTestsBaseClass):
         node.append(TemplateWordNode("Test"))
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><extension path="programytest.parser.template.node_tests.test_extension.MockExtension">Test</extension></template>', xml_str)
@@ -93,6 +93,6 @@ class TemplateExtensionNodeTests(ParserTestsBaseClass):
         node = MockTemplateExtensionNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

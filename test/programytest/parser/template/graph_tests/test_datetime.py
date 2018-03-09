@@ -23,7 +23,7 @@ class TemplateGraphDateTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateDateNode)
-        self.assertIsNotNone(ast.resolve(self._bot, self._clientid))
+        self.assertIsNotNone(ast.resolve(self._client_context))
 
     def test_date_format_as_attrib_full(self):
         template = ET.fromstring("""
@@ -40,7 +40,7 @@ class TemplateGraphDateTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateDateNode)
-        self.assertIsNotNone(ast.resolve(self._bot, self._clientid))
+        self.assertIsNotNone(ast.resolve(self._client_context))
 
     def test_date_format_as_attrib_default(self):
         template = ET.fromstring("""
@@ -57,5 +57,5 @@ class TemplateGraphDateTests(TemplateGraphTestClient):
         set_node = ast.children[0]
         self.assertIsNotNone(set_node)
         self.assertIsInstance(set_node, TemplateDateNode)
-        self.assertIsNotNone(ast.resolve(self._bot, self._clientid))
+        self.assertIsNotNone(ast.resolve(self._client_context))
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,8 +17,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import logging
 
-from programy.config.sections.bot.filestorage import BotConversationsFileStorageConfiguration
-from programy.config.sections.bot.redisstorage import BotConversationsRedisStorageConfiguration
+from programy.config.bot.filestorage import BotConversationsFileStorageConfiguration
+from programy.config.bot.redisstorage import BotConversationsRedisStorageConfiguration
 from programy.dialog.storage.file import ConversationFileStorage
 from programy.dialog.storage.redis import ConversationRedisStorage
 

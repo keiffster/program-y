@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -62,16 +62,16 @@ class TemplateIntervalNode(TemplateNode):
     def style(self, style):
         self._style = style
 
-    def resolve_to_string(self, bot, clientid):
-        format_str = self._interval_format.resolve(bot, clientid)
+    def resolve_to_string(self, client_context):
+        format_str = self._interval_format.resolve(client_context)
 
-        from_str = self.interval_from.resolve(bot, clientid)
+        from_str = self.interval_from.resolve(client_context)
         from_time = datetime.datetime.strptime(from_str, format_str)
 
-        to_str = self.interval_to.resolve(bot, clientid)
+        to_str = self.interval_to.resolve(client_context)
         to_time = datetime.datetime.strptime(to_str, format_str)
 
-        style = self._style.resolve(bot, clientid)
+        style = self._style.resolve(client_context)
 
         diff = to_time - from_time
         difference = relativedelta(to_time, from_time)
@@ -111,9 +111,9 @@ class TemplateIntervalNode(TemplateNode):
             logging.debug("[INTERVAL] resolved to [%s]", resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -121,16 +121,16 @@ class TemplateIntervalNode(TemplateNode):
     def to_string(self):
         return "[INTERVAL]"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = '<interval'
-        xml += ' format="%s"' % self._interval_format.to_xml(bot, clientid)
-        xml += ' style="%s"' % self._style.to_xml(bot, clientid)
+        xml += ' format="%s"' % self._interval_format.to_xml(client_context)
+        xml += ' style="%s"' % self._style.to_xml(client_context)
         xml += '>'
         xml += '<from>'
-        xml += self._interval_from.to_xml(bot, clientid)
+        xml += self._interval_from.to_xml(client_context)
         xml += '</from>'
         xml += '<to>'
-        xml += self._interval_to.to_xml(bot, clientid)
+        xml += self._interval_to.to_xml(client_context)
         xml += '</to>'
         xml += '</interval>'
         return xml

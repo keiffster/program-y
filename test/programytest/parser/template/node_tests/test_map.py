@@ -11,7 +11,7 @@ class MockTemplateMapNode(TemplateMapNode):
     def __init__(self):
         TemplateMapNode.__init__(self)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, context):
         raise Exception("This is an error")
 
 
@@ -24,7 +24,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 0)
 
         node = TemplateMapNode()
-        self.assertEqual("", node.resolve_children(self._bot, self._clientid))
+        self.assertEqual("", node.resolve_children(self._client_context))
 
         node.name = TemplateWordNode("COLOURS")
         node.append(TemplateWordNode("BLACK"))
@@ -32,15 +32,15 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("WHITE", result)
 
     def test_no_var_defaultmap_set(self):
-        self._bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._bot.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self._client_context.brain.properties.add_property('default-map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("COLOURS")
@@ -48,12 +48,12 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root = TemplateNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("test_value", result)
 
     def test_no_var_defaultmap_not_set(self):
-        self._bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("COLOURS")
@@ -61,13 +61,13 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root = TemplateNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
 
     def test_no_map_for_name_defaultmap_set(self):
-        self._bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
-        self._bot.brain.properties.add_property('default-map', "test_value")
+        self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self._client_context.brain.properties.add_property('default-map', "test_value")
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("UNKNOWN")
@@ -75,12 +75,12 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root = TemplateNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("test_value", result)
 
     def test_no_map_for_name_defaultmap_not_set(self):
-        self._bot.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
+        self._client_context.brain.maps._maps['COLOURS'] = {'BLACK': 'WHITE'}
 
         node = TemplateMapNode()
         node.name = TemplateWordNode("UNKNOWN")
@@ -88,7 +88,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root = TemplateNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("", result)
 
@@ -105,7 +105,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("HORSES", result)
 
@@ -122,7 +122,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("HORSE", result)
 
@@ -139,7 +139,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("1", result)
 
@@ -156,7 +156,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("2", result)
 
@@ -167,7 +167,7 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         node.append(TemplateWordNode("BLACK"))
         root.append(node)
 
-        xml = root.xml_tree(self._bot, self._clientid)
+        xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
         self.assertEqual('<template><map name="COLOURS">BLACK</map></template>', xml_str)
@@ -177,6 +177,6 @@ class TemplateMapNodeTests(ParserTestsBaseClass):
         node = MockTemplateMapNode()
         root.append(node)
 
-        result = root.resolve(self._bot, self._clientid)
+        result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEquals("", result)

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,6 +25,6 @@ class GetTime(DynamicVariable):
     def __init__(self, config):
         DynamicVariable.__init__(self, config)
 
-    def get_value(self, bot, clientid, value=None):
+    def get_value(self, client_context, value=None):
         formatter = DateFormatter()
         return formatter.time_representation()

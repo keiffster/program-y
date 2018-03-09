@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -24,8 +24,8 @@ class DenormalizePostProcessor(PostProcessor):
     def __init__(self):
         PostProcessor.__init__(self)
 
-    def process(self, bot, clientid, word_string):
-        denormalized = bot.brain.denormals.denormalise_string(word_string)
+    def process(self, context, word_string):
+        denormalized = context.brain.denormals.denormalise_string(word_string)
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Denormalising input from [%s] to [%s]", word_string, denormalized)
         return denormalized

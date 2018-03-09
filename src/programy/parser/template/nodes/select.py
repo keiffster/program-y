@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-17 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -41,23 +41,23 @@ class QueryBase(object):
     def obj(self):
         return self._obj
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<subj>%s</subj>"%self._subj
         xml += "<pred>%s</pred>"%self._pred
         xml += "<obj>%s</obj>"%self._obj
         return xml
 
-    def execute(self, bot, clientid):
+    def execute(self, client_context):
         return []
 
-    def get_rdf(self, bot, clientid):
-        subj = self.subj.resolve(bot, clientid)
+    def get_rdf(self, client_context):
+        subj = self.subj.resolve(client_context)
         if subj.startswith("?") is False:
             subj = subj.upper()
-        pred = self.pred.resolve(bot, clientid)
+        pred = self.pred.resolve(client_context)
         if pred.startswith("?") is False:
             pred = pred.upper()
-        obj = self.obj.resolve(bot, clientid)
+        obj = self.obj.resolve(client_context)
         return subj, pred, obj
 
 
@@ -66,22 +66,22 @@ class Query(QueryBase):
     def __init__(self, subj, pred, obj):
         QueryBase.__init__(self, subj, pred, obj)
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<q>"
-        xml += super(Query, self).to_xml(bot, clientid)
+        xml += super(Query, self).to_xml(client_context)
         xml + "</q>"
         return xml
 
-    def execute(self, bot, clientid, vars=None):
-        subj, pred, obj = self.get_rdf(bot, clientid)
+    def execute(self, client_context, vars=None):
+        subj, pred, obj = self.get_rdf(client_context)
         if vars is None:
-            tuples = bot.brain.rdf.matched_as_tuples(subj, pred, obj)
+            tuples = client_context.brain.rdf.matched_as_tuples(subj, pred, obj)
             results = []
             for atuple in tuples:
                 results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
             return results
         else:
-            tuples = bot.brain.rdf.match_to_vars(subj, pred, obj)
+            tuples = client_context.brain.rdf.match_to_vars(subj, pred, obj)
             return tuples
 
 
@@ -93,22 +93,22 @@ class NotQuery(QueryBase):
     def get_xml_type(self):
         return "notq"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<notq>"
-        xml += super(NotQuery, self).to_xml(bot, clientid)
+        xml += super(NotQuery, self).to_xml(client_context)
         xml += "</notq>"
         return xml
 
-    def execute(self, bot, clientid, vars=None):
-        subj, pred, obj = self.get_rdf(bot, clientid)
+    def execute(self, client_context, vars=None):
+        subj, pred, obj = self.get_rdf(client_context)
         if vars is None:
-            tuples = bot.brain.rdf.not_matched_as_tuples(subj, pred, obj)
+            tuples = client_context.brain.rdf.not_matched_as_tuples(subj, pred, obj)
             results = []
             for atuple in tuples:
                 results.append([["subj", atuple[0]], ["pred", atuple[1]], ["obj", atuple[2]]])
             return results
         else:
-            tuples = bot.brain.rdf.not_match_to_vars(subj, pred, obj)
+            tuples = client_context.brain.rdf.not_match_to_vars(subj, pred, obj)
             return tuples
 
 
@@ -133,33 +133,33 @@ class TemplateSelectNode(TemplateNode):
     def vars(self):
         return self._vars
 
-    def encode_results(self, bot, results):
+    def encode_results(self, client_context, results):
         # At some point put a config item here that allows us to switch between
         # XML, JSON, Yaml, and Picke
         return json.dumps(results)
 
-    def resolve_to_string(self, bot, clientid):
+    def resolve_to_string(self, client_context):
 
         resolved = ""
         if self._queries:
             results = []
 
             for query in self._queries:
-                query_results = query.execute(bot, clientid, self.vars)
+                query_results = query.execute(client_context, self.vars)
                 results.append(query_results)
 
             if self._vars:
-                results = bot.brain.rdf.unify(self.vars, results)
+                results = client_context.brain.rdf.unify(self.vars, results)
 
-            resolved = self.encode_results(bot, results)
+            resolved = self.encode_results(client_context, results)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, bot, clientid):
+    def resolve(self, client_context):
         try:
-            return self.resolve_to_string(bot, clientid)
+            return self.resolve_to_string(client_context)
         except Exception as excep:
             logging.exception(excep)
             return ""
@@ -167,7 +167,7 @@ class TemplateSelectNode(TemplateNode):
     def to_string(self):
         return "SELECT"
 
-    def to_xml(self, bot, clientid):
+    def to_xml(self, client_context):
         xml = "<select>"
         if self._vars:
             xml += "<vars>"
@@ -175,7 +175,7 @@ class TemplateSelectNode(TemplateNode):
             xml += "</vars>"
         if self._queries:
             for query in self._queries:
-                xml += query.to_xml(bot, clientid)
+                xml += query.to_xml(client_context)
         xml += "</select>"
         return xml
 
