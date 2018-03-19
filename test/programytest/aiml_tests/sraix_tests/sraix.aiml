@@ -26,4 +26,9 @@ For more information see [url]
 		</template>
 	</category>
 
+	<category>
+    	<pattern>ASKOTHERSERVICE *</pattern>
+    	<template><sraix service="MYSERVICE">PROCESS <star /></sraix></template>
+	</category>
+
 </aiml>

@@ -87,6 +87,7 @@ newsapi: true
 weather: true
 mapping: true
 geocode: true
+myservice: true
 
 jsenabled: false
 

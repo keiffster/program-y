@@ -23,7 +23,7 @@
         <pattern>ASKASERVICE *</pattern>
         <template>
             I was not able to locate that information in my brain, but I could look it up using the following
-            services Pandora, Pannous DuckDuckGo or Wikipedia, which one would you like to use
+            services Pandora, Pannous, DuckDuckGo, myservice or Wikipedia, which one would you like to use
             <think>
                 <set name="topic">SELECTSERVICE</set>
                 <set name="query"><star/></set>
@@ -57,6 +57,13 @@
             <pattern>DUCKDUCKGO</pattern>
             <template>
                 <srai>ASKDUCKDUCKGO <get name="query" /></srai>
+            </template>
+        </category>
+
+        <category>
+            <pattern>MYSERVICE</pattern>
+            <template>
+                <srai>ASKOTHERSERVICE <get name="query" /></srai>
             </template>
         </category>
     </topic>
