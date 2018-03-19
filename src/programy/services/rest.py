@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import logging
 import requests
+from urllib.parse import urlencode, quote_plus
 
 from programy.services.service import Service
 from programy.config.sections.brain.service import BrainServiceConfiguration
@@ -72,7 +73,9 @@ class GenericRESTService(Service):
         return {}
 
     def _format_get_url(self, url, bot, clientid, question):
-        return url
+        payload = {'question': question, 'sessionid': clientid }
+        full_url = url + "?" + urlencode(payload, quote_via=quote_plus)
+        return full_url
 
     def _parse_response(self, text):
         return text
