@@ -26,7 +26,6 @@ from programy.config.container import BaseContainerConfigurationData
 class BotConfiguration(BaseContainerConfigurationData):
 
     DEFAULT_ROOT = "."
-    DEFAULT_PROMPT = ">>> "
     DEFAULT_RESPONSE = ""
     DEFAULT_RESPONSE_SRAI = ""
     DEFAULT_EMPTY_STRING = ""
@@ -47,7 +46,6 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._brain_configs.append(BrainConfiguration("brain"))
 
         self._bot_root = BotConfiguration.DEFAULT_ROOT
-        self._prompt = BotConfiguration.DEFAULT_PROMPT
         self._default_response = BotConfiguration.DEFAULT_RESPONSE
         self._default_response_srai = BotConfiguration.DEFAULT_RESPONSE_SRAI
         self._exit_response = BotConfiguration.DEFAULT_EXIT_RESPONSE
@@ -70,8 +68,6 @@ class BotConfiguration(BaseContainerConfigurationData):
         bot = configuration_file.get_section(self.section_name)
         if bot is not None:
 
-            self._prompt = configuration_file.get_option(bot, "prompt",
-                                                         BotConfiguration.DEFAULT_PROMPT)
             self._default_response = configuration_file.get_option(bot, "default_response",
                                                                    BotConfiguration.DEFAULT_RESPONSE)
             self._default_response_srai = configuration_file.get_option(bot, "default_response_srai",
@@ -134,14 +130,6 @@ class BotConfiguration(BaseContainerConfigurationData):
     @property
     def bot_root(self):
         return self._bot_root
-
-    @property
-    def prompt(self):
-        return self._prompt
-
-    @prompt.setter
-    def prompt(self, text):
-        self._prompt = text
 
     @property
     def default_response(self):

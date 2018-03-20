@@ -21,6 +21,7 @@ from programy.config.bot.bot import BotConfiguration
 
 
 class ClientConfigurationData(BaseContainerConfigurationData):
+
     def __init__(self, name):
         BaseContainerConfigurationData.__init__(self, name)
         self._bot_configs = []

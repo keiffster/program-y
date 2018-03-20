@@ -83,8 +83,6 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertFalse(configuration.client_configuration.configurations[0].configurations[0].services.exists('Other'))
 
         self.assertIsNotNone(configuration.client_configuration.configurations)
-        self.assertEqual(configuration.client_configuration.configurations[0].license_keys, "./config/test-license.keys")
-        self.assertEqual(configuration.client_configuration.configurations[0].prompt, "TEST>>>")
         self.assertEqual(configuration.client_configuration.configurations[0].initial_question, "Hi, how can I help you test today?")
         self.assertEqual(configuration.client_configuration.configurations[0].default_response, "Sorry, I don't have a test answer for that!")
         self.assertEqual(configuration.client_configuration.configurations[0].empty_string, "TEST-YEMPTY")

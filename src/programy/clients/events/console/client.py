@@ -39,11 +39,14 @@ class ConsoleBotClient(EventBotClient):
         return
 
     def get_question(self, client_context, input_func=input):
-        ask = "%s " % client_context.bot.prompt
+        ask = "%s " % self.get_client_configuration().prompt
         return input_func(ask)
 
+    def get_response(self, client_context, question):
+        return client_context.bot.ask_question(client_context , question, responselogger=self)
+
     def display_startup_messages(self, client_context):
-        self.display_response(client_context.bot.get_version_string)
+        self.display_response(client_context.bot.get_version_string(client_context))
         initial_question = client_context.bot.get_initial_question(client_context)
         self.display_response(initial_question)
 
@@ -52,7 +55,7 @@ class ConsoleBotClient(EventBotClient):
 
     def process_question_answer(self, client_context):
         question = self.get_question(client_context)
-        response = client_context.bot.ask_question(client_context , question, responselogger=self)
+        response = self.get_response(client_context , question)
         self.display_response(response)
         return question
 
@@ -71,22 +74,9 @@ class ConsoleBotClient(EventBotClient):
                 logging.error("Oops something bad happened !")
         return running
 
-    def run(self):
-
-        if self.arguments.noloop is False:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Entering conversation loop...")
-
-            client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
-            self.display_startup_messages(client_context)
-
-            running = True
-            while running is True:
-                running = self.wait_and_answer()
-
-        else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("noloop set to True, exiting...")
+    def prior_to_run_loop(self):
+        client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
+        self.display_startup_messages(client_context)
 
 
 if __name__ == '__main__':

@@ -35,5 +35,5 @@ class FacebookConfigurationTests(unittest.TestCase):
         facebook_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", facebook_config.host)
-        self.assertEqual(5000, facebook_config.port)
+        self.assertEqual(80, facebook_config.port)
         self.assertEqual(False, facebook_config.debug)

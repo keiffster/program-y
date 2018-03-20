@@ -78,7 +78,7 @@ class DuckDuckGoService(Service):
         else:
             self._url = config.url
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
         try:
             return self._api.ask_question(self._url, question)
         except Exception as e:

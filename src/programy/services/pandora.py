@@ -59,10 +59,10 @@ class PandoraService(Service):
         if config.url is None:
             raise Exception("Undefined url parameter")
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
         try:
-            if bot.license_keys.has_key('PANDORA_BOTID'):
-                botid = bot.license_keys.get_key('PANDORA_BOTID')
+            if client_context.client.license_keys.has_key('PANDORA_BOTID'):
+                botid = client_context.client.license_keys.get_key('PANDORA_BOTID')
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("No variable PANDORA_BOTID found in license key file")

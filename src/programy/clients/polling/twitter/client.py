@@ -21,10 +21,10 @@ import os
 import tweepy
 from tweepy.error import RateLimitError
 
-from programy.clients.client import BotClient
+from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
 
-class TwitterBotClient(BotClient):
+class TwitterBotClient(PollingBotClient):
 
     FIFTEEN_MINUTES = 15*60
 
@@ -33,7 +33,7 @@ class TwitterBotClient(BotClient):
         self._username_len = 0
         self._welcome_message = None
         self._api = None
-        BotClient.__init__(self, "Twitter", argument_parser)
+        PollingBotClient.__init__(self, "Twitter", argument_parser)
 
     def get_description(self):
         return 'ProgramY AIML2.0 Twitter Client'
@@ -41,31 +41,18 @@ class TwitterBotClient(BotClient):
     def get_client_configuration(self):
         return TwitterConfiguration()
 
-    def _get_username(self, bot):
-        self._username = bot.license_keys.get_key("TWITTER_USERNAME")
+    def get_license_keys(self):
+        self._username = self.license_keys.get_key("TWITTER_USERNAME")
+        self._consumer_key = self.license_keys.get_key("TWITTER_CONSUMER_KEY")
+        self._consumer_secret = self.license_keys.get_key("TWITTER_CONSUMER_SECRET")
+        self._access_token = self.license_keys.get_key("TWITTER_ACCESS_TOKEN")
+        self._access_token_secret = self.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
         self._username_len = len(self._username) # Going to get used quite a lot
-
-    def _get_consumer_secrets(self, bot):
-        consumer_key = bot.license_keys.get_key("TWITTER_CONSUMER_KEY")
-        consumer_secret = bot.license_keys.get_key("TWITTER_CONSUMER_SECRET")
-        return consumer_key, consumer_secret
-
-    def _get_access_secrets(self, bot):
-        access_token = bot.license_keys.get_key("TWITTER_ACCESS_TOKEN")
-        access_token_secret = bot.license_keys.get_key("TWITTER_ACCESS_TOKEN_SECRET")
-        return access_token, access_token_secret
 
     def _create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         auth.set_access_token(access_token, access_token_secret)
         return tweepy.API(auth)
-
-    def _initialise(self):
-        self._welcome_message = self.configuration.client_configuration.welcome_message
-        self._get_username(self.bot)
-        consumer_key, consumer_secret = self._get_consumer_secrets(self.bot)
-        access_token, access_token_secret = self._get_access_secrets(self.bot)
-        self._api = self._create_api(consumer_key, consumer_secret, access_token, access_token_secret)
 
     #############################################################################################
     # Direct Messages
@@ -83,9 +70,13 @@ class TwitterBotClient(BotClient):
         return messages
 
     def _process_direct_message_question(self, userid, text):
+
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Direct Messages: %s -> %s", userid, text)
-        response = self.bot.ask_question(userid, text, responselogger=self)
+
+        client_context = self.create_client_context(userid)
+        response = client_context.bot.ask_question(client_context, text, responselogger=self)
+
         self._api.send_direct_message(userid, text=response)
 
     def _process_direct_messages(self, last_message_id):
@@ -171,6 +162,10 @@ class TwitterBotClient(BotClient):
         question = text[(pos+self._username_len)+1:]
         return question.strip()
 
+    def ask_question(self, userid, question):
+        client_context = self.create_client_context(userid)
+        return client_context.bot.ask_question(client_context, question, responselogger=self)
+
     def _process_status_question(self, userid, text):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Status Update: %s -> %s", userid, text)
@@ -180,7 +175,7 @@ class TwitterBotClient(BotClient):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("%s -> %s", userid, question)
 
-            response = self.bot.ask_question(userid, question, responselogger=self)
+            response = self.ask_question(userid, question)
 
             user = self._api.get_user(userid)
             status = "@%s %s"%(user.screen_name, response)
@@ -288,58 +283,45 @@ class TwitterBotClient(BotClient):
 
         time.sleep(self._configuration.client_configuration.polling_interval)
 
-    def _use_polling(self):
+    def connect(self):
+        self._welcome_message = self.configuration.client_configuration.welcome_message
+        self._api = self._create_api(self._consumer_key, self._consumer_secret, self._access_token, self._access_token_secret)
+        return True
 
-        print("Twitter client running as [%s]..."%self._username)
+    def display_connected_message(self):
+        print ("Twitter Bot connected and running...")
+
+    def poll_and_answer(self):
 
         running = True
-        while running is True:
-            try:
-                (last_direct_message_id, last_status_id) = self._get_last_message_ids()
+        try:
+            (last_direct_message_id, last_status_id) = self._get_last_message_ids()
 
-                self._poll(last_direct_message_id, last_status_id)
+            self._poll(last_direct_message_id, last_status_id)
 
-            except KeyboardInterrupt:
-                running = False
+        except KeyboardInterrupt:
+            running = False
 
-            except RateLimitError:
+        except RateLimitError:
 
-                if self._configuration.client_configuration.rate_limit_sleep != -1:
-                    rate_limit_sleep = self._configuration.client_configuration.rate_limit_sleep
-                else:
-                    rate_limit_sleep = self.FIFTEEN_MINUTES
+            if self._configuration.client_configuration.rate_limit_sleep != -1:
+                rate_limit_sleep = self._configuration.client_configuration.rate_limit_sleep
+            else:
+                rate_limit_sleep = self.FIFTEEN_MINUTES
 
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Rate limit exceeded, sleeping for %d seconds", rate_limit_sleep)
-
-                time.sleep(rate_limit_sleep)
-
-            except Exception as excep:
-                logging.exception(excep)
-
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Exiting gracefully...")
-
-    def _use_streaming(self):
-        raise NotImplementedError("Streaming currently not supported in this release")
-
-    def run(self):
-
-        self._initialise()
-
-        if self._configuration.client_configuration.polling is True:
-            self._use_polling()
-        elif self._configuration.client_configuration.streaming is True:
-            self._use_streaming()
-        else:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No Twitter interactiong model specified in config ( polling or streaming )")
+                logging.error("Rate limit exceeded, sleeping for %d seconds", rate_limit_sleep)
+
+            self.sleep(rate_limit_sleep)
+
+        except Exception as excep:
+            logging.exception(excep)
+
+        return running
+
 
 if __name__ == '__main__':
 
-    def run():
-        print("Loading Twitter client, please wait. See log output for progres...")
-        twitter_app = TwitterBotClient()
-        twitter_app.run()
-
-    run()
+    print("Loading Twitter client, please wait. See log output for progres...")
+    twitter_app = TwitterBotClient()
+    twitter_app.run()

@@ -11,10 +11,11 @@ from programy.context import ClientContext
 
 from programytest.aiml_tests.client import TestClient
 
-class ConversationPersistenceTests(unittest.TestCase):
+class ConversationFileStorageTests(unittest.TestCase):
 
     def test_persistence(self):
-        client_context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        client_context = client.create_client_context("testid")
         bot_config = BotConfiguration()
         bot_config.conversations._type = "file"
         bot_config.conversations._storage = BotConversationsFileStorageConfiguration("test")

@@ -23,28 +23,25 @@ import re
 
 from slackclient import SlackClient
 
-from programy.clients.client import BotClient
+from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.slack.config import SlackConfiguration
 
 
 SLACK_CLIENT = None
 
 
-class SlackBotClient(BotClient):
+class SlackBotClient(PollingBotClient):
 
     # constants
     MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
 
     def __init__(self, argument_parser=None):
         self._bot_token = None
+        self._running = False
 
-        BotClient.__init__(self, "slack", argument_parser)
+        PollingBotClient.__init__(self, "slack", argument_parser)
 
-        self._polling_interval = self.configuration.client_configuration.polling_interval
-
-        self._slack_client = self.create_slack_client()
-
-        self._running = True
+        self._slack_client = self.create_client()
 
     def get_description(self):
         return 'ProgramY AIML2.0 Slack Client'
@@ -52,19 +49,38 @@ class SlackBotClient(BotClient):
     def get_client_configuration(self):
         return SlackConfiguration()
 
-    def get_license_keys(self,):
-        self._bot_token = self.bot.license_keys.get_key("SLACK_TOKEN")
+    def parse_configuration(self):
+        self._polling_interval = self.configuration.client_configuration.polling_interval
 
-    def create_slack_client(self):
+    def get_license_keys(self):
+        self._bot_token = self.license_keys.get_key("SLACK_TOKEN")
+
+    def create_client(self):
         return SlackClient(self._bot_token)
 
-    def connect_to_slack(self):
-        return self._slack_client.rtm_connect(with_team_state=False)
+    def connect(self):
+        if self._slack_client.rtm_connect(with_team_state=False) is True:
+            # Read bot's user ID by calling Web API method `auth.test`
+            self._starterbot_id = self.get_bot_id()
+            return True
+        return False
 
     def get_bot_id(self):
         return self._slack_client.api_call("auth.test")["user_id"]
 
-    def parse_bot_messages(self, slack_events):
+    def parse_message(self, event):
+        text = event["text"]
+    
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Slack received [%s] " % text)
+    
+        userid, message = self.parse_direct_mention(text)
+    
+        if message and userid == self._starterbot_id:
+            channel = event['channel']
+            self.handle_message(message, channel, userid)
+
+    def parse_messages(self, slack_events):
         """
             Parses a list of events coming from the Slack RTM API to find bot messages.
             If a bot message is found, this function returns a tuple of message and channel.
@@ -72,19 +88,8 @@ class SlackBotClient(BotClient):
         """
         for event in slack_events:
             if event["type"] == "message" and not "subtype" in event:
-                text = event["text"]
-
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("Slack received [%s] "%text)
-
-                user_id, message = self.parse_direct_mention(text)
-
-                if user_id == self._starterbot_id:
-                    return message, event["channel"], event['user']
-
-        return None, None, None
-
-
+                self.parse_message(event)
+ 
     def parse_direct_mention(self, message_text):
         """
             Finds a direct mention (a mention that is at the beginning) in message text
@@ -92,20 +97,16 @@ class SlackBotClient(BotClient):
         """
         matches = re.search(self.MENTION_REGEX, message_text)
         # the first group contains the username, the second group contains the remaining message
-        return (matches.group(1), matches.group(2).strip()) if matches else (None, None)
+        if matches:
+            return (matches.group(1), matches.group(2).strip())
+        return (None, None)
 
-    def ask_question(self, sessionid, question):
-        response = self.bot.ask_question(sessionid, question, responselogger=self)
+    def ask_question(self, userid, question):
+        client_context = self.create_client_context(userid)
+        response = client_context.bot.ask_question(client_context, question, responselogger=self)
         return response
 
-    def handle_message(self, message, channel, user_id):
-
-        # Finds and executes the given message, filling in response
-        response = self.ask_question(user_id, message)
-
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Slack sending [%s] to [%s]" % (message, user_id))
-
+    def send_response(self, response, channel):
         # Sends the response back to the channel
         self._slack_client.api_call(
             "chat.postMessage",
@@ -113,30 +114,38 @@ class SlackBotClient(BotClient):
             text=response or response
         )
 
-    def run(self):
+    def handle_message(self, message, channel, userid):
 
-        if self.connect_to_slack():
-            print("Starter Bot connected and running!")
+        # Finds and executes the given message, filling in response
+        response = self.ask_question(userid, message)
 
-            # Read bot's user ID by calling Web API method `auth.test`
-            self._starterbot_id = self.get_bot_id()
+        if logging.getLogger().isEnabledFor(logging.DEBUG):
+            logging.debug("Slack sending [%s] to [%s]" % (message, userid))
 
-            while self._running:
-                try:
-                    message, channel, user_id = self.parse_bot_messages(self._slack_client.rtm_read())
-                    if message:
-                        self.handle_message(message, channel, user_id)
-                    time.sleep(self._polling_interval)
-                except KeyboardInterrupt:
-                    self._running = False
-                except Exception as excep:
-                    logging.exception(excep)
+        self.send_response(response, channel)
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Exiting gracefully...")
+    def get_messages(self):
+        return self._slack_client.rtm_read()
 
-        else:
-            print("Connection failed. Exception traceback printed above.")
+    def display_connected_message(self):
+        print ("Slack Bot connected and running...")
+
+    def poll_and_answer(self):
+        running = True
+        try:
+            messages = self.get_messages()
+            if messages:
+                self.parse_messages(messages)
+
+            self.sleep(self._polling_interval)
+
+        except KeyboardInterrupt:
+            running = False
+
+        except Exception as excep:
+            logging.exception(excep)
+
+        return running
 
 
 if __name__ == '__main__':
@@ -144,5 +153,3 @@ if __name__ == '__main__':
     print("Loading Slack client, please wait. See log output for progress...")
     SLACK_CLIENT = SlackBotClient()
     SLACK_CLIENT.run()
-
-

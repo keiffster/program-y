@@ -21,7 +21,7 @@ import sleekxmpp
 class XmppClient(sleekxmpp.ClientXMPP):
 
     def __init__(self, bot_client, jid, password):
-        self.bot_client = bot_client
+        self._bot_client = bot_client
         sleekxmpp.ClientXMPP.__init__(self, jid, password)
         self.add_event_handlers()
 
@@ -67,7 +67,8 @@ class XmppClient(sleekxmpp.ClientXMPP):
                     logging.debug("Missing 'userid' from XMPP message")
                 return
 
-            response = self.bot_client.ask_question(userid, question)
+            response = self._bot_client.ask_question(userid, question)
+
             self.send_response(msg, response)
 
         else:
@@ -76,28 +77,14 @@ class XmppClient(sleekxmpp.ClientXMPP):
             self.send_response(msg, "Sorry, no idea!")
 
     def register_xep_plugins(self, configuration):
-        if configuration.client_configuration.xep_0030 is True:
+        if configuration.xep_0030 is True:
             self.register_plugin('xep_0030')
 
-        if configuration.client_configuration.xep_0004 is True:
+        if configuration.xep_0004 is True:
             self.register_plugin('xep_0004')
 
-        if configuration.client_configuration.xep_0060 is True:
+        if configuration.xep_0060 is True:
             self.register_plugin('xep_0060')
 
-        if configuration.client_configuration.xep_0199 is True:
+        if configuration.xep_0199 is True:
             self.register_plugin('xep_0199')
-
-    def run(self, server, port, block=True):
-        if self.connect((server, port)):
-            print("Connected, running as [%s]..."%self.requested_jid)
-            try:
-                self.process(block=block)
-                print("Xmpp connection closed...")
-            except Exception as excep:
-                print("Xmpp connection terminated...")
-                logging.exception(excep)
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Oops something bad happened !")
-        else:
-            print("Failed to connect, exiting...")

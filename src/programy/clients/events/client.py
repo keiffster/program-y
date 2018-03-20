@@ -14,14 +14,42 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
 
 from programy.clients.client import BotClient
 
 class EventBotClient(BotClient):
 
     def __init__(self, id, argument_parser=None):
+        self._running = False
         BotClient.__init__(self, id, argument_parser=argument_parser)
 
-    def wait_and_answer(self, server_socket, debug):
+    def prior_to_run_loop(self):
+        pass
+
+    def run_loop(self):
+        self._running = True
+        while self._running is True:
+            self._running = self.wait_and_answer()
+
+    def wait_and_answer(self):
         raise NotImplementedError("You must override this and implement the logic wait for a question and send an answer back")
 
+    def post_run_loop(self):
+        pass
+
+    def run(self):
+
+        if self.arguments.noloop is False:
+            if logging.getLogger().isEnabledFor(logging.INFO):
+                logging.info("Entering conversation loop...")
+
+            self.prior_to_run_loop()
+
+            self.run_loop()
+
+            self.post_run_loop()
+
+        else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("noloop set to True, exiting...")

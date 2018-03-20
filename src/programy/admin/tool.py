@@ -31,6 +31,8 @@ class AdminTool(object):
                 self.create_app(args)
             elif args.create == 'script':
                 self.create_script(args)
+            else:
+                raise Exception("Unknown create type")
         else:
             raise Exception("Unknown command")
 

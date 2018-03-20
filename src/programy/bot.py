@@ -52,9 +52,10 @@ class Bot(object):
         self._question_start_time = None
 
         self.conversation_logger = None
+
         # TODO Either move config into brain or move functionaity into bot
-        if self.brain.configuration.files.aiml_files.conversation is not None:
-            self.conversation_logger = ConversationFileWriter(self.brain.configuration.files.aiml_files.conversation)
+        #if self.brain.configuration.files.aiml_files.conversation is not None:
+        #    self.conversation_logger = ConversationFileWriter(self.brain.configuration.files.aiml_files.conversation)
 
         self._spell_checker = None
         self.initiate_spellchecker()
@@ -99,12 +100,6 @@ class Bot(object):
         return self._conversations
 
     @property
-    def prompt(self):
-        if self.configuration is not None:
-            return self.configuration.prompt
-        return BotConfiguration.DEFAULT_PROMPT
-
-    @property
     def default_response(self):
         if self.configuration is not None:
             return self.configuration.default_response
@@ -146,22 +141,21 @@ class Bot(object):
             return self.configuration.override_properties
         return False
 
-    @property
-    def get_version_string(self):
-        if self.brain.properties.has_property("version"):
+    def get_version_string(self, client_context):
+        if client_context.brain.properties.has_property("version"):
             # The old version of returning the version string, did not distinquish
             # between App and Grammar version
             return "%s, v%s, initiated %s" % (
-                self.brain.properties.property("name"),
-                self.brain.properties.property("version"),
-                self.brain.properties.property("birthdate"))
+                client_context.brain.properties.property("name"),
+                client_context.brain.properties.property("version"),
+                client_context.brain.properties.property("birthdate"))
         else:
             # This version now does
             return "%s, App: v%s Grammar v%s, initiated %s" % (
-                self.brain.properties.property("name"),
-                self.brain.properties.property("app_version"),
-                self.brain.properties.property("grammar_version"),
-                self.brain.properties.property("birthdate"))
+                client_context.brain.properties.property("name"),
+                client_context.brain.properties.property("app_version"),
+                client_context.brain.properties.property("grammar_version"),
+                client_context.brain.properties.property("birthdate"))
 
     def has_conversation(self, client_context):
         return bool(client_context.userid in self._conversations)
@@ -182,8 +176,8 @@ class Bot(object):
 
             conversation = Conversation(client_context)
 
-            if self.brain.properties is not None:
-                conversation.load_initial_variables(self.brain.variables)
+            if client_context.brain.properties is not None:
+                conversation.load_initial_variables(client_context.brain.variables)
 
             self._conversations[client_context.userid] = conversation
 
@@ -232,14 +226,14 @@ class Bot(object):
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
-            response = self.brain.ask_question(client_context, each_sentence)
+            response = client_context.brain.ask_question(client_context, each_sentence)
             return response
         return None
 
     def get_default_response(self, client_context):
         if self.default_response_srai is not None:
-            sentence = Sentence(self.brain.tokenizer, self.default_response_srai)
-            default_response = self.brain.ask_question(client_context, sentence)
+            sentence = Sentence(client_context.brain.tokenizer, self.default_response_srai)
+            default_response = client_context.brain.ask_question(client_context, sentence)
             if default_response is None or not default_response:
                 default_response = self.default_response
             return default_response
@@ -247,13 +241,9 @@ class Bot(object):
             return self.default_response
 
     def get_initial_question(self, client_context):
-
-        client_context.bot = self
-        client_context.brain = client_context.bot.brain
-
         if self.initial_question_srai is not None:
-            sentence = Sentence(self.brain.tokenizer, self.initial_question_srai)
-            initial_question = self.brain.ask_question(client_context, sentence)
+            sentence = Sentence(client_context.brain.tokenizer, self.initial_question_srai)
+            initial_question = client_context.brain.ask_question(client_context, sentence)
             if initial_question is None or not initial_question:
                 initial_question = self.initial_question
             return initial_question
@@ -261,13 +251,9 @@ class Bot(object):
             return self.initial_question
 
     def get_exit_response(self, client_context):
-
-        client_context.bot = self
-        client_context.brain = client_context.bot.brain
-
         if self.exit_response_srai is not None:
-            sentence = Sentence(self.brain.tokenizer, self.exit_response_srai)
-            exit_response = self.brain.ask_question(client_context, sentence)
+            sentence = Sentence(client_context.brain.tokenizer, self.exit_response_srai)
+            exit_response = client_context.brain.ask_question(client_context, sentence)
             if exit_response is None or not exit_response:
                 exit_response = self.exit_response
             return exit_response
@@ -276,7 +262,7 @@ class Bot(object):
 
     def pre_process_text(self, client_context, text, srai):
         if srai is False:
-            pre_processed = self.brain.pre_process_question(client_context, text)
+            pre_processed = client_context.brain.pre_process_question(client_context, text)
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 logging.debug("Pre Processed (%s): %s", client_context.userid, pre_processed)
         else:
@@ -287,18 +273,18 @@ class Bot(object):
 
         return pre_processed
 
-    def get_question(self, pre_processed, srai):
+    def get_question(self, client_context, pre_processed, srai):
         if srai is False:
-            return Question.create_from_text(self.brain.tokenizer, pre_processed)
+            return Question.create_from_text(client_context.brain.tokenizer, pre_processed)
         else:
-            return Question.create_from_text(self.brain.tokenizer, pre_processed, split=False)
+            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, split=False)
 
     def combine_answers(self, answers):
         return ". ".join([sentence for sentence in answers if sentence is not None])
 
     def post_process_response(self, client_context, response, srai):
         if srai is False:
-            answer = self.brain.post_process_response(client_context, response).strip()
+            answer = client_context.brain.post_process_response(client_context, response).strip()
             if not answer:
                 answer = self.get_default_response(client_context)
         else:
@@ -322,7 +308,7 @@ class Bot(object):
 
         pre_processed = self.pre_process_text(client_context, text, srai)
 
-        question = self.get_question(pre_processed, srai)
+        question = self.get_question(client_context, pre_processed, srai)
 
         conversation = self.get_conversation(client_context)
 
@@ -356,7 +342,7 @@ class Bot(object):
         if srai is False:
             self.check_spelling_before(sentence)
 
-        response = self.brain.ask_question(client_context, sentence)
+        response = client_context.brain.ask_question(client_context, sentence)
 
         if response is None and srai is False:
             response = self.check_spelling_and_retry(client_context, sentence)

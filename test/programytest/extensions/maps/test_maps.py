@@ -32,7 +32,8 @@ class MockGoogleMapsExtension(GoogleMapsExtension):
 class MapsExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        self.context = client.create_client_context("testid")
 
     def test_maps_distance(self):
         distance    = os.path.dirname(__file__) +  os.sep + "distance.json"

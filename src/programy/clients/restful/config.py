@@ -19,12 +19,11 @@ from programy.config.client.config import ClientConfigurationData
 
 class RestConfiguration(ClientConfigurationData):
 
-    def __init__(self):
-        ClientConfigurationData.__init__(self, "rest")
+    def __init__(self, name):
+        ClientConfigurationData.__init__(self, name)
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
-        self._workers = 4
         self._use_api_keys = False
         self._api_key_file = None
         self._ssl_cert_file = None
@@ -41,10 +40,6 @@ class RestConfiguration(ClientConfigurationData):
     @property
     def debug(self):
         return self._debug
-
-    @property
-    def workers(self):
-        return self._workers
 
     @property
     def use_api_keys(self):
@@ -68,7 +63,6 @@ class RestConfiguration(ClientConfigurationData):
             self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0")
             self._port = configuration_file.get_option(rest, "port", missing_value=80)
             self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False)
-            self._workers = configuration_file.get_option(rest, "workers", missing_value=4)
             self._use_api_keys = configuration_file.get_bool_option(rest, "use_api_keys", missing_value=False)
             self._api_key_file = configuration_file.get_option(rest, "api_key_file")
             if self._api_key_file is not None:

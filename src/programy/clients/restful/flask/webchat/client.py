@@ -20,6 +20,7 @@ class WebChatBotClient(BotClient):
     def get_client_configuration(self):
         return WebChatConfiguration()
 
+
 print("Loading, please wait...")
 WEBCHAT_CLIENT = WebChatBotClient()
 
@@ -69,27 +70,28 @@ def ask():
 
     clientid = request.args['clientid']
 
-    sessionid = request.cookies.get(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id)
+    userid = request.cookies.get(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id)
     expire_date = None
-    if sessionid is None:
+    if userid is None:
         import uuid
         import datetime
 
         expire_date = datetime.datetime.now()
         expire_date = expire_date + datetime.timedelta(days=WEBCHAT_CLIENT.configuration.client_configuration.cookie_expires)
 
-        sessionid = str(uuid.uuid4().hex)
+        userid = str(uuid.uuid4().hex)
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.debug("Setting client cookie to :%s"%sessionid)
+            logging.debug("Setting client cookie to :%s"%userid)
     else:
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.debug("Found client cookie : %s"%sessionid)
+            logging.debug("Found client cookie : %s"%userid)
 
     try:
+        client_context = WEBCHAT_CLIENT.create_client_context(userid)
         if question == 'YINITIALQUESTION':
-            answer = WEBCHAT_CLIENT.bot.get_initial_question(sessionid)
+            answer = client_context.bot.get_initial_question(userid)
         else:
-            answer = WEBCHAT_CLIENT.bot.ask_question(sessionid, question, responselogger=WEBCHAT_CLIENT)
+            answer = client_context.bot.ask_question(userid, question, responselogger=WEBCHAT_CLIENT)
 
         response_data = {"question": question,
                     "answer": answer,
@@ -98,7 +100,7 @@ def ask():
 
         response = jsonify({'response': response_data})
         if expire_date is not None:
-            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, sessionid,
+            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, userid,
                                 expires=expire_date)
 
     except Exception as excep:
@@ -111,9 +113,9 @@ def ask():
                     "error": str(excep)
                    }
 
-        repsonse = jsonify({'response': response_data})
+        response = jsonify({'response': response_data})
         if expire_date is not None:
-            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, sessionid,
+            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, userid,
                                 expires=expire_date)
 
     return response

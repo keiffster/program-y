@@ -40,6 +40,7 @@ class MockXmppClient(XmppClient):
         self.event_handlers = []
         self.registered_plugins = []
         self.response = None
+        self.should_connect = True
         XmppClient.__init__(self, bot_client, jid, password)
 
     def add_event_handler(self, name, pointer):
@@ -60,12 +61,29 @@ class MockXmppClient(XmppClient):
     def send_response(self, msg, response):
         self.response = response
 
+    def connect(self, address=tuple(), reattempt=True,
+                use_tls=True, use_ssl=False):
+        return self.should_connect
 
 class MockXmppBotClient(XmppBotClient):
 
     def __init__(self, argument_parser=None):
         XmppBotClient.__init__(self, argument_parser)
         self.mock_xmpp_client = None
+
+    def get_client_configuration(self):
+        config = XmppConfiguration()
+        config._server = "Server"
+        config._port = 8080
+        config._xep_0030 = True
+        config._xep_0004 = True
+        config._xep_0060 = True
+        config._xep_0199 = True
+        return config
+
+    def get_license_keys(self):
+        self._username = "XMPPUSERNAME"
+        self._password = "XMPPPASSWORD"
 
     def create_client(self, username, password):
         self.mock_xmpp_client = MockXmppClient(self, username, password)
@@ -75,129 +93,23 @@ class MockXmppBotClient(XmppBotClient):
         self._bots.append(MockBot(BotConfiguration()))
 
 
-class XmppClientTests(unittest.TestCase):
-
-    def test_xmpp_client_init(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-        self.assertIsNotNone(xmpp_client)
-        self.assertEqual(bot_client, xmpp_client.bot_client)
-        self.assertTrue(bool("session_start" in xmpp_client.event_handlers))
-        self.assertTrue(bool("message" in xmpp_client.event_handlers))
-
-    def test_is_valid_message(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        self.assertTrue(xmpp_client.is_valid_message({"type": "chat"}))
-        self.assertTrue(xmpp_client.is_valid_message({"type": "normal"}))
-
-    def test_get_question(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        self.assertEqual("this is text", xmpp_client.get_question({"body": "this is text"}))
-
-    def test_get_userid(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        self.assertEqual("user123", xmpp_client.get_userid({"from": "user123"}))
-
-    def test_register_plugins(self):
-        arguments = MockArgumentParser()
-        bot_client = XmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        bot_client.configuration.client_configuration._xep_0030 = True
-        bot_client.configuration.client_configuration._xep_0004 = True
-        bot_client.configuration.client_configuration._xep_0060 = True
-        bot_client.configuration.client_configuration._xep_0199 = True
-
-        xmpp_client.register_xep_plugins(bot_client.configuration)
-
-        self.assertTrue(bool("xep_0030" in xmpp_client.registered_plugins))
-        self.assertTrue(bool("xep_0004" in xmpp_client.registered_plugins))
-        self.assertTrue(bool("xep_0060" in xmpp_client.registered_plugins))
-        self.assertTrue(bool("xep_0199" in xmpp_client.registered_plugins))
-
-    def test_message(self):
-        arguments = MockArgumentParser()
-        bot_client = MockXmppBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
-
-        bot_client.bot._answer = "Hiya"
-
-        xmpp_client.message({"type": "chat", "from": "user123", "body": "Hello"})
-        self.assertIsNotNone(xmpp_client.response)
-        self.assertEqual("Hiya", xmpp_client.response)
-
-
 class XmppBotClientTests(unittest.TestCase):
 
     def test_xmpp_bot_client_init(self):
         arguments = MockArgumentParser()
-        client = XmppBotClient(arguments)
+        client = MockXmppBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), XmppConfiguration)
+        self.assertEquals('ProgramY AIML2.0 XMPP Client', client.get_description())
+        self.assertEquals('XMPPUSERNAME', client._username)
+        self.assertEquals('XMPPPASSWORD', client._password)
+        self.assertEqual("Server", client._server)
+        self.assertEqual(8080, client._port)
 
-    def test_get_username_password(self):
-        arguments = MockArgumentParser()
-        client = XmppBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            XMPP_USERNAME = Username
-            XMPP_PASSWORD = Password
-        """)
-
-        username, password = client.get_username_password(client.bot.license_keys)
-        self.assertIsNotNone(username)
-        self.assertEquals("Username", username)
-        self.assertIsNotNone(password)
-        self.assertEquals("Password", password)
-
-    def test_get_server_port(self):
-        arguments = MockArgumentParser()
-        client = XmppBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.configuration.client_configuration._server = "Server"
-        client.configuration.client_configuration._port = 8080
-
-        server, port = client.get_server_port(client.configuration)
-        self.assertIsNotNone(server)
-        self.assertEqual("Server", server)
-        self.assertEqual(8080, port)
-
-    def test_run(self):
-
+    def test_connect(self):
         arguments = MockArgumentParser()
         client = MockXmppBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.configuration.client_configuration._server = "Server"
-        client.configuration.client_configuration._port = 8080
-
-        client.bot.license_keys.load_license_key_data("""
-            XMPP_USERNAME = Username
-            XMPP_PASSWORD = Password
-        """)
-
-        client.run()
-
-        self.assertTrue(client.mock_xmpp_client.registered)
-        self.assertEqual("Server", client.mock_xmpp_client.server_url)
-        self.assertEqual(8080, client.mock_xmpp_client.port_no)
-        self.assertTrue(client.mock_xmpp_client.block)
+        client._xmpp_client = MockXmppClient(client,  "username", "password")
+        client.connect()

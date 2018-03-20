@@ -14,55 +14,27 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.restful.config import RestConfiguration
 
 
-class LineConfiguration(ClientConfigurationData):
+class LineConfiguration(RestConfiguration):
 
     def __init__(self):
-        ClientConfigurationData.__init__(self, "line")
-        self._host = "0.0.0.0"
-        self._port = 5000
-        self._debug = False
-        self._workers = 4
-        self._ssl_cert_file = None
-        self._ssl_key_file = None
+        RestConfiguration.__init__(self, "line")
+        self._unknown_command = "Unknown command"
+        self._unknown_command_srai = None
 
     @property
-    def host(self):
-        return self._host
+    def unknown_command(self):
+        return self._unknown_command
 
     @property
-    def port(self):
-        return self._port
-
-    @property
-    def debug(self):
-        return self._debug
-
-    @property
-    def workers(self):
-        return self._workers
-
-    @property
-    def ssl_cert_file(self):
-        return self._ssl_cert_file
-
-    @property
-    def ssl_key_file(self):
-        return self._ssl_key_file
+    def unknown_command_srai(self):
+        return self._unknown_command_srai
 
     def load_configuration(self, configuration_file, bot_root):
         line = configuration_file.get_section(self.section_name)
         if line is not None:
-            self._host = configuration_file.get_option(line, "host", missing_value="0.0.0.0")
-            self._port = configuration_file.get_option(line, "port", missing_value=5000)
-            self._debug = configuration_file.get_bool_option(line, "debug", missing_value=False)
-            self._workers = configuration_file.get_option(line, "workers", missing_value=4)
-            self._ssl_cert_file = configuration_file.get_option(line, "ssl_cert_file")
-            if self._ssl_cert_file is not None:
-                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
-            self._ssl_key_file = configuration_file.get_option(line, "ssl_key_file")
-            if self._ssl_key_file is not None:
-                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-        super(LineConfiguration, self).load_configuration(configuration_file, line, bot_root)
+            self._unknown_command = configuration_file.get_option(line, "unknown_command", missing_value="Unknown command")
+            self._unknown_command_srai = configuration_file.get_option(line, "unknown_command_srai", missing_value=None)
+        super(LineConfiguration, self).load_configuration(configuration_file, bot_root)

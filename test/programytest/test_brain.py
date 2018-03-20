@@ -16,9 +16,8 @@ from programytest.aiml_tests.client import TestClient
 class BrainTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(TestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = TestClient()
+        self._client_context = client.create_client_context("testid")
 
     def load_os_specific_configuration(self, yaml, linux_filename, windows_filename):
         if os.name == 'posix':

@@ -1,14 +1,10 @@
 import unittest
 import os
 
-from programy.utils.license.keys import LicenseKeys
 from programy.services.rest import GenericRESTService, RestAPI
 from programy.services.service import BrainServiceConfiguration
 
-class TestBot:
-
-    def __init__(self):
-        self.license_keys = None
+from programytest.aiml_tests.client import TestClient
 
 
 class MockRestResponse(object):
@@ -33,9 +29,9 @@ class MockRestAPI(object):
 class RestServiceTests(unittest.TestCase):
 
     def setUp(self):
-        self.bot = TestBot()
-        self.bot.license_keys = LicenseKeys()
-        self.bot.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
+        client = TestClient()
+        self._client_context = client.create_client_context("testid")
+        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_init_default_api(self):
         config = BrainServiceConfiguration("rest")
@@ -68,7 +64,7 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI(200, "Test REST response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("Test REST response", response)
 
     def test_ask_question_post(self):
@@ -79,7 +75,7 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI(200, "Post REST response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("Post REST response", response)
 
     def test_ask_question_delete(self):
@@ -90,7 +86,7 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI())
         self.assertIsNotNone(service)
 
-        self.assertEquals("", service.ask_question(self.bot, "testid", "what is a cat"))
+        self.assertEquals("", service.ask_question(self._client_context, "what is a cat"))
 
     def test_ask_question_error(self):
         config = BrainServiceConfiguration("rest")
@@ -100,4 +96,4 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI(500, "Bad thing happened!"))
         self.assertIsNotNone(service)
 
-        self.assertEquals("", service.ask_question(self.bot, "testid", "what is a cat"))
+        self.assertEquals("", service.ask_question(self._client_context, "what is a cat"))

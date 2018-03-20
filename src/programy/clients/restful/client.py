@@ -23,18 +23,19 @@ from programy.clients.restful.config import RestConfiguration
 class RestBotClient(BotClient):
     __metaclass__ = ABCMeta
 
-    def __init__(self, clientid, argument_parser=None):
-        BotClient.__init__(self, clientid, argument_parser)
+    def __init__(self, id, argument_parser=None):
+        BotClient.__init__(self, id, argument_parser)
         self.api_keys = []
 
     def get_client_configuration(self):
-        return RestConfiguration()
+        return RestConfiguration("rest")
 
     def load_api_keys(self):
-        if self.configuration.client_configuration.api_key_file is not None:
-            with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
-                for api_key in api_key_file:
-                    self.api_keys.append(api_key.strip())
+        if self.configuration.client_configuration.use_api_keys is True:
+            if self.configuration.client_configuration.api_key_file is not None:
+                with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
+                    for api_key in api_key_file:
+                        self.api_keys.append(api_key.strip())
 
     def initialise(self):
         self.load_api_keys()
@@ -48,7 +49,11 @@ class RestBotClient(BotClient):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_sessionid(self, rest_request):
+    def get_userid(self, rest_request):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def create_response(self, response, status):
         raise NotImplementedError()
 
     def is_apikey_valid(self, apikey):
@@ -71,30 +76,32 @@ class RestBotClient(BotClient):
 
         return None, None
 
-    def format_success_response(self, sessionid, question, answer):
-        return {"question": question, "answer": answer, "sessionid": sessionid}
+    def format_success_response(self, userid, question, answer):
+        return {"question": question, "answer": answer, "userid": userid}
 
-    def format_error_response(self, sessionid, question, error):
-        return {"question": question, "answer": self.bot.default_response, "sessionid": sessionid, "error": error}
+    def format_error_response(self, userid, question, error):
+        client_context = self.create_client_context(userid)
+        return {"question": question, "answer": client_context.bot.default_response, "userid": userid, "error": error}
 
-    def ask_question(self, sessionid, question):
-        return self.bot.ask_question(sessionid, question, responselogger=self)
+    def ask_question(self, userid, question):
+        client_context = self.create_client_context(userid)
+        return self.bot.ask_question(client_context, question, responselogger=self)
 
     def process_request(self, request):
         question = "Unknown"
-        sessionid = "Unknown"
+        userid = "Unknown"
         try:
             response, status = self.verify_api_key_usage(request)
             if response is not None:
                 return response, status
 
             question = self.get_question(request)
-            sessionid = self.get_sessionid(request)
+            userid = self.get_userid(request)
 
-            response = self.ask_question(sessionid, question)
+            response = self.ask_question(userid, question)
 
-            return self.format_success_response(sessionid, question, response), 200
+            return self.format_success_response(userid, question, response), 200
 
         except Exception as excep:
 
-            return self.format_error_response(sessionid, question, str(excep)), 500
+            return self.format_error_response(userid, question, str(excep)), 500

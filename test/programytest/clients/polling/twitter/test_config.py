@@ -12,10 +12,8 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
             twitter:
-              polling: true
               polling_interval: 59
               rate_limit_sleep: 900
-              streaming: true
               use_status: true
               use_direct_message: true
               auto_follow: true
@@ -27,10 +25,8 @@ class TwitterConfigurationTests(unittest.TestCase):
         twitter_config = TwitterConfiguration()
         twitter_config.load_configuration(yaml, ".")
 
-        self.assertTrue(twitter_config.polling)
         self.assertEqual(59, twitter_config.polling_interval)
         self.assertEqual(900, twitter_config.rate_limit_sleep)
-        self.assertTrue(twitter_config.streaming)
         self.assertTrue(twitter_config.use_status)
         self.assertTrue(twitter_config.use_direct_message)
         self.assertTrue(twitter_config.auto_follow)

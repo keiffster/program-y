@@ -23,9 +23,8 @@ class LearnfTestClient(TestClient):
 class LearnfAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(LearnfTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = LearnfTestClient()
+        self._client_context = client.create_client_context("testid")
 
         self.learnf_path = self._client_context.bot.brain.configuration.defaults._learn_filename
         if os.path.exists(self.learnf_path):

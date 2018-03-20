@@ -2,7 +2,8 @@ import unittest
 import os
 
 from programy.context import ClientContext
-
+from programy.bot import Bot
+from programy.config.bot.bot import BotConfiguration
 from programytest.aiml_tests.client import TestClient
 
 
@@ -19,9 +20,8 @@ class BankBalanceTestsClient(TestClient):
 class BankBalanceAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        self._client_context = ClientContext(BankBalanceTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = BankBalanceTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_balance(self):
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS MY BANK BALANCE")

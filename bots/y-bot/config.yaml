@@ -1,5 +1,7 @@
 console:
   bot:  bot
+  prompt: ">>>"
+  license_keys: $BOT_ROOT/config/license.keys
 
 voice:
   tts: osx
@@ -87,10 +89,6 @@ kik:
 
 bot:
     brain: brain
-
-    license_keys: $BOT_ROOT/config/license.keys
-
-    prompt: ">>>"
 
     initial_question: Hi, how can I help you today?
     initial_question_srai: YINITIALQUESTION

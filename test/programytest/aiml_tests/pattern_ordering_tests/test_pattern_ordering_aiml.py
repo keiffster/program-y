@@ -6,22 +6,22 @@ from programy.context import ClientContext
 from programytest.aiml_tests.client import TestClient
 
 
-class OrderingTestClient(TestClient):
+class PatternOrderingTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
     def load_configuration(self, arguments):
-        super(OrderingTestClient, self).load_configuration(arguments)
+        super(PatternOrderingTestClient, self).load_configuration(arguments)
         self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
 
 
-class OrderingAIMLTests(unittest.TestCase):
+class PatternOrderingAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(OrderingTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = PatternOrderingTestClient()
+        self._client_context = client.create_client_context("testid")
+
         self._client_context.brain.sets._sets["COLOR"] = {"RED": [["RED"]]}
         self._client_context.brain.sets._sets["ANIMAL"] = {"DOLPHIN": [["DOLPHIN"]]}
 

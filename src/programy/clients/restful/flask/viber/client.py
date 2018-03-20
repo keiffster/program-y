@@ -30,24 +30,22 @@ from viberbot.api.viber_requests import ViberSubscribedRequest
 from viberbot.api.viber_requests import ViberUnsubscribedRequest
 from viberbot.api.messages.text_message import TextMessage
 
-from programy.clients.client import BotClient
+from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.viber.config import ViberConfiguration
 
 
 VIBER_CLIENT = None
 
 
-class ViberBotClient(BotClient):
+class ViberBotClient(FlaskRestBotClient):
 
     _running = False
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "viber", argument_parser)
+        FlaskRestBotClient.__init__(self, "viber", argument_parser)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Viber Client is running....")
-
-        self._viber_token = self.get_token(self.bot.license_keys)
 
         self._viber_bot = self.create_viber_bot(self._viber_token)
 
@@ -57,23 +55,36 @@ class ViberBotClient(BotClient):
     def get_client_configuration(self):
         return ViberConfiguration()
 
-    def get_token(self, license_keys):
-        return license_keys.get_key("VIBER_TOKEN")
-
-    def ask_question(self, bot, clientid, question):
-        try:
-            response = self.bot.ask_question(bot, clientid, question)
-        except Exception as e:
-            print(e)
+    def get_license_keys(self):
+        self._viber_token = self.license_keys.get_key("VIBER_TOKEN")
 
     def create_viber_api(self, configuration):
         return Api(configuration)
 
     def create_viber_bot(self, viber_token):
 
+        if viber_token is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'viber_token' missing")
+            return None
+
         name = self.configuration.client_configuration.name
+        if name is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'name' missing from Viber configuration")
+            return None
+
         avatar = self.configuration.client_configuration.avatar
+        if avatar is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'avatar' missing from Viber configuration")
+            return None
+
         webhook = self.configuration.client_configuration.webhook
+        if webhook is None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'webhook' missing from Viber configuration")
+            return None
 
         configuration = BotConfiguration(
             name=name,
@@ -82,24 +93,26 @@ class ViberBotClient(BotClient):
         )
 
         bot = self.create_viber_api(configuration)
+        if bot is not None:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("'Failed to create Viber api")
 
         bot.set_webhook(webhook)
-
         return bot
 
     def handle_message_request(self, viber_request):
         message = viber_request.message
-        clientid = viber_request.sender.id
+        userid = viber_request.sender.id
 
-        self.ask_question(self.bot, clientid, message)
+        response = self.ask_question(userid, message)
 
         self._viber_bot.send_messages(viber_request.sender.id, [
-            message
+            TextMessage(text=response)
         ])
 
     def handle_subscribed_request(self, viber_request):
-        self._viber_bot.send_messages(viber_request.get_user.id, [
-            TextMessage(text="thanks for subscribing!")
+        self._viber_bot.send_messages(viber_request.user.id, [
+            TextMessage(text="Thanks for subscribing!")
         ])
 
     def handle_unsubscribed_request(self, viber_request):
@@ -114,7 +127,11 @@ class ViberBotClient(BotClient):
     def handle_unknown_request(self, viber_request):
         logging.error("client failed receiving message. failure: {0}".format(viber_request))
 
-    def handle_incoming(self, request):
+    def receive_message(self, request):
+
+        if self.configuration.client_configuration.debug is True:
+            self.dump_request(request)
+
         # every viber message is signed, you can verify the signature using this method
         if not self._viber_bot.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
             return Response(status=403)
@@ -137,45 +154,25 @@ class ViberBotClient(BotClient):
         elif isinstance(viber_request, ViberFailedRequest):
             self.handle_failed_request(viber_request)
 
-        elif isinstance(viber_request, ViberFailedRequest):
+        else:
             self.handle_unknown_request(viber_request)
 
         return Response(status=200)
 
 
+Viber_CLIENT = None
 APP = Flask(__name__)
 
 
-@APP.route('/incoming', methods=['POST'])
-def incoming():
-    return VIBER_CLIENT.handle_incoming(request)
+@APP.route("/api/twilio/v1.0/ask", methods=['POST'])
+def receive_message():
+    try:
+        return Viber_CLIENT.receive_message(request)
+    except Exception as e:
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.exception(e)
 
 
-if __name__ == '__main__':
-
-
-    VIBER_CLIENT = ViberBotClient()
-
-    print("Viber Client running on %s:%s" % (VIBER_CLIENT.configuration.client_configuration.host,
-                                             VIBER_CLIENT.configuration.client_configuration.port))
-
-
-    if VIBER_CLIENT.configuration.client_configuration.debug is True:
-        print("Viber Client running in debug mode")
-
-    if VIBER_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-            VIBER_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-        context = (VIBER_CLIENT.configuration.client_configuration.ssl_cert_file,
-                   VIBER_CLIENT.configuration.client_configuration.ssl_key_file)
-
-        print("Viber Client running in https mode")
-        APP.run(host=VIBER_CLIENT.configuration.client_configuration.host,
-                port=VIBER_CLIENT.configuration.client_configuration.port,
-                debug=VIBER_CLIENT.configuration.client_configuration.debug,
-                ssl_context=context)
-    else:
-        print("Viber Client running in http mode, careful now !")
-        APP.run(host=VIBER_CLIENT.configuration.client_configuration.host,
-                port=VIBER_CLIENT.configuration.client_configuration.port,
-                debug=VIBER_CLIENT.configuration.client_configuration.debug)
-
+if __name__ == "__main__":
+    Viber_CLIENT = ViberBotClient()
+    Viber_CLIENT.run()

@@ -100,7 +100,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("Missing value for [%s] in config, return default value", option_name)
-            return missing_value
+            return [missing_value]
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
 

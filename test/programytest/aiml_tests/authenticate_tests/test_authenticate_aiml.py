@@ -34,9 +34,8 @@ class AuthenticateTestClient(TestClient):
 class AuthenticateAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(AuthenticateTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = AuthenticateTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_authentication_passed(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = True

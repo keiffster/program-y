@@ -52,7 +52,8 @@ class MockWeatherExtension(WeatherExtension):
 class WeatherExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        self.context = client.create_client_context("testid")
 
         bot = unittest.mock.Mock()
         self.context.bot = bot

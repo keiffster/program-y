@@ -6,13 +6,13 @@ from programy.utils.text.dateformat import DateFormatter
 
 from programytest.aiml_tests.client import TestClient
 
-class BasicTestClient(TestClient):
+class DateTimeAIMLTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
     def load_configuration(self, arguments):
-        super(BasicTestClient, self).load_configuration(arguments)
+        super(DateTimeAIMLTestClient, self).load_configuration(arguments)
         self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
         self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._files = [os.path.dirname(__file__)+ os.sep + "sets"]
         self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._extension=".txt"
@@ -25,9 +25,9 @@ class DateTimeAIMLTests(unittest.TestCase):
     DEFAULT_DATETIME_REGEX = "^.*.{3}\s*.{3}\s*\d{1,}\s\d{2}:\d{2}:\d{2}\s\d{4}"
 
     def setUp(self):
-        self._client_context = ClientContext(BasicTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = DateTimeAIMLTestClient()
+        self._client_context = client.create_client_context("testid")
+
         self._client_context.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
         self.date = DateFormatter()
 

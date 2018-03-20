@@ -25,19 +25,14 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import MessageEvent, TextMessage, TextSendMessage
 
-from programy.clients.client import BotClient
+from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.line.config import LineConfiguration
 
 
-LINE_CLIENT = None
-
-
-class LineBotClient(BotClient):
+class LineBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "line", argument_parser)
-
-        self.get_tokens()
+        FlaskRestBotClient.__init__(self, "line", argument_parser)
 
         self.create_line_bot()
 
@@ -50,17 +45,9 @@ class LineBotClient(BotClient):
     def get_client_configuration(self):
         return LineConfiguration()
 
-    def get_tokens(self):
-        self._channel_secret = self.bot.license_keys.get_key("LINE_CHANNEL_SECRET")
-        self._channel_access_token = self.bot.license_keys.get_key("LINE_ACCESS_TOKEN")
-
-    def ask_question(self, clientid, question):
-        response = ""
-        try:
-            response = self.bot.ask_question(clientid, question)
-        except Exception as e:
-            print(e)
-        return response
+    def get_license_keys(self):
+        self._channel_secret = self.license_keys.get_key("LINE_CHANNEL_SECRET")
+        self._channel_access_token = self.license_keys.get_key("LINE_ACCESS_TOKEN")
 
     def create_line_bot(self):
         self._line_bot_api = LineBotApi(self._channel_access_token)
@@ -68,17 +55,30 @@ class LineBotClient(BotClient):
 
     def handle_text_message(self, event):
         question = event.message.text
-        clientid = event.source.user_id
+        userid = event.source.user_id
 
-        answer = self.ask_question(clientid, question)
+        answer = self.ask_question(userid, question)
 
         self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=answer))
 
+    def get_unknown_response(self, userid):
+        if self.configuration.client_configuration.unknown_command_srai is None:
+            unknown_response = self.configuration.client_configuration.unknown_command
+        else:
+            unknown_response = self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
+            if unknown_response is None or unknown_response == "":
+                unknown_response = self.configuration.client_configuration.unknown_command
+        return unknown_response
+
     def handle_unknown_event(self, event):
-        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text="Sorry, I only handle text messages right now!"))
+        userid = ""
+        unknown_response = self.get_unknown_response(userid)
+        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=unknown_response))
 
     def handle_unknown_message(self, event):
-        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text="Sorry, I only handle text messages right now!"))
+        userid = ""
+        unknown_response = self.get_unknown_response(userid)
+        self._line_bot_api.reply_message(event.reply_token, TextSendMessage(text=unknown_response))
 
     def handle_message_request(self, body, signature):
 
@@ -93,7 +93,11 @@ class LineBotClient(BotClient):
             else:
                 self.handle_unknown_event(event)
 
-    def handle_incoming(self, request):
+    def receive_message(self, request):
+
+        if self.configuration.client_configuration.debug is True:
+            self.dump_request(request)
+
         # get X-Line-Signature header value
         signature = request.headers['X-Line-Signature']
 
@@ -109,38 +113,19 @@ class LineBotClient(BotClient):
         return 'OK'
 
 
+LINE_CLIENT = None
 APP = Flask(__name__)
 
 
-@APP.route('/callback', methods=['POST'])
-def incoming():
-    return LINE_CLIENT.handle_incoming(request)
+@APP.route("/api/line/v1.0/ask", methods=['POST'])
+def receive_message():
+    try:
+        return LINE_CLIENT.receive_message(request)
+    except Exception as e:
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.exception(e)
 
 
-if __name__ == '__main__':
-
-
+if __name__ == "__main__":
     LINE_CLIENT = LineBotClient()
-
-    print("Line Client running on %s:%s" % (LINE_CLIENT.configuration.client_configuration.host,
-                                             LINE_CLIENT.configuration.client_configuration.port))
-
-
-    if LINE_CLIENT.configuration.client_configuration.debug is True:
-        print("Line Client running in debug mode")
-
-    if LINE_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-            LINE_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-        context = (LINE_CLIENT.configuration.client_configuration.ssl_cert_file,
-                   LINE_CLIENT.configuration.client_configuration.ssl_key_file)
-
-        print("Line Client running in https mode")
-        APP.run(host=LINE_CLIENT.configuration.client_configuration.host,
-                port=LINE_CLIENT.configuration.client_configuration.port,
-                debug=LINE_CLIENT.configuration.client_configuration.debug,
-                ssl_context=context)
-    else:
-        print("Line Client running in http mode, careful now !")
-        APP.run(host=LINE_CLIENT.configuration.client_configuration.host,
-                port=LINE_CLIENT.configuration.client_configuration.port,
-                debug=LINE_CLIENT.configuration.client_configuration.debug)
+    LINE_CLIENT.run()

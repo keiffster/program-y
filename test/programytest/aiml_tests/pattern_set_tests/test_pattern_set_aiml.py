@@ -6,24 +6,24 @@ from programy.context import ClientContext
 from programytest.aiml_tests.client import TestClient
 
 
-class BasicTestClient(TestClient):
+class PatternSetTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
     def load_configuration(self, arguments):
-        super(BasicTestClient, self).load_configuration(arguments)
+        super(PatternSetTestClient, self).load_configuration(arguments)
         self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
         self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._files =[os.path.dirname(__file__)+ os.sep + "sets"]
         self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._extension=".txt"
 
 
-class PatternsetAIMLTests(unittest.TestCase):
+class PatternSetAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(BasicTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = PatternSetTestClient()
+        self._client_context = client.create_client_context("testid")
+
         self._client_context.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
     def test_patten_set_match(self):

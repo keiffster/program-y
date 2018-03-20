@@ -40,7 +40,7 @@ class ViberConfigurationTests(unittest.TestCase):
         viber_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", viber_config.host)
-        self.assertEqual(5001, viber_config.port)
+        self.assertEqual(80, viber_config.port)
         self.assertEqual(False, viber_config.debug)
         self.assertIsNone(viber_config.name)
         self.assertIsNone(viber_config.avatar)

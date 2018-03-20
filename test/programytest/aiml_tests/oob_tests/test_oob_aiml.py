@@ -22,9 +22,8 @@ class OOBTestClient(TestClient):
 class OOBAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(OOBTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = OOBTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_oob_one_word(self):
         response = self._client_context.bot.ask_question(self._client_context,  "HELLO")

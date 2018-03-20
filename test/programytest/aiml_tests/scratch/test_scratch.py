@@ -25,9 +25,8 @@ class ScratchTestsClient(TestClient):
 class ScratchAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(ScratchTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = ScratchTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_response(self):
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU FRED")

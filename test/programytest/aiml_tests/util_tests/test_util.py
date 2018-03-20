@@ -19,9 +19,8 @@ class UtiltyTestClient(TestClient):
 class UtiltyAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(UtiltyTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = UtiltyTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_util_function(self):
         response = self._client_context.bot.ask_question(self._client_context, "KEITH IS A PROGRAMMER")

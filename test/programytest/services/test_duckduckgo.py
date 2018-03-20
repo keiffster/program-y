@@ -1,15 +1,31 @@
 import unittest
 import os
 
-from programy.utils.license.keys import LicenseKeys
 from programy.services.duckduckgo import DuckDuckGoService
-from programytest.settings import external_services
+from programy.services.duckduckgo import DuckDuckGoAPI
+from programy.services.requestsapi import RequestsAPI
 from programy.services.service import BrainServiceConfiguration
 
-class TestBot:
+from programytest.aiml_tests.client import TestClient
+
+
+class MockResponse(object):
+
+    def __init__(self, status_code, text):
+        self.status_code = status_code
+        self.text = text
+
+
+class MockRequestsAPI(object):
 
     def __init__(self):
-        self.license_keys = None
+        self._status_code = None
+        self._response = None
+
+    def get(self, url, params):
+        self._url = url
+        return MockResponse(self._status_code, self._response)
+
 
 class MockDuckDuckGoAPI(object):
 
@@ -18,17 +34,62 @@ class MockDuckDuckGoAPI(object):
         self._throw_exception = throw_exception
 
     def ask_question(self, url, question):
+        self._question = question
+        self._url = url
         if self._throw_exception is True:
             raise Exception()
         else:
             return self._response
 
+
+class TestDuckDuckGoAPI(unittest.TestCase):
+
+    def test_init_no_requestapi(self):
+        api = DuckDuckGoAPI()
+        self.assertIsNotNone(api)
+        self.assertIsInstance(api._requests_api, RequestsAPI)
+
+    def test_init_with_requestapi(self):
+        api = DuckDuckGoAPI(MockRequestsAPI())
+        self.assertIsNotNone(api)
+        self.assertIsInstance(api._requests_api, MockRequestsAPI)
+
+    def test_ask_question(self):
+        request_api = MockRequestsAPI()
+        api = DuckDuckGoAPI(request_api)
+        self.assertIsNotNone(api)
+        self.assertIsInstance(api._requests_api, MockRequestsAPI)
+
+        request_api._status_code = 200
+        request_api._response = b'{"RelatedTopics": [{"Text": "A feline, 4 legged thing"}]}'
+
+        response = api.ask_question("http:/test.url.com/ask", "cat")
+
+        self.assertEquals("A feline, 4 legged thing", response)
+
+
 class DuckDuckGoServiceTests(unittest.TestCase):
 
     def setUp(self):
-        self.bot = TestBot()
-        self.bot.license_keys = LicenseKeys()
-        self.bot.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
+        client = TestClient()
+        self._client_context = client.create_client_context("testid")
+        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
+
+    def test_init_with_no_request_api(self):
+        config = BrainServiceConfiguration("pannous")
+        config._url = "http://test.pandora.url"
+
+        service = DuckDuckGoService(config=config)
+
+        self.assertIsNotNone(service)
+        self.assertIsInstance(service._api, DuckDuckGoAPI)
+
+    def test_init_with_no_url(self):
+        config = BrainServiceConfiguration("pannous")
+        config._url = None
+
+        with self.assertRaises(Exception):
+            service = DuckDuckGoService(config=config)
 
     def test_ask_question(self):
 
@@ -38,7 +99,7 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         service = DuckDuckGoService(config=config, api=MockDuckDuckGoAPI(response="Test DuckDuckGo response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("Test DuckDuckGo response", response)
 
     def test_ask_question_general_exception(self):
@@ -48,17 +109,6 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         service = DuckDuckGoService(config=config, api=MockDuckDuckGoAPI(response=None, throw_exception=True))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("", response)
 
-    @unittest.skipIf(not external_services, "External service testing disabled")
-    def test_ask_question_summary(self):
-        config = BrainServiceConfiguration("pannous")
-        config._url = "http://api.duckduckgo.com"
-
-        service = DuckDuckGoService(config=config)
-        self.assertIsNotNone(service)
-
-        response = service.ask_question(self.bot, "testid", "cat")
-        self.assertIsNotNone(response)
-        self.assertEqual("Cat A small, typically furry, carnivorous mammal", response)

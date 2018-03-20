@@ -19,9 +19,8 @@ class TelecomsMinutesTestsClient(TestClient):
 class TelecomsMinutesAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        self._client_context = ClientContext(TelecomsMinutesTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = TelecomsMinutesTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_balance(self):
         response = self._client_context.bot.ask_question(self._client_context, "HOW MANY MINUTES DO I HAVE LEFT")

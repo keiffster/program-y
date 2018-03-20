@@ -40,9 +40,8 @@ class MapsTestsClient(TestClient):
 class MapsAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        self._client_context = ClientContext(MapsTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = MapsTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_distance(self):
         MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "distance.json"

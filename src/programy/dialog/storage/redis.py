@@ -16,16 +16,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import time
+import redis
 
 from programy.dialog.storage.base import ConversationStorage
-import redis
+
+class DefaultRedisFactory(object):
+
+    @staticmethod
+    def connect(config):
+        return redis.StrictRedis(host=config.host, port=config.port, db=0)
+
 
 class ConversationRedisStorage(ConversationStorage):
 
-    def __init__(self, config):
+    def __init__(self, config, factory=None):
         ConversationStorage.__init__(self, config)
-        self._redis = redis.StrictRedis(host=config.host, port=config.port, db=0)
+        if factory is None:
+            factory = DefaultRedisFactory()
+        self._redis = factory.connect(config)
 
     def empty(self):
         pass

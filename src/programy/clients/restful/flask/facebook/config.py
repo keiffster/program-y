@@ -14,49 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.restful.config import RestConfiguration
 
 
-class FacebookConfiguration(ClientConfigurationData):
+class FacebookConfiguration(RestConfiguration):
     
     def __init__(self):
-        ClientConfigurationData.__init__(self, "facebook")
-        self._host = "0.0.0.0"
-        self._port = 5000
-        self._debug = False
-        self._ssl_cert_file = None
-        self._ssl_key_file = None
-
-    @property
-    def host(self):
-        return self._host
-
-    @property
-    def port(self):
-        return self._port
-
-    @property
-    def debug(self):
-        return self._debug
-
-    @property
-    def ssl_cert_file(self):
-        return self._ssl_cert_file
-
-    @property
-    def ssl_key_file(self):
-        return self._ssl_key_file
-
-    def load_configuration(self, configuration_file, bot_root):
-        facebook = configuration_file.get_section(self.section_name)
-        if facebook is not None:
-            self._host = configuration_file.get_option(facebook, "host", missing_value="0.0.0.0")
-            self._port = configuration_file.get_option(facebook, "port", missing_value=5000)
-            self._debug = configuration_file.get_bool_option(facebook, "debug", missing_value=False)
-            self._ssl_cert_file = configuration_file.get_option(facebook, "ssl_cert_file")
-            if self._ssl_cert_file is not None:
-                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
-            self._ssl_key_file = configuration_file.get_option(facebook, "ssl_key_file")
-            if self._ssl_key_file is not None:
-                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-        super(FacebookConfiguration, self).load_configuration(configuration_file, facebook, bot_root)
+        RestConfiguration.__init__(self, "facebook")

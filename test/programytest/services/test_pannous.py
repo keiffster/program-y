@@ -2,10 +2,12 @@ import unittest
 import os
 import json
 
-from programy.utils.license.keys import LicenseKeys
 from programy.services.pannous import PannousService, PannousAPI
 from programy.services.service import BrainServiceConfiguration
 from programytest.services.mock_requests import MockRequestsAPI
+
+from programytest.aiml_tests.client import TestClient
+
 
 class PannousAPITests(unittest.TestCase):
 
@@ -116,12 +118,6 @@ class PannousAPITests(unittest.TestCase):
         self.assertEqual(raised.exception.args[0], "'output' section missing from pannous json_data")
 
 
-class TestBot:
-
-    def __init__(self):
-        self.license_keys = None
-
-
 class MockPannousAPI(object):
 
     def __init__(self, response=None, throw_exception=False):
@@ -138,9 +134,9 @@ class MockPannousAPI(object):
 class PannousServiceTests(unittest.TestCase):
 
     def setUp(self):
-        self.bot = TestBot()
-        self.bot.license_keys = LicenseKeys()
-        self.bot.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
+        client = TestClient()
+        self._client_context = client.create_client_context("testid")
+        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_ask_question(self):
 
@@ -150,7 +146,7 @@ class PannousServiceTests(unittest.TestCase):
         service = PannousService(config=config, api=MockPannousAPI(response="Test pannous response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("Test pannous response", response)
 
     def test_ask_question_no_url(self):
@@ -161,15 +157,14 @@ class PannousServiceTests(unittest.TestCase):
             service = PannousService(config=config, api=MockPannousAPI(response="Test pannous response"))
             self.assertIsNotNone(service)
 
-            response = service.ask_question(self.bot, "testid", "what is a cat")
+            response = service.ask_question(self._client_context, "what is a cat")
             self.assertEquals("", response)
 
         self.assertEqual(raised.exception.args[0], "Undefined url parameter")
 
     def test_ask_question_no_license_key(self):
 
-        self.bot = TestBot()
-        self.bot.license_keys = LicenseKeys()
+        self._client_context.client.license_keys._keys.clear()
 
         config = BrainServiceConfiguration("pannous")
         config._url = "http://test.pandora.url"
@@ -177,7 +172,7 @@ class PannousServiceTests(unittest.TestCase):
         service = PannousService(config=config, api=MockPannousAPI(response="Test pannous response"))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("", response)
 
     def test_ask_question_with_exception(self):
@@ -188,5 +183,5 @@ class PannousServiceTests(unittest.TestCase):
         service = PannousService(config=config, api=MockPannousAPI(response="Some wierd error", throw_exception=True))
         self.assertIsNotNone(service)
 
-        response = service.ask_question(self.bot, "testid", "what is a cat")
+        response = service.ask_question(self._client_context, "what is a cat")
         self.assertEquals("", response)

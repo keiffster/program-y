@@ -21,37 +21,37 @@ from telegram.ext import Updater
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 
-from programy.clients.client import BotClient
+from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.telegram.config import TelegramConfiguration
 
 
-TELEGRAM_CLIENT = None
-
-
-def start(bot, update):
-    if TELEGRAM_CLIENT is None:
+def start(telegram_bot, update):
+    if TelegramBotClient.TELEGRAM_CLIENT is None:
         raise Exception("Please initialise Telegram Client first")
-    TELEGRAM_CLIENT.start(bot, update)
+    TelegramBotClient.TELEGRAM_CLIENT.start(telegram_bot, update)
 
 
-def message(bot, update):
-    if TELEGRAM_CLIENT is None:
+def message(telegram_bot, update):
+    if TelegramBotClient.TELEGRAM_CLIENT is None:
         raise Exception("Please initialise Telegram Client first")
-    TELEGRAM_CLIENT.message(bot, update)
+    TelegramBotClient.TELEGRAM_CLIENT.message(telegram_bot, update)
 
 
-def unknown(bot, update):
-    if TELEGRAM_CLIENT is None:
+def unknown(telegram_bot, update):
+    if TelegramBotClient.TELEGRAM_CLIENT is None:
         raise Exception("Please initialise Telegram Client first")
-    TELEGRAM_CLIENT.unknown(bot, update)
+    TelegramBotClient.TELEGRAM_CLIENT.unknown(telegram_bot, update)
 
 
-class TelegramBotClient(BotClient):
+class TelegramBotClient(PollingBotClient):
+
+    TELEGRAM_CLIENT = None
 
     _running = False
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "telegram", argument_parser)
+        self._updater = None
+        PollingBotClient.__init__(self, "telegram", argument_parser)
 
     def get_description(self):
         return 'ProgramY AIML2.0 Telegram Client'
@@ -59,90 +59,111 @@ class TelegramBotClient(BotClient):
     def get_client_configuration(self):
         return TelegramConfiguration()
 
-    @staticmethod
-    def get_token(license_keys):
-        return license_keys.get_key("TELEGRAM_TOKEN")
+    def get_license_keys(self):
+        self._telegram_token = self.license_keys.get_key("TELEGRAM_TOKEN")
 
-    @staticmethod
-    def register_handlers(dispatcher):
+    def create_updater(self, telegram_token):
+        self._updater = Updater(token=telegram_token)
+
+    def register_handlers(self):
         start_handler = CommandHandler('start', start)
         message_handler = MessageHandler(Filters.text, message)
         unknown_handler = MessageHandler(Filters.command, unknown)
 
-        dispatcher.add_handler(start_handler)
-        dispatcher.add_handler(message_handler)
+        self._updater.dispatcher.add_handler(start_handler)
+        self._updater.dispatcher.add_handler(message_handler)
         # Add unknown last
-        dispatcher.add_handler(unknown_handler)
+        self._updater.dispatcher.add_handler(unknown_handler)
 
-    @staticmethod
-    def poll_and_process(updater):
-        print("Telegram client running....")
-        TelegramBotClient._running = True
-        while TelegramBotClient._running is True:
-            try:
-                updater.start_polling()
-            except KeyboardInterrupt as keye:
-                print("Telegram client stopping....")
-                TelegramBotClient._running = False
-                updater.stop()
-            except Exception as excep:
-                logging.exception(excep)
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Oops something bad happened !")
-
-    def start(self, bot, update):
-        try:
-            initial_question = self.bot.get_initial_question(update.message.chat_id)
-            processed_question = self.bot.brain.post_process_response(self.bot,
-                                                                      update.message.chat_id,
+    def get_initial_question(self, update):
+        client_context = self.create_client_context(update.message.chat_id)
+        initial_question = client_context.bot.get_initial_question(client_context)
+        processed_question = client_context.bot.post_process_response(client_context,
                                                                       initial_question)
-            bot.send_message(chat_id=update.message.chat_id, text=processed_question)
-        except Exception as e:
-            print(e)
+        return processed_question
 
-    def message(self, bot, update):
+    def ask_question(self, userid, question):
+        client_context = self.create_client_context(userid)
+        return client_context.bot.ask_question(client_context, question, responselogger=self)
+
+    def start(self, telegram_bot, update):
         try:
-            response = self.bot.ask_question(update.message.chat_id, update.message.text, responselogger=self)
-            bot.send_message(chat_id=update.message.chat_id, text=response)
-        except Exception as e:
-            print(e)
+            initial_question = self.get_initial_question(update)
+            if initial_question:
+                telegram_bot.send_message(chat_id=update.message.chat_id, text=initial_question)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Not initial question to return in start()")
 
-    def get_unknown_command(self, clientid):
+        except Exception as e:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.exception(e)
+
+    def message(self, telegram_bot, update):
+        try:
+            response = self.ask_question(update.message.chat_id, update.message.text)
+            if response:
+                telegram_bot.send_message(chat_id=update.message.chat_id, text=response)
+            else:
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("Not response to return in message()")
+
+        except Exception as e:
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.exception(e)
+
+    def get_unknown_response(self, userid):
+        return self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
+
+    def get_unknown_command(self, userid):
         if self.configuration.client_configuration.unknown_command_srai is None:
             unknown_response = self.configuration.client_configuration.unknown_command
         else:
-            unknown_response = self.bot.ask_question(clientid,
-                                                     self.configuration.client_configuration.unknown_command_srai,
-                                                     responselogger=self)
+            unknown_response = self.get_unknown_response(userid)
             if unknown_response is None or unknown_response == "":
                 unknown_response = self.configuration.client_configuration.unknown_command
         return unknown_response
 
-    def unknown(self, bot, update):
+    def unknown(self, telegram_bot, update):
         try:
             unknown_response = self.get_unknown_command(update.message.chat_id)
-            bot.send_message(chat_id=update.message.chat_id, text=unknown_response)
+            if unknown_response:
+                telegram_bot.send_message(chat_id=update.message.chat_id, text=unknown_response)
+                if logging.getLogger().isEnabledFor(logging.ERROR):
+                    logging.error("No response to return in unknown()")
+
         except Exception as e:
-            print(e)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.exception(e)
 
-    def create_updater(self, telegram_token):
-        return Updater(token=telegram_token)
+    def display_connected_message(self):
+        print ("Telegram Bot connected and running...")
 
-    def run(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Telegram Client is running....")
+    def poll_and_answer(self):
 
-        telegram_token = self.get_token(self.bot.license_keys)
+        running = True
+        try:
+            self._updater.start_polling()
 
-        updater = self.create_updater(telegram_token)
+        except KeyboardInterrupt as keye:
+            print("Telegram client stopping....")
+            running = False
+            self._updater.stop()
 
-        self.register_handlers(updater.dispatcher)
+        except Exception as excep:
+            logging.exception(excep)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Oops something bad happened !")
 
-        self.poll_and_process(updater)
+        return running
+
+    def connect(self):
+        self.create_updater(self._telegram_token)
+        self.register_handlers()
 
 
 if __name__ == '__main__':
 
     print("Loading Telegram client, please wait. See log output for progress...")
-    TELEGRAM_CLIENT = TelegramBotClient()
-    TELEGRAM_CLIENT.run()
+    TelegramBotClient.TELEGRAM_CLIENT = TelegramBotClient()
+    TelegramBotClient.TELEGRAM_CLIENT.run()

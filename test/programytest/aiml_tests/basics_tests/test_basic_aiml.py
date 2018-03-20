@@ -19,9 +19,8 @@ class BasicTestClient(TestClient):
 class BasicAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(BasicTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = BasicTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_basic_basic_text(self):
         response = self._client_context.bot.ask_question(self._client_context,  "NO RESPONSE")

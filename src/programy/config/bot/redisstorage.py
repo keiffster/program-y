@@ -23,8 +23,8 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
 
     def __init__(self, config_name):
         BaseConfigurationData.__init__(self, name=config_name)
-        self._host = None
-        self._port = None
+        self._host = "localhost"
+        self._port = 6379
 
     @property
     def host(self):

@@ -16,18 +16,21 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
-import sleekxmpp
 
-from programy.clients.client import BotClient
+from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
 from programy.clients.polling.xmpp.xmpp import XmppClient
 
 
-class XmppBotClient(BotClient):
+class XmppBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
         self._xmpp_client = None
-        BotClient.__init__(self, "XMPP", argument_parser)
+        self._server = None
+        self._port = None
+        self._username = None
+        self._password = None
+        PollingBotClient.__init__(self, "XMPP", argument_parser)
 
     def get_description(self):
         return 'ProgramY AIML2.0 XMPP Client'
@@ -35,40 +38,50 @@ class XmppBotClient(BotClient):
     def get_client_configuration(self):
         return XmppConfiguration()
 
-    def get_username_password(self, license_keys):
-        username = license_keys.get_key("XMPP_USERNAME")
-        password = license_keys.get_key("XMPP_PASSWORD")
-        return username, password
+    def parse_configuration(self):
+        self._server = self.configuration.client_configuration.server
+        self._port = self.configuration.client_configuration.port
 
-    def get_server_port(self, configuration):
-        server = configuration.client_configuration.server
-        port = configuration.client_configuration.port
-        return server, port
+    def get_license_keys(self):
+        self._username = self.license_keys.get_key("XMPP_USERNAME")
+        self._password = self.license_keys.get_key("XMPP_PASSWORD")
 
     def create_client(self, username, password):
         return XmppClient(self, username, password)
 
     def ask_question(self, userid, question):
-        response = self.bot.ask_question(userid, question, responselogger=self)
+        client_context = self.create_client_context(userid)
+        response = self.bot.ask_question(client_context, question, responselogger=self)
         return response
 
-    def run(self):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("XMPP Client is running....")
+    def connect(self):
+        self._xmpp_client = self.create_client(self._username, self._password)
+        self._xmpp_client.register_xep_plugins(self.configuration.client_configuration)
+        return self._xmpp_client.connect((self._server, self._port))
 
-        username, password = self.get_username_password(self.bot.license_keys)
-        server, port = self.get_server_port(self.configuration)
+    def display_connected_message(self):
+        print ("XMPP Bot connected and running...")
 
-        self._xmpp_client = self.create_client(username, password)
-        self._xmpp_client.register_xep_plugins(self.configuration)
-        self._xmpp_client.run(server, port, block=True)
+    def poll_and_answer(self):
 
+        running = True
+        try:
+            self._xmpp_client.process(block=True)
+
+        except KeyboardInterrupt as keye:
+            print("XMPP client stopping....")
+            running = False
+            self._updater.stop()
+
+        except Exception as excep:
+            logging.exception(excep)
+            if logging.getLogger().isEnabledFor(logging.ERROR):
+                logging.error("Oops something bad happened !")
+
+        return running
 
 if __name__ == '__main__':
 
-    def run():
-        print("Loading Xmpp client, please wait. See log output for progress...")
-        xmpp_app = XmppBotClient()
-        xmpp_app.run()
-
-    run()
+    print("Loading Xmpp client, please wait. See log output for progress...")
+    xmpp_app = XmppBotClient()
+    xmpp_app.run()

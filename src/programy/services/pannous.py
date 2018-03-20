@@ -72,10 +72,10 @@ class PannousService(Service):
         else:
             self.url = config.url
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
         try:
-            if bot.license_keys.has_key('PANNOUS_LOGIN'):
-                login = bot.license_keys.get_key('PANNOUS_LOGIN')
+            if client_context.client.license_keys.has_key('PANNOUS_LOGIN'):
+                login = client_context.client.license_keys.get_key('PANNOUS_LOGIN')
             else:
                 if logging.getLogger().isEnabledFor(logging.ERROR):
                     logging.error("No variable PANNOUS_LOGIN found in license key file")

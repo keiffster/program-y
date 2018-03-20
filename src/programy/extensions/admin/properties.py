@@ -24,7 +24,7 @@ from programy.parser.template.nodes.bot import TemplateBotNode
 class PropertiesAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, client_context, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Properties Admin - [%s]", data)
 
@@ -34,22 +34,22 @@ class PropertiesAdminExtension(Extension):
         if splits[0] == 'GET':
 
             if splits[1] == 'BOT':
-                properties = TemplateBotNode.get_bot_variable(bot, clientid, splits[2])
+                properties = TemplateBotNode.get_bot_variable(client_context, splits[2])
 
             elif splits[1] == "USER":
                 local = bool(splits[2].upper == 'LOCAL')
-                properties = TemplateGetNode.get_property_value(bot, clientid, local, splits[3])
+                properties = TemplateGetNode.get_property_value(client_context, local, splits[3])
 
         elif splits[0] == 'BOT':
             properties += "Properties:<br /><ul>"
-            for pair in bot.brain.properties.pairs:
+            for pair in client_context.brain.properties.pairs:
                 properties += "<li>%s = %s</li>"%(pair[0], pair[1])
             properties += "</ul>"
             properties += "<br />"
 
         elif splits[0] == "USER":
-            if bot.has_conversation(clientid):
-                conversation = bot.conversation(clientid)
+            if client_context.bot.has_conversation(client_context):
+                conversation = client_context.bot.conversation(client_context)
 
                 properties += "Properties:<br /><ul>"
                 for name, value in conversation.properties.items():

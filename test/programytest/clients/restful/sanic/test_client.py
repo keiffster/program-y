@@ -19,7 +19,7 @@ if os.name != "nt":
             self.aborted = True
             raise Exception("Pretending to abort!")
 
-        def ask_question(self, sessionid, question):
+        def ask_question(self, userid, question):
             if self.ask_question_exception is True:
                 raise Exception("Something bad happened")
             return self.answer
@@ -122,18 +122,18 @@ if os.name != "nt":
                 self.assertEquals("Hello", client.get_question(request))
             self.assertTrue(client.aborted)
 
-        def test_get_sessionid(self):
+        def test_get_userid(self):
             arguments = MockArgumentParser()
             client = SanicRestBotClient(arguments)
             self.assertIsNotNone(client)
 
             request = unittest.mock.Mock()
             request.raw_args = {}
-            request.raw_args['sessionid'] = '1234567890'
+            request.raw_args['userid'] = '1234567890'
 
-            self.assertEquals("1234567890", client.get_sessionid(request))
+            self.assertEquals("1234567890", client.get_userid(request))
 
-        def test_get_sessionid_no_sessionid(self):
+        def test_get_userid_no_userid(self):
             arguments = MockArgumentParser()
             client = MockSanicRestBotClient(arguments)
             self.assertIsNotNone(client)
@@ -143,21 +143,21 @@ if os.name != "nt":
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("1234567890", client.get_sessionid(request))
+                self.assertEquals("1234567890", client.get_userid(request))
             self.assertTrue(client.aborted)
 
-        def test_get_sessionid_none_sessionid(self):
+        def test_get_userid_none_userid(self):
             arguments = MockArgumentParser()
             client = MockSanicRestBotClient(arguments)
             self.assertIsNotNone(client)
 
             request = unittest.mock.Mock()
             request.raw_args = {}
-            request.raw_args['sessionid'] = None
+            request.raw_args['userid'] = None
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("1234567890", client.get_sessionid(request))
+                self.assertEquals("1234567890", client.get_userid(request))
             self.assertTrue(client.aborted)
 
         def test_format_success_response(self):
@@ -167,7 +167,7 @@ if os.name != "nt":
 
             response = client.format_success_response("1234567890", "Hello", "Hi")
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['sessionid'])
+            self.assertEquals("1234567890", response['userid'])
             self.assertEquals("Hello", response['question'])
             self.assertEquals("Hi", response['answer'])
 
@@ -178,7 +178,7 @@ if os.name != "nt":
 
             response = client.format_error_response("1234567890", "Hello", "Something Bad")
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['sessionid'])
+            self.assertEquals("1234567890", response['userid'])
             self.assertEquals("Hello", response['question'])
             self.assertEquals("", response['answer'])
             self.assertEquals("Something Bad", response['error'])
@@ -192,13 +192,13 @@ if os.name != "nt":
             request = unittest.mock.Mock()
             request.raw_args = {}
             request.raw_args['question'] = 'Hello'
-            request.raw_args['sessionid'] = '1234567890'
+            request.raw_args['userid'] = '1234567890'
 
             client.answer = "Hi"
 
             response, status = client.process_request(request)
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['sessionid'])
+            self.assertEquals("1234567890", response['userid'])
             self.assertEquals("Hello", response['question'])
             self.assertEquals("Hi", response['answer'])
 
@@ -211,7 +211,7 @@ if os.name != "nt":
             request = unittest.mock.Mock()
             request.raw_args = {}
             request.raw_args['question'] = 'Hello'
-            request.raw_args['sessionid'] = '1234567890'
+            request.raw_args['userid'] = '1234567890'
 
             client.answer = "Hi"
 
@@ -228,7 +228,7 @@ if os.name != "nt":
             request = unittest.mock.Mock()
             request.raw_args = {}
             request.raw_args['question'] = 'Hello'
-            request.raw_args['sessionid'] = '1234567890'
+            request.raw_args['userid'] = '1234567890'
 
             client.answer = "Hi"
             client.ask_question_exception = True

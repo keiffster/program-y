@@ -47,7 +47,8 @@ class MockNewsAPIExtension(NewsAPIExtension):
 class NewsAPIExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        self.context = client.create_client_context("testid")
 
     def test_get_news(self):
 

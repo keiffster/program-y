@@ -19,9 +19,8 @@ class SraiSetTestClient(TestClient):
 class SraiAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(SraiSetTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = SraiSetTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_srai__set_response(self):
         response = self._client_context.bot.ask_question(self._client_context, "TEST SRAI SET")

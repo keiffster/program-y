@@ -14,22 +14,16 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.restful.config import RestConfiguration
 
 
-class ViberConfiguration(ClientConfigurationData):
+class ViberConfiguration(RestConfiguration):
 
     def __init__(self):
-        ClientConfigurationData.__init__(self, "viber")
+        RestConfiguration.__init__(self, "viber")
         self._name = None
         self._avatar = None
         self._webhook = None
-        self._host = "0.0.0.0"
-        self._port = 5001
-        self._debug = False
-        self._workers = 4
-        self._ssl_cert_file = None
-        self._ssl_key_file = None
 
     @property
     def name(self):
@@ -43,44 +37,10 @@ class ViberConfiguration(ClientConfigurationData):
     def webhook(self):
         return self._webhook
 
-    @property
-    def host(self):
-        return self._host
-
-    @property
-    def port(self):
-        return self._port
-
-    @property
-    def debug(self):
-        return self._debug
-
-    @property
-    def workers(self):
-        return self._workers
-
-    @property
-    def ssl_cert_file(self):
-        return self._ssl_cert_file
-
-    @property
-    def ssl_key_file(self):
-        return self._ssl_key_file
-
     def load_configuration(self, configuration_file, bot_root):
         viber = configuration_file.get_section(self.section_name)
         if viber is not None:
             self._name = configuration_file.get_option(viber, "name", missing_value="Program-y")
             self._avatar = configuration_file.get_option(viber, "avatar", missing_value="http://viber.com/avatar.jpg")
             self._webhook = configuration_file.get_option(viber, "webhook", missing_value="https://localhost:443/incoming")
-            self._host = configuration_file.get_option(viber, "host", missing_value="0.0.0.0")
-            self._port = configuration_file.get_option(viber, "port", missing_value=5000)
-            self._debug = configuration_file.get_bool_option(viber, "debug", missing_value=False)
-            self._workers = configuration_file.get_option(viber, "workers", missing_value=4)
-            self._ssl_cert_file = configuration_file.get_option(viber, "ssl_cert_file")
-            if self._ssl_cert_file is not None:
-                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
-            self._ssl_key_file = configuration_file.get_option(viber, "ssl_key_file")
-            if self._ssl_key_file is not None:
-                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-        super(ViberConfiguration, self).load_configuration(configuration_file, viber, bot_root)
+        super(ViberConfiguration, self).load_configuration(configuration_file, bot_root)

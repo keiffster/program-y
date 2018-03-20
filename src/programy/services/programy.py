@@ -26,11 +26,11 @@ class ProgramyRESTService(GenericRESTService):
     def __init__(self, config: BrainServiceConfiguration, api=None):
         GenericRESTService.__init__(self, config, api)
 
-    def _format_payload(self, bot, clientid, question):
-        return {'question': question, "sessionid": clientid}
+    def _format_payload(self, client_context, question):
+        return {'question': question, "userid": client_context.userid}
 
-    def _format_get_url(self, url, bot, clientid, question):
-        return "%s?question=%s&sessionid=%s"%(url, quote(question), clientid)
+    def _format_get_url(self, url, client_context, question):
+        return "%s?question=%s&userid=%s"%(url, quote(question), client_context.userid)
 
     def _parse_response(self, text):
         data = json.loads(text)

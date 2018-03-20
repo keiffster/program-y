@@ -40,9 +40,8 @@ class GeoCodeAIMLTests(unittest.TestCase):
     LATLONG = None
 
     def setUp (self):
-        self._client_context = ClientContext(GeoCodeTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = GeoCodeTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_postcode1(self):
         GeoCodeAIMLTests.LATLONG = os.path.dirname(__file__) + os.sep + "google_latlong.json"

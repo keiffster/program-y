@@ -24,19 +24,14 @@ from flask import Flask, request, abort, Response
 from kik import KikApi, Configuration
 from kik.messages import messages_from_json, TextMessage
 
-from programy.clients.client import BotClient
+from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.kik.config import KikConfiguration
 
 
-KIK_CLIENT = None
-
-
-class KikBotClient(BotClient):
+class KikBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "kik", argument_parser)
-
-        self.get_tokens()
+        FlaskRestBotClient.__init__(self, "kik", argument_parser)
 
         self.create_kik_bot()
 
@@ -49,16 +44,8 @@ class KikBotClient(BotClient):
     def get_client_configuration(self):
         return KikConfiguration()
 
-    def get_tokens(self):
-        self._bot_api_key = self.bot.license_keys.get_key("KIK_BOT_API_KEY")
-
-    def ask_question(self, clientid, question):
-        response = ""
-        try:
-            response = self.bot.ask_question(clientid, question)
-        except Exception as e:
-            print(e)
-        return response
+    def get_license_keys(self):
+        self._bot_api_key = self.license_keys.get_key("KIK_BOT_API_KEY")
 
     def create_kik_bot(self):
         self._kik_bot = KikApi(self.configuration.client_configuration.bot_name, self._bot_api_key)
@@ -66,9 +53,9 @@ class KikBotClient(BotClient):
 
     def handle_text_message(self, message):
         question = message.body
-        clientid = message.from_user
+        userid = message.from_user
 
-        answer = self.ask_question(clientid, question)
+        answer = self.ask_question(userid, question)
 
         self._kik_bot.send_messages([
             TextMessage(
@@ -78,8 +65,27 @@ class KikBotClient(BotClient):
             )
         ])
 
+    def get_unknown_response(self, userid):
+        if self.configuration.client_configuration.unknown_command_srai is None:
+            unknown_response = self.configuration.client_configuration.unknown_command
+        else:
+            unknown_response = self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
+            if unknown_response is None or unknown_response == "":
+                unknown_response = self.configuration.client_configuration.unknown_command
+        return unknown_response
+
     def handle_unknown_message(self, message):
-        pass
+        userid = message.from_user
+
+        unknown_response = self.get_unknown_response(userid)
+
+        self._kik_bot.send_messages([
+            TextMessage(
+                to=message.from_user,
+                chat_id=message.chat_id,
+                body=unknown_response
+            )
+        ])
 
     def handle_message_request(self, request):
 
@@ -91,7 +97,11 @@ class KikBotClient(BotClient):
             else:
                 self.handle_unknown_message(message)
 
-    def handle_incoming(self, request):
+    def receive_message(self, request):
+
+        if self.configuration.client_configuration.debug is True:
+            self.dump_request(request)
+
         if not self._kik_bot.verify_signature(request.headers.get('X-Kik-Signature'), request.get_data()):
             return Response(status=403)
 
@@ -99,37 +109,19 @@ class KikBotClient(BotClient):
         return Response(status=200)
 
 
+KIK_CLIENT = None
 APP = Flask(__name__)
 
+@APP.route("/api/kik/v1.0/ask", methods=['POST'])
+def receive_message():
+    try:
+        return KIK_CLIENT.receive_message(request)
+    except Exception as e:
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            logging.exception(e)
 
-@APP.route('/incoming', methods=['POST'])
-def incoming():
-    return KIK_CLIENT.handle_incoming(request)
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
 
     KIK_CLIENT = KikBotClient()
-
-    print("Kik Client running on %s:%s" % (KIK_CLIENT.configuration.client_configuration.host,
-                                             KIK_CLIENT.configuration.client_configuration.port))
-
-
-    if KIK_CLIENT.configuration.client_configuration.debug is True:
-        print("Kik Client running in debug mode")
-
-    if KIK_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-            KIK_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-        context = (KIK_CLIENT.configuration.client_configuration.ssl_cert_file,
-                   KIK_CLIENT.configuration.client_configuration.ssl_key_file)
-
-        print("Kik Client running in https mode")
-        APP.run(host=KIK_CLIENT.configuration.client_configuration.host,
-                port=KIK_CLIENT.configuration.client_configuration.port,
-                debug=KIK_CLIENT.configuration.client_configuration.debug,
-                ssl_context=context)
-    else:
-        print("Kik Client running in http mode, careful now !")
-        APP.run(host=KIK_CLIENT.configuration.client_configuration.host,
-                port=KIK_CLIENT.configuration.client_configuration.port,
-                debug=KIK_CLIENT.configuration.client_configuration.debug)
+    KIK_CLIENT.run()

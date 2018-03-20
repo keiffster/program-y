@@ -14,55 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.restful.config import RestConfiguration
 
 
-class TwilioConfiguration(ClientConfigurationData):
+class TwilioConfiguration(RestConfiguration):
 
     def __init__(self):
-        ClientConfigurationData.__init__(self, "twilio")
-        self._host = "0.0.0.0"
-        self._port = 5001
-        self._debug = False
-        self._workers = 4
-        self._ssl_cert_file = None
-        self._ssl_key_file = None
-
-    @property
-    def host(self):
-        return self._host
-
-    @property
-    def port(self):
-        return self._port
-
-    @property
-    def debug(self):
-        return self._debug
-
-    @property
-    def workers(self):
-        return self._workers
-
-    @property
-    def ssl_cert_file(self):
-        return self._ssl_cert_file
-
-    @property
-    def ssl_key_file(self):
-        return self._ssl_key_file
+        RestConfiguration.__init__(self, "twilio")
 
     def load_configuration(self, configuration_file, bot_root):
-        twilio = configuration_file.get_section(self.section_name)
-        if twilio is not None:
-            self._host = configuration_file.get_option(twilio, "host", missing_value="0.0.0.0")
-            self._port = configuration_file.get_option(twilio, "port", missing_value=80)
-            self._debug = configuration_file.get_bool_option(twilio, "debug", missing_value=False)
-            self._workers = configuration_file.get_option(twilio, "workers", missing_value=4)
-            self._ssl_cert_file = configuration_file.get_option(twilio, "ssl_cert_file")
-            if self._ssl_cert_file is not None:
-                self._ssl_cert_file = self.sub_bot_root(self._ssl_cert_file, bot_root)
-            self._ssl_key_file = configuration_file.get_option(twilio, "ssl_key_file")
-            if self._ssl_key_file is not None:
-                self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-        super(TwilioConfiguration, self).load_configuration(configuration_file, twilio, bot_root)
+        super(TwilioConfiguration, self).load_configuration(configuration_file, bot_root)

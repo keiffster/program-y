@@ -21,10 +21,8 @@ class TwitterConfiguration(ClientConfigurationData):
 
     def __init__(self):
         ClientConfigurationData.__init__(self, "twitter")
-        self._polling = False
         self._polling_interval = 0
         self._rate_limit_sleep = -1
-        self._streaming = False
         self._use_status = False
         self._use_direct_message = False
         self._auto_follow = False
@@ -33,20 +31,12 @@ class TwitterConfiguration(ClientConfigurationData):
         self._welcome_message = "Thanks for following me."
 
     @property
-    def polling(self):
-        return self._polling
-
-    @property
     def polling_interval(self):
         return self._polling_interval
 
     @property
     def rate_limit_sleep(self):
         return self._rate_limit_sleep
-
-    @property
-    def streaming(self):
-        return self._streaming
 
     @property
     def use_status(self):
@@ -75,10 +65,8 @@ class TwitterConfiguration(ClientConfigurationData):
     def load_configuration(self, configuration_file, bot_root):
         twitter = configuration_file.get_section(self.section_name)
         if twitter is not None:
-            self._polling = configuration_file.get_bool_option(twitter, "polling")
-            if self._polling is True:
-                self._polling_interval = configuration_file.get_int_option(twitter, "polling_interval")
-                self._rate_limit_sleep = configuration_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
+            self._polling_interval = configuration_file.get_int_option(twitter, "polling_interval")
+            self._rate_limit_sleep = configuration_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
             self._streaming = configuration_file.get_bool_option(twitter, "streaming")
             self._use_status = configuration_file.get_bool_option(twitter, "use_status")
             self._use_direct_message = configuration_file.get_bool_option(twitter, "use_direct_message")

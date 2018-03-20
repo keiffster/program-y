@@ -19,9 +19,9 @@ class SraiTestClient(TestClient):
 class SraiAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(SraiTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = SraiTestClient()
+        self._client_context = client.create_client_context("testid")
+
         self._client_context.bot.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
 
     def test_srai_response(self):

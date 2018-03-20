@@ -46,10 +46,13 @@ class ClientConnection(object):
         self._clientsocket.send(json_data.encode('utf-8'))
 
     def send_error(self, error):
-        if hasattr(error, 'message') is False:
-            return_payload = {"result": "ERROR", "message": "Unknown"}
-        else:
+        if hasattr(error, 'message') is True:
             return_payload = {"result": "ERROR", "message": error.message}
+        elif hasattr(error, 'msg') is False:
+            return_payload = {"result": "ERROR", "message": error.msg}
+        else:
+            return_payload = {"result": "ERROR", "message": str(error)}
+
         json_data = json.dumps(return_payload)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
@@ -95,31 +98,20 @@ class SocketBotClient(EventBotClient):
     def __init__(self, argument_parser=None):
         EventBotClient.__init__(self, "Socket", argument_parser)
 
-        # get local machine name
-        host = self.configuration.client_configuration.host
-        port = self.configuration.client_configuration.port
-        queue = self.configuration.client_configuration.queue
-        max_buffer = self.configuration.client_configuration.max_buffer
-
-        print("TCP Socket Client server now listening on %s:%d"%(host, port))
-
-        self._server_socket = self.create_socket_connection(host, port, queue, max_buffer)
-
+        print("TCP Socket Client server now listening on %s:%d"%(self._host, self._port))
+        self._server_socket = self.create_socket_connection(self._host, self._port, self._queue, self._max_buffer)
 
     def get_description(self):
         return 'ProgramY AIML2.0 TCP Socket Client'
 
-    def set_environment(self):
-        self.bot.brain.properties.add_property("env", "Console")
-
     def get_client_configuration(self):
         return SocketConfiguration()
 
-    def add_client_arguments(self, parser=None):
-        return
-
-    def parse_args(self, arguments, parsed_args):
-        return
+    def parse_configuration(self):
+        self._host = self.configuration.client_configuration.host
+        self._port = self.configuration.client_configuration.port
+        self._queue = self.configuration.client_configuration.queue
+        self._max_buffer = self.configuration.client_configuration.max_buffer
 
     def extract_question(self, receive_payload):
         question = None
@@ -142,6 +134,7 @@ class SocketBotClient(EventBotClient):
 
     def wait_and_answer(self):
         running = True
+        client_connection = None
         try:
             client_connection = self._server_socket.accept_connection()
 
@@ -161,7 +154,6 @@ class SocketBotClient(EventBotClient):
                 logging.debug("Cleaning up and exiting...")
 
         except Exception as e:
-            print(e)
             if client_connection is not None:
                 client_connection.send_error(e)
 
@@ -170,12 +162,6 @@ class SocketBotClient(EventBotClient):
                 client_connection.close()
 
         return running
-
-    def run(self):
-
-        running = True
-        while running:
-            running = self.wait_and_answer()
 
 
 if __name__ == '__main__':

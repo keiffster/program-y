@@ -68,25 +68,25 @@ class GenericRESTService(Service):
         else:
             return host_port
 
-    def _format_payload(self, bot, clientid, question):
+    def _format_payload(self, client_context, question):
         return {}
 
-    def _format_get_url(self, url, bot, clientid, question):
+    def _format_get_url(self, url, client_context, question):
         return url
 
     def _parse_response(self, text):
         return text
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
 
         try:
             url = self._format_url()
 
             if self.method == 'GET':
-                full_url = self._format_get_url(url, bot, clientid, question)
+                full_url = self._format_get_url(url, client_context, question)
                 response = self.api.get(full_url)
             elif self.method == 'POST':
-                payload = self._format_payload(bot, clientid, question)
+                payload = self._format_payload(client_context, question)
                 response = self.api.post(url, data=payload)
             else:
                 raise Exception("Unsupported REST method [%s]"%self.method)

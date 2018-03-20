@@ -57,17 +57,17 @@ class BotClient(ResponseLogger):
 
     def __init__(self, id, argument_parser=None):
         self._id = id
-        self._configuration = None
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
 
         self.initiate_logging(self.arguments)
 
+        self._configuration = None
         self.load_configuration(self.arguments)
+        self.parse_configuration()
 
-        self._license_keys = None
+        self._license_keys = LicenseKeys()
         self.load_license_keys()
-
         self.get_license_keys()
 
         self._bot_factory = BotFactory(self.configuration.client_configuration)
@@ -95,6 +95,10 @@ class BotClient(ResponseLogger):
         # Nothing to add
         return
 
+    def parse_configuration(self):
+        # Nothing to add
+        return
+
     def parse_args(self, arguments, parsed_args):
         # Nothing to add
         return
@@ -105,19 +109,18 @@ class BotClient(ResponseLogger):
         return client_args
 
     def load_license_keys(self):
-        self._license_keys = LicenseKeys()
         if self.configuration is not None:
-            self._load_license_keys(self.configuration)
+            if self.configuration.client_configuration.license_keys is not None:
+                self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
+            else:
+                if logging.getLogger().isEnabledFor(logging.WARNING):
+                    logging.warning("No client configuration setting for license_keys")
         else:
             if logging.getLogger().isEnabledFor(logging.WARNING):
                 logging.warning("No configuration defined when loading license keys")
 
-    def _load_license_keys(self, botconfiguration):
-        if self.configuration.client_configuration.license_keys is not None:
-            self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
-        else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No client configuration setting for license_keys")
+    def get_license_keys(self):
+        return
 
     def initiate_logging(self, arguments):
         if arguments.logging is not None:
@@ -154,12 +157,10 @@ class BotClient(ResponseLogger):
             print("No configuration file specified, using defaults only !")
             self._configuration = ProgramyConfiguration(self.get_client_configuration())
 
-    def get_license_keys(self):
-        return
-
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)
         client_context.bot = self._bot_factory.select_bot()
+        client_context.brain = client_context.bot._brain_factory.select_brain()
         return client_context
 
     def run(self):

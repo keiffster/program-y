@@ -52,6 +52,9 @@ class MockSocketBotClient(SocketBotClient):
     def create_socket_connection(self, host, port, queue, max_buffer):
         return SocketConnection(host, port, queue, max_buffer, factory=MockSocketFactory(self._socket))
 
+    def ask_question(self, question):
+        return self.response
+
 
 class SocketBotClientTests(unittest.TestCase):
 
@@ -82,3 +85,19 @@ class SocketBotClientTests(unittest.TestCase):
         client = MockSocketBotClient(mock_socket, arguments)
         client.wait_and_answer()
         self.assertEquals('{"result": "OK", "answer": "", "userid": "user1234"}', mock_socket._send)
+
+    def test_wait_and_answer_no_response(self):
+        arguments = MockArgumentParser()
+        mock_socket = MockSocket()
+        mock_socket._recv =  ''
+        client = MockSocketBotClient(mock_socket, arguments)
+        client.wait_and_answer()
+        self.assertEquals('{"result": "ERROR", "message": "Expecting value: line 1 column 1 (char 0)"}', mock_socket._send)
+
+    def test_wait_and_answer_invalid_response(self):
+        arguments = MockArgumentParser()
+        mock_socket = MockSocket()
+        mock_socket._recv =  'This is rubbish'
+        client = MockSocketBotClient(mock_socket, arguments)
+        client.wait_and_answer()
+        self.assertEquals('{"result": "ERROR", "message": "Expecting value: line 1 column 1 (char 0)"}', mock_socket._send)

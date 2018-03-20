@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 #
-# curl 'http://localhost:5000/api/v1.0/ask?question=hello+world&sessionid=1234567890'
+# curl 'http://localhost:5000/api/v1.0/ask?question=hello+world&userid=1234567890'
 #
 
 
@@ -57,13 +57,20 @@ class SanicRestBotClient(RestBotClient):
             self.server_abort("'question' missing from rest_request", 500)
         return rest_request.raw_args['question']
 
-    def get_sessionid(self, rest_request):
-        if 'sessionid' not in rest_request.raw_args or rest_request.raw_args['sessionid'] is None:
-            print("'sessionid' missing from rest_request")
+    def get_userid(self, rest_request):
+        if 'userid' not in rest_request.raw_args or rest_request.raw_args['userid'] is None:
+            print("'userid' missing from rest_request")
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'sessionid' missing from rest_request")
-            self.server_abort("'sessionid' missing from rest_request", 500)
-        return rest_request.raw_args['sessionid']
+                logging.error("'userid' missing from rest_request")
+            self.server_abort("'userid' missing from rest_request", 500)
+        return rest_request.raw_args['userid']
+
+    def create_response(self, response, status):
+        return json(response, status=status)
+
+    def dump_request(self, request):
+        pass
+
 
 REST_CLIENT = None
 
@@ -73,7 +80,7 @@ APP = Sanic()
 @APP.route('/api/v1.0/ask', methods=['GET'])
 async def ask(request):
     response, status = REST_CLIENT.process_request(request)
-    return json(response, status=status)
+    return REST_CLIENT.create_response(response, status=status)
 
 if __name__ == '__main__':
 

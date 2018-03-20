@@ -9,7 +9,7 @@ from programytest.clients.arguments import MockArgumentParser
 class MockFlaskRestBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
-        FlaskRestBotClient.__init__(self, argument_parser)
+        FlaskRestBotClient.__init__(self, "flask", argument_parser)
         self.aborted = False
         self.answer = None
         self.ask_question_exception = False
@@ -18,7 +18,7 @@ class MockFlaskRestBotClient(FlaskRestBotClient):
         self.aborted = True
         raise Exception("Pretending to abort!")
 
-    def ask_question(self, sessionid, question, responselogger=None):
+    def ask_question(self, userid, question, responselogger=None):
         if self.ask_question_exception is True:
             raise Exception("Something bad happened")
         return self.answer
@@ -28,12 +28,12 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_rest_client_init(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
 
     def test_verify_api_key_usage_inactive(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
         client.configuration.client_configuration._use_api_keys = False
         request = unittest.mock.Mock()
@@ -41,7 +41,7 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_get_api_key(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
 
         request = unittest.mock.Mock()
         request.args = {}
@@ -51,7 +51,7 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_verify_api_key_usage_active(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
         client.configuration.client_configuration._use_api_keys = True
         client.configuration.client_configuration._api_key_file = os.path.dirname(__file__) + os.sep + ".." + os.sep + ".." + os.sep + "api_keys.txt"
@@ -86,7 +86,7 @@ class RestBotClientTests(unittest.TestCase):
 
     def test_get_question(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
 
         request = unittest.mock.Mock()
@@ -122,18 +122,18 @@ class RestBotClientTests(unittest.TestCase):
             self.assertEquals("Hello", client.get_question(request))
         self.assertTrue(client.aborted)
 
-    def test_get_sessionid(self):
+    def test_get_userid(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
 
         request = unittest.mock.Mock()
         request.args = {}
-        request.args['sessionid'] = '1234567890'
+        request.args['userid'] = '1234567890'
 
-        self.assertEquals("1234567890", client.get_sessionid(request))
+        self.assertEquals("1234567890", client.get_userid(request))
 
-    def test_get_sessionid_no_sessionid(self):
+    def test_get_userid_no_userid(self):
         arguments = MockArgumentParser()
         client = MockFlaskRestBotClient(arguments)
         self.assertIsNotNone(client)
@@ -143,42 +143,42 @@ class RestBotClientTests(unittest.TestCase):
 
         self.assertFalse(client.aborted)
         with self.assertRaises(Exception):
-            self.assertEquals("1234567890", client.get_sessionid(request))
+            self.assertEquals("1234567890", client.get_userid(request))
         self.assertTrue(client.aborted)
 
-    def test_get_sessionid_none_sessionid(self):
+    def test_get_userid_none_userid(self):
         arguments = MockArgumentParser()
         client = MockFlaskRestBotClient(arguments)
         self.assertIsNotNone(client)
 
         request = unittest.mock.Mock()
         request.args = {}
-        request.args['sessionid'] = None
+        request.args['userid'] = None
 
         self.assertFalse(client.aborted)
         with self.assertRaises(Exception):
-            self.assertEquals("1234567890", client.get_sessionid(request))
+            self.assertEquals("1234567890", client.get_userid(request))
         self.assertTrue(client.aborted)
 
     def test_format_success_response(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
 
         response = client.format_success_response("1234567890", "Hello", "Hi")
         self.assertIsNotNone(response)
-        self.assertEquals("1234567890", response['sessionid'])
+        self.assertEquals("1234567890", response['userid'])
         self.assertEquals("Hello", response['question'])
         self.assertEquals("Hi", response['answer'])
 
     def test_format_error_response(self):
         arguments = MockArgumentParser()
-        client = FlaskRestBotClient(arguments)
+        client = FlaskRestBotClient("flask", arguments)
         self.assertIsNotNone(client)
 
         response = client.format_error_response("1234567890", "Hello", "Something Bad")
         self.assertIsNotNone(response)
-        self.assertEquals("1234567890", response['sessionid'])
+        self.assertEquals("1234567890", response['userid'])
         self.assertEquals("Hello", response['question'])
         self.assertEquals("", response['answer'])
         self.assertEquals("Something Bad", response['error'])
@@ -192,13 +192,13 @@ class RestBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args = {}
         request.args['question'] = 'Hello'
-        request.args['sessionid'] = '1234567890'
+        request.args['userid'] = '1234567890'
 
         client.answer = "Hi"
 
         response, status = client.process_request(request)
         self.assertIsNotNone(response)
-        self.assertEquals("1234567890", response['sessionid'])
+        self.assertEquals("1234567890", response['userid'])
         self.assertEquals("Hello", response['question'])
         self.assertEquals("Hi", response['answer'])
 
@@ -211,7 +211,7 @@ class RestBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args = {}
         request.args['question'] = 'Hello'
-        request.args['sessionid'] = '1234567890'
+        request.args['userid'] = '1234567890'
 
         client.answer = "Hi"
 
@@ -228,7 +228,7 @@ class RestBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args = {}
         request.args['question'] = 'Hello'
-        request.args['sessionid'] = '1234567890'
+        request.args['userid'] = '1234567890'
 
         client.answer = "Hi"
         client.ask_question_exception = True

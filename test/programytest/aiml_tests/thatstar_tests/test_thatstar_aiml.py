@@ -19,9 +19,8 @@ class ThatStarTestClient(TestClient):
 class ThatStarAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(ThatStarTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = ThatStarTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_single_thatstar_word_default(self):
         # We need to ask 2 questions, first we get a response which is stored in the <that> clause, we then return it

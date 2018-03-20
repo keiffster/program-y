@@ -6,12 +6,12 @@ import json
 host =      sys.argv[1]
 port =      int(sys.argv[2])
 question =  sys.argv[3]
-clientid =  sys.argv[4]
+userid =  sys.argv[4]
 max_size =  1024
 if len(sys.argv) == 6:
     max_size = sys.argv[5]
 
-payload = {"question": question, "clientid": clientid}
+payload = {"question": question, "userid": userid}
 json_data = json.dumps(payload)
 
 # create a socket object

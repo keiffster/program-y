@@ -34,5 +34,5 @@ class TwilioConfigurationTests(unittest.TestCase):
         twilio_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", twilio_config.host)
-        self.assertEqual(5001, twilio_config.port)
+        self.assertEqual(80, twilio_config.port)
         self.assertEqual(False, twilio_config.debug)

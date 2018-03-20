@@ -22,9 +22,12 @@ from programy.clients.restful.client import RestBotClient
 
 class FlaskRestBotClient(RestBotClient):
 
-    def __init__(self, argument_parser=None):
-        RestBotClient.__init__(self, "FlaskRest", argument_parser)
+    def __init__(self, id, argument_parser=None):
+        RestBotClient.__init__(self, id, argument_parser)
         self.initialise()
+
+    def get_description(self):
+        return 'ProgramY AIML2.0 Flask REST Client'
 
     def get_api_key(self, rest_request):
         if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
@@ -34,6 +37,15 @@ class FlaskRestBotClient(RestBotClient):
     def server_abort(self, error_code):
         abort(error_code)
 
+    def ask_question(self, userid, question):
+        response = ""
+        try:
+            client_context = self.create_client_context(userid)
+            response = self.bot.ask_question(client_context, question, responselogger=self)
+        except Exception as e:
+            print(e)
+        return response
+
     def get_question(self, rest_request):
         if 'question' not in rest_request.args or rest_request.args['question'] is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
@@ -41,12 +53,53 @@ class FlaskRestBotClient(RestBotClient):
             self.server_abort(400)
         return rest_request.args['question']
 
-    def get_sessionid(self, rest_request):
-        if 'sessionid' not in rest_request.args or rest_request.args['sessionid'] is None:
+    def get_userid(self, rest_request):
+        if 'userid' not in rest_request.args or rest_request.args['userid'] is None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'sessionid' missing from request")
+                logging.error("'userid' missing from request")
             self.server_abort(400)
-        return rest_request.args['sessionid']
+        return rest_request.args['userid']
+
+    def create_response(self, response, status):
+        if self.configuration.client_configuration.debug is True:
+            self.dump_request(request)
+
+        return make_response(jsonify({'response': response}, status))
+
+    def run(self, flask):
+
+        print("%s Client running on %s:%s" % (self.id, self.configuration.client_configuration.host,
+                                              self.configuration.client_configuration.port))
+
+        if self.configuration.client_configuration.debug is True:
+            print("%s Client running in debug mode" % self.id)
+
+        if self.configuration.client_configuration.ssl_cert_file is not None and \
+                self.configuration.client_configuration.ssl_key_file is not None:
+            context = (self.configuration.client_configuration.ssl_cert_file,
+                       self.configuration.client_configuration.ssl_key_file)
+
+            print("%s Client running in https mode" % self.id)
+            flask.run(host=self.configuration.client_configuration.host,
+                      port=self.configuration.client_configuration.port,
+                      debug=self.configuration.client_configuration.debug,
+                      ssl_context=context)
+        else:
+            print("%s Client running in http mode, careful now !" % self.id)
+            flask.run(host=self.configuration.client_configuration.host,
+                      port=self.configuration.client_configuration.port,
+                      debug=self.configuration.client_configuration.debug)
+
+    def dump_request(self, request):
+        if request.method == 'POST':
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug(str(request))
+        elif request.method == 'GET':
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug(str(request))
+        else:
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("restsclient.dump_request(), only GET and POST supported!")
 
 REST_CLIENT = None
 
@@ -56,35 +109,10 @@ APP = Flask(__name__)
 @APP.route('/api/v1.0/ask', methods=['GET'])
 def ask():
     response, status = REST_CLIENT.process_request(request)
-    return make_response(jsonify({'response': response}, status))
+    return REST_CLIENT.create_response(request, status)
 
 if __name__ == '__main__':
 
     print("Loading, please wait...")
     REST_CLIENT = FlaskRestBotClient()
-
-    def run():
-
-        print("REST Client running on %s:%s" % (REST_CLIENT.configuration.client_configuration.host,
-                                                REST_CLIENT.configuration.client_configuration.port))
-
-        if REST_CLIENT.configuration.client_configuration.debug is True:
-            print("REST Client running in debug mode")
-
-        if REST_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-           REST_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-            context = (REST_CLIENT.configuration.client_configuration.ssl_cert_file,
-                       REST_CLIENT.configuration.client_configuration.ssl_key_file)
-
-            print("REST Client running in https mode")
-            APP.run(host=REST_CLIENT.configuration.client_configuration.host,
-                    port=REST_CLIENT.configuration.client_configuration.port,
-                    debug=REST_CLIENT.configuration.client_configuration.debug,
-                    ssl_context=context)
-        else:
-            print("REST Client running in http mode, careful now !")
-            APP.run(host=REST_CLIENT.configuration.client_configuration.host,
-                    port=REST_CLIENT.configuration.client_configuration.port,
-                    debug=REST_CLIENT.configuration.client_configuration.debug)
-
-    run()
+    REST_CLIENT.run()

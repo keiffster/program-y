@@ -22,13 +22,19 @@ class ConsoleConfiguration(ClientConfigurationData):
     def __init__(self):
         ClientConfigurationData.__init__(self, "console")
         self._default_userid = "console"
+        self._prompt = ">>>"
 
     @property
     def default_userid(self):
         return self._default_userid
 
+    @property
+    def prompt(self):
+        return self._prompt
+
     def load_configuration(self, configuration_file, bot_root):
         console = configuration_file.get_section(self.section_name)
         if console is not None:
-            self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="console")
+            self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="Console")
+            self._prompt = configuration_file.get_option(console, "prompt", missing_value=">>>")
         super(ConsoleConfiguration, self).load_configuration(configuration_file, console, bot_root)

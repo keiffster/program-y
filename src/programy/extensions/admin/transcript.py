@@ -23,16 +23,16 @@ from programy.extensions.base import Extension
 class TranscriptAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, client_context, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Transcript Admin - [%s]", data)
 
-        show_props = True if data == "PROPERTUES" else False
+        show_props = True if data == "PROPERTIES" else False
 
         transcript = ""
 
-        if bot.has_conversation(clientid):
-            conversation = bot.conversation(clientid)
+        if client_context.bot.has_conversation(client_context):
+            conversation = client_context.bot.conversation(client_context)
 
             transcript += "Questions:<br /><ul>"
             for question in conversation.questions:

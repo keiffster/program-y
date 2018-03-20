@@ -35,7 +35,7 @@ class Service(object):
         pass
 
     @abstractmethod
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
         """
         Never knowingly Implemented
         """

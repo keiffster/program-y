@@ -14,10 +14,37 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
 
 from programy.clients.client import BotClient
+
 
 class PollingBotClient(BotClient):
 
     def __init__(self, id, argument_parser=None):
         BotClient.__init__(self, id, argument_parser=argument_parser)
+
+    def connect(self):
+        return True
+
+    def poll_and_answer(self):
+        raise NotImplementedError("You must override this and implement the logic poll for messages and send answers back")
+
+    def sleep(self, time):
+        time.sleep(time)
+
+    def run(self):
+        if self.connect():
+            self.display_connected_message()
+
+            self._running = True
+            while self._running:
+                self._running = self.poll_and_answer()
+
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                logging.debug("Exiting gracefully...")
+
+        else:
+            print("Connection failed. Exception traceback printed above.")
+
+

@@ -42,7 +42,7 @@ class WikipediaService(Service):
         else:
             self._api = api
 
-    def ask_question(self, bot, clientid: str, question: str):
+    def ask_question(self, client_context, question: str):
         try:
             words  = question.split()
             question = " ".join(words[1:])

@@ -67,93 +67,39 @@ class MockBot(Bot):
 class MockTwitterBotClient(TwitterBotClient):
 
     def __init__(self, argument_parser=None):
+        self._response = None
         TwitterBotClient.__init__(self, argument_parser)
-        self._use_polling_real = True
-        self._polled = False
 
     def _create_api(self, consumer_key, consumer_secret, access_token, access_token_secret):
         return MockTwitterApi()
 
-    def _use_polling(self):
-        if self._use_polling_real:
-            super(MockTwitterBotClient, self).use_polling(self)
-        else:
-            self._polled = True
+    def load_license_keys(self):
+        self._license_keys.add_key("TWITTER_USERNAME", "username")
+        self._license_keys.add_key("TWITTER_CONSUMER_KEY", "consumer_key")
+        self._license_keys.add_key("TWITTER_CONSUMER_SECRET", "consumer_secret")
+        self._license_keys.add_key("TWITTER_ACCESS_TOKEN", "access_token")
+        self._license_keys.add_key("TWITTER_ACCESS_TOKEN_SECRET", "access_secret")
 
-    def create_bot(self):
-        self._bots.append(MockBot(BotConfiguration()))
-
+    def ask_question(self, userid, question):
+        return self._response
 
 class TwitterBotClientTests(unittest.TestCase):
 
-    def test_twitter_client(self):
+    def test_twitter_init(self):
         arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
-        self.assertIsNotNone(client)
+        client = MockTwitterBotClient(arguments)
 
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), TwitterConfiguration)
+        self.assertEquals("ProgramY AIML2.0 Twitter Client", client.get_description())
 
-    def test_twitter_get_username(self):
-        arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-        """)
-
-        client._get_username(client.bot)
-        self.assertEquals("Username", client._username)
+        self.assertEquals("username", client._username)
         self.assertEquals(8, client._username_len)
 
-    def test_twitter_get_consumer_secrets(self):
-        arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-        """)
-
-        consumer_key, consumer_secret = client._get_consumer_secrets(client.bot)
-        self.assertIsNotNone(consumer_key)
-        self.assertEquals("Key", consumer_key)
-        self.assertIsNotNone(consumer_secret)
-        self.assertEquals("Secret", consumer_secret)
-
-    def test_twitter_get_access_secrets(self):
-        arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        access_token, access_token_secret = client._get_access_secrets(client.bot)
-        self.assertIsNotNone(access_token)
-        self.assertEquals("Access", access_token)
-        self.assertIsNotNone(access_token_secret)
-        self.assertEquals("Secret", access_token_secret)
-
-    def test_twitter_initialise(self):
-        arguments = MockArgumentParser()
-        client = MockTwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
-        self.assertIsNotNone(client._api)
+        self.assertEquals("consumer_key", client._consumer_key)
+        self.assertEquals("consumer_secret", client._consumer_secret)
+        self.assertEquals("access_token", client._access_token)
+        self.assertEquals("access_secret", client._access_token_secret)
 
     #############################################################################################
     # Direct Messages
@@ -162,16 +108,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         client._api._mock_direct_messages = [MockMessage(1, "Message1", 1)]
 
@@ -182,16 +119,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
 
@@ -202,18 +130,8 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
-
-        client.bot.answer = "Hiya"
         client._process_direct_message_question("userid1", "Hello")
 
         self.assertEqual(1, len(client._api._messages_sent_to))
@@ -223,18 +141,8 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
-
-        client.bot.answer = "Hiya"
         client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
 
         last_message_id = client._process_direct_messages(-1)
@@ -247,16 +155,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         friends = [1, 2, 3, 4]
         followers_ids = [1, 2, 4]
@@ -270,16 +169,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         follower1 = unittest.mock.Mock()
         follower1.follow.return_value = None
@@ -297,16 +187,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         follower1 = unittest.mock.Mock()
         follower1.follow.return_value = None
@@ -330,40 +211,22 @@ class TwitterBotClientTests(unittest.TestCase):
     #############################################################################################
     # Status (Tweets)
 
-    def test_get_statuses_no(self):
+    def test_get_statuses_wrong_number(self):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         client._api._statuses = []
 
         statuses = client._get_statuses(-1)
         self.assertIsNotNone(statuses)
 
-    def test_get_statuses_no(self):
+    def test_get_statuses_excessive_number(self):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
+        self.assertTrue(client.connect())
 
         client._api._statuses = []
 
@@ -374,6 +237,7 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
         client._username = "keiffster"
         client._username_len = 9
@@ -386,18 +250,10 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
+        client._response = "Hiya"
 
-        client._initialise()
-
-        client.bot._answer = "Hiya"
         client._username = "keiffster"
         client._username_len = 9
 
@@ -413,19 +269,10 @@ class TwitterBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
+        client._response = "Hiya"
 
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
-
-        client.bot._answer = "Hiya"
         client._username = "Keiffster"
         client._username_len = 9
 
@@ -460,8 +307,9 @@ class TwitterBotClientTests(unittest.TestCase):
 
     def test_message_ids_save_load(self):
         arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
+        client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
         client.configuration.client_configuration._storage = 'file'
         if os.name == 'posix':
@@ -484,30 +332,12 @@ class TwitterBotClientTests(unittest.TestCase):
     #############################################################################################
     # Execution
 
-    def test_twitter_user_streaming(self):
-        arguments = MockArgumentParser()
-        client = TwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        with self.assertRaises(Exception):
-            client._use_streaming()
-
     def test_poll(self):
         arguments = MockArgumentParser()
         client = MockTwitterBotClient(arguments)
         self.assertIsNotNone(client)
+        self.assertTrue(client.connect())
 
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client._initialise()
-
-        client.bot.answer = "Hiya"
         client._username = "Keiffster"
         client._username_len = 9
 
@@ -518,41 +348,3 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._poll( -1, -1)
 
-    def test_run_with_streaming(self):
-        arguments = MockArgumentParser()
-        client = MockTwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client.configuration.client_configuration._streaming = True
-        client.configuration.client_configuration._polling = False
-
-        with self.assertRaises(Exception):
-            client._run()
-
-    def test_run_with_polling(self):
-        arguments = MockArgumentParser()
-        client = MockTwitterBotClient(arguments)
-        self.assertIsNotNone(client)
-
-        client.bot.license_keys.load_license_key_data("""
-            TWITTER_USERNAME = Username
-            TWITTER_CONSUMER_KEY = Key
-            TWITTER_CONSUMER_SECRET = Secret
-            TWITTER_ACCESS_TOKEN = Access
-            TWITTER_ACCESS_TOKEN_SECRET = Secret
-        """)
-
-        client.configuration.client_configuration._streaming = False
-        client.configuration.client_configuration._polling = True
-
-        client._use_polling_real = False
-        client.run()
-        self.assertTrue(client._polled)

@@ -19,9 +19,8 @@ class MultipleSentencesTestClient(TestClient):
 class MultipleSentencesAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(MultipleSentencesTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = MultipleSentencesTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_multiple_questions(self):
         response = self._client_context.bot.ask_question(self._client_context, "TICKET SET 01453675. TICKET ANALYSE")

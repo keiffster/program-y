@@ -19,9 +19,8 @@ class PatternsTestClient(TestClient):
 class PatternsAIMLTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(PatternsTestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = PatternsTestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_basic2_1(self):
         response = self._client_context.bot.ask_question(self._client_context,  "A B")

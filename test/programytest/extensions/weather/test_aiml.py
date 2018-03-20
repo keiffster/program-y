@@ -60,11 +60,9 @@ class WeathersTestsClient(TestClient):
 
 class WeathersAIMLTests(unittest.TestCase):
 
-
     def setUp (self):
-        self._client_context = ClientContext(WeathersTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = WeathersTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_weather(self):
         MockWeatherExtension.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"

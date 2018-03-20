@@ -16,6 +16,8 @@ class KikConfigurationTests(unittest.TestCase):
           host: 127.0.0.1
           port: 5000
           debug: false
+          unknown_command: Sorry, that is not a command I have been taught yet!
+          unknown_command_srai: YKIK_UNKNOWN_COMMAND
         """, ConsoleConfiguration(), ".")
 
         kik_config = KikConfiguration()
@@ -26,6 +28,8 @@ class KikConfigurationTests(unittest.TestCase):
         self.assertEqual("127.0.0.1", kik_config.host)
         self.assertEqual(5000, kik_config.port)
         self.assertEqual(False, kik_config.debug)
+        self.assertEquals(kik_config.unknown_command, "Sorry, that is not a command I have been taught yet!")
+        self.assertEquals(kik_config.unknown_command_srai, "YKIK_UNKNOWN_COMMAND")
 
     def test_init_no_values(self):
         yaml = YamlConfigurationFile()
@@ -40,5 +44,5 @@ class KikConfigurationTests(unittest.TestCase):
         self.assertEqual("program-y", kik_config.bot_name)
         self.assertEqual("https://localhost:5000", kik_config.webhook)
         self.assertEqual("0.0.0.0", kik_config.host)
-        self.assertEqual(5000, kik_config.port)
+        self.assertEqual(80, kik_config.port)
         self.assertEqual(False, kik_config.debug)

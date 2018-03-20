@@ -23,15 +23,15 @@ from flask import Flask, request
 from twilio.rest import Client
 from twilio.twiml.messaging_response import MessagingResponse
 
-from programy.clients.client import BotClient
+from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.twilio.config import TwilioConfiguration
 
 TWILIO_CLIENT = None
 
-class TwilioBotClient(BotClient):
+class TwilioBotClient(FlaskRestBotClient):
     
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, 'twilio', argument_parser)
+        FlaskRestBotClient.__init__(self, 'twilio', argument_parser)
 
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("Twilio Client is running....")
@@ -50,19 +50,15 @@ class TwilioBotClient(BotClient):
         return 'ProgramY AIML2.0 Twilio Client'
 
     def get_license_keys(self):
-        self._account_sid = self.bot.license_keys.get_key("TWILIO_ACCOUNT_SID")
-        self._auth_token = self.bot.license_keys.get_key("TWILIO_AUTH_TOKEN")
-        self._from_number = self.bot.license_keys.get_key("TWILIO_FROM_NUMBER")
+        self._account_sid = self.license_keys.get_key("TWILIO_ACCOUNT_SID")
+        self._auth_token = self.license_keys.get_key("TWILIO_AUTH_TOKEN")
+        self._from_number = self.license_keys.get_key("TWILIO_FROM_NUMBER")
 
     def get_client_configuration(self):
         return TwilioConfiguration()
 
     def create_twilio_client(self):
         return Client(self._account_sid, self._auth_token)
-
-    def ask_question(self, sessionid, question):
-        response = self.bot.ask_question(sessionid, question, responselogger=self)
-        return response
 
     def create_response(self, client_number, answer):
         response = MessagingResponse()
@@ -71,6 +67,10 @@ class TwilioBotClient(BotClient):
         return response_str
 
     def receive_message(self, request):
+
+        if self.configuration.client_configuration.debug is True:
+            self.dump_request(request)
+
         if request.method == 'POST':
             client_number = request.form['From']
             question = request.form['Body']
@@ -90,43 +90,20 @@ class TwilioBotClient(BotClient):
 
         return response
 
+
+TWILIO_CLIENT = None
 APP = Flask(__name__)
 
-#We will receive messages that Twilio sends our bot at this endpoint
-@APP.route("/sms", methods=['POST'])
+
+@APP.route("/api/twilio/v1.0/ask", methods=['POST'])
 def receive_message():
     try:
         return TWILIO_CLIENT.receive_message(request)
     except Exception as e:
         if logging.getLogger().isEnabledFor(logging.ERROR):
             logging.exception(e)
-        return ""
+
 
 if __name__ == "__main__":
-
     TWILIO_CLIENT = TwilioBotClient()
-
-    print("Twilio Client running on %s:%s, receiving on %s" % (TWILIO_CLIENT.configuration.client_configuration.host,
-                                                             TWILIO_CLIENT.configuration.client_configuration.port,
-                                                             TWILIO_CLIENT.from_number))
-
-
-    if TWILIO_CLIENT.configuration.client_configuration.debug is True:
-        print("Twilio Client running in debug mode")
-
-    if TWILIO_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-            TWILIO_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-        context = (TWILIO_CLIENT.configuration.client_configuration.ssl_cert_file,
-                   TWILIO_CLIENT.configuration.client_configuration.ssl_key_file)
-
-        print("Twilio Client running in https mode")
-        APP.run(host=TWILIO_CLIENT.configuration.client_configuration.host,
-                port=TWILIO_CLIENT.configuration.client_configuration.port,
-                debug=TWILIO_CLIENT.configuration.client_configuration.debug,
-                ssl_context=context)
-    else:
-        print("Twilio Client running in http mode, careful now !")
-        APP.run(host=TWILIO_CLIENT.configuration.client_configuration.host,
-                port=TWILIO_CLIENT.configuration.client_configuration.port,
-                debug=TWILIO_CLIENT.configuration.client_configuration.debug)
-
+    TWILIO_CLIENT.run()

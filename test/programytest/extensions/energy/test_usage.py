@@ -8,7 +8,8 @@ from programytest.aiml_tests.client import TestClient
 class EnergyUsageExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        self.context = client.create_client_context("testid")
 
     def test_usage(self):
 

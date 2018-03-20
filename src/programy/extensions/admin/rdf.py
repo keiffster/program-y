@@ -23,14 +23,14 @@ from programy.extensions.base import Extension
 class RDFAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, bot, clientid, data):
+    def execute(self, client_context, data):
         if logging.getLogger().isEnabledFor(logging.DEBUG):
             logging.debug("RDF Admin - [%s]", data)
 
         rdf = ""
         segments = data.split()
         if segments[0] == 'SUBJECTS':
-            subjects = bot.brain.rdf.subjects()
+            subjects = client_context.brain.rdf.subjects()
             if segments[1] == 'LIST':
                 rdf += "<ul>"
                 for subject in subjects:
@@ -41,7 +41,7 @@ class RDFAdminExtension(Extension):
 
         elif segments[0] == "PREDICATES":
             subject = segments[1]
-            predicates = bot.brain.rdf.predicates(subject)
+            predicates = client_context.brain.rdf.predicates(subject)
             rdf += "<ul>"
             for predicate in predicates:
                 rdf += "<li>%s</li>" % predicate
@@ -50,7 +50,7 @@ class RDFAdminExtension(Extension):
         elif segments[0] == "OBJECT":
             subject = segments[1]
             predicate = segments[2]
-            objects =  bot.brain.rdf.objects(subject, predicate)
+            objects =  client_context.brain.rdf.objects(subject, predicate)
             rdf += "<ul>"
             for object in objects:
                 rdf += "<li>%s</li>" % object

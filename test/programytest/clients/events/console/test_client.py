@@ -4,6 +4,7 @@ from programy.clients.events.console.client import ConsoleBotClient
 
 from programytest.clients.arguments import MockArgumentParser
 
+
 class MockConsoleBotClient(ConsoleBotClient):
 
     def __init__(self, argument_parser=None):
@@ -26,7 +27,7 @@ class MockConsoleBotClient(ConsoleBotClient):
         self.response += response
 
     def ask_question(self, question):
-        return self.question
+        return self.response
 
     def process_question_answer(self, client_context):
         if self.process_question_answer_keyboard_interrupt is True:
@@ -51,12 +52,14 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
         self.assertEqual(client.id, "Console")
+        self.assertEqual('ProgramY AIML2.0 Console Client', client.get_description())
 
     def test_get_question(self):
         arguments = MockArgumentParser()
         client = ConsoleBotClient(arguments)
         self.assertIsNotNone(client)
-        question = client.get_question(input_func=mock_input_func)
+        context = client.create_client_context("console")
+        question = client.get_question(context, input_func=mock_input_func)
         self.assertEquals("Hello", question)
 
     def test_display_response(self):

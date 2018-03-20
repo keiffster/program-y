@@ -10,9 +10,8 @@ from programytest.aiml_tests.client import TestClient
 class URLOutOfBandProcessorTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(TestClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = TestClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_processor_xml_parsing(self):
         oob_processor = URLOutOfBandProcessor()

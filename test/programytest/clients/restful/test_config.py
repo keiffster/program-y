@@ -19,13 +19,12 @@ class RestConfigurationTests(unittest.TestCase):
           api_key_file: apikeys.txt
         """, ConsoleConfiguration(), ".")
 
-        rest_config = RestConfiguration()
+        rest_config = RestConfiguration("rest")
         rest_config.load_configuration(yaml, ".")
 
         self.assertEqual("127.0.0.1", rest_config.host)
         self.assertEqual(5000, rest_config.port)
         self.assertEqual(False, rest_config.debug)
-        self.assertEqual(4, rest_config.workers)
         self.assertEqual(False, rest_config.use_api_keys)
         self.assertEqual("apikeys.txt", rest_config.api_key_file)
 
@@ -36,11 +35,10 @@ class RestConfigurationTests(unittest.TestCase):
         rest:
         """, ConsoleConfiguration(), ".")
 
-        rest_config = RestConfiguration()
+        rest_config = RestConfiguration("rest")
         rest_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", rest_config.host)
         self.assertEqual(80, rest_config.port)
         self.assertEqual(False, rest_config.debug)
-        self.assertEqual(4, rest_config.workers)
         self.assertEqual(False, rest_config.use_api_keys)

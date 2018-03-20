@@ -30,7 +30,8 @@ class MockGeoCodeExtension(GeoCodeExtension):
 class GeoCodeExtensionTests(unittest.TestCase):
 
     def setUp(self):
-        self.context = ClientContext(TestClient(), "testid")
+        client = TestClient()
+        self.context = client.create_client_context("testid")
 
     def test_geocode_postcode1(self):
         filename = os.path.dirname(__file__) +  os.sep + "google_latlong.json"

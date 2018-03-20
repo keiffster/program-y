@@ -19,9 +19,8 @@ class SurveyTestsClient(TestClient):
 class SurveyAIMLTests(unittest.TestCase):
 
     def setUp (self):
-        self._client_context = ClientContext(SurveyTestsClient(), "testid")
-        self._client_context.bot = self._client_context.client.bot
-        self._client_context.brain = self._client_context.bot.brain
+        client = SurveyTestsClient()
+        self._client_context = client.create_client_context("testid")
 
     def test_survey(self):
         # Question 1

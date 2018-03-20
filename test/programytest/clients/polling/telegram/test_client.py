@@ -1,8 +1,9 @@
-import unittest
+import unittest.mock
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler
 
 from programy.clients.polling.telegram.client import TelegramBotClient
+from programy.clients.polling.telegram.client import start, message, unknown
 from programy.clients.polling.telegram.config import TelegramConfiguration
 
 from programytest.clients.arguments import MockArgumentParser
@@ -52,6 +53,7 @@ class MockDispatcher(object):
 class MockUpdater(object):
 
     def __init__(self):
+        self.dispatcher = MockDispatcher()
         self._ran = False
         self._stopped = False
 
@@ -63,29 +65,209 @@ class MockUpdater(object):
         self._stopped = True
 
 
+class MockMessage(object):
+
+    def __init__(self, chat_id, text):
+        self.chat_id = chat_id
+        self.text = text
+
+
+class MockUpdate(object):
+
+    def __init__(self, message):
+        self.message = message
+
+
+class MockTelegramBotClient(TelegramBotClient):
+
+    def __init__(self, argument_parser=None):
+        self._response = None
+        TelegramBotClient.__init__(self, argument_parser)
+
+    def get_license_keys(self):
+         self._telegram_token = "TELEGRAM_TOKEN"
+
+    def create_updater(self, telegram_token):
+        self._updater = MockUpdater()
+
+    def ask_question(self, userid, question):
+        return self.response
+
+    def get_unknown_response(self, userid):
+        return self.response
+
+    def get_initial_question(self, update):
+        return self.response
+
+
 class TelegramBotClientTests(unittest.TestCase):
 
-    def test_telegram_bot_client_init(self):
+    def test_telegram_client_init(self):
         arguments = MockArgumentParser()
-        bot_client = TelegramBotClient(arguments)
-        self.assertIsNotNone(bot_client)
-        self.assertEquals(bot_client.id, "telegram")
-        self.assertIsInstance(bot_client.get_client_configuration(), TelegramConfiguration)
-
-    def test_get_token(self):
-        mock_keys = MockLicenseKeys({"TELEGRAM_TOKEN": "TEST123"})
-        self.assertEquals("TEST123", TelegramBotClient.get_token(mock_keys))
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+        self.assertIsInstance(client.get_client_configuration(), TelegramConfiguration)
+        self.assertEquals(client.id, "telegram")
+        self.assertEquals('ProgramY AIML2.0 Telegram Client', client.get_description())
+        self.assertEquals("TELEGRAM_TOKEN", client._telegram_token)
 
     def test_register_handlers(self):
-        dispatcher = MockDispatcher()
-        TelegramBotClient.register_handlers(dispatcher)
-        self.assertEquals(3, len(dispatcher._handlers))
-        self.assertIsInstance(dispatcher._handlers[0], CommandHandler)
-        self.assertIsInstance(dispatcher._handlers[1], MessageHandler)
-        self.assertIsInstance(dispatcher._handlers[2], MessageHandler)
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
 
-    def test_poll_and_process(self):
-        updater = MockUpdater()
-        TelegramBotClient.poll_and_process(updater)
-        self.assertTrue(updater._ran)
+        client.create_updater("TELEGRAM_TOKEN")
 
+        client.register_handlers()
+
+        self.assertEquals(3, len(client._updater.dispatcher._handlers))
+        self.assertIsInstance(client._updater.dispatcher._handlers[0], CommandHandler)
+        self.assertIsInstance(client._updater.dispatcher._handlers[1], MessageHandler)
+        self.assertIsInstance(client._updater.dispatcher._handlers[2], MessageHandler)
+
+    def test_start_no_client(self):
+        TelegramBotClient.TELEGRAM_CLIENT = None
+        mock_bot = unittest.mock.Mock()
+        update = []
+        with self.assertRaises(Exception):
+            start(mock_bot, update)
+
+    def test_start_with_client(self):
+        arguments = MockArgumentParser()
+        TelegramBotClient.TELEGRAM_CLIENT = MockTelegramBotClient(arguments)
+        mock_bot = unittest.mock.Mock()
+        update = []
+        start(mock_bot, update)
+
+    def test_client_start_no_initial_question(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = None
+
+        message = MockMessage("test123", None)
+        update = MockUpdate(message)
+
+        client.start(telegram_bot, update)
+
+        self.assertIsNone(telegram_bot._text)
+
+    def test_client_start(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = "Initial Question"
+
+        message = MockMessage("test123", None)
+        update = MockUpdate(message)
+
+        client.start(telegram_bot, update)
+
+        self.assertEquals("test123", telegram_bot._chat_id)
+        self.assertEquals("Initial Question", telegram_bot._text)
+
+    def test_message_no_client(self):
+        mock_bot = unittest.mock.Mock()
+        update = []
+        with self.assertRaises(Exception):
+            message(mock_bot, update)
+
+    def test_message_with_client(self):
+        arguments = MockArgumentParser()
+        TelegramBotClient.TELEGRAM_CLIENT = MockTelegramBotClient(arguments)
+        mock_bot = unittest.mock.Mock()
+        update = []
+        message(mock_bot, update)
+
+    def test_client_message_no_response(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = None
+
+        message = MockMessage("test123", "Hello")
+        update = MockUpdate(message)
+
+        client.message(telegram_bot, update)
+
+        self.assertIsNone(telegram_bot._text)
+
+    def test_client_message(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = "Hi there"
+
+        message = MockMessage("test123", "Hello")
+        update = MockUpdate(message)
+
+        client.message(telegram_bot, update)
+
+        self.assertEquals("test123", telegram_bot._chat_id)
+        self.assertEquals("Hi there", telegram_bot._text)
+
+    def test_unknown_no_client(self):
+        TelegramBotClient.TELEGRAM_CLIENT = None
+        mock_bot = unittest.mock.Mock()
+        update = []
+        with self.assertRaises(Exception):
+            unknown(mock_bot, update)
+
+    def test_unknown_with_client(self):
+        arguments = MockArgumentParser()
+        TelegramBotClient.TELEGRAM_CLIENT = MockTelegramBotClient(arguments)
+        mock_bot = unittest.mock.Mock()
+        update = []
+        unknown(mock_bot, update)
+
+    def test_client_unknown_no_response(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = None
+
+        message = MockMessage("test123", None)
+        update = MockUpdate(message)
+
+        client.message(telegram_bot, update)
+
+        self.assertIsNone(telegram_bot._text)
+
+    def test_client_unknown(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+
+        client.response = "Unknown Question"
+
+        message = MockMessage("test123", None)
+        update = MockUpdate(message)
+
+        client.message(telegram_bot, update)
+
+        self.assertEquals("test123", telegram_bot._chat_id)
+        self.assertEquals("Unknown Question", telegram_bot._text)
+
+    def test_poll_answer(self):
+        telegram_bot = MockTelegramBot()
+        arguments = MockArgumentParser()
+        client = MockTelegramBotClient(arguments)
+        self.assertIsNotNone(client)
+        client.connect()
+
+        self.assertFalse(client._updater._ran)
+
+        client.poll_and_answer()
+
+        self.assertTrue(client._updater._ran)
