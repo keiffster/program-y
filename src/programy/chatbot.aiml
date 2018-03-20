@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [chatbot.aiml]
+Author: [Keith Sterling]
+Last modified: [20th March 2018]
+
+This AIML file is part of the [ProgramY] [v2.0] chat bot knowledge base.
+
+The [ProgramY] brain is Copyright &copy; [2016-2018] by [Keith Sterling].
+
+The [ProgramY] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+-->
+
+<aiml>
+
+	<category>
+		<pattern>*</pattern>
+		<template>
+		    Hi there, I'm ProgramY a AIML 2.x compliant chat bot. You have successfully installed me
+            and can happily talk to me. Great news!. However right now, I am pretty limited in what I can say.
+            Head over to GitHub and download and configure a brain by following the instructions
+            at https://github.com/keiffster/program-y/wiki. Enjoy and welcome to the world of AIML!
+		</template>
+	</category>
+
+</aiml>
