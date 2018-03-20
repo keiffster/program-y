@@ -103,12 +103,10 @@ class TemplateIntervalNode(TemplateNode):
                        (difference.years, difference.months, difference.days,
                         difference.hours, difference.minutes, difference.seconds)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unknown interval style [%s]", style)
+            logging.error("Unknown interval style [%s]", style)
             resolved = ""
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[INTERVAL] resolved to [%s]", resolved)
+        logging.debug("[INTERVAL] resolved to [%s]", resolved)
         return resolved
 
     def resolve(self, client_context):
@@ -187,16 +185,12 @@ class TemplateIntervalNode(TemplateNode):
             self.parse_text(graph, tail_text)
 
         if self.interval_format is None:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Interval node, format missing, defaulting to 'c%%'!")
+            logging.warning("Interval node, format missing, defaulting to 'c%%'!")
             self.interval_format = "%c"
         if self.style is None:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("style node, format missing, defaulting to 'days'!")
+            logging.warning("style node, format missing, defaulting to 'days'!")
             self.style = "days"
         if self.interval_from is None:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("interval_from node, format missing !")
+            logging.warning("interval_from node, format missing !")
         if self.interval_to is None:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("interval_to node, format missing !")
+            logging.warning("interval_to node, format missing !")

@@ -44,5 +44,4 @@ class BrainNodesConfiguration(BaseSectionConfigurationData):
             if template_nodes is not None:
                 self._template_nodes = self.sub_bot_root(template_nodes, bot_root)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'nodes' section missing from bot config, using to defaults")
+            logging.warning("'nodes' section missing from bot config, using to defaults")

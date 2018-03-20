@@ -63,24 +63,21 @@ class YamlConfigurationFile(BaseConfigurationFile):
         if option_name in section:
             return section[option_name]
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_bool_option(self, section, option_name, missing_value=False):
         if option_name in section:
             return section[option_name]
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
         if option_name in section:
             return section[option_name]
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
     def get_multi_option(self, section, option_name, missing_value=None):
@@ -98,8 +95,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
             return multis
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Missing value for [%s] in config, return default value", option_name)
+            logging.warning("Missing value for [%s] in config, return default value", option_name)
             return [missing_value]
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
@@ -117,6 +113,5 @@ class YamlConfigurationFile(BaseConfigurationFile):
             return multis
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Missing value for [%s] in config, return default value", option_name)
+            logging.warning("Missing value for [%s] in config, return default value", option_name)
             return missing_value

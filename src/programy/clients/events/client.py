@@ -41,8 +41,7 @@ class EventBotClient(BotClient):
     def run(self):
 
         if self.arguments.noloop is False:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Entering conversation loop...")
+            logging.info("Entering conversation loop...")
 
             self.prior_to_run_loop()
 
@@ -51,5 +50,4 @@ class EventBotClient(BotClient):
             self.post_run_loop()
 
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("noloop set to True, exiting...")
+            logging.debug("noloop set to True, exiting...")

@@ -29,8 +29,7 @@ class TemplatePerson2Node(TemplateNode):
     def resolve_to_string(self, client_context):
         string = self.resolve_children_to_string(client_context)
         resolved = client_context.brain.person2s.personalise_string(string)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

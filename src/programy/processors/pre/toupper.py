@@ -26,6 +26,5 @@ class ToUpperPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Making input upper case...")
+        logging.debug("Making input upper case...")
         return word_string.upper()

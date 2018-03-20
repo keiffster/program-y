@@ -42,8 +42,7 @@ class TemplateUniqNode(TemplateTripleNode):
         if values:
             resolved = " ".join(values)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

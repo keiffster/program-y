@@ -98,8 +98,7 @@ class BotConfiguration(BaseContainerConfigurationData):
             self._spelling.load_config_section(configuration_file, bot, bot_root)
             self._conversations.load_config_section(configuration_file, bot, bot_root)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Config section [%s] missing, using default values", self.section_name)
+            logging.warning("Config section [%s] missing, using default values", self.section_name)
 
         self.load_configurations(configuration_file, bot, bot_root)
 
@@ -117,8 +116,7 @@ class BotConfiguration(BaseContainerConfigurationData):
                 config.load_configuration(configuration_file, bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No brain name defined for bot [%s], defaulting to 'brain'." % self.section_name)
+            logging.warning("No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
             brain_name = "brain"
             self._brain_configs[0]._section_name = brain_name
             self._brain_configs[0].load_configuration(configuration_file, bot_root)

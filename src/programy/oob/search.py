@@ -36,11 +36,9 @@ class SearchOutOfBandProcessor(OutOfBandProcessor):
             self._search = oob.text
             return True
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unvalid search oob command - missing search query!")
+            logging.error("Unvalid search oob command - missing search query!")
             return False
 
     def execute_oob_command(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("SearchOutOfBandProcessor: Searching=%s", self._search)
+        logging.info("SearchOutOfBandProcessor: Searching=%s", self._search)
         return "SEARCH"

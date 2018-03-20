@@ -46,23 +46,19 @@ class AlarmOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'message':
                     self._message = child.text
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown child element [%s] in alarm oob", child.tag)
+                    logging.error("Unknown child element [%s] in alarm oob", child.tag)
 
             if self._hour is not None and self._min is not None:
                 return True
             if self._message is not None:
                 return True
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("Invalid alarm oob command, either hour,min or message ")
+        logging.error("Invalid alarm oob command, either hour,min or message ")
         return False
 
     def execute_oob_command(self, client_context):
         if self._message is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("AlarmOutOfBandProcessor: Showing alarm=%s", self._message)
+            logging.info("AlarmOutOfBandProcessor: Showing alarm=%s", self._message)
         elif self._hour is not None and self._min is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("AlarmOutOfBandProcessor: Setting alarm for %s:%s", self._hour, self._min)
+            logging.info("AlarmOutOfBandProcessor: Setting alarm for %s:%s", self._hour, self._min)
         return "ALARM"

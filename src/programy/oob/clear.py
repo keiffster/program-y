@@ -35,11 +35,9 @@ class ClearOutOfBandProcessor(OutOfBandProcessor):
             self._command = oob.text
             return True
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unvalid clear oob command - missing command")
+            logging.error("Unvalid clear oob command - missing command")
             return False
 
     def execute_oob_command(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("ClearOutOfBandProcessor: Clearing=%s", self._command)
+        logging.info("ClearOutOfBandProcessor: Clearing=%s", self._command)
         return "CLEAR"

@@ -30,19 +30,16 @@ class TemplateProgramNode(TemplateNode):
         if client_context.brain.properties.has_property("fullname") is True:
             fullname = client_context.brain.properties.property("fullname")
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Fullname property missing")
+            logging.error("Fullname property missing")
 
         version = ""
         if client_context.brain.properties.has_property("version") is True:
             version = client_context.brain.properties.property("version")
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Version property missing")
+            logging.error("Version property missing")
 
         resolved = "%s %s" % (fullname, version)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

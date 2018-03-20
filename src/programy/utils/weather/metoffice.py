@@ -49,15 +49,12 @@ class DataPoint(object):
             return json_data[name]
         else:
             if data_type == MetOfficeWeatherReport.OBSERVATION:
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning('%s attribute missing from ObservationDataPoint data point', name)
+                logging.warning('%s attribute missing from ObservationDataPoint data point', name)
             elif data_type == MetOfficeWeatherReport.FORECAST:
                 if time_period == metoffer.THREE_HOURLY:
-                    if logging.getLogger().isEnabledFor(logging.WARNING):
-                        logging.warning('%s attribute missing from three hourly forecast data point', name)
+                    logging.warning('%s attribute missing from three hourly forecast data point', name)
                 if time_period == metoffer.DAILY:
-                    if logging.getLogger().isEnabledFor(logging.WARNING):
-                        logging.warning('%s attribute missing from daily forecast data point', name)
+                    logging.warning('%s attribute missing from daily forecast data point', name)
             return None
 
     def direction_to_full_text(self, direction):

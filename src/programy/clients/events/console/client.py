@@ -69,9 +69,8 @@ class ConsoleBotClient(EventBotClient):
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
             self.display_response(client_context.bot.get_exit_response(client_context))
         except Exception as excep:
+            logging.error("Oops something bad happened !")
             logging.exception(excep)
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Oops something bad happened !")
         return running
 
     def prior_to_run_loop(self):

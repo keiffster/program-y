@@ -41,8 +41,7 @@ class PollingBotClient(BotClient):
             while self._running:
                 self._running = self.poll_and_answer()
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Exiting gracefully...")
+            logging.debug("Exiting gracefully...")
 
         else:
             print("Connection failed. Exception traceback printed above.")

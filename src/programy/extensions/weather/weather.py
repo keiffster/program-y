@@ -37,28 +37,24 @@ class WeatherExtension(Extension):
 
         splits = data.split()
         if len(splits) != 5:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Weather - Not enough paramters passed, [%d] expected 5"%len(splits))
+            logging.debug("Weather - Not enough paramters passed, [%d] expected 5", len(splits))
             return None
 
         type = splits[0]
         if type not in ['OBSERVATION', 'FORECAST5DAY', 'FORECAST24HOUR']:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Weather - Type not understood [%s]"%type)
+            logging.debug("Weather - Type not understood [%s]", type)
             return None
 
         if splits[1] == 'LOCATION':
             postcode = splits[2]
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Weather - LOCATION missing")
+            logging.debug("Weather - LOCATION missing")
             return None
 
         if splits[3] == 'WHEN':
             when = splits[4]
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Weather - WHEN missing")
+            logging.debug("Weather - WHEN missing")
             return None
 
         if type == 'OBSERVATION':
@@ -69,8 +65,7 @@ class WeatherExtension(Extension):
             return self.twentyfour_hour_forecast(context.bot, postcode, when)
 
     def current_observation(self, bot, postcode):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting weather observation for [%s]"%(postcode))
+        logging.debug("Getting weather observation for [%s]", postcode)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
@@ -85,8 +80,7 @@ class WeatherExtension(Extension):
             return "UNAVAILABLE"
 
     def twentyfour_hour_forecast(self, bot, postcode, when):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting 24 hour weather forecast for [%s] at time [%s]"%(postcode, when))
+        logging.debug("Getting 24 hour weather forecast for [%s] at time [%s]", postcode, when)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
@@ -103,8 +97,7 @@ class WeatherExtension(Extension):
             return "UNAVAILABLE"
 
     def five_day_forecast(self, bot, postcode, when):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Getting 5 day forecast for [%s] at time [%s]"%(postcode, when))
+        logging.debug("Getting 5 day forecast for [%s] at time [%s]", postcode, when)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)

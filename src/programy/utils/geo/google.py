@@ -210,13 +210,11 @@ class GoogleMaps(object):
     ##################
 
     def _get_response_as_json(self, url):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("GoogleMaps Request = [%s]", url)
+        logging.debug("GoogleMaps Request = [%s]", url)
         response = urllib.request.urlopen(url)
         content = response.read()
         decoded = content.decode('utf8')
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("GoogleMaps Response = [%s]", decoded)
+        logging.debug("GoogleMaps Response = [%s]", decoded)
         return json.loads(decoded)
 
     ##################
@@ -233,8 +231,7 @@ class GoogleMaps(object):
         return False
 
     def get_latlong_for_location(self, location):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("get_latlong_for_location - calling service")
+        logging.debug("get_latlong_for_location - calling service")
         response = self._get_latlong_for_location_response(location)
 
         if self.is_error_response(response):
@@ -253,19 +250,16 @@ class GoogleMaps(object):
         return self._get_response_as_json(url)
 
     def get_distance_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("get_distance_between_addresses - calling service")
+        logging.debug("get_distance_between_addresses - calling service")
         response = self._get_distance_between_addresses(origin, destination, country, mode, units)
 
         if response['status'] == 'OK':
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("get_distance_between_addresses - OK")
+            logging.debug("get_distance_between_addresses - OK")
             distance = GoogleDistance(origin, destination, country, mode, units)
             distance.parse_json(response['rows'])
             return distance
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("get_distance_between_addresses - [%s]", response['status'])
+            logging.error("get_distance_between_addresses - [%s]", response['status'])
             return None
 
     ##################
@@ -277,18 +271,15 @@ class GoogleMaps(object):
         return self._get_response_as_json(url)
 
     def get_directions_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("get_directions_between_addresses - calling live service")
+        logging.debug("get_directions_between_addresses - calling live service")
         response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
 
         if response['status'] == 'OK':
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("get_directions_between_addresses - OK")
+            logging.debug("get_directions_between_addresses - OK")
             directions = GoogleDirections(origin, destination, country, mode, units)
             directions.parse_json(response['routes'])
             return directions
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("get_directions_between_addresses - %s", response['status'])
+            logging.error("get_directions_between_addresses - %s", response['status'])
             return None
 

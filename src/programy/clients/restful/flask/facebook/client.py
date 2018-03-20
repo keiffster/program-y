@@ -37,8 +37,7 @@ class FacebookBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, 'facebook', argument_parser)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Facebook Client is running....")
+        logging.debug("Facebook Client is running....")
 
         self._facebook_bot = self.create_facebook_bot()
 
@@ -150,8 +149,7 @@ def receive_message():
     try:
         return FACEBOOK_CLIENT.receive_message(request)
     except Exception as e:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(e)
+        logging.exception(e)
 
 
 if __name__ == "__main__":

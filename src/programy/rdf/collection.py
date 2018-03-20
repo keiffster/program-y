@@ -9,13 +9,11 @@ class RDFLoader(FileFinder):
         self._collection = collection
 
     def load_file_contents(self, filename):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Loading RDF File [%s]", filename)
+        logging.debug("Loading RDF File [%s]", filename)
         try:
             self._collection.load_from_filename(filename)
         except Exception as excep:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load RDF File [%s] - %s", filename, excep)
+            logging.error("Failed to load RDF File [%s] - %s", filename, excep)
 
 class RDFEntity(object):
 

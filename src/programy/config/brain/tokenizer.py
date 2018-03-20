@@ -40,5 +40,4 @@ class BrainTokenizerConfiguration(BaseConfigurationData):
             self._classname = configuration_file.get_option(tokenizer, "classname", missing_value="programy.parser.tokenizer.Tokenizer")
             self._split_chars = configuration_file.get_option(tokenizer, "split_chars", missing_value=" ")
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'tokenizer' section missing from bot config, using defaults")
+            logging.warning("'tokenizer' section missing from bot config, using defaults")

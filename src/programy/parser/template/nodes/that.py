@@ -34,8 +34,7 @@ class TemplateThatNode(TemplateDoubleIndexedNode):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.previous_nth_question(self.question)
         resolved = question.combine_answers()
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

@@ -58,5 +58,4 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
             if learn_filename is not None:
                 self._learn_filename = self.sub_bot_root(learn_filename, bot_root)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'spelling' section missing from bot config, using to defaults")
+            logging.warning("'spelling' section missing from bot config, using to defaults")

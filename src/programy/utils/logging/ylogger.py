@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import logging
 
-
 class YLoggerSnapshot(object):
 
     def __init__(self, criticals=0, fatals=0, errors=0, exceptions=0, warnings=0, infos=0, debugs=0):
@@ -56,6 +55,8 @@ class YLogger(object):
 
     @staticmethod
     def format_message(context, message):
+        if context is None:
+            return "[] [] [] [] [] - %s"%message
         return "[%s] - %s"%(str(context), message)
 
     @staticmethod

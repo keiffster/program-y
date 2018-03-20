@@ -45,8 +45,7 @@ class TemplateMapNode(TemplateNode):
         if value is None:
             value = client_context.brain.properties.property("default-map")
             if value is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No value for default-map defined, empty string returned")
+                logging.error("No value for default-map defined, empty string returned")
                 value = ""
         return value
 
@@ -58,20 +57,17 @@ class TemplateMapNode(TemplateNode):
             value = client_context.brain.dynamics.dynamic_map(client_context, name, var)
         else:
             if client_context.brain.maps.contains(name) is False:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No map defined for [%s], using default-map as value", var)
+                logging.error("No map defined for [%s], using default-map as value", var)
                 value = self.get_default_value(client_context)
             else:
                 the_map = client_context.brain.maps.map(name)
                 if var in the_map:
                     value = the_map[var]
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("No value defined for [%s], using default-map as value", var)
+                    logging.error("No value defined for [%s], using default-map as value", var)
                     value = self.get_default_value(client_context)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+        logging.debug("MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, client_context):

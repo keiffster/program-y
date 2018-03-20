@@ -33,8 +33,7 @@ class TwilioBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, 'twilio', argument_parser)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Twilio Client is running....")
+        logging.debug("Twilio Client is running....")
 
         self.get_license_keys()
 
@@ -78,15 +77,13 @@ class TwilioBotClient(FlaskRestBotClient):
             client_number = request.args.get('From')
             question = request.args.get('Body')
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Twillio received [%s] from [%s]"%(question, client_number))
+        logging.debug("Twillio received [%s] from [%s]", question, client_number)
 
         answer = self.ask_question(client_number, question)
 
         response = self.create_response(client_number, answer)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Twillio sending [%s] to [%s]"%(answer, client_number))
+        logging.debug("Twillio sending [%s] to [%s]", answer, client_number)
 
         return response
 
@@ -100,8 +97,7 @@ def receive_message():
     try:
         return TWILIO_CLIENT.receive_message(request)
     except Exception as e:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(e)
+        logging.exception(e)
 
 
 if __name__ == "__main__":

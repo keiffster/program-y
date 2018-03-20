@@ -27,8 +27,7 @@ class TemplateIdNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), client_context.client.id)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), client_context.client.id)
         if client_context.client.id is not None:
             return client_context.client.id
         return ""

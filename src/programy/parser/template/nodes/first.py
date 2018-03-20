@@ -40,8 +40,7 @@ class TemplateFirstNode(TemplateNode):
                 if len(words) > 0:
                     resolved = words[0]
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 

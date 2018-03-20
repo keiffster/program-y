@@ -54,24 +54,19 @@ class TemplateSetNode(TemplateNode):
         value = self.resolve_children(client_context)
 
         if self.local is True:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
-                client_context.bot.get_conversation(client_context).current_question().set_property(name, value)
+            logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
+            client_context.bot.get_conversation(client_context).current_question().set_property(name, value)
         else:
             if client_context.bot.override_properties is False and client_context.brain.properties.has_property(name):
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Global property already exists for name [%s], ignoring set!", name)
+                logging.error("Global property already exists for name [%s], ignoring set!", name)
                 value = client_context.brain.properties.property(name)
             else:
                 if client_context.brain.properties.has_property(name):
-                    if logging.getLogger().isEnabledFor(logging.WARNING):
-                        logging.warning("Global property already exists for name [%s], over writing!", name)
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
-                    client_context.bot.get_conversation(client_context).set_property(name, value)
+                    logging.warning("Global property already exists for name [%s], over writing!", name)
+                logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
+                client_context.bot.get_conversation(client_context).set_property(name, value)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), value)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), value)
 
         return value
 

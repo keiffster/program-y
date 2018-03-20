@@ -71,5 +71,4 @@ class BotConversationsConfiguration(BaseConfigurationData):
 
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'Conversations' section missing from bot config, using defaults")
+            logging.warning("'Conversations' section missing from bot config, using defaults")

@@ -51,8 +51,7 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def write_learnf_to_file(self, client_context, category):
         learnf_path = client_context.brain.configuration.defaults.learn_filename
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Writing learnf to %s", learnf_path)
+        logging.debug("Writing learnf to %s", learnf_path)
 
         if os.path.isfile(learnf_path) is False:
             file = open(learnf_path, "w+", encoding="utf-8")

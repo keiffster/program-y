@@ -39,14 +39,12 @@ class ConversationRedisStorage(ConversationStorage):
         pass
 
     def save_conversation(self, conversation, clientid):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Saving conversation to Redis for %s"%clientid)
+        logging.debug("Saving conversation to Redis for %s", clientid)
         print("Writing to redis for %s"%clientid)
         self._redis.hmset(clientid, conversation._properties)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Loading Conversation from file for %s"%clientid)
+        logging.debug("Loading Conversation from file for %s", clientid)
 
         print("Reading from redis for %s"%clientid)
         result = self._redis.hgetall(clientid)

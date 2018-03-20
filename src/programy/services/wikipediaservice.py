@@ -52,17 +52,13 @@ class WikipediaService(Service):
                 results = self._api.search(question)
                 search = ", ".join(results)
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Unknown Wikipedia command [%s]", words[0])
+                logging.error("Unknown Wikipedia command [%s]", words[0])
                 search = ""
             return search
         except wikipedia.exceptions.DisambiguationError:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Wikipedia search is ambiguous for question [%s]", question)
+            logging.error("Wikipedia search is ambiguous for question [%s]", question)
         except wikipedia.exceptions.PageError:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No page on Wikipedia for question [%s]", question)
+            logging.error("No page on Wikipedia for question [%s]", question)
         except Exception:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("General error querying Wikipedia for question [%s]", question)
+            logging.error("General error querying Wikipedia for question [%s]", question)
         return ""

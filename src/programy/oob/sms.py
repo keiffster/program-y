@@ -42,17 +42,14 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'message':
                     self._message = child.text
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown child element [%s] in sms oob", child.tag)
+                    logging.error("Unknown child element [%s] in sms oob", child.tag)
 
             if self._recipient is not None and self._message is not None:
                 return True
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("Invalid sms oob command")
+        logging.error("Invalid sms oob command")
         return False
 
     def execute_oob_command(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("SMSOutOfBandProcessor: Messaging=%s", self._recipient)
+        logging.info("SMSOutOfBandProcessor: Messaging=%s", self._recipient)
         return "SMS"

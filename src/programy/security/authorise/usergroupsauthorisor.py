@@ -37,8 +37,7 @@ class BasicUserGroupAuthorisationService(Authoriser):
             loader = UserGroupLoader()
             self._users, self._groups = loader.load_users_and_groups_from_file(self.configuration.usergroups)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No user groups defined, authorisation tag will not work!")
+            logging.warning("No user groups defined, authorisation tag will not work!")
 
     def authorise(self, userid, role):
         if userid not in self._users:

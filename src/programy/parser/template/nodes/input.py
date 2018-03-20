@@ -42,8 +42,7 @@ class TemplateInputNode(TemplateIndexedNode):
             resolved = question.combine_sentences()
         else:
             resolved = question.previous_nth_sentence(self.index).text()
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

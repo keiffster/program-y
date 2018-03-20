@@ -32,8 +32,7 @@ class TemplateRandomNode(TemplateNode):
     def resolve_to_string(self, client_context):
         selection = randint(0, (len(self._children) - 1))
         resolved = self._children[selection - 1].resolve(client_context)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

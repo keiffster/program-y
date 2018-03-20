@@ -26,6 +26,5 @@ class DenormalizePostProcessor(PostProcessor):
 
     def process(self, context, word_string):
         denormalized = context.brain.denormals.denormalise_string(word_string)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Denormalising input from [%s] to [%s]", word_string, denormalized)
+        logging.debug("Denormalising input from [%s] to [%s]", word_string, denormalized)
         return denormalized

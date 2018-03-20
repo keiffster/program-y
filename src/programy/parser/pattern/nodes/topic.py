@@ -59,15 +59,12 @@ class PatternTopicNode(PatternNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_depth_exceeded(depth) is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
+            logging.error("%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
             return None
 
         if words.word(word_no) == PatternTopicNode.TOPIC:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("%sTopic matched %s", tabs, words.word(word_no))
+            logging.debug("%sTopic matched %s", tabs, words.word(word_no))
             return super(PatternTopicNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("%sTopic NOT matched %s", tabs, words.word(word_no))
+        logging.debug("%sTopic NOT matched %s", tabs, words.word(word_no))
         return None

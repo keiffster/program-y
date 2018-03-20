@@ -26,7 +26,6 @@ class RemoveMultiSpacePostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, context, word_string):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Removing multiple spaces from words...")
+        logging.debug("Removing multiple spaces from words...")
         word_string = re.sub(r'\s+', ' ', word_string)
         return word_string.strip()

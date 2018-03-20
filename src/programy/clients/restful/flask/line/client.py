@@ -36,8 +36,7 @@ class LineBotClient(FlaskRestBotClient):
 
         self.create_line_bot()
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Line Client is running....")
+        logging.debug("Line Client is running....")
 
     def get_description(self):
         return 'ProgramY AIML2.0 Line Client'
@@ -122,8 +121,7 @@ def receive_message():
     try:
         return LINE_CLIENT.receive_message(request)
     except Exception as e:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(e)
+        logging.exception(e)
 
 
 if __name__ == "__main__":

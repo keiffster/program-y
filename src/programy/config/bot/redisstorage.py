@@ -40,5 +40,4 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
             self._host = configuration_file.get_option(ConversationsFileStorage, "host", missing_value="localhost")
             self._port = configuration_file.get_int_option(ConversationsFileStorage, "port", missing_value=6379)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")
+            logging.warning("'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")

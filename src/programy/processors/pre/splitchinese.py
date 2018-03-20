@@ -28,8 +28,7 @@ class SplitChinesePreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Splitting Chinese into parsable words...")
+        logging.debug("Splitting Chinese into parsable words...")
         chars = []
         for ch in word_string:
             if ChineseLanguage.is_language(ch):

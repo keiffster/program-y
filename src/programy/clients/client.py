@@ -113,11 +113,9 @@ class BotClient(ResponseLogger):
             if self.configuration.client_configuration.license_keys is not None:
                 self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
             else:
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("No client configuration setting for license_keys")
+                logging.warning("No client configuration setting for license_keys")
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration defined when loading license keys")
+            logging.warning("No configuration defined when loading license keys")
 
     def get_license_keys(self):
         return
@@ -127,8 +125,7 @@ class BotClient(ResponseLogger):
             with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
                 logging_config = yaml.load(yml_data_file)
                 logging.config.dictConfig(logging_config)
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info("Now logging under configuration")
+                logging.info("Now logging under configuration")
         else:
             print("Warning. No logging configuration file defined, using defaults...")
 

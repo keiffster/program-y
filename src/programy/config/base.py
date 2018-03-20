@@ -32,8 +32,7 @@ class BaseConfigurationData(object):
         if key in self._additionals:
             return self._additionals[key]
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("Configuration key [%s] does not exist", key)
+            logging.warning("Configuration key [%s] does not exist", key)
             return None
 
     @property

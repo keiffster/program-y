@@ -45,8 +45,7 @@ class FileFinder(object):
                     for filename in [f for f in filenames if f.endswith(extension)]:
                         found_files.append((filename, os.path.join(dirpath, filename)))
         except FileNotFoundError:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No directory found [%s]", path)
+            logging.error("No directory found [%s]", path)
 
         return sorted(found_files, key=lambda element: (element[1], element[0]))
 
@@ -61,8 +60,7 @@ class FileFinder(object):
                 collection[just_filename] = self.load_file_contents(file[1])
             except Exception as excep:
                 logging.exception(excep)
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Failed to load file contents for file [%s]", file[1])
+                logging.error("Failed to load file contents for file [%s]", file[1])
 
         return collection
 
@@ -74,8 +72,7 @@ class FileFinder(object):
             collection[just_filename] = self.load_file_contents(filename)
         except Exception as excep:
             logging.exception(excep)
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Failed to load file contents for file [%s]", filename)
+            logging.error("Failed to load file contents for file [%s]", filename)
 
         return collection
 

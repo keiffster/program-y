@@ -58,13 +58,11 @@ class TemplateGetNode(TemplateNode):
     def get_default_value(bot):
         value = bot.brain.properties.property("default-get")
         if value is None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.error("No property defined for default-get, checking defaults")
+            logging.error("No property defined for default-get, checking defaults")
 
             value = bot.brain.configuration.defaults.default_get
             if value is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No value defined for default default-get, returning 'unknown'")
+                logging.error("No value defined for default default-get, returning 'unknown'")
                 value = "unknown"
 
         return value
@@ -90,8 +88,7 @@ class TemplateGetNode(TemplateNode):
                 #    value = bot.brain.properties.property(name)
 
         if value is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No property for [%s]"%name)
+            logging.error("No property for [%s]", name)
 
             value = TemplateGetNode.get_default_value(client_context.bot)
 
@@ -101,11 +98,9 @@ class TemplateGetNode(TemplateNode):
         name = self.name.resolve(client_context)
         value = TemplateGetNode.get_property_value(client_context, self.local, name)
         if self.local:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
+            logging.debug("[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+            logging.debug("[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
         return value
 
     def decode_tuples(self, tuples):
@@ -151,8 +146,7 @@ class TemplateGetNode(TemplateNode):
                         resolved += atuple[2][1]
                         resolved += " "
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 

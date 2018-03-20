@@ -35,8 +35,7 @@ class ConversationStorageFactory(object):
             storage.load_config_section(configuration_file, configuration, bot_root)
             return storage
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.warning("Invalid Conversations file storage type [%s]" % type)
+        logging.warning("Invalid Conversations file storage type [%s]", type)
         return None
 
     @staticmethod
@@ -47,6 +46,5 @@ class ConversationStorageFactory(object):
         elif config.conversations.type == 'redis':
             return ConversationRedisStorage(config.conversations.storage)
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.warning("Invalid Conversations file storage type [%s]" % config.conversations.type)
+        logging.warning("Invalid Conversations file storage type [%s]", config.conversations.type)
         return None

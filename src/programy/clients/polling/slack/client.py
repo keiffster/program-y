@@ -71,8 +71,7 @@ class SlackBotClient(PollingBotClient):
     def parse_message(self, event):
         text = event["text"]
     
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Slack received [%s] " % text)
+        logging.debug("Slack received [%s] ", text)
     
         userid, message = self.parse_direct_mention(text)
     
@@ -119,8 +118,7 @@ class SlackBotClient(PollingBotClient):
         # Finds and executes the given message, filling in response
         response = self.ask_question(userid, message)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Slack sending [%s] to [%s]" % (message, userid))
+        logging.debug("Slack sending [%s] to [%s]", message, userid)
 
         self.send_response(response, channel)
 

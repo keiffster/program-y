@@ -31,8 +31,7 @@ class TemplateSentenceNode(TemplateNode):
         first = result[:1]
         rest = result[1:]
         resolved = first.upper() + rest.lower()
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

@@ -56,8 +56,7 @@ class TemplateAttribNode(TemplateNode):
             attrib_name = attrib[0]
             if attrib_name not in attribs_found:
                 if attrib[1] is not None:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG):
-                        logging.debug("Setting default value for attrib [%s]", attrib_name)
+                    logging.debug("Setting default value for attrib [%s]", attrib_name)
                     self.set_attrib(attrib_name, attrib[1])
 
     def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
@@ -79,6 +78,5 @@ class TemplateAttribNode(TemplateNode):
             self.parse_text(graph, self.get_tail_from_element(child))
 
         if attrib_found is False:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Setting default value for attrib [%s]", attrib_name)
+            logging.debug("Setting default value for attrib [%s]", attrib_name)
             self.set_attrib(attrib_name, default_value)

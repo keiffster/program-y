@@ -57,14 +57,12 @@ class XmppClient(sleekxmpp.ClientXMPP):
 
             question = self.get_question(msg)
             if question is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.debug("Missing 'question' from XMPP message")
+                logging.debug("Missing 'question' from XMPP message")
                 return
 
             userid = self.get_userid(msg)
             if userid is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.debug("Missing 'userid' from XMPP message")
+                logging.debug("Missing 'userid' from XMPP message")
                 return
 
             response = self._bot_client.ask_question(userid, question)
@@ -72,8 +70,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
             self.send_response(msg, response)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.debug("Invalid XMPP message")
+            logging.debug("Invalid XMPP message")
             self.send_response(msg, "Sorry, no idea!")
 
     def register_xep_plugins(self, configuration):

@@ -47,19 +47,16 @@ class EmailOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'body':
                     self._body = child.text
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown child element [%s] in email oob", child.tag)
+                    logging.error("Unknown child element [%s] in email oob", child.tag)
 
             if self._to is not None and \
                 self._subject is not None and \
                 self._body is not None:
                 return True
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("Invalid email oob command")
+        logging.error("Invalid email oob command")
         return False
 
     def execute_oob_command(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("EmailOutOfBandProcessor: Emailing=%s", self._to)
+        logging.info("EmailOutOfBandProcessor: Emailing=%s", self._to)
         return "EMAIL"

@@ -26,8 +26,7 @@ class TelecomMinutesExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Telecom Minutes - Calling external service for with extra data [%s]", data)
+        logging.debug("Telecom Minutes - Calling external service for with extra data [%s]", data)
 
         #
         # Add the logic to receive the phone minutes usage and format it into used and total

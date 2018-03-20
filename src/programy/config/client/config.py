@@ -54,8 +54,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
                 self._license_keys = self.sub_bot_root(self._license_keys, bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No bot name defined for client [%s], defaulting to 'bot'." % self.section_name)
+            logging.warning("No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"
             self._bot_configs[0].load_configuration(configuration_file, bot_root)
 

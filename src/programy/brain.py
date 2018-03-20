@@ -175,8 +175,7 @@ class Brain(object):
 
     def load_tokenizer(self):
         if self.configuration is not None and self.configuration.tokenizer.classname is not None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loading tokenizer from class [%s]", self.configuration.tokenizer.classname)
+            logging.info("Loading tokenizer from class [%s]", self.configuration.tokenizer.classname)
             tokenizer_class = ClassLoader.instantiate_class(self.configuration.tokenizer.classname)
             return tokenizer_class(self.configuration.tokenizer.split_chars)
         else:
@@ -186,8 +185,7 @@ class Brain(object):
         return AIMLParser(self)
 
     def load_binary(self, configuration):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading binary brain from [%s]", configuration.binaries.binary_filename)
+        logging.info("Loading binary brain from [%s]", configuration.binaries.binary_filename)
         try:
             start = datetime.datetime.now()
             gc.disable()
@@ -197,8 +195,7 @@ class Brain(object):
             bin_file.close()
             stop = datetime.datetime.now()
             diff = stop - start
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Brain load took a total of %.2f sec", diff.total_seconds())
+            logging.info("Brain load took a total of %.2f sec", diff.total_seconds())
             return False   # Tell caller, load succeeded and skip aiml load
         except Exception as excep:
             logging.exception(excep)
@@ -208,21 +205,18 @@ class Brain(object):
                 raise excep
 
     def load_aiml(self, configuration):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading aiml source brain")
+        logging.info("Loading aiml source brain")
         self._aiml_parser.load_aiml(configuration)
 
     def save_binary(self, configuration):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Saving binary brain to [%s]", configuration.binaries.binary_filename)
+        logging.info("Saving binary brain to [%s]", configuration.binaries.binary_filename)
         start = datetime.datetime.now()
         bin_file = open(configuration.binaries.binary_filename, "wb")
         pickle.dump(self._aiml_parser, bin_file)
         bin_file.close()
         stop = datetime.datetime.now()
         diff = stop - start
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Brain save took a total of %.2f sec", diff.total_seconds())
+        logging.info("Brain save took a total of %.2f sec", diff.total_seconds())
 
     def load(self, configuration: BrainConfiguration):
 
@@ -236,34 +230,27 @@ class Brain(object):
         if configuration.binaries.save_binary is True:
             self.save_binary(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading collections")
+        logging.info("Loading collections")
         self.load_collections(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading services")
+        logging.info("Loading services")
         self.load_services(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading security services")
+        logging.info("Loading security services")
         self.load_security_services(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading oob processors")
+        logging.info("Loading oob processors")
         self.load_oob_processors(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading regex templates")
+        logging.info("Loading regex templates")
         self.load_regex_templates(configuration)
 
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loading dynamics sets, maps and vars")
+        logging.info("Loading dynamics sets, maps and vars")
         self.load_dynamics(configuration)
 
     def dump_brain_tree(self):
         if self.configuration.braintree.file is not None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Dumping AIML Graph as tree to [%s]",
+            logging.debug("Dumping AIML Graph as tree to [%s]",
                               self._configuration.braintree.file)
             self.aiml_parser.pattern_parser.save_braintree(
                 self.bot,
@@ -274,106 +261,83 @@ class Brain(object):
     def _load_denormals(self, configuration):
         if configuration.files.denormal is not None:
             total = self._denormal_collection.load_from_filename(configuration.files.denormal)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d denormalisations", total)
+            logging.info("Loaded a total of %d denormalisations", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for denormal")
+            logging.warning("No configuration setting for denormal")
 
     def _load_normals(self, configuration):
         if configuration.files.normal is not None:
             total = self._normal_collection.load_from_filename(configuration.files.normal)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d normalisations", total)
+            logging.info("Loaded a total of %d normalisations", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for normal")
+            logging.warning("No configuration setting for normal")
 
     def _load_genders(self, configuration):
         if configuration.files.gender is not None:
             total = self._gender_collection.load_from_filename(configuration.files.gender)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d genderisations", total)
+            logging.info("Loaded a total of %d genderisations", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for gender")
+            logging.warning("No configuration setting for gender")
 
     def _load_persons(self, configuration):
         if configuration.files.person is not None:
             total = self._person_collection.load_from_filename(configuration.files.person)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d persons", total)
+            logging.info("Loaded a total of %d persons", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for person")
+            logging.warning("No configuration setting for person")
 
     def _load_person2s(self, configuration):
         if configuration.files.person2 is not None:
             total = self._person2_collection.load_from_filename(configuration.files.person2)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d person2s", total)
+            logging.info("Loaded a total of %d person2s", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for person2")
+            logging.warning("No configuration setting for person2")
 
     def _load_properties(self, configuration):
         if configuration.files.properties is not None:
             total = self._properties_collection.load_from_filename(configuration.files.properties)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d properties", total)
+            logging.info("Loaded a total of %d properties", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for properties")
+            logging.warning("No configuration setting for properties")
 
     def _load_variables(self, configuration):
         if configuration.files.variables is not None:
             total = self._variables_collection.load_from_filename(configuration.files.variables)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d variables", total)
+            logging.info("Loaded a total of %d variables", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for variables")
+            logging.warning("No configuration setting for variables")
 
     def _load_rdf(self, configuration):
         if configuration.files.rdf_files is not None and configuration.files.rdf_files.files:
             total = self._rdf_collection.load(configuration.files.rdf_files)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d rdf files", total)
+            logging.info("Loaded a total of %d rdf files", total)
         elif configuration.files.triples is not None:
             total = self._rdf_collection.load_from_filename(configuration.files.triples)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d triples", total)
+            logging.info("Loaded a total of %d triples", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for triples")
+            logging.warning("No configuration setting for triples")
 
     def _load_sets(self, configuration):
         total = self._sets_collection.load(configuration.files.set_files)
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loaded a total of %d sets files", total)
+        logging.info("Loaded a total of %d sets files", total)
 
     def _load_maps(self, configuration):
         total = self._maps_collection.load(configuration.files.map_files)
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Loaded a total of %d maps files", total)
+        logging.info("Loaded a total of %d maps files", total)
 
     def _load_preprocessors(self, configuration):
         if configuration.files.preprocessors is not None:
             total = self._preprocessors.load(configuration.files.preprocessors)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d pre processors", total)
+            logging.info("Loaded a total of %d pre processors", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for pre processors")
+            logging.warning("No configuration setting for pre processors")
 
     def _load_postprocessors(self, configuration):
         if configuration.files.postprocessors is not None:
             total = self._postprocessors.load(configuration.files.postprocessors)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d post processors", total)
+            logging.info("Loaded a total of %d post processors", total)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("No configuration setting for post processors")
+            logging.warning("No configuration setting for post processors")
 
     def load_collections(self, configuration):
         self._load_denormals(configuration)
@@ -403,8 +367,7 @@ class Brain(object):
                     except Exception as excep:
                         logging.exception(excep)
             else:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("No authentication configuration defined")
+                logging.debug("No authentication configuration defined")
 
             if configuration.security.authorisation is not None:
                 if configuration.security.authorisation.classname is not None:
@@ -415,19 +378,16 @@ class Brain(object):
                     except Exception as excep:
                         logging.exception(excep)
             else:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("No authorisation configuration defined")
+                logging.debug("No authorisation configuration defined")
 
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("No security configuration defined, running open...")
+            logging.debug("No security configuration defined, running open...")
 
     def load_dynamics(self, configuration):
         if configuration.dynamics is not None:
             self._dynamics_collection.load_from_configuration(configuration.dynamics)
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("No dynamics configuration defined...")
+            logging.debug("No dynamics configuration defined...")
 
     def pre_process_question(self, client_context, question):
         return self.preprocessors.process(client_context, question)
@@ -436,8 +396,7 @@ class Brain(object):
         if configuration.oob is not None:
             if configuration.oob.default() is not None:
                 try:
-                    if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.info("Loading default oob")
+                    logging.info("Loading default oob")
                     classobject = ClassLoader.instantiate_class(configuration.oob.default().classname)
                     self._default_oob = classobject()
                 except Exception as excep:
@@ -445,8 +404,7 @@ class Brain(object):
 
             for oob_name in  configuration.oob.oobs():
                 try:
-                    if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.info("Loading oob: %s", oob_name)
+                    logging.info("Loading oob: %s", oob_name)
                     classobject = ClassLoader.instantiate_class(configuration.oob.oob(oob_name).classname)
                     self._oob[oob_name] = classobject()
                 except Exception as excep:
@@ -456,8 +414,7 @@ class Brain(object):
         if configuration.files.regex_templates is not None:
             collection = PropertiesCollection()
             total = collection.load_from_filename(configuration.files.regex_templates)
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Loaded a total of %d regex templates", total)
+            logging.info("Loaded a total of %d regex templates", total)
 
             for pair in collection.pairs:
                 name = pair[0]
@@ -465,8 +422,7 @@ class Brain(object):
                 try:
                     self._regex_templates[name] = re.compile(pattern, re.IGNORECASE)
                 except Exception:
-                    if logging.getLogger().isEnabledFor(logging.INFO):
-                        logging.error("Invalid regex template [%s]", pattern)
+                    logging.error("Invalid regex template [%s]", pattern)
 
     def regex_template(self, name):
         if name in self._regex_templates:
@@ -504,8 +460,7 @@ class Brain(object):
         return self.postprocessors.process(client_context, response)
 
     def failed_authentication(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("[%s] failed authentication!")
+        logging.error("[%s] failed authentication!")
 
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
@@ -532,8 +487,7 @@ class Brain(object):
 
         template_node = match_context.template_node()
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+        logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
 
         response = template_node.template.resolve(client_context)
 

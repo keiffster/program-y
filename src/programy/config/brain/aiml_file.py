@@ -58,8 +58,7 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
             self._conversation = self.get_debug_file_configuration(configuration_file, files_config, "conversation", bot_root)
 
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
+            logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
 
     def get_debug_file_configuration(self, configuration_file, files_config, debug_name, bot_root):
         keys = configuration_file.get_keys(files_config)

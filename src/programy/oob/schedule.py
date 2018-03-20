@@ -40,18 +40,15 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'description':
                     self._description = child.text
                 else:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("Unknown child element [%s] in schedule oob", child.tag)
+                    logging.error("Unknown child element [%s] in schedule oob", child.tag)
 
             if self._title is not None and \
                 self._description is not None:
                 return True
 
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("Invalid email schedule command")
+        logging.error("Invalid email schedule command")
         return False
 
     def execute_oob_command(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
+        logging.info("ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
         return "SCHEDULE"

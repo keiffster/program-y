@@ -39,18 +39,15 @@ class TemplateBotNode(TemplateNode):
     def get_bot_variable(client_context, name):
         value = client_context.brain.properties.property(name)
         if value is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("No bot property for [%s]"%name)
+            logging.error("No bot property for [%s]", name)
 
             value = client_context.brain.properties.property("default-property")
             if value is None:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No value for default-property")
+                logging.error("No value for default-property")
 
                 value = client_context.brain.configuration.defaults.default_get
                 if value is None:
-                    if logging.getLogger().isEnabledFor(logging.ERROR):
-                        logging.error("No value for default default-property, return 'unknown'")
+                    logging.error("No value for default default-property, return 'unknown'")
                     value = "unknown"
 
         return value
@@ -58,8 +55,7 @@ class TemplateBotNode(TemplateNode):
     def resolve_to_string(self, client_context):
         name = self.name.resolve(client_context)
         value = TemplateBotNode.get_bot_variable(client_context, name)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+        logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, client_context):

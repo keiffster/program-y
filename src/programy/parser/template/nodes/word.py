@@ -35,8 +35,7 @@ class TemplateWordNode(TemplateNode):
         self._word = word
 
     def resolve(self, client_context):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), self.word)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), self.word)
         if self.word is not None:
             return self.word
         return ""

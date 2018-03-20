@@ -50,8 +50,7 @@ class BaseCollection(object):
                     if self.process_line(line):
                         count += 1
         except FileNotFoundError:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("File not found [%s]", filename)
+            logging.error("File not found [%s]", filename)
 
         return count
 
@@ -168,8 +167,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Pattern is bad [%s]"%line)
+            logging.error("Pattern is bad [%s]", line)
         return None
 
     def normalise_pattern(self, pattern):
@@ -218,8 +216,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         alreadys.append(pair[1])
 
             except Exception as excep:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Invalid regular expression [%s]", str(pair[0]))
+                logging.error("Invalid regular expression [%s]", str(pair[0]))
                 logging.exception(excep)
 
         return re.sub(' +', ' ', replacable.strip())

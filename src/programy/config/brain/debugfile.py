@@ -54,6 +54,5 @@ class DebugFileConfiguration(BaseSectionConfigurationData):
             self._encoding = configuration_file.get_option(debugfile_config, "encoding", missing_value="utf-8")
             self._delete_on_start = configuration_file.get_bool_option(debugfile_config, "delete_on_start", missing_value=False)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("'%s' section missing from aiml files config, using to defaults", self.section_name)
+            logging.warning("'%s' section missing from aiml files config, using to defaults", self.section_name)
 

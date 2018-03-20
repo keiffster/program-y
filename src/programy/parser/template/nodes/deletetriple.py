@@ -33,8 +33,7 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
 
         resolved = ""
         client_context.brain.rdf.delete_entity(rdf_subject, rdf_predicate, rdf_object)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
@@ -63,9 +62,7 @@ class TemplateDeleteTripleNode(TemplateTripleNode):
             raise ParserException("<%s> node missing subject attribue/element"%self.node_name)
 
         if  self._pred is None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("<%s> node missing predicate attribue/element"%self.node_name)
+            logging.debug("<%s> node missing predicate attribue/element", self.node_name)
 
         if self._obj is None:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("<%s> node missing object attribue/element"%self.node_name)
+            logging.debug("<%s> node missing object attribue/element", self.node_name)

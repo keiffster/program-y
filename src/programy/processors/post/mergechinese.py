@@ -28,8 +28,7 @@ class MergeChinesePostProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Merging Chinese into understandable words...")
+        logging.debug("Merging Chinese into understandable words...")
 
         words = word_string.split(" ")
         str = ""

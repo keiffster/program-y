@@ -35,8 +35,7 @@ class KikBotClient(FlaskRestBotClient):
 
         self.create_kik_bot()
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Kik Client is running....")
+        logging.debug("Kik Client is running....")
 
     def get_description(self):
         return 'ProgramY AIML2.0 Kik Client'
@@ -117,8 +116,7 @@ def receive_message():
     try:
         return KIK_CLIENT.receive_message(request)
     except Exception as e:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(e)
+        logging.exception(e)
 
 
 if __name__ == "__main__":

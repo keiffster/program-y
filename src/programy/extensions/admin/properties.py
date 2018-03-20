@@ -25,8 +25,7 @@ class PropertiesAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Properties Admin - [%s]", data)
+        logging.debug("Properties Admin - [%s]", data)
 
         properties = ""
 

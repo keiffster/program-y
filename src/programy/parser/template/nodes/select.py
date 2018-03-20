@@ -153,8 +153,7 @@ class TemplateSelectNode(TemplateNode):
 
             resolved = self.encode_results(client_context, results)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
@@ -195,27 +194,23 @@ class TemplateSelectNode(TemplateNode):
             if tag_name == 'subj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 subj = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 pred = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        if logging.getLogger().isEnabledFor(logging.DEBUG):
-                            logging.debug("Variable [%s] defined in query element [%s], but not in vars!"%(child.text, tag_name))
+                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 obj = self.parse_children_as_word_node(graph, child)
             else:
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("Unknown tag name [%s] in select query", tag_name)
+                logging.warning("Unknown tag name [%s] in select query", tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -237,8 +232,7 @@ class TemplateSelectNode(TemplateNode):
         variables = expression.findall('./vars')
         if variables:
             if len(variables) > 1:
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning("Multiple <vars> found in select tag, using first")
+               logging.warning("Multiple <vars> found in select tag, using first")
             self.parse_vars(variables[0].text)
 
         queries = expression.findall('./*')

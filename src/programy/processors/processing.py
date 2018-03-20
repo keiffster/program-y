@@ -27,8 +27,7 @@ class ProcessorLoader(ClassLoader):
         self.processors = []
 
     def load(self, filename, *args, **kw):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Loading processors from file [%s]", filename)
+        logging.debug("Loading processors from file [%s]", filename)
         count = 0
         try:
             with open(filename, "r", encoding="utf-8") as file:
@@ -41,8 +40,7 @@ class ProcessorLoader(ClassLoader):
                                 self.processors.append(new_class(*args, **kw))
                                 count += 1
         except FileNotFoundError:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("File not found [%s]", filename)
+            logging.error("File not found [%s]", filename)
         return count
 
     def process(self, client_context, string):

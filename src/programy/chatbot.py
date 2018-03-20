@@ -1,7 +1,7 @@
 import os
 
 from programy.clients.events.console.client import ConsoleBotClient
-
+from programy.utils.text.dateformat import DateFormatter
 
 class ProgramYChatbot(ConsoleBotClient):
 
@@ -17,6 +17,15 @@ if __name__ == '__main__':
     print ("Running ProgramY Chatbot with default options....")
 
     chatbot = ProgramYChatbot()
+
+    date_formatter = DateFormatter()
+
+    client_context = chatbot.create_client_context("console")
+    client_context.brain.properties.add_property("name", "ProgramY")
+    client_context.brain.properties.add_property("app_version", "1.0.0")
+    client_context.brain.properties.add_property("grammar_version", "1.0.0")
+    client_context.brain.properties.add_property("birthdate", date_formatter.locate_appropriate_date_time())
+
     chatbot.run()
 
 

@@ -57,8 +57,7 @@ class FileWriter(object):
 
         if configuration.delete_on_start:
             if os.path.exists(configuration.filename):
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info("Removing %s on start up", configuration.filename)
+                logging.info("Removing %s on start up", configuration.filename)
                 os.remove(configuration.filename)
 
         if configuration.file_format == 'txt':
@@ -110,8 +109,7 @@ class ContentFileWriter(FileWriter):
         self._entries.append(row)
 
     def save_content(self):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Saving aiml %s to file [%s]", self._content_type, self._filename )
+        logging.info("Saving aiml %s to file [%s]", self._content_type, self._filename )
 
         for entry in self._entries:
             self._file.write_line(self, entry)
@@ -130,8 +128,7 @@ class ContentFileWriter(FileWriter):
             return "%s [%s]\n"%(row[0], row[1])
 
     def display_debug_info(self):
-        if logging.getLogger().isEnabledFor(logging.INFO):
-            logging.info("Found a total of %d %s in your grammrs, check out [%s] for details",
+        logging.info("Found a total of %d %s in your grammrs, check out [%s] for details",
                          len(self._entries), self._content_type, self._filename)
 
 

@@ -48,15 +48,13 @@ class FlaskRestBotClient(RestBotClient):
 
     def get_question(self, rest_request):
         if 'question' not in rest_request.args or rest_request.args['question'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'question' missing from request")
+            logging.error("'question' missing from request")
             self.server_abort(400)
         return rest_request.args['question']
 
     def get_userid(self, rest_request):
         if 'userid' not in rest_request.args or rest_request.args['userid'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'userid' missing from request")
+            logging.error("'userid' missing from request")
             self.server_abort(400)
         return rest_request.args['userid']
 
@@ -92,14 +90,11 @@ class FlaskRestBotClient(RestBotClient):
 
     def dump_request(self, request):
         if request.method == 'POST':
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug(str(request))
+            logging.debug(str(request))
         elif request.method == 'GET':
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug(str(request))
+            logging.debug(str(request))
         else:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("restsclient.dump_request(), only GET and POST supported!")
+            logging.debug("restsclient.dump_request(), only GET and POST supported!")
 
 REST_CLIENT = None
 

@@ -27,12 +27,10 @@ class TemplateSRAINode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         srai_text = self.resolve_children_to_string(client_context)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] SRAI Text [%s]", self.to_string(), srai_text)
+        logging.debug("[%s] SRAI Text [%s]", self.to_string(), srai_text)
 
         resolved = client_context.bot.ask_question(client_context, srai_text, srai=True)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

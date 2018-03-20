@@ -92,12 +92,10 @@ class TelegramBotClient(PollingBotClient):
             if initial_question:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=initial_question)
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Not initial question to return in start()")
+                logging.error("Not initial question to return in start()")
 
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.exception(e)
+            logging.exception(e)
 
     def message(self, telegram_bot, update):
         try:
@@ -105,12 +103,10 @@ class TelegramBotClient(PollingBotClient):
             if response:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=response)
             else:
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("Not response to return in message()")
+                logging.error("Not response to return in message()")
 
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.exception(e)
+            logging.exception(e)
 
     def get_unknown_response(self, userid):
         return self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
@@ -129,12 +125,10 @@ class TelegramBotClient(PollingBotClient):
             unknown_response = self.get_unknown_command(update.message.chat_id)
             if unknown_response:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=unknown_response)
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error("No response to return in unknown()")
+                logging.error("No response to return in unknown()")
 
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.exception(e)
+            logging.exception(e)
 
     def display_connected_message(self):
         print ("Telegram Bot connected and running...")
@@ -152,8 +146,7 @@ class TelegramBotClient(PollingBotClient):
 
         except Exception as excep:
             logging.exception(excep)
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Oops something bad happened !")
+            logging.error("Oops something bad happened !")
 
         return running
 

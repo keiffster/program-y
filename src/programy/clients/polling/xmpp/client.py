@@ -75,8 +75,7 @@ class XmppBotClient(PollingBotClient):
 
         except Exception as excep:
             logging.exception(excep)
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Oops something bad happened !")
+            logging.error("Oops something bad happened !")
 
         return running
 

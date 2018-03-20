@@ -61,21 +61,18 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
+            logging.error("%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
             return None
 
         if context.search_depth_exceeded(depth) is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
+            logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
             return None
 
         if word_no >= words.num_words():
             return None
 
         word = words.word(word_no)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
+        logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
         context_match = Match(match_type, self, word)
         context.add_match(context_match)
         matches_added = 1
@@ -87,29 +84,24 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
         if self._topic is not None:
             match = self._topic.consume(client_context, context, words, word_no+1, Match.TOPIC, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched topic, success!", tabs)
+                logging.debug("%sMatched topic, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.TOPIC:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
                 return None
 
         if self._that is not None:
             match = self._that.consume(client_context, context, words, word_no+1, Match.THAT, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched that, success!", tabs)
+                logging.debug("%sMatched that, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.THAT:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
+                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
         word_no += 1
         if word_no >= words.num_words():
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("%sNo more words", tabs)
+            logging.debug("%sNo more words", tabs)
             return super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
         word = words.word(word_no)
 
@@ -119,8 +111,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 result = child.equals(client_context, words, word_no)
                 if result.matched is True:
                     word_no = result.word_no
-                    if logging.getLogger().isEnabledFor(logging.DEBUG):
-                        logging.debug("%sWildcard child matched %s", tabs, result.matched_phrase)
+                    logging.debug("%sWildcard child matched %s", tabs, result.matched_phrase)
 
                     context_match2 = Match(Match.WORD, child, result.matched_phrase)
 
@@ -134,8 +125,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
+            logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             word_no += 1
@@ -144,8 +134,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
                 return None
             word = words.word(word_no)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("%sNo children, consume words until next break point", tabs)
+        logging.debug("%sNo children, consume words until next break point", tabs)
 
         while word_no < words.num_words()-1:
             match = super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
@@ -155,15 +144,13 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
                 return None
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
+            logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             word_no += 1
             word = words.word(word_no)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
+        logging.debug("%sWildcard %s matched %s", tabs, self._wildcard, word)
         context_match.add_word(word)
 
         if word_no == words.num_words()-1:

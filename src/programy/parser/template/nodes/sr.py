@@ -32,11 +32,9 @@ class TemplateSrNode(TemplateNode):
         if star is not None:
             resolved = client_context.bot.ask_question(client_context, star, srai=True)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Sr node has no stars available")
+            logging.error("Sr node has no stars available")
             resolved = ""
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

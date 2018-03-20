@@ -34,8 +34,7 @@ class TemplateRequestNode(TemplateIndexedNode):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.previous_nth_question(self.index)
         resolved = question.combine_sentences()
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

@@ -44,28 +44,24 @@ def ask():
 
     if WEBCHAT_CLIENT.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Unauthorised access - api required but missing")
+            logging.error("Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
         apikey = request.args['apikey']
         if is_apikey_valid(apikey) is False:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'Unauthorised access - invalid api key")
+            logging.error("'Unauthorised access - invalid api key")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
     if 'question' not in request.args or request.args['question'] is None:
         print("'question' missing from request")
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("'question' missing from request")
+        logging.error("'question' missing from request")
         abort(400)
 
     question = request.args['question']
 
     if 'clientid' not in request.args or request.args['clientid'] is None:
         print("'clientid' missing from request")
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error("'clientid' missing from request")
+        logging.error("'clientid' missing from request")
         abort(400)
 
     clientid = request.args['clientid']
@@ -80,11 +76,9 @@ def ask():
         expire_date = expire_date + datetime.timedelta(days=WEBCHAT_CLIENT.configuration.client_configuration.cookie_expires)
 
         userid = str(uuid.uuid4().hex)
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.debug("Setting client cookie to :%s"%userid)
+        logging.debug("Setting client cookie to :%s"%userid)
     else:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.debug("Found client cookie : %s"%userid)
+        logging.debug("Found client cookie : %s"%userid)
 
     try:
         client_context = WEBCHAT_CLIENT.create_client_context(userid)
@@ -104,8 +98,7 @@ def ask():
                                 expires=expire_date)
 
     except Exception as excep:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(excep)
+        logging.exception(excep)
 
         response_data = {"question": question,
                     "answer": WEBCHAT_CLIENT.bot.default_response,

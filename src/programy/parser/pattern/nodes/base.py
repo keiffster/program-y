@@ -453,8 +453,7 @@ class PatternNode(object):
             result = child.equals(client_context, words, word_no)
             if result.matched is True:
                 word_no = result.word_no
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%s%s matched %s", tabs, child_type, result.matched_phrase)
+                logging.debug("%s%s matched %s", tabs, child_type, result.matched_phrase)
 
                 match_node = Match(match_type, child, result.matched_phrase)
 
@@ -462,8 +461,7 @@ class PatternNode(object):
 
                 match = child.consume(client_context, context, words, word_no + 1, match_type, depth+1)
                 if match is not None:
-                    if logging.getLogger().isEnabledFor(logging.DEBUG):
-                        logging.debug("%sMatched %s child, success!", tabs, child_type)
+                    logging.debug("%sMatched %s child, success!", tabs, child_type)
                     return match, word_no
                 else:
                     context.pop_match()
@@ -475,46 +473,37 @@ class PatternNode(object):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
+            logging.error("%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
             return None
 
         if context.search_depth_exceeded(depth) is True:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
+            logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
             return None
 
         if word_no >= words.num_words():
             if self._template is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sFound a template, success!", tabs)
+                logging.debug("%sFound a template, success!", tabs)
                 return self._template
             else:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sNo more words and no template, no match found!", tabs)
-                #context.pop_match()
+                logging.debug("%sNo more words and no template, no match found!", tabs)
                 return None
 
         if self._topic is not None:
             match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched topic, success!", tabs)
+                logging.debug("%sMatched topic, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.TOPIC:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
                 return None
 
         if self._that is not None:
             match = self._that.consume(client_context, context, words, word_no, Match.THAT, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched that, success!", tabs)
+                logging.debug("%sMatched that, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.THAT:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
+                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
         match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context, match_type, depth)
@@ -524,15 +513,13 @@ class PatternNode(object):
         if self._0ormore_hash is not None:
             match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched 0 or more hash, success!", tabs)
+                logging.debug("%sMatched 0 or more hash, success!", tabs)
                 return match
 
         if self._1ormore_underline is not None:
             match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched 1 or more underline, success!", tabs)
+                logging.debug("%sMatched 1 or more underline, success!", tabs)
                 return match
 
         match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context, match_type, depth)
@@ -542,17 +529,14 @@ class PatternNode(object):
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched 0 or more arrow, success!", tabs)
+                logging.debug("%sMatched 0 or more arrow, success!", tabs)
                 return match
 
         if self._1ormore_star is not None:
             match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug("%sMatched 1 or more star, success!", tabs)
+                logging.debug("%sMatched 1 or more star, success!", tabs)
                 return match
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("%sNo match for %s, trying another path", tabs, words.word(word_no))
+        logging.debug("%sNo match for %s, trying another path", tabs, words.word(word_no))
         return None

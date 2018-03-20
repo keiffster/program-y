@@ -44,8 +44,7 @@ class ViberBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, "viber", argument_parser)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Viber Client is running....")
+        logging.debug("Viber Client is running....")
 
         self._viber_bot = self.create_viber_bot(self._viber_token)
 
@@ -64,26 +63,22 @@ class ViberBotClient(FlaskRestBotClient):
     def create_viber_bot(self, viber_token):
 
         if viber_token is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'viber_token' missing")
+            logging.error("'viber_token' missing")
             return None
 
         name = self.configuration.client_configuration.name
         if name is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'name' missing from Viber configuration")
+            logging.error("'name' missing from Viber configuration")
             return None
 
         avatar = self.configuration.client_configuration.avatar
         if avatar is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'avatar' missing from Viber configuration")
+            logging.error("'avatar' missing from Viber configuration")
             return None
 
         webhook = self.configuration.client_configuration.webhook
         if webhook is None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'webhook' missing from Viber configuration")
+            logging.error("'webhook' missing from Viber configuration")
             return None
 
         configuration = BotConfiguration(
@@ -94,8 +89,7 @@ class ViberBotClient(FlaskRestBotClient):
 
         bot = self.create_viber_api(configuration)
         if bot is not None:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("'Failed to create Viber api")
+            logging.error("'Failed to create Viber api")
 
         bot.set_webhook(webhook)
         return bot
@@ -169,8 +163,7 @@ def receive_message():
     try:
         return Viber_CLIENT.receive_message(request)
     except Exception as e:
-        if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.exception(e)
+        logging.exception(e)
 
 
 if __name__ == "__main__":

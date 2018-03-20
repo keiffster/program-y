@@ -47,11 +47,9 @@ class TemplateSystemNode(TemplateAttribNode):
             process.wait()
             resolved = " ".join(result)
         else:
-            if logging.getLogger().isEnabledFor(logging.WARNING):
-                logging.warning("System command node disabled in config")
+            logging.warning("System command node disabled in config")
             resolved = ""
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
@@ -67,8 +65,7 @@ class TemplateSystemNode(TemplateAttribNode):
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':
             raise ParserException("Invalid attribute name %s for this node", attrib_name)
-        if logging.getLogger().isEnabledFor(logging.WARNING):
-            logging.warning("System node timeout attrib currently ignored")
+        logging.warning("System node timeout attrib currently ignored")
         self._timeout = attrib_value
 
     def to_xml(self, client_context):

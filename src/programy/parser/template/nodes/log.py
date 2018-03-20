@@ -42,23 +42,17 @@ class TemplateLogNode(TemplateAttribNode):
         resolved = self.resolve_children_to_string(client_context)
 
         if self._output == "logging":
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
             if self._level == "debug":
-                if logging.getLogger().isEnabledFor(logging.DEBUG):
-                    logging.debug(resolved)
+                logging.debug(resolved)
             elif self._level == "warning":
-                if logging.getLogger().isEnabledFor(logging.WARNING):
-                    logging.warning(resolved)
+                logging.warning(resolved)
             elif self._level == "error":
-                if logging.getLogger().isEnabledFor(logging.ERROR):
-                    logging.error(resolved)
+                logging.error(resolved)
             elif self._level == "info":
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info(resolved)
+                logging.info(resolved)
             else:
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info(resolved)
+                logging.info(resolved)
         else:
             print(resolved)
         return ""

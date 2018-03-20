@@ -26,6 +26,5 @@ class NormalizePreProcessor(PreProcessor):
 
     def process(self, context, word_string):
         normalized = context.brain.normals.normalise_string(word_string)
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Normalising input from [%s] to [%s]", word_string, normalized)
+        logging.debug("Normalising input from [%s] to [%s]", word_string, normalized)
         return normalized

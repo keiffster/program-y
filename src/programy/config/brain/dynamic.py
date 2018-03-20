@@ -46,8 +46,7 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
             self.load_dynamic_maps(configuration_file, dynamic_config)
             self.load_dynamic_vars(configuration_file, dynamic_config)
         else:
-            if logging.getLogger().isEnabledFor(logging.ERROR):
-                logging.error("Config section [dynamic] missing from Brain, using defaults")
+            logging.error("Config section [dynamic] missing from Brain, using defaults")
 
     def load_dynamic_sets(self, configuration_file, dynamic_config):
         sets_config = configuration_file.get_option(dynamic_config, "sets")

@@ -67,9 +67,8 @@ class ClientContext(object):
                 raise Exception("Maximum search time limit [%d] exceeded" % self.bot.configuration.max_question_timeout)
 
     def mark_question_start(self, question):
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("##########################################################################################")
-            logging.debug("Question (%s): %s", self._client.id, question)
+        logging.debug("##########################################################################################")
+        logging.debug("Question (%s): %s", self._client.id, question)
 
         if self._question_depth == 0:
             self._question_start_time = datetime.datetime.now()

@@ -31,8 +31,7 @@ class TemplateSearchNode(TemplateNode):
         query = {'q': string}
         encoded = urlencode(query)
         resolved = "https://www.google.co.uk/search?" + encoded
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

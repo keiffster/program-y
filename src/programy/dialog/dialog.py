@@ -205,8 +205,7 @@ class Conversation(object):
 
     def record_dialog(self, question: Question):
         if len(self._questions) == self._max_histories:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
+            logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
             self._questions.remove(self._questions[0])
         self._questions.append(question)
 
@@ -216,20 +215,17 @@ class Conversation(object):
 
     def load_initial_variables(self, variables_collection):
         for pair in variables_collection.pairs:
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
+            logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
 
     def get_topic_pattern(self):
         topic_pattern = self.property("topic")
 
         if topic_pattern is None:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("No Topic pattern default to [*]")
+            logging.info("No Topic pattern default to [*]")
             topic_pattern = "*"
         else:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("Topic pattern = [%s]", topic_pattern)
+            logging.info("Topic pattern = [%s]", topic_pattern)
 
         return topic_pattern
 
@@ -257,16 +253,13 @@ class Conversation(object):
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
                 that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info("That pattern = [%s]", that_pattern)
+                logging.info("That pattern = [%s]", that_pattern)
             else:
-                if logging.getLogger().isEnabledFor(logging.INFO):
-                    logging.info("That pattern, no response, default to [*]")
+                logging.info("That pattern, no response, default to [*]")
                 that_pattern = "*"
 
         except Exception as e:
-            if logging.getLogger().isEnabledFor(logging.INFO):
-                logging.info("No That pattern default to [*]")
+            logging.info("No That pattern default to [*]")
             that_pattern = "*"
 
         return that_pattern

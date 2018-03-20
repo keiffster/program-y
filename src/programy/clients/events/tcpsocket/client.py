@@ -32,16 +32,14 @@ class ClientConnection(object):
 
     def receive_data(self):
         json_data = self._clientsocket.recv(self._max_buffer).decode()
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Received: %s", json_data)
+        logging.debug("Received: %s", json_data)
         return json.loads(json_data, encoding="utf-8")
 
     def send_response(self, answer, userid):
         return_payload = {"result": "OK", "answer": answer, "userid": userid}
         json_data = json.dumps(return_payload)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Sent %s:", json_data)
+        logging.debug("Sent %s:", json_data)
 
         self._clientsocket.send(json_data.encode('utf-8'))
 
@@ -55,8 +53,7 @@ class ClientConnection(object):
 
         json_data = json.dumps(return_payload)
 
-        if logging.getLogger().isEnabledFor(logging.DEBUG):
-            logging.debug("Sent: %s", json_data)
+        logging.debug("Sent: %s", json_data)
 
         self._clientsocket.send(json_data.encode('utf-8'))
 
@@ -150,8 +147,7 @@ class SocketBotClient(EventBotClient):
 
         except KeyboardInterrupt:
             running = False
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                logging.debug("Cleaning up and exiting...")
+            logging.debug("Cleaning up and exiting...")
 
         except Exception as e:
             if client_connection is not None:
