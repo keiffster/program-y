@@ -1,8 +1,8 @@
 # Readme info:
 
-Version: 1.8.0 <br/>
+Version: 2.0.0 <br/>
 Authors: Keith Sterling <br/>
-Date: 16th January 2018 <br/>
+Date: xxth XXXXX 2018 <br/>
 
 # Introduction
 
