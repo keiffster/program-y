@@ -1,38 +1,9 @@
 import unittest
-import unittest.mock
 
 from programy.config.bot.redisstorage import BotConversationsRedisStorageConfiguration
 from programy.dialog.storage.redis import ConversationRedisStorage
 from programytest.aiml_tests.client import TestClient
 from programy.dialog.dialog import Conversation
-
-class MockRedisStorage(object):
-
-    def __init__(self, config):
-        self.__config = config
-        self._properties = None
-
-    def delete(self, key):
-        pass
-
-    def save(self, h_key,s_key, clientid, properties):
-        self._properties = properties
-
-    def is_member(self, s_key, clientid):
-        return True
-
-    def get(self, h_key):
-        return self._properties
-
-    def remove(self, s_key, clientid):
-        self._properties = None
-
-
-class MockRedisFactory(object):
-
-    @staticmethod
-    def connect(config):
-        return MockRedisStorage(config)
 
 
 class ConversationRedisStorageTests(unittest.TestCase):
@@ -40,7 +11,7 @@ class ConversationRedisStorageTests(unittest.TestCase):
     def test_persistence(self):
 
         storage_config = BotConversationsRedisStorageConfiguration("redis")
-        redis = ConversationRedisStorage(storage_config, factory=MockRedisFactory())
+        redis = ConversationRedisStorage(storage_config)
         self.assertIsNotNone(redis)
 
         client = TestClient()
