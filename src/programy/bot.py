@@ -171,11 +171,11 @@ class Bot(object):
     def get_conversation(self, client_context):
         # TODO move this to Conversations base class
         if client_context.userid in self._conversations:
-            YLogger.info(self, "Retrieving conversation for client %s", client_context.userid)
+            YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
             return self._conversations[client_context.userid]
 
         else:
-            YLogger.info(self, "Creating new conversation for client %s", client_context.userid)
+            YLogger.info(client_context, "Creating new conversation for client %s", client_context.userid)
 
             conversation = Conversation(client_context)
 
@@ -263,7 +263,7 @@ class Bot(object):
     def pre_process_text(self, client_context, text, srai):
         if srai is False:
             pre_processed = client_context.brain.pre_process_question(client_context, text)
-            YLogger.debug(self, "Pre Processed (%s): %s", client_context.userid, pre_processed)
+            YLogger.debug(client_context, "Pre Processed (%s): %s", client_context.userid, pre_processed)
         else:
             pre_processed = text
 
@@ -291,7 +291,7 @@ class Bot(object):
         return answer
 
     def log_answer(self, client_context, text, answer, responselogger):
-        YLogger.debug(self, "Processed Response (%s): %s", client_context.userid, answer)
+        YLogger.debug(client_context, "Processed Response (%s): %s", client_context.userid, answer)
 
         if responselogger is not None:
             responselogger.log_response(text, answer)
@@ -353,7 +353,7 @@ class Bot(object):
         return answer
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
-        YLogger.debug(self, "Raw Response (%s): %s", client_context.userid, response)
+        YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
         answer = self.post_process_response(client_context, response, srai)
         self.log_answer(client_context, sentence.text, answer, responselogger)

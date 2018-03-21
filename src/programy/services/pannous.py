@@ -77,11 +77,11 @@ class PannousService(Service):
             if client_context.client.license_keys.has_key('PANNOUS_LOGIN'):
                 login = client_context.client.license_keys.get_key('PANNOUS_LOGIN')
             else:
-                YLogger.error(self, "No variable PANNOUS_LOGIN found in license key file")
+                YLogger.error(client_context, "No variable PANNOUS_LOGIN found in license key file")
                 return ""
 
             return self.api.ask_question(self.url, question, login)
 
         except Exception as excep:
-            YLogger.error(self, str(excep))
+            YLogger.error(client_context, str(excep))
             return ""

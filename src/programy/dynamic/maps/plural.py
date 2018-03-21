@@ -42,5 +42,5 @@ class PluralMap(DynamicMap):
             else:
                 plural_value = input_value + "S"
 
-        YLogger.debug(self, "PluralMap converted %s to %s", input_value, plural_value)
+        YLogger.debug(client_context, "PluralMap converted %s to %s", input_value, plural_value)
         return plural_value

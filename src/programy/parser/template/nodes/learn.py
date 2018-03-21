@@ -133,7 +133,7 @@ class TemplateLearnNode(TemplateNode):
 
         client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
 
-        YLogger.debug(self, "[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
+        YLogger.debug(client_context, "[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
                       ET.tostring(new_topic, 'utf-8').decode('utf-8'),
                       ET.tostring(new_that, 'utf-8').decode('utf-8'))
@@ -149,7 +149,7 @@ class TemplateLearnNode(TemplateNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

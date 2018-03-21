@@ -33,7 +33,7 @@ class TemplateResetLearnfNode(TemplateNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

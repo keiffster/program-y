@@ -82,5 +82,5 @@ class DuckDuckGoService(Service):
         try:
             return self._api.ask_question(self._url, question)
         except Exception as e:
-            YLogger.error(self, "General error querying DuckDuckGo for question [%s] - [%s]", question, str(e))
+            YLogger.error(client_context, "General error querying DuckDuckGo for question [%s] - [%s]", question, str(e))
         return ""

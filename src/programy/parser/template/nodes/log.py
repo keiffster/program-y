@@ -42,17 +42,17 @@ class TemplateLogNode(TemplateAttribNode):
         resolved = self.resolve_children_to_string(client_context)
 
         if self._output == "logging":
-            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             if self._level == "debug":
-                YLogger.debug(self, resolved)
+                YLogger.debug(client_context, resolved)
             elif self._level == "warning":
-                YLogger.warning(self, resolved)
+                YLogger.warning(client_context, resolved)
             elif self._level == "error":
-                YLogger.error(self, resolved)
+                YLogger.error(client_context, resolved)
             elif self._level == "info":
-                YLogger.info(self, resolved)
+                YLogger.info(client_context, resolved)
             else:
-                YLogger.info(self, resolved)
+                YLogger.info(client_context, resolved)
         else:
             print(resolved)
         return ""
@@ -61,7 +61,7 @@ class TemplateLogNode(TemplateAttribNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

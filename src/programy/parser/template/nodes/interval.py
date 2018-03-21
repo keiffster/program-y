@@ -103,17 +103,17 @@ class TemplateIntervalNode(TemplateNode):
                        (difference.years, difference.months, difference.days,
                         difference.hours, difference.minutes, difference.seconds)
         else:
-            YLogger.error(self, "Unknown interval style [%s]", style)
+            YLogger.error(client_context, "Unknown interval style [%s]", style)
             resolved = ""
 
-        YLogger.debug(self, "[INTERVAL] resolved to [%s]", resolved)
+        YLogger.debug(client_context, "[INTERVAL] resolved to [%s]", resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

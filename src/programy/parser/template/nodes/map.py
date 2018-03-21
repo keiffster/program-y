@@ -45,7 +45,7 @@ class TemplateMapNode(TemplateNode):
         if value is None:
             value = client_context.brain.properties.property("default-map")
             if value is None:
-                YLogger.error(self, "No value for default-map defined, empty string returned")
+                YLogger.error(client_context, "No value for default-map defined, empty string returned")
                 value = ""
         return value
 
@@ -57,24 +57,24 @@ class TemplateMapNode(TemplateNode):
             value = client_context.brain.dynamics.dynamic_map(client_context, name, var)
         else:
             if client_context.brain.maps.contains(name) is False:
-                YLogger.error(self, "No map defined for [%s], using default-map as value", var)
+                YLogger.error(client_context, "No map defined for [%s], using default-map as value", var)
                 value = self.get_default_value(client_context)
             else:
                 the_map = client_context.brain.maps.map(name)
                 if var in the_map:
                     value = the_map[var]
                 else:
-                    YLogger.error(self, "No value defined for [%s], using default-map as value", var)
+                    YLogger.error(client_context, "No value defined for [%s], using default-map as value", var)
                     value = self.get_default_value(client_context)
 
-        YLogger.debug(self, "MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+        YLogger.debug(client_context, "MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

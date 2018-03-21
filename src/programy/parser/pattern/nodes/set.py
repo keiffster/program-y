@@ -90,13 +90,13 @@ class PatternSetNode(PatternNode):
             if self.set_is_known(client_context):
                 match = self.words_in_set(client_context, words, word_no)
                 if match.matched is True:
-                    YLogger.debug(self, "Found word [%s] in set [%s]", word, self.set_name)
+                    YLogger.debug(client_context, "Found word [%s] in set [%s]", word, self.set_name)
                     return match
                 else:
-                    YLogger.error(self, "No word [%s] found in set [%s]", word, self.set_name)
+                    YLogger.error(client_context, "No word [%s] found in set [%s]", word, self.set_name)
                     return EqualsMatch(False, word_no)
             else:
-                YLogger.error(self, "No set named [%s] in sets collection", self.set_name)
+                YLogger.error(client_context, "No set named [%s] in sets collection", self.set_name)
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

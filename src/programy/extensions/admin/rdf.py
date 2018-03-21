@@ -24,7 +24,7 @@ class RDFAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
-        YLogger.debug(self, "RDF Admin - [%s]", data)
+        YLogger.debug(client_context, "RDF Admin - [%s]", data)
 
         rdf = ""
         segments = data.split()

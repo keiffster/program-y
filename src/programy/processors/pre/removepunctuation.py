@@ -26,5 +26,5 @@ class RemovePunctuationPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        YLogger.debug(self, "Removing punctuation...")
+        YLogger.debug(context, "Removing punctuation...")
         return TextUtils.strip_all_punctuation(word_string)

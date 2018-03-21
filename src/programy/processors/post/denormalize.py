@@ -26,5 +26,5 @@ class DenormalizePostProcessor(PostProcessor):
 
     def process(self, context, word_string):
         denormalized = context.brain.denormals.denormalise_string(word_string)
-        YLogger.debug(self, "Denormalising input from [%s] to [%s]", word_string, denormalized)
+        YLogger.debug(context, "Denormalising input from [%s] to [%s]", word_string, denormalized)
         return denormalized

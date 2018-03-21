@@ -259,4 +259,4 @@ class PatternGraph(object):
             with open(filename, "w+", encoding="utf-8") as dump_file:
                 dump_file.write(braintree)
         else:
-            YLogger.error(self, "Unknown braintree content type [%s]", content)
+            YLogger.error(client_context, "Unknown braintree content type [%s]", content)

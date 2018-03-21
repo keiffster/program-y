@@ -50,10 +50,10 @@ class TemplateNode(object):
     def resolve(self, client_context):
         try:
             resolved = self.resolve_children_to_string(client_context)
-            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

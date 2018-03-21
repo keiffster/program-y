@@ -39,15 +39,15 @@ class TemplateBotNode(TemplateNode):
     def get_bot_variable(client_context, name):
         value = client_context.brain.properties.property(name)
         if value is None:
-            YLogger.error(None, "No bot property for [%s]", name)
+            YLogger.error(client_context, "No bot property for [%s]", name)
 
             value = client_context.brain.properties.property("default-property")
             if value is None:
-                YLogger.error(None, "No value for default-property")
+                YLogger.error(client_context, "No value for default-property")
 
                 value = client_context.brain.configuration.defaults.default_get
                 if value is None:
-                    YLogger.error(None, "No value for default default-property, return 'unknown'")
+                    YLogger.error(client_context, "No value for default default-property, return 'unknown'")
                     value = "unknown"
 
         return value
@@ -55,14 +55,14 @@ class TemplateBotNode(TemplateNode):
     def resolve_to_string(self, client_context):
         name = self.name.resolve(client_context)
         value = TemplateBotNode.get_bot_variable(client_context, name)
-        YLogger.debug(self, "[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+        YLogger.debug(client_context, "[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

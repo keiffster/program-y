@@ -84,20 +84,20 @@ class PatternRegexNode(PatternNode):
             if template is not None:
                 result = template.match(word)
                 if result is not None:
-                    YLogger.debug(self, "Match word [%s] regex", word)
+                    YLogger.debug(client_context, "Match word [%s] regex", word)
                     return EqualsMatch(True, word_no, word)
                 else:
-                    YLogger.error(self, "No word [%s] matched regex", word)
+                    YLogger.error(client_context, "No word [%s] matched regex", word)
                     return EqualsMatch(False, word_no)
             else:
                 return EqualsMatch(False, word_no)
         else:
             result = self.pattern.match(word)
             if result is not None:
-                YLogger.debug(self, "Match word [%s] regex", word)
+                YLogger.debug(client_context, "Match word [%s] regex", word)
                 return EqualsMatch(True, word_no, word)
             else:
-                YLogger.error(self, "No word [%s] matched regex", word)
+                YLogger.error(client_context, "No word [%s] matched regex", word)
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

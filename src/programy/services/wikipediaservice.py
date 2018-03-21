@@ -52,13 +52,13 @@ class WikipediaService(Service):
                 results = self._api.search(question)
                 search = ", ".join(results)
             else:
-                YLogger.error(self, "Unknown Wikipedia command [%s]", words[0])
+                YLogger.error(client_context, "Unknown Wikipedia command [%s]", words[0])
                 search = ""
             return search
         except wikipedia.exceptions.DisambiguationError:
-            YLogger.error(self, "Wikipedia search is ambiguous for question [%s]", question)
+            YLogger.error(client_context, "Wikipedia search is ambiguous for question [%s]", question)
         except wikipedia.exceptions.PageError:
-            YLogger.error(self, "No page on Wikipedia for question [%s]", question)
+            YLogger.error(client_context, "No page on Wikipedia for question [%s]", question)
         except Exception:
-            YLogger.error(self, "General error querying Wikipedia for question [%s]", question)
+            YLogger.error(client_context, "General error querying Wikipedia for question [%s]", question)
         return ""

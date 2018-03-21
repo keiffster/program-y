@@ -60,11 +60,11 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
-            YLogger.error(self, "%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
+            YLogger.error(client_context, "%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
             return None
 
         if context.search_depth_exceeded(depth) is True:
-            YLogger.error(self, "%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
+            YLogger.error(client_context, "%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
             return None
 
         context_match = Match(match_type, self, None)
@@ -83,7 +83,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 result = child.equals(client_context, words, word_no)
                 if result.matched is True:
                     word_no = result.word_no
-                    YLogger.debug(self, "%sWildcard child matched %s", tabs, result.matched_phrase)
+                    YLogger.debug(client_context, "%sWildcard child matched %s", tabs, result.matched_phrase)
 
                     context_match2 = Match(Match.WORD, child, result.matched_phrase)
 
@@ -94,10 +94,10 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     if match is not None:
                         return match
 
-                    if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
+                    if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
                         return None
 
-            YLogger.debug(self, "%sWildcard %s matched %s", tabs, self._wildcard, word)
+            YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
@@ -107,10 +107,10 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-            if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
+            if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
                 return None
 
-            YLogger.debug(self, "%sWildcard %s matched %s", tabs, self._wildcard, word)
+            YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
@@ -123,16 +123,16 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                 return None
             word = words.word(word_no)
 
-        YLogger.debug(self, "%sNo children, consume words until next break point", tabs)
+        YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)
         while word_no < words.num_words() - 1:
             match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 return match
 
-            if self.invalid_topic_or_that(tabs, word, context, matches_added) is True:
+            if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
                 return None
 
-            YLogger.debug(self, "%sWildcard %s matched %s", tabs, self._wildcard, word)
+            YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
             context_match.add_word(word)
 
             word_no += 1

@@ -39,5 +39,5 @@ class MapOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "MapOutOfBandProcessor: Showing a map for location=%s", self._location)
+        YLogger.info(client_context, "MapOutOfBandProcessor: Showing a map for location=%s", self._location)
         return "MAP"

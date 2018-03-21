@@ -92,11 +92,11 @@ class GenericRESTService(Service):
                 raise Exception("Unsupported REST method [%s]"%self.method)
 
             if response.status_code != 200:
-                YLogger.error(self, "[%s] return status code [%d]", self.host, response.status_code)
+                YLogger.error(client_context, "[%s] return status code [%d]", self.host, response.status_code)
             else:
                 return self._parse_response(response.text)
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
 
         return ""

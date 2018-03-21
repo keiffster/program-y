@@ -59,12 +59,12 @@ class PatternTopicNode(PatternNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_depth_exceeded(depth) is True:
-            YLogger.error(self, "%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
+            YLogger.error(client_context, "%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
             return None
 
         if words.word(word_no) == PatternTopicNode.TOPIC:
-            YLogger.debug(self, "%sTopic matched %s", tabs, words.word(word_no))
+            YLogger.debug(client_context, "%sTopic matched %s", tabs, words.word(word_no))
             return super(PatternTopicNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
 
-        YLogger.debug(self, "%sTopic NOT matched %s", tabs, words.word(word_no))
+        YLogger.debug(client_context, "%sTopic NOT matched %s", tabs, words.word(word_no))
         return None

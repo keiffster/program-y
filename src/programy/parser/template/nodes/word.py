@@ -35,7 +35,7 @@ class TemplateWordNode(TemplateNode):
         self._word = word
 
     def resolve(self, client_context):
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), self.word)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), self.word)
         if self.word is not None:
             return self.word
         return ""

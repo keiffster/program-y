@@ -24,7 +24,7 @@ class TranscriptAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
-        YLogger.debug(self, "Transcript Admin - [%s]", data)
+        YLogger.debug(client_context, "Transcript Admin - [%s]", data)
 
         show_props = True if data == "PROPERTIES" else False
 

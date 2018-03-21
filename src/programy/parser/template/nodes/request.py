@@ -34,14 +34,14 @@ class TemplateRequestNode(TemplateIndexedNode):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.previous_nth_question(self.index)
         resolved = question.combine_sentences()
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

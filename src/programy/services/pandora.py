@@ -64,11 +64,11 @@ class PandoraService(Service):
             if client_context.client.license_keys.has_key('PANDORA_BOTID'):
                 botid = client_context.client.license_keys.get_key('PANDORA_BOTID')
             else:
-                YLogger.error(self, "No variable PANDORA_BOTID found in license key file")
+                YLogger.error(client_context, "No variable PANDORA_BOTID found in license key file")
                 return ""
 
             return self.api.ask_question(self._config.url, question, botid)
 
         except Exception as excep:
-            YLogger.error(self, str(excep))
+            YLogger.error(client_context, str(excep))
             return ""

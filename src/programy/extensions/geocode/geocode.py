@@ -27,7 +27,7 @@ class GeoCodeExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
-        YLogger.debug(self, "GeoCode [%s]", data)
+        YLogger.debug(context, "GeoCode [%s]", data)
 
         words = data.split(" ")
         if words[0] == 'POSTCODE1':

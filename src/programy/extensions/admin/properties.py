@@ -25,7 +25,7 @@ class PropertiesAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
-        YLogger.debug(self, "Properties Admin - [%s]", data)
+        YLogger.debug(client_context, "Properties Admin - [%s]", data)
 
         properties = ""
 

@@ -59,13 +59,12 @@ class PatternThatNode(PatternNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_depth_exceeded(depth) is True:
-        # if depth > context.max_search_depth:
-            YLogger.error(self, "%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
+            YLogger.error(client_context, "%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
             return None
 
         if words.word(word_no) == PatternThatNode.THAT:
-            YLogger.debug(self, "%sThat matched %s", tabs, words.word(word_no))
+            YLogger.debug(client_context, "%sThat matched %s", tabs, words.word(word_no))
             return super(PatternThatNode, self).consume(client_context, context, words, word_no + 1, match_type, depth+1)
 
-        YLogger.debug(self, "%sTHAT NOT matched %s", tabs, words.word(word_no))
+        YLogger.debug(client_context, "%sTHAT NOT matched %s", tabs, words.word(word_no))
         return None

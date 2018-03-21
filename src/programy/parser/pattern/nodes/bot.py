@@ -57,7 +57,7 @@ class PatternBotNode(PatternNode):
         word = words.word(word_no)
         if client_context.brain.properties.has_property(self.property):
             if word == client_context.brain.properties.property(self.property):
-                YLogger.debug(self, "Found word [%s] as bot property", word)
+                YLogger.debug(client_context, "Found word [%s] as bot property", word)
                 return EqualsMatch(True, word_no, word)
         return EqualsMatch(False, word_no)
 

@@ -28,7 +28,7 @@ class MergeChinesePostProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        YLogger.debug(self, "Merging Chinese into understandable words...")
+        YLogger.debug(context, "Merging Chinese into understandable words...")
 
         words = word_string.split(" ")
         str = ""

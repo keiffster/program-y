@@ -58,5 +58,5 @@ class EmailOutOfBandProcessor(OutOfBandProcessor):
         return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "EmailOutOfBandProcessor: Emailing=%s", self._to)
+        YLogger.info(client_context, "EmailOutOfBandProcessor: Emailing=%s", self._to)
         return "EMAIL"

@@ -30,13 +30,13 @@ class TemplateProgramNode(TemplateNode):
         if client_context.brain.properties.has_property("fullname") is True:
             fullname = client_context.brain.properties.property("fullname")
         else:
-            YLogger.error(self, "Fullname property missing")
+            YLogger.error(client_context, "Fullname property missing")
 
         version = ""
         if client_context.brain.properties.has_property("version") is True:
             version = client_context.brain.properties.property("version")
         else:
-            YLogger.error(self, "Version property missing")
+            YLogger.error(client_context, "Version property missing")
 
         resolved = "%s %s" % (fullname, version)
         YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
@@ -46,7 +46,7 @@ class TemplateProgramNode(TemplateNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

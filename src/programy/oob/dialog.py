@@ -50,5 +50,5 @@ class DialogOutOfBandProcessor(OutOfBandProcessor):
         return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "DialogOutOfBandProcessor: Dialog=%s", self._title)
+        YLogger.info(client_context, "DialogOutOfBandProcessor: Dialog=%s", self._title)
         return "DIALOG"

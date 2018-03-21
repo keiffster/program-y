@@ -43,14 +43,14 @@ class TemplateRestNode(TemplateNode):
                     if len(words) > 1:
                         resolved = " ".join(words[1:])
 
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

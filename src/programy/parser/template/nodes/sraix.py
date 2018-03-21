@@ -38,22 +38,22 @@ class TemplateSRAIXNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         resolved = self.resolve_children_to_string(client_context)
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
         if self._service is not None:
             bot_service = ServiceFactory.get_service(self._service)
             response = bot_service.ask_question(client_context, resolved)
-            YLogger.debug(self, "SRAIX service [%s] return [%s]", self._service, response)
+            YLogger.debug(client_context, "SRAIX service [%s] return [%s]", self._service, response)
             return response
         else:
-            YLogger.error(self, "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+            YLogger.error(client_context, "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
             return ""
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

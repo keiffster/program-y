@@ -51,5 +51,5 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
         return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
+        YLogger.info(client_context, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
         return "SMS"

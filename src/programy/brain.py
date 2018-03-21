@@ -463,7 +463,7 @@ class Brain(object):
         return self.postprocessors.process(client_context, response)
 
     def failed_authentication(self, client_context):
-        YLogger.error(self, "[%s] failed authentication!")
+        YLogger.error(client_context, "[%s] failed authentication!")
 
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
@@ -490,7 +490,7 @@ class Brain(object):
 
         template_node = match_context.template_node()
 
-        YLogger.debug(self, "AIML Parser evaluating template [%s]", template_node.to_string())
+        YLogger.debug(client_context, "AIML Parser evaluating template [%s]", template_node.to_string())
 
         response = template_node.template.resolve(client_context)
 

@@ -27,7 +27,7 @@ class ConsoleFormatPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, context, word_string):
-        YLogger.debug(self, "Formatting response for console outpout...")
+        YLogger.debug(context, "Formatting response for console outpout...")
         lines = textwrap.wrap(word_string, width=80)
         word_string = os.linesep.join(lines)
         return word_string

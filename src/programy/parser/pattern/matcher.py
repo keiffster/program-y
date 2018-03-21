@@ -144,18 +144,18 @@ class MatchContext(object):
     def thatstar(self, index):
         return self._get_indexed_match_by_type(index, Match.THAT)
 
-    def list_matches(self, output_func=YLogger.debug, tabs="\t", include_template=True):
-        output_func(self, "%sMatches..."%tabs)
+    def list_matches(self, client_context, output_func=YLogger.debug, tabs="\t", include_template=True):
+        output_func(client_context, "%sMatches..."%tabs)
         count = 1
         for match in self._matched_nodes:
-            output_func(self, "%s\t%d - %s"%(tabs, count, match.to_string(self._tokenizer)))
+            output_func(client_context, "%s\t%d - %s"%(tabs, count, match.to_string(self._tokenizer)))
             count += 1
-        output_func(self, "%sMatch score %.2f"%(tabs, self.calculate_match_score()))
+        output_func(client_context, "%sMatch score %.2f"%(tabs, self.calculate_match_score()))
         if include_template is True:
             if self.matched() is True:
-                output_func(self, "%s\tT - %s"%(tabs, self._template_node.to_string()))
+                output_func(client_context, "%s\tT - %s"%(tabs, self._template_node.to_string()))
             else:
-                output_func(self, "%s\tT - None"%tabs)
+                output_func(client_context, "%s\tT - None"%tabs)
 
     def calculate_match_score(self):
         wildcards = 0

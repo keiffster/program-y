@@ -47,6 +47,7 @@ class ConversationFileStorage(ConversationStorage):
     def create_filename(self, clientid):
         return self._config._dir + os.sep + clientid + ".convo"
 
+    # TODO clientid could be replaced with context
     def save_conversation(self, conversation, clientid):
         YLogger.debug(self, "Saving conversation to file")
         try:

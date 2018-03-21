@@ -45,14 +45,14 @@ class PatternWildCardNode(PatternNode):
     def matching_wildcards(self):
         return []
 
-    def invalid_topic_or_that(self, tabs, word, context, matches_add):
+    def invalid_topic_or_that(self, tabs, client_context, word, context, matches_add):
         if word == PatternTopicNode.TOPIC:
-            YLogger.debug(self, "%sFound a topic at the wrong place....", tabs)
+            YLogger.debug(client_context, "%sFound a topic at the wrong place....", tabs)
             context.pop_matches(matches_add)
             return True
 
         if word == PatternThatNode.THAT:
-            YLogger.debug(self, "%sFound a that at the wrong place....", tabs)
+            YLogger.debug(client_context, "%sFound a that at the wrong place....", tabs)
             context.pop_matches(matches_add)
             return True
 
@@ -60,25 +60,25 @@ class PatternWildCardNode(PatternNode):
 
     def check_child_is_wildcard(self, tabs, client_context, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
-            YLogger.debug(self, "%sWildcard # is next node, moving on!", tabs)
+            YLogger.debug(client_context, "%sWildcard # is next node, moving on!", tabs)
             match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
-            YLogger.debug(self, "%sWildcard _ is next node, moving on!", tabs)
+            YLogger.debug(client_context, "%sWildcard _ is next node, moving on!", tabs)
             match = self._1ormore_underline.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
-            YLogger.debug(self, "%sWildcard ^ is next node, moving on!", tabs)
+            YLogger.debug(client_context, "%sWildcard ^ is next node, moving on!", tabs)
             match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
-            YLogger.debug(self, "%sWildcard * is next node, moving on!", tabs)
+            YLogger.debug(client_context, "%sWildcard * is next node, moving on!", tabs)
             match = self._1ormore_star.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match

@@ -27,7 +27,7 @@ class TemplateIdNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, client_context):
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), client_context.client.id)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), client_context.client.id)
         if client_context.client.id is not None:
             return client_context.client.id
         return ""

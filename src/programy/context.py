@@ -14,9 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import datetime
+import uuid
 
 from programy.utils.logging.ylogger import YLogger
-import datetime
 
 class ClientContext(object):
     
@@ -27,9 +28,14 @@ class ClientContext(object):
         self._brain = None
         self._question_start_time = None
         self._question_depth = 0
+        self._id = uuid.uuid1()
 
     def ylogger_type(self):
         return "context"
+
+    @property
+    def id(self):
+        return self._id
 
     @property
     def client(self):

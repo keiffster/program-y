@@ -46,10 +46,10 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
         context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         matches_added = 1
 
-        self.assertTrue(wildcard.invalid_topic_or_that("", PatternTopicNode.TOPIC, context, matches_added))
-        self.assertTrue(wildcard.invalid_topic_or_that("", PatternTopicNode.THAT, context, matches_added))
+        self.assertTrue(wildcard.invalid_topic_or_that("", self._client_context, PatternTopicNode.TOPIC, context, matches_added))
+        self.assertTrue(wildcard.invalid_topic_or_that("", self._client_context, PatternTopicNode.THAT, context, matches_added))
 
-        self.assertFalse(wildcard.invalid_topic_or_that("", "TEST", context, matches_added))
+        self.assertFalse(wildcard.invalid_topic_or_that("", self._client_context, "TEST", context, matches_added))
 
     def test_check_child_is_wildcard_no_wildcard_children(self):
 

@@ -39,5 +39,5 @@ class ClearOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "ClearOutOfBandProcessor: Clearing=%s", self._command)
+        YLogger.info(client_context, "ClearOutOfBandProcessor: Clearing=%s", self._command)
         return "CLEAR"

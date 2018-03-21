@@ -33,7 +33,7 @@ class TemplateAddTripleNode(TemplateTripleNode):
 
         client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
         resolved = ""
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):

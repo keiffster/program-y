@@ -52,5 +52,5 @@ class ClientIdAuthenticationService(Authenticator):
 
                 return False
         except Exception as excep:
-            YLogger.error(self, str(excep))
+            YLogger.error(client_context, str(excep))
             return False

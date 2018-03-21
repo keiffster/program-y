@@ -25,7 +25,7 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
         OutOfBandProcessor.__init__(self)
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "Default OOB Processing....")
+        YLogger.info(client_context, "Default OOB Processing....")
         if self._xml is not None:
             return ""
         return ""

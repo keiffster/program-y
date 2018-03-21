@@ -40,5 +40,5 @@ class DialOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "DialOutOfBandProcessor: Dialing=%s", self._number)
+        YLogger.info(client_context, "DialOutOfBandProcessor: Dialing=%s", self._number)
         return "DIAL"

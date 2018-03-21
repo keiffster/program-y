@@ -44,5 +44,5 @@ class SingularMap(DynamicMap):
             else:
                 singular_value = input_value
 
-        YLogger.debug(self, "SingleMap converted %s to %s", input_value, singular_value)
+        YLogger.debug(client_context, "SingleMap converted %s to %s", input_value, singular_value)
         return singular_value

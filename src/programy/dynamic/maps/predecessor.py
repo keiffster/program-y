@@ -31,8 +31,8 @@ class PredecessorMap(DynamicMap):
         try:
             int_value = int(input_value)
             str_value = str(int_value - 1)
-            YLogger.debug(self, "PredecessorMap converted %s to %s", input_value, str_value)
+            YLogger.debug(client_context, "PredecessorMap converted %s to %s", input_value, str_value)
             return str_value
         except Exception:
-            YLogger.error(self, "PredecessorMap could not convert %s to integer string", input_value)
+            YLogger.error(client_context, "PredecessorMap could not convert %s to integer string", input_value)
             return ""

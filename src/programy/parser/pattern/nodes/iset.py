@@ -78,10 +78,10 @@ class PatternISetNode(PatternNode):
             word = word.upper()
             for set_word in self._words:
                 if word == set_word:
-                    YLogger.debug(self, "Found word [%s] in iset", word)
+                    YLogger.debug(client_context, "Found word [%s] in iset", word)
                     return EqualsMatch(True, word_no, word)
 
-        YLogger.error(self, "No word [%s] found in iset", word)
+        YLogger.error(client_context, "No word [%s] found in iset", word)
         return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

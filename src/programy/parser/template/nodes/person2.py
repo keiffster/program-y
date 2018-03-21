@@ -29,14 +29,14 @@ class TemplatePerson2Node(TemplateNode):
     def resolve_to_string(self, client_context):
         string = self.resolve_children_to_string(client_context)
         resolved = client_context.brain.person2s.personalise_string(string)
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

@@ -28,7 +28,7 @@ class SplitChinesePreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        YLogger.debug(self, "Splitting Chinese into parsable words...")
+        YLogger.debug(context, "Splitting Chinese into parsable words...")
         chars = []
         for ch in word_string:
             if ChineseLanguage.is_language(ch):

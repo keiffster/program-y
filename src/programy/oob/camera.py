@@ -39,5 +39,5 @@ class CameraOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "CameraOutOfBandProcessor: Setting camera to=%s", self._command)
+        YLogger.info(client_context, "CameraOutOfBandProcessor: Setting camera to=%s", self._command)
         return "CAMERA"

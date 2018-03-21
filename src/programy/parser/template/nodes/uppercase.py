@@ -28,7 +28,7 @@ class TemplateUppercaseNode(TemplateNode):
     def resolve_to_string(self, client_context):
         resolved = self.resolve_children_to_string(client_context)
         resolved = resolved.upper()
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
@@ -36,7 +36,7 @@ class TemplateUppercaseNode(TemplateNode):
             data = self.resolve_to_string(client_context)
             return data
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

@@ -21,6 +21,7 @@ class RDFEntity(object):
         self._subject = subject
         self._predicates = {}
 
+#TODO No logging statements at all in RDF!
 class RDFCollection(BaseCollection):
 
 

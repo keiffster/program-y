@@ -50,5 +50,5 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
         return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
+        YLogger.info(client_context, "ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
         return "SCHEDULE"

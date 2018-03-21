@@ -37,7 +37,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):
@@ -51,7 +51,7 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def write_learnf_to_file(self, client_context, category):
         learnf_path = client_context.brain.configuration.defaults.learn_filename
-        YLogger.debug(self, "Writing learnf to %s", learnf_path)
+        YLogger.debug(client_context, "Writing learnf to %s", learnf_path)
 
         if os.path.isfile(learnf_path) is False:
             file = open(learnf_path, "w+", encoding="utf-8")

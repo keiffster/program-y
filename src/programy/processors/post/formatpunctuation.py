@@ -47,7 +47,7 @@ class FormatPunctuationProcessor(PostProcessor):
         return splits
 
     def process(self, context, word_string):
-        YLogger.debug(self, "Formatting punctuation...")
+        YLogger.debug(context, "Formatting punctuation...")
 
         word_list = self.space_split(word_string)
         new_word_list = []

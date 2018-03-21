@@ -55,6 +55,7 @@ class TemplateGetNode(TemplateNode):
         self._tuples = tuples
 
     @staticmethod
+    #TODO Replace bot with client_context
     def get_default_value(bot):
         value = bot.brain.properties.property("default-get")
         if value is None:
@@ -88,7 +89,7 @@ class TemplateGetNode(TemplateNode):
                 #    value = bot.brain.properties.property(name)
 
         if value is None:
-            YLogger.error(None, "No property for [%s]", name)
+            YLogger.error(client_context, "No property for [%s]", name)
 
             value = TemplateGetNode.get_default_value(client_context.bot)
 
@@ -98,9 +99,9 @@ class TemplateGetNode(TemplateNode):
         name = self.name.resolve(client_context)
         value = TemplateGetNode.get_property_value(client_context, self.local, name)
         if self.local:
-            YLogger.debug(self, "[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
+            YLogger.debug(client_context, "[%s] resolved to local: [%s] <= [%s]", self.to_string(), name, value)
         else:
-            YLogger.debug(self, "[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
+            YLogger.debug(client_context, "[%s] resolved to global: [%s] <= [%s]", self.to_string(), name, value)
         return value
 
     def decode_tuples(self, tuples):
@@ -146,7 +147,7 @@ class TemplateGetNode(TemplateNode):
                         resolved += atuple[2][1]
                         resolved += " "
 
-        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
         return resolved
 
@@ -162,7 +163,7 @@ class TemplateGetNode(TemplateNode):
             client_context.bot.load_conversation(client_context.userid)
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def to_string(self):

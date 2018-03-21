@@ -39,5 +39,5 @@ class URLOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "URLOutOfBandProcessor: Loading=%s", self._url)
+        YLogger.info(client_context, "URLOutOfBandProcessor: Loading=%s", self._url)
         return "URL"

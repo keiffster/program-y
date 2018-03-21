@@ -465,7 +465,7 @@ class AIMLParser(object):
         sentence.append_sentence(topic_sentence)
         sentence.append_word('__THAT__')
         sentence.append_sentence(that_sentence)
-        YLogger.debug(self, "Matching [%s]", sentence.words_from_current_pos(0))
+        YLogger.debug(client_context, "Matching [%s]", sentence.words_from_current_pos(0))
 
         context = MatchContext(max_search_depth=client_context.bot.configuration.max_search_depth,
                                max_search_timeout=client_context.bot.configuration.max_search_timeout,
@@ -476,7 +476,7 @@ class AIMLParser(object):
         if template is not None:
             context._template_node = template
 
-            context.list_matches()
+            context.list_matches(client_context)
 
             # Save the matched context for the associated sentence
             pattern_sentence.matched_context = context

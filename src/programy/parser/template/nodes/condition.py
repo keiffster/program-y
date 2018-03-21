@@ -410,11 +410,11 @@ class TemplateConditionNode(TemplateConditionVariable):
             else:
                 resolved = ""
 
-            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def resolve_type2_condition(self, client_context):
@@ -428,7 +428,7 @@ class TemplateConditionNode(TemplateConditionVariable):
                     # Condition comparison is always case insensetive
                     if client_context.brain.tokenizer.compare(value.upper(), condition_value.upper()):
                         resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in condition.children])
-                        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
                         if condition.loop is True:
                             resolved = resolved.strip() + " " + self.resolve(client_context)
@@ -444,11 +444,11 @@ class TemplateConditionNode(TemplateConditionVariable):
             else:
                 resolved = ""
 
-            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""
 
     def resolve_type3_condition(self, client_context):
@@ -461,7 +461,7 @@ class TemplateConditionNode(TemplateConditionVariable):
                     # Condition comparison is always case insensetive
                     if value.upper() == condition_value.upper():
                         resolved = client_context.brain.tokenizer.words_to_texts([child_node.resolve(client_context) for child_node in condition.children])
-                        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+                        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
 
                         if condition.loop is True:
                             resolved = resolved.strip() + " " + self.resolve(client_context).strip()
@@ -478,9 +478,9 @@ class TemplateConditionNode(TemplateConditionVariable):
             else:
                 resolved = ""
 
-            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(client_context, excep)
             return ""

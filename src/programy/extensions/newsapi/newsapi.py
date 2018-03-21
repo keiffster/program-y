@@ -31,17 +31,17 @@ class NewsAPIExtension(Extension):
 
         headlines = newsapi.get_headlines(source, max_num, sort, reverse)
         if headlines is None:
-            YLogger.error(self, "NewsAPIExtension no headlines found!")
+            YLogger.error(context, "NewsAPIExtension no headlines found!")
             return ""
 
         results = newsapi.to_program_y_text(headlines)
         if results is None:
-            YLogger.error(self, "NewsAPIExtension no results returned!")
+            YLogger.error(context, "NewsAPIExtension no results returned!")
             return ""
 
         return results
 
-    def parse_data(self, data):
+    def parse_data(self, context, data):
         source = None
         max_num = 10
         sort = False
@@ -63,7 +63,7 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     sort = False
                 else:
-                    YLogger.error(self, "Invalid value for NewAPI Data parameter sort [%s]", splits[count])
+                    YLogger.error(context, "Invalid value for NewAPI Data parameter sort [%s]", splits[count])
                     sort = False
             elif splits[count] == "REVERSE":
                 count += 1
@@ -72,10 +72,10 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     reverse = False
                 else:
-                    YLogger.error(self, "Invalid value for NewAPI Data parameter reverse [%s]", splits[count])
+                    YLogger.error(context, "Invalid value for NewAPI Data parameter reverse [%s]", splits[count])
                     reverse = False
             else:
-                YLogger.error(self, "Unknown News API Command [%s]", splits[count])
+                YLogger.error(context, "Unknown News API Command [%s]", splits[count])
 
             count += 1
 
@@ -84,10 +84,10 @@ class NewsAPIExtension(Extension):
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
 
-        source, max_num, sort, reverse = self.parse_data(data)
+        source, max_num, sort, reverse = self.parse_data(context, data)
 
         if source is None:
-            YLogger.error(self, "NewsAPIExtension no source passed in as data parameter!")
+            YLogger.error(context, "NewsAPIExtension no source passed in as data parameter!")
             return ""
 
         return self.get_news(context, source, max_num, sort, reverse)

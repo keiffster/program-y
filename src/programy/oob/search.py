@@ -40,5 +40,5 @@ class SearchOutOfBandProcessor(OutOfBandProcessor):
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(self, "SearchOutOfBandProcessor: Searching=%s", self._search)
+        YLogger.info(client_context, "SearchOutOfBandProcessor: Searching=%s", self._search)
         return "SEARCH"
