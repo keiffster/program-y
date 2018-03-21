@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.files.filefinder import FileFinder
 
 
@@ -32,14 +32,14 @@ class SetLoader(FileFinder):
         return sorted_set
 
     def load_file_contents(self, filename):
-        logging.debug("Loading set [%s]", filename)
+        YLogger.debug(self, "Loading set [%s]", filename)
         the_set = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
                     self.process_line(line, the_set)
         except Exception as excep:
-            logging.error("Failed to load set [%s] - %s", filename, excep)
+            YLogger.error(self, "Failed to load set [%s] - %s", filename, excep)
         return self.sort_sets(the_set)
 
     def load_from_text(self, text):
@@ -69,7 +69,7 @@ class SetCollection(object):
         set_name = name.upper()
         if set_name in self._sets:
             raise Exception("Set %s already exists" % set_name)
-        logging.debug("Adding set [%s[ to set group", set_name)
+        YLogger.debug(self, "Adding set [%s[ to set group", set_name)
         self._sets[set_name] = the_set
 
     def set(self, name):
@@ -96,7 +96,7 @@ class SetCollection(object):
                 sets = loader.load_dir_contents(file, configuration.directories, configuration.extension)
                 for key in sets.keys():
                     if key in self._sets:
-                        logging.error("Duplicate set [%s] found in [%s]", key, file)
+                        YLogger.error(self, "Duplicate set [%s] found in [%s]", key, file)
                     self._sets[key] = sets[key]
         else:
             self._sets = {}

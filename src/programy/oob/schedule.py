@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -40,15 +40,15 @@ class ScheduleOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'description':
                     self._description = child.text
                 else:
-                    logging.error("Unknown child element [%s] in schedule oob", child.tag)
+                    YLogger.error(self, "Unknown child element [%s] in schedule oob", child.tag)
 
             if self._title is not None and \
                 self._description is not None:
                 return True
 
-        logging.error("Invalid email schedule command")
+        YLogger.error(self, "Invalid email schedule command")
         return False
 
     def execute_oob_command(self, client_context):
-        logging.info("ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
+        YLogger.info(self, "ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
         return "SCHEDULE"

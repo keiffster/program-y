@@ -16,9 +16,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import os
-import logging
 import logging.config
 import yaml
+
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.file.factory import ConfigurationFactory
 from programy.clients.args import CommandLineClientArguments
@@ -39,13 +40,14 @@ class ResponseLogger(object):
 
 class BotFactory(object):
 
-    def __init__(self, configuration):
+    def __init__(self, client, configuration):
+        self._client = client
         self._bots = {}
         self.loads_bots(configuration)
 
     def loads_bots(self, configuration):
         for config in configuration.configurations:
-            bot = Bot(config)
+            bot = Bot(config, client=self._client)
             self._bots[bot.id] = bot
 
     # TODO Replace this with a bot selector
@@ -70,7 +72,10 @@ class BotClient(ResponseLogger):
         self.load_license_keys()
         self.get_license_keys()
 
-        self._bot_factory = BotFactory(self.configuration.client_configuration)
+        self._bot_factory = BotFactory(self, self.configuration.client_configuration)
+
+    def ylogger_type(self):
+        return "client"
 
     @property
     def configuration(self):
@@ -113,9 +118,9 @@ class BotClient(ResponseLogger):
             if self.configuration.client_configuration.license_keys is not None:
                 self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
             else:
-                logging.warning("No client configuration setting for license_keys")
+                YLogger.warning(self, "No client configuration setting for license_keys")
         else:
-            logging.warning("No configuration defined when loading license keys")
+            YLogger.warning(self, "No configuration defined when loading license keys")
 
     def get_license_keys(self):
         return
@@ -125,7 +130,7 @@ class BotClient(ResponseLogger):
             with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
                 logging_config = yaml.load(yml_data_file)
                 logging.config.dictConfig(logging_config)
-                logging.info("Now logging under configuration")
+                YLogger.info(self, "Now logging under configuration")
         else:
             print("Warning. No logging configuration file defined, using defaults...")
 

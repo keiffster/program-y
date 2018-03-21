@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.bot.filestorage import BotConversationsFileStorageConfiguration
 from programy.config.bot.redisstorage import BotConversationsRedisStorageConfiguration
@@ -35,7 +35,7 @@ class ConversationStorageFactory(object):
             storage.load_config_section(configuration_file, configuration, bot_root)
             return storage
 
-        logging.warning("Invalid Conversations file storage type [%s]", type)
+        YLogger.warning(None, "Invalid Conversations file storage type [%s]", type)
         return None
 
     @staticmethod
@@ -46,5 +46,5 @@ class ConversationStorageFactory(object):
         elif config.conversations.type == 'redis':
             return ConversationRedisStorage(config.conversations.storage)
 
-        logging.warning("Invalid Conversations file storage type [%s]", config.conversations.type)
+        YLogger.warning(None, "Invalid Conversations file storage type [%s]", config.conversations.type)
         return None

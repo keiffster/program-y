@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.processors.processing import PreProcessor
@@ -28,7 +28,7 @@ class SplitChinesePreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Splitting Chinese into parsable words...")
+        YLogger.debug(self, "Splitting Chinese into parsable words...")
         chars = []
         for ch in word_string:
             if ChineseLanguage.is_language(ch):

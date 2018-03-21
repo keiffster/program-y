@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -46,7 +46,7 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
             self.load_dynamic_maps(configuration_file, dynamic_config)
             self.load_dynamic_vars(configuration_file, dynamic_config)
         else:
-            logging.error("Config section [dynamic] missing from Brain, using defaults")
+            YLogger.error(self, "Config section [dynamic] missing from Brain, using defaults")
 
     def load_dynamic_sets(self, configuration_file, dynamic_config):
         sets_config = configuration_file.get_option(dynamic_config, "sets")

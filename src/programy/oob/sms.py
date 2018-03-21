@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -42,14 +42,14 @@ class SMSOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'message':
                     self._message = child.text
                 else:
-                    logging.error("Unknown child element [%s] in sms oob", child.tag)
+                    YLogger.error(self, "Unknown child element [%s] in sms oob", child.tag)
 
             if self._recipient is not None and self._message is not None:
                 return True
 
-        logging.error("Invalid sms oob command")
+        YLogger.error(self, "Invalid sms oob command")
         return False
 
     def execute_oob_command(self, client_context):
-        logging.info("SMSOutOfBandProcessor: Messaging=%s", self._recipient)
+        YLogger.info(self, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
         return "SMS"

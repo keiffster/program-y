@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -69,4 +69,4 @@ class BrainFileConfiguration(BaseSectionConfigurationData):
                 if file is not None:
                     self._file = self.sub_bot_root(file, bot_root)
         else:
-            logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
+            YLogger.warning(self, "'%s' section missing from bot config, using to defaults", self.section_name)

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.dynamic.maps.map import DynamicMap
 
@@ -42,5 +42,5 @@ class PluralMap(DynamicMap):
             else:
                 plural_value = input_value + "S"
 
-        logging.debug("PluralMap converted %s to %s", input_value, plural_value)
+        YLogger.debug(self, "PluralMap converted %s to %s", input_value, plural_value)
         return plural_value

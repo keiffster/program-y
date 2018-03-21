@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
@@ -78,10 +78,10 @@ class PatternISetNode(PatternNode):
             word = word.upper()
             for set_word in self._words:
                 if word == set_word:
-                    logging.debug("Found word [%s] in iset", word)
+                    YLogger.debug(self, "Found word [%s] in iset", word)
                     return EqualsMatch(True, word_no, word)
 
-        logging.error("No word [%s] found in iset", word)
+        YLogger.error(self, "No word [%s] found in iset", word)
         return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
@@ -27,7 +27,7 @@ class TemplateIdNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve(self, client_context):
-        logging.debug("[%s] resolved to [%s]", self.to_string(), client_context.client.id)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), client_context.client.id)
         if client_context.client.id is not None:
             return client_context.client.id
         return ""

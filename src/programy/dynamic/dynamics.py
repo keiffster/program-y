@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.classes.loader import ClassLoader
 from programy.dynamic.sets.numeric import IsNumeric
@@ -53,24 +53,24 @@ class DynamicsCollection(object):
 
     def load_default_dynamic_sets(self, dynamics_configuration):
         if IsNumeric.NAME not in self._dynamic_sets:
-            logging.warning("Dynamic set %s not defined, adding default implementation", IsNumeric.NAME)
+            YLogger.warning(self, "Dynamic set %s not defined, adding default implementation", IsNumeric.NAME)
             self._dynamic_sets[IsNumeric.NAME] = IsNumeric(dynamics_configuration)
 
     def load_default_dynamic_maps(self, dynamics_configuration):
         if PluralMap.NAME not in self._dynamic_maps:
-            logging.warning("Dynamic set %s not defined, adding default implementation", PluralMap.NAME)
+            YLogger.warning(self, "Dynamic set %s not defined, adding default implementation", PluralMap.NAME)
             self._dynamic_maps[PluralMap.NAME] = PluralMap(dynamics_configuration)
 
         if SingularMap.NAME not in self._dynamic_maps:
-            logging.warning("Dynamic set %s not defined, adding default implementation", SingularMap.NAME)
+            YLogger.warning(self, "Dynamic set %s not defined, adding default implementation", SingularMap.NAME)
             self._dynamic_maps[SingularMap.NAME] = SingularMap(dynamics_configuration)
 
         if SuccessorMap.NAME not in self._dynamic_maps:
-            logging.warning("Dynamic set %s not defined, adding default implementation", SuccessorMap.NAME)
+            YLogger.warning(self, "Dynamic set %s not defined, adding default implementation", SuccessorMap.NAME)
             self._dynamic_maps[SuccessorMap.NAME] = SuccessorMap(dynamics_configuration)
 
         if PredecessorMap.NAME not in self._dynamic_maps:
-            logging.warning("Dynamic set %s not defined, adding default implementation", PredecessorMap.NAME)
+            YLogger.warning(self, "Dynamic set %s not defined, adding default implementation", PredecessorMap.NAME)
             self._dynamic_maps[PredecessorMap.NAME] = PredecessorMap(dynamics_configuration)
 
     def load_default_dynamic_vars(self, dynamics_configuration):

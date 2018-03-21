@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
 from programy.parser.exceptions import ParserException
@@ -57,7 +57,7 @@ class PatternBotNode(PatternNode):
         word = words.word(word_no)
         if client_context.brain.properties.has_property(self.property):
             if word == client_context.brain.properties.property(self.property):
-                logging.debug("Found word [%s] as bot property", word)
+                YLogger.debug(self, "Found word [%s] as bot property", word)
                 return EqualsMatch(True, word_no, word)
         return EqualsMatch(False, word_no)
 

@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.processors.processing import PostProcessor
@@ -47,7 +47,7 @@ class FormatPunctuationProcessor(PostProcessor):
         return splits
 
     def process(self, context, word_string):
-        logging.debug("Formatting punctuation...")
+        YLogger.debug(self, "Formatting punctuation...")
 
         word_list = self.space_split(word_string)
         new_word_list = []

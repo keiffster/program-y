@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 from abc import ABCMeta, abstractmethod
 
@@ -50,7 +50,7 @@ class BaseCollection(object):
                     if self.process_line(line):
                         count += 1
         except FileNotFoundError:
-            logging.error("File not found [%s]", filename)
+            YLogger.error(self, "File not found [%s]", filename)
 
         return count
 
@@ -167,7 +167,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                 lhs = match.group(1)
                 rhs = match.group(2)
                 return [lhs, rhs]
-            logging.error("Pattern is bad [%s]", line)
+            YLogger.error(self, "Pattern is bad [%s]", line)
         return None
 
     def normalise_pattern(self, pattern):
@@ -216,8 +216,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         alreadys.append(pair[1])
 
             except Exception as excep:
-                logging.error("Invalid regular expression [%s]", str(pair[0]))
-                logging.exception(excep)
+                YLogger.error(self, "Invalid regular expression [%s]", str(pair[0]))
+                YLogger.exception(self, excep)
 
         return re.sub(' +', ' ', replacable.strip())
 

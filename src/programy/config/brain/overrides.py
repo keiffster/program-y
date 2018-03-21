@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -46,4 +46,4 @@ class BrainOverridesConfiguration(BaseSectionConfigurationData):
             self._allow_learn_aiml = configuration_file.get_bool_option(overrides, "allow_learn_aiml", missing_value=False)
             self._allow_learnf_aiml = configuration_file.get_bool_option(overrides, "allow_learnf_aiml", missing_value=False)
         else:
-            logging.warning("'overrides' section missing from brain config, using to defaults")
+            YLogger.warning(self, "'overrides' section missing from brain config, using to defaults")

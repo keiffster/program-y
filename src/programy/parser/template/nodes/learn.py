@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
@@ -133,7 +133,7 @@ class TemplateLearnNode(TemplateNode):
 
         client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
 
-        logging.debug("[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
+        YLogger.debug(self, "[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
                       ET.tostring(new_topic, 'utf-8').decode('utf-8'),
                       ET.tostring(new_that, 'utf-8').decode('utf-8'))
@@ -149,7 +149,7 @@ class TemplateLearnNode(TemplateNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):

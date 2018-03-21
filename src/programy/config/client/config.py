@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.container import BaseContainerConfigurationData
 from programy.config.bot.bot import BotConfiguration
@@ -54,7 +54,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
                 self._license_keys = self.sub_bot_root(self._license_keys, bot_root)
 
         else:
-            logging.warning("No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
+            YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"
             self._bot_configs[0].load_configuration(configuration_file, bot_root)
 

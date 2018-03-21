@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import datetime
 
 class ClientContext(object):
@@ -27,6 +27,9 @@ class ClientContext(object):
         self._brain = None
         self._question_start_time = None
         self._question_depth = 0
+
+    def ylogger_type(self):
+        return "context"
 
     @property
     def client(self):
@@ -67,8 +70,8 @@ class ClientContext(object):
                 raise Exception("Maximum search time limit [%d] exceeded" % self.bot.configuration.max_question_timeout)
 
     def mark_question_start(self, question):
-        logging.debug("##########################################################################################")
-        logging.debug("Question (%s): %s", self._client.id, question)
+        YLogger.debug(self, "##########################################################################################")
+        YLogger.debug(self, "Question (%s): %s", self._client.id, question)
 
         if self._question_depth == 0:
             self._question_start_time = datetime.datetime.now()

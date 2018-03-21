@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 This is an example extension that allow you to call an external service to save the results of a survey
 Currently contains no authentication
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.extensions.base import Extension
 
 
@@ -25,10 +25,10 @@ class SurveyExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
-        logging.debug("Survey Storage - Storing data [%s]", data)
+        YLogger.debug(self, "Survey Storage - Storing data [%s]", data)
 
         # Data is bar delimited, so you could write to a file, add to a database, or send to another REST service
         for answer in data.split("|"):
-            logging.debug("Answer = %s", answer.strip())
+            YLogger.debug(self, "Answer = %s", answer.strip())
 
         return "OK"

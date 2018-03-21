@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -54,4 +54,4 @@ class BrainBinariesConfiguration(BaseSectionConfigurationData):
                 self._binary_filename = self.sub_bot_root(binary_filename, bot_root)
             self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
         else:
-            logging.warning("'binaries' section missing from bot config, using to defaults")
+            YLogger.warning(self, "'binaries' section missing from bot config, using to defaults")

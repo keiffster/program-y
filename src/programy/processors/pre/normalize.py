@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PreProcessor
 
 class NormalizePreProcessor(PreProcessor):
@@ -26,5 +26,5 @@ class NormalizePreProcessor(PreProcessor):
 
     def process(self, context, word_string):
         normalized = context.brain.normals.normalise_string(word_string)
-        logging.debug("Normalising input from [%s] to [%s]", word_string, normalized)
+        YLogger.debug(self, "Normalising input from [%s] to [%s]", word_string, normalized)
         return normalized

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import json
 import urllib.request
 
@@ -210,11 +210,11 @@ class GoogleMaps(object):
     ##################
 
     def _get_response_as_json(self, url):
-        logging.debug("GoogleMaps Request = [%s]", url)
+        YLogger.debug(self, "GoogleMaps Request = [%s]", url)
         response = urllib.request.urlopen(url)
         content = response.read()
         decoded = content.decode('utf8')
-        logging.debug("GoogleMaps Response = [%s]", decoded)
+        YLogger.debug(self, "GoogleMaps Response = [%s]", decoded)
         return json.loads(decoded)
 
     ##################
@@ -231,7 +231,7 @@ class GoogleMaps(object):
         return False
 
     def get_latlong_for_location(self, location):
-        logging.debug("get_latlong_for_location - calling service")
+        YLogger.debug(self, "get_latlong_for_location - calling service")
         response = self._get_latlong_for_location_response(location)
 
         if self.is_error_response(response):
@@ -250,16 +250,16 @@ class GoogleMaps(object):
         return self._get_response_as_json(url)
 
     def get_distance_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
-        logging.debug("get_distance_between_addresses - calling service")
+        YLogger.debug(self, "get_distance_between_addresses - calling service")
         response = self._get_distance_between_addresses(origin, destination, country, mode, units)
 
         if response['status'] == 'OK':
-            logging.debug("get_distance_between_addresses - OK")
+            YLogger.debug(self, "get_distance_between_addresses - OK")
             distance = GoogleDistance(origin, destination, country, mode, units)
             distance.parse_json(response['rows'])
             return distance
         else:
-            logging.error("get_distance_between_addresses - [%s]", response['status'])
+            YLogger.error(self, "get_distance_between_addresses - [%s]", response['status'])
             return None
 
     ##################
@@ -271,15 +271,15 @@ class GoogleMaps(object):
         return self._get_response_as_json(url)
 
     def get_directions_between_addresses(self, origin, destination, country="UK", mode="driving", units="imperial"):
-        logging.debug("get_directions_between_addresses - calling live service")
+        YLogger.debug(self, "get_directions_between_addresses - calling live service")
         response = self._get_directions_between_addresses_response(origin, destination, country, mode, units)
 
         if response['status'] == 'OK':
-            logging.debug("get_directions_between_addresses - OK")
+            YLogger.debug(self, "get_directions_between_addresses - OK")
             directions = GoogleDirections(origin, destination, country, mode, units)
             directions.parse_json(response['routes'])
             return directions
         else:
-            logging.error("get_directions_between_addresses - %s", response['status'])
+            YLogger.error(self, "get_directions_between_addresses - %s", response['status'])
             return None
 

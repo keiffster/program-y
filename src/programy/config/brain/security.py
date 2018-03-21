@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -57,4 +57,4 @@ class BrainSecurityConfiguration(BaseSectionConfigurationData):
                 self._usergroups = self.sub_bot_root(usergroups, bot_root)
             self.load_additional_key_values(configuration_file, service)
         else:
-            logging.warning("'security' section missing from bot config, using to defaults")
+            YLogger.warning(self, "'security' section missing from bot config, using to defaults")

@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PreProcessor
 from programy.utils.text.text import TextUtils
 
@@ -26,5 +26,5 @@ class RemovePunctuationPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Removing punctuation...")
+        YLogger.debug(self, "Removing punctuation...")
         return TextUtils.strip_all_punctuation(word_string)

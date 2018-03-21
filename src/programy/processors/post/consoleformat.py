@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import textwrap
 import os
 
@@ -27,7 +27,7 @@ class ConsoleFormatPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Formatting response for console outpout...")
+        YLogger.debug(self, "Formatting response for console outpout...")
         lines = textwrap.wrap(word_string, width=80)
         word_string = os.linesep.join(lines)
         return word_string

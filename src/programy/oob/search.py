@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -36,9 +36,9 @@ class SearchOutOfBandProcessor(OutOfBandProcessor):
             self._search = oob.text
             return True
         else:
-            logging.error("Unvalid search oob command - missing search query!")
+            YLogger.error(self, "Unvalid search oob command - missing search query!")
             return False
 
     def execute_oob_command(self, client_context):
-        logging.info("SearchOutOfBandProcessor: Searching=%s", self._search)
+        YLogger.info(self, "SearchOutOfBandProcessor: Searching=%s", self._search)
         return "SEARCH"

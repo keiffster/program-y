@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.services.service import ServiceFactory
@@ -38,22 +38,22 @@ class TemplateSRAIXNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         resolved = self.resolve_children_to_string(client_context)
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
 
         if self._service is not None:
             bot_service = ServiceFactory.get_service(self._service)
             response = bot_service.ask_question(client_context, resolved)
-            logging.debug("SRAIX service [%s] return [%s]", self._service, response)
+            YLogger.debug(self, "SRAIX service [%s] return [%s]", self._service, response)
             return response
         else:
-            logging.error("Sorry SRAIX does not currently have an implementation for [%s]", self._service)
+            YLogger.error(self, "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
             return ""
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -79,13 +79,13 @@ class TemplateSRAIXNode(TemplateNode):
     def parse_expression(self, graph, expression):
 
         if 'host' in expression.attrib:
-            logging.warning("'host' attrib not supported in sraix, moved to config, see documentation")
+            YLogger.warning(self, "'host' attrib not supported in sraix, moved to config, see documentation")
         if 'botid' in expression.attrib:
-            logging.warning("'botid' attrib not supported in sraix, moved to config, see documentation")
+            YLogger.warning(self, "'botid' attrib not supported in sraix, moved to config, see documentation")
         if 'hint' in expression.attrib:
-            logging.warning("'hint' attrib not supported in sraix, moved to config, see documentation")
+            YLogger.warning(self, "'hint' attrib not supported in sraix, moved to config, see documentation")
         if 'apikey' in expression.attrib:
-            logging.warning("'apikey' attrib not supported in sraix, moved to config, see documentation")
+            YLogger.warning(self, "'apikey' attrib not supported in sraix, moved to config, see documentation")
 
         if 'service' in expression.attrib:
             self.service = expression.attrib['service']
@@ -97,13 +97,13 @@ class TemplateSRAIXNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == 'host':
-                logging.warning("'host' element not supported in sraix, moved to config, see documentation")
+                YLogger.warning(self, "'host' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'botid':
-                logging.warning("'botid' element not supported in sraix, moved to config, see documentation")
+                YLogger.warning(self, "'botid' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'hint':
-                logging.warning("'hint' element not supported in sraix, moved to config, see documentation")
+                YLogger.warning(self, "'hint' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'apikey':
-                logging.warning("'apikey' element not supported in sraix, moved to config, see documentation")
+                YLogger.warning(self, "'apikey' element not supported in sraix, moved to config, see documentation")
             elif tag_name == 'service':
                 self.service = self.get_text_from_element(child)
             else:

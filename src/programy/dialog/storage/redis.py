@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import redis
 
 from programy.dialog.storage.base import ConversationStorage
@@ -39,12 +39,12 @@ class ConversationRedisStorage(ConversationStorage):
         pass
 
     def save_conversation(self, conversation, clientid):
-        logging.debug("Saving conversation to Redis for %s", clientid)
+        YLogger.debug(self, "Saving conversation to Redis for %s", clientid)
         print("Writing to redis for %s"%clientid)
         self._redis.hmset(clientid, conversation._properties)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
-        logging.debug("Loading Conversation from file for %s", clientid)
+        YLogger.debug(self, "Loading Conversation from file for %s", clientid)
 
         print("Reading from redis for %s"%clientid)
         result = self._redis.hgetall(clientid)

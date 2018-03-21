@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from abc import ABCMeta, abstractmethod
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 
 class BaseConfigurationData(object):
@@ -32,7 +32,7 @@ class BaseConfigurationData(object):
         if key in self._additionals:
             return self._additionals[key]
         else:
-            logging.warning("Configuration key [%s] does not exist", key)
+            YLogger.warning(self, "Configuration key [%s] does not exist", key)
             return None
 
     @property

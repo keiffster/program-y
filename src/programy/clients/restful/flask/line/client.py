@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 # https://github.com/line/line-bot-sdk-python
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request, abort
 
@@ -36,7 +36,7 @@ class LineBotClient(FlaskRestBotClient):
 
         self.create_line_bot()
 
-        logging.debug("Line Client is running....")
+        YLogger.debug(self, "Line Client is running....")
 
     def get_description(self):
         return 'ProgramY AIML2.0 Line Client'
@@ -121,7 +121,7 @@ def receive_message():
     try:
         return LINE_CLIENT.receive_message(request)
     except Exception as e:
-        logging.exception(e)
+        YLogger.exception(self, e)
 
 
 if __name__ == "__main__":

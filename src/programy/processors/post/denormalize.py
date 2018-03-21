@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PostProcessor
 
 class DenormalizePostProcessor(PostProcessor):
@@ -26,5 +26,5 @@ class DenormalizePostProcessor(PostProcessor):
 
     def process(self, context, word_string):
         denormalized = context.brain.denormals.denormalise_string(word_string)
-        logging.debug("Denormalising input from [%s] to [%s]", word_string, denormalized)
+        YLogger.debug(self, "Denormalising input from [%s] to [%s]", word_string, denormalized)
         return denormalized

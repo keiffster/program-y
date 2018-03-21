@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -36,9 +36,9 @@ class WifiOutOfBandProcessor(OutOfBandProcessor):
             self._command = oob.text
             return True
         else:
-            logging.error("Unvalid camera oob command - missing command")
+            YLogger.error(self, "Unvalid camera oob command - missing command")
             return False
 
     def execute_oob_command(self, client_context):
-        logging.info("WifiOutOfBandProcessor: Setting camera to=%s", self._command)
+        YLogger.info(self, "WifiOutOfBandProcessor: Setting camera to=%s", self._command)
         return "WIFI"

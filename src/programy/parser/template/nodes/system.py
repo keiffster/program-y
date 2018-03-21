@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import subprocess
 
 from programy.parser.exceptions import ParserException
@@ -47,16 +47,16 @@ class TemplateSystemNode(TemplateAttribNode):
             process.wait()
             resolved = " ".join(result)
         else:
-            logging.warning("System command node disabled in config")
+            YLogger.warning(self, "System command node disabled in config")
             resolved = ""
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -65,7 +65,7 @@ class TemplateSystemNode(TemplateAttribNode):
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':
             raise ParserException("Invalid attribute name %s for this node", attrib_name)
-        logging.warning("System node timeout attrib currently ignored")
+        YLogger.warning(self, "System node timeout attrib currently ignored")
         self._timeout = attrib_value
 
     def to_xml(self, client_context):

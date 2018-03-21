@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.brain.security import BrainSecurityConfiguration
 from programy.security.authenticate.authenticator import Authenticator
@@ -52,5 +52,5 @@ class ClientIdAuthenticationService(Authenticator):
 
                 return False
         except Exception as excep:
-            logging.error(str(excep))
+            YLogger.error(self, str(excep))
             return False

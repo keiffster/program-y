@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.dynamic.maps.map import DynamicMap
 
@@ -31,8 +31,8 @@ class SuccessorMap(DynamicMap):
         try:
             int_value = int(input_value)
             str_value = str(int_value + 1)
-            logging.debug("SuccessorMap converted %s to %s", input_value, str_value)
+            YLogger.debug(self, "SuccessorMap converted %s to %s", input_value, str_value)
             return str_value
         except Exception:
-            logging.error("SuccessorMap could not convert %s to integer string", input_value)
+            YLogger.error(self, "SuccessorMap could not convert %s to integer string", input_value)
             return ""

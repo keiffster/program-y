@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.restful.client import RestBotClient
@@ -48,13 +48,13 @@ class FlaskRestBotClient(RestBotClient):
 
     def get_question(self, rest_request):
         if 'question' not in rest_request.args or rest_request.args['question'] is None:
-            logging.error("'question' missing from request")
+            YLogger.error(self, "'question' missing from request")
             self.server_abort(400)
         return rest_request.args['question']
 
     def get_userid(self, rest_request):
         if 'userid' not in rest_request.args or rest_request.args['userid'] is None:
-            logging.error("'userid' missing from request")
+            YLogger.error(self, "'userid' missing from request")
             self.server_abort(400)
         return rest_request.args['userid']
 
@@ -90,11 +90,11 @@ class FlaskRestBotClient(RestBotClient):
 
     def dump_request(self, request):
         if request.method == 'POST':
-            logging.debug(str(request))
+            YLogger.debug(self, str(request))
         elif request.method == 'GET':
-            logging.debug(str(request))
+            YLogger.debug(self, str(request))
         else:
-            logging.debug("restsclient.dump_request(), only GET and POST supported!")
+            YLogger.debug(self, "restsclient.dump_request(), only GET and POST supported!")
 
 REST_CLIENT = None
 

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 
@@ -59,4 +59,4 @@ class BotSpellingConfiguration(BaseConfigurationData):
             self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False)
             self._check_and_retry = configuration_file.get_option(spelling, "check_and_retry", missing_value=False)
         else:
-            logging.warning("'spelling' section missing from bot config, using defaults")
+            YLogger.warning(self, "'spelling' section missing from bot config, using defaults")

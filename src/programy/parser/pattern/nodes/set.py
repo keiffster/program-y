@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.matcher import EqualsMatch
@@ -90,13 +90,13 @@ class PatternSetNode(PatternNode):
             if self.set_is_known(client_context):
                 match = self.words_in_set(client_context, words, word_no)
                 if match.matched is True:
-                    logging.debug("Found word [%s] in set [%s]", word, self.set_name)
+                    YLogger.debug(self, "Found word [%s] in set [%s]", word, self.set_name)
                     return match
                 else:
-                    logging.error("No word [%s] found in set [%s]", word, self.set_name)
+                    YLogger.error(self, "No word [%s] found in set [%s]", word, self.set_name)
                     return EqualsMatch(False, word_no)
             else:
-                logging.error("No set named [%s] in sets collection", self.set_name)
+                YLogger.error(self, "No set named [%s] in sets collection", self.set_name)
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

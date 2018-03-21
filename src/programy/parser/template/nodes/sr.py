@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
@@ -32,16 +32,16 @@ class TemplateSrNode(TemplateNode):
         if star is not None:
             resolved = client_context.bot.ask_question(client_context, star, srai=True)
         else:
-            logging.error("Sr node has no stars available")
+            YLogger.error(self, "Sr node has no stars available")
             resolved = ""
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):

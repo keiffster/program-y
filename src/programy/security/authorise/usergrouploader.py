@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import yaml
 
 from programy.security.authorise.usergroups import User
@@ -56,7 +56,7 @@ class UserGroupLoader(object):
                         if role_name not in user.roles:
                             user.roles.append(role_name)
                         else:
-                            logging.debug("Role [%s] already exists in user [%s]", role_name, user_name)
+                            YLogger.debug(self, "Role [%s] already exists in user [%s]", role_name, user_name)
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -66,7 +66,7 @@ class UserGroupLoader(object):
                         if group_name not in user.groups:
                             user.groups.append(group_name)
                         else:
-                            logging.debug("Group [%s] already exists in user [%s]", group_name, user_name)
+                            YLogger.debug(self, "Group [%s] already exists in user [%s]", group_name, user_name)
 
                 users[user.userid] = user
         return users
@@ -87,7 +87,7 @@ class UserGroupLoader(object):
                         if role_name not in group.roles:
                             group.roles.append(role_name)
                         else:
-                            logging.debug("Role [%s] already exists in group [%s]", role_name, group_name)
+                            YLogger.debug(self, "Role [%s] already exists in group [%s]", role_name, group_name)
 
                 if 'groups' in yaml_obj:
                     groups_list = yaml_obj['groups']
@@ -97,7 +97,7 @@ class UserGroupLoader(object):
                         if inner_group_name not in group.groups:
                             group.groups.append(inner_group_name)
                         else:
-                            logging.debug("Group [%s] already exists in group [%s]", inner_group_name, group_name)
+                            YLogger.debug(self, "Group [%s] already exists in group [%s]", inner_group_name, group_name)
 
                 if 'users' in yaml_obj:
                     users_list = yaml_obj['groups']
@@ -107,7 +107,7 @@ class UserGroupLoader(object):
                         if user_name not in group.users:
                             group.users.append(user_name)
                         else:
-                            logging.debug("User [%s] already exists in group [%s]", user_name, group_name)
+                            YLogger.debug(self, "User [%s] already exists in group [%s]", user_name, group_name)
 
                 groups[group.groupid] = group
         return groups
@@ -123,7 +123,7 @@ class UserGroupLoader(object):
                     group = groups[group_id]
                     new_groups.append(group)
                 else:
-                    logging.error("Unknown group id [%s] in user [%s]", group_id, user_id)
+                    YLogger.error(self, "Unknown group id [%s] in user [%s]", group_id, user_id)
             user.add_groups(new_groups[:])
 
         for group_id in groups.keys():
@@ -135,7 +135,7 @@ class UserGroupLoader(object):
                     new_group = groups[sub_group_id]
                     new_groups.append(new_group)
                 else:
-                    logging.error("Unknown group id [%s] in group [%s]", sub_group_id, group_id)
+                    YLogger.error(self, "Unknown group id [%s] in group [%s]", sub_group_id, group_id)
             group.add_groups(new_groups[:])
 
             new_users = []
@@ -144,46 +144,46 @@ class UserGroupLoader(object):
                     new_user = users[sub_user_id]
                     new_users.append(new_user)
                 else:
-                    logging.error("Unknown user id [%s] in group [%s]", sub_user_id, group_id)
+                    YLogger.error(self, "Unknown user id [%s] in group [%s]", sub_user_id, group_id)
             group.add_users(new_users[:])
 
     def dump_users_and_groups(self, users, groups):
 
         if users is not None:
-            logging.debug("Users:")
+            YLogger.debug(self, "Users:")
             for user_id in users.keys():
                 user = users[user_id]
 
-                logging.debug("\t"+user.userid)
+                YLogger.debug(self, "\t"+user.userid)
 
                 if user.roles:
-                    logging.debug("\t\tRoles:")
+                    YLogger.debug(self, "\t\tRoles:")
                     for role in user.roles:
-                        logging.debug("\t\t\t"+role)
+                        YLogger.debug(self, "\t\t\t"+role)
 
                 if user.groups:
-                    logging.debug("\t\tGroups:")
+                    YLogger.debug(self, "\t\tGroups:")
                     for group in user.groups:
-                        logging.debug("\t\t\t" + group.groupid)
+                        YLogger.debug(self, "\t\t\t" + group.groupid)
 
         if groups is not None:
-            logging.debug("Groups:")
+            YLogger.debug(self, "Groups:")
             for group_id in groups.keys():
                 group = groups[group_id]
 
-                logging.debug("\t"+group.groupid)
+                YLogger.debug(self, "\t"+group.groupid)
 
                 if group.roles:
-                    logging.debug("\t\tRoles:")
+                    YLogger.debug(self, "\t\tRoles:")
                     for role in group.roles:
-                        logging.debug("\t\t\t"+role)
+                        YLogger.debug(self, "\t\t\t"+role)
 
                 if group.groups:
-                    logging.debug("\t\tGroups:")
+                    YLogger.debug(self, "\t\tGroups:")
                     for group in group.groups:
-                        logging.debug("\t\t\t" + group.groupid)
+                        YLogger.debug(self, "\t\t\t" + group.groupid)
 
                 if group.users:
-                    logging.debug("\t\tUsers:")
+                    YLogger.debug(self, "\t\tUsers:")
                     for user in group.users:
-                        logging.debug("\t\t\t" + user.userid)
+                        YLogger.debug(self, "\t\t\t" + user.userid)

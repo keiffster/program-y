@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
@@ -54,19 +54,19 @@ class TemplateSetNode(TemplateNode):
         value = self.resolve_children(client_context)
 
         if self.local is True:
-            logging.debug("[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
+            YLogger.debug(self, "[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
             client_context.bot.get_conversation(client_context).current_question().set_property(name, value)
         else:
             if client_context.bot.override_properties is False and client_context.brain.properties.has_property(name):
-                logging.error("Global property already exists for name [%s], ignoring set!", name)
+                YLogger.error(self, "Global property already exists for name [%s], ignoring set!", name)
                 value = client_context.brain.properties.property(name)
             else:
                 if client_context.brain.properties.has_property(name):
-                    logging.warning("Global property already exists for name [%s], over writing!", name)
-                logging.debug("[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
+                    YLogger.warning(self, "Global property already exists for name [%s], over writing!", name)
+                YLogger.debug(self, "[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
                 client_context.bot.get_conversation(client_context).set_property(name, value)
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), value)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), value)
 
         return value
 
@@ -76,7 +76,7 @@ class TemplateSetNode(TemplateNode):
             client_context.bot.save_conversation(client_context.userid)
             return str
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):

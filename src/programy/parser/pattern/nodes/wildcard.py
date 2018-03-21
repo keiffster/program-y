@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
@@ -47,12 +47,12 @@ class PatternWildCardNode(PatternNode):
 
     def invalid_topic_or_that(self, tabs, word, context, matches_add):
         if word == PatternTopicNode.TOPIC:
-            logging.debug("%sFound a topic at the wrong place....", tabs)
+            YLogger.debug(self, "%sFound a topic at the wrong place....", tabs)
             context.pop_matches(matches_add)
             return True
 
         if word == PatternThatNode.THAT:
-            logging.debug("%sFound a that at the wrong place....", tabs)
+            YLogger.debug(self, "%sFound a that at the wrong place....", tabs)
             context.pop_matches(matches_add)
             return True
 
@@ -60,25 +60,25 @@ class PatternWildCardNode(PatternNode):
 
     def check_child_is_wildcard(self, tabs, client_context, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
-            logging.debug("%sWildcard # is next node, moving on!", tabs)
+            YLogger.debug(self, "%sWildcard # is next node, moving on!", tabs)
             match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_underline is not None:
-            logging.debug("%sWildcard _ is next node, moving on!", tabs)
+            YLogger.debug(self, "%sWildcard _ is next node, moving on!", tabs)
             match = self._1ormore_underline.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._0ormore_arrow is not None:
-            logging.debug("%sWildcard ^ is next node, moving on!", tabs)
+            YLogger.debug(self, "%sWildcard ^ is next node, moving on!", tabs)
             match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match
 
         if self._1ormore_star is not None:
-            logging.debug("%sWildcard * is next node, moving on!", tabs)
+            YLogger.debug(self, "%sWildcard * is next node, moving on!", tabs)
             match = self._1ormore_star.consume(client_context, context, words, word_no+1, match_type, depth+1)
             if match is not None:
                 return match

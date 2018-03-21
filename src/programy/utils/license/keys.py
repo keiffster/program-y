@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 
 class LicenseKeys(object):
@@ -24,7 +24,7 @@ class LicenseKeys(object):
 
     def add_key(self, name, value):
         if name in self._keys:
-            logging.warning("License key [%s], already exists", name)
+            YLogger.warning(self, "License key [%s], already exists", name)
         self._keys[name] = value
 
     def has_key(self, name):
@@ -45,12 +45,12 @@ class LicenseKeys(object):
 
     def load_license_key_file(self, license_key_filename):
         try:
-            logging.info("Loading license key file: [%s]", license_key_filename)
+            YLogger.info(self, "Loading license key file: [%s]", license_key_filename)
             with open(license_key_filename, "r", encoding="utf-8") as license_file:
                 for line in license_file:
                     self._process_license_key_line(line)
         except Exception:
-            logging.error("Invalid license key file [%s]", license_key_filename)
+            YLogger.error(self, "Invalid license key file [%s]", license_key_filename)
 
     def _process_license_key_line(self, line):
         line = line.strip()
@@ -63,4 +63,4 @@ class LicenseKeys(object):
                     key = "".join(splits[1:]).strip()
                     self._keys[key_name] = key
                 else:
-                    logging.warning("Invalid license key [%s]", line)
+                    YLogger.warning(self, "Invalid license key [%s]", line)

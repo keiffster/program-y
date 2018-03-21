@@ -1,4 +1,4 @@
-import logging
+from programy.utils.logging.ylogger import YLogger
 import json
 import requests
 
@@ -21,7 +21,7 @@ class NewsArticle(object):
         if name in data:
             return data[name]
         else:
-            logging.debug("Attribute [%s] missing from New API Article data", name)
+            YLogger.debug(self, "Attribute [%s] missing from New API Article data", name)
             return def_value
 
     def parse_json(self, data):
@@ -211,7 +211,7 @@ class NewsAPI(object):
 
     @staticmethod
     def _get_news_feed_articles(url, max_articles, sort, reverse):
-        logging.debug("News API URL: [%s]", url)
+        YLogger.debug(None, "News API URL: [%s]", url)
         response = NewsAPI._news_api_api.get_news(url)
         articles = []
         if response.status_code == 200:
@@ -223,24 +223,24 @@ class NewsAPI(object):
                         article = NewsArticle()
                         article.parse_json(article_data)
                         articles.append(article)
-                        logging.debug(article.description)
+                        YLogger.debug(None, article.description)
 
                     if sort is True:
-                        logging.debug("Sorting articles,, reverse=%s", str(reverse))
+                        YLogger.debug(None, "Sorting articles,, reverse=%s", str(reverse))
                         articles.sort(key=lambda article: article.published_at, reverse=reverse)
 
                     if max_articles != 0:
-                        logging.debug("Returning max_articles %d articles", max_articles)
+                        YLogger.debug(None, "Returning max_articles %d articles", max_articles)
                         articles = articles[:max_articles]
                     else:
-                        logging.debug("Returning all articles")
+                        YLogger.debug(None, "Returning all articles")
                 else:
-                    logging.error("NewAPI payload contains no articles attribute")
+                    YLogger.error(None, "NewAPI payload contains no articles attribute")
             else:
-                logging.error("NewsAPI request none JSON object")
+                YLogger.error(None, "NewsAPI request none JSON object")
 
         else:
-            logging.error("NewsAPI request returned error code %d", response.status_code)
+            YLogger.error(None, "NewsAPI request returned error code %d", response.status_code)
 
         return articles
 
@@ -250,7 +250,7 @@ class NewsAPI(object):
             function = self.function_mapping[source]
             return function(self.api_key, max_articles, sort, reverse)
         else:
-            logging.error("No source available for %s", source)
+            YLogger.error(self, "No source available for %s", source)
             return []
 
     @staticmethod

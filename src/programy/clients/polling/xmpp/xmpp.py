@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import sleekxmpp
 
 class XmppClient(sleekxmpp.ClientXMPP):
@@ -57,12 +57,12 @@ class XmppClient(sleekxmpp.ClientXMPP):
 
             question = self.get_question(msg)
             if question is None:
-                logging.debug("Missing 'question' from XMPP message")
+                YLogger.debug(self, "Missing 'question' from XMPP message")
                 return
 
             userid = self.get_userid(msg)
             if userid is None:
-                logging.debug("Missing 'userid' from XMPP message")
+                YLogger.debug(self, "Missing 'userid' from XMPP message")
                 return
 
             response = self._bot_client.ask_question(userid, question)
@@ -70,7 +70,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
             self.send_response(msg, response)
 
         else:
-            logging.debug("Invalid XMPP message")
+            YLogger.debug(self, "Invalid XMPP message")
             self.send_response(msg, "Sorry, no idea!")
 
     def register_xep_plugins(self, configuration):

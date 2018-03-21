@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 
 from programy.parser.exceptions import ParserException
@@ -42,17 +42,17 @@ class TemplateLogNode(TemplateAttribNode):
         resolved = self.resolve_children_to_string(client_context)
 
         if self._output == "logging":
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
             if self._level == "debug":
-                logging.debug(resolved)
+                YLogger.debug(self, resolved)
             elif self._level == "warning":
-                logging.warning(resolved)
+                YLogger.warning(self, resolved)
             elif self._level == "error":
-                logging.error(resolved)
+                YLogger.error(self, resolved)
             elif self._level == "info":
-                logging.info(resolved)
+                YLogger.info(self, resolved)
             else:
-                logging.info(resolved)
+                YLogger.info(self, resolved)
         else:
             print(resolved)
         return ""
@@ -61,7 +61,7 @@ class TemplateLogNode(TemplateAttribNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
@@ -74,8 +74,8 @@ class XmppBotClient(PollingBotClient):
             self._updater.stop()
 
         except Exception as excep:
-            logging.exception(excep)
-            logging.error("Oops something bad happened !")
+            YLogger.exception(self, excep)
+            YLogger.error(self, "Oops something bad happened !")
 
         return running
 

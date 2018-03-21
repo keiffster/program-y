@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.base import TemplateNode
 
@@ -56,7 +56,7 @@ class TemplateAttribNode(TemplateNode):
             attrib_name = attrib[0]
             if attrib_name not in attribs_found:
                 if attrib[1] is not None:
-                    logging.debug("Setting default value for attrib [%s]", attrib_name)
+                    YLogger.debug(self, "Setting default value for attrib [%s]", attrib_name)
                     self.set_attrib(attrib_name, attrib[1])
 
     def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
@@ -78,5 +78,5 @@ class TemplateAttribNode(TemplateNode):
             self.parse_text(graph, self.get_tail_from_element(child))
 
         if attrib_found is False:
-            logging.debug("Setting default value for attrib [%s]", attrib_name)
+            YLogger.debug(self, "Setting default value for attrib [%s]", attrib_name)
             self.set_attrib(attrib_name, default_value)

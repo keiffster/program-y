@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -35,9 +35,9 @@ class MapOutOfBandProcessor(OutOfBandProcessor):
             self._location = oob.text
             return True
         else:
-            logging.error("Unvalid geomap oob command - missing location text!")
+            YLogger.error(self, "Unvalid geomap oob command - missing location text!")
             return False
 
     def execute_oob_command(self, client_context):
-        logging.info("MapOutOfBandProcessor: Showing a map for location=%s", self._location)
+        YLogger.info(self, "MapOutOfBandProcessor: Showing a map for location=%s", self._location)
         return "MAP"

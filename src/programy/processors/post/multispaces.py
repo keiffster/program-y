@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.processors.processing import PostProcessor
@@ -26,6 +26,6 @@ class RemoveMultiSpacePostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Removing multiple spaces from words...")
+        YLogger.debug(self, "Removing multiple spaces from words...")
         word_string = re.sub(r'\s+', ' ', word_string)
         return word_string.strip()

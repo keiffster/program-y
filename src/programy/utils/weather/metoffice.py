@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import datetime
 import json
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 import metoffer
 
@@ -49,12 +49,12 @@ class DataPoint(object):
             return json_data[name]
         else:
             if data_type == MetOfficeWeatherReport.OBSERVATION:
-                logging.warning('%s attribute missing from ObservationDataPoint data point', name)
+                YLogger.warning(self, '%s attribute missing from ObservationDataPoint data point', name)
             elif data_type == MetOfficeWeatherReport.FORECAST:
                 if time_period == metoffer.THREE_HOURLY:
-                    logging.warning('%s attribute missing from three hourly forecast data point', name)
+                    YLogger.warning(self, '%s attribute missing from three hourly forecast data point', name)
                 if time_period == metoffer.DAILY:
-                    logging.warning('%s attribute missing from daily forecast data point', name)
+                    YLogger.warning(self, '%s attribute missing from daily forecast data point', name)
             return None
 
     def direction_to_full_text(self, direction):

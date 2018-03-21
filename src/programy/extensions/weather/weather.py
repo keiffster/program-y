@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import datetime
 
 from programy.utils.weather.metoffice import MetOffice
@@ -37,24 +37,24 @@ class WeatherExtension(Extension):
 
         splits = data.split()
         if len(splits) != 5:
-            logging.debug("Weather - Not enough paramters passed, [%d] expected 5", len(splits))
+            YLogger.debug(self, "Weather - Not enough paramters passed, [%d] expected 5", len(splits))
             return None
 
         type = splits[0]
         if type not in ['OBSERVATION', 'FORECAST5DAY', 'FORECAST24HOUR']:
-            logging.debug("Weather - Type not understood [%s]", type)
+            YLogger.debug(self, "Weather - Type not understood [%s]", type)
             return None
 
         if splits[1] == 'LOCATION':
             postcode = splits[2]
         else:
-            logging.debug("Weather - LOCATION missing")
+            YLogger.debug(self, "Weather - LOCATION missing")
             return None
 
         if splits[3] == 'WHEN':
             when = splits[4]
         else:
-            logging.debug("Weather - WHEN missing")
+            YLogger.debug(self, "Weather - WHEN missing")
             return None
 
         if type == 'OBSERVATION':
@@ -65,7 +65,7 @@ class WeatherExtension(Extension):
             return self.twentyfour_hour_forecast(context.bot, postcode, when)
 
     def current_observation(self, bot, postcode):
-        logging.debug("Getting weather observation for [%s]", postcode)
+        YLogger.debug(self, "Getting weather observation for [%s]", postcode)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
@@ -80,7 +80,7 @@ class WeatherExtension(Extension):
             return "UNAVAILABLE"
 
     def twentyfour_hour_forecast(self, bot, postcode, when):
-        logging.debug("Getting 24 hour weather forecast for [%s] at time [%s]", postcode, when)
+        YLogger.debug(self, "Getting 24 hour weather forecast for [%s] at time [%s]", postcode, when)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)
@@ -97,7 +97,7 @@ class WeatherExtension(Extension):
             return "UNAVAILABLE"
 
     def five_day_forecast(self, bot, postcode, when):
-        logging.debug("Getting 5 day forecast for [%s] at time [%s]", postcode, when)
+        YLogger.debug(self, "Getting 5 day forecast for [%s] at time [%s]", postcode, when)
 
         googlemaps = self.get_geo_locator(bot)
         latlng = googlemaps.get_latlong_for_location(postcode)

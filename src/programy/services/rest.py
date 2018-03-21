@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import requests
 
 from programy.services.service import Service
@@ -92,11 +92,11 @@ class GenericRESTService(Service):
                 raise Exception("Unsupported REST method [%s]"%self.method)
 
             if response.status_code != 200:
-                logging.error("[%s] return status code [%d]", self.host, response.status_code)
+                YLogger.error(self, "[%s] return status code [%d]", self.host, response.status_code)
             else:
                 return self._parse_response(response.text)
 
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
 
         return ""

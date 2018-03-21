@@ -1,4 +1,4 @@
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask
 from flask import jsonify
@@ -44,24 +44,24 @@ def ask():
 
     if WEBCHAT_CLIENT.configuration.client_configuration.use_api_keys is True:
         if 'apikey' not in request.args or request.args['apikey'] is None:
-            logging.error("Unauthorised access - api required but missing")
+            YLogger.error(self, "Unauthorised access - api required but missing")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
         apikey = request.args['apikey']
         if is_apikey_valid(apikey) is False:
-            logging.error("'Unauthorised access - invalid api key")
+            YLogger.error(self, "'Unauthorised access - invalid api key")
             return make_response(jsonify({'error': 'Unauthorized access'}), 401)
 
     if 'question' not in request.args or request.args['question'] is None:
         print("'question' missing from request")
-        logging.error("'question' missing from request")
+        YLogger.error(self, "'question' missing from request")
         abort(400)
 
     question = request.args['question']
 
     if 'clientid' not in request.args or request.args['clientid'] is None:
         print("'clientid' missing from request")
-        logging.error("'clientid' missing from request")
+        YLogger.error(self, "'clientid' missing from request")
         abort(400)
 
     clientid = request.args['clientid']
@@ -76,9 +76,9 @@ def ask():
         expire_date = expire_date + datetime.timedelta(days=WEBCHAT_CLIENT.configuration.client_configuration.cookie_expires)
 
         userid = str(uuid.uuid4().hex)
-        logging.debug("Setting client cookie to :%s"%userid)
+        YLogger.debug(self, "Setting client cookie to :%s"%userid)
     else:
-        logging.debug("Found client cookie : %s"%userid)
+        YLogger.debug(self, "Found client cookie : %s"%userid)
 
     try:
         client_context = WEBCHAT_CLIENT.create_client_context(userid)
@@ -98,7 +98,7 @@ def ask():
                                 expires=expire_date)
 
     except Exception as excep:
-        logging.exception(excep)
+        YLogger.exception(self, excep)
 
         response_data = {"question": question,
                     "answer": WEBCHAT_CLIENT.bot.default_response,

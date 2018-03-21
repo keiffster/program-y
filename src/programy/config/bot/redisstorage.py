@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 
@@ -40,4 +40,4 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
             self._host = configuration_file.get_option(ConversationsFileStorage, "host", missing_value="localhost")
             self._port = configuration_file.get_int_option(ConversationsFileStorage, "port", missing_value=6379)
         else:
-            logging.warning("'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")
+            YLogger.warning(self, "'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")

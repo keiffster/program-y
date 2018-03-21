@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.files.filefinder import FileFinder
 
@@ -28,14 +28,14 @@ class MapLoader(FileFinder):
         FileFinder.__init__(self)
 
     def load_file_contents(self, filename):
-        logging.debug("Loading map [%s]", filename)
+        YLogger.debug(self, "Loading map [%s]", filename)
         the_map = {}
         try:
             with open(filename, 'r', encoding='utf8') as my_file:
                 for line in my_file:
                     self.process_line(line, the_map)
         except Exception as excep:
-            logging.error("Failed to load map [%s] - %s", filename, excep)
+            YLogger.error(self, "Failed to load map [%s] - %s", filename, excep)
         return the_map
 
     def load_from_text(self, text):
@@ -79,7 +79,7 @@ class MapCollection(object):
                 maps = loader.load_dir_contents(file, configuration.directories, configuration.extension)
                 for key in maps.keys():
                     if key in self._maps:
-                        logging.error("Duplicate map [%s] found in [%s]", key, file)
+                        YLogger.error(self, "Duplicate map [%s] found in [%s]", key, file)
                     self._maps[key] = maps[key]
         else:
             self._maps = {}

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
@@ -39,15 +39,15 @@ class TemplateBotNode(TemplateNode):
     def get_bot_variable(client_context, name):
         value = client_context.brain.properties.property(name)
         if value is None:
-            logging.error("No bot property for [%s]", name)
+            YLogger.error(None, "No bot property for [%s]", name)
 
             value = client_context.brain.properties.property("default-property")
             if value is None:
-                logging.error("No value for default-property")
+                YLogger.error(None, "No value for default-property")
 
                 value = client_context.brain.configuration.defaults.default_get
                 if value is None:
-                    logging.error("No value for default default-property, return 'unknown'")
+                    YLogger.error(None, "No value for default default-property, return 'unknown'")
                     value = "unknown"
 
         return value
@@ -55,14 +55,14 @@ class TemplateBotNode(TemplateNode):
     def resolve_to_string(self, client_context):
         name = self.name.resolve(client_context)
         value = TemplateBotNode.get_bot_variable(client_context, name)
-        logging.debug("[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
+        YLogger.debug(self, "[%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):

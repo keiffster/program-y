@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.services.service import Service
 from programy.config.brain.service import BrainServiceConfiguration
@@ -77,11 +77,11 @@ class PannousService(Service):
             if client_context.client.license_keys.has_key('PANNOUS_LOGIN'):
                 login = client_context.client.license_keys.get_key('PANNOUS_LOGIN')
             else:
-                logging.error("No variable PANNOUS_LOGIN found in license key file")
+                YLogger.error(self, "No variable PANNOUS_LOGIN found in license key file")
                 return ""
 
             return self.api.ask_question(self.url, question, login)
 
         except Exception as excep:
-            logging.error(str(excep))
+            YLogger.error(self, str(excep))
             return ""

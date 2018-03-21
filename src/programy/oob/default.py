@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.oob.oob import OutOfBandProcessor
 
@@ -25,7 +25,7 @@ class DefaultOutOfBandProcessor(OutOfBandProcessor):
         OutOfBandProcessor.__init__(self)
 
     def execute_oob_command(self, client_context):
-        logging.info("Default OOB Processing....")
+        YLogger.info(self, "Default OOB Processing....")
         if self._xml is not None:
             return ""
         return ""

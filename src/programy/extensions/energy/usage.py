@@ -18,7 +18,7 @@ This is an example extension that allow you to call an external service to retre
 of the customer. Currently contains no authentication
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.extensions.base import Extension
 
@@ -27,7 +27,7 @@ class EnergyUsageExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
-        logging.debug("Energy Usage - Calling external service for with extra data [%s]", data)
+        YLogger.debug(self, "Energy Usage - Calling external service for with extra data [%s]", data)
 
         #
         # Add the logic to receive the balance and format it into KWh for Gas and Electricity consumption

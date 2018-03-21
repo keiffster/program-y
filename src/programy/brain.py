@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 import xml.etree.ElementTree as ET
 try:
@@ -80,6 +80,9 @@ class Brain(object):
         self.load(self.configuration)
 
         self.dump_brain_tree ()
+
+    def ylogger_type(self):
+        return "brain"
 
     @property
     def id(self):
@@ -175,7 +178,7 @@ class Brain(object):
 
     def load_tokenizer(self):
         if self.configuration is not None and self.configuration.tokenizer.classname is not None:
-            logging.info("Loading tokenizer from class [%s]", self.configuration.tokenizer.classname)
+            YLogger.info(self, "Loading tokenizer from class [%s]", self.configuration.tokenizer.classname)
             tokenizer_class = ClassLoader.instantiate_class(self.configuration.tokenizer.classname)
             return tokenizer_class(self.configuration.tokenizer.split_chars)
         else:
@@ -185,7 +188,7 @@ class Brain(object):
         return AIMLParser(self)
 
     def load_binary(self, configuration):
-        logging.info("Loading binary brain from [%s]", configuration.binaries.binary_filename)
+        YLogger.info(self, "Loading binary brain from [%s]", configuration.binaries.binary_filename)
         try:
             start = datetime.datetime.now()
             gc.disable()
@@ -195,28 +198,28 @@ class Brain(object):
             bin_file.close()
             stop = datetime.datetime.now()
             diff = stop - start
-            logging.info("Brain load took a total of %.2f sec", diff.total_seconds())
+            YLogger.info(self, "Brain load took a total of %.2f sec", diff.total_seconds())
             return False   # Tell caller, load succeeded and skip aiml load
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             if configuration.binaries.load_aiml_on_binary_fail is True:
                 return True   # Tell caller, load failed and to load aiml directly
             else:
                 raise excep
 
     def load_aiml(self, configuration):
-        logging.info("Loading aiml source brain")
+        YLogger.info(self, "Loading aiml source brain")
         self._aiml_parser.load_aiml(configuration)
 
     def save_binary(self, configuration):
-        logging.info("Saving binary brain to [%s]", configuration.binaries.binary_filename)
+        YLogger.info(self, "Saving binary brain to [%s]", configuration.binaries.binary_filename)
         start = datetime.datetime.now()
         bin_file = open(configuration.binaries.binary_filename, "wb")
         pickle.dump(self._aiml_parser, bin_file)
         bin_file.close()
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Brain save took a total of %.2f sec", diff.total_seconds())
+        YLogger.info(self, "Brain save took a total of %.2f sec", diff.total_seconds())
 
     def load(self, configuration: BrainConfiguration):
 
@@ -230,27 +233,27 @@ class Brain(object):
         if configuration.binaries.save_binary is True:
             self.save_binary(configuration)
 
-        logging.info("Loading collections")
+        YLogger.info(self, "Loading collections")
         self.load_collections(configuration)
 
-        logging.info("Loading services")
+        YLogger.info(self, "Loading services")
         self.load_services(configuration)
 
-        logging.info("Loading security services")
+        YLogger.info(self, "Loading security services")
         self.load_security_services(configuration)
 
-        logging.info("Loading oob processors")
+        YLogger.info(self, "Loading oob processors")
         self.load_oob_processors(configuration)
 
-        logging.info("Loading regex templates")
+        YLogger.info(self, "Loading regex templates")
         self.load_regex_templates(configuration)
 
-        logging.info("Loading dynamics sets, maps and vars")
+        YLogger.info(self, "Loading dynamics sets, maps and vars")
         self.load_dynamics(configuration)
 
     def dump_brain_tree(self):
         if self.configuration.braintree.file is not None:
-            logging.debug("Dumping AIML Graph as tree to [%s]",
+            YLogger.debug(self, "Dumping AIML Graph as tree to [%s]",
                               self._configuration.braintree.file)
             self.aiml_parser.pattern_parser.save_braintree(
                 self.bot,
@@ -261,83 +264,83 @@ class Brain(object):
     def _load_denormals(self, configuration):
         if configuration.files.denormal is not None:
             total = self._denormal_collection.load_from_filename(configuration.files.denormal)
-            logging.info("Loaded a total of %d denormalisations", total)
+            YLogger.info(self, "Loaded a total of %d denormalisations", total)
         else:
-            logging.warning("No configuration setting for denormal")
+            YLogger.warning(self, "No configuration setting for denormal")
 
     def _load_normals(self, configuration):
         if configuration.files.normal is not None:
             total = self._normal_collection.load_from_filename(configuration.files.normal)
-            logging.info("Loaded a total of %d normalisations", total)
+            YLogger.info(self, "Loaded a total of %d normalisations", total)
         else:
-            logging.warning("No configuration setting for normal")
+            YLogger.warning(self, "No configuration setting for normal")
 
     def _load_genders(self, configuration):
         if configuration.files.gender is not None:
             total = self._gender_collection.load_from_filename(configuration.files.gender)
-            logging.info("Loaded a total of %d genderisations", total)
+            YLogger.info(self, "Loaded a total of %d genderisations", total)
         else:
-            logging.warning("No configuration setting for gender")
+            YLogger.warning(self, "No configuration setting for gender")
 
     def _load_persons(self, configuration):
         if configuration.files.person is not None:
             total = self._person_collection.load_from_filename(configuration.files.person)
-            logging.info("Loaded a total of %d persons", total)
+            YLogger.info(self, "Loaded a total of %d persons", total)
         else:
-            logging.warning("No configuration setting for person")
+            YLogger.warning(self, "No configuration setting for person")
 
     def _load_person2s(self, configuration):
         if configuration.files.person2 is not None:
             total = self._person2_collection.load_from_filename(configuration.files.person2)
-            logging.info("Loaded a total of %d person2s", total)
+            YLogger.info(self, "Loaded a total of %d person2s", total)
         else:
-            logging.warning("No configuration setting for person2")
+            YLogger.warning(self, "No configuration setting for person2")
 
     def _load_properties(self, configuration):
         if configuration.files.properties is not None:
             total = self._properties_collection.load_from_filename(configuration.files.properties)
-            logging.info("Loaded a total of %d properties", total)
+            YLogger.info(self, "Loaded a total of %d properties", total)
         else:
-            logging.warning("No configuration setting for properties")
+            YLogger.warning(self, "No configuration setting for properties")
 
     def _load_variables(self, configuration):
         if configuration.files.variables is not None:
             total = self._variables_collection.load_from_filename(configuration.files.variables)
-            logging.info("Loaded a total of %d variables", total)
+            YLogger.info(self, "Loaded a total of %d variables", total)
         else:
-            logging.warning("No configuration setting for variables")
+            YLogger.warning(self, "No configuration setting for variables")
 
     def _load_rdf(self, configuration):
         if configuration.files.rdf_files is not None and configuration.files.rdf_files.files:
             total = self._rdf_collection.load(configuration.files.rdf_files)
-            logging.info("Loaded a total of %d rdf files", total)
+            YLogger.info(self, "Loaded a total of %d rdf files", total)
         elif configuration.files.triples is not None:
             total = self._rdf_collection.load_from_filename(configuration.files.triples)
-            logging.info("Loaded a total of %d triples", total)
+            YLogger.info(self, "Loaded a total of %d triples", total)
         else:
-            logging.warning("No configuration setting for triples")
+            YLogger.warning(self, "No configuration setting for triples")
 
     def _load_sets(self, configuration):
         total = self._sets_collection.load(configuration.files.set_files)
-        logging.info("Loaded a total of %d sets files", total)
+        YLogger.info(self, "Loaded a total of %d sets files", total)
 
     def _load_maps(self, configuration):
         total = self._maps_collection.load(configuration.files.map_files)
-        logging.info("Loaded a total of %d maps files", total)
+        YLogger.info(self, "Loaded a total of %d maps files", total)
 
     def _load_preprocessors(self, configuration):
         if configuration.files.preprocessors is not None:
             total = self._preprocessors.load(configuration.files.preprocessors)
-            logging.info("Loaded a total of %d pre processors", total)
+            YLogger.info(self, "Loaded a total of %d pre processors", total)
         else:
-            logging.warning("No configuration setting for pre processors")
+            YLogger.warning(self, "No configuration setting for pre processors")
 
     def _load_postprocessors(self, configuration):
         if configuration.files.postprocessors is not None:
             total = self._postprocessors.load(configuration.files.postprocessors)
-            logging.info("Loaded a total of %d post processors", total)
+            YLogger.info(self, "Loaded a total of %d post processors", total)
         else:
-            logging.warning("No configuration setting for post processors")
+            YLogger.warning(self, "No configuration setting for post processors")
 
     def load_collections(self, configuration):
         self._load_denormals(configuration)
@@ -365,9 +368,9 @@ class Brain(object):
                             configuration.security.authentication.classname)
                         self._authentication = classobject(configuration.security.authentication)
                     except Exception as excep:
-                        logging.exception(excep)
+                        YLogger.exception(self, excep)
             else:
-                logging.debug("No authentication configuration defined")
+                YLogger.debug(self, "No authentication configuration defined")
 
             if configuration.security.authorisation is not None:
                 if configuration.security.authorisation.classname is not None:
@@ -376,18 +379,18 @@ class Brain(object):
                             configuration.security.authorisation.classname)
                         self._authorisation = classobject(configuration.security.authorisation)
                     except Exception as excep:
-                        logging.exception(excep)
+                        YLogger.exception(self, excep)
             else:
-                logging.debug("No authorisation configuration defined")
+                YLogger.debug(self, "No authorisation configuration defined")
 
         else:
-            logging.debug("No security configuration defined, running open...")
+            YLogger.debug(self, "No security configuration defined, running open...")
 
     def load_dynamics(self, configuration):
         if configuration.dynamics is not None:
             self._dynamics_collection.load_from_configuration(configuration.dynamics)
         else:
-            logging.debug("No dynamics configuration defined...")
+            YLogger.debug(self, "No dynamics configuration defined...")
 
     def pre_process_question(self, client_context, question):
         return self.preprocessors.process(client_context, question)
@@ -396,25 +399,25 @@ class Brain(object):
         if configuration.oob is not None:
             if configuration.oob.default() is not None:
                 try:
-                    logging.info("Loading default oob")
+                    YLogger.info(self, "Loading default oob")
                     classobject = ClassLoader.instantiate_class(configuration.oob.default().classname)
                     self._default_oob = classobject()
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
 
             for oob_name in  configuration.oob.oobs():
                 try:
-                    logging.info("Loading oob: %s", oob_name)
+                    YLogger.info(self, "Loading oob: %s", oob_name)
                     classobject = ClassLoader.instantiate_class(configuration.oob.oob(oob_name).classname)
                     self._oob[oob_name] = classobject()
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
 
     def load_regex_templates(self, configuration):
         if configuration.files.regex_templates is not None:
             collection = PropertiesCollection()
             total = collection.load_from_filename(configuration.files.regex_templates)
-            logging.info("Loaded a total of %d regex templates", total)
+            YLogger.info(self, "Loaded a total of %d regex templates", total)
 
             for pair in collection.pairs:
                 name = pair[0]
@@ -422,7 +425,7 @@ class Brain(object):
                 try:
                     self._regex_templates[name] = re.compile(pattern, re.IGNORECASE)
                 except Exception:
-                    logging.error("Invalid regex template [%s]", pattern)
+                    YLogger.error(self, "Invalid regex template [%s]", pattern)
 
     def regex_template(self, name):
         if name in self._regex_templates:
@@ -460,7 +463,7 @@ class Brain(object):
         return self.postprocessors.process(client_context, response)
 
     def failed_authentication(self, client_context):
-        logging.error("[%s] failed authentication!")
+        YLogger.error(self, "[%s] failed authentication!")
 
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
@@ -487,7 +490,7 @@ class Brain(object):
 
         template_node = match_context.template_node()
 
-        logging.debug("AIML Parser evaluating template [%s]", template_node.to_string())
+        YLogger.debug(self, "AIML Parser evaluating template [%s]", template_node.to_string())
 
         response = template_node.template.resolve(client_context)
 

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.bot.spelling import BotSpellingConfiguration
@@ -98,7 +98,7 @@ class BotConfiguration(BaseContainerConfigurationData):
             self._spelling.load_config_section(configuration_file, bot, bot_root)
             self._conversations.load_config_section(configuration_file, bot, bot_root)
         else:
-            logging.warning("Config section [%s] missing, using default values", self.section_name)
+            YLogger.warning(self, "Config section [%s] missing, using default values", self.section_name)
 
         self.load_configurations(configuration_file, bot, bot_root)
 
@@ -116,7 +116,7 @@ class BotConfiguration(BaseContainerConfigurationData):
                 config.load_configuration(configuration_file, bot_root)
 
         else:
-            logging.warning("No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
+            YLogger.warning(self, "No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
             brain_name = "brain"
             self._brain_configs[0]._section_name = brain_name
             self._brain_configs[0].load_configuration(configuration_file, bot_root)

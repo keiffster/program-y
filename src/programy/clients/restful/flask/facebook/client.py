@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request
 from pymessenger.bot import Bot
@@ -37,7 +37,7 @@ class FacebookBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, 'facebook', argument_parser)
 
-        logging.debug("Facebook Client is running....")
+        YLogger.debug(self, "Facebook Client is running....")
 
         self._facebook_bot = self.create_facebook_bot()
 
@@ -149,7 +149,7 @@ def receive_message():
     try:
         return FACEBOOK_CLIENT.receive_message(request)
     except Exception as e:
-        logging.exception(e)
+        YLogger.exception(self, e)
 
 
 if __name__ == "__main__":

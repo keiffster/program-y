@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.processors.processing import PreProcessor
@@ -28,7 +28,7 @@ class MergeChinesePostProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Merging Chinese into understandable words...")
+        YLogger.debug(self, "Merging Chinese into understandable words...")
 
         words = word_string.split(" ")
         str = ""

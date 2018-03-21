@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 # Ignore pylint warning, this import from Programy must be before ElementTree
 # Which ensures that the class LineNumberingParser is injected into the code
 from programy.utils.parsing.linenumxml import LineNumberingParser
@@ -78,7 +78,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return child
         else:
             if missing_value is not None:
-                logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+                YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def _infer_type_from_string(self, text):
@@ -93,7 +93,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         if child is not None:
             return self.convert_to_bool(child.text)
         else:
-            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
@@ -101,7 +101,7 @@ class XMLConfigurationFile(BaseConfigurationFile):
         if child is not None:
             return self.convert_to_int(child.text)
         else:
-            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
     def get_multi_option(self, section, option_name, missing_value=None):

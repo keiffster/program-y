@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.brain.file import BrainFileConfiguration
 from programy.config.brain.debugfile import DebugFileConfiguration
@@ -58,7 +58,7 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
             self._conversation = self.get_debug_file_configuration(configuration_file, files_config, "conversation", bot_root)
 
         else:
-            logging.warning("'%s' section missing from bot config, using to defaults", self.section_name)
+            YLogger.warning(self, "'%s' section missing from bot config, using to defaults", self.section_name)
 
     def get_debug_file_configuration(self, configuration_file, files_config, debug_name, bot_root):
         keys = configuration_file.get_keys(files_config)

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
@@ -69,8 +69,8 @@ class ConsoleBotClient(EventBotClient):
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
             self.display_response(client_context.bot.get_exit_response(client_context))
         except Exception as excep:
-            logging.error("Oops something bad happened !")
-            logging.exception(excep)
+            YLogger.error(self, "Oops something bad happened !")
+            YLogger.exception(self, excep)
         return running
 
     def prior_to_run_loop(self):

@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import wikipedia
 
 from programy.services.service import Service
@@ -52,13 +52,13 @@ class WikipediaService(Service):
                 results = self._api.search(question)
                 search = ", ".join(results)
             else:
-                logging.error("Unknown Wikipedia command [%s]", words[0])
+                YLogger.error(self, "Unknown Wikipedia command [%s]", words[0])
                 search = ""
             return search
         except wikipedia.exceptions.DisambiguationError:
-            logging.error("Wikipedia search is ambiguous for question [%s]", question)
+            YLogger.error(self, "Wikipedia search is ambiguous for question [%s]", question)
         except wikipedia.exceptions.PageError:
-            logging.error("No page on Wikipedia for question [%s]", question)
+            YLogger.error(self, "No page on Wikipedia for question [%s]", question)
         except Exception:
-            logging.error("General error querying Wikipedia for question [%s]", question)
+            YLogger.error(self, "General error querying Wikipedia for question [%s]", question)
         return ""

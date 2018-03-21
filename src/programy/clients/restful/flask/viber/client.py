@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 # https://developers.viber.com/docs/api/python-bot-api/
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request, Response
 
@@ -44,7 +44,7 @@ class ViberBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, "viber", argument_parser)
 
-        logging.debug("Viber Client is running....")
+        YLogger.debug(self, "Viber Client is running....")
 
         self._viber_bot = self.create_viber_bot(self._viber_token)
 
@@ -63,22 +63,22 @@ class ViberBotClient(FlaskRestBotClient):
     def create_viber_bot(self, viber_token):
 
         if viber_token is None:
-            logging.error("'viber_token' missing")
+            YLogger.error(self, "'viber_token' missing")
             return None
 
         name = self.configuration.client_configuration.name
         if name is None:
-            logging.error("'name' missing from Viber configuration")
+            YLogger.error(self, "'name' missing from Viber configuration")
             return None
 
         avatar = self.configuration.client_configuration.avatar
         if avatar is None:
-            logging.error("'avatar' missing from Viber configuration")
+            YLogger.error(self, "'avatar' missing from Viber configuration")
             return None
 
         webhook = self.configuration.client_configuration.webhook
         if webhook is None:
-            logging.error("'webhook' missing from Viber configuration")
+            YLogger.error(self, "'webhook' missing from Viber configuration")
             return None
 
         configuration = BotConfiguration(
@@ -89,7 +89,7 @@ class ViberBotClient(FlaskRestBotClient):
 
         bot = self.create_viber_api(configuration)
         if bot is not None:
-            logging.error("'Failed to create Viber api")
+            YLogger.error(self, "'Failed to create Viber api")
 
         bot.set_webhook(webhook)
         return bot
@@ -119,7 +119,7 @@ class ViberBotClient(FlaskRestBotClient):
         pass
 
     def handle_unknown_request(self, viber_request):
-        logging.error("client failed receiving message. failure: {0}".format(viber_request))
+        YLogger.error(self, "client failed receiving message. failure: {0}".format(viber_request))
 
     def receive_message(self, request):
 
@@ -163,7 +163,7 @@ def receive_message():
     try:
         return Viber_CLIENT.receive_message(request)
     except Exception as e:
-        logging.exception(e)
+        YLogger.exception(self, e)
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 
@@ -36,4 +36,4 @@ class BotConversationsFileStorageConfiguration(BaseConfigurationData):
             if dir is not None:
                 self._dir = self.sub_bot_root(dir, bot_root)
         else:
-            logging.warning("'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")
+            YLogger.warning(self, "'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")

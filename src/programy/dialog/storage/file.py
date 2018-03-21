@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import os
 import time
 from os import listdir
@@ -31,24 +31,24 @@ class ConversationFileStorage(ConversationStorage):
         self._last_modified = None
 
     def empty(self):
-        logging.debug("Emptying Conversation Folder")
+        YLogger.debug(self, "Emptying Conversation Folder")
         try:
             if self._config._dir is not None:
                 if os.path.exists(self._config._dir):
                     convo_files = [f for f in listdir(self._config._dir) if isfile(join(self._config._dir, f))]
                     for file in convo_files:
                         fullpath = self._config._dir + os.sep + file
-                        logging.debug("Removing conversation file: [%s]", fullpath)
+                        YLogger.debug(self, "Removing conversation file: [%s]", fullpath)
                         os.remove(fullpath)
         except Exception as e:
-            logging.error("Failed emptying conversation directory [%s]", self._config._dir)
-            logging.exception(e)
+            YLogger.error(self, "Failed emptying conversation directory [%s]", self._config._dir)
+            YLogger.exception(self, e)
 
     def create_filename(self, clientid):
         return self._config._dir + os.sep + clientid + ".convo"
 
     def save_conversation(self, conversation, clientid):
-        logging.debug("Saving conversation to file")
+        YLogger.debug(self, "Saving conversation to file")
         try:
             if self._config._dir is not None:
                 if os.path.exists(self._config._dir):
@@ -58,8 +58,8 @@ class ConversationFileStorage(ConversationStorage):
                             convo_file.write("%s:%s\n"%(name, value))
                         convo_file.write("\n")
         except Exception as e:
-            logging.error("Failed to save conversation for clientid [%s]", clientid)
-            logging.exception(e)
+            YLogger.error(self, "Failed to save conversation for clientid [%s]", clientid)
+            YLogger.exception(self, e)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
         try:
@@ -76,7 +76,7 @@ class ConversationFileStorage(ConversationStorage):
                         self._last_modified = last_modified
 
                         if should_open is True:
-                            logging.debug("Loading Conversation from file")
+                            YLogger.debug(self, "Loading Conversation from file")
 
                             with open(filename, "r", encoding="utf-8") as convo_file:
                                 for line in convo_file:
@@ -86,18 +86,18 @@ class ConversationFileStorage(ConversationStorage):
                                         value = splits[1].strip()
                                         if name == "topic":
                                             if restore_last_topic is True:
-                                                logging.debug("Loading stored property [%s]=[%s] for %s", name, value, clientid)
+                                                YLogger.debug(self, "Loading stored property [%s]=[%s] for %s", name, value, clientid)
                                                 conversation._properties[name] = value
                                         else:
-                                            logging.debug("Loading stored property [%s]=[%s] for %s", name, value, clientid)
+                                            YLogger.debug(self, "Loading stored property [%s]=[%s] for %s", name, value, clientid)
                                             conversation._properties[name] = value
 
         except Exception as e:
-            logging.error("Failed to load conversation for clientid [%s]", clientid)
-            logging.exception(e)
+            YLogger.error(self, "Failed to load conversation for clientid [%s]", clientid)
+            YLogger.exception(self, e)
 
     def remove_conversation(self, clientid):
         filename = self.create_filename(clientid)
         if os.path.exists(filename):
-            logging.debug("Removing conversation for %s", clientid)
+            YLogger.debug(self, "Removing conversation for %s", clientid)
             os.path.remove(filename)

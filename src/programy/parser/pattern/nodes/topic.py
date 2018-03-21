@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.base import PatternNode
@@ -59,12 +59,12 @@ class PatternTopicNode(PatternNode):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_depth_exceeded(depth) is True:
-            logging.error("%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
+            YLogger.error(self, "%sMax search depth [%d]exceeded", tabs, context.max_search_depth)
             return None
 
         if words.word(word_no) == PatternTopicNode.TOPIC:
-            logging.debug("%sTopic matched %s", tabs, words.word(word_no))
+            YLogger.debug(self, "%sTopic matched %s", tabs, words.word(word_no))
             return super(PatternTopicNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
 
-        logging.debug("%sTopic NOT matched %s", tabs, words.word(word_no))
+        YLogger.debug(self, "%sTopic NOT matched %s", tabs, words.word(word_no))
         return None

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
@@ -37,7 +37,7 @@ class PatternGraph(object):
         self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
 
         if root_node is None:
-            logging.debug("Defaulting root to PatternRootNode")
+            YLogger.debug(self, "Defaulting root to PatternRootNode")
             self._root_node = self._pattern_factory.get_root_node()
         else:
             if root_node.is_root() is False:
@@ -222,10 +222,10 @@ class PatternGraph(object):
                     raise DuplicateGrammarException("Dupicate grammar tree found for bot/set")
             else:
                 if pattern_element.text is not None:
-                    logging.warning("Dupicate grammar tree found [%s] in learn, replacing existing",
+                    YLogger.warning(self, "Dupicate grammar tree found [%s] in learn, replacing existing",
                                         pattern_element.text.strip())
                 else:
-                    logging.warning("Dupicate grammar tree found for bot/set in learn, replacing existing")
+                    YLogger.warning(self, "Dupicate grammar tree found for bot/set in learn, replacing existing")
 
                 self.add_template_to_node(template_graph_root, that_node)
         else:
@@ -243,9 +243,9 @@ class PatternGraph(object):
             counter[0] += 1
             self._count_words_in_children(child, counter)
 
-    def dump(self, output_func=logging.debug, eol="", verbose=True):
+    def dump(self, output_func=YLogger.debug, eol="", verbose=True):
         self.root.dump("", output_func, eol, verbose)
-        output_func("")
+        output_func(self, "")
 
     def save_braintree(self, client_context, filename, content):
         if content == 'txt':
@@ -259,4 +259,4 @@ class PatternGraph(object):
             with open(filename, "w+", encoding="utf-8") as dump_file:
                 dump_file.write(braintree)
         else:
-            logging.error("Unknown braintree content type [%s]", content)
+            YLogger.error(self, "Unknown braintree content type [%s]", content)

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import os
 from abc import ABCMeta, abstractmethod
 
@@ -37,14 +37,15 @@ class NodeFactory(object):
             splits = line.split("=")
             node_name = splits[0].strip()
             if node_name in self._nodes_config:
-                logging.error("Node already exists in config [%s]", line)
+                YLogger.error(self, "Node already exists in config [%s]", line)
                 return
             class_name = splits[1].strip()
-            logging.debug("Pre-instantiating %s Node [%s]", self._type, class_name)
+            YLogger.debug(self, "Pre-instantiating %s Node [%s]", self._type, class_name)
             try:
                 self._nodes_config[node_name] = ClassLoader.instantiate_class(class_name)
-            except Exception:
-                logging.error("Failed to pre-instantiating %s Node [%s]", self._type, class_name)
+            except Exception as e:
+                YLogger.error(self, "Failed to pre-instantiating %s Node [%s]", self._type, class_name)
+                YLogger.exception(e)
 
     def valid_config_line(self, line):
 
@@ -55,7 +56,7 @@ class NodeFactory(object):
             return False
 
         if "=" not in line:
-            logging.error("Config line missing '=' [%s]", line)
+            YLogger.error(self, "Config line missing '=' [%s]", line)
             return False
 
         return True
@@ -71,8 +72,8 @@ class NodeFactory(object):
                     self.process_config_line(line)
 
         except Exception as excep:
-            logging.error("Failed to load %s Node Factory config file [%s]", self._type, filename)
-            logging.exception(excep)
+            YLogger.error(self, "Failed to load %s Node Factory config file [%s]", self._type, filename)
+            YLogger.exception(self, excep)
 
     def load_nodes_config_from_text(self, text):
         lines = text.split("\n")

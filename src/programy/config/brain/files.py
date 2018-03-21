@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.aiml_file import BrainAIMLFileConfiguration
@@ -122,4 +122,4 @@ class BrainFilesConfiguration(BaseSectionConfigurationData):
             self._postprocessors = self._get_file_option(configuration_file, "postprocessors", files_config, bot_root)
             self._regex_templates = self._get_file_option(configuration_file, "regex_templates", files_config, bot_root)
         else:
-            logging.error("Config section [files] missing from Brain, default values not appropriate")
+            YLogger.error(self, "Config section [files] missing from Brain, default values not appropriate")

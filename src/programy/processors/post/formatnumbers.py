@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.processors.processing import PostProcessor
@@ -26,7 +26,7 @@ class FormatNumbersPostProcessor(PostProcessor):
         PostProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Formatting numbers...")
+        YLogger.debug(self, "Formatting numbers...")
         word_string = re.sub(r'(\d)([\.|,])\s+(\d)', r'\1\2\3', word_string)
         word_string = re.sub(r'(\d)\s+([\.|,])(\d)', r'\1\2\3', word_string)
         word_string = re.sub(r'(\d)\s+([\.|,])\s+(\d)', r'\1\2\3', word_string)

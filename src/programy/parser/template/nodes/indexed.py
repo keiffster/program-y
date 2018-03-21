@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
@@ -130,7 +130,7 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                 try:
                     self._sentence = int(splits[0])
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
                     raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'",
                                           attrib_value, attrib_name)
             elif len(splits) == 2:
@@ -141,7 +141,7 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                     else:
                         self._sentence = int(splits[1])
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
                     raise ParserException("None numeric format [%s] for this node [%s], either 'x', 'x,y', or 'x,*'",
                                           attrib_value, attrib_name)
 

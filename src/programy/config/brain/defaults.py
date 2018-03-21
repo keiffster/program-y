@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import os
 
 from programy.config.section import BaseSectionConfigurationData
@@ -58,4 +58,4 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
             if learn_filename is not None:
                 self._learn_filename = self.sub_bot_root(learn_filename, bot_root)
         else:
-            logging.warning("'spelling' section missing from bot config, using to defaults")
+            YLogger.warning(self, "'spelling' section missing from bot config, using to defaults")

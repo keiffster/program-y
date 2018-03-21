@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -47,16 +47,16 @@ class EmailOutOfBandProcessor(OutOfBandProcessor):
                 elif child.tag == 'body':
                     self._body = child.text
                 else:
-                    logging.error("Unknown child element [%s] in email oob", child.tag)
+                    YLogger.error(self, "Unknown child element [%s] in email oob", child.tag)
 
             if self._to is not None and \
                 self._subject is not None and \
                 self._body is not None:
                 return True
 
-        logging.error("Invalid email oob command")
+        YLogger.error(self, "Invalid email oob command")
         return False
 
     def execute_oob_command(self, client_context):
-        logging.info("EmailOutOfBandProcessor: Emailing=%s", self._to)
+        YLogger.info(self, "EmailOutOfBandProcessor: Emailing=%s", self._to)
         return "EMAIL"

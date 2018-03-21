@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.extensions.base import Extension
 
@@ -24,7 +24,7 @@ class TranscriptAdminExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, client_context, data):
-        logging.debug("Transcript Admin - [%s]", data)
+        YLogger.debug(self, "Transcript Admin - [%s]", data)
 
         show_props = True if data == "PROPERTIES" else False
 

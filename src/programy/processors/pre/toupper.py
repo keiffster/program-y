@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.processors.processing import PreProcessor
 
@@ -26,5 +26,5 @@ class ToUpperPreProcessor(PreProcessor):
         PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        logging.debug("Making input upper case...")
+        YLogger.debug(self, "Making input upper case...")
         return word_string.upper()

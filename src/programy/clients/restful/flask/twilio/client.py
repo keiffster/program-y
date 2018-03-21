@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 # https://www.twilio.com/docs/quickstart/python/sms#sign-up-for-twilio-and-get-a-phone-number
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request
 from twilio.rest import Client
@@ -33,7 +33,7 @@ class TwilioBotClient(FlaskRestBotClient):
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, 'twilio', argument_parser)
 
-        logging.debug("Twilio Client is running....")
+        YLogger.debug(self, "Twilio Client is running....")
 
         self.get_license_keys()
 
@@ -77,13 +77,13 @@ class TwilioBotClient(FlaskRestBotClient):
             client_number = request.args.get('From')
             question = request.args.get('Body')
 
-        logging.debug("Twillio received [%s] from [%s]", question, client_number)
+        YLogger.debug(self, "Twillio received [%s] from [%s]", question, client_number)
 
         answer = self.ask_question(client_number, question)
 
         response = self.create_response(client_number, answer)
 
-        logging.debug("Twillio sending [%s] to [%s]", answer, client_number)
+        YLogger.debug(self, "Twillio sending [%s] to [%s]", answer, client_number)
 
         return response
 
@@ -97,7 +97,7 @@ def receive_message():
     try:
         return TWILIO_CLIENT.receive_message(request)
     except Exception as e:
-        logging.exception(e)
+        YLogger.exception(self, e)
 
 
 if __name__ == "__main__":

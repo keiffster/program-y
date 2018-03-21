@@ -21,6 +21,7 @@ import re
 from programy.utils.parsing.linenumxml import LineNumberingParser
 import xml.etree.ElementTree as ET
 
+from programy.utils.logging.ylogger import YLogger
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
 from programy.config.brain.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
@@ -42,8 +43,8 @@ class AIMLLoader(FileFinder):
         try:
             return self._aiml_parser.parse_from_file(filename)
         except Exception as excep:
-            logging.exception("Failed to load contents of file from [%s]", filename)
-            logging.exception(excep)
+            YLogger.exception(self, "Failed to load contents of file from [%s]", filename)
+            YLogger.exception(self, excep)
 
 
 class AIMLParser(object):
@@ -131,18 +132,18 @@ class AIMLParser(object):
             total_aimls_loaded = len(aimls_loaded)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Total processing time %.6f secs", diff.total_seconds())
-        logging.info("Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
+        YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
+        YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
         if diff.total_seconds() > 0:
-            logging.info("Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
+            YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
 
     def load_single_file(self, configuration):
         start = datetime.datetime.now()
         self._aiml_loader.load_single_file_contents(configuration.files.aiml_files.file)
         stop = datetime.datetime.now()
         diff = stop - start
-        logging.info("Total processing time %.6f secs", diff.total_seconds())
-        logging.info("Loaded a single aiml file with %d categories", self.num_categories)
+        YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
+        YLogger.info(self, "Loaded a single aiml file with %d categories", self.num_categories)
 
     def load_aiml(self, configuration: BrainConfiguration):
 
@@ -157,14 +158,14 @@ class AIMLParser(object):
                 self.load_single_file(configuration)
 
             else:
-                logging.info("No AIML files or file defined in configuration to load")
+                YLogger.info(self, "No AIML files or file defined in configuration to load")
 
             self.save_debug_files(configuration)
 
             self.display_debug_info(configuration)
 
         else:
-            logging.info("No AIML files or file defined in configuration to load")
+            YLogger.info(self, "No AIML files or file defined in configuration to load")
 
     def tag_and_namespace_from_text(self, text):
         # If there is a namespace, then it looks something like
@@ -204,7 +205,7 @@ class AIMLParser(object):
         :param filename: Name of file to parse
         :return list of categories parsed from file:
         """
-        logging.info("Loading aiml file: " + filename)
+        YLogger.info(self, "Loading aiml file: " + filename)
 
         try:
             tree = ET.parse(filename, parser=LineNumberingParser())
@@ -216,11 +217,11 @@ class AIMLParser(object):
             num_categories = self.parse_aiml(aiml, namespace, filename)
             stop = datetime.datetime.now()
             diff = stop - start
-            logging.info("Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
+            YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
 
         except Exception as excep:
-            logging.exception(excep)
-            logging.error("Failed to load contents of AIML file from [%s] - [%s]", filename, excep)
+            YLogger.exception(self, excep)
+            YLogger.error(self, "Failed to load contents of AIML file from [%s] - [%s]", filename, excep)
 
 
     def parse_from_text(self, text):
@@ -256,7 +257,7 @@ class AIMLParser(object):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 dupe_excep.filename = filename
                 msg = dupe_excep.format_message()
-                logging.error(msg)
+                YLogger.error(self, msg)
 
             startline = None
             if hasattr(expression, "_start_line_number"):
@@ -273,7 +274,7 @@ class AIMLParser(object):
             if logging.getLogger().isEnabledFor(logging.ERROR):
                 parser_excep.filename = filename
                 msg = parser_excep.format_message()
-                logging.error(msg)
+                YLogger.error(self, msg)
 
             startline = None
             if hasattr(expression, "_start_line_number"):
@@ -320,7 +321,7 @@ class AIMLParser(object):
                 raise ParserException("Unknown top level tag, %s" % expression.tag, xml_element=expression)
 
         if categories_found is False:
-            logging.warning("no categories in aiml file")
+            YLogger.warning(self, "no categories in aiml file")
 
         return num_category
 
@@ -333,9 +334,9 @@ class AIMLParser(object):
         if 'version' in aiml.attrib:
             version = aiml.attrib['version']
             if version not in ['0.9', '1.0', '1.1', '2.0']:
-                logging.warning("Version number not a supported version: %s", version)
+                YLogger.warning(self, "Version number not a supported version: %s", version)
         else:
-            logging.warning("No version info, defaulting to 2.0")
+            YLogger.warning(self, "No version info, defaulting to 2.0")
             version = "2.0"
         return version
 
@@ -362,7 +363,7 @@ class AIMLParser(object):
             if name is None or not name:
                 raise ParserException("Topic name empty or null", xml_element=topic_element)
             xml = "<topic>%s</topic>" % name
-            logging.info("Topic attrib converted to %s", xml)
+            YLogger.info(self, "Topic attrib converted to %s", xml)
             topic_pattern = ET.fromstring(xml)
         else:
             raise ParserException("Missing name attribute for topic", xml_element=topic_element)
@@ -455,7 +456,7 @@ class AIMLParser(object):
         topic_sentence = Sentence(client_context.brain.tokenizer, topic_pattern)
         that_sentence = Sentence(client_context.brain.tokenizer, that_pattern)
 
-        logging.debug("AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
+        YLogger.debug(self, "AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
                           pattern_sentence.text(), topic_pattern, that_pattern)
 
         sentence = Sentence(client_context.brain.tokenizer)
@@ -464,7 +465,7 @@ class AIMLParser(object):
         sentence.append_sentence(topic_sentence)
         sentence.append_word('__THAT__')
         sentence.append_sentence(that_sentence)
-        logging.debug("Matching [%s]", sentence.words_from_current_pos(0))
+        YLogger.debug(self, "Matching [%s]", sentence.words_from_current_pos(0))
 
         context = MatchContext(max_search_depth=client_context.bot.configuration.max_search_depth,
                                max_search_timeout=client_context.bot.configuration.max_search_timeout,

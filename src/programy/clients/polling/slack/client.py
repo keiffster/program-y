@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 # https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import time
 import re
 
@@ -71,7 +71,7 @@ class SlackBotClient(PollingBotClient):
     def parse_message(self, event):
         text = event["text"]
     
-        logging.debug("Slack received [%s] ", text)
+        YLogger.debug(self, "Slack received [%s] ", text)
     
         userid, message = self.parse_direct_mention(text)
     
@@ -118,7 +118,7 @@ class SlackBotClient(PollingBotClient):
         # Finds and executes the given message, filling in response
         response = self.ask_question(userid, message)
 
-        logging.debug("Slack sending [%s] to [%s]", message, userid)
+        YLogger.debug(self, "Slack sending [%s] to [%s]", message, userid)
 
         self.send_response(response, channel)
 
@@ -141,7 +141,7 @@ class SlackBotClient(PollingBotClient):
             running = False
 
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
 
         return running
 

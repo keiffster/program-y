@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 from programy.oob.oob import OutOfBandProcessor
@@ -36,9 +36,9 @@ class DialOutOfBandProcessor(OutOfBandProcessor):
             self._number = oob.text
             return True
         else:
-            logging.error("Unvalid dial oob command - missing dial text!")
+            YLogger.error(self, "Unvalid dial oob command - missing dial text!")
             return False
 
     def execute_oob_command(self, client_context):
-        logging.info("DialOutOfBandProcessor: Dialing=%s", self._number)
+        YLogger.info(self, "DialOutOfBandProcessor: Dialing=%s", self._number)
         return "DIAL"

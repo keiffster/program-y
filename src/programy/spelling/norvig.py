@@ -2,7 +2,7 @@
 
 import re
 import os
-import logging
+from programy.utils.logging.ylogger import YLogger
 from collections import Counter
 
 from programy.spelling.base import SpellingChecker
@@ -23,12 +23,12 @@ class NorvigSpellingChecker(SpellingChecker):
             corpus_filename = spelling_config.corpus
 
         if os.path.exists(corpus_filename) is True:
-            logging.info("Loading spelling corpus [%s]", corpus_filename)
+            YLogger.info(self, "Loading spelling corpus [%s]", corpus_filename)
 
             self.words = Counter(self._all_words(open(corpus_filename, encoding="utf-8").read()))
             self.sum_of_words = sum(self.words.values())
         else:
-            logging.error("No spelling corpus found[%s]", corpus_filename)
+            YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)
 
     def _all_words(self, text):
         return re.findall(r'\w+', text.upper())

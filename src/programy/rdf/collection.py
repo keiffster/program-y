@@ -1,4 +1,4 @@
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.mappings.base import BaseCollection
 from programy.utils.files.filefinder import FileFinder
@@ -9,11 +9,11 @@ class RDFLoader(FileFinder):
         self._collection = collection
 
     def load_file_contents(self, filename):
-        logging.debug("Loading RDF File [%s]", filename)
+        YLogger.debug(self, "Loading RDF File [%s]", filename)
         try:
             self._collection.load_from_filename(filename)
         except Exception as excep:
-            logging.error("Failed to load RDF File [%s] - %s", filename, excep)
+            YLogger.error(self, "Failed to load RDF File [%s] - %s", filename, excep)
 
 class RDFEntity(object):
 

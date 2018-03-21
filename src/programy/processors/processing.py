@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from abc import ABCMeta, abstractmethod
 
 from programy.utils.classes.loader import ClassLoader
@@ -27,7 +27,7 @@ class ProcessorLoader(ClassLoader):
         self.processors = []
 
     def load(self, filename, *args, **kw):
-        logging.debug("Loading processors from file [%s]", filename)
+        YLogger.debug(self, "Loading processors from file [%s]", filename)
         count = 0
         try:
             with open(filename, "r", encoding="utf-8") as file:
@@ -40,7 +40,7 @@ class ProcessorLoader(ClassLoader):
                                 self.processors.append(new_class(*args, **kw))
                                 count += 1
         except FileNotFoundError:
-            logging.error("File not found [%s]", filename)
+            YLogger.error(self, "File not found [%s]", filename)
         return count
 
     def process(self, client_context, string):

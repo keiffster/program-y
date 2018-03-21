@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.parser.tokenizer import Tokenizer
@@ -205,7 +205,7 @@ class Conversation(object):
 
     def record_dialog(self, question: Question):
         if len(self._questions) == self._max_histories:
-            logging.info("Conversation history at max [%d], removing oldest", self._max_histories)
+            YLogger.info(self, "Conversation history at max [%d], removing oldest", self._max_histories)
             self._questions.remove(self._questions[0])
         self._questions.append(question)
 
@@ -215,17 +215,17 @@ class Conversation(object):
 
     def load_initial_variables(self, variables_collection):
         for pair in variables_collection.pairs:
-            logging.debug("Setting variable [%s] = [%s]", pair[0], pair[1])
+            YLogger.debug(self, "Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
 
     def get_topic_pattern(self):
         topic_pattern = self.property("topic")
 
         if topic_pattern is None:
-            logging.info("No Topic pattern default to [*]")
+            YLogger.info(self, "No Topic pattern default to [*]")
             topic_pattern = "*"
         else:
-            logging.info("Topic pattern = [%s]", topic_pattern)
+            YLogger.info(self, "Topic pattern = [%s]", topic_pattern)
 
         return topic_pattern
 
@@ -253,13 +253,13 @@ class Conversation(object):
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
                 that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
-                logging.info("That pattern = [%s]", that_pattern)
+                YLogger.info(self, "That pattern = [%s]", that_pattern)
             else:
-                logging.info("That pattern, no response, default to [*]")
+                YLogger.info(self, "That pattern, no response, default to [*]")
                 that_pattern = "*"
 
         except Exception as e:
-            logging.info("No That pattern default to [*]")
+            YLogger.info(self, "No That pattern default to [*]")
             that_pattern = "*"
 
         return that_pattern

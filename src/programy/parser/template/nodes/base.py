@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
 ######################################################################################################################
@@ -40,7 +40,7 @@ class TemplateNode(object):
 
     def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            output_func("{0}{1}{2}".format(tabs, child.to_string(), eol))
+            output_func(self, "{0}{1}{2}".format(tabs, child.to_string(), eol))
             self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, client_context):
@@ -50,10 +50,10 @@ class TemplateNode(object):
     def resolve(self, client_context):
         try:
             resolved = self.resolve_children_to_string(client_context)
-            logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+            YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -124,11 +124,11 @@ class TemplateNode(object):
 
         if head_result is False and found_sub is False:
             if hasattr(pattern, '_end_line_number'):
-                logging.warning("No context in template tag at [line(%d), column(%d)]",
+                YLogger.warning(self, "No context in template tag at [line(%d), column(%d)]",
                                     pattern._end_line_number,
                                     pattern._end_column_number)
             else:
-                logging.warning("No context in template tag")
+                YLogger.warning(self, "No context in template tag")
 
     #######################################################################################################
 
@@ -146,7 +146,7 @@ class TemplateNode(object):
 
         if expression_text is False and expression_children is False:
             if self.add_default_star() is True:
-                logging.debug("Node has no content (text or children), default to <star/>")
+                YLogger.debug(self, "Node has no content (text or children), default to <star/>")
                 star_class = graph.get_node_class_by_name('star')
                 star_node = star_class()
                 self.append(star_node)

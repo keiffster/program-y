@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.text.text import TextUtils
 from programy.parser.pattern.matcher import Match, EqualsMatch
@@ -392,10 +392,10 @@ class PatternNode(object):
             return TextUtils.get_tabs(depth)
         return ""
 
-    def dump(self, tabs, output_func=logging.debug, eol="", verbose=True):
+    def dump(self, tabs, output_func=YLogger.debug, eol="", verbose=True):
 
         string = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
-        output_func(string)
+        output_func(self, string)
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)
@@ -453,7 +453,7 @@ class PatternNode(object):
             result = child.equals(client_context, words, word_no)
             if result.matched is True:
                 word_no = result.word_no
-                logging.debug("%s%s matched %s", tabs, child_type, result.matched_phrase)
+                YLogger.debug(self, "%s%s matched %s", tabs, child_type, result.matched_phrase)
 
                 match_node = Match(match_type, child, result.matched_phrase)
 
@@ -461,7 +461,7 @@ class PatternNode(object):
 
                 match = child.consume(client_context, context, words, word_no + 1, match_type, depth+1)
                 if match is not None:
-                    logging.debug("%sMatched %s child, success!", tabs, child_type)
+                    YLogger.debug(self, "%sMatched %s child, success!", tabs, child_type)
                     return match, word_no
                 else:
                     context.pop_match()
@@ -473,37 +473,37 @@ class PatternNode(object):
         tabs = self.get_tabs(client_context, depth)
 
         if context.search_time_exceeded() is True:
-            logging.error("%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
+            YLogger.error(self, "%sMax search time [%d]secs exceeded", tabs, context.max_search_timeout)
             return None
 
         if context.search_depth_exceeded(depth) is True:
-            logging.error("%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
+            YLogger.error(self, "%sMax search depth [%d] exceeded", tabs, context.max_search_depth)
             return None
 
         if word_no >= words.num_words():
             if self._template is not None:
-                logging.debug("%sFound a template, success!", tabs)
+                YLogger.debug(self, "%sFound a template, success!", tabs)
                 return self._template
             else:
-                logging.debug("%sNo more words and no template, no match found!", tabs)
+                YLogger.debug(self, "%sNo more words and no template, no match found!", tabs)
                 return None
 
         if self._topic is not None:
             match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
             if match is not None:
-                logging.debug("%sMatched topic, success!", tabs)
+                YLogger.debug(self, "%sMatched topic, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.TOPIC:
-                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                YLogger.debug(self, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
                 return None
 
         if self._that is not None:
             match = self._that.consume(client_context, context, words, word_no, Match.THAT, depth+1)
             if match is not None:
-                logging.debug("%sMatched that, success!", tabs)
+                YLogger.debug(self, "%sMatched that, success!", tabs)
                 return match
             if words.word(word_no) == PatternNode.THAT:
-                logging.debug("%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
+                YLogger.debug(self, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
                 return None
 
         match, word_no = self.match_children(client_context, self._priority_words, "Priority", words, word_no, context, match_type, depth)
@@ -513,13 +513,13 @@ class PatternNode(object):
         if self._0ormore_hash is not None:
             match = self._0ormore_hash.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                logging.debug("%sMatched 0 or more hash, success!", tabs)
+                YLogger.debug(self, "%sMatched 0 or more hash, success!", tabs)
                 return match
 
         if self._1ormore_underline is not None:
             match = self._1ormore_underline.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                logging.debug("%sMatched 1 or more underline, success!", tabs)
+                YLogger.debug(self, "%sMatched 1 or more underline, success!", tabs)
                 return match
 
         match, word_no = self.match_children(client_context, self._children, "Word", words, word_no, context, match_type, depth)
@@ -529,14 +529,14 @@ class PatternNode(object):
         if self._0ormore_arrow is not None:
             match = self._0ormore_arrow.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                logging.debug("%sMatched 0 or more arrow, success!", tabs)
+                YLogger.debug(self, "%sMatched 0 or more arrow, success!", tabs)
                 return match
 
         if self._1ormore_star is not None:
             match = self._1ormore_star.consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
-                logging.debug("%sMatched 1 or more star, success!", tabs)
+                YLogger.debug(self, "%sMatched 1 or more star, success!", tabs)
                 return match
 
-        logging.debug("%sNo match for %s, trying another path", tabs, words.word(word_no))
+        YLogger.debug(self, "%sNo match for %s, trying another path", tabs, words.word(word_no))
         return None

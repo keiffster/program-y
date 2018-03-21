@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 # https://kik.readthedocs.io/en/latest/user.html#installation
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request, abort, Response
 
@@ -35,7 +35,7 @@ class KikBotClient(FlaskRestBotClient):
 
         self.create_kik_bot()
 
-        logging.debug("Kik Client is running....")
+        YLogger.debug(self, "Kik Client is running....")
 
     def get_description(self):
         return 'ProgramY AIML2.0 Kik Client'
@@ -116,7 +116,7 @@ def receive_message():
     try:
         return KIK_CLIENT.receive_message(request)
     except Exception as e:
-        logging.exception(e)
+        YLogger.exception(self, e)
 
 
 if __name__ == "__main__":

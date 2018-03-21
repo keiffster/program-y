@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import os
 import xml.etree.ElementTree as ET
 
@@ -37,7 +37,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -51,7 +51,7 @@ class TemplateLearnfNode(TemplateLearnNode):
 
     def write_learnf_to_file(self, client_context, category):
         learnf_path = client_context.brain.configuration.defaults.learn_filename
-        logging.debug("Writing learnf to %s", learnf_path)
+        YLogger.debug(self, "Writing learnf to %s", learnf_path)
 
         if os.path.isfile(learnf_path) is False:
             file = open(learnf_path, "w+", encoding="utf-8")

@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import re
 
 from programy.parser.pattern.nodes.base import PatternNode
@@ -84,20 +84,20 @@ class PatternRegexNode(PatternNode):
             if template is not None:
                 result = template.match(word)
                 if result is not None:
-                    logging.debug("Match word [%s] regex", word)
+                    YLogger.debug(self, "Match word [%s] regex", word)
                     return EqualsMatch(True, word_no, word)
                 else:
-                    logging.error("No word [%s] matched regex", word)
+                    YLogger.error(self, "No word [%s] matched regex", word)
                     return EqualsMatch(False, word_no)
             else:
                 return EqualsMatch(False, word_no)
         else:
             result = self.pattern.match(word)
             if result is not None:
-                logging.debug("Match word [%s] regex", word)
+                YLogger.debug(self, "Match word [%s] regex", word)
                 return EqualsMatch(True, word_no, word)
             else:
-                logging.error("No word [%s] matched regex", word)
+                YLogger.error(self, "No word [%s] matched regex", word)
                 return EqualsMatch(False, word_no)
 
     def to_string(self, verbose=True):

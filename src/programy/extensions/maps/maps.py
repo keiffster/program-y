@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.geo.google import GoogleMaps
 from programy.extensions.base import Extension
@@ -27,7 +27,7 @@ class GoogleMapsExtension(Extension):
 
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
-        logging.debug("GoogleMaps [%s]", data)
+        YLogger.debug(self, "GoogleMaps [%s]", data)
 
         splits = data.split(" ")
         command = splits[0]
@@ -43,7 +43,7 @@ class GoogleMapsExtension(Extension):
             directions = googlemaps.get_directions_between_addresses(from_place, to_place)
             return self._format_directions_for_programy(directions)
         else:
-            logging.error("Unknown Google Maps Extension command [%s]", command)
+            YLogger.error(self, "Unknown Google Maps Extension command [%s]", command)
             return None
 
     def _format_distance_for_programy(self, distance):

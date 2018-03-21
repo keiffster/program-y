@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import datetime
 from dateutil.relativedelta import relativedelta
 from programy.parser.template.nodes.base import TemplateNode
@@ -103,17 +103,17 @@ class TemplateIntervalNode(TemplateNode):
                        (difference.years, difference.months, difference.days,
                         difference.hours, difference.minutes, difference.seconds)
         else:
-            logging.error("Unknown interval style [%s]", style)
+            YLogger.error(self, "Unknown interval style [%s]", style)
             resolved = ""
 
-        logging.debug("[INTERVAL] resolved to [%s]", resolved)
+        YLogger.debug(self, "[INTERVAL] resolved to [%s]", resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -185,12 +185,12 @@ class TemplateIntervalNode(TemplateNode):
             self.parse_text(graph, tail_text)
 
         if self.interval_format is None:
-            logging.warning("Interval node, format missing, defaulting to 'c%%'!")
+            YLogger.warning(self, "Interval node, format missing, defaulting to 'c%%'!")
             self.interval_format = "%c"
         if self.style is None:
-            logging.warning("style node, format missing, defaulting to 'days'!")
+            YLogger.warning(self, "style node, format missing, defaulting to 'days'!")
             self.style = "days"
         if self.interval_from is None:
-            logging.warning("interval_from node, format missing !")
+            YLogger.warning(self, "interval_from node, format missing !")
         if self.interval_to is None:
-            logging.warning("interval_to node, format missing !")
+            YLogger.warning(self, "interval_to node, format missing !")

@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 
@@ -40,4 +40,4 @@ class BrainTokenizerConfiguration(BaseConfigurationData):
             self._classname = configuration_file.get_option(tokenizer, "classname", missing_value="programy.parser.tokenizer.Tokenizer")
             self._split_chars = configuration_file.get_option(tokenizer, "split_chars", missing_value=" ")
         else:
-            logging.warning("'tokenizer' section missing from bot config, using defaults")
+            YLogger.warning(self, "'tokenizer' section missing from bot config, using defaults")

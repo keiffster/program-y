@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import time
 import os
 import tweepy
@@ -59,17 +59,17 @@ class TwitterBotClient(PollingBotClient):
 
     def _get_direct_messages(self, last_message_id):
         if last_message_id == -1:
-            logging.debug("Getting latest direct messages")
+            YLogger.debug(self, "Getting latest direct messages")
             messages = self._api.direct_messages()
         else:
-            logging.debug("Getting latest direct messages since : %s", last_message_id)
+            YLogger.debug(self, "Getting latest direct messages since : %s", last_message_id)
             messages = self._api.direct_messages(since_id=last_message_id)
         messages.sort(key=lambda msg: msg.id)
         return messages
 
     def _process_direct_message_question(self, userid, text):
 
-        logging.debug("Direct Messages: %s -> %s", userid, text)
+        YLogger.debug(self, "Direct Messages: %s -> %s", userid, text)
 
         client_context = self.create_client_context(userid)
         response = client_context.bot.ask_question(client_context, text, responselogger=self)
@@ -77,16 +77,16 @@ class TwitterBotClient(PollingBotClient):
         self._api.send_direct_message(userid, text=response)
 
     def _process_direct_messages(self, last_message_id):
-        logging.debug("Processing direct messages since [%s]", last_message_id)
+        YLogger.debug(self, "Processing direct messages since [%s]", last_message_id)
 
         messages = self._get_direct_messages(last_message_id)
 
         for message in messages:
-            logging.debug("message: %s", message.text)
+            YLogger.debug(self, "message: %s", message.text)
             try:
                 self._process_direct_message_question(message.sender_id, message.text)
             except Exception as err:
-                logging.exception(err)
+                YLogger.exception(self, err)
 
         if messages:
             last_message_id = messages[-1].id
@@ -99,19 +99,19 @@ class TwitterBotClient(PollingBotClient):
     def _unfollow_non_followers(self, friends, followers_ids):
         for friend_id in friends:
             if friend_id not in followers_ids:
-                logging.debug("Removing previous friendship with [%d]", friend_id)
+                YLogger.debug(self, "Removing previous friendship with [%d]", friend_id)
                 self._api.destroy_friendship(friend_id)
 
     def _follow_new_followers(self, followers, friends):
         for follower in followers:
-            logging.debug("Checking follower [%s]", follower.screen_name)
+            YLogger.debug(self, "Checking follower [%s]", follower.screen_name)
             if follower.id not in friends:
-                logging.debug("Following %s", follower.screen_name)
+                YLogger.debug(self, "Following %s", follower.screen_name)
                 follower.follow()
                 self._api.send_direct_message(follower.id, text=self._welcome_message)
 
     def _process_followers(self):
-        logging.debug("Processing followers")
+        YLogger.debug(self, "Processing followers")
         followers = self._api.followers()
         followers_ids = [x.id for x in followers]
         friends = self._api.friends_ids()
@@ -127,10 +127,10 @@ class TwitterBotClient(PollingBotClient):
 
     def _get_statuses(self, last_status_id):
         if last_status_id == -1:
-            logging.debug("Getting latest statuses")
+            YLogger.debug(self, "Getting latest statuses")
             statuses = self._api.home_timeline()
         else:
-            logging.debug("Getting latest statuses since : %s", last_status_id)
+            YLogger.debug(self, "Getting latest statuses since : %s", last_status_id)
 
             statuses = self._api.home_timeline(since_id=last_status_id)
 
@@ -155,36 +155,36 @@ class TwitterBotClient(PollingBotClient):
         return client_context.bot.ask_question(client_context, question, responselogger=self)
 
     def _process_status_question(self, userid, text):
-        logging.debug("Status Update: %s -> %s", userid, text)
+        YLogger.debug(self, "Status Update: %s -> %s", userid, text)
 
         question = self._get_question_from_text(text)
         if question is not None:
-            logging.debug("%s -> %s", userid, question)
+            YLogger.debug(self, "%s -> %s", userid, question)
 
             response = self.ask_question(userid, question)
 
             user = self._api.get_user(userid)
             status = "@%s %s"%(user.screen_name, response)
 
-            logging.debug("Sending status response [@%s] [%s]",user.screen_name, response)
+            YLogger.debug(self, "Sending status response [@%s] [%s]",user.screen_name, response)
 
             self._api.update_status(status)
 
     def _process_statuses(self, last_status_id):
-        logging.debug("Processing status updates since [%s]", last_status_id)
+        YLogger.debug(self, "Processing status updates since [%s]", last_status_id)
 
         statuses = self._get_statuses(last_status_id)
 
         for status in statuses:
 
-            logging.debug("%s Received Status From[%s] - To[%s] -> [%s]", status.id, status.author.screen_name, self._username, status.text)
+            YLogger.debug(self, "%s Received Status From[%s] - To[%s] -> [%s]", status.id, status.author.screen_name, self._username, status.text)
 
             if status.author.screen_name != self._username:
-                logging.debug("status: %s", status.text)
+                YLogger.debug(self, "status: %s", status.text)
                 try:
                     self._process_status_question(status.user.id, status.text)
                 except Exception as err:
-                    logging.exception(err)
+                    YLogger.exception(self, err)
 
             last_status_id = status.id
 
@@ -198,32 +198,32 @@ class TwitterBotClient(PollingBotClient):
         last_status_id = -1
 
         if self._configuration.client_configuration.storage == 'file':
-            logging.debug("Reads messages ids from [%s]", self._configuration.client_configuration.storage_location)
+            YLogger.debug(self, "Reads messages ids from [%s]", self._configuration.client_configuration.storage_location)
             if os.path.exists(self._configuration.client_configuration.storage_location):
                 try:
                     with open(self._configuration.client_configuration.storage_location, "r", encoding="utf-8") as idfile:
                         last_direct_message_id = int(idfile.readline().strip())
                         last_status_id = int(idfile.readline().strip())
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
 
-        logging.debug ("Got Last Messaged ID: %s", last_direct_message_id)
-        logging.debug ("Got Last Status ID: %s", last_status_id)
+        YLogger.debug(self, "Got Last Messaged ID: %s", last_direct_message_id)
+        YLogger.debug(self, "Got Last Status ID: %s", last_status_id)
 
         return (last_direct_message_id, last_status_id)
 
     def _store_last_message_ids(self, last_direct_message_id, last_status_id):
         if self._configuration.client_configuration.storage == 'file':
             try:
-                logging.debug("Storing Last Messaged ID: %s", last_direct_message_id)
-                logging.debug("Storing Last Status ID: %s", last_status_id)
+                YLogger.debug(self, "Storing Last Messaged ID: %s", last_direct_message_id)
+                YLogger.debug(self, "Storing Last Status ID: %s", last_status_id)
 
                 with open(self._configuration.client_configuration.storage_location, "w+", encoding="utf-8") as idfile:
                     idfile.write("%d\n"%last_direct_message_id)
                     idfile.write("%d\n"%last_status_id)
 
             except Exception as excep:
-                logging.exception(excep)
+                YLogger.exception(self, excep)
 
     #############################################################################################
     # Execution
@@ -233,19 +233,19 @@ class TwitterBotClient(PollingBotClient):
             if self._configuration.client_configuration.auto_follow is True:
                 self._process_followers()
 
-            logging.debug("Processing direct messaages")
+            YLogger.debug(self, "Processing direct messaages")
 
             last_direct_message_id = self._process_direct_messages(last_direct_message_id)
 
-            logging.debug("Last message id = %d", last_direct_message_id)
+            YLogger.debug(self, "Last message id = %d", last_direct_message_id)
 
         if self._configuration.client_configuration.use_status is True:
 
-            logging.debug("Processing status messaages")
+            YLogger.debug(self, "Processing status messaages")
 
             last_status_id = self._process_statuses(last_status_id)
 
-            logging.debug("Last status id = %d", last_status_id)
+            YLogger.debug(self, "Last status id = %d", last_status_id)
 
         self._store_last_message_ids(last_direct_message_id, last_status_id)
 
@@ -277,12 +277,12 @@ class TwitterBotClient(PollingBotClient):
             else:
                 rate_limit_sleep = self.FIFTEEN_MINUTES
 
-            logging.error("Rate limit exceeded, sleeping for %d seconds", rate_limit_sleep)
+            YLogger.error(self, "Rate limit exceeded, sleeping for %d seconds", rate_limit_sleep)
 
             self.sleep(rate_limit_sleep)
 
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
 
         return running
 

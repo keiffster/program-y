@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.client import BotClient
 
@@ -41,7 +41,7 @@ class EventBotClient(BotClient):
     def run(self):
 
         if self.arguments.noloop is False:
-            logging.info("Entering conversation loop...")
+            YLogger.info(self, "Entering conversation loop...")
 
             self.prior_to_run_loop()
 
@@ -50,4 +50,4 @@ class EventBotClient(BotClient):
             self.post_run_loop()
 
         else:
-            logging.debug("noloop set to True, exiting...")
+            YLogger.debug(self, "noloop set to True, exiting...")

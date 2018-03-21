@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 
@@ -54,5 +54,5 @@ class DebugFileConfiguration(BaseSectionConfigurationData):
             self._encoding = configuration_file.get_option(debugfile_config, "encoding", missing_value="utf-8")
             self._delete_on_start = configuration_file.get_bool_option(debugfile_config, "delete_on_start", missing_value=False)
         else:
-            logging.warning("'%s' section missing from aiml files config, using to defaults", self.section_name)
+            YLogger.warning(self, "'%s' section missing from aiml files config, using to defaults", self.section_name)
 

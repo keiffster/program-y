@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 from programy.dialog.storage.factory import ConversationStorageFactory
@@ -71,4 +71,4 @@ class BotConversationsConfiguration(BaseConfigurationData):
 
 
         else:
-            logging.warning("'Conversations' section missing from bot config, using defaults")
+            YLogger.warning(self, "'Conversations' section missing from bot config, using defaults")

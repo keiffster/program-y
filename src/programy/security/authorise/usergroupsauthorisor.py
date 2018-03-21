@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.security.authorise.authorisor import Authoriser
 from programy.security.authorise.authorisor import AuthorisationException
@@ -37,7 +37,7 @@ class BasicUserGroupAuthorisationService(Authoriser):
             loader = UserGroupLoader()
             self._users, self._groups = loader.load_users_and_groups_from_file(self.configuration.usergroups)
         else:
-            logging.warning("No user groups defined, authorisation tag will not work!")
+            YLogger.warning(self, "No user groups defined, authorisation tag will not work!")
 
     def authorise(self, userid, role):
         if userid not in self._users:

@@ -26,7 +26,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 # uvloop. This code will not run on Windows
 #
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from sanic import Sanic
 from sanic.response import json
 from sanic.exceptions import ServerError
@@ -52,14 +52,14 @@ class SanicRestBotClient(RestBotClient):
     def get_question(self, rest_request):
         if 'question' not in rest_request.raw_args or rest_request.raw_args['question'] is None:
             print("'question' missing from rest_request")
-            logging.error("'question' missing from rest_request")
+            YLogger.error(self, "'question' missing from rest_request")
             self.server_abort("'question' missing from rest_request", 500)
         return rest_request.raw_args['question']
 
     def get_userid(self, rest_request):
         if 'userid' not in rest_request.raw_args or rest_request.raw_args['userid'] is None:
             print("'userid' missing from rest_request")
-            logging.error("'userid' missing from rest_request")
+            YLogger.error(self, "'userid' missing from rest_request")
             self.server_abort("'userid' missing from rest_request", 500)
         return rest_request.raw_args['userid']
 

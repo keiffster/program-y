@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.newsapi.newsapi import NewsAPI
 from programy.extensions.base import Extension
@@ -31,12 +31,12 @@ class NewsAPIExtension(Extension):
 
         headlines = newsapi.get_headlines(source, max_num, sort, reverse)
         if headlines is None:
-            logging.error("NewsAPIExtension no headlines found!")
+            YLogger.error(self, "NewsAPIExtension no headlines found!")
             return ""
 
         results = newsapi.to_program_y_text(headlines)
         if results is None:
-            logging.error("NewsAPIExtension no results returned!")
+            YLogger.error(self, "NewsAPIExtension no results returned!")
             return ""
 
         return results
@@ -63,7 +63,7 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     sort = False
                 else:
-                    logging.error("Invalid value for NewAPI Data parameter sort [%s]", splits[count])
+                    YLogger.error(self, "Invalid value for NewAPI Data parameter sort [%s]", splits[count])
                     sort = False
             elif splits[count] == "REVERSE":
                 count += 1
@@ -72,10 +72,10 @@ class NewsAPIExtension(Extension):
                 elif splits[count].upper() == 'FALSE':
                     reverse = False
                 else:
-                    logging.error("Invalid value for NewAPI Data parameter reverse [%s]", splits[count])
+                    YLogger.error(self, "Invalid value for NewAPI Data parameter reverse [%s]", splits[count])
                     reverse = False
             else:
-                logging.error("Unknown News API Command [%s]", splits[count])
+                YLogger.error(self, "Unknown News API Command [%s]", splits[count])
 
             count += 1
 
@@ -87,7 +87,7 @@ class NewsAPIExtension(Extension):
         source, max_num, sort, reverse = self.parse_data(data)
 
         if source is None:
-            logging.error("NewsAPIExtension no source passed in as data parameter!")
+            YLogger.error(self, "NewsAPIExtension no source passed in as data parameter!")
             return ""
 
         return self.get_news(context, source, max_num, sort, reverse)

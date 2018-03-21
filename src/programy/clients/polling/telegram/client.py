@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from telegram.ext import Updater
 from telegram.ext import CommandHandler
@@ -92,10 +92,10 @@ class TelegramBotClient(PollingBotClient):
             if initial_question:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=initial_question)
             else:
-                logging.error("Not initial question to return in start()")
+                YLogger.error(self, "Not initial question to return in start()")
 
         except Exception as e:
-            logging.exception(e)
+            YLogger.exception(self, e)
 
     def message(self, telegram_bot, update):
         try:
@@ -103,10 +103,10 @@ class TelegramBotClient(PollingBotClient):
             if response:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=response)
             else:
-                logging.error("Not response to return in message()")
+                YLogger.error(self, "Not response to return in message()")
 
         except Exception as e:
-            logging.exception(e)
+            YLogger.exception(self, e)
 
     def get_unknown_response(self, userid):
         return self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
@@ -125,10 +125,10 @@ class TelegramBotClient(PollingBotClient):
             unknown_response = self.get_unknown_command(update.message.chat_id)
             if unknown_response:
                 telegram_bot.send_message(chat_id=update.message.chat_id, text=unknown_response)
-                logging.error("No response to return in unknown()")
+                YLogger.error(self, "No response to return in unknown()")
 
         except Exception as e:
-            logging.exception(e)
+            YLogger.exception(self, e)
 
     def display_connected_message(self):
         print ("Telegram Bot connected and running...")
@@ -145,8 +145,8 @@ class TelegramBotClient(PollingBotClient):
             self._updater.stop()
 
         except Exception as excep:
-            logging.exception(excep)
-            logging.error("Oops something bad happened !")
+            YLogger.exception(self, excep)
+            YLogger.error(self, "Oops something bad happened !")
 
         return running
 

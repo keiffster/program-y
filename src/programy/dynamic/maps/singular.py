@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.dynamic.maps.map import DynamicMap
 
@@ -44,5 +44,5 @@ class SingularMap(DynamicMap):
             else:
                 singular_value = input_value
 
-        logging.debug("SingleMap converted %s to %s", input_value, singular_value)
+        YLogger.debug(self, "SingleMap converted %s to %s", input_value, singular_value)
         return singular_value

@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.service import BrainServiceConfiguration
@@ -47,4 +47,4 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
                 self._services[name] = service
 
         else:
-            logging.warning("Config section [services] missing from Brain, no services loaded")
+            YLogger.warning(self, "Config section [services] missing from Brain, no services loaded")

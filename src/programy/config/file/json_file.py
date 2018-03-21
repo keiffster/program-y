@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import json
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
 
@@ -62,21 +62,21 @@ class JSONConfigurationFile(BaseConfigurationFile):
         if option_name in section:
             return section[option_name]
         else:
-            logging.warning("Missing value for [%s] in config , return default value %s", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config , return default value %s", option_name, missing_value)
             return missing_value
 
     def get_bool_option(self, section, option_name, missing_value=False):
         if option_name in section:
             return section[option_name]
         else:
-            logging.warning("Missing value for [%s] in config, return default value %s", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
             return missing_value
 
     def get_int_option(self, section, option_name, missing_value=0):
         if option_name in section:
             return section[option_name]
         else:
-            logging.warning("Missing value for [%s] in config, return default value %d", option_name, missing_value)
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
             return missing_value
 
     def get_multi_option(self, section, option_name, missing_value=None):

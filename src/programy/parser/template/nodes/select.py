@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 import json
 
 from programy.parser.template.nodes.base import TemplateNode
@@ -153,14 +153,14 @@ class TemplateSelectNode(TemplateNode):
 
             resolved = self.encode_results(client_context, results)
 
-        logging.debug("[%s] resolved to [%s]", self.to_string(), resolved)
+        YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def resolve(self, client_context):
         try:
             return self.resolve_to_string(client_context)
         except Exception as excep:
-            logging.exception(excep)
+            YLogger.exception(self, excep)
             return ""
 
     def to_string(self):
@@ -194,23 +194,23 @@ class TemplateSelectNode(TemplateNode):
             if tag_name == 'subj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 subj = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'pred':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 pred = self.parse_children_as_word_node(graph, child)
             elif tag_name == 'obj':
                 if child.text is not None and child.text.startswith("?"):
                     if child.text not in self.vars:
-                        logging.debug("Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
+                        YLogger.debug(self, "Variable [%s] defined in query element [%s], but not in vars!", child.text, tag_name)
                         self.vars.append(child.text)
                 obj = self.parse_children_as_word_node(graph, child)
             else:
-                logging.warning("Unknown tag name [%s] in select query", tag_name)
+                YLogger.warning(self, "Unknown tag name [%s] in select query", tag_name)
 
         if subj is None:
             raise ParserException("<subj> element missing from select query")
@@ -232,7 +232,7 @@ class TemplateSelectNode(TemplateNode):
         variables = expression.findall('./vars')
         if variables:
             if len(variables) > 1:
-               logging.warning("Multiple <vars> found in select tag, using first")
+               YLogger.warning(self, "Multiple <vars> found in select tag, using first")
             self.parse_vars(variables[0].text)
 
         queries = expression.findall('./*')

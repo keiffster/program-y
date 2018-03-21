@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.brain import Brain
 from programy.dialog.dialog import Conversation, Question, Sentence
@@ -42,8 +42,9 @@ class BrainFactory(object):
 
 class Bot(object):
 
-    def __init__(self, config: BotConfiguration):
+    def __init__(self, config: BotConfiguration, client=None):
         self._configuration = config
+        self._client = client
 
         self._brain_factory = BrainFactory(self)
 
@@ -63,9 +64,16 @@ class Bot(object):
         self._conversation_storage = None
         self.initiate_conversation_storage()
 
+    def ylogger_type(self):
+        return "bot"
+
     @property
     def id(self):
         return self._configuration.section_name
+
+    @property
+    def client(self):
+        return self._client
 
     @property
     def configuration(self):
@@ -76,13 +84,13 @@ class Bot(object):
         if self.configuration is not None:
             if self.configuration.spelling.classname is not None:
                 try:
-                    logging.info("Loading spelling checker from class [%s]", self.configuration.spelling.classname)
+                    YLogger.info(self, "Loading spelling checker from class [%s]", self.configuration.spelling.classname)
                     spell_class = ClassLoader.instantiate_class(self.configuration.spelling.classname)
                     self._spell_checker = spell_class(self.configuration.spelling)
                 except Exception as excep:
-                    logging.exception(excep)
+                    YLogger.exception(self, excep)
             else:
-                logging.warning("No configuration setting for spelling checker!")
+                YLogger.warning(self, "No configuration setting for spelling checker!")
 
     @property
     def spell_checker(self):
@@ -163,11 +171,11 @@ class Bot(object):
     def get_conversation(self, client_context):
         # TODO move this to Conversations base class
         if client_context.userid in self._conversations:
-            logging.info("Retrieving conversation for client %s", client_context.userid)
+            YLogger.info(self, "Retrieving conversation for client %s", client_context.userid)
             return self._conversations[client_context.userid]
 
         else:
-            logging.info("Creating new conversation for client %s", client_context.userid)
+            YLogger.info(self, "Creating new conversation for client %s", client_context.userid)
 
             conversation = Conversation(client_context)
 
@@ -201,14 +209,14 @@ class Bot(object):
                 conversation = self._conversations[clientid]
                 self._conversation_storage.save_conversation(conversation, clientid)
             else:
-                logging.error("Unknown conversation id type [%s] unable tonot persist!", clientid)
+                YLogger.error(self, "Unknown conversation id type [%s] unable tonot persist!", clientid)
 
     def check_spelling_before(self, each_sentence):
         # TODO Move this to spelliing base class
         if self.configuration.spelling.check_before is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
-            logging.debug("Spell Checker corrected [%s] to [%s]", text, corrected)
+            YLogger.debug(self, "Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
 
     def check_spelling_and_retry(self, client_context, each_sentence):
@@ -216,7 +224,7 @@ class Bot(object):
         if self.configuration.spelling.check_and_retry is True:
             text = each_sentence.text()
             corrected = self.spell_checker.correct(text)
-            logging.debug("Spell Checker corrected [%s] to [%s]", text, corrected)
+            YLogger.debug(self, "Spell Checker corrected [%s] to [%s]", text, corrected)
             each_sentence.replace_words(corrected)
             response = client_context.brain.ask_question(client_context, each_sentence)
             return response
@@ -255,7 +263,7 @@ class Bot(object):
     def pre_process_text(self, client_context, text, srai):
         if srai is False:
             pre_processed = client_context.brain.pre_process_question(client_context, text)
-            logging.debug("Pre Processed (%s): %s", client_context.userid, pre_processed)
+            YLogger.debug(self, "Pre Processed (%s): %s", client_context.userid, pre_processed)
         else:
             pre_processed = text
 
@@ -283,7 +291,7 @@ class Bot(object):
         return answer
 
     def log_answer(self, client_context, text, answer, responselogger):
-        logging.debug("Processed Response (%s): %s", client_context.userid, answer)
+        YLogger.debug(self, "Processed Response (%s): %s", client_context.userid, answer)
 
         if responselogger is not None:
             responselogger.log_response(text, answer)
@@ -345,7 +353,7 @@ class Bot(object):
         return answer
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
-        logging.debug("Raw Response (%s): %s", client_context.userid, response)
+        YLogger.debug(self, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
         answer = self.post_process_response(client_context, response, srai)
         self.log_answer(client_context, sentence.text, answer, responselogger)

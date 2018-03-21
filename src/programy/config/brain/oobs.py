@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
+from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.oob import BrainOOBConfiguration
@@ -56,4 +56,4 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
                     self._oobs[name] = oob
 
         else:
-            logging.warning("Config section [oobs] missing from Brain, no oobs loaded")
+            YLogger.warning(self, "Config section [oobs] missing from Brain, no oobs loaded")
