@@ -112,18 +112,19 @@ class LineBotClient(FlaskRestBotClient):
         return 'OK'
 
 
-LINE_CLIENT = None
-APP = Flask(__name__)
-
-
-@APP.route("/api/line/v1.0/ask", methods=['POST'])
-def receive_message():
-    try:
-        return LINE_CLIENT.receive_message(request)
-    except Exception as e:
-        YLogger.exception(self, e)
-
-
 if __name__ == "__main__":
+
+    LINE_CLIENT = None
+
+    print("Initiating Line Client...")
+    APP = Flask(__name__)
+
+    @APP.route("/api/line/v1.0/ask", methods=['POST'])
+    def receive_message():
+        try:
+            return LINE_CLIENT.receive_message(request)
+        except Exception as e:
+            YLogger.exception(None, e)
+
     LINE_CLIENT = LineBotClient()
-    LINE_CLIENT.run()
+    LINE_CLIENT.run(APP)

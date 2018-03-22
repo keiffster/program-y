@@ -1,6 +1,4 @@
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
-
     prompt: ">>>"
 
     initial_question: Hi, how can I help you today?
@@ -72,3 +70,5 @@ xmpp:
   xep_0004: true
   xep_0060: true
   xep_0199: true
+  license_keys: $BOT_ROOT/config/license.keys
+

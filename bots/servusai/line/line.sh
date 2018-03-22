@@ -4,5 +4,5 @@ clear
 
 export PYTHONPATH=../../../src:.
 
-python3 ../../../src/programy/clients/line_client.py --config ./config.yaml --cformat yaml --logging ../../y-bot/logging.yaml
+python3 ../../../src/programy/clients/restful/flask/line/client.py --config ./config.yaml --cformat yaml --logging ../../y-bot/logging.yaml
 

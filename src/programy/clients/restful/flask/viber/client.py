@@ -154,18 +154,19 @@ class ViberBotClient(FlaskRestBotClient):
         return Response(status=200)
 
 
-Viber_CLIENT = None
-APP = Flask(__name__)
-
-
-@APP.route("/api/twilio/v1.0/ask", methods=['POST'])
-def receive_message():
-    try:
-        return Viber_CLIENT.receive_message(request)
-    except Exception as e:
-        YLogger.exception(self, e)
-
-
 if __name__ == "__main__":
-    Viber_CLIENT = ViberBotClient()
-    Viber_CLIENT.run()
+
+    VIBER_CLIENT = None
+
+    print("Initiating Viber Client...")
+    APP = Flask(__name__)
+
+    @APP.route("/api/twilio/v1.0/ask", methods=['POST'])
+    def receive_message():
+        try:
+            return VIBER_CLIENT.receive_message(request)
+        except Exception as e:
+            YLogger.exception(None, e)
+
+    VIBER_CLIENT = ViberBotClient()
+    VIBER_CLIENT.run(APP)

@@ -141,19 +141,20 @@ class FacebookBotClient(FlaskRestBotClient):
 
             self.send_message(recipient_id, response_text)
 
-FACEBOOK_CLIENT = None
-APP = Flask(__name__)
-
-@APP.route("/api/facebook/v1.0/ask", methods=['GET', 'POST'])
-def receive_message():
-    try:
-        return FACEBOOK_CLIENT.receive_message(request)
-    except Exception as e:
-        YLogger.exception(self, e)
-
-
 if __name__ == "__main__":
 
+    FACEBOOK_CLIENT = None
+
+    print("Initiating Facebook Client...")
+    APP = Flask(__name__)
+
+    @APP.route("/api/facebook/v1.0/ask", methods=['GET', 'POST'])
+    def receive_message():
+        try:
+            return FACEBOOK_CLIENT.receive_message(request)
+        except Exception as e:
+            YLogger.exception(None, e)
+
     FACEBOOK_CLIENT = FacebookBotClient()
-    FACEBOOK_CLIENT.run()
+    FACEBOOK_CLIENT.run(APP)
 

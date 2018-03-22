@@ -1,5 +1,4 @@
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
 
     prompt: ">>>"
 
@@ -54,3 +53,4 @@ brain:
 
 slack:
   polling_interval: 1
+  license_keys: $BOT_ROOT/config/license.keys

@@ -4,6 +4,7 @@ console:
   license_keys: $BOT_ROOT/config/license.keys
 
 voice:
+  license_keys: $BOT_ROOT/config/license.keys
   tts: osx
   stt: azhang
   osx:
@@ -21,11 +22,13 @@ rest:
   port: 8989
   debug: false
   workers: 4
+  license_keys: $BOT_ROOT/config/license.keys
 
 webchat:
   host: 0.0.0.0
-  port: 8080
+  port: 8090
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
 
 twitter:
   polling: true
@@ -37,6 +40,7 @@ twitter:
   storage: file
   storage_location: $BOT_ROOT/storage/twitter.data
   welcome_message: Thanks for following me, send me a message and I'll try and help
+  license_keys: $BOT_ROOT/config/license.keys
 
 xmpp:
   server: talk.google.com
@@ -45,37 +49,45 @@ xmpp:
   xep_0004: true
   xep_0060: true
   xep_0199: true
+  license_keys: $BOT_ROOT/config/license.keys
 
 socket:
   host: 127.0.0.1
   port: 9999
   queue: 5
   debug: true
+  license_keys: $BOT_ROOT/config/license.keys
 
 telegram:
   unknown_command: Sorry, that is not a command I have been taught yet!
+  license_keys: $BOT_ROOT/config/license.keys
 
 facebook:
   host: 127.0.0.1
   port: 5000
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
 
 twilio:
   host: 127.0.0.1
   port: 5000
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
 
 slack:
   polling_interval: 1
+  license_keys: $BOT_ROOT/config/license.keys
 
 viber:
   name: Servusai
   avatar: http://viber.com/avatar.jpg
+  license_keys: $BOT_ROOT/config/license.keys
 
 line:
   host: 127.0.0.1
   port: 5000
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
 
 kik:
   bot_name: servusai
@@ -83,6 +95,7 @@ kik:
   host: 127.0.0.1
   port: 5000
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
 
 #####################################################################################################
 #

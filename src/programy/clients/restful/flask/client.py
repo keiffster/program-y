@@ -96,18 +96,18 @@ class FlaskRestBotClient(RestBotClient):
         else:
             YLogger.debug(self, "restsclient.dump_request(), only GET and POST supported!")
 
-REST_CLIENT = None
-
-print("Initiating REST Service...")
-APP = Flask(__name__)
-
-@APP.route('/api/v1.0/ask', methods=['GET'])
-def ask():
-    response, status = REST_CLIENT.process_request(request)
-    return REST_CLIENT.create_response(request, status)
-
 if __name__ == '__main__':
 
+    REST_CLIENT = None
+
+    print("Initiating REST Service...")
+    APP = Flask(__name__)
+
+    @APP.route('/api/v1.0/ask', methods=['GET'])
+    def ask():
+        response, status = REST_CLIENT.process_request(request)
+        return REST_CLIENT.create_response(request, status)
+
     print("Loading, please wait...")
-    REST_CLIENT = FlaskRestBotClient()
-    REST_CLIENT.run()
+    REST_CLIENT = FlaskRestBotClient("flask")
+    REST_CLIENT.run(APP)

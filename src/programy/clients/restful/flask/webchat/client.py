@@ -1,3 +1,6 @@
+import uuid
+import datetime
+
 from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask
@@ -6,13 +9,19 @@ from flask import request
 from flask import make_response
 from flask import abort
 from flask import current_app
-from programy.clients.client import BotClient
+
+from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.webchat.config import WebChatConfiguration
 
-class WebChatBotClient(BotClient):
 
-    def __init__(self):
-        BotClient.__init__(self, "WebChat")
+class WebChatBotClient(FlaskRestBotClient):
+
+    def __init__(self, argument_parser=None):
+        FlaskRestBotClient.__init__(self, "WebChat", argument_parser)
+        # Enter you API keys, here, alternatively store in a db or file and load at startup
+        # This is an exmaple, and therefore not suitable for production
+        self._api_keys = [
+        ]
 
     def get_description(self):
         return 'ProgramY AIML2.0 Webchat Client'
@@ -20,136 +29,119 @@ class WebChatBotClient(BotClient):
     def get_client_configuration(self):
         return WebChatConfiguration()
 
+    def is_apikey_valid(self, apikey):
+        return bool(apikey in self._api_keys)
 
-print("Loading, please wait...")
-WEBCHAT_CLIENT = WebChatBotClient()
+    def get_api_key(self, request):
+        if 'api_key' in request.args:
+            return request.args['api_key']
+        return None
 
-print("Initiating Webchat Client...")
-APP = Flask(__name__)
+    def unauthorised_access_response(self, error_code=401):
+        return make_response(jsonify({'error': 'Unauthorized access'}), error_code)
 
-@APP.route('/')
-def index():
-    return current_app.send_static_file('webchat.html')
+    def check_api_key(self, request):
+        if self.configuration.client_configuration.use_api_keys is True:
+            api_key = self.get_api_key(request)
+            if api_key is None:
+                YLogger.error(self, "Unauthorised access - api required but missing")
+                return self.unauthorised_access_response()
 
-# Enter you API keys, here, alternatively store in a db or file and load at startup
-# This is an exmaple, and therefore not suitable for production
-API_KEYS = [
-]
+            if self.is_apikey_valid(api_key) is False:
+                YLogger.error(self, "'Unauthorised access - invalid api key")
+                return self.unauthorised_access_response()
 
-def is_apikey_valid(apikey):
-    return bool(apikey in API_KEYS)
+        return None
 
-@APP.route('/api/v1.0/ask', methods=['GET'])
-def ask():
+    def get_question(self, request):
+        if 'question' in request.args:
+            return request.args['question']
+        return None
 
-    if WEBCHAT_CLIENT.configuration.client_configuration.use_api_keys is True:
-        if 'apikey' not in request.args or request.args['apikey'] is None:
-            YLogger.error(self, "Unauthorised access - api required but missing")
-            return make_response(jsonify({'error': 'Unauthorized access'}), 401)
-
-        apikey = request.args['apikey']
-        if is_apikey_valid(apikey) is False:
-            YLogger.error(self, "'Unauthorised access - invalid api key")
-            return make_response(jsonify({'error': 'Unauthorized access'}), 401)
-
-    if 'question' not in request.args or request.args['question'] is None:
-        print("'question' missing from request")
-        YLogger.error(self, "'question' missing from request")
-        abort(400)
-
-    question = request.args['question']
-
-    if 'clientid' not in request.args or request.args['clientid'] is None:
-        print("'clientid' missing from request")
-        YLogger.error(self, "'clientid' missing from request")
-        abort(400)
-
-    clientid = request.args['clientid']
-
-    userid = request.cookies.get(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id)
-    expire_date = None
-    if userid is None:
-        import uuid
-        import datetime
-
-        expire_date = datetime.datetime.now()
-        expire_date = expire_date + datetime.timedelta(days=WEBCHAT_CLIENT.configuration.client_configuration.cookie_expires)
-
-        userid = str(uuid.uuid4().hex)
-        YLogger.debug(self, "Setting client cookie to :%s"%userid)
-    else:
-        YLogger.debug(self, "Found client cookie : %s"%userid)
-
-    try:
-        client_context = WEBCHAT_CLIENT.create_client_context(userid)
-        if question == 'YINITIALQUESTION':
-            answer = client_context.bot.get_initial_question(userid)
+    def get_userid(self, request):
+        userid = request.cookies.get(self.configuration.client_configuration.cookie_id)
+        if userid is None:
+            userid = str(uuid.uuid4().hex)
+            YLogger.debug(self, "Setting userid cookie to :%s" % userid)
         else:
-            answer = client_context.bot.ask_question(userid, question, responselogger=WEBCHAT_CLIENT)
+            YLogger.debug(self, "Found userid cookie : %s" % userid)
+        return userid
 
-        response_data = {"question": question,
-                    "answer": answer,
-                    "clientid": clientid
-                   }
+    def get_userid_cookie_expirary_date(self, duration):
+        expire_date = datetime.datetime.now()
+        expire_date = expire_date + datetime.timedelta(days=duration)
+        return expire_date
 
+    def create_success_response_data(self, question, answer):
+        return {"question": question, "answer": answer}
+
+    def get_default_response(self, client_context):
+        return client_context.bot.default_response
+
+    def create_error_response_data(self, client_context, question, error):
+        return {"question": question,
+                "answer": self.get_default_response(client_context),
+                "error": error
+                }
+
+    def create_response(self, response_data, userid, userid_expire_date):
         response = jsonify({'response': response_data})
-        if expire_date is not None:
-            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, userid,
-                                expires=expire_date)
+        self.add_cookie(response, self.configuration.client_configuration.cookie_id, userid, userid_expire_date)
+        return response
 
-    except Exception as excep:
-        YLogger.exception(self, excep)
+    def get_answer(self, client_context, question):
+        if question == 'YINITIALQUESTION':
+            answer = client_context.bot.get_initial_question(client_context)
+        else:
+            answer = client_context.bot.ask_question(client_context, question, responselogger=self)
+        return answer
 
-        response_data = {"question": question,
-                    "answer": WEBCHAT_CLIENT.bot.default_response,
-                    "clientid": clientid,
-                    "error": str(excep)
-                   }
+    def receive_message(self, request):
 
-        response = jsonify({'response': response_data})
-        if expire_date is not None:
-            response.set_cookie(WEBCHAT_CLIENT.configuration.client_configuration.cookie_id, userid,
-                                expires=expire_date)
+        api_key_response = self.check_api_key(request)
+        if api_key_response is not None:
+            return api_key_response
 
-    return response
+        question = self.get_question(request)
+        if question is None:
+            YLogger.error(self, "'question' missing from request")
+            abort(400)
+
+        userid = self.get_userid(request)
+
+        userid_expire_date = self.get_userid_cookie_expirary_date(self.configuration.client_configuration.cookie_expires)
+
+        client_context = self.create_client_context(userid)
+        try:
+            answer = self.get_answer(client_context, question)
+            response_data = self.create_success_response_data(question, answer)
+
+        except Exception as excep:
+            YLogger.exception(self, excep)
+            response_data = self.create_error_response_data(client_context, question, str(excep))
+
+        return self.create_response(response_data, userid, userid_expire_date)
+
 
 if __name__ == '__main__':
 
-    import signal
-    import sys
+    WEB_CLIENT = None
 
-    def set_exit_handler(func):
-        signal.signal(signal.SIGTERM, func)
+    print("Initiating WebChat Client...")
+    APP = Flask(__name__)
 
-    def on_exit(sig, func=None):
-        print("exit handler triggered")
-        sys.exit(1)
+    @APP.route('/')
+    def index():
+        return current_app.send_static_file('webchat.html')
 
-    def run():
-        print("WebChat Client running on %s:%s" % (WEBCHAT_CLIENT.configuration.client_configuration.host,
-                                                   WEBCHAT_CLIENT.configuration.client_configuration.port))
-        if WEBCHAT_CLIENT.configuration.client_configuration.debug is True:
-            print("WebChat Client running in debug mode")
+    @APP.route('/api/web/v1.0/ask', methods=['GET'])
+    def receive_message():
+        try:
+            return WEB_CLIENT.receive_message(request)
+        except Exception as e:
+            print(e)
+            YLogger.exception(None, e)
+            return "500"
 
-        if WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file is not None and \
-           WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file is not None:
-
-            print ("SSL using Cert:%s and Key: %s"%(WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file,
-                                                    WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file))
-            context = (WEBCHAT_CLIENT.configuration.client_configuration.ssl_cert_file,
-                       WEBCHAT_CLIENT.configuration.client_configuration.ssl_key_file)
-
-            print("Webchat Client running in https mode")
-            APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
-                    port=WEBCHAT_CLIENT.configuration.client_configuration.port,
-                    debug=WEBCHAT_CLIENT.configuration.client_configuration.debug,
-                    ssl_context=context)
-        else:
-            print("Webchat Client running in http mode, careful now !")
-            APP.run(host=WEBCHAT_CLIENT.configuration.client_configuration.host,
-                    port=WEBCHAT_CLIENT.configuration.client_configuration.port,
-                    debug=WEBCHAT_CLIENT.configuration.client_configuration.debug)
-
-    set_exit_handler(on_exit)
-
-    run()
+    WEB_CLIENT = WebChatBotClient()
+    WEB_CLIENT.run(APP)

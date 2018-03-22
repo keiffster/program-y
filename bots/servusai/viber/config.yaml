@@ -1,6 +1,4 @@
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
-
     prompt: ">>>"
 
     initial_question: Hi, how can I help you today?
@@ -55,3 +53,5 @@ brain:
 viber:
   name: Servusai
   avatar: http://viber.com/avatar.jpg
+  license_keys: $BOT_ROOT/config/license.keys
+

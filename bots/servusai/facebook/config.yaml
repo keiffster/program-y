@@ -1,6 +1,4 @@
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
-
     prompt: ">>>"
 
     initial_question: Hi, how can I help you today?
@@ -56,3 +54,5 @@ facebook:
   host: 127.0.0.1
   port: 5000
   debug: false
+  license_keys: $BOT_ROOT/config/license.keys
+

@@ -1,5 +1,4 @@
 bot:
-    license_keys: $BOT_ROOT/config/license.keys
 
     prompt: ">>>"
 
@@ -67,3 +66,4 @@ brain:
 
 telegram:
   unknown_command: Sorry, that is not a command I have been taught yet!
+  license_keys: $BOT_ROOT/config/license.keys

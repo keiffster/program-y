@@ -6,5 +6,5 @@ echo WARNING - Have you installed Sanic before running this [pip install sanic] 
 
 export PYTHONPATH=../../src:.
 
-python3 ../../src/programy/clients/sanicrest.py --config ./config.production.yaml --cformat yaml --logging ./logging.production.yaml
+python3 ../../src/programy/clients/restful/sanic/client.py --config ./config.production.yaml --cformat yaml --logging ./logging.production.yaml
 
