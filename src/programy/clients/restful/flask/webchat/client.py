@@ -86,7 +86,7 @@ class WebChatBotClient(FlaskRestBotClient):
 
     def create_response(self, response_data, userid, userid_expire_date):
         response = jsonify({'response': response_data})
-        self.add_cookie(response, self.configuration.client_configuration.cookie_id, userid, userid_expire_date)
+        response.set_cookie(self.configuration.client_configuration.cookie_id, userid, expires=userid_expire_date)
         return response
 
     def get_answer(self, client_context, question):
