@@ -47,12 +47,12 @@ brain:
         PROGRAMY:
             classname: programy.services.programy.ProgramyRESTService
             method: GET
-            host: 0.0.0.0
+            host: 127.0.0.1
             port: 8989
             url: /api/v1.0/ask
 
 line:
   host: 127.0.0.1
-  port: 8084
+  port: 8083
   debug: false
   license_keys: $BOT_ROOT/config/license.keys

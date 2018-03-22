@@ -161,7 +161,7 @@ if __name__ == "__main__":
     print("Initiating Viber Client...")
     APP = Flask(__name__)
 
-    @APP.route("/api/twilio/v1.0/ask", methods=['POST'])
+    @APP.route("/api/viber/v1.0/ask", methods=['POST'])
     def receive_message():
         try:
             return VIBER_CLIENT.receive_message(request)

@@ -103,7 +103,7 @@ if __name__ == '__main__':
     print("Initiating REST Service...")
     APP = Flask(__name__)
 
-    @APP.route('/api/v1.0/ask', methods=['GET'])
+    @APP.route('/api/rest/v1.0/ask', methods=['GET'])
     def ask():
         response, status = REST_CLIENT.process_request(request)
         return REST_CLIENT.create_response(request, status)

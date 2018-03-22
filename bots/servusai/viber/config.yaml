@@ -46,11 +46,14 @@ brain:
         PROGRAMY:
             classname: programy.services.programy.ProgramyRESTService
             method: GET
-            host: 0.0.0.0
+            host: 127.0.0.1
             port: 8989
             url: /api/v1.0/ask
 
 viber:
+  host: 127.0.0.1
+  port: 8085
+  debug: false
   name: Servusai
   avatar: http://viber.com/avatar.jpg
   license_keys: $BOT_ROOT/config/license.keys
