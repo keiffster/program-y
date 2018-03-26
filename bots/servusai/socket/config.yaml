@@ -48,7 +48,7 @@ brain:
             method: GET
             host: 127.0.0.1
             port: 8989
-            url: /api/v1.0/ask
+            url: /api/rest/v1.0/ask
 
 socket:
   host: 0.0.0.0

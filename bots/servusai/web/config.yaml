@@ -60,8 +60,8 @@ brain:
             classname: programy.services.programy.ProgramyRESTService
             method: GET
             host: 127.0.0.1
-            port: 8989
-            url: /api/v1.0/ask
+            port: 9989
+            url: /api/rest/v1.0/ask
 
 webchat:
   host: 127.0.0.1

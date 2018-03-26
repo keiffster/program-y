@@ -1,10 +1,10 @@
 
 REST
-    9898 -> 8989
+    9989 -> 8989
     /api/rest/v1.0/ask
 
 Web
-    9080 -> 8080
+    443 -> 8080
     /api/web/v1.0/ask
 
 Facebook

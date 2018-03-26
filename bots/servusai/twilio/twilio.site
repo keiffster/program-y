@@ -1,5 +1,5 @@
  server {
-    listen 8084 ssl;
+    listen 9084 ssl;
     server_name www.servus.ai;
     ssl_certificate /etc/letsencrypt/live/servus.ai/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/servus.ai/privkey.pem;
