@@ -19,7 +19,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 
-from flask import Flask, request, abort
+from flask import Flask, request, abort, Response
 
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError
@@ -106,10 +106,11 @@ class LineBotClient(FlaskRestBotClient):
         # handle webhook body
         try:
             self.handle_message_request(body, signature)
-        except InvalidSignatureError:
-            abort(400)
+        except InvalidSignatureError as excep:
+            YLogger.exception(self, excep)
+            abort(500)
 
-        return 'OK'
+        return Response(status=200)
 
 
 if __name__ == "__main__":

@@ -12,8 +12,8 @@ cd ../facebook
 cd ../kik
 ./install.sh
 
-#cd ../line
-#./install.sh
+cd ../line
+./install.sh
 
 #cd ../slack
 #./install.sh
