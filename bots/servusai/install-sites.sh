@@ -8,8 +8,12 @@ cp ./facebook/facebook.site /etc/nginx/sites-enabled/facebook.site
 
 cp ./kik/kik.site /etc/nginx/sites-enabled/kik.site
 
+cp ./line/line.site /etc/nginx/sites-enabled/line.site
+
 cp ./twilio/twilio.site /etc/nginx/sites-enabled/twilio.site
 
 cp ./viber/viber.site /etc/nginx/sites-enabled/viber.site
+
+nginx -t
 
 service nginx restart
