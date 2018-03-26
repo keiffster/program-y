@@ -53,7 +53,7 @@ brain:
 
 kik:
   bot_name: servusai
-  webhook: https://67e25e8b.ngrok.io/api/kik/v1.0/ask
+  webhook: https://servus.ai:9092/api/kik/v1.0/ask
   host: 127.0.0.1
   port: 8082
   debug: false
