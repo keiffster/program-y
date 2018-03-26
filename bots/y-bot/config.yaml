@@ -91,9 +91,9 @@ line:
 
 kik:
   bot_name: servusai
-  webhook: https://4264d3b1.ngrok.io/incoming
+  webhook: https://93638f7a.ngrok.io/api/kik/v1.0/ask
   host: 127.0.0.1
-  port: 5000
+  port: 8082
   debug: false
   license_keys: $BOT_ROOT/config/license.keys
 

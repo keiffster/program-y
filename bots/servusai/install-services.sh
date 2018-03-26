@@ -6,11 +6,11 @@ install-services.sh
 cd ../web
 install-services.sh
 
-#cd ../facebook
-#./install.sh
+cd ../facebook
+./install.sh
 
-#cd ../kik
-#./install.sh
+cd ../kik
+./install.sh
 
 #cd ../line
 #./install.sh
