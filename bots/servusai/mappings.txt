@@ -16,15 +16,15 @@ Kik
     /api/kik/v1.0/ask
 
 Line
-    9083 -> 8083
+    9084 -> 8084
     /api/line/v1.0/ask
 
 Twilio
-    9084 -> 8084
+    9085 -> 8085
     /api/twilio/v1.0/ask
 
 Viber
-    9085 -> 8085
+    9086 -> 8086
     /api/viber/v1.0/ask
 
 TCP

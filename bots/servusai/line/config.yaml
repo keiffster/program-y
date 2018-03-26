@@ -53,6 +53,6 @@ brain:
 
 line:
   host: 127.0.0.1
-  port: 8083
+  port: 8084
   debug: false
   license_keys: $BOT_ROOT/config/license.keys
