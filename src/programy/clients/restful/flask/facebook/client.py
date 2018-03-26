@@ -60,13 +60,18 @@ class FacebookBotClient(FlaskRestBotClient):
         return request.args.get("hub.challenge")
 
     def get_hub_verify_token(self, request):
-        return request.args.get("hub._verify_token")
+        return request.args.get("hub.verify_token")
 
     def verify_fb_token(self, token_sent, request):
         # take token sent by facebook and verify it matches the verify token you sent
         # if they match, allow the request, else return an error
+        if token_sent is None:
+            YLogger.error(self, "Verify Token is None!")
+
         if token_sent == self._verify_token:
             return self.get_hub_challenge(request)
+
+        YLogger.error(self, "Facebook verify token failed received [%s]", token_sent)
         return 'Invalid verification token'
 
     def return_hub_challenge(self, request):
