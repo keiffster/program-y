@@ -82,8 +82,13 @@ class RestBotClient(BotClient):
         return {"question": question, "answer": client_context.bot.default_response, "userid": userid, "error": error}
 
     def ask_question(self, userid, question):
-        client_context = self.create_client_context(userid)
-        return self.bot.ask_question(client_context, question, responselogger=self)
+        response = ""
+        try:
+            client_context = self.create_client_context(userid)
+            response = client_context.bot.ask_question(client_context, question, responselogger=self)
+        except Exception as e:
+            print(e)
+        return response
 
     def process_request(self, request):
         question = "Unknown"

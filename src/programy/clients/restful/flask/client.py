@@ -37,15 +37,6 @@ class FlaskRestBotClient(RestBotClient):
     def server_abort(self, error_code):
         abort(error_code)
 
-    def ask_question(self, userid, question):
-        response = ""
-        try:
-            client_context = self.create_client_context(userid)
-            response = client_context.bot.ask_question(client_context, question, responselogger=self)
-        except Exception as e:
-            print(e)
-        return response
-
     def get_question(self, rest_request):
         if 'question' not in rest_request.args or rest_request.args['question'] is None:
             YLogger.error(self, "'question' missing from request")
@@ -100,7 +91,7 @@ if __name__ == '__main__':
 
     REST_CLIENT = None
 
-    print("Initiating REST Service...")
+    print("Initiating Flask REST Service...")
     APP = Flask(__name__)
 
     @APP.route('/api/rest/v1.0/ask', methods=['GET'])

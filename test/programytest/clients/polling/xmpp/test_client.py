@@ -5,6 +5,7 @@ from programy.clients.polling.xmpp.client import XmppBotClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
+
 from programytest.clients.arguments import MockArgumentParser
 
 

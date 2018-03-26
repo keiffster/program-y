@@ -10,7 +10,7 @@ if os.name != "nt":
     class MockSanicRestBotClient(SanicRestBotClient):
 
         def __init__(self, argument_parser=None):
-            SanicRestBotClient.__init__(self, argument_parser)
+            SanicRestBotClient.__init__(self, "sanic", argument_parser)
             self.aborted = False
             self.answer = None
             self.ask_question_exception = False
@@ -28,12 +28,12 @@ if os.name != "nt":
 
         def test_rest_client_init(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
 
         def test_verify_api_key_usage_inactive(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
             client.configuration.client_configuration._use_api_keys = False
             request = unittest.mock.Mock()
@@ -41,7 +41,7 @@ if os.name != "nt":
 
         def test_get_api_key(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
 
             request = unittest.mock.Mock()
             request.raw_args = {}
@@ -51,7 +51,7 @@ if os.name != "nt":
 
         def test_verify_api_key_usage_active(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
             client.configuration.client_configuration._use_api_keys = True
             client.configuration.client_configuration._api_key_file = os.path.dirname(__file__) + os.sep + ".." + os.sep + ".." + os.sep + "api_keys.txt"
@@ -86,7 +86,7 @@ if os.name != "nt":
 
         def test_get_question(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
 
             request = unittest.mock.Mock()
@@ -124,7 +124,7 @@ if os.name != "nt":
 
         def test_get_userid(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
 
             request = unittest.mock.Mock()
@@ -162,7 +162,7 @@ if os.name != "nt":
 
         def test_format_success_response(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
 
             response = client.format_success_response("1234567890", "Hello", "Hi")
@@ -173,7 +173,7 @@ if os.name != "nt":
 
         def test_format_error_response(self):
             arguments = MockArgumentParser()
-            client = SanicRestBotClient(arguments)
+            client = SanicRestBotClient("sanic", arguments)
             self.assertIsNotNone(client)
 
             response = client.format_error_response("1234567890", "Hello", "Something Bad")

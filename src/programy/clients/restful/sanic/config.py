@@ -19,9 +19,9 @@ from programy.clients.restful.config import RestConfiguration
 
 class SanicRestConfiguration(RestConfiguration):
 
-    def __init__(self):
+    def __init__(self, name):
         self._workers = 4
-        RestConfiguration.__init__(self, "rest")
+        RestConfiguration.__init__(self, name)
 
     @property
     def workers(self):

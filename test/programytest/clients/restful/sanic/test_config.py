@@ -19,7 +19,7 @@ class SanicRestConfigurationTests(unittest.TestCase):
           api_key_file: apikeys.txt
         """, ConsoleConfiguration(), ".")
 
-        sanic_config = SanicRestConfiguration()
+        sanic_config = SanicRestConfiguration("rest")
         sanic_config.load_configuration(yaml, ".")
 
         self.assertEqual("127.0.0.1", sanic_config.host)
@@ -37,7 +37,7 @@ class SanicRestConfigurationTests(unittest.TestCase):
         rest:
         """, ConsoleConfiguration(), ".")
 
-        sanic_config = SanicRestConfiguration()
+        sanic_config = SanicRestConfiguration("rest")
         sanic_config.load_configuration(yaml, ".")
 
         self.assertEqual("0.0.0.0", sanic_config.host)
