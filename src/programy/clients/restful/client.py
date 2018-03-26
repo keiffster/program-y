@@ -96,9 +96,9 @@ class RestBotClient(BotClient):
             question = self.get_question(request)
             userid = self.get_userid(request)
 
-            response = self.ask_question(userid, question)
+            answer = self.ask_question(userid, question)
 
-            return self.format_success_response(userid, question, response), 200
+            return self.format_success_response(userid, question, answer), 200
 
         except Exception as excep:
 

@@ -1,0 +1,20 @@
+  server {
+    listen 80;
+    server_name www.servus.ai;
+    location / {
+      # Redirect any http requests to https
+      return 301 https://$server_name$request_uri;
+    }
+  }
+
+  server {
+    listen 443 ssl;
+    server_name www.servus.ai;
+    ssl_certificate /etc/letsencrypt/live/servus.ai/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/servus.ai/privkey.pem;
+    add_header Strict-Transport-Security “max-age=31536000”;
+
+    location / {
+      proxy_pass http://127.0.0.1:8080;
+    }
+  }

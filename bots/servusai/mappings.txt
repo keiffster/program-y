@@ -1,31 +1,31 @@
 
 REST
-    8989
+    9898 -> 8989
     /api/rest/v1.0/ask
 
 Web
-    8080
+    9080 -> 8080
     /api/web/v1.0/ask
 
 Facebook
-    8081
+    9081 -> 8081
     /api/facebook/v1.0/ask
 
 Kik
-    8082
+    9082 -> 8082
     /api/kik/v1.0/ask
 
 Line
-    8083
+    9083 -> 8083
     /api/line/v1.0/ask
 
 Twilio
-    8084
+    9084 -> 8084
     /api/twilio/v1.0/ask
 
 Viber
-    8085
+    9085 -> 8085
     /api/viber/v1.0/ask
 
 TCP
-    8086
+    9086

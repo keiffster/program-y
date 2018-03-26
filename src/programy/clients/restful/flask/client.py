@@ -41,7 +41,7 @@ class FlaskRestBotClient(RestBotClient):
         response = ""
         try:
             client_context = self.create_client_context(userid)
-            response = self.bot.ask_question(client_context, question, responselogger=self)
+            response = client_context.bot.ask_question(client_context, question, responselogger=self)
         except Exception as e:
             print(e)
         return response
@@ -58,11 +58,11 @@ class FlaskRestBotClient(RestBotClient):
             self.server_abort(400)
         return rest_request.args['userid']
 
-    def create_response(self, response, status):
+    def create_response(self, response_data, status):
         if self.configuration.client_configuration.debug is True:
-            self.dump_request(request)
+            self.dump_request(response_data)
 
-        return make_response(jsonify({'response': response}, status))
+        return make_response(jsonify({'response': response_data}, status))
 
     def run(self, flask):
 
@@ -105,8 +105,8 @@ if __name__ == '__main__':
 
     @APP.route('/api/rest/v1.0/ask', methods=['GET'])
     def ask():
-        response, status = REST_CLIENT.process_request(request)
-        return REST_CLIENT.create_response(request, status)
+        response_data, status = REST_CLIENT.process_request(request)
+        return REST_CLIENT.create_response(response_data, status)
 
     print("Loading, please wait...")
     REST_CLIENT = FlaskRestBotClient("flask")
