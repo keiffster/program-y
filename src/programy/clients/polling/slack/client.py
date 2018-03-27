@@ -37,7 +37,6 @@ class SlackBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
         self._bot_token = None
-        self._running = False
 
         PollingBotClient.__init__(self, "slack", argument_parser)
 
@@ -134,10 +133,10 @@ class SlackBotClient(PollingBotClient):
             messages = self.get_messages()
             if messages:
                 self.parse_messages(messages)
-
             self.sleep(self._polling_interval)
 
         except KeyboardInterrupt:
+            print("Slack client stopping via keyboard....")
             running = False
 
         except Exception as excep:

@@ -80,7 +80,6 @@ class XmppBotClient(PollingBotClient):
             running = False
 
         except Exception as excep:
-            print("XMPP client stopping via exception....")
             YLogger.exception(self, excep)
             YLogger.error(self, "Oops something bad happened !")
 
