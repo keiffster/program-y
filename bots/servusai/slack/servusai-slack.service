@@ -3,7 +3,7 @@ Description=Y-Bot Facebook Client
 
 [Service]
 User=ubuntu
-ExecStart=/opt/program-y/bots/servusai/facebook/servusai-slack.sh
+ExecStart=/opt/program-y/bots/servusai/slack/servusai-slack.sh
 Restart=always
 
 [Install]
