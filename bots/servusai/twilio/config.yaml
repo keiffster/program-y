@@ -52,7 +52,7 @@ brain:
 
 twilio:
   host: 127.0.0.1
-  port: 8084
+  port: 8085
   debug: false
   license_keys: $BOT_ROOT/config/license.keys
 
