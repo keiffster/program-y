@@ -40,9 +40,7 @@ class PollingBotClient(BotClient):
 
     def run(self):
         try:
-            print("Connecting...")
             if self.connect():
-                print("Connected")
                 self.display_connected_message()
 
                 self._running = True

@@ -47,8 +47,6 @@ class TelegramBotClient(PollingBotClient):
 
     TELEGRAM_CLIENT = None
 
-    _running = False
-
     def __init__(self, argument_parser=None):
         self._updater = None
         PollingBotClient.__init__(self, "telegram", argument_parser)
@@ -133,6 +131,11 @@ class TelegramBotClient(PollingBotClient):
     def display_connected_message(self):
         print ("Telegram Bot connected and running...")
 
+    def connect(self):
+        self.create_updater(self._telegram_token)
+        self.register_handlers()
+        return True
+
     def poll_and_answer(self):
 
         running = True
@@ -149,10 +152,6 @@ class TelegramBotClient(PollingBotClient):
             YLogger.error(self, "Oops something bad happened !")
 
         return running
-
-    def connect(self):
-        self.create_updater(self._telegram_token)
-        self.register_handlers()
 
 
 if __name__ == '__main__':
