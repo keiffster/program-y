@@ -27,14 +27,14 @@ cd ../line
 #cd ../twilio
 #./install.sh
 
-#cd ../tritter
+#cd ../twitter
 #./install.sh
 
 # cd ../viber
 # ./install.sh
 
-#cd ../xmpp
-#./install.sh
+# cd ../xmpp
+# ./install.sh
 
 journalctl -xe
 

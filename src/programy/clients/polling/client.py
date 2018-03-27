@@ -27,6 +27,9 @@ class PollingBotClient(BotClient):
     def connect(self):
         return True
 
+    def disconnect(self):
+        return True
+
     def poll_and_answer(self):
         raise NotImplementedError("You must override this and implement the logic poll for messages and send answers back")
 
@@ -34,16 +37,21 @@ class PollingBotClient(BotClient):
         time.sleep(time)
 
     def run(self):
-        if self.connect():
-            self.display_connected_message()
+        try:
+            if self.connect():
+                self.display_connected_message()
 
-            self._running = True
-            while self._running:
-                self._running = self.poll_and_answer()
+                self._running = True
+                while self._running:
+                    self._running = self.poll_and_answer()
 
-            YLogger.debug(self, "Exiting gracefully...")
+                YLogger.debug(self, "Exiting gracefully...")
 
-        else:
-            print("Connection failed. Exception traceback printed above.")
+            else:
+                raise Exception("Connection failed....")
 
+        except Exception as e:
+            YLogger.exception(self, e)
 
+        finally:
+            self.disconnect()

@@ -55,6 +55,7 @@ class XmppBotClient(PollingBotClient):
         return response
 
     def connect(self):
+        YLogger.debug(self, "XMPPBotClient Connecting as %s to %s %s", self._username, self._server, self._port)
         self._xmpp_client = self.create_client(self._username, self._password)
         self._xmpp_client.register_xep_plugins(self.configuration.client_configuration)
         return self._xmpp_client.connect((self._server, self._port))
@@ -67,13 +68,15 @@ class XmppBotClient(PollingBotClient):
         running = True
         try:
             self._xmpp_client.process(block=True)
-
-        except KeyboardInterrupt as keye:
-            print("XMPP client stopping....")
+            print("XMPP client exiting cleanly....")
             running = False
-            self._updater.stop()
+
+        except KeyboardInterrupt:
+            print("XMPP client stopping via keyboard....")
+            running = False
 
         except Exception as excep:
+            print("XMPP client stopping via exception....")
             YLogger.exception(self, excep)
             YLogger.error(self, "Oops something bad happened !")
 

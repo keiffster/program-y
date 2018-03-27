@@ -26,17 +26,45 @@ class XmppClient(sleekxmpp.ClientXMPP):
         self.add_event_handlers()
 
     def add_event_handlers(self):
+        YLogger.debug(self, "XMPPClient adding event handlers")
         self.add_event_handler("session_start", self.start)
         self.add_event_handler("message", self.message)
 
+    def register_xep_plugins(self, configuration):
+        YLogger.debug(self, "XMPPClient registering XEP plugins")
+
+        if configuration.xep_0030 is True:
+            YLogger.debug(self, "XMPPClient registering xep_0030 plugin")
+            self.register_plugin('xep_0030')
+
+        if configuration.xep_0004 is True:
+            YLogger.debug(self, "XMPPClient registering xep_0004 plugin")
+            self.register_plugin('xep_0004')
+
+        if configuration.xep_0060 is True:
+            YLogger.debug(self, "XMPPClient registering xep_0060 plugin")
+            self.register_plugin('xep_0060')
+
+        if configuration.xep_0199 is True:
+            YLogger.debug(self, "XMPPClient registering xep_0199 plugin")
+            self.register_plugin('xep_0199')
+
     def start(self, event):
+        YLogger.debug(self, "XMPPClient starting....")
         self.send_presence()
         self.get_roster()
 
     def is_valid_message(self, msg):
+        valid = False
+        type = "Unknown"
         if 'type' in msg:
-            return bool(msg['type'] in ('chat', 'normal'))
-        return False
+            type = msg['type']
+            valid = type in ('chat', 'normal')
+
+        if valid is False:
+            YLogger.debug(self, "XMPPClient invalid message type [%s]", type)
+
+        return valid
 
     def get_question(self, msg):
         if 'body' in msg:
@@ -53,16 +81,17 @@ class XmppClient(sleekxmpp.ClientXMPP):
             msg.reply(response).send()
 
     def message(self, msg):
+        print("message")
         if self.is_valid_message(msg) is True:
 
             question = self.get_question(msg)
             if question is None:
-                YLogger.debug(self, "Missing 'question' from XMPP message")
+                YLogger.debug(self, "XMPPClient - Missing 'question' from XMPP message")
                 return
 
             userid = self.get_userid(msg)
             if userid is None:
-                YLogger.debug(self, "Missing 'userid' from XMPP message")
+                YLogger.debug(self, "XMPCLient - Missing 'userid' from XMPP message")
                 return
 
             response = self._bot_client.ask_question(userid, question)
@@ -73,15 +102,3 @@ class XmppClient(sleekxmpp.ClientXMPP):
             YLogger.debug(self, "Invalid XMPP message")
             self.send_response(msg, "Sorry, no idea!")
 
-    def register_xep_plugins(self, configuration):
-        if configuration.xep_0030 is True:
-            self.register_plugin('xep_0030')
-
-        if configuration.xep_0004 is True:
-            self.register_plugin('xep_0004')
-
-        if configuration.xep_0060 is True:
-            self.register_plugin('xep_0060')
-
-        if configuration.xep_0199 is True:
-            self.register_plugin('xep_0199')
