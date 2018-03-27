@@ -14,6 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import time
+
 from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.client import BotClient
@@ -33,8 +35,8 @@ class PollingBotClient(BotClient):
     def poll_and_answer(self):
         raise NotImplementedError("You must override this and implement the logic poll for messages and send answers back")
 
-    def sleep(self, time):
-        time.sleep(time)
+    def sleep(self, period):
+        time.sleep(period)
 
     def run(self):
         try:

@@ -15,8 +15,8 @@ cd ../kik
 cd ../line
 ./install.sh
 
-#cd ../slack
-#./install.sh
+cd ../slack
+./install.sh
 
 #cd ../socket
 #./install.sh
@@ -33,8 +33,8 @@ cd ../line
 # cd ../viber
 # ./install.sh
 
-# cd ../xmpp
-# ./install.sh
+cd ../xmpp
+./install.sh
 
 journalctl -xe
 
