@@ -24,8 +24,8 @@ cd ../socket
 cd ../telegram
 ./install.sh
 
-#cd ../twilio
-#./install.sh
+cd ../twilio
+./install.sh
 
 cd ../twitter
 ./install.sh

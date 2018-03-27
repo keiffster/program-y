@@ -4,12 +4,11 @@ Version: 2.0.0 Candidate 1 Release<br/>
 Authors: Keith Sterling <br/>
 Date: 22nd March 2018 <br/>
 
-# V2.0 Candidate 1 Release
+# V2.0 Candidate 2 Release
 
-WARNING: This is the first release candidate of V2.0 of ProgramY. Its pushed to master to allow testing 
-of various systems that rely on master including my own Servusai.com platform and PyPi
-
-Please clone or download v1.8.0 until future notice
+Second candidate release as part of the refactoring and improvements for v2.0 release
+This is now live on servis.ai and running all active clients so actively under test. 
+RC 3 in the next view days will create the firsst V2.0 PyPi release.
 
 # Introduction
 
@@ -47,10 +46,15 @@ Program Y is extremely extensible, you can
   * REST
   * Web Chat
   * Twitter
-  * Google Hangouts (XMPP)
-  * SMS ( coming soon )
-  * Facebook ( coming )
-  * Slack ( coming soon )
+  * Google Hangouts
+  * XMPP
+  * SMS 
+  * Facebook
+  * Slack 
+  * Telegram
+  * Kik
+  * Line
+  * Viber (pending approval)
 
 Program-Y comes with a base set of grammars for various industry sectors, including
 
