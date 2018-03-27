@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import sleekxmpp
 
 from programy.utils.logging.ylogger import YLogger
 
@@ -51,14 +52,17 @@ class XmppBotClient(PollingBotClient):
 
     def ask_question(self, userid, question):
         client_context = self.create_client_context(userid)
-        response = self.bot.ask_question(client_context, question, responselogger=self)
+        response = client_context.bot.ask_question(client_context, question, responselogger=self)
         return response
 
     def connect(self):
         YLogger.debug(self, "XMPPBotClient Connecting as %s to %s %s", self._username, self._server, self._port)
         self._xmpp_client = self.create_client(self._username, self._password)
-        self._xmpp_client.register_xep_plugins(self.configuration.client_configuration)
-        return self._xmpp_client.connect((self._server, self._port))
+        if self._xmpp_client is not None:
+            self._xmpp_client.connect((self._server, self._port))
+            self._xmpp_client.register_xep_plugins(self.configuration.client_configuration)
+            return True
+        return False
 
     def display_connected_message(self):
         print ("XMPP Bot connected and running...")
@@ -81,6 +85,7 @@ class XmppBotClient(PollingBotClient):
             YLogger.error(self, "Oops something bad happened !")
 
         return running
+
 
 if __name__ == '__main__':
 

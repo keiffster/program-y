@@ -55,33 +55,19 @@ class XmppClient(sleekxmpp.ClientXMPP):
         self.get_roster()
 
     def is_valid_message(self, msg):
-        valid = False
-        type = "Unknown"
-        if 'type' in msg:
-            type = msg['type']
-            valid = type in ('chat', 'normal')
-
-        if valid is False:
-            YLogger.debug(self, "XMPPClient invalid message type [%s]", type)
-
-        return valid
+        return bool(msg['type'] in ('chat', 'normal'))
 
     def get_question(self, msg):
-        if 'body' in msg:
-            return msg['body']
-        return None
+        return msg['body']
 
     def get_userid(self, msg):
-        if 'from' in msg:
-            return msg['from']
-        return None
+        return msg['from']
 
     def send_response(self, msg, response):
         if response is not None:
             msg.reply(response).send()
 
     def message(self, msg):
-        print("message")
         if self.is_valid_message(msg) is True:
 
             question = self.get_question(msg)
@@ -101,4 +87,3 @@ class XmppClient(sleekxmpp.ClientXMPP):
         else:
             YLogger.debug(self, "Invalid XMPP message")
             self.send_response(msg, "Sorry, no idea!")
-
