@@ -54,6 +54,7 @@ Program Y is extremely extensible, you can
   * Telegram
   * Kik
   * Line
+  * TCP Socket
   * Viber (pending approval)
 
 Program-Y comes with a base set of grammars for various industry sectors, including
