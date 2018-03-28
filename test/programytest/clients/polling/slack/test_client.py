@@ -68,7 +68,6 @@ class SlackBotClientTests(unittest.TestCase):
         self.assertEquals('ProgramY AIML2.0 Slack Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SlackConfiguration)
         self.assertIsInstance(client._slack_client, SlackClient)
-        self.assertFalse(client._running)
 
     def test_parse_direct_mention(self):
         arguments = MockArgumentParser()
