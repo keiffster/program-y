@@ -1,15 +1,16 @@
-from distutils.core import setup
 from setuptools import setup, find_packages
 
 setup(
   name = 'programy',
   packages=find_packages(),
-  version = '1.8.0',
+  package_data={'': ['*.conf', '*.aiml']},
+  include_package_data=True,
+  version = '2.0.0rc5',
   description = 'AIML 2.0 Framework and Platform',
   author = 'Keith Sterling',
   author_email = 'keiffster@gmail.com',
   url = 'https://github.com/keiffster/program-y.git',
-  download_url = 'https://github.com/keiffster/program-y/archive/1.8.0.tar.gz',
+  download_url = 'https://github.com/keiffster/program-y/archive/programy-2.0.0rc5.tar.gz',
   keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai'],
   classifiers = [
       # How mature is this project? Common values are
@@ -42,6 +43,14 @@ setup(
                     'pyyaml',
                     'tweepy',
                     'sleekxmpp',
-                    'metoffer']
+                    'metoffer',
+                    'python-telegram-bot',
+                    'pymessenger',
+                    'twilio',
+                    'slackclient',
+                    'redis',
+                    'viberbot',
+                    'line-bot-sdk',
+                    'kik']
 
 )
