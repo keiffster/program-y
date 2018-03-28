@@ -27,6 +27,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._bot_configs = []
         self._bot_configs.append(BotConfiguration("bot"))
         self._license_keys = None
+        self._bot_selector = None
 
     @property
     def configurations(self):
@@ -35,6 +36,10 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     @property
     def license_keys(self):
         return self._license_keys
+
+    @property
+    def bot_selector(self):
+        return self._bot_selector
 
     def load_configuration(self, configuration_file, section, bot_root):
         if section is not None:
@@ -52,6 +57,8 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             self._license_keys = configuration_file.get_option(section, "license_keys")
             if self._license_keys is not None:
                 self._license_keys = self.sub_bot_root(self._license_keys, bot_root)
+
+            self._bot_selector = configuration_file.get_option(section, "bot_selector")
 
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)

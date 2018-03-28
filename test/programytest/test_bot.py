@@ -1,15 +1,19 @@
 import unittest
+import unittest.mock
 import os
-import datetime
 
 from programy.brain import Brain
+from programy.bot import DefaultBrainSelector
+from programy.bot import BrainFactory
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
+from programy.config.brain.brain import BrainConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.dialog.dialog import Sentence
 from programy.context import ClientContext
 
+from programytest.clients.arguments import MockArgumentParser
 from programytest.aiml_tests.client import TestClient
 
 class MockBrain(Brain):
@@ -30,6 +34,36 @@ class MockBot(Bot):
     def loads_brains(self, bot):
         self._brains["mock"] = MockBrain(self, self.configuration.configurations[0])
 
+
+class DefaultBrainSelectorTests(unittest.TestCase):
+
+    def test_init(self):
+        configuration = unittest.mock.Mock()
+
+        selector = DefaultBrainSelector(configuration)
+        self.assertIsNotNone(selector)
+
+        brain1 = unittest.mock.Mock()
+        brain2 = unittest.mock.Mock()
+
+        brains = {"one": brain1, "two": brain2}
+        self.assertEquals(brain1, selector.select_brain(brains))
+
+
+class BrainFactoryTests(unittest.TestCase):
+
+    def test_empty_config_init(self):
+        configuration = BotConfiguration()
+        configuration._bot_selector = "programy.clients.client.DefaultBrainSelector"
+
+        bot = Bot(configuration)
+
+        factory = BrainFactory(bot)
+        self.assertIsNotNone(factory)
+
+        brain = factory.select_brain()
+        self.assertIsNotNone(brain)
+        self.assertIsInstance(brain, Brain)
 
 class BotTests(unittest.TestCase):
 

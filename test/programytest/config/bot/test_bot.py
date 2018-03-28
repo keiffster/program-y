@@ -12,6 +12,8 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
         bot:
+            brain_selector: programy.bot.DefaultBrainSelector
+        
             prompt: ">>>"
             initial_question: Hi, how can I help you today?
             initial_question_srai: YINITIALQUESTION
@@ -45,6 +47,8 @@ class BotConfigurationTests(unittest.TestCase):
         bot_config = BotConfiguration()
         bot_config.load_configuration(yaml, ".")
 
+        self.assertEqual("programy.bot.DefaultBrainSelector", bot_config.brain_selector)
+
         self.assertEqual("Hi, how can I help you today?", bot_config.initial_question)
         self.assertEqual("YINITIALQUESTION", bot_config.initial_question_srai)
         self.assertEqual("Sorry, I don't have an answer for that!", bot_config.default_response)
@@ -76,6 +80,7 @@ class BotConfigurationTests(unittest.TestCase):
         bot_config = BotConfiguration()
         bot_config.load_configuration(yaml, ".")
 
+        self.assertIsNone(bot_config.brain_selector)
         self.assertEqual("Hello", bot_config.initial_question)
         self.assertEqual("", bot_config.initial_question_srai)
         self.assertEqual("", bot_config.default_response)

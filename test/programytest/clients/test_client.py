@@ -1,7 +1,12 @@
 import unittest
+import unittest.mock
 import os
 
 from programy.clients.client import BotClient
+from programy.clients.client import DefaultBotSelector
+from programy.clients.client import BotFactory
+from programy.config.bot.bot import BotConfiguration
+from programy.bot import Bot
 
 from programytest.clients.arguments import MockArgumentParser
 from programy.config.client.config import ClientConfigurationData
@@ -38,6 +43,58 @@ class MockBotClient(BotClient):
     def run(self):
         """For testing purposes we do nothing"""
         return
+
+
+class DefaultBotSelectorTests(unittest.TestCase):
+
+    def test_init(self):
+        configuration = unittest.mock.Mock()
+
+        selector = DefaultBotSelector(configuration)
+        self.assertIsNotNone(selector)
+
+        bot1 = unittest.mock.Mock()
+        bot2 = unittest.mock.Mock()
+
+        bots = {"one": bot1, "two": bot2}
+        self.assertEquals(bot1, selector.select_bot(bots))
+
+
+class BotFactoryTests(unittest.TestCase):
+
+    def test_empty_config_init(self):
+        arguments = MockArgumentParser()
+        client = MockBotClient(arguments)
+
+        configuration = unittest.mock.Mock()
+
+        configuration.configurations = []
+
+        configuration.bot_selector = "programy.clients.client.DefaultBotSelector"
+
+        factory = BotFactory(client, configuration)
+        self.assertIsNotNone(factory)
+
+        bot = factory.select_bot()
+        self.assertIsNone(bot)
+
+    def test_config_init(self):
+        arguments = MockArgumentParser()
+        client = MockBotClient(arguments)
+
+        configuration = unittest.mock.Mock()
+
+        configuration.configurations = [BotConfiguration()]
+
+        configuration.bot_selector = "programy.clients.client.DefaultBotSelector"
+
+        factory = BotFactory(client, configuration)
+        self.assertIsNotNone(factory)
+
+        bot = factory.select_bot()
+        self.assertIsNotNone(bot)
+        self.assertIsInstance(bot, Bot)
+
 
 class BotClientTests(unittest.TestCase):
 

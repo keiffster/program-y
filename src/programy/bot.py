@@ -24,20 +24,50 @@ from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
 
 
+class BrainSelector(object):
+
+    def __init__(self, configuration):
+        self._configuration = configuration
+
+    def select_brain(self, brains):
+        pass
+
+
+class DefaultBrainSelector(BrainSelector):
+
+    def __init__(self, configuration):
+        BrainSelector.__init__(self, configuration)
+
+    def select_brain(self, brains):
+        if brains:
+            return next (iter (brains.values()))
+        return None
+
+
 class BrainFactory(object):
 
     def __init__(self, bot):
         self._brains = {}
         self.loads_brains(bot)
+        self._brain_selector = None
+        self.load_brain_selector(bot.configuration)
 
     def loads_brains(self, bot):
         for config in bot.configuration.configurations:
             brain = Brain(bot, config)
             self._brains[brain.id] = brain
 
-    # TODO Replace this with a bot selector
+    def load_brain_selector(self, configuration):
+        if configuration.brain_selector is None:
+            self._brain_selector = DefaultBrainSelector(configuration)
+        else:
+            try:
+                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration)
+            except Exception as e:
+                self._brain_selector = DefaultBrainSelector(configuration)
+
     def select_brain(self):
-        return next (iter (self._brains.values()))
+        return self._brain_selector.select_brain(self._brains)
 
 
 class Bot(object):

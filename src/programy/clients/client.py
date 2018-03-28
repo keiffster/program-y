@@ -27,6 +27,7 @@ from programy.bot import Bot
 from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
+from programy.utils.classes.loader import ClassLoader
 
 
 class ResponseLogger(object):
@@ -38,21 +39,51 @@ class ResponseLogger(object):
         return
 
 
+class BotSelector(object):
+
+    def __init__(self, configuration):
+        self._configuration = configuration
+
+    def select_bot(self, bots):
+        pass
+
+
+class DefaultBotSelector(BotSelector):
+
+    def __init__(self, configuration):
+        BotSelector.__init__(self, configuration)
+
+    def select_bot(self, bots):
+        if bots:
+            return next (iter (bots.values()))
+        return None
+
+
 class BotFactory(object):
 
     def __init__(self, client, configuration):
         self._client = client
         self._bots = {}
-        self.loads_bots(configuration)
+        self.load_bots(configuration)
+        self._bot_selector = None
+        self.load_bot_selector(configuration)
 
-    def loads_bots(self, configuration):
+    def load_bots(self, configuration):
         for config in configuration.configurations:
             bot = Bot(config, client=self._client)
             self._bots[bot.id] = bot
 
-    # TODO Replace this with a bot selector
+    def load_bot_selector(self, configuration):
+        if configuration.bot_selector is None:
+            self._bot_selector = DefaultBotSelector(configuration)
+        else:
+            try:
+                self._bot_selector = ClassLoader.instantiate_class(configuration.bot_selector)(configuration)
+            except Exception as e:
+                self._bot_selector = DefaultBotSelector(configuration)
+
     def select_bot(self):
-        return next (iter (self._bots.values()))
+        return self._bot_selector.select_bot(self._bots)
 
 
 class BotClient(ResponseLogger):
