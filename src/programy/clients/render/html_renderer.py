@@ -16,68 +16,111 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
+import time
 import urllib.parse
 
-from programy.clients.renderer import RichMediaRenderer
+from programy.clients.render.text_renderer import TextRenderer
 
 
-class HtmlRenderer(RichMediaRenderer):
+class HtmlRenderer(TextRenderer):
 
-    def __init__(self, config):
-        RichMediaRenderer.__init__(self, config)
+    def __init__(self, config, client):
+        TextRenderer.__init__(self, config, client)
 
     def create_postback_url(self, postback):
         host = self._config.host
         port = self._config.port
         api = self._config.api
         question = urllib.parse.quote_plus(postback)
-        return "%s:%s%squestion=%s"%(host, port, api, question)
+        return "http://%s:%s%squestion=%s"%(host, port, api, question)
 
     def handle_text(self, userid, text):
-        self._bot.send_message(userid, text)
+        str = "<p>%s</p>"%text
+        self._client.display_response(str)
 
     def handle_url_button(self, userid, text, url):
-        return '<a href="%s">%s</a>'%(url, text)
+        str = '<a href="%s">%s</a>'%(url, text)
+        self._client.display_response(str)
 
     def handle_postback_button(self, userid, text, postback):
         url = self.create_postback_url(postback)
-        return '<a href="%s">%s</a>'%(url, text)
+        str = '<a href="%s">%s</a>'%(url, text)
+        self._client.display_response(str)
 
     def handle_link(self, userid, text, url):
-        return '<a href="%s">%s</a>'%(url, text)
+        str = '<a href="%s">%s</a>'%(url, text)
+        self._client.display_response(str)
 
     def handle_image(self, userid, url):
-        return '<img src="%s" />'%url
+        str = '<img src="%s" />'%url
+        self._client.display_response(str)
 
     def handle_video(self, userid, url):
-        return """
-        <video src="%s">
-        Sorry, your browser doesn't support embedded videos, 
-        but don't worry, you can <a href="%s">download it</a>
-        and watch it with your favorite video player!
-        </video>
-        """%(url, url)
+        str = """<video src="%s">
+Sorry, your browser doesn't support embedded videos, 
+but don't worry, you can <a href="%s">download it</a>
+and watch it with your favorite video player!
+</video>"""%(url, url)
+        self._client.display_response(str)
 
-    def handle_card(self, userid, image, title, substitle, buttons):
-        pass
+    def _format_card(self, image, title, subtitle, buttons):
+        str = '<div class="card" >'
+        str += '<img src="%s" />' % image
+        str += '<h1>%s</h1>' % title
+        str += '<h2>%s</h2>' % subtitle
+        for button in buttons:
+            if button[1] is not None:
+                str += '<a href="%s">%s</a>' % (button[1], button[0])
+            else:
+                postback = self.create_postback_url(button[2])
+                str += '<a href="%s">%s</a>' % (postback, button[0])
+        str += '</div>'
+        return str
+
+    def handle_card(self, userid, image, title, subtitle, buttons):
+        str = self._format_card(image, title, subtitle, buttons)
+        self._client.display_response(str)
 
     def handle_carousel(self, userid, cards):
-        pass
+        str = "<carousel>"
+        for card in cards:
+            str += self._format_card(card[0], card[1], card[2], card[3])
+        str += "</carousel>"
+        self._client.display_response(str)
 
     def handle_reply(self, userid, text, postback):
-        pass
+        str = '<div class="reply">'
+        if postback is not None:
+            url = self.create_postback_url(postback)
+        else:
+            url = self.create_postback_url(text)
+        str += '<a href="%s">%s</a>'%(url, text)
+        str += '</div>'
+        self._client.display_response(str)
 
     def handle_delay(self, userid, seconds):
-        pass
+        self._client.display_response('<div class="delay">...</div>')
+        delay = int(seconds)
+        time.sleep(delay)
 
-    def handle_split(self):
-        pass
+    def handle_split(self, userid):
+        str = ""
+        self._client.display_response(str)
 
     def handle_list(self, userid, items):
-        pass
+        str = "<ul>"
+        for item in items:
+            str += "<li>%s</li>"%item
+        str += "</ul>"
+        self._client.display_response(str)
 
     def handle_ordered_list(self, userid, items):
-        pass
+        str = "<ol>"
+        for item in items:
+            str += "<li>%s</li>" % item
+        str += "</ol>"
+        self._client.display_response(str)
 
     def handle_location(self, userid):
-        pass
+        str = ""
+        self._client.display_response(str)

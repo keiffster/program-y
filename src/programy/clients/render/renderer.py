@@ -26,14 +26,20 @@ class RichMediaRenderer(object):
         self._config = config
 
     def send_message(self, userid, message):
-        soup = Soup(message, "html.parser")
-        for child in soup.children:
+        #soup = Soup(message, "html.parser")
+        soup = Soup(message, "lxml-xml")
+        parsed = False
+        if soup.children:
+                for child in soup.children:
+                    if isinstance(child, Tag):
+                        self.parse_tag(userid, child)
 
-            if isinstance(child, Tag):
-                self.parse_tag(userid, child)
+                    elif isinstance(child, NavigableString):
+                        self.parse_text(userid, child)
 
-            elif isinstance(child, NavigableString):
-                self.parse_text(userid, child)
+                    parsed = True
+        if parsed is False:
+            self.parse_text(userid, message)
 
     def parse_tag(self, userid, tag):
 
@@ -74,7 +80,7 @@ class RichMediaRenderer(object):
             return self.parse_location(userid, tag)
 
         else:
-            print("Unknown tag %s".tag.name)
+            print("Unknown tag %s", tag.name)
             return None
 
     def parse_text(self, userid, text):
@@ -131,10 +137,10 @@ class RichMediaRenderer(object):
     def parse_video(self, userid, tag):
         self.handle_video(userid, tag.text)
 
-    def parse_card(self, userid, tag):
+    def _parse_card_details(self, tag):
         image = None
         title = None
-        substitle = None
+        subtitle = None
         buttons = []
 
         for child in tag.children:
@@ -143,7 +149,7 @@ class RichMediaRenderer(object):
                 pass
 
             elif child.name == 'image':
-                image = self.parse_image(child)
+                image = child.text
 
             elif child.name == 'title':
                 title = child.text
@@ -151,13 +157,42 @@ class RichMediaRenderer(object):
             elif child.name == 'subtitle':
                 subtitle = child.text
 
-            elif child.text == 'button':
-                buttons.append(self.parse_button(child))
+            elif child.name == 'button':
+                text = None
+                url = None
+                postback = None
+                for button_child in child:
+                    if button_child.name is None:
+                        pass
 
+                    elif button_child.name == 'text':
+                        text = button_child.text
+
+                    elif button_child.name == 'url':
+                        url = button_child.text
+
+                    elif button_child.name == 'postback':
+                        postback = button_child.text
+
+                    else:
+                        print("Unknown button child tag %s" % child.name)
+
+                buttons.append((text, url, postback))
             else:
-                print("Unknown card tag %s" % child.name)
+                print("Unknown card tag [%s]" % child.name)
 
-        self.handle_card(userid, image, title, substitle, buttons)
+        return (image, title, subtitle, buttons)
+
+    def parse_card(self, userid, tag):
+
+        details = self._parse_card_details(tag)
+
+        image = details[0]
+        title = details[1]
+        subtitle = details[2]
+        buttons = details[3]
+
+        self.handle_card(userid, image, title, subtitle, buttons)
 
     def parse_carousel(self, userid, tag):
 
@@ -168,7 +203,8 @@ class RichMediaRenderer(object):
                 pass
 
             elif child.name == 'card':
-                cards.append(self.parse_card(child))
+                details = self._parse_card_details(child)
+                cards.append(details)
 
             else:
                 print("Unknown carousel tag %s" % child.name)
@@ -207,7 +243,7 @@ class RichMediaRenderer(object):
         self.handle_delay(userid, seconds)
 
     def parse_split(self, userid, tag):
-        self.handle_split()
+        self.handle_split(userid)
 
     def parse_list(self, userid, tag):
         items = []
@@ -237,7 +273,7 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown olist tag %s" % child.name)
 
-        self.handle_ordered_list(items)
+        self.handle_ordered_list(userid, items)
 
     def parse_location(self, userid, tag):
         self.handle_location(userid)
@@ -263,7 +299,7 @@ class RichMediaRenderer(object):
     def handle_video(self, userid, url):
         pass
 
-    def handle_card(self, userid, image, title, substitle, buttons):
+    def handle_card(self, userid, image, title, subtitle, buttons):
         pass
 
     def handle_carousel(self, userid, cards):
@@ -275,7 +311,7 @@ class RichMediaRenderer(object):
     def handle_delay(self, userid, seconds):
         pass
 
-    def handle_split(self):
+    def handle_split(self, userid):
         pass
 
     def handle_list(self, userid, items):

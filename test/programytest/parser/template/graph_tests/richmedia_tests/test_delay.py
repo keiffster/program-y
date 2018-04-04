@@ -24,4 +24,4 @@ class TemplateGraphDelayTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateDelayNode)
 
-        self.assertEquals("10", node._seconds)
+        self.assertEquals("10", node._seconds.resolve(self._client_context))

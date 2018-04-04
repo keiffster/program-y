@@ -18,7 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from pymessenger.bot import Bot
 
-from programy.clients.renderer import RichMediaRenderer
+from programy.clients.render.renderer import RichMediaRenderer
 
 
 class FacebookBot(RichMediaRenderer):

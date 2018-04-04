@@ -16,54 +16,97 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from pymessenger.bot import Bot
+import time
 
-from programy.clients.renderer import RichMediaRenderer
+from programy.clients.render.renderer import RichMediaRenderer
 
 
 class TextRenderer(RichMediaRenderer):
 
-    def __init__(self):
-        RichMediaRenderer.__init__(self)
+    def __init__(self, config, client):
+        RichMediaRenderer.__init__(self, config)
+        self._client = client
 
     def handle_text(self, userid, text):
-        self._bot.send_message(userid, text)
+        return self._client.display_response(text)
 
     def handle_url_button(self, userid, text, url):
-        pass
+        str = "%s, click %s"%(text, url)
+        self._client.display_response(str)
 
     def handle_postback_button(self, userid, text, postback):
-        pass
+        self._client.display_response(postback)
 
     def handle_link(self, userid, text, url):
-        pass
+        str = "Open in browser, click %s"%url
+        self._client.display_response(str)
 
     def handle_image(self, userid, url):
-        pass
+        str = "To see the image, click %s"%url
+        self._client.display_response(str)
 
     def handle_video(self, userid, url):
-        pass
+        str = "To see the video, click %s"%url
+        self._client.display_response(str)
 
-    def handle_card(self, userid, image, title, substitle, buttons):
-        pass
+    def _format_card(self, userid, image, title, subtitle, buttons):
+        str = "Image: %s\nTitle: %s\nSubtitle: %s\n"%(image, title, subtitle)
+        for button in buttons:
+            str += "---------------------------------------\n"
+            text = button[0]
+            url = button[1]
+            postback = button[2]
+            if url is not None:
+                str += "%s : %s"%(text, url)
+            else:
+                str += "%s : %s" % (text, postback)
+            str += "\n---------------------------------------\n"
+        return str
+    
+    def handle_card(self, userid, image, title, subtitle, buttons):
+        str = self._format_card(userid, image, title, subtitle, buttons)
+        self._client.display_response(str)
 
     def handle_carousel(self, userid, cards):
-        pass
+        str = ""
+        for card in cards:
+            str += "=========================================\n"
+            image = card[0]
+            title = card[1]
+            subtitle = card[2]
+            buttons = card[3]
+            str += self._format_card(userid, image, title, subtitle, buttons)
+            str += "=========================================\n"
+        self._client.display_response(str)
 
     def handle_reply(self, userid, text, postback):
-        pass
+        if postback is not None:
+            self._client.display_response(postback)
+        else:
+            self._client.display_response(text)
 
     def handle_delay(self, userid, seconds):
-        pass
+        self._client.display_response("...")
+        delay = int(seconds)
+        time.sleep(delay)
 
-    def handle_split(self):
-        pass
+    def handle_split(self, userid):
+        return
 
     def handle_list(self, userid, items):
-        pass
+        str = ""
+        for item in items:
+            str += "> %s\n"%item
+        self._client.display_response(str)
 
     def handle_ordered_list(self, userid, items):
-        pass
+        str = ""
+        count = 1
+        for item in items:
+            str += "%d. %s\n"%(count, item)
+            count += 1
+        self._client.display_response(str)
 
     def handle_location(self, userid):
-        pass
+        str = ""
+        self._client.display_response(str)
