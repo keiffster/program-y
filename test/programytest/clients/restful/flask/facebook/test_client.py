@@ -11,7 +11,7 @@ class MockFacebookBot(FacebookBot):
     def __init__(self, access_token):
         pass
 
-    def send_text_message(self, recipient_id, message):
+    def send_message(self, recipient_id, message):
         self._recipient_id = recipient_id
         self._message = message
 

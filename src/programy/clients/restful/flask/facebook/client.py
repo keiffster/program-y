@@ -17,19 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from flask import Flask, request
-from pymessenger.bot import Bot
 
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.facebook.config import FacebookConfiguration
-
-
-class FacebookBot(object):
-
-    def __init__(self, access_token):
-        self._bot = Bot(access_token)
-
-    def send_text_message(self, recipient_id, response):
-        self._bot.send_text_message(recipient_id, response)
+from programy.clients.restful.flask.facebook.renderer import FacebookBot
 
 
 class FacebookBotClient(FlaskRestBotClient):
@@ -82,7 +73,7 @@ class FacebookBotClient(FlaskRestBotClient):
 
     def send_message(self, recipient_id, response):
         # sends user the text message provided via input response parameter
-        self._facebook_bot.send_text_message(recipient_id, response)
+        self._facebook_bot.send_message(recipient_id, response)
         return "success"
 
     def receive_message(self, request):

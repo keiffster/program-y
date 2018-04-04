@@ -44,7 +44,7 @@ class NodeFactory(object):
             try:
                 self._nodes_config[node_name] = ClassLoader.instantiate_class(class_name)
             except Exception as e:
-                YLogger.error(self, "Failed to pre-instantiating %s Node [%s]", self._type, class_name)
+                YLogger.error(self, "Failed pre-instantiating %s Node [%s]", self._type, class_name)
                 YLogger.exception(e)
 
     def valid_config_line(self, line):

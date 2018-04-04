@@ -13,6 +13,7 @@ class RestConfigurationTests(unittest.TestCase):
         rest:
           host: 127.0.0.1
           port: 5000
+          api: /api/web/v1.0/ask
           debug: false
           workers: 4
           use_api_keys: false
@@ -24,6 +25,7 @@ class RestConfigurationTests(unittest.TestCase):
 
         self.assertEqual("127.0.0.1", rest_config.host)
         self.assertEqual(5000, rest_config.port)
+        self.assertEqual('/api/web/v1.0/ask', rest_config.api)
         self.assertEqual(False, rest_config.debug)
         self.assertEqual(False, rest_config.use_api_keys)
         self.assertEqual("apikeys.txt", rest_config.api_key_file)
@@ -40,5 +42,6 @@ class RestConfigurationTests(unittest.TestCase):
 
         self.assertEqual("0.0.0.0", rest_config.host)
         self.assertEqual(80, rest_config.port)
+        self.assertIsNone(rest_config.api)
         self.assertEqual(False, rest_config.debug)
         self.assertEqual(False, rest_config.use_api_keys)

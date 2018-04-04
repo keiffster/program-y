@@ -29,6 +29,7 @@ webchat:
   port: 8090
   debug: false
   license_keys: $BOT_ROOT/config/license.keys
+  api: /api/web/v1.0/ask
 
 twitter:
   polling: true

@@ -1,11 +1,6 @@
 // jQuery Document
 $(document).ready(function(){
 
-    /*
-    $("#chatbox").append ("<p><b>Bot:</b>Hello, my name is Y-Bot, how can I help you today?</p>" );
-    $("#chatbox").append ("<p><hr /></p>" );
-    */
-
     ask_question = function(question, show_question) {
 
         var xhttp = new XMLHttpRequest();
