@@ -7,21 +7,20 @@ class MockHtmlBotClient(object):
 
     def __init__(self):
         self._response = None
+        self.configuration = unittest.mock.Mock()
+        self.configuration.host = "127.0.0.1"
+        self.configuration.port = "6666"
+        self.configuration.api  = "/api/web/v1.0/ask"
 
     def display_response(self, response, output_func=print):
         self._response = response
 
-class HtmlRendererTests(unittest.TestCase):
 
-    def setUp(self):
-        self._mock_config = unittest.mock.Mock()
-        self._mock_config.host = "127.0.0.1"
-        self._mock_config.port = "6666"
-        self._mock_config.api  = "/api/web/v1.0/ask"
+class HtmlRendererTests(unittest.TestCase):
 
     def test_create_postback_url(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         postback = renderer.create_postback_url("Hello world")
@@ -30,7 +29,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_text_only(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "Hello world")
@@ -39,7 +38,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_url_button(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
@@ -48,7 +47,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_postback_button(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
@@ -57,7 +56,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_link(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
@@ -66,7 +65,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_image(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<image>http://servusai.com/aiml.png</image>")
@@ -75,7 +74,7 @@ class HtmlRendererTests(unittest.TestCase):
 
     def test_video(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<video>http://servusai.com/aiml.mov</video>")
@@ -88,7 +87,7 @@ and watch it with your favorite video player!
 
     def test_card(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
@@ -97,7 +96,7 @@ and watch it with your favorite video player!
 
     def test_carousel(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
@@ -106,7 +105,7 @@ and watch it with your favorite video player!
 
     def test_reply_with_postback(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
@@ -115,7 +114,7 @@ and watch it with your favorite video player!
 
     def test_reply_without_postback(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<reply><text>Hello</text></reply>")
@@ -124,7 +123,7 @@ and watch it with your favorite video player!
 
     def test_delay(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<delay><seconds>0</seconds></delay>")
@@ -133,7 +132,7 @@ and watch it with your favorite video player!
 
     def test_split(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<split />")
@@ -142,7 +141,7 @@ and watch it with your favorite video player!
 
     def test_list(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<list><item>Item1</item><item>Item2</item></list>")
@@ -151,7 +150,7 @@ and watch it with your favorite video player!
 
     def test_olist(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
@@ -160,7 +159,7 @@ and watch it with your favorite video player!
 
     def test_location(self):
         mock_console = MockHtmlBotClient()
-        renderer = HtmlRenderer(self._mock_config, mock_console)
+        renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<location />")

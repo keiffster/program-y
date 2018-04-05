@@ -57,7 +57,7 @@ class FacebookBot(RichMediaRenderer):
     def handle_delay(self, userid, seconds):
         pass
 
-    def handle_split(self):
+    def handle_split(self, userid):
         pass
 
     def handle_list(self, userid, items):

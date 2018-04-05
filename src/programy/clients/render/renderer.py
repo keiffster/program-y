@@ -22,8 +22,8 @@ from bs4.element import Tag, NavigableString
 
 class RichMediaRenderer(object):
 
-    def __init__(self, config):
-        self._config = config
+    def __init__(self, client):
+        self._client = client
 
     def send_message(self, userid, message):
         #soup = Soup(message, "html.parser")

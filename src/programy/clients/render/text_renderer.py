@@ -23,9 +23,8 @@ from programy.clients.render.renderer import RichMediaRenderer
 
 class TextRenderer(RichMediaRenderer):
 
-    def __init__(self, config, client):
-        RichMediaRenderer.__init__(self, config)
-        self._client = client
+    def __init__(self, client):
+        RichMediaRenderer.__init__(self, client)
 
     def handle_text(self, userid, text):
         return self._client.display_response(text)

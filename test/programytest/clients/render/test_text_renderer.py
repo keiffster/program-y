@@ -14,9 +14,8 @@ class MockConsoleBotClient(object):
 class TextRendererTests(unittest.TestCase):
 
     def test_text_only(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "Hello world")
@@ -24,9 +23,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "Hello world")
 
     def test_url_button(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
@@ -34,9 +32,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "Hello, click http://click.me")
 
     def test_postback_button(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
@@ -44,9 +41,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "HELLO")
 
     def test_link(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
@@ -54,9 +50,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "Open in browser, click http://click.me")
 
     def test_image(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<image>http://servusai.com/aiml.png</image>")
@@ -64,9 +59,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "To see the image, click http://servusai.com/aiml.png")
 
     def test_video(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<video>http://servusai.com/aiml.mov</video>")
@@ -74,9 +68,8 @@ class TextRendererTests(unittest.TestCase):
         self.assertEquals(mock_console._response, "To see the video, click http://servusai.com/aiml.mov")
 
     def test_card(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
@@ -90,9 +83,8 @@ Hello : http://click.me
 """)
 
     def test_carousel(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
@@ -108,9 +100,8 @@ Hello : http://click.me
 """)
 
     def test_reply_with_postback(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
@@ -118,9 +109,8 @@ Hello : http://click.me
         self.assertEquals(mock_console._response, "HELLO")
 
     def test_reply_without_postback(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<reply><text>Hello</text></reply>")
@@ -128,9 +118,8 @@ Hello : http://click.me
         self.assertEquals(mock_console._response, "Hello")
 
     def test_delay(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<delay><seconds>0</seconds></delay>")
@@ -138,9 +127,8 @@ Hello : http://click.me
         self.assertEquals(mock_console._response, "...")
 
     def test_split(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<split />")
@@ -148,9 +136,8 @@ Hello : http://click.me
         self.assertIsNone(mock_console._response)
 
     def test_list(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<list><item>Item1</item><item>Item2</item></list>")
@@ -158,9 +145,8 @@ Hello : http://click.me
         self.assertEquals(mock_console._response, "> Item1\n> Item2\n")
 
     def test_olist(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
@@ -168,9 +154,8 @@ Hello : http://click.me
         self.assertEquals(mock_console._response, "1. Item1\n2. Item2\n")
 
     def test_location(self):
-        mock_config = unittest.mock.Mock()
         mock_console = MockConsoleBotClient()
-        renderer = TextRenderer(mock_config, mock_console)
+        renderer = TextRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
         renderer.send_message("testuser", "<location />")

@@ -456,7 +456,7 @@ class AIMLParser(object):
         topic_sentence = Sentence(client_context.brain.tokenizer, topic_pattern)
         that_sentence = Sentence(client_context.brain.tokenizer, that_pattern)
 
-        YLogger.debug(self, "AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
+        YLogger.debug(client_context, "AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
                           pattern_sentence.text(), topic_pattern, that_pattern)
 
         sentence = Sentence(client_context.brain.tokenizer)

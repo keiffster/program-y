@@ -19,12 +19,14 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.clients.render.text_renderer import TextRenderer
 
 class ConsoleBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
+        self._renderer = TextRenderer(self)
 
     def get_description(self):
         return 'ProgramY AIML2.0 Console Client'
@@ -38,6 +40,9 @@ class ConsoleBotClient(EventBotClient):
     def parse_args(self, arguments, parsed_args):
         return
 
+    def display_response(self, response):
+        print(response)
+
     def get_question(self, client_context, input_func=input):
         ask = "%s " % self.get_client_configuration().prompt
         return input_func(ask)
@@ -48,15 +53,12 @@ class ConsoleBotClient(EventBotClient):
     def display_startup_messages(self, client_context):
         self.display_response(client_context.bot.get_version_string(client_context))
         initial_question = client_context.bot.get_initial_question(client_context)
-        self.display_response(initial_question)
-
-    def display_response(self, response, output_func=print):
-        output_func(response)
+        self._renderer.send_message(client_context.userid, initial_question)
 
     def process_question_answer(self, client_context):
         question = self.get_question(client_context)
         response = self.get_response(client_context , question)
-        self.display_response(response)
+        self._renderer.send_message(client_context.userid, response)
         return question
 
     def wait_and_answer(self):
@@ -67,7 +69,7 @@ class ConsoleBotClient(EventBotClient):
         except KeyboardInterrupt as keye:
             running = False
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
-            self.display_response(client_context.bot.get_exit_response(client_context))
+            self._renderer.send_message(client_context.userid, client_context.bot.get_exit_response(client_context))
         except Exception as excep:
             YLogger.error(self, "Oops something bad happened !")
             YLogger.exception(self, excep)

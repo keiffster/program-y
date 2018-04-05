@@ -218,14 +218,14 @@ class Conversation(object):
             YLogger.debug(self, "Setting variable [%s] = [%s]", pair[0], pair[1])
             self._properties[pair[0]] = pair[1]
 
-    def get_topic_pattern(self):
+    def get_topic_pattern(self, client_context):
         topic_pattern = self.property("topic")
 
         if topic_pattern is None:
-            YLogger.info(self, "No Topic pattern default to [*]")
+            YLogger.info(client_context, "No Topic pattern default to [*]")
             topic_pattern = "*"
         else:
-            YLogger.info(self, "Topic pattern = [%s]", topic_pattern)
+            YLogger.info(client_context, "Topic pattern = [%s]", topic_pattern)
 
         return topic_pattern
 
@@ -244,7 +244,7 @@ class Conversation(object):
             that_pattern = '*'
         return that_pattern
 
-    def get_that_pattern(self):
+    def get_that_pattern(self, client_context):
         try:
             that_question = self.previous_nth_question(1)
             that_sentence = that_question.current_sentence()
@@ -253,13 +253,13 @@ class Conversation(object):
             # that as the that_pattern, otherwise we default to '*' as pattern
             if that_sentence.response is not None and that_sentence.response != '':
                 that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
-                YLogger.info(self, "That pattern = [%s]", that_pattern)
+                YLogger.info(client_context, "That pattern = [%s]", that_pattern)
             else:
-                YLogger.info(self, "That pattern, no response, default to [*]")
+                YLogger.info(client_context, "That pattern, no response, default to [*]")
                 that_pattern = "*"
 
         except Exception as e:
-            YLogger.info(self, "No That pattern default to [*]")
+            YLogger.info(client_context, "No That pattern default to [*]")
             that_pattern = "*"
 
         return that_pattern

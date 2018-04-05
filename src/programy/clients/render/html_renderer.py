@@ -24,13 +24,13 @@ from programy.clients.render.text_renderer import TextRenderer
 
 class HtmlRenderer(TextRenderer):
 
-    def __init__(self, config, client):
-        TextRenderer.__init__(self, config, client)
+    def __init__(self, client):
+        TextRenderer.__init__(self, client)
 
     def create_postback_url(self, postback):
-        host = self._config.host
-        port = self._config.port
-        api = self._config.api
+        host = self._client.configuration.host
+        port = self._client.configuration.port
+        api = self._client.configuration.api
         question = urllib.parse.quote_plus(postback)
         return "http://%s:%s%squestion=%s"%(host, port, api, question)
 

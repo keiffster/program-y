@@ -512,9 +512,9 @@ class Brain(object):
 
         conversation = client_context.bot.get_conversation(client_context)
 
-        topic_pattern = conversation.get_topic_pattern()
+        topic_pattern = conversation.get_topic_pattern(client_context)
 
-        that_pattern = conversation.get_that_pattern()
+        that_pattern = conversation.get_that_pattern(client_context)
 
         match_context = self._aiml_parser.match_sentence(client_context,
                                                          sentence,
