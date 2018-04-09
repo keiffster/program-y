@@ -91,7 +91,7 @@ class SanicRestBotClient(RestBotClient):
             sanic.run(host=self.configuration.client_configuration.host,
                       port=self.configuration.client_configuration.port,
                       debug=self.configuration.client_configuration.debug,
-                      workers = REST_CLIENT.configuration.client_configuration.workers)
+                      workers = self.configuration.client_configuration.workers)
 
     def dump_request(self, request):
         pass
