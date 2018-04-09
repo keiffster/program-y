@@ -6,7 +6,7 @@ from programy.clients.events.console.config import ConsoleConfiguration
 
 class TestClient(BotClient):
 
-    def __init__(self, debug=False, level=logging.DEBUG):
+    def __init__(self, debug=False, level=logging.ERROR):
         if debug is True:
             logging.getLogger().setLevel(level)
         BotClient.__init__(self, "testclient")

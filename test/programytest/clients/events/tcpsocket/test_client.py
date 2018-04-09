@@ -48,11 +48,12 @@ class MockSocketBotClient(SocketBotClient):
     def __init__(self, socket, argument_parser=None):
         self._socket = socket
         SocketBotClient.__init__(self, argument_parser)
+        self.response = ""
 
     def create_socket_connection(self, host, port, queue, max_buffer):
         return SocketConnection(host, port, queue, max_buffer, factory=MockSocketFactory(self._socket))
 
-    def ask_question(self, question):
+    def process_question(self, client_context, question):
         return self.response
 
 
@@ -83,16 +84,18 @@ class SocketBotClientTests(unittest.TestCase):
         mock_socket = MockSocket()
         mock_socket._recv =  '{"userid": "user1234", "question": "Test Question"}'
         client = MockSocketBotClient(mock_socket, arguments)
+        client.response = "Hello"
         client.wait_and_answer()
-        self.assertEquals('{"result": "OK", "answer": "", "userid": "user1234"}', mock_socket._send)
+        self.assertEquals('{"result": "OK", "answer": {"text": "Hello"}, "userid": "user1234"}', mock_socket._send)
 
     def test_wait_and_answer_no_response(self):
         arguments = MockArgumentParser()
         mock_socket = MockSocket()
         mock_socket._recv =  ''
         client = MockSocketBotClient(mock_socket, arguments)
+        client.response = ""
         client.wait_and_answer()
-        self.assertEquals('{"result": "ERROR", "message": "Expecting value: line 1 column 1 (char 0)"}', mock_socket._send)
+        self.assertEquals('{"result": "ERROR", "message": "Expecting value"}', mock_socket._send)
 
     def test_wait_and_answer_invalid_response(self):
         arguments = MockArgumentParser()
@@ -100,4 +103,4 @@ class SocketBotClientTests(unittest.TestCase):
         mock_socket._recv =  'This is rubbish'
         client = MockSocketBotClient(mock_socket, arguments)
         client.wait_and_answer()
-        self.assertEquals('{"result": "ERROR", "message": "Expecting value: line 1 column 1 (char 0)"}', mock_socket._send)
+        self.assertEquals('{"result": "ERROR", "message": "Expecting value"}', mock_socket._send)

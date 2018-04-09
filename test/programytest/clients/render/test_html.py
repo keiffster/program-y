@@ -1,7 +1,7 @@
 import unittest
 import unittest.mock
 
-from programy.clients.render.html_renderer import HtmlRenderer
+from programy.clients.render.html import HtmlRenderer
 
 class MockHtmlBotClient(object):
 
@@ -12,7 +12,7 @@ class MockHtmlBotClient(object):
         self.configuration.port = "6666"
         self.configuration.api  = "/api/web/v1.0/ask"
 
-    def display_response(self, response, output_func=print):
+    def process_response(self, client_context, response):
         self._response = response
 
 
@@ -23,25 +23,25 @@ class HtmlRendererTests(unittest.TestCase):
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        postback = renderer.create_postback_url("Hello world")
+        postback = renderer.create_postback_url()
         self.assertIsNotNone(postback)
-        self.assertEquals(postback, "http://127.0.0.1:6666/api/web/v1.0/askquestion=Hello+world")
+        self.assertEquals(postback, "#")
 
     def test_text_only(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "Hello world")
+        renderer.render("testuser", "Hello world")
 
-        self.assertEquals(mock_console._response, "<p>Hello world</p>")
+        self.assertEquals(mock_console._response, "Hello world")
 
     def test_url_button(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
+        renderer.render("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
 
         self.assertEquals(mock_console._response, '<a href="http://click.me">Hello</a>')
 
@@ -50,16 +50,16 @@ class HtmlRendererTests(unittest.TestCase):
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
+        renderer.render("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
 
-        self.assertEquals(mock_console._response, '<a href="http://127.0.0.1:6666/api/web/v1.0/askquestion=HELLO">Hello</a>')
+        self.assertEquals(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
 
     def test_link(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
+        renderer.render("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
 
         self.assertEquals(mock_console._response, '<a href="http://click.me">Hello</a>')
 
@@ -68,7 +68,7 @@ class HtmlRendererTests(unittest.TestCase):
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<image>http://servusai.com/aiml.png</image>")
+        renderer.render("testuser", "<image>http://servusai.com/aiml.png</image>")
 
         self.assertEquals(mock_console._response, '<img src="http://servusai.com/aiml.png" />')
 
@@ -77,7 +77,7 @@ class HtmlRendererTests(unittest.TestCase):
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<video>http://servusai.com/aiml.mov</video>")
+        renderer.render("testuser", "<video>http://servusai.com/aiml.mov</video>")
 
         self.assertEquals(mock_console._response, """<video src="http://servusai.com/aiml.mov">
 Sorry, your browser doesn't support embedded videos, 
@@ -90,7 +90,7 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
+        renderer.render("testuser", '<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>')
 
         self.assertEquals(mock_console._response, '<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>')
 
@@ -99,34 +99,34 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
+        renderer.render("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
 
-        self.assertEquals(mock_console._response, '<carousel><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div></carousel>')
+        self.assertEquals(mock_console._response, '<div class="carousel"><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div></div>')
 
     def test_reply_with_postback(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
+        renderer.render("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
 
-        self.assertEquals(mock_console._response, '<div class="reply"><a href="http://127.0.0.1:6666/api/web/v1.0/askquestion=HELLO">Hello</a></div>')
+        self.assertEquals(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
 
     def test_reply_without_postback(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<reply><text>Hello</text></reply>")
+        renderer.render("testuser", "<reply><text>Hello</text></reply>")
 
-        self.assertEquals(mock_console._response, '<div class="reply"><a href="http://127.0.0.1:6666/api/web/v1.0/askquestion=Hello">Hello</a></div>')
+        self.assertEquals(mock_console._response, '<a class="postback" postback="Hello" href="#">Hello</a>')
 
     def test_delay(self):
         mock_console = MockHtmlBotClient()
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<delay><seconds>0</seconds></delay>")
+        renderer.render("testuser", "<delay><seconds>0</seconds></delay>")
 
         self.assertEquals(mock_console._response, '<div class="delay">...</div>')
 
@@ -135,7 +135,7 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<split />")
+        renderer.render("testuser", "<split />")
 
         self.assertEquals(mock_console._response, "")
 
@@ -144,7 +144,7 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<list><item>Item1</item><item>Item2</item></list>")
+        renderer.render("testuser", "<list><item>Item1</item><item>Item2</item></list>")
 
         self.assertEquals(mock_console._response, "<ul><li>Item1</li><li>Item2</li></ul>")
 
@@ -153,7 +153,7 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
+        renderer.render("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
 
         self.assertEquals(mock_console._response, "<ol><li>Item1</li><li>Item2</li></ol>")
 
@@ -162,7 +162,7 @@ and watch it with your favorite video player!
         renderer = HtmlRenderer(mock_console)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<location />")
+        renderer.render("testuser", "<location />")
 
         self.assertEquals(mock_console._response, "")
 

@@ -196,6 +196,15 @@ class BotClient(ResponseLogger):
         client_context.brain = client_context.bot._brain_factory.select_brain()
         return client_context
 
+    def process_question(self, client_context, question):
+        raise NotImplementedError("You must override this and implement the logic to create a response to the question")
+
+    def render_response(self, client_context, response):
+        raise NotImplementedError("You must override this and implement the logic to process the response by rendering using a RCS renderer")
+
+    def process_response(self, response):
+        raise NotImplementedError("You must override this and implement the logic to display the response to the user")
+
     def run(self):
         raise NotImplementedError("You must override this and implement the logic to run the client")
 

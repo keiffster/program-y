@@ -12,6 +12,7 @@ from flask import current_app
 
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.webchat.config import WebChatConfiguration
+from programy.clients.render.html import HtmlRenderer
 
 
 class WebChatBotClient(FlaskRestBotClient):
@@ -22,6 +23,7 @@ class WebChatBotClient(FlaskRestBotClient):
         # This is an exmaple, and therefore not suitable for production
         self._api_keys = [
         ]
+        self._renderer = HtmlRenderer()
 
     def get_description(self):
         return 'ProgramY AIML2.0 Webchat Client'
@@ -114,7 +116,8 @@ class WebChatBotClient(FlaskRestBotClient):
         client_context = self.create_client_context(userid)
         try:
             answer = self.get_answer(client_context, question)
-            response_data = self.create_success_response_data(question, answer)
+            rendered = self._renderer.render(client_context, answer)
+            response_data = self.create_success_response_data(question, rendered)
 
         except Exception as excep:
             YLogger.exception(self, excep)

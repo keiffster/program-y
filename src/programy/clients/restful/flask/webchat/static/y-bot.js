@@ -32,6 +32,17 @@ $(document).ready(function(){
         return ask_question(question, true)
     });
 
+    $(document).on('click', '.postback', function(){
+	    var question = "";
+	    var attr = $(this).attr('postback');
+        if (typeof attr !== typeof undefined && attr !== false) {
+            question = attr
+        } else {
+            question = $(this).text();
+        }
+        return ask_question(question, true)
+    });
+
 	$("#submitmsg").click(function(){
         var question = $("#usermsg").val();
         $("#usermsg").val("");

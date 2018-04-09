@@ -16,55 +16,189 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from pymessenger.bot import Bot
-
 from programy.clients.render.renderer import RichMediaRenderer
 
 
-class FacebookBot(RichMediaRenderer):
+class FacebookRenderer(RichMediaRenderer):
 
-    def __init__(self, access_token):
-        RichMediaRenderer.__init__(self)
-        self._bot = Bot(access_token)
+    def __init__(self, client):
+        RichMediaRenderer.__init__(self, client)
 
-    def handle_text(self, userid, text):
-        self._bot.send_message(userid, text)
+    def handle_text(self, client_context, text):
+        payload = {
+            'recipient': {
+                'id': client_context.userid
+            },
+            'message': {
+                'text': text
+            }
+        }
+        return self._client.facebook_bot.send_raw(payload)
 
-    def handle_url_button(self, userid, text, url):
+    def handle_url_button(self, client_context, text, url):
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": text,
+                        "buttons": [
+                            {
+                                "type": "web_url",
+                                "url": url,
+                                "title": text,
+                                "webview_height_ratio": "full",
+                                "messenger_extensions": "false"
+                            }
+                        ]
+                    }
+                }
+            }
+
+        }
+        return self._client.facebook_bot.send_raw(payload)
+
+    def handle_postback_button(self, client_context, text, postback):
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "button",
+                        "text": text,
+                        "buttons": [
+                            {
+                                "type": "postback",
+                                "title": text,
+                                "payload": postback
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        return self._client.facebook_bot.send_raw(payload)
+
+    def handle_link(self, client_context, text, url):
         pass
 
-    def handle_postback_button(self, userid, text, postback):
+    def handle_image(self, client_context, url):
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "media",
+                        "elements": [
+                            {
+                                "media_type": "image",
+                                "url": url
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        return self._client.facebook_bot.send_raw(payload)
+
+    def handle_video(self, client_context, url):
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "media",
+                        "elements": [
+                            {
+                                "media_type": "video",
+                                "url": url
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+        return self._client.facebook_bot.send_raw(payload)
+
+    def handle_card(self, client_context, image, title, subtitle, buttons):
+
+        if len(buttons) > 3:
+            print("Warning more buttons than facebook allows for a card")
+
+        payload = {
+            'recipient': {
+                'id': client_context.userid
+            },
+            'message': {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": []
+                    }
+                }
+            }
+        }
+
+        payload['message']['attachment']['payload']['elements'].append({
+            "title": "Welcome!",
+            "image_url": "https://petersfancybrownhats.com/company_image.png",
+            "subtitle": "We have the right hat for everyone.",
+
+        })
+
+        """
+        for button in buttons:
+            if button[1] is not None:
+                payload['elements'][0]['buttons'].append({
+                    "type": "url",
+                    "title": button[0],
+                    "url": button[1]
+                })
+            else:
+                payload['elements'][0]['buttons'].append({
+                    "type": "postback",
+                    "title": button[0],
+                    "payload": button[0]
+                })
+        """
+
+        print(payload)
+
+        return self._client.facebook_bot.send_raw(payload)
+
+    def handle_carousel(self, client_context, cards):
+        if len(cards) > 10:
+            print("Warning more cards than facebook allows for a carousel")
         pass
 
-    def handle_link(self, userid, text, url):
+    def handle_reply(self, client_context, text, postback):
         pass
 
-    def handle_image(self, userid, url):
+    def handle_delay(self, client_context, seconds):
         pass
 
-    def handle_video(self, userid, url):
+    def handle_split(self, client_context):
         pass
 
-    def handle_card(self, userid, image, title, substitle, buttons):
+    def handle_list(self, client_context, items):
         pass
 
-    def handle_carousel(self, userid, cards):
+    def handle_ordered_list(self, client_context, items):
         pass
 
-    def handle_reply(self, userid, text, postback):
-        pass
-
-    def handle_delay(self, userid, seconds):
-        pass
-
-    def handle_split(self, userid):
-        pass
-
-    def handle_list(self, userid, items):
-        pass
-
-    def handle_ordered_list(self, userid, items):
-        pass
-
-    def handle_location(self, userid):
+    def handle_location(self, client_context):
         pass

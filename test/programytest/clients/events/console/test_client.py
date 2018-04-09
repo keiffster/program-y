@@ -9,6 +9,7 @@ class MockConsoleBotClient(ConsoleBotClient):
 
     def __init__(self, argument_parser=None):
         ConsoleBotClient.__init__(self, argument_parser)
+        self.answer = None
         self.question = None
         self.response = ""
         self.get_question_exception = False
@@ -16,18 +17,18 @@ class MockConsoleBotClient(ConsoleBotClient):
         self.process_question_answer_keyboard_interrupt = False
         self.process_question_answer_exception = False
 
-    def get_question(self, input_func=input):
+    def get_question(self, client_context, input_func=input):
+        return self.question
+
+    def process_question(self, client_context, input_func=input):
         if self.get_question_exception is True:
             raise Exception("Bad Thing Happen")
         else:
             return self.question
 
-    def display_response(self, response):
-        super (MockConsoleBotClient, self).display_response(response)
+    def process_response(self, client_context, response):
+        super (MockConsoleBotClient, self).process_response(client_context, response)
         self.response += response
-
-    def ask_question(self, question):
-        return self.response
 
     def process_question_answer(self, client_context):
         if self.process_question_answer_keyboard_interrupt is True:
@@ -35,9 +36,9 @@ class MockConsoleBotClient(ConsoleBotClient):
         elif self.process_question_answer_exception is True:
             raise Exception()
         elif self.process_question_answer_do_nothing is True:
-            return "question"
+            pass
         else:
-            return super(MockConsoleBotClient, self).process_question_answer(client_context)
+            super(MockConsoleBotClient, self).process_question_answer(client_context)
 
 
 def mock_input_func(ask):
@@ -62,11 +63,12 @@ class ConsoleBotClientTests(unittest.TestCase):
         question = client.get_question(context, input_func=mock_input_func)
         self.assertEquals("Hello", question)
 
-    def test_display_response(self):
+    def test_process_response(self):
         arguments = MockArgumentParser()
         client = MockConsoleBotClient(arguments)
         self.assertIsNotNone(client)
-        client.display_response("Answer")
+        context = client.create_client_context("console")
+        client.process_response(context, "Answer")
         self.assertEquals("Answer", client.response)
 
     def test_display_startup_messages(self):
@@ -83,9 +85,10 @@ class ConsoleBotClientTests(unittest.TestCase):
         client = MockConsoleBotClient(arguments)
         self.assertIsNotNone(client)
         client.question = "Hello"
+        client.answer = "Hello"
         context = client.create_client_context("console")
-        question = client.process_question_answer(context)
-        self.assertEquals("Hello", question)
+        client.process_question_answer(context)
+        self.assertEquals("Hello", client.response)
 
     def test_process_question_answer_no_response(self):
         arguments = MockArgumentParser()
@@ -93,8 +96,8 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         client.question = None
         context = client.create_client_context("console")
-        question = client.process_question_answer(context)
-        self.assertEquals(None, question)
+        client.process_question_answer(context)
+        self.assertEquals('', client.response)
 
     def test_process_question_answer_with_context(self):
         arguments = MockArgumentParser()
@@ -103,8 +106,8 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         client.question = "Hello"
         context = client.create_client_context("console")
-        question = client.process_question_answer(context)
-        self.assertEquals("Hello", question)
+        client.process_question_answer(context)
+        self.assertEquals("Hello", client.response)
 
     def test_run_loop_no_loop(self):
         arguments = MockArgumentParser()

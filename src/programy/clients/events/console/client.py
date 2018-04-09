@@ -19,7 +19,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
-from programy.clients.render.text_renderer import TextRenderer
+from programy.clients.render.text import TextRenderer
 
 class ConsoleBotClient(EventBotClient):
 
@@ -40,26 +40,30 @@ class ConsoleBotClient(EventBotClient):
     def parse_args(self, arguments, parsed_args):
         return
 
-    def display_response(self, response):
-        print(response)
-
     def get_question(self, client_context, input_func=input):
         ask = "%s " % self.get_client_configuration().prompt
         return input_func(ask)
 
-    def get_response(self, client_context, question):
+    def display_startup_messages(self, client_context):
+        self.process_response(client_context, client_context.bot.get_version_string(client_context))
+        initial_question = client_context.bot.get_initial_question(client_context)
+        self._renderer.render(client_context, initial_question)
+
+    def process_question(self, client_context, question):
+        # Returns a response
         return client_context.bot.ask_question(client_context , question, responselogger=self)
 
-    def display_startup_messages(self, client_context):
-        self.display_response(client_context.bot.get_version_string(client_context))
-        initial_question = client_context.bot.get_initial_question(client_context)
-        self._renderer.send_message(client_context.userid, initial_question)
+    def render_response(self, client_context, response):
+        # Calls the renderer which handles RCS context, and then calls back to the client to show response
+        self._renderer.render(client_context, response)
+
+    def process_response(self, client_context, response):
+        print(response)
 
     def process_question_answer(self, client_context):
         question = self.get_question(client_context)
-        response = self.get_response(client_context , question)
-        self._renderer.send_message(client_context.userid, response)
-        return question
+        response = self.process_question(client_context, question)
+        self.render_response(client_context, response)
 
     def wait_and_answer(self):
         running = True
@@ -69,7 +73,7 @@ class ConsoleBotClient(EventBotClient):
         except KeyboardInterrupt as keye:
             running = False
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
-            self._renderer.send_message(client_context.userid, client_context.bot.get_exit_response(client_context))
+            self._renderer.render(client_context, client_context.bot.get_exit_response(client_context))
         except Exception as excep:
             YLogger.error(self, "Oops something bad happened !")
             YLogger.exception(self, excep)

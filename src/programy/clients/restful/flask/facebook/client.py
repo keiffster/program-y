@@ -16,11 +16,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
+from pymessenger.bot import Bot
 from flask import Flask, request
 
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.facebook.config import FacebookConfiguration
-from programy.clients.restful.flask.facebook.renderer import FacebookBot
+from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 
 
 class FacebookBotClient(FlaskRestBotClient):
@@ -32,7 +33,13 @@ class FacebookBotClient(FlaskRestBotClient):
 
         self._facebook_bot = self.create_facebook_bot()
 
+        self._renderer = FacebookRenderer(self)
+
         print("Facebook Client loaded")
+
+    @property
+    def facebook_bot(self):
+        return self._facebook_bot
 
     def get_description(self):
         return 'ProgramY AIML2.0 Facebook Client'
@@ -45,7 +52,7 @@ class FacebookBotClient(FlaskRestBotClient):
         return FacebookConfiguration()
 
     def create_facebook_bot(self):
-        return FacebookBot(self._access_token)
+        return Bot(self._access_token)
 
     def get_hub_challenge(self, request):
         return request.args.get("hub.challenge")
@@ -71,9 +78,9 @@ class FacebookBotClient(FlaskRestBotClient):
         token_sent = self.get_hub_verify_token(request)
         return self.verify_fb_token(token_sent, request)
 
-    def send_message(self, recipient_id, response):
+    def send_message(self, client_context, message):
         # sends user the text message provided via input response parameter
-        self._facebook_bot.send_message(recipient_id, response)
+        self._renderer.render(client_context, message)
         return "success"
 
     def receive_message(self, request):
@@ -95,6 +102,11 @@ class FacebookBotClient(FlaskRestBotClient):
             return message['message'].get('text')
         return None
 
+    def get_postback_text(self, message):
+        if 'postback' in message:
+            return message['postback'].get('payload')
+        return None
+
     def has_attachements(self, message):
         if 'message' in message:
             if message['message'].get('attachments') is not None:
@@ -112,8 +124,48 @@ class FacebookBotClient(FlaskRestBotClient):
         for message in messaging:
             if message.get('message'):
                 self.handle_message(message)
+            elif message.get('postback'):
+                self.handle_postback(message)
+
+    def ask_question(self, client_context, question):
+        response = ""
+        try:
+            response = client_context.bot.ask_question(client_context, question, responselogger=self)
+        except Exception as e:
+            print(e)
+        return response
 
     def handle_message(self, message):
+
+        try:
+            if self.configuration.client_configuration.debug is True:
+                self.dump_request(message)
+
+            # Facebook Messenger ID for user so we know where to send response back to
+            recipient_id = self.get_recipitent_id(message)
+            if recipient_id:
+                client_context = self.create_client_context(recipient_id)
+
+                message_text = self.get_message_text(message)
+                print(message_text)
+                # We have been send a text message, we can respond
+                if message_text is not None:
+                    response_text = self.ask_question(client_context, message_text)
+
+                # else if user sends us a GIF, photo,video, or any other non-text item
+                elif self.has_attachements(message):
+                    response_text = "Sorry, I cannot handle attachements right now!"
+
+                # otherwise its a general error
+                else:
+                    response_text = "Sorry, I do not understand you!"
+
+                self.send_message(client_context, response_text)
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+
+    def handle_postback(self, message):
 
         if self.configuration.client_configuration.debug is True:
             self.dump_request(message)
@@ -122,20 +174,18 @@ class FacebookBotClient(FlaskRestBotClient):
         recipient_id = self.get_recipitent_id(message)
         if recipient_id:
 
-            message_text = self.get_message_text(message)
+            client_context = self.create_client_context(recipient_id)
+
+            message_text = self.get_postback_text(message)
             # We have been send a text message, we can respond
             if message_text is not None:
-                response_text = self.ask_question(recipient_id, message_text)
-
-            # else if user sends us a GIF, photo,video, or any other non-text item
-            elif self.has_attachements(message):
-                response_text = "Sorry, I cannot handle attachements right now!"
+                response_text = self.ask_question(client_context, message_text)
 
             # otherwise its a general error
             else:
                 response_text = "Sorry, I do not understand you!"
 
-            self.send_message(recipient_id, response_text)
+            self.send_message(client_context, response_text)
 
 if __name__ == "__main__":
 

@@ -23,7 +23,6 @@ class RestConfiguration(ClientConfigurationData):
         ClientConfigurationData.__init__(self, name)
         self._host = "0.0.0.0"
         self._port = 80
-        self._api = None
         self._debug = False
         self._use_api_keys = False
         self._api_key_file = None
@@ -37,10 +36,6 @@ class RestConfiguration(ClientConfigurationData):
     @property
     def port(self):
         return self._port
-
-    @property
-    def api(self):
-        return self._api
 
     @property
     def debug(self):
@@ -67,7 +62,6 @@ class RestConfiguration(ClientConfigurationData):
         if rest is not None:
             self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0")
             self._port = configuration_file.get_option(rest, "port", missing_value=80)
-            self._api = configuration_file.get_option(rest, "api", missing_value=None)
             self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False)
             self._use_api_keys = configuration_file.get_bool_option(rest, "use_api_keys", missing_value=False)
             self._api_key_file = configuration_file.get_option(rest, "api_key_file")

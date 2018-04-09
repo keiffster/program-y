@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import logging
 
 from programy.utils.logging.ylogger import YLogger
 
@@ -80,12 +81,6 @@ class Bot(object):
 
         self._question_depth = 0
         self._question_start_time = None
-
-        self.conversation_logger = None
-
-        # TODO Either move config into brain or move functionaity into bot
-        #if self.brain.configuration.files.aiml_files.conversation is not None:
-        #    self.conversation_logger = ConversationFileWriter(self.brain.configuration.files.aiml_files.conversation)
 
         self._spell_checker = None
         self.initiate_spellchecker()
@@ -357,10 +352,15 @@ class Bot(object):
 
         response = self.combine_answers(answers)
 
-        if self.conversation_logger is not None:
-            self.conversation_logger.log_question_and_answer(client_context.userid, text, response)
+        self.log_question_and_answer(client_context, text, response)
 
         return response
+
+    def log_question_and_answer(self, client_context, text, response):
+        convo_logger = logging.getLogger("conversation")
+        if convo_logger:
+            qanda =  "%s - Question[%s], Response[%s]"%(str(client_context), text, response)
+            convo_logger.info(qanda)
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
 

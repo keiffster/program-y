@@ -22,71 +22,74 @@ from bs4.element import Tag, NavigableString
 
 class RichMediaRenderer(object):
 
-    def __init__(self, client):
-        self._client = client
+    def __init__(self, callback):
+        self._client = callback
 
-    def send_message(self, userid, message):
-        #soup = Soup(message, "html.parser")
-        soup = Soup(message, "lxml-xml")
-        parsed = False
-        if soup.children:
-                for child in soup.children:
-                    if isinstance(child, Tag):
-                        self.parse_tag(userid, child)
+    def render(self, client_context, message):
+        if message:
+            soup = Soup(message, "lxml-xml")
+            parsed = False
+            if soup.children:
+                    for child in soup.children:
+                        if isinstance(child, Tag):
+                            return self.parse_tag(client_context, child)
 
-                    elif isinstance(child, NavigableString):
-                        self.parse_text(userid, child)
+                        elif isinstance(child, NavigableString):
+                            return self.parse_text(client_context, child)
 
-                    parsed = True
-        if parsed is False:
-            self.parse_text(userid, message)
+                        parsed = True
 
-    def parse_tag(self, userid, tag):
+            if parsed is False:
+                return self.parse_text(client_context, message)
+
+        return None
+
+    def parse_tag(self, client_context, tag):
 
         if tag.name == 'button':
-            return self.parse_button(userid, tag)
+            return self.parse_button(client_context, tag)
 
         elif tag.name == 'link':
-            return self.parse_link(userid, tag)
+            return self.parse_link(client_context, tag)
 
         elif tag.name == 'image':
-            return self.parse_image(userid, tag)
+            return self.parse_image(client_context, tag)
 
         elif tag.name == 'video':
-            return self.parse_video(userid, tag)
+            return self.parse_video(client_context, tag)
 
         elif tag.name == 'card':
-            return self.parse_card(userid, tag)
+            return self.parse_card(client_context, tag)
 
         elif tag.name == 'carousel':
-            return self.parse_carousel(userid, tag)
+            return self.parse_carousel(client_context, tag)
 
         elif tag.name == 'reply':
-            return self.parse_reply(userid, tag)
+            return self.parse_reply(client_context, tag)
 
         elif tag.name == 'delay':
-            return self.parse_delay(userid, tag)
+            return self.parse_delay(client_context, tag)
 
         elif tag.name == 'split':
-            return self.parse_split(userid, tag)
+            return self.parse_split(client_context, tag)
 
         elif tag.name == 'list':
-            return self.parse_list(userid, tag)
+            return self.parse_list(client_context, tag)
 
         elif tag.name == 'olist':
-            return self.parse_olist(userid, tag)
+            return self.parse_olist(client_context, tag)
 
         elif tag.name == 'location':
-            return self.parse_location(userid, tag)
+            return self.parse_location(client_context, tag)
 
         else:
             print("Unknown tag %s", tag.name)
             return None
 
-    def parse_text(self, userid, text):
-        self.handle_text(userid, text)
+    def parse_text(self, client_context, text):
+        return self.handle_text(client_context, text)
 
-    def parse_button(self, userid, tag):
+    def parse_button(self, client_context, tag):
         text = None
         url = None
         postback = None
@@ -108,11 +111,11 @@ class RichMediaRenderer(object):
                 print("Unknown button tag %s" % child.name)
 
         if url is not None:
-            self.handle_url_button(userid, text, url)
+            return self.handle_url_button(client_context, text, url)
         else:
-            self.handle_postback_button(userid, text, postback)
+            return self.handle_postback_button(client_context, text, postback)
 
-    def parse_link(self, userid, tag):
+    def parse_link(self, client_context, tag):
         text = None
         url = None
         for child in tag.children:
@@ -129,13 +132,13 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown link tag %s" % child.name)
 
-        self.handle_link(userid, text, url)
+        return self.handle_link(client_context, text, url)
 
-    def parse_image(self, userid, tag):
-        self.handle_image(userid, tag.text)
+    def parse_image(self, client_context, tag):
+        return self.handle_image(client_context, tag.text)
 
-    def parse_video(self, userid, tag):
-        self.handle_video(userid, tag.text)
+    def parse_video(self, client_context, tag):
+        return self.handle_video(client_context, tag.text)
 
     def _parse_card_details(self, tag):
         image = None
@@ -183,7 +186,7 @@ class RichMediaRenderer(object):
 
         return (image, title, subtitle, buttons)
 
-    def parse_card(self, userid, tag):
+    def parse_card(self, client_context, tag):
 
         details = self._parse_card_details(tag)
 
@@ -192,9 +195,9 @@ class RichMediaRenderer(object):
         subtitle = details[2]
         buttons = details[3]
 
-        self.handle_card(userid, image, title, subtitle, buttons)
+        return self.handle_card(client_context, image, title, subtitle, buttons)
 
-    def parse_carousel(self, userid, tag):
+    def parse_carousel(self, client_context, tag):
 
         cards = []
         for child in tag.children:
@@ -209,9 +212,9 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown carousel tag %s" % child.name)
 
-        self.handle_carousel(userid, cards)
+        return self.handle_carousel(client_context, cards)
 
-    def parse_reply(self, userid, tag):
+    def parse_reply(self, client_context, tag):
         text = None
         postback = None
         for child in tag.children:
@@ -228,9 +231,9 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown reply tag %s" % child.name)
 
-        self.handle_reply(userid, text, postback)
+        return self.handle_reply(client_context, text, postback)
 
-    def parse_delay(self, userid, tag):
+    def parse_delay(self, client_context, tag):
         seconds = None
         for child in tag.children:
 
@@ -240,12 +243,12 @@ class RichMediaRenderer(object):
             elif child.name == 'seconds':
                 seconds = child.text
 
-        self.handle_delay(userid, seconds)
+        return self.handle_delay(client_context, seconds)
 
-    def parse_split(self, userid, tag):
-        self.handle_split(userid)
+    def parse_split(self, client_context, tag):
+        return self.handle_split(client_context)
 
-    def parse_list(self, userid, tag):
+    def parse_list(self, client_context, tag):
         items = []
         for child in tag.children:
 
@@ -258,9 +261,9 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown list tag %s" % child.name)
 
-        self.handle_list(userid, items)
+        return self.handle_list(client_context, items)
 
-    def parse_olist(self, userid, tag):
+    def parse_olist(self, client_context, tag):
         items = []
         for child in tag.children:
 
@@ -273,52 +276,52 @@ class RichMediaRenderer(object):
             else:
                 print("Unknown olist tag %s" % child.name)
 
-        self.handle_ordered_list(userid, items)
+        return self.handle_ordered_list(client_context, items)
 
-    def parse_location(self, userid, tag):
-        self.handle_location(userid)
+    def parse_location(self, client_context, tag):
+        return self.handle_location(client_context)
 
     ######################################################################################################
     # You need to implement all of these and decide how to display the various rich media elements
     # 
-    def handle_text(self, userid, text):
-        pass
+    def handle_text(self, client_context, text):
+        return None
 
-    def handle_url_button(self, userid, text, url):
-        pass
+    def handle_url_button(self, client_context, text, url):
+        return None
 
-    def handle_postback_button(self, userid, text, postback):
-        pass
+    def handle_postback_button(self, client_context, text, postback):
+        return None
 
-    def handle_link(self, userid, text, url):
-        pass
+    def handle_link(self, client_context, text, url):
+        return None
 
-    def handle_image(self, userid, url):
-        pass
+    def handle_image(self, client_context, url):
+        return None
 
-    def handle_video(self, userid, url):
-        pass
+    def handle_video(self, client_context, url):
+        return None
 
-    def handle_card(self, userid, image, title, subtitle, buttons):
-        pass
+    def handle_card(self, client_context, image, title, subtitle, buttons):
+        return None
 
-    def handle_carousel(self, userid, cards):
-        pass
+    def handle_carousel(self, client_context, cards):
+        return None
 
-    def handle_reply(self, userid, text, postback):
-        pass
+    def handle_reply(self, client_context, text, postback):
+        return None
 
-    def handle_delay(self, userid, seconds):
-        pass
+    def handle_delay(self, client_context, seconds):
+        return None
 
-    def handle_split(self, userid):
-        pass
+    def handle_split(self, client_context):
+        return None
 
-    def handle_list(self, userid, items):
-        pass
+    def handle_list(self, client_context, items):
+        return None
 
-    def handle_ordered_list(self, userid, items):
-        pass
+    def handle_ordered_list(self, client_context, items):
+        return None
 
-    def handle_location(self, userid):
-        pass
+    def handle_location(self, client_context):
+        return None

@@ -76,7 +76,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "Hello world")
+        renderer.render("testuser", "Hello world")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello world")
@@ -86,7 +86,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
+        renderer.render("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello")
@@ -97,7 +97,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<button><text>Hello</text><postback>HELLO</url></postback></button>")
+        renderer.render("testuser", "<button><text>Hello</text><postback>HELLO</url></postback></button>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello")
@@ -108,7 +108,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
+        renderer.render("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello")
@@ -119,7 +119,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<image>http://servusai.com/aiml.png</image>")
+        renderer.render("testuser", "<image>http://servusai.com/aiml.png</image>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._url, "http://servusai.com/aiml.png")
@@ -129,7 +129,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<video>http://servusai.com/aiml.mov</video>")
+        renderer.render("testuser", "<video>http://servusai.com/aiml.mov</video>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._url, "http://servusai.com/aiml.mov")
@@ -139,7 +139,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
+        renderer.render("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._image, "http://servusai.com/aiml.png")
@@ -153,7 +153,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
+        renderer.render("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(len(renderer._cards), 1)
@@ -164,7 +164,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<reply><text>Hello</text><postback>HELLO</url></postback></reply>")
+        renderer.render("testuser", "<reply><text>Hello</text><postback>HELLO</url></postback></reply>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello")
@@ -175,7 +175,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<reply><text>Hello</text></reply>")
+        renderer.render("testuser", "<reply><text>Hello</text></reply>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._text, "Hello")
@@ -186,7 +186,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<delay><seconds>10</seconds></delay>")
+        renderer.render("testuser", "<delay><seconds>10</seconds></delay>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertEquals(renderer._seconds, "10")
@@ -196,7 +196,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<split />")
+        renderer.render("testuser", "<split />")
 
         self.assertEquals(renderer._userid, "testuser")
 
@@ -205,7 +205,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<list><item>Item1</item><item>Item2</item></list>")
+        renderer.render("testuser", "<list><item>Item1</item><item>Item2</item></list>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertIsNotNone(renderer._items)
@@ -218,7 +218,7 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
+        renderer.render("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
 
         self.assertEquals(renderer._userid, "testuser")
         self.assertIsNotNone(renderer._items)
@@ -231,6 +231,6 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.send_message("testuser", "<location />")
+        renderer.render("testuser", "<location />")
 
         self.assertEquals(renderer._userid, "testuser")

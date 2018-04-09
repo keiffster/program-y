@@ -21,7 +21,7 @@ import json
 
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.tcpsocket.config import SocketConfiguration
-
+from programy.clients.render.json import JSONRenderer
 
 class ClientConnection(object):
 
@@ -35,7 +35,7 @@ class ClientConnection(object):
         YLogger.debug(self, "Received: %s", json_data)
         return json.loads(json_data, encoding="utf-8")
 
-    def send_response(self, answer, userid):
+    def send_response(self, userid, answer):
         return_payload = {"result": "OK", "answer": answer, "userid": userid}
         json_data = json.dumps(return_payload)
 
@@ -46,7 +46,7 @@ class ClientConnection(object):
     def send_error(self, error):
         if hasattr(error, 'message') is True:
             return_payload = {"result": "ERROR", "message": error.message}
-        elif hasattr(error, 'msg') is False:
+        elif hasattr(error, 'msg') is True:
             return_payload = {"result": "ERROR", "message": error.msg}
         else:
             return_payload = {"result": "ERROR", "message": str(error)}
@@ -98,6 +98,8 @@ class SocketBotClient(EventBotClient):
         print("TCP Socket Client server now listening on %s:%d"%(self._host, self._port))
         self._server_socket = self.create_socket_connection(self._host, self._port, self._queue, self._max_buffer)
 
+        self._renderer = JSONRenderer(self)
+
     def get_description(self):
         return 'ProgramY AIML2.0 TCP Socket Client'
 
@@ -129,33 +131,43 @@ class SocketBotClient(EventBotClient):
     def create_socket_connection(self, host, port, queue, max_buffer):
         return SocketConnection(host, port, queue, max_buffer)
 
+    def process_question(self, client_context, question):
+        # Returns a response
+        return client_context.bot.ask_question(client_context , question, responselogger=self)
+
+    def render_response(self, client_context, response):
+        # Calls the renderer which handles RCS context, and then calls back to the client to show response
+        self._renderer.render(client_context, response)
+
+    def process_response(self, client_context, str):
+        self._client_connection.send_response(client_context.userid, str)
+
     def wait_and_answer(self):
         running = True
-        client_connection = None
         try:
-            client_connection = self._server_socket.accept_connection()
+            self._client_connection = self._server_socket.accept_connection()
 
-            receive_payload = client_connection.receive_data()
+            receive_payload = self._client_connection.receive_data()
 
             question = self.extract_question(receive_payload)
             userid = self.extract_userid(receive_payload)
 
             client_context = self.create_client_context(userid)
-            answer = client_context.bot.ask_question(client_context, question, responselogger=self)
+            answer = self.process_question(client_context, question)
 
-            client_connection.send_response(answer, userid)
+            self.render_response(client_context, answer)
 
         except KeyboardInterrupt:
             running = False
             YLogger.debug(self, "Cleaning up and exiting...")
 
         except Exception as e:
-            if client_connection is not None:
-                client_connection.send_error(e)
+            if self._client_connection is not None:
+                self._client_connection.send_error(e)
 
         finally:
-            if client_connection is not None:
-                client_connection.close()
+            if self._client_connection is not None:
+                self._client_connection.close()
 
         return running
 
