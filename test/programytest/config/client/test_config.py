@@ -15,6 +15,12 @@ class ClientConfigurationDataTests(unittest.TestCase):
           prompt: ">>>"
           license_keys: $BOT_ROOT/config/license.keys
           bot_selector: programy.clients.client.DefaultBotSelector
+
+          scheduler:
+            name: Scheduler1
+            debug_level: 0
+            add_listeners: True
+            remove_all_jobs: True
         """, ConsoleConfiguration(), ".")
 
         bot_config = yaml.get_section("console")
@@ -25,6 +31,12 @@ class ClientConfigurationDataTests(unittest.TestCase):
         self.assertEquals("./config/license.keys", client_config.license_keys)
 
         self.assertEquals("programy.clients.client.DefaultBotSelector", client_config.bot_selector)
+
+        self.assertIsNotNone(client_config.scheduler)
+        self.assertEquals("Scheduler1", client_config.scheduler.name)
+        self.assertEquals(0, client_config.scheduler.debug_level)
+        self.assertTrue(client_config.scheduler.add_listeners)
+        self.assertTrue(client_config.scheduler.remove_all_jobs)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -41,3 +53,9 @@ class ClientConfigurationDataTests(unittest.TestCase):
         self.assertIsNone(client_config.license_keys)
 
         self.assertIsNone(client_config.bot_selector)
+
+        self.assertIsNotNone(client_config.scheduler)
+        self.assertEquals(None, client_config.scheduler.name)
+        self.assertEquals(0, client_config.scheduler.debug_level)
+        self.assertFalse(client_config.scheduler.add_listeners)
+        self.assertFalse(client_config.scheduler.remove_all_jobs)

@@ -28,6 +28,7 @@ from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
+from programy.scheduling.scheduler import ProgramyScheduler
 
 
 class ResponseLogger(object):
@@ -105,6 +106,10 @@ class BotClient(ResponseLogger):
 
         self._bot_factory = BotFactory(self, self.configuration.client_configuration)
 
+        self._scheduler = None
+        self.load_scheduler()
+
+
     def ylogger_type(self):
         return "client"
 
@@ -123,6 +128,10 @@ class BotClient(ResponseLogger):
     @property
     def license_keys(self):
         return self._license_keys
+
+    @property
+    def scheduler(self):
+        return self._scheduler
 
     def get_description(self):
         raise NotImplementedError("You must override this and return a client description")
@@ -189,6 +198,11 @@ class BotClient(ResponseLogger):
         else:
             print("No configuration file specified, using defaults only !")
             self._configuration = ProgramyConfiguration(self.get_client_configuration())
+
+    def load_scheduler(self):
+        if self.configuration.client_configuration.scheduler is not None:
+            self._scheduler = ProgramyScheduler(self, self.configuration.client_configuration.scheduler)
+            self._scheduler.start()
 
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)

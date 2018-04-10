@@ -147,20 +147,24 @@ class FacebookBotClient(FlaskRestBotClient):
                 client_context = self.create_client_context(recipient_id)
 
                 message_text = self.get_message_text(message)
-                print(message_text)
                 # We have been send a text message, we can respond
                 if message_text is not None:
+                    YLogger.debug("Facebook sent message: [%s]", message_text)
                     response_text = self.ask_question(client_context, message_text)
 
                 # else if user sends us a GIF, photo,video, or any other non-text item
                 elif self.has_attachements(message):
+                    YLogger.error("Facebook client cannot handle attachments at this time")
                     response_text = "Sorry, I cannot handle attachements right now!"
 
                 # otherwise its a general error
                 else:
+                    YLogger.error("Facebook general error handling message")
                     response_text = "Sorry, I do not understand you!"
 
+                YLogger.debug("Facebook message response: [%s]", response_text)
                 self.send_message(client_context, response_text)
+
         except Exception as e:
             import traceback
             traceback.print_exc()
@@ -179,12 +183,15 @@ class FacebookBotClient(FlaskRestBotClient):
             message_text = self.get_postback_text(message)
             # We have been send a text message, we can respond
             if message_text is not None:
+                YLogger.debug("Facebook sent postback: [%s]", message_text)
                 response_text = self.ask_question(client_context, message_text)
 
             # otherwise its a general error
             else:
+                YLogger.error("Facebook general error handling postback")
                 response_text = "Sorry, I do not understand you!"
 
+            YLogger.debug("Facebook postback response: [%s]", response_text)
             self.send_message(client_context, response_text)
 
 if __name__ == "__main__":

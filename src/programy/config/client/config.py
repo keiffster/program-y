@@ -18,7 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.container import BaseContainerConfigurationData
 from programy.config.bot.bot import BotConfiguration
-
+from programy.config.client.scheduler import SchedulerConfiguration
 
 class ClientConfigurationData(BaseContainerConfigurationData):
 
@@ -28,6 +28,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._bot_configs.append(BotConfiguration("bot"))
         self._license_keys = None
         self._bot_selector = None
+        self._scheduler = SchedulerConfiguration()
 
     @property
     def configurations(self):
@@ -40,6 +41,10 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     @property
     def bot_selector(self):
         return self._bot_selector
+
+    @property
+    def scheduler(self):
+        return self._scheduler
 
     def load_configuration(self, configuration_file, section, bot_root):
         if section is not None:
@@ -60,6 +65,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
             self._bot_selector = configuration_file.get_option(section, "bot_selector")
 
+            self._scheduler.load_config_section(configuration_file, section, bot_root)
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"

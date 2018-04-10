@@ -2,6 +2,11 @@ console:
   bot:  bot
   prompt: ">>>"
   license_keys: $BOT_ROOT/config/license.keys
+  scheduler:
+    name: Scheduler1
+    debug_level: 0
+    add_listeners: False
+    remove_all_jobs: False
 
 voice:
   license_keys: $BOT_ROOT/config/license.keys

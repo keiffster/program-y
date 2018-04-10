@@ -4,6 +4,9 @@ python-dateutil==2.6.1
 beautifulsoup4==4.6.0
 lxml==3.8.0
 wikipedia==1.4.0
+pylint==1.7.2
+nose==1.3.7
+coverage==4.4.1
 PyYAML==3.12
 tweepy==3.5.0
 sleekxmpp==1.3.2

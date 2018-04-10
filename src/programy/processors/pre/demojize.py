@@ -16,17 +16,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.utils.logging.ylogger import YLogger
-import re
+import emoji
 
-from programy.processors.processing import PostProcessor
+from programy.processors.processing import PreProcessor
 
-class FormatNumbersPostProcessor(PostProcessor):
+class DemojizePreProcessor(PreProcessor):
+
     def __init__(self):
-        PostProcessor.__init__(self)
+        PreProcessor.__init__(self)
 
     def process(self, context, word_string):
-        YLogger.debug(context, "Formatting numbers...")
-        word_string = re.sub(r'(\d)([\.|,])\s+(\d)', r'\1\2\3', word_string)
-        word_string = re.sub(r'(\d)\s+([\.|,])(\d)', r'\1\2\3', word_string)
-        word_string = re.sub(r'(\d)\s+([\.|,])\s+(\d)', r'\1\2\3', word_string)
-        return word_string
+        return emoji.demojize(word_string)

@@ -3,6 +3,7 @@ from programy.processors.post.denormalize import DenormalizePostProcessor
 from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
 from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
+from programy.processors.post.emojize import EmojizePreProcessor
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
@@ -23,11 +24,14 @@ class PostProcessingTests(unittest.TestCase):
         punctuation = FormatPunctuationProcessor()
         numbers = FormatNumbersPostProcessor()
         multispaces = RemoveMultiSpacePostProcessor()
+        emojize = EmojizePreProcessor()
 
         output_str = denormalize.process(context, output_str)
         output_str = punctuation.process(context, output_str)
         output_str = numbers.process(context, output_str)
         output_str = multispaces.process(context, output_str)
+        output_str = emojize.process(context, output_str)
+
         return output_str
 
     def test_post_cleanup(self):

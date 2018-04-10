@@ -15,11 +15,15 @@ class MockFacebookBot(Bot):
         self._recipient_id = recipient_id
         self._message = message
 
+    def send_raw(self, payload):
+        self.payload = payload
+
 
 class MockFacebookBotClient(FacebookBotClient):
 
     def __init__(self, argument_parser=None):
         self.test_question = None
+        self.payload = None
         FacebookBotClient.__init__(self, argument_parser)
 
     def set_question(self, question):
@@ -36,7 +40,6 @@ class MockFacebookBotClient(FacebookBotClient):
 
     def create_facebook_bot(self):
         return MockFacebookBot(self._access_token)
-
 
 class FacebookBotClientTests(unittest.TestCase):
 
@@ -87,8 +90,8 @@ class FacebookBotClientTests(unittest.TestCase):
         client = MockFacebookBotClient(arguments)
 
         client.send_message(client.create_client_context("user1"), "hello")
-        self.assertEquals("user1", client._facebook_bot._recipient_id)
-        self.assertEquals("hello", client._facebook_bot._message)
+
+        self.assertIsNotNone(client._facebook_bot.payload)
 
     def test_return_hub_challenge(self):
         arguments = MockArgumentParser()
@@ -147,8 +150,7 @@ class FacebookBotClientTests(unittest.TestCase):
 
         client.process_facebook_request(request)
 
-        self.assertEquals("user1", client._facebook_bot._recipient_id)
-        self.assertEquals("Hi there", client._facebook_bot._message)
+        self.assertIsNotNone(client._facebook_bot.payload)
 
     def test_process_facebook_message(self):
         arguments = MockArgumentParser()
@@ -162,8 +164,7 @@ class FacebookBotClientTests(unittest.TestCase):
 
         client.process_facebook_message(messaging)
 
-        self.assertEquals("user1", client._facebook_bot._recipient_id)
-        self.assertEquals("Hi there", client._facebook_bot._message)
+        self.assertIsNotNone(client._facebook_bot.payload)
 
     def test_handle_message(self):
         arguments = MockArgumentParser()
@@ -177,5 +178,4 @@ class FacebookBotClientTests(unittest.TestCase):
 
         client.handle_message(message)
 
-        self.assertEquals("user1", client._facebook_bot._recipient_id)
-        self.assertEquals("Hi there", client._facebook_bot._message)
+        self.assertIsNotNone(client._facebook_bot.payload)
