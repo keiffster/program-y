@@ -11,7 +11,7 @@ class MockFacebookBot(Bot):
     def __init__(self, access_token):
         pass
 
-    def send_message(self, recipient_id, message):
+    def render_response(self, recipient_id, message):
         self._recipient_id = recipient_id
         self._message = message
 
@@ -85,11 +85,11 @@ class FacebookBotClientTests(unittest.TestCase):
         client._verify_token = "XXXXXX"
         self.assertEquals("ZZZZZZ", client.verify_fb_token("XXXXXX", request))
 
-    def test_send_message(self):
+    def test_render_response(self):
         arguments = MockArgumentParser()
         client = MockFacebookBotClient(arguments)
 
-        client.send_message(client.create_client_context("user1"), "hello")
+        client.render_response(client.create_client_context("user1"), "hello")
 
         self.assertIsNotNone(client._facebook_bot.payload)
 

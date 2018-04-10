@@ -78,9 +78,9 @@ class FacebookBotClient(FlaskRestBotClient):
         token_sent = self.get_hub_verify_token(request)
         return self.verify_fb_token(token_sent, request)
 
-    def send_message(self, client_context, message):
+    def render_response(self, client_context, response):
         # sends user the text message provided via input response parameter
-        self._renderer.render(client_context, message)
+        self._renderer.render(client_context, response)
         return "success"
 
     def receive_message(self, request):
@@ -163,7 +163,7 @@ class FacebookBotClient(FlaskRestBotClient):
                     response_text = "Sorry, I do not understand you!"
 
                 YLogger.debug("Facebook message response: [%s]", response_text)
-                self.send_message(client_context, response_text)
+                self.render_response(client_context, response_text)
 
         except Exception as e:
             import traceback
@@ -192,7 +192,7 @@ class FacebookBotClient(FlaskRestBotClient):
                 response_text = "Sorry, I do not understand you!"
 
             YLogger.debug("Facebook postback response: [%s]", response_text)
-            self.send_message(client_context, response_text)
+            self.render_response(client_context, response_text)
 
 if __name__ == "__main__":
 
