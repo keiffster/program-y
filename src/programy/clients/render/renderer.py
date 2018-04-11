@@ -270,7 +270,10 @@ class RichMediaRenderer(object):
                         text = child2.strip()
                         if text:
                             parsed = self.parse_text(client_context, child2)
-                            items.append(parsed.strip())
+                            if isinstance(parsed, str):
+                                items.append(parsed.strip())
+                            else:
+                                items.append(parsed)
 
             else:
                 print("Unknown list tag %s" % child.name)

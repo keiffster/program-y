@@ -9,6 +9,7 @@ class MockConsoleBotClient(object):
 
     def process_response(self, client_context, response):
         self._response = response
+        return response
 
 class JSONRendererTests(unittest.TestCase):
 
