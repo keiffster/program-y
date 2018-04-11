@@ -26,16 +26,41 @@ class SchedulerAdminExtension(Extension):
     def execute(self, client_context, data):
         YLogger.debug(client_context, "Scheduler Admin - [%s]", data)
 
+        try:
+            commands = [x.upper() for x in data.split()]
 
-        commands = [x.upper() for x in data.split()]
+            if commands[0] == 'COMMANDS':
 
-        if commands[0] == 'LIST':
-            if commands[1] == 'JOBS':
-                jobs = client_context.client.scheduler.list_jobs()
-                if jobs:
-                    response = ""
-                    for id, job in jobs.items():
-                        response += "> Job ID:%s, Next Run: %s, Args: %s\n"%(id, job.next_run_time, str(job.args))
-                    return response
+                return "LIST JOBS, KILL JOB, PAUSE, RESUME"
 
-        return "No job information available"
+            elif commands[0] == 'LIST':
+
+                if commands[1] == 'JOBS':
+                    jobs = client_context.client.scheduler.list_jobs()
+                    if jobs:
+                        response = ""
+                        for id, job in jobs.items():
+                            response += "> Job ID:%s, Next Run: %s, Args: %s\n"%(id, job.next_run_time, str(job.args))
+                        return response
+
+                    return "No job information available"
+
+            elif commands[0] == 'KILL':
+
+                if commands[1] == 'JOB':
+                    id = commands[2]
+                    client_context.client.scheduler.remove_existing_job(id)
+                    return "Job removed"
+
+            elif commands[0] == 'PAUSE':
+                client_context.client.scheduler.pause()
+                return "Scheduler paused"
+
+            elif commands[0] == 'RESUME':
+                client_context.client.scheduler.resume()
+                return "Scheduler resumed"
+
+        except Exception as e:
+            YLogger.exception(client_context, e)
+
+        return "Scheduler Admin Error"

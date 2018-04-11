@@ -98,6 +98,12 @@ class ProgramyScheduler(object):
     def stop(self):
         self._scheduler.shutdown()
 
+    def pause(self):
+        self._scheduler.pause()
+
+    def resume(self):
+        self._scheduler.resume()
+
     def wait_loop(self, period=5):
         try:
             while True:
@@ -119,7 +125,7 @@ class ProgramyScheduler(object):
         hashed = hashlib.md5(str.encode())
         return hashed.hexdigest()
 
-    def remove_existing_jobs(self, job_id):
+    def remove_existing_job(self, job_id):
         old_job = self._scheduler.get_job(job_id)
         if old_job is not None:
             self._scheduler.remove_job(old_job)
@@ -129,32 +135,32 @@ class ProgramyScheduler(object):
 
     def schedule_every_n_seconds(self, userid, clientid, action, text, seconds):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, seconds=seconds)
 
     def schedule_every_n_minutes(self, userid, clientid, action, text, minutes):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, minutes=minutes)
 
     def schedule_every_n_hours(self, userid, clientid, action, text, hours):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, hours=hours)
 
     def schedule_every_n_days(self, userid, clientid, action, text, days):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, days=days)
 
     def schedule_every_n_weeks(self, userid, clientid, action, text, weeks):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, weeks=weeks)
 
     def schedule_every_n(self, userid, clientid, action, text, weeks=0, days=0, hours=0, minutes=0, seconds=0):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, weeks=weeks, days=days,
                                 hours=hours, minutes=minutes, seconds=seconds)
 
@@ -188,7 +194,7 @@ class ProgramyScheduler(object):
 
     def schedule_at_datetime(self, userid, clientid, action, text, schedule):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'date', [self.name, userid, clientid, action, text], id=job_id, run_date=schedule)
 
     #################################################################################################################
@@ -197,7 +203,7 @@ class ProgramyScheduler(object):
     def schedule_as_cron(self, userid, clientid, action, text, year='*', month='*', day='*', week='*', day_of_week='*',
                          hour='*', minute='*', second='*'):
         job_id = self.create_job_id(userid, clientid, action, text)
-        self.remove_existing_jobs(job_id)
+        self.remove_existing_job(job_id)
         self._scheduler.add_job(scheduled, 'cron', [self.name, userid, clientid, action, text], id=job_id, year=year, month=month, day=day,
                                 week=week, day_of_week=day_of_week, hour=hour, minute=minute, second=second)
 

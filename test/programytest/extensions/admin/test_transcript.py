@@ -16,7 +16,7 @@ class TranscriptAdminExtensionClient(TestClient):
         super(TranscriptAdminExtensionClient, self).load_configuration(arguments)
 
 
-class RDFAdminExtensionTests(unittest.TestCase):
+class TranscriptAdminExtensionTests(unittest.TestCase):
 
     def test_transcripts_no_questions_without_props(self):
         client = TranscriptAdminExtensionClient()
