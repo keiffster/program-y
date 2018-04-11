@@ -11,29 +11,35 @@ class MockRichMediaRenderer(RichMediaRenderer):
     def handle_text(self, userid, text):
         self._userid = userid
         self._text = text
+        return text
 
     def handle_url_button(self, userid, text, url):
         self._userid = userid
         self._text = text
         self._url = url
+        return text
 
     def handle_postback_button(self, userid, text, postback):
         self._userid = userid
         self._text = text
         self._postback = postback
+        return text
 
     def handle_link(self, userid, text, url):
         self._userid = userid
         self._text = text
         self._url = url
+        return text
 
     def handle_image(self, userid, url):
         self._userid = userid
         self._url = url
+        return url
 
     def handle_video(self, userid, url):
         self._userid = userid
         self._url = url
+        return url
 
     def handle_card(self, userid, image, title, subtitle, buttons):
         self._userid = userid
@@ -41,33 +47,41 @@ class MockRichMediaRenderer(RichMediaRenderer):
         self._title = title
         self._subtitle = subtitle
         self._buttons = buttons
+        return "image"
 
     def handle_carousel(self, userid, cards):
         self._userid = userid
         self._cards = cards
+        return "carousel"
 
     def handle_reply(self, userid, text, postback):
         self._userid = userid
         self._text = text
         self._postback = postback
+        return text
 
     def handle_delay(self, userid, seconds):
         self._userid = userid
         self._seconds = seconds
+        return seconds
 
     def handle_split(self, userid):
         self._userid = userid
+        return "split"
 
     def handle_list(self, userid, items):
         self._userid = userid
         self._items = items
+        return items
 
     def handle_ordered_list(self, userid, items):
         self._userid = userid
         self._items = items
+        return items
 
     def handle_location(self, userid):
         self._userid = userid
+        return "location"
 
 class RichMediaRendererTests(unittest.TestCase):
 
@@ -213,6 +227,31 @@ class RichMediaRendererTests(unittest.TestCase):
         self.assertEquals(renderer._items[0], "Item1")
         self.assertEquals(renderer._items[1], "Item2")
 
+    def test_list_with_nested_rcs(self):
+        mock_config = unittest.mock.Mock()
+        renderer = MockRichMediaRenderer(mock_config)
+        self.assertIsNotNone(renderer)
+
+        renderer.render("testuser", """
+        <list>
+            <item>
+                <list>
+                    <item>Item1.1</item>
+                    <item>Item1.2</item>
+                </list>
+            </item>
+            <item>
+                Item2
+            </item>
+        </list>
+        """)
+
+        self.assertEquals(renderer._userid, "testuser")
+        self.assertIsNotNone(renderer._items)
+        self.assertEquals(len(renderer._items), 2)
+        self.assertEquals(renderer._items[0], ['Item1.1', 'Item1.2'])
+        self.assertEquals(renderer._items[1], "Item2")
+
     def test_olist(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
@@ -234,3 +273,14 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer.render("testuser", "<location />")
 
         self.assertEquals(renderer._userid, "testuser")
+
+    def test_xml_html(self):
+        mock_config = unittest.mock.Mock()
+        renderer = MockRichMediaRenderer(mock_config)
+        self.assertIsNotNone(renderer)
+
+        renderer.render("testuser", "<ul><li>item1</li><li>item2</li></ul>")
+
+        self.assertEquals(renderer._userid, "testuser")
+        self.assertEquals(renderer._text, "<ul><li>item1</li><li>item2</li></ul>")
+

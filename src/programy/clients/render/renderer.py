@@ -83,9 +83,13 @@ class RichMediaRenderer(object):
             return self.parse_location(client_context, tag)
 
         else:
-            return None
+            return self.parse_xml(client_context, tag)
 
     def parse_text(self, client_context, text):
+        return self.handle_text(client_context, text)
+
+    def parse_xml(self, client_context, tag):
+        text = str(tag)
         return self.handle_text(client_context, text)
 
     def parse_button(self, client_context, tag):
@@ -222,10 +226,10 @@ class RichMediaRenderer(object):
                 pass
 
             elif child.name == 'text':
-                text = child.text
+                text = child.text.strip()
 
             elif child.name == 'postback':
-                postback = child.text
+                postback = child.text.strip()
 
             else:
                 print("Unknown reply tag %s" % child.name)
@@ -240,41 +244,45 @@ class RichMediaRenderer(object):
                 pass
 
             elif child.name == 'seconds':
-                seconds = child.text
+                seconds = child.text.strip()
 
         return self.handle_delay(client_context, seconds)
 
     def parse_split(self, client_context, tag):
         return self.handle_split(client_context)
 
-    def parse_list(self, client_context, tag):
+    def parse_list_items(self, client_context, tag):
         items = []
+
         for child in tag.children:
 
             if child.name is None:
                 pass
 
             elif child.name == 'item':
-                items.append(child.text)
+                for child2 in child.children:
+
+                    if isinstance(child2, Tag):
+                        parsed = self.parse_tag(client_context, child2)
+                        items.append(parsed)
+
+                    elif isinstance(child2, NavigableString):
+                        text = child2.strip()
+                        if text:
+                            parsed = self.parse_text(client_context, child2)
+                            items.append(parsed.strip())
 
             else:
                 print("Unknown list tag %s" % child.name)
 
+        return items
+
+    def parse_list(self, client_context, tag):
+        items = self.parse_list_items(client_context, tag)
         return self.handle_list(client_context, items)
 
     def parse_olist(self, client_context, tag):
-        items = []
-        for child in tag.children:
-
-            if child.name is None:
-                pass
-
-            elif child.name == 'item':
-                items.append(child.text)
-
-            else:
-                print("Unknown olist tag %s" % child.name)
-
+        items = self.parse_list_items(client_context, tag)
         return self.handle_ordered_list(client_context, items)
 
     def parse_location(self, client_context, tag):

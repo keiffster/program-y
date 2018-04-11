@@ -1,14 +1,73 @@
 # Readme info:
 
-Version: 2.0.0 Candidate 1 Release<br/>
+Version: 2.0.0<br/>
 Authors: Keith Sterling <br/>
 Date: 22nd March 2018 <br/>
 
-# V2.0 Candidate 2 Release
+## V2.0
 
-Second candidate release as part of the refactoring and improvements for v2.0 release
-This is now live on servis.ai and running all active clients so actively under test. 
-RC 3 in the next view days will create the firsst V2.0 PyPi release.
+### New Features
+Version 2.0 brings some important changes to the overall Program-Y platform and ecosystem including
+
+* Thread Safety across all processing
+* Multiple Bots per Client, useful to mix AIML and ML processing
+* Multiple Brains per Bot, useful to seperate grammars, including langauge specific
+* Wide variety of clients including
+  * Console
+  * Web
+  * Facebook
+  * Twitter
+  * SMS
+  * XMPP (Google Hangouts)
+  * Telegram
+  * Slack
+  * Viber
+  * Kik
+  * Line
+  * TCP Socket
+  * REST
+* Improved Logging which now includes more info about client, bot and brain
+* Support for AIML 2.x Rich Media
+* Support for Emojis
+* Natively support Pypi instalation
+* Asynchronous Scheduling of events, useful to carry out time dependent call backs, such as "remind me 7:00am to wake up" or
+"Set a timer for 20 minutes". The bot will then call back to your client asynchronously with the text or parsed grammar
+
+### Rich Media
+Rich media is an exciting enhancement to AIML proposed by the [AIML Foundation](http://aiml.foundation) which adds a range
+of new capabilities to the AIML langauge to help in building engaging interfaces. Rich media introduces a number of new
+template tags including
+* button
+* card
+* carousel
+* delay
+* image
+* link
+* list
+* location
+* reply
+* split
+* video
+Rather than just returning plain text, using these tags allows you to build conversations that including buttons, clickable links, images, videos
+and more complex UI structures
+
+### Breaking Changes
+Along with this work there are some break changes for anyone actively developing their own extensions or clients. The biggest change is
+that any Python method that used used to take the parameters 'bot, clientid' has been modified and these 2 variables replaced
+with the object client_context. Which stores conversational state, including the client making the call, the bot used to ask the
+question, the brain that processed the grammar and parse depth. If you have built and extension, the code would have looking something like
+
+```python
+class SomeExtension(Extension):
+    def execute(self, bot, clientid, data):
+        return "OK"
+```
+This should now be refactored to 
+```python
+class SomeExtension(Extension):
+    def execute(self, client_context, data):
+        return "OK"
+```
 
 # Introduction
 
@@ -41,21 +100,7 @@ Program Y is extremely extensible, you can
 * Add Dynamic Sets in Python
 * Add Dynamic Maps in Python
 * Add Dynamic Variables in Python
-* Run a variety of clients, including
-  * Console
-  * REST
-  * Web Chat
-  * Twitter
-  * Google Hangouts
-  * XMPP
-  * SMS 
-  * Facebook
-  * Slack 
-  * Telegram
-  * Kik
-  * Line
-  * TCP Socket
-  * Viber (pending approval)
+* Run a variety of clients
 
 Program-Y comes with a base set of grammars for various industry sectors, including
 
@@ -66,28 +111,6 @@ Program-Y comes with a base set of grammars for various industry sectors, includ
 * Surveys
 * News Feeds
 * Maps
-
-
-# System Requirements
-
-Program Y is built using Python 3.6 and has dependencies upon the following Python libraries
-
-* requests
-* flask
-* python-dateutil
-* beautifulsoup4
-* lxml
-* wikipedia
-* pylint
-* nose
-* coverage
-* pyyaml
-* tweepy
-* sleekxmpp
-
-In addition, there are a number of additional libraries for use with Sanic version of the REST server, specifically
-
-* sanic
 
 # Using Program-Y
 
