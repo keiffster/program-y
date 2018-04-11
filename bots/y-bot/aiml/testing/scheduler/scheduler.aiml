@@ -47,6 +47,17 @@
         </template>
     </category>
 
+    <category>
+        <pattern>ACTION IN * * TO *</pattern>
+        <template>
+            <srai>
+                SCHEDULE
+                <extension path="programy.extensions.scheduler.scheduler.SchedulerExtension">
+                    REMIND IN <star index="1" /> <star index="2" /> GRAMMAR <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
 
 </aiml>
 

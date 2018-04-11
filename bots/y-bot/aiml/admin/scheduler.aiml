@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <category>
+        <pattern>YADMIN SCHEDULER LIST JOBS</pattern>
+        <template>
+            <extension path="programy.extensions.admin.scheduler.SchedulerAdminExtension">
+                LIST JOBS
+            </extension>
+        </template>
+    </category>
+
+</aiml>

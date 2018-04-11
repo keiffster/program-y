@@ -26,7 +26,7 @@ class SchedulerExtension(Extension):
     def execute(self, client_context, data):
         YLogger.debug(client_context, "Scheduler - [%s]", data)
 
-        # REDMIND IN|EVERY X SECONDS|MINUTES|HOURS|DAYS|WEEKS MESSAGE ...........
+        # REDMIND IN|EVERY X SECONDS|MINUTES|HOURS|DAYS|WEEKS MESSAGE|GRAMMAR ...........
 
         words = data.split()
         if len(words)> 5:
@@ -36,9 +36,10 @@ class SchedulerExtension(Extension):
                     quantity = int(words[2])
                     period = words[3].upper()
                     if period in ['SECONDS', 'MINUTES', 'HOURS', 'DAYS', 'WEEKS']:
-                        if words[4] == 'MESSAGE':
+                        action = words[4]
+                        if action in ['MESSAGE', 'GRAMMAR']:
                             text = " ".join(words[5:])
-                            self.schedule(client_context, when, quantity, period, text)
+                            self.schedule(client_context, when, quantity, period, action, text)
                             return 'OK'
                         else:
                             print ('MESSAGE missing')
@@ -51,14 +52,14 @@ class SchedulerExtension(Extension):
 
         return 'ERR'
 
-    def schedule(self, client_context, when, quantity, period, text):
+    def schedule(self, client_context, when, quantity, period, action, text):
 
         if when == 'IN':
             if period == 'SECONDS':
-                client_context.client.scheduler.schedule_in_n_seconds(client_context.userid, client_context.id, text, quantity)
+                client_context.client.scheduler.schedule_in_n_seconds(client_context.userid, client_context.id, action, text, quantity)
 
         elif when == 'EVERY':
             if period == 'SECONDS':
-                client_context.client.scheduler.schedule_every_n_seconds(client_context.userid, client_context.id, text, quantity)
+                client_context.client.scheduler.schedule_every_n_seconds(client_context.userid, client_context.id, action, text, quantity)
 
 

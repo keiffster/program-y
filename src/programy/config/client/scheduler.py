@@ -17,7 +17,144 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
-from programy.config.bot.bot import BotConfiguration
+
+
+class SchedulerJobStoreConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="jobstore")
+        self._jobstore = None
+
+    @property
+    def name(self):
+        return self._name
+
+    @property
+    def jobstore(self):
+        return self._jobstore
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        jobstore = configuration_file.get_section(self._section_name, configuration)
+        if jobstore is not None:
+            self._name = configuration_file.get_option(jobstore, "name", missing_value=None)
+            if self._name is not None:
+                if self._name == 'mongo':
+                    self._jobstore = SchedulerMongoJobStoreConfiguration()
+                elif self._name == 'redis':
+                    self._jobstore = SchedulerRedisJobStoreConfiguration()
+                elif self._name == 'sqlalchemy':
+                    self._jobstore = SchedulerSqlAlchemyJobStoreConfiguration()
+
+                self._jobstore.load_config_section(configuration_file, jobstore, bot_root)
+
+
+class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="mongo")
+        self._collection = None
+
+    @property
+    def collection(self):
+        return self._collection
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        mongodb = configuration_file.get_section(self._section_name, configuration)
+        if mongodb is not None:
+            self._collection = configuration_file.get_option(mongodb, "collection", missing_value=None)
+
+
+class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="redis")
+        self._jobs_key = None
+        self._run_times_key = None
+
+    @property
+    def jobs_key(self):
+        return self._jobs_key
+
+    @property
+    def run_times_key(self):
+        return self._run_times_key
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        redis = configuration_file.get_section(self._section_name, configuration)
+        if redis is not None:
+            self._jobs_key = configuration_file.get_option(redis, "jobs_key", missing_value=None)
+            self._run_times_key = configuration_file.get_option(redis, "run_times_key", missing_value=None)
+
+
+class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="sqlalchemy")
+        self._url = None
+
+    @property
+    def url(self):
+        return self._url
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        sqlalchemy = configuration_file.get_section(self._section_name, configuration)
+        if sqlalchemy is not None:
+            self._url = configuration_file.get_option(sqlalchemy, "url", missing_value=None)
+
+
+class SchedulerThreadPoolConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="threadpool")
+        self._max_workers = None
+
+    @property
+    def max_workers(self):
+        return self._max_workers
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        threadpool = configuration_file.get_section(self._section_name, configuration)
+        if threadpool is not None:
+            self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
+
+
+class SchedulerProcessPoolConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="processpool")
+        self._max_workers = None
+
+    @property
+    def max_workers(self):
+        return self._max_workers
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        processpool = configuration_file.get_section(self._section_name, configuration)
+        if processpool is not None:
+            self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
+
+
+class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
+
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="job_defaults")
+        self._coalesce = None
+        self._max_instances = None
+
+    @property
+    def coalesce(self):
+        return self._coalesce
+
+    @property
+    def max_instances(self):
+        return self._max_instances
+
+
+    def load_config_section(self, configuration_file, configuration, bot_root):
+        job_defaults = configuration_file.get_section(self._section_name, configuration)
+        if job_defaults is not None:
+            self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
+            self._max_instances = configuration_file.get_option(job_defaults, "max_instances", missing_value=None)
 
 
 class SchedulerConfiguration(BaseConfigurationData):
@@ -29,6 +166,11 @@ class SchedulerConfiguration(BaseConfigurationData):
         self._add_listeners = False
         self._remove_all_jobs = False
         self._blocking = False
+
+        self._jobstore = None
+        self._threadpool = None
+        self._processpool = None
+        self._job_defaults = None
 
     @property
     def name(self):
@@ -50,6 +192,22 @@ class SchedulerConfiguration(BaseConfigurationData):
     def blocking(self):
         return self._blocking
 
+    @property
+    def jobstore(self):
+        return self._jobstore
+
+    @property
+    def threadpool(self):
+        return self._threadpool
+
+    @property
+    def processpool(self):
+        return self._processpool
+
+    @property
+    def job_defaults(self):
+        return self._job_defaults
+
     def load_config_section(self, configuration_file, configuration, bot_root):
         scheduler = configuration_file.get_section(self._section_name, configuration)
         if scheduler is not None:
@@ -58,8 +216,70 @@ class SchedulerConfiguration(BaseConfigurationData):
             self._add_listeners = configuration_file.get_bool_option(scheduler, "add_listeners", missing_value=False)
             self._remove_all_jobs = configuration_file.get_bool_option(scheduler, "remove_all_jobs", missing_value=False)
 
+            if 'jobstore' in scheduler:
+                self._jobstore = SchedulerJobStoreConfiguration()
+                self._jobstore.load_config_section(configuration_file, scheduler, bot_root)
+
+            if 'threadpool' in scheduler:
+                self._threadpool = SchedulerThreadPoolConfiguration()
+                self._threadpool.load_config_section(configuration_file, scheduler, bot_root)
+
+            if 'processpool' in scheduler:
+                self._processpool = SchedulerProcessPoolConfiguration()
+                self._processpool.load_config_section(configuration_file, scheduler, bot_root)
+
+            if 'job_defaults' in scheduler:
+                self._job_defaults = SchedulerJobDefaultsConfiguration()
+                self._job_defaults.load_config_section(configuration_file, scheduler, bot_root)
         else:
             YLogger.warning(self, "'scheduler' section missing from client config, using to defaults")
+
+    def create_scheduler_config(self):
+
+        config = {}
+        if self.jobstore is not None:
+
+            if self.jobstore.name == 'mongo':
+                config['apscheduler.jobstores.mongo'] = {'type': 'mongodb'}
+                if self.jobstore.jobstore is not None:
+                    if self.jobstore.jobstore.collection is not None:
+                        config['apscheduler.jobstores.mongo']['collection'] = self.jobstore.jobstore.collection
+
+            elif self.jobstore.name == 'redis':
+                config['apscheduler.jobstores.redis'] = {'type': 'redis'}
+                if self.jobstore.jobstore is not None:
+                    if self.jobstore.jobstore.jobs_key is not None:
+                        config['apscheduler.jobstores.redis']['jobs_key'] = self.jobstore.jobstore.jobs_key
+                    if self.jobstore.jobstore.run_times_key is not None:
+                        config['apscheduler.jobstores.redis']['run_times_key'] = self.jobstore.jobstore.run_times_key
+
+            elif self.jobstore.name == 'sqlalchemy':
+                config['apscheduler.jobstores.sqlalchemy'] = {'type': 'sqlalchemy'}
+                if self.jobstore.jobstore is not None:
+                    if self.jobstore.jobstore.url is not None:
+                        config['apscheduler.jobstores.sqlalchemy']['url'] = self.jobstore.jobstore.url
+
+        if self.threadpool is not None:
+            config['apscheduler.executors.default'] = {'class': 'apscheduler.executors.pool:ThreadPoolExecutor'}
+            if self.threadpool.max_workers is not None:
+                config['apscheduler.executors.default']['max_workers'] = str(self.threadpool.max_workers)
+
+        if self.processpool is not None:
+            config['apscheduler.executors.processpool'] = {'type': 'processpool'}
+            if self.threadpool.max_workers is not None:
+                config['apscheduler.executors.processpool']['max_workers'] = str(self.threadpool.max_workers)
+
+        if self.job_defaults is not None:
+            config['apscheduler.job_defaults'] = {}
+            if self.job_defaults.coalesce is not None:
+                config['apscheduler.job_defaults.coalesce'] = str(self.job_defaults.coalesce).lower()
+            if self.job_defaults.max_instances is not None:
+                config['apscheduler.job_defaults.max_instances'] = str(self.job_defaults.max_instances)
+
+        if len(config.keys()) > 0:
+            return config
+
+        return None
 
 
 

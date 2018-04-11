@@ -50,7 +50,7 @@ class MockProgramyScheduler(ProgramyScheduler):
     def _create_scheduler(self):
         return MockScheduler()
 
-    def scheduled(self, userid, clientid, grammar):
+    def scheduled(self, userid, clientid, action, text):
         self._scheduled = True
 
 
@@ -117,13 +117,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_seconds("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_seconds("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_seconds("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_every_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_every_minutes(self):
@@ -131,13 +131,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_minutes("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_minutes("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_minutes("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_every_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_every_hours(self):
@@ -145,13 +145,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_hours("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_hours("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_hours("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_every_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_every_days(self):
@@ -159,13 +159,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_days("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_days("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_days("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_days("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_days("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_every_n_days("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_every_weeks(self):
@@ -173,13 +173,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_weeks("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_weeks("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_every_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_every_n_weeks("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_every_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_in_seconds(self):
@@ -187,13 +187,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_seconds("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_seconds("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_seconds("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_in_n_seconds("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_in_minutes(self):
@@ -201,13 +201,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_minutes("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_minutes("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_minutes("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_in_n_minutes("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_in_hours(self):
@@ -215,13 +215,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_hours("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_hours("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_hours("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_in_n_hours("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_in_days(self):
@@ -229,13 +229,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_days("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_days("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_days("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_days("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_days("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_in_n_days("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_in_weeks(self):
@@ -243,13 +243,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_weeks("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_weeks("testuser", "testclient", "REMIND ME", 3)
+        scheduler.schedule_in_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME", 3)
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_in_n_weeks("testuser", "testclient", "REMIND ME 2", 3)
+        scheduler.schedule_in_n_weeks("testuser", "testclient", "MESSAGE", "REMIND ME 2", 3)
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_add_job_as_cron(self):
@@ -257,13 +257,13 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertIsNotNone(scheduler)
         self.assertEquals(0, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_as_cron("testuser", "testclient", "REMIND ME", second='*/3')
+        scheduler.schedule_as_cron("testuser", "testclient", "MESSAGE", "REMIND ME", second='*/3')
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_as_cron("testuser", "testclient", "REMIND ME", second='*/3')
+        scheduler.schedule_as_cron("testuser", "testclient", "MESSAGE", "REMIND ME", second='*/3')
         self.assertEquals(1, len(scheduler._scheduler._jobs.keys()))
 
-        scheduler.schedule_as_cron("testuser", "testclient", "REMIND ME 2", second='*/3')
+        scheduler.schedule_as_cron("testuser", "testclient", "MESSAGE", "REMIND ME 2", second='*/3')
         self.assertEquals(2, len(scheduler._scheduler._jobs.keys()))
 
     def test_get_event_str_scheduler_event(self):
@@ -311,7 +311,7 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertEquals(scheduler1, ProgramyScheduler.schedulers['Scheduler1'])
 
         self.assertFalse(scheduler1._scheduled)
-        scheduled("Scheduler1", "User1", "TestClient", "REMIND ME")
+        scheduled("Scheduler1", "User1", "TestClient", "MESSAGE", "REMIND ME")
         self.assertTrue(scheduler1._scheduled)
 
     def test_scheduled_unknown_scheduler(self):
@@ -322,5 +322,5 @@ class ProgramySchedulerTests(unittest.TestCase):
         self.assertEquals(scheduler1, ProgramyScheduler.schedulers['Scheduler1'])
 
         self.assertFalse(scheduler1._scheduled)
-        scheduled("Scheduler2", "User1", "TestClient", "REMIND ME")
+        scheduled("Scheduler2", "User1", "TestClient", "MESSAGE", "REMIND ME")
         self.assertFalse(scheduler1._scheduled)

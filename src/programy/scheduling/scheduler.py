@@ -28,8 +28,8 @@ from apscheduler.events import EVENT_ALL
 from apscheduler.events import SchedulerEvent, JobEvent, JobSubmissionEvent, JobExecutionEvent
 
 
-def scheduled(name, userid, clientid, grammar):
-    ProgramyScheduler.scheduled_event(name, userid, clientid, grammar)
+def scheduled(name, userid, clientid, action, text):
+    ProgramyScheduler.scheduled_event(name, userid, clientid, action, text)
 
 
 def scheduler_listener(event):
@@ -76,8 +76,20 @@ class ProgramyScheduler(object):
 
     def _create_scheduler(self):
         if self._configuration is not None:
+            config = self._configuration.create_scheduler_config()
             if self._configuration.blocking is True:
-                return BlockingScheduler()
+                if config is not None:
+                    YLogger.debug(None, "Creating Blocking Scheduler WITH config")
+                    return BlockingScheduler(config)
+                else:
+                    YLogger.debug(None, "Creating Blocking Scheduler WITHOUT config")
+                    return BlockingScheduler()
+            else:
+                if config is not None:
+                    YLogger.debug(None, "Creating Background Scheduler WITH config")
+                    return BackgroundScheduler(config)
+
+        YLogger.debug(None, "Creating Background Scheduler WITHOUT config")
         return BackgroundScheduler()
 
     def start(self):
@@ -102,8 +114,8 @@ class ProgramyScheduler(object):
             id_jobs[job.id] = job
         return id_jobs
 
-    def create_job_id(self, userid, clientid, grammar):
-        str = "%s:%s:%s"%(userid, clientid, grammar)
+    def create_job_id(self, userid, clientid, action, text):
+        str = "%s:%s:%s:%s"%(userid, clientid, action, text)
         hashed = hashlib.md5(str.encode())
         return hashed.hexdigest()
 
@@ -115,78 +127,78 @@ class ProgramyScheduler(object):
     #################################################################################################################
     # Interval triggers
 
-    def schedule_every_n_seconds(self, userid, clientid, grammar, seconds):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n_seconds(self, userid, clientid, action, text, seconds):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, seconds=seconds)
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, seconds=seconds)
 
-    def schedule_every_n_minutes(self, userid, clientid, grammar, minutes):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n_minutes(self, userid, clientid, action, text, minutes):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, minutes=minutes)
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, minutes=minutes)
 
-    def schedule_every_n_hours(self, userid, clientid, grammar, hours):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n_hours(self, userid, clientid, action, text, hours):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, hours=hours)
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, hours=hours)
 
-    def schedule_every_n_days(self, userid, clientid, grammar, days):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n_days(self, userid, clientid, action, text, days):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, days=days)
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, days=days)
 
-    def schedule_every_n_weeks(self, userid, clientid, grammar, weeks):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n_weeks(self, userid, clientid, action, text, weeks):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, weeks=weeks)
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, weeks=weeks)
 
-    def schedule_every_n(self, userid, clientid, grammar, weeks=0, days=0, hours=0, minutes=0, seconds=0):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_every_n(self, userid, clientid, action, text, weeks=0, days=0, hours=0, minutes=0, seconds=0):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, grammar], id=job_id, weeks=weeks, days=days,
+        self._scheduler.add_job(scheduled, 'interval', [self.name, userid, clientid, action, text], id=job_id, weeks=weeks, days=days,
                                 hours=hours, minutes=minutes, seconds=seconds)
 
     #################################################################################################################
     # Date trigger
 
-    def schedule_in_n_weeks(self, userid, clientid, grammar, weeks):
+    def schedule_in_n_weeks(self, userid, clientid, action, text, weeks):
         now = datetime.now()
         the_future = now + timedelta(weeks=weeks)
-        self.schedule_at_datetime(userid, clientid, grammar, the_future)
+        self.schedule_at_datetime(userid, clientid, action, text, the_future)
 
-    def schedule_in_n_days(self, userid, clientid, grammar, days):
+    def schedule_in_n_days(self, userid, clientid, action, text, days):
         now = datetime.now()
         the_future = now + timedelta(days=days)
-        self.schedule_at_datetime(userid, clientid, grammar, the_future)
+        self.schedule_at_datetime(userid, clientid, action, text, the_future)
 
-    def schedule_in_n_hours(self, userid, clientid, grammar, hours):
+    def schedule_in_n_hours(self, userid, clientid, action, text, hours):
         now = datetime.now()
         the_future = now + timedelta(hours=hours)
-        self.schedule_at_datetime(userid, clientid, grammar, the_future)
+        self.schedule_at_datetime(userid, clientid, action, text, the_future)
 
-    def schedule_in_n_minutes(self, userid, clientid, grammar, minutes):
+    def schedule_in_n_minutes(self, userid, clientid, action, text, minutes):
         now = datetime.now()
         the_future = now + timedelta(minutes=minutes)
-        self.schedule_at_datetime(userid, clientid, grammar, the_future)
+        self.schedule_at_datetime(userid, clientid, action, text, the_future)
 
-    def schedule_in_n_seconds(self, userid, clientid, grammar, seconds):
+    def schedule_in_n_seconds(self, userid, clientid, action, text, seconds):
         now = datetime.now()
         the_future = now + timedelta(seconds=seconds)
-        self.schedule_at_datetime(userid, clientid, grammar, the_future)
+        self.schedule_at_datetime(userid, clientid, action, text, the_future)
 
-    def schedule_at_datetime(self, userid, clientid, grammar, schedule):
-        job_id = self.create_job_id(userid, clientid, grammar)
+    def schedule_at_datetime(self, userid, clientid, action, text, schedule):
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'date', [self.name, userid, clientid, grammar], id=job_id, run_date=schedule)
+        self._scheduler.add_job(scheduled, 'date', [self.name, userid, clientid, action, text], id=job_id, run_date=schedule)
 
     #################################################################################################################
     # Cron triggers
 
-    def schedule_as_cron(self, userid, clientid, grammar, year='*', month='*', day='*', week='*', day_of_week='*',
+    def schedule_as_cron(self, userid, clientid, action, text, year='*', month='*', day='*', week='*', day_of_week='*',
                          hour='*', minute='*', second='*'):
-        job_id = self.create_job_id(userid, clientid, grammar)
+        job_id = self.create_job_id(userid, clientid, action, text)
         self.remove_existing_jobs(job_id)
-        self._scheduler.add_job(scheduled, 'cron', [self.name, userid, clientid, grammar], id=job_id, year=year, month=month, day=day,
+        self._scheduler.add_job(scheduled, 'cron', [self.name, userid, clientid, action, text], id=job_id, year=year, month=month, day=day,
                                 week=week, day_of_week=day_of_week, hour=hour, minute=minute, second=second)
 
 
@@ -231,17 +243,23 @@ class ProgramyScheduler(object):
     # Admin/Debug Functions
 
     @staticmethod
-    def scheduled_event(name, userid, clientid, grammar):
-        YLogger.debug(None, "Received Scheduled Event [%s] [%s] [%s] [%s]", name, userid, clientid, grammar)
+    def scheduled_event(name, userid, clientid, action, text):
+        YLogger.debug(None, "Received Scheduled Event [%s] [%s] [%s] [%s] [%s]", name, userid, clientid, action, text)
 
         if name in ProgramyScheduler.schedulers:
             scheduler = ProgramyScheduler.schedulers[name]
-            scheduler.scheduled(userid, clientid, grammar)
+            scheduler.scheduled(userid, clientid, action, text)
         else:
             YLogger.error(None, "Unknown scheduler [%s]", name)
 
-    def scheduled(self, userid, clientid, grammar):
-        YLogger.debug(None, "Processing Scheduled Event [%s] [%s] [%s] [%s]", self.name, userid, clientid, grammar)
+    def scheduled(self, userid, clientid, action, text):
+        YLogger.debug(None, "Processing Scheduled Event [%s] [%s] [%s] [%s] [%s]", self.name, userid, clientid, action, text)
 
         client_context = self._client.create_client_context(userid)
-        self._client.render_response(client_context, grammar)
+        if action == 'MESSAGE':
+            self._client.render_response(client_context, text)
+        elif action == 'GRAMMAR':
+            response = client_context.bot.ask_question(client_context, text)
+            self._client.render_response(client_context, response)
+        else:
+            YLogger.error(client_context, "Unknown scheduler command [%s]", action)

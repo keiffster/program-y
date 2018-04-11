@@ -83,7 +83,6 @@ class RichMediaRenderer(object):
             return self.parse_location(client_context, tag)
 
         else:
-            print("Unknown tag %s", tag.name)
             return None
 
     def parse_text(self, client_context, text):
