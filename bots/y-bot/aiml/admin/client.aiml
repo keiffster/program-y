@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+    <category>
+        <pattern>YADMIN CLIENT LIST BOTS</pattern>
+        <template>
+            <extension path="programy.extensions.admin.client.ClientAdminExtension">
+                LIST BOTS
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN CLIENT LIST BRAINS BOT *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.client.ClientAdminExtension">
+                LIST BRAINS <star index="1" />
+            </extension>
+        </template>
+    </category>
+
+    <category>
+        <pattern>YADMIN CLIENT DUMP BRAIN * BOT *</pattern>
+        <template>
+            <extension path="programy.extensions.admin.client.ClientAdminExtension">
+                DUMP BRAIN <star index="2" /> <star index="1" />
+            </extension>
+        </template>
+    </category>
+
+</aiml>

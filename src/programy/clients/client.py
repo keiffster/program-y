@@ -69,6 +69,15 @@ class BotFactory(object):
         self._bot_selector = None
         self.load_bot_selector(configuration)
 
+    def botids(self):
+        return self._bots.keys()
+
+    def bot(self, id):
+        if id in self._bots:
+            return self._bots[id]
+        else:
+            return None
+
     def load_bots(self, configuration):
         for config in configuration.configurations:
             bot = Bot(config, client=self._client)
@@ -100,11 +109,11 @@ class BotClient(ResponseLogger):
         self.load_configuration(self.arguments)
         self.parse_configuration()
 
+        self._bot_factory = BotFactory(self, self.configuration.client_configuration)
+
         self._license_keys = LicenseKeys()
         self.load_license_keys()
         self.get_license_keys()
-
-        self._bot_factory = BotFactory(self, self.configuration.client_configuration)
 
         self._scheduler = None
         self.load_scheduler()
@@ -132,6 +141,10 @@ class BotClient(ResponseLogger):
     @property
     def scheduler(self):
         return self._scheduler
+
+    @property
+    def bot_factory(self):
+        return self._bot_factory
 
     def get_description(self):
         raise NotImplementedError("You must override this and return a client description")

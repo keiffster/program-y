@@ -79,8 +79,6 @@ class Brain(object):
 
         self.load(self.configuration)
 
-        self.dump_brain_tree ()
-
     def ylogger_type(self):
         return "brain"
 
@@ -187,6 +185,10 @@ class Brain(object):
     def load_aiml_parser(self):
         return AIMLParser(self)
 
+    def load_aiml(self, configuration):
+        YLogger.info(self, "Loading aiml source brain")
+        self._aiml_parser.load_aiml(configuration)
+
     def load_binary(self, configuration):
         YLogger.info(self, "Loading binary brain from [%s]", configuration.binaries.binary_filename)
         try:
@@ -194,6 +196,7 @@ class Brain(object):
             gc.disable()
             bin_file = open(configuration.binaries.binary_filename, "rb")
             self._aiml_parser = pickle.load(bin_file)
+            self._aiml_parser._brain = self
             gc.enable()
             bin_file.close()
             stop = datetime.datetime.now()
@@ -206,10 +209,6 @@ class Brain(object):
                 return True   # Tell caller, load failed and to load aiml directly
             else:
                 raise excep
-
-    def load_aiml(self, configuration):
-        YLogger.info(self, "Loading aiml source brain")
-        self._aiml_parser.load_aiml(configuration)
 
     def save_binary(self, configuration):
         YLogger.info(self, "Saving binary brain to [%s]", configuration.binaries.binary_filename)
@@ -255,9 +254,10 @@ class Brain(object):
         if self.configuration.braintree.file is not None:
             YLogger.debug(self, "Dumping AIML Graph as tree to [%s]",
                               self._configuration.braintree.file)
+
+            client_context = self.bot.client.create_client_context("system")
             self.aiml_parser.pattern_parser.save_braintree(
-                self.bot,
-                self.clientid,
+                client_context,
                 self.configuration.braintree.file,
                 self.configuration.braintree.content)
 

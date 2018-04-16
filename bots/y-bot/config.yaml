@@ -175,9 +175,9 @@ brain:
       load_aiml_on_binary_fail: false
 
     # Braintree
-    #braintree:
-    #  file: /tmp/braintree.xml
-    #  content: xml
+    braintree:
+      file: /tmp/braintree.xml
+      content: xml
 
     files:
         aiml:

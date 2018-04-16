@@ -53,6 +53,15 @@ class BrainFactory(object):
         self._brain_selector = None
         self.load_brain_selector(bot.configuration)
 
+    def brainids(self):
+        return self._brains.keys()
+
+    def brain(self, id):
+        if id in self._brains:
+            return self._brains[id]
+        else:
+            return None
+
     def loads_brains(self, bot):
         for config in bot.configuration.configurations:
             brain = Brain(bot, config)
@@ -103,6 +112,10 @@ class Bot(object):
     @property
     def configuration(self):
         return self._configuration
+
+    @property
+    def brain_factory(self):
+        return self._brain_factory
 
     def initiate_spellchecker(self):
         # TODO Move this to Spelling bass class

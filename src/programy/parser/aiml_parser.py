@@ -74,6 +74,7 @@ class AIMLParser(object):
         # __getstate__ is called during the pickling process to determin whih
         # attributes to load, so we remove the ones we don't want pickling
         d = dict(self.__dict__)
+        del d['_brain']
         if '_errors' in d:
             del d['_errors']
         if '_duplicates' in d:
