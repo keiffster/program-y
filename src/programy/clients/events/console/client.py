@@ -19,14 +19,12 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
-from programy.clients.render.text import TextRenderer
 
 class ConsoleBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
-        self._renderer = TextRenderer(self)
 
     def get_description(self):
         return 'ProgramY AIML2.0 Console Client'

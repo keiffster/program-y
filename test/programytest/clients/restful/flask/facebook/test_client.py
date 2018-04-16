@@ -22,9 +22,9 @@ class MockFacebookBot(Bot):
 class MockFacebookBotClient(FacebookBotClient):
 
     def __init__(self, argument_parser=None):
+        FacebookBotClient.__init__(self, argument_parser)
         self.test_question = None
         self.payload = None
-        FacebookBotClient.__init__(self, argument_parser)
 
     def set_question(self, question):
         self.test_question = question

@@ -33,8 +33,6 @@ class FacebookBotClient(FlaskRestBotClient):
 
         self._facebook_bot = self.create_facebook_bot()
 
-        self._renderer = FacebookRenderer(self)
-
         print("Facebook Client loaded")
 
     @property
@@ -50,6 +48,9 @@ class FacebookBotClient(FlaskRestBotClient):
 
     def get_client_configuration(self):
         return FacebookConfiguration()
+
+    def get_default_renderer(self):
+        return FacebookRenderer(self)
 
     def create_facebook_bot(self):
         return Bot(self._access_token)

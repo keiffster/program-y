@@ -29,6 +29,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._license_keys = None
         self._bot_selector = None
         self._scheduler = SchedulerConfiguration()
+        self._renderer = None
 
     @property
     def configurations(self):
@@ -45,6 +46,10 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     @property
     def scheduler(self):
         return self._scheduler
+
+    @property
+    def renderer(self):
+        return self._renderer
 
     def load_configuration(self, configuration_file, section, bot_root):
         if section is not None:
@@ -66,6 +71,9 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             self._bot_selector = configuration_file.get_option(section, "bot_selector")
 
             self._scheduler.load_config_section(configuration_file, section, bot_root)
+
+            self._renderer = configuration_file.get_option(section, "renderer")
+
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"

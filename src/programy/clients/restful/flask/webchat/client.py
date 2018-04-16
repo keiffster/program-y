@@ -23,13 +23,15 @@ class WebChatBotClient(FlaskRestBotClient):
         # This is an exmaple, and therefore not suitable for production
         self._api_keys = [
         ]
-        self._renderer = HtmlRenderer()
 
     def get_description(self):
         return 'ProgramY AIML2.0 Webchat Client'
 
     def get_client_configuration(self):
         return WebChatConfiguration()
+
+    def get_default_renderer(self):
+        return HtmlRenderer()
 
     def is_apikey_valid(self, apikey):
         return bool(apikey in self._api_keys)

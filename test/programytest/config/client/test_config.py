@@ -15,7 +15,7 @@ class ClientConfigurationDataTests(unittest.TestCase):
           prompt: ">>>"
           license_keys: $BOT_ROOT/config/license.keys
           bot_selector: programy.clients.client.DefaultBotSelector
-
+          renderer: programy.clients.render.text.TextRenderer
           scheduler:
             name: Scheduler1
             debug_level: 0
@@ -38,6 +38,8 @@ class ClientConfigurationDataTests(unittest.TestCase):
         self.assertTrue(client_config.scheduler.add_listeners)
         self.assertTrue(client_config.scheduler.remove_all_jobs)
 
+        self.assertEquals("programy.clients.render.text.TextRenderer", client_config.renderer)
+
     def test_without_data(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
@@ -59,3 +61,5 @@ class ClientConfigurationDataTests(unittest.TestCase):
         self.assertEquals(0, client_config.scheduler.debug_level)
         self.assertFalse(client_config.scheduler.add_listeners)
         self.assertFalse(client_config.scheduler.remove_all_jobs)
+
+        self.assertIsNone(client_config.renderer)

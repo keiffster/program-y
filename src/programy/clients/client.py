@@ -29,6 +29,8 @@ from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
 from programy.utils.classes.loader import ClassLoader
 from programy.scheduling.scheduler import ProgramyScheduler
+from programy.clients.render.text import TextRenderer
+from programy.utils.classes.loader import ClassLoader
 
 
 class ResponseLogger(object):
@@ -118,6 +120,7 @@ class BotClient(ResponseLogger):
         self._scheduler = None
         self.load_scheduler()
 
+        self._renderer = self.load_renderer()
 
     def ylogger_type(self):
         return "client"
@@ -145,6 +148,10 @@ class BotClient(ResponseLogger):
     @property
     def bot_factory(self):
         return self._bot_factory
+
+    @property
+    def renderer(self):
+        return self._renderer
 
     def get_description(self):
         raise NotImplementedError("You must override this and return a client description")
@@ -222,6 +229,19 @@ class BotClient(ResponseLogger):
         client_context.bot = self._bot_factory.select_bot()
         client_context.brain = client_context.bot._brain_factory.select_brain()
         return client_context
+
+    def load_renderer(self):
+        try:
+            if self.get_client_configuration().renderer is not None:
+                clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
+                return clazz(self)
+        except Exception as e:
+            YLogger.exception("Failed to load config specified renderer", e)
+
+        return self.get_default_renderer()
+
+    def get_default_renderer(self):
+        return TextRenderer(self)
 
     def process_question(self, client_context, question):
         raise NotImplementedError("You must override this and implement the logic to create a response to the question")
