@@ -93,7 +93,7 @@ class TelegramBotClient(PollingBotClient):
                 YLogger.error(self, "Not initial question to return in start()")
 
         except Exception as e:
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to start", e)
 
     def message(self, telegram_bot, update):
         try:
@@ -104,7 +104,7 @@ class TelegramBotClient(PollingBotClient):
                 YLogger.error(self, "Not response to return in message()")
 
         except Exception as e:
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to handle message", e)
 
     def get_unknown_response(self, userid):
         return self.ask_question(userid, self.configuration.client_configuration.unknown_command_srai)
@@ -126,7 +126,7 @@ class TelegramBotClient(PollingBotClient):
                 YLogger.error(self, "No response to return in unknown()")
 
         except Exception as e:
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to handle unknown", e)
 
     def display_connected_message(self):
         print ("Telegram Bot connected and running...")
@@ -148,8 +148,7 @@ class TelegramBotClient(PollingBotClient):
             self._updater.stop()
 
         except Exception as excep:
-            YLogger.exception(self, excep)
-            YLogger.error(self, "Oops something bad happened !")
+            YLogger.exception(self, "Failed to poll and answer", excep)
 
         return running
 

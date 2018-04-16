@@ -120,7 +120,7 @@ if __name__ == "__main__":
         try:
             return KIK_CLIENT.receive_message(request)
         except Exception as e:
-            YLogger.exception(None, e)
+            YLogger.exception(None, "KIK Error", e)
 
     KIK_CLIENT = KikBotClient()
     KIK_CLIENT.run(APP)

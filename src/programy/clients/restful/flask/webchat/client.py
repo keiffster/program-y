@@ -122,7 +122,7 @@ class WebChatBotClient(FlaskRestBotClient):
             response_data = self.create_success_response_data(question, rendered)
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Failed receving message", excep)
             response_data = self.create_error_response_data(client_context, question, str(excep))
 
         return self.create_response(response_data, userid, userid_expire_date)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
             return WEB_CLIENT.receive_message(request)
         except Exception as e:
             print(e)
-            YLogger.exception(None, e)
+            YLogger.exception(None, "Web client error", e)
             return "500"
 
     WEB_CLIENT = WebChatBotClient()

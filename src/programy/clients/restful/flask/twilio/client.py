@@ -100,7 +100,7 @@ if __name__ == "__main__":
         try:
             return TWILIO_CLIENT.receive_message(request)
         except Exception as e:
-            YLogger.exception(None, e)
+            YLogger.exception(None, "Twilio Error", e)
 
     TWILIO_CLIENT = TwilioBotClient()
     TWILIO_CLIENT.run(APP)

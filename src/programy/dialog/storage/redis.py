@@ -81,8 +81,7 @@ class ConversationRedisStorage(ConversationStorage):
             self._redis.delete(self._sessions_set_key)
 
         except Exception as e:
-            YLogger.error(self, "Failed deleting conversation redis data")
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed deleting conversation redis data", e)
 
     def save_conversation(self, conversation, clientid):
 
@@ -96,8 +95,7 @@ class ConversationRedisStorage(ConversationStorage):
             self._redis.save(h_key, self._sessions_set_key, clientid, conversation._properties)
 
         except Exception as e:
-            YLogger.error(self, "Failed to save conversation to redis for clientid [%s]"%clientid)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to save conversation to redis for clientid [%s]"%clientid, e)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
 
@@ -122,8 +120,7 @@ class ConversationRedisStorage(ConversationStorage):
                 conversation._properties["topic"] = last_topic
 
         except Exception as e:
-            YLogger.error(self, "Failed to load conversation from redis for clientid [%s]"%clientid)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to load conversation from redis for clientid [%s]"%clientid, e)
 
     def remove_conversation(self, clientid):
 
@@ -133,5 +130,4 @@ class ConversationRedisStorage(ConversationStorage):
             self._redis.remove(self._sessions_set_key, clientid)
 
         except Exception as e:
-            YLogger.error(self, "Failed deleting conversation redis data for clientid [%s]"%clientid)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed deleting conversation redis data for clientid [%s]"%clientid, e)

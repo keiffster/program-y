@@ -53,7 +53,7 @@ class TemplateNode(object):
             YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve", excep)
             return ""
 
     def to_string(self):

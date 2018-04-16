@@ -97,6 +97,6 @@ class GenericRESTService(Service):
                 return self._parse_response(response.text)
 
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve", excep)
 
         return ""

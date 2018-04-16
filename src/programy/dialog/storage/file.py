@@ -41,8 +41,7 @@ class ConversationFileStorage(ConversationStorage):
                         YLogger.debug(self, "Removing conversation file: [%s]", fullpath)
                         os.remove(fullpath)
         except Exception as e:
-            YLogger.error(self, "Failed emptying conversation directory [%s]", self._config._dir)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed emptying conversation directory [%s]"%self._config._dir, e)
 
     def create_filename(self, clientid):
         return self._config._dir + os.sep + clientid + ".convo"
@@ -59,8 +58,7 @@ class ConversationFileStorage(ConversationStorage):
                             convo_file.write("%s:%s\n"%(name, value))
                         convo_file.write("\n")
         except Exception as e:
-            YLogger.error(self, "Failed to save conversation for clientid [%s]", clientid)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to save conversation for clientid [%s]"% clientid, e)
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
         try:
@@ -94,8 +92,7 @@ class ConversationFileStorage(ConversationStorage):
                                             conversation._properties[name] = value
 
         except Exception as e:
-            YLogger.error(self, "Failed to load conversation for clientid [%s]", clientid)
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Failed to load conversation for clientid [%s]"%clientid, e)
 
     def remove_conversation(self, clientid):
         filename = self.create_filename(clientid)

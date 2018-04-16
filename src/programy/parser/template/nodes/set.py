@@ -76,7 +76,7 @@ class TemplateSetNode(TemplateNode):
             client_context.bot.save_conversation(client_context.userid)
             return str
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve", excep)
             return ""
 
     def to_string(self):

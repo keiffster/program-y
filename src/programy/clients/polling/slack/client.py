@@ -140,7 +140,7 @@ class SlackBotClient(PollingBotClient):
             running = False
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Failed to poll and answer", excep)
 
         return running
 

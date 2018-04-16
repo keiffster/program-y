@@ -130,7 +130,7 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                 try:
                     self._sentence = int(splits[0])
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to split string", excep)
                     raise ParserException("None numeric format [%s] for this node [%s], either 'x' or 'x,y'",
                                           attrib_value, attrib_name)
             elif len(splits) == 2:
@@ -141,7 +141,7 @@ class TemplateDoubleIndexedNode(TemplateAttribNode):
                     else:
                         self._sentence = int(splits[1])
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to split string", excep)
                     raise ParserException("None numeric format [%s] for this node [%s], either 'x', 'x,y', or 'x,*'",
                                           attrib_value, attrib_name)
 

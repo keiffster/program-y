@@ -15,6 +15,8 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import logging
+import traceback
+
 
 class YLoggerSnapshot(object):
 
@@ -97,10 +99,12 @@ class YLogger(object):
             logging.error(YLogger.format_message(caller, message), *args, **kwargs)
 
     @staticmethod
-    def exception(caller, message, *args, **kwargs):
+    def exception(caller, message, exception, *args, **kwargs):
         YLogger.EXCEPTIONS += 1
         if logging.getLogger().isEnabledFor(logging.ERROR):
-            logging.error(YLogger.format_message(caller, message), *args, **kwargs)
+            excep_msg = "%s [%s]"%(message, str(exception))
+            logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
+            traceback.print_exc()
 
     @staticmethod
     def warning(caller, message, *args, **kwargs):

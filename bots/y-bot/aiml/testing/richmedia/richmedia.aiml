@@ -9,7 +9,7 @@
     Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
     documentation files (the "Software"), to deal in the Software without restriction, including without limitation
     the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
-    and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+    and to permit persons to whom the Software is furnished to do so, subject to the follo§wing conditions:
 
     The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
@@ -54,7 +54,7 @@
         <pattern>RCS SHOW IMAGE</pattern>
         <template>
             <image>
-                http://www.servusai.com/servusai.png
+                https://www.facebook.com/147520292603297/photos/148487795839880/
             </image>
         </template>
     </category>
@@ -63,7 +63,7 @@
         <pattern>RCS SHOW VIDEO</pattern>
         <template>
             <video>
-                http://www.servusai.com/servusai.mov
+                https://www.facebook.com/servusai/videos/164636254225034/?t=0
             </video>
         </template>
     </category>
@@ -72,7 +72,7 @@
         <pattern>RCS SHOW CARD</pattern>
         <template>
             <card>
-                <image>http://www.servusai.com/servusai.png</image>
+                <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
                 <title>Servusai</title>
                 <subtitle>The home of Program Y</subtitle>
                 <button>
@@ -92,20 +92,28 @@
         <template>
             <carousel>
                 <card>
-                    <image>http://www.servusai.com/servusai.png</image>
+                    <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
                     <title>Servusai</title>
                     <subtitle>The home of Program Y</subtitle>
                     <button>
-                        <text>Show me...</text>
+                        <text>Servusai</text>
                         <url>http://www.servusai.com</url>
+                    </button>
+                    <button>
+                        <text>AIML</text>
+                        <url>http://aiml.foundation</url>
                     </button>
                 </card>
                 <card>
-                    <image>http://aiml.foundation/aiml.png</image>
-                    <title>AIML Foundation</title>
-                    <subtitle>The home of AIML</subtitle>
+                    <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
+                    <title>Servusai</title>
+                    <subtitle>The home of Program Y</subtitle>
                     <button>
-                        <text>Show me...</text>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                    <button>
+                        <text>AIML</text>
                         <url>http://aiml.foundation</url>
                     </button>
                 </card>
@@ -163,6 +171,11 @@
                 <item>Item 4</item>
             </olist>
         </template>
+    </category>
+
+    <category>
+        <pattern>RCS SHOW LOCATION</pattern>
+        <template><location /></template>
     </category>
 
 </aiml>

@@ -166,7 +166,7 @@ if __name__ == "__main__":
         try:
             return VIBER_CLIENT.receive_message(request)
         except Exception as e:
-            YLogger.exception(None, e)
+            YLogger.exception(None, "Viber error", e)
 
     VIBER_CLIENT = ViberBotClient()
     VIBER_CLIENT.run(APP)

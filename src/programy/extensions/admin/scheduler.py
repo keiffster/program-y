@@ -61,6 +61,6 @@ class SchedulerAdminExtension(Extension):
                 return "Scheduler resumed"
 
         except Exception as e:
-            YLogger.exception(client_context, e)
+            YLogger.exception(client_context, "Failed to execute extension", e)
 
         return "Scheduler Admin Error"

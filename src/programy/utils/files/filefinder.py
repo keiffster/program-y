@@ -59,8 +59,7 @@ class FileFinder(object):
             try:
                 collection[just_filename] = self.load_file_contents(file[1])
             except Exception as excep:
-                YLogger.exception(self, excep)
-                YLogger.error(self, "Failed to load file contents for file [%s]", file[1])
+                YLogger.error(self, "Failed to load file contents for file [%s]"% file[1], excep)
 
         return collection
 
@@ -71,8 +70,7 @@ class FileFinder(object):
         try:
             collection[just_filename] = self.load_file_contents(filename)
         except Exception as excep:
-            YLogger.exception(self, excep)
-            YLogger.error(self, "Failed to load file contents for file [%s]", filename)
+            YLogger.exception(self, "Failed to load file contents for file [%s]"%filename, excep)
 
         return collection
 

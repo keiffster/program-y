@@ -204,7 +204,7 @@ class Brain(object):
             YLogger.info(self, "Brain load took a total of %.2f sec", diff.total_seconds())
             return False   # Tell caller, load succeeded and skip aiml load
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Failed to load binary file", excep)
             if configuration.binaries.load_aiml_on_binary_fail is True:
                 return True   # Tell caller, load failed and to load aiml directly
             else:
@@ -368,7 +368,7 @@ class Brain(object):
                             configuration.security.authentication.classname)
                         self._authentication = classobject(configuration.security.authentication)
                     except Exception as excep:
-                        YLogger.exception(self, excep)
+                        YLogger.exception(self, "Failed to load security services", excep)
             else:
                 YLogger.debug(self, "No authentication configuration defined")
 
@@ -379,7 +379,7 @@ class Brain(object):
                             configuration.security.authorisation.classname)
                         self._authorisation = classobject(configuration.security.authorisation)
                     except Exception as excep:
-                        YLogger.exception(self, excep)
+                        YLogger.exception(self, "Failed to instatiate authorisation class", excep)
             else:
                 YLogger.debug(self, "No authorisation configuration defined")
 
@@ -403,7 +403,7 @@ class Brain(object):
                     classobject = ClassLoader.instantiate_class(configuration.oob.default().classname)
                     self._default_oob = classobject()
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to load OOB Processor", excep)
 
             for oob_name in  configuration.oob.oobs():
                 try:
@@ -411,7 +411,7 @@ class Brain(object):
                     classobject = ClassLoader.instantiate_class(configuration.oob.oob(oob_name).classname)
                     self._oob[oob_name] = classobject()
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to load OOB", excep)
 
     def load_regex_templates(self, configuration):
         if configuration.files.regex_templates is not None:

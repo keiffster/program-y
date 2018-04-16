@@ -107,7 +107,7 @@ class LineBotClient(FlaskRestBotClient):
         try:
             self.handle_message_request(body, signature)
         except InvalidSignatureError as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Line error", excep)
             abort(500)
 
         return Response(status=200)
@@ -125,7 +125,7 @@ if __name__ == "__main__":
         try:
             return LINE_CLIENT.receive_message(request)
         except Exception as e:
-            YLogger.exception(None, e)
+            YLogger.exception(None, "Line error", e)
 
     LINE_CLIENT = LineBotClient()
     LINE_CLIENT.run(APP)

@@ -86,7 +86,7 @@ class TwitterBotClient(PollingBotClient):
             try:
                 self._process_direct_message_question(message.sender_id, message.text)
             except Exception as err:
-                YLogger.exception(self, err)
+                YLogger.exception(self, "Failed processing direct messages", err)
 
         if messages:
             last_message_id = messages[-1].id
@@ -184,7 +184,7 @@ class TwitterBotClient(PollingBotClient):
                 try:
                     self._process_status_question(status.user.id, status.text)
                 except Exception as err:
-                    YLogger.exception(self, err)
+                    YLogger.exception(self, "Failed processing statuses", err)
 
             last_status_id = status.id
 
@@ -205,7 +205,7 @@ class TwitterBotClient(PollingBotClient):
                         last_direct_message_id = int(idfile.readline().strip())
                         last_status_id = int(idfile.readline().strip())
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to get last message ids", excep)
 
         YLogger.debug(self, "Got Last Messaged ID: %s", last_direct_message_id)
         YLogger.debug(self, "Got Last Status ID: %s", last_status_id)
@@ -223,7 +223,7 @@ class TwitterBotClient(PollingBotClient):
                     idfile.write("%d\n"%last_status_id)
 
             except Exception as excep:
-                YLogger.exception(self, excep)
+                YLogger.exception(self, "Failed to store last message ids", excep)
 
     #############################################################################################
     # Execution
@@ -282,7 +282,7 @@ class TwitterBotClient(PollingBotClient):
             self.sleep(rate_limit_sleep)
 
         except Exception as excep:
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Poll and answer error", excep)
 
         return running
 

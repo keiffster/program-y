@@ -61,6 +61,6 @@ class ClientAdminExtension(Extension):
                             return "Brain dumped, see config for location"
 
         except Exception as e:
-            YLogger.exception(client_context, e)
+            YLogger.exception(client_context, "Failed to execute client admin extension", e)
 
         return "Client Admin Error"

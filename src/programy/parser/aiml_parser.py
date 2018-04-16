@@ -43,8 +43,7 @@ class AIMLLoader(FileFinder):
         try:
             return self._aiml_parser.parse_from_file(filename)
         except Exception as excep:
-            YLogger.exception(self, "Failed to load contents of file from [%s]", filename)
-            YLogger.exception(self, excep)
+            YLogger.exception(self, "Failed to load contents of file from [%s]"%filename, excep)
 
 
 class AIMLParser(object):
@@ -221,8 +220,7 @@ class AIMLParser(object):
             YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
 
         except Exception as excep:
-            YLogger.exception(self, excep)
-            YLogger.error(self, "Failed to load contents of AIML file from [%s] - [%s]", filename, excep)
+            YLogger.exception(self, "Failed to load contents of AIML file from [%s]"%filename, excep)
 
 
     def parse_from_text(self, text):

@@ -53,7 +53,7 @@ class PollingBotClient(BotClient):
                 raise Exception("Connection failed....")
 
         except Exception as e:
-            YLogger.exception(self, e)
+            YLogger.exception(self, "Polling run error", e)
 
         finally:
             self.disconnect()

@@ -126,7 +126,7 @@ class Bot(object):
                     spell_class = ClassLoader.instantiate_class(self.configuration.spelling.classname)
                     self._spell_checker = spell_class(self.configuration.spelling)
                 except Exception as excep:
-                    YLogger.exception(self, excep)
+                    YLogger.exception(self, "Failed to initiate spellcheker", excep)
             else:
                 YLogger.warning(self, "No configuration setting for spelling checker!")
 

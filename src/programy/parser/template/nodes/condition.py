@@ -414,7 +414,7 @@ class TemplateConditionNode(TemplateConditionVariable):
             return resolved
 
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve type1 condition", excep)
             return ""
 
     def resolve_type2_condition(self, client_context):
@@ -448,7 +448,7 @@ class TemplateConditionNode(TemplateConditionVariable):
             return resolved
 
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve type2 condition", excep)
             return ""
 
     def resolve_type3_condition(self, client_context):
@@ -482,5 +482,5 @@ class TemplateConditionNode(TemplateConditionVariable):
             return resolved
 
         except Exception as excep:
-            YLogger.exception(client_context, excep)
+            YLogger.exception(client_context, "Failed to resolve type3 condition", excep)
             return ""

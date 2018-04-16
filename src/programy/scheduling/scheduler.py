@@ -243,7 +243,7 @@ class ProgramyScheduler(object):
                 YLogger.error(None, "Unknown APSchedulerEvent! %s", str(event))
 
         except Exception as e:
-            YLogger.exception(None, "APScheduler Listener Error: %s", e)
+            YLogger.exception(None, "APScheduler Listener Error", e)
 
     #################################################################################################################
     # Admin/Debug Functions

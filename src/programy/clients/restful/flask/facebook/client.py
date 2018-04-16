@@ -150,25 +150,24 @@ class FacebookBotClient(FlaskRestBotClient):
                 message_text = self.get_message_text(message)
                 # We have been send a text message, we can respond
                 if message_text is not None:
-                    YLogger.debug("Facebook sent message: [%s]", message_text)
+                    YLogger.debug(client_context, "Facebook sent message: [%s]", message_text)
                     response_text = self.ask_question(client_context, message_text)
 
                 # else if user sends us a GIF, photo,video, or any other non-text item
                 elif self.has_attachements(message):
-                    YLogger.error("Facebook client cannot handle attachments at this time")
+                    YLogger.error(client_context, "Facebook client cannot handle attachments at this time")
                     response_text = "Sorry, I cannot handle attachements right now!"
 
                 # otherwise its a general error
                 else:
-                    YLogger.error("Facebook general error handling message")
+                    YLogger.error(client_context, "Facebook general error handling message")
                     response_text = "Sorry, I do not understand you!"
 
-                YLogger.debug("Facebook message response: [%s]", response_text)
+                YLogger.debug(client_context, "Facebook message response: [%s]", response_text)
                 self.render_response(client_context, response_text)
 
         except Exception as e:
-            import traceback
-            traceback.print_exc()
+            YLogger.exception("Error handling facebook message", e)
 
     def handle_postback(self, message):
 
@@ -207,7 +206,7 @@ if __name__ == "__main__":
         try:
             return FACEBOOK_CLIENT.receive_message(request)
         except Exception as e:
-            YLogger.exception(None, e)
+            YLogger.exception(None, "Facebook Error", e)
 
     FACEBOOK_CLIENT = FacebookBotClient()
     FACEBOOK_CLIENT.run(APP)

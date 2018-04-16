@@ -236,7 +236,7 @@ class BotClient(ResponseLogger):
                 clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
                 return clazz(self)
         except Exception as e:
-            YLogger.exception("Failed to load config specified renderer", e)
+            YLogger.exception(None, "Failed to load config specified renderer", e)
 
         return self.get_default_renderer()
 

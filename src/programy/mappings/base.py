@@ -216,8 +216,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         alreadys.append(pair[1])
 
             except Exception as excep:
-                YLogger.error(self, "Invalid regular expression [%s]", str(pair[0]))
-                YLogger.exception(self, excep)
+                YLogger.exception(self, "Invalid regular expression [%s]"%str(pair[0]), excep)
 
         return re.sub(' +', ' ', replacable.strip())
 
