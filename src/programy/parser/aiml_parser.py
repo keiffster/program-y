@@ -222,7 +222,6 @@ class AIMLParser(object):
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of AIML file from [%s]"%filename, excep)
 
-
     def parse_from_text(self, text):
         """
          Parse an AIML text version of an aiml file and return all the cateogeries found in the file
