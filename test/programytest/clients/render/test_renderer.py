@@ -13,75 +13,69 @@ class MockRichMediaRenderer(RichMediaRenderer):
         self._text = text
         return text
 
-    def handle_url_button(self, userid, text, url):
+    def handle_url_button(self, userid, button):
         self._userid = userid
-        self._text = text
-        self._url = url
-        return text
+        self._button = button
+        return None
 
-    def handle_postback_button(self, userid, text, postback):
+    def handle_postback_button(self, userid, button):
         self._userid = userid
-        self._text = text
-        self._postback = postback
-        return text
+        self._button = button
+        return None
 
-    def handle_link(self, userid, text, url):
+    def handle_link(self, userid, link):
         self._userid = userid
-        self._text = text
-        self._url = url
-        return text
+        self._link = link
+        return None
 
-    def handle_image(self, userid, url):
-        self._userid = userid
-        self._url = url
-        return url
-
-    def handle_video(self, userid, url):
-        self._userid = userid
-        self._url = url
-        return url
-
-    def handle_card(self, userid, image, title, subtitle, buttons):
+    def handle_image(self, userid, image):
         self._userid = userid
         self._image = image
-        self._title = title
-        self._subtitle = subtitle
-        self._buttons = buttons
-        return "image"
+        return None
 
-    def handle_carousel(self, userid, cards):
+    def handle_video(self, userid, video):
         self._userid = userid
-        self._cards = cards
-        return "carousel"
+        self._video = video
+        return None
 
-    def handle_reply(self, userid, text, postback):
+    def handle_card(self, userid, card):
         self._userid = userid
-        self._text = text
-        self._postback = postback
-        return text
+        self._card = card
+        return None
 
-    def handle_delay(self, userid, seconds):
+    def handle_carousel(self, userid, carousel):
         self._userid = userid
-        self._seconds = seconds
-        return seconds
+        self._carousel = carousel
+        return None
+
+    def handle_reply(self, userid, reply):
+        self._userid = userid
+        self._reply = reply
+        return None
+
+    def handle_delay(self, userid, delay):
+        self._userid = userid
+        self._delay = delay
+        return None
 
     def handle_split(self, userid):
         self._userid = userid
         return "split"
 
-    def handle_list(self, userid, items):
+    def handle_list(self, userid, list):
         self._userid = userid
-        self._items = items
-        return items
+        self._list = list
+        return None
 
     def handle_ordered_list(self, userid, items):
         self._userid = userid
-        self._items = items
-        return items
+        self._list = list
+        return None
 
     def handle_location(self, userid):
         self._userid = userid
-        return "location"
+        return None
+
 
 class RichMediaRendererTests(unittest.TestCase):
 
@@ -93,117 +87,217 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer.render("testuser", "Hello world")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello world")
+        self.assertIsNotNone(renderer._text)
+        self.assertEquals("text", renderer._text['type'])
+        self.assertEquals("Hello world", renderer._text['text'])
+
+    def test_xml_html(self):
+        mock_config = unittest.mock.Mock()
+        renderer = MockRichMediaRenderer(mock_config)
+        self.assertIsNotNone(renderer)
+
+        renderer.render("testuser", """
+            <ul>
+                <li>item1</li>
+                <li>item2</li>
+            </ul>""")
+
+        self.assertEquals(renderer._userid, "testuser")
+        self.assertIsNotNone(renderer._text)
+        self.assertEquals("text", renderer._text['type'])
+        self.assertEquals("<ul>\n<li>item1</li>\n<li>item2</li>\n</ul>", renderer._text['text'])
 
     def test_url_button(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
+        renderer.render("testuser", """
+            <button>
+                <text>Hello</text>
+                <url>http://click.me</url>
+            </button>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello")
-        self.assertEquals(renderer._url, "http://click.me")
+        self.assertIsNotNone(renderer._button)
+        self.assertEquals("button", renderer._button['type'])
+        self.assertEquals(renderer._button['text'], "Hello")
+        self.assertEquals(renderer._button['url'], "http://click.me")
 
     def test_postback_button(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<button><text>Hello</text><postback>HELLO</url></postback></button>")
+        renderer.render("testuser", """
+            <button>
+                <text>Hello</text>
+                <postback>HELLO</url></postback>
+            </button>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello")
-        self.assertEquals(renderer._postback, "HELLO")
+        self.assertIsNotNone(renderer._button)
+        self.assertEquals("button", renderer._button['type'])
+        self.assertEquals(renderer._button['text'], "Hello")
+        self.assertEquals(renderer._button['postback'], "HELLO")
 
     def test_link(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
+        renderer.render("testuser", """
+            <link>
+                <text>Hello</text>
+                <url>http://click.me</url>
+            </link>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello")
-        self.assertEquals(renderer._url, "http://click.me")
+        self.assertIsNotNone(renderer._link)
+        self.assertEquals("link", renderer._link['type'])
+        self.assertEquals(renderer._link['text'], "Hello")
+        self.assertEquals(renderer._link['url'], "http://click.me")
 
     def test_image(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<image>http://servusai.com/aiml.png</image>")
+        renderer.render("testuser", """
+            <image>
+                http://servusai.com/aiml.png
+            </image>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._url, "http://servusai.com/aiml.png")
+        self.assertIsNotNone(renderer._image)
+        self.assertEquals("image", renderer._image['type'])
+        self.assertEquals(renderer._image['url'], "http://servusai.com/aiml.png")
 
     def test_video(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<video>http://servusai.com/aiml.mov</video>")
+        renderer.render("testuser", """
+            <video>
+                http://servusai.com/aiml.mov
+            </video>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._url, "http://servusai.com/aiml.mov")
+        self.assertIsNotNone(renderer._video)
+        self.assertEquals("video", renderer._video['type'])
+        self.assertEquals(renderer._video['url'], "http://servusai.com/aiml.mov")
 
     def test_card(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
+        renderer.render("testuser", """
+            <card>
+                <image>http://servusai.com/aiml.png</image>
+                <title>Servusai</title>
+                <subtitle>Home of ProgramY</subtitle>
+                <button>
+                    <text>Hello</text>
+                    <url>http://click.me</url>
+                </button>
+            </card>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._image, "http://servusai.com/aiml.png")
-        self.assertEquals(renderer._title, "Servusai")
-        self.assertEquals(renderer._subtitle, "Home of ProgramY")
-        self.assertEquals(len(renderer._buttons), 1)
-        self.assertEquals(renderer._buttons[0], ("Hello", "http://click.me", None))
+        self.assertIsNotNone(renderer._card)
+        self.assertEquals("card", renderer._card['type'])
+        self.assertEquals(renderer._card['image'], "http://servusai.com/aiml.png")
+        self.assertEquals(renderer._card['title'], "Servusai")
+        self.assertEquals(renderer._card['subtitle'], "Home of ProgramY")
+        self.assertEquals(len(renderer._card['buttons']), 1)
+
+        button1 = renderer._card['buttons'][0]
+        self.assertEquals("button", button1['type'])
+        self.assertEquals(button1['text'], "Hello")
+        self.assertEquals(button1['url'], "http://click.me")
 
     def test_carousel(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
+        renderer.render("testuser", """
+            <carousel>
+                <card>
+                    <image>http://servusai.com/aiml.png</image>
+                    <title>Servusai</title>
+                    <subtitle>Home of ProgramY</subtitle>
+                    <button>
+                        <text>Hello</text>
+                        <url>http://click.me</url>
+                    </button>
+                </card>
+            </carousel>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(len(renderer._cards), 1)
-        self.assertEquals(renderer._cards[0], ('http://servusai.com/aiml.png', 'Servusai', 'Home of ProgramY', [('Hello', 'http://click.me', None)]))
+        self.assertIsNotNone(renderer._carousel)
+        self.assertEquals("carousel", renderer._carousel['type'])
+        self.assertEquals(1, len(renderer._carousel['cards']))
+
+        card1 = renderer._carousel['cards'][0]
+        self.assertEquals(card1['image'], "http://servusai.com/aiml.png")
+        self.assertEquals(card1['title'], "Servusai")
+        self.assertEquals(card1['subtitle'], "Home of ProgramY")
+        self.assertEquals(len(card1['buttons']), 1)
+
+        button1 = card1['buttons'][0]
+        self.assertEquals("button", button1['type'])
+        self.assertEquals(button1['text'], "Hello")
+        self.assertEquals(button1['url'], "http://click.me")
 
     def test_reply_with_postback(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<reply><text>Hello</text><postback>HELLO</url></postback></reply>")
+        renderer.render("testuser", """
+            <reply>
+                <text>Hello</text>
+                <postback>HELLO</postback>
+            </reply>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello")
-        self.assertEquals(renderer._postback, "HELLO")
+        self.assertIsNotNone(renderer._reply)
+        self.assertEquals("reply", renderer._reply['type'])
+        self.assertEquals(renderer._reply['text'], "Hello")
+        self.assertEquals(renderer._reply['postback'], "HELLO")
 
     def test_reply_without_postback(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<reply><text>Hello</text></reply>")
+        renderer.render("testuser", """
+            <reply>
+                <text>Hello</text>
+            </reply>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "Hello")
-        self.assertIsNone(renderer._postback)
+        self.assertIsNotNone(renderer._reply)
+        self.assertEquals("reply", renderer._reply['type'])
+        self.assertEquals(renderer._reply['text'], "Hello")
+        self.assertIsNone(renderer._reply['postback'])
 
     def test_delay(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<delay><seconds>10</seconds></delay>")
+        renderer.render("testuser", """
+            <delay>
+                <seconds>10</seconds>
+            </delay>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._seconds, "10")
+        self.assertIsNotNone(renderer._delay)
+        self.assertEquals("delay", renderer._delay['type'])
+        self.assertEquals(renderer._delay['seconds'], "10")
 
     def test_split(self):
         mock_config = unittest.mock.Mock()
@@ -214,18 +308,29 @@ class RichMediaRendererTests(unittest.TestCase):
 
         self.assertEquals(renderer._userid, "testuser")
 
-    def test_list(self):
+    def test_list_with_text_only(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<list><item>Item1</item><item>Item2</item></list>")
+        renderer.render("testuser", """
+            <list>
+                <item>Item1</item>
+                <item>Item2</item>
+            </list>""")
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertIsNotNone(renderer._items)
-        self.assertEquals(len(renderer._items), 2)
-        self.assertEquals(renderer._items[0], "Item1")
-        self.assertEquals(renderer._items[1], "Item2")
+        self.assertIsNotNone(renderer._list)
+        self.assertEquals("list", renderer._list['type'])
+        self.assertEquals(2, len(renderer._list['items']))
+
+        item1 = renderer._list['items'][0]
+        self.assertEquals("text", item1['type'])
+        self.assertEquals("Item1", item1['text'])
+
+        item2 = renderer._list['items'][1]
+        self.assertEquals("text", item2['type'])
+        self.assertEquals("Item2", item2['text'])
 
     def test_list_with_nested_rcs(self):
         mock_config = unittest.mock.Mock()
@@ -233,37 +338,60 @@ class RichMediaRendererTests(unittest.TestCase):
         self.assertIsNotNone(renderer)
 
         renderer.render("testuser", """
-        <list>
-            <item>
-                <list>
-                    <item>Item1.1</item>
-                    <item>Item1.2</item>
-                </list>
-            </item>
-            <item>
-                Item2
-            </item>
-        </list>
-        """)
+            <list>
+                <item>
+                    <list>
+                        <item>Item1.1</item>
+                        <item>Item1.2</item>
+                    </list>
+                </item>
+                <item>
+                    Item2
+                </item>
+            </list>
+            """)
 
         self.assertEquals(renderer._userid, "testuser")
-        self.assertIsNotNone(renderer._items)
-        self.assertEquals(len(renderer._items), 2)
-        self.assertEquals(renderer._items[0], ['Item1.1', 'Item1.2'])
-        self.assertEquals(renderer._items[1], "Item2")
+        self.assertIsNotNone(renderer._list)
+        self.assertEquals("list", renderer._list['type'])
+        self.assertEquals(2, len(renderer._list['items']))
+
+        item1 = renderer._list['items'][0]
+        self.assertEquals("list", item1['type'])
+        self.assertEquals(2, len(item1['items']))
+        item1_1 = item1['items'][0]
+        self.assertEquals("text", item1_1['type'])
+        self.assertEquals("Item1.1", item1_1['text'])
+        item1_2 = item1['items'][1]
+        self.assertEquals("text", item1_2['type'])
+        self.assertEquals("Item1.2", item1_2['text'])
+
+        item2 = renderer._list['items'][1]
+        self.assertEquals("text", item2['type'])
+        self.assertEquals("Item2", item2['text'])
 
     def test_olist(self):
         mock_config = unittest.mock.Mock()
         renderer = MockRichMediaRenderer(mock_config)
         self.assertIsNotNone(renderer)
 
-        renderer.render("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
+        renderer.render("testuser", """
+             <list>
+                <item>Item1</item>
+                <item>Item2</item>
+            </list>""")
 
-        self.assertEquals(renderer._userid, "testuser")
-        self.assertIsNotNone(renderer._items)
-        self.assertEquals(len(renderer._items), 2)
-        self.assertEquals(renderer._items[0], "Item1")
-        self.assertEquals(renderer._items[1], "Item2")
+        self.assertIsNotNone(renderer._list)
+        self.assertEquals("list", renderer._list['type'])
+        self.assertEquals(2, len(renderer._list['items']))
+
+        item1 = renderer._list['items'][0]
+        self.assertEquals("text", item1['type'])
+        self.assertEquals("Item1", item1['text'])
+
+        item2 = renderer._list['items'][1]
+        self.assertEquals("text", item2['type'])
+        self.assertEquals("Item2", item2['text'])
 
     def test_location(self):
         mock_config = unittest.mock.Mock()
@@ -273,14 +401,4 @@ class RichMediaRendererTests(unittest.TestCase):
         renderer.render("testuser", "<location />")
 
         self.assertEquals(renderer._userid, "testuser")
-
-    def test_xml_html(self):
-        mock_config = unittest.mock.Mock()
-        renderer = MockRichMediaRenderer(mock_config)
-        self.assertIsNotNone(renderer)
-
-        renderer.render("testuser", "<ul><li>item1</li><li>item2</li></ul>")
-
-        self.assertEquals(renderer._userid, "testuser")
-        self.assertEquals(renderer._text, "<ul><li>item1</li><li>item2</li></ul>")
 

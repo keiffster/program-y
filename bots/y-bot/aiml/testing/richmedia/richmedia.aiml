@@ -140,7 +140,7 @@
         </template>
     </category>
 
-    <category>
+     <category>
         <pattern>RCS SHOW DELAY</pattern>
         <template>
             <delay>
@@ -153,10 +153,24 @@
         <pattern>RCS SHOW LIST</pattern>
         <template>
             <list>
-                <item>Item 1</item>
-                <item>Item 2</item>
-                <item>Item 3</item>
-                <item>Item 4</item>
+                <item>
+                    <button>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                </item>
+                <item>
+                    <button>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                </item>
+                <item>
+                    <button>
+                        <text>Servusai</text>
+                        <url>http://www.servusai.com</url>
+                    </button>
+                </item>
             </list>
         </template>
     </category>
@@ -176,6 +190,13 @@
     <category>
         <pattern>RCS SHOW LOCATION</pattern>
         <template><location /></template>
+    </category>
+
+    <category>
+        <pattern>RCS XLATLONG LOCATION XLAT * XLONG *</pattern>
+        <template>
+            Thanks for that, I'll remember it
+        </template>
     </category>
 
 </aiml>

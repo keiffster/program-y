@@ -80,12 +80,7 @@ class FlaskRestBotClient(RestBotClient):
                       debug=self.configuration.client_configuration.debug)
 
     def dump_request(self, request):
-        if request.method == 'POST':
-            YLogger.debug(self, str(request))
-        elif request.method == 'GET':
-            YLogger.debug(self, str(request))
-        else:
-            YLogger.debug(self, "restsclient.dump_request(), only GET and POST supported!")
+        YLogger.debug(self, str(request))
 
 if __name__ == '__main__':
 

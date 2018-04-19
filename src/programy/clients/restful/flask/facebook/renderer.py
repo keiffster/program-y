@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 import json
+import time
 
 from programy.utils.logging.ylogger import YLogger
 
@@ -62,9 +63,7 @@ class FacebookRenderer(RichMediaRenderer):
                             {
                                 "type": "web_url",
                                 "url": url,
-                                "title": text,
-                                "webview_height_ratio": "full",
-                                "messenger_extensions": "false"
+                                "title": text
                             }
                         ]
                     }
@@ -115,9 +114,7 @@ class FacebookRenderer(RichMediaRenderer):
                             {
                                 "type": "web_url",
                                 "title": text,
-                                "url": url,
-                                "webview_height_ratio": "full",
-                                "messenger_extensions": "false"
+                                "url": url
                             }
                         ]
                     }
@@ -269,27 +266,78 @@ class FacebookRenderer(RichMediaRenderer):
 
     def handle_reply(self, client_context, text, postback):
         print("Handling reply...")
-        payload = {}
-        return self.send_payload(payload)
+        if postback is None:
+            return self.handle_postback_button(client_context, text, text)
+        else:
+            return self.handle_postback_button(client_context, text, postback)
 
     def handle_delay(self, client_context, seconds):
         print("Handling delay...")
-        payload = {}
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "sender_action": "typing_on"
+        }
+        result = self.send_payload(payload)
+        time.sleep(int(seconds))
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "sender_action": "typing_off"
+        }
         return self.send_payload(payload)
 
     def handle_split(self, client_context):
         print("Handling split...")
-        payload = {}
-        return self.send_payload(payload)
 
     def handle_list(self, client_context, items):
         print("Handling list...")
-        payload = {}
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "list",
+                        "top_element_style": "compact",
+                        "elements": [
+                        ]
+                    }
+                }
+            }
+        }
+
+        for item in items:
+            print(item)
+
         return self.send_payload(payload)
 
     def handle_ordered_list(self, client_context, items):
         print("Handling ordered...")
-        payload = {}
+        payload = {
+            "recipient": {
+                "id": client_context.userid
+            },
+            "message": {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "list",
+                        "top_element_style": "compact",
+                        "elements": [
+                        ]
+                    }
+                }
+            }
+        }
+
+        for item in items:
+            print(item)
+
         return self.send_payload(payload)
 
     def handle_location(self, client_context):
