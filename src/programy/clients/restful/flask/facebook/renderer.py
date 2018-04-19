@@ -172,6 +172,30 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
+    def create_card_payload(self, card):
+        payload = {
+                    "title": card['title'],
+                    "image_url": card['image'],
+                    "subtitle": card['subtitle'],
+                    "buttons": []
+                }
+
+        for button in card['buttons']:
+            if button['url'] is not None:
+                payload['buttons'].append({
+                                "type": "web_url",
+                                "title": button['text'],
+                                "url": button['url']
+                            })
+            else:
+                payload['buttons'].append({
+                                "type": "web_url",
+                                "title": button['text'],
+                                "postback": button['postback']
+                            })
+
+        return payload
+
     def handle_card(self, client_context, card):
         print("Handling card...")
 
@@ -188,32 +212,12 @@ class FacebookRenderer(RichMediaRenderer):
                     "payload": {
                         "template_type": "generic",
                         "elements": [
-                            {
-                                "title": card['title'],
-                                "image_url": card['image'],
-                                "subtitle": card['subtitle'],
-                                "buttons": []
-                            }
                         ]
                     }
                 }
             }
         }
-
-        for button in card['buttons']:
-            if button['url'] is not None:
-                payload['message']['attachment']['payload']['elements'][0]['buttons'].append({
-                                "type": "web_url",
-                                "title": button['text'],
-                                "url": button['url']
-                            })
-            else:
-                payload['message']['attachment']['payload']['elements'][0]['buttons'].append({
-                                "type": "web_url",
-                                "title": button['text'],
-                                "postback": button['postback']
-                            })
-
+        payload['message']['attachment']['payload']['elements'].append(self.create_card_payload(card))
         return self.send_payload(payload)
 
     def handle_carousel(self, client_context, carousel):
@@ -292,6 +296,11 @@ class FacebookRenderer(RichMediaRenderer):
     def handle_split(self, client_context, split):
         print("Handling split...")
 
+    def convert_to_element(self, item):
+        if item["type"] == 'card':
+            return self.create_card_payload(item)
+        return None
+
     def handle_list(self, client_context, list):
         print("Handling list...")
         payload = {
@@ -312,8 +321,9 @@ class FacebookRenderer(RichMediaRenderer):
         }
 
         for item in list['items']:
-            print(item)
-            payload["message"]["attachment"]["payload"]["elements"].append(item)
+            element = self.convert_to_element(item)
+            if element is not None:
+                payload["message"]["attachment"]["payload"]["elements"].append(element)
 
         return self.send_payload(payload)
 
@@ -337,8 +347,9 @@ class FacebookRenderer(RichMediaRenderer):
         }
 
         for item in list['items']:
-            print(item)
-            payload["message"]["attachment"]["payload"]["elements"].append(item)
+            element = self.convert_to_element(item)
+            if element is not None:
+                payload["message"]["attachment"]["payload"]["elements"].append(element)
 
         return self.send_payload(payload)
 

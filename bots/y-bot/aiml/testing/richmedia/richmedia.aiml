@@ -154,22 +154,26 @@
         <template>
             <list>
                 <item>
-                    <button>
-                        <text>Servusai</text>
-                        <url>http://www.servusai.com</url>
-                    </button>
+                    <card>
+                        <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
+                        <title>Servusai</title>
+                        <subtitle>The home of Program Y</subtitle>
+                        <button>
+                            <text>Servusai</text>
+                            <url>http://www.servusai.com</url>
+                        </button>
+                    </card>
                 </item>
                 <item>
-                    <button>
-                        <text>Servusai</text>
-                        <url>http://www.servusai.com</url>
-                    </button>
-                </item>
-                <item>
-                    <button>
-                        <text>Servusai</text>
-                        <url>http://www.servusai.com</url>
-                    </button>
+                    <card>
+                        <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
+                        <title>Servusai</title>
+                        <subtitle>The home of Program Y</subtitle>
+                        <button>
+                            <text>AIML</text>
+                            <url>http://aiml.foundation</url>
+                        </button>
+                    </card>
                 </item>
             </list>
         </template>
@@ -179,10 +183,28 @@
         <pattern>RCS SHOW ORDERED LIST</pattern>
         <template>
             <olist>
-                <item>Item 1</item>
-                <item>Item 2</item>
-                <item>Item 3</item>
-                <item>Item 4</item>
+               <item>
+                    <card>
+                        <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
+                        <title>Servusai</title>
+                        <subtitle>The home of Program Y</subtitle>
+                        <button>
+                            <text>Servusai</text>
+                            <url>http://www.servusai.com</url>
+                        </button>
+                    </card>
+                </item>
+                <item>
+                    <card>
+                        <image>https://www.facebook.com/147520292603297/photos/148487795839880/</image>
+                        <title>Servusai</title>
+                        <subtitle>The home of Program Y</subtitle>
+                        <button>
+                            <text>AIML</text>
+                            <url>http://aiml.foundation</url>
+                        </button>
+                    </card>
+                </item>
             </olist>
         </template>
     </category>

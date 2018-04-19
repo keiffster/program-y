@@ -289,6 +289,17 @@ class FacebookRendererTests(unittest.TestCase):
         self.assertIsNotNone(payload['elements'])
         elements = payload['elements']
         self.assertEquals(1, len(elements))
+        element1 = elements[0]
+        self.assertEquals("Servusai", element1['title'])
+        self.assertEquals("The home of Program-Y", element1['subtitle'])
+        self.assertEquals("https://www.servusai.com/test.png", element1['image_url'])
+        self.assertEquals(1, len(element1['buttons']))
+        button1 = element1['buttons'][0]
+        self.assertEquals("Servusai", button1['title'])
+        self.assertEquals("web_url", button1['type'])
+        self.assertEquals("https://www.servusai.com", button1['url'])
+
+
 
     def test_handle_ordered_list(self):
         list = {
