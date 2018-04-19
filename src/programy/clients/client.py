@@ -249,7 +249,7 @@ class BotClient(ResponseLogger):
     def render_response(self, client_context, response):
         raise NotImplementedError("You must override this and implement the logic to process the response by rendering using a RCS renderer")
 
-    def process_response(self, response):
+    def process_response(self, client_context, response):
         raise NotImplementedError("You must override this and implement the logic to display the response to the user")
 
     def run(self):

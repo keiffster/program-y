@@ -243,7 +243,7 @@ class RichMediaRenderer(object):
         return self.handle_delay(client_context, delay)
 
     def parse_split(self, client_context, tag):
-        return self.handle_split(client_context)
+        return self.handle_split(client_context, {"type": "split"})
 
     def extract_item_info(self, tag):
 
@@ -328,7 +328,7 @@ class RichMediaRenderer(object):
         return self.handle_ordered_list(client_context, list)
 
     def parse_location(self, client_context, tag):
-        return self.handle_location(client_context)
+        return self.handle_location(client_context, {"type": "location"})
 
     ######################################################################################################
     # You need to implement all of these and decide how to display the various rich media elements
@@ -363,7 +363,7 @@ class RichMediaRenderer(object):
     def handle_delay(self, client_context, delay):
         return None
 
-    def handle_split(self, client_context):
+    def handle_split(self, client_contex, split):
         return None
 
     def handle_list(self, client_context, list):
@@ -372,5 +372,5 @@ class RichMediaRenderer(object):
     def handle_ordered_list(self, client_context, list):
         return None
 
-    def handle_location(self, client_context):
+    def handle_location(self, client_context, location):
         return None

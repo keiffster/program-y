@@ -11,6 +11,7 @@ class MockConsoleBotClient(object):
     def process_response(self, client_context, response, output_func=print):
         self._response = response
 
+
 class TextRendererTests(unittest.TestCase):
 
     def test_text_only(self):
@@ -133,7 +134,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<split />")
 
-        self.assertIsNone(mock_console._response)
+        self.assertEquals(mock_console._response, "\n")
 
     def test_list(self):
         mock_console = MockConsoleBotClient()

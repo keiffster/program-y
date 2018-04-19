@@ -58,9 +58,10 @@ class MockRichMediaRenderer(RichMediaRenderer):
         self._delay = delay
         return None
 
-    def handle_split(self, userid):
+    def handle_split(self, userid, split):
         self._userid = userid
-        return "split"
+        self._split = split
+        return None
 
     def handle_list(self, userid, list):
         self._userid = userid
@@ -72,8 +73,9 @@ class MockRichMediaRenderer(RichMediaRenderer):
         self._list = list
         return None
 
-    def handle_location(self, userid):
+    def handle_location(self, userid, location):
         self._userid = userid
+        self._location = location
         return None
 
 

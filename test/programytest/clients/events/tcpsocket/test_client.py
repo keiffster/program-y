@@ -86,7 +86,7 @@ class SocketBotClientTests(unittest.TestCase):
         client = MockSocketBotClient(mock_socket, arguments)
         client.response = "Hello"
         client.wait_and_answer()
-        self.assertEquals('{"result": "OK", "answer": {"text": "Hello"}, "userid": "user1234"}', mock_socket._send)
+        self.assertEquals('{"result": "OK", "answer": {"type": "text", "text": "Hello"}, "userid": "user1234"}', mock_socket._send)
 
     def test_wait_and_answer_no_response(self):
         arguments = MockArgumentParser()

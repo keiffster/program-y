@@ -41,7 +41,7 @@ class MockFacebookBotClient(FacebookBotClient):
     def create_facebook_bot(self):
         return MockFacebookBot(self._access_token)
 
-class FacebookBotClientTests(unittest.TestCase):
+class Facebookclient_contextBotClientTests(unittest.TestCase):
 
     def test_facebook_client_init(self):
         arguments = MockArgumentParser()
@@ -143,10 +143,7 @@ class FacebookBotClientTests(unittest.TestCase):
         client = MockFacebookBotClient(arguments)
         client.test_question = "Hi there"
 
-        message = unittest.mock.Mock()
-        message.get.return_value = "hello"
-
-        request = {'entry': [{'messaging': [{'message': message, 'sender': {'id': 'user1'}}]}]}
+        request = {'entry': [{'messaging': [{'message': {"text": "Hello"}, 'sender': {'id': 'user1'}}]}]}
 
         client.process_facebook_request(request)
 
@@ -157,10 +154,7 @@ class FacebookBotClientTests(unittest.TestCase):
         client = MockFacebookBotClient(arguments)
         client.test_question = "Hi there"
 
-        message = unittest.mock.Mock()
-        message.get.return_value = "hello"
-
-        messaging = [{'message': message, 'sender': {'id': 'user1'}}]
+        messaging = [{'message': {"text": "Hello"}, 'sender': {'id': 'user1'}}]
 
         client.process_facebook_message(messaging)
 
@@ -171,10 +165,7 @@ class FacebookBotClientTests(unittest.TestCase):
         client = MockFacebookBotClient(arguments)
         client.test_question = "Hi there"
 
-        inner_message = unittest.mock.Mock()
-        inner_message.get.return_value = "hello"
-
-        message = {'message': inner_message, 'sender': {'id': 'user1'}}
+        message = {'message': {"text": "Hello"}, 'sender': {'id': 'user1'}}
 
         client.handle_message(message)
 

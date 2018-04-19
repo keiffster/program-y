@@ -25,115 +25,71 @@ class JSONRenderer(RichMediaRenderer):
         RichMediaRenderer.__init__(self, callback)
 
     def handle_text(self, client_context, text):
-        data = {"text": text}
         if self._client:
-            return self._client.process_response(client_context, data)
-        return data
+            return self._client.process_response(client_context, text)
+        return text
 
-    def handle_url_button(self, client_context, text, url):
-        data = {"button": {"text": text, "url": url}}
+    def handle_url_button(self, client_context, button):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, button)
+        return button
 
-    def handle_postback_button(self, client_context, text, postback):
-        data = {"button": {"text": text, "postback": postback}}
+    def handle_postback_button(self, client_context, button):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, button)
+        return button
 
-    def handle_link(self, client_context, text, url):
-        data = {"link": {"text": text, "url": url}}
+    def handle_link(self, client_context, link):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, link)
+        return link
 
-    def handle_image(self, client_context, url):
-        data = {"image": {"url": url}}
+    def handle_image(self, client_context, image):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, image)
+        return image
 
-    def handle_video(self, client_context, url):
-        data = {"video": {"url": url}}
+    def handle_video(self, client_context, video):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, video)
+        return video
 
-    def _format_card(self, client_context, image, title, subtitle, buttons):
-        data = {"card": {
-            "image": image, "title": title, "subtitle": subtitle, "buttons": []
-        }}
-        if buttons:
-            for button in buttons:
-                text = button[0]
-                url = button[1]
-                postback = button[2]
-                if url is not None:
-                    data['card']['buttons'].append({"button": {"text": text, "url": url}})
-                else:
-                    data['card']['buttons'].append({"button": {"text": text, "postback": postback}})
-        return data
-    
-    def handle_card(self, client_context, image, title, subtitle, buttons):
-        data = self._format_card(client_context, image, title, subtitle, buttons)
+    def handle_card(self, client_context, card):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, card)
+        return card
 
-    def handle_carousel(self, client_context, cards):
-        data = {"carousel": { "cards": [] }}
-        for card in cards:
-            image = card[0]
-            title = card[1]
-            subtitle = card[2]
-            buttons = card[3]
-            data['carousel']['cards'].append(self._format_card(client_context, image, title, subtitle, buttons))
+    def handle_carousel(self, client_context, carousel):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, carousel)
+        return carousel
 
-    def handle_reply(self, client_context, text, postback):
-        if postback is not None:
-            data = {"reply": { "text": text}}
-        else:
-            data = {"reply": { "text": text, "postback": postback}}
+    def handle_reply(self, client_context, reply):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, reply)
+        return reply
 
-    def handle_delay(self, client_context, seconds):
-        data = {"delay": { "seconds": seconds}}
+    def handle_delay(self, client_context, delay):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, delay)
+        return delay
 
-    def handle_split(self, client_context):
-        data = {"split": {}}
+    def handle_split(self, client_context, split):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, split)
+        return split
 
-    def handle_list(self, client_context, items):
-        data = {"list": { "items": []}}
-        for item in items:
-            data['list']['items'].append({"item": item})
+    def handle_list(self, client_context, list):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, list)
+        return list
 
-    def handle_ordered_list(self, client_context, items):
-        count = 1
-        data = {"olist": { "items": []}}
-        for item in items:
-            data['olist']['items'].append({"item": item, "pos": count})
-            count += 1
+    def handle_ordered_list(self, client_context, list):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, list)
+        return list
 
-    def handle_location(self, client_context):
-        data = {'location': {"xlat": "", "xlong": ""}}
+    def handle_location(self, client_context, location):
         if self._client:
-            self._client.process_response(client_context, data)
-        return data
+            self._client.process_response(client_context, location)
+        return location

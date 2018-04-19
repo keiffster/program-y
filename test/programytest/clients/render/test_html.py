@@ -137,7 +137,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<split />")
 
-        self.assertEquals(mock_console._response, "")
+        self.assertEquals(mock_console._response, "<br />")
 
     def test_list(self):
         mock_console = MockHtmlBotClient()

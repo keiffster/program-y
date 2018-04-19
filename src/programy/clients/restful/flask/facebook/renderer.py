@@ -42,12 +42,12 @@ class FacebookRenderer(RichMediaRenderer):
                 'id': client_context.userid
             },
             'message': {
-                'text': text
+                'text': text['text']
             }
         }
         return self.send_payload(payload)
 
-    def handle_url_button(self, client_context, text, url):
+    def handle_url_button(self, client_context, button):
         print("Handling url...")
         payload = {
             "recipient": {
@@ -58,12 +58,12 @@ class FacebookRenderer(RichMediaRenderer):
                     "type": "template",
                     "payload": {
                         "template_type": "button",
-                        "text": text,
+                        "text": button['text'],
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "url": url,
-                                "title": text
+                                "url": button['url'],
+                                "title": button['text']
                             }
                         ]
                     }
@@ -73,11 +73,10 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
-    def handle_postback_button(self, client_context, text, postback):
-        print("Handling postback button...")
-        payload = {
+    def create_postback_button(self, userid, text, postback):
+        return {
             "recipient": {
-                "id": client_context.userid
+                "id": userid
             },
             "message": {
                 "attachment": {
@@ -96,9 +95,13 @@ class FacebookRenderer(RichMediaRenderer):
                 }
             }
         }
+
+    def handle_postback_button(self, client_context, button):
+        print("Handling postback button...")
+        payload = self.create_postback_button(client_context.userid, button['text'], button['postback'])
         return self.send_payload(payload)
 
-    def handle_link(self, client_context, text, url):
+    def handle_link(self, client_context, link):
         print("Handling link...")
         payload = {
             "recipient": {
@@ -109,12 +112,12 @@ class FacebookRenderer(RichMediaRenderer):
                     "type": "template",
                     "payload": {
                         "template_type": "button",
-                        "text": text,
+                        "text": link['text'],
                         "buttons": [
                             {
                                 "type": "web_url",
-                                "title": text,
-                                "url": url
+                                "title": link['text'],
+                                "url": link['url']
                             }
                         ]
                     }
@@ -123,7 +126,7 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
-    def handle_image(self, client_context, url):
+    def handle_image(self, client_context, image):
         print("Handling image...")
         payload = {
             "recipient": {
@@ -137,7 +140,7 @@ class FacebookRenderer(RichMediaRenderer):
                         "elements": [
                             {
                                 "media_type": "image",
-                                "url": url
+                                "url": image['url']
                             }
                         ]
                     }
@@ -146,7 +149,7 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
-    def handle_video(self, client_context, url):
+    def handle_video(self, client_context, video):
         print("Handling video...")
         payload = {
             "recipient": {
@@ -160,7 +163,7 @@ class FacebookRenderer(RichMediaRenderer):
                         "elements": [
                             {
                                 "media_type": "video",
-                                "url": url
+                                "url": video['url']
                             }
                         ]
                     }
@@ -169,10 +172,10 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
-    def handle_card(self, client_context, image, title, subtitle, buttons):
+    def handle_card(self, client_context, card):
         print("Handling card...")
 
-        if len(buttons) > 3:
+        if len(card['buttons']) > 3:
             print("Warning more buttons than facebook allows for a card")
 
         payload = {
@@ -186,9 +189,9 @@ class FacebookRenderer(RichMediaRenderer):
                         "template_type": "generic",
                         "elements": [
                             {
-                                "title": title,
-                                "image_url": image,
-                                "subtitle": subtitle,
+                                "title": card['title'],
+                                "image_url": card['image'],
+                                "subtitle": card['subtitle'],
                                 "buttons": []
                             }
                         ]
@@ -197,25 +200,25 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for button in buttons:
-            if button[1] is not None:
+        for button in card['buttons']:
+            if button['url'] is not None:
                 payload['message']['attachment']['payload']['elements'][0]['buttons'].append({
                                 "type": "web_url",
-                                "title": button[0],
-                                "url": button[1]
+                                "title": button['text'],
+                                "url": button['url']
                             })
             else:
                 payload['message']['attachment']['payload']['elements'][0]['buttons'].append({
                                 "type": "web_url",
-                                "title": button[0],
-                                "url": button[2]
+                                "title": button['text'],
+                                "postback": button['postback']
                             })
 
         return self.send_payload(payload)
 
-    def handle_carousel(self, client_context, cards):
+    def handle_carousel(self, client_context, carousel):
         print("Handling carousel...")
-        if len(cards) > 10:
+        if len(carousel['cards']) > 10:
             print("Warning more cards than facebook allows for a carousel")
 
         payload = {
@@ -233,45 +236,42 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for card in cards:
-            image = card[0]
-            title = card[1]
-            subtitle = card[2]
-            buttons = card[3]
+        for card in carousel['cards']:
 
             element = {
-                "title": title,
-                "image_url": image,
-                "subtitle": subtitle,
+                "title": card['title'],
+                "image_url": card['image'],
+                "subtitle": card['subtitle'],
                 "buttons": []
             }
 
-            for button in  buttons:
-                if button[1] is not None:
+            for button in card['buttons']:
+                if button['url'] is not None:
                     element['buttons'].append({
                         "type": "web_url",
-                        "title": button[0],
-                        "url": button[1]
+                        "title": button['text'],
+                        "url": button['url']
                     })
                 else:
                     element['buttons'].append({
                         "type": "web_url",
-                        "title": button[0],
-                        "url": button[2]
+                        "title": button['text'],
+                        "postback": button['postback']
                     })
 
             payload['message']['attachment']['payload']['elements'].append(element)
 
         return self.send_payload(payload)
 
-    def handle_reply(self, client_context, text, postback):
+    def handle_reply(self, client_context, reply):
         print("Handling reply...")
-        if postback is None:
-            return self.handle_postback_button(client_context, text, text)
+        if reply['postback'] is None:
+            payload = self.create_postback_button(client_context.userid, reply['text'], reply['text'])
         else:
-            return self.handle_postback_button(client_context, text, postback)
+            payload = self.create_postback_button(client_context.userid, reply['text'], reply['postback'])
+        self.send_payload(payload)
 
-    def handle_delay(self, client_context, seconds):
+    def handle_delay(self, client_context, delay):
         print("Handling delay...")
         payload = {
             "recipient": {
@@ -280,7 +280,7 @@ class FacebookRenderer(RichMediaRenderer):
             "sender_action": "typing_on"
         }
         result = self.send_payload(payload)
-        time.sleep(int(seconds))
+        time.sleep(int(delay['seconds']))
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -289,10 +289,10 @@ class FacebookRenderer(RichMediaRenderer):
         }
         return self.send_payload(payload)
 
-    def handle_split(self, client_context):
+    def handle_split(self, client_context, split):
         print("Handling split...")
 
-    def handle_list(self, client_context, items):
+    def handle_list(self, client_context, list):
         print("Handling list...")
         payload = {
             "recipient": {
@@ -311,12 +311,13 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for item in items:
+        for item in list['items']:
             print(item)
+            payload["message"]["attachment"]["payload"]["elements"].append(item)
 
         return self.send_payload(payload)
 
-    def handle_ordered_list(self, client_context, items):
+    def handle_ordered_list(self, client_context, list):
         print("Handling ordered...")
         payload = {
             "recipient": {
@@ -335,12 +336,13 @@ class FacebookRenderer(RichMediaRenderer):
             }
         }
 
-        for item in items:
+        for item in list['items']:
             print(item)
+            payload["message"]["attachment"]["payload"]["elements"].append(item)
 
         return self.send_payload(payload)
 
-    def handle_location(self, client_context):
+    def handle_location(self, client_context, location):
         print("Handling location...")
         payload = {
             'recipient': {

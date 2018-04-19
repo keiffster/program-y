@@ -139,8 +139,8 @@ class SocketBotClient(EventBotClient):
         # Calls the renderer which handles RCS context, and then calls back to the client to show response
         self._renderer.render(client_context, response)
 
-    def process_response(self, client_context, str):
-        self._client_connection.send_response(client_context.userid, str)
+    def process_response(self, client_context, response):
+        self._client_connection.send_response(client_context.userid, response)
 
     def wait_and_answer(self):
         running = True
