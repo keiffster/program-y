@@ -91,7 +91,7 @@ Program-Y comes with a base set of grammars for various industry sectors, includ
 
 Using Program-Y
 ----------------
-Full documentation is available on 'Program Y Wiki <https://github.com/keiffster/program-y/wiki>'_
+Full documentation is available on `Program Y Wiki <https://github.com/keiffster/program-y/wiki>`_
 
 After installation from the Github repository you can chat with your Program Y by running one of the many bots found in the 
 \bot folder. These include
@@ -106,7 +106,7 @@ See the individual folders for unix and windows scripts required to run a bot.
 Tutorial
 ---------
 Once you have got the system installed and have run one or more of the bots, head over to the
-'Tutorial <https://github.com/keiffster/program-y/wiki/AIML-Tutorial>'_ on the Wiki for a full
+`Tutorial <https://github.com/keiffster/program-y/wiki/AIML-Tutorial>`_ on the Wiki for a full
 run down of everything possible in AIML
 
 
