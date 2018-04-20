@@ -1,8 +1,22 @@
 from setuptools import setup, find_packages
 from os import path
+import sys
+
+version = None
+if "--version" in sys.argv:
+    index = sys.argv.index('--version')
+    sys.argv.pop(index)
+    version = sys.argv[index]
+    sys.argv.pop(index)
+
+if version is None:
+    print("--version x.y.z missing from command line")
+    exit(0)
+
+download_url = "https://github.com/keiffster/program-y/%s.tar.gz"%version
 
 here = path.abspath(path.dirname(__file__))
-with open(path.join(here, '../README.md'), encoding='utf-8') as f:
+with open(path.join(here, '../README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
@@ -10,14 +24,13 @@ setup(
   packages=find_packages(),
   package_data={'': ['*.conf', '*.aiml']},
   include_package_data=True,
-  version = '2.0.1',
-  description = 'AIML 2.0.1 Framework and Platform',
+  version = version,
+  description = 'AIML Framework and Platform',
   long_description=long_description,
-  long_description_content_type='text/markdown',
   author = 'Keith Sterling',
   author_email = 'keiffster@gmail.com',
   url = 'https://github.com/keiffster/program-y.git',
-  download_url = 'https://github.com/keiffster/program-y/archive/programy-2.0.1.tar.gz',
+  download_url = download_url,
   keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai'],
   classifiers = [
       # How mature is this project? Common values are
