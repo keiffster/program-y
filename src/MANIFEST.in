@@ -1,1 +1,1 @@
-global-include *.py *.aiml *.conf ../README.md
+global-include *.py *.aiml *.conf *.txt *.rst

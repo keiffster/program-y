@@ -5,7 +5,7 @@ This release brings some important changes to the overall Program-Y platform and
 
 - Thread Safety across all processing
 - Multiple Bots per Client, useful to mix AIML and ML processing
-- Multiple Brains per Bot, useful to seperate grammars, including langauge specific
+- Multiple Brains per Bot, useful to separate grammars, including langauge specific
 - Wide variety of clients including
   - Console
   - Web
@@ -23,14 +23,13 @@ This release brings some important changes to the overall Program-Y platform and
 - Improved Logging which now includes more info about client, bot and brain
 - Support for AIML 2.x Rich Media
 - Support for Emojis
-- Natively support Pypi instalation
-- Asynchronous Scheduling of events, useful to carry out time dependent call backs, such as "remind me 7:00am to wake up" or
-"Set a timer for 20 minutes". The bot will then call back to your client asynchronously with the text or parsed grammar
+- Natively support Pypi installation
+- Asynchronous Scheduling of events
 
 Rich Media
 ----------
 Rich media is an exciting enhancement to AIML proposed by the [AIML Foundation](http://aiml.foundation) which adds a range
-of new capabilities to the AIML langauge to help in building engaging interfaces. Rich media introduces a number of new
+of new capabilities to the AIML language to help in building engaging interfaces. Rich media introduces a number of new
 template tags including
 - button
 - card
@@ -48,10 +47,10 @@ and more complex UI structures
 
 Introduction
 ------------
-Program Y is an AIML interpretor written in Python. It includes an entire Python 3 framework for building you own chat bots using
+Program Y is an AIML interpreter written in Python. It includes an entire Python 3 framework for building you own chat bots using
 Artificial Intelligence Markup Language, or AIML for short. 
 
-Programy-Y is fully cross plaform, running on 
+Program Y is fully cross platform, running on
 
 - Mac OSX
 - Linux
@@ -99,7 +98,7 @@ After installation from the Github repository you can chat with your Program Y b
 - Y-Bot - My own bot under development
 - Professor - A huge knowledge base of questions and answers
 - Alice2 - AIML 2 version of the famous Alice chat bot
-- Roise - An AIML base set of grammars for creating your own bot
+- Rosie - An AIML base set of grammars for creating your own bot
 
 See the individual folders for unix and windows scripts required to run a bot.
 

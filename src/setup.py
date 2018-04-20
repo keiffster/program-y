@@ -2,22 +2,19 @@ from setuptools import setup, find_packages
 from os import path
 import sys
 
+here = path.abspath(path.dirname(__file__))
+
 version = None
-if "--version" in sys.argv:
-    index = sys.argv.index('--version')
-    sys.argv.pop(index)
-    version = sys.argv[index]
-    sys.argv.pop(index)
+with open(path.join(here, 'version.txt'), encoding='utf-8') as f:
+    version = f.read()
 
 if version is None:
-    print("--version x.y.z missing from command line")
-    exit(0)
+    print("No version.txt found")
+
+with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+    long_description = f.read()
 
 download_url = "https://github.com/keiffster/program-y/%s.tar.gz"%version
-
-here = path.abspath(path.dirname(__file__))
-with open(path.join(here, '../README.rst'), encoding='utf-8') as f:
-    long_description = f.read()
 
 setup(
   name = 'programy',
