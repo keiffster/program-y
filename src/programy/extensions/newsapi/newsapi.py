@@ -23,7 +23,7 @@ from programy.extensions.base import Extension
 class NewsAPIExtension(Extension):
 
     def get_news_api_api(self, context):
-        return  NewsAPI(context.bot.license_keys)
+        return  NewsAPI(context.client.license_keys)
 
     def get_news(self, context, source, max_num, sort, reverse):
 

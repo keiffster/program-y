@@ -27,8 +27,8 @@ class WeatherExtension(Extension):
     def get_geo_locator(self, context):
         return GoogleMaps()
 
-    def get_met_office(self, bot):
-        return MetOffice(bot.license_keys)
+    def get_met_office(self, license_keys):
+        return MetOffice(license_keys)
 
     # WEATHER [OBSERVATION|FORECAST3|FORECAST24] LOCATION * WHEN *
 
@@ -70,7 +70,7 @@ class WeatherExtension(Extension):
         googlemaps = self.get_geo_locator(context)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        met_office = self.get_met_office(context.bot)
+        met_office = self.get_met_office(context.client.license_keys)
 
         observation = met_office.current_observation(latlng.latitude, latlng.longitude)
         if observation is not None:
@@ -85,7 +85,7 @@ class WeatherExtension(Extension):
         googlemaps = self.get_geo_locator(context)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        met_office = self.get_met_office(context.bot)
+        met_office = self.get_met_office(context.client.license_keys)
 
         forecast = met_office.twentyfour_hour_forecast(latlng.latitude, latlng.longitude)
         if forecast is not None:
@@ -102,7 +102,7 @@ class WeatherExtension(Extension):
         googlemaps = self.get_geo_locator(context)
         latlng = googlemaps.get_latlong_for_location(postcode)
 
-        met_office = self.get_met_office(context.bot)
+        met_office = self.get_met_office(context.client.license_keys)
 
         forecast = met_office.five_day_forecast(latlng.latitude, latlng.longitude)
         if forecast is not None:

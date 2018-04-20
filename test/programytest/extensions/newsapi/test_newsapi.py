@@ -38,7 +38,7 @@ class MockNewsAPIExtension(NewsAPIExtension):
         self.fail_to_program_y_text = False
 
     def get_news_api_api(self, context):
-        self.news_api = MockNewsAPI(context.bot.license_keys)
+        self.news_api = MockNewsAPI(context.client.license_keys)
         self.news_api.fail_get_headlines = self.fail_get_headlines
         self.news_api.fail_to_program_y_text = self.fail_to_program_y_text
         return self.news_api

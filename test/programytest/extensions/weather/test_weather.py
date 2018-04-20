@@ -59,7 +59,7 @@ class WeatherExtensionTests(unittest.TestCase):
         self.context.bot = bot
         self.context.brain = bot.brain
 
-        self.context.bot.license_keys.load_license_key_data("""
+        self.context.client.license_keys.load_license_key_data("""
         METOFFICE_API_KEY=TESTKEY
         """)
 

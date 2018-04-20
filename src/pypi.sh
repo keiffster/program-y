@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-git tag 2.0rc3 -m "Version 2.0 Release Candidate 3"
+git tag 2.0.1 -m "Version 2.0.1"
 
 git push --tags github master
 

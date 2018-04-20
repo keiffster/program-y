@@ -1,16 +1,23 @@
 from setuptools import setup, find_packages
+from os import path
+
+here = path.abspath(path.dirname(__file__))
+with open(path.join(here, '../README.md'), encoding='utf-8') as f:
+    long_description = f.read()
 
 setup(
   name = 'programy',
   packages=find_packages(),
   package_data={'': ['*.conf', '*.aiml']},
   include_package_data=True,
-  version = '2.0.0rc5',
-  description = 'AIML 2.0 Framework and Platform',
+  version = '2.0.1',
+  description = 'AIML 2.0.1 Framework and Platform',
+  long_description=long_description,
+  long_description_content_type='text/markdown',
   author = 'Keith Sterling',
   author_email = 'keiffster@gmail.com',
   url = 'https://github.com/keiffster/program-y.git',
-  download_url = 'https://github.com/keiffster/program-y/archive/programy-2.0.0rc5.tar.gz',
+  download_url = 'https://github.com/keiffster/program-y/archive/programy-2.0.1.tar.gz',
   keywords = ['aiml', 'chatbot', 'virtual assistant', 'ai'],
   classifiers = [
       # How mature is this project? Common values are
@@ -51,6 +58,9 @@ setup(
                     'redis',
                     'viberbot',
                     'line-bot-sdk',
-                    'kik']
+                    'kik',
+                    'APScheduler',
+                    'emoji'
+                    ]
 
 )
