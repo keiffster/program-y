@@ -1,5 +1,0 @@
-AMERICAN:hasPurpose:to be a citizen of America
-AMERICAN:hasSize:0
-AMERICAN:hasSyllables:3
-AMERICAN:isa:Nationality
-AMERICAN:lifeArea:Social

@@ -1,5 +1,0 @@
-BALL:hasPurpose:to play sports
-BALL:hasSize:4
-BALL:hasSyllables:1
-BALL:isa:Object
-BALL:lifeArea:Recreation

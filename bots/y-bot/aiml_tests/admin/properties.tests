@@ -1,5 +1,0 @@
-"YADMIN BOT PROPERTIES",                "Properties.*"
-"YADMIN GET BOT PROPERTY name",         "Y-Bot"
-"YADMIN USER PROPERTIES",               "Properties.*"
-"YADMIN GET USER LOCAL PROPERTY topic", "*"
-"YADMIN GET USER GLOBAL PROPERTY name", "Y-Bot"

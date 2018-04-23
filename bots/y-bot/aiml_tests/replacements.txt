@@ -1,7 +1,0 @@
-SET,animal:cow
-SET,animals:cows
-SET,number:2
-*:STAR
-#:HASH
-^:ARROW
-_:UNDERLINE

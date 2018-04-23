@@ -1,5 +1,0 @@
-BAND:hasPurpose:to play music
-BAND:hasSize:8
-BAND:hasSyllables:1
-BAND:isa:Organization
-BAND:lifeArea:Recreation
