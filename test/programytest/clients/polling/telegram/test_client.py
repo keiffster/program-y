@@ -91,13 +91,13 @@ class MockTelegramBotClient(TelegramBotClient):
         self._updater = MockUpdater()
 
     def ask_question(self, userid, question):
-        return self.response
+        return self._response
 
     def get_unknown_response(self, userid):
-        return self.response
+        return self._response
 
     def get_initial_question(self, update):
-        return self.response
+        return self._response
 
 
 class TelegramBotClientTests(unittest.TestCase):
@@ -145,7 +145,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = None
+        client._response = None
 
         message = MockMessage("test123", None)
         update = MockUpdate(message)
@@ -160,7 +160,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = "Initial Question"
+        client._response = "Initial Question"
 
         message = MockMessage("test123", None)
         update = MockUpdate(message)
@@ -189,7 +189,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = None
+        client._response = None
 
         message = MockMessage("test123", "Hello")
         update = MockUpdate(message)
@@ -204,7 +204,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = "Hi there"
+        client._response = "Hi there"
 
         message = MockMessage("test123", "Hello")
         update = MockUpdate(message)
@@ -234,7 +234,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = None
+        client._response = None
 
         message = MockMessage("test123", None)
         update = MockUpdate(message)
@@ -249,7 +249,7 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.response = "Unknown Question"
+        client._response = "Unknown Question"
 
         message = MockMessage("test123", None)
         update = MockUpdate(message)

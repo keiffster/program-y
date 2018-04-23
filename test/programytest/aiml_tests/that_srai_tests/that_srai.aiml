@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+  <category>
+      <pattern>Yes</pattern>
+      <template><srai>AGREEMENT</srai></template>
+  </category>
+
+  <category>
+      <pattern>OK</pattern>
+      <template><srai>AGREEMENT</srai></template>
+  </category>
+
+  <category>
+      <pattern>No</pattern>
+      <template><srai>DISAGREEMENT</srai></template>
+  </category>
+
+  <category>
+      <pattern>Hi</pattern>
+      <template><srai>GREETINGS</srai></template>
+  </category>
+
+  <category>
+      <pattern>GREETINGS</pattern>
+      <template>Hello. Do you know explore the website?</template>
+  </category>
+
+  <category>
+      <pattern>AGREEMENT</pattern>
+      <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+      <template>The website was created in 2014.</template>
+  </category>
+
+  <category>
+      <pattern>AGREEMENT</pattern>
+      <template>Test pattern: AGREEMENT</template>
+  </category>
+
+  <category>
+      <pattern>DISAGREEMENT</pattern>
+      <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+      <template>Disagreement with that pattern.</template>
+  </category>
+
+  <category>
+      <pattern>DISAGREEMENT</pattern>
+      <template>Test pattern: DISAGREEMENT</template>
+  </category>
+
+</aiml>

@@ -502,7 +502,7 @@ class Brain(object):
 
         return response
 
-    def ask_question(self, client_context, sentence):
+    def ask_question(self, client_context, sentence, srai=False):
 
         client_context.brain = self
 
@@ -514,7 +514,7 @@ class Brain(object):
 
         topic_pattern = conversation.get_topic_pattern(client_context)
 
-        that_pattern = conversation.get_that_pattern(client_context)
+        that_pattern = conversation.get_that_pattern(client_context, srai)
 
         match_context = self._aiml_parser.match_sentence(client_context,
                                                          sentence,

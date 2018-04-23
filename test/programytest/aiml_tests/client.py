@@ -18,6 +18,9 @@ class TestClient(BotClient):
     def initiate_logging(self, arguments):
         pass
 
+    def get_client_configuration(self):
+        return ConsoleConfiguration()
+
     def load_configuration(self, arguments):
         self._configuration = ProgramyConfiguration(ConsoleConfiguration())
 

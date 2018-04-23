@@ -81,10 +81,11 @@ class Sentence(object):
 
 class Question(object):
 
+
     #TODO Move sentence_split_charts into a property of tokenizer and move functionality into that class
     @staticmethod
-    def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True):
-        question = Question()
+    def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True, srai=False):
+        question = Question(srai)
         if split is True:
             question.split_into_sentences(text, sentence_split_chars, tokenizer)
         else:
@@ -92,19 +93,20 @@ class Question(object):
         return question
 
     @staticmethod
-    def create_from_sentence(sentence: Sentence):
-        question = Question()
+    def create_from_sentence(sentence: Sentence, srai=False):
+        question = Question(srai)
         question.sentences.append(sentence)
         return question
 
     @staticmethod
-    def create_from_question(question):
-        new_question = Question()
+    def create_from_question(question, srai=False):
+        new_question = Question(srai)
         for each_sentence in question.sentences:
             new_question.sentences.append(each_sentence)
         return new_question
 
-    def __init__(self):
+    def __init__(self, srai=False):
+        self._srai = srai
         self._sentences = []
         self._properties = {}
         self._current_sentence_no = -1
@@ -244,10 +246,21 @@ class Conversation(object):
             that_pattern = '*'
         return that_pattern
 
-    def get_that_pattern(self, client_context):
+    def get_that_pattern(self, client_context, srai=False):
         try:
-            that_question = self.previous_nth_question(1)
-            that_sentence = that_question.current_sentence()
+            that_question = None
+            if srai is False:
+                that_question = self.previous_nth_question(1)
+            else:
+                for question in reversed(self._questions[:-2]):
+                    if question._srai is False:
+                        that_question = question
+                        break
+
+            if that_question is not None:
+                that_sentence = that_question.current_sentence()
+            else:
+                that_sentence = None
 
             # If the last response was valid, i.e not none and not empty string, then use
             # that as the that_pattern, otherwise we default to '*' as pattern

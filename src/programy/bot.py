@@ -312,9 +312,9 @@ class Bot(object):
 
     def get_question(self, client_context, pre_processed, srai):
         if srai is False:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed)
+            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, srai=srai)
         else:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, split=False)
+            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, split=False, srai=srai)
 
     def combine_answers(self, answers):
         return ". ".join([sentence for sentence in answers if sentence is not None])
@@ -383,7 +383,7 @@ class Bot(object):
         if srai is False:
             self.check_spelling_before(sentence)
 
-        response = client_context.brain.ask_question(client_context, sentence)
+        response = client_context.brain.ask_question(client_context, sentence, srai)
 
         if response is None and srai is False:
             response = self.check_spelling_and_retry(client_context, sentence)
