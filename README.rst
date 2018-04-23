@@ -92,13 +92,12 @@ Using Program-Y
 ----------------
 Full documentation is available on `Program Y Wiki <https://github.com/keiffster/program-y/wiki>`_
 
-After installation from the Github repository you can chat with your Program Y by running one of the many bots found in the 
-\bot folder. These include
+Program-Y ships with a very basic bot that has a single answer, after installation you can chat with your Program Y by running one of the many bots found in GitHub repo
 
-- Y-Bot - My own bot under development
-- Professor - A huge knowledge base of questions and answers
-- Alice2 - AIML 2 version of the famous Alice chat bot
-- Rosie - An AIML base set of grammars for creating your own bot
+- `Y-Bot <https://github.com/keiffster/y-bot>`_
+- `Alice2 <https://github.com/keiffster/alice2-y>`_
+- `Rosie <https://github.com/keiffster/rosie-y>`_
+- `Professor <https://github.com/keiffster/professor-y>`_
 
 See the individual folders for unix and windows scripts required to run a bot.
 
