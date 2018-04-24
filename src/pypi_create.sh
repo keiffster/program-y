@@ -13,6 +13,4 @@ rm -Rf programy.egg-info
 
 python3 setup.py sdist
 
-twine upload dist/*
 
-rm README.rst

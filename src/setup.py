@@ -7,6 +7,7 @@ here = path.abspath(path.dirname(__file__))
 version = None
 with open(path.join(here, 'version.txt'), encoding='utf-8') as f:
     version = f.read()
+version = version.strip()
 
 if version is None:
     print("No version.txt found")
