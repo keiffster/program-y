@@ -81,7 +81,6 @@ class Sentence(object):
 
 class Question(object):
 
-
     #TODO Move sentence_split_charts into a property of tokenizer and move functionality into that class
     @staticmethod
     def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True, srai=False):
@@ -111,9 +110,27 @@ class Question(object):
         self._properties = {}
         self._current_sentence_no = -1
 
+    def debug_info(self):
+        str = ""
+        for sentence in self._sentences:
+            str += sentence.text()
+            str += " = "
+            if sentence.response is not None:
+                str += sentence.response
+            else:
+                str += "N/A"
+            str += ", "
+        return str
+
     @property
     def sentences(self):
         return self._sentences
+
+    def has_response(self):
+        for sentence in self._sentences:
+            if sentence.response is not None:
+                return True
+        return False
 
     def set_current_sentence_no(self, sentence_no):
         self._current_sentence_no = sentence_no
@@ -252,10 +269,11 @@ class Conversation(object):
             if srai is False:
                 that_question = self.previous_nth_question(1)
             else:
-                for question in reversed(self._questions[:-2]):
-                    if question._srai is False:
-                        that_question = question
-                        break
+                if len(self._questions) > 2:
+                    for question in reversed(self._questions[:-2]):
+                        if question._srai is False and question.has_response():
+                            that_question = question
+                            break
 
             if that_question is not None:
                 that_sentence = that_question.current_sentence()
@@ -272,6 +290,7 @@ class Conversation(object):
                 that_pattern = "*"
 
         except Exception as e:
+            print(e)
             YLogger.info(client_context, "No That pattern default to [*]")
             that_pattern = "*"
 

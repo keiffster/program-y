@@ -18,51 +18,65 @@ For more information see [url]
 -->
 
 <aiml>
-  <category>
-      <pattern>Yes</pattern>
-      <template><srai>AGREEMENT</srai></template>
-  </category>
-
-  <category>
-      <pattern>OK</pattern>
-      <template><srai>AGREEMENT</srai></template>
-  </category>
-
-  <category>
-      <pattern>No</pattern>
-      <template><srai>DISAGREEMENT</srai></template>
-  </category>
-
-  <category>
-      <pattern>Hi</pattern>
-      <template><srai>GREETINGS</srai></template>
-  </category>
-
-  <category>
-      <pattern>GREETINGS</pattern>
-      <template>Hello. Do you know explore the website?</template>
-  </category>
-
-  <category>
-      <pattern>AGREEMENT</pattern>
-      <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
-      <template>The website was created in 2014.</template>
-  </category>
-
-  <category>
-      <pattern>AGREEMENT</pattern>
-      <template>Test pattern: AGREEMENT</template>
-  </category>
-
-  <category>
-      <pattern>DISAGREEMENT</pattern>
-      <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
-      <template>Disagreement with that pattern.</template>
-  </category>
-
-  <category>
-      <pattern>DISAGREEMENT</pattern>
-      <template>Test pattern: DISAGREEMENT</template>
-  </category>
-
+    <category>
+        <pattern>Hi</pattern>
+        <template>
+            <srai>GREETINGS</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GREETINGS</pattern>
+        <template>
+            <random>
+                <li>Hello. Do you know explore the website?</li>
+                <li>Good day. Do you know explore the website?</li>
+            </random>
+        </template>
+    </category>
+    <category>
+        <pattern>Yes</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>
+            <srai>AGREEMENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>AGREEMENT</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>
+            <srai>GROUPAGREEMENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GROUPAGREEMENT</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>The website was created in 2014.</template>
+    </category>
+    <category>
+        <pattern>GROUPAGREEMENT</pattern>
+        <template>Default AGREEMENT</template>
+    </category>
+    <category>
+        <pattern>No</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>
+            <srai>DISAGREEMENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>DISAGREEMENT</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>
+            <srai>GROUPDISAGREEMENT</srai>
+        </template>
+    </category>
+    <category>
+        <pattern>GROUPDISAGREEMENT</pattern>
+        <that>DO YOU KNOW EXPLORE THE WEBSITE</that>
+        <template>Disagreement with that pattern.</template>
+    </category>
+    <category>
+        <pattern>GROUPDISAGREEMENT</pattern>
+        <template>Default DISAGREEMENT</template>
+    </category>
 </aiml>
