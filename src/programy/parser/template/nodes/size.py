@@ -50,4 +50,4 @@ class TemplateSizeNode(TemplateNode):
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if self.children:
-            raise ParserException("<size> node should not contains child text, use <size /> or <size></size> only")
+            raise ParserException("<size> node should not contain child text, use <size /> or <size></size> only")

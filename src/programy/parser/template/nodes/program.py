@@ -63,4 +63,4 @@ class TemplateProgramNode(TemplateNode):
         self._parse_node(graph, expression)
         if self.children:
             raise ParserException(
-                "<program> node should not contains child text, use <program /> or <program></program> only")
+                "<program> node should not contain child text, use <program /> or <program></program> only")

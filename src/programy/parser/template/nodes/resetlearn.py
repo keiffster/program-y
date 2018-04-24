@@ -48,4 +48,4 @@ class TemplateResetLearnNode(TemplateNode):
     def parse_expression(self, graph, expression):
         self._parse_node(graph, expression)
         if self.children:
-            raise ParserException("<resetlearn> node should not contains child text, use <resetlearn /> or <resetlearn></resetlearn> only")
+            raise ParserException("<resetlearn> node should not contain child text, use <resetlearn /> or <resetlearn></resetlearn> only")

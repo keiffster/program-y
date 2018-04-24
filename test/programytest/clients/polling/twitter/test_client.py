@@ -110,7 +110,7 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
-        client._api._mock_direct_messages = [MockMessage(1, "Message1", 1)]
+        client._api._mock_direct_messages = [MockMessage(1, 1, "Message1")]
 
         messages = client._get_direct_messages(-1)
         self.assertEquals(1, len(messages))
@@ -121,7 +121,7 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
-        client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
+        client._api._mock_direct_messages = [MockMessage(31, 1, "Message1")]
 
         messages = client._get_direct_messages(30)
         self.assertEquals(1, len(messages))
@@ -143,7 +143,7 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
-        client._api._mock_direct_messages = [MockMessage(31, "Message1", 1)]
+        client._api._mock_direct_messages = [MockMessage(31, 1, "Message1")]
 
         last_message_id = client._process_direct_messages(-1)
         self.assertEqual(31, last_message_id)

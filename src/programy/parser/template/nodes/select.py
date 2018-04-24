@@ -242,4 +242,4 @@ class TemplateSelectNode(TemplateNode):
                 self.parse_query(graph, tag_name, query)
 
         if self.children:
-            raise ParserException("<select> node should not contains child text, use <select><vars></vars><q></q></select> only")
+            raise ParserException("<select> node should not contain child text, use <select><vars></vars><q></q></select> only")

@@ -70,4 +70,4 @@ class TemplateInputNode(TemplateIndexedNode):
     def parse_expression(self, graph, expression):
         self._parse_node_with_attrib(graph, expression, "index", "1")
         if self.children:
-            raise ParserException("<input> node should not contains child text, use <input /> or <input></input> only")
+            raise ParserException("<input> node should not contain child text, use <input /> or <input></input> only")

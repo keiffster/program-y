@@ -180,7 +180,10 @@ class TelegramBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         TelegramBotClient.TELEGRAM_CLIENT = MockTelegramBotClient(arguments)
         mock_bot = unittest.mock.Mock()
-        update = []
+        update = unittest.mock.Mock()
+        update.message = unittest.mock.Mock()
+        update.message.chat_id = 1
+        update.message.text = "Hello"
         message(mock_bot, update)
 
     def test_client_message_no_response(self):
@@ -225,7 +228,9 @@ class TelegramBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         TelegramBotClient.TELEGRAM_CLIENT = MockTelegramBotClient(arguments)
         mock_bot = unittest.mock.Mock()
-        update = []
+        update = unittest.mock.Mock()
+        update.message = unittest.mock.Mock()
+        update.message.chat_id = 1
         unknown(mock_bot, update)
 
     def test_client_unknown_no_response(self):

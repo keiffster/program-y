@@ -62,4 +62,4 @@ class TemplateRequestNode(TemplateIndexedNode):
     def parse_expression(self, graph, expression):
         self._parse_node_with_attrib(graph, expression, "index", "1")
         if self.children:
-            raise ParserException("<request> node should not contains child text, use <request /> or <request></request> only")
+            raise ParserException("<request> node should not contain child text, use <request /> or <request></request> only")
