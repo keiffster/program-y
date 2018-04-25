@@ -27,7 +27,9 @@ class PatternNode(object):
     THAT = "__THAT__"
     TOPIC = "__TOPIC__"
 
-    def __init__(self):
+    def __init__(self, userid='*'):
+
+        self._userid = userid
 
         # Child Nodes
         self._priority_words = []
@@ -45,6 +47,10 @@ class PatternNode(object):
         self._topic = None
         self._that = None
         self._template = None
+
+    @property
+    def userid(self):
+        return self._userid
 
     ########################################################################
     #

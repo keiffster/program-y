@@ -290,7 +290,6 @@ class Conversation(object):
                 that_pattern = "*"
 
         except Exception as e:
-            print(e)
             YLogger.info(client_context, "No That pattern default to [*]")
             that_pattern = "*"
 
