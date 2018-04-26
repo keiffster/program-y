@@ -23,8 +23,8 @@ from programy.parser.exceptions import ParserException
 
 class PatternSetNode(PatternNode):
 
-    def __init__(self, attribs, text):
-        PatternNode.__init__(self)
+    def __init__(self, attribs, text, userid='*'):
+        PatternNode.__init__(self, userid)
         if 'name' in attribs:
             self._set_name = attribs['name'].upper()
         elif text:
@@ -39,18 +39,20 @@ class PatternSetNode(PatternNode):
     def is_set(self):
         return True
 
-    def to_xml(self, client_context):
+    def to_xml(self, client_context, include_user=False):
         string = ""
-        string += '<set name="%s">\n' % self.set_name
+        if include_user is True:
+            string += '<set userid="%s" name="%s">\n'%(self.userid, self.set_name)
+        else:
+            string += '<set name="%s">\n' % self.set_name
         string += super(PatternSetNode, self).to_xml(client_context)
         string += "</set>"
         return string
 
-    def equivalent(self, other):
-        if other.is_set():
-            if self.set_name == other.set_name:
-                return True
-        return False
+    def to_string(self, verbose=True):
+        if verbose is True:
+            return "SET [%s] [%s] name=[%s]" % (self.userid, self._child_count(verbose), self.set_name)
+        return "SET name=[%s]" % (self.set_name)
 
     def set_is_numeric(self):
         return bool(self.set_name.upper() == 'NUMBER')
@@ -80,8 +82,19 @@ class PatternSetNode(PatternNode):
 
         return EqualsMatch(False, word_no)
 
+    def equivalent(self, other):
+        if other.is_set():
+            if self.userid == other.userid:
+                if self.set_name == other.set_name:
+                    return True
+        return False
+
     def equals(self, client_context, words, word_no):
         word = words.word(word_no)
+
+        if self.userid != '*':
+            if self.userid != client_context.userid:
+                return EqualsMatch(False, word_no)
 
         if client_context.brain.dynamics.is_dynamic_set(self._set_name) is True:
             result = client_context.brain.dynamics.dynamic_set(client_context, self._set_name, word)
@@ -99,7 +112,3 @@ class PatternSetNode(PatternNode):
                 YLogger.error(client_context, "No set named [%s] in sets collection", self.set_name)
                 return EqualsMatch(False, word_no)
 
-    def to_string(self, verbose=True):
-        if verbose is True:
-            return "SET [%s] name=[%s]" % (self._child_count(verbose), self.set_name)
-        return "SET name=[%s]" % (self.set_name)

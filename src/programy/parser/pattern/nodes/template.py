@@ -21,21 +21,13 @@ from programy.parser.pattern.nodes.base import PatternNode
 
 class PatternTemplateNode(PatternNode):
 
-    def __init__(self, template):
-        PatternNode.__init__(self)
+    def __init__(self, template, userid='*'):
+        PatternNode.__init__(self, userid)
         self._template = template
 
     @property
     def template(self):
         return self._template
-
-    def to_xml(self, client_context):
-        string = ""
-        string += '<template>'
-        string2 = super(PatternTemplateNode, self).to_xml(client_context)
-        string += string2
-        string += '</template>\n'
-        return string
 
     def is_template(self):
         return True
@@ -50,12 +42,25 @@ class PatternTemplateNode(PatternNode):
         elif new_node.is_template():
             raise ParserException("Cannot add template node to template node")
 
-    def equivalent(self, other):
-        if other.is_template():
-            return True
-        return False
+    def to_xml(self, client_context, include_user=False):
+        string = ""
+        if include_user is True:
+            string += '<template userid="%s">'%self.userid
+        else:
+            string += '<template>'
+        string2 = super(PatternTemplateNode, self).to_xml(client_context, include_user)
+        string += string2
+        string += '</template>\n'
+        return string
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "PTEMPLATE [%s] " % self._child_count(verbose)
+            return "PTEMPLATE [%s] [%s]" %(self.userid, self._child_count(verbose))
         return "PTEMPLATE"
+
+    def equivalent(self, other):
+        if other.is_template():
+            if self.userid == other.userid:
+                return True
+        return False
+

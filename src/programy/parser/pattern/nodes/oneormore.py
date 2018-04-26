@@ -25,36 +25,40 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
     MATCH_CHARS = ['_', '*']
 
-    def __init__(self, wildcard):
-        PatternWildCardNode.__init__(self, wildcard)
+    def __init__(self, wildcard, userid='*'):
+        PatternWildCardNode.__init__(self, wildcard, userid)
 
     def is_one_or_more(self):
         return True
-
-    def matching_wildcards(self):
-        return PatternOneOrMoreWildCardNode.MATCH_CHARS
-
-    def to_xml(self, client_context):
-        string = ""
-        string += '<oneormore wildcard="%s">\n' % self.wildcard
-        string += super(PatternOneOrMoreWildCardNode, self).to_xml(client_context)
-        string += "</oneormore>\n"
-        return string
 
     @staticmethod
     def is_wild_card(text):
         return bool(text in PatternOneOrMoreWildCardNode.MATCH_CHARS)
 
-    def equivalent(self, other):
-        if other.is_one_or_more():
-            if self._wildcard == other.wildcard:
-                return True
-        return False
+    def matching_wildcards(self):
+        return PatternOneOrMoreWildCardNode.MATCH_CHARS
+
+    def to_xml(self, client_context, include_user=False):
+        string = ""
+        if include_user is True:
+            string += '<oneormore userid="%s" wildcard="%s">\n'%(self.userid, self.wildcard)
+        else:
+            string += '<oneormore wildcard="%s">\n' % self.wildcard
+        string += super(PatternOneOrMoreWildCardNode, self).to_xml(client_context)
+        string += "</oneormore>\n"
+        return string
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "ONEORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+            return "ONEORMORE [%s] [%s] wildcard=[%s]" % (self.userid, self._child_count(verbose), self.wildcard)
         return "ONEORMORE [%s]" % (self.wildcard)
+
+    def equivalent(self, other):
+        if other.is_one_or_more():
+            if self.userid == other.userid:
+                if self._wildcard == other.wildcard:
+                    return True
+        return False
 
     def consume(self, client_context, context, words, word_no, match_type, depth):
 

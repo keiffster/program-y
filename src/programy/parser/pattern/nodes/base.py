@@ -225,7 +225,7 @@ class PatternNode(object):
     def equals(self, client_context, words, word_no):
         return EqualsMatch(False, word_no)
 
-    def equals_ignore_case(self, client_context, word1, word2):
+    def equals_ignore_case(self, word1, word2):
         if word1 is not None and word2 is not None:
             return bool(word1.upper() == word2.upper())
         return False
@@ -390,7 +390,7 @@ class PatternNode(object):
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "NODE [%s]" % self._child_count(verbose)
+            return "NODE [%s] [%s]"%(self.userid, self._child_count(verbose))
         return "NODE"
 
     def get_tabs(self, client_context, depth):
@@ -424,29 +424,29 @@ class PatternNode(object):
         for child in self.children:
             child.dump(tabs+"\t", output_func, eol, verbose)
 
-    def to_xml(self, client_context):
+    def to_xml(self, client_context, include_user=False):
         string = ""
 
         for priority in self._priority_words:
-            string += priority.to_xml(client_context)
+            string += priority.to_xml(client_context, include_user)
 
         if self._0ormore_arrow is not None:
-            string += self._0ormore_arrow.to_xml(client_context)
+            string += self._0ormore_arrow.to_xml(client_context, include_user)
         if self._0ormore_hash is not None:
-            string += self._0ormore_hash.to_xml(client_context)
+            string += self._0ormore_hash.to_xml(client_context, include_user)
         if self._1ormore_underline is not None:
-            string += self._1ormore_underline.to_xml(client_context)
+            string += self._1ormore_underline.to_xml(client_context, include_user)
         if self._1ormore_star is not None:
-            string += self._1ormore_star.to_xml(client_context)
+            string += self._1ormore_star.to_xml(client_context, include_user)
         if self._topic is not None:
-            string += self._topic.to_xml(client_context)
+            string += self._topic.to_xml(client_context, include_user)
         if self._that is not None:
-            string += self._that.to_xml(client_context)
+            string += self._that.to_xml(client_context, include_user)
         if self._template is not None:
             string += self._template.to_xml(client_context)
 
         for child in self.children:
-            string += child.to_xml(client_context)
+            string += child.to_xml(client_context, include_user)
 
         return string
 

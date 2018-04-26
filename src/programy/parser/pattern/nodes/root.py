@@ -23,8 +23,8 @@ from programy.parser.pattern.nodes.base import PatternNode
 
 class PatternRootNode(PatternNode):
 
-    def __init__(self):
-        PatternNode.__init__(self)
+    def __init__(self, userid='*'):
+        PatternNode.__init__(self, userid)
 
     def is_root(self):
         return True
@@ -41,12 +41,13 @@ class PatternRootNode(PatternNode):
 
     def equivalent(self, other: PatternNode)->bool:
         if other.is_root():
-            return True
+            if self.userid == other.userid:
+                return True
         return False
 
     def to_string(self, verbose: bool = True)->str:
         if verbose is True:
-            return "ROOT [%s]" % self._child_count(verbose)
+            return "ROOT [%s] [%s]" %(self.userid, self._child_count(verbose))
         return "ROOT "
 
     def match(self, client_context, context, words):

@@ -24,15 +24,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
     MATCH_CHARS = ['^', '#']
 
-    def __init__(self, wildcard):
-        PatternWildCardNode.__init__(self, wildcard)
-
-    def to_xml(self, client_context):
-        string = ""
-        string += '<zerormore wildcard="%s">\n' % self.wildcard
-        string += super(PatternZeroOrMoreWildCardNode, self).to_xml(client_context)
-        string += "</zerormore>\n"
-        return string
+    def __init__(self, wildcard, userid='*'):
+        PatternWildCardNode.__init__(self, wildcard, userid)
 
     def is_zero_or_more(self):
         return True
@@ -44,16 +37,27 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
     def is_wild_card(text):
         return bool(text in PatternZeroOrMoreWildCardNode.MATCH_CHARS)
 
-    def equivalent(self, other):
-        if other.is_zero_or_more():
-            if self._wildcard == other.wildcard:
-                return True
-        return False
+    def to_xml(self, client_context, include_user=False):
+        string = ""
+        if include_user is True:
+            string += '<zerormore userid="%s" wildcard="%s">\n'%(self.userid, self.wildcard)
+        else:
+            string += '<zerormore wildcard="%s">\n' % self.wildcard
+        string += super(PatternZeroOrMoreWildCardNode, self).to_xml(client_context)
+        string += "</zerormore>\n"
+        return string
 
     def to_string(self, verbose=True):
         if verbose is True:
-            return "ZEROORMORE [%s] wildcard=[%s]" % (self._child_count(verbose), self.wildcard)
+            return "ZEROORMORE [%s] [%s] wildcard=[%s]" % (self.userid, self._child_count(verbose), self.wildcard)
         return "ZEROORMORE [%s]" % (self.wildcard)
+
+    def equivalent(self, other):
+        if other.is_zero_or_more():
+            if self.userid == other.userid:
+                if self._wildcard == other.wildcard:
+                    return True
+        return False
 
     def consume(self, client_context, context, words, word_no, match_type, depth):
 

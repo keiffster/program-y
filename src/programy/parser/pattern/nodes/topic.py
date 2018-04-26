@@ -23,15 +23,26 @@ from programy.parser.pattern.nodes.base import PatternNode
 
 class PatternTopicNode(PatternNode):
 
-    def __init__(self):
-        PatternNode.__init__(self)
+    def __init__(self, userid='*'):
+        PatternNode.__init__(self, userid)
 
-    def to_xml(self, client_context):
+    def is_topic(self):
+        return True
+
+    def to_xml(self, client_context, include_user=False):
         string = ""
-        string += '<topic>'
+        if include_user is True:
+            string += '<topic userid="%s">'%self.userid
+        else:
+            string += '<topic>'
         string += super(PatternTopicNode, self).to_xml(client_context)
         string += '</topic>\n'
         return string
+
+    def to_string(self, verbose=True):
+        if verbose is True:
+            return "TOPIC [%s] [%s]" % (self.userid, self._child_count(verbose))
+        return "TOPIC"
 
     def can_add(self, new_node):
         if new_node.is_root():
@@ -41,18 +52,11 @@ class PatternTopicNode(PatternNode):
         if new_node.is_that():
             raise ParserException("Cannot add that node to topic node")
 
-    def is_topic(self):
-        return True
-
     def equivalent(self, other):
-        if other.is_topic() is False:
-            return False
-        return True
-
-    def to_string(self, verbose=True):
-        if verbose is True:
-            return "TOPIC [%s]" % self._child_count(verbose)
-        return "TOPIC"
+        if other.is_topic():
+            if self.userid == other.userid:
+                return True
+        return False
 
     def consume(self, client_context, context, words, word_no, match_type, depth):
 

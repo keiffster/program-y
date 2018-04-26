@@ -25,8 +25,8 @@ from programy.parser.pattern.nodes.that import PatternThatNode
 
 class PatternWildCardNode(PatternNode):
 
-    def __init__(self, wildcard):
-        PatternNode.__init__(self)
+    def __init__(self, wildcard, userid='*'):
+        PatternNode.__init__(self, userid)
         if wildcard not in self.matching_wildcards():
             raise ParserException("%s not in valid wildcards %s" % (wildcard, ", ".join(self.matching_wildcards())))
         self._wildcard = wildcard
