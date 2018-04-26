@@ -68,7 +68,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertEquals("P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)", node._child_count(verbose=True))
         self.assertEquals("", node._child_count(verbose=False))
 
-        self.assertEquals("NODE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node.to_string(verbose=True))
+        self.assertEquals("NODE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node.to_string(verbose=True))
         self.assertEquals("NODE", node.to_string(verbose=False))
 
         self.assertEquals("", node.to_xml(self._client_context))
@@ -95,20 +95,20 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         node = PatternNode()
         self.assertIsNotNone(node)
 
-        self.assertTrue(node.equals_ignore_case(self._client_context, "", ""))
+        self.assertTrue(node.equals_ignore_case("", ""))
 
-        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "test"))
-        self.assertTrue(node.equals_ignore_case(self._client_context, "Test", "test"))
-        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "Test"))
-        self.assertTrue(node.equals_ignore_case(self._client_context, "TEST", "test"))
-        self.assertTrue(node.equals_ignore_case(self._client_context, "test", "TEST"))
+        self.assertTrue(node.equals_ignore_case("test", "test"))
+        self.assertTrue(node.equals_ignore_case("Test", "test"))
+        self.assertTrue(node.equals_ignore_case("test", "Test"))
+        self.assertTrue(node.equals_ignore_case("TEST", "test"))
+        self.assertTrue(node.equals_ignore_case("test", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self._client_context, "test", "TESTX"))
-        self.assertFalse(node.equals_ignore_case(self._client_context, "testX", "TEST"))
+        self.assertFalse(node.equals_ignore_case("test", "TESTX"))
+        self.assertFalse(node.equals_ignore_case("testX", "TEST"))
 
-        self.assertFalse(node.equals_ignore_case(self._client_context, None, "TEST"))
-        self.assertFalse(node.equals_ignore_case(self._client_context, "testX", None))
-        self.assertFalse(node.equals_ignore_case(self._client_context, None, None))
+        self.assertFalse(node.equals_ignore_case(None, "TEST"))
+        self.assertFalse(node.equals_ignore_case("testX", None))
+        self.assertFalse(node.equals_ignore_case(None, None))
 
     def test_nodes(self):
 

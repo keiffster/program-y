@@ -36,7 +36,7 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("#")))
         result = node.equals(self._client_context, sentence, 0)
         self.assertFalse(result.matched)
-        self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[#]")
+        self.assertEqual(node.to_string(), "ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[#]")
         self.assertEqual('<zerormore wildcard="#">\n</zerormore>\n', node.to_xml(self._client_context))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
@@ -64,7 +64,33 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("^")))
         result = node.equals(self._client_context, sentence, 0)
         self.assertFalse(result.matched)
-        self.assertEqual(node.to_string(), "ZEROORMORE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]")
+        self.assertEqual(node.to_string(), "ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]")
         self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node.to_xml(self._client_context))
 
         self.assertFalse(node.equivalent(PatternWordNode("test")))
+
+    def test_to_xml(self):
+        node1 = PatternZeroOrMoreWildCardNode("^")
+        self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node1.to_xml(self._client_context))
+        self.assertEqual('<zerormore userid="*" wildcard="^">\n</zerormore>\n', node1.to_xml(self._client_context, include_user=True))
+
+        node2 = PatternZeroOrMoreWildCardNode("^", userid="testid")
+        self.assertEqual('<zerormore wildcard="^">\n</zerormore>\n', node2.to_xml(self._client_context))
+        self.assertEqual('<zerormore userid="testid" wildcard="^">\n</zerormore>\n', node2.to_xml(self._client_context, include_user=True))
+
+    def test_to_string(self):
+        node1 = PatternZeroOrMoreWildCardNode("^")
+        self.assertEquals("ZEROORMORE [^]", node1.to_string(verbose=False))
+        self.assertEquals("ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
+
+        node1 = PatternZeroOrMoreWildCardNode("^", userid="testid")
+        self.assertEquals("ZEROORMORE [^]", node1.to_string(verbose=False))
+        self.assertEquals("ZEROORMORE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
+
+    def test_equivalent_userid(self):
+        node1 = PatternZeroOrMoreWildCardNode("^")
+        node2 = PatternZeroOrMoreWildCardNode("^")
+        node3 = PatternZeroOrMoreWildCardNode("^", userid="testuser")
+
+        self.assertTrue(node1.equivalent(node2))
+        self.assertFalse(node1.equivalent(node3))

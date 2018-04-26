@@ -69,9 +69,6 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         result = node.equals(self._client_context, sentence, 3)
         self.assertFalse(result.matched)
 
-        self.assertEqual(node.to_string(), "ISET [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
-        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node.to_xml(self._client_context))
-
     def test_parse_words(self):
         node = PatternISetNode([], "test1")
         self.assertIsNotNone(node)
@@ -94,3 +91,44 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertEquals("TEST2", node.words[1])
         self.assertEquals("TEST3", node.words[2])
 
+    def test_to_xml(self):
+        node1 = PatternISetNode([], "test1, test2, test3")
+        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node1.to_xml(self._client_context))
+
+        node2 = PatternISetNode([], "test1, test2, test3", userid="testid")
+        self.assertEqual('<iset words="TEST1. TEST2. TEST3"></iset>\n', node2.to_xml(self._client_context, include_user=False))
+        self.assertEqual('<iset userid="testid" words="TEST1. TEST2. TEST3"></iset>\n', node2.to_xml(self._client_context, include_user=True))
+
+    def test_to_string(self):
+        node1 = PatternISetNode([], "test1, test2, test3")
+        self.assertEqual(node1.to_string(verbose=False), "ISET words=[TEST1,TEST2,TEST3]")
+        self.assertEqual(node1.to_string(verbose=True), "ISET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
+
+        node2 = PatternISetNode([], "test1, test2, test3", userid="testid")
+        self.assertEqual(node2.to_string(verbose=False), "ISET words=[TEST1,TEST2,TEST3]")
+        self.assertEqual(node2.to_string(verbose=True), "ISET [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] words=[TEST1,TEST2,TEST3]")
+
+    def test_equivalent(self):
+        node1 = PatternISetNode([], "test1, test2, test3")
+        node2 = PatternISetNode([], "test1, test2, test3")
+        node3 = PatternISetNode([], "test1, test2, test3", userid="testid")
+
+        self.assertTrue(node1.equivalent(node2))
+        self.assertFalse(node1.equivalent(node3))
+
+    def test_equals(self):
+        node1 = PatternISetNode([], "test1, test2, test3")
+        node2 = PatternISetNode([], "test1, test2, test3", userid="testid")
+        node3 = PatternISetNode([], "test1, test2, test3", userid="testid2")
+
+        match1 = node1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'test1'), 0)
+        self.assertIsNotNone(match1)
+        self.assertTrue(match1.matched)
+
+        match2 = node2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'test1'), 0)
+        self.assertIsNotNone(match2)
+        self.assertTrue(match2.matched)
+
+        match3 = node3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'test1'), 0)
+        self.assertIsNotNone(match3)
+        self.assertFalse(match3.matched)

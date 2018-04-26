@@ -20,7 +20,6 @@ class TemplateIdNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        # TODO check documentation on this, AIML spec says this returns the bot name
         self.assertEqual(root.resolve(self._client_context), "testclient")
 
     def test_to_xml(self):

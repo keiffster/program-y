@@ -33,11 +33,11 @@ class PatternRootNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.has_children())
 
         self.assertTrue(node.equivalent(PatternRootNode()))
-        self.assertEqual(node.to_string(), "ROOT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
+        self.assertEqual(node.to_string(), "ROOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
 
         node.add_child(PatternNode())
         self.assertEqual(len(node.children), 1)
-        self.assertEqual(node.to_string(), "ROOT [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)]")
+        self.assertEqual(node.to_string(), "ROOT [*] [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)]")
 
     def test_multiple_roots(self):
         node1 = PatternRootNode()
@@ -95,6 +95,22 @@ class PatternRootNodeTests(ParserTestsBaseClass):
             node1.can_add(node2)
         self.assertEqual(str(raised.exception), "Cannot add template node to template node")
 
+    def test_to_string(self):
+        node1 = PatternRootNode()
+        self.assertEquals("ROOT ", node1.to_string(verbose=False))
+        self.assertEquals("ROOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node1.to_string(verbose=True))
+
+        node2 = PatternRootNode("testid")
+        self.assertEquals("ROOT ", node2.to_string(verbose=False))
+        self.assertEquals("ROOT [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node2.to_string(verbose=True))
+
+    def test_equivalent_userid(self):
+        node1 = PatternRootNode()
+        node2 = PatternRootNode()
+        node3 = PatternRootNode(userid="testuser")
+
+        self.assertTrue(node1.equivalent(node2))
+        self.assertFalse(node1.equivalent(node3))
 
 
 

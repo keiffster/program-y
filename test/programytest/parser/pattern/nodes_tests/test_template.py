@@ -31,11 +31,37 @@ class PatternTemplateNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.has_children())
 
         self.assertTrue(node.equivalent(PatternTemplateNode(TemplateNode())))
-        self.assertEqual(node.to_string(), "PTEMPLATE [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)] ")
+        self.assertEqual(node.to_string(), "PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]")
         self.assertEqual(node.to_string(verbose=False), "PTEMPLATE")
         self.assertEqual('<template></template>\n', node.to_xml(self._client_context))
 
         self.assertFalse(node.equivalent(PatternTopicNode()))
+
+    def test_to_xml(self):
+        node1 = PatternTemplateNode(TemplateNode())
+        self.assertEqual('<template></template>\n', node1.to_xml(self._client_context))
+        self.assertEqual('<template userid="*"></template>\n', node1.to_xml(self._client_context, include_user=True))
+
+        node2 = PatternTemplateNode(TemplateNode(), userid="testid")
+        self.assertEqual('<template></template>\n', node2.to_xml(self._client_context))
+        self.assertEqual('<template userid="testid"></template>\n', node2.to_xml(self._client_context, include_user=True))
+
+    def test_to_string(self):
+        node1 = PatternTemplateNode(TemplateNode())
+        self.assertEqual(node1.to_string(verbose=False), "PTEMPLATE")
+        self.assertEqual(node1.to_string(), "PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]")
+
+        node2 = PatternTemplateNode(TemplateNode(), userid="testid")
+        self.assertEqual(node2.to_string(verbose=False), "PTEMPLATE")
+        self.assertEqual(node2.to_string(), "PTEMPLATE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]")
+
+    def test_equivalent(self):
+        node1 = PatternTemplateNode(TemplateNode())
+        node2 = PatternTemplateNode(TemplateNode())
+        node3 = PatternTemplateNode(TemplateNode(), userid="testid")
+
+        self.assertTrue(node1.equivalent(node2))
+        self.assertFalse(node1.equivalent(node3))
 
     def test_root_to_template(self):
         node1 = PatternTemplateNode(TemplateNode())

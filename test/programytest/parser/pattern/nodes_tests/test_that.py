@@ -28,7 +28,7 @@ class PatternThatNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.has_children())
 
         self.assertTrue(node.equivalent(PatternThatNode()))
-        self.assertEqual(node.to_string(), "THAT [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
+        self.assertEqual(node.to_string(), "THAT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
         self.assertEqual(node.to_string(verbose=False), "THAT")
 
         self.assertEqual("<that></that>\n", node.to_xml(self._client_context))
@@ -57,9 +57,30 @@ class PatternThatNodeTests(ParserTestsBaseClass):
             node1.can_add(node2)
         self.assertEqual(str(raised.exception), "Cannot add that node to that node")
 
+    def test_to_xml(self):
+        node1 = PatternThatNode()
+        self.assertEqual('<that></that>\n', node1.to_xml(self._client_context))
+        self.assertEqual('<that userid="*"></that>\n', node1.to_xml(self._client_context, include_user=True))
+
+        node2 = PatternThatNode(userid="testid")
+        self.assertEqual('<that></that>\n', node2.to_xml(self._client_context))
+        self.assertEqual('<that userid="testid"></that>\n', node2.to_xml(self._client_context, include_user=True))
+
+    def test_to_string(self):
+        node1 = PatternThatNode()
+        self.assertEqual(node1.to_string(verbose=False), "THAT")
+        self.assertEqual(node1.to_string(verbose=True), "THAT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
+
+        node2 = PatternThatNode(userid="testid")
+        self.assertEqual(node2.to_string(verbose=False), "THAT")
+        self.assertEqual(node2.to_string(verbose=True), "THAT [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]")
+
     def test_equivalent(self):
         node1 = PatternThatNode()
         node2 = PatternThatNode()
         node3 = PatternTopicNode()
+        node4 = PatternThatNode(userid="testid")
+
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
+        self.assertFalse(node1.equivalent(node4))

@@ -97,7 +97,22 @@ class BrainTests(unittest.TestCase):
         brain = Brain(None, brain_config)
         self.assertIsNotNone(brain)
 
-        #TODO Add tests here
+        self.assertIsNotNone(brain.aiml_parser)
+        self.assertIsNotNone(brain.denormals)
+        self.assertIsNotNone(brain.normals)
+        self.assertIsNotNone(brain.genders)
+        self.assertIsNotNone(brain.persons)
+        self.assertIsNotNone(brain.person2s)
+        self.assertIsNotNone(brain.properties)
+        self.assertIsNotNone(brain.rdf)
+        self.assertIsNotNone(brain.sets)
+        self.assertIsNotNone(brain.maps)
+        self.assertIsNotNone(brain.preprocessors)
+        self.assertIsNotNone(brain.postprocessors)
+        self.assertIsNotNone(brain.authentication)
+        self.assertIsNotNone(brain.authorisation)
+        self.assertIsNone(brain.default_oob)
+        self.assertEquals({}, brain.oobs)
 
     def test_oob_loading(self):
 

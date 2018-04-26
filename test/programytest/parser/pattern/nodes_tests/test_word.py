@@ -2,7 +2,6 @@ from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.bot import PatternBotNode
-
 from programy.dialog.dialog import Sentence
 
 class PatternWordNodeTests(ParserTestsBaseClass):
@@ -35,10 +34,51 @@ class PatternWordNodeTests(ParserTestsBaseClass):
         self.assertTrue(result.matched)
         result = node.equals(self._client_context, sentence, 1)
         self.assertFalse(result.matched)
-        self.assertEqual(node.to_string(), "WORD [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
+        self.assertEqual(node.to_string(), "WORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
 
         node.add_child(PatternWordNode("test2"))
         self.assertEqual(len(node.children), 1)
-        self.assertEqual(node.to_string(), "WORD [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
+        self.assertEqual(node.to_string(), "WORD [*] [P(0)^(0)#(0)C(1)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]")
 
-        self.assertEqual('<word word="test1"><word word="test2"></word>\n</word>\n', node.to_xml(self._client_context))
+    def test_to_xml(self):
+        word1 = PatternWordNode("test1")
+        self.assertEqual('<word word="test1"></word>\n', word1.to_xml(self._client_context))
+        self.assertEqual('<word userid="*" word="test1"></word>\n', word1.to_xml(self._client_context, include_user=True))
+
+        word2 = PatternWordNode("test2", userid="testid")
+        self.assertEqual('<word word="test2"></word>\n', word2.to_xml(self._client_context))
+        self.assertEqual('<word userid="testid" word="test2"></word>\n', word2.to_xml(self._client_context, include_user=True))
+
+    def test_to_string(self):
+        word1 = PatternWordNode("test1")
+        self.assertEquals("WORD [test1]", word1.to_string(verbose=False))
+        self.assertEquals("WORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]", word1.to_string(verbose=True))
+
+        word2 = PatternWordNode("test2", "testid")
+        self.assertEquals("WORD [test2]", word2.to_string(verbose=False))
+        self.assertEquals("WORD [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test2]", word2.to_string(verbose=True))
+
+    def test_equivalent(self):
+        word1 = PatternWordNode("word")
+        word2 = PatternWordNode("word")
+        word3 = PatternWordNode("word", userid="testuser")
+
+        self.assertTrue(word1.equivalent(word2))
+        self.assertFalse(word1.equivalent(word3))
+
+    def test_equals(self):
+        word1 = PatternWordNode("word")
+        word2 = PatternWordNode("word", userid="testid")
+        word3 = PatternWordNode("word", userid="testid2")
+
+        match1 = word1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        self.assertIsNotNone(match1)
+        self.assertTrue(match1.matched)
+
+        match2 = word2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        self.assertIsNotNone(match2)
+        self.assertTrue(match2.matched)
+
+        match3 = word3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        self.assertIsNotNone(match3)
+        self.assertFalse(match3.matched)
