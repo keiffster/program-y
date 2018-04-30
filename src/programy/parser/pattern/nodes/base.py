@@ -22,6 +22,22 @@ from programy.parser.pattern.matcher import Match, EqualsMatch
 
 #######################################################################################################################
 #
+
+class MultiValueDict(dict):
+
+    def __setitem__(self, key, value):
+        """add the given value to the list of values for this key"""
+        self.setdefault(key, []).append(value)
+
+    def remove(self, key, value):
+        if key in self:
+            for v in self[key]:
+                if v == value:
+                    self[key].remove(value)
+            if len(self[key]) == 0:
+                del self[key]
+
+
 class PatternNode(object):
 
     THAT = "__THAT__"
@@ -36,10 +52,10 @@ class PatternNode(object):
         self._0ormore_hash = None
         self._1ormore_underline = None
         self._children = []
-        self._children_words = {}
-        self._iset_names = {}
-        self._set_names = {}
-        self._bot_properties = {}
+        self._children_words = MultiValueDict()
+        self._iset_names = MultiValueDict()
+        self._set_names = MultiValueDict()
+        self._bot_properties = MultiValueDict()
         self._0ormore_arrow = None
         self._1ormore_star = None
 
@@ -235,104 +251,146 @@ class PatternNode(object):
     def can_add(self, new_node):
         pass
 
+    def _priority_node_exist(self, new_node):
+        for priority in self._priority_words:
+            if priority.equivalent(new_node) is True:
+                # Equivalent node already exists, use this one instead
+                return priority
+        return None
+
+    def _zero_or_more_node_exist(self, new_node):
+        if self._0ormore_arrow is not None:
+            if self._0ormore_arrow.equivalent(new_node) is True:
+                return self._0ormore_arrow
+        if self._0ormore_hash is not None:
+            if self._0ormore_hash.equivalent(new_node) is True:
+                return self._0ormore_hash
+        return None
+
+    def _one_or_more_node_exist(self, new_node):
+        if self._1ormore_underline is not None:
+            if self._1ormore_underline.equivalent(new_node) is True:
+                return self._1ormore_underline
+        if self._1ormore_star is not None:
+            if self._1ormore_star.equivalent(new_node) is True:
+                return self._1ormore_star
+        return None
+
+    def _topic_node_exist(self, new_node):
+        if self._topic is not None:
+            return self._topic
+        return None
+
+    def _that_node_exist(self, new_node):
+        if self._that is not None:
+            return self._that
+        return None
+
+    def _template_node_exist(self, new_node):
+        if self._template is not None:
+            return self._template
+        return None
+
+    def _iset_node_exist(self, new_node):
+        for existing_node in self.children:
+            if existing_node.is_iset():
+                if existing_node.equivalent(new_node):
+                    return existing_node
+        return None
+
+    def _set_node_exist(self, new_node):
+        if new_node.set_name in self._set_names:
+            existing_nodes = self._set_names[new_node.set_name]
+            for existing_node in existing_nodes:
+                if existing_node.equivalent(new_node):
+                    # Equivalent node already exists, use this one instead
+                    return existing_node
+        return None
+
+    def _bot_node_exist(self, new_node):
+        if new_node.property in self._bot_properties:
+            existing_nodes = self._bot_properties[new_node.property]
+            for existing_node in existing_nodes:
+                if existing_node.equivalent(new_node):
+                    # Equivalent node already exists, use this one instead
+                    return existing_node
+        return None
+
+    def _regex_node_exist(self, new_node):
+        for existing_node in self.children:
+            if existing_node.is_regex():
+                if existing_node.equivalent(new_node):
+                    return existing_node
+        return None
+
+    def _word_node_exist(self, new_node):
+        if new_node.word in self._children_words:
+            existing_nodes = self._children_words[new_node.word]
+            for existing_node in existing_nodes:
+                if existing_node.equivalent(new_node):
+                    # Equivalent node already exists, use this one instead
+                    return existing_node
+        return None
+
     def _node_exists(self, new_node):
 
         if new_node.is_priority() is True:
-            for priority in self._priority_words:
-                if priority.equivalent(new_node) is True:
-                    # Equivalent node already exists, use this one instead
-                    return priority
-            return None
+            return self._priority_node_exist(new_node)
 
         if new_node.is_zero_or_more() is True:
-            if self._0ormore_arrow is not None:
-                if self._0ormore_arrow.equivalent(new_node) is True:
-                    return self._0ormore_arrow
-            if self._0ormore_hash is not None:
-                if self._0ormore_hash.equivalent(new_node) is True:
-                    return self._0ormore_hash
-            return None
+            return self._zero_or_more_node_exist(new_node)
 
         if new_node.is_one_or_more() is True:
-            if self._1ormore_underline is not None:
-                if self._1ormore_underline.equivalent(new_node) is True:
-                    return self._1ormore_underline
-            if self._1ormore_star is not None:
-                if self._1ormore_star.equivalent(new_node) is True:
-                    return self._1ormore_star
-            return None
+            return self._one_or_more_node_exist(new_node)
 
         if new_node.is_topic() is True:
-            if self._topic is not None:
-                return self._topic
-            return None
+            return self._topic_node_exist(new_node)
 
         if new_node.is_that():
-            if self._that is not None:
-                return self._that
-            return None
+            return self._that_node_exist(new_node)
 
         if new_node.is_template() is True:
-            if self._template is not None:
-                return self._template
-            return None
+            return self._template_node_exist(new_node)
 
         if new_node.is_iset() is True:
-            for existing_node in self.children:
-                if existing_node.is_iset():
-                    if existing_node.equivalent(new_node):
-                        return existing_node
-            return None
+            return self._iset_node_exist(new_node)
 
         if new_node.is_set() is True:
-            if new_node.set_name in self._set_names:
-                existing_node = self._set_names[new_node.set_name]
-                if existing_node.equivalent(new_node):
-                    # Equivalent node already exists, use this one instead
-                    return existing_node
-            return None
+            return self._set_node_exist(new_node)
 
         if new_node.is_bot() is True:
-            if new_node.property in self._bot_properties:
-                existing_node = self._bot_properties[new_node.property]
-                if existing_node.equivalent(new_node):
-                    # Equivalent node already exists, use this one instead
-                    return existing_node
-            return None
+            return self._bot_node_exist(new_node)
 
         if new_node.is_regex() is True:
-            for existing_node in self.children:
-                if existing_node.is_regex():
-                    if existing_node.equivalent(new_node):
-                        return existing_node
-            return None
+            return self._regex_node_exist(new_node)
 
         if new_node.is_word():
-            if new_node.word in self._children_words:
-                existing_node = self._children_words[new_node.word]
-                if existing_node.equivalent(new_node):
-                    # Equivalent node already exists, use this one instead
-                    return existing_node
+            return self._word_node_exist(new_node)
 
         return None
 
     def _add_node(self, new_node):
+
         # Otherwise use the new node, and return that to maintain consistence
         # And allow child node to be chained, but supports duplicates
         if new_node.is_priority()  is True:
             self._priority_words.append(new_node)
+
         elif new_node.is_zero_or_more() is True:
             if new_node.wildcard == '^':
                 self._0ormore_arrow = new_node
             elif new_node.wildcard == '#':
                 self._0ormore_hash = new_node
+
         elif new_node.is_one_or_more() is True:
             if new_node.wildcard == '_':
                 self._1ormore_underline = new_node
             elif new_node.wildcard == '*':
                 self._1ormore_star = new_node
+
         elif new_node.is_template() is True:
             self._template = new_node
+
         else:
             # Append sets and bots to the end of the array as they take a slightly
             # lower priority to actual words.
@@ -344,14 +402,18 @@ class PatternNode(object):
             if new_node.is_set() is True:
                 self.children.append(new_node)
                 self._set_names[new_node.set_name] = new_node
+
             elif new_node.is_iset() is True:
                 self.children.append(new_node)
                 self._iset_names[new_node.iset_name] = new_node
+
             elif new_node.is_bot() is True:
                 self.children.append(new_node)
                 self._bot_properties[new_node.property] = new_node
+
             elif new_node.is_regex() is True:
                 self.children.append(new_node)
+
             else:
                 self.children.insert(0, new_node)
                 if new_node.is_word() is True:
@@ -408,16 +470,22 @@ class PatternNode(object):
 
         if self._0ormore_arrow is not None:
             self._0ormore_arrow.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._0ormore_hash is not None:
             self._0ormore_hash.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._1ormore_underline is not None:
             self._1ormore_underline.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._1ormore_star is not None:
             self._1ormore_star.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._topic is not None:
             self._topic.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._that is not None:
             self._that.dump(tabs+"\t", output_func, eol, verbose)
+
         if self._template is not None:
             self._template.dump(tabs+"\t", output_func, eol, verbose)
 
@@ -432,16 +500,22 @@ class PatternNode(object):
 
         if self._0ormore_arrow is not None:
             string += self._0ormore_arrow.to_xml(client_context, include_user)
+
         if self._0ormore_hash is not None:
             string += self._0ormore_hash.to_xml(client_context, include_user)
+
         if self._1ormore_underline is not None:
             string += self._1ormore_underline.to_xml(client_context, include_user)
+
         if self._1ormore_star is not None:
             string += self._1ormore_star.to_xml(client_context, include_user)
+
         if self._topic is not None:
             string += self._topic.to_xml(client_context, include_user)
+
         if self._that is not None:
             string += self._that.to_xml(client_context, include_user)
+
         if self._template is not None:
             string += self._template.to_xml(client_context)
 

@@ -262,4 +262,5 @@ class PatternGraphDuplicateTests(ParserTestsBaseClass):
 
         self.assertEqual(1, len(graph.root._bot_properties))
         values = graph.root._bot_properties.values()
-        self.assertIsInstance(list(values)[0], PatternBotNode)
+
+        self.assertIsInstance(list(values)[0][0], PatternBotNode)

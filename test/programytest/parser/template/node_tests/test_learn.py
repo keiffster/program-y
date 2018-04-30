@@ -7,12 +7,14 @@ from programy.parser.template.nodes.word import TemplateWordNode
 
 from programytest.parser.base import ParserTestsBaseClass
 
+
 class MockTemplateLearnNode(TemplateLearnNode):
     def __init__(self):
         TemplateLearnNode.__init__(self)
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TestLearnCategory(unittest.TestCase):
 
@@ -40,6 +42,7 @@ class TestLearnCategory(unittest.TestCase):
         learncat.append("category1")
         learncat.append("category2")
         self.assertEqual(2, len(learncat.children))
+
 
 class TemplateLearnNodeTests(ParserTestsBaseClass):
 

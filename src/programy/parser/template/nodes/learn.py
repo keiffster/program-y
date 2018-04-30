@@ -124,14 +124,14 @@ class TemplateLearnNode(TemplateNode):
 
         return new_element
 
-    def _create_new_category(self, client_context, category):
+    def _create_new_category(self, client_context, category, userid="*"):
         new_pattern = self.resolve_element_evals(client_context, category.pattern)
         new_topic = self.resolve_element_evals(client_context, category.topic)
         new_that = self.resolve_element_evals(client_context, category.that)
 
         new_template = self.evaluate_eval_nodes(client_context, category.template)
 
-        client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True)
+        client_context.brain.aiml_parser.pattern_parser.add_pattern_to_graph(new_pattern, new_topic, new_that, new_template, learn=True, userid=client_context.userid)
 
         YLogger.debug(client_context, "[%s] resolved to new pattern [[%s] [%s] [%s]", self.to_string(),
                       ET.tostring(new_pattern, 'utf-8').decode('utf-8'),
@@ -142,7 +142,7 @@ class TemplateLearnNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         for category in self.children:
-            self._create_new_category(client_context, category)
+            self._create_new_category(client_context, category, userid=client_context.userid)
         return ""
 
     def resolve(self, client_context):

@@ -27,6 +27,7 @@ class TemplateResetLearnNode(TemplateNode):
         TemplateNode.__init__(self)
 
     def resolve_to_string(self, client_context):
+        YLogger.debug(client_context, "Removing all learn nodes created by [%s]", client_context.userid)
         return ""
 
     def resolve(self, client_context):

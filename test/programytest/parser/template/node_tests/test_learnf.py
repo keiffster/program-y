@@ -9,12 +9,14 @@ from programy.config.brain.file import BrainFileConfiguration
 
 from programytest.parser.base import ParserTestsBaseClass
 
+
 class MockTemplateLearnfNode(TemplateLearnfNode):
     def __init__(self):
         TemplateLearnfNode.__init__(self)
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TemplateLearnfNodeTests(ParserTestsBaseClass):
 

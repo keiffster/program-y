@@ -2,10 +2,10 @@ import unittest.mock
 
 from programytest.parser.base import ParserTestsBaseClass
 
+from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
@@ -14,6 +14,8 @@ from programy.parser.pattern.nodes.set import PatternSetNode
 from programy.parser.pattern.nodes.iset import PatternISetNode
 from programy.parser.pattern.nodes.bot import PatternBotNode
 from programy.parser.pattern.nodes.regex import PatternRegexNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
+
 
 
 class PatternBotNodeTests(ParserTestsBaseClass):
@@ -269,9 +271,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(new_node)
         self.assertEquals(new_node, template1)
 
-        node.dump("")
-
-        self.assertEqual(node.to_xml(self._client_context), """<priority word="priority"></priority>
+        test_result = """<priority word="priority"></priority>
 <zerormore wildcard="^">
 </zerormore>
 <zerormore wildcard="#">
@@ -289,7 +289,11 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 </bot><iset words="WORD1 WORD2"></iset>
 <regex pattern="^LEGION$"></regex>
 <regex template="LEGION"></regex>
-""")
+"""
+
+        generated_xml = node.to_xml(self._client_context)
+
+        self.assertEqual(generated_xml, test_result)
 
     def assert_child_node_exists(self, base_node, first_node, second_node, child_equal=True):
         self.assertIsNone(base_node._node_exists(first_node))
@@ -302,3 +306,178 @@ class PatternBotNodeTests(ParserTestsBaseClass):
             self.assertIsNotNone(new_node)
             self.assertEquals(new_node, first_node)
 
+    def test_priority_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternPriorityWordNode("test")
+
+        self.assertIsNone(node._priority_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._priority_node_exist(new_node1))
+
+        new_node2 = PatternPriorityWordNode("test", userid="testid2")
+
+        self.assertIsNone(node._priority_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._priority_node_exist(new_node2))
+
+    def test_zero_or_more_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternZeroOrMoreWildCardNode("^")
+
+        self.assertIsNone(node._zero_or_more_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._zero_or_more_node_exist(new_node1))
+
+        new_node2 = PatternZeroOrMoreWildCardNode("^", userid="testid2")
+
+        self.assertIsNone(node._zero_or_more_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._zero_or_more_node_exist(new_node2))
+
+    def test_one_or_more_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternOneOrMoreWildCardNode("*")
+
+        self.assertIsNone(node._one_or_more_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._one_or_more_node_exist(new_node1))
+
+        new_node2 = PatternOneOrMoreWildCardNode("*", userid="testid2")
+
+        self.assertIsNone(node._one_or_more_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._one_or_more_node_exist(new_node2))
+
+    def test_topic_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternTopicNode()
+
+        self.assertIsNone(node._topic_node_exist(new_node1))
+        node.add_topic(new_node1)
+        self.assertIsNotNone(node._topic_node_exist(new_node1))
+
+        new_node2 = PatternTopicNode(userid="testid2")
+
+        self.assertIsNotNone(node._topic_node_exist(new_node2))
+        node.add_topic(new_node2)
+        self.assertIsNotNone(node._topic_node_exist(new_node2))
+
+    def test_that_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternThatNode()
+
+        self.assertIsNone(node._that_node_exist(new_node1))
+        node.add_that(new_node1)
+        self.assertIsNotNone(node._that_node_exist(new_node1))
+
+        new_node2 = PatternThatNode(userid="testid2")
+
+        self.assertIsNotNone(node._that_node_exist(new_node2))
+        node.add_that(new_node2)
+        self.assertIsNotNone(node._that_node_exist(new_node2))
+
+    def test_template_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternTemplateNode(TemplateNode())
+
+        self.assertIsNone(node._template_node_exist(new_node1))
+        node.add_template(new_node1)
+        self.assertIsNotNone(node._template_node_exist(new_node1))
+
+        new_node2 = PatternTemplateNode(TemplateNode(), userid="testid2")
+
+        self.assertIsNotNone(node._template_node_exist(new_node2))
+        node.add_template(new_node2)
+        self.assertIsNotNone(node._template_node_exist(new_node2))
+
+    def test_iset_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternISetNode([], "test")
+
+        self.assertIsNone(node._iset_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._iset_node_exist(new_node1))
+
+        new_node2 = PatternISetNode([], "test", userid="testid2")
+
+        self.assertIsNone(node._iset_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._iset_node_exist(new_node2))
+
+    def test_set_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternSetNode([], "test")
+
+        self.assertIsNone(node._set_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._set_node_exist(new_node1))
+
+        new_node2 = PatternSetNode([], "test", userid="testid2")
+
+        self.assertIsNone(node._set_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._set_node_exist(new_node2))
+
+    def test_bot_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternBotNode([], "test")
+
+        self.assertIsNone(node._bot_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._bot_node_exist(new_node1))
+
+        new_node2 = PatternBotNode([], "test", userid="testid2")
+
+        self.assertIsNone(node._bot_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._bot_node_exist(new_node2))
+
+    def test_regex_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternRegexNode([], "test")
+
+        self.assertIsNone(node._regex_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._regex_node_exist(new_node1))
+
+        new_node2 = PatternRegexNode([], "test", userid="testid2")
+
+        self.assertIsNone(node._regex_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._regex_node_exist(new_node2))
+
+    def test_word_node_exists(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        new_node1 = PatternWordNode("test")
+
+        self.assertIsNone(node._word_node_exist(new_node1))
+        node.add_child(new_node1)
+        self.assertIsNotNone(node._word_node_exist(new_node1))
+
+        new_node2 = PatternWordNode("test", userid="testid2")
+
+        self.assertIsNone(node._word_node_exist(new_node2))
+        node.add_child(new_node2)
+        self.assertIsNotNone(node._word_node_exist(new_node2))
