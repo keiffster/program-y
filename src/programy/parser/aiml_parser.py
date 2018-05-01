@@ -123,19 +123,32 @@ class AIMLParser(object):
             self._duplicates.display_debug_info()
 
     def load_files_from_directory(self, configuration):
+
         start = datetime.datetime.now()
         total_aimls_loaded = 0
+
         for file in configuration.files.aiml_files.files:
             aimls_loaded = self._aiml_loader.load_dir_contents(file,
                                                                configuration.files.aiml_files.directories,
                                                                configuration.files.aiml_files.extension)
             total_aimls_loaded = len(aimls_loaded)
+
         stop = datetime.datetime.now()
         diff = stop - start
+
         YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
         YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
         if diff.total_seconds() > 0:
             YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
+
+    def load_learnf_from_directory(self, configuration):
+        for file in configuration.defaults.learnf_path:
+            aimls_loaded = self._aiml_loader.load_dir_contents(file,
+                                                               configuration.defaults.learnf_path,
+                                                               configuration.files.aiml_files.extension)
+            total_aimls_loaded = len(aimls_loaded)
+
+        YLogger.info(self, "Loaded a total of %d aiml learnf files", total_aimls_loaded)
 
     def load_single_file(self, configuration):
         start = datetime.datetime.now()
@@ -153,6 +166,7 @@ class AIMLParser(object):
 
             if configuration.files.aiml_files.has_multiple_files():
                 self.load_files_from_directory(configuration)
+                #self.load_learnf_from_directory(configuration)
 
             elif configuration.files.aiml_files.has_single_file():
                 self.load_single_file(configuration)

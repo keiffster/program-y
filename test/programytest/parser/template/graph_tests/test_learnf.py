@@ -9,9 +9,10 @@ from programy.parser.template.nodes.learnf import TemplateLearnfNode
 
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
+
 class TemplateGraphLearnfTests(TemplateGraphTestClient):
 
-     def test_learnf_simple(self):
+    def test_learnf_simple(self):
         template = ET.fromstring("""
 			<template>
 				<learnf>
@@ -23,7 +24,7 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        self._client_context.brain.configuration._aiml_files = BrainFileConfiguration( os.sep + "tmp", ".aiml", False)
+        self._client_context.brain.configuration._aiml_files = BrainFileConfiguration(os.sep + "tmp", ".aiml", False)
 
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
@@ -45,8 +46,17 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
         self.assertIsNotNone(learn_node.children[0].template)
         self.assertIsInstance(learn_node.children[0].template, TemplateNode)
 
+        learnf_path = TemplateLearnfNode.create_learnf_path(self._client_context)
+        self.assertIsNotNone(learnf_path)
+        if os.path.exists(learnf_path):
+            os.remove(learnf_path)
+        self.assertFalse(os.path.exists(learnf_path))
+
         resolved = learn_node.resolve(self._client_context)
         self.assertEqual(resolved, "")
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)
+
+        self.assertTrue(os.path.exists(learnf_path))
+        os.remove(learnf_path)

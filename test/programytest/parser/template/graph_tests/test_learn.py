@@ -1,4 +1,3 @@
-import unittest
 import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode

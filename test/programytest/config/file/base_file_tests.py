@@ -18,7 +18,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].defaults.default_get, "test_unknown")
         self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].defaults.default_property, "test_unknown")
         self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].defaults.default_map, "test_unknown")
-        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].defaults.learn_filename, "test-learnf.aiml")
+        self.assertEqual(configuration.client_configuration.configurations[0].configurations[0].defaults.learnf_path, "/tmp/learnf")
 
         self.assertIsNotNone(configuration.client_configuration.configurations[0].configurations[0].nodes)
 

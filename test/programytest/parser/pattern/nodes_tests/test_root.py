@@ -2,13 +2,20 @@ from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.exceptions import ParserException
 
-from programy.parser.pattern.nodes.word import PatternWordNode
 from programy.parser.pattern.nodes.base import PatternNode
 from programy.parser.template.nodes.base import TemplateNode
-from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.nodes.root import PatternRootNode
+from programy.parser.pattern.nodes.word import PatternWordNode
+from programy.parser.pattern.nodes.priority import PatternPriorityWordNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
+from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
+from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
+from programy.parser.pattern.nodes.set import PatternSetNode
+from programy.parser.pattern.nodes.iset import PatternISetNode
+from programy.parser.pattern.nodes.bot import PatternBotNode
+from programy.parser.pattern.nodes.regex import PatternRegexNode
+from programy.parser.pattern.nodes.template import PatternTemplateNode
 
 
 class PatternRootNodeTests(ParserTestsBaseClass):
@@ -112,5 +119,42 @@ class PatternRootNodeTests(ParserTestsBaseClass):
         self.assertTrue(node1.equivalent(node2))
         self.assertFalse(node1.equivalent(node3))
 
+    def test_remove_children_with_userid(self):
+        root = PatternRootNode()
 
+        root.add_child(PatternWordNode("test1"))
+        root.add_child(PatternWordNode("test2", userid="user1"))
+        root.add_child(PatternWordNode("test3", userid="user1"))
+        root.add_child(PatternWordNode("test4", userid="user2"))
 
+        self.assertEquals(4, len(root.children))
+
+        root.remove_children_with_userid("user1")
+
+        self.assertEquals(2, len(root.children))
+
+    def test_remove_all_types_children_with_userid(self):
+        root = PatternRootNode()
+
+        root.add_child(PatternPriorityWordNode("test1", userid="user1"))
+        root.add_child(PatternWordNode("test2", userid="user1"))
+        root.add_child(PatternZeroOrMoreWildCardNode('^', userid="user1"))
+        root.add_child(PatternZeroOrMoreWildCardNode('#', userid="user1"))
+        root.add_child(PatternOneOrMoreWildCardNode('_', userid="user1"))
+        root.add_child(PatternOneOrMoreWildCardNode('*', userid="user1"))
+
+        self.assertEquals(1, len(root.priority_words))
+        self.assertIsNotNone(root._0ormore_hash)
+        self.assertIsNotNone(root._1ormore_underline)
+        self.assertEquals(1, len(root.children))
+        self.assertIsNotNone(root._0ormore_arrow)
+        self.assertIsNotNone(root._1ormore_star)
+
+        root.remove_children_with_userid("user1")
+
+        self.assertEquals(0, len(root.priority_words))
+        self.assertIsNone(root._0ormore_hash)
+        self.assertIsNone(root._1ormore_underline)
+        self.assertEquals(0, len(root.children))
+        self.assertIsNone(root._0ormore_arrow)
+        self.assertIsNone(root._1ormore_star)

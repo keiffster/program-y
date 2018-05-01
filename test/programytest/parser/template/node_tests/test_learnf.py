@@ -20,18 +20,20 @@ class MockTemplateLearnfNode(TemplateLearnfNode):
 
 class TemplateLearnfNodeTests(ParserTestsBaseClass):
 
-    def get_os_specific_filename(self):
+    def get_os_specific_path(self):
         if os.name == 'posix':
-            return '/tmp/learnf.aiml'
+            return '/tmp/learnf'
         elif os.name == 'nt':
-            return 'C:\Windows\Temp\leanf.aiml'
+            return 'C:\Windows\Temp\leanf'
         else:
             raise Exception("Unknown OS [%s]"%os.name)
         
     def test_node(self):
 
-        if os.path.exists(self.get_os_specific_filename()):
-            os.remove(self.get_os_specific_filename())
+        learnf_path = self.get_os_specific_path() + os.sep + "testid.aiml"
+
+        if os.path.exists(learnf_path):
+            os.remove(learnf_path)
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -46,12 +48,12 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
         root.append(learn)
         self.assertEqual(1, len(root.children))
 
-        self._client_context.brain.configuration.defaults._learn_filename = self.get_os_specific_filename()
+        self._client_context.brain.configuration.defaults._learn_path = self.get_os_specific_path()
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
 
-        self.assertTrue(os.path.exists(self.get_os_specific_filename()))
+        self.assertTrue(os.path.exists(learnf_path))
 
     def test_to_xml(self):
         root = TemplateNode()

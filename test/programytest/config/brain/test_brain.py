@@ -20,7 +20,7 @@ class BrainConfigurationTests(unittest.TestCase):
                   default-get: unknown
                   default-property: unknown
                   default-map: unknown
-                  learn-filename: y-bot-learn.aiml
+                  learnf-path: /tmp/learnf
 
                 nodes:
                   pattern_nodes: $BOT_ROOT/config/pattern_nodes.conf
@@ -116,7 +116,7 @@ class BrainConfigurationTests(unittest.TestCase):
         self.assertEqual("unknown", brain_config.defaults.default_get)
         self.assertEqual("unknown", brain_config.defaults.default_property)
         self.assertEqual("unknown", brain_config.defaults.default_map)
-        self.assertEqual("y-bot-learn.aiml", brain_config.defaults.learn_filename)
+        self.assertEqual("/tmp/learnf", brain_config.defaults.learnf_path)
 
         self.assertIsNotNone(brain_config.nodes)
         self.assertEquals("./config/pattern_nodes.conf", brain_config.nodes.pattern_nodes)

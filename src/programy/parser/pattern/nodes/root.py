@@ -52,3 +52,55 @@ class PatternRootNode(PatternNode):
 
     def match(self, client_context, context, words):
         return self.consume(client_context, context, words, 0, Match.WORD, 0)
+
+    def _remove_priority(self, userid):
+        removals = []
+        for node in self._priority_words:
+            if node.userid == userid:
+                removals.append(node)
+        for node in removals:
+            self._remove_node(node)
+
+    def _remove_0ormore_hash(self, userid):
+        if self._0ormore_hash is not None:
+            if self._0ormore_hash.userid == userid:
+                self._remove_node(self._0ormore_hash)
+
+    def _remove_1ormore_underline(self, userid):
+        if self._1ormore_underline is not None:
+            if self._1ormore_underline.userid == userid:
+                self._remove_node(self._1ormore_underline)
+
+    def _remove_children(self, userid):
+        removals = []
+        for node in self._children:
+            if node.userid == userid:
+                removals.append(node)
+        for node in removals:
+            self._remove_node(node)
+
+    def _remove_0ormore_arrow(self, userid):
+        if self._0ormore_arrow is not None:
+            if self._0ormore_arrow.userid == userid:
+                self._remove_node(self._0ormore_arrow)
+
+    def _remove_1ormore_star(self, userid):
+        if self._1ormore_star is not None:
+            if self._1ormore_star.userid == userid:
+                self._remove_node(self._1ormore_star)
+
+    def remove_children_with_userid(self, userid):
+
+        self._remove_priority(userid)
+
+        self._remove_0ormore_hash(userid)
+
+        self._remove_1ormore_underline(userid)
+
+        self._remove_children(userid)
+
+        self._remove_0ormore_arrow(userid)
+
+        self._remove_1ormore_star(userid)
+
+

@@ -1,9 +1,13 @@
 import xml.etree.ElementTree as ET
 
-from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.resetlearn import TemplateResetLearnNode
 from programy.parser.exceptions import ParserException
+from programy.parser.template.nodes.base import TemplateNode
+from programy.context import ClientContext
+from programy.bot import Bot
+from programy.config.bot.bot import BotConfiguration
 
+from programytest.aiml_tests.client import TestClient
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 class TemplateGraphResetLearnTests(TemplateGraphTestClient):
@@ -48,3 +52,65 @@ class TemplateGraphResetLearnTests(TemplateGraphTestClient):
 			""")
         with self.assertRaises(ParserException):
             ast = self._graph.parse_template_expression(template)
+
+     def test_removal(self):
+        client_context1 = ClientContext(TestClient(), "testid")
+        client_context1.bot = Bot(BotConfiguration())
+        client_context1.brain = client_context1.bot.brain
+
+        template = ET.fromstring("""
+        			<template>
+        				<learn>
+        				    <category>
+        				        <pattern>HELLO THERE</pattern>
+        				        <template>HIYA ONE</template>
+        				    </category>
+        				</learn>
+        			</template>
+        			""")
+
+        ast = self._graph.parse_template_expression(template)
+
+        learn_node = ast.children[0]
+
+        learn_node.resolve(client_context1)
+
+        response = client_context1.bot.ask_question(client_context1, "HELLO THERE")
+        self.assertEqual("HIYA ONE", response)
+
+        client_context2 = ClientContext(TestClient(), "testid")
+        client_context2.bot = Bot(BotConfiguration())
+        client_context2.brain = client_context2.bot.brain
+
+        template = ET.fromstring("""
+        			<template>
+        				<learn>
+        				    <category>
+        				        <pattern>HELLO THERE</pattern>
+        				        <template>HIYA TWO</template>
+        				    </category>
+        				</learn>
+        			</template>
+        			""")
+
+        ast = self._graph.parse_template_expression(template)
+
+        learn_node = ast.children[0]
+
+        learn_node.resolve(client_context2)
+
+        response = client_context2.bot.ask_question(client_context2, "HELLO THERE")
+        self.assertEqual("HIYA TWO", response)
+
+        template = ET.fromstring("""
+        			<template>
+        				<resetlearn />
+        			</template>
+        			""")
+
+        ast = self._graph.parse_template_expression(template)
+
+        learn_node = ast.children[0]
+
+        learn_node.resolve(client_context2)
+

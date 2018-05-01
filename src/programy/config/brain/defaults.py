@@ -28,9 +28,9 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
         self._default_property = "unknown"
         self._default_map = "unknown"
         if os.name == 'posix':
-            self._learn_filename = '/tmp/learnf.aiml'
+            self._learnf_path = '/tmp/learnf'
         elif os.name == 'nt':
-            self._learn_filename = 'C:\\Windows\\Temp\\leanf.aiml'
+            self._learnf_path = 'C:\\Windows\\Temp\\leanf'
 
     @property
     def default_get(self):
@@ -45,8 +45,8 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
         return self._default_map
 
     @property
-    def learn_filename(self):
-        return self._learn_filename
+    def learnf_path(self):
+        return self._learnf_path
 
     def load_config_section(self, configuration_file, configuration, bot_root):
         binaries = configuration_file.get_section("defaults", configuration)
@@ -54,8 +54,8 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
             self._default_get = configuration_file.get_option(binaries, "default-get", missing_value=None)
             self._default_property = configuration_file.get_option(binaries, "default-property", missing_value=None)
             self._default_map = configuration_file.get_option(binaries, "default-map", missing_value=None)
-            learn_filename = configuration_file.get_option(binaries, "learn-filename", missing_value=None)
-            if learn_filename is not None:
-                self._learn_filename = self.sub_bot_root(learn_filename, bot_root)
+            learnf_path = configuration_file.get_option(binaries, "learnf_path", missing_value=None)
+            if learnf_path is not None:
+                self._learnf_path = self.sub_bot_root(learnf_path, bot_root)
         else:
-            YLogger.warning(self, "'spelling' section missing from bot config, using to defaults")
+            YLogger.warning(self, "'defaults' section missing from bot config, using default defaults")

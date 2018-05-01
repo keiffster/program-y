@@ -421,6 +421,55 @@ class PatternNode(object):
 
         return new_node
 
+    def _remove_node(self, current_node):
+        YLogger.debug(None, "Removing %s" % current_node.to_string())
+
+        if current_node.is_priority()  is True:
+            self._priority_words.remove(current_node)
+
+        elif current_node.is_zero_or_more() is True:
+            if current_node.wildcard == '^':
+                self._0ormore_arrow = None
+            elif current_node.wildcard == '#':
+                self._0ormore_hash = None
+
+        elif current_node.is_one_or_more() is True:
+            if current_node.wildcard == '_':
+                self._1ormore_underline = None
+            elif current_node.wildcard == '*':
+                self._1ormore_star = None
+
+        elif current_node.is_template() is True:
+            self._template = None
+
+        else:
+            # Append sets and bots to the end of the array as they take a slightly
+            # lower priority to actual words.
+            # This allows the following to work
+            #  my favorite color is green
+            #  my favorite color is <set>color</set>
+            # In the above, if the set color contains green then
+            # it still gets picked up in the first grammar and not he second
+            if current_node.is_set() is True:
+                self.children.remove(current_node)
+                self._set_names.remove(current_node.set_name, current_node)
+
+            elif current_node.is_iset() is True:
+                self.children.remove(current_node)
+                self._iset_names.remove(current_node.iset_name, current_node)
+
+            elif current_node.is_bot() is True:
+                self.children.remove(current_node)
+                self._bot_properties.remove(current_node.property, current_node)
+
+            elif current_node.is_regex() is True:
+                self.children.remove(current_node)
+
+            else:
+                self.children.remove(current_node)
+                if current_node.is_word() is True:
+                    self._children_words.remove(current_node.word, current_node)
+
     def add_child(self, new_node, replace_existing=False):
 
         # Check the rules allow this now to be a child of the current node

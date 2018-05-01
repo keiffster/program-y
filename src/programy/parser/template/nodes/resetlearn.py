@@ -28,6 +28,8 @@ class TemplateResetLearnNode(TemplateNode):
 
     def resolve_to_string(self, client_context):
         YLogger.debug(client_context, "Removing all learn nodes created by [%s]", client_context.userid)
+        root = client_context.brain.aiml_parser.pattern_parser.root
+        root.remove_children_with_userid(client_context.userid)
         return ""
 
     def resolve(self, client_context):

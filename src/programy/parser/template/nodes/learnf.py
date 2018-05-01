@@ -49,9 +49,15 @@ class TemplateLearnfNode(TemplateLearnNode):
         xml += "</learnf>"
         return xml
 
-    def write_learnf_to_file(self, client_context, category):
-        learnf_path = client_context.brain.configuration.defaults.learn_filename
-        YLogger.debug(client_context, "Writing learnf to %s", learnf_path)
+    @staticmethod
+    def create_learnf_path(client_context):
+        return "%s%s%s.aiml"%(client_context.brain.configuration.defaults.learnf_path, os.sep, client_context.userid)
+
+    @staticmethod
+    def create_learn_file_if_missing(client_context, learnf_path):
+
+        if os.path.exists(client_context.brain.configuration.defaults.learnf_path) is False:
+            os.mkdir(client_context.brain.configuration.defaults.learnf_path)
 
         if os.path.isfile(learnf_path) is False:
             file = open(learnf_path, "w+", encoding="utf-8")
@@ -60,16 +66,32 @@ class TemplateLearnfNode(TemplateLearnNode):
             file.write('</aiml>\n')
             file.close()
 
-        tree = ET.parse(learnf_path)
-        root = tree.getroot()
-
+    @staticmethod
+    def create_category_xml_node(client_context, category)   :
         # Add our new element
         child = ET.Element("category")
         child.append(category.pattern)
         child.append(category.topic)
         child.append(category.that)
         child.append(category.template.xml_tree(client_context))
+        return child
 
-        root.append(child)
+    @staticmethod
+    def write_node_to_learnf_file(client_context, node):
 
+        learnf_path = TemplateLearnfNode.create_learnf_path(client_context)
+
+        TemplateLearnfNode.create_learn_file_if_missing(client_context, learnf_path)
+
+        YLogger.debug(client_context, "Writing learnf to %s", learnf_path)
+
+        tree = ET.parse(learnf_path)
+        root = tree.getroot()
+        root.append(node)
         tree.write(learnf_path, method="xml")
+
+    def write_learnf_to_file(self, client_context, category):
+
+        node = TemplateLearnfNode.create_category_xml_node(client_context, category)
+
+        TemplateLearnfNode.write_node_to_learnf_file(client_context, node)

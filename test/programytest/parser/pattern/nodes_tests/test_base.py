@@ -481,3 +481,71 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertIsNone(node._word_node_exist(new_node2))
         node.add_child(new_node2)
         self.assertIsNotNone(node._word_node_exist(new_node2))
+
+    def test_remove_priority_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternPriorityWordNode("test")
+        node.add_child(child_node)
+        self.assertEquals(1, len(node.priority_words))
+
+        node._remove_node(child_node)
+        self.assertEquals(0, len(node.priority_words))
+
+    def test_remove_zeroormore_arrow_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternZeroOrMoreWildCardNode("^")
+        node.add_child(child_node)
+        self.assertIsNotNone(node._0ormore_arrow)
+
+        node._remove_node(child_node)
+        self.assertIsNone(node._0ormore_arrow)
+
+    def test_remove_zeroormore_hash_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternZeroOrMoreWildCardNode("#")
+        node.add_child(child_node)
+        self.assertIsNotNone(node._0ormore_hash)
+
+        node._remove_node(child_node)
+        self.assertIsNone(node._0ormore_hash)
+
+    def test_remove_oneormore_underline_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternOneOrMoreWildCardNode("_")
+        node.add_child(child_node)
+        self.assertIsNotNone(node._1ormore_underline)
+
+        node._remove_node(child_node)
+        self.assertIsNone(node._1ormore_underline)
+
+    def test_remove_oneormore_star_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternOneOrMoreWildCardNode("*")
+        node.add_child(child_node)
+        self.assertIsNotNone(node._1ormore_star)
+
+        node._remove_node(child_node)
+        self.assertIsNone(node._1ormore_star)
+
+    def test_remove_word_node(self):
+        node = PatternNode()
+        self.assertIsNotNone(node)
+
+        child_node = PatternWordNode("test")
+        node.add_child(child_node)
+        self.assertEquals(1, len(node.children))
+        self.assertEquals(1, len(node._children_words))
+
+        node._remove_node(child_node)
+        self.assertEquals(0, len(node.children))
+        self.assertEquals(0, len(node._children_words))

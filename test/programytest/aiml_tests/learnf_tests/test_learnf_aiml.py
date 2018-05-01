@@ -26,12 +26,14 @@ class LearnfAIMLTests(unittest.TestCase):
         client = LearnfTestClient()
         self._client_context = client.create_client_context("testid")
 
-        self.learnf_path = self._client_context.bot.brain.configuration.defaults._learn_filename
-        if os.path.exists(self.learnf_path):
-            os.remove(self.learnf_path)
+        self.learnf_path = self._client_context.bot.brain.configuration.defaults._learnf_path
+        self.learnf_file = self.learnf_path + os.sep + "testid.aiml"
+
+        if os.path.exists(self.learnf_file):
+            os.remove(self.learnf_file)
 
     def test_my_name_is_fred(self):
-        self.assertFalse(os.path.exists(self.learnf_path))
+        self.assertFalse(os.path.exists(self.learnf_file))
 
         response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
         self.assertIsNotNone(response)
@@ -43,7 +45,7 @@ class LearnfAIMLTests(unittest.TestCase):
         self.assertEqual(response, "YOUR NAME IS FRED")
 
     def test_john_played_cricket(self):
-        self.assertFalse(os.path.exists(self.learnf_path))
+        self.assertFalse(os.path.exists(self.learnf_file))
 
         response = self._client_context.bot.ask_question(self._client_context, "JOHN PLAYED CRICKET")
         self.assertIsNotNone(response)
@@ -55,9 +57,9 @@ class LearnfAIMLTests(unittest.TestCase):
         self.assertEqual(response, "JOHN PLAYED CRICKET")
 
     def check_file_contents(self, pattern, topic, that, template):
-        self.assertTrue(os.path.exists(self.learnf_path))
+        self.assertTrue(os.path.exists(self.learnf_file))
 
-        tree = ET.parse(self.learnf_path)
+        tree = ET.parse(self.learnf_file)
         aiml = tree.getroot()
 
         categories = aiml.findall('category')
