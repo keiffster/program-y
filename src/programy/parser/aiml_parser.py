@@ -141,15 +141,6 @@ class AIMLParser(object):
         if diff.total_seconds() > 0:
             YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
 
-    def load_learnf_from_directory(self, configuration):
-        for file in configuration.defaults.learnf_path:
-            aimls_loaded = self._aiml_loader.load_dir_contents(file,
-                                                               configuration.defaults.learnf_path,
-                                                               configuration.files.aiml_files.extension)
-            total_aimls_loaded = len(aimls_loaded)
-
-        YLogger.info(self, "Loaded a total of %d aiml learnf files", total_aimls_loaded)
-
     def load_single_file(self, configuration):
         start = datetime.datetime.now()
         self._aiml_loader.load_single_file_contents(configuration.files.aiml_files.file)
@@ -166,7 +157,6 @@ class AIMLParser(object):
 
             if configuration.files.aiml_files.has_multiple_files():
                 self.load_files_from_directory(configuration)
-                #self.load_learnf_from_directory(configuration)
 
             elif configuration.files.aiml_files.has_single_file():
                 self.load_single_file(configuration)

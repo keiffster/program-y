@@ -54,7 +54,7 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
             self._default_get = configuration_file.get_option(binaries, "default-get", missing_value=None)
             self._default_property = configuration_file.get_option(binaries, "default-property", missing_value=None)
             self._default_map = configuration_file.get_option(binaries, "default-map", missing_value=None)
-            learnf_path = configuration_file.get_option(binaries, "learnf_path", missing_value=None)
+            learnf_path = configuration_file.get_option(binaries, "learnf-path", missing_value=None)
             if learnf_path is not None:
                 self._learnf_path = self.sub_bot_root(learnf_path, bot_root)
         else:
