@@ -89,6 +89,7 @@ class ConfigurationWriter(object):
 
         parser.add_argument('-f', '--file', default="config.yaml", help="Name of file to create" )
         parser.add_argument('-c', '--clients', nargs='+', help="Name of client config to create, use multiple times or all" )
+        parser.add_argument('-d', '--defaults', action='store_true', help="Create all config settings with default values" )
 
         return parser
 
@@ -105,4 +106,5 @@ class ConfigurationWriter(object):
 if __name__ == '__main__':
 
     ConfigurationWriter.run ()
+
 
