@@ -2,7 +2,7 @@ import unittest
 import os
 
 from programy.context import ClientContext
-from programy.config.brain.security import BrainSecurityConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 
 from programytest.aiml_tests.client import TestClient
 
@@ -14,7 +14,7 @@ class AuthoriseTestClient(TestClient):
     def load_configuration(self, arguments):
         super(AuthoriseTestClient, self).load_configuration(arguments)
         self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
-        self.configuration.client_configuration.configurations[0].configurations[0].security._authorisation = BrainSecurityConfiguration("authorisation")
+        self.configuration.client_configuration.configurations[0].configurations[0].security._authorisation = BrainSecurityAuthorisationConfiguration()
         self.configuration.client_configuration.configurations[0].configurations[0].security.authorisation._classname = "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
         self.configuration.client_configuration.configurations[0].configurations[0].security.authorisation._denied_srai = "ACCESS_DENIED"
         self.configuration.client_configuration.configurations[0].configurations[0].security.authorisation._usergroups = os.path.dirname(__file__) + os.sep + "usergroups.yaml"

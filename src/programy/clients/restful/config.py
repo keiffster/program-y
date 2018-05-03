@@ -74,3 +74,23 @@ class RestConfiguration(ClientConfigurationData):
             if self._ssl_key_file is not None:
                 self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
         super(RestConfiguration, self).load_configuration(configuration_file, rest, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['host'] = "0.0.0.0"
+            data['port'] = 80
+            data['debug'] = False
+            data['use_api_keys'] = False
+            data['api_key_file'] = './api.keys'
+            data['ssl_cert_file'] = './rsa.cert'
+            data['ssl_key_file'] = './rsa.keys'
+        else:
+            data['host'] = self._host
+            data['port'] = self._port
+            data['debug'] = self._debug
+            data['use_api_keys'] = self._use_api_keys
+            data['api_key_file'] = self._api_key_file
+            data['ssl_cert_file'] = self._ssl_cert_file
+            data['ssl_key_file'] = self._ssl_key_file
+
+        super(RestConfiguration, self).to_yaml(data, defaults)

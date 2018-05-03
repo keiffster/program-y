@@ -56,3 +56,19 @@ class SocketConfiguration(ClientConfigurationData):
             self._workers = configuration_file.get_option(socket, "queue", missing_value=5)
             self._max_buffer = configuration_file.get_option(socket, "max_buffer", missing_value=1024)
         super(SocketConfiguration, self).load_configuration(configuration_file, socket, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['host'] = "0.0.0.0"
+            data['port'] = 80
+            data['debug'] = False
+            data['queue'] = 5
+            data['max_buffer'] = 1024
+        else:
+            data['host'] = self._host
+            data['port'] = self._port
+            data['debug'] = self._debug
+            data['queue'] = self._queue
+            data['max_buffer'] = self._max_buffer
+
+        super(SocketConfiguration, self).to_yaml(data, defaults)

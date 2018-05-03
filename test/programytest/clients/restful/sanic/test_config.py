@@ -44,3 +44,16 @@ class SanicRestConfigurationTests(unittest.TestCase):
         self.assertEqual(80, sanic_config.port)
         self.assertEqual(False, sanic_config.debug)
         self.assertEqual(False, sanic_config.use_api_keys)
+
+    def test_to_yaml_with_defaults(self):
+        config = SanicRestConfiguration("sanic")
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['workers'], 4)
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

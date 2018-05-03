@@ -39,9 +39,9 @@ class AIMLLoader(FileFinder):
         FileFinder.__init__(self)
         self._aiml_parser = aiml_parser
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid="*"):
         try:
-            return self._aiml_parser.parse_from_file(filename)
+            return self._aiml_parser.parse_from_file(filename, userid=userid)
         except Exception as excep:
             YLogger.exception(self, "Failed to load contents of file from [%s]"%filename, excep)
 
@@ -130,7 +130,8 @@ class AIMLParser(object):
         for file in configuration.files.aiml_files.files:
             aimls_loaded = self._aiml_loader.load_dir_contents(file,
                                                                configuration.files.aiml_files.directories,
-                                                               configuration.files.aiml_files.extension)
+                                                               configuration.files.aiml_files.extension,
+                                                               filename_as_userid=False)
             total_aimls_loaded = len(aimls_loaded)
 
         stop = datetime.datetime.now()
@@ -140,6 +141,17 @@ class AIMLParser(object):
         YLogger.info(self, "Loaded a total of %d aiml files with %d categories", total_aimls_loaded, self.num_categories)
         if diff.total_seconds() > 0:
             YLogger.info(self, "Thats approx %f aiml files per sec", total_aimls_loaded / diff.total_seconds())
+
+    def load_learnf_files_from_directory(self, configuration):
+
+        if configuration.defaults.learnf_path is not None:
+            aimls_loaded = self._aiml_loader.load_dir_contents(configuration.defaults.learnf_path,
+                                                               False,
+                                                               configuration.files.aiml_files.extension,
+                                                               filename_as_userid=True)
+            total_aimls_loaded = len(aimls_loaded)
+
+            YLogger.info(self, "Loaded a total of %d learnf aiml files", total_aimls_loaded)
 
     def load_single_file(self, configuration):
         start = datetime.datetime.now()
@@ -157,9 +169,11 @@ class AIMLParser(object):
 
             if configuration.files.aiml_files.has_multiple_files():
                 self.load_files_from_directory(configuration)
+                self.load_learnf_files_from_directory(configuration)
 
             elif configuration.files.aiml_files.has_single_file():
                 self.load_single_file(configuration)
+                self.load_learnf_files_from_directory(configuration)
 
             else:
                 YLogger.info(self, "No AIML files or file defined in configuration to load")
@@ -203,7 +217,7 @@ class AIMLParser(object):
 
         return tag_name, namespace
 
-    def parse_from_file(self, filename):
+    def parse_from_file(self, filename, userid="*"):
         """
         Parse an AIML file and return all the cateogeries found in the file
         :param filename: Name of file to parse
@@ -218,7 +232,7 @@ class AIMLParser(object):
             _, namespace = self.check_aiml_tag(aiml, filename=filename)
 
             start = datetime.datetime.now()
-            num_categories = self.parse_aiml(aiml, namespace, filename)
+            num_categories = self.parse_aiml(aiml, namespace, filename, userid=userid)
             stop = datetime.datetime.now()
             diff = stop - start
             YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
@@ -288,7 +302,7 @@ class AIMLParser(object):
 
             self._errors.save_entry(parser_excep.message, filename, startline, endline)
 
-    def parse_aiml(self, aiml_xml, namespace, filename=None):
+    def parse_aiml(self, aiml_xml, namespace, filename=None, userid="*"):
         self.parse_version(aiml_xml)
 
         categories_found = False
@@ -309,7 +323,7 @@ class AIMLParser(object):
 
             elif tag_name == 'category':
                 try:
-                    self.parse_category(expression, namespace)
+                    self.parse_category(expression, namespace, userid=userid)
                     categories_found = True
                     num_category += 1
 
@@ -437,7 +451,7 @@ class AIMLParser(object):
         else:
             return patterns[0]
 
-    def parse_category(self, category_xml, namespace, topic_element=None, add_to_graph=True):
+    def parse_category(self, category_xml, namespace, topic_element=None, add_to_graph=True, userid="*"):
 
         topic_element = self.find_topic(category_xml, namespace, topic_element)
 
@@ -448,7 +462,7 @@ class AIMLParser(object):
         pattern = self.get_pattern(category_xml, namespace)
 
         if add_to_graph is True:
-            self._pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root)
+            self._pattern_parser.add_pattern_to_graph(pattern, topic_element, that_element, template_graph_root, userid=userid)
             self._num_categories += 1
 
         return (pattern, topic_element, that_element, template_graph_root)

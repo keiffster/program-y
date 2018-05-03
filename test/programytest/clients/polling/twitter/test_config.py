@@ -34,3 +34,22 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertEquals("./storage/twitter.data", twitter_config.storage_location)
         self.assertEquals("Thanks for following me", twitter_config.welcome_message)
 
+    def test_to_yaml_with_defaults(self):
+        config = TwitterConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['polling_interval'], 0)
+        self.assertEquals(data['rate_limit_sleep'], -1)
+        self.assertEquals(data['use_status'], False)
+        self.assertEquals(data['use_direct_message'], False)
+        self.assertEquals(data['auto_follow'], False)
+        self.assertEquals(data['storage'], 'file')
+        self.assertEquals(data['storage_location'], './storage/twitter.data')
+        self.assertEquals(data['welcome_message'], "Thanks for following me.")
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

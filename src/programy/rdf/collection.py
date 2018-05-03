@@ -8,7 +8,7 @@ class RDFLoader(FileFinder):
         FileFinder.__init__(self)
         self._collection = collection
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid="*"):
         YLogger.debug(self, "Loading RDF File [%s]", filename)
         try:
             self._collection.load_from_filename(filename)

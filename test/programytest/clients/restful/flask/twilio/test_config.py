@@ -36,3 +36,14 @@ class TwilioConfigurationTests(unittest.TestCase):
         self.assertEqual("0.0.0.0", twilio_config.host)
         self.assertEqual(80, twilio_config.port)
         self.assertEqual(False, twilio_config.debug)
+
+    def test_to_yaml_with_defaults(self):
+        config = TwilioConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

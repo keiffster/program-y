@@ -94,7 +94,7 @@ class TestFileFileFinder(FileFinder):
         else:
             print("Template [%s] not found!" % answer)
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid="*"):
         print("Loading aiml_tests from file [%s]" % filename)
         questions = []
         templates = {}

@@ -34,6 +34,7 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
 
         if os.path.exists(learnf_path):
             os.remove(learnf_path)
+        self.assertFalse(os.path.exists(learnf_path))
 
         root = TemplateNode()
         self.assertIsNotNone(root)
@@ -54,6 +55,9 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
         self.assertEqual("", resolved)
 
         self.assertTrue(os.path.exists(learnf_path))
+        if os.path.exists(learnf_path):
+            os.remove(learnf_path)
+        self.assertFalse(os.path.exists(learnf_path))
 
     def test_to_xml(self):
         root = TemplateNode()

@@ -22,6 +22,7 @@ class ArrowAIMLTests(unittest.TestCase):
         self._client_context = client.create_client_context("testid")
 
     def test_arrow_first_word(self):
+
         response = self._client_context.bot.ask_question(self._client_context,  "SAY HEY")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'ARROW IS SAY')

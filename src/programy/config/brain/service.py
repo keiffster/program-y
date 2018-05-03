@@ -65,3 +65,10 @@ class BrainServiceConfiguration(BaseSectionConfigurationData):
             self.load_additional_key_values(configuration_file, service)
         else:
             YLogger.warning(self, "'services' section missing from brain config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        data['classname'] = self._classname
+        data['method'] = self._method
+        data['host'] = self._host
+        data['port'] = self._port
+        data['url'] = self._url

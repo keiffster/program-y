@@ -1,7 +1,8 @@
 import unittest
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.brain.security import BrainSecurityConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
+from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 
 class BrainSecurityConfigurationTests(unittest.TestCase):
@@ -22,12 +23,12 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authorisation")
+        service_config = BrainSecurityAuthorisationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authorise.passthrough.PassThroughAuthorisationService", service_config.classname)
         self.assertEqual("AUTHORISATION_FAILED", service_config.denied_srai)
-        self.assertEqual(BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+        self.assertEqual(BrainSecurityAuthorisationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
 
     def test_authorisation_with_data_denied_text(self):
         yaml = YamlConfigurationFile()
@@ -45,7 +46,7 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authorisation")
+        service_config = BrainSecurityAuthorisationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authorise.passthrough.PassThroughAuthorisationService", service_config.classname)
@@ -67,11 +68,11 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authorisation")
+        service_config = BrainSecurityAuthorisationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authorise.passthrough.PassThroughAuthorisationService", service_config.classname)
-        self.assertEqual(BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+        self.assertEqual(BrainSecurityAuthorisationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
         self.assertIsNone(service_config.denied_srai)
 
     def test_authentication_with_data_denied_srai(self):
@@ -90,12 +91,12 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authentication")
+        service_config = BrainSecurityAuthenticationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
         self.assertEqual("AUTHENTICATION_FAILED", service_config.denied_srai)
-        self.assertEqual(BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+        self.assertEqual(BrainSecurityAuthenticationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
 
     def test_authentication_with_data_denied_text(self):
         yaml = YamlConfigurationFile()
@@ -113,7 +114,7 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authentication")
+        service_config = BrainSecurityAuthenticationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
@@ -135,9 +136,9 @@ class BrainSecurityConfigurationTests(unittest.TestCase):
         services_config = yaml.get_section("security", brain_config)
         self.assertIsNotNone(services_config)
 
-        service_config = BrainSecurityConfiguration("authentication")
+        service_config = BrainSecurityAuthenticationConfiguration()
         service_config.load_config_section(yaml, services_config, ".")
 
         self.assertEqual("programy.security.authenticate.passthrough.PassThroughAuthenticationService", service_config.classname)
-        self.assertEqual(BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
-        self.assertEqual(BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+        self.assertEqual(BrainSecurityAuthenticationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)
+        self.assertEqual(BrainSecurityAuthenticationConfiguration.DEFAULT_ACCESS_DENIED, service_config.denied_text)

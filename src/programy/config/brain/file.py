@@ -70,3 +70,13 @@ class BrainFileConfiguration(BaseSectionConfigurationData):
                     self._file = self.sub_bot_root(file, bot_root)
         else:
             YLogger.warning(self, "'%s' section missing from bot config, using to defaults", self.section_name)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['files'] = "./%s"%self.id
+            data['extension'] = ".txt"
+            data['directories'] = False
+        else:
+            data['files'] = self._files
+            data['extension'] = self._extension
+            data['directories'] = self._directories

@@ -53,3 +53,15 @@ class BotConversationsRedisStorageConfiguration(BaseConfigurationData):
                                                          missing_value="program_y:bot_cache")
         else:
             YLogger.warning(self, "'BotConversationsRedisStorageConfiguration' section missing from bot config, using defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['host'] = 'localhost'
+            data['port'] = 6379
+            data['password'] = 'password'
+            data['prefix'] = 'programy'
+        else:
+            data['host'] = self._host
+            data['port'] = self._port
+            data['password'] = self._password
+            data['prefix'] = self._prefix

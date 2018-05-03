@@ -74,3 +74,8 @@ class BrainAIMLFileConfiguration(BrainFileConfiguration):
                 debug_file.load_config_section(configuration_file, files_config, bot_root)
                 return debug_file
         return None
+
+    def to_yaml(self, data, defaults=True):
+        self.config_to_yaml(data, DebugFileConfiguration('errors'), defaults)
+        self.config_to_yaml(data, DebugFileConfiguration('duplicates'), defaults)
+        self.config_to_yaml(data, DebugFileConfiguration('conversation'), defaults)

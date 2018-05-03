@@ -20,11 +20,11 @@ from programy.utils.logging.ylogger import YLogger
 from programy.security.authorise.authorisor import Authoriser
 from programy.security.authorise.authorisor import AuthorisationException
 from programy.security.authorise.usergrouploader import UserGroupLoader
-from programy.config.brain.security import BrainSecurityConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 
 class BasicUserGroupAuthorisationService(Authoriser):
 
-    def __init__(self, config: BrainSecurityConfiguration):
+    def __init__(self, config: BrainSecurityAuthorisationConfiguration):
         Authoriser.__init__(self, config)
         self.load_users_and_groups()
 

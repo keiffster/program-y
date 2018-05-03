@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.config.bot.redisstorage import BotConversationsRedisStorageConfiguration
+from programy.config.bot.filestorage import BotConversationsFileStorageConfiguration
 from programy.dialog.storage.factory import ConversationStorageFactory
 
 class BotConversationsConfiguration(BaseConfigurationData):
@@ -72,3 +74,20 @@ class BotConversationsConfiguration(BaseConfigurationData):
 
         else:
             YLogger.warning(self, "'Conversations' section missing from bot config, using defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['type'] = "file"
+            data['max_histories'] = 100
+            data['restore_last_topic'] = True
+            data['initial_topic'] = "*"
+            data['empty_on_start'] = True
+        else:
+            data['type'] = self._type
+            data['max_histories'] = self._max_histories
+            data['restore_last_topic'] = self._restore_last_topic
+            data['initial_topic'] = self._initial_topic
+            data['empty_on_start'] = self._empty_on_start
+
+        self.config_to_yaml(data, BotConversationsFileStorageConfiguration("file"), defaults)
+        self.config_to_yaml(data, BotConversationsRedisStorageConfiguration("redis"), defaults)

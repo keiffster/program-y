@@ -55,3 +55,15 @@ class BrainBinariesConfiguration(BaseSectionConfigurationData):
             self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
         else:
             YLogger.warning(self, "'binaries' section missing from bot config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['save_binary'] = False
+            data['load_binary'] = False
+            data['binary_filename'] = "./braintree.bin"
+            data['load_aiml_on_binary_fail'] = True
+        else:
+            data['save_binary'] = self._save_binary
+            data['load_binary'] = self._load_binary
+            data['binary_filename'] = self._binary_filename
+            data['load_aiml_on_binary_fail'] = self._load_aiml_on_binary_fail

@@ -50,3 +50,17 @@ class KikConfiguration(RestConfiguration):
             self._unknown_command = configuration_file.get_option(kik, "unknown_command", missing_value="Unknown command")
             self._unknown_command_srai = configuration_file.get_option(kik, "unknown_command_srai", missing_value=None)
         super(KikConfiguration, self).load_configuration(configuration_file, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['bot_name'] = "program-y"
+            data['webhook'] = "https://666666666.ngrok.io"
+            data['unknown_command'] = "Unknown command"
+            data['unknown_command_srai'] = 'KIKUNKNONWCOMMAND'
+        else:
+            data['bot_name'] = self._bot_name
+            data['webhook'] = self._webhook
+            data['unknown_command'] = self._unknown_command
+            data['unknown_command_srai'] = self._unknown_command_srai
+
+        super(KikConfiguration, self).to_yaml(data, defaults)

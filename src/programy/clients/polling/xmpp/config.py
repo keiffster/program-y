@@ -62,3 +62,21 @@ class XmppConfiguration(ClientConfigurationData):
             self._xep_0060 = configuration_file.get_bool_option(xmpp, "xep_0060")
             self._xep_0199 = configuration_file.get_bool_option(xmpp, "xep_0199")
         super(XmppConfiguration, self).load_configuration(configuration_file, xmpp, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['server'] = "talk.google.com"
+            data['port'] = 5222
+            data['xep_0030'] = True
+            data['xep_0004'] = True
+            data['xep_0060'] = True
+            data['xep_0199'] = True
+        else:
+            data['server'] = self._server
+            data['port'] = self._port
+            data['xep_0030'] = self._xep_0030
+            data['xep_0004'] = self._xep_0004
+            data['xep_0060'] = self._xep_0060
+            data['xep_0199'] = self._xep_0199
+
+        super(XmppConfiguration, self).to_yaml(data, defaults)

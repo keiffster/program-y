@@ -21,6 +21,8 @@ class YLoggerTests(unittest.TestCase):
         self.assertIsNotNone(snapshot)
         self.assertEquals(str(snapshot), "Critical(0) Fatal(0) Error(0) Exception(0) Warning(0) Info(0), Debug(0)")
 
+        YLogger.reset_snapshot()
+
         YLogger.critical(client_context, "Test Message")
         snapshot = YLogger.snapshot()
         self.assertIsNotNone(snapshot)
@@ -36,7 +38,7 @@ class YLoggerTests(unittest.TestCase):
         self.assertIsNotNone(snapshot)
         self.assertEquals(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(0) Warning(0) Info(0), Debug(0)")
 
-        YLogger.exception(client_context, "Test Message")
+        YLogger.exception(client_context, "Test Message", Exception("Test error"))
         snapshot = YLogger.snapshot()
         self.assertIsNotNone(snapshot)
         self.assertEquals(str(snapshot), "Critical(1) Fatal(1) Error(1) Exception(1) Warning(0) Info(0), Debug(0)")

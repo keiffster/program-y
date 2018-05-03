@@ -45,3 +45,11 @@ class BrainNodesConfiguration(BaseSectionConfigurationData):
                 self._template_nodes = self.sub_bot_root(template_nodes, bot_root)
         else:
             YLogger.warning(self, "'nodes' section missing from bot config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['pattern_nodes'] = "./config/pattern_nodes.conf"
+            data['template_nodes'] = "./config/template_nodes.conf"
+        else:
+            data['pattern_nodes'] = self._pattern_nodes
+            data['template_nodes'] = self._template_nodes

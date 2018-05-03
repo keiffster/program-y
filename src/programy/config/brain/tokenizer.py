@@ -41,3 +41,11 @@ class BrainTokenizerConfiguration(BaseConfigurationData):
             self._split_chars = configuration_file.get_option(tokenizer, "split_chars", missing_value=" ")
         else:
             YLogger.warning(self, "'tokenizer' section missing from bot config, using defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['classname'] = "programy.parser.tokenizer.Tokenizer"
+            data['split_chars'] = ' '
+        else:
+            data['classname'] = self._classname
+            data['split_chars'] = self._split_chars

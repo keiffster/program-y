@@ -32,3 +32,11 @@ class SanicRestConfiguration(RestConfiguration):
         if sanic is not None:
             self._workers = configuration_file.get_option(sanic, "workers", missing_value=4)
         super(SanicRestConfiguration, self).load_configuration(configuration_file, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['workers'] = 4
+        else:
+            data['workers'] = self._workers
+
+        super(SanicRestConfiguration, self).to_yaml(data, defaults)

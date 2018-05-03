@@ -56,3 +56,14 @@ class DebugFileConfiguration(BaseSectionConfigurationData):
         else:
             YLogger.warning(self, "'%s' section missing from aiml files config, using to defaults", self.section_name)
 
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['file'] = "./%s.csv"%self.id
+            data['file_format'] = "csv"
+            data['encoding'] = 'utf-8'
+            data['delete_on_start'] = True
+        else:
+            data['file'] = self._file
+            data['file_format'] = self._file_format
+            data['encoding'] = self._encoding
+            data['delete_on_start'] = self._delete_on_start

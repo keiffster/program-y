@@ -9,8 +9,9 @@ class TestFileFinder(FileFinder):
         FileFinder.__init__(self)
         self.files = []
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid):
         self.files.append(filename)
+
 
 class FileFinderTests(unittest.TestCase):
 

@@ -36,3 +36,9 @@ class BotConversationsFileStorageConfiguration(BaseConfigurationData):
                 self._dir = self.sub_bot_root(dir, bot_root)
         else:
             YLogger.warning(self, "'BotConversationsFileStorageConfiguration' section missing from bot config, using defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['dir'] = './conversations'
+        else:
+            data['dir'] = self._dir

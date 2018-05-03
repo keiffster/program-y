@@ -38,3 +38,13 @@ class TelegramConfiguration(ClientConfigurationData):
             self._unknown_command = configuration_file.get_option(telegram, "unknown_command", missing_value="Unknown command")
             self._unknown_command_srai = configuration_file.get_option(telegram, "unknown_command_srai", missing_value=None)
         super(TelegramConfiguration, self).load_configuration(configuration_file, telegram, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['unknown_command'] = "Sorry, that is not a command I have been taught yet!"
+            data['unknown_command_srai'] = 'YTELEGRAM_UNKNOWN_COMMAND'
+        else:
+            data['unknown_command'] = self._unknown_command
+            data['unknown_command_srai'] = self._unknown_command_srai
+
+        super(TelegramConfiguration, self).to_yaml(data, defaults)

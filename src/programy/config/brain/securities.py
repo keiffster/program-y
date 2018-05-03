@@ -16,7 +16,9 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.config.section import BaseSectionConfigurationData
-from programy.config.brain.security import BrainSecurityConfiguration
+from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
+from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
+
 
 
 class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
@@ -36,8 +38,12 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
     def load_config_section(self, configuration_file, configuration, bot_root):
         securities = configuration_file.get_section(self.section_name, configuration)
         if securities is not None:
-            self._authentication = BrainSecurityConfiguration("authentication")
+            self._authentication = BrainSecurityAuthenticationConfiguration()
             self._authentication.load_config_section(configuration_file, securities, bot_root)
 
-            self._authorisation = BrainSecurityConfiguration("authorisation")
+            self._authorisation = BrainSecurityAuthorisationConfiguration()
             self._authorisation.load_config_section(configuration_file, securities, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        self.config_to_yaml(data, BrainSecurityAuthenticationConfiguration(), defaults)
+        self.config_to_yaml(data, BrainSecurityAuthorisationConfiguration(), defaults)

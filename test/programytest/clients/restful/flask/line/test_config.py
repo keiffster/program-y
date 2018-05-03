@@ -40,3 +40,17 @@ class LineConfigurationTests(unittest.TestCase):
         self.assertEqual("0.0.0.0", line_config.host)
         self.assertEqual(80, line_config.port)
         self.assertEqual(False, line_config.debug)
+
+    def test_to_yaml_with_defaults(self):
+        config = LineConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['unknown_command'], "Unknown command")
+        self.assertEquals(data['unknown_command_srai'], 'LINEUNKNOWNCOMMAND')
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

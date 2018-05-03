@@ -79,4 +79,18 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             self._bot_configs[0]._section_name = "bot"
             self._bot_configs[0].load_configuration(configuration_file, bot_root)
 
-
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['bot'] = 'bot'
+            data['license_keys'] = "./config/license.keys"
+            data['bot_selector'] = "programy.clients.client.DefaultBotSelector"
+            data[self._scheduler.id] = {}
+            self._scheduler.to_yaml(data[self._scheduler.id], defaults)
+            data['renderer'] = "programy.clients.render.text.TextRenderer"
+        else:
+            data['bot'] = self._bot_configs[0].id
+            data['license_keys'] = self.license_keys
+            data['bot_selector'] = self.bot_selector
+            data[self._scheduler.id] = {}
+            self._scheduler.to_yaml(data[self._scheduler.id], defaults)
+            data['renderer'] = self.renderer

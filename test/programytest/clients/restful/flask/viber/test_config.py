@@ -45,3 +45,18 @@ class ViberConfigurationTests(unittest.TestCase):
         self.assertIsNone(viber_config.name)
         self.assertIsNone(viber_config.avatar)
         self.assertIsNone(viber_config.webhook)
+
+    def test_to_yaml_with_defaults(self):
+        config = ViberConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['name'], "ProgramY")
+        self.assertEquals(data['avatar'], 'http://666666666.ngrok.io/programy.png')
+        self.assertEquals(data['webhook'], 'http://666666666.ngrok.io/rest/v1.0/ask')
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

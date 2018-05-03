@@ -22,7 +22,8 @@ class TestClient(BotClient):
         return ConsoleConfiguration()
 
     def load_configuration(self, arguments):
-        self._configuration = ProgramyConfiguration(ConsoleConfiguration())
+        config = ConsoleConfiguration()
+        self._configuration = ProgramyConfiguration(config)
 
     def set_environment(self):
         """For testing purposes we do nothing"""
@@ -31,3 +32,6 @@ class TestClient(BotClient):
     def run(self):
         """For testing purposes we do nothing"""
         return
+
+    def dump_graph(self, client_context):
+        client_context.brain.aiml_parser.pattern_parser.root.dump("", output_func=print)

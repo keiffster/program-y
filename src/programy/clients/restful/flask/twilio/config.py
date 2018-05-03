@@ -24,3 +24,6 @@ class TwilioConfiguration(RestConfiguration):
 
     def load_configuration(self, configuration_file, bot_root):
         super(TwilioConfiguration, self).load_configuration(configuration_file, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        super(TwilioConfiguration, self).to_yaml(data, defaults)

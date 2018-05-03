@@ -31,7 +31,7 @@ class SetLoader(FileFinder):
             sorted_set[key] = sorted_values
         return sorted_set
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid="*"):
         YLogger.debug(self, "Loading set [%s]", filename)
         the_set = {}
         try:

@@ -27,7 +27,7 @@ class MapLoader(FileFinder):
         self._eol = eol
         FileFinder.__init__(self)
 
-    def load_file_contents(self, filename):
+    def load_file_contents(self, filename, userid="*"):
         YLogger.debug(self, "Loading map [%s]", filename)
         the_map = {}
         try:

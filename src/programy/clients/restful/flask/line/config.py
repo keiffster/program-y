@@ -38,3 +38,13 @@ class LineConfiguration(RestConfiguration):
             self._unknown_command = configuration_file.get_option(line, "unknown_command", missing_value="Unknown command")
             self._unknown_command_srai = configuration_file.get_option(line, "unknown_command_srai", missing_value=None)
         super(LineConfiguration, self).load_configuration(configuration_file, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['unknown_command'] = "Unknown command"
+            data['unknown_command_srai'] = 'LINEUNKNOWNCOMMAND'
+        else:
+            data['unknown_command'] = self._unknown_command
+            data['unknown_command_srai'] = self._unknown_command_srai
+
+        super(LineConfiguration, self).to_yaml(data, defaults)

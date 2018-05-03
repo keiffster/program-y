@@ -27,10 +27,15 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
         self._default_get = "unknown"
         self._default_property = "unknown"
         self._default_map = "unknown"
+        self._learnf_path = self._default_os_learnf_path()
+
+    @staticmethod
+    def _default_os_learnf_path():
         if os.name == 'posix':
-            self._learnf_path = '/tmp/learnf'
+            return '/tmp/learnf'
         elif os.name == 'nt':
-            self._learnf_path = 'C:\\Windows\\Temp\\leanf'
+            return 'C:\\Windows\\Temp\\leanf'
+        return "."
 
     @property
     def default_get(self):
@@ -59,3 +64,15 @@ class BrainDefaultsConfiguration(BaseSectionConfigurationData):
                 self._learnf_path = self.sub_bot_root(learnf_path, bot_root)
         else:
             YLogger.warning(self, "'defaults' section missing from bot config, using default defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['default_get'] = "unknown"
+            data['default_property'] = "unknown"
+            data['default_map'] = "unknown"
+            data['learnf_path'] = self._default_os_learnf_path()
+        else:
+            data['default_get'] = self._default_get
+            data['default_property'] = self._default_property
+            data['default_map'] = self._default_map
+            data['learnf_path'] = self._learnf_path

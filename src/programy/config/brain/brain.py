@@ -102,3 +102,16 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._oob.load_config_section(configuration_file, brain_config, bot_root)
             self._dynamics.load_config_section(configuration_file, brain_config, bot_root)
             self._tokenizer.load_config_section(configuration_file, brain_config, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        self.config_to_yaml(data, BrainOverridesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainDefaultsConfiguration(), defaults)
+        self.config_to_yaml(data, BrainNodesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainBinariesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainBraintreeConfiguration(), defaults)
+        self.config_to_yaml(data, BrainFilesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainServicesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainSecuritiesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainOOBSConfiguration(), defaults)
+        self.config_to_yaml(data, BrainDynamicsConfiguration(), defaults)
+        self.config_to_yaml(data, BrainTokenizerConfiguration(), defaults)

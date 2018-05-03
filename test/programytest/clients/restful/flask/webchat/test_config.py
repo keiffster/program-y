@@ -29,3 +29,16 @@ class WebChatConfigurationTests(unittest.TestCase):
         self.assertEqual("ProgramYSession", webchat_config.cookie_id)
         self.assertEqual(90, webchat_config.cookie_expires)
 
+    def test_to_yaml_with_defaults(self):
+        config = WebChatConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['cookie_id'], "ProgramYSession")
+        self.assertEquals(data['cookie_expires'], 90)
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

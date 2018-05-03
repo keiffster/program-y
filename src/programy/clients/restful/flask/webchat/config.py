@@ -38,3 +38,13 @@ class WebChatConfiguration(RestConfiguration):
             self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession")
             self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90)
         super(WebChatConfiguration, self).load_configuration(configuration_file, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['cookie_id'] = "ProgramYSession"
+            data['cookie_expires'] = 90
+        else:
+            data['cookie_id'] = self._cookie_id
+            data['cookie_expires'] = self._cookie_expires
+
+        super(WebChatConfiguration, self).to_yaml(data, defaults)

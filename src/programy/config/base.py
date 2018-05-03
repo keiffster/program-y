@@ -61,4 +61,9 @@ class BaseConfigurationData(object):
                 value = file_config.get_option(service, key)
                 self._additionals[key] = value
 
+    def config_to_yaml(self, data, config, defaults=True):
+        data[config.id] = {}
+        config.to_yaml(data[config.id], defaults)
 
+    def to_yaml(self, data, defaults=True):
+        pass

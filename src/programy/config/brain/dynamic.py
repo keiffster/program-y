@@ -68,3 +68,29 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
             for var_name in vars_config.keys():
                 dyn_var_class = vars_config[var_name]
                 self._dynamic_vars[var_name .upper()] = dyn_var_class
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['sets'] = {}
+            data['sets']['numeric'] = 'programy.dynamic.sets.numeric.IsNumeric'
+            data['sets']['roman'] = 'programy.dynamic.sets.roman.IsRomanNumeral'
+
+            data['maps'] = {}
+            data['maps']['romantodec'] = 'programy.dynamic.maps.roman.MapRomanToDecimal'
+            data['maps']['dectoroman'] = 'programy.dynamic.maps.roman.MapDecimalToRoman'
+
+            data['variables'] = {}
+            data['variables']['gettime'] = 'programy.dynamic.variables.datetime.GetTime'
+
+        else:
+            data['sets'] = {}
+            for dyn in self._dynamic_sets:
+                self.config_to_yaml(data['sets'], dyn, defaults)
+
+            data['maps'] = {}
+            for dyn in self._dynamic_maps:
+                self.config_to_yaml(data['maps'], dyn, defaults)
+
+            data['variables'] = {}
+            for dyn in self._dynamic_vars:
+                self.config_to_yaml(data['variables'], dyn, defaults)

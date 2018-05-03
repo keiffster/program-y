@@ -29,3 +29,20 @@ class XmppConfigurationTests(unittest.TestCase):
         self.assertTrue(xmpp_config.xep_0060)
         self.assertTrue(xmpp_config.xep_0199)
 
+    def test_to_yaml_with_defaults(self):
+        config = XmppConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['server'], "talk.google.com")
+        self.assertEquals(data['port'], 5222)
+        self.assertEquals(data['xep_0030'], True)
+        self.assertEquals(data['xep_0004'], True)
+        self.assertEquals(data['xep_0060'], True)
+        self.assertEquals(data['xep_0199'], True)
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

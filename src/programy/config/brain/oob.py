@@ -35,3 +35,6 @@ class BrainOOBConfiguration(BaseSectionConfigurationData):
             self._classname = configuration_file.get_option(service, "classname", missing_value=None)
         else:
             YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        data['classname'] = self._classname

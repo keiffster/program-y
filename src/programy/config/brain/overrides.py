@@ -47,3 +47,13 @@ class BrainOverridesConfiguration(BaseSectionConfigurationData):
             self._allow_learnf_aiml = configuration_file.get_bool_option(overrides, "allow_learnf_aiml", missing_value=False)
         else:
             YLogger.warning(self, "'overrides' section missing from brain config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['allow_system_aiml'] = False
+            data['allow_learn_aiml'] = False
+            data['allow_learnf_aiml'] = False
+        else:
+            data['allow_system_aiml'] = self._allow_system_aiml
+            data['allow_learn_aiml'] = self._allow_learn_aiml
+            data['allow_learnf_aiml'] = self._allow_learnf_aiml

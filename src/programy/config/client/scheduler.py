@@ -23,6 +23,7 @@ class SchedulerJobStoreConfiguration(BaseConfigurationData):
 
     def __init__(self):
         BaseConfigurationData.__init__(self, name="jobstore")
+        self._name = None
         self._jobstore = None
 
     @property
@@ -47,6 +48,16 @@ class SchedulerJobStoreConfiguration(BaseConfigurationData):
 
                 self._jobstore.load_config_section(configuration_file, jobstore, bot_root)
 
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['name'] = "mongo"
+        else:
+            data['name'] = self._name
+
+        self.config_to_yaml(data, SchedulerMongoJobStoreConfiguration(), defaults)
+        self.config_to_yaml(data, SchedulerRedisJobStoreConfiguration(), defaults)
+        self.config_to_yaml(data, SchedulerSqlAlchemyJobStoreConfiguration(), defaults)
+
 
 class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
 
@@ -62,6 +73,12 @@ class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
         mongodb = configuration_file.get_section(self._section_name, configuration)
         if mongodb is not None:
             self._collection = configuration_file.get_option(mongodb, "collection", missing_value=None)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['collection'] = "programy"
+        else:
+            data['collection'] = self.collection
 
 
 class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
@@ -85,6 +102,14 @@ class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
             self._jobs_key = configuration_file.get_option(redis, "jobs_key", missing_value=None)
             self._run_times_key = configuration_file.get_option(redis, "run_times_key", missing_value=None)
 
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['jobs_key'] = "programy.jobs"
+            data['run_times_key'] = "programy.run_times"
+        else:
+            data['jobs_key'] = self.jobs_key
+            data['run_times_key'] = self.run_times_key
+
 
 class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
 
@@ -100,6 +125,12 @@ class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
         sqlalchemy = configuration_file.get_section(self._section_name, configuration)
         if sqlalchemy is not None:
             self._url = configuration_file.get_option(sqlalchemy, "url", missing_value=None)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['url'] = 'sqlite:///programy.sqlite'
+        else:
+            data['url'] = self.url
 
 
 class SchedulerThreadPoolConfiguration(BaseConfigurationData):
@@ -117,6 +148,12 @@ class SchedulerThreadPoolConfiguration(BaseConfigurationData):
         if threadpool is not None:
             self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
 
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['max_workers'] = 20
+        else:
+            data['max_workers'] = self.max_workers
+
 
 class SchedulerProcessPoolConfiguration(BaseConfigurationData):
 
@@ -132,6 +169,12 @@ class SchedulerProcessPoolConfiguration(BaseConfigurationData):
         processpool = configuration_file.get_section(self._section_name, configuration)
         if processpool is not None:
             self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['max_workers'] = 5
+        else:
+            data['max_workers'] = self.max_workers
 
 
 class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
@@ -155,6 +198,14 @@ class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
         if job_defaults is not None:
             self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
             self._max_instances = configuration_file.get_option(job_defaults, "max_instances", missing_value=None)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['coalesce'] = False
+            data['max_instances'] = 3
+        else:
+            data['coalesce'] = self.coalesce
+            data['max_instances'] = self.max_instances
 
 
 class SchedulerConfiguration(BaseConfigurationData):
@@ -280,6 +331,23 @@ class SchedulerConfiguration(BaseConfigurationData):
             return config
 
         return None
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['name'] = "scheduler"
+            data['debug_level'] = 0
+            data['add_listeners'] = False
+            data['remove_all_jobs'] = False
+        else:
+            data['name'] = self.name
+            data['debug_level'] = self.debug_level
+            data['add_listeners'] = self.add_listeners
+            data['remove_all_jobs'] = self.remove_all_jobs
+
+        self.config_to_yaml(data, SchedulerJobStoreConfiguration(), defaults)
+        self.config_to_yaml(data, SchedulerThreadPoolConfiguration(), defaults)
+        self.config_to_yaml(data, SchedulerProcessPoolConfiguration(), defaults)
+        self.config_to_yaml(data, SchedulerJobDefaultsConfiguration(), defaults)
 
 
 

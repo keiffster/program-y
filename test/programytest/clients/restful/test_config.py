@@ -42,3 +42,22 @@ class RestConfigurationTests(unittest.TestCase):
         self.assertEqual(80, rest_config.port)
         self.assertEqual(False, rest_config.debug)
         self.assertEqual(False, rest_config.use_api_keys)
+
+    def test_to_yaml_with_defaults(self):
+        config = RestConfiguration("rest")
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['host'], "0.0.0.0")
+        self.assertEquals(data['port'], 80)
+        self.assertEquals(data['debug'], False)
+        self.assertEquals(data['use_api_keys'], False)
+        self.assertEquals(data['api_key_file'], './api.keys')
+        self.assertEquals(data['ssl_cert_file'], './rsa.cert')
+        self.assertEquals(data['ssl_key_file'], './rsa.keys')
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

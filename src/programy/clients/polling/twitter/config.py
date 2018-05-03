@@ -80,3 +80,25 @@ class TwitterConfiguration(ClientConfigurationData):
 
             self._welcome_message = configuration_file.get_option(twitter, "welcome_message")
         super(TwitterConfiguration, self).load_configuration(configuration_file, twitter, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['polling_interval'] = 0
+            data['rate_limit_sleep'] = -1
+            data['use_status'] = False
+            data['use_direct_message'] = False
+            data['auto_follow'] = False
+            data['storage'] = 'file'
+            data['storage_location'] = './storage/twitter.data'
+            data['welcome_message'] = "Thanks for following me."
+        else:
+            data['polling_interval'] = self._polling_interval
+            data['rate_limit_sleep'] = self._rate_limit_sleep
+            data['use_status'] = self._use_status
+            data['use_direct_message'] = self._use_direct_message
+            data['auto_follow'] = self._auto_follow
+            data['storage'] = self._storage
+            data['storage_location'] = self._storage_location
+            data['welcome_message'] = self._welcome_message
+
+        super(TwitterConfiguration, self).to_yaml(data, defaults)

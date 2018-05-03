@@ -56,6 +56,16 @@ class YLogger(object):
                                YLogger.DEBUGS)
 
     @staticmethod
+    def reset_snapshot():
+        YLogger.CRITICALS = 0
+        YLogger.FATALS = 0
+        YLogger.ERRORS = 0
+        YLogger.EXCEPTIONS = 0
+        YLogger.WARNINGS = 0
+        YLogger.INFOS = 0
+        YLogger.DEBUGS = 0
+
+    @staticmethod
     def format_message(caller, message):
         if caller is not None:
             if hasattr(caller, "ylogger_type"):

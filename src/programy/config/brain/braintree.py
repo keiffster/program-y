@@ -43,3 +43,11 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
             self._content = configuration_file.get_option(braintree, "content", missing_value="txt")
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['file'] = "./braintree.xml"
+            data['content'] = "xml"
+        else:
+            data['file'] = self._file
+            data['content'] = self._content

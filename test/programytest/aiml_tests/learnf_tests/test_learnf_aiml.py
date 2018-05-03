@@ -3,8 +3,6 @@ import os
 import os.path
 import xml.etree.ElementTree as ET
 
-from programy.context import ClientContext
-
 from programytest.aiml_tests.client import TestClient
 
 
@@ -29,8 +27,12 @@ class LearnfAIMLTests(unittest.TestCase):
         self.learnf_path = self._client_context.bot.brain.configuration.defaults._learnf_path
         self.learnf_file = self.learnf_path + os.sep + "testid.aiml"
 
+        self.tearDown()
+
+    def tearDown(self):
         if os.path.exists(self.learnf_file):
             os.remove(self.learnf_file)
+        self.assertFalse(os.path.exists(self.learnf_file))
 
     def test_my_name_is_fred(self):
         self.assertFalse(os.path.exists(self.learnf_file))

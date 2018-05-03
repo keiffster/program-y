@@ -46,3 +46,19 @@ class KikConfigurationTests(unittest.TestCase):
         self.assertEqual("0.0.0.0", kik_config.host)
         self.assertEqual(80, kik_config.port)
         self.assertEqual(False, kik_config.debug)
+
+    def test_to_yaml_with_defaults(self):
+        config = KikConfiguration()
+
+        data = {}
+        config.to_yaml(data, True)
+
+        self.assertEquals(data['bot_name'], "program-y")
+        self.assertEquals(data['webhook'], "https://666666666.ngrok.io")
+        self.assertEquals(data['unknown_command'], "Unknown command")
+        self.assertEquals(data['unknown_command_srai'], 'KIKUNKNONWCOMMAND')
+
+        self.assertEquals(data['bot'], 'bot')
+        self.assertEquals(data['license_keys'], "./config/license.keys")
+        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

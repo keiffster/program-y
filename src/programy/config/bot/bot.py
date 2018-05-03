@@ -227,3 +227,22 @@ class BotConfiguration(BaseContainerConfigurationData):
     @property
     def conversations(self):
         return self._conversations
+
+    def to_yaml(self, data, defaults=True):
+
+        data['bot_root'] = self.bot_root
+        data['default_response'] = self.default_response
+        data['default_response_srai'] = self.default_response_srai
+        data['exit_response'] = self.exit_response
+        data['exit_response_srai'] = self.exit_response_srai
+        data['initial_question'] = self.initial_question
+        data['initial_question_srai'] = self.initial_question_srai
+        data['empty_string'] = self.empty_string
+        data['override_properties'] = self.override_properties
+        data['max_question_recursion'] = self.max_question_recursion
+        data['max_question_timeout'] = self.max_question_timeout
+        data['max_search_depth'] = self.max_search_depth
+        data['max_search_timeout'] = self.max_search_timeout
+        data['tab_parse_output'] = self.tab_parse_output
+        self.config_to_yaml(data, BotSpellingConfiguration(), defaults)
+        self.config_to_yaml(data, BotConversationsConfiguration(), defaults)

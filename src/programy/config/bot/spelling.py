@@ -60,3 +60,17 @@ class BotSpellingConfiguration(BaseConfigurationData):
             self._check_and_retry = configuration_file.get_option(spelling, "check_and_retry", missing_value=False)
         else:
             YLogger.warning(self, "'spelling' section missing from bot config, using defaults")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['classname'] = "programy.spelling.norvig.NorvigSpellingChecker"
+            data['corpus'] = "./spelling/corpus.txt"
+            data['alphabet'] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+            data['check_before'] = False
+            data['check_and_retry'] = True
+        else:
+            data['classname'] = self._classname
+            data['corpus'] = self._corpus
+            data['alphabet'] = self._alphabet
+            data['check_before'] = self._check_before
+            data['check_and_retry'] = self._check_and_retry

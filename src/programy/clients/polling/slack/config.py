@@ -32,3 +32,11 @@ class SlackConfiguration(ClientConfigurationData):
         if slack is not None:
             self._polling_interval = configuration_file.get_int_option(slack, "polling_interval", missing_value=1)
         super(SlackConfiguration, self).load_configuration(configuration_file, slack, bot_root)
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['polling_interval'] = 1
+        else:
+            data['polling_interval'] = self._polling_interval
+
+        super(SlackConfiguration, self).to_yaml(data, defaults)

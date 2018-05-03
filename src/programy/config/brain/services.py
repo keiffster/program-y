@@ -48,3 +48,25 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
 
         else:
             YLogger.warning(self, "Config section [services] missing from Brain, no services loaded")
+
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            data['REST'] = {}
+            data['REST']['classname'] = 'programy.services.rest.GenericRESTService'
+            data['REST']['method'] = 'GET'
+            data['REST']['host'] = '0.0.0.0'
+
+            data['Pannous'] = {}
+            data['Pannous']['classname'] = 'programy.services.pannous.PannousService'
+            data['Pannous']['url'] = 'http://weannie.pannous.com/api'
+
+            data['Pandora'] = {}
+            data['Pandora']['classname'] = 'programy.services.pandora.PandoraService'
+            data['Pandora']['url'] = 'http://www.pandorabots.com/pandora/talk-xml'
+
+            data['Wikipedia'] = {}
+            data['Wikipedia']['classname'] = 'programy.services.wikipediaservice.WikipediaService'
+
+            data['DuckDuckGo'] = {}
+            data['DuckDuckGo']['classname'] = 'programy.services.duckduckgo.DuckDuckGoService'
+            data['DuckDuckGo']['url'] = 'http://api.duckduckgo.com'
