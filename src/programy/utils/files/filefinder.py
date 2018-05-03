@@ -61,7 +61,7 @@ class FileFinder(object):
                     userid = just_filename
                 else:
                     userid = "*"
-                collection[just_filename] = self.load_file_contents(file[1], userid=userid)
+                collection[just_filename.upper()] = self.load_file_contents(file[1], userid=userid)
             except Exception as excep:
                 print(excep)
                 YLogger.exception(self, "Failed to load file contents for file [%s]"% file[1], excep)
@@ -93,4 +93,4 @@ class FileFinder(object):
         else:
             filename = filename_ext
 
-        return filename.upper()
+        return filename
