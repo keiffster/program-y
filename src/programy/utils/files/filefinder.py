@@ -27,7 +27,7 @@ class FileFinder(object):
         pass
 
     @abstractmethod
-    def load_file_contents(self, filename, userid="*"):
+    def load_file_contents(self, id, filename, userid="*"):
         """
         Never Implemented
         """
@@ -54,6 +54,7 @@ class FileFinder(object):
         files = self.find_files(paths, subdir, extension)
 
         collection = {}
+        file_maps = {}
         for file in files:
             just_filename = self.get_just_filename_from_filepath(file[0])
             try:
@@ -61,19 +62,20 @@ class FileFinder(object):
                     userid = just_filename
                 else:
                     userid = "*"
-                collection[just_filename.upper()] = self.load_file_contents(file[1], userid=userid)
+                collection[just_filename.upper()] = self.load_file_contents(just_filename, file[1], userid=userid)
+                file_maps[just_filename.upper()] = file[1]
             except Exception as excep:
                 print(excep)
                 YLogger.exception(self, "Failed to load file contents for file [%s]"% file[1], excep)
 
-        return collection
+        return collection, file_maps
 
     def load_single_file_contents(self, filename):
         just_filename = self.get_just_filename_from_filepath(filename)
 
         collection = {}
         try:
-            collection[just_filename] = self.load_file_contents(filename)
+            collection[just_filename] = self.load_file_contents(just_filename, filename)
         except Exception as excep:
             YLogger.exception(self, "Failed to load file contents for file [%s]"%filename, excep)
 

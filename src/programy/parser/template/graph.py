@@ -24,10 +24,7 @@ class TemplateGraph(object):
     def __init__(self, aiml_parser):
         self._aiml_parser = aiml_parser
 
-        template_nodes = aiml_parser.brain.configuration.nodes.template_nodes
-
-        self._template_factory = TemplateNodeFactory()
-        self._template_factory.load_nodes_config_from_file(template_nodes)
+        self.load_template_node_factory()
 
     @property
     def aiml_parser(self):
@@ -36,6 +33,11 @@ class TemplateGraph(object):
     @property
     def template_factory(self):
         return self._template_factory
+
+    def load_template_node_factory(self):
+        template_nodes = self._aiml_parser.brain.configuration.nodes.template_nodes
+        self._template_factory = TemplateNodeFactory()
+        self._template_factory.load_nodes_config_from_file(template_nodes)
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*

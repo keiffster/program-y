@@ -27,7 +27,7 @@ class MapLoader(FileFinder):
         self._eol = eol
         FileFinder.__init__(self)
 
-    def load_file_contents(self, filename, userid="*"):
+    def load_file_contents(self, id, filename, userid="*"):
         YLogger.debug(self, "Loading map [%s]", filename)
         the_map = {}
         try:
@@ -59,10 +59,18 @@ class MapCollection(object):
         self._split_char = split_char
         self._eol = eol
         self._maps = {}
+        self._files = {}
+
+    def empty(self):
+        self._maps.clear()
+        self._files.clear()
 
     def map(self, name):
         map_name = name.upper()
         return self._maps[map_name]
+
+    def filename(self, mapname):
+        return self._files[mapname]
 
     def add_map(self, name, values):
         self._maps[name.upper()] = values
@@ -76,11 +84,21 @@ class MapCollection(object):
         if configuration.files is not None:
             self._maps = {}
             for file in configuration.files:
-                maps = loader.load_dir_contents(file, configuration.directories, configuration.extension)
+                maps, file_maps = loader.load_dir_contents(file, configuration.directories, configuration.extension)
                 for key in maps.keys():
                     if key in self._maps:
                         YLogger.error(self, "Duplicate map [%s] found in [%s]", key, file)
                     self._maps[key] = maps[key]
+                for key in file_maps.keys():
+                    self._files[key] = file_maps[key]
         else:
             self._maps = {}
         return len(self._maps)
+
+    def reload_file(self, filename):
+        loader = MapLoader(split_char=self._split_char, eol=self._eol)
+        just_filename = loader.get_just_filename_from_filepath(filename)
+        new_map = loader.load_file_contents(just_filename, filename)
+        map_name = just_filename.upper()
+        del self._maps[map_name]
+        self._maps[map_name] = new_map

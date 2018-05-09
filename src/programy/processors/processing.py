@@ -26,6 +26,9 @@ class ProcessorLoader(ClassLoader):
         ClassLoader.__init__(self)
         self.processors = []
 
+    def empty(self):
+        self.processors.clear()
+
     def load(self, filename, *args, **kw):
         YLogger.debug(self, "Loading processors from file [%s]", filename)
         count = 0

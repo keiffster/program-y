@@ -189,6 +189,11 @@ class Brain(object):
         YLogger.info(self, "Loading aiml source brain")
         self._aiml_parser.load_aiml(configuration)
 
+    def reload_aimls(self):
+        YLogger.info(self, "Loading aiml source brain")
+        self._aiml_parser.empty()
+        self._aiml_parser.load_aiml(self.configuration)
+
     def load_binary(self, configuration):
         YLogger.info(self, "Loading binary brain from [%s]", configuration.binaries.binary_filename)
         try:
@@ -263,6 +268,7 @@ class Brain(object):
 
     def _load_denormals(self, configuration):
         if configuration.files.denormal is not None:
+            self._denormal_collection.empty()
             total = self._denormal_collection.load_from_filename(configuration.files.denormal)
             YLogger.info(self, "Loaded a total of %d denormalisations", total)
         else:
@@ -270,6 +276,7 @@ class Brain(object):
 
     def _load_normals(self, configuration):
         if configuration.files.normal is not None:
+            self._normal_collection.empty()
             total = self._normal_collection.load_from_filename(configuration.files.normal)
             YLogger.info(self, "Loaded a total of %d normalisations", total)
         else:
@@ -277,6 +284,7 @@ class Brain(object):
 
     def _load_genders(self, configuration):
         if configuration.files.gender is not None:
+            self._gender_collection.empty()
             total = self._gender_collection.load_from_filename(configuration.files.gender)
             YLogger.info(self, "Loaded a total of %d genderisations", total)
         else:
@@ -284,6 +292,7 @@ class Brain(object):
 
     def _load_persons(self, configuration):
         if configuration.files.person is not None:
+            self._person_collection.empty()
             total = self._person_collection.load_from_filename(configuration.files.person)
             YLogger.info(self, "Loaded a total of %d persons", total)
         else:
@@ -291,6 +300,7 @@ class Brain(object):
 
     def _load_person2s(self, configuration):
         if configuration.files.person2 is not None:
+            self._person2_collection.empty()
             total = self._person2_collection.load_from_filename(configuration.files.person2)
             YLogger.info(self, "Loaded a total of %d person2s", total)
         else:
@@ -298,6 +308,7 @@ class Brain(object):
 
     def _load_properties(self, configuration):
         if configuration.files.properties is not None:
+            self._properties_collection.empty()
             total = self._properties_collection.load_from_filename(configuration.files.properties)
             YLogger.info(self, "Loaded a total of %d properties", total)
         else:
@@ -305,31 +316,51 @@ class Brain(object):
 
     def _load_variables(self, configuration):
         if configuration.files.variables is not None:
+            self._variables_collection.empty ()
             total = self._variables_collection.load_from_filename(configuration.files.variables)
             YLogger.info(self, "Loaded a total of %d variables", total)
         else:
             YLogger.warning(self, "No configuration setting for variables")
 
-    def _load_rdf(self, configuration):
+    def _load_maps(self, configuration):
+        self._maps_collection.empty()
+        total = self._maps_collection.load(configuration.files.map_files)
+        YLogger.info(self, "Loaded a total of %d maps files", total)
+
+    def reload_map(self, mapname):
+        if self._maps_collection.contains(mapname):
+            filename = self._maps_collection.filename(mapname)
+            self._maps_collection.reload_file(filename)
+
+    def _load_sets(self, configuration):
+        self._sets_collection.empty()
+        total = self._sets_collection.load(configuration.files.set_files)
+        YLogger.info(self, "Loaded a total of %d sets files", total)
+
+    def reload_set(self, setname):
+        if self._sets_collection.contains(setname):
+            filename = self._sets_collection.filename(setname)
+            self._sets_collection.reload_file(filename)
+
+    def _load_rdfs(self, configuration):
         if configuration.files.rdf_files is not None and configuration.files.rdf_files.files:
+            self._rdf_collection.empty()
             total = self._rdf_collection.load(configuration.files.rdf_files)
             YLogger.info(self, "Loaded a total of %d rdf files", total)
         elif configuration.files.triples is not None:
+            self._rdf_collection.empty()
             total = self._rdf_collection.load_from_filename(configuration.files.triples)
             YLogger.info(self, "Loaded a total of %d triples", total)
         else:
             YLogger.warning(self, "No configuration setting for triples")
 
-    def _load_sets(self, configuration):
-        total = self._sets_collection.load(configuration.files.set_files)
-        YLogger.info(self, "Loaded a total of %d sets files", total)
-
-    def _load_maps(self, configuration):
-        total = self._maps_collection.load(configuration.files.map_files)
-        YLogger.info(self, "Loaded a total of %d maps files", total)
+    def reload_rdf(self, rdfname):
+        if self._rdf_collection.contains(rdfname):
+            self._rdf_collection.reload_file(rdfname)
 
     def _load_preprocessors(self, configuration):
         if configuration.files.preprocessors is not None:
+            self._preprocessors.empty()
             total = self._preprocessors.load(configuration.files.preprocessors)
             YLogger.info(self, "Loaded a total of %d pre processors", total)
         else:
@@ -337,6 +368,7 @@ class Brain(object):
 
     def _load_postprocessors(self, configuration):
         if configuration.files.postprocessors is not None:
+            self._postprocessors.empty()
             total = self._postprocessors.load(configuration.files.postprocessors)
             YLogger.info(self, "Loaded a total of %d post processors", total)
         else:
@@ -350,7 +382,7 @@ class Brain(object):
         self._load_person2s(configuration)
         self._load_properties(configuration)
         self._load_variables(configuration)
-        self._load_rdf(configuration)
+        self._load_rdfs(configuration)
         self._load_sets(configuration)
         self._load_maps(configuration)
         self._load_preprocessors(configuration)
@@ -418,6 +450,8 @@ class Brain(object):
             collection = PropertiesCollection()
             total = collection.load_from_filename(configuration.files.regex_templates)
             YLogger.info(self, "Loaded a total of %d regex templates", total)
+
+            self._regex_templates.clear()
 
             for pair in collection.pairs:
                 name = pair[0]

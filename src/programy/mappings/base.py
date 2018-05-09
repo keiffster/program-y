@@ -29,25 +29,25 @@ class BaseCollection(object):
         """
 
     @abstractmethod
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         """
         Never Implemented
         """
 
-    def process_line(self, line):
+    def process_line(self, line, id=None):
         line = line.strip()
         if line is not None and line:
             if line.startswith("#") is False:
                 splits = self.split_line(line)
-                return self.process_splits(splits)
+                return self.process_splits(splits, id)
         return False
 
-    def load_from_filename(self, filename):
+    def load_from_filename(self, filename, id=None):
         count = 0
         try:
             with open(filename, "r", encoding="utf-8") as data_file:
                 for line in data_file:
-                    if self.process_line(line):
+                    if self.process_line(line, id):
                         count += 1
         except FileNotFoundError:
             YLogger.error(self, "File not found [%s]", filename)
@@ -69,6 +69,9 @@ class SingleStringCollection(BaseCollection):
         BaseCollection.__init__(self)
         self._strings = []
 
+    def empty(self):
+        self._strings.clear()
+
     @property
     def strings(self):
         return self._strings
@@ -76,7 +79,7 @@ class SingleStringCollection(BaseCollection):
     def split_line(self, line):
         return [line.strip()]
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         self._strings.append(splits[0])
         return True
 
@@ -86,6 +89,9 @@ class DoubleStringCharSplitCollection(BaseCollection):
     def __init__(self):
         BaseCollection.__init__(self)
         self._pairs = []
+
+    def empty(self):
+        self._pairs.clear()
 
     @property
     def pairs(self):
@@ -128,7 +134,7 @@ class DoubleStringCharSplitCollection(BaseCollection):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         self.add_value(splits[0], splits[1])
         return True
 
@@ -139,6 +145,9 @@ class DoubleStringPatternSplitCollection(BaseCollection):
     def __init__(self):
         BaseCollection.__init__(self)
         self._pairs = {}
+
+    def empty(self):
+        self._pairs.clear()
 
     def has_key(self, key):
         for pair in self._pairs.items():
@@ -185,7 +194,7 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         pattern = pattern.replace("*", r"\*")
         return pattern
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         if splits is not None and len(splits) > 0:
             pattern_text = self.normalise_pattern(splits[0])
             start = pattern_text.lstrip()
@@ -227,6 +236,9 @@ class TripleStringCollection(BaseCollection):
         BaseCollection.__init__(self)
         self.triples = {}
 
+    def empty(self):
+        self._triples.clear()
+
     def split_line(self, line):
         splits = self.split_line_by_char(line)
         if len(splits) > 3:
@@ -260,7 +272,7 @@ class TripleStringCollection(BaseCollection):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         first = splits[0]
         second = splits[1]
         third = splits[2]

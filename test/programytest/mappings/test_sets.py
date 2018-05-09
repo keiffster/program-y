@@ -8,7 +8,7 @@ class SetTests(unittest.TestCase):
         loader = SetLoader()
         self.assertIsNotNone(loader)
 
-        the_set = loader.load_file_contents(os.path.dirname(__file__)+  os.sep + "test_files" + os.sep + "sets" + os.sep + "test_set.txt")
+        the_set = loader.load_file_contents("testid", os.path.dirname(__file__)+  os.sep + "test_files" + os.sep + "sets" + os.sep + "test_set.txt")
         self.assertIsNotNone(the_set)
         self.assertEqual(len(the_set), 451)
 

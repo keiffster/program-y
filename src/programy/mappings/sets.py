@@ -31,7 +31,7 @@ class SetLoader(FileFinder):
             sorted_set[key] = sorted_values
         return sorted_set
 
-    def load_file_contents(self, filename, userid="*"):
+    def load_file_contents(self, id, filename, userid="*"):
         YLogger.debug(self, "Loading set [%s]", filename)
         the_set = {}
         try:
@@ -63,6 +63,11 @@ class SetCollection(object):
 
     def __init__(self):
         self._sets = {}
+        self._files = {}
+
+    def empty(self):
+        self._sets.clear()
+        self._files.clear()
 
     def add_set(self, name, the_set):
         # Set names always stored in upper case to handle ambiquity
@@ -76,6 +81,9 @@ class SetCollection(object):
         # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
         return self._sets[set_name]
+
+    def filename(self, setname):
+        return self._files[setname]
 
     def contains(self, name):
         # Set names always stored in upper case to handle ambiquity
@@ -93,11 +101,21 @@ class SetCollection(object):
         if configuration.files is not None:
             self._sets = {}
             for file in configuration.files:
-                sets = loader.load_dir_contents(file, configuration.directories, configuration.extension)
+                sets, file_sets = loader.load_dir_contents(file, configuration.directories, configuration.extension)
                 for key in sets.keys():
                     if key in self._sets:
                         YLogger.error(self, "Duplicate set [%s] found in [%s]", key, file)
                     self._sets[key] = sets[key]
+                for key in file_sets.keys():
+                    self._files[key] = file_sets[key]
         else:
             self._sets = {}
         return len(self._sets)
+
+    def reload_file(self, filename):
+        loader = SetLoader()
+        just_filename = loader.get_just_filename_from_filepath(filename)
+        new_set = loader.load_file_contents(just_filename, filename)
+        set_name = just_filename.upper()
+        del self._sets[set_name]
+        self._sets[set_name] = new_set

@@ -1,0 +1,5 @@
+name:Y-Bot
+firstname:Y
+middlename:AIML
+lastname:BoT
+fullname:Y-Bot

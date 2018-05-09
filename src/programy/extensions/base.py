@@ -23,3 +23,7 @@ class Extension(object):
     @abstractmethod
     def execute(self,context, data):
         raise NotImplementedError()
+
+    @staticmethod
+    def split_into_commands(data):
+        return [x.upper() for x in data.split()]

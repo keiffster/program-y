@@ -39,7 +39,7 @@ class AIMLLoader(FileFinder):
         FileFinder.__init__(self)
         self._aiml_parser = aiml_parser
 
-    def load_file_contents(self, filename, userid="*"):
+    def load_file_contents(self, id, filename, userid="*"):
         try:
             return self._aiml_parser.parse_from_file(filename, userid=userid)
         except Exception as excep:
@@ -160,6 +160,9 @@ class AIMLParser(object):
         diff = stop - start
         YLogger.info(self, "Total processing time %.6f secs", diff.total_seconds())
         YLogger.info(self, "Loaded a single aiml file with %d categories", self.num_categories)
+
+    def empty(self):
+        self._pattern_parser.empty()
 
     def load_aiml(self, configuration: BrainConfiguration):
 

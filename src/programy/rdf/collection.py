@@ -8,10 +8,10 @@ class RDFLoader(FileFinder):
         FileFinder.__init__(self)
         self._collection = collection
 
-    def load_file_contents(self, filename, userid="*"):
+    def load_file_contents(self, id, filename, userid="*"):
         YLogger.debug(self, "Loading RDF File [%s]", filename)
         try:
-            self._collection.load_from_filename(filename)
+            self._collection.load_from_filename(filename, id)
         except Exception as excep:
             YLogger.error(self, "Failed to load RDF File [%s] - %s", filename, excep)
 
@@ -24,19 +24,46 @@ class RDFEntity(object):
 #TODO No logging statements at all in RDF!
 class RDFCollection(BaseCollection):
 
-
     def __init__(self):
         BaseCollection.__init__(self)
         self._entities = {}
+        self._files = {}
+        self._entities_to_ids = {}
+
+    def empty(self):
+        self._entities.clear()
+        self._files.clear()
+        self._entities_to_ids.clear()
+
+    def contains(self, rdfname):
+        return bool(rdfname.upper() in self._files)
+
+    def filename(self, rdfname):
+        return self._files[rdfname]
 
     def load(self, configuration):
         loader = RDFLoader(self)
         if configuration.files is not None:
-            files = []
+            count = 0
             for file in configuration.files:
-                files += loader.load_dir_contents(file, configuration.directories, configuration.extension)
-            return len(files)
+                rdfs, file_rdfs = loader.load_dir_contents(file, configuration.directories, configuration.extension)
+                count += len(rdfs)
+                for key in file_rdfs.keys():
+                    self._files[key] = file_rdfs[key]
+            return count
         return 0
+
+    def reload_file(self, rdf_name):
+        loader = RDFLoader(self)
+        rdf_name = rdf_name.upper()
+        filename = self.filename(rdf_name)
+        if rdf_name in self._entities_to_ids:
+            to_delete = []
+            for entity in self._entities_to_ids[rdf_name]:
+                to_delete.append(entity)
+            for entity in to_delete:
+                self.delete_entity(entity._subject)
+        loader.load_file_contents(rdf_name, filename)
 
     def split_line(self, line):
         splits = self.split_line_by_char(line)
@@ -54,13 +81,13 @@ class RDFCollection(BaseCollection):
         splits = line.split(self.get_split_char())
         return splits
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
 
         subject = splits[0]
         predicate = splits[1]
         obj = splits[2]
 
-        self.add_entity(subject, predicate, obj)
+        self.add_entity(subject, predicate, obj, id)
         return True
 
     def subjects(self):
@@ -77,12 +104,18 @@ class RDFCollection(BaseCollection):
                 return [self._entities[subject]._predicates[predicate]]
         return []
 
-    def add_entity(self, subject, predicate, obj):
+    def add_entity(self, subject, predicate, obj, id=None):
         subject = subject.upper()
         predicate = predicate.upper()
 
         if subject not in self._entities:
-            self._entities[subject] = RDFEntity(subject)
+            the_subject = RDFEntity(subject)
+            self._entities[subject] = the_subject
+            if id is not None:
+                id = id.upper()
+                if id not in self._entities_to_ids:
+                    self._entities_to_ids[id] = []
+                self._entities_to_ids[id].append(the_subject)
 
         entity = self._entities[subject]
 
@@ -226,9 +259,6 @@ class RDFCollection(BaseCollection):
             all_obj = None
         all = self.match_to_vars(all_subject, all_predicate, all_obj)
         matched = self.match_to_vars(subject, predicate, obj)
-
-        #for atuple in matched:
-        #    print("Remove", atuple[0][1])
 
         to_remove =[]
         for entity in all:

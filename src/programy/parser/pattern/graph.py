@@ -31,10 +31,7 @@ class PatternGraph(object):
     def __init__(self, aiml_parser, root_node=None):
         self._aiml_parser = aiml_parser
 
-        pattern_nodes = aiml_parser.brain.configuration.nodes.pattern_nodes
-
-        self._pattern_factory = PatternNodeFactory()
-        self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
+        self.load_pattern_node_factory()
 
         if root_node is None:
             YLogger.debug(self, "Defaulting root to PatternRootNode")
@@ -43,6 +40,11 @@ class PatternGraph(object):
             if root_node.is_root() is False:
                 raise ParserException("Root node needs to be of base type PatternRootNode")
             self._root_node = root_node
+
+    def load_pattern_node_factory(self):
+        pattern_nodes = self._aiml_parser.brain.configuration.nodes.pattern_nodes
+        self._pattern_factory = PatternNodeFactory()
+        self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
 
     @property
     def root(self):
@@ -55,6 +57,16 @@ class PatternGraph(object):
     @property
     def pattern_factory(self):
         return self._pattern_factory
+
+    def empty(self):
+        YLogger.debug(self, "Defaulting root to PatternRootNode")
+        self._empty_children(self._root_node)
+        self._root_node = self._pattern_factory.get_root_node()
+
+    def _empty_children(self, node):
+        for child in node.children:
+            self._empty_children(child)
+            child.children.clear()
 
     def node_from_text(self, word, userid="*"):
         if word.startswith("$"):

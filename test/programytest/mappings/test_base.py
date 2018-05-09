@@ -12,9 +12,9 @@ class MockSingleStringCollection(SingleStringCollection):
         SingleStringCollection.__init__(self)
         self._process_splits_success = process_splits_success
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         if self._process_splits_success is True:
-            return super(TestSingleStringCollection, self).process_splits(splits)
+            return super(TestSingleStringCollection, self).process_splits(splits, id)
         else:
             return False
 
@@ -25,9 +25,9 @@ class MockDoubleStringCharSplitCollection(DoubleStringCharSplitCollection):
         DoubleStringCharSplitCollection.__init__(self)
         self._process_splits_success = process_splits_success
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         if self._process_splits_success is True:
-            return super(MockDoubleStringCharSplitCollection, self).process_splits(splits)
+            return super(MockDoubleStringCharSplitCollection, self).process_splits(splits, id)
         else:
             return False
 
@@ -38,9 +38,9 @@ class MockDoubleStringPatternSplitCollection(DoubleStringPatternSplitCollection)
         DoubleStringPatternSplitCollection.__init__(self)
         self._process_splits_success = process_splits_success
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         if self._process_splits_success is True:
-            return super(MockDoubleStringPatternSplitCollection, self).process_splits(splits)
+            return super(MockDoubleStringPatternSplitCollection, self).process_splits(splits, id)
         else:
             return False
 
@@ -51,9 +51,9 @@ class MockTripleStringCollection(TripleStringCollection):
         TripleStringCollection.__init__(self)
         self._process_splits_success = process_splits_success
 
-    def process_splits(self, splits):
+    def process_splits(self, splits, id=None):
         if self._process_splits_success is True:
-            return super(MockTripleStringCollection, self).process_splits(splits)
+            return super(MockTripleStringCollection, self).process_splits(splits, id)
         else:
             return False
 

@@ -62,6 +62,8 @@ class NodeFactory(object):
 
     def load_nodes_config_from_file(self, filename=None):
         try:
+            self._nodes_config.clear()
+
             if filename is None or os.path.exists(filename) is False:
                 filename = self.default_config_file()
 
@@ -74,6 +76,8 @@ class NodeFactory(object):
             YLogger.exception(self, "Failed to load %s Node Factory config file [%s]"%(self._type, filename), excep)
 
     def load_nodes_config_from_text(self, text):
+        self._nodes_config.clear()
+
         lines = text.split("\n")
         for line in lines:
             line = line.strip()
