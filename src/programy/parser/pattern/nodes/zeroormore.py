@@ -142,10 +142,8 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-        if word_no == words.num_words()-1:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
-        else:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
+        match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type,
+                                                                   depth + 1)
 
         if match is not None:
             return match

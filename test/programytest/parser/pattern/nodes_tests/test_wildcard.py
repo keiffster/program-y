@@ -70,7 +70,7 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
 
         context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         sentence = Sentence(self._client_context.brain.tokenizer, "TEST SENTENCE")
-        match = wildcard.check_child_is_wildcard("", self._client_context, context, sentence, 0,  Match.WORD, 0)
+        match = wildcard.check_child_is_wildcard("", self._client_context, context, sentence, 1,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
         context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
@@ -87,7 +87,7 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
 
         context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         sentence = Sentence(self._client_context.brain.tokenizer, "TEST SENTENCE")
-        match = wildcard.check_child_is_wildcard("", self._client_context, context, sentence, 0,  Match.WORD, 0)
+        match = wildcard.check_child_is_wildcard("", self._client_context, context, sentence, 1,  Match.WORD, 0)
         self.assertIsNotNone(match)
 
         context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)

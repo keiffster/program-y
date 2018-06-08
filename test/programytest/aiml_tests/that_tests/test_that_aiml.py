@@ -74,3 +74,13 @@ class ThatAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "CONTINUE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'TEST PASS')
+
+    def test_wildcard_matching(self):
+        response = self._client_context.bot.ask_question(self._client_context, "WELCOME")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'aaa bbb ccc ddd')
+
+        response = self._client_context.bot.ask_question(self._client_context, "AND AGAIN")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'matched')
+

@@ -66,3 +66,8 @@ class ArrowAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "WELL I WAS THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'ARROW IS I WAS')
+
+    def test_arrow_specific_case1(self):
+        response = self._client_context.bot.ask_question(self._client_context, "aaa bbb ccc ddd")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'passed')
