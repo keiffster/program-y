@@ -30,67 +30,67 @@ class HotReloadAdminExtension(Extension):
     @staticmethod
     def reload_denormal(client_context):
         YLogger.debug(client_context, "Hot reloading Denormal")
-        client_context.brain._load_denormals(client_context.brain.configuration)
+        client_context.brain._load_denormals()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_normal(client_context):
         YLogger.debug(client_context, "Hot reloading Normal")
-        client_context.brain._load_normals(client_context.brain.configuration)
+        client_context.brain._load_normals()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_gender(client_context):
         YLogger.debug(client_context, "Hot reloading Gender")
-        client_context.brain._load_genders(client_context.brain.configuration)
+        client_context.brain._load_genders()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_person(client_context):
         YLogger.debug(client_context, "Hot reloading Person")
-        client_context.brain._load_persons(client_context.brain.configuration)
+        client_context.brain._load_persons()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_person2(client_context):
         YLogger.debug(client_context, "Hot reloading Person2")
-        client_context.brain._load_person2s(client_context.brain.configuration)
+        client_context.brain._load_person2s()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_properties(client_context):
         YLogger.debug(client_context, "Hot reloading Properties")
-        client_context.brain._load_properties(client_context.brain.configuration)
+        client_context.brain._load_properties()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_defaults(client_context):
         YLogger.debug(client_context, "Hot reloading Defaults")
-        client_context.brain._load_variables(client_context.brain.configuration)
+        client_context.brain._load_variables()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_regex(client_context):
         YLogger.debug(client_context, "Hot reloading Regex")
-        client_context.brain.load_regex_templates(client_context.brain.configuration)
+        client_context.brain.load_regex_templates()
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_patterns(client_context):
         YLogger.debug(client_context, "Hot reloading Pattern Nodes")
-        client_context.brain.aiml_parser.pattern_parser._pattern_factory.load_nodes_config_from_file(client_context.brain.configuration.nodes._pattern_nodes)
+        client_context.brain.aiml_parser.pattern_parser._pattern_factory.load(client_context.client.storage_factory)
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_templates(client_context):
         YLogger.debug(client_context, "Hot reloading Template Nodes")
-        client_context.brain.aiml_parser.template_parser._template_factory.load_nodes_config_from_file(client_context.brain.configuration.nodes._template_nodes)
+        client_context.brain.aiml_parser.template_parser._template_factory.load(client_context.client.storage_factory)
         return 'HOTRELOAD OK'
 
     @staticmethod
     def reload_maps(client_context):
         YLogger.debug(client_context, "Hot reloading Maps")
-        client_context.brain._load_maps(client_context.brain.configuration)
+        client_context.brain._load_maps()
         return 'HOTRELOAD OK'
 
     @staticmethod
@@ -102,7 +102,7 @@ class HotReloadAdminExtension(Extension):
     @staticmethod
     def reload_sets(client_context):
         YLogger.debug(client_context, "Hot reloading Sets")
-        client_context.brain._load_sets(client_context.brain.configuration)
+        client_context.brain._load_sets()
         return 'HOTRELOAD OK'
 
     @staticmethod
@@ -114,7 +114,7 @@ class HotReloadAdminExtension(Extension):
     @staticmethod
     def reload_rdfs(client_context):
         YLogger.debug(client_context, "Hot reloading Rdfs")
-        client_context.brain._load_rdfs(client_context.brain.configuration)
+        client_context.brain._load_rdfs()
         return 'HOTRELOAD OK'
 
     @staticmethod

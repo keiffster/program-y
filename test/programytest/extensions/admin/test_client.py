@@ -1,10 +1,8 @@
-import unittest
 import unittest.mock
-from datetime import datetime
 
 from programy.extensions.admin.client import ClientAdminExtension
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ClientAdminExtensionClient(TestClient):

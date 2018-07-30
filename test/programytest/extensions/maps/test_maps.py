@@ -6,9 +6,8 @@ import json
 from programy.extensions.maps.maps import GoogleMapsExtension
 from programy.utils.geo.google import GoogleDistance
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 

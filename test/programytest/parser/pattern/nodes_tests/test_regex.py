@@ -153,7 +153,7 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         self.assertFalse(match3.matched)
 
     def test_equals_template(self):
-        self._client_context.brain.regex_templates["LEGION"] = re.compile("^LEGION$", re.IGNORECASE)
+        self._client_context.brain.regex_templates.add_regex("LEGION", re.compile("^LEGION$", re.IGNORECASE))
 
         node1 = PatternRegexNode({"template": "LEGION"}, "")
         node2 = PatternRegexNode({"template": "LEGION"}, "", userid="testid")
@@ -176,7 +176,7 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         node2 = PatternRegexNode({}, "^LEGION$", userid="testid")
         node3 = PatternRegexNode({}, "^LEGION$", userid="testid2")
 
-        self._client_context.brain.regex_templates["LEGION"] = re.compile("^LEGION$", re.IGNORECASE)
+        self._client_context.brain.regex_templates.add_regex("LEGION", re.compile("^LEGION$", re.IGNORECASE))
 
         node4 = PatternRegexNode({"template": "LEGION"}, "")
         node5 = PatternRegexNode({"template": "LEGION"}, "", userid="testid")

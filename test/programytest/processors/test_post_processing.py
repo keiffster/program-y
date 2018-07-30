@@ -8,18 +8,21 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
-
+from programytest.client import TestClient
+import re
 
 class PostProcessingTests(unittest.TestCase):
 
     def post_process(self, output_str):
-        context = ClientContext(TestClient(), "testid")
+        self.client = TestClient()
+
+        context = ClientContext(self.client, "testid")
    
-        context.bot = Bot(config=BotConfiguration())
+        context.bot = Bot(config=BotConfiguration(), client=self.client)
         context.brain = context.bot.brain
-        context.bot.brain.denormals.process_splits([" dot com ",".com"])
-        context.bot.brain.denormals.process_splits([" atsign ","@"])
+        context.bot.brain.denormals.add_to_lookup(" DOT COM ", [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM '])
+        context.bot.brain.denormals.add_to_lookup(" ATSIGN ",[re.compile('(^ATSIGN | ATSIGN | ATSIGN$)', re.IGNORECASE), '@'])
+
         denormalize = DenormalizePostProcessor()
         punctuation = FormatPunctuationProcessor()
         numbers = FormatNumbersPostProcessor()
@@ -50,7 +53,7 @@ class PostProcessingTests(unittest.TestCase):
 
         result = self.post_process("My email address is ybot atsign programy dot com")
         self.assertIsNotNone(result)
-        self.assertEqual("My email address is ybot@programy.com", result)
+        self.assertEqual("My email address is ybot@programy.COM", result)
 
         result = self.post_process("He said ' Hello World '.")
         self.assertIsNotNone(result)

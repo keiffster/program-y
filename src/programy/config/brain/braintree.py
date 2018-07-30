@@ -23,31 +23,21 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
 
     def __init__(self):
         BaseSectionConfigurationData.__init__(self, "braintree")
-        self._file = None
-        self._content = None
+        self._create = False
 
     @property
-    def file(self):
-        return self._file
-
-    @property
-    def content(self):
-        return self._content
+    def create(self):
+        return self._create
 
     def load_config_section(self, configuration_file, configuration, bot_root):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
-            file = configuration_file.get_option(braintree, "file", missing_value=None)
-            if file is not None:
-                self._file = self.sub_bot_root(file, bot_root)
-            self._content = configuration_file.get_option(braintree, "content", missing_value="txt")
+            self._create = configuration_file.get_option(braintree, "create", missing_value=None)
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['file'] = "./braintree.xml"
-            data['content'] = "xml"
+            data['create'] = False
         else:
-            data['file'] = self._file
-            data['content'] = self._content
+            data['create'] = self._create

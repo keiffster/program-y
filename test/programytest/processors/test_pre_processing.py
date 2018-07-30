@@ -7,15 +7,16 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PreProcessingTests(unittest.TestCase):
 
     def test_pre_cleanup(self):
+        self.client = TestClient()
 
-        context = ClientContext(TestClient(), "testid")
-        context.bot = Bot(config=BotConfiguration())
+        context = ClientContext(self.client, "testid")
+        context.bot = Bot(config=BotConfiguration(), client=self.client)
         context.brain = context.bot.brain
         test_str = "This is my Location!"
 

@@ -32,7 +32,7 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
     def test_basic_regex_match_as_template(self):
 
-        self._client_context.brain._regex_templates['LEGION']= re.compile("^LEGION$")
+        self._client_context.brain.regex_templates.add_regex("LEGION", re.compile("^LEGION$", re.IGNORECASE))
 
         self.add_pattern_to_graph(pattern='I AM <regex template="LEGION" />', topic="*", that="*", template="1")
 

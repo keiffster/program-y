@@ -3,7 +3,7 @@ import unittest
 from programy.dialog.dialog import Question
 from programy.extensions.admin.properties import PropertiesAdminExtension
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PropertiesAdminExtensionClient(TestClient):

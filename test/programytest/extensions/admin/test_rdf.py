@@ -1,6 +1,6 @@
 import unittest
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 from programy.extensions.admin.rdf import RDFAdminExtension
 
@@ -21,7 +21,7 @@ class RDFAdminExtensionTests(unittest.TestCase):
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
@@ -35,7 +35,7 @@ class RDFAdminExtensionTests(unittest.TestCase):
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
@@ -49,7 +49,7 @@ class RDFAdminExtensionTests(unittest.TestCase):
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
@@ -63,7 +63,7 @@ class RDFAdminExtensionTests(unittest.TestCase):
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)

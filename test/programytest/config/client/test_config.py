@@ -13,7 +13,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
         console:
           bot:  bot
           prompt: ">>>"
-          license_keys: $BOT_ROOT/config/license.keys
           bot_selector: programy.clients.client.DefaultBotSelector
           renderer: programy.clients.render.text.TextRenderer
           scheduler:
@@ -27,8 +26,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
 
         client_config = ClientConfigurationData("test")
         client_config.load_configuration(yaml, bot_config, ".")
-
-        self.assertEquals("./config/license.keys", client_config.license_keys)
 
         self.assertEquals("programy.clients.client.DefaultBotSelector", client_config.bot_selector)
 
@@ -51,8 +48,6 @@ class ClientConfigurationDataTests(unittest.TestCase):
 
         client_config = ClientConfigurationData("test")
         client_config.load_configuration(yaml, bot_config, ".")
-
-        self.assertIsNone(client_config.license_keys)
 
         self.assertIsNone(client_config.bot_selector)
 

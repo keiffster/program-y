@@ -58,6 +58,8 @@ class PannousAPI(object):
 
 class PannousService(Service):
 
+    LICENSE_KEY = 'PANNOUS_LOGIN'
+
     def __init__(self, config: BrainServiceConfiguration, api=None):
         Service.__init__(self, config)
 
@@ -74,10 +76,10 @@ class PannousService(Service):
 
     def ask_question(self, client_context, question: str):
         try:
-            if client_context.client.license_keys.has_key('PANNOUS_LOGIN'):
-                login = client_context.client.license_keys.get_key('PANNOUS_LOGIN')
+            if client_context.client.license_keys.has_key(PannousService.LICENSE_KEY):
+                login = client_context.client.license_keys.get_key(PannousService.LICENSE_KEY)
             else:
-                YLogger.error(client_context, "No variable PANNOUS_LOGIN found in license key file")
+                YLogger.error(client_context, "No variable %s found in license key file", PannousService.LICENSE_KEY)
                 return ""
 
             return self.api.ask_question(self.url, question, login)

@@ -39,6 +39,5 @@ class WebChatConfigurationTests(unittest.TestCase):
         self.assertEquals(data['cookie_expires'], 90)
 
         self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
         self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

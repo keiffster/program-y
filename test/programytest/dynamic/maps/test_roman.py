@@ -4,7 +4,7 @@ from programy.dynamic.maps.roman import MapDecimalToRoman
 from programy.dynamic.maps.roman import MapRomanToDecimal
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class IsRomanNumeralDynamicSetTests(unittest.TestCase):

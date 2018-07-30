@@ -5,7 +5,7 @@ from programy.services.pandora import PandoraService, PandoraAPI
 from programy.services.service import BrainServiceConfiguration
 from programytest.services.mock_requests import MockRequestsAPI
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PandoraAPITests(unittest.TestCase):
@@ -61,8 +61,8 @@ class PandoraServiceTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self._client_context = client.create_client_context("testid")
-        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_ask_question(self):
 

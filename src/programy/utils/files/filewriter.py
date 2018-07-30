@@ -20,6 +20,9 @@ import datetime
 import csv
 import os
 
+
+# TODO Remove this and move to storage
+
 class TextFile(object):
 
     def __init__(self, filename, mode="a", encoding="utf-8"):
@@ -70,6 +73,7 @@ class FileWriter(object):
 
     def get_timestamp(self):
         return "{:%Y-%m-%d %H:%M:%S}".format(datetime.datetime.now())
+
 
 class ConversationFileWriter(FileWriter):
 

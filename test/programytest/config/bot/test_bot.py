@@ -29,18 +29,20 @@ class BotConfigurationTests(unittest.TestCase):
             max_search_timeout: 60
             
             spelling:
+              load: true
               classname: programy.spelling.norvig.NorvigSpellingChecker
-              alphabet: 'abcdefghijklmnopqrstuvwxyz'
-              corpus: $BOT_ROOT/corpus.txt
+              alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
               check_before: true
               check_and_retry: true
               
             conversations:
-              type: file
-              config_name: file_storage
+              save: true
+              load: false
+              max_histories: 100
+              restore_last_topic: false
+              initial_topic: TOPIC1
+              empty_on_start: false
         
-            file_storage:
-              dir: $BOT_ROOT/conversations
 
         """, ConsoleConfiguration(), ".")
 
@@ -63,12 +65,18 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertTrue(bot_config.override_properties)
 
         self.assertIsNotNone(bot_config.spelling)
-        self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", bot_config.spelling.classname)
+        self.assertEqual(bot_config.spelling.section_name, "spelling")
+        self.assertEqual(bot_config.spelling.classname, "programy.spelling.norvig.NorvigSpellingChecker")
+        self.assertTrue(bot_config.spelling.check_before)
+        self.assertTrue(bot_config.spelling.check_and_retry)
 
         self.assertIsNotNone(bot_config.conversations)
-        self.assertEquals(bot_config.conversations.type, "file")
-        self.assertIsNotNone(bot_config.conversations.storage)
-        self.assertEquals(bot_config.conversations.storage.dir, "./conversations")
+        self.assertIsNotNone(bot_config.conversations.save, True)
+        self.assertIsNotNone(bot_config.conversations.load, False)
+        self.assertIsNotNone(bot_config.conversations.max_histories, 100)
+        self.assertIsNotNone(bot_config.conversations.restore_last_topic, False)
+        self.assertIsNotNone(bot_config.conversations.initial_topic, "TOPIC1")
+        self.assertIsNotNone(bot_config.conversations.empty_on_start, False)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

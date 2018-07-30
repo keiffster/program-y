@@ -23,7 +23,6 @@ import xml.etree.ElementTree as ET
 
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
-from programy.config.brain.brain import BrainConfiguration
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
@@ -31,7 +30,7 @@ from programy.dialog.dialog import Sentence
 from programy.parser.pattern.matcher import MatchContext
 from programy.utils.files.filewriter import ErrorsFileWriter
 from programy.utils.files.filewriter import DuplicatesFileWriter
-
+from programy.storage.factory import StorageFactory
 
 class AIMLLoader(FileFinder):
     
@@ -96,32 +95,6 @@ class AIMLParser(object):
     def template_parser(self):
         return self._template_parser
 
-    def create_debug_storage(self, configuration):
-        if configuration.files.aiml_files.errors is not None:
-            self._errors = ErrorsFileWriter(configuration.files.aiml_files.errors)
-        if configuration.files.aiml_files.duplicates is not None:
-            self._duplicates = DuplicatesFileWriter(configuration.files.aiml_files.duplicates)
-
-    def save_debug_files(self, configuration):
-
-        if configuration.files.aiml_files.errors is not None:
-            num_errors = self._errors.save_content()
-            if num_errors > 0:
-                print("WARNING:%d errors detected"%num_errors)
-                self._errors.print_content()
-
-        if configuration.files.aiml_files.duplicates is not None:
-            num_dupes = self._duplicates.save_content()
-            if num_dupes > 0:
-                print("WARNING: %d duplicated grammars detected"%num_dupes)
-                self._duplicates.print_content()
-
-    def display_debug_info(self, configuration):
-        if self._errors is not None:
-            self._errors.display_debug_info()
-        if self._duplicates is not None:
-            self._duplicates.display_debug_info()
-
     def load_files_from_directory(self, configuration):
 
         start = datetime.datetime.now()
@@ -164,29 +137,13 @@ class AIMLParser(object):
     def empty(self):
         self._pattern_parser.empty()
 
-    def load_aiml(self, configuration: BrainConfiguration):
-
-        if configuration.files.aiml_files is not None:
-
-            self.create_debug_storage(configuration)
-
-            if configuration.files.aiml_files.has_multiple_files():
-                self.load_files_from_directory(configuration)
-                self.load_learnf_files_from_directory(configuration)
-
-            elif configuration.files.aiml_files.has_single_file():
-                self.load_single_file(configuration)
-                self.load_learnf_files_from_directory(configuration)
-
-            else:
-                YLogger.info(self, "No AIML files or file defined in configuration to load")
-
-            self.save_debug_files(configuration)
-
-            self.display_debug_info(configuration)
-
+    def load_aiml(self):
+        if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.CATEGORIES) is True:
+            storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.CATEGORIES)
+            category_store = storage_engine.category_store()
+            category_store.load_all(self)
         else:
-            YLogger.info(self, "No AIML files or file defined in configuration to load")
+            YLogger.error(None, "No category storage defined, no aiml loaded!")
 
     def tag_and_namespace_from_text(self, text):
         # If there is a namespace, then it looks something like
@@ -271,6 +228,32 @@ class AIMLParser(object):
     #   </aiml>
     #
 
+    def create_debug_storage(self, configuration):
+        if configuration.debugfiles.save_errors is True:
+            self._errors = []
+        if configuration.debugfiles.save_duplicates is True:
+            self._duplicates = []
+
+    def save_debug_files(self, configuration):
+
+        if configuration.debugfiles.save_errors is True:
+            if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.ERRORS) is True:
+                storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.ERRORS)
+                errors_store = storage_engine.errors_store()
+                errors_store.save_errors(self._errors)
+
+        if configuration.debugfiles.save_duplicates is True:
+            if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.DUPLICATES) is True:
+                storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.DUPLICATES)
+                duplicates_store = storage_engine.duplicates_store()
+                duplicates_store.save_duplicates(self._duplicates)
+
+    def display_debug_info(self, configuration):
+        if self._errors is not None:
+            print("Found a total of %d errors in your grammars, check your errors store" % len(self._errors))
+        if self._duplicates is not None:
+            print("Found a total of %d duplicates in your grammars, check your duplicates store" % len(self._duplicates))
+
     def handle_aiml_duplicate(self, dupe_excep, filename, expression):
         if self._duplicates is not None:
             if logging.getLogger().isEnabledFor(logging.ERROR):
@@ -286,7 +269,7 @@ class AIMLParser(object):
             if hasattr(expression, "_end_line_number"):
                 endline = str(expression._end_line_number)
 
-            self._duplicates.save_entry(dupe_excep.message, filename, startline, endline)
+            self._duplicates.append([dupe_excep.message, filename, startline, endline])
 
     def handle_aiml_error(self, parser_excep, filename, expression):
         if self._errors is not None:
@@ -303,7 +286,7 @@ class AIMLParser(object):
             if hasattr(expression, "_end_line_number"):
                 endline = str(expression._end_line_number)
 
-            self._errors.save_entry(parser_excep.message, filename, startline, endline)
+            self._errors.append([parser_excep.message, filename, startline, endline])
 
     def parse_aiml(self, aiml_xml, namespace, filename=None, userid="*"):
         self.parse_version(aiml_xml)

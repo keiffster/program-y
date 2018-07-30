@@ -1,8 +1,6 @@
 import unittest
 import os
-from xml.etree.ElementTree import ParseError
 
-from programy.parser.aiml_parser import AIMLParser
 from programy.parser.pattern.nodes.root import PatternRootNode
 from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.pattern.nodes.that import PatternThatNode
@@ -12,19 +10,26 @@ from programy.parser.pattern.nodes.template import PatternTemplateNode
 
 from programy.dialog.dialog import Sentence
 from programy.bot import Bot
-from programy.brain import Brain
-from programy.config.brain.brain import BrainConfiguration
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
+
+class AIMLParserTestClient(TestClient):
+
+    def __init__(self):
+        TestClient.__init__(self)
+
+    def load_storage(self):
+        super(AIMLParserTestClient, self).load_storage()
+        self.add_default_stores()
+
 
 class AIMLParserTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(TestClient(), "testid")
-        self._client_context.bot = Bot(BotConfiguration())
-        self._client_context.brain = self._client_context.bot.brain
+        self._client = AIMLParserTestClient()
+        self._client_context = self._client.create_client_context("testid")
         self.parser = self._client_context.brain.aiml_parser
 
     def test_tag_name_from_namespace(self):
@@ -576,9 +581,7 @@ class AIMLParserTests(unittest.TestCase):
 
         self.parser.pattern_parser.dump()
 
-        bot = Bot(BotConfiguration())
-
-        context = self.parser.match_sentence(self._client_context, Sentence(bot.brain.tokenizer, "HELLO"), "*", "*")
+        context = self.parser.match_sentence(self._client_context, Sentence(self._client_context.brain.tokenizer, "HELLO"), "*", "*")
         self.assertIsNotNone(context)
         self.assertEqual("Hiya", context.template_node().template.resolve(self._client_context))
 

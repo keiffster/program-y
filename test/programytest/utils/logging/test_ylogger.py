@@ -2,9 +2,8 @@ import unittest
 
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.logging.ylogger import YLoggerSnapshot
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 from programy.config.bot.bot import BotConfiguration
 from programy.bot import Bot
@@ -79,11 +78,12 @@ class YLoggerTests(unittest.TestCase):
     def test_format_message_with_bot(self):
         config = BotConfiguration()
         config._section_name = "testbot"
-        bot = Bot(config)
+        client = TestClient()
+        bot = Bot(config, client)
 
         msg = YLogger.format_message(bot, "Test Message")
         self.assertIsNotNone(msg)
-        self.assertEquals("[] [testbot] - Test Message", msg)
+        self.assertEquals("[testclient] [testbot] - Test Message", msg)
 
     def test_format_message_with_client_and_bot_and_brain(self):
         client = TestClient()
@@ -102,12 +102,15 @@ class YLoggerTests(unittest.TestCase):
 
     def test_format_message_with_client_and_bot_and_brain(self):
         brain_config = BrainConfiguration()
+        client = TestClient()
+        context = client.create_client_context("testid")
+
         brain_config._section_name = "testbrain"
-        brain = Brain(None, brain_config)
+        brain = Brain(context.bot, brain_config)
 
         msg = YLogger.format_message(brain, "Test Message")
         self.assertIsNotNone(msg)
-        self.assertEquals("[] [] [testbrain] - Test Message", msg)
+        self.assertEquals("[testclient] [bot] [testbrain] - Test Message", msg)
 
     def test_format_message_with_client_context(self):
 

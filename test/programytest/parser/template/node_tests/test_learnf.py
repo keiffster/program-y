@@ -5,7 +5,6 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.config.brain.file import BrainFileConfiguration
 
 from programytest.parser.base import ParserTestsBaseClass
 
@@ -30,12 +29,6 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
         
     def test_node(self):
 
-        learnf_path = self.get_os_specific_path() + os.sep + "testid.aiml"
-
-        if os.path.exists(learnf_path):
-            os.remove(learnf_path)
-        self.assertFalse(os.path.exists(learnf_path))
-
         root = TemplateNode()
         self.assertIsNotNone(root)
 
@@ -53,11 +46,6 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
         self.assertEqual("", resolved)
-
-        self.assertTrue(os.path.exists(learnf_path))
-        if os.path.exists(learnf_path):
-            os.remove(learnf_path)
-        self.assertFalse(os.path.exists(learnf_path))
 
     def test_to_xml(self):
         root = TemplateNode()

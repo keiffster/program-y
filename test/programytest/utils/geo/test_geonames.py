@@ -3,6 +3,7 @@ import os
 
 from programy.utils.geo.geonames import GeoNamesApi
 from programy.utils.license.keys import LicenseKeys
+from programytest.client import TestClient
 
 #############################################################################
 #
@@ -33,11 +34,10 @@ class GeoNamesTests(unittest.TestCase):
         geonames = GeoNamesApi(license_keys)
 
     def test_geonames(self):
+        client = TestClient()
+        client.add_license_keys_store()
 
-        license_keys = LicenseKeys()
-        license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
-
-        geonames = GeoNamesApi(license_keys)
+        geonames = GeoNamesApi(client.license_keys)
         self.assertIsNotNone(geonames)
 
         GeoNamesApi.get_latlong_for_postcode_response_file = os.path.dirname(__file__)+ os.sep + "geonames_latlong.json"

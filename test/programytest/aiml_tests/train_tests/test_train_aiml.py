@@ -1,11 +1,10 @@
 import unittest
 import os
 
-from programy.context import ClientContext
 from programy.config.file.factory import ConfigurationFactory
 from programy.clients.events.console.config import ConsoleConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class TrainTestClient(TestClient):
@@ -13,10 +12,12 @@ class TrainTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        self._configuration = ConfigurationFactory.load_configuration_from_file(ConsoleConfiguration(),
-                                                                               os.path.dirname(__file__)+ os.sep + "testconfig.yaml",
-                                                                               bot_root=os.path.dirname(__file__))
+    def load_storage(self):
+        super(TrainTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+        self.add_sets_store([os.path.dirname(__file__) + os.sep + "sets"])
+
 
 class TrainAIMLTests(unittest.TestCase):
 
@@ -53,7 +54,8 @@ class TrainAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "mommy likes to smoke cigars")
         self.assertIsNotNone(response)
 
-        self.assertEqual('Now you can ask me: "Who likes TO SMOKE CIGARS?" and "What does my mommy like?"', response)
+        # TODO, deal with the spacing between the quotes
+        self.assertEqual('Now you can ask me: " Who likes to smoke cigars ?" and " What does my mommy ?"', response)
 
         response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)

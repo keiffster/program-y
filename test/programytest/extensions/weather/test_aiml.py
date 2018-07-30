@@ -3,11 +3,10 @@ import os
 import json
 
 from programy.extensions.weather.weather import WeatherExtension
-from programy.context import ClientContext
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class MockGoogleMaps(GoogleMaps):
@@ -53,9 +52,10 @@ class WeathersTestsClient(TestClient):
     def __init__(self):
         TestClient.__init__(self, debug=True)
 
-    def load_configuration(self, arguments):
-        super(WeathersTestsClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
+    def load_storage(self):
+        super(WeathersTestsClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class WeathersAIMLTests(unittest.TestCase):

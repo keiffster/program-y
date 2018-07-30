@@ -2,7 +2,6 @@ import xml.etree.ElementTree as ET
 
 import os
 
-from programy.config.brain.file import BrainFileConfiguration
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.learn import LearnCategory
 from programy.parser.template.nodes.learnf import TemplateLearnfNode
@@ -24,8 +23,6 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
 			</template>
 			""")
 
-        self._client_context.brain.configuration._aiml_files = BrainFileConfiguration(os.sep + "tmp", ".aiml", False)
-
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
@@ -46,17 +43,10 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
         self.assertIsNotNone(learn_node.children[0].template)
         self.assertIsInstance(learn_node.children[0].template, TemplateNode)
 
-        learnf_path = TemplateLearnfNode.create_learnf_path(self._client_context)
-        self.assertIsNotNone(learnf_path)
-        if os.path.exists(learnf_path):
-            os.remove(learnf_path)
-        self.assertFalse(os.path.exists(learnf_path))
-
         resolved = learn_node.resolve(self._client_context)
         self.assertEqual(resolved, "")
 
+        #TODO Add checks to ensure learnf data is created in storage
+
         response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)
-
-        self.assertTrue(os.path.exists(learnf_path))
-        os.remove(learnf_path)

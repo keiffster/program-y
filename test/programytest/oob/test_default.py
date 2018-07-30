@@ -2,9 +2,8 @@ import unittest
 
 from programy.oob.default import DefaultOutOfBandProcessor
 import xml.etree.ElementTree as ET
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class DefaultOutOfBandProcessorTests(unittest.TestCase):
 

@@ -82,7 +82,7 @@ class BrainFactory(object):
 
 class Bot(object):
 
-    def __init__(self, config: BotConfiguration, client=None):
+    def __init__(self, config, client):
         self._configuration = config
         self._client = client
 
@@ -125,6 +125,7 @@ class Bot(object):
                     YLogger.info(self, "Loading spelling checker from class [%s]", self.configuration.spelling.classname)
                     spell_class = ClassLoader.instantiate_class(self.configuration.spelling.classname)
                     self._spell_checker = spell_class(self.configuration.spelling)
+                    self._spell_checker.initialise(self.client)
                 except Exception as excep:
                     YLogger.exception(self, "Failed to initiate spellcheker", excep)
             else:
@@ -207,7 +208,7 @@ class Bot(object):
         return self.get_conversation(client_context)
 
     def get_conversation(self, client_context):
-        # TODO move this to Conversations base class
+        # TODO MOve into Conversation Manager
         if client_context.userid in self._conversations:
             YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
             return self._conversations[client_context.userid]
@@ -227,14 +228,19 @@ class Bot(object):
             return conversation
 
     def initiate_conversation_storage(self):
+        # TODO MOve into Conversation Manager
+        pass
+        """
         if self.configuration is not None:
             if self.configuration.conversations is not None:
                 self._conversation_storage = ConversationStorageFactory.get_storage(self.configuration)
                 if self._conversation_storage is not None:
                     if self.configuration.conversations.empty_on_start is True:
                         self._conversation_storage.empty ()
+        """
 
     def load_conversation(self, clientid):
+        # TODO MOve into Conversation Manager
         if self._conversation_storage is not None:
             if clientid in self._conversations:
                 conversation = self._conversations[clientid]
@@ -242,6 +248,7 @@ class Bot(object):
                                                              self.configuration.conversations.restore_last_topic)
 
     def save_conversation(self, clientid):
+        # TODO MOve into Conversation Manager
         if self._conversation_storage is not None:
             if clientid in self._conversations:
                 conversation = self._conversations[clientid]
@@ -370,13 +377,14 @@ class Bot(object):
         return response
 
     def log_question_and_answer(self, client_context, text, response):
+        # TODO Move to Conversation Storage Class
         convo_logger = logging.getLogger("conversation")
         if convo_logger:
             qanda =  "%s - Question[%s], Response[%s]"%(str(client_context), text, response)
             convo_logger.info(qanda)
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
-
+        # TODO Create Sentence Processor
         client_context.check_max_recursion()
         client_context.check_max_timeout()
 
@@ -396,6 +404,7 @@ class Bot(object):
         return answer
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
+        # TODO Create Response Processor
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
         answer = self.post_process_response(client_context, response, srai)
@@ -403,6 +412,7 @@ class Bot(object):
         return answer
 
     def handle_none_response(self, clientid, sentence, responselogger):
+        # TODO Create Response Processor
         sentence.response = self.get_default_response(clientid)
         if responselogger is not None:
             responselogger.log_unknown_response(sentence)

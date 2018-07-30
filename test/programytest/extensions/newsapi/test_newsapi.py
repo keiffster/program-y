@@ -3,9 +3,8 @@ import unittest.mock
 
 from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programy.extensions.newsapi.newsapi import NewsAPI
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class MockNewsAPI(NewsAPI):

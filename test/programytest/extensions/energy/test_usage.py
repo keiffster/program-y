@@ -1,9 +1,8 @@
 import unittest
 
 from programy.extensions.energy.usage import EnergyUsageExtension
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class EnergyUsageExtensionTests(unittest.TestCase):
 

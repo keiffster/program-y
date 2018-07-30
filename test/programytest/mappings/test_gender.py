@@ -1,34 +1,75 @@
 import unittest
+import re
+import os
 
 from programy.mappings.gender import GenderCollection
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
 
 
-class GenderTests(unittest.TestCase):
+class GenderiseTests(unittest.TestCase):
 
-    def test_collection(self):
+    def test_initialise_collection(self):
         collection = GenderCollection()
         self.assertIsNotNone(collection)
 
-        count = collection.load_from_text("""
-                " with him "," with her "
-                " with her "," with him "
-                " to him "," to her "
-                " to her "," to him "
-                " on him "," on her "
-                " on her "," on him "
-                " in him "," in her "
-                " in her "," in him "
-                " for him "," for her "
-                " for her "," for him "
-                " he "," she "
-                " his "," her "
-                " him "," her "
-                " her "," his "
-                " she "," he "
-        """)
-        self.assertEqual(count, 15)
+    def test_collection_operations(self):
+        collection = GenderCollection()
+        self.assertIsNotNone(collection)
 
-        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
+        collection.add_to_lookup(" WITH HIM ", [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
 
-        #self.assertEqual("(^with him | with him | with him$)", collection.gender(" with him "))
-        self.assertIsNone(collection.gender("unknown"))
+        self.assertTrue(collection.has_key(" WITH HIM "))
+        self.assertEquals([re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '], collection.value(" WITH HIM "))
+
+        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+
+    def test_load(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._gender_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.GENDER] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.GENDER] = storage_engine
+
+        collection = GenderCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+
+    def test_reload(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._gender_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.GENDER] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.GENDER] = storage_engine
+
+        collection = GenderCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+
+        collection.reload(storage_factory)
+
+        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+
+
+
+

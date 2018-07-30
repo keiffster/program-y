@@ -3,7 +3,7 @@ import unittest
 from programy.services.programy import ProgramyRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ProgramyRESTServiceTests(unittest.TestCase):

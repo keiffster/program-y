@@ -1,11 +1,10 @@
 import unittest
 import os
 
-from programy.context import ClientContext
 from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.security.authenticate.authenticator import Authenticator
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockAuthenticationService(Authenticator):
 
@@ -23,9 +22,13 @@ class AuthenticateTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
+    def load_storage(self):
+        super(AuthenticateTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+
     def load_configuration(self, arguments):
         super(AuthenticateTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
         self.configuration.client_configuration.configurations[0].configurations[0].security._authentication = BrainSecurityAuthenticationConfiguration("authentication")
         self.configuration.client_configuration.configurations[0].configurations[0].security.authentication._classname = "programytest.aiml_tests.authenticate_tests.test_authenticate_aiml.MockAuthenticationService"
         self.configuration.client_configuration.configurations[0].configurations[0].security.authentication._denied_srai = "AUTHENTICATED_FAILED"

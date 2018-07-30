@@ -49,7 +49,6 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEquals('>>>', data['prompt'])
 
         self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
         self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")
 
@@ -61,7 +60,6 @@ class ConsoleConfigurationTests(unittest.TestCase):
           bot: bot
           default_userid: console
           prompt: $
-          license_keys: ./config/license.keys
           bot_selector: programy.clients.client.DefaultBotSelector
           renderer: programy.clients.render.text.TextRenderer
         """, ConsoleConfiguration(), ".")
@@ -76,6 +74,5 @@ class ConsoleConfigurationTests(unittest.TestCase):
         self.assertEquals('$', data['prompt'])
 
         self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
         self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

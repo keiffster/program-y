@@ -51,6 +51,5 @@ class LineConfigurationTests(unittest.TestCase):
         self.assertEquals(data['unknown_command_srai'], 'LINEUNKNOWNCOMMAND')
 
         self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
         self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
         self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")

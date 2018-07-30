@@ -6,9 +6,8 @@ import unittest.mock
 from programy.extensions.weather.weather import WeatherExtension
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -53,15 +52,13 @@ class WeatherExtensionTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self.context = client.create_client_context("testid")
 
         bot = unittest.mock.Mock()
         self.context.bot = bot
         self.context.brain = bot.brain
 
-        self.context.client.license_keys.load_license_key_data("""
-        METOFFICE_API_KEY=TESTKEY
-        """)
 
     def test_observation(self):
         latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"

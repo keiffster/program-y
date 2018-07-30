@@ -12,8 +12,7 @@ class BrainBraintreeConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         brain:
             braintree:
-              file: /tmp/braintree.xml
-              content: xml
+              create: true
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -21,8 +20,7 @@ class BrainBraintreeConfigurationTests(unittest.TestCase):
         braintree_config = BrainBraintreeConfiguration()
         braintree_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertEquals("/tmp/braintree.xml", braintree_config.file)
-        self.assertEquals("xml", braintree_config.content)
+        self.assertTrue("file", braintree_config.create)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -37,8 +35,7 @@ class BrainBraintreeConfigurationTests(unittest.TestCase):
         braintree_config = BrainBraintreeConfiguration()
         braintree_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertIsNone(braintree_config.file)
-        self.assertIsNone(braintree_config.content)
+        self.assertFalse(braintree_config.create)
 
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()
@@ -52,5 +49,4 @@ class BrainBraintreeConfigurationTests(unittest.TestCase):
         braintree_config = BrainBraintreeConfiguration()
         braintree_config.load_config_section(yaml, brain_config, ".")
 
-        self.assertIsNone(braintree_config.file)
-        self.assertIsNone(braintree_config.content)
+        self.assertFalse(braintree_config.create)

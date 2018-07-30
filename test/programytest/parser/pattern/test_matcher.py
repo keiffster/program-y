@@ -7,26 +7,33 @@ from programy.parser.pattern.matcher import EqualsMatch
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.template.nodes.base import TemplateNode
-from programy.bot import Bot
-from programy.brain import Brain
-from programy.config.brain.brain import BrainConfiguration
-from programy.config.bot.bot import BotConfiguration
-from programy.parser.aiml_parser import AIMLParser
+from programytest.client import TestClient
 
+
+class MatcherTestClient(TestClient):
+
+    def __init__(self):
+        TestClient.__init__(self)
+
+    def load_storage(self):
+        super(MatcherTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_pattern_nodes_store()
+        
 
 class PatternFactoryTests(unittest.TestCase):
 
     def setUp(self):
-        self._clientid = "testid"
-        self._bot = Bot(BotConfiguration())
-
+        client = MatcherTestClient()
+        self._client_context = client.create_client_context("testid")
+        
     def test_match_no_word(self):
         topic = PatternOneOrMoreWildCardNode("*")
         match = Match(Match.TOPIC, topic, None)
         self.assertEquals(Match.TOPIC, match.match_type)
         self.assertEquals(topic, match.matched_node)
         self.assertEquals([], match.matched_words)
-        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=()", match.to_string(self._bot.brain.tokenizer))
+        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=()", match.to_string(self._client_context.brain.tokenizer))
 
     def test_match_word(self):
         topic = PatternOneOrMoreWildCardNode("*")
@@ -34,7 +41,7 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals(Match.TOPIC, match.match_type)
         self.assertEquals(topic, match.matched_node)
         self.assertEquals(["Hello"], match.matched_words)
-        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=(Hello)", match.to_string(self._bot.brain.tokenizer))
+        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=(Hello)", match.to_string(self._client_context.brain.tokenizer))
 
     def test_match_multi_word(self):
         topic = PatternOneOrMoreWildCardNode("*")
@@ -42,8 +49,8 @@ class PatternFactoryTests(unittest.TestCase):
         match.add_word("Hello")
         match.add_word("World")
         self.assertEquals(["Hello", "World"], match.matched_words)
-        self.assertEquals("Hello World", match.joined_words(self._bot.brain.tokenizer))
-        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=(Hello World)", match.to_string(self._bot.brain.tokenizer))
+        self.assertEquals("Hello World", match.joined_words(self._client_context.brain.tokenizer))
+        self.assertEquals("Match=(Topic) Node=(ONEORMORE [*]) Matched=(Hello World)", match.to_string(self._client_context.brain.tokenizer))
 
     def test_type_to_string(self):
         self.assertEquals("Word", Match.type_to_string(Match.WORD))
@@ -52,12 +59,12 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals("Unknown", Match.type_to_string(999))
 
     def test_match_context_depth(self):
-        context1 = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._bot.brain.tokenizer)
+        context1 = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._client_context.brain.tokenizer)
         self.assertEquals(100, context1.max_search_depth)
         self.assertEquals(60, context1.max_search_time)
 
     def test_match_context_depth(self):
-        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._client_context.brain.tokenizer)
         self.assertEquals(100, context.max_search_depth)
         self.assertEquals(60, context.max_search_timeout)
         self.assertFalse(context.matched())
@@ -68,7 +75,7 @@ class PatternFactoryTests(unittest.TestCase):
 
     def test_match_context_pop_push(self):
         topic = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._client_context.brain.tokenizer)
         context.add_match(Match(Match.TOPIC, topic, None))
         self.assertEquals(1, len(context.matched_nodes))
         context.add_match(Match(Match.TOPIC, topic, None))
@@ -89,7 +96,7 @@ class PatternFactoryTests(unittest.TestCase):
         topic = PatternOneOrMoreWildCardNode("*")
         that = PatternOneOrMoreWildCardNode("*")
 
-        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._client_context.brain.tokenizer)
 
         context.add_match(Match(Match.WORD, word, "Hello"))
         context.add_match(Match(Match.TOPIC, topic, "Hello Topic"))
@@ -112,15 +119,15 @@ class PatternFactoryTests(unittest.TestCase):
         self.assertEquals("True, 1, Hello World", equals_match.to_string())
 
     def test_time_functions(self):
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
         self.assertEqual(-1, context.max_search_timeout)
         self.assertFalse(context.search_time_exceeded())
 
-        context = MatchContext(max_search_depth=100, max_search_timeout=0, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=0, tokenizer=self._client_context.brain.tokenizer)
         self.assertEqual(0, context.max_search_timeout)
         self.assertTrue(context.search_time_exceeded())
 
-        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._bot.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=60, tokenizer=self._client_context.brain.tokenizer)
         time_now = datetime.datetime.now()
         prev_time = time_now - datetime.timedelta(seconds=-70)
         context._total_search_start = prev_time

@@ -16,8 +16,8 @@ from programy.utils.weather.metoffice import DV
 from programy.utils.weather.metoffice import SiteReport
 from programy.utils.weather.metoffice import MetOffice24HourForecast, MetOffice5DayForecast, MetOfficeObservation, MetOfficeWeatherReport
 from programy.utils.weather.metoffice import MetOffice
-from programy.utils.text.dateformat import DateFormatter
 from programy.utils.license.keys import LicenseKeys
+from programytest.client import TestClient
 
 
 class DataPointTets(unittest.TestCase):
@@ -2109,14 +2109,14 @@ class MockMetOffice(MetOffice):
 class MetOfficeTests(unittest.TestCase):
 
     def setUp(self):
-        self.license_keys = LicenseKeys()
-        self.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
+        self._client = TestClient()
+        self._client.add_license_keys_store()
 
         self.lat = 56.0720397
         self.lng = -3.1752001
 
     def test_init(self):
-        met_office = MetOffice(self.license_keys)
+        met_office = MetOffice(self._client.license_keys)
         self.assertIsNotNone(met_office)
         self.assertIsNotNone(met_office._met_office_api)
 
@@ -2125,7 +2125,7 @@ class MetOfficeTests(unittest.TestCase):
             met_office = MetOffice(None)
 
     def test_observation(self):
-        met_office = MockMetOffice(self.license_keys)
+        met_office = MockMetOffice(self._client.license_keys)
         self.assertIsNotNone(met_office)
         met_office._observation_file = os.path.dirname(__file__) +  os.sep + "observation.json"
         self.assertTrue(os.path.exists(met_office._observation_file))
@@ -2134,7 +2134,7 @@ class MetOfficeTests(unittest.TestCase):
         self.assertIsNotNone(observation)
 
     def tes_five_day_forecast(self):
-        met_office = MockMetOffice(self.license_keys)
+        met_office = MockMetOffice(self._client.license_keys)
         self.assertIsNotNone(met_office)
         met_office._forecast_file = os.path.dirname(__file__) +  os.sep + "forecast_3hourly.json"
         self.assertTrue(os.path.exists(met_office._forecast_file))
@@ -2143,7 +2143,7 @@ class MetOfficeTests(unittest.TestCase):
         self.assertIsNotNone(forecast)
 
     def tets_twentyfour_hour_forecast(self):
-        met_office = MockMetOffice(self.license_keys)
+        met_office = MockMetOffice(self._client.license_keys)
         self.assertIsNotNone(met_office)
         met_office._forecast_file = os.path.dirname(__file__) +  os.sep + "forecast_daily.json"
         self.assertTrue(os.path.exists(met_office._forecast_file))

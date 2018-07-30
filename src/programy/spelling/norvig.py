@@ -1,8 +1,6 @@
 #http://norvig.com/spell-correct.html
 
 import re
-import os
-from programy.utils.logging.ylogger import YLogger
 from collections import Counter
 
 from programy.spelling.base import SpellingChecker
@@ -17,18 +15,19 @@ class NorvigSpellingChecker(SpellingChecker):
         self.words = []
         self.sum_of_words = 0
 
-        if spelling_config is None:
-            corpus_filename = os.path.dirname(__file__) + os.sep + "corpus.txt"
-        else:
-            corpus_filename = spelling_config.corpus
+    def initialise(self, client):
+        self.load_corpus(client)
 
-        if os.path.exists(corpus_filename) is True:
-            YLogger.info(self, "Loading spelling corpus [%s]", corpus_filename)
+    def load_corpus(self, client):
+        if client.storage_factory.entity_storage_engine_available("spelling_corpus") is True:
+            spelling_engine =  client.storage_factory.entity_storage_engine("spelling_corpus")
+            if spelling_engine:
+                store = spelling_engine.spelling_store()
+                store.load_spelling(self)
 
-            self.words = Counter(self._all_words(open(corpus_filename, encoding="utf-8").read()))
-            self.sum_of_words = sum(self.words.values())
-        else:
-            YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)
+    def add_corpus(self, all_words):
+        self.words = Counter(self._all_words(all_words))
+        self.sum_of_words = sum(self.words.values())
 
     def _all_words(self, text):
         return re.findall(r'\w+', text.upper())

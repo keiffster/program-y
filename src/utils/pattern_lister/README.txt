@@ -1,6 +1,6 @@
 Pattern Lister
 ==============
-Creates a single CSV file containingall AIML patterns from the files specified in the directory ( and sub directories )
+Creates a single CSV file containing all AIML patterns from the files specified in the directory ( and sub directories )
 
 Useful tool for debugging and seeing the spread of AIML categories across files.
 

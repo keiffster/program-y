@@ -19,10 +19,9 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.text.text import TextUtils
 from programy.parser.exceptions import ParserException, DuplicateGrammarException
-from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
-
+from programy.storage.factory import StorageFactory
 
 #######################################################################################################################
 #
@@ -30,21 +29,9 @@ class PatternGraph(object):
 
     def __init__(self, aiml_parser, root_node=None):
         self._aiml_parser = aiml_parser
+        self._pattern_factory = aiml_parser.brain.pattern_factory
 
-        self.load_pattern_node_factory()
-
-        if root_node is None:
-            YLogger.debug(self, "Defaulting root to PatternRootNode")
-            self._root_node = self._pattern_factory.get_root_node()
-        else:
-            if root_node.is_root() is False:
-                raise ParserException("Root node needs to be of base type PatternRootNode")
-            self._root_node = root_node
-
-    def load_pattern_node_factory(self):
-        pattern_nodes = self._aiml_parser.brain.configuration.nodes.pattern_nodes
-        self._pattern_factory = PatternNodeFactory()
-        self._pattern_factory.load_nodes_config_from_file(pattern_nodes)
+        self._set_root_node(root_node)
 
     @property
     def root(self):
@@ -57,6 +44,15 @@ class PatternGraph(object):
     @property
     def pattern_factory(self):
         return self._pattern_factory
+
+    def _set_root_node(self, root_node):
+        if root_node is None:
+            YLogger.debug(self, "Defaulting root to PatternRootNode")
+            self._root_node = self._pattern_factory.get_root_node()
+        else:
+            if root_node.is_root() is False:
+                raise ParserException("Root node needs to be of base type PatternRootNode")
+            self._root_node = root_node
 
     def empty(self):
         YLogger.debug(self, "Defaulting root to PatternRootNode")
@@ -234,10 +230,10 @@ class PatternGraph(object):
                     raise DuplicateGrammarException("Dupicate grammar tree found for bot/set")
             else:
                 if pattern_element.text is not None:
-                    YLogger.warning(self, "Dupicate grammar tree found [%s] in learn, replacing existing",
+                    YLogger.warning(self, "Duplicate grammar tree found [%s] in learn, replacing existing",
                                         pattern_element.text.strip())
                 else:
-                    YLogger.warning(self, "Dupicate grammar tree found for bot/set in learn, replacing existing")
+                    YLogger.warning(self, "Duplicate grammar tree found for bot/set in learn, replacing existing")
 
                 self.add_template_to_node(template_graph_root, that_node)
         else:
@@ -259,16 +255,8 @@ class PatternGraph(object):
         self.root.dump("", output_func, eol, verbose)
         output_func(self, "")
 
-    def save_braintree(self, client_context, filename, content):
-        if content == 'txt':
-            with open(filename, "w+", encoding="utf-8") as dump_file:
-                self.dump(output_func=dump_file.write, eol="\n")
-        elif content == 'xml':
-            braintree = '<?xml version="1.0" encoding="UTF-8"?>\n'
-            braintree += '<aiml>\n'
-            braintree += self.root.to_xml(client_context)
-            braintree += '</aiml>\n'
-            with open(filename, "w+", encoding="utf-8") as dump_file:
-                dump_file.write(braintree)
-        else:
-            YLogger.error(client_context, "Unknown braintree content type [%s]", content)
+    def save_braintree(self, client_context):
+        if self._aiml_parser.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.BRAINTREE) is True:
+            storage_engine = self._aiml_parser.brain.bot.client.storage_factory.storage_engine(StorageFactory.BRAINTREE)
+            braintree_storage = storage_engine.braintree_storage()
+            braintree_storage.save_braintree(client_context)

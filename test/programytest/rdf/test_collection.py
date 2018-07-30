@@ -1,48 +1,32 @@
 import unittest
+import os
+import os.path
 
 from programy.rdf.collection import RDFCollection
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.factory import StorageFactory
 
 
 class RDFCollectionTests(unittest.TestCase):
 
     def add_data(self, collection):
-        collection.add_entity("MONKEY", "LEGS", "2")
-        collection.add_entity("MONKEY", "HASFUR", "true")
-        collection.add_entity("ZEBRA", "LEGS", "4")
-        collection.add_entity("BIRD", "LEGS", "2")
-        collection.add_entity("ELEPHANT", "TRUNK", "true")
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMALS")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMALS")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS")
 
     ###################################################################################################################
     # RDF Database creation
     #
 
-    def test_collection(self):
-        collection = RDFCollection()
-        self.assertIsNotNone(collection)
-
-        count = collection.load_from_text("""
-            ACCOUNT:hasPurpose:to track money
-            ACCOUNT:hasSize:0
-            ACCOUNT:hasSyllables:2
-            ACCOUNT:isa:Concept
-            ACCOUNT:lifeArea:Finances
-            ACT:hasPurpose:to entertain by performing
-        """)
-        self.assertEqual(count, 6)
-
-        self.assertTrue(collection.has_subject('ACCOUNT'))
-        self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
-        self.assertTrue(collection.has_object('ACCOUNT', 'ISA', 'Concept'))
-
-        self.assertFalse(collection.has_subject('ACCOUNTX'))
-        self.assertFalse(collection.has_predicate('ACCOUNT', 'hasSizeX'))
-        self.assertFalse(collection.has_object('ACCOUNT', 'isa', 'ConceptX'))
-
     def test_add_collection(self):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("ACCOUNT", "hasSize", "0")
+        collection.add_entity("ACCOUNT", "hasSize", "0", "BANIKING")
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
@@ -51,7 +35,7 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("ACCOUNT", "hasSize", "0")
+        collection.add_entity("ACCOUNT", "hasSize", "0", "BANIKING")
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
@@ -64,7 +48,7 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("ACCOUNT", "hasSize", "0")
+        collection.add_entity("ACCOUNT", "hasSize", "0", "BANIKING")
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
@@ -77,7 +61,7 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("ACCOUNT", "hasSize", "0")
+        collection.add_entity("ACCOUNT", "hasSize", "0", "BANIKING")
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
@@ -92,7 +76,7 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("ACCOUNT", "hasSize", "0")
+        collection.add_entity("ACCOUNT", "hasSize", "0", "BANKING", "BANIKING")
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
@@ -102,6 +86,63 @@ class RDFCollectionTests(unittest.TestCase):
         self.assertTrue(collection.has_subject('ACCOUNT'))
         self.assertTrue(collection.has_predicate('ACCOUNT', 'hasSize'))
         self.assertTrue(collection.has_object('ACCOUNT', 'hasSize', "0"))
+
+    ###################################################################################################################
+    # Loading
+    #
+
+    def test_load_from_file(self):
+        config = FileStorageConfiguration()
+        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "rdfs"])
+
+        factory = StorageFactory()
+
+        storage_engine = FileStorageEngine(config)
+
+        factory._storage_engines[StorageFactory.RDF] = storage_engine
+        factory._store_to_engine_map[StorageFactory.RDF] = storage_engine
+
+        storage_engine.initialise()
+
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(factory)
+
+        self.assertTrue(collection.has_subject("TEST1"))
+        self.assertTrue(collection.has_predicate("TEST1", "HASPURPOSE"))
+        self.assertTrue(collection.has_object("TEST1", "HASPURPOSE", "to test"))
+
+    def test_reload_from_file(self):
+        config = FileStorageConfiguration()
+        config._rdf_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "rdfs"])
+
+        factory = StorageFactory()
+
+        storage_engine = FileStorageEngine(config)
+
+        factory._storage_engines[StorageFactory.RDF] = storage_engine
+        factory._store_to_engine_map[StorageFactory.RDF] = storage_engine
+
+        storage_engine.initialise()
+
+        collection = RDFCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(factory)
+
+        self.assertTrue(collection.has_subject("TEST1"))
+        self.assertTrue(collection.has_predicate("TEST1", "HASPURPOSE"))
+        self.assertTrue(collection.has_object("TEST1", "HASPURPOSE", "to test"))
+
+        collection.delete_entity("TEST1", "HASPURPOSE", "to test")
+        self.assertFalse(collection.has_object("TEST1", "HASPURPOSE", "to test"))
+
+        collection.reload(factory, "TESTDATA")
+
+        self.assertTrue(collection.has_subject("TEST1"))
+        self.assertTrue(collection.has_predicate("TEST1", "HASPURPOSE"))
+        self.assertTrue(collection.has_object("TEST1", "HASPURPOSE", "to test"))
 
     ###################################################################################################################
     # Basic matching
@@ -620,11 +661,11 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("MONKEY", "LEGS", "2")
-        collection.add_entity("MONKEY", "HASFUR", "true")
-        collection.add_entity("ZEBRA", "LEGS", "4")
-        collection.add_entity("BIRD", "LEGS", "2")
-        collection.add_entity("ELEPHANT", "TRUNK", "true")
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMAL")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMAL")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMAL")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMAL")
 
         set1 = collection.match_to_vars("?x", "LEGS", "2")
         set2 = collection.match_to_vars("?x", "HASFUR", "true")
@@ -638,11 +679,11 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("MONKEY", "LEGS", "2")
-        collection.add_entity("MONKEY", "HASFUR", "true")
-        collection.add_entity("ZEBRA", "LEGS", "4")
-        collection.add_entity("BIRD", "LEGS", "2")
-        collection.add_entity("ELEPHANT", "TRUNK", "true")
+        collection.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
+        collection.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")
+        collection.add_entity("ZEBRA", "LEGS", "4", "ANIMALS")
+        collection.add_entity("BIRD", "LEGS", "2", "ANIMALS")
+        collection.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS")
 
         set1 = collection.match_to_vars("?x", "LEGS", "2")
         set2 = collection.not_match_to_vars("?x", "HASFUR", "true")
@@ -656,8 +697,8 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("TEST1", "ISA", "TEST2")
-        collection.add_entity("TEST2", "ISA", "TEST3")
+        collection.add_entity("TEST1", "ISA", "TEST2", "TEST")
+        collection.add_entity("TEST2", "ISA", "TEST3", "TEST")
 
         set1 = collection.match_to_vars("?x", "ISA", "?y")
         set2 = collection.match_to_vars("?y", "ISA", "?z")
@@ -673,10 +714,10 @@ class RDFCollectionTests(unittest.TestCase):
         collection = RDFCollection()
         self.assertIsNotNone(collection)
 
-        collection.add_entity("TEST1", "ISA", "TEST2")
-        collection.add_entity("TEST2", "ISA", "TEST3")
-        collection.add_entity("TEST3", "ISA", "TEST4")
-        collection.add_entity("TEST4", "ISA", "TEST5")
+        collection.add_entity("TEST1", "ISA", "TEST2", "TEST")
+        collection.add_entity("TEST2", "ISA", "TEST3", "TEST")
+        collection.add_entity("TEST3", "ISA", "TEST4", "TEST")
+        collection.add_entity("TEST4", "ISA", "TEST5", "TEST")
 
         set1 = collection.match_to_vars("?x", "ISA", "?y")
         set2 = collection.match_to_vars("?y", "ISA", "?z")

@@ -5,8 +5,12 @@ import os
 from programy.clients.polling.twitter.client import TwitterBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
 from programy.bot import Bot
-from programy.config.bot.bot import BotConfiguration
 from programytest.clients.arguments import MockArgumentParser
+from programy.storage.config import FileStorageConfiguration
+from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.store.twitter import FileTwitterStore
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.factory import StorageFactory
 
 
 class MockMessage(object):
@@ -311,19 +315,15 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
-        client.configuration.client_configuration._storage = 'file'
-        if os.name == 'posix':
-            client.configuration.client_configuration._storage_location = "/tmp/twitter.txt"
-        else:
-            client.configuration.client_configuration._storage_location = "C:\Windows\Temp/twitter.txt"
+        file_store_config = FileStorageConfiguration()
+        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
-        if os.path.exists(client.configuration.client_configuration.storage_location):
-            os.remove(client.configuration.client_configuration.storage_location)
-        self.assertFalse(os.path.exists(client.configuration.client_configuration.storage_location))
+        storage_engine = FileStorageEngine(file_store_config)
+
+        client.storage_factory._storage_engines[StorageFactory.TWITTER] = storage_engine
+        client.storage_factory._store_to_engine_map[StorageFactory.TWITTER] = storage_engine
 
         client._store_last_message_ids(666, 667)
-
-        self.assertTrue(os.path.exists(client.configuration.client_configuration.storage_location))
 
         ids = client._get_last_message_ids()
         self.assertEquals(ids[0], 666)

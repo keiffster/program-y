@@ -21,6 +21,8 @@ line-bot-sdk==1.5.0
 kik==1.5.0
 APScheduler==3.5.1
 emoji==0.5.0
+Flask-Ask==0.9.8
+Flask-SocketIO==3.0.0
 
 # Uncomment this line on Osx or Linux if you want to use sanic rest client
 # Sanic is not supported on Windows !

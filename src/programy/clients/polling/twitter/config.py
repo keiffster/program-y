@@ -26,8 +26,6 @@ class TwitterConfiguration(ClientConfigurationData):
         self._use_status = False
         self._use_direct_message = False
         self._auto_follow = False
-        self._storage = None
-        self._storage_location = None
         self._welcome_message = "Thanks for following me."
 
     @property
@@ -73,11 +71,6 @@ class TwitterConfiguration(ClientConfigurationData):
             if self._use_direct_message is True:
                 self._auto_follow = configuration_file.get_bool_option(twitter, "auto_follow")
 
-            self._storage = configuration_file.get_option(twitter, "storage")
-            if self._storage == 'file':
-                storage_loc = configuration_file.get_option(twitter, "storage_location")
-                self._storage_location = self.sub_bot_root(storage_loc, bot_root)
-
             self._welcome_message = configuration_file.get_option(twitter, "welcome_message")
         super(TwitterConfiguration, self).load_configuration(configuration_file, twitter, bot_root)
 
@@ -97,8 +90,6 @@ class TwitterConfiguration(ClientConfigurationData):
             data['use_status'] = self._use_status
             data['use_direct_message'] = self._use_direct_message
             data['auto_follow'] = self._auto_follow
-            data['storage'] = self._storage
-            data['storage_location'] = self._storage_location
             data['welcome_message'] = self._welcome_message
 
         super(TwitterConfiguration, self).to_yaml(data, defaults)

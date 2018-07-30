@@ -3,7 +3,7 @@ import unittest
 from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class FormatNmbersTests(unittest.TestCase):
 

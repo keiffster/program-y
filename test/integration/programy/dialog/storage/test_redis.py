@@ -2,7 +2,7 @@ import unittest
 
 from programy.config.bot.redisstorage import BotConversationsRedisStorageConfiguration
 from programy.dialog.storage.redis import ConversationRedisStorage
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 from programy.dialog.dialog import Conversation
 
 

@@ -71,29 +71,19 @@ class BrainSecurityAuthorisationConfiguration(BrainSecurityConfiguration):
 
     def __init__(self, service_name="authorisation"):
         BrainSecurityConfiguration.__init__(self, service_name)
-        self._usergroups = None
-
-    @property
-    def usergroups(self):
-        return self._usergroups
 
     def load_config_section(self, configuration_file, configuration, bot_root):
         super(BrainSecurityAuthorisationConfiguration, self).load_config_section(configuration_file, configuration, bot_root)
         service = configuration_file.get_section(self.section_name, configuration)
-        if service is not None:
-            usergroups = configuration_file.get_option(service, "usergroups", missing_value=None)
-            if usergroups is not None:
-                self._usergroups = self.sub_bot_root(usergroups, bot_root)
-            self.load_additional_key_values(configuration_file, service)
+        self.load_additional_key_values(configuration_file, service)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['classname'] = "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
             data['denied_srai'] = "AUTHORISATION_FAILED"
             data['denied_text'] = "Access Denied!"
-            data['usergroups'] = './config/usergroups.txt'
         else:
             data['classname'] = self._classname
             data['denied_srai'] = self._denied_srai
             data['denied_text'] = self._denied_text
-            data['usergroups'] = self._usergroups
+

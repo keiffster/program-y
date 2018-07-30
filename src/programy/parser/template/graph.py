@@ -16,15 +16,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.parser.exceptions import ParserException
-from programy.parser.template.factory import TemplateNodeFactory
 from programy.utils.text.text import TextUtils
 
 class TemplateGraph(object):
 
     def __init__(self, aiml_parser):
         self._aiml_parser = aiml_parser
-
-        self.load_template_node_factory()
+        self._template_factory = aiml_parser.brain.template_factory
 
     @property
     def aiml_parser(self):
@@ -33,11 +31,6 @@ class TemplateGraph(object):
     @property
     def template_factory(self):
         return self._template_factory
-
-    def load_template_node_factory(self):
-        template_nodes = self._aiml_parser.brain.configuration.nodes.template_nodes
-        self._template_factory = TemplateNodeFactory()
-        self._template_factory.load_nodes_config_from_file(template_nodes)
 
     #
     # TEMPLATE_EXPRESSION ::== TEXT | TAG_EXPRESSION | (TEMPLATE_EXPRESSION)*

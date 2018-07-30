@@ -56,10 +56,12 @@ class BaseConfigurationData(object):
         return []
 
     def load_additional_key_values(self, file_config, service):
-        for key in file_config.get_keys(service):
-            if key in self.additionals_to_add():
-                value = file_config.get_option(service, key)
-                self._additionals[key] = value
+        if file_config:
+            if service:
+                for key in file_config.get_keys(service):
+                    if key in self.additionals_to_add():
+                        value = file_config.get_option(service, key)
+                        self._additionals[key] = value
 
     def config_to_yaml(self, data, config, defaults=True):
         data[config.id] = {}

@@ -1,0 +1,6 @@
+bear:grrrrr
+bee:buzz
+bird:tweet
+buffalo:moo
+cat:moew
+chicken:cluck

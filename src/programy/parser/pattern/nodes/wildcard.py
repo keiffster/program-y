@@ -61,7 +61,7 @@ class PatternWildCardNode(PatternNode):
     def check_child_is_wildcard(self, tabs, client_context, context, words, word_no, match_type, depth):
         if self._0ormore_hash is not None:
             YLogger.debug(client_context, "%sWildcard # is next node, moving on!", tabs)
-            match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1)
+            match = self._0ormore_hash.consume(client_context, context, words, word_no+1, match_type, depth+1, parent_wildcard=True)
             if match is not None:
                 return match
 
@@ -73,7 +73,7 @@ class PatternWildCardNode(PatternNode):
 
         if self._0ormore_arrow is not None:
             YLogger.debug(client_context, "%sWildcard ^ is next node, moving on!", tabs)
-            match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1)
+            match = self._0ormore_arrow.consume(client_context, context, words, word_no+1, match_type, depth+1, parent_wildcard=True)
             if match is not None:
                 return match
 

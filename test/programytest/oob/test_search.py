@@ -3,9 +3,8 @@ import unittest.mock
 
 from programy.oob.search import SearchOutOfBandProcessor
 import xml.etree.ElementTree as ET
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class SearchOutOfBandProcessorTests(unittest.TestCase):
 

@@ -4,18 +4,20 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class NormalizeTests(unittest.TestCase):
 
     def setUp(self):
-        self.bot = Bot(config=BotConfiguration())
+        self.client = TestClient()
+
+        self.bot = Bot(config=BotConfiguration(), client=self.client)
 
     def test_normalize(self):
         processor = NormalizePreProcessor()
 
-        context = ClientContext(TestClient(), "testid")
+        context = ClientContext(self.client, "testid")
         context.bot = self.bot
         context.brain = self.bot.brain
 

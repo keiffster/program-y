@@ -1,0 +1,473 @@
+ANIMAL:hasPurpose:to live in nature
+ANIMAL:hasSize:0
+ANIMAL:hasSyllables:3
+ANIMAL:isa:Living Thing
+ANIMAL:lifeArea:Physical
+Animal Part:isa:Body Part
+ANT:hasPurpose:to make anthills
+ANT:hasSize:3
+ANT:hasSyllables:1
+ANT:isa:Animal
+ANT:isa:Insect
+ANT:lifeArea:Physical
+ANTEATER:hasPurpose:to eat ants
+ANTEATER:hasSize:6
+ANTEATER:hasSyllables:3
+ANTEATER:isa:Animal
+ANTEATER:isa:Mammal
+ANTEATER:lifeArea:Physical
+Arachnid:isa:Animal
+BIRD:hasPurpose:to eat worms
+BIRD:hasSize:4
+BIRD:hasSyllables:1
+Bird:isa:Animal
+BIRD:isa:Animal
+BIRD:isa:Wild Animal
+BIRD:lifeArea:Physical
+BULL:hasPurpose:to marry cows
+BULL:hasSize:8
+BULL:hasSyllables:1
+BULL:isa:Animal
+BULL:isa:Farm Animal
+BULL:lifeArea:Physical
+BUNNY:hasPurpose:to deliver Easter eggs
+BUNNY:hasSize:4
+BUNNY:hasSyllables:2
+BUNNY:isa:Animal
+BUNNY:isa:Rabbit
+BUNNY:lifeArea:Physical
+CAT:hasPurpose:to keep us company
+CAT:hasSize:5
+CAT:hasSyllables:3
+CAT:isa:Animal
+Cat:isa:Pet
+CAT:isa:Pet
+CAT:lifeArea:Physical
+CHEETAH:hasPurpose:to hunt wildlife
+CHEETAH:hasSize:7
+CHEETAH:hasSpeed:10
+CHEETAH:hasSyllables:2
+CHEETAH:isa:Animal
+CHEETAH:isa:Wild Animal
+CHEETAH:lifeArea:Physical
+CRAB:hasPurpose:to walk sideways
+CRAB:hasSize:4
+CRAB:hasSyllables:1
+CRAB:isa:Animal
+CRAB:isa:Shellfish
+CRAB:lifeArea:Physical
+COW:hasPurpose:to provide milk
+COW:hasSize:8
+COW:hasSyllables:1
+COW:isa:Animal
+COW:isa:Farm Animal
+COW:lifeArea:Physical
+ELEPHANT:hasPurpose:to make baby elephants
+ELEPHANT:hasSize:9
+ELEPHANT:hasSyllables:3
+ELEPHANT:isa:Animal
+ELEPHANT:isa:Wild Animal
+ELEPHANT:lifeArea:Physical
+FOX:hasPurpose:to hunt wildlife
+FOX:hasSize:6
+FOX:hasSyllables:1
+FOX:isa:Predator
+FOX:isa:Wild Animal
+FOX:lifeArea:Physical
+HORSE:hasPurpose:to ride
+HORSE:hasSize:8
+HORSE:hasSyllables:1
+Horse:isa:Animal
+HORSE:isa:Animal
+HORSE:isa:Farm Animal
+HORSE:lifeArea:Physical
+KITTY:hasPurpose:to provide us with companionship
+KITTY:hasSize:5
+KITTY:hasSyllables:2
+KITTY:isa:Cat
+KITTY:isa:Pet
+KITTY:lifeArea:Physical
+LION:hasPurpose:to hunt wildlife
+LION:hasSize:8
+LION:hasSyllables:2
+LION:isa:Predator
+LION:isa:Wild Animal
+LION:lifeArea:Physical
+MAGGOT:hasPurpose:to be a fly larva
+MAGGOT:hasSize:3
+MAGGOT:hasSyllables:2
+MAGGOT:isa:Animal
+MAGGOT:isa:Juvenile animal
+MAGGOT:lifeArea:Physical
+Animal:hasPlural:Plural
+Animal:maleName:Male
+Animal:femaleName:Female
+Animal:youngName:Young
+Animal:collective:Collective
+Animal:legs:Legs
+Animal:sound:Sound
+ant:hasPlural:ants
+ant:maleName:winged male or  aner
+ant:femaleName:queen
+ant:youngName:antling
+ant:collective:a colony of ants or  an army of ants
+ant:legs:6
+ant:sound:scratch
+bat:hasPlural:bats
+bat:maleName:male
+bat:femaleName:female
+bat:youngName:pup
+bat:collective:a cloud of bats or  a colony of bats
+bat:legs:2
+bat:sound:eee
+bear:hasPlural:bears
+bear:maleName:boar
+bear:femaleName:sow
+bear:youngName:cub
+bear:collective:a sleuth of bears or  a sloth of bears
+bear:legs:4
+bear:sound:grrrrr
+bee:hasPlural:bees
+bee:maleName:drone
+bee:femaleName:queen
+bee:youngName:larva
+bee:collective:a hive of bees or  a swarm of bees
+bee:legs:
+bee:sound:buzz
+bird:hasPlural:birds
+bird:maleName:cock
+bird:femaleName:hen
+bird:youngName:fledgling
+bird:collective:a flock of birds or  a flight of birds (in the air)
+bird:legs:2
+bird:sound:tweet
+buffalo:hasPlural:buffaloes
+buffalo:maleName:bull
+buffalo:femaleName:cow
+buffalo:youngName:calf
+buffalo:collective:a herd of buffalo
+buffalo:legs:4
+buffalo:sound:moo
+cat:hasPlural:cats
+cat:maleName:tom
+cat:femaleName:queen
+cat:youngName:kitten
+cat:collective:a clutter of cats
+cat:legs:4
+cat:sound:meow
+chicken:hasPlural:chickens
+chicken:maleName:rooster
+chicken:femaleName:hen
+chicken:youngName:chick
+chicken:collective:a brood of chickens or  a flock of chickens
+chicken:legs:2
+chicken:sound:cluck cluck
+cow:hasPlural:cattle
+cow:maleName:bull
+cow:femaleName:cow
+cow:youngName:calf
+cow:collective:a herd of cattle
+cow:legs:4
+cow:sound:moo
+dolphin:hasPlural:dolphins
+dolphin:maleName:bull
+dolphin:femaleName:cow
+dolphin:youngName:pup
+dolphin:collective:a school of dolphins
+dolphin:legs:0
+dolphin:sound:meep meep
+duck:hasPlural:ducks
+duck:maleName:drake
+duck:femaleName:duck
+duck:youngName:duckling
+duck:collective:a raft of ducks
+duck:legs:2
+duck:sound:quack
+elephant:hasPlural:elephants
+elephant:maleName:bull
+elephant:femaleName:cow
+elephant:youngName:calf
+elephant:collective:a herd of elephants
+elephant:legs:4
+elephant:sound:eeeha
+fish:hasPlural:fish
+fish:maleName:male
+fish:femaleName:female
+fish:youngName:fry (plural noun)
+fish:collective:a school of fish
+fish:legs:0
+fish:sound:bubble bubble
+fox:hasPlural:foxes
+fox:maleName:dog
+fox:femaleName:vixen
+fox:youngName:cub
+fox:collective:a troop of foxes or  an earth of foxes
+fox:legs:4
+fox:sound:grrrrr
+frog:hasPlural:frogs
+frog:maleName:male
+frog:femaleName:female
+frog:youngName:tadpole or  froglet
+frog:collective:an army of frogs or  a colony of frogs
+frog:legs:4
+frog:sound:ribbet
+goose:hasPlural:geese
+goose:maleName:gander
+goose:femaleName:goose
+goose:youngName:gosling
+goose:collective:a flock of geese or  a gaggle of geese
+goose:legs:2
+goose:sound:honk honk
+goat:hasPlural:goats
+goat:maleName:billy
+goat:femaleName:nanny
+goat:youngName:kid
+goat:collective:a flock of goats or  a herd of goats
+goat:legs:4
+goat:sound:baa baa
+horse:hasPlural:horses
+horse:maleName:stallion
+horse:femaleName:mare
+horse:youngName:foal
+horse:collective:a herd of horses or  a team of horses (in harness) or  a string of horses (for racing)
+horse:legs:4
+horse:sound:whinney
+kangaroo:hasPlural:kangaroos
+kangaroo:maleName:buck
+kangaroo:femaleName:doe
+kangaroo:youngName:joey
+kangaroo:collective:a mob of kangaroos or  a troop of kangaroos
+kangaroo:legs:2
+kangaroo:sound:grrrr
+lion:hasPlural:lions
+lion:maleName:lion
+lion:femaleName:lioness
+lion:youngName:cub
+lion:collective:a pride of lions
+lion:legs:4
+lion:sound:roar
+monkey:hasPlural:monkeys
+monkey:maleName:male
+monkey:femaleName:female
+monkey:youngName:infant
+monkey:collective:a troop of monkeys
+monkey:legs:4
+monkey:sound:eep eep
+owl:hasPlural:owls
+owl:maleName:male
+owl:femaleName:female
+owl:youngName:owlet
+owl:collective:a parliament of owls
+owl:legs:2
+owl:sound:whoooo
+ox:hasPlural:oxen
+ox:maleName:bull
+ox:femaleName:cow
+ox:youngName:calf
+ox:collective:a herd of oxen or  a drove of oxen (when driven in a group) or  a team of oxen (in harness)
+ox:legs:4
+ox:sound:snort snort
+penguin:hasPlural:penguins
+penguin:maleName:male
+penguin:femaleName:female
+penguin:youngName:chick
+penguin:collective:a colony of penguins
+penguin:legs:2
+penguin:sound:myeah myeah
+pig:hasPlural:pigs
+pig:maleName:boar
+pig:femaleName:sow
+pig:youngName:suckling or  piglet
+pig:collective:a herd of pigs or  a flock of pigs
+pig:legs:4
+pig:sound:oink oink
+rabbit:hasPlural:rabbits
+rabbit:maleName:buck
+rabbit:femaleName:roe
+rabbit:youngName:bunny or  bunny rabbit
+rabbit:collective:a colony of rabbits or  a nest of rabbits or  a warren of rabbits (strictly or  where they live)
+rabbit:legs:4
+rabbit:sound:cuggle cuggle
+sheep:hasPlural:sheep
+sheep:maleName:ram
+sheep:femaleName:ewe
+sheep:youngName:lamb
+sheep:collective:a flock of sheep
+sheep:legs:4
+sheep:sound:baa baa
+tiger:hasPlural:tigers
+tiger:maleName:tiger
+tiger:femaleName:tigress
+tiger:youngName:cub or  whelp
+tiger:collective:a streak of tigers or  an ambush of tigers (fanciful*)
+tiger:legs:4
+tiger:sound:grrr
+whale:hasPlural:whales
+whale:maleName:bull
+whale:femaleName:cow
+whale:youngName:calf
+whale:collective:a school of whales or  a shoal of whales
+whale:legs:0
+whale:sound:whistle
+wolf:hasPlural:wolves
+wolf:maleName:dog
+wolf:femaleName:bitch
+wolf:youngName:cub
+wolf:collective:a pack of wolves or  a herd of wolves
+wolf:legs:4
+wolf:sound:woof woof
+WOLF:hasPurpose:to howl at the moon
+WOLF:hasSize:6
+WOLF:hasSyllables:1
+WOLF:isa:Animal
+WOLF:isa:Wild Animal
+WOLF:lifeArea:Physical
+zebra:hasPlural:zebras
+zebra:maleName:stallion
+zebra:femaleName:mare
+zebra:youngName:foal
+zebra:collective:a cohort of zebra or  a herd of zebra
+zebra:legs:4
+zebra:sound:nyeaah
+cow:hasPlural:cows
+TURTLE:hasPurpose:to live in a shell
+TURTLE:hasSize:4
+TURTLE:hasSyllables:2
+TURTLE:isa:Animal
+TURTLE:isa:Pet
+TURTLE:lifeArea:Physical
+SNAIL:hasPurpose:to crawl slowly
+SNAIL:hasSize:3
+SNAIL:hasSpeed:4
+SNAIL:hasSyllables:1
+SNAIL:isa:Animal
+SNAIL:isa:Shellfish
+SNAIL:lifeArea:Physical
+DINOSAUR:hasPurpose:to evolve into birds
+DINOSAUR:hasSize:9
+DINOSAUR:hasSpeed:8
+DINOSAUR:hasSyllables:3
+DINOSAUR:isa:Animal
+DINOSAUR:isa:Extinct Species
+DINOSAUR:lifeArea:Education
+DOG:hasPurpose:to keep us company
+DOG:hasSize:6
+DOG:hasSyllables:1
+DOG:isa:Animal
+DOG:isa:Pet
+DOG:lifeArea:Physical
+DOG:hasPlural:dogs
+DOG:maleName:dog
+DOG:femaleName:bitch
+DOG:youngName:puppy or  pup
+DOG:collective:a pack of dogs
+DOG:legs:4
+DOG:sound:woof
+DUCK:hasPurpose:to migrate
+DUCK:hasSize:4
+DUCK:hasSyllables:1
+DUCK:isa:Animal
+DUCK:isa:Bird
+DUCK:lifeArea:Physical
+FISH:hasPurpose:to provide nourishment
+FISH:hasSize:4
+FISH:hasSyllables:1
+FISH:isa:Animal
+FISH:isa:Water Animal
+FISH:lifeArea:Physical
+HAMPSTER:hasPurpose:to run on a wheel
+HAMPSTER:hasSize:4
+HAMPSTER:hasSyllables:2
+HAMPSTER:isa:Animal
+HAMPSTER:isa:Rodent
+HAMPSTER:lifeArea:Physical
+Mammal:isa:Animal
+MONKEY:hasPurpose:to eat bananas
+MONKEY:hasSize:6
+MONKEY:hasSyllables:2
+MONKEY:isa:Wild Animal
+MONKEY:lifeArea:Physical
+Wild Animal:isa:Animal
+PARROT:hasPurpose:to repeat what we say
+PARROT:hasSize:4
+PARROT:hasSyllables:2
+PARROT:isa:Animal
+PARROT:isa:Bird
+PARROT:lifeArea:Physical
+PYTHON:hasPurpose:to slither
+PYTHON:hasSize:5
+PYTHON:hasSyllables:2
+PYTHON:isa:Animal
+PYTHON:isa:Snake
+PYTHON:lifeArea:Physical
+TIGER:hasPurpose:to hunt wildlife
+TIGER:hasSize:8
+TIGER:hasSyllables:2
+TIGER:isa:Predator
+TIGER:isa:Wild Animal
+TIGER:lifeArea:Physical
+ROBIN:hasPurpose:to make nests
+ROBIN:hasSize:4
+ROBIN:hasSyllables:2
+ROBIN:isa:Animal
+ROBIN:isa:Bird
+ROBIN:lifeArea:Physical
+RAT:hasPurpose:to eat cheese
+RAT:hasSize:4
+RAT:hasSyllables:1
+RAT:isa:Animal
+RAT:isa:Vermin
+RAT:lifeArea:Physical
+PUPPY:hasPurpose:to be a young dog
+PUPPY:hasSize:5
+PUPPY:hasSyllables:2
+PUPPY:isa:Animal
+PUPPY:isa:Pet
+PUPPY:lifeArea:Physical
+MOUSE:hasPurpose:to be chased by cats
+MOUSE:hasSize:3
+MOUSE:hasSyllables:1
+MOUSE:isa:Wild Animal
+MOUSE:lifeArea:Physical
+BEAR:hasPurpose:to eat leaves and small animals
+BEAR:hasSize:8
+BEAR:hasSyllables:1
+BEAR:isa:Animal
+BEAR:isa:Wild Animal
+BEAR:lifeArea:Physical
+BUFFALO:hasPurpose:to eat grass
+BUFFALO:hasSize:8
+BUFFALO:hasSyllables:3
+BUFFALO:isa:Animal
+BUFFALO:isa:Wild Animal
+BUFFALO:lifeArea:Physical
+PET:hasPurpose:to keep us company
+PET:hasSize:0
+PET:hasSyllables:1
+Pet:isa:Animal
+PET:isa:Animal
+PET:lifeArea:Physical
+PONY:hasPurpose:to be a young horse
+PONY:hasSize:6
+PONY:hasSyllables:2
+PONY:isa:Animal
+PONY:isa:Horse
+PONY:lifeArea:Physical
+Rabbit:isa:Animal
+Insect:isa:Animal
+Farm Animal:isa:Animal
+Shellfish:isa:Animal
+Snake:isa:Animal
+SPIDER:hasPurpose:to build webs
+SPIDER:hasSize:3
+SPIDER:hasSyllables:2
+SPIDER:isa:Animal
+SPIDER:isa:Arachnid
+SPIDER:lifeArea:Physical
+Predator:isa:Wild Animal
+Rodent:isa:Animal
+Vermin:isa:Animal
+Water Animal:isa:Animal
+Extinct Species:isa:Animal
+Juvenile animal:isa:Animal
+

@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PatternSetTestClient(TestClient):
@@ -11,11 +9,11 @@ class PatternSetTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(PatternSetTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
-        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._files =[os.path.dirname(__file__)+ os.sep + "sets"]
-        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._extension=".txt"
+    def load_storage(self):
+        super(PatternSetTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+        self.add_sets_store([os.path.dirname(__file__)+ os.sep + "sets"])
 
 
 class PatternSetAIMLTests(unittest.TestCase):

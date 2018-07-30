@@ -27,11 +27,11 @@ from programy.bot import Bot
 from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
-from programy.utils.classes.loader import ClassLoader
 from programy.scheduling.scheduler import ProgramyScheduler
 from programy.clients.render.text import TextRenderer
 from programy.utils.classes.loader import ClassLoader
-
+from programy.storage.factory import StorageFactory
+from programy.storage.factory import StorageFactory
 
 class ResponseLogger(object):
 
@@ -102,22 +102,25 @@ class BotClient(ResponseLogger):
 
     def __init__(self, id, argument_parser=None):
         self._id = id
+        self._license_keys = LicenseKeys()
+        self._storage = None
+        self._scheduler = None
+        self._configuration = None
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
 
         self.initiate_logging(self.arguments)
 
-        self._configuration = None
         self.load_configuration(self.arguments)
         self.parse_configuration()
 
+        self.load_storage()
+
         self._bot_factory = BotFactory(self, self.configuration.client_configuration)
 
-        self._license_keys = LicenseKeys()
         self.load_license_keys()
         self.get_license_keys()
 
-        self._scheduler = None
         self.load_scheduler()
 
         self._renderer = self.load_renderer()
@@ -144,6 +147,10 @@ class BotClient(ResponseLogger):
     @property
     def scheduler(self):
         return self._scheduler
+
+    @property
+    def storage_factory(self):
+        return self._storage
 
     @property
     def bot_factory(self):
@@ -174,13 +181,12 @@ class BotClient(ResponseLogger):
         return client_args
 
     def load_license_keys(self):
-        if self.configuration is not None:
-            if self.configuration.client_configuration.license_keys is not None:
-                self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
-            else:
-                YLogger.warning(self, "No client configuration setting for license_keys")
+        if self.storage_factory.storage_engine_available(StorageFactory.LICENSE_KEYS) is True:
+            storage_engine = self.storage_factory.storage_engine(StorageFactory.LICENSE_KEYS)
+            keys_store = storage_engine.license_store()
+            keys_store.load(self._license_keys)
         else:
-            YLogger.warning(self, "No configuration defined when loading license keys")
+            YLogger.warning(self, "No storage factory setting for license_keys")
 
     def get_license_keys(self):
         return
@@ -223,6 +229,11 @@ class BotClient(ResponseLogger):
         if self.configuration.client_configuration.scheduler is not None:
             self._scheduler = ProgramyScheduler(self, self.configuration.client_configuration.scheduler)
             self._scheduler.start()
+
+    def load_storage(self):
+        self._storage = StorageFactory()
+        if self.configuration.client_configuration.storage is not None:
+            self._storage.load_engines_from_config(self.configuration.client_configuration.storage)
 
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)

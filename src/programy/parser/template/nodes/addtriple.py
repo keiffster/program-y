@@ -31,7 +31,7 @@ class TemplateAddTripleNode(TemplateTripleNode):
         rdf_predicate = self._pred.resolve(client_context)
         rdf_object = self._obj.resolve(client_context)
 
-        client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
+        client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object, "USERDEFINED")
         resolved = ""
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

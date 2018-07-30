@@ -3,9 +3,8 @@ import unittest.mock
 import xml.etree.ElementTree as ET
 
 from programy.oob.alarm import AlarmOutOfBandProcessor
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class AlarmOutOfBandProcessorTests(unittest.TestCase):
 

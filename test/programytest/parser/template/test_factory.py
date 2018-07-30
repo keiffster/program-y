@@ -112,13 +112,3 @@ class TemplateFactoryTests(unittest.TestCase):
         self.assert_node(factory, 'rest', TemplateRestNode, None)
         self.assert_node(factory, 'log', TemplateLogNode, None)
 
-    def test_load_nodes_config_from_file(self):
-        factory = TemplateNodeFactory()
-        factory.load_nodes_config_from_file(os.path.dirname(__file__) + os.sep + "pattern_nodes.conf")
-        self.assert_nodes(factory)
-
-    def test_load_nodes_config_from_file_invalid_filename(self):
-        factory = TemplateNodeFactory()
-        factory.load_nodes_config_from_file("some_rubbish.txt")
-        self.assertEquals(66, len(factory._nodes_config))
-        self.assert_nodes(factory)

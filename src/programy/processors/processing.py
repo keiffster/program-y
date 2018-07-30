@@ -19,37 +19,53 @@ from programy.utils.logging.ylogger import YLogger
 from abc import ABCMeta, abstractmethod
 
 from programy.utils.classes.loader import ClassLoader
+from programy.storage.factory import StorageFactory
 
-class ProcessorLoader(ClassLoader):
+
+class ProcessorCollection(object):
 
     def __init__(self):
         ClassLoader.__init__(self)
-        self.processors = []
+        self._processors = []
+
+    @property
+    def processors(self):
+        return self._processors
 
     def empty(self):
         self.processors.clear()
 
-    def load(self, filename, *args, **kw):
-        YLogger.debug(self, "Loading processors from file [%s]", filename)
-        count = 0
-        try:
-            with open(filename, "r", encoding="utf-8") as file:
-                for line in file:
-                    line = line.strip()
-                    if line:
-                        if line[0] != '#':
-                            new_class = ClassLoader.instantiate_class(line)
-                            if new_class is not None:
-                                self.processors.append(new_class(*args, **kw))
-                                count += 1
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-        return count
+    def add_processor(self, processor):
+        self._processors.append(processor)
 
     def process(self, client_context, string):
-        for processor in self.processors:
+        for processor in self._processors:
             string = processor.process(client_context, string)
         return string
+
+
+class PreProcessorCollection(ProcessorCollection):
+
+    def __init__(self):
+        ProcessorCollection.__init__(self)
+
+    def load(self, storage_factory):
+        if storage_factory.storage_engine_available(StorageFactory.PREPROCESSORS) is True:
+            storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.PREPROCESSORS)
+            processor_store = storage_engine.preprocessors_store()
+            processor_store.load(self)
+
+
+class PostProcessorCollection(ProcessorCollection):
+
+    def __init__(self):
+        ProcessorCollection.__init__(self)
+
+    def load(self, storage_factory):
+        if storage_factory.storage_engine_available(StorageFactory.POSTPROCESSORS) is True:
+            storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.POSTPROCESSORS)
+            processor_store = storage_engine.postrocessors_store()
+            processor_store.load(self)
 
 
 ##################################################################
@@ -75,6 +91,7 @@ class PreProcessor(Processor):
     @abstractmethod
     def process(self, client_context, word_string):
         pass
+
 
 ##################################################################
 #

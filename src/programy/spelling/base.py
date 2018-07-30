@@ -23,6 +23,10 @@ class SpellingChecker(object):
     def __init__(self, spelling_config=None):
         self.spelling_config = spelling_config
 
+    def initialise(self, client):
+        pass
+
     @abstractmethod
     def correct(self, phrase):
         raise NotImplementedError()
+

@@ -4,9 +4,8 @@ import json
 
 from programy.extensions.geocode.geocode import GeoCodeExtension
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 

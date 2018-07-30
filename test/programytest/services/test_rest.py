@@ -4,7 +4,7 @@ import os
 from programy.services.rest import GenericRESTService, RestAPI
 from programy.services.service import BrainServiceConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class MockRestResponse(object):
@@ -30,8 +30,8 @@ class RestServiceTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self._client_context = client.create_client_context("testid")
-        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_init_default_api(self):
         config = BrainServiceConfiguration("rest")

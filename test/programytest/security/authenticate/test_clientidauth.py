@@ -3,12 +3,10 @@ import unittest
 from programy.security.authenticate.clientidauth import ClientIdAuthenticationService
 from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.bot import Bot
-from programy.brain import Brain
 from programy.config.bot.bot import BotConfiguration
-from programy.config.brain.brain import BrainConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockClientIdAuthenticationService(ClientIdAuthenticationService):
 
@@ -25,8 +23,9 @@ class MockClientIdAuthenticationService(ClientIdAuthenticationService):
 class ClientIdAuthenticationServiceTests(unittest.TestCase):
 
     def setUp(self):
-        self._client_context = ClientContext(TestClient(), "unknown")
-        self._client_context.bot = Bot(BotConfiguration())
+        client = TestClient()
+        self._client_context = ClientContext(client, "unknown")
+        self._client_context.bot = Bot(BotConfiguration(), client)
         self._client_context.bot.configuration.conversations._max_histories = 3
         self._client_context.brain = self._client_context.bot.brain
 

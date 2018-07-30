@@ -59,7 +59,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                     return True
         return False
 
-    def consume(self, client_context, context, words, word_no, match_type, depth):
+    def consume(self, client_context, context, words, word_no, match_type, depth, parent_wildcard=False):
 
         tabs = self.get_tabs(client_context, depth)
 
@@ -142,11 +142,12 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word_no += 1
             word = words.word(word_no)
 
-        if word_no == words.num_words()-1:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no+1, match_type, depth+1)
+        if parent_wildcard is True:
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no+1, match_type,
+                                                                       depth + 1)
         else:
-            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
-
+            match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type,
+                                                                       depth + 1)
         if match is not None:
             return match
         context.pop_matches(matches_added)

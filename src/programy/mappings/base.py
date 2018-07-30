@@ -28,40 +28,6 @@ class BaseCollection(object):
         Never Implemented
         """
 
-    @abstractmethod
-    def process_splits(self, splits, id=None):
-        """
-        Never Implemented
-        """
-
-    def process_line(self, line, id=None):
-        line = line.strip()
-        if line is not None and line:
-            if line.startswith("#") is False:
-                splits = self.split_line(line)
-                return self.process_splits(splits, id)
-        return False
-
-    def load_from_filename(self, filename, id=None):
-        count = 0
-        try:
-            with open(filename, "r", encoding="utf-8") as data_file:
-                for line in data_file:
-                    if self.process_line(line, id):
-                        count += 1
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-
-        return count
-
-    def load_from_text(self, text):
-        count = 0
-        lines = text.split("\n")
-        for line in lines:
-            if self.process_line(line):
-                count += 1
-        return count
-
 
 class SingleStringCollection(BaseCollection):
 
@@ -76,13 +42,15 @@ class SingleStringCollection(BaseCollection):
     def strings(self):
         return self._strings
 
-    def split_line(self, line):
-        return [line.strip()]
-
-    def process_splits(self, splits, id=None):
-        self._strings.append(splits[0])
-        return True
-
+    def load_from_text(self, text):
+        lines = text.split("\n")
+        count = 0
+        for line in lines:
+            line = line.strip()
+            if len(line) > 0:
+                self._strings.append(line)
+                count += 1
+        return count
 
 class DoubleStringCharSplitCollection(BaseCollection):
 
@@ -91,6 +59,9 @@ class DoubleStringCharSplitCollection(BaseCollection):
         self._pairs = []
 
     def empty(self):
+        self._pairs.clear()
+
+    def remove(self, name=None):
         self._pairs.clear()
 
     @property
@@ -122,25 +93,23 @@ class DoubleStringCharSplitCollection(BaseCollection):
         return None
 
     def get_split_char(self):
-        return ","
+        return ','
 
-    def split_line(self, line):
-        splits = self.split_line_by_char(line)
-        if len(splits) > 2:
-            return [splits[0], self.get_split_char().join(splits[1:])]
-        return splits
-
-    def split_line_by_char(self, line):
-        splits = line.split(self.get_split_char())
-        return splits
-
-    def process_splits(self, splits, id=None):
-        self.add_value(splits[0], splits[1])
-        return True
-
+    def load_from_text(self, text):
+        lines = text.split("\n")
+        count = 0
+        for line in lines:
+            line = line.strip()
+            kvp = line.split(self.get_split_char())
+            if len(kvp) > 1:
+                key = kvp[0]
+                value = self.get_split_char().join(kvp[1:])
+                count += 1
+                self.add_value(key, value)
+        return count
 
 class DoubleStringPatternSplitCollection(BaseCollection):
-    RE_OF_SPLIT_PATTERN = re.compile("\"(.*?)\",\"(.*?)\"")
+    RE_OF_SPLIT_PATTERN = re.compile('\"(.*?)\",\"(.*?)\"')
 
     def __init__(self):
         BaseCollection.__init__(self)
@@ -161,50 +130,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
         else:
             return None
 
-    def get_split_pattern(self):
-        return DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN
-
-    def split_line(self, line):
-        return self.split_line_by_pattern(line)
-
-    def split_line_by_pattern(self, line):
-        line = line.strip()
-        if line is not None and line:
-            pattern = self.get_split_pattern()
-            match = pattern.search(line)
-            if match is not None:
-                lhs = match.group(1)
-                rhs = match.group(2)
-                return [lhs, rhs]
-            YLogger.error(self, "Pattern is bad [%s]", line)
-        return None
-
-    def normalise_pattern(self, pattern):
-        pattern = pattern.replace("(", r"\(")
-        pattern = pattern.replace(")", r"\)")
-        pattern = pattern.replace("[", r"\[")
-        pattern = pattern.replace("]", r"\]")
-        pattern = pattern.replace("{", r"\{")
-        pattern = pattern.replace("}", r"\}")
-        pattern = pattern.replace("|", r"\|")
-        pattern = pattern.replace("^", r"\^")
-        pattern = pattern.replace("$", r"\$")
-        pattern = pattern.replace("+", r"\+")
-        pattern = pattern.replace(".", r"\.")
-        pattern = pattern.replace("*", r"\*")
-        return pattern
-
-    def process_splits(self, splits, id=None):
-        if splits is not None and len(splits) > 0:
-            pattern_text = self.normalise_pattern(splits[0])
-            start = pattern_text.lstrip()
-            middle = pattern_text
-            end = pattern_text.rstrip()
-            pattern = "(^%s|%s|%s$)" % (start, middle, end)
-            replacement = splits[1]
-            self._pairs[splits[0]] = [re.compile(pattern, re.IGNORECASE), replacement]
-            return True
-        return False
+    def add_to_lookup(self, index, pattern):
+        self._pairs[index] = pattern
 
     def replace_by_pattern(self, replacable):
         alreadys = []
@@ -225,62 +152,56 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         alreadys.append(pair[1])
 
             except Exception as excep:
-                YLogger.exception(self, "Invalid regular expression [%s]"%str(pair[0]), excep)
+                YLogger.exception(self, "Invalid regular expression [%s]", excep, str(pair[0]))
 
         return re.sub(' +', ' ', replacable.strip())
 
+    def load_from_text(self, text):
+        lines = text.split("\n")
+        count = 0
+        for line in lines:
+            line = line.strip()
+            split = self.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
+            if split is not None:
+                key, value = self.process_key_value(split[0], split[1])
+                self.add_to_lookup(key, value)
+                count += 1
+        return count
 
-class TripleStringCollection(BaseCollection):
-
-    def __init__(self):
-        BaseCollection.__init__(self)
-        self.triples = {}
-
-    def empty(self):
-        self._triples.clear()
-
-    def split_line(self, line):
-        splits = self.split_line_by_char(line)
-        if len(splits) > 3:
-            return [splits[0], splits[1], self.get_split_char().join(splits[2:])]
-        return splits
-
-    def get_split_char(self):
-        return ":"
-
-    def get_split_pattern(self):
-        return ".*"
-
-    def has_primary(self, key):
-        if key in self.triples:
-            return True
-        return False
-
-    def has_secondary(self, primary, key):
-        if self.has_primary(primary):
-            if key in self.triples[primary]:
-                return True
-        return False
-
-    def value(self, primary, secondary):
-        if self.has_primary(primary):
-            if self.has_secondary(primary, secondary):
-                return self.triples[primary][secondary]
+    @staticmethod
+    def split_line_by_pattern(line, pattern):
+        line = line.strip()
+        if line is not None and line:
+            match = pattern.search(line)
+            if match is not None:
+                lhs = match.group(1)
+                rhs = match.group(2)
+                return [lhs, rhs]
+            print("Pattern is bad [%s]", line)
         return None
 
-    def split_line_by_char(self, line):
-        splits = line.split(self.get_split_char())
-        return splits
+    @staticmethod
+    def normalise_pattern(pattern):
+        pattern = pattern.replace("(", r"\(")
+        pattern = pattern.replace(")", r"\)")
+        pattern = pattern.replace("[", r"\[")
+        pattern = pattern.replace("]", r"\]")
+        pattern = pattern.replace("{", r"\{")
+        pattern = pattern.replace("}", r"\}")
+        pattern = pattern.replace("|", r"\|")
+        pattern = pattern.replace("^", r"\^")
+        pattern = pattern.replace("$", r"\$")
+        pattern = pattern.replace("+", r"\+")
+        pattern = pattern.replace(".", r"\.")
+        pattern = pattern.replace("*", r"\*")
+        return pattern
 
-    def process_splits(self, splits, id=None):
-        first = splits[0]
-        second = splits[1]
-        third = splits[2]
-
-        if first not in self.triples:
-            self.triples[first] = {}
-
-        if second not in self.triples[first]:
-            self.triples[first][second] = third
-
-        return True
+    @staticmethod
+    def process_key_value(key, value, id=None):
+        pattern_text = DoubleStringPatternSplitCollection.normalise_pattern(key)
+        start = pattern_text.lstrip()
+        middle = pattern_text
+        end = pattern_text.rstrip()
+        pattern = "(^%s|%s|%s$)" % (start, middle, end)
+        replacement = value.upper()
+        return key, [re.compile(pattern, re.IGNORECASE), replacement]

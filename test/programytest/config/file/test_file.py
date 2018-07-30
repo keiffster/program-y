@@ -2,12 +2,13 @@ import unittest
 
 from programy.config.file.file import BaseConfigurationFile
 
+
 class TestBaseConfigurationFile(BaseConfigurationFile):
 
-    def load_from_text(self, text, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root):
         return None
 
-    def load_from_file(self, filename, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root):
         return None
 
     def get_section(self, section_name, parent_section=None):
@@ -21,6 +22,7 @@ class TestBaseConfigurationFile(BaseConfigurationFile):
 
     def get_option(self, section, option_name, missing_value=None):
         return None
+
 
 class BaseConfigurationFileTests(unittest.TestCase):
 

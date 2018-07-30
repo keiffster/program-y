@@ -1,0 +1,378 @@
+ACT:hasPurpose:to entertain by performing
+ACT:hasSize:0
+ACT:hasSyllables:1
+ACT:isa:Activity
+ACT:lifeArea:Recreation
+ADVENTURE:hasPurpose:to provide new experience
+ADVENTURE:hasSize:0
+ADVENTURE:hasSyllables:3
+ADVENTURE:isa:Activity
+ADVENTURE:lifeArea:Recreation
+FISHING:hasPurpose:to hunt for fish
+FISHING:hasSize:0
+FISHING:hasSyllables:2
+FISHING:isa:Activity
+FISHING:lifeArea:Recreation
+POLITICS:hasPurpose:to compete
+POLITICS:hasSize:0
+POLITICS:hasSyllables:3
+POLITICS:isa:Activity
+POLITICS:lifeArea:Social
+PEE:hasPurpose:to empty the bladder
+PEE:hasSize:0
+PEE:hasSyllables:1
+PEE:isa:Body Function
+PEE:lifeArea:Physical
+PEEING:hasPurpose:to empty the bladder
+PEEING:hasSize:0
+PEEING:hasSyllables:1
+PEEING:isa:Body Function
+PEEING:lifeArea:Physical
+READING:hasPurpose:to gather information through words
+READING:hasSize:0
+READING:hasSyllables:2
+READING:lifeArea:Education
+POKER:hasPurpose:to gamble
+POKER:hasSize:0
+POKER:hasSyllables:2
+POKER:isa:Game
+POKER:lifeArea:Recreation
+HOLIDAY:hasPurpose:to give us a break from work
+HOLIDAY:hasPurpose:to give us time to remember and celebrate
+HOLIDAY:hasSize:0
+HOLIDAY:hasSyllables:3
+HOLIDAY:isa:Annual Event
+HOLIDAY:isa:Time Quantity
+HOLIDAY:lifeArea:Social
+BREAK:hasPurpose:to relax
+BREAK:hasSize:0
+BREAK:hasSyllables:1
+BREAK:isa:Activity
+BREAK:lifeArea:Recreation
+CHEER:hasPurpose:to praise
+CHEER:hasSize:0
+CHEER:hasSyllables:1
+CHEER:isa:Activity
+CHEER:isa:Group Activity
+CHEER:lifeArea:Recreation
+COOKING:hasPurpose:to prepare food
+COOKING:hasSize:0
+COOKING:hasSyllables:2
+COOKING:isa:Activity
+COOKING:lifeArea:Diet
+DANCE:hasPurpose:to move our bodies gracefully
+DANCE:hasSize:0
+DANCE:hasSyllables:1
+DANCE:isa:Activity
+DANCE:lifeArea:Recreation
+DREAM:hasPurpose:to reveal mysteries of the unconscious
+DREAM:hasSize:0
+DREAM:hasSyllables:1
+DREAM:isa:Activity
+DREAM:isa:Unconscious Mental Process
+DREAM:lifeArea:Spiritual
+DYING:hasPurpose:to end life
+DYING:hasSize:0
+DYING:hasSyllables:2
+DYING:isa:Activity
+DYING:lifeArea:Spiritual
+EATING:hasPurpose:to nourish the body
+EATING:hasSize:0
+EATING:hasSyllables:2
+EATING:isa:Activity
+FLIGHT:hasPurpose:to transport us a long distance
+FLIGHT:hasSize:0
+FLIGHT:hasSyllables:2
+FLIGHT:isa:Activity
+FLIGHT:lifeArea:Business
+Group Activity:isa:Activity
+Habit:isa:Activity
+Initimate Activity:isa:Activity
+JOB:hasPurpose:to give us work
+JOB:hasSize:0
+JOB:hasSyllables:1
+JOB:isa:Activity
+JOB:lifeArea:Business
+MEETING:hasPurpose:to discuss matters with other people
+MEETING:hasSize:0
+MEETING:hasSyllables:2
+MEETING:isa:Activity
+MEETING:lifeArea:Business
+MASSAGE:hasPurpose:to relax the muscles
+MASSAGE:hasSize:0
+MASSAGE:hasSyllables:2
+MASSAGE:isa:Activity
+MASSAGE:lifeArea:Recreation
+MISSION:hasPurpose:to provide a goal for work
+MISSION:hasSize:0
+MISSION:hasSyllables:2
+MISSION:isa:Activity
+MISSION:lifeArea:Business
+NAVIGATION:hasPurpose:to follow directions
+NAVIGATION:hasSize:0
+NAVIGATION:hasSyllables:4
+NAVIGATION:isa:Activity
+NAVIGATION:lifeArea:Education
+PARTY:hasPurpose:to have fun with a group
+PARTY:hasSize:0
+PARTY:hasSyllables:2
+PARTY:isa:Activity
+PARTY:lifeArea:Recreation
+SEX:hasPurpose:to gain pleasure reproduce
+SEX:hasSize:0
+SEX:hasSyllables:1
+SEX:isa:Activity
+SEX:isa:Initimate Activity
+SEX:lifeArea:Physical
+SHOPPING:hasPurpose:to buy things
+SHOPPING:hasSize:0
+SHOPPING:hasSyllables:2
+SHOPPING:isa:Activity
+SHOPPING:lifeArea:Recreation
+SINGING:hasPurpose:to express emotion
+SINGING:hasSize:0
+SINGING:hasSyllables:2
+SINGING:isa:Activity
+SINGING:lifeArea:Creative
+SMOKING:hasPurpose:to ruin your health
+SMOKING:hasSize:0
+SMOKING:hasSyllables:2
+SMOKING:isa:Activity
+SMOKING:isa:Habit
+SMOKING:lifeArea:Diet
+SWALLOWING:hasPurpose:to nourish the body
+SWALLOWING:hasSize:0
+SWALLOWING:hasSyllables:2
+SWALLOWING:isa:Activity
+SWALLOWING:lifeArea:Diet
+TRAVEL:hasPurpose:to reach distant places
+TRAVEL:hasSize:0
+TRAVEL:hasSyllables:2
+TRAVEL:isa:Activity
+TRAVEL:lifeArea:Recreation
+Unconscious Mental Process:isa:Activity
+WORK:hasPurpose:to make money
+WORK:hasSize:0
+WORK:hasSyllables:1
+WORK:isa:Activity
+WORK:lifeArea:Business
+COPYING:hasPurpose:to make duplicates
+COPYING:hasSize:0
+COPYING:hasSyllables:3
+COPYING:lifeArea:Education
+CRYING:hasPurpose:to express sadness
+CRYING:hasSize:0
+CRYING:hasSyllables:1
+CRYING:isa:Body Function
+CRYING:lifeArea:Physical
+DATING:hasPurpose:to play at romance
+DATING:hasSize:0
+DATING:hasSyllables:3
+DATING:lifeArea:Social
+DIAL:hasPurpose:to rotate a switch
+DIAL:hasSize:0
+DIAL:hasSyllables:2
+DIAL:isa:Tool
+DIAL:lifeArea:Physical
+EATING:lifeArea:Diet
+FIGHT:hasPurpose:to conflict physically
+FIGHT:hasSize:0
+FIGHT:hasSyllables:1
+FIGHT:lifeArea:Social
+FIGHTING:hasPurpose:to conflict physically
+FIGHTING:hasSize:0
+FIGHTING:hasSyllables:2
+FIGHTING:lifeArea:Social
+STUDY:hasPurpose:to learn
+STUDY:hasSize:0
+STUDY:hasSyllables:2
+STUDY:lifeArea:Education
+SWIM:hasPurpose:to move in the water
+SWIM:hasSize:0
+SWIM:hasSyllables:1
+SWIM:lifeArea:Recreation
+BATH:hasPurpose:to clean the body
+BATH:hasSize:7
+BATH:hasSyllables:1
+BATH:isa:Hygeine
+BATH:lifeArea:Physical
+BET:hasPurpose:to gamble
+BET:hasSize:0
+BET:hasSyllables:1
+BET:isa:Wager
+BET:lifeArea:Finances
+CALL:hasPurpose:to contact someone by phone
+CALL:hasSize:0
+CALL:hasSyllables:1
+CALL:isa:Communication
+CALL:isa:Voice Communications
+CALL:lifeArea:Social
+CYCLE:hasPurpose:to repeat a pattern
+CYCLE:hasSize:0
+CYCLE:hasSyllables:2
+CYCLE:lifeArea:Education
+GREETING:hasPurpose:to meet
+GREETING:hasSize:0
+GREETING:hasSyllables:2
+GREETING:lifeArea:Social
+KILLING:hasPurpose:to murder
+KILLING:hasSize:0
+KILLING:hasSyllables:2
+KILLING:lifeArea:Social
+LAUGH:hasPurpose:to make us feel good
+LAUGH:hasSize:0
+LAUGH:hasSyllables:1
+LAUGH:lifeArea:Social
+LAUGHING:hasPurpose:to make us feel good
+LAUGHING:hasSize:0
+LAUGHING:hasSyllables:2
+LAUGHING:lifeArea:Social
+LEARNING:hasPurpose:to teach us things
+LEARNING:hasSize:0
+LEARNING:hasSyllables:2
+LEARNING:lifeArea:Education
+LIVING:hasPurpose:to make us alive
+LIVING:hasSize:0
+LIVING:hasSyllables:2
+LIVING:isa:Spiritual State
+LIVING:lifeArea:Spiritual
+MURDER:hasPurpose:to kill someone
+MURDER:hasSize:0
+MURDER:hasSyllables:2
+MURDER:lifeArea:Social
+NAP:hasPurpose:to sleep in the daytime
+NAP:hasSize:0
+NAP:hasSyllables:1
+NAP:lifeArea:Physical
+RUSH:hasPurpose:to be in a hurry
+RUSH:hasSize:0
+RUSH:hasSyllables:1
+RUSH:lifeArea:Physical
+SIGNAL:hasPurpose:to send a message
+SIGNAL:hasSize:0
+SIGNAL:hasSyllables:2
+SIGNAL:lifeArea:Physical
+SPEAKING:hasPurpose:to communicate with words
+SPEAKING:hasSize:0
+SPEAKING:hasSyllables:2
+SPEAKING:lifeArea:Education
+TREK:hasPurpose:to take a journey
+TREK:hasSize:0
+TREK:hasSyllables:1
+TREK:lifeArea:Recreation
+WEDDING:hasPurpose:to join in matrimony
+WEDDING:hasSize:0
+WEDDING:hasSyllables:2
+WEDDING:lifeArea:Social
+MAJOR:hasPurpose:to specialize in a field of study
+MAJOR:hasSize:0
+MAJOR:hasSyllables:2
+MAJOR:lifeArea:Education
+LOVE:hasPurpose:to adore unconditionally
+LOVE:hasSize:0
+LOVE:hasSyllables:1
+LOVE:lifeArea:Social
+MAIL:hasPurpose:to deliver messages and packages
+MAIL:hasSize:4
+MAIL:hasSyllables:1
+MAIL:lifeArea:Social
+LIE:hasPurpose:to tell an untruth
+LIE:hasSize:0
+LIE:hasSyllables:1
+LIE:lifeArea:Social
+COOK:hasPurpose:to prepare food
+COOK:hasSize:7
+COOK:hasSyllables:1
+COOK:isa:Person
+COOK:lifeArea:Business
+SLEEP:hasPurpose:to provide rest
+SLEEP:hasSize:0
+SLEEP:hasSyllables:1
+SLEEP:lifeArea:Physical
+CONTACT:hasPurpose:to identify someone
+CONTACT:hasSize:7
+CONTACT:hasSyllables:2
+CONTACT:isa:Person
+CONTACT:lifeArea:Social
+COPY:hasPurpose:to make a duplicate
+COPY:hasSize:0
+COPY:hasSyllables:2
+COPY:lifeArea:Education
+CORRECTION:hasPurpose:to fix a mistake
+CORRECTION:hasSize:0
+CORRECTION:hasSyllables:3
+CORRECTION:lifeArea:Education
+CUT:hasPurpose:to divide
+CUT:hasSize:0
+CUT:hasSyllables:1
+CUT:lifeArea:Education
+DASH:hasPurpose:to run quickly
+DASH:hasSize:0
+DASH:hasSyllables:1
+DASH:lifeArea:Recreation
+DETAIL:hasPurpose:to give specific information
+DETAIL:hasSize:0
+DETAIL:hasSyllables:2
+DETAIL:lifeArea:Education
+DROP:hasPurpose:to fall with gravity
+DROP:hasSize:0
+DROP:hasSyllables:1
+DROP:lifeArea:Education
+ENTERTAINMENT:hasPurpose:to make us enjoy recreation
+ENTERTAINMENT:hasSize:0
+ENTERTAINMENT:hasSyllables:4
+ENTERTAINMENT:lifeArea:Recreation
+MINE:hasPurpose:to dig for metal
+MINE:hasSize:10
+MINE:hasSyllables:1
+MINE:lifeArea:Physical
+MODEL:hasPurpose:to prototype on a small scale
+MODEL:hasSize:0
+MODEL:hasSyllables:2
+MODEL:lifeArea:Physical
+PICK:hasPurpose:to select something
+PICK:hasSize:0
+PICK:hasSyllables:1
+PICK:isa:Choice
+PICK:isa:Decision
+PICK:lifeArea:Spiritual
+PLACE:lifeArea:Physical
+PLAN:hasPurpose:to provide guidance
+PLAN:hasSize:0
+PLAN:hasSyllables:1
+PLAN:lifeArea:Business
+SHOW:hasPurpose:to display
+SHOW:hasSize:0
+SHOW:hasSyllables:1
+SHOW:lifeArea:Recreation
+TASTE:hasPurpose:to provide mouth sensations
+TASTE:hasSize:0
+TASTE:hasSyllables:1
+TASTE:lifeArea:Physical
+TIP:hasPurpose:to reward for service
+TIP:hasSize:0
+TIP:hasSyllables:1
+TIP:isa:Money Amount
+TIP:isa:Payment
+TIP:lifeArea:Business
+TOUCH:hasPurpose:to feel something
+TOUCH:hasSize:0
+TOUCH:hasSyllables:1
+TOUCH:lifeArea:Physical
+TASK:hasPurpose:to define an activity
+TASK:hasSize:0
+TASK:hasSyllables:1
+TASK:lifeArea:Business
+VIEW:hasPurpose:to see
+VIEW:hasSize:0
+VIEW:hasSyllables:1
+VIEW:lifeArea:Physical
+STOP:hasPurpose:to terminate motion
+STOP:hasSize:0
+STOP:hasSyllables:1
+STOP:lifeArea:Physical
+GUESS:hasPurpose:to estimate the result
+GUESS:hasSize:0
+GUESS:hasSyllables:1
+GUESS:isa:Location
+GUESS:lifeArea:Spiritual

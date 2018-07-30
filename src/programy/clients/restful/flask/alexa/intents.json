@@ -1,0 +1,144 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "boracle bot",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AskBoracle",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "the question {text}"
+                    ]
+                },
+                {
+                    "name": "AskWho",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "who {text}"
+                    ]
+                },
+                {
+                    "name": "AskWhat",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "what {text}"
+                    ]
+                },
+                {
+                    "name": "AskWhere",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "where {text}"
+                    ]
+                },
+                {
+                    "name": "AskWhy",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "why {text}"
+                    ]
+                },
+                {
+                    "name": "AskWhen",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "when {text}"
+                    ]
+                },
+                {
+                    "name": "AskHow",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "how {text}"
+                    ]
+                },
+                {
+                    "name": "AskIf",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "if {text}"
+                    ]
+                },
+                {
+                    "name": "AskCould",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "could {text}",
+                        "can {text}"                    ]
+                },
+                {
+                    "name": "AskWould",
+                    "slots": [
+                        {
+                            "name": "text",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "would {text}",
+                        "will {text}"
+                    ]
+                }
+
+            ],
+            "types": []
+        }
+    }
+}

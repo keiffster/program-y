@@ -3,7 +3,7 @@ import unittest
 from programy.dynamic.maps.successor import SuccessorMap
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class TestSingularMaps(unittest.TestCase):
 

@@ -2,7 +2,7 @@ import unittest
 from programy.processors.pre.splitchinese import SplitChinesePreProcessor
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class SplitChineseTests(unittest.TestCase):

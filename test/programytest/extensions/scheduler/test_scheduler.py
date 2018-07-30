@@ -1,9 +1,8 @@
 import unittest
 
-from programy.dialog.dialog import Question
 from programy.extensions.scheduler.scheduler import SchedulerExtension
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class SchedulerExtensionClient(TestClient):

@@ -40,7 +40,7 @@ class PatternRegexNode(PatternNode):
             raise ParserException("Invalid regex node, neither pattern or template specified as attribute or text")
 
         if self._pattern_text is not None:
-            self._pattern = re.compile(self._pattern_text)
+            self._pattern = re.compile(self._pattern_text, re.IGNORECASE)
 
     @property
     def pattern(self):
@@ -102,7 +102,7 @@ class PatternRegexNode(PatternNode):
                 return EqualsMatch(False, word_no)
 
         if self._pattern_template is not None:
-            template = client_context.brain.regex_templates[self._pattern_template]
+            template = client_context.brain.regex_templates.regex(self._pattern_template)
             if template is not None:
                 result = template.match(word)
                 if result is not None:

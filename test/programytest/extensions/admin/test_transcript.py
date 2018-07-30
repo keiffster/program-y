@@ -4,7 +4,7 @@ from programy.extensions.admin.transcript import TranscriptAdminExtension
 from programy.dialog.dialog import Sentence
 from programy.dialog.dialog import Question
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class TranscriptAdminExtensionClient(TestClient):

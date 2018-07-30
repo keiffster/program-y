@@ -14,8 +14,10 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 
 from programy.mappings.base import DoubleStringPatternSplitCollection
+from programy.storage.factory import StorageFactory
 
 class GenderCollection(DoubleStringPatternSplitCollection):
 
@@ -29,3 +31,17 @@ class GenderCollection(DoubleStringPatternSplitCollection):
 
     def genderise_string(self, string):
         return self.replace_by_pattern(string)
+
+    def load(self, storage_factory):
+        if storage_factory.entity_storage_engine_available(StorageFactory.GENDER) is True:
+            lookups_engine = storage_factory.entity_storage_engine(StorageFactory.GENDER)
+            if lookups_engine:
+                try:
+                    lookups_store = lookups_engine.gender_store()
+                    lookups_store.load_all(self)
+                except Exception as e:
+                    YLogger.exception(self, "Failed to load lookups from storage", e)
+
+    def reload(self, storage_factory):
+        self.load(storage_factory)
+

@@ -29,10 +29,6 @@ class TemplatePerson2NodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode("me"))
-        self._client_context.brain.person2s.process_splits(["me","him or her"])
-
-        self.assertEqual(root.resolve(self._client_context), "him or her")
 
     def test_to_xml(self):
         root = TemplateNode()

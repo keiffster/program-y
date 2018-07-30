@@ -3,7 +3,7 @@ import unittest
 from programy.dynamic.maps.predecessor import PredecessorMap
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class TestPredecessorMaps(unittest.TestCase):

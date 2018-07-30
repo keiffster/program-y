@@ -27,6 +27,13 @@ For more information see [url]
 	</category>
 
 	<category>
+		<pattern>^ CHECKING MULTI WORD MATCH</pattern>
+		<template>
+		    ARROW IS NOW <star index="1" />
+		</template>
+	</category>
+
+	<category>
 		<pattern>HELLO ^</pattern>
 		<template>
 		    ARROW IS <star index="1" />

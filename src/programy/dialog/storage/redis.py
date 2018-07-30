@@ -68,17 +68,24 @@ class ConversationRedisStorage(ConversationStorage):
             self._redis = factory.connect(config)
 
         self._prefix = config.prefix
-        self._sessions_set_key = "{prefix}:sessions".format( prefix=self._prefix )
+        self._sessions_set_key = self.create_session_key(self._prefix )
 
         # Make sure the client is able to connect to the redis instance
-        #assert self._redis.echo("test"), "Failed to connect to redis instance"
+        assert self._redis.echo("test"), "Failed to connect to redis instance"
+
+    def create_session_key(self):
+        return "{prefix}:sessions".format(prefix=self._prefix)
+
+    def create_hash_key(self, clientid):
+        return "{prefix}:{clientid}:props".format(prefix = self._prefix, clientid=clientid )
 
     def empty(self):
 
         YLogger.debug(self, "Deleting Conversation redis data")
 
         try:
-            self._redis.delete(self._sessions_set_key)
+            deleted = self._redis.delete(self._sessions_set_key)
+            print ("Deleted %d elements from the cache [%s]"%(deleted, self._sessions_set_key))
 
         except Exception as e:
             YLogger.exception(self, "Failed deleting conversation redis data", e)
@@ -87,11 +94,10 @@ class ConversationRedisStorage(ConversationStorage):
 
         YLogger.debug(self, "Saving conversation to Redis for %s"%clientid)
 
-        h_key = "{prefix}:{clientid}:props".format(
-            prefix = self._prefix,
-            clientid = clientid )
+        h_key = self.create_hash_key(clientid)
 
         try:
+            print("Saving to cache [%s] - [%s]"%(h_key, self._sessions_set_key))
             self._redis.save(h_key, self._sessions_set_key, clientid, conversation._properties)
 
         except Exception as e:
@@ -99,13 +105,16 @@ class ConversationRedisStorage(ConversationStorage):
 
     def load_conversation(self, conversation, clientid, restore_last_topic=False):
 
-        YLogger.debug(self, "Loading Conversation from file for %s"%clientid)
+        YLogger.debug(self, "Loading Conversation from cache for %s"%clientid)
 
-        h_key = "{prefix}:{clientid}:props".format(prefix = self._prefix, clientid = clientid)
+        h_key = self.create_hash_key(clientid)
 
         try:
+            print("Loading to cache [%s] - [%s]"%(h_key, self._sessions_set_key))
+
             # Check if clientid in sessions set
             if not self._redis.is_member( self._sessions_set_key, clientid ):
+                print("Clientid [%s] not in session [%s]" % (clientid, self._sessions_set_key))
                 return
 
             # Fetch properties
@@ -124,7 +133,7 @@ class ConversationRedisStorage(ConversationStorage):
 
     def remove_conversation(self, clientid):
 
-        YLogger.debug("Deleting Conversation redis data")
+        YLogger.debug(self, "Saving conversation from cache Redis [%s]"%clientid)
 
         try:
             self._redis.remove(self._sessions_set_key, clientid)
