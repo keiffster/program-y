@@ -1,0 +1,75 @@
+import unittest
+import shutil
+import os
+
+from programy.config.bot.conversations import BotConversationsConfiguration
+from programy.dialog.conversation import ConversationManager
+from programy.dialog.dialog import Question
+
+from programytest.client import TestClient
+
+
+class ConversationManagerTests(unittest.TestCase):
+
+    def test_init(self):
+        config = BotConversationsConfiguration()
+        mgr = ConversationManager(config)
+
+        self.assertEqual(mgr.configuration, config)
+        self.assertIsNone(mgr.storage)
+        self.assertEquals(mgr.conversations, {})
+
+    def test_initialise(self):
+        config = BotConversationsConfiguration()
+        mgr = ConversationManager(config)
+
+        client = TestClient()
+        client.add_conversation_store("./storage/conversations")
+
+        mgr.initialise(client.storage_factory)
+        self.assertIsNotNone(mgr.storage)
+
+    def test_conversation_operations(self):
+        config = BotConversationsConfiguration()
+        mgr = ConversationManager(config)
+
+        #if os.path.exists("./storage/conversations"):
+        #    shutil.rmtree("./storage/conversations")
+
+        client = TestClient()
+        client.add_conversation_store("./storage/conversations")
+
+        mgr.initialise(client.storage_factory)
+
+        client_context = client.create_client_context("user1")
+
+        conversation = mgr.get_conversation(client_context)
+
+        question1 = Question.create_from_text(client_context.brain.tokenizer, "Hello There")
+        question1.sentence(0).response = "Hi"
+        conversation.record_dialog(question1)
+        mgr.save_conversation(client_context)
+
+        question2 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again")
+        question2.sentence(0).response = "Hi Again"
+        conversation.record_dialog(question2)
+        mgr.save_conversation(client_context)
+
+        question3 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again Again")
+        question3.sentence(0).response = "Hi Again Again"
+        conversation.record_dialog(question3)
+        mgr.save_conversation(client_context)
+
+        self.assertEquals(len(mgr.conversations), 1)
+        mgr.empty()
+        self.assertEquals(len(mgr.conversations), 0)
+
+        conversation = mgr.get_conversation(client_context)
+        self.assertEquals(len(mgr.conversations), 1)
+
+        self.assertIsNotNone(conversation)
+        self.assertEquals(len(conversation.questions), 3)
+
+        #if os.path.exists("./storage/conversations"):
+        #    shutil.rmtree("./storage/conversations")
+

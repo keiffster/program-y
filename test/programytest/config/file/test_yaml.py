@@ -322,8 +322,6 @@ bot:
       check_and_retry: true
 
     conversations:
-      save: true
-      load: false
       max_histories: 100
       restore_last_topic: false
       initial_topic: TOPIC1

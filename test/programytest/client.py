@@ -140,6 +140,11 @@ class TestClient(BotClient):
         self.storage_factory._storage_engines[StorageFactory.RDF] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.RDF] = self._storage_engine
 
+    def add_conversation_store(self, dir):
+        self._file_store_config._conversation_storage = FileStoreConfiguration(dirs=dir, format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.CONVERSATIONS] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.CONVERSATIONS] = self._storage_engine
+
     def add_default_stores(self):
         self.add_license_keys_store()
         self.add_spelling_store()

@@ -1,6 +1,8 @@
 import unittest
 
 from programy.spelling.autocorrection import AutoCorrectSpellingChecker
+from programy.spelling.base import SpellingChecker
+from programy.config.bot.spelling import BotSpellingConfiguration
 
 from programytest.client import TestClient
 
@@ -23,3 +25,17 @@ class AutoCorrectSpellingCheckerTests(unittest.TestCase):
         self.assertEqual("LOCATION", checker.correct("locetion"))
 
         self.assertEqual("WHAT IS YOUR LOCATION", checker.correct("Waht is your locetion"))
+
+    def test_initiate_spellchecker(self):
+
+        spelling_config = BotSpellingConfiguration()
+        spelling_config._load = True
+        spelling_config._classname = "programy.spelling.autocorrection.AutoCorrectSpellingChecker"
+
+        client = TestClient()
+        storage_factory = client.storage_factory
+
+        spell_checker = SpellingChecker.initiate_spellchecker(spelling_config, storage_factory)
+
+        self.assertIsNotNone(spell_checker)
+

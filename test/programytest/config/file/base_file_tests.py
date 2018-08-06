@@ -37,8 +37,6 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertTrue(bot_configuration.spelling.check_and_retry)
 
         self.assertIsNotNone(bot_configuration.conversations)
-        self.assertIsNotNone(bot_configuration.conversations.save, True)
-        self.assertIsNotNone(bot_configuration.conversations.load, False)
         self.assertIsNotNone(bot_configuration.conversations.max_histories, 100)
         self.assertIsNotNone(bot_configuration.conversations.restore_last_topic, False)
         self.assertIsNotNone(bot_configuration.conversations.initial_topic, "TOPIC1")

@@ -102,7 +102,7 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("", root.resolve(self._client_context))
 
@@ -127,7 +127,7 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Matched", root.resolve(self._client_context))
 
@@ -152,7 +152,7 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
 
         conversation.record_dialog(question)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("", root.resolve(self._client_context))
 

@@ -43,7 +43,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
         root.append(node)
 
         conversation = Conversation(self._client_context)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("", root.resolve(self._client_context))
 
@@ -55,7 +55,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
         conversation = Conversation(self._client_context)
         question = Question()
         conversation.record_dialog(question)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("", root.resolve(self._client_context))
 
@@ -71,7 +71,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
         question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("", root.resolve(self._client_context))
 
@@ -93,7 +93,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
 
         conversation.record_dialog(question)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Matched", root.resolve(self._client_context))
 

@@ -67,7 +67,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
@@ -96,7 +96,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         question.current_sentence()._response = "Hello2 response"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         response = root.resolve(self._client_context)
         self.assertIsNotNone(response)

@@ -13,11 +13,10 @@ class BotConversationsConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             conversations:
-              save: True
-              load: True
               max_histories: 666
               initial_topic: topic1
               restore_last_topic: true
+              multi_client: true
         
         """, ConsoleConfiguration(), ".")
 
@@ -28,11 +27,10 @@ class BotConversationsConfigurationTests(unittest.TestCase):
 
         self.assertEquals(convo_config.section_name, "conversations")
 
-        self.assertTrue(convo_config.save)
-        self.assertTrue(convo_config.load)
         self.assertEquals(666, convo_config.max_histories)
         self.assertEquals("topic1", convo_config.initial_topic)
         self.assertTrue(convo_config.restore_last_topic)
+        self.assertTrue(convo_config.multi_client)
 
     def test_with_defaults(self):
         yaml = YamlConfigurationFile()
@@ -49,11 +47,10 @@ class BotConversationsConfigurationTests(unittest.TestCase):
 
         self.assertEquals(convo_config.section_name, "conversations")
 
-        self.assertFalse(convo_config.save)
-        self.assertFalse(convo_config.load)
         self.assertEquals(100, convo_config.max_histories)
         self.assertEquals("*", convo_config.initial_topic)
         self.assertFalse(convo_config.restore_last_topic)
+        self.assertFalse(convo_config.multi_client)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -69,8 +66,7 @@ class BotConversationsConfigurationTests(unittest.TestCase):
 
         self.assertEquals(convo_config.section_name, "conversations")
 
-        self.assertFalse(convo_config.save)
-        self.assertFalse(convo_config.load)
         self.assertEquals(100, convo_config.max_histories)
         self.assertEquals("*", convo_config.initial_topic)
         self.assertFalse(convo_config.restore_last_topic)
+        self.assertFalse(convo_config.multi_client)

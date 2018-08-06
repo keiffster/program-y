@@ -81,7 +81,7 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Hello matey", node.resolve(self._client_context))
 
@@ -109,7 +109,7 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Hello matey", node.resolve(self._client_context))
 

@@ -74,7 +74,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEquals("Matched", root.resolve(self._client_context))
 
@@ -107,7 +107,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Matched", node.resolve(self._client_context))
 

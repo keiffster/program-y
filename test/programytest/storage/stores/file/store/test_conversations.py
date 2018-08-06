@@ -21,4 +21,4 @@ class FileConversationStoreTests(ConverstionStoreAsserts):
         store = FileConversationStore(engine)
         self.assertEquals(store.storage_engine, engine)
 
-        self.assert_conversation_storage(store, can_empty=True, test_load=False)
+        self.assert_conversation_storage(store, can_empty=True, test_load=True)

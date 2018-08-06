@@ -71,8 +71,6 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertTrue(bot_config.spelling.check_and_retry)
 
         self.assertIsNotNone(bot_config.conversations)
-        self.assertIsNotNone(bot_config.conversations.save, True)
-        self.assertIsNotNone(bot_config.conversations.load, False)
         self.assertIsNotNone(bot_config.conversations.max_histories, 100)
         self.assertIsNotNone(bot_config.conversations.restore_last_topic, False)
         self.assertIsNotNone(bot_config.conversations.initial_topic, "TOPIC1")
