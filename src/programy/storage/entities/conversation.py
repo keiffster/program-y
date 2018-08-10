@@ -17,8 +17,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class ConversationStore(object):
 
-    def store_conversation(self, clientid, userid, botid, brainid, depth, question, response):
+    def store_conversation(self, client_context, conversation):
         raise NotImplementedError("store_conversation missing from Conversation Store")
 
-    def load_conversation(self, clientid, userid):
+    def load_conversation(self, client_context, conversation):
         raise NotImplementedError("load_conversation missing from Conversation Store")

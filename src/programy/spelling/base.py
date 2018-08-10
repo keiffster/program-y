@@ -14,6 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.classes.loader import ClassLoader
 
 from abc import ABCMeta, abstractmethod
 
@@ -23,10 +25,44 @@ class SpellingChecker(object):
     def __init__(self, spelling_config=None):
         self.spelling_config = spelling_config
 
-    def initialise(self, client):
+    def initialise(self, storage_factory):
         pass
 
     @abstractmethod
     def correct(self, phrase):
         raise NotImplementedError()
+
+    @staticmethod
+    def initiate_spellchecker(spelling_config, storage_factory):
+        if spelling_config.load is True:
+            if spelling_config.classname is not None:
+                try:
+                    YLogger.info(None, "Loading spelling checker from class [%s]", spelling_config.classname)
+                    spell_class = ClassLoader.instantiate_class(spelling_config.classname)
+                    spell_checker = spell_class(spelling_config)
+                    spell_checker.initialise(storage_factory)
+                    return spell_checker
+                except Exception as excep:
+                    YLogger.exception(None, "Failed to initiate spellcheker", excep)
+            else:
+                YLogger.warning(None, "No configuration setting for spelling checker!")
+
+        return None
+    
+    def check_spelling_before(self, client_context, each_sentence):
+        if self.spelling_config.check_before is True:
+            text = each_sentence.text()
+            corrected = self.correct(text)
+            YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
+            each_sentence.replace_words(corrected)
+
+    def check_spelling_and_retry(self, client_context, each_sentence):
+        if self.spelling_config.check_and_retry is True:
+            text = each_sentence.text()
+            corrected = self.correct(text)
+            YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
+            each_sentence.replace_words(corrected)
+            response = client_context.brain.ask_question(client_context, each_sentence)
+            return response
+        return None
 

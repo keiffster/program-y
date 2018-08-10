@@ -43,9 +43,9 @@ class RedisStorageEngine(StorageEngine):
 
         if self.configuration.drop_all_first is True:
             try:
-                self.property_store().empty()
+                self.variables_store().empty()
             except Exception as e:
-                print("Failed deleting conversation redis data", e)
+                print("Failed deleting conversation redis data - ", e)
 
     def variables_store(self):
         return RedisVariableStore(self)

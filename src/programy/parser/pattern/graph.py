@@ -256,7 +256,7 @@ class PatternGraph(object):
         output_func(self, "")
 
     def save_braintree(self, client_context):
-        if self._aiml_parser.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.BRAINTREE) is True:
-            storage_engine = self._aiml_parser.brain.bot.client.storage_factory.storage_engine(StorageFactory.BRAINTREE)
+        if self._aiml_parser.brain.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.BRAINTREE) is True:
+            storage_engine = self._aiml_parser.brain.bot.client.storage_factory.entity_storage_engine(StorageFactory.BRAINTREE)
             braintree_storage = storage_engine.braintree_storage()
             braintree_storage.save_braintree(client_context)

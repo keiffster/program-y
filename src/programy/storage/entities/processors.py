@@ -16,4 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 class ProcessorStore(object):
-    pass
+
+    def load(self, processor_factory):
+        raise NotImplementedError()
+

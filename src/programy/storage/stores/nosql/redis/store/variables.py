@@ -14,6 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
+
 from programy.storage.stores.nosql.redis.store.redisstore import RedisStore
 from programy.storage.entities.variables import VariablesStore
 
@@ -29,7 +31,7 @@ class RedisVariableStore(RedisStore, VariablesStore):
     def empty(self):
         ns_keys = "programy:*"
 
-        print("Emptying Conversation from cache [%s]"%ns_keys)
+        YLogger.debug(self, "Emptying Conversation from cache [%s]", ns_keys)
 
         cursor = '0'
         while cursor != 0:
@@ -51,15 +53,15 @@ class RedisVariableStore(RedisStore, VariablesStore):
             h_key = self.create_key(clientid, userid)
             s_key = self._storage_engine._sessions_set_key
 
-            print ("Adding variables [%s] - [%s]"%(s_key, h_key))
+            YLogger.debug(self, "Adding variables [%s] - [%s]"%s_key, h_key)
             self.save(h_key, s_key, clientid, variables)
 
         except Exception as e:
-            print ("Failed to save conversation to redis for clientid [%s]"%clientid, e)
+            YLogger.exception (self, "Failed to save conversation to redis for clientid [%s]", e, clientid)
 
     def get_variables(self, clientid, userid, restore_last_topic=False):
 
-        print("Loading Conversation from cache for %s"%clientid)
+        YLogger.debug("Loading Conversation from cache for %s", clientid)
 
         try:
             h_key = self.create_key(clientid, userid)
@@ -67,11 +69,11 @@ class RedisVariableStore(RedisStore, VariablesStore):
 
             # Check if clientid in sessions set
             if not self.is_member(s_key, clientid ):
-                print ("Clientid [%s], not in sessions [%s]"%(clientid, s_key))
+                YLogger.debug(self, "Clientid [%s], not in sessions [%s]", clientid, s_key)
                 return {}
 
             # Fetch variables
-            print("Fetching variables [%s]"%h_key)
+            YLogger.debug(self, "Fetching variables [%s]", h_key)
             props = self.get(h_key)
 
             variables = {}
@@ -88,7 +90,7 @@ class RedisVariableStore(RedisStore, VariablesStore):
             return variables
 
         except Exception as e:
-            print("Failed to load conversation from redis for clientid [%s]"%clientid, e)
+            YLogger.exception(self, "Failed to load conversation from redis for clientid [%s]",e, clientid)
 
         return {}
 
@@ -96,7 +98,7 @@ class RedisVariableStore(RedisStore, VariablesStore):
 
         ns_keys = self.create_key(clientid, userid)
 
-        print("Emptying Conversation from cache [%s]"%ns_keys)
+        YLogger.debug(self, "Emptying Conversation from cache [%s]", ns_keys)
 
         cursor = '0'
         while cursor != 0:

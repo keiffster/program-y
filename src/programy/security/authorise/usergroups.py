@@ -95,8 +95,8 @@ class Group(Authorisable):
 
 class User(Authorisable):
 
-    def __init__(self, groupid):
-        Authorisable.__init__(self, groupid)
+    def __init__(self, userid):
+        Authorisable.__init__(self, userid)
 
     @property
     def userid(self):

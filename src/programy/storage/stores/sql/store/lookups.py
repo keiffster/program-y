@@ -16,54 +16,68 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.lookups import LookupsStore
-from programy.storage.stores.sql.dao.lookup import Lookup
+from programy.storage.stores.sql.dao.lookup import Denormal
+from programy.storage.stores.sql.dao.lookup import Normal
+from programy.storage.stores.sql.dao.lookup import Person
+from programy.storage.stores.sql.dao.lookup import Person2
+from programy.storage.stores.sql.dao.lookup import Gender
 
 
 class SQLLookupsStore(SQLStore, LookupsStore):
 
-    def empty(self):
-        self._storage_engine.session.query(Lookup).delete()
-
-    def empty_named(self, name):
-        self._storage_engine.session.query(Lookup).filter(Lookup.name==name).delete()
-
-    def add_to_lookup(self, name, key, value):
-        lookup = Lookup(name=name, key=key, value=value)
-        self._storage_engine.session.add(lookup)
-        return lookup
-
-    def remove_lookup(self, name):
-        self._storage_engine.session.query(Lookup).filter(Lookup.name==name).delete()
-
-    def remove_lookup_key(self, name, key):
-        self._storage_engine.session.query(Lookup).filter(Lookup.name==name, Lookup.key==key).delete()
-
-    def get_lookup(self, name):
-        db_lookups = self._storage_engine.session.query(Lookup).filter(Lookup.name==name)
-        lookups = []
-        for lookup in db_lookups:
-            lookups.append({"key": lookup.key, "value": lookup.value})
-        if lookups:
-            return lookups
-        return None
-
     def load_all(self, lookup_collection):
         lookup_collection.empty()
-        names = self._storage_engine.session.query(Lookup.name).distinct()
-        for name in names:
-            self.load(lookup_collection, name[0])
+        db_lookups = self._get_all()
+        for db_lookup in db_lookups:
+            lookup_collection.add_to_lookup(db_lookup.key,  db_lookup.value)
 
-    def load(self, lookup_collection, name):
-        lookup_collection.empty()
-        values = self._storage_engine.session.query(Lookup).filter(Lookup.name==name)
-        for pair in values:
-            key = pair.key.strip('"')
-            value = pair.value.strip('"')
-            index, pattern = self.process_key_value(key, value)
-            lookup_collection.add_to_lookup(index,  pattern)
+    def split_into_fields(self, line):
+        pass
 
     def process_line(self, name, fields):
-        if fields:
-            key = fields[0].upper()
-            alookup = Lookup(name=name, key=key, value=fields[1])
-            self._storage_engine.session.add(alookup)
+        pass
+
+
+class SQLDenormalStore(SQLLookupsStore):
+
+    def empty(self):
+        self._storage_engine.session.query(Denormal).delete()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Denormal)
+
+
+class SQLNormalStore(SQLLookupsStore):
+
+    def empty(self):
+        self._storage_engine.session.query(Normal).delete()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Normal)
+
+
+class SQLGenderStore(SQLLookupsStore):
+
+    def empty(self):
+        self._storage_engine.session.query(Gender).delete()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Gender)
+
+
+class SQLPersonStore(SQLLookupsStore):
+
+    def empty(self):
+        self._storage_engine.session.query(Person).delete()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Person)
+
+
+class SQLPerson2Store(SQLLookupsStore):
+
+    def empty(self):
+        self._storage_engine.session.query(Person2).delete()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Person2)

@@ -41,8 +41,8 @@ class BasicUserGroupAuthorisationService(Authoriser):
         self.load_users_and_groups(client)
 
     def load_users_and_groups(self, client):
-        if client.storage_factory.storage_engine_available(StorageFactory.USERGROUPS) is True:
-            storage_engine = client.storage_factory.storage_engine(StorageFactory.USERGROUPS)
+        if client.storage_factory.entity_storage_engine_available(StorageFactory.USERGROUPS) is True:
+            storage_engine = client.storage_factory.entity_storage_engine(StorageFactory.USERGROUPS)
             usergroups_store = storage_engine.usergroups_store()
             usergroups_store.load_usergroups(self)
         else:

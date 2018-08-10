@@ -29,11 +29,13 @@ from programy.storage.stores.file.store.lookups import FileGenderStore
 from programy.storage.stores.file.store.lookups import FilePersonStore
 from programy.storage.stores.file.store.lookups import FilePerson2Store
 from programy.storage.stores.file.store.properties import FileRegexStore
+from programy.storage.stores.file.store.errors import FileErrorsStore
+from programy.storage.stores.file.store.duplicates import FileDuplicatesStore
 from programy.storage.stores.file.store.categories import FileCategoryStore
 from programy.storage.stores.file.store.learnf import FileLearnfStore
 from programy.storage.stores.file.store.variables import FileVariablesStore
 from programy.storage.stores.file.store.spelling import FileSpellingStore
-from programy.storage.stores.file.store.license import FileLicenseStore
+from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 from programy.storage.stores.file.store.nodes import FilePatternNodeStore
 from programy.storage.stores.file.store.nodes import FileTemplateNodeStore
 from programy.storage.stores.file.store.binaries import FileBinariesStore
@@ -54,6 +56,10 @@ class FileStorageEngine(StorageEngine):
 
     def category_store(self):
         return FileCategoryStore(self)
+    def errors_store(self):
+        return FileErrorsStore(self)
+    def duplicates_store(self):
+        return FileDuplicatesStore(self)
     def learnf_store(self):
         return FileLearnfStore(self)
 

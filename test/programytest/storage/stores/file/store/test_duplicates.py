@@ -18,6 +18,10 @@ class FileDuplicatesStoreTests(unittest.TestCase):
 
     def test_save_duplicates(self):
         config = FileStorageConfiguration()
+        tmpdir = os.path.dirname(__file__) + os.sep + "duplicates"
+        tmpfile = tmpdir + os.sep + "duplicates.txt"
+        config.duplicates_storage._dirs = [tmpfile]
+        config.duplicates_storage._has_single_file = True
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileDuplicatesStore(engine)
@@ -32,3 +36,5 @@ class FileDuplicatesStoreTests(unittest.TestCase):
 
         self.assertTrue(os.path.exists(store._get_storage_path()))
 
+        shutil.rmtree(tmpdir)
+        self.assertFalse(os.path.exists(tmpdir))

@@ -16,4 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 class SpellingStore(object):
-    pass
+
+    def load_spelling(self, spell_checker):
+        raise NotImplementedError()

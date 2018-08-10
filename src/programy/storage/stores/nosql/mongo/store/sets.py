@@ -18,7 +18,7 @@ from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.sets import SetsStore
 from programy.storage.stores.nosql.mongo.dao.set import Set
 
-class MongoSetStore(MongoStore, SetsStore):
+class MongoSetsStore(MongoStore, SetsStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)

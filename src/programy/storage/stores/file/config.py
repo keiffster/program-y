@@ -26,10 +26,10 @@ class FileStorageConfiguration(BaseConfigurationData):
     def __init__(self, name="files"):
         BaseConfigurationData.__init__(self, name=name)
 
-        self._category_storage          = FileStoreConfiguration(dirs=["./storage/aiml"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
+        self._categories_storage        = FileStoreConfiguration(dirs=["./storage/categories"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
         self._errors_storage            = FileStoreConfiguration(file="./storage/debug/errors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self._duplicates_storage        = FileStoreConfiguration(file="./storage/debug/duplicates.txt", format="text", encoding="utf-8", delete_on_start=False)
-        self._learnf_storage            = FileStoreConfiguration(dirs=["./storage/aiml/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        self._learnf_storage            = FileStoreConfiguration(dirs=["./storage/categories/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
 
         self._conversation_storage      = FileStoreConfiguration(dirs=["./storage/conversations"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
         
@@ -63,11 +63,11 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._preprocessors_storage = FileStoreConfiguration(file="./storage/processing/preprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self._postprocessors_storage = FileStoreConfiguration(file="./storage/processing/postprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
 
-        self._usergroups_storage = FileStoreConfiguration(file="./storage/security/usergroups.txt", format="text", encoding="utf-8", delete_on_start=False)
+        self._usergroups_storage = FileStoreConfiguration(file="./storage/security/usergroups.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
 
     @property
-    def category_storage(self):
-        return self._category_storage
+    def categories_storage(self):
+        return self._categories_storage
 
     @property
     def errors_storage(self):
@@ -174,13 +174,14 @@ class FileStorageConfiguration(BaseConfigurationData):
         return self._usergroups_storage
 
     def load_storage_config(self, storage_config, name, configuration_file, storage, bot_root):
-        config_section = configuration_file.get_option(storage, name)
-        if config_section is not None:
-            storage_config.extract_configuration(configuration_file, config_section, bot_root)
+        config_section = configuration_file.get_option(storage, 'config')
+        storage_config_section = configuration_file.get_option(config_section, name)
+        if storage_config_section is not None:
+            storage_config.extract_configuration(configuration_file, storage_config_section, bot_root)
 
     def load_config_section(self, configuration_file, storage, bot_root):
         if storage is not None:
-            self.load_storage_config(self._category_storage, FileStore.CATEGORIES_STORAGE, configuration_file, storage, bot_root)
+            self.load_storage_config(self._categories_storage, FileStore.CATEGORIES_STORAGE, configuration_file, storage, bot_root)
             self.load_storage_config(self._errors_storage, FileStore.ERRORS_STORAGE, configuration_file, storage, bot_root)
             self.load_storage_config(self._duplicates_storage, FileStore.DUPLICATES_STORAGE, configuration_file, storage, bot_root)
             self.load_storage_config(self._learnf_storage, FileStore.LEARNF_STORAGE, configuration_file, storage, bot_root)
@@ -241,7 +242,7 @@ class FileStorageConfiguration(BaseConfigurationData):
 
     def _create_storage_map(self, amap):
         
-        amap[FileStore.CATEGORIES_STORAGE] = self._category_storage
+        amap[FileStore.CATEGORIES_STORAGE] = self._categories_storage
         amap[FileStore.ERRORS_STORAGE] = self._errors_storage
         amap[FileStore.DUPLICATES_STORAGE] = self._duplicates_storage
         amap[FileStore.LEARNF_STORAGE] = self._learnf_storage
@@ -282,13 +283,13 @@ class FileStorageConfiguration(BaseConfigurationData):
 
     def _create_storage_defaults(self, amap):
 
-        amap[FileStore.CATEGORIES_STORAGE] = FileStoreConfiguration(dirs=["./storage/aiml"], extension="aiml", subdirs=True,
+        amap[FileStore.CATEGORIES_STORAGE] = FileStoreConfiguration(dirs=["./storage/categories"], extension="aiml", subdirs=True,
                                                         format="xml", encoding="utf-8", delete_on_start=False)
         amap[FileStore.ERRORS_STORAGE] = FileStoreConfiguration(file="./storage/debug/errors.txt", format="text",
                                                         encoding="utf-8", delete_on_start=False)
         amap[FileStore.DUPLICATES_STORAGE] = FileStoreConfiguration(file="./storage/debug/duplicates.txt", format="text",
                                                         encoding="utf-8", delete_on_start=False)
-        amap[FileStore.LEARNF_STORAGE] = FileStoreConfiguration(dirs=["./storage/aiml/learnf"], extension="aiml", subdirs=False,
+        amap[FileStore.LEARNF_STORAGE] = FileStoreConfiguration(dirs=["./storage/categories/learnf"], extension="aiml", subdirs=False,
                                                       format="xml", encoding="utf-8", delete_on_start=False)
 
         amap[FileStore.CONVERSATION_STORAGE] = FileStoreConfiguration(dirs=["./storage/conversations"], extension="txt",

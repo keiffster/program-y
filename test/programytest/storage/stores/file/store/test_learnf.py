@@ -1,6 +1,7 @@
 import unittest
 import os.path
 import xml.etree.ElementTree as ET
+import shutil
 
 from programy.storage.stores.file.store.learnf import FileLearnfStore
 from programy.storage.stores.file.engine import FileStorageEngine
@@ -19,6 +20,8 @@ class FileLearnfStoreTests(unittest.TestCase):
 
     def test_save_learnf(self):
         config = FileStorageConfiguration()
+        tmpdir = os.path.dirname(__file__) + os.sep + "learnf"
+        config.learnf_storage._dirs = [tmpdir]
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileLearnfStore(engine)
@@ -43,3 +46,6 @@ class FileLearnfStoreTests(unittest.TestCase):
         store.save_learnf(client_context, xml_node)
 
         self.assertTrue(os.path.exists(learnf_fullpath))
+
+        shutil.rmtree(tmpdir)
+        self.assertFalse(os.path.exists(tmpdir))

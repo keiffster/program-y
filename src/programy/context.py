@@ -95,3 +95,12 @@ class ClientContext(object):
             self._brain.id if self._brain else "",
             self._question_depth
         )
+
+    def to_json(self):
+        return {
+            "clientid": self._client.id,
+            "userid": self._userid,
+            "botid": self._bot.id if self._bot else None,
+            "brainid": self._brain.id if self._brain else None,
+            "depth": self._question_depth
+        }

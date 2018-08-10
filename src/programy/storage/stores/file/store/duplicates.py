@@ -29,7 +29,7 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
         FileStore.__init__(self, storage_engine)
 
     def _get_storage_path(self):
-        return self.storage_engine.configuration.errors_storage.file
+        return self.storage_engine.configuration.duplicates_storage.file
 
     def empty(self):
         filename = self._get_storage_path()

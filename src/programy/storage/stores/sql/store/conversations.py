@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.conversation import ConversationStore
 from programy.storage.stores.sql.dao.conversation import Conversation
+from programy.dialog.dialog import Question
+from programy.dialog.dialog import Sentence
 
 
 class SQLConversationStore(SQLStore, ConversationStore):
@@ -28,15 +30,35 @@ class SQLConversationStore(SQLStore, ConversationStore):
     def empty(self):
         self._storage_engine.session.query(Conversation).delete()
 
-    def store_conversation(self, clientid, userid, botid, brainid, depth, question, response):
-        conversation = Conversation(clientid=clientid, userid=userid, botid=botid, brainid=brainid, question_depth=depth, question=question, response=response)
-        self._storage_engine.session.add(conversation)
-        return conversation
+    def store_conversation(self, client_context, conversation):
+        question_no = 0
+        for question in conversation.questions:
+            sentence_no = 0
+            for sentence in question.sentences:
+                #TODO Check for duplicates and remove
+                conversation = Conversation(clientid=client_context.client.id,
+                                            userid=client_context.userid,
+                                            botid=client_context.bot.id,
+                                            brainid=client_context.brain.id,
+                                            question=question_no,
+                                            sentence=sentence.text(),
+                                            response=sentence.response)
+                self._storage_engine.session.add(conversation)
+                sentence_no += 1
+                question_no += 1
 
-    def load_conversation(self, clientid, userid):
-        db_conversations = self._storage_engine.session.query(Conversation).filter(Conversation.clientid==clientid, Conversation.userid==userid)
-        conversations = []
+    def load_conversation(self, client_context, conversation):
+        db_conversations = self._storage_engine.session.query(Conversation).filter(Conversation.clientid==client_context.client.id, Conversation.userid==client_context.userid)
+        question = Question()
+        conversation.questions.append(question)
+
+        current_question = 0
         for conversation in db_conversations:
-            conversations.append({"clientid": conversation.clientid, "userid": conversation.userid, "botid": conversation.botid, "brainid": conversation.brainid,
-                                  "question_depth": conversation.question_depth, "question": conversation.question, "response": conversation.response})
-        return conversations
+
+            if conversation.question != current_question:
+                question = Question ()
+                conversation.questions.append(question)
+
+            sentence = Sentence(client_context.bot.brain.tokenizer, conversation.sentence)
+            sentence.response = conversation.response
+            question.sentences.append(sentence)

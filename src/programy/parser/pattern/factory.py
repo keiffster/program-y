@@ -38,8 +38,8 @@ class PatternNodeFactory(NodeFactory):
             return ClassLoader.instantiate_class("programy.parser.pattern.nodes.root.PatternRootNode")()
 
     def load(self, storage_factory):
-        if storage_factory.storage_engine_available(StorageFactory.PATTERN_NODES) is True:
-            storage_engine = storage_factory.storage_engine(StorageFactory.PATTERN_NODES)
+        if storage_factory.entity_storage_engine_available(StorageFactory.PATTERN_NODES) is True:
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.PATTERN_NODES)
             pattern_store = storage_engine.pattern_nodes_store()
             pattern_store.load(self)
         else:

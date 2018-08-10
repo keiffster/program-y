@@ -40,6 +40,7 @@ class RDFCollection(BaseCollection):
         self._entities_to_stores = {}
     
     def empty(self):
+        YLogger.debug(self, "Emptying RDF Collection")
         self._entities.clear()
         self._stores.clear()
         self._entities_to_ids.clear()
@@ -57,6 +58,7 @@ class RDFCollection(BaseCollection):
         return None
 
     def load(self, storage_factory):
+        YLogger.debug(self, "Loading RDF Collection")
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
             rdf_engine = storage_factory.entity_storage_engine(StorageFactory.RDF)
             if rdf_engine:
@@ -65,7 +67,8 @@ class RDFCollection(BaseCollection):
                     rdfs_store.load_all(self)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load rdf from storage", e)
-
+        else:
+            YLogger.error(self, "No RDF Storage Engine [%s] in StorageFactory", StorageFactory.RDF)
 
     def reload(self, storage_factory, rdf_name):
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
@@ -76,6 +79,8 @@ class RDFCollection(BaseCollection):
                     rdfs_store.reload(self, rdf_name)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load rdf from storage", e)
+        else:
+            YLogger.error(self, "No RDF Storage Engine [%s] in StorageFactory", StorageFactory.RDF)
 
     def subjects(self):
         return self._entities.keys()
@@ -92,6 +97,8 @@ class RDFCollection(BaseCollection):
         return []
 
     def add_entity(self, subject, predicate, obj, rdf_name, rdf_store=None, id=None):
+        YLogger.debug(self, "Adding RDF Entity [%s] [%s] [%s] [%s]", subject, predicate, obj, rdf_name)
+
         subject = subject.upper()
         predicate = predicate.upper()
 
@@ -129,6 +136,7 @@ class RDFCollection(BaseCollection):
         return False
 
     def delete_entity(self, subject, predicate=None, obj=None):
+        YLogger.debug(self, "Deleting RDF Entity [%s] [%s] [%s]", subject, predicate, obj)
 
         if self.has_subject(subject):
             if predicate is None and obj is None:

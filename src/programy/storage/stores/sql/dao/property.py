@@ -20,13 +20,30 @@ from sqlalchemy import Column, Integer, String
 from programy.storage.stores.sql.base import Base
 
 
-class Property(Base):
-    __tablename__ = 'properties'
+class PropertyBase(object):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
     value = Column(String)
 
+
+class Property(Base, PropertyBase):
+    __tablename__ = 'properties'
+
     def __repr__(self):
         return "<Property(id='%d', name='%s', value='%s')>" % (self.id, self.name, self.value)
+
+
+class DefaultVariable(Base, PropertyBase):
+    __tablename__ = 'defaults'
+
+    def __repr__(self):
+        return "<Default(id='%d', name='%s', value='%s')>" % (self.id, self.name, self.value)
+
+
+class Regex(Base, PropertyBase):
+    __tablename__ = 'regexes'
+
+    def __repr__(self):
+        return "<Regex(id='%d', name='%s', regfex='%s')>" % (self.id, self.name, self.value)
 

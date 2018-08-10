@@ -18,6 +18,10 @@ class FileErrorsStoreTests(unittest.TestCase):
 
     def test_save_errors(self):
         config = FileStorageConfiguration()
+        tmpdir = os.path.dirname(__file__) + os.sep + "errors"
+        tmpfile = tmpdir + os.sep + "errors.txt"
+        config.errors_storage._dirs = [tmpfile]
+        config.errors_storage._has_single_file = True
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileErrorsStore(engine)
@@ -32,3 +36,5 @@ class FileErrorsStoreTests(unittest.TestCase):
 
         self.assertTrue(os.path.exists(store._get_storage_path()))
 
+        shutil.rmtree(tmpdir)
+        self.assertFalse(os.path.exists(tmpdir))

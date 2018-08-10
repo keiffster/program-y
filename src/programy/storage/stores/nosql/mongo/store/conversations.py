@@ -27,14 +27,12 @@ class MongoConversationStore(MongoStore, ConversationStore):
     def collection_name(self):
         return 'conversations'
 
-    def store_conversation(self, clientid, userid, botid, brainid, depth, question, response):
-        convo = Conversation(clientid, userid, botid, brainid, depth, question, response)
-        return self.add_document(convo)
+    def store_conversation(self, client_context, conversation):
+        # TODO Check for duplicates and remove
+        return self.add_document(Conversation(client_context, conversation))
 
-    def load_conversation(self, clientid, userid):
+    def load_conversation(self, client_context, conversation):
         collection = self.collection()
-        documents = collection.find({"clientid": clientid, "userid": userid})
-        conversations = []
-        for doc in documents:
-            conversations.append(Conversation.from_document(doc))
-        return conversations
+        document = collection.find({"clientid": client_context.client.id, "userid": client_context.userid})
+        data = document[0]
+        conversation.from_json(data['conversation'])

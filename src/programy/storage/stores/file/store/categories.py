@@ -28,14 +28,15 @@ class FileCategoryStore(FileStore, CategoryStore):
         FileStore.__init__(self, storage_engine)
 
     def get_storage(self):
-        return self.storage_engine.configuration.category_storage
+        return self.storage_engine.configuration.categories_storage
 
     def load_all(self, parser):
-        dirs    = self.storage_engine.configuration.category_storage.dirs
-        cat_ext = self.storage_engine.configuration.category_storage.extension
-        subdirs = self.storage_engine.configuration.category_storage.subdirs
+        dirs    = self.storage_engine.configuration.categories_storage.dirs
+        cat_ext = self.storage_engine.configuration.categories_storage.extension
+        subdirs = self.storage_engine.configuration.categories_storage.subdirs
 
-        if self.storage_engine.configuration.category_storage.has_single_file():
+        #TODO This fails when subdirs = False and/or when extension is none
+        if self.storage_engine.configuration.categories_storage.has_single_file():
             for file in dirs:
                 self._load_file_contents(parser, file)
         else:

@@ -62,10 +62,10 @@ class TemplateLearnfNode(TemplateLearnNode):
 
         node = self.create_category_xml_node(client_context, category)
 
-        if client_context.bot.client.storage_factory.storage_engine_available(StorageFactory.LEARNF) is True:
+        if client_context.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.LEARNF) is True:
             YLogger.info(self, "Saving binary brain to [%s]", StorageFactory.LEARNF)
 
-            storage_engine = client_context.bot.client.storage_factory.storage_engine(StorageFactory.LEARNF)
+            storage_engine = client_context.bot.client.storage_factory.entity_storage_engine(StorageFactory.LEARNF)
             learnf_storage = storage_engine.learnf_soteage()
 
             learnf_storage.save_learnf(self, client_context, node)

@@ -32,14 +32,15 @@ class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
     def save_errors(self):
         return self._save_errors
 
+    @property
     def save_duplicates(self):
         return self._save_duplicates
 
     def load_config_section(self, configuration_file, configuration, bot_root):
-        binaries = configuration_file.get_section("defaults", configuration)
-        if binaries is not None:
-            self._save_errors = configuration_file.get_bool_option(binaries, "save-errors", missing_value=False)
-            self._save_duplicates = configuration_file.get_bool_option(binaries, "save-duplicates", missing_value=False)
+        debugfiles = configuration_file.get_section("debugfiles", configuration)
+        if debugfiles is not None:
+            self._save_errors = configuration_file.get_bool_option(debugfiles, "save-errors", missing_value=False)
+            self._save_duplicates = configuration_file.get_bool_option(debugfiles, "save-duplicates", missing_value=False)
         else:
             YLogger.warning(self, "'debugfiles' section missing from brain config, using debugfile defaults")
 

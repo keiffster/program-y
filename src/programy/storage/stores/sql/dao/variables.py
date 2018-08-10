@@ -20,8 +20,8 @@ from sqlalchemy import Column, Integer, String
 from programy.storage.stores.sql.base import Base
 
 
-class Property(Base):
-    __tablename__ = 'properties'
+class Variable(Base):
+    __tablename__ = 'variables'
 
     id = Column(Integer, primary_key=True)
     clientid = Column(String)

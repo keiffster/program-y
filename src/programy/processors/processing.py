@@ -43,17 +43,30 @@ class ProcessorCollection(object):
             string = processor.process(client_context, string)
         return string
 
+    def load(self, storage_factory):
+        storage_name = self._get_storage_name()
+        if storage_factory.entity_storage_engine_available(storage_name) is True:
+            storage_engine = storage_factory.entity_storage_engine(storage_name)
+            processor_store = self._get_store(storage_engine)
+            processor_store.load(self)
+
+    def _get_storage_name(self):
+        raise NotImplementedError("Override this in derived class, return StorageFactory.XXX name")
+
+    def _get_store(self, storage_engine):
+        raise NotImplementedError("Override this in derived class, return Store from StorageEngine")
+
 
 class PreProcessorCollection(ProcessorCollection):
 
     def __init__(self):
         ProcessorCollection.__init__(self)
 
-    def load(self, storage_factory):
-        if storage_factory.storage_engine_available(StorageFactory.PREPROCESSORS) is True:
-            storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.PREPROCESSORS)
-            processor_store = storage_engine.preprocessors_store()
-            processor_store.load(self)
+    def _get_storage_name(self):
+        return StorageFactory.PREPROCESSORS
+
+    def _get_store(self, storage_engine):
+        return storage_engine.preprocessors_store()
 
 
 class PostProcessorCollection(ProcessorCollection):
@@ -61,11 +74,11 @@ class PostProcessorCollection(ProcessorCollection):
     def __init__(self):
         ProcessorCollection.__init__(self)
 
-    def load(self, storage_factory):
-        if storage_factory.storage_engine_available(StorageFactory.POSTPROCESSORS) is True:
-            storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.POSTPROCESSORS)
-            processor_store = storage_engine.postrocessors_store()
-            processor_store.load(self)
+    def _get_storage_name(self):
+        return StorageFactory.POSTPROCESSORS
+
+    def _get_store(self, storage_engine):
+        return storage_engine.postprocessors_store()
 
 
 ##################################################################

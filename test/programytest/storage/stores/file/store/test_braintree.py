@@ -19,7 +19,11 @@ class FileBraintreeStoreTests(unittest.TestCase):
 
     def test_save_braintree(self):
         config = FileStorageConfiguration()
-        config._category_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        config._categories_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "data" + os.sep + "categories"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        tmpdir = os.path.dirname(__file__) + os.sep + "braintree"
+        tmpfile = tmpdir + os.sep + "braintree.xml"
+        config.braintree_storage._dirs = [tmpfile]
+        config.braintree_storage._has_single_file = True
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileBraintreeStore(engine)
@@ -36,3 +40,6 @@ class FileBraintreeStoreTests(unittest.TestCase):
         store.save_braintree(client_context, pattern_graph)
 
         self.assertTrue(os.path.exists(store._get_storage_path()))
+
+        shutil.rmtree(tmpdir)
+        self.assertFalse(os.path.exists(tmpdir))

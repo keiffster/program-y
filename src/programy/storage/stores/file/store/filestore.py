@@ -103,6 +103,10 @@ class FileStore(Store):
         if os.path.exists(path) is False:
             os.makedirs(path)
 
+    @staticmethod
+    def _file_exists(path):
+        return os.path.exists(path)
+
     def commit(self):
         pass
 

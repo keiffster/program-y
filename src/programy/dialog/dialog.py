@@ -81,7 +81,6 @@ class Sentence(object):
 
 class Question(object):
 
-    #TODO Move sentence_split_charts into a property of tokenizer and move functionality into that class
     @staticmethod
     def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True, srai=False):
         question = Question(srai)
@@ -258,7 +257,7 @@ class Conversation(object):
         last_sentence = sentences[-1]
         that_pattern = TextUtils.strip_all_punctuation(last_sentence)
         that_pattern = that_pattern.strip()
-        # TODO Added this to catch a failed sentence
+
         if that_pattern == "":
             that_pattern = '*'
         return that_pattern
@@ -294,3 +293,37 @@ class Conversation(object):
             that_pattern = "*"
 
         return that_pattern
+
+    def to_json(self):
+        json_data = {
+            'client_context': self._client_context.to_json(),
+            'questions': [],
+            'max_histories': self._max_histories,
+            'properties': self._properties
+        }
+
+        for question in self.questions:
+            json_question = {'sentences': [],
+                             'srai': question._srai,
+                             'properties': question._properties,
+                             'current_sentence_no': question._current_sentence_no
+            }
+            json_data['questions'].append(json_question)
+
+            for sentence in question.sentences:
+                json_sentence = {"question": sentence.text(),
+                                 "response": sentence.response
+                                 }
+                json_question['sentences'].append(json_sentence)
+
+        return json_data
+
+    def from_json(self, json_data):
+        if json_data is not None:
+            json_questions = json_data['questions']
+            for json_question in json_questions:
+                json_sentences = json_question['sentences']
+                for json_sentence in json_sentences:
+                    question = Question.create_from_text(self._client_context.brain.tokenizer, json_sentence['question'])
+                    question.sentence(0).response = json_sentence['response']
+                    self._questions.append(question)

@@ -11,7 +11,7 @@ class ProgramYChatbot(ConsoleBotClient):
         ConsoleBotClient.__init__(self, argument_parser)
 
     def parse_configuration(self):
-        self.configuration.client_configuration.storage._category_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__)], format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
+        self.configuration.client_configuration.storage._categories_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__)], format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
 
     def add_local_properties(self):
         client_context = self.create_client_context("console")

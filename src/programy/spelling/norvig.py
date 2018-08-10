@@ -4,6 +4,7 @@ import re
 from collections import Counter
 
 from programy.spelling.base import SpellingChecker
+from programy.storage.factory import StorageFactory
 
 class NorvigSpellingChecker(SpellingChecker):
 
@@ -15,12 +16,12 @@ class NorvigSpellingChecker(SpellingChecker):
         self.words = []
         self.sum_of_words = 0
 
-    def initialise(self, client):
-        self.load_corpus(client)
+    def initialise(self, storage_factory):
+        self.load_corpus(storage_factory)
 
-    def load_corpus(self, client):
-        if client.storage_factory.entity_storage_engine_available("spelling_corpus") is True:
-            spelling_engine =  client.storage_factory.entity_storage_engine("spelling_corpus")
+    def load_corpus(self, storage_factory):
+        if storage_factory.entity_storage_engine_available(StorageFactory.SPELLING_CORPUS) is True:
+            spelling_engine =  storage_factory.entity_storage_engine(StorageFactory.SPELLING_CORPUS)
             if spelling_engine:
                 store = spelling_engine.spelling_store()
                 store.load_spelling(self)

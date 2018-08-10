@@ -29,13 +29,19 @@ class Conversation(Base):
     userid = Column(String)
     botid = Column(String)
     brainid = Column(String)
-    question_depth = Column(Integer)
-
-    question = Column(String)
+    question = Column(Integer)
+    sentence = Column(String)
     response = Column(String)
 
     def __repr__(self):
-        return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s', depth='%d', question='%s', response='%s')" % \
-               (self.id, self.clientid, self.userid, self.botid, self.brainid, self.question_depth, self.question,
+        return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s', question='%d', sentence='%s', response='%s')" % \
+               (self.id,
+                self.clientid,
+                self.userid,
+                self.botid,
+                self.brainid,
+                self.question_depth,
+                self.question,
+                self.sentence,
                 self.response)
 

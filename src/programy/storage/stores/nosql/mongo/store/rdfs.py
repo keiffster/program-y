@@ -18,7 +18,7 @@ from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.rdf import RDFStore
 from programy.storage.stores.nosql.mongo.dao.rdf import RDF
 
-class MongoRDFStore(MongoStore, RDFStore):
+class MongoRDFsStore(MongoStore, RDFStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)

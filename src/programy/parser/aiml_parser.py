@@ -138,12 +138,18 @@ class AIMLParser(object):
         self._pattern_parser.empty()
 
     def load_aiml(self):
-        if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.CATEGORIES) is True:
-            storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.CATEGORIES)
+
+        self.create_debug_storage()
+
+        if self.brain.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.CATEGORIES) is True:
+            storage_engine = self.brain.bot.client.storage_factory.entity_storage_engine(StorageFactory.CATEGORIES)
             category_store = storage_engine.category_store()
             category_store.load_all(self)
         else:
             YLogger.error(None, "No category storage defined, no aiml loaded!")
+
+        self.save_debug_files()
+        self.display_debug_info()
 
     def tag_and_namespace_from_text(self, text):
         # If there is a namespace, then it looks something like
@@ -228,27 +234,26 @@ class AIMLParser(object):
     #   </aiml>
     #
 
-    def create_debug_storage(self, configuration):
-        if configuration.debugfiles.save_errors is True:
+    def create_debug_storage(self):
+        if self.brain.configuration.debugfiles.save_errors is True:
             self._errors = []
-        if configuration.debugfiles.save_duplicates is True:
+        if self.brain.configuration.debugfiles.save_duplicates is True:
             self._duplicates = []
 
-    def save_debug_files(self, configuration):
-
-        if configuration.debugfiles.save_errors is True:
-            if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.ERRORS) is True:
-                storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.ERRORS)
+    def save_debug_files(self):
+        if self.brain.configuration.debugfiles.save_errors is True:
+            if self.brain.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.ERRORS) is True:
+                storage_engine = self.brain.bot.client.storage_factory.entity_storage_engine(StorageFactory.ERRORS)
                 errors_store = storage_engine.errors_store()
                 errors_store.save_errors(self._errors)
 
-        if configuration.debugfiles.save_duplicates is True:
-            if self.brain.bot.client.storage_factory.storage_engine_available(StorageFactory.DUPLICATES) is True:
-                storage_engine = self.brain.bot.client.storage_factory.storage_engine(StorageFactory.DUPLICATES)
+        if self.brain.configuration.debugfiles.save_duplicates is True:
+            if self.brain.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.DUPLICATES) is True:
+                storage_engine = self.brain.bot.client.storage_factory.entity_storage_engine(StorageFactory.DUPLICATES)
                 duplicates_store = storage_engine.duplicates_store()
                 duplicates_store.save_duplicates(self._duplicates)
 
-    def display_debug_info(self, configuration):
+    def display_debug_info(self):
         if self._errors is not None:
             print("Found a total of %d errors in your grammars, check your errors store" % len(self._errors))
         if self._duplicates is not None:

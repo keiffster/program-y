@@ -55,13 +55,12 @@ class TemplateGetNode(TemplateNode):
         self._tuples = tuples
 
     @staticmethod
-    #TODO Replace bot with client_context
-    def get_default_value(bot):
-        value = bot.brain.properties.property("default-get")
+    def get_default_value(client_context):
+        value = client_context.bot.brain.properties.property("default-get")
         if value is None:
             YLogger.error(None, "No property defined for default-get, checking defaults")
 
-            value = bot.brain.configuration.defaults.default_get
+            value = client_context.bot.brain.configuration.defaults.default_get
             if value is None:
                 YLogger.error(None, "No value defined for default default-get, returning 'unknown'")
                 value = "unknown"
@@ -71,27 +70,25 @@ class TemplateGetNode(TemplateNode):
     @staticmethod
     def get_property_value(client_context, local, name):
 
+        conversation = client_context.bot.get_conversation(client_context)
+
+        value = None
         if local is True:
 
-            value = None
-            #TODO Why would you need this test, when is get_conversation(clientid) == None ?
-            if client_context.bot.get_conversation(client_context) is not None:
-                if client_context.bot.get_conversation(client_context).has_current_question():
-                    value = client_context.bot.get_conversation(client_context).current_question().property(name)
+            if conversation.has_current_question():
+                value = conversation.current_question().property(name)
 
         else:
 
             if name is not None and client_context.brain.dynamics.is_dynamic_var(name) is True:
                 value = client_context.brain.dynamics.dynamic_var(client_context, name)
             else:
-                value = client_context.bot.get_conversation(client_context).property(name)
-                #if value is None:
-                #    value = bot.brain.properties.property(name)
+                value = conversation.property(name)
 
         if value is None:
             YLogger.error(client_context, "No property for [%s]", name)
 
-            value = TemplateGetNode.get_default_value(client_context.bot)
+            value = TemplateGetNode.get_default_value(client_context)
 
         return value
 
@@ -160,7 +157,8 @@ class TemplateGetNode(TemplateNode):
 
     def resolve(self, client_context):
         try:
-            client_context.bot.load_conversation(client_context.userid)
+            #TODO, need a load conversation when running in multi client mode using Redis
+            #client_context.bot.load_conversation(client_context.userid)
             return self.resolve_to_string(client_context)
         except Exception as excep:
             YLogger.exception(client_context, "Failed to resolve", excep)

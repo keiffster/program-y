@@ -20,10 +20,10 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.brain import Brain
 from programy.dialog.dialog import Conversation, Question, Sentence
-from programy.dialog.storage.factory import ConversationStorageFactory
+from programy.dialog.conversation import ConversationManager
 from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
-
+from programy.spelling.base import SpellingChecker
 
 class BrainSelector(object):
 
@@ -94,9 +94,8 @@ class Bot(object):
         self._spell_checker = None
         self.initiate_spellchecker()
 
-        self._conversations = {}
-        self._conversation_storage = None
-        self.initiate_conversation_storage()
+        self._conversation_mgr = ConversationManager(config.conversations)
+        self._conversation_mgr.initialise(self._client.storage_factory)
 
     def ylogger_type(self):
         return "bot"
@@ -118,18 +117,9 @@ class Bot(object):
         return self._brain_factory
 
     def initiate_spellchecker(self):
-        # TODO Move this to Spelling bass class
         if self.configuration is not None:
-            if self.configuration.spelling.classname is not None:
-                try:
-                    YLogger.info(self, "Loading spelling checker from class [%s]", self.configuration.spelling.classname)
-                    spell_class = ClassLoader.instantiate_class(self.configuration.spelling.classname)
-                    self._spell_checker = spell_class(self.configuration.spelling)
-                    self._spell_checker.initialise(self.client)
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to initiate spellcheker", excep)
-            else:
-                YLogger.warning(self, "No configuration setting for spelling checker!")
+            if self.configuration.spelling is not None:
+                self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
 
     @property
     def spell_checker(self):
@@ -141,7 +131,7 @@ class Bot(object):
 
     @property
     def conversations(self):
-        return self._conversations
+        return self._conversation_mgr
 
     @property
     def default_response(self):
@@ -202,77 +192,24 @@ class Bot(object):
                 client_context.brain.properties.property("birthdate"))
 
     def has_conversation(self, client_context):
-        return bool(client_context.userid in self._conversations)
+        return self._conversation_mgr.has_conversation(client_context)
 
     def conversation(self, client_context):
         return self.get_conversation(client_context)
 
     def get_conversation(self, client_context):
-        # TODO MOve into Conversation Manager
-        if client_context.userid in self._conversations:
-            YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
-            return self._conversations[client_context.userid]
+        return self._conversation_mgr.get_conversation(client_context)
 
-        else:
-            YLogger.info(client_context, "Creating new conversation for client %s", client_context.userid)
+    def save_conversation(self, client_context):
+        self._conversation_mgr.save_conversation(client_context)
 
-            conversation = Conversation(client_context)
-
-            if client_context.brain.properties is not None:
-                conversation.load_initial_variables(client_context.brain.variables)
-
-            self._conversations[client_context.userid] = conversation
-
-            self.load_conversation(client_context.userid)
-
-            return conversation
-
-    def initiate_conversation_storage(self):
-        # TODO MOve into Conversation Manager
-        pass
-        """
-        if self.configuration is not None:
-            if self.configuration.conversations is not None:
-                self._conversation_storage = ConversationStorageFactory.get_storage(self.configuration)
-                if self._conversation_storage is not None:
-                    if self.configuration.conversations.empty_on_start is True:
-                        self._conversation_storage.empty ()
-        """
-
-    def load_conversation(self, clientid):
-        # TODO MOve into Conversation Manager
-        if self._conversation_storage is not None:
-            if clientid in self._conversations:
-                conversation = self._conversations[clientid]
-                self._conversation_storage.load_conversation(conversation, clientid,
-                                                             self.configuration.conversations.restore_last_topic)
-
-    def save_conversation(self, clientid):
-        # TODO MOve into Conversation Manager
-        if self._conversation_storage is not None:
-            if clientid in self._conversations:
-                conversation = self._conversations[clientid]
-                self._conversation_storage.save_conversation(conversation, clientid)
-            else:
-                YLogger.error(self, "Unknown conversation id type [%s] unable tonot persist!", clientid)
-
-    def check_spelling_before(self, each_sentence):
-        # TODO Move this to spelliing base class
-        if self.configuration.spelling.check_before is True:
-            text = each_sentence.text()
-            corrected = self.spell_checker.correct(text)
-            YLogger.debug(self, "Spell Checker corrected [%s] to [%s]", text, corrected)
-            each_sentence.replace_words(corrected)
+    def check_spelling_before(self, client_context, each_sentence):
+        if self.spell_checker is not None:
+            self.spell_checker.check_spelling_before(client_context, each_sentence)
 
     def check_spelling_and_retry(self, client_context, each_sentence):
-        # TODO Move this to spelling base class
-        if self.configuration.spelling.check_and_retry is True:
-            text = each_sentence.text()
-            corrected = self.spell_checker.correct(text)
-            YLogger.debug(self, "Spell Checker corrected [%s] to [%s]", text, corrected)
-            each_sentence.replace_words(corrected)
-            response = client_context.brain.ask_question(client_context, each_sentence)
-            return response
+        if self.spell_checker is not None:
+            return self.spell_checker.check_spelling_and_retry(client_context, each_sentence)
         return None
 
     def get_default_response(self, client_context):
@@ -370,26 +307,16 @@ class Bot(object):
         if srai is True:
             conversation.pop_dialog()
 
-        response = self.combine_answers(answers)
+        self.save_conversation(client_context)
 
-        self.log_question_and_answer(client_context, text, response)
-
-        return response
-
-    def log_question_and_answer(self, client_context, text, response):
-        # TODO Move to Conversation Storage Class
-        convo_logger = logging.getLogger("conversation")
-        if convo_logger:
-            qanda =  "%s - Question[%s], Response[%s]"%(str(client_context), text, response)
-            convo_logger.info(qanda)
+        return self.combine_answers(answers)
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
-        # TODO Create Sentence Processor
         client_context.check_max_recursion()
         client_context.check_max_timeout()
 
         if srai is False:
-            self.check_spelling_before(sentence)
+            self.check_spelling_before(client_context, sentence)
 
         response = client_context.brain.ask_question(client_context, sentence, srai)
 
@@ -401,10 +328,7 @@ class Bot(object):
         else:
             return self.handle_none_response(client_context, sentence, responselogger)
 
-        return answer
-
     def handle_response(self, client_context, sentence, response, srai, responselogger):
-        # TODO Create Response Processor
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
         answer = self.post_process_response(client_context, response, srai)
@@ -412,7 +336,6 @@ class Bot(object):
         return answer
 
     def handle_none_response(self, clientid, sentence, responselogger):
-        # TODO Create Response Processor
         sentence.response = self.get_default_response(clientid)
         if responselogger is not None:
             responselogger.log_unknown_response(sentence)

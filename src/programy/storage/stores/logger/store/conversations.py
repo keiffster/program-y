@@ -26,7 +26,19 @@ class LoggerConversationStore(LoggerStore, ConversationStore):
     def __init__(self, storage_engine):
         LoggerStore.__init__(self, storage_engine)
 
-    def store_conversation(self, clientid, userid, botid, brainid, depth, question, response):
-        convo_logger = logging.getLogger(self._storage_engine.configuration.conversation_logger)
+    def _get_logger(self):
+        return logging.getLogger(self._storage_engine.configuration.conversation_logger)
+
+    def store_conversation(self, client_context, conversation):
+        convo_logger = self._get_logger()
         if convo_logger:
-            convo_logger.info("[%s] [%s] [%s] [%s] [%s] [%s] [%s]\n"%(clientid, userid, botid, brainid, depth, question, response))
+            current_question = conversation.current_question()
+            current_sentence = current_question.current_sentence()
+            sentence = current_sentence.text()
+            response = current_sentence.response
+            convo_logger.info("[%s] [%s] [%s] [%s] [%s] [%s]", client_context.client.id,
+                                                               client_context.userid,
+                                                               client_context.bot.id,
+                                                               client_context.brain,
+                                                               sentence,
+                                                               response)

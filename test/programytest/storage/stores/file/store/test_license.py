@@ -2,7 +2,7 @@ import unittest
 import os
 import os.path
 
-from programy.storage.stores.file.store.license import FileLicenseStore
+from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.utils.license.keys import LicenseKeys

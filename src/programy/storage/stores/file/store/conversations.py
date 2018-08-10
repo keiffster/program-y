@@ -20,6 +20,7 @@ import shutil
 
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.conversation import ConversationStore
+import json
 
 
 class FileConversationStore(FileStore, ConversationStore):
@@ -34,15 +35,22 @@ class FileConversationStore(FileStore, ConversationStore):
     def _conversations_filename(self, storage_dir, clientid, userid, ext="conv"):
         return "%s%s%s_%s.%s"%(storage_dir, os.sep, clientid, userid, ext)
 
-    def store_conversation(self, clientid, userid, botid, brainid, depth, question, response):
+    def store_conversation(self, client_context, conversation):
         self._ensure_dir_exists(self._storage_engine.configuration.conversation_storage.dirs[0])
 
-        conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], clientid, userid)
+        conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
 
-        with open(conversation_filepath, "a+") as convo_file:
-            convo_file.write("[%s] [%s] [%s] [%s] [%s] [%s] [%s]\n"%(clientid, userid, botid, brainid, depth, question, response))
-            convo_file.flush ()
+        convo_json = conversation.to_json ()
+        json_text = json.dumps(convo_json, indent=4)
 
-    def load_conversation(self, clientid, userid):
-        raise NotImplementedError("load_conversation missing from Conversation Store")
+        with open(conversation_filepath, "w+") as convo_file:
+            convo_file.write(json_text)
 
+    def load_conversation(self, client_context, conversation):
+        conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
+
+        if self._file_exists(conversation_filepath):
+            with open(conversation_filepath, "r+") as convo_file:
+                json_text = convo_file.read()
+                json_data = json.loads(json_text)
+                conversation.from_json(json_data)

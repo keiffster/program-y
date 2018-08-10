@@ -65,8 +65,7 @@ class Brain(object):
         self._maps_collection = MapCollection()
 
         self._properties_collection = PropertiesCollection()
-        self._variables_collection = DefaultVariablesCollection()
-        self._defaults_collection = RegexTemplatesCollection()
+        self._default_variables_collection = DefaultVariablesCollection()
 
         self._preprocessors = PreProcessorCollection()
         self._postprocessors = PostProcessorCollection()
@@ -145,8 +144,8 @@ class Brain(object):
         return self._properties_collection
 
     @property
-    def variables(self):
-        return self._variables_collection
+    def default_variables(self):
+        return self._default_variables_collection
 
     @property
     def preprocessors(self):
@@ -220,7 +219,7 @@ class Brain(object):
         YLogger.info(self, "Loading binary brain from [%s]", binaries_configuration.binary_filename)
         try:
 
-            storage_engine = self.bot.client.storage_factory.storage_engine(binaries_configuration.storage)
+            storage_engine = self.bot.client.storage_factory.entity_storage_engine(binaries_configuration.storage)
             binaries_storage = storage_engine.binaries_storage()
             self._aiml_parser = binaries_storage.load_binary()
 
@@ -236,10 +235,10 @@ class Brain(object):
     def save_binary(self, binaries_configuration):
         # TODO MOve into BinariesManager
         try:
-            if self.bot.client.storage_factor.storage_engine_available(StorageFactory.BINARIES) is True:
+            if self.bot.client.storage_factor.entity_storage_engine_available(StorageFactory.BINARIES) is True:
                 YLogger.info(self, "Saving binary brain to [%s]", StorageFactory.BINARIES)
 
-                storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.BINARIES)
+                storage_engine = self.bot.client.storage_factory.entity_storage_engine(StorageFactory.BINARIES)
                 binaries_storage = storage_engine.binaries_storage()
                 binaries_storage.save_binary(self._aiml_parser)
 
@@ -310,9 +309,9 @@ class Brain(object):
         self._properties_collection.empty()
         self._properties_collection.load(self.bot.client.storage_factory)
 
-    def _load_variables(self):
-        self._variables_collection.empty()
-        self._variables_collection.load(self.bot.client.storage_factory)
+    def _load_default_variables(self):
+        self._default_variables_collection.empty()
+        self._default_variables_collection.load(self.bot.client.storage_factory)
 
     def _load_maps(self):
         self._maps_collection.empty()
@@ -361,7 +360,7 @@ class Brain(object):
         self._load_persons()
         self._load_person2s()
         self._load_properties()
-        self._load_variables()
+        self._load_default_variables()
         self._load_rdfs()
         self._load_sets()
         self._load_maps()
@@ -458,8 +457,8 @@ class Brain(object):
         return ""
 
     def load_regex_templates(self):
-        if self.bot.client.storage_factory.storage_engine_available(StorageFactory.REGEX_TEMPLATES) is True:
-            storage_engine = self.bot.client.storage_factory.storage_engine(StorageFactory.REGEX_TEMPLATES)
+        if self.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.REGEX_TEMPLATES) is True:
+            storage_engine = self.bot.client.storage_factory.entity_storage_engine(StorageFactory.REGEX_TEMPLATES)
             regex_store = storage_engine.regex_store()
             regex_store.load(self._regex_templates)
 

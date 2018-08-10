@@ -181,8 +181,8 @@ class BotClient(ResponseLogger):
         return client_args
 
     def load_license_keys(self):
-        if self.storage_factory.storage_engine_available(StorageFactory.LICENSE_KEYS) is True:
-            storage_engine = self.storage_factory.storage_engine(StorageFactory.LICENSE_KEYS)
+        if self.storage_factory.entity_storage_engine_available(StorageFactory.LICENSE_KEYS) is True:
+            storage_engine = self.storage_factory.entity_storage_engine(StorageFactory.LICENSE_KEYS)
             keys_store = storage_engine.license_store()
             keys_store.load(self._license_keys)
         else:

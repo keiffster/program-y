@@ -29,8 +29,8 @@ class TemplateNodeFactory(NodeFactory):
         return os.path.dirname(__file__) + os.sep + "template_nodes.conf"
 
     def load(self, storage_factory):
-        if storage_factory.storage_engine_available(StorageFactory.TEMPLATE_NODES) is True:
-            storage_engine = storage_factory.storage_engine(StorageFactory.TEMPLATE_NODES)
+        if storage_factory.entity_storage_engine_available(StorageFactory.TEMPLATE_NODES) is True:
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.TEMPLATE_NODES)
             template_store = storage_engine.template_nodes_store()
             template_store.load(self)
         else:

@@ -11,7 +11,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         config = FileStorageConfiguration()
         self.assertIsNotNone(config)
 
-        self.assertIsNotNone(config.category_storage)
+        self.assertIsNotNone(config.categories_storage)
         self.assertIsNotNone(config.learnf_storage)
 
         self.assertIsNotNone(config.conversation_storage)
@@ -52,8 +52,8 @@ class FileStorageConfigurationTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
-                files:
-                    category_storage:
+                config:
+                    categories_storage:
                       dirs: ./storage/aiml
                       subdirs: true
                       extension: aiml
@@ -210,8 +210,8 @@ class FileStorageConfigurationTests(unittest.TestCase):
         config = FileStorageConfiguration()
         config.load_config_section(yaml, file_config, ".")
 
-        self.assert_config(config.category_storage, dirs=["./storage/aiml"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
-        self.assert_config(config.learnf_storage, dirs=["./storage/aiml/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.categories_storage, dirs=["./storage/categories"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.learnf_storage, dirs=["./storage/categories/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.conversation_storage, dirs=["./storage/conversations"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
@@ -245,7 +245,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_config(config.preprocessors_storage, file="./storage/processing/preprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.postprocessors_storage, file="./storage/processing/postprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
 
-        self.assert_config(config.usergroups_storage, file="./storage/security/usergroups.txt", format="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.usergroups_storage, file="./storage/security/usergroups.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
 
     def test_initialise_without_config(self):
         yaml = YamlConfigurationFile()
@@ -259,8 +259,8 @@ class FileStorageConfigurationTests(unittest.TestCase):
         config = FileStorageConfiguration()
         config.load_config_section(yaml, file_config, ".")
 
-        self.assert_config(config.category_storage, dirs=["./storage/aiml"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
-        self.assert_config(config.learnf_storage, dirs=["./storage/aiml/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.categories_storage, dirs=["./storage/categories"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.learnf_storage, dirs=["./storage/categories/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.conversation_storage, dirs=["./storage/conversations"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
@@ -294,7 +294,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
         self.assert_config(config.preprocessors_storage, file="./storage/processing/preprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.postprocessors_storage, file="./storage/processing/postprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
 
-        self.assert_config(config.usergroups_storage, file="./storage/security/usergroups.txt", format="text", encoding="utf-8", delete_on_start=False)
+        self.assert_config(config.usergroups_storage, file="./storage/security/usergroups.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
 
     def test_create_storage_defaults(self):
         amap = {}
@@ -302,8 +302,8 @@ class FileStorageConfigurationTests(unittest.TestCase):
         config = FileStorageConfiguration()
         config._create_storage_defaults(amap)
 
-        self.assert_config(amap['categories_storage'], dirs=["./storage/aiml"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
-        self.assert_config(amap['learnf_storage'], dirs=["./storage/aiml/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(amap['categories_storage'], dirs=["./storage/categories"], extension="aiml", subdirs=True, format="xml", encoding="utf-8", delete_on_start=False)
+        self.assert_config(amap['learnf_storage'], dirs=["./storage/categories/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(amap['conversation_storage'], dirs=["./storage/conversations"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 

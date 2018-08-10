@@ -18,7 +18,7 @@ from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.maps import MapsStore
 from programy.storage.stores.nosql.mongo.dao.map import Map
 
-class MongoMapStore(MongoStore, MapsStore):
+class MongoMapsStore(MongoStore, MapsStore):
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)

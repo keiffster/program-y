@@ -14,53 +14,56 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.dialog.conversation import Conversation as Convo
 
 class Conversation(object):
 
-    def __init__(self, clientid, userid, botid, brainid, depth, question, response):
+    def __init__(self, client_context, conversation):
         self.id = None
 
-        self.clientid = clientid
-        self.userid = userid
-        self.botid = botid
-        self.brainid = brainid
-        self.depth = depth
+        if client_context is None:
+            self.clientid = None
+            self.userid = None
+            self.botid = None
+            self.brainid = None
+        else:
+            self.clientid = client_context.client.id
+            self.userid = client_context.userid
+            self.botid = client_context.bot.id
+            self.brainid = client_context.brain.id
 
-        self.question = question
-        self.response = response
+        self.conversation = conversation
 
     def __repr__(self):
         return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s', depth='%d', question='%s', response='%s')" % \
-               (self.id, self.clientid, self.userid, self.botid, self.brainid, self.depth, self.question,
-                self.response)
+               (self.id, self.clientid, self.userid, self.botid, self.brainid, self.depth)
 
     def to_document(self):
         document = {"clientid": self.clientid,
                     "userid": self.userid,
                     "botid": self.botid,
                     "brainid": self.brainid,
-                    "depth": self.depth,
-                    "question": self.question,
-                    "response": self.response}
+                    "conversation": self.conversation.to_json()}
         if self.id is not None:
             document['_id'] = self.id
         return document
 
     @staticmethod
-    def from_document(data):
-        conversation = Conversation(None, None, None, None, None, None, None)
+    def from_document(client_context, data):
+        conversation = Conversation(client_context, None)
         if '_id' in data:
             conversation.id = data['_id']
         if 'clientid' in data:
             conversation.clientid = data['clientid']
+        if 'userid' in data:
+            conversation.userid = data['userid']
         if 'botid' in data:
             conversation.botid = data['botid']
         if 'brainid' in data:
             conversation.brainid = data['brainid']
-        if 'depth' in data:
-            conversation.depth = data['depth']
-        if 'question' in data:
-            conversation.question = data['question']
-        if 'response' in data:
-            conversation.response = data['response']
+
+        if 'conversation' in data:
+            conversation.conversation = Convo(client_context)
+            conversation.conversation.from_json(data['conversation'])
+
         return conversation

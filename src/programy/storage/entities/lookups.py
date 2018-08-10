@@ -24,15 +24,6 @@ class LookupsStore(Store):
     def add_to_lookup(self, name, key, value):
         raise NotImplementedError("add_to_lookup missing from Lookups Store")
 
-    def remove_lookup(self, name):
-        raise NotImplementedError("remove_lookup missing from Lookups Store")
-
-    def remove_lookup_key(self, name, key):
-        raise NotImplementedError("remove_lookup_key missing from Lookups Store")
-
-    def get_lookup(self, name):
-        raise NotImplementedError("get_lookup missing from Lookups Store")
-
     def load_all(self, lookup_collection, subdir=True, set_ext=".txt"):
         raise NotImplementedError("load_all missing from Lookups Store")
 

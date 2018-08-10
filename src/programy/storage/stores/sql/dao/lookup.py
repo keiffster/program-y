@@ -20,15 +20,44 @@ from sqlalchemy import Column, Integer, String
 from programy.storage.stores.sql.base import Base
 
 
-class Lookup(Base):
-    __tablename__ = 'lookups'
+class Lookup(object):
 
     id = Column(Integer, primary_key=True)
 
-    name = Column(String)
     key = Column(String)
     value = Column(String)
 
+
+class Denormal(Base, Lookup):
+    __tablename__ = 'dernormals'
+
     def __repr__(self):
-        return "<Lookup(id='%d', name='%s', key='%s', value='%s')" % \
-               (self.id, self.name, self.key, self.value)
+        return "<Denormal(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+
+
+class Normal(Base, Lookup):
+    __tablename__ = 'normals'
+
+    def __repr__(self):
+        return "<Normal(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+
+
+class Person(Base, Lookup):
+    __tablename__ = 'persons'
+
+    def __repr__(self):
+        return "<Person(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+
+
+class Person2(Base, Lookup):
+    __tablename__ = 'person2s'
+
+    def __repr__(self):
+        return "<Person2(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+
+
+class Gender(Base, Lookup):
+    __tablename__ = 'genders'
+
+    def __repr__(self):
+        return "<Gender(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)

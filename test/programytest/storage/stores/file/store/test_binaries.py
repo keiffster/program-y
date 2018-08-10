@@ -5,7 +5,7 @@ import shutil
 from programy.storage.stores.file.store.binaries import FileBinariesStore
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
-
+import shutil
 
 class PretendAimlParser(object):
 
@@ -24,6 +24,10 @@ class FileBinariesStoreTests(unittest.TestCase):
 
     def test_save_load_binaries(self):
         config = FileStorageConfiguration()
+        tmpdir = os.path.dirname(__file__) + os.sep + "braintree"
+        tmpfile = tmpdir + os.sep + "braintree.bin"
+        config.binaries_storage._dirs = [tmpfile]
+        config.binaries_storage._has_single_file = True
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileBinariesStore(engine)
@@ -44,3 +48,5 @@ class FileBinariesStoreTests(unittest.TestCase):
 
         self.assertEquals(aiml_parser2._name, "pretend1")
 
+        shutil.rmtree(tmpdir)
+        self.assertFalse(os.path.exists(tmpdir))

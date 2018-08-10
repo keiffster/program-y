@@ -75,7 +75,7 @@ class StorageFactory(object):
             if config in self._storage_engines:
                 self._store_to_engine_map[store_name] = self._storage_engines[config]
             else:
-                print (config + "Not a valid storage engine name")
+                YLogger.error("%s is not a valid storage engine name", config)
 
     def storage_engine_available(self, name):
         return name in self._storage_engines

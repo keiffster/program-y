@@ -16,4 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 class NodesStore(object):
-    pass
+
+    def load(self, node_factory):
+        raise NotImplementedError()
