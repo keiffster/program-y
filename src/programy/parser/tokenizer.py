@@ -32,10 +32,13 @@ class CjkTokenizer(Tokenizer):
 
     @staticmethod
     def _is_chinese_word(word):
-        for ch in word:
-            if CjkTokenizer._is_chinese_char(ch):
-                return True
-        return False
+        if word is None:
+            return False
+        else:
+            for ch in word:
+                if CjkTokenizer._is_chinese_char(ch):
+                    return True
+            return False
 
     @staticmethod
     def _is_chinese_char(c):
@@ -75,13 +78,12 @@ class CjkTokenizer(Tokenizer):
                         words.append(last_word)
                         last_word = ''
                     words.append(ch)
+                elif ch == self.split_chars:
+                    if len(last_word) > 0:
+                        words.append(last_word)
+                        last_word = ''
                 else:
-                    if ch == self.split_chars:
-                        if len(last_word) > 0:
-                            words.append(last_word)
-                            last_word = ''
-                    else:
-                        last_word += ch
+                    last_word += ch
 
         if len(last_word) > 0:
             words.append(last_word)
@@ -90,12 +92,15 @@ class CjkTokenizer(Tokenizer):
     
     def words_to_texts(self, words):
         texts = ''
-
+        if words is None:
+            words = ''
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
             elif len(texts) > 0:
                 texts += ' ' + word
+            elif word is None:
+                pass
             else:
                 texts += word
 
@@ -113,3 +118,42 @@ class CjkTokenizer(Tokenizer):
         cjk_value2 = self.words_to_texts(self.texts_to_words(value2.upper()))
         return cjk_value1 == cjk_value2
 
+    @staticmethod
+    def test():
+        inputs = [
+            '你好！',
+            'X你好X',
+            'Hello你WorldOK的',
+            '200万元',
+            '#你好OK#',
+            '*HELLO*',
+            '*HELLO你好*',
+            'HELLO*你好*',
+            'HELLO*你好*NICE OK',
+        ]
+        outputs = [
+            ['你', '好', '！'],
+            ['X', '你', '好', 'X'],
+            ['Hello', '你', 'WorldOK', '的'],
+            ['200', '万', '元'],
+            ['#', '你', '好', 'OK', '#'],
+            ['*', 'HELLO', '*'],
+            ['*', 'HELLO', '你', '好', '*'],
+            ['HELLO', '*', '你', '好', '*'],
+            ['HELLO', '*', '你', '好', '*', 'NICE', 'OK'],
+        ]
+        token = CjkTokenizer()
+        assert (len(inputs) == len(outputs))
+        cases = len(inputs)
+        for c in range(cases):
+            input = inputs[c]
+            output = outputs[c]
+            result = token.texts_to_words(input)
+            if result == output:
+                print("<OK>     %-15s => %s " % (input, output))
+            else:
+                print("<FAILED> %-15s => %s " % (input, output))
+
+
+if __name__ == '__main__':
+    CjkTokenizer.test()

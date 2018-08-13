@@ -191,7 +191,7 @@ class PatternGraph(object):
 
             head_text = self.get_text_from_element(that_element)
             if head_text is not None:
-                current_node = self._parse_text(TextUtils.strip_whitespace(head_text), current_node)
+                current_node = self._parse_text(TextUtils.strip_all_punctuation(head_text), current_node)
 
             added_child = False
             for sub_element in that_element:
