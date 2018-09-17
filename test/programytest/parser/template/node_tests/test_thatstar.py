@@ -19,15 +19,15 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateThatStarNode()
-        self.assertEquals("THATSTAR", node.to_string())
+        self.assertEqual("THATSTAR", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateThatStarNode(3, 2)
-        self.assertEquals("THATSTAR question=3 sentence=2", node.to_string())
+        self.assertEqual("THATSTAR question=3 sentence=2", node.to_string())
 
     def test_to_str_star(self):
         node = TemplateThatStarNode(1, -1)
-        self.assertEquals("THATSTAR sentence=*", node.to_string())
+        self.assertEqual("THATSTAR sentence=*", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -70,8 +70,8 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEquals(1, node.question)
-        self.assertEquals(1, node.sentence)
+        self.assertEqual(1, node.question)
+        self.assertEqual(1, node.sentence)
 
     def test_node_no_defaults(self):
         root = TemplateNode()
@@ -84,8 +84,8 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEquals(3, node.question)
-        self.assertEquals(2, node.sentence)
+        self.assertEqual(3, node.question)
+        self.assertEqual(2, node.sentence)
 
     def test_node_no_star(self):
         root = TemplateNode()
@@ -163,4 +163,4 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

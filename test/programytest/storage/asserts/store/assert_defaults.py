@@ -1,4 +1,9 @@
 import unittest
+import os
+import os.path
+
+from programy.mappings.properties import DefaultVariablesCollection
+
 
 class DefaultStoreAsserts(unittest.TestCase):
 
@@ -12,16 +17,16 @@ class DefaultStoreAsserts(unittest.TestCase):
 
         new_defaults = store.get_default_values()
         self.assertTrue("name1" in new_defaults)
-        self.assertEquals("val1", new_defaults["name1"])
+        self.assertEqual("val1", new_defaults["name1"])
         self.assertTrue("name2" in new_defaults)
-        self.assertEquals("val2", new_defaults["name2"])
+        self.assertEqual("val2", new_defaults["name2"])
         self.assertTrue("name3" in new_defaults)
-        self.assertEquals("val3", new_defaults["name3"])
+        self.assertEqual("val3", new_defaults["name3"])
         self.assertFalse("name4" in new_defaults)
 
         store.empty()
         new_defaults = store.get_default_values()
-        self.assertEquals(0, len(new_defaults.keys()))
+        self.assertEqual(0, len(new_defaults.keys()))
 
     def assert_default_storage(self, store):
 
@@ -32,7 +37,7 @@ class DefaultStoreAsserts(unittest.TestCase):
         new_defaults = store.get_default_values()
 
         self.assertTrue("name1" in new_defaults)
-        self.assertEquals("val1", new_defaults["name1"])
+        self.assertEqual("val1", new_defaults["name1"])
         self.assertFalse("name2" in new_defaults)
 
         store.add_default("name2", "val2")
@@ -40,9 +45,9 @@ class DefaultStoreAsserts(unittest.TestCase):
 
         new_defaults = store.get_default_values()
         self.assertTrue("name1" in new_defaults)
-        self.assertEquals("val1", new_defaults["name1"])
+        self.assertEqual("val1", new_defaults["name1"])
         self.assertTrue("name2" in new_defaults)
-        self.assertEquals("val2", new_defaults["name2"])
+        self.assertEqual("val2", new_defaults["name2"])
         self.assertFalse("name3" in new_defaults)
 
     def assert_empty_defaults(self, store):
@@ -57,13 +62,23 @@ class DefaultStoreAsserts(unittest.TestCase):
 
         new_defaults = store.get_default_values()
         self.assertTrue("name1" in new_defaults)
-        self.assertEquals("val1", new_defaults["name1"])
+        self.assertEqual("val1", new_defaults["name1"])
         new_defaults = store.get_default_values()
         self.assertTrue("name2" in new_defaults)
-        self.assertEquals("val2", new_defaults["name2"])
+        self.assertEqual("val2", new_defaults["name2"])
 
-        store.empty_defaults()
+        store.empty()
 
         new_defaults = store.get_default_values()
         self.assertFalse("name1" in new_defaults)
+
+    def assert_upload_from_file(self, store):
+        
+        store.empty()
+        
+        default_collection = DefaultVariablesCollection()
+
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "lookups" + os.sep + "text" + os.sep + "defaults.txt")
+
+        store.load(default_collection)
 

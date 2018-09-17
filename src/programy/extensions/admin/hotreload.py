@@ -66,7 +66,7 @@ class HotReloadAdminExtension(Extension):
     @staticmethod
     def reload_defaults(client_context):
         YLogger.debug(client_context, "Hot reloading Defaults")
-        client_context.brain._load_variables()
+        client_context.brain._load_default_variables()
         return 'HOTRELOAD OK'
 
     @staticmethod

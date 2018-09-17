@@ -14,40 +14,54 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.entities.store import Store
 
 
 class MongoStore(Store):
 
+    MONGO = "mongo"
+
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
+
+    def store_name(self):
+        return MongoStore.MONGO
 
     @property
     def storage_engine(self):
         return self._storage_engine
 
     def drop(self):
+        YLogger.info(self, "Dropping storage [%s]", self.store_name())
         self.collection().drop ()
 
     def commit(self):
-        pass
+        YLogger.info(self, "Commit collection [%s] not supported on Mongo", self.collection_name())
+
+    def rollback(self):
+        YLogger.info(self, "Rollback collection [%s] not supported on Mongo", self.collection_name())
 
     def collection_name(self):
-        return None
+        raise NotImplementedError()
 
     def collection(self):
         return self._storage_engine._database[self.collection_name()]
 
     def empty(self):
+        YLogger.info(self, "Emptying collection [%s]", self.collection_name())
         collection = self.collection()
-        collection.remove()
+        collection.delete_many({})
 
     def add_document(self, document):
+        YLogger.debug(self, "Adding document to collection [%s]", self.collection_name())
         collection = self.collection()
         result = collection.insert_one(document.to_document())
         document.id = result.inserted_id
-        return document
+        return True
 
     def replace_document(self, document):
+        YLogger.debug(self, "Replacing document in collection [%s]", self.collection_name())
         collection = self.collection()
         collection.replace_one({'_id': document.id}, document.to_document())
+        return True

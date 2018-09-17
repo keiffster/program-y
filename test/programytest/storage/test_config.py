@@ -131,47 +131,47 @@ class StorageConfigurationTests(unittest.TestCase):
 
     def assert_entity_store(self, storage_config):
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.USERS], 'sqlite')
-        self.assertEquals(storage_config.entity_store[StorageFactory.LINKED_ACCOUNTS], 'sqlite')
-        self.assertEquals(storage_config.entity_store[StorageFactory.LINKS], 'sqlite')
+        self.assertEqual(storage_config.entity_store[StorageFactory.USERS], 'sqlite')
+        self.assertEqual(storage_config.entity_store[StorageFactory.LINKED_ACCOUNTS], 'sqlite')
+        self.assertEqual(storage_config.entity_store[StorageFactory.LINKS], 'sqlite')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.CATEGORIES], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.ERRORS], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.DUPLICATES], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.LEARNF], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.CATEGORIES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.ERRORS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.DUPLICATES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.LEARNF], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.CONVERSATIONS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.CONVERSATIONS], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.MAPS], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.SETS], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.RDF], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.MAPS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.SETS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.RDF], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.DENORMAL], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.NORMAL], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.GENDER], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.PERSON], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.PERSON2], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.REGEX_TEMPLATES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.DENORMAL], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.NORMAL], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.GENDER], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.PERSON], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.PERSON2], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.REGEX_TEMPLATES], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.VARIABLES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.VARIABLES], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.TWITTER], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.TWITTER], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.SPELLING_CORPUS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.SPELLING_CORPUS], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.LICENSE_KEYS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.LICENSE_KEYS], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.TEMPLATE_NODES], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.PATTERN_NODES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.TEMPLATE_NODES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.PATTERN_NODES], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.BINARIES], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.BRAINTREE], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.BINARIES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.BRAINTREE], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.PREPROCESSORS], 'file')
-        self.assertEquals(storage_config.entity_store[StorageFactory.POSTPROCESSORS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.PREPROCESSORS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.POSTPROCESSORS], 'file')
 
-        self.assertEquals(storage_config.entity_store[StorageFactory.USERGROUPS], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.USERGROUPS], 'file')
 
     def assert_storage_configurations(self, storage_config):
 

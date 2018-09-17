@@ -46,7 +46,5 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
         resolved = learn_node.resolve(self._client_context)
         self.assertEqual(resolved, "")
 
-        #TODO Add checks to ensure learnf data is created in storage
-
         response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
         self.assertEqual("HIYA", response)

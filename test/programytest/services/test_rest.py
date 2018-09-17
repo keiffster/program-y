@@ -48,7 +48,7 @@ class RestServiceTests(unittest.TestCase):
 
         service = GenericRESTService(config=config)
         self.assertIsNotNone(service)
-        self.assertEquals(service.method, "GET")
+        self.assertEqual(service.method, "GET")
 
     def test_ask_no_host(self):
         config = BrainServiceConfiguration("rest")
@@ -65,7 +65,7 @@ class RestServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("Test REST response", response)
+        self.assertEqual("Test REST response", response)
 
     def test_ask_question_post(self):
         config = BrainServiceConfiguration("rest")
@@ -76,7 +76,7 @@ class RestServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("Post REST response", response)
+        self.assertEqual("Post REST response", response)
 
     def test_ask_question_delete(self):
         config = BrainServiceConfiguration("rest")
@@ -86,7 +86,7 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI())
         self.assertIsNotNone(service)
 
-        self.assertEquals("", service.ask_question(self._client_context, "what is a cat"))
+        self.assertEqual("", service.ask_question(self._client_context, "what is a cat"))
 
     def test_ask_question_error(self):
         config = BrainServiceConfiguration("rest")
@@ -96,4 +96,4 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config, api=MockRestAPI(500, "Bad thing happened!"))
         self.assertIsNotNone(service)
 
-        self.assertEquals("", service.ask_question(self._client_context, "what is a cat"))
+        self.assertEqual("", service.ask_question(self._client_context, "what is a cat"))

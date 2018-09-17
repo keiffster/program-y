@@ -18,8 +18,13 @@ from programy.storage.entities.store import Store
 
 class RedisStore(Store):
 
+    REDIS = "redis"
+
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
+
+    def store_name(self):
+        return RedisStore.REDIS
 
     @property
     def storage_engine(self):

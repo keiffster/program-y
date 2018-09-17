@@ -16,7 +16,7 @@ class FileRDFStoreTests(RDFStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileRDFStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()

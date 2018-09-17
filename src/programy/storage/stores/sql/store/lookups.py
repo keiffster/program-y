@@ -14,6 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.lookups import LookupsStore
 from programy.storage.stores.sql.dao.lookup import Denormal
@@ -21,22 +23,66 @@ from programy.storage.stores.sql.dao.lookup import Normal
 from programy.storage.stores.sql.dao.lookup import Person
 from programy.storage.stores.sql.dao.lookup import Person2
 from programy.storage.stores.sql.dao.lookup import Gender
+from programy.storage.entities.store import Store
+from programy.mappings.base import DoubleStringPatternSplitCollection
 
 
 class SQLLookupsStore(SQLStore, LookupsStore):
 
-    def load_all(self, lookup_collection):
-        lookup_collection.empty()
+    def load_all(self, collection):
+        self.load(collection)
+
+    def load(self, collection):
         db_lookups = self._get_all()
         for db_lookup in db_lookups:
-            lookup_collection.add_to_lookup(db_lookup.key,  db_lookup.value)
+            key, value = DoubleStringPatternSplitCollection.process_key_value(db_lookup.key, db_lookup.value)
+            collection.add_to_lookup(key, value)
+
+    def _get_all(self):
+        raise NotImplementedError()
+
+    def _get_entity(self, key, value):
+        raise NotImplementedError()
+
+    def add(self, key, value):
+        lookup = self._get_entity(key=key, value=value)
+        self._storage_engine.session.add(lookup)
+        return True
 
     def split_into_fields(self, line):
-        pass
+        return DoubleStringPatternSplitCollection.split_line_by_pattern(line, DoubleStringPatternSplitCollection.RE_OF_SPLIT_PATTERN)
 
-    def process_line(self, name, fields):
-        pass
+    def process_line(self, fields, verbose=False):
+        if fields and len(fields) == 2:
+            result = self.add(fields[0].upper(), fields[1].upper())
+            if verbose is True:
+                print(fields[0].upper(), fields[1].upper())
+            return result
+        return False
 
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        count = 0
+        success = 0
+
+        if os.path.exists(filename):
+            try:
+                with open(filename, "r") as lookup_file:
+                    for line in lookup_file:
+                        line = line.strip()
+                        if line:
+                            fields = self.split_into_fields(line)
+                            if self.process_line(fields, verbose) is True:
+                                success += 1
+                        count += 1
+
+                if commit is True:
+                    self.commit()
+
+            except Exception as e:
+                YLogger.exception(None, "Failed to upload lookups from file [%s]", e, filename)
+
+        return count, success
 
 class SQLDenormalStore(SQLLookupsStore):
 
@@ -45,6 +91,9 @@ class SQLDenormalStore(SQLLookupsStore):
 
     def _get_all(self):
         return self._storage_engine.session.query(Denormal)
+
+    def _get_entity(self, key, value):
+        return Denormal(key=key, value=value)
 
 
 class SQLNormalStore(SQLLookupsStore):
@@ -55,6 +104,9 @@ class SQLNormalStore(SQLLookupsStore):
     def _get_all(self):
         return self._storage_engine.session.query(Normal)
 
+    def _get_entity(self, key, value):
+        return Normal(key=key, value=value)
+
 
 class SQLGenderStore(SQLLookupsStore):
 
@@ -63,6 +115,9 @@ class SQLGenderStore(SQLLookupsStore):
 
     def _get_all(self):
         return self._storage_engine.session.query(Gender)
+
+    def _get_entity(self, key, value):
+        return Gender(key=key, value=value)
 
 
 class SQLPersonStore(SQLLookupsStore):
@@ -73,6 +128,9 @@ class SQLPersonStore(SQLLookupsStore):
     def _get_all(self):
         return self._storage_engine.session.query(Person)
 
+    def _get_entity(self, key, value):
+        return Person(key=key, value=value)
+
 
 class SQLPerson2Store(SQLLookupsStore):
 
@@ -81,3 +139,6 @@ class SQLPerson2Store(SQLLookupsStore):
 
     def _get_all(self):
         return self._storage_engine.session.query(Person2)
+
+    def _get_entity(self, key, value):
+        return Person2(key=key, value=value)

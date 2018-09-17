@@ -17,7 +17,7 @@ class ConversationManagerTests(unittest.TestCase):
 
         self.assertEqual(mgr.configuration, config)
         self.assertIsNone(mgr.storage)
-        self.assertEquals(mgr.conversations, {})
+        self.assertEqual(mgr.conversations, {})
 
     def test_initialise(self):
         config = BotConversationsConfiguration()
@@ -33,8 +33,8 @@ class ConversationManagerTests(unittest.TestCase):
         config = BotConversationsConfiguration()
         mgr = ConversationManager(config)
 
-        #if os.path.exists("./storage/conversations"):
-        #    shutil.rmtree("./storage/conversations")
+        if os.path.exists("./storage/conversations"):
+            shutil.rmtree("./storage/conversations")
 
         client = TestClient()
         client.add_conversation_store("./storage/conversations")
@@ -60,16 +60,16 @@ class ConversationManagerTests(unittest.TestCase):
         conversation.record_dialog(question3)
         mgr.save_conversation(client_context)
 
-        self.assertEquals(len(mgr.conversations), 1)
+        self.assertEqual(len(mgr.conversations), 1)
         mgr.empty()
-        self.assertEquals(len(mgr.conversations), 0)
+        self.assertEqual(len(mgr.conversations), 0)
 
         conversation = mgr.get_conversation(client_context)
-        self.assertEquals(len(mgr.conversations), 1)
+        self.assertEqual(len(mgr.conversations), 1)
 
         self.assertIsNotNone(conversation)
-        self.assertEquals(len(conversation.questions), 3)
+        self.assertEqual(len(conversation.questions), 3)
 
-        #if os.path.exists("./storage/conversations"):
-        #    shutil.rmtree("./storage/conversations")
+        if os.path.exists("./storage/conversations"):
+            shutil.rmtree("./storage/conversations")
 

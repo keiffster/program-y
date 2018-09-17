@@ -1,4 +1,4 @@
-from programytest.storage.asserts.store.assert_lookups import LookupStoreAsserts
+from programytest.storage.asserts.store.assert_normals import NormalsStoreAsserts
 import os
 import os.path
 import re
@@ -10,14 +10,14 @@ from programy.mappings.normal import NormalCollection
 from programy.storage.stores.file.config import FileStoreConfiguration
 
 
-class FileNormalStoreTests(LookupStoreAsserts):
+class FileNormalStoreTests(NormalsStoreAsserts):
 
     def test_initialise(self):
         config = FileStorageConfiguration()
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileNormalStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
@@ -30,5 +30,5 @@ class FileNormalStoreTests(LookupStoreAsserts):
         
         store.load(normal_collection)
 
-        self.assertEquals(normal_collection.normalise(".COM"), [re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '])
+        self.assertEqual(normal_collection.normalise(".COM"), [re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '])
         self.assertEqual(normal_collection.normalise_string("keith.com"), "keith DOT COM")

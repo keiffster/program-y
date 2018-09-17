@@ -36,7 +36,7 @@ class Person2Tests(unittest.TestCase):
 
         pattern = collection.person(" I am ")
         self.assertIsNotNone(pattern)
-        self.assertEquals(" HE OR SHE IS ", pattern[1])
+        self.assertEqual(" HE OR SHE IS ", pattern[1])
 
     def test_load(self):
         storage_factory = StorageFactory()

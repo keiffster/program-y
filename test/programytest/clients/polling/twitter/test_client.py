@@ -95,15 +95,15 @@ class TwitterBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), TwitterConfiguration)
-        self.assertEquals("ProgramY AIML2.0 Twitter Client", client.get_description())
+        self.assertEqual("ProgramY AIML2.0 Twitter Client", client.get_description())
 
-        self.assertEquals("username", client._username)
-        self.assertEquals(8, client._username_len)
+        self.assertEqual("username", client._username)
+        self.assertEqual(8, client._username_len)
 
-        self.assertEquals("consumer_key", client._consumer_key)
-        self.assertEquals("consumer_secret", client._consumer_secret)
-        self.assertEquals("access_token", client._access_token)
-        self.assertEquals("access_secret", client._access_token_secret)
+        self.assertEqual("consumer_key", client._consumer_key)
+        self.assertEqual("consumer_secret", client._consumer_secret)
+        self.assertEqual("access_token", client._access_token)
+        self.assertEqual("access_secret", client._access_token_secret)
 
     #############################################################################################
     # Direct Messages
@@ -117,7 +117,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._mock_direct_messages = [MockMessage(1, 1, "Message1")]
 
         messages = client._get_direct_messages(-1)
-        self.assertEquals(1, len(messages))
+        self.assertEqual(1, len(messages))
 
     def test_get_direct_messages_previous(self):
         arguments = MockArgumentParser()
@@ -128,7 +128,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._mock_direct_messages = [MockMessage(31, 1, "Message1")]
 
         messages = client._get_direct_messages(30)
-        self.assertEquals(1, len(messages))
+        self.assertEqual(1, len(messages))
 
     def test_process_direct_message_question(self):
         arguments = MockArgumentParser()
@@ -166,7 +166,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._unfollow_non_followers(friends, followers_ids)
 
-        self.assertEquals(1, len(client._api._destroyed_friendships))
+        self.assertEqual(1, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
 
     def test_follow_new_followers(self):
@@ -184,7 +184,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._follow_new_followers(followers, friends)
 
-        self.assertEquals(1, len(client._api._messages_sent_to))
+        self.assertEqual(1, len(client._api._messages_sent_to))
         self.assertTrue(bool(3 in client._api._messages_sent_to))
 
     def test_process_followers(self):
@@ -206,10 +206,10 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._process_followers()
 
-        self.assertEquals(2, len(client._api._destroyed_friendships))
+        self.assertEqual(2, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
         self.assertTrue(bool(4 in client._api._destroyed_friendships))
-        self.assertEquals(1, len(client._api._messages_sent_to))
+        self.assertEqual(1, len(client._api._messages_sent_to))
         self.assertTrue(bool(1 in client._api._messages_sent_to))
 
     #############################################################################################
@@ -246,7 +246,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._username = "keiffster"
         client._username_len = 9
 
-        self.assertEquals("Hello", client._get_question_from_text("@keiffster Hello"))
+        self.assertEqual("Hello", client._get_question_from_text("@keiffster Hello"))
         self.assertIsNone(client._get_question_from_text("keiffster Hello"))
         self.assertIsNone(client._get_question_from_text("Hello"))
 
@@ -323,11 +323,11 @@ class TwitterBotClientTests(unittest.TestCase):
         client.storage_factory._storage_engines[StorageFactory.TWITTER] = storage_engine
         client.storage_factory._store_to_engine_map[StorageFactory.TWITTER] = storage_engine
 
-        client._store_last_message_ids(666, 667)
+        client._store_last_message_ids('666', '667')
 
         ids = client._get_last_message_ids()
-        self.assertEquals(ids[0], 666)
-        self.assertEquals(ids[1], 667)
+        self.assertEqual(ids[0], '666')
+        self.assertEqual(ids[1], '667')
 
     #############################################################################################
     # Execution

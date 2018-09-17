@@ -25,10 +25,10 @@ class BotConversationsConfigurationTests(unittest.TestCase):
         convo_config = BotConversationsConfiguration()
         convo_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals(convo_config.section_name, "conversations")
+        self.assertEqual(convo_config.section_name, "conversations")
 
-        self.assertEquals(666, convo_config.max_histories)
-        self.assertEquals("topic1", convo_config.initial_topic)
+        self.assertEqual(666, convo_config.max_histories)
+        self.assertEqual("topic1", convo_config.initial_topic)
         self.assertTrue(convo_config.restore_last_topic)
         self.assertTrue(convo_config.multi_client)
 
@@ -45,10 +45,10 @@ class BotConversationsConfigurationTests(unittest.TestCase):
         convo_config = BotConversationsConfiguration()
         convo_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals(convo_config.section_name, "conversations")
+        self.assertEqual(convo_config.section_name, "conversations")
 
-        self.assertEquals(100, convo_config.max_histories)
-        self.assertEquals("*", convo_config.initial_topic)
+        self.assertEqual(100, convo_config.max_histories)
+        self.assertEqual("*", convo_config.initial_topic)
         self.assertFalse(convo_config.restore_last_topic)
         self.assertFalse(convo_config.multi_client)
 
@@ -64,9 +64,9 @@ class BotConversationsConfigurationTests(unittest.TestCase):
         convo_config = BotConversationsConfiguration()
         convo_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals(convo_config.section_name, "conversations")
+        self.assertEqual(convo_config.section_name, "conversations")
 
-        self.assertEquals(100, convo_config.max_histories)
-        self.assertEquals("*", convo_config.initial_topic)
+        self.assertEqual(100, convo_config.max_histories)
+        self.assertEqual("*", convo_config.initial_topic)
         self.assertFalse(convo_config.restore_last_topic)
         self.assertFalse(convo_config.multi_client)

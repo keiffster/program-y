@@ -26,5 +26,5 @@ class ConversationRedisStorageTests(unittest.TestCase):
         self.assertIsNotNone(conversation2)
         self.assertIsNotNone(conversation2.properties)
 
-        self.assertEquals(conversation1.properties, conversation2.properties)
+        self.assertEqual(conversation1.properties, conversation2.properties)
 

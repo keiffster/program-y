@@ -15,7 +15,7 @@ class FileVariablesStoreTests(VariablesStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileVariablesStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_variables_storage(self):
         config = FileStorageConfiguration()

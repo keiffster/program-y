@@ -27,4 +27,4 @@ class TemplateGraphSearchTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("https://www.google.co.uk/search?q=keith+sterling", result)
+        self.assertEqual("https://www.google.co.uk/search?q=keith+sterling", result)

@@ -19,7 +19,7 @@ from programy.storage.entities.category import CategoryStore
 from programy.storage.stores.sql.dao.category import Category
 
 
-class SQLCategoryStore(SQLStore, CategoryStore):
+class SQLCategoryStore(CategoryStore, SQLStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
@@ -33,18 +33,25 @@ class SQLCategoryStore(SQLStore, CategoryStore):
     def store_category(self, groupid, userid, topic, that, pattern, template):
         category = Category(groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)
         self._storage_engine.session.add(category)
-        return category
+        return True
 
     def load_all(self, parser):
         categories = self._storage_engine.session.query(Category)
         for category in categories:
-            self._load_category(category, parser)
+            self._load_category(category.groupid,
+                                category.pattern.strip(),
+                                category.topic.strip(),
+                                category.that.strip(),
+                                category.template.strip(),
+                                parser)
 
     def load_categories(self, groupid, parser):
         categories = self._storage_engine.session.query(Category).filter(Category.groupid==groupid)
         for category in categories:
-            self._load_category(category, parser)
+            self._load_category(category.groupid,
+                                category.pattern.strip(),
+                                category.topic.strip(),
+                                category.that.strip(),
+                                category.template.strip(),
+                                parser)
 
-    def _load_category(self, category, parser):
-        parser.parse_csv_line({"groupid": category.groupid, "userid": category.userid, "topic": category.topic,
-                               "that": category.that, "pattern": category.pattern, "template": category.template})

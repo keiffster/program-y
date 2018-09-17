@@ -45,7 +45,7 @@ class DefaultBrainSelectorTests(unittest.TestCase):
         brain2 = unittest.mock.Mock()
 
         brains = {"one": brain1, "two": brain2}
-        self.assertEquals(brain1, selector.select_brain(brains))
+        self.assertEqual(brain1, selector.select_brain(brains))
 
 
 class BrainFactoryTests(unittest.TestCase):
@@ -237,7 +237,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("", bot.get_default_response(self._client_context))
+        self.assertEqual("", bot.get_default_response(self._client_context))
 
     def test_get_default_response_default_response_only(self):
 
@@ -250,7 +250,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_default_response(self._client_context))
+        self.assertEqual("Default response!", bot.get_default_response(self._client_context))
 
     def test_get_default_response_default_response_srai_no_match(self):
 
@@ -264,7 +264,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_default_response(self._client_context))
+        self.assertEqual("Default response!", bot.get_default_response(self._client_context))
 
     def test_get_default_response_default_response_srai_match(self):
 
@@ -285,7 +285,7 @@ class BotTests(unittest.TestCase):
 
         response = bot.get_default_response(client_context2)
         self.assertIsNotNone(response)
-        self.assertEquals("Y DEFAULT RESPONSE", response)
+        self.assertEqual("Y DEFAULT RESPONSE", response)
 
     ############################
 
@@ -298,7 +298,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Hello", bot.get_initial_question(self._client_context))
+        self.assertEqual("Hello", bot.get_initial_question(self._client_context))
 
     def test_get_initial_question_initial_question_only(self):
 
@@ -311,7 +311,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_initial_question(self._client_context))
+        self.assertEqual("Default response!", bot.get_initial_question(self._client_context))
 
     def test_get_initial_question_initial_question_srai_no_match(self):
 
@@ -325,7 +325,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_initial_question(self._client_context))
+        self.assertEqual("Default response!", bot.get_initial_question(self._client_context))
 
     def test_get_initial_question_initial_question_srai_match(self):
 
@@ -341,7 +341,7 @@ class BotTests(unittest.TestCase):
         client_context2._brain = MockBrain(bot, bot.configuration.configurations[0])
         client_context2._brain._response = "Y DEFAULT RESPONSE"
 
-        self.assertEquals("Y DEFAULT RESPONSE", bot.get_initial_question(client_context2))
+        self.assertEqual("Y DEFAULT RESPONSE", bot.get_initial_question(client_context2))
 
     ###################
 
@@ -354,7 +354,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Bye!", bot.get_exit_response(self._client_context))
+        self.assertEqual("Bye!", bot.get_exit_response(self._client_context))
 
     def test_get_exit_response_exit_response_only(self):
 
@@ -367,7 +367,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_exit_response(self._client_context))
+        self.assertEqual("Default response!", bot.get_exit_response(self._client_context))
 
     def test_get_exit_response_exit_response_srai_no_match(self):
 
@@ -381,7 +381,7 @@ class BotTests(unittest.TestCase):
         bot = Bot(bot_config, client)
         self.assertIsNotNone(bot)
 
-        self.assertEquals("Default response!", bot.get_exit_response(self._client_context))
+        self.assertEqual("Default response!", bot.get_exit_response(self._client_context))
 
     def test_get_exit_response_exit_response_srai_match(self):
 
@@ -399,4 +399,4 @@ class BotTests(unittest.TestCase):
         client_context2._brain = MockBrain(bot, bot.configuration.configurations[0])
         client_context2._brain._response = "Y DEFAULT RESPONSE"
 
-        self.assertEquals("Y DEFAULT RESPONSE", bot.get_exit_response(client_context2))
+        self.assertEqual("Y DEFAULT RESPONSE", bot.get_exit_response(client_context2))

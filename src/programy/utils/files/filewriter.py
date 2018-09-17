@@ -21,8 +21,6 @@ import csv
 import os
 
 
-# TODO Remove this and move to storage
-
 class TextFile(object):
 
     def __init__(self, filename, mode="a", encoding="utf-8"):

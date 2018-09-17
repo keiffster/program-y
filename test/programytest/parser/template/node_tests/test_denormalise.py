@@ -53,7 +53,7 @@ class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -62,4 +62,4 @@ class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

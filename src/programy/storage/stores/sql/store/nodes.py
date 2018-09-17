@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
@@ -21,6 +22,7 @@ from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.nodes import NodesStore
 from programy.storage.stores.sql.dao.node import PatternNode
 from programy.storage.stores.sql.dao.node import TemplateNode
+from programy.storage.entities.store import Store
 
 
 class SQLNodesStore(SQLStore, NodesStore):
@@ -34,7 +36,46 @@ class SQLNodesStore(SQLStore, NodesStore):
             try:
                 node_factory.add_node(node.name, ClassLoader.instantiate_class(node.node_class))
             except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, node.node_class), e)
+                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]", e, node_factory.type, node.node_class)
+
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        count = 0
+        success = 0
+
+        if os.path.exists(filename):
+
+            try:
+                with open(filename, "r", encoding="utf-8") as file:
+                    for line in file:
+                        if self._process_config_line(line, verbose) is True:
+                            success += 1
+                        count += 1
+
+                if commit is True:
+                    self.commit()
+
+            except FileNotFoundError:
+                YLogger.error(self, "File not found [%s]", filename)
+
+        return count, success
+
+    def _process_config_line(self, line, verbose=False):
+        line = line.strip()
+        if line:
+            if line.startswith('#') is False:
+                splits = line.split("=")
+                node_name = splits[0].strip()
+                class_name = splits[1].strip()
+                node = self._get_entity(node_name, class_name)
+                self.storage_engine.session.add(node)
+                if verbose is True:
+                    print("[%s] = [%s]"%(node_name, class_name))
+                return True
+        return False
+
+    def _get_entity(self, name, classname):
+        raise NotImplementedError()
 
 
 class SQLPatternNodesStore(SQLNodesStore, NodesStore):
@@ -45,6 +86,9 @@ class SQLPatternNodesStore(SQLNodesStore, NodesStore):
     def get_all_nodes(self):
         return self._storage_engine.session.query(PatternNode)
 
+    def _get_entity(self, name, classname):
+        return PatternNode(name=name, node_class=classname)
+
 
 class SQLTemplateNodesStore(SQLNodesStore, NodesStore):
 
@@ -54,3 +98,5 @@ class SQLTemplateNodesStore(SQLNodesStore, NodesStore):
     def get_all_nodes(self):
         return self._storage_engine.session.query(TemplateNode)
 
+    def _get_entity(self, name, classname):
+        return TemplateNode(name=name, node_class=classname)

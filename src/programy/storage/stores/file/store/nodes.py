@@ -33,14 +33,16 @@ class FileNodeStore(FileStore, NodesStore):
         try:
             with open(filename, "r", encoding="utf-8") as file:
                 for line in file:
-                    self.process_config_line(node_factory, line)
+                    line = line.strip()
+                    if line:
+                        self.process_config_line(node_factory, line, filename)
         except FileNotFoundError:
             YLogger.error(self, "File not found [%s]", filename)
 
         return count
 
-    def process_config_line(self, node_factory, line):
-        if self.valid_config_line(line):
+    def process_config_line(self, node_factory, line, filename):
+        if self.valid_config_line(line, filename):
             splits = line.split("=")
             node_name = splits[0].strip()
             if node_name in node_factory.nodes:
@@ -53,7 +55,7 @@ class FileNodeStore(FileStore, NodesStore):
             except Exception as e:
                 YLogger.exception(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, class_name), e)
 
-    def valid_config_line(self, line):
+    def valid_config_line(self, line, filename):
 
         if not line:
             return False
@@ -62,7 +64,7 @@ class FileNodeStore(FileStore, NodesStore):
             return False
 
         if "=" not in line:
-            YLogger.error(self, "Config line missing '=' [%s]", line)
+            YLogger.error(self, "Config line missing '=' [%s] in [%s]", line, filename)
             return False
 
         return True

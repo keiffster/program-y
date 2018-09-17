@@ -131,6 +131,8 @@ class DoubleStringPatternSplitCollection(BaseCollection):
             return None
 
     def add_to_lookup(self, index, pattern):
+        if index in self._pairs:
+            YLogger.error(self, "%s = %s already exists in collection", index, pattern)
         self._pairs[index] = pattern
 
     def replace_by_pattern(self, replacable):

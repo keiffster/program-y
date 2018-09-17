@@ -24,14 +24,14 @@ class FileStoreTests(unittest.TestCase):
         config = FileStorageConfiguration()
         engine = FileStorageEngine(config)
         store = FileStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_file_path_operations(self):
-        self.assertEquals("/temp", FileStore._get_dir_from_path("/temp/files.txt"))
-        self.assertEquals("/temp/files", FileStore._get_dir_from_path("/temp/files/files.txt"))
-        self.assertEquals("./temp", FileStore._get_dir_from_path("./temp/files.txt"))
-        self.assertEquals(".", FileStore._get_dir_from_path("./files.txt"))
-        self.assertEquals("", FileStore._get_dir_from_path("files.txt"))
+        self.assertEqual("/temp", FileStore._get_dir_from_path("/temp/files.txt"))
+        self.assertEqual("/temp/files", FileStore._get_dir_from_path("/temp/files/files.txt"))
+        self.assertEqual("./temp", FileStore._get_dir_from_path("./temp/files.txt"))
+        self.assertEqual(".", FileStore._get_dir_from_path("./files.txt"))
+        self.assertEqual("", FileStore._get_dir_from_path("files.txt"))
 
     def test_ensure_dir_exists(self):
         config = FileStorageConfiguration()

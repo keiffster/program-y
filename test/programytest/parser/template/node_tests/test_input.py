@@ -19,11 +19,11 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateInputNode()
-        self.assertEquals("INPUT", node.to_string())
+        self.assertEqual("INPUT", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateInputNode(index=2)
-        self.assertEquals("INPUT index=2", node.to_string())
+        self.assertEqual("INPUT index=2", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -135,4 +135,4 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
@@ -43,14 +44,23 @@ class FileConversationStore(FileStore, ConversationStore):
         convo_json = conversation.to_json ()
         json_text = json.dumps(convo_json, indent=4)
 
-        with open(conversation_filepath, "w+") as convo_file:
-            convo_file.write(json_text)
+        try:
+            with open(conversation_filepath, "w+") as convo_file:
+                convo_file.write(json_text)
+
+        except Exception as excep:
+           YLogger.exception(self, "Failed to write conversation file [%s]", excep, conversation_filepath)
+
 
     def load_conversation(self, client_context, conversation):
         conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
 
         if self._file_exists(conversation_filepath):
-            with open(conversation_filepath, "r+") as convo_file:
-                json_text = convo_file.read()
-                json_data = json.loads(json_text)
-                conversation.from_json(json_data)
+            try:
+                with open(conversation_filepath, "r+") as convo_file:
+                    json_text = convo_file.read()
+                    json_data = json.loads(json_text)
+                    conversation.from_json(json_data)
+
+            except Exception as excep:
+               YLogger.exception(self, "Failed to read conversation file [%s]", excep, conversation_filepath)

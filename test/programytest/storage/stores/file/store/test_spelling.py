@@ -15,7 +15,7 @@ class FileSpellingStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileSpellingStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_spelling(self):
         config = FileStorageConfiguration()
@@ -29,4 +29,4 @@ class FileSpellingStoreTests(unittest.TestCase):
         spelling_checker = NorvigSpellingChecker()
         store.load_spelling(spelling_checker)
 
-        self.assertEquals("THESE ARE SOME WORDS", spelling_checker.correct("Thise ara sime wards"))
+        self.assertEqual("THESE ARE SOME WORDS", spelling_checker.correct("Thise ara sime wards"))

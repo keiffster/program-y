@@ -14,12 +14,22 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
+
+import os
+
 from programy.storage.entities.store import Store
+
 
 class SQLStore(Store):
 
+    SQL = 'sql'
+
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
+
+    def store_name(self):
+        return SQLStore.SQL
 
     @property
     def storage_engine(self):
@@ -30,4 +40,3 @@ class SQLStore(Store):
 
     def rollback(self):
         self._storage_engine.session.rollback()
-

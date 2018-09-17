@@ -33,9 +33,13 @@ class RestBotClient(BotClient):
     def load_api_keys(self):
         if self.configuration.client_configuration.use_api_keys is True:
             if self.configuration.client_configuration.api_key_file is not None:
-                with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
-                    for api_key in api_key_file:
-                        self.api_keys.append(api_key.strip())
+                try:
+                    with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
+                        for api_key in api_key_file:
+                            self.api_keys.append(api_key.strip())
+
+                except Exception as excep:
+                    YLogger.exception(self, "Failed to open license key file [%s]", excep, self.configuration.client_configuration.api_key_file)
 
     def initialise(self):
         self.load_api_keys()

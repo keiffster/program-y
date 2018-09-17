@@ -14,10 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
+from programy.utils.logging.ylogger import YLogger
 
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.license import LicenseStore
 from programy.storage.stores.sql.dao.license import LicenseKey
+from programy.storage.entities.store import Store
 
 
 class SQLLicenseKeysStore(SQLStore, LicenseStore):
@@ -32,15 +35,15 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
         return LicenseKey(name=name, key=key)
 
     def empty(self):
-        self.get_all().delete()
+        self._get_all().delete()
 
     def empty_licensekeys(self):
-        self.get_all().delete()
+        self._get_all().delete()
 
     def add_licensekey(self, name, key):
         licensekey = self._get_entity(name=name, key=key)
         self._storage_engine.session.add(licensekey)
-        return licensekey
+        return True
 
     def add_licensekeys(self, licensekeys):
         prop_list = []
@@ -58,11 +61,47 @@ class SQLLicenseKeysStore(SQLStore, LicenseStore):
     def load(self, licensekey_collection):
         self.load_all(licensekey_collection)
 
-    def load_all(self, licensekey_collection):
-        licensekey_collection.empty()
+    def load_all(self, licensekeys):
+        licensekeys.empty()
         db_licensekeys = self._get_all()
         for db_licensekey in db_licensekeys:
-            licensekey_collection.add_licensekey(db_licensekey.key,  db_licensekey.key)
+            licensekeys.add_key(db_licensekey.name,  db_licensekey.key)
 
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
 
+        count = 0
+        success = 0
+
+        if os.path.exists(filename):
+            try:
+                with open(filename, "r") as key_file:
+                    for line in key_file:
+                        if self._process_license_key_line(line, verbose) is True:
+                            success +=1
+                        count += 1
+
+                if commit is True:
+                    self.commit()
+
+            except Exception as e:
+                YLogger.exception(None, "Failed to upload license keys from file [%s]", e, filename)
+
+        return count, success
+
+    def _process_license_key_line(self, line, verbose=False):
+        line = line.strip()
+        if line:
+            if line.startswith('#') is False:
+                splits = line.split("=")
+                if len(splits) > 1:
+                    key_name = splits[0].strip()
+                    # If key has = signs in it, then combine all elements past the first
+                    key = "".join(splits[1:]).strip()
+                    license_key = self.add_licensekey(key_name, key)
+                    if verbose is True:
+                        print("[%s] = [%s]"%(key_name, key))
+                    return True
+                else:
+                    YLogger.warning(self, "Invalid license key [%s]", line)
+        return False
 

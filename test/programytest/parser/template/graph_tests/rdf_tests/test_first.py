@@ -33,7 +33,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"]]', result)
+        self.assertEqual('[["?x", "MONKEY"]]', result)
 
     def test_first_single_var_multipe_result(self):
 
@@ -64,7 +64,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"]]', result)
+        self.assertEqual('[["?x", "MONKEY"]]', result)
 
     def test_first_multi_var_single_result(self):
 
@@ -94,7 +94,7 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"], ["?y", "true"]]', result)
+        self.assertEqual('[["?x", "MONKEY"], ["?y", "true"]]', result)
 
     def test_first_multiple_var_multipe_result(self):
 
@@ -125,4 +125,4 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals('[["?x", "MONKEY"], ["?y", "2"]]', result)
+        self.assertEqual('[["?x", "MONKEY"], ["?y", "2"]]', result)

@@ -147,40 +147,40 @@ class NewsAPIExtensionTests(unittest.TestCase):
 
         result = extension.execute(self.context, "SOURCE BBC")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT TRUE")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT FALSE")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT ERROR")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT TRUE REVERSE TRUE")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT TRUE REVERSE FALSE")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT TRUE REVERSE ERROR")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)
 
         result = extension.execute(self.context, "OTHER MAX 20 SORT TRUE REVERSE ERROR")
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
         result = extension.execute(self.context, "SOURCE BBC MAX 20 SORT TRUE OTHER ERROR")
         self.assertIsNotNone(result)
-        self.assertEquals("Headline - BBC", result)
+        self.assertEqual("Headline - BBC", result)

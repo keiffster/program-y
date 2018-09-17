@@ -14,14 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from sqlalchemy.orm.exc import NoResultFound
-from sqlalchemy.orm.exc import MultipleResultsFound
-
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.spelling import SpellingStore
 from programy.storage.stores.sql.dao.corpus import Corpus
-
+from programy.storage.entities.store import Store
 
 class SQLSpellingStore(SQLStore, SpellingStore):
 
@@ -31,14 +28,36 @@ class SQLSpellingStore(SQLStore, SpellingStore):
     def empty(self):
         self._storage_engine.session.query(Corpus).delete()
 
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        count = success = 0
+
+        try:
+            with open(filename, "r") as text_file:
+                for lines in text_file:
+                    words = lines.split(' ')
+                    for word in words:
+                        corpus = Corpus(word=word)
+                        self.storage_engine.session.add(corpus)
+                        if verbose is True:
+                            print(word)
+                        success += 1
+                        count += 1
+
+            if commit is True:
+                self.commit()
+
+        except FileNotFoundError:
+            YLogger.error(self, "File not found [%s]", filename)
+
+        return count, success
+
     def load_spelling(self, spell_checker):
         corpus = self._storage_engine.session.query(Corpus)
-        try:
-            all_words = corpus.one().decode('utf-8')
-            spell_checker.add_corpus(all_words)
-        except MultipleResultsFound as mrf:
-            pass
-        except NoResultFound as nrf:
-            pass
+        words = []
+        for dbword in corpus:
+            words.append(dbword.word)
+        all_words = " ".join(words)
+        spell_checker.add_corpus(all_words)
 
 

@@ -15,17 +15,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, BLOB
+from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Corpus(Base):
     __tablename__ = 'corpus'
 
     id = Column(Integer, primary_key=True)
-    text = Column(BLOB)
+    word = Column(String(56))
 
     def __repr__(self):
-        return "<Corpus(id='%d')>" % (self.id)
+        return "<Corpus(id='%s', word='%s'>" % (DAOUtils.valid_id(self.id), self.word)
 

@@ -40,9 +40,13 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
         filename = self._get_storage_path()
         file_dir = self._get_dir_from_path(filename)
         self._ensure_dir_exists(file_dir)
-        with open(filename, "w+") as duplicates_file:
-            duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
-            for duplicate in duplicates:
-                duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
-            duplicates_file.flush()
 
+        try:
+            with open(filename, "w+") as duplicates_file:
+                duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
+                for duplicate in duplicates:
+                    duplicates_file.write("%s\t%s\t%s\t%s\n" % (duplicate[0], duplicate[1], duplicate[2], duplicate[3]))
+                duplicates_file.flush()
+
+        except Exception as excep:
+           YLogger.exception(self, "Failed to write duplicates file [%s]", excep, filename)

@@ -34,11 +34,11 @@ class Map(object):
 
     @staticmethod
     def from_document(data):
-        lookup = Map(None, None)
+        amap = Map(None, None)
         if '_id' in data:
-            lookup.id = data['_id']
+            amap.id = data['_id']
         if 'name' in data:
-            lookup.primary_user = data['name']
+            amap.name = data['name']
         if 'key_values' in data:
-            lookup.generated_key = data['key_values']
-        return lookup
+            amap.key_values = data['key_values']
+        return amap

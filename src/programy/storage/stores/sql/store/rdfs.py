@@ -31,6 +31,7 @@ class SQLRDFsStore(SQLStore, RDFStore):
     def add_rdf(self, name, subject, predicate, objct):
         anrdf = RDF(name=name, subject=subject, predicate=predicate, object=objct)
         self._storage_engine.session.add(anrdf)
+        return True
 
     def load_all(self, rdf_collection):
         names = self._storage_engine.session.query(RDF.name).distinct()
@@ -42,3 +43,12 @@ class SQLRDFsStore(SQLStore, RDFStore):
         for rdf in db_rdfs:
             rdf_collection.add_entity(rdf.subject, rdf.predicate, rdf.object, rdf_name)
 
+    def _process_upload_line(self, rdf_name, line, verbose):
+        splits = line.split(":")
+        if len(splits) > 2:
+            subj = splits[0].upper()
+            pred = splits[1].upper()
+            obj = (":".join(splits[2:])).strip()
+            anrdf = self.add_rdf(rdf_name, subj, pred, obj)
+            if verbose is True:
+                print(anrdf)

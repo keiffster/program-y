@@ -18,24 +18,24 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Processor(object):
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    processor_class = Column(String)
+    classname = Column(String(512))
 
 
 class PreProcessor(Base, Processor):
     __tablename__ = 'preprocessors'
 
     def __repr__(self):
-        return "<PreProcessor Node(id='%d', name='%s', class='%s')>" % (self.id, self.name, self.processor_class)
+        return "<PreProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
 
 
 class PostProcessor(Base, Processor):
     __tablename__ = 'postprocessors'
 
     def __repr__(self):
-        return "<PostProcessor Node(id='%d', name='%s', class='%s')>" % (self.id, self.name, self.processor_class)
+        return "<PostProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)

@@ -65,7 +65,7 @@ class TestDuckDuckGoAPI(unittest.TestCase):
 
         response = api.ask_question("http:/test.url.com/ask", "cat")
 
-        self.assertEquals("A feline, 4 legged thing", response)
+        self.assertEqual("A feline, 4 legged thing", response)
 
 
 class DuckDuckGoServiceTests(unittest.TestCase):
@@ -100,7 +100,7 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("Test DuckDuckGo response", response)
+        self.assertEqual("Test DuckDuckGo response", response)
 
     def test_ask_question_general_exception(self):
         config = BrainServiceConfiguration("pannous")
@@ -110,5 +110,5 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)
 

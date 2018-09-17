@@ -28,8 +28,6 @@ from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog.dialog import Sentence
 from programy.parser.pattern.matcher import MatchContext
-from programy.utils.files.filewriter import ErrorsFileWriter
-from programy.utils.files.filewriter import DuplicatesFileWriter
 from programy.storage.factory import StorageFactory
 
 class AIMLLoader(FileFinder):
@@ -42,7 +40,7 @@ class AIMLLoader(FileFinder):
         try:
             return self._aiml_parser.parse_from_file(filename, userid=userid)
         except Exception as excep:
-            YLogger.exception(self, "Failed to load contents of file from [%s]"%filename, excep)
+            YLogger.exception(self, "Failed to load contents of file from [%s]", excep, filename)
 
 
 class AIMLParser(object):
@@ -151,7 +149,8 @@ class AIMLParser(object):
         self.save_debug_files()
         self.display_debug_info()
 
-    def tag_and_namespace_from_text(self, text):
+    @staticmethod
+    def tag_and_namespace_from_text(text):
         # If there is a namespace, then it looks something like
         # {http://alicebot.org/2001/AIML}aiml
         if AIMLParser.RE_PATTERN_OF_TAG_AND_NAMESPACE_FROM_TEXT.match(text) is None:
@@ -166,16 +165,13 @@ class AIMLParser(object):
             return tag_name, namespace
         return None, None
 
-    def tag_from_text(self, text):
-        tag, _ = self.tag_and_namespace_from_text(text)
-        return tag
-
-    def check_aiml_tag(self, aiml, filename=None):
+    @staticmethod
+    def check_aiml_tag(aiml, filename=None):
         # Null check just to be sure
         if aiml is None:
             raise ParserException("Null root tag", filename=filename)
 
-        tag_name, namespace = self.tag_and_namespace_from_text(aiml.tag)
+        tag_name, namespace = AIMLParser.tag_and_namespace_from_text(aiml.tag)
 
         # Then if check is just <aiml>, thats OK
         if tag_name != 'aiml':
@@ -195,7 +191,7 @@ class AIMLParser(object):
             tree = ET.parse(filename, parser=LineNumberingParser())
             aiml = tree.getroot()
 
-            _, namespace = self.check_aiml_tag(aiml, filename=filename)
+            _, namespace = AIMLParser.check_aiml_tag(aiml, filename=filename)
 
             start = datetime.datetime.now()
             num_categories = self.parse_aiml(aiml, namespace, filename, userid=userid)
@@ -204,7 +200,7 @@ class AIMLParser(object):
             YLogger.info(self, "Processed %s with %d categories in %f.2 secs", filename, num_categories, diff.total_seconds())
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to load contents of AIML file from [%s]"%filename, excep)
+            YLogger.exception(self, "Failed to load contents of AIML file from [%s]", excep, filename)
 
     def parse_from_text(self, text):
         """
@@ -215,7 +211,7 @@ class AIMLParser(object):
 
         aiml = ET.fromstring(text)
 
-        _, namespace = self.check_aiml_tag(aiml)
+        _, namespace = AIMLParser.check_aiml_tag(aiml)
 
         self.parse_aiml(aiml, namespace)
 

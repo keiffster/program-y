@@ -20,7 +20,7 @@ class TemplateDeleteTripleNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateDeleteTripleNode()
         self.assertIsNotNone(root)
-        self.assertEquals("DELETETRIPLE", root.to_string())
+        self.assertEqual("DELETETRIPLE", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -39,7 +39,7 @@ class TemplateDeleteTripleNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -48,4 +48,4 @@ class TemplateDeleteTripleNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

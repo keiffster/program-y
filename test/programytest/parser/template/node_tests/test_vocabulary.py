@@ -36,7 +36,7 @@ class TemplateVocabularyNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEquals(root.resolve(self._client_context), '14')
+        self.assertEqual(root.resolve(self._client_context), '14')
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -56,4 +56,4 @@ class TemplateVocabularyNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

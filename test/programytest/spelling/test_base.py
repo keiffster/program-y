@@ -99,7 +99,7 @@ class SpellingCheckerTests(unittest.TestCase):
 
         spell_checker.check_spelling_before(client_context, sentence)
 
-        self.assertEquals(sentence.text(), "Hello World")
+        self.assertEqual(sentence.text(), "Hello World")
 
     def test_check_spelling_before_false(self):
         spelling_config = BotSpellingConfiguration()
@@ -118,7 +118,7 @@ class SpellingCheckerTests(unittest.TestCase):
 
         spell_checker.check_spelling_before(client_context, sentence)
 
-        self.assertEquals(sentence.text(), "Hello word")
+        self.assertEqual(sentence.text(), "Hello word")
 
     def test_check_spelling_and_retry_true(self):
         spelling_config = BotSpellingConfiguration()
@@ -140,7 +140,7 @@ class SpellingCheckerTests(unittest.TestCase):
         response = spell_checker.check_spelling_and_retry(client_context, sentence)
 
         self.assertIsNotNone(response)
-        self.assertEquals(response, "Hello World")
+        self.assertEqual(response, "Hello World")
 
     def test_check_spelling_and_retry_false(self):
         spelling_config = BotSpellingConfiguration()

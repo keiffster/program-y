@@ -38,10 +38,10 @@ class ProcessorCollection(object):
     def add_processor(self, processor):
         self._processors.append(processor)
 
-    def process(self, client_context, string):
+    def process(self, client_context, word_string):
         for processor in self._processors:
-            string = processor.process(client_context, string)
-        return string
+            word_string = processor.process(client_context, word_string)
+        return word_string
 
     def load(self, storage_factory):
         storage_name = self._get_storage_name()

@@ -31,4 +31,4 @@ class ThinkAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
-        self.assertEquals("Keith", self._client_context.bot.get_conversation(self._client_context).current_question().property("name"))
+        self.assertEqual("Keith", self._client_context.bot.get_conversation(self._client_context).current_question().property("name"))

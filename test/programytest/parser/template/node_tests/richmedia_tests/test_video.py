@@ -23,7 +23,7 @@ class TemplateVideoNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<video>http://Servusai.com/logo.mov</video>", resolved)
+        self.assertEqual("<video>http://Servusai.com/logo.mov</video>", resolved)
 
-        self.assertEquals("<video>http://Servusai.com/logo.mov</video>", root.to_xml(self._client_context))
+        self.assertEqual("<video>http://Servusai.com/logo.mov</video>", root.to_xml(self._client_context))
 

@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.user import UserStore
 from programy.storage.stores.nosql.mongo.dao.user import User
@@ -21,24 +22,30 @@ from programy.storage.stores.nosql.mongo.dao.user import User
 
 class MongoUserStore(MongoStore, UserStore):
 
+    USERS = 'users'
+    USERID = 'userid'
+    CLIENT = 'client'
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'users'
+        return MongoUserStore.USERS
 
     def add_user(self, userid, client):
+        YLogger.info(self, "Adding user [%s] for client [%s]", userid, client)
         user = User(userid, client)
-        return self.add_document(user)
+        self.add_document(user)
+        return True
 
     def get_user(self, userid):
         collection = self.collection()
-        user = collection.find_one({"userid": userid})
+        user = collection.find_one({MongoUserStore.USERIDS: userid})
         return user
 
     def get_client_users(self, client):
         collection = self.collection()
-        db_users = collection.find({"client": client})
+        db_users = collection.find({MongoUserStore.CLIENT: client})
         users = []
         for user in db_users:
             users.append(user)

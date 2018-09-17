@@ -22,8 +22,14 @@ from programy.storage.utils.processors import CSVFileReader
 
 class Store(object):
 
-    CSV_FORMAT = "csv"
     TEXT_FORMAT = "text"
+    CSV_FORMAT = "csv"
+    XML_FORMAT = "xml"
+    BINARY_FORMAT = "bin"
+    YAML_FORMAT = "yaml"
+
+    def store_name(self):
+        raise NotImplementedError
 
     def empty(self):
         raise NotImplementedError("empty missing from implementation")
@@ -32,9 +38,6 @@ class Store(object):
         raise NotImplementedError("empty_named missing from implementation")
 
     def upload_from_text(self, name, text, commit=True):
-
-        self.empty_named(name)
-
         lines = text.split('\n')
         for line in lines:
             line = line.strip()
@@ -48,10 +51,8 @@ class Store(object):
     @staticmethod
     def get_file_processor(format, filename):
         if format == Store.TEXT_FORMAT:
-            print("Processing text file")
             return TextFile(filename)
         elif format == Store.CSV_FORMAT:
-            print("Processing csv file")
             return CSVFileReader(filename)
         else:
             raise Exception("Unknown file format [%s]" % format)
@@ -73,47 +74,73 @@ class Store(object):
 
         return filename.upper()
 
-    def upload_from_file(self, filename, format=TEXT_FORMAT, commit=True):
-        try:
-            print("Load from file [%s]"%filename)
-            name = self.get_just_filename_from_filepath(filename)
-            self.empty_named(name)
+    def upload_from_directory(self, directory, format=TEXT_FORMAT, extension=None, subdir=True, commit=True, verbose=False):
 
-            file_processor = self.get_file_processor(format, filename)
-            file_processor.process_lines(name, self)
-
-            if commit is True:
-                self.commit()
-
-        except Exception as e:
-            print(e)
-            if commit is True:
-                self.rollback()
-
-    def upload_from_directory(self, directory, format=TEXT_FORMAT, extension=None, subdir=True, commit=True):
+        final_count = 0
+        final_success = 0
 
         try:
             if subdir is False:
                 paths = os.listdir(directory)
                 for filename in paths:
-                    if extension is not None:
-                        if filename.endswith(extension):
-                            self.upload_from_file(os.path.join(directory, filename), format=format, commit=False)
-                    else:
-                        self.upload_from_file(os.path.join(directory, filename), format=format, commit=False)
+                    fullpath = os.path.join(directory, filename)
+                    if os.path.isdir(fullpath) is False:
+                        if extension is not None:
+                            if filename.endswith(extension):
+                                count, success = self.upload_from_file(fullpath, format=format, commit=commit, verbose=verbose)
+                                final_count += count
+                                final_success += success
+                        else:
+                            count, success = self.upload_from_file(fullpath, format=format, commit=commit, verbose=verbose)
+                            final_count += count
+                            final_success += success
             else:
                 for dirpath, _, filenames in os.walk(directory):
                     for filename in filenames:
                         if extension is not None:
                             if filename.endswith(extension):
-                                self.upload_from_file(os.path.join(dirpath, filename), format=format, commit=False)
+                                count, success = self.upload_from_file(os.path.join(dirpath, filename), format=format, commit=commit, verbose=verbose)
+                                final_count += count
+                                final_success += success
                         else:
-                            self.upload_from_file(os.path.join(dirpath, filename), format=format, commit=False)
+                            count, success = self.upload_from_file(os.path.join(dirpath, filename), format=format, commit=commit, verbose=verbose)
+                            final_count += count
+                            final_success += success
 
             if commit is True:
                 self.commit()
 
         except Exception as e:
-            print(e)
+            print("Error loading from directory", e)
             if commit is True:
                 self.rollback()
+
+        return final_count, final_success
+
+    def upload_from_file(self, filename, format=TEXT_FORMAT, commit=True, verbose=False):
+
+        file_processor = None
+        final_count = 0
+        final_success = 0
+        try:
+            name = self.get_just_filename_from_filepath(filename)
+            print(name)
+
+            file_processor = Store.get_file_processor(format, filename)
+            count, success = file_processor.process_lines(name, self, verbose=verbose)
+            final_count += count
+            final_success += success
+
+            if commit is True:
+                self.commit()
+
+        except Exception as e:
+            print("Error uploading from file: ", e)
+            if commit is True:
+                self.rollback()
+
+        finally:
+            if file_processor is not None:
+                file_processor.close()
+
+        return final_count, final_success

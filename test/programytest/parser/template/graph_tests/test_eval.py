@@ -42,11 +42,11 @@ class TemplateGraphEvalTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateEvalNode)
 
-        self.assertEquals(len(node.children), 2)
+        self.assertEqual(len(node.children), 2)
         self.assertIsInstance(node.children[0], TemplateWordNode)
-        self.assertEquals(node.children[0].word, "Some")
+        self.assertEqual(node.children[0].word, "Some")
         self.assertIsInstance(node.children[1], TemplateWordNode)
-        self.assertEquals(node.children[1].word, "Text")
+        self.assertEqual(node.children[1].word, "Text")
 
     def test_eval_node_from_xml_multi_words(self):
         template = ET.fromstring("""
@@ -64,9 +64,9 @@ class TemplateGraphEvalTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateEvalNode)
 
-        self.assertEquals(len(node.children), 3)
+        self.assertEqual(len(node.children), 3)
         self.assertIsInstance(node.children[0], TemplateWordNode)
-        self.assertEquals(node.children[0].word, "Some")
+        self.assertEqual(node.children[0].word, "Some")
         self.assertIsInstance(node.children[1], TemplateGetNode)
         self.assertIsInstance(node.children[2], TemplateWordNode)
-        self.assertEquals(node.children[2].word, "Text")
+        self.assertEqual(node.children[2].word, "Text")

@@ -38,7 +38,7 @@ class LinkedAccount(object):
         if '_id' in data:
             linked.id = data['_id']
         if 'primary_userid' in data:
-            linked.primary_userid = int(data['primary_userid'])
+            linked.primary_userid = data['primary_userid']
         if 'linked_userid' in data:
-            linked.linked_userid = int(data['linked_userid'])
+            linked.linked_userid = data['linked_userid']
         return linked

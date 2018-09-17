@@ -16,7 +16,7 @@ class FileDefaultVariablesStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileDefaultVariablesStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_variables(self):
         config = FileStorageConfiguration()

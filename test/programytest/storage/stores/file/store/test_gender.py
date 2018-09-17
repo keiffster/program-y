@@ -1,4 +1,4 @@
-from programytest.storage.asserts.store.assert_lookups import LookupStoreAsserts
+from programytest.storage.asserts.store.assert_genders import GenderStoreAsserts
 import os
 import os.path
 import re
@@ -10,14 +10,14 @@ from programy.mappings.gender import GenderCollection
 from programy.storage.stores.file.config import FileStoreConfiguration
 
 
-class FileGenderStoreTests(LookupStoreAsserts):
+class FileGenderStoreTests(GenderStoreAsserts):
 
     def test_initialise(self):
         config = FileStorageConfiguration()
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileGenderStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
@@ -30,5 +30,5 @@ class FileGenderStoreTests(LookupStoreAsserts):
         
         store.load(gender_collection)
 
-        self.assertEquals(gender_collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(gender_collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(gender_collection.genderise_string("This is with him "), "This is WITH HER")

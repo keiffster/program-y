@@ -6,10 +6,6 @@ from programy.dialog.dialog import Conversation
 from programytest.client import TestClient
 
 
-class Vistor(object):
-    def visit(self, text):
-        pass
-
 class StorageEngineTestUtils(unittest.TestCase):
 
     def user_asserts(self, storage_engine):
@@ -64,6 +60,6 @@ class StorageEngineTestUtils(unittest.TestCase):
         twitter_store.commit()
 
         last_direct_message_id, last_status_id = twitter_store.load_last_message_ids()
-        self.assertEquals(1, last_direct_message_id)
-        self.assertEquals(2, last_status_id)
+        self.assertEqual(1, int(last_direct_message_id))
+        self.assertEqual(2, int(last_status_id))
 

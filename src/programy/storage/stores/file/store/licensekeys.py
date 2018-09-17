@@ -57,3 +57,4 @@ class FileLicenseStore(FileStore, LicenseStore):
 
     def get_storage(self):
         return self.storage_engine.configuration.license_storage
+

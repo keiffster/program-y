@@ -33,8 +33,13 @@ class FileSpellingStore(FileStore, SpellingStore):
         if os.path.exists(corpus_filename) is True:
             YLogger.info(self, "Loading spelling corpus [%s]", corpus_filename)
 
-            all_words = open(corpus_filename, encoding=encoding).read()
-            spell_checker.add_corpus(all_words)
+            try:
+                with open(corpus_filename, encoding=encoding) as words_file:
+                    all_words = words_file.read()
+                    spell_checker.add_corpus(all_words)
+
+            except Exception as e:
+                YLogger.exception(self, "Failed to load corpus [%s]", e, corpus_filename)
 
         else:
             YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)

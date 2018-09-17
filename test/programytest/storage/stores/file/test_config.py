@@ -4,8 +4,12 @@ from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 
+import programytest.storage.engines as Engines
+
+
 class FileStorageConfigurationTests(unittest.TestCase):
 
+    unittest.skipIf(Engines.file is True, Engines.file_disabled)
     def test_initial_creation_with_defaults(self):
 
         config = FileStorageConfiguration()

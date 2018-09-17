@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.linked import LinkedAccountStore
 from programy.storage.stores.nosql.mongo.dao.linked import LinkedAccount
@@ -21,27 +22,38 @@ from programy.storage.stores.nosql.mongo.dao.linked import LinkedAccount
 
 class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
 
+    LINKEDACCOUNTS = 'linkedaccounts'
+    PRIMARY_USERID = "primary_userid"
+    LINKED_USERID = "linked_userid"
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'linkedaccounts'
+        return MongoLinkedAccountStore.LINKEDACCOUNTS
 
     def link_accounts(self, primary_userid, linked_userid):
+        YLogger.info(self, "Linking accounts [%s] [%s] in Mongo", primary_userid, linked_userid)
         linked = LinkedAccount(primary_userid, linked_userid)
-        return self.add_document(linked)
+        self.add_document(linked)
+        return True
 
     def unlink_account(self, primary_userid, linked_userid):
+        YLogger.info(self, "Unlinking accounts [%s] [%s] in Mongo", primary_userid, linked_userid)
         collection = self.collection()
-        collection.delete_many({"primary_userid": primary_userid, "linked_userid": linked_userid})
+        collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid,
+                                MongoLinkedAccountStore.LINKED_USERID: linked_userid})
+        return True
 
     def unlink_accounts(self, primary_userid):
+        YLogger.info(self, "Unlinking accounts [%s] in Mongo", primary_userid)
         collection = self.collection()
-        collection.delete_many({"primary_userid": primary_userid})
+        collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
+        return True
 
     def linked_accounts(self, primary_userid):
         collection = self.collection()
-        documents = collection.find({"primary_userid": primary_userid})
+        documents = collection.find({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
         accounts = []
         for doc in documents:
             linked = LinkedAccount.from_document(doc)
@@ -50,7 +62,7 @@ class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
 
     def primary_account(self, linked_userid):
         collection = self.collection()
-        documents = collection.find({"linked_userid": linked_userid})
+        documents = collection.find({MongoLinkedAccountStore.LINKED_USERID: linked_userid})
         accounts = []
         for doc in documents:
             linked = LinkedAccount.from_document(doc)

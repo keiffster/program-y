@@ -32,10 +32,13 @@ class CjkTokenizer(Tokenizer):
 
     @staticmethod
     def _is_chinese_word(word):
-        for ch in word:
-            if CjkTokenizer._is_chinese_char(ch):
-                return True
-        return False
+        if word is None:
+            return False
+        else:
+            for ch in word:
+                if CjkTokenizer._is_chinese_char(ch):
+                    return True
+            return False
 
     @staticmethod
     def _is_chinese_char(c):
@@ -69,6 +72,10 @@ class CjkTokenizer(Tokenizer):
                     words.append(last_word)
                     last_word = ''
                 words.append(ch)
+            elif ch == self.split_chars:
+                if len(last_word) > 0:
+                    words.append(last_word)
+                    last_word = ''
             else:
                 if self._is_wildchar(ch):
                     if len(last_word) > 0:
@@ -76,12 +83,7 @@ class CjkTokenizer(Tokenizer):
                         last_word = ''
                     words.append(ch)
                 else:
-                    if ch == self.split_chars:
-                        if len(last_word) > 0:
-                            words.append(last_word)
-                            last_word = ''
-                    else:
-                        last_word += ch
+                    last_word += ch
 
         if len(last_word) > 0:
             words.append(last_word)
@@ -91,11 +93,16 @@ class CjkTokenizer(Tokenizer):
     def words_to_texts(self, words):
         texts = ''
 
+        if words is None:
+            words = ''
+
         for word in words:
             if CjkTokenizer._is_chinese_word(word):
                 texts += word
             elif len(texts) > 0:
                 texts += ' ' + word
+            elif word is None:
+                pass
             else:
                 texts += word
 

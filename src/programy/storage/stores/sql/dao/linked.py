@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
+
 
 class LinkedAccount(Base):
     __tablename__ = 'linkaccounts'
@@ -27,5 +29,5 @@ class LinkedAccount(Base):
     linked_user = Column(Integer)
 
     def __repr__(self):
-       return "<Linked(id='%d', primary='%s', linked='%s')>" % (self.id, self.primary_user, self.linked_user)
+       return "<Linked(id='%s', primary_user='%s', linked_user='%s')>" % (DAOUtils.valid_id(self.id), self.primary_user, self.linked_user)
 

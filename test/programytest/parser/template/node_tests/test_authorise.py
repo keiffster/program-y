@@ -118,4 +118,4 @@ class TemplateAuthoriseNodeTests(ParserTestsBaseClass):
         with self.assertRaises(Exception):
             node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._client_context))
+        self.assertEqual("", root.resolve(self._client_context))

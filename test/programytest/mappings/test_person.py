@@ -31,7 +31,7 @@ class PersonTests(unittest.TestCase):
 
         pattern = collection.person(" with you ")
         self.assertIsNotNone(pattern)
-        self.assertEquals(" WITH ME2 ", pattern[1])
+        self.assertEqual(" WITH ME2 ", pattern[1])
 
     def test_load(self):
         storage_factory = StorageFactory()

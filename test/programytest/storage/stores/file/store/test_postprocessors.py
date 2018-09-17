@@ -16,7 +16,7 @@ class FilePostProcessorsStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePostProcessorsStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_postprocessors(self):
         config = FileStorageConfiguration()
@@ -28,4 +28,4 @@ class FilePostProcessorsStoreTests(unittest.TestCase):
         collection = ProcessorCollection()
         store.load(collection)
 
-        self.assertEquals(5, len(collection.processors))
+        self.assertEqual(5, len(collection.processors))

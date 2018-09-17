@@ -21,7 +21,7 @@ class ClientAdminExtensionTests(unittest.TestCase):
         client_context = client.create_client_context("testid")
 
         extension = ClientAdminExtension()
-        self.assertEquals("LIST BOTS, LIST BRAINS, DUMP BRAIN", extension.execute(client_context, "COMMANDS"))
+        self.assertEqual("LIST BOTS, LIST BRAINS, DUMP BRAIN", extension.execute(client_context, "COMMANDS"))
 
     def test_client_list_bots(self):
         client = ClientAdminExtensionClient()
@@ -29,7 +29,7 @@ class ClientAdminExtensionTests(unittest.TestCase):
 
         extension = ClientAdminExtension()
 
-        self.assertEquals("bot", extension.execute(client_context, "LIST BOTS"))
+        self.assertEqual("bot", extension.execute(client_context, "LIST BOTS"))
 
     def test_client_list_brains(self):
         client = ClientAdminExtensionClient()
@@ -37,7 +37,7 @@ class ClientAdminExtensionTests(unittest.TestCase):
 
         extension = ClientAdminExtension()
 
-        self.assertEquals("brain", extension.execute(client_context, "LIST BRAINS bot"))
+        self.assertEqual("brain", extension.execute(client_context, "LIST BRAINS bot"))
 
     def test_client_dump_brain(self):
         client = ClientAdminExtensionClient()
@@ -45,5 +45,5 @@ class ClientAdminExtensionTests(unittest.TestCase):
 
         extension = ClientAdminExtension()
 
-        self.assertEquals("Brain dumped, see config for location", extension.execute(client_context, "DUMP BRAIN bot brain"))
+        self.assertEqual("Brain dumped, see config for location", extension.execute(client_context, "DUMP BRAIN bot brain"))
 

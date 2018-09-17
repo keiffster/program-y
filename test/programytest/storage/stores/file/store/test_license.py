@@ -15,9 +15,9 @@ class FileLicenseKeysStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileLicenseStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
-    def test_load_spelling(self):
+    def test_load_license_key(self):
         config = FileStorageConfiguration()
         config._license_storage =  FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "data" + os.sep + "licenses" + os.sep + "test_license.keys", format="text", encoding="utf-8", delete_on_start=False)
         engine = FileStorageEngine(config)
@@ -30,6 +30,6 @@ class FileLicenseKeysStoreTests(unittest.TestCase):
         store.load(license_keys)
 
         self.assertTrue(license_keys.has_key("TESTKEY1"))
-        self.assertEquals("VALUE1", license_keys.get_key("TESTKEY1"))
+        self.assertEqual("VALUE1", license_keys.get_key("TESTKEY1"))
         self.assertTrue(license_keys.has_key("TESTKEY2"))
-        self.assertEquals("VERY LONG VALUE 2", license_keys.get_key("TESTKEY2"))
+        self.assertEqual("VERY LONG VALUE 2", license_keys.get_key("TESTKEY2"))

@@ -24,7 +24,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileCategoryStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_text_file(self):
         config = FileStorageConfiguration()
@@ -38,7 +38,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         parser = MockAIMLParser()
         store.load_all(parser)
 
-        self.assertEquals(1, len(parser._parsed_files))
+        self.assertEqual(1, len(parser._parsed_files))
         self.assertTrue(parser._parsed_files[0].endswith("/kinghorn.aiml"))
 
     def test_load_from_test_dir_no_subdir(self):
@@ -53,7 +53,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         parser = MockAIMLParser()
         store.load_all(parser)
 
-        self.assertEquals(1, len(parser._parsed_files))
+        self.assertEqual(1, len(parser._parsed_files))
         self.assertTrue(parser._parsed_files[0].endswith("/kinghorn.aiml"))
 
     def test_load_from_test_dir_with_subdir(self):
@@ -68,7 +68,7 @@ class FileCategoryStoreTests(CategoryStoreAsserts):
         parser = MockAIMLParser()
         store.load_all(parser)
 
-        self.assertEquals(3, len(parser._parsed_files))
+        self.assertEqual(3, len(parser._parsed_files))
         self.assertTrue(parser._parsed_files[0].endswith("/kinghorn.aiml"))
         self.assertTrue(parser._parsed_files[1].endswith("/fife.aiml"))
         self.assertTrue(parser._parsed_files[2].endswith("/scotland.aiml"))

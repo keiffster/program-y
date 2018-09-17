@@ -14,54 +14,83 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.sets import SetsStore
 from programy.storage.stores.nosql.mongo.dao.set import Set
 
 class MongoSetsStore(MongoStore, SetsStore):
 
+    SETS = 'sets'
+    NAME = 'name'
+    VALUES = 'values'
+    
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'sets'
+        return MongoSetsStore.SETS
 
     def empty_named(self, name):
+        YLogger.info(self, "Empting set [%s]", name)
         collection = self.collection ()
-        collection.remove({"name": name})
+        collection.remove({MongoSetsStore.NAME: name})
 
-    def add_to_set(self, name, value):
+    def add_to_set(self, name, value, replace_existing=False):
         collection = self.collection()
-        aset = collection.find_one({"name": name})
+        aset = collection.find_one({MongoSetsStore.NAME: name})
+        uvalue = value.upper()
         if aset is not None:
-            aset['values'].append(value.upper())
-            collection.update({"name": name}, aset)
+            if uvalue not in aset[MongoSetsStore.VALUES]:
+                YLogger.info(self, "Adding value to set [%s] [%s]", name, uvalue)
+                aset[MongoSetsStore.VALUES].append(uvalue)
+                collection.replace_one({MongoSetsStore.NAME: name}, aset)
+                return True
+            else:
+                if replace_existing is True:
+                    YLogger.info(self, "Updating set [%s] [%s]", name, uvalue)
+                    aset[MongoSetsStore.VALUES] = uvalue
+                    collection.replace_one({MongoSetsStore.NAME: name}, aset)
+                    return True
+                else:
+                    YLogger.error(self, "Existing value in set [%s] [%s]", name, uvalue)
+                    return False
         else:
-            aset = Set(name, [value.upper()])
+            YLogger.info(self, "Creating new set [%s], initial value", name, uvalue)
+            aset = Set(name, [uvalue])
             self.add_document(aset)
-        return aset
+            return True
 
     def remove_from_set(self, name, value):
+        YLogger.info(self, "Remove value [%s] from set [%s]", value, name)
         collection = self.collection()
-        aset = collection.find_one({"name": name})
+        aset = collection.find_one({MongoSetsStore.NAME: name})
         if aset is not None:
-            if value.upper() in aset['values']:
-                aset['values'].remove(value.upper())
-                if aset['values']:
-                    collection.update({"name": name}, aset)
+            if value.upper() in aset[MongoSetsStore.VALUES]:
+                aset[MongoSetsStore.VALUES].remove(value.upper())
+                if aset[MongoSetsStore.VALUES]:
+                    collection.replace_one({MongoSetsStore.NAME: name}, aset)
                 else:
-                    collection.remove({"name": name})
+                    collection.delete_one({MongoSetsStore.NAME: name})
 
     def load_all(self, set_collection):
+        YLogger.info(self, "Loading all sets from Mongo")
         collection = self.collection ()
         set_collection.empty()
         sets = collection.find({})
         for aset in sets:
-            self.load(set_collection, aset['name'])
+            self.load(set_collection, aset[MongoSetsStore.NAME])
 
     def load(self, set_collection, set_name):
+        YLogger.info(self, "Loading set [%s] from Mongo", set_name)
         collection = self.collection ()
-        aset = collection.find_one({"name": set_name})
+        aset = collection.find_one({MongoSetsStore.NAME: set_name})
         if aset is not None:
+            the_set = {}
+            for value in  aset[MongoSetsStore.VALUES]:
+                value = value.strip()
+                if value:
+                    self.add_set_values(the_set, value)
+
             set_collection.remove(set_name)
-            set_collection.add_set(set_name, aset['values'], 'mongo')
+            set_collection.add_set(set_name, the_set, MongoStore.MONGO)

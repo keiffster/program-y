@@ -31,7 +31,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY", result)
+        self.assertEqual("MONKEY", result)
 
     def test_tuples_multi_vars_single_results(self):
         self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
@@ -58,7 +58,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY LEGS", result)
+        self.assertEqual("MONKEY LEGS", result)
 
     def test_tuples_single_var_multi_resultss(self):
 
@@ -87,7 +87,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY BIRD", result)
+        self.assertEqual("MONKEY BIRD", result)
 
     def test_tuples_multi_vars_multi_resultss(self):
 
@@ -116,7 +116,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY LEGS BIRD LEGS", result)
+        self.assertEqual("MONKEY LEGS BIRD LEGS", result)
 
     def test_get_from_tuple_from_get_from_var(self):
         template = ET.fromstring("""
@@ -138,4 +138,4 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("TEST1", result)
+        self.assertEqual("TEST1", result)

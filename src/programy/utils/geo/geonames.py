@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 import json
 import urllib.request
-
+from programy.utils.logging.ylogger import YLogger
 from programy.utils.geo.latlong import LatLong
 
 
@@ -62,21 +62,32 @@ class GeoNamesApi(object):
         return json.loads(content.decode('utf8'))
 
     def load_get_latlong_for_postcode_from_file(self, filename):
-        with open(filename, "w+", encoding="utf-8") as response_file:
-            return json.load(response_file)
+        try:
+            with open(filename, "r", encoding="utf-8") as response_file:
+                return json.load(response_file)
+
+        except FileNotFoundError:
+            YLogger.error(self, "File not found [%s]", filename)
 
     def store_get_latlong_for_postcode_to_file(self, postcode, filename):
         content = self._get_latlong_for_postcode_response(postcode)
-        with open(filename, "w+", encoding="utf-8") as response_file:
-            json.dump(content, response_file, sort_keys=True, indent=2)
+        try:
+            with open(filename, "w+", encoding="utf-8") as response_file:
+                json.dump(content, response_file, sort_keys=True, indent=2)
+
+        except FileNotFoundError:
+            YLogger.error(self, "Failed to write to [%s]", filename)
 
     def get_latlong_for_postcode(self, postcode):
 
         if GeoNamesApi.get_latlong_for_postcode_response_file is None:
             data = self._get_latlong_for_postcode_response(postcode)
         else:
-            with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r", encoding="utf-8") as datafile:
-                data = json.load(datafile)
+            try:
+                with open(GeoNamesApi.get_latlong_for_postcode_response_file, "r", encoding="utf-8") as datafile:
+                    data = json.load(datafile)
+            except FileNotFoundError:
+                YLogger.error(self, "File not found [%s]", GeoNamesApi.get_latlong_for_postcode_response_file)
 
         if 'postalCodes' not in data:
             raise Exception("Invalid/Unknown post code")

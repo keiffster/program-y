@@ -12,6 +12,7 @@ class MockService(Service):
     def ask_question(self, context: str, question: str):
         return "asked"
 
+
 class ServiceFactoryTests(unittest.TestCase):
 
     def test_load_services(self):
@@ -24,5 +25,7 @@ class ServiceFactoryTests(unittest.TestCase):
 
         ServiceFactory.preload_services(brain_config.services)
 
-        self.assertIsNotNone(ServiceFactory.get_service("mock"))
-        self.assertIsInstance(ServiceFactory.get_service("mock"), MockService)
+        mock_service = ServiceFactory.get_service("mock")
+        print(mock_service)
+        self.assertIsNotNone(mock_service)
+        self.assertIsInstance(mock_service, Service)

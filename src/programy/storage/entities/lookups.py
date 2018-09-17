@@ -21,13 +21,10 @@ from programy.mappings.base import DoubleStringPatternSplitCollection
 
 class LookupsStore(Store):
 
-    def add_to_lookup(self, name, key, value):
-        raise NotImplementedError("add_to_lookup missing from Lookups Store")
-
     def load_all(self, lookup_collection, subdir=True, set_ext=".txt"):
         raise NotImplementedError("load_all missing from Lookups Store")
 
-    def load(self, lookup_collection, name):
+    def load(self, lookup_collection):
         raise NotImplementedError("load missing from Lookups Store")
 
     def process_key_value(self, key, value, id=None):

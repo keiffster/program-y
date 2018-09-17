@@ -24,7 +24,7 @@ class TemplateListNodeTests(ParserTestsBaseClass):
         resolved = root.resolve(self._client_context)
 
         self.assertIsNotNone(resolved)
-        self.assertEquals("<olist><item>Item1</item><item>Item2</item></olist>", resolved)
+        self.assertEqual("<olist><item>Item1</item><item>Item2</item></olist>", resolved)
 
-        self.assertEquals("<olist><item>Item1</item><item>Item2</item></olist>", root.to_xml(self._client_context))
+        self.assertEqual("<olist><item>Item1</item><item>Item2</item></olist>", root.to_xml(self._client_context))
 

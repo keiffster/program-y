@@ -18,17 +18,19 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Variable(Base):
     __tablename__ = 'variables'
 
     id = Column(Integer, primary_key=True)
-    clientid = Column(String)
-    userid = Column(String)
-    name = Column(String)
-    value = Column(String)
+    clientid = Column(String(16))
+    userid = Column(String(16))
+    name = Column(String(48))
+    value = Column(String(256))
 
     def __repr__(self):
-        return "<Variable(id='%d', client='%s', user='%s', name='%s', value='%s')>" % (self.id, self.clientid, self.userid, self.name, self.value)
+        return "<Variable(id='%s', clientid='%s', userid='%s', name='%s', value='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.clientid, self.userid, self.name, self.value)
 

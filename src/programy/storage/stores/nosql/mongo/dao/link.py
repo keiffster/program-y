@@ -14,19 +14,26 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
 class Link(object):
 
-    def __init__(self, primary_user, generated_key, provided_key):
+    def __init__(self, primary_user, generated_key, provided_key, expired=None, expires=None):
         self.id = None
         self.primary_user = primary_user
         self.generated_key = generated_key
         self.provided_key = provided_key
-        self.expired = None
-        self.expires = None
+        self.expired = expired
+        self.expires = expires
 
     def __repr__(self):
-        return "<Linked(id='%d', primary='%s', generated='%s', provided='%s')>" % (self.id, self.primary_user, self.generated_key, self.provided_key)
+        return "<Linked(id='%d', primary='%s', generated='%s', provided='%s', expired='%s', expires='%s')>" % (
+            DAOUtils.valid_id(self.id),
+            self.primary_user,
+            self.generated_key,
+            self.provided_key,
+            DAOUtils.valid_id(self.expired),
+            DAOUtils.valid_id(self.expires))
 
     def to_document(self):
         document = {"primary_user": self.primary_user,
@@ -52,5 +59,5 @@ class Link(object):
         if 'expired' in data:
             link.expired = data['expired']
         if 'expires' in data:
-            link.id = data['expires']
+            link.expires = data['expires']
         return link

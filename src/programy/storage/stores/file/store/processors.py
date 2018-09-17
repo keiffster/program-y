@@ -17,10 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
+from programy.utils.classes.loader import ClassLoader
 
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.processors import ProcessorStore
-from programy.utils.classes.loader import ClassLoader
 
 
 class FileProcessorsStore(FileStore, ProcessorStore):

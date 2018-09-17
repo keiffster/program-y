@@ -28,7 +28,7 @@ class ConverstionStoreAsserts(unittest.TestCase):
             conversation2 = Conversation(client_context)
             store.load_conversation(client_context, conversation2)
 
-            self.assertEquals(1, len(conversation2.questions))
-            self.assertEquals(1, len(conversation2.questions[0].sentences))
-            self.assertEquals("Hello There", conversation2.questions[0].sentences[0].text())
-            self.assertEquals("Hi", conversation2.questions[0].sentences[0].response)
+            self.assertEqual(1, len(conversation2.questions))
+            self.assertEqual(1, len(conversation2.questions[0].sentences))
+            self.assertEqual("Hello There", conversation2.questions[0].sentences[0].text())
+            self.assertEqual("Hi", conversation2.questions[0].sentences[0].response)

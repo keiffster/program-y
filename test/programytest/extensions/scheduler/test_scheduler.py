@@ -30,68 +30,68 @@ class SchedulerExtensionTests(unittest.TestCase):
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE IN 10 SECONDS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_in_n_minutes(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE IN 10 MINUTES TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_in_n_hours(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE IN 10 HOURS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_in_n_days(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE IN 10 DAYS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_in_n_weeks(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE IN 10 WEEKS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_every_n_seconds(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE EVERY 10 SECONDS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_every_n_minutes(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE EVERY 10 MINUTES TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_every_n_hours(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE EVERY 10 HOURS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_every_n_days(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE EVERY 10 DAYS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 
     def test_remind_every_n_weeks(self):
         client = SchedulerExtensionClient()
         client_context = client.create_client_context("testid")
         extension = SchedulerExtension()
         response = extension.execute(client_context, "SCHEDULE EVERY 10 WEEKS TEXT WAKEY WAKEY")
-        self.assertEquals("OK", response)
+        self.assertEqual("OK", response)
 

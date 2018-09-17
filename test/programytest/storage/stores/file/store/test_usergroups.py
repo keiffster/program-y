@@ -15,7 +15,7 @@ class FileSpellingStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileUserGroupStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_users_and_groups(self):
         config = FileStorageConfiguration()

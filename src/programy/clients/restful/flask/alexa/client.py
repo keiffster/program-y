@@ -48,7 +48,7 @@ class FacebookBotClient(FlaskRestBotClient):
             client_context = self.create_client_context(userid)
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
         except Exception as e:
-            print(e)
+            print("Error asking Alexa: ", e)
         return response
 
 if __name__ == "__main__":

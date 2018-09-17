@@ -11,25 +11,25 @@ class LinkedAccountStoreAsserts(unittest.TestCase):
 
         accounts = store.linked_accounts(1)
         self.assertIsNotNone(accounts)
-        self.assertEquals(2, len(accounts))
+        self.assertEqual(2, len(accounts))
         self.assertTrue(2 in accounts)
         self.assertTrue(3 in accounts)
 
         accounts = store.primary_account(2)
         self.assertIsNotNone(accounts)
-        self.assertEquals(1, len(accounts))
+        self.assertEqual(1, len(accounts))
         self.assertTrue(1 in accounts)
 
         accounts = store.primary_account(3)
         self.assertIsNotNone(accounts)
-        self.assertEquals(1, len(accounts))
+        self.assertEqual(1, len(accounts))
         self.assertTrue(1 in accounts)
 
         store.unlink_account(1, 2)
         store.commit()
         accounts = store.linked_accounts(1)
         self.assertIsNotNone(accounts)
-        self.assertEquals(1, len(accounts))
+        self.assertEqual(1, len(accounts))
         self.assertTrue(3 in accounts)
 
         store.unlink_accounts(1)
@@ -37,5 +37,5 @@ class LinkedAccountStoreAsserts(unittest.TestCase):
         store.commit()
         accounts = store.linked_accounts(1)
         self.assertIsNotNone(accounts)
-        self.assertEquals(0, len(accounts))
+        self.assertEqual(0, len(accounts))
 

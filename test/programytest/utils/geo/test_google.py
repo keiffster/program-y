@@ -29,8 +29,8 @@ class GoogleMapsTests(unittest.TestCase):
         latlng = googlemaps.get_latlong_for_location("KY3 9UR")
         self.assertIsNotNone(latlng)
         self.assertIsInstance(latlng, LatLong)
-        self.assertEquals(latlng.latitude, 56.0720397)
-        self.assertEquals(latlng.longitude, -3.1752001)
+        self.assertEqual(latlng.latitude, 56.0720397)
+        self.assertEqual(latlng.longitude, -3.1752001)
 
     def test_distance_uk_driving_imperial(self):
         filename = os.path.dirname(__file__) + os.sep + "distance.json"
@@ -41,7 +41,7 @@ class GoogleMapsTests(unittest.TestCase):
         distance = googlemaps.get_distance_between_addresses("Edinburgh", "London", country="UK", mode="driving", units="imperial")
         self.assertIsNotNone(distance)
         self.assertIsInstance(distance, GoogleDistance)
-        self.assertEquals("25.1 mi", distance._distance_text)
+        self.assertEqual("25.1 mi", distance._distance_text)
 
     def test_directions(self):
         filename = os.path.dirname(__file__) + os.sep + "directions.json"

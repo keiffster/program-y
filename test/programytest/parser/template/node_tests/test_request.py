@@ -18,11 +18,11 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateRequestNode()
-        self.assertEquals("REQUEST", node.to_string())
+        self.assertEqual("REQUEST", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateRequestNode(index=2)
-        self.assertEquals("REQUEST index=2", node.to_string())
+        self.assertEqual("REQUEST index=2", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -136,4 +136,4 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

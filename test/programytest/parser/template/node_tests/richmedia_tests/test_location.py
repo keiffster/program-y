@@ -20,7 +20,7 @@ class TemplateLocationNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<location />", resolved)
+        self.assertEqual("<location />", resolved)
 
-        self.assertEquals("<location />", root.to_xml(self._client_context))
+        self.assertEqual("<location />", root.to_xml(self._client_context))
 

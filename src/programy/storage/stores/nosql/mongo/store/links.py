@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.link import LinkStore
 from programy.storage.stores.nosql.mongo.dao.link import Link
@@ -21,19 +22,24 @@ from programy.storage.stores.nosql.mongo.dao.link import Link
 
 class MongoLinkStore(MongoStore, LinkStore):
 
+    LINKS = "links"
+    PRIMARY_USER = "primary_user"
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'links'
+        return MongoLinkStore.LINKS
 
     def create_link(self, primary_userid, generated_key, provided_key):
+        YLogger.info(self, "Creating link in Mongo [%s] [%s] [%s]", primary_userid, generated_key, provided_key)
         link = Link(primary_userid, generated_key, provided_key)
-        return self.add_document(link)
+        self.add_document(link)
+        return True
 
     def get_link(self, primary_user):
         collection = self.collection()
-        documents = collection.find({"primary_user": primary_user})
+        documents = collection.find({MongoLinkStore.PRIMARY_USER: primary_user})
         links = []
         for doc in documents:
             links.append(doc)
@@ -41,4 +47,4 @@ class MongoLinkStore(MongoStore, LinkStore):
 
     def remove_link(self, primary_user):
         collection = self.collection()
-        collection.delete_many({"primary_user": primary_user})
+        collection.delete_many({MongoLinkStore.PRIMARY_USER: primary_user})

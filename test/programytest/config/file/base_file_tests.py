@@ -11,7 +11,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertEqual(client_configuration.section_name, "console")
         self.assertEqual(client_configuration.prompt, ">>>")
 
-        self.assertEquals(1, len(client_configuration.configurations))
+        self.assertEqual(1, len(client_configuration.configurations))
         bot_configuration = client_configuration.configurations[0]
         self.assertIsNotNone(bot_configuration)
 
@@ -42,7 +42,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
         self.assertIsNotNone(bot_configuration.conversations.initial_topic, "TOPIC1")
         self.assertIsNotNone(bot_configuration.conversations.empty_on_start, False)
 
-        self.assertEquals(1, len(bot_configuration.configurations))
+        self.assertEqual(1, len(bot_configuration.configurations))
         brain_configuration = bot_configuration.configurations[0]
         self.assertIsNotNone(brain_configuration)
 

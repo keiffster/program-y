@@ -2,6 +2,7 @@ from programy.storage.stores.sql.engine import SQLStorageEngine
 from programy.storage.stores.sql.config import SQLStorageConfiguration
 
 from programytest.storage.test_utils import StorageEngineTestUtils
+import programytest.storage.engines as Engines
 
 
 class SQLStorageEngineTests(StorageEngineTestUtils):

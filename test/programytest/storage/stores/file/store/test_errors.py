@@ -14,7 +14,7 @@ class FileErrorsStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileErrorsStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_save_errors(self):
         config = FileStorageConfiguration()

@@ -27,7 +27,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         self.assertFalse(node.is_root())
 
-        self.assertEquals(0, len(node.priority_words))
+        self.assertEqual(0, len(node.priority_words))
         self.assertFalse(node.has_priority_words())
         self.assertFalse(node.is_priority())
 
@@ -47,7 +47,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.is_zero_or_more())
         self.assertFalse(node.is_one_or_more())
 
-        self.assertEquals(0, len(node.children))
+        self.assertEqual(0, len(node.children))
         self.assertFalse(node.has_children())
         self.assertFalse(node.has_nodes())
 
@@ -67,14 +67,14 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         self.assertFalse(node.is_bot())
 
-        self.assertEquals("P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)", node._child_count(verbose=True))
-        self.assertEquals("", node._child_count(verbose=False))
+        self.assertEqual("P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)", node._child_count(verbose=True))
+        self.assertEqual("", node._child_count(verbose=False))
 
-        self.assertEquals("NODE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node.to_string(verbose=True))
-        self.assertEquals("NODE", node.to_string(verbose=False))
+        self.assertEqual("NODE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node.to_string(verbose=True))
+        self.assertEqual("NODE", node.to_string(verbose=False))
 
-        self.assertEquals("", node.to_xml(self._client_context))
-        self.assertEquals("", node.to_xml(self._client_context))
+        self.assertEqual("", node.to_xml(self._client_context))
+        self.assertEqual("", node.to_xml(self._client_context))
 
     def test_get_tabs(self):
         node = PatternNode()
@@ -82,15 +82,15 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         self._client_context.bot.configuration._tab_parse_output = True
 
-        self.assertEquals("", node.get_tabs(self._client_context, 0))
-        self.assertEquals("  ", node.get_tabs(self._client_context, 1))
-        self.assertEquals("          ", node.get_tabs(self._client_context, 5))
+        self.assertEqual("", node.get_tabs(self._client_context, 0))
+        self.assertEqual("  ", node.get_tabs(self._client_context, 1))
+        self.assertEqual("          ", node.get_tabs(self._client_context, 5))
 
         self._client_context.bot.configuration._tab_parse_output = False
 
-        self.assertEquals("", node.get_tabs(self._client_context, 0))
-        self.assertEquals("", node.get_tabs(self._client_context, 1))
-        self.assertEquals("", node.get_tabs(self._client_context, 5))
+        self.assertEqual("", node.get_tabs(self._client_context, 0))
+        self.assertEqual("", node.get_tabs(self._client_context, 1))
+        self.assertEqual("", node.get_tabs(self._client_context, 5))
 
     def test_equals_ignore_case(self):
 
@@ -244,10 +244,10 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         node.add_topic(topic1)
         new_node = node._node_exists(topic1)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, topic1)
+        self.assertEqual(new_node, topic1)
         new_node = node.add_topic(topic2)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, topic1)
+        self.assertEqual(new_node, topic1)
 
         that1 = PatternThatNode()
         that2 = PatternThatNode()
@@ -255,10 +255,10 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         node.add_that(that1)
         new_node = node._node_exists(that1)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, that1)
+        self.assertEqual(new_node, that1)
         new_node = node.add_that(that2)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, that1)
+        self.assertEqual(new_node, that1)
 
         template1 = PatternTemplateNode(None)
         template2 = PatternTemplateNode(None)
@@ -266,10 +266,10 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         node.add_template(template1)
         new_node = node._node_exists(template1)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, template1)
+        self.assertEqual(new_node, template1)
         new_node = node.add_template(template2)
         self.assertIsNotNone(new_node)
-        self.assertEquals(new_node, template1)
+        self.assertEqual(new_node, template1)
 
         test_result = """<priority word="priority"></priority>
 <zerormore wildcard="^">
@@ -301,10 +301,10 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         if child_equal is True:
             new_node = base_node._node_exists(first_node)
             self.assertIsNotNone(new_node)
-            self.assertEquals(new_node, first_node)
+            self.assertEqual(new_node, first_node)
             new_node = base_node._node_exists(second_node)
             self.assertIsNotNone(new_node)
-            self.assertEquals(new_node, first_node)
+            self.assertEqual(new_node, first_node)
 
     def test_priority_node_exists(self):
         node = PatternNode()
@@ -488,10 +488,10 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         child_node = PatternPriorityWordNode("test")
         node.add_child(child_node)
-        self.assertEquals(1, len(node.priority_words))
+        self.assertEqual(1, len(node.priority_words))
 
         node._remove_node(child_node)
-        self.assertEquals(0, len(node.priority_words))
+        self.assertEqual(0, len(node.priority_words))
 
     def test_remove_zeroormore_arrow_node(self):
         node = PatternNode()
@@ -543,9 +543,9 @@ class PatternBotNodeTests(ParserTestsBaseClass):
 
         child_node = PatternWordNode("test")
         node.add_child(child_node)
-        self.assertEquals(1, len(node.children))
-        self.assertEquals(1, len(node._children_words))
+        self.assertEqual(1, len(node.children))
+        self.assertEqual(1, len(node._children_words))
 
         node._remove_node(child_node)
-        self.assertEquals(0, len(node.children))
-        self.assertEquals(0, len(node._children_words))
+        self.assertEqual(0, len(node.children))
+        self.assertEqual(0, len(node._children_words))

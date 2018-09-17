@@ -15,25 +15,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, TEXT
 
 from programy.storage.stores.sql.base import Base
-
+from programy.storage.stores.utils import DAOUtils
 
 class Category(Base):
     __tablename__ = 'categories'
 
     id = Column(Integer, primary_key=True)
 
-    groupid = Column(String)
-    userid = Column(String)
-    topic = Column(String, nullable=True)
-    that = Column(String, nullable=True)
-    pattern = Column(String)
-    template = Column(String)
+    groupid = Column(String(48))
+    userid = Column(String(16))
+    topic = Column(String(255), nullable=True)
+    that = Column(String(512), nullable=True)
+    pattern = Column(String(512))
+    template = Column(TEXT)
 
     def __repr__(self):
-        return "<Category(id='%d', groupid='%s', userid='%s', topic='%s', that='%s', pattern='%s', template='%s')" % \
-               (self.id, self.groupid, self.userid, self.topic, self.that, self.pattern, self.template)
+        return "<Category(id='%s', groupid='%s', userid='%s', topic='%s', that='%s', pattern='%s', template='%s'>" % \
+               (DAOUtils.valid_id(self.id), self.groupid, self.userid, self.topic, self.that, self.pattern, self.template)
 
 

@@ -8,12 +8,12 @@ class TwitterStoreAsserts(unittest.TestCase):
 
         last_direct_message_id, last_status_id = store.load_last_message_ids()
 
-        self.assertEquals(last_direct_message_id, -1)
-        self.assertEquals(last_status_id, -1)
+        self.assertEqual(last_direct_message_id, "-1")
+        self.assertEqual(last_status_id, "-1")
 
-        store.store_last_message_ids(666, 999)
+        store.store_last_message_ids("666", "999")
 
         last_direct_message_id, last_status_id = store.load_last_message_ids()
 
-        self.assertEquals(last_direct_message_id, 666)
-        self.assertEquals(last_status_id, 999)
+        self.assertEqual(last_direct_message_id, "666")
+        self.assertEqual(last_status_id, "999")

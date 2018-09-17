@@ -18,17 +18,18 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Duplicate(Base):
     __tablename__ = 'duplicates'
 
     id = Column(Integer, primary_key=True)
-    duplicate = Column(String)
-    file = Column(String)
-    start = Column(String)
-    end = Column(String)
+    duplicate = Column(String(512))
+    file = Column(String(512))
+    start = Column(String(16))
+    end = Column(String(16))
 
     def __repr__(self):
-        return "<Duplicate(id='%d', duplicate='%s', file='%s', start'%s', end='%s')>" % (self.id, self.duplicate, self.file, self.start, self.end)
+        return "<Duplicate(id='%s', duplicate='%s', file='%s', start='%s', end='%s')>" % (DAOUtils.valid_id(self.id), self.duplicate, self.file, self.start, self.end)
 

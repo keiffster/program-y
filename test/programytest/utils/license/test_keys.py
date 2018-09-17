@@ -25,11 +25,11 @@ class LicenseKeyTests(unittest.TestCase):
         keys.add_key("KEY3", "KEY3 Data With Spaces")
 
         self.assertTrue(keys.has_key('KEY1'))
-        self.assertEquals("Key1Data", keys.get_key("KEY1"))
+        self.assertEqual("Key1Data", keys.get_key("KEY1"))
         self.assertTrue(keys.has_key('KEY2'))
-        self.assertEquals("Key2Data", keys.get_key("KEY2"))
+        self.assertEqual("Key2Data", keys.get_key("KEY2"))
         self.assertTrue(keys.has_key('KEY3'))
-        self.assertEquals("KEY3 Data With Spaces", keys.get_key("KEY3"))
+        self.assertEqual("KEY3 Data With Spaces", keys.get_key("KEY3"))
         with self.assertRaises(Exception):
             keys.get_key("KEY5")
 

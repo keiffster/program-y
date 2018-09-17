@@ -18,32 +18,34 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class PropertyBase(object):
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    value = Column(String)
+    name = Column(String(48))
+    value = Column(String(256))
 
 
 class Property(Base, PropertyBase):
     __tablename__ = 'properties'
 
     def __repr__(self):
-        return "<Property(id='%d', name='%s', value='%s')>" % (self.id, self.name, self.value)
+        return "<Property(id='%s', name='%s', value='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.name, self.value)
 
 
 class DefaultVariable(Base, PropertyBase):
     __tablename__ = 'defaults'
 
     def __repr__(self):
-        return "<Default(id='%d', name='%s', value='%s')>" % (self.id, self.name, self.value)
+        return "<DefaultVariable(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
 
 
 class Regex(Base, PropertyBase):
     __tablename__ = 'regexes'
 
     def __repr__(self):
-        return "<Regex(id='%d', name='%s', regfex='%s')>" % (self.id, self.name, self.value)
+        return "<Regex(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
 

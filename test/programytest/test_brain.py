@@ -110,7 +110,7 @@ class BrainTests(unittest.TestCase):
         self.assertIsNotNone(brain.authentication)
         self.assertIsNotNone(brain.authorisation)
         self.assertIsNone(brain.default_oob)
-        self.assertEquals({}, brain.oobs)
+        self.assertEqual({}, brain.oobs)
 
     def test_oob_loading(self):
 

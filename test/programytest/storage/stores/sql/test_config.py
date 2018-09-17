@@ -27,10 +27,10 @@ class SQLStorageConfigurationTests(unittest.TestCase):
                         echo: false
                         encoding: utf-8
                         create_db: true
-                        drop_all_first: true
+                        drop_all_first: True
                 """, ConsoleConfiguration(), ".")
 
-        mongo_config = yaml.get_section("redis")
+        mongo_config = yaml.get_section("sql")
 
         config = SQLStorageConfiguration()
         config.load_config_section(yaml, mongo_config, ".")

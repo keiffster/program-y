@@ -17,7 +17,7 @@ class FilePropertyStoreTests(PropertyStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePropertyStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_properties_storage(self):
         config = FileStorageConfiguration()

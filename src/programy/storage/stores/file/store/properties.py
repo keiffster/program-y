@@ -62,27 +62,36 @@ class FilePropertyStore(FileStore, PropertyStore):
     def _load_properties(self, property_filepath):
         properties = {}
         if os.path.exists(property_filepath):
-            with open(property_filepath, "r") as props_file:
-                for line in props_file:
-                    line = line.strip()
-                    if line:
-                        if line.startswith(FilePropertyStore.COMMENT) is False:
-                            splits = line.split(FilePropertyStore.SPLIT_CHAR)
-                            if len(splits)>1:
-                                key = splits[0].strip()
-                                val = self.process_value(splits[1:])
-                                if val is not None:
-                                    properties[key] = val
+            try:
+                with open(property_filepath, "r") as props_file:
+                    for line in props_file:
+                        line = line.strip()
+                        if line:
+                            if line.startswith(FilePropertyStore.COMMENT) is False:
+                                splits = line.split(FilePropertyStore.SPLIT_CHAR)
+                                if len(splits)>1:
+                                    key = splits[0].strip()
+                                    val = self.process_value(splits[1:])
+                                    if val is not None:
+                                        properties[key] = val
+
+            except Exception as excep:
+               YLogger.exception(self, "Failed to load properties file [%s]", excep, property_filepath)
+
         return properties
 
     def process_value(self, splits):
         return (FilePropertyStore.SPLIT_CHAR.join(splits)).strip()
 
     def _write_properties(self, property_filepath, properties):
-        with open(property_filepath, "w+") as props_file:
-            for key, value in properties.items():
-                props_file.write("%s%s%s\n"%(key, FilePropertyStore.SPLIT_CHAR, value))
-            props_file.write("\n")
+        try:
+            with open(property_filepath, "w+") as props_file:
+                for key, value in properties.items():
+                    props_file.write("%s%s%s\n"%(key, FilePropertyStore.SPLIT_CHAR, value))
+                props_file.write("\n")
+
+        except Exception as excep:
+            YLogger.exception(self, "Failed to write properties file [%s]", excep, property_filepath)
 
     def _load_file_contents(self, collection, filename):
         properties = self._load_properties(filename)

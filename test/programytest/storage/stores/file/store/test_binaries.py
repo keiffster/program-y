@@ -20,7 +20,7 @@ class FileBinariesStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileBinariesStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_save_load_binaries(self):
         config = FileStorageConfiguration()
@@ -46,7 +46,7 @@ class FileBinariesStoreTests(unittest.TestCase):
         aiml_parser2 = store.load_binary()
         self.assertIsNotNone(aiml_parser2)
 
-        self.assertEquals(aiml_parser2._name, "pretend1")
+        self.assertEqual(aiml_parser2._name, "pretend1")
 
         shutil.rmtree(tmpdir)
         self.assertFalse(os.path.exists(tmpdir))

@@ -1,4 +1,6 @@
 import unittest
+import os
+import os.path
 
 from programy.storage.entities.store import Store
 from programy.mappings.sets import SetCollection
@@ -32,7 +34,7 @@ class SetStoreAsserts(unittest.TestCase):
 
         set_collection = MockSetCollection()
         store.load_all(set_collection)
-        self.assertEquals(2, len(set_collection.sets.keys()))
+        self.assertEqual(2, len(set_collection.sets.keys()))
         self.assertTrue('TESTSET1' in set_collection.sets)
         self.assertTrue('VAL1' in set_collection.sets['TESTSET1'])
         self.assertTrue('VAL2' in set_collection.sets['TESTSET1'])
@@ -46,7 +48,7 @@ class SetStoreAsserts(unittest.TestCase):
 
         set_collection = MockSetCollection()
         store.load_all(set_collection)
-        self.assertEquals(1, len(set_collection.sets.keys()))
+        self.assertEqual(1, len(set_collection.sets.keys()))
         self.assertTrue('TESTSET1' in set_collection.sets)
         self.assertTrue('VAL1' in set_collection.sets['TESTSET1'])
         self.assertTrue('VAL3' in set_collection.sets['TESTSET1'])
@@ -72,11 +74,11 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL3' in values)
         self.assertTrue('VAL4' in values)
 
-    def assert_upload_from_text_file(self, store, filename):
+    def assert_upload_from_text_file(self, store):
 
         store.empty()
 
-        store.upload_from_file(filename)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "text" + os.sep + "testset.txt")
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')
@@ -87,11 +89,11 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL3' in values)
         self.assertTrue('VAL4' in values)
 
-    def assert_upload_text_files_from_directory_no_subdir(self, store, filename):
+    def assert_upload_text_files_from_directory_no_subdir(self, store):
 
         store.empty ()
 
-        store.upload_from_directory(filename, subdir=False)
+        store.upload_from_directory(os.path.dirname(__file__)+os.sep+"data"+os.sep+"sets"+os.sep+"text", subdir=False)
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')
@@ -102,11 +104,11 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL3' in values)
         self.assertTrue('VAL4' in values)
 
-    def assert_upload_from_csv_file(self, store, filename):
+    def assert_upload_from_csv_file(self, store):
 
         store.empty()
 
-        store.upload_from_file(filename, format=Store.CSV_FORMAT)
+        store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv" + os.sep + "testset.csv", format=Store.CSV_FORMAT)
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')
@@ -117,10 +119,10 @@ class SetStoreAsserts(unittest.TestCase):
         self.assertTrue('VAL3' in values)
         self.assertTrue('VAL4' in values)
 
-    def assert_upload_csv_files_from_directory_with_subdir(self, store, filename):
+    def assert_upload_csv_files_from_directory_with_subdir(self, store):
         store.empty()
 
-        store.upload_from_directory(filename, format=Store.CSV_FORMAT)
+        store.upload_from_directory(os.path.dirname(__file__) + os.sep + "data" + os.sep + "sets" + os.sep + "csv", format=Store.CSV_FORMAT)
 
         set_collection = SetCollection()
         store.load(set_collection, 'TESTSET')
@@ -135,7 +137,7 @@ class SetStoreAsserts(unittest.TestCase):
         store.load(set_collection, 'TESTSET2')
         self.assertTrue(set_collection.contains('TESTSET2'))
         values = set_collection.set('TESTSET2')
-        self.assertEquals(4, len(values))
+        self.assertEqual(4, len(values))
         self.assertTrue('VAL5' in values)
         self.assertTrue('VAL6' in values)
         self.assertTrue('VAL7' in values)

@@ -26,9 +26,15 @@ class SQLDuplicatesStore(SQLStore, DuplicatesStore):
         SQLStore.__init__(self, storage_engine)
 
     def empty(self):
-        self._storage_engine.session.query(Duplicate).delete()
+        self._get_all().delete()
 
-    def save_duplicates(self, duplicates):
+    def save_duplicates(self, duplicates, commit=True):
         for duplicate in duplicates:
-            duplicate = Duplicate(duplicate=duplicate[0], file=duplicate[1], start=duplicate[2], end=duplicate[3])
-            self._storage_engine.session.add(duplicate)
+            db_duplicate = Duplicate(duplicate=duplicate[0], file=duplicate[1], start=duplicate[2], end=duplicate[3])
+            self._storage_engine.session.add(db_duplicate)
+
+        if commit is True:
+            self.commit()
+
+    def _get_all(self):
+        return self._storage_engine.session.query(Duplicate)

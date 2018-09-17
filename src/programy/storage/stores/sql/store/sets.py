@@ -31,6 +31,7 @@ class SQLSetsStore(SQLStore, SetsStore):
     def add_to_set(self, name, value):
         aset = Set(name=name, value=value.upper())
         self._storage_engine.session.add(aset)
+        return True
 
     def remove_from_set(self, name, value):
         self._storage_engine.session.query(Set).filter(Set.name==name, Set.value==value.upper()).delete()
@@ -46,6 +47,7 @@ class SQLSetsStore(SQLStore, SetsStore):
         values = self._storage_engine.session.query(Set).filter(Set.name==set_name)
         the_set = {}
         for pair in values:
-            self.add_set_values(the_set, pair.value)
-        set_collection.add_set(set_name, the_set, 'sql')
-
+            value = pair.value.strip()
+            if value:
+                self.add_set_values(the_set, value)
+        set_collection.add_set(set_name, the_set, SQLStore.SQL)

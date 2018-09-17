@@ -1,4 +1,4 @@
-from programytest.storage.asserts.store.assert_lookups import LookupStoreAsserts
+from programytest.storage.asserts.store.assert_denormals import DenormalStoreAsserts
 import os
 import os.path
 import re
@@ -10,14 +10,14 @@ from programy.mappings.denormal import DenormalCollection
 from programy.storage.stores.file.config import FileStoreConfiguration
 
 
-class FileDenormalStoreTests(LookupStoreAsserts):
+class FileDenormalStoreTests(DenormalStoreAsserts):
 
     def test_initialise(self):
         config = FileStorageConfiguration()
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileDenormalStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
@@ -30,5 +30,5 @@ class FileDenormalStoreTests(LookupStoreAsserts):
         
         store.load(denormal_collection)
 
-        self.assertEquals(denormal_collection.denormalise(" DOT COM "), [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM '])
+        self.assertEqual(denormal_collection.denormalise(" DOT COM "), [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM '])
         self.assertEqual(denormal_collection.denormalise_string("keith dot com"), "keith.COM")

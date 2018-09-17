@@ -17,17 +17,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class Lookup(object):
 
-    def __init__(self, name, key_values):
+    def __init__(self, key, value):
         self.id = None
-        self.name = name
-        self.key_values = key_values
+        self.key = key
+        self.value = value
 
     def __repr__(self):
-        return "<Lookup(id='%d', name='%s')>" % (self.id, self.name)
+        return "<Lookup(id='%d', key='%s', value='%s')>" % (self.id, self.key, self.value)
 
     def to_document(self):
-        document = {"name": self.name,
-                    "key_values": self.key_values}
+        document = {"key": self.key,
+                    "value": self.value}
         if self.id is not None:
             document['_id'] = self.id
         return document
@@ -37,8 +37,9 @@ class Lookup(object):
         lookup = Lookup(None, None)
         if '_id' in data:
             lookup.id = data['_id']
-        if 'name' in data:
-            lookup.primary_user = data['name']
-        if 'key_values' in data:
-            lookup.generated_key = data['key_values']
+        if 'key' in data:
+            lookup.key = data['key']
+        if 'value' in data:
+            lookup.value = data['value']
         return lookup
+

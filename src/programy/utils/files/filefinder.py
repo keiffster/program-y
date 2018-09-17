@@ -65,8 +65,7 @@ class FileFinder(object):
                 collection[just_filename.upper()] = self.load_file_contents(just_filename, file[1], userid=userid)
                 file_maps[just_filename.upper()] = file[1]
             except Exception as excep:
-                print(excep)
-                YLogger.exception(self, "Failed to load file contents for file [%s]"% file[1], excep)
+                YLogger.exception(self, "Failed to load file contents for file [%s]", excep, file[1])
 
         return collection, file_maps
 
@@ -77,7 +76,7 @@ class FileFinder(object):
         try:
             collection[just_filename] = self.load_file_contents(just_filename, filename)
         except Exception as excep:
-            YLogger.exception(self, "Failed to load file contents for file [%s]"%filename, excep)
+            YLogger.exception(self, "Failed to load file contents for file [%s]", excep, filename)
 
         return collection
 

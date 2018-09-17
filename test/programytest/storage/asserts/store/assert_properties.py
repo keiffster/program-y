@@ -12,16 +12,16 @@ class PropertyStoreAsserts(unittest.TestCase):
 
         new_properties = store.get_properties()
         self.assertTrue("name1" in new_properties)
-        self.assertEquals("val1", new_properties["name1"])
+        self.assertEqual("val1", new_properties["name1"])
         self.assertTrue("name2" in new_properties)
-        self.assertEquals("val2", new_properties["name2"])
+        self.assertEqual("val2", new_properties["name2"])
         self.assertTrue("name3" in new_properties)
-        self.assertEquals("val3", new_properties["name3"])
+        self.assertEqual("val3", new_properties["name3"])
         self.assertFalse("name4" in new_properties)
 
         store.empty()
         new_properties = store.get_properties()
-        self.assertEquals(0, len(new_properties.keys()))
+        self.assertEqual(0, len(new_properties.keys()))
 
     def assert_property_storage(self, store):
 
@@ -32,7 +32,7 @@ class PropertyStoreAsserts(unittest.TestCase):
         new_properties = store.get_properties()
 
         self.assertTrue("name1" in new_properties)
-        self.assertEquals("val1", new_properties["name1"])
+        self.assertEqual("val1", new_properties["name1"])
         self.assertFalse("name2" in new_properties)
 
         store.add_property("name2", "val2")
@@ -40,9 +40,9 @@ class PropertyStoreAsserts(unittest.TestCase):
 
         new_properties = store.get_properties()
         self.assertTrue("name1" in new_properties)
-        self.assertEquals("val1", new_properties["name1"])
+        self.assertEqual("val1", new_properties["name1"])
         self.assertTrue("name2" in new_properties)
-        self.assertEquals("val2", new_properties["name2"])
+        self.assertEqual("val2", new_properties["name2"])
         self.assertFalse("name3" in new_properties)
 
     def assert_empty_properties(self, store):
@@ -57,10 +57,10 @@ class PropertyStoreAsserts(unittest.TestCase):
 
         new_properties = store.get_properties()
         self.assertTrue("name1" in new_properties)
-        self.assertEquals("val1", new_properties["name1"])
+        self.assertEqual("val1", new_properties["name1"])
         new_properties = store.get_properties()
         self.assertTrue("name2" in new_properties)
-        self.assertEquals("val2", new_properties["name2"])
+        self.assertEqual("val2", new_properties["name2"])
 
         store.empty_properties()
 

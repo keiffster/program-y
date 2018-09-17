@@ -15,7 +15,7 @@ class FileTwitterStoreTests(TwitterStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTwitterStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_twitter_storage(self):
         config = FileStorageConfiguration()

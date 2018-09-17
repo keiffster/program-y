@@ -18,17 +18,18 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Error(Base):
     __tablename__ = 'errors'
 
     id = Column(Integer, primary_key=True)
-    error = Column(String)
-    file = Column(String)
-    start = Column(String)
-    end = Column(String)
+    error = Column(String(512))
+    file = Column(String(512))
+    start = Column(String(16))
+    end = Column(String(16))
 
     def __repr__(self):
-        return "<Error(id='%d', error='%s', file='%s', start'%s', end='%s')>" % (self.id, self.error, self.file, self.start, self.end)
+        return "<Error(id='%s', error='%s', file='%s', start='%s', end='%s')>" % (DAOUtils.valid_id(self.id), self.error, self.file, self.start, self.end)
 

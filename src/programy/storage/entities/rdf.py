@@ -41,8 +41,10 @@ class RDFStore(object):
         return splits
 
     def process_line(self, name, fields, id=None):
-        subject = fields[0].strip().strip('"')
-        predicate = fields[1].strip().strip('"')
-        obj = fields[2].strip().strip('"')
+        if len(fields) == 3:
+            subject = fields[0].strip().strip('"')
+            predicate = fields[1].strip().strip('"')
+            obj = fields[2].strip().strip('"')
 
-        self.add_rdf(name, subject, predicate, obj)
+            return self.add_rdf(name, subject, predicate, obj)
+        return False

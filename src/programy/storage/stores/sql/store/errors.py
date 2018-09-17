@@ -28,7 +28,10 @@ class SQLErrorsStore(SQLStore, ErrorsStore):
     def empty(self):
         self._storage_engine.session.query(Error).delete()
 
-    def save_errors(self, errors):
+    def save_errors(self, errors, commit=True):
         for error in errors:
             error = Error(error=error[0], file=error[1], start=error[2], end=error[3])
             self._storage_engine.session.add(error)
+
+        if commit is True:
+            self.commit()

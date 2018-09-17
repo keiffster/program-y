@@ -37,14 +37,11 @@ class MockMetOffice(MetOffice):
 
 class MockWeatherExtension(WeatherExtension):
 
-    maps_file = None
-    weather_file = None
-
     def get_geo_locator(self, bot):
-        return MockGoogleMaps(MockWeatherExtension.maps_file)
+        return MockGoogleMaps(WeathersAIMLTests.maps_file)
 
     def get_met_office(self, bot):
-        return MockMetOffice(MockWeatherExtension.weather_file)
+        return MockMetOffice(WeathersAIMLTests.weather_file)
 
 
 class WeathersTestsClient(TestClient):
@@ -60,13 +57,16 @@ class WeathersTestsClient(TestClient):
 
 class WeathersAIMLTests(unittest.TestCase):
 
+    maps_file = None
+    weather_file = None
+
     def setUp (self):
         client = WeathersTestsClient()
         self._client_context = client.create_client_context("testid")
 
     def test_weather(self):
-        MockWeatherExtension.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"
-        MockWeatherExtension.weather_file = os.path.dirname(__file__) + os.sep + "observation.json"
+        WeathersAIMLTests.maps_file = os.path.dirname(__file__) + os.sep + "google_latlong.json"
+        WeathersAIMLTests.weather_file = os.path.dirname(__file__) + os.sep + "observation.json"
         threehourly = os.path.dirname(__file__) + os.sep + "forecast_3hourly.json"
         daily       = os.path.dirname(__file__) + os.sep + "forecast_daily.json"
 

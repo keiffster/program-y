@@ -24,8 +24,8 @@ class ResponseAIMLTests(unittest.TestCase):
     def test_Response(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
-        self.assertEquals(response, "Hi! It's delightful to see you.")
+        self.assertEqual(response, "Hi! It's delightful to see you.")
 
         response = self._client_context.bot.ask_question(self._client_context, "CAN YOU REPEAT THAT")
         self.assertIsNotNone(response)
-        self.assertEquals(response, "I said, Hi! It's delightful to see you.")
+        self.assertEqual(response, "I said, Hi! It's delightful to see you.")

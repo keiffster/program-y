@@ -49,7 +49,7 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("2", result)
+        self.assertEqual("2", result)
 
     def test_uniq_query_on_subject(self):
         self._client_context.brain.rdf.add_entity("MONKEY", "legs", "2", "ANIMALS")
@@ -73,7 +73,7 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY BIRD", result)
+        self.assertEqual("MONKEY BIRD", result)
 
     def test_uniq_query_on_predicate(self):
         self._client_context.brain.rdf.add_entity("MONKEY", "legs", "2", "ANIMALS")
@@ -97,4 +97,4 @@ class TemplateGraphUniqTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("LEGS", result)
+        self.assertEqual("LEGS", result)

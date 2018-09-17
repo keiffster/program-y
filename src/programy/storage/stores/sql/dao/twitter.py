@@ -18,15 +18,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Twitter(Base):
     __tablename__ = 'twitter'
 
     id = Column(Integer, primary_key=True)
-    last_direct_message_id = Column(String)
-    last_status_id = Column(String)
+    last_direct_message_id = Column(String(16))
+    last_status_id = Column(String(16))
 
     def __repr__(self):
-        return "<Twitter(id='%d', last_direct_message_id='%s', last_status_id='%s')>" % (self.id, self.last_direct_message_id, self.last_status_id)
+        return "<Twitter(id='%s', last_direct_message_id='%s', last_status_id='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.last_direct_message_id, self.last_status_id)
 

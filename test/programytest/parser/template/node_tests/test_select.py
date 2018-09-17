@@ -17,7 +17,7 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateSelectNode()
         self.assertIsNotNone(root)
-        self.assertEquals("SELECT", root.to_string())
+        self.assertEqual("SELECT", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -36,7 +36,7 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -45,4 +45,4 @@ class TemplateSelectNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

@@ -58,7 +58,7 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertEquals(1, len(configuration.client_configuration.configurations[0].configurations))
+        self.assertEqual(1, len(configuration.client_configuration.configurations[0].configurations))
 
     def test_load_from_text_multis_multiple_values(self):
         yaml = YamlConfigurationFile()
@@ -71,7 +71,7 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
-        self.assertEquals(2, len(configuration.client_configuration.configurations[0].configurations))
+        self.assertEqual(2, len(configuration.client_configuration.configurations[0].configurations))
 
     def test_load_from_text(self):
         yaml = YamlConfigurationFile()
@@ -165,7 +165,9 @@ console:
                   extension: .txt
                   directories: false
                 properties_storage:
-                  files: ./storage/properties
+                  file: ./storage/properties.txt
+                defaults_storage:
+                  file: ./storage/defaults.txt
                 variables:
                   files: ./storage/variables
                 rdf_storage:

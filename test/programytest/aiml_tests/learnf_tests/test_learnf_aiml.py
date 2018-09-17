@@ -57,20 +57,20 @@ class LearnfAIMLTests(unittest.TestCase):
         aiml = tree.getroot()
 
         categories = aiml.findall('category')
-        self.assertEquals(1, len(categories))
+        self.assertEqual(1, len(categories))
 
         patterns = categories[0].findall('pattern')
-        self.assertEquals(1, len(patterns))
-        self.assertEquals(patterns[0].text, pattern)
+        self.assertEqual(1, len(patterns))
+        self.assertEqual(patterns[0].text, pattern)
 
         topics = categories[0].findall('topic')
-        self.assertEquals(1, len(topics))
-        self.assertEquals(topics[0].text, topic)
+        self.assertEqual(1, len(topics))
+        self.assertEqual(topics[0].text, topic)
 
         thats = categories[0].findall('that')
-        self.assertEquals(1, len(thats))
-        self.assertEquals(thats[0].text, that)
+        self.assertEqual(1, len(thats))
+        self.assertEqual(thats[0].text, that)
 
         templates = categories[0].findall('template')
-        self.assertEquals(1, len(templates))
-        self.assertEquals(templates[0].text, template)
+        self.assertEqual(1, len(templates))
+        self.assertEqual(templates[0].text, template)

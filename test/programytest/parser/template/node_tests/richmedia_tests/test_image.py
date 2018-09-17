@@ -23,7 +23,7 @@ class TemplateImageNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<image>http://Servusai.com/logo.png</image>", resolved)
+        self.assertEqual("<image>http://Servusai.com/logo.png</image>", resolved)
 
-        self.assertEquals("<image>http://Servusai.com/logo.png</image>", root.to_xml(self._client_context))
+        self.assertEqual("<image>http://Servusai.com/logo.png</image>", root.to_xml(self._client_context))
 

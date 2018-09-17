@@ -159,28 +159,28 @@ class PatternGraphTests(ParserTestsBaseClass):
         set_element = ET.fromstring('<set>colour</set>')
         text = graph.get_text_from_element(set_element)
         self.assertIsNotNone(text)
-        self.assertEquals("colour", text)
+        self.assertEqual("colour", text)
 
     def get_text_from_element_whitespaces(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         set_element = ET.fromstring('<set>colour \n\r\t  eyes</set>')
         text = graph.get_text_from_element(set_element)
         self.assertIsNotNone(text)
-        self.assertEquals("colour set", text)
+        self.assertEqual("colour set", text)
 
     def get_tail_from_element_word(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         set_element = ET.fromstring('<set>colour</set>this')
         text = graph.get_tail_from_element(set_element)
         self.assertIsNotNone(text)
-        self.assertEquals("this", text)
+        self.assertEqual("this", text)
 
     def get_tail_from_element_word_whitespaces(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         set_element = ET.fromstring('<set>colour</set>this \t that \n the \r other')
         text = graph.get_tail_from_element(set_element)
         self.assertIsNotNone(text)
-        self.assertEquals("this that the other", text)
+        self.assertEqual("this that the other", text)
 
     def test_add_pattern_to_node(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
@@ -325,7 +325,7 @@ class PatternGraphTests(ParserTestsBaseClass):
     def test_count_word_in_patterns(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         count = graph.count_words_in_patterns()
-        self.assertEquals(0, count)
+        self.assertEqual(0, count)
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         pattern = ET.fromstring("<pattern>HELLO</pattern>")
         topic = ET.fromstring("<topic>HELLO</topic>")
@@ -334,12 +334,12 @@ class PatternGraphTests(ParserTestsBaseClass):
         graph.add_pattern_to_graph(pattern, topic, that, template)
 
         count = graph.count_words_in_patterns()
-        self.assertEquals(1, count)
+        self.assertEqual(1, count)
 
     def test_count_words_in_patterns(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         count = graph.count_words_in_patterns()
-        self.assertEquals(0, count)
+        self.assertEqual(0, count)
         graph = PatternGraph(self._client_context.brain.aiml_parser)
         pattern1 = ET.fromstring("<pattern>HELLO THErE</pattern>")
         topic = ET.fromstring("<topic>HELLO</topic>")
@@ -348,12 +348,12 @@ class PatternGraphTests(ParserTestsBaseClass):
 
         graph.add_pattern_to_graph(pattern1, topic, that, template)
         count = graph.count_words_in_patterns()
-        self.assertEquals(2, count)
+        self.assertEqual(2, count)
 
         pattern2 = ET.fromstring("<pattern>WHERE ARE YOU</pattern>")
         graph.add_pattern_to_graph(pattern2, topic, that, template)
         count = graph.count_words_in_patterns()
-        self.assertEquals(5, count)
+        self.assertEqual(5, count)
 
     def test_add_pattern_with_whitepsace(self):
         graph = PatternGraph(self._client_context.brain.aiml_parser)

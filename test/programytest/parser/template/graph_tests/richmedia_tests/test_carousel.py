@@ -39,4 +39,4 @@ class TemplateGraphCarouselTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateCarouselNode)
 
-        self.assertEquals(1, len(node._cards))
+        self.assertEqual(1, len(node._cards))

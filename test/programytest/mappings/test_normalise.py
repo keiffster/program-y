@@ -22,7 +22,7 @@ class NormaliseTests(unittest.TestCase):
         collection.add_to_lookup(".COM", [re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '])
 
         self.assertTrue(collection.has_key(".COM"))
-        self.assertEquals([re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '], collection.value(".COM"))
+        self.assertEqual([re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '], collection.value(".COM"))
 
         self.assertEqual("keithsterling DOT COM", collection.normalise_string("keithsterling.COM"))
 

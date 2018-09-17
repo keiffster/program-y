@@ -18,24 +18,25 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Node(object):
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    node_class = Column(String)
+    name = Column(String(48))
+    node_class = Column(String(512))
 
 
 class PatternNode(Base, Node):
     __tablename__ = 'pattern_nodes'
 
     def __repr__(self):
-        return "<Pattern Node(id='%d', name='%s', class='%s')>" % (self.id, self.name, self.node_class)
+        return "<Pattern Node(id='%s', name='%s', node_class='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.node_class)
 
 
 class TemplateNode(Base, Node):
     __tablename__ = 'template_nodes'
 
     def __repr__(self):
-        return "<Template Node(id='%d', name='%s', class='%s')>" % (self.id, self.name, self.node_class)
+        return "<Template Node(id='%s', name='%s', node_class='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.node_class)

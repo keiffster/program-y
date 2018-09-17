@@ -36,8 +36,8 @@ class FileStoreConfigurationTests(unittest.TestCase):
         self.assertEqual(".txt", sets_config.extension)
         self.assertFalse(sets_config.subdirs)
 
-        self.assertEquals("utf-8", sets_config.encoding)
-        self.assertEquals("text", sets_config.format)
+        self.assertEqual("utf-8", sets_config.encoding)
+        self.assertEqual("text", sets_config.format)
 
         self.assertTrue(sets_config.delete_on_start)
 
@@ -65,5 +65,5 @@ class FileStoreConfigurationTests(unittest.TestCase):
         self.assertFalse(sets_config.has_multiple_dirs())
 
         self.assertEqual(["./sets/test.txt"], sets_config.dirs)
-        self.assertEquals("text", sets_config.format)
-        self.assertEquals("utf-8", sets_config.encoding)
+        self.assertEqual("text", sets_config.format)
+        self.assertEqual("utf-8", sets_config.encoding)

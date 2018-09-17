@@ -41,25 +41,25 @@ class WikipediaServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "SUMMARY what is a cat")
-        self.assertEquals("Test Wikipedia response", response)
+        self.assertEqual("Test Wikipedia response", response)
 
     def test_ask_question_disambiguous(self):
         service = WikipediaService(api=MockWikipediaAPI(response=None, throw_exception=MockWikipediaAPI.DISAMBIGUATIONERROR))
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)
 
     def test_ask_question_pageerror_exception(self):
         service = WikipediaService(api=MockWikipediaAPI(response=None, throw_exception=MockWikipediaAPI.PAGEERROR))
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)
 
     def test_ask_question_general_exception(self):
         service = WikipediaService(api=MockWikipediaAPI(response=None, throw_exception=MockWikipediaAPI.GENERALEXCEPTION))
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)

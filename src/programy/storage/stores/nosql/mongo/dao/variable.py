@@ -17,11 +17,11 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class Variables(object):
 
-    def __init__(self, clientid, userid):
+    def __init__(self, clientid, userid, variables):
         self.id = None
         self.clientid = clientid
         self.userid = userid
-        self.variables = {}
+        self.variables = variables
 
     def __repr__(self):
         return "<Variables(id='%d', clientid='%s', userid='%s', variables='%s')>" % (self.id, self.clientid, self.userid, self.variables)
@@ -36,7 +36,7 @@ class Variables(object):
 
     @staticmethod
     def from_document(data):
-        property = Variables(None, None)
+        property = Variables(None, None, None)
         if '_id' in data:
             property.id = data['_id']
         if 'clientid' in data:
@@ -44,5 +44,7 @@ class Variables(object):
         if 'userid' in data:
             property.userid = data['userid']
         if 'variables' in data:
-            property.variables in data['variables']
+            property.variables = {}
+            for key, value in data['variables'].items():
+                property.variables[key] = value
         return property

@@ -17,14 +17,14 @@ class TemplateGraphFirstTests(TemplateGraphTestClient):
         ast = self._graph.parse_template_expression(template)
         self.assertIsNotNone(ast)
         self.assertIsInstance(ast, TemplateNode)
-        self.assertEquals(1, len(ast.children))
+        self.assertEqual(1, len(ast.children))
 
         first_node = ast.children[0]
         self.assertIsNotNone(first_node)
         self.assertIsInstance(first_node, TemplateFirstNode)
 
         self.assertIsNotNone(first_node.children)
-        self.assertEquals(4, len(first_node.children))
+        self.assertEqual(4, len(first_node.children))
         self.assertIsInstance(first_node.children[0], TemplateWordNode)
 
         self.assertEqual(ast.resolve(self._client_context), "one")

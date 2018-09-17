@@ -41,8 +41,12 @@ class FileErrorsStore(FileStore, ErrorsStore):
         filename = self._get_storage_path()
         file_dir = self._get_dir_from_path(filename)
         self._ensure_dir_exists(file_dir)
-        with open(filename, "w+") as errors_file:
-            errors_file.write("Error,File,Start Line,End Line\n")
-            for error in errors:
-                errors_file.write("%s,%s,%s,%s\n"%(error[0],error[1],error[2],error[3]))
-            errors_file.flush()
+        try:
+            with open(filename, "w+") as errors_file:
+                errors_file.write("Error,File,Start Line,End Line\n")
+                for error in errors:
+                    errors_file.write("%s,%s,%s,%s\n"%(error[0],error[1],error[2],error[3]))
+                errors_file.flush()
+
+        except Exception as excep:
+           YLogger.exception(self, "Failed to write errors file [%s]", excep, filename)

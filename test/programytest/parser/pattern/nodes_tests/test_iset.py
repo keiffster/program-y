@@ -9,16 +9,16 @@ class PatternSetNodeTests(ParserTestsBaseClass):
     def test_init_with_text(self):
         node = PatternISetNode({}, "test1, test2, test3")
         self.assertIsNotNone(node)
-        self.assertEquals("TEST1", node.words[0])
-        self.assertEquals("TEST2", node.words[1])
-        self.assertEquals("TEST3", node.words[2])
+        self.assertEqual("TEST1", node.words[0])
+        self.assertEqual("TEST2", node.words[1])
+        self.assertEqual("TEST3", node.words[2])
 
     def test_init_with_attribs(self):
         node = PatternISetNode({"words": "test1, test2, test3"}, "")
         self.assertIsNotNone(node)
-        self.assertEquals("TEST1", node.words[0])
-        self.assertEquals("TEST2", node.words[1])
-        self.assertEquals("TEST3", node.words[2])
+        self.assertEqual("TEST1", node.words[0])
+        self.assertEqual("TEST2", node.words[1])
+        self.assertEqual("TEST3", node.words[2])
 
     def test_init_with_invalid_attribs(self):
         with self.assertRaises(ParserException) as raised:
@@ -51,10 +51,10 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertFalse(node.has_children())
 
         self.assertIsNotNone(node.words)
-        self.assertEquals(3, len(node.words))
-        self.assertEquals("TEST1", node.words[0])
-        self.assertEquals("TEST2", node.words[1])
-        self.assertEquals("TEST3", node.words[2])
+        self.assertEqual(3, len(node.words))
+        self.assertEqual("TEST1", node.words[0])
+        self.assertEqual("TEST2", node.words[1])
+        self.assertEqual("TEST3", node.words[2])
 
         self.assertTrue(node.equivalent(PatternISetNode([], "test1, test2, test3")))
 
@@ -73,23 +73,23 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node = PatternISetNode([], "test1")
         self.assertIsNotNone(node)
         self.assertIsNotNone(node.words)
-        self.assertEquals(1, len(node.words))
-        self.assertEquals("TEST1", node.words[0])
+        self.assertEqual(1, len(node.words))
+        self.assertEqual("TEST1", node.words[0])
 
         node = PatternISetNode([], "test1,test2")
         self.assertIsNotNone(node)
         self.assertIsNotNone(node.words)
-        self.assertEquals(2, len(node.words))
-        self.assertEquals("TEST1", node.words[0])
-        self.assertEquals("TEST2", node.words[1])
+        self.assertEqual(2, len(node.words))
+        self.assertEqual("TEST1", node.words[0])
+        self.assertEqual("TEST2", node.words[1])
 
         node = PatternISetNode([], " test1, test2 , test3 ")
         self.assertIsNotNone(node)
         self.assertIsNotNone(node.words)
-        self.assertEquals(3, len(node.words))
-        self.assertEquals("TEST1", node.words[0])
-        self.assertEquals("TEST2", node.words[1])
-        self.assertEquals("TEST3", node.words[2])
+        self.assertEqual(3, len(node.words))
+        self.assertEqual("TEST1", node.words[0])
+        self.assertEqual("TEST2", node.words[1])
+        self.assertEqual("TEST3", node.words[2])
 
     def test_to_xml(self):
         node1 = PatternISetNode([], "test1, test2, test3")

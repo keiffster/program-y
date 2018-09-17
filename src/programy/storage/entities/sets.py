@@ -36,13 +36,13 @@ class SetsStore(Store):
 
     def process_line(self, name, text):
         if text:
-            value = text[0].upper()
-            self.add_to_set(name, value)
+            return self.add_to_set(name, text[0])
+        return False
 
     def add_set_values(self, the_set, value):
-            splits = value.split()
-            key = splits[0].upper()
-            if key not in the_set:
-                the_set[key] = []
-            the_set[key].append(splits)
+        splits = value.split()
+        key = splits[0].upper()
+        if key not in the_set:
+            the_set[key] = []
+        the_set[key].append(splits)
 

@@ -22,7 +22,7 @@ class DenormaliseTests(unittest.TestCase):
         collection.add_to_lookup(" DOT COM ", [re.compile("(^DOT COM | DOT COM | DOT COM$)", re.IGNORECASE), ".com"])
 
         self.assertTrue(collection.has_key(" DOT COM "))
-        self.assertEquals([re.compile("(^DOT COM | DOT COM | DOT COM$)", re.IGNORECASE), ".com"], collection.value(" DOT COM "))
+        self.assertEqual([re.compile("(^DOT COM | DOT COM | DOT COM$)", re.IGNORECASE), ".com"], collection.value(" DOT COM "))
 
         self.assertEqual(collection.denormalise_string("keithsterling dot com"), "keithsterling.com")
         self.assertIsNone(collection.denormalise(" dot cox "))

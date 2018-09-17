@@ -35,10 +35,13 @@ class FileCategoryStore(FileStore, CategoryStore):
         cat_ext = self.storage_engine.configuration.categories_storage.extension
         subdirs = self.storage_engine.configuration.categories_storage.subdirs
 
-        #TODO This fails when subdirs = False and/or when extension is none
         if self.storage_engine.configuration.categories_storage.has_single_file():
-            for file in dirs:
-                self._load_file_contents(parser, file)
+            for filename in dirs:
+                if cat_ext is not None:
+                    if filename.endswith(cat_ext):
+                        self._load_file_contents(parser, filename)
+                else:
+                    self._load_file_contents(parser, filename)
         else:
             for cat_dir in dirs:
                 if subdirs is False:

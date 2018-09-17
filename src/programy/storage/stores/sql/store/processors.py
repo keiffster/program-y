@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import os
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
 
@@ -21,6 +22,8 @@ from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.processors import ProcessorStore
 from programy.storage.stores.sql.dao.processor import PreProcessor
 from programy.storage.stores.sql.dao.processor import PostProcessor
+from programy.storage.entities.store import Store
+from programy.utils.classes.loader import ClassLoader
 
 
 class SQLProcessorsStore(SQLStore, ProcessorStore):
@@ -32,9 +35,44 @@ class SQLProcessorsStore(SQLStore, ProcessorStore):
         processors = self.get_all_processors()
         for processor in processors:
             try:
-                processor_factory.add_processor(processor.name, ClassLoader.instantiate_class(processor.processor_class))
+                processor_factory.add_processor(ClassLoader.instantiate_class(processor.classname)())
             except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Processor [%s]"%(processor_factory.type, processor.processor_class), e)
+                YLogger.exception(self, "Failed pre-instantiating Processor [%s]", e, processor.classname)
+
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        count = 0
+        success = 0
+
+        if os.path.exists(filename):
+            try:
+                with open(filename, "r", encoding="utf-8") as file:
+                    for line in file:
+                        if self._process_config_line(line, verbose) is True:
+                            success += 1
+                        count += 1
+
+                if commit is True:
+                    self.commit()
+
+            except FileNotFoundError:
+                YLogger.error(self, "File not found [%s]", filename)
+
+        return count, success
+
+    def _process_config_line(self, line, verbose):
+        line = line.strip()
+        if line:
+            if line[0] != '#':
+                processor = self._get_entity(line)
+                self.storage_engine.session.add(processor)
+                if verbose is True:
+                    print(line)
+                return True
+        return False
+
+    def _get_entity(self, classname):
+        raise NotImplementedError()
 
 
 class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
@@ -45,6 +83,9 @@ class SQLPreProcessorsStore(SQLProcessorsStore, ProcessorStore):
     def get_all_processors(self):
         return self._storage_engine.session.query(PreProcessor)
 
+    def _get_entity(self, classname):
+        return PreProcessor(classname=classname)
+
 
 class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
 
@@ -54,3 +95,5 @@ class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
     def get_all_processors(self):
         return self._storage_engine.session.query(PostProcessor)
 
+    def _get_entity(self, classname):
+        return PostProcessor(classname=classname)

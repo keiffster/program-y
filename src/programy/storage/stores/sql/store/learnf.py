@@ -18,11 +18,20 @@ from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.learnf import LearnfStore
 from programy.storage.stores.sql.dao.category import Category
 
-
 class SQLLearnfStore(SQLStore, LearnfStore):
 
     def __init__(self, storage_engine):
         SQLStore.__init__(self, storage_engine)
 
-    def save_learnf(self, client_context, xml_node):
-        pass
+    def save_learnf(self, client_context, category):
+        pattern = category.pattern
+        topic = category.topic
+        that = category.that
+        template = category.template
+
+        groupid = "LEARNF"
+        userid = client_context.userid
+
+        category = Category(groupid=groupid, userid=userid, pattern=pattern, topic=topic, that=that, template=template)
+        self.storage_engine.session.add(category)
+

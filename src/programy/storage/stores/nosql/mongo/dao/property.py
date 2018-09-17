@@ -14,16 +14,17 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
 
 class Property(object):
 
-    def __init__(self):
+    def __init__(self, name, value):
         self.id = None
-        self.name = None
-        self.value = None
+        self.name = name
+        self.value = value
 
     def __repr__(self):
-        return "<Property(id='%d', name='%s', value='%s')>" % (self.id, self.name, self.value)
+        return "<Property(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
 
     def to_document(self):
         document = {"name": self.name,
@@ -34,12 +35,52 @@ class Property(object):
 
     @staticmethod
     def from_document(data):
-        property = Property()
+        property = Property(None, None)
         if '_id' in data:
             property.id = data['_id']
         if 'name' in data:
-            property.clientid = data['name']
+            property.name = data['name']
         if 'value' in data:
-            property.userid = data['value']
+            property.value = data['value']
+        return property
+
+
+class DefaultVariable(Property):
+
+    def __init__(self, name, value):
+        Property.__init__(self, name, value)
+
+    def __repr__(self):
+        return "<DefaultVariable(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
+
+    @staticmethod
+    def from_document(data):
+        property = DefaultVariable(None, None)
+        if '_id' in data:
+            property.id = data['_id']
+        if 'name' in data:
+            property.name = data['name']
+        if 'value' in data:
+            property.value = data['value']
+        return property
+
+
+class Regex(Property):
+
+    def __init__(self, name, value):
+        Property.__init__(self, name, value)
+
+    def __repr__(self):
+        return "<Regex(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
+
+    @staticmethod
+    def from_document(data):
+        property = Regex(None, None)
+        if '_id' in data:
+            property.id = data['_id']
+        if 'name' in data:
+            property.name = data['name']
+        if 'value' in data:
+            property.value = data['value']
         return property
 

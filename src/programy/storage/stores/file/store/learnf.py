@@ -39,11 +39,14 @@ class FileLearnfStore(FileStore, LearnfStore):
     def create_learnf_file_if_missing(learnf_path):
 
         if os.path.isfile(learnf_path) is False:
-            file = open(learnf_path, "w+", encoding="utf-8")
-            file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-            file.write('<aiml>\n')
-            file.write('</aiml>\n')
-            file.close()
+            try:
+                with open(learnf_path, "w+", encoding="utf-8") as file:
+                    file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+                    file.write('<aiml>\n')
+                    file.write('</aiml>\n')
+                    file.close()
+            except Exception as excep:
+                YLogger.exception(None, "Error Writing learnf to %s", excep, learnf_path)
 
     @staticmethod
     def write_node_to_learnf_file(client_context, node, learnf_path):
@@ -57,12 +60,23 @@ class FileLearnfStore(FileStore, LearnfStore):
 
     def _get_storage_path(self):
         if len(self.storage_engine.configuration.learnf_storage.dirs) > 1:
-            YLogger.warning("Learnf Storage has multiple folders specified, using first only")
+            YLogger.warning(self, "Learnf Storage has multiple folders specified, using first only")
 
         return self.storage_engine.configuration.learnf_storage.dirs[0]
 
-    def save_learnf(self, client_context, xml_node):
+    def create_category_xml_node(self, client_context, category)   :
+        # Add our new element
+        child = ET.Element("category")
+        child.append(ET.Element(category.pattern))
+        child.append(ET.Element(category.topic))
+        child.append(ET.Element(category.that))
+        child.append(category.template.xml_tree(client_context))
+        return child
+
+    def save_learnf(self, client_context, category):
         try:
+            xml_node = self.create_category_xml_node(client_context, category)
+
             learnf_path = self._get_storage_path()
             self._ensure_dir_exists(learnf_path)
 

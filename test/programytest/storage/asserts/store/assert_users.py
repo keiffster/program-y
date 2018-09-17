@@ -14,11 +14,11 @@ class UserStoreAsserts(unittest.TestCase):
         store.commit()
 
         user = store.get_user('1')
-        self.assertEquals(user['userid'], '1')
-        self.assertEquals(user['client'], "console")
+        self.assertEqual(user['userid'], '1')
+        self.assertEqual(user['client'], "console")
 
         users = store.get_client_users("console")
-        self.assertEquals(3, len(users))
+        self.assertEqual(3, len(users))
 
         for user in users:
-            self.assertEquals(user['client'], 'console')
+            self.assertEqual(user['client'], 'console')

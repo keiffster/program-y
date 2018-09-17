@@ -27,12 +27,12 @@ class SetTests(unittest.TestCase):
         self.assertTrue(collection.contains("TESTSET"))
         self.assertTrue(collection.contains("TESTSET2"))
         self.assertFalse(collection.contains("TESTSET3"))
-        self.assertEquals(collection.store_name("TESTSET"), "teststore")
+        self.assertEqual(collection.store_name("TESTSET"), "teststore")
 
         aset = collection.set("TESTSET")
         self.assertIsNotNone(aset)
 
-        self.assertEquals(6, collection.count_words_in_sets())
+        self.assertEqual(6, collection.count_words_in_sets())
 
         collection.remove("TESTSET2")
         self.assertTrue(collection.contains("TESTSET"))

@@ -10,11 +10,11 @@ class PatternFactoryTests(unittest.TestCase):
     def test_init(self):
         factory = PatternNodeFactory()
         self.assertIsNotNone(factory)
-        self.assertEquals({}, factory._nodes_config)
+        self.assertEqual({}, factory._nodes_config)
         self.assertEqual("Pattern", factory._type)
 
     def assert_nodes(self, factory):
-        self.assertEquals(12, len(factory._nodes_config))
+        self.assertEqual(12, len(factory._nodes_config))
 
         self.assertTrue("root" in factory._nodes_config)
         instance = factory._nodes_config["root"]

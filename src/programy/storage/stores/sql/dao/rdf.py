@@ -18,6 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class RDF(Base):
@@ -25,13 +26,13 @@ class RDF(Base):
 
     id = Column(Integer, primary_key=True)
 
-    name = Column(String)
-    subject = Column(String)
-    predicate = Column(String)
-    object = Column(String)
+    name = Column(String(48))
+    subject = Column(String(48))
+    predicate = Column(String(48))
+    object = Column(String(256))
 
     def __repr__(self):
-        return "<RDF(id='%d', name='%s', subject='%s', predicate='%s', object='%s')" % \
-               (self.id, self.name, self.subject, self.predicate, self.object)
+        return "<RDF(id='%s', name='%s', subject='%s', predicate='%s', object='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.name, self.subject, self.predicate, self.object)
 
 

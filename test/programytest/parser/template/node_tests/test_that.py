@@ -17,15 +17,15 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateThatNode()
-        self.assertEquals("THAT", node.to_string())
+        self.assertEqual("THAT", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateThatNode(3, 2)
-        self.assertEquals("THAT question=3 sentence=2", node.to_string())
+        self.assertEqual("THAT question=3 sentence=2", node.to_string())
 
     def test_to_str_star(self):
         node = TemplateThatNode(1, -1)
-        self.assertEquals("THAT sentence=*", node.to_string())
+        self.assertEqual("THAT sentence=*", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -120,4 +120,4 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

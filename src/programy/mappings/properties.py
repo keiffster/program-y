@@ -82,7 +82,7 @@ class DefaultVariablesCollection(BasePropertiesCollection):
         return StorageFactory.DEFAULTS
 
     def get_store(self, engine):
-        return engine.variables_store()
+        return engine.defaults_store()
 
     def has_variable(self, key):
         return self.has_property(key)

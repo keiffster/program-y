@@ -30,13 +30,13 @@ class DataPointTets(unittest.TestCase):
         dp = DataPoint()
         self.assertIsNotNone(dp)
 
-        self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.OBSERVATION))
+        self.assertEqual("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.OBSERVATION))
         self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.OBSERVATION, None))
 
-        self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.FORECAST, metoffer.THREE_HOURLY))
+        self.assertEqual("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.FORECAST, metoffer.THREE_HOURLY))
         self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.FORECAST, metoffer.THREE_HOURLY))
 
-        self.assertEquals("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.FORECAST,metoffer.DAILY))
+        self.assertEqual("value", dp.extract_attribute({"item": "value"}, "item", MetOfficeWeatherReport.FORECAST,metoffer.DAILY))
         self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", MetOfficeWeatherReport.FORECAST,metoffer.DAILY))
 
         self.assertIsNone(dp.extract_attribute({"item": "value"}, "itemx", 3))
@@ -45,26 +45,26 @@ class DataPointTets(unittest.TestCase):
         dp = DataPoint()
         self.assertIsNotNone(dp)
 
-        self.assertEquals(dp.direction_to_full_text('N'), 'North')
-        self.assertEquals(dp.direction_to_full_text('NNE'), 'North North East')
-        self.assertEquals(dp.direction_to_full_text('NE'), 'North East')
-        self.assertEquals(dp.direction_to_full_text('ENE'), 'East North East')
-        self.assertEquals(dp.direction_to_full_text('E'), 'East')
-        self.assertEquals(dp.direction_to_full_text('ESE'), 'East South East')
-        self.assertEquals(dp.direction_to_full_text('SE'), 'South East')
-        self.assertEquals(dp.direction_to_full_text('SSE'), 'South South East')
-        self.assertEquals(dp.direction_to_full_text('S'), 'South')
-        self.assertEquals(dp.direction_to_full_text('SSW'), 'South South West')
-        self.assertEquals(dp.direction_to_full_text('SW'), 'South West')
-        self.assertEquals(dp.direction_to_full_text('WSW'), 'West South West')
-        self.assertEquals(dp.direction_to_full_text('W'), 'West')
-        self.assertEquals(dp.direction_to_full_text('WNW'), 'West North West')
-        self.assertEquals(dp.direction_to_full_text('NW'), 'North West')
-        self.assertEquals(dp.direction_to_full_text('NNW'), 'North North West')
+        self.assertEqual(dp.direction_to_full_text('N'), 'North')
+        self.assertEqual(dp.direction_to_full_text('NNE'), 'North North East')
+        self.assertEqual(dp.direction_to_full_text('NE'), 'North East')
+        self.assertEqual(dp.direction_to_full_text('ENE'), 'East North East')
+        self.assertEqual(dp.direction_to_full_text('E'), 'East')
+        self.assertEqual(dp.direction_to_full_text('ESE'), 'East South East')
+        self.assertEqual(dp.direction_to_full_text('SE'), 'South East')
+        self.assertEqual(dp.direction_to_full_text('SSE'), 'South South East')
+        self.assertEqual(dp.direction_to_full_text('S'), 'South')
+        self.assertEqual(dp.direction_to_full_text('SSW'), 'South South West')
+        self.assertEqual(dp.direction_to_full_text('SW'), 'South West')
+        self.assertEqual(dp.direction_to_full_text('WSW'), 'West South West')
+        self.assertEqual(dp.direction_to_full_text('W'), 'West')
+        self.assertEqual(dp.direction_to_full_text('WNW'), 'West North West')
+        self.assertEqual(dp.direction_to_full_text('NW'), 'North West')
+        self.assertEqual(dp.direction_to_full_text('NNW'), 'North North West')
 
-        self.assertEquals(dp.direction_to_full_text(''), "Unknown")
-        self.assertEquals(dp.direction_to_full_text('other'), "Unknown")
-        self.assertEquals(dp.direction_to_full_text(None), "Unknown")
+        self.assertEqual(dp.direction_to_full_text(''), "Unknown")
+        self.assertEqual(dp.direction_to_full_text('other'), "Unknown")
+        self.assertEqual(dp.direction_to_full_text(None), "Unknown")
 
 
 class DailyForecastDayDataPointTests(unittest.TestCase):
@@ -121,7 +121,7 @@ class DailyForecastDayDataPointTests(unittest.TestCase):
         self.assertEqual("1", dp._weather_type_code)
         self.assertEqual("Sunny day", dp._weather_type_text )
 
-        self.assertEquals("WEATHER TYPE Day WINDDIR S WINDSPEED 9 WINDGUST 16 TEMP 15 FEELS 13 HUMID 54 RAINPROB 0 UVINDEX 4 UVGUIDE Moderate exposure. Seek shade during midday hours, cover up and wear sunscreen VIS Very good - Between 20-40 km WEATHER Sunny day", dp.to_program_y_text())
+        self.assertEqual("WEATHER TYPE Day WINDDIR S WINDSPEED 9 WINDGUST 16 TEMP 15 FEELS 13 HUMID 54 RAINPROB 0 UVINDEX 4 UVGUIDE Moderate exposure. Seek shade during midday hours, cover up and wear sunscreen VIS Very good - Between 20-40 km WEATHER Sunny day", dp.to_program_y_text())
 
 
 class DailyForecastNightDataPointTests(unittest.TestCase):
@@ -173,7 +173,7 @@ class DailyForecastNightDataPointTests(unittest.TestCase):
         self.assertEqual("7", dp._weather_type_code)
         self.assertEqual("Cloudy", dp._weather_type_text)
 
-        self.assertEquals("WEATHER TYPE Cloudy WINDDIR SSW WINDGUST 16 WINDSPEED 7 TEMP 9 FEELS 7 HUMID 86 RAINPROB 57 VISTEXT Good - Between 10-20 km WEATHER Cloudy", dp.to_program_y_text())
+        self.assertEqual("WEATHER TYPE Cloudy WINDDIR SSW WINDGUST 16 WINDSPEED 7 TEMP 9 FEELS 7 HUMID 86 RAINPROB 57 VISTEXT Good - Between 10-20 km WEATHER Cloudy", dp.to_program_y_text())
 
 
 class ThreeHourlyForecastDataPointTests(unittest.TestCase):
@@ -232,7 +232,7 @@ class ThreeHourlyForecastDataPointTests(unittest.TestCase):
         self.assertEqual("0", dp._precipitation_probability)
         self.assertEqual("96", dp._screen_relative_humidity)
 
-        self.assertEquals("WEATHER Sunny day TEMP 4 FEELS 3 WINDDIR S WINDDIRFULL South WINDSPEED 2 VIS Moderate - Between 4-10 km UVINDEX 1 UVGUIDE Low exposure. No protection required. You can safely stay outside RAINPROB 0 HUMIDITY 96", dp.to_program_y_text())
+        self.assertEqual("WEATHER Sunny day TEMP 4 FEELS 3 WINDDIR S WINDDIRFULL South WINDSPEED 2 VIS Moderate - Between 4-10 km UVINDEX 1 UVGUIDE Low exposure. No protection required. You can safely stay outside RAINPROB 0 HUMIDITY 96", dp.to_program_y_text())
 
 
 class ObservationDataPointTests(unittest.TestCase):
@@ -290,7 +290,7 @@ class ObservationDataPointTests(unittest.TestCase):
         self.assertEqual("3.2", dp._dew_point)
         self.assertEqual("57.3", dp._screen_relative_humidity)
 
-        self.assertEquals("WEATHER Partly cloudy (day) TEMP 11 2 VISIBILITY V 35000 VF Very Good WIND D W DF West S 11 PRESSURE P 1021 PT R PTF Rising HUMIDITY 57 3", dp.to_program_y_text())
+        self.assertEqual("WEATHER Partly cloudy (day) TEMP 11 2 VISIBILITY V 35000 VF Very Good WIND D W DF West S 11 PRESSURE P 1021 PT R PTF Rising HUMIDITY 57 3", dp.to_program_y_text())
 
     def test_parse_visibility_to_text(self):
         dp = ObservationDataPoint()
@@ -331,11 +331,11 @@ class ReportTests(unittest.TestCase):
         report = Report("Forecast", "2017-04-03T09:00:00Z")
         self.assertIsNotNone(report)
 
-        self.assertEquals("Forecast", report._data_type)
-        self.assertEquals("2017-04-03T09:00:00Z", report._time_period)
+        self.assertEqual("Forecast", report._data_type)
+        self.assertEqual("2017-04-03T09:00:00Z", report._time_period)
 
         self.assertIsNotNone(report._time_periods)
-        self.assertEquals([], report._time_periods)
+        self.assertEqual([], report._time_periods)
 
         self.assertIsNone(report._type)
         self.assertIsNone(report._report_date)
@@ -384,11 +384,11 @@ class LocationTests(unittest.TestCase):
         location = Location(MetOfficeWeatherReport.FORECAST, metoffer.DAILY)
         self.assertIsNotNone(location)
 
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, location._data_type)
-        self.assertEquals(metoffer.DAILY, location._time_period)
+        self.assertEqual(MetOfficeWeatherReport.FORECAST, location._data_type)
+        self.assertEqual(metoffer.DAILY, location._time_period)
 
         self.assertIsNotNone(location._reports)
-        self.assertEquals([], location._reports)
+        self.assertEqual([], location._reports)
 
         self.assertIsNone(location._continent)
         self.assertIsNone(location._country)
@@ -477,7 +477,7 @@ class LocationTests(unittest.TestCase):
         location.parse_json(json)
 
         self.assertIsNotNone(location._reports)
-        self.assertEquals(2, len(location._reports))
+        self.assertEqual(2, len(location._reports))
 
         self.assertEqual("EUROPE", location._continent)
         self.assertEqual("ENGLAND", location._country)
@@ -494,8 +494,8 @@ class DVTests(unittest.TestCase):
         dv = DV(MetOfficeWeatherReport.FORECAST, metoffer.DAILY)
         self.assertIsNotNone(dv)
 
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, dv._data_type)
-        self.assertEquals(metoffer.DAILY, dv._time_period)
+        self.assertEqual(MetOfficeWeatherReport.FORECAST, dv._data_type)
+        self.assertEqual(metoffer.DAILY, dv._time_period)
 
         self.assertIsNone(dv._date)
         self.assertIsNone(dv._type)
@@ -689,8 +689,8 @@ class SiteReportTests(unittest.TestCase):
         report = SiteReport(MetOfficeWeatherReport.FORECAST, metoffer.DAILY)
         self.assertIsNotNone(report)
 
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, report._data_type)
-        self.assertEquals(metoffer.DAILY, report._time_period)
+        self.assertEqual(MetOfficeWeatherReport.FORECAST, report._data_type)
+        self.assertEqual(metoffer.DAILY, report._time_period)
 
         self.assertIsNone(report._dv)
 
@@ -952,8 +952,8 @@ class SiteReportTests(unittest.TestCase):
 
         report.parse_json(json)
 
-        self.assertEquals(MetOfficeWeatherReport.FORECAST, report._data_type)
-        self.assertEquals(metoffer.DAILY, report._time_period)
+        self.assertEqual(MetOfficeWeatherReport.FORECAST, report._data_type)
+        self.assertEqual(metoffer.DAILY, report._time_period)
         self.assertIsNotNone("", report._dv)
 
 

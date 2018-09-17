@@ -193,10 +193,14 @@ class BotClient(ResponseLogger):
 
     def initiate_logging(self, arguments):
         if arguments.logging is not None:
-            with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
-                logging_config = yaml.load(yml_data_file)
-                logging.config.dictConfig(logging_config)
-                YLogger.info(self, "Now logging under configuration")
+            try:
+                with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
+                    logging_config = yaml.load(yml_data_file)
+                    logging.config.dictConfig(logging_config)
+                    YLogger.info(self, "Now logging under configuration")
+
+            except Exception as excep:
+                YLogger.exception(self, "Failed to open logging configuration [%s]", excep, arguments.logging)
         else:
             print("Warning. No logging configuration file defined, using defaults...")
 

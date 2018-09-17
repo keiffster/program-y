@@ -15,7 +15,7 @@ class FileBraintreeStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileBraintreeStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_save_braintree(self):
         config = FileStorageConfiguration()

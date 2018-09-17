@@ -16,7 +16,7 @@ class FilePatternNodeStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePatternNodeStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_variables(self):
         config = FileStorageConfiguration()
@@ -28,5 +28,5 @@ class FilePatternNodeStoreTests(unittest.TestCase):
         collection = PatternNodeFactory()
         store.load(collection)
 
-        self.assertEquals(12, len(collection.nodes))
+        self.assertEqual(12, len(collection.nodes))
         self.assertTrue(collection.exists("zeroormore"))

@@ -22,4 +22,4 @@ class PassThroughRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "Hello world")
 
-        self.assertEquals(mock_console._response, "Hello world")
+        self.assertEqual(mock_console._response, "Hello world")

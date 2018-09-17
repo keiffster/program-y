@@ -38,16 +38,20 @@ class FileBinariesStore(FileStore, BinariesStore):
     def save_binary(self, aiml_parser):
         try:
             bin_file_path = self._get_storage_path()
-            bin_file_dir = self._get_dir_from_path(bin_file_path)
-            self._ensure_dir_exists(bin_file_dir)
             YLogger.info(self, "Saving binary brain to [%s]", bin_file_path)
+            bin_file_dir = self._get_dir_from_path(bin_file_path)
+
+            self._ensure_dir_exists(bin_file_dir)
             start = datetime.datetime.now()
-            bin_file = open(bin_file_path, "wb")
-            pickle.dump(aiml_parser, bin_file)
-            bin_file.close()
+
+            with open(bin_file_path, "wb") as bin_file:
+                pickle.dump(aiml_parser, bin_file)
+                bin_file.close()
+
             stop = datetime.datetime.now()
             diff = stop - start
             YLogger.info(self, "Brain save took a total of %.2f sec", diff.total_seconds())
+
         except Exception as excep:
             YLogger.exception(self, "Failed to save binary file", excep)
 
@@ -55,16 +59,21 @@ class FileBinariesStore(FileStore, BinariesStore):
         try:
             bin_file_path = self._get_storage_path()
             YLogger.info(self, "Loading binary brain from [%s]", bin_file_path)
+
             start = datetime.datetime.now()
             gc.disable()
-            bin_file = open(bin_file_path, "rb")
-            aiml_parser = pickle.load(bin_file)
+
+            with open(bin_file_path, "rb") as bin_file:
+                aiml_parser = pickle.load(bin_file)
+                bin_file.close()
+
             gc.enable()
-            bin_file.close()
+
             stop = datetime.datetime.now()
             diff = stop - start
             YLogger.info(self, "Brain load took a total of %.2f sec", diff.total_seconds())
             return aiml_parser
+
         except Exception as excep:
             YLogger.exception(self, "Failed to load binary file", excep)
             return None

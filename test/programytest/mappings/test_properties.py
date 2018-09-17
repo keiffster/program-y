@@ -26,7 +26,7 @@ class PropertysTests(unittest.TestCase):
         self.assertTrue(collection.has_property("name"))
         self.assertFalse(collection.has_property("age"))
 
-        self.assertEquals("KeiffBot 1.0", collection.property("name"))
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
         self.assertIsNone(collection.property("age"))
 
     def test_load_from_file(self):
@@ -48,7 +48,7 @@ class PropertysTests(unittest.TestCase):
         self.assertTrue(collection.has_property("name"))
         self.assertFalse(collection.has_property("age"))
 
-        self.assertEquals("KeiffBot 1.0", collection.property("name"))
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
         self.assertIsNone(collection.property("age"))
 
     def test_reload_from_file(self):
@@ -70,7 +70,7 @@ class PropertysTests(unittest.TestCase):
         self.assertTrue(collection.has_property("name"))
         self.assertFalse(collection.has_property("age"))
 
-        self.assertEquals("KeiffBot 1.0", collection.property("name"))
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
         self.assertIsNone(collection.property("age"))
 
         collection.remove()
@@ -80,6 +80,6 @@ class PropertysTests(unittest.TestCase):
         self.assertTrue(collection.has_property("name"))
         self.assertFalse(collection.has_property("age"))
 
-        self.assertEquals("KeiffBot 1.0", collection.property("name"))
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
         self.assertIsNone(collection.property("age"))
 

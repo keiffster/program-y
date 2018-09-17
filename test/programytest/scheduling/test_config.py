@@ -48,24 +48,24 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config = SchedulerConfiguration()
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals("Scheduler1", scheduler_config.name)
-        self.assertEquals(0, scheduler_config.debug_level)
+        self.assertEqual("Scheduler1", scheduler_config.name)
+        self.assertEqual(0, scheduler_config.debug_level)
         self.assertTrue(scheduler_config.add_listeners)
         self.assertTrue(scheduler_config.remove_all_jobs)
 
         self.assertIsNotNone(scheduler_config.jobstore)
         self.assertIsNotNone(scheduler_config.jobstore.jobstore)
-        self.assertEquals("example_jobs", scheduler_config.jobstore.jobstore.collection)
+        self.assertEqual("example_jobs", scheduler_config.jobstore.jobstore.collection)
 
         self.assertIsNotNone(scheduler_config.threadpool)
-        self.assertEquals(20, scheduler_config.threadpool.max_workers)
+        self.assertEqual(20, scheduler_config.threadpool.max_workers)
 
         self.assertIsNotNone(scheduler_config.processpool)
-        self.assertEquals(5, scheduler_config.processpool.max_workers)
+        self.assertEqual(5, scheduler_config.processpool.max_workers)
 
         self.assertIsNotNone(scheduler_config.job_defaults)
-        self.assertEquals(False, scheduler_config.job_defaults.coalesce)
-        self.assertEquals(3, scheduler_config.job_defaults.max_instances)
+        self.assertEqual(False, scheduler_config.job_defaults.coalesce)
+        self.assertEqual(3, scheduler_config.job_defaults.max_instances)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -81,7 +81,7 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
         self.assertIsNone(scheduler_config.name)
-        self.assertEquals(0, scheduler_config.debug_level)
+        self.assertEqual(0, scheduler_config.debug_level)
         self.assertFalse(scheduler_config.add_listeners)
         self.assertFalse(scheduler_config.remove_all_jobs)
 
@@ -103,7 +103,7 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
         self.assertIsNone(scheduler_config.name)
-        self.assertEquals(0, scheduler_config.debug_level)
+        self.assertEqual(0, scheduler_config.debug_level)
         self.assertFalse(scheduler_config.add_listeners)
         self.assertFalse(scheduler_config.remove_all_jobs)
 
@@ -147,7 +147,6 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
         config = scheduler_config.create_scheduler_config()
-        print(config)
         self.assertIsNotNone(config)
 
     def test_create_scheduler_config_redis(self):
@@ -186,7 +185,6 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
         config = scheduler_config.create_scheduler_config()
-        print(config)
         self.assertIsNotNone(config)
 
     def test_create_scheduler_config_sqlalchemy(self):
@@ -224,7 +222,6 @@ class SchedulerConfigurationTests(unittest.TestCase):
         scheduler_config.load_config_section(yaml, bot_config, ".")
 
         config = scheduler_config.create_scheduler_config()
-        print(config)
         self.assertIsNotNone(config)
 
 

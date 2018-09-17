@@ -15,7 +15,7 @@ class FileSetsStoreTests(SetStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileSetsStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()
@@ -53,7 +53,7 @@ class FileSetsStoreTests(SetStoreAsserts):
 
         self.assertTrue(set_collection.contains('TESTSET2'))
         values = set_collection.set('TESTSET2')
-        self.assertEquals(4, len(values))
+        self.assertEqual(4, len(values))
         self.assertTrue('VAL5' in values)
         self.assertTrue('VAL6' in values)
         self.assertTrue('VAL7' in values)

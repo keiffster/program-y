@@ -16,7 +16,7 @@ class FileTemplateNodeStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTemplateNodeStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_variables(self):
         config = FileStorageConfiguration()
@@ -28,5 +28,5 @@ class FileTemplateNodeStoreTests(unittest.TestCase):
         collection = TemplateNodeFactory()
         store.load(collection)
 
-        self.assertEquals(64, len(collection.nodes))
+        self.assertEqual(64, len(collection.nodes))
         self.assertTrue(collection.exists("lowercase"))

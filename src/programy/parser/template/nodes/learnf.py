@@ -49,18 +49,7 @@ class TemplateLearnfNode(TemplateLearnNode):
         xml += "</learnf>"
         return xml
 
-    def create_category_xml_node(self, client_context, category)   :
-        # Add our new element
-        child = ET.Element("category")
-        child.append(category.pattern)
-        child.append(category.topic)
-        child.append(category.that)
-        child.append(category.template.xml_tree(client_context))
-        return child
-
     def save_learnf(self, client_context, category):
-
-        node = self.create_category_xml_node(client_context, category)
 
         if client_context.bot.client.storage_factory.entity_storage_engine_available(StorageFactory.LEARNF) is True:
             YLogger.info(self, "Saving binary brain to [%s]", StorageFactory.LEARNF)
@@ -68,4 +57,4 @@ class TemplateLearnfNode(TemplateLearnNode):
             storage_engine = client_context.bot.client.storage_factory.entity_storage_engine(StorageFactory.LEARNF)
             learnf_storage = storage_engine.learnf_soteage()
 
-            learnf_storage.save_learnf(self, client_context, node)
+            learnf_storage.save_learnf(self, client_context, category)

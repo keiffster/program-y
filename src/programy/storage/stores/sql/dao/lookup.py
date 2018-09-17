@@ -18,46 +18,47 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Lookup(object):
 
     id = Column(Integer, primary_key=True)
 
-    key = Column(String)
-    value = Column(String)
+    key = Column(String(48))
+    value = Column(String(256))
 
 
 class Denormal(Base, Lookup):
-    __tablename__ = 'dernormals'
+    __tablename__ = 'denormals'
 
     def __repr__(self):
-        return "<Denormal(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+        return "<Denormal(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
 
 class Normal(Base, Lookup):
     __tablename__ = 'normals'
 
     def __repr__(self):
-        return "<Normal(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+        return "<Normal(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
 
 class Person(Base, Lookup):
     __tablename__ = 'persons'
 
     def __repr__(self):
-        return "<Person(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+        return "<Person(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
 
 class Person2(Base, Lookup):
     __tablename__ = 'person2s'
 
     def __repr__(self):
-        return "<Person2(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+        return "<Person2(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)
 
 
 class Gender(Base, Lookup):
     __tablename__ = 'genders'
 
     def __repr__(self):
-        return "<Gender(id='%d', key='%s', value='%s')" % (self.id, self.key, self.value)
+        return "<Gender(id='%s', key='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.key, self.value)

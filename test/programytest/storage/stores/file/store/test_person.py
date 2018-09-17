@@ -1,4 +1,4 @@
-from programytest.storage.asserts.store.assert_lookups import LookupStoreAsserts
+from programytest.storage.asserts.store.assert_persons import PersonssStoreAsserts
 import os
 import os.path
 import re
@@ -10,14 +10,14 @@ from programy.mappings.person import PersonCollection
 from programy.storage.stores.file.config import FileStoreConfiguration
 
 
-class FilePersonStoreTests(LookupStoreAsserts):
+class FilePersonStoreTests(PersonssStoreAsserts):
 
     def test_initialise(self):
         config = FileStorageConfiguration()
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FilePersonStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_file(self):
         config = FileStorageConfiguration()
@@ -30,5 +30,5 @@ class FilePersonStoreTests(LookupStoreAsserts):
         
         store.load(person_collection)
 
-        self.assertEquals(person_collection.person(" WITH YOU "), [re.compile('(^WITH YOU | WITH YOU | WITH YOU$)', re.IGNORECASE), ' WITH ME2 '])
+        self.assertEqual(person_collection.person(" WITH YOU "), [re.compile('(^WITH YOU | WITH YOU | WITH YOU$)', re.IGNORECASE), ' WITH ME2 '])
         self.assertEqual(person_collection.personalise_string("Is he with you"), "Is he WITH ME2")

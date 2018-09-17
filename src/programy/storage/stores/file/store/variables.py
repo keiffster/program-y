@@ -78,23 +78,32 @@ class FileVariablesStore(FileStore, VariablesStore):
     def _load_variables(self, variables_filepath):
         variables = {}
         if os.path.exists(variables_filepath):
-            with open(variables_filepath, "r") as vars_file:
-                for line in vars_file:
-                    line = line.strip()
-                    if line:
-                        if line.startswith(FileVariablesStore.COMMENT) is False:
-                            splits = line.split(FileVariablesStore.SPLIT_CHAR)
-                            if len(splits)>1:
-                                key = splits[0].strip()
-                                val = splits[1].strip()
-                                variables[key] = val
+            try:
+                with open(variables_filepath, "r") as vars_file:
+                    for line in vars_file:
+                        line = line.strip()
+                        if line:
+                            if line.startswith(FileVariablesStore.COMMENT) is False:
+                                splits = line.split(FileVariablesStore.SPLIT_CHAR)
+                                if len(splits)>1:
+                                    key = splits[0].strip()
+                                    val = splits[1].strip()
+                                    variables[key] = val
+
+            except Exception as e:
+                YLogger.exception(None, "Failed to load variables [%s]", e, variables_filepath)
+
         return variables
 
     def _write_variables(self, variables_filepath, variables):
-        with open(variables_filepath, "w+") as vars_file:
-            for key, value in variables.items():
-                vars_file.write("%s%s%s\n"%(key, FileVariablesStore.SPLIT_CHAR, value))
-            vars_file.write("\n")
+        try:
+            with open(variables_filepath, "w+") as vars_file:
+                for key, value in variables.items():
+                    vars_file.write("%s%s%s\n"%(key, FileVariablesStore.SPLIT_CHAR, value))
+                vars_file.write("\n")
+
+        except Exception as e:
+            YLogger.exception(None, "Failed to write variables [%s]", e, variables_filepath)
 
     def _load_file_contents(self, collection, filename):
         variables = self._load_variables(filename)

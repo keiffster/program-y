@@ -37,9 +37,14 @@ class YamlConfigurationFile(BaseConfigurationFile):
 
     def load_from_file(self, filename, client_configuration, bot_root):
         configuration = ProgramyConfiguration(client_configuration)
-        with open(filename, 'r+', encoding="utf-8") as yml_data_file:
-            self.yaml_data = yaml.load(yml_data_file)
-            configuration.load_config_data(self, bot_root)
+        try:
+            with open(filename, 'r+', encoding="utf-8") as yml_data_file:
+                self.yaml_data = yaml.load(yml_data_file)
+                configuration.load_config_data(self, bot_root)
+
+        except Exception as excep:
+           YLogger.exception(self, "Failed to open yaml config file [%s]", excep, filename)
+
         return configuration
 
     def get_section(self, section_name, parent_section=None):

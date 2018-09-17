@@ -29,7 +29,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET BOT PROP1")
         self.assertIsNotNone(result)
-        self.assertEquals("Value1", result)
+        self.assertEqual("Value1", result)
 
     def test_get_bot_unknown(self):
 
@@ -41,7 +41,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET BOT XXXXX")
         self.assertIsNotNone(result)
-        self.assertEquals("unknown", result)
+        self.assertEqual("unknown", result)
 
     def test_get_user_local_known(self):
 
@@ -58,7 +58,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET USER LOCAL PROP1")
         self.assertIsNotNone(result)
-        self.assertEquals("Value1", result)
+        self.assertEqual("Value1", result)
 
     def test_get_user_Local_unknown(self):
 
@@ -70,7 +70,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET USER LOCAL XXX")
         self.assertIsNotNone(result)
-        self.assertEquals("unknown", result)
+        self.assertEqual("unknown", result)
 
     def test_get_user_global_known(self):
 
@@ -84,7 +84,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET USER GLOBAL PROP1")
         self.assertIsNotNone(result)
-        self.assertEquals("Value1", result)
+        self.assertEqual("Value1", result)
 
     def test_get_user_global_unknown(self):
 
@@ -96,7 +96,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "GET USER GLOBAL XXX")
         self.assertIsNotNone(result)
-        self.assertEquals("unknown", result)
+        self.assertEqual("unknown", result)
 
     def test_get_bot(self):
 
@@ -110,7 +110,7 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "BOT")
         self.assertIsNotNone(result)
-        self.assertEquals("Properties:<br /><ul></ul><br />", result)
+        self.assertEqual("Properties:<br /><ul></ul><br />", result)
 
     def test_get_user(self):
 
@@ -124,4 +124,4 @@ class PropertiesAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "USER")
         self.assertIsNotNone(result)
-        self.assertEquals("Properties:<br /><ul><li>topic = *</li></ul><br />", result)
+        self.assertEqual("Properties:<br /><ul><li>topic = *</li></ul><br />", result)

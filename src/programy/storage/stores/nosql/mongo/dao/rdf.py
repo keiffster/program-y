@@ -38,7 +38,7 @@ class RDF(object):
 
     @staticmethod
     def from_document(data):
-        rdf = RDF(None, None)
+        rdf = RDF(None, None, None, None)
         if '_id' in data:
             rdf.id = data['_id']
         if 'name' in data:

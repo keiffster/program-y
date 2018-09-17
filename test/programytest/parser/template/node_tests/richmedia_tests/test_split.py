@@ -20,7 +20,7 @@ class TemplateSplitNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<split />", resolved)
+        self.assertEqual("<split />", resolved)
 
-        self.assertEquals("<split />", root.to_xml(self._client_context))
+        self.assertEqual("<split />", root.to_xml(self._client_context))
 

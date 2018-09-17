@@ -114,7 +114,10 @@ class YLogger(object):
         if logging.getLogger().isEnabledFor(logging.ERROR):
             excep_msg = "%s [%s]"%(message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
-            traceback.print_exc()
+            tb_lines = [line.rstrip('\n') for line in
+                        traceback.format_exception(exception.__class__, exception, exception.__traceback__)]
+            for line in tb_lines:
+                logging.exception(YLogger.format_message(caller, line))
 
     @staticmethod
     def warning(caller, message, *args, **kwargs):

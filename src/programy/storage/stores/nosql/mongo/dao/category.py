@@ -14,11 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.storage.stores.utils import DAOUtils
+
 
 class Category(object):
 
-    def __init__(self, groupid, userid, topic, that, pattern, template):
-        self.id = None
+    def __init__(self, groupid, userid, topic, that, pattern, template, id=None):
+        self.id = id
 
         self.groupid = groupid
         self.userid = userid
@@ -28,8 +30,9 @@ class Category(object):
         self.template = template
 
     def __repr__(self):
-        return "<Category(id='%d', groupid='%s', userid='%s', topic='%s', that='%s', pattern='%s', template='%s')" % \
-               (self.groupid, self.id, self.userid, self.topic, self.that, self.pattern, self.template)
+        return "<Category(id='%s', groupid='%s', userid='%s', topic='%s', that='%s', pattern='%s', template='%s'>" % \
+               (DAOUtils.valid_id(self.id), DAOUtils.valid_id(self.groupid), DAOUtils.valid_id(self.userid),
+                self.topic, self.that, self.pattern, self.template)
 
     def to_document(self):
         document = {"groupid": self.groupid,
@@ -44,19 +47,13 @@ class Category(object):
 
     @staticmethod
     def from_document(data):
-        category = Category(None, None, None, None, None, None)
-        if '_id' in data:
-            category.id = data['_id']
-        if 'groupid' in data:
-            category.groupid = data['groupid']
-        if 'userid' in data:
-            category.userid = data['userid']
-        if 'topic' in data:
-            category.topic = data['topic']
-        if 'that' in data:
-            category.that = data['that']
-        if 'pattern' in data:
-            category.pattern = data['pattern']
-        if 'template' in data:
-            category.template = data['template']
-        return category
+
+        id = DAOUtils.get_value_from_data(data, '_id')
+        groupid = DAOUtils.get_value_from_data(data, 'groupid')
+        userid = DAOUtils.get_value_from_data(data, 'userid')
+        topic = DAOUtils.get_value_from_data(data, 'topic')
+        that = DAOUtils.get_value_from_data(data, 'that')
+        pattern = DAOUtils.get_value_from_data(data, 'pattern')
+        template = DAOUtils.get_value_from_data(data, 'template')
+
+        return Category(id=id, groupid=groupid, userid=userid, topic=topic, that=that, pattern=pattern, template=template)

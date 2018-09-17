@@ -25,9 +25,9 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals(True, spelling_config.load)
-        self.assertEquals("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
-        self.assertEquals("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
+        self.assertEqual(True, spelling_config.load)
+        self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
+        self.assertEqual("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
         self.assertTrue(spelling_config.check_before)
         self.assertTrue(spelling_config.check_and_retry)
 

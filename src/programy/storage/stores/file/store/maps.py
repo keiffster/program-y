@@ -29,13 +29,16 @@ class FileMapsStore(FileStore, MapsStore):
         YLogger.debug(self, "Loading map [%s]", filename)
 
         the_map = {}
-        with open(filename, 'r', encoding='utf8') as my_file:
-            for line in my_file:
-                splits = line.split(":")
-                if len(splits) > 1:
-                    key = splits[0].strip().upper()
-                    value = ":".join(splits[1:]).strip()
-                    the_map[key] = value.strip()
+        try:
+            with open(filename, 'r', encoding='utf8') as my_file:
+                for line in my_file:
+                    splits = line.split(":")
+                    if len(splits) > 1:
+                        key = splits[0].strip().upper()
+                        value = ":".join(splits[1:]).strip()
+                        the_map[key] = value.strip()
+        except Exception as excep:
+            YLogger.exception(self, "Failed to load map [%s]", excep, filename)
 
         map_name = self.get_just_filename_from_filepath(filename)
         map_collection.add_map(map_name, the_map, filename)

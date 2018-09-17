@@ -18,6 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Conversation(Base):
@@ -25,22 +26,21 @@ class Conversation(Base):
 
     id = Column(Integer, primary_key=True)
 
-    clientid = Column(String)
-    userid = Column(String)
-    botid = Column(String)
-    brainid = Column(String)
+    clientid = Column(String(16))
+    userid = Column(String(16))
+    botid = Column(String(16))
+    brainid = Column(String(16))
     question = Column(Integer)
-    sentence = Column(String)
-    response = Column(String)
+    sentence = Column(String(512))
+    response = Column(String(512))
 
     def __repr__(self):
-        return "<Conversation(id='%s', client='%s', user='%s', bot='%s', brain='%s', question='%d', sentence='%s', response='%s')" % \
-               (self.id,
+        return "<Conversation(id='%s', clientid='%s', userid='%s', botid='%s', brainid='%s', question='%s', sentence='%s', response='%s'>" % \
+               (DAOUtils.valid_id(self.id),
                 self.clientid,
                 self.userid,
                 self.botid,
                 self.brainid,
-                self.question_depth,
                 self.question,
                 self.sentence,
                 self.response)

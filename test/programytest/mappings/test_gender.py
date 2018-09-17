@@ -22,9 +22,9 @@ class GenderiseTests(unittest.TestCase):
         collection.add_to_lookup(" WITH HIM ", [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
 
         self.assertTrue(collection.has_key(" WITH HIM "))
-        self.assertEquals([re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '], collection.value(" WITH HIM "))
+        self.assertEqual([re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '], collection.value(" WITH HIM "))
 
-        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
 
     def test_load(self):
@@ -43,7 +43,7 @@ class GenderiseTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
 
     def test_reload(self):
@@ -62,12 +62,12 @@ class GenderiseTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
 
         collection.reload(storage_factory)
 
-        self.assertEquals(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
+        self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
         self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
 
 

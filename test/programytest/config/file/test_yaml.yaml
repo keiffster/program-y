@@ -86,7 +86,9 @@ console:
                   extension: .txt
                   directories: false
                 properties_storage:
-                  files: ./storage/properties
+                  file: ./storage/properties.txt
+                defaults_storage:
+                  file: ./storage/defaults.txt
                 variables:
                   files: ./storage/variables
                 rdf_storage:

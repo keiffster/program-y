@@ -10,6 +10,6 @@ class FactoryTests(unittest.TestCase):
     def test_init(self):
         factory = NodeFactory("Test")
         self.assertIsNotNone(factory)
-        self.assertEquals({}, factory._nodes_config)
+        self.assertEqual({}, factory._nodes_config)
         self.assertEqual("Test", factory._type)
 

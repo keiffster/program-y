@@ -36,7 +36,7 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
 
         wildcard.can_add(PatternWordNode("test"))
 
-        self.assertEquals(["*"], wildcard.matching_wildcards())
+        self.assertEqual(["*"], wildcard.matching_wildcards())
 
     def test_invalid_topic_or_that(self):
 

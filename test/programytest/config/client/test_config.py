@@ -27,15 +27,15 @@ class ClientConfigurationDataTests(unittest.TestCase):
         client_config = ClientConfigurationData("test")
         client_config.load_configuration(yaml, bot_config, ".")
 
-        self.assertEquals("programy.clients.client.DefaultBotSelector", client_config.bot_selector)
+        self.assertEqual("programy.clients.client.DefaultBotSelector", client_config.bot_selector)
 
         self.assertIsNotNone(client_config.scheduler)
-        self.assertEquals("Scheduler1", client_config.scheduler.name)
-        self.assertEquals(0, client_config.scheduler.debug_level)
+        self.assertEqual("Scheduler1", client_config.scheduler.name)
+        self.assertEqual(0, client_config.scheduler.debug_level)
         self.assertTrue(client_config.scheduler.add_listeners)
         self.assertTrue(client_config.scheduler.remove_all_jobs)
 
-        self.assertEquals("programy.clients.render.text.TextRenderer", client_config.renderer)
+        self.assertEqual("programy.clients.render.text.TextRenderer", client_config.renderer)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -52,8 +52,8 @@ class ClientConfigurationDataTests(unittest.TestCase):
         self.assertIsNone(client_config.bot_selector)
 
         self.assertIsNotNone(client_config.scheduler)
-        self.assertEquals(None, client_config.scheduler.name)
-        self.assertEquals(0, client_config.scheduler.debug_level)
+        self.assertEqual(None, client_config.scheduler.name)
+        self.assertEqual(0, client_config.scheduler.debug_level)
         self.assertFalse(client_config.scheduler.add_listeners)
         self.assertFalse(client_config.scheduler.remove_all_jobs)
 

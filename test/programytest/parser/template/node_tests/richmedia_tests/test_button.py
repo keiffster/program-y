@@ -22,9 +22,9 @@ class TemplateButtonNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<button><text>Servusai.com</text><url>http://Servusai.com</url></button>", resolved)
+        self.assertEqual("<button><text>Servusai.com</text><url>http://Servusai.com</url></button>", resolved)
 
-        self.assertEquals("<button><text>Servusai.com</text><url>http://Servusai.com</url></button>", root.to_xml(self._client_context))
+        self.assertEqual("<button><text>Servusai.com</text><url>http://Servusai.com</url></button>", root.to_xml(self._client_context))
 
     def test_url_postback_node(self):
         root = TemplateNode()
@@ -40,6 +40,6 @@ class TemplateButtonNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<button><text>SAY HELLO</text><postback>HELLO</postback></button>", resolved)
+        self.assertEqual("<button><text>SAY HELLO</text><postback>HELLO</postback></button>", resolved)
 
-        self.assertEquals("<button><text>SAY HELLO</text><postback>HELLO</postback></button>", root.to_xml(self._client_context))
+        self.assertEqual("<button><text>SAY HELLO</text><postback>HELLO</postback></button>", root.to_xml(self._client_context))

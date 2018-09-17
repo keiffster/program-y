@@ -133,7 +133,7 @@ class FacebookBotClient(FlaskRestBotClient):
         try:
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
         except Exception as e:
-            print(e)
+            print("Error asking Facebook:", e)
         return response
 
     def handle_message(self, message):
@@ -217,10 +217,10 @@ class FacebookBotClient(FlaskRestBotClient):
 
             # otherwise its a general error
             else:
-                YLogger.error("Facebook general error handling postback")
+                YLogger.error(self, "Facebook general error handling postback")
                 response_text = "Sorry, I do not understand you!"
 
-            YLogger.debug("Facebook postback response: [%s]", response_text)
+            YLogger.debug(self, "Facebook postback response: [%s]", response_text)
             self.render_response(client_context, response_text)
 
 if __name__ == "__main__":

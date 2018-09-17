@@ -64,8 +64,10 @@ class PatternSetNode(PatternNode):
 
         word = words.word(word_no).upper()
         set_words = client_context.brain.sets.set(self.set_name)
+        if not set_words:
+            YLogger.error(self, "No set with name [%s]", self.set_name)
 
-        if word in set_words:
+        elif word in set_words:
             phrases = set_words[word]
             phrases = sorted(phrases, key=len, reverse=True)
             for phrase in phrases:

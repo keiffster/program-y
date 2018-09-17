@@ -88,16 +88,16 @@ class PatternSetNodeTests(ParserTestsBaseClass):
 
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "RED")
-        self.assertEquals(result.word_no, 0)
+        self.assertEqual(result.matched_phrase, "RED")
+        self.assertEqual(result.word_no, 0)
 
         result = node.equals(self._client_context, sentence, result.word_no+1)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "RED BROWN")
+        self.assertEqual(result.matched_phrase, "RED BROWN")
 
         result = node.equals(self._client_context, sentence, result.word_no+1)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "RED AMBER")
+        self.assertEqual(result.matched_phrase, "RED AMBER")
 
         self.assertEqual(node.to_string(), "SET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
         self.assertEqual('<set name="TEST1">\n</set>', node.to_xml(self._client_context))

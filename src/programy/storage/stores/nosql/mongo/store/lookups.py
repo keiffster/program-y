@@ -14,9 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.lookups import LookupsStore
 from programy.storage.stores.nosql.mongo.dao.lookup import Lookup
+from programy.mappings.base import DoubleStringPatternSplitCollection
 
 
 class MongoLookupStore(MongoStore, LookupsStore):
@@ -25,67 +27,105 @@ class MongoLookupStore(MongoStore, LookupsStore):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'lookups'
+        raise NotImplementedError()
 
-    def empty_named(self, name):
+    def add_to_lookup(self, key, value, overwrite_existing=False):
         collection = self.collection()
-        collection.remove({"name": name})
-
-    def add_to_lookup(self, name, key, value):
-        collection = self.collection()
-        lookup = collection.find_one({"name": name})
+        lookup = collection.find_one({'key': key})
         if lookup is not None:
-            lookup['key_values'][key] = value
-            collection.update({"name": name}, lookup)
+            if overwrite_existing is True:
+                YLogger.info(self, "Updating lookup in Mongo [%s] [%s]", key, value)
+                lookup['value'] = value
+                collection.replace_one({'key': key}, lookup)
+            else:
+                YLogger.error(self, "Existing value in Mongo lookup [%s] = [%s]", key, value)
+                return False
         else:
-            lookup = Lookup(name, {key: value})
+            YLogger.debug(self, "Adding lookup to Mongo [%s] = [%s]", key, value)
+            lookup = Lookup(key, value)
             self.add_document(lookup)
-        return lookup
+        return True
 
-    def remove_lookup(self, name):
+    def remove_lookup(self):
+        YLogger.debug(self, "Removing lookup from Mongo [%s]", self.collection_name())
         collection = self.collection()
-        collection.delete_many({"name": name})
+        collection.delete_many({})
 
-    def remove_lookup_key(self, name, key):
+    def remove_lookup_key(self, key):
+        YLogger.debug(self, "Removing lookup key [%s] from [%s] in Mongo", key, self.collection_name())
         collection = self.collection()
-        lookup = collection.find_one({"name": name})
-        if lookup is not None:
-            if key in lookup['key_values']:
-                lookup['key_values'].pop(key)
-                collection.update({"name": name}, lookup)
+        collection.delete_one({'key': key})
 
-    def get_lookup(self, name):
+    def get_lookup(self):
         collection = self.collection()
-        lookup = collection.find_one({"name": name})
-        if lookup is not None:
-            return lookup['key_values']
-        return None
+        lookups = collection.find()
+        if lookups is not None:
+            collection = {}
+            for lookup in lookups:
+                collection[lookup['key']] = lookup['value']
+            return collection
+        return {}
 
     def load_all(self, lookup_collection):
+        self.load(lookup_collection)
+
+    def load(self, lookup_collection):
+        YLogger.debug(self, "Loading lookup from Mongo [%s]", self.collection_name())
         collection = self.collection()
-
-        lookup_collection.empty()
-
         lookups = collection.find()
-        for lookup in lookups:
-            self._load_lookup(lookup_collection, lookup)
-
-    def load(self, lookup_collection, name):
-        collection = self.collection()
-
-        lookup = collection.find_one({"name": name})
-
-        self._load_lookup(lookup_collection, lookup)
-
-    def _load_lookup(self, lookup_collection, lookup):
-        for key, value in lookup['key_values'].items():
-            key = key.strip('"')
-            value =  value.strip('"')
-            index, pattern = self.process_key_value(key, value)
-            lookup_collection.add_to_lookup(index,  pattern)
+        if lookups is not None:
+            for lookup in lookups:
+                key, value = DoubleStringPatternSplitCollection.process_key_value(lookup['key'], lookup['value'])
+                lookup_collection.add_to_lookup(key, value)
 
     def process_line(self, name, fields):
         if fields:
             key = fields[0].upper()
             value = fields[1]
-            self.add_to_lookup(name, key, value)
+            return self.add_to_lookup(key, value)
+        return False
+
+
+class MongoDenormalStore(MongoLookupStore):
+
+    def __init__(self, storage_engine):
+        MongoStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return "denormals"
+
+
+class MongoNormalStore(MongoLookupStore):
+
+    def __init__(self, storage_engine):
+        MongoStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return "normals"
+
+
+class MongoGenderStore(MongoLookupStore):
+
+    def __init__(self, storage_engine):
+        MongoStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return "genders"
+
+
+class MongoPersonStore(MongoLookupStore):
+
+    def __init__(self, storage_engine):
+        MongoStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return "persons"
+
+
+class MongoPerson2Store(MongoLookupStore):
+
+    def __init__(self, storage_engine):
+        MongoStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return "person2s"

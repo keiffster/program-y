@@ -40,12 +40,12 @@ class TestClient(BotClient):
         self.storage_factory._store_to_engine_map[StorageFactory.USERGROUPS] = self._storage_engine
 
     def add_categories_store(self, dirs):
-        self._file_store_config._category_storage = FileStoreConfiguration(dirs=dirs, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
+        self._file_store_config._categories_storage = FileStoreConfiguration(dirs=dirs, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines['categories'] = self._storage_engine
         self.storage_factory._store_to_engine_map['categories'] =  self._storage_engine
 
     def add_single_categories_store(self, file):
-        self._file_store_config._category_storage = FileStoreConfiguration(file=file, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
+        self._file_store_config._categories_storage = FileStoreConfiguration(file=file, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines['categories'] = self._storage_engine
         self.storage_factory._store_to_engine_map['categories'] =  self._storage_engine
 
@@ -119,6 +119,11 @@ class TestClient(BotClient):
         self._file_store_config._properties_storage = FileStoreConfiguration(file=file, format="text", encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.PROPERTIES] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.PROPERTIES] = self._storage_engine
+
+    def add_defaults_store(self, file):
+        self._file_store_config._defaults_storage = FileStoreConfiguration(file=file, format="text", encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.DEFAULTS] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.DEFAULTS] = self._storage_engine
 
     def add_variables_store(self, file):
         self._file_store_config._variables_storage = FileStoreConfiguration(file=file, format="text", encoding="utf-8", delete_on_start=False)

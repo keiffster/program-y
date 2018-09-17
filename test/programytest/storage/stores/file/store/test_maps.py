@@ -15,7 +15,7 @@ class FileMapsStoreTests(MapStoreAsserts):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileMapsStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_from_test_dir_no_subdir(self):
         config = FileStorageConfiguration()
@@ -30,7 +30,7 @@ class FileMapsStoreTests(MapStoreAsserts):
         self.assertTrue(map_collection.contains('TESTMAP'))
         the_map = map_collection.map('TESTMAP')
         self.assertIsNotNone(the_map)
-        self.assertEquals("6", the_map['ANT'])
+        self.assertEqual("6", the_map['ANT'])
 
     def test_load_from_test_dir_with_subdir(self):
         config = FileStorageConfiguration()
@@ -45,9 +45,9 @@ class FileMapsStoreTests(MapStoreAsserts):
         self.assertTrue(map_collection.contains('TESTMAP'))
         the_map = map_collection.map('TESTMAP')
         self.assertIsNotNone(the_map)
-        self.assertEquals("6", the_map['ANT'])
+        self.assertEqual("6", the_map['ANT'])
 
         self.assertTrue(map_collection.contains('TESTMAP2'))
         the_map = map_collection.map('TESTMAP2')
         self.assertIsNotNone(the_map)
-        self.assertEquals("grrrrr", the_map['BEAR'])
+        self.assertEqual("grrrrr", the_map['BEAR'])

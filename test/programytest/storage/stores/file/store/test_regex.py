@@ -16,7 +16,7 @@ class FileRegexStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileRegexStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_load_regex(self):
         config = FileStorageConfiguration()
@@ -31,6 +31,6 @@ class FileRegexStoreTests(unittest.TestCase):
         store.load(collection)
 
         self.assertTrue(collection.has_regex("anything"))
-        self.assertEquals(re.compile('^.*$', re.IGNORECASE), collection.regex("anything"))
+        self.assertEqual(re.compile('^.*$', re.IGNORECASE), collection.regex("anything"))
         self.assertTrue(collection.has_regex("legion"))
         self.assertFalse(collection.has_regex("XXXXX"))

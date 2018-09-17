@@ -41,6 +41,6 @@ class TemplateGraphVocabularyTests(TemplateGraphTestClient):
         self.assertIsNotNone(gender_node)
         self.assertIsInstance(gender_node, TemplateVocabularyNode)
 
-        self.assertEquals(1, len(gender_node.children))
+        self.assertEqual(1, len(gender_node.children))
         next_node = gender_node.children[0]
         self.assertIsInstance(next_node, TemplateStarNode)

@@ -29,7 +29,7 @@ class MapTests(unittest.TestCase):
         self.assertTrue(collection.contains("TESTMAP2"))
         self.assertFalse(collection.contains("TESTMAP3"))
 
-        self.assertEquals("teststore", collection.storename("TESTMAP1"))
+        self.assertEqual("teststore", collection.storename("TESTMAP1"))
         self.assertIsNone(collection.storename("TESTMAP3"))
 
         collection.remove("TESTMAP2")

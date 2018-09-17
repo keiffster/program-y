@@ -18,6 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class Link(Base):
@@ -25,11 +26,12 @@ class Link(Base):
 
     id = Column(Integer, primary_key=True)
     primary_user = Column(Integer)
-    generated_key = Column(String)
-    provided_key = Column(String)
+    generated_key = Column(String(256))
+    provided_key = Column(String(256))
     expired = Column(Boolean)
     expires = Column(DateTime)
 
     def __repr__(self):
-        return "<Linked(id='%d', primary='%s', generated='%s', provided='%s')>" % (self.id, self.primary_user, self.generated_key, self.provided_key)
+        return "<Linked(id='%s', primary_user='%s', generated_key='%s', provided_key='%s', expired='%s', expires='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.primary_user, self.generated_key, self.provided_key, self.expired, self.expires)
 

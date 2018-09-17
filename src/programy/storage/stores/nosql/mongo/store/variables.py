@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.variables import VariablesStore
 from programy.storage.stores.nosql.mongo.dao.variable import Variables
@@ -21,45 +22,63 @@ from programy.storage.stores.nosql.mongo.dao.variable import Variables
 
 class MongoVariableStore(MongoStore, VariablesStore):
 
+    VARIABLES = 'variables'
+    CLIENTD = 'clientid'
+    USERID = 'userid'
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'variables'
+        return MongoVariableStore.VARIABLES
 
     def empty_variables(self, clientid, userid):
+        YLogger.info(self, "Emptying variables for clientid [%s], userid [%s]", clientid, userid)
         collection = self.collection()
-        collection.remove({'clientid': clientid, 'userid': userid})
+        collection.delete_many({MongoVariableStore.CLIENTID: clientid, MongoVariableStore.USERID: userid})
 
-    def add_variable(self, clientid, userid, name, value):
+    def add_variable(self, clientid, userid, name, value, replace_existing=True):
         collection = self.collection()
-        variables = collection.find_one({"clientid": clientid, "userid": userid})
+        variables = collection.find_one({MongoVariableStore.CLIENTID: clientid, "userid": userid})
         if variables is not None:
-            variables['variables'][name] = value
-            collection.update({"clientid": clientid, "userid": userid}, variables)
+            if replace_existing is True:
+                YLogger.debug(self, "Replacing existing variable [%s=%s] for clientid [%s], userid [%s]", name, value, clientid,userid)
+                variables[MongoVariableStore.VARIABLES][name] = value
+                collection.replace_one({MongoVariableStore.CLIENTID: clientid, "userid": userid}, variables)
+            else:
+                YLogger.debug(self, "Variable already exists [%s=%s] for clientid [%s], userid [%s]", name, value, clientid,userid)
+                return False
         else:
-            variables = Variables(clientid, userid)
+            YLogger.debug(self, "Adding variable [%s=%s] for clientid [%s], userid [%s]", name, value, clientid, userid)
+            variables = Variables(clientid, userid, {})
             variables.variables[name] = value
             self.add_document(variables)
-        return variables
+        return True
 
-    def add_variables(self, clientid, userid, variables):
+    def add_variables(self, clientid, userid, variables, replace_existing=True):
         collection = self.collection()
-        document = collection.find_one({"clientid": clientid, "userid": userid})
+        document = collection.find_one({MongoVariableStore.CLIENTID: clientid, MongoVariableStore.USERID: userid})
         if document is not None:
-            props = Variables(clientid, userid)
-            for key, value in variables.items():
-                props.variables[key] = value
-            self.replace_document(props)
+            if replace_existing is True:
+                YLogger.debug(self, "Replacing existing variables for clientid [%s], userid [%s]", clientid, userid)
+                props = Variables(clientid, userid)
+                for key, value in variables.items():
+                    props.variables[key] = value
+                self.replace_document(props)
+            else:
+                YLogger.debug(self, "Variablse already exist for clientid [%s], userid [%s]", clientid, userid)
+                return False
         else:
-            props = Variables(clientid, userid)
+            YLogger.debug(self, "Adding variables for clientid [%s], userid [%s]", clientid, userid)
+            props = Variables(clientid, userid, {})
             for key, value in variables.items():
                 props.variables[key] = value
             self.add_document(props)
+        return True
 
     def get_variables(self, clientid, userid):
         collection = self.collection()
-        variables = collection.find_one({"clientid": clientid, "userid": userid})
+        variables = collection.find_one({MongoVariableStore.CLIENTID: clientid, MongoVariableStore.USERID: userid})
         if variables is not None:
-            return variables['variables']
+            return variables[MongoVariableStore.VARIABLES]
         return {}

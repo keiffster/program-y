@@ -19,11 +19,11 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateTopicStarNode()
-        self.assertEquals("TOPICSTAR", node.to_string())
+        self.assertEqual("TOPICSTAR", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateTopicStarNode(index=2)
-        self.assertEquals("TOPICSTAR index=2", node.to_string())
+        self.assertEqual("TOPICSTAR index=2", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -53,7 +53,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         node = TemplateTopicStarNode()
         self.assertIsNotNone(node)
-        self.assertEquals(1, node.index)
+        self.assertEqual(1, node.index)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
@@ -76,7 +76,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
-        self.assertEquals("Matched", root.resolve(self._client_context))
+        self.assertEqual("Matched", root.resolve(self._client_context))
 
     def test_resolve_no_defaults_inside_topic(self):
         root = TemplateNode()
@@ -118,4 +118,4 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

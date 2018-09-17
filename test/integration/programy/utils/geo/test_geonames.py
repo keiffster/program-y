@@ -20,5 +20,5 @@ class GeoNamesTests(unittest.TestCase):
 
         latlng = geonames.get_latlong_for_postcode('KY39UR')
         self.assertIsNotNone(latlng)
-        self.assertEquals(latlng.latitude, 56.07206267570594)
-        self.assertEquals(latlng.longitude, -3.175233048730664)
+        self.assertEqual(latlng.latitude, 56.07206267570594)
+        self.assertEqual(latlng.longitude, -3.175233048730664)

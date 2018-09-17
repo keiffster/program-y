@@ -69,7 +69,7 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "OBSERVATION LOCATION KY39UR WHEN NOW")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
+        self.assertEqual("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
 
         result = weather.execute(self.context, "OBSERVATION OTHER KY39UR WHEN NOW")
         self.assertIsNone(result)
@@ -89,7 +89,7 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "FORECAST5DAY LOCATION KY39UR WHEN 1")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER TYPE Cloudy WINDDIR NW WINDGUST 7 WINDSPEED 4 TEMP 8 FEELS 8 HUMID 76 RAINPROB 8 VISTEXT Very good - Between 20-40 km WEATHER Cloudy", result)
+        self.assertEqual("WEATHER TYPE Cloudy WINDDIR NW WINDGUST 7 WINDSPEED 4 TEMP 8 FEELS 8 HUMID 76 RAINPROB 8 VISTEXT Very good - Between 20-40 km WEATHER Cloudy", result)
 
     def test_forecast24hour(self):
         latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
@@ -100,4 +100,4 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "FORECAST24HOUR LOCATION KY39UR WHEN 1")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)
+        self.assertEqual("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)

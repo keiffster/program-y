@@ -18,15 +18,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
 
 
 class LicenseKey(Base):
     __tablename__ = 'licenses'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String)
-    key = Column(String)
+    name = Column(String(48))
+    key = Column(String(512))
 
 
     def __repr__(self):
-        return "<LicenseKey(id='%d', name='%s', key='%s')>" % (self.id, self.name, self.key)
+        return "<LicenseKey(id='%s', name='%s', key='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.key)

@@ -12,13 +12,13 @@ class LoggerConversationStoreTests(ConverstionStoreAsserts):
         engine = LoggerStorageEngine(config)
         engine.initialise()
         store = LoggerConversationStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def tests_conversation_storage(self):
         config = LoggerStorageConfiguration()
         engine = LoggerStorageEngine(config)
         engine.initialise()
         store = LoggerConversationStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
         self.assert_conversation_storage(store, can_empty=False, test_load=False)

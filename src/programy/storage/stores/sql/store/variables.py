@@ -35,7 +35,7 @@ class SQLVariablesStore(SQLStore, VariablesStore):
         self._storage_engine.session.add(var)
 
     def add_variables(self, clientid, userid, variables):
-        for name, value in variables:
+        for name, value in variables.items():
             var = Variable(clientid=clientid, userid=userid, name=name, value=value)
             self._storage_engine.session.add(var)
 

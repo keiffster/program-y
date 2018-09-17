@@ -19,11 +19,11 @@ class ConsoleConfigurationTests(unittest.TestCase):
         config = ConsoleConfiguration()
         config.load_configuration(yaml, ".")
 
-        self.assertEquals("console", config.default_userid)
-        self.assertEquals("$", config.prompt)
+        self.assertEqual("console", config.default_userid)
+        self.assertEqual("$", config.prompt)
 
         self.assertIsNotNone(config.configurations)
-        self.assertEquals(1, len(config.configurations))
+        self.assertEqual(1, len(config.configurations))
         self.assertIsInstance(config.configurations[0], BotConfiguration)
 
     def test_init_no_values(self):
@@ -37,7 +37,7 @@ class ConsoleConfigurationTests(unittest.TestCase):
         config.load_configuration(yaml, ".")
 
         self.assertIsNotNone(config.configurations)
-        self.assertEquals(1, len(config.configurations))
+        self.assertEqual(1, len(config.configurations))
 
     def test_to_yaml_with_defaults(self):
         config = ConsoleConfiguration()
@@ -45,12 +45,12 @@ class ConsoleConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, True)
 
-        self.assertEquals('console', data['default_userid'])
-        self.assertEquals('>>>', data['prompt'])
+        self.assertEqual('console', data['default_userid'])
+        self.assertEqual('>>>', data['prompt'])
 
-        self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
-        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")
+        self.assertEqual(data['bot'], 'bot')
+        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")
 
     def test_to_yaml_without_defaults(self):
         yaml = YamlConfigurationFile()
@@ -70,9 +70,9 @@ class ConsoleConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, False)
 
-        self.assertEquals('console', data['default_userid'])
-        self.assertEquals('$', data['prompt'])
+        self.assertEqual('console', data['default_userid'])
+        self.assertEqual('$', data['prompt'])
 
-        self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
-        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")
+        self.assertEqual(data['bot'], 'bot')
+        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

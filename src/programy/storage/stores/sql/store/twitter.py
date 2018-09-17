@@ -39,7 +39,7 @@ class SQLTwitterStore(SQLStore, TwitterStore):
     def load_last_message_ids(self):
         twitter = self._storage_engine.session.query(Twitter)
         try:
-            ids = twitter.one().decode('utf-8')
+            ids = twitter.one()
 
             return ids.last_direct_message_id, ids.last_status_id
         except MultipleResultsFound as mrf:
@@ -47,4 +47,4 @@ class SQLTwitterStore(SQLStore, TwitterStore):
         except NoResultFound as nrf:
             pass
 
-        return -1, -1
+        return "-1", "-1"

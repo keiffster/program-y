@@ -57,7 +57,7 @@ class DefaultBotSelectorTests(unittest.TestCase):
         bot2 = unittest.mock.Mock()
 
         bots = {"one": bot1, "two": bot2}
-        self.assertEquals(bot1, selector.select_bot(bots))
+        self.assertEqual(bot1, selector.select_bot(bots))
 
 
 class BotFactoryTests(unittest.TestCase):
@@ -124,7 +124,7 @@ class BotClientTests(unittest.TestCase):
         self.assertIsNotNone(client.arguments)
 
         self.assertIsNotNone(client.arguments)
-        self.assertEquals("ProgramY Test Client", client.get_description())
+        self.assertEqual("ProgramY Test Client", client.get_description())
 
         client.run()
         client.log_response(None, None)

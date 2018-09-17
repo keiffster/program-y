@@ -64,8 +64,8 @@ class SlackBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockSlackBotClient(arguments)
         self.assertIsNotNone(client)
-        self.assertEquals("SLACK_BOT_TOKEN", client._bot_token)
-        self.assertEquals('ProgramY AIML2.0 Slack Client', client.get_description())
+        self.assertEqual("SLACK_BOT_TOKEN", client._bot_token)
+        self.assertEqual('ProgramY AIML2.0 Slack Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SlackConfiguration)
         self.assertIsInstance(client._slack_client, SlackClient)
 
@@ -77,9 +77,9 @@ class SlackBotClientTests(unittest.TestCase):
 
         userid, message = client.parse_direct_mention(text)
         self.assertIsNotNone(userid)
-        self.assertEquals("U024BE7LH", userid)
+        self.assertEqual("U024BE7LH", userid)
         self.assertIsNotNone(message)
-        self.assertEquals("Hello", message)
+        self.assertEqual("Hello", message)
 
     def test_handle_message(self):
         arguments = MockArgumentParser()
@@ -90,9 +90,9 @@ class SlackBotClientTests(unittest.TestCase):
         client.handle_message("Hello", "test", "U024BE7LH")
 
         self.assertIsNotNone(client.response_sent)
-        self.assertEquals("Hi there", client.response_sent)
+        self.assertEqual("Hi there", client.response_sent)
         self.assertIsNotNone(client.channel_sent)
-        self.assertEquals("test", client.channel_sent)
+        self.assertEqual("test", client.channel_sent)
 
     def test_parse_message(self):
         arguments = MockArgumentParser()
@@ -107,9 +107,9 @@ class SlackBotClientTests(unittest.TestCase):
         client.parse_message(event)
 
         self.assertIsNotNone(client.response_sent)
-        self.assertEquals("Hi there", client.response_sent)
+        self.assertEqual("Hi there", client.response_sent)
         self.assertIsNotNone(client.channel_sent)
-        self.assertEquals("test", client.channel_sent)
+        self.assertEqual("test", client.channel_sent)
 
     def test_parse_messages(self):
         arguments = MockArgumentParser()
@@ -123,9 +123,9 @@ class SlackBotClientTests(unittest.TestCase):
         client.parse_messages(events)
 
         self.assertIsNotNone(client.response_sent)
-        self.assertEquals("Hi there", client.response_sent)
+        self.assertEqual("Hi there", client.response_sent)
         self.assertIsNotNone(client.channel_sent)
-        self.assertEquals("test", client.channel_sent)
+        self.assertEqual("test", client.channel_sent)
 
     def poll_and_answer(self):
         arguments = MockArgumentParser()

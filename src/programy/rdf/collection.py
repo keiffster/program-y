@@ -27,7 +27,6 @@ class RDFEntity(object):
         self._predicates = {}
 
 
-#TODO No logging statements at all in RDF!
 class RDFCollection(BaseCollection):
 
     RDFS = "rdfs"
@@ -71,6 +70,7 @@ class RDFCollection(BaseCollection):
             YLogger.error(self, "No RDF Storage Engine [%s] in StorageFactory", StorageFactory.RDF)
 
     def reload(self, storage_factory, rdf_name):
+        YLogger.debug(self, "Reloading RDF [%s]", rdf_name)
         if storage_factory.entity_storage_engine_available(StorageFactory.RDF) is True:
             rdf_engine = storage_factory.entity_storage_engine(StorageFactory.RDF)
             if rdf_engine:
@@ -167,6 +167,13 @@ class RDFCollection(BaseCollection):
         return all
 
     def remove(self, entities, subject=None, predicate=None, obj=None):
+        if predicate is None and obj is None:
+            YLogger.debug(self, "Removing subject=[%s]", subject)
+        elif obj is None:
+            YLogger.debug(self, "Removing subject=[%s], predicate=[%s]", subject, predicate)
+        else:
+            YLogger.debug(self, "Removing subject=[%s], predicate=[%s], object=[%s]", subject, predicate, obj)
+
         removes = []
         for entity in entities:
             if subject is not None:
@@ -198,6 +205,13 @@ class RDFCollection(BaseCollection):
         return [entity for entity in entities if entity not in removes]
 
     def match_to_vars(self, subject=None, predicate=None, obj=None):
+        if predicate is None and obj is None:
+            YLogger.debug(self, "Matching subject=[%s]", subject)
+        elif obj is None:
+            YLogger.debug(self, "Matching subject=[%s], predicate=[%s]", subject, predicate)
+        else:
+            YLogger.debug(self, "Matching subject=[%s], predicate=[%s], object=[%s]", subject, predicate, obj)
+
         results = []
         for entity_subject, entity in self._entities.items():
             subj_element = None
@@ -243,6 +257,12 @@ class RDFCollection(BaseCollection):
         return results
 
     def not_match_to_vars(self, subject=None, predicate=None, obj=None):
+        if predicate is None and obj is None:
+            YLogger.debug(self, "Not matching subject=[%s]", subject)
+        elif obj is None:
+            YLogger.debug(self, "Not matching subject=[%s], predicate=[%s]", subject, predicate)
+        else:
+            YLogger.debug(self, "Not matching subject=[%s], predicate=[%s], object=[%s]", subject, predicate, obj)
 
         if subject is not None and subject.startswith("?") is True:
             all_subject = subject
@@ -269,6 +289,13 @@ class RDFCollection(BaseCollection):
         return [entity for entity in all if entity not in to_remove]
 
     def match_only_vars(self, subject=None, predicate=None, obj=None):
+        if predicate is None and obj is None:
+            YLogger.debug(self, "Matching only vars subject=[%s]", subject)
+        elif obj is None:
+            YLogger.debug(self, "Matching only vars subject=[%s], predicate=[%s]", subject, predicate)
+        else:
+            YLogger.debug(self, "Matching only vars subject=[%s], predicate=[%s], object=[%s]", subject, predicate, obj)
+
         results = self.match_to_vars(subject, predicate, obj)
         returns = []
         for atuple in results:
@@ -294,6 +321,8 @@ class RDFCollection(BaseCollection):
         return atuple
 
     def unify(self, vars, sets):
+        YLogger.debug(self, "Unifying Vars [%s]", vars)
+
         unifications = []
         if sets:
             # For each tuple in the first set
@@ -314,6 +343,8 @@ class RDFCollection(BaseCollection):
         return unifications
 
     def unify_set(self, num_set, sets, unified_vars, depth):
+        YLogger.debug(self, "Unifying Set")
+
         aset = sets[num_set]
         unified = False
         for atuple in aset:
@@ -323,9 +354,12 @@ class RDFCollection(BaseCollection):
                 unified = True
             if num_set < len(sets)-1:
                 return self.unify_set(num_set+1, sets, unified_vars, depth+1)
+
         return unified
 
     def unify_tuple(self, tuple, vars):
+        YLogger.debug(self, "Unifying Tuple")
+
         for name, value in tuple:
             if name in vars:
                 if vars[name] is None:
@@ -333,4 +367,5 @@ class RDFCollection(BaseCollection):
                 else:
                     if vars[name] != value:
                         return False
+
         return True

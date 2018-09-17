@@ -104,12 +104,12 @@ class PatternRootNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         node1 = PatternRootNode()
-        self.assertEquals("ROOT ", node1.to_string(verbose=False))
-        self.assertEquals("ROOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node1.to_string(verbose=True))
+        self.assertEqual("ROOT ", node1.to_string(verbose=False))
+        self.assertEqual("ROOT [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node1.to_string(verbose=True))
 
         node2 = PatternRootNode("testid")
-        self.assertEquals("ROOT ", node2.to_string(verbose=False))
-        self.assertEquals("ROOT [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node2.to_string(verbose=True))
+        self.assertEqual("ROOT ", node2.to_string(verbose=False))
+        self.assertEqual("ROOT [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)]", node2.to_string(verbose=True))
 
     def test_equivalent_userid(self):
         node1 = PatternRootNode()
@@ -127,11 +127,11 @@ class PatternRootNodeTests(ParserTestsBaseClass):
         root.add_child(PatternWordNode("test3", userid="user1"))
         root.add_child(PatternWordNode("test4", userid="user2"))
 
-        self.assertEquals(4, len(root.children))
+        self.assertEqual(4, len(root.children))
 
         root.remove_children_with_userid("user1")
 
-        self.assertEquals(2, len(root.children))
+        self.assertEqual(2, len(root.children))
 
     def test_remove_all_types_children_with_userid(self):
         root = PatternRootNode()
@@ -143,18 +143,18 @@ class PatternRootNodeTests(ParserTestsBaseClass):
         root.add_child(PatternOneOrMoreWildCardNode('_', userid="user1"))
         root.add_child(PatternOneOrMoreWildCardNode('*', userid="user1"))
 
-        self.assertEquals(1, len(root.priority_words))
+        self.assertEqual(1, len(root.priority_words))
         self.assertIsNotNone(root._0ormore_hash)
         self.assertIsNotNone(root._1ormore_underline)
-        self.assertEquals(1, len(root.children))
+        self.assertEqual(1, len(root.children))
         self.assertIsNotNone(root._0ormore_arrow)
         self.assertIsNotNone(root._1ormore_star)
 
         root.remove_children_with_userid("user1")
 
-        self.assertEquals(0, len(root.priority_words))
+        self.assertEqual(0, len(root.priority_words))
         self.assertIsNone(root._0ormore_hash)
         self.assertIsNone(root._1ormore_underline)
-        self.assertEquals(0, len(root.children))
+        self.assertEqual(0, len(root.children))
         self.assertIsNone(root._0ormore_arrow)
         self.assertIsNone(root._1ormore_star)

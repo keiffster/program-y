@@ -36,8 +36,9 @@ class User(object):
     def from_document(data):
         user = User(None, None)
         if '_id' in data:
-            user._id = data['_id']
+            user.id = data['_id']
         if 'userid' in data:
             user.userid = data['userid']
         if 'client' in data:
             user.client = data['client']
+        return user

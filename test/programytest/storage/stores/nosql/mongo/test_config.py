@@ -9,7 +9,7 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
     def test_initial_creation(self):
         config = MongoStorageConfiguration()
         self.assertIsNotNone(config)
-        self.assertEqual(config.url, 'mongodb://localhost:27017/')
+        self.assertTrue(config.url.startswith('mongodb://localhost:'))
         self.assertEqual(config.database, "programy")
         self.assertEqual(config.drop_all_first, True)
 
@@ -31,6 +31,6 @@ class MongoStorgeConfigurationTests(unittest.TestCase):
         config = MongoStorageConfiguration()
         config.load_config_section(yaml, mongo_config, ".")
 
-        self.assertEqual(config.url, 'mongodb://localhost:27017/')
+        self.assertTrue(config.url.startswith('mongodb://localhost:'))
         self.assertEqual(config.database, "programy")
         self.assertEqual(config.drop_all_first, True)

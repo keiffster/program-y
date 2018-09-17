@@ -18,13 +18,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
+from programy.storage.stores.utils import DAOUtils
+
 
 class User(Base):
     __tablename__ = 'user'
 
     id = Column(Integer, primary_key=True)
-    userid = Column(String)
-    client = Column(String)
+    userid = Column(String(16))
+    client = Column(String(16))
 
     def __repr__(self):
-       return "<User(id='%d', userid='%s', clientid='%s')>" % (self.id, self.userid, self.client)
+       return "<User(id='%s', userid='%s', client='%s')>" % \
+              (DAOUtils.valid_id(self.id), self.userid, self.client)

@@ -22,6 +22,8 @@ from programy.storage.entities.store import Store
 
 class FileStore(Store):
 
+    FILE = "file"
+
     CATEGORIES_STORAGE = 'categories_storage'
     ERRORS_STORAGE = 'errors_storage'
     DUPLICATES_STORAGE = 'duplicates_storage'
@@ -61,14 +63,11 @@ class FileStore(Store):
 
     USERGROUPS_STORAGE = 'usergroups_storage'
 
-    TEXT_FORMAT = "text"
-    CSV_FORMAT = "csv"
-    XML_FORMAT = "xml"
-    BINARY_FORMAT = "bin"
-    YAML_FORMAT = "yaml"
-
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
+
+    def store_name(self):
+        return FileStore.FILE
 
     def empty(self):
         pass
@@ -89,7 +88,7 @@ class FileStore(Store):
             if os.path.exists(storage_path):
                 shutil.rmtree(storage_path)
         except Exception as e:
-            print(e)
+            print("Error dropping storage", e)
 
     @staticmethod
     def _get_dir_from_path(file_path):
@@ -139,3 +138,27 @@ class FileStore(Store):
 
     def get_storage(self):
         raise NotImplementedError("get_storage must be implemented in child class")
+
+    def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
+
+        file_processor = None
+        try:
+            name = self.get_just_filename_from_filepath(filename)
+            if verbose is True:
+                print(name)
+
+            file_processor = self.get_file_processor(format, filename)
+            file_processor.process_lines(name, self, verbose=verbose)
+
+            if commit is True:
+                self.commit()
+
+        except Exception as e:
+            print("Error uploading from file: ", e)
+            if commit is True:
+                self.rollback()
+
+        finally:
+            if file_processor is not None:
+                file_processor.close()
+

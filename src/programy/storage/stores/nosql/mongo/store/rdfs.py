@@ -14,36 +14,50 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.rdf import RDFStore
 from programy.storage.stores.nosql.mongo.dao.rdf import RDF
 
 class MongoRDFsStore(MongoStore, RDFStore):
 
+    RDFS = 'rdfs'
+    SUBJECT = 'subject'
+    PREDICATE = 'predicate'
+    OBJECT = 'object'
+    NAME = 'name'
+
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
 
     def collection_name(self):
-        return 'rdfs'
+        return MongoRDFsStore.RDFS
 
     def empty_named(self, name):
+        YLogger.info(self, "Empting rdf [%s]", name)
         collection = self.collection()
-        collection.remove({'name': name})
+        collection.remove({MongoRDFsStore.NAME: name})
 
-    def add_rdf(self, name, subject, predicate, objct):
+    def add_rdf(self, name, subject, predicate, objct, replace_existing=True):
+        collection = self.collection()
+        YLogger.info(self, "Adding RDF [%s] [%s] [%s] [%s]", name, subject, predicate, objct)
         anrdf = RDF(name=name, subject=subject, predicate=predicate, object=objct)
-        self.add_document(anrdf)
+        collection.insert_one(anrdf.to_document())
+        return True
 
     def load_all(self, rdf_collection):
+        YLogger.info(self, "Loading all RDFs")
         collection = self.collection()
         rdfs = collection.find({})
         for rdf in rdfs:
-            rdf_collection.add_entity(rdf['subject'], rdf['predicate'], rdf['object'], rdf['name'])
+            YLogger.info(self, "Loading RDF [%s]", rdf[MongoRDFsStore.NAME])
+            rdf_collection.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT], rdf[MongoRDFsStore.NAME])
 
     def load(self, rdf_collection, rdf_name):
         collection = self.collection()
-        rdfs = collection.find({'name': rdf_name})
+        rdfs = collection.find({MongoRDFsStore.NAME: rdf_name})
         for rdf in rdfs:
-            rdf_collection.add_entity(rdf['subject'], rdf['predicate'], rdf['object'], rdf_name)
+            YLogger.info(self, "Loading RDF [%s]", rdf[MongoRDFsStore.NAME])
+            rdf_collection.add_entity(rdf[MongoRDFsStore.SUBJECT], rdf[MongoRDFsStore.PREDICATE], rdf[MongoRDFsStore.OBJECT], rdf_name)
 
 

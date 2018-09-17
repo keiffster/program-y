@@ -40,5 +40,6 @@ class MapsStore(Store):
 
     def process_line(self, name, components):
         if components:
-            self.add_to_map(name, components[0], components[1])
+            return self.add_to_map(name, components[0], components[1])
+        return False
 

@@ -9,7 +9,7 @@ class UserGroupTests(unittest.TestCase):
 
     def test_users(self):
         user = User("keith")
-        self.assertEquals("keith", user.userid)
+        self.assertEqual("keith", user.userid)
         user.roles.append("admin1")
         self.assertTrue(user.has_role("admin1"))
         self.assertFalse(user.has_role("adminx"))
@@ -68,21 +68,21 @@ class UserGroupTests(unittest.TestCase):
 
     def test_authorisable(self):
         authorisable = Authorisable("testid")
-        self.assertEquals("testid", authorisable._id)
-        self.assertEquals([], authorisable.roles)
-        self.assertEquals([], authorisable.groups)
+        self.assertEqual("testid", authorisable._id)
+        self.assertEqual([], authorisable.roles)
+        self.assertEqual([], authorisable.groups)
 
-        self.assertEquals([], authorisable.available_roles())
+        self.assertEqual([], authorisable.available_roles())
 
         self.assertFalse(authorisable.has_role("user"))
         self.assertFalse(authorisable.has_role("admin"))
         self.assertFalse(authorisable.has_group("sysadmin"))
 
-        self.assertEquals([], authorisable.roles)
+        self.assertEqual([], authorisable.roles)
         authorisable.add_role("user")
-        self.assertEquals(['user'], authorisable.roles)
+        self.assertEqual(['user'], authorisable.roles)
         authorisable.add_role("user")
-        self.assertEquals(['user'], authorisable.roles)
+        self.assertEqual(['user'], authorisable.roles)
         self.assertTrue(authorisable.has_role("user"))
 
         group = Group("sysadmin")
@@ -97,7 +97,7 @@ class UserGroupTests(unittest.TestCase):
         self.assertTrue(authorisable.has_group("sysadmin"))
         self.assertTrue(authorisable.has_role("admin"))
 
-        self.assertEquals(['user', 'admin'], authorisable.available_roles())
+        self.assertEqual(['user', 'admin'], authorisable.available_roles())
 
         group2 = Group("root")
         self.assertFalse(authorisable.has_group("root"))

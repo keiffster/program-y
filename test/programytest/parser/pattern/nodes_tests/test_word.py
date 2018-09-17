@@ -51,12 +51,12 @@ class PatternWordNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         word1 = PatternWordNode("test1")
-        self.assertEquals("WORD [test1]", word1.to_string(verbose=False))
-        self.assertEquals("WORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]", word1.to_string(verbose=True))
+        self.assertEqual("WORD [test1]", word1.to_string(verbose=False))
+        self.assertEqual("WORD [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test1]", word1.to_string(verbose=True))
 
         word2 = PatternWordNode("test2", "testid")
-        self.assertEquals("WORD [test2]", word2.to_string(verbose=False))
-        self.assertEquals("WORD [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test2]", word2.to_string(verbose=True))
+        self.assertEqual("WORD [test2]", word2.to_string(verbose=False))
+        self.assertEqual("WORD [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] word=[test2]", word2.to_string(verbose=True))
 
     def test_equivalent(self):
         word1 = PatternWordNode("word")

@@ -85,8 +85,12 @@ class ConfigurationWriter(object):
 
     def write_yaml(self, filename, data):
         print("Writing new config file to", filename)
-        with open(filename, 'w') as outfile:
-            yaml.dump(data, outfile, default_flow_style=False)
+        try:
+            with open(filename, 'w') as outfile:
+                yaml.dump(data, outfile, default_flow_style=False)
+
+        except Exception as excep:
+           print("Failed to write new config file [%s]", filename)
 
     @staticmethod
     def create_arguments():
@@ -106,7 +110,6 @@ class ConfigurationWriter(object):
             app.execute(parser.parse_args())
         except Exception as e:
             raise(e)
-            #print(e)
             parser.print_help()
 
 if __name__ == '__main__':

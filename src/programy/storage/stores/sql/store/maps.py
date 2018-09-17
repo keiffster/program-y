@@ -14,7 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.maps import MapsStore
 from programy.storage.stores.sql.dao.map import Map
@@ -28,10 +27,13 @@ class SQLMapsStore(SQLStore, MapsStore):
     def empty_named(self, name):
         self._storage_engine.session.query(Map).filter(Map.name == name).delete()
 
-    def add_to_map(self, name, key, value):
-        print("Loading map value [%s] [%s] [%s]" % (name, key, value))
+    def _get_entity(self, name, key, value):
+        return Map(name=name, key=key, value=value)
+
+    def add_to_map(self, name, key, value, overwrite_existing=False):
         amap = Map(name=name, key=key, value=value)
         self._storage_engine.session.add(amap)
+        return True
 
     def remove_from_map(self, name, key):
         self._storage_engine.session.query(Map).filter(Map.name==name, Map.key==key).delete()

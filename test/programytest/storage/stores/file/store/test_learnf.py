@@ -6,6 +6,10 @@ import shutil
 from programy.storage.stores.file.store.learnf import FileLearnfStore
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.parser.template.nodes.learn import LearnCategory
+from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.word import TemplateWordNode
+
 from programytest.client import TestClient
 
 
@@ -16,7 +20,7 @@ class FileLearnfStoreTests(unittest.TestCase):
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileLearnfStore(engine)
-        self.assertEquals(store.storage_engine, engine)
+        self.assertEqual(store.storage_engine, engine)
 
     def test_save_learnf(self):
         config = FileStorageConfiguration()
@@ -36,14 +40,12 @@ class FileLearnfStoreTests(unittest.TestCase):
             os.remove(learnf_fullpath)
         self.assertFalse(os.path.exists(learnf_fullpath))
 
-        xml_node =  ET.fromstring("""
-            <category>
-                <pattern>HELLO</pattern>
-                <template>Hi there</template>
-            </category>
-        """)
+        template = TemplateNode()
+        template.append(TemplateWordNode("Hello"))
 
-        store.save_learnf(client_context, xml_node)
+        category = LearnCategory("HELLO *", "*", "*", template)
+
+        store.save_learnf(client_context, category)
 
         self.assertTrue(os.path.exists(learnf_fullpath))
 

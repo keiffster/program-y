@@ -40,8 +40,8 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_text(self.client_context, text)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("Hello", self.renderer._payload['message']['text'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("Hello", self.renderer._payload['message']['text'])
 
     def test_handle_url_button(self):
         button = {
@@ -49,14 +49,14 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_url_button(self.client_context, button)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
-        self.assertEquals(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
-        self.assertEquals("web_url", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
-        self.assertEquals("https://www.servusai.com", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["url"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
+        self.assertEqual(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
+        self.assertEqual("web_url", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
+        self.assertEqual("https://www.servusai.com", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["url"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
 
     def test_handle_postback_button(self):
         button = {
@@ -64,14 +64,14 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_postback_button(self.client_context, button)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
-        self.assertEquals(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
-        self.assertEquals("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
+        self.assertEqual(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
+        self.assertEqual("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
 
     def test_handle_link(self):
         link = {
@@ -79,14 +79,14 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_link(self.client_context, link)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
-        self.assertEquals(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
-        self.assertEquals("web_url", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
-        self.assertEquals("https://www.servusai.com", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["url"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
+        self.assertEqual(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
+        self.assertEqual("web_url", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
+        self.assertEqual("https://www.servusai.com", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["url"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
 
     def test_handle_image(self):
         image = {
@@ -94,11 +94,11 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_image(self.client_context, image)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("media", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("image", self.renderer._payload['message']['attachment']['payload']['elements'][0]['media_type'])
-        self.assertEquals("https://www.servusai.com/test.png", self.renderer._payload['message']['attachment']['payload']['elements'][0]['url'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("media", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("image", self.renderer._payload['message']['attachment']['payload']['elements'][0]['media_type'])
+        self.assertEqual("https://www.servusai.com/test.png", self.renderer._payload['message']['attachment']['payload']['elements'][0]['url'])
 
     def test_handle_video(self):
         video = {
@@ -106,11 +106,11 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_video(self.client_context, video)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("media", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("video", self.renderer._payload['message']['attachment']['payload']['elements'][0]['media_type'])
-        self.assertEquals("https://www.servusai.com/test.mov", self.renderer._payload['message']['attachment']['payload']['elements'][0]['url'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("media", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("video", self.renderer._payload['message']['attachment']['payload']['elements'][0]['media_type'])
+        self.assertEqual("https://www.servusai.com/test.mov", self.renderer._payload['message']['attachment']['payload']['elements'][0]['url'])
 
     def test_handle_card(self):
         card = {
@@ -125,32 +125,32 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_card(self.client_context, card)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
         message = self.renderer._payload['message']
         self.assertIsNotNone(message['attachment'])
         attachment = message['attachment']
-        self.assertEquals("template", attachment['type'])
+        self.assertEqual("template", attachment['type'])
         self.assertIsNotNone(attachment['payload'])
         payload = attachment['payload']
-        self.assertEquals("generic", payload["template_type"])
+        self.assertEqual("generic", payload["template_type"])
         self.assertIsNotNone(payload['elements'])
         elements = payload['elements']
-        self.assertEquals(1, len(elements))
+        self.assertEqual(1, len(elements))
         element1 = elements[0]
-        self.assertEquals("Servusai.com", element1["title"])
-        self.assertEquals("The home of Program-Y", element1["subtitle"])
-        self.assertEquals("http://www.servusai.com/test.png", element1["image_url"])
+        self.assertEqual("Servusai.com", element1["title"])
+        self.assertEqual("The home of Program-Y", element1["subtitle"])
+        self.assertEqual("http://www.servusai.com/test.png", element1["image_url"])
         self.assertIsNotNone(element1["buttons"])
         buttons = element1["buttons"]
-        self.assertEquals(2, len(buttons))
+        self.assertEqual(2, len(buttons))
         button1 = buttons[0]
-        self.assertEquals("web_url", button1["type"])
-        self.assertEquals("Servusai", button1["title"])
-        self.assertEquals("http://www.servusai.com", button1["url"])
+        self.assertEqual("web_url", button1["type"])
+        self.assertEqual("Servusai", button1["title"])
+        self.assertEqual("http://www.servusai.com", button1["url"])
         button2 = buttons[1]
-        self.assertEquals("web_url", button2["type"])
-        self.assertEquals("AIML Foundation", button2["title"])
-        self.assertEquals("http://www.aiml.foundation", button2["url"])
+        self.assertEqual("web_url", button2["type"])
+        self.assertEqual("AIML Foundation", button2["title"])
+        self.assertEqual("http://www.aiml.foundation", button2["url"])
 
     def test_handle_carousel(self):
         carousel = {
@@ -179,41 +179,41 @@ class FacebookRendererTests(unittest.TestCase):
 
         self.renderer.handle_carousel(self.client_context, carousel)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
         message = self.renderer._payload['message']
         self.assertIsNotNone(message['attachment'])
         attachment = message['attachment']
-        self.assertEquals("template", attachment['type'])
+        self.assertEqual("template", attachment['type'])
         self.assertIsNotNone(attachment['payload'])
         payload = attachment['payload']
-        self.assertEquals("generic", payload["template_type"])
+        self.assertEqual("generic", payload["template_type"])
         self.assertIsNotNone(payload['elements'])
         elements = payload['elements']
-        self.assertEquals(2, len(elements))
+        self.assertEqual(2, len(elements))
 
         element1 = elements[0]
-        self.assertEquals("Servusai.com", element1["title"])
-        self.assertEquals("The home of Program-Y", element1["subtitle"])
-        self.assertEquals("https://www.servusai.com/test.png", element1["image_url"])
+        self.assertEqual("Servusai.com", element1["title"])
+        self.assertEqual("The home of Program-Y", element1["subtitle"])
+        self.assertEqual("https://www.servusai.com/test.png", element1["image_url"])
         self.assertIsNotNone(element1["buttons"])
         buttons = element1["buttons"]
-        self.assertEquals(1, len(buttons))
+        self.assertEqual(1, len(buttons))
         button1 = buttons[0]
-        self.assertEquals("web_url", button1["type"])
-        self.assertEquals("Servusai", button1["title"])
-        self.assertEquals("httpw://www.servusai.com", button1["url"])
+        self.assertEqual("web_url", button1["type"])
+        self.assertEqual("Servusai", button1["title"])
+        self.assertEqual("httpw://www.servusai.com", button1["url"])
 
         element2 = elements[1]
-        self.assertEquals("AIML Foundation", element2["title"])
-        self.assertEquals("The home of AIML", element2["subtitle"])
-        self.assertEquals("https://aiml.foundation/test.png", element2["image_url"])
+        self.assertEqual("AIML Foundation", element2["title"])
+        self.assertEqual("The home of AIML", element2["subtitle"])
+        self.assertEqual("https://aiml.foundation/test.png", element2["image_url"])
         self.assertIsNotNone(element2["buttons"])
         buttons = element2["buttons"]
-        self.assertEquals(1, len(buttons))
+        self.assertEqual(1, len(buttons))
         button1 = buttons[0]
-        self.assertEquals("web_url", button1["type"])
-        self.assertEquals("AIML Foundation", button1["title"])
-        self.assertEquals("httpw://aiml.foundation", button1["url"])
+        self.assertEqual("web_url", button1["type"])
+        self.assertEqual("AIML Foundation", button1["title"])
+        self.assertEqual("httpw://aiml.foundation", button1["url"])
 
     def test_handle_reply(self):
         reply = {
@@ -223,14 +223,14 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_reply(self.client_context, reply)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
-        self.assertEquals(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
-        self.assertEquals("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
+        self.assertEqual(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
+        self.assertEqual("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
 
     def test_handle_postback_reply(self):
         reply = {
@@ -240,14 +240,14 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_reply(self.client_context, reply)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("template", self.renderer._payload['message']['attachment']['type'])
-        self.assertEquals("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
-        self.assertEquals(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
-        self.assertEquals("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
-        self.assertEquals("SERVUSAI", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
-        self.assertEquals("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("template", self.renderer._payload['message']['attachment']['type'])
+        self.assertEqual("button", self.renderer._payload['message']['attachment']['payload']['template_type'])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['text'])
+        self.assertEqual(1, len(self.renderer._payload['message']['attachment']['payload']['buttons']))
+        self.assertEqual("postback", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["type"])
+        self.assertEqual("SERVUSAI", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["payload"])
+        self.assertEqual("Servusai", self.renderer._payload['message']['attachment']['payload']['buttons'][0]["title"])
 
     def test_handle_delay(self):
         delay = {
@@ -256,8 +256,8 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_delay(self.client_context, delay)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("typing_off", self.renderer._payload['sender_action'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("typing_off", self.renderer._payload['sender_action'])
 
     def test_handle_split(self):
         split = {
@@ -278,26 +278,26 @@ class FacebookRendererTests(unittest.TestCase):
 
         self.renderer.handle_list(self.client_context, list)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
         message = self.renderer._payload['message']
         self.assertIsNotNone(message['attachment'])
         attachment = message['attachment']
-        self.assertEquals("template", attachment['type'])
+        self.assertEqual("template", attachment['type'])
         self.assertIsNotNone(attachment['payload'])
         payload = attachment['payload']
-        self.assertEquals("list", payload["template_type"])
+        self.assertEqual("list", payload["template_type"])
         self.assertIsNotNone(payload['elements'])
         elements = payload['elements']
-        self.assertEquals(1, len(elements))
+        self.assertEqual(1, len(elements))
         element1 = elements[0]
-        self.assertEquals("Servusai", element1['title'])
-        self.assertEquals("The home of Program-Y", element1['subtitle'])
-        self.assertEquals("https://www.servusai.com/test.png", element1['image_url'])
-        self.assertEquals(1, len(element1['buttons']))
+        self.assertEqual("Servusai", element1['title'])
+        self.assertEqual("The home of Program-Y", element1['subtitle'])
+        self.assertEqual("https://www.servusai.com/test.png", element1['image_url'])
+        self.assertEqual(1, len(element1['buttons']))
         button1 = element1['buttons'][0]
-        self.assertEquals("Servusai", button1['title'])
-        self.assertEquals("web_url", button1['type'])
-        self.assertEquals("https://www.servusai.com", button1['url'])
+        self.assertEqual("Servusai", button1['title'])
+        self.assertEqual("web_url", button1['type'])
+        self.assertEqual("https://www.servusai.com", button1['url'])
 
     def test_handle_ordered_list(self):
         list = {
@@ -311,26 +311,26 @@ class FacebookRendererTests(unittest.TestCase):
 
         self.renderer.handle_ordered_list(self.client_context, list)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
         message = self.renderer._payload['message']
         self.assertIsNotNone(message['attachment'])
         attachment = message['attachment']
-        self.assertEquals("template", attachment['type'])
+        self.assertEqual("template", attachment['type'])
         self.assertIsNotNone(attachment['payload'])
         payload = attachment['payload']
-        self.assertEquals("list", payload["template_type"])
+        self.assertEqual("list", payload["template_type"])
         self.assertIsNotNone(payload['elements'])
         elements = payload['elements']
-        self.assertEquals(1, len(elements))
+        self.assertEqual(1, len(elements))
         element1 = elements[0]
-        self.assertEquals("Servusai", element1['title'])
-        self.assertEquals("The home of Program-Y", element1['subtitle'])
-        self.assertEquals("https://www.servusai.com/test.png", element1['image_url'])
-        self.assertEquals(1, len(element1['buttons']))
+        self.assertEqual("Servusai", element1['title'])
+        self.assertEqual("The home of Program-Y", element1['subtitle'])
+        self.assertEqual("https://www.servusai.com/test.png", element1['image_url'])
+        self.assertEqual(1, len(element1['buttons']))
         button1 = element1['buttons'][0]
-        self.assertEquals("Servusai", button1['title'])
-        self.assertEquals("web_url", button1['type'])
-        self.assertEquals("https://www.servusai.com", button1['url'])
+        self.assertEqual("Servusai", button1['title'])
+        self.assertEqual("web_url", button1['type'])
+        self.assertEqual("https://www.servusai.com", button1['url'])
 
     def test_render_payload(self):
         pass
@@ -341,7 +341,7 @@ class FacebookRendererTests(unittest.TestCase):
         }
         self.renderer.handle_location(self.client_context, location)
         self.assertIsNotNone(self.renderer._payload)
-        self.assertEquals("testid", self.renderer._payload['recipient']['id'])
-        self.assertEquals("Your location", self.renderer._payload['message']['text'])
-        self.assertEquals("location", self.renderer._payload['message']['quick_replies'][0]['content_type'])
+        self.assertEqual("testid", self.renderer._payload['recipient']['id'])
+        self.assertEqual("Your location", self.renderer._payload['message']['text'])
+        self.assertEqual("location", self.renderer._payload['message']['quick_replies'][0]['content_type'])
 

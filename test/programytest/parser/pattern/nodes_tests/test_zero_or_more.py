@@ -80,12 +80,12 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         node1 = PatternZeroOrMoreWildCardNode("^")
-        self.assertEquals("ZEROORMORE [^]", node1.to_string(verbose=False))
-        self.assertEquals("ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
+        self.assertEqual("ZEROORMORE [^]", node1.to_string(verbose=False))
+        self.assertEqual("ZEROORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
 
         node1 = PatternZeroOrMoreWildCardNode("^", userid="testid")
-        self.assertEquals("ZEROORMORE [^]", node1.to_string(verbose=False))
-        self.assertEquals("ZEROORMORE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
+        self.assertEqual("ZEROORMORE [^]", node1.to_string(verbose=False))
+        self.assertEqual("ZEROORMORE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[^]", node1.to_string(verbose=True))
 
     def test_equivalent_userid(self):
         node1 = PatternZeroOrMoreWildCardNode("^")

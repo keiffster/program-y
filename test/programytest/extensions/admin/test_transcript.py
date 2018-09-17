@@ -29,7 +29,7 @@ class TranscriptAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "")
         self.assertIsNotNone(result)
-        self.assertEquals("Questions:<br /><ul></ul><br />", result)
+        self.assertEqual("Questions:<br /><ul></ul><br />", result)
 
     def test_transcripts_questions_without_props(self):
         client = TranscriptAdminExtensionClient()
@@ -44,7 +44,7 @@ class TranscriptAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "")
         self.assertIsNotNone(result)
-        self.assertEquals("Questions:<br /><ul><li>Hello World - </li></ul><br />", result)
+        self.assertEqual("Questions:<br /><ul><li>Hello World - </li></ul><br />", result)
 
     def test_transcripts_questions_with_props(self):
         client = TranscriptAdminExtensionClient()
@@ -59,4 +59,4 @@ class TranscriptAdminExtensionTests(unittest.TestCase):
 
         result = extension.execute(client_context, "PROPERTIES")
         self.assertIsNotNone(result)
-        self.assertEquals("Questions:<br /><ul><li>Hello World - </li></ul><br />Properties:<br /><ul><li>topic = *</li></ul><br />", result)
+        self.assertEqual("Questions:<br /><ul><li>Hello World - </li></ul><br />Properties:<br /><ul><li>topic = *</li></ul><br />", result)

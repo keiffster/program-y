@@ -84,12 +84,12 @@ class PatternOneOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         node1 = PatternOneOrMoreWildCardNode("*")
-        self.assertEquals("ONEORMORE [*]", node1.to_string(verbose=False))
-        self.assertEquals("ONEORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]", node1.to_string(verbose=True))
+        self.assertEqual("ONEORMORE [*]", node1.to_string(verbose=False))
+        self.assertEqual("ONEORMORE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]", node1.to_string(verbose=True))
 
         node1 = PatternOneOrMoreWildCardNode("*", userid="testid")
-        self.assertEquals("ONEORMORE [*]", node1.to_string(verbose=False))
-        self.assertEquals("ONEORMORE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]", node1.to_string(verbose=True))
+        self.assertEqual("ONEORMORE [*]", node1.to_string(verbose=False))
+        self.assertEqual("ONEORMORE [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] wildcard=[*]", node1.to_string(verbose=True))
 
     def test_equivalent_userid(self):
         node1 = PatternOneOrMoreWildCardNode("*")
