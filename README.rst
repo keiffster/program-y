@@ -5,11 +5,13 @@ THIS IS A PRERELEASE VERSION of V3.0 WHICH INTRODUCES A COMPLETELY NEW STORAGE E
 AS WELL AS CONTINUING TO SUPPORT THE LEGACY FILE STRUCTURE
 
 New in this release
+
 - Support for SQL Storage (Currently tested on MariaDB and MySQL)
 - Support for NoSQL Storage (Currently tested on MongoDB and Redis)
 - Full support for AIML 2.x (Including Rich Media)
 
 WARNINGS:
+
 - Documentation is still pending, use at your own peril!
 - This only works with Y-Bot v3 branch
 - This has only been tested using y-bot.sh script on OSX
