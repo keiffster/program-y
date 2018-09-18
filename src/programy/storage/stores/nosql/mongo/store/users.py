@@ -40,7 +40,7 @@ class MongoUserStore(MongoStore, UserStore):
 
     def get_user(self, userid):
         collection = self.collection()
-        user = collection.find_one({MongoUserStore.USERIDS: userid})
+        user = collection.find_one({MongoUserStore.USERID: userid})
         return user
 
     def get_client_users(self, client):

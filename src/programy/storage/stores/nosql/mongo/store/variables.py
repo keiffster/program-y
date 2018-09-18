@@ -23,7 +23,7 @@ from programy.storage.stores.nosql.mongo.dao.variable import Variables
 class MongoVariableStore(MongoStore, VariablesStore):
 
     VARIABLES = 'variables'
-    CLIENTD = 'clientid'
+    CLIENTID = 'clientid'
     USERID = 'userid'
 
     def __init__(self, storage_engine):

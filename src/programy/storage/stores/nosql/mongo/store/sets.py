@@ -56,7 +56,7 @@ class MongoSetsStore(MongoStore, SetsStore):
                     YLogger.error(self, "Existing value in set [%s] [%s]", name, uvalue)
                     return False
         else:
-            YLogger.info(self, "Creating new set [%s], initial value", name, uvalue)
+            YLogger.info(self, "Creating new set [%s], initial value [%s]", name, uvalue)
             aset = Set(name, [uvalue])
             self.add_document(aset)
             return True
