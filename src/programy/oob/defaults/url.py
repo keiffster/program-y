@@ -17,38 +17,27 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
-from programy.oob.oob import OutOfBandProcessor
+from programy.oob.defaults.oob import OutOfBandProcessor
 
 
-class ScheduleOutOfBandProcessor(OutOfBandProcessor):
+class URLOutOfBandProcessor(OutOfBandProcessor):
     """
     <oob>
-        <schedule><title><star/></title><description><lowercase><star index="2"/></lowercase></description><get name="sraix"/></schedule>
+        <url>http://<star/>.com</url>
     </oob>
     """
-
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._title = None
-        self._description = None
+        self._url = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None:
-            for child in oob:
-                if child.tag == 'title':
-                    self._title = child.text
-                elif child.tag == 'description':
-                    self._description = child.text
-                else:
-                    YLogger.error(self, "Unknown child element [%s] in schedule oob", child.tag)
-
-            if self._title is not None and \
-                self._description is not None:
-                return True
-
-        YLogger.error(self, "Invalid email schedule command")
-        return False
+        if oob is not None and oob.text is not None:
+            self._url = oob.text
+            return True
+        else:
+            YLogger.error(self, "Unvalid url oob command - missing url!")
+            return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "ScheduleOutOfBandProcessor: Scheduling=%s", self._title)
-        return "SCHEDULE"
+        YLogger.info(client_context, "URLOutOfBandProcessor: Loading=%s", self._url)
+        return "URL"

@@ -25,12 +25,17 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
     def __init__(self, name):
         BaseContainerConfigurationData.__init__(self, name)
+        self._description = 'ProgramY AIML2.0 Client'
         self._bot_configs = []
         self._bot_configs.append(BotConfiguration("bot"))
         self._bot_selector = None
         self._scheduler = SchedulerConfiguration()
         self._storage = StorageConfiguration()
         self._renderer = None
+
+    @property
+    def description(self):
+        return self._description
 
     @property
     def configurations(self):
@@ -53,7 +58,12 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         return self._renderer
 
     def load_configuration(self, configuration_file, section, bot_root):
+
+        assert(configuration_file is not None)
+
         if section is not None:
+            self._description = configuration_file.get_option(section, "description", missing_value='ProgramY AIML2.0 Client')
+
             bot_names = configuration_file.get_multi_option(section, "bot", missing_value="bot")
             first = True
             for name in bot_names:
@@ -79,7 +89,11 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             self._bot_configs[0].load_configuration(configuration_file, bot_root)
 
     def to_yaml(self, data, defaults=True):
+
+        assert (data is not None)
+
         if defaults is True:
+            data['description'] = 'ProgramY AIML2.0 Client'
             data['bot'] = 'bot'
             data['bot_selector'] = "programy.clients.client.DefaultBotSelector"
 
@@ -90,6 +104,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
             data['renderer'] = "programy.clients.render.text.TextRenderer"
 
         else:
+            data['description'] = self._description
             data['bot'] = self._bot_configs[0].id
             data['bot_selector'] = self.bot_selector
 

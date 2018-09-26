@@ -18,6 +18,7 @@ from programy.clients.render.html import HtmlRenderer
 class WebChatBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Webchat Client"
         FlaskRestBotClient.__init__(self, "WebChat", argument_parser)
         # Enter you API keys, here, alternatively store in a db or file and load at startup
         # This is an exmaple, and therefore not suitable for production

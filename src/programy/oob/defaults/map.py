@@ -17,39 +17,27 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import xml.etree.ElementTree as ET
 
-from programy.oob.oob import OutOfBandProcessor
+from programy.oob.defaults.oob import OutOfBandProcessor
 
 
-class SMSOutOfBandProcessor(OutOfBandProcessor):
+class MapOutOfBandProcessor(OutOfBandProcessor):
     """
-    <oob>
-        <sms>
-            <recipient><get name="contacturi"/></recipient>
-            <message><get name="messagebody"/></message>
-        </sms>
-    </oob>
+    <geooob>
+        <map>Kinghorn</map>
+    </geooob>
     """
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._recipient = None
-        self._message = None
+        self._location = None
 
     def parse_oob_xml(self, oob: ET.Element):
-        if oob is not None:
-            for child in oob:
-                if child.tag == 'recipient':
-                    self._recipient = child.text
-                elif child.tag == 'message':
-                    self._message = child.text
-                else:
-                    YLogger.error(self, "Unknown child element [%s] in sms oob", child.tag)
-
-            if self._recipient is not None and self._message is not None:
-                return True
-
-        YLogger.error(self, "Invalid sms oob command")
-        return False
+        if oob is not None and oob.text is not None:
+            self._location = oob.text
+            return True
+        else:
+            YLogger.error(self, "Unvalid geomap oob command - missing location text!")
+            return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
-        return "SMS"
+        YLogger.info(client_context, "MapOutOfBandProcessor: Showing a map for location=%s", self._location)
+        return "MAP"

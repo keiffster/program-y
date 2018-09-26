@@ -24,20 +24,28 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
     def __init__(self):
         BaseSectionConfigurationData.__init__(self, "braintree")
         self._create = False
+        self._save_as_user = "system"
 
     @property
     def create(self):
         return self._create
 
+    @property
+    def save_as_user(self):
+        return self._save_as_user
+
     def load_config_section(self, configuration_file, configuration, bot_root):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
             self._create = configuration_file.get_option(braintree, "create", missing_value=None)
+            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system")
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['create'] = False
+            data['create'] = "system"
         else:
             data['create'] = self._create
+            data['create'] = self._save_as_user

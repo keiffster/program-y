@@ -21,7 +21,7 @@ from programy.config.section import BaseSectionConfigurationData
 
 class FileStoreConfiguration(BaseSectionConfigurationData):
     
-    def __init__(self, name=None, dirs=None, extension=None, subdirs=False, format=None, encoding=None, delete_on_start=False, file=None):
+    def __init__(self, name='storage', dirs=None, extension=None, subdirs=False, format=None, encoding=None, delete_on_start=False, file=None):
         BaseSectionConfigurationData.__init__(self, name)
 
         self._dirs = None

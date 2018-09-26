@@ -28,9 +28,11 @@ from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.alexa.config import AlexaConfiguration
 
 
-class FacebookBotClient(FlaskRestBotClient):
+class AlexaBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Alexa Client"
+
         FlaskRestBotClient.__init__(self, 'alexa', argument_parser)
 
         YLogger.debug(self, "Alexa Client is running....")
@@ -125,6 +127,6 @@ if __name__ == "__main__":
         response = APP.ask_question('alexa', question)
         return question(response)
 
-    ALEXA_CLIENT = FacebookBotClient()
+    ALEXA_CLIENT = AlexaBotClient()
     ALEXA_CLIENT.run(APP)
 

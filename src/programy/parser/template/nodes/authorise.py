@@ -47,12 +47,12 @@ class TemplateAuthoriseNode(TemplateNode):
         # Check if the user, role or group exists, assumption being, that if defined
         # in the tag and exists then we can execute the inner children
         # Assumption is that user has been authenticated and passed and is value
-        if client_context.brain.authorisation is not None:
-            if client_context.brain.authorisation.authorise(client_context.userid, self.role) is False:
+        if client_context.brain.security.authorisation is not None:
+            if client_context.brain.security.authorisation.authorise(client_context.userid, self.role) is False:
                 if self._denied_srai is not None:
                     srai_text = self._denied_srai
                 else:
-                    srai_text = client_context.brain.authorisation.get_default_denied_srai()
+                    srai_text = client_context.brain.security.authorisation.get_default_denied_srai()
                 resolved = client_context.bot.ask_question(client_context, srai_text, srai=True)
                 YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
                 return resolved

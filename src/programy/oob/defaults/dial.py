@@ -15,29 +15,30 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
+import xml.etree.ElementTree as ET
 
-from programy.oob.oob import OutOfBandProcessor
+from programy.oob.defaults.oob import OutOfBandProcessor
 
 
-class CameraOutOfBandProcessor(OutOfBandProcessor):
+class DialOutOfBandProcessor(OutOfBandProcessor):
     """
     <oob>
-        <camera>on|off</camera>
+        <dial>07777777777</dial>
     </oob>
     """
 
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._command = None
+        self._number = None
 
-    def parse_oob_xml(self, oob):
+    def parse_oob_xml(self, oob: ET.Element):
         if oob is not None and oob.text is not None:
-            self._command = oob.text
+            self._number = oob.text
             return True
         else:
-            YLogger.error(self, "Invalid camera oob command - missing command")
+            YLogger.error(self, "Unvalid dial oob command - missing dial text!")
             return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "CameraOutOfBandProcessor: Setting camera to=%s", self._command)
-        return "CAMERA"
+        YLogger.info(client_context, "DialOutOfBandProcessor: Dialing=%s", self._number)
+        return "DIAL"

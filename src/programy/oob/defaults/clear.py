@@ -16,16 +16,28 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from programy.oob.oob import OutOfBandProcessor
+from programy.oob.defaults.oob import OutOfBandProcessor
 
-class DefaultOutOfBandProcessor(OutOfBandProcessor):
-    # Default OOB Processor consumes XML and returns nothing
+
+class ClearOutOfBandProcessor(OutOfBandProcessor):
+    """
+    <oob>
+        <clear>log</clear>
+    </oob>
+    """
 
     def __init__(self):
         OutOfBandProcessor.__init__(self)
+        self._command = None
+
+    def parse_oob_xml(self, oob):
+        if oob is not None and oob.text is not None:
+            self._command = oob.text
+            return True
+        else:
+            YLogger.error(self, "Unvalid clear oob command - missing command")
+            return False
 
     def execute_oob_command(self, client_context):
-        YLogger.info(client_context, "Default OOB Processing....")
-        if self._xml is not None:
-            return ""
-        return ""
+        YLogger.info(client_context, "ClearOutOfBandProcessor: Clearing=%s", self._command)
+        return "CLEAR"

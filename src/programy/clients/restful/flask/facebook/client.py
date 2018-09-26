@@ -27,6 +27,7 @@ from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 class FacebookBotClient(FlaskRestBotClient):
     
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Facebook Client"
         FlaskRestBotClient.__init__(self, 'facebook', argument_parser)
 
         YLogger.debug(self, "Facebook Client is running....")

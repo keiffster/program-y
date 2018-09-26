@@ -1,4 +1,7 @@
 import re
+from programy.utils.logging.ylogger import YLogger
+from programy.utils.classes.loader import ClassLoader
+
 
 class Tokenizer(object):
 
@@ -23,6 +26,15 @@ class Tokenizer(object):
 
     def compare(self, value1, value2):
         return value1 == value2
+
+    @staticmethod
+    def load_tokenizer(configuration):
+        if configuration is not None and configuration.tokenizer.classname is not None:
+            YLogger.info(None, "Loading tokenizer from class [%s]", configuration.tokenizer.classname)
+            tokenizer_class = ClassLoader.instantiate_class(configuration.tokenizer.classname)
+            return tokenizer_class(configuration.tokenizer.split_chars)
+        else:
+            return Tokenizer(configuration.tokenizer.split_chars)
 
 
 class CjkTokenizer(Tokenizer):

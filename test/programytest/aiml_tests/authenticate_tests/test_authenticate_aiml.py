@@ -49,8 +49,8 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
     def test_authentication_failed_with_srai(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
-        self._client_context.bot.brain.authentication.configuration._denied_srai = "AUTHENTICATED_FAILED"
-        self._client_context.bot.brain.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
+        self._client_context.brain.security.authentication.configuration._denied_srai = "AUTHENTICATED_FAILED"
+        self._client_context.brain.security.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL SRAI")
         self.assertIsNotNone(response)
@@ -58,8 +58,8 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
     def test_authentication_failed_with_unknown_srai(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
-        self._client_context.bot.brain.authentication.configuration._denied_srai = "AUTHENTICATED_FAILEDX"
-        self._client_context.bot.brain.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
+        self._client_context.brain.security.authentication.configuration._denied_srai = "AUTHENTICATED_FAILEDX"
+        self._client_context.brain.security.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL SRAI")
         self.assertIsNotNone(response)
@@ -67,8 +67,8 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
     def test_authentication_failed_with_text(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
-        self._client_context.bot.brain.authentication.configuration._denied_srai = None
-        self._client_context.bot.brain.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
+        self._client_context.brain.security.authentication.configuration._denied_srai = None
+        self._client_context.brain.security.authentication.configuration._denied_text = "AUTHENTICATED FAILED TEXT"
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL TEXT")
         self.assertIsNotNone(response)

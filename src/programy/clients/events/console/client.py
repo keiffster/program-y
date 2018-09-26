@@ -23,6 +23,7 @@ from programy.clients.events.console.config import ConsoleConfiguration
 class ConsoleBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Console Client"
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
 

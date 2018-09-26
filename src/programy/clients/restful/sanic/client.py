@@ -37,6 +37,7 @@ from programy.clients.restful.sanic.config import SanicRestConfiguration
 class SanicRestBotClient(RestBotClient):
 
     def __init__(self, id, argument_parser=None):
+        self._description = "Programy AIML2.x Sanic REST Client"
         RestBotClient.__init__(self, id, argument_parser)
 
     def get_description(self):

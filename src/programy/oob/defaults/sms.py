@@ -15,50 +15,41 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
+import xml.etree.ElementTree as ET
 
-from programy.oob.oob import OutOfBandProcessor
+from programy.oob.defaults.oob import OutOfBandProcessor
 
 
-class AlarmOutOfBandProcessor(OutOfBandProcessor):
+class SMSOutOfBandProcessor(OutOfBandProcessor):
     """
     <oob>
-        <alarm><message><star/></message><get name="sraix"/></alarm>
-    </oob>
-
-    <oob>
-        <alarm><hour>11</hour><minute>30</minute></alarm>
+        <sms>
+            <recipient><get name="contacturi"/></recipient>
+            <message><get name="messagebody"/></message>
+        </sms>
     </oob>
     """
-
     def __init__(self):
         OutOfBandProcessor.__init__(self)
-        self._hour = None
-        self._min = None
+        self._recipient = None
         self._message = None
 
-    def parse_oob_xml(self, oob):
+    def parse_oob_xml(self, oob: ET.Element):
         if oob is not None:
             for child in oob:
-                if child.tag == 'hour':
-                    self._hour = child.text
-                elif child.tag == 'minute':
-                    self._min = child.text
+                if child.tag == 'recipient':
+                    self._recipient = child.text
                 elif child.tag == 'message':
                     self._message = child.text
                 else:
-                    YLogger.error(self, "Unknown child element [%s] in alarm oob", child.tag)
+                    YLogger.error(self, "Unknown child element [%s] in sms oob", child.tag)
 
-            if self._hour is not None and self._min is not None:
-                return True
-            if self._message is not None:
+            if self._recipient is not None and self._message is not None:
                 return True
 
-        YLogger.error(self, "Invalid alarm oob command, either hour,min or message ")
+        YLogger.error(self, "Invalid sms oob command")
         return False
 
     def execute_oob_command(self, client_context):
-        if self._message is not None:
-            YLogger.info(client_context, "AlarmOutOfBandProcessor: Showing alarm=%s", self._message)
-        elif self._hour is not None and self._min is not None:
-            YLogger.info(client_context, "AlarmOutOfBandProcessor: Setting alarm for %s:%s", self._hour, self._min)
-        return "ALARM"
+        YLogger.info(client_context, "SMSOutOfBandProcessor: Messaging=%s", self._recipient)
+        return "SMS"
