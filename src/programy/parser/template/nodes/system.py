@@ -52,15 +52,8 @@ class TemplateSystemNode(TemplateAttribNode):
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        return "SYSTEM timeout=%s" % (self._timeout)
+        return "[SYSTEM timeout=%s]" % (self._timeout)
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':

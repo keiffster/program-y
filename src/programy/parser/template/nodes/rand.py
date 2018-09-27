@@ -35,14 +35,6 @@ class TemplateRandomNode(TemplateNode):
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    #TODO Same method in every class, move to base class
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         return "[RANDOM] %d" % (len(self._children))
 

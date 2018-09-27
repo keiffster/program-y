@@ -248,7 +248,7 @@ class Conversation(object):
         return topic_pattern
 
     def parse_last_sentences_from_response(self, response):
-        # TODO Issue here when the response is more than just a simple sentence
+
         # If the response contains punctuation such as "Hello. There" then THAT is none
         response = re.sub(r'<\s*br\s*/>\s*', ".", response)
         response = re.sub(r'<br></br>*', ".", response)
@@ -260,6 +260,7 @@ class Conversation(object):
 
         if that_pattern == "":
             that_pattern = '*'
+
         return that_pattern
 
     def get_that_pattern(self, client_context, srai=False):

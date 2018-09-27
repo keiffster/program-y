@@ -66,9 +66,6 @@ class TemplateConditionListItemNode(TemplateConditionVariable):
     def is_default(self):
         return bool(self.value is None)
 
-    def resolve(self, client_context):
-        pass
-
     def to_string(self):
         if self.name is not None:
             return "[CONDITIONLIST(%s=%s)]" % (self.name, self.value.to_string())
@@ -378,7 +375,6 @@ class TemplateConditionNode(TemplateConditionVariable):
         xml += "</condition>"
 
         return xml
-
 
     def resolve(self, client_context):
         if self._condition_type == TemplateConditionNode.BLOCK:

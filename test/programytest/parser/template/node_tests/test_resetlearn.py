@@ -28,7 +28,7 @@ class TemplateResetLearnNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         node = MockTemplateResetLearnNode()
-        self.assertEqual("RESETLEARN", node.to_string())
+        self.assertEqual("[RESETLEARN]", node.to_string())
 
     def test_to_xml(self):
         node = TemplateResetLearnNode()

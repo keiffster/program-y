@@ -18,11 +18,11 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateRequestNode()
-        self.assertEqual("REQUEST", node.to_string())
+        self.assertEqual("[REQUEST]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateRequestNode(index=2)
-        self.assertEqual("REQUEST index=2", node.to_string())
+        self.assertEqual("[REQUEST index=2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()

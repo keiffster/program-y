@@ -18,7 +18,7 @@ class TemplateUniqNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateUniqNode()
         self.assertIsNotNone(root)
-        self.assertEqual("UNIQ", root.to_string())
+        self.assertEqual("[UNIQ]", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()

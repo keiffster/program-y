@@ -17,17 +17,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.dialog.dialog import Conversation
 from programy.storage.factory import StorageFactory
+from programy.config.bot.conversations import BotConversationsConfiguration
 
-"""
-        self._max_histories = 100
-        self._restore_last_topic = False
-        self._initial_topic = "*"
-        self._empty_on_start = False
-"""
 
 class ConversationManager(object):
 
     def __init__(self, conversation_configuration):
+
+        assert (conversation_configuration is not None)
+        assert (isinstance(conversation_configuration, BotConversationsConfiguration))
+
         self._configuration = conversation_configuration
         self._conversation_storage = None
         self._conversations = {}
@@ -65,9 +64,17 @@ class ConversationManager(object):
 
     def get_conversation(self, client_context):
 
+        assert (client_context is not None)
+        assert (client_context.userid  is not None)
+
         if client_context.userid in self._conversations:
             YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
-            return self._conversations[client_context.userid]
+            conversation = self._conversations[client_context.userid]
+
+            # Load existing conversation from cache
+            if self.configuration.multi_client:
+                if self._conversation_storage is not None:
+                    self._conversation_storage.load_conversation(client_context, conversation)
 
         else:
             YLogger.info(client_context, "Creating new conversation for client %s", client_context.userid)
@@ -85,5 +92,5 @@ class ConversationManager(object):
             if self.configuration.restore_last_topic is True:
                 pass
 
-            return conversation
+        return conversation
 

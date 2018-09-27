@@ -52,16 +52,9 @@ class TemplateStarNode(TemplateIndexedNode):
         YLogger.debug(client_context, "Star Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        string = "STAR"
-        string += self.get_index_as_str()
+        string = "[STAR"
+        string += self.get_index_as_str() + ']'
         return string
 
     def to_xml(self, client_context):

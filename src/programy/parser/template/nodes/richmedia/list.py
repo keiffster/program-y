@@ -40,15 +40,8 @@ class TemplateListNode(TemplateNode):
         str += "</list>"
         return str
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        return "[LIST] %d" % (len(self._items))
+        return "[LIST %d]" % (len(self._items))
 
     def to_xml(self, client_context):
         return self.resolve_to_string(client_context)

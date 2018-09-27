@@ -62,19 +62,12 @@ class TemplateAuthoriseNode(TemplateNode):
         YLogger.debug(self, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        text = "AUTHORISE ("
+        text = "[AUTHORISE ("
         text += "role=%s"%self._role
         if self._denied_srai is not None:
             text += ", denied_srai=%s"%self._denied_srai
-        text += ")"
+        text += ")]"
         return text
 
     def to_xml(self, client_context):

@@ -44,7 +44,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("SRAIX (service=api)", node.to_string())
+        self.assertEqual("[SRAIX (service=api)]", node.to_string())
 
     def test_node_service(self):
         root = TemplateNode()
@@ -60,7 +60,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("SRAIX (service=api)", node.to_string())
+        self.assertEqual("[SRAIX (service=api)]", node.to_string())
 
     def test_node_no_service(self):
         root = TemplateNode()
@@ -74,7 +74,7 @@ class TemplateSRAIXNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("SRAIX ()", node.to_string())
+        self.assertEqual("[SRAIX ()]", node.to_string())
 
     def test_to_xml_service(self):
         root = TemplateNode()

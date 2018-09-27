@@ -18,7 +18,7 @@ class TemplateSearchNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateSearchNode()
         self.assertIsNotNone(root)
-        self.assertEqual("SEARCH", root.to_string())
+        self.assertEqual("[SEARCH]", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()

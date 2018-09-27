@@ -6,7 +6,6 @@ from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programytest.client import TestClient
 
 
-# TODO, modify this to return mocked json payload
 class MockNewsApiExtension(NewsAPIExtension):
 
     def execute(self, context, data):

@@ -109,13 +109,6 @@ class TemplateIntervalNode(TemplateNode):
         YLogger.debug(client_context, "[INTERVAL] resolved to [%s]", resolved)
         return resolved
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         return "[INTERVAL]"
 

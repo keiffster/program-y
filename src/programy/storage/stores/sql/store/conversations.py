@@ -35,7 +35,13 @@ class SQLConversationStore(SQLStore, ConversationStore):
         for question in conversation.questions:
             sentence_no = 0
             for sentence in question.sentences:
-                #TODO Check for duplicates and remove
+
+                self._storage_engine.session.query(Conversation).filter(Conversation.clientid==client_context.client.id,
+                                                                        Conversation.userid==client_context.userid,
+                                                                        Conversation.botid==client_context.bot.id,
+                                                                        Conversation.brainid==client_context.brain.id,
+                                                                        Conversation.question==question_no).delete()
+
                 conversation = Conversation(clientid=client_context.client.id,
                                             userid=client_context.userid,
                                             botid=client_context.bot.id,
