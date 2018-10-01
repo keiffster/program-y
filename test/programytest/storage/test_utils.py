@@ -41,7 +41,7 @@ class StorageEngineTestUtils(unittest.TestCase):
 
         conversation = Conversation(client_context)
 
-        question1 = Question.create_from_text(client_context.brain.tokenizer, "Hello There")
+        question1 = Question.create_from_text(client_context, "Hello There")
         question1.sentence(0).response = "Hi"
         conversation.record_dialog(question1)
 

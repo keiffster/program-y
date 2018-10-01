@@ -35,6 +35,9 @@ class BotConfigurationTests(unittest.TestCase):
               check_before: true
               check_and_retry: true
               
+            splitter:
+                classname: programy.dialog.splitter.regex.RegexSentenceSplitter
+
             conversations:
               save: true
               load: false
@@ -70,6 +73,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertTrue(bot_config.spelling.check_before)
         self.assertTrue(bot_config.spelling.check_and_retry)
 
+        self.assertIsNotNone(bot_config.splitter)
+        self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
+        self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
         self.assertIsNotNone(bot_config.conversations)
         self.assertIsNotNone(bot_config.conversations.max_histories, 100)
         self.assertIsNotNone(bot_config.conversations.restore_last_topic, False)
@@ -99,7 +106,13 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(bot_config.max_search_depth, 100)
         self.assertEqual(bot_config.max_search_timeout, -1)
         self.assertTrue(bot_config.override_properties)
+
         self.assertIsNotNone(bot_config.spelling)
+
+        self.assertIsNotNone(bot_config.splitter)
+        self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
+        self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
         self.assertIsNotNone(bot_config.conversations)
 
     def test_with_no_data(self):

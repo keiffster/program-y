@@ -16,25 +16,36 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from programy.config.section import BaseSectionConfigurationData
+from programy.config.base import BaseConfigurationData
 
 
-class BrainOOBConfiguration(BaseSectionConfigurationData):
+class BotSentenceSplitterConfiguration(BaseConfigurationData):
 
-    def __init__(self, oob_name):
-        BaseSectionConfigurationData.__init__(self, oob_name)
-        self._classname = None
+    def __init__(self):
+        BaseConfigurationData.__init__(self, name="splitter")
+        self._classname = "programy.dialog.splitter.regex.RegexSentenceSplitter"
+        self._split_chars = '[:;,.?!]'
 
     @property
     def classname(self):
         return self._classname
 
+    @property
+    def split_chars(self):
+        return self._split_chars
+
     def load_config_section(self, configuration_file, configuration, bot_root):
-        oob = configuration_file.get_section(self.section_name, configuration)
-        if oob is not None:
-            self._classname = configuration_file.get_option(oob, "classname", missing_value=None)
+        splitter = configuration_file.get_section(self._section_name, configuration)
+        if splitter is not None:
+            self._classname = configuration_file.get_option(splitter, "classname", missing_value="programy.dialog.splitter.regex.RegexSentenceSplitter")
+            self._split_chars = configuration_file.get_option(splitter, "split_chars", missing_value="[:;,.?!]")
         else:
-            YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
+            YLogger.warning(self, "'splitter' section missing from bot config, using defaults")
 
     def to_yaml(self, data, defaults=True):
-        data['classname'] = self._classname
+        if defaults is True:
+            data['classname'] = "programy.dialog.splitter.regex.RegexSentenceSplitter"
+            data['split_chars'] = '[:;,.?!]'
+        else:
+            data['classname'] = self._classname
+            data['split_chars'] = self._split_chars

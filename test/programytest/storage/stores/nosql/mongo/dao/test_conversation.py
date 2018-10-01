@@ -25,7 +25,7 @@ class ConversationTests(unittest.TestCase):
 
         convo = Convo(client_context)
 
-        question = Question.create_from_text(client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         convo.record_dialog(question)
 

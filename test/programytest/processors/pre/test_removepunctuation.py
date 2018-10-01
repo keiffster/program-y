@@ -12,7 +12,7 @@ class RemovePunctuationTests(unittest.TestCase):
 
         context = ClientContext(TestClient(), "testid")
 
-        result = processor.process(context, "Hello!")
+        result = processor.process(context, "'Hello'")
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 

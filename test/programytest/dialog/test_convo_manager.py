@@ -45,17 +45,17 @@ class ConversationManagerTests(unittest.TestCase):
 
         conversation = mgr.get_conversation(client_context)
 
-        question1 = Question.create_from_text(client_context.brain.tokenizer, "Hello There")
+        question1 = Question.create_from_text(client_context, "Hello There")
         question1.sentence(0).response = "Hi"
         conversation.record_dialog(question1)
         mgr.save_conversation(client_context)
 
-        question2 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again")
+        question2 = Question.create_from_text(client_context, "Hello There Again")
         question2.sentence(0).response = "Hi Again"
         conversation.record_dialog(question2)
         mgr.save_conversation(client_context)
 
-        question3 = Question.create_from_text(client_context.brain.tokenizer, "Hello There Again Again")
+        question3 = Question.create_from_text(client_context, "Hello There Again Again")
         question3.sentence(0).response = "Hi Again Again"
         conversation.record_dialog(question3)
         mgr.save_conversation(client_context)

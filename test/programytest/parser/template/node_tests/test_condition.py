@@ -239,7 +239,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         self._client_context.bot.conversation(self._client_context).record_dialog(question)
         self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value1")
 
@@ -260,7 +260,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         self._client_context.bot.conversation(self._client_context).record_dialog(question)
         self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value2")
 
@@ -359,7 +359,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
 
         self._client_context.bot.conversation(self._client_context).set_property('cond1', "value2")
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         self._client_context.bot.conversation(self._client_context).record_dialog(question)
         self._client_context.bot.conversation(self._client_context).current_question().set_property("cond1", "value2")
 
@@ -414,7 +414,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         self._client_context.bot.conversation(self._client_context).record_dialog(question)
         self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value2")
 

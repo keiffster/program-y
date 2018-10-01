@@ -14,8 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
-
 from programy.utils.logging.ylogger import YLogger
 
 from programy.brain import Brain
@@ -24,6 +22,8 @@ from programy.dialog.conversation import ConversationManager
 from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
 from programy.spelling.base import SpellingChecker
+from programy.dialog.splitter.splitter import SentenceSplitter
+
 
 class BrainSelector(object):
 
@@ -98,6 +98,9 @@ class Bot(object):
         self._spell_checker = None
         self.initiate_spellchecker()
 
+        self._sentence_splitter = None
+        self.initiate_sentence_splitter()
+
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
 
@@ -120,14 +123,23 @@ class Bot(object):
     def brain_factory(self):
         return self._brain_factory
 
+    @property
+    def spell_checker(self):
+        return self._spell_checker
+
     def initiate_spellchecker(self):
         if self.configuration is not None:
             if self.configuration.spelling is not None:
                 self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
 
     @property
-    def spell_checker(self):
-        return self._spell_checker
+    def sentence_splitter(self):
+        return self._sentence_splitter
+
+    def initiate_sentence_splitter(self):
+        if self.configuration is not None:
+            if self.configuration.splitter is not None:
+                self._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(self.configuration.splitter)
 
     @property
     def brain(self):
@@ -289,12 +301,33 @@ class Bot(object):
 
     def get_question(self, client_context, pre_processed, srai):
         if srai is False:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, srai=srai)
+            return Question.create_from_text(client_context, pre_processed, srai=srai)
         else:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, split=False, srai=srai)
+            return Question.create_from_text(client_context, pre_processed, split=False, srai=srai)
 
     def combine_answers(self, answers):
-        return ". ".join([sentence for sentence in answers if sentence is not None])
+        final_sentences = []
+        for sentence in answers:
+            if sentence:
+
+                # Capitalise the start of each sentence
+                if sentence[0].isalpha():
+                    sentence = sentence[0].upper() + sentence[1:]
+
+                # If it ends with a terminator, keep the terminator, otherwise add a full stop
+                if self.ends_with_terminator(sentence):
+                    final_sentences.append(sentence)
+                else:
+                    final_sentences.append(sentence+'.')
+
+        return " ".join([sentence for sentence in final_sentences])
+
+    def ends_with_terminator(self, sentence):
+        terminators = ".?!"
+        for ch in terminators:
+            if sentence.endswith(ch):
+                return True
+        return False
 
     def post_process_response(self, client_context, response, srai):
         if srai is False:

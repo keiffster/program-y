@@ -86,6 +86,8 @@ if __name__ == '__main__':
 
     def run():
         print("Loading, please wait...")
+        import os
+        print(os.getcwd())
         console_app = ConsoleBotClient()
         console_app.run()
 

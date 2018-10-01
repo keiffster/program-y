@@ -76,8 +76,10 @@ class BotTests(unittest.TestCase):
         client = TestClient()
         bot = Bot(BotConfiguration(), client)
 
-        self.assertIsNone(bot.spell_checker)
         self.assertIsNotNone(bot.brain)
+
+        self.assertIsNone(bot.spell_checker)
+        self.assertIsNotNone(bot.sentence_splitter)
         self.assertIsNotNone(bot.conversations)
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
@@ -102,8 +104,9 @@ class BotTests(unittest.TestCase):
         client = TestClient()
         bot = Bot(bot_config, client)
 
-        self.assertIsNone(bot.spell_checker)
         self.assertIsNotNone(bot.brain)
+        self.assertIsNone(bot.spell_checker)
+        self.assertIsNotNone(bot.sentence_splitter)
         self.assertIsNotNone(bot.conversations)
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
