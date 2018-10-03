@@ -38,6 +38,9 @@ class BotConfigurationTests(unittest.TestCase):
             splitter:
                 classname: programy.dialog.splitter.regex.RegexSentenceSplitter
 
+            joiner:
+                classname: programy.dialog.joiner.SentenceJoiner
+
             conversations:
               save: true
               load: false
@@ -77,6 +80,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
         self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
 
+        self.assertIsNotNone(bot_config.joiner)
+        self.assertEqual("programy.dialog.joiner.SentenceJoiner", bot_config.joiner.classname)
+        self.assertEqual('.?!', bot_config.joiner.join_chars)
+
         self.assertIsNotNone(bot_config.conversations)
         self.assertIsNotNone(bot_config.conversations.max_histories, 100)
         self.assertIsNotNone(bot_config.conversations.restore_last_topic, False)
@@ -112,6 +119,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(bot_config.splitter)
         self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
         self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
+        self.assertIsNotNone(bot_config.joiner)
+        self.assertEqual("programy.dialog.joiner.joiner.SentenceJoiner", bot_config.joiner.classname)
+        self.assertEqual('.?!', bot_config.joiner.join_chars)
 
         self.assertIsNotNone(bot_config.conversations)
 

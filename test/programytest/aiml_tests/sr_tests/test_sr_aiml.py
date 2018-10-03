@@ -24,7 +24,7 @@ class SrAIMLTests(unittest.TestCase):
     def test_sr_response(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL HELLO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HI THERE')
+        self.assertEqual(response, 'HI THERE.')
 
     def test_sr_response_no_star(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL HOWDY")
@@ -34,4 +34,4 @@ class SrAIMLTests(unittest.TestCase):
     def test_sr_response_two_star(self):
         response = self._client_context.bot.ask_question(self._client_context, "HI FRIEND HOW ARE YOU TODAY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HEY FRIEND')
+        self.assertEqual(response, 'HEY FRIEND.')

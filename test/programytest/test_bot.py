@@ -80,6 +80,7 @@ class BotTests(unittest.TestCase):
 
         self.assertIsNone(bot.spell_checker)
         self.assertIsNotNone(bot.sentence_splitter)
+        self.assertIsNotNone(bot.sentence_joiner)
         self.assertIsNotNone(bot.conversations)
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
@@ -107,6 +108,7 @@ class BotTests(unittest.TestCase):
         self.assertIsNotNone(bot.brain)
         self.assertIsNone(bot.spell_checker)
         self.assertIsNotNone(bot.sentence_splitter)
+        self.assertIsNotNone(bot.sentence_joiner)
         self.assertIsNotNone(bot.conversations)
         self.assertIsNotNone(bot.default_response)
         self.assertIsNotNone(bot.exit_response)
@@ -198,15 +200,15 @@ class BotTests(unittest.TestCase):
 
         response = bot.ask_question(self._client_context, "hello")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Sorry, I don't have an answer for that right now")
+        self.assertEqual(response, "Sorry, I don't have an answer for that right now.")
 
         response = bot.ask_question(self._client_context, "hello again")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Sorry, I don't have an answer for that right now")
+        self.assertEqual(response, "Sorry, I don't have an answer for that right now.")
 
         response = bot.ask_question(self._client_context, "goodbye")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Sorry, I don't have an answer for that right now")
+        self.assertEqual(response, "Sorry, I don't have an answer for that right now.")
 
         conversation = bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)

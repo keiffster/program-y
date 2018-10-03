@@ -48,18 +48,18 @@ class GeoCodeAIMLTests(unittest.TestCase):
         self.assertTrue(os.path.exists(GeoCodeAIMLTests.LATLONG))
         response =self._client_context.bot.ask_question(self._client_context, "POSTCODE KY39UR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001')
+        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001.')
 
     def test_postcode2(self):
         GeoCodeAIMLTests.LATLONG = os.path.dirname(__file__) + os.sep + "google_latlong.json"
         self.assertTrue(os.path.exists(GeoCodeAIMLTests.LATLONG))
         response =self._client_context.bot.ask_question(self._client_context, "POSTCODE KY3 9UR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001')
+        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001.')
 
     def test_location(self):
         GeoCodeAIMLTests.LATLONG = os.path.dirname(__file__) + os.sep + "google_latlong.json"
         self.assertTrue(os.path.exists(GeoCodeAIMLTests.LATLONG))
         response =self._client_context.bot.ask_question(self._client_context, "LOCATION KINGHORN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001')
+        self.assertEqual(response, 'LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001.')

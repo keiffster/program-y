@@ -3,7 +3,7 @@ import unittest
 from programy.dialog.dialog import Sentence
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
-from programy.parser.tokenizer import Tokenizer
+from programy.dialog.tokenizer.tokenizer import Tokenizer
 
 from programytest.client import TestClient
 

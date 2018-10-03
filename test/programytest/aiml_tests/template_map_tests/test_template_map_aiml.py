@@ -25,9 +25,9 @@ class TemplateMapAIMLTests(unittest.TestCase):
     def test_name_map_topic(self):
         response =self._client_context.bot.ask_question(self._client_context,  "NAME MAP")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK VAL1")
+        self.assertEqual(response, "OK VAL1.")
 
     def test_multi_word_name_map_topic(self):
         response =self._client_context.bot.ask_question(self._client_context,  "MULTI WORD NAME MAP")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK VAL1")
+        self.assertEqual(response, "OK VAL1.")

@@ -25,7 +25,7 @@ class GenderiseTests(unittest.TestCase):
         self.assertEqual([re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '], collection.value(" WITH HIM "))
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
     def test_load(self):
         storage_factory = StorageFactory()
@@ -44,7 +44,7 @@ class GenderiseTests(unittest.TestCase):
         collection.load(storage_factory)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
     def test_reload(self):
         storage_factory = StorageFactory()
@@ -63,12 +63,12 @@ class GenderiseTests(unittest.TestCase):
         collection.load(storage_factory)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
         collection.reload(storage_factory)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
 
 

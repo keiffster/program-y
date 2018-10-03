@@ -25,26 +25,26 @@ class TopicAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "HI THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'OUTSIDE OF TEST1TOPIC')
+        self.assertEqual(response, 'OUTSIDE OF TEST1TOPIC.')
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'INSIDE OF TEST1TOPIC')
+        self.assertEqual(response, 'INSIDE OF TEST1TOPIC.')
 
     def test_topic_multiple_topic_words(self):
         response = self._client_context.bot.ask_question(self._client_context, "SEEYA")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'OUTSIDE OF TEST2 TOPIC')
+        self.assertEqual(response, 'OUTSIDE OF TEST2 TOPIC.')
 
         response = self._client_context.bot.ask_question(self._client_context, "GOODBYE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'INSIDE OF TEST2 TOPIC')
+        self.assertEqual(response, 'INSIDE OF TEST2 TOPIC.')
 
     def test_topic_wildcard_topic_words(self):
         response = self._client_context.bot.ask_question(self._client_context, "WILDCARD1")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'WILDCARD1 TEST OK')
+        self.assertEqual(response, 'WILDCARD1 TEST OK.')
 
         response = self._client_context.bot.ask_question(self._client_context, "WILDCARD2")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'WILDCARD2 TEST OK')
+        self.assertEqual(response, 'WILDCARD2 TEST OK.')

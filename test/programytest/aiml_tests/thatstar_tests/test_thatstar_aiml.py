@@ -27,8 +27,8 @@ class ThatStarAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HI THERE')
+        self.assertEqual(response, 'HI THERE.')
 
         response = self._client_context.bot.ask_question(self._client_context, "I SAID HI THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HEARD YOU SAY HI THERE')
+        self.assertEqual(response, 'HEARD YOU SAY HI THERE.')

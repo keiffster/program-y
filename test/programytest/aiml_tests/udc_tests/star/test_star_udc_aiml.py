@@ -24,12 +24,12 @@ class StarUDCAIMLTests(unittest.TestCase):
     def test_udc_multi_word_question(self):
         response = self._client_context.bot.ask_question(self._client_context, "Ask Question")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Star Response")
+        self.assertEqual(response, "UDC Star Response.")
 
     def test_udc_single_word_question(self):
         response = self._client_context.bot.ask_question(self._client_context, "Question")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Star Response")
+        self.assertEqual(response, "UDC Star Response.")
 
     def test_udc_empty_string_question(self):
         response = self._client_context.bot.ask_question(self._client_context, "")

@@ -74,7 +74,7 @@ class TemplateGraphResetLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context1)
 
         response = client_context1.bot.ask_question(client_context1, "HELLO THERE")
-        self.assertEqual("HIYA ONE", response)
+        self.assertEqual("HIYA ONE.", response)
 
         client_context2 = self.create_client_context("testid")
 
@@ -96,7 +96,7 @@ class TemplateGraphResetLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context2)
 
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE")
-        self.assertEqual("HIYA TWO", response)
+        self.assertEqual("HIYA TWO.", response)
 
         template = ET.fromstring("""
         			<template>

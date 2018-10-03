@@ -42,7 +42,7 @@ class QuestionTests(unittest.TestCase):
             question.sentence(2)
 
     def test_question_create_from_sentence(self):
-        sentence = Sentence(self._client_context, "One Two Three")
+        sentence = Sentence(self._client_context.brain.tokenizer, "One Two Three")
         question = Question.create_from_sentence(sentence)
         self.assertIsNotNone(question)
         self.assertEqual(1, len(question.sentences))
@@ -61,10 +61,10 @@ class QuestionTests(unittest.TestCase):
 
     def test_combine_answers(self):
         question = Question()
-        sentence1 = Sentence(self._client_context, "Hi")
+        sentence1 = Sentence(self._client_context.brain.tokenizer, "Hi")
         sentence1._response = "Hello"
         question._sentences.append(sentence1)
-        sentence2 = Sentence(self._client_context, "Hi Again")
+        sentence2 = Sentence(self._client_context.brain.tokenizer, "Hi Again")
         question._sentences.append(sentence2)
         sentence2._response = "World"
 

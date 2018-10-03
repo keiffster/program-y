@@ -42,4 +42,4 @@ class OOBAIMLTests(unittest.TestCase):
 
     def test_oob_complex(self):
         response = self._client_context.bot.ask_question(self._client_context,  "FILE BUG REPORT")
-        self.assertEqual(response, "To help the developers blah blah blah")
+        self.assertEqual(response, "To help the developers blah blah blah.")

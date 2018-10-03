@@ -31,8 +31,8 @@ class Person2Tests(unittest.TestCase):
 
         collection.load_from_text(person2_text)
 
-        self.assertEqual(collection.personalise_string("I was"), "HE OR SHE was")
-        self.assertEqual(collection.personalise_string("Hello he was over there"), "Hello I WAS over there")
+        self.assertEqual(collection.personalise_string("I was"), "he or she was")
+        self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
 
         pattern = collection.person(" I am ")
         self.assertIsNotNone(pattern)
@@ -54,8 +54,8 @@ class Person2Tests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.personalise_string("I was"), "HE OR SHE was")
-        self.assertEqual(collection.personalise_string("Hello he was over there"), "Hello I WAS over there")
+        self.assertEqual(collection.personalise_string("I was"), "he or she was")
+        self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
 
     def test_reload(self):
         storage_factory = StorageFactory()
@@ -73,10 +73,10 @@ class Person2Tests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.personalise_string("I was"), "HE OR SHE was")
-        self.assertEqual(collection.personalise_string("Hello he was over there"), "Hello I WAS over there")
+        self.assertEqual(collection.personalise_string("I was"), "he or she was")
+        self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")
 
         collection.reload(storage_factory)
 
-        self.assertEqual(collection.personalise_string("I was"), "HE OR SHE was")
-        self.assertEqual(collection.personalise_string("Hello he was over there"), "Hello I WAS over there")
+        self.assertEqual(collection.personalise_string("I was"), "he or she was")
+        self.assertEqual(collection.personalise_string("hello he was over there"), "hello i was over there")

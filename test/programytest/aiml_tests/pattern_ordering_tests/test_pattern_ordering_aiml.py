@@ -26,7 +26,7 @@ class PatternOrderingAIMLTests(unittest.TestCase):
 
     def test_basic_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS BLUE")
-        self.assertEqual(response, "i didn't recognize BLUE AS A COLOR.")
+        self.assertEqual(response, "I didn't recognize BLUE AS A COLOR.")
 
     def test_basic_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS RED")
@@ -38,7 +38,7 @@ class PatternOrderingAIMLTests(unittest.TestCase):
 
     def test_hash_v_star(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS A DOLPHIN")
-        self.assertEqual(response, "HASH SELECTED")
+        self.assertEqual(response, "HASH SELECTED.")
 
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS AN AARDVARK")
-        self.assertEqual(response, "SELECTED ONCE")
+        self.assertEqual(response, "SELECTED ONCE.")

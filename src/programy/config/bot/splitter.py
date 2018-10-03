@@ -21,10 +21,13 @@ from programy.config.base import BaseConfigurationData
 
 class BotSentenceSplitterConfiguration(BaseConfigurationData):
 
+    DEFAULT_CLASSNAME = "programy.dialog.splitter.regex.RegexSentenceSplitter"
+    DEFAULT_SPLITCHARS = '[:;,.?!]'
+
     def __init__(self):
         BaseConfigurationData.__init__(self, name="splitter")
-        self._classname = "programy.dialog.splitter.regex.RegexSentenceSplitter"
-        self._split_chars = '[:;,.?!]'
+        self._classname = BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME
+        self._split_chars = BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS
 
     @property
     def classname(self):
@@ -37,15 +40,15 @@ class BotSentenceSplitterConfiguration(BaseConfigurationData):
     def load_config_section(self, configuration_file, configuration, bot_root):
         splitter = configuration_file.get_section(self._section_name, configuration)
         if splitter is not None:
-            self._classname = configuration_file.get_option(splitter, "classname", missing_value="programy.dialog.splitter.regex.RegexSentenceSplitter")
-            self._split_chars = configuration_file.get_option(splitter, "split_chars", missing_value="[:;,.?!]")
+            self._classname = configuration_file.get_option(splitter, "classname", missing_value=BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME)
+            self._split_chars = configuration_file.get_option(splitter, "split_chars", missing_value=BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS)
         else:
             YLogger.warning(self, "'splitter' section missing from bot config, using defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['classname'] = "programy.dialog.splitter.regex.RegexSentenceSplitter"
-            data['split_chars'] = '[:;,.?!]'
+            data['classname'] = BotSentenceSplitterConfiguration.DEFAULT_CLASSNAME
+            data['split_chars'] = BotSentenceSplitterConfiguration.DEFAULT_SPLITCHARS
         else:
             data['classname'] = self._classname
             data['split_chars'] = self._split_chars

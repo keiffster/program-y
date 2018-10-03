@@ -24,11 +24,11 @@ class YesNoAIMLTests(unittest.TestCase):
     def test_ask_yes_no(self):
         response = self._client_context.bot.ask_question(self._client_context, "yes")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Default Yes')
+        self.assertEqual(response, 'Default Yes.')
 
         response = self._client_context.bot.ask_question(self._client_context, "no")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Default No')
+        self.assertEqual(response, 'Default No.')
 
         response = self._client_context.bot.ask_question(self._client_context, "Hello")
         self.assertIsNotNone(response)
@@ -36,7 +36,7 @@ class YesNoAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "yes thanks")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Thats great')
+        self.assertEqual(response, 'Thats great.')
 
         response = self._client_context.bot.ask_question(self._client_context, "Hello")
         self.assertIsNotNone(response)
@@ -44,13 +44,13 @@ class YesNoAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "no not really")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Oh dear')
+        self.assertEqual(response, 'Oh dear.')
 
         response = self._client_context.bot.ask_question(self._client_context, "yes")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Default Yes')
+        self.assertEqual(response, 'Default Yes.')
 
         response = self._client_context.bot.ask_question(self._client_context, "no")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Default No')
+        self.assertEqual(response, 'Default No.')
 

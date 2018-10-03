@@ -29,4 +29,4 @@ class TrainAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "daddy is great")
         self.assertIsNotNone(response)
         
-        self.assertEqual('Now you can ask me: " Who is great ?" and " What does my daddy ?"', response)
+        self.assertEqual('Now you can ask me: " Who is great ?" and " What does my daddy ?".', response)

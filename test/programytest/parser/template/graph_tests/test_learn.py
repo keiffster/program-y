@@ -50,7 +50,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         self.assertEqual(resolved, "")
 
         response = client_context1.bot.ask_question(client_context1, "HELLO WORLD THERE")
-        self.assertEqual("HIYA", response)
+        self.assertEqual("HIYA.", response)
 
     def test_learn_multi_user(self):
         client_context1 = self._client.create_client_context("testid")
@@ -73,7 +73,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context1)
 
         response = client_context1.bot.ask_question(client_context1, "HELLO THERE ONE")
-        self.assertEqual("HIYA ONE", response)
+        self.assertEqual("HIYA ONE.", response)
 
         client_context2 = self._client.create_client_context("testid2")
 
@@ -95,7 +95,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context2)
 
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE TWO")
-        self.assertEqual("HIYA TWO", response)
+        self.assertEqual("HIYA TWO.", response)
 
         # Now try and ask each others questions
 
@@ -126,7 +126,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context1)
 
         response = client_context1.bot.ask_question(client_context1, "HELLO THERE")
-        self.assertEqual("HIYA ONE", response)
+        self.assertEqual("HIYA ONE.", response)
 
         client_context2 = self._client.create_client_context("testid")
 
@@ -148,5 +148,5 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context2)
 
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE")
-        self.assertEqual("HIYA TWO", response)
+        self.assertEqual("HIYA TWO.", response)
 

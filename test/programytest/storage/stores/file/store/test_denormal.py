@@ -31,4 +31,4 @@ class FileDenormalStoreTests(DenormalStoreAsserts):
         store.load(denormal_collection)
 
         self.assertEqual(denormal_collection.denormalise(" DOT COM "), [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM '])
-        self.assertEqual(denormal_collection.denormalise_string("keith dot com"), "keith.COM")
+        self.assertEqual(denormal_collection.denormalise_string("keith dot com"), "keith.com")

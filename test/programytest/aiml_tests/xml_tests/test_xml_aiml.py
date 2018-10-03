@@ -27,15 +27,15 @@ class XMLAIMLTests(unittest.TestCase):
 
     def test_html_link(self):
         response = self._client_context.bot.ask_question(self._client_context,  "PICTURE")
-        self.assertEqual(response, 'You can see my picture at <a href="http://someurl/image.png">Here</a>')
+        self.assertEqual(response, 'You can see my picture at <a href="http://someurl/image.png">Here</a>.')
 
     def test_html_link_with_star(self):
         response = self._client_context.bot.ask_question(self._client_context,  "GOOGLE AIML")
-        self.assertEqual(response, '<a target="_new" href="http://www.google.com/search?q=AIML">Google Search</a>')
+        self.assertEqual(response, '<a target="_new" href="http://www.google.com/search?q=AIML">Google Search</a>.')
 
     def test_html_br(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST1")
-        self.assertEqual(response, 'Line1\n\t\t\tLine2')
+        self.assertEqual(response, 'Line1\n\t\t\tLine2.')
 
         response = self._client_context.bot.ask_question(self._client_context,  "TEST2")
-        self.assertEqual(response, 'Line1 <br></br> Line2')
+        self.assertEqual(response, 'Line1 <br></br> Line2.')

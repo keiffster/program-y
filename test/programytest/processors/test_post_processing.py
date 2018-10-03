@@ -53,7 +53,7 @@ class PostProcessingTests(unittest.TestCase):
 
         result = self.post_process("My email address is ybot atsign programy dot com")
         self.assertIsNotNone(result)
-        self.assertEqual("My email address is ybot@programy.COM", result)
+        self.assertEqual("My email address is ybot@programy.com", result)
 
         result = self.post_process("He said ' Hello World '.")
         self.assertIsNotNone(result)

@@ -26,8 +26,8 @@ class PersonTests(unittest.TestCase):
 
         collection.load_from_text(person_text)
 
-        self.assertEqual(collection.personalise_string(" with me "), "WITH YOU2")
-        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello AM I2 WITH YOU2")
+        self.assertEqual(collection.personalise_string(" with me "), "with you2")
+        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello am i2 with you2")
 
         pattern = collection.person(" with you ")
         self.assertIsNotNone(pattern)
@@ -49,8 +49,8 @@ class PersonTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.personalise_string(" with me "), "WITH YOU2")
-        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello AM I2 WITH YOU2")
+        self.assertEqual(collection.personalise_string(" with me "), "with you2")
+        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello am i2 with you2")
 
     def test_reload(self):
         storage_factory = StorageFactory()
@@ -68,10 +68,10 @@ class PersonTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.personalise_string(" with me "), "WITH YOU2")
-        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello AM I2 WITH YOU2")
+        self.assertEqual(collection.personalise_string(" with me "), "with you2")
+        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello am i2 with you2")
 
         collection.reload(storage_factory)
 
-        self.assertEqual(collection.personalise_string(" with me "), "WITH YOU2")
-        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello AM I2 WITH YOU2")
+        self.assertEqual(collection.personalise_string(" with me "), "with you2")
+        self.assertEqual(collection.personalise_string("Hello are you with me"), "Hello am i2 with you2")

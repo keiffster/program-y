@@ -30,13 +30,13 @@ class ScratchAIMLTests(unittest.TestCase):
     def test_response(self):
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU FRED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 1')
+        self.assertEqual(response, 'RESULT 1.')
 
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU FRED WEST")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 2')
+        self.assertEqual(response, 'RESULT 2.')
 
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU WRITTEN IN C#")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 3')
+        self.assertEqual(response, 'RESULT 3.')
 

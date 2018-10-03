@@ -32,4 +32,4 @@ class NewsApiAIMLTests(unittest.TestCase):
     def test_newsapi(self):
         response = self._client_context.bot.ask_question(self._client_context, "ABC NEWS")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "THIS IS NEWS")
+        self.assertEqual(response, "THIS IS NEWS.")

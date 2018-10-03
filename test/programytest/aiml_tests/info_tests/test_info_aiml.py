@@ -23,12 +23,12 @@ class InfoAIMLTests(unittest.TestCase):
     def test_program(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST PROGRAM")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "AIMLBot")
+        self.assertEqual(response, "AIMLBot.")
 
     def test_id(self):
         response = self._client_context.bot.ask_question(self._client_context, "TEST ID")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "testclient")
+        self.assertEqual(response, "Testclient.")
 
     def test_env(self):
 
@@ -36,4 +36,4 @@ class InfoAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "TEST ENVIRONMENT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "ENVIRONMENT IS test")
+        self.assertEqual(response, "ENVIRONMENT IS test.")

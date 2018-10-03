@@ -24,6 +24,6 @@ class MultipleSentencesAIMLTests(unittest.TestCase):
     def test_multiple_questions(self):
         response = self._client_context.bot.ask_question(self._client_context, "TICKET SET 01453675. TICKET ANALYSE")
         self.assertIsNotNone(response)
-        self.assertEqual("TICKET SET TO 01453675. ANALYSING TICKET", response)
+        self.assertEqual("TICKET SET TO 01453675. ANALYSING TICKET.", response)
 
 

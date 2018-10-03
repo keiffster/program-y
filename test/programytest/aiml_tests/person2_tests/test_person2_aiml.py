@@ -25,4 +25,4 @@ class Person2AIMLTests(unittest.TestCase):
     def test_person2(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST PERSON2")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "HE OR SHE WAS going")
+        self.assertEqual(response, "He or she was going.")

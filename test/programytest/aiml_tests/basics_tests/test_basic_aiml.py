@@ -27,15 +27,15 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_basic_one_word(self):
         response = self._client_context.bot.ask_question(self._client_context,  "HELLO")
-        self.assertEqual(response, "HELLO, WORLD")
+        self.assertEqual(response, "HELLO, WORLD.")
 
     def test_basic_two_words(self):
         response = self._client_context.bot.ask_question(self._client_context,  "HELLO THERE")
-        self.assertEqual(response, "HOW ARE YOU")
+        self.assertEqual(response, "HOW ARE YOU.")
 
     def test_basic_three_words(self):
         response = self._client_context.bot.ask_question(self._client_context,  "HELLO THERE NOW")
-        self.assertEqual(response, "HOW ARE YOU NOW")
+        self.assertEqual(response, "HOW ARE YOU NOW.")
 
     def test_basic_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO YOU")
@@ -47,11 +47,11 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_star_after_no_match_single(self):
         response = self._client_context.bot.ask_question(self._client_context, "HI THERE")
-        self.assertEqual(response, "HI, HOW ARE YOU")
+        self.assertEqual(response, "HI, HOW ARE YOU.")
 
     def test_star_after_no_match_multiple(self):
         response = self._client_context.bot.ask_question(self._client_context, "HI THERE MATE")
-        self.assertEqual(response, "HI, HOW ARE YOU")
+        self.assertEqual(response, "HI, HOW ARE YOU.")
 
     def test_star_before_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "HEY")
@@ -59,38 +59,38 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_star_before_single(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL HEY")
-        self.assertEqual(response, "HEY, HOW ARE YOU")
+        self.assertEqual(response, "HEY, HOW ARE YOU.")
 
     def test_star_before_multiple(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL NOW HEY")
-        self.assertEqual(response, "HEY, HOW ARE YOU")
+        self.assertEqual(response, "HEY, HOW ARE YOU.")
 
     def test_star_before2(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE HEY")
-        self.assertEqual(response, "HEY, HOW ARE YOU")
+        self.assertEqual(response, "HEY, HOW ARE YOU.")
 
     def test_hash_after(self):
         response = self._client_context.bot.ask_question(self._client_context, "HOWDY")
-        self.assertEqual(response, "HOWDY PARTNER")
+        self.assertEqual(response, "HOWDY PARTNER.")
 
         response = self._client_context.bot.ask_question(self._client_context, "HOWDY MATE")
-        self.assertEqual(response, "HOWDY PARTNER")
+        self.assertEqual(response, "HOWDY PARTNER.")
 
         response = self._client_context.bot.ask_question(self._client_context, "HOWDY THERE MATE")
-        self.assertEqual(response, "HOWDY PARTNER")
+        self.assertEqual(response, "HOWDY PARTNER.")
 
     def test_hash_before(self):
         response = self._client_context.bot.ask_question(self._client_context, "YO")
-        self.assertEqual(response, "YO, HOW ARE YOU")
+        self.assertEqual(response, "YO, HOW ARE YOU.")
 
         response = self._client_context.bot.ask_question(self._client_context, "HEY YO")
-        self.assertEqual(response, "YO, HOW ARE YOU")
+        self.assertEqual(response, "YO, HOW ARE YOU.")
 
         response = self._client_context.bot.ask_question(self._client_context, "HEY NOW YO")
-        self.assertEqual(response, "YO, HOW ARE YOU")
+        self.assertEqual(response, "YO, HOW ARE YOU.")
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE YO")
-        self.assertEqual(response, "YO, HOW ARE YOU")
+        self.assertEqual(response, "YO, HOW ARE YOU.")
 
     def test_star_star_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "GOODBYE")
@@ -102,7 +102,7 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_star_star_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL GOODBYE MATE")
-        self.assertEqual(response, "BYE BYE")
+        self.assertEqual(response, "BYE BYE.")
 
     def test_star_hash_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "SEEYA")
@@ -114,24 +114,24 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_star_no_hash_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL SEEYA")
-        self.assertEqual(response, "BYE THE NOW")
+        self.assertEqual(response, "BYE THE NOW.")
 
     def test_star_hash_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL SEEYA MATE")
-        self.assertEqual(response, "BYE THE NOW")
+        self.assertEqual(response, "BYE THE NOW.")
 
     def test_hash_hash(self):
         response = self._client_context.bot.ask_question(self._client_context, "LATER")
-        self.assertEqual(response, "LATERZ")
+        self.assertEqual(response, "LATERZ.")
 
         response = self._client_context.bot.ask_question(self._client_context, "LATER MATE")
-        self.assertEqual(response, "LATERZ")
+        self.assertEqual(response, "LATERZ.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WELL LATER")
-        self.assertEqual(response, "LATERZ")
+        self.assertEqual(response, "LATERZ.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WELL LATER MATE")
-        self.assertEqual(response, "LATERZ")
+        self.assertEqual(response, "LATERZ.")
 
     def test_hash_star_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context, "FAREWELL")
@@ -143,21 +143,21 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_hash_star_no_hash_and_star(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL FAREWELL MATE")
-        self.assertEqual(response, "UNTIL TOMORROW")
+        self.assertEqual(response, "UNTIL TOMORROW.")
 
     def test_hash_star_hash_and_star(self):
         response = self._client_context.bot.ask_question(self._client_context, "FAREWELL MATE")
-        self.assertEqual(response, "UNTIL TOMORROW")
+        self.assertEqual(response, "UNTIL TOMORROW.")
 
     def test_hash_middle(self):
         response = self._client_context.bot.ask_question(self._client_context, "MORNING MATE")
-        self.assertEqual(response, 'GOOD MORNING')
+        self.assertEqual(response, 'GOOD MORNING.')
 
         response = self._client_context.bot.ask_question(self._client_context, "MORNING THERE MATE")
-        self.assertEqual(response, 'GOOD MORNING')
+        self.assertEqual(response, 'GOOD MORNING.')
 
         response = self._client_context.bot.ask_question(self._client_context, "MORNING MY GOOD MATE")
-        self.assertEqual(response, 'GOOD MORNING')
+        self.assertEqual(response, 'GOOD MORNING.')
 
     def test_hash_middle_with_extra(self):
         response = self._client_context.bot.ask_question(self._client_context, "MORNING MATE AHOY")
@@ -176,9 +176,9 @@ class BasicAIMLTests(unittest.TestCase):
 
     def test_star_middle_match_single(self):
         response = self._client_context.bot.ask_question(self._client_context, "EVENING THERE CHUM")
-        self.assertEqual(response, 'GOOD EVENING')
+        self.assertEqual(response, 'GOOD EVENING.')
 
     def test_star_middle_match_multi(self):
         response = self._client_context.bot.ask_question(self._client_context, "EVENING THERE MY CHUM")
-        self.assertEqual(response, 'GOOD EVENING')
+        self.assertEqual(response, 'GOOD EVENING.')
 

@@ -22,6 +22,7 @@ from programy.config.brain.brain import BrainConfiguration
 from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.config.bot.conversations import BotConversationsConfiguration
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.config.bot.joiner import BotSentenceJoinerConfiguration
 
 class BotConfiguration(BaseContainerConfigurationData):
 
@@ -63,6 +64,7 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._spelling = BotSpellingConfiguration()
         self._conversations = BotConversationsConfiguration()
         self._splitter = BotSentenceSplitterConfiguration()
+        self._joiner = BotSentenceJoinerConfiguration()
         BaseContainerConfigurationData.__init__(self, section_name)
 
     def load_configuration(self, configuration_file, bot_root):
@@ -101,6 +103,8 @@ class BotConfiguration(BaseContainerConfigurationData):
             self._conversations.load_config_section(configuration_file, bot, bot_root)
 
             self._splitter.load_config_section(configuration_file, bot, bot_root)
+
+            self._joiner.load_config_section(configuration_file, bot, bot_root)
 
         else:
             YLogger.warning(self, "Config section [%s] missing, using default values", self.section_name)
@@ -236,6 +240,10 @@ class BotConfiguration(BaseContainerConfigurationData):
     def splitter(self):
         return self._splitter
 
+    @property
+    def joiner(self):
+        return self._joiner
+
     def to_yaml(self, data, defaults=True):
 
         data['bot_root'] = self.bot_root
@@ -255,3 +263,4 @@ class BotConfiguration(BaseContainerConfigurationData):
         self.config_to_yaml(data, BotSpellingConfiguration(), defaults)
         self.config_to_yaml(data, BotConversationsConfiguration(), defaults)
         self.config_to_yaml(data, BotSentenceSplitterConfiguration(), defaults)
+        self.config_to_yaml(data, BotSentenceJoinerConfiguration(), defaults)

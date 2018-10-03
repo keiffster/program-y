@@ -24,14 +24,14 @@ class UnderlineStarAIMLTests(unittest.TestCase):
     def test_underline_first(self):
         response = self._client_context.bot.ask_question(self._client_context,  "SAY HEY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'UNDERLINE IS SAY')
+        self.assertEqual(response, 'UNDERLINE IS SAY.')
 
     def test_underline_last(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'UNDERLINE IS THERE')
+        self.assertEqual(response, 'UNDERLINE IS THERE.')
 
     def test_underline_middle(self):
         response = self._client_context.bot.ask_question(self._client_context, "HI KEIFF MATE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'UNDERLINE IS KEIFF')
+        self.assertEqual(response, 'UNDERLINE IS KEIFF.')

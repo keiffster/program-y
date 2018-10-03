@@ -33,22 +33,22 @@ class LearnfAIMLTests(unittest.TestCase):
     def test_my_name_is_fred(self):
         response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK, I will remember your name is FRED")
+        self.assertEqual(response, "OK, I will remember your name is FRED.")
         #self.check_file_contents("WHAT IS MY NAME", "*", "*", "YOUR NAME IS FRED")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS MY NAME")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "YOUR NAME IS FRED")
+        self.assertEqual(response, "YOUR NAME IS FRED.")
 
     def test_john_played_cricket(self):
         response = self._client_context.bot.ask_question(self._client_context, "JOHN PLAYED CRICKET")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Ok. I will remember this")
+        self.assertEqual(response, "Ok. I will remember this.")
         #self.check_file_contents("WHAT DID JOHN PLAY", "*", "*", "JOHN PLAYED CRICKET")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT DID JOHN PLAY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "JOHN PLAYED CRICKET")
+        self.assertEqual(response, "JOHN PLAYED CRICKET.")
 
     def check_file_contents(self, pattern, topic, that, template):
         self.assertTrue(os.path.exists(self.learnf_file))

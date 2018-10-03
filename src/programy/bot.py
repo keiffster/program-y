@@ -23,6 +23,7 @@ from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
+from programy.dialog.joiner.joiner import SentenceJoiner
 
 
 class BrainSelector(object):
@@ -101,6 +102,9 @@ class Bot(object):
         self._sentence_splitter = None
         self.initiate_sentence_splitter()
 
+        self._sentence_joiner = None
+        self.initiate_sentence_joiner()
+
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
 
@@ -140,6 +144,15 @@ class Bot(object):
         if self.configuration is not None:
             if self.configuration.splitter is not None:
                 self._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(self.configuration.splitter)
+
+    @property
+    def sentence_joiner(self):
+        return self._sentence_joiner
+
+    def initiate_sentence_joiner(self):
+        if self.configuration is not None:
+            if self.configuration.joiner is not None:
+                self._sentence_joiner = SentenceJoiner.initiate_sentence_joiner(self.configuration.joiner)
 
     @property
     def brain(self):
@@ -232,7 +245,6 @@ class Bot(object):
         self._conversation_mgr.save_conversation(client_context)
 
     def check_spelling_before(self, client_context, each_sentence):
-
         if self.spell_checker is not None:
             self.spell_checker.check_spelling_before(client_context, each_sentence)
 
@@ -305,29 +317,12 @@ class Bot(object):
         else:
             return Question.create_from_text(client_context, pre_processed, split=False, srai=srai)
 
-    def combine_answers(self, answers):
-        final_sentences = []
-        for sentence in answers:
-            if sentence:
+    def combine_answers(self, answers, srai):
 
-                # Capitalise the start of each sentence
-                if sentence[0].isalpha():
-                    sentence = sentence[0].upper() + sentence[1:]
+        assert (answers is not None)
+        assert (self._sentence_joiner is not None)
 
-                # If it ends with a terminator, keep the terminator, otherwise add a full stop
-                if self.ends_with_terminator(sentence):
-                    final_sentences.append(sentence)
-                else:
-                    final_sentences.append(sentence+'.')
-
-        return " ".join([sentence for sentence in final_sentences])
-
-    def ends_with_terminator(self, sentence):
-        terminators = ".?!"
-        for ch in terminators:
-            if sentence.endswith(ch):
-                return True
-        return False
+        return self._sentence_joiner.combine_answers(answers, srai)
 
     def post_process_response(self, client_context, response, srai):
         if srai is False:
@@ -385,7 +380,7 @@ class Bot(object):
 
         self.save_conversation(client_context)
 
-        return self.combine_answers(answers)
+        return self.combine_answers(answers, srai)
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
 

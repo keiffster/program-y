@@ -18,12 +18,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import re
 
-from programy.parser.tokenizer import Tokenizer
+from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.utils.text.text import TextUtils
 
 class Sentence(object):
 
-    def __init__(self, tokenizer: Tokenizer, text: str = None ):
+    def __init__(self, tokenizer, text: str = None ):
         self._tokenizer = tokenizer
         self._words = self._tokenizer.texts_to_words(text)
         self._response = None

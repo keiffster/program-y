@@ -28,4 +28,4 @@ class DenormalizeTests(unittest.TestCase):
 
         result = processor.process(context, "hello dot com")
         self.assertIsNotNone(result)
-        self.assertEqual("hello.COM", result)
+        self.assertEqual("hello.com", result)

@@ -478,8 +478,8 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         client = ReloadTestClient()
         client_context = client.create_client_context("testid")
 
-        self.assertEqual("That was test 1", client_context.bot.ask_question(client_context, "TEST1"))
-        self.assertEqual("That was test 2", client_context.bot.ask_question(client_context, "TEST2"))
+        self.assertEqual("That was test 1.", client_context.bot.ask_question(client_context, "TEST1"))
+        self.assertEqual("That was test 2.", client_context.bot.ask_question(client_context, "TEST2"))
 
         category_engine = client.storage_factory.entity_storage_engine(StorageFactory.CATEGORIES)
         category_store = category_engine.category_store()
@@ -488,5 +488,5 @@ class HotReloadAdminExtensionTests(unittest.TestCase):
         result = extension.execute(client_context, "RELOAD ALL AIML")
         self.assertEqual("HOTRELOAD OK", result)
 
-        self.assertEqual("That was test 3", client_context.bot.ask_question(client_context, "TEST3"))
-        self.assertEqual("That was test 4", client_context.bot.ask_question(client_context, "TEST4"))
+        self.assertEqual("That was test 3.", client_context.bot.ask_question(client_context, "TEST3"))
+        self.assertEqual("That was test 4.", client_context.bot.ask_question(client_context, "TEST4"))

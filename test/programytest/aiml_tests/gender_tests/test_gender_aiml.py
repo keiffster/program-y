@@ -24,4 +24,4 @@ class GenderAIMLTests(unittest.TestCase):
     def test_gender(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST GENDER")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This goes TO HER")
+        self.assertEqual(response, "This goes to her.")

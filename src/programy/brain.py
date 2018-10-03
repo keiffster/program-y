@@ -15,8 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-import re
-import xml.etree.ElementTree as ET
+
 try:
     import _pickle as pickle
 except:
@@ -39,7 +38,7 @@ from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
-from programy.parser.tokenizer import Tokenizer
+from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.template.factory import TemplateNodeFactory
 from programy.binaries import BinariesManager

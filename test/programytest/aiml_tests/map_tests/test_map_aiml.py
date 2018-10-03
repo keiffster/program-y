@@ -30,27 +30,27 @@ class MapAIMLTests(unittest.TestCase):
 
     def test_static_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "STATIC MAP TEST")
-        self.assertEqual(response, "One")
+        self.assertEqual(response, "One.")
 
     def test_plural_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "PLURAL MAP TEST")
-        self.assertEqual(response, "TWOS")
+        self.assertEqual(response, "TWOS.")
 
     def test_singular_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "SINGULAR MAP TEST")
-        self.assertEqual(response, "TWO")
+        self.assertEqual(response, "TWO.")
 
     def test_successor_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "SUCCESSOR MAP TEST")
-        self.assertEqual(response, "667")
+        self.assertEqual(response, "667.")
 
     def test_predessor_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "PREDECESSOR MAP TEST")
-        self.assertEqual(response, "666")
+        self.assertEqual(response, "666.")
 
     def test_dynamic_map(self):
         response = self._client_context.bot.ask_question(self._client_context,  "DYNAMIC MAP DECIMAL TO ROMAN")
-        self.assertEqual(response, "20 is XX")
+        self.assertEqual(response, "20 is XX.")
 
         response = self._client_context.bot.ask_question(self._client_context,  "DYNAMIC MAP ROMAN TO DECIMAL")
-        self.assertEqual(response, "XX is 20")
+        self.assertEqual(response, "XX is 20.")

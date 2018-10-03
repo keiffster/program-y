@@ -45,7 +45,7 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE PASSED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'User allowed')
+        self.assertEqual(response, 'User allowed.')
 
     def test_authentication_failed_with_srai(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
@@ -54,7 +54,7 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL SRAI")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Authentication failed')
+        self.assertEqual(response, 'Authentication failed.')
 
     def test_authentication_failed_with_unknown_srai(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
@@ -63,7 +63,7 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL SRAI")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'AUTHENTICATED FAILED TEXT')
+        self.assertEqual(response, 'AUTHENTICATED FAILED TEXT.')
 
     def test_authentication_failed_with_text(self):
         MockAuthenticationService.AUTHENTICATION_SUCCESS = False
@@ -72,4 +72,4 @@ class AuthenticateAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "AUTHENTICATE FAIL TEXT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'AUTHENTICATED FAILED TEXT')
+        self.assertEqual(response, 'AUTHENTICATED FAILED TEXT.')

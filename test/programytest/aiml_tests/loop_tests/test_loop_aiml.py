@@ -24,9 +24,9 @@ class ConditionLoopAIMLTests(unittest.TestCase):
     def test_condition_type2_loop(self):
         response = self._client_context.bot.ask_question(self._client_context, "TYPE2 LOOP")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Y Z")
+        self.assertEqual(response, "Y Z.")
 
     def test_condition_type3_loop(self):
         response = self._client_context.bot.ask_question(self._client_context, "TYPE3 LOOP")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "B D")
+        self.assertEqual(response, "B D.")

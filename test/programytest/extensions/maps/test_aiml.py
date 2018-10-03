@@ -48,7 +48,7 @@ class MapsAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'It is 25 . 1 miles')
+        self.assertEqual(response, 'It is 25 . 1 miles.')
 
     def test_directions(self):
         MockGoogleMapsExtension.response_file    = os.path.dirname(__file__) +  os.sep + "directions.json"
