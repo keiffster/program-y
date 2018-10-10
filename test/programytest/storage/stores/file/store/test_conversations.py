@@ -8,8 +8,18 @@ import shutil
 
 class FileConversationStoreTests(ConverstionStoreAsserts):
 
+    def setUp(self):
+        self._tmpdir = os.path.dirname(__file__) + os.sep + "conversations"
+
+    def tearDown(self):
+        if os.path.exists(self._tmpdir):
+            shutil.rmtree(self._tmpdir)
+        self.assertFalse(os.path.exists(self._tmpdir))
+
     def test_initialise(self):
         config = FileStorageConfiguration()
+        config.conversation_storage._dirs = [self._tmpdir]
+
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileConversationStore(engine)
@@ -17,8 +27,8 @@ class FileConversationStoreTests(ConverstionStoreAsserts):
 
     def tests_conversation_storage(self):
         config = FileStorageConfiguration()
-        tmpdir = os.path.dirname(__file__) + os.sep + "conversations"
-        config.conversation_storage._dirs = [tmpdir]
+        config.conversation_storage._dirs = [self._tmpdir]
+
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileConversationStore(engine)
@@ -26,5 +36,3 @@ class FileConversationStoreTests(ConverstionStoreAsserts):
 
         self.assert_conversation_storage(store, can_empty=True, test_load=True)
 
-        shutil.rmtree(tmpdir)
-        self.assertFalse(os.path.exists(tmpdir))

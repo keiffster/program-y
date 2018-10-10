@@ -10,8 +10,21 @@ from programy.storage.stores.file.config import FileStorageConfiguration
 
 class FileTwitterStoreTests(TwitterStoreAsserts):
 
+    def setUp(self):
+        self._tmpdir = os.path.dirname(__file__) + os.sep + "twitter"
+        self._tmpfile = self._tmpdir + os.sep + "twitter.ids"
+
+    def tearDown(self):
+        if os.path.exists(self._tmpdir):
+            shutil.rmtree(self._tmpdir)
+        self.assertFalse(os.path.exists(self._tmpdir))
+
     def test_initialise(self):
         config = FileStorageConfiguration()
+
+        config.twitter_storage._dirs = [self._tmpfile]
+        config.twitter_storage._has_single_file = True
+
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTwitterStore(engine)
@@ -19,15 +32,12 @@ class FileTwitterStoreTests(TwitterStoreAsserts):
 
     def test_twitter_storage(self):
         config = FileStorageConfiguration()
-        tmpdir = os.path.dirname(__file__) + os.sep + "twitter"
-        tmpfile = tmpdir + os.sep + "twitter.ids"
-        config.twitter_storage._dirs = [tmpfile]
+
+        config.twitter_storage._dirs = [self._tmpfile]
         config.twitter_storage._has_single_file = True
+
         engine = FileStorageEngine(config)
         engine.initialise()
         store = FileTwitterStore(engine)
 
         self.assert_twitter_storage(store)
-
-        shutil.rmtree(tmpdir)
-        self.assertFalse(os.path.exists(tmpdir))
