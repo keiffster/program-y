@@ -28,4 +28,4 @@ class RequestAIMLTests(unittest.TestCase):
 
         Request = self._client_context.bot.ask_question(self._client_context, "WHAT DID I SAY")
         self.assertIsNotNone(Request)
-        self.assertEqual(Request, "You said, HELLO")
+        self.assertEqual(Request, "You said, HELLO.")

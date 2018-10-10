@@ -24,9 +24,9 @@ class VocabularyAIMLTests(unittest.TestCase):
     def test_vocabulary(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST VOCABULARY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "My vocabulary is 3 words")
+        self.assertEqual(response, "My vocabulary is 3 words.")
 
     def test_size(self):
         response = self._client_context.bot.ask_question(self._client_context, "TEST SIZE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "I can answer 2 questions")
+        self.assertEqual(response, "I can answer 2 questions.")

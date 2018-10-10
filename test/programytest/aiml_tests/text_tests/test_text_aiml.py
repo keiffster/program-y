@@ -24,22 +24,22 @@ class TextAIMLTests(unittest.TestCase):
     def test_lowercase(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MAKE LOWERCASE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "hello world")
+        self.assertEqual(response, "Hello world.")
 
     def test_uppercase(self):
         response = self._client_context.bot.ask_question(self._client_context, "MAKE UPPERCASE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "HELLO WORLD")
+        self.assertEqual(response, "HELLO WORLD.")
 
 
     def test_sentence(self):
         response = self._client_context.bot.ask_question(self._client_context, "MAKE SENTENCE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello world")
+        self.assertEqual(response, "Hello world.")
 
 
     def test_formal(self):
         response = self._client_context.bot.ask_question(self._client_context, "MAKE FORMAL")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Hello World")
+        self.assertEqual(response, "Hello World.")
 

@@ -6,7 +6,6 @@ from programy.extensions.newsapi.newsapi import NewsAPIExtension
 from programytest.client import TestClient
 
 
-# TODO, modify this to return mocked json payload
 class MockNewsApiExtension(NewsAPIExtension):
 
     def execute(self, context, data):
@@ -33,4 +32,4 @@ class NewsApiAIMLTests(unittest.TestCase):
     def test_newsapi(self):
         response = self._client_context.bot.ask_question(self._client_context, "ABC NEWS")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "THIS IS NEWS")
+        self.assertEqual(response, "THIS IS NEWS.")

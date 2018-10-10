@@ -1,49 +1,22 @@
 
-Version 2.0
+Version 3.0
 ============
-This release brings some important changes to the overall Program-Y platform and ecosystem including
+THIS IS A PRERELEASE VERSION of V3.0 WHICH INTRODUCES A COMPLETELY NEW STORAGE ENGINE SUPPORTING SQL AND NOSQL DATA SOURCES
+AS WELL AS CONTINUING TO SUPPORT THE LEGACY FILE STRUCTURE
 
-- Thread Safety across all processing
-- Multiple Bots per Client, useful to mix AIML and ML processing
-- Multiple Brains per Bot, useful to separate grammars, including langauge specific
-- Wide variety of clients including
-  - Console
-  - Web
-  - Facebook
-  - Twitter
-  - SMS
-  - XMPP (Google Hangouts)
-  - Telegram
-  - Slack
-  - Viber
-  - Kik
-  - Line
-  - TCP Socket
-  - REST
-- Improved Logging which now includes more info about client, bot and brain
-- Support for AIML 2.x Rich Media
-- Support for Emojis
-- Natively support Pypi installation
-- Asynchronous Scheduling of events
+New in this release
 
-Rich Media
-----------
-Rich media is an exciting enhancement to AIML proposed by the [AIML Foundation](http://aiml.foundation) which adds a range
-of new capabilities to the AIML language to help in building engaging interfaces. Rich media introduces a number of new
-template tags including
-- button
-- card
-- carousel
-- delay
-- image
-- link
-- list
-- location
-- reply
-- split
-- video
-Rather than just returning plain text, using these tags allows you to build conversations that including buttons, clickable links, images, videos
-and more complex UI structures
+- Support for SQL Storage (Currently tested on MariaDB and MySQL)
+- Support for NoSQL Storage (Currently tested on MongoDB and Redis)
+- Full support for AIML 2.x (Including Rich Media)
+
+WARNINGS:
+
+- Documentation is still pending, use at your own peril!
+- This only works with Y-Bot v3 branch
+- This has only been tested using y-bot.sh script on OSX
+- Other than that, have fun
+
 
 Introduction
 ------------

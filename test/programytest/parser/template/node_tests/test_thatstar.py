@@ -19,15 +19,15 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateThatStarNode()
-        self.assertEqual("THATSTAR", node.to_string())
+        self.assertEqual("[THATSTAR]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateThatStarNode(3, 2)
-        self.assertEqual("THATSTAR question=3 sentence=2", node.to_string())
+        self.assertEqual("[THATSTAR question=3 sentence=2]", node.to_string())
 
     def test_to_str_star(self):
         node = TemplateThatStarNode(1, -1)
-        self.assertEqual("THATSTAR sentence=*", node.to_string())
+        self.assertEqual("[THATSTAR sentence=*]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -94,11 +94,11 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -113,11 +113,11 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -138,11 +138,11 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 

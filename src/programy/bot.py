@@ -14,8 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-import logging
-
 from programy.utils.logging.ylogger import YLogger
 
 from programy.brain import Brain
@@ -24,6 +22,9 @@ from programy.dialog.conversation import ConversationManager
 from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
 from programy.spelling.base import SpellingChecker
+from programy.dialog.splitter.splitter import SentenceSplitter
+from programy.dialog.joiner.joiner import SentenceJoiner
+
 
 class BrainSelector(object):
 
@@ -83,6 +84,10 @@ class BrainFactory(object):
 class Bot(object):
 
     def __init__(self, config, client):
+
+        assert (config is not None)
+        assert (client is not None)
+
         self._configuration = config
         self._client = client
 
@@ -93,6 +98,12 @@ class Bot(object):
 
         self._spell_checker = None
         self.initiate_spellchecker()
+
+        self._sentence_splitter = None
+        self.initiate_sentence_splitter()
+
+        self._sentence_joiner = None
+        self.initiate_sentence_joiner()
 
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
@@ -116,14 +127,32 @@ class Bot(object):
     def brain_factory(self):
         return self._brain_factory
 
+    @property
+    def spell_checker(self):
+        return self._spell_checker
+
     def initiate_spellchecker(self):
         if self.configuration is not None:
             if self.configuration.spelling is not None:
                 self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
 
     @property
-    def spell_checker(self):
-        return self._spell_checker
+    def sentence_splitter(self):
+        return self._sentence_splitter
+
+    def initiate_sentence_splitter(self):
+        if self.configuration is not None:
+            if self.configuration.splitter is not None:
+                self._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(self.configuration.splitter)
+
+    @property
+    def sentence_joiner(self):
+        return self._sentence_joiner
+
+    def initiate_sentence_joiner(self):
+        if self.configuration is not None:
+            if self.configuration.joiner is not None:
+                self._sentence_joiner = SentenceJoiner.initiate_sentence_joiner(self.configuration.joiner)
 
     @property
     def brain(self):
@@ -176,6 +205,9 @@ class Bot(object):
         return False
 
     def get_version_string(self, client_context):
+
+        assert (client_context is not None)
+
         if client_context.brain.properties.has_property("version"):
             # The old version of returning the version string, did not distinquish
             # between App and Grammar version
@@ -192,15 +224,24 @@ class Bot(object):
                 client_context.brain.properties.property("birthdate"))
 
     def has_conversation(self, client_context):
+
+        assert (self._conversation_mgr is not None)
+
         return self._conversation_mgr.has_conversation(client_context)
 
     def conversation(self, client_context):
         return self.get_conversation(client_context)
 
     def get_conversation(self, client_context):
+
+        assert (self._conversation_mgr is not None)
+
         return self._conversation_mgr.get_conversation(client_context)
 
     def save_conversation(self, client_context):
+
+        assert (self._conversation_mgr is not None)
+
         self._conversation_mgr.save_conversation(client_context)
 
     def check_spelling_before(self, client_context, each_sentence):
@@ -213,6 +254,9 @@ class Bot(object):
         return None
 
     def get_default_response(self, client_context):
+
+        assert (client_context is not None)
+
         if self.default_response_srai is not None:
             sentence = Sentence(client_context.brain.tokenizer, self.default_response_srai)
             default_response = client_context.brain.ask_question(client_context, sentence)
@@ -223,6 +267,9 @@ class Bot(object):
             return self.default_response
 
     def get_initial_question(self, client_context):
+
+        assert (client_context is not None)
+
         if self.initial_question_srai is not None:
             sentence = Sentence(client_context.brain.tokenizer, self.initial_question_srai)
             initial_question = client_context.brain.ask_question(client_context, sentence)
@@ -233,6 +280,9 @@ class Bot(object):
             return self.initial_question
 
     def get_exit_response(self, client_context):
+
+        assert (client_context is not None)
+
         if self.exit_response_srai is not None:
             sentence = Sentence(client_context.brain.tokenizer, self.exit_response_srai)
             exit_response = client_context.brain.ask_question(client_context, sentence)
@@ -243,6 +293,10 @@ class Bot(object):
             return self.exit_response
 
     def pre_process_text(self, client_context, text, srai):
+
+        assert (client_context is not None)
+        assert (client_context.brain is not None)
+
         if srai is False:
             pre_processed = client_context.brain.pre_process_question(client_context, text)
             YLogger.debug(client_context, "Pre Processed (%s): %s", client_context.userid, pre_processed)
@@ -250,21 +304,31 @@ class Bot(object):
             pre_processed = text
 
         if pre_processed is None or pre_processed == "":
+
+            assert (self.configuration is not None)
+
             pre_processed = self.configuration.empty_string
 
         return pre_processed
 
     def get_question(self, client_context, pre_processed, srai):
         if srai is False:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, srai=srai)
+            return Question.create_from_text(client_context, pre_processed, srai=srai)
         else:
-            return Question.create_from_text(client_context.brain.tokenizer, pre_processed, split=False, srai=srai)
+            return Question.create_from_text(client_context, pre_processed, split=False, srai=srai)
 
-    def combine_answers(self, answers):
-        return ". ".join([sentence for sentence in answers if sentence is not None])
+    def combine_answers(self, answers, srai):
+
+        assert (answers is not None)
+        assert (self._sentence_joiner is not None)
+
+        return self._sentence_joiner.combine_answers(answers, srai)
 
     def post_process_response(self, client_context, response, srai):
         if srai is False:
+
+            assert (client_context is not None)
+
             answer = client_context.brain.post_process_response(client_context, response).strip()
             if not answer:
                 answer = self.get_default_response(client_context)
@@ -280,9 +344,14 @@ class Bot(object):
 
     def ask_question(self, client_context, text, srai=False, responselogger=None):
 
+        assert (client_context is not None)
+
         if srai is False:
             client_context.bot = self
             client_context.brain = client_context.bot.brain
+
+        assert (client_context.bot is not None)
+        assert (client_context.brain is not None)
 
         client_context.mark_question_start(text)
 
@@ -291,6 +360,8 @@ class Bot(object):
         question = self.get_question(client_context, pre_processed, srai)
 
         conversation = self.get_conversation(client_context)
+
+        assert (conversation is not None)
 
         conversation.record_dialog(question)
 
@@ -309,9 +380,13 @@ class Bot(object):
 
         self.save_conversation(client_context)
 
-        return self.combine_answers(answers)
+        return self.combine_answers(answers, srai)
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
+
+        assert (client_context is not None)
+        assert (client_context.brain is not None)
+
         client_context.check_max_recursion()
         client_context.check_max_timeout()
 
@@ -329,6 +404,9 @@ class Bot(object):
             return self.handle_none_response(client_context, sentence, responselogger)
 
     def handle_response(self, client_context, sentence, response, srai, responselogger):
+
+        assert (sentence is not None)
+
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
         answer = self.post_process_response(client_context, response, srai)
@@ -336,6 +414,9 @@ class Bot(object):
         return answer
 
     def handle_none_response(self, clientid, sentence, responselogger):
+
+        assert (sentence is not None)
+
         sentence.response = self.get_default_response(clientid)
         if responselogger is not None:
             responselogger.log_unknown_response(sentence)

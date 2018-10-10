@@ -21,6 +21,7 @@ class TwitterConfiguration(ClientConfigurationData):
 
     def __init__(self):
         ClientConfigurationData.__init__(self, "twitter")
+        self._description = 'ProgramY AIML2.0 Twitter Client'
         self._polling_interval = 0
         self._rate_limit_sleep = -1
         self._use_status = False

@@ -24,26 +24,26 @@ class ThatAIMLTests(unittest.TestCase):
     def test_that_single_that_word(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HI THERE')
+        self.assertEqual(response, 'HI THERE.')
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO AGAIN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HELLO WITH THAT')
+        self.assertEqual(response, 'HELLO WITH THAT.')
 
     def test_wildcard_matching_one_or_more(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELCOME")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'aaa bbb ccc ddd')
+        self.assertEqual(response, 'Aaa bbb ccc ddd.')
 
         response = self._client_context.bot.ask_question(self._client_context, "AND AGAIN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'matched')
+        self.assertEqual(response, 'Matched.')
 
     def test_wildcard_matching_zero_or_more(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELCOME2")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'xxx yyy zzz')
+        self.assertEqual(response, 'Xxx yyy zzz.')
 
         response = self._client_context.bot.ask_question(self._client_context, "AND AGAIN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'matched2')
+        self.assertEqual(response, 'Matched2.')

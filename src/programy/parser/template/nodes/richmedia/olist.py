@@ -32,5 +32,5 @@ class TemplateOrderedListNode(TemplateListNode):
         return str
 
     def to_string(self):
-        return "[OLIST] %d" % (len(self._items))
+        return "[OLIST %d]" % (len(self._items))
 

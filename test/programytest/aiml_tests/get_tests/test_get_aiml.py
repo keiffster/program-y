@@ -36,22 +36,22 @@ class GetAIMLTests(unittest.TestCase):
     def test_name_unknown_get(self):
         response = self._client_context.bot.ask_question(self._client_context, "NAME UNKNOWN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "unknown")
+        self.assertEqual(response, "Unknown.")
 
     def test_name_get(self):
         response = self._client_context.bot.ask_question(self._client_context, "NAME GET")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "test1")
+        self.assertEqual(response, "Test1.")
 
     def test_name_get_with_topic(self):
         response = self._client_context.bot.ask_question(self._client_context, "NAME GET WITH TOPIC")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "test2")
+        self.assertEqual(response, "Test2.")
 
     def test_name_get_with_topic(self):
         response = self._client_context.bot.ask_question(self._client_context, "NAME GET AFTER TOPIC UNSET")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "VAR1 is test3 AND NOW VAR1 is test4 AND FINALLY NOW VAR 1 is test4")
+        self.assertEqual(response, "VAR1 is test3 AND NOW VAR1 is test4 AND FINALLY NOW VAR 1 is test4.")
 
     #################################################################################################################
     #
@@ -59,7 +59,7 @@ class GetAIMLTests(unittest.TestCase):
     def test_var_get(self):
         response = self._client_context.bot.ask_question(self._client_context, "VAR GET")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "vtest1")
+        self.assertEqual(response, "Vtest1.")
 
     def test_var_unknown_get(self):
         response = self._client_context.bot.ask_question(self._client_context, "VAR UNKNOWN")

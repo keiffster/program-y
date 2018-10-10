@@ -33,4 +33,4 @@ class SurveyAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "Too many undocmented features by the creators")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Thanks, thats the end of the survey')
+        self.assertEqual(response, 'Thanks, thats the end of the survey.')

@@ -19,11 +19,11 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateInputNode()
-        self.assertEqual("INPUT", node.to_string())
+        self.assertEqual("[INPUT]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateInputNode(index=2)
-        self.assertEqual("INPUT index=2", node.to_string())
+        self.assertEqual("[INPUT index=2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -60,7 +60,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
@@ -85,11 +85,11 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you. Are you well")
+        question = Question.create_from_text(self._client_context, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
@@ -114,11 +114,11 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you. Are you well")
+        question = Question.create_from_text(self._client_context, "How are you. Are you well", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 

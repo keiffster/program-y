@@ -30,10 +30,10 @@ class PatternISetAIMLTests(unittest.TestCase):
 
     def test_patten_set_one_or_more_wildcard_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "WHAT IS YOUR FAVOURITE COLOUR PLEASE")
-        self.assertEqual(response, "My favourite colour is Red")
+        self.assertEqual(response, "My favourite colour is Red.")
 
         response = self._client_context.bot.ask_question(self._client_context,  "WHAT IS YOUR FAVOURITE COLOR PLEASE")
-        self.assertEqual(response, "My favourite color is Red")
+        self.assertEqual(response, "My favourite color is Red.")
 
     def test_patten_set_zero_or_more_wildcard_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I LIKE TO EAT BURGERS")
@@ -47,7 +47,7 @@ class PatternISetAIMLTests(unittest.TestCase):
 
     def test_patten_alternative_set_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I LIKE RIDING BMW MOTORCYCLES")
-        self.assertEqual(response, "I prefer a Harley Davidson to a BMW")
+        self.assertEqual(response, "I prefer a Harley Davidson to a BMW.")
 
     def test_united_kingdom(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I live in wales")

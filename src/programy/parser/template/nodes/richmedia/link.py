@@ -37,15 +37,8 @@ class TemplateLinkNode(TemplateNode):
         str += "</link>"
         return str
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        return "[LINK] %d" % (len(self._children))
+        return "[LINK %d]" % (len(self._children))
 
     def to_xml(self, client_context):
         return self.resolve_to_string(client_context)

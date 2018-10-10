@@ -147,16 +147,36 @@ class DoubleStringPatternSplitCollection(BaseCollection):
                         if stripped in already:
                             found = True
                     if found is not True:
+
+                        to_replace = pair[1]
+                        to_replace = self.match_case(replacable, to_replace)
+
                         if pair[1].endswith("."):
-                            replacable = pattern.sub(pair[1], replacable)
+                            replacable = pattern.sub(to_replace, replacable)
                         else:
-                            replacable = pattern.sub(pair[1]+" ", replacable)
+                            replacable = pattern.sub(to_replace+" ", replacable)
                         alreadys.append(pair[1])
 
             except Exception as excep:
                 YLogger.exception(self, "Invalid regular expression [%s]", excep, str(pair[0]))
 
         return re.sub(' +', ' ', replacable.strip())
+
+    def match_case(self, replacable, to_replace):
+        count = 0
+        length = len(replacable)
+
+        for i in range(length):
+            if replacable[i].isupper():
+                count += 1
+
+        if count == length:
+            return to_replace.upper()
+
+        if float(count) > float(length)/3.0:
+            return to_replace.upper()
+
+        return to_replace.lower()
 
     def load_from_text(self, text):
         lines = text.split("\n")

@@ -29,19 +29,19 @@ class UDCAIMLTests(unittest.TestCase):
     def test_udc_multi_word_question(self):
         response = self._client_context.bot.ask_question(self._client_context, "Ask Question")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Hash Response")
+        self.assertEqual(response, "UDC Hash Response.")
 
     def test_udc_single_word_question(self):
         response = self._client_context.bot.ask_question(self._client_context, "Question")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Hash Response")
+        self.assertEqual(response, "UDC Hash Response.")
 
     def test_udc_empty_string_question1(self):
         response = self._client_context.bot.ask_question(self._client_context, "YEMPTY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Hash Response")
+        self.assertEqual(response, "UDC Hash Response.")
 
     def test_udc_empty_string_question2(self):
         response = self._client_context.bot.ask_question(self._client_context, "")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "UDC Hash Response")
+        self.assertEqual(response, "UDC Hash Response.")

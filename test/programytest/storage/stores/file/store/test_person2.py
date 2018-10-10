@@ -31,4 +31,4 @@ class FilePerson2StoreTests(Person2sStoreAsserts):
         store.load(person2_collection)
 
         self.assertEqual(person2_collection.person(" I WAS "), [re.compile('(^I WAS | I WAS | I WAS$)', re.IGNORECASE), ' HE OR SHE WAS '])
-        self.assertEqual(person2_collection.personalise_string("I was there"), "HE OR SHE WAS there")
+        self.assertEqual(person2_collection.personalise_string("I was there"), "he or she was there")

@@ -11,7 +11,7 @@ class MockTemplateUppercaseNode(TemplateUppercaseNode):
     def __init__(self):
         TemplateUppercaseNode.__init__(self)
 
-    def resolve_to_string(self, context):
+    def resolve(self, context):
         raise Exception("This is a failure!")
 
 class TemplateUppercaseNodeTests(ParserTestsBaseClass):
@@ -58,9 +58,6 @@ class TemplateUppercaseNodeTests(ParserTestsBaseClass):
 
         word = TemplateWordNode("This is a Sentence")
         node.append(word)
-
-        with self.assertRaises(Exception):
-            root.resolve_to_string(self._client_context)
 
         self.assertEqual(root.resolve(self._client_context), "")
 

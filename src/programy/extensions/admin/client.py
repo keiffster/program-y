@@ -57,7 +57,7 @@ class ClientAdminExtension(Extension):
                         brainid = commands[3]
                         brain = bot.brain_factory.brain(brainid)
                         if brain is not None:
-                            brain.dump_brain_tree()
+                            brain.dump_brain_tree(client_context)
                             return "Brain dumped, see config for location"
 
         except Exception as e:

@@ -18,12 +18,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import re
 
-from programy.parser.tokenizer import Tokenizer
+from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.utils.text.text import TextUtils
 
 class Sentence(object):
 
-    def __init__(self, tokenizer: Tokenizer, text: str = None ):
+    def __init__(self, tokenizer, text: str = None ):
         self._tokenizer = tokenizer
         self._words = self._tokenizer.texts_to_words(text)
         self._response = None
@@ -82,12 +82,12 @@ class Sentence(object):
 class Question(object):
 
     @staticmethod
-    def create_from_text(tokenizer, text, sentence_split_chars: str = ".", split=True, srai=False):
+    def create_from_text(client_context, text, split=True, srai=False):
         question = Question(srai)
         if split is True:
-            question.split_into_sentences(text, sentence_split_chars, tokenizer)
+            question.split_into_sentences(client_context, text)
         else:
-            question.sentences.append(Sentence(tokenizer, text))
+            question.sentences.append(Sentence(client_context.brain.tokenizer, text))
         return question
 
     @staticmethod
@@ -164,12 +164,11 @@ class Question(object):
     def combine_answers(self):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
-    def split_into_sentences(self, text: str, sentence_split_chars: str, tokenizer):
+    def split_into_sentences(self, client_context, text):
         if text is not None and text.strip():
-            self._sentences = []
-            all_sentences = text.split(sentence_split_chars)
+            all_sentences = client_context.bot.sentence_splitter.split(text)
             for each_sentence in all_sentences:
-                self._sentences.append(Sentence(tokenizer, each_sentence))
+                self._sentences.append(Sentence(client_context.brain.tokenizer, each_sentence))
 
 
 #
@@ -248,7 +247,7 @@ class Conversation(object):
         return topic_pattern
 
     def parse_last_sentences_from_response(self, response):
-        # TODO Issue here when the response is more than just a simple sentence
+
         # If the response contains punctuation such as "Hello. There" then THAT is none
         response = re.sub(r'<\s*br\s*/>\s*', ".", response)
         response = re.sub(r'<br></br>*', ".", response)
@@ -260,6 +259,7 @@ class Conversation(object):
 
         if that_pattern == "":
             that_pattern = '*'
+
         return that_pattern
 
     def get_that_pattern(self, client_context, srai=False):
@@ -324,6 +324,6 @@ class Conversation(object):
             for json_question in json_questions:
                 json_sentences = json_question['sentences']
                 for json_sentence in json_sentences:
-                    question = Question.create_from_text(self._client_context.brain.tokenizer, json_sentence['question'])
+                    question = Question.create_from_text(self._client_context, json_sentence['question'])
                     question.sentence(0).response = json_sentence['response']
                     self._questions.append(question)

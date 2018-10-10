@@ -31,4 +31,4 @@ class FileGenderStoreTests(GenderStoreAsserts):
         store.load(gender_collection)
 
         self.assertEqual(gender_collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(gender_collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(gender_collection.genderise_string("This is with him "), "This is with her")

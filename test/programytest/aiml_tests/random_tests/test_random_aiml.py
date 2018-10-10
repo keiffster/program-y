@@ -24,4 +24,4 @@ class RandomAIMLTests(unittest.TestCase):
     def test_random(self):
         response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
-        self.assertIn(response, ['HI', 'HELLO', 'HI THERE'])
+        self.assertIn(response, ['HI.', 'HELLO.', 'HI THERE.'])

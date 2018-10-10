@@ -40,7 +40,7 @@ class SraixAIMLTests(unittest.TestCase):
     def test_basic_sraix_test(self):
         response = self._client_context.bot.ask_question(self._client_context, "GENERIC REST TEST")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'ANSWER')
+        self.assertEqual(response, 'ANSWER.')
 
     def test_unknown_sraix_test(self):
         response = self._client_context.bot.ask_question(self._client_context, "UNKNOWN REST TEST")

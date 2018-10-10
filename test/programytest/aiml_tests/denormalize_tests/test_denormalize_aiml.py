@@ -24,9 +24,9 @@ class DenormalizeAIMLTests(unittest.TestCase):
     def test_denormalize(self):
         response = self._client_context.bot.ask_question(self._client_context,  "TEST DENORMALIZE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "keithsterling.COM")
+        self.assertEqual(response, "Keithsterling.com.")
 
     def test_newdev7_say(self):
         response = self._client_context.bot.ask_question(self._client_context,  "SAY abc dot com")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "abc.COM")
+        self.assertEqual(response, "Abc.com.")

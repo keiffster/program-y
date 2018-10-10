@@ -43,7 +43,7 @@ class DenormaliseTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.denormalise_string("keithsterling dot com"), "keithsterling.COM")
+        self.assertEqual(collection.denormalise_string("keithsterling dot com"), "keithsterling.com")
         self.assertIsNone(collection.denormalise(" dot cox "))
 
     def test_reload(self):

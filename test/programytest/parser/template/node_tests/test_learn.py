@@ -28,7 +28,7 @@ class TestLearnCategory(unittest.TestCase):
         self.assertIsNotNone(learncat.children)
         self.assertEqual(0, len(learncat.children))
 
-        self.assertEqual("CATEGORY", learncat.to_string())
+        self.assertEqual("[CATEGORY]", learncat.to_string())
 
         learncat.pattern = "pattern2"
         self.assertEqual("pattern2", learncat.pattern)

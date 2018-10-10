@@ -70,13 +70,6 @@ class TemplateMapNode(TemplateNode):
         YLogger.debug(client_context, "MAP [%s] resolved to [%s] = [%s]", self.to_string(), name, value)
         return value
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         return "[MAP (%s)]" % (self.name.to_string())
 

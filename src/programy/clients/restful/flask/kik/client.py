@@ -31,6 +31,7 @@ from programy.clients.restful.flask.kik.config import KikConfiguration
 class KikBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Kik Client"
         FlaskRestBotClient.__init__(self, "kik", argument_parser)
 
         self.create_kik_bot()

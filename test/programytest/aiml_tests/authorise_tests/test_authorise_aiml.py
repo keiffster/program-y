@@ -32,7 +32,7 @@ class AuthoriseAIMLTests(unittest.TestCase):
     def test_authorise_allowed(self):
         response = self._client_context.bot.ask_question(self._client_context, "ALLOW ACCESS")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Access Allowed')
+        self.assertEqual(response, 'Access Allowed.')
 
     def test_authorise_denied(self):
         response = self._client_context.bot.ask_question(self._client_context, "DENY ACCESS")

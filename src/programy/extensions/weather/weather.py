@@ -74,7 +74,6 @@ class WeatherExtension(Extension):
 
         observation = met_office.current_observation(latlng.latitude, latlng.longitude)
         if observation is not None:
-            #TODO Use 'when" paramter to extract datapoints
             return observation.get_latest_observation().to_program_y_text()
         else:
             return "UNAVAILABLE"

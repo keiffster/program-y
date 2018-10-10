@@ -33,7 +33,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -75,7 +75,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -105,7 +105,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -135,7 +135,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 

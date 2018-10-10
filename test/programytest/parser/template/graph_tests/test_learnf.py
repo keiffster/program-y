@@ -47,4 +47,4 @@ class TemplateGraphLearnfTests(TemplateGraphTestClient):
         self.assertEqual(resolved, "")
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO WORLD THERE")
-        self.assertEqual("HIYA", response)
+        self.assertEqual("HIYA.", response)

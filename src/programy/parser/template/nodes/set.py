@@ -72,14 +72,6 @@ class TemplateSetNode(TemplateNode):
 
         return value
 
-    def resolve(self, client_context):
-        try:
-            str = self.resolve_to_string(client_context)
-            return str
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())
 

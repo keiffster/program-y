@@ -33,7 +33,7 @@ class TemplateIdNode(TemplateNode):
         return ""
 
     def to_string(self):
-        return "ID"
+        return "[ID]"
 
     def to_xml(self, client_context):
         return "<id />"

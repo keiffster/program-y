@@ -25,5 +25,5 @@ class TopicStarAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HELLO STAR TOPIC')
+        self.assertEqual(response, 'HELLO STAR TOPIC.')
 

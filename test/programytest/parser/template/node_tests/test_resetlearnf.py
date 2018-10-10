@@ -30,7 +30,7 @@ class TemplateResetLearnfNodeTests(ParserTestsBaseClass):
 
     def test_to_string(self):
         node = TemplateResetLearnfNode()
-        self.assertEqual("RESETLEARNF", node.to_string())
+        self.assertEqual("[RESETLEARNF]", node.to_string())
 
     def test_to_xml(self):
         node = TemplateResetLearnfNode()

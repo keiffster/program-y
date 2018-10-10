@@ -24,34 +24,34 @@ class LearnAIMLTests(unittest.TestCase):
     def test_learn(self):
         response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK, I will remember your name is FRED")
+        self.assertEqual(response, "OK, I will remember your name is FRED.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS MY NAME")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "YOUR NAME IS FRED")
+        self.assertEqual(response, "YOUR NAME IS FRED.")
 
     def test_learn_x_is_y(self):
 
         response = self._client_context.bot.ask_question(self._client_context, "LEARN THE SUN IS HOT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK, I will remember THE SUN is HOT")
+        self.assertEqual(response, "OK, I will remember THE SUN is HOT.")
 
         response = self._client_context.bot.ask_question(self._client_context, "LEARN THE SKY IS BLUE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK, I will remember THE SKY is BLUE")
+        self.assertEqual(response, "OK, I will remember THE SKY is BLUE.")
 
         response = self._client_context.bot.ask_question(self._client_context, "LEARN THE MOON IS GREY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "OK, I will remember THE MOON is GREY")
+        self.assertEqual(response, "OK, I will remember THE MOON is GREY.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS THE SUN")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "HOT")
+        self.assertEqual(response, "HOT.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS THE SKY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "BLUE")
+        self.assertEqual(response, "BLUE.")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS THE MOON")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "GREY")
+        self.assertEqual(response, "GREY.")

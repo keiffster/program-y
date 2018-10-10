@@ -32,32 +32,31 @@ class TrainAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
-        self.assertEqual("Jessica likes to smoke cigars", response)
+        self.assertEqual("Jessica likes to smoke cigars.", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
-        self.assertEqual("Jessica likes to smoke cigars", response)
+        self.assertEqual("Jessica likes to smoke cigars.", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "what does jessica like")
         self.assertIsNotNone(response)
-        self.assertEqual("Jessica likes to smoke cigars", response)
+        self.assertEqual("Jessica likes to smoke cigars.", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "what does jessica smoke")
         self.assertIsNotNone(response)
-        self.assertEqual("Jessica likes to smoke cigars", response)
+        self.assertEqual("Jessica likes to smoke cigars.", response)
 
         response = self._client_context.bot.ask_question(self._client_context, "who smokes")
         self.assertIsNotNone(response)
-        self.assertEqual("Jessica likes to smoke cigars", response)
+        self.assertEqual("Jessica likes to smoke cigars.", response)
 
     def test_train_pronoun(self):
         response = self._client_context.bot.ask_question(self._client_context, "mommy likes to smoke cigars")
         self.assertIsNotNone(response)
 
-        # TODO, deal with the spacing between the quotes
-        self.assertEqual('Now you can ask me: " Who likes to smoke cigars ?" and " What does my mommy ?"', response)
+        self.assertEqual('Now you can ask me: " Who likes to smoke cigars ?" and " What does my mommy ?".', response)
 
         response = self._client_context.bot.ask_question(self._client_context, "who likes to smoke cigars")
         self.assertIsNotNone(response)
-        self.assertEqual("Your mommy", response)
+        self.assertEqual("Your mommy.", response)
 

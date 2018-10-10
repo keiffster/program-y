@@ -36,6 +36,7 @@ class SlackBotClient(PollingBotClient):
     MENTION_REGEX = "^<@(|[WU].+?)>(.*)"
 
     def __init__(self, argument_parser=None):
+        self._description = "Programy AIML2.x Slack Client"
         self._bot_token = None
 
         PollingBotClient.__init__(self, "slack", argument_parser)

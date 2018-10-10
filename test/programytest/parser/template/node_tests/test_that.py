@@ -17,15 +17,15 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateThatNode()
-        self.assertEqual("THAT", node.to_string())
+        self.assertEqual("[THAT]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateThatNode(3, 2)
-        self.assertEqual("THAT question=3 sentence=2", node.to_string())
+        self.assertEqual("[THAT question=3 sentence=2]", node.to_string())
 
     def test_to_str_star(self):
         node = TemplateThatNode(1, -1)
-        self.assertEqual("THAT sentence=*", node.to_string())
+        self.assertEqual("[THAT sentence=*]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -73,11 +73,11 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -101,11 +101,11 @@ class TemplateThatNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 

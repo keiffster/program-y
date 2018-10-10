@@ -13,7 +13,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             spelling:
-              load: true
               classname: programy.spelling.norvig.NorvigSpellingChecker
               alphabet: abcdefghijklmnopqrstuvwxyz
               check_before: true
@@ -25,36 +24,10 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEqual(True, spelling_config.load)
         self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
         self.assertEqual("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
         self.assertTrue(spelling_config.check_before)
         self.assertTrue(spelling_config.check_and_retry)
-
-    def test_with_load_as_false(self):
-        yaml = YamlConfigurationFile()
-        self.assertIsNotNone(yaml)
-        yaml.load_from_text("""
-        bot:
-            spelling:
-              load: false
-              classname: programy.spelling.norvig.NorvigSpellingChecker
-              corpus: $BOT_ROOT/corpus.txt
-              alphabet: abcdefghijklmnopqrstuvwxyz
-              check_before: true
-              check_and_retry: true
-        """, ConsoleConfiguration(), ".")
-
-        bot_config = yaml.get_section("bot")
-
-        spelling_config = BotSpellingConfiguration()
-        spelling_config.load_config_section(yaml, bot_config, ".")
-
-        self.assertFalse(spelling_config.load)
-        self.assertIsNone(spelling_config.classname)
-        self.assertIsNone(spelling_config.alphabet)
-        self.assertFalse(spelling_config.check_before)
-        self.assertFalse(spelling_config.check_and_retry)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -69,7 +42,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertFalse(spelling_config.load)
         self.assertIsNone(spelling_config.classname)
         self.assertIsNone(spelling_config.alphabet)
         self.assertFalse(spelling_config.check_before)
@@ -87,7 +59,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertFalse(spelling_config.load)
         self.assertIsNone(spelling_config.classname)
         self.assertIsNone(spelling_config.alphabet)
         self.assertFalse(spelling_config.check_before)

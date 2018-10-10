@@ -18,7 +18,7 @@ class OOBTestClient(TestClient):
     def load_configuration(self, arguments):
         super(OOBTestClient, self).load_configuration(arguments)
         default = BrainOOBConfiguration("default")
-        default._classname = "programy.oob.default.DefaultOutOfBandProcessor"
+        default._classname = "programy.oob.defaults.default.DefaultOutOfBandProcessor"
         self.configuration.client_configuration.configurations[0].configurations[0].oob._default = default
 
 
@@ -42,4 +42,4 @@ class OOBAIMLTests(unittest.TestCase):
 
     def test_oob_complex(self):
         response = self._client_context.bot.ask_question(self._client_context,  "FILE BUG REPORT")
-        self.assertEqual(response, "To help the developers blah blah blah")
+        self.assertEqual(response, "To help the developers blah blah blah.")

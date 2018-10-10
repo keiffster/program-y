@@ -20,7 +20,7 @@ class TemplateDeleteTripleNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateDeleteTripleNode()
         self.assertIsNotNone(root)
-        self.assertEqual("DELETETRIPLE", root.to_string())
+        self.assertEqual("[DELETETRIPLE]", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()

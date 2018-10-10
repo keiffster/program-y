@@ -55,9 +55,6 @@ class FileCategoryStore(FileStore, CategoryStore):
                             self._load_file_contents(parser, os.path.join(dirpath, filename))
 
     def load(self, parser, category_fullname):
-        cat_name = self.get_just_filename_from_filepath(category_fullname)
-        #TODO fix this
-        #parser.remove_category(cat_name)
         self._load_file_contents(parser, category_fullname)
 
     def _load_file_contents(self, parser, filename):

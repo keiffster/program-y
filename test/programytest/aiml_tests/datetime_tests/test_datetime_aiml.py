@@ -37,49 +37,49 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_day(self):
         response = self._client_context.bot.ask_question(self._client_context, "DAY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Today is %s"%(self.date.full_weekday()))
+        self.assertEqual(response, "Today is %s."%(self.date.full_weekday()))
 
     def test_tomorrow(self):
         response = self._client_context.bot.ask_question(self._client_context, "TOMORROW")
         self.assertIsNotNone(response)
         self.date = DateFormatter(days=1)
-        self.assertEqual(response, self.date.full_weekday())
+        self.assertEqual(response, self.date.full_weekday()+".")
 
     def test_year(self):
         response = self._client_context.bot.ask_question(self._client_context, "YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.year_4_digit()))
+        self.assertEqual(response, "This is %s."%(self.date.year_4_digit()))
 
         response = self._client_context.bot.ask_question(self._client_context, "YEAR NEXT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.year_4_digit()))
+        self.assertEqual(response, "This is %s."%(self.date.year_4_digit()))
 
     def test_next_year(self):
         next_year = (int(self.date.year_4_digit()))+1
 
         response = self._client_context.bot.ask_question(self._client_context, "NEXT YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(next_year))
+        self.assertEqual(response, "%d."%(next_year))
 
         response = self._client_context.bot.ask_question(self._client_context, "NEXT YEAR NEXT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(next_year))
+        self.assertEqual(response, "%d."%(next_year))
 
     def test_last_year(self):
         last_year = (int(self.date.year_4_digit()))-1
 
         response = self._client_context.bot.ask_question(self._client_context, "LAST YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(last_year))
+        self.assertEqual(response, "%d."%(last_year))
 
         response = self._client_context.bot.ask_question(self._client_context, "LAST YEAR AGO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(last_year))
+        self.assertEqual(response, "%d."%(last_year))
 
     def test_month(self):
         response = self._client_context.bot.ask_question(self._client_context, "MONTH")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.full_month()))
+        self.assertEqual(response, "This is %s."%(self.date.full_month()))
 
     def test_time(self):
         response = self._client_context.bot.ask_question(self._client_context, "TIME")
@@ -88,7 +88,7 @@ class DateTimeAIMLTests(unittest.TestCase):
         hour = self.date.hour_12_hour_clock()
         min = self.date.decimal_minute()
         ampm = self.date.am_or_pm()
-        self.assertRegex(response, "The time is %s:%s %s"%(hour, min, ampm))
+        self.assertRegex(response, "The time is %s:%s %s."%(hour, min, ampm))
 
     def test_day_phase(self):
         response = self._client_context.bot.ask_question(self._client_context,  "DAY PHASE")

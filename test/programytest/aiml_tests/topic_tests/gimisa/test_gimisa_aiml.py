@@ -24,13 +24,13 @@ class GimisaAIMLTests(unittest.TestCase):
     def test_ask_blender_twice(self):
         response = self._client_context.bot.ask_question(self._client_context, "render")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'some definition of render as per professor ....')
+        self.assertEqual(response, 'Some definition of render as per professor ....')
 
         response = self._client_context.bot.ask_question(self._client_context, "hello")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'hi .. setting topic to blender....')
+        self.assertEqual(response, 'Hi .. setting topic to blender....')
 
         response = self._client_context.bot.ask_question(self._client_context, "render")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'the definition of render in blender is')
+        self.assertEqual(response, 'The definition of render in blender is.')
 

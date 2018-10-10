@@ -27,28 +27,28 @@ brain:
 
     oob:
       default:
-        classname: programy.oob.default.DefaultOutOfBandProcessor
+        classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
       alarm:
-        classname: programy.oob.alarm.AlarmOutOfBandProcessor
+        classname: programy.oob.defaults.alarm.AlarmOutOfBandProcessor
       camera:
-        classname: programy.oob.camera.CameraOutOfBandProcessor
+        classname: programy.oob.defaults.camera.CameraOutOfBandProcessor
       clear:
-        classname: programy.oob.clear.ClearOutOfBandProcessor
+        classname: programy.oob.defaults.clear.ClearOutOfBandProcessor
       dial:
-        classname: programy.oob.dial.DialOutOfBandProcessor
+        classname: programy.oob.defaults.dial.DialOutOfBandProcessor
       dialog:
-        classname: programy.oob.dialog.DialogOutOfBandProcessor
+        classname: programy.oob.defaults.dialog.DialogOutOfBandProcessor
       email:
-        classname: programy.oob.email.EmailOutOfBandProcessor
+        classname: programy.oob.defaults.email.EmailOutOfBandProcessor
       map:
-        classname: programy.oob.map.MapOutOfBandProcessor
+        classname: programy.oob.defaults.map.MapOutOfBandProcessor
       schedule:
-        classname: programy.oob.schedule.ScheduleOutOfBandProcessor
+        classname: programy.oob.defaults.schedule.ScheduleOutOfBandProcessor
       search:
-        classname: programy.oob.search.SearchOutOfBandProcessor
+        classname: programy.oob.defaults.search.SearchOutOfBandProcessor
       sms:
-        classname: programy.oob.sms.SMSOutOfBandProcessor
+        classname: programy.oob.defaults.sms.SMSOutOfBandProcessor
       url:
-        classname: programy.oob.url.URLOutOfBandProcessor
+        classname: programy.oob.defaults.url.URLOutOfBandProcessor
       wifi:
-        classname: programy.oob.wifi.WifiOutOfBandProcessor
+        classname: programy.oob.defaults.wifi.WifiOutOfBandProcessor

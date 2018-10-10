@@ -4,7 +4,7 @@ file_disabled="File Storage disaabled"
 sql=False
 sql_disabled="SQL Storage disaabled"
 
-mongo=True
+mongo=False
 mongo_disabled="Mongo Storage disaabled"
 
 redis=False

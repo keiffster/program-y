@@ -19,7 +19,7 @@ class TemplateAddTripleNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateAddTripleNode()
         self.assertIsNotNone(root)
-        self.assertEqual("ADDTRIPLE", root.to_string())
+        self.assertEqual("[ADDTRIPLE]", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()

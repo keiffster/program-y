@@ -47,13 +47,16 @@ class TemplateNode(object):
         words = [child.resolve(client_context) for child in self._children]
         return client_context.brain.tokenizer.words_to_texts(words)
 
+    def resolve_to_string(self, client_context):
+        return self.resolve_children_to_string(client_context)
+
     def resolve(self, client_context):
         try:
-            resolved = self.resolve_children_to_string(client_context)
+            resolved = self.resolve_to_string(client_context)
             YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
             return resolved
         except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
+            YLogger.exception(client_context, "Template node failed to resolve", excep)
             return ""
 
     def to_string(self):

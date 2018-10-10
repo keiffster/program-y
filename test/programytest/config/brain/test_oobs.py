@@ -13,11 +13,11 @@ class BrainOOBsConfigurationTests(unittest.TestCase):
         brain:
             oob:
               default:
-                classname: programy.oob.default.DefaultOutOfBandProcessor
+                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
               dial:
-                classname: programy.oob.dial.DialOutOfBandProcessor
+                classname: programy.oob.defaults.dial.DialOutOfBandProcessor
               email:
-                classname: programy.oob.email.EmailOutOfBandProcessor
+                classname: programy.oob.defaults.email.EmailOutOfBandProcessor
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")

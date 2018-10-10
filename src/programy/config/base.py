@@ -22,13 +22,22 @@ class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
 
     def __init__(self, name):
+
+        assert (name is not None)
+
         self._section_name = name
         self._additionals = {}
 
     def exists(self, name):
+
+        assert (name is not None)
+
         return bool(name in self._additionals)
 
     def value(self, key):
+
+        assert (key is not None)
+
         if key in self._additionals:
             return self._additionals[key]
         else:
@@ -44,12 +53,20 @@ class BaseConfigurationData(object):
         return self._section_name
 
     def _get_file_option(self, config_file, option_name, section, bot_root):
+
+        assert (config_file is not None)
+        assert (option_name is not None)
+
         option = config_file.get_option(section, option_name)
         if option is not None:
             option = self.sub_bot_root(option, bot_root)
         return option
 
     def sub_bot_root(self, text, root):
+
+        assert text is not None
+        assert root is not None
+
         return text.replace('$BOT_ROOT', root)
 
     def additionals_to_add(self):
@@ -64,6 +81,10 @@ class BaseConfigurationData(object):
                         self._additionals[key] = value
 
     def config_to_yaml(self, data, config, defaults=True):
+
+        assert (data is not None)
+        assert (config is not None)
+
         data[config.id] = {}
         config.to_yaml(data[config.id], defaults)
 

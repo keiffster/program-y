@@ -22,15 +22,15 @@ class PreProcessingTests(unittest.TestCase):
 
         punctuation_processor = RemovePunctuationPreProcessor()
         test_str = punctuation_processor.process(context, test_str)
-        self.assertEqual("This is my Location", test_str)
+        self.assertEqual("This is my Location!", test_str)
 
         normalize_processor = NormalizePreProcessor()
         test_str = normalize_processor.process(context, test_str)
-        self.assertEqual("This is my Location", test_str)
+        self.assertEqual("This is my Location!", test_str)
 
         toupper_processor = ToUpperPreProcessor()
         test_str = toupper_processor.process(context, test_str)
-        self.assertEqual("THIS IS MY LOCATION", test_str)
+        self.assertEqual("THIS IS MY LOCATION!", test_str)
 
         demojize_processpr = DemojizePreProcessor()
         test_str = demojize_processpr.process(context, test_str)

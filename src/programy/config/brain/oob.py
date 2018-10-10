@@ -30,9 +30,9 @@ class BrainOOBConfiguration(BaseSectionConfigurationData):
         return self._classname
 
     def load_config_section(self, configuration_file, configuration, bot_root):
-        service = configuration_file.get_section(self.section_name, configuration)
-        if service is not None:
-            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
+        oob = configuration_file.get_section(self.section_name, configuration)
+        if oob is not None:
+            self._classname = configuration_file.get_option(oob, "classname", missing_value=None)
         else:
             YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
 

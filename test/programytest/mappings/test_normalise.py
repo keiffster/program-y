@@ -24,7 +24,7 @@ class NormaliseTests(unittest.TestCase):
         self.assertTrue(collection.has_key(".COM"))
         self.assertEqual([re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '], collection.value(".COM"))
 
-        self.assertEqual("keithsterling DOT COM", collection.normalise_string("keithsterling.COM"))
+        self.assertEqual("keithsterling dot com", collection.normalise_string("keithsterling.COM"))
 
     def test_load(self):
         storage_factory = StorageFactory()
@@ -42,7 +42,7 @@ class NormaliseTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling DOT COM")
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")
 
     def test_reload(self):
         storage_factory = StorageFactory()
@@ -60,8 +60,8 @@ class NormaliseTests(unittest.TestCase):
 
         collection.load(storage_factory)
 
-        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling DOT COM")
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")
 
         collection.reload(storage_factory)
 
-        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling DOT COM")
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")

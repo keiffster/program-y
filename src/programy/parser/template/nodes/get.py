@@ -155,15 +155,6 @@ class TemplateGetNode(TemplateNode):
             value = self.resolve_tuple(client_context)
         return value
 
-    def resolve(self, client_context):
-        try:
-            #TODO, need a load conversation when running in multi client mode using Redis
-            #client_context.bot.load_conversation(client_context.userid)
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         if self.tuples is None:
             if self.name is None:
