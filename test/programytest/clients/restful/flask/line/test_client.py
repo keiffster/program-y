@@ -72,7 +72,7 @@ class LineBotClientTests(unittest.TestCase):
         self.assertEqual("LINE_ACCESS_TOKEN", client._channel_access_token)
 
         self.assertIsInstance(client.get_client_configuration(), LineConfiguration)
-        self.assertEqual('ProgramY AIML2.0 Line Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_handle_text_message(self):
         arguments = MockArgumentParser()

@@ -63,7 +63,7 @@ class SocketBotClientTests(unittest.TestCase):
         arguments = MockArgumentParser()
         client = MockSocketBotClient( MockSocket(), arguments)
         self.assertIsNotNone(client)
-        self.assertEqual('ProgramY AIML2.0 TCP Socket Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SocketConfiguration)
 
     def test_extract_payload(self):

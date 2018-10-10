@@ -32,15 +32,11 @@ from programy.clients.restful.flask.line.config import LineConfiguration
 class LineBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Line Client"
         FlaskRestBotClient.__init__(self, "line", argument_parser)
 
         self.create_line_bot()
 
         YLogger.debug(self, "Line Client is running....")
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Line Client'
 
     def get_client_configuration(self):
         return LineConfiguration()

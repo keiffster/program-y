@@ -26,9 +26,6 @@ class FlaskRestBotClient(RestBotClient):
         RestBotClient.__init__(self, id, argument_parser)
         self.initialise()
 
-    def get_description(self):
-        return 'ProgramY AIML2.0 Flask REST Client'
-
     def get_api_key(self, rest_request):
         if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
             return None

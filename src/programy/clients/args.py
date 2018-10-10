@@ -68,7 +68,7 @@ class CommandLineClientArguments(ClientArguments):
 
         ClientArguments.__init__(self, client)
         if parser is None:
-            self.parser = argparse.ArgumentParser(description=client.get_description())
+            self.parser = argparse.ArgumentParser()
         else:
             self.parser = parser
         self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')

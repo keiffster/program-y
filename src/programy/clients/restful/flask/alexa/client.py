@@ -31,8 +31,6 @@ from programy.clients.restful.flask.alexa.config import AlexaConfiguration
 class AlexaBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Alexa Client"
-
         FlaskRestBotClient.__init__(self, 'alexa', argument_parser)
 
         YLogger.debug(self, "Alexa Client is running....")

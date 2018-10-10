@@ -27,7 +27,6 @@ from programy.clients.restful.flask.facebook.renderer import FacebookRenderer
 class FacebookBotClient(FlaskRestBotClient):
     
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Facebook Client"
         FlaskRestBotClient.__init__(self, 'facebook', argument_parser)
 
         YLogger.debug(self, "Facebook Client is running....")
@@ -39,9 +38,6 @@ class FacebookBotClient(FlaskRestBotClient):
     @property
     def facebook_bot(self):
         return self._facebook_bot
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Facebook Client'
 
     def get_license_keys(self):
         self._access_token = self.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")

@@ -48,12 +48,8 @@ class TelegramBotClient(PollingBotClient):
     TELEGRAM_CLIENT = None
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Telegram Client"
         self._updater = None
         PollingBotClient.__init__(self, "telegram", argument_parser)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Telegram Client'
 
     def get_client_configuration(self):
         return TelegramConfiguration()

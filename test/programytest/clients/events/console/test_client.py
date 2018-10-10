@@ -53,7 +53,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
         self.assertEqual(client.id, "Console")
-        self.assertEqual('ProgramY AIML2.0 Console Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_get_question(self):
         arguments = MockArgumentParser()

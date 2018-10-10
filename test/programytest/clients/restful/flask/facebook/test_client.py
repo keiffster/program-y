@@ -52,7 +52,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         self.assertEqual("FACEBOOK_ACCESS_TOKEN", client._access_token)
 
         self.assertIsInstance(client.get_client_configuration(), FacebookConfiguration)
-        self.assertEqual('ProgramY AIML2.0 Facebook Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._facebook_bot, Bot)
 

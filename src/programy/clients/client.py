@@ -161,8 +161,11 @@ class BotClient(ResponseLogger):
         return self._renderer
 
     def get_description(self):
-        raise NotImplementedError("You must override this and return a client description")
-
+        if self.configuration is not None:
+            if self.configuration.client_configuration is not None:
+                return self.configuration.client_configuration.description
+        return "Bot Client"
+    
     def add_client_arguments(self, parser=None):
         # Nothing to add
         return

@@ -26,16 +26,12 @@ from programy.clients.polling.xmpp.xmpp import XmppClient
 class XmppBotClient(PollingBotClient):
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x XMPP Client"
         self._xmpp_client = None
         self._server = None
         self._port = None
         self._username = None
         self._password = None
         PollingBotClient.__init__(self, "XMPP", argument_parser)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 XMPP Client'
 
     def get_client_configuration(self):
         return XmppConfiguration()

@@ -108,7 +108,7 @@ class TelegramBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsInstance(client.get_client_configuration(), TelegramConfiguration)
         self.assertEqual(client.id, "telegram")
-        self.assertEqual('ProgramY AIML2.0 Telegram Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertEqual("TELEGRAM_TOKEN", client._telegram_token)
 
     def test_register_handlers(self):

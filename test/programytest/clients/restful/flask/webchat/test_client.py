@@ -36,7 +36,7 @@ class WebChatBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
 
         self.assertIsInstance(client.get_client_configuration(), WebChatConfiguration)
-        self.assertEqual('ProgramY AIML2.0 Webchat Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_api_keys(self):
         arguments = MockArgumentParser()

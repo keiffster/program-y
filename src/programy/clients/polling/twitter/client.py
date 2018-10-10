@@ -29,15 +29,11 @@ class TwitterBotClient(PollingBotClient):
     FIFTEEN_MINUTES = 15*60
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Twitter Client"
         self._username = "unknown"
         self._username_len = 0
         self._welcome_message = None
         self._api = None
         PollingBotClient.__init__(self, "Twitter", argument_parser)
-
-    def get_description(self):
-        return self.configuration.client_configuration.description
 
     def get_client_configuration(self):
         return TwitterConfiguration()

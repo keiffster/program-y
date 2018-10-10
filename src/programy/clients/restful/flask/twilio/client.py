@@ -31,7 +31,6 @@ TWILIO_CLIENT = None
 class TwilioBotClient(FlaskRestBotClient):
     
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Twilio Client"
         FlaskRestBotClient.__init__(self, 'twilio', argument_parser)
 
         YLogger.debug(self, "Twilio Client is running....")
@@ -45,9 +44,6 @@ class TwilioBotClient(FlaskRestBotClient):
     @property
     def from_number(self):
         return self._from_number
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Twilio Client'
 
     def get_license_keys(self):
         self._account_sid = self.license_keys.get_key("TWILIO_ACCOUNT_SID")

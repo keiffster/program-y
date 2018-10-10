@@ -65,7 +65,7 @@ class SlackBotClientTests(unittest.TestCase):
         client = MockSlackBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertEqual("SLACK_BOT_TOKEN", client._bot_token)
-        self.assertEqual('ProgramY AIML2.0 Slack Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
         self.assertIsInstance(client.get_client_configuration(), SlackConfiguration)
         self.assertIsInstance(client._slack_client, SlackClient)
 

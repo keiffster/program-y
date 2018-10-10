@@ -42,15 +42,11 @@ class ViberBotClient(FlaskRestBotClient):
     _running = False
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Viber Client"
         FlaskRestBotClient.__init__(self, "viber", argument_parser)
 
         YLogger.debug(self, "Viber Client is running....")
 
         self._viber_bot = self.create_viber_bot(self._viber_token)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Viber Client'
 
     def get_client_configuration(self):
         return ViberConfiguration()

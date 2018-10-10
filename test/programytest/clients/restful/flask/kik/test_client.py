@@ -69,7 +69,7 @@ class KikBotClientTests(unittest.TestCase):
         self.assertEqual("KIK_BOT_API_KEY", client._bot_api_key)
 
         self.assertIsInstance(client.get_client_configuration(), KikConfiguration)
-        self.assertEqual('ProgramY AIML2.0 Kik Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._kik_bot, KikApi)
 

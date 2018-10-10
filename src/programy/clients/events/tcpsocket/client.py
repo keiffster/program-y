@@ -93,16 +93,12 @@ class SocketConnection(object):
 class SocketBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):
-        self._description = "Programy AIML2.x Socket Client"
         EventBotClient.__init__(self, "Socket", argument_parser)
 
         print("TCP Socket Client server now listening on %s:%d"%(self._host, self._port))
         self._server_socket = self.create_socket_connection(self._host, self._port, self._queue, self._max_buffer)
 
         self._renderer = JSONRenderer(self)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 TCP Socket Client'
 
     def get_client_configuration(self):
         return SocketConfiguration()
