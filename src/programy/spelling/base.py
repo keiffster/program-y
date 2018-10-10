@@ -34,18 +34,17 @@ class SpellingChecker(object):
 
     @staticmethod
     def initiate_spellchecker(spelling_config, storage_factory):
-        if spelling_config.load is True:
-            if spelling_config.classname is not None:
-                try:
-                    YLogger.info(None, "Loading spelling checker from class [%s]", spelling_config.classname)
-                    spell_class = ClassLoader.instantiate_class(spelling_config.classname)
-                    spell_checker = spell_class(spelling_config)
-                    spell_checker.initialise(storage_factory)
-                    return spell_checker
-                except Exception as excep:
-                    YLogger.exception(None, "Failed to initiate spellcheker", excep)
-            else:
-                YLogger.warning(None, "No configuration setting for spelling checker!")
+        if spelling_config.classname is not None:
+            try:
+                YLogger.info(None, "Loading spelling checker from class [%s]", spelling_config.classname)
+                spell_class = ClassLoader.instantiate_class(spelling_config.classname)
+                spell_checker = spell_class(spelling_config)
+                spell_checker.initialise(storage_factory)
+                return spell_checker
+            except Exception as excep:
+                YLogger.exception(None, "Failed to initiate spellcheker", excep)
+        else:
+            YLogger.warning(None, "No configuration setting for spelling checker!")
 
         return None
     

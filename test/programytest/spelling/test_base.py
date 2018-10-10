@@ -37,7 +37,6 @@ class SpellingCheckerTests(unittest.TestCase):
     def test_initiate_spellchecker(self):
 
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
 
         storage_factory = None
@@ -46,22 +45,9 @@ class SpellingCheckerTests(unittest.TestCase):
 
         self.assertIsNotNone(spell_checker)
 
-    def test_initiate_spellchecker_load_is_false(self):
-
-        spelling_config = BotSpellingConfiguration()
-        spelling_config._load = False
-        spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
-
-        storage_factory = None
-
-        spell_checker = SpellingChecker.initiate_spellchecker(spelling_config, storage_factory)
-
-        self.assertIsNone(spell_checker)
-
     def test_initiate_spellchecker_no_classname(self):
 
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = None
 
         storage_factory = None
@@ -73,7 +59,6 @@ class SpellingCheckerTests(unittest.TestCase):
     def test_initiate_spellchecker_invalid_classname(self):
 
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.InvalidSpellingChecker"
 
         storage_factory = None
@@ -84,7 +69,6 @@ class SpellingCheckerTests(unittest.TestCase):
         
     def test_check_spelling_before_true(self):
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
         spelling_config._check_before = True
 
@@ -103,7 +87,6 @@ class SpellingCheckerTests(unittest.TestCase):
 
     def test_check_spelling_before_false(self):
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
         spelling_config._check_before = False
 
@@ -122,7 +105,6 @@ class SpellingCheckerTests(unittest.TestCase):
 
     def test_check_spelling_and_retry_true(self):
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
         spelling_config._check_and_retry = True
 
@@ -144,7 +126,6 @@ class SpellingCheckerTests(unittest.TestCase):
 
     def test_check_spelling_and_retry_false(self):
         spelling_config = BotSpellingConfiguration()
-        spelling_config._load = True
         spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
         spelling_config._check_and_retry = False
 
