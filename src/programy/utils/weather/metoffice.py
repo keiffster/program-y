@@ -16,7 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import datetime
-import json
 from programy.utils.logging.ylogger import YLogger
 
 import metoffer
