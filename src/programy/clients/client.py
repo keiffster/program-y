@@ -241,6 +241,8 @@ class BotClient(ResponseLogger):
         self._storage = StorageFactory()
         if self.configuration.client_configuration.storage is not None:
             self._storage.load_engines_from_config(self.configuration.client_configuration.storage)
+        else:
+            print("No storage defined!")
 
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)
