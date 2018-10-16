@@ -1,6 +1,5 @@
 from setuptools import setup, find_packages
 from os import path
-import sys
 
 here = path.abspath(path.dirname(__file__))
 
@@ -8,6 +7,15 @@ version = None
 with open(path.join(here, 'version.txt'), encoding='utf-8') as f:
     version = f.read()
 version = version.strip()
+print("Building PyPi Package for version %s"%version)
+
+requires = []
+with open("../requirements.txt", encoding='utf-8') as f:
+    for line in f:
+        line = line.strip()
+        if len(line) > 0 and line.startswith('#') is False:
+            print("Adding Package: %s"%line)
+            requires.append(line)
 
 if version is None:
     print("No version.txt found")
@@ -52,33 +60,5 @@ setup(
       'Programming Language :: Python :: 3.5',
       'Programming Language :: Python :: 3.6',
   ],
-  install_requires=[
-                    'python-dateutil',
-                    'beautifulsoup4',
-                    'lxml',
-                    'PyYAML',
-                    'requests',
-                    'Flask',
-                    'Flask-Ask',
-                    'Flask-SocketIO',
-                    'tweepy',
-                    'sleekxmpp',
-                    'python-telegram-bot',
-                    'pymessenger',
-                    'twilio',
-                    'slackclient',
-                    'viberbot',
-                    'line-bot-sdk',
-                    'kik',
-                    'wikipedia',
-                    'MetOffer',
-                    'APScheduler',
-                    'emoji',
-                    'autocorrect',
-                    'redis',
-                    'pymongo',
-                    'SQLAlchemy',
-                    'PyMySQL'
-                    ]
-
+  install_requires=requires
 )

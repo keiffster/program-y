@@ -31,7 +31,6 @@ from programy.scheduling.scheduler import ProgramyScheduler
 from programy.clients.render.text import TextRenderer
 from programy.utils.classes.loader import ClassLoader
 from programy.storage.factory import StorageFactory
-from programy.storage.factory import StorageFactory
 
 class ResponseLogger(object):
 

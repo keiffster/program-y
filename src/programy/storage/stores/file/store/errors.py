@@ -42,6 +42,8 @@ class FileErrorsStore(FileStore, ErrorsStore):
         file_dir = self._get_dir_from_path(filename)
         self._ensure_dir_exists(file_dir)
         try:
+            YLogger.debug(self, "Saving errors to [%s]", filename)
+
             with open(filename, "w+") as errors_file:
                 errors_file.write("Error,File,Start Line,End Line\n")
                 for error in errors:

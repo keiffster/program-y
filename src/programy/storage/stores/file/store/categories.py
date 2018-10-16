@@ -58,7 +58,7 @@ class FileCategoryStore(FileStore, CategoryStore):
         self._load_file_contents(parser, category_fullname)
 
     def _load_file_contents(self, parser, filename):
-        YLogger.debug(self, "Loading category [%s]", filename)
+        YLogger.debug(self, "Loading file contents from [%s]", filename)
         try:
             parser.parse_from_file(filename, userid="*")
         except Exception as excep:

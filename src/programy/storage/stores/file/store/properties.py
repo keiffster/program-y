@@ -63,6 +63,8 @@ class FilePropertyStore(FileStore, PropertyStore):
         properties = {}
         if os.path.exists(property_filepath):
             try:
+                YLogger.debug(self, "Loading properties from [%s]", property_filepath)
+
                 with open(property_filepath, "r") as props_file:
                     for line in props_file:
                         line = line.strip()

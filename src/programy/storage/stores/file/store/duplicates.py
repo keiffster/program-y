@@ -42,6 +42,8 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
         self._ensure_dir_exists(file_dir)
 
         try:
+            YLogger.debug(self, "Saving duplicates to [%s]", filename)
+
             with open(filename, "w+") as duplicates_file:
                 duplicates_file.write("Duplicate\tFile\tStart Line\tEnd Line")
                 for duplicate in duplicates:

@@ -14,6 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 import os
 import os.path
 import shutil
@@ -88,7 +89,7 @@ class FileStore(Store):
             if os.path.exists(storage_path):
                 shutil.rmtree(storage_path)
         except Exception as e:
-            print("Error dropping storage", e)
+            YLogger.exception(self, "Error dropping storage", e)
 
     @staticmethod
     def _get_dir_from_path(file_path):
@@ -100,6 +101,7 @@ class FileStore(Store):
     @staticmethod
     def _ensure_dir_exists(path):
         if os.path.exists(path) is False:
+            YLogger.debug(None, "Directory does not exist, creating %s", path)
             os.makedirs(path)
 
     @staticmethod
@@ -120,11 +122,14 @@ class FileStore(Store):
                     paths = os.listdir(col_dir)
                     for filename in paths:
                         if col_ext is None or filename.endswith(col_ext):
+                            YLogger.debug(self, "Loading file contents from [%s]", filename)
                             self._load_file_contents(collection, os.path.join(col_dir, filename))
                 else:
                     for dirpath, _, filenames in os.walk(col_dir):
                         for filename in [f for f in filenames if f.endswith(col_ext)]:
+                            YLogger.debug(self, "Loading file contents from [%s]", filename)
                             self._load_file_contents(collection, os.path.join(dirpath, filename))
+
         else:
             self.load(collection)
 
@@ -141,6 +146,8 @@ class FileStore(Store):
 
     def upload_from_file(self, filename, format=Store.TEXT_FORMAT, commit=True, verbose=False):
 
+        YLogger.debug(self, "Oploading from file [%s]", filename)
+
         file_processor = None
         try:
             name = self.get_just_filename_from_filepath(filename)
@@ -154,7 +161,8 @@ class FileStore(Store):
                 self.commit()
 
         except Exception as e:
-            print("Error uploading from file: ", e)
+            YLogger.exception(self, "Error uploading from file [%s]", e, filename)
+
             if commit is True:
                 self.rollback()
 

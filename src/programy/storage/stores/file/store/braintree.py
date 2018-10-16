@@ -34,6 +34,8 @@ class FileBraintreeStore(FileStore, BraintreeStore):
 
         try:
             braintree_fullpath = self.storage_engine.configuration.braintree_storage.file
+            YLogger.info(self, "Saving braintree to %s", braintree_fullpath)
+
             braintree_dirpath = self._get_dir_from_path(braintree_fullpath)
             self._ensure_dir_exists(braintree_dirpath)
 

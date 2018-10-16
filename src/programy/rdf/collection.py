@@ -66,8 +66,6 @@ class RDFCollection(BaseCollection):
                     rdfs_store.load_all(self)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load rdf from storage", e)
-        else:
-            YLogger.error(self, "No RDF Storage Engine [%s] in StorageFactory", StorageFactory.RDF)
 
     def reload(self, storage_factory, rdf_name):
         YLogger.debug(self, "Reloading RDF [%s]", rdf_name)
@@ -79,8 +77,6 @@ class RDFCollection(BaseCollection):
                     rdfs_store.reload(self, rdf_name)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load rdf from storage", e)
-        else:
-            YLogger.error(self, "No RDF Storage Engine [%s] in StorageFactory", StorageFactory.RDF)
 
     def subjects(self):
         return self._entities.keys()

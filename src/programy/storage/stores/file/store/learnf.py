@@ -40,6 +40,8 @@ class FileLearnfStore(FileStore, LearnfStore):
 
         if os.path.isfile(learnf_path) is False:
             try:
+                YLogger.debug(None, "Creating new learnf file [%s]", learnf_path)
+
                 with open(learnf_path, "w+", encoding="utf-8") as file:
                     file.write('<?xml version="1.0" encoding="UTF-8"?>\n')
                     file.write('<aiml>\n')
