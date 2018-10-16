@@ -9,14 +9,6 @@ with open(path.join(here, 'version.txt'), encoding='utf-8') as f:
 version = version.strip()
 print("Building PyPi Package for version %s"%version)
 
-requires = []
-with open("../requirements.txt", encoding='utf-8') as f:
-    for line in f:
-        line = line.strip()
-        if len(line) > 0 and line.startswith('#') is False:
-            print("Adding Package: %s"%line)
-            requires.append(line)
-
 if version is None:
     print("No version.txt found")
 
@@ -60,5 +52,32 @@ setup(
       'Programming Language :: Python :: 3.5',
       'Programming Language :: Python :: 3.6',
   ],
-  install_requires=requires
+  install_requires=[
+'python-dateutil==2.7.3',
+'beautifulsoup4==4.6.3',
+'lxml==4.2.5',
+'PyYAML==4.2b4',
+'requests==2.19.1',
+'Flask==1.0.2',
+'Flask-Ask==0.9.8',
+'Flask-SocketIO==3.0.2',
+'tweepy==3.6.0',
+'sleekxmpp==1.3.3',
+'python-telegram-bot==11.1.0',
+'pymessenger==0.0.7.0',
+'twilio==6.18.1',
+'slackclient==1.3.0',
+'viberbot==1.0.11',
+'line-bot-sdk==1.8.0',
+'kik==1.5.0',
+'wikipedia==1.4.0',
+'MetOffer==1.3.2',
+'APScheduler==3.5.3',
+'emoji==0.5.1',
+'autocorrect==0.3.0',
+'redis==2.10.6',
+'pymongo==3.7.1',
+'SQLAlchemy==1.2.12',
+'PyMySQL==0.9.2'
+]
 )
