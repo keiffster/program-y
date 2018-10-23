@@ -89,10 +89,8 @@ class SQLStorageEngine(StorageEngine):
 
     def user_store(self):
         return SQLUserStore(self)
-
     def linked_account_store(self):
         return SQLLinkedAccountStore(self)
-
     def link_store(self):
         return SQLLinkStore(self)
 

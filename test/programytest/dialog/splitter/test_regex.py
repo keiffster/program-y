@@ -11,6 +11,12 @@ class RegexSentenceSplitterTests(unittest.TestCase):
 
         self.assertEquals(["This is a basic sentence"], splitter.split("This is a basic sentence"))
 
+    def test_punctuation_at_end(self):
+        splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
+        self.assertIsNotNone(splitter)
+
+        self.assertEquals(["Is this the first sentence"], splitter.split("Is this the first sentence?"))
+
     def test_fullstop(self):
         splitter = RegexSentenceSplitter(BotSentenceSplitterConfiguration())
         self.assertIsNotNone(splitter)

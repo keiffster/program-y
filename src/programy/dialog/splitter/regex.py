@@ -24,7 +24,7 @@ class RegexSentenceSplitter(SentenceSplitter):
         SentenceSplitter.__init__(self, config)
 
     def split(self, text):
-        sentences = re.split('[:;,.?!]', text)
-        return [self.remove_punctuation(s).strip() for s in sentences]
+        sentences = re.split(self._configuration.split_chars, text)
+        return [self.remove_punctuation(s).strip() for s in sentences if s is not None and len(s) > 0]
 
 
