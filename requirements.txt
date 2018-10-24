@@ -6,7 +6,7 @@ PyYAML==4.2b4
 
 requests==2.19.1
 Flask==1.0.2
-Flask-Ask==0.9.8
+#Flask-Ask==0.9.8
 Flask-SocketIO==3.0.2
 
 tweepy==3.6.0
