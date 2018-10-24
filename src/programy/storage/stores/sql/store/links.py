@@ -42,3 +42,13 @@ class SQLLinkStore(SQLStore, LinkStore):
 
     def remove_link(self, primary_userid):
         self._storage_engine.session.query(Link).filter(Link.primary_user==primary_userid).delete()
+
+    def link_exists(self, userid, provided_key, generated_key):
+        link = self._storage_engine.session.query(Link).filter(Link.primary_user==userid,
+                                                                Link.generated_key==generated_key,
+                                                                Link.provided_key==provided_key).one()
+
+        if link is not None:
+            return True
+
+        return False

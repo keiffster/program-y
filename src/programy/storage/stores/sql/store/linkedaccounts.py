@@ -47,8 +47,7 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
         return accounts
 
     def primary_account(self, linked_userid):
-        db_accounts = self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.linked_user==linked_userid)
-        accounts = []
-        for account in db_accounts:
-            accounts.append(account.primary_user)
-        return accounts
+        db_account = self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.linked_user==linked_userid).one()
+        if db_account is not None:
+            return db_account.primary_user
+        return None

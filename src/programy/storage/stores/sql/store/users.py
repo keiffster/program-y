@@ -32,6 +32,13 @@ class SQLUserStore(SQLStore, UserStore):
         self._storage_engine.session.add(user)
         return user
 
+    def get_links(self, userid):
+        links = []
+        db_users = self._storage_engine.session.query(User).filter(User.userid == userid)
+        for user in db_users:
+            links.append(user.client)
+        return links
+
     def get_user(self, userid):
         db_users = self._storage_engine.session.query(User).filter(User.userid == userid)
         users = []

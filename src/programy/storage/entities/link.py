@@ -21,8 +21,11 @@ class LinkStore(object):
     def create_link(self, primary_userid, generated_key, provided_key):
         raise NotImplementedError("create_link missing from Link Store")
 
+    def get_link(self, primary_userid):
+        raise NotImplementedError("get_link missing from Link Store")
+
     def remove_link(self, primary_userid):
         raise NotImplementedError("remove_link missing from Link Store")
 
-    def get_link(self, primary_userid):
-        raise NotImplementedError("get_link missing from Link Store")
+    def link_exists(self, userid, provided_key, generated_key):
+        raise NotImplementedError("link_exists missing from Link Store")

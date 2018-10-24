@@ -19,6 +19,7 @@ from programy.utils.classes.loader import ClassLoader
 from programy.dialog.dialog import Sentence
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 
+
 class SecurityManager(object):
 
     def __init__(self, security_configuration):
@@ -29,6 +30,7 @@ class SecurityManager(object):
         self._configuration = security_configuration
         self._authentication = None
         self._authorisation = None
+        self._account_linker = None
 
     @property
     def authentication(self):
@@ -38,34 +40,54 @@ class SecurityManager(object):
     def authorisation(self):
         return self._authorisation
 
+    @property
+    def account_linker(self):
+        return self._account_linker
+
     def load_security_services(self, client):
         if self._configuration is not None:
-            if self._configuration.authentication is not None:
-                if self._configuration.authentication.classname is not None:
-                    try:
-                        classobject = ClassLoader.instantiate_class(
-                            self._configuration.authentication.classname)
-                        self._authentication = classobject(self._configuration.authentication)
-                        self._authentication.initialise(client)
-                    except Exception as excep:
-                        YLogger.exception(self, "Failed to load security services", excep)
-            else:
-                YLogger.debug(self, "No authentication configuration defined")
-
-            if self._configuration.authorisation is not None:
-                if self._configuration.authorisation.classname is not None:
-                    try:
-                        classobject = ClassLoader.instantiate_class(
-                            self._configuration.authorisation.classname)
-                        self._authorisation = classobject(self._configuration.authorisation)
-                        self._authorisation.initialise(client)
-                    except Exception as excep:
-                        YLogger.exception(self, "Failed to instatiate authorisation class", excep)
-            else:
-                YLogger.debug(self, "No authorisation configuration defined")
-
+            self.load_authentication_service(client)
+            self.load_authorisation_service(client)
+            self.load_account_linking_service(client)
         else:
             YLogger.debug(self, "No security configuration defined, running open...")
+
+    def load_authentication_service(self, client):
+        if self._configuration.authentication is not None:
+            if self._configuration.authentication.classname is not None:
+                try:
+                    classobject = ClassLoader.instantiate_class(self._configuration.authentication.classname)
+                    self._authentication = classobject(self._configuration.authentication)
+                    self._authentication.initialise(client)
+                except Exception as excep:
+                    YLogger.exception(self, "Failed to load security services", excep)
+        else:
+            YLogger.debug(self, "No authentication configuration defined")
+
+    def load_authorisation_service(self, client):
+        if self._configuration.authorisation is not None:
+            if self._configuration.authorisation.classname is not None:
+                try:
+                    classobject = ClassLoader.instantiate_class(self._configuration.authorisation.classname)
+                    self._authorisation = classobject(self._configuration.authorisation)
+                    self._authorisation.initialise(client)
+                except Exception as excep:
+                    YLogger.exception(self, "Failed to instatiate authorisation class", excep)
+        else:
+            YLogger.debug(self, "No authorisation configuration defined")
+
+    def load_account_linking_service(self, client):
+        if self._configuration.account_linker is not None:
+            if self._configuration.account_linker.classname is not None:
+                try:
+                    classobject = ClassLoader.instantiate_class(self._configuration.account_linker.classname)
+                    self._account_linker = classobject(self._configuration.account_linker)
+                    self.account_linker.initialise(client)
+                except Exception as excep:
+                    YLogger.exception(self, "Failed to instatiate authorisation class", excep)
+        else:
+            YLogger.debug(self, "No authorisation configuration defined")
+
 
     def failed_authentication(self, client_context):
         YLogger.error(client_context, "[%s] failed authentication!")

@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
-
+from programy.config.brain.security import BrainSecurityAccountLinkerConfiguration
 
 
 class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
@@ -26,6 +26,7 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
         BaseSectionConfigurationData.__init__(self, "security")
         self._authorisation = None
         self._authentication = None
+        self._account_linker = None
 
     @property
     def authorisation(self):
@@ -34,6 +35,10 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
     @property
     def authentication(self):
         return self._authentication
+
+    @property
+    def account_linker(self):
+        return self._account_linker
 
     def load_config_section(self, configuration_file, configuration, bot_root):
         securities = configuration_file.get_section(self.section_name, configuration)
@@ -44,6 +49,10 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
             self._authorisation = BrainSecurityAuthorisationConfiguration()
             self._authorisation.load_config_section(configuration_file, securities, bot_root)
 
+            self._account_linker = BrainSecurityAccountLinkerConfiguration()
+            self._account_linker.load_config_section(configuration_file, securities, bot_root)
+
     def to_yaml(self, data, defaults=True):
         self.config_to_yaml(data, BrainSecurityAuthenticationConfiguration(), defaults)
         self.config_to_yaml(data, BrainSecurityAuthorisationConfiguration(), defaults)
+        self.config_to_yaml(data, BrainSecurityAccountLinkerConfiguration(), defaults)
