@@ -4,7 +4,7 @@ beautifulsoup4==4.6.3
 lxml==4.2.5
 PyYAML==4.2b4
 
-requests==2.19.1
+requests==2.20.0
 Flask==1.0.2
 #Flask-Ask==0.9.8
 Flask-SocketIO==3.0.2
