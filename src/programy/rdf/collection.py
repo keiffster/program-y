@@ -113,53 +113,86 @@ class RDFCollection(BaseCollection):
 
         entity = self._entities[subject]
 
-        entity._predicates[predicate] = obj
+        if predicate in entity._predicates:
+            entity._predicates[predicate].append(obj)
+        else:
+            entity._predicates[predicate] = [obj]
 
     def has_subject(self, subject):
         return bool(subject.upper() in self._entities)
 
     def has_predicate(self, subject, predicate):
         if self.has_subject(subject):
+
             entity = self._entities[subject.upper()]
             return bool(predicate.upper() in entity._predicates)
+
         return False
 
     def has_object(self, subject, predicate, obj):
         if self.has_subject(subject):
             entity = self._entities[subject.upper()]
+
             if self.has_predicate(subject, predicate):
-                return bool(entity._predicates[predicate.upper()] == obj)
+                objects = entity._predicates[predicate.upper()]
+
+                for object in objects:
+                   if object == obj:
+                       return True
+
         return False
 
     def delete_entity(self, subject, predicate=None, obj=None):
         YLogger.debug(self, "Deleting RDF Entity [%s] [%s] [%s]", subject, predicate, obj)
 
         if self.has_subject(subject):
+
             if predicate is None and obj is None:
+                YLogger.debug(None, "Removing entire subject %s", subject)
                 del self._entities[subject.upper()]
                 return
+
             entity = self._entities[subject.upper()]
-            if self.has_predicate(subject, predicate):
-                if obj is None or obj == entity._predicates[predicate.upper()]:
+
+            if obj is None:
+                if self.has_predicate(subject, predicate):
+                    YLogger.debug(None, "Removing entire predicate %s, subject %s", predicate, subject)
                     del entity._predicates[predicate.upper()]
-            if bool(entity._predicates) is False :
+            else:
+                if predicate.upper() in entity._predicates:
+                    objects = entity._predicates[predicate.upper()]
+
+                    if obj in objects:
+                        YLogger.debug(None, "Removing object %s from predicate %s, subject %s", obj, predicate, subject)
+                        objects = entity._predicates[predicate.upper()]
+                        objects.remove(obj)
+
+                if len(entity._predicates[predicate.upper()]) == 0:
+                    YLogger.debug(None, "Removing empty predicate %s, subject %s", predicate, subject)
+                    del entity._predicates[predicate.upper()]
+
+            if len(entity._predicates.keys()) == 0:
+                YLogger.debug(None, "Removing empty subject %s", subject)
                 del self._entities[subject.upper()]
 
     def all_as_tuples(self):
         all = []
         for subject, entity in self._entities.items():
-            for predicate, obj in entity._predicates.items():
-                all.append ([subject, predicate, obj])
+            for predicate, objects in entity._predicates.items():
+                for obj in objects:
+                    all.append ([subject, predicate, obj])
         return all
 
     def matched_as_tuples(self, subject=None, predicate=None, obj=None):
         all = []
         for entity_subject, entity in self._entities.items():
             if subject is None or subject == entity_subject:
-                for entity_predicate, entity_obj in entity._predicates.items():
+                for entity_predicate, entity_objects in entity._predicates.items():
                     if predicate is None or predicate == entity_predicate:
-                        if obj is None or obj == entity_obj:
-                            all.append([entity_subject, entity_predicate, entity_obj])
+                        for entity_obj in entity_objects:
+                            if obj is None or obj == entity_obj:
+                                YLogger.debug(None, "Matched tuple subject %s, predicate %s, object %s", entity_subject, entity_predicate, entity_obj)
+                                all.append([entity_subject, entity_predicate, entity_obj])
         return all
 
     def remove(self, entities, subject=None, predicate=None, obj=None):
@@ -174,31 +207,94 @@ class RDFCollection(BaseCollection):
         for entity in entities:
             if subject is not None:
                 if predicate is not None:
+
                     if obj is not None:
                         if subject == entity[0] and predicate == entity[1] and obj == entity[2]:
                             removes.append(entity)
+
                     else:
                         if subject == entity[0] and predicate == entity[1]:
                             removes.append(entity)
+
                 else:
+
                     if obj is not None:
                         if subject == entity[0] and obj == entity[2]:
                             removes.append(entity)
+
                     else:
                         if subject == entity[0]:
                             removes.append(entity)
+
             elif predicate is not None:
+
                 if obj is not None:
                     if predicate == entity[1] and obj == entity[2]:
                         removes.append(entity)
+
                 else:
                     if predicate == entity[1]:
                         removes.append(entity)
+
             elif obj is not None:
+
                 if obj == entity[2]:
                     removes.append(entity)
 
         return [entity for entity in entities if entity not in removes]
+
+    def _get_subject_element(self, subject, entity_subject):
+        subj_element = None
+        if subject is not None:
+
+            if subject.startswith("?"):
+                subj_element = [subject, entity_subject]
+
+            elif subject == entity_subject:
+                subj_element = ["subj", entity_subject]
+
+        else:
+            subj_element = ["subj", entity_subject]
+
+        return subj_element
+
+    def _get_predicate_element(self, predicate, entity_pred):
+        pred_element = None
+        if predicate is not None:
+
+            if predicate.startswith("?"):
+                pred_element = [predicate, entity_pred]
+
+            elif predicate == entity_pred:
+                pred_element = ["pred", entity_pred]
+
+        else:
+            pred_element = ["pred", entity_pred]
+
+        return pred_element
+
+    def _get_object_elements(self, entity, obj, entity_pred):
+
+        obj_elements = []
+        if obj is not None:
+
+            if obj.startswith("?"):
+
+                for object in entity._predicates[entity_pred]:
+                    obj_elements.append([obj, object])
+
+            else:
+
+                for object in entity._predicates[entity_pred]:
+
+                    if object == obj:
+                        obj_elements.append(["obj", object])
+        else:
+
+            for object in entity._predicates[entity_pred]:
+                obj_elements.append(["obj", object])
+
+        return obj_elements
 
     def match_to_vars(self, subject=None, predicate=None, obj=None):
         if predicate is None and obj is None:
@@ -210,45 +306,17 @@ class RDFCollection(BaseCollection):
 
         results = []
         for entity_subject, entity in self._entities.items():
-            subj_element = None
-            if subject is not None:
-                if subject.startswith("?"):
-                    subj_element = [subject, entity_subject]
-                elif subject == entity_subject:
-                    subj_element = ["subj", entity_subject]
-            else:
-                subj_element = ["subj", entity_subject]
+            subj_element = self._get_subject_element(subject, entity_subject)
 
             for entity_pred in entity._predicates:
-                pred_element = None
-                obj_element = None
-                if predicate is not None:
-                    if predicate.startswith("?"):
-                        pred_element = [predicate, entity_pred]
-                    elif predicate == entity_pred:
-                        pred_element = ["pred", entity_pred]
 
-                    if obj is not None:
-                        if obj.startswith("?"):
-                            obj_element = [obj, entity._predicates[entity_pred]]
-                        elif obj == entity._predicates[entity_pred]:
-                            obj_element = ["obj", entity._predicates[entity_pred]]
-                    else:
-                        obj_element = ["obj", entity._predicates[entity_pred]]
+                pred_element = self._get_predicate_element(predicate, entity_pred)
 
-                else:
-                    pred_element = ["pred", entity_pred]
+                obj_elements = self._get_object_elements(entity, obj, entity_pred)
 
-                    if obj is not None:
-                        if obj.startswith("?"):
-                            obj_element = [obj, entity._predicates[entity_pred]]
-                        elif subject == entity_subject:
-                            obj_element = [obj, entity._predicates[entity_pred]]
-                    else:
-                        obj_element = ["obj", entity._predicates[entity_pred]]
-
-                if subj_element is not None and pred_element is not None and obj_element is not None:
-                    results.append([subj_element, pred_element, obj_element])
+                if subj_element is not None and pred_element is not None and len(obj_elements) > 0:
+                    for object in obj_elements:
+                        results.append([subj_element, pred_element, object])
 
         return results
 
@@ -264,22 +332,25 @@ class RDFCollection(BaseCollection):
             all_subject = subject
         else:
             all_subject = None
+
         if predicate  is not None and predicate.startswith("?") is True:
             all_predicate = predicate
         else:
             all_predicate = None
+
         if obj  is not None and obj.startswith("?") is True:
             all_obj = obj
         else:
             all_obj = None
+
         all = self.match_to_vars(all_subject, all_predicate, all_obj)
+
         matched = self.match_to_vars(subject, predicate, obj)
 
         to_remove =[]
         for entity in all:
            for atuple in matched:
                if entity[0][1] == atuple[0][1]:
-                   #print("Removing from all", entity)
                    to_remove.append(entity)
 
         return [entity for entity in all if entity not in to_remove]
@@ -332,7 +403,6 @@ class RDFCollection(BaseCollection):
                         unified = True
                         if len(sets) > 1:
                             unified = self.unify_set(1, sets, unified_vars, 0)
-                            #print("Unified?", unified_vars, unified)
                         # If we have unified all variables then we have a match
                         if unified is True and None not in unified_vars.values():
                             unifications.append(self.dict_to_array(unified_vars))
