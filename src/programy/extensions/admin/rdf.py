@@ -52,7 +52,8 @@ class RDFAdminExtension(Extension):
             objects =  client_context.brain.rdf.objects(subject, predicate)
             rdf += "<ul>"
             for object in objects:
-                rdf += "<li>%s</li>" % object
+                for obj in object:
+                    rdf += "<li>%s</li>" % obj
             rdf += "</ul>"
 
         return rdf
