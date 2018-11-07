@@ -9,7 +9,7 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 from programy.context import ClientContext
 
 from programytest.client import TestClient

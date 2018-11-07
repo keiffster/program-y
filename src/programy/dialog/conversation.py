@@ -14,83 +14,183 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
 from programy.utils.logging.ylogger import YLogger
-from programy.dialog.dialog import Conversation
-from programy.storage.factory import StorageFactory
-from programy.config.bot.conversations import BotConversationsConfiguration
+import re
 
+from programy.utils.text.text import TextUtils
+from programy.dialog.question import Question
 
-class ConversationManager(object):
+class Conversation(object):
 
-    def __init__(self, conversation_configuration):
-
-        assert (conversation_configuration is not None)
-        assert (isinstance(conversation_configuration, BotConversationsConfiguration))
-
-        self._configuration = conversation_configuration
-        self._conversation_storage = None
-        self._conversations = {}
+    def __init__(self, client_context):
+        self._client_context = client_context
+        self._questions = []
+        self._max_histories = client_context.bot.configuration.conversations.max_histories
+        self._properties = {'topic': client_context.bot.configuration.conversations.initial_topic}
 
     @property
-    def configuration(self):
-        return self._configuration
+    def questions(self):
+        return self._questions
 
     @property
-    def storage(self):
-        return self._conversation_storage
+    def max_histories(self):
+        return self._max_histories
 
     @property
-    def conversations(self):
-        return self._conversations
+    def properties(self):
+        return self._properties
 
-    def empty(self):
-        self._conversations.clear()
+    def has_current_question(self):
+        return bool(self._questions)
 
-    def initialise(self, storage_factory):
-        if storage_factory.entity_storage_engine_available(StorageFactory.CONVERSATIONS) is True:
-            converstion_engine =  storage_factory.entity_storage_engine(StorageFactory.CONVERSATIONS)
-            if converstion_engine:
-                self._conversation_storage = converstion_engine.conversation_store()
+    def current_question(self):
+        if self._questions:
+            return self._questions[-1]
+        raise Exception("Invalid question index")
 
-    def save_conversation(self, client_context):
-        if self._conversation_storage is not None:
-            if client_context.userid in self._conversations:
-                conversation = self._conversations[client_context.userid]
-                if conversation is not None:
-                    self._conversation_storage.store_conversation(client_context, conversation)
+    def previous_nth_question(self, num: int):
+        if len(self._questions) < num:
+            raise Exception("Num question array violation !")
+        previous = -1 - num
+        return self._questions[previous]
 
-    def has_conversation(self, client_context):
-        return bool(client_context.userid in self._conversations)
+    def set_property(self, name: str, value: str):
+        if name == 'topic':
+            if value == "":
+                value = '*'
+        self._properties[name] = value
 
-    def get_conversation(self, client_context):
+    def property(self, name: str):
+        if self._properties is not None:
+            if name in self._properties:
+                return self._properties[name]
+        return None
 
-        assert (client_context is not None)
-        assert (client_context.userid  is not None)
+    def record_dialog(self, question: Question):
+        if len(self._questions) == self._max_histories:
+            YLogger.info(self, "Conversation history at max [%d], removing oldest", self._max_histories)
+            self._questions.remove(self._questions[0])
+        self._questions.append(question)
 
-        if client_context.userid in self._conversations:
-            YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
-            conversation = self._conversations[client_context.userid]
+    def pop_dialog(self):
+        if self._questions:
+            self._questions.pop()
 
-            # Load existing conversation from cache
-            if self.configuration.multi_client:
-                if self._conversation_storage is not None:
-                    self._conversation_storage.load_conversation(client_context, conversation)
+    def load_initial_variables(self, variables_collection):
+        for pair in variables_collection.pairs:
+            YLogger.debug(self, "Setting variable [%s] = [%s]", pair[0], pair[1])
+            self._properties[pair[0]] = pair[1]
 
+    def get_topic_pattern(self, client_context):
+        topic_pattern = self.property("topic")
+
+        if topic_pattern is None:
+            YLogger.info(client_context, "No Topic pattern default to [*]")
+            topic_pattern = "*"
         else:
-            YLogger.info(client_context, "Creating new conversation for client %s", client_context.userid)
+            YLogger.info(client_context, "Topic pattern = [%s]", topic_pattern)
 
-            conversation = Conversation(client_context)
+        return topic_pattern
 
-            if client_context.brain.default_variables is not None:
-                conversation.load_initial_variables(client_context.brain.default_variables)
+    def parse_last_sentences_from_response(self, response):
 
-            self._conversations[client_context.userid] = conversation
+        # If the response contains punctuation such as "Hello. There" then THAT is none
+        response = re.sub(r'<\s*br\s*/>\s*', ".", response)
+        response = re.sub(r'<br></br>*', ".", response)
+        sentences = response.split(".")
+        sentences = [x for x in sentences if x]
+        last_sentence = sentences[-1]
+        that_pattern = TextUtils.strip_all_punctuation(last_sentence)
+        that_pattern = that_pattern.strip()
 
-            if self._conversation_storage is not None:
-                self._conversation_storage.load_conversation(client_context, conversation)
+        if that_pattern == "":
+            that_pattern = '*'
 
-            if self.configuration.restore_last_topic is True:
-                pass
+        return that_pattern
 
-        return conversation
+    def get_that_pattern(self, client_context, srai=False):
+        try:
+            that_question = None
+            if srai is False:
+                that_question = self.previous_nth_question(1)
+            else:
+                if len(self._questions) > 2:
+                    for question in reversed(self._questions[:-2]):
+                        if question._srai is False and question.has_response():
+                            that_question = question
+                            break
 
+            if that_question is not None:
+                that_sentence = that_question.current_sentence()
+            else:
+                that_sentence = None
+
+            # If the last response was valid, i.e not none and not empty string, then use
+            # that as the that_pattern, otherwise we default to '*' as pattern
+            if that_sentence.response is not None and that_sentence.response != '':
+                that_pattern = self.parse_last_sentences_from_response(that_sentence.response)
+                YLogger.info(client_context, "That pattern = [%s]", that_pattern)
+            else:
+                YLogger.info(client_context, "That pattern, no response, default to [*]")
+                that_pattern = "*"
+
+        except Exception as e:
+            YLogger.info(client_context, "No That pattern default to [*]")
+            that_pattern = "*"
+
+        return that_pattern
+
+    def to_json(self):
+        json_data = {
+            'client_context': self._client_context.to_json(),
+            'questions': [],
+            'max_histories': self._max_histories,
+            'properties': self._properties
+        }
+
+        for question in self.questions:
+            json_question = {'sentences': [],
+                             'srai': question._srai,
+                             'properties': question._properties,
+                             'current_sentence_no': question._current_sentence_no
+                             }
+            json_data['questions'].append(json_question)
+
+            for sentence in question.sentences:
+                json_sentence = {"question": sentence.text(),
+                                 "response": sentence.response
+                                 }
+                json_question['sentences'].append(json_sentence)
+
+        return json_data
+
+    def from_json(self, json_data):
+        if json_data is not None:
+            json_questions = json_data['questions']
+            for json_question in json_questions:
+                json_sentences = json_question['sentences']
+                for json_sentence in json_sentences:
+                    question = Question.create_from_text(self._client_context, json_sentence['question'])
+                    question.sentence(0).response = json_sentence['response']
+                    self._questions.append(question)
+
+    def recalculate_sentiment_score(self, client_context):
+        for question in self._questions:
+            question.recalculate_sentinment_score(client_context)
+
+    def calculate_sentiment_score(self):
+
+        polarity = 0.00
+        subjectivity = 0.00
+
+        for question in self._questions:
+            q_polarity, q_subjectivity = question.calculate_sentinment_score()
+
+            polarity += q_polarity
+            subjectivity += q_subjectivity
+
+        polarity /= len(self._questions)
+        subjectivity /= len(self._questions)
+
+        return polarity, subjectivity

@@ -38,6 +38,11 @@ class MockUserStore(object):
             return True
         return False
 
+    def remove_user_from_all_clients(self, userid):
+        if userid in self.users:
+            del self.users[userid]
+
+
 class MockLink(object):
 
     def __init__(self, data):
@@ -84,8 +89,10 @@ class MockLinkStore(object):
             return True
         return False
 
+
 class MockAccountLink(object):
     pass
+
 
 class MockLinkedAccount(object):
 
@@ -115,6 +122,7 @@ class MockLinkedAccount(object):
         for key in toremove:
             del self.lookup[key]
         return True
+
 
 class MockStorageEngine(object):
 

@@ -18,8 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.conversation import ConversationStore
 from programy.storage.stores.sql.dao.conversation import Conversation
-from programy.dialog.dialog import Question
-from programy.dialog.dialog import Sentence
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
 
 
 class SQLConversationStore(SQLStore, ConversationStore):

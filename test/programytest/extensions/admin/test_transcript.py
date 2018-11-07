@@ -1,8 +1,8 @@
 import unittest
 
 from programy.extensions.admin.transcript import TranscriptAdminExtension
-from programy.dialog.dialog import Sentence
-from programy.dialog.dialog import Question
+from programy.dialog.sentence import Sentence
+from programy.dialog.question import Question
 
 from programytest.client import TestClient
 

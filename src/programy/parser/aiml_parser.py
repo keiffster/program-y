@@ -26,7 +26,7 @@ from programy.parser.exceptions import ParserException, DuplicateGrammarExceptio
 from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 from programy.parser.pattern.matcher import MatchContext
 from programy.storage.factory import StorageFactory
 

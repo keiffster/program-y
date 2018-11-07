@@ -4,7 +4,7 @@ from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.regex import PatternRegexNode
 from programy.parser.exceptions import ParserException
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 
 
 class PatternRegexNodeTests(ParserTestsBaseClass):

@@ -17,13 +17,16 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.brain import Brain
-from programy.dialog.dialog import Conversation, Question, Sentence
-from programy.dialog.conversation import ConversationManager
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.dialog.convo_mgr import ConversationManager
 from programy.config.bot.bot import BotConfiguration
 from programy.utils.classes.loader import ClassLoader
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner
+from programy.translate.base import BaseTranslator
+from programy.sentiment.base import BaseSentimentAnalyser
 
 
 class BrainSelector(object):
@@ -105,6 +108,14 @@ class Bot(object):
         self._sentence_joiner = None
         self.initiate_sentence_joiner()
 
+        self._from_translator = None
+        self._to_translator = None
+        self.initiate_translator()
+
+        self._sentiment_analyser = None
+        self._sentiment_scores = None
+        self.initiate_sentiment_analyser()
+
         self._conversation_mgr = ConversationManager(config.conversations)
         self._conversation_mgr.initialise(self._client.storage_factory)
 
@@ -153,6 +164,36 @@ class Bot(object):
         if self.configuration is not None:
             if self.configuration.joiner is not None:
                 self._sentence_joiner = SentenceJoiner.initiate_sentence_joiner(self.configuration.joiner)
+
+    @property
+    def from_translator(self):
+        return self._from_translator
+
+    @property
+    def to_translator(self):
+        return self._to_translator
+
+    def initiate_translator(self):
+        if self.configuration is not None:
+
+            if self.configuration.from_translator is not None:
+                self._from_translator = BaseTranslator.initiate_translator(self.configuration.from_translator)
+
+            if self.configuration.to_translator is not None:
+                self._to_translator = BaseTranslator.initiate_translator(self.configuration.to_translator)
+
+    @property
+    def sentiment_analyser(self):
+        return self._sentiment_analyser
+
+    @property
+    def sentiment_scores(self):
+        return self._sentiment_scores
+
+    def initiate_sentiment_analyser(self):
+        if self.configuration is not None:
+            if self.configuration.sentiment_analyser is not None:
+                self._sentiment_analyser, self._sentiment_scores = BaseSentimentAnalyser.initiate_sentiment_analyser(self.configuration.sentiment_analyser)
 
     @property
     def brain(self):
@@ -409,15 +450,23 @@ class Bot(object):
 
         YLogger.debug(client_context, "Raw Response (%s): %s", client_context.userid, response)
         sentence.response = response
+
+        sentence.calculate_sentinment_score(client_context)
+
         answer = self.post_process_response(client_context, response, srai)
         self.log_answer(client_context, sentence.text, answer, responselogger)
+
         return answer
 
-    def handle_none_response(self, clientid, sentence, responselogger):
+    def handle_none_response(self, client_context, sentence, responselogger):
 
         assert (sentence is not None)
 
-        sentence.response = self.get_default_response(clientid)
+        sentence.response = self.get_default_response(client_context)
+
+        sentence.calculate_sentinment_score(client_context)
+
         if responselogger is not None:
             responselogger.log_unknown_response(sentence)
+
         return sentence.response

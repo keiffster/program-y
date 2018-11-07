@@ -16,7 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.classes.loader import ClassLoader
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 
 

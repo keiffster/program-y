@@ -1,8 +1,8 @@
 import unittest
 
 from programy.storage.entities.conversation import ConversationStore
-from programy.dialog.dialog import Question
-from programy.dialog.dialog import Conversation
+from programy.dialog.question import Question
+from programy.dialog.conversation import Conversation
 
 from programytest.client import TestClient
 

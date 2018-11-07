@@ -20,7 +20,7 @@ import emoji
 
 from programy.processors.processing import PreProcessor
 
-class EmojizePreProcessor(PreProcessor):
+class EmojizePostProcessor(PreProcessor):
 
     def __init__(self):
         PreProcessor.__init__(self)

@@ -1,6 +1,6 @@
 import unittest
 
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.dialog.tokenizer.tokenizer import Tokenizer

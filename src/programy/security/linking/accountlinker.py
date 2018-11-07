@@ -23,6 +23,7 @@ Workflow is
 
 1. User is associated with an initial PRIMARY Client, e.g Facebook
 
+
 2. User decides to link account and ask PY to initiate an action
 
 3. PY asks them to login into primary account and ask for a LINK TOKEN
@@ -33,6 +34,11 @@ Workflow is
                 PRIMARY ACCOUNT NAME
                 GIVEN TOKEN
                 GENERATED TOKEN
+
+        -> LINK PRIMARY ACCOUNT $USERID $ACCOUNTNAME $GIVENTOKEN
+
+        <- PRIMARY ACCOUNT LINKED $GENERATEDTOKEN
+        <-> PRIMARY ACCOUNT LINK FAILED $REASON
 
     Link has a expirary time, circa 1 hr, after which link expires and now tokens will need to be requested
 
@@ -46,8 +52,15 @@ Workflow is
                 GIVEN TOKEN
                 GENERATED TOKEN
 
+        -> LINK SECONDARY ACCOUNT $SECONDARY_USERID $SECONDARY_ACCOUNT_NAME $PRIMARY_USERID $PRIMARY_ACCOUNT_NAME $GIVEN_TOKEN $GENERATED_TOKEN
+        
+        <- SECONDARY ACCOUNT LINKED
+        <- SECONDARY ACCOUNT LINK FAILED $REASON
+
 7. PY Links accounts
 """
+
+
 class BasicAccountLinkerService(object):
 
     KEY_CHARS = string.ascii_uppercase + string.digits
@@ -70,6 +83,7 @@ class BasicAccountLinkerService(object):
 
         if self._storage_engine.user_store.add_user(userid, clientid) is not None:
             return True
+
         return False
 
     def linked_accounts(self, userid):
@@ -87,11 +101,19 @@ class BasicAccountLinkerService(object):
             if self._storage_engine.link_store.remove_link(userid) is True:
                 if self._storage_engine.linked_account_store.unlink_accounts(userid) is True:
                     return True
+
         return False
 
     def unlink_user_from_all_clients(self, userid):
 
         assert (userid is not None)
+
+        if self._storage_engine.user_store.remove_user_from_all_clients(userid) is True:
+            if self._storage_engine.link_store.remove_link(userid) is True:
+                if self._storage_engine.linked_account_store.unlink_accounts(userid) is True:
+                    return True
+
+        return False
 
     def _generate_key(self, size=8):
         return ''.join(random.choice(BasicAccountLinkerService.KEY_CHARS) for _ in range(size))
@@ -113,21 +135,34 @@ class BasicAccountLinkerService(object):
         return None
 
     def _has_link_expired(self, link):
+
+        assert (link is not None)
+
         now = datetime.datetime.now()
         if now > link.expires:
             return True
+
         return False
 
     def _expire_link(self, link):
+
+        assert (link is not None)
+
         link.expired = True
         self._storage_engine.link_store.update_link(link)
 
     def _valid_link_keys(self, link, provided_key, generated_key, max_retries):
+
+        assert (link is not None)
+
         return link.generated_key == generated_key and \
                link.provided_key == provided_key and \
                link.retry_count < max_retries
 
     def _inc_retry_count(self, link):
+
+        assert (link is not None)
+
         link.retry_count += 1
         self._storage_engine.link_store.update_link(link)
 
@@ -158,13 +193,21 @@ class BasicAccountLinkerService(object):
         return False
 
     def reset_link(self, userid):
+
+        assert (userid is not None)
+
         link = self._storage_engine.link_store.get_link(userid)
+
         if link is not None:
             link.retry_count = 0
             self._storage_engine.link_store.update_link(link)
             return True
+
         return False
 
     def primary_account(self, secondary_userid):
+
+        assert (secondary_userid is not None)
+
         return self._storage_engine.linked_account_store.primary_account(secondary_userid)
 

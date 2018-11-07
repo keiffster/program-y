@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.select import TemplateSelectNode
-from programy.dialog.dialog import Question
+from programy.dialog.question import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 

@@ -23,6 +23,8 @@ from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.config.bot.conversations import BotConversationsConfiguration
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
 from programy.config.bot.joiner import BotSentenceJoinerConfiguration
+from programy.config.bot.translation import BotTranslatorConfiguration
+from programy.config.bot.sentiment import BotSentimentAnalyserConfiguration
 
 class BotConfiguration(BaseContainerConfigurationData):
 
@@ -62,6 +64,9 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._max_search_timeout = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
         self._tab_parse_output = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
         self._spelling = BotSpellingConfiguration()
+        self._from_translator = BotTranslatorConfiguration(name="from_translator")
+        self._to_translator = BotTranslatorConfiguration(name="to_translator")
+        self._sentiment = BotSentimentAnalyserConfiguration()
         self._conversations = BotConversationsConfiguration()
         self._splitter = BotSentenceSplitterConfiguration()
         self._joiner = BotSentenceJoinerConfiguration()
@@ -105,6 +110,12 @@ class BotConfiguration(BaseContainerConfigurationData):
             self._splitter.load_config_section(configuration_file, bot, bot_root)
 
             self._joiner.load_config_section(configuration_file, bot, bot_root)
+
+            self._from_translator.load_config_section(configuration_file, bot, bot_root)
+
+            self._to_translator.load_config_section(configuration_file, bot, bot_root)
+
+            self._sentiment.load_config_section(configuration_file, bot, bot_root)
 
         else:
             YLogger.warning(self, "Config section [%s] missing, using default values", self.section_name)
@@ -244,6 +255,18 @@ class BotConfiguration(BaseContainerConfigurationData):
     def joiner(self):
         return self._joiner
 
+    @property
+    def from_translator(self):
+        return self._from_translator
+
+    @property
+    def to_translator(self):
+        return self._to_translator
+
+    @property
+    def sentiment_analyser(self):
+        return self._sentiment
+
     def to_yaml(self, data, defaults=True):
 
         data['bot_root'] = self.bot_root
@@ -264,3 +287,6 @@ class BotConfiguration(BaseContainerConfigurationData):
         self.config_to_yaml(data, BotConversationsConfiguration(), defaults)
         self.config_to_yaml(data, BotSentenceSplitterConfiguration(), defaults)
         self.config_to_yaml(data, BotSentenceJoinerConfiguration(), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(name="from_translator"), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(name="to_translator"), defaults)
+        self.config_to_yaml(data, BotSentimentAnalyserConfiguration(), defaults)

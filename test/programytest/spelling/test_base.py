@@ -2,7 +2,7 @@ import unittest
 
 from programy.spelling.base import SpellingChecker
 from programy.config.bot.spelling import BotSpellingConfiguration
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 
 from programytest.client import TestClient
 

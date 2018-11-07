@@ -3,7 +3,7 @@ from programytest.parser.base import ParserTestsBaseClass
 from programy.parser.exceptions import ParserException
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.word import PatternWordNode
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 
 
 class PatternOneOrMoreWildCardNodeTests(ParserTestsBaseClass):

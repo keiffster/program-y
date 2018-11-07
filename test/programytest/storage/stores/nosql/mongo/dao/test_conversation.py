@@ -2,8 +2,8 @@ import unittest
 
 from programy.storage.stores.nosql.mongo.dao.conversation import Conversation
 
-from programy.dialog.dialog import Question
-from programy.dialog.dialog import Conversation as Convo
+from programy.dialog.question import Question
+from programy.dialog.conversation import Conversation as Convo
 
 from programytest.client import TestClient
 

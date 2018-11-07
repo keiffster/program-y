@@ -5,7 +5,7 @@ from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.condition import TemplateConditionVariable
 from programy.parser.template.nodes.condition import TemplateConditionNode
 from programy.parser.template.nodes.condition import TemplateConditionListItemNode
-from programy.dialog.dialog import Question
+from programy.dialog.question import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 

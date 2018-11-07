@@ -1,15 +1,16 @@
 import unittest
+import re
 from programy.processors.post.denormalize import DenormalizePostProcessor
 from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
 from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
-from programy.processors.post.emojize import EmojizePreProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
 from programytest.client import TestClient
-import re
+
 
 class PostProcessingTests(unittest.TestCase):
 
@@ -27,7 +28,7 @@ class PostProcessingTests(unittest.TestCase):
         punctuation = FormatPunctuationProcessor()
         numbers = FormatNumbersPostProcessor()
         multispaces = RemoveMultiSpacePostProcessor()
-        emojize = EmojizePreProcessor()
+        emojize = EmojizePostProcessor()
 
         output_str = denormalize.process(context, output_str)
         output_str = punctuation.process(context, output_str)

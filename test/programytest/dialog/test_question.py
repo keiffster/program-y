@@ -1,9 +1,9 @@
 import unittest
 
-from programy.dialog.dialog import Sentence, Question, Conversation
+from programy.dialog.sentence import Sentence
+from programy.dialog.question import Question
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
-from programy.context import ClientContext
 
 from programytest.client import TestClient
 

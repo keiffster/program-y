@@ -1,6 +1,6 @@
 import unittest
 
-from programy.dialog.dialog import Question
+from programy.dialog.question import Question
 from programy.extensions.admin.properties import PropertiesAdminExtension
 
 from programytest.client import TestClient

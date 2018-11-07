@@ -3,8 +3,8 @@ import shutil
 import os
 
 from programy.config.bot.conversations import BotConversationsConfiguration
-from programy.dialog.conversation import ConversationManager
-from programy.dialog.dialog import Question
+from programy.dialog.convo_mgr import ConversationManager
+from programy.dialog.question import Question
 
 from programytest.client import TestClient
 

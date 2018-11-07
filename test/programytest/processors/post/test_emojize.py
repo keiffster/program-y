@@ -1,5 +1,5 @@
 import unittest
-from programy.processors.post.emojize import EmojizePreProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
@@ -7,14 +7,14 @@ from programy.context import ClientContext
 from programytest.client import TestClient
 
 
-class EmojizeTests(unittest.TestCase):
+class EmojizePreProcessorTests(unittest.TestCase):
 
     def setUp(self):
         self.client = TestClient()
         self.bot = Bot(config=BotConfiguration(), client=self.client)
 
     def test_demojize(self):
-        processor = EmojizePreProcessor()
+        processor = EmojizePostProcessor()
         
         context = ClientContext(self.client, "TestUser")
         

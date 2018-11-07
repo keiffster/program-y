@@ -49,6 +49,19 @@ class BotConfigurationTests(unittest.TestCase):
               initial_topic: TOPIC1
               empty_on_start: false
         
+            from_translator:
+                classname: programy.translate.textblob_translator.TextBlobTranslator
+                from: fr
+                to: en 
+
+            to_translator:
+                classname: programy.translate.textblob_translator.TextBlobTranslator
+                from: en
+                to: fr
+
+            sentiment:
+                classname: programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
+                scores: programy.sentiment.scores.SentimentScores
 
         """, ConsoleConfiguration(), ".")
 
@@ -90,6 +103,17 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertIsNotNone(bot_config.conversations.initial_topic, "TOPIC1")
         self.assertIsNotNone(bot_config.conversations.empty_on_start, False)
 
+        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", bot_config.from_translator.classname)
+        self.assertEqual("en", bot_config.from_translator.to_lang)
+        self.assertEqual("fr", bot_config.from_translator.from_lang)
+
+        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", bot_config.to_translator.classname)
+        self.assertEqual("fr", bot_config.to_translator.to_lang)
+        self.assertEqual("en", bot_config.to_translator.from_lang)
+
+        self.assertEqual("programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", bot_config.sentiment_analyser.classname)
+        self.assertEqual("programy.sentiment.scores.SentimentScores", bot_config.sentiment_analyser.scores)
+
     def test_without_data(self):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
@@ -125,6 +149,10 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual('.?!', bot_config.joiner.join_chars)
 
         self.assertIsNotNone(bot_config.conversations)
+
+        self.assertIsNotNone(bot_config.from_translator)
+        self.assertIsNotNone(bot_config.to_translator)
+        self.assertIsNotNone(bot_config.sentiment_analyser)
 
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()
