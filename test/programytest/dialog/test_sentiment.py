@@ -27,13 +27,13 @@ class SentimentTests(unittest.TestCase):
         sentence = Sentence(self.client_context._bot.brain.tokenizer, "HELLO")
         sentence.calculate_sentinment_score(self.client_context)
 
-        self.assertEqual(0.00, sentence.polarity)
+        self.assertEqual(0.00, sentence.positivity)
         self.assertEqual(0.00, sentence.subjectivity)
 
         sentence = Sentence(self.client_context._bot.brain.tokenizer, "I hate you")
         sentence.calculate_sentinment_score(self.client_context)
 
-        self.assertEqual(-0.8, sentence.polarity)
+        self.assertEqual(-0.8, sentence.positivity)
         self.assertEqual(0.9, sentence.subjectivity)
 
     def test_question_sentiment(self):
@@ -43,15 +43,15 @@ class SentimentTests(unittest.TestCase):
         for sentence in question.sentences:
             sentence.calculate_sentinment_score(self.client_context)
 
-        polarity, subjectivity = question.calculate_sentinment_score()
-        self.assertEqual(0.0, polarity)
+        positivity, subjectivity = question.calculate_sentinment_score()
+        self.assertEqual(0.0, positivity)
         self.assertEqual(0.0, subjectivity)
 
         question = Question.create_from_text(self.client_context, "I hate you. Your car is rubbish")
         question.recalculate_sentinment_score(self.client_context)
 
-        polarity, subjectivity = question.calculate_sentinment_score()
-        self.assertEqual(-0.4, polarity)
+        positivity, subjectivity = question.calculate_sentinment_score()
+        self.assertEqual(-0.4, positivity)
         self.assertEqual(0.45, subjectivity)
 
     def test_conversation_sentiment(self):
@@ -68,6 +68,6 @@ class SentimentTests(unittest.TestCase):
 
         conversation.recalculate_sentiment_score(self.client_context)
 
-        polarity, subjectivity = conversation.calculate_sentiment_score()
-        self.assertEqual(-0.4380952380952381, polarity)
+        positivity, subjectivity = conversation.calculate_sentiment_score()
+        self.assertEqual(-0.4380952380952381, positivity)
         self.assertEqual(0.5857142857142857, subjectivity)

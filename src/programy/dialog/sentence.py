@@ -25,7 +25,7 @@ class Sentence(object):
         self._words = self._tokenizer.texts_to_words(text)
         self._response = None
         self._matched_context = None
-        self._polarity = 0.00
+        self._positivity = 0.00
         self._subjectivity = 0.00
 
     @property
@@ -33,12 +33,12 @@ class Sentence(object):
         return self._words
 
     @property
-    def polarity(self):
-        return self._polarity
+    def positivity(self):
+        return self._positivity
 
-    @polarity.setter
-    def polarity(self, value):
-        self._polarity = value
+    @positivity.setter
+    def positivity(self, value):
+        self._positivity = value
 
     @property
     def subjectivity(self):
@@ -98,9 +98,9 @@ class Sentence(object):
         assert (client_context is not None)
 
         if client_context.bot.sentiment_analyser is not None:
-            polarity, subjectivity = client_context.bot.sentiment_analyser.analyse_all(self.text())
-            YLogger.debug(client_context, "Sentiment: polarity[%f], subjectivity [%f]", polarity, subjectivity)
-            self._polarity = polarity
+            positivity, subjectivity = client_context.bot.sentiment_analyser.analyse_all(self.text())
+            YLogger.debug(client_context, "Sentiment: positivity[%f], subjectivity [%f]", positivity, subjectivity)
+            self._positivity = positivity
             self._subjectivity = subjectivity
 
 

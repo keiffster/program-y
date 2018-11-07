@@ -64,6 +64,6 @@ class Conversation(object):
 
         if 'conversation' in data:
             conversation.conversation = Convo(client_context)
-            conversation.conversation.from_json(data['conversation'])
+            conversation.conversation.from_json(client_context, data['conversation'])
 
         return conversation

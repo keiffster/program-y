@@ -14,8 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.dialog.sentence import Sentence
+
 
 class Question(object):
 
@@ -26,6 +26,7 @@ class Question(object):
             question.split_into_sentences(client_context, text)
         else:
             question.sentences.append(Sentence(client_context.brain.tokenizer, text))
+        question.recalculate_sentinment_score(client_context)
         return question
 
     @staticmethod
@@ -48,16 +49,16 @@ class Question(object):
         self._current_sentence_no = -1
 
     def debug_info(self):
-        str = ""
+        text = ""
         for sentence in self._sentences:
-            str += sentence.text()
-            str += " = "
+            text += sentence.text()
+            text += " = "
             if sentence.response is not None:
-                str += sentence.response
+                text += sentence.response
             else:
-                str += "N/A"
-            str += ", "
-        return str
+                text += "N/A"
+            text += ", "
+        return text
 
     @property
     def sentences(self):
@@ -114,14 +115,14 @@ class Question(object):
 
     def calculate_sentinment_score(self):
 
-        polarity = 0.00
+        positivity = 0.00
         subjectivity = 0.00
 
         for sentence in self._sentences:
-            polarity += sentence.polarity
+            positivity += sentence.positivity
             subjectivity += sentence.subjectivity
 
-        polarity /= len(self._sentences)
+        positivity /= len(self._sentences)
         subjectivity /= len(self._sentences)
 
-        return polarity, subjectivity
+        return positivity, subjectivity

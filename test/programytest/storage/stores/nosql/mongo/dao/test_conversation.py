@@ -39,7 +39,7 @@ class ConversationTests(unittest.TestCase):
         self.assertIsNotNone(conversation.conversation)
 
         doc = conversation.to_document()
-        self.assertEqual({'clientid': 'testclient', 'userid': 'tesuser', 'botid': 'bot', 'brainid': 'brain', 'conversation': {'client_context': {'clientid': 'testclient', 'userid': 'tesuser', 'botid': 'bot', 'brainid': 'brain', 'depth': 0}, 'questions': [{'sentences': [{'question': 'Hello world', 'response': 'Hello matey'}], 'srai': False, 'properties': {}, 'current_sentence_no': -1}], 'max_histories': 100, 'properties': {'topic': '*'}}},
+        self.assertEqual({'clientid': 'testclient', 'userid': 'tesuser', 'botid': 'bot', 'brainid': 'brain', 'conversation': {'client_context': {'clientid': 'testclient', 'userid': 'tesuser', 'botid': 'bot', 'brainid': 'brain', 'depth': 0}, 'questions': [{'sentences': [{'positivity': 0.0, 'question': 'Hello world', 'response': 'Hello matey', 'subjectivity': 0.0}], 'srai': False, 'properties': {}, 'current_sentence_no': -1}], 'max_histories': 100, 'properties': {'topic': '*'}}},
                           doc)
 
         conversation2 = Conversation.from_document(client_context, doc)

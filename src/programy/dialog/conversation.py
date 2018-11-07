@@ -159,13 +159,15 @@ class Conversation(object):
 
             for sentence in question.sentences:
                 json_sentence = {"question": sentence.text(),
-                                 "response": sentence.response
+                                 "response": sentence.response,
+                                 "positivity": sentence.positivity,
+                                 "subjectivity": sentence.subjectivity
                                  }
                 json_question['sentences'].append(json_sentence)
 
         return json_data
 
-    def from_json(self, json_data):
+    def from_json(self, client_context, json_data):
         if json_data is not None:
             json_questions = json_data['questions']
             for json_question in json_questions:
@@ -174,6 +176,7 @@ class Conversation(object):
                     question = Question.create_from_text(self._client_context, json_sentence['question'])
                     question.sentence(0).response = json_sentence['response']
                     self._questions.append(question)
+            self.recalculate_sentiment_score(client_context)
 
     def recalculate_sentiment_score(self, client_context):
         for question in self._questions:
