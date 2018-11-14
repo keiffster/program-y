@@ -18,10 +18,12 @@ New in this release
 Where Used
 ===========
 Program-Y is used in a variety of projects, some of which are public
+
 - `Orange Research <https://oma-chatbot.kmt.orange.com/`
 - `Cataluna University <https://bpm.cs.upc.edu/chatbot>`
 - `Heriot Watt University <https://www.researchgate.net/publication/319723461_Hybrid_Chat_and_Task_Dialogue_for_More_Engaging_HRI_Using_Reinforcement_Learning>`
-- Major automotive manufacturer`
+- Major automotive manufacturer
+
 If you want to be listed, please let me know
 
 
