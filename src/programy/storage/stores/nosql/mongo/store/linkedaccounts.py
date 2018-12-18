@@ -38,13 +38,6 @@ class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
         self.add_document(linked)
         return True
 
-    def unlink_account(self, primary_userid, linked_userid):
-        YLogger.info(self, "Unlinking accounts [%s] [%s] in Mongo", primary_userid, linked_userid)
-        collection = self.collection()
-        collection.delete_many({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid,
-                                MongoLinkedAccountStore.LINKED_USERID: linked_userid})
-        return True
-
     def unlink_accounts(self, primary_userid):
         YLogger.info(self, "Unlinking accounts [%s] in Mongo", primary_userid)
         collection = self.collection()
@@ -53,18 +46,15 @@ class MongoLinkedAccountStore(MongoStore, LinkedAccountStore):
 
     def linked_accounts(self, primary_userid):
         collection = self.collection()
-        documents = collection.find({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
+        linked_accounts = collection.find({MongoLinkedAccountStore.PRIMARY_USERID: primary_userid})
         accounts = []
-        for doc in documents:
-            linked = LinkedAccount.from_document(doc)
-            accounts.append(linked.linked_userid)
+        for account in linked_accounts:
+            accounts.append(account['linked_userid'])
         return accounts
 
     def primary_account(self, linked_userid):
         collection = self.collection()
-        documents = collection.find({MongoLinkedAccountStore.LINKED_USERID: linked_userid})
-        accounts = []
-        for doc in documents:
-            linked = LinkedAccount.from_document(doc)
-            accounts.append(linked.primary_userid)
-        return accounts
+        account = collection.find_one({MongoLinkedAccountStore.LINKED_USERID: linked_userid})
+        if account is not None:
+            return account['primary_userid']
+        return None

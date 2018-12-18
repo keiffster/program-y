@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.storage.stores.sql.store.sqlstore import SQLStore
 from programy.storage.entities.link import LinkStore
 from programy.storage.stores.sql.dao.link import Link
-
+from sqlalchemy import and_
 
 class SQLLinkStore(SQLStore, LinkStore):
 
@@ -28,27 +28,46 @@ class SQLLinkStore(SQLStore, LinkStore):
     def empty(self):
         self._storage_engine.session.query(Link).delete()
 
-    def create_link(self, primary_userid, generated_key, provided_key):
-        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key)
+    def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
+        link = Link(primary_user=primary_userid, generated_key=generated_key, provided_key=provided_key, expires=expires, expired=expired, retry_count=retry_count)
         self._storage_engine.session.add(link)
         return link
 
     def get_link(self, primary_userid):
-        db_links = self._storage_engine.session.query(Link).filter(Link.primary_user==primary_userid)
-        links = []
-        for link in db_links:
-            links.append({"primary_user": link.primary_user, "generated_key": link.generated_key, "provided_key": link.provided_key})
-        return links
+        try:
+            link = self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).one()
+            return link
+        except Exception as e:
+            print(e)
+        return None
 
     def remove_link(self, primary_userid):
-        self._storage_engine.session.query(Link).filter(Link.primary_user==primary_userid).delete()
+        try:
+            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid).delete()
+            return True
+        except Exception as e:
+            return False
 
-    def link_exists(self, userid, provided_key, generated_key):
-        link = self._storage_engine.session.query(Link).filter(Link.primary_user==userid,
-                                                                Link.generated_key==generated_key,
-                                                                Link.provided_key==provided_key).one()
+    def link_exists(self, primary_userid, provided_key, generated_key):
+        try:
+            self._storage_engine.session.query(Link).filter(Link.primary_user == primary_userid,
+                                                            Link.provided_key == provided_key,
+                                                            Link.generated_key == generated_key).one()
+            return True
+        except Exception as e:
+            return False
 
-        if link is not None:
+    def update_link(self, link):
+        existing = self._storage_engine.session.query(Link).filter(and_(Link.id == link.id)).one()
+        if existing is not None:
+            existing.primary_user = link.primary_user
+            existing.generated_key = link.generated_key
+            existing.provided_key = link.provided_key
+            existing.expired = link.expired
+            existing.expires = link.expires
+            existing.retry_count = link.retry_count
+
+            self._storage_engine.session.commit()
             return True
 
         return False

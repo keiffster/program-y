@@ -118,11 +118,16 @@ class Question(object):
         positivity = 0.00
         subjectivity = 0.00
 
+        count = 0
         for sentence in self._sentences:
             positivity += sentence.positivity
             subjectivity += sentence.subjectivity
+            count += 1
 
-        positivity /= len(self._sentences)
-        subjectivity /= len(self._sentences)
+        if count > 0:
+            positivity /= count
+            subjectivity /= count
+        else:
+            subjectivity = 0.5
 
         return positivity, subjectivity

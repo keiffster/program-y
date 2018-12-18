@@ -15,7 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer
+from sqlalchemy import Column, Integer, String
 
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
@@ -25,8 +25,8 @@ class LinkedAccount(Base):
     __tablename__ = 'linkaccounts'
 
     id = Column(Integer, primary_key=True)
-    primary_user = Column(Integer)
-    linked_user = Column(Integer)
+    primary_user = Column(String(16))
+    linked_user = Column(String(16))
 
     def __repr__(self):
        return "<Linked(id='%s', primary_user='%s', linked_user='%s')>" % (DAOUtils.valid_id(self.id), self.primary_user, self.linked_user)

@@ -43,7 +43,10 @@ class TextBlobSentimentAnalyser(BaseSentimentAnalyser):
             subjectivity += sentence.sentiment.subjectivity
             count += 1
 
-        polarity /= count
-        subjectivity /= count
+        if count > 0:
+            polarity /= count
+            subjectivity /= count
+        else:
+            subjectivity = 0.5
 
         return polarity, subjectivity

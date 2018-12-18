@@ -17,11 +17,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class UserStore(object):
 
-    def add_user(self, userid, client):
+    def add_user(self, userid, clientid):
         raise NotImplementedError("add_user missing from User Store")
 
-    def get_user(self, userid):
-        raise NotImplementedError("get_user missing from User Store")
+    def exists(self, userid, clientid):
+        raise NotImplementedError("exists missing from User Store")
 
-    def get_client_users(self, clientid):
-        raise NotImplementedError("get_client_users missing from User Store")
+    def get_links(self, userid):
+        raise NotImplementedError("get_links missing from User Store")
+
+    def remove_user(self, userid, clientid):
+        raise NotImplementedError("remove_user missing from User Store")
+
+    def remove_user_from_all_clients(self, userid):
+        raise NotImplementedError("remove_user_from_all_clients missing from User Store")

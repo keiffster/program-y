@@ -57,7 +57,7 @@ class RedisVariableStore(RedisStore, VariablesStore):
             h_key = self.create_key(clientid, userid)
             s_key = self._storage_engine._sessions_set_key
 
-            YLogger.debug(self, "Adding variables [%s] - [%s]"%s_key, h_key)
+            YLogger.debug(self, "Adding variables [%s] - [%s]", s_key, h_key)
             self.save(h_key, s_key, clientid, variables)
 
         except Exception as e:

@@ -32,6 +32,13 @@ class SQLUserStore(SQLStore, UserStore):
         self._storage_engine.session.add(user)
         return user
 
+    def exists(self, userid, clientid):
+        try:
+            self._storage_engine.session.query(User).filter(User.userid == userid, User.client == clientid).one()
+            return True
+        except Exception:
+            return False
+
     def get_links(self, userid):
         links = []
         db_users = self._storage_engine.session.query(User).filter(User.userid == userid)
@@ -39,16 +46,21 @@ class SQLUserStore(SQLStore, UserStore):
             links.append(user.client)
         return links
 
-    def get_user(self, userid):
-        db_users = self._storage_engine.session.query(User).filter(User.userid == userid)
-        users = []
-        for user in db_users:
-            users.append({"userid": user.userid, "client": user.client})
-        return users[0]
+    def remove_user(self, userid, clientid):
+        try:
+            self._storage_engine.session.query(User).filter(User.userid == userid, User.client == clientid).delete()
+            return True
+        except:
+            pass
 
-    def get_client_users(self, clientid):
-        db_users = self._storage_engine.session.query(User).filter(User.client == clientid)
-        users = []
-        for user in db_users:
-            users.append({"userid": user.userid, "client": user.client})
-        return users
+        return False
+
+    def remove_user_from_all_clients(self, userid):
+        try:
+            self._storage_engine.session.query(User).filter(User.userid == userid).delete()
+            return True
+        except:
+            pass
+
+        return False
+

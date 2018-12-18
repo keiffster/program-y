@@ -27,4 +27,3 @@ class SQLDenormalStoreTests(DenormalStoreAsserts):
         store = SQLDenormalStore(engine)
 
         self.assert_upload_from_file(store)
-

@@ -18,8 +18,8 @@ class RedisStorageEngineTests(StorageEngineTestUtils):
         self.assertIsNotNone(engine.configuration)
 
     @unittest.skipIf(Engines.redis is False, Engines.redis_disabled)
-    def test_properties(self):
+    def test_variables(self):
         config = RedisStorageConfiguration()
         engine = RedisStorageEngine(config)
         engine.initialise()
-        self.property_asserts(storage_engine=engine)
+        self.variable_asserts(storage_engine=engine)

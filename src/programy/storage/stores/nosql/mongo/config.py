@@ -24,7 +24,7 @@ class MongoStorageConfiguration(BaseConfigurationData):
     def __init__(self):
         BaseConfigurationData.__init__(self, name="config")
 
-        self._url = 'mongodb://localhost:32768/'
+        self._url = 'mongodb://localhost:27017/'
         self._database = "programy"
         self._drop_all_first = True
 

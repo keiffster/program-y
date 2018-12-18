@@ -42,8 +42,8 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         translator_config.load_config_section(yaml, bot_config, ".")
 
         self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", translator_config.classname)
-        self.assertEqual("en", translator_config.to_lang)
-        self.assertEqual("en", translator_config.from_lang)
+        self.assertIsNone(translator_config.to_lang)
+        self.assertIsNone(translator_config.from_lang)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

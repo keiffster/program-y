@@ -61,7 +61,7 @@ class PatternPriorityWordNode(PatternNode):
             if self.userid != client_context.userid:
                 return EqualsMatch(False, word_no)
 
-        if self.priority_word == word:
+        if self.equals_ignore_case(self.priority_word, word):
             return EqualsMatch(True, word_no, word)
 
         return EqualsMatch(False, word_no)

@@ -23,6 +23,9 @@ class BotSentenceSplitterConfiguration(BaseConfigurationData):
 
     DEFAULT_CLASSNAME = "programy.dialog.splitter.regex.RegexSentenceSplitter"
     DEFAULT_SPLITCHARS = '[:;,.?!]'
+    JAPANESE_SPLITTERS = "。"
+    CHINESE_SPLITTERS = "？！"
+    ALL_SPLITTERS = DEFAULT_SPLITCHARS + JAPANESE_SPLITTERS + CHINESE_SPLITTERS
 
     def __init__(self):
         BaseConfigurationData.__init__(self, name="splitter")

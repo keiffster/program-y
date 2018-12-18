@@ -18,4 +18,4 @@ class PersonssStoreAsserts(unittest.TestCase):
 
         self.assertEqual(person_collection.person(" WITH YOU "),
                          [re.compile('(^WITH YOU | WITH YOU | WITH YOU$)', re.IGNORECASE), ' WITH ME2 '])
-        self.assertEqual(person_collection.personalise_string("Is he with you"), "Is he WITH ME2")
+        self.assertEqual(person_collection.personalise_string("Is he with you"), "Is he with me2")

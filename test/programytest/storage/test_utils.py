@@ -4,7 +4,7 @@ from programy.dialog.question import Question
 from programy.dialog.conversation import Conversation
 
 from programytest.client import TestClient
-
+import datetime
 
 class StorageEngineTestUtils(unittest.TestCase):
 
@@ -23,16 +23,25 @@ class StorageEngineTestUtils(unittest.TestCase):
 
     def link_asserts(self, storage_engine):
         link_store = storage_engine.link_store()
-        link_store.create_link(primary_userid=1, generated_key='AFG37CE', provided_key="Password")
+        link_store.create_link(primary_userid=1, generated_key='AFG37CE', provided_key="Password", expires=datetime.datetime.now())
         link_store.commit ()
 
     def property_asserts(self, storage_engine):
         property_store = storage_engine.property_store()
         property_store.add_property(name="topic", value="*")
         property_store.add_properties({"name": "Fred",
-                                                                  "age": "47",
-                                                                  "occupation": "Gardener"})
+                                       "age": "47",
+                                       "occupation": "Gardener"})
         property_store.commit()
+
+    def variable_asserts(self, storage_engine):
+        variables_store = storage_engine.variables_store()
+        variables_store.add_variable(clientid='test', userid='test', name="topic", value="*")
+        variables_store.add_variables(clientid='test', userid='test',
+                                      variables={"name": "Fred",
+                                       "age": "47",
+                                       "occupation": "Gardener"})
+        variables_store.commit()
 
     def conversation_asserts(self, storage_engine, visit=True):
 

@@ -193,7 +193,7 @@ class StorageFactoryTests(unittest.TestCase):
         self.assertIsNone(factory.entity_storage_engine("other"))
 
     @unittest.skipIf(Engines.mongo is False or Engines.sql is False or Engines.redis is False, Engines.all_disabled)
-    def test_initialise_with_config_mixed(self):
+    def  test_initialise_with_config_mixed(self):
 
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)

@@ -60,7 +60,7 @@ class GenderStoreAsserts(unittest.TestCase):
         store.load(collection)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
     def assert_upload_from_text_file(self, store):
 
@@ -72,7 +72,7 @@ class GenderStoreAsserts(unittest.TestCase):
         store.load(collection)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")
 
     def assert_upload_csv_file(self, store, filename):
 
@@ -84,4 +84,4 @@ class GenderStoreAsserts(unittest.TestCase):
         store.load(collection)
 
         self.assertEqual(collection.gender(" WITH HIM "), [re.compile('(^WITH HIM | WITH HIM | WITH HIM$)', re.IGNORECASE), ' WITH HER '])
-        self.assertEqual(collection.genderise_string("This is with him "), "This is WITH HER")
+        self.assertEqual(collection.genderise_string("This is with him "), "This is with her")

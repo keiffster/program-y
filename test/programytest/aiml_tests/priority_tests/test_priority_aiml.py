@@ -78,3 +78,15 @@ class PriorityAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, 'NOT A PRIORITY TEST.')
 
+    def test_priority_case(self):
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO FRIEND")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Hello my friend!')
+
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO Friend")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Hello my friend!')
+
+        response = self._client_context.bot.ask_question(self._client_context, "HELLO friend")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Hello my friend!')

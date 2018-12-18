@@ -44,9 +44,23 @@ class SQLLookupsStore(SQLStore, LookupsStore):
     def _get_entity(self, key, value):
         raise NotImplementedError()
 
-    def add(self, key, value):
+    def _exists(self, key):
+        raise NotImplementedError()
+
+    def add(self, key, value, overwrite_existing=False):
         lookup = self._get_entity(key=key, value=value)
-        self._storage_engine.session.add(lookup)
+        if self._exists(key):
+            if overwrite_existing:
+                YLogger.info(self, "Updating lookup in SQL [%s] [%s]", key, value)
+                lookup.value = value
+                self._storage_engine.session.commit()
+            else:
+                YLogger.error(self, "Existing value in SQL lookup [%s] = [%s]", key, value)
+                return False
+        else:
+            YLogger.debug(self, "Adding lookup to SQL [%s] = [%s]", key, value)
+            self._storage_engine.session.add(lookup)
+
         return True
 
     def split_into_fields(self, line):
@@ -95,6 +109,14 @@ class SQLDenormalStore(SQLLookupsStore):
     def _get_entity(self, key, value):
         return Denormal(key=key, value=value)
 
+    def _exists(self, key):
+        try:
+            self._storage_engine.session.query(Denormal).filter(Denormal.key==key).one()
+            return True
+        except Exception as e:
+            print (e)
+        return False
+
 
 class SQLNormalStore(SQLLookupsStore):
 
@@ -106,6 +128,14 @@ class SQLNormalStore(SQLLookupsStore):
 
     def _get_entity(self, key, value):
         return Normal(key=key, value=value)
+
+    def _exists(self, key):
+        try:
+            self._storage_engine.session.query(Normal).filter(Denormal.key==key).one()
+            return True
+        except Exception as e:
+            print (e)
+        return False
 
 
 class SQLGenderStore(SQLLookupsStore):
@@ -119,6 +149,14 @@ class SQLGenderStore(SQLLookupsStore):
     def _get_entity(self, key, value):
         return Gender(key=key, value=value)
 
+    def _exists(self, key):
+        try:
+            self._storage_engine.session.query(Normal).filter(Gender.key==key).one()
+            return True
+        except Exception as e:
+            print (e)
+        return False
+
 
 class SQLPersonStore(SQLLookupsStore):
 
@@ -131,6 +169,14 @@ class SQLPersonStore(SQLLookupsStore):
     def _get_entity(self, key, value):
         return Person(key=key, value=value)
 
+    def _exists(self, key):
+        try:
+            self._storage_engine.session.query(Normal).filter(Person.key==key).one()
+            return True
+        except Exception as e:
+            print (e)
+        return False
+
 
 class SQLPerson2Store(SQLLookupsStore):
 
@@ -142,3 +188,11 @@ class SQLPerson2Store(SQLLookupsStore):
 
     def _get_entity(self, key, value):
         return Person2(key=key, value=value)
+
+    def _exists(self, key):
+        try:
+            self._storage_engine.session.query(Person2).filter(Denormal.key==key).one()
+            return True
+        except Exception as e:
+            print (e)
+        return False

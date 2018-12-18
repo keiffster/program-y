@@ -38,15 +38,25 @@ class MongoUserStore(MongoStore, UserStore):
         self.add_document(user)
         return True
 
-    def get_user(self, userid):
+    def exists(self, userid, clientid):
         collection = self.collection()
-        user = collection.find_one({MongoUserStore.USERID: userid})
-        return user
+        user = collection.find_one({MongoUserStore.USERID: userid, MongoUserStore.CLIENT: clientid})
+        return bool(user is not None)
 
-    def get_client_users(self, client):
+    def get_links(self, userid):
         collection = self.collection()
-        db_users = collection.find({MongoUserStore.CLIENT: client})
-        users = []
-        for user in db_users:
-            users.append(user)
-        return users
+        users = collection.find({MongoUserStore.USERID: userid})
+        links = []
+        for user in users:
+            links.append(user['client'])
+        return links
+
+    def remove_user(self, userid, clientid):
+        collection = self.collection()
+        collection.delete_many({MongoUserStore.USERID: userid, MongoUserStore.CLIENT: clientid})
+        return True
+
+    def remove_user_from_all_clients(self, userid):
+        collection = self.collection()
+        collection.delete_many({MongoUserStore.USERID: userid})
+        return True

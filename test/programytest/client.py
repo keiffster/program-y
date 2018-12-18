@@ -9,6 +9,7 @@ from programy.storage.stores.file.store.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.factory import StorageFactory
 
+
 class TestClient(BotClient):
 
     def __init__(self, debug=False, level=logging.ERROR):

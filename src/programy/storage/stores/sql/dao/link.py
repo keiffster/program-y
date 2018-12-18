@@ -25,13 +25,14 @@ class Link(Base):
     __tablename__ = 'links'
 
     id = Column(Integer, primary_key=True)
-    primary_user = Column(Integer)
+    primary_user = Column(String(16))
     generated_key = Column(String(256))
     provided_key = Column(String(256))
     expired = Column(Boolean)
     expires = Column(DateTime)
+    retry_count = Column(Integer)
 
     def __repr__(self):
-        return "<Linked(id='%s', primary_user='%s', generated_key='%s', provided_key='%s', expired='%s', expires='%s')>" % \
-               (DAOUtils.valid_id(self.id), self.primary_user, self.generated_key, self.provided_key, self.expired, self.expires)
+        return "<Linked(id='%s', primary_user='%s', provided_key='%s', generated_key='%s', expired='%s', expires='%s', retry_count='%d')>" % \
+               (DAOUtils.valid_id(self.id), self.primary_user, self.provided_key, self.generated_key, self.expired, self.expires, self.retry_count)
 

@@ -7,18 +7,29 @@ class UserStoreAsserts(unittest.TestCase):
         store.empty()
 
         store.add_user('1', "console")
+        store.add_user('1', "facebook")
         store.add_user('2', "console")
         store.add_user('3', "twitter")
         store.add_user('4', "facebook")
         store.add_user('5', "console")
         store.commit()
 
-        user = store.get_user('1')
-        self.assertEqual(user['userid'], '1')
-        self.assertEqual(user['client'], "console")
+        self.assertTrue(store.exists('1', "console"))
+        self.assertFalse(store.exists('2', "facebook"))
 
-        users = store.get_client_users("console")
-        self.assertEqual(3, len(users))
+        links = store.get_links('1')
+        self.assertEquals(['console', "facebook"], links)
 
-        for user in users:
-            self.assertEqual(user['client'], 'console')
+        links = store.get_links('999')
+        self.assertEquals([], links)
+
+        store.remove_user('1', "console")
+        self.assertFalse(store.exists('1', "console"))
+
+        store.add_user('1', "console")
+        self.assertTrue(store.exists('1', "console"))
+        self.assertTrue(store.exists('1', "facebook"))
+
+        store.remove_user_from_all_clients('1')
+        self.assertFalse(store.exists('1', "console"))
+        self.assertFalse(store.exists('1', "facebook"))

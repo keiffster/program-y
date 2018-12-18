@@ -187,13 +187,19 @@ class Conversation(object):
         polarity = 0.00
         subjectivity = 0.00
 
+        count = 0
         for question in self._questions:
             q_polarity, q_subjectivity = question.calculate_sentinment_score()
 
             polarity += q_polarity
             subjectivity += q_subjectivity
 
-        polarity /= len(self._questions)
-        subjectivity /= len(self._questions)
+            count += 1
+
+        if count > 0:
+            polarity /= count
+            subjectivity /= count
+        else:
+            subjectivity = 0.5
 
         return polarity, subjectivity

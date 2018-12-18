@@ -24,6 +24,8 @@ class MongoLinkStore(MongoStore, LinkStore):
 
     LINKS = "links"
     PRIMARY_USER = "primary_user"
+    PROVIDED_KEY = 'provided_key'
+    GENERATED_KEY = 'generated_key'
 
     def __init__(self, storage_engine):
         MongoStore.__init__(self, storage_engine)
@@ -31,20 +33,30 @@ class MongoLinkStore(MongoStore, LinkStore):
     def collection_name(self):
         return MongoLinkStore.LINKS
 
-    def create_link(self, primary_userid, generated_key, provided_key):
+    def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
         YLogger.info(self, "Creating link in Mongo [%s] [%s] [%s]", primary_userid, generated_key, provided_key)
-        link = Link(primary_userid, generated_key, provided_key)
+        link = Link(primary_userid, provided_key, generated_key, expires, expired, retry_count)
         self.add_document(link)
         return True
 
     def get_link(self, primary_user):
         collection = self.collection()
-        documents = collection.find({MongoLinkStore.PRIMARY_USER: primary_user})
-        links = []
-        for doc in documents:
-            links.append(doc)
-        return links
+        doc = collection.find_one({MongoLinkStore.PRIMARY_USER: primary_user})
+        if doc is not None:
+            return Link.from_document(doc)
+        return None
 
     def remove_link(self, primary_user):
         collection = self.collection()
         collection.delete_many({MongoLinkStore.PRIMARY_USER: primary_user})
+        return True
+
+    def link_exists(self, userid, provided_key, generated_key):
+        collection = self.collection()
+        link = collection.find_one({MongoLinkStore.PRIMARY_USER: userid, MongoLinkStore.PROVIDED_KEY: provided_key, MongoLinkStore.GENERATED_KEY: generated_key})
+        return bool(link is not None)
+
+    def update_link(self, link):
+        collection = self.collection()
+        collection.update({'_id': link.id}, Link.to_document(link))
+        return True

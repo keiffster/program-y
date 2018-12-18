@@ -164,14 +164,16 @@ class TextBlobTranslator(BaseTranslator):
 
     def translate(self, text, from_lang, to_lang="EN"):
 
-        YLogger.debug(None, "Translateing [%s] from [%s] to [%s], are they the same?", text, from_lang, to_lang)
+        YLogger.debug(None, "Translating [%s] from [%s] to [%s], are they the same?", text, from_lang, to_lang)
 
         blob = TextBlob(text)
         try:
             if from_lang is not None:
-                return str(blob.translate(from_lang=from_lang, to=to_lang))
+                translated = str(blob.translate(from_lang=from_lang, to=to_lang))
             else:
-                return str(blob.translate(to=to_lang))
+                translated = str(blob.translate(to=to_lang))
+            YLogger.debug(None, "Translated [%s] to [%s]", text, translated)
+            return translated
 
         except NotTranslated as nte:
             YLogger.exception(None, "Unable to translate text from [%s] to [%s], are they the same?", nte, from_lang, to_lang)

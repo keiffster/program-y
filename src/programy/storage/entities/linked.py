@@ -18,16 +18,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 class LinkedAccountStore(object):
 
     def link_accounts(self, primary_userid, linked_userid):
-        raise NotImplementedError("link_accounts missing from Linked Account DAO")
+        raise NotImplementedError("link_accounts missing from Link Store")
 
-    def unlink_account(self, primary_userid, linked_userid):
-        raise NotImplementedError("unlink_account missing from Linked Account DAO")
+    def unlink_accounts(self, userid):
+        raise NotImplementedError("unlink_accounts missing from Link Store")
 
-    def unlink_accounts(self, primary_userid):
-        raise NotImplementedError("unlink_accounts missing from Linked Account DAO")
-
-    def linked_accounts(self, primary_userid):
-        raise NotImplementedError("linked_accounts missing from Linked Account DAO")
-
-    def primary_account(self, linked_userid):
-        raise NotImplementedError("primary_account missing from Linked Account DAO")
+    def primary_account(self, secondary_userid):
+        raise NotImplementedError("primary_account missing from Link Store")

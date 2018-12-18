@@ -26,7 +26,7 @@ class Sentence(object):
         self._response = None
         self._matched_context = None
         self._positivity = 0.00
-        self._subjectivity = 0.00
+        self._subjectivity = 0.5
 
     @property
     def words(self):

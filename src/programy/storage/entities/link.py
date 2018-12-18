@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 class LinkStore(object):
 
-    def create_link(self, primary_userid, generated_key, provided_key):
+    def create_link(self, primary_userid, provided_key, generated_key, expires, expired=False, retry_count=0):
         raise NotImplementedError("create_link missing from Link Store")
 
     def get_link(self, primary_userid):
@@ -29,3 +29,6 @@ class LinkStore(object):
 
     def link_exists(self, userid, provided_key, generated_key):
         raise NotImplementedError("link_exists missing from Link Store")
+
+    def update_link(self, link):
+        raise NotImplementedError("update_link missing from Link Store")

@@ -18,13 +18,14 @@ from programy.storage.stores.utils import DAOUtils
 
 class Link(object):
 
-    def __init__(self, primary_user, generated_key, provided_key, expired=None, expires=None):
+    def __init__(self, primary_user, provided_key, generated_key, expires=None, expired=False, retry_count=0):
         self.id = None
         self.primary_user = primary_user
-        self.generated_key = generated_key
         self.provided_key = provided_key
-        self.expired = expired
+        self.generated_key = generated_key
         self.expires = expires
+        self.expired = expired
+        self.retry_count = retry_count
 
     def __repr__(self):
         return "<Linked(id='%d', primary='%s', generated='%s', provided='%s', expired='%s', expires='%s')>" % (
@@ -32,15 +33,18 @@ class Link(object):
             self.primary_user,
             self.generated_key,
             self.provided_key,
+            DAOUtils.valid_id(self.expires),
             DAOUtils.valid_id(self.expired),
-            DAOUtils.valid_id(self.expires))
+        )
 
     def to_document(self):
         document = {"primary_user": self.primary_user,
-                    "generated_key": self.generated_key,
                     "provided_key": self.provided_key,
+                    "generated_key": self.generated_key,
+                    "expires": self.expires,
                     "expired": self.expired,
-                    "expires": self.expires}
+                    "retry_count": self.retry_count
+                    }
         if self.id is not None:
             document['_id'] = self.id
         return document
@@ -56,8 +60,10 @@ class Link(object):
             link.generated_key = data['generated_key']
         if 'provided_key' in data:
             link.provided_key = data['provided_key']
-        if 'expired' in data:
-            link.expired = data['expired']
         if 'expires' in data:
             link.expires = data['expires']
+        if 'expired' in data:
+            link.expired = data['expired']
+        if 'retry_count' in data:
+            link.retry_count = data['retry_count']
         return link

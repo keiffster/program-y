@@ -33,11 +33,12 @@ class SQLLinkedAccountStore(SQLStore, LinkedAccountStore):
         self._storage_engine.session.add(shared)
         return shared
 
-    def unlink_account(self, primary_userid, linked_userid):
-        self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.primary_user==primary_userid, LinkedAccount.linked_user==linked_userid).delete()
-
     def unlink_accounts(self, primary_userid):
-        self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.primary_user==primary_userid).delete()
+        try:
+            self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.primary_user==primary_userid).delete()
+            return True
+        except Exception as e:
+            return False
 
     def linked_accounts(self, primary_userid):
         db_accounts = self._storage_engine.session.query(LinkedAccount).filter(LinkedAccount.primary_user==primary_userid)

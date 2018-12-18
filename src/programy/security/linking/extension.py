@@ -19,38 +19,72 @@ of the customer. Currently contains no authentication
 """
 from programy.utils.logging.ylogger import YLogger
 
+from programy.context import ClientContext
 from programy.extensions.base import Extension
-
+from programy.security.linking.accountlinker import BasicAccountLinkerService
 
 class AccountLinkingExtension(Extension):
 
+    def get_account_linker_service(self, context: ClientContext) -> BasicAccountLinkerService:
+
+        assert (isinstance(context, ClientContext))
+
+        return context.brain.security.account_linker
+
     # LINK PRIMARY ACCOUNT $USERID $ACCOUNTNAME $GIVENTOKEN
-    def handle_primary_account_link(self, context, words):
+    def handle_primary_account_link(self, context: ClientContext, words: list):
+
+        assert (isinstance(context, ClientContext))
+        assert (isinstance(words, list))
+
         if words[2] == 'ACCOUNT':
             if len(words) == 6:
                 userid = words[3]
                 account_name = words[4]
-                given_token = words[5]
-                return "PRIMARY ACCOUNT LINKED $GENERATEDTOKEN"
+                provided_key = words[5]
+
+                linked = self.get_account_linker_service(context)
+
+                assert (isinstance(linked, BasicAccountLinkerService))
+
+                if linked is not None:
+                    generated_key = linked.generate_link( userid, provided_key)
+                    if generated_key is not None:
+                        if linked.link_user_to_client(userid, account_name) is True:
+                            return "PRIMARY ACCOUNT LINKED %s"%generated_key
 
         return "INVALID PRIMARY ACCOUNT COMMAND"
 
-    # LINK SECONDARY ACCOUNT $SECONDARY_USERID $SECONDARY_ACCOUNT_NAME $PRIMARY_USERID $PRIMARY_ACCOUNT_NAME $GIVEN_TOKEN $GENERATED_TOKEN
-    def handle_secondary_account_link(self, context, words):
+    # LINK SECONDARY ACCOUNT $SECONDARY_USERID $SECONDARY_ACCOUNT_NAME $PRIMARY_USERID $GIVEN_TOKEN $GENERATED_TOKEN
+    def handle_secondary_account_link(self, context: ClientContext, words: list) -> str:
+
+        assert (isinstance(context, ClientContext))
+        assert (isinstance(words, list))
+
         if words[2] == 'ACCOUNT':
-            if len(words) == 9:
-                secondary_userid = words[3]
-                secondary_account_name = words[4]
-                primary_userid = words[5]
-                primary_account_name = words[6]
-                given_token = words[7]
-                generated_token = words[8]
-                return "SECONDARY ACCOUNT LINKED"
+            if len(words) == 8:
+                primary_userid = words[3]
+                secondary_userid = words[4]
+                secondary_account_name = words[5]
+                provided_key = words[6]
+                generated_key = words[7]
+
+                linked = self.get_account_linker_service(context)
+
+                assert (isinstance(linked, BasicAccountLinkerService))
+
+                if linked is not None:
+                    if linked.link_accounts(primary_userid, provided_key, generated_key, secondary_userid, secondary_account_name) is True:
+                        return "SECONDARY ACCOUNT LINKED"
 
         return "INVALID SECONDARY ACCOUNT COMMAND"
 
     # execute() is the interface that is called from the <extension> tag in the AIML
-    def execute(self, context, data):
+    def execute(self, context: ClientContext, data: str) -> str:
+
+        assert (isinstance(context, ClientContext))
+        assert (isinstance(data, str))
+
         YLogger.debug(context, "Account Linking Extension - Calling external service for with extra data [%s]", data)
 
         words = data.split(" ")

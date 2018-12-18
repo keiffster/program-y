@@ -38,6 +38,14 @@ class SentimentExtensionTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual("SENTIMENT INVALID COMMAND", result)
 
+        result = extension.execute(self.client_context, "SENTIMENT FEELING")
+        self.assertIsNotNone(result)
+        self.assertEqual("SENTIMENT INVALID COMMAND", result)
+
+        result = extension.execute(self.client_context, "SENTIMENT FEELING LAST")
+        self.assertIsNotNone(result)
+        self.assertEqual("SENTIMENT INVALID COMMAND", result)
+
         result = extension.execute(self.client_context, "SENTIMENT SCORES")
         self.assertIsNotNone(result)
         self.assertEqual("SENTIMENT INVALID COMMAND", result)
@@ -50,6 +58,14 @@ class SentimentExtensionTests(unittest.TestCase):
         result = extension.execute(self.client_context, "SENTIMENT ENABLED")
         self.assertIsNotNone(result)
         self.assertEqual("SENTIMENT ENABLED", result)
+
+        result = extension.execute(self.client_context, "SENTIMENT FEELING LAST 1")
+        self.assertIsNotNone(result)
+        self.assertEqual("SENTIMENT FEELING NEUTRAL AND NEUTRAL", result)
+
+        result = extension.execute(self.client_context, "SENTIMENT FEELING OVERALL")
+        self.assertIsNotNone(result)
+        self.assertEqual("SENTIMENT FEELING NEUTRAL AND COMPLETELY OBJECTIVE", result)
 
         result = extension.execute(self.client_context, "SENTIMENT SCORE I LIKE YOU")
         self.assertIsNotNone(result)

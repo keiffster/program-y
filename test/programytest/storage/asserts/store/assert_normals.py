@@ -17,4 +17,4 @@ class NormalsStoreAsserts(unittest.TestCase):
 
         self.assertEqual(normal_collection.normalise(".COM"),
                          [re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '])
-        self.assertEqual(normal_collection.normalise_string("keith.com"), "keith DOT COM")
+        self.assertEqual(normal_collection.normalise_string("keith.com"), "keith dot com")
