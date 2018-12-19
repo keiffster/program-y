@@ -71,18 +71,31 @@ class SentimentExtension(Extension):
             subj_str = "UNKNOWN"
             if context.bot.sentiment_scores is not None:
                 pos_str = context.bot.sentiment_scores.positivity(positivity, context)
-                subj_str = context.bot.sentiment_scores.subjectivity(positivity, context)
+                subj_str = context.bot.sentiment_scores.subjectivity(subjectivity, context)
 
             return "SENTIMENT SCORES POSITIVITY %s SUBJECTIVITY %s" % (pos_str, subj_str)
 
         else:
             return "SENTIMENT DISABLED"
 
+    def _get_positivity(self, context, words):
+        positivity = float(words[2])
+        return context.bot.sentiment_scores.positivity(positivity, context)
+
+    def _get_subjectivity(self, context, words):
+        subjectivity = float(words[2])
+        return context.bot.sentiment_scores.subjectivity(subjectivity, context)
+
     # execute() is the interface that is called from the <extension> tag in the AIML
     def execute(self, context, data):
         YLogger.debug(context, "Sentiment - Calling external service for with extra data [%s]", data)
 
         # SENTIMENT SCORE <TEXT STRING>
+        # SENTIMENT FEELING <TEXT STRING>
+        # SENTIMENT ENABLED
+        # SENTIMENT POSITIVITY <VALUE>
+        # SENTIMENT SUBJECTIVITY <VALUE>
+
 
         words = data.split(" ")
         if words:
@@ -99,4 +112,11 @@ class SentimentExtension(Extension):
                     if words[1] == 'ENABLED':
                         return self._check_enabled(context)
 
+                    if words[1] == 'POSITIVITY':
+                        return self._get_positivity(context, words)
+
+                    if words[1] == 'SUBJECTIVITY':
+                        return self._get_subjectivity(context, words)
+
         return "SENTIMENT INVALID COMMAND"
+

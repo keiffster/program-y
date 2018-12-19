@@ -420,13 +420,9 @@ class Bot(object):
 
         self.save_conversation(client_context)
 
-        self.save_sentiment(client_context, conversation)
+        conversation.save_sentiment()
 
         return self.combine_answers(answers, srai)
-
-    def save_sentiment(self, client_context, conversation):
-        positivity, subjectivity = conversation.calculate_sentiment_score()
-        client_context.brain.set_sentiment_scores(positivity, subjectivity)
 
     def process_sentences(self, client_context, question, srai, responselogger):
         answers = []

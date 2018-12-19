@@ -184,22 +184,28 @@ class Conversation(object):
 
     def calculate_sentiment_score(self):
 
-        polarity = 0.00
+        positivity = 0.00
         subjectivity = 0.00
 
         count = 0
         for question in self._questions:
-            q_polarity, q_subjectivity = question.calculate_sentinment_score()
+            q_positivity, q_subjectivity = question.calculate_sentinment_score()
 
-            polarity += q_polarity
+            positivity += q_positivity
             subjectivity += q_subjectivity
 
             count += 1
 
         if count > 0:
-            polarity /= count
+            positivity /= count
             subjectivity /= count
         else:
             subjectivity = 0.5
 
-        return polarity, subjectivity
+        return positivity, subjectivity
+
+    def save_sentiment(self):
+        positivity, subjectivity = self.calculate_sentiment_score()
+        self.properties['positivity'] = str(positivity)
+        self.properties['subjectivity'] = str(subjectivity)
+
