@@ -22,6 +22,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.extensions.base import Extension
 
+
 class SentimentExtension(Extension):
 
     def _check_enabled(self, context):

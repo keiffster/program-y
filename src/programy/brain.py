@@ -258,6 +258,18 @@ class Brain(object):
         self._default_variables_collection.empty()
         self._default_variables_collection.load(self.bot.client.storage_factory)
 
+        self._set_system_defined()
+
+    def _set_system_defined(self):
+        self.set_sentiment_scores(0.0, 0.5)
+
+    def set_sentiment_scores(self, positivity, subjectivity):
+        if self._default_variables_collection.has_variable("positivity") is False:
+            self._default_variables_collection.set_value("positivity", str(positivity))
+
+        if self._default_variables_collection.has_variable("subjectivity") is False:
+            self._default_variables_collection.set_value("subjectivity", str(subjectivity))
+
     def _load_maps(self):
         self._maps_collection.empty()
         self._maps_collection.load(self.bot.client.storage_factory)

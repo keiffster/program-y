@@ -329,7 +329,9 @@ class Bot(object):
             exit_response = client_context.brain.ask_question(client_context, sentence)
             if exit_response is None or not exit_response:
                 exit_response = self.exit_response
+
             return exit_response
+
         else:
             return self.exit_response
 
@@ -341,6 +343,7 @@ class Bot(object):
         if srai is False:
             pre_processed = client_context.brain.pre_process_question(client_context, text)
             YLogger.debug(client_context, "Pre Processed (%s): %s", client_context.userid, pre_processed)
+
         else:
             pre_processed = text
 
@@ -373,8 +376,10 @@ class Bot(object):
             answer = client_context.brain.post_process_response(client_context, response).strip()
             if not answer:
                 answer = self.get_default_response(client_context)
+
         else:
             answer = response
+
         return answer
 
     def log_answer(self, client_context, text, answer, responselogger):
@@ -406,13 +411,7 @@ class Bot(object):
 
         conversation.record_dialog(question)
 
-        answers = []
-        sentence_no = 0
-        for sentence in question.sentences:
-            question.set_current_sentence_no(sentence_no)
-            answer = self.process_sentence(client_context, sentence, srai, responselogger)
-            answers.append(answer)
-            sentence_no += 1
+        answers = self.process_sentences(client_context, question, srai, responselogger)
 
         client_context.reset_question()
 
@@ -421,7 +420,24 @@ class Bot(object):
 
         self.save_conversation(client_context)
 
+        self.save_sentiment(client_context, conversation)
+
         return self.combine_answers(answers, srai)
+
+    def save_sentiment(self, client_context, conversation):
+        positivity, subjectivity = conversation.calculate_sentiment_score()
+        client_context.brain.set_sentiment_scores(positivity, subjectivity)
+
+    def process_sentences(self, client_context, question, srai, responselogger):
+        answers = []
+        sentence_no = 0
+        for sentence in question.sentences:
+            question.set_current_sentence_no(sentence_no)
+            answer = self.process_sentence(client_context, sentence, srai, responselogger)
+            answers.append(answer)
+            sentence_no += 1
+
+        return answers
 
     def process_sentence(self, client_context, sentence, srai, responselogger):
 

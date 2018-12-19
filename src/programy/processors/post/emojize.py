@@ -15,15 +15,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.utils.logging.ylogger import YLogger
 import emoji
 
-from programy.processors.processing import PreProcessor
+from programy.processors.processing import PostProcessor
 
-class EmojizePostProcessor(PreProcessor):
+class EmojizePostProcessor(PostProcessor):
 
     def __init__(self):
-        PreProcessor.__init__(self)
+        PostProcessor.__init__(self)
 
     def process(self, context, word_string):
         return emoji.emojize(word_string, use_aliases=True)
