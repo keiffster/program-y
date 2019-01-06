@@ -61,7 +61,7 @@ class XmppClient(sleekxmpp.ClientXMPP):
         return msg['body']
 
     def get_userid(self, msg):
-        return msg['from']
+        return msg['from'].bare
 
     def send_response(self, msg, response):
         if response is not None:
