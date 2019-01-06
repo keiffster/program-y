@@ -42,13 +42,18 @@ class TestClient(BotClient):
 
     def add_categories_store(self, dirs):
         self._file_store_config._categories_storage = FileStoreConfiguration(dirs=dirs, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
-        self.storage_factory._storage_engines['categories'] = self._storage_engine
-        self.storage_factory._store_to_engine_map['categories'] =  self._storage_engine
+        self.storage_factory._storage_engines[StorageFactory.CATEGORIES] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.CATEGORIES] =  self._storage_engine
 
     def add_single_categories_store(self, file):
         self._file_store_config._categories_storage = FileStoreConfiguration(file=file, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
-        self.storage_factory._storage_engines['categories'] = self._storage_engine
-        self.storage_factory._store_to_engine_map['categories'] =  self._storage_engine
+        self.storage_factory._storage_engines[StorageFactory.CATEGORIES] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.CATEGORIES] =  self._storage_engine
+
+    def add_learnf_store(self, dirs):
+        self._file_store_config._learnf_storage = FileStoreConfiguration(dirs=dirs, format="xml", extension="aiml", encoding="utf-8", delete_on_start=False)
+        self.storage_factory._storage_engines[StorageFactory.LEARNF] = self._storage_engine
+        self.storage_factory._store_to_engine_map[StorageFactory.LEARNF] =  self._storage_engine
 
     def add_sets_store(self, dirs):
         self._file_store_config._sets_storage = FileStoreConfiguration(dirs=dirs, format="text", extension="txt", encoding="utf-8", delete_on_start=False)

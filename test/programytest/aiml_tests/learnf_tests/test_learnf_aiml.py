@@ -2,6 +2,7 @@ import unittest
 import os
 import os.path
 import xml.etree.ElementTree as ET
+import shutil
 
 from programytest.client import TestClient
 
@@ -9,12 +10,14 @@ from programytest.client import TestClient
 class LearnfTestClient(TestClient):
 
     def __init__(self):
+        self._learnf_path = os.path.dirname(__file__) + os.sep + 'learnf'
         TestClient.__init__(self)
 
     def load_storage(self):
         super(LearnfTestClient, self).load_storage()
         self.add_default_stores()
         self.add_categories_store([os.path.dirname(__file__)])
+        self.add_learnf_store([self._learnf_path])
 
     def load_configuration(self, arguments):
         super(LearnfTestClient, self).load_configuration(arguments)
@@ -28,32 +31,47 @@ class LearnfAIMLTests(unittest.TestCase):
         client = LearnfTestClient()
         self._client_context = client.create_client_context("testid")
 
-        self.tearDown()
+    def tearDown(self):
+        shutil.rmtree(self._client_context.client._learnf_path)
 
     def test_my_name_is_fred(self):
         response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
         self.assertIsNotNone(response)
         self.assertEqual(response, "OK, I will remember your name is FRED.")
-        #self.check_file_contents("WHAT IS MY NAME", "*", "*", "YOUR NAME IS FRED")
+        self.check_file_contents("WHAT IS MY NAME", "*", "*", "YOUR NAME IS FRED")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS MY NAME")
         self.assertIsNotNone(response)
         self.assertEqual(response, "YOUR NAME IS FRED.")
 
+    def test_multiple_my_name_is_fred_asks(self):
+        response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "OK, I will remember your name is FRED.")
+
+        response = self._client_context.bot.ask_question(self._client_context, "MY NAME IS FRED")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, "OK, I will remember your name is FRED.")
+
+        self.check_file_contents("WHAT IS MY NAME", "*", "*", "YOUR NAME IS FRED")
+
     def test_john_played_cricket(self):
         response = self._client_context.bot.ask_question(self._client_context, "JOHN PLAYED CRICKET")
         self.assertIsNotNone(response)
         self.assertEqual(response, "Ok. I will remember this.")
-        #self.check_file_contents("WHAT DID JOHN PLAY", "*", "*", "JOHN PLAYED CRICKET")
+
+        self.check_file_contents("WHAT DID JOHN PLAY", "*", "*", "JOHN PLAYED CRICKET")
 
         response = self._client_context.bot.ask_question(self._client_context, "WHAT DID JOHN PLAY")
         self.assertIsNotNone(response)
         self.assertEqual(response, "JOHN PLAYED CRICKET.")
 
     def check_file_contents(self, pattern, topic, that, template):
-        self.assertTrue(os.path.exists(self.learnf_file))
+        learnf_file = self._client_context.client._learnf_path + os.sep + "testid.aiml"
 
-        tree = ET.parse(self.learnf_file)
+        self.assertTrue(os.path.exists(learnf_file))
+
+        tree = ET.parse(learnf_file)
         aiml = tree.getroot()
 
         categories = aiml.findall('category')

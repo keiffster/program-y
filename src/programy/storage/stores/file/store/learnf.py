@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -47,6 +47,7 @@ class FileLearnfStore(FileStore, LearnfStore):
                     file.write('<aiml>\n')
                     file.write('</aiml>\n')
                     file.close()
+
             except Exception as excep:
                 YLogger.exception(None, "Error Writing learnf to %s", excep, learnf_path)
 
@@ -55,10 +56,38 @@ class FileLearnfStore(FileStore, LearnfStore):
 
         YLogger.debug(client_context, "Writing learnf to %s", learnf_path)
 
-        tree = ET.parse(learnf_path)
+        try:
+            tree = ET.parse(learnf_path)
+        except Exception:
+            # Assume invalid aiml file, so remove it and start again with a fresh copy
+            os.remove(learnf_path)
+            FileLearnfStore.create_learnf_file_if_missing(learnf_path)
+            tree = ET.parse(learnf_path)
+
         root = tree.getroot()
-        root.append(node)
-        tree.write(learnf_path, method="xml")
+
+        # Only add a new node if it doesn't already exist
+        if FileLearnfStore.node_already_exists(root, node) is False:
+            root.append(node)
+            tree.write(learnf_path, method="xml")
+
+    @staticmethod
+    def node_already_exists(root, node):
+
+        new_pattern = node.find('pattern')
+        if new_pattern is None:
+            return False
+
+        new_pattern_str = ET.tostring(new_pattern)
+
+        for category in root:
+            current_pattern = category.find('pattern')
+            if current_pattern is not None:
+                current_pattern_str = ET.tostring(current_pattern)
+                if current_pattern_str == new_pattern_str:
+                    return True
+
+        return False
 
     def _get_storage_path(self):
         if len(self.storage_engine.configuration.learnf_storage.dirs) > 1:
@@ -69,10 +98,11 @@ class FileLearnfStore(FileStore, LearnfStore):
     def create_category_xml_node(self, client_context, category)   :
         # Add our new element
         child = ET.Element("category")
-        child.append(ET.Element(category.pattern))
-        child.append(ET.Element(category.topic))
-        child.append(ET.Element(category.that))
-        child.append(category.template.xml_tree(client_context))
+        child.append(category.pattern)
+        child.append(category.topic)
+        child.append(category.that)
+        xml_category = category.template.xml_tree(client_context)
+        child.append(xml_category)
         return child
 
     def save_learnf(self, client_context, category):

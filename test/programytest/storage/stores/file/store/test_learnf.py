@@ -38,12 +38,19 @@ class FileLearnfStoreTests(unittest.TestCase):
 
         if os.path.exists(learnf_fullpath):
             os.remove(learnf_fullpath)
+
         self.assertFalse(os.path.exists(learnf_fullpath))
 
+        pattern = ET.Element('pattern')
+        pattern.text = "HELLO"
+        topic = ET.Element('topic')
+        topic.text = '*'
+        that = ET.Element('that')
+        that.text = '*'
         template = TemplateNode()
         template.append(TemplateWordNode("Hello"))
 
-        category = LearnCategory("HELLO *", "*", "*", template)
+        category = LearnCategory(pattern, topic, that, template)
 
         store.save_learnf(client_context, category)
 

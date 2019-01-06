@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -49,11 +49,11 @@ class BasePropertiesCollection(DoubleStringCharSplitCollection):
     def load(self, storage_factory):
         name = self.get_storage_name()
         if storage_factory.entity_storage_engine_available(name) is True:
-            properties_engine = storage_factory.entity_storage_engine(name)
-            if properties_engine:
+            engine = storage_factory.entity_storage_engine(name)
+            if engine:
                 try:
-                    properties_store = self.get_store(properties_engine)
-                    properties_store.load_all(self)
+                    store = self.get_store(engine)
+                    store.load_all(self)
                 except Exception as e:
                     YLogger.exception(self, "Failed to load %s from storage", e, name)
 

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -337,7 +337,6 @@ class Brain(object):
             YLogger.debug(self, "No dynamics configuration defined...")
 
     def load_regex_templates(self):
-        self._regex_templates.empty()
         self._regex_templates.load(self.bot.client.storage_factory)
 
     def pre_process_question(self, client_context, question):
