@@ -1,4 +1,5 @@
 import unittest
+import unittest.mock
 
 from programy.clients.polling.xmpp.xmpp import XmppClient
 from programy.clients.polling.xmpp.config import XmppConfiguration
@@ -22,6 +23,7 @@ class MockXmppClient(XmppClient):
         self.event_handlers = []
         self.registered_plugins = []
         self.response = None
+        self.userid = jid
         XmppClient.__init__(self, bot_client, jid, password)
 
     def add_event_handler(self, name, pointer):
@@ -42,6 +44,8 @@ class MockXmppClient(XmppClient):
     def send_response(self, msg, response):
         self.response = response
 
+    def get_userid(self, msg):
+        return self.userid
 
 class XmppClientTesst(unittest.TestCase):
 
@@ -65,7 +69,7 @@ class XmppClientTesst(unittest.TestCase):
 
     def test_get_userid(self):
         bot_client = MockBotClient()
-        xmpp_client = MockXmppClient(bot_client, "userid", "password")
+        xmpp_client = MockXmppClient(bot_client, "user123", "password")
         self.assertEqual("user123", xmpp_client.get_userid({"from": "user123"}))
 
     def test_register_plugins(self):
