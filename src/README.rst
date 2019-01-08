@@ -1,19 +1,30 @@
 
+Coming in Version 3.1
+======================
+- Translation. You can now speak to it in any language supported by google translate and also have the answers in any language. This means you can keep your rules in English bur open your bot to a variety of language users
+- Sentiment. Each question asked has a sentiment score attached to it and the bot also keeps a running score for the whole conversation. Both values are available through runtime variables to be used to adjust your responses
+- Client account linking. You can now link accounts across all clients and therefore continue conversations. For example start on the web client, link Facebook and continue there and then link twitter and continue there then swap between all 3 at will preserving the entire conversation. This works across all 11 supported clients
+
+
 Version 3.0
 ============
-
 New in this release
 
 - Support for SQL Storage (Currently tested on MariaDB and MySQL)
 - Support for NoSQL Storage (Currently tested on MongoDB and Redis)
 - Full support for AIML 2.x (Including Rich Media)
 
-WARNINGS:
 
-- Documentation is still pending, use at your own peril!
-- This only works with Y-Bot v3 branch
-- This has only been tested using y-bot.sh script on OSX
-- Other than that, have fun
+Where Used
+===========
+Program-Y is used in a variety of projects, some of which are public
+
+- `Orange Research <https://oma-chatbot.kmt.orange.com/>`_
+- `Cataluna University <https://bpm.cs.upc.edu/chatbot>`_
+- `Heriot Watt University <https://www.researchgate.net/publication/319723461_Hybrid_Chat_and_Task_Dialogue_for_More_Engaging_HRI_Using_Reinforcement_Learning>`_
+- Major automotive manufacturer
+
+If you want to be listed, please let me know
 
 
 Introduction
