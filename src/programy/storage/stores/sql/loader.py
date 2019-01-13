@@ -45,6 +45,7 @@ from programy.storage.stores.sql.store.nodes import SQLPatternNodesStore
 from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
 
+
 class Uploader(object):
 
     @staticmethod

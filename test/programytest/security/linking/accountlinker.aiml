@@ -20,17 +20,6 @@
     </category>
 
     <category>
-        <pattern>LINK PRIMARY ACCOUNT * * *</pattern>
-        <template>
-            <srai>
-                <extension path="programy.security.linking.extension.AccountLinkingExtension">
-                    LINK PRIMARY ACCOUNT <star index="1" /> <star index="2" /> <star index="3" />
-                </extension>
-            </srai>
-        </template>
-    </category>
-
-    <category>
         <pattern>INVALID PRIMARY ACCOUNT COMMAND</pattern>
         <template>
             Failed to register your account for linking.

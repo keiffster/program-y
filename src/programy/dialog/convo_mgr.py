@@ -23,7 +23,6 @@ from programy.config.bot.conversations import BotConversationsConfiguration
 class ConversationManager(object):
 
     def __init__(self, conversation_configuration):
-
         assert (conversation_configuration is not None)
         assert (isinstance(conversation_configuration, BotConversationsConfiguration))
 

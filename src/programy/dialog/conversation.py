@@ -206,6 +206,6 @@ class Conversation(object):
 
     def save_sentiment(self):
         positivity, subjectivity = self.calculate_sentiment_score()
-        self.properties['positivity'] = str(positivity)
-        self.properties['subjectivity'] = str(subjectivity)
+        self._properties['positivity'] = str(positivity)
+        self._properties['subjectivity'] = str(subjectivity)
 

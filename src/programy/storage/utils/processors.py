@@ -83,6 +83,7 @@ class CSVFileWriter(CSVFileProcessor):
     def close(self):
         self._file.close()
 
+
 class CSVFileReader(CSVFileProcessor):
 
     def __init__(self, filename, mode=FileProcessor.READ, encoding=FileProcessor.UTF8, delimiter=CSVFileProcessor.DELIMITER, quotechar=CSVFileProcessor.QUOTECHAR, quoting=csv.QUOTE_ALL):

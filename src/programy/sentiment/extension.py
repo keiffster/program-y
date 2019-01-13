@@ -36,12 +36,20 @@ class SentimentExtension(Extension):
         positivity, subjectivity = conversation.calculate_sentiment_score()
         if context.bot.sentiment_scores is not None:
             pos_str = context.bot.sentiment_scores.positivity(positivity)
-            sub_str = context.bot.sentiment_scores.subjectivity(positivity)
+            sub_str = context.bot.sentiment_scores.subjectivity(subjectivity)
             return "SENTIMENT FEELING %s AND %s"%(pos_str, sub_str)
         return "SENTIMENT FEELING NEUTRAL AND NEUTRAL"
 
     def _calc_question_sentiment(self, context, nth_question):
-        return "SENTIMENT FEELING NEUTRAL AND NEUTRAL"
+        conversation = context.bot.get_conversation(context)
+        try:
+            sentence = conversation.previous_nth_question(nth_question)
+            pos_str = context.bot.sentiment_scores.positivity(sentence.positivity)
+            sub_str = context.bot.sentiment_scores.subjectivity(sentence.subjectivity)
+            return "SENTIMENT FEELING %s AND %s" % (pos_str, sub_str)
+        except:
+            print("Whoops")
+            return "SENTIMENT FEELING NEUTRAL AND NEUTRAL"
 
     def _calc_feeling(self, context, words):
         if context.bot.sentiment_analyser is not None:
@@ -59,6 +67,24 @@ class SentimentExtension(Extension):
 
         else:
             return "SENTIMENT DISABLED"
+
+    def _current_score(self, context, words):
+
+        conversation = context.bot.get_conversation(context)
+
+        assert (conversation is not None)
+
+        if len(words) == 3:
+
+            if words[2] == 'NUMERIC':
+                return "SENTIMENT SCORES POSITIVITY %s SUBJECTIVITY %s" % (conversation.properties['positivity'], conversation.properties['subjectivity'])
+
+            if words[2] == 'TEXT':
+                pos_str = context.bot.sentiment_scores.positivity(float(conversation.properties['positivity']), context)
+                subj_str = context.bot.sentiment_scores.subjectivity(float(conversation.properties['subjectivity']), context)
+                return "SENTIMENT SCORES POSITIVITY %s SUBJECTIVITY %s" % (pos_str, subj_str)
+
+        return "SENTIMENT INVALID COMMAND"
 
     def _calc_score(self, context, words):
         if context.bot.sentiment_analyser is not None:
@@ -96,13 +122,15 @@ class SentimentExtension(Extension):
         # SENTIMENT POSITIVITY <VALUE>
         # SENTIMENT SUBJECTIVITY <VALUE>
 
-
         words = data.split(" ")
         if words:
 
             if words[0] == "SENTIMENT":
 
                 if len(words) >= 2:
+                    if words[1] == "CURRENT":
+                        return self._current_score(context, words)
+
                     if words[1] == "SCORE":
                         return self._calc_score(context, words)
 
