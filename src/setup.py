@@ -12,7 +12,7 @@ print("Building PyPi Package for version %s"%version)
 if version is None:
     print("No version.txt found")
 
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, '../../wiki/Home.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 download_url = "https://github.com/keiffster/program-y/%s.tar.gz"%version
@@ -25,6 +25,7 @@ setup(
   version = version,
   description = 'AIML Framework and Platform',
   long_description=long_description,
+  long_description_content_type='text/markdown',
   author = 'Keith Sterling',
   author_email = 'keiffster@gmail.com',
   url = 'https://github.com/keiffster/program-y.git',
