@@ -52,6 +52,7 @@ setup(
       'Programming Language :: Python :: 3.4',
       'Programming Language :: Python :: 3.5',
       'Programming Language :: Python :: 3.6',
+      'Programming Language :: Python :: 3.7',
   ],
   install_requires=[
 'python-dateutil==2.7.3',
@@ -60,7 +61,6 @@ setup(
 'PyYAML==4.2b4',
 'requests==2.20.0',
 'Flask==1.0.2',
-'Flask-Ask==0.9.8',
 'Flask-SocketIO==3.0.2',
 'tweepy==3.6.0',
 'sleekxmpp==1.3.3',
