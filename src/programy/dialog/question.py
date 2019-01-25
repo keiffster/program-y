@@ -104,10 +104,13 @@ class Question(object):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
 
     def split_into_sentences(self, client_context, text):
-        if text is not None and text.strip():
-            all_sentences = client_context.bot.sentence_splitter.split(text)
-            for each_sentence in all_sentences:
-                self._sentences.append(Sentence(client_context.brain.tokenizer, each_sentence))
+        if client_context.bot.sentence_splitter.is_active():
+            if text is not None and text.strip():
+                all_sentences = client_context.bot.sentence_splitter.split(text)
+                for each_sentence in all_sentences:
+                    self._sentences.append(Sentence(client_context.brain.tokenizer, each_sentence))
+        else:
+            self._sentences.append(Sentence(client_context.brain.tokenizer, text))
 
     def recalculate_sentinment_score(self, client_context):
         for sentence in self._sentences:

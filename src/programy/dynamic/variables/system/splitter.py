@@ -15,22 +15,22 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from abc import ABCMeta, abstractmethod
+from programy.dynamic.variables.variable import DynamicVariable
+
+from programy.utils.text.dateformat import DateFormatter
 
 
-class DynamicVariable(object):
-    __metaclass__ = ABCMeta
+class SentenceSplitter(DynamicVariable):
 
     def __init__(self, config):
-        self._config = config
+        DynamicVariable.__init__(self, config)
 
-    @property
-    def config(self):
-        return self._config
+    def get_value(self, client_context, value=None):
+        if client_context.bot.sentence_splitter is not None:
+            return client_context.bot.sentence_splitter.active
+        return None
 
-    @abstractmethod
-    def get_value(self, client_context, value):
-        raise NotImplementedError()
+    def set_value(self, client_context, active):
+        if client_context.bot.sentence_splitter is not None:
+            client_context.bot.sentence_splitter.active = active
 
-    def set_value(self, client_context, value):
-        raise NotImplementedError()

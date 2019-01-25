@@ -20,13 +20,14 @@ import re
 
 from programy.utils.classes.loader import ClassLoader
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.activate import Activatable
 
+class SentenceSplitter(Activatable):
 
-class SentenceSplitter(object):
-
-    ALL_PUNCTUATION = re.compile('[:\'";,.?!\(\)\-"]')
+    ALL_PUNCTUATION = re.compile(r'[:\'";,.?!\(\)\-"]')
 
     def __init__(self, splitter_config):
+        Activatable.__init__(self)
 
         assert (splitter_config is not None)
         assert (isinstance(splitter_config, BotSentenceSplitterConfiguration))

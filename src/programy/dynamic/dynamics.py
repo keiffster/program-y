@@ -24,6 +24,7 @@ from programy.dynamic.maps.singular import SingularMap
 from programy.dynamic.maps.predecessor import PredecessorMap
 from programy.dynamic.maps.successor import SuccessorMap
 
+
 class DynamicsCollection(object):
 
     def __init__(self):
@@ -135,3 +136,12 @@ class DynamicsCollection(object):
             dynamic_var = self._dynamic_vars[name]
             return dynamic_var.get_value(client_context, value)
         return None
+
+    def set_dynamic_var(self, client_context, name, value):
+        try:
+            name = name.upper()
+            if name in self._dynamic_vars:
+                dynamic_var = self._dynamic_vars[name]
+                dynamic_var.set_value(client_context, value)
+        except Exception as e:
+            YLogger.exception(self, "Unable to set value for dynamic var %s", e, name)

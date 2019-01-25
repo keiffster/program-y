@@ -15,14 +15,18 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.classes.loader import ClassLoader
 
 from abc import ABCMeta, abstractmethod
 
-class SpellingChecker(object):
+from programy.utils.classes.loader import ClassLoader
+from programy.activate import Activatable
+
+
+class SpellingChecker(Activatable):
     __metaclass__ = ABCMeta
 
     def __init__(self, spelling_config=None):
+        Activatable.__init__(self)
         self.spelling_config = spelling_config
 
     def initialise(self, storage_factory):
@@ -49,19 +53,28 @@ class SpellingChecker(object):
         return None
     
     def check_spelling_before(self, client_context, each_sentence):
-        if self.spelling_config.check_before is True:
-            text = each_sentence.text()
-            corrected = self.correct(text)
-            YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
-            each_sentence.replace_words(corrected)
+        if self.is_active():
+            if self.spelling_config.check_before is True:
+                text = each_sentence.text()
+                corrected = self.correct(text)
+                YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
+                each_sentence.replace_words(corrected)
+
+        else:
+            YLogger.debug(client_context, "Spelling is switched off.")
 
     def check_spelling_and_retry(self, client_context, each_sentence):
-        if self.spelling_config.check_and_retry is True:
-            text = each_sentence.text()
-            corrected = self.correct(text)
-            YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
-            each_sentence.replace_words(corrected)
-            response = client_context.brain.ask_question(client_context, each_sentence)
-            return response
+        if self.is_active():
+            if self.spelling_config.check_and_retry is True:
+                text = each_sentence.text()
+                corrected = self.correct(text)
+                YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
+                each_sentence.replace_words(corrected)
+                response = client_context.brain.ask_question(client_context, each_sentence)
+                return response
+
+        else:
+            YLogger.debug(client_context, "Spelling is switched off.")
+
         return None
 

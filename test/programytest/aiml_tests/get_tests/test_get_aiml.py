@@ -2,6 +2,19 @@ import unittest
 import os
 
 from programytest.client import TestClient
+from programy.spelling.base import SpellingChecker
+from programy.config.bot.spelling import BotSpellingConfiguration
+from programy.dialog.splitter.splitter import SentenceSplitter
+from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+
+
+class MockSpellingChecker(SpellingChecker):
+
+    def __init__(self, spelling_config=None):
+        SpellingChecker.__init__(self, spelling_config)
+
+    def correct(self, phrase):
+        return "Hello World"
 
 
 class GetAIMLTestClient(TestClient):
@@ -24,6 +37,16 @@ class GetAIMLTests(unittest.TestCase):
              default-get:unknown
          """)
         self._client_context.bot.brain.dynamics.add_dynamic_var('gettime', "programy.dynamic.variables.datetime.GetTime", None)
+        self._client_context.bot.brain.dynamics.add_dynamic_var('spelling', "programy.dynamic.variables.system.spelling.Spelling", None)
+        self._client_context.bot.brain.dynamics.add_dynamic_var('splitter', "programy.dynamic.variables.system.splitter.SentenceSplitter", None)
+
+        spelling_config = BotSpellingConfiguration()
+        spelling_config._classname = "programytest.spelling.test_base.MockSpellingChecker"
+        self._client_context.bot._spell_checker = SpellingChecker.initiate_spellchecker(spelling_config, None)
+
+        config = BotSentenceSplitterConfiguration()
+        self._client_context.bot._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(config)
+
 
     def test_unknown_get(self):
         response = self._client_context.bot.ask_question(self._client_context,  "UNKNOWN GET")
@@ -65,13 +88,4 @@ class GetAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "VAR UNKNOWN")
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
-
-    #################################################################################################################
-    #
-
-    def test_dynamic_get(self):
-        response = self._client_context.bot.ask_question(self._client_context, "DYNAMIC GET")
-        self.assertIsNotNone(response)
-        self.assertTrue(response.startswith("The time is "))
-
 

@@ -58,10 +58,15 @@ class TemplateSetNode(TemplateNode):
         if self.local is True:
             YLogger.debug(client_context, "[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
             conversation.current_question().set_property(name, value)
+
+        elif client_context.brain.dynamics.is_dynamic_var(name) is True:
+            client_context.brain.dynamics.set_dynamic_var(client_context, name, value)
+
         else:
             if client_context.bot.override_properties is False and client_context.brain.properties.has_property(name):
                 YLogger.error(client_context, "Global property already exists for name [%s], ignoring set!", name)
                 value = client_context.brain.properties.property(name)
+
             else:
                 if client_context.brain.properties.has_property(name):
                     YLogger.warning(client_context, "Global property already exists for name [%s], over writing!", name)

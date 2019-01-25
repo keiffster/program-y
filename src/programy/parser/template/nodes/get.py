@@ -22,6 +22,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.exceptions import ParserException
 from programy.utils.text.text import TextUtils
 
+
 class TemplateGetNode(TemplateNode):
 
     def __init__(self):

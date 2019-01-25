@@ -1,6 +1,5 @@
 import unittest
 import unittest.mock
-import os
 
 from programy.brain import Brain
 from programy.bot import DefaultBrainSelector
@@ -9,10 +8,10 @@ from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
-from programy.dialog.sentence import Sentence
 from programy.context import ClientContext
 
 from programytest.client import TestClient
+
 
 class MockBrain(Brain):
 

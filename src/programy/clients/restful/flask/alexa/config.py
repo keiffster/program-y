@@ -23,7 +23,6 @@ class AlexaConfiguration(RestConfiguration):
 
     def __init__(self):
         RestConfiguration.__init__(self, "alexa")
-        self._ask_debug_level = logging.ERROR
 
     @property
     def ask_debug_level(self):
@@ -31,14 +30,7 @@ class AlexaConfiguration(RestConfiguration):
 
     def load_configuration(self, configuration_file, bot_root):
         alexa = configuration_file.get_section(self.section_name)
-        if alexa is not None:
-            self._ask_debug_level = configuration_file.get_option(alexa, "ask_debug_level", missing_value=logging.ERROR)
         super(AlexaConfiguration, self).load_configuration(configuration_file, bot_root)
 
     def to_yaml(self, data, defaults=True):
-        if defaults is True:
-            data['ask_debug_level'] = logging.ERROR
-        else:
-            data['ask_debug_level'] = self._ask_debug_level
-
         super(AlexaConfiguration, self).to_yaml(data, defaults)
