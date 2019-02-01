@@ -6,6 +6,7 @@ from programy.clients.restful.flask.facebook.config import FacebookConfiguration
 
 from programytest.clients.arguments import MockArgumentParser
 
+
 class MockFacebookBot(Bot):
 
     def __init__(self, access_token):
@@ -41,7 +42,8 @@ class MockFacebookBotClient(FacebookBotClient):
     def create_facebook_bot(self):
         return MockFacebookBot(self._access_token)
 
-class Facebookclient_contextBotClientTests(unittest.TestCase):
+
+class FacebookClientBotClientTests(unittest.TestCase):
 
     def test_facebook_client_init(self):
         arguments = MockArgumentParser()

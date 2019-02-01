@@ -87,6 +87,7 @@ class MockTwitterBotClient(TwitterBotClient):
     def ask_question(self, userid, question):
         return self._response
 
+
 class TwitterBotClientTests(unittest.TestCase):
 
     def test_twitter_init(self):
@@ -315,6 +316,7 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
+        #TODO this writes to local storage rather than /tmp
         file_store_config = FileStorageConfiguration()
         file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
 

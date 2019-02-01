@@ -20,6 +20,7 @@ from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.restful.client import RestBotClient
 
+
 class FlaskRestBotClient(RestBotClient):
 
     def __init__(self, id, argument_parser=None):
@@ -78,6 +79,7 @@ class FlaskRestBotClient(RestBotClient):
 
     def dump_request(self, request):
         YLogger.debug(self, str(request))
+
 
 if __name__ == '__main__':
 

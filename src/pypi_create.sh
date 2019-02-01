@@ -2,7 +2,7 @@
 
 echo $1 > version.txt
 
-cp ../README.rst .
+cp  ../../wiki/Home.md .
 
 git tag $1 -m "Version %1 Release"
 

@@ -12,7 +12,8 @@ print("Building PyPi Package for version %s"%version)
 if version is None:
     print("No version.txt found")
 
-with open(path.join(here, '../../wiki/Home.md'), encoding='utf-8') as f:
+long_description = ""
+with open(path.join(here, path.join(here, 'Home.md')), encoding='utf-8') as f:
     long_description = f.read()
 
 download_url = "https://github.com/keiffster/program-y/%s.tar.gz"%version
