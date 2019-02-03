@@ -3,6 +3,7 @@
 echo $1 > version.txt
 
 cp  ../../wiki/Home.md .
+cp ./Home.md README.rst
 
 git tag $1 -m "Version %1 Release"
 

@@ -18,25 +18,96 @@ from programy.clients.restful.config import RestConfiguration
 
 
 class GoogleConfiguration(RestConfiguration):
-    
+
+    DEFAULT_LAUNCH_TEXT = "Hello and welcome"
+    DEFAULT_QUIT_TEXT = "Good bye matey"
+    DEFAULT_HELP_TEXT = "Ask me anything, I know loads"
+    DEFAULT_ERROR_TEXT = "Oopsie there has been an error"
+
     def __init__(self):
-        RestConfiguration.__init__(self, "google")
-        self._bot_name = "program-y"
+        RestConfiguration.__init__(self, "google")     
+        self._launch_text = GoogleConfiguration.DEFAULT_LAUNCH_TEXT
+        self._launch_srai = None
+
+        self._quit_text = GoogleConfiguration.DEFAULT_QUIT_TEXT
+        self._quit_srai = None
+
+        self._help_text = GoogleConfiguration.DEFAULT_HELP_TEXT
+        self._help_srai = None
+
+        self._error_text = GoogleConfiguration.DEFAULT_ERROR_TEXT
+        self._error_srai = None
 
     @property
-    def bot_name(self):
-        return self._bot_name
+    def launch_text(self):
+        return self._launch_text
+    @property
+    def launch_srai(self):
+        return self._launch_srai
+
+    @property
+    def quit_text(self):
+        return self._quit_text
+    @property
+    def quit_srai(self):
+        return self._quit_srai
+
+    @property
+    def help_text(self):
+        return self._help_text
+    @property
+    def help_srai(self):
+        return self._help_srai
+
+    @property
+    def error_text(self):
+        return self._error_text
+    @property
+    def error_srai(self):
+        return self._error_srai
 
     def load_configuration(self, configuration_file, bot_root):
-        kik = configuration_file.get_section(self.section_name)
-        if kik is not None:
-            self._bot_name = configuration_file.get_option(kik, "bot_name", missing_value="program-y")
+        google = configuration_file.get_section(self.section_name)
+        if google is not None:
+            self._launch_text = configuration_file.get_option(google, "launch_text", missing_value=GoogleConfiguration.DEFAULT_LAUNCH_TEXT)
+            self._launch_srai = configuration_file.get_option(google, "launch_srai", missing_value=None)
+
+            self._quit_text = configuration_file.get_option(google, "quit_text", missing_value=GoogleConfiguration.DEFAULT_QUIT_TEXT)
+            self._quit_srai = configuration_file.get_option(google, "quit_srai", missing_value=None)
+
+            self._help_text = configuration_file.get_option(google, "help_text", missing_value=GoogleConfiguration.DEFAULT_HELP_TEXT)
+            self._help_srai = configuration_file.get_option(google, "help_srai", missing_value=None)
+
+            self._error_text = configuration_file.get_option(google, "error_text", missing_value=GoogleConfiguration.DEFAULT_ERROR_TEXT)
+            self._error_srai = configuration_file.get_option(google, "error_srai", missing_value=None)
+
         super(GoogleConfiguration, self).load_configuration(configuration_file, bot_root)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['bot_name'] = "program-y"
+            data["launch_text"] = GoogleConfiguration.DEFAULT_LAUNCH_TEXT
+            data["launch_srai"] = None
+
+            data["quit_text"] = GoogleConfiguration.DEFAULT_QUIT_TEXT
+            data["quit_srai"] = None
+
+            data["help_text"] = GoogleConfiguration.DEFAULT_HELP_TEXT
+            data["help_srai"] = None
+
+            data["error_text"] = GoogleConfiguration.DEFAULT_ERROR_TEXT
+            data["error_srai"] = None
+
         else:
-            data['bot_name'] = self._bot_name
+            data["launch_text"] = self._launch_text
+            data["launch_srai"] = self._launch_srai
+
+            data["quit_text"] = self._quit_text
+            data["quit_srai"] = self._quit_srai
+
+            data["help_text"] = self._help_text
+            data["help_srai"] = self._help_srai
+
+            data["error_text"] = self._error_text
+            data["error_srai"] = self._error_srai
 
         super(GoogleConfiguration, self).to_yaml(data, defaults)

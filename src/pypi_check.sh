@@ -2,9 +2,9 @@
 
 cd /tmp
 
-mkdir programy
+mkdir pypi
 
-cd programy
+cd pypi
 
 python3 -m venv programy
 
@@ -16,3 +16,6 @@ pip3 install programy
 
 deactivate
 
+cd ..
+cd ..
+rm -Rf pypi

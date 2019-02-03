@@ -102,7 +102,7 @@ class AlexaBotClient(FlaskRestBotClient):
             return True
         return False
 
-    def get_replpy_from_bot(self, client_context, text, srai):
+    def get_reply_from_bot(self, client_context, text, srai):
         if srai is not None:
             reply = self._ask_question(client_context, srai)
             if reply is None or reply == "":
@@ -164,25 +164,25 @@ class AlexaBotClient(FlaskRestBotClient):
 
     def _handle_cancel_request(self, client_context, shouldEndSession=False):
         print("Handling cancel request...")
-        reply = self.get_replpy_from_bot(client_context, self.configuration.client_configuration.cancel_text,
+        reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.cancel_text,
                                          self.configuration.client_configuration.cancel_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_stop_request(self, client_context, shouldEndSession=False):
         print("Handling stop...")
-        reply = self.get_replpy_from_bot(client_context, self.configuration.client_configuration.stop_text,
+        reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.stop_text,
                                          self.configuration.client_configuration.stop_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_help_request(self, client_context):
         print("Handling stop...")
-        reply = self.get_replpy_from_bot(client_context, self.configuration.client_configuration.help_text,
+        reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.help_text,
                                          self.configuration.client_configuration.help_srai)
         return self._create_response(reply)
 
     def _handle_error(self, client_context):
         print("Handling error...")
-        reply = self.get_replpy_from_bot(client_context, self.configuration.client_configuration.error_text,
+        reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.error_text,
                                          self.configuration.client_configuration.error_srai)
         return self._create_response(reply)
 
