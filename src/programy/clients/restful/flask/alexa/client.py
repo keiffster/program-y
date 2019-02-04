@@ -58,8 +58,10 @@ class AlexaBotClient(FlaskRestBotClient):
         reply = ""
         try:
             reply = client_context.bot.ask_question(client_context, question, responselogger=self)
+
         except Exception as e:
-            print("Error asking Alexa:", e)
+            YLogger.exception(client_context, "Error getting reply from bot", e)
+
         return reply
 
     def _to_json(self, data):
@@ -150,38 +152,31 @@ class AlexaBotClient(FlaskRestBotClient):
 
             question = self._add_intent(intent_name, value)
 
-            print("Question = [%s]"%question)
             return self._handle_reply_request(client_context, question)
 
     def _handle_leave_request(self):
-        print("Handling leave...")
         return self._create_response("See you later, aligator", shouldEndSession=True)
 
     def _handle_reply_request(self, client_context, question):
-        print("Handling reply...")
         reply = self._ask_question(client_context, question)
         return self._create_response(reply)
 
     def _handle_cancel_request(self, client_context, shouldEndSession=False):
-        print("Handling cancel request...")
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.cancel_text,
                                          self.configuration.client_configuration.cancel_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_stop_request(self, client_context, shouldEndSession=False):
-        print("Handling stop...")
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.stop_text,
                                          self.configuration.client_configuration.stop_srai)
         return self._create_response(reply, shouldEndSession=shouldEndSession)
 
     def _handle_help_request(self, client_context):
-        print("Handling stop...")
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.help_text,
                                          self.configuration.client_configuration.help_srai)
         return self._create_response(reply)
 
     def _handle_error(self, client_context):
-        print("Handling error...")
         reply = self.get_reply_from_bot(client_context, self.configuration.client_configuration.error_text,
                                          self.configuration.client_configuration.error_srai)
         return self._create_response(reply)
@@ -201,6 +196,7 @@ class AlexaBotClient(FlaskRestBotClient):
     def receive_message(self, http_request):
 
         skill_json = http_request.json
+        #print(json.dumps(skill_json, indent=4))
 
         recipient_id = self._get_userid(skill_json)
 
@@ -230,7 +226,6 @@ class AlexaBotClient(FlaskRestBotClient):
                 raise Exception("Unknown/Unhandled request")
 
         except Exception as e:
-            print(e)
             YLogger.exception(client_context, "Unknown/Unhandled request [%s]", e, request_type)
             return self._handle_error(client_context)
 

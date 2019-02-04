@@ -39,8 +39,10 @@ class GoogleBotClient(FlaskRestBotClient):
         reply = ""
         try:
             reply = client_context.bot.ask_question(client_context, question, responselogger=self)
+
         except Exception as e:
-            print("Error asking Google:", e)
+            YLogger.exception(client_context, "Error getting reply from bot", e)
+
         return reply
 
     def _get_reply_from_bot(self, client_context, text, srai):
