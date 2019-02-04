@@ -18,7 +18,7 @@ pip3 install programy
 ```
 
 For more information about installing directly from GitHub or getting set up to develop and contriute to Program-y check out
-the [Advanced Installation Options ](https://github.com/keiffster/program-y/wiki/Install_Advanced.) section
+the [Advanced Installation Options](https://github.com/keiffster/program-y/wiki/Install_Advanced) section
 
 ### Additional Installation
 
