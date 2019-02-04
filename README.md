@@ -1,10 +1,10 @@
 # Program-Y
 
 Program Y is a fully compliant AIML 2.0 chatbot framework written in Python 3. It includes an entire platform for building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
-For more information about Program-y, its features and its history then check out the [Background](./Background) page.
+For more information about Program-y, its features and its history then check out the Background page.
 
 ## New in 3.5
-Version 3.5 ships with new Google Client. [Google Client](./wiki/Client-Google). As well as supporting DialogFlow and hence
+Version 3.5 ships with new Google Client. As well as supporting DialogFlow and hence
 Google Assistant, it also enables access to the wide range of clients that DialogFlow supports including Cortana, Alexa, 
 Skype and Cisco intelligent agents
 
