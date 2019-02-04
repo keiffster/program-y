@@ -1,15 +1,14 @@
 # Program-Y
 
 Program Y is a fully compliant AIML 2.0 chatbot framework written in Python 3. It includes an entire platform for building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
-For more information about Program-y, its features and its history then check out the [Background](./Background) page.
+For more information about Program-y, its features and its history then check out the Background page.
 
-## New in 3.4
+## New in 3.5
+Version 3.5 ships with new [Google Client](https://github.com/keiffster/program-y/wiki/Client-Google). 
+As well as supporting DialogFlow and hence
+Google Assistant, it also enables access to the wide range of clients that DialogFlow supports including Cortana, Alexa, 
+Skype and Cisco intelligent agents
 
-Version 3.4 ships with new Alexa Client. This has been rewritten from the ground up to remove the dependency on
-a library which is no longer supported by the owner. The new client has no additional eternal dependencies. For full 
-documentation on how to build an Alexa Skill and hook it to your Program-Y Client, see [Alexa Client](./Client-Alexa)
-
-A newly redesigne Google Client will follow in v3.5
 
 ## Installation
 You can now install Program-y directly from PyPi with the follow commands
@@ -19,7 +18,7 @@ pip3 install programy
 ```
 
 For more information about installing directly from GitHub or getting set up to develop and contriute to Program-y check out
-the [Advanced Installation Options ](./Install_Advanced.md) section
+the [Advanced Installation Options](https://github.com/keiffster/program-y/wiki/Install_Advanced) section
 
 ### Additional Installation
 
