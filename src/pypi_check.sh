@@ -12,7 +12,9 @@ cd programy
 
 source ./bin/activate
 
-pip3 install programy
+pip3 install --no-cache-dir programy
+
+python3 -m programy.admin.tool
 
 deactivate
 
