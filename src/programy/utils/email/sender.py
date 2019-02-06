@@ -9,28 +9,12 @@ from email.mime.image import MIMEImage
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
-
-class Configuration(object):
-
-    def __init__(self):
-        self._host      = None
-        self._port      = None
-        self._username  = None
-        self._password  = None
-        self._from_addr  = None
-
+from programy.utils.email.config import EmailConfiguration
 
 class Email(object):
 
-    def __init__(self, config):
-        self._host      = config._host
-        self._port      = config._port
-        self._username  = config._username
-        self._password  = config._password
-        self._from_addr = config._from_addr
-        if config._from_addr is None:
-            self._from_addr = self._username
-
+    def __init__(self, config: EmailConfiguration):
+        self._config = config
         self._to = []
         self._subject = None
         self._message = None
@@ -89,29 +73,17 @@ class Email(object):
         msg['From'] = self._from_addr
         msg['To'] = to
 
-
         print("Starting")
-        server=smtplib.SMTP(self._host, config._port)
+        server=smtplib.SMTP(self._config.host, self._config.port)
         server.ehlo()
         print("TLS")
         server.starttls()
         print("Logging in")
-        server.login(config._username, config._password)
+        server.login(self._.config.username, self._config.password)
         print("Sending")
         server.send_message(msg)
         print("Quiting")
         server.quit()
 
-
-if __name__ == '__main__':
-
-    config = Configuration()
-    config._host = 'smtp.gmail.com'
-    config._port = 587
-    config._username = "email-address"
-    config._password = "password"
-
-    email = Email(config)
-    email.send("keiffster@gmail.com", "ServusAI is great", "Did you know Servus AI is amazing!")
 
 
