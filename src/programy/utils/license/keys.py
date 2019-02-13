@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 
+
 class LicenseKeys(object):
 
     def __init__(self):

@@ -22,5 +22,8 @@ class FacebookConfiguration(RestConfiguration):
     def __init__(self):
         RestConfiguration.__init__(self, "facebook")
 
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
     def to_yaml(self, data, defaults=True):
         super(FacebookConfiguration, self).to_yaml(data, defaults)

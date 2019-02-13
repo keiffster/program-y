@@ -14,8 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
-
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 class ConsoleConfiguration(ClientConfigurationData):
 
@@ -32,12 +32,15 @@ class ConsoleConfiguration(ClientConfigurationData):
     def prompt(self):
         return self._prompt
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         console = configuration_file.get_section(self.section_name)
         if console is not None:
-            self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="Console")
-            self._prompt = configuration_file.get_option(console, "prompt", missing_value=">>>")
-        super(ConsoleConfiguration, self).load_configuration(configuration_file, console, bot_root)
+            self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="Console", subs=subs)
+            self._prompt = configuration_file.get_option(console, "prompt", missing_value=">>>", subs=subs)
+        super(ConsoleConfiguration, self).load_configuration_section(configuration_file, console, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class LineConfiguration(RestConfiguration):
@@ -32,12 +33,15 @@ class LineConfiguration(RestConfiguration):
     def unknown_command_srai(self):
         return self._unknown_command_srai
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         line = configuration_file.get_section(self.section_name)
         if line is not None:
-            self._unknown_command = configuration_file.get_option(line, "unknown_command", missing_value="Unknown command")
-            self._unknown_command_srai = configuration_file.get_option(line, "unknown_command_srai", missing_value=None)
-        super(LineConfiguration, self).load_configuration(configuration_file, bot_root)
+            self._unknown_command = configuration_file.get_option(line, "unknown_command", missing_value="Unknown command", subs=subs)
+            self._unknown_command_srai = configuration_file.get_option(line, "unknown_command_srai", missing_value=None, subs=subs)
+        super(LineConfiguration, self).load_configuration_section(configuration_file, line, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

@@ -604,7 +604,7 @@ class MetOffice24HourForecast(MetOfficeForecast):
 
 class MetOffice(object):
 
-    def __init__(self, license_keys):
+    def check_for_license_keys(self, license_keys):
 
         if license_keys.has_key('METOFFICE_API_KEY'):
             api_key = license_keys.get_key('METOFFICE_API_KEY')

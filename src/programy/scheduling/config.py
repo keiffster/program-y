@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class SchedulerJobStoreConfiguration(BaseConfigurationData):
@@ -34,7 +35,10 @@ class SchedulerJobStoreConfiguration(BaseConfigurationData):
     def jobstore(self):
         return self._jobstore
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         jobstore = configuration_file.get_section(self._section_name, configuration)
         if jobstore is not None:
             self._name = configuration_file.get_option(jobstore, "name", missing_value=None)
@@ -69,7 +73,10 @@ class SchedulerMongoJobStoreConfiguration(BaseConfigurationData):
     def collection(self):
         return self._collection
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         mongodb = configuration_file.get_section(self._section_name, configuration)
         if mongodb is not None:
             self._collection = configuration_file.get_option(mongodb, "collection", missing_value=None)
@@ -96,7 +103,10 @@ class SchedulerRedisJobStoreConfiguration(BaseConfigurationData):
     def run_times_key(self):
         return self._run_times_key
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         redis = configuration_file.get_section(self._section_name, configuration)
         if redis is not None:
             self._jobs_key = configuration_file.get_option(redis, "jobs_key", missing_value=None)
@@ -121,7 +131,10 @@ class SchedulerSqlAlchemyJobStoreConfiguration(BaseConfigurationData):
     def url(self):
         return self._url
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         sqlalchemy = configuration_file.get_section(self._section_name, configuration)
         if sqlalchemy is not None:
             self._url = configuration_file.get_option(sqlalchemy, "url", missing_value=None)
@@ -143,7 +156,10 @@ class SchedulerThreadPoolConfiguration(BaseConfigurationData):
     def max_workers(self):
         return self._max_workers
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         threadpool = configuration_file.get_section(self._section_name, configuration)
         if threadpool is not None:
             self._max_workers = configuration_file.get_option(threadpool, "max_workers", missing_value=None)
@@ -165,7 +181,10 @@ class SchedulerProcessPoolConfiguration(BaseConfigurationData):
     def max_workers(self):
         return self._max_workers
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         processpool = configuration_file.get_section(self._section_name, configuration)
         if processpool is not None:
             self._max_workers = configuration_file.get_option(processpool, "max_workers", missing_value=None)
@@ -192,8 +211,10 @@ class SchedulerJobDefaultsConfiguration(BaseConfigurationData):
     def max_instances(self):
         return self._max_instances
 
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         job_defaults = configuration_file.get_section(self._section_name, configuration)
         if job_defaults is not None:
             self._coalesce = configuration_file.get_option(job_defaults, "coalesce", missing_value=None)
@@ -259,7 +280,7 @@ class SchedulerConfiguration(BaseConfigurationData):
     def job_defaults(self):
         return self._job_defaults
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         scheduler = configuration_file.get_section(self._section_name, configuration)
         if scheduler is not None:
             self._name = configuration_file.get_option(scheduler, "name", missing_value=None)

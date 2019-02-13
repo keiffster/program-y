@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BotSpellingConfiguration(BaseConfigurationData):
 
@@ -44,13 +46,16 @@ class BotSpellingConfiguration(BaseConfigurationData):
     def check_and_retry(self):
         return self._check_and_retry
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         spelling = configuration_file.get_section(self._section_name, configuration)
         if spelling is not None:
-            self._classname = configuration_file.get_option(spelling, "classname", missing_value=None)
-            self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None)
-            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False)
-            self._check_and_retry = configuration_file.get_bool_option(spelling, "check_and_retry", missing_value=False)
+            self._classname = configuration_file.get_option(spelling, "classname", missing_value=None, subs=subs)
+            self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None, subs=subs)
+            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False, subs=subs)
+            self._check_and_retry = configuration_file.get_bool_option(spelling, "check_and_retry", missing_value=False, subs=subs)
         else:
             YLogger.warning(self, "'spelling' section missing from bot config, using defaults")
 

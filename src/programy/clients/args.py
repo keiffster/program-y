@@ -27,6 +27,7 @@ class ClientArguments(object):
         self._config_name = "config.yaml"
         self._config_format = "yaml"
         self._no_loop = False
+        self._substitutions = None
 
     def parse_args(self, client):
         pass
@@ -55,6 +56,10 @@ class ClientArguments(object):
     def noloop(self):
         return self._no_loop
 
+    @property
+    def substitutions(self):
+        return self._substitutions
+
 
 class CommandLineClientArguments(ClientArguments):
 
@@ -65,6 +70,7 @@ class CommandLineClientArguments(ClientArguments):
         self._config_name = None
         self._config_format = None
         self._no_loop = False
+        self._substitutions = None
 
         ClientArguments.__init__(self, client)
         if parser is None:
@@ -74,6 +80,7 @@ class CommandLineClientArguments(ClientArguments):
 
         self.parser.add_argument('--bot_root', dest='bot_root', help='root folder for all bot configuration data')
         self.parser.add_argument('--config', dest='config', help='configuration file location')
+        self.parser.add_argument('--substitutions', dest='substitutions', help='values to substitute in the config file')
         self.parser.add_argument('--cformat', dest='cformat', help='configuration file format (yaml|json|ini)')
         self.parser.add_argument('--logging', dest='logging', help='logging configuration file')
         self.parser.add_argument('--noloop', dest='noloop', action='store_true', help='do not enter conversation loop')
@@ -87,4 +94,5 @@ class CommandLineClientArguments(ClientArguments):
         self._config_name = self.args.config
         self._config_format = self.args.cformat
         self._no_loop = self.args.noloop
+        self._substitutions = self.args.substitutions
         client.parse_args(self, self.args)

@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from abc import ABCMeta, abstractmethod
 
 from programy.config.base import BaseConfigurationData
-
+from programy.utils.substitutions.substitues import Substitutions
 
 class BaseSectionConfigurationData(BaseConfigurationData):
     __metaclass__ = ABCMeta
@@ -26,7 +26,7 @@ class BaseSectionConfigurationData(BaseConfigurationData):
         BaseConfigurationData.__init__(self, name)
 
     @abstractmethod
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         """
         Never Implemented
         """

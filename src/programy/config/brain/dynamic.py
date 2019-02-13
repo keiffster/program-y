@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainDynamicsConfiguration(BaseSectionConfigurationData):
@@ -39,31 +40,34 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
     def dynamic_vars(self):
         return self._dynamic_vars
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         dynamic_config = configuration_file.get_section("dynamic", configuration)
         if dynamic_config is not None:
-            self.load_dynamic_sets(configuration_file, dynamic_config)
-            self.load_dynamic_maps(configuration_file, dynamic_config)
-            self.load_dynamic_vars(configuration_file, dynamic_config)
+            self.load_dynamic_sets(configuration_file, dynamic_config, subs=subs)
+            self.load_dynamic_maps(configuration_file, dynamic_config, subs=subs)
+            self.load_dynamic_vars(configuration_file, dynamic_config, subs=subs)
         else:
             YLogger.error(self, "Config section [dynamic] missing from Brain, using defaults")
 
-    def load_dynamic_sets(self, configuration_file, dynamic_config):
-        sets_config = configuration_file.get_option(dynamic_config, "sets")
+    def load_dynamic_sets(self, configuration_file, dynamic_config, subs: Substitutions = None):
+        sets_config = configuration_file.get_option(dynamic_config, "sets", subs=subs)
         if sets_config is not None:
             for set_key in sets_config.keys():
                 dyn_set_class = sets_config[set_key]
                 self._dynamic_sets[set_key.upper()] = dyn_set_class
 
-    def load_dynamic_maps(self, configuration_file, dynamic_config):
-        maps_config = configuration_file.get_option(dynamic_config, "maps")
+    def load_dynamic_maps(self, configuration_file, dynamic_config, subs: Substitutions = None):
+        maps_config = configuration_file.get_option(dynamic_config, "maps", subs=subs)
         if maps_config is not None:
             for map_name in maps_config.keys():
                 dyn_map_class = maps_config[map_name]
                 self._dynamic_maps[map_name.upper()] = dyn_map_class
 
-    def load_dynamic_vars(self, configuration_file, dynamic_config):
-        vars_config = configuration_file.get_option(dynamic_config, "variables")
+    def load_dynamic_vars(self, configuration_file, dynamic_config, subs: Substitutions = None):
+        vars_config = configuration_file.get_option(dynamic_config, "variables", subs=subs)
         if vars_config is not None:
             for var_name in vars_config.keys():
                 dyn_var_class = vars_config[var_name]

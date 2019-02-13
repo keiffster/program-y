@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class TwilioConfiguration(RestConfiguration):
@@ -22,8 +23,12 @@ class TwilioConfiguration(RestConfiguration):
     def __init__(self):
         RestConfiguration.__init__(self, "twilio")
 
-    def load_configuration(self, configuration_file, bot_root):
-        super(TwilioConfiguration, self).load_configuration(configuration_file, bot_root)
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
+        twilio = configuration_file.get_section(self.section_name)
+        super(TwilioConfiguration, self).load_configuration_section(configuration_file, twilio, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         super(TwilioConfiguration, self).to_yaml(data, defaults)

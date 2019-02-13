@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainSecurityConfiguration(BaseSectionConfigurationData):
@@ -41,12 +42,16 @@ class BrainSecurityConfiguration(BaseSectionConfigurationData):
     def denied_text(self):
         return self._denied_text
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:
-            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
-            self._denied_srai = configuration_file.get_option(service, "denied_srai", missing_value=None)
-            self._denied_text = configuration_file.get_option(service, "denied_text", missing_value=BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED)
+            self._classname = configuration_file.get_option(service, "classname", missing_value=None, subs=subs)
+            self._denied_srai = configuration_file.get_option(service, "denied_srai", missing_value=None, subs=subs)
+            self._denied_text = configuration_file.get_option(service, "denied_text",
+                                                              missing_value=BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED, subs=subs)
         else:
             YLogger.warning(self, "'security' section missing from bot config, using to defaults")
 
@@ -58,6 +63,9 @@ class BrainSecurityAuthenticationConfiguration(BrainSecurityConfiguration):
         self._classname =  "programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService"
         self._denied_srai = "AUTHENTICATION_FAILED"
         self._denied_text = "Access Denied!"
+
+    def check_for_license_keys(self, license_keys):
+        BrainSecurityConfiguration.check_for_license_keys(self, license_keys)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
@@ -78,8 +86,11 @@ class BrainSecurityAuthorisationConfiguration(BrainSecurityConfiguration):
         self._denied_srai = "AUTHORISATION_FAILED"
         self._denied_text = "Access Denied!"
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        super(BrainSecurityAuthorisationConfiguration, self).load_config_section(configuration_file, configuration, bot_root)
+    def check_for_license_keys(self, license_keys):
+        BrainSecurityConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        super(BrainSecurityAuthorisationConfiguration, self).load_config_section(configuration_file, configuration, bot_root, subs=subs)
         service = configuration_file.get_section(self.section_name, configuration)
         self.load_additional_key_values(configuration_file, service)
 
@@ -102,8 +113,11 @@ class BrainSecurityAccountLinkerConfiguration(BrainSecurityConfiguration):
         self._denied_srai = "ACCOUNT_LINKING_FAILED"
         self._denied_text = "Unable to link accounts!"
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        super(BrainSecurityAccountLinkerConfiguration, self).load_config_section(configuration_file, configuration, bot_root)
+    def check_for_license_keys(self, license_keys):
+        BrainSecurityConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        super(BrainSecurityAccountLinkerConfiguration, self).load_config_section(configuration_file, configuration, bot_root, subs=subs)
         service = configuration_file.get_section(self.section_name, configuration)
         self.load_additional_key_values(configuration_file, service)
 

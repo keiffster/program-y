@@ -14,9 +14,9 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from abc import ABCMeta, abstractmethod
+from abc import ABCMeta
 from programy.utils.logging.ylogger import YLogger
-
+from programy.utils.substitutions.substitues import Substitutions
 
 class BaseConfigurationData(object):
     __metaclass__ = ABCMeta
@@ -52,14 +52,14 @@ class BaseConfigurationData(object):
     def id(self):
         return self._section_name
 
-    def _get_file_option(self, config_file, option_name, section, bot_root):
+    def _get_file_option(self, config_file, option_name, section, bot_root, subs: Substitutions=None):
 
         assert (config_file is not None)
         assert (option_name is not None)
 
-        option = config_file.get_option(section, option_name)
+        option = config_file.get_option(section, option_name, subs=subs)
         if option is not None:
-            option = self.sub_bot_root(option, bot_root)
+            option = self.sub_bot_root(option, bot_root, subs=subs)
         return option
 
     def sub_bot_root(self, text, root):
@@ -72,13 +72,23 @@ class BaseConfigurationData(object):
     def additionals_to_add(self):
         return []
 
-    def load_additional_key_values(self, file_config, service):
+    def load_additional_key_values(self, file_config, service, subs: Substitutions = None):
         if file_config:
             if service:
                 for key in file_config.get_keys(service):
                     if key in self.additionals_to_add():
-                        value = file_config.get_option(service, key)
+                        value = file_config.get_option(service, key, subs=subs)
                         self._additionals[key] = value
+
+    def _extract_license_key(self, attr, license_keys):
+        if attr is not None:
+            if "LICENSE:" in attr:
+                if license_keys.has_key(attr[8:]):
+                    return license_keys.get_key(attr[8:])
+        return attr
+
+    def check_for_license_keys(self, license_keys):
+        return
 
     def config_to_yaml(self, data, config, defaults=True):
 

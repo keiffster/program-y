@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class FileStoreConfiguration(BaseSectionConfigurationData):
@@ -83,30 +84,33 @@ class FileStoreConfiguration(BaseSectionConfigurationData):
     def delete_on_start(self):
         return self._delete_on_start
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         dirs_config = configuration_file.get_option(configuration, self.section_name)
         if dirs_config is not None:
-            self.extract_configuration(configuration_file, dirs_config, bot_root)
+            self.extract_configuration(configuration_file, dirs_config, bot_root, subs=subs)
         else:
             YLogger.warning(self, "'%s' section missing from bot config, using to defaults", self.section_name)
 
-    def extract_configuration(self, configuration_file, files_config, bot_root):
-        dirs = configuration_file.get_multi_file_option(files_config, "dirs", bot_root)
+    def extract_configuration(self, configuration_file, files_config, bot_root, subs: Substitutions = None):
+        dirs = configuration_file.get_multi_file_option(files_config, "dirs", bot_root, subs=subs)
         if dirs is not None and dirs:
             self._dirs = dirs
-            self._extension = configuration_file.get_option(files_config, "extension")
-            self._subdirs = configuration_file.get_bool_option(files_config, "subdirs", False)
+            self._extension = configuration_file.get_option(files_config, "extension", subs=subs)
+            self._subdirs = configuration_file.get_bool_option(files_config, "subdirs", False, subs=subs)
             self._has_single_file = False
         else:
-            file = configuration_file.get_option(files_config, "file")
+            file = configuration_file.get_option(files_config, "file", subs=subs)
             if file is not None:
                 self._dirs = [self.sub_bot_root(file, bot_root)]
                 self._has_single_file = True
 
-        self._format = configuration_file.get_option(files_config, "format", None)
-        self._encoding = configuration_file.get_option(files_config, "encoding", None)
+        self._format = configuration_file.get_option(files_config, "format", None, subs=subs)
+        self._encoding = configuration_file.get_option(files_config, "encoding", None, subs=subs)
 
-        self._delete_on_start = configuration_file.get_bool_option(files_config, "delete_on_start", False)
+        self._delete_on_start = configuration_file.get_bool_option(files_config, "delete_on_start", False, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

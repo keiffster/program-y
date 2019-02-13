@@ -8,6 +8,7 @@ from programy.storage.stores.file.config import FileStorageConfiguration
 from programy.storage.stores.file.store.config import FileStoreConfiguration
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.factory import StorageFactory
+from programytest.clients.arguments import MockArguments
 
 
 class TestClient(BotClient):
@@ -164,8 +165,7 @@ class TestClient(BotClient):
         self.add_template_nodes_store()
 
     def parse_arguments(self, argument_parser):
-        client_args = {}
-        return client_args
+        return MockArguments()
 
     def initiate_logging(self, arguments):
         pass

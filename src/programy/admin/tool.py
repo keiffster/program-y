@@ -85,11 +85,17 @@ class AdminTool(object):
         display("Available bots are:\n")
         for bot in bots:
             display("\t%s" % bot)
-        display("\n\tTo download use 'python3 -m programy.admin.tool donwload <bot-name>'")
+        if os.name == 'posix':
+            display("\n\tTo download use 'python3 -m programy.admin.tool download <bot-name>'")
+        else:
+            display("\n\tTo download use 'python -m programy.admin.tool download <bot-name>'")
 
         display("\nAdditional components are:\n")
         display("\ttextblob")
-        display("\n\tTo install use 'python3 -m programy.admin.tool install <component>'")
+        if os.name == 'posix':
+            display("\n\tTo install use 'python3 -m programy.admin.tool install <component>'")
+        else:
+            display("\n\tTo install use 'python -m programy.admin.tool install <component>'")
         display()
 
     @staticmethod
@@ -122,8 +128,9 @@ class AdminTool(object):
         if bot_name not in bots:
             raise Exception("Unknown bot [%s]" % bot_name)
 
-        display("Removing existing file from [%s]" % os.getcwd())
-        AdminTool.delete_folder_contents(os.getcwd())
+        if os.name == 'posix':
+            display("Removing existing file from [%s]" % os.getcwd())
+            AdminTool.delete_folder_contents(os.getcwd())
 
         filename = AdminTool.download_bot(bot_name, display)
 
@@ -163,7 +170,7 @@ class AdminTool(object):
             display("\n\tcd scripts/xnix")
             display("\t./%s.sh" % bot_name)
         else:
-            display("\n\tcd scripts\\xnix")
+            display("\n\tcd scripts\\windows")
             display("\t%s.cmd" % bot_name)
 
     @staticmethod
@@ -178,7 +185,6 @@ class AdminTool(object):
     def run(self, words, display=print):
         try:
             num_words = len(words)
-            text = " ".join(words)
             if num_words > 0:
                 primary = words[0]
                 if primary == 'list':
@@ -192,7 +198,7 @@ class AdminTool(object):
                 else:
                     raise Exception("Unknown primary command [%s]" % words[0])
             else:
-                raise Exception("Invalid command [%s]" % text)
+                AdminTool.show_help(words, display)
 
         except Exception as e:
             display(str(e))

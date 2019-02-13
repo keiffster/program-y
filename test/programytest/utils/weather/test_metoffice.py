@@ -2093,7 +2093,7 @@ class MetOfficeObservationTests(unittest.TestCase):
 class MockMetOffice(MetOffice):
 
     def __init__(self, license_keys):
-        MetOffice.__init__(self, license_keys)
+        MetOffice.__init__(self)
         self._observation_file = None
         self._forecast_file = None
 
@@ -2116,9 +2116,8 @@ class MetOfficeTests(unittest.TestCase):
         self.lng = -3.1752001
 
     def test_init(self):
-        met_office = MetOffice(self._client.license_keys)
+        met_office = MetOffice()
         self.assertIsNotNone(met_office)
-        self.assertIsNotNone(met_office._met_office_api)
 
     def test_init_no_license_keys(self):
         with self.assertRaises(Exception):

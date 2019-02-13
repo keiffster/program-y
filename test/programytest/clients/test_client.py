@@ -8,8 +8,10 @@ from programy.clients.client import BotFactory
 from programy.config.bot.bot import BotConfiguration
 from programy.bot import Bot
 
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 from programytest.clients.arguments import MockArgumentParser
-from programy.config.client.config import ClientConfigurationData
 
 
 class MockClientConfiguration(ClientConfigurationData):
@@ -17,9 +19,9 @@ class MockClientConfiguration(ClientConfigurationData):
     def __init__(self):
         ClientConfigurationData.__init__(self, "console")
 
-    def load_configuration(self, configuration_file, bot_root):
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions):
         console = configuration_file.get_section(self.section_name)
-        super(MockClientConfiguration, self).load_configuration(configuration_file, console, bot_root)
+        super(MockClientConfiguration, self).load_configuration(configuration_file, console, bot_root, subs=subs)
 
 
 class MockBotClient(BotClient):

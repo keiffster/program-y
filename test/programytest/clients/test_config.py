@@ -1,8 +1,9 @@
 import unittest
 
 from programy.config.file.yaml_file import YamlConfigurationFile
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
 from programy.clients.events.console.config import ConsoleConfiguration
+
 
 class ClientConfigurationDataTests(unittest.TestCase):
 
@@ -25,7 +26,7 @@ class ClientConfigurationDataTests(unittest.TestCase):
         bot_config = yaml.get_section("console")
 
         client_config = ClientConfigurationData("test")
-        client_config.load_configuration(yaml, bot_config, ".")
+        client_config.load_configuration_section(yaml, bot_config, ".")
 
         self.assertEqual("programy.clients.client.DefaultBotSelector", client_config.bot_selector)
 
@@ -47,7 +48,7 @@ class ClientConfigurationDataTests(unittest.TestCase):
         bot_config = yaml.get_section("console")
 
         client_config = ClientConfigurationData("test")
-        client_config.load_configuration(yaml, bot_config, ".")
+        client_config.load_configuration_section(yaml, bot_config, ".")
 
         self.assertIsNone(client_config.bot_selector)
 

@@ -24,6 +24,7 @@ from programy.storage.stores.logger.config import LoggerStorageConfiguration
 from programy.storage.stores.nosql.mongo.config import MongoStorageConfiguration
 from programy.storage.stores.nosql.redis.config import RedisStorageConfiguration
 from programy.storage.factory import StorageFactory
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class StorageConfiguration(BaseConfigurationData):
@@ -41,7 +42,10 @@ class StorageConfiguration(BaseConfigurationData):
     def storage_configurations(self):
         return self._store_configs
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
 
@@ -65,27 +69,27 @@ class StorageConfiguration(BaseConfigurationData):
                     YLogger.error(None, "'config' section missing from client config stores element [%s], ignoring config", store)
                     continue
 
-                type = configuration_file.get_option(store_config, 'type')
+                type = configuration_file.get_option(store_config, 'type', subs=subs)
 
                 if type == 'sql':
                     config = SQLStorageConfiguration()
-                    config.load_config_section(configuration_file, store_config, bot_root)
+                    config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
 
                 elif type == 'mongo':
                     config = MongoStorageConfiguration()
-                    config.load_config_section(configuration_file, store_config, bot_root)
+                    config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
 
                 elif type == 'redis':
                     config = RedisStorageConfiguration()
-                    config.load_config_section(configuration_file, store_config, bot_root)
+                    config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
 
                 elif type == 'file':
                     config = FileStorageConfiguration()
-                    config.load_config_section(configuration_file, store_config, bot_root)
+                    config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
 
                 elif type == 'logger':
                     config = LoggerStorageConfiguration()
-                    config.load_config_section(configuration_file, store_config, bot_root)
+                    config.load_config_section(configuration_file, store_config, bot_root, subs=subs)
 
                 self._store_configs[store] = config
 

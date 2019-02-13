@@ -1,5 +1,6 @@
-import smtplib
+from programy.utils.logging.ylogger import YLogger
 
+import smtplib
 import mimetypes
 
 from email import encoders
@@ -11,7 +12,7 @@ from email.mime.multipart import MIMEMultipart
 
 from programy.utils.email.config import EmailConfiguration
 
-class Email(object):
+class EmailSender(object):
 
     def __init__(self, config: EmailConfiguration):
         self._config = config
@@ -60,30 +61,41 @@ class Email(object):
 
         msg.attach(attach)
 
+    def _smtp_server(self, host, port):
+        return smtplib.SMTP(host, port)
+
+    def _send_message(self, host, port, username, password, msg):
+        YLogger.info(self, "Email sender starting")
+        server = self._smtp_server(host, port)
+        server.ehlo()
+        server.starttls()
+        YLogger.info(self, "Email sender logging in")
+        server.login(username, password)
+        YLogger.info(self, "Email sender sending")
+        server.send_message(msg)
+        YLogger.info(self, "Email sender quiting")
+        server.quit()
+
     def send(self, to, subject, message, attachments=[]):
 
-        if attachments:
-            msg = MIMEMultipart()
-            msg.attach(MIMEText(message))
-            self.add_mime_attachements(msg, attachments)
-        else:
-            msg = MIMEText(message)
+        try:
+            if attachments:
+                YLogger.info(self, "Email sender adding mime attachment")
+                msg = MIMEMultipart()
+                msg.attach(MIMEText(message))
+                self.add_mime_attachements(msg, attachments)
+            else:
+                msg = MIMEText(message)
 
-        msg['Subject'] = subject
-        msg['From'] = self._from_addr
-        msg['To'] = to
+            msg['Subject'] = subject
+            msg['From'] = self._from_addr
+            msg['To'] = to
 
-        print("Starting")
-        server=smtplib.SMTP(self._config.host, self._config.port)
-        server.ehlo()
-        print("TLS")
-        server.starttls()
-        print("Logging in")
-        server.login(self._.config.username, self._config.password)
-        print("Sending")
-        server.send_message(msg)
-        print("Quiting")
-        server.quit()
+            self._send_message(self._config.host, self._config.port, self._config.username, self._config.password, msg)
+
+        except Exception as e:
+            YLogger.exception(self, "Email sender failed", e)
+
 
 
 

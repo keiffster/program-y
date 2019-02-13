@@ -27,17 +27,11 @@ class GeoNamesTests(unittest.TestCase):
         with self.assertRaises(Exception):
             geonames = GeoNamesApi(license_keys)
 
-    def test_geonames_with_license_keys(self):
-        license_keys = LicenseKeys()
-        license_keys.add_key('GEO_NAMES_COUNTRY', "DummyValue")
-        license_keys.add_key('GEO_NAMES_ACCOUNTNAME', "DummyValue")
-        geonames = GeoNamesApi(license_keys)
-
     def test_geonames(self):
         client = TestClient()
         client.add_license_keys_store()
 
-        geonames = GeoNamesApi(client.license_keys)
+        geonames = GeoNamesApi()
         self.assertIsNotNone(geonames)
 
         GeoNamesApi.get_latlong_for_postcode_response_file = os.path.dirname(__file__)+ os.sep + "geonames_latlong.json"

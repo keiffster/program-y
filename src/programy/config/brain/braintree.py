@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainBraintreeConfiguration(BaseSectionConfigurationData):
@@ -34,11 +35,14 @@ class BrainBraintreeConfiguration(BaseSectionConfigurationData):
     def save_as_user(self):
         return self._save_as_user
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         braintree = configuration_file.get_section("braintree", configuration)
         if braintree is not None:
-            self._create = configuration_file.get_option(braintree, "create", missing_value=None)
-            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system")
+            self._create = configuration_file.get_option(braintree, "create", missing_value=None, subs=subs)
+            self._save_as_user = configuration_file.get_option(braintree, "save_as_user", missing_value="system", subs=subs)
         else:
             YLogger.warning(self, "'braintree' section missing from bot config, using to defaults")
 

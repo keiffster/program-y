@@ -4,6 +4,7 @@ from programy.clients.events.tcpsocket.config import SocketConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class SocketConfigurationTests(unittest.TestCase):
 
     def test_init(self):

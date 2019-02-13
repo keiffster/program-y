@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from abc import ABCMeta, abstractmethod
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BaseConfigurationFile(object):
@@ -56,15 +57,42 @@ class BaseConfigurationFile(object):
         """
         raise NotImplementedError()
 
+    def _replace_subs(self, subs: Substitutions, value):
+        if subs is not None:
+            return subs.replace(value)
+
+        return value
+
     @abstractmethod
-    def get_option(self, section, option_name, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+    def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_int_option(self, section, option_name, missing_value=0, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """

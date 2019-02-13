@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotSentenceJoinerConfiguration(BaseConfigurationData):
@@ -43,12 +44,15 @@ class BotSentenceJoinerConfiguration(BaseConfigurationData):
     def terminator(self):
         return self._terminator
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         joiner = configuration_file.get_section(self._section_name, configuration)
         if joiner is not None:
-            self._classname = configuration_file.get_option(joiner, "classname", missing_value=BotSentenceJoinerConfiguration.DEFAULT_CLASSNAME)
-            self._join_chars = configuration_file.get_option(joiner, "join_chars", missing_value=BotSentenceJoinerConfiguration.DEFAULT_JOIN_CHARS)
-            self._terminator = configuration_file.get_option(joiner, "terminator", missing_value=BotSentenceJoinerConfiguration.DEFAULT_TERMINATOR)
+            self._classname = configuration_file.get_option(joiner, "classname", missing_value=BotSentenceJoinerConfiguration.DEFAULT_CLASSNAME, subs=subs)
+            self._join_chars = configuration_file.get_option(joiner, "join_chars", missing_value=BotSentenceJoinerConfiguration.DEFAULT_JOIN_CHARS, subs=subs)
+            self._terminator = configuration_file.get_option(joiner, "terminator", missing_value=BotSentenceJoinerConfiguration.DEFAULT_TERMINATOR, subs=subs)
         else:
             YLogger.warning(self, "'joiner' section missing from bot config, using defaults")
 

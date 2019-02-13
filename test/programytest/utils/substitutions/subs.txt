@@ -1,0 +1,3 @@
+$FIRSTNAME:Fred
+$SURNAME:West
+$WIFE:Mary

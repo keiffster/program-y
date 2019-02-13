@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class AlexaConfiguration(RestConfiguration):
@@ -90,29 +91,32 @@ class AlexaConfiguration(RestConfiguration):
     def intent_map_file(self):
         return self._intent_map_file
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         alexa = configuration_file.get_section(self.section_name)
         if alexa is not None:
-            self._launch_text = configuration_file.get_option(alexa, "launch_text", missing_value=AlexaConfiguration.DEFAULT_LAUNCH_TEXT)
-            self._launch_srai = configuration_file.get_option(alexa, "launch_srai", missing_value=None)
+            self._launch_text = configuration_file.get_option(alexa, "launch_text", missing_value=AlexaConfiguration.DEFAULT_LAUNCH_TEXT, subs=subs)
+            self._launch_srai = configuration_file.get_option(alexa, "launch_srai", missing_value=None, subs=subs)
 
-            self._stop_text = configuration_file.get_option(alexa, "stop_text", missing_value=AlexaConfiguration.DEFAULT_STOP_TEXT)
-            self._stop_srai = configuration_file.get_option(alexa, "stop_srai", missing_value=None)
+            self._stop_text = configuration_file.get_option(alexa, "stop_text", missing_value=AlexaConfiguration.DEFAULT_STOP_TEXT, subs=subs)
+            self._stop_srai = configuration_file.get_option(alexa, "stop_srai", missing_value=None, subs=subs)
 
-            self._cancel_text = configuration_file.get_option(alexa, "cancel_text", missing_value=AlexaConfiguration.DEFAULT_CANCEL_TEXT)
-            self._cancel_srai = configuration_file.get_option(alexa, "cancel_srai", missing_value=None)
+            self._cancel_text = configuration_file.get_option(alexa, "cancel_text", missing_value=AlexaConfiguration.DEFAULT_CANCEL_TEXT, subs=subs)
+            self._cancel_srai = configuration_file.get_option(alexa, "cancel_srai", missing_value=None, subs=subs)
 
-            self._help_text = configuration_file.get_option(alexa, "help_text", missing_value=AlexaConfiguration.DEFAULT_HELP_TEXT)
-            self._help_srai = configuration_file.get_option(alexa, "help_srai", missing_value=None)
+            self._help_text = configuration_file.get_option(alexa, "help_text", missing_value=AlexaConfiguration.DEFAULT_HELP_TEXT, subs=subs)
+            self._help_srai = configuration_file.get_option(alexa, "help_srai", missing_value=None, subs=subs)
 
-            self._error_text = configuration_file.get_option(alexa, "error_text", missing_value=AlexaConfiguration.DEFAULT_ERROR_TEXT)
-            self._error_srai = configuration_file.get_option(alexa, "error_srai", missing_value=None)
+            self._error_text = configuration_file.get_option(alexa, "error_text", missing_value=AlexaConfiguration.DEFAULT_ERROR_TEXT, subs=subs)
+            self._error_srai = configuration_file.get_option(alexa, "error_srai", missing_value=None, subs=subs)
 
-            self._intent_map_file = configuration_file.get_option(alexa, "intent_map_file", missing_value=None)
+            self._intent_map_file = configuration_file.get_option(alexa, "intent_map_file", missing_value=None, subs=subs)
             leave_intents = configuration_file.get_option(alexa, "leave_intents",
-                                                           missing_value=AlexaConfiguration.DEFAULT_LEAVE_INTENT)
+                                                           missing_value=AlexaConfiguration.DEFAULT_LEAVE_INTENT, subs=subs)
             self._leave_intents = [x.strip() for x in leave_intents.split(",")]
-        super(AlexaConfiguration, self).load_configuration(configuration_file, bot_root)
+        super(AlexaConfiguration, self).load_configuration_section(configuration_file, alexa, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

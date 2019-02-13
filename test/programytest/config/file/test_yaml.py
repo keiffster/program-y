@@ -2,9 +2,9 @@ import os
 
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.clients.events.console.config import ConsoleConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 from programytest.config.file.base_file_tests import ConfigurationBaseFileTests
-
 
 class YamlConfigurationFileTests(ConfigurationBaseFileTests):
 
@@ -441,3 +441,32 @@ brain:
 
         self.assertTrue(auth_service.exists("denied_srai"))
         self.assertEqual("ACCESS_DENIED", auth_service.value("denied_srai"))
+
+    def test_load_with_subs(self):
+
+        subs = Substitutions()
+        subs.add_substitute("$ALLOW_SYSTEM", True)
+
+        config_data = YamlConfigurationFile()
+        self.assertIsNotNone(config_data)
+        configuration = config_data.load_from_text("""
+            brain:
+                overrides:
+                  allow_system_aiml: true
+                  allow_learn_aiml: true
+                  allow_learnf_aiml: true
+          """, ConsoleConfiguration(), ".")
+        self.assertIsNotNone(configuration)
+
+        section = config_data.get_section("brainx")
+        self.assertIsNone(section)
+
+        section = config_data.get_section("brain")
+        self.assertIsNotNone(section)
+
+        child_section = config_data.get_section("overrides", section)
+        self.assertIsNotNone(child_section)
+
+        self.assertEqual(True, config_data.get_option(child_section, "allow_system_aiml"))
+        self.assertEqual(True, config_data.get_bool_option(child_section, "allow_system_aiml"))
+        self.assertEqual(False, config_data.get_bool_option(child_section, "other_value"))

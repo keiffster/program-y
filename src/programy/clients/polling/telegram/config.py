@@ -14,7 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class TelegramConfiguration(ClientConfigurationData):
@@ -32,12 +33,15 @@ class TelegramConfiguration(ClientConfigurationData):
     def unknown_command_srai(self):
         return self._unknown_command_srai
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         telegram = configuration_file.get_section(self.section_name)
         if telegram is not None:
-            self._unknown_command = configuration_file.get_option(telegram, "unknown_command", missing_value="Unknown command")
-            self._unknown_command_srai = configuration_file.get_option(telegram, "unknown_command_srai", missing_value=None)
-        super(TelegramConfiguration, self).load_configuration(configuration_file, telegram, bot_root)
+            self._unknown_command = configuration_file.get_option(telegram, "unknown_command", missing_value="Unknown command", subs=subs)
+            self._unknown_command_srai = configuration_file.get_option(telegram, "unknown_command_srai", missing_value=None, subs=subs)
+        super(TelegramConfiguration, self).load_configuration_section(configuration_file, telegram, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

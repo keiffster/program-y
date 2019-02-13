@@ -25,6 +25,8 @@ from programy.config.brain.oobs import BrainOOBSConfiguration
 from programy.config.brain.dynamic import BrainDynamicsConfiguration
 from programy.config.brain.tokenizer import BrainTokenizerConfiguration
 from programy.config.brain.debugfiles import BrainDebugFilesConfiguration
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BrainConfiguration(BaseContainerConfigurationData):
 
@@ -81,19 +83,32 @@ class BrainConfiguration(BaseContainerConfigurationData):
     def debugfiles(self):
         return self._debugfiles
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        self._overrides.check_for_license_keys(license_keys)
+        self._defaults.check_for_license_keys(license_keys)
+        self._binaries.check_for_license_keys(license_keys)
+        self._braintree.check_for_license_keys(license_keys)
+        self._services.check_for_license_keys(license_keys)
+        self._security.check_for_license_keys(license_keys)
+        self._oob.check_for_license_keys(license_keys)
+        self._dynamics.check_for_license_keys(license_keys)
+        self._tokenizer.check_for_license_keys(license_keys)
+        self._debugfiles.check_for_license_keys(license_keys)
+        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         brain_config = configuration_file.get_section(self.section_name)
         if brain_config is not None:
-            self._overrides.load_config_section(configuration_file, brain_config, bot_root)
-            self._defaults.load_config_section(configuration_file, brain_config, bot_root)
-            self._binaries.load_config_section(configuration_file, brain_config, bot_root)
-            self._braintree.load_config_section(configuration_file, brain_config, bot_root)
-            self._services.load_config_section(configuration_file, brain_config, bot_root)
-            self._security.load_config_section(configuration_file, brain_config, bot_root)
-            self._oob.load_config_section(configuration_file, brain_config, bot_root)
-            self._dynamics.load_config_section(configuration_file, brain_config, bot_root)
-            self._tokenizer.load_config_section(configuration_file, brain_config, bot_root)
-            self._debugfiles.load_config_section(configuration_file, brain_config, bot_root)
+            self._overrides.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._defaults.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._binaries.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._braintree.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._services.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._security.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._oob.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._dynamics.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._tokenizer.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._debugfiles.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         self.config_to_yaml(data, BrainOverridesConfiguration(), defaults)

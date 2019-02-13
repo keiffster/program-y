@@ -28,7 +28,7 @@ class RestBotClient(BotClient):
         self.api_keys = []
 
     def get_client_configuration(self):
-        return RestConfiguration("rest")
+        return RestConfiguration(self.id)
 
     def load_api_keys(self):
         if self.configuration.client_configuration.use_api_keys is True:

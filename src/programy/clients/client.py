@@ -27,10 +27,12 @@ from programy.bot import Bot
 from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
+from programy.utils.substitutions.substitues import Substitutions
 from programy.scheduling.scheduler import ProgramyScheduler
 from programy.clients.render.text import TextRenderer
 from programy.utils.classes.loader import ClassLoader
 from programy.storage.factory import StorageFactory
+
 
 class ResponseLogger(object):
 
@@ -110,6 +112,10 @@ class BotClient(ResponseLogger):
 
         self.initiate_logging(self.arguments)
 
+        self._subsitutions = Substitutions()
+        if self.arguments.substitutions is not None:
+            self._subsitutions.load_substitutions(self.arguments.substitutions)
+
         self.load_configuration(self.arguments)
         self.parse_configuration()
 
@@ -119,6 +125,7 @@ class BotClient(ResponseLogger):
 
         self.load_license_keys()
         self.get_license_keys()
+        self._configuration.client_configuration.check_for_license_keys(self._license_keys)
 
         self.load_scheduler()
 
@@ -214,7 +221,7 @@ class BotClient(ResponseLogger):
         """
         raise NotImplementedError("You must override this and return a subclassed client configuration")
 
-    def load_configuration(self, arguments):
+    def load_configuration(self, arguments, subs: Substitutions = None):
         if arguments.bot_root is None:
             if arguments.config_filename is not None:
                 arguments.bot_root = os.path.dirname(arguments.config_filename)
@@ -224,9 +231,10 @@ class BotClient(ResponseLogger):
 
         if arguments.config_filename is not None:
             self._configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
-                                                                                   arguments.config_filename,
-                                                                                   arguments.config_format,
-                                                                                   arguments.bot_root)
+                                                                                    arguments.config_filename,
+                                                                                    arguments.config_format,
+                                                                                    arguments.bot_root,
+                                                                                    subs)
         else:
             print("No configuration file specified, using defaults only !")
             self._configuration = ProgramyConfiguration(self.get_client_configuration())
@@ -254,6 +262,7 @@ class BotClient(ResponseLogger):
             if self.get_client_configuration().renderer is not None:
                 clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
                 return clazz(self)
+
         except Exception as e:
             YLogger.exception(None, "Failed to load config specified renderer", e)
 
@@ -266,7 +275,8 @@ class BotClient(ResponseLogger):
         raise NotImplementedError("You must override this and implement the logic to create a response to the question")
 
     def render_response(self, client_context, response):
-        raise NotImplementedError("You must override this and implement the logic to process the response by rendering using a RCS renderer")
+        raise NotImplementedError("You must override this and implement the logic to process the response by rendering"
+                                  " using a RCS renderer")
 
     def process_response(self, client_context, response):
         raise NotImplementedError("You must override this and implement the logic to display the response to the user")

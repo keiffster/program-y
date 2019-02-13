@@ -18,6 +18,8 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.nosql.mongo.engine import MongoStorageEngine
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class MongoStorageConfiguration(BaseConfigurationData):
 
@@ -40,7 +42,10 @@ class MongoStorageConfiguration(BaseConfigurationData):
     def drop_all_first(self):
         return self._drop_all_first
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
             self._url = configuration_file.get_option(storage, "url")

@@ -26,7 +26,7 @@ class GeoNamesApi(object):
     POSTALCODESEARCH = "http://api.geonames.org/postalCodeSearchJSON?postalcode={0}&country={1}&maxRows=10&username={2}"
     get_latlong_for_postcode_response_file = None
 
-    def __init__(self, license_keys):
+    def check_for_license_keys(self, license_keys):
 
         if license_keys.has_key('GEO_NAMES_ACCOUNTNAME'):
             self.account_name = license_keys.get_key('GEO_NAMES_ACCOUNTNAME')

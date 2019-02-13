@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BotSentimentAnalyserConfiguration(BaseConfigurationData):
 
@@ -34,11 +36,14 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
     def scores(self):
         return self._scores
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         sentiment = configuration_file.get_section(self._section_name, configuration)
         if sentiment is not None:
-            self._classname = configuration_file.get_option(sentiment, "classname", missing_value=None)
-            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.sentiment.scores.SentimentScores")
+            self._classname = configuration_file.get_option(sentiment, "classname", missing_value=None, subs=subs)
+            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.sentiment.scores.SentimentScores", subs=subs)
         else:
             YLogger.warning(self, "'sentiment' section missing from bot config, using defaults")
 

@@ -17,6 +17,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BrainBinariesConfiguration(BaseSectionConfigurationData):
 
@@ -38,12 +40,15 @@ class BrainBinariesConfiguration(BaseSectionConfigurationData):
     def load_aiml_on_binary_fail(self):
         return self._load_aiml_on_binary_fail
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         binaries = configuration_file.get_section("binaries", configuration)
         if binaries is not None:
-            self._save_binary = configuration_file.get_option(binaries, "save_binary", missing_value=None)
-            self._load_binary = configuration_file.get_option(binaries, "load_binary", missing_value=None)
-            self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None)
+            self._save_binary = configuration_file.get_option(binaries, "save_binary", missing_value=None, subs=subs)
+            self._load_binary = configuration_file.get_option(binaries, "load_binary", missing_value=None, subs=subs)
+            self._load_aiml_on_binary_fail = configuration_file.get_option(binaries, "load_aiml_on_binary_fail", missing_value=None, subs=subs)
         else:
             YLogger.warning(self, "'binaries' section missing from bot config, using to defaults")
 

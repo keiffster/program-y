@@ -20,7 +20,7 @@ class MockGoogleBotClient(GoogleBotClient):
 class MockHttpRequest(object):
 
     def __init__(self, data):
-        self.json = data
+        self.data = data
 
 
 class GoogleClientBotClientTests(unittest.TestCase):
@@ -42,9 +42,20 @@ class GoogleClientBotClientTests(unittest.TestCase):
         self.assertIsInstance(config, GoogleConfiguration)
 
 
-    def test_receive_message(self):
+    def test_receive_launch_intent_message(self):
         arguments = MockArgumentParser()
         client = MockGoogleBotClient(arguments)
         self.assertIsNotNone(client)
 
-        client.receive_message(None)
+        http_request = MockHttpRequest("""
+        {
+            "queryResult": {
+              "intent": {
+                "displayName": "Launch Intent"
+              },
+              "session": "test session"
+            }
+        }
+        """
+                                       )
+        client.receive_message(http_request)

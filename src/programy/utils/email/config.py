@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class EmailConfiguration(BaseConfigurationData):
 
@@ -49,7 +51,12 @@ class EmailConfiguration(BaseConfigurationData):
     def from_addr(self):
         return self._from_addr
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        self._username = self._extract_license_key(self._username, license_keys)
+        self._password = self._extract_license_key(self._password, license_keys)
+        BaseConfigurationData.check_for_license_keys(license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         email = configuration_file.get_section(self._section_name, configuration)
         if email is not None:
             self._host = configuration_file.get_option(email, "host", missing_value=None)

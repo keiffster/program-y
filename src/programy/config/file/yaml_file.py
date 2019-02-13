@@ -20,6 +20,8 @@ import yaml
 
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class YamlConfigurationFile(BaseConfigurationFile):
 
@@ -27,23 +29,23 @@ class YamlConfigurationFile(BaseConfigurationFile):
         BaseConfigurationFile.__init__(self)
         self.yaml_data = None
 
-    def load_from_text(self, text, client_configuration, bot_root):
+    def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions=None):
         self.yaml_data = yaml.load(text)
         if self.yaml_data is None:
             raise Exception("Yaml data is missing")
         configuration = ProgramyConfiguration(client_configuration)
-        configuration.load_config_data(self, bot_root)
+        configuration.load_config_data(self, bot_root, subs=subs)
         return configuration
 
-    def load_from_file(self, filename, client_configuration, bot_root):
+    def load_from_file(self, filename, client_configuration, bot_root, subs: Substitutions=None):
         configuration = ProgramyConfiguration(client_configuration)
         try:
             with open(filename, 'r+', encoding="utf-8") as yml_data_file:
                 self.yaml_data = yaml.load(yml_data_file)
-                configuration.load_config_data(self, bot_root)
+                configuration.load_config_data(self, bot_root, subs=subs)
 
         except Exception as excep:
-           YLogger.exception(self, "Failed to open yaml config file [%s]", excep, filename)
+            YLogger.exception(self, "Failed to open yaml config file [%s]", excep, filename)
 
         return configuration
 
@@ -64,28 +66,35 @@ class YamlConfigurationFile(BaseConfigurationFile):
             return parent_section[child_section_name].keys()
         return None
 
-    def get_option(self, section, option_name, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         if option_name in section:
-            return section[option_name]
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
-            return missing_value
+            option_value = section[option_name]
+            return self._replace_subs(subs, option_value)
 
-    def get_bool_option(self, section, option_name, missing_value=False):
+        YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
+        return missing_value
+
+    def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
         if option_name in section:
-            return section[option_name]
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
-            return missing_value
+            option_value = section[option_name]
+            if isinstance(option_value, bool):
+                return option_value
+            return bool(self._replace_subs(subs, option_value))
 
-    def get_int_option(self, section, option_name, missing_value=0):
+        YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
+        return missing_value
+
+    def get_int_option(self, section, option_name, missing_value=0, subs: Substitutions = None):
         if option_name in section:
-            return section[option_name]
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
-            return missing_value
+            option_value = section[option_name]
+            if isinstance(option_value, int):
+                return option_value
+            return int(self._replace_subs(subs, option_value))
 
-    def get_multi_option(self, section, option_name, missing_value=None):
+        YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+        return missing_value
+
+    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
 
         if missing_value is None:
             missing_value = []
@@ -96,14 +105,13 @@ class YamlConfigurationFile(BaseConfigurationFile):
             multis = []
             for value in splits:
                 if value is not None and value != '':
-                    multis.append(value)
+                    multis.append(self._replace_subs(subs, value))
             return multis
 
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
-            return [missing_value]
+        YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
+        return [missing_value]
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
 
         if missing_value is None:
             missing_value = []
@@ -114,9 +122,9 @@ class YamlConfigurationFile(BaseConfigurationFile):
             multis = []
             for value in splits:
                 if value is not None and value != '':
+                    value = self._replace_subs(subs, value)
                     multis.append(value.replace('$BOT_ROOT', bot_root))
             return multis
 
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
-            return missing_value
+        YLogger.warning(self, "Missing value for [%s] in config, return default value", option_name)
+        return missing_value

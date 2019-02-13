@@ -18,6 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.logger.engine import LoggerStorageEngine
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class LoggerStorageConfiguration(BaseConfigurationData):
@@ -31,10 +32,13 @@ class LoggerStorageConfiguration(BaseConfigurationData):
     def conversation_logger(self):
         return self._conversation_logger
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
-            self._conversation_logger = configuration_file.get_option(storage, "conversation_logger")
+            self._conversation_logger = configuration_file.get_option(storage, "conversation_logger", subs=subs)
         else:
             YLogger.error(None, "'config' section missing from storage config")
 

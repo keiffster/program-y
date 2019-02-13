@@ -10,7 +10,7 @@ class SanicRestConfigurationTests(unittest.TestCase):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         yaml.load_from_text("""
-        rest:
+        sanic:
           host: 127.0.0.1
           port: 5000
           debug: false
@@ -19,7 +19,7 @@ class SanicRestConfigurationTests(unittest.TestCase):
           api_key_file: apikeys.txt
         """, ConsoleConfiguration(), ".")
 
-        sanic_config = SanicRestConfiguration("rest")
+        sanic_config = SanicRestConfiguration("sanic")
         sanic_config.load_configuration(yaml, ".")
 
         self.assertEqual("127.0.0.1", sanic_config.host)

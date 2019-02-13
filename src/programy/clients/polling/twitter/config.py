@@ -14,7 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class TwitterConfiguration(ClientConfigurationData):
@@ -61,19 +62,22 @@ class TwitterConfiguration(ClientConfigurationData):
     def welcome_message(self):
         return self._welcome_message
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         twitter = configuration_file.get_section(self.section_name)
         if twitter is not None:
-            self._polling_interval = configuration_file.get_int_option(twitter, "polling_interval")
-            self._rate_limit_sleep = configuration_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1)
-            self._streaming = configuration_file.get_bool_option(twitter, "streaming")
-            self._use_status = configuration_file.get_bool_option(twitter, "use_status")
-            self._use_direct_message = configuration_file.get_bool_option(twitter, "use_direct_message")
+            self._polling_interval = configuration_file.get_int_option(twitter, "polling_interval", subs=subs)
+            self._rate_limit_sleep = configuration_file.get_int_option(twitter, "rate_limit_sleep", missing_value=-1, subs=subs)
+            self._streaming = configuration_file.get_bool_option(twitter, "streaming", subs=subs)
+            self._use_status = configuration_file.get_bool_option(twitter, "use_status", subs=subs)
+            self._use_direct_message = configuration_file.get_bool_option(twitter, "use_direct_message", subs=subs)
             if self._use_direct_message is True:
-                self._auto_follow = configuration_file.get_bool_option(twitter, "auto_follow")
+                self._auto_follow = configuration_file.get_bool_option(twitter, "auto_follow", subs=subs)
 
-            self._welcome_message = configuration_file.get_option(twitter, "welcome_message")
-        super(TwitterConfiguration, self).load_configuration(configuration_file, twitter, bot_root)
+            self._welcome_message = configuration_file.get_option(twitter, "welcome_message", subs=subs)
+        super(TwitterConfiguration, self).load_configuration_section(configuration_file, twitter, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

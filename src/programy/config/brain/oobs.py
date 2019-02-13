@@ -18,6 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.oob import BrainOOBConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainOOBSConfiguration(BaseSectionConfigurationData):
@@ -42,14 +43,17 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
     def oobs(self):
         return self._oobs.keys()
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         oobs = configuration_file.get_section("oob", configuration)
         if oobs is not None:
             oob_keys = configuration_file.get_keys(oobs)
 
             for name in oob_keys:
                 oob = BrainOOBConfiguration(name)
-                oob.load_config_section(configuration_file, oobs, bot_root)
+                oob.load_config_section(configuration_file, oobs, bot_root, subs=subs)
                 if name == 'default':
                     self._default = oob
                 else:

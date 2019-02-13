@@ -18,6 +18,8 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
 from programy.storage.stores.sql.engine import SQLStorageEngine
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class SQLStorageConfiguration(BaseConfigurationData):
 
@@ -50,16 +52,19 @@ class SQLStorageConfiguration(BaseConfigurationData):
     def drop_all_first(self):
         return self._drop_all_first
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         storage = configuration_file.get_section(self._section_name, configuration)
         if storage is not None:
-            self._url = configuration_file.get_option(storage, "url")
+            self._url = configuration_file.get_option(storage, "url", subs=subs)
             if self._url.endswith("memory"):
                 self._url += ":"
-            self._echo = configuration_file.get_option(storage, "echo")
-            self._encoding = configuration_file.get_option(storage, "encoding")
-            self._create_db = configuration_file.get_option(storage, "create_db")
-            self._drop_all_first = configuration_file.get_option(storage, "drop_all_first")
+            self._echo = configuration_file.get_option(storage, "echo", subs=subs)
+            self._encoding = configuration_file.get_option(storage, "encoding", subs=subs)
+            self._create_db = configuration_file.get_option(storage, "create_db", subs=subs)
+            self._drop_all_first = configuration_file.get_option(storage, "drop_all_first", subs=subs)
 
         else:
             YLogger.error(None, "'config' section missing from storage config")

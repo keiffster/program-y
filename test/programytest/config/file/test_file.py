@@ -1,6 +1,7 @@
 import unittest
 
 from programy.config.file.file import BaseConfigurationFile
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class TestBaseConfigurationFile(BaseConfigurationFile):
@@ -20,7 +21,7 @@ class TestBaseConfigurationFile(BaseConfigurationFile):
     def get_child_section_keys(self, section_name, parent_section=None):
         return None
 
-    def get_option(self, section, option_name, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         return None
 
 

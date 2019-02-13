@@ -18,6 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.service import BrainServiceConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainServicesConfiguration(BaseSectionConfigurationData):
@@ -36,14 +37,17 @@ class BrainServicesConfiguration(BaseSectionConfigurationData):
     def services(self):
         return self._services.keys()
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         services = configuration_file.get_section("services", configuration)
         if services is not None:
             service_keys = configuration_file.get_keys(services)
 
             for name in service_keys:
                 service = BrainServiceConfiguration(name)
-                service.load_config_section(configuration_file, services, bot_root)
+                service.load_config_section(configuration_file, services, bot_root, subs=subs)
                 self._services[name] = service
 
         else:

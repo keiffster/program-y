@@ -19,6 +19,7 @@ from programy.utils.logging.ylogger import YLogger
 import os
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
@@ -36,11 +37,14 @@ class BrainDebugFilesConfiguration(BaseSectionConfigurationData):
     def save_duplicates(self):
         return self._save_duplicates
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         debugfiles = configuration_file.get_section("debugfiles", configuration)
         if debugfiles is not None:
-            self._save_errors = configuration_file.get_bool_option(debugfiles, "save-errors", missing_value=False)
-            self._save_duplicates = configuration_file.get_bool_option(debugfiles, "save-duplicates", missing_value=False)
+            self._save_errors = configuration_file.get_bool_option(debugfiles, "save-errors", missing_value=False, subs=subs)
+            self._save_duplicates = configuration_file.get_bool_option(debugfiles, "save-duplicates", missing_value=False, subs=subs)
         else:
             YLogger.warning(self, "'debugfiles' section missing from brain config, using debugfile defaults")
 

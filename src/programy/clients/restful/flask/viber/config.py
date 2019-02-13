@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class ViberConfiguration(RestConfiguration):
@@ -37,13 +38,16 @@ class ViberConfiguration(RestConfiguration):
     def webhook(self):
         return self._webhook
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         viber = configuration_file.get_section(self.section_name)
         if viber is not None:
-            self._name = configuration_file.get_option(viber, "name", missing_value="Program-y")
-            self._avatar = configuration_file.get_option(viber, "avatar", missing_value="http://viber.com/avatar.jpg")
-            self._webhook = configuration_file.get_option(viber, "webhook", missing_value="https://localhost:443/incoming")
-        super(ViberConfiguration, self).load_configuration(configuration_file, bot_root)
+            self._name = configuration_file.get_option(viber, "name", missing_value="Program-y", subs=subs)
+            self._avatar = configuration_file.get_option(viber, "avatar", missing_value="http://viber.com/avatar.jpg", subs=subs)
+            self._webhook = configuration_file.get_option(viber, "webhook", missing_value="https://localhost:443/incoming", subs=subs)
+        super(ViberConfiguration, self).load_configuration_section(configuration_file, viber, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

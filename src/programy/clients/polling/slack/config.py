@@ -14,7 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class SlackConfiguration(ClientConfigurationData):
@@ -27,11 +28,14 @@ class SlackConfiguration(ClientConfigurationData):
     def polling_interval(self):
         return self._polling_interval
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         slack = configuration_file.get_section(self.section_name)
         if slack is not None:
-            self._polling_interval = configuration_file.get_int_option(slack, "polling_interval", missing_value=1)
-        super(SlackConfiguration, self).load_configuration(configuration_file, slack, bot_root)
+            self._polling_interval = configuration_file.get_int_option(slack, "polling_interval", missing_value=1, subs=subs)
+        super(SlackConfiguration, self).load_configuration_section(configuration_file, slack, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

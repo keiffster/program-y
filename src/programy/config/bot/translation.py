@@ -18,6 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BotTranslatorConfiguration(BaseConfigurationData):
 
@@ -39,12 +41,15 @@ class BotTranslatorConfiguration(BaseConfigurationData):
     def  to_lang(self):
         return self._to_lang
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         translation = configuration_file.get_section(self._section_name, configuration)
         if translation is not None:
-            self._classname = configuration_file.get_option(translation, "classname", missing_value=None)
-            self._from_lang = configuration_file.get_option(translation, "from", missing_value=None)
-            self._to_lang = configuration_file.get_option(translation, "to", missing_value=None)
+            self._classname = configuration_file.get_option(translation, "classname", missing_value=None, subs=subs)
+            self._from_lang = configuration_file.get_option(translation, "from", missing_value=None, subs=subs)
+            self._to_lang = configuration_file.get_option(translation, "to", missing_value=None, subs=subs)
         else:
             YLogger.warning(self, "'translation' section missing from bot config, using defaults")
 

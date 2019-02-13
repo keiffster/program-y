@@ -19,6 +19,7 @@ from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.security import BrainSecurityAuthenticationConfiguration
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 from programy.config.brain.security import BrainSecurityAccountLinkerConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
@@ -40,17 +41,20 @@ class BrainSecuritiesConfiguration(BaseSectionConfigurationData):
     def account_linker(self):
         return self._account_linker
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         securities = configuration_file.get_section(self.section_name, configuration)
         if securities is not None:
             self._authentication = BrainSecurityAuthenticationConfiguration()
-            self._authentication.load_config_section(configuration_file, securities, bot_root)
+            self._authentication.load_config_section(configuration_file, securities, bot_root, subs=subs)
 
             self._authorisation = BrainSecurityAuthorisationConfiguration()
-            self._authorisation.load_config_section(configuration_file, securities, bot_root)
+            self._authorisation.load_config_section(configuration_file, securities, bot_root, subs=subs)
 
             self._account_linker = BrainSecurityAccountLinkerConfiguration()
-            self._account_linker.load_config_section(configuration_file, securities, bot_root)
+            self._account_linker.load_config_section(configuration_file, securities, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         self.config_to_yaml(data, BrainSecurityAuthenticationConfiguration(), defaults)

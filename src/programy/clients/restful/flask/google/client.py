@@ -32,6 +32,9 @@ class GoogleBotClient(FlaskRestBotClient):
 
         print("Google Client loaded")
 
+    def _to_json(self, data):
+        return self._to_json(data)
+
     def get_client_configuration(self):
         return GoogleConfiguration()
 
@@ -58,22 +61,22 @@ class GoogleBotClient(FlaskRestBotClient):
     def _handle_launch_intent(self, client_context):
         response = self._get_reply_from_bot(client_context, self.configuration.client_configuration.launch_text,
                                             self.configuration.client_configuration.launch_srai)
-        return jsonify({"fulfillmentText": response})
+        return self._to_json({"fulfillmentText": response})
 
     def _handle_quit_intent(self, client_context):
         response = self._get_reply_from_bot(client_context, self.configuration.client_configuration.quit_text,
                                             self.configuration.client_configuration.quit_srai)
-        return jsonify({"fulfillmentText": response})
+        return self._to_json({"fulfillmentText": response})
 
     def _handle_help_intent(self, client_context):
         response = self._get_reply_from_bot(client_context, self.configuration.client_configuration.help_text,
                                             self.configuration.client_configuration.help_srai)
-        return jsonify({"fulfillmentText": response})
+        return self._to_json({"fulfillmentText": response})
 
     def _handle_error(self, client_context):
         response = self._get_reply_from_bot(client_context, self.configuration.client_configuration.error_text,
                                             self.configuration.client_configuration.error_srai)
-        return jsonify({"fulfillmentText": response})
+        return self._to_json({"fulfillmentText": response})
 
     def _handle_query_intent(self, client_context, query_result):
 
@@ -83,7 +86,7 @@ class GoogleBotClient(FlaskRestBotClient):
 
         response = self._ask_question(client_context, query_text)
 
-        return jsonify({"fulfillmentText": response})
+        return self._to_json({"fulfillmentText": response})
 
     def _get_userid(self, skill_data):
 
