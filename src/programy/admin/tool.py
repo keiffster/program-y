@@ -128,10 +128,6 @@ class AdminTool(object):
         if bot_name not in bots:
             raise Exception("Unknown bot [%s]" % bot_name)
 
-        if os.name == 'posix':
-            display("Removing existing file from [%s]" % os.getcwd())
-            AdminTool.delete_folder_contents(os.getcwd())
-
         filename = AdminTool.download_bot(bot_name, display)
 
         AdminTool.extract_bot(filename)
