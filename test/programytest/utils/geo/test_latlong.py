@@ -11,7 +11,7 @@ class LatLongTests(unittest.TestCase):
 
         latlong = LatLong(latitude=1.0, longitude=2.0)
         self.assertIsNotNone(latlong)
-        self.assertEquals(1.0, latlong.latitude)
-        self.assertEquals(2.0, latlong.longitude)
+        self.assertEqual(1.0, latlong.latitude)
+        self.assertEqual(2.0, latlong.longitude)
 
-        self.assertEquals("Latitude: 1.00, Longitude: 2.00", latlong.to_string())
+        self.assertEqual("Latitude: 1.00, Longitude: 2.00", latlong.to_string())

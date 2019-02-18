@@ -24,7 +24,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSRAIXNode)
-        self.assertEquals("ask", ast.children[0]._service)
+        self.assertEqual("ask", ast.children[0]._service)
 
     def test_sraix_template_params_as_children(self):
         template = ET.fromstring("""
@@ -44,7 +44,7 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSRAIXNode)
-        self.assertEquals("ask", ast.children[0]._service)
+        self.assertEqual("ask", ast.children[0]._service)
 
     def test_sraix_template_no_service(self):
         template = ET.fromstring("""
@@ -72,4 +72,4 @@ class TemplateGraphSraixTests(TemplateGraphTestClient):
         self.assertIsNotNone(ast.children)
         self.assertIsNotNone(ast.children[0])
         self.assertIsInstance(ast.children[0], TemplateSRAIXNode)
-        self.assertEquals("ask", ast.children[0]._service)
+        self.assertEqual("ask", ast.children[0]._service)

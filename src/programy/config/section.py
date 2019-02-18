@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from abc import ABCMeta, abstractmethod
 
 from programy.config.base import BaseConfigurationData
-
+from programy.utils.substitutions.substitues import Substitutions
 
 class BaseSectionConfigurationData(BaseConfigurationData):
     __metaclass__ = ABCMeta
@@ -26,7 +26,7 @@ class BaseSectionConfigurationData(BaseConfigurationData):
         BaseConfigurationData.__init__(self, name)
 
     @abstractmethod
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         """
         Never Implemented
         """

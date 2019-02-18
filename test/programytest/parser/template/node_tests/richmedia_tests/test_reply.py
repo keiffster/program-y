@@ -21,9 +21,9 @@ class TemplateReplyNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<reply><text>SAY HELLO</text></reply>", resolved)
+        self.assertEqual("<reply><text>SAY HELLO</text></reply>", resolved)
 
-        self.assertEquals("<reply><text>SAY HELLO</text></reply>", root.to_xml(self._client_context))
+        self.assertEqual("<reply><text>SAY HELLO</text></reply>", root.to_xml(self._client_context))
 
     def test_text_postback__replynode(self):
         root = TemplateNode()
@@ -39,6 +39,6 @@ class TemplateReplyNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<reply><text>SAY HELLO</text><postback>HELLO</postback></reply>", resolved)
+        self.assertEqual("<reply><text>SAY HELLO</text><postback>HELLO</postback></reply>", resolved)
 
-        self.assertEquals("<reply><text>SAY HELLO</text><postback>HELLO</postback></reply>", root.to_xml(self._client_context))
+        self.assertEqual("<reply><text>SAY HELLO</text><postback>HELLO</postback></reply>", root.to_xml(self._client_context))

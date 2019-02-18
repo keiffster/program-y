@@ -24,9 +24,6 @@ class WebChatBotClient(FlaskRestBotClient):
         self._api_keys = [
         ]
 
-    def get_description(self):
-        return 'ProgramY AIML2.0 Webchat Client'
-
     def get_client_configuration(self):
         return WebChatConfiguration()
 
@@ -144,7 +141,7 @@ if __name__ == '__main__':
         try:
             return WEB_CLIENT.receive_message(request)
         except Exception as e:
-            print(e)
+            print("Error receiving webchat message", e)
             YLogger.exception(None, "Web client error", e)
             return "500"
 

@@ -35,10 +35,9 @@ class WebChatConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, True)
 
-        self.assertEquals(data['cookie_id'], "ProgramYSession")
-        self.assertEquals(data['cookie_expires'], 90)
+        self.assertEqual(data['cookie_id'], "ProgramYSession")
+        self.assertEqual(data['cookie_expires'], 90)
 
-        self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
-        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
-        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")
+        self.assertEqual(data['bot'], 'bot')
+        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

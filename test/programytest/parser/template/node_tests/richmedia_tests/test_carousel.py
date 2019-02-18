@@ -35,7 +35,7 @@ class TemplateCarouselNodeTests(ParserTestsBaseClass):
         resolved = root.resolve(self._client_context)
 
         self.assertIsNotNone(resolved)
-        self.assertEquals("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", resolved)
+        self.assertEqual("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", resolved)
 
-        self.assertEquals("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", root.to_xml(self._client_context))
+        self.assertEqual("<carousel><card><image>http://Servusai.com</image><title>Servusai.com</title><subtitle>The home of ProgramY</subtitle><button><text>More...</text><url>http://Servusai.com/aiml</url></button></card></carousel>", root.to_xml(self._client_context))
 

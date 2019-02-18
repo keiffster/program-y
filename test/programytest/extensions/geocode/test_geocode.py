@@ -4,9 +4,8 @@ import json
 
 from programy.extensions.geocode.geocode import GeoCodeExtension
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -43,7 +42,7 @@ class GeoCodeExtensionTests(unittest.TestCase):
 
         result = geocode.execute(self.context, "POSTCODE1 KY39UR")
         self.assertIsNotNone(result)
-        self.assertEquals("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
+        self.assertEqual("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
 
     def test_geocode_postcode2(self):
         filename = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
@@ -55,7 +54,7 @@ class GeoCodeExtensionTests(unittest.TestCase):
 
         result = geocode.execute(self.context, "POSTCODE2 KY3 9UR")
         self.assertIsNotNone(result)
-        self.assertEquals("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
+        self.assertEqual("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
 
     def test_geocode_location(self):
         filename = os.path.dirname(__file__) +  os.sep + "google_latlong.json"
@@ -67,4 +66,4 @@ class GeoCodeExtensionTests(unittest.TestCase):
 
         result = geocode.execute(self.context, "LOCATION KINGHORN")
         self.assertIsNotNone(result)
-        self.assertEquals("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)
+        self.assertEqual("LATITUDE DEC 56 FRAC 0720397 LONGITUDE DEC -3 FRAC 1752001", result)

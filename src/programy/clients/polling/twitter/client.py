@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,12 +17,12 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 import time
-import os
 import tweepy
 from tweepy.error import RateLimitError
 
 from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
+from programy.storage.factory import StorageFactory
 
 class TwitterBotClient(PollingBotClient):
 
@@ -34,9 +34,6 @@ class TwitterBotClient(PollingBotClient):
         self._welcome_message = None
         self._api = None
         PollingBotClient.__init__(self, "Twitter", argument_parser)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Twitter Client'
 
     def get_client_configuration(self):
         return TwitterConfiguration()
@@ -194,36 +191,26 @@ class TwitterBotClient(PollingBotClient):
     # Message ID Storage
 
     def _get_last_message_ids(self):
-        last_direct_message_id = -1
-        last_status_id = -1
 
-        if self._configuration.client_configuration.storage == 'file':
-            YLogger.debug(self, "Reads messages ids from [%s]", self._configuration.client_configuration.storage_location)
-            if os.path.exists(self._configuration.client_configuration.storage_location):
-                try:
-                    with open(self._configuration.client_configuration.storage_location, "r", encoding="utf-8") as idfile:
-                        last_direct_message_id = int(idfile.readline().strip())
-                        last_status_id = int(idfile.readline().strip())
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to get last message ids", excep)
+        if self.storage_factory.entity_storage_engine_available(StorageFactory.TWITTER) is True:
+            engine = self.storage_factory.entity_storage_engine(StorageFactory.TWITTER)
+            store = engine.twitter_store()
+            last_direct_message_id, last_status_id = store.load_last_message_ids()
+
+        else:
+            last_direct_message_id = last_status_id = -1
 
         YLogger.debug(self, "Got Last Messaged ID: %s", last_direct_message_id)
         YLogger.debug(self, "Got Last Status ID: %s", last_status_id)
 
-        return (last_direct_message_id, last_status_id)
+        return  last_direct_message_id, last_status_id
 
     def _store_last_message_ids(self, last_direct_message_id, last_status_id):
-        if self._configuration.client_configuration.storage == 'file':
-            try:
-                YLogger.debug(self, "Storing Last Messaged ID: %s", last_direct_message_id)
-                YLogger.debug(self, "Storing Last Status ID: %s", last_status_id)
 
-                with open(self._configuration.client_configuration.storage_location, "w+", encoding="utf-8") as idfile:
-                    idfile.write("%d\n"%last_direct_message_id)
-                    idfile.write("%d\n"%last_status_id)
-
-            except Exception as excep:
-                YLogger.exception(self, "Failed to store last message ids", excep)
+        if self.storage_factory.entity_storage_engine_available(StorageFactory.TWITTER) is True:
+            engine = self.storage_factory.entity_storage_engine(StorageFactory.TWITTER)
+            store = engine.twitter_store()
+            store.store_last_message_ids(last_direct_message_id, last_status_id)
 
     #############################################################################################
     # Execution

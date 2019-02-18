@@ -4,7 +4,7 @@ from datetime import datetime
 
 from programy.extensions.admin.scheduler import SchedulerAdminExtension
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockScheduler(object):
 
@@ -45,7 +45,7 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
         client_context = client.create_client_context("testid")
 
         extension = SchedulerAdminExtension()
-        self.assertEquals("LIST JOBS, KILL JOB, PAUSE, RESUME", extension.execute(client_context, "COMMANDS"))
+        self.assertEqual("LIST JOBS, KILL JOB, PAUSE, RESUME", extension.execute(client_context, "COMMANDS"))
 
     def test_scheduler_list_jobs(self):
         client = SchedulerAdminExtensionClient()
@@ -53,14 +53,14 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
 
         extension = SchedulerAdminExtension()
 
-        self.assertEquals("No job information available", extension.execute(client_context, "LIST JOBS"))
+        self.assertEqual("No job information available", extension.execute(client_context, "LIST JOBS"))
 
         job1 = unittest.mock.Mock()
         job1.next_run_time = datetime.strptime("11/04/18 19:02", "%d/%m/%y %H:%M")
         job1.args = ("Arg1", "Arg2", "Arg3", "Arg4", "Arg5")
         client.scheduler._jobs["1"] = job1
 
-        self.assertEquals("> Job ID:1, Next Run: 2018-04-11 19:02:00, Args: ('Arg1', 'Arg2', 'Arg3', 'Arg4', 'Arg5')\n", extension.execute(client_context, "LIST JOBS"))
+        self.assertEqual("> Job ID:1, Next Run: 2018-04-11 19:02:00, Args: ('Arg1', 'Arg2', 'Arg3', 'Arg4', 'Arg5')\n", extension.execute(client_context, "LIST JOBS"))
 
     def test_scheduler_kill_job(self):
         client = SchedulerAdminExtensionClient()
@@ -73,7 +73,7 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
         job1.args = ("Arg1", "Arg2", "Arg3", "Arg4", "Arg5")
         client.scheduler._jobs["1"] = job1
 
-        self.assertEquals("Job removed", extension.execute(client_context, "KILL JOB 1"))
+        self.assertEqual("Job removed", extension.execute(client_context, "KILL JOB 1"))
 
     def test_scheduler_pause_resume(self):
         client = SchedulerAdminExtensionClient()
@@ -81,8 +81,8 @@ class SchedulerAdminExtensionTests(unittest.TestCase):
 
         extension = SchedulerAdminExtension()
 
-        self.assertEquals("Scheduler paused", extension.execute(client_context, "PAUSE"))
+        self.assertEqual("Scheduler paused", extension.execute(client_context, "PAUSE"))
         self.assertTrue(client.scheduler._paused)
 
-        self.assertEquals("Scheduler resumed", extension.execute(client_context, "RESUME"))
+        self.assertEqual("Scheduler resumed", extension.execute(client_context, "RESUME"))
         self.assertFalse(client.scheduler._paused)

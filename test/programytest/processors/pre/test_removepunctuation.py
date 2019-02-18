@@ -2,7 +2,7 @@ import unittest
 from programy.processors.pre.removepunctuation import RemovePunctuationPreProcessor
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class RemovePunctuationTests(unittest.TestCase):
@@ -12,7 +12,7 @@ class RemovePunctuationTests(unittest.TestCase):
 
         context = ClientContext(TestClient(), "testid")
 
-        result = processor.process(context, "Hello!")
+        result = processor.process(context, "'Hello'")
         self.assertIsNotNone(result)
         self.assertEqual("Hello", result)
 

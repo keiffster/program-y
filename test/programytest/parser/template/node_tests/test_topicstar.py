@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.topicstar import TemplateTopicStarNode
-from programy.dialog.dialog import Conversation, Question
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
 from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 
@@ -19,11 +20,11 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateTopicStarNode()
-        self.assertEquals("TOPICSTAR", node.to_string())
+        self.assertEqual("[TOPICSTAR]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateTopicStarNode(index=2)
-        self.assertEquals("TOPICSTAR index=2", node.to_string())
+        self.assertEqual("[TOPICSTAR index=2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -53,18 +54,18 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         node = TemplateTopicStarNode()
         self.assertIsNotNone(node)
-        self.assertEquals(1, node.index)
+        self.assertEqual(1, node.index)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -74,9 +75,9 @@ class TemplateNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
-        self.assertEquals("Matched", root.resolve(self._client_context))
+        self.assertEqual("Matched", root.resolve(self._client_context))
 
     def test_resolve_no_defaults_inside_topic(self):
         root = TemplateNode()
@@ -93,11 +94,11 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you")
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -107,7 +108,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         self.assertEqual("Matched", node.resolve(self._client_context))
 
@@ -118,4 +119,4 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

@@ -23,13 +23,10 @@ if __name__ == '__main__':
                     rdf_splits = line.split(":")
                     entity.append(rdf_file)
                     entity += rdf_splits
-                    print(entity)
                     entities.append(entity)
             file.close ()
 
-    print(len(entities))
     entities.sort(key=lambda x: x[1])
-    print(len(entities))
 
     with open(csv_file, "w+") as output_file:
         for entity in entities:

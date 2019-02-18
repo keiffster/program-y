@@ -1,0 +1,5 @@
+ant:6
+bat:2
+bear:4
+bee:6
+bird:2

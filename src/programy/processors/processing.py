@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,37 +19,66 @@ from programy.utils.logging.ylogger import YLogger
 from abc import ABCMeta, abstractmethod
 
 from programy.utils.classes.loader import ClassLoader
+from programy.storage.factory import StorageFactory
 
-class ProcessorLoader(ClassLoader):
+
+class ProcessorCollection(object):
 
     def __init__(self):
         ClassLoader.__init__(self)
-        self.processors = []
+        self._processors = []
+
+    @property
+    def processors(self):
+        return self._processors
 
     def empty(self):
         self.processors.clear()
 
-    def load(self, filename, *args, **kw):
-        YLogger.debug(self, "Loading processors from file [%s]", filename)
-        count = 0
-        try:
-            with open(filename, "r", encoding="utf-8") as file:
-                for line in file:
-                    line = line.strip()
-                    if line:
-                        if line[0] != '#':
-                            new_class = ClassLoader.instantiate_class(line)
-                            if new_class is not None:
-                                self.processors.append(new_class(*args, **kw))
-                                count += 1
-        except FileNotFoundError:
-            YLogger.error(self, "File not found [%s]", filename)
-        return count
+    def add_processor(self, processor):
+        self._processors.append(processor)
 
-    def process(self, client_context, string):
-        for processor in self.processors:
-            string = processor.process(client_context, string)
-        return string
+    def process(self, client_context, word_string):
+        for processor in self._processors:
+            word_string = processor.process(client_context, word_string)
+        return word_string
+
+    def load(self, storage_factory):
+        storage_name = self._get_storage_name()
+        if storage_factory.entity_storage_engine_available(storage_name) is True:
+            storage_engine = storage_factory.entity_storage_engine(storage_name)
+            processor_store = self._get_store(storage_engine)
+            processor_store.load(self)
+
+    def _get_storage_name(self):
+        raise NotImplementedError("Override this in derived class, return StorageFactory.XXX name")
+
+    def _get_store(self, storage_engine):
+        raise NotImplementedError("Override this in derived class, return Store from StorageEngine")
+
+
+class PreProcessorCollection(ProcessorCollection):
+
+    def __init__(self):
+        ProcessorCollection.__init__(self)
+
+    def _get_storage_name(self):
+        return StorageFactory.PREPROCESSORS
+
+    def _get_store(self, storage_engine):
+        return storage_engine.preprocessors_store()
+
+
+class PostProcessorCollection(ProcessorCollection):
+
+    def __init__(self):
+        ProcessorCollection.__init__(self)
+
+    def _get_storage_name(self):
+        return StorageFactory.POSTPROCESSORS
+
+    def _get_store(self, storage_engine):
+        return storage_engine.postprocessors_store()
 
 
 ##################################################################
@@ -75,6 +104,7 @@ class PreProcessor(Processor):
     @abstractmethod
     def process(self, client_context, word_string):
         pass
+
 
 ##################################################################
 #

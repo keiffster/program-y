@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainServiceConfiguration(BaseSectionConfigurationData):
@@ -54,14 +55,17 @@ class BrainServiceConfiguration(BaseSectionConfigurationData):
     def additionals_to_add(self):
         return BrainServiceConfiguration.additionals
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         service = configuration_file.get_section(self.section_name, configuration)
         if service is not None:
-            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
-            self._method = configuration_file.get_option(service, "method", missing_value=None)
-            self._host = configuration_file.get_option(service, "host", missing_value=None)
-            self._port = configuration_file.get_option(service, "port", missing_value=None)
-            self._url = configuration_file.get_option(service, "url", missing_value=None)
+            self._classname = configuration_file.get_option(service, "classname", missing_value=None, subs=subs)
+            self._method = configuration_file.get_option(service, "method", missing_value=None, subs=subs)
+            self._host = configuration_file.get_option(service, "host", missing_value=None, subs=subs)
+            self._port = configuration_file.get_option(service, "port", missing_value=None, subs=subs)
+            self._url = configuration_file.get_option(service, "url", missing_value=None, subs=subs)
             self.load_additional_key_values(configuration_file, service)
         else:
             YLogger.warning(self, "'services' section missing from brain config, using to defaults")

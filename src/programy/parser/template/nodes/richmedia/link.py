@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -37,15 +37,8 @@ class TemplateLinkNode(TemplateNode):
         str += "</link>"
         return str
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        return "[LINK] %d" % (len(self._children))
+        return "[LINK %d]" % (len(self._children))
 
     def to_xml(self, client_context):
         return self.resolve_to_string(client_context)

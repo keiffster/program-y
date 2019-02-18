@@ -102,9 +102,9 @@ class XmppBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), XmppConfiguration)
-        self.assertEquals('ProgramY AIML2.0 XMPP Client', client.get_description())
-        self.assertEquals('XMPPUSERNAME', client._username)
-        self.assertEquals('XMPPPASSWORD', client._password)
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+        self.assertEqual('XMPPUSERNAME', client._username)
+        self.assertEqual('XMPPPASSWORD', client._password)
         self.assertEqual("Server", client._server)
         self.assertEqual(8080, client._port)
 

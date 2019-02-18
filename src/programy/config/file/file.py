@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from abc import ABCMeta, abstractmethod
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BaseConfigurationFile(object):
@@ -56,15 +57,42 @@ class BaseConfigurationFile(object):
         """
         raise NotImplementedError()
 
+    def _replace_subs(self, subs: Substitutions, value):
+        if subs is not None:
+            return subs.replace(value)
+
+        return value
+
     @abstractmethod
-    def get_option(self, section, option_name, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """
         raise NotImplementedError()
 
     @abstractmethod
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+    def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_int_option(self, section, option_name, missing_value=0, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
+        """
+        Never Implemented
+        """
+        raise NotImplementedError()
+
+    @abstractmethod
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
         """
         Never Implemented
         """

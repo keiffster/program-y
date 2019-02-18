@@ -1,21 +1,24 @@
 import unittest
 import os
 
-from programy.context import ClientContext
 from programy.config.brain.oob import BrainOOBConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class OOBTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
+    def load_storage(self):
+        super(OOBTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+
     def load_configuration(self, arguments):
         super(OOBTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
         default = BrainOOBConfiguration("default")
-        default._classname = "programy.oob.default.DefaultOutOfBandProcessor"
+        default._classname = "programy.oob.defaults.default.DefaultOutOfBandProcessor"
         self.configuration.client_configuration.configurations[0].configurations[0].oob._default = default
 
 
@@ -39,4 +42,4 @@ class OOBAIMLTests(unittest.TestCase):
 
     def test_oob_complex(self):
         response = self._client_context.bot.ask_question(self._client_context,  "FILE BUG REPORT")
-        self.assertEqual(response, "To help the developers blah blah blah")
+        self.assertEqual(response, "To help the developers blah blah blah.")

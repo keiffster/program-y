@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+    <category>
+        <pattern>WHEN I SAY * YOU SAY *</pattern>
+        <template>
+            Okay. When you say <star index="1"/>, I will say
+            <star index="2"/>
+            <learn>
+                <category>
+                    <pattern>
+                        <eval>
+                            <star index="1"/>
+                        </eval>
+                    </pattern>
+                    <template>
+                        <eval>
+                            <star index="2"/>
+                        </eval>
+                    </template>
+                </category>
+            </learn>
+        </template>
+    </category>
+</aiml>

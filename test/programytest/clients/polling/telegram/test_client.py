@@ -107,9 +107,9 @@ class TelegramBotClientTests(unittest.TestCase):
         client = MockTelegramBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertIsInstance(client.get_client_configuration(), TelegramConfiguration)
-        self.assertEquals(client.id, "telegram")
-        self.assertEquals('ProgramY AIML2.0 Telegram Client', client.get_description())
-        self.assertEquals("TELEGRAM_TOKEN", client._telegram_token)
+        self.assertEqual(client.id, "telegram")
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
+        self.assertEqual("TELEGRAM_TOKEN", client._telegram_token)
 
     def test_register_handlers(self):
         arguments = MockArgumentParser()
@@ -120,7 +120,7 @@ class TelegramBotClientTests(unittest.TestCase):
 
         client.register_handlers()
 
-        self.assertEquals(3, len(client._updater.dispatcher._handlers))
+        self.assertEqual(3, len(client._updater.dispatcher._handlers))
         self.assertIsInstance(client._updater.dispatcher._handlers[0], CommandHandler)
         self.assertIsInstance(client._updater.dispatcher._handlers[1], MessageHandler)
         self.assertIsInstance(client._updater.dispatcher._handlers[2], MessageHandler)
@@ -167,8 +167,8 @@ class TelegramBotClientTests(unittest.TestCase):
 
         client.start(telegram_bot, update)
 
-        self.assertEquals("test123", telegram_bot._chat_id)
-        self.assertEquals("Initial Question", telegram_bot._text)
+        self.assertEqual("test123", telegram_bot._chat_id)
+        self.assertEqual("Initial Question", telegram_bot._text)
 
     def test_message_no_client(self):
         mock_bot = unittest.mock.Mock()
@@ -214,8 +214,8 @@ class TelegramBotClientTests(unittest.TestCase):
 
         client.message(telegram_bot, update)
 
-        self.assertEquals("test123", telegram_bot._chat_id)
-        self.assertEquals("Hi there", telegram_bot._text)
+        self.assertEqual("test123", telegram_bot._chat_id)
+        self.assertEqual("Hi there", telegram_bot._text)
 
     def test_unknown_no_client(self):
         TelegramBotClient.TELEGRAM_CLIENT = None
@@ -261,8 +261,8 @@ class TelegramBotClientTests(unittest.TestCase):
 
         client.message(telegram_bot, update)
 
-        self.assertEquals("test123", telegram_bot._chat_id)
-        self.assertEquals("Unknown Question", telegram_bot._text)
+        self.assertEqual("test123", telegram_bot._chat_id)
+        self.assertEqual("Unknown Question", telegram_bot._text)
 
     def test_poll_answer(self):
         telegram_bot = MockTelegramBot()

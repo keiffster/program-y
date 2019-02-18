@@ -27,4 +27,4 @@ class TemplateGraphListTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateListNode)
 
-        self.assertEquals(2, len(node._items))
+        self.assertEqual(2, len(node._items))

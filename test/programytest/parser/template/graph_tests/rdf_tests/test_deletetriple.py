@@ -10,7 +10,7 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
 
     def test_delete_triple_type1(self):
         self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
-        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z", "LETTERS")
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""
@@ -38,7 +38,7 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
 
     def test_delete_triple_type2(self):
         self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
-        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z", "LETTERS")
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""
@@ -63,7 +63,7 @@ class TemplateGraphDeleteTripleTests(TemplateGraphTestClient):
 
     def test_delete_triple_type3(self):
         self.assertFalse(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
-        self._client_context.brain.rdf.add_entity("X", "Y", "Z")
+        self._client_context.brain.rdf.add_entity("X", "Y", "Z", "LETTERS")
         self.assertTrue(self._client_context.brain.rdf.has_object("X", "Y", "Z"))
 
         template = ET.fromstring("""

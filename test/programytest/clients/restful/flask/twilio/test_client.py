@@ -54,9 +54,9 @@ class TwilioBotClientTests(unittest.TestCase):
         client = MockTwilioBotClient(arguments)
         self.assertIsNotNone(client)
 
-        self.assertEquals("TWILIO_ACCOUNT_SID", client._account_sid)
-        self.assertEquals("TWILIO_AUTH_TOKEN", client._auth_token)
-        self.assertEquals("+447777777777", client._from_number)
+        self.assertEqual("TWILIO_ACCOUNT_SID", client._account_sid)
+        self.assertEqual("TWILIO_AUTH_TOKEN", client._auth_token)
+        self.assertEqual("+447777777777", client._from_number)
 
         self.assertIsInstance(client.get_client_configuration(), TwilioConfiguration)
 
@@ -69,7 +69,7 @@ class TwilioBotClientTests(unittest.TestCase):
 
         response = client.create_response("+447777777777", "Hi There")
         self.assertIsNotNone(response)
-        self.assertEquals('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>', response)
+        self.assertEqual('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777777">Hi There</Message></Response>', response)
 
     def test_receive_message_post(self):
         arguments = MockArgumentParser()
@@ -84,7 +84,7 @@ class TwilioBotClientTests(unittest.TestCase):
 
         response = client.receive_message(request)
         self.assertIsNotNone(response)
-        self.assertEquals('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777888">Hi there</Message></Response>', response)
+        self.assertEqual('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777888">Hi there</Message></Response>', response)
 
     def test_receive_message_get(self):
         arguments = MockArgumentParser()
@@ -101,4 +101,4 @@ class TwilioBotClientTests(unittest.TestCase):
 
         response = client.receive_message(request)
         self.assertIsNotNone(response)
-        self.assertEquals('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777888">Hi there</Message></Response>', response)
+        self.assertEqual('<?xml version="1.0" encoding="UTF-8"?><Response><Message to="+447777777888">Hi there</Message></Response>', response)

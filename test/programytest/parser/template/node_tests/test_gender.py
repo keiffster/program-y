@@ -28,9 +28,6 @@ class TemplateGenderNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         node.append(TemplateWordNode("to him"))
-        self._client_context.brain.genders.process_splits(["to him","to her"])
-
-        self.assertEqual(root.resolve(self._client_context), "to her")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -50,4 +47,4 @@ class TemplateGenderNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

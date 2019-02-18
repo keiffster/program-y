@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ThatSraiTestClient(TestClient):
@@ -11,9 +9,10 @@ class ThatSraiTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(ThatSraiTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
+    def load_storage(self):
+        super(ThatSraiTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class ThatSraiAIMLTests(unittest.TestCase):
@@ -25,7 +24,7 @@ class ThatSraiAIMLTests(unittest.TestCase):
     def test_that_srai_agreement(self):
 
         response = self._client_context.bot.ask_question(self._client_context, "GROUPAGREEMENT")
-        self.assertTrue(response in ['Default AGREEMENT'])
+        self.assertTrue(response in ['Default AGREEMENT.'])
 
         response = self._client_context.bot.ask_question(self._client_context, "HI")
         self.assertTrue(response in ['Hello. Do you know explore the website?', 'Good day. Do you know explore the website?'])
@@ -37,7 +36,7 @@ class ThatSraiAIMLTests(unittest.TestCase):
     def test_that_srai_disagreement(self):
 
         response = self._client_context.bot.ask_question(self._client_context, "GROUPDISAGREEMENT")
-        self.assertTrue(response in ['Default DISAGREEMENT'])
+        self.assertTrue(response in ['Default DISAGREEMENT.'])
 
         response = self._client_context.bot.ask_question(self._client_context, "HI")
         self.assertTrue(response in ['Hello. Do you know explore the website?', 'Good day. Do you know explore the website?'])

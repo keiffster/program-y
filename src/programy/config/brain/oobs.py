@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,6 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
 from programy.config.brain.oob import BrainOOBConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainOOBSConfiguration(BaseSectionConfigurationData):
@@ -42,14 +43,17 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
     def oobs(self):
         return self._oobs.keys()
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         oobs = configuration_file.get_section("oob", configuration)
         if oobs is not None:
             oob_keys = configuration_file.get_keys(oobs)
 
             for name in oob_keys:
                 oob = BrainOOBConfiguration(name)
-                oob.load_config_section(configuration_file, oobs, bot_root)
+                oob.load_config_section(configuration_file, oobs, bot_root, subs=subs)
                 if name == 'default':
                     self._default = oob
                 else:
@@ -60,19 +64,19 @@ class BrainOOBSConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['default'] = {'classname': 'programy.oob.default.DefaultOutOfBandProcessor'}
-            data['alarm'] = {'classname': 'programy.oob.alarm.AlarmOutOfBandProcessor'}
-            data['camera'] = {'classname': 'programy.oob.camera.CameraOutOfBandProcessor'}
-            data['clear'] = {'classname': 'programy.oob.clear.ClearOutOfBandProcessor'}
-            data['dial'] = {'classname': 'programy.oob.dial.DialOutOfBandProcessor'}
-            data['dialog'] = {'classname': 'programy.oob.dialog.DialogOutOfBandProcessor'}
-            data['email'] = {'classname': 'programy.oob.email.EmailOutOfBandProcessor'}
-            data['geomap'] = {'classname': 'programy.oob.map.MapOutOfBandProcessor'}
-            data['schedule'] = {'classname': 'programy.oob.schedule.ScheduleOutOfBandProcessor'}
-            data['search'] = {'classname': 'programy.oob.search.SearchOutOfBandProcessor'}
-            data['sms'] = {'classname': 'programy.oob.sms.SMSOutOfBandProcessor'}
-            data['url'] = {'classname': 'programy.oob.url.URLOutOfBandProcessor'}
-            data['wifi'] = {'classname': 'programy.oob.wifi.WifiOutOfBandProcessor'}
+            data['default'] = {'classname': 'programy.oob.defaults.default.DefaultOutOfBandProcessor'}
+            data['alarm'] = {'classname': 'programy.oob.defaults.alarm.AlarmOutOfBandProcessor'}
+            data['camera'] = {'classname': 'programy.oob.defaults.camera.CameraOutOfBandProcessor'}
+            data['clear'] = {'classname': 'programy.oob.defaults.clear.ClearOutOfBandProcessor'}
+            data['dial'] = {'classname': 'programy.oob.defaults.dial.DialOutOfBandProcessor'}
+            data['dialog'] = {'classname': 'programy.oob.defaults.dialog.DialogOutOfBandProcessor'}
+            data['email'] = {'classname': 'programy.oob.defaults.email.EmailOutOfBandProcessor'}
+            data['geomap'] = {'classname': 'programy.oob.defaults.map.MapOutOfBandProcessor'}
+            data['schedule'] = {'classname': 'programy.oob.defaults.schedule.ScheduleOutOfBandProcessor'}
+            data['search'] = {'classname': 'programy.oob.defaults.search.SearchOutOfBandProcessor'}
+            data['sms'] = {'classname': 'programy.oob.defaults.sms.SMSOutOfBandProcessor'}
+            data['url'] = {'classname': 'programy.oob.defaults.url.URLOutOfBandProcessor'}
+            data['wifi'] = {'classname': 'programy.oob.defaults.wifi.WifiOutOfBandProcessor'}
         else:
             if self._default is not None:
                 self.config_to_yaml(data, self._default, defaults)

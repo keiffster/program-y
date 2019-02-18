@@ -5,8 +5,12 @@ import os
 from programy.clients.polling.twitter.client import TwitterBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
 from programy.bot import Bot
-from programy.config.bot.bot import BotConfiguration
 from programytest.clients.arguments import MockArgumentParser
+from programy.storage.config import FileStorageConfiguration
+from programy.storage.stores.file.config import FileStoreConfiguration
+from programy.storage.stores.file.store.twitter import FileTwitterStore
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.factory import StorageFactory
 
 
 class MockMessage(object):
@@ -83,6 +87,7 @@ class MockTwitterBotClient(TwitterBotClient):
     def ask_question(self, userid, question):
         return self._response
 
+
 class TwitterBotClientTests(unittest.TestCase):
 
     def test_twitter_init(self):
@@ -91,15 +96,15 @@ class TwitterBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), TwitterConfiguration)
-        self.assertEquals("ProgramY AIML2.0 Twitter Client", client.get_description())
+        self.assertEqual("ProgramY AIML2.0 Twitter Client", client.get_description())
 
-        self.assertEquals("username", client._username)
-        self.assertEquals(8, client._username_len)
+        self.assertEqual("username", client._username)
+        self.assertEqual(8, client._username_len)
 
-        self.assertEquals("consumer_key", client._consumer_key)
-        self.assertEquals("consumer_secret", client._consumer_secret)
-        self.assertEquals("access_token", client._access_token)
-        self.assertEquals("access_secret", client._access_token_secret)
+        self.assertEqual("consumer_key", client._consumer_key)
+        self.assertEqual("consumer_secret", client._consumer_secret)
+        self.assertEqual("access_token", client._access_token)
+        self.assertEqual("access_secret", client._access_token_secret)
 
     #############################################################################################
     # Direct Messages
@@ -113,7 +118,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._mock_direct_messages = [MockMessage(1, 1, "Message1")]
 
         messages = client._get_direct_messages(-1)
-        self.assertEquals(1, len(messages))
+        self.assertEqual(1, len(messages))
 
     def test_get_direct_messages_previous(self):
         arguments = MockArgumentParser()
@@ -124,7 +129,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._api._mock_direct_messages = [MockMessage(31, 1, "Message1")]
 
         messages = client._get_direct_messages(30)
-        self.assertEquals(1, len(messages))
+        self.assertEqual(1, len(messages))
 
     def test_process_direct_message_question(self):
         arguments = MockArgumentParser()
@@ -162,7 +167,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._unfollow_non_followers(friends, followers_ids)
 
-        self.assertEquals(1, len(client._api._destroyed_friendships))
+        self.assertEqual(1, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
 
     def test_follow_new_followers(self):
@@ -180,7 +185,7 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._follow_new_followers(followers, friends)
 
-        self.assertEquals(1, len(client._api._messages_sent_to))
+        self.assertEqual(1, len(client._api._messages_sent_to))
         self.assertTrue(bool(3 in client._api._messages_sent_to))
 
     def test_process_followers(self):
@@ -202,10 +207,10 @@ class TwitterBotClientTests(unittest.TestCase):
 
         client._process_followers()
 
-        self.assertEquals(2, len(client._api._destroyed_friendships))
+        self.assertEqual(2, len(client._api._destroyed_friendships))
         self.assertTrue(bool(3 in client._api._destroyed_friendships))
         self.assertTrue(bool(4 in client._api._destroyed_friendships))
-        self.assertEquals(1, len(client._api._messages_sent_to))
+        self.assertEqual(1, len(client._api._messages_sent_to))
         self.assertTrue(bool(1 in client._api._messages_sent_to))
 
     #############################################################################################
@@ -242,7 +247,7 @@ class TwitterBotClientTests(unittest.TestCase):
         client._username = "keiffster"
         client._username_len = 9
 
-        self.assertEquals("Hello", client._get_question_from_text("@keiffster Hello"))
+        self.assertEqual("Hello", client._get_question_from_text("@keiffster Hello"))
         self.assertIsNone(client._get_question_from_text("keiffster Hello"))
         self.assertIsNone(client._get_question_from_text("Hello"))
 
@@ -311,23 +316,20 @@ class TwitterBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertTrue(client.connect())
 
-        client.configuration.client_configuration._storage = 'file'
-        if os.name == 'posix':
-            client.configuration.client_configuration._storage_location = "/tmp/twitter.txt"
-        else:
-            client.configuration.client_configuration._storage_location = "C:\Windows\Temp/twitter.txt"
+        #TODO this writes to local storage rather than /tmp
+        file_store_config = FileStorageConfiguration()
+        file_store_config._twitter_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "gender.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
 
-        if os.path.exists(client.configuration.client_configuration.storage_location):
-            os.remove(client.configuration.client_configuration.storage_location)
-        self.assertFalse(os.path.exists(client.configuration.client_configuration.storage_location))
+        storage_engine = FileStorageEngine(file_store_config)
 
-        client._store_last_message_ids(666, 667)
+        client.storage_factory._storage_engines[StorageFactory.TWITTER] = storage_engine
+        client.storage_factory._store_to_engine_map[StorageFactory.TWITTER] = storage_engine
 
-        self.assertTrue(os.path.exists(client.configuration.client_configuration.storage_location))
+        client._store_last_message_ids('666', '667')
 
         ids = client._get_last_message_ids()
-        self.assertEquals(ids[0], 666)
-        self.assertEquals(ids[1], 667)
+        self.assertEqual(ids[0], '666')
+        self.assertEqual(ids[1], '667')
 
     #############################################################################################
     # Execution

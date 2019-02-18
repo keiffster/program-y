@@ -68,11 +68,11 @@ class LineBotClientTests(unittest.TestCase):
         client = MockLineBotClient(arguments)
         self.assertIsNotNone(client)
 
-        self.assertEquals("LINE_CHANNEL_SECRET", client._channel_secret)
-        self.assertEquals("LINE_ACCESS_TOKEN", client._channel_access_token)
+        self.assertEqual("LINE_CHANNEL_SECRET", client._channel_secret)
+        self.assertEqual("LINE_ACCESS_TOKEN", client._channel_access_token)
 
         self.assertIsInstance(client.get_client_configuration(), LineConfiguration)
-        self.assertEquals('ProgramY AIML2.0 Line Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_handle_text_message(self):
         arguments = MockArgumentParser()
@@ -92,7 +92,7 @@ class LineBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client._line_bot_api)
         self.assertIsNotNone(client._line_bot_api._messages)
         self.assertIsInstance(client._line_bot_api._messages, TextSendMessage)
-        self.assertEquals("Hi there", client._line_bot_api._messages.text)
+        self.assertEqual("Hi there", client._line_bot_api._messages.text)
 
     def test_handle_unknown_message(self):
         arguments = MockArgumentParser()
@@ -112,7 +112,7 @@ class LineBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client._line_bot_api)
         self.assertIsNotNone(client._line_bot_api._messages)
         self.assertIsInstance(client._line_bot_api._messages, TextSendMessage)
-        self.assertEquals("Unknown command", client._line_bot_api._messages.text)
+        self.assertEqual("Unknown command", client._line_bot_api._messages.text)
 
     def test_handle_unknown_event(self):
         arguments = MockArgumentParser()
@@ -132,7 +132,7 @@ class LineBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client._line_bot_api)
         self.assertIsNotNone(client._line_bot_api._messages)
         self.assertIsInstance(client._line_bot_api._messages, TextSendMessage)
-        self.assertEquals("Unknown command", client._line_bot_api._messages.text)
+        self.assertEqual("Unknown command", client._line_bot_api._messages.text)
 
     def test_handle_message_request(self):
         arguments = MockArgumentParser()
@@ -147,7 +147,7 @@ class LineBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client._line_bot_api)
         self.assertIsNotNone(client._line_bot_api._messages)
         self.assertIsInstance(client._line_bot_api._messages, TextSendMessage)
-        self.assertEquals("Unknown command", client._line_bot_api._messages.text)
+        self.assertEqual("Unknown command", client._line_bot_api._messages.text)
 
     def test_receive_message(self):
         arguments = MockArgumentParser()
@@ -165,4 +165,4 @@ class LineBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client._line_bot_api)
         self.assertIsNotNone(client._line_bot_api._messages)
         self.assertIsInstance(client._line_bot_api._messages, TextSendMessage)
-        self.assertEquals("Unknown command", client._line_bot_api._messages.text)
+        self.assertEqual("Unknown command", client._line_bot_api._messages.text)

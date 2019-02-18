@@ -37,7 +37,7 @@ if os.name != "nt":
             self.assertIsNotNone(client)
             client.configuration.client_configuration._use_api_keys = False
             request = unittest.mock.Mock()
-            self.assertEquals((None, None),client.verify_api_key_usage(request))
+            self.assertEqual((None, None),client.verify_api_key_usage(request))
 
         def test_get_api_key(self):
             arguments = MockArgumentParser()
@@ -47,7 +47,7 @@ if os.name != "nt":
             request.raw_args = {}
             request.raw_args['apikey'] = '11111111'
 
-            self.assertEquals('11111111', client.get_api_key(request))
+            self.assertEqual('11111111', client.get_api_key(request))
 
         def test_verify_api_key_usage_active(self):
             arguments = MockArgumentParser()
@@ -59,7 +59,7 @@ if os.name != "nt":
             request = unittest.mock.Mock()
             request.raw_args = {}
             request.raw_args['apikey'] = '11111111'
-            self.assertEquals((None, None),client.verify_api_key_usage(request))
+            self.assertEqual((None, None),client.verify_api_key_usage(request))
 
         def test_verify_api_key_usage_active_no_apikey(self):
             arguments = MockArgumentParser()
@@ -93,7 +93,7 @@ if os.name != "nt":
             request.raw_args = {}
             request.raw_args['question'] = 'Hello'
 
-            self.assertEquals("Hello", client.get_question(request))
+            self.assertEqual("Hello", client.get_question(request))
 
         def test_get_question_no_question(self):
             arguments = MockArgumentParser()
@@ -106,7 +106,7 @@ if os.name != "nt":
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("Hello", client.get_question(request))
+                self.assertEqual("Hello", client.get_question(request))
             self.assertTrue(client.aborted)
 
         def test_get_question_none_question(self):
@@ -119,7 +119,7 @@ if os.name != "nt":
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("Hello", client.get_question(request))
+                self.assertEqual("Hello", client.get_question(request))
             self.assertTrue(client.aborted)
 
         def test_get_userid(self):
@@ -131,7 +131,7 @@ if os.name != "nt":
             request.raw_args = {}
             request.raw_args['userid'] = '1234567890'
 
-            self.assertEquals("1234567890", client.get_userid(request))
+            self.assertEqual("1234567890", client.get_userid(request))
 
         def test_get_userid_no_userid(self):
             arguments = MockArgumentParser()
@@ -143,7 +143,7 @@ if os.name != "nt":
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("1234567890", client.get_userid(request))
+                self.assertEqual("1234567890", client.get_userid(request))
             self.assertTrue(client.aborted)
 
         def test_get_userid_none_userid(self):
@@ -157,7 +157,7 @@ if os.name != "nt":
 
             self.assertFalse(client.aborted)
             with self.assertRaises(Exception):
-                self.assertEquals("1234567890", client.get_userid(request))
+                self.assertEqual("1234567890", client.get_userid(request))
             self.assertTrue(client.aborted)
 
         def test_format_success_response(self):
@@ -167,9 +167,9 @@ if os.name != "nt":
 
             response = client.format_success_response("1234567890", "Hello", "Hi")
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['userid'])
-            self.assertEquals("Hello", response['question'])
-            self.assertEquals("Hi", response['answer'])
+            self.assertEqual("1234567890", response['userid'])
+            self.assertEqual("Hello", response['question'])
+            self.assertEqual("Hi", response['answer'])
 
         def test_format_error_response(self):
             arguments = MockArgumentParser()
@@ -178,10 +178,10 @@ if os.name != "nt":
 
             response = client.format_error_response("1234567890", "Hello", "Something Bad")
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['userid'])
-            self.assertEquals("Hello", response['question'])
-            self.assertEquals("", response['answer'])
-            self.assertEquals("Something Bad", response['error'])
+            self.assertEqual("1234567890", response['userid'])
+            self.assertEqual("Hello", response['question'])
+            self.assertEqual("", response['answer'])
+            self.assertEqual("Something Bad", response['error'])
 
         def test_process_request(self):
             arguments = MockArgumentParser()
@@ -198,9 +198,9 @@ if os.name != "nt":
 
             response, status = client.process_request(request)
             self.assertIsNotNone(response)
-            self.assertEquals("1234567890", response['userid'])
-            self.assertEquals("Hello", response['question'])
-            self.assertEquals("Hi", response['answer'])
+            self.assertEqual("1234567890", response['userid'])
+            self.assertEqual("Hello", response['question'])
+            self.assertEqual("Hi", response['answer'])
 
         def test_process_request_no_api_key(self):
             arguments = MockArgumentParser()
@@ -217,7 +217,7 @@ if os.name != "nt":
 
             response, status = client.process_request(request)
             self.assertIsNotNone(response)
-            self.assertEquals(status, 401)
+            self.assertEqual(status, 401)
 
         def test_process_request_exception(self):
             arguments = MockArgumentParser()
@@ -235,4 +235,4 @@ if os.name != "nt":
 
             response, status = client.process_request(request)
             self.assertIsNotNone(response)
-            self.assertEquals(status, 500)
+            self.assertEqual(status, 500)

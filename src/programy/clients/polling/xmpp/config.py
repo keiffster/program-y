@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,7 +14,8 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from programy.config.client.config import ClientConfigurationData
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class XmppConfiguration(ClientConfigurationData):
@@ -52,16 +53,19 @@ class XmppConfiguration(ClientConfigurationData):
     def xep_0199(self):
         return self._xep_0199
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         xmpp = configuration_file.get_section(self.section_name)
         if xmpp is not None:
-            self._server = configuration_file.get_option(xmpp, "server")
-            self._port = configuration_file.get_int_option(xmpp, "port", missing_value=5222)
-            self._xep_0030 = configuration_file.get_bool_option(xmpp, "xep_0030")
-            self._xep_0004 = configuration_file.get_bool_option(xmpp, "xep_0004")
-            self._xep_0060 = configuration_file.get_bool_option(xmpp, "xep_0060")
-            self._xep_0199 = configuration_file.get_bool_option(xmpp, "xep_0199")
-        super(XmppConfiguration, self).load_configuration(configuration_file, xmpp, bot_root)
+            self._server = configuration_file.get_option(xmpp, "server", subs=subs)
+            self._port = configuration_file.get_int_option(xmpp, "port", missing_value=5222, subs=subs)
+            self._xep_0030 = configuration_file.get_bool_option(xmpp, "xep_0030", subs=subs)
+            self._xep_0004 = configuration_file.get_bool_option(xmpp, "xep_0004", subs=subs)
+            self._xep_0060 = configuration_file.get_bool_option(xmpp, "xep_0060", subs=subs)
+            self._xep_0199 = configuration_file.get_bool_option(xmpp, "xep_0199", subs=subs)
+        super(XmppConfiguration, self).load_configuration_section(configuration_file, xmpp, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

@@ -3,7 +3,7 @@ import unittest
 from programy.services.programy import ProgramyRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ProgramyRESTServiceTests(unittest.TestCase):
@@ -20,7 +20,7 @@ class ProgramyRESTServiceTests(unittest.TestCase):
         config._url = "/api/v1.0/ask"
 
         service = ProgramyRESTService(config, api=None)
-        self.assertEquals({'question': 'Hello', 'userid': 'testid'}, service._format_payload(client_context, "Hello"))
+        self.assertEqual({'question': 'Hello', 'userid': 'testid'}, service._format_payload(client_context, "Hello"))
 
     def test_format_get_url(self):
         client = TestClient()
@@ -34,7 +34,7 @@ class ProgramyRESTServiceTests(unittest.TestCase):
         config._url = "/api/v1.0/ask"
 
         service = ProgramyRESTService(config, api=None)
-        self.assertEquals("/api/v1.0/ask?question=Hello&userid=testid", service._format_get_url("/api/v1.0/ask", client_context, "Hello"))
+        self.assertEqual("/api/v1.0/ask?question=Hello&userid=testid", service._format_get_url("/api/v1.0/ask", client_context, "Hello"))
 
     def test_parse_response(self):
         client = TestClient()
@@ -48,4 +48,4 @@ class ProgramyRESTServiceTests(unittest.TestCase):
         config._url = "/api/v1.0/ask"
 
         service = ProgramyRESTService(config, api=None)
-        self.assertEquals("Hello", service._parse_response('[{"response": {"answer": "Hello"}}]'))
+        self.assertEqual("Hello", service._parse_response('[{"response": {"answer": "Hello"}}]'))

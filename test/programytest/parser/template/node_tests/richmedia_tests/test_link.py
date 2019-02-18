@@ -22,7 +22,7 @@ class TemplateLinkNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<link><text>Servusai.com</text><url>http://Servusai.com</url></link>", resolved)
+        self.assertEqual("<link><text>Servusai.com</text><url>http://Servusai.com</url></link>", resolved)
 
-        self.assertEquals("<link><text>Servusai.com</text><url>http://Servusai.com</url></link>", root.to_xml(self._client_context))
+        self.assertEqual("<link><text>Servusai.com</text><url>http://Servusai.com</url></link>", root.to_xml(self._client_context))
 

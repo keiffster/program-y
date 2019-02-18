@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -114,7 +114,10 @@ class YLogger(object):
         if logging.getLogger().isEnabledFor(logging.ERROR):
             excep_msg = "%s [%s]"%(message, str(exception))
             logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
-            traceback.print_exc()
+            tb_lines = [line.rstrip('\n') for line in
+                        traceback.format_exception(exception.__class__, exception, exception.__traceback__)]
+            for line in tb_lines:
+                logging.exception(YLogger.format_message(caller, line))
 
     @staticmethod
     def warning(caller, message, *args, **kwargs):

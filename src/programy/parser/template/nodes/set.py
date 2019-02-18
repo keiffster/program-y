@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -50,34 +50,32 @@ class TemplateSetNode(TemplateNode):
         return ""
 
     def resolve_to_string(self, client_context):
+
+        conversation = client_context.bot.get_conversation(client_context)
         name = self.name.resolve(client_context)
         value = self.resolve_children(client_context)
 
         if self.local is True:
             YLogger.debug(client_context, "[%s] resolved to local: [%s] => [%s]", self.to_string(), name, value)
-            client_context.bot.get_conversation(client_context).current_question().set_property(name, value)
+            conversation.current_question().set_property(name, value)
+
+        elif client_context.brain.dynamics.is_dynamic_var(name) is True:
+            client_context.brain.dynamics.set_dynamic_var(client_context, name, value)
+
         else:
             if client_context.bot.override_properties is False and client_context.brain.properties.has_property(name):
                 YLogger.error(client_context, "Global property already exists for name [%s], ignoring set!", name)
                 value = client_context.brain.properties.property(name)
+
             else:
                 if client_context.brain.properties.has_property(name):
                     YLogger.warning(client_context, "Global property already exists for name [%s], over writing!", name)
                 YLogger.debug(client_context, "[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
-                client_context.bot.get_conversation(client_context).set_property(name, value)
+                conversation.set_property(name, value)
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), value)
 
         return value
-
-    def resolve(self, client_context):
-        try:
-            str = self.resolve_to_string(client_context)
-            client_context.bot.save_conversation(client_context.userid)
-            return str
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
 
     def to_string(self):
         return "[SET [%s] - %s]" % ("Local" if self.local else "Global", self.name.to_string())

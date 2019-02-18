@@ -6,17 +6,14 @@ from programy.context import ClientContext
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
 
 class TemplateGraphLearnTests(TemplateGraphTestClient):
 
     def test_learn_simple(self):
-        
-        client_context1 = ClientContext(TestClient(), "testid")
-        client_context1.bot = Bot(BotConfiguration())
-        client_context1.brain = client_context1.bot.brain
+        client_context1 = self.create_client_context("testid")
 
         template = ET.fromstring("""
 			<template>
@@ -53,12 +50,10 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         self.assertEqual(resolved, "")
 
         response = client_context1.bot.ask_question(client_context1, "HELLO WORLD THERE")
-        self.assertEqual("HIYA", response)
+        self.assertEqual("HIYA.", response)
 
     def test_learn_multi_user(self):
-        client_context1 = ClientContext(TestClient(), "testid")
-        client_context1.bot = Bot(BotConfiguration())
-        client_context1.brain = client_context1.bot.brain
+        client_context1 = self._client.create_client_context("testid")
 
         template = ET.fromstring("""
 			<template>
@@ -78,11 +73,9 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context1)
 
         response = client_context1.bot.ask_question(client_context1, "HELLO THERE ONE")
-        self.assertEqual("HIYA ONE", response)
+        self.assertEqual("HIYA ONE.", response)
 
-        client_context2 = ClientContext(TestClient(), "testid")
-        client_context2.bot = Bot(BotConfiguration())
-        client_context2.brain = client_context2.bot.brain
+        client_context2 = self._client.create_client_context("testid2")
 
         template = ET.fromstring("""
 			<template>
@@ -102,7 +95,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context2)
 
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE TWO")
-        self.assertEqual("HIYA TWO", response)
+        self.assertEqual("HIYA TWO.", response)
 
         # Now try and ask each others questions
 
@@ -113,9 +106,7 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         self.assertEqual("", response)
 
     def test_multiple_patterns(self):
-        client_context1 = ClientContext(TestClient(), "testid")
-        client_context1.bot = Bot(BotConfiguration())
-        client_context1.brain = client_context1.bot.brain
+        client_context1 = self._client.create_client_context("testid")
 
         template = ET.fromstring("""
         			<template>
@@ -135,11 +126,9 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context1)
 
         response = client_context1.bot.ask_question(client_context1, "HELLO THERE")
-        self.assertEqual("HIYA ONE", response)
+        self.assertEqual("HIYA ONE.", response)
 
-        client_context2 = ClientContext(TestClient(), "testid")
-        client_context2.bot = Bot(BotConfiguration())
-        client_context2.brain = client_context2.bot.brain
+        client_context2 = self._client.create_client_context("testid")
 
         template = ET.fromstring("""
         			<template>
@@ -159,5 +148,5 @@ class TemplateGraphLearnTests(TemplateGraphTestClient):
         learn_node.resolve(client_context2)
 
         response = client_context2.bot.ask_question(client_context2, "HELLO THERE")
-        self.assertEqual("HIYA TWO", response)
+        self.assertEqual("HIYA TWO.", response)
 

@@ -25,7 +25,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         postback = renderer.create_postback_url()
         self.assertIsNotNone(postback)
-        self.assertEquals(postback, "#")
+        self.assertEqual(postback, "#")
 
     def test_text_only(self):
         mock_console = MockHtmlBotClient()
@@ -34,7 +34,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "Hello world")
 
-        self.assertEquals(mock_console._response, "Hello world")
+        self.assertEqual(mock_console._response, "Hello world")
 
     def test_url_button(self):
         mock_console = MockHtmlBotClient()
@@ -43,7 +43,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
 
-        self.assertEquals(mock_console._response, '<a href="http://click.me">Hello</a>')
+        self.assertEqual(mock_console._response, '<a href="http://click.me">Hello</a>')
 
     def test_postback_button(self):
         mock_console = MockHtmlBotClient()
@@ -52,7 +52,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
 
-        self.assertEquals(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
+        self.assertEqual(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
 
     def test_link(self):
         mock_console = MockHtmlBotClient()
@@ -61,7 +61,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
 
-        self.assertEquals(mock_console._response, '<a href="http://click.me">Hello</a>')
+        self.assertEqual(mock_console._response, '<a href="http://click.me">Hello</a>')
 
     def test_image(self):
         mock_console = MockHtmlBotClient()
@@ -70,7 +70,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<image>http://servusai.com/aiml.png</image>")
 
-        self.assertEquals(mock_console._response, '<img src="http://servusai.com/aiml.png" />')
+        self.assertEqual(mock_console._response, '<img src="http://servusai.com/aiml.png" />')
 
     def test_video(self):
         mock_console = MockHtmlBotClient()
@@ -79,7 +79,7 @@ class HtmlRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<video>http://servusai.com/aiml.mov</video>")
 
-        self.assertEquals(mock_console._response, """<video src="http://servusai.com/aiml.mov">
+        self.assertEqual(mock_console._response, """<video src="http://servusai.com/aiml.mov">
 Sorry, your browser doesn't support embedded videos, 
 but don't worry, you can <a href="http://servusai.com/aiml.mov">download it</a>
 and watch it with your favorite video player!
@@ -92,7 +92,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", '<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>')
 
-        self.assertEquals(mock_console._response, '<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>')
+        self.assertEqual(mock_console._response, '<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>')
 
     def test_carousel(self):
         mock_console = MockHtmlBotClient()
@@ -101,7 +101,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
 
-        self.assertEquals(mock_console._response, '<div class="carousel"><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div></div>')
+        self.assertEqual(mock_console._response, '<div class="carousel"><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div></div>')
 
     def test_reply_with_postback(self):
         mock_console = MockHtmlBotClient()
@@ -110,7 +110,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
 
-        self.assertEquals(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
+        self.assertEqual(mock_console._response, '<a class="postback" postback="HELLO" href="#">Hello</a>')
 
     def test_reply_without_postback(self):
         mock_console = MockHtmlBotClient()
@@ -119,7 +119,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<reply><text>Hello</text></reply>")
 
-        self.assertEquals(mock_console._response, '<a class="postback" postback="Hello" href="#">Hello</a>')
+        self.assertEqual(mock_console._response, '<a class="postback" postback="Hello" href="#">Hello</a>')
 
     def test_delay(self):
         mock_console = MockHtmlBotClient()
@@ -128,7 +128,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<delay><seconds>0</seconds></delay>")
 
-        self.assertEquals(mock_console._response, '<div class="delay">...</div>')
+        self.assertEqual(mock_console._response, '<div class="delay">...</div>')
 
     def test_split(self):
         mock_console = MockHtmlBotClient()
@@ -137,7 +137,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<split />")
 
-        self.assertEquals(mock_console._response, "<br />")
+        self.assertEqual(mock_console._response, "<br />")
 
     def test_list(self):
         mock_console = MockHtmlBotClient()
@@ -146,7 +146,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<list><item>Item1</item><item>Item2</item></list>")
 
-        self.assertEquals(mock_console._response, "<ul><li>Item1</li><li>Item2</li></ul>")
+        self.assertEqual(mock_console._response, "<ul><li>Item1</li><li>Item2</li></ul>")
 
     def test_olist(self):
         mock_console = MockHtmlBotClient()
@@ -155,7 +155,7 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
 
-        self.assertEquals(mock_console._response, "<ol><li>Item1</li><li>Item2</li></ol>")
+        self.assertEqual(mock_console._response, "<ol><li>Item1</li><li>Item2</li></ol>")
 
     def test_location(self):
         mock_console = MockHtmlBotClient()
@@ -164,5 +164,5 @@ and watch it with your favorite video player!
 
         renderer.render("testuser", "<location />")
 
-        self.assertEquals(mock_console._response, "")
+        self.assertEqual(mock_console._response, "")
 

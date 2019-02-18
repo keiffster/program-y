@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without webchatriction, including without limitation
@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class WebChatConfiguration(RestConfiguration):
@@ -32,12 +33,15 @@ class WebChatConfiguration(RestConfiguration):
     def cookie_expires(self):
         return self._cookie_expires
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         webchat = configuration_file.get_section(self.section_name)
         if webchat is not None:
-            self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession")
-            self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90)
-        super(WebChatConfiguration, self).load_configuration(configuration_file, bot_root)
+            self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession", subs=subs)
+            self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90, subs=subs)
+        super(WebChatConfiguration, self).load_configuration_section(configuration_file, webchat, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

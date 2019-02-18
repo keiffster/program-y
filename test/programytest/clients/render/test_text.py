@@ -21,7 +21,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "Hello world")
 
-        self.assertEquals(mock_console._response, "Hello world")
+        self.assertEqual(mock_console._response, "Hello world")
 
     def test_url_button(self):
         mock_console = MockConsoleBotClient()
@@ -30,7 +30,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<button><text>Hello</text><url>http://click.me</url></button>")
 
-        self.assertEquals(mock_console._response, "Hello, click http://click.me")
+        self.assertEqual(mock_console._response, "Hello, click http://click.me")
 
     def test_postback_button(self):
         mock_console = MockConsoleBotClient()
@@ -39,7 +39,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<button><text>Hello</text><postback>HELLO</postback></button>")
 
-        self.assertEquals(mock_console._response, "HELLO")
+        self.assertEqual(mock_console._response, "HELLO")
 
     def test_link(self):
         mock_console = MockConsoleBotClient()
@@ -48,7 +48,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<link><text>Hello</text><url>http://click.me</url></link>")
 
-        self.assertEquals(mock_console._response, "Open in browser, click http://click.me")
+        self.assertEqual(mock_console._response, "Open in browser, click http://click.me")
 
     def test_image(self):
         mock_console = MockConsoleBotClient()
@@ -57,7 +57,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<image>http://servusai.com/aiml.png</image>")
 
-        self.assertEquals(mock_console._response, "To see the image, click http://servusai.com/aiml.png")
+        self.assertEqual(mock_console._response, "To see the image, click http://servusai.com/aiml.png")
 
     def test_video(self):
         mock_console = MockConsoleBotClient()
@@ -66,7 +66,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<video>http://servusai.com/aiml.mov</video>")
 
-        self.assertEquals(mock_console._response, "To see the video, click http://servusai.com/aiml.mov")
+        self.assertEqual(mock_console._response, "To see the video, click http://servusai.com/aiml.mov")
 
     def test_card(self):
         mock_console = MockConsoleBotClient()
@@ -75,7 +75,7 @@ class TextRendererTests(unittest.TestCase):
 
         renderer.render("testuser", "<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>")
 
-        self.assertEquals(mock_console._response, """Image: http://servusai.com/aiml.png
+        self.assertEqual(mock_console._response, """Image: http://servusai.com/aiml.png
 Title: Servusai
 Subtitle: Home of ProgramY
 ---------------------------------------
@@ -90,7 +90,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<carousel><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card></carousel>")
 
-        self.assertEquals(mock_console._response, """=========================================
+        self.assertEqual(mock_console._response, """=========================================
 Image: http://servusai.com/aiml.png
 Title: Servusai
 Subtitle: Home of ProgramY
@@ -107,7 +107,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<reply><text>Hello</text><postback>HELLO</postback></reply>")
 
-        self.assertEquals(mock_console._response, "HELLO")
+        self.assertEqual(mock_console._response, "HELLO")
 
     def test_reply_without_postback(self):
         mock_console = MockConsoleBotClient()
@@ -116,7 +116,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<reply><text>Hello</text></reply>")
 
-        self.assertEquals(mock_console._response, "Hello")
+        self.assertEqual(mock_console._response, "Hello")
 
     def test_delay(self):
         mock_console = MockConsoleBotClient()
@@ -125,7 +125,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<delay><seconds>0</seconds></delay>")
 
-        self.assertEquals(mock_console._response, "...")
+        self.assertEqual(mock_console._response, "...")
 
     def test_split(self):
         mock_console = MockConsoleBotClient()
@@ -134,7 +134,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<split />")
 
-        self.assertEquals(mock_console._response, "\n")
+        self.assertEqual(mock_console._response, "\n")
 
     def test_list(self):
         mock_console = MockConsoleBotClient()
@@ -143,7 +143,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<list><item>Item1</item><item>Item2</item></list>")
 
-        self.assertEquals(mock_console._response, "> Item1\n> Item2\n")
+        self.assertEqual(mock_console._response, "> Item1\n> Item2\n")
 
     def test_olist(self):
         mock_console = MockConsoleBotClient()
@@ -152,7 +152,7 @@ Hello : http://click.me
 
         renderer.render("testuser", "<olist><item>Item1</item><item>Item2</item></olist>")
 
-        self.assertEquals(mock_console._response, "1. Item1\n2. Item2\n")
+        self.assertEqual(mock_console._response, "1. Item1\n2. Item2\n")
 
     def test_location(self):
         mock_console = MockConsoleBotClient()
@@ -161,5 +161,5 @@ Hello : http://click.me
 
         renderer.render("testuser", "<location />")
 
-        self.assertEquals(mock_console._response, "")
+        self.assertEqual(mock_console._response, "")
 

@@ -21,7 +21,7 @@ class TemplateDelayNodeTests(ParserTestsBaseClass):
 
         resolved = root.resolve(self._client_context)
         self.assertIsNotNone(resolved)
-        self.assertEquals("<delay><seconds>10</seconds></delay>", resolved)
+        self.assertEqual("<delay><seconds>10</seconds></delay>", resolved)
 
-        self.assertEquals("<delay><seconds>10</seconds></delay>", root.to_xml(self._client_context))
+        self.assertEqual("<delay><seconds>10</seconds></delay>", root.to_xml(self._client_context))
 

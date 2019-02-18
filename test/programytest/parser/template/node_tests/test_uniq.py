@@ -18,7 +18,7 @@ class TemplateUniqNodeTests(ParserTestsBaseClass):
     def test_to_string(self):
         root = TemplateUniqNode()
         self.assertIsNotNone(root)
-        self.assertEquals("UNIQ", root.to_string())
+        self.assertEqual("[UNIQ]", root.to_string())
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -37,7 +37,7 @@ class TemplateUniqNodeTests(ParserTestsBaseClass):
         root.append(node)
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_no_defaults(self):
         root = TemplateNode()
@@ -46,7 +46,7 @@ class TemplateUniqNodeTests(ParserTestsBaseClass):
         root.append(node)
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -55,4 +55,4 @@ class TemplateUniqNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

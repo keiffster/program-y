@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -32,6 +32,9 @@ class Authoriser(object):
     @property
     def configuration(self):
         return self._configuration
+
+    def initialise(self, brain):
+        pass
 
     def get_default_denied_srai(self):
         return self.configuration.denied_srai

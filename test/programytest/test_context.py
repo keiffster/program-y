@@ -59,14 +59,14 @@ class ClientContextTests(unittest.TestCase):
     def test_base_init(self):
         client = MockClient("clientid")
         context = ClientContext(client, "testid")
-        self.assertEquals("[clientid] [testid] [] [] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [] [] [0]", str(context))
 
     def test_init_with_bot(self):
         client = MockClient("clientid")
         bot = MockBot("botid", None)
         context = ClientContext(client, "testid")
         context.bot = bot
-        self.assertEquals("[clientid] [testid] [botid] [] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [] [0]", str(context))
 
     def test_init_with_bot_brain(self):
         client = MockClient("clientid")
@@ -75,7 +75,7 @@ class ClientContextTests(unittest.TestCase):
         context = ClientContext(client, "testid")
         context.bot = bot
         context.brain = brain
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [0]", str(context))
 
     def test_question(self):
         client = MockClient("clientid")
@@ -84,19 +84,19 @@ class ClientContextTests(unittest.TestCase):
         context = ClientContext(client, "testid")
         context.bot = bot
         context.brain = brain
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [0]", str(context))
 
         context.mark_question_start("question")
 
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [1]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [1]", str(context))
 
         context.mark_question_start("question")
 
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [2]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [2]", str(context))
 
         context.reset_question()
 
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [0]", str(context))
 
     def test_max_recursion(self):
         client = MockClient("clientid")
@@ -106,7 +106,7 @@ class ClientContextTests(unittest.TestCase):
         context = ClientContext(client, "testid")
         context.bot = bot
         context.brain = brain
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [0]", str(context))
 
         context.mark_question_start("question1")
 
@@ -125,7 +125,7 @@ class ClientContextTests(unittest.TestCase):
         context = ClientContext(client, "testid")
         context.bot = bot
         context.brain = brain
-        self.assertEquals("[clientid] [testid] [botid] [brainid] [0]", str(context))
+        self.assertEqual("[clientid] [testid] [botid] [brainid] [0]", str(context))
 
         context.mark_question_start("question1")
 

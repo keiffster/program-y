@@ -6,9 +6,8 @@ import json
 from programy.extensions.maps.maps import GoogleMapsExtension
 from programy.utils.geo.google import GoogleDistance
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -43,7 +42,7 @@ class MapsExtensionTests(unittest.TestCase):
 
         result = googlemaps.execute(self.context, "DISTANCE EDINBURGH KINGHORN")
         self.assertIsNotNone(result)
-        self.assertEquals("DISTANCE DEC 25 FRAC 1 UNITS miles", result)
+        self.assertEqual("DISTANCE DEC 25 FRAC 1 UNITS miles", result)
 
     def test_maps_direction(self):
         directions  = os.path.dirname(__file__) +  os.sep + "directions.json"
@@ -72,11 +71,11 @@ class MapsExtensionTests(unittest.TestCase):
 
         distance = GoogleDistance("here", "there")
         distance._distance_text = "10 miles"
-        self.assertEquals("DISTANCE DEC 10 FRAC 0 UNITS miles", googlemaps._format_distance_for_programy(distance))
+        self.assertEqual("DISTANCE DEC 10 FRAC 0 UNITS miles", googlemaps._format_distance_for_programy(distance))
 
         distance = GoogleDistance("here", "there")
         distance._distance_text = "22.45 km"
-        self.assertEquals("DISTANCE DEC 22 FRAC 45 UNITS km", googlemaps._format_distance_for_programy(distance))
+        self.assertEqual("DISTANCE DEC 22 FRAC 45 UNITS km", googlemaps._format_distance_for_programy(distance))
 
     def test_format_directions_for_programy(self):
         directions  = os.path.dirname(__file__) +  os.sep + "directions.json"
@@ -86,4 +85,4 @@ class MapsExtensionTests(unittest.TestCase):
 
         directions = unittest.mock.Mock()
         directions.legs_as_a_string = lambda : "Leg As String"
-        self.assertEquals("DIRECTIONS Leg As String", googlemaps._format_directions_for_programy(directions))
+        self.assertEqual("DIRECTIONS Leg As String", googlemaps._format_directions_for_programy(directions))

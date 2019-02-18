@@ -4,6 +4,7 @@ from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class BotSpellingConfigurationTests(unittest.TestCase):
 
     def test_with_data(self):
@@ -13,7 +14,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         bot:
             spelling:
               classname: programy.spelling.norvig.NorvigSpellingChecker
-              corpus: $BOT_ROOT/corpus.txt
               alphabet: abcdefghijklmnopqrstuvwxyz
               check_before: true
               check_and_retry: true
@@ -24,9 +24,8 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config = BotSpellingConfiguration()
         spelling_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEquals("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
-        self.assertEquals("./corpus.txt", spelling_config.corpus)
-        self.assertEquals("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
+        self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", spelling_config.classname)
+        self.assertEqual("abcdefghijklmnopqrstuvwxyz", spelling_config.alphabet)
         self.assertTrue(spelling_config.check_before)
         self.assertTrue(spelling_config.check_and_retry)
 
@@ -44,7 +43,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config.load_config_section(yaml, bot_config, ".")
 
         self.assertIsNone(spelling_config.classname)
-        self.assertIsNone(spelling_config.corpus)
         self.assertIsNone(spelling_config.alphabet)
         self.assertFalse(spelling_config.check_before)
         self.assertFalse(spelling_config.check_and_retry)
@@ -62,7 +60,6 @@ class BotSpellingConfigurationTests(unittest.TestCase):
         spelling_config.load_config_section(yaml, bot_config, ".")
 
         self.assertIsNone(spelling_config.classname)
-        self.assertIsNone(spelling_config.corpus)
         self.assertIsNone(spelling_config.alphabet)
         self.assertFalse(spelling_config.check_before)
         self.assertFalse(spelling_config.check_and_retry)

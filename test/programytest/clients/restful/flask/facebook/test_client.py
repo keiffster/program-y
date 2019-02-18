@@ -6,6 +6,7 @@ from programy.clients.restful.flask.facebook.config import FacebookConfiguration
 
 from programytest.clients.arguments import MockArgumentParser
 
+
 class MockFacebookBot(Bot):
 
     def __init__(self, access_token):
@@ -41,18 +42,19 @@ class MockFacebookBotClient(FacebookBotClient):
     def create_facebook_bot(self):
         return MockFacebookBot(self._access_token)
 
-class Facebookclient_contextBotClientTests(unittest.TestCase):
+
+class FacebookClientBotClientTests(unittest.TestCase):
 
     def test_facebook_client_init(self):
         arguments = MockArgumentParser()
         client = MockFacebookBotClient(arguments)
         self.assertIsNotNone(client)
 
-        self.assertEquals("FACEBOOK_VERIFY_TOKEN", client._verify_token)
-        self.assertEquals("FACEBOOK_ACCESS_TOKEN", client._access_token)
+        self.assertEqual("FACEBOOK_VERIFY_TOKEN", client._verify_token)
+        self.assertEqual("FACEBOOK_ACCESS_TOKEN", client._access_token)
 
         self.assertIsInstance(client.get_client_configuration(), FacebookConfiguration)
-        self.assertEquals('ProgramY AIML2.0 Facebook Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._facebook_bot, Bot)
 
@@ -63,7 +65,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args =unittest.mock.Mock()
         request.args.get.return_value = "XXZZ"
-        self.assertEquals("XXZZ", client.get_hub_challenge(request))
+        self.assertEqual("XXZZ", client.get_hub_challenge(request))
 
     def test_hub_verify_token(self):
         arguments = MockArgumentParser()
@@ -72,7 +74,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args =unittest.mock.Mock()
         request.args.get.return_value = "XXZZ"
-        self.assertEquals("XXZZ", client.get_hub_verify_token(request))
+        self.assertEqual("XXZZ", client.get_hub_verify_token(request))
 
     def test_verify_fb_token(self):
         arguments = MockArgumentParser()
@@ -83,7 +85,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         request.args.get.return_value = "ZZZZZZ"
 
         client._verify_token = "XXXXXX"
-        self.assertEquals("ZZZZZZ", client.verify_fb_token("XXXXXX", request))
+        self.assertEqual("ZZZZZZ", client.verify_fb_token("XXXXXX", request))
 
     def test_render_response(self):
         arguments = MockArgumentParser()
@@ -103,7 +105,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
 
         client._verify_token = "ZZZZZZ"
 
-        self.assertEquals("ZZZZZZ", client.return_hub_challenge(request))
+        self.assertEqual("ZZZZZZ", client.return_hub_challenge(request))
 
     def test_get_message_text(self):
         arguments = MockArgumentParser()
@@ -113,7 +115,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         message['message'] = unittest.mock.Mock()
         message['message'].get.return_value = "Hello"
 
-        self.assertEquals("Hello", client.get_message_text(message))
+        self.assertEqual("Hello", client.get_message_text(message))
 
     def has_attachements(self):
         arguments = MockArgumentParser()
@@ -126,7 +128,7 @@ class Facebookclient_contextBotClientTests(unittest.TestCase):
         message['message'] = unittest.mock.Mock()
         message['message'].get.return_value = "Hello"
 
-        self.assertEquals("Hello", client.get_message_text(message))
+        self.assertEqual("Hello", client.get_message_text(message))
 
     def test_get_recipitent_id(self):
         arguments = MockArgumentParser()

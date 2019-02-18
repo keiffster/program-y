@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,10 +17,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 
+from programy.config.container import BaseContainerConfigurationData
 from programy.config.brain.brain import BrainConfiguration
 from programy.config.bot.spelling import BotSpellingConfiguration
 from programy.config.bot.conversations import BotConversationsConfiguration
-from programy.config.container import BaseContainerConfigurationData
+from programy.config.bot.splitter import BotSentenceSplitterConfiguration
+from programy.config.bot.joiner import BotSentenceJoinerConfiguration
+from programy.config.bot.translation import BotTranslatorConfiguration
+from programy.config.bot.sentiment import BotSentimentAnalyserConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BotConfiguration(BaseContainerConfigurationData):
@@ -61,49 +66,68 @@ class BotConfiguration(BaseContainerConfigurationData):
         self._max_search_timeout = BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT
         self._tab_parse_output = BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT
         self._spelling = BotSpellingConfiguration()
+        self._from_translator = BotTranslatorConfiguration(name="from_translator")
+        self._to_translator = BotTranslatorConfiguration(name="to_translator")
+        self._sentiment = BotSentimentAnalyserConfiguration()
         self._conversations = BotConversationsConfiguration()
-
+        self._splitter = BotSentenceSplitterConfiguration()
+        self._joiner = BotSentenceJoinerConfiguration()
         BaseContainerConfigurationData.__init__(self, section_name)
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         bot = configuration_file.get_section(self.section_name)
         if bot is not None:
 
             self._default_response = configuration_file.get_option(bot, "default_response",
-                                                                   BotConfiguration.DEFAULT_RESPONSE)
+                                                                   BotConfiguration.DEFAULT_RESPONSE, subs=subs)
             self._default_response_srai = configuration_file.get_option(bot, "default_response_srai",
-                                                                        BotConfiguration.DEFAULT_RESPONSE_SRAI)
+                                                                        BotConfiguration.DEFAULT_RESPONSE_SRAI, subs=subs)
             self._empty_string = configuration_file.get_option(bot, "empty_string",
-                                                               BotConfiguration.DEFAULT_EMPTY_STRING)
+                                                               BotConfiguration.DEFAULT_EMPTY_STRING, subs=subs)
             self._exit_response = configuration_file.get_option(bot, "exit_response",
-                                                                BotConfiguration.DEFAULT_EXIT_RESPONSE)
+                                                                BotConfiguration.DEFAULT_EXIT_RESPONSE, subs=subs)
             self._exit_response_srai = configuration_file.get_option(bot, "exit_response_srai",
-                                                                     BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI)
+                                                                     BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI, subs=subs)
             self._initial_question = configuration_file.get_option(bot, "initial_question",
-                                                                   BotConfiguration.DEFAULT_INITIAL_QUESTION)
+                                                                   BotConfiguration.DEFAULT_INITIAL_QUESTION, subs=subs)
             self._initial_question_srai = configuration_file.get_option(bot, "initial_question_srai",
-                                                                        BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI)
+                                                                        BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI, subs=subs)
             self._override_properties = configuration_file.get_option(bot, "override_properties",
-                                                                      BotConfiguration.DEFAULT_OVERRIDE_PREDICATES)
+                                                                      BotConfiguration.DEFAULT_OVERRIDE_PREDICATES, subs=subs)
             self._max_question_recursion = configuration_file.get_int_option(bot, "max_question_recursion",
-                                                                             BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION)
+                                                                             BotConfiguration.DEFAULT_MAX_QUESTION_RECURSION, subs=subs)
             self._max_question_timeout = configuration_file.get_int_option(bot, "max_question_timeout",
-                                                                           BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT)
+                                                                           BotConfiguration.DEFAULT_MAX_QUESTION_TIMEOUT, subs=subs)
             self._max_search_depth = configuration_file.get_int_option(bot, "max_search_depth",
-                                                                       BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH)
+                                                                       BotConfiguration.DEFAULT_MAX_SEARCH_DEPTH, subs=subs)
             self._max_search_timeout = configuration_file.get_int_option(bot, "max_search_timeout",
-                                                                         BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT)
+                                                                         BotConfiguration.DEFAULT_MAX_SEARCH_TIMEOUT, subs=subs)
             self._tab_parse_output = configuration_file.get_bool_option(bot, "tab_parse_output",
-                                                                        BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT)
+                                                                        BotConfiguration.DEFAULT_TAB_PARSE_OUTPUT, subs=subs)
 
-            self._spelling.load_config_section(configuration_file, bot, bot_root)
-            self._conversations.load_config_section(configuration_file, bot, bot_root)
+            self._spelling.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._conversations.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._splitter.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._joiner.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._from_translator.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._to_translator.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
+            self._sentiment.load_config_section(configuration_file, bot, bot_root, subs=subs)
+
         else:
             YLogger.warning(self, "Config section [%s] missing, using default values", self.section_name)
 
-        self.load_configurations(configuration_file, bot, bot_root)
+        self.load_configurations(configuration_file, bot, bot_root, subs)
 
-    def load_configurations(self, configuration_file, bot, bot_root):
+    def load_configurations(self, configuration_file, bot, bot_root, subs: Substitutions = None):
         if bot is not None:
             brain_names = configuration_file.get_multi_option(bot, "brain", missing_value="brain")
             first = True
@@ -114,15 +138,15 @@ class BotConfiguration(BaseContainerConfigurationData):
                 else:
                     config = BrainConfiguration(name)
                     self._brain_configs.append(config)
-                config.load_configuration(configuration_file, bot_root)
+                config.load_configuration(configuration_file, bot_root, subs=subs)
 
-                self._brain_selector = configuration_file.get_option(bot, "brain_selector")
+                self._brain_selector = configuration_file.get_option(bot, "brain_selector", subs=subs)
 
         else:
             YLogger.warning(self, "No brain name defined for bot [%s], defaulting to 'brain'.", self.section_name)
             brain_name = "brain"
             self._brain_configs[0]._section_name = brain_name
-            self._brain_configs[0].load_configuration(configuration_file, bot_root)
+            self._brain_configs[0].load_configuration(configuration_file, bot_root, subs=subs)
 
     @property
     def configurations(self):
@@ -228,6 +252,26 @@ class BotConfiguration(BaseContainerConfigurationData):
     def conversations(self):
         return self._conversations
 
+    @property
+    def splitter(self):
+        return self._splitter
+
+    @property
+    def joiner(self):
+        return self._joiner
+
+    @property
+    def from_translator(self):
+        return self._from_translator
+
+    @property
+    def to_translator(self):
+        return self._to_translator
+
+    @property
+    def sentiment_analyser(self):
+        return self._sentiment
+
     def to_yaml(self, data, defaults=True):
 
         data['bot_root'] = self.bot_root
@@ -246,3 +290,8 @@ class BotConfiguration(BaseContainerConfigurationData):
         data['tab_parse_output'] = self.tab_parse_output
         self.config_to_yaml(data, BotSpellingConfiguration(), defaults)
         self.config_to_yaml(data, BotConversationsConfiguration(), defaults)
+        self.config_to_yaml(data, BotSentenceSplitterConfiguration(), defaults)
+        self.config_to_yaml(data, BotSentenceJoinerConfiguration(), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(name="from_translator"), defaults)
+        self.config_to_yaml(data, BotTranslatorConfiguration(name="to_translator"), defaults)
+        self.config_to_yaml(data, BotSentimentAnalyserConfiguration(), defaults)

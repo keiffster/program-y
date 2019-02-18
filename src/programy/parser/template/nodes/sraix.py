@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -49,17 +49,10 @@ class TemplateSRAIXNode(TemplateNode):
             YLogger.error(client_context, "Sorry SRAIX does not currently have an implementation for [%s]", self._service)
             return ""
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
         if self._service is not None:
-            return "SRAIX (service=%s)" % (self._service)
-        return "SRAIX ()"
+            return "[SRAIX (service=%s)]" % (self._service)
+        return "[SRAIX ()]"
 
     def to_xml(self, client_context):
         xml = '<sraix'

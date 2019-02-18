@@ -51,7 +51,7 @@ class TemplateFactoryTests(unittest.TestCase):
     def test_init(self):
         factory = TemplateNodeFactory()
         self.assertIsNotNone(factory)
-        self.assertEquals({}, factory._nodes_config)
+        self.assertEqual({}, factory._nodes_config)
         self.assertEqual("Template", factory._type)
 
     def assert_node(self, factory, name, cls, *args):
@@ -67,7 +67,7 @@ class TemplateFactoryTests(unittest.TestCase):
         self.assertIsInstance(new_node, cls)
 
     def assert_nodes(self, factory):
-        self.assertEquals(66, len(factory._nodes_config))
+        self.assertEqual(66, len(factory._nodes_config))
 
         self.assert_node(factory, 'random', TemplateRandomNode, None)
         self.assert_node(factory, 'condition', TemplateConditionNode, "name", "value")
@@ -112,13 +112,3 @@ class TemplateFactoryTests(unittest.TestCase):
         self.assert_node(factory, 'rest', TemplateRestNode, None)
         self.assert_node(factory, 'log', TemplateLogNode, None)
 
-    def test_load_nodes_config_from_file(self):
-        factory = TemplateNodeFactory()
-        factory.load_nodes_config_from_file(os.path.dirname(__file__) + os.sep + "pattern_nodes.conf")
-        self.assert_nodes(factory)
-
-    def test_load_nodes_config_from_file_invalid_filename(self):
-        factory = TemplateNodeFactory()
-        factory.load_nodes_config_from_file("some_rubbish.txt")
-        self.assertEquals(66, len(factory._nodes_config))
-        self.assert_nodes(factory)

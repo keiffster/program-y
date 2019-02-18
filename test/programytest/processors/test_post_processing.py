@@ -1,30 +1,34 @@
 import unittest
+import re
 from programy.processors.post.denormalize import DenormalizePostProcessor
 from programy.processors.post.formatpunctuation import FormatPunctuationProcessor
 from programy.processors.post.formatnumbers import FormatNumbersPostProcessor
 from programy.processors.post.multispaces import RemoveMultiSpacePostProcessor
-from programy.processors.post.emojize import EmojizePreProcessor
+from programy.processors.post.emojize import EmojizePostProcessor
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PostProcessingTests(unittest.TestCase):
 
     def post_process(self, output_str):
-        context = ClientContext(TestClient(), "testid")
+        self.client = TestClient()
+
+        context = ClientContext(self.client, "testid")
    
-        context.bot = Bot(config=BotConfiguration())
+        context.bot = Bot(config=BotConfiguration(), client=self.client)
         context.brain = context.bot.brain
-        context.bot.brain.denormals.process_splits([" dot com ",".com"])
-        context.bot.brain.denormals.process_splits([" atsign ","@"])
+        context.bot.brain.denormals.add_to_lookup(" DOT COM ", [re.compile('(^DOT COM | DOT COM | DOT COM$)', re.IGNORECASE), '.COM '])
+        context.bot.brain.denormals.add_to_lookup(" ATSIGN ",[re.compile('(^ATSIGN | ATSIGN | ATSIGN$)', re.IGNORECASE), '@'])
+
         denormalize = DenormalizePostProcessor()
         punctuation = FormatPunctuationProcessor()
         numbers = FormatNumbersPostProcessor()
         multispaces = RemoveMultiSpacePostProcessor()
-        emojize = EmojizePreProcessor()
+        emojize = EmojizePostProcessor()
 
         output_str = denormalize.process(context, output_str)
         output_str = punctuation.process(context, output_str)

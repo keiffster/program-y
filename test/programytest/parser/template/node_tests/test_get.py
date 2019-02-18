@@ -4,7 +4,7 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.get import TemplateGetNode
 from programy.parser.template.nodes.word import TemplateWordNode
 from programy.parser.template.nodes.select import TemplateSelectNode
-from programy.dialog.dialog import Question
+from programy.dialog.question import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 
@@ -35,7 +35,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello", self._client_context.bot.sentence_splitter)
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
         question.set_property("name", "keith")
@@ -75,7 +75,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello", self._client_context.bot.sentence_splitter)
         conversation.record_dialog(question)
 
         result = root.resolve(self._client_context)
@@ -99,7 +99,7 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello", self._client_context.bot.sentence_splitter)
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
         conversation.set_property("name", "keith")
@@ -192,4 +192,4 @@ class TemplateGetNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

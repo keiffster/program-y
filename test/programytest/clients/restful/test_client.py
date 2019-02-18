@@ -15,7 +15,7 @@ class RestBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.get_client_configuration())
         self.assertIsInstance(client.get_client_configuration(), RestConfiguration)
-        self.assertEquals([], client.api_keys)
+        self.assertEqual([], client.api_keys)
 
         request = unittest.mock.Mock()
         response, code = client.process_request(request)
@@ -30,7 +30,7 @@ class RestBotClientTests(unittest.TestCase):
 
         client.load_api_keys()
 
-        self.assertEquals(3, len(client.api_keys))
+        self.assertEqual(3, len(client.api_keys))
         self.assertTrue(client.is_apikey_valid("11111111"))
         self.assertTrue(client.is_apikey_valid("22222222"))
         self.assertTrue(client.is_apikey_valid("33333333"))

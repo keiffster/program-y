@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -19,13 +19,13 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 import re
 
-from programy.processors.processing import PreProcessor
+from programy.processors.processing import PostProcessor
 from programy.utils.language.chinese import ChineseLanguage
 
-class MergeChinesePostProcessor(PreProcessor):
+class MergeChinesePostProcessor(PostProcessor):
 
     def __init__(self):
-        PreProcessor.__init__(self)
+        PostProcessor.__init__(self)
 
     def process(self, context, word_string):
         YLogger.debug(context, "Merging Chinese into understandable words...")

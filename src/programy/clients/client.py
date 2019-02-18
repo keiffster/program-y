@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -27,10 +27,11 @@ from programy.bot import Bot
 from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
-from programy.utils.classes.loader import ClassLoader
+from programy.utils.substitutions.substitues import Substitutions
 from programy.scheduling.scheduler import ProgramyScheduler
 from programy.clients.render.text import TextRenderer
 from programy.utils.classes.loader import ClassLoader
+from programy.storage.factory import StorageFactory
 
 
 class ResponseLogger(object):
@@ -102,22 +103,30 @@ class BotClient(ResponseLogger):
 
     def __init__(self, id, argument_parser=None):
         self._id = id
+        self._license_keys = LicenseKeys()
+        self._storage = None
+        self._scheduler = None
+        self._configuration = None
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
 
         self.initiate_logging(self.arguments)
 
-        self._configuration = None
+        self._subsitutions = Substitutions()
+        if self.arguments.substitutions is not None:
+            self._subsitutions.load_substitutions(self.arguments.substitutions)
+
         self.load_configuration(self.arguments)
         self.parse_configuration()
 
+        self.load_storage()
+
         self._bot_factory = BotFactory(self, self.configuration.client_configuration)
 
-        self._license_keys = LicenseKeys()
         self.load_license_keys()
         self.get_license_keys()
+        self._configuration.client_configuration.check_for_license_keys(self._license_keys)
 
-        self._scheduler = None
         self.load_scheduler()
 
         self._renderer = self.load_renderer()
@@ -146,6 +155,10 @@ class BotClient(ResponseLogger):
         return self._scheduler
 
     @property
+    def storage_factory(self):
+        return self._storage
+
+    @property
     def bot_factory(self):
         return self._bot_factory
 
@@ -154,8 +167,11 @@ class BotClient(ResponseLogger):
         return self._renderer
 
     def get_description(self):
-        raise NotImplementedError("You must override this and return a client description")
-
+        if self.configuration is not None:
+            if self.configuration.client_configuration is not None:
+                return self.configuration.client_configuration.description
+        return "Bot Client"
+    
     def add_client_arguments(self, parser=None):
         # Nothing to add
         return
@@ -174,23 +190,26 @@ class BotClient(ResponseLogger):
         return client_args
 
     def load_license_keys(self):
-        if self.configuration is not None:
-            if self.configuration.client_configuration.license_keys is not None:
-                self._license_keys.load_license_key_file(self.configuration.client_configuration.license_keys)
-            else:
-                YLogger.warning(self, "No client configuration setting for license_keys")
+        if self.storage_factory.entity_storage_engine_available(StorageFactory.LICENSE_KEYS) is True:
+            storage_engine = self.storage_factory.entity_storage_engine(StorageFactory.LICENSE_KEYS)
+            keys_store = storage_engine.license_store()
+            keys_store.load(self._license_keys)
         else:
-            YLogger.warning(self, "No configuration defined when loading license keys")
+            YLogger.warning(self, "No storage factory setting for license_keys")
 
     def get_license_keys(self):
         return
 
     def initiate_logging(self, arguments):
         if arguments.logging is not None:
-            with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
-                logging_config = yaml.load(yml_data_file)
-                logging.config.dictConfig(logging_config)
-                YLogger.info(self, "Now logging under configuration")
+            try:
+                with open(arguments.logging, 'r+', encoding="utf-8") as yml_data_file:
+                    logging_config = yaml.load(yml_data_file)
+                    logging.config.dictConfig(logging_config)
+                    YLogger.info(self, "Now logging under configuration")
+
+            except Exception as excep:
+                YLogger.exception(self, "Failed to open logging configuration [%s]", excep, arguments.logging)
         else:
             print("Warning. No logging configuration file defined, using defaults...")
 
@@ -202,7 +221,7 @@ class BotClient(ResponseLogger):
         """
         raise NotImplementedError("You must override this and return a subclassed client configuration")
 
-    def load_configuration(self, arguments):
+    def load_configuration(self, arguments, subs: Substitutions = None):
         if arguments.bot_root is None:
             if arguments.config_filename is not None:
                 arguments.bot_root = os.path.dirname(arguments.config_filename)
@@ -212,9 +231,10 @@ class BotClient(ResponseLogger):
 
         if arguments.config_filename is not None:
             self._configuration = ConfigurationFactory.load_configuration_from_file(self.get_client_configuration(),
-                                                                                   arguments.config_filename,
-                                                                                   arguments.config_format,
-                                                                                   arguments.bot_root)
+                                                                                    arguments.config_filename,
+                                                                                    arguments.config_format,
+                                                                                    arguments.bot_root,
+                                                                                    subs)
         else:
             print("No configuration file specified, using defaults only !")
             self._configuration = ProgramyConfiguration(self.get_client_configuration())
@@ -223,6 +243,13 @@ class BotClient(ResponseLogger):
         if self.configuration.client_configuration.scheduler is not None:
             self._scheduler = ProgramyScheduler(self, self.configuration.client_configuration.scheduler)
             self._scheduler.start()
+
+    def load_storage(self):
+        self._storage = StorageFactory()
+        if self.configuration.client_configuration.storage is not None:
+            self._storage.load_engines_from_config(self.configuration.client_configuration.storage)
+        else:
+            print("No storage defined!")
 
     def create_client_context(self, userid):
         client_context = ClientContext(self, userid)
@@ -235,6 +262,7 @@ class BotClient(ResponseLogger):
             if self.get_client_configuration().renderer is not None:
                 clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
                 return clazz(self)
+
         except Exception as e:
             YLogger.exception(None, "Failed to load config specified renderer", e)
 
@@ -247,7 +275,8 @@ class BotClient(ResponseLogger):
         raise NotImplementedError("You must override this and implement the logic to create a response to the question")
 
     def render_response(self, client_context, response):
-        raise NotImplementedError("You must override this and implement the logic to process the response by rendering using a RCS renderer")
+        raise NotImplementedError("You must override this and implement the logic to process the response by rendering"
+                                  " using a RCS renderer")
 
     def process_response(self, client_context, response):
         raise NotImplementedError("You must override this and implement the logic to display the response to the user")

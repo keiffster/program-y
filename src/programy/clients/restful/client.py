@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -28,14 +28,18 @@ class RestBotClient(BotClient):
         self.api_keys = []
 
     def get_client_configuration(self):
-        return RestConfiguration("rest")
+        return RestConfiguration(self.id)
 
     def load_api_keys(self):
         if self.configuration.client_configuration.use_api_keys is True:
             if self.configuration.client_configuration.api_key_file is not None:
-                with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
-                    for api_key in api_key_file:
-                        self.api_keys.append(api_key.strip())
+                try:
+                    with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
+                        for api_key in api_key_file:
+                            self.api_keys.append(api_key.strip())
+
+                except Exception as excep:
+                    YLogger.exception(self, "Failed to open license key file [%s]", excep, self.configuration.client_configuration.api_key_file)
 
     def initialise(self):
         self.load_api_keys()

@@ -1,21 +1,34 @@
 import unittest
 
-from programy.bot import Bot
-from programy.dialog.dialog import Question, Sentence
+from programy.dialog.question import Question, Sentence
 from programy.parser.pattern.matcher import MatchContext, Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
-from programy.config.bot.bot import BotConfiguration
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
+
+
+class TemplateGraphClient(TestClient):
+
+    def __init__(self):
+        TestClient.__init__(self)
+
+    def load_storage(self):
+        super(TemplateGraphClient, self).load_storage()
+        self.add_default_stores()
+        self.add_pattern_nodes_store()
+        self.add_template_nodes_store()
+
 
 class TemplateGraphTestClient(unittest.TestCase):
 
+    def create_client_context(self, testid):
+        client = TemplateGraphClient()
+        return client.create_client_context(testid)
+
     def setUp(self):
 
-        self._client_context = ClientContext(TestClient(), "testid")
-        self._client_context.bot = Bot(BotConfiguration())
-        self._client_context.brain = self._client_context.bot.brain
+        self._client = TemplateGraphClient()
+        self._client_context = self._client.create_client_context("testid")
 
         self._graph = self._client_context.bot.brain.aiml_parser.template_parser
 

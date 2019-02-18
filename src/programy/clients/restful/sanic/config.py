@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 from programy.clients.restful.config import RestConfiguration
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class SanicRestConfiguration(RestConfiguration):
@@ -27,11 +28,14 @@ class SanicRestConfiguration(RestConfiguration):
     def workers(self):
         return self._workers
 
-    def load_configuration(self, configuration_file, bot_root):
+    def check_for_license_keys(self, license_keys):
+        RestConfiguration.check_for_license_keys(self, license_keys)
+
+    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
         sanic = configuration_file.get_section(self.section_name)
         if sanic is not None:
-            self._workers = configuration_file.get_option(sanic, "workers", missing_value=4)
-        super(SanicRestConfiguration, self).load_configuration(configuration_file, bot_root)
+            self._workers = configuration_file.get_option(sanic, "workers", missing_value=4, subs=subs)
+        super(SanicRestConfiguration, self).load_configuration_section(configuration_file, sanic, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

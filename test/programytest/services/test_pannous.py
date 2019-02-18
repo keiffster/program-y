@@ -6,7 +6,7 @@ from programy.services.pannous import PannousService, PannousAPI
 from programy.services.service import BrainServiceConfiguration
 from programytest.services.mock_requests import MockRequestsAPI
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PannousAPITests(unittest.TestCase):
@@ -23,7 +23,7 @@ class PannousAPITests(unittest.TestCase):
         }
         """)
         response = pannous_api.ask_question("http://testurl", "Hello", "testid")
-        self.assertEquals(response, "Hello")
+        self.assertEqual(response, "Hello")
 
     def test_ask_question_no_response(self):
 
@@ -135,8 +135,8 @@ class PannousServiceTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self._client_context = client.create_client_context("testid")
-        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_ask_question(self):
 
@@ -147,7 +147,7 @@ class PannousServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("Test pannous response", response)
+        self.assertEqual("Test pannous response", response)
 
     def test_ask_question_no_url(self):
 
@@ -158,7 +158,7 @@ class PannousServiceTests(unittest.TestCase):
             self.assertIsNotNone(service)
 
             response = service.ask_question(self._client_context, "what is a cat")
-            self.assertEquals("", response)
+            self.assertEqual("", response)
 
         self.assertEqual(raised.exception.args[0], "Undefined url parameter")
 
@@ -173,7 +173,7 @@ class PannousServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)
 
     def test_ask_question_with_exception(self):
 
@@ -184,4 +184,4 @@ class PannousServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)

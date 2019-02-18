@@ -93,7 +93,7 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
     def test_set_attrib(self):
         node = TemplateSystemNode()
         node.set_attrib("timeout", 1000)
-        self.assertEquals(1000, node.timeout)
+        self.assertEqual(1000, node.timeout)
 
         with self.assertRaises(ParserException):
             node.set_attrib("unknown", 1000)
@@ -128,4 +128,4 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

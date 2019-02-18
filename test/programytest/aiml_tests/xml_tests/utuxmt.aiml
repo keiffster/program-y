@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<aiml>
+
+	<category>
+		<pattern>command1</pattern>
+		<template>
+			<myTag1 name="myTag1" />
+			<myTag2 name="myTag2" />
+            Message from `command1`
+		</template>
+	</category>
+
+    <category>
+		<pattern>command2</pattern>
+		<template>
+            Message from pattern `command2`
+			<myTag1 name="myTag1" />
+			<myTag2 name="myTag2" />
+		</template>
+	</category>
+
+    <category>
+		<pattern>command3</pattern>
+		<template>
+            <input />
+			<myTag1 name="myTag1" />
+			<myTag2 name="myTag2" />
+            Message from pattern `command3`
+		</template>
+	</category>
+
+</aiml>

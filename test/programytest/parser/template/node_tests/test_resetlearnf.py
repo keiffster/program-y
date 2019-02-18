@@ -17,7 +17,7 @@ class TemplateResetLearnfNodeTests(ParserTestsBaseClass):
     def test_node(self):
         root = TemplateResetLearnfNode()
         self.assertIsNotNone(root)
-        self.assertEquals("", root.resolve(self._client_context))
+        self.assertEqual("", root.resolve(self._client_context))
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -26,12 +26,12 @@ class TemplateResetLearnfNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_to_string(self):
         node = TemplateResetLearnfNode()
-        self.assertEquals("RESETLEARNF", node.to_string())
+        self.assertEqual("[RESETLEARNF]", node.to_string())
 
     def test_to_xml(self):
         node = TemplateResetLearnfNode()
-        self.assertEquals("<resetlearnf />", node.to_xml(self._client_context))
+        self.assertEqual("<resetlearnf />", node.to_xml(self._client_context))

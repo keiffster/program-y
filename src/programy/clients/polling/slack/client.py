@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -41,9 +41,6 @@ class SlackBotClient(PollingBotClient):
         PollingBotClient.__init__(self, "slack", argument_parser)
 
         self._slack_client = self.create_client()
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Slack Client'
 
     def get_client_configuration(self):
         return SlackConfiguration()

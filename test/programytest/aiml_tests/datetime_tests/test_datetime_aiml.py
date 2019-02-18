@@ -1,23 +1,21 @@
 import unittest
 import os
 
-from programy.context import ClientContext
 from programy.utils.text.dateformat import DateFormatter
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class DateTimeAIMLTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(DateTimeAIMLTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
-        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._files = [os.path.dirname(__file__)+ os.sep + "sets"]
-        self.configuration.client_configuration.configurations[0].configurations[0].files.set_files._extension=".txt"
-        self.configuration.client_configuration.configurations[0].configurations[0].files.map_files._files = [os.path.dirname(__file__)+ os.sep + "maps"]
-        self.configuration.client_configuration.configurations[0].configurations[0].files.map_files._extension=".txt"
+    def load_storage(self):
+        super(DateTimeAIMLTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+        self.add_sets_store([os.path.dirname(__file__)+ os.sep + "sets"])
+        self.add_maps_store([os.path.dirname(__file__)+ os.sep + "maps"])
 
 
 class DateTimeAIMLTests(unittest.TestCase):
@@ -39,49 +37,49 @@ class DateTimeAIMLTests(unittest.TestCase):
     def test_day(self):
         response = self._client_context.bot.ask_question(self._client_context, "DAY")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "Today is %s"%(self.date.full_weekday()))
+        self.assertEqual(response, "Today is %s."%(self.date.full_weekday()))
 
     def test_tomorrow(self):
         response = self._client_context.bot.ask_question(self._client_context, "TOMORROW")
         self.assertIsNotNone(response)
         self.date = DateFormatter(days=1)
-        self.assertEqual(response, self.date.full_weekday())
+        self.assertEqual(response, self.date.full_weekday()+".")
 
     def test_year(self):
         response = self._client_context.bot.ask_question(self._client_context, "YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.year_4_digit()))
+        self.assertEqual(response, "This is %s."%(self.date.year_4_digit()))
 
         response = self._client_context.bot.ask_question(self._client_context, "YEAR NEXT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.year_4_digit()))
+        self.assertEqual(response, "This is %s."%(self.date.year_4_digit()))
 
     def test_next_year(self):
         next_year = (int(self.date.year_4_digit()))+1
 
         response = self._client_context.bot.ask_question(self._client_context, "NEXT YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(next_year))
+        self.assertEqual(response, "%d."%(next_year))
 
         response = self._client_context.bot.ask_question(self._client_context, "NEXT YEAR NEXT")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(next_year))
+        self.assertEqual(response, "%d."%(next_year))
 
     def test_last_year(self):
         last_year = (int(self.date.year_4_digit()))-1
 
         response = self._client_context.bot.ask_question(self._client_context, "LAST YEAR")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(last_year))
+        self.assertEqual(response, "%d."%(last_year))
 
         response = self._client_context.bot.ask_question(self._client_context, "LAST YEAR AGO")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "%d"%(last_year))
+        self.assertEqual(response, "%d."%(last_year))
 
     def test_month(self):
         response = self._client_context.bot.ask_question(self._client_context, "MONTH")
         self.assertIsNotNone(response)
-        self.assertEqual(response, "This is %s"%(self.date.full_month()))
+        self.assertEqual(response, "This is %s."%(self.date.full_month()))
 
     def test_time(self):
         response = self._client_context.bot.ask_question(self._client_context, "TIME")
@@ -90,7 +88,7 @@ class DateTimeAIMLTests(unittest.TestCase):
         hour = self.date.hour_12_hour_clock()
         min = self.date.decimal_minute()
         ampm = self.date.am_or_pm()
-        self.assertRegex(response, "The time is %s:%s %s"%(hour, min, ampm))
+        self.assertRegex(response, "The time is %s:%s %s."%(hour, min, ampm))
 
     def test_day_phase(self):
         response = self._client_context.bot.ask_question(self._client_context,  "DAY PHASE")

@@ -5,7 +5,7 @@ from programy.parser.template.nodes.denormalise import TemplateDenormalizeNode
 from programy.parser.template.nodes.word import TemplateWordNode
 
 from programytest.parser.base import ParserTestsBaseClass
-
+import re
 
 class MockTemplateDenormalizeNode(TemplateDenormalizeNode):
 
@@ -14,6 +14,7 @@ class MockTemplateDenormalizeNode(TemplateDenormalizeNode):
 
     def resolve_to_string(self, context):
         raise Exception ("This is an error")
+
 
 class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
@@ -29,10 +30,10 @@ class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode("keiff dot uk"))
-        self._client_context.brain.denormals.process_splits([" dot uk",".uk"])
+        node.append(TemplateWordNode("keiff dot com"))
+        self._client_context.brain.denormals.add_to_lookup(" DOT COM ", [re.compile("(^DOT COM | DOT COM | DOT COM$)", re.IGNORECASE), ".com"])
 
-        self.assertEqual(root.resolve(self._client_context), "keiff.uk")
+        self.assertEqual(root.resolve(self._client_context), "keiff.com")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -52,7 +53,7 @@ class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)
 
     def test_node_exception_handling(self):
         root = TemplateNode()
@@ -61,4 +62,4 @@ class TemplateDenormalizeNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

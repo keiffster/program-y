@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -44,9 +44,6 @@ class TwilioBotClient(FlaskRestBotClient):
     @property
     def from_number(self):
         return self._from_number
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Twilio Client'
 
     def get_license_keys(self):
         self._account_sid = self.license_keys.get_key("TWILIO_ACCOUNT_SID")

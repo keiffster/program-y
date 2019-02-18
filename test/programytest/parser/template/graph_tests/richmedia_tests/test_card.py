@@ -40,4 +40,4 @@ class TemplateGraphCardTests(TemplateGraphTestClient):
         self.assertIsNotNone(node._title)
         self.assertIsNotNone(node._subtitle)
         self.assertIsNotNone(node._buttons)
-        self.assertEquals(2, len(node._buttons))
+        self.assertEqual(2, len(node._buttons))

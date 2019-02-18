@@ -6,9 +6,8 @@ import unittest.mock
 from programy.extensions.weather.weather import WeatherExtension
 from programy.utils.weather.metoffice import MetOffice
 from programy.utils.geo.google import GoogleMaps
-from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class MockGoogleMaps(GoogleMaps):
 
@@ -53,15 +52,13 @@ class WeatherExtensionTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self.context = client.create_client_context("testid")
 
         bot = unittest.mock.Mock()
         self.context.bot = bot
         self.context.brain = bot.brain
 
-        self.context.client.license_keys.load_license_key_data("""
-        METOFFICE_API_KEY=TESTKEY
-        """)
 
     def test_observation(self):
         latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
@@ -72,7 +69,7 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "OBSERVATION LOCATION KY39UR WHEN NOW")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
+        self.assertEqual("WEATHER Partly cloudy (day) TEMP 12 3 VISIBILITY V 35000 VF Very Good WIND D SW DF South West S 10 PRESSURE P 1017 PT F PTF Falling HUMIDITY 57 3", result)
 
         result = weather.execute(self.context, "OBSERVATION OTHER KY39UR WHEN NOW")
         self.assertIsNone(result)
@@ -92,7 +89,7 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "FORECAST5DAY LOCATION KY39UR WHEN 1")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER TYPE Cloudy WINDDIR NW WINDGUST 7 WINDSPEED 4 TEMP 8 FEELS 8 HUMID 76 RAINPROB 8 VISTEXT Very good - Between 20-40 km WEATHER Cloudy", result)
+        self.assertEqual("WEATHER TYPE Cloudy WINDDIR NW WINDGUST 7 WINDSPEED 4 TEMP 8 FEELS 8 HUMID 76 RAINPROB 8 VISTEXT Very good - Between 20-40 km WEATHER Cloudy", result)
 
     def test_forecast24hour(self):
         latlong     = os.path.dirname(__file__) + os.sep + "google_latlong.json"
@@ -103,4 +100,4 @@ class WeatherExtensionTests(unittest.TestCase):
 
         result = weather.execute(self.context, "FORECAST24HOUR LOCATION KY39UR WHEN 1")
         self.assertIsNotNone(result)
-        self.assertEquals("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)
+        self.assertEqual("WEATHER Overcast TEMP 10 FEELS 10 WINDDIR NW WINDDIRFULL North West WINDSPEED 4 VIS Very good - Between 20-40 km UVINDEX 0 UVGUIDE None RAINPROB 8 HUMIDITY 73", result)

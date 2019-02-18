@@ -14,7 +14,6 @@ class BrainBinariesConfigurationTests(unittest.TestCase):
             binaries:
               save_binary: true
               load_binary: true
-              binary_filename: /tmp/y-bot.brain
               load_aiml_on_binary_fail: true
         """, ConsoleConfiguration(), ".")
 
@@ -25,7 +24,6 @@ class BrainBinariesConfigurationTests(unittest.TestCase):
 
         self.assertTrue(binaries_config.save_binary)
         self.assertTrue(binaries_config.load_binary)
-        self.assertEquals("/tmp/y-bot.brain", binaries_config.binary_filename)
         self.assertTrue(binaries_config.load_aiml_on_binary_fail)
 
     def test_without_data(self):
@@ -43,7 +41,6 @@ class BrainBinariesConfigurationTests(unittest.TestCase):
 
         self.assertFalse(binaries_config.save_binary)
         self.assertFalse(binaries_config.load_binary)
-        self.assertIsNone(binaries_config.binary_filename)
         self.assertFalse(binaries_config.load_aiml_on_binary_fail)
 
     def test_with_no_data(self):
@@ -60,5 +57,4 @@ class BrainBinariesConfigurationTests(unittest.TestCase):
 
         self.assertFalse(binaries_config.save_binary)
         self.assertFalse(binaries_config.load_binary)
-        self.assertIsNone(binaries_config.binary_filename)
         self.assertFalse(binaries_config.load_aiml_on_binary_fail)

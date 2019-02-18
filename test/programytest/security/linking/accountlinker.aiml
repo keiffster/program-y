@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+
+    <category>
+        <pattern>LINK PRIMARY ACCOUNT * * *</pattern>
+        <template>
+            <srai>
+                <extension path="programy.security.linking.extension.AccountLinkingExtension">
+                    LINK PRIMARY ACCOUNT <star index="1" /> <star index="2" /> <star index="3" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>PRIMARY ACCOUNT LINKED *</pattern>
+        <template>
+            Your generated key is <star index="1" />
+        </template>
+    </category>
+
+    <category>
+        <pattern>INVALID PRIMARY ACCOUNT COMMAND</pattern>
+        <template>
+            Failed to register your account for linking.
+        </template>
+    </category>
+
+    <category>
+        <pattern>LINK SECONDARY ACCOUNT * * * * *</pattern>
+        <template>
+            <srai>
+                <extension path="programy.security.linking.extension.AccountLinkingExtension">
+                    LINK SECONDARY ACCOUNT <star index="1" /> <star index="2" /> <star index="3" /> <star index="4" /> <star index="5" />
+                </extension>
+            </srai>
+        </template>
+    </category>
+
+    <category>
+        <pattern>SECONDARY ACCOUNT LINKED</pattern>
+        <template>
+            Your accounts are now linked.
+        </template>
+    </category>
+
+    <category>
+        <pattern>INVALID SECONDARY ACCOUNT COMMAND</pattern>
+        <template>
+            Failed to link your accounts.
+        </template>
+    </category>
+
+ </aiml>

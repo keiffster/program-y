@@ -4,7 +4,7 @@ import os
 from programy.processors.post.consoleformat import ConsoleFormatPostProcessor
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class RemoveHTMLTests(unittest.TestCase):
 

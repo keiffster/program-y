@@ -17,8 +17,6 @@ class TwitterConfigurationTests(unittest.TestCase):
               use_status: true
               use_direct_message: true
               auto_follow: true
-              storage: file
-              storage_location: ./storage/twitter.data
               welcome_message: Thanks for following me
         """, ConsoleConfiguration(), ".")
 
@@ -30,9 +28,7 @@ class TwitterConfigurationTests(unittest.TestCase):
         self.assertTrue(twitter_config.use_status)
         self.assertTrue(twitter_config.use_direct_message)
         self.assertTrue(twitter_config.auto_follow)
-        self.assertEquals("file", twitter_config.storage)
-        self.assertEquals("./storage/twitter.data", twitter_config.storage_location)
-        self.assertEquals("Thanks for following me", twitter_config.welcome_message)
+        self.assertEqual("Thanks for following me", twitter_config.welcome_message)
 
     def test_to_yaml_with_defaults(self):
         config = TwitterConfiguration()
@@ -40,16 +36,13 @@ class TwitterConfigurationTests(unittest.TestCase):
         data = {}
         config.to_yaml(data, True)
 
-        self.assertEquals(data['polling_interval'], 0)
-        self.assertEquals(data['rate_limit_sleep'], -1)
-        self.assertEquals(data['use_status'], False)
-        self.assertEquals(data['use_direct_message'], False)
-        self.assertEquals(data['auto_follow'], False)
-        self.assertEquals(data['storage'], 'file')
-        self.assertEquals(data['storage_location'], './storage/twitter.data')
-        self.assertEquals(data['welcome_message'], "Thanks for following me.")
+        self.assertEqual(data['polling_interval'], 0)
+        self.assertEqual(data['rate_limit_sleep'], -1)
+        self.assertEqual(data['use_status'], False)
+        self.assertEqual(data['use_direct_message'], False)
+        self.assertEqual(data['auto_follow'], False)
+        self.assertEqual(data['welcome_message'], "Thanks for following me.")
 
-        self.assertEquals(data['bot'], 'bot')
-        self.assertEquals(data['license_keys'], "./config/license.keys")
-        self.assertEquals(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
-        self.assertEquals(data['renderer'], "programy.clients.render.text.TextRenderer")
+        self.assertEqual(data['bot'], 'bot')
+        self.assertEqual(data['bot_selector'], "programy.clients.client.DefaultBotSelector")
+        self.assertEqual(data['renderer'], "programy.clients.render.text.TextRenderer")

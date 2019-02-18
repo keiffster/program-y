@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,18 +18,19 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.config.file.xml_file import XMLConfigurationFile
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.file.json_file import JSONConfigurationFile
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class ConfigurationFactory(object):
 
     @classmethod
-    def load_configuration_from_file(cls, client_configuration, filename, file_format=None, bot_root="."):
+    def load_configuration_from_file(cls, client_configuration, filename, file_format=None, bot_root=".", subs: Substitutions = None):
 
         if file_format is None or not file_format:
             file_format = ConfigurationFactory.guess_format_from_filename(filename)
 
         config_file = ConfigurationFactory.get_config_by_name(file_format)
-        return config_file.load_from_file(filename, client_configuration, bot_root)
+        return config_file.load_from_file(filename, client_configuration, bot_root, subs)
 
     @classmethod
     def guess_format_from_filename(cls, filename):

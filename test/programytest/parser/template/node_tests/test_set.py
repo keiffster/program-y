@@ -3,7 +3,7 @@ import xml.etree.ElementTree as ET
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.set import TemplateSetNode
 from programy.parser.template.nodes.word import TemplateWordNode
-from programy.dialog.dialog import Question
+from programy.dialog.question import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 
@@ -33,7 +33,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -75,7 +75,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -105,7 +105,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -135,7 +135,7 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         conversation = self._client_context.bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello")
+        question = Question.create_from_text(self._client_context, "Hello")
         conversation.record_dialog(question)
         self.assertIsNotNone(conversation.current_question())
 
@@ -165,4 +165,4 @@ class TemplateSetNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

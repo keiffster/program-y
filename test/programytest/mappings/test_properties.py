@@ -1,39 +1,85 @@
 import unittest
+import os
+
 from programy.mappings.properties import PropertiesCollection
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
 
 class PropertysTests(unittest.TestCase):
 
-    def test_properties_from_text(self):
+    def test_initialise_collection(self):
+        collection = PropertiesCollection()
+        self.assertIsNotNone(collection)
 
-        properties = PropertiesCollection()
-        self.assertIsNotNone(properties)
+    def test_properties_operations(self):
+        collection = PropertiesCollection()
+        self.assertIsNotNone(collection)
 
-        properties.load_from_text("""
-            url:http://www.keithsterling.com/aiml
-            name:KeiffBot 1.0
-            firstname:Keiff
-            middlename:AIML
-            lastname:BoT
-            fullname:KeiffBot
-            email:info@alicebot.org
-            gender:male
-            botmaster:Keith Sterling
-            organization:keithsterling.com
-            version:0.0.1
-            birthplace:Edinburgh, Scotland
-            job:mobile virtual assistant
-            species:robot
-            birthday:September 9th
-            birthdate:September 9th, 2016
-            sign:Virgo
-            logo:<img src="http://www.keithsterling.com/aiml/logo.png" width="128"/>
-            religion:Atheist
-            default-get:unknown
-            default-property:unknown
-            default-map:unknown
-            learn-filename:keiffbot-learn.aiml
-        """)
+        collection.add_property("name", "KeiffBot 1.0")
+        collection.add_property("firstname", "Keiff")
+        collection.add_property("middlename", "AIML")
+        collection.add_property("lastname", "BoT")
+        collection.add_property("fullname", "KeiffBot")
 
-        self.assertEqual(properties.property('url'), "http://www.keithsterling.com/aiml")
-        self.assertEqual(properties.property('job'), "mobile virtual assistant")
-        self.assertEqual(properties.property('learn-filename'), "keiffbot-learn.aiml")
+        self.assertTrue(collection.has_property("name"))
+        self.assertFalse(collection.has_property("age"))
+
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
+        self.assertIsNone(collection.property("age"))
+
+    def test_load_from_file(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._properties_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "properties.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.PROPERTIES] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.PROPERTIES] = storage_engine
+
+        collection = PropertiesCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertTrue(collection.has_property("name"))
+        self.assertFalse(collection.has_property("age"))
+
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
+        self.assertIsNone(collection.property("age"))
+
+    def test_reload_from_file(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._properties_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "properties.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.PROPERTIES] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.PROPERTIES] = storage_engine
+
+        collection = PropertiesCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertTrue(collection.has_property("name"))
+        self.assertFalse(collection.has_property("age"))
+
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
+        self.assertIsNone(collection.property("age"))
+
+        collection.remove()
+
+        collection.reload_file(storage_factory)
+
+        self.assertTrue(collection.has_property("name"))
+        self.assertFalse(collection.has_property("age"))
+
+        self.assertEqual("KeiffBot 1.0", collection.property("name"))
+        self.assertIsNone(collection.property("age"))
+

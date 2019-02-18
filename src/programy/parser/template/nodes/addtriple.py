@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -31,20 +31,13 @@ class TemplateAddTripleNode(TemplateTripleNode):
         rdf_predicate = self._pred.resolve(client_context)
         rdf_object = self._obj.resolve(client_context)
 
-        client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object)
+        client_context.brain.rdf.add_entity(rdf_subject, rdf_predicate, rdf_object, "USERDEFINED")
         resolved = ""
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
-    def resolve(self, client_context):
-        try:
-            return self.resolve_to_string(client_context)
-        except Exception as excep:
-            YLogger.exception(client_context, "Failed to resolve", excep)
-            return ""
-
     def to_string(self):
-        return "ADDTRIPLE"
+        return "[ADDTRIPLE]"
 
     def to_xml(self, client_context):
         xml = "<addtriple>"

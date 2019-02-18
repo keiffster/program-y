@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -26,6 +26,7 @@ from programy.parser.exceptions import ParserException
 class PatternRegexNode(PatternNode):
 
     def __init__(self, attribs, text, userid='*'):
+        # @TODO This does not handle upper and lower case
         PatternNode.__init__(self, userid)
         self._pattern_text = None
         self._pattern_template = None
@@ -40,7 +41,7 @@ class PatternRegexNode(PatternNode):
             raise ParserException("Invalid regex node, neither pattern or template specified as attribute or text")
 
         if self._pattern_text is not None:
-            self._pattern = re.compile(self._pattern_text)
+            self._pattern = re.compile(self._pattern_text, re.IGNORECASE)
 
     @property
     def pattern(self):
@@ -102,7 +103,7 @@ class PatternRegexNode(PatternNode):
                 return EqualsMatch(False, word_no)
 
         if self._pattern_template is not None:
-            template = client_context.brain.regex_templates[self._pattern_template]
+            template = client_context.brain.regex_templates.regex(self._pattern_template)
             if template is not None:
                 result = template.match(word)
                 if result is not None:

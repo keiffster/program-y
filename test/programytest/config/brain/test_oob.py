@@ -13,7 +13,7 @@ class BrainOOBConfigurationTests(unittest.TestCase):
         brain:
             oobs:
               default:
-                classname: programy.oob.default.DefaultOutOfBandProcessor
+                classname: programy.oob.defaults.default.DefaultOutOfBandProcessor
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -24,7 +24,7 @@ class BrainOOBConfigurationTests(unittest.TestCase):
         oob_config = BrainOOBConfiguration("default")
         oob_config.load_config_section(yaml, oobs_config, ".")
 
-        self.assertEqual("programy.oob.default.DefaultOutOfBandProcessor", oob_config.classname)
+        self.assertEqual("programy.oob.defaults.default.DefaultOutOfBandProcessor", oob_config.classname)
 
     def test_default_without_data(self):
         yaml = YamlConfigurationFile()

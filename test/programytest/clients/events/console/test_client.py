@@ -53,7 +53,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
         self.assertEqual(client.id, "Console")
-        self.assertEqual('ProgramY AIML2.0 Console Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_get_question(self):
         arguments = MockArgumentParser()
@@ -61,7 +61,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         context = client.create_client_context("console")
         question = client.get_question(context, input_func=mock_input_func)
-        self.assertEquals("Hello", question)
+        self.assertEqual("Hello", question)
 
     def test_process_response(self):
         arguments = MockArgumentParser()
@@ -69,7 +69,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         context = client.create_client_context("console")
         client.process_response(context, "Answer")
-        self.assertEquals("Answer", client.response)
+        self.assertEqual("Answer", client.response)
 
     def test_display_startup_messages(self):
         arguments = MockArgumentParser()
@@ -78,7 +78,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         client._arguments.context = False
         context = client.create_client_context("console")
         client.display_startup_messages(context)
-        self.assertEquals("None, App: vNone Grammar vNone, initiated NoneHello", client.response)
+        self.assertEqual("None, App: vNone Grammar vNone, initiated NoneHello", client.response)
 
     def test_process_question_answer(self):
         arguments = MockArgumentParser()
@@ -88,7 +88,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         client.answer = "Hello"
         context = client.create_client_context("console")
         client.process_question_answer(context)
-        self.assertEquals("Hello", client.response)
+        self.assertEqual("Hello", client.response)
 
     def test_process_question_answer_no_response(self):
         arguments = MockArgumentParser()
@@ -97,7 +97,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         client.question = None
         context = client.create_client_context("console")
         client.process_question_answer(context)
-        self.assertEquals('', client.response)
+        self.assertEqual('', client.response)
 
     def test_process_question_answer_with_context(self):
         arguments = MockArgumentParser()
@@ -107,7 +107,7 @@ class ConsoleBotClientTests(unittest.TestCase):
         client.question = "Hello"
         context = client.create_client_context("console")
         client.process_question_answer(context)
-        self.assertEquals("Hello", client.response)
+        self.assertEqual("Hello", client.response)
 
     def test_run_loop_no_loop(self):
         arguments = MockArgumentParser()

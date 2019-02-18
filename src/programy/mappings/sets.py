@@ -1,5 +1,5 @@
 """
-Copyright(c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright(c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files(the "Software"), to deal in the Software without restriction, including without limitation
@@ -16,106 +16,93 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 from programy.utils.logging.ylogger import YLogger
-from programy.utils.files.filefinder import FileFinder
 
-
-class SetLoader(FileFinder):
-    def __init__(self):
-        FileFinder.__init__(self)
-
-    def sort_sets(self, the_set):
-        sorted_set = {}
-        for key in the_set.keys():
-            values = the_set[key]
-            sorted_values = sorted(values, key=len, reverse=True)
-            sorted_set[key] = sorted_values
-        return sorted_set
-
-    def load_file_contents(self, id, filename, userid="*"):
-        YLogger.debug(self, "Loading set [%s]", filename)
-        the_set = {}
-        try:
-            with open(filename, 'r', encoding='utf8') as my_file:
-                for line in my_file:
-                    self.process_line(line, the_set)
-        except Exception as excep:
-            YLogger.error(self, "Failed to load set [%s] - %s", filename, excep)
-        return self.sort_sets(the_set)
-
-    def load_from_text(self, text):
-        the_set = {}
-        lines = text.split("\n")
-        for line in lines:
-            self.process_line(line, the_set)
-        return self.sort_sets(the_set)
-
-    def process_line(self, line, the_set):
-        text = line.strip()
-        if text is not None and text:
-            splits = text.split()
-            key = splits[0].upper()
-            if key not in the_set:
-                the_set[key] = []
-            the_set[key].append(splits)
+from programy.storage.factory import StorageFactory
 
 
 class SetCollection(object):
 
     def __init__(self):
         self._sets = {}
-        self._files = {}
+        self._stores = {}
+
+    @property
+    def sets(self):
+        return self._sets
+
+    @property
+    def stores(self):
+        return self._stores
+
+    def storename(self, mapname):
+        if mapname in self._stores:
+            return self._stores[mapname]
+        return None
 
     def empty(self):
         self._sets.clear()
-        self._files.clear()
+        self._stores.clear()
 
-    def add_set(self, name, the_set):
+    def remove(self, set_name):
+        self._sets.pop(set_name, None)
+        self._stores.pop(set_name, None)
+
+    def add_set(self, set_name, the_set, set_store):
+
         # Set names always stored in upper case to handle ambiquity
-        set_name = name.upper()
+        set_name = set_name.upper()
+
         if set_name in self._sets:
             raise Exception("Set %s already exists" % set_name)
-        YLogger.debug(self, "Adding set [%s[ to set group", set_name)
+
+        YLogger.debug(self, "Adding set [%s][%s] to set group", set_name, set_store)
         self._sets[set_name] = the_set
-
-    def set(self, name):
-        # Set names always stored in upper case to handle ambiquity
-        set_name = name.upper()
-        return self._sets[set_name]
-
-    def filename(self, setname):
-        return self._files[setname]
+        self._stores[set_name] = set_store
 
     def contains(self, name):
         # Set names always stored in upper case to handle ambiquity
         set_name = name.upper()
         return bool(set_name in self._sets)
 
+    def set(self, name):
+        # Set names always stored in upper case to handle ambiquity
+        set_name = name.upper()
+        if set_name in self._sets:
+            return self._sets[set_name]
+        return None
+
+    def store_name(self, set_name):
+        if set_name in self._stores:
+            return self._stores[set_name]
+        return None
+
     def count_words_in_sets(self):
         count = 0
-        for aset in self._sets.values():
-            count += len(aset)
+        for name, aset in self._sets.items():
+            for value in aset:
+                for variant in value:
+                    count += len(variant)
         return count
 
-    def load(self, configuration):
-        loader = SetLoader()
-        if configuration.files is not None:
-            self._sets = {}
-            for file in configuration.files:
-                sets, file_sets = loader.load_dir_contents(file, configuration.directories, configuration.extension)
-                for key in sets.keys():
-                    if key in self._sets:
-                        YLogger.error(self, "Duplicate set [%s] found in [%s]", key, file)
-                    self._sets[key] = sets[key]
-                for key in file_sets.keys():
-                    self._files[key] = file_sets[key]
-        else:
-            self._sets = {}
+    def load(self, storage_factory):
+        if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
+            sets_store_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            if sets_store_engine:
+                try:
+                    sets_store = sets_store_engine.sets_store()
+                    sets_store.load_all(self)
+                except Exception as e:
+                    YLogger.exception(self, "Failed to load set from storage", e)
+
         return len(self._sets)
 
-    def reload_file(self, filename):
-        loader = SetLoader()
-        just_filename = loader.get_just_filename_from_filepath(filename)
-        new_set = loader.load_file_contents(just_filename, filename)
-        set_name = just_filename.upper()
-        del self._sets[set_name]
-        self._sets[set_name] = new_set
+    def reload(self, storage_factory, set_name):
+        if storage_factory.entity_storage_engine_available(StorageFactory.SETS) is True:
+            set_engine = storage_factory.entity_storage_engine(StorageFactory.SETS)
+            if set_engine:
+                try:
+                    sets_store = set_engine.sets_store()
+                    sets_store.reload(self, set_name)
+                except Exception as e:
+                    YLogger.exception(self, "Failed to load set from storage", e)
+

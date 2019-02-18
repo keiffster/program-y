@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -95,3 +95,12 @@ class ClientContext(object):
             self._brain.id if self._brain else "",
             self._question_depth
         )
+
+    def to_json(self):
+        return {
+            "clientid": self._client.id,
+            "userid": self._userid,
+            "botid": self._bot.id if self._bot else None,
+            "brainid": self._brain.id if self._brain else None,
+            "depth": self._question_depth
+        }

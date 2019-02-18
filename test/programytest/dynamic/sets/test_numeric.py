@@ -3,7 +3,7 @@ import unittest
 from programy.dynamic.sets.numeric import IsNumeric
 from programy.context import ClientContext
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class IsNumericDynamicSetTests(unittest.TestCase):
 

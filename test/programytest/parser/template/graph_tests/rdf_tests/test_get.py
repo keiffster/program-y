@@ -7,10 +7,10 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
     def test_tuples_single_var_single_result(self):
 
-        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
-        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
-        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS")
 
         template = ET.fromstring("""
 			<template>
@@ -31,13 +31,13 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY", result)
+        self.assertEqual("MONKEY", result)
 
     def test_tuples_multi_vars_single_results(self):
-        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
-        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
-        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS")
 
         template = ET.fromstring("""
             <template>
@@ -58,15 +58,15 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY LEGS", result)
+        self.assertEqual("MONKEY LEGS", result)
 
     def test_tuples_single_var_multi_resultss(self):
 
-        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
-        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
-        self._client_context.brain.rdf.add_entity("BIRD", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("BIRD", "LEGS", "2", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS")
 
         template = ET.fromstring("""
 			<template>
@@ -87,15 +87,15 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY BIRD", result)
+        self.assertEqual("MONKEY BIRD", result)
 
     def test_tuples_multi_vars_multi_resultss(self):
 
-        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true")
-        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4")
-        self._client_context.brain.rdf.add_entity("BIRD", "LEGS", "2")
-        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true")
+        self._client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("MONKEY", "HASFUR", "true", "ANIMALS", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ZEBRA", "LEGS", "4", "ANIMALS", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("BIRD", "LEGS", "2", "ANIMALS", "ANIMALS")
+        self._client_context.brain.rdf.add_entity("ELEPHANT", "TRUNK", "true", "ANIMALS", "ANIMALS")
 
         template = ET.fromstring("""
 			<template>
@@ -116,7 +116,7 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("MONKEY LEGS BIRD LEGS", result)
+        self.assertEqual("MONKEY LEGS BIRD LEGS", result)
 
     def test_get_from_tuple_from_get_from_var(self):
         template = ET.fromstring("""
@@ -138,4 +138,4 @@ class TemplateGraphGetTests(TemplateGraphTestClient):
 
         result = ast.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("TEST1", result)
+        self.assertEqual("TEST1", result)

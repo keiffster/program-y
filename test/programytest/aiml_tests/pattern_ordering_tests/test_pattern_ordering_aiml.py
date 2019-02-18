@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PatternOrderingTestClient(TestClient):
@@ -11,9 +9,10 @@ class PatternOrderingTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(PatternOrderingTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+    def load_storage(self):
+        super(PatternOrderingTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class PatternOrderingAIMLTests(unittest.TestCase):
@@ -27,7 +26,7 @@ class PatternOrderingAIMLTests(unittest.TestCase):
 
     def test_basic_no_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS BLUE")
-        self.assertEqual(response, "i didn't recognize BLUE AS A COLOR.")
+        self.assertEqual(response, "I didn't recognize BLUE AS A COLOR.")
 
     def test_basic_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS RED")
@@ -39,7 +38,7 @@ class PatternOrderingAIMLTests(unittest.TestCase):
 
     def test_hash_v_star(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS A DOLPHIN")
-        self.assertEqual(response, "HASH SELECTED")
+        self.assertEqual(response, "HASH SELECTED.")
 
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE ANIMAL IS AN AARDVARK")
-        self.assertEqual(response, "SELECTED ONCE")
+        self.assertEqual(response, "SELECTED ONCE.")

@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-twine upload dist/*
+twine upload --verbose dist/*

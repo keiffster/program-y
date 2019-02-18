@@ -2,9 +2,7 @@ import unittest
 
 from programy.extensions.banking.balance import BankingBalanceExtension
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class BankBalanceExtensionTests(unittest.TestCase):
 

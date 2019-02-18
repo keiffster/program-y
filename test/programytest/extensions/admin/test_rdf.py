@@ -1,6 +1,6 @@
 import unittest
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 from programy.extensions.admin.rdf import RDFAdminExtension
 
@@ -21,53 +21,53 @@ class RDFAdminExtensionTests(unittest.TestCase):
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
 
         result = extension.execute(client_context, "SUBJECTS LIST")
         self.assertIsNotNone(result)
-        self.assertEquals("<ul><li>MONKEY</li></ul>", result)
+        self.assertEqual("<ul><li>MONKEY</li></ul>", result)
 
     def test_subjects_count(self):
 
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
 
         result = extension.execute(client_context, "SUBJECTS COUNT")
         self.assertIsNotNone(result)
-        self.assertEquals("1", result)
+        self.assertEqual("1", result)
 
     def test_predicates(self):
 
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMALS")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
 
         result = extension.execute(client_context, "PREDICATES MONKEY")
         self.assertIsNotNone(result)
-        self.assertEquals("<ul><li>LEGS</li></ul>", result)
+        self.assertEqual("<ul><li>LEGS</li></ul>", result)
 
     def test_objects(self):
 
         client = RDFAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2")
+        client_context.brain.rdf.add_entity("MONKEY", "LEGS", "2", "ANIMAL")
 
         extension = RDFAdminExtension()
         self.assertIsNotNone(extension)
 
         result = extension.execute(client_context, "OBJECT MONKEY LEGS")
         self.assertIsNotNone(result)
-        self.assertEquals("<ul><li>2</li></ul>", result)
+        self.assertEqual("<ul><li>2</li></ul>", result)

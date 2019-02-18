@@ -6,7 +6,7 @@ from programy.services.duckduckgo import DuckDuckGoAPI
 from programy.services.requestsapi import RequestsAPI
 from programy.services.service import BrainServiceConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class MockResponse(object):
@@ -65,15 +65,15 @@ class TestDuckDuckGoAPI(unittest.TestCase):
 
         response = api.ask_question("http:/test.url.com/ask", "cat")
 
-        self.assertEquals("A feline, 4 legged thing", response)
+        self.assertEqual("A feline, 4 legged thing", response)
 
 
 class DuckDuckGoServiceTests(unittest.TestCase):
 
     def setUp(self):
         client = TestClient()
+        client.add_license_keys_store()
         self._client_context = client.create_client_context("testid")
-        self._client_context.client.license_keys.load_license_key_file(os.path.dirname(__file__)+ os.sep + "test.keys")
 
     def test_init_with_no_request_api(self):
         config = BrainServiceConfiguration("pannous")
@@ -100,7 +100,7 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("Test DuckDuckGo response", response)
+        self.assertEqual("Test DuckDuckGo response", response)
 
     def test_ask_question_general_exception(self):
         config = BrainServiceConfiguration("pannous")
@@ -110,5 +110,5 @@ class DuckDuckGoServiceTests(unittest.TestCase):
         self.assertIsNotNone(service)
 
         response = service.ask_question(self._client_context, "what is a cat")
-        self.assertEquals("", response)
+        self.assertEqual("", response)
 

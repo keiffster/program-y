@@ -31,7 +31,7 @@ class TemplateAuthoriseNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("AUTHORISE (role=root)", node.to_string())
+        self.assertEqual("[AUTHORISE (role=root)]", node.to_string())
 
     def test_node_init_optiona_srai(self):
         root = TemplateNode()
@@ -51,7 +51,7 @@ class TemplateAuthoriseNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self.assertEqual("AUTHORISE (role=root, denied_srai=ACCESS_DENIED)", node.to_string())
+        self.assertEqual("[AUTHORISE (role=root, denied_srai=ACCESS_DENIED)]", node.to_string())
 
     def test_to_xml_service_no_content(self):
         root = TemplateNode()
@@ -118,4 +118,4 @@ class TemplateAuthoriseNodeTests(ParserTestsBaseClass):
         with self.assertRaises(Exception):
             node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._client_context))
+        self.assertEqual("", root.resolve(self._client_context))

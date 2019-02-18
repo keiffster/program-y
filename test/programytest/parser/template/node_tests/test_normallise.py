@@ -27,10 +27,6 @@ class TemplateNormalizeNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        node.append(TemplateWordNode("shouldnt"))
-        self._client_context.brain.normals.process_splits(["shouldnt","should not"])
-
-        self.assertEqual(root.resolve(self._client_context), "should not")
 
     def test_to_xml(self):
         root = TemplateNode()
@@ -50,4 +46,4 @@ class TemplateNormalizeNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

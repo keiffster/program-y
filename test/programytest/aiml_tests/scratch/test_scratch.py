@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 """
@@ -17,9 +15,10 @@ class ScratchTestsClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(ScratchTestsClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+    def load_storage(self):
+        super(ScratchTestsClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class ScratchAIMLTests(unittest.TestCase):
@@ -31,13 +30,13 @@ class ScratchAIMLTests(unittest.TestCase):
     def test_response(self):
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU FRED")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 1')
+        self.assertEqual(response, 'RESULT 1.')
 
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU FRED WEST")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 2')
+        self.assertEqual(response, 'RESULT 2.')
 
         response = self._client_context.bot.ask_question(self._client_context, "ARE YOU WRITTEN IN C#")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'RESULT 3')
+        self.assertEqual(response, 'RESULT 3.')
 

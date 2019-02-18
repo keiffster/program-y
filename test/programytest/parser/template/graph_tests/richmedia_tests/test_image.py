@@ -24,4 +24,4 @@ class TemplateGraphImageTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateImageNode)
 
-        self.assertEquals("http://http://www.servusai.com/aiml.png", node.resolve_children_to_string(self._client_context))
+        self.assertEqual("http://http://www.servusai.com/aiml.png", node.resolve_children_to_string(self._client_context))

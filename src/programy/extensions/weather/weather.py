@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -74,7 +74,6 @@ class WeatherExtension(Extension):
 
         observation = met_office.current_observation(latlng.latitude, latlng.longitude)
         if observation is not None:
-            #TODO Use 'when" paramter to extract datapoints
             return observation.get_latest_observation().to_program_y_text()
         else:
             return "UNAVAILABLE"

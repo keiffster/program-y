@@ -36,7 +36,7 @@ class WebChatBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
 
         self.assertIsInstance(client.get_client_configuration(), WebChatConfiguration)
-        self.assertEquals('ProgramY AIML2.0 Webchat Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
     def test_api_keys(self):
         arguments = MockArgumentParser()
@@ -59,7 +59,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         key = client.get_api_key(request)
         self.assertIsNotNone(key)
-        self.assertEquals('KEY1', key)
+        self.assertEqual('KEY1', key)
 
     def test_get_api_key_not_exists(self):
         arguments = MockArgumentParser()
@@ -82,7 +82,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         key = client.get_question(request)
         self.assertIsNotNone(key)
-        self.assertEquals('Hello', key)
+        self.assertEqual('Hello', key)
 
     def test_get_question_not_exists(self):
         arguments = MockArgumentParser()
@@ -132,7 +132,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         response = client.check_api_key(request)
         self.assertIsNotNone(response)
-        self.assertEquals("Unauthorised Access", response)
+        self.assertEqual("Unauthorised Access", response)
 
     def test_check_api_key_required_key_invalid(self):
         arguments = MockArgumentParser()
@@ -147,7 +147,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         response = client.check_api_key(request)
         self.assertIsNotNone(response)
-        self.assertEquals("Unauthorised Access", response)
+        self.assertEqual("Unauthorised Access", response)
 
     def test_get_userid_present(self):
         arguments = MockArgumentParser()
@@ -158,7 +158,7 @@ class WebChatBotClientTests(unittest.TestCase):
         request.cookies = unittest.mock.Mock()
         request.cookies.get.return_value = "User123"
 
-        self.assertEquals("User123", client.get_userid(request))
+        self.assertEqual("User123", client.get_userid(request))
 
     def test_get_userid_missing(self):
         arguments = MockArgumentParser()
@@ -178,7 +178,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         response = client.create_success_response_data("Hello", "Hi there")
         self.assertIsNotNone(response)
-        self.assertEquals({"question": "Hello", "answer": "Hi there"}, response)
+        self.assertEqual({"question": "Hello", "answer": "Hi there"}, response)
 
     def test_create_error_response_data(self):
         arguments = MockArgumentParser()
@@ -189,7 +189,7 @@ class WebChatBotClientTests(unittest.TestCase):
 
         response = client.create_error_response_data(client_context, "Hello", "Whoops!")
         self.assertIsNotNone(response)
-        self.assertEquals({"question": "Hello", "answer": "Sorry", "error": "Whoops!"}, response)
+        self.assertEqual({"question": "Hello", "answer": "Sorry", "error": "Whoops!"}, response)
 
     def test_get_userid_cookie_expirary_date(self):
         arguments = MockArgumentParser()
@@ -215,4 +215,4 @@ class WebChatBotClientTests(unittest.TestCase):
 
         response = client.receive_message(request)
         self.assertIsNotNone(response)
-        self.assertEquals({'response': {'answer': 'Hi there', 'question': 'Hello'}}, response)
+        self.assertEqual({'response': {'answer': 'Hi there', 'question': 'Hello'}}, response)

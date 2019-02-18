@@ -29,18 +29,39 @@ class BotConfigurationTests(unittest.TestCase):
             max_search_timeout: 60
             
             spelling:
+              load: true
               classname: programy.spelling.norvig.NorvigSpellingChecker
-              alphabet: 'abcdefghijklmnopqrstuvwxyz'
-              corpus: $BOT_ROOT/corpus.txt
+              alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
               check_before: true
               check_and_retry: true
               
+            splitter:
+                classname: programy.dialog.splitter.regex.RegexSentenceSplitter
+
+            joiner:
+                classname: programy.dialog.joiner.SentenceJoiner
+
             conversations:
-              type: file
-              config_name: file_storage
+              save: true
+              load: false
+              max_histories: 100
+              restore_last_topic: false
+              initial_topic: TOPIC1
+              empty_on_start: false
         
-            file_storage:
-              dir: $BOT_ROOT/conversations
+            from_translator:
+                classname: programy.translate.textblob_translator.TextBlobTranslator
+                from: fr
+                to: en 
+
+            to_translator:
+                classname: programy.translate.textblob_translator.TextBlobTranslator
+                from: en
+                to: fr
+
+            sentiment:
+                classname: programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
+                scores: programy.sentiment.scores.SentimentScores
 
         """, ConsoleConfiguration(), ".")
 
@@ -63,12 +84,35 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertTrue(bot_config.override_properties)
 
         self.assertIsNotNone(bot_config.spelling)
-        self.assertEqual("programy.spelling.norvig.NorvigSpellingChecker", bot_config.spelling.classname)
+        self.assertEqual(bot_config.spelling.section_name, "spelling")
+        self.assertEqual(bot_config.spelling.classname, "programy.spelling.norvig.NorvigSpellingChecker")
+        self.assertTrue(bot_config.spelling.check_before)
+        self.assertTrue(bot_config.spelling.check_and_retry)
+
+        self.assertIsNotNone(bot_config.splitter)
+        self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
+        self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
+        self.assertIsNotNone(bot_config.joiner)
+        self.assertEqual("programy.dialog.joiner.SentenceJoiner", bot_config.joiner.classname)
+        self.assertEqual('.?!', bot_config.joiner.join_chars)
 
         self.assertIsNotNone(bot_config.conversations)
-        self.assertEquals(bot_config.conversations.type, "file")
-        self.assertIsNotNone(bot_config.conversations.storage)
-        self.assertEquals(bot_config.conversations.storage.dir, "./conversations")
+        self.assertIsNotNone(bot_config.conversations.max_histories, 100)
+        self.assertIsNotNone(bot_config.conversations.restore_last_topic, False)
+        self.assertIsNotNone(bot_config.conversations.initial_topic, "TOPIC1")
+        self.assertIsNotNone(bot_config.conversations.empty_on_start, False)
+
+        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", bot_config.from_translator.classname)
+        self.assertEqual("en", bot_config.from_translator.to_lang)
+        self.assertEqual("fr", bot_config.from_translator.from_lang)
+
+        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", bot_config.to_translator.classname)
+        self.assertEqual("fr", bot_config.to_translator.to_lang)
+        self.assertEqual("en", bot_config.to_translator.from_lang)
+
+        self.assertEqual("programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", bot_config.sentiment_analyser.classname)
+        self.assertEqual("programy.sentiment.scores.SentimentScores", bot_config.sentiment_analyser.scores)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()
@@ -93,8 +137,22 @@ class BotConfigurationTests(unittest.TestCase):
         self.assertEqual(bot_config.max_search_depth, 100)
         self.assertEqual(bot_config.max_search_timeout, -1)
         self.assertTrue(bot_config.override_properties)
+
         self.assertIsNotNone(bot_config.spelling)
+
+        self.assertIsNotNone(bot_config.splitter)
+        self.assertEqual("programy.dialog.splitter.regex.RegexSentenceSplitter", bot_config.splitter.classname)
+        self.assertEqual('[:;,.?!]', bot_config.splitter.split_chars)
+
+        self.assertIsNotNone(bot_config.joiner)
+        self.assertEqual("programy.dialog.joiner.joiner.SentenceJoiner", bot_config.joiner.classname)
+        self.assertEqual('.?!', bot_config.joiner.join_chars)
+
         self.assertIsNotNone(bot_config.conversations)
+
+        self.assertIsNotNone(bot_config.from_translator)
+        self.assertIsNotNone(bot_config.to_translator)
+        self.assertIsNotNone(bot_config.sentiment_analyser)
 
     def test_with_no_data(self):
         yaml = YamlConfigurationFile()

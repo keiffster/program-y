@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -25,9 +25,6 @@ class ConsoleBotClient(EventBotClient):
     def __init__(self, argument_parser=None):
         self.running = False
         EventBotClient.__init__(self, "Console", argument_parser)
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Console Client'
 
     def get_client_configuration(self):
         return ConsoleConfiguration()
@@ -73,7 +70,7 @@ class ConsoleBotClient(EventBotClient):
             client_context = self.create_client_context(self._configuration.client_configuration.default_userid)
             self._renderer.render(client_context, client_context.bot.get_exit_response(client_context))
         except Exception as excep:
-            YLogger.exception(self, "Oops something bad happened !", e)
+            YLogger.exception(self, "Oops something bad happened !", excep)
         return running
 
     def prior_to_run_loop(self):
@@ -85,6 +82,8 @@ if __name__ == '__main__':
 
     def run():
         print("Loading, please wait...")
+        import os
+        print(os.getcwd())
         console_app = ConsoleBotClient()
         console_app.run()
 

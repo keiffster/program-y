@@ -1,64 +1,81 @@
 import unittest
 import os
-from programy.mappings.maps import MapCollection, MapLoader
+
+from programy.mappings.maps import MapCollection
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
 
 
 class MapTests(unittest.TestCase):
 
-    def test_loader_from_file(self):
-        loader = MapLoader()
-        self.assertIsNotNone(loader)
+    def test_initialise_collection(self):
+        collection = MapCollection()
+        self.assertIsNotNone(collection)
+        self.assertIsNotNone(collection.maps)
+        self.assertIsNotNone(collection.stores)
 
-        map = loader.load_file_contents("testid", os.path.dirname( __file__)+  os.sep + "test_files" + os.sep + "maps" + os.sep + "test_map.txt")
+    def test_collection_operations(self):
+        collection = MapCollection()
 
-        self.assertIsNotNone(map)
-        self.assertEqual(len(map.keys()), 12)
-        self.assertEqual(map['ALABAMA'], 'Montgomery')
-        self.assertEqual(map['COLORADO'], 'Denver')
-        self.assertEqual(map['HAWAII'], 'Honolulu')
+        collection.add_map("TESTMAP1", {"key1": "val1", "key2": "val2"}, "teststore")
+        collection.add_map("TESTMAP2", {"key4": "val4", "key5": "val5"}, "teststore")
 
-    def test_loader_from_text(self):
-        loader = MapLoader()
-        self.assertIsNotNone(loader)
+        self.assertIsNotNone(collection.maps)
+        self.assertIsNotNone(collection.stores)
 
-        map = loader.load_from_text("""
-        KEY1:VAL1
-        KEY2:VAL2
-        KEY3:VAL3
-        KEY4:VAL4
-        KEY5:VAL5:VAL6
-        """)
-        self.assertIsNotNone(map)
-        self.assertEqual(len(map.keys()), 5)
-        self.assertEqual(map['KEY1'], 'VAL1')
-        self.assertEqual(map['KEY2'], 'VAL2')
-        self.assertEqual(map['KEY3'], 'VAL3')
-        self.assertEqual(map['KEY4'], 'VAL4')
-        self.assertEqual(map['KEY5'], 'VAL5:VAL6')
+        self.assertTrue(collection.contains("TESTMAP1"))
+        self.assertTrue(collection.contains("TESTMAP2"))
+        self.assertFalse(collection.contains("TESTMAP3"))
 
-    def test_collection(self):
+        self.assertEqual("teststore", collection.storename("TESTMAP1"))
+        self.assertIsNone(collection.storename("TESTMAP3"))
+
+        collection.remove("TESTMAP2")
+        self.assertTrue(collection.contains("TESTMAP1"))
+        self.assertFalse(collection.contains("TESTMAP2"))
+        self.assertFalse(collection.contains("TESTMAP3"))
+
+        collection.empty()
+        self.assertFalse(collection.contains("TESTMAP1"))
+        self.assertFalse(collection.contains("TESTMAP2"))
+        self.assertFalse(collection.contains("TESTMAP3"))
+
+    def test_load_from_file(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "maps"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.MAPS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.MAPS] = storage_engine
+
         collection = MapCollection()
         self.assertIsNotNone(collection)
 
-        loader = MapLoader()
-        self.assertIsNotNone(loader)
+        collection.load(storage_factory)
 
-        collection._maps = loader.load_from_text("""
-            KEY1:VAL1
-            KEY2:VAL2
-            KEY3:VAL3
-            KEY4:VAL4
-            KEY5:VAL5:VAL6
-        """)
-        self.assertIsNotNone(collection._maps)
-        self.assertTrue(collection.contains('KEY1'))
-        self.assertEqual(collection.map('KEY1'), 'VAL1')
-        self.assertTrue(collection.contains('KEY2'))
-        self.assertEqual(collection.map('KEY2'), 'VAL2')
-        self.assertTrue(collection.contains('KEY3'))
-        self.assertEqual(collection.map('KEY3'), 'VAL3')
-        self.assertTrue(collection.contains('KEY4'))
-        self.assertEqual(collection.map('KEY4'), 'VAL4')
-        self.assertTrue(collection.contains('KEY5'))
-        self.assertEqual(collection.map('KEY5'), 'VAL5:VAL6')
-        self.assertFalse(collection.contains('KEY6'))
+        self.assertTrue(collection.contains("TEST_MAP"))
+
+    def test_reload_from_file(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._maps_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "maps"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.MAPS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.MAPS] = storage_engine
+
+        collection = MapCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertTrue(collection.contains("TEST_MAP"))
+
+        collection.reload(storage_factory, "TEST_MAP")
+
+        self.assertTrue(collection.contains("TEST_MAP"))

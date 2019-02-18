@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,11 +14,13 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.utils.logging.ylogger import YLogger
 
 import os
 
 from programy.parser.factory import NodeFactory
-
+from programy.utils.classes.loader import ClassLoader
+from programy.storage.factory import StorageFactory
 
 class PatternNodeFactory(NodeFactory):
 
@@ -29,5 +31,16 @@ class PatternNodeFactory(NodeFactory):
         return os.path.dirname(__file__) + os.sep + "pattern_nodes.conf"
 
     def get_root_node(self):
-        root_class = self.new_node_class('root')
-        return root_class()
+        try:
+            root_class = self.new_node_class('root')
+            return root_class()
+        except:
+            return ClassLoader.instantiate_class("programy.parser.pattern.nodes.root.PatternRootNode")()
+
+    def load(self, storage_factory):
+        if storage_factory.entity_storage_engine_available(StorageFactory.PATTERN_NODES) is True:
+            storage_engine = storage_factory.entity_storage_engine(StorageFactory.PATTERN_NODES)
+            pattern_store = storage_engine.pattern_nodes_store()
+            pattern_store.load(self)
+        else:
+            YLogger.error(None, "No storage engine available for pattern_nodes!")

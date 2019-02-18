@@ -1,8 +1,7 @@
 from programytest.parser.base import ParserTestsBaseClass
 
 from programy.parser.pattern.nodes.set import PatternSetNode
-from programy.dialog.dialog import Sentence
-from programy.mappings.sets import SetLoader
+from programy.dialog.sentence import Sentence
 from programy.parser.exceptions import ParserException
 
 
@@ -29,14 +28,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertEqual(str(raised.exception), "Invalid set node, no name specified as attribute or text")
 
     def test_init(self):
-        loader = SetLoader()
-
-        self._client_context.brain._sets_collection._sets["TEST1"] = loader.load_from_text("""
-            VALUE1
-            VALUE2
-            VALUE3
-            VALUE4
-        """)
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
 
         node = PatternSetNode([], "test1")
         self.assertIsNotNone(node)
@@ -71,13 +63,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertEqual('<set name="TEST1">\n</set>', node.to_xml(self._client_context))
 
     def test_multi_node_set(self):
-        loader = SetLoader()
-
-        self._client_context.brain._sets_collection._sets["TEST1"] = loader.load_from_text("""
-            Red
-            Red Amber
-            Red Brown
-        """)
+        self._client_context.brain._sets_collection.add_set("TEST1", {"RED": [["RED"], ["RED", "AMBER"], ["RED", "BROWN"]]}, "teststore")
 
         node = PatternSetNode([], "test1")
         self.assertIsNotNone(node)
@@ -102,16 +88,16 @@ class PatternSetNodeTests(ParserTestsBaseClass):
 
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "Red")
-        self.assertEquals(result.word_no, 0)
+        self.assertEqual(result.matched_phrase, "RED")
+        self.assertEqual(result.word_no, 0)
 
         result = node.equals(self._client_context, sentence, result.word_no+1)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "Red Brown")
+        self.assertEqual(result.matched_phrase, "RED BROWN")
 
         result = node.equals(self._client_context, sentence, result.word_no+1)
         self.assertTrue(result.matched)
-        self.assertEquals(result.matched_phrase, "Red Amber")
+        self.assertEqual(result.matched_phrase, "RED AMBER")
 
         self.assertEqual(node.to_string(), "SET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]")
         self.assertEqual('<set name="TEST1">\n</set>', node.to_xml(self._client_context))
@@ -185,14 +171,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertFalse(node1.equivalent(node3))
 
     def test_equals_text(self):
-        loader = SetLoader()
-
-        self._client_context.brain._sets_collection._sets["TEST1"] = loader.load_from_text("""
-                    VALUE1
-                    VALUE2
-                    VALUE3
-                    VALUE4
-                """)
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
 
         node1 = PatternSetNode({}, "test1")
         node2 = PatternSetNode({}, "test1", userid="testid")
@@ -211,14 +190,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertFalse(match3.matched)
 
     def test_equals_attribs(self):
-        loader = SetLoader()
-
-        self._client_context.brain._sets_collection._sets["TEST1"] = loader.load_from_text("""
-                    VALUE1
-                    VALUE2
-                    VALUE3
-                    VALUE4
-                """)
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
 
         node1 = PatternSetNode({"name": "test1"}, "")
         node2 = PatternSetNode({"name": "test1"}, "", userid="testid")
@@ -237,14 +209,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertFalse(match3.matched)
 
     def test_equals_mixed(self):
-        loader = SetLoader()
-
-        self._client_context.brain._sets_collection._sets["TEST1"] = loader.load_from_text("""
-                    VALUE1
-                    VALUE2
-                    VALUE3
-                    VALUE4
-                """)
+        self._client_context.brain._sets_collection.add_set("TEST1", {"VALUE1": [["VALUE1"]], "VALUE2": [["VALUE2"]], "VALUE3": [["VALUE3"]], "VALUE4": [["VALUE4"]]}, "teststore")
 
         node1 = PatternSetNode({}, "test1")
         node2 = PatternSetNode({}, "test1", userid="testid")

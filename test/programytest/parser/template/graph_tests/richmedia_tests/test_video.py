@@ -24,4 +24,4 @@ class TemplateGraphVideoTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateVideoNode)
 
-        self.assertEquals("http://http://www.servusai.com/aiml.mov", node.resolve_children_to_string(self._client_context))
+        self.assertEqual("http://http://www.servusai.com/aiml.mov", node.resolve_children_to_string(self._client_context))

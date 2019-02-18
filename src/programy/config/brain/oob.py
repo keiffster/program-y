@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainOOBConfiguration(BaseSectionConfigurationData):
@@ -29,10 +30,13 @@ class BrainOOBConfiguration(BaseSectionConfigurationData):
     def classname(self):
         return self._classname
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
-        service = configuration_file.get_section(self.section_name, configuration)
-        if service is not None:
-            self._classname = configuration_file.get_option(service, "classname", missing_value=None)
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
+        oob = configuration_file.get_section(self.section_name, configuration)
+        if oob is not None:
+            self._classname = configuration_file.get_option(oob, "classname", missing_value=None, subs=subs)
         else:
             YLogger.warning(self, "'oob' section missing from brain config, using to defaults")
 

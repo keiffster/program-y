@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ThinkTestClient(TestClient):
@@ -11,9 +9,10 @@ class ThinkTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(ThinkTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+    def load_storage(self):
+        super(ThinkTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class ThinkAIMLTests(unittest.TestCase):
@@ -32,4 +31,4 @@ class ThinkAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, "")
 
-        self.assertEquals("Keith", self._client_context.bot.get_conversation(self._client_context).current_question().property("name"))
+        self.assertEqual("Keith", self._client_context.bot.get_conversation(self._client_context).current_question().property("name"))

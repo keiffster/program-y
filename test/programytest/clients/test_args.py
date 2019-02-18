@@ -4,6 +4,7 @@ import os
 from programy.clients.args import ClientArguments
 from programy.clients.args import CommandLineClientArguments
 
+
 class MockArguments(object):
 
     def __init__(self,
@@ -12,14 +13,15 @@ class MockArguments(object):
                     config  = "config.yaml",
                     cformat = "yaml",
                     noloop = False,
-                    context=None
+                    substitutions='subs.txt'
                 ):
         self.bot_root = bot_root
         self.logging = logging
         self.config = config
         self.cformat = cformat
         self.noloop = noloop
-        self.context = context
+        self.substitutions = substitutions
+
 
 class MockArgumentParser(object):
 
@@ -28,6 +30,7 @@ class MockArgumentParser(object):
 
     def parse_args(self):
         return MockArguments()
+
 
 class MockClient(object):
 
@@ -39,6 +42,7 @@ class MockClient(object):
 
     def parse_args(sel, arguments, parsed_args):
         pass
+
 
 class ClientArgumentsTests(unittest.TestCase):
 
@@ -54,6 +58,7 @@ class ClientArgumentsTests(unittest.TestCase):
         self.assertIsNotNone(args.config_filename)
         self.assertIsNotNone(args.config_format)
         self.assertIsNotNone(args.noloop)
+        self.assertIsNone(args.substitutions)
 
         args.bot_root = os.sep + "tmp"
         self.assertIsNotNone(args.bot_root)
@@ -74,7 +79,7 @@ class CommandLineClientArgumentsTests(unittest.TestCase):
         self.assertEqual(args._config_name, "config.yaml")
         self.assertEqual(args._config_format, "yaml")
         self.assertEqual(args._no_loop, False)
-
+        self.assertEqual(args._substitutions, "subs.txt")
 
     def test_init_command_line_parser(self):
         args = CommandLineClientArguments(client=MockClient())
@@ -85,3 +90,4 @@ class CommandLineClientArgumentsTests(unittest.TestCase):
         self.assertIsNotNone(args._config_name)
         self.assertIsNotNone(args._config_format)
         self.assertIsNotNone(args._no_loop)
+        self.assertIsNone(args.substitutions)

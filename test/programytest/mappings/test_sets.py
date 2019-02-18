@@ -1,83 +1,128 @@
 import unittest
 import os
-from programy.mappings.sets import SetCollection, SetLoader
+
+from programy.mappings.sets import SetCollection
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
+
 
 class SetTests(unittest.TestCase):
 
-    def test_loader_from_file(self):
-        loader = SetLoader()
-        self.assertIsNotNone(loader)
+    def test_initialise_collection(self):
+        collection = SetCollection()
+        self.assertIsNotNone(collection)
+        self.assertIsNotNone(collection.sets)
+        self.assertIsNotNone(collection.stores)
 
-        the_set = loader.load_file_contents("testid", os.path.dirname(__file__)+  os.sep + "test_files" + os.sep + "sets" + os.sep + "test_set.txt")
-        self.assertIsNotNone(the_set)
-        self.assertEqual(len(the_set), 451)
+    def test_collection_operations(self):
+        collection = SetCollection()
+        collection.add_set("TESTSET", {"A": [["A", "B", "C"]], "D": [["D"]], "E": [["E", "F"]]}, "teststore")
+        collection.add_set("TESTSET2", {"1": [["1", "2", "3"]], "4": [["4"]], "5": [["5", "6"]]}, "teststore")
 
-        self.assertIn("AMBER", the_set)
-        self.assertEqual([["Amber"]], the_set['AMBER'])
+        self.assertIsNotNone(collection.sets)
+        self.assertIsNotNone(collection.stores)
 
-        self.assertIn("RED", the_set)
-        self.assertEqual([['Red', 'brown'], ['Red', 'Orange'], ['Red', 'violet'], ['Red']], the_set["RED"])
+        self.assertTrue(collection.contains("TESTSET"))
+        self.assertTrue(collection.contains("TESTSET2"))
+        self.assertFalse(collection.contains("TESTSET3"))
+        self.assertEqual(collection.store_name("TESTSET"), "teststore")
 
-        self.assertNotIn("London", the_set)
+        aset = collection.set("TESTSET")
+        self.assertIsNotNone(aset)
 
-    def test_loader_from_text(self):
-        loader = SetLoader()
-        self.assertIsNotNone(loader)
+        self.assertEqual(6, collection.count_words_in_sets())
 
-        the_set = loader.load_from_text("""
-            Val1
-            Val2
-            Val3
-            Val4
-        """)
-        self.assertIsNotNone(the_set)
-        self.assertEqual(len(the_set), 4)
+        collection.remove("TESTSET2")
+        self.assertTrue(collection.contains("TESTSET"))
+        self.assertFalse(collection.contains("TESTSET2"))
+        self.assertFalse(collection.contains("TESTSET3"))
 
-        self.assertIn("VAL1", the_set)
-        self.assertEqual([["Val1"]], the_set['VAL1'])
-        self.assertIn("VAL2", the_set)
-        self.assertIn("VAL3", the_set)
-        self.assertIn("VAL4", the_set)
+        collection.empty()
 
-    def test_loader_from_text_multi_word(self):
-        loader = SetLoader()
-        self.assertIsNotNone(loader)
+        self.assertIsNotNone(collection.sets)
+        self.assertIsNotNone(collection.stores)
 
-        the_set = loader.load_from_text("""
-            Val11 Val12
-            Val2
-            Val31 Val32
-            Val4
-        """)
-        self.assertIsNotNone(the_set)
-        self.assertEqual(len(the_set), 4)
+        self.assertFalse(collection.contains("TESTSET"))
+        self.assertIsNone(collection.set("TESTSET"))
+        self.assertNotEquals(collection.store_name("TESTSET"), "teststore")
 
-        self.assertIn("VAL11", the_set)
-        self.assertEqual([["Val11", "Val12"]], the_set['VAL11'])
-        self.assertIn("VAL2", the_set)
-        self.assertIn("VAL31", the_set)
-        self.assertIn("VAL4", the_set)
+    def test_load_from_file(self):
+        storage_factory = StorageFactory()
 
+        file_store_config = FileStorageConfiguration()
+        file_store_config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "sets"])
+        storage_engine = FileStorageEngine(file_store_config)
 
-    def test_collection(self):
-        loader = SetLoader()
-        self.assertIsNotNone(loader)
+        storage_factory._storage_engines[StorageFactory.SETS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.SETS] = storage_engine
 
         collection = SetCollection()
         self.assertIsNotNone(collection)
 
-        collection._sets = loader.load_from_text("""
-            Val1
-            Val2
-            Val3
-            Val4
-        """)
+        collection.load(storage_factory)
 
         self.assertIsNotNone(collection._sets)
-        self.assertEqual(len(collection._sets), 4)
+        self.assertEqual(len(collection._sets), 1)
 
-        self.assertTrue(collection.contains('VAL1'))
-        self.assertTrue(collection.contains('VAL2'))
-        self.assertTrue(collection.contains('VAL3'))
-        self.assertTrue(collection.contains('VAL4'))
-        self.assertFalse(collection.contains('VAL5'))
+        self.assertIsNotNone(collection._stores)
+        self.assertEqual(len(collection._stores), 1)
+
+        self.assertTrue("TEST_SET" in collection._sets)
+        self.assertTrue("TEST_SET" in collection._stores)
+
+        self.assertTrue(collection.contains('TEST_SET'))
+
+        aset = collection.set('TEST_SET')
+        self.assertIsNotNone(aset)
+        values = aset['AIR']
+        self.assertIsNotNone(values)
+        self.assertTrue(['Air', 'Force', 'blue'] in values)
+
+    def test_reload_from_file(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._sets_storage = FileStoreConfiguration(dirs=[os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "sets"])
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.SETS] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.SETS] = storage_engine
+
+        collection = SetCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertIsNotNone(collection._sets)
+        self.assertEqual(len(collection._sets), 1)
+
+        self.assertIsNotNone(collection._stores)
+        self.assertEqual(len(collection._stores), 1)
+
+        self.assertTrue("TEST_SET" in collection._sets)
+        self.assertTrue("TEST_SET" in collection._stores)
+
+        self.assertTrue(collection.contains('TEST_SET'))
+
+        aset = collection.set('TEST_SET')
+        self.assertIsNotNone(aset)
+        self.assertTrue(['Air', 'Force', 'blue'] in aset['AIR'])
+
+        collection.reload(storage_factory, "TEST_SET" )
+
+        self.assertIsNotNone(collection._sets)
+        self.assertEqual(len(collection._sets), 1)
+
+        self.assertIsNotNone(collection._stores)
+        self.assertEqual(len(collection._stores), 1)
+
+        self.assertTrue("TEST_SET" in collection._sets)
+        self.assertTrue("TEST_SET" in collection._stores)
+
+        self.assertTrue(collection.contains('TEST_SET'))
+
+        self.assertIsNotNone(collection.set('TEST_SET'))
+        self.assertTrue(['Air', 'Force', 'blue'] in collection.set('TEST_SET')['AIR'])
+

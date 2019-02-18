@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -23,6 +23,8 @@ import xml.etree.ElementTree as ET
 
 from programy.config.file.file import BaseConfigurationFile
 from programy.config.programy import ProgramyConfiguration
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class XMLConfigurationFile(BaseConfigurationFile):
 
@@ -39,10 +41,16 @@ class XMLConfigurationFile(BaseConfigurationFile):
 
     def load_from_file(self, filename, client_configuration, bot_root):
         configuration = ProgramyConfiguration(client_configuration)
-        with open(filename, 'r+', encoding="utf-8") as xml_data_file:
-            tree = ET.parse(xml_data_file, parser=LineNumberingParser())
-            self.xml_data = tree.getroot()
-            configuration.load_config_data(self, bot_root)
+
+        try:
+            with open(filename, 'r+', encoding="utf-8") as xml_data_file:
+                tree = ET.parse(xml_data_file, parser=LineNumberingParser())
+                self.xml_data = tree.getroot()
+                configuration.load_config_data(self, bot_root)
+
+        except Exception as excep:
+            YLogger.exception(self, "Failed to open xml config file [%s]", excep, filename)
+
         return configuration
 
     def is_string(self, section):
@@ -70,15 +78,19 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return keys
         return None
 
-    def get_option(self, section, option_name, missing_value=None):
+    def get_option(self, section, option_name, missing_value=None, subs=None):
         child = section.find(option_name)
         if child is not None:
             if not child._children:
-                return self._infer_type_from_string(child.text)
+                value = self._replace_subs(subs, child.text)
+                return self._infer_type_from_string(value)
+
             return child
-        else:
-            if missing_value is not None:
-                YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
+
+        if missing_value is not None:
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name,
+                            missing_value)
+
             return missing_value
 
     def _infer_type_from_string(self, text):
@@ -88,56 +100,72 @@ class XMLConfigurationFile(BaseConfigurationFile):
             return False
         return text
 
-    def get_bool_option(self, section, option_name, missing_value=False):
+    def get_bool_option(self, section, option_name, missing_value=False, subs: Substitutions = None):
         child = section.find(option_name)
         if child is not None:
-            return self.convert_to_bool(child.text)
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name, missing_value)
-            return missing_value
+            value = self._replace_subs(subs, child.text)
+            return self.convert_to_bool(value)
 
-    def get_int_option(self, section, option_name, missing_value=0):
+        YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name,
+                        missing_value)
+        return missing_value
+
+    def get_int_option(self, section, option_name, missing_value=0, subs=None):
         child = section.find(option_name)
         if child is not None:
-            return self.convert_to_int(child.text)
-        else:
-            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
-            return missing_value
+            value = self._replace_subs(subs, child.text)
+            return self.convert_to_int(value)
 
-    def get_multi_option(self, section, option_name, missing_value=None):
+        YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
+                        missing_value)
+        return missing_value
+
+    def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
         if missing_value is None:
             missing_value = []
-        value = self.get_option(section, option_name, missing_value)
+
+        value = self.get_option(section, option_name, missing_value, subs=subs)
+
         if isinstance(value, list):
             if not value:
-                return value
+                return self._replace_subs(subs, value)
+
         if isinstance(value, str):
-            values = [value]
+            values = [self._replace_subs(subs, value)]
+        
         else:
             values = []
             for child in value._children:
                 if child.tag == "bot":
-                    values.append(child.text)
+                    values.append(self._replace_subs(subs, child.text))
+
         multis = []
         for value in values:
             multis.append(value)
+
         return multis
 
-    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None):
+    def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
         if missing_value is None:
             missing_value = []
-        value = self.get_option(section, option_name, missing_value)
+
+        value = self.get_option(section, option_name, missing_value, subs)
+
         if isinstance(value, list):
             if not value:
-                return value
+                return self._replace_subs(subs, value)
+
         if isinstance(value, str):
-            values = [value]
+            values = [self._replace_subs(subs, value)]
+
         else:
             values = []
             for child in value._children:
                 if child.tag == "dir":
-                    values.append(child.text)
+                    values.append(self._replace_subs(subs, child.text))
+
         multis = []
         for value in values:
             multis.append(value.replace('$BOT_ROOT', bot_root))
+
         return multis

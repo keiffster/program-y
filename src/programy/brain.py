@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -14,70 +14,83 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
 from programy.utils.logging.ylogger import YLogger
-import re
-import xml.etree.ElementTree as ET
+
 try:
     import _pickle as pickle
 except:
     import pickle
-import gc
-import datetime
 
-from programy.processors.processing import ProcessorLoader
+from programy.processors.processing import PreProcessorCollection
+from programy.processors.processing import PostProcessorCollection
 from programy.config.brain.brain import BrainConfiguration
 from programy.mappings.denormal import DenormalCollection
 from programy.mappings.gender import GenderCollection
 from programy.mappings.maps import MapCollection
 from programy.mappings.normal import NormalCollection
 from programy.mappings.person import PersonCollection
+from programy.mappings.person import Person2Collection
 from programy.mappings.properties import PropertiesCollection
+from programy.mappings.properties import RegexTemplatesCollection
+from programy.mappings.properties import DefaultVariablesCollection
 from programy.mappings.sets import SetCollection
 from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
-from programy.utils.classes.loader import ClassLoader
-from programy.dialog.dialog import Sentence
-from programy.parser.tokenizer import Tokenizer
+from programy.dialog.tokenizer.tokenizer import Tokenizer
+from programy.parser.pattern.factory import PatternNodeFactory
+from programy.parser.template.factory import TemplateNodeFactory
+from programy.binaries import BinariesManager
+from programy.braintree import BraintreeManager
+from programy.security.manager import SecurityManager
+from programy.oob.handler import OOBHandler
 
 
 class Brain(object):
 
     def __init__(self, bot, configuration: BrainConfiguration):
+
+        assert (bot is not None)
+        assert (configuration is not None)
+
         self._bot = bot
         self._configuration = configuration
 
-        self._tokenizer = self.load_tokenizer()
-
-        self._aiml_parser = self.load_aiml_parser()
+        self._binaries = BinariesManager(configuration.binaries)
+        self._braintree = BraintreeManager(configuration.braintree)
+        self._tokenizer = Tokenizer.load_tokenizer(configuration)
 
         self._denormal_collection = DenormalCollection()
         self._normal_collection = NormalCollection()
         self._gender_collection = GenderCollection()
         self._person_collection = PersonCollection()
-        self._person2_collection = PersonCollection()
+        self._person2_collection = Person2Collection()
         self._rdf_collection = RDFCollection()
         self._sets_collection = SetCollection()
         self._maps_collection = MapCollection()
+
         self._properties_collection = PropertiesCollection()
-        self._variables_collection = PropertiesCollection()
+        self._default_variables_collection = DefaultVariablesCollection()
 
-        self._preprocessors = ProcessorLoader()
-        self._postprocessors = ProcessorLoader()
+        self._preprocessors = PreProcessorCollection()
+        self._postprocessors = PostProcessorCollection()
 
-        self._authentication = None
-        self._authorisation = None
+        self._pattern_factory = None
+        self._template_factory = None
 
-        self._default_oob = None
-        self._oob = {}
+        self._security = SecurityManager(configuration.security)
 
-        self._regex_templates = {}
+        self._oobhandler = OOBHandler(configuration.oob)
+
+        self._regex_templates = RegexTemplatesCollection()
 
         self._dynamics_collection = DynamicsCollection()
 
+        self._aiml_parser = self.load_aiml_parser()
+
         self.load(self.configuration)
+
 
     def ylogger_type(self):
         return "brain"
@@ -89,7 +102,7 @@ class Brain(object):
     @property
     def bot(self):
         return self._bot
-    
+
     @property
     def configuration(self):
         return self._configuration
@@ -135,8 +148,8 @@ class Brain(object):
         return self._properties_collection
 
     @property
-    def variables(self):
-        return self._variables_collection
+    def default_variables(self):
+        return self._default_variables_collection
 
     @property
     def preprocessors(self):
@@ -147,20 +160,12 @@ class Brain(object):
         return self._postprocessors
 
     @property
-    def authentication(self):
-        return self._authentication
+    def pattern_factory(self):
+        return self._pattern_factory
 
     @property
-    def authorisation(self):
-        return self._authorisation
-
-    @property
-    def default_oob(self):
-        return self._default_oob
-
-    @property
-    def oobs(self):
-        return self._oob
+    def template_factory(self):
+        return self._template_factory
 
     @property
     def regex_templates(self):
@@ -174,353 +179,182 @@ class Brain(object):
     def tokenizer(self):
         return self._tokenizer
 
-    def load_tokenizer(self):
-        if self.configuration is not None and self.configuration.tokenizer.classname is not None:
-            YLogger.info(self, "Loading tokenizer from class [%s]", self.configuration.tokenizer.classname)
-            tokenizer_class = ClassLoader.instantiate_class(self.configuration.tokenizer.classname)
-            return tokenizer_class(self.configuration.tokenizer.split_chars)
-        else:
-            return Tokenizer(self.configuration.tokenizer.split_chars)
+    @property
+    def security(self):
+        return self._security
 
     def load_aiml_parser(self):
+        self._load_pattern_nodes()
+        self._load_template_nodes()
         return AIMLParser(self)
 
-    def load_aiml(self, configuration):
+    def load_aiml(self):
         YLogger.info(self, "Loading aiml source brain")
-        self._aiml_parser.load_aiml(configuration)
+        self._aiml_parser.load_aiml()
 
     def reload_aimls(self):
         YLogger.info(self, "Loading aiml source brain")
         self._aiml_parser.empty()
-        self._aiml_parser.load_aiml(self.configuration)
-
-    def load_binary(self, configuration):
-        YLogger.info(self, "Loading binary brain from [%s]", configuration.binaries.binary_filename)
-        try:
-            start = datetime.datetime.now()
-            gc.disable()
-            bin_file = open(configuration.binaries.binary_filename, "rb")
-            self._aiml_parser = pickle.load(bin_file)
-            self._aiml_parser._brain = self
-            gc.enable()
-            bin_file.close()
-            stop = datetime.datetime.now()
-            diff = stop - start
-            YLogger.info(self, "Brain load took a total of %.2f sec", diff.total_seconds())
-            return False   # Tell caller, load succeeded and skip aiml load
-        except Exception as excep:
-            YLogger.exception(self, "Failed to load binary file", excep)
-            if configuration.binaries.load_aiml_on_binary_fail is True:
-                return True   # Tell caller, load failed and to load aiml directly
-            else:
-                raise excep
-
-    def save_binary(self, configuration):
-        YLogger.info(self, "Saving binary brain to [%s]", configuration.binaries.binary_filename)
-        start = datetime.datetime.now()
-        bin_file = open(configuration.binaries.binary_filename, "wb")
-        pickle.dump(self._aiml_parser, bin_file)
-        bin_file.close()
-        stop = datetime.datetime.now()
-        diff = stop - start
-        YLogger.info(self, "Brain save took a total of %.2f sec", diff.total_seconds())
+        self._aiml_parser.load_aiml()
 
     def load(self, configuration: BrainConfiguration):
 
         load_aiml = True
         if self.configuration.binaries.load_binary is True:
-            load_aiml = self.load_binary(configuration)
+            load_aiml = self._binaries.load_binary(self.bot.client.storage_factory)
 
         if load_aiml is True:
-            self.load_aiml(configuration)
+            self.load_aiml()
 
         if configuration.binaries.save_binary is True:
-            self.save_binary(configuration)
+            self._binaries.save_binary(self.bot.client.storage_factory)
 
         YLogger.info(self, "Loading collections")
-        self.load_collections(configuration)
+        self.load_collections()
 
         YLogger.info(self, "Loading services")
         self.load_services(configuration)
 
         YLogger.info(self, "Loading security services")
-        self.load_security_services(configuration)
+        self.load_security_services()
 
         YLogger.info(self, "Loading oob processors")
-        self.load_oob_processors(configuration)
+        self._oobhandler.load_oob_processors()
 
         YLogger.info(self, "Loading regex templates")
-        self.load_regex_templates(configuration)
+        self.load_regex_templates()
 
         YLogger.info(self, "Loading dynamics sets, maps and vars")
-        self.load_dynamics(configuration)
+        self.load_dynamics()
 
-    def dump_brain_tree(self):
-        if self.configuration.braintree.file is not None:
-            YLogger.debug(self, "Dumping AIML Graph as tree to [%s]",
-                              self._configuration.braintree.file)
+    def dump_brain_tree(self, client_context):
+        self._braintree.dump_brain_tree(client_context)
 
-            client_context = self.bot.client.create_client_context("system")
-            self.aiml_parser.pattern_parser.save_braintree(
-                client_context,
-                self.configuration.braintree.file,
-                self.configuration.braintree.content)
+    def _load_denormals(self):
+        self._denormal_collection.empty()
+        self._denormal_collection.load(self.bot.client.storage_factory)
 
-    def _load_denormals(self, configuration):
-        if configuration.files.denormal is not None:
-            self._denormal_collection.empty()
-            total = self._denormal_collection.load_from_filename(configuration.files.denormal)
-            YLogger.info(self, "Loaded a total of %d denormalisations", total)
-        else:
-            YLogger.warning(self, "No configuration setting for denormal")
+    def _load_normals(self):
+        self._normal_collection.empty()
+        self._normal_collection.load(self.bot.client.storage_factory)
 
-    def _load_normals(self, configuration):
-        if configuration.files.normal is not None:
-            self._normal_collection.empty()
-            total = self._normal_collection.load_from_filename(configuration.files.normal)
-            YLogger.info(self, "Loaded a total of %d normalisations", total)
-        else:
-            YLogger.warning(self, "No configuration setting for normal")
+    def _load_genders(self):
+        self._gender_collection.empty()
+        self._gender_collection.load(self.bot.client.storage_factory)
 
-    def _load_genders(self, configuration):
-        if configuration.files.gender is not None:
-            self._gender_collection.empty()
-            total = self._gender_collection.load_from_filename(configuration.files.gender)
-            YLogger.info(self, "Loaded a total of %d genderisations", total)
-        else:
-            YLogger.warning(self, "No configuration setting for gender")
+    def _load_persons(self):
+        self._person_collection.empty()
+        self._person_collection.load(self.bot.client.storage_factory)
 
-    def _load_persons(self, configuration):
-        if configuration.files.person is not None:
-            self._person_collection.empty()
-            total = self._person_collection.load_from_filename(configuration.files.person)
-            YLogger.info(self, "Loaded a total of %d persons", total)
-        else:
-            YLogger.warning(self, "No configuration setting for person")
+    def _load_person2s(self):
+        self._person2_collection.empty()
+        self._person2_collection.load(self.bot.client.storage_factory)
 
-    def _load_person2s(self, configuration):
-        if configuration.files.person2 is not None:
-            self._person2_collection.empty()
-            total = self._person2_collection.load_from_filename(configuration.files.person2)
-            YLogger.info(self, "Loaded a total of %d person2s", total)
-        else:
-            YLogger.warning(self, "No configuration setting for person2")
+    def _load_properties(self):
+        self._properties_collection.empty()
+        self._properties_collection.load(self.bot.client.storage_factory)
 
-    def _load_properties(self, configuration):
-        if configuration.files.properties is not None:
-            self._properties_collection.empty()
-            total = self._properties_collection.load_from_filename(configuration.files.properties)
-            YLogger.info(self, "Loaded a total of %d properties", total)
-        else:
-            YLogger.warning(self, "No configuration setting for properties")
+    def _load_default_variables(self):
+        self._default_variables_collection.empty()
+        self._default_variables_collection.load(self.bot.client.storage_factory)
 
-    def _load_variables(self, configuration):
-        if configuration.files.variables is not None:
-            self._variables_collection.empty ()
-            total = self._variables_collection.load_from_filename(configuration.files.variables)
-            YLogger.info(self, "Loaded a total of %d variables", total)
-        else:
-            YLogger.warning(self, "No configuration setting for variables")
+        self._set_system_defined()
 
-    def _load_maps(self, configuration):
+    def _set_system_defined(self):
+        self.set_sentiment_scores(0.0, 0.5)
+
+    def set_sentiment_scores(self, positivity, subjectivity):
+        if self._default_variables_collection.has_variable("positivity") is False:
+            self._default_variables_collection.set_value("positivity", str(positivity))
+
+        if self._default_variables_collection.has_variable("subjectivity") is False:
+            self._default_variables_collection.set_value("subjectivity", str(subjectivity))
+
+    def _load_maps(self):
         self._maps_collection.empty()
-        total = self._maps_collection.load(configuration.files.map_files)
-        YLogger.info(self, "Loaded a total of %d maps files", total)
+        self._maps_collection.load(self.bot.client.storage_factory)
 
     def reload_map(self, mapname):
         if self._maps_collection.contains(mapname):
-            filename = self._maps_collection.filename(mapname)
-            self._maps_collection.reload_file(filename)
+            self._maps_collection.reload(self.bot.client.storage_factory, mapname)
 
-    def _load_sets(self, configuration):
+    def _load_sets(self):
         self._sets_collection.empty()
-        total = self._sets_collection.load(configuration.files.set_files)
-        YLogger.info(self, "Loaded a total of %d sets files", total)
+        self._sets_collection.load(self.bot.client.storage_factory)
 
     def reload_set(self, setname):
         if self._sets_collection.contains(setname):
-            filename = self._sets_collection.filename(setname)
-            self._sets_collection.reload_file(filename)
+            self._sets_collection.reload(self.bot.client.storage_factory, setname)
 
-    def _load_rdfs(self, configuration):
-        if configuration.files.rdf_files is not None and configuration.files.rdf_files.files:
-            self._rdf_collection.empty()
-            total = self._rdf_collection.load(configuration.files.rdf_files)
-            YLogger.info(self, "Loaded a total of %d rdf files", total)
-        elif configuration.files.triples is not None:
-            self._rdf_collection.empty()
-            total = self._rdf_collection.load_from_filename(configuration.files.triples)
-            YLogger.info(self, "Loaded a total of %d triples", total)
-        else:
-            YLogger.warning(self, "No configuration setting for triples")
+    def _load_rdfs(self):
+        self._rdf_collection.empty()
+        self._rdf_collection.load(self.bot.client.storage_factory)
 
     def reload_rdf(self, rdfname):
         if self._rdf_collection.contains(rdfname):
-            self._rdf_collection.reload_file(rdfname)
+            self._rdf_collection.reload(self.bot.client.storage_factory, rdfname)
 
-    def _load_preprocessors(self, configuration):
-        if configuration.files.preprocessors is not None:
-            self._preprocessors.empty()
-            total = self._preprocessors.load(configuration.files.preprocessors)
-            YLogger.info(self, "Loaded a total of %d pre processors", total)
-        else:
-            YLogger.warning(self, "No configuration setting for pre processors")
+    def _load_preprocessors(self):
+        self._preprocessors.empty()
+        self._preprocessors.load(self.bot.client.storage_factory)
 
-    def _load_postprocessors(self, configuration):
-        if configuration.files.postprocessors is not None:
-            self._postprocessors.empty()
-            total = self._postprocessors.load(configuration.files.postprocessors)
-            YLogger.info(self, "Loaded a total of %d post processors", total)
-        else:
-            YLogger.warning(self, "No configuration setting for post processors")
+    def _load_postprocessors(self):
+        self._postprocessors.empty()
+        self._postprocessors.load(self.bot.client.storage_factory)
 
-    def load_collections(self, configuration):
-        self._load_denormals(configuration)
-        self._load_normals(configuration)
-        self._load_genders(configuration)
-        self._load_persons(configuration)
-        self._load_person2s(configuration)
-        self._load_properties(configuration)
-        self._load_variables(configuration)
-        self._load_rdfs(configuration)
-        self._load_sets(configuration)
-        self._load_maps(configuration)
-        self._load_preprocessors(configuration)
-        self._load_postprocessors(configuration)
+    def _load_pattern_nodes(self):
+        self._pattern_factory = PatternNodeFactory()
+        self._pattern_factory.load(self.bot.client.storage_factory)
+
+    def _load_template_nodes(self):
+        self._template_factory = TemplateNodeFactory()
+        self._template_factory.load(self.bot.client.storage_factory)
+
+    def load_collections(self):
+        self._load_denormals()
+        self._load_normals()
+        self._load_genders()
+        self._load_persons()
+        self._load_person2s()
+        self._load_properties()
+        self._load_default_variables()
+        self._load_rdfs()
+        self._load_sets()
+        self._load_maps()
+        self._load_preprocessors()
+        self._load_postprocessors()
 
     def load_services(self, configuration):
         ServiceFactory.preload_services(configuration.services)
 
-    def load_security_services(self, configuration):
-        if configuration.security is not None:
-            if configuration.security.authentication is not None:
-                if configuration.security.authentication.classname is not None:
-                    try:
-                        classobject = ClassLoader.instantiate_class(
-                            configuration.security.authentication.classname)
-                        self._authentication = classobject(configuration.security.authentication)
-                    except Exception as excep:
-                        YLogger.exception(self, "Failed to load security services", excep)
-            else:
-                YLogger.debug(self, "No authentication configuration defined")
+    def load_security_services(self):
+        self._security.load_security_services(self.bot.client)
 
-            if configuration.security.authorisation is not None:
-                if configuration.security.authorisation.classname is not None:
-                    try:
-                        classobject = ClassLoader.instantiate_class(
-                            configuration.security.authorisation.classname)
-                        self._authorisation = classobject(configuration.security.authorisation)
-                    except Exception as excep:
-                        YLogger.exception(self, "Failed to instatiate authorisation class", excep)
-            else:
-                YLogger.debug(self, "No authorisation configuration defined")
-
-        else:
-            YLogger.debug(self, "No security configuration defined, running open...")
-
-    def load_dynamics(self, configuration):
-        if configuration.dynamics is not None:
-            self._dynamics_collection.load_from_configuration(configuration.dynamics)
+    def load_dynamics(self):
+        if self.configuration.dynamics is not None:
+            self._dynamics_collection.load_from_configuration(self.configuration.dynamics)
         else:
             YLogger.debug(self, "No dynamics configuration defined...")
 
+    def load_regex_templates(self):
+        self._regex_templates.load(self.bot.client.storage_factory)
+
     def pre_process_question(self, client_context, question):
         return self.preprocessors.process(client_context, question)
-
-    def load_oob_processors(self, configuration):
-        if configuration.oob is not None:
-            if configuration.oob.default() is not None:
-                try:
-                    YLogger.info(self, "Loading default oob")
-                    classobject = ClassLoader.instantiate_class(configuration.oob.default().classname)
-                    self._default_oob = classobject()
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to load OOB Processor", excep)
-
-            for oob_name in  configuration.oob.oobs():
-                try:
-                    YLogger.info(self, "Loading oob: %s", oob_name)
-                    classobject = ClassLoader.instantiate_class(configuration.oob.oob(oob_name).classname)
-                    self._oob[oob_name] = classobject()
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to load OOB", excep)
-
-    def load_regex_templates(self, configuration):
-        if configuration.files.regex_templates is not None:
-            collection = PropertiesCollection()
-            total = collection.load_from_filename(configuration.files.regex_templates)
-            YLogger.info(self, "Loaded a total of %d regex templates", total)
-
-            self._regex_templates.clear()
-
-            for pair in collection.pairs:
-                name = pair[0]
-                pattern = pair[1]
-                try:
-                    self._regex_templates[name] = re.compile(pattern, re.IGNORECASE)
-                except Exception:
-                    YLogger.error(self, "Invalid regex template [%s]", pattern)
-
-    def regex_template(self, name):
-        if name in self._regex_templates:
-            return self._regex_templates[name]
-        return None
-
-    def strip_oob(self, response):
-        match = re.compile(r"(.*)(<\s*oob\s*>.*<\/\s*oob\s*>)(.*)")
-        groupings = match.match(response)
-        if groupings is not None:
-            front = groupings.group(1).strip()
-            back = groupings.group(3).strip()
-            response = ""
-            if front != "":
-                response = front + " "
-            response += back
-            oob = groupings.group(2)
-            return response, oob
-        return response, None
-
-    def process_oob(self, client_context, oob_command):
-
-        oob_content = ET.fromstring(oob_command)
-
-        if oob_content.tag == 'oob':
-            for child in oob_content.findall('./'):
-                if child.tag in self._oob:
-                    oob_class = self._oob[child.tag]
-                    return oob_class.process_out_of_bounds(client_context, child)
-                return self._default_oob.process_out_of_bounds(client_context, child)
-
-        return ""
 
     def post_process_response(self, client_context, response: str):
         return self.postprocessors.process(client_context, response)
 
     def failed_authentication(self, client_context):
-        YLogger.error(client_context, "[%s] failed authentication!")
-
-        # If we have an SRAI defined, then use that
-        if self.authentication.configuration.denied_srai is not None:
-            match_context = self._aiml_parser.match_sentence(client_context,
-                                                             Sentence(self._bot.brain.tokenizer, self.authentication.configuration.denied_srai),
-                                                             topic_pattern="*",
-                                                             that_pattern="*")
-            # If the SRAI matched then return the result
-            if match_context is not None:
-                return self.resolve_matched_template(client_context, match_context)
-
-        # Otherswise return the static text, which is either
-        #    User defined via config.yaml
-        #    Or use the default value BrainSecurityConfiguration.DEFAULT_ACCESS_DENIED
-        return self.authentication.configuration.denied_text
+        return self._security.failed_authentication(client_context)
 
     def authenticate_user(self, client_context):
-        if self.authentication is not None:
-            if self.authentication.authenticate(client_context) is False:
-                return self.failed_authentication(client_context)
-        return None
+        return self._security.authenticate_user(client_context)
 
     def resolve_matched_template(self, client_context, match_context):
+
+        assert (client_context is not None)
+        assert (match_context is not None)
 
         template_node = match_context.template_node()
 
@@ -528,15 +362,16 @@ class Brain(object):
 
         response = template_node.template.resolve(client_context)
 
-        if "<oob>" in response:
-            response, oob = self.strip_oob(response)
-            if oob is not None:
-                oob_response = self.process_oob(client_context, oob)
-                response = response + " " + oob_response
+        if self._oobhandler.oob_in_response(response) is True:
+            response = self._oobhandler.handle(client_context, response)
 
         return response
 
     def ask_question(self, client_context, sentence, srai=False):
+
+        assert (client_context is not None)
+        assert (client_context.bot is not None)
+        assert (self._aiml_parser is not None)
 
         client_context.brain = self
 
@@ -546,17 +381,18 @@ class Brain(object):
 
         conversation = client_context.bot.get_conversation(client_context)
 
-        topic_pattern = conversation.get_topic_pattern(client_context)
+        if conversation is not None:
+            topic_pattern = conversation.get_topic_pattern(client_context)
 
-        that_pattern = conversation.get_that_pattern(client_context, srai)
+            that_pattern = conversation.get_that_pattern(client_context, srai)
 
-        match_context = self._aiml_parser.match_sentence(client_context,
-                                                         sentence,
-                                                         topic_pattern=topic_pattern,
-                                                         that_pattern=that_pattern)
+            match_context = self._aiml_parser.match_sentence(client_context,
+                                                             sentence,
+                                                             topic_pattern=topic_pattern,
+                                                             that_pattern=that_pattern)
 
-        if match_context is not None:
-            return self.resolve_matched_template(client_context, match_context)
+            if match_context is not None:
+                return self.resolve_matched_template(client_context, match_context)
 
         return None
 

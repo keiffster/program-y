@@ -17,7 +17,7 @@ class ChatBotTests(unittest.TestCase):
         self.assertIsNotNone(client_context)
         self.assertIsNotNone(client_context.brain)
 
-        self.assertEquals(client_context.brain.properties.property("name"), "ProgramY")
-        self.assertEquals(client_context.brain.properties.property("app_version"), "1.0.0")
-        self.assertEquals(client_context.brain.properties.property("grammar_version"), "1.0.0")
+        self.assertEqual(client_context.brain.properties.property("name"), "ProgramY")
+        self.assertEqual(client_context.brain.properties.property("app_version"), "1.0.0")
+        self.assertEqual(client_context.brain.properties.property("grammar_version"), "1.0.0")
         self.assertIsNotNone(client_context.brain.properties.property("birthdate"))

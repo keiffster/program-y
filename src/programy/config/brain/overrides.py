@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.section import BaseSectionConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
 
 class BrainOverridesConfiguration(BaseSectionConfigurationData):
@@ -39,12 +40,15 @@ class BrainOverridesConfiguration(BaseSectionConfigurationData):
     def allow_learnf_aiml(self):
         return self._allow_learnf_aiml
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         overrides = configuration_file.get_section(self._section_name, configuration)
         if overrides is not None:
-            self._allow_system_aiml = configuration_file.get_bool_option(overrides, "allow_system_aiml", missing_value=False)
-            self._allow_learn_aiml = configuration_file.get_bool_option(overrides, "allow_learn_aiml", missing_value=False)
-            self._allow_learnf_aiml = configuration_file.get_bool_option(overrides, "allow_learnf_aiml", missing_value=False)
+            self._allow_system_aiml = configuration_file.get_bool_option(overrides, "allow_system_aiml", missing_value=False, subs=subs)
+            self._allow_learn_aiml = configuration_file.get_bool_option(overrides, "allow_learn_aiml", missing_value=False, subs=subs)
+            self._allow_learnf_aiml = configuration_file.get_bool_option(overrides, "allow_learnf_aiml", missing_value=False, subs=subs)
         else:
             YLogger.warning(self, "'overrides' section missing from brain config, using to defaults")
 

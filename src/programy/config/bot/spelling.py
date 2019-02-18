@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -18,13 +18,14 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.config.base import BaseConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
+
 
 class BotSpellingConfiguration(BaseConfigurationData):
 
     def __init__(self):
         BaseConfigurationData.__init__(self, name="spelling")
         self._classname = None
-        self._corpus = None
         self._alphabet = None
         self._check_before = False
         self._check_and_retry = False
@@ -32,10 +33,6 @@ class BotSpellingConfiguration(BaseConfigurationData):
     @property
     def classname(self):
         return self._classname
-
-    @property
-    def corpus(self):
-        return self._corpus
 
     @property
     def alphabet(self):
@@ -49,28 +46,27 @@ class BotSpellingConfiguration(BaseConfigurationData):
     def check_and_retry(self):
         return self._check_and_retry
 
-    def load_config_section(self, configuration_file, configuration, bot_root):
+    def check_for_license_keys(self, license_keys):
+        BaseConfigurationData.check_for_license_keys(self, license_keys)
+
+    def load_config_section(self, configuration_file, configuration, bot_root, subs: Substitutions = None):
         spelling = configuration_file.get_section(self._section_name, configuration)
         if spelling is not None:
-            self._classname = configuration_file.get_option(spelling, "classname", missing_value=None)
-            self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None)
-            corpus = configuration_file.get_option(spelling, "corpus", missing_value=None)
-            self._corpus = self.sub_bot_root(corpus, bot_root)
-            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False)
-            self._check_and_retry = configuration_file.get_option(spelling, "check_and_retry", missing_value=False)
+            self._classname = configuration_file.get_option(spelling, "classname", missing_value=None, subs=subs)
+            self._alphabet = configuration_file.get_option(spelling, "alphabet", missing_value=None, subs=subs)
+            self._check_before = configuration_file.get_bool_option(spelling, "check_before", missing_value=False, subs=subs)
+            self._check_and_retry = configuration_file.get_bool_option(spelling, "check_and_retry", missing_value=False, subs=subs)
         else:
             YLogger.warning(self, "'spelling' section missing from bot config, using defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
             data['classname'] = "programy.spelling.norvig.NorvigSpellingChecker"
-            data['corpus'] = "./spelling/corpus.txt"
             data['alphabet'] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
             data['check_before'] = False
-            data['check_and_retry'] = True
+            data['check_and_retry'] = False
         else:
             data['classname'] = self._classname
-            data['corpus'] = self._corpus
             data['alphabet'] = self._alphabet
             data['check_before'] = self._check_before
             data['check_and_retry'] = self._check_and_retry

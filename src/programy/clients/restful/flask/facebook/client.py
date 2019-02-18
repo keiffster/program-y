@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -38,9 +38,6 @@ class FacebookBotClient(FlaskRestBotClient):
     @property
     def facebook_bot(self):
         return self._facebook_bot
-
-    def get_description(self):
-        return 'ProgramY AIML2.0 Facebook Client'
 
     def get_license_keys(self):
         self._access_token = self.license_keys.get_key("FACEBOOK_ACCESS_TOKEN")
@@ -133,7 +130,7 @@ class FacebookBotClient(FlaskRestBotClient):
         try:
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
         except Exception as e:
-            print(e)
+            print("Error asking Facebook:", e)
         return response
 
     def handle_message(self, message):
@@ -217,10 +214,10 @@ class FacebookBotClient(FlaskRestBotClient):
 
             # otherwise its a general error
             else:
-                YLogger.error("Facebook general error handling postback")
+                YLogger.error(self, "Facebook general error handling postback")
                 response_text = "Sorry, I do not understand you!"
 
-            YLogger.debug("Facebook postback response: [%s]", response_text)
+            YLogger.debug(self, "Facebook postback response: [%s]", response_text)
             self.render_response(client_context, response_text)
 
 if __name__ == "__main__":

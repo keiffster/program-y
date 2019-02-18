@@ -66,10 +66,10 @@ class KikBotClientTests(unittest.TestCase):
         client = MockKikBotClient(arguments, kik_bot=MockKikApi(bot="test", api_key="KEY"))
         self.assertIsNotNone(client)
 
-        self.assertEquals("KIK_BOT_API_KEY", client._bot_api_key)
+        self.assertEqual("KIK_BOT_API_KEY", client._bot_api_key)
 
         self.assertIsInstance(client.get_client_configuration(), KikConfiguration)
-        self.assertEquals('ProgramY AIML2.0 Kik Client', client.get_description())
+        self.assertEqual('ProgramY AIML2.0 Client', client.get_description())
 
         self.assertIsInstance(client._kik_bot, KikApi)
 
@@ -88,9 +88,9 @@ class KikBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client._kik_bot)
         self.assertIsNotNone(client._kik_bot._messages)
-        self.assertEquals(1, len(client._kik_bot._messages))
+        self.assertEqual(1, len(client._kik_bot._messages))
         self.assertIsInstance(client._kik_bot._messages[0], TextMessage)
-        self.assertEquals("Hi there", client._kik_bot._messages[0].body)
+        self.assertEqual("Hi there", client._kik_bot._messages[0].body)
 
     def test_handle_unknown_message(self):
         arguments = MockArgumentParser()
@@ -108,9 +108,9 @@ class KikBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client._kik_bot)
         self.assertIsNotNone(client._kik_bot._messages)
-        self.assertEquals(1, len(client._kik_bot._messages))
+        self.assertEqual(1, len(client._kik_bot._messages))
         self.assertIsInstance(client._kik_bot._messages[0], TextMessage)
-        self.assertEquals("Unknown command", client._kik_bot._messages[0].body)
+        self.assertEqual("Unknown command", client._kik_bot._messages[0].body)
 
     def test_handle_message_request(self):
         arguments = MockArgumentParser()
@@ -126,9 +126,9 @@ class KikBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client._kik_bot)
         self.assertIsNotNone(client._kik_bot._messages)
-        self.assertEquals(1, len(client._kik_bot._messages))
+        self.assertEqual(1, len(client._kik_bot._messages))
         self.assertIsInstance(client._kik_bot._messages[0], TextMessage)
-        self.assertEquals("Hi there", client._kik_bot._messages[0].body)
+        self.assertEqual("Hi there", client._kik_bot._messages[0].body)
 
     def test_handle_message_request_unknown(self):
         arguments = MockArgumentParser()
@@ -145,9 +145,9 @@ class KikBotClientTests(unittest.TestCase):
 
         self.assertIsNotNone(client._kik_bot)
         self.assertIsNotNone(client._kik_bot._messages)
-        self.assertEquals(1, len(client._kik_bot._messages))
+        self.assertEqual(1, len(client._kik_bot._messages))
         self.assertIsInstance(client._kik_bot._messages[0], TextMessage)
-        self.assertEquals("Unknown command", client._kik_bot._messages[0].body)
+        self.assertEqual("Unknown command", client._kik_bot._messages[0].body)
 
     def test_receive_message_valid_message(self):
         arguments = MockArgumentParser()
@@ -160,7 +160,7 @@ class KikBotClientTests(unittest.TestCase):
 
         response = client.receive_message(request)
         self.assertIsNotNone(response)
-        self.assertEquals("200 OK", response.status)
+        self.assertEqual("200 OK", response.status)
 
     def test_receive_message_invalid_message(self):
         arguments = MockArgumentParser()
@@ -173,4 +173,4 @@ class KikBotClientTests(unittest.TestCase):
 
         response = client.receive_message(request)
         self.assertIsNotNone(response)
-        self.assertEquals("403 FORBIDDEN", response.status)
+        self.assertEqual("403 FORBIDDEN", response.status)

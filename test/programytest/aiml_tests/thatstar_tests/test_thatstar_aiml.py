@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class ThatStarTestClient(TestClient):
@@ -11,9 +9,10 @@ class ThatStarTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(ThatStarTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
+    def load_storage(self):
+        super(ThatStarTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class ThatStarAIMLTests(unittest.TestCase):
@@ -28,8 +27,8 @@ class ThatStarAIMLTests(unittest.TestCase):
 
         response = self._client_context.bot.ask_question(self._client_context, "HELLO THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HI THERE')
+        self.assertEqual(response, 'HI THERE.')
 
         response = self._client_context.bot.ask_question(self._client_context, "I SAID HI THERE")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'HEARD YOU SAY HI THERE')
+        self.assertEqual(response, 'HEARD YOU SAY HI THERE.')

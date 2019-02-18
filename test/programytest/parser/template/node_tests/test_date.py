@@ -59,7 +59,7 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
         root.append(node)
 
         self.assertEqual(len(root.children), 1)
-        self.assertEquals("%c", node.format)
+        self.assertEqual("%c", node.format)
         self.assertRegex(root.resolve(self._client_context), TemplateDateNodeTests.DEFAULT_DATETIME_REGEX)
 
     def test_node_customformat_set_attrib(self):
@@ -111,4 +111,4 @@ class TemplateDateNodeTests(ParserTestsBaseClass, CustomAssertions):
         with self.assertRaises(Exception):
             node.resolve_to_string(self._client_context)
 
-        self.assertEquals("", root.resolve(self._client_context))
+        self.assertEqual("", root.resolve(self._client_context))

@@ -10,7 +10,7 @@ from programy.parser.pattern.nodes.topic import PatternTopicNode
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.pattern.nodes.template import PatternTemplateNode
 from programy.parser.pattern.matcher import MatchContext, Match
-from programy.dialog.dialog import Sentence
+from programy.dialog.sentence import Sentence
 
 
 class MockPatternWildCardNode(PatternWildCardNode):
@@ -36,7 +36,7 @@ class PatternWildCardNodeTests(ParserTestsBaseClass):
 
         wildcard.can_add(PatternWordNode("test"))
 
-        self.assertEquals(["*"], wildcard.matching_wildcards())
+        self.assertEqual(["*"], wildcard.matching_wildcards())
 
     def test_invalid_topic_or_that(self):
 

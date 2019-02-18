@@ -1,36 +1,67 @@
 import unittest
+import re
+import os
 
 from programy.mappings.normal import NormalCollection
+from programy.storage.factory import StorageFactory
+from programy.storage.stores.file.config import FileStorageConfiguration
+from programy.storage.stores.file.engine import FileStorageEngine
+from programy.storage.stores.file.config import FileStoreConfiguration
+
 
 class NormaliseTests(unittest.TestCase):
 
-    def test_normalise(self):
-        collection = NormalCollection ()
+    def test_initialise_collection(self):
+        collection = NormalCollection()
         self.assertIsNotNone(collection)
 
-        count = collection.load_from_text("""
-            " www. ","www dot "
-            " www."," www dot "
-            ".com "," dot com "
-            "%24"," dollars "
-            "%27","'"
-            "%2A","*"
-            "%2D","-"
-            "%2d","-"
-            "%2E","."
-            "%2e","."
-            " aren t "," are not "
-            " aren.t "," are not "
-            " arent "," are not "
-            " aren't "," are not "
-            " are'nt "," are not "
-            " arn t "," are not "
-        """)
-        self.assertEqual(count, 16)
+    def test_collection_operations(self):
+        collection = NormalCollection()
+        self.assertIsNotNone(collection)
 
-        self.assertEqual(collection.normalise_string("That will be 24 %24"), "That will be 24 dollars")
-        self.assertEqual(collection.normalise_string("You aren't him"), "You are not him")
+        collection.add_to_lookup(".COM", [re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '])
 
-        self.assertEqual(collection.normalise_string("www.google.com"), "www dot google dot com")
+        self.assertTrue(collection.has_key(".COM"))
+        self.assertEqual([re.compile('(^\\.COM|\\.COM|\\.COM$)', re.IGNORECASE), ' DOT COM '], collection.value(".COM"))
 
-        self.assertIsNone(collection.normalise(" other "))
+        self.assertEqual("keithsterling dot com", collection.normalise_string("keithsterling.COM"))
+
+    def test_load(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._normal_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "normal.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.NORMAL] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.NORMAL] = storage_engine
+
+        collection = NormalCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")
+
+    def test_reload(self):
+        storage_factory = StorageFactory()
+
+        file_store_config = FileStorageConfiguration()
+        file_store_config._normal_storage = FileStoreConfiguration(file=os.path.dirname(__file__) + os.sep + "test_files" + os.sep + "normal.txt", format="text", extension="txt", encoding="utf-8", delete_on_start=False)
+
+        storage_engine = FileStorageEngine(file_store_config)
+
+        storage_factory._storage_engines[StorageFactory.NORMAL] = storage_engine
+        storage_factory._store_to_engine_map[StorageFactory.NORMAL] = storage_engine
+
+        collection = NormalCollection()
+        self.assertIsNotNone(collection)
+
+        collection.load(storage_factory)
+
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")
+
+        collection.reload(storage_factory)
+
+        self.assertEqual(collection.normalise_string("keithsterling.COM"), "keithsterling dot com")

@@ -1,5 +1,5 @@
 """
-Copyright (c) 2016-2018 Keith Sterling http://www.keithsterling.com
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
 documentation files (the "Software"), to deal in the Software without restriction, including without limitation
@@ -24,6 +24,8 @@ class TextUtils:
 
     RE_STRIP_ALL_WHITESPACE = re.compile('[\s+]')
     RE_STRIP_WHITESPACE = re.compile('[\n\t\r+]')
+    RE_TERMIANTORS = re.compile('[:;,.?!]')
+    RE_STRIP_NONE_TERMINATING = re.compile('[\'"\(\)\-"]')
     RE_STRIP_ALL_PUNCTUATION1 = re.compile('[:\'";,.?!\(\)\-"]')
     RE_STRIP_ALL_PUNCTUATION2 = re.compile('\s+')
     RE_STRIP_HTML = re.compile(r'<.*?>')
@@ -51,6 +53,12 @@ class TextUtils:
     def strip_all_whitespace(string):
         first_pass = TextUtils.RE_STRIP_ALL_WHITESPACE.sub('', string)
         return ' '.join(first_pass.split())
+
+    @staticmethod
+    def strip_none_terminating_punctuation(string):
+        first_pass = TextUtils.RE_STRIP_NONE_TERMINATING.sub(' ', string)
+        second_pass = TextUtils.RE_STRIP_NONE_TERMINATING.sub(' ', first_pass)
+        return second_pass.strip()
 
     @staticmethod
     def strip_all_punctuation(string):

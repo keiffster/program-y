@@ -1,9 +1,7 @@
 import unittest
 import os
 
-from programy.context import ClientContext
-
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 
 class PatternISetTestClient(TestClient):
@@ -11,9 +9,10 @@ class PatternISetTestClient(TestClient):
     def __init__(self):
         TestClient.__init__(self)
 
-    def load_configuration(self, arguments):
-        super(PatternISetTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files=[os.path.dirname(__file__)]
+    def load_storage(self):
+        super(PatternISetTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
 
 
 class PatternISetAIMLTests(unittest.TestCase):
@@ -31,10 +30,10 @@ class PatternISetAIMLTests(unittest.TestCase):
 
     def test_patten_set_one_or_more_wildcard_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "WHAT IS YOUR FAVOURITE COLOUR PLEASE")
-        self.assertEqual(response, "My favourite colour is Red")
+        self.assertEqual(response, "My favourite colour is Red.")
 
         response = self._client_context.bot.ask_question(self._client_context,  "WHAT IS YOUR FAVOURITE COLOR PLEASE")
-        self.assertEqual(response, "My favourite color is Red")
+        self.assertEqual(response, "My favourite color is Red.")
 
     def test_patten_set_zero_or_more_wildcard_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I LIKE TO EAT BURGERS")
@@ -48,7 +47,7 @@ class PatternISetAIMLTests(unittest.TestCase):
 
     def test_patten_alternative_set_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I LIKE RIDING BMW MOTORCYCLES")
-        self.assertEqual(response, "I prefer a Harley Davidson to a BMW")
+        self.assertEqual(response, "I prefer a Harley Davidson to a BMW.")
 
     def test_united_kingdom(self):
         response = self._client_context.bot.ask_question(self._client_context,  "I live in wales")

@@ -1,19 +1,22 @@
 import unittest
 import os
 
-from programy.context import ClientContext
 from programy.config.brain.security import BrainSecurityAuthorisationConfiguration
 
-from programytest.aiml_tests.client import TestClient
+from programytest.client import TestClient
 
 class AuthoriseTestClient(TestClient):
 
     def __init__(self):
         TestClient.__init__(self)
 
+    def load_storage(self):
+        super(AuthoriseTestClient, self).load_storage()
+        self.add_default_stores()
+        self.add_categories_store([os.path.dirname(__file__)])
+
     def load_configuration(self, arguments):
         super(AuthoriseTestClient, self).load_configuration(arguments)
-        self.configuration.client_configuration.configurations[0].configurations[0].files.aiml_files._files = [os.path.dirname(__file__)]
         self.configuration.client_configuration.configurations[0].configurations[0].security._authorisation = BrainSecurityAuthorisationConfiguration()
         self.configuration.client_configuration.configurations[0].configurations[0].security.authorisation._classname = "programy.security.authorise.usergroupsauthorisor.BasicUserGroupAuthorisationService"
         self.configuration.client_configuration.configurations[0].configurations[0].security.authorisation._denied_srai = "ACCESS_DENIED"
@@ -29,7 +32,7 @@ class AuthoriseAIMLTests(unittest.TestCase):
     def test_authorise_allowed(self):
         response = self._client_context.bot.ask_question(self._client_context, "ALLOW ACCESS")
         self.assertIsNotNone(response)
-        self.assertEqual(response, 'Access Allowed')
+        self.assertEqual(response, 'Access Allowed.')
 
     def test_authorise_denied(self):
         response = self._client_context.bot.ask_question(self._client_context, "DENY ACCESS")

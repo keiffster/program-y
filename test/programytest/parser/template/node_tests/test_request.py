@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.request import TemplateRequestNode
-from programy.dialog.dialog import Question, Conversation
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
 
 from programytest.parser.base import ParserTestsBaseClass
 
@@ -18,11 +19,11 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateRequestNode()
-        self.assertEquals("REQUEST", node.to_string())
+        self.assertEqual("[REQUEST]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateRequestNode(index=2)
-        self.assertEquals("REQUEST index=2", node.to_string())
+        self.assertEqual("[REQUEST index=2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -58,13 +59,13 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
         self.assertEqual(1, node.index)
 
         conversation = Conversation(self._client_context)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation._questions.append(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "What did you say")
+        question = Question.create_from_text(self._client_context, "What did you say")
         question.current_sentence()._response = "Hello matey"
         conversation._questions.append(question)
 
@@ -86,13 +87,13 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
         self.assertEqual(1, node.index)
 
         conversation = Conversation(self._client_context)
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation._questions.append(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "What did you say")
+        question = Question.create_from_text(self._client_context, "What did you say")
         question.current_sentence()._response = "Hello matey"
         conversation._questions.append(question)
 
@@ -115,15 +116,15 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "Hello world")
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context.brain.tokenizer, "How are you. Are you well")
+        question = Question.create_from_text(self._client_context, "How are you. Are you well")
         question.current_sentence()._response = "Fine thanks"
         conversation.record_dialog(question)
 
-        self._client_context.bot._conversations["testid"] = conversation
+        self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
 
         response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
@@ -136,4 +137,4 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
-        self.assertEquals("", result)
+        self.assertEqual("", result)

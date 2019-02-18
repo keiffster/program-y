@@ -198,7 +198,7 @@ class NewsAPI(object):
         if license_keys.has_key('NEWSAPI_API_KEY'):
             self.api_key = license_keys.get_key('NEWSAPI_API_KEY')
         else:
-            raise Exception("No valid license key METOFFICE_API_KEY found")
+            raise Exception("No valid license key NEWSAPI_API_KEY found")
 
     @staticmethod
     def _format_url(service, api_key, sort_by="top"):
@@ -263,13 +263,21 @@ class NewsAPI(object):
 
     @staticmethod
     def json_to_file(filename, json_data):
-        with open(filename, 'w+', encoding="utf-8") as json_file:
-            json.dump(json_data, json_file)
+        try:
+            with open(filename, 'w+', encoding="utf-8") as json_file:
+                json.dump(json_data, json_file)
+
+        except Exception as e:
+            YLogger.exception(None, "Failed to write to [%s]", e, filename)
 
     @staticmethod
     def json_from_file(filename):
-        with open(filename, 'r+', encoding="utf-8") as json_file:
-            return json.load(json_file)
+        try:
+            with open(filename, 'r+', encoding="utf-8") as json_file:
+                return json.load(json_file)
+
+        except Exception as e:
+            YLogger.exception(None, "Failed to read from [%s]", e, filename)
 
     @staticmethod
     def to_program_y_text(articles, break_str=" <br /> "):
