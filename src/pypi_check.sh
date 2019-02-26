@@ -1,6 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 cd /tmp
+
+if [ -d pypi ]; then
+    rm -Rf pypi
+fi
 
 mkdir pypi
 
@@ -10,7 +14,7 @@ python3 -m venv programy
 
 cd programy
 
-source cd ./bin/activate
+source ./bin/activate
 
 pip3 install --no-cache-dir programy
 
@@ -22,8 +26,12 @@ python3 -m programy.admin.tool download y-bot
 
 cd scripts/xnix
 
+pwd
+
+#. ./y-bot.sh
+
 deactivate
 
-cd ..
-cd ..
+cd ../../../..
+
 rm -Rf pypi
