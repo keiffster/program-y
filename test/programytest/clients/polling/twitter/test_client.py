@@ -8,7 +8,6 @@ from programy.bot import Bot
 from programytest.clients.arguments import MockArgumentParser
 from programy.storage.config import FileStorageConfiguration
 from programy.storage.stores.file.config import FileStoreConfiguration
-from programy.storage.stores.file.store.twitter import FileTwitterStore
 from programy.storage.stores.file.engine import FileStorageEngine
 from programy.storage.factory import StorageFactory
 

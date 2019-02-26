@@ -12,6 +12,7 @@ from email.mime.multipart import MIMEMultipart
 
 from programy.utils.email.config import EmailConfiguration
 
+
 class EmailSender(object):
 
     def __init__(self, config: EmailConfiguration):

@@ -40,9 +40,11 @@ class BaseConfigurationData(object):
 
         if key in self._additionals:
             return self._additionals[key]
+
         else:
             YLogger.warning(self, "Configuration key [%s] does not exist", key)
-            return None
+
+        return None
 
     @property
     def section_name(self):
@@ -72,12 +74,12 @@ class BaseConfigurationData(object):
     def additionals_to_add(self):
         return []
 
-    def load_additional_key_values(self, file_config, service, subs: Substitutions = None):
-        if file_config:
-            if service:
-                for key in file_config.get_keys(service):
+    def load_additional_key_values(self, configuration, section, subs: Substitutions = None):
+        if configuration:
+            if section:
+                for key in configuration.get_keys(section):
                     if key in self.additionals_to_add():
-                        value = file_config.get_option(service, key, subs=subs)
+                        value = configuration.get_option(section, key, subs=subs)
                         self._additionals[key] = value
 
     def _extract_license_key(self, attr, license_keys):

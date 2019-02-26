@@ -43,11 +43,15 @@ class EventBotClient(BotClient):
         if self.arguments.noloop is False:
             YLogger.info(self, "Entering conversation loop...")
 
+            self.startup()
+
             self.prior_to_run_loop()
 
             self.run_loop()
 
             self.post_run_loop()
+
+            self.shutdown()
 
         else:
             YLogger.debug(self, "noloop set to True, exiting...")

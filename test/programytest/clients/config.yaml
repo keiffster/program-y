@@ -1,3 +1,17 @@
+mock:
+  description: Program-Y Console Client
+  bot:  bot
+  prompt: ">>>"
+
+  scheduler:
+    name: Scheduler1
+    debug_level: 50
+    add_listeners: False
+    remove_all_jobs: False
+
+  triggers:
+    manager: programy.triggers.local.LocalTriggerManager
+
 
 brain:
 

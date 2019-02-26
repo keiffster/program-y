@@ -187,3 +187,9 @@ class StorageEngineTests(unittest.TestCase):
         engine = StorageEngine(config)
         with self.assertRaises(NotImplementedError):
             _ = engine.usergroups_store()
+
+    def test_triggers_store_not_implemented(self):
+        config = unittest.mock.Mock()
+        engine = StorageEngine(config)
+        with self.assertRaises(NotImplementedError):
+            _ = engine.triggers_store()

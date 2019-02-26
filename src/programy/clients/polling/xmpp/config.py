@@ -56,8 +56,7 @@ class XmppConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        xmpp = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, xmpp, bot_root, subs: Substitutions = None):
         if xmpp is not None:
             self._server = configuration_file.get_option(xmpp, "server", subs=subs)
             self._port = configuration_file.get_int_option(xmpp, "port", missing_value=5222, subs=subs)
@@ -65,7 +64,7 @@ class XmppConfiguration(ClientConfigurationData):
             self._xep_0004 = configuration_file.get_bool_option(xmpp, "xep_0004", subs=subs)
             self._xep_0060 = configuration_file.get_bool_option(xmpp, "xep_0060", subs=subs)
             self._xep_0199 = configuration_file.get_bool_option(xmpp, "xep_0199", subs=subs)
-        super(XmppConfiguration, self).load_configuration_section(configuration_file, xmpp, bot_root, subs=subs)
+            super(XmppConfiguration, self).load_configuration_section(configuration_file, xmpp, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

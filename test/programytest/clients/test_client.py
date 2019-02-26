@@ -9,7 +9,6 @@ from programy.config.bot.bot import BotConfiguration
 from programy.bot import Bot
 
 from programy.clients.config import ClientConfigurationData
-from programy.utils.substitutions.substitues import Substitutions
 
 from programytest.clients.arguments import MockArgumentParser
 
@@ -17,17 +16,13 @@ from programytest.clients.arguments import MockArgumentParser
 class MockClientConfiguration(ClientConfigurationData):
 
     def __init__(self):
-        ClientConfigurationData.__init__(self, "console")
-
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions):
-        console = configuration_file.get_section(self.section_name)
-        super(MockClientConfiguration, self).load_configuration(configuration_file, console, bot_root, subs=subs)
+        ClientConfigurationData.__init__(self, "mock")
 
 
 class MockBotClient(BotClient):
 
     def __init__(self, argument_parser=None):
-        BotClient.__init__(self, "Mock", argument_parser)
+        BotClient.__init__(self, "mock", argument_parser)
 
     def get_description(self):
         return "ProgramY Test Client"
@@ -105,22 +100,35 @@ class BotClientTests(unittest.TestCase):
         with self.assertRaises(Exception):
             client = BotClient("test", arguments)
 
-    def test_sub_classed_client(self):
-
+    def get_config_files(self):
         if os.name == 'posix':
             logging_file = os.path.dirname(__file__) + os.sep + "logging.yaml"
+            self.assertTrue(os.path.exists(logging_file))
             config_file = os.path.dirname(__file__) + os.sep + "config.yaml"
+            self.assertTrue(os.path.exists(config_file))
         elif os.name == 'nt':
             logging_file = os.path.dirname(__file__) + os.sep + "logging.windows.yaml"
+            self.assertTrue(os.path.exists(logging_file))
             config_file = os.path.dirname(__file__) + os.sep + "config.windows.yaml"
+            self.assertTrue(os.path.exists(config_file))
         else:
             raise Exception("Unknown os [%s]" % os.name)
 
-        arguments = MockArgumentParser(bot_root=".",
-                                       logging=logging_file,
-                                       config=config_file,
-                                       cformat="yaml",
-                                       noloop=False)
+        return config_file, logging_file
+
+    def get_commandline_args(self, config_file = None, logging_file = None):
+        return MockArgumentParser(bot_root=None,
+                                  logging=logging_file,
+                                  config=config_file,
+                                  cformat="yaml",
+                                  noloop=False)
+
+    def test_sub_classed_client(self):
+
+        config_file, logging_file = self.get_config_files()
+
+        arguments = self.get_commandline_args(None, logging_file)
+
         client = MockBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
@@ -133,37 +141,44 @@ class BotClientTests(unittest.TestCase):
         client.log_unknown_response(None)
 
     def test_sub_classed_client_no_bot_root(self):
-        if os.name == 'posix':
-            logging_file = os.path.dirname(__file__) + os.sep + "logging.yaml"
-            config_file = os.path.dirname(__file__) + os.sep + "config.yaml"
-        elif os.name == 'nt':
-            logging_file = os.path.dirname(__file__) + os.sep + "logging.windows.yaml"
-            config_file = os.path.dirname(__file__) + os.sep + "config.windows.yaml"
-        else:
-            raise Exception("Unknown os [%s]" % os.name)
 
-        arguments = MockArgumentParser(bot_root=None,
-                                       logging=logging_file,
-                                       config=config_file,
-                                       cformat="yaml",
-                                       noloop=False)
+        config_file, logging_file = self.get_config_files()
+
+        arguments = self.get_commandline_args(config_file, logging_file)
+
         client = MockBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
 
     def test_sub_classed_client_no_bot_root_no_config(self):
-        if os.name == 'posix':
-            logging_file = os.path.dirname(__file__) + os.sep + "logging.yaml"
-        elif os.name == 'nt':
-            logging_file = os.path.dirname(__file__) + os.sep + "logging.windows.yaml"
-        else:
-            raise Exception("Unknown os [%s]" % os.name)
 
-        arguments = MockArgumentParser(bot_root=None,
-                                       logging=logging_file,
-                                       config=None,
-                                       cformat="yaml",
-                                       noloop=False)
+        config_file, logging_file = self.get_config_files()
+
+        arguments = self.get_commandline_args(None, logging_file)
+
         client = MockBotClient(arguments)
         self.assertIsNotNone(client)
         self.assertIsNotNone(client.arguments)
+
+    def test_scheduler(self):
+
+        config_file, logging_file = self.get_config_files()
+
+        arguments = self.get_commandline_args(config_file, logging_file)
+
+        client = MockBotClient(arguments)
+
+        self.assertIsNotNone(client.scheduler)
+
+    def test_trigger_manager(self):
+
+        config_file, logging_file = self.get_config_files()
+
+        arguments = self.get_commandline_args(config_file, logging_file)
+
+        client = MockBotClient(arguments)
+
+        self.assertIsNotNone(client.trigger_manager)
+
+        client.startup()
+        client.shutdown()

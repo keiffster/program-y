@@ -46,14 +46,13 @@ class KikConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        kik = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, kik, bot_root, subs: Substitutions = None):
         if kik is not None:
             self._bot_name = configuration_file.get_option(kik, "bot_name", missing_value="program-y", subs=subs)
             self._webhook = configuration_file.get_option(kik, "webhook", missing_value="https://localhost:5000", subs=subs)
             self._unknown_command = configuration_file.get_option(kik, "unknown_command", missing_value="Unknown command", subs=subs)
             self._unknown_command_srai = configuration_file.get_option(kik, "unknown_command_srai", missing_value=None, subs=subs)
-        super(KikConfiguration, self).load_configuration_section(configuration_file, kik, bot_root, subs=subs)
+            super(KikConfiguration, self).load_configuration_section(configuration_file, kik, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

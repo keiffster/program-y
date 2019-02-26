@@ -35,12 +35,11 @@ class ConsoleConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        console = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, console, bot_root, subs: Substitutions = None):
         if console is not None:
             self._default_userid = configuration_file.get_option(console, "default_userid", missing_value="Console", subs=subs)
             self._prompt = configuration_file.get_option(console, "prompt", missing_value=">>>", subs=subs)
-        super(ConsoleConfiguration, self).load_configuration_section(configuration_file, console, bot_root, subs=subs)
+            super(ConsoleConfiguration, self).load_configuration_section(configuration_file, console, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

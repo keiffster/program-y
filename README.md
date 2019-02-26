@@ -11,19 +11,7 @@ For more information about Program-y, its features and its history then check ou
 * Ability to use tokens in config files which are subsituted at run time
 
 
-### Installation on OSX and Ubuntu
-You can now install Program-y directly from PyPi with the follow commands
-```bash
-pip3 install programy
-```
-### Installation on Windows
-You can now install Program-y directly from PyPi with the follow commands
-```cmd
-pip install programy
-```
-
-For more information about installing either via Git or Pip on OSX, Ubuntu and Windows go to 
+## Installation
+For information about installing either via Git or Pip on OSX, Ubuntu and Windows go to 
 [Installation Instructions](https://github.com/keiffster/program-y/wiki/Install).
-
-
 

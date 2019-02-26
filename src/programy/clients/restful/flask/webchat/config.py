@@ -36,12 +36,11 @@ class WebChatConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        webchat = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, webchat, bot_root, subs: Substitutions = None):
         if webchat is not None:
             self._cookie_id = configuration_file.get_option(webchat, "cookie_id", missing_value="ProgramYSession", subs=subs)
             self._cookie_expires = configuration_file.get_int_option(webchat, "cookie_expires", missing_value=90, subs=subs)
-        super(WebChatConfiguration, self).load_configuration_section(configuration_file, webchat, bot_root, subs=subs)
+            super(WebChatConfiguration, self).load_configuration_section(configuration_file, webchat, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

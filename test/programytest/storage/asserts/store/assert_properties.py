@@ -1,5 +1,6 @@
 import unittest
 
+
 class PropertyStoreAsserts(unittest.TestCase):
 
     def assert_properties_storage(self, store):

@@ -24,6 +24,7 @@ from programy.clients.polling.client import PollingBotClient
 from programy.clients.polling.twitter.config import TwitterConfiguration
 from programy.storage.factory import StorageFactory
 
+
 class TwitterBotClient(PollingBotClient):
 
     FIFTEEN_MINUTES = 15*60

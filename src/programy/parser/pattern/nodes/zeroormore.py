@@ -19,6 +19,8 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.pattern.nodes.wildcard import PatternWildCardNode
 from programy.parser.pattern.matcher import Match
+from programy.parser.pattern.nodes.base import PatternNode
+
 
 class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
@@ -78,6 +80,15 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
         match = self.check_child_is_wildcard(tabs, client_context, context, words, word_no, match_type, depth)
         if match is not None:
             return match
+
+        if self._topic is not None:
+            match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
+            if match is not None:
+                YLogger.debug(client_context, "%sMatched topic, success!", tabs)
+                return match
+            if words.word(word_no) == PatternNode.TOPIC:
+                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                return None
 
         word = words.word(word_no)
 

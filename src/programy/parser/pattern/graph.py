@@ -252,5 +252,4 @@ class PatternGraph(object):
 
     def dump(self, output_func=YLogger.debug, eol="", verbose=True):
         self.root.dump("", output_func, eol, verbose)
-        output_func(self, "")
 

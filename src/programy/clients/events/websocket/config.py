@@ -36,12 +36,11 @@ class WebSocketConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        websocket = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, websocket, bot_root, subs: Substitutions = None):
         if websocket is not None:
             self._host = configuration_file.get_option(websocket, "host", missing_value="0.0.0.0", subs=subs)
             self._port = configuration_file.get_option(websocket, "port", missing_value=80, subs=subs)
-        super(WebSocketConfiguration, self).load_configuration_section(configuration_file, websocket, bot_root, subs=subs)
+            super(WebSocketConfiguration, self).load_configuration_section(configuration_file, websocket, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

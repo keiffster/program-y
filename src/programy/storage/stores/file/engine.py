@@ -43,6 +43,8 @@ from programy.storage.stores.file.store.braintree import FileBraintreeStore
 from programy.storage.stores.file.store.processors import FilePreProcessorsStore
 from programy.storage.stores.file.store.processors import FilePostProcessorsStore
 from programy.storage.stores.file.store.usergroups import FileUserGroupStore
+from programy.storage.stores.file.store.triggers import FileTriggersStore
+
 
 class FileStorageEngine(StorageEngine):
 
@@ -120,3 +122,6 @@ class FileStorageEngine(StorageEngine):
 
     def usergroups_store(self):
         return FileUserGroupStore(self)
+
+    def triggers_store(self):
+        return FileTriggersStore(self)

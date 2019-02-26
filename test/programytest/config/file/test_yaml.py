@@ -12,11 +12,11 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         config_data = YamlConfigurationFile()
         self.assertIsNotNone(config_data)
         configuration = config_data.load_from_text("""
-            brain:
-                overrides:
-                  allow_system_aiml: true
-                  allow_learn_aiml: true
-                  allow_learnf_aiml: true
+brain:
+    overrides:
+      allow_system_aiml: true
+      allow_learn_aiml: true
+      allow_learnf_aiml: true
           """, ConsoleConfiguration(), ".")
         self.assertIsNotNone(configuration)
 
@@ -64,6 +64,9 @@ class YamlConfigurationFileTests(ConfigurationBaseFileTests):
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         configuration = yaml.load_from_text("""
+            console:
+                bot: bot
+                
             bot:
                 brain:  |
                     bot1
@@ -424,10 +427,15 @@ brain:
         yaml = YamlConfigurationFile()
         self.assertIsNotNone(yaml)
         configuration = yaml.load_from_text("""
+            console:
+                bot: bot
+                
+            bot:
+                brain: brain
+                
             brain:
-
                 services:
-                    Authentication:
+                    authentication:
                         classname: programy.services.authenticate.passthrough.PassThroughAuthenticationService
                         denied_srai: ACCESS_DENIED
 
@@ -435,8 +443,8 @@ brain:
 
         self.assertIsNotNone(configuration)
 
-        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].services.exists("Authentication"))
-        auth_service = configuration.client_configuration.configurations[0].configurations[0].services.service("Authentication")
+        self.assertTrue(configuration.client_configuration.configurations[0].configurations[0].services.exists("authentication"))
+        auth_service = configuration.client_configuration.configurations[0].configurations[0].services.service("authentication")
         self.assertIsNotNone(auth_service)
 
         self.assertTrue(auth_service.exists("denied_srai"))

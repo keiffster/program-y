@@ -60,6 +60,8 @@ class StorageFactory(object):
 
     USERGROUPS = "usergroups"
 
+    TRIGGERS = "triggers"
+
     def __init__(self):
         self._storage_engines = {}
         self._store_to_engine_map = {}

@@ -138,6 +138,8 @@ class TelegramBotClient(PollingBotClient):
         running = True
         try:
             self._updater.start_polling()
+            # Without this the system goes into 100% CPU utilisation
+            self._updater.idle()
 
         except KeyboardInterrupt as keye:
             print("Telegram client stopping....")

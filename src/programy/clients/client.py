@@ -32,6 +32,9 @@ from programy.scheduling.scheduler import ProgramyScheduler
 from programy.clients.render.text import TextRenderer
 from programy.utils.classes.loader import ClassLoader
 from programy.storage.factory import StorageFactory
+from programy.utils.email.sender import EmailSender
+from programy.triggers.manager import TriggerManager
+from programy.triggers.system import SystemTriggers
 
 
 class ResponseLogger(object):
@@ -106,6 +109,8 @@ class BotClient(ResponseLogger):
         self._license_keys = LicenseKeys()
         self._storage = None
         self._scheduler = None
+        self._email = None
+        self._trigger_mgr = None
         self._configuration = None
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
@@ -129,7 +134,11 @@ class BotClient(ResponseLogger):
 
         self.load_scheduler()
 
-        self._renderer = self.load_renderer()
+        self.load_renderer()
+
+        self.load_email()
+
+        self.load_trigger_manager()
 
     def ylogger_type(self):
         return "client"
@@ -165,6 +174,10 @@ class BotClient(ResponseLogger):
     @property
     def renderer(self):
         return self._renderer
+
+    @property
+    def trigger_manager(self):
+        return self._trigger_mgr
 
     def get_description(self):
         if self.configuration is not None:
@@ -244,6 +257,12 @@ class BotClient(ResponseLogger):
             self._scheduler = ProgramyScheduler(self, self.configuration.client_configuration.scheduler)
             self._scheduler.start()
 
+    def load_email(self):
+        self._email = EmailSender(self._configuration.client_configuration.email)
+
+    def load_trigger_manager(self):
+        self._trigger_mgr = TriggerManager.load_trigger_manager(self._configuration.client_configuration.triggers)
+
     def load_storage(self):
         self._storage = StorageFactory()
         if self.configuration.client_configuration.storage is not None:
@@ -261,15 +280,24 @@ class BotClient(ResponseLogger):
         try:
             if self.get_client_configuration().renderer is not None:
                 clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
-                return clazz(self)
+                self._renderer = clazz(self)
+                return
 
         except Exception as e:
             YLogger.exception(None, "Failed to load config specified renderer", e)
 
-        return self.get_default_renderer()
+        self._renderer = self.get_default_renderer()
 
     def get_default_renderer(self):
         return TextRenderer(self)
+
+    def startup(self):
+        if self._trigger_mgr is not None:
+            self._trigger_mgr.trigger(event=SystemTriggers.SYSTEM_STARTUP)
+
+    def shutdown(self):
+        if self._trigger_mgr is not None:
+            self._trigger_mgr.trigger(event=SystemTriggers.SYSTEM_SHUTDOWN)
 
     def process_question(self, client_context, question):
         raise NotImplementedError("You must override this and implement the logic to create a response to the question")

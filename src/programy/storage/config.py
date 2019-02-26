@@ -196,3 +196,4 @@ class StorageConfiguration(BaseConfigurationData):
 
         amap[StorageFactory.USERGROUPS] = 'file'
 
+        amap[StorageFactory.TRIGGERS] = 'file'

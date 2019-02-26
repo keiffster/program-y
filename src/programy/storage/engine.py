@@ -113,3 +113,6 @@ class StorageEngine(object):
 
     def usergroups_store(self):
         raise NotImplementedError("Engine does not support user groups storage")
+
+    def triggers_store(self):
+        raise NotImplementedError("Engine does not support trigger storage")

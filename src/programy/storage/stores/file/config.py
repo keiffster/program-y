@@ -79,6 +79,8 @@ class FileStorageConfiguration(BaseConfigurationData):
 
         self._usergroups_storage = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
 
+        self._triggers_storage = FileStoreConfiguration(file=tmpdir + os.sep + "triggers.txt", format="text", encoding="utf-8", delete_on_start=False)
+
     @property
     def categories_storage(self):
         return self._categories_storage
@@ -187,6 +189,10 @@ class FileStorageConfiguration(BaseConfigurationData):
     def usergroups_storage(self):
         return self._usergroups_storage
 
+    @property
+    def triggers_storage(self):
+        return self._triggers_storage
+
     def load_storage_config(self, storage_config, name, configuration_file, storage, bot_root, subs: Substitutions = None):
         config_section = configuration_file.get_option(storage, 'config', subs=subs)
         storage_config_section = configuration_file.get_option(config_section, name, subs=subs)
@@ -236,6 +242,8 @@ class FileStorageConfiguration(BaseConfigurationData):
             self.load_storage_config(self._postprocessors_storage, FileStore.POSTPROCESSORS_STORAGE, configuration_file, storage, bot_root, subs=subs)
 
             self.load_storage_config(self._usergroups_storage, FileStore.USERGROUPS_STORAGE, configuration_file, storage, bot_root, subs=subs)
+
+            self.load_storage_config(self._triggers_storage, FileStore.TRIGGERS_STORAGE, configuration_file, storage, bot_root, subs=subs)
 
     def create_filestorage_config(self):
         config = {}
@@ -297,6 +305,8 @@ class FileStorageConfiguration(BaseConfigurationData):
         amap[FileStore.POSTPROCESSORS_STORAGE] = self._postprocessors_storage
 
         amap[FileStore.USERGROUPS_STORAGE] = self._usergroups_storage
+
+        amap[FileStore.TRIGGERS_STORAGE] = self._triggers_storage
 
     def _create_storage_defaults(self, amap):
 
@@ -367,4 +377,7 @@ class FileStorageConfiguration(BaseConfigurationData):
                                                               format="text", encoding="utf-8", delete_on_start=False)
 
         amap[FileStore.USERGROUPS_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.txt", format="text",
+                                                          encoding="utf-8", delete_on_start=False)
+
+        amap[FileStore.TRIGGERS_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "triggers/triggers.txt", format="text",
                                                           encoding="utf-8", delete_on_start=False)

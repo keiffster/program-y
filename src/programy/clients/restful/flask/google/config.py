@@ -70,8 +70,7 @@ class GoogleConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        google = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, google, bot_root, subs: Substitutions = None):
         if google is not None:
             self._launch_text = configuration_file.get_option(google, "launch_text", missing_value=GoogleConfiguration.DEFAULT_LAUNCH_TEXT)
             self._launch_srai = configuration_file.get_option(google, "launch_srai", missing_value=None)
@@ -85,7 +84,7 @@ class GoogleConfiguration(RestConfiguration):
             self._error_text = configuration_file.get_option(google, "error_text", missing_value=GoogleConfiguration.DEFAULT_ERROR_TEXT)
             self._error_srai = configuration_file.get_option(google, "error_srai", missing_value=None)
 
-        super(GoogleConfiguration, self).load_configuration_section(configuration_file, google, bot_root, subs=subs)
+            super(GoogleConfiguration, self).load_configuration_section(configuration_file, google, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

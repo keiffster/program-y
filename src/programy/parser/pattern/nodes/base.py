@@ -512,7 +512,10 @@ class PatternNode(object):
     def dump(self, tabs, output_func=YLogger.debug, eol="", verbose=True):
 
         string = "{0}{1}{2}".format(tabs, self.to_string(verbose), eol)
-        output_func(self, string)
+        if output_func == print:
+            output_func(string)
+        else:
+            output_func(self, string)
 
         for priority in self._priority_words:
             priority.dump(tabs+"\t", output_func, eol, verbose)

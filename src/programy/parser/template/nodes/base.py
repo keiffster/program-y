@@ -40,7 +40,10 @@ class TemplateNode(object):
 
     def output_child(self, node, tabs, eol, output_func):
         for child in node.children:
-            output_func(self, "{0}{1}{2}".format(tabs, child.to_string(), eol))
+            if output_func == print:
+                output_func("{0}{1}{2}".format(tabs, child.to_string(), eol))
+            else:
+                output_func(self, "{0}{1}{2}".format(tabs, child.to_string(), eol))
             self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, client_context):

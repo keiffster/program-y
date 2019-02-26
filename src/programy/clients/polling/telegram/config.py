@@ -36,12 +36,11 @@ class TelegramConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        telegram = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, telegram, bot_root, subs: Substitutions = None):
         if telegram is not None:
             self._unknown_command = configuration_file.get_option(telegram, "unknown_command", missing_value="Unknown command", subs=subs)
             self._unknown_command_srai = configuration_file.get_option(telegram, "unknown_command_srai", missing_value=None, subs=subs)
-        super(TelegramConfiguration, self).load_configuration_section(configuration_file, telegram, bot_root, subs=subs)
+            super(TelegramConfiguration, self).load_configuration_section(configuration_file, telegram, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

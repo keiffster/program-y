@@ -54,4 +54,20 @@ For more information see [url]
 		</template>
 	</category>
 
+		<category>
+		<pattern>TEST1 # TEST2 #</pattern>
+		<template>answer 2</template>
+	</category>
+
+	<category>
+		<pattern>TEST1 #</pattern>
+		<template>answer 1</template>
+	</category>
+
+	<category>
+		<pattern>TEST3 #</pattern>
+		<template>answer 3</template>
+	</category>
+
+
 </aiml>

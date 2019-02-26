@@ -94,8 +94,7 @@ class AlexaConfiguration(RestConfiguration):
     def check_for_license_keys(self, license_keys):
         RestConfiguration.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        alexa = configuration_file.get_section(self.section_name)
+    def load_configuration_section(self, configuration_file, alexa, bot_root, subs: Substitutions = None):
         if alexa is not None:
             self._launch_text = configuration_file.get_option(alexa, "launch_text", missing_value=AlexaConfiguration.DEFAULT_LAUNCH_TEXT, subs=subs)
             self._launch_srai = configuration_file.get_option(alexa, "launch_srai", missing_value=None, subs=subs)
@@ -116,7 +115,7 @@ class AlexaConfiguration(RestConfiguration):
             leave_intents = configuration_file.get_option(alexa, "leave_intents",
                                                            missing_value=AlexaConfiguration.DEFAULT_LEAVE_INTENT, subs=subs)
             self._leave_intents = [x.strip() for x in leave_intents.split(",")]
-        super(AlexaConfiguration, self).load_configuration_section(configuration_file, alexa, bot_root, subs=subs)
+            super(AlexaConfiguration, self).load_configuration_section(configuration_file, alexa, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

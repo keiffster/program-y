@@ -104,3 +104,12 @@ class ClientContext(object):
             "brainid": self._brain.id if self._brain else None,
             "depth": self._question_depth
         }
+
+    def dump(self, output_func=print, verbose=False):
+        """
+        Helper Function for output tree structure
+        :param output_func: Function used to display output, typically print or logging function
+        :param verbose: Level of detail to display
+        :return: None
+        """
+        self.brain.aiml_parser.pattern_parser.dump(output_func=output_func, verbose=False)

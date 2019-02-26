@@ -3,6 +3,7 @@ import os
 
 from programytest.client import TestClient
 
+
 class ArrowTestClient(TestClient):
 
     def __init__(self):
@@ -69,3 +70,23 @@ class ArrowAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "WELL I WAS THERE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'ARROW IS I WAS.')
+
+    def test_test1_testx_issue(self):
+        response = self._client_context.bot.ask_question(self._client_context, "TEST1 TESTX")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Answer 1.')
+
+    def test_test1_test2_issue(self):
+        response = self._client_context.bot.ask_question(self._client_context, "TEST1 TEST2")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Answer 2.')
+
+    def test_test3_issue(self):
+        response = self._client_context.bot.ask_question(self._client_context, "TEST3")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Answer 3.')
+
+    def test_test1_issue(self):
+        response = self._client_context.bot.ask_question(self._client_context, "TEST1")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'Answer 1.')

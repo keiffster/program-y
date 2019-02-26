@@ -1,0 +1,3 @@
+TRIGGER1:programy.triggers.null.NullTrigger
+TRIGGER2:programy.triggers.null.NullTrigger
+TRIGGER3:programy.triggers.null.NullTrigger

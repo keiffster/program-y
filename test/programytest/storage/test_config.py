@@ -5,6 +5,7 @@ from programy.storage.config import StorageConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.storage.factory import StorageFactory
 
+
 class StorageConfigurationTests(unittest.TestCase):
 
     def test_with_data(self):
@@ -57,6 +58,8 @@ class StorageConfigurationTests(unittest.TestCase):
                     
                     usergroups: file
                 
+                    triggers: file
+                    
                 stores:
                     sqlite:
                         type:   sql
@@ -88,7 +91,7 @@ class StorageConfigurationTests(unittest.TestCase):
                         type:   file
                         config:
                             properties_storage: 
-                                dir: ./storage/properties
+                                file: ./storage/properties
                             conversation_storage: 
                                 dir: ./storage/conversations
             
@@ -172,6 +175,8 @@ class StorageConfigurationTests(unittest.TestCase):
         self.assertEqual(storage_config.entity_store[StorageFactory.POSTPROCESSORS], 'file')
 
         self.assertEqual(storage_config.entity_store[StorageFactory.USERGROUPS], 'file')
+
+        self.assertEqual(storage_config.entity_store[StorageFactory.TRIGGERS], 'file')
 
     def assert_storage_configurations(self, storage_config):
 

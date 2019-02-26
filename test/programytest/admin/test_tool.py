@@ -20,12 +20,6 @@ class AdminToolTests(unittest.TestCase):
     def setUp(self):
         AdminToolTests.text = ""
 
-    def test_invalid_commands(self):
-        tool = AdminTool()
-        tool.run([], AdminToolTests.display)
-        self.assertIsNotNone(AdminToolTests.text)
-        self.assertTrue(AdminToolTests.text.startswith("Invalid command []"))
-
     def test_unknown_primary_command(self):
         tool = AdminTool()
         tool.run(['unknown'], AdminToolTests.display)
@@ -37,9 +31,3 @@ class AdminToolTests(unittest.TestCase):
         tool.run(['download'], AdminToolTests.display)
         self.assertIsNotNone(AdminToolTests.text)
         self.assertTrue(AdminToolTests.text.startswith("Missing bot name from download command"))
-
-    def test_list_bots(self):
-        tool = AdminTool()
-        tool.run([], AdminToolTests.display)
-        self.assertIsNotNone(AdminToolTests.text)
-        self.assertTrue(AdminToolTests.text.startswith("Invalid command []"))

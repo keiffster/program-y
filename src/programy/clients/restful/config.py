@@ -61,11 +61,6 @@ class RestConfiguration(ClientConfigurationData):
     def check_for_license_keys(self, license_keys):
         ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-    def load_configuration(self, configuration_file, bot_root, subs: Substitutions = None):
-        rest = configuration_file.get_section(self.section_name)
-        if rest is not None:
-            self.load_configuration_section(configuration_file, rest, bot_root, subs)
-
     def load_configuration_section(self, configuration_file, rest, bot_root, subs: Substitutions = None):
         if rest is not None:
             self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0", subs=subs)
@@ -81,7 +76,7 @@ class RestConfiguration(ClientConfigurationData):
             self._ssl_key_file = configuration_file.get_option(rest, "ssl_key_file", subs=subs)
             if self._ssl_key_file is not None:
                 self._ssl_key_file = self.sub_bot_root(self._ssl_key_file, bot_root)
-        super(RestConfiguration, self).load_configuration_section(configuration_file, rest, bot_root, subs=subs)
+            super(RestConfiguration, self).load_configuration_section(configuration_file, rest, bot_root, subs=subs)
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:

@@ -64,6 +64,8 @@ class FileStore(Store):
 
     USERGROUPS_STORAGE = 'usergroups_storage'
 
+    TRIGGERS_STORAGE = 'triggers_storage'
+
     def __init__(self, storage_engine):
         self._storage_engine = storage_engine
 
