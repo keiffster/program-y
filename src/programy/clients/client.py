@@ -254,31 +254,32 @@ class BotClient(ResponseLogger):
 
     def load_scheduler(self):
         if self.configuration.client_configuration.scheduler is not None:
+            YLogger.debug(None, "Loading Scheduler")
             self._scheduler = ProgramyScheduler(self, self.configuration.client_configuration.scheduler)
             self._scheduler.start()
 
     def load_email(self):
-        self._email = EmailSender(self._configuration.client_configuration.email)
+        if self._configuration.client_configuration.email is not None:
+            YLogger.debug(None, "Loading Email Manager")
+            self._email = EmailSender(self._configuration.client_configuration.email)
 
     def load_trigger_manager(self):
-        self._trigger_mgr = TriggerManager.load_trigger_manager(self._configuration.client_configuration.triggers)
+        if self._configuration.client_configuration.triggers is not None:
+            YLogger.debug(None, "Loading Trigger Manager")
+            self._trigger_mgr = TriggerManager.load_trigger_manager(self._configuration.client_configuration.triggers)
 
     def load_storage(self):
         self._storage = StorageFactory()
         if self.configuration.client_configuration.storage is not None:
+            YLogger.debug(None, "Loading Storage Factory")
             self._storage.load_engines_from_config(self.configuration.client_configuration.storage)
         else:
             print("No storage defined!")
 
-    def create_client_context(self, userid):
-        client_context = ClientContext(self, userid)
-        client_context.bot = self._bot_factory.select_bot()
-        client_context.brain = client_context.bot._brain_factory.select_brain()
-        return client_context
-
     def load_renderer(self):
         try:
             if self.get_client_configuration().renderer is not None:
+                YLogger.debug(None, "Loading Renderer")
                 clazz = ClassLoader.instantiate_class(self.get_client_configuration().renderer.renderer)
                 self._renderer = clazz(self)
                 return
@@ -290,6 +291,12 @@ class BotClient(ResponseLogger):
 
     def get_default_renderer(self):
         return TextRenderer(self)
+
+    def create_client_context(self, userid):
+        client_context = ClientContext(self, userid)
+        client_context.bot = self._bot_factory.select_bot()
+        client_context.brain = client_context.bot._brain_factory.select_brain()
+        return client_context
 
     def startup(self):
         if self._trigger_mgr is not None:

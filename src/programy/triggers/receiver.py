@@ -14,11 +14,22 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+import sys
 
+from flask import Flask, request, json
 
-class SystemTriggers(object):
+if __name__ == '__main__':
 
-    SYSTEM_STARTUP = "SYSTEM_STARTUP"
-    SYSTEM_SHUTDOWN = "SYSTEM_SHUTDOWN"
-    CONVERSATION_START = "CONVERSATION_START"
-    QUESTION_ASKED = "QUESTION_ASKED"
+    print("Initiating Trigger Receiver...")
+    receiver = Flask(__name__)
+
+    @receiver.route('/api/rest/v1.0/trigger', methods=['POST'])
+    def trigger():
+        print("\nTrigger received...")
+        try:
+            print(request.json)
+        except Exception as e:
+            print(e)
+        return 'OK'
+
+    receiver.run(port=sys.argv[1])

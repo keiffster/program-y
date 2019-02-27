@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 import requests
+import json
 
 from programy.triggers.config import TriggerConfiguration
 from programy.context import ClientContext
@@ -29,7 +30,7 @@ class RestTriggerManager(TriggerManager):
         TriggerManager.__init__(self, config)
 
     def post_data(self, api_url_base, headers, payload):
-        return requests.post(api_url_base, headers=headers, data=payload)
+        return requests.post(api_url_base, headers=headers, json=payload)
 
     def trigger(self, event: str, client_context: ClientContext = None, additional: {} = None) -> bool:
 

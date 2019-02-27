@@ -54,7 +54,7 @@ class Substitutions(object):
                             self.add_substitute(namevalue[0], ":".join(namevalue[1:]))
 
             except Exception as e:
-                YLogger.exception(None, "Failed to load substitutions file", e)
+                YLogger.error(None, "Failed to load substitutions file")
 
     def replace(self, string: str) -> str:
         splits = Substitutions.PATTERN.split(string)

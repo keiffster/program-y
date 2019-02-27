@@ -186,7 +186,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.bot.conversation(self._client_context).set_property('name1', "value1")
+        self._client_context.bot.get_conversation(self._client_context).set_property('name1', "value1")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -205,7 +205,7 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.bot.conversation(self._client_context).set_property('name1', "value2")
+        self._client_context.bot.get_conversation(self._client_context).set_property('name1', "value2")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -240,8 +240,8 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         question = Question.create_from_text(self._client_context, "Hello")
-        self._client_context.bot.conversation(self._client_context).record_dialog(question)
-        self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value1")
+        self._client_context.bot.get_conversation(self._client_context).record_dialog(question)
+        self._client_context.bot.get_conversation(self._client_context).current_question().set_property("var1", "value1")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -261,8 +261,8 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         question = Question.create_from_text(self._client_context, "Hello")
-        self._client_context.bot.conversation(self._client_context).record_dialog(question)
-        self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value2")
+        self._client_context.bot.get_conversation(self._client_context).record_dialog(question)
+        self._client_context.bot.get_conversation(self._client_context).current_question().set_property("var1", "value2")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -357,11 +357,11 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.bot.conversation(self._client_context).set_property('cond1', "value2")
+        self._client_context.bot.get_conversation(self._client_context).set_property('cond1', "value2")
 
         question = Question.create_from_text(self._client_context, "Hello")
-        self._client_context.bot.conversation(self._client_context).record_dialog(question)
-        self._client_context.bot.conversation(self._client_context).current_question().set_property("cond1", "value2")
+        self._client_context.bot.get_conversation(self._client_context).record_dialog(question)
+        self._client_context.bot.get_conversation(self._client_context).current_question().set_property("cond1", "value2")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -415,8 +415,8 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         self.assertEqual(len(root.children), 1)
 
         question = Question.create_from_text(self._client_context, "Hello")
-        self._client_context.bot.conversation(self._client_context).record_dialog(question)
-        self._client_context.bot.conversation(self._client_context).current_question().set_property("var1", "value2")
+        self._client_context.bot.get_conversation(self._client_context).record_dialog(question)
+        self._client_context.bot.get_conversation(self._client_context).current_question().set_property("var1", "value2")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
@@ -531,14 +531,14 @@ class TemplateConditionNodeTests(ParserTestsBaseClass):
         root.append(node)
         self.assertEqual(len(root.children), 1)
 
-        self._client_context.bot.conversation(self._client_context).set_property('name1', "value1")
+        self._client_context.bot.get_conversation(self._client_context).set_property('name1', "value1")
         self._client_context.brain.properties.add_property('name3', "value3")
 
         result = root.resolve(self._client_context)
         self.assertIsNotNone(result)
         self.assertEqual("Word1", result)
 
-        self._client_context.bot.conversation(self._client_context).set_property('name1', "value2")
+        self._client_context.bot.get_conversation(self._client_context).set_property('name1', "value2")
 
         self._client_context.brain.properties.add_property('name3', "value3")
         result = root.resolve(self._client_context)

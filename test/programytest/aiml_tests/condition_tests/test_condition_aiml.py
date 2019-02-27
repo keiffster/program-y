@@ -3,6 +3,7 @@ import os
 
 from programytest.client import TestClient
 
+
 class ConditionTestClient(TestClient):
 
     def __init__(self):

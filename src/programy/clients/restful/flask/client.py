@@ -58,6 +58,8 @@ class FlaskRestBotClient(RestBotClient):
         print("%s Client running on %s:%s" % (self.id, self.configuration.client_configuration.host,
                                               self.configuration.client_configuration.port))
 
+        self.startup()
+
         if self.configuration.client_configuration.debug is True:
             print("%s Client running in debug mode" % self.id)
 
@@ -76,6 +78,8 @@ class FlaskRestBotClient(RestBotClient):
             flask.run(host=self.configuration.client_configuration.host,
                       port=self.configuration.client_configuration.port,
                       debug=self.configuration.client_configuration.debug)
+
+        self.shutdown()
 
     def dump_request(self, request):
         YLogger.debug(self, str(request))

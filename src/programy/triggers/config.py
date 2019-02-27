@@ -34,7 +34,7 @@ class TriggerConfiguration(BaseContainerConfigurationData):
         return self._manager
 
     def additionals_to_add(self):
-        return ["host", "port"]
+        return ["url", "method", "token"]
 
     def load_config_section(self, configuration_file, section, bot_root, subs: Substitutions = None):
         triggers = configuration_file.get_section(self._section_name, section)

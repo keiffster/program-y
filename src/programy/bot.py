@@ -27,6 +27,7 @@ from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner
 from programy.translate.base import BaseTranslator
 from programy.sentiment.base import BaseSentimentAnalyser
+from programy.triggers.system import SystemTriggers
 
 
 class BrainSelector(object):
@@ -270,9 +271,6 @@ class Bot(object):
 
         return self._conversation_mgr.has_conversation(client_context)
 
-    def conversation(self, client_context):
-        return self.get_conversation(client_context)
-
     def get_conversation(self, client_context):
 
         assert (self._conversation_mgr is not None)
@@ -406,6 +404,9 @@ class Bot(object):
         question = self.get_question(client_context, pre_processed, srai)
 
         conversation = self.get_conversation(client_context)
+        if len(conversation.questions) == 0:
+            if self.client.trigger_manager is not None:
+                self.client.trigger_manager.trigger(SystemTriggers.CONVERSATION_START, client_context)
 
         assert (conversation is not None)
 
@@ -421,6 +422,9 @@ class Bot(object):
         self.save_conversation(client_context)
 
         conversation.save_sentiment()
+
+        if self.client.trigger_manager is not None and srai is False:
+            self.client.trigger_manager.trigger(SystemTriggers.QUESTION_ASKED, client_context)
 
         return self.combine_answers(answers, srai)
 

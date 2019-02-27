@@ -40,6 +40,8 @@ class PollingBotClient(BotClient):
 
     def run(self):
         try:
+            self.startup()
+
             if self.connect():
                 self.display_connected_message()
 
@@ -57,3 +59,5 @@ class PollingBotClient(BotClient):
 
         finally:
             self.disconnect()
+
+        self.shutdown()

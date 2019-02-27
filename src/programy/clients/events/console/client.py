@@ -20,6 +20,7 @@ from programy.utils.logging.ylogger import YLogger
 from programy.clients.events.client import EventBotClient
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class ConsoleBotClient(EventBotClient):
 
     def __init__(self, argument_parser=None):

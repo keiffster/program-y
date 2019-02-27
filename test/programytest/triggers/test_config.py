@@ -59,8 +59,9 @@ class TriggersConfigurationTests(unittest.TestCase):
         console:
             triggers:
                 manager: programy.triggers.rest.RestTriggerManager
-                host: localhost
-                port: 8080
+                url: http://localhost:8989/api/v1.0/trigger
+                method: POST
+                token: 123BC4F3D
         """, ConsoleConfiguration(), ".")
 
         console_config = yaml.get_section("console")
@@ -69,5 +70,6 @@ class TriggersConfigurationTests(unittest.TestCase):
         triggers_config.load_config_section(yaml, console_config, ".")
 
         self.assertEquals("programy.triggers.rest.RestTriggerManager", triggers_config.manager)
-        self.assertEquals("localhost", triggers_config.value("host"))
-        self.assertEquals(8080, triggers_config.value("port"))
+        self.assertEquals(triggers_config.value("url"), "http://localhost:8989/api/v1.0/trigger")
+        self.assertEquals(triggers_config.value("method"), "POST")
+        self.assertEquals(triggers_config.value("token"), "123BC4F3D")

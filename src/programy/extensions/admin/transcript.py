@@ -31,7 +31,7 @@ class TranscriptAdminExtension(Extension):
         transcript = ""
 
         if client_context.bot.has_conversation(client_context):
-            conversation = client_context.bot.conversation(client_context)
+            conversation = client_context.bot.get_conversation(client_context)
 
             transcript += "Questions:<br /><ul>"
             for question in conversation.questions:

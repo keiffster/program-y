@@ -18,6 +18,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.client import BotClient
 
+
 class EventBotClient(BotClient):
 
     def __init__(self, id, argument_parser=None):

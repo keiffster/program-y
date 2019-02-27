@@ -48,7 +48,7 @@ class PropertiesAdminExtension(Extension):
 
         elif splits[0] == "USER":
             if client_context.bot.has_conversation(client_context):
-                conversation = client_context.bot.conversation(client_context)
+                conversation = client_context.bot.get_conversation(client_context)
 
                 properties += "Properties:<br /><ul>"
                 for name, value in conversation.properties.items():
