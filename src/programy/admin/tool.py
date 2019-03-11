@@ -28,6 +28,7 @@ bots = {
     'rosie-y': "https://github.com/keiffster/rosie-y/archive/master.zip",
     'talk-y': "https://github.com/keiffster/talk-y/archive/master.zip",
     'y-bot': "https://github.com/keiffster/y-bot/archive/master.zip",
+    'servusai-y': "https://github.com/keiffster/servusai-y/archive/master.zip",
     'template-y': "https://github.com/keiffster/template-y/archive/master.zip",
     'traintimes-y': "https://github.com/keiffster/traintimes-y/archive/master.zip"
 }
