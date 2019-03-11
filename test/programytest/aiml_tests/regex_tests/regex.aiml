@@ -22,7 +22,7 @@ For more information see [url]
 	<category>
 		<pattern>I AM <regex>^LEGION$</regex></pattern>
 		<template>
-		    Hello Legion
+		    Hello <sentence><star /></sentence>
 		</template>
 	</category>
 

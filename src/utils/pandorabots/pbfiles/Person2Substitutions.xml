@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <item name=" WITH YOU " value=" with me " />
+  <item name=" WITH ME " value=" with you " />
+  <item name=" TO YOU " value=" to me " />
+  <item name=" TO ME " value=" to you " />
+  <item name=" OF YOU " value=" of me " />
+  <item name=" OF ME " value=" of you " />
+  <item name=" FOR YOU " value=" for me " />
+  <item name=" FOR ME " value=" for you " />
+  <item name=" GIVE YOU " value=" give me " />
+  <item name=" GIVE ME " value=" give you " />
+  <item name=" GIVING YOU " value=" giving me " />
+  <item name=" GIVING ME " value=" giving you " />
+  <item name=" GAVE YOU " value=" gave me " />
+  <item name=" GAVE ME " value=" gave you " />
+  <item name=" MAKE YOU " value=" make me " />
+  <item name=" MAKE ME " value=" make you " />
+  <item name=" MADE YOU " value=" made me " />
+  <item name=" MADE ME " value=" made you " />
+  <item name=" TAKE YOU " value=" take me " />
+  <item name=" TAKE ME " value=" take you " />
+  <item name=" SAVE YOU " value=" save me " />
+  <item name=" SAVE ME " value=" save you " />
+  <item name=" TELL YOU " value=" tell me " />
+  <item name=" TELL ME " value=" tell you " />
+  <item name=" TELLING YOU " value=" telling me " />
+  <item name=" TELLING ME " value=" telling you " />
+  <item name=" TOLD YOU " value=" told me " />
+  <item name=" TOLD ME " value=" told you " />
+  <item name=" ARE YOU " value=" am I " />
+  <item name=" AM I " value=" are you " />
+  <item name=" YOU ARE " value=" I am " />
+  <item name=" I AM " value=" you are " />
+  <item name=" YOU " value=" me " />
+  <item name=" ME " value=" you " />
+  <item name=" YOUR " value=" my " />
+  <item name=" MY " value=" your " />
+  <item name=" YOURS " value=" mine " />
+  <item name=" MINE " value=" yours " />
+  <item name=" YOURSELF " value=" myself " />
+  <item name=" MYSELF " value=" yourself " />
+  <item name=" I WAS " value=" you were " />
+  <item name=" YOU WERE " value=" I was " />
+  <item name=" I AM " value=" you are " />
+  <item name=" YOU ARE " value=" I am " />
+  <item name=" I " value=" you " />
+  <item name=" ME " value=" you " />
+  <item name=" MY " value=" your " />
+  <item name=" YOUR " value=" my " />
+</root>

@@ -1,0 +1,273 @@
+=REPLY:
+NAME=RESET:
+:-):smile
+:):smile
+,):smile
+;):smile
+;-):smile
+":
+/:
+>:gt
+<:lt
+(:
+):
+`:
+,:
+::
+&:
+-:-
+=:
+L A:la
+O K:ok
+P S:ps
+OHH:oh
+HEHE:he
+HAHA:ha
+HELLP:help
+BECAUS:because
+BELEIVE:believe
+BECASUE:because
+BECUASE:because
+BECOUSE:because
+REDUCTIONALISM:reductionism
+ITS A:it is a
+NOI:yes I
+FAV:favorite
+YESI:yes I
+YESIT:yes it
+IAM:I am
+WELLI:well I
+WELLIT:well it
+AMFINE:am fine
+AMAN:am an
+AMON:am on
+AMNOT:am not
+REALY:really
+IAMUSING:I am using
+AMLEAVING:am leaving
+YEAH:yes
+YEP:yes
+YHA:yes
+YOU:you
+WANNA:want to
+YOU'D:you would
+YOU'RE:you are
+YOU RE:you are
+YOU'VE:you have
+YOU VE:you have
+YOU'LL:you will
+YOU LL:you will
+YOURE:you are
+DIDNT:did not
+DIDN T:did not
+DID'NT:did not
+COULDN'T:could not
+COULDN T:could not
+DIDN'T:did not
+AIN'T:is not
+AIN T:is not
+ISN'T:is not
+ISN T:is not
+ISNT:is not
+IT'S:it is
+IT S:it is
+ARE'NT:are not
+ARENT:are not
+AREN'T:are not
+AREN T:are not
+ARN T:are not
+WHERE'S:where is
+WHERE S:where is
+HAVEN'T:have not
+HAVENT:have not
+HASN'T:has not
+HASN T:has not
+WEREN T:were not
+WEREN'T:were not
+WERENT:were not
+CAN'T:can not
+CAN T:can not
+CANT:can not
+CANNOT:can not
+WHOS:who is
+HOW'S:how is
+HOW S:how is
+HOW'D:how did
+HOW D:how did
+HOWS:how is
+WHATS:what is
+NAME'S:name is
+WHO'S:who is
+WHO S:who is
+WHAT'S:what is
+WHAT S:what is
+THAT'S:that is
+THERE'S:there is
+THERE S:there is
+THERES:there is
+THATS:that is
+DOESN'T:does not
+DOESN T:does not
+DOESNT:does not
+DON'T:do not
+DON T:do not
+DONT:do not
+DO NT:do not
+DO'NT:do not
+WON'T:will not
+WONT:will not
+WON T:will not
+LET'S:let us
+THEY'RE:they are
+THER RE:they are
+WASN'T:was not
+WASN T:was not
+WASNT:was not
+HADN'T:had not
+HADN T:had not
+WOULDN'T:would not
+WOULDN T:would not
+WOULDNT:would not
+SHOULDN'T:should not
+SHOULDNT:should not
+FAVOURITE:favorite
+COLOUR:color
+WE'LL:we will
+WE LL:we will
+HE'LL:he will
+HE LL:he will
+I'LL:I will
+IVE:I have
+I'VE:I have
+I VE:I have
+I'D:I would
+I'M:I am
+I M:I am
+WE'VE:we have
+WE'RE:we are
+SHE'S:she is
+SHES:she is
+SHE'D:she would
+SHE D:she would
+SHED:she would
+HE'D:he would
+HE D:he would
+HED:he would
+HE'S:he is
+WE VE:we have
+WE RE:we are
+SHE S:she is
+HE S:he is
+IAMA:I am a
+IAMASKING:I am asking
+IAMDOING:I am doing
+IAMFROM:I am from
+IAMIN:I am in
+IAMOK:I am ok
+IAMSORRY:I am sorry
+IAMTALKING:I am talking
+IAMTIRED:I am tired
+DOWN LOAD:download
+REMEBER:remember
+WAHT:what
+TOLLERVY:Tollervey
+YOU R:you are
+U:you
+UR:your
+RU:are you
+R U:are you
+{:beginscript
+}:endscript
+\:
+:0:0
+: 0:0
+:1:1
+: 1:1
+:2:2
+: 2:2
+:3:3
+: 3:3
+:4:4
+: 4:4
+:5:5
+: 5:5
+.0:point 0
+.1:point 1
+.2:point 3
+.4:point 4
+.5:point 5
+.6:point 6
+.7:point 7
+.8:point 8
+.9:point 9
+DR.:Dr
+DR .:Dr
+MR.:Mr
+MRS.:Mrs
+ST.:St
+WWW.:www dot
+BOTSPOT.:botspot dot
+AMUSED.COM:amused dot com
+WHATIS.:whatis dot
+.COM:dot com
+.NET:dot net
+.ORG:dot org
+.ORG.UK:dot org dot uk
+.CO.UK:dot co dot uk
+.EDU:dot edu
+.UK:dot uk
+.JP:dot jp
+.AU:dot au
+.CO:dot co
+.AC:dot ac
+O.K.:ok
+O. K.:ok
+L.L.:l l
+P.S.:ps
+U S A:USA
+U. S. A.:USA
+U.S.A.:USA
+U.S.:USA
+PH.D:PhD
+A.:a
+B.:b
+C.:c
+D.:d
+E.:e
+F.:f
+G.:g
+H.:h
+I.:i
+J.:j
+K.:k
+L.:l
+M.:m
+N.:n
+P.:p
+O.:o
+Q.:q
+R.:r
+S.:s
+T.:t
+U.:u
+V.:v
+X.:x
+Y.:y
+W.:w
+Z.:z
+.JAR:jar
+.ZIP:zip
+, BUT:.
+, AND:.
+,BUT:.
+,AND:.
+BUT:.
+AND:.
+, I:. I
+, YOU:. you
+,I:. I
+,YOU:. you
+, WHAT:. what
+,WHAT:. what
+, DO:. do
+,DO:. do

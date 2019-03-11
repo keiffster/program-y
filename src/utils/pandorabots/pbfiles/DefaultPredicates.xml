@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <item name="name" value="un-named user" />
+  <item name="he" value="somebody" />
+  <item name="she" value="somebody" />
+  <item name="it" value="something" />
+  <item name="they" value="something" />
+  <item name="age" value="unknown" />
+  <item name="birthday" value="unknown" />
+  <item name="boyfriend" value="unknown" />
+  <item name="brother" value="unknown" />
+  <item name="cat" value="unknown" />
+  <item name="does" value="unknown" />
+  <item name="dog" value="unknown" />
+  <item name="email" value="unknown" />
+  <item name="father" value="unknown" />
+  <item name="favcolor" value="unknown" />
+  <item name="favmovie" value="unknown" />
+  <item name="friend" value="unknown" />
+  <item name="fullname" value="unknown" />
+  <item name="gender" value="unknown" />
+  <item name="girlfriend" value="unknown" />
+  <item name="has" value="unknown" />
+  <item name="heard" value="unknown" />
+  <item name="husband" value="unknown" />
+  <item name="is" value="unknown" />
+  <item name="job" value="unknown" />
+  <item name="lastname" value="unknown" />
+  <item name="like" value="unknown" />
+  <item name="location" value="unknown" />
+  <item name="looklike" value="unknown" />
+  <item name="memory" value="unknown" />
+  <item name="meta" value="unknown" />
+  <item name="nickname" value="unknown" />
+  <item name="middlename" value="unknown" />
+  <item name="mother" value="unknown" />
+  <item name="password" value="unknown" />
+  <item name="personality" value="unknown" />
+  <item name="phone" value="unknown" />
+  <item name="sign" value="unknown" />
+  <item name="sister" value="unknown" />
+  <item name="them" value="unknown" />
+  <item name="thought" value="unknown" />
+  <item name="want" value="unknown" />
+  <item name="we" value="unknown" />
+</root>

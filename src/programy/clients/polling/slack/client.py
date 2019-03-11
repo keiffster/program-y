@@ -18,7 +18,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 # https://www.fullstackpython.com/blog/build-first-slack-bot-python.html
 
 from programy.utils.logging.ylogger import YLogger
-import time
 import re
 
 from slackclient import SlackClient

@@ -22,7 +22,7 @@ For more information see [url]
 	<category>
 		<pattern>I AM <regex template="anyinteger" /> YEARS OLD</pattern>
 		<template>
-		    Thats Great!
+		    Thats Great! You are <star />
 		</template>
 	</category>
 

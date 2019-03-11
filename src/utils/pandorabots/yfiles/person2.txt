@@ -1,0 +1,48 @@
+WITH YOU:with me
+WITH ME:with you
+TO YOU:to me
+TO ME:to you
+OF YOU:of me
+OF ME:of you
+FOR YOU:for me
+FOR ME:for you
+GIVE YOU:give me
+GIVE ME:give you
+GIVING YOU:giving me
+GIVING ME:giving you
+GAVE YOU:gave me
+GAVE ME:gave you
+MAKE YOU:make me
+MAKE ME:make you
+MADE YOU:made me
+MADE ME:made you
+TAKE YOU:take me
+TAKE ME:take you
+SAVE YOU:save me
+SAVE ME:save you
+TELL YOU:tell me
+TELL ME:tell you
+TELLING YOU:telling me
+TELLING ME:telling you
+TOLD YOU:told me
+TOLD ME:told you
+ARE YOU:am I
+AM I:are you
+YOU ARE:I am
+I AM:you are
+YOU:me
+ME:you
+YOUR:my
+MY:your
+YOURS:mine
+MINE:yours
+YOURSELF:myself
+MYSELF:yourself
+I WAS:you were
+YOU WERE:I was
+I AM:you are
+YOU ARE:I am
+I:you
+ME:you
+MY:your
+YOUR:my

@@ -1,0 +1,15 @@
+HE:she
+SHE:he
+TO HIM:to her
+FOR HIM:for her
+WITH HIM:with her
+ON HIM:on her
+IN HIM:in her
+TO HER:to him
+FOR HER:for him
+WITH HER:with him
+ON HER:on him
+IN HER:in him
+HIS:her
+HER:his
+HIM:her

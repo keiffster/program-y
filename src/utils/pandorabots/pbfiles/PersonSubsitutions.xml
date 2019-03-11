@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <item name=" I WAS " value=" he or she was " />
+  <item name=" I AM " value=" he or she is " />
+  <item name=" I " value=" he or she " />
+  <item name=" HE WAS " value=" I was " />
+  <item name=" SHE WAS " value=" I was " />
+  <item name=" ME " value=" him or her " />
+  <item name=" MY " value=" his or her " />
+  <item name=" MYSELF " value=" him or herself " />
+</root>
