@@ -83,11 +83,14 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
 
         if self._topic is not None:
             match = self._topic.consume(client_context, context, words, word_no, Match.TOPIC, depth+1)
+
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
                 return match
+
             if words.word(word_no) == PatternNode.TOPIC:
-                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                YLogger.debug(client_context, "%s Looking for a %s, none given, no match found!", tabs, PatternNode.TOPIC)
+                context.pop_matches(matches_added)
                 return None
 
         word = words.word(word_no)
@@ -110,6 +113,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                         return match
 
                     if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
+                        context.pop_matches(matches_added)
                         return None
 
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
@@ -123,6 +127,7 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word = words.word(word_no)
 
             if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
+                context.pop_matches(matches_added)
                 return None
 
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
@@ -139,12 +144,14 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
             word = words.word(word_no)
 
         YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)
+
         while word_no < words.num_words() - 1:
             match = super(PatternZeroOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
             if match is not None:
                 return match
 
             if self.invalid_topic_or_that(tabs, client_context, word, context, matches_added) is True:
+                context.pop_matches(matches_added)
                 return None
 
             YLogger.debug(client_context, "%sWildcard %s matched %s", tabs, self._wildcard, word)
@@ -161,5 +168,6 @@ class PatternZeroOrMoreWildCardNode(PatternWildCardNode):
                                                                        depth + 1)
         if match is not None:
             return match
+
         context.pop_matches(matches_added)
         return None
