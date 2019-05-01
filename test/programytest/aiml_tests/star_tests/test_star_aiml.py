@@ -48,6 +48,11 @@ class StarAIMLTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual(response, 'YOU SAID WELL AND THERE.')
 
+    def test_multi_star_with_break(self):
+        response = self._client_context.bot.ask_question(self._client_context, "WELL HI2 THERE FRIEND")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'YOU SAID WELL AND THERE THEN FRIEND.')
+
     def test_multi_star_mulit_words(self):
         response = self._client_context.bot.ask_question(self._client_context, "WELL THEN HI THERE MATE")
         self.assertIsNotNone(response)
@@ -72,6 +77,11 @@ class StarAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "MULTI STARS ONE TWO THREE FOUR")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'FOUR THREE TWO ONE.')
+
+    def test_stars_two_one(self):
+        response = self._client_context.bot.ask_question(self._client_context, "STARS FIRST ONE TWO SECOND THREE")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, '3= THREE 2= TWO 1= ONE.')
 
     def test_star_with_set(self):
         response = self._client_context.bot.ask_question(self._client_context, "STAR WITH SET 666")

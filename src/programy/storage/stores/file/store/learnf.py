@@ -49,7 +49,7 @@ class FileLearnfStore(FileStore, LearnfStore):
                     file.close()
 
             except Exception as excep:
-                YLogger.exception(None, "Error Writing learnf to %s", excep, learnf_path)
+                YLogger.exception_nostack(None, "Error Writing learnf to %s", excep, learnf_path)
 
     @staticmethod
     def write_node_to_learnf_file(client_context, node, learnf_path):
@@ -119,4 +119,4 @@ class FileLearnfStore(FileStore, LearnfStore):
             self.write_node_to_learnf_file(client_context, xml_node, learnf_fullpath)
 
         except Exception as exc:
-            YLogger.exception(client_context, "Failed to save learnf", exc)
+            YLogger.exception_nostack(client_context, "Failed to save learnf", exc)

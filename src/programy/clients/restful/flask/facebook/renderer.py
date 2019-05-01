@@ -21,6 +21,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.clients.render.renderer import RichMediaRenderer
 
+
 class FacebookRenderer(RichMediaRenderer):
 
     def __init__(self, client):
@@ -30,13 +31,12 @@ class FacebookRenderer(RichMediaRenderer):
         print(title, json.dumps(payload, indent=indent, sort_keys=sort_keys))
 
     def send_payload(self, payload):
-        self.print_payload("Payload:", payload)
         result = self._client.facebook_bot.send_raw(payload)
-        self.print_payload("Result:", result)
         return result
 
     def handle_text(self, client_context, text):
-        print("Handling text...")
+        YLogger.debug(client_context, "Handling text...")
+
         payload = {
             'recipient': {
                 'id': client_context.userid
@@ -48,7 +48,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_url_button(self, client_context, button):
-        print("Handling url...")
+        YLogger.debug(client_context, "Handling url...")
+
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -97,12 +98,14 @@ class FacebookRenderer(RichMediaRenderer):
         }
 
     def handle_postback_button(self, client_context, button):
-        print("Handling postback button...")
+        YLogger.debug(client_context, "Handling postback button...")
+
         payload = self.create_postback_button(client_context.userid, button['text'], button['postback'])
         return self.send_payload(payload)
 
     def handle_link(self, client_context, link):
-        print("Handling link...")
+        YLogger.debug(client_context, "Handling link...")
+
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -127,7 +130,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_image(self, client_context, image):
-        print("Handling image...")
+        YLogger.debug(client_context, "Handling image...")
+
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -150,7 +154,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_video(self, client_context, video):
-        print("Handling video...")
+        YLogger.debug(client_context, "Handling video...")
+
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -197,10 +202,10 @@ class FacebookRenderer(RichMediaRenderer):
         return payload
 
     def handle_card(self, client_context, card):
-        print("Handling card...")
+        YLogger.debug(client_context, "Handling card...")
 
         if len(card['buttons']) > 3:
-            print("Warning more buttons than facebook allows for a card")
+            YLogger.warning(client_context,"More buttons than facebook allows for a card")
 
         payload = {
             'recipient': {
@@ -221,9 +226,10 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_carousel(self, client_context, carousel):
-        print("Handling carousel...")
+        YLogger.debug(client_context, "Handling carousel...")
+
         if len(carousel['cards']) > 10:
-            print("Warning more cards than facebook allows for a carousel")
+            YLogger.warning(client_context, "More cards than facebook allows for a carousel")
 
         payload = {
             'recipient': {
@@ -268,7 +274,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_reply(self, client_context, reply):
-        print("Handling reply...")
+        YLogger.debug(client_context, "Handling reply...")
+
         if reply['postback'] is None:
             payload = self.create_postback_button(client_context.userid, reply['text'], reply['text'])
         else:
@@ -276,7 +283,7 @@ class FacebookRenderer(RichMediaRenderer):
         self.send_payload(payload)
 
     def handle_delay(self, client_context, delay):
-        print("Handling delay...")
+        YLogger.debug(client_context, "Handling delay...")
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -294,7 +301,7 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_split(self, client_context, split):
-        print("Handling split...")
+        YLogger.debug(client_context, "Handling split...")
 
     def convert_to_element(self, item):
         if item["type"] == 'card':
@@ -302,7 +309,7 @@ class FacebookRenderer(RichMediaRenderer):
         return None
 
     def handle_list(self, client_context, list):
-        print("Handling list...")
+        YLogger.debug(client_context, "Handling list...")
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -328,7 +335,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_ordered_list(self, client_context, list):
-        print("Handling ordered...")
+        YLogger.debug(client_context, "Handling ordered...")
+
         payload = {
             "recipient": {
                 "id": client_context.userid
@@ -354,7 +362,8 @@ class FacebookRenderer(RichMediaRenderer):
         return self.send_payload(payload)
 
     def handle_location(self, client_context, location):
-        print("Handling location...")
+        YLogger.debug(client_context, "Handling location...")
+
         payload = {
             'recipient': {
                 'id': client_context.userid

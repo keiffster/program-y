@@ -81,11 +81,16 @@ class XMLConfigurationFile(BaseConfigurationFile):
     def get_option(self, section, option_name, missing_value=None, subs=None):
         child = section.find(option_name)
         if child is not None:
-            if not child._children:
-                value = self._replace_subs(subs, child.text)
-                return self._infer_type_from_string(value)
+                has_children = False
+                for x in child:
+                    has_children = True
+                    break
 
-            return child
+                if has_children is False:
+                    value = self._replace_subs(subs, child.text)
+                    return self._infer_type_from_string(value)
+
+                return child
 
         if missing_value is not None:
             YLogger.warning(self, "Missing value for [%s] in config, return default value %s", option_name,
@@ -116,34 +121,33 @@ class XMLConfigurationFile(BaseConfigurationFile):
             value = self._replace_subs(subs, child.text)
             return self.convert_to_int(value)
 
-        YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name,
-                        missing_value)
+        if missing_value is not None:
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+        else:
+            YLogger.warning(self, "Missing value for [%s] in config, return default value None", option_name)
+
         return missing_value
 
     def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):
-        if missing_value is None:
-            missing_value = []
 
-        value = self.get_option(section, option_name, missing_value, subs=subs)
+        values = []
+        for child in section:
+            if child.tag == option_name:
+                values.append(self._replace_subs(subs, child.text))
 
-        if isinstance(value, list):
-            if not value:
-                return self._replace_subs(subs, value)
-
-        if isinstance(value, str):
-            values = [self._replace_subs(subs, value)]
-        
-        else:
-            values = []
-            for child in value._children:
-                if child.tag == "bot":
-                    values.append(self._replace_subs(subs, child.text))
+        if len(values) == 0:
+            values = [self._replace_subs(subs, section.text)]
 
         multis = []
         for value in values:
             multis.append(value)
 
-        return multis
+        if multis:
+            return multis
+
+        if missing_value is None:
+            missing_value = []
+        return missing_value
 
     def get_multi_file_option(self, section, option_name, bot_root, missing_value=None, subs: Substitutions = None):
         if missing_value is None:

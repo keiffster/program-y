@@ -1,14 +1,13 @@
-import unittest
 import unittest.mock
 
 from programy.brain import Brain
-from programy.bot import DefaultBrainSelector
 from programy.bot import BrainFactory
 from programy.bot import Bot
 from programy.config.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.context import ClientContext
+from programy.config.bot.spelling import BotSpellingConfiguration
 
 from programytest.client import TestClient
 
@@ -30,21 +29,6 @@ class MockBot(Bot):
 
     def loads_brains(self, bot):
         self._brains["mock"] = MockBrain(self, self.configuration.configurations[0])
-
-
-class DefaultBrainSelectorTests(unittest.TestCase):
-
-    def test_init(self):
-        configuration = unittest.mock.Mock()
-
-        selector = DefaultBrainSelector(configuration)
-        self.assertIsNotNone(selector)
-
-        brain1 = unittest.mock.Mock()
-        brain2 = unittest.mock.Mock()
-
-        brains = {"one": brain1, "two": brain2}
-        self.assertEqual(brain1, selector.select_brain(brains))
 
 
 class BrainFactoryTests(unittest.TestCase):
@@ -77,6 +61,7 @@ class BotTests(unittest.TestCase):
 
         self.assertIsNotNone(bot.brain)
 
+        self.assertEqual("bot", bot.ylogger_type())
         self.assertIsNone(bot.spell_checker)
         self.assertIsNotNone(bot.sentence_splitter)
         self.assertIsNotNone(bot.sentence_joiner)
@@ -115,19 +100,224 @@ class BotTests(unittest.TestCase):
         self.assertTrue(bot.override_properties)
         self.assertIsNotNone(bot.get_version_string)
 
+    def test_bot_old_version(self):
+        bot_config = BotConfiguration()
+
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self._client_context.brain.properties.add_property("name", 'bot'),
+        self._client_context.brain.properties.add_property("version", "1.9.3"),
+        self._client_context.brain.properties.add_property("birthdate", "1st January 2019")
+
+        version = bot.get_version_string(self._client_context)
+
+        self.assertIsNotNone(version)
+        self.assertEqual("bot, v1.9.3, initiated 1st January 2019", version)
+
+    def test_bot_new_version(self):
+        bot_config = BotConfiguration()
+
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self._client_context.brain.properties.add_property("name", 'bot'),
+        self._client_context.brain.properties.add_property("app_version", "1.9.3"),
+        self._client_context.brain.properties.add_property("grammar_version", "37"),
+        self._client_context.brain.properties.add_property("birthdate", "1st January 2019")
+
+        version = bot.get_version_string(self._client_context)
+
+        self.assertIsNotNone(version)
+        self.assertEqual("bot, App: v1.9.3 Grammar v37, initiated 1st January 2019", version)
+
+    def test_bot_init_no_spellchecker_configuration(self):
+        bot_config = BotConfiguration()
+        bot_config._spelling = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.spell_checker)
+
     def test_bot_init_no_spellchecker(self):
         bot_config = BotConfiguration()
         bot_config.spelling._classname = None
         client = TestClient()
-        bot = Bot(BotConfiguration(), client)
+        bot = Bot(bot_config, client)
+
         self.assertIsNotNone(bot)
+        self.assertIsNone(bot.spell_checker)
 
     def test_bot_init_with_invalid_spellchecker(self):
         bot_config = BotConfiguration()
         bot_config.spelling._classname = "programy.spelling.checker.SpellingCheckerX"
         client = TestClient()
-        bot = Bot(BotConfiguration(), client)
+        bot = Bot(bot_config, client)
+
         self.assertIsNotNone(bot)
+        self.assertIsNone(bot.spell_checker)
+
+    def test_bot_init_with_valid_spellchecker(self):
+        bot_config = BotConfiguration()
+        bot_config.spelling._classname = "programy.spelling.textblob_spelling.TextBlobSpellingChecker"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNotNone(bot.spell_checker)
+
+    def test_bot_init_no_splitter_configuration(self):
+        bot_config = BotConfiguration()
+        bot_config._splitter = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_splitter)
+
+    def test_bot_init_no_splitterr(self):
+        bot_config = BotConfiguration()
+        bot_config.splitter._classname = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_splitter)
+
+    def test_bot_init_with_invalid_splitterr(self):
+        bot_config = BotConfiguration()
+        bot_config.splitter._classname = "programy.spelling.checker.SpellingCheckerX"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_splitter)
+
+    def test_bot_init_with_valid_splitterr(self):
+        bot_config = BotConfiguration()
+        bot_config.splitter._classname = "programy.dialog.splitter.splitter.SentenceSplitter"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNotNone(bot.sentence_splitter)
+
+    def test_bot_init_no_joiner_configuration(self):
+        bot_config = BotConfiguration()
+        bot_config._joiner = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_joiner)
+
+    def test_bot_init_no_joinerr(self):
+        bot_config = BotConfiguration()
+        bot_config.joiner._classname = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_joiner)
+
+    def test_bot_init_with_invalid_joinerr(self):
+        bot_config = BotConfiguration()
+        bot_config.joiner._classname = "programy.spelling.checker.SpellingCheckerX"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentence_joiner)
+
+    def test_bot_init_with_valid_joinerr(self):
+        bot_config = BotConfiguration()
+        bot_config.joiner._classname = "programy.dialog.joiner.joiner.SentenceJoiner"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNotNone(bot.sentence_joiner)
+
+    def test_bot_init_no_translator_configuration(self):
+        bot_config = BotConfiguration()
+        bot_config._from_translator = None
+        bot_config._to_translator = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.from_translator)
+        self.assertIsNone(bot.to_translator)
+
+    def test_bot_init_no_translatorr(self):
+        bot_config = BotConfiguration()
+        bot_config.from_translator._classname = None
+        bot_config.to_translator._classname = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.from_translator)
+        self.assertIsNone(bot.to_translator)
+
+    def test_bot_init_with_invalid_translatorr(self):
+        bot_config = BotConfiguration()
+        bot_config.from_translator._classname = "programy.spelling.checker.SpellingCheckerX"
+        bot_config.to_translator._classname = "programy.spelling.checker.SpellingCheckerX"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.from_translator)
+        self.assertIsNone(bot.to_translator)
+
+    def test_bot_init_with_valid_translatorr(self):
+        bot_config = BotConfiguration()
+        bot_config.from_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
+        bot_config.to_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNotNone(bot.from_translator)
+        self.assertIsNotNone(bot.to_translator)
+
+    def test_bot_init_no_sentiment_analyser_configuration(self):
+        bot_config = BotConfiguration()
+        bot_config._sentiment = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentiment_analyser)
+
+    def test_bot_init_no_sentiment_analyserr(self):
+        bot_config = BotConfiguration()
+        bot_config.sentiment_analyser._classname = None
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentiment_analyser)
+
+    def test_bot_init_with_invalid_sentiment_analyserr(self):
+        bot_config = BotConfiguration()
+        bot_config.sentiment_analyser._classname = "programy.spelling.checker.SpellingCheckerX"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNone(bot.sentiment_analyser)
+
+    def test_bot_init_with_valid_sentiment_analyserr(self):
+        bot_config = BotConfiguration()
+        bot_config.sentiment_analyser._classname = "programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        self.assertIsNotNone(bot)
+        self.assertIsNotNone(bot.sentiment_analyser)
 
     def test_bot_init_default_brain(self):
         client = TestClient()
@@ -291,7 +481,18 @@ class BotTests(unittest.TestCase):
         self.assertIsNotNone(response)
         self.assertEqual("Y DEFAULT RESPONSE", response)
 
-    ############################
+    def test_get_default_response_no_srai(self):
+
+        bot_config = BotConfiguration()
+        bot_config._default_response_srai = None
+        bot_config._default_response = "Test This"
+        self.assertIsNotNone(bot_config)
+
+        client = TestClient()
+        bot = Bot(bot_config, client)
+        self.assertIsNotNone(bot)
+
+        self.assertEqual("Test This", bot.get_default_response(self._client_context))
 
     def test_get_initial_question_empty_string(self):
 
@@ -347,7 +548,19 @@ class BotTests(unittest.TestCase):
 
         self.assertEqual("Y DEFAULT RESPONSE", bot.get_initial_question(client_context2))
 
-    ###################
+    def test_get_initial_question_no_srai(self):
+
+        bot_config = BotConfiguration()
+        bot_config._initial_question = "Test This"
+        bot_config._initial_question_srai = None
+
+        self.assertIsNotNone(bot_config)
+
+        client = TestClient()
+        bot = Bot(bot_config, client)
+        self.assertIsNotNone(bot)
+
+        self.assertEqual("Test This", bot.get_initial_question(self._client_context))
 
     def test_get_exit_response_empty_string(self):
 
@@ -404,3 +617,27 @@ class BotTests(unittest.TestCase):
         client_context2._brain._response = "Y DEFAULT RESPONSE"
 
         self.assertEqual("Y DEFAULT RESPONSE", bot.get_exit_response(client_context2))
+
+    def test_get_exit_response_no_srai(self):
+
+        bot_config = BotConfiguration()
+        bot_config._exit_response = "Test This"
+        bot_config._exit_response_srai = None
+        self.assertIsNotNone(bot_config)
+
+        client = TestClient()
+        bot = Bot(bot_config, client)
+        self.assertIsNotNone(bot)
+
+        self.assertEqual("Test This", bot.get_exit_response(self._client_context))
+
+    def test_log_answer(self):
+        bot_config = BotConfiguration()
+        client = TestClient()
+        bot = Bot(bot_config, client)
+
+        bot.log_answer(self._client_context, "Hello", "Test", None)
+
+        response_logger = unittest.mock.Mock()
+
+        bot.log_answer(self._client_context, "Hello", "Test", response_logger)

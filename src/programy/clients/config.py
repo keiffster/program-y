@@ -23,6 +23,7 @@ from programy.storage.config import StorageConfiguration
 from programy.utils.substitutions.substitues import Substitutions
 from programy.utils.email.config import EmailConfiguration
 from programy.triggers.config import TriggerConfiguration
+from programy.clients.ping.config import PingResponderConfig
 
 
 class ClientConfigurationData(BaseContainerConfigurationData):
@@ -38,6 +39,7 @@ class ClientConfigurationData(BaseContainerConfigurationData):
         self._storage = StorageConfiguration()
         self._email = EmailConfiguration()
         self._triggers = TriggerConfiguration()
+        self._responder = PingResponderConfig()
 
     @property
     def description(self):
@@ -70,6 +72,10 @@ class ClientConfigurationData(BaseContainerConfigurationData):
     @property
     def triggers(self):
         return self._triggers
+
+    @property
+    def responder(self):
+        return self._responder
 
     def check_for_license_keys(self, license_keys):
         BaseContainerConfigurationData.check_for_license_keys(self, license_keys)
@@ -120,6 +126,8 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
             self._triggers.load_config_section(configuration_file, section, bot_root, subs=subs)
 
+            self._responder.load_config_section(configuration_file, section, bot_root, subs=subs)
+
         else:
             YLogger.warning(self, "No bot name defined for client [%s], defaulting to 'bot'.", self.section_name)
             self._bot_configs[0]._section_name = "bot"
@@ -152,5 +160,8 @@ class ClientConfigurationData(BaseContainerConfigurationData):
 
             data['triggers'] = {}
             self._email.to_yaml(data['triggers'], defaults)
+
+            data['responder'] = {}
+            self._email.to_yaml(data['responder'], defaults)
 
             data['renderer'] = self.renderer

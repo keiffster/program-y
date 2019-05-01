@@ -91,7 +91,10 @@ class YamlConfigurationFile(BaseConfigurationFile):
                 return option_value
             return int(self._replace_subs(subs, option_value))
 
-        YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
+        if missing_value is None:
+            YLogger.warning(self, "Missing value for [%s] in config, return None", option_name)
+        else:
+            YLogger.warning(self, "Missing value for [%s] in config, return default value %d", option_name, missing_value)
         return missing_value
 
     def get_multi_option(self, section, option_name, missing_value=None, subs: Substitutions = None):

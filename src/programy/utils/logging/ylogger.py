@@ -34,6 +34,17 @@ class YLoggerSnapshot(object):
             self._criticals, self._fatals, self._errors, self._exceptions, self._warnings, self._infos, self._debugs
         )
 
+    def to_json(self):
+        return {
+                "criticals":    self._criticals,
+                "fatals":       self._fatals,
+                "errors":       self._errors,
+                "exceptions":   self._exceptions,
+                "warnings":     self._warnings,
+                "infos":        self._infos,
+                "debugs":       self._debugs
+        }
+
 
 class YLogger(object):
 
@@ -107,6 +118,13 @@ class YLogger(object):
         YLogger.ERRORS += 1
         if logging.getLogger().isEnabledFor(logging.ERROR):
             logging.error(YLogger.format_message(caller, message), *args, **kwargs)
+
+    @staticmethod
+    def exception_nostack(caller, message, exception, *args, **kwargs):
+        YLogger.EXCEPTIONS += 1
+        if logging.getLogger().isEnabledFor(logging.ERROR):
+            excep_msg = "%s [%s]"%(message, str(exception))
+            logging.error(YLogger.format_message(caller, excep_msg), *args, **kwargs)
 
     @staticmethod
     def exception(caller, message, exception, *args, **kwargs):

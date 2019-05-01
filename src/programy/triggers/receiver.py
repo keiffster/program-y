@@ -16,7 +16,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 import sys
 
-from flask import Flask, request, json
+from flask import Flask, request
+
+
+def handle_trigger(json):
+    print("\nTrigger received...")
+    try:
+        print(json)
+    except Exception as e:
+        print(e)
+    return 'OK'
+
 
 if __name__ == '__main__':
 
@@ -25,11 +35,6 @@ if __name__ == '__main__':
 
     @receiver.route('/api/rest/v1.0/trigger', methods=['POST'])
     def trigger():
-        print("\nTrigger received...")
-        try:
-            print(request.json)
-        except Exception as e:
-            print(e)
-        return 'OK'
+        handle_trigger(request.json)
 
     receiver.run(port=sys.argv[1])

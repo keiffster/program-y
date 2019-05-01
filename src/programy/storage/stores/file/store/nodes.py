@@ -53,7 +53,7 @@ class FileNodeStore(FileStore, NodesStore):
             try:
                 node_factory.add_node(node_name, ClassLoader.instantiate_class(class_name))
             except Exception as e:
-                YLogger.exception(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, class_name), e)
+                YLogger.exception_nostack(self, "Failed pre-instantiating %s Node [%s]"%(node_factory.type, class_name), e)
 
     def valid_config_line(self, line, filename):
 

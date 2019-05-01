@@ -78,6 +78,7 @@ class TelegramBotClient(PollingBotClient):
         return processed_question
 
     def ask_question(self, userid, question):
+        self._questions += 1
         client_context = self.create_client_context(userid)
         return client_context.bot.ask_question(client_context, question, responselogger=self)
 
@@ -154,6 +155,7 @@ class TelegramBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Loading Telegram client, please wait. See log output for progress...")
+    print("Initiating Telegram Client...")
+
     TelegramBotClient.TELEGRAM_CLIENT = TelegramBotClient()
     TelegramBotClient.TELEGRAM_CLIENT.run()

@@ -45,6 +45,7 @@ from programy.storage.stores.nosql.mongo.store.nodes import MongoPatternNodeStor
 from programy.storage.stores.nosql.mongo.store.processors import MongoPostProcessorStore
 from programy.storage.stores.nosql.mongo.store.processors import MongoPreProcessorStore
 
+
 class Uploader(object):
 
     @staticmethod

@@ -90,8 +90,9 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if match is not None:
                 YLogger.debug(client_context, "%sMatched topic, success!", tabs)
                 return match
+
             if words.word(word_no) == PatternNode.TOPIC:
-                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.TOPIC)
+                YLogger.debug(client_context, "%s Looking for a %s, none given, no match found!", tabs, PatternNode.TOPIC)
                 return None
 
         if self._that is not None:
@@ -99,17 +100,40 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if match is not None:
                 YLogger.debug(client_context, "%sMatched that, success!", tabs)
                 return match
+
             if words.word(word_no) == PatternNode.THAT:
-                YLogger.debug(client_context, "%s Looking for a %s, none give, no match found!", tabs, PatternNode.THAT)
+                YLogger.debug(client_context, "%s Looking for a %s, none given, no match found!", tabs, PatternNode.THAT)
                 return None
 
         word_no += 1
         if word_no >= words.num_words():
             YLogger.debug(client_context, "%sNo more words", tabs)
             return super(PatternOneOrMoreWildCardNode, self).consume(client_context, context, words, word_no, match_type, depth+1)
+
         word = words.word(word_no)
 
-        if self._children:
+        if self._priority_words or self._children:
+
+            ################################################################################################################
+            # Priority nodes
+            for child in self._priority_words:
+
+                result = child.equals(client_context, words, word_no)
+                if result.matched is True:
+                    word_no = result.word_no
+                    YLogger.debug(client_context, "%sWildcard child matched %s", tabs, result.matched_phrase)
+
+                    context_match2 = Match(Match.WORD, child, result.matched_phrase)
+
+                    context.add_match(context_match2)
+                    matches_added += 1
+
+                    match = child.consume(client_context, context, words, word_no+1, match_type, depth+1)
+                    if match is not None:
+                        return match
+
+            ################################################################################################################
+            # Children nodes
             for child in self._children:
 
                 result = child.equals(client_context, words, word_no)
@@ -136,6 +160,7 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
             if word_no >= words.num_words():
                 context.pop_matches(matches_added)
                 return None
+
             word = words.word(word_no)
 
         YLogger.debug(client_context, "%sNo children, consume words until next break point", tabs)
@@ -164,5 +189,6 @@ class PatternOneOrMoreWildCardNode(PatternWildCardNode):
 
         if match is not None:
             return match
+
         context.pop_matches(matches_added)
         return None

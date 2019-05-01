@@ -28,7 +28,7 @@ class AlexaConfiguration(RestConfiguration):
     DEFAULT_LEAVE_INTENT = "AMAZON.StopIntent, AMAZON.CancelIntent"
 
     def __init__(self):
-        RestConfiguration.__init__(self, "alexa")     
+        RestConfiguration.__init__(self, "alexa")
         self._launch_text = AlexaConfiguration.DEFAULT_LAUNCH_TEXT
         self._launch_srai = None
 

@@ -42,7 +42,7 @@ class FileRDFStore(FileStore, RDFStore):
                             rdf_collection.add_entity(subj, pred, obj, rdf_name, filename)
                             
         except Exception as excep:
-            YLogger.exception(self, "Failed to load rdf [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to load rdf [%s]", excep, filename)
 
     def get_storage(self):
         return self.storage_engine.configuration.rdf_storage

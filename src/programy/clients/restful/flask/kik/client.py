@@ -107,17 +107,17 @@ class KikBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    KIK_CLIENT = None
-
     print("Initiating Kik Client...")
+
+    KIK_CLIENT = KikBotClient()
+
     APP = Flask(__name__)
 
-    @APP.route("/api/kik/v1.0/ask", methods=['POST'])
+    @APP.route(KIK_CLIENT.configuration.client_configuration.api, methods=['POST'])
     def receive_message():
         try:
             return KIK_CLIENT.receive_message(request)
         except Exception as e:
             YLogger.exception(None, "KIK Error", e)
 
-    KIK_CLIENT = KikBotClient()
     KIK_CLIENT.run(APP)

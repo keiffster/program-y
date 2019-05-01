@@ -76,7 +76,7 @@ class BaseConfigurationData(object):
 
     def load_additional_key_values(self, configuration, section, subs: Substitutions = None):
         if configuration:
-            if section:
+            if section is not None:
                 for key in configuration.get_keys(section):
                     if key in self.additionals_to_add():
                         value = configuration.get_option(section, key, subs=subs)

@@ -69,6 +69,8 @@ class TwitterBotClient(PollingBotClient):
 
         YLogger.debug(self, "Direct Messages: %s -> %s", userid, text)
 
+        self._questions += 1
+
         client_context = self.create_client_context(userid)
         response = client_context.bot.ask_question(client_context, text, responselogger=self)
 
@@ -149,6 +151,9 @@ class TwitterBotClient(PollingBotClient):
         return question.strip()
 
     def ask_question(self, userid, question):
+
+        self._questions += 1
+
         client_context = self.create_client_context(userid)
         return client_context.bot.ask_question(client_context, question, responselogger=self)
 
@@ -277,6 +282,7 @@ class TwitterBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Loading Twitter client, please wait. See log output for progres...")
+    print("Initiating Twitter Client...")
+
     twitter_app = TwitterBotClient()
     twitter_app.run()

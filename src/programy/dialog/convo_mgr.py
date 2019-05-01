@@ -67,7 +67,7 @@ class ConversationManager(object):
         assert (client_context.userid  is not None)
 
         if client_context.userid in self._conversations:
-            YLogger.info(client_context, "Retrieving conversation for client %s", client_context.userid)
+            YLogger.debug(client_context, "Retrieving conversation for client %s", client_context.userid)
             conversation = self._conversations[client_context.userid]
 
             # Load existing conversation from cache

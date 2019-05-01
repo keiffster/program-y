@@ -23,7 +23,7 @@ class TemplateLearnfNodeTests(ParserTestsBaseClass):
         if os.name == 'posix':
             return '/tmp/learnf'
         elif os.name == 'nt':
-            return
+            return ''
         else:
             raise Exception("Unknown OS [%s]"%os.name)
         

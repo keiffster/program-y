@@ -54,6 +54,8 @@ class Brain(object):
         assert (bot is not None)
         assert (configuration is not None)
 
+        self._questions = 0
+
         self._bot = bot
         self._configuration = configuration
 
@@ -91,9 +93,12 @@ class Brain(object):
 
         self.load(self.configuration)
 
-
     def ylogger_type(self):
         return "brain"
+
+    @property
+    def num_questions(self):
+        return self._questions
 
     @property
     def id(self):
@@ -277,6 +282,8 @@ class Brain(object):
     def reload_map(self, mapname):
         if self._maps_collection.contains(mapname):
             self._maps_collection.reload(self.bot.client.storage_factory, mapname)
+        else:
+            YLogger.error(self, "Unknown map name [%s], unable to reload ", mapname)
 
     def _load_sets(self):
         self._sets_collection.empty()
@@ -285,6 +292,8 @@ class Brain(object):
     def reload_set(self, setname):
         if self._sets_collection.contains(setname):
             self._sets_collection.reload(self.bot.client.storage_factory, setname)
+        else:
+            YLogger.error(self, "Unknown set name [%s], unable to reload ", setname)
 
     def _load_rdfs(self):
         self._rdf_collection.empty()
@@ -293,6 +302,8 @@ class Brain(object):
     def reload_rdf(self, rdfname):
         if self._rdf_collection.contains(rdfname):
             self._rdf_collection.reload(self.bot.client.storage_factory, rdfname)
+        else:
+            YLogger.error(self, "Unknown rdf name [%s], unable to reload ", rdfname)
 
     def _load_preprocessors(self):
         self._preprocessors.empty()
@@ -382,6 +393,9 @@ class Brain(object):
         conversation = client_context.bot.get_conversation(client_context)
 
         if conversation is not None:
+
+            self._questions += 1
+
             topic_pattern = conversation.get_topic_pattern(client_context)
 
             that_pattern = conversation.get_that_pattern(client_context, srai)

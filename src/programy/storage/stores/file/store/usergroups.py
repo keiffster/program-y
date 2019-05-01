@@ -31,12 +31,12 @@ class FileUserGroupStore(FileStore, UserGroupsStore):
 
         try:
             with open(filename, 'r+', encoding=self.get_storage().encoding) as yml_data_file:
-                yaml_data = yaml.load(yml_data_file)
+                yaml_data = yaml.load(yml_data_file, Loader=yaml.FullLoader)
 
             self.load_users_and_groups_from_yaml(yaml_data, usersgroupsauthorisor)
 
         except Exception as e:
-            YLogger.exception(self, "Failed to load usergroups yaml file [%s]", e, filename)
+            YLogger.exception_nostack(self, "Failed to load usergroups yaml file [%s]", e, filename)
 
 
     def get_storage(self):

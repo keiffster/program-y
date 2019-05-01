@@ -51,4 +51,4 @@ class FileErrorsStore(FileStore, ErrorsStore):
                 errors_file.flush()
 
         except Exception as excep:
-           YLogger.exception(self, "Failed to write errors file [%s]", excep, filename)
+           YLogger.exception_nostack(self, "Failed to write errors file [%s]", excep, filename)

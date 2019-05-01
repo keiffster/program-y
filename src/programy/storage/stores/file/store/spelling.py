@@ -39,7 +39,7 @@ class FileSpellingStore(FileStore, SpellingStore):
                     spell_checker.add_corpus(all_words)
 
             except Exception as e:
-                YLogger.exception(self, "Failed to load corpus [%s]", e, corpus_filename)
+                YLogger.exception_nostack(self, "Failed to load corpus [%s]", e, corpus_filename)
 
         else:
             YLogger.error(self, "No spelling corpus found[%s]", corpus_filename)

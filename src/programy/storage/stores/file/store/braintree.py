@@ -58,5 +58,5 @@ class FileBraintreeStore(FileStore, BraintreeStore):
                 YLogger.error(client_context, "Unknown braintree content type [%s]", format)
 
         except Exception as exc:
-            YLogger.exception(client_context, "Failed to save Braintree", exc)
+            YLogger.exception_nostack(client_context, "Failed to save Braintree", exc)
 

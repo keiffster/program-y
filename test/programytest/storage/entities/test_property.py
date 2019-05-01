@@ -2,6 +2,7 @@ import unittest
 
 from programy.storage.entities.property import PropertyStore
 
+
 class PropertyStoreTests(unittest.TestCase):
 
     def test_add_property(self):

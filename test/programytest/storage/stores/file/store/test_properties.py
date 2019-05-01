@@ -42,6 +42,10 @@ class FilePropertyStoreTests(PropertyStoreAsserts):
 
         self.assert_properties_storage(store)
 
+        if os.path.exists(self._tmpdir) is True:
+            shutil.rmtree(self._tmpdir)
+        self.assertFalse(os.path.exists(self._tmpdir))
+
     def test_property_storage(self):
         config = FileStorageConfiguration()
         config.properties_storage._dirs = [self._tmpfile]
@@ -56,6 +60,10 @@ class FilePropertyStoreTests(PropertyStoreAsserts):
 
         self.assert_property_storage(store)
 
+        if os.path.exists(self._tmpdir) is True:
+            shutil.rmtree(self._tmpdir)
+        self.assertFalse(os.path.exists(self._tmpdir))
+
     def test_empty_properties(self):
         config = FileStorageConfiguration()
         config.properties_storage._dirs = [self._tmpfile]
@@ -69,6 +77,10 @@ class FilePropertyStoreTests(PropertyStoreAsserts):
         self.assertTrue(os.path.exists(self._tmpdir))
 
         self.assert_empty_properties(store)
+
+        if os.path.exists(self._tmpdir) is True:
+            shutil.rmtree(self._tmpdir)
+        self.assertFalse(os.path.exists(self._tmpdir))
 
     def test_load_properties(self):
         config = FileStorageConfiguration()

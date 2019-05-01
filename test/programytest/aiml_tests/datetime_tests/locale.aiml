@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml>
+
+<category>
+        <pattern>TESTDATE</pattern>
+        <template>Nous sommes le
+            <sentence><date locale="fr_FR" format="%d %B %Y" jformat="dd MMMMMMMMM yyyy"/></sentence>
+        </template>
+</category>
+
+</aiml>

@@ -62,4 +62,4 @@ class FileCategoryStore(FileStore, CategoryStore):
         try:
             parser.parse_from_file(filename, userid="*")
         except Exception as excep:
-            YLogger.exception(self, "Failed to load cat [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to load cat [%s]", excep, filename)

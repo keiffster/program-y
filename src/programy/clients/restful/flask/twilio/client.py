@@ -87,17 +87,18 @@ class TwilioBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    TWILIO_CLIENT = None
-
     print("Initiating Twilio Client...")
+
+    TWILIO_CLIENT = TwilioBotClient()
+
     APP = Flask(__name__)
 
-    @APP.route("/api/twilio/v1.0/ask", methods=['POST'])
+    print("Exposing endpoint: "+TWILIO_CLIENT.configuration.client_configuration.api)
+    @APP.route(TWILIO_CLIENT.configuration.client_configuration.api, methods=['POST'])
     def receive_message():
         try:
             return TWILIO_CLIENT.receive_message(request)
         except Exception as e:
             YLogger.exception(None, "Twilio Error", e)
 
-    TWILIO_CLIENT = TwilioBotClient()
     TWILIO_CLIENT.run(APP)

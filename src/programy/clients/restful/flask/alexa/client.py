@@ -57,6 +57,7 @@ class AlexaBotClient(FlaskRestBotClient):
     def _ask_question(self, client_context, question):
         reply = ""
         try:
+            self._questions += 1
             reply = client_context.bot.ask_question(client_context, question, responselogger=self)
 
         except Exception as e:
@@ -196,7 +197,6 @@ class AlexaBotClient(FlaskRestBotClient):
     def receive_message(self, http_request):
 
         skill_json = http_request.json
-        #print(json.dumps(skill_json, indent=4))
 
         recipient_id = self._get_userid(skill_json)
 
@@ -232,12 +232,13 @@ class AlexaBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    ALEXA_CLIENT = None
-
     print("Initiating Alexa Client...")
+
+    ALEXA_CLIENT = AlexaBotClient()
+
     APP = Flask(__name__)
 
-    @APP.route("/api/alexa/v1.0/ask", methods=['GET', 'POST'])
+    @APP.route(ALEXA_CLIENT.configuration.client_configuration.api, methods=['GET', 'POST'])
     def receive_message():
         try:
             return ALEXA_CLIENT.receive_message(request)
@@ -245,6 +246,4 @@ if __name__ == "__main__":
             print(e)
             YLogger.exception(None, "Alexa Error", e)
 
-
-    ALEXA_CLIENT = AlexaBotClient()
     ALEXA_CLIENT.run(APP)

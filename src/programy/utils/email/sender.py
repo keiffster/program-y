@@ -17,47 +17,48 @@ class EmailSender(object):
 
     def __init__(self, config: EmailConfiguration):
         self._config = config
-        self._to = []
-        self._subject = None
-        self._message = None
         self._attachments = []
 
-    def add_to(self, address):
-        self._to.append(address)
-
-    def set_message(self, text):
-        self._message = text
-
-    def add_mine_attachments(self, msg, attachments):
+    def _add_mine_attachments(self, msg, attachments):
         for attachment in attachments:
-            self.add_attachement(msg, attachment)
+            self._add_attachement(msg, attachment)
 
-    def add_attachement(self, msg, path, ctype=None, encoding=None):
+    def _add_attachement(self, msg, path, ctype=None, encoding=None):
 
         if ctype is None:
-            ctype, encoding = mimetypes.guess_type(path)
-            if  ctype is None:
+            ctype, attachment_encoding = mimetypes.guess_type(path)
+            if ctype is None:
                 # No guess could be made, or the file is encoded (compressed), so
                 # use a generic bag-of-bits type.
                 ctype = 'application/octet-stream'
 
+            if attachment_encoding is None:
+                if encoding is not None:
+                    attachment_encoding = encoding
+
+                else:
+                    attachment_encoding = "utf-8"
+
         maintype, subtype = ctype.split('/', 1)
 
         if maintype == 'text':
-            with open(path) as fp:
+            with open(path, encoding=attachment_encoding) as fp:
                 # Note: we should handle calculating the charset
                 attach = MIMEText(fp.read(), _subtype=subtype)
+
         elif maintype == 'image':
             with open(path, 'rb') as fp:
                 attach = MIMEImage(fp.read(), _subtype=subtype)
+
         elif maintype == 'audio':
             with open(path, 'rb') as fp:
                 attach = MIMEAudio(fp.read(), _subtype=subtype)
+
         else:
             with open(path, 'rb') as fp:
                 attach = MIMEBase(maintype, subtype)
                 attach.set_payload(fp.read())
-            # Encode the payload using Base64
+
             encoders.encode_base64(attach)
 
         msg.attach(attach)
@@ -65,7 +66,11 @@ class EmailSender(object):
     def _smtp_server(self, host, port):
         return smtplib.SMTP(host, port)
 
-    def _send_message(self, host, port, username, password, msg):
+    def _send_message(self, host, port, username, password, msg, attachments=[]):
+
+        if attachments:
+            self._add_mine_attachments(msg, attachments)
+
         YLogger.info(self, "Email sender starting")
         server = self._smtp_server(host, port)
         server.ehlo()
@@ -73,9 +78,10 @@ class EmailSender(object):
         YLogger.info(self, "Email sender logging in")
         server.login(username, password)
         YLogger.info(self, "Email sender sending")
-        server.send_message(msg)
+        result = server.send_message(msg)
         YLogger.info(self, "Email sender quiting")
         server.quit()
+        return result
 
     def send(self, to, subject, message, attachments=[]):
 
@@ -84,15 +90,17 @@ class EmailSender(object):
                 YLogger.info(self, "Email sender adding mime attachment")
                 msg = MIMEMultipart()
                 msg.attach(MIMEText(message))
-                self.add_mime_attachements(msg, attachments)
+                self._add_mine_attachments(msg, attachments)
             else:
                 msg = MIMEText(message)
 
             msg['Subject'] = subject
-            msg['From'] = self._from_addr
+            msg['From'] = self._config._from_addr
             msg['To'] = to
 
-            self._send_message(self._config.host, self._config.port, self._config.username, self._config.password, msg)
+            result = self._send_message(self._config.host, self._config.port, self._config.username, self._config.password, msg, attachments)
+            for email, error in result.items():
+                YLogger.error(None, "Email send failed [%s] = [%d] - [%s]"%(email, error[0], error[1]))
 
         except Exception as e:
             YLogger.exception(self, "Email sender failed", e)

@@ -21,6 +21,7 @@ from dateutil.relativedelta import relativedelta
 from programy.parser.template.nodes.base import TemplateNode
 from programy.utils.text.text import TextUtils
 
+
 class TemplateIntervalNode(TemplateNode):
 
     def __init__(self):

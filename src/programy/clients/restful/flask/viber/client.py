@@ -153,17 +153,17 @@ class ViberBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    VIBER_CLIENT = None
-
     print("Initiating Viber Client...")
+
+    VIBER_CLIENT = ViberBotClient()
+
     APP = Flask(__name__)
 
-    @APP.route("/api/viber/v1.0/ask", methods=['POST'])
+    @APP.route(VIBER_CLIENT.configuration.client_configuration.api, methods=['POST'])
     def receive_message():
         try:
             return VIBER_CLIENT.receive_message(request)
         except Exception as e:
             YLogger.exception(None, "Viber error", e)
 
-    VIBER_CLIENT = ViberBotClient()
     VIBER_CLIENT.run(APP)

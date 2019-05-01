@@ -53,7 +53,7 @@ class FileBinariesStore(FileStore, BinariesStore):
             YLogger.info(self, "Brain save took a total of %.2f sec", diff.total_seconds())
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to save binary file", excep)
+            YLogger.exception_nostack(self, "Failed to save binary file", excep)
 
     def load_binary(self):
         try:
@@ -75,6 +75,6 @@ class FileBinariesStore(FileStore, BinariesStore):
             return aiml_parser
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to load binary file", excep)
+            YLogger.exception_nostack(self, "Failed to load binary file", excep)
             return None
 

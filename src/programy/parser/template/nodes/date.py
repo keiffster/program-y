@@ -17,6 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 import datetime
+import locale
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
@@ -24,29 +25,53 @@ from programy.parser.template.nodes.attrib import TemplateAttribNode
 
 class TemplateDateNode(TemplateAttribNode):
 
-    def __init__(self, date_format=None):
+    def __init__(self, date_format=None, locale=None):
         TemplateAttribNode.__init__(self)
         if date_format is None:
             self._format = "%c"
         else:
             self._format = date_format
+        self._locale = locale
 
     def resolve_to_string(self, client_context):
         time_now = datetime.datetime.now()
-        resolved = time_now.strftime(self._format)
+
+        local_time = None
+        if self._locale is not None:
+            local_time = locale.setlocale(locale.LC_TIME)
+
+        try:
+            if self._locale is not None:
+                locale.setlocale(locale.LC_TIME, self._locale)
+            resolved = time_now.strftime(self._format)
+
+        finally:
+            if local_time is not None:
+                locale.setlocale(locale.LC_TIME, local_time)
+
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
-        return "[DATE format=%s]" % (self._format)
+        if self._locale is None:
+            return "[DATE format=%s]" %self._format
+        else:
+            return "[DATE format=%s locale=%s]"%(self._format, self._locale)
 
     def set_attrib(self, attrib_name, attrib_value):
-        if attrib_name != 'format':
+        if attrib_name == 'format':
+            self._format = attrib_value
+        elif attrib_name == 'locale':
+            self._locale = attrib_value
+        else:
             raise ParserException("Invalid attribute name %s for this node" % (attrib_name))
-        self._format = attrib_value
 
     def to_xml(self, client_context):
-        xml = '<date format="%s" >' % self._format
+        if self._locale is None:
+            xml = '<date format="%s" >' % self._format
+        else:
+            xml = '<date format="%s" locale="%s">'%(self._format, self._locale)
+
         xml += self.children_to_xml(client_context)
         xml += "</date>"
         return xml
@@ -61,4 +86,4 @@ class TemplateDateNode(TemplateAttribNode):
     #       timezone
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attrib(graph, expression, "format", "%c")
+        self._parse_node_with_attribs(graph, expression, [["format", "%c"], ["locale", None]])

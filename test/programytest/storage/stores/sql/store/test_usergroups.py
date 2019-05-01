@@ -9,7 +9,7 @@ from programy.storage.stores.sql.config import SQLStorageConfiguration
 import programytest.storage.engines as Engines
 
 
-class SQLSpellingStoreTests(UserGroupsStoreAsserts):
+class SQLUserGroupStoreTests(UserGroupsStoreAsserts):
 
     @unittest.skipIf(Engines.sql is False, Engines.sql_disabled)
     def test_initialise(self):

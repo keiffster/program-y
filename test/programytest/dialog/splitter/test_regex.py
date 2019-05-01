@@ -3,6 +3,7 @@ import unittest
 from programy.dialog.splitter.regex import RegexSentenceSplitter
 from programy.config.bot.splitter import BotSentenceSplitterConfiguration
 
+
 class RegexSentenceSplitterTests(unittest.TestCase):
 
     def test_basic_sentence(self):

@@ -36,7 +36,7 @@ class FileSetsStore(FileStore, SetsStore):
                         self.add_set_values(the_set, line)
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to load set [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to load set [%s]", excep, filename)
 
         set_name = self.get_just_filename_from_filepath(filename)
         set_collection.add_set(set_name, the_set, filename)

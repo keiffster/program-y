@@ -3,8 +3,10 @@ import socket
 
 from programy.clients.events.tcpsocket.client import SocketConnection
 from programy.clients.events.tcpsocket.client import SocketBotClient
-from programytest.clients.arguments import MockArgumentParser
 from programy.clients.events.tcpsocket.config import SocketConfiguration
+
+from programytest.clients.arguments import MockArgumentParser
+
 
 class MockSocket(object):
 

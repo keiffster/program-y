@@ -23,6 +23,7 @@ from programy.clients.events.client import EventBotClient
 from programy.clients.events.tcpsocket.config import SocketConfiguration
 from programy.clients.render.json import JSONRenderer
 
+
 class ClientConnection(object):
 
     def __init__(self, clientsocket, addr, max_buffer):
@@ -129,7 +130,7 @@ class SocketBotClient(EventBotClient):
         return SocketConnection(host, port, queue, max_buffer)
 
     def process_question(self, client_context, question):
-        # Returns a response
+        self._questions += 1
         return client_context.bot.ask_question(client_context , question, responselogger=self)
 
     def render_response(self, client_context, response):
@@ -171,10 +172,11 @@ class SocketBotClient(EventBotClient):
 
 if __name__ == '__main__':
 
+    print("Initiating TCP Socket Client...")
+
     def run():
-        print("Loading, please wait...")
-        console_app = SocketBotClient()
-        console_app.run()
+        tcpsocket_app = SocketBotClient()
+        tcpsocket_app.run()
 
     run()
 

@@ -51,4 +51,4 @@ class FileDuplicatesStore(FileStore, DuplicatesStore):
                 duplicates_file.flush()
 
         except Exception as excep:
-           YLogger.exception(self, "Failed to write duplicates file [%s]", excep, filename)
+           YLogger.exception_nostack(self, "Failed to write duplicates file [%s]", excep, filename)

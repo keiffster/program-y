@@ -81,11 +81,11 @@ class FacebookBotClient(FlaskRestBotClient):
         self._renderer.render(client_context, response)
         return "success"
 
-    def receive_message(self, request):
-        if request.method == 'GET':
-            return self.return_hub_challenge(request)
+    def receive_message(self, msg_request):
+        if msg_request.method == 'GET':
+            return self.return_hub_challenge(msg_request)
         else:
-            data = request.get_json()
+            data = msg_request.get_json()
             self.process_facebook_request(data)
         return "Message Processed"
 
@@ -122,27 +122,42 @@ class FacebookBotClient(FlaskRestBotClient):
         for message in messaging:
             if message.get('message'):
                 self.handle_message(message)
+
             elif message.get('postback'):
                 self.handle_postback(message)
 
     def ask_question(self, client_context, question):
         response = ""
         try:
+            self._questions += 1
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
+
         except Exception as e:
-            print("Error asking Facebook:", e)
+            YLogger.exception(client_context, "Error asking Facebook:", e)
+
         return response
+
+    def is_echo(self, message):
+        if 'message' in message:
+            if 'is_echo' in message['message']:
+                return message['message']['is_echo']
+        return False
 
     def handle_message(self, message):
 
         try:
             if self.configuration.client_configuration.debug is True:
                 self.dump_request(message)
-            self.renderer.print_payload("Incoming", message)
+                self.renderer.print_payload("Incoming", message)
 
             # Facebook Messenger ID for user so we know where to send response back to
             recipient_id = self.get_recipitent_id(message)
             if recipient_id:
+
+                if self.is_echo(message):
+                    YLogger.debug(None, "Handle Facebook is_echo = True")
+                    return
+
                 client_context = self.create_client_context(recipient_id)
 
                 message_text = self.get_message_text(message)
@@ -222,18 +237,18 @@ class FacebookBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    FACEBOOK_CLIENT = None
-
     print("Initiating Facebook Client...")
+
+    FACEBOOK_CLIENT = FacebookBotClient()
+
     APP = Flask(__name__)
 
-    @APP.route("/api/facebook/v1.0/ask", methods=['GET', 'POST'])
+    @APP.route(FACEBOOK_CLIENT.configuration.client_configuration.api, methods=['GET', 'POST'])
     def receive_message():
         try:
             return FACEBOOK_CLIENT.receive_message(request)
         except Exception as e:
             YLogger.exception(None, "Facebook Error", e)
 
-    FACEBOOK_CLIENT = FacebookBotClient()
     FACEBOOK_CLIENT.run(APP)
 

@@ -17,16 +17,10 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 import re
-from abc import ABCMeta, abstractmethod
+
 
 class BaseCollection(object):
-    __metaclass__ = ABCMeta
-
-    @abstractmethod
-    def split_line(self, line):
-        """
-        Never Implemented
-        """
+    pass
 
 
 class SingleStringCollection(BaseCollection):
@@ -51,6 +45,7 @@ class SingleStringCollection(BaseCollection):
                 self._strings.append(line)
                 count += 1
         return count
+
 
 class DoubleStringCharSplitCollection(BaseCollection):
 
@@ -108,12 +103,17 @@ class DoubleStringCharSplitCollection(BaseCollection):
                 self.add_value(key, value)
         return count
 
+
 class DoubleStringPatternSplitCollection(BaseCollection):
     RE_OF_SPLIT_PATTERN = re.compile('\"(.*?)\",\"(.*?)\"')
 
     def __init__(self):
         BaseCollection.__init__(self)
         self._pairs = {}
+
+    @property
+    def pairs(self):
+        return self._pairs
 
     def empty(self):
         self._pairs.clear()

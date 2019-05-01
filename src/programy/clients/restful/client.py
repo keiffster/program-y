@@ -88,6 +88,7 @@ class RestBotClient(BotClient):
     def ask_question(self, userid, question):
         response = ""
         try:
+            self._questions += 1
             client_context = self.create_client_context(userid)
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
         except Exception as e:

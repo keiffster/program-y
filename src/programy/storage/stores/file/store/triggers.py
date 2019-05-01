@@ -55,7 +55,7 @@ class FileTriggersStore(FileStore, TriggersStore):
                                     trigger_collection.add_trigger(event, classname)
 
             except Exception as e:
-                YLogger.exception(None, "Failed to load triggers [%s]", e, filename)
+                YLogger.exception_nostack(None, "Failed to load triggers [%s]", e, filename)
 
     def get_storage(self):
         return self.storage_engine.configuration.triggers_storage

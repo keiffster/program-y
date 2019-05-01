@@ -64,7 +64,7 @@ class BrainServiceConfiguration(BaseSectionConfigurationData):
             self._classname = configuration_file.get_option(service, "classname", missing_value=None, subs=subs)
             self._method = configuration_file.get_option(service, "method", missing_value=None, subs=subs)
             self._host = configuration_file.get_option(service, "host", missing_value=None, subs=subs)
-            self._port = configuration_file.get_option(service, "port", missing_value=None, subs=subs)
+            self._port = configuration_file.get_int_option(service, "port", missing_value=None, subs=subs)
             self._url = configuration_file.get_option(service, "url", missing_value=None, subs=subs)
             self.load_additional_key_values(configuration_file, service)
         else:

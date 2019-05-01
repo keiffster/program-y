@@ -33,7 +33,7 @@ class FileLicenseStore(FileStore, LicenseStore):
                     self._process_license_key_line(license_collection, line)
 
         except Exception as excep:
-            YLogger.exception(self, "Invalid license key file [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Invalid license key file [%s]", excep, filename)
 
     def load_license_key_data(self, license_key_data):
         lines = license_key_data.split('\n')

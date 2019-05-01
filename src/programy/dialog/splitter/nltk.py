@@ -18,6 +18,7 @@ import re
 
 from programy.dialog.splitter.splitter import SentenceSplitter
 
+
 class NLTKSentenceSplitter(SentenceSplitter):
 
     def __init__(self, config):

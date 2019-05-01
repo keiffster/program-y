@@ -28,6 +28,15 @@ class TextFile(object):
         self._encoding = encoding
         self._file = open(self._filename, mode, encoding=self._encoding)
 
+    @property
+    def filename(self):
+        return self._filename
+
+    @property
+    def encoding(self):
+        return self._encoding
+
+
     def write_line(self, file_writer, elements):
         string = file_writer.format_row_as_text(elements)
         self._file.write(string)
@@ -51,6 +60,36 @@ class CSVFile(object):
         return # Do nothing, noting to flush
 
 
+class FileWriterConfiguration(object):
+
+    def __init__(self, filename, file_format=None, mode="a", encoding="utf-8", delete_on_start=False):
+        self._filename = filename
+        self._file_format = file_format
+        self._mode = mode
+        self._encoding = encoding
+        self._delete_on_start = delete_on_start
+
+    @property
+    def filename(self):
+        return self._filename
+
+    @property
+    def file_format(self):
+        return self._file_format
+
+    @property
+    def mode(self):
+        return self._mode
+
+    @property
+    def encoding(self):
+        return self._encoding
+
+    @property
+    def delete_on_start(self):
+        return self._delete_on_start
+
+
 class FileWriter(object):
 
     def __init__(self, configuration):
@@ -63,9 +102,11 @@ class FileWriter(object):
 
         if configuration.file_format == 'txt':
             self._file = TextFile(self._filename, encoding=configuration.encoding)
+
         elif configuration.file_format == 'csv':
             self._file = CSVFile(self._filename)
             self.write_header()
+
         else:
             raise Exception ("Unknown file type [%s]", configuration.file_format)
 

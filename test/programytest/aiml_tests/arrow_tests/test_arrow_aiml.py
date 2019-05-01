@@ -12,7 +12,7 @@ class ArrowTestClient(TestClient):
     def load_storage(self):
         super(ArrowTestClient, self).load_storage()
         self.add_default_stores()
-        self.add_categories_store([os.path.dirname(__file__)])
+        self.add_single_categories_store(os.path.dirname(__file__) + os.sep + "arrow.aiml")
 
 
 class ArrowAIMLTests(unittest.TestCase):

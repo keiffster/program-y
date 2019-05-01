@@ -79,8 +79,6 @@ class FlaskRestBotClient(RestBotClient):
                       port=self.configuration.client_configuration.port,
                       debug=self.configuration.client_configuration.debug)
 
-        self.shutdown()
-
     def dump_request(self, request):
         YLogger.debug(self, str(request))
 

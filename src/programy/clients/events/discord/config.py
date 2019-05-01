@@ -14,27 +14,28 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from programy.clients.config import ClientConfigurationData
+from programy.utils.substitutions.substitues import Substitutions
 
-from programy.utils.logging.ylogger import YLogger
 
-from programy.clients.events.client import EventBotClient
-from programy.clients.events.websocket.config import WebSocketConfiguration
+class DiscordConfiguration(ClientConfigurationData):
 
-from flask import Flask, render_template
-from flask_socketio import SocketIO
+    def __init__(self):
+        ClientConfigurationData.__init__(self, "discord")
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
-socketio = SocketIO(app)
+    def check_for_license_keys(self, license_keys):
+        ClientConfigurationData.check_for_license_keys(self, license_keys)
 
-@socketio.on('connected')
-def handle_connect(json):
-    print('connect received json: ' + str(json))
+    def load_configuration_section(self, configuration_file, discord, bot_root, subs: Substitutions = None):
+        if discord is not None:
+            super(DiscordConfiguration, self).load_configuration_section(configuration_file, discord, bot_root,
+                                                                           subs=subs)
 
-@socketio.on('question')
-def handle_question(json):
-    print('question received json: ' + str(json))
-    socketio.emit('answer', "Hi there")
+    def to_yaml(self, data, defaults=True):
+        if defaults is True:
+            pass
+        else:
+            pass
 
-if __name__ == '__main__':
-    socketio.run(app)
+        super(DiscordConfiguration, self).to_yaml(data, defaults)
+

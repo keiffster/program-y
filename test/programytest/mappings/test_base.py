@@ -1,5 +1,4 @@
 import unittest
-import os
 
 from programy.mappings.base import SingleStringCollection
 from programy.mappings.base import DoubleStringCharSplitCollection
@@ -54,7 +53,9 @@ class TestSingleStringCollection(unittest.TestCase):
         count = singles.load_from_text("""
         val1
         val2
+        
         val3
+        
         """)
         self.assertEqual(count, 3)
         self.assertIsNotNone(singles.strings)
@@ -62,6 +63,9 @@ class TestSingleStringCollection(unittest.TestCase):
         self.assertIn("val1", singles.strings)
         self.assertIn("val2", singles.strings)
         self.assertIn("val3", singles.strings)
+
+        singles.empty()
+        self.assertEqual(0, len(singles.strings))
 
 
 class TestDoubleStringCharSplitCollection(unittest.TestCase):
@@ -73,6 +77,7 @@ class TestDoubleStringCharSplitCollection(unittest.TestCase):
         count = doubles.load_from_text("""
         key1,val1
         key2,val2
+        
         key3,val3,val4
         """)
         self.assertEqual(count, 3)
@@ -93,6 +98,9 @@ class TestDoubleStringCharSplitCollection(unittest.TestCase):
         doubles.set_value("key4", "val6")
         self.assertEqual(doubles.value("key4"), "val6")
 
+        doubles.empty()
+        self.assertEqual(0, len(doubles.pairs))
+
 
 class TestDoubleStringPatternSplitCollection(unittest.TestCase):
 
@@ -103,7 +111,9 @@ class TestDoubleStringPatternSplitCollection(unittest.TestCase):
         count = doubles.load_from_text("""
         "key1","val1"
         "key2","val2"
+          
         "key3","val3,val4"
+          
         """)
         self.assertEqual(count, 3)
 
@@ -114,3 +124,6 @@ class TestDoubleStringPatternSplitCollection(unittest.TestCase):
         self.assertTrue(doubles.has_key("key3"))
 
         self.assertFalse(doubles.has_key("key4"))
+
+        doubles.empty()
+        self.assertEqual(0, len(doubles.pairs))

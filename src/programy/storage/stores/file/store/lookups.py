@@ -39,7 +39,7 @@ class FileLookupsStore(FileStore, LookupsStore):
                             lookup_collection.add_to_lookup(index, pattern)
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to load lookup [%s]", excep, filename)
+            YLogger.exception_nostack(self, "Failed to load lookup [%s]", excep, filename)
 
 
 class FileDenormalStore(FileLookupsStore):

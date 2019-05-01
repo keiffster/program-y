@@ -8,12 +8,14 @@ from programy.parser.exceptions import ParserException
 
 from programytest.parser.base import ParserTestsBaseClass
 
+
 class MockTemplateSystemNode(TemplateSystemNode):
     def __init__(self):
         TemplateSystemNode.__init__(self)
 
     def resolve_to_string(self, context):
         raise Exception("This is an error")
+
 
 class TemplateSystemNodeTests(ParserTestsBaseClass):
 

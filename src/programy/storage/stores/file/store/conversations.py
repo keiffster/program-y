@@ -51,8 +51,7 @@ class FileConversationStore(FileStore, ConversationStore):
                 convo_file.write(json_text)
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to write conversation file [%s]", excep, conversation_filepath)
-
+            YLogger.exception_nostack(self, "Failed to write conversation file [%s]", excep, conversation_filepath)
 
     def load_conversation(self, client_context, conversation):
         conversation_filepath = self._conversations_filename(self._storage_engine.configuration.conversation_storage.dirs[0], client_context.client.id, client_context.userid)
@@ -65,4 +64,4 @@ class FileConversationStore(FileStore, ConversationStore):
                     conversation.from_json(client_context, json_data)
 
             except Exception as excep:
-               YLogger.exception(self, "Failed to read conversation file [%s]", excep, conversation_filepath)
+                YLogger.exception_nostack(self, "Failed to read conversation file [%s]", excep, conversation_filepath)

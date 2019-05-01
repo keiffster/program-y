@@ -91,7 +91,7 @@ class FileStore(Store):
             if os.path.exists(storage_path):
                 shutil.rmtree(storage_path)
         except Exception as e:
-            YLogger.exception(self, "Error dropping storage", e)
+            YLogger.exception_nostack(self, "Error dropping storage", e)
 
     @staticmethod
     def _get_dir_from_path(file_path):
@@ -163,7 +163,7 @@ class FileStore(Store):
                 self.commit()
 
         except Exception as e:
-            YLogger.exception(self, "Error uploading from file [%s]", e, filename)
+            YLogger.exception_nostack(self, "Error uploading from file [%s]", e, filename)
 
             if commit is True:
                 self.rollback()

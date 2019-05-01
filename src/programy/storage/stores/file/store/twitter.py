@@ -44,7 +44,7 @@ class FileTwitterStore(FileStore, TwitterStore):
                 idfile.write("%s\n" % last_status_id)
 
         except Exception as e:
-            YLogger.exception(None, "Failed to store last message ids [%s]", e, twitter_ids_file)
+            YLogger.exception_nostack(None, "Failed to store last message ids [%s]", e, twitter_ids_file)
 
     def load_last_message_ids(self):
         self._ensure_dir_exists(self.storage_engine.configuration.twitter_storage.dirs[0])
@@ -57,7 +57,7 @@ class FileTwitterStore(FileStore, TwitterStore):
                 last_status_id = idfile.readline().strip()
 
         except Exception as e:
-            YLogger.exception(None, "Failed to load last message ids [%s]", e, twitter_ids_file)
+            YLogger.exception_nostack(None, "Failed to load last message ids [%s]", e, twitter_ids_file)
 
         return last_direct_message_id, last_status_id
 

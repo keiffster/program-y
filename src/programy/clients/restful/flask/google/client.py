@@ -41,6 +41,7 @@ class GoogleBotClient(FlaskRestBotClient):
     def _ask_question(self, client_context, question):
         reply = ""
         try:
+            self._questions += 1
             reply = client_context.bot.ask_question(client_context, question, responselogger=self)
 
         except Exception as e:
@@ -141,9 +142,10 @@ class GoogleBotClient(FlaskRestBotClient):
 
 if __name__ == "__main__":
 
-    GOOGLE_CLIENT = None
-
     print("Initiating Google Client...")
+
+    GOOGLE_CLIENT = GoogleBotClient()
+
     APP = Flask(__name__)
 
     @APP.route("/api/google/v1.0/ask", methods=['GET', 'POST'])
@@ -154,5 +156,4 @@ if __name__ == "__main__":
             print(e)
             YLogger.exception(None, "Google Error", e)
 
-    GOOGLE_CLIENT = GoogleBotClient()
     GOOGLE_CLIENT.run(APP)

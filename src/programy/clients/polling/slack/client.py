@@ -96,6 +96,7 @@ class SlackBotClient(PollingBotClient):
         return (None, None)
 
     def ask_question(self, userid, question):
+        self._questions += 1
         client_context = self.create_client_context(userid)
         response = client_context.bot.ask_question(client_context, question, responselogger=self)
         return response
@@ -143,6 +144,7 @@ class SlackBotClient(PollingBotClient):
 
 if __name__ == '__main__':
 
-    print("Loading Slack client, please wait. See log output for progress...")
+    print("Initiating Slack Client...")
+
     SLACK_CLIENT = SlackBotClient()
     SLACK_CLIENT.run()

@@ -33,3 +33,12 @@ class ActivatableTests(unittest.TestCase):
         activatable.active = Activatable.ON
         self.assertEquals(Activatable.ON, activatable.active)
         self.assertTrue(activatable.is_active())
+
+    def test_invalid_state(self):
+        activatable = Activatable()
+        self.assertIsNotNone(activatable)
+        self.assertEquals(Activatable.ON, activatable.active)
+
+        activatable.active = "OTHER"
+
+        self.assertEquals(Activatable.ON, activatable.active)

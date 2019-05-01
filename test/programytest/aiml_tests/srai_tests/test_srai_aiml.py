@@ -57,29 +57,3 @@ class SraiAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "TEST INCLUDED SRAI KEITH STERLING")
         self.assertIsNotNone(response)
         self.assertEqual('TEST1 KEITH TEST2 STERLING TEST2 TEST1.', response)
-
-    def test_xlength_xadd_0_1(self):
-        response = self._client_context.bot.ask_question(self._client_context, "XADD 0 XS 1")
-        self.assertIsNotNone(response)
-        self.assertEqual('1.', response)
-
-    def test_xlength_xadd_1_1(self):
-        response = self._client_context.bot.ask_question(self._client_context, "XADD 1 XS 1")
-        self.assertIsNotNone(response)
-        self.assertEqual('2.', response)
-
-    def test_length_no_string(self):
-        response = self._client_context.bot.ask_question(self._client_context, "XLENGTH")
-        self.assertIsNotNone(response)
-        self.assertEqual('0.', response)
-
-    def test_xxlength_1char_string(self):
-        response = self._client_context.bot.ask_question(self._client_context, "XXLENGTH X XS 0")
-        self.assertIsNotNone(response)
-        self.assertEqual('1.', response)
-
-    def test_xxlength_3char_string(self):
-        response = self._client_context.bot.ask_question(self._client_context, "XXLENGTH X Y Z XS 0")
-        self.assertIsNotNone(response)
-        self.assertEqual('3.', response)
-

@@ -16,73 +16,17 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 
-from programy.brain import Brain
 from programy.dialog.question import Question
 from programy.dialog.sentence import Sentence
 from programy.dialog.convo_mgr import ConversationManager
 from programy.config.bot.bot import BotConfiguration
-from programy.utils.classes.loader import ClassLoader
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner
 from programy.translate.base import BaseTranslator
 from programy.sentiment.base import BaseSentimentAnalyser
 from programy.triggers.system import SystemTriggers
-
-
-class BrainSelector(object):
-
-    def __init__(self, configuration):
-        self._configuration = configuration
-
-    def select_brain(self, brains):
-        pass
-
-
-class DefaultBrainSelector(BrainSelector):
-
-    def __init__(self, configuration):
-        BrainSelector.__init__(self, configuration)
-
-    def select_brain(self, brains):
-        if brains:
-            return next (iter (brains.values()))
-        return None
-
-
-class BrainFactory(object):
-
-    def __init__(self, bot):
-        self._brains = {}
-        self.loads_brains(bot)
-        self._brain_selector = None
-        self.load_brain_selector(bot.configuration)
-
-    def brainids(self):
-        return self._brains.keys()
-
-    def brain(self, id):
-        if id in self._brains:
-            return self._brains[id]
-        else:
-            return None
-
-    def loads_brains(self, bot):
-        for config in bot.configuration.configurations:
-            brain = Brain(bot, config)
-            self._brains[brain.id] = brain
-
-    def load_brain_selector(self, configuration):
-        if configuration.brain_selector is None:
-            self._brain_selector = DefaultBrainSelector(configuration)
-        else:
-            try:
-                self._brain_selector = ClassLoader.instantiate_class(configuration.brain_selector)(configuration)
-            except Exception as e:
-                self._brain_selector = DefaultBrainSelector(configuration)
-
-    def select_brain(self):
-        return self._brain_selector.select_brain(self._brains)
+from programy.brainfactory import BrainFactory
 
 
 class Bot(object):
@@ -91,6 +35,8 @@ class Bot(object):
 
         assert (config is not None)
         assert (client is not None)
+
+        self._questions = 0
 
         self._configuration = config
         self._client = client
@@ -124,6 +70,10 @@ class Bot(object):
         return "bot"
 
     @property
+    def num_questions(self):
+        return self._questions
+
+    @property
     def id(self):
         return self._configuration.section_name
 
@@ -143,28 +93,28 @@ class Bot(object):
     def spell_checker(self):
         return self._spell_checker
 
+    def get_question_counts(self):
+        return self._brain_factory.get_question_counts()
+
     def initiate_spellchecker(self):
-        if self.configuration is not None:
-            if self.configuration.spelling is not None:
-                self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
+        if self.configuration.spelling is not None:
+            self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
 
     @property
     def sentence_splitter(self):
         return self._sentence_splitter
 
     def initiate_sentence_splitter(self):
-        if self.configuration is not None:
-            if self.configuration.splitter is not None:
-                self._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(self.configuration.splitter)
+        if self.configuration.splitter is not None:
+            self._sentence_splitter = SentenceSplitter.initiate_sentence_splitter(self.configuration.splitter)
 
     @property
     def sentence_joiner(self):
         return self._sentence_joiner
 
     def initiate_sentence_joiner(self):
-        if self.configuration is not None:
-            if self.configuration.joiner is not None:
-                self._sentence_joiner = SentenceJoiner.initiate_sentence_joiner(self.configuration.joiner)
+        if self.configuration.joiner is not None:
+            self._sentence_joiner = SentenceJoiner.initiate_sentence_joiner(self.configuration.joiner)
 
     @property
     def from_translator(self):
@@ -175,13 +125,11 @@ class Bot(object):
         return self._to_translator
 
     def initiate_translator(self):
-        if self.configuration is not None:
+        if self.configuration.from_translator is not None:
+            self._from_translator = BaseTranslator.initiate_translator(self.configuration.from_translator)
 
-            if self.configuration.from_translator is not None:
-                self._from_translator = BaseTranslator.initiate_translator(self.configuration.from_translator)
-
-            if self.configuration.to_translator is not None:
-                self._to_translator = BaseTranslator.initiate_translator(self.configuration.to_translator)
+        if self.configuration.to_translator is not None:
+            self._to_translator = BaseTranslator.initiate_translator(self.configuration.to_translator)
 
     @property
     def sentiment_analyser(self):
@@ -192,9 +140,8 @@ class Bot(object):
         return self._sentiment_scores
 
     def initiate_sentiment_analyser(self):
-        if self.configuration is not None:
-            if self.configuration.sentiment_analyser is not None:
-                self._sentiment_analyser, self._sentiment_scores = BaseSentimentAnalyser.initiate_sentiment_analyser(self.configuration.sentiment_analyser)
+        if self.configuration.sentiment_analyser is not None:
+            self._sentiment_analyser, self._sentiment_scores = BaseSentimentAnalyser.initiate_sentiment_analyser(self.configuration.sentiment_analyser)
 
     @property
     def brain(self):
@@ -206,45 +153,31 @@ class Bot(object):
 
     @property
     def default_response(self):
-        if self.configuration is not None:
-            return self.configuration.default_response
-        return BotConfiguration.DEFAULT_RESPONSE
+        return self.configuration.default_response
 
     @property
     def default_response_srai(self):
-        if self.configuration is not None:
-            return self.configuration.default_response_srai
-        return None
+        return self.configuration.default_response_srai
 
     @property
     def exit_response(self):
-        if self.configuration is not None:
-            return self.configuration.exit_response
-        return BotConfiguration.DEFAULT_EXIT_RESPONSE
+        return self.configuration.exit_response
 
     @property
     def exit_response_srai(self):
-        if self.configuration is not None:
-            return self.configuration.exit_response_srai
-        return BotConfiguration.DEFAULT_EXIT_RESPONSE_SRAI
+        return self.configuration.exit_response_srai
 
     @property
     def initial_question(self):
-        if self.configuration is not None:
-            return self.configuration.initial_question
-        return BotConfiguration.DEFAULT_INITIAL_QUESTION
+        return self.configuration.initial_question
 
     @property
     def initial_question_srai(self):
-        if self.configuration is not None:
-            return self.configuration.initial_question_srai
-        return BotConfiguration.DEFAULT_INITIAL_QUESTION_SRAI
+        return self.configuration.initial_question_srai
 
     @property
     def override_properties(self):
-        if self.configuration is not None:
-            return self.configuration.override_properties
-        return False
+        return self.configuration.override_properties
 
     def get_version_string(self, client_context):
 
@@ -397,6 +330,8 @@ class Bot(object):
         assert (client_context.bot is not None)
         assert (client_context.brain is not None)
 
+        self._questions += 1
+
         client_context.mark_question_start(text)
 
         pre_processed = self.pre_process_text(client_context, text, srai)
@@ -470,6 +405,7 @@ class Bot(object):
         sentence.calculate_sentinment_score(client_context)
 
         answer = self.post_process_response(client_context, response, srai)
+
         self.log_answer(client_context, sentence.text, answer, responselogger)
 
         return answer

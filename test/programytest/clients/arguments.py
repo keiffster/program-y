@@ -1,6 +1,6 @@
 class MockArguments(object):
 
-    def __init__(self, bot_root = ".",
+    def __init__(self, bot_root=".",
                  logging=None,
                  config=None,
                  cformat="yaml",
@@ -13,9 +13,10 @@ class MockArguments(object):
         self.noloop = noloop
         self.substitutions = substitutions
 
+
 class MockArgumentParser(object):
 
-    def __init__(self, bot_root = ".", logging=None, config=None, cformat="yaml", noloop=False, substitutions='subs.txt'):
+    def __init__(self, bot_root=".", logging=None, config=None, cformat="yaml", noloop=False, substitutions='subs.txt'):
         self.bot_root = bot_root
         self.logging = logging
         self.config = config

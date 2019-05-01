@@ -103,6 +103,7 @@ if __name__ == '__main__':
     REST_CLIENT = None
 
     print("Initiating Sanic REST Service...")
+
     APP = Sanic()
 
     @APP.route('/api/rest/v1.0/ask', methods=['GET'])

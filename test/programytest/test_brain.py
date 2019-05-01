@@ -1,6 +1,5 @@
 import unittest
 import os
-import xml.etree.ElementTree as ET
 
 from programy.brain import Brain
 from programy.config.brain.brain import BrainConfiguration
@@ -11,6 +10,7 @@ from programy.oob.defaults.dial import DialOutOfBandProcessor
 from programy.oob.defaults.email import EmailOutOfBandProcessor
 
 from programytest.client import TestClient
+
 
 class BrainTests(unittest.TestCase):
 
@@ -115,3 +115,18 @@ class BrainTests(unittest.TestCase):
         self.assertIsInstance(brain._oobhandler.oobs['dial'], DialOutOfBandProcessor)
         self.assertIsInstance(brain._oobhandler.oobs['email'], EmailOutOfBandProcessor)
 
+    def test_reload_unknowns(self):
+
+        yaml = YamlConfigurationFile()
+        self.load_os_specific_configuration(yaml, "test_brain.yaml", "test_brain.windows.yaml")
+
+        brain_config = BrainConfiguration()
+        brain_config.load_configuration(yaml, ".")
+
+        client = TestClient()
+        client_context = client.create_client_context("testid")
+        brain = Brain(client_context.bot, brain_config)
+
+        brain.reload_map("Unknown")
+        brain.reload_set("Unknown")
+        brain.reload_rdf("Unknown")

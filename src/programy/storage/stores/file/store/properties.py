@@ -78,7 +78,7 @@ class FilePropertyStore(FileStore, PropertyStore):
                                         properties[key] = val
 
             except Exception as excep:
-               YLogger.exception(self, "Failed to load properties file [%s]", excep, property_filepath)
+               YLogger.exception_nostack(self, "Failed to load properties file [%s]", excep, property_filepath)
 
         return properties
 
@@ -93,7 +93,7 @@ class FilePropertyStore(FileStore, PropertyStore):
                 props_file.write("\n")
 
         except Exception as excep:
-            YLogger.exception(self, "Failed to write properties file [%s]", excep, property_filepath)
+            YLogger.exception_nostack(self, "Failed to write properties file [%s]", excep, property_filepath)
 
     def _load_file_contents(self, collection, filename):
         properties = self._load_properties(filename)

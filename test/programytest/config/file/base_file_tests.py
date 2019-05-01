@@ -66,7 +66,7 @@ class ConfigurationBaseFileTests(unittest.TestCase):
 
         self.assertIsNotNone(brain_configuration.services)
         self.assertTrue(brain_configuration.services.exists('REST'))
-        rest_config =brain_configuration.services.service('REST')
+        rest_config=brain_configuration.services.service('REST')
         self.assertEqual("programy.services.rest.GenericRESTService", rest_config.classname)
         self.assertEqual(rest_config.method, "GET")
         self.assertEqual(rest_config.host, "0.0.0.0")

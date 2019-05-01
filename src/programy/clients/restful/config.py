@@ -25,6 +25,7 @@ class RestConfiguration(ClientConfigurationData):
         self._host = "0.0.0.0"
         self._port = 80
         self._debug = False
+        self._api = '/api/rest/v1.0/ask'
         self._use_api_keys = False
         self._api_key_file = None
         self._ssl_cert_file = None
@@ -41,6 +42,10 @@ class RestConfiguration(ClientConfigurationData):
     @property
     def debug(self):
         return self._debug
+
+    @property
+    def api(self):
+        return self._api
 
     @property
     def use_api_keys(self):
@@ -64,8 +69,9 @@ class RestConfiguration(ClientConfigurationData):
     def load_configuration_section(self, configuration_file, rest, bot_root, subs: Substitutions = None):
         if rest is not None:
             self._host = configuration_file.get_option(rest, "host", missing_value="0.0.0.0", subs=subs)
-            self._port = configuration_file.get_option(rest, "port", missing_value=80, subs=subs)
+            self._port = configuration_file.get_int_option(rest, "port", missing_value=80, subs=subs)
             self._debug = configuration_file.get_bool_option(rest, "debug", missing_value=False, subs=subs)
+            self._api = configuration_file.get_option(rest, "api", missing_value='/api/rest/v1.0/ask', subs=subs)
             self._use_api_keys = configuration_file.get_bool_option(rest, "use_api_keys", missing_value=False, subs=subs)
             self._api_key_file = configuration_file.get_option(rest, "api_key_file", subs=subs)
             if self._api_key_file is not None:
@@ -83,6 +89,7 @@ class RestConfiguration(ClientConfigurationData):
             data['host'] = "0.0.0.0"
             data['port'] = 80
             data['debug'] = False
+            data['api'] = '/api/rest/v1.0/ask'
             data['use_api_keys'] = False
             data['api_key_file'] = './api.keys'
             data['ssl_cert_file'] = './rsa.cert'
@@ -91,6 +98,7 @@ class RestConfiguration(ClientConfigurationData):
             data['host'] = self._host
             data['port'] = self._port
             data['debug'] = self._debug
+            data['api'] = self._api
             data['use_api_keys'] = self._use_api_keys
             data['api_key_file'] = self._api_key_file
             data['ssl_cert_file'] = self._ssl_cert_file

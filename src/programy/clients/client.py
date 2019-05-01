@@ -23,7 +23,6 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.config.file.factory import ConfigurationFactory
 from programy.clients.args import CommandLineClientArguments
-from programy.bot import Bot
 from programy.config.programy import ProgramyConfiguration
 from programy.context import ClientContext
 from programy.utils.license.keys import LicenseKeys
@@ -35,71 +34,9 @@ from programy.storage.factory import StorageFactory
 from programy.utils.email.sender import EmailSender
 from programy.triggers.manager import TriggerManager
 from programy.triggers.system import SystemTriggers
-
-
-class ResponseLogger(object):
-
-    def log_unknown_response(self, question):
-        return
-
-    def log_response(self, question, answer):
-        return
-
-
-class BotSelector(object):
-
-    def __init__(self, configuration):
-        self._configuration = configuration
-
-    def select_bot(self, bots):
-        pass
-
-
-class DefaultBotSelector(BotSelector):
-
-    def __init__(self, configuration):
-        BotSelector.__init__(self, configuration)
-
-    def select_bot(self, bots):
-        if bots:
-            return next (iter (bots.values()))
-        return None
-
-
-class BotFactory(object):
-
-    def __init__(self, client, configuration):
-        self._client = client
-        self._bots = {}
-        self.load_bots(configuration)
-        self._bot_selector = None
-        self.load_bot_selector(configuration)
-
-    def botids(self):
-        return self._bots.keys()
-
-    def bot(self, id):
-        if id in self._bots:
-            return self._bots[id]
-        else:
-            return None
-
-    def load_bots(self, configuration):
-        for config in configuration.configurations:
-            bot = Bot(config, client=self._client)
-            self._bots[bot.id] = bot
-
-    def load_bot_selector(self, configuration):
-        if configuration.bot_selector is None:
-            self._bot_selector = DefaultBotSelector(configuration)
-        else:
-            try:
-                self._bot_selector = ClassLoader.instantiate_class(configuration.bot_selector)(configuration)
-            except Exception as e:
-                self._bot_selector = DefaultBotSelector(configuration)
-
-    def select_bot(self):
-        return self._bot_selector.select_bot(self._bots)
+from programy.clients.ping.responder import PingResponder
+from programy.clients.botfactory import BotFactory
+from programy.clients.response import ResponseLogger
 
 
 class BotClient(ResponseLogger):
@@ -112,6 +49,9 @@ class BotClient(ResponseLogger):
         self._email = None
         self._trigger_mgr = None
         self._configuration = None
+        self._ping_responder = None
+
+        self._questions = 0
 
         self._arguments = self.parse_arguments(argument_parser=argument_parser)
 
@@ -140,8 +80,14 @@ class BotClient(ResponseLogger):
 
         self.load_trigger_manager()
 
+        self.load_ping_responder()
+
     def ylogger_type(self):
         return "client"
+
+    @property
+    def num_questions(self):
+        return self._questions
 
     @property
     def configuration(self):
@@ -179,12 +125,19 @@ class BotClient(ResponseLogger):
     def trigger_manager(self):
         return self._trigger_mgr
 
+    @property
+    def ping_responder(self):
+        return self._ping_responder
+
     def get_description(self):
         if self.configuration is not None:
             if self.configuration.client_configuration is not None:
                 return self.configuration.client_configuration.description
         return "Bot Client"
-    
+
+    def get_question_counts(self):
+        return self.bot_factory.get_question_counts()
+
     def add_client_arguments(self, parser=None):
         # Nothing to add
         return
@@ -298,13 +251,25 @@ class BotClient(ResponseLogger):
         client_context.brain = client_context.bot._brain_factory.select_brain()
         return client_context
 
+    def load_ping_responder(self):
+
+        self._ping_responder = PingResponder(self)
+
+        self._ping_responder.register_with_healthchecker()
+
     def startup(self):
         if self._trigger_mgr is not None:
             self._trigger_mgr.trigger(event=SystemTriggers.SYSTEM_STARTUP)
 
+        if self._ping_responder is not None:
+            PingResponder.init_ping_response(self._ping_responder)
+
     def shutdown(self):
         if self._trigger_mgr is not None:
             self._trigger_mgr.trigger(event=SystemTriggers.SYSTEM_SHUTDOWN)
+
+        if self._ping_responder is not None:
+            self._ping_responder.shutdown_ping_service()
 
     def process_question(self, client_context, question):
         raise NotImplementedError("You must override this and implement the logic to create a response to the question")

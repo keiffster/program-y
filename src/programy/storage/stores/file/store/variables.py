@@ -91,7 +91,7 @@ class FileVariablesStore(FileStore, VariablesStore):
                                     variables[key] = val
 
             except Exception as e:
-                YLogger.exception(None, "Failed to load variables [%s]", e, variables_filepath)
+                YLogger.exception_nostack(None, "Failed to load variables [%s]", e, variables_filepath)
 
         return variables
 
@@ -103,7 +103,7 @@ class FileVariablesStore(FileStore, VariablesStore):
                 vars_file.write("\n")
 
         except Exception as e:
-            YLogger.exception(None, "Failed to write variables [%s]", e, variables_filepath)
+            YLogger.exception_nostack(None, "Failed to write variables [%s]", e, variables_filepath)
 
     def _load_file_contents(self, collection, filename):
         variables = self._load_variables(filename)
