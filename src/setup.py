@@ -74,7 +74,7 @@ setup(
     'line-bot-sdk==1.8.0',
     'kik==1.5.0',
     'wikipedia==1.4.0',
-    'discord==1.0.1',
+    'discord.py==1.0.1',
     'botbuilder-core==4.0.0a6',
     'botbuilder-schema==4.0.0a6',
     'MetOffer==1.3.2',
