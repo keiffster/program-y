@@ -42,7 +42,7 @@ class SQLUserGroupStore(SQLStore, UserGroupsStore):
         if os.path.exists(filename):
             try:
                 with open(filename, 'r+') as yml_data_file:
-                    yaml_data = yaml.load(yml_data_file)
+                    yaml_data = yaml.load(yml_data_file, Loader=yaml.FullLoader)
                     self._upload_users(yaml_data, verbose)
                     self._upload_groups(yaml_data, verbose)
 

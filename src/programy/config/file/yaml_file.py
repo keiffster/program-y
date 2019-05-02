@@ -30,7 +30,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         self.yaml_data = None
 
     def load_from_text(self, text, client_configuration, bot_root, subs: Substitutions=None):
-        self.yaml_data = yaml.load(text)
+        self.yaml_data = yaml.load(text, Loader=yaml.FullLoader)
         if self.yaml_data is None:
             raise Exception("Yaml data is missing")
         configuration = ProgramyConfiguration(client_configuration)
@@ -41,7 +41,7 @@ class YamlConfigurationFile(BaseConfigurationFile):
         configuration = ProgramyConfiguration(client_configuration)
         try:
             with open(filename, 'r+', encoding="utf-8") as yml_data_file:
-                self.yaml_data = yaml.load(yml_data_file)
+                self.yaml_data = yaml.load(yml_data_file, Loader=yaml.FullLoader)
                 configuration.load_config_data(self, bot_root, subs=subs)
 
         except Exception as excep:

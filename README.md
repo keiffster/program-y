@@ -10,11 +10,11 @@ For more information about Program-y, its features and its history then check ou
 * Livezilla Support
 * PandoraBots File Support
 * Health Checking added to all clients  [HealthChecker](./Client-Healthcheck)
-* Improved installation documentation for most clients
+* Improved installatin documentation for most clients
 
 ## Fixed in 3.8
 * Added missing Locale feature to date tag
-* Removed unnecessary logging and calls in Facebook client
+* Removed unnecassary logging and calls in Facebook client
 
 ## Installation
 For information about installing either via Git or Pip on OSX, Ubuntu and Windows go to 
