@@ -80,7 +80,7 @@ setup(
     'MetOffer==1.3.2',
     'APScheduler==3.6.0',
     'emoji==0.5.2',
-    'textblob==0.15.3'
+    'textblob==0.15.3',
     'autocorrect==0.3.0',
     'redis==3.2.1',
     'pymongo==3.8.0',
