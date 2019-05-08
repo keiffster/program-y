@@ -19,6 +19,8 @@ from abc import ABCMeta, abstractmethod
 
 from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
+from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
+
 
 class RestBotClient(BotClient):
     __metaclass__ = ABCMeta
@@ -26,6 +28,8 @@ class RestBotClient(BotClient):
     def __init__(self, id, argument_parser=None):
         BotClient.__init__(self, id, argument_parser)
         self.api_keys = []
+        self._v1_0_handler = APIHandler_V1_0(self)
+        self._v2_0_handler = APIHandler_V2_0(self)
 
     def get_client_configuration(self):
         return RestConfiguration(self.id)
@@ -44,21 +48,10 @@ class RestBotClient(BotClient):
     def initialise(self):
         self.load_api_keys()
 
-    @abstractmethod
     def get_api_key(self, rest_request):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def get_question(self, rest_request):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def get_userid(self, rest_request):
-        raise NotImplementedError()
-
-    @abstractmethod
-    def create_response(self, response, status):
-        raise NotImplementedError()
+        if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
+            return None
+        return rest_request.args['apikey']
 
     def is_apikey_valid(self, apikey):
         return bool(apikey in self.api_keys)
@@ -78,38 +71,73 @@ class RestBotClient(BotClient):
 
         return None, None
 
-    def format_success_response(self, userid, question, answer):
-        return {"question": question, "answer": answer, "userid": userid}
+    def get_variable(self, rest_request, name, method='GET'):
+        if method == 'GET':
+            if name not in rest_request.args or rest_request.args[name] is None:
+                YLogger.error(self, "'%s' missing from GET request", name)
+                self.server_abort(400)
+            return rest_request.args[name]
 
-    def format_error_response(self, userid, question, error):
-        client_context = self.create_client_context(userid)
-        return {"question": question, "answer": client_context.bot.default_response, "userid": userid, "error": error}
+        elif method == 'POST':
+            if name not in rest_request.json or rest_request.json[name] is None:
+                YLogger.error(self, "'%s' missing from POST request", name)
+                self.server_abort(400)
+            return rest_request.json[name]
 
-    def ask_question(self, userid, question):
+        else:
+            YLogger.error(self, "Invalid REST request type '%s'", method)
+            self.server_abort(400)
+
+    @abstractmethod
+    def server_abort(self, error_code):
+        raise NotImplementedError()
+
+    @abstractmethod
+    def create_response(self, response, status):
+        raise NotImplementedError()
+
+    def _get_metadata(self, client_context, metadata):
+
+        if client_context.brain.properties.has_property("fullname"):
+            metadata['botName'] = client_context.brain.properties.property("fullname")
+        else:
+            metadata['botName'] = "Program-y"
+
+        if client_context.brain.properties.has_property("app_version"):
+            metadata['version'] = client_context.brain.properties.property("app_version")
+        else:
+            metadata['version'] = "1.0.0"
+
+        if client_context.brain.properties.has_property("copyright"):
+            metadata['copyright'] = client_context.brain.properties.property("copyright")
+        else:
+            metadata['copyright'] = "Copyright 2016-2019 keithsterling.com"
+
+        if client_context.brain.properties.has_property("botmaster"):
+            metadata['authors'] = [client_context.brain.properties.property("botmaster")]
+        else:
+            metadata['authors'] = ["Keith Sterling"]
+
+    def ask_question(self, userid, question, metadata=None):
         response = ""
         try:
             self._questions += 1
             client_context = self.create_client_context(userid)
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
+
+            if metadata is not None:
+                self._get_metadata(client_context, metadata)
+
         except Exception as e:
-            print(e)
+            YLogger.exception_nostack(self, "Failed to ask question", e)
+
         return response
 
-    def process_request(self, request):
-        question = "Unknown"
-        userid = "Unknown"
-        try:
-            response, status = self.verify_api_key_usage(request)
-            if response is not None:
-                return response, status
+    def process_v1_0_request(self, request):
+        return self._v1_0_handler.process_request(request)
 
-            question = self.get_question(request)
-            userid = self.get_userid(request)
+    def process_v2_0_request(self, request):
+        return self._v2_0_handler.process_request(request)
 
-            answer = self.ask_question(userid, question)
-
-            return self.format_success_response(userid, question, answer), 200
-
-        except Exception as excep:
-
-            return self.format_error_response(userid, question, str(excep)), 500
+    def dump_request(self, request):
+        YLogger.debug(self, str(request))

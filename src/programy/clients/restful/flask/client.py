@@ -14,8 +14,6 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-
-from programy.utils.logging.ylogger import YLogger
 from flask import Flask, jsonify, request, make_response, abort
 
 from programy.clients.restful.client import RestBotClient
@@ -27,25 +25,8 @@ class FlaskRestBotClient(RestBotClient):
         RestBotClient.__init__(self, id, argument_parser)
         self.initialise()
 
-    def get_api_key(self, rest_request):
-        if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
-            return None
-        return rest_request.args['apikey']
-
     def server_abort(self, error_code):
         abort(error_code)
-
-    def get_question(self, rest_request):
-        if 'question' not in rest_request.args or rest_request.args['question'] is None:
-            YLogger.error(self, "'question' missing from request")
-            self.server_abort(400)
-        return rest_request.args['question']
-
-    def get_userid(self, rest_request):
-        if 'userid' not in rest_request.args or rest_request.args['userid'] is None:
-            YLogger.error(self, "'userid' missing from request")
-            self.server_abort(400)
-        return rest_request.args['userid']
 
     def create_response(self, response_data, status):
         if self.configuration.client_configuration.debug is True:
@@ -79,8 +60,7 @@ class FlaskRestBotClient(RestBotClient):
                       port=self.configuration.client_configuration.port,
                       debug=self.configuration.client_configuration.debug)
 
-    def dump_request(self, request):
-        YLogger.debug(self, str(request))
+        self.shutdown()
 
 
 if __name__ == '__main__':
@@ -90,9 +70,14 @@ if __name__ == '__main__':
     print("Initiating Flask REST Service...")
     APP = Flask(__name__)
 
-    @APP.route('/api/rest/v1.0/ask', methods=['GET'])
-    def ask():
-        response_data, status = REST_CLIENT.process_request(request)
+    @APP.route('/api/rest/v1.0/ask', methods=['GET', 'POST'])
+    def ask_v1_0():
+        response_data, status = REST_CLIENT.process_v1_0_request(request)
+        return REST_CLIENT.create_response(response_data, status)
+
+    @APP.route('/api/rest/v2.0/ask', methods=['GET', 'POST'])
+    def ask_v2_0():
+        response_data, status = REST_CLIENT.process_v2_0_request(request)
         return REST_CLIENT.create_response(response_data, status)
 
     print("Loading, please wait...")
