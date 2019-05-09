@@ -19,7 +19,6 @@ from programy.utils.logging.ylogger import YLogger
 from programy.dialog.question import Question
 from programy.dialog.sentence import Sentence
 from programy.dialog.convo_mgr import ConversationManager
-from programy.config.bot.bot import BotConfiguration
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner

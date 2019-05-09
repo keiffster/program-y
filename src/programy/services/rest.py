@@ -45,9 +45,9 @@ class GenericRESTService(Service):
         else:
             self.method = config.method
 
-        if config.host is None:
-            raise Exception("Undefined host parameter")
-        self.host = config.host
+        self.host = None
+        if config.host is not None:
+            self.host = config.host
 
         self.port = None
         if config.port is not None:

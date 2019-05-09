@@ -23,7 +23,7 @@ class APIHandler(object):
     __metaclass__ = ABCMeta
 
     UNKNOWN = "Unknown"
-    USERID = 'userid'
+    USERID = 'userId'
 
     def __init__(self, bot_client):
         self._bot_client = bot_client
@@ -111,7 +111,7 @@ class APIHandler_V2_0(APIHandler):
 
     def format_success_response(self, userid, question, answer, metadata):
         return {'response': {"query": question,
-                             "userid": userid,
+                             "userId": userid,
                              "timestamp": datetime.timestamp(datetime.now()),
                              "text": answer,
                              },
@@ -129,7 +129,7 @@ class APIHandler_V2_0(APIHandler):
 
     def format_error_response(self, userid, query, error, metadata):
         return {'response': {"query": query,
-                             "userid": userid,
+                             "userId": userid,
                              "timestamp": datetime.timestamp(datetime.now())
                              },
                 'status': {

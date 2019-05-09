@@ -17,6 +17,15 @@ brain:
             extension: .aiml
             directories: false
 
+    services:
+        OPENCHAT:
+            classname: programy.services.openchat.OpenChatRESTService
+
+    openchatbots:
+      chatbot1:
+        url: http://localhost:5959/api/rest/v2.0/ask
+        method: GET
+
     security:
         authentication:
             classname: programy.security.authenticate.passthrough.BasicPassThroughAuthenticationService

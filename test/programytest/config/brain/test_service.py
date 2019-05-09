@@ -4,6 +4,7 @@ from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.config.brain.service import BrainServiceConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class BrainServiceConfigurationTests(unittest.TestCase):
 
     def test_rest_with_data(self):

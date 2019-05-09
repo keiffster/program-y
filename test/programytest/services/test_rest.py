@@ -1,5 +1,4 @@
 import unittest
-import os
 
 from programy.services.rest import GenericRESTService, RestAPI
 from programy.services.service import BrainServiceConfiguration
