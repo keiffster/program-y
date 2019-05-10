@@ -333,7 +333,7 @@ class Bot(object):
 
         client_context.mark_question_start(text)
 
-        pre_processed = self.pre_process_text(client_context, text, srai)
+        pre_processed = self.pre_process_text(client_context, text, srai=False)
 
         question = self.get_question(client_context, pre_processed, srai)
 

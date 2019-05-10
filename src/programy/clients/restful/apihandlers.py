@@ -23,7 +23,6 @@ class APIHandler(object):
     __metaclass__ = ABCMeta
 
     UNKNOWN = "Unknown"
-    USERID = 'userId'
 
     def __init__(self, bot_client):
         self._bot_client = bot_client
@@ -44,6 +43,7 @@ class APIHandler(object):
 class APIHandler_V1_0(APIHandler):
 
     QUESTION = 'question'
+    USERID = 'userid'
 
     def __init__(self, bot_client):
         APIHandler.__init__(self, bot_client)
@@ -58,27 +58,32 @@ class APIHandler_V1_0(APIHandler):
                 return response, status
 
             question = self._bot_client.get_variable(request, APIHandler_V1_0.QUESTION, method)
-            userid =  self._bot_client.get_variable(request, APIHandler_V1_0.USERID, method)
+            userid = self._bot_client.get_variable(request, APIHandler_V1_0.USERID, method)
 
             answer = self._bot_client.ask_question(userid, question)
 
             return self.format_success_response(userid, question, answer), 200
 
         except Exception as excep:
-
             return self.format_error_response(userid, question, str(excep)), 500
 
     def format_success_response(self, userid, question, answer, metadata=None):
-        return {'response': {"question": question, "answer": answer, "userid": userid}}
+        return {'response': {"question": question,
+                             "answer": answer,
+                             "userid": userid}}
 
     def format_error_response(self, userid, question, error, metadata=None):
-        client_context = self.create_client_context(userid)
-        return {"question": question, "answer": client_context.bot.default_response, "userid": userid, "error": error}
+        client_context =  self._bot_client.create_client_context(userid)
+        return {"response": {"question": question,
+                             "answer": client_context.bot.default_response,
+                             "userid": userid,
+                             "error": error}}
 
 
 class APIHandler_V2_0(APIHandler):
 
     QUERY = "query"
+    USERID = 'userId'
     LANG = "lang"
     location = "location"
 
@@ -107,39 +112,48 @@ class APIHandler_V2_0(APIHandler):
             return self.format_success_response(userid, query, answer, metadata), 200
 
         except Exception as excep:
-            return self.format_error_response(userid, query, str(excep), metadata), 500
+            return self.format_error_response(userid, query, str(excep), None), 500
+
+    def _get_timestamp(self):
+        return datetime.timestamp(datetime.now())
 
     def format_success_response(self, userid, question, answer, metadata):
-        return {'response': {"query": question,
+        payload = {'response': {"query": question,
                              "userId": userid,
-                             "timestamp": datetime.timestamp(datetime.now()),
+                             "timestamp": self._get_timestamp(),
                              "text": answer,
                              },
-                'status': {
-                    'code': 200,
-                    'message': 'success'
-                },
-                "meta": {
+                    'status': {
+                        'code': 200,
+                        'message': 'success'
+                    }}
+
+        if metadata is not None:
+            payload["meta"] = {
                     "botName": metadata['botName'],
                     "version": metadata['version'],
                     "copyright": metadata['copyright'],
                     "authors": metadata['authors']
                 }
-                }
+
+        return payload
 
     def format_error_response(self, userid, query, error, metadata):
-        return {'response': {"query": query,
-                             "userId": userid,
-                             "timestamp": datetime.timestamp(datetime.now())
+        payload = {'response': {"query": query,
+                                "userId": userid,
+                                "timestamp": self._get_timestamp(),
                              },
                 'status': {
                     'code': 500,
                     'message': error
-                },
-                "meta": {
+                }}
+
+        if metadata is not None:
+            payload["meta"] = {
                     "botName": metadata['botName'],
                     "version": metadata['version'],
                     "copyright": metadata['copyright'],
                     "authors": metadata['authors']
                 }
-                }
+
+        return payload

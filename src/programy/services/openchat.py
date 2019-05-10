@@ -32,7 +32,7 @@ class OpenChatRESTService(GenericRESTService):
 
     def _format_post_payload(self, client_context, question, lang=None, location=None):
         payload = {'query': question,
-                   "userid": client_context.userid}
+                   "userId": client_context.userid}
 
         if lang is not None:
             payload["lang"] = lang
@@ -43,7 +43,7 @@ class OpenChatRESTService(GenericRESTService):
         return payload
 
     def _format_get_url(self, url, client_context, question, lang=None, location=None):
-        get_url = "%s?query=%s&userid=%s"%(url, quote(question), client_context.userid)
+        get_url = "%s?query=%s&userId=%s"%(url, quote(question), client_context.userid)
 
         if lang is not None:
             get_url = "%s&lang=%s"%(get_url, lang)
@@ -56,19 +56,24 @@ class OpenChatRESTService(GenericRESTService):
     def _parse_response(self, client_context, text):
         data = json.loads(text)
         if data:
-            if 'response' in data[0]:
-                response = data[0]['response']
-                if 'status' in response:
-                    status = response['status']
+            payload = data[0]
+            http_code = data[1]
+            if 'response' in payload:
+                response = payload['response']
+                if 'status' in payload:
+                    status = payload['status']
                     statuscode = status['code']
                     if statuscode == 200:       # Success
                         return response['text']
                     else:
-                        YLogger.error(client_context, "Invalid response from Open Chat Bot [%d] - [%s]", statuscode,
-                                      status['message'])
-                        return client_context.bot.default_response
+                        YLogger.error(client_context, "Status code not 200 - [%d]", statuscode)
+                else:
+                    YLogger.error(client_context, "No 'status' in payload")
+            else:
+                YLogger.error(client_context, "No 'response' in payload")
+        else:
+            YLogger.error(client_context, "Invalid response [%s]", text)
 
-        YLogger.error(client_context, "Invalid payload from Open Chat Bot")
         return client_context.bot.default_response
 
     def _parse_question(self, text):

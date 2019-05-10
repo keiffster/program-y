@@ -32,7 +32,7 @@ class FlaskRestBotClient(RestBotClient):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response_data)
 
-        return make_response(jsonify({'response': response_data}, status))
+        return make_response(jsonify(response_data, status))
 
     def run(self, flask):
 

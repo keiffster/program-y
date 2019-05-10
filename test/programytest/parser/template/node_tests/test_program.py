@@ -2,8 +2,7 @@ import xml.etree.ElementTree as ET
 
 from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.program import TemplateProgramNode
-from programy.bot import Bot, BotConfiguration
-from programy.brain import Brain, BrainConfiguration
+
 
 from programytest.parser.base import ParserTestsBaseClass
 
