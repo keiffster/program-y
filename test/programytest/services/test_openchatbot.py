@@ -40,11 +40,11 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
     def test_ask_question_get(self):
 
-        mock_data = [{"response": {
+        mock_data = {"response": {
                             "text": "Hi there from chatbot1",
                         },
                         "status": {"code": 200, "text": "success"}
-                     }, 200]
+                     }
         mock_response = json.dumps(mock_data)
 
         service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))

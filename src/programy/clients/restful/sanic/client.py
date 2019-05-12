@@ -86,13 +86,13 @@ if __name__ == '__main__':
 
     @APP.route('/api/rest/v1.0/ask', methods=['GET', 'POST'])
     async def ask(request):
-        response, status = REST_CLIENT.process_request(request)
-        return REST_CLIENT.create_response(response, status=status)
+        response, status = REST_CLIENT.process_request(request, version=1.0)
+        return REST_CLIENT.create_response(response, status=status, version=1.0)
 
     @APP.route('/api/rest/v2.0/ask', methods=['GET', 'POST'])
     async def ask(request):
-        response, status = REST_CLIENT.process_request(request)
-        return REST_CLIENT.create_response(response, status=status)
+        response, status = REST_CLIENT.process_request(request, version=2.0)
+        return REST_CLIENT.create_response(response, status=status, version=2.0)
 
     print("Loading, please wait...")
     REST_CLIENT = SanicRestBotClient("sanic")

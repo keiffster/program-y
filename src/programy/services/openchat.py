@@ -54,10 +54,8 @@ class OpenChatRESTService(GenericRESTService):
         return get_url
 
     def _parse_response(self, client_context, text):
-        data = json.loads(text)
-        if data:
-            payload = data[0]
-            http_code = data[1]
+        payload = json.loads(text)
+        if payload:
             if 'response' in payload:
                 response = payload['response']
                 if 'status' in payload:

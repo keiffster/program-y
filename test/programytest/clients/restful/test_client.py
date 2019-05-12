@@ -18,7 +18,7 @@ class RestBotClientTests(unittest.TestCase):
         self.assertEqual([], client.api_keys)
 
         request = unittest.mock.Mock()
-        response, code = client.process_v1_0_request(request)
+        response, code = client.process_request(request, version=1.0)
 
     def test_api_keys(self):
         arguments = MockArgumentParser()

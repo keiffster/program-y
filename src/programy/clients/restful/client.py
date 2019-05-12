@@ -133,11 +133,15 @@ class RestBotClient(BotClient):
 
         return response
 
-    def process_v1_0_request(self, request):
-        return self._v1_0_handler.process_request(request)
+    def process_request(self, request, version=1.0):
+        if version == 1.0:
+            return self._v1_0_handler.process_request(request)
+        elif version == 2.0:
+            return self._v2_0_handler.process_request(request)
+        else:
+            return 'Invalid API version', 500
 
-    def process_v2_0_request(self, request):
-        return self._v2_0_handler.process_request(request)
+
 
     def dump_request(self, request):
         YLogger.debug(self, str(request))

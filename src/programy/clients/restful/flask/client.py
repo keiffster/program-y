@@ -28,11 +28,16 @@ class FlaskRestBotClient(RestBotClient):
     def server_abort(self, error_code):
         abort(error_code)
 
-    def create_response(self, response_data, status):
+    def create_response(self, response_data, status, version=1.0):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response_data)
 
-        return make_response(jsonify(response_data, status))
+        if version == 1.0:
+            return make_response(jsonify(response_data, status))
+        elif version == 2.0:
+            return make_response(jsonify(response_data), status)
+        else:
+            return make_response('Invalid API version', 500)
 
     def run(self, flask):
 
@@ -72,13 +77,13 @@ if __name__ == '__main__':
 
     @APP.route('/api/rest/v1.0/ask', methods=['GET', 'POST'])
     def ask_v1_0():
-        response_data, status = REST_CLIENT.process_v1_0_request(request)
-        return REST_CLIENT.create_response(response_data, status)
+        response_data, status = REST_CLIENT.process_request(request, version=1.0)
+        return REST_CLIENT.create_response(response_data, status, version=1.0)
 
     @APP.route('/api/rest/v2.0/ask', methods=['GET', 'POST'])
     def ask_v2_0():
-        response_data, status = REST_CLIENT.process_v2_0_request(request)
-        return REST_CLIENT.create_response(response_data, status)
+        response_data, status = REST_CLIENT.process_request(request, version=2.0)
+        return REST_CLIENT.create_response(response_data, status, version=2.0)
 
     print("Loading, please wait...")
     REST_CLIENT = FlaskRestBotClient("flask")
