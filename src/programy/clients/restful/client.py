@@ -114,7 +114,7 @@ class RestBotClient(BotClient):
 
         if self._authorization is not None:
             if self._authorization.authorise(request) is False:
-                return "Access denied", 503
+                return "Access denied", 403
         print("Authorised")
 
         if self._api_keys is not None:
