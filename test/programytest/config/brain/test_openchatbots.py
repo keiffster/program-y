@@ -22,6 +22,8 @@ class BrainOpenChatBotsConfigurationTests(unittest.TestCase):
                 chatbot3:
                     url: https://33.33.33.33/api/rest/v2.0/ask
                     method: POST
+                    authorisation_type: Basic
+                    authorisation_token: 1234567890
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")

@@ -16,8 +16,6 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.utils.logging.ylogger import YLogger
 import requests
-import urllib.parse
-import json
 
 from programy.services.service import Service
 from programy.config.brain.service import BrainServiceConfiguration
@@ -25,11 +23,17 @@ from programy.config.brain.service import BrainServiceConfiguration
 
 class RestAPI(object):
 
-    def get(self, url):
-        return requests.get(url)
+    def get(self, url, headers=None):
+        if headers is None:
+            return requests.get(url)
+        else:
+            return requests.get(url, headers=headers)
 
-    def post(self, url, data):
-        return requests.post(url, data=data)
+    def post(self, url, data, headers=None):
+        if headers is None:
+            return requests.post(url, data=data)
+        else:
+            return requests.post(url, data=data, headers=headers)
 
 
 class GenericRESTService(Service):

@@ -26,6 +26,7 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
         BaseSectionConfigurationData.__init__(self, openchatbot_name)
         self._url = None
         self._method = None
+        self._authorization = None
 
     @property
     def url(self):
@@ -35,6 +36,10 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
     def method(self):
         return self._method
 
+    @property
+    def authorization(self):
+        return self._authorization
+
     def check_for_license_keys(self, license_keys):
         BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
 
@@ -43,10 +48,17 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
         if openchatbot is not None:
             self._url = configuration_file.get_option(openchatbot, "url", missing_value=None, subs=subs)
             self._method = configuration_file.get_option(openchatbot, "method", missing_value="GET", subs=subs)
+            self._authorization = configuration_file.get_option(openchatbot, "authorization", subs=subs)
             self.load_additional_key_values(configuration_file, openchatbot)
         else:
             YLogger.warning(self, "'openchatbots' section missing from brain config, using to defaults")
 
     def to_yaml(self, data, defaults=True):
-        data['url'] = self._url
-        data['method'] = self._method
+        if defaults is True:
+            data['url'] = self._url
+            data['method'] = self._method
+            data['authorization'] = self._authorization
+        else:
+            data['url'] = None
+            data['method'] = None
+            data['authorization'] = None

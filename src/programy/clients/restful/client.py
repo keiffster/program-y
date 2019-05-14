@@ -20,6 +20,8 @@ from abc import ABCMeta, abstractmethod
 from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
 from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
+from programy.clients.restful.apikeys import APIKeysHandler
+from programy.clients.restful.auth import RestBasicAuthorizationHandler
 
 
 class RestBotClient(BotClient):
@@ -27,49 +29,24 @@ class RestBotClient(BotClient):
 
     def __init__(self, id, argument_parser=None):
         BotClient.__init__(self, id, argument_parser)
-        self.api_keys = []
+        self._api_keys = APIKeysHandler(self.configuration.client_configuration)
+        self._authorization = None
         self._v1_0_handler = APIHandler_V1_0(self)
         self._v2_0_handler = APIHandler_V2_0(self)
+
+    @property
+    def api_keys(self):
+        return self._api_keys
 
     def get_client_configuration(self):
         return RestConfiguration(self.id)
 
-    def load_api_keys(self):
-        if self.configuration.client_configuration.use_api_keys is True:
-            if self.configuration.client_configuration.api_key_file is not None:
-                try:
-                    with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
-                        for api_key in api_key_file:
-                            self.api_keys.append(api_key.strip())
-
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to open license key file [%s]", excep, self.configuration.client_configuration.api_key_file)
-
     def initialise(self):
-        self.load_api_keys()
+        self._api_keys.load_api_keys()
 
-    def get_api_key(self, rest_request):
-        if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
-            return None
-        return rest_request.args['apikey']
-
-    def is_apikey_valid(self, apikey):
-        return bool(apikey in self.api_keys)
-
-    def verify_api_key_usage(self, request):
-        if self.configuration.client_configuration.use_api_keys is True:
-
-            apikey = self.get_api_key(request)
-
-            if apikey is None:
-                YLogger.error(self, "Unauthorised access - api required but missing")
-                return {'error': 'Unauthorized access'}, 401
-
-            if self.is_apikey_valid(apikey) is False:
-                YLogger.error(self, "'Unauthorised access - invalid api key")
-                return {'error': 'Unauthorized access'}, 401
-
-        return None, None
+        if self.configuration.client_configuration.authorization is not None:
+            self._authorization = RestBasicAuthorizationHandler(self.configuration.client_configuration)
+            self._authorization.initialise(self)
 
     def get_variable(self, rest_request, name, method='GET'):
         if method == 'GET':
@@ -89,11 +66,11 @@ class RestBotClient(BotClient):
             self.server_abort(400)
 
     @abstractmethod
-    def server_abort(self, error_code):
+    def server_abort(self, message, status_code):
         raise NotImplementedError()
 
     @abstractmethod
-    def create_response(self, response, status):
+    def create_response(self, response_data, status_code, version=1.0):
         raise NotImplementedError()
 
     def _get_metadata(self, client_context, metadata):
@@ -134,14 +111,27 @@ class RestBotClient(BotClient):
         return response
 
     def process_request(self, request, version=1.0):
+
+        if self._authorization is not None:
+            if self._authorization.authorise(request) is False:
+                return "Access denied", 503
+        print("Authorised")
+
+        if self._api_keys is not None:
+            if self._api_keys.use_api_keys():
+                if self._api_keys.verify_api_key_usage(request) is False:
+                    return 'Unauthorized access', 401
+        print("API Keys")
+
         if version == 1.0:
             return self._v1_0_handler.process_request(request)
+
         elif version == 2.0:
+            print("V2")
             return self._v2_0_handler.process_request(request)
+
         else:
-            return 'Invalid API version', 500
-
-
+            return 'Invalid API version', 400
 
     def dump_request(self, request):
         YLogger.debug(self, str(request))

@@ -16,6 +16,7 @@ class BrainOpenChatBotConfigurationTests(unittest.TestCase):
                 chatbot1:
                     url: https://99.88.77.66/api/rest/v2.0/ask
                     method: GET
+                    authorization: Basic
         """, ConsoleConfiguration(), ".")
 
         brain_config = yaml.get_section("brain")
@@ -28,6 +29,7 @@ class BrainOpenChatBotConfigurationTests(unittest.TestCase):
 
         self.assertEqual("GET", openchatbot_config.method)
         self.assertEqual("https://99.88.77.66/api/rest/v2.0/ask", openchatbot_config.url)
+        self.assertEqual("Basic", openchatbot_config.authorization)
 
     def test_rest_without_data(self):
         yaml = YamlConfigurationFile()
@@ -48,5 +50,6 @@ class BrainOpenChatBotConfigurationTests(unittest.TestCase):
 
         self.assertIsNone(openchatbot_config.url)
         self.assertIsNone(openchatbot_config.method)
+        self.assertIsNone(openchatbot_config.authorization)
 
 

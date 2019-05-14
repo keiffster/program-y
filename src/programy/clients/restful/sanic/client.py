@@ -40,11 +40,11 @@ class SanicRestBotClient(RestBotClient):
     def server_abort(self, message, status_code):
         raise ServerError(message, status_code=status_code)
 
-    def create_response(self, response, status):
+    def create_response(self, response, status_code, version=1.0):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response)
 
-        return json(response, status=status)
+        return json(response, status=status_code)
 
     def run(self, sanic):
 

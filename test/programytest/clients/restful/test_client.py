@@ -7,6 +7,7 @@ from programy.clients.restful.config import RestConfiguration
 
 from programytest.clients.arguments import MockArgumentParser
 
+
 class RestBotClientTests(unittest.TestCase):
 
     def test_init(self):

@@ -102,13 +102,24 @@ class OpenChatRESTService(GenericRESTService):
 
             chatbot = self._get_openchatbot(client_context, botname)
 
+            headers = {}
+            if chatbot.authorization == 'Basic':
+                headers['AUTHORIZATION'] = "Basic %s"%client_context.client.license_keys.get_key("BASIC_AUTH_TOKEN")
+
             if chatbot.method == 'GET':
                 full_url = self._format_get_url(chatbot.url, client_context, query)
-                response = self.api.get(full_url)
+                if chatbot.authorization == 'Basic':
+                    response = self.api.get(full_url, headers=headers)
+                else:
+                    response = self.api.get(full_url)
 
             elif chatbot.method == 'POST':
                 payload = self._format_post_payload(client_context, query)
-                response = self.api.post(chatbot.url, data=payload)
+                if chatbot.authorisation_type == 'Basic':
+                    response = self.api.post(chatbot.url, data=payload, headers=headers)
+                else:
+                    response = self.api.post(chatbot.url, data=payload)
+
 
             else:
                 raise Exception("Unsupported REST method [%s]"%self.method)

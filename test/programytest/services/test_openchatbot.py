@@ -29,7 +29,7 @@ class MockRestAPI(object):
 
 class OpenChatRESTServiceTests(unittest.TestCase):
 
-    def setUp(self):
+    def test_ask_question_get(self):
         client = TestClient()
         client.add_license_keys_store()
         self._client_context = client.create_client_context("testid")
@@ -38,7 +38,76 @@ class OpenChatRESTServiceTests(unittest.TestCase):
                                                                                          "http://localhost:5959/api/rest/v2.0/ask",
                                                                                          "GET")
 
-    def test_ask_question_get(self):
+        mock_data = {"response": {
+                            "text": "Hi there from chatbot1",
+                        },
+                        "status": {"code": 200, "text": "success"}
+                     }
+        mock_response = json.dumps(mock_data)
+
+        service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+
+        response = service.ask_question(self._client_context, "chatbot1 Hello")
+        self.assertIsNotNone(response)
+        self.assertEquals("Hi there from chatbot1", response)
+
+    def test_ask_question_get_with_authorization(self):
+        client = TestClient()
+        client.add_license_keys_store()
+        self._client_context = client.create_client_context("testid")
+
+        self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
+                                                                                         "http://localhost:5959/api/rest/v2.0/ask",
+                                                                                         "GET",
+                                                                                         "Basic",
+                                                                                         "1234567890")
+
+        mock_data = {"response": {
+                            "text": "Hi there from chatbot1",
+                        },
+                        "status": {"code": 200, "text": "success"}
+                     }
+        mock_response = json.dumps(mock_data)
+
+        service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+
+        response = service.ask_question(self._client_context, "chatbot1 Hello")
+        self.assertIsNotNone(response)
+        self.assertEquals("Hi there from chatbot1", response)
+
+
+    def test_ask_question_post(self):
+        client = TestClient()
+        client.add_license_keys_store()
+        self._client_context = client.create_client_context("testid")
+
+        self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
+                                                                                         "http://localhost:5959/api/rest/v2.0/ask",
+                                                                                         "POST")
+
+        mock_data = {"response": {
+                            "text": "Hi there from chatbot1",
+                        },
+                        "status": {"code": 200, "text": "success"}
+                     }
+        mock_response = json.dumps(mock_data)
+
+        service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+
+        response = service.ask_question(self._client_context, "chatbot1 Hello")
+        self.assertIsNotNone(response)
+        self.assertEquals("Hi there from chatbot1", response)
+
+    def test_ask_question_post_with_authorization(self):
+        client = TestClient()
+        client.add_license_keys_store()
+        self._client_context = client.create_client_context("testid")
+
+        self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
+                                                                                         "http://localhost:5959/api/rest/v2.0/ask",
+                                                                                         "POST",
+                                                                                        "Basic",
+                                                                                        "1234567890")
 
         mock_data = {"response": {
                             "text": "Hi there from chatbot1",

@@ -14,7 +14,7 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
-from flask import Flask, jsonify, request, make_response, abort
+from flask import Flask, jsonify, request, make_response, abort, Response
 
 from programy.clients.restful.client import RestBotClient
 
@@ -25,19 +25,19 @@ class FlaskRestBotClient(RestBotClient):
         RestBotClient.__init__(self, id, argument_parser)
         self.initialise()
 
-    def server_abort(self, error_code):
-        abort(error_code)
+    def server_abort(self, message, status_code):
+        abort(Response(message), status_code)
 
-    def create_response(self, response_data, status, version=1.0):
+    def create_response(self, response_data, status_code, version=1.0):
         if self.configuration.client_configuration.debug is True:
             self.dump_request(response_data)
 
         if version == 1.0:
-            return make_response(jsonify(response_data, status))
+            return make_response(jsonify(response_data, status_code))
         elif version == 2.0:
-            return make_response(jsonify(response_data), status)
+            return make_response(jsonify(response_data), status_code)
         else:
-            return make_response('Invalid API version', 500)
+            return make_response('Invalid API version', 400)
 
     def run(self, flask):
 
