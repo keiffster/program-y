@@ -19,6 +19,7 @@ from programy.utils.logging.ylogger import YLogger
 
 from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
+
 class TemplateStarNode(TemplateIndexedNode):
 
     def __init__(self, index=1):
@@ -38,10 +39,11 @@ class TemplateStarNode(TemplateIndexedNode):
                 YLogger.error(client_context, "Star node has no matched context for clientid %s", client_context.userid)
                 resolved = ""
             else:
+                int_index = int(self.index.resolve(client_context))
                 try:
-                    resolved = matched_context.star(self.index)
+                    resolved = matched_context.star(int_index)
                     if resolved is None:
-                        YLogger.error(client_context, "Star index not in range [%d]", self.index)
+                        YLogger.error(client_context, "Star index not in range [%d]", int_index)
                         resolved = ""
                 except Exception:
                     YLogger.error(client_context, "Star index not in range [%d]", self.index)
@@ -54,14 +56,13 @@ class TemplateStarNode(TemplateIndexedNode):
 
     def to_string(self):
         string = "[STAR"
-        string += self.get_index_as_str() + ']'
+        string += self.index.to_string() + ']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<star"
-        xml += self.get_index_as_xml()
-        xml += ">"
-        xml += "</star>"
+        xml = '<star index="'
+        xml += self.index.to_xml(client_context)
+        xml += '"></star>'
         return xml
 
     #######################################################################################################

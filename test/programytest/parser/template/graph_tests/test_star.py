@@ -7,6 +7,7 @@ from programy.parser.template.nodes.star import TemplateStarNode
 
 from programytest.parser.template.graph_tests.graph_test_client import TemplateGraphTestClient
 
+
 class TemplateGraphStarTests(TemplateGraphTestClient):
 
     def test_star_no_index_full(self):

@@ -47,7 +47,10 @@ class TemplateNode(object):
             self.output_child(child, tabs + "\t", eol, output_func)
 
     def resolve_children_to_string(self, client_context):
-        words = [child.resolve(client_context) for child in self._children]
+        words = []
+        for child in self._children:
+            words.append(child.resolve(client_context))
+
         return client_context.brain.tokenizer.words_to_texts(words)
 
     def resolve_to_string(self, client_context):
@@ -70,7 +73,8 @@ class TemplateNode(object):
 
     def xml_tree(self, client_context):
         xml = "<template>"
-        xml += self.children_to_xml(client_context)
+        value =  self.children_to_xml(client_context)
+        xml += value
         xml += "</template>"
         return ET.fromstring(xml)
 

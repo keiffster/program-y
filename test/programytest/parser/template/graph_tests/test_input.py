@@ -9,12 +9,12 @@ from programytest.parser.template.graph_tests.graph_test_client import TemplateG
 
 class TemplateGraphInputTests(TemplateGraphTestClient):
 
-    def test_input_node_from_xml(self):
+    def test_input_node_from_xml_default(self):
         template = ET.fromstring("""
-			<template>
-				<input/>
-			</template>
-			""")
+            <template>
+                <input/>
+            </template>
+            """)
         root = self._graph.parse_template_expression(template)
         self.assertIsNotNone(root)
         self.assertIsInstance(root, TemplateNode)
@@ -25,11 +25,54 @@ class TemplateGraphInputTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateInputNode)
 
+        result = node.resolve(self.create_client_context("testid"))
+        self.assertIsNotNone(result)
+
+    def test_input_node_from_xml_attrib(self):
+        template = ET.fromstring("""
+            <template>
+                <input index="1"/>
+            </template>
+            """)
+        root = self._graph.parse_template_expression(template)
+        self.assertIsNotNone(root)
+        self.assertIsInstance(root, TemplateNode)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 1)
+
+        node = root.children[0]
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, TemplateInputNode)
+
+        result = node.resolve(self.create_client_context("testid"))
+        self.assertIsNotNone(result)
+
+    def test_input_node_from_xml_children(self):
+        template = ET.fromstring("""
+            <template>
+                <input>
+                    <index>1</index>
+                </input>
+            </template>
+            """)
+        root = self._graph.parse_template_expression(template)
+        self.assertIsNotNone(root)
+        self.assertIsInstance(root, TemplateNode)
+        self.assertIsNotNone(root.children)
+        self.assertEqual(len(root.children), 1)
+
+        node = root.children[0]
+        self.assertIsNotNone(node)
+        self.assertIsInstance(node, TemplateInputNode)
+
+        result = node.resolve(self.create_client_context("testid"))
+        self.assertIsNotNone(result)
+
     def test_input_node_with_children(self):
         template = ET.fromstring("""
-			<template>
-				<input>Text</input>
-			</template>
-			""")
+            <template>
+                <input>Text</input>
+            </template>
+            """)
         with self.assertRaises(ParserException):
-            root = self._graph.parse_template_expression(template)
+            self._graph.parse_template_expression(template)

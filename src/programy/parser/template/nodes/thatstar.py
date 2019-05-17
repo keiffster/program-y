@@ -17,41 +17,58 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 
-from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
+from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
 
 #####################################################################################################################
 #
-class TemplateThatStarNode(TemplateDoubleIndexedNode):
+class TemplateThatStarNode(TemplateIndexedNode):
 
-    def __init__(self, question=1, sentence=1):
-        TemplateDoubleIndexedNode.__init__(self, question, sentence)
+    def __init__(self, index=1):
+        TemplateIndexedNode.__init__(self, index)
 
     def resolve_to_string(self, client_context):
         conversation = client_context.bot.get_conversation(client_context)
 
-        question = conversation.previous_nth_question(self.question - 1)
+        if conversation.has_current_question():
 
-        sentence = question.current_sentence()
+            current_question = conversation.current_question()
 
-        resolved = sentence.matched_context.thatstar(self.sentence)
+            current_sentence = current_question.current_sentence()
 
-        YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+            matched_context = current_sentence.matched_context
+            if matched_context is None:
+                YLogger.error(client_context, "ThatStar node has no matched context for clientid %s", client_context.userid)
+                resolved = ""
+            else:
+                int_index = int(self.index.resolve(client_context))
+                try:
+                    resolved = matched_context.thatstar(int_index)
+                    if resolved is None:
+                        YLogger.error(client_context, "ThatStar index not in range [%d]", int_index)
+                        resolved = ""
+                except Exception:
+                    YLogger.error(client_context, "ThatStar index not in range [%d]", self.index)
+                    resolved = ""
+        else:
+            resolved = ""
+
+        YLogger.debug(client_context, "ThatStar Node [%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
         string = "[THATSTAR"
-        string += self.get_question_and_sentence_as_str() + "]"
+        string += self.index.to_string() + ']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<thatstar"
-        xml += self.get_question_and_sentence_as_index_xml()
-        xml += "></thatstar>"
+        xml = '<thatstar index="'
+        xml += self.index.to_xml(client_context)
+        xml += '"></thatstar>'
         return xml
 
     #######################################################################################################
     # THATSTAR_EXPRESSION ::== <thatstar( INDEX_ATTRIBUTE)/> | <thatstar><index>TEMPLATE_EXPRESSION</index></thatstar>
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attrib(graph, expression, "index", "1,1")
+        self._parse_node_with_attrib(graph, expression, "index", "1")

@@ -32,36 +32,36 @@ class TemplateInputNode(TemplateIndexedNode):
     def __init__(self, index=0):
         TemplateIndexedNode.__init__(self, index)
 
-    def get_default_index(self):
-        return 0
-
     def resolve_to_string(self, client_context):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.current_question()
-        if self.index == 0:
+
+        int_index = int(self.index.resolve(client_context))
+        if int_index == 0:
             resolved = question.combine_sentences()
+
         else:
-            resolved = question.previous_nth_sentence(self.index).text()
+            resolved = conversation.previous_nth_question(int_index).combine_sentences()
+
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
         string = "[INPUT"
-        string += self.get_index_as_str()
+        string += self.index.to_string()
         string += ']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<input"
-        xml += self.get_index_as_xml()
-        xml += ">"
-        xml += "</input>"
+        xml = '<input index="'
+        xml += self.index.to_xml(client_context)
+        xml += '"></input>'
         return xml
 
     #######################################################################################################
     # INPUT_EXPRESSION ::== <input( INDEX_ATTRIBUTE)/> | <input><index>TEMPLATE_EXPRESSION</index></input>
 
     def parse_expression(self, graph, expression):
-        self._parse_node_with_attrib(graph, expression, "index", "1")
+        self._parse_node_with_attrib(graph, expression, "index", "0")
         if self.children:
             raise ParserException("<input> node should not contain child text, use <input /> or <input></input> only")

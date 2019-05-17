@@ -19,11 +19,11 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateResponseNode()
-        self.assertEqual("[RESPONSE]", node.to_string())
+        self.assertEqual("[RESPONSE[WORD]1]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateResponseNode(index=2)
-        self.assertEqual("[RESPONSE index=2]", node.to_string())
+        self.assertEqual("[RESPONSE[WORD]2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -33,7 +33,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><response /></template>", xml_str)
+        self.assertEqual('<template><response index="1" /></template>', xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
@@ -53,7 +53,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
 
         node = TemplateResponseNode()
         self.assertIsNotNone(node)
-        self.assertEqual(1, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
@@ -82,7 +82,7 @@ class TemplateResponseNodeTests(ParserTestsBaseClass):
 
         node = TemplateResponseNode(index=1)
         self.assertIsNotNone(node)
-        self.assertEqual(1, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)

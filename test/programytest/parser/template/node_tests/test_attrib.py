@@ -2,9 +2,8 @@ from programy.parser.template.nodes.attrib import TemplateAttribNode
 
 from programytest.parser.base import ParserTestsBaseClass
 
-######################################################################################################################
-#
-class TemplateAttribTests(ParserTestsBaseClass):
+
+class TemplateAttribNodeTests(ParserTestsBaseClass):
 
     def test_node(self):
         attrib = TemplateAttribNode()

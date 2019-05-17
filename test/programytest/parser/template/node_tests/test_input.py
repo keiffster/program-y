@@ -20,11 +20,11 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateInputNode()
-        self.assertEqual("[INPUT]", node.to_string())
+        self.assertEqual("[INPUT[WORD]0]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateInputNode(index=2)
-        self.assertEqual("[INPUT index=2]", node.to_string())
+        self.assertEqual("[INPUT[WORD]2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -34,7 +34,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><input /></template>", xml_str)
+        self.assertEqual('<template><input index="0" /></template>', xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
@@ -57,7 +57,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(0, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         conversation = Conversation(self._client_context)
 
@@ -82,7 +82,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(1, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         conversation = Conversation(self._client_context)
 
@@ -98,7 +98,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         response = root.resolve(self._client_context)
         self.assertIsNotNone(response)
-        self.assertEqual(response, "How are you")
+        self.assertEqual(response, "Hello world")
 
     def test_resolve_no_sentence(self):
         root = TemplateNode()
@@ -111,7 +111,7 @@ class TemplateInputNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(3, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         conversation = Conversation(self._client_context)
 

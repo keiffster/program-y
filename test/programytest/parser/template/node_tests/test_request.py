@@ -15,15 +15,16 @@ class MockTemplateRequestNode(TemplateRequestNode):
     def resolve_to_string(self, context):
         raise Exception("This is an error")
 
+
 class TemplateRequestNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateRequestNode()
-        self.assertEqual("[REQUEST]", node.to_string())
+        self.assertEqual("[REQUEST[WORD]1]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateRequestNode(index=2)
-        self.assertEqual("[REQUEST index=2]", node.to_string())
+        self.assertEqual("[REQUEST[WORD]2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -33,7 +34,7 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><request /></template>", xml_str)
+        self.assertEqual('<template><request index="1" /></template>', xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
@@ -56,7 +57,7 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(1, node.index)
+        self.assertEqual("1", node.index.word)
 
         conversation = Conversation(self._client_context)
         self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
@@ -84,7 +85,7 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(1, node.index)
+        self.assertEqual("1", node.index.word)
 
         conversation = Conversation(self._client_context)
         self._client_context.bot._conversation_mgr._conversations["testid"] = conversation
@@ -112,7 +113,7 @@ class TemplateRequestNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(3, node.index)
+        self.assertEqual("3", node.index.word)
 
         conversation = Conversation(self._client_context)
 

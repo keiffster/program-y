@@ -94,8 +94,8 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
 
     def test_set_attrib(self):
         node = TemplateSystemNode()
-        node.set_attrib("timeout", 1000)
-        self.assertEqual(1000, node.timeout)
+        node.set_attrib("timeout", TemplateWordNode("1000"))
+        self.assertEqual("1000", node._timeout.word)
 
         with self.assertRaises(ParserException):
             node.set_attrib("unknown", 1000)
@@ -114,14 +114,13 @@ class TemplateSystemNodeTests(ParserTestsBaseClass):
     def test_to_xml_with_timeout(self):
         root = TemplateNode()
         node = TemplateSystemNode()
-        node.timeout = 1000
         root.append(node)
         node.append(TemplateWordNode('echo "Hello World"'))
 
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><system timeout="1000">echo "Hello World"</system></template>', xml_str)
+        self.assertEqual('<template><system>echo "Hello World"</system></template>', xml_str)
 
     def test_node_exception_handling(self):
         root = TemplateNode()

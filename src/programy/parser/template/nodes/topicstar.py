@@ -33,22 +33,24 @@ class TemplateTopicStarNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, index)
 
     def resolve_to_string(self, client_context):
+        int_index = int(self.index.resolve(client_context))
+
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.current_question()
         sentence = question.current_sentence()
-        resolved = sentence.matched_context.topicstar(self.index)
+        resolved = sentence.matched_context.topicstar(int_index)
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
         string = "[TOPICSTAR"
-        string += self.get_index_as_str() + ']'
+        string += self.index.to_string() + ']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<topicstar"
-        xml += self.get_index_as_xml()
-        xml += ">"
+        xml = '<topicstar index="'
+        xml += self.index.to_xml(client_context)
+        xml += '">'
         xml += "</topicstar>"
         return xml
 

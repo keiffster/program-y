@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 
-from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
+from programy.parser.template.nodes.indexed import TemplateIndexedNode
 
 ######################################################################################################################
 #
@@ -25,26 +25,50 @@ from programy.parser.template.nodes.indexed import TemplateDoubleIndexedNode
 # <that index=”n” />
 # <that index="m,n" />
 #
-class TemplateThatNode(TemplateDoubleIndexedNode):
 
-    def __init__(self, question=1, sentence=1):
-        TemplateDoubleIndexedNode.__init__(self, question, sentence)
+
+class TemplateThatNode(TemplateIndexedNode):
+
+    def __init__(self, index=1):
+        TemplateIndexedNode.__init__(self, index)
 
     def resolve_to_string(self, client_context):
+        index = self.index.resolve(client_context)
+        parts = index.split(",")
+        if len(parts) == 1:
+            int_question = int(parts[0])
+            int_sentence = -1
+        elif len(parts) == 2:
+            int_question = int(parts[0])
+            if parts[1] != '*':
+                int_sentence = int(parts[1])
+            else:
+                int_sentence = -1
+        else:
+            YLogger.error(client_context, "Thatstar index not of valid format [%s]", index)
+            return ""
+
         conversation = client_context.bot.get_conversation(client_context)
-        question = conversation.previous_nth_question(self.question)
-        resolved = question.combine_answers()
+
+        question = conversation.previous_nth_question(int_question)
+
+        if int_sentence == -1:
+            resolved = question.combine_answers()
+        else:
+            resolved = question.sentence(int_sentence-1).response
+
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
+
         return resolved
 
     def to_string(self):
         string = "[THAT"
-        string += self.get_question_and_sentence_as_str() + ']'
+        string += self.index.to_string()+']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<that"
-        xml += self.get_question_and_sentence_as_index_xml()
+        xml = "<that "
+        xml += 'index="%s"'%self.index.to_xml(client_context)
         xml += ">"
         xml += "</that>"
         return xml

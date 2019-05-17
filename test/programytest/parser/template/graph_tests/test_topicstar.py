@@ -8,7 +8,7 @@ from programytest.parser.template.graph_tests.graph_test_client import TemplateG
 
 class TemplateGraphTopicStarTests(TemplateGraphTestClient):
 
-    def test_thatstar_index_as_attrib_full(self):
+    def test_topicstar_index_as_attrib_full(self):
         template = ET.fromstring("""
 			<template>
 				<topicstar index="1"></topicstar>
@@ -20,6 +20,6 @@ class TemplateGraphTopicStarTests(TemplateGraphTestClient):
         self.assertIsNotNone(node)
         self.assertIsInstance(node, TemplateTopicStarNode)
 
-        self.assertEqual(root.children[0].to_string(), "[TOPICSTAR]")
+        self.assertEqual(root.children[0].to_string(), "[TOPICSTAR[WORD]1]")
         self.assertEqual(root.resolve(self._client_context), "*")
 

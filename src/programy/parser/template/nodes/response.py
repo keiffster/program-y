@@ -31,23 +31,24 @@ class TemplateResponseNode(TemplateIndexedNode):
         TemplateIndexedNode.__init__(self, index)
 
     def resolve_to_string(self, client_context):
+        int_index = int(self.index.resolve(client_context))
+
         conversation = client_context.bot.get_conversation(client_context)
-        question = conversation.previous_nth_question(self.index)
+        question = conversation.previous_nth_question(int_index)
         resolved = question.combine_answers()
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
         string = "[RESPONSE"
-        string += self.get_index_as_str()
+        string += self.index.to_string()
         string += ']'
         return string
 
     def to_xml(self, client_context):
-        xml = "<response"
-        xml += self.get_index_as_xml()
-        xml += ">"
-        xml += "</response>"
+        xml = '<response index="'
+        xml += self.index.to_xml(client_context)
+        xml += '"></response>'
         return xml
 
     #######################################################################################################

@@ -18,13 +18,15 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.utils.text.text import TextUtils
 from programy.parser.template.nodes.base import TemplateNode
+from programy.parser.template.nodes.word import TemplateWordNode
+
 
 class TemplateAttribNode(TemplateNode):
 
     def __init__(self):
         TemplateNode.__init__(self)
 
-    def set_attrib(self, attrib_name, attrib_value):
+    def set_attrib(self, attrib_name: str, attrib_value):
         raise NotImplementedError("Should not call this base method, implementation missing")
 
     #######################################################################################################
@@ -35,7 +37,7 @@ class TemplateAttribNode(TemplateNode):
         for attrib in attribs:
             attrib_name = attrib[0]
             if attrib_name in expression.attrib:
-                self.set_attrib(attrib_name, expression.attrib[attrib_name])
+                self.set_attrib(attrib_name, TemplateWordNode(expression.attrib[attrib_name]))
                 attribs_found.append(attrib_name)
 
         self.parse_text(graph, self.get_text_from_element(expression))
@@ -46,7 +48,7 @@ class TemplateAttribNode(TemplateNode):
             for attrib in attribs:
                 attrib_name = attrib[0]
                 if tag_name == attrib_name:
-                    self.set_attrib(attrib[0], self.get_text_from_element(child))
+                    self.set_attrib(attrib[0], self.parse_children_as_word_node(graph, child))
                 else:
                     graph.parse_tag_expression(child, self)
 
@@ -57,13 +59,14 @@ class TemplateAttribNode(TemplateNode):
             if attrib_name not in attribs_found:
                 if attrib[1] is not None:
                     YLogger.debug(self, "Setting default value for attrib [%s]", attrib_name)
-                    self.set_attrib(attrib_name, attrib[1])
+                    self.set_attrib(attrib_name, TemplateWordNode(attrib[1]))
 
     def _parse_node_with_attrib(self, graph, expression, attrib_name, default_value=None):
 
-        attrib_found = True
+        attrib_found = False
         if attrib_name in expression.attrib:
-            self.set_attrib(attrib_name, expression.attrib[attrib_name])
+            self.set_attrib(attrib_name, TemplateWordNode(expression.attrib[attrib_name]))
+            attrib_found = True
 
         self.parse_text(graph, self.get_text_from_element(expression))
 
@@ -71,12 +74,14 @@ class TemplateAttribNode(TemplateNode):
             tag_name = TextUtils.tag_from_text(child.tag)
 
             if tag_name == attrib_name:
-                self.set_attrib(attrib_name, self.get_text_from_element(child))
+                self.set_attrib(attrib_name, self.parse_children_as_word_node(graph, child))
+                attrib_found = True
             else:
                 graph.parse_tag_expression(child, self)
 
             self.parse_text(graph, self.get_tail_from_element(child))
 
         if attrib_found is False:
-            YLogger.debug(self, "Setting default value for attrib [%s]", attrib_name)
-            self.set_attrib(attrib_name, default_value)
+            if default_value is not None:
+                YLogger.debug(self, "Setting default value for attrib [%s]", attrib_name)
+                self.set_attrib(attrib_name, TemplateWordNode(default_value))

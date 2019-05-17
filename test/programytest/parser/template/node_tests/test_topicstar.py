@@ -20,11 +20,11 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateTopicStarNode()
-        self.assertEqual("[TOPICSTAR]", node.to_string())
+        self.assertEqual("[TOPICSTAR[WORD]1]", node.to_string())
 
     def test_to_str_no_defaults(self):
         node = TemplateTopicStarNode(index=2)
-        self.assertEqual("[TOPICSTAR index=2]", node.to_string())
+        self.assertEqual("[TOPICSTAR[WORD]2]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -34,7 +34,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><topicstar /></template>", xml_str)
+        self.assertEqual('<template><topicstar index="1" /></template>', xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
@@ -54,7 +54,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         node = TemplateTopicStarNode()
         self.assertIsNotNone(node)
-        self.assertEqual(1, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
@@ -87,7 +87,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
 
         node = TemplateTopicStarNode(index=1)
         self.assertIsNotNone(node)
-        self.assertEqual(1, node.index)
+        self.assertIsInstance(node.index, TemplateNode)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)

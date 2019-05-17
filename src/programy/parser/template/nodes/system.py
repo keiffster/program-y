@@ -20,21 +20,14 @@ import subprocess
 
 from programy.parser.exceptions import ParserException
 from programy.parser.template.nodes.attrib import TemplateAttribNode
+from programy.parser.template.nodes.word import TemplateWordNode
 
 
 class TemplateSystemNode(TemplateAttribNode):
 
     def __init__(self):
         TemplateAttribNode.__init__(self)
-        self._timeout = 0
-
-    @property
-    def timeout(self):
-        return self._timeout
-
-    @timeout.setter
-    def timeout(self, timeout):
-        self._timeout = timeout
+        self._timeout = TemplateWordNode("0")
 
     def resolve_to_string(self, client_context):
         if client_context.brain.configuration.overrides.allow_system_aiml is True:
@@ -44,16 +37,19 @@ class TemplateSystemNode(TemplateAttribNode):
             for line in process.stdout.readlines():
                 byte_string = line.decode("utf-8")
                 result.append(byte_string.strip())
+
             process.wait()
             resolved = " ".join(result)
+
         else:
             YLogger.warning(client_context, "System command node disabled in config")
             resolved = ""
+
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 
     def to_string(self):
-        return "[SYSTEM timeout=%s]" % (self._timeout)
+        return "[SYSTEM timeout=%s]" % (self._timeout.to_string())
 
     def set_attrib(self, attrib_name, attrib_value):
         if attrib_name != 'timeout':
@@ -63,11 +59,16 @@ class TemplateSystemNode(TemplateAttribNode):
 
     def to_xml(self, client_context):
         xml = "<system"
-        if self._timeout != 0:
-            xml += ' timeout="%d"' % self._timeout
+
+        timeout = self._timeout.to_xml(client_context)
+
+        if timeout != "0":
+            xml += ' timeout="%s"' % timeout
+
         xml += ">"
         xml += self.children_to_xml(client_context)
         xml += "</system>"
+
         return xml
 
     #######################################################################################################

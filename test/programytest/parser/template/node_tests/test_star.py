@@ -106,7 +106,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><star /></template>", xml_str)
+        self.assertEqual('<template><star index="1" /></template>', xml_str)
 
     def test_node_no_defaults(self):
         root = TemplateNode()
@@ -119,7 +119,7 @@ class TemplateStarNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(2, node.index)
+        self.assertEqual("2", node.index.word)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()

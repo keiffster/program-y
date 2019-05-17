@@ -20,15 +20,15 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):
         node = TemplateThatStarNode()
-        self.assertEqual("[THATSTAR]", node.to_string())
+        self.assertEqual("[THATSTAR[WORD]1]", node.to_string())
 
     def test_to_str_no_defaults(self):
-        node = TemplateThatStarNode(3, 2)
-        self.assertEqual("[THATSTAR question=3 sentence=2]", node.to_string())
+        node = TemplateThatStarNode("3,2")
+        self.assertEqual("[THATSTAR[WORD]3,2]", node.to_string())
 
     def test_to_str_star(self):
-        node = TemplateThatStarNode(1, -1)
-        self.assertEqual("[THATSTAR sentence=*]", node.to_string())
+        node = TemplateThatStarNode("1,*")
+        self.assertEqual("[THATSTAR[WORD]1,*]", node.to_string())
 
     def test_to_xml_defaults(self):
         root = TemplateNode()
@@ -38,27 +38,27 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual("<template><thatstar /></template>", xml_str)
+        self.assertEqual('<template><thatstar index="1" /></template>', xml_str)
 
     def test_to_xml_no_defaults(self):
         root = TemplateNode()
-        node = TemplateThatStarNode(question=3, sentence=2)
+        node = TemplateThatStarNode(index="3")
         root.append(node)
 
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><thatstar index="3,2" /></template>', xml_str)
+        self.assertEqual('<template><thatstar index="3" /></template>', xml_str)
 
     def test_to_xml_no_default_star(self):
         root = TemplateNode()
-        node = TemplateThatStarNode(question=3, sentence=-1)
+        node = TemplateThatStarNode("3")
         root.append(node)
 
         xml = root.xml_tree(self._client_context)
         self.assertIsNotNone(xml)
         xml_str = ET.tostring(xml, "utf-8").decode("utf-8")
-        self.assertEqual('<template><thatstar index="3,*" /></template>', xml_str)
+        self.assertEqual('<template><thatstar index="3" /></template>', xml_str)
 
     def test_node(self):
         root = TemplateNode()
@@ -71,8 +71,7 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(1, node.question)
-        self.assertEqual(1, node.sentence)
+        self.assertIsInstance(node.index, TemplateNode)
 
     def test_node_no_defaults(self):
         root = TemplateNode()
@@ -80,13 +79,12 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(root.children)
         self.assertEqual(len(root.children), 0)
 
-        node = TemplateThatStarNode(question=3, sentence=2)
+        node = TemplateThatStarNode(index="2,3")
         self.assertIsNotNone(node)
 
         root.append(node)
         self.assertEqual(len(root.children), 1)
-        self.assertEqual(3, node.question)
-        self.assertEqual(2, node.sentence)
+        self.assertIsInstance(node.index, TemplateNode)
 
     def test_node_no_star(self):
         root = TemplateNode()

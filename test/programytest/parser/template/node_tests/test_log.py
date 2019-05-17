@@ -42,24 +42,20 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
     def test_set_attrib(self):
         log = TemplateLogNode()
 
-        log.set_attrib('level', 'debug')
-        self.assertEqual("debug", log.level)
+        log.set_attrib('level', TemplateWordNode('debug'))
+        self.assertEqual("debug", log.level.word)
 
-        log.set_attrib('level', 'warning')
-        self.assertEqual("warning", log.level)
+        log.set_attrib('level', TemplateWordNode('warning'))
+        self.assertEqual("warning", log.level.word)
 
-        log.set_attrib('level', 'error')
-        self.assertEqual("error", log.level)
+        log.set_attrib('level', TemplateWordNode('error'))
+        self.assertEqual("error", log.level.word)
 
-        log.set_attrib('level', 'info')
-        self.assertEqual("info", log.level)
-
-        with self.assertRaises(ParserException):
-            log.set_attrib('unknown', 'info')
+        log.set_attrib('level', TemplateWordNode('info'))
+        self.assertEqual("info", log.level.word)
 
         with self.assertRaises(ParserException):
-            log.set_attrib('level', 'unknown')
-
+            log.set_attrib('unknown', TemplateWordNode('info'))
 
     def test_node(self):
         root = TemplateNode()
@@ -93,7 +89,7 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log.level = "debug"
+        log.level = TemplateWordNode("debug")
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -107,7 +103,7 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log.level = "error"
+        log.level = TemplateWordNode("error")
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -121,7 +117,7 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log.level = "info"
+        log.level = TemplateWordNode("info")
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
@@ -135,7 +131,7 @@ class TemplateLogNodeTests(ParserTestsBaseClass):
 
         root = TemplateNode()
         log = TemplateLogNode()
-        log.level = "warning"
+        log.level = TemplateWordNode("warning")
 
         log.append(TemplateWordNode("Log Test"))
         root.append(log)
