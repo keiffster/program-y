@@ -42,7 +42,7 @@ class OpenChatRESTService(GenericRESTService):
 
         return payload
 
-    def _format_get_url(self, url, client_context, question, lang=None, location=None):
+    def _format_get_url(self, url, client_context, question, lang=None, location=None, api_key=None):
         get_url = "%s?query=%s&userId=%s"%(url, quote(question), client_context.userid)
 
         if lang is not None:
@@ -50,6 +50,9 @@ class OpenChatRESTService(GenericRESTService):
 
         if location is not None:
             get_url = "%s&location=%s"%(get_url, location)
+
+        if api_key is not None:
+            get_url = "%s&apikey=%s"%(get_url, api_key)
 
         return get_url
 
@@ -103,19 +106,30 @@ class OpenChatRESTService(GenericRESTService):
             chatbot = self._get_openchatbot(client_context, botname)
 
             headers = {}
-            if chatbot.authorization == 'Basic':
-                headers['AUTHORIZATION'] = "Basic %s"%client_context.client.license_keys.get_key("BASIC_AUTH_TOKEN")
 
             if chatbot.method == 'GET':
-                full_url = self._format_get_url(chatbot.url, client_context, query)
+                full_url = self._format_get_url(chatbot.url, client_context, query, api_key=chatbot.api_key)
+
                 if chatbot.authorization == 'Basic':
+                    headers['AUTHORIZATION'] = "Basic %s" % client_context.client.license_keys.get_key(
+                        "BASIC_AUTH_TOKEN")
+
                     response = self.api.get(full_url, headers=headers)
+
                 else:
                     response = self.api.get(full_url)
 
             elif chatbot.method == 'POST':
                 payload = self._format_post_payload(client_context, query)
-                if chatbot.authorisation_type == 'Basic':
+                if chatbot.authorisation_type == 'Basic' or chatbot.api_key is not None:
+
+                    if chatbot.authorization == 'Basic':
+                        headers['AUTHORIZATION'] = "Basic %s" % client_context.client.license_keys.get_key(
+                            "BASIC_AUTH_TOKEN")
+
+                    if chatbot.api_key is not None:
+                        headers['PROGRAMY-API-KEY'] = chatbot.api_key
+
                     response = self.api.post(chatbot.url, data=payload, headers=headers)
                 else:
                     response = self.api.post(chatbot.url, data=payload)

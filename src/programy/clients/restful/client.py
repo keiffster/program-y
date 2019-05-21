@@ -21,7 +21,7 @@ from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
 from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
 from programy.clients.restful.apikeys import APIKeysHandler
-from programy.clients.restful.auth import RestBasicAuthorizationHandler
+from programy.clients.restful.auth import RestAuthorizationHandler
 
 
 class RestBotClient(BotClient):
@@ -43,10 +43,7 @@ class RestBotClient(BotClient):
 
     def initialise(self):
         self._api_keys.load_api_keys()
-
-        if self.configuration.client_configuration.authorization is not None:
-            self._authorization = RestBasicAuthorizationHandler(self.configuration.client_configuration)
-            self._authorization.initialise(self)
+        self._authorization = RestAuthorizationHandler.load_authorisation(self)
 
     def get_variable(self, rest_request, name, method='GET'):
         if method == 'GET':
@@ -115,19 +112,16 @@ class RestBotClient(BotClient):
         if self._authorization is not None:
             if self._authorization.authorise(request) is False:
                 return "Access denied", 403
-        print("Authorised")
 
         if self._api_keys is not None:
             if self._api_keys.use_api_keys():
                 if self._api_keys.verify_api_key_usage(request) is False:
                     return 'Unauthorized access', 401
-        print("API Keys")
 
         if version == 1.0:
             return self._v1_0_handler.process_request(request)
 
         elif version == 2.0:
-            print("V2")
             return self._v2_0_handler.process_request(request)
 
         else:

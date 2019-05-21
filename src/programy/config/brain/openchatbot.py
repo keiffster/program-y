@@ -27,6 +27,7 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
         self._url = None
         self._method = None
         self._authorization = None
+        self._api_key = None
 
     @property
     def url(self):
@@ -40,6 +41,10 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
     def authorization(self):
         return self._authorization
 
+    @property
+    def api_key(self):
+        return self._api_key
+
     def check_for_license_keys(self, license_keys):
         BaseSectionConfigurationData.check_for_license_keys(self, license_keys)
 
@@ -49,6 +54,7 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
             self._url = configuration_file.get_option(openchatbot, "url", missing_value=None, subs=subs)
             self._method = configuration_file.get_option(openchatbot, "method", missing_value="GET", subs=subs)
             self._authorization = configuration_file.get_option(openchatbot, "authorization", subs=subs)
+            self._api_key = configuration_file.get_option(openchatbot, "api_key", subs=subs)
             self.load_additional_key_values(configuration_file, openchatbot)
         else:
             YLogger.warning(self, "'openchatbots' section missing from brain config, using to defaults")
@@ -58,7 +64,9 @@ class BrainOpenChatBotConfiguration(BaseSectionConfigurationData):
             data['url'] = self._url
             data['method'] = self._method
             data['authorization'] = self._authorization
+            data['api_key'] = self._api_key
         else:
             data['url'] = None
             data['method'] = None
             data['authorization'] = None
+            data['api_key'] = None

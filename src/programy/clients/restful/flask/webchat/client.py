@@ -1,3 +1,19 @@
+"""
+Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software,
+and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the
+Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"""
 import uuid
 import datetime
 
@@ -13,12 +29,14 @@ from flask import current_app
 from programy.clients.restful.flask.client import FlaskRestBotClient
 from programy.clients.restful.flask.webchat.config import WebChatConfiguration
 from programy.clients.render.html import HtmlRenderer
+from programy.clients.restful.auth import RestAuthorizationHandler
 
 
 class WebChatBotClient(FlaskRestBotClient):
 
     def __init__(self, argument_parser=None):
         FlaskRestBotClient.__init__(self, "WebChat", argument_parser)
+        self._authorization = RestAuthorizationHandler.load_authorisation(self)
 
     def get_client_configuration(self):
         return WebChatConfiguration()
@@ -28,20 +46,6 @@ class WebChatBotClient(FlaskRestBotClient):
 
     def unauthorised_access_response(self, error_code=401):
         return make_response(jsonify({'error': 'Unauthorized access'}), error_code)
-
-    # TODO Move this into base REST Client, then every REST based service supports API Keys
-    def check_api_key(self, request):
-        if self.configuration.client_configuration.use_api_keys is True:
-            api_key = self.api_keys.get_api_key(request)
-            if api_key is None:
-                YLogger.error(self, "Unauthorised access - api required but missing")
-                return self.unauthorised_access_response()
-
-            if self.api_keys.is_apikey_valid(api_key) is False:
-                YLogger.error(self, "'Unauthorised access - invalid api key")
-                return self.unauthorised_access_response()
-
-        return None
 
     def get_question(self, request):
         if 'question' in request.args:
@@ -89,9 +93,14 @@ class WebChatBotClient(FlaskRestBotClient):
 
     def receive_message(self, request):
 
-        api_key_response = self.api_keys.check_api_key(request)
-        if api_key_response is not None:
-            return api_key_response
+        if self._authorization is not None:
+            if self._authorization.authorise(request) is False:
+                abort(403)
+
+        if self._api_keys is not None:
+            if self._api_keys.use_api_keys():
+                if self._api_keys.verify_api_key_usage(request) is False:
+                    abort(403)
 
         question = self.get_question(request)
         if question is None:

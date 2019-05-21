@@ -21,7 +21,7 @@ class MockBotClient(object):
         self._variables = variables
         self._response = response
 
-    def verify_api_key_usage(self, request):
+    def verify_api_key_usage(self, request, method='GET'):
         return self._verify_api_key_usage[0],  self._verify_api_key_usage[1]
 
     def get_variable(self, request, name, method):

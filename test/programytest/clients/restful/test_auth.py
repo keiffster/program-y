@@ -1,7 +1,11 @@
 import unittest
 
 from programy.clients.restful.auth import RestBasicAuthorizationHandler
+from programy.clients.restful.auth import RestAuthorizationHandler
+from programy.clients.restful.client import RestBotClient
 from programy.clients.restful.config import RestConfiguration
+
+from programytest.clients.arguments import MockArgumentParser
 
 
 class MockRestBasicAuthorizationHandler(RestBasicAuthorizationHandler):
@@ -20,6 +24,32 @@ class MockRequest(object):
         self.headers = {}
 
 
+class RestAuthorizationHandlerTests(unittest.TestCase):
+
+    def test_basic_authorisation(self):
+
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+
+        client.license_keys.add_key('BASIC_AUTH_TOKEN', "1234567890")
+        client.configuration.client_configuration._authorization = "Basic"
+
+        handler = RestAuthorizationHandler.load_authorisation(client)
+        self.assertIsNotNone(handler)
+
+    def test_unsupported_authorisation(self):
+
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+
+        client.configuration.client_configuration._authorization = "Sha"
+
+        handler = RestAuthorizationHandler.load_authorisation(client)
+        self.assertIsNone(handler)
+
+
 class RestBasicAuthorizationHandlerTests(unittest.TestCase):
 
     def test_init(self):
@@ -30,7 +60,12 @@ class RestBasicAuthorizationHandlerTests(unittest.TestCase):
         self.assertIsNotNone(handler)
         handler.auth_token = "1234567890"
 
-        handler.initialise(None)
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+        client.license_keys.add_key('BASIC_AUTH_TOKEN', "1234567890")
+
+        handler.initialise(client)
         self.assertEquals("1234567890", handler._basic_auth_token)
 
     def test_authorise_valid_header(self):
@@ -41,10 +76,15 @@ class RestBasicAuthorizationHandlerTests(unittest.TestCase):
         self.assertIsNotNone(handler)
         handler.auth_token = "1234567890"
 
-        handler.initialise(None)
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+        client.license_keys.add_key('BASIC_AUTH_TOKEN', "1234567890")
+
+        handler.initialise(client)
 
         request = MockRequest()
-        request.headers['AUTHORISATION'] = 'Basic 1234567890'
+        request.headers['Authorization'] = 'Basic 1234567890'
 
         self.assertTrue(handler.authorise(request))
 
@@ -56,7 +96,12 @@ class RestBasicAuthorizationHandlerTests(unittest.TestCase):
         self.assertIsNotNone(handler)
         handler.auth_token = "1234567890"
 
-        handler.initialise(None)
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+        client.license_keys.add_key('BASIC_AUTH_TOKEN', "1234567890")
+
+        handler.initialise(client)
 
         request = MockRequest()
         request.headers['AUTHORISATION'] = 'Basic 0123456789'
@@ -71,7 +116,12 @@ class RestBasicAuthorizationHandlerTests(unittest.TestCase):
         self.assertIsNotNone(handler)
         handler.auth_token = "1234567890"
 
-        handler.initialise(None)
+        arguments = MockArgumentParser()
+        client = RestBotClient("testrest", arguments)
+        self.assertIsNotNone(client)
+        client.license_keys.add_key('BASIC_AUTH_TOKEN', "1234567890")
+
+        handler.initialise(client)
 
         request = MockRequest()
 

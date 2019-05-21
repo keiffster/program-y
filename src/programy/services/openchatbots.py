@@ -20,11 +20,12 @@ from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 
 class OpenChatBot(object):
 
-    def __init__(self, name, url, method, authorization):
+    def __init__(self, name, url, method, authorization, api_key):
         self._name = name
         self._url = url
         self._method = method
         self._authorization = authorization
+        self._api_key = api_key
 
     @property
     def name(self):
@@ -42,6 +43,10 @@ class OpenChatBot(object):
     def authorization(self):
         return self._authorization
 
+    @property
+    def api_key(self):
+        return self._api_key
+
 
 class OpenChatBotCollection(object):
 
@@ -56,7 +61,8 @@ class OpenChatBotCollection(object):
             self._openchatbots[name.upper()] = OpenChatBot(openchatbot_config.section_name,
                                                            openchatbot_config.url,
                                                            openchatbot_config.method,
-                                                           openchatbot_config.authorization)
+                                                           openchatbot_config.authorization,
+                                                           openchatbot_config.api_key)
         return True
 
     def exists(self, name):

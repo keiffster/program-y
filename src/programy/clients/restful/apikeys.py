@@ -20,6 +20,9 @@ from programy.clients.restful.config import RestConfiguration
 
 class APIKeysHandler(object):
 
+    API_KEY_HEADER = "PROGRAMY-API-KEY"
+    API_KEY_ARG = 'apikey'
+
     def __init__(self, configuration: RestConfiguration):
         self._configuration = configuration
         self.api_keys = []
@@ -38,18 +41,31 @@ class APIKeysHandler(object):
     def use_api_keys(self):
         return self._configuration.use_api_keys
 
-    def get_api_key(self, rest_request):
-        if 'apikey' not in rest_request.args or rest_request.args['apikey'] is None:
-            return None
-        return rest_request.args['apikey']
+    def get_api_key(self, rest_request, method='GET'):
+        if method == 'GET':
+            if APIKeysHandler.API_KEY_ARG not in rest_request.args:
+                return None
+
+            if rest_request.args[APIKeysHandler.API_KEY_ARG] is None:
+                return None
+
+            return rest_request.args[APIKeysHandler.API_KEY_ARG]
+
+        elif method == 'POST':
+            if APIKeysHandler.APIKeysHandler not in rest_request.headers or \
+                    rest_request.headers [APIKeysHandler.APIKeysHandler] is None:
+                return None
+
+            return rest_request.headers [APIKeysHandler.APIKeysHandler]
+
+        return None
 
     def is_apikey_valid(self, apikey):
         return bool(apikey in self.api_keys)
 
-    def verify_api_key_usage(self, request):
+    def verify_api_key_usage(self, request, method='GET'):
         if self.use_api_keys() is True:
-
-            apikey = self.get_api_key(request)
+            apikey = self.get_api_key(request, method)
 
             if apikey is None:
                 YLogger.error(self, "Unauthorised access - api required but missing")

@@ -53,10 +53,6 @@ class APIHandler_V1_0(APIHandler):
         userid = APIHandler.UNKNOWN
 
         try:
-            response, status = self._bot_client.verify_api_key_usage(request)
-            if response is not None:
-                return response, status
-
             question = self._bot_client.get_variable(request, APIHandler_V1_0.QUESTION, method)
             userid = self._bot_client.get_variable(request, APIHandler_V1_0.USERID, method)
 

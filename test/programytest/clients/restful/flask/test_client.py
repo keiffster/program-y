@@ -37,7 +37,7 @@ class FlaskRestBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         client.configuration.client_configuration._use_api_keys = False
         request = unittest.mock.Mock()
-        self.assertEqual((None, None),client.verify_api_key_usage(request))
+        self.assertTrue(client.api_keys.verify_api_key_usage(request))
 
     def test_get_api_key(self):
         arguments = MockArgumentParser()
@@ -47,7 +47,7 @@ class FlaskRestBotClientTests(unittest.TestCase):
         request.args = {}
         request.args['apikey'] = '11111111'
 
-        self.assertEqual('11111111', client.get_api_key(request))
+        self.assertEqual('11111111', client.api_keys.get_api_key(request))
 
     def test_verify_api_key_usage_active(self):
         arguments = MockArgumentParser()
@@ -55,11 +55,11 @@ class FlaskRestBotClientTests(unittest.TestCase):
         self.assertIsNotNone(client)
         client.configuration.client_configuration._use_api_keys = True
         client.configuration.client_configuration._api_key_file = os.path.dirname(__file__) + os.sep + ".." + os.sep + ".." + os.sep + "api_keys.txt"
-        client.load_api_keys()
+        client.initialise()
         request = unittest.mock.Mock()
         request.args = {}
         request.args['apikey'] = '11111111'
-        self.assertEqual((None, None),client.verify_api_key_usage(request))
+        self.assertTrue(client.api_keys.verify_api_key_usage(request))
 
     def test_verify_api_key_usage_active_no_apikey(self):
         arguments = MockArgumentParser()
@@ -69,7 +69,7 @@ class FlaskRestBotClientTests(unittest.TestCase):
         request = unittest.mock.Mock()
         request.args = {}
 
-        response = client.verify_api_key_usage(request)
+        response = client.api_keys.verify_api_key_usage(request)
         self.assertIsNotNone(response)
 
     def test_verify_api_key_usage_active_invalid_apikey(self):
@@ -81,6 +81,6 @@ class FlaskRestBotClientTests(unittest.TestCase):
         request.args = {}
         request.args['apikey'] = 'invalid'
 
-        response = client.verify_api_key_usage(request)
+        response = client.api_keys.verify_api_key_usage(request)
         self.assertIsNotNone(response)
 

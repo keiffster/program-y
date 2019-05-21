@@ -28,6 +28,18 @@ class RestAuthorizationHandler(object):
     def initialise(self, client):
         pass
 
+    @staticmethod
+    def load_authorisation(client):
+        if client.configuration.client_configuration.authorization is not None:
+            if client.configuration.client_configuration.authorization == 'Basic':
+                YLogger.info(client, "Loading Authorization - Basic")
+                auth = RestBasicAuthorizationHandler(client.configuration.client_configuration)
+                auth.initialise(client)
+                return auth
+            else:
+                YLogger.error(client, "Unsupported Authentication [%s]", client.configuration.client_configuration.authorization)
+        return None
+
 
 class RestBasicAuthorizationHandler(RestAuthorizationHandler):
 
@@ -41,7 +53,7 @@ class RestBasicAuthorizationHandler(RestAuthorizationHandler):
         return client.license_keys.get_key("BASIC_AUTH_TOKEN")
 
     def initialise(self, client):
-        self._basic_auth_token = self.get_license_key(client)
+        self._basic_auth_token = RestBasicAuthorizationHandler.get_license_key(client)
 
     def authorise(self, request):
         if 'Authorization' in request.headers:
