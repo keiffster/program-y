@@ -145,13 +145,15 @@ if __name__ == '__main__':
             YLogger.exception(None, "Web client error", e)
             return "500"
 
-    @APP.route(WEB_CLIENT.ping_responder.config.url, methods=['GET'])
-    def ping():
-        return jsonify(WEB_CLIENT.ping_responder.ping())
+    if WEB_CLIENT.ping_responder.config.url is not None:
+        @APP.route(WEB_CLIENT.ping_responder.config.url, methods=['GET'])
+        def ping():
+            return jsonify(WEB_CLIENT.ping_responder.ping())
 
-    @APP.route(WEB_CLIENT.ping_responder.config.shutdown, methods=['GET'])
-    def shutdown():
-        WEB_CLIENT.ping_responder.stop_ping_service()
-        return 'Server shutting down...'
+    if WEB_CLIENT.ping_responder.config.shutdown is not None:
+        @APP.route(WEB_CLIENT.ping_responder.config.shutdown, methods=['GET'])
+        def shutdown():
+            WEB_CLIENT.ping_responder.stop_ping_service()
+            return 'Server shutting down...'
 
     WEB_CLIENT.run(APP)
