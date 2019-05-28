@@ -23,6 +23,8 @@ from urllib.parse import quote
 
 from programy.services.rest import GenericRESTService
 from programy.config.brain.service import BrainServiceConfiguration
+from programy.clients.restful.apikeys import APIKeysHandler
+from programy.clients.restful.auth import RestBasicAuthorizationHandler
 
 
 class OpenChatRESTService(GenericRESTService):
@@ -52,7 +54,7 @@ class OpenChatRESTService(GenericRESTService):
             get_url = "%s&location=%s"%(get_url, location)
 
         if api_key is not None:
-            get_url = "%s&apikey=%s"%(get_url, api_key)
+            get_url = "%s&%s"%(get_url, APIKeysHandler.format_get_api_key_param(api_key))
 
         return get_url
 
@@ -90,13 +92,12 @@ class OpenChatRESTService(GenericRESTService):
 
     def _get_openchatbot(self, client_context, botname):
 
-        if client_context.brain.openchatbots.exists(botname):
-            openchatbot = client_context.brain.openchatbots.openchatbot(botname)
+        openchatbot = client_context.brain.openchatbots.openchatbot(botname)
 
-            if openchatbot is not None:
-                return openchatbot
+        if openchatbot is not None:
+            return openchatbot
 
-        raise Exception ("Unknown OpenChatBot [%s]" % botname)
+        raise Exception ("No open chatbot available for [%s]"% botname)
 
     def ask_question(self, client_context, question: str):
 
@@ -107,33 +108,30 @@ class OpenChatRESTService(GenericRESTService):
 
             headers = {}
 
-            if chatbot.method == 'GET':
+            if self.method == 'GET' and self.method in chatbot.methods:
                 full_url = self._format_get_url(chatbot.url, client_context, query, api_key=chatbot.api_key)
 
                 if chatbot.authorization == 'Basic':
-                    headers['AUTHORIZATION'] = "Basic %s" % client_context.client.license_keys.get_key(
-                        "BASIC_AUTH_TOKEN")
+                    RestBasicAuthorizationHandler.add_authorisation_header(client_context, headers)
 
                     response = self.api.get(full_url, headers=headers)
 
                 else:
                     response = self.api.get(full_url)
 
-            elif chatbot.method == 'POST':
+            elif self.method == 'POST' and self.method in chatbot.methods:
                 payload = self._format_post_payload(client_context, query)
-                if chatbot.authorisation_type == 'Basic' or chatbot.api_key is not None:
+                if chatbot.authorization == 'Basic' or chatbot.api_key is not None:
 
                     if chatbot.authorization == 'Basic':
-                        headers['AUTHORIZATION'] = "Basic %s" % client_context.client.license_keys.get_key(
-                            "BASIC_AUTH_TOKEN")
+                        RestBasicAuthorizationHandler.add_authorisation_header(client_context, headers)
 
                     if chatbot.api_key is not None:
-                        headers['PROGRAMY-API-KEY'] = chatbot.api_key
+                        APIKeysHandler.add_post_api_key_header(headers, chatbot.api_key)
 
                     response = self.api.post(chatbot.url, data=payload, headers=headers)
                 else:
                     response = self.api.post(chatbot.url, data=payload)
-
 
             else:
                 raise Exception("Unsupported REST method [%s]"%self.method)

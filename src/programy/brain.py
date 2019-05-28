@@ -38,7 +38,7 @@ from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
-from programy.services.openchatbots import OpenChatBotCollection
+from programy.services.openchatbot.collection import OpenChatBotCollection
 from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.template.factory import TemplateNodeFactory

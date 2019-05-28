@@ -27,6 +27,14 @@ class APIKeysHandler(object):
         self._configuration = configuration
         self.api_keys = []
 
+    @staticmethod
+    def format_get_api_key_param(api_key):
+        return "%s=%s" % (APIKeysHandler.API_KEY_ARG, api_key)
+
+    @staticmethod
+    def add_post_api_key_header(headers, api_key):
+        headers['PROGRAMY-API-KEY'] = api_key
+
     def load_api_keys(self):
         if self._configuration.use_api_keys is True:
             if self._configuration.api_key_file is not None:

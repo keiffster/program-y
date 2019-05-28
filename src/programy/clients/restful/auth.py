@@ -44,20 +44,31 @@ class RestAuthorizationHandler(object):
 class RestBasicAuthorizationHandler(RestAuthorizationHandler):
 
     BASIC = "Basic"
+    BASIC_AUTH_TOKEN = 'BASIC_AUTH_TOKEN'
 
     def __init__(self, configuration: RestConfiguration):
         RestAuthorizationHandler.__init__(self, configuration)
+        self._basic_auth_token = None
+
+    @staticmethod
+    def get_auth_token_from_license_keys(client_context):
+        return client_context.client.license_keys.get_key(RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
+
+    @staticmethod
+    def add_authorisation_header(client_context, headers):
+        headers[RestBasicAuthorizationHandler.AUTHORIZATION] = "Basic %s" % \
+                            client_context.client.license_keys.get_key(RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
 
     @staticmethod
     def get_license_key(client):
-        return client.license_keys.get_key("BASIC_AUTH_TOKEN")
+        return client.license_keys.get_key(RestBasicAuthorizationHandler.BASIC_AUTH_TOKEN)
 
     def initialise(self, client):
         self._basic_auth_token = RestBasicAuthorizationHandler.get_license_key(client)
 
     def authorise(self, request):
-        if 'Authorization' in request.headers:
-            authorization = request.headers['Authorization']
+        if RestBasicAuthorizationHandler.AUTHORIZATION in request.headers:
+            authorization = request.headers[RestBasicAuthorizationHandler.AUTHORIZATION]
             parts = authorization.split(" ")
             if len(parts) > 1:
                 type = parts[0].strip()

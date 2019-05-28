@@ -1,9 +1,9 @@
 import unittest
 import json
 
-from programy.services.openchat import OpenChatRESTService
+from programy.services.openchatbot.service import OpenChatRESTService
 from programy.config.brain.service import BrainServiceConfiguration
-from programy.services.openchatbots import OpenChatBot
+from programy.services.openchatbot.openchatbot import OpenChatBot
 
 from programytest.client import TestClient
 
@@ -20,10 +20,10 @@ class MockRestAPI(object):
         self.status_code = status_code
         self.response = response
 
-    def get(self, host):
+    def get(self, host, headers=None):
         return MockRestResponse(self.status_code, self.response)
 
-    def post(self, host, data):
+    def post(self, host, data, headers=None):
         return MockRestResponse(self.status_code, self.response)
 
 
@@ -58,7 +58,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
                                                                                          "http://localhost:5959/api/rest/v2.0/ask",
-                                                                                         "GET",
+                                                                                         ["GET"],
                                                                                          "Basic",
                                                                                          "1234567890")
 
@@ -83,7 +83,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
                                                                                          "http://localhost:5959/api/rest/v2.0/ask",
-                                                                                         "POST")
+                                                                                         ["POST"])
 
         mock_data = {"response": {
                             "text": "Hi there from chatbot1",
@@ -92,7 +92,10 @@ class OpenChatRESTServiceTests(unittest.TestCase):
                      }
         mock_response = json.dumps(mock_data)
 
-        service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+        service_config = BrainServiceConfiguration("openchatbot")
+        service_config._method = 'POST'
+
+        service = OpenChatRESTService(service_config, api=MockRestAPI(200, mock_response))
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
@@ -105,9 +108,9 @@ class OpenChatRESTServiceTests(unittest.TestCase):
 
         self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
                                                                                          "http://localhost:5959/api/rest/v2.0/ask",
-                                                                                         "POST",
-                                                                                        "Basic",
-                                                                                        "1234567890")
+                                                                                         ["POST"],
+                                                                                         "Basic",
+                                                                                         "1234567890")
 
         mock_data = {"response": {
                             "text": "Hi there from chatbot1",
@@ -116,7 +119,10 @@ class OpenChatRESTServiceTests(unittest.TestCase):
                      }
         mock_response = json.dumps(mock_data)
 
-        service = OpenChatRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+        service_config = BrainServiceConfiguration("openchatbot")
+        service_config._method = 'POST'
+
+        service = OpenChatRESTService(service_config, api=MockRestAPI(200, mock_response))
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)

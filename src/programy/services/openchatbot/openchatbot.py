@@ -15,15 +15,13 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
-
 
 class OpenChatBot(object):
 
-    def __init__(self, name, url, method, authorization, api_key):
+    def __init__(self, name, url, methods, authorization=None, api_key=None):
         self._name = name
         self._url = url
-        self._method = method
+        self._methods = methods
         self._authorization = authorization
         self._api_key = api_key
 
@@ -36,8 +34,8 @@ class OpenChatBot(object):
         return self._url
 
     @property
-    def method(self):
-        return self._method
+    def methods(self):
+        return self._methods
 
     @property
     def authorization(self):
@@ -47,29 +45,40 @@ class OpenChatBot(object):
     def api_key(self):
         return self._api_key
 
+    @staticmethod
+    def uri(host, port, endpoint):
+        if endpoint.startswith('/') is False:
+            endpoint = "/" + endpoint
 
-class OpenChatBotCollection(object):
+        if port == 0:
+            return "%s%s"%(host, endpoint)
+        else:
+            return "%s:%d%s"%(host, port, endpoint)
 
-    def __init__(self):
-        self._openchatbots = {}
+    @staticmethod
+    def create(name, payload):
 
-    def load_from_configuration(self, configuration: BrainOpenChatBotsConfiguration):
+        if 'openchatbot' not in payload:
+            return None
+        openchatbot = payload['openchatbot']
 
-        names = configuration.openchatbots()
-        for name in names:
-            openchatbot_config = configuration.openchatbot(name)
-            self._openchatbots[name.upper()] = OpenChatBot(openchatbot_config.section_name,
-                                                           openchatbot_config.url,
-                                                           openchatbot_config.method,
-                                                           openchatbot_config.authorization,
-                                                           openchatbot_config.api_key)
-        return True
+        if 'host' not in openchatbot:
+            return None
+        host = openchatbot['host']
 
-    def exists(self, name):
-        return bool(name.upper() in self._openchatbots)
+        if 'port' not in openchatbot:
+            port = 0
+        else:
+            port = openchatbot['port']
 
-    def openchatbot(self, name):
-        if self.exists(name):
-            return self._openchatbots[name.upper()]
+        if 'endpoint' not in openchatbot:
+            return None
+        endpoint = openchatbot['endpoint']
 
-        return None
+        uri = OpenChatBot.uri(host, port, endpoint)
+
+        if 'methods' not in openchatbot:
+            return None
+        methods = openchatbot['methods']
+
+        return OpenChatBot(name, uri, methods)
