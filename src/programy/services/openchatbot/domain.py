@@ -19,6 +19,7 @@ from programy.utils.logging.ylogger import YLogger
 import requests
 
 from programy.services.openchatbot.openchatbot import OpenChatBot
+from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 
 
 class HTTPRequests(object):
@@ -31,54 +32,66 @@ class OpenChatBotDomainHandler(object):
 
     config_file_name = "openchatbot-configuration"
     wellknown_folder = ".well-known"
-    search_domains = ["co", "co.uk", "uk", "fr", "es", "net", "info", "org"]
-    default_domain = "com"
+    default_domain = ["com"]
 
-    def __init__(self, scan_alternatives=True, http_requests=None):
-        self._scan_alternatives = scan_alternatives
+    def __init__(self, configuration: BrainOpenChatBotsConfiguration, http_requests=None):
+        self._config = configuration
+
         if http_requests is None:
             self._http_requests = HTTPRequests()
         else:
             self._http_requests = http_requests
         self._cached = {}
 
-    @staticmethod
-    def _get_protocol(https):
-        if https is True:
-            return "https"
-        else:
-            return "http"
-
-    def _create_query_url(self, domain, https, ext=default_domain):
-
-        return "%s://%s.%s/%s/%s"%(self._get_protocol(https), domain, ext,
+    def _create_query_url(self, domain, protocol, ext):
+        return "%s://%s.%s/%s/%s"%(protocol, domain, ext,
                                    OpenChatBotDomainHandler.wellknown_folder,
                                    OpenChatBotDomainHandler.config_file_name)
 
-    def get_endpoint(self, domain, https=False):
+    def _try_connection(self, domain, protocol, ext):
+        url = self._create_query_url(domain, protocol, ext)
 
+        YLogger.debug(None, "Trying [%s]", url)
+        reply = self._http_requests.get(url)
+
+        if reply.status_code == 200:
+            domaincb = OpenChatBot.create(domain, reply.json())
+            self.cache_domain(domain, domaincb)
+            return domaincb
+
+        return None
+
+    def get_extensions(self):
+        return OpenChatBotDomainHandler.default_domain + self._config.domains
+
+    def get_cached(self, domain):
         if domain.upper() in self._cached:
             YLogger.info(None, "Returning cached domain chatbot [%s]", domain)
             return self._cached[domain.upper()]
+        return None
 
-        extensions = [OpenChatBotDomainHandler.default_domain]
-        if self._scan_alternatives is True:
-            extensions = extensions + OpenChatBotDomainHandler.search_domains
+    def cache_domain(self, domain, domaincb):
+        self._cached[domain.upper()] = domaincb
 
-        for ext in extensions:
-            try:
-                url = self._create_query_url(domain, https, ext)
+    def get_endpoint(self, domain):
 
-                YLogger.debug(None, "Trying [%s]", url)
-                reply = self._http_requests.get(url)
+        domaincb = self.get_cached(domain)
+        if domaincb is not None:
+            return domaincb
 
-                if reply.status_code == 200:
-                    domaincb = OpenChatBot.create(domain, reply.json())
-                    self._cached[domain.upper()] = domaincb
-                    return domaincb
+        extensions = self.get_extensions()
 
-            except Exception as excep:
-                YLogger.exception_nostack(None, "Failed to get endpoint for domain [%s]", excep, domain)
+        # Either http, https, or both
+        for protocol in self._config.protocols:
+            # always com, then anything in config.domains, e.g co.uk, org, fr, de etc
+            for ext in extensions:
+                try:
+                    domaincb = self._try_connection(domain, protocol, ext)
+                    if domaincb is not None:
+                        return domaincb
+
+                except Exception as excep:
+                    YLogger.exception_nostack(None, "Failed to get endpoint for domain [%s]", excep, domain)
 
         return None
 

@@ -26,6 +26,16 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
     def __init__(self):
         BaseSectionConfigurationData.__init__(self, "openchatbots")
         self._openchatbots = {}
+        self._protocols = ['http']
+        self._domains = []
+
+    @property
+    def protocols(self):
+        return self._protocols
+
+    @property
+    def domains(self):
+        return self._domains
 
     def exists(self, name):
         return bool(name in self._openchatbots)
@@ -47,12 +57,24 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
             openchatbot_keys = configuration_file.get_keys(openchatbots)
 
             for name in openchatbot_keys:
-                openchatbot = BrainOpenChatBotConfiguration(name)
-                openchatbot.load_config_section(configuration_file, openchatbots, bot_root, subs=subs)
-                self._openchatbots[name] = openchatbot
+                if name == 'protocols':
+                    protocols = configuration_file.get_option(openchatbots, "protocols", missing_value=['http'], subs=subs)
+                    self._protocols = [x.strip() for x in protocols.split(",")]
+                elif name == 'domains':
+                    domains = configuration_file.get_option(openchatbots, "domains", missing_value=[], subs=subs)
+                    self._domains = [x.strip() for x in domains.split(",")]
+                else:
+                    openchatbot = BrainOpenChatBotConfiguration(name)
+                    openchatbot.load_config_section(configuration_file, openchatbots, bot_root, subs=subs)
+                    self._openchatbots[name] = openchatbot
 
         else:
             YLogger.warning(self, "Config section [openchatbots] missing from Brain, no openchatbots loaded")
 
     def to_yaml(self, data, defaults=True):
-        return
+        if defaults is True:
+            data['authorization'] = self._authorization
+            data['domains'] = self._domains
+        else:
+            data['protocols'] = ['http']
+            data['domains'] = []
