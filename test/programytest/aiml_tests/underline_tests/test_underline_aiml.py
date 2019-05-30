@@ -60,3 +60,8 @@ class UnderlineAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "GOODBYE KEIFF MATE SEEYA")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'LATER KEIFF MATE.')
+
+    def test_underline_in_word(self):
+        response = self._client_context.bot.ask_question(self._client_context, "PLEASE DO _STOP_")
+        self.assertIsNotNone(response)
+        self.assertEqual(response, 'PLEASE DO.')
