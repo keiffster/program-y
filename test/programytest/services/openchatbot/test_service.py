@@ -2,6 +2,7 @@ import unittest
 import json
 
 from programy.services.openchatbot.service import OpenChatRESTService
+from programy.services.openchatbot.service import OpenChatMetaBotRESTService
 from programy.config.brain.service import BrainServiceConfiguration
 from programy.services.openchatbot.openchatbot import OpenChatBot
 
@@ -95,7 +96,7 @@ class OpenChatRESTServiceTests(unittest.TestCase):
         service_config = BrainServiceConfiguration("openchatbot")
         service_config._method = 'POST'
 
-        service = OpenChatRESTService(service_config, api=MockRestAPI(200, mock_response))
+        service = OpenChatMetaBotRESTService(service_config, api=MockRestAPI(200, mock_response))
 
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
@@ -127,3 +128,28 @@ class OpenChatRESTServiceTests(unittest.TestCase):
         response = service.ask_question(self._client_context, "chatbot1 Hello")
         self.assertIsNotNone(response)
         self.assertEquals("Hi there from chatbot1", response)
+
+
+class OpenChatMetaBotRESTServiceTests(unittest.TestCase):
+
+    def test_ask_question_get(self):
+        client = TestClient()
+        client.add_license_keys_store()
+        self._client_context = client.create_client_context("testid")
+
+        self._client_context.brain._openchatbots._openchatbots['CHATBOT1'] = OpenChatBot("openchat1",
+                                                                                         "http://localhost:5959/api/rest/v2.0/ask",
+                                                                                         "GET")
+
+        mock_data = {"response": {
+                            "text": "Hi there from chatbot1",
+                        },
+                        "status": {"code": 200, "text": "success"}
+                     }
+        mock_response = json.dumps(mock_data)
+
+        service = OpenChatMetaBotRESTService(BrainServiceConfiguration("openchatbot"), api=MockRestAPI(200, mock_response))
+
+        response = service.ask_question(self._client_context, "chatbot1 Hello")
+        self.assertIsNotNone(response)
+        self.assertEquals('{"response": {"text": "Hi there from chatbot1"}, "status": {"code": 200, "text": "success"}}', response)
