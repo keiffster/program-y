@@ -134,13 +134,15 @@ class PingResponder(object):
 
         ping_app = Flask(ping_responder.config.name)
 
-        @ping_app.route(ping_responder.config.url, methods=['GET'])
-        def ping():
-            return jsonify(ping_responder.ping())
+        if ping_responder.config.url is not None:
+            @ping_app.route(ping_responder.config.url, methods=['GET'])
+            def ping():
+                return jsonify(ping_responder.ping())
 
-        @ping_app.route(ping_responder.config.shutdown, methods=['GET'])
-        def shutdown():
-            ping_responder.stop_ping_service()
-            return 'Server shutting down...'
+        if ping_responder.config.shutdown is not None:
+            @ping_app.route(ping_responder.config.shutdown, methods=['GET'])
+            def shutdown():
+                ping_responder.stop_ping_service()
+                return 'Server shutting down...'
 
         ping_responder.start_ping_service(ping_app)
