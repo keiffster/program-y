@@ -98,7 +98,8 @@ class Bot(object):
 
     def initiate_spellchecker(self):
         if self.configuration.spelling is not None:
-            self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling, self.client.storage_factory)
+            self._spell_checker = SpellingChecker.initiate_spellchecker(self.configuration.spelling,
+                                                                        self.client.storage_factory)
 
     @property
     def sentence_splitter(self):
@@ -141,7 +142,8 @@ class Bot(object):
 
     def initiate_sentiment_analyser(self):
         if self.configuration.sentiment_analyser is not None:
-            self._sentiment_analyser, self._sentiment_scores = BaseSentimentAnalyser.initiate_sentiment_analyser(self.configuration.sentiment_analyser)
+            self._sentiment_analyser, self._sentiment_scores = BaseSentimentAnalyser.initiate_sentiment_analyser(
+                self.configuration.sentiment_analyser)
 
     @property
     def brain(self):
@@ -279,7 +281,6 @@ class Bot(object):
             pre_processed = text
 
         if pre_processed is None or pre_processed == "":
-
             assert (self.configuration is not None)
 
             pre_processed = self.configuration.empty_string
@@ -403,9 +404,7 @@ class Bot(object):
         sentence.response = response
 
         sentence.calculate_sentinment_score(client_context)
-
         answer = self.post_process_response(client_context, response, srai)
-
         self.log_answer(client_context, sentence.text, answer, responselogger)
 
         return answer
@@ -413,8 +412,9 @@ class Bot(object):
     def handle_none_response(self, client_context, sentence, responselogger):
 
         assert (sentence is not None)
-
-        sentence.response = self.get_default_response(client_context)
+        sentence.response = self.post_process_response(client_context, sentence.text(), False)
+        if sentence.response is None:
+            sentence.response = self.get_default_response(client_context)
 
         sentence.calculate_sentinment_score(client_context)
 
