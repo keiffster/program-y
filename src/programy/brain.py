@@ -380,7 +380,7 @@ class Brain(object):
         assert (client_context is not None)
         assert (match_context is not None)
 
-        template_node = match_context.template_node()
+        template_node = match_context.template_node
 
         YLogger.debug(client_context, "AIML Parser evaluating template [%s]", template_node.to_string())
 
@@ -388,6 +388,8 @@ class Brain(object):
 
         if self._oobhandler.oob_in_response(response) is True:
             response = self._oobhandler.handle(client_context, response)
+
+        match_context.response = response
 
         return response
 
@@ -419,6 +421,7 @@ class Brain(object):
                                                              that_pattern=that_pattern)
 
             if match_context is not None:
+                match_context.sentence = sentence.text(client_context)
                 return self.resolve_matched_template(client_context, match_context)
 
         return None

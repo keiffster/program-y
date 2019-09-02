@@ -33,7 +33,7 @@ class PatternOneOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
         self.assertEqual(node.wildcard, "*")
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "*")
+        sentence = Sentence(self._client_context, "*")
 
         self.assertTrue(node.equivalent(PatternOneOrMoreWildCardNode("*")))
         result = node.equals(self._client_context, sentence, 0)
@@ -63,7 +63,7 @@ class PatternOneOrMoreWildCardNodeTests(ParserTestsBaseClass):
 
         self.assertEqual(node.wildcard, "_")
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "*")
+        sentence = Sentence(self._client_context, "*")
 
         self.assertTrue(node.equivalent(PatternOneOrMoreWildCardNode("_")))
         result = node.equals(self._client_context, sentence, 0)

@@ -93,6 +93,7 @@ class APIHandler_V2_0(APIHandler):
         #location =  APIHandler_V2_0.UNKNOWN
 
         try:
+            print(request)
             query = self._bot_client.get_variable(request, APIHandler_V2_0.QUERY, method)
             userid = self._bot_client.get_variable(request, APIHandler_V2_0.USERID, method)
             #lang = self._bot_client.get_variable(request, APIHandler_V2_0.LANG, method)
@@ -104,7 +105,6 @@ class APIHandler_V2_0(APIHandler):
             return self.format_success_response(userid, query, answer, metadata), 200
 
         except Exception as excep:
-            print(excep)
             return self.format_error_response(userid, query, str(excep), None), 500
 
     def _get_timestamp(self):

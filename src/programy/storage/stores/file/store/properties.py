@@ -23,6 +23,7 @@ import re
 from programy.storage.stores.file.store.filestore import FileStore
 from programy.storage.entities.property import PropertyStore
 
+
 class FilePropertyStore(FileStore, PropertyStore):
 
     SPLIT_CHAR = ':'
@@ -122,7 +123,6 @@ class FileRegexStore(FilePropertyStore):
 
     def get_regular_expressions(self):
         return self.get_properties()
-
 
 
 class FileDefaultVariablesStore(FilePropertyStore):

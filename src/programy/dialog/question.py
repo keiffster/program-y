@@ -25,7 +25,7 @@ class Question(object):
         if split is True:
             question.split_into_sentences(client_context, text)
         else:
-            question.sentences.append(Sentence(client_context.brain.tokenizer, text))
+            question.sentences.append(Sentence(client_context, text))
         question.recalculate_sentinment_score(client_context)
         return question
 
@@ -48,10 +48,10 @@ class Question(object):
         self._properties = {}
         self._current_sentence_no = -1
 
-    def debug_info(self):
+    def debug_info(self, client_context):
         text = ""
         for sentence in self._sentences:
-            text += sentence.text()
+            text += sentence.text(client_context)
             text += " = "
             if sentence.response is not None:
                 text += sentence.response
@@ -61,8 +61,16 @@ class Question(object):
         return text
 
     @property
+    def srai(self):
+        return self._srai
+
+    @property
     def sentences(self):
         return self._sentences
+
+    @property
+    def properties(self):
+        return self._properties
 
     def has_response(self):
         for sentence in self._sentences:
@@ -97,8 +105,8 @@ class Question(object):
         previous = -1 - num
         return self._sentences[previous]
 
-    def combine_sentences(self):
-        return ". ".join([sentence.text() for sentence in self._sentences])
+    def combine_sentences(self, client_context):
+        return ". ".join([sentence.text(client_context) for sentence in self._sentences])
 
     def combine_answers(self):
         return ". ".join([sentence.response for sentence in self.sentences if sentence.response is not None])
@@ -108,9 +116,9 @@ class Question(object):
             if text is not None and text.strip():
                 all_sentences = client_context.bot.sentence_splitter.split(text)
                 for each_sentence in all_sentences:
-                    self._sentences.append(Sentence(client_context.brain.tokenizer, each_sentence))
+                    self._sentences.append(Sentence(client_context, each_sentence))
         else:
-            self._sentences.append(Sentence(client_context.brain.tokenizer, text))
+            self._sentences.append(Sentence(client_context, text))
 
     def recalculate_sentinment_score(self, client_context):
         for sentence in self._sentences:
@@ -134,3 +142,31 @@ class Question(object):
             subjectivity = 0.5
 
         return positivity, subjectivity
+
+    def to_json(self):
+
+        json_data = {
+            "srai": self._srai,
+            "sentences": [],
+            "current_sentence_no": self._current_sentence_no,
+            "properties": self._properties
+        }
+
+        for sentence in self._sentences:
+            json_data["sentences"].append(sentence.to_json())
+
+        return json_data
+
+    @staticmethod
+    def from_json(client_context, json_data):
+
+        question = Question()
+
+        question._srai = json_data["srai"]
+        question._current_sentence_no = json_data["current_sentence_no"]
+        question._properties = json_data["properties"]
+
+        for sentence in json_data["sentences"]:
+            question.sentences.append(Sentence.from_json(client_context, sentence))
+
+        return question

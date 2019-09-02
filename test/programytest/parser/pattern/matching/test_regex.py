@@ -2,6 +2,7 @@ import re
 
 from programytest.parser.pattern.matching.base import PatternMatcherBaseClass
 
+
 class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
     def test_basic_regex_match_as_text(self):
@@ -10,9 +11,9 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM LEGION", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("LEGION", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("LEGION", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM LEGIONAIRRE", topic="*", that="*")
         self.assertIsNone(context)
@@ -23,9 +24,9 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM LEGION", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("LEGION", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("LEGION", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM LEGIONAIRRE", topic="*", that="*")
         self.assertIsNone(context)
@@ -38,9 +39,9 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM LEGION", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("LEGION", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("LEGION", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM LEGIONAIRRE", topic="*", that="*")
         self.assertIsNone(context)
@@ -53,15 +54,15 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM LEGION", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("LEGION", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("LEGION", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM LEGIONAIRRE", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("LEGIONAIRRE", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("LEGIONAIRRE", context.star(self._client_context, 1))
 
     def test_regex_loaded_from_file(self):
 
@@ -71,6 +72,6 @@ class PatternMatcherRegexTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM 27 YEARS OLD", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("CORRECT", context.template_node().template.word)
-        self.assertEqual("27", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("CORRECT", context.template_node.template.word)
+        self.assertEqual("27", context.star(self._client_context, 1))

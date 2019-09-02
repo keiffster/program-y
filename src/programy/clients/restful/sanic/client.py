@@ -48,7 +48,7 @@ class SanicRestBotClient(RestBotClient):
 
     def run(self, sanic):
 
-        print("%s Client running on %s:%s" % (self.id, self.configuration.client_configuration.host,
+        print("%s Client running on http://%s:%s" % (self.id, self.configuration.client_configuration.host,
                                               self.configuration.client_configuration.port))
 
         self.startup()

@@ -10,9 +10,12 @@ from programy.context import ClientContext
 
 from programytest.client import TestClient
 
+import programytest.externals as Externals
+
 
 class PreProcessingTests(unittest.TestCase):
 
+    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
     def test_pre_cleanup(self):
         self.client = TestClient()
 

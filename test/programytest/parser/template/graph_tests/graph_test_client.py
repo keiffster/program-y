@@ -1,7 +1,8 @@
 import unittest
 
 from programy.dialog.question import Question, Sentence
-from programy.parser.pattern.matcher import MatchContext, Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 
 from programytest.client import TestClient
@@ -32,11 +33,11 @@ class TemplateGraphTestClient(unittest.TestCase):
 
         self._graph = self._client_context.bot.brain.aiml_parser.template_parser
 
-        self.test_sentence = Sentence(self._client_context.brain.tokenizer, "test sentence")
+        self.test_sentence = Sentence(self._client_context, "test sentence")
 
         test_node = PatternOneOrMoreWildCardNode("*")
 
-        self.test_sentence._matched_context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        self.test_sentence._matched_context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         self.test_sentence._matched_context._matched_nodes = [Match(Match.WORD, test_node, 'one'),
                                                               Match(Match.WORD, test_node, 'two'),
                                                               Match(Match.WORD, test_node, 'three'),

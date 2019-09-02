@@ -38,7 +38,7 @@ brain:
 
     services:
         OPENCHAT:
-            classname: programy.services.openchat.OpenChatRESTService
+            classname: programy.services.openchat.openchat.service.OpenChatRESTService
         REST:
             classname: programy.services.rest.GenericRESTService
             method: GET
@@ -127,7 +127,7 @@ brain:
 
         self.assertTrue(brain_configuration.services.exists('OPENCHAT'))
         rest_config = brain_configuration.services.service('OPENCHAT')
-        self.assertEqual("programy.services.openchat.OpenChatRESTService", rest_config.classname)
+        self.assertEqual("programy.services.openchat.openchat.service.OpenChatRESTService", rest_config.classname)
 
         self.assertTrue(brain_configuration.services.exists('REST'))
         rest_config =brain_configuration.services.service('REST')

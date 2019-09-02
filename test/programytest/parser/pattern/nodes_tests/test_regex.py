@@ -140,15 +140,15 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         node2 = PatternRegexNode({}, "^LEGION$", userid="testid")
         node3 = PatternRegexNode({}, "^LEGION$", userid="testid2")
 
-        match1 = node1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match1 = node1.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = node2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match2 = node2.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = node3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match3 = node3.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
@@ -159,15 +159,15 @@ class PatternRegexNodeTests(ParserTestsBaseClass):
         node2 = PatternRegexNode({"template": "LEGION"}, "", userid="testid")
         node3 = PatternRegexNode({"template": "LEGION"}, "", userid="testid2")
 
-        match1 = node1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match1 = node1.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = node2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match2 = node2.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = node3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'LEGION'), 0)
+        match3 = node3.equals(self._client_context, Sentence(self._client_context, 'LEGION'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 

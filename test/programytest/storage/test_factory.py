@@ -258,7 +258,7 @@ class StorageFactoryTests(unittest.TestCase):
         factory.load_engines_from_config(storage_config)
 
         self.assertTrue(factory.storage_engine_available("sql"))
-        self.assertIsInstance(factory.storage_engine("sql"), MongoStorageEngine)
+        self.assertIsInstance(factory.storage_engine("sql"), SQLStorageEngine)
         self.assertTrue(factory.storage_engine_available("mongo"))
         self.assertIsInstance(factory.storage_engine("mongo"), MongoStorageEngine)
         self.assertTrue(factory.storage_engine_available("redis"))

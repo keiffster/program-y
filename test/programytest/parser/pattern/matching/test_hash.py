@@ -1,5 +1,5 @@
-
 from programytest.parser.pattern.matching.base import PatternMatcherBaseClass
+
 
 class PatternMatcherTests(PatternMatcherBaseClass):
 
@@ -9,10 +9,10 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("A", context.star(1))
+        self.assertEqual("A", context.star(self._client_context, 1))
 
     def test_hash_tree_matching_single(self):
 
@@ -20,17 +20,17 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("B A", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("B", context.star(1))
+        self.assertEqual("B", context.star(self._client_context, 1))
 
         context = self.match_sentence("A", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("", context.star(1))
+        self.assertEqual("", context.star(self._client_context, 1))
 
     def test_hash_tree_matching_front(self):
 
@@ -38,17 +38,15 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]", context.template_node.to_string())
+        self.assertEqual("A B", context.star(self._client_context, 1))
 
-        self.assertEqual("A B", context.star(1))
-
-        context = self.match_sentence("C D", topic="X", that="Y")
-        self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-
-        self.assertEqual("", context.star(1))
+        context2 = self.match_sentence("C D", topic="X", that="Y")
+        self.assertIsNotNone(context2)
+        self.assertIsNotNone(context2.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]", context2.template_node.to_string())
+        self.assertEqual("", context2.star(self._client_context, 1))
 
     def test_hash_tree_matching_middle(self):
 
@@ -56,17 +54,17 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("B C", context.star(1))
+        self.assertEqual("B C", context.star(self._client_context, 1))
 
         context = self.match_sentence("A D", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("", context.star(1))
+        self.assertEqual("", context.star(self._client_context, 1))
 
     def test_hash_tree_matching_end(self):
 
@@ -74,17 +72,17 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A B C D", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("C D", context.star(1))
+        self.assertEqual("C D", context.star(self._client_context, 1))
 
         context = self.match_sentence("A B", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("", context.star(1))
+        self.assertEqual("", context.star(self._client_context, 1))
 
     def test_hash_front_and_back(self):
 
@@ -93,11 +91,11 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("F A B G", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
+        self.assertIsNotNone(context.template_node.to_string())
 
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("F", context.star(1))
-        self.assertEqual("G", context.star(2))
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("F", context.star(self._client_context, 1))
+        self.assertEqual("G", context.star(self._client_context, 2))
 
     def test_hash_deep_tree_matching(self):
 
@@ -107,11 +105,11 @@ class PatternMatcherTests(PatternMatcherBaseClass):
         context = self.match_sentence("A X1 X2 X3 X4 B Y1 Y2 Y3 Y4 C", topic="X", that="Y")
 
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("X1 X2 X3 X4", context.star(1))
-        self.assertEqual("Y1 Y2 Y3 Y4", context.star(2))
+        self.assertEqual("X1 X2 X3 X4", context.star(self._client_context, 1))
+        self.assertEqual("Y1 Y2 Y3 Y4", context.star(self._client_context, 2))
         
     def test_hash_at_start_and_end(self):
 
@@ -119,28 +117,28 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A B")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("X A B")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("A X B")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("A B X")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("X A X B X")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
     def test_multiple_hash_at_start_and_end(self):
 
@@ -149,20 +147,20 @@ class PatternMatcherTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("A B")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("X A B")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         context = self.match_sentence("A B C")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("2", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("2", context.template_node.template.word)
 
         context = self.match_sentence("X A B C")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("2", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node.to_string())
+        self.assertEqual("2", context.template_node.template.word)

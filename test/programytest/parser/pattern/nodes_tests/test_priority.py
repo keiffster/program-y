@@ -26,7 +26,7 @@ class PatternPriorityWordNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "test1 test2")
+        sentence = Sentence(self._client_context, "test1 test2")
         self.assertTrue(node.equivalent(PatternPriorityWordNode("test1")))
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
@@ -71,14 +71,14 @@ class PatternPriorityWordNodeTests(ParserTestsBaseClass):
         word2 = PatternPriorityWordNode("word", userid="testid")
         word3 = PatternPriorityWordNode("word", userid="testid2")
 
-        match1 = word1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match1 = word1.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = word2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match2 = word2.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = word3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match3 = word3.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)

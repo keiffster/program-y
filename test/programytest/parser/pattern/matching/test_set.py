@@ -1,4 +1,3 @@
-
 from programytest.parser.pattern.matching.base import PatternMatcherBaseClass
 
 
@@ -15,15 +14,15 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM A MAN", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("MAN", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("MAN", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM A WOMAN", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("WOMAN", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("WOMAN", context.star(self._client_context, 1))
 
     def test_basic_set_match_as_name(self):
 
@@ -36,15 +35,15 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM A MAN", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("MAN", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("MAN", context.star(self._client_context, 1))
 
         context = self.match_sentence("I AM A WOMAN", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("WOMAN", context.star(1))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("WOMAN", context.star(self._client_context, 1))
 
     def test_multi_word_set_match(self):
 
@@ -58,24 +57,24 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I LIKE RED PAINT", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("RED", context.star(1))
-        self.assertEqual("PAINT", context.star(2))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("RED", context.star(self._client_context, 1))
+        self.assertEqual("PAINT", context.star(self._client_context, 2))
 
         context = self.match_sentence("I LIKE RED AMBER CARS", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("RED AMBER", context.star(1))
-        self.assertEqual("CARS", context.star(2))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("RED AMBER", context.star(self._client_context, 1))
+        self.assertEqual("CARS", context.star(self._client_context, 2))
 
         context = self.match_sentence("I LIKE RED BURNT OAK MOTOR BIKES", topic="*", that="*")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
-        self.assertEqual("RED BURNT OAK", context.star(1))
-        self.assertEqual("MOTOR BIKES", context.star(2))
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
+        self.assertEqual("RED BURNT OAK", context.star(self._client_context, 1))
+        self.assertEqual("MOTOR BIKES", context.star(self._client_context, 2))
 
     def test_basic_set_number_match(self):
         self._client_context.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
@@ -84,7 +83,7 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("I AM 49 YEARS OLD", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("49", context.star(1))
+        self.assertEqual("49", context.star(self._client_context, 1))

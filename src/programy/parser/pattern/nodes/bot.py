@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 from programy.parser.pattern.nodes.base import PatternNode
-from programy.parser.pattern.matcher import EqualsMatch
+from programy.parser.pattern.equalsmatch import EqualsMatch
 from programy.parser.exceptions import ParserException
 
 class PatternBotNode(PatternNode):

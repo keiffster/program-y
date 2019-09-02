@@ -24,7 +24,7 @@ class PatternWordNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "test1 test")
+        sentence = Sentence(self._client_context, "test1 test")
 
         self.assertTrue(node.equivalent(PatternWordNode("test1")))
         self.assertFalse(node.equivalent(PatternWordNode("test2")))
@@ -71,14 +71,14 @@ class PatternWordNodeTests(ParserTestsBaseClass):
         word2 = PatternWordNode("word", userid="testid")
         word3 = PatternWordNode("word", userid="testid2")
 
-        match1 = word1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match1 = word1.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = word2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match2 = word2.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = word3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'word'), 0)
+        match3 = word3.equals(self._client_context, Sentence(self._client_context, 'word'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)

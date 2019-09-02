@@ -209,12 +209,6 @@ class Bot(object):
 
         return self._conversation_mgr.get_conversation(client_context)
 
-    def save_conversation(self, client_context):
-
-        assert (self._conversation_mgr is not None)
-
-        self._conversation_mgr.save_conversation(client_context)
-
     def check_spelling_before(self, client_context, each_sentence):
         if self.spell_checker is not None:
             self.spell_checker.check_spelling_before(client_context, each_sentence)
@@ -229,7 +223,7 @@ class Bot(object):
         assert (client_context is not None)
 
         if self.default_response_srai is not None:
-            sentence = Sentence(client_context.brain.tokenizer, self.default_response_srai)
+            sentence = Sentence(client_context, self.default_response_srai)
             default_response = client_context.brain.ask_question(client_context, sentence)
             if default_response is None or not default_response:
                 default_response = self.default_response
@@ -242,7 +236,7 @@ class Bot(object):
         assert (client_context is not None)
 
         if self.initial_question_srai is not None:
-            sentence = Sentence(client_context.brain.tokenizer, self.initial_question_srai)
+            sentence = Sentence(client_context, self.initial_question_srai)
             initial_question = client_context.brain.ask_question(client_context, sentence)
             if initial_question is None or not initial_question:
                 initial_question = self.initial_question
@@ -255,7 +249,7 @@ class Bot(object):
         assert (client_context is not None)
 
         if self.exit_response_srai is not None:
-            sentence = Sentence(client_context.brain.tokenizer, self.exit_response_srai)
+            sentence = Sentence(client_context, self.exit_response_srai)
             exit_response = client_context.brain.ask_question(client_context, sentence)
             if exit_response is None or not exit_response:
                 exit_response = self.exit_response
@@ -353,9 +347,9 @@ class Bot(object):
         if srai is True:
             conversation.pop_dialog()
 
-        self.save_conversation(client_context)
-
         conversation.save_sentiment()
+
+        self._conversation_mgr.save_conversation(client_context)
 
         if self.client.trigger_manager is not None and srai is False:
             self.client.trigger_manager.trigger(SystemTriggers.QUESTION_ASKED, client_context)

@@ -19,6 +19,6 @@ class PatternMatcherBaseClass(ParserTestsBaseClass):
     def match_sentence(self, sentence, topic="*", that="*"):
 
         return self._client_context.brain.aiml_parser.match_sentence(self._client_context,
-                                                                     Sentence(self._client_context.brain.tokenizer, sentence),
+                                                                     Sentence(self._client_context, sentence),
                                                                      topic,
                                                                      that)

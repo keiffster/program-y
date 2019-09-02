@@ -4,7 +4,8 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.thatstar import TemplateThatStarNode
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-from programy.parser.pattern.matcher import MatchContext, Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 
 from programytest.parser.base import ParserTestsBaseClass
@@ -95,11 +96,11 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
@@ -114,16 +115,16 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         context.add_match(Match(Match.THAT, match, "Matched"))
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
@@ -139,16 +140,16 @@ class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
         conversation = Conversation(self._client_context)
 
-        question = Question.create_from_text(self._client_context, "Hello world", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "Hello world")
         question.current_sentence()._response = "Hello matey"
         conversation.record_dialog(question)
 
-        question = Question.create_from_text(self._client_context, "How are you", self._client_context.bot.sentence_splitter)
+        question = Question.create_from_text(self._client_context, "How are you")
         question.current_sentence()._response = "Very well thanks"
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         context.add_match(Match(Match.THAT, match, None))
         question.current_sentence()._matched_context = context
 

@@ -18,16 +18,35 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 import redis
 
 from programy.storage.engine import StorageEngine
-from programy.storage.stores.nosql.redis.store.variables import RedisVariableStore
+from programy.storage.stores.nosql.redis.store.conversations import RedisConversationStore
+
 
 class RedisStorageEngine(StorageEngine):
 
     def __init__(self, configuration):
         StorageEngine.__init__(self, configuration)
+        self._prefix = "programy"       # Default value
+        self._sessions_set_key = self._create_sessions_set_key()
+        self._redis = None
+
+    @property
+    def redis(self):
+        return self._redis
+
+    @property
+    def prefix(self):
+        return self._prefix
+
+    @property
+    def sessions_set_key(self):
+        return self._sessions_set_key
+
+    def _create_sessions_set_key(self):
+        return "{prefix}:sessions".format( prefix=self._prefix )
 
     def initialise(self):
         self._prefix = self.configuration.prefix
-        self._sessions_set_key = "{prefix}:sessions".format( prefix=self._prefix )
+        self._sessions_set_key = self._create_sessions_set_key()
 
         if self.configuration.password is not None:
             self._redis = redis.StrictRedis(
@@ -43,10 +62,10 @@ class RedisStorageEngine(StorageEngine):
 
         if self.configuration.drop_all_first is True:
             try:
-                self.variables_store().empty()
+                self.conversation_store().empty()
             except Exception as e:
                 print("Failed deleting conversation redis data - ", e)
 
-    def variables_store(self):
-        return RedisVariableStore(self)
+    def conversation_store(self):
+        return RedisConversationStore(self)
 

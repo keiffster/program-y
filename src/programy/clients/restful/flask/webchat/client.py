@@ -114,6 +114,7 @@ class WebChatBotClient(FlaskRestBotClient):
         client_context = self.create_client_context(userid)
         try:
             answer = self.get_answer(client_context, question)
+            answer = answer.replace('\n', '').strip()
             rendered = self._renderer.render(client_context, answer)
             response_data = self.create_success_response_data(question, rendered)
 

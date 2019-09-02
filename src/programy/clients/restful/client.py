@@ -49,18 +49,18 @@ class RestBotClient(BotClient):
         if method == 'GET':
             if name not in rest_request.args or rest_request.args[name] is None:
                 YLogger.error(self, "'%s' missing from GET request", name)
-                self.server_abort(400)
+                self.server_abort(message="'%s' missing from GET request"%name, status_code=400)
             return rest_request.args[name]
 
         elif method == 'POST':
             if name not in rest_request.json or rest_request.json[name] is None:
                 YLogger.error(self, "'%s' missing from POST request", name)
-                self.server_abort(400)
+                self.server_abort(message="'%s' missing from POST request"%name, status_code=400)
             return rest_request.json[name]
 
         else:
             YLogger.error(self, "Invalid REST request type '%s'", method)
-            self.server_abort(400)
+            self.server_abort(message="Invalid REST request type '%s'"%method, status_code=400)
 
     @abstractmethod
     def server_abort(self, message, status_code):

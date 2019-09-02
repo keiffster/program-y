@@ -4,7 +4,8 @@ from programy.parser.template.nodes.base import TemplateNode
 from programy.parser.template.nodes.topicstar import TemplateTopicStarNode
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-from programy.parser.pattern.matcher import MatchContext, Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 
 from programytest.parser.base import ParserTestsBaseClass
@@ -70,7 +71,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         context.add_match(Match(Match.TOPIC, match, "Matched"))
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)
@@ -103,7 +104,7 @@ class TemplateNodeTests(ParserTestsBaseClass):
         conversation.record_dialog(question)
 
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         context.add_match(Match(Match.TOPIC, match, "Matched"))
         question.current_sentence()._matched_context = context
         conversation.record_dialog(question)

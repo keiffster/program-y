@@ -39,7 +39,7 @@ class TemplateStarNode(TemplateIndexedNode):
                 resolved = ""
             else:
                 try:
-                    resolved = matched_context.star(self.index)
+                    resolved = matched_context.star(client_context, self.index)
                     if resolved is None:
                         YLogger.error(client_context, "Star index not in range [%d]", self.index)
                         resolved = ""

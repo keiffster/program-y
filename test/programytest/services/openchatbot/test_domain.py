@@ -2,6 +2,7 @@ import unittest
 import json
 
 from programy.services.openchatbot.domain import OpenChatBotDomainHandler
+from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 
 
 class MockHTTPResponse(object):
@@ -30,19 +31,16 @@ class MockHTTPRequests(object):
 
 class OpenChatBotDomainHandlerTests(unittest.TestCase):
 
-    def test_construction_with_get_protocol(self):
-        self.assertEquals("https", OpenChatBotDomainHandler._get_protocol(https=True))
-        self.assertEquals("http", OpenChatBotDomainHandler._get_protocol(https=False))
-
     def test_construction_with_create_query_url(self):
-        handler = OpenChatBotDomainHandler()
+        config = BrainOpenChatBotsConfiguration()
+        handler = OpenChatBotDomainHandler(config)
         self.assertIsNotNone(handler)
 
-        self.assertEquals("https://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", True))
-        self.assertEquals("http://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", False))
+        self.assertEquals("https://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", "com"))
+        self.assertEquals("http://website1.com/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", "com"))
 
-        self.assertEquals("https://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", True, ext="org"))
-        self.assertEquals("http://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", False, ext="org"))
+        self.assertEquals("https://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "https", ext="org"))
+        self.assertEquals("http://website1.org/.well-known/openchatbot-configuration", handler._create_query_url("website1", "http", ext="org"))
 
     def test_construction_with_scan_alternatives_com(self):
 
@@ -55,10 +53,11 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
                        }
                     }""")
 
-        handler = OpenChatBotDomainHandler(scan_alternatives=True, http_requests=mock_requests)
+        config = BrainOpenChatBotsConfiguration()
+        handler = OpenChatBotDomainHandler(config, http_requests=mock_requests)
         self.assertIsNotNone(handler)
 
-        domaincb = handler.get_endpoint("website1", https=False)
+        domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
         self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
@@ -75,10 +74,12 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
                     }""",
                     valid_domain=".org")
 
-        handler = OpenChatBotDomainHandler(scan_alternatives=True, http_requests=mock_requests)
+        config = BrainOpenChatBotsConfiguration()
+        config._domains = ['org']
+        handler = OpenChatBotDomainHandler(config, http_requests=mock_requests)
         self.assertIsNotNone(handler)
 
-        domaincb = handler.get_endpoint("website1", https=False)
+        domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
         self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)
@@ -94,10 +95,11 @@ class OpenChatBotDomainHandlerTests(unittest.TestCase):
                        }
                     }""")
 
-        handler = OpenChatBotDomainHandler(scan_alternatives=False, http_requests=mock_requests)
+        config = BrainOpenChatBotsConfiguration()
+        handler = OpenChatBotDomainHandler(config, http_requests=mock_requests)
         self.assertIsNotNone(handler)
 
-        domaincb = handler.get_endpoint("website1", https=False)
+        domaincb = handler.get_endpoint("website1")
         self.assertIsNotNone(domaincb)
 
         self.assertEquals("https://website1.com:80/api/mybot/v1.0/ask", domaincb.url)

@@ -142,4 +142,5 @@ class OpenChatMetaBotRESTService(OpenChatRESTService):
         OpenChatRESTService.__init__(self, config, api)
 
     def _parse_response(self, client_context, text):
+        print(text)
         return text

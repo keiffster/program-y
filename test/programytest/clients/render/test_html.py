@@ -3,6 +3,7 @@ import unittest.mock
 
 from programy.clients.render.html import HtmlRenderer
 
+
 class MockHtmlBotClient(object):
 
     def __init__(self):
@@ -166,3 +167,65 @@ and watch it with your favorite video player!
 
         self.assertEqual(mock_console._response, "")
 
+    def test_tts(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", '<tts>Some speech</tts>')
+
+        self.assertEqual(rendered, '')
+
+    def test_card_with_xml_at_front(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", '<something>Some speech</something><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>')
+
+        self.assertEqual(rendered, '<something>Some speech</something><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>')
+
+    def test_card_with_xml_at_end(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", '<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card><something>Some speech</something>')
+
+        self.assertEqual(rendered, '<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div><something>Some speech</something>')
+
+    def test_card_with_xml_at_front_and_end(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", '<something>Some speech</something><card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card><something>Some speech</something>')
+
+        self.assertEqual(rendered, '<something>Some speech</something><div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div><something>Some speech</something>')
+
+    def test_card_with_text_at_front(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", 'Hello<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>')
+
+        self.assertEqual(rendered, 'Hello<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>')
+
+    def test_card_with_text_at_end(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", '<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>Hello')
+
+        self.assertEqual(rendered, '<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>Hello')
+
+    def test_card_with_text_at_front_and_end(self):
+        mock_console = MockHtmlBotClient()
+        renderer = HtmlRenderer(mock_console)
+        self.assertIsNotNone(renderer)
+
+        rendered = renderer.render("testuser", 'Hello<card><image>http://servusai.com/aiml.png</image><title>Servusai</title><subtitle>Home of ProgramY</subtitle><button><text>Hello</text><url>http://click.me</url></button></card>Hello')
+
+        self.assertEqual(rendered, 'Hello<div class="card" ><img src="http://servusai.com/aiml.png" /><h1>Servusai</h1><h2>Home of ProgramY</h2><a href="http://click.me">Hello</a></div>Hello')

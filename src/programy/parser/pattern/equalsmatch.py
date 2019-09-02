@@ -15,22 +15,25 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
 
-from programy.storage.stores.sql.base import Base
-from programy.storage.stores.utils import DAOUtils
+class EqualsMatch(object):
 
+    def __init__(self, matched, word_no, matched_phrase=None):
+        self._matched = matched
+        self._word_no = word_no
+        self._matched_phrase = matched_phrase
 
-class Variable(Base):
-    __tablename__ = 'variables'
+    @property
+    def matched(self):
+        return self._matched
 
-    id = Column(Integer, primary_key=True)
-    clientid = Column(String(16))
-    userid = Column(String(16))
-    name = Column(String(48))
-    value = Column(String(256))
+    @property
+    def word_no(self):
+        return self._word_no
 
-    def __repr__(self):
-        return "<Variable(id='%s', clientid='%s', userid='%s', name='%s', value='%s')>" % \
-               (DAOUtils.valid_id(self.id), self.clientid, self.userid, self.name, self.value)
+    @property
+    def matched_phrase(self):
+        return self._matched_phrase
 
+    def to_string(self):
+        return "%s, %d, %s"%(self._matched, self._word_no, self.matched_phrase if self.matched_phrase is not None else "''")

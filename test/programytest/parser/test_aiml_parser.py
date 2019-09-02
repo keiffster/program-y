@@ -581,9 +581,9 @@ class AIMLParserTests(unittest.TestCase):
 
         self.parser.pattern_parser.dump()
 
-        context = self.parser.match_sentence(self._client_context, Sentence(self._client_context.brain.tokenizer, "HELLO"), "*", "*")
+        context = self.parser.match_sentence(self._client_context, Sentence(self._client_context, "HELLO"), "*", "*")
         self.assertIsNotNone(context)
-        self.assertEqual("Hiya", context.template_node().template.resolve(self._client_context))
+        self.assertEqual("Hiya", context.template_node.template.resolve(self._client_context))
 
     def test_inline_br_html(self):
 

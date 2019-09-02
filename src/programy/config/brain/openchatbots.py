@@ -73,8 +73,10 @@ class BrainOpenChatBotsConfiguration(BaseSectionConfigurationData):
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['authorization'] = self._authorization
+            data['openchatbots'] = self._openchatbots
+            data['protocols'] = self._protocols
             data['domains'] = self._domains
         else:
+            data['openchatbots'] = {}
             data['protocols'] = ['http']
             data['domains'] = []

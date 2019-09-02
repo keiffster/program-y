@@ -402,13 +402,13 @@ class BotTests(unittest.TestCase):
         conversation = bot.get_conversation(self._client_context)
         self.assertIsNotNone(conversation)
 
-        self.assertEqual(conversation.previous_nth_question(2).sentence(0).text(), "hello")
+        self.assertEqual(conversation.previous_nth_question(2).sentence(0).text(self._client_context), "hello")
         self.assertEqual(conversation.previous_nth_question(2).sentence(0).response, "Sorry, I don't have an answer for that right now")
 
-        self.assertEqual(conversation.previous_nth_question(1).sentence(0).text(), "hello again")
+        self.assertEqual(conversation.previous_nth_question(1).sentence(0).text(self._client_context), "hello again")
         self.assertEqual(conversation.previous_nth_question(1).sentence(0).response, "Sorry, I don't have an answer for that right now")
 
-        self.assertEqual(conversation.previous_nth_question(0).sentence(0).text(), "goodbye")
+        self.assertEqual(conversation.previous_nth_question(0).sentence(0).text(self._client_context), "goodbye")
         self.assertEqual(conversation.previous_nth_question(0).sentence(0).response, "Sorry, I don't have an answer for that right now")
 
     def test_max_recusion(self):

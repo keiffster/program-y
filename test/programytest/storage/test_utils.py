@@ -34,15 +34,6 @@ class StorageEngineTestUtils(unittest.TestCase):
                                        "occupation": "Gardener"})
         property_store.commit()
 
-    def variable_asserts(self, storage_engine):
-        variables_store = storage_engine.variables_store()
-        variables_store.add_variable(clientid='test', userid='test', name="topic", value="*")
-        variables_store.add_variables(clientid='test', userid='test',
-                                      variables={"name": "Fred",
-                                       "age": "47",
-                                       "occupation": "Gardener"})
-        variables_store.commit()
-
     def conversation_asserts(self, storage_engine, visit=True):
 
         client = TestClient()

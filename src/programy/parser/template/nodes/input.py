@@ -39,9 +39,9 @@ class TemplateInputNode(TemplateIndexedNode):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.current_question()
         if self.index == 0:
-            resolved = question.combine_sentences()
+            resolved = question.combine_sentences(client_context)
         else:
-            resolved = question.previous_nth_sentence(self.index).text()
+            resolved = question.previous_nth_sentence(self.index).text(client_context)
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 

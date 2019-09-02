@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 
 import logging
+import json
 
 from programy.storage.stores.logger.store.loggerstore import LoggerStore
 from programy.storage.entities.conversation import ConversationStore
@@ -32,13 +33,12 @@ class LoggerConversationStore(LoggerStore, ConversationStore):
     def store_conversation(self, client_context, conversation):
         convo_logger = self._get_logger()
         if convo_logger:
-            current_question = conversation.current_question()
-            current_sentence = current_question.current_sentence()
-            sentence = current_sentence.text()
-            response = current_sentence.response
-            convo_logger.info("[%s] [%s] [%s] [%s] [%s] [%s]", client_context.client.id,
+            json_data = conversation.to_json()
+            json_str = json.dumps(json_data)
+
+            convo_logger.info("[%s] [%s] [%s] [%s] [%s]", client_context.client.id,
                                                                client_context.userid,
                                                                client_context.bot.id,
                                                                client_context.brain,
-                                                               sentence,
-                                                               response)
+                                                               json_str
+                                                               )

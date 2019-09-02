@@ -19,7 +19,7 @@ brain:
 
     services:
         OPENCHAT:
-            classname: programy.services.openchat.OpenChatRESTService
+            classname: programy.services.openchatbot.service.OpenChatRESTService
 
     openchatbots:
       chatbot1:

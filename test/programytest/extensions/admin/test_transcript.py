@@ -35,7 +35,7 @@ class TranscriptAdminExtensionTests(unittest.TestCase):
         client = TranscriptAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        question = Question.create_from_sentence(Sentence(client_context.brain.tokenizer, "Hello World"))
+        question = Question.create_from_sentence(Sentence(client_context, "Hello World"))
         conversation = client_context.bot.get_conversation(client_context)
         conversation.record_dialog(question)
 
@@ -50,7 +50,7 @@ class TranscriptAdminExtensionTests(unittest.TestCase):
         client = TranscriptAdminExtensionClient()
         client_context = client.create_client_context("testid")
 
-        question = Question.create_from_sentence(Sentence(client_context.brain.tokenizer, "Hello World"))
+        question = Question.create_from_sentence(Sentence(client_context, "Hello World"))
         conversation = client_context.bot.get_conversation(client_context)
         conversation.record_dialog(question)
 

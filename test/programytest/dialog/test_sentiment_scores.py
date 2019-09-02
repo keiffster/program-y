@@ -25,22 +25,22 @@ class SentimentScoreTests(unittest.TestCase):
         self.client_context._bot.initiate_sentiment_analyser()
 
     def test_sentence_scores(self):
-        sentence = Sentence(self.client_context._bot.brain.tokenizer, "")
+        sentence = Sentence(self.client_context, "")
         sentence.calculate_sentinment_score(self.client_context)
         self.assertEqual(0.0, sentence.positivity)
         self.assertEqual(0.5, sentence.subjectivity)
 
-        sentence = Sentence(self.client_context._bot.brain.tokenizer, "I like you")
+        sentence = Sentence(self.client_context, "I like you")
         sentence.calculate_sentinment_score(self.client_context)
         self.assertEqual(0.0, sentence.positivity)
         self.assertEqual(0.0, sentence.subjectivity)
 
-        sentence = Sentence(self.client_context._bot.brain.tokenizer, "I hate you")
+        sentence = Sentence(self.client_context, "I hate you")
         sentence.calculate_sentinment_score(self.client_context)
         self.assertEqual(-0.8, sentence.positivity)
         self.assertEqual(0.9, sentence.subjectivity)
 
-        sentence = Sentence(self.client_context._bot.brain.tokenizer, "I think like you")
+        sentence = Sentence(self.client_context, "I think like you")
         sentence.calculate_sentinment_score(self.client_context)
         self.assertEqual(0.0, sentence.positivity)
         self.assertEqual(0.0, sentence.subjectivity)

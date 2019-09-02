@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.parser.exceptions import ParserException
 
-from programy.parser.pattern.matcher import Match
+from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.base import PatternNode
 
 

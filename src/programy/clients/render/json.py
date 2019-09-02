@@ -24,6 +24,12 @@ class JSONRenderer(RichMediaRenderer):
     def __init__(self, callback=None):
         RichMediaRenderer.__init__(self, callback)
 
+    def _default_output(self):
+        return {}
+
+    def _concat_result(self, first, second):
+        return dict(first, **second)
+
     def handle_text(self, client_context, text):
         if self._client:
             return self._client.process_response(client_context, text)

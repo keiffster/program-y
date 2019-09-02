@@ -20,6 +20,7 @@ class MockBrain(object):
 
     def __init__(self):
         self.id = 'id'
+        self.tokenizer = None
 
     def ask_question(self, client_context, each_sentence):
         return "Hello World"
@@ -79,11 +80,11 @@ class SpellingCheckerTests(unittest.TestCase):
         client = TestClient()
         client_context = client.create_client_context("user1")
 
-        sentence = Sentence(client_context.brain.tokenizer, "Hello word")
+        sentence = Sentence(client_context, "Hello word")
 
         spell_checker.check_spelling_before(client_context, sentence)
 
-        self.assertEqual(sentence.text(), "Hello World")
+        self.assertEqual(sentence.text(client_context), "Hello World")
 
     def test_check_spelling_before_false(self):
         spelling_config = BotSpellingConfiguration()
@@ -97,11 +98,11 @@ class SpellingCheckerTests(unittest.TestCase):
         client = TestClient()
         client_context = client.create_client_context("user1")
 
-        sentence = Sentence(client_context.brain.tokenizer, "Hello word")
+        sentence = Sentence(client_context, "Hello word")
 
         spell_checker.check_spelling_before(client_context, sentence)
 
-        self.assertEqual(sentence.text(), "Hello word")
+        self.assertEqual(sentence.text(client_context), "Hello word")
 
     def test_check_spelling_and_retry_true(self):
         spelling_config = BotSpellingConfiguration()
@@ -115,9 +116,10 @@ class SpellingCheckerTests(unittest.TestCase):
         client = TestClient()
         client_context = client.create_client_context("user1")
         tokenizer = client_context.brain.tokenizer
-        client_context._brain = MockBrain ()
+        client_context._brain = MockBrain()
+        client_context._brain.tokenizer = tokenizer
 
-        sentence = Sentence(tokenizer, "Hello word")
+        sentence = Sentence(client_context, "Hello word")
 
         response = spell_checker.check_spelling_and_retry(client_context, sentence)
 
@@ -137,8 +139,9 @@ class SpellingCheckerTests(unittest.TestCase):
         client_context = client.create_client_context("user1")
         tokenizer = client_context.brain.tokenizer
         client_context._brain = MockBrain()
+        client_context._brain.tokenizer = tokenizer
 
-        sentence = Sentence(tokenizer, "Hello word")
+        sentence = Sentence(client_context, "Hello word")
 
         response = spell_checker.check_spelling_and_retry(client_context, sentence)
 

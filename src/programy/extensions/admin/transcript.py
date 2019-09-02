@@ -35,7 +35,7 @@ class TranscriptAdminExtension(Extension):
 
             transcript += "Questions:<br /><ul>"
             for question in conversation.questions:
-                transcript += "<li>%s - %s</li>"%(question.combine_sentences(), question.combine_answers())
+                transcript += "<li>%s - %s</li>"%(question.combine_sentences(client_context), question.combine_answers())
             transcript += "</ul>"
             transcript += "<br />"
 

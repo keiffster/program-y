@@ -104,6 +104,7 @@ class SQLBasePropertyStore(SQLStore, PropertyStore):
 
         return count, success
 
+
 class SQLPropertyStore(SQLBasePropertyStore, PropertyStore):
 
     def __init__(self, storage_engine):

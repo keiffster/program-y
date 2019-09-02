@@ -61,7 +61,7 @@ class FileConversationStore(FileStore, ConversationStore):
                 with open(conversation_filepath, "r+") as convo_file:
                     json_text = convo_file.read()
                     json_data = json.loads(json_text)
-                    conversation.from_json(client_context, json_data)
+                    conversation.create_from_json(json_data)
 
             except Exception as excep:
                 YLogger.exception_nostack(self, "Failed to read conversation file [%s]", excep, conversation_filepath)

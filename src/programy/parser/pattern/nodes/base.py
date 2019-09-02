@@ -18,7 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.utils.text.text import TextUtils
-from programy.parser.pattern.matcher import Match, EqualsMatch
+from programy.parser.pattern.match import Match
+from programy.parser.pattern.equalsmatch import EqualsMatch
 
 #######################################################################################################################
 #

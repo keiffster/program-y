@@ -24,7 +24,7 @@ class ButtonAIMLTests(unittest.TestCase):
     def test_text_button(self):
         response = self._client_context.bot.ask_question(self._client_context, "URL BUTTON")
         self.assertIsNotNone(response)
-        self.assertEqual(response, '<button><text>Servusai Website</text><url>https://www.servusai.com</url></button>.')
+        self.assertEqual(response, 'Click this <button><text>Servusai Website</text><url>https://www.servusai.com</url></button>.')
 
     def test_postback_button(self):
         response = self._client_context.bot.ask_question(self._client_context, "POSTBACK BUTTON")

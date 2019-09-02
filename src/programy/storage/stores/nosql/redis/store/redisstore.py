@@ -16,6 +16,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 """
 from programy.storage.entities.store import Store
 
+
 class RedisStore(Store):
 
     REDIS = "redis"
@@ -34,24 +35,19 @@ class RedisStore(Store):
         pass
 
     def delete(self, key):
-        self._storage_engine._redis.delete(key)
+        self._storage_engine.redis.delete(key)
 
-    def save(self, h_key, s_key, clientid, properties):
+    def save(self, convo_key, conversation_str):
         # Add clientid to sessions set
-        pipeline = self._storage_engine._redis.pipeline()
-        pipeline.sadd(s_key, clientid)
+        pipeline = self._storage_engine.redis.pipeline()
 
         # Save properties
-        pipeline.hmset(h_key, properties)
+        pipeline.set(convo_key, conversation_str)
         pipeline.execute()
 
-    def is_member(self, s_key, clientid):
-        # Check if clientid in sessions set
-        return self._storage_engine._redis.sismember(s_key, clientid)
-
     def get(self, h_key):
-        return self._storage_engine._redis.hgetall(h_key)
+        return self._storage_engine.redis.get(h_key)
 
     def remove(self, s_key, clientid):
-        self._storage_engine._redis.srem(s_key, clientid)
+        self._storage_engine.redis.srem(s_key, clientid)
 

@@ -1,8 +1,3 @@
-from flask import Flask, jsonify, request
-import threading
-import time
-import datetime
-import requests
 """
 Copyright (c) 2016-2019 Keith Sterling http://www.keithsterling.com
 
@@ -19,6 +14,11 @@ THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRI
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+from flask import Flask, jsonify, request
+import threading
+import datetime
+import requests
+
 from programy.utils.logging.ylogger import YLogger
 from programy.clients.ping.config import PingResponderConfig
 

@@ -48,7 +48,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "VALUE1 VALUE2 VALUE3 VALUE4")
+        sentence = Sentence(self._client_context, "VALUE1 VALUE2 VALUE3 VALUE4")
 
         self.assertTrue(node.equivalent(PatternSetNode([], "TEST1")))
         result = node.equals(self._client_context, sentence, 0)
@@ -84,7 +84,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "RED Red BROWN red AMBER")
+        sentence = Sentence(self._client_context, "RED Red BROWN red AMBER")
 
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
@@ -108,7 +108,7 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node = PatternSetNode([], "NUMBER")
         self.assertIsNotNone(node)
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "12 XY")
+        sentence = Sentence(self._client_context, "12 XY")
 
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
@@ -177,15 +177,15 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node2 = PatternSetNode({}, "test1", userid="testid")
         node3 = PatternSetNode({}, "test1", userid="testid2")
 
-        match1 = node1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match1 = node1.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = node2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match2 = node2.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = node3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match3 = node3.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
@@ -196,15 +196,15 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node2 = PatternSetNode({"name": "test1"}, "", userid="testid")
         node3 = PatternSetNode({"name": "test1"}, "", userid="testid2")
 
-        match1 = node1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match1 = node1.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = node2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match2 = node2.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = node3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'VALUE1'), 0)
+        match3 = node3.equals(self._client_context, Sentence(self._client_context, 'VALUE1'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 

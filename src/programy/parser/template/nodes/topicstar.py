@@ -36,7 +36,7 @@ class TemplateTopicStarNode(TemplateIndexedNode):
         conversation = client_context.bot.get_conversation(client_context)
         question = conversation.current_question()
         sentence = question.current_sentence()
-        resolved = sentence.matched_context.topicstar(self.index)
+        resolved = sentence.matched_context.topicstar(client_context, self.index)
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
 

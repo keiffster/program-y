@@ -34,7 +34,7 @@ class TemplateThatStarNode(TemplateDoubleIndexedNode):
 
         sentence = question.current_sentence()
 
-        resolved = sentence.matched_context.thatstar(self.sentence)
+        resolved = sentence.matched_context.thatstar(client_context, self.sentence)
 
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved
