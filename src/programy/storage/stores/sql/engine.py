@@ -30,8 +30,6 @@ from programy.storage.stores.sql.store.properties import SQLPropertyStore
 from programy.storage.stores.sql.store.properties import SQLRegexStore
 from programy.storage.stores.sql.store.properties import SQLDefaultVariableStore
 
-from programy.storage.stores.sql.store.variables import SQLVariablesStore
-
 from programy.storage.stores.sql.store.categories import SQLCategoryStore
 from programy.storage.stores.sql.store.learnf import SQLLearnfStore
 from programy.storage.stores.sql.store.conversations import SQLConversationStore
@@ -130,8 +128,6 @@ class SQLStorageEngine(StorageEngine):
         return SQLPropertyStore(self)
     def defaults_store(self):
         return SQLDefaultVariableStore(self)
-    def variables_store(self):
-        return SQLVariablesStore(self)
 
     def twitter_store(self):
         return SQLTwitterStore(self)

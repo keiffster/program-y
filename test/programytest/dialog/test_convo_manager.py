@@ -67,9 +67,9 @@ class ConversationManagerTests(unittest.TestCase):
         conversation = mgr.get_conversation(client_context)
         self.assertEqual(len(mgr.conversations), 1)
 
-        self.assertIsNotNone(conversation)
-        self.assertEqual(len(conversation.questions), 3)
-
         if os.path.exists("./storage/conversations"):
             shutil.rmtree("./storage/conversations")
+
+        self.assertIsNotNone(conversation)
+        self.assertEqual(len(conversation.questions), 3)
 

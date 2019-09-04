@@ -27,7 +27,7 @@ from programy.parser.pattern.graph import PatternGraph
 from programy.parser.template.graph import TemplateGraph
 from programy.utils.files.filefinder import FileFinder
 from programy.dialog.sentence import Sentence
-from programy.parser.pattern.matcher import MatchContext
+from programy.parser.pattern.matchcontext import MatchContext
 from programy.storage.factory import StorageFactory
 
 class AIMLLoader(FileFinder):
@@ -456,28 +456,27 @@ class AIMLParser(object):
 
     def match_sentence(self, client_context, pattern_sentence, topic_pattern, that_pattern):
 
-        topic_sentence = Sentence(client_context.brain.tokenizer, topic_pattern)
-        that_sentence = Sentence(client_context.brain.tokenizer, that_pattern)
+        topic_sentence = Sentence(client_context, topic_pattern)
+        that_sentence = Sentence(client_context, that_pattern)
 
         YLogger.debug(client_context, "AIML Parser matching sentence [%s], topic=[%s], that=[%s] ",
-                          pattern_sentence.text(), topic_pattern, that_pattern)
+                          pattern_sentence.text(client_context), topic_pattern, that_pattern)
 
-        sentence = Sentence(client_context.brain.tokenizer)
+        sentence = Sentence(client_context)
         sentence.append_sentence(pattern_sentence)
         sentence.append_word('__TOPIC__')
         sentence.append_sentence(topic_sentence)
         sentence.append_word('__THAT__')
         sentence.append_sentence(that_sentence)
-        YLogger.debug(client_context, "Matching [%s]", sentence.words_from_current_pos(0))
+        YLogger.debug(client_context, "Matching [%s]", sentence.words_from_current_pos(client_context, 0))
 
         context = MatchContext(max_search_depth=client_context.bot.configuration.max_search_depth,
-                               max_search_timeout=client_context.bot.configuration.max_search_timeout,
-                               tokenizer=client_context.brain.tokenizer)
+                               max_search_timeout=client_context.bot.configuration.max_search_timeout)
 
         template = self._pattern_parser._root_node.match(client_context, context, sentence)
 
         if template is not None:
-            context._template_node = template
+            context.template_node = template
 
             context.list_matches(client_context)
 

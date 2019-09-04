@@ -53,7 +53,7 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         self.assertTrue(node.equivalent(PatternBotNode([], "test1")))
         self.assertFalse(node.equivalent(PatternBotNode([], "test2")))
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "value1 value2")
+        sentence = Sentence(self._client_context, "value1 value2")
 
         result = node.equals(self._client_context, sentence, 0)
         self.assertTrue(result.matched)
@@ -147,15 +147,15 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         bot2 = PatternBotNode({}, "test1", userid="testid")
         bot3 = PatternBotNode({}, "test1", userid="testid2")
 
-        match1 = bot1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match1 = bot1.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = bot2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match2 = bot2.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = bot3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match3 = bot3.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
@@ -166,15 +166,15 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         bot2 = PatternBotNode({"name": "test1"}, None, userid="testid")
         bot3 = PatternBotNode({"name": "test1"}, None, userid="testid2")
 
-        match1 = bot1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match1 = bot1.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = bot2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match2 = bot2.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = bot3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match3 = bot3.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 
@@ -185,15 +185,15 @@ class PatternBotNodeTests(ParserTestsBaseClass):
         bot2 = PatternBotNode({"property": "test1"}, None, userid="testid")
         bot3 = PatternBotNode({"property": "test1"}, None, userid="testid2")
 
-        match1 = bot1.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match1 = bot1.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match1)
         self.assertTrue(match1.matched)
 
-        match2 = bot2.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match2 = bot2.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match2)
         self.assertTrue(match2.matched)
 
-        match3 = bot3.equals(self._client_context, Sentence(self._client_context.brain.tokenizer, 'value1'), 0)
+        match3 = bot3.equals(self._client_context, Sentence(self._client_context, 'value1'), 0)
         self.assertIsNotNone(match3)
         self.assertFalse(match3.matched)
 

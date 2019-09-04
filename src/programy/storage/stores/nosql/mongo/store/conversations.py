@@ -44,6 +44,7 @@ class MongoConversationStore(MongoStore, ConversationStore):
                                         MongoConversationStore.USERID: client_context.userid})
         if document:
             data = document
-            conversation.from_json(client_context, data[MongoConversationStore.CONVERSATION])
+            conversation.create_from_json(data[MongoConversationStore.CONVERSATION])
             return True
+
         return False

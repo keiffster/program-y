@@ -70,7 +70,7 @@ class SQLLookupsStore(SQLStore, LookupsStore):
         if fields and len(fields) == 2:
             result = self.add(fields[0].upper(), fields[1].upper())
             if verbose is True:
-                print(fields[0].upper(), fields[1].upper())
+                print("Key=[%s], Value={%s]"%(fields[0].upper(), fields[1].upper()))
             return result
         return False
 
@@ -98,6 +98,7 @@ class SQLLookupsStore(SQLStore, LookupsStore):
 
         return count, success
 
+
 class SQLDenormalStore(SQLLookupsStore):
 
     def empty(self):
@@ -114,7 +115,7 @@ class SQLDenormalStore(SQLLookupsStore):
             self._storage_engine.session.query(Denormal).filter(Denormal.key==key).one()
             return True
         except Exception as e:
-            print (e)
+            pass
         return False
 
 
@@ -134,7 +135,7 @@ class SQLNormalStore(SQLLookupsStore):
             self._storage_engine.session.query(Normal).filter(Denormal.key==key).one()
             return True
         except Exception as e:
-            print (e)
+            pass
         return False
 
 
@@ -154,7 +155,7 @@ class SQLGenderStore(SQLLookupsStore):
             self._storage_engine.session.query(Normal).filter(Gender.key==key).one()
             return True
         except Exception as e:
-            print (e)
+            pass
         return False
 
 
@@ -174,7 +175,7 @@ class SQLPersonStore(SQLLookupsStore):
             self._storage_engine.session.query(Normal).filter(Person.key==key).one()
             return True
         except Exception as e:
-            print (e)
+            pass
         return False
 
 
@@ -194,5 +195,5 @@ class SQLPerson2Store(SQLLookupsStore):
             self._storage_engine.session.query(Person2).filter(Denormal.key==key).one()
             return True
         except Exception as e:
-            print (e)
+            pass
         return False

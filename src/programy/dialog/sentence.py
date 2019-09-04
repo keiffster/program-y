@@ -17,16 +17,23 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.utils.logging.ylogger import YLogger
 
+from programy.parser.pattern.matchcontext import MatchContext
+
 
 class Sentence(object):
 
-    def __init__(self, tokenizer, text: str = None ):
-        self._tokenizer = tokenizer
-        self._words = self._tokenizer.texts_to_words(text)
-        self._response = None
-        self._matched_context = None
-        self._positivity = 0.00
-        self._subjectivity = 0.5
+    def __init__(self, client_context=None, text: str=None,
+                 response: str=None,
+                 matched_context: MatchContext=None,
+                 positivity=0.0, subjectivity=0.5):
+        if text is not None:
+            self._words = client_context.brain.tokenizer.texts_to_words(text)
+        else:
+            self._words = []
+        self._response = response
+        self._matched_context = matched_context
+        self._positivity = positivity
+        self._subjectivity = subjectivity
 
     @property
     def words(self):
@@ -55,8 +62,8 @@ class Sentence(object):
         for word in sentence.words:
             self._words.append(word)
 
-    def replace_words(self, text):
-        self._words = self._split_into_words(text)
+    def replace_words(self, client_context, text):
+        self._words = self._split_into_words(client_context.brain.tokenizer, text)
 
     @property
     def response(self):
@@ -82,26 +89,53 @@ class Sentence(object):
             return self.words[num]
         return None
 
-    def words_from_current_pos(self, current_pos: int):
-        return self._tokenizer.words_from_current_pos(self._words, current_pos)
+    def words_from_current_pos(self, client_context, current_pos: int):
+        return client_context.brain.tokenizer.words_from_current_pos(self._words, current_pos)
 
-    def text(self):
-        return self._tokenizer.words_to_texts(self._words)
+    def text(self, client_context):
+        return client_context.brain.tokenizer.words_to_texts(self._words)
 
-    def _split_into_words(self, text):
+    def _split_into_words(self, tokenizer, text):
         if text is None:
             return []
-        return self._tokenizer.texts_to_words(text)
+        return tokenizer.texts_to_words(text)
 
     def calculate_sentinment_score(self, client_context):
 
         assert (client_context is not None)
 
         if client_context.bot.sentiment_analyser is not None:
-            positivity, subjectivity = client_context.bot.sentiment_analyser.analyse_all(self.text())
+            positivity, subjectivity = client_context.bot.sentiment_analyser.analyse_all(self.text(client_context))
             YLogger.debug(client_context, "Sentiment: positivity[%f], subjectivity [%f]", positivity, subjectivity)
             self._positivity = positivity
             self._subjectivity = subjectivity
 
+    def to_json(self):
+        json_data = {
+            "words": self._words,
+            "response": self._response,
+            "positivity": self._positivity,
+            "subjectivity": self._subjectivity
+        }
+
+        if self._matched_context is not None:
+            json_data["matched_context"] = self._matched_context.to_json()
+
+        return json_data
+
+    @staticmethod
+    def from_json(client_context, json_data):
+
+        sentence = Sentence(client_context)
+
+        sentence._words = json_data['words']
+        sentence._response = json_data['response']
+        sentence._positivity = json_data['positivity']
+        sentence._subjectivity = json_data['subjectivity']
+
+        if 'matched_context' in json_data:
+            sentence._matched_context = MatchContext.from_json(json_data["matched_context"])
+
+        return sentence
 
 

@@ -2,6 +2,8 @@ import unittest
 
 from programy.translate.textblob_translator import TextBlobTranslator
 
+import programytest.externals as Externals
+
 
 class TestTextBlobTranslator(unittest.TestCase):
 
@@ -18,6 +20,7 @@ class TestTextBlobTranslator(unittest.TestCase):
         self.assertEqual("EN", translator.language_code("ENGLISH"))
         self.assertEqual("UNKNOWN", translator.language_code("KLINGON"))
 
+    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
     def test_detect_language(self):
         translator = TextBlobTranslator()
         self.assertEqual("EN", translator.detect("Hello"))

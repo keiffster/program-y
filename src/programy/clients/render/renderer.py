@@ -25,22 +25,35 @@ class RichMediaRenderer(object):
     def __init__(self, callback):
         self._client = callback
 
+    def _default_output(self):
+        pass
+
+    def _concat_result(self, first, second):
+        pass
+
     def render(self, client_context, message):
         if message:
+            message = "<content>%s</content>"%message
             soup = Soup(message, "lxml-xml")
-            parsed = False
             if soup.children:
-                    for child in soup.children:
-                        if isinstance(child, Tag):
-                            return self.parse_tag(client_context, child)
+                output = self._default_output()
 
-                        elif isinstance(child, NavigableString):
-                            return self.parse_text(client_context, child)
+                for outer_child in soup.children:
+                    if outer_child.children:
+                        for child in outer_child.children:
+                            if isinstance(child, Tag):
+                                result = self.parse_tag(client_context, child)
+                                if result is not None:
+                                    output = self._concat_result(output, result)
 
-                        parsed = True
+                            elif isinstance(child, NavigableString):
+                                result = self.parse_text(client_context, child)
+                                if result is not None:
+                                    output = self._concat_result(output, result)
 
-            if parsed is False:
-                return self.parse_text(client_context, message)
+                return output
+
+            return self.parse_text(client_context, message)
 
         return None
 
@@ -81,6 +94,9 @@ class RichMediaRenderer(object):
 
         elif tag.name == 'location':
             return self.parse_location(client_context, tag)
+
+        elif tag.name == 'tts':
+            return self.parse_tts(client_context, tag)
 
         else:
             return self.parse_xml(client_context, tag)
@@ -330,6 +346,9 @@ class RichMediaRenderer(object):
     def parse_location(self, client_context, tag):
         return self.handle_location(client_context, {"type": "location"})
 
+    def parse_tts(self, client_context, tag):
+        return self.handle_tts(client_context, {"type": "tts", "text": tag.text})
+
     ######################################################################################################
     # You need to implement all of these and decide how to display the various rich media elements
     # 
@@ -373,4 +392,7 @@ class RichMediaRenderer(object):
         return None
 
     def handle_location(self, client_context, location):
+        return None
+
+    def handle_tts(self, client_context, location):
         return None

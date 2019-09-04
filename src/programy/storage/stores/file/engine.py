@@ -33,7 +33,6 @@ from programy.storage.stores.file.store.errors import FileErrorsStore
 from programy.storage.stores.file.store.duplicates import FileDuplicatesStore
 from programy.storage.stores.file.store.categories import FileCategoryStore
 from programy.storage.stores.file.store.learnf import FileLearnfStore
-from programy.storage.stores.file.store.variables import FileVariablesStore
 from programy.storage.stores.file.store.spelling import FileSpellingStore
 from programy.storage.stores.file.store.licensekeys import FileLicenseStore
 from programy.storage.stores.file.store.nodes import FilePatternNodeStore
@@ -92,8 +91,6 @@ class FileStorageEngine(StorageEngine):
         return FilePropertyStore(self)
     def defaults_store(self):
         return FileDefaultVariablesStore(self)
-    def variables_store(self):
-        return FileVariablesStore(self)
 
     def twitter_store(self):
         return FileTwitterStore(self)

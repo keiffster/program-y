@@ -95,7 +95,7 @@ class SecurityManager(object):
         # If we have an SRAI defined, then use that
         if self.authentication.configuration.denied_srai is not None:
             match_context = client_context.brain.aiml_parser.match_sentence(client_context,
-                                                             Sentence(client_context.brain.tokenizer, self.authentication.configuration.denied_srai),
+                                                             Sentence(client_context, self.authentication.configuration.denied_srai),
                                                              topic_pattern="*",
                                                              that_pattern="*")
             # If the SRAI matched then return the result

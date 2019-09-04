@@ -4,6 +4,7 @@ from programy.config.brain.brain import BrainConfiguration
 from programy.config.file.yaml_file import YamlConfigurationFile
 from programy.clients.events.console.config import ConsoleConfiguration
 
+
 class BrainConfigurationTests(unittest.TestCase):
 
     def test_with_data(self):
@@ -36,6 +37,8 @@ brain:
       create: true
 
     services:
+        OPENCHAT:
+            classname: programy.services.openchat.openchat.service.OpenChatRESTService
         REST:
             classname: programy.services.rest.GenericRESTService
             method: GET
@@ -44,6 +47,11 @@ brain:
         Pannous:
             classname: programy.services.pannous.PannousService
             url: http://weannie.pannous.com/api
+
+    openchatbots:
+      chatbot1:
+        url: http://localhost:5959/api/rest/v2.0/ask
+        method: GET
 
     security:
         authentication:
@@ -116,12 +124,18 @@ brain:
         self.assertTrue(brain_configuration.braintree.create)
 
         self.assertIsNotNone(brain_configuration.services)
+
+        self.assertTrue(brain_configuration.services.exists('OPENCHAT'))
+        rest_config = brain_configuration.services.service('OPENCHAT')
+        self.assertEqual("programy.services.openchat.openchat.service.OpenChatRESTService", rest_config.classname)
+
         self.assertTrue(brain_configuration.services.exists('REST'))
         rest_config =brain_configuration.services.service('REST')
         self.assertEqual("programy.services.rest.GenericRESTService", rest_config.classname)
         self.assertEqual(rest_config.method, "GET")
         self.assertEqual(rest_config.host, "0.0.0.0")
         self.assertEqual(rest_config.port, 8080)
+
         pannous_config =brain_configuration.services.service('Pannous')
         self.assertEqual("programy.services.pannous.PannousService", pannous_config.classname)
         self.assertEqual(pannous_config.url, "http://weannie.pannous.com/api")

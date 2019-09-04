@@ -120,18 +120,18 @@ and watch it with your favorite video player!
             self._client.process_response(client_context, str)
         return str
 
-    def handle_list(self, client_context, list):
+    def handle_list(self, client_context, rcs_list):
         str = "<ul>"
-        for item in list['items']:
+        for item in rcs_list['items']:
             str += "<li>%s</li>"%item['text']
         str += "</ul>"
         if self._client:
             self._client.process_response(client_context, str)
         return str
 
-    def handle_ordered_list(self, client_context, list):
+    def handle_ordered_list(self, client_context, rcs_list):
         str = "<ol>"
-        for item in list['items']:
+        for item in rcs_list['items']:
             str += "<li>%s</li>" % item['text']
         str += "</ol>"
         if self._client:

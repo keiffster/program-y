@@ -70,6 +70,7 @@ class TemplateSetNode(TemplateNode):
             else:
                 if client_context.brain.properties.has_property(name):
                     YLogger.warning(client_context, "Global property already exists for name [%s], over writing!", name)
+
                 YLogger.debug(client_context, "[%s] resolved to global: [%s] => [%s]", self.to_string(), name, value)
                 conversation.set_property(name, value)
 

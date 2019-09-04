@@ -1,5 +1,5 @@
-
 from programytest.parser.pattern.matching.base import PatternMatcherBaseClass
+
 
 class PatternMatcherBotTests(PatternMatcherBaseClass):
 
@@ -11,10 +11,10 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("testbot", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("testbot", context.star(1))
+        self.assertEqual("testbot", context.star(self._client_context, 1))
 
     def test_basic_bot_match_as_name(self):
 
@@ -24,10 +24,10 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("testbot", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("testbot", context.star(1))
+        self.assertEqual("testbot", context.star(self._client_context, 1))
 
     def test_basic_bot_match_as_property(self):
 
@@ -37,7 +37,7 @@ class PatternMatcherBotTests(PatternMatcherBaseClass):
 
         context = self.match_sentence("testbot", topic="X", that="Y")
         self.assertIsNotNone(context)
-        self.assertIsNotNone(context.template_node())
-        self.assertEqual("1", context.template_node().template.word)
+        self.assertIsNotNone(context.template_node)
+        self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
-        self.assertEqual("testbot", context.star(1))
+        self.assertEqual("testbot", context.star(self._client_context, 1))

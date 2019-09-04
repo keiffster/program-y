@@ -6,6 +6,8 @@ from programy.translate.extension import TranslateExtension
 
 from programytest.client import TestClient
 
+import programytest.externals as Externals
+
 
 class TranslateExtensionTests(unittest.TestCase):
 
@@ -49,6 +51,7 @@ class TranslateExtensionTests(unittest.TestCase):
         self.assertIsNotNone(result)
         self.assertEqual("TRANSLATE INVALID COMMAND", result)
 
+    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
     def test_valid_scores_command(self):
 
         extension = TranslateExtension()

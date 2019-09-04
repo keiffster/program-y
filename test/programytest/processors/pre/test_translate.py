@@ -5,6 +5,8 @@ from programy.config.bot.bot import BotConfiguration
 
 from programytest.client import TestClient
 
+import programytest.externals as Externals
+
 
 class MockClientContext(object):
 
@@ -29,6 +31,7 @@ class TranslatorPreProcessorTest(unittest.TestCase):
         self.bot = Bot(config=config, client=self.client)
         self.bot.initiate_translator()
 
+    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
     def test_pre_process_translate(self):
         processor = TranslatorPreProcessor()
 

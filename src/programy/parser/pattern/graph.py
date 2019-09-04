@@ -22,8 +22,7 @@ from programy.parser.exceptions import ParserException, DuplicateGrammarExceptio
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.pattern.nodes.zeroormore import PatternZeroOrMoreWildCardNode
 
-#######################################################################################################################
-#
+
 class PatternGraph(object):
 
     def __init__(self, aiml_parser, root_node=None):

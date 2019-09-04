@@ -58,7 +58,7 @@ class ServiceFactory(object):
 
     @classmethod
     def service_exists(cls, name):
-        return bool(name.upper() in ServiceFactory.services)\
+        return bool(name.upper() in ServiceFactory.services)
 
     @classmethod
     def get_service(cls, service):

@@ -30,7 +30,7 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "*")
+        sentence = Sentence(self._client_context, "*")
 
         self.assertEqual(node.wildcard, "#")
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("#")))
@@ -58,7 +58,7 @@ class PatternZeroOrMoreWildCardNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node.children)
         self.assertFalse(node.has_children())
 
-        sentence = Sentence(self._client_context.brain.tokenizer, "*")
+        sentence = Sentence(self._client_context, "*")
 
         self.assertEqual(node.wildcard, "^")
         self.assertTrue(node.equivalent(PatternZeroOrMoreWildCardNode("^")))

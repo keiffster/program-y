@@ -15,10 +15,16 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
+
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match as MatchObject
 
 
 class Conversation(Base):
@@ -30,18 +36,109 @@ class Conversation(Base):
     userid = Column(String(16))
     botid = Column(String(16))
     brainid = Column(String(16))
-    question = Column(Integer)
-    sentence = Column(String(512))
-    response = Column(String(512))
+    maxhistories = Column(Integer)
 
     def __repr__(self):
-        return "<Conversation(id='%s', clientid='%s', userid='%s', botid='%s', brainid='%s', question='%s', sentence='%s', response='%s'>" % \
+        return "<Conversation(id='%s', clientid='%s', userid='%s', botid='%s', brainid='%s', maxhistories='%d'>" % \
                (DAOUtils.valid_id(self.id),
                 self.clientid,
                 self.userid,
                 self.botid,
                 self.brainid,
-                self.question,
-                self.sentence,
-                self.response)
+                self.maxhistories)
 
+
+class Question(Base):
+    __tablename__ = 'questions'
+
+    id = Column(Integer, primary_key=True)
+
+    conversationid = Column(Integer)
+    questionno = Column(Integer)
+    srai = Column(Boolean)
+
+    def __repr__(self):
+        return "<Question(id='%s', conversationid='%d', questionno='%d', srai='%s'>" % \
+               (DAOUtils.valid_id(self.id), self.conversationid, self.questionno, self.srai)
+
+
+class Sentence(Base):
+    __tablename__ = 'sentences'
+
+    id = Column(Integer, primary_key=True)
+
+    questionid = Column(Integer)
+    sentenceno = Column(Integer)
+    sentence = Column(String(256))
+    response = Column(String(2000))
+    positivity = Column(String(10))
+    subjectivity = Column(String(10))
+
+    def __repr__(self):
+        return "<Sentence(id='%s', questionid='%d', sentenceno='%d', sentence='%s', response='%s', " \
+               "positivity='%s', subjectivity='%s'>" % (DAOUtils.valid_id(self.id),
+                                                                        self.questionid, self.sentenceno,
+                                                                        self.sentence, self.response,
+                                                                        self.positivity, self.subjectivity)
+
+
+class ConversationProperty(Base):
+    __tablename__ = 'conprops'
+
+    CONVERSATION = 1
+    QUESTION = 2
+
+    id = Column(Integer, primary_key=True)
+
+    conversationid = Column(Integer)
+    questionid = Column(Integer)
+    type = Column(Integer)
+    name = Column(String(48))
+    value = Column(String(256))
+
+    def __repr__(self):
+        return "<ConversationProperty(id='%s', conversationid='%d', questionid='%d', " \
+               "type='%d', name='%s', value='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.conversationid, self.questionid,
+                self.type, self.name, self.value)
+
+
+class Match(Base):
+    __tablename__ = 'matches'
+
+    id = Column(Integer, primary_key=True)
+
+    sentenceid = Column(Integer)
+
+    max_search_depth = Column(Integer())
+    max_search_timeout = Column(Integer())
+    sentence = Column(String(256))
+    response = Column(String(500))
+
+    score = Column(String(20))
+
+    def __repr__(self):
+        return "<Match(id='%s', max_search_depth='%d', max_search_timeout='%d', " \
+               "sentence='%s', response='%s', score='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.max_search_depth, self.max_search_timeout,
+                self.sentence, self.response, self.score)
+
+
+class MatchNode(Base):
+    __tablename__ = 'matchednodes'
+
+    id = Column(Integer, primary_key=True)
+
+    matchid = Column(Integer)
+    matchcount = Column(Integer)
+    matchtype = Column(String(10))
+    matchnode = Column(String(256))
+    matchstr = Column(String(256))
+    wildcard = Column(Boolean)
+    multiword = Column(Boolean)
+
+    def __repr__(self):
+        return "<MatchNode(id='%s', matchid='%d', matchcount='%d', matchtype='%s'," \
+               " matchnode='%s', matchstr='%s', wildcard='%s', multiword='%s')>" % \
+               (DAOUtils.valid_id(self.id), self.matchid, self.matchcount, self.matchtype,
+                self.matchnode, self.matchstr, self.wildcard, self.multiword)

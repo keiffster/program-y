@@ -22,6 +22,7 @@ For more information see [url]
 	<category>
 		<pattern>URL BUTTON</pattern>
 		<template>
+			Click this
             <button>
               <text>Servusai Website</text>
               <url>https://www.servusai.com</url>

@@ -26,10 +26,16 @@ class TextRenderer(RichMediaRenderer):
     def __init__(self, callback):
         RichMediaRenderer.__init__(self, callback)
 
+    def _default_output(self):
+        return ""
+
+    def _concat_result(self, first, second):
+        return first + second
+
     def handle_text(self, client_context, text):
         if self._client:
             self._client.process_response(client_context, text['text'])
-        return text
+        return text['text']
 
     def handle_url_button(self, client_context, button):
         str = "%s, click %s"%(button['text'], button['url'])
@@ -128,3 +134,6 @@ class TextRenderer(RichMediaRenderer):
         if self._client:
             self._client.process_response(client_context, str)
         return str
+
+    def handle_tts(self, client_context, location):
+        return ""

@@ -12,6 +12,8 @@ from programy.context import ClientContext
 
 from programytest.client import TestClient
 
+import programytest.externals as Externals
+
 
 class PostProcessingTests(unittest.TestCase):
 
@@ -51,6 +53,7 @@ class PostProcessingTests(unittest.TestCase):
 
         return output_str
 
+    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
     def test_post_cleanup(self):
 
         result = self.post_process("Hello World")

@@ -40,12 +40,14 @@ class DefaultVariable(Base, PropertyBase):
     __tablename__ = 'defaults'
 
     def __repr__(self):
-        return "<DefaultVariable(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
+        return "<DefaultVariable(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id),
+                                                                                 self.name, self.value)
 
 
 class Regex(Base, PropertyBase):
     __tablename__ = 'regexes'
 
     def __repr__(self):
-        return "<Regex(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id), self.name, self.value)
+        return "<Regex(id='%s', name='%s', value='%s')>" % (DAOUtils.valid_id(self.id),
+                                                                       self.name, self.value)
 

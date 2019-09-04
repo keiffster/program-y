@@ -55,10 +55,10 @@ class SpellingChecker(Activatable):
     def check_spelling_before(self, client_context, each_sentence):
         if self.is_active():
             if self.spelling_config.check_before is True:
-                text = each_sentence.text()
+                text = each_sentence.text(client_context)
                 corrected = self.correct(text)
                 YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
-                each_sentence.replace_words(corrected)
+                each_sentence.replace_words(client_context, corrected)
 
         else:
             YLogger.debug(client_context, "Spelling is switched off.")
@@ -66,10 +66,10 @@ class SpellingChecker(Activatable):
     def check_spelling_and_retry(self, client_context, each_sentence):
         if self.is_active():
             if self.spelling_config.check_and_retry is True:
-                text = each_sentence.text()
+                text = each_sentence.text(client_context)
                 corrected = self.correct(text)
                 YLogger.debug(client_context, "Spell Checker corrected [%s] to [%s]", text, corrected)
-                each_sentence.replace_words(corrected)
+                each_sentence.replace_words(client_context, corrected)
                 response = client_context.brain.ask_question(client_context, each_sentence)
                 return response
 

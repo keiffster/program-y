@@ -20,6 +20,10 @@ import re
 
 from programy.utils.text.text import TextUtils
 from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match
+
 
 class Conversation(object):
 
@@ -141,43 +145,6 @@ class Conversation(object):
 
         return that_pattern
 
-    def to_json(self):
-        json_data = {
-            'client_context': self._client_context.to_json(),
-            'questions': [],
-            'max_histories': self._max_histories,
-            'properties': self._properties
-        }
-
-        for question in self.questions:
-            json_question = {'sentences': [],
-                             'srai': question._srai,
-                             'properties': question._properties,
-                             'current_sentence_no': question._current_sentence_no
-                             }
-            json_data['questions'].append(json_question)
-
-            for sentence in question.sentences:
-                json_sentence = {"question": sentence.text(),
-                                 "response": sentence.response,
-                                 "positivity": sentence.positivity,
-                                 "subjectivity": sentence.subjectivity
-                                 }
-                json_question['sentences'].append(json_sentence)
-
-        return json_data
-
-    def from_json(self, client_context, json_data):
-        if json_data is not None:
-            json_questions = json_data['questions']
-            for json_question in json_questions:
-                json_sentences = json_question['sentences']
-                for json_sentence in json_sentences:
-                    question = Question.create_from_text(self._client_context, json_sentence['question'])
-                    question.sentence(0).response = json_sentence['response']
-                    self._questions.append(question)
-            self.recalculate_sentiment_score(client_context)
-
     def recalculate_sentiment_score(self, client_context):
         for question in self._questions:
             question.recalculate_sentinment_score(client_context)
@@ -209,3 +176,31 @@ class Conversation(object):
         self._properties['positivity'] = str(positivity)
         self._properties['subjectivity'] = str(subjectivity)
 
+    def to_json(self):
+        json_data = {
+            'client_context': self._client_context.to_json(),
+            'questions': [],
+            'max_histories': self._max_histories,
+            'properties': self._properties
+        }
+
+        for question in self.questions:
+            json_data["questions"].append(question.to_json())
+
+        return json_data
+
+    @staticmethod
+    def from_json(client_context, json_data):
+        conversation = Conversation(client_context)
+        conversation.create_from_json(json_data)
+        return conversation
+
+    def create_from_json(self, json_data):
+
+        for key, value in json_data['properties'].items():
+            self._properties[key] = value
+
+        for json_question in json_data['questions']:
+            self._questions.append(Question.from_json(self._client_context, json_question))
+
+        self.recalculate_sentiment_score(self._client_context)
