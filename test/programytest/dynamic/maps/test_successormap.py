@@ -5,6 +5,7 @@ from programy.context import ClientContext
 
 from programytest.client import TestClient
 
+
 class TestSingularMaps(unittest.TestCase):
 
     def setUp(self):

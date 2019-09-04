@@ -20,6 +20,12 @@ from sqlalchemy import Column, Integer, String, Boolean
 from programy.storage.stores.sql.base import Base
 from programy.storage.stores.utils import DAOUtils
 
+from programy.dialog.conversation import Conversation
+from programy.dialog.question import Question
+from programy.dialog.sentence import Sentence
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match as MatchObject
+
 
 class Conversation(Base):
     __tablename__ = 'conversations'
@@ -136,4 +142,3 @@ class MatchNode(Base):
                " matchnode='%s', matchstr='%s', wildcard='%s', multiword='%s')>" % \
                (DAOUtils.valid_id(self.id), self.matchid, self.matchcount, self.matchtype,
                 self.matchnode, self.matchstr, self.wildcard, self.multiword)
-

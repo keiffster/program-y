@@ -155,6 +155,7 @@ class AdminTool(object):
             display("Installing additional components for %s"%additional)
 
             nltk.download('punkt')
+            nltk.download('stopwords')
 
             download_corpora.download_all()
         else:

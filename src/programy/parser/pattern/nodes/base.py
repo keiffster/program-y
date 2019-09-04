@@ -589,7 +589,6 @@ class PatternNode(object):
                 YLogger.debug(client_context, "%s%s matched %s", tabs, child_type, result.matched_phrase)
 
                 match_node = Match(match_type, child, result.matched_phrase)
-
                 context.add_match(match_node)
 
                 match = child.consume(client_context, context, words, word_no + 1, match_type, depth+1)
