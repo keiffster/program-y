@@ -26,6 +26,6 @@ class ServiceFactoryTests(unittest.TestCase):
         ServiceFactory.preload_services(brain_config.services)
 
         mock_service = ServiceFactory.get_service("mock")
-        print(mock_service)
+
         self.assertIsNotNone(mock_service)
         self.assertIsInstance(mock_service, Service)

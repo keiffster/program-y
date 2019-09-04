@@ -23,11 +23,17 @@ from programy.config.brain.service import BrainServiceConfiguration
 
 class RestAPI(object):
 
-    def get(self, url):
-        return requests.get(url)
+    def get(self, url, headers=None):
+        if headers is None:
+            return requests.get(url)
+        else:
+            return requests.get(url, headers=headers)
 
-    def post(self, url, data):
-        return requests.post(url, data=data)
+    def post(self, url, data, headers=None):
+        if headers is None:
+            return requests.post(url, data=data)
+        else:
+            return requests.post(url, data=data, headers=headers)
 
 
 class GenericRESTService(Service):
@@ -45,9 +51,9 @@ class GenericRESTService(Service):
         else:
             self.method = config.method
 
-        if config.host is None:
-            raise Exception("Undefined host parameter")
-        self.host = config.host
+        self.host = None
+        if config.host is not None:
+            self.host = config.host
 
         self.port = None
         if config.port is not None:

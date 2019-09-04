@@ -44,6 +44,8 @@ class BrainTests(unittest.TestCase):
         self.assertIsNotNone(client_context.brain.maps)
         self.assertIsNotNone(client_context.brain.preprocessors)
         self.assertIsNotNone(client_context.brain.postprocessors)
+        self.assertIsNotNone(client_context.brain.openchatbots)
+        self.assertIsNotNone(client_context.brain.security)
 
     def test_brain_init_with_config(self):
 
@@ -70,6 +72,7 @@ class BrainTests(unittest.TestCase):
         self.assertIsNotNone(brain.maps)
         self.assertIsNotNone(brain.preprocessors)
         self.assertIsNotNone(brain.postprocessors)
+        self.assertIsNotNone(brain.openchatbots)
         self.assertIsNotNone(brain.security)
 
     def test_brain_init_with_secure_config(self):
@@ -97,6 +100,7 @@ class BrainTests(unittest.TestCase):
         self.assertIsNotNone(brain.maps)
         self.assertIsNotNone(brain.preprocessors)
         self.assertIsNotNone(brain.postprocessors)
+        self.assertIsNotNone(brain.openchatbots)
         self.assertIsNotNone(brain.security)
 
     def test_oob_loading(self):

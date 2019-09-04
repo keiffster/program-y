@@ -38,6 +38,7 @@ from programy.dynamic.dynamics import DynamicsCollection
 from programy.rdf.collection import RDFCollection
 from programy.parser.aiml_parser import AIMLParser
 from programy.services.service import ServiceFactory
+from programy.services.openchatbot.collection import OpenChatBotCollection
 from programy.dialog.tokenizer.tokenizer import Tokenizer
 from programy.parser.pattern.factory import PatternNodeFactory
 from programy.parser.template.factory import TemplateNodeFactory
@@ -84,6 +85,8 @@ class Brain(object):
         self._security = SecurityManager(configuration.security)
 
         self._oobhandler = OOBHandler(configuration.oob)
+
+        self._openchatbots = OpenChatBotCollection()
 
         self._regex_templates = RegexTemplatesCollection()
 
@@ -185,6 +188,10 @@ class Brain(object):
         return self._tokenizer
 
     @property
+    def openchatbots(self):
+        return self._openchatbots
+
+    @property
     def security(self):
         return self._security
 
@@ -219,6 +226,9 @@ class Brain(object):
 
         YLogger.info(self, "Loading services")
         self.load_services(configuration)
+
+        YLogger.info(self, "Loading openchat bots")
+        self.load_openchatbots(configuration)
 
         YLogger.info(self, "Loading security services")
         self.load_security_services()
@@ -337,6 +347,9 @@ class Brain(object):
 
     def load_services(self, configuration):
         ServiceFactory.preload_services(configuration.services)
+
+    def load_openchatbots(self, configuration):
+        self._openchatbots.load_from_configuration(configuration.openchatbots)
 
     def load_security_services(self):
         self._security.load_security_services(self.bot.client)

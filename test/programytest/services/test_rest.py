@@ -1,5 +1,4 @@
 import unittest
-import os
 
 from programy.services.rest import GenericRESTService, RestAPI
 from programy.services.service import BrainServiceConfiguration
@@ -49,12 +48,6 @@ class RestServiceTests(unittest.TestCase):
         service = GenericRESTService(config=config)
         self.assertIsNotNone(service)
         self.assertEqual(service.method, "GET")
-
-    def test_ask_no_host(self):
-        config = BrainServiceConfiguration("rest")
-
-        with self.assertRaises(Exception):
-            service = GenericRESTService(config=config)
 
     def test_ask_question_get(self):
         config = BrainServiceConfiguration("rest")
