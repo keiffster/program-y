@@ -49,7 +49,7 @@ class ConsoleBotClient(EventBotClient):
 
         self._questions += 1
 
-        return client_context.bot.ask_question(client_context , question, responselogger=self)
+        return client_context.bot.ask_question(client_context, question, responselogger=self)
 
     def render_response(self, client_context, response):
         # Calls the renderer which handles RCS context, and then calls back to the client to show response

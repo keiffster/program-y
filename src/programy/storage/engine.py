@@ -15,6 +15,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
+
 class StorageEngine(object):
 
     def __init__(self, configuration):
@@ -109,6 +110,9 @@ class StorageEngine(object):
         raise NotImplementedError("Engine does not support preprocessor storage")
 
     def postprocessors_store(self):
+        raise NotImplementedError("Engine does not support postprocessor storage")
+
+    def postquestionprocessors_store(self):
         raise NotImplementedError("Engine does not support postprocessor storage")
 
     def usergroups_store(self):

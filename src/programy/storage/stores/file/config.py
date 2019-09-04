@@ -46,7 +46,7 @@ class FileStorageConfiguration(BaseConfigurationData):
         self._learnf_storage            = FileStoreConfiguration(dirs=[tmpdir + os.sep + "categories/learnf"], extension="aiml", subdirs=False, format="xml", encoding="utf-8", delete_on_start=False)
 
         self._conversation_storage      = FileStoreConfiguration(dirs=[tmpdir + os.sep + "conversations"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
-        
+
         self._sets_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "sets"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
         self._maps_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "maps"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
         self._rdf_storage = FileStoreConfiguration(dirs=[tmpdir + os.sep + "rdfs"], extension="txt", subdirs=True, format="text", encoding="utf-8", delete_on_start=False)
@@ -76,7 +76,7 @@ class FileStorageConfiguration(BaseConfigurationData):
 
         self._preprocessors_storage = FileStoreConfiguration(file=tmpdir + os.sep + "processing/preprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self._postprocessors_storage = FileStoreConfiguration(file=tmpdir + os.sep + "processing/postprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
-
+        self._postquestionprocessors_storage = FileStoreConfiguration(file=tmpdir + os.sep + "processing/postquestionprocessors.txt", format="text", encoding="utf-8", delete_on_start=False)
         self._usergroups_storage = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.yaml", format="yaml", encoding="utf-8", delete_on_start=False)
 
         self._triggers_storage = FileStoreConfiguration(file=tmpdir + os.sep + "triggers.txt", format="text", encoding="utf-8", delete_on_start=False)
@@ -140,7 +140,7 @@ class FileStorageConfiguration(BaseConfigurationData):
     @property
     def properties_storage(self):
         return self._properties_storage
-    
+
     @property
     def variables_storage(self):
         return self._variables_storage
@@ -184,6 +184,10 @@ class FileStorageConfiguration(BaseConfigurationData):
     @property
     def postprocessors_storage(self):
         return self._postprocessors_storage
+
+    @property
+    def postquestionprocessors_storage(self):
+        return self._postquestionprocessors_storage
 
     @property
     def usergroups_storage(self):
@@ -240,6 +244,7 @@ class FileStorageConfiguration(BaseConfigurationData):
 
             self.load_storage_config(self._preprocessors_storage, FileStore.PREPROCESSORS_STORAGE, configuration_file, storage, bot_root, subs=subs)
             self.load_storage_config(self._postprocessors_storage, FileStore.POSTPROCESSORS_STORAGE, configuration_file, storage, bot_root, subs=subs)
+            self.load_storage_config(self._postquestionprocessors_storage, FileStore.POSTQUESTIONPROCESSORS_STORAGE, configuration_file, storage, bot_root, subs=subs)
 
             self.load_storage_config(self._usergroups_storage, FileStore.USERGROUPS_STORAGE, configuration_file, storage, bot_root, subs=subs)
 
@@ -266,7 +271,7 @@ class FileStorageConfiguration(BaseConfigurationData):
         return engine
 
     def _create_storage_map(self, amap):
-        
+
         amap[FileStore.CATEGORIES_STORAGE] = self._categories_storage
         amap[FileStore.ERRORS_STORAGE] = self._errors_storage
         amap[FileStore.DUPLICATES_STORAGE] = self._duplicates_storage
@@ -303,6 +308,7 @@ class FileStorageConfiguration(BaseConfigurationData):
 
         amap[FileStore.PREPROCESSORS_STORAGE] = self._preprocessors_storage
         amap[FileStore.POSTPROCESSORS_STORAGE] = self._postprocessors_storage
+        amap[FileStore.POSTQUESTIONPROCESSORS_STORAGE] = self._postquestionprocessors_storage
 
         amap[FileStore.USERGROUPS_STORAGE] = self._usergroups_storage
 
@@ -375,6 +381,9 @@ class FileStorageConfiguration(BaseConfigurationData):
                                                              format="text", encoding="utf-8", delete_on_start=False)
         amap[FileStore.POSTPROCESSORS_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "processing/postprocessors.txt",
                                                               format="text", encoding="utf-8", delete_on_start=False)
+
+        amap[FileStore.POSTQUESTIONPROCESSORS_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "processing/postquestionprocessors.txt", format="text",
+                                                                                encoding="utf-8", delete_on_start=False)
 
         amap[FileStore.USERGROUPS_STORAGE] = FileStoreConfiguration(file=tmpdir + os.sep + "security/usergroups.txt", format="text",
                                                           encoding="utf-8", delete_on_start=False)

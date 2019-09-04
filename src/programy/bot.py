@@ -314,6 +314,17 @@ class Bot(object):
 
         return answer
 
+    def post_process_question(self, client_context, question, srai):
+        if srai is False:
+            assert (client_context is not None)
+            answer = client_context.brain.post_process_question(client_context, question).strip()
+            if not answer:
+                answer = self.get_default_response(client_context)
+        else:
+            answer = question
+
+        return answer
+
     def log_answer(self, client_context, text, answer, responselogger):
         YLogger.debug(client_context, "Processed Response (%s): %s", client_context.userid, answer)
 
@@ -412,7 +423,7 @@ class Bot(object):
     def handle_none_response(self, client_context, sentence, responselogger):
 
         assert (sentence is not None)
-        sentence.response = self.post_process_response(client_context, sentence.text(), False)
+        sentence.response = self.post_process_question(client_context, sentence.text(), False)
         if sentence.response is None:
             sentence.response = self.get_default_response(client_context)
 
