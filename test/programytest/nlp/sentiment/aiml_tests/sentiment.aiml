@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+File: [filename]
+Author: [botmaster]
+Last modified: [date]
+
+This AIML file is part of the [botname] [version] chat bot knowledge base.
+
+The [botname] brain is Copyright &copy; [YYYY] by [organization].
+
+The [botname] brain is released under the terms of the GNU Lesser General
+Public License, as published by the Free Software Foundation.
+
+This file is distributed WITHOUT ANY WARRANTY; without even the
+implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+For more information see [url]
+-->
+
+<aiml>
+
+	<!--
+	    # SENTIMENT CURRENT [NUMERIC|TEXT]
+	    # SENTIMENT SCORE <TEXT STRING>
+        # SENTIMENT FEELING [LAST N|OVERALL|
+        # SENTIMENT ENABLED
+        # SENTIMENT POSITIVITY <VALUE>
+        # SENTIMENT SUBJECTIVITY <VALUE>
+	-->
+	<category>
+		<pattern>*</pattern>
+		<template>Done</template>
+	</category>
+
+	<category>
+		<pattern>CONVERSATION SENTIMENT</pattern>
+		<template>
+			<get name="positivity" />
+			<get name="subjectivity" />
+		</template>
+	</category>
+
+	<category>
+		<pattern>CURRENT SENTIMENT TEXT</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT CURRENT TEXT</extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>CURRENT SENTIMENT NUMERIC</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT CURRENT NUMERIC</extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>CALCULATE SENTIMENT SCORE *</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT SCORE <star /></extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>CALCULATE SENTIMENT FEELING LAST *</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT FEELING LAST <star /></extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>CALCULATE SENTIMENT FEELING OVERALL</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT FEELING OVERALL</extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>GET SENTIMENT POSITIVITY *</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT POSITIVITY <star /></extension>
+		</template>
+	</category>
+
+	<category>
+		<pattern>IS SENTIMENT ENABLED</pattern>
+		<template>
+			<extension path="programy.nlp.sentiment.extension.SentimentExtension" >SENTIMENT ENABLED</extension>
+		</template>
+	</category>
+
+</aiml>

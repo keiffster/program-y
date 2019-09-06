@@ -25,7 +25,6 @@ class DynamicAIMLTests(unittest.TestCase):
          """)
         self._client_context.bot.brain.dynamics.add_dynamic_var('gettime', "programy.dynamic.variables.datetime.GetTime", None)
 
-
     def test_dynamic_get(self):
         response = self._client_context.bot.ask_question(self._client_context, "DYNAMIC GET")
         self.assertIsNotNone(response)

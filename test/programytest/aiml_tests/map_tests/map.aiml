@@ -61,12 +61,25 @@ For more information see [url]
 		</template>
 	</category>
 
-		<category>
+	<category>
 		<pattern>DYNAMIC MAP ROMAN TO DECIMAL</pattern>
 		<template>
 		    XX is <map name="romantodec">XX</map>
 		</template>
 	</category>
 
+	<category>
+		<pattern>DYNAMIC MAP STEMMER</pattern>
+		<template>
+		    Troubled stemmed is <map name="stemmer">Troubled</map>
+		</template>
+	</category>
+
+	<category>
+		<pattern>DYNAMIC MAP LEMMATIZE</pattern>
+		<template>
+		    The singular of octopi is <map name="lemmatize">octopi</map>
+		</template>
+	</category>
 
 </aiml>

@@ -22,8 +22,8 @@ from programy.dialog.convo_mgr import ConversationManager
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner
-from programy.translate.base import BaseTranslator
-from programy.sentiment.base import BaseSentimentAnalyser
+from programy.nlp.translate.base import BaseTranslator
+from programy.nlp.sentiment.base import BaseSentimentAnalyser
 from programy.triggers.system import SystemTriggers
 from programy.brainfactory import BrainFactory
 

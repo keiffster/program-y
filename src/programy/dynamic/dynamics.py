@@ -90,11 +90,11 @@ class DynamicsCollection(object):
     def is_dynamic_set(self, name):
         return bool(name.upper() in self._dynamic_sets)
 
-    def dynamic_set(self, client_context, name, value):
+    def dynamic_set(self, client_context, name, value, additional=None):
         name = name.upper()
         if name in self._dynamic_sets:
             dynamic_set = self._dynamic_sets[name]
-            return dynamic_set.is_member(client_context, value)
+            return dynamic_set.is_member(client_context, value, additional)
         return None
 
     ###################################################################################################

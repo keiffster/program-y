@@ -157,7 +157,7 @@ class StorageConfigurationTests(unittest.TestCase):
         self.assertEqual(storage_config.entity_store[StorageFactory.REGEX_TEMPLATES], 'file')
 
         self.assertEqual(storage_config.entity_store[StorageFactory.PROPERTIES], 'file')
-        self.assertEqual(storage_config.entity_store[StorageFactory.VARIABLES], 'file')
+        self.assertEqual(storage_config.entity_store[StorageFactory.DEFAULTS], 'file')
 
         self.assertEqual(storage_config.entity_store[StorageFactory.TWITTER], 'file')
 

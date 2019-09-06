@@ -43,14 +43,14 @@ class BotSentimentAnalyserConfiguration(BaseConfigurationData):
         sentiment = configuration_file.get_section(self._section_name, configuration)
         if sentiment is not None:
             self._classname = configuration_file.get_option(sentiment, "classname", missing_value=None, subs=subs)
-            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.sentiment.scores.SentimentScores", subs=subs)
+            self._scores = configuration_file.get_option(sentiment, "scores", missing_value="programy.nlp.sentiment.scores.SentimentScores", subs=subs)
         else:
             YLogger.warning(self, "'sentiment' section missing from bot config, using defaults")
 
     def to_yaml(self, data, defaults=True):
         if defaults is True:
-            data['classname'] = "programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
-            data['scores'] = "programy.sentiment.scores.SentimentScores"
+            data['classname'] = "programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
+            data['scores'] = "programy.nlp.sentiment.scores.SentimentScores"
         else:
             data['classname'] = self._classname
             data['scores'] = self._scores

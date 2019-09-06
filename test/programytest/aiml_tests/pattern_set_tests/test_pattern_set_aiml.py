@@ -23,6 +23,8 @@ class PatternSetAIMLTests(unittest.TestCase):
         self._client_context = client.create_client_context("testid")
 
         self._client_context.brain.dynamics.add_dynamic_set('number', "programy.dynamic.sets.numeric.IsNumeric", None)
+        self._client_context.brain.dynamics.add_dynamic_set('roman', "programy.dynamic.sets.roman.IsRomanNumeral", None)
+        self._client_context.brain.dynamics.add_dynamic_set('stopword', "programy.dynamic.sets.stopword.IsStopWord", None)
 
     def test_patten_set_match(self):
         response = self._client_context.bot.ask_question(self._client_context,  "MY FAVORITE COLOR IS AMBER")
@@ -66,3 +68,11 @@ class PatternSetAIMLTests(unittest.TestCase):
     def test_inbuilt_set_number(self):
         response = self._client_context.bot.ask_question(self._client_context,  "Is 666 a number")
         self.assertEqual(response, "Yes 666 is a number.")
+
+    def test_roman_set(self):
+        response = self._client_context.bot.ask_question(self._client_context,  "Is XXX a roman number")
+        self.assertEqual(response, "Yes XXX is a roman number.")
+
+    def test_stopword_set(self):
+        response = self._client_context.bot.ask_question(self._client_context,  "Is the a stopword")
+        self.assertEqual(response, "Yes the is a stopword.")

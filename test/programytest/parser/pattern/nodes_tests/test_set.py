@@ -17,6 +17,14 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertIsNotNone(node)
         self.assertEqual("TEST1", node.set_name)
 
+    def test_init_with_attribs_with_additional(self):
+        node = PatternSetNode({"name": "test1", "similar": "hack", "pos": "word", "weight": "0.8"}, "")
+        self.assertIsNotNone(node)
+        self.assertEqual("TEST1", node.set_name)
+        self.assertEqual("HACK", node.additional['similar'])
+        self.assertEqual("WORD", node.additional['pos'])
+        self.assertEqual("0.8", node.additional['weight'])
+
     def test_init_with_invalid_attribs(self):
         with self.assertRaises(ParserException) as raised:
             node = PatternSetNode({"unknwon": "test1"}, "")
@@ -116,6 +124,20 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         result = node.equals(self._client_context, sentence, result.word_no+1)
         self.assertFalse(result.matched)
 
+    def test_synset(self):
+        self._client_context.brain.dynamics.add_dynamic_set('synset', "programy.dynamic.sets.synsets.IsSynset", None)
+
+        node = PatternSetNode({'similar': 'HACK'}, "SYNSET")
+        self.assertIsNotNone(node)
+
+        sentence = Sentence(self._client_context, "CHOP")
+
+        result = node.equals(self._client_context, sentence, 0)
+        self.assertTrue(result.matched)
+
+        result = node.equals(self._client_context, sentence, result.word_no+1)
+        self.assertFalse(result.matched)
+
     def test_to_xml_text(self):
         node1 = PatternSetNode({}, "test1")
         self.assertEqual('<set name="TEST1">\n</set>', node1.to_xml(self._client_context))
@@ -134,6 +156,15 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         self.assertEqual('<set name="TEST1">\n</set>', node2.to_xml(self._client_context))
         self.assertEqual('<set userid="testid" name="TEST1">\n</set>', node2.to_xml(self._client_context, include_user=True))
 
+    def test_to_xml_with_additional(self):
+        node1 = PatternSetNode({"name": "test1", "similar": "hack"}, "")
+        self.assertEqual('<set name="TEST1" similar="HACK">\n</set>', node1.to_xml(self._client_context))
+        self.assertEqual('<set userid="*" name="TEST1" similar="HACK">\n</set>', node1.to_xml(self._client_context, include_user=True))
+
+        node2 = PatternSetNode({"name": "test1", "similar": "hack"}, "", userid="testid")
+        self.assertEqual('<set name="TEST1" similar="HACK">\n</set>', node2.to_xml(self._client_context))
+        self.assertEqual('<set userid="testid" name="TEST1" similar="HACK">\n</set>', node2.to_xml(self._client_context, include_user=True))
+
     def test_to_string_text(self):
         node1 = PatternSetNode({}, "test1")
         self.assertEqual('SET name=[TEST1]', node1.to_string(verbose=False))
@@ -142,7 +173,6 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node2 = PatternSetNode({}, "test1", userid="testid")
         self.assertEqual('SET name=[TEST1]', node2.to_string(verbose=False))
         self.assertEqual('SET [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]', node2.to_string(verbose=True))
-        pass
 
     def test_to_string_attribs(self):
         node1 = PatternSetNode({"name": "test1"}, "")
@@ -152,7 +182,15 @@ class PatternSetNodeTests(ParserTestsBaseClass):
         node2 = PatternSetNode({"name": "test1"}, "", userid="testid")
         self.assertEqual('SET name=[TEST1]', node2.to_string(verbose=False))
         self.assertEqual('SET [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1]', node2.to_string(verbose=True))
-        pass
+
+    def test_to_string_with_additional(self):
+        node1 = PatternSetNode({"name": "test1", "similar": "hack"}, "")
+        self.assertEqual('SET name=[TEST1] similar=[HACK]', node1.to_string(verbose=False))
+        self.assertEqual('SET [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1] similar=[HACK]', node1.to_string(verbose=True))
+
+        node2 = PatternSetNode({"name": "test1", "similar": "hack"}, "", userid="testid")
+        self.assertEqual('SET name=[TEST1] similar=[HACK]', node2.to_string(verbose=False))
+        self.assertEqual('SET [testid] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(0)] name=[TEST1] similar=[HACK]', node2.to_string(verbose=True))
 
     def test_equivalent_text(self):
         node1 = PatternSetNode({}, "test1")

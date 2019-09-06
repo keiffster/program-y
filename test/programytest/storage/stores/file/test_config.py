@@ -34,7 +34,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(config.properties_storage)
         self.assertIsNotNone(config.defaults_storage)
-        self.assertIsNotNone(config.variables_storage)
 
         self.assertIsNotNone(config.twitter_storage)
 
@@ -235,7 +234,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assert_config(config.properties_storage, file="./storage/properties.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.defaults_storage, file="./storage/defaults.txt", format="text", encoding="utf-8", delete_on_start=False)
-        self.assert_config(config.variables_storage, dirs=["./storage/variables"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.twitter_storage, dirs=["./storage/twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
@@ -286,7 +284,6 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assert_config(config.properties_storage, file=tmpdir + os.sep + "properties.txt", format="text", encoding="utf-8", delete_on_start=False)
         self.assert_config(config.defaults_storage, file=tmpdir + os.sep + "defaults.txt", format="text", encoding="utf-8", delete_on_start=False)
-        self.assert_config(config.variables_storage, dirs=[tmpdir + os.sep + "variables"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 
         self.assert_config(config.twitter_storage, dirs=[tmpdir + os.sep + "twitter"], extension="txt", subdirs=False, format="text", encoding="utf-8", delete_on_start=False)
 

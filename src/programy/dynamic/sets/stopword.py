@@ -17,7 +17,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 
 from programy.dynamic.sets.set import DynamicSet
 
-from programy.utils.nlp.stopwords import StopWords
+from programy.nlp.stopwords import StopWords
 
 
 class IsStopWord(DynamicSet):
@@ -27,5 +27,5 @@ class IsStopWord(DynamicSet):
     def __init__(self, config):
         DynamicSet.__init__(self, config)
 
-    def is_member(self, client_context, value):
+    def is_member(self, client_context, value, additional=None):
         return StopWords.is_stopword(value)

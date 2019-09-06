@@ -7,7 +7,6 @@ from programy.config.bot.bot import BotConfiguration
 from programy.config.programy import ProgramyConfiguration
 from programy.clients.events.console.config import ConsoleConfiguration
 from programy.context import ClientContext
-from programy.config.bot.spelling import BotSpellingConfiguration
 
 from programytest.client import TestClient
 
@@ -274,8 +273,8 @@ class BotTests(unittest.TestCase):
 
     def test_bot_init_with_valid_translatorr(self):
         bot_config = BotConfiguration()
-        bot_config.from_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
-        bot_config.to_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
+        bot_config.from_translator._classname = "programy.nlp.translate.textblob_translator.TextBlobTranslator"
+        bot_config.to_translator._classname = "programy.nlp.translate.textblob_translator.TextBlobTranslator"
         client = TestClient()
         bot = Bot(bot_config, client)
 
@@ -312,7 +311,7 @@ class BotTests(unittest.TestCase):
 
     def test_bot_init_with_valid_sentiment_analyserr(self):
         bot_config = BotConfiguration()
-        bot_config.sentiment_analyser._classname = "programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
+        bot_config.sentiment_analyser._classname = "programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
         client = TestClient()
         bot = Bot(bot_config, client)
 

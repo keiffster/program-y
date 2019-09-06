@@ -16,8 +16,8 @@ class SentimentScoreTests(unittest.TestCase):
         self._client = TestClient()
 
         config = BotConfiguration()
-        config.sentiment_analyser._classname = "programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
-        config.sentiment_analyser._scores = "programy.sentiment.scores.SentimentScores"
+        config.sentiment_analyser._classname = "programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser"
+        config.sentiment_analyser._scores = "programy.nlp.sentiment.scores.SentimentScores"
 
         self.client_context = self._client.create_client_context("testuser")
 

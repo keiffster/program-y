@@ -12,9 +12,9 @@ class TestLemmatizeMaps(unittest.TestCase):
         self._client_context = ClientContext(TestClient(), "testid")
 
     def test_static_map(self):
-        map = LemmatizeMap(None)
-        self.assertEqual("octopus", map.map_value(self._client_context, "octopi"))
-        self.assertEqual("sheep", map.map_value(self._client_context, "sheep"))
-        self.assertEqual("fish", map.map_value(self._client_context, "fish"))
-        self.assertEqual("mouse", map.map_value(self._client_context, "mice"))
-        self.assertEqual("holly", map.map_value(self._client_context, "hollies"))
+        lemmamap = LemmatizeMap(None)
+        self.assertEqual("octopus", lemmamap.map_value(self._client_context, "octopi"))
+        self.assertEqual("sheep", lemmamap.map_value(self._client_context, "sheep"))
+        self.assertEqual("fish", lemmamap.map_value(self._client_context, "fish"))
+        self.assertEqual("mouse", lemmamap.map_value(self._client_context, "mice"))
+        self.assertEqual("holly", lemmamap.map_value(self._client_context, "hollies"))

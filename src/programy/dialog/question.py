@@ -102,7 +102,7 @@ class Question(object):
     def previous_nth_sentence(self, num):
         if len(self._sentences) < num:
             raise Exception("Num sentence array violation !")
-        previous = -1 - num
+        previous = -1 -num
         return self._sentences[previous]
 
     def combine_sentences(self, client_context):

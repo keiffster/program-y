@@ -25,7 +25,7 @@ class IsNumeric(DynamicSet):
     def __init__(self, config):
         DynamicSet.__init__(self, config)
 
-    def is_member(self, client_context, value):
+    def is_member(self, client_context, value, additional=None):
         if value is not None:
             return value.isnumeric()
         return False

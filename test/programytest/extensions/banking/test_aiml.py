@@ -14,6 +14,7 @@ class BankBalanceTestsClient(TestClient):
         self.add_default_stores()
         self.add_categories_store([os.path.dirname(__file__)])
 
+
 class BankBalanceAIMLTests(unittest.TestCase):
 
     def setUp (self):
@@ -24,4 +25,3 @@ class BankBalanceAIMLTests(unittest.TestCase):
         response = self._client_context.bot.ask_question(self._client_context, "WHAT IS MY BANK BALANCE")
         self.assertIsNotNone(response)
         self.assertEqual(response, 'Your bank balance is currently £0.00.')
-

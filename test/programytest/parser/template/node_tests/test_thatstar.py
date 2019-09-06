@@ -17,6 +17,7 @@ class MockTemplateThatStarNode(TemplateThatStarNode):
     def resolve_to_string(self, context):
         raise Exception("This is an error")
 
+
 class TemplateThatStarNodeTests(ParserTestsBaseClass):
 
     def test_to_str_defaults(self):

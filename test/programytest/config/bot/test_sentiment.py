@@ -13,8 +13,8 @@ class BotSentimentAnalyserConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             sentiment:
-                classname: programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
-                scores: programy.sentiment.scores.SentimentScores
+                classname: programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
+                scores: programy.nlp.sentiment.scores.SentimentScores
         """, ConsoleConfiguration(), ".")
 
         bot_config = yaml.get_section("bot")
@@ -22,8 +22,8 @@ class BotSentimentAnalyserConfigurationTests(unittest.TestCase):
         sentiment_config = BotSentimentAnalyserConfiguration()
         sentiment_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEqual("programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", sentiment_config.classname)
-        self.assertEqual("programy.sentiment.scores.SentimentScores", sentiment_config.scores)
+        self.assertEqual("programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", sentiment_config.classname)
+        self.assertEqual("programy.nlp.sentiment.scores.SentimentScores", sentiment_config.scores)
 
     def test_with_default_data(self):
         yaml = YamlConfigurationFile()
@@ -31,7 +31,7 @@ class BotSentimentAnalyserConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             sentiment:
-                classname: programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
+                classname: programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser
         """, ConsoleConfiguration(), ".")
 
         bot_config = yaml.get_section("bot")
@@ -39,8 +39,8 @@ class BotSentimentAnalyserConfigurationTests(unittest.TestCase):
         sentiment_config = BotSentimentAnalyserConfiguration()
         sentiment_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEqual("programy.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", sentiment_config.classname)
-        self.assertEqual("programy.sentiment.scores.SentimentScores", sentiment_config.scores)
+        self.assertEqual("programy.nlp.sentiment.textblob_sentiment.TextBlobSentimentAnalyser", sentiment_config.classname)
+        self.assertEqual("programy.nlp.sentiment.scores.SentimentScores", sentiment_config.scores)
 
     def test_without_data(self):
         yaml = YamlConfigurationFile()

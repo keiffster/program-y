@@ -5,7 +5,8 @@ from programy.parser.template.nodes.xml import TemplateXMLNode
 from programy.parser.template.nodes.star import TemplateStarNode
 from programy.dialog.conversation import Conversation
 from programy.dialog.question import Question
-from programy.parser.pattern.matcher import MatchContext, Match
+from programy.parser.pattern.matchcontext import MatchContext
+from programy.parser.pattern.match import Match
 from programy.parser.pattern.nodes.oneormore import PatternOneOrMoreWildCardNode
 from programy.parser.template.nodes.base import TemplateNode
 
@@ -68,7 +69,7 @@ class TemplateGraphXMLTests(TemplateGraphTestClient):
         question.current_sentence()._response = "OK"
         conversation.record_dialog(question)
         match = PatternOneOrMoreWildCardNode("*")
-        context = MatchContext(max_search_depth=100, max_search_timeout=-1, tokenizer=self._client_context.brain.tokenizer)
+        context = MatchContext(max_search_depth=100, max_search_timeout=-1)
         context.add_match(Match(Match.WORD, match, "AIML"))
         question.current_sentence()._matched_context = context
         self._client_context.bot._conversation_mgr._conversations["testid"] = conversation

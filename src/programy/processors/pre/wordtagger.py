@@ -18,7 +18,7 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 from programy.processors.processing import PreProcessor
 
-from programy.utils.nlp.pos import PartsOfSpeechTagger
+from programy.nlp.pos import PartsOfSpeechTagger
 
 
 class WordTaggerPreProcessor(PreProcessor):

@@ -35,7 +35,7 @@ class TemplateRequestNode(TemplateIndexedNode):
         int_index = int(self.index.resolve(client_context))
 
         conversation = client_context.bot.get_conversation(client_context)
-        question = conversation.previous_nth_question(self.index)
+        question = conversation.previous_nth_question(int_index)
         resolved = question.combine_sentences(client_context)
         YLogger.debug(client_context, "[%s] resolved to [%s]", self.to_string(), resolved)
         return resolved

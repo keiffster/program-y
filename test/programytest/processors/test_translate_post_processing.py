@@ -24,11 +24,11 @@ class PostProcessingTests(unittest.TestCase):
 
         config = BotConfiguration()
 
-        config.from_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
+        config.from_translator._classname = "programy.nlp.translate.textblob_translator.TextBlobTranslator"
         config.from_translator._from_lang = "fr"
         config.from_translator._to_lang = "en"
 
-        config.to_translator._classname = "programy.translate.textblob_translator.TextBlobTranslator"
+        config.to_translator._classname = "programy.nlp.translate.textblob_translator.TextBlobTranslator"
         config.to_translator._from_lang = "en"
         config.to_translator._to_lang = "fr"
 
@@ -53,7 +53,7 @@ class PostProcessingTests(unittest.TestCase):
 
         return output_str
 
-    @unittest.skipIf(Externals.google_translate is True, Externals.google_translate_disabled)
+    @unittest.skipIf(Externals.google_translate is False, Externals.google_translate_disabled)
     def test_post_cleanup(self):
 
         result = self.post_process("Hello World")

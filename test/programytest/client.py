@@ -132,11 +132,6 @@ class TestClient(BotClient):
         self.storage_factory._storage_engines[StorageFactory.DEFAULTS] = self._storage_engine
         self.storage_factory._store_to_engine_map[StorageFactory.DEFAULTS] = self._storage_engine
 
-    def add_variables_store(self, file):
-        self._file_store_config._variables_storage = FileStoreConfiguration(file=file, format="text", encoding="utf-8", delete_on_start=False)
-        self.storage_factory._storage_engines[StorageFactory.VARIABLES] = self._storage_engine
-        self.storage_factory._store_to_engine_map[StorageFactory.VARIABLES] = self._storage_engine
-
     def add_regex_templates_store(self, file):
         self._file_store_config._regex_storage = FileStoreConfiguration(file=file, format="text", encoding="utf-8", delete_on_start=False)
         self.storage_factory._storage_engines[StorageFactory.REGEX_TEMPLATES] = self._storage_engine

@@ -13,7 +13,7 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             translator:
-                classname: programy.translate.textblob_translator.TextBlobTranslator
+                classname: programy.nlp.translate.textblob_translator.TextBlobTranslator
                 from: fr
                 to: en 
         """, ConsoleConfiguration(), ".")
@@ -23,7 +23,7 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         translator_config = BotTranslatorConfiguration(name="translator")
         translator_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", translator_config.classname)
+        self.assertEqual("programy.nlp.translate.textblob_translator.TextBlobTranslator", translator_config.classname)
         self.assertEqual("en", translator_config.to_lang)
         self.assertEqual("fr", translator_config.from_lang)
 
@@ -33,7 +33,7 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         yaml.load_from_text("""
         bot:
             translator:
-                classname: programy.translate.textblob_translator.TextBlobTranslator
+                classname: programy.nlp.translate.textblob_translator.TextBlobTranslator
         """, ConsoleConfiguration(), ".")
 
         bot_config = yaml.get_section("bot")
@@ -41,7 +41,7 @@ class BotTranslatorConfigurationTests(unittest.TestCase):
         translator_config = BotTranslatorConfiguration(name="translator")
         translator_config.load_config_section(yaml, bot_config, ".")
 
-        self.assertEqual("programy.translate.textblob_translator.TextBlobTranslator", translator_config.classname)
+        self.assertEqual("programy.nlp.translate.textblob_translator.TextBlobTranslator", translator_config.classname)
         self.assertIsNone(translator_config.to_lang)
         self.assertIsNone(translator_config.from_lang)
 

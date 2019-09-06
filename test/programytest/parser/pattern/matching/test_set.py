@@ -87,3 +87,15 @@ class PatternMatcherSetTests(PatternMatcherBaseClass):
         self.assertEqual("PTEMPLATE [*] [P(0)^(0)#(0)C(0)_(0)*(0)To(0)Th(0)Te(1)]",  context.template_node.to_string())
 
         self.assertEqual("49", context.star(self._client_context, 1))
+
+    def test_basic_set_synset_match(self):
+        self._client_context.brain.dynamics.add_dynamic_set('synset', "programy.dynamic.sets.synsets.IsSynset", None)
+
+        self.add_pattern_to_graph(pattern='I AM A <set name="synset" similar="hack" />', topic="*", that="*", template="OK")
+
+        context = self.match_sentence("I AM A CHOP", topic="X", that="Y")
+        self.assertIsNotNone(context)
+        self.assertIsNotNone(context.template_node)
+
+        context = self.match_sentence("I AM A FISH", topic="X", that="Y")
+        self.assertIsNone(context)

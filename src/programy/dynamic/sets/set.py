@@ -28,5 +28,5 @@ class DynamicSet(object):
         return self._config
 
     @abstractmethod
-    def is_member(self, client_context, value):
+    def is_member(self, client_context, value, additional=None):
         raise NotImplementedError()

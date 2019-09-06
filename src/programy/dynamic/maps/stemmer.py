@@ -18,7 +18,8 @@ TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR TH
 from programy.utils.logging.ylogger import YLogger
 
 from programy.dynamic.maps.map import DynamicMap
-from programy.utils.nlp.stemming import Stemmer
+from programy.nlp.stemming import Stemmer
+
 
 class StemmerMap(DynamicMap):
 
