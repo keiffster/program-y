@@ -20,6 +20,7 @@ from programy.config.brain.defaults import BrainDefaultsConfiguration
 from programy.config.brain.binaries import BrainBinariesConfiguration
 from programy.config.brain.braintree import BrainBraintreeConfiguration
 from programy.config.brain.services import BrainServicesConfiguration
+from programy.config.brain.openchatbots import BrainOpenChatBotsConfiguration
 from programy.config.brain.securities import BrainSecuritiesConfiguration
 from programy.config.brain.oobs import BrainOOBSConfiguration
 from programy.config.brain.dynamic import BrainDynamicsConfiguration
@@ -36,6 +37,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._binaries = BrainBinariesConfiguration()
         self._braintree = BrainBraintreeConfiguration()
         self._services = BrainServicesConfiguration()
+        self._openchatbots = BrainOpenChatBotsConfiguration()
         self._security = BrainSecuritiesConfiguration()
         self._oob = BrainOOBSConfiguration()
         self._dynamics = BrainDynamicsConfiguration()
@@ -64,6 +66,10 @@ class BrainConfiguration(BaseContainerConfigurationData):
         return self._services
 
     @property
+    def openchatbots(self):
+        return self._openchatbots
+
+    @property
     def security(self):
         return self._security
 
@@ -89,6 +95,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self._binaries.check_for_license_keys(license_keys)
         self._braintree.check_for_license_keys(license_keys)
         self._services.check_for_license_keys(license_keys)
+        self._openchatbots.check_for_license_keys(license_keys)
         self._security.check_for_license_keys(license_keys)
         self._oob.check_for_license_keys(license_keys)
         self._dynamics.check_for_license_keys(license_keys)
@@ -104,6 +111,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
             self._binaries.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._braintree.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._services.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
+            self._openchatbots.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._security.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._oob.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
             self._dynamics.load_config_section(configuration_file, brain_config, bot_root, subs=subs)
@@ -116,6 +124,7 @@ class BrainConfiguration(BaseContainerConfigurationData):
         self.config_to_yaml(data, BrainBinariesConfiguration(), defaults)
         self.config_to_yaml(data, BrainBraintreeConfiguration(), defaults)
         self.config_to_yaml(data, BrainServicesConfiguration(), defaults)
+        self.config_to_yaml(data, BrainOpenChatBotsConfiguration(), defaults)
         self.config_to_yaml(data, BrainSecuritiesConfiguration(), defaults)
         self.config_to_yaml(data, BrainOOBSConfiguration(), defaults)
         self.config_to_yaml(data, BrainDynamicsConfiguration(), defaults)

@@ -19,7 +19,6 @@ from programy.utils.logging.ylogger import YLogger
 from programy.dialog.question import Question
 from programy.dialog.sentence import Sentence
 from programy.dialog.convo_mgr import ConversationManager
-from programy.config.bot.bot import BotConfiguration
 from programy.spelling.base import SpellingChecker
 from programy.dialog.splitter.splitter import SentenceSplitter
 from programy.dialog.joiner.joiner import SentenceJoiner
@@ -346,7 +345,7 @@ class Bot(object):
 
         client_context.mark_question_start(text)
 
-        pre_processed = self.pre_process_text(client_context, text, srai)
+        pre_processed = self.pre_process_text(client_context, text, srai=False)
 
         question = self.get_question(client_context, pre_processed, srai)
 

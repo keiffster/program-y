@@ -46,9 +46,7 @@ class ConsoleBotClient(EventBotClient):
         self._renderer.render(client_context, initial_question)
 
     def process_question(self, client_context, question):
-
         self._questions += 1
-
         return client_context.bot.ask_question(client_context, question, responselogger=self)
 
     def render_response(self, client_context, response):

@@ -19,97 +19,113 @@ from abc import ABCMeta, abstractmethod
 
 from programy.clients.client import BotClient
 from programy.clients.restful.config import RestConfiguration
+from programy.clients.restful.apihandlers import APIHandler_V1_0, APIHandler_V2_0
+from programy.clients.restful.apikeys import APIKeysHandler
+from programy.clients.restful.auth import RestAuthorizationHandler
+
 
 class RestBotClient(BotClient):
     __metaclass__ = ABCMeta
 
     def __init__(self, id, argument_parser=None):
         BotClient.__init__(self, id, argument_parser)
-        self.api_keys = []
+        self._api_keys = APIKeysHandler(self.configuration.client_configuration)
+        self._authorization = None
+        self._v1_0_handler = APIHandler_V1_0(self)
+        self._v2_0_handler = APIHandler_V2_0(self)
+
+    @property
+    def api_keys(self):
+        return self._api_keys
 
     def get_client_configuration(self):
         return RestConfiguration(self.id)
 
-    def load_api_keys(self):
-        if self.configuration.client_configuration.use_api_keys is True:
-            if self.configuration.client_configuration.api_key_file is not None:
-                try:
-                    with open(self.configuration.client_configuration.api_key_file, "r", encoding="utf-8") as api_key_file:
-                        for api_key in api_key_file:
-                            self.api_keys.append(api_key.strip())
-
-                except Exception as excep:
-                    YLogger.exception(self, "Failed to open license key file [%s]", excep, self.configuration.client_configuration.api_key_file)
-
     def initialise(self):
-        self.load_api_keys()
+        self._api_keys.load_api_keys()
+        self._authorization = RestAuthorizationHandler.load_authorisation(self)
+
+    def get_variable(self, rest_request, name, method='GET'):
+        if method == 'GET':
+            if name not in rest_request.args or rest_request.args[name] is None:
+                YLogger.error(self, "'%s' missing from GET request", name)
+                self.server_abort(400)
+            return rest_request.args[name]
+
+        elif method == 'POST':
+            if name not in rest_request.json or rest_request.json[name] is None:
+                YLogger.error(self, "'%s' missing from POST request", name)
+                self.server_abort(400)
+            return rest_request.json[name]
+
+        else:
+            YLogger.error(self, "Invalid REST request type '%s'", method)
+            self.server_abort(400)
 
     @abstractmethod
-    def get_api_key(self, rest_request):
+    def server_abort(self, message, status_code):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_question(self, rest_request):
+    def create_response(self, response_data, status_code, version=1.0):
         raise NotImplementedError()
 
-    @abstractmethod
-    def get_userid(self, rest_request):
-        raise NotImplementedError()
+    def _get_metadata(self, client_context, metadata):
 
-    @abstractmethod
-    def create_response(self, response, status):
-        raise NotImplementedError()
+        if client_context.brain.properties.has_property("fullname"):
+            metadata['botName'] = client_context.brain.properties.property("fullname")
+        else:
+            metadata['botName'] = "Program-y"
 
-    def is_apikey_valid(self, apikey):
-        return bool(apikey in self.api_keys)
+        if client_context.brain.properties.has_property("app_version"):
+            metadata['version'] = client_context.brain.properties.property("app_version")
+        else:
+            metadata['version'] = "1.0.0"
 
-    def verify_api_key_usage(self, request):
-        if self.configuration.client_configuration.use_api_keys is True:
+        if client_context.brain.properties.has_property("copyright"):
+            metadata['copyright'] = client_context.brain.properties.property("copyright")
+        else:
+            metadata['copyright'] = "Copyright 2016-2019 keithsterling.com"
 
-            apikey = self.get_api_key(request)
+        if client_context.brain.properties.has_property("botmaster"):
+            metadata['authors'] = [client_context.brain.properties.property("botmaster")]
+        else:
+            metadata['authors'] = ["Keith Sterling"]
 
-            if apikey is None:
-                YLogger.error(self, "Unauthorised access - api required but missing")
-                return {'error': 'Unauthorized access'}, 401
-
-            if self.is_apikey_valid(apikey) is False:
-                YLogger.error(self, "'Unauthorised access - invalid api key")
-                return {'error': 'Unauthorized access'}, 401
-
-        return None, None
-
-    def format_success_response(self, userid, question, answer):
-        return {"question": question, "answer": answer, "userid": userid}
-
-    def format_error_response(self, userid, question, error):
-        client_context = self.create_client_context(userid)
-        return {"question": question, "answer": client_context.bot.default_response, "userid": userid, "error": error}
-
-    def ask_question(self, userid, question):
+    def ask_question(self, userid, question, metadata=None):
         response = ""
         try:
             self._questions += 1
             client_context = self.create_client_context(userid)
             response = client_context.bot.ask_question(client_context, question, responselogger=self)
+
+            if metadata is not None:
+                self._get_metadata(client_context, metadata)
+
         except Exception as e:
-            print(e)
+            YLogger.exception_nostack(self, "Failed to ask question", e)
+
         return response
 
-    def process_request(self, request):
-        question = "Unknown"
-        userid = "Unknown"
-        try:
-            response, status = self.verify_api_key_usage(request)
-            if response is not None:
-                return response, status
+    def process_request(self, request, version=1.0):
 
-            question = self.get_question(request)
-            userid = self.get_userid(request)
+        if self._authorization is not None:
+            if self._authorization.authorise(request) is False:
+                return "Access denied", 403
 
-            answer = self.ask_question(userid, question)
+        if self._api_keys is not None:
+            if self._api_keys.use_api_keys():
+                if self._api_keys.verify_api_key_usage(request) is False:
+                    return 'Unauthorized access', 401
 
-            return self.format_success_response(userid, question, answer), 200
+        if version == 1.0:
+            return self._v1_0_handler.process_request(request)
 
-        except Exception as excep:
+        elif version == 2.0:
+            return self._v2_0_handler.process_request(request)
 
-            return self.format_error_response(userid, question, str(excep)), 500
+        else:
+            return 'Invalid API version', 400
+
+    def dump_request(self, request):
+        YLogger.debug(self, str(request))
