@@ -78,10 +78,14 @@ class BrainDynamicsConfiguration(BaseSectionConfigurationData):
             data['sets'] = {}
             data['sets']['numeric'] = 'programy.dynamic.sets.numeric.IsNumeric'
             data['sets']['roman'] = 'programy.dynamic.sets.roman.IsRomanNumeral'
+            data['sets']['stopword'] = 'programy.dynamic.sets.stopword.IsStopWord'
+            data['sets']['synsets'] = 'programy.dynamic.sets.synsets.IsSynset'
 
             data['maps'] = {}
             data['maps']['romantodec'] = 'programy.dynamic.maps.roman.MapRomanToDecimal'
             data['maps']['dectoroman'] = 'programy.dynamic.maps.roman.MapDecimalToRoman'
+            data['maps']['lemmatize'] = 'programy.dynamic.maps.lemmatize.LemmatizeMap'
+            data['maps']['stemmer'] = 'programy.dynamic.maps.stemmer.StemmerMap'
 
             data['variables'] = {}
             data['variables']['gettime'] = 'programy.dynamic.variables.datetime.GetTime'
