@@ -193,6 +193,7 @@ class StorageConfiguration(BaseConfigurationData):
 
         amap[StorageFactory.PREPROCESSORS] = 'file'
         amap[StorageFactory.POSTPROCESSORS] = 'file'
+        amap[StorageFactory.POSTQUESTIONPROCESSORS] = 'file'
 
         amap[StorageFactory.USERGROUPS] = 'file'
 
