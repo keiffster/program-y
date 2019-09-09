@@ -61,6 +61,7 @@ class FileStore(Store):
 
     PREPROCESSORS_STORAGE = 'preprocessors_storage'
     POSTPROCESSORS_STORAGE = 'postprocessors_storage'
+    POSTQUESTIONPROCESSORS_STORAGE = 'postquestionprocessors_storage'
 
     USERGROUPS_STORAGE = 'usergroups_storage'
 

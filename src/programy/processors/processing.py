@@ -81,6 +81,18 @@ class PostProcessorCollection(ProcessorCollection):
         return storage_engine.postprocessors_store()
 
 
+class PostQuestionProcessorCollection(ProcessorCollection):
+
+    def __init__(self):
+        ProcessorCollection.__init__(self)
+
+    def _get_storage_name(self):
+        return StorageFactory.POSTQUESTIONPROCESSORS
+
+    def _get_store(self, storage_engine):
+        return storage_engine.postquestionprocessors_store()
+
+
 ##################################################################
 #
 class Processor:
@@ -109,6 +121,17 @@ class PreProcessor(Processor):
 ##################################################################
 #
 class PostProcessor(Processor):
+    def __init__(self):
+        Processor.__init__(self)
+
+    @abstractmethod
+    def process(self, client_context, word_string):
+        pass
+
+
+##################################################################
+#
+class PostQuestionProcessor(Processor):
     def __init__(self):
         Processor.__init__(self)
 

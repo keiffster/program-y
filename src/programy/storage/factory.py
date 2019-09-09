@@ -57,6 +57,7 @@ class StorageFactory(object):
 
     PREPROCESSORS = "preprocessors"
     POSTPROCESSORS = "postprocessors"
+    POSTQUESTIONPROCESSORS = "postquestionprocessors"
 
     USERGROUPS = "usergroups"
 

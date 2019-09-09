@@ -63,3 +63,12 @@ class FilePostProcessorsStore(FileProcessorsStore):
 
     def get_storage(self):
         return self.storage_engine.configuration.postprocessors_storage
+
+
+class FilePostQuestionProcessorsStore(FileProcessorsStore):
+
+    def __init__(self, storage_engine):
+        FileProcessorsStore.__init__(self, storage_engine)
+
+    def get_storage(self):
+        return self.storage_engine.configuration.postquestionprocessors_storage

@@ -41,12 +41,12 @@ from programy.storage.stores.file.store.binaries import FileBinariesStore
 from programy.storage.stores.file.store.braintree import FileBraintreeStore
 from programy.storage.stores.file.store.processors import FilePreProcessorsStore
 from programy.storage.stores.file.store.processors import FilePostProcessorsStore
+from programy.storage.stores.file.store.processors import FilePostQuestionProcessorsStore
 from programy.storage.stores.file.store.usergroups import FileUserGroupStore
 from programy.storage.stores.file.store.triggers import FileTriggersStore
 
 
 class FileStorageEngine(StorageEngine):
-
     FILE = "file"
 
     def __init__(self, configuration):
@@ -57,10 +57,13 @@ class FileStorageEngine(StorageEngine):
 
     def category_store(self):
         return FileCategoryStore(self)
+
     def errors_store(self):
         return FileErrorsStore(self)
+
     def duplicates_store(self):
         return FileDuplicatesStore(self)
+
     def learnf_store(self):
         return FileLearnfStore(self)
 
@@ -69,26 +72,34 @@ class FileStorageEngine(StorageEngine):
 
     def sets_store(self):
         return FileSetsStore(self)
+
     def maps_store(self):
         return FileMapsStore(self)
+
     def rdf_store(self):
         return FileRDFStore(self)
 
     def denormal_store(self):
         return FileDenormalStore(self)
+
     def normal_store(self):
         return FileNormalStore(self)
+
     def gender_store(self):
         return FileGenderStore(self)
+
     def person_store(self):
         return FilePersonStore(self)
+
     def person2_store(self):
         return FilePerson2Store(self)
+
     def regex_store(self):
         return FileRegexStore(self)
 
     def property_store(self):
         return FilePropertyStore(self)
+
     def defaults_store(self):
         return FileDefaultVariablesStore(self)
 
@@ -103,6 +114,7 @@ class FileStorageEngine(StorageEngine):
 
     def pattern_nodes_store(self):
         return FilePatternNodeStore(self)
+
     def template_nodes_store(self):
         return FileTemplateNodeStore(self)
 
@@ -114,8 +126,12 @@ class FileStorageEngine(StorageEngine):
 
     def preprocessors_store(self):
         return FilePreProcessorsStore(self)
+
     def postprocessors_store(self):
         return FilePostProcessorsStore(self)
+
+    def postquestionprocessors_store(self):
+        return FilePostQuestionProcessorsStore(self)
 
     def usergroups_store(self):
         return FileUserGroupStore(self)
