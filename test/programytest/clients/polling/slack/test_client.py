@@ -58,6 +58,7 @@ class MockSlackBotClient(SlackBotClient):
         self.response_sent = response
         self.channel_sent = channel
 
+
 class SlackBotClientTests(unittest.TestCase):
 
     def test_slack_client_init(self):

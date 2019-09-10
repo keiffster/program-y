@@ -1,0 +1,51 @@
+To deploy program-y to PyPi, there are a number of checks to be made
+
+1. Make sure all skips are set back to True in
+
+        programy/test/storage/engines.py
+        programytest/externals.py
+
+        Note, leave rslp_stemming=False unless you have installed rslp via NLTK
+
+2. Make sure to start
+
+        mysql
+        mongodb
+        redis
+
+3. Check latest version of pip, otherwise upgrade
+
+        python3 -m pip install --upgrade pip
+
+4. Make sure requirements.txt is up to date with all dependencies
+
+5. Check latest version of all dependencies in requirements.txt
+
+        This is done by running pipver.py and using the results to
+
+            1) Update requirements.txt
+            2) Update requirements-dev.txt
+            3) Update setup.py
+
+            * Note - Do NOT change the following versions
+                    MetOffer, v2.0 is currently not supported
+                    slackclient, v2.10 is currently not supported
+
+6. Make sure setup.py matches requirements.txt
+
+7. Run pip3 install -r requirements.txt
+
+8. Run all unit tests and ensure pass rate of > 80%, although currently 84%
+
+9. Check in to git any changes that you made
+
+        git add .
+        git commit -m "Updates follow"
+
+10. Run pypi_create.sh X.Y
+
+11. Run pypi_upload.sh
+
+12. Run pypi_check.sh
+
+
