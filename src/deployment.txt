@@ -42,10 +42,14 @@ To deploy program-y to PyPi, there are a number of checks to be made
         git add .
         git commit -m "Updates follow"
 
-10. Run pypi_create.sh X.Y
+10. Push all changes to github
 
-11. Run pypi_upload.sh
+        github push github master
 
-12. Run pypi_check.sh
+11. Run pypi_create.sh X.Y
+
+12. Run pypi_upload.sh
+
+13. Run pypi_check.sh
 
 
