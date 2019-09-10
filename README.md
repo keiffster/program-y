@@ -4,13 +4,13 @@ Program Y is a fully compliant AIML 2.1 chatbot framework written in Python 3. I
 building your own chat bots using Artificial Intelligence Markup Language, or AIML for short. 
 For more information about Program-y, its features and its history then check out the Background page.
 
-## New in 3.8
-* Microsoft Bot Framework 
-* Discord Client
-* Livezilla Support
-* PandoraBots File Support
-* Health Checking added to all clients  [HealthChecker](https://github.com/keiffster/program-y/wiki/Client-Healthcheck)
-* Improved installation documentation for most clients
+## New in 3.9
+* Openchatbot support (client and server)
+* Major NLP enhancements including direct support for stemming, lemmatisation, stopwords, ngrams, pos tagging and synsets. These are available as maps, sets and pre processors
+* New question post processor that allows you to hand off retry of a question if the initial result is null.
+* A number of bug fixes to rich media, pattern matching on _ and rest client
+* Support for latest version of Pip
+* Updated dependencies support all latest versions
 
 ## Fixed in 3.8
 * Added missing Locale feature to date tag
