@@ -49,7 +49,6 @@ class PreProcessor(Processor):
         return lookup
 
 
-
 class PostProcessor(Processor):
 
     def __init__(self, classname):
@@ -62,6 +61,25 @@ class PostProcessor(Processor):
     @staticmethod
     def from_document(data):
         lookup = PostProcessor(None)
+        if '_id' in data:
+            lookup.id = data['_id']
+        if 'classname' in data:
+            lookup.classname = data['classname']
+        return lookup
+
+
+class PostQuestionProcessor(Processor):
+
+    def __init__(self, classname):
+        Processor.__init__(self, classname)
+
+    def __repr__(self):
+        return "<PostQuestionProcessor(id='%s', classname='%s')>" % (
+        DAOUtils.valid_id(self.id), self.classname)
+
+    @staticmethod
+    def from_document(data):
+        lookup = PostQuestionProcessor(None)
         if '_id' in data:
             lookup.id = data['_id']
         if 'classname' in data:

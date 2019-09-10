@@ -97,3 +97,15 @@ class SQLPostProcessorsStore(SQLProcessorsStore, ProcessorStore):
 
     def _get_entity(self, classname):
         return PostProcessor(classname=classname)
+
+
+class SQLPostQuestionProcessorsStore(SQLProcessorsStore, ProcessorStore):
+
+    def empty(self):
+        self._storage_engine.session.query(PostProcessor).delete()
+
+    def get_all_processors(self):
+        return self._storage_engine.session.query(PostProcessor)
+
+    def _get_entity(self, classname):
+        return PostProcessor(classname=classname)

@@ -15,34 +15,20 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
 
-from programy.storage.stores.sql.base import Base
-from programy.storage.stores.utils import DAOUtils
+from programy.utils.logging.ylogger import YLogger
 
-
-class Processor(object):
-
-    id = Column(Integer, primary_key=True)
-    classname = Column(String(512))
+from programy.processors.processing import PreProcessor
+from programy.nlp.lemmatize import Lemmatizer
 
 
-class PreProcessor(Base, Processor):
-    __tablename__ = 'preprocessors'
+class LemmatizePreProcessor(PreProcessor):
 
-    def __repr__(self):
-        return "<PreProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+    def __init__(self):
+        PreProcessor.__init__(self)
 
-
-class PostProcessor(Base, Processor):
-    __tablename__ = 'postprocessors'
-
-    def __repr__(self):
-        return "<PostProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
-
-
-class PostQuestionProcessor(Base, Processor):
-    __tablename__ = 'postquestionprocessors'
-
-    def __repr__(self):
-        return "<PostQuestionProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+    def process(self, context, word_string):
+        YLogger.debug(context, "Lemmatizing sentence...")
+        unstemmed_words = context.brain.tokenizer.texts_to_words(word_string)
+        stemmed_words = [Lemmatizer.lemmatize(x) for x in unstemmed_words]
+        return context.brain.tokenizer.words_to_texts(stemmed_words)

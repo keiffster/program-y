@@ -48,6 +48,7 @@ class FileStorageConfigurationTests(unittest.TestCase):
 
         self.assertIsNotNone(config.preprocessors_storage)
         self.assertIsNotNone(config.postprocessors_storage)
+        self.assertIsNotNone(config.postquestionprocessors_storage)
 
         self.assertIsNotNone(config.usergroups_storage)
 

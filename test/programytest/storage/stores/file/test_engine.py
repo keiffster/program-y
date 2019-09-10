@@ -8,6 +8,7 @@ from programy.storage.stores.file.config import FileStorageConfiguration
 
 from programytest.storage.test_utils import StorageEngineTestUtils
 
+
 class FileStorageEngineTests(StorageEngineTestUtils):
 
     def test_init_with_configuration(self):

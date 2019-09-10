@@ -19,11 +19,13 @@ from textblob import TextBlob
 
 class NGramsCreator(object):
 
-    def get_ngrams(self, string, size=3):
+    @staticmethod
+    def get_ngrams(string, size=3):
         blob = TextBlob(string)
 
-        ngrams = []
-        for ngram in blob.ngrams(n=size):
-            ngrams.append([str(x) for x in ngram])
+        sentences = []
+        ngrams = blob.ngrams(n=size)
+        for ngram in ngrams:
+            sentences.append([x for x in ngram])
 
         return ngrams

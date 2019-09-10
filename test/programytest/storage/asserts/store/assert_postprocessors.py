@@ -2,7 +2,7 @@ import unittest
 import os
 import os.path
 
-from programy.processors.processing import ProcessorCollection
+from programy.processors.processing import PostProcessorCollection
 
 
 class PostProcessorsStoreAsserts(unittest.TestCase):
@@ -11,7 +11,7 @@ class PostProcessorsStoreAsserts(unittest.TestCase):
 
         store.upload_from_file(os.path.dirname(__file__) + os.sep + "data" + os.sep + "processors" + os.sep + "postprocessors.conf")
 
-        collection = ProcessorCollection()
+        collection = PostProcessorCollection()
         store.load(collection)
 
         self.assertEqual(5, len(collection.processors))

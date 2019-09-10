@@ -15,34 +15,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
 
-from programy.storage.stores.sql.base import Base
-from programy.storage.stores.utils import DAOUtils
+from programy.utils.logging.ylogger import YLogger
 
-
-class Processor(object):
-
-    id = Column(Integer, primary_key=True)
-    classname = Column(String(512))
+from programy.processors.processing import PostQuestionProcessor
+from programy.nlp.ngrams import NGramsCreator
+from programy.dialog.sentence import Sentence
 
 
-class PreProcessor(Base, Processor):
-    __tablename__ = 'preprocessors'
+class NGramsPostQuestionProcessor(PostQuestionProcessor):
 
-    def __repr__(self):
-        return "<PreProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+    def __init__(self):
+        PostQuestionProcessor.__init__(self)
 
+    def process(self, context, word_string):
+        YLogger.debug(context, "Creating ngrams from sentence...")
+        try:
+            sentences = NGramsCreator.get_ngrams(word_string, 3)
+            for ngram in sentences:
+                text = context.brain.tokenizer.words_to_texts(ngram)
+                sentence = Sentence(context, text)
+                response = context.brain.ask_question(context, sentence)
+                if response is not None:
+                    return response
 
-class PostProcessor(Base, Processor):
-    __tablename__ = 'postprocessors'
+        except Exception as excep:
+            print(excep)
 
-    def __repr__(self):
-        return "<PostProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
-
-
-class PostQuestionProcessor(Base, Processor):
-    __tablename__ = 'postquestionprocessors'
-
-    def __repr__(self):
-        return "<PostQuestionProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+        return None

@@ -6,6 +6,7 @@ from programy.context import ClientContext
 
 from programytest.client import TestClient
 
+
 class RemoveHTMLTests(unittest.TestCase):
 
     def test_format_console(self):

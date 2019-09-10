@@ -42,8 +42,9 @@ from programy.storage.stores.nosql.mongo.store.usergroups import MongoUserGroups
 from programy.storage.stores.nosql.mongo.store.nodes import MongoTemplateNodeStore
 from programy.storage.stores.nosql.mongo.store.nodes import MongoPatternNodeStore
 
-from programy.storage.stores.nosql.mongo.store.processors import MongoPostProcessorStore
 from programy.storage.stores.nosql.mongo.store.processors import MongoPreProcessorStore
+from programy.storage.stores.nosql.mongo.store.processors import MongoPostProcessorStore
+from programy.storage.stores.nosql.mongo.store.processors import MongoPostQuestionProcessorStore
 
 
 class Uploader(object):
@@ -87,10 +88,12 @@ class Uploader(object):
             return MongoSetsStore(engine)
         if type == 'rdfs':
             return MongoRDFsStore(engine)
-        if type == 'postprocessors':
-            return MongoPostProcessorStore(engine)
         if type == 'preprocessors':
             return MongoPreProcessorStore(engine)
+        if type == 'postprocessors':
+            return MongoPostProcessorStore(engine)
+        if type == 'postquestionprocessors':
+            return MongoPostQuestionProcessorStore(engine)
         if type == 'templatenodes':
             return MongoTemplateNodeStore(engine)
         if type == 'patternnodes':

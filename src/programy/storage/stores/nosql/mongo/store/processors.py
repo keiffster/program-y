@@ -22,6 +22,7 @@ from programy.storage.stores.nosql.mongo.store.mongostore import MongoStore
 from programy.storage.entities.processors import ProcessorStore
 from programy.storage.stores.nosql.mongo.dao.processor import PreProcessor
 from programy.storage.stores.nosql.mongo.dao.processor import PostProcessor
+from programy.storage.stores.nosql.mongo.dao.processor import PostQuestionProcessor
 
 
 class MongoProcessorStore(MongoStore, ProcessorStore):
@@ -106,3 +107,17 @@ class MongoPostProcessorStore(MongoProcessorStore):
 
     def _get_entity(self, classname):
         return PostProcessor(classname)
+
+
+class MongoPostQuestionProcessorStore(MongoProcessorStore):
+
+    POSTQUESTIONPROCESSORS = 'postquestionprocessors'
+
+    def __init__(self, storage_engine):
+        MongoProcessorStore.__init__(self, storage_engine)
+
+    def collection_name(self):
+        return MongoPostQuestionProcessorStore.POSTQUESTIONPROCESSORS
+
+    def _get_entity(self, classname):
+        return PostQuestionProcessor(classname)

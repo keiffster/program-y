@@ -15,34 +15,24 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
-from sqlalchemy import Column, Integer, String
 
-from programy.storage.stores.sql.base import Base
-from programy.storage.stores.utils import DAOUtils
+from programy.utils.logging.ylogger import YLogger
 
-
-class Processor(object):
-
-    id = Column(Integer, primary_key=True)
-    classname = Column(String(512))
+from programy.processors.processing import PostQuestionProcessor
+from programy.nlp.stopwords import StopWords
+from programy.dialog.sentence import Sentence
 
 
-class PreProcessor(Base, Processor):
-    __tablename__ = 'preprocessors'
+class StopWordsPostQuestionProcessor(PostQuestionProcessor):
 
-    def __repr__(self):
-        return "<PreProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+    def __init__(self):
+        PostQuestionProcessor.__init__(self)
 
-
-class PostProcessor(Base, Processor):
-    __tablename__ = 'postprocessors'
-
-    def __repr__(self):
-        return "<PostProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
-
-
-class PostQuestionProcessor(Base, Processor):
-    __tablename__ = 'postquestionprocessors'
-
-    def __repr__(self):
-        return "<PostQuestionProcessor Node(id='%s', classname='%s')>" % (DAOUtils.valid_id(self.id), self.classname)
+    def process(self, context, word_string):
+        YLogger.debug(context, "Removing stop words...")
+        with_stopwords = context.brain.tokenizer.texts_to_words(word_string)
+        non_stopwords = StopWords.remove(with_stopwords)
+        text = context.brain.tokenizer.words_to_texts(non_stopwords)
+        sentence = Sentence(context, text)
+        response = context.brain.ask_question(context, sentence)
+        return response

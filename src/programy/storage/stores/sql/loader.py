@@ -42,8 +42,9 @@ from programy.storage.stores.sql.store.usergroups import SQLUserGroupStore
 from programy.storage.stores.sql.store.nodes import SQLTemplateNodesStore
 from programy.storage.stores.sql.store.nodes import SQLPatternNodesStore
 
-from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
 from programy.storage.stores.sql.store.processors import SQLPreProcessorsStore
+from programy.storage.stores.sql.store.processors import SQLPostProcessorsStore
+from programy.storage.stores.sql.store.processors import SQLPostQuestionProcessorsStore
 
 
 class Uploader(object):
@@ -84,10 +85,12 @@ class Uploader(object):
             return SQLSetsStore(engine)
         if type == 'rdfs':
             return SQLRDFsStore(engine)
-        if type == 'postprocessors':
-            return SQLPostProcessorsStore(engine)
         if type == 'preprocessors':
             return SQLPreProcessorsStore(engine)
+        if type == 'postprocessors':
+            return SQLPostProcessorsStore(engine)
+        if type == 'postquestionprocessors':
+            return SQLPostQuestionProcessorsStore(engine)
         if type == 'templatenodes':
             return SQLTemplateNodesStore(engine)
         if type == 'patternnodes':
