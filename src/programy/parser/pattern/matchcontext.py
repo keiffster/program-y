@@ -164,7 +164,7 @@ class MatchContext(object):
     def to_json(self):
         context={ "max_search_depth":self._max_search_depth,
                   "max_search_timeout": self._max_search_timeout,
-                  "total_search_start": self._total_search_start,
+                  "total_search_start": self._total_search_start.strftime("%d/%m/%Y, %H:%M:%S"),
                   "sentence": self._sentence,
                   "response": self._response,
                   "matched_nodes": []
@@ -181,7 +181,7 @@ class MatchContext(object):
 
         match_context._max_search_depth = json_data["max_search_depth"]
         match_context._max_search_timeout = json_data["max_search_timeout"]
-        match_context._total_search_start = json_data["total_search_start"]
+        match_context._total_search_start = datetime.strptime(json_data["total_search_start"], "%d/%m/%Y, %H:%M:%S")
         match_context._sentence = json_data["sentence"]
         match_context._response = json_data["response"]
 

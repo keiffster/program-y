@@ -46,6 +46,8 @@ To deploy program-y to PyPi, there are a number of checks to be made
 
         github push github master
 
+11. Update Wiki Page with new release
+
 11. Run pypi_create.sh X.Y
 
 12. Run pypi_upload.sh
